@@ -15,8 +15,15 @@ Completed, including the five final service builds. Shared builder still reports
 candidate (build), ref e09jofgvou4h6lrfekwox1ipf, Running, created
 2026-10-22 01:10:51 JST; a local docker build client PID 45104 was observed.
 Global Docker inactivity is NOT confirmed. No active build was interrupted,
-and no container, cache or production service was changed. This chat remains
-on hold for local Docker mutations until the resume notice.
+and no container, cache or production service was changed. The hold remained
+active until the coordinator's resume notice.
+
+Status: CLOSED after the resume notice on 2026-10-22 JST. Local Docker operations
+may resume within the original task's authorization. No new build or container
+replacement is required for the already deployed Bobuy release. The coordinator
+reported cleanup completion and supplied its evidence at
+C:/workspace/rhospital/docs/investigations/20261021-docker-storage-cleanup/RECEIPT.md.
+Cleanup results were not independently revalidated by this chat.
 
 Date: 2026-10-21 (Asia/Tokyo)
 
