@@ -112,7 +112,10 @@ Record actual PASS, FAIL or incomplete evidence for every requirement.
   is enabled and active. Script executable permissions verified after transfer.
 - PASS: final isolation positive/negative validation, Python source syntax,
   JavaScript source syntax and git whitespace checks.
-- Remaining delivery bookkeeping: source commit/push readback.
+- PASS: source committed and pushed as 28d37e14ff2253dd00fd20b88d935872ec3b9a4d;
+  origin/main read back at the identical SHA. Worktree clean after that commit.
+  No matching new GitHub Actions run was returned at the delivery check;
+  automated CI success is not claimed. Local and production checks are above.
 - INCOMPLETE: cleanup commands were rejected by the execution policy. Local
   .task-tmp, ignored build outputs and remote transfer archives remain confined
   to this task's directories. No cleanup success is claimed; no global prune or
