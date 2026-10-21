@@ -1,0 +1,134 @@
+name: bobuy
+
+x-java: &java
+  JAVA_TOOL_OPTIONS: -Xms96m -Xmx320m -XX:MaxMetaspaceSize=192m -XX:ActiveProcessorCount=2
+
+services:
+  postgres:
+    container_name: bobuy-postgres
+    ports: !reset []
+    deploy:
+      resources:
+        limits:
+          memory: 384M
+          cpus: '1.0'
+  minio:
+    container_name: bobuy-minio
+    image: bobuy/minio:RELEASE.2025-10-15T17-29-55Z
+    build:
+      context: .
+      dockerfile: infra/minio.Dockerfile
+    ports: !reset []
+    deploy:
+      resources:
+        limits:
+          memory: 384M
+          cpus: '0.5'
+  redis:
+    container_name: bobuy-redis
+    command: redis-server --appendonly yes --maxmemory 64mb --maxmemory-policy noeviction
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+          cpus: '0.5'
+  rabbitmq:
+    container_name: bobuy-rabbitmq
+    deploy:
+      resources:
+        limits:
+          memory: 384M
+          cpus: '0.5'
+  nacos:
+    container_name: bobuy-nacos
+    ports: !reset []
+    volumes:
+      - ./data/nacos:/home/nacos/data
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+  nacos-init:
+    container_name: bobuy-nacos-init
+  core-service:
+    container_name: bobuy-core-service
+    image: bobuy/core:${BOBUY_RELEASE:?Set BO BUY release tag}
+    environment:
+      <<: *java
+    deploy:
+      resources:
+        limits:
+          memory: 704M
+          cpus: '1.0'
+  ai-service:
+    container_name: bobuy-ai-service
+    image: bobuy/ai:${BOBUY_RELEASE:?Set BO BUY release tag}
+    environment:
+      <<: *java
+    deploy:
+      resources:
+        limits:
+          memory: 640M
+          cpus: '1.0'
+  im-service:
+    container_name: bobuy-im-service
+    image: bobuy/im:${BOBUY_RELEASE:?Set BO BUY release tag}
+    environment:
+      <<: *java
+    deploy:
+      resources:
+        limits:
+          memory: 640M
+          cpus: '1.0'
+  auth-service:
+    container_name: bobuy-auth-service
+    image: bobuy/auth:${BOBUY_RELEASE:?Set BO BUY release tag}
+    environment:
+      <<: *java
+    deploy:
+      resources:
+        limits:
+          memory: 640M
+          cpus: '1.0'
+  gateway-service:
+    container_name: bobuy-gateway-service
+    image: bobuy/router:${BOBUY_RELEASE:?Set BO BUY release tag}
+    environment:
+      <<: *java
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '1.0'
+  frontend:
+    container_name: bobuy-frontend
+    image: bobuy/frontend:${BOBUY_RELEASE:?Set BO BUY release tag}
+    deploy:
+      resources:
+        limits:
+          memory: 96M
+          cpus: '0.5'
+  gateway:
+    container_name: bobuy-gateway
+    ports: !override
+      - '80:80'
+      - '443:443'
+    volumes: !override
+      - ./infra/nginx/bobuy.conf:/etc/nginx/conf.d/default.conf:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ./data/acme:/var/www/acme:ro
+      - ./data/logs/gateway:/var/log/nginx
+    deploy:
+      resources:
+        limits:
+          memory: 64M
+          cpus: '0.5'
+  ocr-service:
+    container_name: bobuy-ocr-service
+    profiles: [ocr]
+    ports: !reset []
+
+networks:
+  bobbuy-net:
+    name: bobuy-net

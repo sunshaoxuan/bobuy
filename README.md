@@ -1,5 +1,10 @@
 # BOBBuy
 
+2026-10-21 deployment: repository `sunshaoxuan/bobuy`, site `https://bobuy.cc`.
+See [production deployment](docs/production-deployment.md) and
+[deployment acceptance](docs/deployment-task.md) for the current release,
+isolation boundary, credentials location and remaining product limits.
+
 BOBBuy 当前是一套以 **Spring Boot + React + PostgreSQL/MinIO + WebSocket(STOMP) 实时聊天 + AI/OCR 辅助识别** 为基础的代购协作系统。
 
 当前实现基线以 [CURRENT-STATE-2026-04-28](docs/reports/CURRENT-STATE-2026-04-28.md) 为准；旧 Release / Plan 文档若与该基线冲突，以当前基线为准。

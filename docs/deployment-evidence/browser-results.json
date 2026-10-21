@@ -1,0 +1,135 @@
+{
+  "origin": "https://bobuy.cc",
+  "release": "20261021.1",
+  "data": "Empty production database; bootstrap operator",
+  "views": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "errors": [],
+      "failedRequests": [
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "cookieResponses": [
+        {
+          "url": "https://bobuy.cc/api/auth/login",
+          "cookie": "bobbuy_refresh_token",
+          "deleted": false
+        },
+        {
+          "url": "https://bobuy.cc/api/auth/login",
+          "cookie": "bobbuy_csrf_token",
+          "deleted": false
+        }
+      ],
+      "cookiesAfterLogin": [
+        {
+          "name": "bobbuy_refresh_token",
+          "path": "/api/auth",
+          "secure": true,
+          "httpOnly": true
+        },
+        {
+          "name": "bobbuy_csrf_token",
+          "path": "/",
+          "secure": true,
+          "httpOnly": false
+        }
+      ],
+      "cookiesAfterReload": [
+        {
+          "name": "bobbuy_refresh_token",
+          "path": "/api/auth",
+          "secure": true,
+          "httpOnly": true
+        },
+        {
+          "name": "bobbuy_csrf_token",
+          "path": "/",
+          "secure": true,
+          "httpOnly": false
+        }
+      ],
+      "layout": {
+        "width": 1440,
+        "scrollWidth": 1440
+      },
+      "login": "PASS",
+      "refresh": "PASS",
+      "csrfNegativeCases": "PASS",
+      "logout": "PASS",
+      "anonymous": "PASS",
+      "secureCookie": "PASS"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "errors": [],
+      "failedRequests": [
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "cookieResponses": [
+        {
+          "url": "https://bobuy.cc/api/auth/login",
+          "cookie": "bobbuy_refresh_token",
+          "deleted": false
+        },
+        {
+          "url": "https://bobuy.cc/api/auth/login",
+          "cookie": "bobbuy_csrf_token",
+          "deleted": false
+        }
+      ],
+      "cookiesAfterLogin": [
+        {
+          "name": "bobbuy_refresh_token",
+          "path": "/api/auth",
+          "secure": true,
+          "httpOnly": true
+        },
+        {
+          "name": "bobbuy_csrf_token",
+          "path": "/",
+          "secure": true,
+          "httpOnly": false
+        }
+      ],
+      "cookiesAfterReload": [
+        {
+          "name": "bobbuy_refresh_token",
+          "path": "/api/auth",
+          "secure": true,
+          "httpOnly": true
+        },
+        {
+          "name": "bobbuy_csrf_token",
+          "path": "/",
+          "secure": true,
+          "httpOnly": false
+        }
+      ],
+      "layout": {
+        "width": 390,
+        "scrollWidth": 390
+      },
+      "login": "PASS",
+      "refresh": "PASS",
+      "csrfNegativeCases": "PASS",
+      "logout": "PASS",
+      "anonymous": "PASS",
+      "secureCookie": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+[Unit]
+Description=Renew Bobuy origin TLS certificate
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh /opt/bobuy/scripts/renew-bobuy-cert.sh

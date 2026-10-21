@@ -92,6 +92,21 @@ class AuthControllerIntegrationTest {
   }
 
   @Test
+  void bearerReadPreservesCsrfCookieForSubsequentRefresh() throws Exception {
+    AuthCookies session = loginSession("agent", "agent-pass");
+    MvcResult result = mockMvc.perform(get("/api/auth/me")
+            .header(HttpHeaders.AUTHORIZATION, "Bearer " + session.accessToken())
+            .cookie(session.csrfCookie()))
+        .andExpect(status().isOk())
+        .andReturn();
+    org.junit.jupiter.api.Assertions.assertFalse(
+        result.getResponse().getHeaders(HttpHeaders.SET_COOKIE).stream().anyMatch(header ->
+            header.startsWith("bobbuy_csrf_token=") && header.contains("Max-Age=0")),
+        "Bearer authentication must preserve the browser's refresh CSRF token");
+    refreshSession(session);
+  }
+
+  @Test
   void refreshReturnsNewAccessAndRefreshTokens() throws Exception {
     AuthCookies loginSession = loginSession("agent", "agent-pass");
 

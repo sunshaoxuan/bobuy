@@ -1,0 +1,187 @@
+{
+  "release": "20261021.1",
+  "protected": "UNCHANGED",
+  "containers": [
+    {
+      "name": "/bobuy-gateway",
+      "image": "nginx:alpine",
+      "image_id": "sha256:892bb2152464f0c5d8972593a5f5afaf8054552580b699d95f8ff4af08c2d33d",
+      "status": "running",
+      "health": null,
+      "restart_count": 0,
+      "oom_killed": false,
+      "ports": {
+        "443/tcp": [
+          {
+            "HostIp": "0.0.0.0",
+            "HostPort": "443"
+          },
+          {
+            "HostIp": "::",
+            "HostPort": "443"
+          }
+        ],
+        "80/tcp": [
+          {
+            "HostIp": "0.0.0.0",
+            "HostPort": "80"
+          },
+          {
+            "HostIp": "::",
+            "HostPort": "80"
+          }
+        ]
+      }
+    },
+    {
+      "name": "/bobuy-frontend",
+      "image": "bobuy/frontend:20261021.1",
+      "image_id": "sha256:2a3e5c1137e4cdee0036a8cc56e48a1dad1cf9ef2bb787ca76f61478dbb51210",
+      "status": "running",
+      "health": null,
+      "restart_count": 0,
+      "oom_killed": false,
+      "ports": {
+        "80/tcp": null
+      }
+    },
+    {
+      "name": "/bobuy-gateway-service",
+      "image": "bobuy/router:20261021.1",
+      "image_id": "sha256:f5195cfcd129c27aca7605c35d7dfa3630c461eee6dfeb90ec5a967c5f2cfc08",
+      "status": "running",
+      "health": "healthy",
+      "restart_count": 0,
+      "oom_killed": false,
+      "ports": {
+        "8080/tcp": null
+      }
+    },
+    {
+      "name": "/bobuy-im-service",
+      "image": "bobuy/im:20261021.1",
+      "image_id": "sha256:a4a19fe0bc04d60d6aee171c0c064ca85985f40353c6f582aa93275a33a6852f",
+      "status": "running",
+      "health": "healthy",
+      "restart_count": 0,
+      "oom_killed": false,
+      "ports": {
+        "8080/tcp": null
+      }
+    },
+    {
+      "name": "/bobuy-ai-service",
+      "image": "bobuy/ai:20261021.1",
+      "image_id": "sha256:c7b53dd6a3348cce42253942e878216632388f1d27e9bcb77524754ecea92fc1",
+      "status": "running",
+      "health": "healthy",
+      "restart_count": 0,
+      "oom_killed": false,
+      "ports": {
+        "8080/tcp": null
+      }
+    },
+    {
+      "name": "/bobuy-auth-service",
+      "image": "bobuy/auth:20261021.1",
+      "image_id": "sha256:5e1ed391773c71dd90482dfec71bbed8fe0b7ff92f53235ad29c02d956745e1f",
+      "status": "running",
+      "health": "healthy",
+      "restart_count": 0,
+      "oom_killed": false,
+      "ports": {
+        "8080/tcp": null
+      }
+    },
+    {
+      "name": "/bobuy-core-service",
+      "image": "bobuy/core:20261021.1",
+      "image_id": "sha256:e60574f60144e73eb06b25a77c6aa122ee23faf8a485c45c5827e680b5b445cb",
+      "status": "running",
+      "health": "healthy",
+      "restart_count": 0,
+      "oom_killed": false,
+      "ports": {
+        "8080/tcp": null
+      }
+    },
+    {
+      "name": "/bobuy-minio",
+      "image": "bobuy/minio:RELEASE.2025-10-15T17-29-55Z",
+      "image_id": "sha256:bb99d7a623bd56e0642a5b2782e2e2936ef56f97bb91c674684347dd657cac46",
+      "status": "running",
+      "health": "healthy",
+      "restart_count": 0,
+      "oom_killed": false,
+      "ports": {
+        "9000/tcp": null,
+        "9001/tcp": null
+      }
+    },
+    {
+      "name": "/bobuy-nacos-init",
+      "image": "curlimages/curl:8.7.1",
+      "image_id": "sha256:25d29daeb9b14b89e2fa8cc17c70e4b188bca1466086907c2d9a4b56b59d8e21",
+      "status": "exited",
+      "health": null,
+      "restart_count": 0,
+      "oom_killed": false,
+      "ports": {}
+    },
+    {
+      "name": "/bobuy-rabbitmq",
+      "image": "rabbitmq:3-management-alpine",
+      "image_id": "sha256:606d8c0d6b3c18d1da9afc53bc7cdb2a8d5486df91b5a9830e9e07626c9ae281",
+      "status": "running",
+      "health": "healthy",
+      "restart_count": 0,
+      "oom_killed": false,
+      "ports": {
+        "15671/tcp": null,
+        "15672/tcp": null,
+        "15691/tcp": null,
+        "15692/tcp": null,
+        "25672/tcp": null,
+        "4369/tcp": null,
+        "5671/tcp": null,
+        "5672/tcp": null
+      }
+    },
+    {
+      "name": "/bobuy-postgres",
+      "image": "postgres:15-alpine",
+      "image_id": "sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+      "status": "running",
+      "health": "healthy",
+      "restart_count": 0,
+      "oom_killed": false,
+      "ports": {
+        "5432/tcp": null
+      }
+    },
+    {
+      "name": "/bobuy-redis",
+      "image": "redis:7-alpine",
+      "image_id": "sha256:858f009f9709ce576febc734aa78b8f6d624b82571f9ddb6bda4377c833b3499",
+      "status": "running",
+      "health": "healthy",
+      "restart_count": 0,
+      "oom_killed": false,
+      "ports": {
+        "6379/tcp": null
+      }
+    },
+    {
+      "name": "/bobuy-nacos",
+      "image": "nacos/nacos-server:v2.3.2-slim",
+      "image_id": "sha256:cca69ab12348b43d95c9b2c1d8d31d5a8d56e634ed4232a510423a9346090a70",
+      "status": "running",
+      "health": "healthy",
+      "restart_count": 0,
+      "oom_killed": false,
+      "ports": {
+        "8848/tcp": null
+      }
+    }
+  ]
+}

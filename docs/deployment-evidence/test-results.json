@@ -1,0 +1,16 @@
+{
+  "backend": {
+    "tests": 176.0,
+    "failures": 0.0,
+    "errors": 0.0,
+    "skipped": 2.0
+  },
+  "frontend": {
+    "tests": 74,
+    "files": 22,
+    "build": "PASS"
+  },
+  "package": "PASS",
+  "regressionBeforeFix": "FAIL as expected",
+  "regressionAfterFix": "PASS"
+}
