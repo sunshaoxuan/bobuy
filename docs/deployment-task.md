@@ -1,5 +1,23 @@
 # Bobuy deployment task
 
+## Local Docker coordination hold (2026-10-22 JST)
+
+Objective: provide a quiet local Docker maintenance window while preserving
+running business services. Allow any active build to finish naturally, then do
+not start local builds, cache cleanup or container replacements until a resume
+notice arrives in this chat. Inspect build records and local build processes
+read-only; report the observed state here without messaging other chats.
+Acceptance: no local build owned by this chat remains active; no stop, prune,
+replacement or remote production change is performed for this coordination.
+
+Observed result: PASS for this chat's quiet window. All Bobuy build records are
+Completed, including the five final service builds. Shared builder still reports
+candidate (build), ref e09jofgvou4h6lrfekwox1ipf, Running, created
+2026-10-22 01:10:51 JST; a local docker build client PID 45104 was observed.
+Global Docker inactivity is NOT confirmed. No active build was interrupted,
+and no container, cache or production service was changed. This chat remains
+on hold for local Docker mutations until the resume notice.
+
 Date: 2026-10-21 (Asia/Tokyo)
 
 ## Objective
