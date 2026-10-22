@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
-import { Alert, Badge, Button, Drawer, Empty, Form, Input, Modal, Segmented, Spin, Tag } from 'antd';
+import { Alert, Badge, Button, Drawer, Empty, Form, Input, InputNumber, Modal, Segmented, Spin, Tag } from 'antd';
 import { ArrowLeftOutlined, ArrowRightOutlined, CalendarOutlined, CheckCircleOutlined, CloseOutlined, DeleteOutlined,
   LogoutOutlined, MailOutlined, MinusOutlined, PlusOutlined, SearchOutlined, ShoppingCartOutlined, ShopOutlined, UserOutlined } from '@ant-design/icons';
 import { Link, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
@@ -8,12 +8,14 @@ import { storeAuthSession } from '../authStorage';
 import { useUserRole } from '../context/UserRoleContext';
 import { CART_KEY, changeQuantity, emptyCart, readCart, type Cart } from '../cart';
 import ProtectedRoute from '../components/ProtectedRoute';
+import ProductFeed from '../components/ProductFeed';
+import '../product-feed.css';
 
 const ClientOrders = lazy(() => import('./ClientOrders'));
 const ClientBilling = lazy(() => import('./ClientBilling'));
 const ClientChat = lazy(() => import('./ClientChat'));
 const text = (value: Record<string, string>) => value['zh-CN'] || value.zh || Object.values(value)[0] || '';
-const money = (value: number) => new Intl.NumberFormat('zh-CN', { style: 'currency', currency: 'JPY', maximumFractionDigits: 2 }).format(value);
+const money = (value: number) => new Intl.NumberFormat('zh-CN', { style: 'currency', currency: 'JPY', currencyDisplay:'narrowSymbol', maximumFractionDigits: 2 }).format(value);
 
 function AccountForm({ afterLogin }: { afterLogin: () => void }) {
   const { login } = useUserRole();
@@ -85,6 +87,9 @@ export default function Storefront() {
   const [error, setError] = useState('');
   const [search, setSearch] = useState('');
   const [detail, setDetail] = useState<StoreProduct>();
+  const [quantityProduct, setQuantityProduct] = useState<StoreProduct>();
+  const [draftQuantity, setDraftQuantity] = useState(1);
+  const [tripPicker, setTripPicker] = useState(false);
   const [busy, setBusy] = useState(false);
   const [receipt, setReceipt] = useState<{ orderId: number; total: number }>();
   async function load() {
@@ -109,6 +114,9 @@ export default function Storefront() {
   const total = cartEntries.reduce((sum, [id, qty]) => sum + (products.find(p => p.id === id)?.price || 0) * qty, 0);
   const invalidCart = !trip || cartEntries.some(([id]) => !available.some(p => p.id === id));
   function change(id: string, value: number) { setCart(prior => changeQuantity(prior, id, value)); setReceipt(undefined); }
+  function configureQuantity(product: StoreProduct) {
+    setDraftQuantity(cart.items[product.id] || 1); setQuantityProduct(product); setDetail(undefined);
+  }
   function choose(next: StoreTrip) {
     const apply = () => setCart(prior => ({ ...prior, tripId: next.id, requestId: crypto.randomUUID(), items: trip?.merchantId === next.merchantId ? prior.items : {} }));
     if (quantity && trip?.merchantId !== next.merchantId) Modal.confirm({ title: '更换商家并清空购物车？', okText: '更换商家', cancelText: '保留购物车', onOk: apply });
@@ -143,24 +151,18 @@ export default function Storefront() {
       {location.pathname !== '/checkout' && <Button block size="large" type="primary" disabled={invalidCart} onClick={() => navigate('/checkout')}>确认下单 <ArrowRightOutlined /></Button>}
     </>}
   </section>;
-  const catalog = <>
-    <section className="trip-section"><div className="section-heading"><div><p className="eyebrow">下一程，带回所需</p><h1>跟着行程选好物</h1></div><CalendarOutlined /></div>
-      <div className="trip-list" role="group" aria-label="选择采购行程">{trips.map(t => <button key={t.id} className={`trip-choice ${cart.tripId === t.id ? 'selected' : ''}`} onClick={() => choose(t)} aria-pressed={cart.tripId === t.id}>
+  const tripChoices = <div className="trip-list" role="group" aria-label="选择采购行程">{trips.map(t => <button key={t.id} className={`trip-choice ${cart.tripId === t.id ? 'selected' : ''}`} onClick={() => { choose(t); setTripPicker(false); }} aria-pressed={cart.tripId === t.id}>
         <span className="trip-date">{t.departDate.slice(5).replace('-', '/')}<small>出发</small></span><span className="trip-route"><strong>{t.origin} <ArrowRightOutlined /> {t.destination}</strong><small>{t.merchantName}</small></span>
-        {cart.tripId === t.id && <CheckCircleOutlined />}</button>)}</div>
-      {!trips.length && !loading && <Empty description="暂无可预订行程" />}
+        {cart.tripId === t.id && <CheckCircleOutlined />}</button>)}</div>;
+  const catalog = <div className="catalog-experience"><section className="journey-strip">
+      <button className="journey-trigger" onClick={() => setTripPicker(true)} aria-label="选择采购行程"><CalendarOutlined /><span><small>{trip ? `${trip.departDate.slice(5).replace('-', '.')} 出发 · ${trip.merchantName}` : '采购行程'}</small><strong>{trip ? <>{trip.origin} <ArrowRightOutlined /> {trip.destination}</> : '暂无可预订行程'}</strong></span><ArrowRightOutlined /></button>
     </section>
-    <section className="catalog"><div className="section-heading"><h2>本程好物 <small>{available.length} 款</small></h2><span className="muted">{trip?.merchantName}</span></div>
-      <Input prefix={<SearchOutlined />} aria-label="搜索商品" placeholder="搜索商品或品牌" allowClear value={search} onChange={e => setSearch(e.target.value)} size="large" />
-      <div className="product-grid">{shown.map(product => <article className="store-product" key={product.id}>
-        <button className="product-photo" aria-label={`查看${text(product.name)}`} onClick={() => setDetail(product)}>{image(product)}</button>
-        <div className="product-body"><small>{product.brand}</small><button className="product-name" onClick={() => setDetail(product)}><h3>{text(product.name)}</h3></button>
-          <p>{text(product.description)}</p><strong className="product-price">{money(product.price)}<small> JPY</small></strong>
-          {cart.items[product.id] ? stepper(product, cart.items[product.id]) : <Button block icon={<PlusOutlined />} onClick={() => change(product.id, 1)}>加入购物车</Button>}
-        </div></article>)}</div>
+    <section className="catalog" aria-label="本程好物"><div className="catalog-toolbar"><h1>本程好物<span>{available.length} 款</span></h1>
+      <Input prefix={<SearchOutlined />} aria-label="搜索商品" placeholder="搜索商品" allowClear value={search} onChange={e => setSearch(e.target.value)} /></div>
+      <ProductFeed products={shown} quantities={cart.items} onAdd={configureQuantity} onDetail={setDetail} />
       {!shown.length && !loading && <Empty description={search ? '没有匹配商品' : '本程暂无商品'} />}
-    </section></>;
-  return <div className="storefront"><header className="store-header"><Link className="store-brand" to="/">bobuy<span>随行好物</span></Link>
+    </section></div>;
+  return <div className={`storefront ${location.pathname === '/' ? 'storefront-catalog' : ''}`}><header className="store-header"><Link className="store-brand" to="/">宝宝败<span>随行好物</span></Link>
     <div className="store-header-actions"><Link to="/account" aria-label="我的账户"><UserOutlined /></Link><Badge count={quantity} size="small"><Link to="/cart" aria-label={`购物车 ${quantity} 件`}><ShoppingCartOutlined /></Link></Badge></div></header>
     <main className="store-main">{error && <Alert type="error" message={error} action={<Button onClick={() => void load()}>重试</Button>} closable onClose={() => setError('')} />}
       {loading ? <div className="store-loading"><Spin /></div> : <Suspense fallback={<Spin />}><Routes>
@@ -175,9 +177,15 @@ export default function Storefront() {
       </Routes></Suspense>}
     </main>
     <nav className="store-bottom" aria-label="客户导航"><Link className={location.pathname === '/' ? 'active' : ''} to="/"><ShopOutlined /><span>选好物</span></Link><Link className={location.pathname === '/cart' ? 'active' : ''} to="/cart"><Badge count={quantity} size="small"><ShoppingCartOutlined /></Badge><span>购物车</span></Link><Link className={location.pathname === '/account' ? 'active' : ''} to="/account"><UserOutlined /><span>我的</span></Link></nav>
-    {location.pathname === '/' && quantity > 0 && <div className="cart-bar"><div><strong>{money(total)}</strong><span>{quantity} 件商品</span></div><Button type="primary" onClick={() => navigate('/cart')}>去结算 <ArrowRightOutlined /></Button></div>}
     <Drawer className="product-detail" title="商品详情" placement="right" width="min(100vw, 480px)" open={!!detail} onClose={() => setDetail(undefined)} closeIcon={<CloseOutlined />}>
-      {detail && <><div className="detail-photo">{image(detail)}</div><small>{detail.brand}</small><h2>{text(detail.name)}</h2><p>{text(detail.description)}</p><h3>{money(detail.price)} <small>JPY</small></h3>{cart.items[detail.id] ? stepper(detail, cart.items[detail.id]) : <Button type="primary" size="large" block icon={<PlusOutlined />} onClick={() => change(detail.id, 1)}>加入购物车</Button>}</>}
+      {detail && <><div className="detail-photo">{image(detail)}</div><small>{detail.brand}</small><h2>{text(detail.name)}</h2><p>{text(detail.description)}</p><h3>{money(detail.price)} <small>JPY</small></h3><Button type="primary" size="large" block icon={<PlusOutlined />} onClick={() => configureQuantity(detail)}>设置购买数量</Button></>}
+    </Drawer>
+    <Drawer className="journey-picker" title="采购行程" placement="bottom" height="auto" open={tripPicker} onClose={() => setTripPicker(false)}>{tripChoices}{!trips.length && <Empty description="暂无可预订行程" />}</Drawer>
+    <Drawer className="quantity-sheet" title="购买数量" placement="bottom" height="auto" open={!!quantityProduct} onClose={() => setQuantityProduct(undefined)} destroyOnClose>
+      {quantityProduct && <div className="quantity-sheet-content"><div className="quantity-product"><div>{image(quantityProduct)}</div><section><small>{quantityProduct.brand}</small><h2>{text(quantityProduct.name)}</h2><strong>{money(quantityProduct.price)} <small>JPY / 件</small></strong></section></div>
+        <div className="quantity-selection"><span>数量</span><div className="quantity-control"><Button icon={<MinusOutlined />} aria-label="减少购买数量" disabled={draftQuantity <= 1} onClick={() => setDraftQuantity(value => value - 1)} /><InputNumber aria-label="购买数量" min={1} max={99} precision={0} controls={false} value={draftQuantity} onChange={value => setDraftQuantity(value ?? 1)} /><Button icon={<PlusOutlined />} aria-label="增加购买数量" disabled={draftQuantity >= 99} onClick={() => setDraftQuantity(value => value + 1)} /></div></div>
+        <div className="quantity-subtotal"><span>小计</span><strong>{money(quantityProduct.price * draftQuantity)}</strong></div>
+        <Button type="primary" block aria-label={cart.items[quantityProduct.id] ? '更新购物车' : '加入购物车'} onClick={() => { change(quantityProduct.id, draftQuantity); setQuantityProduct(undefined); }}>{cart.items[quantityProduct.id] ? '更新购物车' : '加入购物车'} <ShoppingCartOutlined /></Button></div>}
     </Drawer>
   </div>;
 }

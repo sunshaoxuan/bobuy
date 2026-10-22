@@ -11,10 +11,13 @@ for (const [width, height] of [[360,800], [390,844], [768,1024], [1440,1000]]) {
     page.on('response', response => { if (response.status() >= 400) errors.push(`${response.status()} ${response.url()}`); });
     await page.goto('/');
     await expect(page.locator('.store-product').first()).toBeVisible();
+    await expect(page.locator('.store-brand')).toContainText('宝宝败');
+    await page.getByRole('button', { name:'选择采购行程', exact:true }).click();
     await expect(page.locator('.trip-choice.selected')).toBeVisible();
-    await page.locator('.product-photo img').evaluateAll(images => Promise.all(images.map(image => (image as HTMLImageElement).decode())));
+    await page.locator('.journey-picker .ant-drawer-close').click();
+    await page.locator('.product-photo img').first().evaluate(image => (image as HTMLImageElement).decode());
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-    const titleLines = await page.locator('.product-name h3').last().evaluate(element => {
+    const titleLines = await page.locator('.product-name h2').last().evaluate(element => {
       const node = element.firstChild!;
       const lines = new Map<number, number>();
       for (let index = 0; index < (node.textContent?.length || 0); index++) {
@@ -31,22 +34,54 @@ for (const [width, height] of [[360,800], [390,844], [768,1024], [1440,1000]]) {
     await page.getByPlaceholder('搜索商品').fill('不存在的测试商品');
     await expect(page.getByText('没有匹配商品')).toBeVisible();
     await page.getByPlaceholder('搜索商品').fill('');
+    await expect(page.locator('.store-product').first()).toBeVisible();
+    const columns = await page.locator('.product-masonry').evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length);
+    expect(columns).toBe(width < 768 ? 2 : width < 1100 ? 3 : 6);
+    await expect(page.locator('.product-tile').first()).toHaveCSS('border-radius','20px');
+    await expect(page.locator('.product-tile').first()).toHaveCSS('overflow','hidden');
+    const addFace = await page.locator('.product-add').first().evaluate(element => {
+      const face = getComputedStyle(element,'::before');
+      return { size:element.getBoundingClientRect().width - 2 * parseFloat(face.top), fill:face.backgroundColor, blur:face.backdropFilter, hit:element.getBoundingClientRect().height };
+    });
+    expect(addFace.size).toBe(34);
+    expect(addFace.fill).toBe('rgba(255, 255, 255, 0.72)');
+    expect(addFace.blur).toBe('blur(12px)');
+    expect(addFace.hit).toBeGreaterThanOrEqual(44);
+    if (width === 390) {
+      const oldFace = await page.addStyleTag({content:'.product-add::before { inset:0; background:white; }'});
+      const invalidFace = await page.locator('.product-add').first().evaluate(element => element.getBoundingClientRect().width - 2 * parseFloat(getComputedStyle(element,'::before').top));
+      expect(invalidFace === 34).toBe(false);
+      await oldFace.evaluate(element => element.remove());
+    }
+    const tileWidth = (await page.locator('.product-tile').first().boundingBox())!.width;
+    if (width >= 1100) expect(tileWidth).toBeLessThanOrEqual(240);
+    const first = await page.locator('.product-tile').first().boundingBox();
+    const next = await page.locator('.product-tile').nth(1).boundingBox();
+    expect(next!.x-first!.x-first!.width).toBeGreaterThanOrEqual(12);
+    const originalTop = await page.locator('.product-tile').first().evaluate(element => element.getBoundingClientRect().top + scrollY);
+    await page.locator('.store-product').last().scrollIntoViewIfNeeded();
+    await expect(page.locator('.store-product')).toHaveCount(7);
+    expect(await page.locator('.product-tile').first().evaluate(element => element.getBoundingClientRect().top + scrollY)).toBe(originalTop);
+    await page.evaluate(() => scrollTo(0,0));
+    await page.locator('.product-add').first().click();
+    await expect(page.locator('.quantity-sheet')).toBeVisible();
+    await expect(page.getByRole('button',{name:'减少购买数量',exact:true})).toBeDisabled();
+    await page.getByRole('spinbutton',{name:'购买数量',exact:true}).fill('99');
+    await page.getByRole('spinbutton',{name:'购买数量',exact:true}).blur();
+    await expect(page.getByRole('button',{name:'增加购买数量',exact:true})).toBeDisabled();
+    await page.screenshot({path:info.outputPath(`quantity-max-${width}.png`)});
+    await page.locator('.quantity-sheet .ant-drawer-close').click();
+    await expect(page.locator('.product-count')).toHaveCount(0);
     await page.locator('.product-name').first().click();
     await expect(page.locator('.product-detail .detail-photo img')).toBeVisible();
-    await page.locator('.product-detail').getByRole('button', { name: '加入购物车' }).click();
-    await page.locator('.product-detail .ant-drawer-close').click();
+    await page.locator('.product-detail').getByRole('button', { name: '设置购买数量' }).click();
+    await page.locator('.quantity-sheet').getByRole('button', { name:'加入购物车',exact:true }).click();
     await expect(page.locator('.product-detail')).not.toBeVisible();
     await page.reload();
-    await expect(page.locator('.cart-bar')).toContainText('1 件商品');
+    await expect(page.locator('.product-count').first()).toHaveText('1');
     await expect(page.locator('.store-product').first()).toBeVisible();
-    await page.locator('.product-photo img').evaluateAll(images => Promise.all(images.map(image => (image as HTMLImageElement).decode())));
-    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-    expect(await page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
-    const lastAction = await page.locator('.store-product .ant-btn').last().boundingBox();
-    const cartBar = await page.locator('.cart-bar').boundingBox();
-    expect(lastAction!.y + lastAction!.height + 6).toBeLessThan(cartBar!.y);
-    await page.screenshot({ path: info.outputPath(`catalog-bottom-${width}.png`) });
-    await page.getByRole('button', { name: /去结算/ }).click();
+    await page.locator('.product-photo img').first().evaluate(image => (image as HTMLImageElement).decode());
+    await page.locator(width < 768 ? '.store-bottom' : '.store-header-actions').getByRole('link',{name:/购物车/}).click();
     await expect(page.getByRole('button', { name: /确认下单/ })).toBeVisible();
     await page.screenshot({ path: info.outputPath(`cart-${width}.png`), fullPage: true });
     await page.getByRole('button', { name: /确认下单/ }).click();
@@ -58,13 +93,36 @@ for (const [width, height] of [[360,800], [390,844], [768,1024], [1440,1000]]) {
   });
 }
 
+test('progressive masonry appends three batches without shifting loaded cards', async ({ page }) => {
+  await page.setViewportSize({width:390,height:844});
+  await page.route('**/api/storefront/products',async route => {
+    const response=await route.fetch(), envelope=await response.json();
+    const original=envelope.data;
+    envelope.data=Array.from({length:18},(_,index)=>({...original[index%original.length],id:`visual-${index}`}));
+    await route.fulfill({response,json:envelope});
+  });
+  await page.goto('/');
+  await expect(page.locator('.store-product')).toHaveCount(6);
+  await expect(page.locator('.store-product').first()).toHaveCSS('grid-row-end',/span/);
+  const positions=()=>page.locator('.product-tile').evaluateAll(elements=>elements.slice(0,6).map(element=>{const r=element.getBoundingClientRect();return [r.x,r.y+scrollY,r.width,r.height];}));
+  const initial=await positions();
+  await page.locator('.store-product').last().scrollIntoViewIfNeeded();
+  await expect(page.locator('.store-product')).toHaveCount(12);
+  expect(await positions()).toEqual(initial);
+  await page.locator('.store-product').last().scrollIntoViewIfNeeded();
+  await expect(page.locator('.store-product')).toHaveCount(18);
+  expect(await positions()).toEqual(initial);
+  await expect(page.getByRole('button',{name:'加载更多商品',exact:true})).toHaveCount(0);
+});
+
 test('register, unverified checkout, scoped merchant approval and SMTP verification', async ({ page, browser, request }, info) => {
   await page.setViewportSize({ width:390, height:844 });
   const username = `local_${Date.now()}`;
   const email = `${username}@example.test`;
   await page.goto('/');
-  await page.getByRole('button', { name: '加入购物车' }).first().click();
-  await page.getByRole('button', { name: /去结算/ }).click();
+  await page.locator('.product-add').first().click();
+  await page.locator('.quantity-sheet').getByRole('button', { name:'加入购物车',exact:true }).click();
+  await page.locator('.store-bottom').getByRole('link',{name:/购物车/}).click();
   await page.getByRole('button', { name: /确认下单/ }).click();
   await page.getByLabel('用户名', { exact:true }).fill(username);
   await page.getByLabel('邮箱', { exact:true }).fill(email);
