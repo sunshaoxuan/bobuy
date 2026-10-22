@@ -1,0 +1,5 @@
+*
+!dist/
+!dist/**
+!nginx.local.conf
+!Dockerfile.local

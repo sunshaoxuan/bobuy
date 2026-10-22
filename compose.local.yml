@@ -1,0 +1,71 @@
+name: bobuy-local
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: bobuy
+      POSTGRES_USER: bobuy
+      POSTGRES_PASSWORD: local-bobuy-db-only
+    volumes: [database:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U bobuy -d bobuy"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  redis:
+    image: redis:7-alpine
+    volumes: [redis:/data]
+  rabbitmq:
+    image: rabbitmq:3.13-management-alpine
+    environment:
+      RABBITMQ_DEFAULT_USER: bobuy
+      RABBITMQ_DEFAULT_PASS: local-bobuy-mq-only
+    volumes: [rabbitmq:/var/lib/rabbitmq]
+    healthcheck:
+      test: [CMD, rabbitmq-diagnostics, -q, check_running]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  mail:
+    image: axllent/mailpit:v1.27
+    ports: ["127.0.0.1:18025:8025"]
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: bobuy/local-backend:current
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/bobuy
+      SPRING_DATASOURCE_USERNAME: bobuy
+      SPRING_DATASOURCE_PASSWORD: local-bobuy-db-only
+      BOBBUY_SECURITY_JWT_SECRET: local-bobuy-test-only-secret-at-least-thirty-two-characters
+      BOBBUY_SECURITY_HEADER_AUTH_ENABLED: "false"
+      BOBBUY_SECURITY_REFRESH_COOKIE_SECURE: "false"
+      BOBBUY_SECURITY_CORS_ALLOWED_ORIGIN_PATTERNS: http://127.0.0.1:18080,http://localhost:18080
+      BOBBUY_SEED_ENABLED: "true"
+      SPRING_APPLICATION_JSON: '{"bobbuy":{"seed":{"storefront-fixture":{"enabled":true}},"websocket":{"broker-relay":{"enabled":false}}}}'
+      BOBUY_MAIL_HOST: mail
+      BOBUY_MAIL_PORT: 1025
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_USERNAME: bobuy
+      SPRING_RABBITMQ_PASSWORD: local-bobuy-mq-only
+      BOBBUY_MINIO_ENABLED: "false"
+      JAVA_TOOL_OPTIONS: -Xmx512m
+    depends_on:
+      postgres: {condition: service_healthy}
+      rabbitmq: {condition: service_healthy}
+      redis: {condition: service_started}
+      mail: {condition: service_started}
+  web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.local
+    image: bobuy/local-web:current
+    ports: ["127.0.0.1:18080:80"]
+    depends_on: [backend]
+volumes:
+  database:
+  redis:
+  rabbitmq:

@@ -27,6 +27,10 @@ public class Product {
     @Id
     private String id;
 
+    private Long merchantId;
+    public Long getMerchantId() { return merchantId; }
+    public void setMerchantId(Long value) { merchantId = value; }
+
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
     private Map<String, String> name = new HashMap<>();

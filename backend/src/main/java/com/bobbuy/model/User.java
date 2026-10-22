@@ -39,6 +39,11 @@ public class User {
   private String phone;
   private String email;
 
+  private java.time.Instant emailVerifiedAt;
+
+  public java.time.Instant getEmailVerifiedAt() { return emailVerifiedAt; }
+  public void setEmailVerifiedAt(java.time.Instant value) { emailVerifiedAt = value; }
+
   @Column(length = 2000)
   private String note;
 
@@ -84,6 +89,7 @@ public class User {
     this.username = username;
   }
 
+  @com.fasterxml.jackson.annotation.JsonIgnore
   public String getPasswordHash() {
     return passwordHash;
   }

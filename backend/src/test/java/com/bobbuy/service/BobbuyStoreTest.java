@@ -53,12 +53,12 @@ class BobbuyStoreTest {
     // Create
     User newUser = new User(null, "Test User", Role.CUSTOMER, 5.0);
     User created = store.createUser(newUser);
-    assertThat(created.getId()).isEqualTo(1002L);
-    assertThat(store.getUser(1002L)).isPresent();
+    assertThat(created.getId()).isGreaterThanOrEqualTo(1000000L);
+    assertThat(store.getUser(created.getId())).isPresent();
 
     // Update
     created.setName("Updated Name");
-    Optional<User> updated = store.updateUser(1002L, created);
+    Optional<User> updated = store.updateUser(created.getId(), created);
     assertThat(updated).isPresent();
     assertThat(updated.get().getName()).isEqualTo("Updated Name");
 
@@ -66,8 +66,8 @@ class BobbuyStoreTest {
     assertThat(store.updateUser(9999L, created)).isEmpty();
 
     // Delete
-    assertThat(store.deleteUser(1002L)).isTrue();
-    assertThat(store.deleteUser(1002L)).isFalse();
+    assertThat(store.deleteUser(created.getId())).isTrue();
+    assertThat(store.deleteUser(created.getId())).isFalse();
   }
 
   @Test

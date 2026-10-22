@@ -5,6 +5,8 @@ export type AuthenticatedUser = {
   username: string;
   name: string;
   role: UserRole;
+  email?: string;
+  emailVerified?: boolean;
 };
 
 export type StoredAuthSession = {

@@ -885,11 +885,13 @@ public class ProcurementHudService {
   @Transactional(readOnly = true)
   public CustomerBalanceSummaryResponse getCustomerBalanceSummary(Long customerId) {
     double totalReceivable = orderHeaderRepository.findByCustomerId(customerId).stream()
+        .filter(order -> merchantTrip(order.getTripId(), com.bobbuy.security.MerchantScope.current()))
         .filter(this::isSettlementRelevantOrder)
         .filter(order -> isHistoricalOrder(order, LocalDate.now()))
         .mapToDouble(this::calculateReceivable)
         .sum();
     double totalReceived = customerPaymentLedgerRepository.findByCustomerIdOrderByCreatedAtAscIdAsc(customerId).stream()
+        .filter(payment -> merchantTrip(payment.getTripId(), com.bobbuy.security.MerchantScope.current()))
         .filter(payment -> isHistoricalPayment(payment, LocalDate.now()))
         .mapToDouble(CustomerPaymentLedger::getAmount)
         .sum();
@@ -900,6 +902,7 @@ public class ProcurementHudService {
   @Transactional(readOnly = true)
   public List<CustomerPaymentRecordResponse> getCustomerLedgerHistory(Long customerId) {
     return customerPaymentLedgerRepository.findByCustomerIdOrderByCreatedAtAscIdAsc(customerId).stream()
+        .filter(payment -> merchantTrip(payment.getTripId(), com.bobbuy.security.MerchantScope.current()))
         .map(this::toPaymentRecordResponse)
         .toList();
   }
@@ -1164,17 +1167,23 @@ public class ProcurementHudService {
         ? currentTrip.getDepartDate()
         : LocalDate.now();
     double totalReceivable = orderHeaderRepository.findByCustomerId(customerId).stream()
+        .filter(order -> merchantTrip(order.getTripId(), currentTrip == null ? com.bobbuy.security.MerchantScope.current() : currentTrip.getAgentId()))
         .filter(this::isSettlementRelevantOrder)
         .filter(order -> currentTrip == null || !Objects.equals(order.getTripId(), currentTrip.getId()))
         .filter(order -> isHistoricalOrder(order, cutoffDate))
         .mapToDouble(this::calculateReceivable)
         .sum();
     double totalReceived = customerPaymentLedgerRepository.findByCustomerIdOrderByCreatedAtAscIdAsc(customerId).stream()
+        .filter(payment -> merchantTrip(payment.getTripId(), currentTrip == null ? com.bobbuy.security.MerchantScope.current() : currentTrip.getAgentId()))
         .filter(payment -> currentTrip == null || !Objects.equals(payment.getTripId(), currentTrip.getId()))
         .filter(payment -> isHistoricalPayment(payment, cutoffDate))
         .mapToDouble(CustomerPaymentLedger::getAmount)
         .sum();
     return round2(totalReceived - totalReceivable);
+  }
+
+  private boolean merchantTrip(Long tripId, Long merchantId) {
+    return merchantId == null || tripRepository.findById(tripId).map(trip -> merchantId.equals(trip.getAgentId())).orElse(false);
   }
 
   private double calculateReceivable(OrderHeader order) {

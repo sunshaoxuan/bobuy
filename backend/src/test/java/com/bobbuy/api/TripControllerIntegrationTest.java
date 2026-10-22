@@ -88,7 +88,9 @@ class TripControllerIntegrationTest {
         .andExpect(status().isOk());
 
     mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get(
-            "/api/trips/{tripId}/procurement-list", trip.getId()))
+            "/api/trips/{tripId}/procurement-list", trip.getId())
+            .header(RoleInjectionFilter.ROLE_HEADER, AGENT_ROLE)
+            .header(RoleInjectionFilter.USER_HEADER, AGENT_USER))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.data[0].skuId").value("SKU-1"))
         .andExpect(jsonPath("$.data[0].totalQuantity").value(5))

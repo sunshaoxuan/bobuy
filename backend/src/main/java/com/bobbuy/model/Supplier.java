@@ -15,6 +15,9 @@ import java.util.Map;
 @Entity
 @Table(name = "bb_supplier")
 public class Supplier {
+    private Long merchantId;
+    public Long getMerchantId() { return merchantId; }
+    public void setMerchantId(Long value) { merchantId = value; }
     @Id
     private String id;
 

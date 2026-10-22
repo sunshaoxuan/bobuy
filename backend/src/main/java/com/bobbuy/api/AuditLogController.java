@@ -14,14 +14,18 @@ import java.util.List;
 @RequestMapping("/api/audit-logs")
 public class AuditLogController {
   private final AuditLogService auditLogService;
+  private final com.bobbuy.service.BobbuyStore store;
 
-  public AuditLogController(AuditLogService auditLogService) {
+  public AuditLogController(AuditLogService auditLogService, com.bobbuy.service.BobbuyStore store) {
     this.auditLogService = auditLogService;
+    this.store = store;
   }
 
   @GetMapping
   public ApiResponse<List<AuditLog>> list() {
-    List<AuditLog> logs = auditLogService.listLogs();
+    List<AuditLog> logs = auditLogService.listLogs().stream().filter(log ->
+        "TRIP".equals(log.getEntityType()) ? store.getTrip(log.getEntityId()).isPresent() :
+        "ORDER".equals(log.getEntityType()) && store.getOrder(log.getEntityId()).isPresent()).toList();
     return ApiResponse.success(logs, new ApiMeta(logs.size()));
   }
 }

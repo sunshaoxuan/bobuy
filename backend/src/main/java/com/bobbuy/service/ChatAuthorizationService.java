@@ -19,20 +19,29 @@ public class ChatAuthorizationService {
     // extracts the numeric resource id from group(1) for order/trip topics.
     private static final Pattern ORDER_TOPIC = Pattern.compile("^/topic/order/(\\d+)$");
     private static final Pattern TRIP_TOPIC = Pattern.compile("^/topic/trip/(\\d+)$");
-    private static final Pattern PRIVATE_TOPIC = Pattern.compile("^/topic/private/[^/]+/[^/]+$");
+    private static final Pattern PRIVATE_TOPIC = Pattern.compile("^/topic/private/([^/]+)/([^/]+)$");
 
     private final OrderHeaderRepository orderHeaderRepository;
     private final CustomerIdentityResolver customerIdentityResolver;
+    private final com.bobbuy.repository.TripRepository tripRepository;
 
     public ChatAuthorizationService(OrderHeaderRepository orderHeaderRepository,
-                                    CustomerIdentityResolver customerIdentityResolver) {
+                                    CustomerIdentityResolver customerIdentityResolver,
+                                    com.bobbuy.repository.TripRepository tripRepository) {
         this.orderHeaderRepository = orderHeaderRepository;
         this.customerIdentityResolver = customerIdentityResolver;
+        this.tripRepository = tripRepository;
     }
 
     public void authorizeMessage(Authentication authentication, ChatMessage message) {
         requireRestAuthentication(authentication);
-        if (message == null || isConversationAllowed(authentication, message.getOrderId(), message.getTripId(), true)) {
+        if (message != null && isConversationAllowed(authentication, message.getOrderId(), message.getTripId(), false)) {
+            message.setSenderId(authentication.getName());
+            return;
+        }
+        if (message != null && message.getOrderId() == null && message.getTripId() == null &&
+            isPrivateConversationAllowed(authentication, authentication.getName(), message.getRecipientId())) {
+            message.setSenderId(authentication.getName());
             return;
         }
         throw forbiddenApi();
@@ -54,7 +63,7 @@ public class ChatAuthorizationService {
 
     public void authorizePrivateAccess(Authentication authentication, String userA, String userB) {
         requireRestAuthentication(authentication);
-        if (isPrivateConversationAllowed(authentication)) {
+        if (isPrivateConversationAllowed(authentication, userA, userB)) {
             return;
         }
         throw forbiddenApi();
@@ -81,7 +90,8 @@ public class ChatAuthorizationService {
             }
             return;
         }
-        if (PRIVATE_TOPIC.matcher(destination).matches() && !isPrivateConversationAllowed(authentication)) {
+        Matcher privateMatcher = PRIVATE_TOPIC.matcher(destination);
+        if (privateMatcher.matches() && !isPrivateConversationAllowed(authentication, privateMatcher.group(1), privateMatcher.group(2))) {
             throw new AccessDeniedException("Chat destination is forbidden");
         }
     }
@@ -97,28 +107,39 @@ public class ChatAuthorizationService {
             return false;
         }
         if (!customerIdentityResolver.isCustomer(authentication)) {
-            return true;
+            Long merchant = customerIdentityResolver.resolveCustomerId(authentication).orElse(null);
+            if (merchant == null) return false;
+            if (orderId != null) return orderHeaderRepository.findById(orderId).filter(order -> tripId == null || tripId.equals(order.getTripId()))
+                .flatMap(order -> tripRepository.findById(order.getTripId()))
+                .map(t -> merchant.equals(t.getAgentId())).orElse(false);
+            if (tripId != null) return tripRepository.findById(tripId).map(t -> merchant.equals(t.getAgentId())).orElse(false);
+            return false;
         }
         Long customerId = customerIdentityResolver.resolveCustomerId(authentication).orElse(null);
         if (customerId == null) {
             return false;
         }
-        if (tripId != null) {
-            return orderHeaderRepository.existsByTripIdAndCustomerId(tripId, customerId);
-        }
         if (orderId != null) {
             return orderHeaderRepository.findById(orderId)
-                .map(order -> customerId.equals(order.getCustomerId()))
+                .map(order -> customerId.equals(order.getCustomerId()) && (tripId == null || tripId.equals(order.getTripId())))
                 .orElse(false);
         }
+        if (tripId != null) return orderHeaderRepository.existsByTripIdAndCustomerId(tripId, customerId);
         // Unscoped chat messages do not bind to a specific order/trip resource.
         // They remain allowed here only for existing REST send flows that already
         // passed authentication and do not expose customer cross-context reads.
         return allowUnscoped;
     }
 
-    private boolean isPrivateConversationAllowed(Authentication authentication) {
-        return isAuthenticated(authentication) && !customerIdentityResolver.isCustomer(authentication);
+    private boolean isPrivateConversationAllowed(Authentication authentication, String userA, String userB) {
+        Long a = customerIdentityResolver.resolveCustomerId(userA).orElse(null);
+        Long b = customerIdentityResolver.resolveCustomerId(userB).orElse(null);
+        Long current = customerIdentityResolver.resolveCustomerId(authentication).orElse(null);
+        if (a == null || b == null || current == null || (!current.equals(a) && !current.equals(b))) return false;
+        Long customer = customerIdentityResolver.isCustomer(authentication) ? current : (current.equals(a) ? b : a);
+        Long merchant = customerIdentityResolver.isCustomer(authentication) ? (current.equals(a) ? b : a) : current;
+        return orderHeaderRepository.findByCustomerId(customer).stream().anyMatch(order -> tripRepository.findById(order.getTripId())
+            .map(trip -> merchant.equals(trip.getAgentId())).orElse(false));
     }
 
     private boolean isAuthenticated(Authentication authentication) {

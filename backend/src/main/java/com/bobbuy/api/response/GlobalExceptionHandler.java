@@ -28,7 +28,9 @@ public class GlobalExceptionHandler {
         LocaleContextHolder.getLocale());
     String message = (rawMessage != null)
         ? rawMessage
-        : messageSource.getMessage("error.common.unknown", null, "Unknown error", LocaleContextHolder.getLocale());
+        : (ex.getMessageKey().startsWith("error.")
+            ? messageSource.getMessage("error.common.unknown", null, "Unknown error", LocaleContextHolder.getLocale())
+            : ex.getMessageKey());
     return ResponseEntity.status(resolveStatus(ex.getErrorCode()))
         .body(new ApiError(ex.getErrorCode().name(), message));
   }

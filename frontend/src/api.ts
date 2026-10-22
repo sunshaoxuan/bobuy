@@ -976,6 +976,8 @@ export type AiOnboardingSuggestion = {
 
 export const api = {
     auth: {
+        register: (payload: { username: string; password: string; email: string }) =>
+            postJson<AuthSessionResponse, typeof payload>('/api/auth/register', payload, { includeAccessToken: false, retryOnUnauthorized: false }),
         login: (payload: { username: string; password: string }) =>
             postJson<AuthSessionResponse, { username: string; password: string }>('/api/auth/login', payload, {
                 includeAccessToken: false,
@@ -1241,6 +1243,25 @@ export const api = {
         }).then(res => {
             if (!res.ok) throw new Error('Delete failed');
         })
+};
+
+export type StoreTrip = { id: number; merchantId: number; merchantName: string; origin: string; destination: string; departDate: string };
+export type StoreProduct = { id: string; merchantId: number; name: Record<string, string>; description: Record<string, string>; brand: string; price: number; categoryId: string; images: string[] };
+export type MerchantCustomer = { customerId: number; name: string; emailVerified: boolean; merchantApproved: boolean; approvedAt?: string };
+async function storeGet<T>(path: string): Promise<T> {
+    const response = await authorizedFetch(path, undefined, { retryOnUnauthorized: !path.startsWith('/api/storefront/') });
+    if (!response.ok) throw new Error(await parseErrorMessage(response));
+    return parseSuccessPayload<T>(response);
+}
+export const storefrontApi = {
+    trips: () => storeGet<StoreTrip[]>('/api/storefront/trips'),
+    products: () => storeGet<StoreProduct[]>('/api/storefront/products'),
+    customers: () => storeGet<MerchantCustomer[]>('/api/merchant/customers'),
+    approve: (id: number) => postJson<boolean, object>(`/api/merchant/customers/${id}/approve`, {}),
+    resend: () => postJson<boolean, object>('/api/auth/email/resend', {}),
+    verify: (code: string) => postJson<boolean, object>('/api/auth/email/verify', { code }),
+    checkout: (payload: { requestId: string; tripId: number; items: { productId: string; quantity: number }[] }) =>
+        postJson<{ orderId: number; total: number; status: string; emailVerified: boolean; merchantApproved: boolean }, typeof payload>('/api/checkout', payload)
 };
 
 function buildChatCursorQuery(params?: { beforeId?: number; limit?: number }, hasExistingQuery = false) {

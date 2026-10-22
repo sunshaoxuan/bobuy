@@ -1,5 +1,12 @@
 # BOBBuy
 
+2026-10-22 本地增量：公开手机商城与 `/admin` 商家入口，尚未发布到线上。
+需求见 [PROD-05](docs/requirements/PROD-05-公开商城与商客关系.md)，验收见
+[REPORT-15](docs/reports/REPORT-15-手机商城本地验收.md)。
+使用 `./scripts/local-test.ps1 start` 启动唯一 `bobuy-local` 容器组，
+客户入口 `http://127.0.0.1:18080`，商家入口 `/admin`，测试收件箱 `http://127.0.0.1:18025`。
+`status` 和 `stop` 操作同一组。此环境使用本地演示数据，邮件仅在 Mailpit 收取。
+
 2026-10-21 deployment: repository `sunshaoxuan/bobuy`, site `https://bobuy.cc`.
 See [production deployment](docs/production-deployment.md) and
 [deployment acceptance](docs/deployment-task.md) for the current release,

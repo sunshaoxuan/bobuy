@@ -17,11 +17,11 @@ export default function ProtectedRoute({ children, allowedRoles, redirectTo }: P
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace state={{ from: location.pathname }} />;
+    return <Navigate to={location.pathname.startsWith('/admin') ? '/admin' : '/login'} replace state={{ from: location.pathname }} />;
   }
 
   if (!allowedRoles.includes(role)) {
-    const defaultRedirect = role === 'AGENT' ? '/dashboard' : '/';
+    const defaultRedirect = role === 'AGENT' ? '/admin/dashboard' : '/';
     return <Navigate to={redirectTo || defaultRedirect} replace />;
   }
 

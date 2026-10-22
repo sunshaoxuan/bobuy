@@ -59,7 +59,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -70,6 +69,7 @@ public class BobbuyStore {
     private static final Long SYSTEM_USER_ID = 0L;
 
     private final UserRepository userRepository;
+    private final com.bobbuy.repository.CheckoutIdentityRepository checkoutIds;
     private final TripRepository tripRepository;
     private final OrderHeaderRepository orderHeaderRepository;
     private final ProductRepository productRepository;
@@ -90,7 +90,6 @@ public class BobbuyStore {
     private final PasswordEncoder passwordEncoder;
     private final double unitWeight;
     private final double unitVolume;
-    private final AtomicLong orderIdentity = new AtomicLong(3000L);
 
     @Value("${bobbuy.seed.enabled:false}")
     private boolean seedEnabled;
@@ -101,8 +100,12 @@ public class BobbuyStore {
     @Value("${bobbuy.seed.picking-fixture.enabled:false}")
     private boolean seedPickingFixtureEnabled;
 
+    @Value("${bobbuy.seed.storefront-fixture.enabled:false}")
+    private boolean seedStorefrontFixtureEnabled;
+
     public BobbuyStore(
             UserRepository userRepository,
+            com.bobbuy.repository.CheckoutIdentityRepository checkoutIds,
             TripRepository tripRepository,
             OrderHeaderRepository orderHeaderRepository,
             ProductRepository productRepository,
@@ -124,6 +127,7 @@ public class BobbuyStore {
               @Value("${bobbuy.trip.unit-weight:1.0}") double unitWeight,
              @Value("${bobbuy.trip.unit-volume:1.0}") double unitVolume) {
         this.userRepository = userRepository;
+        this.checkoutIds = checkoutIds;
         this.tripRepository = tripRepository;
         this.orderHeaderRepository = orderHeaderRepository;
         this.productRepository = productRepository;
@@ -286,6 +290,7 @@ public class BobbuyStore {
                 new LinkedHashMap<>(Map.of("zh-CN", "东京供货商", "ja-JP", "東京サプライヤー", "en-US", "Tokyo Supplier")),
                 new LinkedHashMap<>(Map.of("zh-CN", "稳定供应抹茶", "ja-JP", "抹茶を安定供給", "en-US", "Stable matcha supplier")),
                 "tokyo-supplier@bobbuy.com");
+        supplier.setMerchantId(agent.getId());
         supplierRepository.save(supplier);
 
         Product product = new Product(
@@ -304,6 +309,7 @@ public class BobbuyStore {
                 OrderMethod.DIRECT_BUY,
                 foodCategory.getId(),
                 new LinkedHashMap<>(Map.of(supplier.getId(), "TOKYO-MATCHA-001")));
+        product.setMerchantId(agent.getId());
         product.setRecommended(true);
         product.setTemporary(false);
         product.setAttributes(new LinkedHashMap<>(Map.of(
@@ -329,6 +335,7 @@ public class BobbuyStore {
                 OrderMethod.DIRECT_BUY,
                 foodCategory.getId(),
                 new LinkedHashMap<>(Map.of(supplier.getId(), "COSTCO-MATCHA-59363")));
+        existingSampleProduct.setMerchantId(agent.getId());
         existingSampleProduct.setItemNumber("59363");
         existingSampleProduct.setRecommended(false);
         existingSampleProduct.setTemporary(false);
@@ -338,6 +345,29 @@ public class BobbuyStore {
                 "flavor", "抹茶"
         )));
         productRepository.save(existingSampleProduct);
+        if (seedStorefrontFixtureEnabled) {
+            product.setVisibilityStatus(com.bobbuy.model.ProductVisibility.DRAFTER_ONLY);
+            productRepository.save(product);
+            existingSampleProduct.setMediaGallery(List.of(new MediaGalleryItem("/assets/products/matcha-muffins.jpg", MediaType.IMAGE, Map.of())));
+            existingSampleProduct.setName(Map.of("zh-CN", "抹茶玛芬 · 6 个装"));
+            existingSampleProduct.setDescription(Map.of("zh-CN", "抹茶风味烘焙点心，分享装"));
+            productRepository.save(existingSampleProduct);
+            String[][] fixtures = {
+                {"strawberries", "鲜采草莓 · 400g", "鲜果", "1280", "当季鲜果，独立盒装"},
+                {"milk", "全脂鲜牛奶 · 1L", "乳品", "328", "冷藏鲜奶，醇厚奶香"},
+                {"croissants", "黄油可颂 · 6 个装", "烘焙", "698", "层层酥香，早餐分享装"},
+                {"spinach", "新鲜菠菜 · 300g", "蔬菜", "298", "新鲜绿叶菜，日常餐桌之选"},
+                {"paper_towels", "厨房纸巾 · 家庭装", "日用", "1498", "厨房清洁，多卷家庭装"},
+                {"chicken", "鲜鸡胸肉 · 1kg", "鲜食", "980", "冷藏鲜肉，分装更方便"}
+            };
+            for (String[] fixture : fixtures) {
+                Product sample = new Product("demo-" + fixture[0], Map.of("zh-CN",fixture[1]), Map.of("zh-CN",fixture[4]),
+                    "Bobuy Select · " + fixture[2], Double.parseDouble(fixture[3]), 1.0, 1.0,
+                    List.of(new MediaGalleryItem("/assets/products/" + fixture[0] + ".png",MediaType.IMAGE,Map.of())),
+                    StorageCondition.AMBIENT, OrderMethod.DIRECT_BUY, foodCategory.getId(), Map.of());
+                sample.setMerchantId(agent.getId()); productRepository.save(sample);
+            }
+        }
 
         MerchantSku merchantSku = new MerchantSku(
                 "msku-1000",
@@ -356,7 +386,6 @@ public class BobbuyStore {
                 798.0,
                 StockStatus.IN_STOCK);
         merchantSkuRepository.save(muffinSku);
-        orderIdentity.set(3000L);
     }
 
     private void clearSeedData() {
@@ -387,11 +416,14 @@ public class BobbuyStore {
     }
 
     public List<User> listUsers() {
-        return userRepository.findAll();
+        Long merchant = com.bobbuy.security.MerchantScope.current();
+        if (merchant == null) return userRepository.findAll();
+        java.util.Set<Long> customers = listOrders().stream().map(OrderHeader::getCustomerId).collect(java.util.stream.Collectors.toSet());
+        return userRepository.findAll().stream().filter(u -> merchant.equals(u.getId()) || customers.contains(u.getId())).toList();
     }
 
     public Optional<User> getUser(Long id) {
-        return userRepository.findById(id);
+        return listUsers().stream().filter(u -> id.equals(u.getId())).findFirst();
     }
 
     @Transactional
@@ -420,12 +452,16 @@ public class BobbuyStore {
 
     public List<Trip> listTrips() {
         return tripRepository.findAll().stream()
+                .filter(t -> com.bobbuy.security.MerchantScope.visible(t.getAgentId()))
+                .filter(t -> isTripVisibleToCustomer(t.getId()))
                 .peek(this::refreshTripDynamicLoad)
                 .toList();
     }
 
     public Optional<Trip> getTrip(Long id) {
         return tripRepository.findById(id)
+                .filter(t -> com.bobbuy.security.MerchantScope.visible(t.getAgentId()))
+                .filter(t -> isTripVisibleToCustomer(t.getId()))
                 .map(trip -> {
                     refreshTripDynamicLoad(trip);
                     return trip;
@@ -434,6 +470,7 @@ public class BobbuyStore {
 
     @Transactional
     public Trip createTrip(Trip trip) {
+        if (com.bobbuy.security.MerchantScope.current() != null) trip.setAgentId(com.bobbuy.security.MerchantScope.current());
         trip.setId(nextTripId());
         trip.setReservedCapacity(Math.max(trip.getReservedCapacity(), 0));
         trip.setStatusUpdatedAt(LocalDateTime.now());
@@ -442,6 +479,8 @@ public class BobbuyStore {
 
     @Transactional
     public Optional<Trip> updateTrip(Long id, Trip trip) {
+        if (getTrip(id).isEmpty()) return Optional.empty();
+        if (com.bobbuy.security.MerchantScope.current() != null) trip.setAgentId(com.bobbuy.security.MerchantScope.current());
         if (!tripRepository.existsById(id)) {
             return Optional.empty();
         }
@@ -464,6 +503,7 @@ public class BobbuyStore {
 
     @Transactional
     public boolean deleteTrip(Long id) {
+        if (getTrip(id).isEmpty()) return false;
         if (!tripRepository.existsById(id)) {
             return false;
         }
@@ -473,6 +513,7 @@ public class BobbuyStore {
 
     public List<Product> listProducts() {
         return productRepository.findAll().stream()
+                .filter(p -> com.bobbuy.security.MerchantScope.visible(p.getMerchantId()))
                 .sorted(Comparator
                         .comparing(Product::isRecommended).reversed()
                         .thenComparing(Product::getUpdatedAt, Comparator.nullsLast(Comparator.reverseOrder()))
@@ -481,18 +522,19 @@ public class BobbuyStore {
     }
 
     public Optional<Product> getProduct(String id) {
-        return productRepository.findById(id);
+        return productRepository.findById(id).filter(p -> com.bobbuy.security.MerchantScope.visible(p.getMerchantId()));
     }
 
     public Optional<Product> findProductByItemNumber(String itemNumber) {
         if (itemNumber == null || itemNumber.isBlank()) {
             return Optional.empty();
         }
-        return productRepository.findByItemNumber(itemNumber.trim());
+        return productRepository.findByItemNumber(itemNumber.trim()).filter(p -> com.bobbuy.security.MerchantScope.visible(p.getMerchantId()));
     }
 
     @Transactional
     public Product createProduct(Product product) {
+        if (com.bobbuy.security.MerchantScope.current() != null) product.setMerchantId(com.bobbuy.security.MerchantScope.current());
         if (product.getId() == null || product.getId().isBlank()) {
             product.setId(UUID.randomUUID().toString());
         }
@@ -502,6 +544,8 @@ public class BobbuyStore {
 
     @Transactional
     public Optional<Product> updateProduct(String id, Product product) {
+        if (getProduct(id).isEmpty()) return Optional.empty();
+        product.setMerchantId(getProduct(id).orElseThrow().getMerchantId());
         if (!productRepository.existsById(id)) {
             return Optional.empty();
         }
@@ -512,7 +556,7 @@ public class BobbuyStore {
 
     @Transactional
     public Optional<Product> patchProduct(String id, ProductPatch patch) {
-        Optional<Product> existingOptional = productRepository.findById(id);
+        Optional<Product> existingOptional = getProduct(id);
         if (existingOptional.isEmpty()) {
             return Optional.empty();
         }
@@ -582,6 +626,7 @@ public class BobbuyStore {
 
     @Transactional
     public boolean deleteProduct(String id) {
+        if (getProduct(id).isEmpty()) return false;
         if (!productRepository.existsById(id)) {
             return false;
         }
@@ -599,21 +644,22 @@ public class BobbuyStore {
     }
 
     public List<Supplier> listSuppliers() {
-        return supplierRepository.findAll();
+        return supplierRepository.findAll().stream().filter(s -> com.bobbuy.security.MerchantScope.visible(s.getMerchantId())).toList();
     }
 
     public Optional<Supplier> getSupplier(String id) {
-        return supplierRepository.findById(id);
+        return supplierRepository.findById(id).filter(s -> com.bobbuy.security.MerchantScope.visible(s.getMerchantId()));
     }
 
     @Transactional
     public Supplier saveSupplier(Supplier supplier) {
+        if (com.bobbuy.security.MerchantScope.current() != null) supplier.setMerchantId(com.bobbuy.security.MerchantScope.current());
         return supplierRepository.save(supplier);
     }
 
     @Transactional
     public Optional<Supplier> updateSupplier(String id, Supplier supplier) {
-        return supplierRepository.findById(id).map(existing -> {
+        return getSupplier(id).map(existing -> {
             existing.setName(supplier.getName());
             existing.setDescription(supplier.getDescription());
             existing.setContactInfo(supplier.getContactInfo());
@@ -623,11 +669,11 @@ public class BobbuyStore {
     }
 
     public List<MerchantSku> listMerchantSkus() {
-        return merchantSkuRepository.findAll();
+        return merchantSkuRepository.findAll().stream().filter(s -> getProduct(s.getProductId()).isPresent()).toList();
     }
 
     public Optional<MerchantSku> getMerchantSku(String id) {
-        return merchantSkuRepository.findById(id);
+        return merchantSkuRepository.findById(id).filter(s -> getProduct(s.getProductId()).isPresent());
     }
 
     public List<OrderHeader> listOrders() {
@@ -651,7 +697,7 @@ public class BobbuyStore {
     }
 
     public Optional<OrderHeader> getOrder(Long id) {
-        return orderHeaderRepository.findById(id);
+        return orderHeaderRepository.findById(id).filter(o -> isOrderVisibleToAuthentication(o, null));
     }
 
     public Optional<OrderHeader> getOrder(Long id, Authentication authentication) {
@@ -665,6 +711,10 @@ public class BobbuyStore {
 
     @Transactional
     public OrderHeader upsertOrder(OrderHeader headerInput) {
+        if (com.bobbuy.security.MerchantScope.current() != null) {
+            requireOwnedTrip(headerInput.getTripId());
+            orderHeaderRepository.findByBusinessId(headerInput.getBusinessId()).ifPresent(o -> requireOwnedTrip(o.getTripId()));
+        }
         if (headerInput.getPaymentStatus() == null) {
             headerInput.setPaymentStatus(PaymentStatus.UNPAID);
         }
@@ -727,6 +777,8 @@ public class BobbuyStore {
         ensureOrderLinesMutable(trip.getId());
         Product product = productRepository.findById(request.getSkuId())
             .orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.product.not_found"));
+        com.bobbuy.security.MerchantScope.require(trip.getAgentId());
+        com.bobbuy.security.MerchantScope.require(product.getMerchantId());
 
         Optional<OrderHeader> existing = orderHeaderRepository.findByBusinessIdAndTripIdForUpdate(request.getBusinessId(), tripId);
 
@@ -772,11 +824,12 @@ public class BobbuyStore {
 
     @Transactional
     public Optional<OrderHeader> updateOrder(Long id, OrderHeader order) {
-        Optional<OrderHeader> existingOptional = orderHeaderRepository.findById(id);
+        Optional<OrderHeader> existingOptional = getOrder(id);
         if (existingOptional.isEmpty()) {
             return Optional.empty();
         }
         OrderHeader existing = existingOptional.orElseThrow();
+        getTrip(order.getTripId()).orElseThrow(() -> new ApiException(ErrorCode.FORBIDDEN, "无权操作此行程"));
         ensureOrderLinesMutable(existing.getTripId());
         ensureOrderLinesMutable(order.getTripId());
         if (order.getPaymentStatus() == null) {
@@ -905,13 +958,12 @@ public class BobbuyStore {
     }
 
     public double calculateGmv() {
-        return orderHeaderRepository.sumTotalAmount();
+        return listOrders().stream().mapToDouble(OrderHeader::getTotalAmount).sum();
     }
 
     public Map<OrderStatus, Integer> orderStatusCounts() {
         Map<OrderStatus, Integer> counts = new EnumMap<>(OrderStatus.class);
-        orderHeaderRepository.countByStatus().forEach(item ->
-                counts.put(item.getStatus(), (int) item.getTotal()));
+        listOrders().forEach(order -> counts.merge(order.getStatus(), 1, Integer::sum));
         return counts;
     }
 
@@ -991,7 +1043,18 @@ public class BobbuyStore {
         }
     }
 
+    private boolean isTripVisibleToCustomer(Long tripId) {
+        Authentication authentication = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
+        if (!customerIdentityResolver.isCustomer(authentication)) return true;
+        return customerIdentityResolver.resolveCustomerId(authentication)
+                .map(id -> orderHeaderRepository.findByCustomerId(id).stream().anyMatch(o -> tripId.equals(o.getTripId())))
+                .orElse(false);
+    }
+
     private boolean isOrderVisibleToAuthentication(OrderHeader order, Authentication authentication) {
+        if (authentication == null) authentication = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
+        Long merchant = com.bobbuy.security.MerchantScope.current();
+        if (merchant != null) return tripRepository.findById(order.getTripId()).map(t -> merchant.equals(t.getAgentId())).orElse(false);
         if (!customerIdentityResolver.isCustomer(authentication)) {
             return true;
         }
@@ -1074,9 +1137,12 @@ public class BobbuyStore {
     }
 
     private Long nextUserId() {
-        return userRepository.findTopByOrderByIdDesc()
-                .map(existing -> existing.getId() + 1)
-                .orElse(1000L);
+        return checkoutIds.saveAndFlush(new com.bobbuy.model.CheckoutIdentity()).id;
+    }
+
+    private void requireOwnedTrip(Long tripId) {
+        Trip trip = tripRepository.findById(tripId).orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.trip.not_found"));
+        com.bobbuy.security.MerchantScope.require(trip.getAgentId());
     }
 
     private Long nextTripId() {
@@ -1086,15 +1152,6 @@ public class BobbuyStore {
     }
 
     private synchronized Long nextOrderIdentity() {
-        long current = orderIdentity.incrementAndGet();
-        long persistedMax = orderHeaderRepository.findTopByOrderByIdDesc()
-                .map(OrderHeader::getId)
-                .orElse(2999L);
-        if (current <= persistedMax) {
-            long adjusted = persistedMax + 1;
-            orderIdentity.set(adjusted);
-            return adjusted;
-        }
-        return current;
+        return checkoutIds.saveAndFlush(new com.bobbuy.model.CheckoutIdentity()).id;
     }
 }
