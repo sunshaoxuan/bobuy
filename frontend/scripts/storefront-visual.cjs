@@ -1,7 +1,7 @@
 const { chromium } = require('@playwright/test');
 const fs = require('node:fs');
 const path = require('node:path');
-const output = path.resolve(__dirname, '../../docs/reports/evidence/PLAN59-pinterest-refined');
+const output = path.resolve(__dirname, '../../docs/reports/evidence', process.env.BOBUY_VISUAL_EVIDENCE || 'PLAN59-pinterest-refined');
 
 function measureControls() {
   const rect = r => ({x:r.x,y:r.y,width:r.width,height:r.height});
@@ -26,6 +26,8 @@ function measureControls() {
         if (clipping && getComputedStyle(clipping).overflow==='hidden' && r.top>=clipping.getBoundingClientRect().bottom) continue;
         const baseline = r.y + (r.height - m.fontBoundingBoxAscent - m.fontBoundingBoxDescent)/2 + m.fontBoundingBoxAscent;
         const glyph={x:r.x + Math.max(0,(r.width-m.width)/2) - m.actualBoundingBoxLeft,y:baseline-m.actualBoundingBoxAscent,width:m.actualBoundingBoxLeft+m.actualBoundingBoxRight,height:m.actualBoundingBoxAscent+m.actualBoundingBoxDescent};
+        const stroke=(parseFloat(style.webkitTextStrokeWidth)||0)/2;
+        glyph.x-=stroke;glyph.y-=stroke;glyph.width+=stroke*2;glyph.height+=stroke*2;
         // Range rectangles can include a clamped line whose glyph ink is fully hidden.
         if (clipping && getComputedStyle(clipping).overflow==='hidden') {
           const clip=clipping.getBoundingClientRect();
@@ -95,6 +97,11 @@ function measureControls() {
       }
       await page.evaluate(()=>scrollTo(0,0));
       await page.screenshot({path:path.join(output,`feed-full-${width}.png`),fullPage:true});
+      if(width===390) {
+        await page.locator('.product-tile').filter({hasText:'厨房纸巾'}).screenshot({path:path.join(output,'light-package-detail.png')});
+        await page.locator('.product-tile').filter({hasText:'全脂鲜牛奶'}).screenshot({path:path.join(output,'milk-detail.png')});
+        await page.evaluate(()=>scrollTo(0,0));
+      }
       await page.locator('.product-add').first().click();
       await page.getByRole('spinbutton',{name:'购买数量',exact:true}).fill('99');
       await page.getByRole('spinbutton',{name:'购买数量',exact:true}).blur();

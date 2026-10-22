@@ -39,6 +39,20 @@ for (const [width, height] of [[360,800], [390,844], [768,1024], [1440,1000]]) {
     expect(columns).toBe(width < 768 ? 2 : width < 1100 ? 3 : 6);
     await expect(page.locator('.product-tile').first()).toHaveCSS('border-radius','20px');
     await expect(page.locator('.product-tile').first()).toHaveCSS('overflow','hidden');
+    const readScrim = () => page.locator('.product-tile').first().evaluate(element => {
+      const style = getComputedStyle(element,'::after');
+      return {height:parseFloat(style.height), top:parseFloat(style.top), gradient:style.backgroundImage};
+    });
+    const isLightScrim = (scrim: {height:number; top:number; gradient:string}) => scrim.height <= 96 && scrim.top > 0 && scrim.gradient.includes('0.18)') && !scrim.gradient.includes('0.84)');
+    expect(isLightScrim(await readScrim())).toBe(true);
+    await expect(page.locator('.product-name h2').first()).toHaveCSS('color','rgb(255, 255, 255)');
+    await expect(page.locator('.product-name h2').first()).toHaveCSS('-webkit-text-stroke-width','0.5px');
+    if (width === 390) {
+      const heavyScrim = await page.addStyleTag({content:'.product-tile::after { inset:0; height:100%; background:linear-gradient(transparent 28%,rgba(0,0,0,.72) 68%,rgba(0,0,0,.84)); }'});
+      expect(isLightScrim(await readScrim())).toBe(false);
+      await heavyScrim.evaluate(element => element.remove());
+      expect(isLightScrim(await readScrim())).toBe(true);
+    }
     const addFace = await page.locator('.product-add').first().evaluate(element => {
       const face = getComputedStyle(element,'::before');
       return { size:element.getBoundingClientRect().width - 2 * parseFloat(face.top), fill:face.backgroundColor, blur:face.backdropFilter, hit:element.getBoundingClientRect().height };
