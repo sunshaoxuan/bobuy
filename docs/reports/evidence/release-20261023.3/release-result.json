@@ -1,0 +1,16 @@
+{
+  "release": "20261023.3",
+  "applicationHealth": "PASS",
+  "protectedState": "PASS",
+  "publicRegistration": "CLOSED_PENDING_SMTP_ABUSE_RECOVERY",
+  "browserVerification": "PASS",
+  "verifiedAt": "2026-10-23T14:46:28.613889+00:00",
+  "verificationEvidence": [
+    "docs/reports/evidence/release-20261023.3/browser-results.json",
+    "docs/reports/evidence/PLAN60/production/browser-report.json",
+    "docs/reports/evidence/PLAN60/production/geometry-report.json",
+    "docs/reports/evidence/PLAN60/production/overlay-report.json"
+  ],
+  "sourceCommit": "2e4c4ec",
+  "applicationCommit": "ec0499d"
+}

@@ -1,0 +1,144 @@
+{
+  "origin": "https://bobuy.cc",
+  "release": "20261023.3",
+  "productionData": "Existing merchant; empty production catalog",
+  "views": [
+    {
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "errors": [],
+      "httpErrors": [],
+      "failedRequests": [
+        {
+          "phase": "guest",
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "phase": "guest",
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "phase": "guest",
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "productionGuest": "PASS",
+      "fixtureCatalog": "PASS: production assets, browser-only local fixture responses"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "errors": [],
+      "httpErrors": [],
+      "failedRequests": [
+        {
+          "phase": "guest",
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "phase": "guest",
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "phase": "guest",
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "phase": "admin-login",
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "phase": "admin-reload",
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "productionGuest": "PASS",
+      "fixtureCatalog": "PASS: production assets, browser-only local fixture responses",
+      "adminLoginReloadRefreshLogout": "PASS"
+    },
+    {
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "errors": [],
+      "httpErrors": [],
+      "failedRequests": [
+        {
+          "phase": "guest",
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "phase": "guest",
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "phase": "guest",
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "productionGuest": "PASS",
+      "fixtureCatalog": "PASS: production assets, browser-only local fixture responses"
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "errors": [],
+      "httpErrors": [],
+      "failedRequests": [
+        {
+          "phase": "guest",
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "phase": "guest",
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "phase": "guest",
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "phase": "admin-login",
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "phase": "admin-reload",
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "productionGuest": "PASS",
+      "fixtureCatalog": "PASS: production assets, browser-only local fixture responses",
+      "adminLoginReloadRefreshLogout": "PASS"
+    }
+  ],
+  "assets": [
+    "/assets/index-RhcUapW1.js",
+    "/assets/vendor-DkHad5pF.js",
+    "/assets/chat-flow-CXMsCHLx.js",
+    "/assets/index-FQci5JcM.css"
+  ],
+  "result": "PASS"
+}

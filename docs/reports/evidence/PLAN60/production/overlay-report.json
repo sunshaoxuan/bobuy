@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "results": [
+    {
+      "width": 360,
+      "target": "form status",
+      "bounds": {
+        "x": 16,
+        "y": 588,
+        "width": 328,
+        "height": 136
+      },
+      "options": "IN_PROGRESS\nCOMPLETED\n草稿\n已发布\n进行中\n已完成"
+    },
+    {
+      "width": 390,
+      "target": "form status",
+      "bounds": {
+        "x": 16,
+        "y": 346,
+        "width": 358,
+        "height": 136
+      },
+      "options": "IN_PROGRESS\nCOMPLETED\n草稿\n已发布\n进行中\n已完成"
+    }
+  ]
+}

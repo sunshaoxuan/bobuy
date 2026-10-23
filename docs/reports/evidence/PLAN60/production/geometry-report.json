@@ -1,0 +1,10 @@
+{
+  "measured": 232,
+  "failures": [],
+  "budget": {
+    "hitArea": 44,
+    "glyphMargin": 3,
+    "center": "min(2px, ink height * 10%)"
+  },
+  "status": "PASS"
+}
