@@ -1,0 +1,1002 @@
+{
+  "capturedAt": "2026-10-23T17:51:03.813Z",
+  "context": "desktop-linux",
+  "containers": [
+    {
+      "id": "09abaa03b4b74f1feacb64ea33f90085d4ed70f70f4bbe91b5806dd25f95041c",
+      "name": "/rhospital-mobile-test-postgres",
+      "image": "sha256:20edbde7749f822887a1a022ad526fde0a47d6b2be9a8364433605cf65099416",
+      "reference": "postgres:16-alpine",
+      "project": "local-game-test",
+      "configurationHash": "b4da4a83c20931442c5f316622d70ec36875226a5d0dbbc678fc5c2b9ecc02f2",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:13.78495054Z",
+      "restartCount": 0
+    },
+    {
+      "id": "1443a9566b8a1c8b0700bdfb9672208be4ab88a90fe127611d7ee8b4a2dd6933",
+      "name": "/bobuy-local-backend-1",
+      "image": "sha256:585edc97f3947436ad7cf01cbc6bd69f72a853d30aa66376efeaee102e5beaf0",
+      "reference": "bobuy/local-backend:current",
+      "project": "bobuy-local",
+      "configurationHash": "8780bfd66808b457ef38ce42129c39f507b3a1eb6fef441dad6f08e491c45d89",
+      "state": "running",
+      "startedAt": "2026-10-23T17:08:50.532539066Z",
+      "restartCount": 0
+    },
+    {
+      "id": "216a1ab3c6e2d37496bf34cd0f02fa22b21106af53a1393bed3f14793b63b459",
+      "name": "/nexora-minio",
+      "image": "sha256:a1ea29fa28355559ef137d71fc570e508a214ec84ff8083e39bc5428980b015e",
+      "reference": "minio/minio:RELEASE.2025-04-22T22-12-26Z",
+      "project": "nexora-local",
+      "configurationHash": "5d00e7da8ae853a1308290dd1b97087c47e55ffc105df138a4e0c7b94870034b",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:13.322683546Z",
+      "restartCount": 0
+    },
+    {
+      "id": "2183b7587921fe0806aea1aa58b6e3aa583aac99aa5276e885f5ccc4dbd47061",
+      "name": "/nexora-asr",
+      "image": "sha256:03b402335881cdab2e4939b24620809df8d6ceec3bf2712217d41c8761a0f5d4",
+      "reference": "onerahmet/openai-whisper-asr-webservice:latest",
+      "project": "nexora-local",
+      "configurationHash": "b320619d68367feaabd207bd192b091d01b4eabe07d0a7eaf9bfabf7f1022792",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:11.887007768Z",
+      "restartCount": 0
+    },
+    {
+      "id": "240e61227b060254bc0eb26a7e240b0a22fd8e14a2c437fb69036f54fd6498de",
+      "name": "/nexora-postgres",
+      "image": "sha256:20edbde7749f822887a1a022ad526fde0a47d6b2be9a8364433605cf65099416",
+      "reference": "postgres:16-alpine",
+      "project": "nexora-local",
+      "configurationHash": "276f38cce01ca36975d25dca5efb15d54fb13d5fd679d80a61053edbec2a1206",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:14.381812564Z",
+      "restartCount": 0
+    },
+    {
+      "id": "2847918cadb99236f574eb7dddcf4c057641813ed6c69ac07bf7537a255b993c",
+      "name": "/bobit-worker-cvd-1",
+      "image": "sha256:e48d049ca208942d660d88d61edc469e15587497ba4568a744b31962717c5feb",
+      "reference": "bobit-worker-cvd",
+      "project": "bobit",
+      "configurationHash": "58f3e4b54c6008ebb43d34daa787c26aafe3751585b96bd5b000e903cda525cd",
+      "state": "exited",
+      "startedAt": "2026-10-08T07:31:10.263163881Z",
+      "restartCount": 0
+    },
+    {
+      "id": "2cb48bad40e04e1e940f72d28aa58d0565319d0d7942a6e146738b97b701a60a",
+      "name": "/bobit-monitor-1",
+      "image": "sha256:cb10d05feea785b5338e4cddabfca35634715d8bee2c41a631cdb9e9e4940523",
+      "reference": "bobit-monitor",
+      "project": "bobit",
+      "configurationHash": "3d5049046433ccb3a807782825e5571e50654eca7e913473c5e4aa6f83f72552",
+      "state": "exited",
+      "startedAt": "2026-10-08T07:31:11.077898464Z",
+      "restartCount": 0
+    },
+    {
+      "id": "3e3cea9efe78ab902805ff94f006fbea9cf7bfaa58423fc98fc9c5feeecedda8",
+      "name": "/nexora-embedding-adapter",
+      "image": "sha256:e2313db6b8288eb02fc2233cc75b42b9cf0e44e7c22528701a59578be06451bc",
+      "reference": "nexora-local-nexora-embedding-adapter",
+      "project": "nexora-local",
+      "configurationHash": "2c8f8af3b3d67ac3799ab1ff0235534ddd93c66a70f8fe9034ca98c0bfa8d9fd",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:12.642234888Z",
+      "restartCount": 0
+    },
+    {
+      "id": "440726eefbfb4e689d4f9244e6763d45b4063225f5ca69ed02eb5893b02a4dc5",
+      "name": "/meelok-local-mailpit-1",
+      "image": "sha256:e22dce5b36f93c77082e204a3942fb6b283b7896e057458400a4c88344c3df68",
+      "reference": "axllent/mailpit:v1.27",
+      "project": "meelok-local",
+      "configurationHash": "fbea389d32d09b66ca0cdecd84d645313889f8d127b08ccb29579e24e84ffec8",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:13.052262739Z",
+      "restartCount": 0
+    },
+    {
+      "id": "46d41e1fb047962ad10c616a50f8830202778548ac2970f32ca60a2b0640eabe",
+      "name": "/bobuy-local-web-1",
+      "image": "sha256:dd979184a9b8e554e16b6736e00d716c2e0f1f17a0b88f2d79e4193fea69bf0f",
+      "reference": "bobuy/local-web:current",
+      "project": "bobuy-local",
+      "configurationHash": "94f87416c1f9d519f1be636f576ac8acad593bdd068d13b0764c6895e502a124",
+      "state": "running",
+      "startedAt": "2026-10-23T17:32:34.641567563Z",
+      "restartCount": 0
+    },
+    {
+      "id": "4839fa8087f7a4219eda90334f1f07700d0a748e72696d50cd7e62dbae9cbec4",
+      "name": "/meelok-local-minio-1",
+      "image": "sha256:14cea493d9a34af32f524e538b8346cf79f3321eff8e708c1e2960462bd8936e",
+      "reference": "minio/minio:RELEASE.2025-09-07T16-13-09Z",
+      "project": "meelok-local",
+      "configurationHash": "466611549cdb2441afeb7a6c6963658170974c76403951ddf2fbe85adf7ccc02",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:12.157422022Z",
+      "restartCount": 0
+    },
+    {
+      "id": "49ca99493fe4fe22e2dbb0d28632afcabcd4a903b62e720aa332ea339d8b2101",
+      "name": "/bobit-worker-macd-1",
+      "image": "sha256:63b171da9ab28a899728790beccfc788a65bab0d0265cd8d4031188f62450c1e",
+      "reference": "bobit-worker-macd",
+      "project": "bobit",
+      "configurationHash": "72fb8a8d2d983a12304a139095e31e226bfd71d9da8e9e5664d09361dae9c7da",
+      "state": "exited",
+      "startedAt": "2026-10-08T07:31:09.432148763Z",
+      "restartCount": 0
+    },
+    {
+      "id": "4b42c5f43164438f5e9648f02eaca7d1f70f1b9a0f4e2be96d7dda6eb0198491",
+      "name": "/meelok-local-postgres-1",
+      "image": "sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2",
+      "reference": "postgres:18.6-alpine",
+      "project": "meelok-local",
+      "configurationHash": "168c182b20a530ed5f39470c750946290f2bd6bba2cd43fe6fbd628843793f03",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:13.561758068Z",
+      "restartCount": 0
+    },
+    {
+      "id": "5264c636213769a95d3e298ba56e5d8cbdf8ec03ce6f9cc0664d5a8f0cd20a19",
+      "name": "/nexora-rabbitmq",
+      "image": "sha256:606d8c0d6b3c18d1da9afc53bc7cdb2a8d5486df91b5a9830e9e07626c9ae281",
+      "reference": "rabbitmq:3.13-management-alpine",
+      "project": "nexora-local",
+      "configurationHash": "f7bb540b10863cb82ff337877613560d3d14d13b06823b57b7749b4e7a4a094a",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:12.426600006Z",
+      "restartCount": 0
+    },
+    {
+      "id": "5969c7be92f35d92d336b391f3ce9571f05e8fc71f50cc343a99534ce345d333",
+      "name": "/bobit-worker-rsi-vwap-1",
+      "image": "sha256:997083d48eb12f99e8798ed495dbe9bb4efc142683eb196dd2220e63465447dd",
+      "reference": "bobit-worker-rsi-vwap",
+      "project": "bobit",
+      "configurationHash": "605fcaefe10126f049493d4f6a0fb332a979a7a0a5784788a71720360d18a62d",
+      "state": "exited",
+      "startedAt": "2026-10-08T07:31:09.844962093Z",
+      "restartCount": 0
+    },
+    {
+      "id": "5ac75f42f7978b0fb4ca8e9bb3da07fd492b72de3c2762358cc5a674961652b3",
+      "name": "/nexora-qdrant",
+      "image": "sha256:419d72603f5346ee22ffc4606bdb7beb52fcb63077766fab678e6622ba247366",
+      "reference": "qdrant/qdrant:v1.14.1",
+      "project": "nexora-local",
+      "configurationHash": "66f30eca40ad62932614199f82975f26550b77052332fd7b134dca42e50a7ae7",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:14.076484113Z",
+      "restartCount": 0
+    },
+    {
+      "id": "7348706368a5dcab4e167e010737c64c19d1b77e6b8cbd2609ef8c980d078b95",
+      "name": "/nexora-web",
+      "image": "sha256:c3196549b7968be3b6efc27d5c56dce7b6b4bc7473be620aba747d14d9dd01e3",
+      "reference": "nexora-web:2.8.17",
+      "project": "nexora-local",
+      "configurationHash": "a95bffcb70faeb1ebc2de938ded2089644a37ee43e98cf50d64a3b42d6202f8a",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:14.401984051Z",
+      "restartCount": 0
+    },
+    {
+      "id": "7c9963cb4377dbb79f04d16ed58a7163cb4dfa2dd20cc2b3b88b936cbfc2edf2",
+      "name": "/bobuy-local-mail-1",
+      "image": "sha256:e22dce5b36f93c77082e204a3942fb6b283b7896e057458400a4c88344c3df68",
+      "reference": "axllent/mailpit:v1.27",
+      "project": "bobuy-local",
+      "configurationHash": "ae1b3a16128c2871ea7df9df1e1991c9e459a96f496ad240756b30240c62a045",
+      "state": "running",
+      "startedAt": "2026-10-23T12:22:21.875209255Z",
+      "restartCount": 0
+    },
+    {
+      "id": "7db3b8fba478559368baba6c9b2663478c7d2b31b3c6d4936321842ec94eaeb7",
+      "name": "/codex-sub2api-forward",
+      "image": "sha256:5f275aa1b6e9889c851f61097142ee050fc6ac4615b4ea64ac1f2b0e81ff8d7f",
+      "reference": "alpine/socat:latest",
+      "project": null,
+      "configurationHash": "ff9d5fc6df2773e6a687a9d45d221965bb21cc1ea8dcc00da5d0301ed4a3398e",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:11.952616848Z",
+      "restartCount": 0
+    },
+    {
+      "id": "8007cc366a65f1824ff418a094c7aeba8a0806a9a82cb9bbb58eda7ab43abbc2",
+      "name": "/bobuy-local-redis-1",
+      "image": "sha256:efc27681bf81e6ed55cb581718b7818c6c04c39b1f9aa40854edd3ea2241b6ed",
+      "reference": "redis:7-alpine",
+      "project": "bobuy-local",
+      "configurationHash": "50f4e5456f058ba4284e2c48d5cd8f4c943d79aa484a9c60ae5271e9289a2a12",
+      "state": "running",
+      "startedAt": "2026-10-23T12:22:18.213895335Z",
+      "restartCount": 0
+    },
+    {
+      "id": "87eec1337bfb4f2b41b1a540d9c355f60062bd5c11aea3f00d14246fdf0bcda6",
+      "name": "/rhospital-local-test",
+      "image": "sha256:fe43766760a14183166d240facd9d2820eae47230ed476afdcddd8d08fc34577",
+      "reference": "hospital-backend:local-test",
+      "project": "local-game-test",
+      "configurationHash": "f09af918ce85b9a208f8285e02e69cff48615adeb1f5ed6d2197c3d60d977e43",
+      "state": "running",
+      "startedAt": "2026-10-23T14:47:28.092945571Z",
+      "restartCount": 0
+    },
+    {
+      "id": "9986d73228f05b69f79039f4c29a48bd98687fc36ac51018266e3451cb49ed68",
+      "name": "/bobuy-local-rabbitmq-1",
+      "image": "sha256:606d8c0d6b3c18d1da9afc53bc7cdb2a8d5486df91b5a9830e9e07626c9ae281",
+      "reference": "rabbitmq:3.13-management-alpine",
+      "project": "bobuy-local",
+      "configurationHash": "8d5eef628b0588ae3f18611c1578c1969598bd9e008fdb337598074d88077b4c",
+      "state": "running",
+      "startedAt": "2026-10-23T12:22:23.067170523Z",
+      "restartCount": 0
+    },
+    {
+      "id": "a2317f1ec26c4d1078106e6709b332b6560c58d8e611740ea0cbd21dbab61a45",
+      "name": "/nexora-media-adapter",
+      "image": "sha256:d1a48dac1ffbd2809d95ba3b3e89db25b31151eaebac49eeb873e740a2c26b9b",
+      "reference": "nexora-local-nexora-media-adapter",
+      "project": "nexora-local",
+      "configurationHash": "bf9ad65b97b4f54e0dba4e4dcd0e38ab9d8b392aaea7bb3f07c34fd777523041",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:13.674576774Z",
+      "restartCount": 0
+    },
+    {
+      "id": "a43ef72eb854954c861fd44e25e2a0a340af5df5790bb31911705876b31a6bf8",
+      "name": "/meelok-test-worker",
+      "image": "sha256:4e593ca33248825845b8faeadaaf7c56b84b06555c26762e06861fd2811eb649",
+      "reference": "meelok-api:local-question-workbench",
+      "project": "meelok-local",
+      "configurationHash": "4cb4a48b53f2bcf350e885556f840194c21029b244361fe3f5538763f44ac6b9",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:47.114456582Z",
+      "restartCount": 1
+    },
+    {
+      "id": "b588c6c9e8ec13a29dbc37f143ed6526ce25974569bf1f1f176ee8d8d811b156",
+      "name": "/meelok-local-redis-1",
+      "image": "sha256:a7859ed111db3c1f5404a973a4747505d559fb5ca32d37e447afc0ef845a2103",
+      "reference": "redis:8.2.8-alpine",
+      "project": "meelok-local",
+      "configurationHash": "c919b9c4d6929cf371563b57b26e3b7723f7d451bcf9146996e59eb1443fdaef",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:13.896897357Z",
+      "restartCount": 0
+    },
+    {
+      "id": "bf69ea68466dc3b4ade2c1f272a054fe6f2dbf7ab189d2a304706d8dc3b9778e",
+      "name": "/bobuy-local-postgres-1",
+      "image": "sha256:20edbde7749f822887a1a022ad526fde0a47d6b2be9a8364433605cf65099416",
+      "reference": "postgres:16-alpine",
+      "project": "bobuy-local",
+      "configurationHash": "9cd3870af00018d1c6a07386253509733b287c16da451f29f1e655bf54f2f3bc",
+      "state": "running",
+      "startedAt": "2026-10-23T12:22:20.725657649Z",
+      "restartCount": 0
+    },
+    {
+      "id": "c861f9937b593049ecb4427c10494afdcd6c0402744b84c71839e89be7b39bef",
+      "name": "/nexora-api",
+      "image": "sha256:cfeda9a57f428301dac5f84847d2a32158776449a81f58ad44d3cbe29ff32aa1",
+      "reference": "nexora-api:2.8.17",
+      "project": "nexora-local",
+      "configurationHash": "b1785ffa06d82117ec3d6c79606cf3c42a7b6eb6e049321088951de13487f925",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:13.773222635Z",
+      "restartCount": 0
+    },
+    {
+      "id": "ccaae8c1d49d63ac8b3e5e7b04c65eacf177637b6fceede765d8f4a880543381",
+      "name": "/bobit-replay-1",
+      "image": "sha256:691a9b25a93d42f22254bde20537b414773db17fb7755484081ad015d8353b5d",
+      "reference": "bobit-replay",
+      "project": "bobit",
+      "configurationHash": "378a15437041a2c8dcf755f2a219f82aea1ba7fc55254d6459e9c3d35edacab9",
+      "state": "exited",
+      "startedAt": "2026-10-08T07:31:10.663757665Z",
+      "restartCount": 0
+    },
+    {
+      "id": "cf65a5a65002097576da00d959359a4e09ac2339c33a21614e22b58853e16d7e",
+      "name": "/meelok-test-api",
+      "image": "sha256:4e593ca33248825845b8faeadaaf7c56b84b06555c26762e06861fd2811eb649",
+      "reference": "meelok-api:local-question-workbench",
+      "project": "meelok-local",
+      "configurationHash": "bcba51fcb925c6d82fc9effe5c1b86f31199f0b37eb7aa0a4c7431b5d0da09bf",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:41.543224975Z",
+      "restartCount": 1
+    },
+    {
+      "id": "d05fc044438032b5ac145eca7884826eda676b2c7c0d7c72d11ab7c0cf640474",
+      "name": "/nexora-authorization-server-local",
+      "image": "sha256:3791ad57b4da33cac4fabf770b9f2a7e1fd489d2b0c0ac6dcee5ba991b6da05d",
+      "reference": "nexora-authorization-server:2.3.3",
+      "project": null,
+      "configurationHash": "df2a51d50e961ee132e678388efc6eb487e271a6a2f4acc9b51aadf8df5244c9",
+      "state": "exited",
+      "startedAt": "2026-08-26T01:17:41.146090649Z",
+      "restartCount": 0
+    },
+    {
+      "id": "d21d727e90df37bd6935a12397c05f89f4dee18267bf89eed64c6fb3f27a0037",
+      "name": "/bobit-api-1",
+      "image": "sha256:e7602f6f009ee77783b61055989d6147ba49f20c5843a75890bc6285e4e4afe2",
+      "reference": "bobit-api",
+      "project": "bobit",
+      "configurationHash": "1e5ef9b986deffe933b0c503a6a714600047026dabed0cf9ada167033df40a97",
+      "state": "exited",
+      "startedAt": "2026-10-08T07:31:08.772761719Z",
+      "restartCount": 0
+    },
+    {
+      "id": "da2c7058cdb66f0fb4f418b9a5dd8453fccefe1ca2cadf46fe431dd1d7a98844",
+      "name": "/bobit-postgres-1",
+      "image": "sha256:18cfe3ef5e6815560c98237d6216d1e5119702fb0f3894c8785dd58b8bbe5d73",
+      "reference": "postgres:17-alpine",
+      "project": "bobit",
+      "configurationHash": "57f2d15ae8bf9601a55d732ac56d9a3613782ada9bb318dbca661d4d7e37b1dd",
+      "state": "exited",
+      "startedAt": "2026-10-08T07:31:11.692674677Z",
+      "restartCount": 0
+    },
+    {
+      "id": "dd30221d4b7124a0682a6cb2dfd542a268801dcc9698dc1b81cbad9d5f55144b",
+      "name": "/mock-approval-system",
+      "image": "sha256:e18d135e26f6ad0f551142c7bce3a008799aec3b2afae8b733deb10629dd2fb6",
+      "reference": "mock-approval-system:2.5.52",
+      "project": "nexora-local",
+      "configurationHash": "062ee29585d8e31305c6666eacaac7ed5a30b790d28a6ca5e2b021997180be66",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:11.787925179Z",
+      "restartCount": 0
+    },
+    {
+      "id": "de865b03b6cea86d38a23d7d1d5f6115ae3f461e2ae535a41f4e7072991cf573",
+      "name": "/meelok-test-web",
+      "image": "sha256:1055e725859dd241ac96c34b0e3b11eacbfb2fc71d9b7fb3950668067a937b2b",
+      "reference": "meelok-web:local-question-workbench",
+      "project": "meelok-local",
+      "configurationHash": "32986beae3944546d31e2277f1971175f28639a5d9539b3ea2d0bfe6eda137b3",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:14.238733912Z",
+      "restartCount": 0
+    },
+    {
+      "id": "e8598a7d1bf858324cc37d0f965f147b116606a4e7e5fb710622773666ac505e",
+      "name": "/nexora-workflow-adapter",
+      "image": "sha256:dab73f97ba15ca3730fb1d1b5b327ae745039195b11122b6388de2c143e3edf8",
+      "reference": "nexora-local-nexora-workflow-adapter",
+      "project": "nexora-local",
+      "configurationHash": "ef2b72d014b7d80973598ba3eb556bb0214de0efd2df43e818d13218a98d0bfa",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:14.510665581Z",
+      "restartCount": 0
+    },
+    {
+      "id": "ec8cfd5e98c17815fe3f60b3be46c41a4f143a8fedc7509fca2c98a539d4f9b3",
+      "name": "/nexora-release-packager",
+      "image": "sha256:ae0a8f7ac2d62e658e4eba140ddb3ef3b1c7291f244a6b9266ab460cdfc15d86",
+      "reference": "nexora-release-packager:2.4.0",
+      "project": "nexora-local",
+      "configurationHash": "9db9001995712df29cba54ff99a6505e28fa3493b8b832d30b12d233642229ae",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:13.600383096Z",
+      "restartCount": 0
+    },
+    {
+      "id": "ef09f05054149aa855fb31578a384e34572b536de6298e58ce9aa8796f00fb09",
+      "name": "/nexora-document-parse",
+      "image": "sha256:ae0b86d3c4d06d8997407fcb08f31a7259fff91c43e0c1d7fffdad1e9ade3fe8",
+      "reference": "apache/tika:2.9.2.1-full",
+      "project": "nexora-local",
+      "configurationHash": "8b0b46ce022633823a0c8d1bf7831bb00bf6821c090b4c3efdf6a0067c213ee0",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:12.016634348Z",
+      "restartCount": 0
+    },
+    {
+      "id": "f534a1d12d9133bbbb85168e5be203a581439fd6751092233355269f8d9bb404",
+      "name": "/nexora-redis",
+      "image": "sha256:efc27681bf81e6ed55cb581718b7818c6c04c39b1f9aa40854edd3ea2241b6ed",
+      "reference": "redis:7-alpine",
+      "project": "nexora-local",
+      "configurationHash": "cff9215da7fe9de744a6d4374193a696af9f0002c146d71f8f2d50ced3bdfa67",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:13.812853786Z",
+      "restartCount": 0
+    },
+    {
+      "id": "f5e3fa5a6b42ef087a1a799415cfefd1ed819eb722547b81d6633de8571b8e74",
+      "name": "/nexora-license",
+      "image": "sha256:7082d3389b83d114d8e5cfe6bac2392b9bd63259af9974194e599e353a29da99",
+      "reference": "nexora-license:2.4.0",
+      "project": "nexora-local",
+      "configurationHash": "0986257849d5810b374fb8f0799b3e46954104ada611c3975a9cacabdafb764e",
+      "state": "running",
+      "startedAt": "2026-10-23T01:10:12.086161449Z",
+      "restartCount": 0
+    }
+  ],
+  "otherImages": [
+    {
+      "id": "sha256:c11fe4569332873562b02e33541300a9ede3ad93cd55b2e4529d56287e664ec0",
+      "ref": "<none>:<none>"
+    },
+    {
+      "id": "sha256:09af8f724979dcef1620075390459f795b24b06e12bd844219242be3afdfaacc",
+      "ref": "<none>:<none>"
+    },
+    {
+      "id": "sha256:807b5a2e3e3df632a1e85d6c4b71ffb0c89c38538cb92da0286aa4cb4c4045fd",
+      "ref": "<none>:<none>"
+    },
+    {
+      "id": "sha256:277fa0d4fa947a110e63b7a5d96dc9a006f1785ae123a88eee1543a4d1665937",
+      "ref": "<none>:<none>"
+    },
+    {
+      "id": "sha256:5f275aa1b6e9889c851f61097142ee050fc6ac4615b4ea64ac1f2b0e81ff8d7f",
+      "ref": "alpine/socat:latest"
+    },
+    {
+      "id": "sha256:ae0b86d3c4d06d8997407fcb08f31a7259fff91c43e0c1d7fffdad1e9ade3fe8",
+      "ref": "apache/tika:2.9.2.1-full"
+    },
+    {
+      "id": "sha256:e22dce5b36f93c77082e204a3942fb6b283b7896e057458400a4c88344c3df68",
+      "ref": "axllent/mailpit:v1.27"
+    },
+    {
+      "id": "sha256:e7602f6f009ee77783b61055989d6147ba49f20c5843a75890bc6285e4e4afe2",
+      "ref": "bobit-api:latest"
+    },
+    {
+      "id": "sha256:cb10d05feea785b5338e4cddabfca35634715d8bee2c41a631cdb9e9e4940523",
+      "ref": "bobit-monitor:latest"
+    },
+    {
+      "id": "sha256:691a9b25a93d42f22254bde20537b414773db17fb7755484081ad015d8353b5d",
+      "ref": "bobit-replay:latest"
+    },
+    {
+      "id": "sha256:e48d049ca208942d660d88d61edc469e15587497ba4568a744b31962717c5feb",
+      "ref": "bobit-worker-cvd:latest"
+    },
+    {
+      "id": "sha256:63b171da9ab28a899728790beccfc788a65bab0d0265cd8d4031188f62450c1e",
+      "ref": "bobit-worker-macd:latest"
+    },
+    {
+      "id": "sha256:997083d48eb12f99e8798ed495dbe9bb4efc142683eb196dd2220e63465447dd",
+      "ref": "bobit-worker-rsi-vwap:latest"
+    },
+    {
+      "id": "sha256:fe43766760a14183166d240facd9d2820eae47230ed476afdcddd8d08fc34577",
+      "ref": "hospital-backend:local-test"
+    },
+    {
+      "id": "sha256:4cf213df1ba556c66d16889b2f9ad98b9fbe06d0d85b70c9d75fdc6496aa3694",
+      "ref": "maven:3.8.8-eclipse-temurin-21"
+    },
+    {
+      "id": "sha256:6446946a1d9fd62d9ae501312a2d76a43ee688542b21622056a372959b65d63d",
+      "ref": "mcr.microsoft.com/playwright:v1.58.2-noble"
+    },
+    {
+      "id": "sha256:4e593ca33248825845b8faeadaaf7c56b84b06555c26762e06861fd2811eb649",
+      "ref": "meelok-api:local-question-workbench"
+    },
+    {
+      "id": "sha256:1055e725859dd241ac96c34b0e3b11eacbfb2fc71d9b7fb3950668067a937b2b",
+      "ref": "meelok-web:local-question-workbench"
+    },
+    {
+      "id": "sha256:a1ea29fa28355559ef137d71fc570e508a214ec84ff8083e39bc5428980b015e",
+      "ref": "minio/minio:RELEASE.2025-04-22T22-12-26Z"
+    },
+    {
+      "id": "sha256:14cea493d9a34af32f524e538b8346cf79f3321eff8e708c1e2960462bd8936e",
+      "ref": "minio/minio:RELEASE.2025-09-07T16-13-09Z"
+    },
+    {
+      "id": "sha256:cec9f139f45e93c5c69c60f8b07cfad9f43f4ef6b6a6cd917527fea5ff2e3dea",
+      "ref": "moby/buildkit:buildx-stable-1"
+    },
+    {
+      "id": "sha256:e18d135e26f6ad0f551142c7bce3a008799aec3b2afae8b733deb10629dd2fb6",
+      "ref": "mock-approval-system:2.5.52"
+    },
+    {
+      "id": "sha256:72b4add968a12a75a9619f80a10cba560fd3f53bae77a8c6777616e31d553002",
+      "ref": "nexora-api-build:2.8.16"
+    },
+    {
+      "id": "sha256:9289cad9086503a5bf7326ba408a2d9923b5ce89654713a79a657b407db51fa7",
+      "ref": "nexora-api:2.8.15"
+    },
+    {
+      "id": "sha256:454001fcc562ab0d4b6413af0e50ae6801a98dfced8df6a5cca61e8b2a19c992",
+      "ref": "nexora-api:2.8.16"
+    },
+    {
+      "id": "sha256:cfeda9a57f428301dac5f84847d2a32158776449a81f58ad44d3cbe29ff32aa1",
+      "ref": "nexora-api:2.8.17"
+    },
+    {
+      "id": "sha256:3791ad57b4da33cac4fabf770b9f2a7e1fd489d2b0c0ac6dcee5ba991b6da05d",
+      "ref": "nexora-authorization-server:2.3.3"
+    },
+    {
+      "id": "sha256:7082d3389b83d114d8e5cfe6bac2392b9bd63259af9974194e599e353a29da99",
+      "ref": "nexora-license:2.4.0"
+    },
+    {
+      "id": "sha256:e2313db6b8288eb02fc2233cc75b42b9cf0e44e7c22528701a59578be06451bc",
+      "ref": "nexora-local-nexora-embedding-adapter:latest"
+    },
+    {
+      "id": "sha256:d1a48dac1ffbd2809d95ba3b3e89db25b31151eaebac49eeb873e740a2c26b9b",
+      "ref": "nexora-local-nexora-media-adapter:latest"
+    },
+    {
+      "id": "sha256:dab73f97ba15ca3730fb1d1b5b327ae745039195b11122b6388de2c143e3edf8",
+      "ref": "nexora-local-nexora-workflow-adapter:latest"
+    },
+    {
+      "id": "sha256:ae0a8f7ac2d62e658e4eba140ddb3ef3b1c7291f244a6b9266ab460cdfc15d86",
+      "ref": "nexora-release-packager:2.4.0"
+    },
+    {
+      "id": "sha256:d9bbb0da048c97a99ea1f954141a138c4c217b94bf850bcce2150953dff0b58b",
+      "ref": "nexora-web:2.8.15"
+    },
+    {
+      "id": "sha256:837a63963d2845c1d99fdc737be94997c01c8f0a9e1a0e8edd0b755ace79b9c9",
+      "ref": "nexora-web:2.8.16"
+    },
+    {
+      "id": "sha256:c3196549b7968be3b6efc27d5c56dce7b6b4bc7473be620aba747d14d9dd01e3",
+      "ref": "nexora-web:2.8.17"
+    },
+    {
+      "id": "sha256:03b402335881cdab2e4939b24620809df8d6ceec3bf2712217d41c8761a0f5d4",
+      "ref": "onerahmet/openai-whisper-asr-webservice:latest"
+    },
+    {
+      "id": "sha256:20edbde7749f822887a1a022ad526fde0a47d6b2be9a8364433605cf65099416",
+      "ref": "postgres:16-alpine"
+    },
+    {
+      "id": "sha256:18cfe3ef5e6815560c98237d6216d1e5119702fb0f3894c8785dd58b8bbe5d73",
+      "ref": "postgres:17-alpine"
+    },
+    {
+      "id": "sha256:1267c7e692de235fda2a50dbcdbcbca4672ea6a0298576a6bd9d07cafc319b32",
+      "ref": "postgres:18"
+    },
+    {
+      "id": "sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2",
+      "ref": "postgres:18.6-alpine"
+    },
+    {
+      "id": "sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1",
+      "ref": "python:3.12-slim"
+    },
+    {
+      "id": "sha256:419d72603f5346ee22ffc4606bdb7beb52fcb63077766fab678e6622ba247366",
+      "ref": "qdrant/qdrant:v1.14.1"
+    },
+    {
+      "id": "sha256:606d8c0d6b3c18d1da9afc53bc7cdb2a8d5486df91b5a9830e9e07626c9ae281",
+      "ref": "rabbitmq:3.13-management-alpine"
+    },
+    {
+      "id": "sha256:efc27681bf81e6ed55cb581718b7818c6c04c39b1f9aa40854edd3ea2241b6ed",
+      "ref": "redis:7-alpine"
+    },
+    {
+      "id": "sha256:a7859ed111db3c1f5404a973a4747505d559fb5ca32d37e447afc0ef845a2103",
+      "ref": "redis:8.2.8-alpine"
+    }
+  ],
+  "volumes": [
+    {
+      "name": "13685ba18a09856d3b8c311c528aff53f7bd1d72e061af3d3b2a8eafa94e483a",
+      "driver": "local"
+    },
+    {
+      "name": "13f0c6f5fbc6a3a9887e3d62a41a573f12677019699f5eb475ffa0ceae8a6a01",
+      "driver": "local"
+    },
+    {
+      "name": "195012312d2479173a7db9a34a09ce52d11a87f3dc583c3d408a1044d846c11c",
+      "driver": "local"
+    },
+    {
+      "name": "1b246bec214ae48f8c5a66c4eb9ca1886748acb273420db08ed1857dd75703af",
+      "driver": "local"
+    },
+    {
+      "name": "1b9059ca2298f259593683be01d8c49f8c1448e1fd3f14e18d871e0bf91764b1",
+      "driver": "local"
+    },
+    {
+      "name": "46a6731c4c4612824616e1d99db14a83aff19981fd341836c59c2c084d1ccfbd",
+      "driver": "local"
+    },
+    {
+      "name": "4741e128403d1fb04563187f112cc855d134e926dfa9e38b9b1e6a1d8bf4c839",
+      "driver": "local"
+    },
+    {
+      "name": "55a6358de51528cb6b60048309064fa35831c5f798725f1176b7f61849379792",
+      "driver": "local"
+    },
+    {
+      "name": "60f9c5815cee10379754b5986ab7e3f2628cfae6e5686f3d3b6aa16249235f2f",
+      "driver": "local"
+    },
+    {
+      "name": "6c2613322056a4d007d6e3e392a6da59d0b830f43ba67564f2cad35a24997ecc",
+      "driver": "local"
+    },
+    {
+      "name": "78b6eacd401f8cd78b7fc6499006abd6fde50a038eca4e124e66f6ae8172d0c0",
+      "driver": "local"
+    },
+    {
+      "name": "8de98a2695df9737e4ae4aaf63dd3b642cfab10499d8476b5b486b7f209e0f05",
+      "driver": "local"
+    },
+    {
+      "name": "ad244aa36a3e0b8a32db2cd1fc04a6480466112a6fb415786adf6b084d8aec9b",
+      "driver": "local"
+    },
+    {
+      "name": "b986529932da7d62c3b215fa4f07aac3aeee00b9d54f1bfbfe1aa21b94cb78e0",
+      "driver": "local"
+    },
+    {
+      "name": "bobit_postgres_data",
+      "driver": "local"
+    },
+    {
+      "name": "bobuy-local_database",
+      "driver": "local"
+    },
+    {
+      "name": "bobuy-local_rabbitmq",
+      "driver": "local"
+    },
+    {
+      "name": "bobuy-local_redis",
+      "driver": "local"
+    },
+    {
+      "name": "c1f3e31812bde403fd194371aa1ef4d9223ec8db932a8f6bde6cc2e88393c123",
+      "driver": "local"
+    },
+    {
+      "name": "c524b6561765bd635a3433a252bee43ac1745bfdb90641e714d7bc8b8918a2b3",
+      "driver": "local"
+    },
+    {
+      "name": "d70dcc7d360f91ee6403621e23a4d42da861a572ce6684e1cad69ff5794d425d",
+      "driver": "local"
+    },
+    {
+      "name": "dbb328eaaba081242dec861b9cc7d0f551a773cfcd0b85ba1f2608e7341f6f29",
+      "driver": "local"
+    },
+    {
+      "name": "dd777ac776ff69ab5d0cae71a6469f346704f6de765b40023879a190360c8c73",
+      "driver": "local"
+    },
+    {
+      "name": "de074f4b611f56bc2c29c82690da8bf85637c7ca7cf5ef3cdd4fcbd3f97afdba",
+      "driver": "local"
+    },
+    {
+      "name": "e28dc679a6926cba4d7ce8bda81c86da64533c6983ffbc324454f25082733feb",
+      "driver": "local"
+    },
+    {
+      "name": "e40de5b79d5a37bfbb0ef8835c76d8234d66c0cf27229d691c9efbbb08950d66",
+      "driver": "local"
+    },
+    {
+      "name": "f3bf94d0fe6058ae15806ba9dc319112b20458322cbe0b9f4338ac726ea67b45",
+      "driver": "local"
+    },
+    {
+      "name": "game-prd2-isolated-appdata",
+      "driver": "local"
+    },
+    {
+      "name": "game-prd2-isolated-pgdata",
+      "driver": "local"
+    },
+    {
+      "name": "game-prd2-isolated-secrets",
+      "driver": "local"
+    },
+    {
+      "name": "hospital_maven_cache",
+      "driver": "local"
+    },
+    {
+      "name": "hospital-backend-ui-test-newrelic-secret",
+      "driver": "local"
+    },
+    {
+      "name": "local-game-test_game-data",
+      "driver": "local"
+    },
+    {
+      "name": "meelok-local_minio-data",
+      "driver": "local"
+    },
+    {
+      "name": "meelok-local_postgres-data",
+      "driver": "local"
+    },
+    {
+      "name": "nexora-local_nexora-license-data",
+      "driver": "local"
+    },
+    {
+      "name": "nexora-local_nexora-minio-data",
+      "driver": "local"
+    },
+    {
+      "name": "nexora-local_nexora-postgres-data",
+      "driver": "local"
+    },
+    {
+      "name": "nexora-local_nexora-qdrant-data",
+      "driver": "local"
+    },
+    {
+      "name": "nexora-local_nexora-rabbitmq-data",
+      "driver": "local"
+    },
+    {
+      "name": "nexora-local_nexora-redis-data",
+      "driver": "local"
+    },
+    {
+      "name": "rhospital-commit-gate-m2",
+      "driver": "local"
+    },
+    {
+      "name": "rhospital-gift-acceptance_game-data",
+      "driver": "local"
+    },
+    {
+      "name": "rhospital-local-test_game-data",
+      "driver": "local"
+    },
+    {
+      "name": "rhospital-void-rewards-db",
+      "driver": "local"
+    },
+    {
+      "name": "runtime_test-data",
+      "driver": "local"
+    },
+    {
+      "name": "runtime_test-db",
+      "driver": "local"
+    },
+    {
+      "name": "toilet-blackbox-pgdata",
+      "driver": "local"
+    }
+  ],
+  "data": {
+    "users": 17,
+    "trips": 1,
+    "products": 8,
+    "orders": 14,
+    "merchantCustomerRelations": 13
+  },
+  "dockerDisk": [
+    {
+      "Active": "33",
+      "Reclaimable": "16.36GB (47%)",
+      "Size": "34.37GB",
+      "TotalCount": "77",
+      "Type": "Images"
+    },
+    {
+      "Active": "31",
+      "Reclaimable": "319.5kB (0%)",
+      "Size": "1.148GB",
+      "TotalCount": "39",
+      "Type": "Containers"
+    },
+    {
+      "Active": "15",
+      "Reclaimable": "4.218GB (9%)",
+      "Size": "45.24GB",
+      "TotalCount": "48",
+      "Type": "Local Volumes"
+    },
+    {
+      "Active": "0",
+      "Reclaimable": "20.76GB",
+      "Size": "23.99GB",
+      "TotalCount": "109",
+      "Type": "Build Cache"
+    }
+  ],
+  "retained": [
+    {
+      "id": "sha256:dd979184a9b8e554e16b6736e00d716c2e0f1f17a0b88f2d79e4193fea69bf0f",
+      "ref": "bobuy/local-web:current"
+    },
+    {
+      "id": "sha256:585edc97f3947436ad7cf01cbc6bd69f72a853d30aa66376efeaee102e5beaf0",
+      "ref": "bobuy/local-backend:current"
+    },
+    {
+      "id": "sha256:20edbde7749f822887a1a022ad526fde0a47d6b2be9a8364433605cf65099416",
+      "ref": "postgres:16-alpine"
+    },
+    {
+      "id": "sha256:606d8c0d6b3c18d1da9afc53bc7cdb2a8d5486df91b5a9830e9e07626c9ae281",
+      "ref": "rabbitmq:3.13-management-alpine"
+    },
+    {
+      "id": "sha256:efc27681bf81e6ed55cb581718b7818c6c04c39b1f9aa40854edd3ea2241b6ed",
+      "ref": "redis:7-alpine"
+    },
+    {
+      "id": "sha256:e22dce5b36f93c77082e204a3942fb6b283b7896e057458400a4c88344c3df68",
+      "ref": "axllent/mailpit:v1.27"
+    }
+  ],
+  "deletionPlan": [
+    {
+      "id": "sha256:42d315e6ec9b4889dc2bd1e4c67ff0a129317cf22859087b5c16651437000430",
+      "ref": "bobuy/frontend:20261024.1"
+    },
+    {
+      "id": "sha256:8c572788d6ffff326106af98cf2c332256e8235ee7a3323bafcd6f03ffb95ecb",
+      "ref": "bobuy/im:20261024.1"
+    },
+    {
+      "id": "sha256:a7fe20aba7d464e79d43b33b33150441b5233f01814813b662632e3c4255145c",
+      "ref": "bobuy/auth:20261024.1"
+    },
+    {
+      "id": "sha256:38dc399d21598d597a504dd960fc66cc3300d32e18ab7ff39cfbfeb09db213c5",
+      "ref": "bobuy/core:20261024.1"
+    },
+    {
+      "id": "sha256:a77676e2df371f37db2e3cc8090f6a8859a8d7410866f910180a920ae4c49c3a",
+      "ref": "bobuy/ai:20261024.1"
+    },
+    {
+      "id": "sha256:2b4b31f93d253b5a666f2d186f8e5471fb01889eb31f992e37c06de62036ef2c",
+      "ref": "bobuy/frontend:20261023.2"
+    },
+    {
+      "id": "sha256:1a7d3c7c18e83312ef780b7601516e71f52d45f8ef104f214608c52fafb62bba",
+      "ref": "bobuy/auth:20261023.2"
+    },
+    {
+      "id": "sha256:2ed63a2da92eaf12a6c22925e2469f99507f19e06a29f4da5df4c6a4ba655779",
+      "ref": "bobuy/im:20261023.2"
+    },
+    {
+      "id": "sha256:b8dbfc750ed78dc0b433a01e33f8b04f8d00b4896a4c712b79ab8a349fadb834",
+      "ref": "bobuy/ai:20261023.2"
+    },
+    {
+      "id": "sha256:091e332d78a027160fe252c4e8da1b2b0ed69835e5f975545fe80bd96b7a9fe1",
+      "ref": "bobuy/core:20261023.2"
+    },
+    {
+      "id": "sha256:ae0c7a4aaac0fea6b9f22337b4fe31d2ed35fedd6d79ee7818138828197f0ce9",
+      "ref": "bobuy/router:20261024.1"
+    },
+    {
+      "id": "sha256:64ef64f55a6c91461806d5ac2a11ba4ac33866d66fd64fe214e0bfc2764a02f9",
+      "ref": "bobuy/router:20261023.2"
+    },
+    {
+      "id": "sha256:acf62d8b7880ba5b4661cfb33a0c0ef6f423e1622d9487378423e281025a3212",
+      "ref": "bobuy/router:20261023.1"
+    },
+    {
+      "id": "sha256:cbea882bb5f0a7a33daadbad6bd14cbf270853ff8bceb55201b2303a26f6bb18",
+      "ref": "bobuy/auth:20261023.1"
+    },
+    {
+      "id": "sha256:f650c647054b6547e2f5d7301b162c1dccee9ce7db6ef0d259548dc474e9969b",
+      "ref": "bobuy/im:20261023.1"
+    },
+    {
+      "id": "sha256:6f200c536bc67f755debe42bef1f751cf7423eee8a21b494d1c0ab2dfaae7999",
+      "ref": "bobuy/ai:20261023.1"
+    },
+    {
+      "id": "sha256:9de16e9e48ab443393dba5212480ec45cb7c0b1e29889f2a752b27ea302d7fbe",
+      "ref": "bobuy/core:20261023.1"
+    },
+    {
+      "id": "sha256:b53db51a1f0457d07b6e05d4c9fa7a0cd5d1088159d893dd8f90de50fc28fb71",
+      "ref": "bobuy/frontend:20261023.1"
+    },
+    {
+      "id": "sha256:a4a19fe0bc04d60d6aee171c0c064ca85985f40353c6f582aa93275a33a6852f",
+      "ref": "bobuy/im:20261021.1"
+    },
+    {
+      "id": "sha256:c7b53dd6a3348cce42253942e878216632388f1d27e9bcb77524754ecea92fc1",
+      "ref": "bobuy/ai:20261021.1"
+    },
+    {
+      "id": "sha256:5e1ed391773c71dd90482dfec71bbed8fe0b7ff92f53235ad29c02d956745e1f",
+      "ref": "bobuy/auth:20261021.1"
+    },
+    {
+      "id": "sha256:e60574f60144e73eb06b25a77c6aa122ee23faf8a485c45c5827e680b5b445cb",
+      "ref": "bobuy/core:20261021.1"
+    },
+    {
+      "id": "sha256:f5195cfcd129c27aca7605c35d7dfa3630c461eee6dfeb90ec5a967c5f2cfc08",
+      "ref": "bobuy/router:20261021.1"
+    },
+    {
+      "id": "sha256:bb99d7a623bd56e0642a5b2782e2e2936ef56f97bb91c674684347dd657cac46",
+      "ref": "bobuy/minio:RELEASE.2025-10-15T17-29-55Z"
+    },
+    {
+      "id": "sha256:2a3e5c1137e4cdee0036a8cc56e48a1dad1cf9ef2bb787ca76f61478dbb51210",
+      "ref": "bobuy/frontend:20261021"
+    },
+    {
+      "id": "sha256:c2b383d9218c43fc4ee434b776711daeceb5a0bda34e72536421cb2f2251831d",
+      "ref": "bobuy/im:20261021"
+    },
+    {
+      "id": "sha256:c32e0fbacff6d7b24808650f012cbf0e08fbeee011cf8fca827d7001fe58055d",
+      "ref": "bobuy/core:20261021"
+    },
+    {
+      "id": "sha256:2cb741dc2a1b64de3c9fdc8d24c8eeb4926a3b2f3cf304a31b67f5585f9722e4",
+      "ref": "bobuy/ai:20261021"
+    },
+    {
+      "id": "sha256:f0ed1ab50016783ade5ac61ccdf7419e1a00ca18a0b296fc6efc7488030e65c5",
+      "ref": "bobuy/auth:20261021"
+    },
+    {
+      "id": "sha256:5cda25de8dba64e7eea75757c517778689e2f55a424ded5dfe24987270b716ef",
+      "ref": "bobuy/router:20261021"
+    }
+  ],
+  "unrelatedDanglingPreserved": [
+    "sha256:c11fe4569332873562b02e33541300a9ede3ad93cd55b2e4529d56287e664ec0",
+    "sha256:09af8f724979dcef1620075390459f795b24b06e12bd844219242be3afdfaacc",
+    "sha256:807b5a2e3e3df632a1e85d6c4b71ffb0c89c38538cb92da0286aa4cb4c4045fd",
+    "sha256:277fa0d4fa947a110e63b7a5d96dc9a006f1785ae123a88eee1543a4d1665937"
+  ]
+}

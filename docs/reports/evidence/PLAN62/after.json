@@ -1,0 +1,135 @@
+{
+  "result": "PASS",
+  "checkedAt": "2026-10-23T17:54:41.932Z",
+  "context": "desktop-linux",
+  "singleProject": {
+    "Name": "bobuy-local",
+    "Status": "running(6)",
+    "ConfigFiles": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\compose.local.yml"
+  },
+  "bobuyTaggedBefore": 32,
+  "bobuyTaggedAfter": 2,
+  "removedTags": 30,
+  "retained": [
+    {
+      "image": "sha256:dd979184a9b8e554e16b6736e00d716c2e0f1f17a0b88f2d79e4193fea69bf0f",
+      "ref": "bobuy/local-web:current"
+    },
+    {
+      "image": "sha256:585edc97f3947436ad7cf01cbc6bd69f72a853d30aa66376efeaee102e5beaf0",
+      "ref": "bobuy/local-backend:current"
+    },
+    {
+      "image": "sha256:20edbde7749f822887a1a022ad526fde0a47d6b2be9a8364433605cf65099416",
+      "ref": "postgres:16-alpine"
+    },
+    {
+      "image": "sha256:606d8c0d6b3c18d1da9afc53bc7cdb2a8d5486df91b5a9830e9e07626c9ae281",
+      "ref": "rabbitmq:3.13-management-alpine"
+    },
+    {
+      "image": "sha256:efc27681bf81e6ed55cb581718b7818c6c04c39b1f9aa40854edd3ea2241b6ed",
+      "ref": "redis:7-alpine"
+    },
+    {
+      "image": "sha256:e22dce5b36f93c77082e204a3942fb6b283b7896e057458400a4c88344c3df68",
+      "ref": "axllent/mailpit:v1.27"
+    }
+  ],
+  "containersUnchanged": 39,
+  "volumesUnchanged": 48,
+  "otherImageReferencesUnchanged": 45,
+  "localData": {
+    "users": 17,
+    "trips": 1,
+    "products": 8,
+    "orders": 14,
+    "merchantCustomerRelations": 13
+  },
+  "publicProductCount": 7,
+  "http": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/trips",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/products",
+      "status": 200
+    },
+    {
+      "path": "/api/admin/users",
+      "status": 401
+    }
+  ],
+  "dockerDiskBefore": [
+    {
+      "Active": "33",
+      "Reclaimable": "16.36GB (47%)",
+      "Size": "34.37GB",
+      "TotalCount": "77",
+      "Type": "Images"
+    },
+    {
+      "Active": "31",
+      "Reclaimable": "319.5kB (0%)",
+      "Size": "1.148GB",
+      "TotalCount": "39",
+      "Type": "Containers"
+    },
+    {
+      "Active": "15",
+      "Reclaimable": "4.218GB (9%)",
+      "Size": "45.24GB",
+      "TotalCount": "48",
+      "Type": "Local Volumes"
+    },
+    {
+      "Active": "0",
+      "Reclaimable": "20.76GB",
+      "Size": "23.99GB",
+      "TotalCount": "109",
+      "Type": "Build Cache"
+    }
+  ],
+  "dockerDiskAfter": [
+    {
+      "Active": "33",
+      "Reclaimable": "11.15GB (38%)",
+      "Size": "28.65GB",
+      "TotalCount": "47",
+      "Type": "Images"
+    },
+    {
+      "Active": "31",
+      "Reclaimable": "319.5kB (0%)",
+      "Size": "1.148GB",
+      "TotalCount": "39",
+      "Type": "Containers"
+    },
+    {
+      "Active": "15",
+      "Reclaimable": "4.218GB (9%)",
+      "Size": "45.24GB",
+      "TotalCount": "48",
+      "Type": "Local Volumes"
+    },
+    {
+      "Active": "0",
+      "Reclaimable": "22.67GB",
+      "Size": "23.99GB",
+      "TotalCount": "109",
+      "Type": "Build Cache"
+    }
+  ],
+  "physicalWindowsVhdReclamation": "not measured; no compaction or global cache pruning",
+  "unrelatedDanglingPreserved": 4,
+  "verificationCorrections": [
+    "Compose listing obtained from PowerShell Docker CLI; Node subprocess Compose plugin unavailable",
+    "Public product IDs compared with PUBLIC visibility query; total product count includes non-public records",
+    "Fetch and local JSON ID arrays compared via sorted canonical JSON to avoid cross-realm prototypes"
+  ]
+}
