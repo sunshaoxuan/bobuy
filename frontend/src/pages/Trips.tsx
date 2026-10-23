@@ -1,4 +1,4 @@
-import { Button, Card, DatePicker, Form, Input, InputNumber, Select, Table, Tag, Typography, message } from 'antd';
+import { Button, DatePicker, Form, Input, InputNumber, Select, Table, Tag, Typography, message } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useEffect, useState } from 'react';
 import { api, Trip } from '../api';
@@ -97,8 +97,9 @@ export default function Trips() {
       <div className="section-title" data-testid="trips-title">{t('trips.title')}</div>
       <Text className="helper-text">{t('trips.helper')}</Text>
 
-      <Card style={{ marginTop: 16, marginBottom: 24 }} bordered={false}>
+      <section className="trip-editor">
         <Form
+          className="trip-form-grid"
           form={form}
           layout="vertical"
           onFinish={handleSubmit}
@@ -149,13 +150,13 @@ export default function Trips() {
               placeholder={t('trips.form.status.placeholder')}
             />
           </Form.Item>
-          <Button type="primary" htmlType="submit" loading={submitting} disabled={submitting} data-testid="trips-submit">
+          <div className="trip-form-actions"><Button type="primary" htmlType="submit" loading={submitting} disabled={submitting} data-testid="trips-submit">
             {t('trips.form.submit')}
-          </Button>
+          </Button></div>
         </Form>
-      </Card>
+      </section>
 
-      <Card bordered={false} title={t('trips.list.title')}>
+      <section className="trip-list-section"><div className="trip-list-heading"><h2>{t('trips.list.title')}</h2><span>{t('admin.trip_count', { count: trips.length })}</span></div>
         <Table<Trip>
           dataSource={trips}
           rowKey="id"
@@ -163,7 +164,7 @@ export default function Trips() {
           locale={{ emptyText: t('table.empty') }}
           scroll={{ x: 'max-content' }}
         />
-      </Card>
+      </section>
     </div>
   );
 }

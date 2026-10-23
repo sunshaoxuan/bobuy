@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0 --port 5173",
-    "build": "tsc && vite build",
+    "build": "npm run check:i18n && tsc && vite build",
+    "check:i18n": "node scripts/check-i18n.mjs",
     "preview": "vite preview --host 0.0.0.0 --port 4173",
     "test": "vitest run",
     "test:watch": "vitest",

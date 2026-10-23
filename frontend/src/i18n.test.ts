@@ -1,84 +1,56 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, afterEach, vi } from 'vitest';
 import zhCN from './locales/zh-CN';
 import enUS from './locales/en-US';
 import jaJP from './locales/ja-JP';
-import { translate } from './i18n';
+import zhTW from './locales/zh-TW';
+import { getStoredLocale, localizedContent, supportedLocales, translate, type Locale } from './i18n';
 
-const BARE_KEY_REGEX = /^[a-z][a-z0-9]*(\.[a-z][a-z0-9_]*)+$/;
-
-describe('i18n locale coverage', () => {
-  const zhKeys = Object.keys(zhCN);
-  const enKeys = Object.keys(enUS);
-  const jaKeys = Object.keys(jaJP);
-
-  it('zh-CN has no empty translation values', () => {
-    const empty = zhKeys.filter((k) => !zhCN[k] || zhCN[k].trim() === '');
-    expect(empty).toEqual([]);
+const dictionaries = { 'zh-CN':zhCN, 'en-US':enUS, 'ja-JP':jaJP, 'zh-TW':zhTW };
+const placeholders = (value:string) => [...value.matchAll(/\{(\w+)\}/g)].map(match=>match[1]).sort();
+afterEach(()=>{ vi.restoreAllMocks(); localStorage.clear(); });
+describe('four-language UI resource contract',()=>{
+  it('exposes exactly the four requested locales and brand names',()=>{
+    expect(supportedLocales).toEqual(['zh-CN','en-US','ja-JP','zh-TW']);
+    expect(supportedLocales.map(locale=>translate(locale,'app.brand'))).toEqual(['宝宝败','BoBuy','ボボバイ','寶寶敗']);
   });
-
-  it('en-US has no empty translation values', () => {
-    const empty = enKeys.filter((k) => !enUS[k] || enUS[k].trim() === '');
-    expect(empty).toEqual([]);
-  });
-
-  it('ja-JP has no empty translation values', () => {
-    const empty = jaKeys.filter((k) => !jaJP[k] || jaJP[k].trim() === '');
-    expect(empty).toEqual([]);
-  });
-
-  it('translate() falls back to zh-CN for keys missing in en-US', () => {
-    const zhOnlyKey = zhKeys.find((k) => !(k in enUS));
-    if (!zhOnlyKey) {
-      // All keys exist in en-US – still a valid pass
-      return;
-    }
-    const result = translate('en-US', zhOnlyKey);
-    expect(result).toBe(zhCN[zhOnlyKey]);
-    expect(result).not.toMatch(BARE_KEY_REGEX);
-  });
-
-  it('translate() falls back to zh-CN for keys missing in ja-JP', () => {
-    const zhOnlyKey = zhKeys.find((k) => !(k in jaJP));
-    if (!zhOnlyKey) {
-      return;
-    }
-    const result = translate('ja-JP', zhOnlyKey);
-    expect(result).toBe(zhCN[zhOnlyKey]);
-    expect(result).not.toMatch(BARE_KEY_REGEX);
-  });
-
-  it('translate() returns the key itself only when the key is not in any locale', () => {
-    const missing = 'this.key.does.not.exist';
-    expect(translate('zh-CN', missing)).toBe(missing);
-    expect(translate('en-US', missing)).toBe(missing);
-    expect(translate('ja-JP', missing)).toBe(missing);
-  });
-
-  it('all zh-CN nav keys exist in en-US (no bare keys on nav)', () => {
-    const navKeys = zhKeys.filter((k) => k.startsWith('nav.'));
-    const missing = navKeys.filter((k) => !(k in enUS));
-    expect(missing).toEqual([]);
-  });
-
-  it('all zh-CN stock keys exist in en-US (no bare keys on stock page)', () => {
-    const stockKeys = zhKeys.filter((k) => k.startsWith('stock.'));
-    const missing = stockKeys.filter((k) => !(k in enUS));
-    expect(missing).toEqual([]);
-  });
-
-  it('translate() zh-CN never returns a raw dot-separated key for known keys', () => {
-    const rawKeys = zhKeys.filter((k) => {
-      const translated = translate('zh-CN', k);
-      return BARE_KEY_REGEX.test(translated);
+  for(const locale of supportedLocales) {
+    it(`${locale} has the exact complete key set, values and interpolation contract`,()=>{
+      const dictionary=dictionaries[locale];
+      expect(Object.keys(dictionary).sort()).toEqual(Object.keys(zhCN).sort());
+      for(const key of Object.keys(zhCN)) {
+        expect(dictionary[key]?.trim(),key).toBeTruthy();
+        expect(placeholders(dictionary[key]),key).toEqual(placeholders(zhCN[key]));
+        expect(translate(locale,key),key).toBe(dictionary[key]);
+      }
     });
-    expect(rawKeys).toEqual([]);
+  }
+  it('interpolates parameters literally, preserving zero and special characters',()=>{
+    expect(translate('en-US','store.item_count',{count:0})).toBe('0 items');
+    expect(translate('ja-JP','store.view_label',{name:'$& <product>'})).toBe('$& <product> を表示');
   });
-
-  it('translate() en-US never returns a raw dot-separated key for known zh-CN keys', () => {
-    const rawKeys = zhKeys.filter((k) => {
-      const translated = translate('en-US', k);
-      return BARE_KEY_REGEX.test(translated);
-    });
-    expect(rawKeys).toEqual([]);
+  it('uses Japanese prose for core merchant navigation and trip resources',()=>{
+    const keys=Object.keys(jaJP).filter(key=>/^(nav|dashboard|trips)\./.test(key));
+    const hasJapanese=(value:string)=>/[\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Han}]/u.test(value);
+    for(const key of keys) expect(hasJapanese(jaJP[key]),key).toBe(true);
+    expect(hasJapanese('Trip Publishing and Pricing')).toBe(false);
+  });
+  it('surfaces missing keys instead of silently substituting Chinese',()=>{
+    expect(translate('en-US','missing.resource')).toBe('missing.resource');
+    const broken={...enUS}; delete broken['store.cart'];
+    expect(Object.keys(broken).sort()).not.toEqual(Object.keys(zhCN).sort());
+  });
+  it('accepts stored locales and rejects invalid storage values',()=>{
+    for(const locale of supportedLocales) { localStorage.setItem('bobbuy_locale',locale); expect(getStoredLocale()).toBe(locale); }
+    localStorage.setItem('bobbuy_locale','fr-FR'); expect(getStoredLocale()).toBe('zh-CN');
+  });
+  it('keeps working when persistent storage is denied',()=>{
+    vi.spyOn(Storage.prototype,'getItem').mockImplementation(()=>{throw new Error('denied');});
+    expect(getStoredLocale()).toBe('zh-CN');
+  });
+  it('selects merchant content in the current language with documented source-language behavior',()=>{
+    const content={'zh-CN':'中文商品','en-US':'Product','ja-JP':'商品','zh-TW':'繁中商品'};
+    for(const locale of supportedLocales) expect(localizedContent(content,locale)).toBe(content[locale]);
+    expect(localizedContent({'zh-CN':'原文'},'ja-JP')).toBe('原文');
+    expect(localizedContent({},'en-US')).toBe('');
   });
 });

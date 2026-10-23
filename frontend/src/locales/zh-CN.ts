@@ -1,6 +1,8 @@
 import type { Dictionary } from './types';
+import experience from './experience.zh-CN.json';
 
 const messages: Dictionary = {
+    ...experience,
     'app.brand_subtitle': '全球代购指挥台',
     'app.header_title': '产品第一版 · MVP Console',
     'app.open_menu': '打开导航菜单',

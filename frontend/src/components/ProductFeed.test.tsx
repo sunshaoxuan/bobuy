@@ -1,11 +1,15 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { act, fireEvent, render as renderBase, screen } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import type { ReactElement } from 'react';
+import { I18nProvider } from '../i18n';
 import ProductFeed from './ProductFeed';
 import type { StoreProduct } from '../api';
 
 const product: StoreProduct = { id:'p1', name:{'zh-CN':'测试商品'}, brand:'测试品牌', description:{'zh-CN':'商品说明'}, price:100, categoryId:'food', images:['/test.jpg'], merchantId:1 };
 const products = Array.from({length:14}, (_,index) => ({...product,id:`p${index+1}`}));
 const props = {quantities:{p1:99},onAdd:vi.fn(),onDetail:vi.fn()};
+const render = (ui: ReactElement) => renderBase(ui,{wrapper:I18nProvider});
+beforeEach(() => localStorage.setItem('bobbuy_locale','zh-CN'));
 afterEach(() => { vi.unstubAllGlobals(); vi.clearAllMocks(); });
 
 describe('ProductFeed', () => {

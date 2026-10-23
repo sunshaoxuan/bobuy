@@ -3,6 +3,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import ProcurementHUD from '../pages/ProcurementHUD';
 import { BrowserRouter } from 'react-router-dom';
 import { I18nProvider } from '../i18n';
+import { api } from '../api';
 
 vi.mock('antd', async () => {
     const antd = await vi.importActual<typeof import('antd')>('antd');
@@ -249,6 +250,8 @@ describe('ProcurementHUD Component', () => {
     });
 
     it('renders profit/load/reconcile sections', async () => {
+        const walletRead = vi.spyOn(api, 'getWallet');
+        const walletHistory = vi.spyOn(api, 'getWalletTransactions');
         render(
             <I18nProvider>
                 <BrowserRouter>
@@ -269,5 +272,8 @@ describe('ProcurementHUD Component', () => {
         expect((await screen.findAllByText('20260117001')).length).toBeGreaterThan(0);
         expect(await screen.findByText('PENDING_MANUAL_REVIEW')).toBeInTheDocument();
         expect((await screen.findAllByText(/ollama-compatible/i)).length).toBeGreaterThan(0);
+        expect(walletRead).not.toHaveBeenCalled();
+        expect(walletHistory).not.toHaveBeenCalled();
+        expect(screen.queryByText('Wallet Center')).not.toBeInTheDocument();
     });
 });

@@ -1,6 +1,9 @@
 import type { Dictionary } from './types';
+import experience from './experience.en-US.json';
 
 const messages: Dictionary = {
+    'procurement.amount': 'Amount',
+    ...experience,
     'app.brand_subtitle': 'Global Personal Shopping Console',
     'app.header_title': 'Product v1 · MVP Console',
     'app.open_menu': 'Open navigation menu',

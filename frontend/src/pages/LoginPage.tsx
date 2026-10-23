@@ -1,11 +1,13 @@
-import { Alert, Button, Card, Form, Input, Space, Typography } from 'antd';
+import { Alert, Button, Form, Input, Space, Typography } from 'antd';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useI18n } from '../i18n';
 import { isLocalAuthOverrideEnabled } from '../authStorage';
 import { useUserRole } from '../context/UserRoleContext';
+import { Link } from 'react-router-dom';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
-const { Paragraph, Title, Text } = Typography;
+const { Paragraph, Text } = Typography;
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -28,12 +30,12 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={{ minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
-      <Card style={{ width: '100%', maxWidth: 420 }}>
+    <div className="merchant-login"><header className="merchant-login-header"><Link className="merchant-brand" to="/"><span className="brand-symbol">B<span /></span><strong>{t('app.brand')}</strong></Link><LanguageSwitcher /></header>
+      <main className="merchant-login-main">
         <Space direction="vertical" size="large" style={{ width: '100%' }}>
           <div>
-            <Title level={3}>{t('auth.login_title')}</Title>
-            <Paragraph type="secondary">{t('auth.login_subtitle')}</Paragraph>
+            <h1>{t('admin.login_title')}</h1>
+            <Paragraph type="secondary">{t('admin.login_subtitle')}</Paragraph>
           </div>
           {isLocalAuthOverrideEnabled() ? (
             <Alert
@@ -55,21 +57,21 @@ export default function LoginPage() {
               name="username"
               rules={[{ required: true, message: t('auth.username_required') }]}
             >
-              <Input autoFocus />
+              <Input autoFocus autoComplete="username" />
             </Form.Item>
             <Form.Item
               label={t('auth.password')}
               name="password"
               rules={[{ required: true, message: t('auth.password_required') }]}
             >
-              <Input.Password />
+              <Input.Password autoComplete="current-password" />
             </Form.Item>
             <Button type="primary" htmlType="submit" block loading={submitting}>
               {t('auth.login_action')}
             </Button>
           </Form>
         </Space>
-      </Card>
+      </main>
     </div>
   );
 }

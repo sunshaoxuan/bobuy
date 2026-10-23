@@ -10,7 +10,7 @@ const { Title, Text } = Typography;
 export default function ZenAuditView() {
     const { tripId } = useParams<{ tripId: string }>();
     const navigate = useNavigate();
-    const { t } = useI18n();
+    const { t, locale } = useI18n();
     const [loading, setLoading] = useState(true);
     const [logs, setLogs] = useState<FinancialAuditLog[]>([]);
     const [chatRecords, setChatRecords] = useState<ChatMessage[]>([]);
@@ -86,10 +86,10 @@ export default function ZenAuditView() {
             <main className="zen-audit-scroll">
                 <Card className="zen-audit-pill-card">
                     <Space direction="vertical" size={12} style={{ width: '100%' }}>
-                        <Text strong>聊天商品闭环检索（Trip: {tripId}）</Text>
+                        <Text strong>{t('audit.search_title',{id:tripId ?? ''})}</Text>
                         <Space wrap>
                             <Input
-                                placeholder="按操作人筛选"
+                                placeholder={t('audit.operator')}
                                 value={operatorFilter}
                                 onChange={(event) => setOperatorFilter(event.target.value)}
                                 style={{ width: 160 }}
@@ -100,13 +100,8 @@ export default function ZenAuditView() {
                                 onChange={setPublishStatusFilter}
                                 style={{ width: 220 }}
                                 options={[
-                                    { label: 'publishStatus: ALL', value: 'ALL' },
-                                    { label: 'PENDING_CONFIRMATION', value: 'PENDING_CONFIRMATION' },
-                                    { label: 'MATCHED_EXISTING_PRODUCT', value: 'MATCHED_EXISTING_PRODUCT' },
-                                    { label: 'CANDIDATE_SELECTED', value: 'CANDIDATE_SELECTED' },
-                                    { label: 'TEMP_PRODUCT_CREATED', value: 'TEMP_PRODUCT_CREATED' },
-                                    { label: 'PUBLISHED_TO_MARKET', value: 'PUBLISHED_TO_MARKET' },
-                                    { label: 'PUBLISH_FAILED', value: 'PUBLISH_FAILED' }
+                                    { label: t('audit.all_statuses'), value: 'ALL' },
+                                    ...['PENDING_CONFIRMATION', 'MATCHED_EXISTING_PRODUCT', 'CANDIDATE_SELECTED', 'TEMP_PRODUCT_CREATED', 'PUBLISHED_TO_MARKET', 'PUBLISH_FAILED'].map(value => ({ label:t(`chat.image_status.${value}`), value }))
                                 ]}
                             />
                             <Select
@@ -114,10 +109,8 @@ export default function ZenAuditView() {
                                 onChange={setCandidateDecisionFilter}
                                 style={{ width: 220 }}
                                 options={[
-                                    { label: 'candidateDecision: ALL', value: 'ALL' },
-                                    { label: 'EXACT_MATCH', value: 'EXACT_MATCH' },
-                                    { label: 'SELECTED_CANDIDATE', value: 'SELECTED_CANDIDATE' },
-                                    { label: 'CREATED_TEMP_PRODUCT', value: 'CREATED_TEMP_PRODUCT' }
+                                    { label: t('audit.all_decisions'), value: 'ALL' },
+                                    ...['EXACT_MATCH', 'SELECTED_CANDIDATE', 'CREATED_TEMP_PRODUCT'].map(value => ({ label:t(`audit.decision.${value}`), value }))
                                 ]}
                             />
                             <Select
@@ -125,29 +118,29 @@ export default function ZenAuditView() {
                                 onChange={setRecordLimit}
                                 style={{ width: 140 }}
                                 options={[
-                                    { label: '显示 20 条', value: 20 },
-                                    { label: '显示 50 条', value: 50 },
-                                    { label: '显示 100 条', value: 100 }
+                                    { label: t('audit.limit',{count:20}), value: 20 },
+                                    { label: t('audit.limit',{count:50}), value: 50 },
+                                    { label: t('audit.limit',{count:100}), value: 100 }
                                 ]}
                             />
                         </Space>
                         <Text type="secondary">
-                            命中 {filteredChatClosureRecords.length} / {chatClosureRecords.length}
+                            {t('audit.hits',{count:filteredChatClosureRecords.length,total:chatClosureRecords.length})}
                         </Text>
                         {filteredChatClosureRecords.slice(0, recordLimit).map((record, index) => (
                             <div key={record.id ?? `chat-closure-${index}`} className="zen-val-block">
                                 <Space wrap>
-                                    <Tag>{record.metadata?.imageFlowStatus ?? 'UNKNOWN'}</Tag>
-                                    <Tag>{record.metadata?.candidateSelectionResult ?? 'N/A'}</Tag>
+                                    <Tag>{record.metadata?.imageFlowStatus ? t(`chat.image_status.${record.metadata.imageFlowStatus}`) : t('common.unknown')}</Tag>
+                                    <Tag>{record.metadata?.candidateSelectionResult ? t(`audit.decision.${record.metadata.candidateSelectionResult}`) : t('common.not_applicable')}</Tag>
                                     <Tag>{record.metadata?.operatorId ?? record.senderId}</Tag>
-                                    <Tag>{record.metadata?.productId ?? 'NO_PRODUCT'}</Tag>
+                                    <Tag>{record.metadata?.productId ?? t('audit.no_product')}</Tag>
                                 </Space>
                             </div>
                         ))}
                     </Space>
                 </Card>
                 {logs.length === 0 ? (
-                    <Result title="No history found" />
+                    <Result title={t('audit.empty')} />
                 ) : (
                     logs.map((log) => (
                         <Card key={log.id} className="zen-audit-pill-card">
@@ -155,7 +148,7 @@ export default function ZenAuditView() {
                                 <header>
                                     <Space direction="vertical" size={2}>
                                         <Text type="secondary" style={{ fontSize: '10px' }}>
-                                            {new Date(log.createdAt).toLocaleString()}
+                                            {new Date(log.createdAt).toLocaleString(locale)}
                                         </Text>
                                         <Text strong className="serif-font" style={{ fontSize: '16px' }}>
                                             {log.actionType.replace(/_/g, ' ')}
@@ -178,7 +171,7 @@ export default function ZenAuditView() {
                                 </div>
                                 <footer>
                                     <Text type="secondary" italic style={{ fontSize: '11px' }}>
-                                        by {log.operatorName}
+                                        {t('audit.by',{name:log.operatorName})}
                                     </Text>
                                 </footer>
                             </div>

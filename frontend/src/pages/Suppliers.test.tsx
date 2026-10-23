@@ -54,16 +54,16 @@ describe('Suppliers page', () => {
     renderSuppliers();
     await waitFor(() => expect(mockApi.suppliers).toHaveBeenCalled());
 
-    expect(await screen.findByText('Costco')).toBeInTheDocument();
-    expect(await screen.findByText('唐吉诃德')).toBeInTheDocument();
-    expect(screen.getByText('2 Rules Defined')).toBeInTheDocument();
+    expect(await screen.findByText('Costco Wholesale')).toBeInTheDocument();
+    expect(await screen.findByText('Don Quijote')).toBeInTheDocument();
+    expect(screen.getByText('2 rules defined')).toBeInTheDocument();
   });
 
   it('shows dash for supplier with no onboarding rules', async () => {
     renderSuppliers();
     await waitFor(() => expect(mockApi.suppliers).toHaveBeenCalled());
 
-    await screen.findByText('Costco');
+    await screen.findByText('Costco Wholesale');
     const dashes = screen.getAllByText('-');
     expect(dashes.length).toBeGreaterThan(0);
   });
@@ -83,7 +83,7 @@ describe('Suppliers page', () => {
     renderSuppliers();
     await waitFor(() => expect(mockApi.suppliers).toHaveBeenCalled());
 
-    await screen.findByText('Costco');
+    await screen.findByText('Costco Wholesale');
     const editButtons = screen.getAllByRole('button', { name: /编辑|edit/i });
     fireEvent.click(editButtons[0]);
 
@@ -98,7 +98,7 @@ describe('Suppliers page', () => {
     renderSuppliers();
     await waitFor(() => expect(mockApi.suppliers).toHaveBeenCalled());
 
-    await screen.findByText('Costco');
+    await screen.findByText('Costco Wholesale');
     const editButtons = screen.getAllByRole('button', { name: /编辑|edit/i });
     fireEvent.click(editButtons[0]);
 
@@ -130,10 +130,10 @@ describe('Suppliers page', () => {
     renderSuppliers();
     await waitFor(() => expect(mockApi.suppliers).toHaveBeenCalled());
 
-    fireEvent.click(screen.getByRole('button', { name: /新增供应商/i }));
+    fireEvent.click(screen.getByRole('button', { name: /add supplier/i }));
 
-    await user.type(screen.getByPlaceholderText('例如: costco'), 'newsupp');
-    await user.type(screen.getByPlaceholderText('例如: Costco'), '新供应商');
+    await user.type(screen.getByPlaceholderText('e.g. costco'), 'newsupp');
+    await user.type(screen.getByPlaceholderText('e.g. Costco'), '新供应商');
     const rulesTextarea = screen.getByPlaceholderText(/itemNumberRule/i);
     fireEvent.change(rulesTextarea, { target: { value: '{"rule":"value"}' } });
 

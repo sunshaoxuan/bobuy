@@ -10,7 +10,7 @@ type StatCardProps = {
 
 export default function StatCard({ label, value, helper }: StatCardProps) {
   return (
-    <Card bordered={false} style={{ borderRadius: 12 }}>
+    <Card bordered={false}>
       <Text type="secondary">{label}</Text>
       <Title level={3} style={{ marginTop: 8, marginBottom: 4 }}>
         {value}

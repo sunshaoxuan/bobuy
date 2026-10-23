@@ -36,9 +36,7 @@ import {
   type ProcurementDeficitItemResponse,
   type ProcurementHudStats,
   type Trip,
-  type TripExpense,
-  type WalletSummary,
-  type WalletTransaction
+  type TripExpense
 } from '../api';
 import { useI18n } from '../i18n';
 import ChatWidget from './ChatWidget';
@@ -75,9 +73,6 @@ export default function ProcurementDashboard() {
   const [logisticsTrackingNumber, setLogisticsTrackingNumber] = useState<string>('');
   const [logisticsChannel, setLogisticsChannel] = useState<string>('DOMESTIC');
   const [logisticsProvider, setLogisticsProvider] = useState<string>('MOCK');
-  const [purchaserWallet, setPurchaserWallet] = useState<WalletSummary>();
-  const [promoterWallet, setPromoterWallet] = useState<WalletSummary>();
-  const [walletTransactions, setWalletTransactions] = useState<WalletTransaction[]>([]);
   const [reconcileRows, setReconcileRows] = useState<ReconcileDetailRow[]>([]);
   const [deficitItems, setDeficitItems] = useState<ProcurementDeficitItemResponse[]>([]);
   const [procurementReceipts, setProcurementReceipts] = useState<ProcurementReceipt[]>([]);
@@ -132,14 +127,6 @@ export default function ProcurementDashboard() {
       setPickingChecklist(pickingList);
       setSelectedReceiptId((current) => receiptList.some((item) => item.id === current) ? current : receiptList[0]?.id);
       setReconcileRows(buildReconcileRows(orderList));
-      const [wPurchaser, wPromoter, txList] = await Promise.all([
-        api.getWallet('PURCHASER'),
-        api.getWallet('PROMOTER'),
-        api.getWalletTransactions('PURCHASER')
-      ]);
-      setPurchaserWallet(wPurchaser);
-      setPromoterWallet(wPromoter);
-      setWalletTransactions(txList);
     } catch {
       // Keep the last successful snapshot on transient polling failures.
     } finally {
@@ -620,53 +607,6 @@ export default function ProcurementDashboard() {
             ]}
           />
         </Space>
-      </Card>
-
-      <Card title={t('procurement.wallet_center')} loading={loading} className="procurement-glass-card">
-        <Row gutter={[16, 16]}>
-          <Col xs={24} sm={12}>
-            <Card size="small" title={t('procurement.purchaser_wallet')}>
-              <Statistic 
-                title={t('procurement.current_balance')} 
-                value={purchaserWallet?.balance ?? 0} 
-                suffix="CNY" 
-                precision={2} 
-              />
-              <Text type="secondary" style={{ fontSize: '12px' }}>
-                {t('procurement.last_updated')}: {purchaserWallet?.updatedAt}
-              </Text>
-            </Card>
-          </Col>
-          <Col xs={24} sm={12}>
-            <Card size="small" title={t('procurement.promoter_wallet')}>
-              <Statistic 
-                title={t('procurement.current_balance')} 
-                value={promoterWallet?.balance ?? 0} 
-                suffix="CNY" 
-                precision={2} 
-              />
-              <Text type="secondary" style={{ fontSize: '12px' }}>
-                {t('procurement.last_updated')}: {promoterWallet?.updatedAt}
-              </Text>
-            </Card>
-          </Col>
-        </Row>
-        <div style={{ marginTop: '16px' }}>
-          <Text strong>{t('procurement.transaction_history')}</Text>
-          <Table<WalletTransaction>
-            dataSource={walletTransactions}
-            rowKey="id"
-            size="small"
-            pagination={{ pageSize: 5 }}
-            scroll={tableScroll}
-            columns={[
-              { title: t('common.date'), dataIndex: 'createdAt', key: 'createdAt' },
-              { title: t('procurement.trip_id'), dataIndex: 'tripId', key: 'tripId' },
-              { title: t('procurement.amount'), dataIndex: 'amount', key: 'amount' },
-              { title: t('procurement.type'), dataIndex: 'type', key: 'type' }
-            ]}
-          />
-        </div>
       </Card>
 
       <Card title={t('procurement.extra_expenses')} loading={loading} className="procurement-glass-card">

@@ -3,12 +3,12 @@ import { Table, Button, Card, Modal, Form, Input, Space, Typography, message, Ta
 import type { ColumnsType } from 'antd/es/table';
 import { PlusOutlined, EditOutlined, SafetyCertificateOutlined } from '@ant-design/icons';
 import { api, type MobileSupplier } from '../api';
-import { useI18n } from '../i18n';
+import { localizedContent, useI18n } from '../i18n';
 
 const { Text, Paragraph } = Typography;
 
 const Suppliers: React.FC = () => {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const [suppliers, setSuppliers] = useState<MobileSupplier[]>([]);
   const [loading, setLoading] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -62,7 +62,7 @@ const Suppliers: React.FC = () => {
         try {
           rulesObj = JSON.parse(values.onboardingRules);
         } catch (e) {
-          message.error('Invalid JSON for onboarding rules');
+          message.error(t('suppliers.invalid_json'));
           return;
         }
       }
@@ -77,10 +77,10 @@ const Suppliers: React.FC = () => {
 
       if (editingSupplier) {
         await api.updateSupplier(editingSupplier.id, payload);
-        message.success('Supplier updated');
+        message.success(t('suppliers.updated'));
       } else {
         await api.createSupplier(payload);
-        message.success('Supplier created');
+        message.success(t('suppliers.created'));
       }
       setIsModalVisible(false);
       loadSuppliers();
@@ -97,23 +97,23 @@ const Suppliers: React.FC = () => {
       width: 120,
     },
     {
-      title: t('stock.item.brand') || 'Brand / Name',
+      title: t('stock.item.brand'),
       key: 'name',
-      render: (_, record) => record.name['zh-CN'] || record.id,
+      render: (_, record) => localizedContent(record.name,locale) || record.id,
     },
     {
-      title: 'Rules',
+      title: t('suppliers.rules_column'),
       key: 'rules',
       render: (_, record) => (
         record.onboardingRules && Object.keys(record.onboardingRules).length > 0 ? (
           <Tag color="blue" icon={<SafetyCertificateOutlined />}>
-            {Object.keys(record.onboardingRules).length} Rules Defined
+            {t('suppliers.rule_count',{count:Object.keys(record.onboardingRules).length})}
           </Tag>
         ) : <Text type="secondary">-</Text>
       )
     },
     {
-      title: t('common.actions') || 'Actions',
+      title: t('common.actions'),
       key: 'actions',
       width: 100,
       render: (_, record) => (
@@ -128,11 +128,12 @@ const Suppliers: React.FC = () => {
     <div className="page-card">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
         <div>
-          <div className="section-title" data-testid="suppliers-title">供应商檔案与 AI 規範</div>
-          <Text type="secondary">定義不同商家的商品識別規則，例如 Costco 的 5 位數品番規範。</Text>
+          <div className="section-title" data-testid="suppliers-title">{t('suppliers.title')}</div>
+          <Text type="secondary">{t('suppliers.helper')}</Text>
         </div>
         <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd} data-testid="suppliers-submit">
-          新增供应商
+
+          {t('suppliers.add')}
         </Button>
       </div>
 
@@ -142,10 +143,11 @@ const Suppliers: React.FC = () => {
         rowKey="id"
         loading={loading}
         pagination={false}
+        scroll={{ x: 'max-content' }}
       />
 
       <Modal
-        title={editingSupplier ? '編輯供应商' : '新增供应商'}
+        title={editingSupplier ? t('suppliers.edit') : t('suppliers.add')}
         open={isModalVisible}
         onOk={handleSave}
         onCancel={handleCancel}
@@ -153,27 +155,27 @@ const Suppliers: React.FC = () => {
         destroyOnClose
       >
         <Form form={form} layout="vertical">
-          <Form.Item name="id" label="供應商 ID (唯一標識)" rules={[{ required: true }]}>
-            <Input placeholder="例如: costco" disabled={!!editingSupplier} />
+          <Form.Item name="id" label={t('suppliers.id')} rules={[{ required: true }]}>
+            <Input placeholder={t('suppliers.id_example')} disabled={!!editingSupplier} />
           </Form.Item>
           <Space style={{ display: 'flex' }} align="baseline">
-            <Form.Item name="name_zh" label="中文名稱" rules={[{ required: true }]}>
-              <Input placeholder="例如: Costco" />
+            <Form.Item name="name_zh" label={t('suppliers.name_zh')} rules={[{ required: true }]}>
+              <Input placeholder={t('suppliers.name_example')} />
             </Form.Item>
-            <Form.Item name="name_en" label="英文名稱">
+            <Form.Item name="name_en" label={t('suppliers.name_en')}>
               <Input placeholder="Costco Wholesale" />
             </Form.Item>
           </Space>
-          <Form.Item name="description_zh" label="簡介">
+          <Form.Item name="description_zh" label={t('suppliers.description')}>
             <Input />
           </Form.Item>
-          <Form.Item name="contactInfo" label="聯繫方式">
+          <Form.Item name="contactInfo" label={t('suppliers.contact')}>
             <Input />
           </Form.Item>
           <Form.Item
             name="onboardingRules"
-            label="AI 識別規則 (JSON)"
-            extra='例如: {"itemNumberPattern": "5-6 digits only", "preferredLanguage": "JP"}'
+            label={t('suppliers.rules')}
+            extra={t('suppliers.rules_example')}
           >
             <Input.TextArea rows={6} placeholder='{ "itemNumberRule": "Must be 5 or 6 digits" }' />
           </Form.Item>

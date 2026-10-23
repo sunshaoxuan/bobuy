@@ -80,6 +80,26 @@ class AuthControllerIntegrationTest {
   }
 
   @Test
+  void invalidCredentialsUseTheRequestedLanguage() throws Exception {
+    String[][] locales = {
+        {"zh-CN", "用户名或密码错误。"},
+        {"en-US", "Invalid username or password."},
+        {"ja-JP", "ユーザー名またはパスワードが正しくありません。"},
+        {"zh-TW", "用戶名或密碼錯誤。"}
+    };
+    for (String[] locale : locales) {
+      mockMvc.perform(post("/api/auth/login")
+              .header(HttpHeaders.ACCEPT_LANGUAGE, locale[0])
+              .contentType(MediaType.APPLICATION_JSON)
+              .content("""
+                  {"username":"agent","password":"wrong-password"}
+                  """))
+          .andExpect(status().isUnauthorized())
+          .andExpect(jsonPath("$.message").value(locale[1]));
+    }
+  }
+
+  @Test
   void meReturnsAuthenticatedUserFromBearerToken() throws Exception {
     String token = loginSession("customer", "customer-pass").accessToken();
 
