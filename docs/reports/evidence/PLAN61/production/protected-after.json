@@ -1,0 +1,49 @@
+{
+  "config_hashes": {
+    "/opt/rhospital-dr/postgres-compose.yml": "f275c2eef161265928c45e7a8b56377af7b39e901fc999ec4db568e6d04c1362"
+  },
+  "containers": {
+    "/rhospital-etcd": {
+      "configuration_sha256": "4217344e8069ba128f454633ecf01b317229db6ecef7e658a6163dc9c4af3ec5",
+      "restart_count": 0,
+      "started_at": "2026-10-04T16:59:24.222729219Z",
+      "status": "running"
+    },
+    "/rhospital-ha-bbs-replica": {
+      "configuration_sha256": "93ea8a1d13010fd53c78ce60c7c5e98cdcc2d4d3266e4f9c000643b81e242157",
+      "restart_count": 0,
+      "started_at": "2026-10-05T03:46:57.739316502Z",
+      "status": "running"
+    },
+    "/rhospital-ha-game-replica": {
+      "configuration_sha256": "fbc94ed6caeefc8d74a4c35a5ea449be5b8641b6bc07ebfba308ee9f9b479f83",
+      "restart_count": 0,
+      "started_at": "2026-10-04T23:18:55.818205027Z",
+      "status": "running"
+    },
+    "/rhospital-postgres-dr": {
+      "configuration_sha256": "14ee339dd119d00d477cefcb40ec594dabbf3006f7e7dfb171029a18410d9d9b",
+      "restart_count": 0,
+      "started_at": "2026-10-02T19:42:23.634321225Z",
+      "status": "exited"
+    }
+  },
+  "images": [
+    "hospital-backend:20261002 cd4184cd22fc",
+    "hospital-backend:20261004 a169b18a4721",
+    "hospital-backend:20261006 7bdef17739c2",
+    "hospital-backend:20261007 d72ecabd5df8",
+    "hospital-backend:20261011 51cc1fdce3d9",
+    "hospital-backend:20261016 5d3f91ca74c6",
+    "hospital-backend:2026102001 3a6364cfd1ec",
+    "hospital-backend:20261021 a5efbcb2bec4",
+    "hospital-backend:20261022 c711b338c6b9",
+    "hospital-backend:20261023 b4d56e2e9320"
+  ],
+  "units": {
+    "bbs-source-tunnel": "MainPID=1279781\nActiveState=active\nActiveEnterTimestamp=Tue 2026-10-20 16:15:04 JST",
+    "rhospital-etcd": "MainPID=445208\nActiveState=active\nActiveEnterTimestamp=Mon 2026-10-05 01:59:24 JST",
+    "rhospital-ha-firewall": "MainPID=0\nActiveState=active\nActiveEnterTimestamp=Mon 2026-10-05 01:51:39 JST",
+    "rhospital-ha-pg-tunnel": "MainPID=1279782\nActiveState=active\nActiveEnterTimestamp=Tue 2026-10-20 16:15:04 JST"
+  }
+}

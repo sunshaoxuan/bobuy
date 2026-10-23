@@ -30,9 +30,19 @@ async function controls(page, view, name) {
     }
   }
 }
+async function settledEditor(page) {
+  await page.locator('.account-editor #username').waitFor();
+  await page.waitForFunction(()=>{
+    const e=document.querySelector('.account-editor');
+    const wrapper=e?.closest('.ant-drawer-content-wrapper');
+    if(!wrapper)return false;
+    const r=wrapper.getBoundingClientRect();
+    return r.width>0 && r.left>=-.1 && Math.abs(r.right-innerWidth)<.1 && wrapper.getAnimations({subtree:true}).every(a=>a.playState==='finished');
+  });
+}
 async function editor(page) {
   await page.locator('.accounts-heading button').click();
-  await page.locator('.account-editor').evaluate(async e=>Promise.all(e.closest('.ant-drawer-content-wrapper').getAnimations({subtree:true}).map(a=>a.finished)));
+  await settledEditor(page);
 }
 try {
   const api = await browser.newContext();
@@ -96,8 +106,7 @@ try {
       await page.locator('.account-editor .ant-drawer-close').click();
       await page.locator('.account-editor').waitFor({state:'hidden'});
       await page.locator('.accounts-table button').first().click();
-      await page.locator('.account-editor #username').waitFor();
-      await page.locator('.account-editor').evaluate(async e=>Promise.all(e.closest('.ant-drawer-content-wrapper').getAnimations({subtree:true}).map(a=>a.finished)));
+      await settledEditor(page);
       assert.equal(await page.locator('.account-editor #password').inputValue(),'');
       await page.locator('.account-editor #name').fill('Customer 商家兼客户 ユーザー 繁體中文'.repeat(3).slice(0,100));
       await snap(page,`edit-${width}-${locale}`);await controls(page,view,'edit');

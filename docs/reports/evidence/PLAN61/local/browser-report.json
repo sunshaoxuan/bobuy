@@ -127,7 +127,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_checkout",
+              "name": "编辑用户 qa61_1792777389002_checkout",
               "background": {
                 "x": 284,
                 "y": 518.53125,
@@ -165,7 +165,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_register",
+              "name": "编辑用户 qa61_1792777389002_register",
               "background": {
                 "x": 284,
                 "y": 626.796875,
@@ -203,7 +203,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_2_customer",
+              "name": "编辑用户 qa61_1792777389002_2_customer",
               "background": {
                 "x": 284,
                 "y": 735.0625,
@@ -241,7 +241,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_agent",
+              "name": "编辑用户 qa61_1792777389002_1_agent",
               "background": {
                 "x": 284,
                 "y": 843.328125,
@@ -279,7 +279,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_customer",
+              "name": "编辑用户 qa61_1792777389002_1_customer",
               "background": {
                 "x": 284,
                 "y": 951.59375,
@@ -702,7 +702,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_checkout",
+              "name": "编辑用户 qa61_1792777389002_checkout",
               "background": {
                 "x": 284,
                 "y": 518.53125,
@@ -740,7 +740,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_register",
+              "name": "编辑用户 qa61_1792777389002_register",
               "background": {
                 "x": 284,
                 "y": 626.796875,
@@ -778,7 +778,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_2_customer",
+              "name": "编辑用户 qa61_1792777389002_2_customer",
               "background": {
                 "x": 284,
                 "y": 735.0625,
@@ -816,7 +816,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_agent",
+              "name": "编辑用户 qa61_1792777389002_1_agent",
               "background": {
                 "x": 284,
                 "y": 843.328125,
@@ -854,7 +854,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_customer",
+              "name": "编辑用户 qa61_1792777389002_1_customer",
               "background": {
                 "x": 284,
                 "y": 951.59375,
@@ -1156,6 +1156,322 @@
                 "top": 15.42400251116078,
                 "bottom": 16.423890522548163
               }
+            },
+            {
+              "name": "Close",
+              "background": {
+                "x": 16,
+                "y": 16,
+                "width": 44,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 17,
+                "width": 42,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 16,
+                "width": 44,
+                "height": 44
+              },
+              "glyph": {
+                "x": 31.82687078203474,
+                "y": 31.826871054513113,
+                "width": 12.346257890973767,
+                "height": 12.346260070800781
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": -2.724783740859493e-7,
+                "y": 0.0000010899135034492247
+              },
+              "margins": {
+                "left": 14.826870782034739,
+                "right": 14.826871326991494,
+                "top": 14.826871054513113,
+                "bottom": 14.826868874686106
+              }
+            },
+            {
+              "name": "username",
+              "background": {
+                "x": 16,
+                "y": 127,
+                "width": 328,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 128,
+                "width": 326,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 127,
+                "width": 328,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "name",
+              "background": {
+                "x": 16,
+                "y": 225,
+                "width": 328,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 226,
+                "width": 326,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 225,
+                "width": 328,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "email",
+              "background": {
+                "x": 16,
+                "y": 323,
+                "width": 328,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 324,
+                "width": 326,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 323,
+                "width": 328,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "ant-input-affix-wrapper css-1a9ju7l ant-input-outlined ant-input-password",
+              "background": {
+                "x": 16,
+                "y": 421,
+                "width": 328,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 422,
+                "width": 326,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 421,
+                "width": 328,
+                "height": 44
+              },
+              "glyph": {
+                "x": 318.1878979206085,
+                "y": 436.88333916664124,
+                "width": 13.624221801757812,
+                "height": 12.043869018554688
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 145.00000882148743,
+                "y": -0.0947263240814209
+              },
+              "margins": {
+                "left": 301.1878979206085,
+                "right": 11.187880277633667,
+                "top": 14.883339166641235,
+                "bottom": 15.072791814804077
+              }
+            },
+            {
+              "name": "客户",
+              "background": {
+                "x": 16,
+                "y": 519,
+                "width": 90,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 520,
+                "width": 88,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 519,
+                "width": 90,
+                "height": 44
+              },
+              "glyph": {
+                "x": 55,
+                "y": 535,
+                "width": 27,
+                "height": 14
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 7.5,
+                "y": 1
+              },
+              "margins": {
+                "left": 38,
+                "right": 23,
+                "top": 15,
+                "bottom": 13
+              }
+            },
+            {
+              "name": "商家",
+              "background": {
+                "x": 118,
+                "y": 519,
+                "width": 90,
+                "height": 44
+              },
+              "inner": {
+                "x": 119,
+                "y": 520,
+                "width": 88,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 118,
+                "y": 519,
+                "width": 90,
+                "height": 44
+              },
+              "glyph": {
+                "x": 157,
+                "y": 535,
+                "width": 28,
+                "height": 13
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 8,
+                "y": 0.5
+              },
+              "margins": {
+                "left": 38,
+                "right": 22,
+                "top": 15,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "已启用",
+              "background": {
+                "x": 286,
+                "y": 587,
+                "width": 58,
+                "height": 44
+              },
+              "inner": {
+                "x": 287,
+                "y": 588,
+                "width": 56,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 286,
+                "y": 587,
+                "width": 58,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "取 消",
+              "background": {
+                "x": 122,
+                "y": 740,
+                "width": 100,
+                "height": 44
+              },
+              "inner": {
+                "x": 123,
+                "y": 741,
+                "width": 98,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 122,
+                "y": 740,
+                "width": 100,
+                "height": 44
+              },
+              "glyph": {
+                "x": 156.421875,
+                "y": 755,
+                "width": 31.125,
+                "height": 14
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": -0.015625,
+                "y": 0
+              },
+              "margins": {
+                "left": 33.421875,
+                "right": 33.453125,
+                "top": 14,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "保存用户",
+              "background": {
+                "x": 234,
+                "y": 740,
+                "width": 110,
+                "height": 44
+              },
+              "inner": {
+                "x": 235,
+                "y": 741,
+                "width": 108,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 234,
+                "y": 740,
+                "width": 110,
+                "height": 44
+              },
+              "glyph": {
+                "x": 250.62474727630615,
+                "y": 755,
+                "width": 76.37525272369385,
+                "height": 14
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": -0.18762636184692383,
+                "y": 0
+              },
+              "margins": {
+                "left": 15.624747276306152,
+                "right": 16,
+                "top": 14,
+                "bottom": 14
+              }
             }
           ]
         },
@@ -1277,7 +1593,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_checkout",
+              "name": "编辑用户 qa61_1792777389002_checkout",
               "background": {
                 "x": 284,
                 "y": 518.53125,
@@ -1315,7 +1631,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_register",
+              "name": "编辑用户 qa61_1792777389002_register",
               "background": {
                 "x": 284,
                 "y": 626.796875,
@@ -1353,7 +1669,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_2_customer",
+              "name": "编辑用户 qa61_1792777389002_2_customer",
               "background": {
                 "x": 284,
                 "y": 735.0625,
@@ -1391,7 +1707,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_agent",
+              "name": "编辑用户 qa61_1792777389002_1_agent",
               "background": {
                 "x": 284,
                 "y": 843.328125,
@@ -1429,7 +1745,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_customer",
+              "name": "编辑用户 qa61_1792777389002_1_customer",
               "background": {
                 "x": 284,
                 "y": 951.59375,
@@ -2225,7 +2541,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_checkout",
+              "name": "Edit User qa61_1792777389002_checkout",
               "background": {
                 "x": 284,
                 "y": 546.125,
@@ -2263,7 +2579,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_register",
+              "name": "Edit User qa61_1792777389002_register",
               "background": {
                 "x": 284,
                 "y": 654.390625,
@@ -2301,7 +2617,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_2_customer",
+              "name": "Edit User qa61_1792777389002_2_customer",
               "background": {
                 "x": 284,
                 "y": 762.65625,
@@ -2339,7 +2655,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_agent",
+              "name": "Edit User qa61_1792777389002_1_agent",
               "background": {
                 "x": 284,
                 "y": 870.921875,
@@ -2377,7 +2693,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_customer",
+              "name": "Edit User qa61_1792777389002_1_customer",
               "background": {
                 "x": 284,
                 "y": 979.1875,
@@ -2800,7 +3116,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_checkout",
+              "name": "Edit User qa61_1792777389002_checkout",
               "background": {
                 "x": 284,
                 "y": 546.125,
@@ -2838,7 +3154,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_register",
+              "name": "Edit User qa61_1792777389002_register",
               "background": {
                 "x": 284,
                 "y": 654.390625,
@@ -2876,7 +3192,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_2_customer",
+              "name": "Edit User qa61_1792777389002_2_customer",
               "background": {
                 "x": 284,
                 "y": 762.65625,
@@ -2914,7 +3230,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_agent",
+              "name": "Edit User qa61_1792777389002_1_agent",
               "background": {
                 "x": 284,
                 "y": 870.921875,
@@ -2952,7 +3268,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_customer",
+              "name": "Edit User qa61_1792777389002_1_customer",
               "background": {
                 "x": 284,
                 "y": 979.1875,
@@ -3254,6 +3570,322 @@
                 "top": 15.42400251116078,
                 "bottom": 16.423890522548163
               }
+            },
+            {
+              "name": "Close",
+              "background": {
+                "x": 16,
+                "y": 16,
+                "width": 44,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 17,
+                "width": 42,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 16,
+                "width": 44,
+                "height": 44
+              },
+              "glyph": {
+                "x": 31.82687078203474,
+                "y": 31.826871054513113,
+                "width": 12.346257890973767,
+                "height": 12.346260070800781
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": -2.724783740859493e-7,
+                "y": 0.0000010899135034492247
+              },
+              "margins": {
+                "left": 14.826870782034739,
+                "right": 14.826871326991494,
+                "top": 14.826871054513113,
+                "bottom": 14.826868874686106
+              }
+            },
+            {
+              "name": "username",
+              "background": {
+                "x": 16,
+                "y": 127,
+                "width": 328,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 128,
+                "width": 326,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 127,
+                "width": 328,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "name",
+              "background": {
+                "x": 16,
+                "y": 225,
+                "width": 328,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 226,
+                "width": 326,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 225,
+                "width": 328,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "email",
+              "background": {
+                "x": 16,
+                "y": 323,
+                "width": 328,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 324,
+                "width": 326,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 323,
+                "width": 328,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "ant-input-affix-wrapper css-1a9ju7l ant-input-outlined ant-input-password",
+              "background": {
+                "x": 16,
+                "y": 421,
+                "width": 328,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 422,
+                "width": 326,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 421,
+                "width": 328,
+                "height": 44
+              },
+              "glyph": {
+                "x": 318.1878979206085,
+                "y": 436.88333916664124,
+                "width": 13.624221801757812,
+                "height": 12.043869018554688
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 145.00000882148743,
+                "y": -0.0947263240814209
+              },
+              "margins": {
+                "left": 301.1878979206085,
+                "right": 11.187880277633667,
+                "top": 14.883339166641235,
+                "bottom": 15.072791814804077
+              }
+            },
+            {
+              "name": "Customer",
+              "background": {
+                "x": 16,
+                "y": 519,
+                "width": 125.109375,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 520,
+                "width": 123.109375,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 519,
+                "width": 125.109375,
+                "height": 44
+              },
+              "glyph": {
+                "x": 55,
+                "y": 536,
+                "width": 63.65625,
+                "height": 12
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 8.2734375,
+                "y": 1
+              },
+              "margins": {
+                "left": 38,
+                "right": 21.453125,
+                "top": 16,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "Merchant",
+              "background": {
+                "x": 153.109375,
+                "y": 519,
+                "width": 123.703125,
+                "height": 44
+              },
+              "inner": {
+                "x": 154.109375,
+                "y": 520,
+                "width": 121.703125,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 153.109375,
+                "y": 519,
+                "width": 123.703125,
+                "height": 44
+              },
+              "glyph": {
+                "x": 193.109375,
+                "y": 535,
+                "width": 61.40625,
+                "height": 13
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 8.8515625,
+                "y": 0.5
+              },
+              "margins": {
+                "left": 39,
+                "right": 21.296875,
+                "top": 15,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "Account enabled",
+              "background": {
+                "x": 286,
+                "y": 587,
+                "width": 58,
+                "height": 44
+              },
+              "inner": {
+                "x": 287,
+                "y": 588,
+                "width": 56,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 286,
+                "y": 587,
+                "width": 58,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "Cancel",
+              "background": {
+                "x": 113.9375,
+                "y": 740,
+                "width": 100,
+                "height": 44
+              },
+              "inner": {
+                "x": 114.9375,
+                "y": 741,
+                "width": 98,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 113.9375,
+                "y": 740,
+                "width": 100,
+                "height": 44
+              },
+              "glyph": {
+                "x": 142,
+                "y": 755,
+                "width": 43.875,
+                "height": 13
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": 0,
+                "y": -0.5
+              },
+              "margins": {
+                "left": 27.0625,
+                "right": 27.0625,
+                "top": 14,
+                "bottom": 15
+              }
+            },
+            {
+              "name": "Save User",
+              "background": {
+                "x": 225.9375,
+                "y": 740,
+                "width": 118.0625,
+                "height": 44
+              },
+              "inner": {
+                "x": 226.9375,
+                "y": 741,
+                "width": 116.0625,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 225.9375,
+                "y": 740,
+                "width": 118.0625,
+                "height": 44
+              },
+              "glyph": {
+                "x": 242.56224727630615,
+                "y": 756,
+                "width": 85.98462772369385,
+                "height": 12
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": 0.5858111381530762,
+                "y": 0
+              },
+              "margins": {
+                "left": 15.624747276306152,
+                "right": 14.453125,
+                "top": 15,
+                "bottom": 15
+              }
             }
           ]
         },
@@ -3375,7 +4007,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_checkout",
+              "name": "Edit User qa61_1792777389002_checkout",
               "background": {
                 "x": 284,
                 "y": 546.125,
@@ -3413,7 +4045,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_register",
+              "name": "Edit User qa61_1792777389002_register",
               "background": {
                 "x": 284,
                 "y": 654.390625,
@@ -3451,7 +4083,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_2_customer",
+              "name": "Edit User qa61_1792777389002_2_customer",
               "background": {
                 "x": 284,
                 "y": 762.65625,
@@ -3489,7 +4121,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_agent",
+              "name": "Edit User qa61_1792777389002_1_agent",
               "background": {
                 "x": 284,
                 "y": 870.921875,
@@ -3527,7 +4159,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_customer",
+              "name": "Edit User qa61_1792777389002_1_customer",
               "background": {
                 "x": 284,
                 "y": 979.1875,
@@ -4323,7 +4955,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_checkout",
+              "name": "ユーザー編集 qa61_1792777389002_checkout",
               "background": {
                 "x": 284,
                 "y": 518.53125,
@@ -4361,7 +4993,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_register",
+              "name": "ユーザー編集 qa61_1792777389002_register",
               "background": {
                 "x": 284,
                 "y": 626.796875,
@@ -4399,7 +5031,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_2_customer",
+              "name": "ユーザー編集 qa61_1792777389002_2_customer",
               "background": {
                 "x": 284,
                 "y": 735.0625,
@@ -4437,7 +5069,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_agent",
+              "name": "ユーザー編集 qa61_1792777389002_1_agent",
               "background": {
                 "x": 284,
                 "y": 843.328125,
@@ -4475,7 +5107,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_customer",
+              "name": "ユーザー編集 qa61_1792777389002_1_customer",
               "background": {
                 "x": 284,
                 "y": 951.59375,
@@ -4898,7 +5530,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_checkout",
+              "name": "ユーザー編集 qa61_1792777389002_checkout",
               "background": {
                 "x": 284,
                 "y": 518.53125,
@@ -4936,7 +5568,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_register",
+              "name": "ユーザー編集 qa61_1792777389002_register",
               "background": {
                 "x": 284,
                 "y": 626.796875,
@@ -4974,7 +5606,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_2_customer",
+              "name": "ユーザー編集 qa61_1792777389002_2_customer",
               "background": {
                 "x": 284,
                 "y": 735.0625,
@@ -5012,7 +5644,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_agent",
+              "name": "ユーザー編集 qa61_1792777389002_1_agent",
               "background": {
                 "x": 284,
                 "y": 843.328125,
@@ -5050,7 +5682,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_customer",
+              "name": "ユーザー編集 qa61_1792777389002_1_customer",
               "background": {
                 "x": 284,
                 "y": 951.59375,
@@ -5789,7 +6421,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_checkout",
+              "name": "ユーザー編集 qa61_1792777389002_checkout",
               "background": {
                 "x": 284,
                 "y": 518.53125,
@@ -5827,7 +6459,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_register",
+              "name": "ユーザー編集 qa61_1792777389002_register",
               "background": {
                 "x": 284,
                 "y": 626.796875,
@@ -5865,7 +6497,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_2_customer",
+              "name": "ユーザー編集 qa61_1792777389002_2_customer",
               "background": {
                 "x": 284,
                 "y": 735.0625,
@@ -5903,7 +6535,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_agent",
+              "name": "ユーザー編集 qa61_1792777389002_1_agent",
               "background": {
                 "x": 284,
                 "y": 843.328125,
@@ -5941,7 +6573,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_customer",
+              "name": "ユーザー編集 qa61_1792777389002_1_customer",
               "background": {
                 "x": 284,
                 "y": 951.59375,
@@ -6243,6 +6875,370 @@
                 "top": 15.42400251116078,
                 "bottom": 16.423890522548163
               }
+            },
+            {
+              "name": "Close",
+              "background": {
+                "x": 16,
+                "y": 16,
+                "width": 44,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 17,
+                "width": 42,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 16,
+                "width": 44,
+                "height": 44
+              },
+              "glyph": {
+                "x": 31.82687078203474,
+                "y": 31.826871054513113,
+                "width": 12.346257890973767,
+                "height": 12.346260070800781
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": -2.724783740859493e-7,
+                "y": 0.0000010899135034492247
+              },
+              "margins": {
+                "left": 14.826870782034739,
+                "right": 14.826871326991494,
+                "top": 14.826871054513113,
+                "bottom": 14.826868874686106
+              }
+            },
+            {
+              "name": "username",
+              "background": {
+                "x": 16,
+                "y": 127,
+                "width": 328,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 128,
+                "width": 326,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 127,
+                "width": 328,
+                "height": 44
+              },
+              "glyph": {
+                "x": 27,
+                "y": 142,
+                "width": 210.00775146484375,
+                "height": 16
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": -47.996124267578125,
+                "y": 1
+              },
+              "margins": {
+                "left": 10,
+                "right": 105.99224853515625,
+                "top": 14,
+                "bottom": 12
+              }
+            },
+            {
+              "name": "name",
+              "background": {
+                "x": 16,
+                "y": 225,
+                "width": 328,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 226,
+                "width": 326,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 225,
+                "width": 328,
+                "height": 44
+              },
+              "glyph": {
+                "x": 27,
+                "y": 240,
+                "width": 306,
+                "height": 14
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 0,
+                "y": 0
+              },
+              "margins": {
+                "left": 10,
+                "right": 10,
+                "top": 14,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "email",
+              "background": {
+                "x": 16,
+                "y": 323,
+                "width": 328,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 324,
+                "width": 326,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 323,
+                "width": 328,
+                "height": 44
+              },
+              "glyph": {
+                "x": 27,
+                "y": 338,
+                "width": 306,
+                "height": 16
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 0,
+                "y": 1
+              },
+              "margins": {
+                "left": 10,
+                "right": 10,
+                "top": 14,
+                "bottom": 12
+              }
+            },
+            {
+              "name": "ant-input-affix-wrapper css-1a9ju7l ant-input-outlined ant-input-password",
+              "background": {
+                "x": 16,
+                "y": 421,
+                "width": 328,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 422,
+                "width": 326,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 421,
+                "width": 328,
+                "height": 44
+              },
+              "glyph": {
+                "x": 318.1878979206085,
+                "y": 436.88333916664124,
+                "width": 13.624221801757812,
+                "height": 12.043869018554688
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 145.00000882148743,
+                "y": -0.0947263240814209
+              },
+              "margins": {
+                "left": 301.1878979206085,
+                "right": 11.187880277633667,
+                "top": 14.883339166641235,
+                "bottom": 15.072791814804077
+              }
+            },
+            {
+              "name": "顧客",
+              "background": {
+                "x": 16,
+                "y": 543,
+                "width": 90,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 544,
+                "width": 88,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 543,
+                "width": 90,
+                "height": 44
+              },
+              "glyph": {
+                "x": 55,
+                "y": 559,
+                "width": 28,
+                "height": 14
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 8,
+                "y": 1
+              },
+              "margins": {
+                "left": 38,
+                "right": 22,
+                "top": 15,
+                "bottom": 13
+              }
+            },
+            {
+              "name": "出品者",
+              "background": {
+                "x": 118,
+                "y": 543,
+                "width": 104,
+                "height": 44
+              },
+              "inner": {
+                "x": 119,
+                "y": 544,
+                "width": 102,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 118,
+                "y": 543,
+                "width": 104,
+                "height": 44
+              },
+              "glyph": {
+                "x": 158,
+                "y": 559,
+                "width": 41,
+                "height": 14
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 8.5,
+                "y": 1
+              },
+              "margins": {
+                "left": 39,
+                "right": 22,
+                "top": 15,
+                "bottom": 13
+              }
+            },
+            {
+              "name": "アカウント有効",
+              "background": {
+                "x": 286,
+                "y": 611,
+                "width": 58,
+                "height": 44
+              },
+              "inner": {
+                "x": 287,
+                "y": 612,
+                "width": 56,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 286,
+                "y": 611,
+                "width": 58,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "キャンセル",
+              "background": {
+                "x": 130,
+                "y": 740,
+                "width": 102,
+                "height": 44
+              },
+              "inner": {
+                "x": 131,
+                "y": 741,
+                "width": 100,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 130,
+                "y": 740,
+                "width": 102,
+                "height": 44
+              },
+              "glyph": {
+                "x": 147,
+                "y": 756,
+                "width": 69,
+                "height": 13
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "margins": {
+                "left": 16,
+                "right": 15,
+                "top": 15,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "保存",
+              "background": {
+                "x": 244,
+                "y": 740,
+                "width": 100,
+                "height": 44
+              },
+              "inner": {
+                "x": 245,
+                "y": 741,
+                "width": 98,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 244,
+                "y": 740,
+                "width": 100,
+                "height": 44
+              },
+              "glyph": {
+                "x": 269.62474727630615,
+                "y": 755,
+                "width": 49.37525272369385,
+                "height": 14
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": 0.31237363815307617,
+                "y": 0
+              },
+              "margins": {
+                "left": 24.624747276306152,
+                "right": 24,
+                "top": 14,
+                "bottom": 14
+              }
             }
           ]
         }
@@ -6373,7 +7369,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_checkout",
+              "name": "編輯使用者 qa61_1792777389002_checkout",
               "background": {
                 "x": 284,
                 "y": 518.53125,
@@ -6411,7 +7407,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_register",
+              "name": "編輯使用者 qa61_1792777389002_register",
               "background": {
                 "x": 284,
                 "y": 626.796875,
@@ -6449,7 +7445,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_2_customer",
+              "name": "編輯使用者 qa61_1792777389002_2_customer",
               "background": {
                 "x": 284,
                 "y": 735.0625,
@@ -6487,7 +7483,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_agent",
+              "name": "編輯使用者 qa61_1792777389002_1_agent",
               "background": {
                 "x": 284,
                 "y": 843.328125,
@@ -6525,7 +7521,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_customer",
+              "name": "編輯使用者 qa61_1792777389002_1_customer",
               "background": {
                 "x": 284,
                 "y": 951.59375,
@@ -6948,7 +7944,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_checkout",
+              "name": "編輯使用者 qa61_1792777389002_checkout",
               "background": {
                 "x": 284,
                 "y": 518.53125,
@@ -6986,7 +7982,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_register",
+              "name": "編輯使用者 qa61_1792777389002_register",
               "background": {
                 "x": 284,
                 "y": 626.796875,
@@ -7024,7 +8020,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_2_customer",
+              "name": "編輯使用者 qa61_1792777389002_2_customer",
               "background": {
                 "x": 284,
                 "y": 735.0625,
@@ -7062,7 +8058,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_agent",
+              "name": "編輯使用者 qa61_1792777389002_1_agent",
               "background": {
                 "x": 284,
                 "y": 843.328125,
@@ -7100,7 +8096,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_customer",
+              "name": "編輯使用者 qa61_1792777389002_1_customer",
               "background": {
                 "x": 284,
                 "y": 951.59375,
@@ -7401,6 +8397,322 @@
                 "right": 17.437461580548927,
                 "top": 15.42400251116078,
                 "bottom": 16.423890522548163
+              }
+            },
+            {
+              "name": "Close",
+              "background": {
+                "x": 16,
+                "y": 16,
+                "width": 44,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 17,
+                "width": 42,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 16,
+                "width": 44,
+                "height": 44
+              },
+              "glyph": {
+                "x": 31.82687078203474,
+                "y": 31.826871054513113,
+                "width": 12.346257890973767,
+                "height": 12.346260070800781
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": -2.724783740859493e-7,
+                "y": 0.0000010899135034492247
+              },
+              "margins": {
+                "left": 14.826870782034739,
+                "right": 14.826871326991494,
+                "top": 14.826871054513113,
+                "bottom": 14.826868874686106
+              }
+            },
+            {
+              "name": "username",
+              "background": {
+                "x": 16,
+                "y": 127,
+                "width": 328,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 128,
+                "width": 326,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 127,
+                "width": 328,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "name",
+              "background": {
+                "x": 16,
+                "y": 225,
+                "width": 328,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 226,
+                "width": 326,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 225,
+                "width": 328,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "email",
+              "background": {
+                "x": 16,
+                "y": 323,
+                "width": 328,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 324,
+                "width": 326,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 323,
+                "width": 328,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "ant-input-affix-wrapper css-1a9ju7l ant-input-outlined ant-input-password",
+              "background": {
+                "x": 16,
+                "y": 421,
+                "width": 328,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 422,
+                "width": 326,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 421,
+                "width": 328,
+                "height": 44
+              },
+              "glyph": {
+                "x": 318.1878979206085,
+                "y": 436.88333916664124,
+                "width": 13.624221801757812,
+                "height": 12.043869018554688
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 145.00000882148743,
+                "y": -0.0947263240814209
+              },
+              "margins": {
+                "left": 301.1878979206085,
+                "right": 11.187880277633667,
+                "top": 14.883339166641235,
+                "bottom": 15.072791814804077
+              }
+            },
+            {
+              "name": "客戶",
+              "background": {
+                "x": 16,
+                "y": 519,
+                "width": 90,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 520,
+                "width": 88,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 519,
+                "width": 90,
+                "height": 44
+              },
+              "glyph": {
+                "x": 55,
+                "y": 535,
+                "width": 26,
+                "height": 14
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 7,
+                "y": 1
+              },
+              "margins": {
+                "left": 38,
+                "right": 24,
+                "top": 15,
+                "bottom": 13
+              }
+            },
+            {
+              "name": "商家",
+              "background": {
+                "x": 118,
+                "y": 519,
+                "width": 90,
+                "height": 44
+              },
+              "inner": {
+                "x": 119,
+                "y": 520,
+                "width": 88,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 118,
+                "y": 519,
+                "width": 90,
+                "height": 44
+              },
+              "glyph": {
+                "x": 157,
+                "y": 535,
+                "width": 28,
+                "height": 13
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 8,
+                "y": 0.5
+              },
+              "margins": {
+                "left": 38,
+                "right": 22,
+                "top": 15,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "已啟用",
+              "background": {
+                "x": 286,
+                "y": 587,
+                "width": 58,
+                "height": 44
+              },
+              "inner": {
+                "x": 287,
+                "y": 588,
+                "width": 56,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 286,
+                "y": 587,
+                "width": 58,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "取 消",
+              "background": {
+                "x": 108,
+                "y": 740,
+                "width": 100,
+                "height": 44
+              },
+              "inner": {
+                "x": 109,
+                "y": 741,
+                "width": 98,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 108,
+                "y": 740,
+                "width": 100,
+                "height": 44
+              },
+              "glyph": {
+                "x": 142.421875,
+                "y": 755,
+                "width": 31.125,
+                "height": 14
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": -0.015625,
+                "y": 0
+              },
+              "margins": {
+                "left": 33.421875,
+                "right": 33.453125,
+                "top": 14,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "儲存使用者",
+              "background": {
+                "x": 220,
+                "y": 740,
+                "width": 124,
+                "height": 44
+              },
+              "inner": {
+                "x": 221,
+                "y": 741,
+                "width": 122,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 220,
+                "y": 740,
+                "width": 124,
+                "height": 44
+              },
+              "glyph": {
+                "x": 236.62474727630615,
+                "y": 755,
+                "width": 91.37525272369385,
+                "height": 14
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": 0.31237363815307617,
+                "y": 0
+              },
+              "margins": {
+                "left": 15.624747276306152,
+                "right": 15,
+                "top": 14,
+                "bottom": 14
               }
             }
           ]
@@ -7523,7 +8835,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_checkout",
+              "name": "編輯使用者 qa61_1792777389002_checkout",
               "background": {
                 "x": 284,
                 "y": 518.53125,
@@ -7561,7 +8873,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_register",
+              "name": "編輯使用者 qa61_1792777389002_register",
               "background": {
                 "x": 284,
                 "y": 626.796875,
@@ -7599,7 +8911,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_2_customer",
+              "name": "編輯使用者 qa61_1792777389002_2_customer",
               "background": {
                 "x": 284,
                 "y": 735.0625,
@@ -7637,7 +8949,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_agent",
+              "name": "編輯使用者 qa61_1792777389002_1_agent",
               "background": {
                 "x": 284,
                 "y": 843.328125,
@@ -7675,7 +8987,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_customer",
+              "name": "編輯使用者 qa61_1792777389002_1_customer",
               "background": {
                 "x": 284,
                 "y": 951.59375,
@@ -7976,6 +9288,370 @@
                 "right": 17.437461580548927,
                 "top": 15.42400251116078,
                 "bottom": 16.423890522548163
+              }
+            },
+            {
+              "name": "Close",
+              "background": {
+                "x": 16,
+                "y": 16,
+                "width": 44,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 17,
+                "width": 42,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 16,
+                "width": 44,
+                "height": 44
+              },
+              "glyph": {
+                "x": 31.82687078203474,
+                "y": 31.826871054513113,
+                "width": 12.346257890973767,
+                "height": 12.346260070800781
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": -2.724783740859493e-7,
+                "y": 0.0000010899135034492247
+              },
+              "margins": {
+                "left": 14.826870782034739,
+                "right": 14.826871326991494,
+                "top": 14.826871054513113,
+                "bottom": 14.826868874686106
+              }
+            },
+            {
+              "name": "username",
+              "background": {
+                "x": 16,
+                "y": 127,
+                "width": 328,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 128,
+                "width": 326,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 127,
+                "width": 328,
+                "height": 44
+              },
+              "glyph": {
+                "x": 27,
+                "y": 142,
+                "width": 210.00775146484375,
+                "height": 16
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": -47.996124267578125,
+                "y": 1
+              },
+              "margins": {
+                "left": 10,
+                "right": 105.99224853515625,
+                "top": 14,
+                "bottom": 12
+              }
+            },
+            {
+              "name": "name",
+              "background": {
+                "x": 16,
+                "y": 225,
+                "width": 328,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 226,
+                "width": 326,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 225,
+                "width": 328,
+                "height": 44
+              },
+              "glyph": {
+                "x": 27,
+                "y": 240,
+                "width": 306,
+                "height": 14
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 0,
+                "y": 0
+              },
+              "margins": {
+                "left": 10,
+                "right": 10,
+                "top": 14,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "email",
+              "background": {
+                "x": 16,
+                "y": 323,
+                "width": 328,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 324,
+                "width": 326,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 323,
+                "width": 328,
+                "height": 44
+              },
+              "glyph": {
+                "x": 27,
+                "y": 338,
+                "width": 306,
+                "height": 16
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 0,
+                "y": 1
+              },
+              "margins": {
+                "left": 10,
+                "right": 10,
+                "top": 14,
+                "bottom": 12
+              }
+            },
+            {
+              "name": "ant-input-affix-wrapper css-1a9ju7l ant-input-outlined ant-input-password",
+              "background": {
+                "x": 16,
+                "y": 421,
+                "width": 328,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 422,
+                "width": 326,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 421,
+                "width": 328,
+                "height": 44
+              },
+              "glyph": {
+                "x": 318.1878979206085,
+                "y": 436.88333916664124,
+                "width": 13.624221801757812,
+                "height": 12.043869018554688
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 145.00000882148743,
+                "y": -0.0947263240814209
+              },
+              "margins": {
+                "left": 301.1878979206085,
+                "right": 11.187880277633667,
+                "top": 14.883339166641235,
+                "bottom": 15.072791814804077
+              }
+            },
+            {
+              "name": "客戶",
+              "background": {
+                "x": 16,
+                "y": 543,
+                "width": 90,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 544,
+                "width": 88,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 543,
+                "width": 90,
+                "height": 44
+              },
+              "glyph": {
+                "x": 55,
+                "y": 559,
+                "width": 26,
+                "height": 14
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 7,
+                "y": 1
+              },
+              "margins": {
+                "left": 38,
+                "right": 24,
+                "top": 15,
+                "bottom": 13
+              }
+            },
+            {
+              "name": "商家",
+              "background": {
+                "x": 118,
+                "y": 543,
+                "width": 90,
+                "height": 44
+              },
+              "inner": {
+                "x": 119,
+                "y": 544,
+                "width": 88,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 118,
+                "y": 543,
+                "width": 90,
+                "height": 44
+              },
+              "glyph": {
+                "x": 157,
+                "y": 559,
+                "width": 28,
+                "height": 13
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 8,
+                "y": 0.5
+              },
+              "margins": {
+                "left": 38,
+                "right": 22,
+                "top": 15,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "已啟用",
+              "background": {
+                "x": 286,
+                "y": 611,
+                "width": 58,
+                "height": 44
+              },
+              "inner": {
+                "x": 287,
+                "y": 612,
+                "width": 56,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 286,
+                "y": 611,
+                "width": 58,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "取 消",
+              "background": {
+                "x": 108,
+                "y": 740,
+                "width": 100,
+                "height": 44
+              },
+              "inner": {
+                "x": 109,
+                "y": 741,
+                "width": 98,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 108,
+                "y": 740,
+                "width": 100,
+                "height": 44
+              },
+              "glyph": {
+                "x": 142.421875,
+                "y": 755,
+                "width": 31.125,
+                "height": 14
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": -0.015625,
+                "y": 0
+              },
+              "margins": {
+                "left": 33.421875,
+                "right": 33.453125,
+                "top": 14,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "儲存使用者",
+              "background": {
+                "x": 220,
+                "y": 740,
+                "width": 124,
+                "height": 44
+              },
+              "inner": {
+                "x": 221,
+                "y": 741,
+                "width": 122,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 220,
+                "y": 740,
+                "width": 124,
+                "height": 44
+              },
+              "glyph": {
+                "x": 236.62474727630615,
+                "y": 755,
+                "width": 91.37525272369385,
+                "height": 14
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": 0.31237363815307617,
+                "y": 0
+              },
+              "margins": {
+                "left": 15.624747276306152,
+                "right": 15,
+                "top": 14,
+                "bottom": 14
               }
             }
           ]
@@ -8107,7 +9783,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_checkout",
+              "name": "编辑用户 qa61_1792777389002_checkout",
               "background": {
                 "x": 314,
                 "y": 518.53125,
@@ -8145,7 +9821,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_register",
+              "name": "编辑用户 qa61_1792777389002_register",
               "background": {
                 "x": 314,
                 "y": 626.796875,
@@ -8183,7 +9859,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_2_customer",
+              "name": "编辑用户 qa61_1792777389002_2_customer",
               "background": {
                 "x": 314,
                 "y": 735.0625,
@@ -8221,7 +9897,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_agent",
+              "name": "编辑用户 qa61_1792777389002_1_agent",
               "background": {
                 "x": 314,
                 "y": 843.328125,
@@ -8259,7 +9935,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_customer",
+              "name": "编辑用户 qa61_1792777389002_1_customer",
               "background": {
                 "x": 314,
                 "y": 951.59375,
@@ -8682,7 +10358,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_checkout",
+              "name": "编辑用户 qa61_1792777389002_checkout",
               "background": {
                 "x": 314,
                 "y": 518.53125,
@@ -8720,7 +10396,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_register",
+              "name": "编辑用户 qa61_1792777389002_register",
               "background": {
                 "x": 314,
                 "y": 626.796875,
@@ -8758,7 +10434,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_2_customer",
+              "name": "编辑用户 qa61_1792777389002_2_customer",
               "background": {
                 "x": 314,
                 "y": 735.0625,
@@ -8796,7 +10472,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_agent",
+              "name": "编辑用户 qa61_1792777389002_1_agent",
               "background": {
                 "x": 314,
                 "y": 843.328125,
@@ -8834,7 +10510,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_customer",
+              "name": "编辑用户 qa61_1792777389002_1_customer",
               "background": {
                 "x": 314,
                 "y": 951.59375,
@@ -9573,7 +11249,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_checkout",
+              "name": "编辑用户 qa61_1792777389002_checkout",
               "background": {
                 "x": 314,
                 "y": 518.53125,
@@ -9611,7 +11287,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_register",
+              "name": "编辑用户 qa61_1792777389002_register",
               "background": {
                 "x": 314,
                 "y": 626.796875,
@@ -9649,7 +11325,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_2_customer",
+              "name": "编辑用户 qa61_1792777389002_2_customer",
               "background": {
                 "x": 314,
                 "y": 735.0625,
@@ -9687,7 +11363,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_agent",
+              "name": "编辑用户 qa61_1792777389002_1_agent",
               "background": {
                 "x": 314,
                 "y": 843.328125,
@@ -9725,7 +11401,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_customer",
+              "name": "编辑用户 qa61_1792777389002_1_customer",
               "background": {
                 "x": 314,
                 "y": 951.59375,
@@ -10521,7 +12197,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_checkout",
+              "name": "Edit User qa61_1792777389002_checkout",
               "background": {
                 "x": 314,
                 "y": 518.53125,
@@ -10559,7 +12235,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_register",
+              "name": "Edit User qa61_1792777389002_register",
               "background": {
                 "x": 314,
                 "y": 626.796875,
@@ -10597,7 +12273,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_2_customer",
+              "name": "Edit User qa61_1792777389002_2_customer",
               "background": {
                 "x": 314,
                 "y": 735.0625,
@@ -10635,7 +12311,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_agent",
+              "name": "Edit User qa61_1792777389002_1_agent",
               "background": {
                 "x": 314,
                 "y": 843.328125,
@@ -10673,7 +12349,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_customer",
+              "name": "Edit User qa61_1792777389002_1_customer",
               "background": {
                 "x": 314,
                 "y": 951.59375,
@@ -11096,7 +12772,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_checkout",
+              "name": "Edit User qa61_1792777389002_checkout",
               "background": {
                 "x": 314,
                 "y": 518.53125,
@@ -11134,7 +12810,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_register",
+              "name": "Edit User qa61_1792777389002_register",
               "background": {
                 "x": 314,
                 "y": 626.796875,
@@ -11172,7 +12848,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_2_customer",
+              "name": "Edit User qa61_1792777389002_2_customer",
               "background": {
                 "x": 314,
                 "y": 735.0625,
@@ -11210,7 +12886,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_agent",
+              "name": "Edit User qa61_1792777389002_1_agent",
               "background": {
                 "x": 314,
                 "y": 843.328125,
@@ -11248,7 +12924,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_customer",
+              "name": "Edit User qa61_1792777389002_1_customer",
               "background": {
                 "x": 314,
                 "y": 951.59375,
@@ -11987,7 +13663,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_checkout",
+              "name": "Edit User qa61_1792777389002_checkout",
               "background": {
                 "x": 314,
                 "y": 518.53125,
@@ -12025,7 +13701,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_register",
+              "name": "Edit User qa61_1792777389002_register",
               "background": {
                 "x": 314,
                 "y": 626.796875,
@@ -12063,7 +13739,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_2_customer",
+              "name": "Edit User qa61_1792777389002_2_customer",
               "background": {
                 "x": 314,
                 "y": 735.0625,
@@ -12101,7 +13777,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_agent",
+              "name": "Edit User qa61_1792777389002_1_agent",
               "background": {
                 "x": 314,
                 "y": 843.328125,
@@ -12139,7 +13815,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_customer",
+              "name": "Edit User qa61_1792777389002_1_customer",
               "background": {
                 "x": 314,
                 "y": 951.59375,
@@ -12441,6 +14117,370 @@
                 "top": 15.42400251116078,
                 "bottom": 16.423890522548163
               }
+            },
+            {
+              "name": "Close",
+              "background": {
+                "x": 16,
+                "y": 16,
+                "width": 44,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 17,
+                "width": 42,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 16,
+                "width": 44,
+                "height": 44
+              },
+              "glyph": {
+                "x": 31.82687078203474,
+                "y": 31.826871054513113,
+                "width": 12.346257890973767,
+                "height": 12.346260070800781
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": -2.724783740859493e-7,
+                "y": 0.0000010899135034492247
+              },
+              "margins": {
+                "left": 14.826870782034739,
+                "right": 14.826871326991494,
+                "top": 14.826871054513113,
+                "bottom": 14.826868874686106
+              }
+            },
+            {
+              "name": "username",
+              "background": {
+                "x": 16,
+                "y": 127,
+                "width": 358,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 128,
+                "width": 356,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 127,
+                "width": 358,
+                "height": 44
+              },
+              "glyph": {
+                "x": 27,
+                "y": 142,
+                "width": 210.00775146484375,
+                "height": 16
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": -62.996124267578125,
+                "y": 1
+              },
+              "margins": {
+                "left": 10,
+                "right": 135.99224853515625,
+                "top": 14,
+                "bottom": 12
+              }
+            },
+            {
+              "name": "name",
+              "background": {
+                "x": 16,
+                "y": 225,
+                "width": 358,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 226,
+                "width": 356,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 225,
+                "width": 358,
+                "height": 44
+              },
+              "glyph": {
+                "x": 27,
+                "y": 240,
+                "width": 336,
+                "height": 14
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 0,
+                "y": 0
+              },
+              "margins": {
+                "left": 10,
+                "right": 10,
+                "top": 14,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "email",
+              "background": {
+                "x": 16,
+                "y": 323,
+                "width": 358,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 324,
+                "width": 356,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 323,
+                "width": 358,
+                "height": 44
+              },
+              "glyph": {
+                "x": 27,
+                "y": 338,
+                "width": 307.9936828613281,
+                "height": 16
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": -14.003158569335938,
+                "y": 1
+              },
+              "margins": {
+                "left": 10,
+                "right": 38.006317138671875,
+                "top": 14,
+                "bottom": 12
+              }
+            },
+            {
+              "name": "ant-input-affix-wrapper css-1a9ju7l ant-input-outlined ant-input-password",
+              "background": {
+                "x": 16,
+                "y": 421,
+                "width": 358,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 422,
+                "width": 356,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 421,
+                "width": 358,
+                "height": 44
+              },
+              "glyph": {
+                "x": 348.1878979206085,
+                "y": 436.88333916664124,
+                "width": 13.624221801757812,
+                "height": 12.043869018554688
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 160.00000882148743,
+                "y": -0.0947263240814209
+              },
+              "margins": {
+                "left": 331.1878979206085,
+                "right": 11.187880277633667,
+                "top": 14.883339166641235,
+                "bottom": 15.072791814804077
+              }
+            },
+            {
+              "name": "Customer",
+              "background": {
+                "x": 16,
+                "y": 543,
+                "width": 125.109375,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 544,
+                "width": 123.109375,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 543,
+                "width": 125.109375,
+                "height": 44
+              },
+              "glyph": {
+                "x": 55,
+                "y": 560,
+                "width": 63.65625,
+                "height": 12
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 8.2734375,
+                "y": 1
+              },
+              "margins": {
+                "left": 38,
+                "right": 21.453125,
+                "top": 16,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "Merchant",
+              "background": {
+                "x": 153.109375,
+                "y": 543,
+                "width": 123.703125,
+                "height": 44
+              },
+              "inner": {
+                "x": 154.109375,
+                "y": 544,
+                "width": 121.703125,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 153.109375,
+                "y": 543,
+                "width": 123.703125,
+                "height": 44
+              },
+              "glyph": {
+                "x": 193.109375,
+                "y": 559,
+                "width": 61.40625,
+                "height": 13
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 8.8515625,
+                "y": 0.5
+              },
+              "margins": {
+                "left": 39,
+                "right": 21.296875,
+                "top": 15,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "Account enabled",
+              "background": {
+                "x": 316,
+                "y": 611,
+                "width": 58,
+                "height": 44
+              },
+              "inner": {
+                "x": 317,
+                "y": 612,
+                "width": 56,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 316,
+                "y": 611,
+                "width": 58,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "Cancel",
+              "background": {
+                "x": 143.9375,
+                "y": 784,
+                "width": 100,
+                "height": 44
+              },
+              "inner": {
+                "x": 144.9375,
+                "y": 785,
+                "width": 98,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 143.9375,
+                "y": 784,
+                "width": 100,
+                "height": 44
+              },
+              "glyph": {
+                "x": 172,
+                "y": 799,
+                "width": 43.875,
+                "height": 13
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": 0,
+                "y": -0.5
+              },
+              "margins": {
+                "left": 27.0625,
+                "right": 27.0625,
+                "top": 14,
+                "bottom": 15
+              }
+            },
+            {
+              "name": "Save User",
+              "background": {
+                "x": 255.9375,
+                "y": 784,
+                "width": 118.0625,
+                "height": 44
+              },
+              "inner": {
+                "x": 256.9375,
+                "y": 785,
+                "width": 116.0625,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 255.9375,
+                "y": 784,
+                "width": 118.0625,
+                "height": 44
+              },
+              "glyph": {
+                "x": 272.56224727630615,
+                "y": 800,
+                "width": 85.98462772369385,
+                "height": 12
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": 0.5858111381530762,
+                "y": 0
+              },
+              "margins": {
+                "left": 15.624747276306152,
+                "right": 14.453125,
+                "top": 15,
+                "bottom": 15
+              }
             }
           ]
         }
@@ -12571,7 +14611,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_checkout",
+              "name": "ユーザー編集 qa61_1792777389002_checkout",
               "background": {
                 "x": 314,
                 "y": 518.53125,
@@ -12609,7 +14649,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_register",
+              "name": "ユーザー編集 qa61_1792777389002_register",
               "background": {
                 "x": 314,
                 "y": 626.796875,
@@ -12647,7 +14687,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_2_customer",
+              "name": "ユーザー編集 qa61_1792777389002_2_customer",
               "background": {
                 "x": 314,
                 "y": 735.0625,
@@ -12685,7 +14725,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_agent",
+              "name": "ユーザー編集 qa61_1792777389002_1_agent",
               "background": {
                 "x": 314,
                 "y": 843.328125,
@@ -12723,7 +14763,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_customer",
+              "name": "ユーザー編集 qa61_1792777389002_1_customer",
               "background": {
                 "x": 314,
                 "y": 951.59375,
@@ -13146,7 +15186,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_checkout",
+              "name": "ユーザー編集 qa61_1792777389002_checkout",
               "background": {
                 "x": 314,
                 "y": 518.53125,
@@ -13184,7 +15224,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_register",
+              "name": "ユーザー編集 qa61_1792777389002_register",
               "background": {
                 "x": 314,
                 "y": 626.796875,
@@ -13222,7 +15262,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_2_customer",
+              "name": "ユーザー編集 qa61_1792777389002_2_customer",
               "background": {
                 "x": 314,
                 "y": 735.0625,
@@ -13260,7 +15300,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_agent",
+              "name": "ユーザー編集 qa61_1792777389002_1_agent",
               "background": {
                 "x": 314,
                 "y": 843.328125,
@@ -13298,7 +15338,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_customer",
+              "name": "ユーザー編集 qa61_1792777389002_1_customer",
               "background": {
                 "x": 314,
                 "y": 951.59375,
@@ -13599,6 +15639,322 @@
                 "right": 17.437461580548927,
                 "top": 15.42400251116078,
                 "bottom": 16.423890522548163
+              }
+            },
+            {
+              "name": "Close",
+              "background": {
+                "x": 16,
+                "y": 16,
+                "width": 44,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 17,
+                "width": 42,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 16,
+                "width": 44,
+                "height": 44
+              },
+              "glyph": {
+                "x": 31.82687078203474,
+                "y": 31.826871054513113,
+                "width": 12.346257890973767,
+                "height": 12.346260070800781
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": -2.724783740859493e-7,
+                "y": 0.0000010899135034492247
+              },
+              "margins": {
+                "left": 14.826870782034739,
+                "right": 14.826871326991494,
+                "top": 14.826871054513113,
+                "bottom": 14.826868874686106
+              }
+            },
+            {
+              "name": "username",
+              "background": {
+                "x": 16,
+                "y": 127,
+                "width": 358,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 128,
+                "width": 356,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 127,
+                "width": 358,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "name",
+              "background": {
+                "x": 16,
+                "y": 225,
+                "width": 358,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 226,
+                "width": 356,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 225,
+                "width": 358,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "email",
+              "background": {
+                "x": 16,
+                "y": 323,
+                "width": 358,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 324,
+                "width": 356,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 323,
+                "width": 358,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "ant-input-affix-wrapper css-1a9ju7l ant-input-outlined ant-input-password",
+              "background": {
+                "x": 16,
+                "y": 421,
+                "width": 358,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 422,
+                "width": 356,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 421,
+                "width": 358,
+                "height": 44
+              },
+              "glyph": {
+                "x": 348.1878979206085,
+                "y": 436.88333916664124,
+                "width": 13.624221801757812,
+                "height": 12.043869018554688
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 160.00000882148743,
+                "y": -0.0947263240814209
+              },
+              "margins": {
+                "left": 331.1878979206085,
+                "right": 11.187880277633667,
+                "top": 14.883339166641235,
+                "bottom": 15.072791814804077
+              }
+            },
+            {
+              "name": "顧客",
+              "background": {
+                "x": 16,
+                "y": 519,
+                "width": 90,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 520,
+                "width": 88,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 519,
+                "width": 90,
+                "height": 44
+              },
+              "glyph": {
+                "x": 55,
+                "y": 535,
+                "width": 28,
+                "height": 14
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 8,
+                "y": 1
+              },
+              "margins": {
+                "left": 38,
+                "right": 22,
+                "top": 15,
+                "bottom": 13
+              }
+            },
+            {
+              "name": "出品者",
+              "background": {
+                "x": 118,
+                "y": 519,
+                "width": 104,
+                "height": 44
+              },
+              "inner": {
+                "x": 119,
+                "y": 520,
+                "width": 102,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 118,
+                "y": 519,
+                "width": 104,
+                "height": 44
+              },
+              "glyph": {
+                "x": 158,
+                "y": 535,
+                "width": 41,
+                "height": 14
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 8.5,
+                "y": 1
+              },
+              "margins": {
+                "left": 39,
+                "right": 22,
+                "top": 15,
+                "bottom": 13
+              }
+            },
+            {
+              "name": "アカウント有効",
+              "background": {
+                "x": 316,
+                "y": 587,
+                "width": 58,
+                "height": 44
+              },
+              "inner": {
+                "x": 317,
+                "y": 588,
+                "width": 56,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 316,
+                "y": 587,
+                "width": 58,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "キャンセル",
+              "background": {
+                "x": 160,
+                "y": 784,
+                "width": 102,
+                "height": 44
+              },
+              "inner": {
+                "x": 161,
+                "y": 785,
+                "width": 100,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 160,
+                "y": 784,
+                "width": 102,
+                "height": 44
+              },
+              "glyph": {
+                "x": 177,
+                "y": 800,
+                "width": 69,
+                "height": 13
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "margins": {
+                "left": 16,
+                "right": 15,
+                "top": 15,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "保存",
+              "background": {
+                "x": 274,
+                "y": 784,
+                "width": 100,
+                "height": 44
+              },
+              "inner": {
+                "x": 275,
+                "y": 785,
+                "width": 98,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 274,
+                "y": 784,
+                "width": 100,
+                "height": 44
+              },
+              "glyph": {
+                "x": 299.62474727630615,
+                "y": 799,
+                "width": 49.37525272369385,
+                "height": 14
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": 0.31237363815307617,
+                "y": 0
+              },
+              "margins": {
+                "left": 24.624747276306152,
+                "right": 24,
+                "top": 14,
+                "bottom": 14
               }
             }
           ]
@@ -13721,7 +16077,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_checkout",
+              "name": "ユーザー編集 qa61_1792777389002_checkout",
               "background": {
                 "x": 314,
                 "y": 518.53125,
@@ -13759,7 +16115,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_register",
+              "name": "ユーザー編集 qa61_1792777389002_register",
               "background": {
                 "x": 314,
                 "y": 626.796875,
@@ -13797,7 +16153,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_2_customer",
+              "name": "ユーザー編集 qa61_1792777389002_2_customer",
               "background": {
                 "x": 314,
                 "y": 735.0625,
@@ -13835,7 +16191,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_agent",
+              "name": "ユーザー編集 qa61_1792777389002_1_agent",
               "background": {
                 "x": 314,
                 "y": 843.328125,
@@ -13873,7 +16229,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_customer",
+              "name": "ユーザー編集 qa61_1792777389002_1_customer",
               "background": {
                 "x": 314,
                 "y": 951.59375,
@@ -14174,6 +16530,370 @@
                 "right": 17.437461580548927,
                 "top": 15.42400251116078,
                 "bottom": 16.423890522548163
+              }
+            },
+            {
+              "name": "Close",
+              "background": {
+                "x": 16,
+                "y": 16,
+                "width": 44,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 17,
+                "width": 42,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 16,
+                "width": 44,
+                "height": 44
+              },
+              "glyph": {
+                "x": 31.82687078203474,
+                "y": 31.826871054513113,
+                "width": 12.346257890973767,
+                "height": 12.346260070800781
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": -2.724783740859493e-7,
+                "y": 0.0000010899135034492247
+              },
+              "margins": {
+                "left": 14.826870782034739,
+                "right": 14.826871326991494,
+                "top": 14.826871054513113,
+                "bottom": 14.826868874686106
+              }
+            },
+            {
+              "name": "username",
+              "background": {
+                "x": 16,
+                "y": 127,
+                "width": 358,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 128,
+                "width": 356,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 127,
+                "width": 358,
+                "height": 44
+              },
+              "glyph": {
+                "x": 27,
+                "y": 142,
+                "width": 210.00775146484375,
+                "height": 16
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": -62.996124267578125,
+                "y": 1
+              },
+              "margins": {
+                "left": 10,
+                "right": 135.99224853515625,
+                "top": 14,
+                "bottom": 12
+              }
+            },
+            {
+              "name": "name",
+              "background": {
+                "x": 16,
+                "y": 225,
+                "width": 358,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 226,
+                "width": 356,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 225,
+                "width": 358,
+                "height": 44
+              },
+              "glyph": {
+                "x": 27,
+                "y": 240,
+                "width": 336,
+                "height": 14
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 0,
+                "y": 0
+              },
+              "margins": {
+                "left": 10,
+                "right": 10,
+                "top": 14,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "email",
+              "background": {
+                "x": 16,
+                "y": 323,
+                "width": 358,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 324,
+                "width": 356,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 323,
+                "width": 358,
+                "height": 44
+              },
+              "glyph": {
+                "x": 27,
+                "y": 338,
+                "width": 307.9936828613281,
+                "height": 16
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": -14.003158569335938,
+                "y": 1
+              },
+              "margins": {
+                "left": 10,
+                "right": 38.006317138671875,
+                "top": 14,
+                "bottom": 12
+              }
+            },
+            {
+              "name": "ant-input-affix-wrapper css-1a9ju7l ant-input-outlined ant-input-password",
+              "background": {
+                "x": 16,
+                "y": 421,
+                "width": 358,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 422,
+                "width": 356,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 421,
+                "width": 358,
+                "height": 44
+              },
+              "glyph": {
+                "x": 348.1878979206085,
+                "y": 436.88333916664124,
+                "width": 13.624221801757812,
+                "height": 12.043869018554688
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 160.00000882148743,
+                "y": -0.0947263240814209
+              },
+              "margins": {
+                "left": 331.1878979206085,
+                "right": 11.187880277633667,
+                "top": 14.883339166641235,
+                "bottom": 15.072791814804077
+              }
+            },
+            {
+              "name": "顧客",
+              "background": {
+                "x": 16,
+                "y": 543,
+                "width": 90,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 544,
+                "width": 88,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 543,
+                "width": 90,
+                "height": 44
+              },
+              "glyph": {
+                "x": 55,
+                "y": 559,
+                "width": 28,
+                "height": 14
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 8,
+                "y": 1
+              },
+              "margins": {
+                "left": 38,
+                "right": 22,
+                "top": 15,
+                "bottom": 13
+              }
+            },
+            {
+              "name": "出品者",
+              "background": {
+                "x": 118,
+                "y": 543,
+                "width": 104,
+                "height": 44
+              },
+              "inner": {
+                "x": 119,
+                "y": 544,
+                "width": 102,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 118,
+                "y": 543,
+                "width": 104,
+                "height": 44
+              },
+              "glyph": {
+                "x": 158,
+                "y": 559,
+                "width": 41,
+                "height": 14
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 8.5,
+                "y": 1
+              },
+              "margins": {
+                "left": 39,
+                "right": 22,
+                "top": 15,
+                "bottom": 13
+              }
+            },
+            {
+              "name": "アカウント有効",
+              "background": {
+                "x": 316,
+                "y": 611,
+                "width": 58,
+                "height": 44
+              },
+              "inner": {
+                "x": 317,
+                "y": 612,
+                "width": 56,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 316,
+                "y": 611,
+                "width": 58,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "キャンセル",
+              "background": {
+                "x": 160,
+                "y": 784,
+                "width": 102,
+                "height": 44
+              },
+              "inner": {
+                "x": 161,
+                "y": 785,
+                "width": 100,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 160,
+                "y": 784,
+                "width": 102,
+                "height": 44
+              },
+              "glyph": {
+                "x": 177,
+                "y": 800,
+                "width": 69,
+                "height": 13
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "margins": {
+                "left": 16,
+                "right": 15,
+                "top": 15,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "保存",
+              "background": {
+                "x": 274,
+                "y": 784,
+                "width": 100,
+                "height": 44
+              },
+              "inner": {
+                "x": 275,
+                "y": 785,
+                "width": 98,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 274,
+                "y": 784,
+                "width": 100,
+                "height": 44
+              },
+              "glyph": {
+                "x": 299.62474727630615,
+                "y": 799,
+                "width": 49.37525272369385,
+                "height": 14
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": 0.31237363815307617,
+                "y": 0
+              },
+              "margins": {
+                "left": 24.624747276306152,
+                "right": 24,
+                "top": 14,
+                "bottom": 14
               }
             }
           ]
@@ -14305,7 +17025,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_checkout",
+              "name": "編輯使用者 qa61_1792777389002_checkout",
               "background": {
                 "x": 314,
                 "y": 518.53125,
@@ -14343,7 +17063,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_register",
+              "name": "編輯使用者 qa61_1792777389002_register",
               "background": {
                 "x": 314,
                 "y": 626.796875,
@@ -14381,7 +17101,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_2_customer",
+              "name": "編輯使用者 qa61_1792777389002_2_customer",
               "background": {
                 "x": 314,
                 "y": 735.0625,
@@ -14419,7 +17139,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_agent",
+              "name": "編輯使用者 qa61_1792777389002_1_agent",
               "background": {
                 "x": 314,
                 "y": 843.328125,
@@ -14457,7 +17177,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_customer",
+              "name": "編輯使用者 qa61_1792777389002_1_customer",
               "background": {
                 "x": 314,
                 "y": 951.59375,
@@ -14880,7 +17600,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_checkout",
+              "name": "編輯使用者 qa61_1792777389002_checkout",
               "background": {
                 "x": 314,
                 "y": 518.53125,
@@ -14918,7 +17638,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_register",
+              "name": "編輯使用者 qa61_1792777389002_register",
               "background": {
                 "x": 314,
                 "y": 626.796875,
@@ -14956,7 +17676,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_2_customer",
+              "name": "編輯使用者 qa61_1792777389002_2_customer",
               "background": {
                 "x": 314,
                 "y": 735.0625,
@@ -14994,7 +17714,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_agent",
+              "name": "編輯使用者 qa61_1792777389002_1_agent",
               "background": {
                 "x": 314,
                 "y": 843.328125,
@@ -15032,7 +17752,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_customer",
+              "name": "編輯使用者 qa61_1792777389002_1_customer",
               "background": {
                 "x": 314,
                 "y": 951.59375,
@@ -15334,6 +18054,322 @@
                 "top": 15.42400251116078,
                 "bottom": 16.423890522548163
               }
+            },
+            {
+              "name": "Close",
+              "background": {
+                "x": 16,
+                "y": 16,
+                "width": 44,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 17,
+                "width": 42,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 16,
+                "width": 44,
+                "height": 44
+              },
+              "glyph": {
+                "x": 31.82687078203474,
+                "y": 31.826871054513113,
+                "width": 12.346257890973767,
+                "height": 12.346260070800781
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": -2.724783740859493e-7,
+                "y": 0.0000010899135034492247
+              },
+              "margins": {
+                "left": 14.826870782034739,
+                "right": 14.826871326991494,
+                "top": 14.826871054513113,
+                "bottom": 14.826868874686106
+              }
+            },
+            {
+              "name": "username",
+              "background": {
+                "x": 16,
+                "y": 127,
+                "width": 358,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 128,
+                "width": 356,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 127,
+                "width": 358,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "name",
+              "background": {
+                "x": 16,
+                "y": 225,
+                "width": 358,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 226,
+                "width": 356,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 225,
+                "width": 358,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "email",
+              "background": {
+                "x": 16,
+                "y": 323,
+                "width": 358,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 324,
+                "width": 356,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 323,
+                "width": 358,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "ant-input-affix-wrapper css-1a9ju7l ant-input-outlined ant-input-password",
+              "background": {
+                "x": 16,
+                "y": 421,
+                "width": 358,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 422,
+                "width": 356,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 421,
+                "width": 358,
+                "height": 44
+              },
+              "glyph": {
+                "x": 348.1878979206085,
+                "y": 436.88333916664124,
+                "width": 13.624221801757812,
+                "height": 12.043869018554688
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 160.00000882148743,
+                "y": -0.0947263240814209
+              },
+              "margins": {
+                "left": 331.1878979206085,
+                "right": 11.187880277633667,
+                "top": 14.883339166641235,
+                "bottom": 15.072791814804077
+              }
+            },
+            {
+              "name": "客戶",
+              "background": {
+                "x": 16,
+                "y": 519,
+                "width": 90,
+                "height": 44
+              },
+              "inner": {
+                "x": 17,
+                "y": 520,
+                "width": 88,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 16,
+                "y": 519,
+                "width": 90,
+                "height": 44
+              },
+              "glyph": {
+                "x": 55,
+                "y": 535,
+                "width": 26,
+                "height": 14
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 7,
+                "y": 1
+              },
+              "margins": {
+                "left": 38,
+                "right": 24,
+                "top": 15,
+                "bottom": 13
+              }
+            },
+            {
+              "name": "商家",
+              "background": {
+                "x": 118,
+                "y": 519,
+                "width": 90,
+                "height": 44
+              },
+              "inner": {
+                "x": 119,
+                "y": 520,
+                "width": 88,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 118,
+                "y": 519,
+                "width": 90,
+                "height": 44
+              },
+              "glyph": {
+                "x": 157,
+                "y": 535,
+                "width": 28,
+                "height": 13
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 8,
+                "y": 0.5
+              },
+              "margins": {
+                "left": 38,
+                "right": 22,
+                "top": 15,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "已啟用",
+              "background": {
+                "x": 316,
+                "y": 587,
+                "width": 58,
+                "height": 44
+              },
+              "inner": {
+                "x": 317,
+                "y": 588,
+                "width": 56,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 316,
+                "y": 587,
+                "width": 58,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "取 消",
+              "background": {
+                "x": 138,
+                "y": 784,
+                "width": 100,
+                "height": 44
+              },
+              "inner": {
+                "x": 139,
+                "y": 785,
+                "width": 98,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 138,
+                "y": 784,
+                "width": 100,
+                "height": 44
+              },
+              "glyph": {
+                "x": 172.421875,
+                "y": 799,
+                "width": 31.125,
+                "height": 14
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": -0.015625,
+                "y": 0
+              },
+              "margins": {
+                "left": 33.421875,
+                "right": 33.453125,
+                "top": 14,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "儲存使用者",
+              "background": {
+                "x": 250,
+                "y": 784,
+                "width": 124,
+                "height": 44
+              },
+              "inner": {
+                "x": 251,
+                "y": 785,
+                "width": 122,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 250,
+                "y": 784,
+                "width": 124,
+                "height": 44
+              },
+              "glyph": {
+                "x": 266.62474727630615,
+                "y": 799,
+                "width": 91.37525272369385,
+                "height": 14
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": 0.31237363815307617,
+                "y": 0
+              },
+              "margins": {
+                "left": 15.624747276306152,
+                "right": 15,
+                "top": 14,
+                "bottom": 14
+              }
             }
           ]
         },
@@ -15455,7 +18491,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_checkout",
+              "name": "編輯使用者 qa61_1792777389002_checkout",
               "background": {
                 "x": 314,
                 "y": 518.53125,
@@ -15493,7 +18529,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_register",
+              "name": "編輯使用者 qa61_1792777389002_register",
               "background": {
                 "x": 314,
                 "y": 626.796875,
@@ -15531,7 +18567,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_2_customer",
+              "name": "編輯使用者 qa61_1792777389002_2_customer",
               "background": {
                 "x": 314,
                 "y": 735.0625,
@@ -15569,7 +18605,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_agent",
+              "name": "編輯使用者 qa61_1792777389002_1_agent",
               "background": {
                 "x": 314,
                 "y": 843.328125,
@@ -15607,7 +18643,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_customer",
+              "name": "編輯使用者 qa61_1792777389002_1_customer",
               "background": {
                 "x": 314,
                 "y": 951.59375,
@@ -16403,7 +19439,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_checkout",
+              "name": "编辑用户 qa61_1792777389002_checkout",
               "background": {
                 "x": 684,
                 "y": 489.765625,
@@ -16441,7 +19477,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_register",
+              "name": "编辑用户 qa61_1792777389002_register",
               "background": {
                 "x": 684,
                 "y": 627.296875,
@@ -16479,7 +19515,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_2_customer",
+              "name": "编辑用户 qa61_1792777389002_2_customer",
               "background": {
                 "x": 684,
                 "y": 775.03125,
@@ -16517,7 +19553,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_agent",
+              "name": "编辑用户 qa61_1792777389002_1_agent",
               "background": {
                 "x": 684,
                 "y": 922.78125,
@@ -16555,7 +19591,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_customer",
+              "name": "编辑用户 qa61_1792777389002_1_customer",
               "background": {
                 "x": 684,
                 "y": 1070.515625,
@@ -16978,7 +20014,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_checkout",
+              "name": "编辑用户 qa61_1792777389002_checkout",
               "background": {
                 "x": 684,
                 "y": 489.765625,
@@ -17016,7 +20052,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_register",
+              "name": "编辑用户 qa61_1792777389002_register",
               "background": {
                 "x": 684,
                 "y": 627.296875,
@@ -17054,7 +20090,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_2_customer",
+              "name": "编辑用户 qa61_1792777389002_2_customer",
               "background": {
                 "x": 684,
                 "y": 775.03125,
@@ -17092,7 +20128,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_agent",
+              "name": "编辑用户 qa61_1792777389002_1_agent",
               "background": {
                 "x": 684,
                 "y": 922.78125,
@@ -17130,7 +20166,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_customer",
+              "name": "编辑用户 qa61_1792777389002_1_customer",
               "background": {
                 "x": 684,
                 "y": 1070.515625,
@@ -17869,7 +20905,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_checkout",
+              "name": "编辑用户 qa61_1792777389002_checkout",
               "background": {
                 "x": 684,
                 "y": 489.765625,
@@ -17907,7 +20943,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_register",
+              "name": "编辑用户 qa61_1792777389002_register",
               "background": {
                 "x": 684,
                 "y": 627.296875,
@@ -17945,7 +20981,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_2_customer",
+              "name": "编辑用户 qa61_1792777389002_2_customer",
               "background": {
                 "x": 684,
                 "y": 775.03125,
@@ -17983,7 +21019,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_agent",
+              "name": "编辑用户 qa61_1792777389002_1_agent",
               "background": {
                 "x": 684,
                 "y": 922.78125,
@@ -18021,7 +21057,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_customer",
+              "name": "编辑用户 qa61_1792777389002_1_customer",
               "background": {
                 "x": 684,
                 "y": 1070.515625,
@@ -18817,7 +21853,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_checkout",
+              "name": "Edit User qa61_1792777389002_checkout",
               "background": {
                 "x": 684,
                 "y": 499.1875,
@@ -18855,7 +21891,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_register",
+              "name": "Edit User qa61_1792777389002_register",
               "background": {
                 "x": 684,
                 "y": 655.5625,
@@ -18893,7 +21929,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_2_customer",
+              "name": "Edit User qa61_1792777389002_2_customer",
               "background": {
                 "x": 684,
                 "y": 822.140625,
@@ -18931,7 +21967,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_agent",
+              "name": "Edit User qa61_1792777389002_1_agent",
               "background": {
                 "x": 684,
                 "y": 988.734375,
@@ -18969,7 +22005,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_customer",
+              "name": "Edit User qa61_1792777389002_1_customer",
               "background": {
                 "x": 684,
                 "y": 1155.3125,
@@ -19392,7 +22428,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_checkout",
+              "name": "Edit User qa61_1792777389002_checkout",
               "background": {
                 "x": 684,
                 "y": 499.1875,
@@ -19430,7 +22466,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_register",
+              "name": "Edit User qa61_1792777389002_register",
               "background": {
                 "x": 684,
                 "y": 655.5625,
@@ -19468,7 +22504,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_2_customer",
+              "name": "Edit User qa61_1792777389002_2_customer",
               "background": {
                 "x": 684,
                 "y": 822.140625,
@@ -19506,7 +22542,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_agent",
+              "name": "Edit User qa61_1792777389002_1_agent",
               "background": {
                 "x": 684,
                 "y": 988.734375,
@@ -19544,7 +22580,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_customer",
+              "name": "Edit User qa61_1792777389002_1_customer",
               "background": {
                 "x": 684,
                 "y": 1155.3125,
@@ -20283,7 +23319,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_checkout",
+              "name": "Edit User qa61_1792777389002_checkout",
               "background": {
                 "x": 684,
                 "y": 499.1875,
@@ -20321,7 +23357,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_register",
+              "name": "Edit User qa61_1792777389002_register",
               "background": {
                 "x": 684,
                 "y": 655.5625,
@@ -20359,7 +23395,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_2_customer",
+              "name": "Edit User qa61_1792777389002_2_customer",
               "background": {
                 "x": 684,
                 "y": 822.140625,
@@ -20397,7 +23433,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_agent",
+              "name": "Edit User qa61_1792777389002_1_agent",
               "background": {
                 "x": 684,
                 "y": 988.734375,
@@ -20435,7 +23471,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_customer",
+              "name": "Edit User qa61_1792777389002_1_customer",
               "background": {
                 "x": 684,
                 "y": 1155.3125,
@@ -21231,7 +24267,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_checkout",
+              "name": "ユーザー編集 qa61_1792777389002_checkout",
               "background": {
                 "x": 684,
                 "y": 508.609375,
@@ -21269,7 +24305,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_register",
+              "name": "ユーザー編集 qa61_1792777389002_register",
               "background": {
                 "x": 684,
                 "y": 646.140625,
@@ -21307,7 +24343,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_2_customer",
+              "name": "ユーザー編集 qa61_1792777389002_2_customer",
               "background": {
                 "x": 684,
                 "y": 793.875,
@@ -21345,7 +24381,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_agent",
+              "name": "ユーザー編集 qa61_1792777389002_1_agent",
               "background": {
                 "x": 684,
                 "y": 941.625,
@@ -21383,7 +24419,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_customer",
+              "name": "ユーザー編集 qa61_1792777389002_1_customer",
               "background": {
                 "x": 684,
                 "y": 1089.359375,
@@ -21806,7 +24842,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_checkout",
+              "name": "ユーザー編集 qa61_1792777389002_checkout",
               "background": {
                 "x": 684,
                 "y": 508.609375,
@@ -21844,7 +24880,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_register",
+              "name": "ユーザー編集 qa61_1792777389002_register",
               "background": {
                 "x": 684,
                 "y": 646.140625,
@@ -21882,7 +24918,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_2_customer",
+              "name": "ユーザー編集 qa61_1792777389002_2_customer",
               "background": {
                 "x": 684,
                 "y": 793.875,
@@ -21920,7 +24956,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_agent",
+              "name": "ユーザー編集 qa61_1792777389002_1_agent",
               "background": {
                 "x": 684,
                 "y": 941.625,
@@ -21958,7 +24994,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_customer",
+              "name": "ユーザー編集 qa61_1792777389002_1_customer",
               "background": {
                 "x": 684,
                 "y": 1089.359375,
@@ -22697,7 +25733,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_checkout",
+              "name": "ユーザー編集 qa61_1792777389002_checkout",
               "background": {
                 "x": 684,
                 "y": 508.609375,
@@ -22735,7 +25771,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_register",
+              "name": "ユーザー編集 qa61_1792777389002_register",
               "background": {
                 "x": 684,
                 "y": 646.140625,
@@ -22773,7 +25809,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_2_customer",
+              "name": "ユーザー編集 qa61_1792777389002_2_customer",
               "background": {
                 "x": 684,
                 "y": 793.875,
@@ -22811,7 +25847,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_agent",
+              "name": "ユーザー編集 qa61_1792777389002_1_agent",
               "background": {
                 "x": 684,
                 "y": 941.625,
@@ -22849,7 +25885,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_customer",
+              "name": "ユーザー編集 qa61_1792777389002_1_customer",
               "background": {
                 "x": 684,
                 "y": 1089.359375,
@@ -23645,7 +26681,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_checkout",
+              "name": "編輯使用者 qa61_1792777389002_checkout",
               "background": {
                 "x": 684,
                 "y": 499.1875,
@@ -23683,7 +26719,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_register",
+              "name": "編輯使用者 qa61_1792777389002_register",
               "background": {
                 "x": 684,
                 "y": 655.5625,
@@ -23721,7 +26757,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_2_customer",
+              "name": "編輯使用者 qa61_1792777389002_2_customer",
               "background": {
                 "x": 684,
                 "y": 822.140625,
@@ -23759,7 +26795,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_agent",
+              "name": "編輯使用者 qa61_1792777389002_1_agent",
               "background": {
                 "x": 684,
                 "y": 988.734375,
@@ -23797,7 +26833,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_customer",
+              "name": "編輯使用者 qa61_1792777389002_1_customer",
               "background": {
                 "x": 684,
                 "y": 1155.3125,
@@ -24220,7 +27256,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_checkout",
+              "name": "編輯使用者 qa61_1792777389002_checkout",
               "background": {
                 "x": 684,
                 "y": 499.1875,
@@ -24258,7 +27294,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_register",
+              "name": "編輯使用者 qa61_1792777389002_register",
               "background": {
                 "x": 684,
                 "y": 655.5625,
@@ -24296,7 +27332,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_2_customer",
+              "name": "編輯使用者 qa61_1792777389002_2_customer",
               "background": {
                 "x": 684,
                 "y": 822.140625,
@@ -24334,7 +27370,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_agent",
+              "name": "編輯使用者 qa61_1792777389002_1_agent",
               "background": {
                 "x": 684,
                 "y": 988.734375,
@@ -24372,7 +27408,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_customer",
+              "name": "編輯使用者 qa61_1792777389002_1_customer",
               "background": {
                 "x": 684,
                 "y": 1155.3125,
@@ -24673,6 +27709,322 @@
                 "right": 17.437461580548984,
                 "top": 15.42400251116078,
                 "bottom": 16.423890522547936
+              }
+            },
+            {
+              "name": "Close",
+              "background": {
+                "x": 312,
+                "y": 16,
+                "width": 44,
+                "height": 44
+              },
+              "inner": {
+                "x": 313,
+                "y": 17,
+                "width": 42,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 312,
+                "y": 16,
+                "width": 44,
+                "height": 44
+              },
+              "glyph": {
+                "x": 327.8268707820347,
+                "y": 31.826871054513113,
+                "width": 12.346257890973789,
+                "height": 12.346260070800781
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": -2.7247841671851347e-7,
+                "y": 0.0000010899135034492247
+              },
+              "margins": {
+                "left": 14.826870782034689,
+                "right": 14.826871326991522,
+                "top": 14.826871054513113,
+                "bottom": 14.826868874686106
+              }
+            },
+            {
+              "name": "username",
+              "background": {
+                "x": 312,
+                "y": 131,
+                "width": 432,
+                "height": 44
+              },
+              "inner": {
+                "x": 313,
+                "y": 132,
+                "width": 430,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 312,
+                "y": 131,
+                "width": 432,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "name",
+              "background": {
+                "x": 312,
+                "y": 229,
+                "width": 432,
+                "height": 44
+              },
+              "inner": {
+                "x": 313,
+                "y": 230,
+                "width": 430,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 312,
+                "y": 229,
+                "width": 432,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "email",
+              "background": {
+                "x": 312,
+                "y": 327,
+                "width": 432,
+                "height": 44
+              },
+              "inner": {
+                "x": 313,
+                "y": 328,
+                "width": 430,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 312,
+                "y": 327,
+                "width": 432,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "ant-input-affix-wrapper css-1a9ju7l ant-input-outlined ant-input-password",
+              "background": {
+                "x": 312,
+                "y": 425,
+                "width": 432,
+                "height": 44
+              },
+              "inner": {
+                "x": 313,
+                "y": 426,
+                "width": 430,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 312,
+                "y": 425,
+                "width": 432,
+                "height": 44
+              },
+              "glyph": {
+                "x": 718.1878979206085,
+                "y": 440.88333916664124,
+                "width": 13.624221801757812,
+                "height": 12.043869018554688
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 197.00000882148743,
+                "y": -0.0947263240814209
+              },
+              "margins": {
+                "left": 405.1878979206085,
+                "right": 11.187880277633667,
+                "top": 14.883339166641235,
+                "bottom": 15.072791814804077
+              }
+            },
+            {
+              "name": "客戶",
+              "background": {
+                "x": 312,
+                "y": 523,
+                "width": 90,
+                "height": 44
+              },
+              "inner": {
+                "x": 313,
+                "y": 524,
+                "width": 88,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 312,
+                "y": 523,
+                "width": 90,
+                "height": 44
+              },
+              "glyph": {
+                "x": 351,
+                "y": 539,
+                "width": 26,
+                "height": 14
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 7,
+                "y": 1
+              },
+              "margins": {
+                "left": 38,
+                "right": 24,
+                "top": 15,
+                "bottom": 13
+              }
+            },
+            {
+              "name": "商家",
+              "background": {
+                "x": 414,
+                "y": 523,
+                "width": 90,
+                "height": 44
+              },
+              "inner": {
+                "x": 415,
+                "y": 524,
+                "width": 88,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 414,
+                "y": 523,
+                "width": 90,
+                "height": 44
+              },
+              "glyph": {
+                "x": 453,
+                "y": 539,
+                "width": 28,
+                "height": 13
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 8,
+                "y": 0.5
+              },
+              "margins": {
+                "left": 38,
+                "right": 22,
+                "top": 15,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "已啟用",
+              "background": {
+                "x": 686,
+                "y": 591,
+                "width": 58,
+                "height": 44
+              },
+              "inner": {
+                "x": 687,
+                "y": 592,
+                "width": 56,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 686,
+                "y": 591,
+                "width": 58,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "取 消",
+              "background": {
+                "x": 516,
+                "y": 964,
+                "width": 100,
+                "height": 44
+              },
+              "inner": {
+                "x": 517,
+                "y": 965,
+                "width": 98,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 516,
+                "y": 964,
+                "width": 100,
+                "height": 44
+              },
+              "glyph": {
+                "x": 550.421875,
+                "y": 979,
+                "width": 31.125,
+                "height": 14
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": -0.015625,
+                "y": 0
+              },
+              "margins": {
+                "left": 33.421875,
+                "right": 33.453125,
+                "top": 14,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "儲存使用者",
+              "background": {
+                "x": 628,
+                "y": 964,
+                "width": 124,
+                "height": 44
+              },
+              "inner": {
+                "x": 629,
+                "y": 965,
+                "width": 122,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 628,
+                "y": 964,
+                "width": 124,
+                "height": 44
+              },
+              "glyph": {
+                "x": 644.6247472763062,
+                "y": 979,
+                "width": 91.37525272369385,
+                "height": 14
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": 0.31237363815307617,
+                "y": 0
+              },
+              "margins": {
+                "left": 15.624747276306152,
+                "right": 15,
+                "top": 14,
+                "bottom": 14
               }
             }
           ]
@@ -24795,7 +28147,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_checkout",
+              "name": "編輯使用者 qa61_1792777389002_checkout",
               "background": {
                 "x": 684,
                 "y": 499.1875,
@@ -24833,7 +28185,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_register",
+              "name": "編輯使用者 qa61_1792777389002_register",
               "background": {
                 "x": 684,
                 "y": 655.5625,
@@ -24871,7 +28223,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_2_customer",
+              "name": "編輯使用者 qa61_1792777389002_2_customer",
               "background": {
                 "x": 684,
                 "y": 822.140625,
@@ -24909,7 +28261,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_agent",
+              "name": "編輯使用者 qa61_1792777389002_1_agent",
               "background": {
                 "x": 684,
                 "y": 988.734375,
@@ -24947,7 +28299,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_customer",
+              "name": "編輯使用者 qa61_1792777389002_1_customer",
               "background": {
                 "x": 684,
                 "y": 1155.3125,
@@ -25248,6 +28600,370 @@
                 "right": 17.437461580548984,
                 "top": 15.42400251116078,
                 "bottom": 16.423890522547936
+              }
+            },
+            {
+              "name": "Close",
+              "background": {
+                "x": 312,
+                "y": 16,
+                "width": 44,
+                "height": 44
+              },
+              "inner": {
+                "x": 313,
+                "y": 17,
+                "width": 42,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 312,
+                "y": 16,
+                "width": 44,
+                "height": 44
+              },
+              "glyph": {
+                "x": 327.8268707820347,
+                "y": 31.826871054513113,
+                "width": 12.346257890973789,
+                "height": 12.346260070800781
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": -2.7247841671851347e-7,
+                "y": 0.0000010899135034492247
+              },
+              "margins": {
+                "left": 14.826870782034689,
+                "right": 14.826871326991522,
+                "top": 14.826871054513113,
+                "bottom": 14.826868874686106
+              }
+            },
+            {
+              "name": "username",
+              "background": {
+                "x": 312,
+                "y": 131,
+                "width": 432,
+                "height": 44
+              },
+              "inner": {
+                "x": 313,
+                "y": 132,
+                "width": 430,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 312,
+                "y": 131,
+                "width": 432,
+                "height": 44
+              },
+              "glyph": {
+                "x": 323,
+                "y": 146,
+                "width": 210.00775146484375,
+                "height": 16
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": -99.99612426757812,
+                "y": 1
+              },
+              "margins": {
+                "left": 10,
+                "right": 209.99224853515625,
+                "top": 14,
+                "bottom": 12
+              }
+            },
+            {
+              "name": "name",
+              "background": {
+                "x": 312,
+                "y": 229,
+                "width": 432,
+                "height": 44
+              },
+              "inner": {
+                "x": 313,
+                "y": 230,
+                "width": 430,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 312,
+                "y": 229,
+                "width": 432,
+                "height": 44
+              },
+              "glyph": {
+                "x": 323,
+                "y": 244,
+                "width": 410,
+                "height": 14
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 0,
+                "y": 0
+              },
+              "margins": {
+                "left": 10,
+                "right": 10,
+                "top": 14,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "email",
+              "background": {
+                "x": 312,
+                "y": 327,
+                "width": 432,
+                "height": 44
+              },
+              "inner": {
+                "x": 313,
+                "y": 328,
+                "width": 430,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 312,
+                "y": 327,
+                "width": 432,
+                "height": 44
+              },
+              "glyph": {
+                "x": 323,
+                "y": 342,
+                "width": 307.9936828613281,
+                "height": 16
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": -51.00315856933594,
+                "y": 1
+              },
+              "margins": {
+                "left": 10,
+                "right": 112.00631713867188,
+                "top": 14,
+                "bottom": 12
+              }
+            },
+            {
+              "name": "ant-input-affix-wrapper css-1a9ju7l ant-input-outlined ant-input-password",
+              "background": {
+                "x": 312,
+                "y": 425,
+                "width": 432,
+                "height": 44
+              },
+              "inner": {
+                "x": 313,
+                "y": 426,
+                "width": 430,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 312,
+                "y": 425,
+                "width": 432,
+                "height": 44
+              },
+              "glyph": {
+                "x": 718.1878979206085,
+                "y": 440.88333916664124,
+                "width": 13.624221801757812,
+                "height": 12.043869018554688
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 197.00000882148743,
+                "y": -0.0947263240814209
+              },
+              "margins": {
+                "left": 405.1878979206085,
+                "right": 11.187880277633667,
+                "top": 14.883339166641235,
+                "bottom": 15.072791814804077
+              }
+            },
+            {
+              "name": "客戶",
+              "background": {
+                "x": 312,
+                "y": 547,
+                "width": 90,
+                "height": 44
+              },
+              "inner": {
+                "x": 313,
+                "y": 548,
+                "width": 88,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 312,
+                "y": 547,
+                "width": 90,
+                "height": 44
+              },
+              "glyph": {
+                "x": 351,
+                "y": 563,
+                "width": 26,
+                "height": 14
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 7,
+                "y": 1
+              },
+              "margins": {
+                "left": 38,
+                "right": 24,
+                "top": 15,
+                "bottom": 13
+              }
+            },
+            {
+              "name": "商家",
+              "background": {
+                "x": 414,
+                "y": 547,
+                "width": 90,
+                "height": 44
+              },
+              "inner": {
+                "x": 415,
+                "y": 548,
+                "width": 88,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 414,
+                "y": 547,
+                "width": 90,
+                "height": 44
+              },
+              "glyph": {
+                "x": 453,
+                "y": 563,
+                "width": 28,
+                "height": 13
+              },
+              "alignment": "start",
+              "centerError": {
+                "x": 8,
+                "y": 0.5
+              },
+              "margins": {
+                "left": 38,
+                "right": 22,
+                "top": 15,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "已啟用",
+              "background": {
+                "x": 686,
+                "y": 615,
+                "width": 58,
+                "height": 44
+              },
+              "inner": {
+                "x": 687,
+                "y": 616,
+                "width": 56,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 686,
+                "y": 615,
+                "width": 58,
+                "height": 44
+              },
+              "glyph": null
+            },
+            {
+              "name": "取 消",
+              "background": {
+                "x": 516,
+                "y": 964,
+                "width": 100,
+                "height": 44
+              },
+              "inner": {
+                "x": 517,
+                "y": 965,
+                "width": 98,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 516,
+                "y": 964,
+                "width": 100,
+                "height": 44
+              },
+              "glyph": {
+                "x": 550.421875,
+                "y": 979,
+                "width": 31.125,
+                "height": 14
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": -0.015625,
+                "y": 0
+              },
+              "margins": {
+                "left": 33.421875,
+                "right": 33.453125,
+                "top": 14,
+                "bottom": 14
+              }
+            },
+            {
+              "name": "儲存使用者",
+              "background": {
+                "x": 628,
+                "y": 964,
+                "width": 124,
+                "height": 44
+              },
+              "inner": {
+                "x": 629,
+                "y": 965,
+                "width": 122,
+                "height": 42
+              },
+              "hitArea": {
+                "x": 628,
+                "y": 964,
+                "width": 124,
+                "height": 44
+              },
+              "glyph": {
+                "x": 644.6247472763062,
+                "y": 979,
+                "width": 91.37525272369385,
+                "height": 14
+              },
+              "alignment": "center",
+              "centerError": {
+                "x": 0.31237363815307617,
+                "y": 0
+              },
+              "margins": {
+                "left": 15.624747276306152,
+                "right": 15,
+                "top": 14,
+                "bottom": 14
               }
             }
           ]
@@ -25379,7 +29095,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_checkout",
+              "name": "编辑用户 qa61_1792777389002_checkout",
               "background": {
                 "x": 1348,
                 "y": 467.5,
@@ -25417,7 +29133,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_register",
+              "name": "编辑用户 qa61_1792777389002_register",
               "background": {
                 "x": 1348,
                 "y": 544.5,
@@ -25455,7 +29171,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_2_customer",
+              "name": "编辑用户 qa61_1792777389002_2_customer",
               "background": {
                 "x": 1348,
                 "y": 621.5,
@@ -25493,7 +29209,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_agent",
+              "name": "编辑用户 qa61_1792777389002_1_agent",
               "background": {
                 "x": 1348,
                 "y": 698.5,
@@ -25531,7 +29247,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_customer",
+              "name": "编辑用户 qa61_1792777389002_1_customer",
               "background": {
                 "x": 1348,
                 "y": 775.5,
@@ -25954,7 +29670,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_checkout",
+              "name": "编辑用户 qa61_1792777389002_checkout",
               "background": {
                 "x": 1348,
                 "y": 467.5,
@@ -25992,7 +29708,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_register",
+              "name": "编辑用户 qa61_1792777389002_register",
               "background": {
                 "x": 1348,
                 "y": 544.5,
@@ -26030,7 +29746,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_2_customer",
+              "name": "编辑用户 qa61_1792777389002_2_customer",
               "background": {
                 "x": 1348,
                 "y": 621.5,
@@ -26068,7 +29784,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_agent",
+              "name": "编辑用户 qa61_1792777389002_1_agent",
               "background": {
                 "x": 1348,
                 "y": 698.5,
@@ -26106,7 +29822,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_customer",
+              "name": "编辑用户 qa61_1792777389002_1_customer",
               "background": {
                 "x": 1348,
                 "y": 775.5,
@@ -26845,7 +30561,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_checkout",
+              "name": "编辑用户 qa61_1792777389002_checkout",
               "background": {
                 "x": 1348,
                 "y": 467.5,
@@ -26883,7 +30599,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_register",
+              "name": "编辑用户 qa61_1792777389002_register",
               "background": {
                 "x": 1348,
                 "y": 544.5,
@@ -26921,7 +30637,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_2_customer",
+              "name": "编辑用户 qa61_1792777389002_2_customer",
               "background": {
                 "x": 1348,
                 "y": 621.5,
@@ -26959,7 +30675,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_agent",
+              "name": "编辑用户 qa61_1792777389002_1_agent",
               "background": {
                 "x": 1348,
                 "y": 698.5,
@@ -26997,7 +30713,7 @@
               }
             },
             {
-              "name": "编辑用户 qa61_1792776797832_1_customer",
+              "name": "编辑用户 qa61_1792777389002_1_customer",
               "background": {
                 "x": 1348,
                 "y": 775.5,
@@ -27793,7 +31509,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_checkout",
+              "name": "Edit User qa61_1792777389002_checkout",
               "background": {
                 "x": 1348,
                 "y": 476.5,
@@ -27831,7 +31547,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_register",
+              "name": "Edit User qa61_1792777389002_register",
               "background": {
                 "x": 1348,
                 "y": 571.5,
@@ -27869,7 +31585,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_2_customer",
+              "name": "Edit User qa61_1792777389002_2_customer",
               "background": {
                 "x": 1348,
                 "y": 666.5,
@@ -27907,7 +31623,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_agent",
+              "name": "Edit User qa61_1792777389002_1_agent",
               "background": {
                 "x": 1348,
                 "y": 752.5,
@@ -27945,7 +31661,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_customer",
+              "name": "Edit User qa61_1792777389002_1_customer",
               "background": {
                 "x": 1348,
                 "y": 829.5,
@@ -28368,7 +32084,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_checkout",
+              "name": "Edit User qa61_1792777389002_checkout",
               "background": {
                 "x": 1348,
                 "y": 476.5,
@@ -28406,7 +32122,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_register",
+              "name": "Edit User qa61_1792777389002_register",
               "background": {
                 "x": 1348,
                 "y": 571.5,
@@ -28444,7 +32160,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_2_customer",
+              "name": "Edit User qa61_1792777389002_2_customer",
               "background": {
                 "x": 1348,
                 "y": 666.5,
@@ -28482,7 +32198,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_agent",
+              "name": "Edit User qa61_1792777389002_1_agent",
               "background": {
                 "x": 1348,
                 "y": 752.5,
@@ -28520,7 +32236,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_customer",
+              "name": "Edit User qa61_1792777389002_1_customer",
               "background": {
                 "x": 1348,
                 "y": 829.5,
@@ -29259,7 +32975,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_checkout",
+              "name": "Edit User qa61_1792777389002_checkout",
               "background": {
                 "x": 1348,
                 "y": 476.5,
@@ -29297,7 +33013,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_register",
+              "name": "Edit User qa61_1792777389002_register",
               "background": {
                 "x": 1348,
                 "y": 571.5,
@@ -29335,7 +33051,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_2_customer",
+              "name": "Edit User qa61_1792777389002_2_customer",
               "background": {
                 "x": 1348,
                 "y": 666.5,
@@ -29373,7 +33089,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_agent",
+              "name": "Edit User qa61_1792777389002_1_agent",
               "background": {
                 "x": 1348,
                 "y": 752.5,
@@ -29411,7 +33127,7 @@
               }
             },
             {
-              "name": "Edit User qa61_1792776797832_1_customer",
+              "name": "Edit User qa61_1792777389002_1_customer",
               "background": {
                 "x": 1348,
                 "y": 829.5,
@@ -30207,7 +33923,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_checkout",
+              "name": "ユーザー編集 qa61_1792777389002_checkout",
               "background": {
                 "x": 1348,
                 "y": 467.5,
@@ -30245,7 +33961,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_register",
+              "name": "ユーザー編集 qa61_1792777389002_register",
               "background": {
                 "x": 1348,
                 "y": 544.5,
@@ -30283,7 +33999,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_2_customer",
+              "name": "ユーザー編集 qa61_1792777389002_2_customer",
               "background": {
                 "x": 1348,
                 "y": 621.5,
@@ -30321,7 +34037,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_agent",
+              "name": "ユーザー編集 qa61_1792777389002_1_agent",
               "background": {
                 "x": 1348,
                 "y": 698.5,
@@ -30359,7 +34075,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_customer",
+              "name": "ユーザー編集 qa61_1792777389002_1_customer",
               "background": {
                 "x": 1348,
                 "y": 775.5,
@@ -30782,7 +34498,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_checkout",
+              "name": "ユーザー編集 qa61_1792777389002_checkout",
               "background": {
                 "x": 1348,
                 "y": 467.5,
@@ -30820,7 +34536,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_register",
+              "name": "ユーザー編集 qa61_1792777389002_register",
               "background": {
                 "x": 1348,
                 "y": 544.5,
@@ -30858,7 +34574,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_2_customer",
+              "name": "ユーザー編集 qa61_1792777389002_2_customer",
               "background": {
                 "x": 1348,
                 "y": 621.5,
@@ -30896,7 +34612,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_agent",
+              "name": "ユーザー編集 qa61_1792777389002_1_agent",
               "background": {
                 "x": 1348,
                 "y": 698.5,
@@ -30934,7 +34650,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_customer",
+              "name": "ユーザー編集 qa61_1792777389002_1_customer",
               "background": {
                 "x": 1348,
                 "y": 775.5,
@@ -31673,7 +35389,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_checkout",
+              "name": "ユーザー編集 qa61_1792777389002_checkout",
               "background": {
                 "x": 1348,
                 "y": 467.5,
@@ -31711,7 +35427,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_register",
+              "name": "ユーザー編集 qa61_1792777389002_register",
               "background": {
                 "x": 1348,
                 "y": 544.5,
@@ -31749,7 +35465,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_2_customer",
+              "name": "ユーザー編集 qa61_1792777389002_2_customer",
               "background": {
                 "x": 1348,
                 "y": 621.5,
@@ -31787,7 +35503,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_agent",
+              "name": "ユーザー編集 qa61_1792777389002_1_agent",
               "background": {
                 "x": 1348,
                 "y": 698.5,
@@ -31825,7 +35541,7 @@
               }
             },
             {
-              "name": "ユーザー編集 qa61_1792776797832_1_customer",
+              "name": "ユーザー編集 qa61_1792777389002_1_customer",
               "background": {
                 "x": 1348,
                 "y": 775.5,
@@ -32621,7 +36337,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_checkout",
+              "name": "編輯使用者 qa61_1792777389002_checkout",
               "background": {
                 "x": 1348,
                 "y": 467.5,
@@ -32659,7 +36375,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_register",
+              "name": "編輯使用者 qa61_1792777389002_register",
               "background": {
                 "x": 1348,
                 "y": 544.5,
@@ -32697,7 +36413,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_2_customer",
+              "name": "編輯使用者 qa61_1792777389002_2_customer",
               "background": {
                 "x": 1348,
                 "y": 621.5,
@@ -32735,7 +36451,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_agent",
+              "name": "編輯使用者 qa61_1792777389002_1_agent",
               "background": {
                 "x": 1348,
                 "y": 698.5,
@@ -32773,7 +36489,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_customer",
+              "name": "編輯使用者 qa61_1792777389002_1_customer",
               "background": {
                 "x": 1348,
                 "y": 775.5,
@@ -33196,7 +36912,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_checkout",
+              "name": "編輯使用者 qa61_1792777389002_checkout",
               "background": {
                 "x": 1348,
                 "y": 467.5,
@@ -33234,7 +36950,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_register",
+              "name": "編輯使用者 qa61_1792777389002_register",
               "background": {
                 "x": 1348,
                 "y": 544.5,
@@ -33272,7 +36988,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_2_customer",
+              "name": "編輯使用者 qa61_1792777389002_2_customer",
               "background": {
                 "x": 1348,
                 "y": 621.5,
@@ -33310,7 +37026,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_agent",
+              "name": "編輯使用者 qa61_1792777389002_1_agent",
               "background": {
                 "x": 1348,
                 "y": 698.5,
@@ -33348,7 +37064,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_customer",
+              "name": "編輯使用者 qa61_1792777389002_1_customer",
               "background": {
                 "x": 1348,
                 "y": 775.5,
@@ -34087,7 +37803,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_checkout",
+              "name": "編輯使用者 qa61_1792777389002_checkout",
               "background": {
                 "x": 1348,
                 "y": 467.5,
@@ -34125,7 +37841,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_register",
+              "name": "編輯使用者 qa61_1792777389002_register",
               "background": {
                 "x": 1348,
                 "y": 544.5,
@@ -34163,7 +37879,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_2_customer",
+              "name": "編輯使用者 qa61_1792777389002_2_customer",
               "background": {
                 "x": 1348,
                 "y": 621.5,
@@ -34201,7 +37917,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_agent",
+              "name": "編輯使用者 qa61_1792777389002_1_agent",
               "background": {
                 "x": 1348,
                 "y": 698.5,
@@ -34239,7 +37955,7 @@
               }
             },
             {
-              "name": "編輯使用者 qa61_1792776797832_1_customer",
+              "name": "編輯使用者 qa61_1792777389002_1_customer",
               "background": {
                 "x": 1348,
                 "y": 775.5,

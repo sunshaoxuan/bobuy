@@ -1,0 +1,17 @@
+{
+  "release": "20261024.1",
+  "origin": "https://bobuy.cc",
+  "checks": {
+    "cloudflareHttpsAndExactAssets": "PASS",
+    "redirectsAndHealth": "PASS",
+    "actualAdminFormRedirectAndReload": "PASS",
+    "adminLoginSecureCookieCsrfRefreshLogout": "PASS"
+  },
+  "assets": [
+    "/assets/index-BWQFtmOe.js",
+    "/assets/vendor-BLuLpG8F.js",
+    "/assets/chat-flow-BmHMd-hq.js",
+    "/assets/index-yrqmkgg0.css"
+  ],
+  "result": "PASS"
+}
