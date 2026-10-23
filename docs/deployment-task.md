@@ -1,5 +1,31 @@
 # Bobuy deployment task
 
+## Production operator rename (2026-10-23 JST)
+
+Objective: rename existing bobuy-admin to admin and set the user-specified test
+password. Preserve account ID, enabled state, role, business data and all running
+containers. Never record the password, hash, access tokens or refresh tokens in
+source, logs or receipts. Main Agent performs this narrow credential operation.
+Method: inspect existing BCrypt/session handling; securely pass the credential
+in memory over SSH stdin; stage the root-only credential JSON and update the
+existing user plus revoke that user's refresh sessions in one SQL transaction.
+Restore the previous credential JSON if the SQL transaction fails. No schema
+migration, image build, service restart or other-account change is required.
+Verify real HTTPS login with admin, rejection of old username and old password,
+unchanged ID/role, credential-file mode 0600 and browser dashboard load. Existing
+access JWTs retain their configured expiry; immediate JWT revocation is outside
+this rename operation. Status: PASS, completed 2026-10-23 JST.
+
+Actual production checks: new admin login HTTP 200; old username with either old
+or new password HTTP 401; admin with previous password HTTP 401; pre-change
+refresh session HTTP 401. Account ID and AGENT role unchanged; saved credential
+JSON matches the requested values and remains 0600. Real 1440x1000 Chrome login
+loads /admin/dashboard and all three initial data APIs return 200, with zero
+page/console/HTTP errors; logout 200. Protected-node before/after state identical.
+No service restart or source behavior change. Password only passed in memory to
+SSH stdin and the authorized root-only credential destination; omitted from this
+record. [Receipt](reports/evidence/release-20261023.1/operator-rename.json).
+
 ## Current release request (2026-10-23 JST)
 
 Objective: publish source 9924339 to the existing bobuy.cc production group.

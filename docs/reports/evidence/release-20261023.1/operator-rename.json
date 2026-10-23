@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-23",
+  "timezone": "Asia/Tokyo",
+  "environment": "https://bobuy.cc",
+  "result": "PASS",
+  "username": "admin",
+  "role": "AGENT",
+  "idPreserved": true,
+  "credentialFileMode": "0600",
+  "newLogin": 200,
+  "oldUsernameRejected": 401,
+  "oldPasswordRejected": 401,
+  "previousRefreshRevoked": 401,
+  "browserDashboard": "PASS",
+  "viewport": { "width": 1440, "height": 1000 },
+  "consoleAndHttpErrors": 0,
+  "protectedState": "UNCHANGED",
+  "serviceRestart": false,
+  "accessJwtImmediateRevocation": "NOT_PERFORMED; existing expiry retained"
+}

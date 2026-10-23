@@ -34,6 +34,12 @@ schema migration. It accepts only an empty user table and stores its randomly
 generated credentials in /etc/bobuy-admin.json with mode 0600 on the node.
 The bootstrap uses the node's Python 3.12 crypt BCrypt support.
 
+Current production operator username is admin following the user-authorized
+2026-10-23 rename. Its ID and AGENT permissions are unchanged. Password is stored
+only in the root-only credential file; no universal default password. Rotation
+revoked the account's prior refresh sessions. Existing signed access JWTs retain
+their configured expiry; this operation did not rotate the shared signing key.
+
 The original MinIO container registries are unavailable. Build
 infra/minio.Dockerfile from the fixed upstream release into bobuy/minio.
 The upstream community repository is archived; track storage maintenance as an
