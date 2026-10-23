@@ -21,7 +21,7 @@ export default function LoginPage() {
     setError(null);
     try {
       const user = await login(values.username, values.password);
-      navigate(user.role === 'AGENT' ? '/admin/dashboard' : '/', { replace: true });
+      navigate(user.platformAdmin ? '/admin/users' : user.roles.includes('AGENT') ? '/admin/dashboard' : '/', { replace: true });
     } catch (loginError) {
       setError(loginError instanceof Error ? loginError.message : t('errors.request_failed'));
     } finally {

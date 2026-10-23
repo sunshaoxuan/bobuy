@@ -70,7 +70,7 @@ export type Order = {
 export type User = {
     id: number;
     name: string;
-    role: string;
+    roles: Array<'CUSTOMER' | 'AGENT'>;
     rating: number;
     phone?: string;
     email?: string;
@@ -93,6 +93,18 @@ export type User = {
         note?: string;
     }>;
 };
+
+export type ManagedUser = {
+    id: number;
+    username: string;
+    name: string;
+    email: string;
+    roles: Array<'CUSTOMER' | 'AGENT'>;
+    enabled: boolean;
+    platformAdmin: boolean;
+    emailVerified: boolean;
+};
+export type UserEdit = Pick<ManagedUser, 'username' | 'name' | 'email' | 'roles' | 'enabled'> & { password?: string };
 
 export type AiExtractedItem = {
     id: string;
@@ -595,7 +607,7 @@ const fallback = {
         {
             id: 1000,
             name: 'Aiko Tan',
-            role: 'AGENT',
+            roles: ['AGENT' as const],
             rating: 4.8,
             phone: '+81-90-1000-0000',
             email: 'aiko@bobbuy.test',
@@ -613,7 +625,7 @@ const fallback = {
         {
             id: 1001,
             name: 'Chen Li',
-            role: 'CUSTOMER',
+            roles: ['CUSTOMER' as const],
             rating: 4.6,
             phone: '+86-138-0000-0001',
             email: 'chen.li@bobbuy.test',
@@ -995,7 +1007,7 @@ export const api = {
                 id: 0,
                 username: '',
                 name: '',
-                role: 'CUSTOMER'
+                roles: ['CUSTOMER']
             })
     },
     metrics: () => fetchJson<Metrics>('/api/metrics', fallback.metrics),
@@ -1006,10 +1018,16 @@ export const api = {
             fallback.orders
         ),
     users: () => fetchJson<User[]>('/api/users', fallback.users),
-    createUser: (user: Omit<User, 'id'>) =>
-        postJson<User, Omit<User, 'id'>>('/api/users', user),
-    updateUser: (id: number, user: Omit<User, 'id'>) =>
-        putJson<User, Omit<User, 'id'>>(`/api/users/${id}`, user),
+    adminUsers: () => fetchJson<ManagedUser[]>('/api/admin/users', []),
+    customerTrips: () => fetchJson<Trip[]>('/api/customer/trips', []),
+    customerOrders: (tripId: number) => fetchJson<Order[]>(`/api/customer/orders?tripId=${tripId}`, []),
+    customerViewLedger: (tripId: number) => fetchJson<CustomerBalanceLedgerEntry[]>(`/api/customer/procurement/${tripId}/ledger`, []),
+    confirmOwnLedger: (tripId: number, businessId: string, action: 'RECEIPT' | 'BILLING') =>
+        postJson<CustomerBalanceLedgerEntry, { action: 'RECEIPT' | 'BILLING' }>(`/api/customer/procurement/${tripId}/ledger/${encodeURIComponent(businessId)}/confirm`, { action }),
+    registerAccount: (account: { username: string; password: string; email: string }, roles: Array<'CUSTOMER' | 'AGENT'>) =>
+        postJson<AuthSessionResponse, { account: typeof account; roles: typeof roles }>('/api/auth/register-account', { account, roles }, { includeAccessToken: false, retryOnUnauthorized: false }),
+    createUser: (user: UserEdit) => postJson<ManagedUser, UserEdit>('/api/admin/users', user),
+    updateUser: (id: number, user: UserEdit) => putJson<ManagedUser, UserEdit>(`/api/admin/users/${id}`, user),
     createTrip: (trip: Omit<Trip, 'id' | 'statusUpdatedAt' | 'remainingCapacity'>) =>
         postJson<Trip, Omit<Trip, 'id' | 'statusUpdatedAt' | 'remainingCapacity'>>('/api/trips', trip),
     createOrder: (order: Omit<Order, 'id' | 'statusUpdatedAt' | 'totalAmount'>) =>

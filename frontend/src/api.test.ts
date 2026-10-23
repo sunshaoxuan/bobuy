@@ -27,7 +27,7 @@ describe('api authentication headers and refresh recovery', () => {
         id: 1000,
         username: 'agent',
         name: 'Aiko Tan',
-        role: 'AGENT'
+        roles: ['AGENT']
       }
     });
 
@@ -62,7 +62,7 @@ describe('api authentication headers and refresh recovery', () => {
               id: 1000,
               username: 'agent',
               name: 'Aiko Tan',
-              role: 'AGENT'
+              roles: ['AGENT']
             }
           }
         })
@@ -83,7 +83,7 @@ describe('api authentication headers and refresh recovery', () => {
         id: 1000,
         username: 'agent',
         name: 'Aiko Tan',
-        role: 'AGENT'
+        roles: ['AGENT']
       }
     });
 
@@ -132,7 +132,7 @@ describe('api authentication headers and refresh recovery', () => {
               id: 1000,
               username: 'agent',
               name: 'Aiko Tan',
-              role: 'AGENT'
+              roles: ['AGENT']
             }
           }
         })
@@ -153,7 +153,7 @@ describe('api authentication headers and refresh recovery', () => {
         id: 1000,
         username: 'agent',
         name: 'Aiko Tan',
-        role: 'AGENT'
+        roles: ['AGENT']
       }
     });
 
@@ -188,7 +188,7 @@ describe('api authentication headers and refresh recovery', () => {
         id: 1000,
         username: 'agent',
         name: 'Aiko Tan',
-        role: 'AGENT'
+        roles: ['AGENT']
       }
     });
 

@@ -44,7 +44,7 @@ class StorefrontIntegrationTest {
         return json.readTree(mvc.perform(post("/api/auth/register").contentType(MediaType.APPLICATION_JSON)
             .content(json.writeValueAsString(Map.of("username", name, "password", "valid-password", "email", name + "@example.com"))))
             .andExpect(status().isOk()).andExpect(jsonPath("$.data.user.emailVerified").value(false))
-            .andExpect(jsonPath("$.data.user.role").value("CUSTOMER")).andExpect(jsonPath("$.data.refreshToken").doesNotExist())
+            .andExpect(jsonPath("$.data.user.roles[0]").value("CUSTOMER")).andExpect(jsonPath("$.data.refreshToken").doesNotExist())
             .andReturn().getResponse().getContentAsString()).get("data");
     }
     String token(JsonNode registration) { return registration.get("accessToken").asText(); }

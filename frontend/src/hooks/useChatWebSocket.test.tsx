@@ -107,7 +107,7 @@ describe('useChatWebSocket', () => {
       accessTokenExpiresAt: '2026-05-01T00:00:00Z',
       refreshToken: 'refresh-456',
       refreshTokenExpiresAt: '2026-05-08T00:00:00Z',
-      user: { id: 1000, username: 'agent', name: 'Aiko Tan', role: 'AGENT' }
+      user: { id: 1000, username: 'agent', name: 'Aiko Tan', roles: ['AGENT'] }
     });
 
     renderHook(() =>

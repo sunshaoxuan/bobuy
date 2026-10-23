@@ -20,13 +20,13 @@ export default function ClientOrders() {
     let cancelled = false;
     (async () => {
       try {
-        const tripList = await api.trips();
+        const tripList = await api.customerTrips();
         if (cancelled) return;
         setTrips(tripList);
         const firstTripId = tripList[0]?.id;
         if (firstTripId) {
           setSelectedTripId(firstTripId);
-          setOrders(await api.orders(firstTripId));
+          setOrders(await api.customerOrders(firstTripId));
         }
       } finally {
         if (!cancelled) {
@@ -43,7 +43,7 @@ export default function ClientOrders() {
     setSelectedTripId(tripId);
     setLoading(true);
     try {
-      setOrders(await api.orders(tripId));
+      setOrders(await api.customerOrders(tripId));
     } finally {
       setLoading(false);
     }

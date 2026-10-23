@@ -17,8 +17,8 @@ vi.mock('../api', () => ({
 }));
 
 function Probe() {
-  const { role, isAuthenticated } = useUserRole();
-  return <div>{`${role}:${isAuthenticated}`}</div>;
+  const { roles, isAuthenticated } = useUserRole();
+  return <div>{`${roles.join(',')}:${isAuthenticated}`}</div>;
 }
 
 describe('UserRoleContext', () => {
@@ -42,7 +42,7 @@ describe('UserRoleContext', () => {
       id: 1001,
       username: 'customer',
       name: 'Chen Li',
-      role: 'CUSTOMER'
+      roles: ['CUSTOMER']
     });
     storeAuthSession({
       accessToken: 'token-123',
@@ -53,7 +53,7 @@ describe('UserRoleContext', () => {
         id: 1001,
         username: 'customer',
         name: 'Chen Li',
-        role: 'CUSTOMER'
+        roles: ['CUSTOMER']
       }
     });
     render(

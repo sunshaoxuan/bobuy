@@ -10,7 +10,7 @@ interface ProtectedRouteProps {
 
 export default function ProtectedRoute({ children, allowedRoles, redirectTo }: ProtectedRouteProps) {
   const location = useLocation();
-  const { role, isAuthenticated, loading } = useUserRole();
+  const { roles, isAuthenticated, loading } = useUserRole();
 
   if (loading) {
     return null;
@@ -20,8 +20,8 @@ export default function ProtectedRoute({ children, allowedRoles, redirectTo }: P
     return <Navigate to={location.pathname.startsWith('/admin') ? '/admin' : '/login'} replace state={{ from: location.pathname }} />;
   }
 
-  if (!allowedRoles.includes(role)) {
-    const defaultRedirect = role === 'AGENT' ? '/admin/dashboard' : '/';
+  if (!allowedRoles.some(role => roles.includes(role))) {
+    const defaultRedirect = roles.includes('AGENT') ? '/admin/dashboard' : '/';
     return <Navigate to={redirectTo || defaultRedirect} replace />;
   }
 

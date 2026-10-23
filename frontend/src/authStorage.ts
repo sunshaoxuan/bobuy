@@ -1,10 +1,11 @@
-export type UserRole = 'CUSTOMER' | 'AGENT' | 'MERCHANT';
+export type UserRole = 'CUSTOMER' | 'AGENT';
 
 export type AuthenticatedUser = {
   id: number;
   username: string;
   name: string;
-  role: UserRole;
+  roles: UserRole[];
+  platformAdmin?: boolean;
   email?: string;
   emailVerified?: boolean;
 };
@@ -47,7 +48,8 @@ function parseStoredUser(value: string | null): AuthenticatedUser | null {
       typeof parsed.id === 'number' &&
       typeof parsed.username === 'string' &&
       typeof parsed.name === 'string' &&
-      (parsed.role === 'CUSTOMER' || parsed.role === 'AGENT' || parsed.role === 'MERCHANT')
+      Array.isArray(parsed.roles) && parsed.roles.length > 0 &&
+      parsed.roles.every(role => role === 'CUSTOMER' || role === 'AGENT')
     ) {
       return parsed as AuthenticatedUser;
     }
@@ -140,7 +142,7 @@ export function getTestInjectedRole(): UserRole | null {
     return null;
   }
   const injectedRole = window.localStorage.getItem(TEST_ROLE_KEY);
-  return injectedRole === 'CUSTOMER' || injectedRole === 'AGENT' || injectedRole === 'MERCHANT' ? injectedRole : null;
+  return injectedRole === 'CUSTOMER' || injectedRole === 'AGENT' ? injectedRole : null;
 }
 
 export function getTestInjectedUser(): string | null {

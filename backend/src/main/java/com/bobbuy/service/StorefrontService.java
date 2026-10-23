@@ -59,6 +59,15 @@ public class StorefrontService {
 
     @Transactional
     public User register(Registration request) {
+        return registerWithRoles(request, Set.of(Role.CUSTOMER));
+    }
+
+    @Transactional
+    public User registerAccount(AccountRegistration request) {
+        return registerWithRoles(request.account(), request.roles());
+    }
+
+    private User registerWithRoles(Registration request, Set<Role> roles) {
         if (request.password().getBytes(java.nio.charset.StandardCharsets.UTF_8).length > 72) throw invalid("密码 UTF-8 长度最多 72 字节");
         String username = request.username().trim().toLowerCase(Locale.ROOT);
         String email = request.email().trim().toLowerCase(Locale.ROOT);
@@ -66,6 +75,7 @@ public class StorefrontService {
             throw invalid("用户名或邮箱已被使用");
         }
         User user = new User(nextId(), username, Role.CUSTOMER, 0);
+        user.setRoles(roles);
         user.setUsername(username); user.setEmail(email);
         user.setPasswordHash(passwords.encode(request.password()));
         users.saveAndFlush(user);
@@ -75,7 +85,7 @@ public class StorefrontService {
 
     @Transactional
     public void resend(Authentication authentication) {
-        User user = lockedCustomer(authentication);
+        User user = users.lockById(auth.currentUser(authentication).id()).orElseThrow();
         if (user.getEmailVerifiedAt() != null) return;
         EmailChallenge prior = challenges.findById(user.getId()).orElse(null);
         if (prior != null && prior.sentAt.plusSeconds(60).isAfter(Instant.now())) {
@@ -86,7 +96,7 @@ public class StorefrontService {
 
     @Transactional(noRollbackFor = ApiException.class)
     public void verify(Authentication authentication, String code) {
-        User user = lockedCustomer(authentication);
+        User user = users.lockById(auth.currentUser(authentication).id()).orElseThrow();
         if (user.getEmailVerifiedAt() != null) return;
         EmailChallenge challenge = challenges.findById(user.getId()).orElseThrow(() -> invalid("请重新获取验证码"));
         if (challenge.attempts >= 5 || !challenge.expiresAt.isAfter(Instant.now())) throw invalid("验证码已失效");
@@ -176,7 +186,7 @@ public class StorefrontService {
     @Transactional
     public void approve(Authentication authentication, Long customerId) {
         Long merchantId = auth.currentUser(authentication).id();
-        users.lockById(customerId).filter(u -> u.getRole() == Role.CUSTOMER)
+        users.lockById(customerId).filter(u -> u.hasRole(Role.CUSTOMER))
             .orElseThrow(() -> invalid("客户不存在"));
         boolean hasOrder = orders.findByCustomerId(customerId).stream().anyMatch(o -> ownedTrip(o.getTripId(), merchantId));
         if (!hasOrder) throw new ApiException(ErrorCode.FORBIDDEN, "仅可激活向本商家下过单的客户");
@@ -196,7 +206,7 @@ public class StorefrontService {
         return new CheckoutResult(order.getId(), order.getTotalAmount(), order.getStatus().name(), user.getEmailVerifiedAt() != null, approved);
     }
     private User lockedCustomer(Authentication authentication) {
-        return users.lockById(auth.currentUser(authentication).id()).filter(u -> u.getRole() == Role.CUSTOMER)
+        return users.lockById(auth.currentUser(authentication).id()).filter(u -> u.hasRole(Role.CUSTOMER))
             .orElseThrow(() -> new ApiException(ErrorCode.FORBIDDEN, "请使用客户账户下单"));
     }
     private boolean bookable(Trip trip) {
@@ -207,6 +217,7 @@ public class StorefrontService {
 
     public record Registration(@NotBlank @Pattern(regexp = "[a-zA-Z0-9_]{3,40}") String username,
         @NotBlank @Size(min = 8, max = 72) String password, @NotBlank @Email @Size(max = 254) String email) {}
+    public record AccountRegistration(@NotNull @Valid Registration account, @NotEmpty Set<@NotNull Role> roles) {}
     public record PublicTrip(Long id, Long merchantId, String merchantName, String origin, String destination, LocalDate departDate) {}
     public record PublicProduct(String id, Long merchantId, Map<String,String> name, Map<String,String> description, String brand,
         double price, String categoryId, List<String> images) {}

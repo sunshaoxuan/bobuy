@@ -57,7 +57,7 @@ public class JwtTokenService {
         Map<String, Object> header = Map.of("alg", JWT_ALGORITHM, "typ", "JWT");
         Map<String, Object> payload = new LinkedHashMap<>();
         payload.put("sub", String.valueOf(user.getId()));
-        payload.put("role", user.getRole().name());
+        payload.put("roles", user.getRoles());
         payload.put("username", user.getUsername());
         payload.put("name", user.getName());
         payload.put("jti", UUID.randomUUID().toString());
@@ -87,7 +87,7 @@ public class JwtTokenService {
         if (Instant.now().getEpochSecond() >= expiresAt) {
             throw new IllegalArgumentException("Token expired");
         }
-        return new VerifiedToken(readLong(payload.get("sub")), readString(payload.get("username")), readString(payload.get("role")));
+        return new VerifiedToken(readLong(payload.get("sub")), readString(payload.get("username")));
     }
 
     private String encodeJson(Map<String, Object> value) {
@@ -130,7 +130,7 @@ public class JwtTokenService {
         return value == null ? null : String.valueOf(value);
     }
 
-    public record VerifiedToken(Long userId, String username, String role) {
+    public record VerifiedToken(Long userId, String username) {
     }
 
     public record IssuedAccessToken(String token, Instant expiresAt) {

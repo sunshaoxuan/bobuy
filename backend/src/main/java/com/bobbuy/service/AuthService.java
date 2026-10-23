@@ -79,8 +79,8 @@ public class AuthService {
     }
 
     private UserProfile toUserProfile(User user) {
-        return new UserProfile(user.getId(), user.getUsername(), user.getName(), user.getRole().name(),
-            user.getEmail(), user.getEmailVerifiedAt() != null);
+        return new UserProfile(user.getId(), user.getUsername(), user.getName(), user.getRoles(),
+            user.getEmail(), user.getEmailVerifiedAt() != null, user.isPlatformAdmin());
     }
 
     private SessionResult createSessionResult(User user, RefreshTokenService.IssuedRefreshToken issuedRefreshToken) {
@@ -107,6 +107,6 @@ public class AuthService {
     public record LogoutResult(boolean revoked) {
     }
 
-    public record UserProfile(Long id, String username, String name, String role, String email, boolean emailVerified) {
+    public record UserProfile(Long id, String username, String name, java.util.Set<com.bobbuy.model.Role> roles, String email, boolean emailVerified, boolean platformAdmin) {
     }
 }

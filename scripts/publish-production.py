@@ -19,6 +19,21 @@ def validate_restored_database(result):
         raise RuntimeError('Unexpected pilot data or migration state in restored backup')
 
 
+def maintenance_config(config):
+    upstream = 'location /api {\n        proxy_pass http://gateway-service:8080;\n    }'
+    if config.count(upstream) != 1:
+        raise RuntimeError('Cannot establish the API write-freeze boundary')
+    return config.replace(upstream, 'location /api {\n        default_type application/json;\n        return 503 \'{"message":"Release maintenance in progress"}\';\n    }')
+
+
+def restore_database(compose, dump):
+    # All application writers stop before replacing the migrated database.
+    run(*compose, 'stop', 'core-service', 'ai-service', 'im-service', 'auth-service', 'gateway-service')
+    with dump.open('rb') as source:
+        run('docker', 'exec', '-i', 'bobuy-postgres', 'sh', '-c',
+            'pg_restore --clean --if-exists --exit-on-error -U "$POSTGRES_USER" -d "$POSTGRES_DB"', stdin=source)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('release')
@@ -60,8 +75,11 @@ def main():
             time.sleep(2)
         raise RuntimeError(container + ' health timeout')
 
+    database_upgrade_started = False
+    backup_verified = False
     try:
-        shutil.copyfile(stage / 'bobuy.conf', root / 'infra/nginx/bobuy.conf')
+        final_config = (stage / 'bobuy.conf').read_text()
+        (root / 'infra/nginx/bobuy.conf').write_text(maintenance_config(final_config))
         run('docker', 'exec', 'bobuy-gateway', 'nginx', '-t')
         run('docker', 'exec', 'bobuy-gateway', 'nginx', '-s', 'reload')
         run(*compose, 'stop', *applications[:-1])
@@ -98,16 +116,16 @@ def main():
         (stage / 'backup-check.json').write_text(json.dumps({
             'databaseRestore': 'PASS', 'restoredMigrationHistoryAndSchema': 'PASS',
             'temporaryDatabaseRemoved': True, 'objectsArchive': 'objects.tar.gz'}))
+        backup_verified = True
         Path('/etc/bobuy.env').write_text(re.sub(r'^BOBUY_RELEASE=.*$',
             'BOBUY_RELEASE=' + args.release, old_env, flags=re.M))
         run(*compose, 'config', '--quiet')
+        database_upgrade_started = True
         run(*compose, 'up', '-d', '--no-deps', 'core-service')
         healthy('bobuy-core-service')
         run(*compose, 'up', '-d', '--no-deps', *applications[1:])
         for service in applications[1:-1]:
             healthy('bobuy-' + service)
-        run('docker', 'exec', 'bobuy-gateway', 'nginx', '-t')
-        run('docker', 'exec', 'bobuy-gateway', 'nginx', '-s', 'reload')
         after = subprocess.check_output(['python3', str(snapshot)])
         (stage / 'protected-after.json').write_bytes(after)
         if json.loads(before) != json.loads(after):
@@ -116,8 +134,15 @@ def main():
             'release': args.release, 'applicationHealth': 'PASS', 'protectedState': 'PASS',
             'publicRegistration': 'CLOSED_PENDING_SMTP_ABUSE_RECOVERY',
             'browserVerification': 'PENDING'}))
+        shutil.copyfile(stage / 'bobuy.conf', root / 'infra/nginx/bobuy.conf')
+        run('docker', 'exec', 'bobuy-gateway', 'nginx', '-t')
+        run('docker', 'exec', 'bobuy-gateway', 'nginx', '-s', 'reload')
         print('PASS: release activated; production browser verification still required')
     except Exception:
+        if database_upgrade_started:
+            if not backup_verified:
+                raise RuntimeError('Refusing database rollback without a verified backup')
+            restore_database(compose, backup / 'database.dump')
         Path('/etc/bobuy.env').write_text(old_env)
         shutil.copyfile(backup / 'infra/nginx/bobuy.conf', root / 'infra/nginx/bobuy.conf')
         run(*compose, 'up', '-d', '--no-deps', *applications)
@@ -125,7 +150,7 @@ def main():
             healthy('bobuy-' + service)
         run('docker', 'exec', 'bobuy-gateway', 'nginx', '-t')
         run('docker', 'exec', 'bobuy-gateway', 'nginx', '-s', 'reload')
-        print('Application rollback activated. Database retained; inspect release evidence.')
+        print('Rollback activated with the verified pre-upgrade database when migration started.')
         raise
 
 

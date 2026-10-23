@@ -1,8 +1,8 @@
 // Runs inside the browser. Canvas ink metrics supplement DOM layout rectangles.
-export function measureMerchantControls() {
+export function measureMerchantControls(customSelectors) {
   const rect = r => ({x:r.x,y:r.y,width:r.width,height:r.height});
   const selectors = '.merchant-header button,.merchant-store-link,.merchant-sidebar .ant-menu-item,.merchant-drawer .ant-menu-item,.merchant-drawer .ant-drawer-close,.trip-editor .ant-btn,.trip-editor .ant-input,.trip-editor .ant-input-number,.trip-editor .ant-picker,.trip-editor .ant-select-selector,.merchant-content .ant-pagination-item,.merchant-content .ant-pagination-prev,.merchant-content .ant-pagination-next,.merchant-login-main .ant-btn,.merchant-login-main .ant-input,.language-switcher';
-  return [...document.querySelectorAll(selectors)].flatMap(element => {
+  return [...document.querySelectorAll(customSelectors || selectors)].flatMap(element => {
     if(element.matches('.ant-input') && element.closest('.ant-picker')) return [];
     const boxElement = element.matches('.ant-input') ? element.closest('.ant-input-affix-wrapper') || element : element;
     const box = boxElement.getBoundingClientRect();
@@ -27,10 +27,18 @@ export function measureMerchantControls() {
       }
     }
     for(const input of element.matches('input') ? [element] : element.querySelectorAll('input')) {
+      if (['checkbox', 'radio', 'hidden'].includes(input.type)) continue;
       const text=input.value || input.placeholder; if(!text) continue;
       const style=getComputedStyle(input), bounds=input.getBoundingClientRect();
       const paddingTop=parseFloat(style.paddingTop),paddingBottom=parseFloat(style.paddingBottom);
-      glyphs.push(ink(text,style,{x:bounds.x+parseFloat(style.paddingLeft),y:bounds.y+paddingTop,width:bounds.width,height:bounds.height-paddingTop-paddingBottom}));
+      const left=bounds.x+parseFloat(style.paddingLeft), right=bounds.right-parseFloat(style.paddingRight);
+      let advance=0;
+      for(const character of text) {
+        const g=ink(character,style,{x:left+advance-input.scrollLeft,y:bounds.y+paddingTop,width:bounds.width,height:bounds.height-paddingTop-paddingBottom});
+        const clippedLeft=Math.max(left,g.x), clippedRight=Math.min(right,g.x+g.width);
+        if(character.trim() && clippedRight>clippedLeft) glyphs.push({...g,x:clippedLeft,width:clippedRight-clippedLeft});
+        advance+=context.measureText(character).width;
+      }
     }
     for(const shape of element.querySelectorAll('svg path,svg rect,svg circle,svg polygon,svg polyline,svg line')) {
       const b=shape.getBBox(),matrix=shape.getScreenCTM();if(!matrix || !b.width || !b.height) continue;

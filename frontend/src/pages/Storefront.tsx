@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
-import { Alert, Badge, Button, Drawer, Empty, Form, Input, InputNumber, Modal, Segmented, Spin, Tag } from 'antd';
+import { Alert, Badge, Button, Checkbox, Drawer, Empty, Form, Input, InputNumber, Modal, Segmented, Spin, Tag } from 'antd';
 import { ArrowLeftOutlined, ArrowRightOutlined, CalendarOutlined, CheckCircleOutlined, CloseOutlined, DeleteOutlined,
   LogoutOutlined, MailOutlined, MinusOutlined, PlusOutlined, SearchOutlined, ShoppingCartOutlined, ShopOutlined, UserOutlined } from '@ant-design/icons';
 import { Link, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
@@ -17,16 +17,19 @@ const ClientOrders = lazy(() => import('./ClientOrders'));
 const ClientBilling = lazy(() => import('./ClientBilling'));
 const ClientChat = lazy(() => import('./ClientChat'));
 
-function AccountForm({ afterLogin }: { afterLogin: () => void }) {
+function AccountForm({ afterLogin, checkout = false }: { afterLogin: () => void; checkout?: boolean }) {
   const { t } = useI18n();
   const { login } = useUserRole();
   const [mode, setMode] = useState('register');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
-  async function submit(values: { username: string; password: string; email: string }) {
+  async function submit(values: { username: string; password: string; email: string; roles: Array<'CUSTOMER' | 'AGENT'> }) {
     setBusy(true); setError('');
     try {
-      if (mode === 'register') storeAuthSession(await api.auth.register(values));
+      if (mode === 'register') {
+        const account = { username: values.username, password: values.password, email: values.email };
+        storeAuthSession(await (checkout ? api.auth.register(account) : api.registerAccount(account, values.roles)));
+      }
       else await login(values.username, values.password);
       afterLogin();
     } catch (e) { setError((e as Error).message); } finally { setBusy(false); }
@@ -34,7 +37,7 @@ function AccountForm({ afterLogin }: { afterLogin: () => void }) {
   return <section className="account-form"><h2>{mode === 'register' ? t('store.create_account') : t('store.signin')}</h2>
     <Segmented block value={mode} options={[{value:'register',label:t('store.register')},{value:'login',label:t('store.login')}]} onChange={v => { setMode(String(v)); setError(''); }} />
     {error && <Alert type="error" message={error} />}
-    <Form key={mode} layout="vertical" onFinish={submit} requiredMark={false}>
+    <Form key={mode} layout="vertical" onFinish={submit} requiredMark={false} initialValues={{ roles: ['CUSTOMER'] }}>
       <Form.Item label={t('store.username')} name="username" rules={[{ required: true, message: t('store.username_required') },
         ...(mode === 'register' ? [{ pattern: /^[a-zA-Z0-9_]{3,40}$/, message: t('store.username_rule') }] : [])]}>
         <Input autoComplete="username" size="large" /></Form.Item>
@@ -43,6 +46,7 @@ function AccountForm({ afterLogin }: { afterLogin: () => void }) {
       <Form.Item label={t('store.password')} name="password" rules={[{ required: true, message: t('store.password_required') },
         ...(mode === 'register' ? [{ min: 8, max: 72, message: t('store.password_rule') }] : [])]}>
         <Input.Password autoComplete={mode === 'register' ? 'new-password' : 'current-password'} size="large" /></Form.Item>
+      {mode === 'register' && !checkout && <Form.Item name="roles" label={t('accounts.types')} rules={[{ type: 'array', required: true, min: 1, message: t('accounts.type_required') }]}><Checkbox.Group className="accounts-types" options={['CUSTOMER', 'AGENT'].map(role => ({ value: role, label: t(`enum.role.${role}`) }))} /></Form.Item>}
       <Button type="primary" htmlType="submit" block size="large" loading={busy}>{mode === 'register' ? t('store.register_continue') : t('store.login_continue')}</Button>
     </Form>
   </section>;
@@ -172,9 +176,9 @@ export default function Storefront() {
     <main className="store-main">{error && <Alert type="error" message={error} action={<Button onClick={() => void load()}>{t('store.retry')}</Button>} closable onClose={() => setError('')} />}
       {loading ? <div className="store-loading"><Spin /></div> : <Suspense fallback={<Spin />}><Routes>
         <Route index element={catalog} /><Route path="cart" element={basket} />
-        <Route path="checkout" element={<div className="checkout-layout">{receipt ? <section className="order-success"><CheckCircleOutlined /><h1>{t('store.submitted')}</h1><p>{t('store.order_number',{id:receipt.orderId})} · {money(receipt.total)}</p><Tag color="gold">{t('store.pending')}</Tag><div className="action-row"><Link to="/client/orders"><Button type="primary">{t('store.view_order')}</Button></Link><Link to="/"><Button>{t('store.continue')}</Button></Link></div></section> : <>{basket}{quantity > 0 && <section className="checkout-account">{!isAuthenticated ? <AccountForm afterLogin={() => {}} /> : user?.role !== 'CUSTOMER' ? <Alert type="warning" message={t('store.customer_only')} action={<Button onClick={() => void logout()}>{t('store.switch_account')}</Button>} /> : <><h2>{t('store.confirm')}</h2><p>{user.name} · {user.email}</p>{!user.emailVerified && <Alert type="info" message={t('store.unverified_hint')} />}<Button type="primary" size="large" block loading={busy} disabled={invalidCart} onClick={() => void checkout()}>{t('store.submit')} · {money(total)}</Button><Link to="/account">{t('store.verify')}</Link></>}</section>}</>}</div>} />
+        <Route path="checkout" element={<div className="checkout-layout">{receipt ? <section className="order-success"><CheckCircleOutlined /><h1>{t('store.submitted')}</h1><p>{t('store.order_number',{id:receipt.orderId})} · {money(receipt.total)}</p><Tag color="gold">{t('store.pending')}</Tag><div className="action-row"><Link to="/client/orders"><Button type="primary">{t('store.view_order')}</Button></Link><Link to="/"><Button>{t('store.continue')}</Button></Link></div></section> : <>{basket}{quantity > 0 && <section className="checkout-account">{!isAuthenticated ? <AccountForm checkout afterLogin={() => {}} /> : !user?.roles.includes('CUSTOMER') ? <Alert type="warning" message={t('store.customer_only')} action={<Button onClick={() => void logout()}>{t('store.switch_account')}</Button>} /> : <><h2>{t('store.confirm')}</h2><p>{user.name} · {user.email}</p>{!user.emailVerified && <Alert type="info" message={t('store.unverified_hint')} />}<Button type="primary" size="large" block loading={busy} disabled={invalidCart} onClick={() => void checkout()}>{t('store.submit')} · {money(total)}</Button><Link to="/account">{t('store.verify')}</Link></>}</section>}</>}</div>} />
         <Route path="login" element={isAuthenticated ? <Navigate to="/account" replace /> : <AccountForm afterLogin={() => navigate('/account')} />} />
-        <Route path="account" element={isAuthenticated ? <section className="account-page"><h1>{t('store.account')}</h1><p>{user?.name}</p>{user?.role === 'CUSTOMER' && <EmailVerification />}<div className="account-links"><Link to="/client/orders">{t('store.orders')} <ArrowRightOutlined /></Link><Link to="/client/billing">{t('store.billing')} <ArrowRightOutlined /></Link>{user?.role === 'AGENT' && <Link to="/admin">{t('store.admin')} <ArrowRightOutlined /></Link>}<Button icon={<LogoutOutlined />} onClick={() => void logout()}>{t('store.logout')}</Button></div></section> : <AccountForm afterLogin={() => {}} />} />
+        <Route path="account" element={isAuthenticated ? <section className="account-page"><h1>{t('store.account')}</h1><p>{user?.name}</p><EmailVerification /><div className="account-links"><Link to="/client/orders">{t('store.orders')} <ArrowRightOutlined /></Link><Link to="/client/billing">{t('store.billing')} <ArrowRightOutlined /></Link>{(user?.roles.includes('AGENT') || user?.platformAdmin) && <Link to="/admin">{t('store.admin')} <ArrowRightOutlined /></Link>}<Button icon={<LogoutOutlined />} onClick={() => void logout()}>{t('store.logout')}</Button></div></section> : <AccountForm afterLogin={() => {}} />} />
         <Route path="client/orders" element={<ProtectedRoute allowedRoles={['CUSTOMER']}><ClientOrders /></ProtectedRoute>} />
         <Route path="client/billing" element={<ProtectedRoute allowedRoles={['CUSTOMER']}><ClientBilling /></ProtectedRoute>} />
         <Route path="client/chat" element={<ProtectedRoute allowedRoles={['CUSTOMER']}><ClientChat /></ProtectedRoute>} />

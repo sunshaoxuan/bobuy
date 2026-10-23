@@ -52,7 +52,7 @@ class AuthControllerIntegrationTest {
         .andExpect(jsonPath("$.data.refreshTokenExpiresAt").isString())
         .andExpect(jsonPath("$.data.user.id").value(1000))
         .andExpect(jsonPath("$.data.user.username").value("agent"))
-        .andExpect(jsonPath("$.data.user.role").value("AGENT"))
+        .andExpect(jsonPath("$.data.user.roles[0]").value("AGENT"))
         .andReturn();
 
     List<String> setCookieHeaders = result.getResponse().getHeaders(HttpHeaders.SET_COOKIE);
@@ -108,7 +108,7 @@ class AuthControllerIntegrationTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.data.id").value(1001))
         .andExpect(jsonPath("$.data.username").value("customer"))
-        .andExpect(jsonPath("$.data.role").value("CUSTOMER"));
+        .andExpect(jsonPath("$.data.roles[0]").value("CUSTOMER"));
   }
 
   @Test
@@ -136,7 +136,7 @@ class AuthControllerIntegrationTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.data.accessToken").isString())
         .andExpect(jsonPath("$.data.refreshToken").doesNotExist())
-        .andExpect(jsonPath("$.data.user.role").value("AGENT"))
+        .andExpect(jsonPath("$.data.user.roles[0]").value("AGENT"))
         .andReturn()
         .getResponse()
         .getContentAsString();
@@ -222,7 +222,7 @@ class AuthControllerIntegrationTest {
     mockMvc.perform(get("/api/auth/me")
             .header(HttpHeaders.AUTHORIZATION, "Bearer " + refreshedSession.accessToken()))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.data.role").value("CUSTOMER"));
+        .andExpect(jsonPath("$.data.roles[0]").value("CUSTOMER"));
 
     mockMvc.perform(get("/api/users")
             .header(HttpHeaders.AUTHORIZATION, "Bearer " + refreshedSession.accessToken()))

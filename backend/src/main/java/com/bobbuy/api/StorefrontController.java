@@ -33,6 +33,14 @@ public class StorefrontController {
     }
     @PostMapping("/api/auth/email/resend")
     public ApiResponse<Boolean> resend(Authentication authentication) { storefront.resend(authentication); return ApiResponse.success(true); }
+    @PostMapping("/api/auth/register-account")
+    public ApiResponse<AuthService.SessionResult> registerAccount(@Valid @RequestBody StorefrontService.AccountRegistration request,
+            HttpServletRequest httpRequest, HttpServletResponse response) {
+        storefront.registerAccount(request);
+        var session = auth.login(request.account().username(), request.account().password(), httpRequest.getHeader("User-Agent"));
+        cookies.writeRefreshAndCsrfCookies(response, session.refreshToken(), session.refreshTokenExpiresAt());
+        return ApiResponse.success(session);
+    }
     @PostMapping("/api/auth/email/verify")
     public ApiResponse<Boolean> verify(Authentication authentication, @Valid @RequestBody Verification request) {
         storefront.verify(authentication, request.code()); return ApiResponse.success(true);

@@ -101,8 +101,11 @@ public class SecurityConfig {
                 .requestMatchers("/internal/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/auth/register-account").permitAll()
+                .requestMatchers("/api/customer/**").hasRole("CUSTOMER")
                 .requestMatchers(HttpMethod.GET, "/api/storefront/**").permitAll()
-                .requestMatchers("/api/checkout/**", "/api/auth/email/**").hasRole("CUSTOMER")
+                .requestMatchers("/api/checkout/**").hasRole("CUSTOMER")
+                .requestMatchers("/api/auth/email/**").authenticated()
                 .requestMatchers("/api/merchant/**").hasRole("AGENT")
                 .requestMatchers(HttpMethod.POST, "/api/orders/*/quick-order").hasRole("AGENT")
                 .requestMatchers(HttpMethod.POST, "/api/auth/refresh").permitAll()
@@ -111,7 +114,9 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/api/procurement/*/ledger").hasAnyRole("CUSTOMER", "AGENT")
                 .requestMatchers(HttpMethod.POST, "/api/procurement/*/ledger/*/confirm").hasAnyRole("CUSTOMER", "AGENT")
                 .requestMatchers("/api/procurement/**").hasRole("AGENT")
-                .requestMatchers("/api/users/**").hasRole("AGENT")
+                .requestMatchers("/api/admin/users/**").hasRole("PLATFORM_ADMIN")
+                .requestMatchers(HttpMethod.GET, "/api/users/**").hasRole("AGENT")
+                .requestMatchers("/api/users/**").denyAll()
                 .requestMatchers("/api/audit-logs/**").hasRole("AGENT")
                 .requestMatchers("/api/metrics/**").hasRole("AGENT")
                 .requestMatchers(HttpMethod.PATCH, "/api/mobile/products/**").hasRole("AGENT")
@@ -178,7 +183,8 @@ public class SecurityConfig {
                 writeForbiddenError(response, "error.auth.invalid_csrf_token");
                 return;
             }
-            response.sendError(HttpStatus.FORBIDDEN.value());
+            // Keep authorization failures out of an unauthenticated /error redispatch.
+            response.setStatus(HttpStatus.FORBIDDEN.value());
         };
     }
 

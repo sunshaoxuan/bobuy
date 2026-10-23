@@ -44,9 +44,9 @@ vi.mock('antd', async () => {
 
 vi.mock('../api', () => ({
   api: {
-    trips: tripsMock,
-    customerBalanceLedger: ledgerMock,
-    confirmCustomerLedger: confirmSpy
+    customerTrips: tripsMock,
+    customerViewLedger: ledgerMock,
+    confirmOwnLedger: confirmSpy
   }
 }));
 

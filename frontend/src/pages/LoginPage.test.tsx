@@ -32,9 +32,9 @@ describe('LoginPage', () => {
       accessTokenExpiresAt: '2026-05-01T00:00:00Z',
       refreshToken: 'refresh-123',
       refreshTokenExpiresAt: '2026-05-08T00:00:00Z',
-      user: { id: 1000, username: 'agent', name: 'Aiko Tan', role: 'AGENT' }
+      user: { id: 1000, username: 'agent', name: 'Aiko Tan', roles: ['AGENT'] }
     });
-    mocks.me.mockResolvedValue({ id: 1000, username: 'agent', name: 'Aiko Tan', role: 'AGENT' });
+    mocks.me.mockResolvedValue({ id: 1000, username: 'agent', name: 'Aiko Tan', roles: ['AGENT'] });
 
     render(
       <I18nProvider>

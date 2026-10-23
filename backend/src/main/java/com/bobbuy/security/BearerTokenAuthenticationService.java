@@ -2,7 +2,7 @@ package com.bobbuy.security;
 
 import com.bobbuy.model.User;
 import com.bobbuy.repository.UserRepository;
-import java.util.List;
+import java.util.ArrayList;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,11 +24,14 @@ public class BearerTokenAuthenticationService {
             .filter(User::isEnabled)
             .orElseThrow(() -> new IllegalArgumentException("User not found"));
         BobbuyAuthenticatedUser principal =
-            new BobbuyAuthenticatedUser(user.getId(), user.getUsername(), user.getName(), user.getRole());
+            new BobbuyAuthenticatedUser(user.getId(), user.getUsername(), user.getName(), user.getRoles());
+        var authorities = new ArrayList<SimpleGrantedAuthority>();
+        user.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority("ROLE_" + role.name())));
+        if (user.isPlatformAdmin()) authorities.add(new SimpleGrantedAuthority("ROLE_PLATFORM_ADMIN"));
         return new UsernamePasswordAuthenticationToken(
             principal,
             null,
-            List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()))
+            authorities
         );
     }
 }

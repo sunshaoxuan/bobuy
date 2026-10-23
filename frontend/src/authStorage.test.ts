@@ -16,7 +16,7 @@ describe('authStorage', () => {
         id: 1000,
         username: 'agent',
         name: 'Aiko Tan',
-        role: 'AGENT'
+        roles: ['AGENT']
       }
     });
 

@@ -19,14 +19,14 @@ export default function ClientBilling() {
     new Intl.NumberFormat(undefined, { style: 'currency', currency: 'JPY' }).format(amount);
 
   const refreshEntries = async (tripId: number) => {
-    setEntries(await api.customerBalanceLedger(tripId));
+    setEntries(await api.customerViewLedger(tripId));
   };
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
       try {
-        const tripList = await api.trips();
+        const tripList = await api.customerTrips();
         if (cancelled) return;
         setTrips(tripList);
         const firstTripId = tripList[0]?.id;
@@ -70,7 +70,7 @@ export default function ClientBilling() {
       onOk: async () => {
         try {
           setConfirmingKey(key);
-          await api.confirmCustomerLedger(selectedTripId, entry.businessId, action);
+          await api.confirmOwnLedger(selectedTripId, entry.businessId, action);
           await refreshEntries(selectedTripId);
           message.success(t('billing.confirm_success'));
         } catch {

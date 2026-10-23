@@ -1,0 +1,49 @@
+### Concrete Defects & Uncertainties
+
+#### Image 1 — Desktop Directory
+* **Table / Status Column (`状态`):**
+  * **Defect (State vs. Action wording):** Column displays `● 启用账号`. This is an imperative verb phrase ("Enable Account") rather than a status state descriptor (e.g., `已启用` / `正常`).
+* **Table / Role Badges (`用户类型`):**
+  * **Defect (Unbalanced visual hierarchy):** `商家` renders as an accent/cyan badge, whereas `客户` renders as a muted gray badge. Because an account can hold both roles, this introduces false hierarchy between peer roles and makes `客户` appear disabled or secondary.
+* **Table / Row Height & Cell Alignment (`用户` & adjacent cells):**
+  * **Defect (Content stretching):** When long names wrap onto multiple lines, the user avatar and adjacent column cells (role tags, email, status, edit action) float awkwardly with large empty vertical gaps. It is ambiguous whether items are anchored to `top` or `center`.
+* **Table / Action Column (`操作`):**
+  * **Defect (Header alignment):** Header `操作` is left-aligned over the column, while the edit icon button sits visually detached without clear cell boundary or right-alignment parity.
+* **Filter Bar (`全部类型` dropdown):**
+  * **Uncertainty (Multi-role filtering):** Single-select appearance dropdown. If users can be both customer and merchant, it is unclear whether this filter supports multi-select or contains compound options (e.g., "仅客户", "仅商家", "双重身份").
+* **Top Metric Cards (`22 全部用户`, `20 客户`, `5 商家`):**
+  * **Uncertainty (Sum mismatch):** `20 + 5 = 25` against `22 全部用户`. While technically valid for overlapping roles, there is no visual clue or label indicating that category sums intentionally exceed total accounts.
+
+---
+
+#### Image 2 — Phone Create Drawer
+* **Role Selection Area (`用户类型`):**
+  * **Defect (Hybrid affordance):** Checkboxes are nested inside card/pill containers. This mixes two conflicting mental models (checkbox group vs. segmented single-select toggle).
+  * **Defect (Semantic color ambiguity):** The active state uses an intense red border, red fill, and red check. In form contexts, heavy red outlines are frequently misread as field validation error states.
+* **Form Layout & Switch (`启用账号`):**
+  * **Defect (Wide control gap on mobile):** The toggle label is pinned to the far left and the switch is pinned to the far right, leaving excessive horizontal whitespace between label and control on wider phone screens.
+* **Footer Action Buttons (`取消`, `保存用户`):**
+  * **Defect (Mobile reachability & tap sizing):** The buttons are right-aligned compact desktop-style buttons rather than mobile-optimized full-width or stacked primary/secondary targets.
+  * **Defect (Icon redundancy):** The `✓ 保存用户` button has an unnecessary leading checkmark that clashes with the checkmark glyph used in the role checkboxes above.
+
+---
+
+#### Image 3 — Native-Size Role Crop
+* **Unchecked Item (`商家`):**
+  * **Defect (Low contrast border):** The unchecked checkbox square uses a very faint gray outline against a soft gray card background, failing WCAG non-text contrast guidelines.
+* **Internal Padding & Baseline:**
+  * **Defect (Optical alignment):** The vertical center of the checkbox glyph and the vertical baseline of Chinese characters (`客户`, `商家`) are slightly misaligned, causing the label to appear pulled downward relative to the box.
+
+---
+
+### Advisory Findings & Recommendations
+
+1. **Dual-Role Model ("Customer, Merchant, or Both"):**
+   * Replace the boxed-pill checkbox hybrid with either standard labeled multi-select checkboxes or explicit toggle tags/chips (e.g., standard filter-chip pattern without nested inner checkboxes).
+   * Ensure both roles share identical visual treatment when selected (neutral primary or brand tone, avoiding danger/red unless red is strictly the system brand accent across all neutral components).
+2. **Directory Table Resilience:**
+   * Pin table cells to vertical-top alignment (`vertical-align: top`) with max-width/truncation rules (`line-clamp`) on names to prevent multi-line rows from distorting neighboring columns.
+   * Standardize the status badge to state terminology (`已启用` / `已停用`).
+3. **Mobile Drawer Usability:**
+   * Convert the drawer footer to a fixed bottom sticky bar with a full-width primary button (`保存用户`) and a secondary dismiss action.
+   * Tighten the horizontal association of the switch toggle by grouping label and control together or enclosing the setting in a structured list-tile row.

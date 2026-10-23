@@ -1,0 +1,57 @@
+### 1. Image 1: Mobile Directory View (`用户管理` 移动端)
+
+* **Region: KPI Cards (顶部统计卡片)**
+  * **Observation:** The "商家" (Merchant) KPI card displays **4**, whereas on Desktop (Image 2) it displays **5** (Total remains 22, Customers 20).
+  * **Classification:** *Missing evidence / Test state variation*. Likely captured across different test run states or seed mutations rather than a rendering bug, but worth confirming data synchronization between viewports.
+
+* **Region: Table Rows – Status Indicator (列表项状态点)**
+  * **Observation:** The green dot indicator `•` sits immediately behind the role badges on the second line without accompanying status copy (e.g., no `已启用` label).
+  * **Classification:** *Preference / Design tradeoff*. In a constrained mobile viewport, omitting the status text preserves horizontal space and prevents extra line wrapping.
+
+* **Region: Table Rows – Text Truncation & Edit Action (用户名称与操作列)**
+  * **Observation:** Long synthetic display names (e.g. `用户管理验收 Customer Mercha…`) truncate cleanly with ellipses (`…`) and do not collide with or push the action button `[✎]`.
+  * **Classification:** *No visible defect*. Ellipsis and fixed-width alignment behave as specified.
+
+---
+
+### 2. Image 2: Desktop Directory View (`商家工作台 / 用户管理` 桌面端)
+
+* **Region: Table – `用户` (User / Account) Column**
+  * **Observation:** Both display names (`Customer 商家兼客户 ユー...`) and usernames (`@qa61_1792776797832_che...`, `@qa61_1792776797832_2_c...`) truncate heavily at ~24–28 characters, despite extensive unused horizontal whitespace between the `用户` and `用户类型` columns across the desktop viewport.
+  * **Classification:** *Defect / Layout constraint issue*. The `用户` column appears to carry an overly rigid `max-width` or fixed flex basis inherited from narrower viewports, triggering premature ellipsis truncation where screen real estate is readily available.
+
+* **Region: Table – `邮箱` (Email) Column Subline**
+  * **Observation:** Rows with verified emails display a glyph prefix (`✓ 邮箱已验证`), whereas unverified rows display plain text (`邮箱待验证`). This causes the start of the word `邮` to misalign horizontally between rows.
+  * **Classification:** *Preference*. This is standard when status icons denote success states, though aligning icons or providing a consistent prefix column is a common polish preference.
+
+* **Region: Search & Filter Toolbar (搜索与筛选区)**
+  * **Observation:** The search input and "全部类型" dropdown occupy only ~60% of the row width on the left, leaving open whitespace on the right.
+  * **Classification:** *Preference*. Left-aligned compact toolbars are standard design system patterns unless full-bleed or right-aligned secondary actions are explicitly required.
+
+---
+
+### 3. Image 3 & Image 4: Create User Drawer & Checkbox Detail (`创建用户` 抽屉与选项微调)
+
+* **Region: Role Selectors (Image 3 & Image 4: `用户类型` 选项卡与复选框)**
+  * **Observation:**
+    * The unselected "商家" checkbox now features a distinct, strengthened gray border that resolves previous low-contrast blending against the container background.
+    * Both inner checkbox glyphs/boxes and the label text ("客户", "商家") are vertically centered within their rounded pill containers.
+    * Container padding and border-radii appear uniform.
+  * **Classification:** *No visible defect*.
+
+* **Region: Enabled Switch & Footer Actions (Image 3: `已启用` 开关与底部按钮)**
+  * **Observation:**
+    * The `已启用` label aligns horizontally with the toggle track on the right margin.
+    * Footer buttons (`取消`, `✓ 保存用户`) have consistent typography, padding, and iconography.
+  * **Classification:** *No visible defect*.
+
+---
+
+### Summary Findings
+
+| Image & Region | Item Observed | Classification | Recommendation |
+| :--- | :--- | :--- | :--- |
+| **Image 2**: Desktop `用户` Column | Username/name ellipsis clipping despite abundant column whitespace | **Defect** (Composition / Constraint) | Relax the fixed/max width on the desktop `用户` cell or use `min-width` + flexible auto-growth so desktop views display full usernames. |
+| **Image 1**: Mobile Stat Cards | "商家" counter shows 4 on mobile vs 5 on desktop | **Missing evidence** (Data state) | Verify whether cache/store hydration or test seed discrepancy caused the count divergence. |
+| **Image 2**: Desktop `邮箱` Column | Text start offset between `✓ 邮箱已验证` and `邮箱待验证` | **Preference** | Leave as-is or standardize icon slots if strict visual indentation parity is preferred. |
+| **Image 1**: Mobile Status Dot | Dot shown without `已启用` copy next to badges | **Preference** | Working as designed for compact mobile density. |

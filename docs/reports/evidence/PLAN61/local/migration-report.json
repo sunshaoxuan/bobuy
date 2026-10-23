@@ -1,0 +1,7 @@
+{
+  "upgradePreservesAccountsPasswordsOrders": "PASS",
+  "invalidRoleSetsRejected": "PASS",
+  "snapshotRollbackRestoresOldSchemaAndData": "PASS",
+  "result": "PASS",
+  "temporaryDatabaseRemoved": true
+}

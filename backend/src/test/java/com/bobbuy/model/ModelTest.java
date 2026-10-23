@@ -33,17 +33,17 @@ class ModelTest {
         user.setSocialAccounts(List.of(socialAccount));
         assertThat(user.getId()).isEqualTo(1L);
         assertThat(user.getName()).isEqualTo("Name");
-        assertThat(user.getRole()).isEqualTo(Role.CUSTOMER);
+        assertThat(user.getRoles()).containsExactly(Role.CUSTOMER);
         assertThat(user.getRating()).isEqualTo(4.5);
         assertThat(user.getPhone()).isEqualTo("+81-9012345678");
         assertThat(user.getDefaultAddress().getCity()).isEqualTo("Tokyo");
         assertThat(user.getSocialAccounts()).hasSize(1);
 
         user.setName("New");
-        user.setRole(Role.AGENT);
+        user.setRoles(java.util.Set.of(Role.AGENT));
         user.setRating(3.0);
         assertThat(user.getName()).isEqualTo("New");
-        assertThat(user.getRole()).isEqualTo(Role.AGENT);
+        assertThat(user.getRoles()).containsExactly(Role.AGENT);
         assertThat(user.getRating()).isEqualTo(3.0);
     }
 

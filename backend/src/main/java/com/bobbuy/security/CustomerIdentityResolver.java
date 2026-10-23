@@ -61,6 +61,8 @@ public class CustomerIdentityResolver {
         if (authentication == null) {
             return false;
         }
+        if (!MerchantScope.customerView() && authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_AGENT"))) return false;
         return authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .anyMatch("ROLE_CUSTOMER"::equals);

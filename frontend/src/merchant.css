@@ -45,6 +45,50 @@
 .merchant-login { min-height:100dvh; background:#fafafa; }.merchant-login-header { display:flex; justify-content:space-between; align-items:center; padding:24px 32px; }.merchant-login-main { width:min(100% - 32px,400px); margin:64px auto; }.merchant-login-main h1 { font-size:28px; margin:0 0 12px; }.merchant-login-main .ant-form { margin-top:32px; }.merchant-login-main .ant-input,.merchant-login-main .ant-input-affix-wrapper,.merchant-login-main .ant-btn { min-height:48px; }.merchant-login-main .ant-input-affix-wrapper>.ant-input { min-height:0; }
 .language-switcher { min-height:44px; display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:8px 12px; border:0; box-shadow:none; flex:none; color:#55555d; }.language-switcher>.anticon:last-child { font-size:10px; }
 .merchant-mobile-brand { display:none; }
+.accounts-page { max-width:1400px; margin:auto; }
+.accounts-heading { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:28px; }
+.accounts-heading h1 { margin:8px 0 0; font-size:28px; color:#222227; }
+.accounts-eyebrow { display:flex; align-items:center; gap:8px; font-size:13px; color:#696970; }
+.accounts-summary { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-block:1px solid #e6e6e9; padding:24px 0; margin-bottom:24px; }
+.accounts-summary>div { display:flex; flex-direction:column; gap:8px; padding-inline:24px; border-inline-start:1px solid #e6e6e9; }
+.accounts-summary>div:first-child { padding-inline-start:0; border:0; }
+.accounts-summary strong { font-size:28px; line-height:1.2; color:#252529; }
+.accounts-summary span { font-size:13px; color:#696970; }
+.accounts-toolbar { display:flex; gap:12px; margin-bottom:20px; }
+.accounts-toolbar>.ant-input-affix-wrapper { max-width:400px; min-height:44px; border-radius:24px; padding-inline:16px; background:#f2f2f4; border-color:transparent; }
+.accounts-toolbar>.ant-select { width:180px; flex:none; height:44px; }
+.accounts-person { display:flex; align-items:center; gap:12px; min-width:0; }
+.accounts-person>.ant-avatar { background:#f0eeec; color:#66616b; flex:none; }
+.accounts-person>div,.accounts-email { display:flex; flex-direction:column; gap:4px; min-width:0; }
+.accounts-person>div { flex:1; width:0; }
+.accounts-person strong,.accounts-person small { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.accounts-email>span { overflow-wrap:anywhere; }
+.accounts-mobile-types { display:none; }
+@media(max-width:767px) { .accounts-mobile-types { display:flex; align-items:center; flex-wrap:wrap; gap:6px; }.accounts-mobile-types .ant-tag { margin:0; }.accounts-table table { table-layout:fixed; }.accounts-table .ant-table-cell { padding:16px 12px; } }
+.accounts-person small,.accounts-email small { font-size:12px; color:#707078; }
+.accounts-admin { font-size:11px; color:#946522; }
+.accounts-status { display:inline-flex; align-items:center; gap:6px; font-size:12px; white-space:nowrap; color:#777780; }
+.accounts-status::before { content:''; width:6px; height:6px; border-radius:50%; background:#b6b6bf; }
+.accounts-status.enabled { color:#21735a; }.accounts-status.enabled::before { background:#258568; }
+.accounts-table .ant-tag { margin:0; border-radius:12px; padding:3px 10px; }
+.accounts-table .ant-table-cell { vertical-align:middle; }
+.account-editor .ant-drawer-header { padding:16px 24px; }
+.account-editor .ant-drawer-close,.account-editor .ant-btn { min-height:44px; min-width:44px; }
+.account-editor .ant-drawer-close { margin-inline-end:8px; }
+.account-editor .ant-input,.account-editor .ant-input-affix-wrapper { min-height:44px; }
+.account-editor .ant-input-affix-wrapper>.ant-input { min-height:0; }
+.accounts-types { display:flex; gap:12px; flex-wrap:wrap; }
+.accounts-types .ant-checkbox-wrapper { min-height:44px; display:flex; align-items:center; padding:8px 14px; margin:0; background:#f5f5f7; border:1px solid #e5e5e9; border-radius:8px; }
+.accounts-types .ant-checkbox-wrapper-checked { background:#fff4f3; border-color:#db6963; }
+.accounts-types .ant-checkbox-inner { border-color:#777780; }
+.accounts-enabled { display:flex; align-items:center; justify-content:space-between; min-height:44px; gap:16px; }
+.accounts-enabled .ant-switch { min-width:58px; height:44px; }.accounts-enabled .ant-switch-handle { top:13px; }
+.accounts-footer { display:flex; justify-content:flex-end; gap:12px; padding:8px 0; }.accounts-footer .ant-btn { min-width:100px; }
+.account-editor input.ant-input { padding-block:3px 5px; }
+.accounts-toolbar .ant-select-selection-item { transform:translateY(-1px); }
+html[lang=en-US] .accounts-heading>.ant-btn>span { transform:translateX(-2px); }
+.accounts-footer .ant-btn>span { position:relative; top:-1px; }
+@media(max-width:767px) { .accounts-heading { gap:8px; }.accounts-heading h1 { font-size:24px; }.accounts-heading>.ant-btn { padding-inline:12px; }.accounts-summary>div { padding-inline:16px; }.accounts-summary span { overflow-wrap:anywhere; }.accounts-toolbar { flex-direction:column; }.accounts-toolbar>.ant-input-affix-wrapper { max-width:none; }.accounts-toolbar>.ant-select { width:100%; }.account-editor .ant-drawer-body { padding:20px 16px; }.account-editor .ant-drawer-header,.account-editor .ant-drawer-footer { padding-inline:16px; } }
 .merchant-breadcrumb>span { color:#6d6d77; }
 .merchant-content .ant-pagination-item-active { border-color:#252529; background:#252529; }
 .merchant-content .ant-pagination-item-active a { color:#fff; }

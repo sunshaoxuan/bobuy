@@ -162,6 +162,7 @@ public class BobbuyStore {
         log.warn("Seeding demo accounts with local-only credentials; ensure bobbuy.seed.enabled remains disabled in public deployments.");
         clearSeedData();
         User agent = new User(1000L, "Aiko Tan", Role.AGENT, 4.8);
+        agent.setPlatformAdmin(true);
         User customer = new User(1001L, "Chen Li", Role.CUSTOMER, 4.6);
         agent.setUsername("agent");
         agent.setPasswordHash(passwordEncoder.encode("agent-pass"));

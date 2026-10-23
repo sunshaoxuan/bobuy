@@ -15,7 +15,7 @@ import {
 } from '../authStorage';
 
 interface UserRoleContextValue {
-  role: UserRole;
+  roles: UserRole[];
   user: AuthenticatedUser | null;
   isAuthenticated: boolean;
   loading: boolean;
@@ -26,21 +26,19 @@ interface UserRoleContextValue {
   isMerchant: boolean;
 }
 
-const DEFAULT_ROLE: UserRole = 'CUSTOMER';
 const SEED_AGENT_ID = 1000;
 const SEED_CUSTOMER_ID = 1001;
-const SEED_MERCHANT_ID = 1002;
 
 const UserRoleContext = createContext<UserRoleContextValue | undefined>(undefined);
 
 function getInjectedUser(role: UserRole): AuthenticatedUser {
   const injectedUser = getTestInjectedUser();
-  const fallbackId = role === 'AGENT' ? SEED_AGENT_ID : role === 'CUSTOMER' ? SEED_CUSTOMER_ID : SEED_MERCHANT_ID;
+  const fallbackId = role === 'AGENT' ? SEED_AGENT_ID : SEED_CUSTOMER_ID;
   return {
     id: Number(injectedUser) || fallbackId,
     username: injectedUser ?? `test-${role.toLowerCase()}`,
     name: injectedUser ?? `Test ${role.toLowerCase()}`,
-    role
+    roles: [role]
   };
 }
 
@@ -137,21 +135,21 @@ export function UserRoleProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  const role = user?.role ?? DEFAULT_ROLE;
+  const roles = user?.roles ?? [];
   const isAuthenticated = user !== null;
   const value = useMemo(
     () => ({
-      role,
+      roles,
       user,
       isAuthenticated,
       loading,
       login,
       logout,
-      isPurchaser: role === 'AGENT',
-      isCustomer: role === 'CUSTOMER',
-      isMerchant: role === 'MERCHANT'
+      isPurchaser: roles.includes('AGENT'),
+      isCustomer: roles.includes('CUSTOMER'),
+      isMerchant: roles.includes('AGENT')
     }),
-    [isAuthenticated, loading, login, logout, role, user]
+    [isAuthenticated, loading, login, logout, roles, user]
   );
 
   return <UserRoleContext.Provider value={value}>{children}</UserRoleContext.Provider>;

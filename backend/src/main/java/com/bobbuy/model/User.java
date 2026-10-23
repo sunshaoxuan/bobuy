@@ -2,8 +2,6 @@ package com.bobbuy.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -13,6 +11,8 @@ import org.hibernate.type.SqlTypes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "bb_user")
@@ -31,9 +31,13 @@ public class User {
 
   private boolean enabled = true;
 
-  @NotNull(message = "{validation.user.role.required}")
-  @Enumerated(EnumType.STRING)
-  private Role role;
+  @jakarta.validation.constraints.NotEmpty
+  @JdbcTypeCode(SqlTypes.JSON)
+  @Column(columnDefinition = "jsonb", nullable = false)
+  private Set<Role> roles = new HashSet<>();
+
+  @Column(nullable = false)
+  private boolean platformAdmin;
 
   private double rating;
   private String phone;
@@ -61,7 +65,7 @@ public class User {
   public User(Long id, String name, Role role, double rating) {
     this.id = id;
     this.name = name;
-    this.role = role;
+    this.roles.add(role);
     this.rating = rating;
   }
 
@@ -106,13 +110,11 @@ public class User {
     this.enabled = enabled;
   }
 
-  public Role getRole() {
-    return role;
-  }
-
-  public void setRole(Role role) {
-    this.role = role;
-  }
+  public Set<Role> getRoles() { return Set.copyOf(roles); }
+  public void setRoles(Set<Role> roles) { this.roles = new HashSet<>(roles); }
+  public boolean hasRole(Role role) { return roles.contains(role); }
+  public boolean isPlatformAdmin() { return platformAdmin; }
+  public void setPlatformAdmin(boolean value) { platformAdmin = value; }
 
   public double getRating() {
     return rating;
