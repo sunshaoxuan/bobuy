@@ -60,12 +60,13 @@ try {
     const context = await browser.newContext({ viewport });
     const page = await context.newPage();
     const errors = [], httpErrors = [], failedRequests = [];
+    let phase = 'guest';
     const view = { viewport, errors, httpErrors, failedRequests };
     report.views.push(view);
     page.on('pageerror', error => errors.push(error.message));
     page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
     page.on('response', response => { if (response.status() >= 400) httpErrors.push({ url: response.url(), status: response.status() }); });
-    page.on('requestfailed', request => failedRequests.push({ url: request.url(), error: request.failure()?.errorText }));
+    page.on('requestfailed', request => failedRequests.push({ phase, url: request.url(), error: request.failure()?.errorText }));
     await page.goto(origin, { waitUntil: 'networkidle' });
     await page.locator('.store-brand').filter({ hasText: '宝宝败' }).waitFor();
     await page.getByRole('button', { name: '选择采购行程', exact: true }).waitFor();
@@ -73,7 +74,7 @@ try {
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
     await page.screenshot({ path: fileURLToPath(new URL(`production-empty-${viewport.width}.png`, output)), fullPage: true });
     await page.getByRole('button', { name: '选择采购行程', exact: true }).click();
-    await page.getByText('暂无可预订行程', { exact: true }).waitFor();
+    await page.getByRole('dialog').getByText('暂无可预订行程', { exact: true }).waitFor();
     await page.locator('.journey-picker .ant-drawer-close').click();
     await page.goto(origin + '/cart', { waitUntil: 'networkidle' });
     view.productionGuest = 'PASS';
@@ -99,16 +100,26 @@ try {
     await page.unrouteAll({ behavior: 'wait' });
 
     if ([390, 1440].includes(viewport.width)) {
+      phase = 'admin-login';
       await page.goto(origin + '/admin', { waitUntil: 'networkidle' });
       await page.locator('#username').fill(credentials.username);
       await page.locator('#password').fill(credentials.password);
+      const dashboardResponses = ['/api/metrics', '/api/trips', '/api/orders'].map(path =>
+        page.waitForResponse(response => response.url() === origin + path && response.request().method() === 'GET'));
       await page.locator('button[type="submit"]').click();
       await page.waitForURL('**/admin/dashboard');
       await page.getByText('今日概览', { exact: true }).waitFor();
+      for (const response of await Promise.all(dashboardResponses)) {
+        assert.equal(response.status(), 200);
+        assert.equal(await response.finished(), null);
+      }
+      await page.waitForLoadState('networkidle');
+      phase = 'admin-reload';
       await page.reload({ waitUntil: 'networkidle' });
       assert(page.url().endsWith('/admin/dashboard'));
       assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
       await page.screenshot({ path: fileURLToPath(new URL(`production-admin-${viewport.width}.png`, output)), fullPage: true });
+      phase = 'admin-cookie-security';
       const cookies = await context.cookies();
       assert(cookies.find(cookie => cookie.name === 'bobbuy_refresh_token' && cookie.secure && cookie.httpOnly));
       const csrf = cookies.find(cookie => cookie.name === 'bobbuy_csrf_token');

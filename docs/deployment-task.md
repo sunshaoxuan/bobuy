@@ -13,13 +13,50 @@ verify HTTPS, guest/admin behavior, browser console/network, responsive screensh
 and protected resource comparison. Record unresolved gates explicitly.
 Acceptance: current assets served, healthy existing group, verified migration,
 recoverable backup, protected state unchanged and production browser evidence.
-No new visual design changes. Status: IN PROGRESS.
+No new visual design changes. Status: PUBLISHED 20261023.1; preview boundary verified.
 
 Preflight: live schema V1-V3, one AGENT, zero products/trips/orders. SMTP absent.
 Publish guest browsing and existing merchant login; keep public signup/email
 closed at the sole public ingress with explicit 503 until SMTP, abuse quotas and
 recovery are accepted. No demo catalog will be inserted into production.
 The shared service Maven module needs the same mail dependency as backend.
+
+### 2026-10-23 release acceptance
+
+- PASS: source 19e5203, six application images 20261023.1, existing production
+  group updated. No other environment was created. Existing bobuy-local was
+  resumed for checks after its previous stopped state caused connection refusal.
+- PASS: Maven reactor 188 tests, zero failures/errors, two manual external AI
+  tests skipped; frontend 81 tests and build; local four-viewport storefront
+  regression; isolation validator with its exposed-database negative case.
+- PASS: database dump restored within the existing PostgreSQL, V4 tested on
+  restored data, temporary database removed. Live Flyway V1-V4 successful;
+  one merchant and zero products/trips/orders retained. Backups are root-only.
+- PASS: five Java services healthy, zero restarts/OOM; other protected containers,
+  image references, configuration hashes and systemd state unchanged, including
+  a second comparison after browser acceptance. Certificate renewal timer active.
+- PASS: Cloudflare HTTPS, redirects, asset byte equality, four responsive guest
+  checks, browser-only catalog/cart checks, mobile/desktop admin login, reload,
+  refresh, logout and missing/forged CSRF rejection. Application console/page,
+  HTTP and request failures zero. Aborted Cloudflare RUM telemetry is separate.
+- Test harness corrections: scope duplicate empty-trip text to its dialog;
+  await all three initial dashboard GET responses before reload. Earlier reload
+  interrupted those requests. Corrected run passes without suppressing API errors.
+- VISUAL: production storefront empty-state and fixture screenshots inspected.
+  No new storefront defect found in this release scope. Existing admin mobile
+  full-page blank overflow persists; full-product visual acceptance remains FAIL.
+  New design/geometry review is outside this unchanged-asset publication; prior
+  REPORT-17 covers the accepted local styling and glyph budgets.
+- INCOMPLETE: real catalog, formal SMTP, abuse quotas, recovery, public signup,
+  attachment URL and external AI/OCR acceptance. Signup/email remain HTTP 503.
+- Evidence: [REPORT-18](reports/REPORT-18-生产商城预览发布.md). Server staging
+  receipt retains browserVerification PENDING as a historical phase; the later
+  browser-results.json is PASS and is also copied to the same node release folder.
+- INCOMPLETE: scoped removal of current-release local temporary logs/archive was
+  rejected by execution policy. Files remain in .task-tmp; no alternate deletion
+  attempted. Formal screenshots/receipts and remote recovery assets are retained.
+
+Earlier sections below describe the 2026-10-21 release and coordination history.
 
 ## Local Docker coordination hold (2026-10-22 JST)
 

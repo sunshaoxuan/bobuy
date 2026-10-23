@@ -11,7 +11,7 @@ Never run global Docker cleanup or modify their Compose projects.
 
 ## Configuration
 
-Release 20261023.1 is staged for the public storefront. The previous release is
+Release 20261023.1 is published for the public storefront. The previous release is
 20261021.1. Publication status is recorded in deployment-task.md and release
 evidence under docs/reports/evidence/release-20261023.1/.
 
@@ -79,9 +79,28 @@ External AI credentials and optional OCR are unconfigured. Two manual external
 AI tests are skipped. ImageStorageService currently builds object URLs from its
 internal MinIO endpoint, including signed previews. Public attachment URL behavior
 is unverified and needs a separate storage URL configuration change and tests.
-The mobile full-page screenshot also shows excess blank overflow below the fixed
-navigation; the visible viewport and horizontal-fit check pass. No frontend code
-or product branding was changed by this deployment.
+The merchant admin mobile full-page screenshot still shows excess blank overflow
+below its visible viewport. Record this as an existing visual failure, separate
+from functional login/reload checks. The public storefront now serves the accepted
+宝宝败 masonry design and lighter overlay from 9924339, with no further design
+changes during release. Production catalog is empty; fixture screenshots are
+browser-only checks and do not prove real inventory or complete business readiness.
 
 The frontend audit found three moderate runtime dependency advisories and
 additional development advisories. No dependency upgrades were included.
+
+## Current Release Receipt
+
+Source: 19e5203fe21b9285a3960173b52a036a28916024; images: 20261023.1.
+See [REPORT-18](reports/REPORT-18-生产商城预览发布.md). Release staging and root-only
+backups are at /opt/bobuy/releases/20261023.1/. Old 20261021.1 images/config remain
+available. V4 is additive for this empty pilot; app rollback retains the schema
+and data, and requires a compatibility check. No destructive schema downgrade.
+scripts/publish-production.py is pilot-specific: its restored-data guard expects
+one user and zero merchant relationships. Review that guard before any later
+release containing real customer data. Never repeat a partially completed publish
+blindly; inspect its receipts and current service state first.
+
+Future user-requested changes may publish after the affected tests, build,
+isolation/migration checks and production browser verification. Reuse this group;
+no automatic scheduler or extra environment was created.
