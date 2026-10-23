@@ -11,9 +11,15 @@ Never run global Docker cleanup or modify their Compose projects.
 
 ## Configuration
 
-Current application release: 20261021.1. The frontend image is unchanged from
-20261021 and has the same image digest. Runtime image identities and container
-health are recorded in deployment-evidence/runtime-verification.json.
+Release 20261023.1 is staged for the public storefront. The previous release is
+20261021.1. Publication status is recorded in deployment-task.md and release
+evidence under docs/reports/evidence/release-20261023.1/.
+
+Preflight found one operator and no products, trips or orders. Never insert local
+demo data during release. Public signup/email routes return explicit HTTP 503
+at the sole public ingress until formal SMTP, abuse quotas and account recovery
+gates pass. Existing merchant login remains available at /admin. This release is
+a storefront preview; full public-registration readiness is not claimed.
 
 Use docker-compose.yml with compose.production.yml, Docker Compose >=2.24.4.
 Supply --env-file /etc/bobuy.env for every command. This root-only file contains
@@ -57,7 +63,10 @@ compare protected container identities, start times, restarts, config hashes,
 protected image references and service state. Verify Compose health, public
 HTTPS, redirects, login, secure cookies, unauthorized access rejection, browser
 console/network and desktop/mobile screenshots. Record actual results in
-deployment-task.md. No UI changes are part of this deployment.
+deployment-task.md. The previously accepted storefront assets are published
+unchanged. Run BOBUY_RELEASE=20261023.1 node scripts/verify-production.mjs with
+the existing local group available for browser-only fixture checks. Real
+production empty-catalog screenshots and fixture screenshots remain separate.
 
 The deployment fixed an existing stateless JWT/CSRF interaction: authenticated
 reads cleared the refresh CSRF cookie. AuthCookieService retains ownership of

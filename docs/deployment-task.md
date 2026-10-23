@@ -1,5 +1,26 @@
 # Bobuy deployment task
 
+## Current release request (2026-10-23 JST)
+
+Objective: publish source 9924339 to the existing bobuy.cc production group.
+Future requested changes may be published after relevant checks; no schedule.
+Reuse /opt/bobuy and Compose project bobuy on RHOSPITAL-GREENCLOUD-DR-JP.
+Preserve all other applications, standby images, sleep policies and data.
+Do not create another test environment or expose local fixtures or credentials.
+Method: inspect live/source delta and migration/auth gates; back up Bobuy data;
+retain rollback images/config; validate affected services; publish only Bobuy;
+verify HTTPS, guest/admin behavior, browser console/network, responsive screenshots
+and protected resource comparison. Record unresolved gates explicitly.
+Acceptance: current assets served, healthy existing group, verified migration,
+recoverable backup, protected state unchanged and production browser evidence.
+No new visual design changes. Status: IN PROGRESS.
+
+Preflight: live schema V1-V3, one AGENT, zero products/trips/orders. SMTP absent.
+Publish guest browsing and existing merchant login; keep public signup/email
+closed at the sole public ingress with explicit 503 until SMTP, abuse quotas and
+recovery are accepted. No demo catalog will be inserted into production.
+The shared service Maven module needs the same mail dependency as backend.
+
 ## Local Docker coordination hold (2026-10-22 JST)
 
 Objective: provide a quiet local Docker maintenance window while preserving
