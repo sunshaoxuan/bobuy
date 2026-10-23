@@ -14,6 +14,11 @@ def run(*args, **kwargs):
     return subprocess.run(args, check=True, **kwargs)
 
 
+def validate_restored_database(result):
+    if result.strip().splitlines() != ['1', '0', '1,2,3,4', '3']:
+        raise RuntimeError('Unexpected pilot data or migration state in restored backup')
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('release')
@@ -72,19 +77,26 @@ def main():
             with (backup / 'database.dump').open('rb') as source:
                 run('docker', 'exec', '-i', 'bobuy-postgres', 'sh', '-c',
                     'pg_restore --exit-on-error -U "$POSTGRES_USER" -d ' + database, stdin=source)
-            with (stage / 'V4__customer_storefront.sql').open('rb') as source:
-                run('docker', 'exec', '-i', 'bobuy-postgres', 'sh', '-c',
-                    'psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d ' + database, stdin=source)
+            # Flyway owns versioned execution; an already migrated backup retains V4.
+            validation_sql = (
+                'select count(*) from bb_user; '
+                'select count(*) from bb_merchant_customer; '
+                "select string_agg(version, ',' order by installed_rank) "
+                'from flyway_schema_history where success; '
+                'select count(*) from information_schema.columns where table_schema = '
+                "'public' and (table_name, column_name) in "
+                "(('bb_user','email_verified_at'),('bb_product','merchant_id'),"
+                "('bb_supplier','merchant_id'));"
+            )
             result = subprocess.check_output(['docker', 'exec', 'bobuy-postgres', 'sh', '-c',
                 'psql -U "$POSTGRES_USER" -d ' + database +
-                ' -Atc "select count(*) from bb_user; select count(*) from bb_merchant_customer;"'], text=True)
-            if result.strip().splitlines() != ['1', '0']:
-                raise RuntimeError('Unexpected pilot backup data; review before release')
+                ' -Atc "' + validation_sql + '"'], text=True)
+            validate_restored_database(result)
         finally:
             run('docker', 'exec', 'bobuy-postgres', 'sh', '-c',
                 'dropdb -U "$POSTGRES_USER" ' + database)
         (stage / 'backup-check.json').write_text(json.dumps({
-            'databaseRestore': 'PASS', 'V4OnRestoredDatabase': 'PASS',
+            'databaseRestore': 'PASS', 'restoredMigrationHistoryAndSchema': 'PASS',
             'temporaryDatabaseRemoved': True, 'objectsArchive': 'objects.tar.gz'}))
         Path('/etc/bobuy.env').write_text(re.sub(r'^BOBUY_RELEASE=.*$',
             'BOBUY_RELEASE=' + args.release, old_env, flags=re.M))
