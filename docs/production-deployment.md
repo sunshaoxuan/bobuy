@@ -1,5 +1,17 @@
 # Bobuy production deployment
 
+## Current Status (2026-10-24)
+
+Production runs 20261024.1 from implementation c17ff0d. Platform administrators
+can create and edit users at /admin/users, with CUSTOMER and AGENT selected
+individually or together. Checkout registration is fixed to CUSTOMER in code;
+production public registration remains HTTP 503 pending SMTP, abuse and recovery
+gates. REPORT-20 and PLAN-61 are the current user-management release receipts.
+The 2026-10-24 continuation reverified live login, exact frontend assets, security
+and 16 viewport/locale combinations. No duplicate deployment was required.
+Release-specific configuration and receipts below describe the earlier storefront
+publication and must be read with this current status.
+
 ## Boundary
 
 Repository: sunshaoxuan/bobuy. Target: RHOSPITAL-GREENCLOUD-DR-JP.
