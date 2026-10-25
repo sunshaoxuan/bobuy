@@ -103,12 +103,11 @@ describe('Orders page', () => {
       {
         id: 2000,
         agentId: 1000,
-        origin: 'Tokyo',
-        destination: 'Shanghai',
-        departDate: '2026-02-01',
-        capacity: 6,
-        reservedCapacity: 1,
-        remainingCapacity: 5,
+        deliveryArea: 'Shanghai',
+        deliveryDate: '2026-02-01',
+
+
+
         status: 'PUBLISHED',
         settlementFrozen: false,
         settlementFreezeStage: 'ACTIVE',
@@ -207,15 +206,14 @@ describe('Orders page', () => {
       {
         id: 2000,
         agentId: 1000,
-        origin: 'Tokyo',
-        destination: 'Shanghai',
-        departDate: '2026-02-01',
-        capacity: 6,
-        reservedCapacity: 1,
-        remainingCapacity: 5,
+        deliveryArea: 'Shanghai',
+        deliveryDate: '2026-02-01',
+
+
+
         status: 'COMPLETED',
         settlementFrozen: true,
-        settlementFreezeStage: 'PROCUREMENT_PENDING_SETTLEMENT',
+        settlementFreezeStage: 'DELIVERY_PENDING_SETTLEMENT',
         settlementFreezeReason: 'Frozen'
       }
     ]);

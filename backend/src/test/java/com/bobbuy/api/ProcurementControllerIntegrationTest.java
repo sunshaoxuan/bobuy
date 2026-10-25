@@ -42,6 +42,15 @@ class ProcurementControllerIntegrationTest {
   @Autowired
   private ObjectMapper objectMapper;
 
+  @Autowired
+  private com.bobbuy.repository.TripRepository trips;
+
+  private void freezeTrip(Long id, TripStatus status) {
+    Trip trip = trips.findById(id).orElseThrow();
+    trip.setStatus(status);
+    trips.saveAndFlush(trip);
+  }
+
   @BeforeEach
   void setUp() {
     store.seed();
@@ -49,7 +58,7 @@ class ProcurementControllerIntegrationTest {
 
   @Test
   void hudReturnsRealtimeProfitAndCategoryCompletion() throws Exception {
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
     OrderHeader order = new OrderHeader("HUD-1", 1001L, trip.getId());
     OrderLine line = new OrderLine("prd-1000", "Matcha", null, 4, 32.5);
     line.setPurchasedQuantity(1);
@@ -70,7 +79,7 @@ class ProcurementControllerIntegrationTest {
 
   @Test
   void deficitReturnsMissingItemsWithPriority() throws Exception {
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
     OrderHeader order = new OrderHeader("DEFICIT-1", 1001L, trip.getId());
     OrderLine line = new OrderLine("prd-1000", "Matcha", null, 4, 32.5);
     line.setPurchasedQuantity(1);
@@ -88,7 +97,7 @@ class ProcurementControllerIntegrationTest {
 
   @Test
   void expensesEndpointCreatesAndListsTripExpense() throws Exception {
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
 
     MvcResult createResult = mockMvc.perform(asAgent(post("/api/procurement/{tripId}/expenses", trip.getId())
             .contentType("application/json")
@@ -115,7 +124,7 @@ class ProcurementControllerIntegrationTest {
 
   @Test
   void exportEndpointReturnsCsvAndPdf() throws Exception {
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
 
     mockMvc.perform(asAgent(get("/api/procurement/{tripId}/export?format=csv", trip.getId())))
         .andExpect(status().isOk())
@@ -130,7 +139,7 @@ class ProcurementControllerIntegrationTest {
 
   @Test
   void auditLogAndLedgerEndpointsReturnFinancialData() throws Exception {
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
     OrderHeader fromOrder = new OrderHeader("LEDGER-FROM", 1001L, trip.getId());
     OrderLine fromLine = new OrderLine("prd-1000", "抹茶セット", null, 3, 10.0);
     fromLine.setPurchasedQuantity(2);
@@ -174,7 +183,7 @@ class ProcurementControllerIntegrationTest {
 
   @Test
   void customerStatementPdfEndpointReturnsDocument() throws Exception {
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
     OrderHeader order = new OrderHeader("CUST-PDF-1", 1001L, trip.getId());
     order.addLine(new OrderLine("prd-1000", "抹茶セット", null, 2, 32.5));
     store.upsertOrder(order);
@@ -212,7 +221,7 @@ class ProcurementControllerIntegrationTest {
 
   @Test
   void receiptWorkbenchEndpointsUploadAndSaveReconciliation() throws Exception {
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
 
     mockMvc.perform(asAgent(post("/api/procurement/{tripId}/receipts", trip.getId())
             .contentType("application/json")
@@ -252,7 +261,7 @@ class ProcurementControllerIntegrationTest {
   @Test
   void offlinePaymentEndpointsReturnTripAndCustomerBalances() throws Exception {
     long customerId = 9001L;
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
     OrderHeader order = new OrderHeader("PAY-100", customerId, trip.getId());
     order.addLine(new OrderLine("prd-1000", "抹茶セット", null, 2, 10.0));
     order.setStatus(com.bobbuy.model.OrderStatus.CONFIRMED);
@@ -292,7 +301,7 @@ class ProcurementControllerIntegrationTest {
 
   @Test
   void offlinePaymentRejectsInvalidPayload() throws Exception {
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
     OrderHeader order = new OrderHeader("PAY-INVALID", 1001L, trip.getId());
     order.addLine(new OrderLine("prd-1000", "抹茶セット", null, 1, 10.0));
     store.upsertOrder(order);
@@ -307,7 +316,7 @@ class ProcurementControllerIntegrationTest {
 
   @Test
   void offlinePaymentRejectsUnsupportedMethod() throws Exception {
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
     OrderHeader order = new OrderHeader("PAY-METHOD", 1001L, trip.getId());
     order.addLine(new OrderLine("prd-1000", "抹茶セット", null, 1, 10.0));
     order.setStatus(com.bobbuy.model.OrderStatus.CONFIRMED);
@@ -324,7 +333,7 @@ class ProcurementControllerIntegrationTest {
 
   @Test
   void settledTripRejectsOfflinePaymentAndReceiptReviewMutation() throws Exception {
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
     OrderHeader order = new OrderHeader("PAY-SETTLED", 1001L, trip.getId());
     order.addLine(new OrderLine("prd-1000", "抹茶セット", null, 1, 10.0));
     order.setStatus(com.bobbuy.model.OrderStatus.CONFIRMED);
@@ -338,7 +347,7 @@ class ProcurementControllerIntegrationTest {
         .andExpect(status().isOk())
         .andReturn();
     long receiptId = objectMapper.readTree(uploadResult.getResponse().getContentAsString()).path("data").get(0).path("id").asLong();
-    store.updateTripStatus(trip.getId(), TripStatus.SETTLED);
+    freezeTrip(trip.getId(), TripStatus.SETTLED);
 
     mockMvc.perform(asAgent(post("/api/procurement/{tripId}/payments", trip.getId())
             .contentType("application/json")
@@ -359,8 +368,8 @@ class ProcurementControllerIntegrationTest {
   }
 
   @Test
-  void completedTripRejectsCustomerConfirmationReceiptUploadAndPickingMutation() throws Exception {
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.IN_PROGRESS, null));
+  void completedTripAllowsConfirmationAndRejectsProcurementMutation() throws Exception {
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.IN_PROGRESS, null));
     OrderHeader order = new OrderHeader("FROZEN-OPS", 1001L, trip.getId());
     OrderLine line = new OrderLine("prd-1000", "抹茶セット", null, 1, 10.0);
     line.setPurchasedQuantity(1);
@@ -384,15 +393,15 @@ class ProcurementControllerIntegrationTest {
                 """)))
         .andExpect(status().isOk());
 
-    store.updateTripStatus(trip.getId(), TripStatus.COMPLETED);
+    freezeTrip(trip.getId(), TripStatus.COMPLETED);
 
     mockMvc.perform(asCustomer(post("/api/procurement/{tripId}/ledger/{businessId}/confirm", trip.getId(), "FROZEN-OPS")
             .contentType("application/json")
             .content("""
                 {"action":"RECEIPT"}
                 """), "1001"))
-        .andExpect(status().isBadRequest())
-        .andExpect(jsonPath("$.message").exists());
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.data.settlementFrozen").value(false));
 
     mockMvc.perform(asAgent(post("/api/procurement/{tripId}/receipts", trip.getId())
             .contentType("application/json")
@@ -412,7 +421,7 @@ class ProcurementControllerIntegrationTest {
   @Test
   void balanceSummaryAndLedgerExcludesNewAndCancelledOrders() throws Exception {
     long customerId = 9010L;
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now().minusDays(1), 20, 0, TripStatus.DRAFT, null));
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now().minusDays(1), TripStatus.PUBLISHED, null));
 
     OrderHeader confirmedOrder = new OrderHeader("BAL-CONFIRMED", customerId, trip.getId());
     confirmedOrder.addLine(new OrderLine("prd-1000", "抹茶セット", null, 2, 10.0));
@@ -442,7 +451,7 @@ class ProcurementControllerIntegrationTest {
 
   @Test
   void profitSharingEndpointsSupportReadAndUpdateWithAuditLog() throws Exception {
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
     OrderHeader order = new OrderHeader("PS-1", 1001L, trip.getId());
     order.addLine(new OrderLine("prd-1000", "Matcha", null, 2, 10.0));
     store.upsertOrder(order);
@@ -469,7 +478,7 @@ class ProcurementControllerIntegrationTest {
 
   @Test
   void logisticsEndpointsSupportTrackingAndSettlementReminderTrigger() throws Exception {
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
 
     MvcResult createResult = mockMvc.perform(asAgent(post("/api/procurement/{tripId}/logistics", trip.getId())
             .contentType("application/json")
@@ -495,7 +504,7 @@ class ProcurementControllerIntegrationTest {
 
   @Test
   void deliveryPreparationAndPickingChecklistSupportReadyForDeliveryFlow() throws Exception {
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.IN_PROGRESS, null));
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.IN_PROGRESS, null));
     OrderHeader order = new OrderHeader("PICK-100", 1001L, trip.getId());
     OrderLine line = new OrderLine("prd-1000", "抹茶セット", null, 2, 10.0);
     line.setPurchasedQuantity(1);

@@ -2,7 +2,7 @@ package com.bobbuy.model;
 
 import jakarta.persistence.*;
 
-/** A shared allocation sequence keeps registered customers and checkout orders away from legacy seed IDs. */
+/** A shared allocation sequence keeps registered customers, deliveries and checkout orders away from legacy seed IDs. */
 @Entity
 @Table(name = "bb_checkout_identity")
 public class CheckoutIdentity {

@@ -1,153 +1,59 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import dayjs from 'dayjs';
 import Trips from '../Trips';
 import { I18nProvider } from '../../i18n';
 import { api } from '../../api';
-import { message } from 'antd';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('antd', async () => {
   const antd = await vi.importActual<typeof import('antd')>('antd');
-  return {
-    ...antd,
-    message: {
-      success: vi.fn(),
-      error: vi.fn()
-    },
-    Select: ({ value, onChange, options = [], disabled }: any) => (
-      <select
-        aria-label="select"
-        value={value}
-        onChange={(event) => onChange?.(event.target.value)}
-        disabled={disabled}
-      >
-        {options.map((option: { value: string; label?: string }) => (
-          <option key={option.value} value={option.value}>
-            {option.label ?? option.value}
-          </option>
-        ))}
-      </select>
-    ),
-    InputNumber: ({ value, onChange, ...props }: any) => {
-      const safeValue = Number.isFinite(value) ? value : '';
-      return (
-        <input
-          type="number"
-          value={safeValue}
-          onChange={(event) => {
-            const next = event.target.value;
-            onChange?.(next === '' ? undefined : Number(next));
-          }}
-          {...props}
-        />
-      );
-    },
-    Table: ({ dataSource = [], locale }: any) => (
-      <div data-testid="table">
-        {dataSource.length === 0 ? locale?.emptyText : null}
-      </div>
-    )
-  };
+  return { ...antd, message: { success: vi.fn(), error: vi.fn() },
+    DatePicker: ({ value, onChange, ...props }: any) => <input {...props} type="date" value={value?.format('YYYY-MM-DD') ?? ''}
+      onChange={event => onChange?.(event.target.value ? dayjs(event.target.value) : null)} /> };
 });
+vi.mock('../../api', () => ({ api: { trips: vi.fn(), createTrip: vi.fn(), updateTrip: vi.fn() } }));
+const mockApi = vi.mocked(api);
+const trip = { id: 2001, agentId: 1000, deliveryArea: 'Seoul region', deliveryDate: '2026-11-01', status: 'PUBLISHED', settlementFrozen: false };
+const show = () => render(<I18nProvider><Trips /></I18nProvider>);
 
-vi.mock('../../api', () => ({
-  api: {
-    trips: vi.fn(),
-    createTrip: vi.fn()
-  }
-}));
-
-const mockApi = api as unknown as {
-  trips: ReturnType<typeof vi.fn>;
-  createTrip: ReturnType<typeof vi.fn>;
-};
-
-const renderTrips = () =>
-  render(
-    <I18nProvider>
-      <Trips />
-    </I18nProvider>
-  );
-
-const fillRequiredFields = async (user: ReturnType<typeof userEvent.setup>) => {
-  await user.type(screen.getByPlaceholderText('Enter agent ID'), '1000');
-  await user.type(screen.getByPlaceholderText('e.g. Tokyo'), 'Tokyo');
-  await user.type(screen.getByPlaceholderText('e.g. Shanghai'), 'Seoul');
-  await user.type(screen.getByLabelText('Departure Date'), '2026-02-01');
-  await user.clear(screen.getByPlaceholderText('Enter capacity'));
-  await user.type(screen.getByPlaceholderText('Enter capacity'), '3');
-};
-
-describe('Trips page', () => {
+describe('Regional delivery management', () => {
   beforeEach(() => {
     window.localStorage.setItem('bobbuy_locale', 'en-US');
-    mockApi.trips.mockReset();
-    mockApi.createTrip.mockReset();
-    (message.success as ReturnType<typeof vi.fn>).mockReset();
-    (message.error as ReturnType<typeof vi.fn>).mockReset();
+    vi.clearAllMocks();
     mockApi.trips.mockResolvedValue([]);
+    mockApi.createTrip.mockResolvedValue(trip);
+    mockApi.updateTrip.mockResolvedValue(trip);
+    Element.prototype.scrollIntoView = vi.fn();
   });
-
-  it('submits the form and refreshes the list', async () => {
-    const user = userEvent.setup();
-    const createdTrip = {
-      id: 2001,
-      agentId: 1000,
-      origin: 'Tokyo',
-      destination: 'Seoul',
-      departDate: '2026-02-01',
-      capacity: 3,
-      reservedCapacity: 0,
-      remainingCapacity: 3,
-      status: 'DRAFT'
-    };
-    mockApi.trips.mockResolvedValueOnce([]).mockResolvedValueOnce([createdTrip]);
-    mockApi.createTrip.mockResolvedValue(createdTrip);
-
-    renderTrips();
-    await waitFor(() => expect(mockApi.trips).toHaveBeenCalled());
-
-    await fillRequiredFields(user);
-    await user.click(screen.getByRole('button', { name: 'Save Trip' }));
-
-    await waitFor(() => expect(mockApi.createTrip).toHaveBeenCalled());
-    expect(mockApi.trips).toHaveBeenCalledTimes(2);
-  }, 10000);
-
-  it('validates required fields', async () => {
-    const user = userEvent.setup();
-    renderTrips();
-    await waitFor(() => expect(mockApi.trips).toHaveBeenCalled());
-
-    await user.click(screen.getByRole('button', { name: 'Save Trip' }));
-
-    expect(await screen.findByText('Please enter agent ID')).toBeInTheDocument();
-    expect(await screen.findByText('Please enter origin')).toBeInTheDocument();
-    expect(await screen.findByText('Please enter destination')).toBeInTheDocument();
+  it('publishes only area and delivery date', async () => {
+    const user = userEvent.setup(); show();
+    await user.type(screen.getByLabelText('Delivery Area'), 'Seoul region');
+    await user.type(screen.getByLabelText('Delivery Date'), '2026-11-01');
+    await user.click(screen.getByRole('button', { name: /Publish Delivery/ }));
+    await waitFor(() => expect(mockApi.createTrip).toHaveBeenCalledWith({ deliveryArea: 'Seoul region', deliveryDate: '2026-11-01' }));
+    expect(screen.queryByLabelText('Agent ID')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Capacity')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Origin')).not.toBeInTheDocument();
+    expect(screen.queryByRole('combobox')).not.toBeInTheDocument();
   });
-
-  it('shows success feedback after a successful submit', async () => {
-    const user = userEvent.setup();
-    mockApi.createTrip.mockResolvedValue({
-      id: 2001,
-      agentId: 1000,
-      origin: 'Tokyo',
-      destination: 'Seoul',
-      departDate: '2026-02-01',
-      capacity: 3,
-      reservedCapacity: 0,
-      remainingCapacity: 3,
-      status: 'DRAFT'
-    });
-
-    renderTrips();
-    await waitFor(() => expect(mockApi.trips).toHaveBeenCalled());
-
-    await fillRequiredFields(user);
-    await user.click(screen.getByRole('button', { name: 'Save Trip' }));
-
-    await waitFor(() =>
-      expect(message.success).toHaveBeenCalledWith('Trip created successfully')
-    );
+  it('validates required area and date', async () => {
+    const user = userEvent.setup(); show();
+    await user.click(screen.getByRole('button', { name: /Publish Delivery/ }));
+    expect(await screen.findByText('Please enter delivery area')).toBeInTheDocument();
+    expect(await screen.findByText('Please select delivery date')).toBeInTheDocument();
+    expect(mockApi.createTrip).not.toHaveBeenCalled();
+  });
+  it('edits existing delivery without changing owner or status', async () => {
+    const user = userEvent.setup(); mockApi.trips.mockResolvedValue([trip]); show();
+    await user.click(await screen.findByRole('button', { name: 'Edit Delivery' }));
+    await user.clear(screen.getByLabelText('Delivery Area'));
+    await user.type(screen.getByLabelText('Delivery Area'), 'Busan region');
+    await user.click(screen.getByRole('button', { name: /Save Changes/ }));
+    await waitFor(() => expect(mockApi.updateTrip).toHaveBeenCalledWith(2001, { deliveryArea: 'Busan region', deliveryDate: '2026-11-01' }));
+  });
+  it('disables editing frozen deliveries', async () => {
+    mockApi.trips.mockResolvedValue([{ ...trip, status: 'SETTLED', settlementFrozen: true }]); show();
+    expect(await screen.findByRole('button', { name: 'Edit Delivery' })).toBeDisabled();
   });
 });

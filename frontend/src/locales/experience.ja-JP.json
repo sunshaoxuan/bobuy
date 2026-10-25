@@ -51,7 +51,7 @@
   "store.payment_hint": "送信後、出店者が買付と配送を確認します。現時点でのお支払いは不要です。",
   "store.checkout": "注文手続きへ",
   "store.choose_trip": "買付予定を選択",
-  "store.depart": "出発",
+  "store.delivery_date": "配送日",
   "store.trip": "買付予定",
   "store.no_trips": "予約できる買付予定はありません",
   "store.catalog": "今回の商品",

@@ -15,7 +15,14 @@ export function measureMerchantControls(customSelectors) {
       const baseline = bounds.y + (bounds.height-m.fontBoundingBoxAscent-m.fontBoundingBoxDescent)/2 + m.fontBoundingBoxAscent;
       return {x:bounds.x-m.actualBoundingBoxLeft,y:baseline-m.actualBoundingBoxAscent,width:m.actualBoundingBoxLeft+m.actualBoundingBoxRight,height:m.actualBoundingBoxAscent+m.actualBoundingBoxDescent};
     };
-    const walker = document.createTreeWalker(element,NodeFilter.SHOW_TEXT);
+    let textElement = element;
+    if(element.matches('textarea')) {
+      const mirror=document.createElement('div'),style=getComputedStyle(element);
+      for(const property of style) mirror.style.setProperty(property,style.getPropertyValue(property));
+      Object.assign(mirror.style,{position:'fixed',left:box.x+'px',top:box.y+'px',width:box.width+'px',height:'auto',visibility:'hidden',whiteSpace:'pre-wrap',overflowWrap:'break-word'});
+      mirror.textContent=element.value || element.placeholder;document.body.append(mirror);textElement=mirror;
+    }
+    const walker = document.createTreeWalker(textElement,NodeFilter.SHOW_TEXT);
     let node;
     while((node=walker.nextNode())) {
       const style = getComputedStyle(node.parentElement);
@@ -26,6 +33,7 @@ export function measureMerchantControls(customSelectors) {
         glyphs.push(ink(character,style,bounds));
       }
     }
+    if(textElement!==element) textElement.remove();
     for(const input of element.matches('input') ? [element] : element.querySelectorAll('input')) {
       if (['checkbox', 'radio', 'hidden'].includes(input.type)) continue;
       const text=input.value || input.placeholder; if(!text) continue;
@@ -50,6 +58,6 @@ export function measureMerchantControls(customSelectors) {
     if(!glyphs.length) return [{name,background:rect(box),inner,hitArea:rect(box),glyph:null}];
     const left=Math.min(...glyphs.map(g=>g.x)),top=Math.min(...glyphs.map(g=>g.y)),right=Math.max(...glyphs.map(g=>g.x+g.width)),bottom=Math.max(...glyphs.map(g=>g.y+g.height));
     const centered=element.matches('button,.merchant-content .ant-pagination-item,.merchant-content .ant-pagination-prev,.merchant-content .ant-pagination-next');
-    return [{name,background:rect(box),inner,hitArea:rect(box),glyph:{x:left,y:top,width:right-left,height:bottom-top},alignment:centered?'center':'start',centerError:{x:(left+right)/2-(inner.x+inner.width/2),y:(top+bottom)/2-(inner.y+inner.height/2)},margins:{left:left-inner.x,right:inner.x+inner.width-right,top:top-inner.y,bottom:inner.y+inner.height-bottom}}];
+    return [{name,background:rect(box),inner,hitArea:rect(box),glyph:{x:left,y:top,width:right-left,height:bottom-top},alignment:element.matches('textarea')?'top-start':centered?'center':'start',centerError:{x:(left+right)/2-(inner.x+inner.width/2),y:(top+bottom)/2-(inner.y+inner.height/2)},margins:{left:left-inner.x,right:inner.x+inner.width-right,top:top-inner.y,bottom:inner.y+inner.height-bottom}}];
   });
 }

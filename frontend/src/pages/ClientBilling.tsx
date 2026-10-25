@@ -58,7 +58,7 @@ export default function ClientBilling() {
   const selectedTrip = useMemo(() => trips.find((trip) => trip.id === selectedTripId), [selectedTripId, trips]);
 
   const confirmLedger = async (entry: CustomerBalanceLedgerEntry, action: 'RECEIPT' | 'BILLING') => {
-    if (!selectedTripId || selectedTrip?.settlementFrozen || entry.settlementFrozen) {
+    if (!selectedTripId || selectedTrip?.status === 'SETTLED' || entry.settlementFrozen) {
       return;
     }
     const key = `${entry.businessId}-${action}`;
@@ -97,9 +97,9 @@ export default function ClientBilling() {
   ];
 
   return (
-    <div className="page-card client-page">
+    <div className="page-card client-page client-billing-page">
       <Space direction="vertical" size={16} style={{ width: '100%' }}>
-        <Space direction={isMobile ? 'vertical' : 'horizontal'} style={{ width: '100%', justifyContent: 'space-between' }}>
+        <div className="client-billing-header">
           <Title level={4} style={{ margin: 0 }} data-testid="client-billing-title">
             {t('nav.client_billing')}
           </Title>
@@ -107,19 +107,19 @@ export default function ClientBilling() {
             value={selectedTripId}
             placeholder={t('orders.trip.select.placeholder')}
             onChange={onTripChange}
-            style={{ minWidth: isMobile ? '100%' : 320 }}
+            style={{ width: isMobile ? '100%' : 320, minWidth: 0 }}
             options={trips.map((trip) => ({
               value: trip.id,
-              label: `${trip.origin} → ${trip.destination}`
+              label: `${trip.deliveryDate} · ${trip.deliveryArea}`
             }))}
           />
-        </Space>
+        </div>
         {selectedTrip ? (
           <Alert
             type={selectedTrip.settlementFrozen ? 'warning' : 'info'}
             showIcon
-            message={`${t('billing.freeze_stage')}: ${selectedTrip.settlementFreezeStage ?? 'ACTIVE'}`}
-            description={selectedTrip.settlementFreezeReason || t('billing.freeze_stage_active')}
+            message={`${t('billing.freeze_stage')}: ${t(`enum.trip_status.${selectedTrip.status}`)}`}
+            description={t(selectedTrip.status === 'SETTLED' ? 'billing.frozen_settled' : selectedTrip.status === 'COMPLETED' ? 'billing.delivery_completed' : 'billing.freeze_stage_active')}
           />
         ) : null}
         {loading ? (
@@ -131,7 +131,7 @@ export default function ClientBilling() {
             {entries.map((entry) => {
               const receiptConfirmed = Boolean(entry.receiptConfirmedAt);
               const billingConfirmed = Boolean(entry.billingConfirmedAt);
-              const settlementFrozen = Boolean(selectedTrip?.settlementFrozen || entry.settlementFrozen);
+              const settlementFrozen = Boolean(selectedTrip?.status === 'SETTLED' || entry.settlementFrozen);
               return (
                 <Card key={entry.businessId} className="client-list-card" title={`${entry.businessId}${entry.customerName ? ` · ${entry.customerName}` : ''}`}>
                   <Space direction="vertical" size={12} style={{ width: '100%' }}>
@@ -168,7 +168,7 @@ export default function ClientBilling() {
                         {
                           key: 'status',
                           label: t('billing.settlement_status'),
-                          children: <Tag color={billingConfirmed ? 'green' : receiptConfirmed ? 'blue' : 'gold'}>{entry.settlementStatus}</Tag>
+                          children: <Tag color={billingConfirmed ? 'green' : receiptConfirmed ? 'blue' : 'gold'}>{t(`billing.status.${entry.settlementStatus}`)}</Tag>
                         },
                         {
                           key: 'delivery-status',
@@ -209,7 +209,7 @@ export default function ClientBilling() {
                       size="small"
                       scroll={{ x: 'max-content' }}
                     />
-                    <Space wrap>
+                    <Space wrap className="client-billing-actions">
                       <Button
                         type="default"
                         onClick={() => confirmLedger(entry, 'RECEIPT')}
@@ -228,7 +228,7 @@ export default function ClientBilling() {
                       </Button>
                     </Space>
                     {settlementFrozen ? (
-                      <Text type="secondary">{entry.settlementFreezeReason || selectedTrip?.settlementFreezeReason}</Text>
+                      <Text type="secondary">{t('billing.frozen_settled')}</Text>
                     ) : null}
                     <Text type="secondary">
                       {t('billing.balance_carry_forward_hint')} {t('billing.order_context_hint')}

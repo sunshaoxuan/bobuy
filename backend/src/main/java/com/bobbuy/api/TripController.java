@@ -45,25 +45,15 @@ public class TripController {
   }
 
   @PostMapping
-  public ResponseEntity<ApiResponse<Trip>> create(@Valid @RequestBody Trip trip) {
-    return ResponseEntity.ok(ApiResponse.success(store.createTrip(trip)));
+  public ResponseEntity<ApiResponse<Trip>> create(@Valid @RequestBody TripWriteRequest request) {
+    return ResponseEntity.ok(ApiResponse.success(store.createTrip(request.toTrip())));
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<ApiResponse<Trip>> update(@PathVariable Long id, @Valid @RequestBody Trip trip) {
-    return store.updateTrip(id, trip)
+  public ResponseEntity<ApiResponse<Trip>> update(@PathVariable Long id, @Valid @RequestBody TripWriteRequest request) {
+    return store.updateTrip(id, request.toTrip())
         .map(updated -> ResponseEntity.ok(ApiResponse.success(updated)))
         .orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.trip.not_found"));
-  }
-
-  @PatchMapping("/{id}/status")
-  public ResponseEntity<ApiResponse<Trip>> updateStatus(@PathVariable Long id, @Valid @RequestBody TripStatusRequest request) {
-    return ResponseEntity.ok(ApiResponse.success(store.updateTripStatus(id, request.getStatus())));
-  }
-
-  @PostMapping("/{id}/reserve")
-  public ResponseEntity<ApiResponse<Trip>> reserve(@PathVariable Long id, @Valid @RequestBody TripReserveRequest request) {
-    return ResponseEntity.ok(ApiResponse.success(store.reserveTripCapacity(id, request.getQuantity())));
   }
 
   @PatchMapping("/{tripId}/orders/bulk-status")

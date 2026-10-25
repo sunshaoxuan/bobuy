@@ -14,10 +14,8 @@ export default function Dashboard() {
   const [orders, setOrders] = useState<Order[]>([]);
 
   const tripColumns: ColumnsType<Trip> = [
-    { title: t('dashboard.trips.origin'), dataIndex: 'origin' },
-    { title: t('dashboard.trips.destination'), dataIndex: 'destination' },
-    { title: t('dashboard.trips.depart_date'), dataIndex: 'departDate' },
-    { title: t('dashboard.trips.remaining_capacity'), dataIndex: 'remainingCapacity' },
+    { title: t('dashboard.trips.delivery_area'), dataIndex: 'deliveryArea' },
+    { title: t('dashboard.trips.delivery_date'), dataIndex: 'deliveryDate' },
     {
       title: t('dashboard.trips.status'),
       dataIndex: 'status',

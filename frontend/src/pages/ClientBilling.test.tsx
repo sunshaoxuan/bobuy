@@ -56,7 +56,7 @@ describe('ClientBilling', () => {
     confirmSpy.mockReset();
     modalConfirmSpy.mockReset();
     confirmSpy.mockResolvedValue({});
-    tripsMock.mockResolvedValue([{ id: 2000, agentId: 1, origin: 'Tokyo', destination: 'Shanghai', departDate: '2026-01-01', capacity: 10, reservedCapacity: 1, status: 'PUBLISHED', settlementFrozen: false, settlementFreezeStage: 'ACTIVE', settlementFreezeReason: '' }]);
+    tripsMock.mockResolvedValue([{ id: 2000, agentId: 1, deliveryArea: 'Shanghai', deliveryDate: '2026-01-01', status: 'PUBLISHED', settlementFrozen: false, settlementFreezeStage: 'ACTIVE', settlementFreezeReason: '' }]);
     ledgerMock.mockResolvedValue([
       {
         tripId: 2000,
@@ -93,6 +93,8 @@ describe('ClientBilling', () => {
 
     expect(await screen.findByText(/BIZ-1001/)).toBeInTheDocument();
     expect(await screen.findByText('Matcha')).toBeInTheDocument();
+    expect(await screen.findAllByText('Pending confirmation')).not.toHaveLength(0);
+    expect(screen.queryByText('PENDING_CONFIRMATION')).not.toBeInTheDocument();
     expect(await screen.findByText(/CASH ·/)).toBeInTheDocument();
     expect(await screen.findByText('Shanghai Pudong Century Ave 88')).toBeInTheDocument();
     expect(await screen.findByText('Ready for Delivery')).toBeInTheDocument();
@@ -102,8 +104,17 @@ describe('ClientBilling', () => {
     expect(modalConfirmSpy).toHaveBeenCalled();
   });
 
-  it('disables confirmation actions when the trip is frozen', async () => {
-    tripsMock.mockResolvedValue([{ id: 2000, agentId: 1, origin: 'Tokyo', destination: 'Shanghai', departDate: '2026-01-01', capacity: 10, reservedCapacity: 1, status: 'COMPLETED', settlementFrozen: true, settlementFreezeStage: 'PROCUREMENT_PENDING_SETTLEMENT', settlementFreezeReason: 'Trip completed and frozen for settlement' }]);
+  it('allows receipt confirmation after delivery completion', async () => {
+    tripsMock.mockResolvedValue([{ id: 2000, deliveryArea: 'Shanghai', deliveryDate: '2026-11-01', status: 'COMPLETED', settlementFrozen: true }]);
+    const user = userEvent.setup();
+    render(<I18nProvider><ClientBilling /></I18nProvider>);
+    const button = await screen.findByRole('button', { name: 'Confirm receipt' });
+    await user.click(button);
+    await waitFor(() => expect(confirmSpy).toHaveBeenCalledWith(2000, 'BIZ-1001', 'RECEIPT'));
+  });
+
+  it('disables confirmation actions after final settlement', async () => {
+    tripsMock.mockResolvedValue([{ id: 2000, agentId: 1, deliveryArea: 'Shanghai', deliveryDate: '2026-01-01', status: 'SETTLED', settlementFrozen: true, settlementFreezeStage: 'SETTLED_FROZEN', settlementFreezeReason: 'Trip completed and frozen for settlement' }]);
     ledgerMock.mockResolvedValue([
       {
         tripId: 2000,
@@ -122,7 +133,7 @@ describe('ClientBilling', () => {
         deliveryStatus: 'PENDING_DELIVERY',
         deliveryAddressSummary: 'Shanghai Pudong Century Ave 88',
         settlementFrozen: true,
-        settlementFreezeStage: 'PROCUREMENT_PENDING_SETTLEMENT',
+        settlementFreezeStage: 'DELIVERY_PENDING_SETTLEMENT',
         settlementFreezeReason: 'Trip completed and frozen for settlement',
         paymentRecords: [],
         orderLines: [{ skuId: 'SKU-1', itemName: 'Matcha', orderedQuantity: 2, purchasedQuantity: 1, unitPrice: 50, differenceNote: 'Short shipped 1' }]
@@ -135,7 +146,9 @@ describe('ClientBilling', () => {
       </I18nProvider>
     );
 
-    expect(await screen.findByText('Trip completed and frozen for settlement')).toBeInTheDocument();
+    await screen.findByRole('button', { name: 'Confirm receipt' });
+    expect(screen.getAllByText('Settlement completed. This bill is read-only.')).toHaveLength(2);
+    expect(screen.queryByText('Trip completed and frozen for settlement')).not.toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Confirm receipt' })).toBeDisabled();
     expect(screen.getByRole('button', { name: 'Confirm statement' })).toBeDisabled();
   });

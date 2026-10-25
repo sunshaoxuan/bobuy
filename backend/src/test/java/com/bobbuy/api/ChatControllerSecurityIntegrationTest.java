@@ -48,8 +48,8 @@ class ChatControllerSecurityIntegrationTest {
     @BeforeEach
     void setUp() {
         store.seed();
-        Trip ownTrip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
-        Trip otherTrip = store.createTrip(new Trip(null, 1000L, "HK", "SF", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+        Trip ownTrip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
+        Trip otherTrip = store.createTrip(new Trip(null, 1000L, "SF", LocalDate.now(), TripStatus.PUBLISHED, null));
 
         OrderHeader ownOrder = new OrderHeader("CHAT-CUST-OWN", 1001L, ownTrip.getId());
         ownOrder.addLine(new OrderLine("SKU-OWN", "Own Item", null, 1, 10.0));

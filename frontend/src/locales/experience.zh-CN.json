@@ -51,7 +51,7 @@
   "store.payment_hint": "提交后由商家确认采购与交付。当前无需付款。",
   "store.checkout": "确认下单",
   "store.choose_trip": "选择采购行程",
-  "store.depart": "出发",
+  "store.delivery_date": "送货日期",
   "store.trip": "采购行程",
   "store.no_trips": "暂无可预订行程",
   "store.catalog": "本程好物",

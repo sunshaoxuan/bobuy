@@ -38,7 +38,6 @@
 | RESOURCE_NOT_FOUND | 资源不存在 | 404 |
 | INVALID_REQUEST | 参数无效 | 400 |
 | INVALID_STATUS | 状态流转非法 | 400 |
-| CAPACITY_NOT_ENOUGH | 行程容量不足 | 409 |
 | INTERNAL_ERROR | 系统异常 | 500 |
 
 ## 3. 订单接口
@@ -113,49 +112,28 @@ NEW -> CONFIRMED -> PURCHASED -> DELIVERED -> SETTLED
 ### 4.1 获取行程列表
 - `GET /api/trips`
 
-### 4.2 创建行程
-- `POST /api/trips`
+### 4.2 创建区域送货安排
+- `POST /api/trips`，仅 AGENT 可调用，归属取认证账号。
 
 请求：
 ```json
-{
-  "agentId": 1000,
-  "origin": "Tokyo",
-  "destination": "Shanghai",
-  "departDate": "2026-02-10",
-  "capacity": 6,
-  "reservedCapacity": 0,
-  "status": "DRAFT"
-}
+{"deliveryArea":"上海市区及周边","deliveryDate":"2026-11-01"}
 ```
 
-### 4.3 更新行程
-- `PUT /api/trips/{id}`
+响应保留内部 `id`、`agentId`、`status`、`statusUpdatedAt` 与冻结信息，显示区域及送货日期。
+客户端传入 `agentId`、`status`、`origin`、`destination`、`departDate` 或任何容量字段均返回 400。
 
-### 4.4 预留行程容量
-- `POST /api/trips/{id}/reserve`
+### 4.3 更新区域送货安排
+- `PUT /api/trips/{id}`，请求与创建相同。归属及状态不能修改，冻结安排拒绝编辑。
+- `DELETE /api/trips/{id}` 保留既有删除与关联约束。
+- 容量预留接口及行程手工状态接口已移除。
 
-请求：
-```json
-{
-  "quantity": 1
-}
-```
+## 5. 自动流程
+- `PUBLISHED`：接单中。新建、无有效订单及全部取消时保持此状态。
+- `IN_PROGRESS`：任一有效订单出现采购数量，或进入 PURCHASED/DELIVERED/SETTLED。
+- `COMPLETED`：至少一个有效订单，且全部有效订单已 DELIVERED/SETTLED。进入交付完成阶段，区域、订单和采购内容锁定；收货/账单确认及登记收款继续开放，最终 SETTLED 后财务只读。
+- `SETTLED`：实际结算成功后进入；重复结算不会重复付款。
+- 取消订单不参与进度判断；日期到期不会自动代表送达。历史 COMPLETED/SETTLED 冻结保留。
+- 同账号可建立多个独立登录会话；刷新令牌及退出按会话隔离。保留角色与账套权限检查。
 
-### 4.5 删除行程
-- `DELETE /api/trips/{id}`
-
-## 5. 附录：字段说明
-
-### 5.1 订单状态
-- `NEW`：新建
-- `CONFIRMED`：已确认
-- `PURCHASED`：已采购
-- `DELIVERED`：已交付
-- `SETTLED`：已结算
-
-### 5.2 行程状态
-- `DRAFT`：草稿
-- `PUBLISHED`：已发布
-- `IN_PROGRESS`：进行中
-- `COMPLETED`：已完成
+结构升级及发布边界见 [PLAN-63](../plans/PLAN-63-区域送货行程与自动流程.md)。

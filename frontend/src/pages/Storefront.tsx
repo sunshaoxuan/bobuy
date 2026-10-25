@@ -148,7 +148,7 @@ export default function Storefront() {
   }
   const basket = <section className="basket"><div className="section-heading"><h1>{t('store.cart')} <small>{t('store.item_count',{count:quantity})}</small></h1><Link to="/">{t('store.continue')} <ArrowRightOutlined /></Link></div>
     {quantity === 0 ? <Empty description={t('store.cart_empty')}><Link to="/"><Button type="primary">{t('store.browse')}</Button></Link></Empty> : <>
-      {trip && <div className="basket-trip"><CalendarOutlined /><div><strong>{trip.origin} <ArrowRightOutlined /> {trip.destination}</strong><p>{trip.departDate} · {trip.merchantName}</p></div></div>}
+      {trip && <div className="basket-trip"><CalendarOutlined /><div><strong>{trip.deliveryArea}</strong><p>{trip.deliveryDate} · {trip.merchantName}</p></div></div>}
       {invalidCart && <Alert type="warning" message={t('store.cart_invalid')} />}
       <div className="basket-lines">{cartEntries.map(([id, qty]) => {
         const product = products.find(p => p.id === id);
@@ -161,10 +161,10 @@ export default function Storefront() {
     </>}
   </section>;
   const tripChoices = <div className="trip-list" role="group" aria-label={t('store.choose_trip')}>{trips.map(journey => <button key={journey.id} className={`trip-choice ${cart.tripId === journey.id ? 'selected' : ''}`} onClick={() => { choose(journey); setTripPicker(false); }} aria-pressed={cart.tripId === journey.id}>
-        <span className="trip-date">{journey.departDate.slice(5).replace('-', '/')}<small>{t('store.depart')}</small></span><span className="trip-route"><strong>{journey.origin} <ArrowRightOutlined /> {journey.destination}</strong><small>{journey.merchantName}</small></span>
+        <span className="trip-date">{journey.deliveryDate.slice(5).replace('-', '/')}<small>{t('store.delivery_date')}</small></span><span className="trip-route"><strong>{journey.deliveryArea}</strong><small>{journey.merchantName}</small></span>
         {cart.tripId === journey.id && <CheckCircleOutlined />}</button>)}</div>;
   const catalog = <div className="catalog-experience"><section className="journey-strip">
-      <button className="journey-trigger" onClick={() => setTripPicker(true)} aria-label={t('store.choose_trip')}><CalendarOutlined /><span><small>{trip ? `${trip.departDate.slice(5).replace('-', '.')} ${t('store.depart')} · ${trip.merchantName}` : t('store.trip')}</small><strong>{trip ? <>{trip.origin} <ArrowRightOutlined /> {trip.destination}</> : t('store.no_trips')}</strong></span><ArrowRightOutlined /></button>
+      <button className="journey-trigger" onClick={() => setTripPicker(true)} aria-label={t('store.choose_trip')}><CalendarOutlined /><span><small>{trip ? `${trip.deliveryDate.slice(5).replace('-', '.')} ${t('store.delivery_date')} · ${trip.merchantName}` : t('store.trip')}</small><strong>{trip ? <>{trip.deliveryArea}</> : t('store.no_trips')}</strong></span><ArrowRightOutlined /></button>
     </section>
     <section className="catalog" aria-label={t('store.catalog')}><div className="catalog-toolbar"><h1>{t('store.catalog')}<span>{t('store.product_count',{count:available.length})}</span></h1>
       <Input prefix={<SearchOutlined />} aria-label={t('store.search')} placeholder={t('store.search')} allowClear value={search} onChange={e => setSearch(e.target.value)} /></div>

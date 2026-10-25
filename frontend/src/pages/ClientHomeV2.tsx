@@ -273,7 +273,7 @@ export default function ClientHomeV2() {
               className="zen-select"
               options={trips.map((trip) => ({
                 value: trip.id,
-                label: `${trip.origin} → ${trip.destination}`
+                label: `${trip.deliveryArea} · ${trip.deliveryDate}`
               }))}
               onChange={onTripChange}
             />
@@ -310,14 +310,10 @@ export default function ClientHomeV2() {
 
         <section className="zen-trip-pulse">
            {trips.filter(t => t.status === 'PUBLISHED').map(trip => {
-             const capacityFill = trip.reservedCapacity / trip.capacity;
-             const isUrgent = capacityFill > 0.8;
              return (
-               <div key={trip.id} className={`zen-pulse-item ${isUrgent ? 'is-urgent' : ''}`}>
-                 <Text className="serif-font">{trip.destination}</Text>
-                 <div className="zen-pulse-bar">
-                   <div className="zen-pulse-fill" style={{ width: `${capacityFill * 100}%` }} />
-                 </div>
+               <div key={trip.id} className="zen-pulse-item">
+                 <Text className="serif-font">{trip.deliveryArea}</Text>
+                 <Text>{trip.deliveryDate}</Text>
                </div>
              );
            })}

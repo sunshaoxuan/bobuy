@@ -35,7 +35,7 @@ class BobbuyStoreCoverageTest {
         // Line 81: !users.containsKey(id)
         assertThat(store.updateUser(9999L, new User(null, "X", Role.CUSTOMER, 1.0))).isEmpty();
         // Line 110: !trips.containsKey(id)
-        assertThat(store.updateTrip(9999L, new Trip(null, 1L, "A", "B", LocalDate.now(), 1, 0, TripStatus.DRAFT, null)))
+        assertThat(store.updateTrip(9999L, new Trip(null, 1L, "B", LocalDate.now(), TripStatus.PUBLISHED, null)))
                 .isEmpty();
     }
 

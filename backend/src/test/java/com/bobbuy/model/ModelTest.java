@@ -50,23 +50,13 @@ class ModelTest {
     @Test
     void tripTest() {
         LocalDateTime now = LocalDateTime.now();
-        Trip trip = new Trip(1L, 100L, "O", "D", LocalDate.MAX, 10, 2, TripStatus.PUBLISHED, now);
-        assertThat(trip.getOrigin()).isEqualTo("O");
-        assertThat(trip.getCapacity()).isEqualTo(10);
-        assertThat(trip.getReservedCapacity()).isEqualTo(2);
-        assertThat(trip.getRemainingCapacity()).isEqualTo(8);
+        Trip trip = new Trip(1L, 100L, "D", LocalDate.MAX, TripStatus.PUBLISHED, now);
         assertThat(trip.getAgentId()).isEqualTo(100L);
-        assertThat(trip.getDepartDate()).isEqualTo(LocalDate.MAX);
+        assertThat(trip.getDeliveryDate()).isEqualTo(LocalDate.MAX);
 
-        trip.setDestination("D2");
+        trip.setDeliveryArea("D2");
         trip.setStatus(TripStatus.COMPLETED);
-        trip.setOrigin("O2");
-        trip.setCapacity(12);
-        trip.setReservedCapacity(3);
-        assertThat(trip.getDestination()).isEqualTo("D2");
-        assertThat(trip.getOrigin()).isEqualTo("O2");
-        assertThat(trip.getCapacity()).isEqualTo(12);
-        assertThat(trip.getReservedCapacity()).isEqualTo(3);
+        assertThat(trip.getDeliveryArea()).isEqualTo("D2");
         assertThat(trip.getStatus()).isEqualTo(TripStatus.COMPLETED);
         assertThat(trip.getStatusUpdatedAt()).isEqualTo(now);
         trip.recalculateCurrentLoad(3, 1.5, 2.0);

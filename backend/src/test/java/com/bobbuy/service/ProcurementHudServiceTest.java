@@ -31,14 +31,40 @@ class ProcurementHudServiceTest {
   @Autowired
   private ProcurementHudService procurementHudService;
 
+  @Autowired
+  private com.bobbuy.repository.TripRepository trips;
+
+  private void freezeTrip(Long id, TripStatus status) {
+    Trip trip = trips.findById(id).orElseThrow();
+    trip.setStatus(status);
+    trips.saveAndFlush(trip);
+  }
+
   @BeforeEach
   void setUp() {
     store.seed();
   }
 
   @Test
+  void settlementRequiresDeliveryAndRejectsDuplicatePayout() {
+    Trip trip = store.createTrip(new Trip(null, 1000L, "Local region", LocalDate.now(), TripStatus.PUBLISHED, null));
+    assertThatThrownBy(() -> procurementHudService.finalizeTripSettlement(trip.getId()))
+        .isInstanceOf(ApiException.class).satisfies(e -> assertThat(((ApiException)e).getMessageKey()).isEqualTo("error.trip.delivery_incomplete"));
+    OrderHeader order = new OrderHeader("AUTO-SETTLE", 1001L, trip.getId());
+    order.addLine(new OrderLine("prd-1000", "Matcha", null, 1, 10.0));
+    order = store.upsertOrder(order);
+    store.updateOrderStatus(order.getId(), OrderStatus.CONFIRMED);
+    store.updateOrderStatus(order.getId(), OrderStatus.PURCHASED);
+    store.updateOrderStatus(order.getId(), OrderStatus.DELIVERED);
+    procurementHudService.finalizeTripSettlement(trip.getId());
+    assertThatThrownBy(() -> procurementHudService.finalizeTripSettlement(trip.getId()))
+        .isInstanceOf(ApiException.class).satisfies(e -> assertThat(((ApiException)e).getMessageKey()).isEqualTo("error.procurement.settlement.already_settled"));
+    assertThat(store.getTrip(trip.getId()).orElseThrow().getStatus()).isEqualTo(TripStatus.SETTLED);
+  }
+
+  @Test
   void reconcileInventoryFillsDraftOrdersByCreationOrderWithinSameTrip() {
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
     OrderHeader first = new OrderHeader("RECON-1", 1001L, trip.getId());
     first.addLine(new OrderLine("prd-1000", "Matcha", null, 3, 10.0));
     OrderHeader createdFirst = store.upsertOrder(first);
@@ -52,14 +78,15 @@ class ProcurementHudServiceTest {
     int reconciled = procurementHudService.reconcileInventory("prd-1000", 3);
 
     assertThat(reconciled).isEqualTo(3);
+    assertThat(store.getTrip(trip.getId()).orElseThrow().getStatus()).isEqualTo(TripStatus.IN_PROGRESS);
     assertThat(store.getOrder(createdFirst.getId()).orElseThrow().getLines().get(0).getPurchasedQuantity()).isEqualTo(3);
     assertThat(store.getOrder(createdSecond.getId()).orElseThrow().getLines().get(0).getPurchasedQuantity()).isEqualTo(1);
   }
 
   @Test
   void reconcileInventoryStopsAtTargetTripWhenSameProductExistsInOtherTrips() {
-    Trip trip1 = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
-    Trip trip2 = store.createTrip(new Trip(null, 1000L, "LA", "SF", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip trip1 = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
+    Trip trip2 = store.createTrip(new Trip(null, 1000L, "SF", LocalDate.now(), TripStatus.PUBLISHED, null));
 
     OrderHeader firstTripOrder = new OrderHeader("RECON-T1", 1001L, trip1.getId());
     firstTripOrder.addLine(new OrderLine("prd-1000", "Matcha", null, 1, 10.0));
@@ -83,7 +110,7 @@ class ProcurementHudServiceTest {
     patch.setVolume(1.2);
     store.patchProduct("prd-1000", patch);
 
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
     OrderHeader order = new OrderHeader("HUD-PHYSICAL", 1001L, trip.getId());
     OrderLine line = new OrderLine("prd-1000", "Matcha", null, 2, 10.0);
     line.setPurchasedQuantity(2);
@@ -98,7 +125,7 @@ class ProcurementHudServiceTest {
 
   @Test
   void reconcileInventoryWithDetailsReturnsAllocatedBusinessIds() {
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
     OrderHeader order = new OrderHeader("RECON-DETAIL", 1001L, trip.getId());
     order.addLine(new OrderLine("prd-1000", "Matcha", null, 2, 10.0));
     store.upsertOrder(order);
@@ -112,7 +139,7 @@ class ProcurementHudServiceTest {
 
   @Test
   void getHudStatsSubtractsTripExpensesFromProfit() {
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
     OrderHeader order = new OrderHeader("HUD-EXPENSE", 1001L, trip.getId());
     OrderLine line = new OrderLine("prd-1000", "Matcha", null, 2, 10.0);
     line.setPurchasedQuantity(2);
@@ -128,7 +155,7 @@ class ProcurementHudServiceTest {
 
   @Test
   void manualReconcileTransfersPurchasedQuantityBetweenOrders() {
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
     OrderHeader fromOrder = new OrderHeader("MANUAL-FROM", 1001L, trip.getId());
     OrderLine fromLine = new OrderLine("prd-1000", "Matcha", null, 3, 10.0);
     fromLine.setPurchasedQuantity(2);
@@ -148,7 +175,7 @@ class ProcurementHudServiceTest {
 
   @Test
   void manualReconcileIsBlockedWhenTripSettlementFrozen() {
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
     OrderHeader fromOrder = new OrderHeader("MANUAL-FROZEN-FROM", 1001L, trip.getId());
     OrderLine fromLine = new OrderLine("prd-1000", "Matcha", null, 2, 10.0);
     fromLine.setPurchasedQuantity(2);
@@ -158,7 +185,7 @@ class ProcurementHudServiceTest {
     OrderHeader toOrder = new OrderHeader("MANUAL-FROZEN-TO", 1001L, trip.getId());
     toOrder.addLine(new OrderLine("prd-1000", "Matcha", null, 2, 10.0));
     store.upsertOrder(toOrder);
-    store.updateTripStatus(trip.getId(), TripStatus.COMPLETED);
+    freezeTrip(trip.getId(), TripStatus.COMPLETED);
 
     assertThatThrownBy(() -> procurementHudService.manualReconcile(trip.getId(), "prd-1000", "MANUAL-FROZEN-FROM", "MANUAL-FROZEN-TO", 1))
         .isInstanceOf(ApiException.class)
@@ -184,13 +211,32 @@ class ProcurementHudServiceTest {
   }
 
   @Test
-  void frozenTripBlocksCustomerConfirmationAndOfflinePayment() {
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+  void deliveredTripAllowsConfirmationAndPaymentBeforeFinalSettlement() {
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
+    OrderHeader order = new OrderHeader("DELIVERED-BILL", 1001L, trip.getId());
+    order.addLine(new OrderLine("prd-1000", "Matcha", null, 1, 10.0));
+    order.setStatus(OrderStatus.CONFIRMED);
+    OrderHeader saved = store.upsertOrder(order);
+    store.updateOrderStatus(saved.getId(), OrderStatus.PURCHASED);
+    store.updateOrderStatus(saved.getId(), OrderStatus.DELIVERED);
+    assertThat(store.getTrip(trip.getId()).orElseThrow().getStatus()).isEqualTo(TripStatus.COMPLETED);
+    var auth = new UsernamePasswordAuthenticationToken("1001", "N/A");
+    LedgerConfirmationRequest request = new LedgerConfirmationRequest();
+    request.setAction("RECEIPT");
+    assertThat(procurementHudService.confirmCustomerLedger(trip.getId(), "DELIVERED-BILL", request, auth).isSettlementFrozen()).isFalse();
+    request.setAction("BILLING");
+    procurementHudService.confirmCustomerLedger(trip.getId(), "DELIVERED-BILL", request, auth);
+    assertThat(procurementHudService.recordOfflinePayment(trip.getId(), buildPayment("DELIVERED-BILL", 10.0, "CASH"), auth).getAmount()).isEqualTo(10.0);
+  }
+
+  @Test
+  void settledTripBlocksCustomerConfirmationAndOfflinePayment() {
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
     OrderHeader order = new OrderHeader("FROZEN-BILL", 1001L, trip.getId());
     order.addLine(new OrderLine("prd-1000", "Matcha", null, 1, 10.0));
     order.setStatus(OrderStatus.CONFIRMED);
     store.upsertOrder(order);
-    store.updateTripStatus(trip.getId(), TripStatus.COMPLETED);
+    freezeTrip(trip.getId(), TripStatus.SETTLED);
 
     LedgerConfirmationRequest request = new LedgerConfirmationRequest();
     request.setAction("RECEIPT");
@@ -214,9 +260,9 @@ class ProcurementHudServiceTest {
   @Test
   void customerBalanceCarryForwardIgnoresCancelledNewAndFutureOrders() {
     long customerId = 9001L;
-    Trip historicalTrip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now().minusDays(10), 20, 0, TripStatus.DRAFT, null));
-    Trip futureTrip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now().plusDays(10), 20, 0, TripStatus.PUBLISHED, null));
-    Trip currentTrip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip historicalTrip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now().minusDays(10), TripStatus.PUBLISHED, null));
+    Trip futureTrip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now().plusDays(10), TripStatus.PUBLISHED, null));
+    Trip currentTrip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
 
     OrderHeader historicalOrder = new OrderHeader("BAL-HIS", customerId, historicalTrip.getId());
     OrderLine historicalLine = new OrderLine("prd-1000", "Matcha", null, 2, 10.0);
@@ -269,8 +315,8 @@ class ProcurementHudServiceTest {
   @Test
   void customerBalanceCarryForwardSupportsOverpaymentAndUnderpayment() {
     long customerId = 9002L;
-    Trip historicalTrip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now().minusDays(5), 20, 0, TripStatus.DRAFT, null));
-    Trip currentTrip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip historicalTrip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now().minusDays(5), TripStatus.PUBLISHED, null));
+    Trip currentTrip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
 
     OrderHeader historicalOrder = new OrderHeader("BAL-OVERPAID", customerId, historicalTrip.getId());
     OrderLine historicalLine = new OrderLine("prd-1000", "Matcha", null, 2, 10.0);

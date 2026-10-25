@@ -71,7 +71,7 @@ export default function ClientOrders() {
             style={{ minWidth: isMobile ? '100%' : 280 }}
             options={trips.map((trip) => ({
               value: trip.id,
-              label: `${trip.origin} → ${trip.destination}`
+              label: `${trip.deliveryArea} · ${trip.deliveryDate}`
             }))}
           />
         </Space>

@@ -112,3 +112,27 @@ html[lang=en-US] .accounts-heading>.ant-btn>span { transform:translateX(-2px); }
 @media(max-width:767px) { .storefront .store-brand span { display:none; }.storefront .store-brand { font-size:23px; flex:none; }.storefront .store-header { padding-inline:16px; gap:8px; }.storefront .store-header-actions { gap:6px; }.storefront .catalog-toolbar { height:auto; min-height:64px; flex-wrap:wrap; }.storefront .catalog-toolbar h1 { white-space:normal; flex-wrap:wrap; gap:6px; }.storefront .catalog-toolbar>.ant-input-affix-wrapper { flex:1; min-width:120px; }.storefront .catalog-toolbar h1>span { display:none; }.storefront .section-heading { flex-wrap:wrap; } }
 @media(max-width:1199px) { .merchant-breadcrumb>span { display:none; }.merchant-header { padding-inline:24px; }.merchant-content { padding:24px; }.merchant-header-tools { gap:8px; }.merchant-store-link>span:not(.anticon) { display:none; }.merchant-content .dashboard-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media(max-width:767px) { .merchant-shell { display:block; }.merchant-shell>.merchant-sidebar { display:none; }.merchant-header { height:72px; padding:12px 16px; gap:8px; }.merchant-header>.merchant-menu-toggle { display:block; }.merchant-breadcrumb { flex:1; }.merchant-breadcrumb strong { font-size:12px; }.merchant-header-tools { gap:6px; }.merchant-header-tools .language-switcher { padding-inline:8px; }.merchant-store-link { padding:8px; border:0; }.merchant-store-link>.anticon:last-child { display:none; }.merchant-content { padding:24px 16px; }.merchant-content .section-title { font-size:22px; }.merchant-content .ant-card-body { padding:16px; }.merchant-content .dashboard-grid { gap:12px; }.merchant-content .dashboard-grid .ant-card-body { padding:16px; }.trip-form-grid { grid-template-columns:minmax(0,1fr); gap:0; }.trip-form-actions .ant-btn { width:100%; }.merchant-login-header { padding:16px; }.merchant-login-main { margin-top:40px; }.merchant-header-tools .ant-btn { padding-inline:10px; }.merchant-drawer .ant-drawer-body { padding:16px; }.merchant-drawer .ant-drawer-close { width:44px; height:44px; }.merchant-drawer .ant-drawer-header { padding:16px; }.merchant-drawer .merchant-brand strong { font-size:20px; } }
+
+.trip-editor-heading { margin:0 0 20px; font-size:17px; font-weight:600; }
+.trip-area { display:block; max-width:480px; white-space:normal; overflow-wrap:anywhere; }
+.regional-trips-table .ant-btn { min-height:44px; min-width:44px; }
+.trip-form-actions .ant-space { gap:8px !important; }
+@media(max-width:767px) { .trip-form-actions .ant-space { width:100%; display:flex; } .trip-form-actions .ant-space-item { flex:1; } }
+
+.client-billing-page.page-card { padding:0; border:0; background:transparent; overflow:visible; }
+.client-billing-header { display:flex; justify-content:space-between; align-items:center; gap:16px; }
+.client-billing-page .ant-space-vertical>.ant-space-item,.client-billing-page .client-list-card { min-width:0; max-width:100%; }
+.client-billing-page .ant-space-vertical>.ant-space-item { width:100%; }
+.client-billing-page .ant-descriptions table { table-layout:fixed; }
+.client-billing-page .ant-descriptions-item-label,.client-billing-page .ant-descriptions-item-content { overflow-wrap:anywhere; }
+.client-billing-actions .ant-btn>span { position:relative; top:-1px; }
+@media(max-width:767px) { .client-billing-header { flex-direction:column; align-items:stretch; }.client-billing-page .ant-card-head { padding-inline:14px; }.client-billing-page .ant-descriptions-item-label { width:44%; } }
+
+.trip-editor textarea.ant-input { padding:6px 11px; resize:none; line-height:22px; }
+.trip-area { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:3; overflow:hidden; }
+.regional-trips-table .ant-table-cell { vertical-align:top; }
+.regional-trips-table .ant-tag-blue { color:#1458ab; background:#e6f4ff; border-color:#91caff; }
+.regional-trips-table .ant-tag-green { color:#246b12; background:#f6ffed; border-color:#b7eb8f; }
+.client-billing-page .ant-descriptions-item-label { overflow-wrap:normal; word-break:normal; }
+.client-billing-page .ant-tag { white-space:normal; overflow-wrap:anywhere; }
+.storefront .client-billing-actions .ant-btn:disabled { background:#f2f2f3; color:#66666e; border-color:#d9d9de; }

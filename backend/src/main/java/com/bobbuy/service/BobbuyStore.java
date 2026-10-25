@@ -71,6 +71,7 @@ public class BobbuyStore {
     private final UserRepository userRepository;
     private final com.bobbuy.repository.CheckoutIdentityRepository checkoutIds;
     private final TripRepository tripRepository;
+    private final TripWorkflowService tripWorkflow;
     private final OrderHeaderRepository orderHeaderRepository;
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
@@ -107,6 +108,7 @@ public class BobbuyStore {
             UserRepository userRepository,
             com.bobbuy.repository.CheckoutIdentityRepository checkoutIds,
             TripRepository tripRepository,
+            TripWorkflowService tripWorkflow,
             OrderHeaderRepository orderHeaderRepository,
             ProductRepository productRepository,
             CategoryRepository categoryRepository,
@@ -129,6 +131,7 @@ public class BobbuyStore {
         this.userRepository = userRepository;
         this.checkoutIds = checkoutIds;
         this.tripRepository = tripRepository;
+        this.tripWorkflow = tripWorkflow;
         this.orderHeaderRepository = orderHeaderRepository;
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
@@ -211,9 +214,7 @@ public class BobbuyStore {
         userRepository.save(agent);
         userRepository.save(customer);
 
-        Trip trip = new Trip(2000L, agent.getId(), "Tokyo", "Shanghai", LocalDate.now().plusDays(5),
-                6, 1,
-                TripStatus.PUBLISHED, LocalDateTime.now());
+        Trip trip = new Trip(2000L, agent.getId(), "Shanghai", LocalDate.now().plusDays(5), TripStatus.PUBLISHED, LocalDateTime.now());
         tripRepository.save(trip);
 
         OrderHeader header = new OrderHeader("20260117001", customer.getId(), trip.getId());
@@ -471,35 +472,27 @@ public class BobbuyStore {
 
     @Transactional
     public Trip createTrip(Trip trip) {
-        if (com.bobbuy.security.MerchantScope.current() != null) trip.setAgentId(com.bobbuy.security.MerchantScope.current());
+        Long owner = com.bobbuy.security.MerchantScope.current();
+        if (owner != null) trip.setAgentId(owner);
+        if (trip.getAgentId() == null) throw new ApiException(ErrorCode.FORBIDDEN, "商家身份无效");
         trip.setId(nextTripId());
-        trip.setReservedCapacity(Math.max(trip.getReservedCapacity(), 0));
+        trip.setDeliveryArea(trip.getDeliveryArea().trim());
+        trip.setStatus(TripStatus.PUBLISHED);
         trip.setStatusUpdatedAt(LocalDateTime.now());
         return tripRepository.save(trip);
     }
 
     @Transactional
-    public Optional<Trip> updateTrip(Long id, Trip trip) {
-        if (getTrip(id).isEmpty()) return Optional.empty();
-        if (com.bobbuy.security.MerchantScope.current() != null) trip.setAgentId(com.bobbuy.security.MerchantScope.current());
-        if (!tripRepository.existsById(id)) {
-            return Optional.empty();
-        }
-        trip.setId(id);
-        trip.setStatusUpdatedAt(LocalDateTime.now());
-        return Optional.of(tripRepository.save(trip));
-    }
-
-    @Transactional
-    public Trip updateTripStatus(Long id, TripStatus nextStatus) {
-        Trip trip = getTrip(id)
-                .orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.trip.not_found"));
-        String previousStatus = trip.getStatus().name();
-        trip.setStatus(nextStatus);
-        trip.setStatusUpdatedAt(LocalDateTime.now());
-        Trip saved = tripRepository.save(trip);
-        auditLogService.logStatusChange("TRIP", id, previousStatus, nextStatus.name(), SYSTEM_USER_ID);
-        return saved;
+    public Optional<Trip> updateTrip(Long id, Trip input) {
+        return tripRepository.findByIdForUpdate(id)
+                .filter(trip -> com.bobbuy.security.MerchantScope.visible(trip.getAgentId()))
+                .filter(trip -> isTripVisibleToCustomer(trip.getId()))
+                .map(trip -> {
+            if (trip.isSettlementFrozen()) throw new ApiException(ErrorCode.INVALID_REQUEST, "error.trip.settlement_frozen");
+            trip.setDeliveryArea(input.getDeliveryArea().trim());
+            trip.setDeliveryDate(input.getDeliveryDate());
+            return tripRepository.save(trip);
+        });
     }
 
     @Transactional
@@ -726,13 +719,11 @@ public class BobbuyStore {
             headerInput.setLines(new ArrayList<>());
         }
         normalizeLinePurchasedQuantities(headerInput.getLines());
+        ensureOrderLinesMutable(headerInput.getTripId());
         Optional<OrderHeader> existingOptional = orderHeaderRepository.findByBusinessIdForUpdate(headerInput.getBusinessId());
 
         if (existingOptional.isEmpty()) {
             ensureOrderLinesMutable(headerInput.getTripId());
-            if (isAtLeastConfirmed(headerInput.getStatus()) && headerInput.getTripId() != null) {
-                reserveTripCapacity(headerInput.getTripId(), calculateTotalQuantity(headerInput));
-            }
             headerInput.setId(nextOrderIdentity());
             headerInput.setStatusUpdatedAt(LocalDateTime.now());
             for (OrderLine line : headerInput.getLines()) {
@@ -740,17 +731,13 @@ public class BobbuyStore {
                 line.setHeaderId(headerInput.getId());
             }
             recalculateTotal(headerInput);
-            return orderHeaderRepository.save(headerInput);
+            return saveOrderAndRefresh(headerInput);
         }
 
         OrderHeader existing = existingOptional.orElseThrow();
         ensureOrderLinesMutable(existing.getTripId());
         if (existing.getLines() == null) {
             existing.setLines(new ArrayList<>());
-        }
-        int additionalQuantity = calculateTotalQuantity(headerInput);
-        if (additionalQuantity > 0 && isAtLeastConfirmed(existing.getStatus()) && existing.getTripId() != null) {
-            reserveTripCapacity(existing.getTripId(), additionalQuantity);
         }
         for (OrderLine newLine : headerInput.getLines()) {
             Optional<OrderLine> match = existing.getLines().stream()
@@ -768,7 +755,7 @@ public class BobbuyStore {
         }
         existing.setStatusUpdatedAt(LocalDateTime.now());
         recalculateTotal(existing);
-        return orderHeaderRepository.save(existing);
+        return saveOrderAndRefresh(existing);
     }
 
     @Transactional
@@ -798,10 +785,7 @@ public class BobbuyStore {
             OrderHeader header = existing.get();
             header.addLine(newLine); // addLine handles IDs and merging
             recalculateTotal(header);
-            if (isAtLeastConfirmed(header.getStatus())) {
-                reserveTripCapacity(tripId, request.getQuantity());
-            }
-            return orderHeaderRepository.save(header);
+            return saveOrderAndRefresh(header);
         } else {
             OrderHeader newHeader = new OrderHeader(request.getBusinessId(), null, tripId);
             newHeader.setTripId(tripId);
@@ -812,7 +796,7 @@ public class BobbuyStore {
             newHeader.setCreatedAt(LocalDateTime.now());
             newHeader.setStatusUpdatedAt(LocalDateTime.now());
             recalculateTotal(newHeader);
-            return orderHeaderRepository.save(newHeader);
+            return saveOrderAndRefresh(newHeader);
         }
     }
 
@@ -830,6 +814,7 @@ public class BobbuyStore {
             return Optional.empty();
         }
         OrderHeader existing = existingOptional.orElseThrow();
+        Long previousTripId = existing.getTripId();
         getTrip(order.getTripId()).orElseThrow(() -> new ApiException(ErrorCode.FORBIDDEN, "无权操作此行程"));
         ensureOrderLinesMutable(existing.getTripId());
         ensureOrderLinesMutable(order.getTripId());
@@ -851,57 +836,28 @@ public class BobbuyStore {
             line.setHeaderId(id);
         }
         order.setStatusUpdatedAt(LocalDateTime.now());
-        return Optional.of(orderHeaderRepository.save(order));
+        OrderHeader saved = saveOrderAndRefresh(order);
+        if (!java.util.Objects.equals(previousTripId, order.getTripId())) tripWorkflow.refresh(previousTripId);
+        return Optional.of(saved);
     }
 
     @Transactional
     public OrderHeader updateOrderStatus(Long id, OrderStatus nextStatus) {
         OrderHeader order = getOrder(id)
                 .orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.order.not_found"));
-        return applyOrderStatusTransition(order, nextStatus, true);
+        return applyOrderStatusTransition(order, nextStatus);
     }
 
     @Transactional
     public boolean deleteOrder(Long id) {
-        Optional<OrderHeader> removed = orderHeaderRepository.findById(id);
+        Optional<OrderHeader> removed = getOrder(id);
         if (removed.isEmpty()) {
             return false;
         }
         ensureOrderLinesMutable(removed.orElseThrow().getTripId());
         orderHeaderRepository.deleteById(id);
+        tripWorkflow.refresh(removed.orElseThrow().getTripId());
         return true;
-    }
-
-    @Transactional
-    public Trip reserveTripCapacity(Long id, int quantity) {
-        Trip trip = tripRepository.findByIdForUpdate(id)
-                .orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.trip.not_found"));
-        int remaining = trip.getRemainingCapacity();
-        if (quantity <= 0) {
-            throw new ApiException(ErrorCode.INVALID_REQUEST, "error.trip.invalid_quantity");
-        }
-        if (remaining < quantity) {
-            throw new ApiException(ErrorCode.CAPACITY_NOT_ENOUGH, "error.trip.capacity_not_enough");
-        }
-        trip.setReservedCapacity(trip.getReservedCapacity() + quantity);
-        trip.setStatusUpdatedAt(LocalDateTime.now());
-        return tripRepository.save(trip);
-    }
-
-    @Transactional
-    public Trip releaseTripCapacity(Long id, int quantity) {
-        Trip trip = tripRepository.findByIdForUpdate(id)
-                .orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.trip.not_found"));
-        if (quantity <= 0) {
-            return trip;
-        }
-        int releaseQuantity = Math.min(quantity, trip.getReservedCapacity());
-        if (releaseQuantity == 0) {
-            return trip;
-        }
-        trip.setReservedCapacity(trip.getReservedCapacity() - releaseQuantity);
-        trip.setStatusUpdatedAt(LocalDateTime.now());
-        return tripRepository.save(trip);
     }
 
     @Transactional
@@ -914,18 +870,9 @@ public class BobbuyStore {
         if (eligible.isEmpty()) {
             return new ArrayList<>();
         }
-        if (targetStatus == OrderStatus.CONFIRMED) {
-            int totalQuantity = eligible.stream()
-                    .mapToInt(this::calculateTotalQuantity)
-                    .sum();
-            if (totalQuantity > 0) {
-                reserveTripCapacity(tripId, totalQuantity);
-            }
-        }
         List<OrderHeader> updated = new ArrayList<>();
-        boolean applyCapacity = targetStatus != OrderStatus.CONFIRMED;
         for (OrderHeader order : eligible) {
-            updated.add(applyOrderStatusTransition(order, targetStatus, applyCapacity));
+            updated.add(applyOrderStatusTransition(order, targetStatus));
         }
         return updated;
     }
@@ -978,44 +925,36 @@ public class BobbuyStore {
         };
     }
 
-    private OrderHeader applyOrderStatusTransition(OrderHeader order, OrderStatus nextStatus, boolean applyCapacity) {
+    private OrderHeader applyOrderStatusTransition(OrderHeader order, OrderStatus nextStatus) {
         if (!isValidStatusTransition(order.getStatus(), nextStatus)) {
             throw new ApiException(ErrorCode.INVALID_STATUS, "error.order.invalid_status");
         }
-        if (applyCapacity && order.getTripId() != null && shouldReserveCapacity(order.getStatus(), nextStatus)) {
-            reserveTripCapacity(order.getTripId(), calculateTotalQuantity(order));
-        }
-        if (applyCapacity && order.getTripId() != null && shouldReleaseCapacity(order.getStatus(), nextStatus)) {
-            releaseTripCapacity(order.getTripId(), calculateTotalQuantity(order));
+        if (order.getTripId() != null) {
+            Trip trip = tripRepository.findByIdForUpdate(order.getTripId()).orElseThrow();
+            if (trip.isSettlementFrozen() && nextStatus != OrderStatus.SETTLED) {
+                throw new ApiException(ErrorCode.INVALID_REQUEST, "error.trip.settlement_frozen");
+            }
         }
         String previousStatus = order.getStatus().name();
         order.setStatus(nextStatus);
+        if (nextStatus == OrderStatus.DELIVERED) order.setDeliveryStatus(com.bobbuy.model.DeliveryStatus.DELIVERED);
         order.setStatusUpdatedAt(LocalDateTime.now());
-        OrderHeader saved = orderHeaderRepository.save(order);
+        OrderHeader saved = saveOrderAndRefresh(order);
         auditLogService.logStatusChange("ORDER", order.getId(), previousStatus, nextStatus.name(), SYSTEM_USER_ID);
         return saved;
     }
 
-    private boolean shouldReserveCapacity(OrderStatus current, OrderStatus nextStatus) {
-        return !isAtLeastConfirmed(current) && isAtLeastConfirmed(nextStatus);
-    }
-
-    private boolean isAtLeastConfirmed(OrderStatus status) {
-        return status == OrderStatus.CONFIRMED
-                || status == OrderStatus.PURCHASED
-                || status == OrderStatus.DELIVERED
-                || status == OrderStatus.SETTLED;
-    }
-
-    private boolean shouldReleaseCapacity(OrderStatus current, OrderStatus nextStatus) {
-        return nextStatus == OrderStatus.CANCELLED && isAtLeastConfirmed(current);
+    private OrderHeader saveOrderAndRefresh(OrderHeader order) {
+        OrderHeader saved = orderHeaderRepository.saveAndFlush(order);
+        tripWorkflow.refresh(order.getTripId());
+        return saved;
     }
 
     private void ensureOrderLinesMutable(Long tripId) {
         if (tripId == null) {
             return;
         }
-        Optional<Trip> tripOptional = tripRepository.findById(tripId);
+        Optional<Trip> tripOptional = tripRepository.findByIdForUpdate(tripId);
         if (tripOptional.isEmpty()) {
             return;
         }
@@ -1075,7 +1014,7 @@ public class BobbuyStore {
                             if (line.getPurchasedQuantity() > 0) {
                                 return line.getPurchasedQuantity();
                             }
-                            return isAtLeastConfirmed(order.getStatus()) ? line.getQuantity() : 0;
+                            return order.getStatus() == OrderStatus.PURCHASED || order.getStatus() == OrderStatus.DELIVERED || order.getStatus() == OrderStatus.SETTLED ? line.getQuantity() : 0;
                         })
                         .sum())
                 .sum();
@@ -1147,9 +1086,7 @@ public class BobbuyStore {
     }
 
     private Long nextTripId() {
-        return tripRepository.findTopByOrderByIdDesc()
-                .map(existing -> existing.getId() + 1)
-                .orElse(2000L);
+        return checkoutIds.saveAndFlush(new com.bobbuy.model.CheckoutIdentity()).id;
     }
 
     private synchronized Long nextOrderIdentity() {

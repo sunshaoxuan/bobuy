@@ -56,7 +56,7 @@ class StorefrontIntegrationTest {
     }
 
     @Test void publicCatalogExcludesDraftsAndPrivateFields() throws Exception {
-        Trip draft = new Trip(9000L,1000L,"Secret","Draft",LocalDate.now().plusDays(2),10,0,TripStatus.DRAFT,LocalDateTime.now());
+        Trip draft = new Trip(9000L, 1000L, "Draft", LocalDate.now().plusDays(2), TripStatus.PUBLISHED, LocalDateTime.now());
         trips.save(draft);
         Product hidden = new Product(); hidden.setId("hidden"); hidden.setMerchantId(1000L); hidden.setName(Map.of("zh-CN","Hidden")); hidden.setVisibilityStatus(ProductVisibility.DRAFTER_ONLY); products.save(hidden);
         String tripJson = mvc.perform(get("/api/storefront/trips")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
@@ -89,7 +89,7 @@ class StorefrontIntegrationTest {
     @Test void merchantApprovalIsPairScopedAndRequiresOwnOrder() throws Exception {
         JsonNode registration = register("pair_customer"); long customer = registration.at("/user/id").asLong();
         User b = new User(9001L,"Merchant B",Role.AGENT,0); b.setUsername("agent_b"); users.save(b);
-        trips.save(new Trip(9002L,9001L,"Osaka","Seoul",LocalDate.now().plusDays(3),100,0,TripStatus.PUBLISHED,LocalDateTime.now()));
+        trips.save(new Trip(9002L, 9001L, "Seoul", LocalDate.now().plusDays(3), TripStatus.PUBLISHED, LocalDateTime.now()));
         checkout(token(registration),checkoutBody(UUID.randomUUID(),2000,"prd-1000",1)).andExpect(status().isOk());
         mvc.perform(post("/api/merchant/customers/"+customer+"/approve").header("X-BOBBUY-ROLE","AGENT").header("X-BOBBUY-USER","9001")).andExpect(status().isForbidden());
         mvc.perform(post("/api/merchant/customers/"+customer+"/approve").header("X-BOBBUY-ROLE","AGENT").header("X-BOBBUY-USER","1000")).andExpect(status().isOk());

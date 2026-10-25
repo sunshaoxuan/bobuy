@@ -40,6 +40,15 @@ class BobbuyStoreTest {
   @Autowired
   private AuditLogService auditLogService;
 
+  @Autowired
+  private com.bobbuy.repository.TripRepository trips;
+
+  private Trip freezeTrip(Long id, TripStatus status) {
+    Trip trip = trips.findById(id).orElseThrow();
+    trip.setStatus(status);
+    return trips.saveAndFlush(trip);
+  }
+
   @BeforeEach
   void setUp() {
     store.seed();
@@ -72,31 +81,15 @@ class BobbuyStoreTest {
 
   @Test
   void tripLifecycleTests() {
-    // List
     assertThat(store.listTrips()).hasSize(1);
-
-    // Create
-    Trip newTrip = new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 5, -1, TripStatus.DRAFT, null);
-    Trip created = store.createTrip(newTrip);
-    assertThat(created.getId()).isEqualTo(2001L);
-    assertThat(created.getReservedCapacity()).isEqualTo(0); // Test Math.max logic
-
-    // Update
-    created.setOrigin("Macau");
-    Optional<Trip> updated = store.updateTrip(2001L, created);
-    assertThat(updated).isPresent();
-    assertThat(updated.get().getOrigin()).isEqualTo("Macau");
-
-    // Update missing
+    Trip created = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.COMPLETED, null));
+    assertThat(created.getStatus()).isEqualTo(TripStatus.PUBLISHED);
+    created.setDeliveryArea("Macau");
+    Trip updated = store.updateTrip(created.getId(), created).orElseThrow();
+    assertThat(updated.getDeliveryArea()).isEqualTo("Macau");
     assertThat(store.updateTrip(9999L, created)).isEmpty();
-
-    // Update status missing
-    assertThatThrownBy(() -> store.updateTripStatus(9999L, TripStatus.COMPLETED))
-        .isInstanceOf(ApiException.class);
-
-    // Delete
-    assertThat(store.deleteTrip(2001L)).isTrue();
-    assertThat(store.deleteTrip(2001L)).isFalse();
+    assertThat(store.deleteTrip(created.getId())).isTrue();
+    assertThat(store.deleteTrip(created.getId())).isFalse();
   }
 
   @Test
@@ -122,41 +115,9 @@ class BobbuyStoreTest {
     assertThat(store.deleteOrder(created.getId())).isFalse();
   }
 
-  @Test
-  void updateOrderStatusReservesCapacityWhenConfirmed() {
-    Trip tripBefore = store.getTrip(2000L).orElseThrow();
-    int reservedBefore = tripBefore.getReservedCapacity();
 
-    OrderHeader newHeader = new OrderHeader("BUS-CAP-1", 1001L, 2000L);
-    newHeader.addLine(new OrderLine("SKU-CAP", "Capacity", null, 2, 10.0));
-    OrderHeader created = store.upsertOrder(newHeader);
 
-    store.updateOrderStatus(created.getId(), OrderStatus.CONFIRMED);
 
-    Trip tripAfter = store.getTrip(2000L).orElseThrow();
-    assertThat(tripAfter.getReservedCapacity()).isEqualTo(reservedBefore + 2);
-  }
-
-  @Test
-  void upsertOrderReservesCapacityForConfirmedMerges() {
-    Trip tripBefore = store.getTrip(2000L).orElseThrow();
-    int reservedBefore = tripBefore.getReservedCapacity();
-
-    OrderHeader confirmed = new OrderHeader("BUS-CAP-2", 1001L, 2000L);
-    confirmed.setStatus(OrderStatus.CONFIRMED);
-    confirmed.addLine(new OrderLine("SKU-CAP", "Capacity", null, 1, 10.0));
-    store.upsertOrder(confirmed);
-
-    Trip tripAfterCreate = store.getTrip(2000L).orElseThrow();
-    assertThat(tripAfterCreate.getReservedCapacity()).isEqualTo(reservedBefore + 1);
-
-    OrderHeader merged = new OrderHeader("BUS-CAP-2", 1001L, 2000L);
-    merged.addLine(new OrderLine("SKU-CAP", "Capacity", null, 3, 10.0));
-    store.upsertOrder(merged);
-
-    Trip tripAfterMerge = store.getTrip(2000L).orElseThrow();
-    assertThat(tripAfterMerge.getReservedCapacity()).isEqualTo(reservedBefore + 4);
-  }
 
   @Test
   void idempotencyMergeTest() {
@@ -204,12 +165,13 @@ class BobbuyStoreTest {
 
   @Test
   void listOrdersFiltersByTripId() {
-    OrderHeader otherTrip = new OrderHeader("BIZ-TRIP", 1001L, 9999L);
+    Trip delivery = store.createTrip(new Trip(null, 1000L, "Other region", LocalDate.now(), TripStatus.PUBLISHED, null));
+    OrderHeader otherTrip = new OrderHeader("BIZ-TRIP", 1001L, delivery.getId());
     otherTrip.addLine(new OrderLine("SKU-T", "Tea", null, 1, 10.0));
     store.upsertOrder(otherTrip);
 
     assertThat(store.listOrders(2000L)).allMatch(order -> order.getTripId().equals(2000L));
-    assertThat(store.listOrders(9999L)).allMatch(order -> order.getTripId().equals(9999L));
+    assertThat(store.listOrders(delivery.getId())).hasSize(1).allMatch(order -> order.getTripId().equals(delivery.getId()));
   }
 
   @Test
@@ -228,7 +190,7 @@ class BobbuyStoreTest {
 
   @Test
   void settlementFrozenTripBlocksOrderMutationAndDeletion() {
-    Trip frozenTrip = store.updateTripStatus(2000L, TripStatus.COMPLETED);
+    Trip frozenTrip = freezeTrip(2000L, TripStatus.COMPLETED);
     assertThat(frozenTrip.isSettlementFrozen()).isTrue();
 
     OrderHeader header = new OrderHeader("BIZ-FROZEN", 1001L, 2000L);
@@ -290,11 +252,7 @@ class BobbuyStoreTest {
         .isInstanceOf(ApiException.class);
   }
 
-  @Test
-  void reserveTripCapacityNotFound() {
-    assertThatThrownBy(() -> store.reserveTripCapacity(9999L, 1))
-        .isInstanceOf(ApiException.class);
-  }
+
 
   @Test
   void updatesOrderStatusAndLogsCounts() {
@@ -302,16 +260,7 @@ class BobbuyStoreTest {
     assertThat(store.orderStatusCounts().get(OrderStatus.CONFIRMED)).isEqualTo(1);
   }
 
-  @Test
-  void reserveTripCapacityRejectsWhenCapacityInsufficient() {
-    assertThatThrownBy(() -> store.reserveTripCapacity(2000L, 99))
-        .isInstanceOf(ApiException.class)
-        .satisfies(error -> {
-          ApiException ex = (ApiException) error;
-          assertThat(ex.getErrorCode()).isEqualTo(ErrorCode.CAPACITY_NOT_ENOUGH);
-          assertThat(ex.getMessageKey()).isEqualTo("error.trip.capacity_not_enough");
-        });
-  }
+
 
   @Test
   void updateOrderStatusRejectsMissingOrder() {
@@ -324,62 +273,13 @@ class BobbuyStoreTest {
         });
   }
 
-  @Test
-  void reserveTripCapacityRejectsInvalidQuantity() {
-    assertThatThrownBy(() -> store.reserveTripCapacity(2000L, 0))
-        .isInstanceOf(ApiException.class)
-        .satisfies(error -> {
-          ApiException ex = (ApiException) error;
-          assertThat(ex.getErrorCode()).isEqualTo(ErrorCode.INVALID_REQUEST);
-          assertThat(ex.getMessageKey()).isEqualTo("error.trip.invalid_quantity");
-        });
 
-    assertThatThrownBy(() -> store.reserveTripCapacity(2000L, -2))
-        .isInstanceOf(ApiException.class)
-        .satisfies(error -> {
-          ApiException ex = (ApiException) error;
-          assertThat(ex.getErrorCode()).isEqualTo(ErrorCode.INVALID_REQUEST);
-          assertThat(ex.getMessageKey()).isEqualTo("error.trip.invalid_quantity");
-        });
-  }
 
-  @Test
-  void reserveTripCapacityAllowsExactRemainingCapacity() {
-    Trip trip = store.reserveTripCapacity(2000L, 5);
-    assertThat(trip.getRemainingCapacity()).isEqualTo(0);
-  }
 
-  @Test
-  void cancelOrderReleasesReservedCapacity() {
-    Trip before = store.getTrip(2000L).orElseThrow();
-    int reservedBefore = before.getReservedCapacity();
 
-    OrderHeader header = new OrderHeader("BIZ-CANCEL", 1001L, 2000L);
-    header.setStatus(OrderStatus.CONFIRMED);
-    header.addLine(new OrderLine("SKU-C", "Cancel Item", null, 2, 10.0));
-    OrderHeader created = store.upsertOrder(header);
 
-    Trip afterConfirm = store.getTrip(2000L).orElseThrow();
-    assertThat(afterConfirm.getReservedCapacity()).isEqualTo(reservedBefore + 2);
 
-    store.updateOrderStatus(created.getId(), OrderStatus.CANCELLED);
-    Trip afterCancel = store.getTrip(2000L).orElseThrow();
-    assertThat(afterCancel.getReservedCapacity()).isEqualTo(reservedBefore);
-  }
 
-  @Test
-  void cancelFromNewDoesNotReleaseCapacity() {
-    Trip before = store.getTrip(2000L).orElseThrow();
-    int reservedBefore = before.getReservedCapacity();
-
-    OrderHeader header = new OrderHeader("BIZ-CANCEL-NEW", 1001L, 2000L);
-    header.addLine(new OrderLine("SKU-N", "New Item", null, 1, 5.0));
-    OrderHeader created = store.upsertOrder(header);
-
-    store.updateOrderStatus(created.getId(), OrderStatus.CANCELLED);
-    Trip afterCancel = store.getTrip(2000L).orElseThrow();
-    assertThat(afterCancel.getReservedCapacity()).isEqualTo(reservedBefore);
-  }
 
   @Test
   void procurementListAggregatesBySku() {
@@ -399,40 +299,32 @@ class BobbuyStoreTest {
             && item.getBusinessIds().contains("BIZ-PROC-2"));
   }
 
+
+
   @Test
-  void reserveTripCapacityPreventsOverbookingUnderConcurrency() throws InterruptedException {
-    ExecutorService executor = Executors.newFixedThreadPool(10);
-    CountDownLatch latch = new CountDownLatch(10);
-    AtomicInteger successCount = new AtomicInteger(0);
-
-    try {
-      for (int i = 0; i < 10; i++) {
-        executor.submit(() -> {
-          try {
-            store.reserveTripCapacity(2000L, 1);
-            successCount.incrementAndGet();
-          } catch (ApiException ignored) {
-            // Expected for some threads due to capacity limit.
-          } finally {
-            latch.countDown();
-          }
-        });
-      }
-      assertThat(latch.await(5, TimeUnit.SECONDS)).isTrue();
-    } finally {
-      executor.shutdownNow();
-    }
-
-    assertThat(successCount.get()).isLessThanOrEqualTo(5);
-    assertThat(store.getTrip(2000L).orElseThrow().getRemainingCapacity()).isGreaterThanOrEqualTo(0);
+  void businessProgressUpdatesTripAndAuditsOnlyChanges() {
+    Trip trip = store.createTrip(new Trip(null, 1000L, "Regional service", LocalDate.now().minusDays(1), TripStatus.PUBLISHED, null));
+    OrderHeader order = new OrderHeader("FLOW", 1001L, trip.getId());
+    order.addLine(new OrderLine("SKU-X", "Large order", null, 100000, 1.0));
+    order = store.upsertOrder(order);
+    store.updateOrderStatus(order.getId(), OrderStatus.CONFIRMED);
+    assertThat(store.getTrip(trip.getId()).orElseThrow().getStatus()).isEqualTo(TripStatus.PUBLISHED);
+    store.updateOrderStatus(order.getId(), OrderStatus.PURCHASED);
+    assertThat(store.getTrip(trip.getId()).orElseThrow().getStatus()).isEqualTo(TripStatus.IN_PROGRESS);
+    store.updateOrderStatus(order.getId(), OrderStatus.DELIVERED);
+    assertThat(store.getTrip(trip.getId()).orElseThrow().getStatus()).isEqualTo(TripStatus.COMPLETED);
+    assertThat(auditLogService.listLogs().stream().filter(l -> "TRIP".equals(l.getEntityType()) && trip.getId().equals(l.getEntityId()))).hasSize(2);
   }
 
   @Test
-  void updateTripStatusCreatesAuditLogEntry() {
-    int before = auditLogService.listLogs().size();
-    store.updateTripStatus(2000L, com.bobbuy.model.TripStatus.IN_PROGRESS);
-    assertThat(auditLogService.listLogs().size()).isEqualTo(before + 1);
-    assertThat(auditLogService.listLogs().get(before).getEntityType()).isEqualTo("TRIP");
+  void emptyAndCancelledTripsStayOpen() {
+    Trip trip = store.createTrip(new Trip(null, 1000L, "Regional service", LocalDate.now(), TripStatus.PUBLISHED, null));
+    assertThat(trip.getStatus()).isEqualTo(TripStatus.PUBLISHED);
+    OrderHeader order = new OrderHeader("CANCEL-FLOW", 1001L, trip.getId());
+    order.addLine(new OrderLine("SKU-X", "Item", null, 10000, 1.0));
+    order = store.upsertOrder(order);
+    store.updateOrderStatus(order.getId(), OrderStatus.CANCELLED);
+    assertThat(store.getTrip(trip.getId()).orElseThrow().getStatus()).isEqualTo(TripStatus.PUBLISHED);
   }
 
   @Test
@@ -521,7 +413,7 @@ class BobbuyStoreTest {
     OrderHeader order = new OrderHeader("BIZ-LOCK-1", 1001L, 2000L);
     order.addLine(new OrderLine("SKU-L", "Lock Item", null, 1, 9.9));
     OrderHeader created = store.upsertOrder(order);
-    store.updateTripStatus(2000L, TripStatus.COMPLETED);
+    freezeTrip(2000L, TripStatus.COMPLETED);
 
     OrderHeader updatePayload = new OrderHeader(created.getBusinessId(), 1001L, 2000L);
     updatePayload.addLine(new OrderLine("SKU-L", "Lock Item", null, 2, 9.9));

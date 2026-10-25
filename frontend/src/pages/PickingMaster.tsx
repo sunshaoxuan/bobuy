@@ -132,7 +132,7 @@ export default function PickingMaster() {
               placeholder={t('procurement.trip_selector')}
               options={trips.map((trip) => ({
                 value: trip.id,
-                label: `${trip.id} · ${trip.origin} → ${trip.destination}`
+                label: `${trip.id} · ${trip.deliveryArea} · ${trip.deliveryDate}`
               }))}
               style={{ minWidth: isMobile ? '100%' : 220, width: isMobile ? '100%' : undefined }}
               onChange={(tripId) => {

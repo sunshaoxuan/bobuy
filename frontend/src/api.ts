@@ -24,12 +24,8 @@ export type Metrics = {
 export type Trip = {
     id: number;
     agentId: number;
-    origin: string;
-    destination: string;
-    departDate: string;
-    capacity: number;
-    reservedCapacity: number;
-    remainingCapacity?: number;
+    deliveryArea: string;
+    deliveryDate: string;
     status: string;
     statusUpdatedAt?: string;
     settlementFrozen?: boolean;
@@ -574,12 +570,11 @@ const fallback = {
         {
             id: 2000,
             agentId: 1000,
-            origin: 'Tokyo',
-            destination: 'Shanghai',
-            departDate: new Date().toISOString().slice(0, 10),
-            capacity: 6,
-            reservedCapacity: 1,
-            remainingCapacity: 5,
+            deliveryArea: 'Shanghai',
+            deliveryDate: new Date().toISOString().slice(0, 10),
+
+
+
             status: 'PUBLISHED'
         }
     ],
@@ -1028,8 +1023,10 @@ export const api = {
         postJson<AuthSessionResponse, { account: typeof account; roles: typeof roles }>('/api/auth/register-account', { account, roles }, { includeAccessToken: false, retryOnUnauthorized: false }),
     createUser: (user: UserEdit) => postJson<ManagedUser, UserEdit>('/api/admin/users', user),
     updateUser: (id: number, user: UserEdit) => putJson<ManagedUser, UserEdit>(`/api/admin/users/${id}`, user),
-    createTrip: (trip: Omit<Trip, 'id' | 'statusUpdatedAt' | 'remainingCapacity'>) =>
-        postJson<Trip, Omit<Trip, 'id' | 'statusUpdatedAt' | 'remainingCapacity'>>('/api/trips', trip),
+    createTrip: (trip: Pick<Trip, 'deliveryArea' | 'deliveryDate'>) =>
+        postJson<Trip, Pick<Trip, 'deliveryArea' | 'deliveryDate'>>('/api/trips', trip),
+    updateTrip: (id: number, trip: Pick<Trip, 'deliveryArea' | 'deliveryDate'>) =>
+        putJson<Trip, Pick<Trip, 'deliveryArea' | 'deliveryDate'>>(`/api/trips/${id}`, trip),
     createOrder: (order: Omit<Order, 'id' | 'statusUpdatedAt' | 'totalAmount'>) =>
         postJson<Order, Omit<Order, 'id' | 'statusUpdatedAt' | 'totalAmount'>>('/api/orders', order),
     parseOrderText: (text: string) =>
@@ -1263,7 +1260,7 @@ export const api = {
         })
 };
 
-export type StoreTrip = { id: number; merchantId: number; merchantName: string; origin: string; destination: string; departDate: string };
+export type StoreTrip = { id: number; merchantId: number; merchantName: string; deliveryArea: string; deliveryDate: string };
 export type StoreProduct = { id: string; merchantId: number; name: Record<string, string>; description: Record<string, string>; brand: string; price: number; categoryId: string; images: string[] };
 export type MerchantCustomer = { customerId: number; name: string; emailVerified: boolean; merchantApproved: boolean; approvedAt?: string };
 async function storeGet<T>(path: string): Promise<T> {

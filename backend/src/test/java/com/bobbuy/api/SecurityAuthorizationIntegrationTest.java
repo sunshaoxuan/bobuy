@@ -41,7 +41,7 @@ class SecurityAuthorizationIntegrationTest {
   @BeforeEach
   void setUp() {
     store.seed();
-    Trip trip = store.createTrip(new Trip(null, 1000L, "HK", "NY", LocalDate.now(), 20, 0, TripStatus.DRAFT, null));
+    Trip trip = store.createTrip(new Trip(null, 1000L, "NY", LocalDate.now(), TripStatus.PUBLISHED, null));
     tripId = trip.getId();
 
     OrderHeader ownOrder = new OrderHeader("LEDGER-CUST-OWN", 9001L, tripId);

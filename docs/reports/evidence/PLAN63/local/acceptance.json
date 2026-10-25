@@ -1,0 +1,126 @@
+{
+  "task": "PLAN63 regional delivery",
+  "capturedAt": "2026-10-25T05:50:10.859Z",
+  "branch": "codex-regional-delivery",
+  "scope": "local candidate; no production changes",
+  "sourceInput": {
+    "method": "SHA256 of sorted Git index path/mode/blob records; docs and Markdown excluded",
+    "sha256": "3d0df3047d9a0703a2018360d494e3587b805f64f33410107cee9f46c8eaf1f8",
+    "fileCount": 473,
+    "groups": [
+      {
+        "prefix": "backend/",
+        "files": 258,
+        "sha256": "9af84c70c78e96e70c8b62a2425d6a41e129c80babc070cc71bbb3a52de4ec53"
+      },
+      {
+        "prefix": "frontend/",
+        "files": 118,
+        "sha256": "31f04fdef707291fbb31803279d06eefe301fe687790caa26e731a886778a2c4"
+      },
+      {
+        "prefix": "scripts/",
+        "files": 17,
+        "sha256": "12a824ee78dbe981a92cf15cfa381719e9d80e211a4dfe4294011ba0968e1b8d"
+      },
+      {
+        "prefix": ".github/",
+        "files": 4,
+        "sha256": "c68327e9bfb6adf5917a84fd39742574cd36e8999a603a279e6aa1af0bc99842"
+      }
+    ]
+  },
+  "runtime": {
+    "origin": "http://127.0.0.1:18080",
+    "backendManifest": "sha256:a6fd3020acc10f3b2ebddaa44f584a359de6fb7d63179e42eb5e0f4f81a751bd",
+    "webManifest": "sha256:0c85a068e5e3779276eaa37fd5d2e4a0cdddf4fac375d0945b9552f60084f6c2",
+    "backendJarSha256": "be2ad88dcfbe0b1e863acc7dea0129457bf822130b3fae68eaf7e592292fe400",
+    "frontendIndexSha256": "cb4309fd62f448ac9571b8f48c753066da59ab9c3daf5162101ac3bef5563aa7",
+    "database": "PostgreSQL16, Flyway public schema version 6; startup revalidated 6 migrations at 2026-10-25T05:48:02Z"
+  },
+  "local": {
+    "backend": {
+      "result": "PASS",
+      "scope": "shared package batch plus affected targeted reruns; not a final all-tests single invocation",
+      "surefireComposite": {
+        "tests": 183,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 2
+      },
+      "lastCommand": "mvn -Dtest=BobbuyStoreTest,TripControllerIntegrationTest package",
+      "lastTests": 25,
+      "lastFailures": 0
+    },
+    "frontend": {
+      "result": "PASS",
+      "scope": "shared initial test batch plus affected targeted reruns",
+      "tripTests": 4,
+      "billingTests": 3,
+      "i18nKeysPerLocale": 801,
+      "build": "npm run build, TypeScript and Vite",
+      "mockPlaywright": {
+        "tests": 1,
+        "result": "PASS",
+        "browser": "installed Chrome",
+        "durationSeconds": 2.8
+      }
+    },
+    "browser": {
+      "result": "PASS",
+      "command": "node frontend/scripts/verify-plan63.mjs",
+      "tripViews": 16,
+      "billingViews": 16,
+      "consoleErrors": 0,
+      "monitoredNetworkErrors": 0,
+      "fixturesRemoved": true,
+      "evidence": "browser-report.json"
+    },
+    "geometry": {
+      "result": "PASS",
+      "controlRecords": 300,
+      "minInkMarginPx": 7,
+      "minHitHeightPx": 44,
+      "maxCenteredYErrorPx": 1,
+      "evidence": "browser-report.json",
+      "negativeFixture": "20px hit target rejected"
+    },
+    "visual": {
+      "result": "PASS",
+      "evidence": "visual-review.md",
+      "externalModel": "gemini-3.8-flash-high",
+      "finalDecision": "main agent screenshot review"
+    },
+    "migration": {
+      "result": "PASS",
+      "evidence": "migration-report.json",
+      "isolatedDatabaseRemoved": true,
+      "rollback": "stopped writers restore V5 backup and matching old images"
+    },
+    "documentation": {
+      "result": "PASS for task changes",
+      "newOrEditedRelativeReferences": "valid",
+      "preexistingUnrelatedReferences": "PROD02 has unchanged legacy architecture links; outside this batch"
+    }
+  },
+  "ci": {
+    "result": "PENDING",
+    "required": [
+      "backend-test",
+      "frontend-quality",
+      "docker-build",
+      "postgres-migration-verify"
+    ],
+    "optionalNotRun": [
+      "whole legacy Playwright suite",
+      "Maven dependency audit, no dependency change"
+    ]
+  },
+  "remainingOutsideScope": [
+    "production delivery-date business confirmation for historical rows",
+    "production migration/deployment",
+    "physical mobile device validation",
+    "concurrent business load stress test"
+  ],
+  "overall": "LOCAL_PASS_CI_PENDING"
+}

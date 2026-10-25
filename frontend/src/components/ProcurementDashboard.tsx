@@ -185,6 +185,7 @@ export default function ProcurementDashboard() {
     [procurementReceipts, selectedReceiptId]
   );
   const settlementFrozen = Boolean(selectedTrip?.settlementFrozen);
+  const billingFrozen = selectedTrip?.status === 'SETTLED';
 
   const grossMarginRate = useMemo(() => {
     if (!hudStats) {
@@ -199,9 +200,7 @@ export default function ProcurementDashboard() {
 
   const trendArrow = grossMarginRate >= 0 ? '▲' : '▼';
   const trendColor = grossMarginRate >= 0 ? 'green' : 'red';
-  const maxWeight = selectedTrip?.capacity ?? 0;
   const currentWeight = hudStats?.currentWeight ?? 0;
-  const loadPercent = maxWeight <= 0 ? 0 : Math.min((currentWeight / maxWeight) * 100, 100);
 
   const targetBusinessOptions = useMemo(() => {
     if (!editingRow) {
@@ -517,7 +516,7 @@ export default function ProcurementDashboard() {
             placeholder={t('orders.trip.select.placeholder')}
             options={trips.map((trip) => ({
               value: trip.id,
-              label: `${trip.id} · ${trip.origin} → ${trip.destination}`
+              label: `${trip.id} · ${trip.deliveryArea} · ${trip.deliveryDate}`
             }))}
             style={{ width: isMobile ? '100%' : undefined }}
             onChange={(tripId) => {
@@ -564,10 +563,9 @@ export default function ProcurementDashboard() {
           </Card>
         </Col>
         <Col xs={24} md={12}>
-          <Card title={t('procurement.capacity_redline')} loading={loading} className="procurement-glass-card">
-            <Progress percent={Number(loadPercent.toFixed(2))} status={loadPercent >= 100 ? 'exception' : 'active'} />
+          <Card title={t('procurement.purchased_load')} loading={loading} className="procurement-glass-card">
             <Text type="secondary">
-              {t('procurement.current_weight_label')} {currentWeight.toFixed(2)} / {maxWeight.toFixed(2)}
+              {t('procurement.current_weight_label')} {currentWeight.toFixed(2)}
             </Text>
           </Card>
         </Col>
@@ -922,7 +920,7 @@ export default function ProcurementDashboard() {
               placeholder={t('procurement.business_id')}
               options={ledgerEntries.map((entry) => ({ value: entry.businessId, label: entry.businessId }))}
               onChange={setPaymentBusinessId}
-              disabled={settlementFrozen}
+              disabled={billingFrozen}
             />
             <InputNumber
               min={0.01}
@@ -930,12 +928,12 @@ export default function ProcurementDashboard() {
               value={paymentAmount}
               placeholder={t('procurement.payment_amount')}
               onChange={(value) => setPaymentAmount(value ?? 0)}
-              disabled={settlementFrozen}
+              disabled={billingFrozen}
             />
             <Select
               value={paymentMethod}
               style={{ minWidth: 140 }}
-              disabled={settlementFrozen}
+              disabled={billingFrozen}
               onChange={setPaymentMethod}
               options={[
                 { value: 'CASH', label: t('procurement.payment_method_cash') },
@@ -948,13 +946,13 @@ export default function ProcurementDashboard() {
               style={{ minWidth: 220 }}
               placeholder={t('procurement.payment_note')}
               onChange={(event) => setPaymentNote(event.target.value)}
-              disabled={settlementFrozen}
+              disabled={billingFrozen}
             />
-            <Button type="primary" onClick={submitOfflinePayment} disabled={settlementFrozen}>
+            <Button type="primary" onClick={submitOfflinePayment} disabled={billingFrozen}>
               {t('procurement.record_offline_payment')}
             </Button>
           </Space>
-          {settlementFrozen ? <Text type="secondary">{selectedTrip?.settlementFreezeReason || t('procurement.payment_readonly_hint')}</Text> : null}
+          {billingFrozen ? <Text type="secondary">{selectedTrip?.settlementFreezeReason || t('procurement.payment_readonly_hint')}</Text> : null}
         {ledgerEntries.length === 0 ? (
           <Empty description={t('procurement.no_ledger_data')} />
         ) : (

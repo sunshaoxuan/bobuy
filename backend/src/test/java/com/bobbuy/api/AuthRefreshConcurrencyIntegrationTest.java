@@ -84,6 +84,20 @@ class AuthRefreshConcurrencyIntegrationTest {
     Assertions.assertNotEquals(successfulRefreshTokens.get(0), nextSession.refreshToken());
   }
 
+  @Test
+  void independentLoginsRefreshConcurrentlyAndLogoutIsSessionScoped() throws Exception {
+    var first = authService.login("agent", "agent-pass", "browser-one");
+    var second = authService.login("agent", "agent-pass", "browser-two");
+    var one = executorService.submit(() -> authService.refresh(first.refreshToken(), "browser-one"));
+    var two = executorService.submit(() -> authService.refresh(second.refreshToken(), "browser-two"));
+    var refreshedOne = one.get(10, TimeUnit.SECONDS);
+    var refreshedTwo = two.get(10, TimeUnit.SECONDS);
+    Assertions.assertNotEquals(refreshedOne.refreshToken(), refreshedTwo.refreshToken());
+    authService.logout(refreshedOne.refreshToken());
+    Assertions.assertThrows(ApiException.class, () -> authService.refresh(refreshedOne.refreshToken(), "browser-one"));
+    Assertions.assertNotNull(authService.refresh(refreshedTwo.refreshToken(), "browser-two").accessToken());
+  }
+
   private record RefreshAttempt(String refreshToken, ErrorCode errorCode) {
     private static RefreshAttempt success(String refreshToken) {
       return new RefreshAttempt(refreshToken, null);

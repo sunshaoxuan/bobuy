@@ -29,7 +29,7 @@ vi.mock('antd', async () => {
 vi.mock('../api', () => ({
     api: {
         trips: () => Promise.resolve([
-            { id: 2000, agentId: 1, origin: 'Tokyo', destination: 'Shanghai', departDate: '2026-01-01', capacity: 10, reservedCapacity: 1, status: 'PUBLISHED', settlementFrozen: false, settlementFreezeStage: 'ACTIVE', settlementFreezeReason: '' }
+            { id: 2000, agentId: 1, deliveryArea: 'Shanghai', deliveryDate: '2026-01-01', status: 'PUBLISHED', settlementFrozen: false, settlementFreezeStage: 'ACTIVE', settlementFreezeReason: '' }
         ]),
         procurementHud: () => Promise.resolve({
             tripId: 2000,
@@ -261,7 +261,7 @@ describe('ProcurementHUD Component', () => {
         );
 
         expect(await screen.findByText(/Profit Insight|利润透视/i)).toBeInTheDocument();
-        expect(await screen.findByText(/Capacity Redline|容积红线/i)).toBeInTheDocument();
+        expect(await screen.findByText(/Purchased Weight|已采购重量/i)).toBeInTheDocument();
         expect(await screen.findByText(/Reconcile Detail|对账详情/i)).toBeInTheDocument();
         expect((await screen.findAllByText(/Extra Expenses|额外支出列表/i)).length).toBeGreaterThan(0);
         expect(await screen.findByText(/Procurement Receipt Workbench|采购小票核销工作台/i)).toBeInTheDocument();

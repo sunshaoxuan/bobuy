@@ -51,7 +51,7 @@
   "store.payment_hint": "The merchant will confirm procurement and delivery. No payment is due now.",
   "store.checkout": "Checkout",
   "store.choose_trip": "Choose a buying trip",
-  "store.depart": "Departure",
+  "store.delivery_date": "Delivery Date",
   "store.trip": "Buying trips",
   "store.no_trips": "No trips available",
   "store.catalog": "Trip finds",

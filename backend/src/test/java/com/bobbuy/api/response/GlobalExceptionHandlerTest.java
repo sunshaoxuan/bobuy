@@ -64,7 +64,6 @@ class GlobalExceptionHandlerTest {
 
   @Test
   void resolveStatusMappings() {
-    assertThat(handler.handleApiException(new ApiException(ErrorCode.CAPACITY_NOT_ENOUGH, "k")).getStatusCode().value()).isEqualTo(409);
     assertThat(handler.handleApiException(new ApiException(ErrorCode.INVALID_STATUS, "k")).getStatusCode().value()).isEqualTo(400);
     assertThat(handler.handleApiException(new ApiException(ErrorCode.INTERNAL_ERROR, "k")).getStatusCode().value()).isEqualTo(500);
   }

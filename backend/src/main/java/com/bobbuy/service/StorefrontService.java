@@ -43,10 +43,10 @@ public class StorefrontService {
 
     public List<PublicTrip> publicTrips() {
         return trips.findAll().stream().filter(this::bookable)
-            .sorted(Comparator.comparing(Trip::getDepartDate))
+            .sorted(Comparator.comparing(Trip::getDeliveryDate))
             .map(t -> new PublicTrip(t.getId(), t.getAgentId(),
                 users.findById(t.getAgentId()).map(User::getName).orElse("Bobuy"),
-                t.getOrigin(), t.getDestination(), t.getDepartDate())).toList();
+                t.getDeliveryArea(), t.getDeliveryDate())).toList();
     }
 
     public List<PublicProduct> publicProducts() {
@@ -134,7 +134,7 @@ public class StorefrontService {
             }
             return result(existing, user);
         }
-        Trip trip = trips.findById(request.tripId()).filter(this::bookable)
+        Trip trip = trips.findByIdForUpdate(request.tripId()).filter(this::bookable)
             .orElseThrow(() -> invalid("该行程暂不可下单，请重新选择"));
         OrderHeader order = new OrderHeader(businessId, user.getId(), trip.getId());
         order.setId(nextId());
@@ -210,7 +210,7 @@ public class StorefrontService {
             .orElseThrow(() -> new ApiException(ErrorCode.FORBIDDEN, "请使用客户账户下单"));
     }
     private boolean bookable(Trip trip) {
-        return trip.getStatus() == TripStatus.PUBLISHED && trip.getDepartDate() != null && !trip.getDepartDate().isBefore(LocalDate.now());
+        return trip.getStatus() == TripStatus.PUBLISHED && trip.getDeliveryDate() != null && !trip.getDeliveryDate().isBefore(LocalDate.now());
     }
     private Long nextId() { return identities.saveAndFlush(new CheckoutIdentity()).id; }
     private ApiException invalid(String message) { return new ApiException(ErrorCode.INVALID_REQUEST, message); }
@@ -218,7 +218,7 @@ public class StorefrontService {
     public record Registration(@NotBlank @Pattern(regexp = "[a-zA-Z0-9_]{3,40}") String username,
         @NotBlank @Size(min = 8, max = 72) String password, @NotBlank @Email @Size(max = 254) String email) {}
     public record AccountRegistration(@NotNull @Valid Registration account, @NotEmpty Set<@NotNull Role> roles) {}
-    public record PublicTrip(Long id, Long merchantId, String merchantName, String origin, String destination, LocalDate departDate) {}
+    public record PublicTrip(Long id, Long merchantId, String merchantName, String deliveryArea, LocalDate deliveryDate) {}
     public record PublicProduct(String id, Long merchantId, Map<String,String> name, Map<String,String> description, String brand,
         double price, String categoryId, List<String> images) {}
     public record Item(@NotBlank @Size(max = 255) String productId, @Min(1) @Max(99) int quantity) {}

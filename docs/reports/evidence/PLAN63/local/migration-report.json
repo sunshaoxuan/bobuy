@@ -1,0 +1,11 @@
+{
+  "environment": "existing bobuy-local PostgreSQL; isolated temporary database",
+  "checks": [
+    "PASS: V1 through V5 fixture upgraded to V6; IDs, links, area and date preserved",
+    "PASS: empty, pending, partial procurement, delivered, cancelled and historical frozen statuses",
+    "PASS: obsolete columns removed, empty area and DRAFT rejected",
+    "PASS: stopped-writer snapshot rollback restores V5 schema and business rows"
+  ],
+  "result": "PASS",
+  "temporaryDatabaseRemoved": true
+}

@@ -225,7 +225,7 @@ export default function Orders() {
                 placeholder={t('orders.trip.select.placeholder')}
                 options={trips.map((trip) => ({
                   value: trip.id,
-                  label: `${trip.origin} → ${trip.destination} (${trip.departDate})`
+                  label: `${trip.deliveryArea} · ${trip.deliveryDate}`
                 }))}
                 style={{ width: '100%' }}
               />
@@ -234,22 +234,16 @@ export default function Orders() {
           {selectedTrip ? (
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, alignItems: 'center', minWidth: 0 }}>
               <div>
-                <Text type="secondary">{t('orders.trip.route')}</Text>
-                <div>{selectedTrip.origin} → {selectedTrip.destination}</div>
+                <Text type="secondary">{t('orders.trip.delivery_area')}</Text>
+                <div>{selectedTrip.deliveryArea}</div>
               </div>
               <div>
-                <Text type="secondary">{t('orders.trip.depart_date')}</Text>
-                <div>{selectedTrip.departDate}</div>
-              </div>
-              <div>
-                <Text type="secondary">{t('orders.trip.capacity')}</Text>
-                <div>
-                  {selectedTrip.reservedCapacity}/{selectedTrip.capacity} ({selectedTrip.remainingCapacity ?? 0})
-                </div>
+                <Text type="secondary">{t('orders.trip.delivery_date')}</Text>
+                <div>{selectedTrip.deliveryDate}</div>
               </div>
               <div>
                 <Text type="secondary">{t('orders.trip.status')}</Text>
-                <div><Tag color="blue">{selectedTrip.status}</Tag></div>
+                <div><Tag color="blue">{t(`enum.trip_status.${selectedTrip.status}`)}</Tag></div>
               </div>
               <div>
                 <Text type="secondary">{t('orders.trip.freeze_status')}</Text>

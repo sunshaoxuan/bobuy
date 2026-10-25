@@ -74,7 +74,7 @@ export default function ClientChat() {
               style={{ minWidth: isMobile ? '100%' : 240 }}
               options={trips.map((trip) => ({
                 value: trip.id,
-                label: `${trip.origin} → ${trip.destination}`
+                label: `${trip.deliveryArea} · ${trip.deliveryDate}`
               }))}
             />
           </Space>

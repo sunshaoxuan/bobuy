@@ -53,6 +53,12 @@ public class GlobalExceptionHandler {
     return ResponseEntity.badRequest().body(new ApiError(ErrorCode.INVALID_REQUEST.name(), message));
   }
 
+  @ExceptionHandler(org.springframework.web.servlet.resource.NoResourceFoundException.class)
+  public ResponseEntity<ApiError> handleMissingResource(org.springframework.web.servlet.resource.NoResourceFoundException ex) {
+    String message = messageSource.getMessage("error.common.not_found", null, "Resource not found", LocaleContextHolder.getLocale());
+    return ResponseEntity.status(404).body(new ApiError(ErrorCode.RESOURCE_NOT_FOUND.name(), message));
+  }
+
   @ExceptionHandler(Exception.class)
   public ResponseEntity<ApiError> handleUnexpected(Exception ex) {
     if (log.isDebugEnabled()) {
@@ -68,7 +74,6 @@ public class GlobalExceptionHandler {
   private int resolveStatus(ErrorCode errorCode) {
     return switch (errorCode) {
       case RESOURCE_NOT_FOUND -> 404;
-      case CAPACITY_NOT_ENOUGH -> 409;
       case UNAUTHORIZED -> 401;
       case FORBIDDEN -> 403;
       case INVALID_REQUEST, INVALID_STATUS -> 400;

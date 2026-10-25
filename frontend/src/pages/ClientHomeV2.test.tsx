@@ -16,12 +16,11 @@ vi.mock('../api', () => ({
         {
           id: 2000,
           agentId: 1000,
-          origin: 'Tokyo',
-          destination: 'Shanghai',
-          departDate: '2026-04-20',
-          capacity: 10,
-          reservedCapacity: 2,
-          remainingCapacity: 8,
+          deliveryArea: 'Shanghai',
+          deliveryDate: '2026-04-20',
+
+
+
           status: 'PUBLISHED'
         }
       ]),

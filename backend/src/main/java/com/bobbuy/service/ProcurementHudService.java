@@ -92,6 +92,7 @@ public class ProcurementHudService {
   private static final Logger log = LoggerFactory.getLogger(ProcurementHudService.class);
 
   private final TripRepository tripRepository;
+  private final TripWorkflowService tripWorkflow;
   private final OrderHeaderRepository orderHeaderRepository;
   private final ProductRepository productRepository;
   private final TripExpenseRepository tripExpenseRepository;
@@ -110,6 +111,7 @@ public class ProcurementHudService {
   private final double referenceFxRate;
 
   public ProcurementHudService(TripRepository tripRepository,
+                               TripWorkflowService tripWorkflow,
                                OrderHeaderRepository orderHeaderRepository,
                                ProductRepository productRepository,
                                TripExpenseRepository tripExpenseRepository,
@@ -127,6 +129,7 @@ public class ProcurementHudService {
                                CustomerIdentityResolver customerIdentityResolver,
                                @Value("${bobbuy.fx.reference-rate:1.0}") double referenceFxRate) {
     this.tripRepository = tripRepository;
+    this.tripWorkflow = tripWorkflow;
     this.orderHeaderRepository = orderHeaderRepository;
     this.productRepository = productRepository;
     this.tripExpenseRepository = tripExpenseRepository;
@@ -376,6 +379,7 @@ public class ProcurementHudService {
 
     if (!changedOrders.isEmpty()) {
       orderHeaderRepository.saveAll(changedOrders);
+      tripWorkflow.refresh(targetTripId);
     }
     return new ReconcileInventoryResult(reconciled, targetTripId, new ArrayList<>(allocatedBusinessIds));
   }
@@ -419,6 +423,7 @@ public class ProcurementHudService {
     sourceLine.setPurchasedQuantity(sourcePurchased - transferred);
     targetLine.setPurchasedQuantity(targetPurchased + transferred);
     orderHeaderRepository.saveAll(List.of(fromOrder, toOrder));
+    tripWorkflow.refresh(tripId);
     Map<String, Object> original = new HashMap<>();
     original.put("skuId", skuId);
     original.put("fromBusinessId", fromBusinessId);
@@ -606,12 +611,16 @@ public class ProcurementHudService {
 
   @Transactional
   public void finalizeTripSettlement(Long tripId) {
-    Trip trip = tripRepository.findById(tripId)
+    Trip trip = tripRepository.findByIdForUpdate(tripId)
         .orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.trip.not_found"));
+    com.bobbuy.security.MerchantScope.require(trip.getAgentId());
     if (trip.getStatus() == TripStatus.SETTLED) {
       throw new ApiException(ErrorCode.INVALID_REQUEST, "error.procurement.settlement.already_settled");
     }
 
+    if (trip.getStatus() != TripStatus.COMPLETED) {
+      throw new ApiException(ErrorCode.INVALID_REQUEST, "error.trip.delivery_incomplete");
+    }
     ProcurementHudResponse stats = getHudStats(tripId);
     double totalEstimatedProfit = stats.getTotalEstimatedProfit();
     TripProfitShareConfig config = getOrCreateProfitShareConfig(tripId);
@@ -623,6 +632,7 @@ public class ProcurementHudService {
 
     TripStatus oldStatus = trip.getStatus();
     trip.setStatus(TripStatus.SETTLED);
+    trip.setStatusUpdatedAt(LocalDateTime.now());
     tripRepository.save(trip);
 
     Map<String, Object> audit = new HashMap<>();
@@ -653,9 +663,9 @@ public class ProcurementHudService {
     if (request == null || request.getAction() == null || request.getAction().isBlank()) {
       throw new ApiException(ErrorCode.INVALID_REQUEST, "error.procurement.billing.confirm.invalid");
     }
-    Trip trip = tripRepository.findById(tripId)
+    Trip trip = tripRepository.findByIdForUpdate(tripId)
         .orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.trip.not_found"));
-    ensureTripMutable(trip);
+    ensureBillingMutable(trip);
     OrderHeader order = getSettlementRelevantTripOrderByBusinessId(tripId, businessId);
     if (customerIdentityResolver.isCustomer(authentication)) {
       Long customerId = customerIdentityResolver.resolveCustomerId(authentication).orElse(null);
@@ -851,9 +861,9 @@ public class ProcurementHudService {
   public CustomerPaymentRecordResponse recordOfflinePayment(Long tripId,
                                                             CustomerPaymentRecordRequest request,
                                                             Authentication authentication) {
-    Trip trip = tripRepository.findById(tripId)
+    Trip trip = tripRepository.findByIdForUpdate(tripId)
         .orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.trip.not_found"));
-    ensureTripMutable(trip);
+    ensureBillingMutable(trip);
     if (request == null || request.getBusinessId() == null || request.getBusinessId().isBlank()
         || request.getPaymentMethod() == null || request.getPaymentMethod().isBlank()
         || request.getAmount() <= 0D) {
@@ -1062,9 +1072,9 @@ public class ProcurementHudService {
         customerProfile.contactPhone(),
         customerProfile.latitude(),
         customerProfile.longitude(),
-        trip.isSettlementFrozen(),
+        trip.getStatus() == TripStatus.SETTLED,
         trip.getSettlementFreezeStage(),
-        trip.getSettlementFreezeReason(),
+        trip.getStatus() == TripStatus.SETTLED ? trip.getSettlementFreezeReason() : "",
         order.getReceiptConfirmedAt(),
         order.getReceiptConfirmedBy(),
         order.getBillingConfirmedAt(),
@@ -1098,11 +1108,19 @@ public class ProcurementHudService {
     return "Matched";
   }
 
+  private void ensureBillingMutable(Trip trip) {
+    Trip locked = tripRepository.findByIdForUpdate(trip.getId())
+        .orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.trip.not_found"));
+    if (locked.getStatus() == TripStatus.SETTLED) {
+      throw new ApiException(ErrorCode.INVALID_REQUEST, "error.trip.settlement_frozen");
+    }
+  }
+
   private void ensureTripMutable(Long tripId) {
     if (tripId == null) {
       return;
     }
-    Trip trip = tripRepository.findById(tripId)
+    Trip trip = tripRepository.findByIdForUpdate(tripId)
         .orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.trip.not_found"));
     if (trip.isSettlementFrozen()) {
       throw new ApiException(ErrorCode.INVALID_REQUEST, "error.trip.settlement_frozen");
@@ -1113,9 +1131,7 @@ public class ProcurementHudService {
     if (trip == null) {
       throw new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.trip.not_found");
     }
-    if (trip.isSettlementFrozen()) {
-      throw new ApiException(ErrorCode.INVALID_REQUEST, "error.trip.settlement_frozen");
-    }
+    ensureTripMutable(trip.getId());
   }
 
   private String resolveOperatorName(Authentication authentication) {
@@ -1163,8 +1179,8 @@ public class ProcurementHudService {
   }
 
   private double calculateCustomerBalanceBeforeTrip(Long customerId, Trip currentTrip) {
-    LocalDate cutoffDate = currentTrip != null && currentTrip.getDepartDate() != null
-        ? currentTrip.getDepartDate()
+    LocalDate cutoffDate = currentTrip != null && currentTrip.getDeliveryDate() != null
+        ? currentTrip.getDeliveryDate()
         : LocalDate.now();
     double totalReceivable = orderHeaderRepository.findByCustomerId(customerId).stream()
         .filter(order -> merchantTrip(order.getTripId(), currentTrip == null ? com.bobbuy.security.MerchantScope.current() : currentTrip.getAgentId()))
@@ -1341,10 +1357,10 @@ public class ProcurementHudService {
 
   private boolean isHistoricalOrder(OrderHeader order, LocalDate cutoffDate) {
     Trip trip = order.getTripId() == null ? null : tripRepository.findById(order.getTripId()).orElse(null);
-    if (trip == null || trip.getDepartDate() == null) {
+    if (trip == null || trip.getDeliveryDate() == null) {
       return true;
     }
-    return !trip.getDepartDate().isAfter(cutoffDate);
+    return !trip.getDeliveryDate().isAfter(cutoffDate);
   }
 
   private boolean isHistoricalPayment(CustomerPaymentLedger payment, LocalDate cutoffDate) {
@@ -1352,10 +1368,10 @@ public class ProcurementHudService {
       return true;
     }
     Trip trip = tripRepository.findById(payment.getTripId()).orElse(null);
-    if (trip == null || trip.getDepartDate() == null) {
+    if (trip == null || trip.getDeliveryDate() == null) {
       return true;
     }
-    return !trip.getDepartDate().isAfter(cutoffDate);
+    return !trip.getDeliveryDate().isAfter(cutoffDate);
   }
 
   private DeliveryStatus resolveDeliveryStatus(OrderHeader order) {

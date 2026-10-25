@@ -7,7 +7,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -20,26 +20,17 @@ public class Trip {
   @Id
   private Long id;
 
-  @NotNull(message = "{validation.trip.agent_id.required}")
   private Long agentId;
 
-  @NotBlank(message = "{validation.trip.origin.required}")
-  private String origin;
+  @NotBlank(message = "{validation.trip.delivery_area.required}")
+  @Size(max = 255)
+  private String deliveryArea;
 
-  @NotBlank(message = "{validation.trip.destination.required}")
-  private String destination;
-
-  @NotNull(message = "{validation.trip.depart_date.required}")
+  @NotNull(message = "{validation.trip.delivery_date.required}")
   @JsonFormat(pattern = "yyyy-MM-dd")
-  private LocalDate departDate;
+  private LocalDate deliveryDate;
 
-  @Min(value = 1, message = "{validation.trip.capacity.min}")
-  private int capacity;
 
-  @Min(value = 0, message = "{validation.trip.reserved_capacity.min}")
-  private int reservedCapacity;
-
-  @NotNull(message = "{validation.trip.status.required}")
   @Enumerated(EnumType.STRING)
   private TripStatus status;
 
@@ -54,15 +45,12 @@ public class Trip {
   public Trip() {
   }
 
-  public Trip(Long id, Long agentId, String origin, String destination, LocalDate departDate, int capacity, int reservedCapacity,
+  public Trip(Long id, Long agentId, String deliveryArea, LocalDate deliveryDate,
               TripStatus status, LocalDateTime statusUpdatedAt) {
     this.id = id;
     this.agentId = agentId;
-    this.origin = origin;
-    this.destination = destination;
-    this.departDate = departDate;
-    this.capacity = capacity;
-    this.reservedCapacity = reservedCapacity;
+    this.deliveryArea = deliveryArea;
+    this.deliveryDate = deliveryDate;
     this.status = status;
     this.statusUpdatedAt = statusUpdatedAt;
   }
@@ -83,49 +71,13 @@ public class Trip {
     this.agentId = agentId;
   }
 
-  public String getOrigin() {
-    return origin;
-  }
+  public String getDeliveryArea() { return deliveryArea; }
 
-  public void setOrigin(String origin) {
-    this.origin = origin;
-  }
+  public void setDeliveryArea(String deliveryArea) { this.deliveryArea = deliveryArea; }
 
-  public String getDestination() {
-    return destination;
-  }
+  public LocalDate getDeliveryDate() { return deliveryDate; }
 
-  public void setDestination(String destination) {
-    this.destination = destination;
-  }
-
-  public LocalDate getDepartDate() {
-    return departDate;
-  }
-
-  public void setDepartDate(LocalDate departDate) {
-    this.departDate = departDate;
-  }
-
-  public int getCapacity() {
-    return capacity;
-  }
-
-  public void setCapacity(int capacity) {
-    this.capacity = capacity;
-  }
-
-  public int getReservedCapacity() {
-    return reservedCapacity;
-  }
-
-  public void setReservedCapacity(int reservedCapacity) {
-    this.reservedCapacity = reservedCapacity;
-  }
-
-  public int getRemainingCapacity() {
-    return Math.max(capacity - reservedCapacity, 0);
-  }
+  public void setDeliveryDate(LocalDate deliveryDate) { this.deliveryDate = deliveryDate; }
 
   public TripStatus getStatus() {
     return status;
@@ -173,7 +125,7 @@ public class Trip {
       return "SETTLED_FROZEN";
     }
     if (status == TripStatus.COMPLETED) {
-      return "PROCUREMENT_PENDING_SETTLEMENT";
+      return "DELIVERY_PENDING_SETTLEMENT";
     }
     return "ACTIVE";
   }
@@ -183,7 +135,7 @@ public class Trip {
       return "Trip already settled and frozen.";
     }
     if (status == TripStatus.COMPLETED) {
-      return "Procurement completed, waiting for settlement freeze release.";
+      return "Delivery completed; operational changes are frozen pending settlement.";
     }
     return "";
   }
