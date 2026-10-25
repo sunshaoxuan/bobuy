@@ -9,9 +9,10 @@
     "docker-build"
   ],
   "comparison": "All tracked blobs except docs/** and *.md remain unchanged after this source commit",
-  "blobCount": 631,
-  "blobListSha256": "e26ff2270a83d0f641642532ae035a705916ecbd403872d28e07d56cb5bb32b7",
+  "blobCount": 476,
+  "blobListSha256": "7645d7aa07b97fd5a3c0ab1f72634e5bfdad16da00f66e5924a0ff35bd22fb38",
   "deployedSource": "1c8d255d62c08f1f120ac147c678ed4d0acd7cc3",
   "deployedRelease": "20261025.2",
-  "scope": "Final documentation and evidence reconciliation only; no production rebuild or redeployment"
+  "scope": "Final documentation and evidence reconciliation only; no production rebuild or redeployment",
+  "blobSerialization": "git ls-tree -rz; NUL-separated unquoted entries, exclude docs/** and *.md"
 }
