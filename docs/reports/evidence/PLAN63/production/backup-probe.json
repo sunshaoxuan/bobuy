@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-25",
+  "source": "scripts/publish-production.py canonical CHECK reparse fix",
+  "backup": "/opt/bobuy/releases/20261025.1/backup/database.dump",
+  "database": "bobuy_plan63_backup_probe",
+  "restoreEquivalent": "PASS",
+  "constraintMutationRejected": "PASS",
+  "temporaryDatabaseRemoved": true,
+  "productionDatabaseModified": false,
+  "firstAttempt": {
+    "release": "20261025.1",
+    "result": "STOPPED_BEFORE_MIGRATION",
+    "recoveredRelease": "20261024.1",
+    "cause": "Equivalent PostgreSQL schema deparse and physical dropped-column positions differed; table data, indexes and sequences matched"
+  }
+}

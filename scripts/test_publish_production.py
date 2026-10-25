@@ -1,3 +1,4 @@
+import json
 import unittest
 from unittest.mock import patch
 from tempfile import TemporaryDirectory
@@ -12,6 +13,20 @@ spec.loader.exec_module(publisher)
 
 
 class RestoredDatabaseValidationTest(unittest.TestCase):
+    def test_fingerprint_reparses_checks_and_ignores_physical_column_positions(self):
+        constraints = [{'relation': 'bb_trip', 'conname': 'status_check', 'contype': 'c',
+                        'definition': "CHECK (status = 'PUBLISHED')"}]
+        with patch.object(publisher.subprocess, 'check_output', side_effect=[
+                'flyway_schema_history', '1:rows', 'columns', 'indexes',
+                json.dumps(constraints), "CHECK (status = 'PUBLISHED'::text)", 'sequences']) as query:
+            result = publisher.database_fingerprint('restored_test')
+        sql = [call.kwargs['input'] for call in query.call_args_list]
+        self.assertNotIn('ordinal_position', sql[2])
+        self.assertIn('column_default', sql[2])
+        self.assertIn('BEGIN; CREATE TEMP TABLE', sql[5])
+        self.assertIn('ROLLBACK;', sql[5])
+        self.assertEqual(len(result['constraints']), 64)
+
     def test_accepts_matching_actual_snapshot(self):
         snapshot = {'bb_user': '7:hash', 'bb_trip': '2:hash', 'columns': 'schema'}
         publisher.validate_restored_database(snapshot, dict(snapshot))

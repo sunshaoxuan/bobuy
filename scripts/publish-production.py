@@ -1,5 +1,6 @@
 """Publish one staged Bobuy release on its existing production node only."""
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -20,7 +21,7 @@ def validate_restored_database(expected, actual):
 
 
 def database_fingerprint(database=None):
-    command = 'psql -U "$POSTGRES_USER" -d ' + (database or '"$POSTGRES_DB"') + ' -At -v ON_ERROR_STOP=1'
+    command = 'psql -U "$POSTGRES_USER" -d ' + (database or '"$POSTGRES_DB"') + ' -qAt -v ON_ERROR_STOP=1'
 
     def sql(query):
         return subprocess.check_output(['docker', 'exec', '-i', 'bobuy-postgres', 'sh', '-c', command],
@@ -34,13 +35,23 @@ def database_fingerprint(database=None):
         identifier = '"' + table.replace('"', '""') + '"'
         result[table] = sql("select count(*) || ':' || md5(coalesce(string_agg(v, chr(10) order by v), '')) "
             'from (select row_to_json(t)::text v from public.' + identifier + ' t) rows;')
-    result['columns'] = sql("select md5(string_agg(row_to_json(c)::text, ',' order by table_name, ordinal_position)) "
-        "from (select table_name, column_name, ordinal_position, column_default, is_nullable, data_type, "
+    result['columns'] = sql("select md5(string_agg(row_to_json(c)::text, ',' order by table_name, column_name)) "
+        "from (select table_name, column_name, column_default, is_nullable, data_type, "
         "udt_name, character_maximum_length, numeric_precision, numeric_scale from information_schema.columns "
         "where table_schema='public') c;")
     result['indexes'] = sql("select md5(string_agg(indexdef, ',' order by indexname)) from pg_indexes where schemaname='public';")
-    result['constraints'] = sql("select md5(string_agg(conrelid::regclass::text || ':' || conname || ':' || pg_get_constraintdef(c.oid), ',' order by conname, conrelid::regclass::text)) "
-        "from pg_constraint c join pg_namespace n on n.oid=c.connamespace where n.nspname='public';")
+    constraints = json.loads(sql("select coalesce(json_agg(s), '[]'::json) from (select conrelid::regclass::text as relation, "
+        "conname, contype, convalidated, condeferrable, condeferred, pg_get_constraintdef(c.oid) as definition "
+        "from pg_constraint c join pg_namespace n on n.oid=c.connamespace where n.nspname='public' "
+        "order by conrelid::regclass::text, conname) s;"))
+    for constraint in constraints:
+        if constraint['contype'] == 'c':
+            # Reparse through PostgreSQL, which canonicalizes restored array casts.
+            constraint['definition'] = sql('BEGIN; CREATE TEMP TABLE __bobuy_constraint_probe (LIKE '
+                + constraint['relation'] + '); ALTER TABLE __bobuy_constraint_probe ADD CONSTRAINT __probe '
+                + constraint['definition'] + "; SELECT pg_get_constraintdef(oid) FROM pg_constraint "
+                "WHERE conrelid='__bobuy_constraint_probe'::regclass AND conname='__probe'; ROLLBACK;")
+    result['constraints'] = hashlib.sha256(json.dumps(constraints, sort_keys=True).encode()).hexdigest()
     result['sequences'] = sql("select md5(string_agg(sequencename || ':' || coalesce(last_value::text, 'null'), ',' order by sequencename)) "
         "from pg_sequences where schemaname='public';")
     return result
