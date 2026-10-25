@@ -38,3 +38,5 @@
 本次生产发布以及创建、自动状态、同账号多端验收PASS。生产测试业务数据已清理。临时文件清理受既有执行策略阻止，该交付检查仍未完成，整体任务记录保留此未完成项。
 
 本地CI40167143749对应68c88fd89c69c4b31be3dee67c695d037ee7d8e9：后端183项中181通过、2跳过；前端86项、801键、构建、Docker及PostgreSQL15迁移通过。生产放行使用[main候选CI40173825227](evidence/PLAN63/production/ci.json)。后续仅验收脚本等待/遥测记录、巡检字段及文档回填，产品镜像和发布脚本输入保持不变。
+
+最终回执代码提交5e89923的CI40174978375必要门禁全部通过。此后仅修正文档及证据状态，按[输入绑定](evidence/PLAN63/production/receipt-ci-binding.json)复用该次有效CI，不重复构建或部署。生产阶段原始待验收回执保留为publication-phase.json，release-result.json绑定最终浏览器PASS及清理结果。

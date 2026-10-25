@@ -1,0 +1,13 @@
+{
+  "result": "PASS_CHANGED_REFERENCES",
+  "existingBrokenReferences": [
+    {
+      "file": "docs/plans/PLAN-00-任务看板总览.md",
+      "target": "walkthrough.md"
+    }
+  ],
+  "validReferences": 68,
+  "jsonFilesParsed": 16,
+  "scope": "PLAN63 and REPORT21 links all resolve; unchanged historical PLAN00 broken links recorded only",
+  "diffCheck": "PASS"
+}
