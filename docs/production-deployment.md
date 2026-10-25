@@ -114,9 +114,9 @@ See [REPORT-18](reports/REPORT-18-生产商城预览发布.md). Release staging 
 backups are at /opt/bobuy/releases/20261023.1/. Old 20261021.1 images/config remain
 available. V4 is additive for this empty pilot; app rollback retains the schema
 and data, and requires a compatibility check. No destructive schema downgrade.
-scripts/publish-production.py is pilot-specific: its restored-data guard expects
-one user and zero merchant relationships. Review that guard before any later
-release containing real customer data. Never repeat a partially completed publish
+scripts/publish-production.py compares restored table content, columns, indexes,
+constraints and sequences with the actual stopped-writer snapshot. It rejects
+any difference before migration, independent of pilot account counts. Never repeat a partially completed publish
 blindly; inspect its receipts and current service state first.
 
 Future user-requested changes may publish after the affected tests, build,

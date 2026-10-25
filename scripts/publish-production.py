@@ -14,9 +14,36 @@ def run(*args, **kwargs):
     return subprocess.run(args, check=True, **kwargs)
 
 
-def validate_restored_database(result):
-    if result.strip().splitlines() != ['1', '0', '1,2,3,4', '3']:
-        raise RuntimeError('Unexpected pilot data or migration state in restored backup')
+def validate_restored_database(expected, actual):
+    if not expected or expected != actual:
+        raise RuntimeError('Restored database differs from the stopped-writer snapshot')
+
+
+def database_fingerprint(database=None):
+    command = 'psql -U "$POSTGRES_USER" -d ' + (database or '"$POSTGRES_DB"') + ' -At -v ON_ERROR_STOP=1'
+
+    def sql(query):
+        return subprocess.check_output(['docker', 'exec', '-i', 'bobuy-postgres', 'sh', '-c', command],
+            input=query, text=True).strip()
+
+    tables = sql("select tablename from pg_tables where schemaname='public' order by tablename;").splitlines()
+    if 'flyway_schema_history' not in tables:
+        raise RuntimeError('Missing migration history in database snapshot')
+    result = {}
+    for table in tables:
+        identifier = '"' + table.replace('"', '""') + '"'
+        result[table] = sql("select count(*) || ':' || md5(coalesce(string_agg(v, chr(10) order by v), '')) "
+            'from (select row_to_json(t)::text v from public.' + identifier + ' t) rows;')
+    result['columns'] = sql("select md5(string_agg(row_to_json(c)::text, ',' order by table_name, ordinal_position)) "
+        "from (select table_name, column_name, ordinal_position, column_default, is_nullable, data_type, "
+        "udt_name, character_maximum_length, numeric_precision, numeric_scale from information_schema.columns "
+        "where table_schema='public') c;")
+    result['indexes'] = sql("select md5(string_agg(indexdef, ',' order by indexname)) from pg_indexes where schemaname='public';")
+    result['constraints'] = sql("select md5(string_agg(conrelid::regclass::text || ':' || conname || ':' || pg_get_constraintdef(c.oid), ',' order by conname, conrelid::regclass::text)) "
+        "from pg_constraint c join pg_namespace n on n.oid=c.connamespace where n.nspname='public';")
+    result['sequences'] = sql("select md5(string_agg(sequencename || ':' || coalesce(last_value::text, 'null'), ',' order by sequencename)) "
+        "from pg_sequences where schemaname='public';")
+    return result
 
 
 def maintenance_config(config):
@@ -83,6 +110,7 @@ def main():
         run('docker', 'exec', 'bobuy-gateway', 'nginx', '-t')
         run('docker', 'exec', 'bobuy-gateway', 'nginx', '-s', 'reload')
         run(*compose, 'stop', *applications[:-1])
+        expected_database = database_fingerprint()
         with (backup / 'database.dump').open('wb') as output:
             run('docker', 'exec', 'bobuy-postgres', 'sh', '-c',
                 'pg_dump -U "$POSTGRES_USER" -d "$POSTGRES_DB" -Fc', stdout=output)
@@ -95,21 +123,7 @@ def main():
             with (backup / 'database.dump').open('rb') as source:
                 run('docker', 'exec', '-i', 'bobuy-postgres', 'sh', '-c',
                     'pg_restore --exit-on-error -U "$POSTGRES_USER" -d ' + database, stdin=source)
-            # Flyway owns versioned execution; an already migrated backup retains V4.
-            validation_sql = (
-                'select count(*) from bb_user; '
-                'select count(*) from bb_merchant_customer; '
-                "select string_agg(version, ',' order by installed_rank) "
-                'from flyway_schema_history where success; '
-                'select count(*) from information_schema.columns where table_schema = '
-                "'public' and (table_name, column_name) in "
-                "(('bb_user','email_verified_at'),('bb_product','merchant_id'),"
-                "('bb_supplier','merchant_id'));"
-            )
-            result = subprocess.check_output(['docker', 'exec', 'bobuy-postgres', 'sh', '-c',
-                'psql -U "$POSTGRES_USER" -d ' + database +
-                ' -Atc "' + validation_sql + '"'], text=True)
-            validate_restored_database(result)
+            validate_restored_database(expected_database, database_fingerprint(database))
         finally:
             run('docker', 'exec', 'bobuy-postgres', 'sh', '-c',
                 'dropdb -U "$POSTGRES_USER" ' + database)

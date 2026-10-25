@@ -27,6 +27,15 @@ permissions:
   contents: read
 
 jobs:
+  release-tools:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate production release guards
+        run: |
+          python -B -m unittest discover -s scripts -p test_publish_production.py
+          python -B scripts/check-production-isolation.py
+
   backend-test:
     name: backend-test
     runs-on: ubuntu-latest
