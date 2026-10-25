@@ -101,10 +101,21 @@
       "result": "PASS for task changes",
       "newOrEditedRelativeReferences": "valid",
       "preexistingUnrelatedReferences": "PROD02 has unchanged legacy architecture links; outside this batch"
+    },
+    "cleanup": {
+      "businessFixtures": "removed",
+      "temporaryMigrationDatabase": "removed",
+      "filesystem": "BLOCKED_BY_EXECUTION_POLICY",
+      "remaining": [
+        ".task-tmp/plan63",
+        "frontend/test-results/test_shopping_flow-regiona-6415a-only-area-and-delivery-date",
+        "frontend/test-results/.last-run.json"
+      ],
+      "committed": false
     }
   },
   "ci": {
-    "result": "PENDING",
+    "result": "PASS",
     "required": [
       "backend-test",
       "frontend-quality",
@@ -114,7 +125,11 @@
     "optionalNotRun": [
       "whole legacy Playwright suite",
       "Maven dependency audit, no dependency change"
-    ]
+    ],
+    "runId": 40167143749,
+    "commit": "68c88fd89c69c4b31be3dee67c695d037ee7d8e9",
+    "evidence": "ci.json",
+    "sourceInputsUnchangedForDocumentationReceipt": true
   },
   "remainingOutsideScope": [
     "production delivery-date business confirmation for historical rows",
@@ -122,5 +137,5 @@
     "physical mobile device validation",
     "concurrent business load stress test"
   ],
-  "overall": "LOCAL_PASS_CI_PENDING"
+  "overall": "FUNCTIONAL_VISUAL_AND_CI_PASS_DELIVERY_CLEANUP_INCOMPLETE"
 }

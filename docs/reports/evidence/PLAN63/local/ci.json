@@ -1,0 +1,53 @@
+{
+  "runId": 40167143749,
+  "url": "https://github.com/sunshaoxuan/bobuy/actions/runs/40167143749",
+  "commit": "68c88fd89c69c4b31be3dee67c695d037ee7d8e9",
+  "result": "PASS",
+  "sourceInputSha256": "3d0df3047d9a0703a2018360d494e3587b805f64f33410107cee9f46c8eaf1f8",
+  "completedAt": "2026-10-25T05:56:02Z",
+  "jobs": [
+    {
+      "name": "backend-test",
+      "id": 121090416870,
+      "result": "success"
+    },
+    {
+      "name": "frontend-quality",
+      "id": 121090416693,
+      "result": "success"
+    },
+    {
+      "name": "docker-build",
+      "id": 121090687075,
+      "result": "success"
+    },
+    {
+      "name": "postgres-migration-verify",
+      "id": 121090416803,
+      "result": "success"
+    },
+    {
+      "name": "playwright-e2e",
+      "id": 121090417705,
+      "result": "skipped"
+    },
+    {
+      "name": "maven-dependency-audit",
+      "id": 121090417630,
+      "result": "skipped"
+    }
+  ],
+  "backend": {
+    "tests": 183,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 2
+  },
+  "frontend": {
+    "testFiles": 25,
+    "tests": 86,
+    "passed": 86,
+    "i18nKeys": 801
+  },
+  "scope": "final code candidate; optional whole legacy Playwright and dependency audit not enabled; no deployment"
+}
