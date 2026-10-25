@@ -26,14 +26,19 @@ async function login(width,height){
  const context=await browser.newContext({viewport:{width,height}});contexts.push(context);
  await context.addInitScript(()=>localStorage.setItem('bobbuy_locale','zh-CN'));
  const page=await context.newPage();
- const view={width,height,errors:[],network:[]};report.views.push(view);
+ const view={width,height,errors:[],network:[],telemetry:[]};report.views.push(view);
  page.on('pageerror',e=>view.errors.push(e.message));
  page.on('console',m=>{if(m.type()==='error')view.errors.push(m.text());});
  page.on('response',r=>{if(r.status()>=400)view.network.push({status:r.status(),path:new URL(r.url()).pathname});});
- page.on('requestfailed',r=>{if(new URL(r.url()).origin===origin&&!r.failure()?.errorText.includes('ERR_ABORTED'))view.network.push({path:new URL(r.url()).pathname,error:r.failure()?.errorText});});
+ page.on('requestfailed',r=>{const url=new URL(r.url());if(url.origin===origin){const failure={path:url.pathname,error:r.failure()?.errorText};if(url.pathname==='/cdn-cgi/rum'&&failure.error?.includes('ERR_ABORTED'))view.telemetry.push(failure);else view.network.push(failure);}});
  await page.goto(origin+'/admin',{waitUntil:'networkidle'});
  await page.locator('#username').fill(credentials.username);await page.locator('#password').fill(credentials.password);
+ const identity=page.waitForResponse(r=>r.url()===origin+'/api/auth/me'&&r.request().method()==='GET');
+ const accounts=page.waitForResponse(r=>new URL(r.url()).pathname==='/api/admin/users'&&r.request().method()==='GET');
  await page.locator('button[type=submit]').click();await page.waitForURL('**/admin/users');
+ const identityResponse=await identity;assert.equal(identityResponse.status(),200);await identityResponse.finished();
+ const accountsResponse=await accounts;assert.equal(accountsResponse.status(),200);await accountsResponse.finished();
+ await page.waitForLoadState('networkidle');
  await page.goto(origin+'/admin/trips',{waitUntil:'networkidle'});
  const token=await page.evaluate(()=>localStorage.getItem('bobbuy_access_token'));assert(token);
  const user=await call(context,token,'get','/auth/me');
@@ -107,6 +112,10 @@ try{
  report.checks.push('Logout in desktop does not revoke mobile refresh/read; forged CSRF rejected; both test sessions logged out');
  report.functionalResult='PASS';report.browserResult='PASS';
 }finally{
+ for(const context of contexts){
+  const csrf=(await context.cookies()).find(c=>c.name==='bobbuy_csrf_token');
+  if(csrf)await context.request.post(origin+'/api/auth/logout',{headers:{'X-BOBBUY-CSRF-TOKEN':csrf.value}});
+ }
  await browser.close();
  if(fixtures.trips.length||fixtures.customer){
   try{

@@ -1,0 +1,73 @@
+{
+  "release": "20261025.2",
+  "origin": "https://bobuy.cc",
+  "startedAt": "2026-10-25T07:56:13.220Z",
+  "data": "Production HTTPS; explicitly labelled zero-value acceptance fixtures",
+  "checks": [
+    "Exact production frontend assets match candidate",
+    "Same account: two browser logins, distinct secure HttpOnly cookies, concurrent independent refresh",
+    "Both sessions create via real UI; strict area/date payload; authenticated account ownership",
+    "100000 quantity accepted; order purchase/delivery and actual settlement automatically advance trip; repeat settlement rejected",
+    "Logout in desktop does not revoke mobile refresh/read; forged CSRF rejected; both test sessions logged out"
+  ],
+  "views": [
+    {
+      "width": 1440,
+      "height": 1000,
+      "errors": [],
+      "network": [],
+      "telemetry": [
+        {
+          "path": "/cdn-cgi/rum",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "path": "/cdn-cgi/rum",
+          "error": "net::ERR_ABORTED"
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "errors": [],
+      "network": [],
+      "telemetry": [
+        {
+          "path": "/cdn-cgi/rum",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "path": "/cdn-cgi/rum",
+          "error": "net::ERR_ABORTED"
+        }
+      ]
+    }
+  ],
+  "states": [
+    "PUBLISHED",
+    "PUBLISHED",
+    "IN_PROGRESS",
+    "COMPLETED",
+    "SETTLED"
+  ],
+  "fixtures": {
+    "marker": "PLAN63_1792914973220",
+    "trips": [
+      1000006,
+      1000007
+    ],
+    "customer": 1000008
+  },
+  "assets": [
+    "/assets/index-BqQsQ-BL.js",
+    "/assets/vendor-CeSrU70O.js",
+    "/assets/chat-flow-BnwIsS5s.js",
+    "/assets/index-AL28obkw.css"
+  ],
+  "functionalResult": "PASS",
+  "browserResult": "PASS",
+  "fixtureCleanup": "PASS",
+  "finishedAt": "2026-10-25T07:56:23.269Z",
+  "result": "PASS"
+}

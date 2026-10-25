@@ -1,12 +1,33 @@
 # Bobuy production deployment
 
-## Current Status (2026-10-24)
+## Current Status (2026-10-25)
 
-Production runs 20261024.1 from implementation c17ff0d. Platform administrators
+Production runs 20261025.2 from candidate 1c8d255, with regional delivery
+implementation 68c88fd. Flyway V1-V6 succeeded. Trip creation accepts only
+deliveryArea and deliveryDate; current authenticated administrator ownership and
+existing RBAC remain. Procurement, delivery and settlement drive trip status.
+Real HTTPS desktop/mobile independent sessions created trips, refreshed
+concurrently and retained the mobile session after desktop logout. Labelled
+zero-value fixtures were removed; production returned to one user and zero
+trips, orders, products and wallet transactions. REPORT-21 and PLAN-63 contain
+the release, browser and runtime evidence.
+
+The first attempt 20261025.1 stopped before migration on an equivalent-schema
+fingerprint mismatch and recovered 20261024.1. The corrected gate reparses CHECK
+definitions through PostgreSQL and ignores physical dropped-column ordinal gaps;
+data, semantic column definitions, indexes, constraint metadata and sequences
+remain checked. Isolated restore and genuine constraint-mutation rejection passed.
+Both attempts' recovery material remains under /opt/bobuy/releases/.
+V6 rollback requires stopping writers, restoring the verified V5 snapshot and
+switching to the matching 20261024.1 images together. Never connect old code to V6.
+
+### Previous User-Management Release
+
+Release 20261024.1 used implementation c17ff0d. Platform administrators
 can create and edit users at /admin/users, with CUSTOMER and AGENT selected
 individually or together. Checkout registration is fixed to CUSTOMER in code;
 production public registration remains HTTP 503 pending SMTP, abuse and recovery
-gates. REPORT-20 and PLAN-61 are the current user-management release receipts.
+gates. REPORT-20 and PLAN-61 remain the user-management release receipts.
 The 2026-10-24 continuation reverified live login, exact frontend assets, security
 and 16 viewport/locale combinations. No duplicate deployment was required.
 Release-specific configuration and receipts below describe the earlier storefront
@@ -107,7 +128,7 @@ browser-only checks and do not prove real inventory or complete business readine
 The frontend audit found three moderate runtime dependency advisories and
 additional development advisories. No dependency upgrades were included.
 
-## Current Release Receipt
+## Earlier Storefront Release Receipt
 
 Source: 19e5203fe21b9285a3960173b52a036a28916024; images: 20261023.1.
 See [REPORT-18](reports/REPORT-18-生产商城预览发布.md). Release staging and root-only

@@ -1,0 +1,269 @@
+{
+  "release": "20261025.2",
+  "origin": "https://bobuy.cc",
+  "data": "Empty live production after acceptance fixture cleanup",
+  "views": [
+    {
+      "width": 1440,
+      "height": 1000,
+      "controls": [
+        {
+          "name": "例如：上海市区及周边",
+          "background": {
+            "x": 264,
+            "y": 264.359375,
+            "width": 468,
+            "height": 58
+          },
+          "inner": {
+            "x": 265,
+            "y": 265.359375,
+            "width": 466,
+            "height": 56
+          },
+          "hitArea": {
+            "x": 264,
+            "y": 264.359375,
+            "width": 468,
+            "height": 58
+          },
+          "glyph": {
+            "x": 276,
+            "y": 276.359375,
+            "width": 140,
+            "height": 14
+          },
+          "alignment": "top-start",
+          "centerError": {
+            "x": -152,
+            "y": -10
+          },
+          "margins": {
+            "left": 11,
+            "right": 315,
+            "top": 11,
+            "bottom": 31
+          }
+        },
+        {
+          "name": "ant-picker ant-picker-outlined css-1a9ju7l",
+          "background": {
+            "x": 756,
+            "y": 264.359375,
+            "width": 468,
+            "height": 44
+          },
+          "inner": {
+            "x": 757,
+            "y": 265.359375,
+            "width": 466,
+            "height": 42
+          },
+          "hitArea": {
+            "x": 756,
+            "y": 264.359375,
+            "width": 468,
+            "height": 44
+          },
+          "glyph": {
+            "x": 768,
+            "y": 279.359375,
+            "width": 443.25,
+            "height": 14
+          },
+          "alignment": "start",
+          "centerError": {
+            "x": -0.375,
+            "y": 0
+          },
+          "margins": {
+            "left": 11,
+            "right": 11.75,
+            "top": 14,
+            "bottom": 14
+          }
+        },
+        {
+          "name": "发布行程",
+          "background": {
+            "x": 1114,
+            "y": 371.359375,
+            "width": 110,
+            "height": 44
+          },
+          "inner": {
+            "x": 1115,
+            "y": 372.359375,
+            "width": 108,
+            "height": 42
+          },
+          "hitArea": {
+            "x": 1114,
+            "y": 371.359375,
+            "width": 110,
+            "height": 44
+          },
+          "glyph": {
+            "x": 1130.75,
+            "y": 386.359375,
+            "width": 77.25,
+            "height": 14
+          },
+          "alignment": "center",
+          "centerError": {
+            "x": 0.375,
+            "y": 0
+          },
+          "margins": {
+            "left": 15.75,
+            "right": 15,
+            "top": 14,
+            "bottom": 14
+          }
+        }
+      ],
+      "errors": [],
+      "network": [],
+      "telemetry": [
+        {
+          "path": "/cdn-cgi/rum",
+          "error": "net::ERR_ABORTED"
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "controls": [
+        {
+          "name": "例如：上海市区及周边",
+          "background": {
+            "x": 16,
+            "y": 245.5625,
+            "width": 358,
+            "height": 58
+          },
+          "inner": {
+            "x": 17,
+            "y": 246.5625,
+            "width": 356,
+            "height": 56
+          },
+          "hitArea": {
+            "x": 16,
+            "y": 245.5625,
+            "width": 358,
+            "height": 58
+          },
+          "glyph": {
+            "x": 28,
+            "y": 257.5625,
+            "width": 140,
+            "height": 14
+          },
+          "alignment": "top-start",
+          "centerError": {
+            "x": -97,
+            "y": -10
+          },
+          "margins": {
+            "left": 11,
+            "right": 205,
+            "top": 11,
+            "bottom": 31
+          }
+        },
+        {
+          "name": "ant-picker ant-picker-outlined css-1a9ju7l",
+          "background": {
+            "x": 16,
+            "y": 357.78125,
+            "width": 358,
+            "height": 44
+          },
+          "inner": {
+            "x": 17,
+            "y": 358.78125,
+            "width": 356,
+            "height": 42
+          },
+          "hitArea": {
+            "x": 16,
+            "y": 357.78125,
+            "width": 358,
+            "height": 44
+          },
+          "glyph": {
+            "x": 28,
+            "y": 372.78125,
+            "width": 333.25,
+            "height": 14
+          },
+          "alignment": "start",
+          "centerError": {
+            "x": -0.375,
+            "y": 0
+          },
+          "margins": {
+            "left": 11,
+            "right": 11.75,
+            "top": 14,
+            "bottom": 14
+          }
+        },
+        {
+          "name": "发布行程",
+          "background": {
+            "x": 16,
+            "y": 450.78125,
+            "width": 358,
+            "height": 44
+          },
+          "inner": {
+            "x": 17,
+            "y": 451.78125,
+            "width": 356,
+            "height": 42
+          },
+          "hitArea": {
+            "x": 16,
+            "y": 450.78125,
+            "width": 358,
+            "height": 44
+          },
+          "glyph": {
+            "x": 156.75,
+            "y": 465.78125,
+            "width": 77.25,
+            "height": 14
+          },
+          "alignment": "center",
+          "centerError": {
+            "x": 0.375,
+            "y": 0
+          },
+          "margins": {
+            "left": 139.75,
+            "right": 139,
+            "top": 14,
+            "bottom": 14
+          }
+        }
+      ],
+      "errors": [],
+      "network": [],
+      "telemetry": [
+        {
+          "path": "/cdn-cgi/rum",
+          "error": "net::ERR_ABORTED"
+        }
+      ]
+    }
+  ],
+  "publicChecks": {
+    "health": 200,
+    "anonymousIdentity": 401,
+    "registration": 503
+  },
+  "geometryResult": "PASS"
+}

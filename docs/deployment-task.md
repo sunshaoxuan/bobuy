@@ -1,5 +1,44 @@
 # Bobuy deployment task
 
+## Regional Delivery Release (2026-10-25 JST)
+
+Objective and authorization: publish PLAN-63 through main and project gates;
+verify production creation, automatic status and same-account multi-session use.
+Method and bounded criteria: PLAN-63 is the governing task document; preserve
+other projects and real records, use labelled zero-value fixtures, retain verified
+rollback material and compare protected-node state.
+
+Published 20261025.2 from 1c8d255 after CI40173825227 passed release-tools,
+backend-test, frontend-quality and docker-build. Product implementation is
+68c88fd; unchanged image contents were retagged for the second attempt.
+V6 succeeded, five Java services are healthy, frontend is running, all six have
+zero restarts/OOM. Protected-node state is unchanged across the release and
+post-browser comparison. The backup restored and compared successfully, and its
+temporary database was removed. First attempt 20261025.1 stopped before migration
+and recovered the prior release; equivalent-schema comparison was then corrected
+and verified against an actual restored backup plus a changed-constraint negative.
+
+Real HTTPS checks passed: two-field UI creation in desktop and mobile contexts,
+current-admin ownership, obsolete fields HTTP400, removed manual-state API404,
+100000-unit zero-value order, automatic PUBLISHED/IN_PROGRESS/COMPLETED/SETTLED,
+repeated settlement rejection, independent secure refresh cookies, concurrent
+refresh, logout isolation and forged-CSRF rejection. Test records were removed.
+Health200, anonymous identity401 and public registration503 remain verified.
+Screenshots show labelled acceptance fixtures separately from the cleared live
+empty state. Chrome responsive contexts were used; physical phones were not tested.
+
+The initial browser probe navigated before login identity completed. Later
+waiting includes both identity and lazy-loaded user-list responses. The final
+application Console/network checks pass; aborted Cloudflare RUM telemetry is
+recorded separately without ignoring application request failures.
+
+Evidence: REPORT-21 and docs/reports/evidence/PLAN63/production/. Root-only V5
+backup and old images remain for coupled database/application rollback.
+Local temporary-file cleanup remains blocked by the previously reported execution
+policy. Ignored archives and test output remain outside Git; no alternate deletion
+was attempted. This housekeeping item is incomplete; production functional release
+and its live acceptance are recorded separately.
+
 ## Production operator rename (2026-10-23 JST)
 
 Objective: rename existing bobuy-admin to admin and set the user-specified test

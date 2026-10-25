@@ -1,0 +1,88 @@
+{
+  "migrations": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6"
+  ],
+  "trips": 0,
+  "orders": 0,
+  "users": 1,
+  "products": 0,
+  "walletTransactions": 0,
+  "tripColumns": [
+    "id",
+    "agent_id",
+    "delivery_area",
+    "delivery_date",
+    "status",
+    "status_updated_at"
+  ],
+  "temporaryDatabases": 0,
+  "containers": [
+    {
+      "name": "/bobuy-core-service",
+      "image": "bobuy/core:20261025.2",
+      "imageId": "sha256:3daac8234375d4e19aae5b138840817379f6b6651e0a5f54b1bd8d64c28c684d",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "oomKilled": false
+    },
+    {
+      "name": "/bobuy-ai-service",
+      "image": "bobuy/ai:20261025.2",
+      "imageId": "sha256:cd5264085a08875d64a72e5e9b3bfe63f8e5d6dbc096728c274b313c49d252d3",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "oomKilled": false
+    },
+    {
+      "name": "/bobuy-im-service",
+      "image": "bobuy/im:20261025.2",
+      "imageId": "sha256:e78ee3d0e5cc89999bf6a527629411fff2498c8dfcaeb3ef4fc78d0ceb24e7c1",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "oomKilled": false
+    },
+    {
+      "name": "/bobuy-auth-service",
+      "image": "bobuy/auth:20261025.2",
+      "imageId": "sha256:50dab99dfc91ec901363b90c21f616df835a32957dc54cf1ed9d86dc726823b2",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "oomKilled": false
+    },
+    {
+      "name": "/bobuy-gateway-service",
+      "image": "bobuy/router:20261025.2",
+      "imageId": "sha256:8d3479d7636b05b15920f74f11505cf42e84de446eb146b44767b63b59f52987",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "oomKilled": false
+    },
+    {
+      "name": "/bobuy-frontend",
+      "image": "bobuy/frontend:20261025.2",
+      "imageId": "sha256:c17cb15268dc4329550decbc796230036ef2d5705cc7dbb4f0dbd598a140e2b8",
+      "status": "running",
+      "health": null,
+      "restarts": 0,
+      "oomKilled": false
+    }
+  ],
+  "release": "20261025.2",
+  "protectedStateUnchanged": true,
+  "backupCheck": {
+    "databaseRestore": "PASS",
+    "restoredMigrationHistoryAndSchema": "PASS",
+    "temporaryDatabaseRemoved": true,
+    "objectsArchive": "objects.tar.gz"
+  }
+}

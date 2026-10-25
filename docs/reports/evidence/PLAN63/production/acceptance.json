@@ -1,0 +1,22 @@
+{
+  "release": "20261025.2",
+  "deployedSource": "1c8d255d62c08f1f120ac147c678ed4d0acd7cc3",
+  "ciRun": 40173825227,
+  "productImplementation": "68c88fd89c69c4b31be3dee67c695d037ee7d8e9",
+  "functional": "PASS",
+  "productionMigration": "PASS",
+  "restoredBackup": "PASS",
+  "productionBrowser": "PASS",
+  "productionGeometry": "PASS",
+  "productionVisual": "PASS",
+  "visualScope": "Regional delivery, same-UI accepted local four-language/Gemini evidence reused; production desktop/mobile and editor crops directly reviewed",
+  "multiSession": "PASS",
+  "fixtureCleanup": "PASS",
+  "protectedState": "PASS",
+  "imageIdentity": "PASS",
+  "publicRegistration": "CLOSED_HTTP_503",
+  "temporaryLocalFiles": "INCOMPLETE_POLICY_BLOCKED",
+  "hardwarePhones": "NOT_TESTED",
+  "overallTask": "INCOMPLETE_HOUSEKEEPING_ONLY",
+  "checkedAt": "2026-10-25T07:58:37.629Z"
+}

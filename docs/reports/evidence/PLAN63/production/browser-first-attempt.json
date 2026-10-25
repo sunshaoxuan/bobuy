@@ -1,0 +1,24 @@
+{
+  "release": "20261025.2",
+  "origin": "https://bobuy.cc",
+  "startedAt": "2026-10-25T07:49:39.563Z",
+  "data": "Production HTTPS; explicitly labelled zero-value acceptance fixtures",
+  "checks": [],
+  "views": [
+    {
+      "width": 1440,
+      "height": 1000,
+      "errors": [
+        "[API ERROR] FETCH failure at /api/auth/me: TypeError: Failed to fetch\n    at N (https://bobuy.cc/assets/chat-flow-BnwIsS5s.js:1:134003)\n    at _ (https://bobuy.cc/assets/chat-flow-BnwIsS5s.js:1:134897)\n    at Object.me (https://bobuy.cc/assets/chat-flow-BnwIsS5s.js:1:136238)\n    at https://bobuy.cc/assets/index-BqQsQ-BL.js:2:3149\n    at async x (https://bobuy.cc/assets/LoginPage-C-sYzY_p.js:1:364)"
+      ],
+      "network": []
+    }
+  ],
+  "states": [],
+  "fixtures": {
+    "marker": "PLAN63_1792914579563",
+    "trips": []
+  },
+  "finishedAt": "2026-10-25T07:49:45.355Z",
+  "result": "FAIL"
+}

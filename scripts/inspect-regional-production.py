@@ -9,7 +9,7 @@ select 'trips='||count(*) from bb_trip;
 select 'orders='||count(*) from bb_order_header;
 select 'users='||count(*) from bb_user;
 select 'products='||count(*) from bb_product;
-select id,status,depart_date from bb_trip order by id limit 100;
+select id,status,delivery_date from bb_trip order by id limit 100;
 """
 result = subprocess.run(['docker','exec','-i','bobuy-postgres','sh','-c',
     'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -At -v ON_ERROR_STOP=1'],
