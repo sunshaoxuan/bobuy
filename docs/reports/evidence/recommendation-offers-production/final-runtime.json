@@ -1,0 +1,80 @@
+{
+  "release": "20261026.1",
+  "source": "dc9a27c7f78580cac9eb41779918276df9c8cd1e",
+  "ciRun": 40285859378,
+  "containers": [
+    {
+      "name": "/bobuy-core-service",
+      "tag": "bobuy/core:20261026.1",
+      "imageId": "sha256:f3fedfaaa908e1e342d88086c4f04f9b8535dbf668f30301ea94d8d6390ac986",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-ai-service",
+      "tag": "bobuy/ai:20261026.1",
+      "imageId": "sha256:1427fa13a331caf24abc6235dd6677a1c0e28de5f06effd660ee689c9323ff7b",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-im-service",
+      "tag": "bobuy/im:20261026.1",
+      "imageId": "sha256:d6ce9738eef635ef0b967fa0285607d754921e18018add44733a39a2f43fd1ee",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-auth-service",
+      "tag": "bobuy/auth:20261026.1",
+      "imageId": "sha256:32df8ccf6f93d0811a9d8bcc8a65e14c25216063aed5f73deea6e5a07cdbcad0",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-gateway-service",
+      "tag": "bobuy/router:20261026.1",
+      "imageId": "sha256:84bea0d88ddfddad4a66f9bbe917bf628832e9b78dd5f6974d37b19fa36026c6",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-frontend",
+      "tag": "bobuy/frontend:20261026.1",
+      "imageId": "sha256:9c8d54fd8eb8acf30e06121af683b0908f91b1b1340d4bdb3ddf2f8418649fa8",
+      "health": "running",
+      "restarts": 0
+    }
+  ],
+  "database": {
+    "migrations": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "9"
+    ],
+    "products": 0,
+    "trips": 0,
+    "orders": 0,
+    "users": 1,
+    "recommendationPosts": 0,
+    "recommendationItems": 0,
+    "publishedRecommendations": 0,
+    "temporaryRestoreDatabases": 0
+  },
+  "protectedStateUnchanged": true,
+  "backup": {
+    "databaseRestore": "PASS",
+    "restoredMigrationHistoryAndSchema": "PASS",
+    "temporaryDatabaseRemoved": true,
+    "objectsArchive": "objects.tar.gz"
+  },
+  "backupDirectoryMode": "0o700",
+  "frontendIndexHash": "5a721c30e72627335399cb0286fb62a9c9c1b53efcdc269938a1eeb532e5536c",
+  "configuredRelease": "20261026.1",
+  "result": "PASS"
+}

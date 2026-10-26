@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reviewed Costco recommendation batch",
+  "description": "Paste into the visible recommendation editor. Preview first; registration saves draft facts only. Dates and JPY facts are per item and never inferred from an issue. Date pairs and original/offer price order are also checked by the editor/server.",
+  "type": "array",
+  "minItems": 1,
+  "maxItems": 200,
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["name"],
+    "anyOf": [{"required": ["imageUrl"]}, {"required": ["fileName"]}],
+    "properties": {
+      "name": {"type": "string", "minLength": 1, "maxLength": 200, "pattern": "\\S"},
+      "itemNumber": {"type": ["string", "null"], "maxLength": 255, "description": "String preserves leading zeros; never supply a JSON number. Omit/null when source omits it."},
+      "currency": {"enum": ["JPY", null], "description": "All amounts are JPY; no conversion or inventory repricing."},
+      "referencePrice": {"$ref": "#/$defs/amount", "description": "Offer price, or the sole stated price; omit if absent."},
+      "originalPrice": {"$ref": "#/$defs/amount"},
+      "discountAmount": {"$ref": "#/$defs/amount", "description": "Only the stated JPY reduction; do not calculate a missing price."},
+      "priceUnit": {"type": ["string", "null"], "maxLength": 100, "description": "E.g. 100g, pack, bottle. Applies to this row's amounts."},
+      "offerStart": {"$ref": "#/$defs/date", "description": "Offer/redemption start, inclusive Japan date."},
+      "offerEnd": {"$ref": "#/$defs/date", "description": "Offer/redemption end, inclusive Japan date."},
+      "couponStart": {"$ref": "#/$defs/date", "description": "Coupon issue start; separate from redemption."},
+      "couponEnd": {"$ref": "#/$defs/date", "description": "Coupon issue end; separate from redemption."},
+      "offerNotes": {"type": ["string", "null"], "maxLength": 2000},
+      "imageUrl": {"type": "string", "format": "uri", "pattern": "^https://cds2\\.costcojapan\\.jp/cds/mail-images/[^\\s#]+$", "description": "Official Costco static PNG/JPEG. Normal visible UI fetches, validates and stores it."},
+      "fileName": {"type": "string", "minLength": 1, "description": "Exact name of a PNG/JPEG already selected in the visible file picker. Each file must be nonempty and at most 8 MiB."}
+    }
+  },
+  "$defs": {
+    "amount": {"type": ["number", "null"], "minimum": 0, "maximum": 999999999999.99, "multipleOf": 0.01},
+    "date": {"type": ["string", "null"], "format": "date", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"}
+  }
+}

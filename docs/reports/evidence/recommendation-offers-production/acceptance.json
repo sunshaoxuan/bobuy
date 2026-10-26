@@ -1,0 +1,39 @@
+{
+  "release": "20261026.1",
+  "runtimeSource": "dc9a27c7f78580cac9eb41779918276df9c8cd1e",
+  "ciRun": 40285859378,
+  "ciHeadSha": "dc9a27c7f78580cac9eb41779918276df9c8cd1e",
+  "applicationHealth": "PASS",
+  "protectedState": "PASS",
+  "databaseBackupRestore": "PASS",
+  "productionReadOnlyBrowser": "PASS",
+  "localDraftEditSavePreviewAndCustomerPeriods": "PASS",
+  "productionDraftWrite": "DENIED_NOT_EXECUTED",
+  "productionBusinessCounts": {
+    "migrations": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "9"
+    ],
+    "products": 0,
+    "trips": 0,
+    "orders": 0,
+    "users": 1,
+    "recommendationPosts": 0,
+    "recommendationItems": 0,
+    "publishedRecommendations": 0,
+    "temporaryRestoreDatabases": 0
+  },
+  "realProductsImported": false,
+  "realProductsPublished": false,
+  "publicUi": "https://bobuy.cc/admin/recommendations",
+  "customerUi": "https://bobuy.cc/recommendations",
+  "browserSha256": "1854f2c3e1c79916288eea41e9707de515c459de34f916988dea9fae71fb64cb",
+  "runtimeSha256": "3f8d5813b22131af2aa5f762e38ef7c90924f2e61290e19a8b05aa7039846379",
+  "result": "PUBLISHED_WITH_PRODUCTION_DRAFT_WRITE_VERIFICATION_NOT_EXECUTED"
+}

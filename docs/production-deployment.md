@@ -1,5 +1,20 @@
 # Bobuy production deployment
 
+## Recommendation release — 2026-10-26
+
+Published 20261026.1 from dc9a27c after exact-head CI 40285859378 passed.
+Normal admin menu /admin/recommendations and public /recommendations are live.
+Source string IDs, optional JPY price/unit/discount facts, per-item inclusive Japan
+offer/redemption and coupon-issue dates, visible JSON preview/edit/draft workflow
+are accepted locally; production entry/API/byte identity and mobile read-only
+checks pass. No production products, articles or drafts were created/published.
+Production draft-save verification was denied by automatic approval before
+execution; local synthetic persistence evidence is retained. Six image IDs match,
+V7/V9 applied, backup restore verified, protected projects unchanged. See
+[release record](reports/RECOMMENDATION-OFFER-WORKFLOW.md) for full evidence, data
+contract and rollback boundary. Earlier status sections below are historical.
+
+
 ## Current Status (2026-10-25)
 
 Production runs 20261025.2 from candidate 1c8d255, with regional delivery

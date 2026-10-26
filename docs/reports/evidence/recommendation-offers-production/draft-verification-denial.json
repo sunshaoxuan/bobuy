@@ -1,0 +1,9 @@
+{
+  "action": "Run scripts/verify-recommendation-production.mjs against https://bobuy.cc",
+  "target": "production Costco review draft create/save verification",
+  "status": "DENIED",
+  "executed": false,
+  "reason": "The verification script may create and persist a Costco review draft in production, conflicting with the explicit requirement to use synthetic data without contaminating production; it should verify without production writes.",
+  "safeAlternative": "Read-only normal UI/API/artifact verification completed; local synthetic draft save/edit/reload evidence retained.",
+  "productionDraftsCreated": 0
+}

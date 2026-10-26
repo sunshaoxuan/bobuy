@@ -1,0 +1,15 @@
+{
+  "oldCiRun": 40285859356,
+  "oldReferenceWas": "independent Maven dependency-check workflow, not the release gate",
+  "correctCiRun": 40285859378,
+  "verifiedHeadSha": "dc9a27c7f78580cac9eb41779918276df9c8cd1e",
+  "workflow": "BOBBuy CI",
+  "conclusion": "success",
+  "requiredJobs": [
+    "release-tools",
+    "backend-test",
+    "frontend-quality",
+    "docker-build"
+  ],
+  "kind": "metadata correction only; no altered artifact or test result"
+}

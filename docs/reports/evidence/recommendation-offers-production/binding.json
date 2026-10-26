@@ -1,0 +1,59 @@
+{
+  "release": "20261026.1",
+  "source": "dc9a27c7f78580cac9eb41779918276df9c8cd1e",
+  "ciRun": 40285859378,
+  "archiveSha256": "093d4abba81f6eaa71f6305e92d52d5719d2a165211b4329e30454997add3290",
+  "images": [
+    {
+      "tags": [
+        "bobuy/core:20261026.1"
+      ],
+      "id": "sha256:f3fedfaaa908e1e342d88086c4f04f9b8535dbf668f30301ea94d8d6390ac986"
+    },
+    {
+      "tags": [
+        "bobuy/ai:20261026.1"
+      ],
+      "id": "sha256:1427fa13a331caf24abc6235dd6677a1c0e28de5f06effd660ee689c9323ff7b"
+    },
+    {
+      "tags": [
+        "bobuy/im:20261026.1"
+      ],
+      "id": "sha256:d6ce9738eef635ef0b967fa0285607d754921e18018add44733a39a2f43fd1ee"
+    },
+    {
+      "tags": [
+        "bobuy/auth:20261026.1"
+      ],
+      "id": "sha256:32df8ccf6f93d0811a9d8bcc8a65e14c25216063aed5f73deea6e5a07cdbcad0"
+    },
+    {
+      "tags": [
+        "bobuy/router:20261026.1"
+      ],
+      "id": "sha256:84bea0d88ddfddad4a66f9bbe917bf628832e9b78dd5f6974d37b19fa36026c6"
+    },
+    {
+      "tags": [
+        "bobuy/frontend:20261026.1"
+      ],
+      "id": "sha256:9c8d54fd8eb8acf30e06121af683b0908f91b1b1340d4bdb3ddf2f8418649fa8"
+    }
+  ],
+  "files": {
+    "docker-compose.yml": "ab7f454b9fdd40023f57bb620131dbaffbe2c5b83200f096881a139d3d6f1c6f",
+    "compose.production.yml": "a60d32e3f704af5bd08868dcf13f6a202eb70c871d73e94f2cb23dec35c49ac7",
+    "infra/nginx/bobuy.conf": "7efd7ee757f94d909a9e22acf44dd1587ee848756b63c40e11fe78f6eacb830a",
+    "scripts/publish-production.py": "4155621f2442a82acc16fae0ee5f6bc7a1d6b787d851a3d03c88f823ee379d39",
+    "frontend/dist/index.html": "5a721c30e72627335399cb0286fb62a9c9c1b53efcdc269938a1eeb532e5536c",
+    "bobbuy-core/target/bobbuy-core-0.1.0.jar": "8b6189da485a4a79720b475eaac542f8d264ff8ad48d988950b47588afc8263c",
+    "bobbuy-ai/target/bobbuy-ai-0.1.0.jar": "30218c0450f21cd139ebf51b31db1160f419bbdf316328d784af2a2688a9ff93",
+    "bobbuy-im/target/bobbuy-im-0.1.0.jar": "923769ba36ccab9ff7c84e423da064ead6efe150584901a58b2e94131face47a",
+    "bobbuy-auth/target/bobbuy-auth-0.1.0.jar": "50693cb1534732cdbda0fa777945bfc52b9c44f2b497689baf9150f6645c8ddf",
+    "bobbuy-gateway/target/bobbuy-gateway-0.1.0.jar": "1f1a7e3b2e49e9037acfa3609d70bce7dac3bc76842d5762d1590fcafa06b4d3"
+  },
+  "note": "Runtime source/config/dependency bytes frozen before packaging. Later backend-only test/coverage metadata does not change shipped common service runtime or frontend bytes.",
+  "ciConclusion": "success",
+  "ciHeadSha": "dc9a27c7f78580cac9eb41779918276df9c8cd1e"
+}

@@ -1,0 +1,18 @@
+{
+  "release": "20261026.1",
+  "origin": "https://bobuy.cc",
+  "data": "Read-only production business/UI verification; no draft or product creation/save/publication",
+  "checks": {
+    "publicBusinessApisAndNoLoadError": "PASS",
+    "servedEntryBytesMatchCandidate": "PASS",
+    "acceptedEditorAndCustomerOfferChunksServed": "PASS",
+    "normalLoginVisibleRecommendationEntryAndEmptyDraftList": "PASS",
+    "secureLoginAndMobile": "PASS",
+    "publicRecommendationEmptyState": "PASS"
+  },
+  "errors": [],
+  "failedApi": [],
+  "entryAsset": "/assets/index-Dgow85bg.js",
+  "result": "PASS",
+  "productionDraftSave": "NOT EXECUTED: automatic approval denied the draft-writing verifier; local synthetic save/reload evidence is preserved."
+}
