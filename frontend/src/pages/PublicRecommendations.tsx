@@ -29,6 +29,8 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
   const { t, locale } = useI18n();
   const {search}=useLocation();
   const [expanded, setExpanded] = useState(false);
+  const [pressedItem,setPressedItem]=useState<number>();
+  useEffect(()=>{const clear=()=>setPressedItem(undefined);window.addEventListener('blur',clear);return()=>window.removeEventListener('blur',clear);},[]);
   const [localItem,setLocalItem]=useState<number>();
   const [params,setParams]=useSearchParams();
   const privatePreview=useLocation().pathname.startsWith('/admin');
@@ -63,7 +65,10 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
       const text=recommendationText(item,locale);
       const product = item.productId ? catalog.get(item.productId) : undefined;
       const buyable = !!product && canBuy(product);
-      return <article className="store-product rec-pin" key={item.id}>
+      return <article className="store-product rec-pin" key={item.id} data-pressed={pressedItem===item.id||undefined}
+        onPointerDown={event=>{if(event.pointerType!=='mouse')setPressedItem(item.id);}}
+        onPointerUp={()=>setPressedItem(undefined)} onPointerCancel={()=>setPressedItem(undefined)}
+        onPointerLeave={()=>setPressedItem(undefined)} onLostPointerCapture={()=>setPressedItem(undefined)}>
         <div className={'product-tile product-shape-' + index % 4}>
           <button className="product-photo" aria-label={t('store.detail_label', {name:item.name})} onClick={() => openItem(item)}>{item.gallery?.[0]?.url?<img src={item.gallery[0].url} alt={text.name} loading={index < 2 && number === 1 ? 'eager' : 'lazy'} />:<span className="rec-no-product-image">{t('gallery.pending')}</span>}</button>
           <Tooltip title={buyable ? t('store.add_cart') : t('store.unavailable')}><button className="product-add" aria-label={t('store.add_label', {name:item.name})} disabled={!buyable} onClick={() => product && onAdd(product)}><PlusOutlined />{!!(item.productId && quantities[item.productId]) && <span className="product-count">{quantities[item.productId!]}</span>}</button></Tooltip>

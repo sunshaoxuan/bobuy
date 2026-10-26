@@ -63,3 +63,13 @@
 @media(max-width:767px){.storefront .product-photo {border-radius:16px;}.storefront .product-photo img {max-height:none;}.rec-product-detail .ant-drawer-body {padding:18px;}.rec-product-detail h1 {font-size:20px;}.rec-localization,.rec-gallery-admin,.rec-catalog-link {padding:14px;}}
 
 .rec-bulk-unit {display:flex;gap:10px;margin:16px 0;max-width:520px;}
+
+/* Keep white official photos distinct without tinting or editing their pixels. */
+.storefront .rec-pin {padding:10px;border:1px solid #00000010;border-radius:24px;background:linear-gradient(to top,rgba(0,0,0,.065),rgba(0,0,0,.018) 42%,rgba(255,255,255,0) 78%);box-shadow:0 2px 8px #00000008;transition:box-shadow .18s ease;}
+.storefront .rec-pin .product-body {background:transparent;}
+.storefront .rec-pin:active,.storefront .rec-pin[data-pressed=true] {box-shadow:0 1px 4px #00000020;}
+.storefront .rec-pin .rec-pin-code,.storefront .rec-pin .rec-pin-status {color:#626262;}
+.storefront .rec-pin:has(:focus-visible) {outline:2px solid #777773;outline-offset:3px;}
+@media(hover:hover) and (pointer:fine){.storefront .rec-pin:hover {box-shadow:0 4px 14px #00000016;}.storefront .rec-pin .product-photo:hover img {transform:none;}}
+@media(prefers-reduced-motion:reduce){.storefront .rec-pin {transition:none;}}
+@media(max-width:767px){.storefront .rec-pin {padding:8px;border-radius:20px;}}
