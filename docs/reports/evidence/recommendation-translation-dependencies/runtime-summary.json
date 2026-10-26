@@ -1,0 +1,33 @@
+{
+  "recordedAt": "2026-10-26T14:41:11.011118+00:00",
+  "scope": "Read-only observations; no secret values/raw logs, model requests, content mutations, database content reads or service restarts",
+  "productionApplicationRelease": "20261026.4",
+  "productionApplicationSource": "81da2b31249ff7c1a7dcfaa1ce6b8ccd7a1a1727",
+  "repositoryBaseline": "929799c8e4d1d9b89b8c3f50993e4427db2eb6b3",
+  "observations": {
+    "aiService": {
+      "configuredProvider": "auto",
+      "activeProvider": "unconfigured",
+      "mainModelNameConfigured": true,
+      "bridgeModelNameConfigured": true,
+      "mainUrlConfigured": false,
+      "bridgeUrlConfigured": false,
+      "plainKeyReferencePresent": false,
+      "encryptedKeyPartsPresent": false,
+      "masterKeyReferencePresent": false,
+      "codexCommandConfigured": false,
+      "codexExecutablePresent": false
+    },
+    "coreService": {
+      "configuredProvider": "auto",
+      "activeProvider": "unconfigured",
+      "providerConnectionReferencesPresent": false,
+      "codexExecutablePresent": false
+    },
+    "aiConnectionTablePresent": false
+  },
+  "automaticTranslationOperational": false,
+  "positiveProviderTestPerformed": false,
+  "reasonNoPositiveTest": "No configured provider/credential reference; no new paid service or long-lived authorization approved",
+  "nextDecision": "Choose an existing approved internal model endpoint or approved OpenAI-compatible endpoint; provide model and secure credential reference where needed, permitted public fields and budget/rate limits"
+}
