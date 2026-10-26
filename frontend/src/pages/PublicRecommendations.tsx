@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Alert, Button, Drawer, Empty, Image, Input, Segmented, Spin, Tooltip } from 'antd';
+import { Alert, Button, Drawer, Empty, Input, Segmented, Spin, Tooltip } from 'antd';
 import { ArrowLeftOutlined, ArrowRightOutlined, CalendarOutlined, DownOutlined, ExpandOutlined, PlusOutlined, UpOutlined, UserOutlined } from '@ant-design/icons';
 import { Link, useParams, useSearchParams, useLocation } from 'react-router-dom';
 import { storefrontApi,recommendationApi, type RecommendationDetail, type StoreProduct } from '../api';
@@ -10,6 +10,8 @@ import {categoryChoices,filterRecommendations,UNCLASSIFIED} from '../recommendat
 import {scopedPath,selectedNode} from '../storeNavigation';
 import {recommendationText} from '../recommendationText';
 import {formatMoney} from '../currency';
+import {RecommendationImageViewer} from '../components/RecommendationImageViewer';
+import {RecommendationName} from '../components/RecommendationName';
 import type {RecommendationItem} from '../api';
 
 type ShoppingProps = {
@@ -73,7 +75,7 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
           <button className="product-photo" aria-label={t('store.detail_label', {name:item.name})} onClick={() => openItem(item)}>{item.gallery?.[0]?.url?<img src={item.gallery[0].url} alt={text.name} loading={index < 2 && number === 1 ? 'eager' : 'lazy'} />:<span className="rec-no-product-image">{t('gallery.pending')}</span>}</button>
           <Tooltip title={buyable ? t('store.add_cart') : t('store.unavailable')}><button className="product-add" aria-label={t('store.add_label', {name:item.name})} disabled={!buyable} onClick={() => product && onAdd(product)}><PlusOutlined />{!!(item.productId && quantities[item.productId]) && <span className="product-count">{quantities[item.productId!]}</span>}</button></Tooltip>
           <Tooltip title={t('store.details')}><button className="rec-pin-preview" aria-label={t('store.details') + ': ' + text.name} onClick={() => openItem(item)}><ExpandOutlined /></button></Tooltip>
-          <div className="product-body"><button className="product-name" onClick={()=>openItem(item)}><h3 title={text.name}>{text.name}</h3></button>{text.specification&&<p className="rec-compact-spec">{text.specification}</p>}{text.missing&&<small>{t('translation.fallback')}</small>}</div>
+          <div className="product-body"><button className="product-name" onClick={()=>openItem(item)}><h3 title={text.name}><RecommendationName text={text}/></h3></button>{text.specification&&<p className="rec-compact-spec">{text.specification}</p>}{text.missing&&<small>{t('translation.fallback')}</small>}</div>
         </div>
         <small className="rec-pin-code">{t('rec.code')}: {item.itemNumber || t('rec.not_stated')}</small>
         {!!item.categories?.length&&<div className="rec-item-categories">{item.categories.map(category=><span key={category.id}>{localizedContent(category.name,locale)}</span>)}</div>}
@@ -90,11 +92,11 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
 }
 
 function RecommendationProductDetail({item,product,onClose,onAdd,canBuy}:{item?:RecommendationItem;product?:StoreProduct;onClose:()=>void;onAdd:(p:StoreProduct)=>void;canBuy:(p:StoreProduct)=>boolean}){
- const {t,locale}=useI18n();const [index,setIndex]=useState(0);useEffect(()=>setIndex(0),[item?.id]);
+ const {t,locale}=useI18n();
  if(!item)return null;const text=recommendationText(item,locale),gallery=item.gallery??[];
  return <Drawer className="rec-product-detail" title={t('store.details')} width="min(100vw,760px)" open={!!item} onClose={onClose}>
-  <div className="rec-detail-gallery">{gallery.length?<><Image src={gallery[index]?.url} alt={text.name} preview={{rootClassName:'rec-image-preview'}}/><div className="rec-detail-thumbs">{gallery.map((picture,i)=><button key={picture.id} aria-label={t('gallery.view',{number:i+1})} aria-pressed={i===index} onClick={()=>setIndex(i)}><img src={picture.url} alt={picture.label||text.name}/></button>)}</div></>:<div className="rec-no-product-image">{t('gallery.pending')}</div>}</div>
-  <h1>{text.name}</h1><p>{t('rec.code')}: {item.itemNumber||t('rec.not_stated')}</p>{text.missing&&<Alert type="info" message={t('translation.fallback')}/>}
+  <RecommendationImageViewer key={item.id} pictures={gallery} name={text.name}/>
+  <h1><RecommendationName text={text}/></h1><p>{t('rec.code')}: {item.itemNumber||t('rec.not_stated')}</p>{text.missing&&<Alert type="info" message={t('translation.fallback')}/>}
   {text.specification&&<p className="rec-detail-spec">{text.specification}</p>}
   {product&&<h2>{t('sale.actual')}: {formatMoney(product.price,product.currency,locale)} / {product.saleUnit}</h2>}
   <OfferInfo facts={{...item,offerNotes:text.offerNotes}}/>

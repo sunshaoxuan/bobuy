@@ -1021,6 +1021,13 @@ const messages: Dictionary = {
   'sale.fill_unit': '為所選未填項統一設定單位',
   'rec.preview_only': '審閱預覽，不操作購物車',
   'sale.private': '產品仍為私有；確認報價不會公開或開放購買。',
+  "gallery.fullscreen": "全螢幕查看商品圖",
+  "gallery.previous": "上一張",
+  "gallery.next": "下一張",
+  "gallery.fit": "符合螢幕",
+  "gallery.native": "原圖尺寸 100%",
+  "gallery.swipe_hint": "左右滑動切圖，點兩下查看原圖",
+  "gallery.pan_hint": "拖動查看細節，點兩下恢復符合螢幕",
 };
 
 export default messages;

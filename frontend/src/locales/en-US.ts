@@ -884,6 +884,13 @@ const messages: Dictionary = {
   'sale.fill_unit': 'Fill missing sale units',
   'rec.preview_only': 'Review preview only',
   'sale.private': 'Product is private. Confirming its quote does not publish it or enable purchases.',
+  "gallery.fullscreen": "View product image fullscreen",
+  "gallery.previous": "Previous image",
+  "gallery.next": "Next image",
+  "gallery.fit": "Fit to screen",
+  "gallery.native": "Original size 100%",
+  "gallery.swipe_hint": "Swipe to change images; double tap for original size",
+  "gallery.pan_hint": "Drag to inspect details; double tap to fit",
 };
 
 export default messages;

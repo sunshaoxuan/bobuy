@@ -884,6 +884,13 @@ const messages: Dictionary = {
   'sale.fill_unit': '未入力の販売単位を一括設定',
   'rec.preview_only': '確認用プレビュー',
   'sale.private': '商品は非公開です。価格確認だけでは公開・購入可能になりません。',
+  "gallery.fullscreen": "商品画像を全画面表示",
+  "gallery.previous": "前の画像",
+  "gallery.next": "次の画像",
+  "gallery.fit": "画面に合わせる",
+  "gallery.native": "原寸 100%",
+  "gallery.swipe_hint": "左右にスワイプで切替、ダブルタップで原寸表示",
+  "gallery.pan_hint": "ドラッグで細部を表示、ダブルタップで画面に合わせる",
 };
 
 export default messages;

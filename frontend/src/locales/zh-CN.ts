@@ -884,6 +884,13 @@ const messages: Dictionary = {
   'sale.fill_unit': '为所选未填项统一设置单位',
   'rec.preview_only': '审阅预览，不操作购物车',
   'sale.private': '产品仍为私有；确认报价不会公开或开放购买。',
+  "gallery.fullscreen": "全屏查看商品图",
+  "gallery.previous": "上一张",
+  "gallery.next": "下一张",
+  "gallery.fit": "适配屏幕",
+  "gallery.native": "原图尺寸 100%",
+  "gallery.swipe_hint": "左右滑动切图，双击查看原图",
+  "gallery.pan_hint": "拖动查看细节，双击恢复适配",
 };
 
 export default messages;

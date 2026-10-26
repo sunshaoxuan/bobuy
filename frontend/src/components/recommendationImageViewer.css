@@ -1,0 +1,17 @@
+.rec-gallery-inline {display:flex;justify-content:center;align-items:center;min-height:160px;border-radius:20px;overflow:hidden;touch-action:pan-y;cursor:zoom-in;user-select:none;}
+.rec-gallery-inline>img {max-width:100%;max-height:520px;width:auto;height:auto;object-fit:contain;border-radius:20px;pointer-events:none;}
+.rec-gallery-inline:focus-visible,.rec-gallery-navigation button:focus-visible,.rec-detail-thumbs button:focus-visible,.rec-gallery-fullscreen button:focus-visible {outline:2px solid #727270;outline-offset:3px;}
+.rec-gallery-navigation,.rec-gallery-tools {display:flex;justify-content:center;align-items:center;gap:16px;padding:10px 0;font-variant-numeric:tabular-nums;}
+.rec-gallery-navigation button,.rec-gallery-tools button {border:1px solid #ddd;border-radius:20px;background:#f5f5f3;color:#252525;min-width:44px;min-height:44px;font:inherit;font-size:16px;cursor:pointer;padding:6px 14px;}
+.rec-gallery-navigation button:disabled,.rec-gallery-tools button:disabled {opacity:.35;cursor:default;}
+.rec-gallery-fullscreen .ant-modal {top:0;margin:0;padding:0;max-width:none;height:100dvh;}
+.rec-gallery-fullscreen .ant-modal-content {height:100dvh;box-sizing:border-box;border-radius:0;padding:16px;display:flex;flex-direction:column;background:#fafaf9;}
+.rec-gallery-fullscreen .ant-modal-header {background:transparent;padding-right:44px;flex-shrink:0;}
+.rec-gallery-fullscreen .ant-modal-body {min-height:0;flex:1;display:flex;flex-direction:column;}
+.rec-gallery-stage {position:relative;flex:1;min-height:0;overflow:hidden;touch-action:none;user-select:none;cursor:zoom-in;border-radius:16px;background:#fff;}
+.rec-gallery-stage[data-zoom=true] {cursor:grab;}.rec-gallery-stage[data-zoom=true]:active {cursor:grabbing;}
+.rec-gallery-stage>img {position:absolute;left:50%;top:50%;max-width:none;max-height:none;pointer-events:none;}
+.rec-gallery-hint {text-align:center;margin:8px 0 0;color:#666;font-size:12px;line-height:1.5;}
+@media(hover:hover) and (pointer:fine){.rec-gallery-navigation button:enabled:hover,.rec-gallery-tools button:enabled:hover{background:#eaeae7;}}
+@media(max-width:767px){.rec-gallery-fullscreen .ant-modal-content {padding:12px;}.rec-gallery-inline>img {max-height:55dvh;}}
+.rec-name-local,.rec-name-original {display:block;overflow-wrap:anywhere;}.rec-name-original {font-size:.9em;font-weight:400;line-height:1.6;}
