@@ -883,6 +883,7 @@ const messages: Dictionary = {
   "rec.conditions_detail": "查看详情与重要适用条件",
   'sale.fill_unit': '为所选未填项统一设置单位',
   'rec.preview_only': '审阅预览，不操作购物车',
+  'sale.private': '产品仍为私有；确认报价不会公开或开放购买。',
 };
 
 export default messages;

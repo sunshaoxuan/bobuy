@@ -4,8 +4,8 @@ import {I18nProvider} from '../i18n';
 import StoreNavigation from '../components/StoreNavigation';
 import PublicRecommendations,{RecommendationPreview} from './PublicRecommendations';
 import {selectedNode,scopedPath} from '../storeNavigation';
-const mocks=vi.hoisted(()=>({feed:vi.fn(),get:vi.fn()}));
-vi.mock('../api',()=>({recommendationApi:mocks}));
+const mocks=vi.hoisted(()=>({feed:vi.fn(),get:vi.fn(),products:vi.fn().mockResolvedValue([])}));
+vi.mock('../api',()=>({recommendationApi:mocks,storefrontApi:{products:mocks.products}}));
 vi.mock('../context/UserRoleContext',()=>({useUserRole:()=>({isCustomer:true})}));
 // JSDOM's selector engine cannot parse AntD Select's adjacent :has selector.
 // These tests exercise routing/races; the real Select is covered in Chromium.
@@ -22,7 +22,7 @@ it('keeps node context in links and exact active state without inventing valid n
  expect(screen.getByRole('link',{name:'Bookable trips'})).toHaveAttribute('href','/trips?node=1000');
  expect(screen.getByRole('link',{name:'Discover'})).not.toHaveAttribute('aria-current');
 });
-it('previews the same customer filters/cards without any public fetch or write',()=>{
+it('previews the same customer filters/cards without public draft reads or writes',()=>{
  const {container}=render(<I18nProvider><MemoryRouter><RecommendationPreview detail={detail(1,'Draft preview')}/></MemoryRouter></I18nProvider>);
  expect(container.querySelectorAll('.rec-pin')).toHaveLength(2);expect(screen.queryByText('Hidden supplier')).not.toBeInTheDocument();
  fireEvent.click(screen.getByRole('button',{name:'Home (1)'}));expect(container.querySelectorAll('.rec-pin')).toHaveLength(1);

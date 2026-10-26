@@ -883,6 +883,7 @@ const messages: Dictionary = {
   "rec.conditions_detail": "詳細・重要な適用条件を確認",
   'sale.fill_unit': '未入力の販売単位を一括設定',
   'rec.preview_only': '確認用プレビュー',
+  'sale.private': '商品は非公開です。価格確認だけでは公開・購入可能になりません。',
 };
 
 export default messages;

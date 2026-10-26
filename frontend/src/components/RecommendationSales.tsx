@@ -3,7 +3,7 @@ import {Alert,Button,Checkbox,Input,InputNumber,Modal,Table,Tag} from 'antd';
 import {recommendationApi,type ProductSale,type RecommendationDetail,type SaleReview} from '../api';
 import {useI18n} from '../i18n';
 import {formatMoney} from '../currency';
-export type SaleProduct={id:string;sale?:ProductSale;currency?:string;basePrice?:number;orderMethod?:string};
+export type SaleProduct={id:string;visibilityStatus?:string;sale?:ProductSale;currency?:string;basePrice?:number;orderMethod?:string};
 export default function RecommendationSales({detail,products,onChange,onReload}:{detail:RecommendationDetail;products:SaleProduct[];onChange:(v:RecommendationDetail)=>void;onReload:()=>Promise<void>}){
  const {t,locale}=useI18n();const [selected,setSelected]=useState<React.Key[]>([]),[rows,setRows]=useState<SaleReview[]>([]),[open,setOpen]=useState(false),[confirmed,setConfirmed]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState(''),[bulkUnit,setBulkUnit]=useState('');
  const [currencyList,setCurrencyList]=useState<{code:string;symbol:string;fractionDigits:number;name:string;saleEnabled:boolean}[]>([]);
@@ -16,7 +16,7 @@ export default function RecommendationSales({detail,products,onChange,onReload}:
   <details><summary>{t('sale.currencies')}</summary><Table rowKey="code" size="small" pagination={false} dataSource={currencyList} columns={[{title:t('sale.currency'),dataIndex:'code'},{title:t('sale.symbol'),dataIndex:'symbol'},{title:t('sale.digits'),dataIndex:'fractionDigits'},{title:t('sale.status'),render:(_,c)=><Tag>{t(c.saleEnabled?'sale.enabled':'sale.future')}</Tag>}]}/></details>
   <Table rowKey="id" size="small" pagination={{pageSize:12,showSizeChanger:false}} dataSource={detail.items} rowSelection={{selectedRowKeys:selected,onChange:setSelected,getCheckboxProps:item=>({disabled:!item.productId||product(item.productId)?.orderMethod!=='PRE_ORDER'})}} columns={[
    {title:t('rec.name'),render:(_,item)=><>{item.name}<small>{item.itemNumber}</small></>},
-   {title:t('sale.actual'),render:(_,item)=>{const sale=product(item.productId)?.sale;return sale?<>{formatMoney(sale.amount,sale.currency,locale)} / {sale.unit}<Tag>{t(sale.enabled?'sale.enabled':'sale.disabled')}</Tag><small>{sale.validFrom||'…'} — {sale.validThrough||'…'}</small></>:<Tag>{t('sale.pending')}</Tag>;}}
+   {title:t('sale.actual'),render:(_,item)=>{const sale=product(item.productId)?.sale;return sale?<>{formatMoney(sale.amount,sale.currency,locale)} / {sale.unit}<Tag>{t(sale.enabled?'sale.enabled':'sale.disabled')}</Tag><small>{sale.validFrom||'…'} — {sale.validThrough||'…'}</small>{product(item.productId)?.visibilityStatus!=='PUBLIC'&&<Tag color="orange">{t('sale.private')}</Tag>}</>:<Tag>{t('sale.pending')}</Tag>;}}
   ]}/><Button disabled={!selected.length} onClick={prepare}>{t('sale.prepare',{count:selected.length})}</Button>
   <Modal width={1100} title={t('sale.title')} open={open} onCancel={()=>!busy&&setOpen(false)} footer={<Button type="primary" disabled={!confirmed||!rows.length||rows.some(row=>!row.amount||!row.unit.trim())} loading={busy} onClick={()=>void save()}>{t('sale.confirm')}</Button>}>
    <Alert type="warning" message={t('sale.review_hint')} showIcon/>{error&&<Alert type="error" message={error}/>}

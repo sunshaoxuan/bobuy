@@ -1020,6 +1020,7 @@ const messages: Dictionary = {
   "rec.conditions_detail": "查看詳情與重要適用條件",
   'sale.fill_unit': '為所選未填項統一設定單位',
   'rec.preview_only': '審閱預覽，不操作購物車',
+  'sale.private': '產品仍為私有；確認報價不會公開或開放購買。',
 };
 
 export default messages;

@@ -117,7 +117,8 @@ class RecommendationIntegrationTest {
         String cover = withImage.at("/items/0/imageUrl").asText();
         assertThat(live.at("/post/coverImageUrl").asText()).isEqualTo(cover);
         var publicList = data(mvc.perform(get("/api/storefront/recommendations")));
-        assertThat(publicList.get(0).at("/post/coverImageUrl").asText()).isEqualTo(cover);
+        assertThat(publicList.get(0).at("/post/coverImageUrl").isNull()).isTrue();
+        assertThat(publicList.get(0).at("/items/0/imageUrl").isNull()).isTrue(); // Original promo remains internal evidence.
         assertThat(publicList.get(0).path("body").asText()).contains("<script>");
         assertThat(publicList.get(0).path("items").size()).isEqualTo(1);
         assertThat(live.at("/post/title").asText()).isEqualTo("Tea recommendation");
@@ -234,7 +235,7 @@ class RecommendationIntegrationTest {
         profile.getAttributes().clear(); // Ordinary catalog edits cannot clear the immutable draft provenance guard.
         String customer=tokens.createAccessToken(users.findById(1001L).orElseThrow());
         for(var method:List.of(OrderMethod.PRE_ORDER,OrderMethod.DIRECT_BUY)) {
-            profile.setVisibilityStatus(ProductVisibility.PUBLIC);profile.setOrderMethod(method);profile.setBasePrice(12345);products.saveAndFlush(profile);
+            profile.setVisibilityStatus(ProductVisibility.PUBLIC);profile.setOrderMethod(method);profile.setBasePrice(12345);profile=products.saveAndFlush(profile);
             assertThat(data(mvc.perform(get("/api/storefront/products"))).toString()).doesNotContain(id);
             for(int quantity:List.of(1,99,100))mvc.perform(post("/api/checkout").header("Authorization","Bearer "+customer).contentType(MediaType.APPLICATION_JSON)
                 .content(json.writeValueAsString(Map.of("requestId",UUID.randomUUID(),"tripId",2000,"items",List.of(Map.of("productId",id,"quantity",quantity)))))).andExpect(status().isBadRequest());

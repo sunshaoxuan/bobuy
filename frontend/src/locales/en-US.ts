@@ -883,6 +883,7 @@ const messages: Dictionary = {
   "rec.conditions_detail": "View details and important conditions",
   'sale.fill_unit': 'Fill missing sale units',
   'rec.preview_only': 'Review preview only',
+  'sale.private': 'Product is private. Confirming its quote does not publish it or enable purchases.',
 };
 
 export default messages;
