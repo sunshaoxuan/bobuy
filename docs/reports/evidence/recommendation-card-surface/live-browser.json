@@ -1,0 +1,51 @@
+{
+  "scope": "Read-only real published products in candidate or live UI; no server content/config writes",
+  "checks": {
+    "desktopWhiteEdgesGradientHoverKeyboardGalleryAndReducedMotion": "PASS",
+    "touchPressReleaseNoStickyHoverAndNativeScroll": "PASS",
+    "acceptedFrontendByteIdentity": "PASS"
+  },
+  "errors": [],
+  "writes": [],
+  "mode": "Actual deployed production stylesheet",
+  "before": {
+    "background": "linear-gradient(to top, rgba(0, 0, 0, 0.067), rgba(0, 0, 0, 0.02) 42%, rgba(255, 255, 255, 0) 78%)",
+    "shadow": "rgba(0, 0, 0, 0.03) 0px 2px 8px 0px",
+    "padding": "10px",
+    "border": "1px",
+    "radius": "24px",
+    "outline": "3px",
+    "transition": "0.18s",
+    "photoRadius": "20px",
+    "imageRadius": "20px",
+    "imageTransform": "none",
+    "imageFit": "contain",
+    "imageMaxHeight": "none"
+  },
+  "realImages": [
+    {
+      "src": "/api/storefront/recommendation-images/d30be1ca-ac6a-49cc-8ace-989f93b477f8",
+      "width": 1200,
+      "height": 1200,
+      "corner": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "src": "/api/storefront/recommendation-images/9e561e7d-6afc-48f0-b5ec-b5f8cee62301",
+      "width": 1200,
+      "height": 1200,
+      "corner": [
+        255,
+        255,
+        255,
+        255
+      ]
+    }
+  ],
+  "result": "PASS",
+  "touchTimingCheck": "Wait for cleared pointer marker and exact settled shadow (bounded 1500ms); original fixed 250ms timing failure retained"
+}

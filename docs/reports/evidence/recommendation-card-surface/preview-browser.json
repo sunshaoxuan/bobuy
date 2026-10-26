@@ -1,0 +1,165 @@
+{
+  "scope": "Read-only real published products; before/after candidate CSS is browser-memory preview, no server content/config writes",
+  "checks": {
+    "desktopWhiteEdgesGradientHoverKeyboardGalleryAndReducedMotion": "PASS",
+    "touchPressReleaseNoStickyHoverAndNativeScroll": "PASS"
+  },
+  "errors": [],
+  "writes": [],
+  "mode": "Actual candidate in existing shared local web container; real public GET data/images replayed read-only",
+  "before": {
+    "background": "linear-gradient(to top, rgba(0, 0, 0, 0.067), rgba(0, 0, 0, 0.02) 42%, rgba(255, 255, 255, 0) 78%)",
+    "shadow": "rgba(0, 0, 0, 0.03) 0px 2px 8px 0px",
+    "padding": "10px",
+    "border": "1px",
+    "radius": "24px",
+    "outline": "3px",
+    "transition": "0.18s",
+    "photoRadius": "20px",
+    "imageRadius": "20px",
+    "imageTransform": "none",
+    "imageFit": "contain",
+    "imageMaxHeight": "none"
+  },
+  "realImages": [
+    {
+      "src": "/api/storefront/recommendation-images/d30be1ca-ac6a-49cc-8ace-989f93b477f8",
+      "width": 1200,
+      "height": 1200,
+      "corner": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "src": "/api/storefront/recommendation-images/9e561e7d-6afc-48f0-b5ec-b5f8cee62301",
+      "width": 1200,
+      "height": 1200,
+      "corner": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "src": "/api/storefront/recommendation-images/5e38b15f-48b5-4bd1-bf5a-a357c849eb12",
+      "width": 1200,
+      "height": 1200,
+      "corner": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "src": "/api/storefront/recommendation-images/9d0ad663-bc06-40c9-98f8-0d1fbd907c73",
+      "width": 1200,
+      "height": 1200,
+      "corner": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "src": "/api/storefront/recommendation-images/29a96eb4-06ff-4e38-a93d-eb478c13afdc",
+      "width": 1200,
+      "height": 1200,
+      "corner": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "src": "/api/storefront/recommendation-images/49057238-878c-4164-9620-5ffd2736d49c",
+      "width": 1200,
+      "height": 1200,
+      "corner": [
+        255,
+        255,
+        255,
+        255
+      ]
+    }
+  ],
+  "states": {
+    "base": {
+      "background": "linear-gradient(to top, rgba(0, 0, 0, 0.067), rgba(0, 0, 0, 0.02) 42%, rgba(255, 255, 255, 0) 78%)",
+      "shadow": "rgba(0, 0, 0, 0.03) 0px 2px 8px 0px",
+      "padding": "10px",
+      "border": "1px",
+      "radius": "24px",
+      "outline": "3px",
+      "transition": "0.18s",
+      "photoRadius": "20px",
+      "imageRadius": "20px",
+      "imageTransform": "none",
+      "imageFit": "contain",
+      "imageMaxHeight": "none"
+    },
+    "hover": {
+      "background": "linear-gradient(to top, rgba(0, 0, 0, 0.067), rgba(0, 0, 0, 0.02) 42%, rgba(255, 255, 255, 0) 78%)",
+      "shadow": "rgba(0, 0, 0, 0.086) 0px 4px 14px 0px",
+      "padding": "10px",
+      "border": "1px",
+      "radius": "24px",
+      "outline": "3px",
+      "transition": "0.18s",
+      "photoRadius": "20px",
+      "imageRadius": "20px",
+      "imageTransform": "none",
+      "imageFit": "contain",
+      "imageMaxHeight": "none"
+    },
+    "focus": {
+      "background": "linear-gradient(to top, rgba(0, 0, 0, 0.067), rgba(0, 0, 0, 0.02) 42%, rgba(255, 255, 255, 0) 78%)",
+      "shadow": "rgba(0, 0, 0, 0.063) 0px 3.10655px 11.3196px 0px",
+      "padding": "10px",
+      "border": "1px",
+      "radius": "24px",
+      "outline": "2px",
+      "transition": "0.18s",
+      "photoRadius": "20px",
+      "imageRadius": "20px",
+      "imageTransform": "none",
+      "imageFit": "contain",
+      "imageMaxHeight": "none"
+    },
+    "mobileBase": {
+      "background": "linear-gradient(to top, rgba(0, 0, 0, 0.067), rgba(0, 0, 0, 0.02) 42%, rgba(255, 255, 255, 0) 78%)",
+      "shadow": "rgba(0, 0, 0, 0.03) 0px 2px 8px 0px",
+      "padding": "8px",
+      "border": "1px",
+      "radius": "20px",
+      "outline": "3px",
+      "transition": "0.18s",
+      "photoRadius": "16px",
+      "imageRadius": "16px",
+      "imageTransform": "none",
+      "imageFit": "contain",
+      "imageMaxHeight": "none"
+    },
+    "pressed": {
+      "background": "linear-gradient(to top, rgba(0, 0, 0, 0.067), rgba(0, 0, 0, 0.02) 42%, rgba(255, 255, 255, 0) 78%)",
+      "shadow": "rgba(0, 0, 0, 0.125) 0px 1px 4px 0px",
+      "padding": "8px",
+      "border": "1px",
+      "radius": "20px",
+      "outline": "3px",
+      "transition": "0.18s",
+      "photoRadius": "16px",
+      "imageRadius": "16px",
+      "imageTransform": "none",
+      "imageFit": "contain",
+      "imageMaxHeight": "none"
+    }
+  },
+  "result": "PASS"
+}

@@ -1,0 +1,49 @@
+{
+  "scope": "Read-only real published products in candidate or live UI; no server content/config writes",
+  "checks": {
+    "desktopWhiteEdgesGradientHoverKeyboardGalleryAndReducedMotion": "PASS"
+  },
+  "errors": [],
+  "writes": [],
+  "mode": "Actual deployed production stylesheet",
+  "before": {
+    "background": "linear-gradient(to top, rgba(0, 0, 0, 0.067), rgba(0, 0, 0, 0.02) 42%, rgba(255, 255, 255, 0) 78%)",
+    "shadow": "rgba(0, 0, 0, 0.03) 0px 2px 8px 0px",
+    "padding": "10px",
+    "border": "1px",
+    "radius": "24px",
+    "outline": "3px",
+    "transition": "0.18s",
+    "photoRadius": "20px",
+    "imageRadius": "20px",
+    "imageTransform": "none",
+    "imageFit": "contain",
+    "imageMaxHeight": "none"
+  },
+  "realImages": [
+    {
+      "src": "/api/storefront/recommendation-images/d30be1ca-ac6a-49cc-8ace-989f93b477f8",
+      "width": 1200,
+      "height": 1200,
+      "corner": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "src": "/api/storefront/recommendation-images/9e561e7d-6afc-48f0-b5ec-b5f8cee62301",
+      "width": 1200,
+      "height": 1200,
+      "corner": [
+        255,
+        255,
+        255,
+        255
+      ]
+    }
+  ],
+  "result": "FAIL",
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'rgba(0, 0, 0, 0.035) 0px 1.97178px 7.88713px 0px'\n- 'rgba(0, 0, 0, 0.03) 0px 2px 8px 0px'\n\n    at file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/card-surface-review.mjs:25:117"
+}

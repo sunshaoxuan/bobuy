@@ -1,0 +1,13 @@
+{
+  "release": "20261026.5",
+  "applicationHealth": "PASS",
+  "protectedState": "PASS",
+  "publicRegistration": "CLOSED_PENDING_SMTP_ABUSE_RECOVERY",
+  "browserVerification": "PASS_DESKTOP_MOBILE_HOVER_TOUCH_KEYBOARD_REDUCED_MOTION",
+  "source": "7b743797ce3976c8716166e8b9eb29665f95b524",
+  "ciRun": 40364441989,
+  "contentPreservation": "PASS_LATEST_SNAPSHOT_SEVEN_TABLES",
+  "scope": "Recommendation card surface/feedback only",
+  "imagePixelsUnmodified": true,
+  "javaImagesReused": 5
+}

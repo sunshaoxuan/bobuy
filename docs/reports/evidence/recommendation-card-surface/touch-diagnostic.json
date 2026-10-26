@@ -1,0 +1,20 @@
+{
+  "box": {
+    "x": 25,
+    "y": 344.328125,
+    "width": 155,
+    "height": 155
+  },
+  "x": 102.5,
+  "y": 421.828125,
+  "target": {
+    "tag": "IMG",
+    "classes": "",
+    "withinPhoto": true
+  },
+  "active": {
+    "elements": [],
+    "firstCardShadow": "rgba(0, 0, 0, 0.03) 0px 2px 8px 0px"
+  },
+  "urlAfterRelease": "https://bobuy.cc/recommendations/1?item=1"
+}
