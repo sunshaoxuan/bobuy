@@ -61,22 +61,22 @@
     {
       "mode": "mobile-edge-damping",
       "width": 354,
-      "offset": 25,
+      "offset": 20,
       "settling": "false",
       "transition": "0s",
       "slides": [
         {
-          "left": -329,
+          "left": -334,
           "width": 354,
           "hasImage": false
         },
         {
-          "left": 25,
+          "left": 20,
           "width": 354,
           "hasImage": true
         },
         {
-          "left": 379,
+          "left": 374,
           "width": 354,
           "hasImage": true
         }

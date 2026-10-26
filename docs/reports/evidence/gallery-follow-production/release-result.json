@@ -1,0 +1,17 @@
+{
+  "release": "20261026.9",
+  "applicationHealth": "PASS",
+  "protectedState": "PASS",
+  "publicRegistration": "CLOSED_PENDING_SMTP_ABUSE_RECOVERY",
+  "browserVerification": "PASS_PUBLIC_DATA_EFFECTIVE_PURCHASE_STATE_ASSET_IDENTITIES_DESKTOP_MOBILE_AND_NORMAL_ADMIN_LOGIN_ENTRY",
+  "source": "a113d7547abd85d64277bfa7da57ef67907c1895",
+  "ciRun": 40412558371,
+  "galleryDirectManipulation": "PASS_TOUCH_MOUSE_INTERMEDIATE_FRAMES_NEIGHBORS_SNAP_REBOUND_CANCEL_ZOOM_SCROLL_REDUCED_MOTION",
+  "contentPreservation": "PASS_ALL_PREEXISTING_COLUMNS_NINE_TABLES_INCLUDING_ORDERS_AND_ADJUSTMENTS",
+  "migration": "NO_SCHEMA_CHANGE_EXISTING_V17_EMPTY_TABLE_PRESERVED_BACKUP_RESTORE_VERIFIED",
+  "productionAdjustmentRows": 0,
+  "productionPriceWrites": false,
+  "purchaseActivation": false,
+  "registrationGateChanged": false,
+  "mailSent": false
+}
