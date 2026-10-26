@@ -1,0 +1,240 @@
+{
+  "url": "https://bobuy.cc/recommendations/1",
+  "styles": [
+    {
+      "src": "/api/storefront/recommendation-images/2b13dd56-3b91-4e32-9b13-05afec14535a",
+      "width": 400,
+      "height": 660,
+      "image": {
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)",
+        "overflow": "clip",
+        "backgroundImage": "none",
+        "objectFit": "contain",
+        "maxHeight": "460px"
+      },
+      "photo": {
+        "radius": "20px",
+        "background": "rgb(245, 245, 245)",
+        "overflow": "hidden",
+        "backgroundImage": "none",
+        "objectFit": "fill",
+        "maxHeight": "none"
+      },
+      "tile": {
+        "radius": "20px",
+        "background": "rgb(245, 245, 245)",
+        "overflow": "visible",
+        "backgroundImage": "none",
+        "objectFit": "fill",
+        "maxHeight": "none"
+      }
+    },
+    {
+      "src": "/api/storefront/recommendation-images/d023ffc1-091a-478e-80d5-14d8a11d5943",
+      "width": 400,
+      "height": 660,
+      "image": {
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)",
+        "overflow": "clip",
+        "backgroundImage": "none",
+        "objectFit": "contain",
+        "maxHeight": "460px"
+      },
+      "photo": {
+        "radius": "20px",
+        "background": "rgb(245, 245, 245)",
+        "overflow": "hidden",
+        "backgroundImage": "none",
+        "objectFit": "fill",
+        "maxHeight": "none"
+      },
+      "tile": {
+        "radius": "20px",
+        "background": "rgb(245, 245, 245)",
+        "overflow": "visible",
+        "backgroundImage": "none",
+        "objectFit": "fill",
+        "maxHeight": "none"
+      }
+    },
+    {
+      "src": "/api/storefront/recommendation-images/216240e9-b178-425c-9607-d1957f13801b",
+      "width": 400,
+      "height": 660,
+      "image": {
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)",
+        "overflow": "clip",
+        "backgroundImage": "none",
+        "objectFit": "contain",
+        "maxHeight": "460px"
+      },
+      "photo": {
+        "radius": "20px",
+        "background": "rgb(245, 245, 245)",
+        "overflow": "hidden",
+        "backgroundImage": "none",
+        "objectFit": "fill",
+        "maxHeight": "none"
+      },
+      "tile": {
+        "radius": "20px",
+        "background": "rgb(245, 245, 245)",
+        "overflow": "visible",
+        "backgroundImage": "none",
+        "objectFit": "fill",
+        "maxHeight": "none"
+      }
+    },
+    {
+      "src": "/api/storefront/recommendation-images/60720808-36fc-4073-92bd-aac06507e5ff",
+      "width": 400,
+      "height": 660,
+      "image": {
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)",
+        "overflow": "clip",
+        "backgroundImage": "none",
+        "objectFit": "contain",
+        "maxHeight": "460px"
+      },
+      "photo": {
+        "radius": "20px",
+        "background": "rgb(245, 245, 245)",
+        "overflow": "hidden",
+        "backgroundImage": "none",
+        "objectFit": "fill",
+        "maxHeight": "none"
+      },
+      "tile": {
+        "radius": "20px",
+        "background": "rgb(245, 245, 245)",
+        "overflow": "visible",
+        "backgroundImage": "none",
+        "objectFit": "fill",
+        "maxHeight": "none"
+      }
+    },
+    {
+      "src": "/api/storefront/recommendation-images/ad81eda6-1b19-420f-acd9-2db255964ef6",
+      "width": 400,
+      "height": 724,
+      "image": {
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)",
+        "overflow": "clip",
+        "backgroundImage": "none",
+        "objectFit": "contain",
+        "maxHeight": "460px"
+      },
+      "photo": {
+        "radius": "20px",
+        "background": "rgb(245, 245, 245)",
+        "overflow": "hidden",
+        "backgroundImage": "none",
+        "objectFit": "fill",
+        "maxHeight": "none"
+      },
+      "tile": {
+        "radius": "20px",
+        "background": "rgb(245, 245, 245)",
+        "overflow": "visible",
+        "backgroundImage": "none",
+        "objectFit": "fill",
+        "maxHeight": "none"
+      }
+    },
+    {
+      "src": "/api/storefront/recommendation-images/bbe2880f-8ff9-4be2-b7bd-8eb0ae39af99",
+      "width": 400,
+      "height": 724,
+      "image": {
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)",
+        "overflow": "clip",
+        "backgroundImage": "none",
+        "objectFit": "contain",
+        "maxHeight": "460px"
+      },
+      "photo": {
+        "radius": "20px",
+        "background": "rgb(245, 245, 245)",
+        "overflow": "hidden",
+        "backgroundImage": "none",
+        "objectFit": "fill",
+        "maxHeight": "none"
+      },
+      "tile": {
+        "radius": "20px",
+        "background": "rgb(245, 245, 245)",
+        "overflow": "visible",
+        "backgroundImage": "none",
+        "objectFit": "fill",
+        "maxHeight": "none"
+      }
+    },
+    {
+      "src": "/api/storefront/recommendation-images/20d2c024-c103-4684-95d2-6569adb61067",
+      "width": 400,
+      "height": 692,
+      "image": {
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)",
+        "overflow": "clip",
+        "backgroundImage": "none",
+        "objectFit": "contain",
+        "maxHeight": "460px"
+      },
+      "photo": {
+        "radius": "20px",
+        "background": "rgb(245, 245, 245)",
+        "overflow": "hidden",
+        "backgroundImage": "none",
+        "objectFit": "fill",
+        "maxHeight": "none"
+      },
+      "tile": {
+        "radius": "20px",
+        "background": "rgb(245, 245, 245)",
+        "overflow": "visible",
+        "backgroundImage": "none",
+        "objectFit": "fill",
+        "maxHeight": "none"
+      }
+    },
+    {
+      "src": "/api/storefront/recommendation-images/97593f56-4ad1-4fbc-be2d-a3b0514d48cd",
+      "width": 400,
+      "height": 692,
+      "image": {
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)",
+        "overflow": "clip",
+        "backgroundImage": "none",
+        "objectFit": "contain",
+        "maxHeight": "460px"
+      },
+      "photo": {
+        "radius": "20px",
+        "background": "rgb(245, 245, 245)",
+        "overflow": "hidden",
+        "backgroundImage": "none",
+        "objectFit": "fill",
+        "maxHeight": "none"
+      },
+      "tile": {
+        "radius": "20px",
+        "background": "rgb(245, 245, 245)",
+        "overflow": "visible",
+        "backgroundImage": "none",
+        "objectFit": "fill",
+        "maxHeight": "none"
+      }
+    }
+  ],
+  "writes": [],
+  "observation": "Read-only published real post 1 before this candidate; source promotion artwork has its own grey/white frame. Images currently have no direct border radius and a max-height letterbox.",
+  "time": "2026-10-26T13:03:06.556Z"
+}

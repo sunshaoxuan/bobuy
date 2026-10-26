@@ -1,0 +1,46 @@
+{
+  "scope": "Normal visible UI on existing LOCAL synthetic post 12 only. No production writes, orders or payments.",
+  "checks": {
+    "reviewedBulkLocalizationPreviewSourceMismatchAndFactPreservation": "PASS",
+    "batchGalleryAppendReplaceHashDedupCoverSelectionAndOriginalEvidence": "PASS"
+  },
+  "errors": [],
+  "failures": [],
+  "writes": [
+    {
+      "method": "POST",
+      "path": "/api/auth/login"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/merchant/recommendations/12/localizations"
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/recommendations/12/items/55/gallery"
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/recommendations/12/items/55/gallery"
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/recommendations/12/items/55/gallery"
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/recommendations/12/items/55/gallery"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/merchant/recommendations/12/items/55/gallery"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/merchant/recommendations/12/items/55/gallery"
+    }
+  ],
+  "stage": "Three synthetic aspect ratios registered; duplicate reused; cover changed",
+  "result": "FAIL",
+  "failure": "locator.check: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.rec-sale-review').locator('tbody tr').first().locator('input[type=checkbox]')\u001b[22m\n\n    at C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\recommendation-release\\scripts\\verify-recommendation-commerce-local.mjs:35:117"
+}

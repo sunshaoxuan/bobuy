@@ -1,0 +1,11 @@
+{
+  "scope": "Existing shared local PostgreSQL snapshot clone; no containers/images or production content created",
+  "checks": {
+    "allPreExistingRowsPricesPublicationAndSourceBytesPreserved": "PASS",
+    "fourCurrenciesOnlyJpyEnabledNoAutomaticSaleOrConversion": "PASS",
+    "contentMutationStillDetected": "PASS",
+    "actualPublisherAddedTableCleanupAndFullSnapshotRestore": "PASS"
+  },
+  "result": "PASS",
+  "temporaryDatabaseRemoved": true
+}

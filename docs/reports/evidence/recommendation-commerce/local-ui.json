@@ -1,0 +1,47 @@
+{
+  "scope": "Normal visible UI on existing LOCAL synthetic post 12 only. No production writes, orders or payments.",
+  "checks": {
+    "reviewedBulkLocalizationPreviewSourceMismatchAndFactPreservation": "PASS",
+    "batchGalleryAppendReplaceHashDedupCoverSelectionAndOriginalEvidence": "PASS",
+    "visibleJpyPriceUnitValidationReviewAndPreorderConfirmation": "PASS",
+    "conciseLocalizedCardsStructuredDetailGalleryMobileBackAndCssClipping": "PASS",
+    "allFourLanguagesJapaneseParenthesisReloadFallbackAndStableJpy": "PASS",
+    "directRepeatAddActualProductQuantityCurrencyAndQuote": "PENDING explicit product-publication decision; private products remain unavailable"
+  },
+  "errors": [],
+  "failures": [],
+  "writes": [
+    {
+      "method": "POST",
+      "path": "/api/auth/login"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/merchant/recommendations/12/sales"
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/recommendations/12/publish"
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/recommendations/12/withdraw"
+    }
+  ],
+  "stage": "All local UI checks passed; withdrawing synthetic fixture",
+  "resumedAfterVerifiedLocalizationAndGallery": true,
+  "styles": {
+    "radius": "20px",
+    "maxHeight": "none",
+    "objectFit": "contain",
+    "background": "rgba(0, 0, 0, 0)",
+    "parentRadius": "20px",
+    "parentOverflow": "hidden",
+    "naturalWidth": 420,
+    "naturalHeight": 220,
+    "renderWidth": 218,
+    "renderHeight": 114
+  },
+  "result": "PARTIAL",
+  "syntheticPostWithdrawn": true
+}

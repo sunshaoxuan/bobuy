@@ -1,0 +1,39 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "published": true,
+      "items": 122,
+      "classified": 121,
+      "supplier_assigned": 122,
+      "supplier_shown": 0
+    },
+    {
+      "id": 2,
+      "published": true,
+      "items": 30,
+      "classified": 30,
+      "supplier_assigned": 30,
+      "supplier_shown": 0
+    }
+  ],
+  "imageBlobs": 152,
+  "products": 0,
+  "migrations": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "9",
+    "10",
+    "11",
+    "12"
+  ],
+  "reservedNamespaceCollisions": 0,
+  "phase": "before",
+  "configuredRelease": "20261026.3",
+  "result": "PASS"
+}

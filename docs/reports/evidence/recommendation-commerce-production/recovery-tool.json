@@ -1,0 +1,12 @@
+{
+  "source": "5e2e0866d582d3b57df38d3874fbef24b78465f5",
+  "ciRun": 40337196429,
+  "ciConclusion": "success",
+  "installedSha256": "655140da83732409f6ebf4970dddc0fac142bbcc15891c9685239927e9bb2f22",
+  "path": "/opt/bobuy/scripts/publish-production.py",
+  "runtimeApplicationUnchanged": true,
+  "productionRollbackExecuted": false,
+  "localActualAddedTableRestore": "PASS",
+  "releaseToolsTests": 8,
+  "originalActivationScriptRetained": "/opt/bobuy/releases/20261026.4/publish-production.py"
+}

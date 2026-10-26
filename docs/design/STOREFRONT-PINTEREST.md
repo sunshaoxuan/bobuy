@@ -56,3 +56,10 @@ placeholders. Reviewed reuse must not rewrite existing price, quantities or
 metadata. No same-name or same-code merging across source issues without human
 selection. Repeated registration/link retries must be idempotent. Product
 creation does not publish a recommendation or imply stock availability.
+
+
+## Product detail/content acceptance added in 20261026.4
+
+Cards contain localized name (Japanese suffix outside ja-JP), original string code, concise specification, source/actual price distinction and critical inclusive Japan offer/coupon periods. Full descriptions and complete conditions belong to addressable structured item detail, preserving filters/list position on back. Missing/stale translation falls back explicitly to Japanese. Currency code/symbol/digits never follow UI language.
+
+Only exact verified official product galleries supply covers. Promotion posters remain internal source evidence; never erase prices or redraw them to fake official photography. Missing/reliable-match-pending images use a clear placeholder. Ordered thumbnail galleries support distinct angles/details; canonical asset identities/hash reuse deduplicate resized copies. Image elements themselves use border-radius with clipped containers and natural aspect ratio; do not simulate corners with artwork/background masks or crop important product content. Test portrait/square/transparent/wide ratios at desktop and narrow widths. Published real-gallery visual acceptance follows normal content import and must not be inferred from an empty public page or synthetic-only evidence.

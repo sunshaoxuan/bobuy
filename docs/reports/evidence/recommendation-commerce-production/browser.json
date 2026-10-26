@@ -1,0 +1,21 @@
+{
+  "release": "20261026.4",
+  "source": "81da2b31249ff7c1a7dcfaa1ce6b8ccd7a1a1727",
+  "scope": "Public production API/UI/static bytes only. No production credentials, business writes, orders or payments.",
+  "checks": {
+    "published152FactsSupplierPrivacyNoImplicitProductsAndCurrencyMaster": "PASS",
+    "desktopMobileStructuredDetailBackRefreshAndNavigation": "PASS",
+    "acceptedFrontendStaticByteIdentity": "PASS",
+    "normalAdminLoginEntry": "PASS"
+  },
+  "errors": [],
+  "failedApi": [],
+  "writes": [],
+  "result": "PASS",
+  "remaining": {
+    "privateProductionUi": "Parent existing authenticated normal UI; no credential access",
+    "realOfficialImageVisual": "Pending parent normal UI gallery import; 152 original posters preserved internally and clients show explicit pending placeholders",
+    "automaticTranslation": "Provider not verified; reviewed bulk import is live",
+    "newProductPurchaseActivation": "Pending explicit product-publication authorization; private products stay unavailable"
+  }
+}

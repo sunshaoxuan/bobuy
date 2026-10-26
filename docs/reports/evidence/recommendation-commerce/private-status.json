@@ -1,0 +1,5 @@
+{
+  "result": "PASS",
+  "scope": "Read-only normal local UI; synthetic reviewed quote remains explicitly private",
+  "noBusinessWrites": true
+}

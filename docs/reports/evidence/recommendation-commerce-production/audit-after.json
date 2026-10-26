@@ -1,0 +1,96 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "published": true,
+      "items": 122,
+      "classified": 121,
+      "supplier_assigned": 122,
+      "supplier_shown": 0
+    },
+    {
+      "id": 2,
+      "published": true,
+      "items": 30,
+      "classified": 30,
+      "supplier_assigned": 30,
+      "supplier_shown": 0
+    }
+  ],
+  "imageBlobs": 152,
+  "products": 0,
+  "migrations": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15"
+  ],
+  "reservedNamespaceCollisions": 0,
+  "phase": "after",
+  "configuredRelease": "20261026.4",
+  "contentPreservation": "PASS (all seven frozen content tables exactly match)",
+  "source": "81da2b31249ff7c1a7dcfaa1ce6b8ccd7a1a1727",
+  "ciRun": 40334284232,
+  "containers": [
+    {
+      "name": "/bobuy-core-service",
+      "tag": "bobuy/core:20261026.4",
+      "imageId": "sha256:2f2b0502307b88dcbe87fec3c36301dd807e211be69351e5879ee3a0db22bd5d",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-ai-service",
+      "tag": "bobuy/ai:20261026.4",
+      "imageId": "sha256:7e0ef642d5c8fe9ec0714fce5966501c1b4823d43d6fb119d956b3e5f3dcfaa8",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-im-service",
+      "tag": "bobuy/im:20261026.4",
+      "imageId": "sha256:dde2d05d9acee0a7663f1ef2e4d367bdbd5ad826c3d5f49141f2266183b40a49",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-auth-service",
+      "tag": "bobuy/auth:20261026.4",
+      "imageId": "sha256:f13680f8fe361878f9fd35f2d7d7ec4175ba5cf9ffa725a850afd046b2917b4b",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-gateway-service",
+      "tag": "bobuy/router:20261026.4",
+      "imageId": "sha256:72d01864004f4a6c520eaf033c77979e600193647c14d9e4c5b45e7aeaa1e260",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-frontend",
+      "tag": "bobuy/frontend:20261026.4",
+      "imageId": "sha256:86d0f0b16a671b61f8cafbf81e27c3e7689999a3ca5d864204585418b2e07a11",
+      "health": "running",
+      "restarts": 0
+    }
+  ],
+  "protectedStateUnchanged": true,
+  "backup": {
+    "databaseRestore": "PASS",
+    "restoredMigrationHistoryAndSchema": "PASS",
+    "temporaryDatabaseRemoved": true,
+    "objectsArchive": "objects.tar.gz"
+  },
+  "result": "PASS"
+}

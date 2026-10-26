@@ -1,0 +1,28 @@
+{
+  "release": "20261026.4",
+  "applicationHealth": "PASS",
+  "protectedState": "PASS",
+  "publicRegistration": "CLOSED_PENDING_SMTP_ABUSE_RECOVERY",
+  "browserVerification": "PUBLIC_PASS_PRIVATE_UI_PARENT_PENDING",
+  "source": "81da2b31249ff7c1a7dcfaa1ce6b8ccd7a1a1727",
+  "ciRun": 40334284232,
+  "contentPreservation": "PASS",
+  "purchaseActivation": false,
+  "privateProductPublication": "Automatic publication patch DENIED before execution; explicit human clarification PENDING; private products stay unavailable",
+  "automaticTranslation": "Provider not verified; normal reviewed localization import enabled",
+  "realContentImports": "Parent normal UI only; no engineering business writes",
+  "configurationPreflight": "PASS; raw archive/script hashes, CRLF/LF normalization only for text configs",
+  "galleryVisual": "Synthetic desktop/mobile PASS; real official gallery after parent import pending",
+  "recoveryTool": {
+    "source": "5e2e0866d582d3b57df38d3874fbef24b78465f5",
+    "ciRun": 40337196429,
+    "ciConclusion": "success",
+    "installedSha256": "655140da83732409f6ebf4970dddc0fac142bbcc15891c9685239927e9bb2f22",
+    "path": "/opt/bobuy/scripts/publish-production.py",
+    "runtimeApplicationUnchanged": true,
+    "productionRollbackExecuted": false,
+    "localActualAddedTableRestore": "PASS",
+    "releaseToolsTests": 8,
+    "originalActivationScriptRetained": "/opt/bobuy/releases/20261026.4/publish-production.py"
+  }
+}
