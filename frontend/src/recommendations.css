@@ -109,11 +109,11 @@ html[lang=en-US] .recommendations .ant-btn>span:not(.ant-btn-icon):not(.anticon)
 .rec-issue-directory { display:flex; gap:8px; overflow-x:auto; overscroll-behavior-x:contain; position:sticky; top:0; z-index:10; background:#fff; padding:12px 0; border-block:1px solid #e4e4e4; margin-bottom:32px; }
 .rec-issue-directory a { flex:0 0 auto; display:flex; align-items:center; gap:8px; min-height:44px; max-width:240px; padding:8px 12px; border:1px solid #dedede; border-radius:6px; color:#333; font-size:13px; text-decoration:none; }
 .rec-issue-directory a>span:first-child { color:#a92b26; font-weight:650; }
-.rec-issue-directory a>span:last-child { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.rec-issue-directory a>span:last-child { white-space:normal; overflow:visible; text-overflow:clip; overflow-wrap:anywhere; }
 .rec-issue { scroll-margin-top:90px; }
 .rec-issue-heading { display:flex; align-items:flex-start; gap:16px; margin-bottom:20px; }
 .rec-issue-heading>div { min-width:0; }
-.rec-issue-heading h1, .rec-issue-heading h2 { font-size:24px; font-weight:650; line-height:1.5; margin:0 0 12px; max-width:960px; overflow-wrap:anywhere; }
+.rec-issue-heading h1, .rec-issue-heading h2 { font-size:24px; font-weight:650; line-height:1.5; margin:0 0 12px; max-width:960px; overflow-wrap:anywhere; white-space:normal; overflow:visible; text-overflow:clip; }
 .rec-issue-heading a { color:inherit; text-decoration:none; }
 .rec-issue-number { flex-shrink:0; padding-top:5px; font-size:18px; line-height:1.5; color:#b52f2a; font-weight:650; }
 .rec-issue .rec-public-body { margin-bottom:0; }

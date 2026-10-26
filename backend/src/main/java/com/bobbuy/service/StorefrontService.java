@@ -65,7 +65,9 @@ public class StorefrontService {
 
     @Transactional
     public User registerAccount(AccountRegistration request) {
-        return registerWithRoles(request.account(), request.roles());
+        // Self-service identities are always customers; roles are managed only
+        // through the existing protected platform-administrator workflow.
+        return register(request.account());
     }
 
     private User registerWithRoles(Registration request, Set<Role> roles) {
@@ -223,7 +225,7 @@ public class StorefrontService {
 
     public record Registration(@NotBlank @Pattern(regexp = "[a-zA-Z0-9_]{3,40}") String username,
         @NotBlank @Size(min = 8, max = 72) String password, @NotBlank @Email @Size(max = 254) String email) {}
-    public record AccountRegistration(@NotNull @Valid Registration account, @NotEmpty Set<@NotNull Role> roles) {}
+    public record AccountRegistration(@NotNull @Valid Registration account) {}
     public record PublicTrip(Long id, Long merchantId, String merchantName, String deliveryArea, LocalDate deliveryDate) {}
     public record PublicProduct(String id, Long merchantId, Map<String,String> name, Map<String,String> description, String brand,
         double price, String categoryId, List<String> images,String currency,String saleUnit,long priceRevision,boolean recommendationReady) {}

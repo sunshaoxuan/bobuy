@@ -50,7 +50,7 @@
 .storefront .product-tile {background:transparent;}
 .storefront .product-photo {padding:0;border:0;background:transparent;overflow:hidden;border-radius:20px;}
 .storefront .product-photo img {display:block;width:100%;height:auto;max-height:none;object-fit:contain;border-radius:inherit;background:transparent;}
-.storefront .rec-pin .product-body h3 {display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.storefront .rec-pin .product-body h3 {display:block;-webkit-line-clamp:unset;overflow:visible;white-space:normal;overflow-wrap:anywhere;}
 .rec-compact-spec {font-size:13px;line-height:1.6;margin:5px 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .rec-condition-link {border:0;background:none;color:#555;text-decoration:underline;font:inherit;font-size:12px;text-align:left;cursor:pointer;padding:5px 4px;min-height:36px;}
 .rec-sale-actual {display:block;font-size:14px;padding:5px 4px;}

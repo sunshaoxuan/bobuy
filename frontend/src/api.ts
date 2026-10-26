@@ -1081,8 +1081,8 @@ export const api = {
     customerViewLedger: (tripId: number) => fetchJson<CustomerBalanceLedgerEntry[]>(`/api/customer/procurement/${tripId}/ledger`, []),
     confirmOwnLedger: (tripId: number, businessId: string, action: 'RECEIPT' | 'BILLING') =>
         postJson<CustomerBalanceLedgerEntry, { action: 'RECEIPT' | 'BILLING' }>(`/api/customer/procurement/${tripId}/ledger/${encodeURIComponent(businessId)}/confirm`, { action }),
-    registerAccount: (account: { username: string; password: string; email: string }, roles: Array<'CUSTOMER' | 'AGENT'>) =>
-        postJson<AuthSessionResponse, { account: typeof account; roles: typeof roles }>('/api/auth/register-account', { account, roles }, { includeAccessToken: false, retryOnUnauthorized: false }),
+    registerAccount: (account: { username: string; password: string; email: string }) =>
+        postJson<AuthSessionResponse, { account: typeof account }>('/api/auth/register-account', { account }, { includeAccessToken: false, retryOnUnauthorized: false }),
     createUser: (user: UserEdit) => postJson<ManagedUser, UserEdit>('/api/admin/users', user),
     updateUser: (id: number, user: UserEdit) => putJson<ManagedUser, UserEdit>(`/api/admin/users/${id}`, user),
     createTrip: (trip: Pick<Trip, 'deliveryArea' | 'deliveryDate'>) =>

@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
-import { Alert, Badge, Button, Checkbox, Drawer, Empty, Form, Input, InputNumber, Modal, Segmented, Spin, Tag } from 'antd';
+import { Alert, Badge, Button, Drawer, Empty, Form, Input, InputNumber, Modal, Segmented, Spin, Tag } from 'antd';
 import { ArrowLeftOutlined, ArrowRightOutlined, CalendarOutlined, CheckCircleOutlined, CloseOutlined, DeleteOutlined,
   LogoutOutlined, MailOutlined, MenuOutlined, MinusOutlined, PlusOutlined, SearchOutlined, ShoppingCartOutlined, ShopOutlined, UserOutlined } from '@ant-design/icons';
 import { Link, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
@@ -23,18 +23,18 @@ const ClientBilling = lazy(() => import('./ClientBilling'));
 const ClientChat = lazy(() => import('./ClientChat'));
 const ClientTrips = lazy(() => import('./ClientTrips'));
 
-function AccountForm({ afterLogin, checkout = false }: { afterLogin: () => void; checkout?: boolean }) {
+export function AccountForm({ afterLogin, checkout = false }: { afterLogin: () => void; checkout?: boolean }) {
   const { t } = useI18n();
   const { login } = useUserRole();
   const [mode, setMode] = useState('register');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
-  async function submit(values: { username: string; password: string; email: string; roles: Array<'CUSTOMER' | 'AGENT'> }) {
+  async function submit(values: { username: string; password: string; email: string }) {
     setBusy(true); setError('');
     try {
       if (mode === 'register') {
         const account = { username: values.username, password: values.password, email: values.email };
-        storeAuthSession(await (checkout ? api.auth.register(account) : api.registerAccount(account, values.roles)));
+        storeAuthSession(await (checkout ? api.auth.register(account) : api.registerAccount(account)));
       }
       else await login(values.username, values.password);
       afterLogin();
@@ -43,7 +43,7 @@ function AccountForm({ afterLogin, checkout = false }: { afterLogin: () => void;
   return <section className="account-form"><h2>{mode === 'register' ? t('store.create_account') : t('store.signin')}</h2>
     <Segmented block value={mode} options={[{value:'register',label:t('store.register')},{value:'login',label:t('store.login')}]} onChange={v => { setMode(String(v)); setError(''); }} />
     {error && <Alert type="error" message={error} />}
-    <Form key={mode} layout="vertical" onFinish={submit} requiredMark={false} initialValues={{ roles: ['CUSTOMER'] }}>
+    <Form key={mode} layout="vertical" onFinish={submit} requiredMark={false}>
       <Form.Item label={t('store.username')} name="username" rules={[{ required: true, message: t('store.username_required') },
         ...(mode === 'register' ? [{ pattern: /^[a-zA-Z0-9_]{3,40}$/, message: t('store.username_rule') }] : [])]}>
         <Input autoComplete="username" size="large" /></Form.Item>
@@ -52,7 +52,6 @@ function AccountForm({ afterLogin, checkout = false }: { afterLogin: () => void;
       <Form.Item label={t('store.password')} name="password" rules={[{ required: true, message: t('store.password_required') },
         ...(mode === 'register' ? [{ min: 8, max: 72, message: t('store.password_rule') }] : [])]}>
         <Input.Password autoComplete={mode === 'register' ? 'new-password' : 'current-password'} size="large" /></Form.Item>
-      {mode === 'register' && !checkout && <Form.Item name="roles" label={t('accounts.types')} rules={[{ type: 'array', required: true, min: 1, message: t('accounts.type_required') }]}><Checkbox.Group className="accounts-types" options={['CUSTOMER', 'AGENT'].map(role => ({ value: role, label: t(`enum.role.${role}`) }))} /></Form.Item>}
       <Button type="primary" htmlType="submit" block size="large" loading={busy}>{mode === 'register' ? t('store.register_continue') : t('store.login_continue')}</Button>
     </Form>
   </section>;

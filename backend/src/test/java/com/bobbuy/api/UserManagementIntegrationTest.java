@@ -104,25 +104,45 @@ class UserManagementIntegrationTest {
         assertThat(users.findById(1000L).orElseThrow().isEnabled()).isTrue();
     }
 
-    @Test void checkoutAlwaysRegistersCustomerAndIndependentRegistrationAllowsBothWithoutAdmin() throws Exception {
+    @Test void allSelfRegistrationForcesCustomerAndIgnoresForgedMerchantFields() throws Exception {
         mvc.perform(post("/api/auth/register").contentType(MediaType.APPLICATION_JSON)
             .content("{\"username\":\"checkout_safe\",\"password\":\"valid-password\",\"email\":\"checkout_safe@example.com\",\"roles\":[\"AGENT\"],\"platformAdmin\":true}"))
             .andExpect(status().isOk()).andExpect(jsonPath("$.data.user.roles[0]").value("CUSTOMER"))
             .andExpect(jsonPath("$.data.user.roles.length()").value(1)).andExpect(jsonPath("$.data.user.platformAdmin").value(false));
         var request = Map.of("account", Map.of("username", "public_dual", "password", "valid-password", "email", "public_dual@example.com"), "roles", List.of("CUSTOMER", "AGENT"), "platformAdmin", true);
         var response = mvc.perform(post("/api/auth/register-account").contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsString(request)))
-            .andExpect(status().isOk()).andExpect(jsonPath("$.data.user.roles.length()").value(2)).andExpect(jsonPath("$.data.user.platformAdmin").value(false)).andReturn();
+            .andExpect(status().isOk()).andExpect(jsonPath("$.data.user.roles.length()").value(1)).andExpect(jsonPath("$.data.user.roles[0]").value("CUSTOMER")).andExpect(jsonPath("$.data.user.platformAdmin").value(false)).andReturn();
         String token = json.readTree(response.getResponse().getContentAsString()).at("/data/accessToken").asText();
         mvc.perform(get("/api/admin/users").header("Authorization", "Bearer " + token)).andExpect(status().isForbidden());
+        mvc.perform(put("/api/users/1000").header("Authorization", "Bearer " + token).contentType(MediaType.APPLICATION_JSON)
+            .content("{\"name\":\"forged\",\"roles\":[\"AGENT\"],\"platformAdmin\":true}")).andExpect(status().isForbidden());
+        mvc.perform(post("/api/admin/users").header("Authorization", "Bearer " + token).contentType(MediaType.APPLICATION_JSON)
+            .content(json.writeValueAsString(edit("forged_merchant",List.of("AGENT"))))).andExpect(status().isForbidden());
+        mvc.perform(get("/api/merchant/recommendations").header("Authorization", "Bearer " + token)).andExpect(status().isForbidden());
         mvc.perform(post("/api/checkout").header("Authorization", "Bearer " + token).contentType(MediaType.APPLICATION_JSON)
             .content(json.writeValueAsString(Map.of("requestId", UUID.randomUUID(), "tripId", 2000, "items", List.of(Map.of("productId", "prd-1000", "quantity", 1))))))
             .andExpect(status().isOk());
         mvc.perform(get("/api/customer/orders").header("Authorization", "Bearer " + token)).andExpect(status().isOk()).andExpect(jsonPath("$.data.length()").value(1));
         mvc.perform(get("/api/customer/trips").header("Authorization", "Bearer " + token)).andExpect(status().isOk()).andExpect(jsonPath("$.data.length()").value(1));
-        mvc.perform(get("/api/orders").header("Authorization", "Bearer " + token)).andExpect(status().isOk()).andExpect(jsonPath("$.data").isEmpty());
-        mvc.perform(get("/api/trips").header("Authorization", "Bearer " + token)).andExpect(status().isOk()).andExpect(jsonPath("$.data").isEmpty());
+        mvc.perform(get("/api/orders").header("Authorization", "Bearer " + token)).andExpect(status().isOk());
+        mvc.perform(get("/api/trips").header("Authorization", "Bearer " + token)).andExpect(status().isOk());
         mvc.perform(get("/api/customer/procurement/2000/ledger").header("Authorization", "Bearer " + token)).andExpect(status().isOk());
         String merchantToken = tokens.createAccessToken(users.findById(1000L).orElseThrow());
         mvc.perform(get("/api/customer/orders").header("Authorization", "Bearer " + merchantToken)).andExpect(status().isForbidden());
+    }
+
+    @Test void accountRegistrationNeedsNoRoleAndReplayCannotElevate() throws Exception {
+        var account=Map.of("username","customer_only","password","valid-password","email","customer_only@example.com","role","AGENT","merchantId","1000");
+        for(var roles:List.of(List.of("AGENT"),List.of("CUSTOMER","AGENT"))){
+            var request=Map.of("account",account,"roles",roles,"platformAdmin",true,"merchantId",1000);
+            boolean existed=users.findByUsernameIgnoreCase("customer_only").isPresent();
+            var response=mvc.perform(post("/api/auth/register-account").contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsString(request)));
+            if(!existed)response.andExpect(status().isOk());
+            else response.andExpect(status().isBadRequest());
+            var user=users.findByUsernameIgnoreCase("customer_only").orElseThrow();assertThat(user.getRoles()).containsExactly(Role.CUSTOMER);assertThat(user.isPlatformAdmin()).isFalse();
+        }
+        mvc.perform(post("/api/auth/register-account").contentType(MediaType.APPLICATION_JSON)
+            .content(json.writeValueAsString(Map.of("account",Map.of("username","without_role","password","valid-password","email","without_role@example.com")))))
+            .andExpect(status().isOk()).andExpect(jsonPath("$.data.user.roles[0]").value("CUSTOMER"));
     }
 }
