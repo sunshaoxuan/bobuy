@@ -1,0 +1,113 @@
+{
+  "scope": "Existing shared local frontend and synthetic read-only browser fixture; no stored content changes",
+  "checks": {
+    "touchContinuousNeighborSnapAndShortDragRebound": "PASS",
+    "edgeDampingAndPointerCancelReturnWithoutNavigation": "PASS",
+    "verticalScrollAndNoDragClick": "PASS",
+    "fullscreenFollowDoubleTapNativePanNoImageSwitch": "PASS",
+    "desktopContinuousDragAndRapidRepeatGuard": "PASS",
+    "desktopDoubleClickKeyboardAndClose": "PASS",
+    "reducedMotionKeepsTrackingWithoutReleaseAnimation": "PASS"
+  },
+  "frames": [
+    {
+      "mode": "mobile-held",
+      "width": 354,
+      "offset": -110,
+      "settling": "false",
+      "transition": "0s",
+      "slides": [
+        {
+          "left": -464,
+          "width": 354,
+          "hasImage": false
+        },
+        {
+          "left": -109.99998474121094,
+          "width": 354,
+          "hasImage": true
+        },
+        {
+          "left": 244,
+          "width": 354,
+          "hasImage": true
+        }
+      ]
+    },
+    {
+      "mode": "mobile-release",
+      "width": 354,
+      "offset": -110,
+      "settling": "true",
+      "transition": "0.22s",
+      "slides": [
+        {
+          "left": -464,
+          "width": 354,
+          "hasImage": false
+        },
+        {
+          "left": -109.99998474121094,
+          "width": 354,
+          "hasImage": true
+        },
+        {
+          "left": 244,
+          "width": 354,
+          "hasImage": true
+        }
+      ]
+    },
+    {
+      "mode": "mobile-edge-damping",
+      "width": 354,
+      "offset": 25,
+      "settling": "false",
+      "transition": "0s",
+      "slides": [
+        {
+          "left": -329,
+          "width": 354,
+          "hasImage": false
+        },
+        {
+          "left": 25,
+          "width": 354,
+          "hasImage": true
+        },
+        {
+          "left": 379,
+          "width": 354,
+          "hasImage": true
+        }
+      ]
+    },
+    {
+      "mode": "desktop-held",
+      "width": 712,
+      "offset": -90,
+      "settling": "false",
+      "transition": "0s",
+      "slides": [
+        {
+          "left": -802,
+          "width": 712,
+          "hasImage": false
+        },
+        {
+          "left": -90,
+          "width": 712,
+          "hasImage": true
+        },
+        {
+          "left": 622,
+          "width": 712,
+          "hasImage": true
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "writes": [],
+  "result": "PASS"
+}

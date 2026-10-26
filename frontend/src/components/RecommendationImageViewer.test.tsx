@@ -1,6 +1,6 @@
 import {describe,it,expect} from 'vitest';
 import {render,screen} from '@testing-library/react';
-import {boundPan,swipeDirection} from './RecommendationImageViewer';
+import {boundPan,dragOffset,swipeDirection} from './RecommendationImageViewer';
 import {RecommendationName} from './RecommendationName';
 
 describe('gallery gesture boundaries',()=>{
@@ -11,6 +11,11 @@ describe('gallery gesture boundaries',()=>{
  it('clamps native-size panning to actual image edges and centers smaller axes',()=>{
   expect(boundPan(900,1200,400)).toBe(400);expect(boundPan(-900,1200,400)).toBe(-400);
   expect(boundPan(90,300,700)).toBe(0);expect(boundPan(-90,300,700)).toBe(0);expect(boundPan(50,1200,400)).toBe(50);
+ });
+ it('tracks the pointer between images, damps outward edges and prevents skipping beyond one image',()=>{
+  expect(dragOffset(-90,300,true,false)).toBe(-90);expect(dragOffset(90,300,false,true)).toBe(90);
+  expect(dragOffset(120,300,true,false)).toBe(30);expect(dragOffset(-120,300,false,true)).toBe(-30);
+  expect(dragOffset(-900,300,false,false)).toBe(-300);
  });
 });
 describe('localized name layout',()=>{

@@ -1,0 +1,11 @@
+# Gallery pointer-follow improvement
+
+The previously released fit-mode viewer only computed swipe direction at pointer-up. It had no drag-offset state or adjacent-image rail, so image navigation happened after release without tracking the finger/mouse.
+
+This focused frontend change adds a three-slot neighboring-image rail to inline and fullscreen fit views. Horizontal axis ownership locks after the movement threshold; the rail tracks displacement without a transition while held. On release, an intentional swipe settles to one adjacent image with a 220ms CSS transition, then resets the rail around the new index. Short drags rebound. Outward edge drags use quarter-distance resistance; movement is limited to one image width. Native-size zoom retains bounded detail panning and never navigates from a pan.
+
+Pointer cancellation/lost capture returns to the original image. Drag-generated clicks are suppressed, and a second drag during the short settling phase cannot skip another image or open fullscreen. Vertical inline touch scrolling remains native (`touch-action: pan-y`). Reduced-motion users retain direct manipulation but have no release animation. Existing images, CSS corner clipping, languages, prices, registration and SMTP are unchanged.
+
+Local validation uses the existing shared frontend and public local synthetic fixture, with three synthetic image responses supplied only to the read-only browser GET. It writes no stored business data. Actual Chrome CDP touch and desktop mouse checks passed: continuous displacement and visible neighbor, release transition and endpoint, short-drag rebound, edge damping, pointercancel, vertical scrolling, no drag click, fullscreen swipe, double-tap native pixels, native panning, rapid repeat, desktop double-click/keyboard/close, and reduced motion. Held-frame screenshots were inspected. Mobile held offset was -110px for a -110px drag; desktop -90px for a -90px drag. Targeted unit tests: 5 passed; normal frontend build passed with 1111 locale keys.
+
+Evidence: [local browser results](evidence/gallery-follow/browser.json), [touch held frame](evidence/gallery-follow/mobile-held.png), [mouse held frame](evidence/gallery-follow/desktop-held.png). Production activation and exact candidate CI are pending at this implementation checkpoint; the final receipt will replace this sentence after verification.
