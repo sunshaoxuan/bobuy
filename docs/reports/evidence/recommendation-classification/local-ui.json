@@ -1,0 +1,14 @@
+{
+  "scope": "Synthetic local normal UI only; existing shared containers",
+  "checks": {
+    "inlineMasterMaintenanceAndBulk25AcrossPagesDefaultHidden": "PASS",
+    "customerCategoriesAllUnknownEmptyRepeatBackMultiAndSupplierPrivacy": "PASS",
+    "ownedCategoryNameSearchAndRename": "PASS",
+    "localCatalogMediaCompatibilityNoStorefrontError": "PASS"
+  },
+  "errors": [],
+  "result": "PASS",
+  "syntheticDraftWithdrawn": true,
+  "postId": "11",
+  "followup": "Reused existing synthetic post. Corrected button/combobox selectors and awaited loaded publication state before fixture cleanup; no re-import."
+}

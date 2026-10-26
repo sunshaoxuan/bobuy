@@ -1,0 +1,10 @@
+{
+  "release": "20261026.2",
+  "applicationHealth": "PASS",
+  "protectedState": "PASS",
+  "publicRegistration": "CLOSED_PENDING_SMTP_ABUSE_RECOVERY",
+  "browserVerification": "PASS",
+  "contentPreservation": "PASS",
+  "source": "df892e9a923baeef1bad372e951a2d59328b525a",
+  "ciRun": 40295807208
+}

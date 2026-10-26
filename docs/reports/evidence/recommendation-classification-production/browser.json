@@ -1,0 +1,12 @@
+{
+  "release": "20261026.2",
+  "scope": "Read-only production UI/API/artifact verification. Never click create/save/assign/publish or modify real draft.",
+  "checks": {
+    "real122DraftOpenedWithoutMutationDefaultSupplierHidden": "PASS",
+    "acceptedAdminCustomerClassificationBytesAndMobile": "PASS",
+    "draftNotPublishedAndAllFilterAlwaysPresent": "PASS"
+  },
+  "errors": [],
+  "failedApi": [],
+  "result": "PASS"
+}

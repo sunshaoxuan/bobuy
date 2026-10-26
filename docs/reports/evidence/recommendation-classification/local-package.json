@@ -1,0 +1,9 @@
+{
+  "purpose": "Existing shared local DB already applied earlier uncommitted V7/V8. Preserve those migration bytes; do not repair/ignore checksums or create another environment. V10 applies normally. Production package remains unmodified.",
+  "applicationClassCount": 369,
+  "allApplicationClassBytesMatchCandidate": true,
+  "localOnlyMigrationResources": [
+    "BOOT-INF/classes/db/migration/V7__product_recommendations.sql",
+    "BOOT-INF/classes/db/migration/V8__ai_connection_settings.sql"
+  ]
+}
