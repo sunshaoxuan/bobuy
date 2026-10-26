@@ -1,0 +1,10 @@
+{
+  "mode": "existing shared local frontend; real public GET replay",
+  "checks": {
+    "mobileInlineSwipeNoPreviewNoClickAndVerticalScroll": "PASS"
+  },
+  "errors": [],
+  "writes": [],
+  "result": "FAIL",
+  "failure": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.rec-gallery-stage') to be visible\u001b[22m\n\u001b[2m    61 × locator resolved to hidden <div role=\"group\" data-zoom=\"false\" class=\"rec-gallery-stage\" aria-label=\"神州一味噌 猪肉味噌汤（神州一味噌 とん汁 20食）\">…</div>\u001b[22m\n\n    at C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\gallery-review.mjs:16:155"
+}

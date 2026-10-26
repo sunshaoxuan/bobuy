@@ -1,0 +1,54 @@
+{
+  "box": {
+    "x": 18,
+    "y": 75,
+    "width": 354,
+    "height": 354
+  },
+  "events": [
+    {
+      "type": "pointerdown",
+      "x": 283.5,
+      "y": 252,
+      "primary": true
+    },
+    {
+      "type": "pointermove",
+      "x": 251.5,
+      "y": 252,
+      "primary": true
+    },
+    {
+      "type": "pointermove",
+      "x": 219.5,
+      "y": 252,
+      "primary": true
+    },
+    {
+      "type": "pointermove",
+      "x": 187.5,
+      "y": 252,
+      "primary": true
+    },
+    {
+      "type": "pointermove",
+      "x": 155.5,
+      "y": 252,
+      "primary": true
+    },
+    {
+      "type": "pointermove",
+      "x": 123.5,
+      "y": 252,
+      "primary": true
+    },
+    {
+      "type": "pointerup",
+      "x": 123.5,
+      "y": 252,
+      "primary": true
+    }
+  ],
+  "counter": "‹\n2 / 2\n›",
+  "action": "pan-y"
+}

@@ -1,0 +1,8 @@
+{
+  "mode": "existing shared local frontend; real public GET replay",
+  "checks": {},
+  "errors": [],
+  "writes": [],
+  "result": "FAIL",
+  "failure": "page.waitForFunction: Timeout 30000ms exceeded.\n    at C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\gallery-review.mjs:12:111"
+}

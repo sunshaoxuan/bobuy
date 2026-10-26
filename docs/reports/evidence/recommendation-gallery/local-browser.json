@@ -1,0 +1,15 @@
+{
+  "mode": "existing shared local frontend; real public GET replay",
+  "checks": {
+    "mobileInlineSwipeNoPreviewNoClickAndVerticalScroll": "PASS",
+    "mobileFullscreenSwipeDoubleTapNativePanBoundaries": "PASS",
+    "mobileCloseReturnsToSameDetail": "PASS",
+    "desktopKeyboardDoubleClickDragEscapeFocus": "PASS",
+    "cardGradientAndSeparatedJapaneseNames": "PASS",
+    "localizedNameFallbackAndNoRepeatedJapanese": "PASS"
+  },
+  "errors": [],
+  "writes": [],
+  "result": "PASS",
+  "languageTestRepair": "Initialization no longer forces zh-CN on every reload; five prior gesture/layout PASS checks reused"
+}

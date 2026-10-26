@@ -1,0 +1,92 @@
+{
+  "phase": "after",
+  "dataMetadata": {
+    "posts": [
+      {
+        "id": 1,
+        "published": true,
+        "items": 122,
+        "classified": 121,
+        "supplier_assigned": 122,
+        "supplier_shown": 0
+      },
+      {
+        "id": 2,
+        "published": true,
+        "items": 30,
+        "classified": 30,
+        "supplier_assigned": 30,
+        "supplier_shown": 0
+      }
+    ],
+    "imageBlobs": 566,
+    "products": 142,
+    "migrations": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15"
+    ]
+  },
+  "configuredRelease": "20261026.6",
+  "source": "93abb352419cc71e0ec31fadeacc118969dfea01",
+  "ciRun": 40372651981,
+  "containers": [
+    {
+      "name": "/bobuy-core-service",
+      "tag": "bobuy/core:20261026.6",
+      "id": "sha256:8a6f950de43e95f32a0537b9ffdc121409f16c44bb13fa884c4daa6147eabc5f",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-ai-service",
+      "tag": "bobuy/ai:20261026.6",
+      "id": "sha256:085d8ccf88cbe630989e68a49cf61876a320385cdab34fbe333643aa855384bc",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-im-service",
+      "tag": "bobuy/im:20261026.6",
+      "id": "sha256:37b2d3a61b5c55a14e3efa5a4342405e7746917b1ae6e0cba70adb16eb1160b4",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-auth-service",
+      "tag": "bobuy/auth:20261026.6",
+      "id": "sha256:3a7d2ce26cd0aa9d79d2beac1a51a20d18378d8c6653122bbc6e23e19efa251e",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-gateway-service",
+      "tag": "bobuy/router:20261026.6",
+      "id": "sha256:f58e3dffef93f1df4587014253776dae37114588f1b05c475453e6080843010f",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-frontend",
+      "tag": "bobuy/frontend:20261026.6",
+      "id": "sha256:5e5311682eb0efcbf58e6552a18668511f7ce2e38c55c66eaa956f2790e99652",
+      "health": "running",
+      "restarts": 0
+    }
+  ],
+  "protectedStateUnchanged": true,
+  "backupRestore": "PASS",
+  "contentAndImageBytesPreserved": "PASS (seven frozen tables, latest pre-deploy snapshot)",
+  "result": "PASS"
+}

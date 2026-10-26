@@ -1,0 +1,15 @@
+{
+  "mode": "production",
+  "checks": {
+    "mobileInlineSwipeNoPreviewNoClickAndVerticalScroll": "PASS",
+    "mobileFullscreenSwipeDoubleTapNativePanBoundaries": "PASS",
+    "mobileCloseReturnsToSameDetail": "PASS",
+    "desktopKeyboardDoubleClickDragEscapeFocus": "PASS",
+    "cardGradientAndSeparatedJapaneseNames": "PASS",
+    "localizedNameFallbackAndNoRepeatedJapanese": "PASS",
+    "acceptedBuildByteIdentity": "PASS"
+  },
+  "errors": [],
+  "writes": [],
+  "result": "PASS"
+}

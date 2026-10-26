@@ -1,0 +1,16 @@
+{
+  "scope": "Actual deployed read-only production; no account creation/email/business write",
+  "checks": {
+    "actualPublicNamesTitles_390": "PASS",
+    "noIdentityChoice_390": "PASS",
+    "existingRegistrationAndMailGuardUnchanged_390": "PASS",
+    "unauthorizedAdminAccessRejected_390": "PASS",
+    "actualPublicNamesTitles_1440": "PASS",
+    "noIdentityChoice_1440": "PASS",
+    "existingRegistrationAndMailGuardUnchanged_1440": "PASS",
+    "unauthorizedAdminAccessRejected_1440": "PASS"
+  },
+  "errors": [],
+  "writes": [],
+  "result": "PASS"
+}

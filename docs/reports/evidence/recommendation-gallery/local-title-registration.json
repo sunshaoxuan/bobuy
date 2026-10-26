@@ -1,0 +1,20 @@
+{
+  "scope": "Browser-only long text fixtures and registration DOM; no real writes",
+  "checks": {
+    "fullLongTitles_390_zh-CN": "PASS",
+    "noPublicIdentityChoices_390_zh-CN": "PASS",
+    "fullLongTitles_390_ja-JP": "PASS",
+    "noPublicIdentityChoices_390_ja-JP": "PASS",
+    "fullLongTitles_390_en-US": "PASS",
+    "noPublicIdentityChoices_390_en-US": "PASS",
+    "fullLongTitles_1440_zh-CN": "PASS",
+    "noPublicIdentityChoices_1440_zh-CN": "PASS",
+    "fullLongTitles_1440_ja-JP": "PASS",
+    "noPublicIdentityChoices_1440_ja-JP": "PASS",
+    "fullLongTitles_1440_en-US": "PASS",
+    "noPublicIdentityChoices_1440_en-US": "PASS"
+  },
+  "errors": [],
+  "writes": [],
+  "result": "PASS"
+}

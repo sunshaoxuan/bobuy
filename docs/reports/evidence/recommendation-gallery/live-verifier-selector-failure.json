@@ -1,0 +1,10 @@
+{
+  "mode": "production",
+  "checks": {},
+  "errors": [
+    "Cannot read properties of null (reading 'getBoundingClientRect')"
+  ],
+  "writes": [],
+  "result": "FAIL",
+  "failure": "page.waitForFunction: TypeError: Cannot read properties of null (reading 'getBoundingClientRect')\n    at eval (eval at predicate (eval at evaluate (:302:30)), <anonymous>:1:87)\n    at predicate (eval at evaluate (:302:30), <anonymous>:7:23)\n    at next (eval at evaluate (:302:30), <anonymous>:29:29)\n    at eval (eval at evaluate (:302:30), <anonymous>:42:9)\n    at UtilityScript.evaluate (<anonymous>:304:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at initialize (C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\gallery-review.mjs:7:487)\n    at async file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/gallery-review.mjs:12:40"
+}

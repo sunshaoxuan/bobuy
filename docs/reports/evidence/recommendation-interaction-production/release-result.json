@@ -1,0 +1,15 @@
+{
+  "release": "20261026.6",
+  "applicationHealth": "PASS",
+  "protectedState": "PASS",
+  "publicRegistration": "CLOSED_PENDING_SMTP_ABUSE_RECOVERY",
+  "browserVerification": "PASS_TOUCH_SWIPE_NATIVE_PAN_DOUBLE_TAP_DESKTOP_KEYS_NAMES_TITLES_CUSTOMER_REGISTRATION",
+  "source": "93abb352419cc71e0ec31fadeacc118969dfea01",
+  "ciRun": 40372651981,
+  "contentPreservation": "PASS_LATEST_SNAPSHOT_SEVEN_TABLES",
+  "scope": "Customer-only self registration; recommendation gallery and complete name/title display",
+  "imagePixelsUnmodified": true,
+  "javaImagesRebuilt": 5,
+  "registrationGateChanged": false,
+  "mailSent": false
+}
