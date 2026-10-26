@@ -50,7 +50,7 @@ jobs:
           cache: maven
 
       - name: Run backend tests
-        run: mvn -B test --file backend/pom.xml
+        run: python scripts/verify-backend-coverage.py
 
   frontend-quality:
     name: frontend-quality

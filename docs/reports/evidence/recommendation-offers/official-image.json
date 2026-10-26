@@ -1,0 +1,10 @@
+{
+  "scope": "existing shared local environment; one official static image through visible UI; synthetic name, no prices, no publication",
+  "checks": {
+    "officialImageUrlToStoredDecodedImage": "PASS",
+    "noAiSettingsOrEditor": "PASS",
+    "transportFixtureUnlinked": "PASS"
+  },
+  "status": 200,
+  "result": "PASS"
+}

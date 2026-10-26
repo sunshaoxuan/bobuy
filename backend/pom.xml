@@ -18,6 +18,8 @@
   <description>Core API for BOBBuy MVP.</description>
 
   <properties>
+    <jacocoArgLine></jacocoArgLine>
+    <jacocoDataFile>${project.build.directory}/jacoco.exec</jacocoDataFile>
     <java.version>17</java.version>
     <spring-cloud.version>2023.0.1</spring-cloud.version>
     <spring-cloud-alibaba.version>2023.0.1.0</spring-cloud-alibaba.version>
@@ -139,6 +141,13 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <argLine>@{jacocoArgLine}</argLine>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
@@ -163,6 +172,11 @@
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
         <version>0.8.11</version>
+        <configuration>
+          <propertyName>jacocoArgLine</propertyName>
+          <destFile>${jacocoDataFile}</destFile>
+          <dataFile>${jacocoDataFile}</dataFile>
+        </configuration>
         <executions>
           <execution>
             <goals>

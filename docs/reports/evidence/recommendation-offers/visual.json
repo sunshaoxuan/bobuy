@@ -1,0 +1,85 @@
+{
+  "scope": "Only final offer-card display changed; reuse earlier full workflow receipt",
+  "postId": "10",
+  "checks": {
+    "390": [
+      {
+        "outsideImageOverlay": true,
+        "notClipped": true,
+        "topBelowPhoto": true,
+        "text": "原价（JPY）: 500 JPY\n优惠价 / 已知价（JPY）: 400 JPY / 100g\n折扣金额（JPY）: 100 JPY / 100g\n优惠 / 兑换期间: 2026-10-26 – 2026-11-21 日本时间，含起止日"
+      },
+      {
+        "outsideImageOverlay": true,
+        "notClipped": true,
+        "topBelowPhoto": true,
+        "text": "优惠价 / 已知价（JPY）: 来源未注明\n优惠 / 兑换期间: 来源未注明期间"
+      },
+      {
+        "outsideImageOverlay": true,
+        "notClipped": true,
+        "topBelowPhoto": true,
+        "text": "优惠价 / 已知价（JPY）: 来源未注明\n优惠 / 兑换期间: 截至 2026-11-01 日本时间，含起止日"
+      },
+      {
+        "outsideImageOverlay": true,
+        "notClipped": true,
+        "topBelowPhoto": true,
+        "text": "优惠价 / 已知价（JPY）: 来源未注明\n优惠 / 兑换期间: 自 2027-01-01 日本时间，含起止日\n尚未开始"
+      },
+      {
+        "outsideImageOverlay": true,
+        "notClipped": true,
+        "topBelowPhoto": true,
+        "text": "优惠价 / 已知价（JPY）: 200 JPY\n优惠 / 兑换期间: 截至 2026-10-25 日本时间，含起止日\n优惠期间已结束"
+      },
+      {
+        "outsideImageOverlay": true,
+        "notClipped": true,
+        "topBelowPhoto": true,
+        "text": "优惠价 / 已知价（JPY）: 900 JPY\n优惠 / 兑换期间: 2026-11-01 – 2026-11-08 日本时间，含起止日\n尚未开始\n券发放期间: 2026-10-20 – 2026-10-25 日本时间，含起止日\n\nCoupon issue and redemption are separate; this item has its own dates."
+      }
+    ],
+    "1440": [
+      {
+        "outsideImageOverlay": true,
+        "notClipped": true,
+        "topBelowPhoto": true,
+        "text": "原价（JPY）: 500 JPY\n优惠价 / 已知价（JPY）: 400 JPY / 100g\n折扣金额（JPY）: 100 JPY / 100g\n优惠 / 兑换期间: 2026-10-26 – 2026-11-21 日本时间，含起止日"
+      },
+      {
+        "outsideImageOverlay": true,
+        "notClipped": true,
+        "topBelowPhoto": true,
+        "text": "优惠价 / 已知价（JPY）: 来源未注明\n优惠 / 兑换期间: 来源未注明期间"
+      },
+      {
+        "outsideImageOverlay": true,
+        "notClipped": true,
+        "topBelowPhoto": true,
+        "text": "优惠价 / 已知价（JPY）: 来源未注明\n优惠 / 兑换期间: 截至 2026-11-01 日本时间，含起止日"
+      },
+      {
+        "outsideImageOverlay": true,
+        "notClipped": true,
+        "topBelowPhoto": true,
+        "text": "优惠价 / 已知价（JPY）: 来源未注明\n优惠 / 兑换期间: 自 2027-01-01 日本时间，含起止日\n尚未开始"
+      },
+      {
+        "outsideImageOverlay": true,
+        "notClipped": true,
+        "topBelowPhoto": true,
+        "text": "优惠价 / 已知价（JPY）: 200 JPY\n优惠 / 兑换期间: 截至 2026-10-25 日本时间，含起止日\n优惠期间已结束"
+      },
+      {
+        "outsideImageOverlay": true,
+        "notClipped": true,
+        "topBelowPhoto": true,
+        "text": "优惠价 / 已知价（JPY）: 900 JPY\n优惠 / 兑换期间: 2026-11-01 – 2026-11-08 日本时间，含起止日\n尚未开始\n券发放期间: 2026-10-20 – 2026-10-25 日本时间，含起止日\n\nCoupon issue and redemption are separate; this item has its own dates."
+      }
+    ]
+  },
+  "errors": [],
+  "result": "PASS",
+  "fixtureWithdrawn": true
+}

@@ -5,6 +5,9 @@ export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
+    // Bound worker contention on the shared workstation; keep all test/coverage gates.
+    maxWorkers: 4,
+    minWorkers: 1,
     environment: 'jsdom',
     passWithNoTests: true,
     setupFiles: './src/test/setup.ts',

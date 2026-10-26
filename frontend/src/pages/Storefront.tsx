@@ -14,6 +14,7 @@ import { localizedContent, useI18n } from '../i18n';
 import '../product-feed.css';
 
 const ClientOrders = lazy(() => import('./ClientOrders'));
+const PublicRecommendations = lazy(() => import('./PublicRecommendations'));
 const ClientBilling = lazy(() => import('./ClientBilling'));
 const ClientChat = lazy(() => import('./ClientChat'));
 
@@ -124,6 +125,7 @@ export default function Storefront() {
   const invalidCart = !trip || cartEntries.some(([id]) => !available.some(p => p.id === id));
   function change(id: string, value: number) { setCart(prior => changeQuantity(prior, id, value)); setReceipt(undefined); }
   function configureQuantity(product: StoreProduct) {
+    if (product.merchantId !== trip?.merchantId) { setDetail(undefined); setTripPicker(true); return; }
     setDraftQuantity(cart.items[product.id] || 1); setQuantityProduct(product); setDetail(undefined);
   }
   function choose(next: StoreTrip) {
@@ -171,23 +173,25 @@ export default function Storefront() {
       <ProductFeed products={shown} quantities={cart.items} onAdd={configureQuantity} onDetail={setDetail} />
       {!shown.length && !loading && <Empty description={search ? t('store.no_matches') : t('store.no_products')} />}
     </section></div>;
-  return <div className={`storefront ${location.pathname === '/' ? 'storefront-catalog' : ''}`}><header className="store-header"><Link className="store-brand" to="/">{t('app.brand')}<span>{t('store.tagline')}</span></Link>
-    <div className="store-header-actions"><LanguageSwitcher /><Link to="/account" aria-label={t('store.account')}><UserOutlined /></Link><Badge count={quantity} size="small"><Link to="/cart" aria-label={t('store.cart_label',{count:quantity})}><ShoppingCartOutlined /></Link></Badge></div></header>
+  return <div className={`storefront ${(location.pathname === '/' || location.pathname.startsWith('/recommendations')) ? 'storefront-catalog' : ''}`}><header className="store-header"><Link className="store-brand" to="/">{t('app.brand')}<span>{t('store.tagline')}</span></Link>
+    <div className="store-header-actions"><Link className="store-recommendations-link" to="/recommendations">{t('rec.title')}</Link><LanguageSwitcher /><Link to="/account" aria-label={t('store.account')}><UserOutlined /></Link><Badge count={quantity} size="small"><Link to="/cart" aria-label={t('store.cart_label',{count:quantity})}><ShoppingCartOutlined /></Link></Badge></div></header>
     <main className="store-main">{error && <Alert type="error" message={error} action={<Button onClick={() => void load()}>{t('store.retry')}</Button>} closable onClose={() => setError('')} />}
       {loading ? <div className="store-loading"><Spin /></div> : <Suspense fallback={<Spin />}><Routes>
         <Route index element={catalog} /><Route path="cart" element={basket} />
         <Route path="checkout" element={<div className="checkout-layout">{receipt ? <section className="order-success"><CheckCircleOutlined /><h1>{t('store.submitted')}</h1><p>{t('store.order_number',{id:receipt.orderId})} · {money(receipt.total)}</p><Tag color="gold">{t('store.pending')}</Tag><div className="action-row"><Link to="/client/orders"><Button type="primary">{t('store.view_order')}</Button></Link><Link to="/"><Button>{t('store.continue')}</Button></Link></div></section> : <>{basket}{quantity > 0 && <section className="checkout-account">{!isAuthenticated ? <AccountForm checkout afterLogin={() => {}} /> : !user?.roles.includes('CUSTOMER') ? <Alert type="warning" message={t('store.customer_only')} action={<Button onClick={() => void logout()}>{t('store.switch_account')}</Button>} /> : <><h2>{t('store.confirm')}</h2><p>{user.name} · {user.email}</p>{!user.emailVerified && <Alert type="info" message={t('store.unverified_hint')} />}<Button type="primary" size="large" block loading={busy} disabled={invalidCart} onClick={() => void checkout()}>{t('store.submit')} · {money(total)}</Button><Link to="/account">{t('store.verify')}</Link></>}</section>}</>}</div>} />
         <Route path="login" element={isAuthenticated ? <Navigate to="/account" replace /> : <AccountForm afterLogin={() => navigate('/account')} />} />
         <Route path="account" element={isAuthenticated ? <section className="account-page"><h1>{t('store.account')}</h1><p>{user?.name}</p><EmailVerification /><div className="account-links"><Link to="/client/orders">{t('store.orders')} <ArrowRightOutlined /></Link><Link to="/client/billing">{t('store.billing')} <ArrowRightOutlined /></Link>{(user?.roles.includes('AGENT') || user?.platformAdmin) && <Link to="/admin">{t('store.admin')} <ArrowRightOutlined /></Link>}<Button icon={<LogoutOutlined />} onClick={() => void logout()}>{t('store.logout')}</Button></div></section> : <AccountForm afterLogin={() => {}} />} />
+        <Route path="recommendations" element={<PublicRecommendations products={products} quantities={cart.items} onDetail={setDetail} onAdd={configureQuantity} canBuy={product => trips.some(journey => journey.merchantId === product.merchantId)} />} />
+        <Route path="recommendations/:id" element={<PublicRecommendations products={products} quantities={cart.items} onDetail={setDetail} onAdd={configureQuantity} canBuy={product => trips.some(journey => journey.merchantId === product.merchantId)} />} />
         <Route path="client/orders" element={<ProtectedRoute allowedRoles={['CUSTOMER']}><ClientOrders /></ProtectedRoute>} />
         <Route path="client/billing" element={<ProtectedRoute allowedRoles={['CUSTOMER']}><ClientBilling /></ProtectedRoute>} />
         <Route path="client/chat" element={<ProtectedRoute allowedRoles={['CUSTOMER']}><ClientChat /></ProtectedRoute>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes></Suspense>}
     </main>
-    <nav className="store-bottom" aria-label={t('store.navigation')}><Link className={location.pathname === '/' ? 'active' : ''} to="/"><ShopOutlined /><span>{t('store.discover')}</span></Link><Link className={location.pathname === '/cart' ? 'active' : ''} to="/cart"><Badge count={quantity} size="small"><ShoppingCartOutlined /></Badge><span>{t('store.cart')}</span></Link><Link className={location.pathname === '/account' ? 'active' : ''} to="/account"><UserOutlined /><span>{t('store.my')}</span></Link></nav>
+    <nav className="store-bottom" aria-label={t('store.navigation')}><Link className={location.pathname === '/' ? 'active' : ''} to="/"><ShopOutlined /><span>{t('store.discover')}</span></Link><Link className={location.pathname.startsWith('/recommendations') ? 'active' : ''} to="/recommendations"><ShopOutlined /><span>{t('rec.title')}</span></Link><Link className={location.pathname === '/cart' ? 'active' : ''} to="/cart"><Badge count={quantity} size="small"><ShoppingCartOutlined /></Badge><span>{t('store.cart')}</span></Link><Link className={location.pathname === '/account' ? 'active' : ''} to="/account"><UserOutlined /><span>{t('store.my')}</span></Link></nav>
     <Drawer className="product-detail" title={t('store.details')} placement="right" width="min(100vw, 480px)" open={!!detail} onClose={() => setDetail(undefined)} closeIcon={<CloseOutlined />}>
-      {detail && <><div className="detail-photo">{image(detail)}</div><small>{detail.brand}</small><h2>{text(detail.name)}</h2><p>{text(detail.description)}</p><h3>{money(detail.price)} <small>JPY</small></h3><Button type="primary" size="large" block icon={<PlusOutlined />} onClick={() => configureQuantity(detail)}>{t('store.set_quantity')}</Button></>}
+      {detail && <><div className="detail-photo">{image(detail)}</div><small>{detail.brand}</small><h2>{text(detail.name)}</h2><p>{text(detail.description)}</p><h3>{money(detail.price)} <small>JPY</small></h3><Button type="primary" size="large" block disabled={!trips.some(journey => journey.merchantId === detail.merchantId)} icon={detail.merchantId === trip?.merchantId ? <PlusOutlined /> : <CalendarOutlined />} onClick={() => configureQuantity(detail)}>{t(detail.merchantId === trip?.merchantId ? 'store.set_quantity' : 'store.choose_trip')}</Button></>}
     </Drawer>
     <Drawer className="journey-picker" title={t('store.trip')} placement="bottom" height="auto" open={tripPicker} onClose={() => setTripPicker(false)}>{tripChoices}{!trips.length && <Empty description={t('store.no_trips')} />}</Drawer>
     <Drawer className="quantity-sheet" title={t('store.quantity_title')} placement="bottom" height="auto" open={!!quantityProduct} onClose={() => setQuantityProduct(undefined)} destroyOnClose>

@@ -16,6 +16,7 @@ const OrderDesk = lazy(() => import('./pages/OrderDesk'));
 const ProcurementHUD = lazy(() => import('./pages/ProcurementHUD'));
 const PickingMaster = lazy(() => import('./pages/PickingMaster'));
 const StockMaster = lazy(() => import('./pages/StockMaster'));
+const Recommendations = lazy(() => import('./pages/Recommendations'));
 const Suppliers = lazy(() => import('./pages/Suppliers'));
 const MerchantCustomers = lazy(() => import('./pages/MerchantCustomers'));
 const ZenAuditView = lazy(() => import('./pages/ZenAuditView'));
@@ -26,6 +27,7 @@ const adminPages = [
   ['dashboard', 'nav.dashboard', Dashboard, AppstoreOutlined], ['trips', 'nav.trips', Trips, CalendarOutlined], ['orders', 'nav.orders', Orders, ShoppingOutlined],
   ['order-desk', 'nav.order_desk', OrderDesk, ScanOutlined], ['procurement', 'nav.procurement', ProcurementHUD, InboxOutlined],
   ['picking', 'nav.picking', PickingMaster, CheckSquareOutlined], ['stock-master', 'nav.stock_master', StockMaster, TagsOutlined],
+  ['recommendations', 'rec.title', Recommendations, ShopOutlined],
   ['suppliers', 'nav.suppliers', Suppliers, ShopOutlined], ['customers', 'nav.customers', MerchantCustomers, TeamOutlined]
 ] as const;
 

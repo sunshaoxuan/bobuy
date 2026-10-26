@@ -1,0 +1,9 @@
+{
+  "scope": "existing shared local Postgres; snapshot clone only",
+  "checks": {
+    "upgradePreservesRecordsAndRejectsReversedDates": "PASS",
+    "snapshotRestore": "PASS"
+  },
+  "result": "PASS",
+  "temporaryDatabaseRemoved": true
+}

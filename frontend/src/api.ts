@@ -981,6 +981,36 @@ export type AiOnboardingSuggestion = {
     };
 };
 
+export type RecommendationSummary = { id: number; title: string; published: boolean; version: number; updatedAt: string; publishedAt?: string; publisherName?: string; coverImageUrl?: string };
+export type RecommendationFacts = { name: string; itemNumber?: string | null; referencePrice?: number | null; originalPrice?: number | null; discountAmount?: number | null; priceUnit?: string | null; offerStart?: string | null; offerEnd?: string | null; couponStart?: string | null; couponEnd?: string | null; offerNotes?: string | null };
+export type RecommendationItem = RecommendationFacts & { id: number; productId?: string | null; currency?: 'JPY'; imageUrl: string };
+export type RecommendationDetail = { post: RecommendationSummary; body: string; items: RecommendationItem[] };
+const recommendationBase = '/api/merchant/recommendations';
+export const recommendationApi = {
+    list: (page: number) => storeGet<RecommendationSummary[]>(recommendationBase + '?page=' + page),
+    feed: (page: number) => storeGet<RecommendationDetail[]>('/api/storefront/recommendations?page=' + page),
+    get: (id: number, publicView = false) => storeGet<RecommendationDetail>((publicView ? '/api/storefront/recommendations/' : recommendationBase + '/') + id),
+    create: () => postJson<RecommendationDetail, object>(recommendationBase, {}),
+    save: (id: number, title: string, body: string, version: number) => putJson<RecommendationDetail, object>(recommendationBase + '/' + id, { title, body, version }),
+    publish: (id: number, version: number, publish: boolean) => postJson<RecommendationDetail, object>(recommendationBase + '/' + id + (publish ? '/publish' : '/withdraw'), { version }),
+    editItem: (id: number, itemId: number, facts: RecommendationFacts, version: number) => putJson<RecommendationDetail, object>(recommendationBase + '/' + id + '/items/' + itemId, { facts, version }),
+    sourceImage: (id: number, imageUrl: string, facts: RecommendationFacts, version: number) => postJson<{detail: RecommendationDetail; productCreated: boolean; imageReused: boolean; priceUpdated: boolean}, object>(recommendationBase + '/' + id + '/source-image', {imageUrl,facts,version}),
+    upload: async (id: number, file: File, name: string, itemNumber: string, referencePrice: number | null, version: number, facts?: RecommendationFacts) => {
+        const body = new FormData();
+        body.append('file', file);
+        for (const [key,value] of Object.entries(facts ?? {name,itemNumber,referencePrice})) if (value != null && value !== '') body.append(key,String(value));
+        body.append('version', String(version));
+        const response = await authorizedFetch(recommendationBase + '/' + id + '/images', { method: 'POST', body });
+        if (!response.ok) throw new Error(await parseErrorMessage(response));
+        return parseSuccessPayload<{ detail: RecommendationDetail; productCreated: boolean; imageReused: boolean; priceUpdated: boolean }>(response);
+    },
+    remove: async (id: number, itemId: number, version: number) => {
+        const response = await authorizedFetch(recommendationBase + '/' + id + '/items/' + itemId + '?version=' + version, { method: 'DELETE' });
+        if (!response.ok) throw new Error(await parseErrorMessage(response));
+        return parseSuccessPayload<RecommendationDetail>(response);
+    }
+};
+
 export const api = {
     auth: {
         register: (payload: { username: string; password: string; email: string }) =>

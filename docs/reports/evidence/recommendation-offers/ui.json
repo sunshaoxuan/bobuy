@@ -1,0 +1,15 @@
+{
+  "origin": "http://127.0.0.1:18080",
+  "data": "Synthetic fixtures entered through visible UI only; no production data",
+  "checks": {
+    "invalidNumericCodeRejectedBeforeSave": "PASS",
+    "previewRegisterOptionalFacts": "PASS",
+    "exactDedup": "PASS",
+    "editValidationCorrectionPersistence": "PASS",
+    "customerSingleEndedUnknownExpiredUpcomingExceptionAndCouponMobile": "PASS",
+    "fixtureWithdrawn": "PASS"
+  },
+  "errors": [],
+  "result": "PASS",
+  "postId": "10"
+}

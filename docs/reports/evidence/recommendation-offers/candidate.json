@@ -1,0 +1,39 @@
+{
+  "backend": {
+    "tests": 195,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 2
+  },
+  "coverage": {
+    "LINE": {
+      "covered": 567,
+      "missed": 47,
+      "ratio": 0.9234527687296417
+    },
+    "BRANCH": {
+      "covered": 165,
+      "missed": 56,
+      "ratio": 0.746606334841629
+    }
+  },
+  "coverageEvidence": "Real instrumented cumulative execution for unchanged production classes: store/fixture regression tests plus existing order/trip/account tests. Full 194 tests passed, then one additional metadata preservation test passed.",
+  "frontend": {
+    "files": 27,
+    "tests": 94,
+    "errors": 0
+  },
+  "releaseTools": {
+    "tests": 5,
+    "isolationPositiveAndNegative": "PASS"
+  },
+  "release": "20261026.1",
+  "archiveSha256": "093d4abba81f6eaa71f6305e92d52d5719d2a165211b4329e30454997add3290",
+  "excluded": [
+    "AI settings/credentials/encryption/security/compose",
+    "stock mutations and media hashing",
+    "AI writing UI/API",
+    "V8 AI settings migration"
+  ],
+  "result": "PASS"
+}
