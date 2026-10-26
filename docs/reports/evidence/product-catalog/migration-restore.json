@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "scope": "Existing shared PostgreSQL instance, isolated restore-probe database only; no live content writes",
+  "backupSha256": "e1f0a043bf5488573c1e4f7f8cbd91ef69cb5c1c8fab3ca863e514a7850560f3",
+  "tablesPreserved": 27,
+  "additiveMigrationPreservesAllRows": true,
+  "backupRestoresLegacySchemaAndRows": true
+}

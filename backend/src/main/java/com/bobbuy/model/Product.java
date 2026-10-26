@@ -40,6 +40,11 @@ public class Product {
     private Map<String, String> description = new HashMap<>();
 
     private String brand;
+    @JdbcTypeCode(SqlTypes.JSON) @Column(columnDefinition="jsonb")
+    @com.fasterxml.jackson.annotation.JsonProperty(access=com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY)
+    private ProductCatalogData catalogData;
+    public ProductCatalogData getCatalogData(){return catalogData;}
+    public void setCatalogData(ProductCatalogData value){catalogData=value;}
     private double basePrice;
     @jakarta.persistence.Version
     @com.fasterxml.jackson.annotation.JsonProperty(access=com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY)

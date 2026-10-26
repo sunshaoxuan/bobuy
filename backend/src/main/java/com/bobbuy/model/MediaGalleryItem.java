@@ -4,6 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MediaGalleryItem {
+    @Override public boolean equals(Object other) {
+        if(this==other)return true;
+        if(!(other instanceof MediaGalleryItem value))return false;
+        return visible==value.visible&&java.util.Objects.equals(sha256,value.sha256)&&java.util.Objects.equals(url,value.url)&&type==value.type&&java.util.Objects.equals(sourceUrl,value.sourceUrl)&&java.util.Objects.equals(sourceDomain,value.sourceDomain)&&java.util.Objects.equals(sourceType,value.sourceType)&&java.util.Objects.equals(title,value.title);
+    }
+    @Override public int hashCode(){return java.util.Objects.hash(sha256,url,type,visible,sourceUrl,sourceDomain,sourceType,title);}
     // Preserve legacy optional image hashes without enabling inventory mutations.
     private String sha256;
     public String getSha256() { return sha256; }

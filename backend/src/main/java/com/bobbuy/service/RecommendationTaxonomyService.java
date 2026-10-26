@@ -14,8 +14,10 @@ public class RecommendationTaxonomyService {
     private final CategoryRepository categories;
     private final SupplierRepository suppliers;
     private final UserRepository users;
-    public RecommendationTaxonomyService(CategoryRepository categories,SupplierRepository suppliers,UserRepository users) {
-        this.categories=categories;this.suppliers=suppliers;this.users=users;
+    private final ProductRepository products;
+    private final RecommendationPostRepository posts;
+    public RecommendationTaxonomyService(CategoryRepository categories,SupplierRepository suppliers,UserRepository users,ProductRepository products,RecommendationPostRepository posts) {
+        this.categories=categories;this.suppliers=suppliers;this.users=users;this.products=products;this.posts=posts;
     }
     public record Choice(String id,Map<String,String> name,boolean editable) {}
     public record Options(List<Choice> categories,List<Choice> suppliers) {}
@@ -56,14 +58,9 @@ public class RecommendationTaxonomyService {
             throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.classification");
     }
     public List<RecommendationItem> display(List<RecommendationItem> source,boolean publicView) {
-        Set<String> ids=new HashSet<>(), supplierIds=new HashSet<>();
-        for(var item:source) {
-            ids.addAll(item.categoryIds);
-            if(item.supplierId!=null&&(!publicView||item.showSupplier))supplierIds.add(item.supplierId);
-        }
-        Map<String,Category> categoryMap=new HashMap<>();categories.findAllById(ids).forEach(c->categoryMap.put(c.getId(),c));
-        Map<String,Supplier> supplierMap=new HashMap<>();suppliers.findAllById(supplierIds).forEach(s->supplierMap.put(s.getId(),s));
-        return source.stream().map(original->{
+        Map<String,Product> productMap=new HashMap<>();products.findAllById(source.stream().map(i->i.productId).filter(Objects::nonNull).distinct().toList()).forEach(p->productMap.put(p.getId(),p));
+        Map<Long,Long> owners=new HashMap<>();posts.findAllById(source.stream().map(i->i.postId).distinct().toList()).forEach(p->owners.put(p.id,p.merchantId));
+        var projected=source.stream().map(original->{
             var item=new RecommendationItem();
             item.id=original.id;item.postId=original.postId;item.productId=original.productId;item.name=original.name;
             item.itemNumber=original.itemNumber;item.referencePrice=original.referencePrice;item.originalPrice=original.originalPrice;
@@ -73,13 +70,22 @@ public class RecommendationTaxonomyService {
             item.translations=original.translations;item.translatedSource=original.translatedSource;
             item.gallery=List.copyOf(original.gallery);
             item.offerNotes=original.offerNotes;item.imageHash=original.imageHash;item.imageUrl=original.imageUrl;item.createdAt=original.createdAt;
+            item.categoryIds=List.copyOf(original.categoryIds);item.showSupplier=original.showSupplier;item.supplierId=original.supplierId;
+            var product=productMap.get(item.productId);
+            if(product!=null&&Objects.equals(owners.get(item.postId),product.getMerchantId()))ProductCatalogProjection.apply(item,original,product);
+            if(!publicView&&item.catalogDriven)item.sourceFacts=new RecommendationItem.SourceFacts(original.name,original.itemNumber,original.specification,original.description,original.translations,original.getTranslationSource());
+            return item;
+        }).toList();
+        Set<String> ids=new HashSet<>(), supplierIds=new HashSet<>();
+        for(var item:projected){ids.addAll(item.categoryIds);if(item.supplierId!=null&&(!publicView||item.showSupplier))supplierIds.add(item.supplierId);}
+        Map<String,Category> categoryMap=new HashMap<>();categories.findAllById(ids).forEach(c->categoryMap.put(c.getId(),c));
+        Map<String,Supplier> supplierMap=new HashMap<>();suppliers.findAllById(supplierIds).forEach(s->supplierMap.put(s.getId(),s));
+        return projected.stream().map(item->{
             if(publicView){item.imageHash=null;item.imageUrl=item.gallery.isEmpty()?null:item.gallery.get(0).url();}
-            item.categoryIds=List.copyOf(original.categoryIds);item.showSupplier=original.showSupplier;
             item.categories=item.categoryIds.stream().filter(categoryMap::containsKey).map(id->new RecommendationItem.Label(id,categoryMap.get(id).getName())).toList();
-            if(!publicView||original.showSupplier) {
-                item.supplierId=original.supplierId;
+            if(!publicView||item.showSupplier) {
                 if(supplierMap.containsKey(item.supplierId))item.supplierName=supplierMap.get(item.supplierId).getName();
-            }
+            }else item.supplierId=null;
             return item;
         }).toList();
     }

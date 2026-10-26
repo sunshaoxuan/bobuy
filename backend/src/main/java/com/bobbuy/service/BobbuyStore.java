@@ -544,11 +544,14 @@ public class BobbuyStore {
         product.setSale(previous.getSale());
         product.setRecordVersion(previous.getRecordVersion());
         product.setCurrency(previous.getCurrency());
+        product.setCatalogData(previous.getCatalogData());
+        // Legacy inventory editing cannot replace version-reviewed master data.
+        if(previous.getCatalogData()!=null){product.setName(previous.getName());product.setDescription(previous.getDescription());product.setBrand(previous.getBrand());product.setItemNumber(previous.getItemNumber());product.setMediaGallery(previous.getMediaGallery());product.setCategoryId(previous.getCategoryId());}
         if (!productRepository.existsById(id)) {
             return Optional.empty();
         }
         product.setId(id);
-        ensureLocalizedFields(product);
+        if(product.getCatalogData()==null)ensureLocalizedFields(product);
         return Optional.of(productRepository.save(product));
     }
 
@@ -562,6 +565,7 @@ public class BobbuyStore {
         if (patch == null) {
             return Optional.of(existing);
         }
+        if(existing.getCatalogData()!=null&&(patch.getName()!=null||patch.getDescription()!=null||patch.getBrand()!=null||patch.getMediaGallery()!=null||patch.getCategoryId()!=null||patch.getItemNumber()!=null))throw new com.bobbuy.api.response.ApiException(com.bobbuy.api.response.ErrorCode.INVALID_REQUEST,"master.use_profile");
         if (patch.getName() != null) {
             mergeLocalizedMap(existing, true, patch.getName());
         }

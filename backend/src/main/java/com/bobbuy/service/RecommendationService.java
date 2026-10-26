@@ -169,6 +169,7 @@ public class RecommendationService {
         lockOwner(); var post = owned(id); editable(post); version(post,expectedVersion);
         var item = items.findById(itemId).filter(i -> i.postId.equals(id)).orElseThrow(RecommendationService::missing);
         var proposed = new RecommendationItem(); facts.apply(proposed);
+        if(item.productId!=null&&products.findById(item.productId).map(p->p.getCatalogData()!=null).orElse(false)&&(!Objects.equals(item.name,proposed.name)||!Objects.equals(item.itemNumber,proposed.itemNumber)))throw new ApiException(ErrorCode.INVALID_REQUEST,"master.use_profile");
         if (items.findByPostIdOrderById(id).stream().anyMatch(i -> !i.id.equals(itemId)
                 && Objects.equals(i.itemNumber,proposed.itemNumber) && i.imageHash.equals(item.imageHash)))
             throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.conflict");
@@ -192,6 +193,13 @@ public class RecommendationService {
         var selected=items.findByPostIdOrderById(id).stream().filter(i->wanted.contains(i.id)).toList();
         if(selected.size()!=wanted.size())throw missing();
         for(var item:selected) {
+            var master=item.productId==null?null:products.findById(item.productId).map(Product::getCatalogData).orElse(null);
+            if(master!=null){
+                if(updateCategories){var next=new LinkedHashSet<>(master.categoryIds());switch(mode){case "add"->next.addAll(categories);case "remove"->next.removeAll(categories);case "replace"->{next.clear();next.addAll(categories);}default->throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.classification");}if(!new ArrayList<>(next).equals(master.categoryIds()))throw new ApiException(ErrorCode.INVALID_REQUEST,"master.use_profile");}
+                if(updateSupplier&&!Objects.equals(supplier,master.supplierId()))throw new ApiException(ErrorCode.INVALID_REQUEST,"master.use_profile");
+                if(updateSupplier)item.showSupplier=showSupplier;
+                continue;
+            }
             if(updateCategories) {
                 var merged=new LinkedHashSet<>(item.categoryIds);
                 switch(mode) {case "add" -> merged.addAll(categories);case "remove" -> merged.removeAll(categories);case "replace" -> {merged.clear();merged.addAll(categories);}default -> throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.classification");}
@@ -205,6 +213,7 @@ public class RecommendationService {
     private void syncGallery(RecommendationItem item){
         if(item.productId==null)return;
         var product=products.lockById(item.productId).orElseThrow(RecommendationService::missing);
+        if(product.getCatalogData()!=null)throw new ApiException(ErrorCode.INVALID_REQUEST,"master.use_profile");
         if(!owner().equals(product.getMerchantId())||!RecommendationCatalogService.profile(product)
             ||!item.postId.toString().equals(product.getAttributes().get("recommendationSourceIssue")))return;
         product.setMediaGallery(item.gallery.stream().map(p->{var media=new MediaGalleryItem();media.setType(MediaType.IMAGE);media.setVisible(true);media.setUrl(p.url());return media;}).collect(java.util.stream.Collectors.toCollection(ArrayList::new)));
@@ -241,6 +250,11 @@ public class RecommendationService {
         for(var row:rows){
             if(row==null)throw new ApiException(ErrorCode.INVALID_REQUEST,"translation.invalid");
             var item=linked.stream().filter(i->i.id.equals(row.itemId())).findFirst().orElseThrow(RecommendationService::missing);
+            boolean canonical=item.productId!=null&&products.findById(item.productId).map(p->p.getCatalogData()!=null).orElse(false);
+            if(canonical){
+                if(!Objects.equals(Objects.toString(item.specification,""),Objects.toString(row.specification(),""))||!Objects.equals(Objects.toString(item.description,""),Objects.toString(row.description(),"")))throw new ApiException(ErrorCode.INVALID_REQUEST,"master.use_profile");
+                if(row.translations()!=null)for(var entry:row.translations().entrySet()){var before=item.translations.get(entry.getKey());var after=entry.getValue();if(after==null||!Objects.equals(before==null?item.name:before.name(),after.name())||!Objects.equals(Objects.toString(before==null?item.specification:before.specification(),""),Objects.toString(after.specification(),""))||!Objects.equals(Objects.toString(before==null?item.description:before.description(),""),Objects.toString(after.description(),"")))throw new ApiException(ErrorCode.INVALID_REQUEST,"master.use_profile");}
+            }
             if(!seen.add(item.id)||!item.getTranslationSource().equals(row.sourceHash()))throw new ApiException(ErrorCode.INVALID_REQUEST,"translation.conflict");
             if(row.translations()==null||row.translations().isEmpty()||!locales.containsAll(row.translations().keySet())
                 ||(row.specification()!=null&&row.specification().length()>1000)||(row.description()!=null&&row.description().length()>8000))throw new ApiException(ErrorCode.INVALID_REQUEST,"translation.invalid");
@@ -253,7 +267,7 @@ public class RecommendationService {
             if("REVIEWED".equals(item.getTranslationStatus()))merged.putAll(item.translations);
             merged.putAll(row.translations());item.translations=merged;item.translatedSource=item.getTranslationSource();
             if(item.productId!=null){var product=products.lockById(item.productId).orElseThrow(RecommendationService::missing);
-                if(owner().equals(product.getMerchantId())&&RecommendationCatalogService.profile(product)
+                if(product.getCatalogData()==null&&owner().equals(product.getMerchantId())&&RecommendationCatalogService.profile(product)
                     &&id.toString().equals(product.getAttributes().get("recommendationSourceIssue"))){
                     product.setName(RecommendationText.names(item));product.setDescription(RecommendationText.descriptions(item));products.save(product);
                 }

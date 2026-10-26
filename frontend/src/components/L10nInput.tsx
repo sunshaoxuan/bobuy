@@ -22,7 +22,7 @@ export interface L10nInputProps {
   applySuggestionText?: string;
 }
 
-const DEFAULT_LOCALES = ['zh-CN', 'ja-JP', 'en-US'];
+const DEFAULT_LOCALES = ['zh-CN', 'ja-JP', 'en-US', 'zh-TW'];
 const i18n = (key: string) => translate(getStoredLocale(), key);
 
 const getDisplayValue = (value: string | undefined): string => value ?? '';

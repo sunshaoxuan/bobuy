@@ -188,18 +188,18 @@ class RecommendationIntegrationTest {
         assertThat(imported.at("/items/0/currency").asText()).isEqualTo("JPY");
         assertThat(imported.at("/items/0/priceUnit").asText()).isEqualTo("100g");
         assertThat(imported.at("/items/0/couponEnd").asText()).isEqualTo("2026-10-25");
-        var facts = json.createObjectNode().put("name","No source prices").put("offerEnd","2026-11-01");
+        var facts = json.createObjectNode().put("name","Synthetic meat").put("itemNumber","00123").put("offerEnd","2026-11-01");
         var saved = data(mvc.perform(put(path(imported)+"/items/"+imported.at("/items/0/id").asLong())
             .header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON)
             .content(json.writeValueAsString(Map.of("facts",facts,"version",imported.at("/post/version").asLong())))));
         assertThat(saved.at("/items/0/referencePrice").isNull()).isTrue();
-        assertThat(saved.at("/items/0/itemNumber").isNull()).isTrue();
+        assertThat(saved.at("/items/0/itemNumber").asText()).isEqualTo("00123");
         assertThat(saved.at("/items/0/offerStart").isNull()).isTrue();
         assertThat(saved.at("/items/0/offerEnd").asText()).isEqualTo("2026-11-01");
         var publicPost = data(publish(data(edit(saved,admin,"Synthetic offers","Review source conditions")),"publish"));
         var visible = data(mvc.perform(get("/api/storefront/recommendations/"+publicPost.at("/post/id").asLong())));
         assertThat(visible.at("/items/0/referencePrice").isNull()).isTrue();
-        assertThat(products.count()).isEqualTo(catalogCount+2);
+        assertThat(products.count()).isEqualTo(catalogCount+1);
         var profile=products.findById(saved.at("/items/0/productId").asText()).orElseThrow();
         assertThat(profile.getVisibilityStatus()).isEqualTo(ProductVisibility.DRAFTER_ONLY);assertThat(profile.getBasePrice()).isZero();
     }

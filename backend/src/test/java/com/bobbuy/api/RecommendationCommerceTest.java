@@ -74,6 +74,8 @@ class RecommendationCommerceTest {
   store.updateProduct(product(),json.treeToValue(payload,Product.class)).orElseThrow();assertThat(products.findById(product()).orElseThrow().getSale()).isEqualTo(saved.getSale());
  }
  @Test void translationsAreReviewedSourceBoundAndGalleryIsOrderedDeduplicatedWithoutChangingSource()throws Exception{
+  // Existing legacy profiles retain this source-editor compatibility path.
+  var legacy=products.findById(product()).orElseThrow();legacy.setCatalogData(null);products.saveAndFlush(legacy);
   String original=detail.at("/items/0/imageUrl").asText(),hash=detail.at("/items/0/translationSource").asText();
   var row=Map.of("itemId",item(),"sourceHash",hash,"specification","16個","description","日本語説明","translations",Map.of("zh-CN",Map.of("name","中文商品","description","中文介绍"),"zh-TW",Map.of("name","繁體商品"),"en-US",Map.of("name","English item")));
   detail=data(putBody(path()+"/localizations",Map.of("version",Long.valueOf(version()),"rows",List.of(row),"reviewed",true),admin));

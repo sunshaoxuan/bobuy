@@ -36,11 +36,13 @@ import { useI18n } from '../i18n';
 import L10nInput, { type L10nValues } from '../components/L10nInput';
 import MediaGallery, { type MediaItem } from '../components/MediaGallery';
 import AiQuickAddModal from '../components/AiQuickAddModal';
+import ProductCatalogPanel from '../components/ProductCatalogPanel';
 import { api, type CategoryAttributeTemplateField, type MobileCategory, type MobileSupplier, type AiOnboardingSuggestion } from '../api';
 
 const { Title, Text } = Typography;
 
 interface StockItem {
+  catalogDriven?:boolean;
   key: string;
   name: string;
   nameL10n?: L10nValues;
@@ -243,6 +245,7 @@ export default function StockMaster() {
   }, [isMobile]);
 
   const [dataSource, setDataSource] = useState<StockItem[]>([]);
+  const [catalogId,setCatalogId]=useState<string|undefined>(()=>new URLSearchParams(window.location.search).get('product')||undefined);
 
   useEffect(() => {
     let cancelled = false;
@@ -250,6 +253,7 @@ export default function StockMaster() {
       if (cancelled) return;
       const mapped: StockItem[] = result.map(res => ({
         key: res.product.id,
+        catalogDriven:!!(res.product as unknown as {catalogData?:unknown}).catalogData,
         name: res.displayName,
         nameL10n: res.product.name,
         category: res.product.categoryId || '',
@@ -637,7 +641,8 @@ export default function StockMaster() {
       width: '8rem',
       render: (_: any, record: StockItem) => (
         <Space>
-          <Button type="text" icon={<EditOutlined />} onClick={() => openDrawer(record)} />
+          <Button size="small" disabled={record.isNew} onClick={()=>setCatalogId(record.key)}>{t('master.title')}</Button>
+          <Button type="text" icon={<EditOutlined />} onClick={() => record.catalogDriven?setCatalogId(record.key):openDrawer(record)} />
           <Button type="text" danger icon={<DeleteOutlined />} onClick={() => handleDelete(record.key)} />
         </Space>
       )
@@ -672,7 +677,8 @@ export default function StockMaster() {
                   <DatabaseOutlined /> {item.stock}
                 </Text>
                 <Space size={4}>
-                  <Button type="text" icon={<EditOutlined />} onClick={() => openDrawer(item)} aria-label={t('stock.master.edit_detail')} />
+                  <Button size="small" disabled={item.isNew} onClick={()=>setCatalogId(item.key)}>{t('master.title')}</Button>
+                  <Button type="text" icon={<EditOutlined />} onClick={() => item.catalogDriven?setCatalogId(item.key):openDrawer(item)} aria-label={t('stock.master.edit_detail')} />
                   <Button type="text" danger icon={<DeleteOutlined />} onClick={() => handleDelete(item.key)} aria-label={t('stock.master.discard')} />
                 </Space>
               </div>
@@ -694,6 +700,7 @@ export default function StockMaster() {
   return (
     <div style={{ padding: isMobile ? `0 0 ${MOBILE_BOTTOM_PADDING} 0` : `0 0 ${DESKTOP_BOTTOM_PADDING} 0` }}>
       <Breadcrumb style={{ marginBottom: '1rem' }} items={[{ title: t('nav.dashboard') }, { title: t('nav.stock_master') }]} />
+      <ProductCatalogPanel id={catalogId} onChoose={setCatalogId} entries={dataSource.filter(row=>!row.isNew)} onSaved={values=>setDataSource(prior=>prior.map(row=>{const value=values.find(v=>v.productId===row.key);return value?{...row,catalogDriven:true,name:getLocalizedFallback(value.name,row.name),nameL10n:value.name,description:getLocalizedFallback(value.description,''),descriptionL10n:value.description,brand:value.brand??undefined,sku:value.itemNumber??undefined,category:value.categoryIds[0]??'',mediaGallery:value.gallery.map(p=>({id:p.sha256||p.url,url:p.url,type:p.type==='VIDEO'?'video' as const:'image' as const,title:p.title,visible:p.visible}))}:row;}))}/>
 
       <div className={`stock-toolbar ${isMobile ? 'stock-toolbar-mobile' : ''} ${toolbarCompact ? 'stock-toolbar-compact' : ''}`}>
         <div style={{ minWidth: 0 }}>

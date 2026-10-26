@@ -3,6 +3,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { I18nProvider } from '../i18n';
 import React from 'react';
 import { api } from '../api';
+vi.mock('../components/ProductCatalogPanel',()=>({default:()=>null}));
 
 vi.mock('../api', () => ({
   api: {

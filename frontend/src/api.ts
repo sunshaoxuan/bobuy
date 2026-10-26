@@ -995,7 +995,7 @@ export type LocalizationRow={itemId:number;sourceHash:string;specification?:stri
 export type ProductSale={amount:number;currency:string;unit:string;validFrom?:string|null;validThrough?:string|null;revision:number;enabled:boolean};
 export type SaleReview={itemId:number;amount:number;currency:string;unit:string;validFrom?:string|null;validThrough?:string|null;revision:number;replaceExisting:boolean;enabled:boolean};
 export type RecommendationPicture={id:string;url:string;hash:string;sourceUrl:string;assetKey:string;label:string};
-export type RecommendationItem = RecommendationFacts & {gallery?:RecommendationPicture[];specification?:string|null;description?:string|null;translations?:Record<string,RecommendationText>;translationSource?:string;translationStatus?:string; id: number; productId?: string | null; currency?: 'JPY'; imageUrl: string; categoryIds?:string[]; categories?:RecommendationLabel[]; supplierId?:string|null; supplierName?:Record<string,string>|null; showSupplier?:boolean };
+export type RecommendationItem = RecommendationFacts & {catalogDriven?:boolean;sourceFacts?:{name:string;itemNumber?:string|null;specification?:string|null;description?:string|null;translations:Record<string,RecommendationText>;translationSource:string};brand?:string|null;model?:string|null;packaging?:string|null;gallery?:RecommendationPicture[];specification?:string|null;description?:string|null;translations?:Record<string,RecommendationText>;translationSource?:string;translationStatus?:string; id: number; productId?: string | null; currency?: 'JPY'; imageUrl: string; categoryIds?:string[]; categories?:RecommendationLabel[]; supplierId?:string|null; supplierName?:Record<string,string>|null; showSupplier?:boolean };
 export type RecommendationChoice = RecommendationLabel & {editable:boolean};
 export type RecommendationAssignment = {itemIds:number[];categoryIds:string[];categoryMode:'add'|'remove'|'replace';updateCategories:boolean;supplierId:string|null;updateSupplier:boolean;showSupplier:boolean;version:number};
 export const recommendationTaxonomyApi = {
@@ -1007,6 +1007,16 @@ export const recommendationTaxonomyApi = {
 };
 export type RecommendationDetail = { post: RecommendationSummary; body: string; items: RecommendationItem[] };
 const recommendationBase = '/api/merchant/recommendations';
+export type CatalogMedia={url:string;type:string;title:Record<string,string>;visible:boolean;sha256?:string|null;sourceUrl?:string|null;sourceDomain?:string|null;sourceType?:string|null};
+export type CatalogInput={productId:string;version:number;name:Record<string,string>;description:Record<string,string>;itemNumber?:string|null;brand?:string|null;specification:Record<string,string>;model?:string|null;packaging?:string|null;categoryIds:string[];supplierId?:string|null;gallery:CatalogMedia[];translationsReviewed:boolean};
+export type CatalogProposal={value:CatalogInput;changes:string[];warnings:string[]};
+export const productCatalogApi={
+ get:(id:string)=>storeGet<{value:CatalogInput;canonical:boolean;sourceItemIds:number[]}>('/api/merchant/product-catalog/'+encodeURIComponent(id)),
+ proposals:()=>storeGet<CatalogProposal[]>('/api/merchant/product-catalog'),
+ preview:(rows:CatalogInput[])=>postJson<CatalogProposal[],object>('/api/merchant/product-catalog/preview',{rows,reviewed:false}),
+ save:(rows:CatalogInput[])=>putJson<{value:CatalogInput;canonical:boolean;sourceItemIds:number[]}[],object>('/api/merchant/product-catalog',{rows,reviewed:true}),
+ upload:async(id:string,file:File,sourceUrl:string,label:string)=>{const form=new FormData();form.set('file',file);form.set('sourceUrl',sourceUrl);form.set('label',label);form.set('verified','true');const response=await authorizedFetch('/api/merchant/product-catalog/'+encodeURIComponent(id)+'/images',{method:'POST',body:form});if(!response.ok)throw new Error(await parseErrorMessage(response));return parseSuccessPayload<CatalogMedia>(response);}
+};
 export const recommendationApi = {
     galleryOrder:(post:number,item:number,orderedIds:string[],version:number)=>putJson<RecommendationDetail,object>(recommendationBase+'/'+post+'/items/'+item+'/gallery',{orderedIds,version}),
     galleryUpload:async(post:number,item:number,file:File,input:{version:number;sourceUrl:string;assetKey:string;label:string;itemNumber?:string|null;verified:boolean})=>{

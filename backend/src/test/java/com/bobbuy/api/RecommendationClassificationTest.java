@@ -25,6 +25,7 @@ class RecommendationClassificationTest {
  @Autowired MockMvc mvc;@Autowired ObjectMapper json;@Autowired BobbuyStore store;
  @Autowired UserRepository users;@Autowired JwtTokenService tokens;@Autowired RecommendationItemRepository items;
  @Autowired RecommendationPostRepository posts;@Autowired RecommendationImageRepository images;@Autowired SupplierRepository suppliers;
+ @Autowired ProductRepository products;
  String admin,other;
  @BeforeEach void setup(){cleanup();store.seed();admin=tokens.createAccessToken(users.findById(1000L).orElseThrow());var user=new User(9090L,"Other",Role.AGENT,0);user.setUsername("classification-other");users.save(user);other=tokens.createAccessToken(user);}
  @AfterEach void cleanup(){items.deleteAll();posts.deleteAll();images.deleteAll();}
@@ -34,7 +35,9 @@ class RecommendationClassificationTest {
  String path(JsonNode value){return "/api/merchant/recommendations/"+value.at("/post/id").asLong();}
  JsonNode image(JsonNode value,String code)throws Exception{
   var image=new BufferedImage(2,2,BufferedImage.TYPE_INT_RGB);var bytes=new ByteArrayOutputStream();ImageIO.write(image,"png",bytes);
-  return data(mvc.perform(multipart(path(value)+"/images").file(new MockMultipartFile("file","synthetic.png","image/png",bytes.toByteArray())).header("Authorization","Bearer "+admin).param("name","Synthetic "+code).param("itemNumber",code).param("referencePrice","400").param("version",value.at("/post/version").asText()))).path("detail");
+  var result=data(mvc.perform(multipart(path(value)+"/images").file(new MockMultipartFile("file","synthetic.png","image/png",bytes.toByteArray())).header("Authorization","Bearer "+admin).param("name","Synthetic "+code).param("itemNumber",code).param("referencePrice","400").param("version",value.at("/post/version").asText()))).path("detail");
+  // Explicitly exercise pre-canonical profiles; new master-owned assignment is tested separately.
+  for(var item:result.get("items")){var product=products.findById(item.get("productId").asText()).orElseThrow();product.setCatalogData(null);products.saveAndFlush(product);}return result;
  }
  ResultActions assign(JsonNode post,String token,List<Long> ids,List<String> cats,String mode,String supplier,boolean show)throws Exception{
   var input=new LinkedHashMap<String,Object>();input.put("itemIds",ids);input.put("categoryIds",cats);input.put("categoryMode",mode);input.put("updateCategories",true);input.put("supplierId",supplier);input.put("updateSupplier",true);input.put("showSupplier",show);input.put("version",post.at("/post/version").asLong());

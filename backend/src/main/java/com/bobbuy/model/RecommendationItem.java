@@ -10,6 +10,12 @@ public class RecommendationItem {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) public Long id;
     @Column(nullable = false) public Long postId;
     public String productId;
+    @Transient public boolean catalogDriven;
+    @Transient public String brand;
+    @Transient public String model;
+    @Transient public String packaging;
+    public record SourceFacts(String name,String itemNumber,String specification,String description,java.util.Map<String,Text> translations,String translationSource) {}
+    @Transient public SourceFacts sourceFacts;
     public record Picture(String id,String url,String hash,String sourceUrl,String assetKey,String label,java.time.Instant verifiedAt) {}
     @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.JSON)
     @Column(nullable=false,columnDefinition="jsonb") public java.util.List<Picture> gallery=new java.util.ArrayList<>();

@@ -1,8 +1,24 @@
 # Product-master and temporary-price follow-up boundary
 
-This is an investigation handoff, not implemented/delivered functionality. Keep this work outside the frozen 20261026.6 registration/gallery/title batch. No real product content has been changed by engineering.
+This batch has an uncommitted implementation, not delivered functionality. Keep this work outside the frozen 20261026.6 registration/gallery/title batch. No real product content has been changed by engineering.
+
+## Implementation checkpoint
+
+Backend compilation and the frontend production build passed. The full existing backend test/coverage gate passed (211 tests, zero failures, two existing skips; BobbuyStore LINE 93.76%, BRANCH 76.494%, unchanged 90%/70% thresholds). Affected backend integration tests passed 20/20 before the additional validation case was included in the full gate. Frontend affected tests passed 19/19; the final suggestions-only filter and its regression assertion passed both panel tests and another production build. No active test/build session is waiting. SMTP authentication does not block this work.
+
+V16 was applied to a backup restored into an isolated probe database in the existing shared PostgreSQL instance: all 27 table row fingerprints were unchanged; restoring the backup recovered the legacy schema and rows. See `evidence/product-catalog/migration-restore.json`. No new containers/images were created. The existing shared backend/frontend containers have the candidate for browser acceptance.
+
+Browser acceptance is PARTIAL: logged into the existing local demo account through the visible page, opened the StockMaster master editor for synthetic NAV-TEST-000, and observed the four-language tabs, supplier/specification fields and existing three-picture gallery. No master save was submitted. The executor temporarily became unavailable; command execution recovered, but cua_repl is still absent from the active tool catalog. The queued close/open-bulk operation returned tool unavailable and did not execute. Save/reopen, bulk correction, mobile and projected storefront visual acceptance remain pending. Release CI and production deployment have not run for this batch. Do not represent these pending checks as passed.
+
+Implemented locally: additive V16 product catalog JSON metadata; owned/versioned product profile read, suggestion, preview and reviewed save endpoints; four-language StockMaster editor including zh-TW, supplier, structured specification/model/packaging and existing gallery provenance; bulk review/preview/save UI; canonical product projection for linked recommendations with per-issue prices/periods/source facts retained. New recommendation profile creation populates canonical metadata; existing 142 profiles require explicit visible review/save and are not automatically backfilled. Legacy inventory edits are prevented from replacing canonical metadata. These behaviors still need meaningful integration and browser tests before release.
 
 Latest parent UI evidence: 152 recommendations now link to 142 private, unpriced product profiles, with ten explicit same-specification cross-issue reuses. Do not repeat backfill or reset their state. Deployment preservation uses the latest actual snapshot, not the historical zero-product baseline.
+
+## Parent's read-only UI sample after the small-batch delivery
+
+SKU 91487 has three master images, SKU 85699 has five, and SKU 95614 correctly has one. The first two match their verified complete online recommendation galleries. These three samples do not establish completeness for all 142 profiles, and they do not support a claim that all master images were lost. Reuse the current image-gallery model; do not create another gallery system or bulk reimport images.
+
+Observed gaps in the sampled master UI/data: no zh-TW language button or supplier field; category, brand and structured specification are blank where recommendation facts include known details such as women's / two-pack. Do not infer an unknown brand or specification. zh-CN/en-US product names contain translated text plus a parenthesized Japanese suffix copied as a composite name. Store plain translated names and a separate Japanese source name; compose the Japanese second display line only in presentation. Empty descriptions whose sources were already empty are not data loss and must remain unembellished. The existing fifteen official-image verification exceptions remain pending. Parent UI worker owns real-content verification and all normal UI corrections; engineering does not write this content through SQL/scripts/hidden endpoints.
 
 ## Existing / missing
 
@@ -18,4 +34,4 @@ Reuse Product and StockMaster. Add the missing metadata/editor/bulk preview-conf
 
 Add a persistent price-adjustment entity keyed by product/variant (when applicable), channel and currency, retaining regular selling price separately. Use explicit JST intervals, block overlapping scheduled/active adjustments with visible conflicts, and resolve effective prices server-side for both display and checkout. Keep order unit-price snapshots immutable and revalidate checkout changes. No reference amount or zero placeholder may activate sale; all current products remain private/unpriced until a normal UI business confirmation. No real data backfill from SQL/scripts/hidden endpoints.
 
-No schema, master-content migration, price adjustment, pricing confirmation or purchase activation for this next batch has been run. The Postmaster verification-mail flow is tracked separately in SELF-REGISTRATION-CUSTOMER-ONLY.md and must not delay delivery of the already tested urgent boundary fix.
+No production schema migration, master-content write, price adjustment, pricing confirmation or purchase activation for this next batch has been run. Independent price adjustments remain a separate later batch. The Postmaster verification-mail flow is tracked separately in SELF-REGISTRATION-CUSTOMER-ONLY.md and does not block product-master development.
