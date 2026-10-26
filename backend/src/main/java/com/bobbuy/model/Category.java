@@ -18,6 +18,12 @@ import java.util.Map;
 @Entity
 @Table(name = "bb_category")
 public class Category {
+    private Long merchantId;
+    public Long getMerchantId() { return merchantId; }
+    public void setMerchantId(Long value) { merchantId = value; }
+    @Column(length=100) private String tagKey;
+    public String getTagKey() { return tagKey; }
+    public void setTagKey(String value) { tagKey = value; }
     @Id
     private String id;
 

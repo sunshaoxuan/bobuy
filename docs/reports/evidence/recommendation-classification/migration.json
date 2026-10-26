@@ -1,0 +1,9 @@
+{
+  "scope": "Snapshot clone in existing shared local PostgreSQL only",
+  "checks": {
+    "originalFactsPreservedDefaultHiddenAndConstraint": "PASS",
+    "verifiedSnapshotRestore": "PASS"
+  },
+  "result": "PASS",
+  "temporaryDatabaseRemoved": true
+}

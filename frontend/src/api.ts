@@ -983,7 +983,17 @@ export type AiOnboardingSuggestion = {
 
 export type RecommendationSummary = { id: number; title: string; published: boolean; version: number; updatedAt: string; publishedAt?: string; publisherName?: string; coverImageUrl?: string };
 export type RecommendationFacts = { name: string; itemNumber?: string | null; referencePrice?: number | null; originalPrice?: number | null; discountAmount?: number | null; priceUnit?: string | null; offerStart?: string | null; offerEnd?: string | null; couponStart?: string | null; couponEnd?: string | null; offerNotes?: string | null };
-export type RecommendationItem = RecommendationFacts & { id: number; productId?: string | null; currency?: 'JPY'; imageUrl: string };
+export type RecommendationLabel = {id:string;name:Record<string,string>};
+export type RecommendationItem = RecommendationFacts & { id: number; productId?: string | null; currency?: 'JPY'; imageUrl: string; categoryIds?:string[]; categories?:RecommendationLabel[]; supplierId?:string|null; supplierName?:Record<string,string>|null; showSupplier?:boolean };
+export type RecommendationChoice = RecommendationLabel & {editable:boolean};
+export type RecommendationAssignment = {itemIds:number[];categoryIds:string[];categoryMode:'add'|'remove'|'replace';updateCategories:boolean;supplierId:string|null;updateSupplier:boolean;showSupplier:boolean;version:number};
+export const recommendationTaxonomyApi = {
+    options:()=>storeGet<{categories:RecommendationChoice[];suppliers:RecommendationChoice[]}>('/api/merchant/recommendation-taxonomy'),
+    category:(id:string|undefined,name:string,locale:string)=>id
+        ? putJson<RecommendationChoice,object>('/api/merchant/recommendation-taxonomy/categories/'+id,{name,locale})
+        : postJson<RecommendationChoice,object>('/api/merchant/recommendation-taxonomy/categories',{name,locale}),
+    assign:(id:number,input:RecommendationAssignment)=>putJson<RecommendationDetail,RecommendationAssignment>(recommendationBase+'/'+id+'/classification',input)
+};
 export type RecommendationDetail = { post: RecommendationSummary; body: string; items: RecommendationItem[] };
 const recommendationBase = '/api/merchant/recommendations';
 export const recommendationApi = {

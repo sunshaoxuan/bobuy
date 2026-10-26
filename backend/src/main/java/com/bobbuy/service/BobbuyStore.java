@@ -630,11 +630,13 @@ public class BobbuyStore {
     }
 
     public List<Category> listCategories() {
-        return categoryRepository.findAll();
+        Long owner=com.bobbuy.security.MerchantScope.current();
+        return categoryRepository.findAll().stream().filter(c->c.getMerchantId()==null||c.getMerchantId().equals(owner)).toList();
     }
 
     public Optional<Category> getCategory(String id) {
-        return categoryRepository.findById(id);
+        Long owner=com.bobbuy.security.MerchantScope.current();
+        return categoryRepository.findById(id).filter(c->c.getMerchantId()==null||c.getMerchantId().equals(owner));
     }
 
     public List<Supplier> listSuppliers() {
@@ -647,6 +649,8 @@ public class BobbuyStore {
 
     @Transactional
     public Supplier saveSupplier(Supplier supplier) {
+        if(com.bobbuy.security.MerchantScope.current()!=null && supplierRepository.existsById(supplier.getId()))
+            throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.classification");
         if (com.bobbuy.security.MerchantScope.current() != null) supplier.setMerchantId(com.bobbuy.security.MerchantScope.current());
         return supplierRepository.save(supplier);
     }

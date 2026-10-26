@@ -19,20 +19,22 @@ public class RecommendationService {
     private final ProductRepository products;
     private final UserRepository users;
     private final AuditLogService audit;
+    private final RecommendationTaxonomyService taxonomy;
 
     public RecommendationService(RecommendationPostRepository posts, RecommendationItemRepository items,
             RecommendationImageRepository images, ProductRepository products, UserRepository users,
-            AuditLogService audit) {
+            AuditLogService audit, RecommendationTaxonomyService taxonomy) {
         this.posts = posts; this.items = items; this.images = images; this.products = products;
-        this.users = users; this.audit = audit;
+        this.users = users; this.audit = audit; this.taxonomy = taxonomy;
     }
     public record Summary(Long id, String title, boolean published, long version, LocalDateTime updatedAt, java.time.Instant publishedAt, String publisherName, String coverImageUrl) {}
     public record Detail(Summary post, String body, List<RecommendationItem> items) {}
     public record Upload(Detail detail, boolean productCreated, boolean imageReused, boolean priceUpdated) {}
     private Summary summary(RecommendationPost post, String cover) { return new Summary(post.id, post.title, post.published, post.version, post.updatedAt, post.publishedAt, post.publisherName, cover); }
-    private Detail detail(RecommendationPost post) {
+    private Detail detail(RecommendationPost post) { return detail(post,false); }
+    private Detail detail(RecommendationPost post,boolean publicView) {
         var linked = items.findByPostIdOrderById(post.id);
-        return new Detail(summary(post, linked.isEmpty() ? null : linked.get(0).imageUrl), post.body, linked);
+        return new Detail(summary(post, linked.isEmpty() ? null : linked.get(0).imageUrl), post.body, taxonomy.display(linked,publicView));
     }
     private Long owner() {
         Long owner = MerchantScope.current();
@@ -67,11 +69,11 @@ public class RecommendationService {
             .collect(java.util.stream.Collectors.groupingBy(i -> i.postId));
         return selected.stream().map(post -> {
             var linked = grouped.getOrDefault(post.id, List.of());
-            return new Detail(summary(post, linked.isEmpty() ? null : linked.get(0).imageUrl), post.body, linked);
+            return new Detail(summary(post, linked.isEmpty() ? null : linked.get(0).imageUrl), post.body, taxonomy.display(linked,true));
         }).toList();
     }
     @Transactional(readOnly = true)
-    public Detail get(Long id, boolean publicView) { return detail(publicView ? posts.findByIdAndPublishedTrue(id).orElseThrow(RecommendationService::missing) : owned(id)); }
+    public Detail get(Long id, boolean publicView) { return detail(publicView ? posts.findByIdAndPublishedTrue(id).orElseThrow(RecommendationService::missing) : owned(id),publicView); }
     @Transactional
     public Detail create() { var post = new RecommendationPost(); post.merchantId = owner(); return detail(posts.saveAndFlush(post)); }
 
@@ -158,4 +160,26 @@ public class RecommendationService {
 
     @Transactional(readOnly = true)
     public RecommendationImage image(String id) { return images.findById(id).orElseThrow(RecommendationService::missing); }
+
+    @Transactional
+    public Detail classify(Long id,List<Long> itemIds,List<String> categoryIds,String mode,boolean updateCategories,
+            String supplierId,boolean updateSupplier,boolean showSupplier,long expectedVersion) {
+        lockOwner();var post=owned(id);editable(post);version(post,expectedVersion);
+        if(!updateCategories&&!updateSupplier)throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.classification");
+        var categories=new ArrayList<>(new LinkedHashSet<>(categoryIds));
+        String supplier=supplierId==null||supplierId.isBlank()?null:supplierId;
+        taxonomy.validate(updateCategories?categories:List.of(),updateSupplier?supplier:null,updateSupplier&&showSupplier);
+        var wanted=new HashSet<>(itemIds);
+        var selected=items.findByPostIdOrderById(id).stream().filter(i->wanted.contains(i.id)).toList();
+        if(selected.size()!=wanted.size())throw missing();
+        for(var item:selected) {
+            if(updateCategories) {
+                var merged=new LinkedHashSet<>(item.categoryIds);
+                switch(mode) {case "add" -> merged.addAll(categories);case "remove" -> merged.removeAll(categories);case "replace" -> {merged.clear();merged.addAll(categories);}default -> throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.classification");}
+                item.categoryIds=new ArrayList<>(merged);
+            }
+            if(updateSupplier) {item.supplierId=supplier;item.showSupplier=showSupplier;}
+        }
+        touch(post);return detail(post);
+    }
 }

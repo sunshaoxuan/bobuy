@@ -2,6 +2,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { I18nProvider } from '../i18n';
 import Recommendations from './Recommendations';
+vi.mock('../components/RecommendationClassification',()=>({default:()=>null}));
 import PublicRecommendations from './PublicRecommendations';
 const mocks = vi.hoisted(() => ({ get:vi.fn(),list:vi.fn(),feed:vi.fn(),create:vi.fn(),save:vi.fn(),publish:vi.fn(),write:vi.fn(),upload:vi.fn(),remove:vi.fn() }));
 vi.mock('../api', () => ({ recommendationApi:mocks }));

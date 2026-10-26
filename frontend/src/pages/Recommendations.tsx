@@ -4,6 +4,7 @@ import { ArrowLeftOutlined, CheckOutlined, CopyOutlined, DeleteOutlined, EditOut
 import { Link, useSearchParams } from 'react-router-dom';
 import { recommendationApi as api, type RecommendationDetail, type RecommendationSummary, type RecommendationFacts } from '../api';
 import { FactsForm, OfferInfo, factsError, parseBatch, factFields } from '../components/RecommendationFacts';
+import RecommendationClassification from '../components/RecommendationClassification';
 import { useI18n } from '../i18n';
 import '../recommendations.css';
 
@@ -31,6 +32,7 @@ export default function Recommendations() {
   const [writing, setWriting] = useState(false);
   const [batch, setBatch] = useState('');
   const [preview, setPreview] = useState(false);
+  const [classificationPending,setClassificationPending]=useState(false);
   const [editingItem, setEditingItem] = useState<number>();
   const [editFacts, setEditFacts] = useState<RecommendationFacts>({name:''});
   const urls = useRef(new Set<string>());
@@ -40,7 +42,7 @@ export default function Recommendations() {
   const published = detail?.post.published;
   const identity = (item: RecommendationDetail['items'][number]) => item.productId || 'recommendation:'+item.id;
   const products = [...new Map(detail?.items.map(item => [identity(item), item])).values()];
-  const pending = queue.some(item => item.status !== 'done') || editingItem !== undefined || !!batch.trim();
+  const pending = queue.some(item => item.status !== 'done') || editingItem !== undefined || !!batch.trim() || classificationPending;
   useEffect(() => () => { urls.current.forEach(url => URL.revokeObjectURL(url)); }, []);
   useEffect(() => {
     if (!dirty && !pending) return;
@@ -53,6 +55,7 @@ export default function Recommendations() {
     urls.current.forEach(url => URL.revokeObjectURL(url)); urls.current.clear();
     setQueue([]); setQueuePage(1); setItemPage(1); setGenerated(''); setPrompt('');
     setEditingItem(undefined); setBatch(''); setPreview(false);
+    setClassificationPending(false);
     setLoading(true); setError(''); setNotice(''); setDetail(undefined);
     const request = id ? api.get(id) : api.list(page);
     void request.then(value => {
@@ -156,6 +159,7 @@ export default function Recommendations() {
           <div className="rec-upload-actions"><Tooltip title={t(item.status === 'failed' ? 'rec.retry' : 'rec.register')}><Button disabled={busy || item.status === 'done'} icon={item.status === 'failed' ? <ReloadOutlined /> : <UploadOutlined />} aria-label={t(item.status === 'failed' ? 'rec.retry' : 'rec.register')} onClick={() => void upload([item])} /></Tooltip><Tooltip title={t('rec.remove')}><Button disabled={busy} icon={<DeleteOutlined />} aria-label={t('rec.remove')} onClick={() => { URL.revokeObjectURL(item.preview); urls.current.delete(item.preview); setQueue(q => q.filter(value => value.key !== item.key)); setQueuePage(1); }} /></Tooltip></div></div>)}</div>
         {queue.length > PAGE_SIZE && <Pagination size="small" current={queuePage} pageSize={PAGE_SIZE} total={queue.length} showSizeChanger={false} onChange={setQueuePage} />}
       </section>}
+      <RecommendationClassification detail={detail} onChanged={setDetail} onPendingChange={setClassificationPending} />
       <Button icon={<EyeOutlined />} onClick={() => setPreview(value => !value)}>{t('rec.draft_preview')}</Button>
       {preview && <section className="rec-draft-preview"><h2>{title}</h2><p style={{whiteSpace:'pre-wrap'}}>{body}</p><div className="rec-product-grid">{detail.items.map(item => <article className="rec-product" key={item.id}><img src={item.imageUrl} alt={item.name} /><div><h3>{item.name}</h3><small>{item.itemNumber}</small><OfferInfo facts={item} /></div></article>)}</div></section>}
       <section className="rec-linked"><div className="rec-section-heading"><h2>{t('rec.products')} <span>({detail.items.length})</span></h2></div><div className="rec-product-grid">{detail.items.slice((itemPage - 1) * 12, itemPage * 12).map(item => <article key={item.id} className="rec-product"><img src={item.imageUrl} alt={item.name} /><div><h3>{item.name}</h3><small>{item.itemNumber}</small><OfferInfo facts={item} />

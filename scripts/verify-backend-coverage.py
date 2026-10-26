@@ -3,7 +3,11 @@ from pathlib import Path
 import csv, json, shutil, subprocess, tempfile
 
 root = Path(__file__).resolve().parents[1]
-maven = shutil.which('mvnd.exe') or shutil.which('mvn') or shutil.which('mvn.cmd')
+maven = shutil.which('mvn') or shutil.which('mvn.cmd')
+if not maven:
+    daemon = shutil.which('mvnd.exe')
+    bundled = Path(daemon).parent.parent/'mvn/bin/mvn.cmd' if daemon else None
+    maven = str(bundled) if bundled and bundled.is_file() else daemon
 if not maven:
     raise SystemExit('Maven is required')
 with tempfile.TemporaryDirectory(prefix='bobuy-coverage-') as temporary:

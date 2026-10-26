@@ -60,7 +60,10 @@ class RestoredDatabaseValidationTest(unittest.TestCase):
                 calls = run.call_args_list
                 self.assertEqual(calls[0].args[:2], ('compose', 'stop'))
                 self.assertIn('core-service', calls[0].args)
-                self.assertIn('--clean --if-exists --exit-on-error', calls[1].args[-1])
+                self.assertIn('ON_ERROR_STOP=1', calls[1].args[-1])
+                self.assertIn("c.contype='f'", calls[1].kwargs['input'])
+                self.assertNotIn('DROP TABLE', calls[1].kwargs['input'])
+                self.assertIn('--clean --if-exists --exit-on-error', calls[2].args[-1])
 
 
 if __name__ == '__main__':

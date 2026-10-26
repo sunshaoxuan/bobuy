@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MediaGalleryItem {
+    // Preserve legacy optional image hashes without enabling inventory mutations.
+    private String sha256;
+    public String getSha256() { return sha256; }
+    public void setSha256(String value) { sha256 = value; }
     private String url;
     private MediaType type;
     private boolean visible = true;

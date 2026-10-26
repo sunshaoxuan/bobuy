@@ -21,6 +21,13 @@ public class RecommendationItem {
     public java.time.LocalDate couponStart;
     public java.time.LocalDate couponEnd;
     @Column(length = 2000) public String offerNotes;
+    @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.JSON)
+    @Column(nullable=false, columnDefinition="jsonb") public java.util.List<String> categoryIds = new java.util.ArrayList<>();
+    public String supplierId;
+    @Column(nullable=false) public boolean showSupplier;
+    public record Label(String id, java.util.Map<String,String> name) {}
+    @Transient public java.util.List<Label> categories = java.util.List.of();
+    @Transient public java.util.Map<String,String> supplierName;
     public String getCurrency() { return "JPY"; }
     @Column(nullable = false, length = 64) public String imageHash;
     @Column(nullable = false, length = 2048) public String imageUrl;

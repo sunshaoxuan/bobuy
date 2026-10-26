@@ -67,9 +67,31 @@ def maintenance_config(config):
 def restore_database(compose, dump):
     # All application writers stop before replacing the migrated database.
     run(*compose, 'stop', 'core-service', 'ai-service', 'im-service', 'auth-service', 'gateway-service')
+    # A pre-upgrade dump does not know foreign keys introduced by an upgrade.
+    # Remove dependency edges only while all writers are stopped; pg_restore
+    # recreates the complete original constraints from the verified snapshot.
+    run('docker', 'exec', '-i', 'bobuy-postgres', 'sh', '-c',
+        'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -q -v ON_ERROR_STOP=1',
+        input=DROP_FOREIGN_KEYS_SQL, text=True)
     with dump.open('rb') as source:
         run('docker', 'exec', '-i', 'bobuy-postgres', 'sh', '-c',
             'pg_restore --clean --if-exists --exit-on-error -U "$POSTGRES_USER" -d "$POSTGRES_DB"', stdin=source)
+
+
+DROP_FOREIGN_KEYS_SQL = """
+DO $restore$
+DECLARE constraint_row record;
+BEGIN
+    FOR constraint_row IN
+        SELECT n.nspname, t.relname, c.conname FROM pg_constraint c
+        JOIN pg_class t ON t.oid=c.conrelid JOIN pg_namespace n ON n.oid=t.relnamespace
+        WHERE c.contype='f' AND n.nspname='public'
+    LOOP
+        EXECUTE format('ALTER TABLE %I.%I DROP CONSTRAINT %I',
+            constraint_row.nspname, constraint_row.relname, constraint_row.conname);
+    END LOOP;
+END $restore$;
+"""
 
 
 def main():
@@ -168,6 +190,7 @@ def main():
             if not backup_verified:
                 raise RuntimeError('Refusing database rollback without a verified backup')
             restore_database(compose, backup / 'database.dump')
+            validate_restored_database(expected_database, database_fingerprint())
         Path('/etc/bobuy.env').write_text(old_env)
         shutil.copyfile(backup / 'infra/nginx/bobuy.conf', root / 'infra/nginx/bobuy.conf')
         run(*compose, 'up', '-d', '--no-deps', *applications)
