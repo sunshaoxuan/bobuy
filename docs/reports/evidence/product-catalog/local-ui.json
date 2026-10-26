@@ -1,0 +1,43 @@
+{
+  "scope": "Existing shared LOCAL synthetic NAV-TEST-000; all saves through visible UI, no production content or API-write setup",
+  "checks": {
+    "visibleBulkInvalidCorrectionPreviewReviewedSave": "PASS",
+    "reopenFourLanguagesStructuredFieldsAndThreeImagesDesktopMobile": "PASS",
+    "linkedRecommendationProjectsReviewedMaster": "PASS"
+  },
+  "errors": [],
+  "writes": [
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "host": "127.0.0.1"
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/product-catalog/preview",
+      "host": "127.0.0.1"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/merchant/product-catalog",
+      "host": "127.0.0.1"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "host": "127.0.0.1"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "host": "127.0.0.1"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "host": "127.0.0.1"
+    }
+  ],
+  "productId": "13156667-be11-3f6c-aca5-9de0f857b9d6",
+  "result": "PASS"
+}
