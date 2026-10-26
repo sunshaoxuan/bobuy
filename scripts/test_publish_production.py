@@ -56,14 +56,16 @@ class RestoredDatabaseValidationTest(unittest.TestCase):
             dump = Path(temp) / 'snapshot.dump'
             dump.write_bytes(b'test snapshot')
             with patch.object(publisher, 'run') as run:
-                publisher.restore_database(['compose'], dump)
+                publisher.restore_database(['compose'], dump,{'flyway_schema_history':'snapshot','bb_product':'snapshot'})
                 calls = run.call_args_list
                 self.assertEqual(calls[0].args[:2], ('compose', 'stop'))
                 self.assertIn('core-service', calls[0].args)
                 self.assertIn('ON_ERROR_STOP=1', calls[1].args[-1])
                 self.assertIn("c.contype='f'", calls[1].kwargs['input'])
                 self.assertNotIn('DROP TABLE', calls[1].kwargs['input'])
-                self.assertIn('--clean --if-exists --exit-on-error', calls[2].args[-1])
+                self.assertIn('DROP TABLE public.%I CASCADE',calls[2].kwargs['input'])
+                self.assertIn("'bb_product'",calls[2].kwargs['input'])
+                self.assertIn('--clean --if-exists --exit-on-error', calls[3].args[-1])
 
 
 
@@ -82,6 +84,14 @@ class AdditiveContentMigrationTests(unittest.TestCase):
             with self.assertRaises(ValueError):publisher.content_projection_query(table,columns)
         before={'bb_product':{'columns':['id','base_price'],'fingerprint':'1:abc'}}
         with self.assertRaises(RuntimeError):publisher.validate_restored_database(before,{'bb_product':{'columns':['id','base_price'],'fingerprint':'1:def'}})
+
+class RollbackAddedTableInventoryTest(unittest.TestCase):
+    def test_missing_inventory_fails_before_stopping_writers(self):
+        with patch.object(publisher,'run') as run:
+            for snapshot in [{},{'columns':'x'},{'flyway_schema_history':'x'},{'flyway_schema_history':'x','malicious;name':'x'}]:
+                with self.assertRaises(ValueError):publisher.restore_database(['compose'],Path('unused.dump'),snapshot)
+            run.assert_not_called()
+
 
 if __name__ == '__main__':
     unittest.main()

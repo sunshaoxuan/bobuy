@@ -90,7 +90,20 @@ def maintenance_config(config):
     return config.replace(upstream, 'location /api {\n        default_type application/json;\n        return 503 \'{"message":"Release maintenance in progress"}\';\n    }')
 
 
-def restore_database(compose, dump):
+def cleanup_added_tables_sql(snapshot):
+    tables = sorted(set(snapshot) - {'columns','indexes','constraints','sequences'})
+    if 'flyway_schema_history' not in tables or len(tables)<2 or any(not re.fullmatch(r'[a-zA-Z_][a-zA-Z0-9_]*',name) for name in tables):
+        raise ValueError('Verified pre-upgrade table inventory is required for rollback')
+    names=','.join("'"+name+"'" for name in tables)
+    return """DO $cleanup$ DECLARE added record; BEGIN
+    FOR added IN SELECT tablename FROM pg_tables WHERE schemaname='public'
+      AND NOT (tablename=ANY(ARRAY["""+names+"""]::text[]))
+    LOOP EXECUTE format('DROP TABLE public.%I CASCADE',added.tablename); END LOOP;
+    END $cleanup$;"""
+
+
+def restore_database(compose, dump, snapshot):
+    added_table_cleanup = cleanup_added_tables_sql(snapshot)
     # All application writers stop before replacing the migrated database.
     run(*compose, 'stop', 'core-service', 'ai-service', 'im-service', 'auth-service', 'gateway-service')
     # A pre-upgrade dump does not know foreign keys introduced by an upgrade.
@@ -99,6 +112,12 @@ def restore_database(compose, dump):
     run('docker', 'exec', '-i', 'bobuy-postgres', 'sh', '-c',
         'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -q -v ON_ERROR_STOP=1',
         input=DROP_FOREIGN_KEYS_SQL, text=True)
+    # A pre-upgrade archive cannot remove tables created by the failed migration.
+    # Remove only tables absent from the verified stopped-writer inventory; all
+    # writers are stopped and the complete snapshot will restore old objects.
+    run('docker','exec','-i','bobuy-postgres','sh','-c',
+        'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -q -v ON_ERROR_STOP=1',
+        input=added_table_cleanup,text=True)
     with dump.open('rb') as source:
         run('docker', 'exec', '-i', 'bobuy-postgres', 'sh', '-c',
             'pg_restore --clean --if-exists --exit-on-error -U "$POSTGRES_USER" -d "$POSTGRES_DB"', stdin=source)
@@ -220,7 +239,7 @@ def main():
         if database_upgrade_started:
             if not backup_verified:
                 raise RuntimeError('Refusing database rollback without a verified backup')
-            restore_database(compose, backup / 'database.dump')
+            restore_database(compose, backup / 'database.dump', expected_database)
             validate_restored_database(expected_database, database_fingerprint())
         Path('/etc/bobuy.env').write_text(old_env)
         shutil.copyfile(backup / 'infra/nginx/bobuy.conf', root / 'infra/nginx/bobuy.conf')
