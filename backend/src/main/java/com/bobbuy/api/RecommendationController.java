@@ -23,7 +23,8 @@ public class RecommendationController {
     }
     private final RecommendationService service;
     private final RecommendationSourceImage sourceImages;
-    public RecommendationController(RecommendationService service, RecommendationSourceImage sourceImages) { this.service = service; this.sourceImages = sourceImages; }
+    private final ProductSaleService currencyService;
+    public RecommendationController(RecommendationService service, RecommendationSourceImage sourceImages,ProductSaleService currencyService) { this.service = service; this.sourceImages = sourceImages; this.currencyService=currencyService; }
     public record ItemEdit(@NotNull @Valid RecommendationFacts facts, @Min(0) long version) {}
     public record SourceImage(@NotNull @Valid RecommendationFacts facts, @NotBlank @Size(max=2048) String imageUrl, @Min(0) long version) {}
     public record Edit(@NotNull @Size(max = 200) String title, @NotNull @Size(max = 100000) String body, @Min(0) long version) {}
@@ -31,6 +32,26 @@ public class RecommendationController {
     public record CatalogLink(@NotEmpty @Size(max=500) List<@NotNull Long> itemIds, @Size(max=255) String productId, @Min(0) long version) {}
     @PutMapping("/api/merchant/recommendations/{id}/catalog")
     public ApiResponse<?> catalog(@PathVariable Long id,@Valid @RequestBody CatalogLink input){return ApiResponse.success(service.catalog(id,input.itemIds(),input.productId(),input.version()));}
+    @PostMapping(value="/api/merchant/recommendations/{id}/items/{itemId}/gallery",consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ApiResponse<?> picture(@PathVariable Long id,@PathVariable Long itemId,@RequestParam long version,
+        @RequestParam String sourceUrl,@RequestParam String assetKey,@RequestParam(defaultValue="") String label,
+        @RequestParam(required=false) String itemNumber,@RequestParam boolean verified,@RequestParam MultipartFile file){
+        return ApiResponse.success(service.picture(id,itemId,version,RecommendationImageValidator.validate(file),sourceUrl,assetKey,label,itemNumber,verified));
+    }
+    public record Gallery(@NotNull @Size(max=100) List<@NotBlank String> orderedIds,@Min(0) long version){}
+    @PutMapping("/api/merchant/recommendations/{id}/items/{itemId}/gallery")
+    public ApiResponse<?> gallery(@PathVariable Long id,@PathVariable Long itemId,@Valid @RequestBody Gallery input){return ApiResponse.success(service.gallery(id,itemId,input.version(),input.orderedIds()));}
+    public record Localizations(@NotEmpty @Size(max=200) @Valid List<RecommendationService.Localization> rows,@Min(0) long version,boolean reviewed) {}
+    @PutMapping("/api/merchant/recommendations/{id}/localizations")
+    public ApiResponse<?> localizations(@PathVariable Long id,@Valid @RequestBody Localizations input){
+        if(!input.reviewed())throw new ApiException(ErrorCode.INVALID_REQUEST,"translation.review_required");
+        return ApiResponse.success(service.localize(id,input.rows(),input.version()));
+    }
+    public record Sales(@NotEmpty @Size(max=500) @Valid List<ProductSaleService.Review> reviews,@Min(0) long version,boolean confirmedPreorder) {}
+    @PutMapping("/api/merchant/recommendations/{id}/sales")
+    public ApiResponse<?> sales(@PathVariable Long id,@Valid @RequestBody Sales input){return ApiResponse.success(service.reviewSales(id,input.reviews(),input.version(),input.confirmedPreorder()));}
+    @GetMapping({"/api/storefront/currencies","/api/merchant/currencies"})
+    public ApiResponse<?> currencies(){return ApiResponse.success(currencyService.currencies());}
     @GetMapping("/api/merchant/recommendations")
     public ApiResponse<?> list(@RequestParam(defaultValue = "0") @Min(0) int page) { return ApiResponse.success(service.list(page)); }
     @PostMapping("/api/merchant/recommendations")

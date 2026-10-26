@@ -18,7 +18,7 @@ export function FactsForm({facts, onChange, disabled}: {facts: RecommendationFac
   return <div className="rec-facts-form">{factFields.map(key => <label key={key}>{t('rec.fact.'+key)}{prices.includes(key) ? <InputNumber value={facts[key] as number | null} min={0} max={999999999999.99} precision={2} disabled={disabled} onChange={value => onChange({...facts,[key]:value})} /> : <Input type={dates.includes(key) ? 'date' : 'text'} value={facts[key] ?? ''} maxLength={key === 'offerNotes' ? 2000 : key === 'name' ? 200 : key === 'priceUnit' ? 100 : 255} disabled={disabled} onChange={event => onChange({...facts,[key]:event.target.value || null})} />}</label>)}</div>;
 }
 export function japanDate(now = new Date()) { return new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(now); }
-export function OfferInfo({facts,today=japanDate()}: {facts: RecommendationFacts; today?: string}) {
+export function OfferInfo({facts,today=japanDate(),compact=false}: {facts: RecommendationFacts; today?: string;compact?:boolean}) {
   const {t,locale} = useI18n();
   const period = (start?: string | null,end?: string | null) => start && end ? start+' – '+end : start ? t('rec.from')+' '+start : end ? t('rec.until')+' '+end : t('rec.period_unknown');
   return <div className="rec-offer-info">
@@ -28,7 +28,7 @@ export function OfferInfo({facts,today=japanDate()}: {facts: RecommendationFacts
     <div className="rec-offer-period">{t('rec.offer_period')}: {period(facts.offerStart,facts.offerEnd)} {(facts.offerStart || facts.offerEnd) && <small>{t('rec.japan_dates')}</small>}</div>
     {facts.offerEnd && today > facts.offerEnd ? <Tag color="default">{t('rec.expired')}</Tag> : facts.offerStart && today < facts.offerStart ? <Tag color="blue">{t('rec.upcoming')}</Tag> : null}
     {(facts.couponStart || facts.couponEnd) && <div>{t('rec.coupon_period')}: {period(facts.couponStart,facts.couponEnd)} <small>{t('rec.japan_dates')}</small></div>}
-    {facts.offerNotes && <p>{facts.offerNotes}</p>}
+    {!compact&&facts.offerNotes && <p>{facts.offerNotes}</p>}
   </div>;
 }
 export type BatchFact = RecommendationFacts & {imageUrl?: string; fileName?: string; currency?: 'JPY'};

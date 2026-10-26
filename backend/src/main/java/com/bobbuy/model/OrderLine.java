@@ -8,10 +8,19 @@ public class OrderLine {
     private Long id; // 物理主键
     private Long headerId; // 头关联 ID
     private String skuId; // 商品唯一标识
+    private java.util.Map<String,String> names=new java.util.HashMap<>();
+    public java.util.Map<String,String> getNames(){return names;}
+    public void setNames(java.util.Map<String,String> value){names=value==null?new java.util.HashMap<>():new java.util.HashMap<>(value);}
     private String itemName; // 商品名称 (冗余用于展现)
     private String spec; // 规格区分 (用于隔离权重品)
     private int quantity; // 数量
     private int purchasedQuantity; // 已采购数量
+    private String currency="JPY";
+    public String getCurrency(){return currency;}
+    public void setCurrency(String value){currency=value;}
+    private long priceRevision;
+    public long getPriceRevision(){return priceRevision;}
+    public void setPriceRevision(long value){priceRevision=value;}
     private double unitPrice; // 单价
     private boolean pickingConfirmed; // 拣货确认
 
@@ -111,6 +120,6 @@ public class OrderLine {
         boolean skuMatch = this.skuId != null && this.skuId.equals(other.skuId);
         boolean specMatch = (this.spec == null && other.spec == null) ||
                 (this.spec != null && this.spec.equals(other.spec));
-        return skuMatch && specMatch;
+        return skuMatch && specMatch && java.util.Objects.equals(currency,other.currency) && Double.compare(unitPrice,other.unitPrice)==0;
     }
 }

@@ -10,8 +10,25 @@ public class RecommendationItem {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) public Long id;
     @Column(nullable = false) public Long postId;
     public String productId;
+    public record Picture(String id,String url,String hash,String sourceUrl,String assetKey,String label,java.time.Instant verifiedAt) {}
+    @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.JSON)
+    @Column(nullable=false,columnDefinition="jsonb") public java.util.List<Picture> gallery=new java.util.ArrayList<>();
+
     @Column(nullable = false, length = 200) public String name;
     public String itemNumber;
+    @Column(length=1000) public String specification;
+    @Column(length=8000) public String description;
+    public record Text(String name,String specification,String description,String offerNotes) {}
+    @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.JSON)
+    @Column(nullable=false,columnDefinition="jsonb") public java.util.Map<String,Text> translations=new java.util.HashMap<>();
+    public String translatedSource;
+    @Transient public String getTranslationSource(){
+        try {return java.util.HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(
+            String.join("\n",java.util.Objects.toString(name,""),java.util.Objects.toString(priceUnit,""),java.util.Objects.toString(offerNotes,""),java.util.Objects.toString(specification,""),java.util.Objects.toString(description,"")).getBytes(java.nio.charset.StandardCharsets.UTF_8)));}
+        catch(java.security.NoSuchAlgorithmException e){throw new IllegalStateException(e);}
+    }
+    @Transient public String getTranslationStatus(){return translations==null||translations.isEmpty()?"MISSING":getTranslationSource().equals(translatedSource)?"REVIEWED":"STALE";}
+
     @Column(precision = 14, scale = 2) public BigDecimal referencePrice;
     @Column(precision = 14, scale = 2) public BigDecimal originalPrice;
     @Column(precision = 14, scale = 2) public BigDecimal discountAmount;

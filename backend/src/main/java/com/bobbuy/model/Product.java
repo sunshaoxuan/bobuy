@@ -41,6 +41,22 @@ public class Product {
 
     private String brand;
     private double basePrice;
+    @jakarta.persistence.Version
+    @com.fasterxml.jackson.annotation.JsonProperty(access=com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY)
+    private Long recordVersion;
+    public Long getRecordVersion(){return recordVersion;}
+    public void setRecordVersion(Long value){recordVersion=value;}
+
+    @com.fasterxml.jackson.annotation.JsonProperty(access=com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY)
+    private String currency="JPY";
+    @JdbcTypeCode(SqlTypes.JSON) @Column(columnDefinition="jsonb")
+    @com.fasterxml.jackson.annotation.JsonProperty(access=com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY)
+    private ProductSale sale;
+    public String getCurrency(){return currency;}
+    public void setCurrency(String value){currency=value;}
+    public ProductSale getSale(){return sale;}
+    public void setSale(ProductSale value){sale=value;}
+
     private Double weight;
     private Double volume;
 

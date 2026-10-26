@@ -3,7 +3,8 @@ import {Alert,Button,Popconfirm,Select,Table,Tag} from 'antd';
 import {Link} from 'react-router-dom';
 import {api,recommendationApi,type RecommendationDetail} from '../api';
 import {localizedContent,useI18n} from '../i18n';
-type CatalogProduct={id:string;name:Record<string,string>;itemNumber?:string;visibilityStatus?:string;attributes?:Record<string,unknown>};
+import RecommendationSales,{type SaleProduct} from './RecommendationSales';
+type CatalogProduct=SaleProduct & {id:string;name:Record<string,string>;itemNumber?:string;visibilityStatus?:string;attributes?:Record<string,unknown>};
 export default function RecommendationCatalog({detail,onChange}:{detail:RecommendationDetail;onChange:(detail:RecommendationDetail)=>void}) {
  const {t,locale}=useI18n();const [products,setProducts]=useState<CatalogProduct[]>([]),[busy,setBusy]=useState(false),[error,setError]=useState('');
  const [choices,setChoices]=useState<Record<number,string>>({});
@@ -14,16 +15,17 @@ export default function RecommendationCatalog({detail,onChange}:{detail:Recommen
  async function link(itemIds:number[],productId?:string){setBusy(true);setError('');try {onChange(await recommendationApi.catalog(detail.post.id,{itemIds,productId,version:detail.post.version}));await load();}catch(error){setError((error as Error).message);}finally{setBusy(false);}}
  return <section className="rec-catalog-link"><h2>{t('catalog.title')}</h2><p>{t('catalog.hint')}</p>
   {error&&<Alert type="error" message={error}/>}
-  <Popconfirm title={t('catalog.confirm_build')} onConfirm={()=>void link(missing.map(item=>item.id))} disabled={!missing.length||busy||detail.post.published}>
-   <Button loading={busy} disabled={!missing.length||busy||detail.post.published}>{t('catalog.build_missing',{count:missing.length})}</Button>
+  <Popconfirm title={t('catalog.confirm_build')} onConfirm={()=>void link(missing.map(item=>item.id))} disabled={!missing.length||busy}>
+   <Button loading={busy} disabled={!missing.length||busy}>{t('catalog.build_missing',{count:missing.length})}</Button>
   </Popconfirm><Link className="rec-stock-link" to="/admin/stock-master">{t('nav.stock_master')}</Link>
-  <Alert type="info" message={t('catalog.price_pending')} showIcon/>
+
   <Table rowKey="id" size="small" dataSource={detail.items} scroll={{x:700}} pagination={{pageSize:12,showSizeChanger:false}} columns={[
    {title:t('rec.name'),render:(_,item)=><><strong>{item.name}</strong><small>{item.itemNumber||t('rec.not_stated')}</small></>},
    {title:t('catalog.profile'),render:(_,item)=>{const product=available.find(value=>value.id===item.productId);return item.productId?<><Tag>{t('catalog.linked')}</Tag><small>{product?localizedContent(product.name,locale):item.productId}</small></>:<Tag>{t('catalog.not_linked')}</Tag>;}},
-   {title:t('catalog.reuse'),render:(_,item)=><div className="rec-catalog-choice"><Select aria-label={t('catalog.reuse')+': '+item.name} showSearch optionFilterProp="label" value={choices[item.id]} placeholder={t('catalog.select_profile')} disabled={busy||detail.post.published}
+   {title:t('catalog.reuse'),render:(_,item)=><div className="rec-catalog-choice"><Select aria-label={t('catalog.reuse')+': '+item.name} showSearch optionFilterProp="label" value={choices[item.id]} placeholder={t('catalog.select_profile')} disabled={busy}
      onChange={value=>setChoices(previous=>({...previous,[item.id]:value}))} options={available.map(product=>({value:product.id,label:[product.itemNumber,localizedContent(product.name,locale),product.attributes?.recommendationSourceIssue?t('catalog.source_issue',{id:String(product.attributes.recommendationSourceIssue)}):undefined,product.id.slice(-8)].filter(Boolean).join(' · ')}))}/>
-     <Popconfirm title={t('catalog.confirm_link')} onConfirm={()=>void link([item.id],choices[item.id])} disabled={!choices[item.id]||busy||detail.post.published}><Button disabled={!choices[item.id]||busy||detail.post.published}>{t('catalog.link')}</Button></Popconfirm></div>}
+     <Popconfirm title={t('catalog.confirm_link')} onConfirm={()=>void link([item.id],choices[item.id])} disabled={!choices[item.id]||busy}><Button disabled={!choices[item.id]||busy}>{t('catalog.link')}</Button></Popconfirm></div>}
   ]}/>
+ <RecommendationSales detail={detail} products={products} onChange={onChange} onReload={load}/>
  </section>;
 }

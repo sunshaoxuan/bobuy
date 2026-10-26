@@ -2,11 +2,12 @@ import { Alert, Button, Card, Descriptions, Empty, Grid, Modal, Select, Space, S
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { api, type CustomerBalanceLedgerEntry, type Trip } from '../api';
 import { useI18n } from '../i18n';
+import {formatMoney} from '../currency';
 
 const { Title, Text } = Typography;
 
 export default function ClientBilling({node}:{node?:number}) {
-  const { t } = useI18n();
+  const { t,locale } = useI18n();
   const screens = Grid.useBreakpoint();
   const isMobile = screens.md !== true;
   const [trips, setTrips] = useState<Trip[]>([]);
@@ -18,7 +19,7 @@ export default function ClientBilling({node}:{node?:number}) {
   const generation=useRef(0);
 
   const formatAmount = (amount: number) =>
-    new Intl.NumberFormat(undefined, { style: 'currency', currency: 'JPY' }).format(amount);
+    formatMoney(amount,'JPY',locale);
 
   const refreshEntries = async (tripId: number) => {
     const request=generation.current;

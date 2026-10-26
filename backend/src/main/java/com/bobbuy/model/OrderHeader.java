@@ -40,6 +40,10 @@ public class OrderHeader {
     private PaymentMethod paymentMethod; // 支付方式
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus; // 支付状态
+    @com.fasterxml.jackson.annotation.JsonProperty(access=com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY)
+    private String currency="JPY";
+    public String getCurrency(){return currency;}
+    public void setCurrency(String value){currency=value;}
     private double totalAmount; // 冗余汇总金额
     private LocalDateTime receiptConfirmedAt;
     private String receiptConfirmedBy;

@@ -15,6 +15,7 @@ import '../product-feed.css';
 import StoreNavigation from '../components/StoreNavigation';
 import {scopedPath,selectedNode} from '../storeNavigation';
 import '../browse.css';
+import {formatMoney} from '../currency';
 
 const ClientOrders = lazy(() => import('./ClientOrders'));
 const PublicRecommendations = lazy(() => import('./PublicRecommendations'));
@@ -90,7 +91,7 @@ function EmailVerification() {
 export default function Storefront() {
   const { t, locale } = useI18n();
   const text = (value: Record<string,string>) => localizedContent(value,locale);
-  const money = (value: number) => new Intl.NumberFormat(locale, { style:'currency', currency:'JPY', currencyDisplay:'narrowSymbol', maximumFractionDigits:2 }).format(value);
+  const money = (value: number,currency='JPY') => formatMoney(value,currency,locale);
   const { user, isAuthenticated, isCustomer, logout } = useUserRole();
   const navigate = useNavigate();
   const location = useLocation();
@@ -111,7 +112,7 @@ export default function Storefront() {
   const [draftQuantity, setDraftQuantity] = useState(1);
   const [tripPicker, setTripPicker] = useState(false);
   const [busy, setBusy] = useState(false);
-  const [receipt, setReceipt] = useState<{ orderId: number; total: number }>();
+  const [receipt, setReceipt] = useState<{ orderId: number; total: number;currency?:string }>();
   async function load() {
     setLoading(true); setError('');
     try {
@@ -144,9 +145,18 @@ export default function Storefront() {
   const available = products.filter(p => p.merchantId === (node??viewTrip?.merchantId));
   const shown = available.filter(p => `${text(p.name)} ${p.brand} ${text(p.description)}`.toLowerCase().includes(search.toLowerCase()));
   const canBuyRecommendation=(product:StoreProduct)=>product.recommendationReady===true&&trips.some(journey=>journey.merchantId===product.merchantId);
-  const total = cartEntries.reduce((sum, [id, qty]) => sum + (products.find(p => p.id === id)?.price || 0) * qty, 0);
-  const invalidCart = !trip || cartEntries.some(([id]) => !products.some(p => p.id === id && p.merchantId === trip.merchantId));
-  function change(id: string, value: number) { setCart(prior => changeQuantity(prior, id, value)); setReceipt(undefined); }
+  const total = cartEntries.reduce((sum,[id,qty])=>sum+(cart.quotes?.[id]?.price??products.find(p=>p.id===id)?.price??0)*qty,0);
+  const invalidCart = !trip || cartEntries.some(([id]) => !products.some(p => p.id === id && p.merchantId === trip.merchantId && (p.currency??'JPY')===(cart.currency??'JPY') && (!(p.priceRevision??0)||(cart.quotes?.[id]?.revision===p.priceRevision&&cart.quotes?.[id]?.price===p.price&&cart.quotes?.[id]?.currency===p.currency))));
+  function change(id:string,value:number){const product=products.find(p=>p.id===id);if(!product&&value>0)return;
+    setCart(prior=>{const next=changeQuantity(prior,id,value);const quotes={...prior.quotes};if(value<=0)delete quotes[id];else quotes[id]={price:product!.price,currency:product!.currency??'JPY',revision:product!.priceRevision??0};return {...next,currency:product?.currency??prior.currency??'JPY',quotes};});setReceipt(undefined);
+  }
+  function addRecommendation(product:StoreProduct){
+    if(!canBuyRecommendation(product))return;
+    if(product.merchantId!==trip?.merchantId){setTripPicker(true);return;}
+    setCart(prior=>{if(Object.keys(prior.items).length&&(prior.currency??'JPY')!==(product.currency??'JPY'))return prior;
+      const next=changeQuantity(prior,product.id,(prior.items[product.id]??0)+1);
+      return {...next,currency:product.currency??'JPY',quotes:{...prior.quotes,[product.id]:{price:product.price,currency:product.currency??'JPY',revision:product.priceRevision??0}}};});setReceipt(undefined);
+  }
   function configureQuantity(product: StoreProduct) {
     if (product.merchantId !== trip?.merchantId) { setDetail(undefined); setTripPicker(true); return; }
     setDraftQuantity(cart.items[product.id] || 1); setQuantityProduct(product); setDetail(undefined);
@@ -166,7 +176,7 @@ export default function Storefront() {
     if (!trip || invalidCart || !quantity) return;
     setBusy(true); setError('');
     try {
-      const result = await storefrontApi.checkout({ requestId: cart.requestId, tripId: trip.id, items: cartEntries.map(([productId, qty]) => ({ productId, quantity: qty })) });
+      const result = await storefrontApi.checkout({ requestId: cart.requestId, tripId: trip.id,currency:cart.currency??'JPY', items: cartEntries.map(([productId, qty]) => ({ productId, quantity: qty,priceRevision:cart.quotes?.[productId]?.revision,currency:cart.quotes?.[productId]?.currency })) });
       setReceipt(result); setCart({ ...emptyCart(), tripId: trip.id });
     } catch (e) { setError((e as Error).message); } finally { setBusy(false); }
   }
@@ -180,13 +190,13 @@ export default function Storefront() {
   const basket = <section className="basket"><div className="section-heading"><h1>{t('store.cart')} <small>{t('store.item_count',{count:quantity})}</small></h1><Link to="/">{t('store.continue')} <ArrowRightOutlined /></Link></div>
     {quantity === 0 ? <Empty description={t('store.cart_empty')}><Link to="/"><Button type="primary">{t('store.browse')}</Button></Link></Empty> : <>
       {trip && <div className="basket-trip"><CalendarOutlined /><div><strong>{trip.deliveryArea}</strong><p>{trip.deliveryDate} · {trip.merchantName}</p></div></div>}
-      {invalidCart && <Alert type="warning" message={t('store.cart_invalid')} />}
+      {invalidCart && <Alert type="warning" message={t('store.cart_invalid')} action={<Button onClick={()=>{setCart(prior=>({...prior,requestId:crypto.randomUUID(),currency:'JPY',quotes:Object.fromEntries(products.filter(p=>prior.items[p.id]).map(p=>[p.id,{price:p.price,currency:p.currency??'JPY',revision:p.priceRevision??0}]))}));}}>{t('sale.refresh_cart')}</Button>}/>}
       <div className="basket-lines">{cartEntries.map(([id, qty]) => {
         const product = products.find(p => p.id === id);
-        return product ? <article className="basket-line" key={id}><div className="basket-photo">{image(product)}</div><div><h2>{text(product.name)}</h2><p>{money(product.price)}</p>{stepper(product, qty)}</div><strong>{money(product.price * qty)}</strong></article> :
+        return product ? <article className="basket-line" key={id}><div className="basket-photo">{image(product)}</div><div><h2>{text(product.name)}</h2><p>{money(cart.quotes?.[id]?.price??product.price,product.currency)} / {product.saleUnit}</p>{stepper(product, qty)}</div><strong>{money((cart.quotes?.[id]?.price??product.price)*qty,product.currency)}</strong></article> :
           <article key={id} className="basket-line"><span>{t('store.unavailable')}</span><Button icon={<DeleteOutlined />} onClick={() => change(id, 0)}>{t('store.remove')}</Button></article>;
       })}</div>
-      <div className="basket-total"><span>{t('store.total')} <small>JPY</small></span><strong>{money(total)}</strong></div>
+      <div className="basket-total"><span>{t('store.total')} <small>{cart.currency??'JPY'}</small></span><strong>{money(total,cart.currency)}</strong></div>
       <p className="muted">{t('store.payment_hint')}</p>
       {location.pathname !== '/checkout' && <Button block size="large" type="primary" disabled={invalidCart} onClick={() => navigate('/checkout')}>{t('store.checkout')} <ArrowRightOutlined /></Button>}
     </>}
@@ -216,8 +226,8 @@ export default function Storefront() {
         <Route path="checkout" element={<div className="checkout-layout">{receipt ? <section className="order-success"><CheckCircleOutlined /><h1>{t('store.submitted')}</h1><p>{t('store.order_number',{id:receipt.orderId})} · {money(receipt.total)}</p><Tag color="gold">{t('store.pending')}</Tag><div className="action-row"><Link to="/client/orders"><Button type="primary">{t('store.view_order')}</Button></Link><Link to="/"><Button>{t('store.continue')}</Button></Link></div></section> : <>{basket}{quantity > 0 && <section className="checkout-account">{!isAuthenticated ? <AccountForm checkout afterLogin={() => {}} /> : !user?.roles.includes('CUSTOMER') ? <Alert type="warning" message={t('store.customer_only')} action={<Button onClick={() => void logout()}>{t('store.switch_account')}</Button>} /> : <><h2>{t('store.confirm')}</h2><p>{user.name} · {user.email}</p>{!user.emailVerified && <Alert type="info" message={t('store.unverified_hint')} />}<Button type="primary" size="large" block loading={busy} disabled={invalidCart} onClick={() => void checkout()}>{t('store.submit')} · {money(total)}</Button><Link to="/account">{t('store.verify')}</Link></>}</section>}</>}</div>} />
         <Route path="login" element={isAuthenticated ? <Navigate to="/account" replace /> : <AccountForm afterLogin={() => navigate('/account')} />} />
         <Route path="account" element={isAuthenticated ? <section className="account-page"><h1>{t('store.account')}</h1><p>{user?.name}</p><EmailVerification /><div className="account-links"><Link to="/client/orders">{t('store.orders')} <ArrowRightOutlined /></Link><Link to="/client/billing">{t('store.billing')} <ArrowRightOutlined /></Link>{(user?.roles.includes('AGENT') || user?.platformAdmin) && <Link to="/admin">{t('store.admin')} <ArrowRightOutlined /></Link>}<Button icon={<LogoutOutlined />} onClick={() => void logout()}>{t('store.logout')}</Button></div></section> : <AccountForm afterLogin={() => {}} />} />
-        <Route path="recommendations" element={<PublicRecommendations query={search} products={products} quantities={cart.items} onDetail={setDetail} onAdd={configureQuantity} canBuy={canBuyRecommendation} />} />
-        <Route path="recommendations/:id" element={<PublicRecommendations query={search} products={products} quantities={cart.items} onDetail={setDetail} onAdd={configureQuantity} canBuy={canBuyRecommendation} />} />
+        <Route path="recommendations" element={<PublicRecommendations query={search} products={products} quantities={cart.items} onDetail={setDetail} onAdd={addRecommendation} canBuy={canBuyRecommendation} />} />
+        <Route path="recommendations/:id" element={<PublicRecommendations query={search} products={products} quantities={cart.items} onDetail={setDetail} onAdd={addRecommendation} canBuy={canBuyRecommendation} />} />
         <Route path="client/orders" element={<ProtectedRoute allowedRoles={['CUSTOMER']}><ClientOrders key={String(node)+':'+user?.id} node={node}/></ProtectedRoute>} />
         <Route path="client/billing" element={<ProtectedRoute allowedRoles={['CUSTOMER']}><ClientBilling key={String(node)+':'+user?.id} node={node}/></ProtectedRoute>} />
         <Route path="client/chat" element={<ProtectedRoute allowedRoles={['CUSTOMER']}><ClientChat /></ProtectedRoute>} />
@@ -225,13 +235,13 @@ export default function Storefront() {
       </Routes></Suspense>}
     </main></div>
     <Drawer className="product-detail" title={t('store.details')} placement="right" width="min(100vw, 480px)" open={!!detail} onClose={() => setDetail(undefined)} closeIcon={<CloseOutlined />}>
-      {detail && <><div className="detail-photo">{image(detail)}</div><small>{detail.brand}</small><h2>{text(detail.name)}</h2><p>{text(detail.description)}</p><h3>{money(detail.price)} <small>JPY</small></h3><Button type="primary" size="large" block disabled={!trips.some(journey => journey.merchantId === detail.merchantId)} icon={detail.merchantId === trip?.merchantId ? <PlusOutlined /> : <CalendarOutlined />} onClick={() => configureQuantity(detail)}>{t(detail.merchantId === trip?.merchantId ? 'store.set_quantity' : 'store.choose_trip')}</Button></>}
+      {detail && <><div className="detail-photo">{image(detail)}</div><small>{detail.brand}</small><h2>{text(detail.name)}</h2><p>{text(detail.description)}</p><h3>{money(detail.price,detail.currency)} <small>{detail.saleUnit}</small></h3><Button type="primary" size="large" block disabled={!trips.some(journey => journey.merchantId === detail.merchantId)} icon={detail.merchantId === trip?.merchantId ? <PlusOutlined /> : <CalendarOutlined />} onClick={() => configureQuantity(detail)}>{t(detail.merchantId === trip?.merchantId ? 'store.set_quantity' : 'store.choose_trip')}</Button></>}
     </Drawer>
     <Drawer className="journey-picker" title={t('store.trip')} placement="bottom" height="auto" open={tripPicker} onClose={() => setTripPicker(false)}>{tripChoices}{!scopedTrips.length && <Empty description={t('store.no_trips')} />}</Drawer>
     <Drawer className="quantity-sheet" title={t('store.quantity_title')} placement="bottom" height="auto" open={!!quantityProduct} onClose={() => setQuantityProduct(undefined)} destroyOnClose>
-      {quantityProduct && <div className="quantity-sheet-content"><div className="quantity-product"><div>{image(quantityProduct)}</div><section><small>{quantityProduct.brand}</small><h2>{text(quantityProduct.name)}</h2><strong>{money(quantityProduct.price)} <small>{t('store.each')}</small></strong></section></div>
+      {quantityProduct && <div className="quantity-sheet-content"><div className="quantity-product"><div>{image(quantityProduct)}</div><section><small>{quantityProduct.brand}</small><h2>{text(quantityProduct.name)}</h2><strong>{money(quantityProduct.price,quantityProduct.currency)} <small>{t('store.each')}</small></strong></section></div>
         <div className="quantity-selection"><span>{t('store.quantity')}</span><div className="quantity-control"><Button icon={<MinusOutlined />} aria-label={t('store.quantity_minus')} disabled={draftQuantity <= 1} onClick={() => setDraftQuantity(value => value - 1)} /><InputNumber aria-label={t('store.quantity_title')} min={1} max={99} precision={0} controls={false} value={draftQuantity} onChange={value => setDraftQuantity(value ?? 1)} /><Button icon={<PlusOutlined />} aria-label={t('store.quantity_plus')} disabled={draftQuantity >= 99} onClick={() => setDraftQuantity(value => value + 1)} /></div></div>
-        <div className="quantity-subtotal"><span>{t('store.subtotal')}</span><strong>{money(quantityProduct.price * draftQuantity)}</strong></div>
+        <div className="quantity-subtotal"><span>{t('store.subtotal')}</span><strong>{money(quantityProduct.price * draftQuantity,quantityProduct.currency)}</strong></div>
         <Button type="primary" block aria-label={cart.items[quantityProduct.id] ? t('store.update_cart') : t('store.add_cart')} onClick={() => { change(quantityProduct.id, draftQuantity); setQuantityProduct(undefined); }}>{cart.items[quantityProduct.id] ? t('store.update_cart') : t('store.add_cart')} <ShoppingCartOutlined /></Button></div>}
     </Drawer>
   </div>;

@@ -30,15 +30,16 @@ public class StorefrontService {
     private final PasswordEncoder passwords;
     private final JavaMailSender mail;
     private final String from;
+    private final ProductSaleService sales;
     private final SecureRandom random = new SecureRandom();
 
     public StorefrontService(UserRepository users, TripRepository trips, ProductRepository products,
             OrderHeaderRepository orders, EmailChallengeRepository challenges, MerchantCustomerRepository relations,
             CheckoutIdentityRepository identities, AuthService auth, PasswordEncoder passwords,
-            JavaMailSender mail, @Value("${bobuy.mail.from:accounts@bobuy.cc}") String from) {
+            JavaMailSender mail, @Value("${bobuy.mail.from:accounts@bobuy.cc}") String from,ProductSaleService sales) {
         this.users = users; this.trips = trips; this.products = products; this.orders = orders;
         this.challenges = challenges; this.relations = relations; this.identities = identities;
-        this.auth = auth; this.passwords = passwords; this.mail = mail; this.from = from;
+        this.auth = auth; this.passwords = passwords; this.mail = mail; this.from = from; this.sales=sales;
     }
 
     public List<PublicTrip> publicTrips() {
@@ -50,12 +51,11 @@ public class StorefrontService {
     }
 
     public List<PublicProduct> publicProducts() {
-        return products.findAll().stream().filter(p -> p.getVisibilityStatus() == ProductVisibility.PUBLIC)
-            .filter(p -> !RecommendationCatalogService.profile(p))
-            .sorted(Comparator.comparing(Product::getId))
-            .map(p -> new PublicProduct(p.getId(), p.getMerchantId(), p.getName(), p.getDescription(), p.getBrand(), p.getBasePrice(),
-                p.getCategoryId(), p.getMediaGallery().stream().filter(MediaGalleryItem::isVisible)
-                    .filter(m -> m.getType() == MediaType.IMAGE).map(MediaGalleryItem::getUrl).toList())).toList();
+        return products.findAll().stream().sorted(Comparator.comparing(Product::getId))
+            .filter(p->p.getVisibilityStatus()==ProductVisibility.PUBLIC)
+            .flatMap(p->sales.quote(p).stream().map(q->new PublicProduct(p.getId(),p.getMerchantId(),p.getName(),p.getDescription(),p.getBrand(),q.amount().doubleValue(),
+                p.getCategoryId(),p.getMediaGallery().stream().filter(MediaGalleryItem::isVisible).filter(m->m.getType()==MediaType.IMAGE).map(MediaGalleryItem::getUrl).toList(),
+                q.currency(),q.unit(),q.revision(),p.getOrderMethod()==OrderMethod.PRE_ORDER))).toList();
     }
 
     @Transactional
@@ -130,7 +130,7 @@ public class StorefrontService {
             OrderHeader existing = prior.get();
             Map<String, Integer> previous = new TreeMap<>();
             existing.getLines().forEach(l -> previous.put(l.getSkuId(), l.getQuantity()));
-            if (!existing.getTripId().equals(request.tripId()) || !previous.equals(quantities(request.items()))) {
+            if (!existing.getTripId().equals(request.tripId()) || !previous.equals(quantities(request.items())) || !existing.getCurrency().equals(request.currency()==null?"JPY":request.currency())) {
                 throw invalid("重复请求与原订单内容不一致，请刷新购物车");
             }
             return result(existing, user);
@@ -141,18 +141,22 @@ public class StorefrontService {
         order.setId(nextId());
         BigDecimal total = BigDecimal.ZERO;
         for (var entry : quantities(request.items()).entrySet()) {
-            Product product = products.findById(entry.getKey())
+            Product product = products.lockById(entry.getKey())
                 .filter(p -> p.getVisibilityStatus() == ProductVisibility.PUBLIC)
-                .filter(p -> !RecommendationCatalogService.profile(p))
                 .filter(p -> trip.getAgentId().equals(p.getMerchantId()))
                 .orElseThrow(() -> invalid("商品已下架，请刷新购物车"));
-            if (!Double.isFinite(product.getBasePrice()) || product.getBasePrice() < 0) throw invalid("商品价格不可用");
+            var quote=sales.quote(product).orElseThrow(()->invalid("sale.unavailable"));
+            if(!quote.currency().equals(request.currency()==null?"JPY":request.currency()))throw invalid("sale.mixed_currency");
+            var supplied=request.items().stream().filter(i->i.productId().equals(product.getId())).toList();
+            if(supplied.stream().anyMatch(i->(i.currency()!=null&&!i.currency().equals(quote.currency()))
+                ||(quote.revision()>0&&(i.priceRevision()==null||i.priceRevision()!=quote.revision()))))throw invalid("sale.conflict");
             OrderLine line = new OrderLine(product.getId(), product.getName().getOrDefault("zh-CN", product.getName().values().stream().findFirst().orElse(product.getId())),
-                null, entry.getValue(), product.getBasePrice());
-            line.setId(nextId());
+                quote.unit(), entry.getValue(), quote.amount().doubleValue());
+            line.setNames(product.getName());line.setCurrency(quote.currency());line.setPriceRevision(quote.revision());line.setId(nextId());
             order.addLine(line);
-            total = total.add(BigDecimal.valueOf(product.getBasePrice()).multiply(BigDecimal.valueOf(entry.getValue())));
+            total = total.add(quote.amount().multiply(BigDecimal.valueOf(entry.getValue())));
         }
+        order.setCurrency(request.currency()==null?"JPY":request.currency());
         order.setTotalAmount(total.doubleValue());
         orders.saveAndFlush(order);
         String key = trip.getAgentId() + ":" + user.getId();
@@ -205,7 +209,7 @@ public class StorefrontService {
     private CheckoutResult result(OrderHeader order, User user) {
         Trip trip = trips.findById(order.getTripId()).orElseThrow();
         boolean approved = relations.findById(trip.getAgentId() + ":" + user.getId()).map(r -> r.approvedAt != null).orElse(false);
-        return new CheckoutResult(order.getId(), order.getTotalAmount(), order.getStatus().name(), user.getEmailVerifiedAt() != null, approved);
+        return new CheckoutResult(order.getId(), order.getTotalAmount(), order.getStatus().name(), user.getEmailVerifiedAt() != null, approved,order.getCurrency());
     }
     private User lockedCustomer(Authentication authentication) {
         return users.lockById(auth.currentUser(authentication).id()).filter(u -> u.hasRole(Role.CUSTOMER))
@@ -222,9 +226,13 @@ public class StorefrontService {
     public record AccountRegistration(@NotNull @Valid Registration account, @NotEmpty Set<@NotNull Role> roles) {}
     public record PublicTrip(Long id, Long merchantId, String merchantName, String deliveryArea, LocalDate deliveryDate) {}
     public record PublicProduct(String id, Long merchantId, Map<String,String> name, Map<String,String> description, String brand,
-        double price, String categoryId, List<String> images) {}
-    public record Item(@NotBlank @Size(max = 255) String productId, @Min(1) @Max(99) int quantity) {}
-    public record Checkout(@NotNull UUID requestId, @NotNull Long tripId, @NotEmpty @Size(max = 50) List<@Valid Item> items) {}
-    public record CheckoutResult(Long orderId, double total, String status, boolean emailVerified, boolean merchantApproved) {}
+        double price, String categoryId, List<String> images,String currency,String saleUnit,long priceRevision,boolean recommendationReady) {}
+    public record Item(@NotBlank @Size(max = 255) String productId, @Min(1) @Max(99) int quantity,Long priceRevision,String currency) {
+        public Item(String productId,int quantity){this(productId,quantity,null,null);}
+    }
+    public record Checkout(@NotNull UUID requestId, @NotNull Long tripId, @NotEmpty @Size(max = 50) List<@Valid Item> items,String currency) {
+        public Checkout(UUID requestId,Long tripId,List<Item> items){this(requestId,tripId,items,"JPY");}
+    }
+    public record CheckoutResult(Long orderId, double total, String status, boolean emailVerified, boolean merchantApproved,String currency) {}
     public record CustomerRelation(Long customerId, String name, boolean emailVerified, boolean merchantApproved, Instant approvedAt) {}
 }

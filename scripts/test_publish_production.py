@@ -66,5 +66,22 @@ class RestoredDatabaseValidationTest(unittest.TestCase):
                 self.assertIn('--clean --if-exists --exit-on-error', calls[2].args[-1])
 
 
+
+
+class AdditiveContentMigrationTests(unittest.TestCase):
+    def test_projection_freezes_all_old_columns_without_new_defaults(self):
+        query=publisher.content_projection_query('bb_recommendation_item',['id','name','offer_notes'])
+        self.assertIn("'id',t.\"id\"",query)
+        self.assertIn("'offer_notes',t.\"offer_notes\"",query)
+        self.assertNotIn('translations',query)
+        self.assertIn('count(*)',query)
+        self.assertIn('order by v',query)
+
+    def test_invalid_projection_and_content_mutation_fail_closed(self):
+        for table,columns in [('private_table',['id']),('bb_product',[]),('bb_product',['id','id'])]:
+            with self.assertRaises(ValueError):publisher.content_projection_query(table,columns)
+        before={'bb_product':{'columns':['id','base_price'],'fingerprint':'1:abc'}}
+        with self.assertRaises(RuntimeError):publisher.validate_restored_database(before,{'bb_product':{'columns':['id','base_price'],'fingerprint':'1:def'}})
+
 if __name__ == '__main__':
     unittest.main()

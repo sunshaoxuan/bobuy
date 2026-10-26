@@ -57,6 +57,32 @@ def database_fingerprint(database=None):
     return result
 
 
+CONTENT_TABLES = ('bb_recommendation_post','bb_recommendation_item','bb_recommendation_image','bb_category','bb_supplier','bb_product','bb_merchant_sku')
+
+
+def content_projection_query(table, columns):
+    if table not in CONTENT_TABLES or not columns or len(set(columns)) != len(columns):
+        raise ValueError('Invalid frozen content projection')
+    identifier = lambda value: '"' + value.replace('"', '""') + '"'
+    arguments = ','.join("'" + name.replace("'", "''") + "',t." + identifier(name) for name in columns)
+    return "select count(*) || ':' || md5(coalesce(string_agg(v, chr(10) order by v), '')) from (select jsonb_build_object(" + arguments + ')::text v from public.' + identifier(table) + ' t) rows;'
+
+
+def content_fingerprint(before=None):
+    # Freeze every pre-existing field, including IDs, publication state, original
+    # image bytes and prices. Additive migration defaults do not fake a data edit.
+    def sql(query):
+        return subprocess.check_output(['docker','exec','-i','bobuy-postgres','sh','-c',
+            'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -qAt -v ON_ERROR_STOP=1'],input=query,text=True).strip()
+    result = {}
+    for table in CONTENT_TABLES:
+        columns = before[table]['columns'] if before else sql("select column_name from information_schema.columns where table_schema='public' and table_name='" + table + "' order by ordinal_position;").splitlines()
+        # A removed/renamed old column fails in PostgreSQL; changed values/counts
+        # fail the exact hash comparison. Backup restore still checks full schema.
+        result[table] = {'columns':columns,'fingerprint':sql(content_projection_query(table,columns))}
+    return result
+
+
 def maintenance_config(config):
     upstream = 'location /api {\n        proxy_pass http://gateway-service:8080;\n    }'
     if config.count(upstream) != 1:
@@ -144,8 +170,7 @@ def main():
         run('docker', 'exec', 'bobuy-gateway', 'nginx', '-s', 'reload')
         run(*compose, 'stop', *applications[:-1])
         expected_database = database_fingerprint()
-        content_tables = ['bb_recommendation_post', 'bb_recommendation_item', 'bb_recommendation_image', 'bb_category', 'bb_supplier', 'bb_product', 'bb_merchant_sku']
-        frozen_content = {name: expected_database[name] for name in content_tables}
+        frozen_content = content_fingerprint()
         (stage / 'content-frozen-before.json').write_text(json.dumps(frozen_content, indent=2))
         with (backup / 'database.dump').open('wb') as output:
             run('docker', 'exec', 'bobuy-postgres', 'sh', '-c',
@@ -176,8 +201,7 @@ def main():
         run(*compose, 'up', '-d', '--no-deps', *applications[1:])
         for service in applications[1:-1]:
             healthy('bobuy-' + service)
-        current_database = database_fingerprint()
-        current_content = {name: current_database[name] for name in content_tables}
+        current_content = content_fingerprint(frozen_content)
         validate_restored_database(frozen_content, current_content)
         (stage / 'content-frozen-after.json').write_text(json.dumps(current_content, indent=2))
         after = subprocess.check_output(['python3', str(snapshot)])

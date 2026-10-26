@@ -37,6 +37,7 @@ export type OrderLine = {
     id?: number;
     skuId: string;
     itemName: string;
+    names?:Record<string,string>;currency?:string;priceRevision?:number;
     spec?: string;
     quantity: number;
     purchasedQuantity?: number;
@@ -45,6 +46,7 @@ export type OrderLine = {
 };
 
 export type Order = {
+    currency?:string;
     id: number;
     businessId: string;
     customerId: number;
@@ -264,6 +266,7 @@ export type CustomerBalanceLedgerEntry = {
     orderLines: {
         skuId: string;
         itemName: string;
+    names?:Record<string,string>;currency?:string;priceRevision?:number;
         orderedQuantity: number;
         unitPrice: number;
         purchasedQuantity: number;
@@ -340,6 +343,7 @@ export type CustomerBalanceSummary = {
 export type ProcurementItemResponse = {
     skuId: string;
     itemName: string;
+    names?:Record<string,string>;currency?:string;priceRevision?:number;
     totalQuantity: number;
     purchasedQuantity: number;
     unitPrice: number;
@@ -349,6 +353,7 @@ export type ProcurementItemResponse = {
 export type PickingChecklistItem = {
     skuId: string;
     itemName: string;
+    names?:Record<string,string>;currency?:string;priceRevision?:number;
     orderedQuantity: number;
     pickedQuantity: number;
     checked: boolean;
@@ -382,6 +387,7 @@ export type DeliveryPreparation = {
 export type ProcurementDeficitItemResponse = {
     skuId: string;
     itemName: string;
+    names?:Record<string,string>;currency?:string;priceRevision?:number;
     deficitQuantity: number;
     completionPercent: number;
     priority: string;
@@ -984,7 +990,12 @@ export type AiOnboardingSuggestion = {
 export type RecommendationSummary = { id: number; title: string; published: boolean; version: number; updatedAt: string; publishedAt?: string; publisherName?: string; coverImageUrl?: string; merchantId?:number };
 export type RecommendationFacts = { name: string; itemNumber?: string | null; referencePrice?: number | null; originalPrice?: number | null; discountAmount?: number | null; priceUnit?: string | null; offerStart?: string | null; offerEnd?: string | null; couponStart?: string | null; couponEnd?: string | null; offerNotes?: string | null };
 export type RecommendationLabel = {id:string;name:Record<string,string>};
-export type RecommendationItem = RecommendationFacts & { id: number; productId?: string | null; currency?: 'JPY'; imageUrl: string; categoryIds?:string[]; categories?:RecommendationLabel[]; supplierId?:string|null; supplierName?:Record<string,string>|null; showSupplier?:boolean };
+export type RecommendationText={name:string;specification?:string|null;description?:string|null;offerNotes?:string|null};
+export type LocalizationRow={itemId:number;sourceHash:string;specification?:string|null;description?:string|null;translations:Record<string,RecommendationText>};
+export type ProductSale={amount:number;currency:string;unit:string;validFrom?:string|null;validThrough?:string|null;revision:number;enabled:boolean};
+export type SaleReview={itemId:number;amount:number;currency:string;unit:string;validFrom?:string|null;validThrough?:string|null;revision:number;replaceExisting:boolean;enabled:boolean};
+export type RecommendationPicture={id:string;url:string;hash:string;sourceUrl:string;assetKey:string;label:string};
+export type RecommendationItem = RecommendationFacts & {gallery?:RecommendationPicture[];specification?:string|null;description?:string|null;translations?:Record<string,RecommendationText>;translationSource?:string;translationStatus?:string; id: number; productId?: string | null; currency?: 'JPY'; imageUrl: string; categoryIds?:string[]; categories?:RecommendationLabel[]; supplierId?:string|null; supplierName?:Record<string,string>|null; showSupplier?:boolean };
 export type RecommendationChoice = RecommendationLabel & {editable:boolean};
 export type RecommendationAssignment = {itemIds:number[];categoryIds:string[];categoryMode:'add'|'remove'|'replace';updateCategories:boolean;supplierId:string|null;updateSupplier:boolean;showSupplier:boolean;version:number};
 export const recommendationTaxonomyApi = {
@@ -997,6 +1008,15 @@ export const recommendationTaxonomyApi = {
 export type RecommendationDetail = { post: RecommendationSummary; body: string; items: RecommendationItem[] };
 const recommendationBase = '/api/merchant/recommendations';
 export const recommendationApi = {
+    galleryOrder:(post:number,item:number,orderedIds:string[],version:number)=>putJson<RecommendationDetail,object>(recommendationBase+'/'+post+'/items/'+item+'/gallery',{orderedIds,version}),
+    galleryUpload:async(post:number,item:number,file:File,input:{version:number;sourceUrl:string;assetKey:string;label:string;itemNumber?:string|null;verified:boolean})=>{
+        const form=new FormData();form.set('file',file);Object.entries(input).forEach(([key,value])=>{if(value!=null)form.set(key,String(value));});
+        const response=await authorizedFetch(recommendationBase+'/'+post+'/items/'+item+'/gallery',{method:'POST',body:form});
+        if(!response.ok)throw new Error(await parseErrorMessage(response));return parseSuccessPayload<RecommendationDetail>(response);
+    },
+    currencies:()=>storeGet<{code:string;symbol:string;fractionDigits:number;name:string;saleEnabled:boolean}[]>('/api/merchant/currencies'),
+    sales:(id:number,input:{reviews:SaleReview[];version:number;confirmedPreorder:boolean})=>putJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/sales',input),
+    localize:(id:number,input:{rows:LocalizationRow[];version:number;reviewed:boolean})=>putJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/localizations',input),
     catalog:(id:number,input:{itemIds:number[];productId?:string;version:number})=>putJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/catalog',input),
     list: (page: number) => storeGet<RecommendationSummary[]>(recommendationBase + '?page=' + page),
     nodes: () => storeGet<{id:number;name:string}[]>('/api/storefront/recommendation-nodes'),
@@ -1303,7 +1323,7 @@ export const api = {
 };
 
 export type StoreTrip = { id: number; merchantId: number; merchantName: string; deliveryArea: string; deliveryDate: string };
-export type StoreProduct = { id: string; merchantId: number; name: Record<string, string>; description: Record<string, string>; brand: string; price: number; categoryId: string; images: string[]; recommendationReady?:boolean };
+export type StoreProduct = { id: string; merchantId: number; name: Record<string, string>; description: Record<string, string>; brand: string; price: number; categoryId: string; images: string[]; recommendationReady?:boolean;currency?:string;saleUnit?:string;priceRevision?:number };
 export type MerchantCustomer = { customerId: number; name: string; emailVerified: boolean; merchantApproved: boolean; approvedAt?: string };
 async function storeGet<T>(path: string): Promise<T> {
     const response = await authorizedFetch(path, undefined, { retryOnUnauthorized: !path.startsWith('/api/storefront/') });
@@ -1317,8 +1337,8 @@ export const storefrontApi = {
     approve: (id: number) => postJson<boolean, object>(`/api/merchant/customers/${id}/approve`, {}),
     resend: () => postJson<boolean, object>('/api/auth/email/resend', {}),
     verify: (code: string) => postJson<boolean, object>('/api/auth/email/verify', { code }),
-    checkout: (payload: { requestId: string; tripId: number; items: { productId: string; quantity: number }[] }) =>
-        postJson<{ orderId: number; total: number; status: string; emailVerified: boolean; merchantApproved: boolean }, typeof payload>('/api/checkout', payload)
+    checkout: (payload: { requestId: string; tripId: number; currency?:string; items: { productId: string; quantity: number;priceRevision?:number;currency?:string }[] }) =>
+        postJson<{ orderId: number; total: number;currency:string; status: string; emailVerified: boolean; merchantApproved: boolean }, typeof payload>('/api/checkout', payload)
 };
 
 function buildChatCursorQuery(params?: { beforeId?: number; limit?: number }, hasExistingQuery = false) {

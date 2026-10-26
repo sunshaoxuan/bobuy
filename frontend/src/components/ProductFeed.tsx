@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { PlusOutlined, ArrowDownOutlined } from '@ant-design/icons';
 import type { StoreProduct } from '../api';
 import { localizedContent, useI18n } from '../i18n';
+import {formatMoney} from '../currency';
 
 const BATCH_SIZE = 6;
 
@@ -42,12 +43,12 @@ export default function ProductFeed({ products, quantities, onAdd, onDetail }: {
       {products.slice(0, limit).map((product, index) => <article className="store-product" key={product.id}>
         <div className={`product-tile product-shape-${index % 4}`}>
           <button className="product-photo" aria-label={t('store.detail_label',{name:label(product.name)})} onClick={() => onDetail(product)}>
-            <img src={product.images[0]} alt={label(product.name)} loading={index < 2 ? 'eager' : 'lazy'} />
+            {product.images[0]?<img src={product.images[0]} alt={label(product.name)} loading={index < 2 ? 'eager' : 'lazy'} />:<span className="rec-no-product-image">{t('gallery.pending')}</span>}
           </button>
           <button className="product-add" title={t('store.set_quantity')} aria-label={t('store.add_label',{name:label(product.name)})} onClick={() => onAdd(product)}><PlusOutlined />{quantities[product.id] > 0 && <span className="product-count">{quantities[product.id]}</span>}</button>
           <div className="product-body">
             <button className="product-name" aria-label={t('store.view_label',{name:label(product.name)})} onClick={() => onDetail(product)}><h2>{label(product.name)}</h2></button>
-            <strong className="product-price"><small>¥</small>{new Intl.NumberFormat(locale).format(product.price)}</strong>
+            <strong className="product-price">{formatMoney(product.price,product.currency??'JPY',locale)}</strong>
           </div>
         </div>
       </article>)}

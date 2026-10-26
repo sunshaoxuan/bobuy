@@ -4,12 +4,14 @@ import { I18nProvider } from '../i18n';
 import Recommendations from './Recommendations';
 vi.mock('../components/RecommendationClassification',()=>({default:()=>null}));
 vi.mock('../components/RecommendationCatalog',()=>({default:()=>null}));
+vi.mock('../components/RecommendationGallery',()=>({default:()=>null}));
+vi.mock('../components/RecommendationLocalization',()=>({default:()=>null}));
 import PublicRecommendations from './PublicRecommendations';
 const mocks = vi.hoisted(() => ({ get:vi.fn(),list:vi.fn(),feed:vi.fn(),create:vi.fn(),save:vi.fn(),publish:vi.fn(),write:vi.fn(),upload:vi.fn(),remove:vi.fn() }));
-vi.mock('../api', () => ({ recommendationApi:mocks }));
+vi.mock('../api', () => ({ recommendationApi:mocks,storefrontApi:{products:vi.fn().mockResolvedValue([])} }));
 const detail = { post:{id:1,title:'Tea picks',published:false,version:2,updatedAt:'2026-10-26T10:00:00'},body:'Original body',items:[
-  {id:1,productId:'p1',name:'Tea',itemNumber:'TEA',referencePrice:100,imageUrl:'/tea.png'},
-  {id:2,productId:'p2',name:'Coffee',itemNumber:'COFFEE',referencePrice:200,imageUrl:'/coffee.png'}] };
+  {id:1,productId:'p1',name:'Tea',itemNumber:'TEA',referencePrice:100,imageUrl:'/source-tea.png',gallery:[{id:'img1',url:'/tea.png',hash:'fixture1',sourceUrl:'https://www.costco.co.jp/p/tea',assetKey:'tea',label:'Tea'}]},
+  {id:2,productId:'p2',name:'Coffee',itemNumber:'COFFEE',referencePrice:200,imageUrl:'/source-coffee.png',gallery:[{id:'img2',url:'/coffee.png',hash:'fixture2',sourceUrl:'https://www.costco.co.jp/p/coffee',assetKey:'coffee',label:'Coffee'}]}] };
 function show() { return render(<I18nProvider><MemoryRouter initialEntries={['/admin/recommendations?post=1']}><Recommendations /></MemoryRouter></I18nProvider>); }
 const shopping = { products:[{id:'p1',merchantId:1000,name:{'zh-CN':'Tea'},description:{},brand:'',price:120,categoryId:'',images:['/tea.png']}], quantities:{p1:2}, onDetail:vi.fn(), onAdd:vi.fn(), canBuy:()=>true };
 function publicFeed() { return render(<I18nProvider><MemoryRouter><PublicRecommendations {...shopping} /></MemoryRouter></I18nProvider>); }
@@ -34,7 +36,7 @@ describe('Recommendations', () => {
   it('uses the catalog product for details and cart, and disables missing products', async () => {
     mocks.feed.mockResolvedValue([detail]); const view=publicFeed(); await screen.findByRole('heading',{name:'Tea picks'});
     fireEvent.click(view.container.querySelectorAll('.product-photo')[0]);
-    expect(shopping.onDetail).toHaveBeenCalledWith(shopping.products[0]);
+    expect(view.container.ownerDocument.querySelector('.rec-product-detail')).toBeInTheDocument();
     fireEvent.click(view.container.querySelectorAll('.product-add')[0]);
     expect(shopping.onAdd).toHaveBeenCalledWith(shopping.products[0]);
     expect(shopping.onAdd.mock.calls[0][0].price).toBe(120);
@@ -79,7 +81,7 @@ describe('Recommendations', () => {
     expect(screen.getByText(/Publication fixture/)).toBeInTheDocument();
     expect(view.container.querySelector('time')).toHaveAttribute('datetime','2026-10-26T01:00:00Z');
     expect(view.container.querySelectorAll('.rec-public-products .product-tile')).toHaveLength(2);
-    fireEvent.click(screen.getByRole('button',{name:/查看原图: Tea/}));
+    fireEvent.click(view.container.querySelector('.rec-pin-preview')!);
     expect(await screen.findByRole('dialog')).toBeInTheDocument();
   });
 });

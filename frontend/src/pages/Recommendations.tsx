@@ -6,6 +6,8 @@ import { recommendationApi as api, type RecommendationDetail, type Recommendatio
 import { FactsForm, OfferInfo, factsError, parseBatch, factFields } from '../components/RecommendationFacts';
 import {RecommendationPreview} from './PublicRecommendations';
 import RecommendationCatalog from '../components/RecommendationCatalog';
+import RecommendationLocalization from '../components/RecommendationLocalization';
+import RecommendationGallery from '../components/RecommendationGallery';
 import '../browse.css';
 import RecommendationClassification from '../components/RecommendationClassification';
 import { useI18n } from '../i18n';
@@ -164,6 +166,8 @@ export default function Recommendations() {
       </section>}
       <RecommendationClassification detail={detail} onChanged={setDetail} onPendingChange={setClassificationPending} />
       <RecommendationCatalog detail={detail} onChange={setDetail}/>
+      <RecommendationLocalization detail={detail} onChange={setDetail}/>
+      <RecommendationGallery detail={detail} onChange={setDetail}/>
       <Button icon={<EyeOutlined />} onClick={() => setPreview(value => !value)}>{t('rec.draft_preview')}</Button>
       {preview && <RecommendationPreview key={detail.post.id} detail={{...detail,post:{...detail.post,title},body}}/>}
       <section className="rec-linked"><div className="rec-section-heading"><h2>{t('rec.products')} <span>({detail.items.length})</span></h2></div><div className="rec-product-grid">{detail.items.slice((itemPage - 1) * 12, itemPage * 12).map(item => <article key={item.id} className="rec-product"><img src={item.imageUrl} alt={item.name} /><div><h3>{item.name}</h3><small>{item.itemNumber}</small><OfferInfo facts={item} />

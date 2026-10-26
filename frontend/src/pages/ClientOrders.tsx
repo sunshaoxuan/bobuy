@@ -2,11 +2,12 @@ import { Alert, Card, Empty, Grid, Select, Space, Spin, Tag, Typography } from '
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { api, type Order, type Trip } from '../api';
 import { useI18n } from '../i18n';
+import {formatMoney} from '../currency';
 
 const { Title, Text } = Typography;
 
 export default function ClientOrders({node}:{node?:number}) {
-  const { t } = useI18n();
+  const { t,locale } = useI18n();
   const screens = Grid.useBreakpoint();
   const isMobile = screens.md !== true;
   const [trips, setTrips] = useState<Trip[]>([]);
@@ -16,7 +17,7 @@ export default function ClientOrders({node}:{node?:number}) {
   const [error,setError]=useState('');
   const generation=useRef(0);
   const formatAmount = (amount: number) =>
-    new Intl.NumberFormat(undefined, { style: 'currency', currency: 'JPY' }).format(amount);
+    formatMoney(amount,'JPY',locale);
 
   useEffect(() => {
     const request=++generation.current;
@@ -104,7 +105,7 @@ export default function ClientOrders({node}:{node?:number}) {
                     {t('orders.table.items')}: {order.lines?.length ?? 0}
                   </Text>
                   <Text strong>
-                    {t('orders.table.total')}: {formatAmount(order.totalAmount)}
+                    {t('orders.table.total')}: {formatMoney(order.totalAmount,order.currency??'JPY',locale)}
                   </Text>
                 </Space>
               </Card>

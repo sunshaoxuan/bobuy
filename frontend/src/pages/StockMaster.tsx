@@ -46,6 +46,7 @@ interface StockItem {
   nameL10n?: L10nValues;
   category: string;
   price: number;
+  actualSale?:import('../api').ProductSale;
   stock: number;
   unit: string;
   description?: string;
@@ -79,11 +80,7 @@ const MOBILE_TOOLBAR_COMPACT_SCROLL_THRESHOLD = 24;
 const MOBILE_DYNAMIC_GUTTER = 16;
 const DESKTOP_DYNAMIC_GUTTER = 8;
 const DEFAULT_STOCK_THUMBNAIL = '/assets/products/milk.png';
-const CURRENCY_BY_LOCALE: Record<string, string> = {
-  'zh-CN': 'CNY',
-  'ja-JP': 'JPY',
-  'en-US': 'USD'
-};
+
 const PRICE_FRACTION_DIGITS = 2;
 const MOBILE_BOTTOM_PADDING = '7rem';
 const DESKTOP_BOTTOM_PADDING = '5rem';
@@ -257,6 +254,7 @@ export default function StockMaster() {
         nameL10n: res.product.name,
         category: res.product.categoryId || '',
         price: res.product.basePrice,
+        actualSale:(res.product as unknown as {sale?:import('../api').ProductSale}).sale,
         stock: 0, // Placeholder
         unit: 'pc',
         description: res.displayDescription,
@@ -290,7 +288,7 @@ export default function StockMaster() {
     () =>
       new Intl.NumberFormat(locale, {
         style: 'currency',
-        currency: CURRENCY_BY_LOCALE[locale] ?? 'USD',
+        currency: 'JPY',
         minimumFractionDigits: PRICE_FRACTION_DIGITS,
         maximumFractionDigits: PRICE_FRACTION_DIGITS
       }),
@@ -606,12 +604,17 @@ export default function StockMaster() {
       )
     },
     {
-      title: t('stock.item.price'),
+      title: t('stock.item.price')+' (JPY)',
       dataIndex: 'price',
       width: '8rem',
       render: (val: number, record: StockItem) => (
-        <InputNumber value={val} prefix="$" style={{ width: '100%' }} onChange={(v) => handleFieldChange(record.key, 'price', v)} />
+        <InputNumber value={val} prefix="JPY ¥" style={{ width: '100%' }} onChange={(v) => handleFieldChange(record.key, 'price', v)} />
       )
+    },
+    {
+      title: t('sale.actual'),
+      key:'actualSale',
+      render:(_:unknown,record:StockItem)=>record.actualSale?<span>{record.actualSale.currency} {record.actualSale.amount.toLocaleString(locale)} / {record.actualSale.unit}</span>:<span>{t('sale.pending')}</span>
     },
     {
       title: t('stock.item.quantity'),
@@ -897,7 +900,7 @@ export default function StockMaster() {
                       />
                     </Form.Item>
                     <Form.Item name="price" label={t('stock.item.price')}>
-                      <InputNumber prefix="$" style={{ width: '100%' }} />
+                      <InputNumber prefix="JPY ¥" style={{ width: '100%' }} />
                     </Form.Item>
                     <Form.Item name="stock" label={t('stock.item.quantity')}>
                       <InputNumber style={{ width: '100%' }} />

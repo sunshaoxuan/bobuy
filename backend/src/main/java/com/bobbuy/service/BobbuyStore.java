@@ -539,7 +539,11 @@ public class BobbuyStore {
     @Transactional
     public Optional<Product> updateProduct(String id, Product product) {
         if (getProduct(id).isEmpty()) return Optional.empty();
-        product.setMerchantId(getProduct(id).orElseThrow().getMerchantId());
+        var previous=getProduct(id).orElseThrow();
+        product.setMerchantId(previous.getMerchantId());
+        product.setSale(previous.getSale());
+        product.setRecordVersion(previous.getRecordVersion());
+        product.setCurrency(previous.getCurrency());
         if (!productRepository.existsById(id)) {
             return Optional.empty();
         }

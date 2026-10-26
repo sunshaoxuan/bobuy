@@ -1,0 +1,40 @@
+# Recommendation sale, text and product-image candidate
+
+Status: implemented, focused tests/build passed; shared browser and final CI/deployment pending. Production remains 20261026.3. Preserve the latest published post 1 (122 items), post 2 (30 items), original facts/images, categories and hidden Costco supplier. No engineering production content writes, orders or payments.
+
+## Normal UI contract
+
+Open `/admin/recommendations?post=1` or `?post=2`. All bulk updates are on that visible page, previewed and human-confirmed. Stable identity is recommendation **itemId plus article ID**, never item number alone. Same SKU across online/warehouse issues remains independent.
+
+### Multilingual text
+
+Section 商品多语文本 → 导出当前条目模板 exports source item IDs, hashes and read-only source matching metadata. Convert prepared text into `[{itemId,sourceHash,specification,description,translations:{"zh-CN":{name,specification,description,offerNotes},"zh-TW":{...},"en-US":{...}}}]`.
+
+`specification` and `description` at the row root are Japanese source text. Japanese name and original price/offer facts remain unchanged. Map prepared `offer_conditions` into `offerNotes`. Supply **bare translated name**, not `display_name`; the client appends Japanese once. Empty descriptions remain empty; no invented claims. Omit unavailable language instead of accepting blank names. Copy exported sourceHash exactly; do not calculate it from a different file. Paste JSON → preview → review translations checkbox → save. A source edit makes old translations stale; clients fall back to Japanese. Product/cart names update for task-owned profiles of that issue, without overwriting reused existing products. Current languages are ja-JP, zh-CN, zh-TW, en-US. No translator is called on browse. Existing generic LlmGateway has a translation method, but no authorized operational translation provider is verified; automatic translation remains a stated dependency. No new key, paid call or external transfer was made.
+
+### Ordered official product galleries
+
+Section 官方商品图集 → export matching template → select all verified local JPEG/PNG files → paste `[{itemId,itemNumber,mode:"append"|"replace",images:[{fileName,sourceUrl,assetKey,label}]}]` → preview → exact-item/official-image verification checkbox → save.
+
+SourceURL is an official HTTPS product page without query, fragment, mail tracking or credentials. assetKey is its stable original-image identity, not a guessed SKU; strip size/tracking parameters before preparing data. Different angles/detail views remain separate; same hash or same assetKey is reused. The first image is the cover; the visible management selector supports cover changes and removal. Replace removes prior gallery associations only after its uploads succeed; original promotion evidence remains. Failed runs retain the editable manifest for correction/retry; committed identical uploads deduplicate. All byte validation, tenant ownership and post-version checks apply. No remote fetch/SSRF expansion was added. Pending/unreliable/partial variant rows may be omitted: their empty gallery displays a clear image-pending placeholder. Do not upload a different package/model or combine distinct variants merely because a promotional tile contains multiple SKUs. The 6 multi-SKU source rows require exact variant review before a single product's gallery/price is confirmed.
+
+Published clients use only verified galleries; old promotional posters are shown only in the admin evidence section, not the cover. Original bytes and source facts remain in storage. Single-product detail is addressable via `?item=<itemId>`, preserving article/node/category URL and the mounted list position. It contains translated full text, original factual price/unit/offer/coupon conditions, ordered thumbnails, enlargement and source links. Cards show concise text and a condition-detail link, retaining important price dates.
+
+### Product profiles and actual sale confirmation
+
+Section 产品档案 → build missing profiles (idempotent by owner/issue/code/reviewed name), or explicitly link one existing owner product. Published articles can be linked without withdrawing. Link/import never overwrites existing selling prices or inventory. New profiles are private, zero **legacy base field**, with no approved selling quote; they cannot be bought. They appear in 集中上架 as the same product records, with separately displayed reviewed sale amount.
+
+Section 实际销售价格确认 → select linked PRE_ORDER rows → prepare selected prices → review actual JPY amounts, units and inclusive Japan dates → explicit pre-order acknowledgment → save. Prepared source amounts are editable proposals, not automatic price authorization, conversion or markup. Required unit blanks can be explicitly filled in one operator bulk action; existing units such as 100g are preserved. Existing actual/base prices require explicit replace checkbox plus matching price revision. Missing/zero prices, missing units, expired selling periods, direct-buy profiles and foreign-owner products cannot be enabled here. Existing Product data uses optimistic versioning to prevent lost concurrent edits.
+
+Currency master records JPY/USD/CNY/TWD, stable symbols and ISO fraction digits, independent of locale. Only current JPY selling is enabled. Foreign records are extension groundwork; enabling overseas settlement requires explicit future pricing/ledger policy, never implicit FX. Product quote, cart, order header and each new order line carry currency; mixed currencies/stale price revisions fail closed. New order lines snapshot multilingual names. Recommendation + adds one of the real product IDs, capped at 99, and requires a bookable same-owner trip. No fake stock is introduced; this is confirmed pre-order fulfillment. No real checkout or payment is part of engineering acceptance.
+
+## Evidence and release gates
+
+`evidence/recommendation-commerce/before.json` records actual public DOM: image radius 0, max-height 460px, containing button radius 20px with gray background, no background image. Reference crop and full promotion poster were materialized using the official Library helper and viewed. The original artwork itself contains gray/white rounded framing. Candidate uses direct img border-radius and inherited clipping, removes the height cap and transparent gray mat; it does not modify image pixels. Browser verification must include synthetic varied-ratio/transparent galleries on desktop/mobile and read-only production empty/pending states. Final real official-gallery visual review follows parent UI import.
+
+V13 adds currency master/protected quote/product version/order currency; V14 adds source-bound translations; V15 adds gallery metadata. No old row values are rewritten. Local clone migration evidence verifies every pre-existing field, publication, source bytes and prices unchanged, detects an intentional content mutation, and restores the complete old schema/rows. Production publisher compares the same pre-existing column projection across additive migration; full backup restoration still verifies all schema/index/constraint/sequence fingerprints. No threshold or required guard is removed.
+
+
+## Product publication review boundary
+
+Automatic approval rejected adding an automatic PUBLIC side effect to sale confirmation. The helper/patch was not written and no such product publication executed. The rejection stated that only recommendation publication had been authorized, while product publication scope remained undetermined. A specific human clarification is pending. Safer current behavior keeps the existing product visibility guard: storing a reviewed quote never publishes a private product, and private products are absent from the public catalog and checkout. Existing already-public owner products can use reviewed JPY quotes; new private profiles cannot be purchased until an explicitly authorized normal product-publication step exists. Synthetic unit checkout fixtures set their own visibility explicitly within H2 tests only. No production credentials or content were touched.

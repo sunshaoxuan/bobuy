@@ -69,7 +69,11 @@ public class RecommendationTaxonomyService {
             item.itemNumber=original.itemNumber;item.referencePrice=original.referencePrice;item.originalPrice=original.originalPrice;
             item.discountAmount=original.discountAmount;item.priceUnit=original.priceUnit;item.offerStart=original.offerStart;
             item.offerEnd=original.offerEnd;item.couponStart=original.couponStart;item.couponEnd=original.couponEnd;
+            item.specification=original.specification;item.description=original.description;
+            item.translations=original.translations;item.translatedSource=original.translatedSource;
+            item.gallery=List.copyOf(original.gallery);
             item.offerNotes=original.offerNotes;item.imageHash=original.imageHash;item.imageUrl=original.imageUrl;item.createdAt=original.createdAt;
+            if(publicView){item.imageHash=null;item.imageUrl=item.gallery.isEmpty()?null:item.gallery.get(0).url();}
             item.categoryIds=List.copyOf(original.categoryIds);item.showSupplier=original.showSupplier;
             item.categories=item.categoryIds.stream().filter(categoryMap::containsKey).map(id->new RecommendationItem.Label(id,categoryMap.get(id).getName())).toList();
             if(!publicView||original.showSupplier) {
