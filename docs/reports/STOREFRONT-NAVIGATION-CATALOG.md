@@ -1,9 +1,13 @@
-# Navigation / visual / catalog checkpoint
+# Navigation / visual / catalog release 20261026.3
 
-2026-10-26. Safe independent candidate is in `.task-tmp/recommendation-release`.
-Production is still 20261026.2, runtime df892e9, receipt main d2f9f8c.
-No activation, production content writes, product backfill or article publication
-has occurred in this revision. Latest parent-reported content: post 1 has 122
+2026-10-26. Independent production release 20261026.3 is active. Runtime source
+93394f79c9f59b6106f35f81a5817eef32a697dc; exact-head CI 40312520350 passed.
+Public production UI/API/static bytes, six image IDs, health, verified backup,
+protected services and frozen content preservation all passed. Private production
+preview remains for the parent's existing authenticated normal UI; credentials
+were not obtained. Actual price/purchase activation remains pending currency.
+Only code/schema was activated: no production content writes, product backfill or
+article publication occurred. Verified before/after content: post 1 has 122
 items (121 assigned to 13 categories, 1 source conflict unclassified), post 2 has
 30 independently priced online-source items. All supplier displays off; both
 drafts. These are 152 recommendation rows, not necessarily 152 unique products.
@@ -52,7 +56,7 @@ while the actual selling-currency decision is unresolved. New recommendation
 profiles are excluded from storefront/checkout even if visibility is changed;
 the legacy sale-price calculation has not been changed.
 
-Completed checks: frontend TypeScript/Vite/i18n; affected prior cards,
+Completed checks: frontend TypeScript/Vite/i18n (964 keys); affected prior cards,
 recommendation editor, category filters; 3 navigation/race/preview tests; backend
 node isolation 1 and classification 3; final recommendation integration 10
 passed with zero failures/errors, including product timestamp preservation.
@@ -61,8 +65,11 @@ prevention and cross-owner/ambiguous-code links. Frontend node/history/cart
 context tests passed: late responses after node/account changes are ignored,
 refresh chooses the URL node, and selecting All preserves the cart request ID.
 Existing shared local containers were reused, with saved prior binaries and a
-local-only V7/V8 resource overlay; all 372 final application class bytes match the
-candidate. V11 started successfully in that environment.
+local-only V7/V8 resource overlay. Its byte comparison applies to the then-tested
+intermediate local JAR. Final backend safety changes are covered by exact-head
+CI; final production Java JAR hashes and all six image IDs are separately bound
+in the production receipt. No checksum repair/ignore or new test container was
+used. V11 started successfully locally; V11/V12 restore rehearsal passed.
 
 Actual normal local browser: six synthetic entries with public official source
 pictures, normal upload/JSON review/registration/save/reopen, automatic private
@@ -98,7 +105,33 @@ selling prices must be manually confirmed; never infer conversion or free sale.
 This is not a generic release approval. No general deployment permission is
 missing. Purchase enablement is a separate pending decision; it no longer blocks
 preparing the independent safe release above. Exact-head CI and production
-backup/migration/content-preservation verification still gate activation.
+backup/migration/content-preservation verification gated activation and passed.
+
+Final release evidence is under evidence/storefront-navigation-production/.
+CI: backend 204 tests (2 skipped), zero failures/errors; frontend 103 tests in
+32 files. Coverage lines 93.69% (minimum 90%), branches 80.26% (minimum 70%).
+No threshold was lowered. The existing CI finished in 2m 53s and was not retried.
+The mirror package SHA256 is
+8e4e8ba55125391fa6690250ad093b8bf122ac0afa1193109a32fa62c82cb76d.
+Both drafts and 152 image blobs remain; Product count is still 0, so there was
+no implicit backfill. Supplier assignment/visibility and all original facts,
+prices, dates, notes and image bytes match the stopped-writer snapshot across
+seven tables. All five application health checks passed; frontend is running;
+all six restart counts are zero. Protected service state is unchanged. The
+verified database/object backup is /opt/bobuy/releases/20261026.3/backup/.
+
+One release-process mistake is retained explicitly: raw-byte config validation
+failed on compose.production.yml, but activation was started before that result
+was inspected. Diagnosis proved only CRLF/LF variation: local LF-normalized SHA
+and production raw SHA both equal
+1681b2307b554cb1b92ca0766927ead2228cc53c7b983edf9cc3e0e5182c1b5f.
+Production configuration was unchanged. Backup, migration, frozen content,
+health and public browser verification subsequently passed; no rollback was
+needed. The original failure/correction receipt is retained, not labelled an
+initial preflight pass. Future execution must short-circuit validation failure:
+validate first and activate only in the same checked/conditional execution chain.
+Only CRLF/LF may be normalized for these YAML source comparisons; archive,
+image, JavaScript and Java JAR identities remain exact byte/hash checks.
 
 Smallest follow-on after the business decision:
 - Uniform JPY: retain the current customer currency presentation; add an explicit

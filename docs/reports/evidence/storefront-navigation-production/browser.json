@@ -1,0 +1,14 @@
+{
+  "release": "20261026.3",
+  "scope": "Public production UI/API/static-byte verification only. No credentials, private draft reads, content writes, orders or payments.",
+  "checks": {
+    "publicApiNavigationAndAcceptedStaticBytes": "PASS",
+    "mobileSearchDrawerRouteRefreshBackAndProtectedHistory": "PASS",
+    "adminNormalLoginEntry": "PASS"
+  },
+  "errors": [],
+  "failedApi": [],
+  "writes": [],
+  "privateProductionPreview": "Pending parent verification through its existing authenticated normal UI; local populated shared preview already passed.",
+  "result": "PASS"
+}

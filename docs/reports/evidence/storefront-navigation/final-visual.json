@@ -1,0 +1,7 @@
+{
+  "scope": "Final scoped visual check using existing synthetic local fixture; no re-import or production access",
+  "postId": "12",
+  "errors": [],
+  "result": "PASS",
+  "syntheticPostWithdrawn": true
+}

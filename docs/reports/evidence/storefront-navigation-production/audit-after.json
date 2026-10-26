@@ -1,0 +1,93 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "published": false,
+      "items": 122,
+      "classified": 121,
+      "supplier_assigned": 122,
+      "supplier_shown": 0
+    },
+    {
+      "id": 2,
+      "published": false,
+      "items": 30,
+      "classified": 30,
+      "supplier_assigned": 30,
+      "supplier_shown": 0
+    }
+  ],
+  "imageBlobs": 152,
+  "products": 0,
+  "migrations": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "9",
+    "10",
+    "11",
+    "12"
+  ],
+  "reservedNamespaceCollisions": 0,
+  "phase": "after",
+  "configuredRelease": "20261026.3",
+  "contentPreservation": "PASS (all seven frozen content tables exactly match)",
+  "source": "93394f79c9f59b6106f35f81a5817eef32a697dc",
+  "ciRun": 40312520350,
+  "containers": [
+    {
+      "name": "/bobuy-core-service",
+      "tag": "bobuy/core:20261026.3",
+      "imageId": "sha256:a8f14230754c4722b117d1e1b8e92cd544a4c5937ef277307f351373796ab7b2",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-ai-service",
+      "tag": "bobuy/ai:20261026.3",
+      "imageId": "sha256:1b697a8936117e915cc28c8a7e020ac0e2a460e83886ad261ef8615bbaa6473c",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-im-service",
+      "tag": "bobuy/im:20261026.3",
+      "imageId": "sha256:00738a403701c95cbac6c238fb7b16332b204723a2659a68d5d8ebe8aab645aa",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-auth-service",
+      "tag": "bobuy/auth:20261026.3",
+      "imageId": "sha256:ccf18e23c1e915ec6b419ee37c719f7a851e2e4225f2fe6f2c39397d4536ccbb",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-gateway-service",
+      "tag": "bobuy/router:20261026.3",
+      "imageId": "sha256:c96cf6c7f7f53069941ebf190ceb22a872943f0a438337088004611ddc83e572",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-frontend",
+      "tag": "bobuy/frontend:20261026.3",
+      "imageId": "sha256:76c402522862c52d6c9882122f5de6aa448a2287e152e1ebbfa4b9a91e51d592",
+      "health": "running",
+      "restarts": 0
+    }
+  ],
+  "protectedStateUnchanged": true,
+  "backup": {
+    "databaseRestore": "PASS",
+    "restoredMigrationHistoryAndSchema": "PASS",
+    "temporaryDatabaseRemoved": true,
+    "objectsArchive": "objects.tar.gz"
+  },
+  "result": "PASS"
+}

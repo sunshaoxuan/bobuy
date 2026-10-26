@@ -1,0 +1,9 @@
+{
+  "issue": "Raw byte preflight failed; activation was inadvertently started before inspecting that result.",
+  "localRawSha256": "a60d32e3f704af5bd08868dcf13f6a202eb70c871d73e94f2cb23dec35c49ac7",
+  "localLfSha256": "1681b2307b554cb1b92ca0766927ead2228cc53c7b983edf9cc3e0e5182c1b5f",
+  "productionRawSha256": "1681b2307b554cb1b92ca0766927ead2228cc53c7b983edf9cc3e0e5182c1b5f",
+  "result": "Equivalent content; CRLF/LF only",
+  "configurationChanged": false,
+  "correctiveFlow": "Future validation and activation must run in one short-circuiting command; never submit the activation before inspecting the validation result."
+}

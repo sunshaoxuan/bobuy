@@ -1,0 +1,59 @@
+{
+  "release": "20261026.3",
+  "source": "93394f79c9f59b6106f35f81a5817eef32a697dc",
+  "ciRun": 40312520350,
+  "ciHeadSha": "93394f79c9f59b6106f35f81a5817eef32a697dc",
+  "ciConclusion": "success",
+  "purchaseActivation": false,
+  "archiveSha256": "8e4e8ba55125391fa6690250ad093b8bf122ac0afa1193109a32fa62c82cb76d",
+  "images": [
+    {
+      "tags": [
+        "bobuy/core:20261026.3"
+      ],
+      "id": "sha256:a8f14230754c4722b117d1e1b8e92cd544a4c5937ef277307f351373796ab7b2"
+    },
+    {
+      "tags": [
+        "bobuy/ai:20261026.3"
+      ],
+      "id": "sha256:1b697a8936117e915cc28c8a7e020ac0e2a460e83886ad261ef8615bbaa6473c"
+    },
+    {
+      "tags": [
+        "bobuy/im:20261026.3"
+      ],
+      "id": "sha256:00738a403701c95cbac6c238fb7b16332b204723a2659a68d5d8ebe8aab645aa"
+    },
+    {
+      "tags": [
+        "bobuy/auth:20261026.3"
+      ],
+      "id": "sha256:ccf18e23c1e915ec6b419ee37c719f7a851e2e4225f2fe6f2c39397d4536ccbb"
+    },
+    {
+      "tags": [
+        "bobuy/router:20261026.3"
+      ],
+      "id": "sha256:c96cf6c7f7f53069941ebf190ceb22a872943f0a438337088004611ddc83e572"
+    },
+    {
+      "tags": [
+        "bobuy/frontend:20261026.3"
+      ],
+      "id": "sha256:76c402522862c52d6c9882122f5de6aa448a2287e152e1ebbfa4b9a91e51d592"
+    }
+  ],
+  "files": {
+    "docker-compose.yml": "ab7f454b9fdd40023f57bb620131dbaffbe2c5b83200f096881a139d3d6f1c6f",
+    "compose.production.yml": "a60d32e3f704af5bd08868dcf13f6a202eb70c871d73e94f2cb23dec35c49ac7",
+    "infra/nginx/bobuy.conf": "7efd7ee757f94d909a9e22acf44dd1587ee848756b63c40e11fe78f6eacb830a",
+    "scripts/publish-production.py": "9eb6fc9f6f51d74381fcd5672f0c143285cc212452b9f0c4e821ba9c67312a11",
+    "frontend/dist/index.html": "4bb2370ec0918eedfb845e8ca0962937b890714905561637deac78329a447f12",
+    "bobbuy-core/target/bobbuy-core-0.1.0.jar": "f156188af5990152ce3f378e4edc34d3de024e21775d61d64d86e50d660656c1",
+    "bobbuy-ai/target/bobbuy-ai-0.1.0.jar": "e42cb232670253165c4c4f2a31acf419cd8d986c48924f1763ec44060d7c3dcb",
+    "bobbuy-im/target/bobbuy-im-0.1.0.jar": "d8ee9a2824de15e0fbc4ed8fb96eeb511d2b3fdbc74b005c26f64823bc4d5d4f",
+    "bobbuy-auth/target/bobbuy-auth-0.1.0.jar": "d1154c1a420a1cf7a41299f898d1e88753c35b084c22fc09e9ad0f6c370067ea",
+    "bobbuy-gateway/target/bobbuy-gateway-0.1.0.jar": "1f1a7e3b2e49e9037acfa3609d70bce7dac3bc76842d5762d1590fcafa06b4d3"
+  }
+}

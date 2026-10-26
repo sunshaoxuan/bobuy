@@ -1,0 +1,14 @@
+{
+  "release": "20261026.3",
+  "applicationHealth": "PASS",
+  "protectedState": "PASS",
+  "publicRegistration": "CLOSED_PENDING_SMTP_ABUSE_RECOVERY",
+  "browserVerification": "PUBLIC_PASS_PRIVATE_UI_PENDING",
+  "source": "93394f79c9f59b6106f35f81a5817eef32a697dc",
+  "ciRun": 40312520350,
+  "purchaseActivation": false,
+  "contentPreservation": "PASS",
+  "privateUiVerification": "Parent existing authenticated normal UI; no production credential access",
+  "activationRecordedAt": "2026-10-26T11:21:31.950190+00:00",
+  "configurationPreflight": "Initial raw-byte FAIL; CRLF/LF equivalence verified; configuration unchanged; initial failure and sequencing error retained"
+}
