@@ -9,6 +9,7 @@ on:
       - 'backend/**'
       - 'pom.xml'
       - '.github/workflows/dependency-check.yml'
+      - 'scripts/run-dependency-audit.sh'
   pull_request:
     branches:
       - main
@@ -16,6 +17,7 @@ on:
       - 'backend/**'
       - 'pom.xml'
       - '.github/workflows/dependency-check.yml'
+      - 'scripts/run-dependency-audit.sh'
   workflow_dispatch:
 
 permissions:
@@ -25,6 +27,7 @@ jobs:
   dependency-check:
     name: dependency-check
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     env:
       NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
       NVD_DATAFEED_URL: ${{ vars.NVD_DATAFEED_URL }}
@@ -39,33 +42,21 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      - name: Cache Dependency-Check data
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/bobuy-dependency-data-v12.2.2
+          key: dependency-check-v12.2.2-${{ runner.os }}-${{ hashFiles('backend/pom.xml') }}-${{ github.run_id }}
+          restore-keys: |
+            dependency-check-v12.2.2-${{ runner.os }}-${{ hashFiles('backend/pom.xml') }}-
+            dependency-check-v12.2.2-${{ runner.os }}-
+
       - name: Run OWASP dependency-check
+        env:
+          BOBUY_AUDIT_RUNTIME_ONLY: 'true'
+          BOBUY_AUDIT_DATA_DIR: ${{ runner.temp }}/bobuy-dependency-data-v12.2.2
         shell: bash
-        run: |
-          set -euo pipefail
-
-          args=(
-            -B
-            org.owasp:dependency-check-maven:12.1.8:check
-            -Dformats=HTML,JSON
-            -DoutputDirectory=/tmp/bobbuy-dependency-check
-            -DskipProvidedScope=true
-            -DskipTestScope=true
-          )
-
-          if [[ -n "${NVD_API_KEY:-}" ]]; then
-            args+=("-DnvdApiKeyEnvironmentVariable=NVD_API_KEY")
-          fi
-
-          if [[ -n "${NVD_DATAFEED_URL:-}" ]]; then
-            args+=("-DnvdDatafeedUrl=${NVD_DATAFEED_URL}")
-          fi
-
-          if [[ -n "${KNOWN_EXPLOITED_URL:-}" ]]; then
-            args+=("-DknownExploitedUrl=${KNOWN_EXPLOITED_URL}")
-          fi
-
-          mvn "${args[@]}" --file backend/pom.xml
+        run: bash scripts/run-dependency-audit.sh
 
       - name: Upload dependency-check reports
         if: always()
@@ -73,6 +64,5 @@ jobs:
         with:
           name: dependency-check-report
           path: |
-            backend/target/dependency-check-report.html
-            backend/target/dependency-check-report.json
+            backend/target/dependency-audit/
           if-no-files-found: error

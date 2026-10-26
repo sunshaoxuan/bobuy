@@ -173,6 +173,7 @@ jobs:
     name: maven-dependency-audit
     if: github.event_name == 'workflow_dispatch' && inputs.run_maven_dependency_audit
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
 
@@ -186,26 +187,22 @@ jobs:
       - name: Cache Dependency-Check data
         uses: actions/cache@v4
         with:
-          path: ~/.m2/repository/org/owasp/dependency-check-data
-          key: dependency-check-data-${{ runner.os }}-${{ hashFiles('backend/pom.xml') }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/bobuy-dependency-data-v12.2.2
+          key: dependency-check-v12.2.2-${{ runner.os }}-${{ hashFiles('backend/pom.xml') }}-${{ github.run_id }}
           restore-keys: |
-            dependency-check-data-${{ runner.os }}-${{ hashFiles('backend/pom.xml') }}-
-            dependency-check-data-${{ runner.os }}-
+            dependency-check-v12.2.2-${{ runner.os }}-${{ hashFiles('backend/pom.xml') }}-
+            dependency-check-v12.2.2-${{ runner.os }}-
 
       - name: Run OWASP Dependency-Check
         env:
           NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+          BOBUY_AUDIT_DATA_DIR: ${{ runner.temp }}/bobuy-dependency-data-v12.2.2
         run: |
           if [ -z "${NVD_API_KEY}" ]; then
             echo "NVD_API_KEY GitHub Actions secret is required for this manual job." >&2
             exit 1
           fi
-          mvn -B --file backend/pom.xml \
-            org.owasp:dependency-check-maven:12.1.8:check \
-            -DnvdApiKey="${NVD_API_KEY}" \
-            -DnvdValidForHours=24 \
-            -Dformat=HTML \
-            -Dformat=JSON
+          bash scripts/run-dependency-audit.sh
 
       - name: Upload Dependency-Check report
         if: always()
@@ -213,8 +210,7 @@ jobs:
         with:
           name: maven-dependency-check-report
           path: |
-            backend/target/dependency-check-report.html
-            backend/target/dependency-check-report.json
+            backend/target/dependency-audit/
           if-no-files-found: ignore
 
   # `npm run e2e:ai` remains outside hosted default CI because it requires a dedicated
