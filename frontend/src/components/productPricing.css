@@ -1,0 +1,5 @@
+.pricing-history-cards {display:none;}
+.pricing-history-cards article {border:1px solid #e5e5e1;border-radius:14px;padding:14px;margin:12px 0;overflow-wrap:anywhere;line-height:1.7;}
+.pricing-history-cards article>div:first-child {display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
+.rec-sale-actual small {display:block;line-height:1.6;}
+@media(max-width:600px){.pricing-history-table {display:none;}.pricing-history-cards {display:block;}}

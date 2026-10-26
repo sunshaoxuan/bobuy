@@ -71,6 +71,21 @@ class RestoredDatabaseValidationTest(unittest.TestCase):
 
 
 class AdditiveContentMigrationTests(unittest.TestCase):
+    def test_orders_frozen_before_v17_and_price_history_frozen_after_v17(self):
+        tables=publisher.CONTENT_TABLES
+        values=[]
+        for table in tables:
+            values.extend(['id','1:hash'] if table!='bb_product_price_adjustment' else [''])
+        with patch.object(publisher.subprocess,'check_output',side_effect=values):
+            before=publisher.content_fingerprint()
+        self.assertIn('bb_order_header',before)
+        self.assertNotIn('bb_product_price_adjustment',before)
+        with patch.object(publisher.subprocess,'check_output',side_effect=['1:hash']*len(before)):
+            self.assertEqual(publisher.content_fingerprint(before),before)
+        with patch.object(publisher.subprocess,'check_output',side_effect=['id','1:hash']*len(tables)):
+            after=publisher.content_fingerprint()
+        self.assertIn('bb_product_price_adjustment',after)
+        with self.assertRaises(ValueError):publisher.content_fingerprint({})
     def test_projection_freezes_all_old_columns_without_new_defaults(self):
         query=publisher.content_projection_query('bb_recommendation_item',['id','name','offer_notes'])
         self.assertIn("'id',t.\"id\"",query)

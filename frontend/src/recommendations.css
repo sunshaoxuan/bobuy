@@ -165,3 +165,4 @@ html[lang=en-US] .recommendations .ant-btn>span:not(.ant-btn-icon):not(.anticon)
 .rec-item-categories span {background:#f0f2f0;padding:2px 6px;border-radius:8px;}
 .rec-supplier {display:block;color:#535e56;padding:4px;font-size:13px;overflow-wrap:anywhere;}
 @media(max-width:650px){.rec-classification {padding:12px;}.rec-classify-controls>div{align-items:stretch;flex-direction:column;}.rec-classify-controls .ant-select {width:100%;min-width:0;}.rec-classification .rec-section-heading{align-items:flex-start;}}
+.rec-sale-actual small {display:block;line-height:1.6;}

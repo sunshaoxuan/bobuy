@@ -19,6 +19,21 @@ public class OrderLine {
     public String getCurrency(){return currency;}
     public void setCurrency(String value){currency=value;}
     private long priceRevision;
+    private java.math.BigDecimal quotedAmount;
+    private java.math.BigDecimal regularAmount;
+    private Long priceAdjustmentId;
+    private String priceChannel;
+    private java.time.Instant pricedAt;
+    public java.math.BigDecimal getQuotedAmount(){return quotedAmount;}
+    public void setQuotedAmount(java.math.BigDecimal value){quotedAmount=value;}
+    public java.math.BigDecimal getRegularAmount(){return regularAmount;}
+    public void setRegularAmount(java.math.BigDecimal value){regularAmount=value;}
+    public Long getPriceAdjustmentId(){return priceAdjustmentId;}
+    public void setPriceAdjustmentId(Long value){priceAdjustmentId=value;}
+    public String getPriceChannel(){return priceChannel;}
+    public void setPriceChannel(String value){priceChannel=value;}
+    public java.time.Instant getPricedAt(){return pricedAt;}
+    public void setPricedAt(java.time.Instant value){pricedAt=value;}
     public long getPriceRevision(){return priceRevision;}
     public void setPriceRevision(long value){priceRevision=value;}
     private double unitPrice; // 单价

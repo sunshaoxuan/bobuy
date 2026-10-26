@@ -1,0 +1,79 @@
+{
+  "scope": "Normal visible UI only on existing LOCAL synthetic private NAV-TEST-000; no API-write fixture setup, no production, no orders/payments",
+  "checks": {
+    "visibleDraftSaveRefreshReopen": "PASS",
+    "explicitApprovalAndOverlapRejectionWithConflictId": "PASS",
+    "realServerExpiryRestoresUnchangedRegularQuoteWithoutPublication": "PASS",
+    "editScheduledCancelRetainsHistoryAndMobile": "PASS",
+    "reloadAndExpiredMobileEvidence": "PASS"
+  },
+  "errors": [],
+  "writes": [
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "host": "127.0.0.1"
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/product-pricing/13156667-be11-3f6c-aca5-9de0f857b9d6/adjustments",
+      "host": "127.0.0.1"
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/product-pricing/13156667-be11-3f6c-aca5-9de0f857b9d6/adjustments/1/approve",
+      "host": "127.0.0.1"
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/product-pricing/13156667-be11-3f6c-aca5-9de0f857b9d6/adjustments",
+      "host": "127.0.0.1"
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/product-pricing/13156667-be11-3f6c-aca5-9de0f857b9d6/adjustments/2/approve",
+      "host": "127.0.0.1"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "host": "127.0.0.1"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/merchant/product-pricing/13156667-be11-3f6c-aca5-9de0f857b9d6/adjustments/2",
+      "host": "127.0.0.1"
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/product-pricing/13156667-be11-3f6c-aca5-9de0f857b9d6/adjustments/2/approve",
+      "host": "127.0.0.1"
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/product-pricing/13156667-be11-3f6c-aca5-9de0f857b9d6/adjustments/2/cancel",
+      "host": "127.0.0.1"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "host": "127.0.0.1"
+    }
+  ],
+  "draftIds": [
+    1,
+    2
+  ],
+  "originalRegular": {
+    "amount": 500,
+    "currency": "JPY",
+    "unit": "100g（合成）",
+    "validFrom": null,
+    "validThrough": null,
+    "revision": 1,
+    "reviewedBy": 1000,
+    "reviewedAt": "2026-10-26T13:39:42.092139531Z",
+    "enabled": true
+  },
+  "result": "PASS"
+}

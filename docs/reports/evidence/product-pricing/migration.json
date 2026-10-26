@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "scope": "V17 in an isolated restore-probe DB inside existing shared PostgreSQL; no production writes or new containers/images",
+  "preexistingTablesPreserved": 27,
+  "noAutomaticAdjustmentsOrPriceUpdates": true,
+  "actualPublisherAddedTableCleanupAndRestore": true,
+  "backupSha256": "101e63b96363f9faafb1835b030ffe76cf5ac76504c2e87f167f90e5bec195dd"
+}

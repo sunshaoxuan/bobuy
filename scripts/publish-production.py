@@ -57,7 +57,7 @@ def database_fingerprint(database=None):
     return result
 
 
-CONTENT_TABLES = ('bb_recommendation_post','bb_recommendation_item','bb_recommendation_image','bb_category','bb_supplier','bb_product','bb_merchant_sku')
+CONTENT_TABLES = ('bb_recommendation_post','bb_recommendation_item','bb_recommendation_image','bb_category','bb_supplier','bb_product','bb_merchant_sku','bb_order_header','bb_product_price_adjustment')
 
 
 def content_projection_query(table, columns):
@@ -75,8 +75,14 @@ def content_fingerprint(before=None):
         return subprocess.check_output(['docker','exec','-i','bobuy-postgres','sh','-c',
             'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -qAt -v ON_ERROR_STOP=1'],input=query,text=True).strip()
     result = {}
-    for table in CONTENT_TABLES:
-        columns = before[table]['columns'] if before else sql("select column_name from information_schema.columns where table_schema='public' and table_name='" + table + "' order by ordinal_position;").splitlines()
+    if before is not None and not before:
+        raise ValueError('Missing frozen-content inventory')
+    for table in (before if before is not None else CONTENT_TABLES):
+        columns = before[table]['columns'] if before is not None else sql("select column_name from information_schema.columns where table_schema='public' and table_name='" + table + "' order by ordinal_position;").splitlines()
+        # V17 introduces this table. Freeze it on every subsequent release;
+        # this release separately verifies that no adjustments were generated.
+        if before is None and table == 'bb_product_price_adjustment' and not columns:
+            continue
         # A removed/renamed old column fails in PostgreSQL; changed values/counts
         # fail the exact hash comparison. Backup restore still checks full schema.
         result[table] = {'columns':columns,'fingerprint':sql(content_projection_query(table,columns))}

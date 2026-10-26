@@ -37,6 +37,7 @@ import L10nInput, { type L10nValues } from '../components/L10nInput';
 import MediaGallery, { type MediaItem } from '../components/MediaGallery';
 import AiQuickAddModal from '../components/AiQuickAddModal';
 import ProductCatalogPanel from '../components/ProductCatalogPanel';
+import ProductPricingPanel from '../components/ProductPricingPanel';
 import { api, type CategoryAttributeTemplateField, type MobileCategory, type MobileSupplier, type AiOnboardingSuggestion } from '../api';
 
 const { Title, Text } = Typography;
@@ -246,6 +247,7 @@ export default function StockMaster() {
 
   const [dataSource, setDataSource] = useState<StockItem[]>([]);
   const [catalogId,setCatalogId]=useState<string|undefined>(()=>new URLSearchParams(window.location.search).get('product')||undefined);
+  const [pricingId,setPricingId]=useState<string>();
 
   useEffect(() => {
     let cancelled = false;
@@ -642,6 +644,7 @@ export default function StockMaster() {
       render: (_: any, record: StockItem) => (
         <Space>
           <Button size="small" disabled={record.isNew} onClick={()=>setCatalogId(record.key)}>{t('master.title')}</Button>
+          <Button size="small" disabled={record.isNew} onClick={()=>setPricingId(record.key)}>{t('pricing.title')}</Button>
           <Button type="text" icon={<EditOutlined />} onClick={() => record.catalogDriven?setCatalogId(record.key):openDrawer(record)} />
           <Button type="text" danger icon={<DeleteOutlined />} onClick={() => handleDelete(record.key)} />
         </Space>
@@ -678,6 +681,7 @@ export default function StockMaster() {
                 </Text>
                 <Space size={4}>
                   <Button size="small" disabled={item.isNew} onClick={()=>setCatalogId(item.key)}>{t('master.title')}</Button>
+                  <Button size="small" disabled={item.isNew} onClick={()=>setPricingId(item.key)}>{t('pricing.title')}</Button>
                   <Button type="text" icon={<EditOutlined />} onClick={() => item.catalogDriven?setCatalogId(item.key):openDrawer(item)} aria-label={t('stock.master.edit_detail')} />
                   <Button type="text" danger icon={<DeleteOutlined />} onClick={() => handleDelete(item.key)} aria-label={t('stock.master.discard')} />
                 </Space>
@@ -754,6 +758,7 @@ export default function StockMaster() {
         )}
       </div>
 
+      <ProductPricingPanel id={pricingId} onClose={()=>setPricingId(undefined)} onSaved={sheet=>setDataSource(prior=>prior.map(row=>row.key===sheet.productId?{...row,actualSale:sheet.regular??undefined}:row))}/>
       {isMobile ? (
         renderMobileCards()
       ) : (

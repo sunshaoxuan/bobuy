@@ -28,3 +28,10 @@ it('drops old private node choices immediately and ignores a late response after
  await screen.findByRole('option',{name:'Node 4'});await act(async()=>resolveA([{id:33,agentId:3,status:'COMPLETED'}]));
  expect(screen.queryByRole('option',{name:'Node 3'})).not.toBeInTheDocument();expect(screen.getByRole('option',{name:'Node 4'})).toBeInTheDocument();
 });
+it('requires an explicit cart refresh even when an unchanged regular revision has a new effective-price token',async()=>{
+ mocks.products.mockResolvedValue([{id:'1',merchantId:1,name:{'en-US':'Product 1'},description:{},brand:'Fixture',images:[],price:12,currency:'JPY',priceRevision:0,priceToken:'new-effective-token',categoryId:''}]);
+ localStorage.setItem(CART_KEY,JSON.stringify({tripId:11,requestId:crypto.randomUUID(),items:{'1':2},currency:'JPY',quotes:{'1':{price:10,currency:'JPY',revision:0,token:'old-token'}}}));
+ render(<I18nProvider><MemoryRouter initialEntries={['/cart?node=1']}><Storefront/></MemoryRouter></I18nProvider>);
+ const refresh=await screen.findByRole('button',{name:'Review and update cart prices'});expect(JSON.parse(localStorage.getItem(CART_KEY)!).quotes['1'].price).toBe(10);
+ fireEvent.click(refresh);await waitFor(()=>expect(JSON.parse(localStorage.getItem(CART_KEY)!).quotes['1']).toMatchObject({price:12,token:'new-effective-token'}));
+});

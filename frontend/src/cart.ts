@@ -1,4 +1,4 @@
-export type Cart = { tripId: number | null; requestId: string; items: Record<string, number>; currency?:string;quotes?:Record<string,{price:number;currency:string;revision:number}> };
+export type Cart = { tripId: number | null; requestId: string; items: Record<string, number>; currency?:string;quotes?:Record<string,{price:number;currency:string;revision:number;token?:string}> };
 export const CART_KEY = 'bobuy.cart.v1';
 export function emptyCart(): Cart { return { tripId: null, requestId: crypto.randomUUID(), items: {},currency:'JPY',quotes:{} }; }
 export function readCart(): Cart {

@@ -125,6 +125,13 @@ export default function Storefront() {
     } catch (e) { setError((e as Error).message); } finally { setLoading(false); }
   }
   useEffect(() => { void load(); }, []);
+  useEffect(()=>{setDetail(prior=>prior?products.find(p=>p.id===prior.id):prior);setQuantityProduct(prior=>prior?products.find(p=>p.id===prior.id):prior);},[products]);
+  useEffect(()=>{
+    const now=Date.now(),boundaries=products.map(p=>Date.parse(p.priceValidUntil??'')).filter(value=>Number.isFinite(value)&&value>now);
+    if(!boundaries.length)return;
+    const timer=window.setTimeout(()=>{void storefrontApi.products().then(setProducts).catch(e=>setError((e as Error).message));},Math.min(2147483647,Math.max(100,Math.min(...boundaries)-now+100)));
+    return()=>window.clearTimeout(timer);
+  },[products]);
   useEffect(()=>{
     let active=true;setPrivateNodes({userId:user?.id,ids:[]});
     if(isCustomer)void api.customerTrips().then(values=>{if(active)setPrivateNodes({userId:user?.id,ids:[...new Set(values.map(value=>value.agentId))]});}).catch(()=>{ /* Public browsing stays available; private pages show their own errors. */ });
@@ -145,16 +152,16 @@ export default function Storefront() {
   const shown = available.filter(p => `${text(p.name)} ${p.brand} ${text(p.description)}`.toLowerCase().includes(search.toLowerCase()));
   const canBuyRecommendation=(product:StoreProduct)=>product.recommendationReady===true&&trips.some(journey=>journey.merchantId===product.merchantId);
   const total = cartEntries.reduce((sum,[id,qty])=>sum+(cart.quotes?.[id]?.price??products.find(p=>p.id===id)?.price??0)*qty,0);
-  const invalidCart = !trip || cartEntries.some(([id]) => !products.some(p => p.id === id && p.merchantId === trip.merchantId && (p.currency??'JPY')===(cart.currency??'JPY') && (!(p.priceRevision??0)||(cart.quotes?.[id]?.revision===p.priceRevision&&cart.quotes?.[id]?.price===p.price&&cart.quotes?.[id]?.currency===p.currency))));
+  const invalidCart = !trip || cartEntries.some(([id]) => !products.some(p => p.id === id && p.merchantId === trip.merchantId && (p.currency??'JPY')===(cart.currency??'JPY') && (!p.priceToken||cart.quotes?.[id]?.token===p.priceToken) && (!(p.priceRevision??0)||(cart.quotes?.[id]?.revision===p.priceRevision&&cart.quotes?.[id]?.price===p.price&&cart.quotes?.[id]?.currency===p.currency))));
   function change(id:string,value:number){const product=products.find(p=>p.id===id);if(!product&&value>0)return;
-    setCart(prior=>{const next=changeQuantity(prior,id,value);const quotes={...prior.quotes};if(value<=0)delete quotes[id];else quotes[id]={price:product!.price,currency:product!.currency??'JPY',revision:product!.priceRevision??0};return {...next,currency:product?.currency??prior.currency??'JPY',quotes};});setReceipt(undefined);
+    setCart(prior=>{const next=changeQuantity(prior,id,value);const quotes={...prior.quotes};if(value<=0)delete quotes[id];else quotes[id]={price:product!.price,currency:product!.currency??'JPY',revision:product!.priceRevision??0,token:product!.priceToken};return {...next,currency:product?.currency??prior.currency??'JPY',quotes};});setReceipt(undefined);
   }
   function addRecommendation(product:StoreProduct){
     if(!canBuyRecommendation(product))return;
     if(product.merchantId!==trip?.merchantId){setTripPicker(true);return;}
     setCart(prior=>{if(Object.keys(prior.items).length&&(prior.currency??'JPY')!==(product.currency??'JPY'))return prior;
       const next=changeQuantity(prior,product.id,(prior.items[product.id]??0)+1);
-      return {...next,currency:product.currency??'JPY',quotes:{...prior.quotes,[product.id]:{price:product.price,currency:product.currency??'JPY',revision:product.priceRevision??0}}};});setReceipt(undefined);
+      return {...next,currency:product.currency??'JPY',quotes:{...prior.quotes,[product.id]:{price:product.price,currency:product.currency??'JPY',revision:product.priceRevision??0,token:product.priceToken}}};});setReceipt(undefined);
   }
   function configureQuantity(product: StoreProduct) {
     if (product.merchantId !== trip?.merchantId) { setDetail(undefined); setTripPicker(true); return; }
@@ -175,9 +182,9 @@ export default function Storefront() {
     if (!trip || invalidCart || !quantity) return;
     setBusy(true); setError('');
     try {
-      const result = await storefrontApi.checkout({ requestId: cart.requestId, tripId: trip.id,currency:cart.currency??'JPY', items: cartEntries.map(([productId, qty]) => ({ productId, quantity: qty,priceRevision:cart.quotes?.[productId]?.revision,currency:cart.quotes?.[productId]?.currency })) });
+      const result = await storefrontApi.checkout({ requestId: cart.requestId, tripId: trip.id,currency:cart.currency??'JPY', items: cartEntries.map(([productId, qty]) => ({ productId, quantity: qty,priceRevision:cart.quotes?.[productId]?.revision,currency:cart.quotes?.[productId]?.currency,priceToken:cart.quotes?.[productId]?.token })) });
       setReceipt(result); setCart({ ...emptyCart(), tripId: trip.id });
-    } catch (e) { setError((e as Error).message); } finally { setBusy(false); }
+    } catch (e) { setError(t((e as Error).message));void storefrontApi.products().then(setProducts).catch(()=>{}); } finally { setBusy(false); }
   }
   function stepper(product: StoreProduct, count: number) {
     return <div className="quantity-control"><Button icon={count === 1 ? <DeleteOutlined /> : <MinusOutlined />} aria-label={t('store.decrease',{name:text(product.name)})} onClick={() => change(product.id, count - 1)} />
@@ -189,7 +196,7 @@ export default function Storefront() {
   const basket = <section className="basket"><div className="section-heading"><h1>{t('store.cart')} <small>{t('store.item_count',{count:quantity})}</small></h1><Link to="/">{t('store.continue')} <ArrowRightOutlined /></Link></div>
     {quantity === 0 ? <Empty description={t('store.cart_empty')}><Link to="/"><Button type="primary">{t('store.browse')}</Button></Link></Empty> : <>
       {trip && <div className="basket-trip"><CalendarOutlined /><div><strong>{trip.deliveryArea}</strong><p>{trip.deliveryDate} · {trip.merchantName}</p></div></div>}
-      {invalidCart && <Alert type="warning" message={t('store.cart_invalid')} action={<Button onClick={()=>{setCart(prior=>({...prior,requestId:crypto.randomUUID(),currency:'JPY',quotes:Object.fromEntries(products.filter(p=>prior.items[p.id]).map(p=>[p.id,{price:p.price,currency:p.currency??'JPY',revision:p.priceRevision??0}]))}));}}>{t('sale.refresh_cart')}</Button>}/>}
+      {invalidCart && <Alert type="warning" message={t('store.cart_invalid')} action={<Button onClick={()=>{setCart(prior=>({...prior,requestId:crypto.randomUUID(),quotes:Object.fromEntries(products.filter(p=>prior.items[p.id]&&(p.currency??'JPY')===(prior.currency??'JPY')).map(p=>[p.id,{price:p.price,currency:p.currency??'JPY',revision:p.priceRevision??0,token:p.priceToken}]))}));}}>{t('sale.refresh_cart')}</Button>}/>}
       <div className="basket-lines">{cartEntries.map(([id, qty]) => {
         const product = products.find(p => p.id === id);
         return product ? <article className="basket-line" key={id}><div className="basket-photo">{image(product)}</div><div><h2>{text(product.name)}</h2><p>{money(cart.quotes?.[id]?.price??product.price,product.currency)} / {product.saleUnit}</p>{stepper(product, qty)}</div><strong>{money((cart.quotes?.[id]?.price??product.price)*qty,product.currency)}</strong></article> :

@@ -12,7 +12,7 @@ import java.util.List;
 
 @Converter
 public class OrderLineListJsonConverter implements AttributeConverter<List<OrderLine>, String> {
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper().findAndRegisterModules();
     private static final TypeReference<List<OrderLine>> TYPE_REFERENCE = new TypeReference<>() {
     };
 

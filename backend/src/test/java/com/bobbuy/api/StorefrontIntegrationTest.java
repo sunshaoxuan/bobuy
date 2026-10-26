@@ -33,6 +33,7 @@ class StorefrontIntegrationTest {
     @Autowired OrderHeaderRepository orders;
     @Autowired EmailChallengeRepository challenges;
     @Autowired MerchantCustomerRepository relations;
+    @Autowired ProductSaleService sales;
     @MockBean JavaMailSender mail;
 
     @BeforeEach void setup() {
@@ -49,7 +50,8 @@ class StorefrontIntegrationTest {
     }
     String token(JsonNode registration) { return registration.get("accessToken").asText(); }
     String checkoutBody(UUID requestId, long tripId, String product, int quantity) throws Exception {
-        return json.writeValueAsString(Map.of("requestId",requestId,"tripId",tripId,"items",List.of(Map.of("productId",product,"quantity",quantity))));
+        String quote=products.findById(product).flatMap(sales::quote).map(ProductSaleService.Quote::priceToken).orElse("unavailable");
+        return json.writeValueAsString(Map.of("requestId",requestId,"tripId",tripId,"items",List.of(Map.of("productId",product,"quantity",quantity,"priceToken",quote))));
     }
     ResultActions checkout(String token, String body) throws Exception {
         return mvc.perform(post("/api/checkout").header("Authorization","Bearer " + token).contentType(MediaType.APPLICATION_JSON).content(body));

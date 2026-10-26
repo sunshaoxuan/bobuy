@@ -55,7 +55,7 @@ public class StorefrontService {
             .filter(p->p.getVisibilityStatus()==ProductVisibility.PUBLIC)
             .flatMap(p->sales.quote(p).stream().map(q->new PublicProduct(p.getId(),p.getMerchantId(),p.getName(),p.getDescription(),p.getBrand(),q.amount().doubleValue(),
                 p.getCategoryId(),p.getMediaGallery().stream().filter(MediaGalleryItem::isVisible).filter(m->m.getType()==MediaType.IMAGE).map(MediaGalleryItem::getUrl).toList(),
-                q.currency(),q.unit(),q.revision(),p.getOrderMethod()==OrderMethod.PRE_ORDER))).toList();
+                q.currency(),q.unit(),q.revision(),p.getOrderMethod()==OrderMethod.PRE_ORDER,q.priceToken(),q.regularAmount(),q.adjustmentId(),q.validFrom(),q.validUntil()))).toList();
     }
 
     @Transactional
@@ -142,19 +142,30 @@ public class StorefrontService {
         OrderHeader order = new OrderHeader(businessId, user.getId(), trip.getId());
         order.setId(nextId());
         BigDecimal total = BigDecimal.ZERO;
-        for (var entry : quantities(request.items()).entrySet()) {
-            Product product = products.lockById(entry.getKey())
+        var quantities=quantities(request.items());
+        Map<String,Product> lockedProducts=new LinkedHashMap<>();
+        for (String productId:quantities.keySet()) {
+            Product product = products.lockById(productId)
                 .filter(p -> p.getVisibilityStatus() == ProductVisibility.PUBLIC)
                 .filter(p -> trip.getAgentId().equals(p.getMerchantId()))
                 .orElseThrow(() -> invalid("商品已下架，请刷新购物车"));
-            var quote=sales.quote(product).orElseThrow(()->invalid("sale.unavailable"));
+            lockedProducts.put(productId,product);
+        }
+        // Wait for all sorted product locks before choosing the common pricing
+        // timestamp; a concurrent approval cannot retain a pre-expiry quote.
+        Instant pricedAt=sales.now();
+        for (var entry:quantities.entrySet()) {
+            Product product=lockedProducts.get(entry.getKey());
+            var quote=sales.quoteAt(product,pricedAt).orElseThrow(()->invalid("sale.unavailable"));
             if(!quote.currency().equals(request.currency()==null?"JPY":request.currency()))throw invalid("sale.mixed_currency");
             var supplied=request.items().stream().filter(i->i.productId().equals(product.getId())).toList();
             if(supplied.stream().anyMatch(i->(i.currency()!=null&&!i.currency().equals(quote.currency()))
-                ||(quote.revision()>0&&(i.priceRevision()==null||i.priceRevision()!=quote.revision()))))throw invalid("sale.conflict");
+                ||!Objects.equals(i.priceToken(),quote.priceToken())
+                ||(quote.revision()>0&&(i.priceRevision()==null||i.priceRevision()!=quote.revision()))))throw invalid("pricing.quote_changed");
             OrderLine line = new OrderLine(product.getId(), product.getName().getOrDefault("zh-CN", product.getName().values().stream().findFirst().orElse(product.getId())),
                 quote.unit(), entry.getValue(), quote.amount().doubleValue());
             line.setNames(product.getName());line.setCurrency(quote.currency());line.setPriceRevision(quote.revision());line.setId(nextId());
+            line.setQuotedAmount(quote.amount());line.setRegularAmount(quote.regularAmount());line.setPriceAdjustmentId(quote.adjustmentId());line.setPriceChannel(quote.channel());line.setPricedAt(pricedAt);
             order.addLine(line);
             total = total.add(quote.amount().multiply(BigDecimal.valueOf(entry.getValue())));
         }
@@ -228,9 +239,9 @@ public class StorefrontService {
     public record AccountRegistration(@NotNull @Valid Registration account) {}
     public record PublicTrip(Long id, Long merchantId, String merchantName, String deliveryArea, LocalDate deliveryDate) {}
     public record PublicProduct(String id, Long merchantId, Map<String,String> name, Map<String,String> description, String brand,
-        double price, String categoryId, List<String> images,String currency,String saleUnit,long priceRevision,boolean recommendationReady) {}
-    public record Item(@NotBlank @Size(max = 255) String productId, @Min(1) @Max(99) int quantity,Long priceRevision,String currency) {
-        public Item(String productId,int quantity){this(productId,quantity,null,null);}
+        double price, String categoryId, List<String> images,String currency,String saleUnit,long priceRevision,boolean recommendationReady,String priceToken,BigDecimal regularPrice,Long priceAdjustmentId,Instant priceValidFrom,Instant priceValidUntil) {}
+    public record Item(@NotBlank @Size(max = 255) String productId, @Min(1) @Max(99) int quantity,Long priceRevision,String currency,@Size(max=64) String priceToken) {
+        public Item(String productId,int quantity){this(productId,quantity,null,null,null);}
     }
     public record Checkout(@NotNull UUID requestId, @NotNull Long tripId, @NotEmpty @Size(max = 50) List<@Valid Item> items,String currency) {
         public Checkout(UUID requestId,Long tripId,List<Item> items){this(requestId,tripId,items,"JPY");}

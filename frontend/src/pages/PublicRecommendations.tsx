@@ -9,7 +9,7 @@ import '../recommendations.css';
 import {categoryChoices,filterRecommendations,UNCLASSIFIED} from '../recommendationFilters';
 import {scopedPath,selectedNode} from '../storeNavigation';
 import {recommendationText} from '../recommendationText';
-import {formatMoney} from '../currency';
+import SellingPrice from '../components/SellingPrice';
 import {RecommendationImageViewer} from '../components/RecommendationImageViewer';
 import {RecommendationName} from '../components/RecommendationName';
 import type {RecommendationItem} from '../api';
@@ -82,7 +82,7 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
         {item.showSupplier&&item.supplierName&&<small className="rec-supplier">{t('class.supplier')}: {localizedContent(item.supplierName,locale)}</small>}
         <OfferInfo facts={{...item,offerNotes:text.offerNotes}} compact/>
         {!!(text.offerNotes||text.description)&&<button className="rec-condition-link" onClick={()=>openItem(item)}>{t('rec.conditions_detail')}</button>}
-        {product&&<strong className="rec-sale-actual">{t('sale.actual')}: {formatMoney(product.price,product.currency,locale)}{product.saleUnit&&' / '+product.saleUnit}</strong>}
+        {product&&<SellingPrice product={product}/>}
         {!buyable && <small className="rec-pin-status">{t(readOnlyPreview?'rec.preview_only':item.productId ? 'catalog.not_available' : 'rec.reference_only')}</small>}
       </article>;
     })}</div>
@@ -98,7 +98,7 @@ function RecommendationProductDetail({item,product,onClose,onAdd,canBuy}:{item?:
   <RecommendationImageViewer key={item.id} pictures={gallery} name={text.name}/>
   <h1><RecommendationName text={text}/></h1><p>{t('rec.code')}: {item.itemNumber||t('rec.not_stated')}</p>{text.missing&&<Alert type="info" message={t('translation.fallback')}/>}
   {text.specification&&<p className="rec-detail-spec">{text.specification}</p>}
-  {product&&<h2>{t('sale.actual')}: {formatMoney(product.price,product.currency,locale)} / {product.saleUnit}</h2>}
+  {product&&<SellingPrice product={product}/>}
   <OfferInfo facts={{...item,offerNotes:text.offerNotes}}/>
   {text.description&&<section className="rec-detail-description"><h2>{t('store.details')}</h2>{text.description.split('\n').map((line,i)=><p key={i}>{line}</p>)}</section>}
   {item.showSupplier&&item.supplierName&&<p>{t('class.supplier')}: {localizedContent(item.supplierName,locale)}</p>}

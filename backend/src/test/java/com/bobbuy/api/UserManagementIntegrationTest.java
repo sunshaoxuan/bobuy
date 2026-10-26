@@ -119,8 +119,10 @@ class UserManagementIntegrationTest {
         mvc.perform(post("/api/admin/users").header("Authorization", "Bearer " + token).contentType(MediaType.APPLICATION_JSON)
             .content(json.writeValueAsString(edit("forged_merchant",List.of("AGENT"))))).andExpect(status().isForbidden());
         mvc.perform(get("/api/merchant/recommendations").header("Authorization", "Bearer " + token)).andExpect(status().isForbidden());
+        var publicCatalog=json.readTree(mvc.perform(get("/api/storefront/products")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString()).at("/data");
+        String priceToken=java.util.stream.StreamSupport.stream(publicCatalog.spliterator(),false).filter(p->p.get("id").asText().equals("prd-1000")).findFirst().orElseThrow().get("priceToken").asText();
         mvc.perform(post("/api/checkout").header("Authorization", "Bearer " + token).contentType(MediaType.APPLICATION_JSON)
-            .content(json.writeValueAsString(Map.of("requestId", UUID.randomUUID(), "tripId", 2000, "items", List.of(Map.of("productId", "prd-1000", "quantity", 1))))))
+            .content(json.writeValueAsString(Map.of("requestId", UUID.randomUUID(), "tripId", 2000, "items", List.of(Map.of("productId", "prd-1000", "quantity", 1,"priceToken",priceToken))))))
             .andExpect(status().isOk());
         mvc.perform(get("/api/customer/orders").header("Authorization", "Bearer " + token)).andExpect(status().isOk()).andExpect(jsonPath("$.data.length()").value(1));
         mvc.perform(get("/api/customer/trips").header("Authorization", "Bearer " + token)).andExpect(status().isOk()).andExpect(jsonPath("$.data.length()").value(1));

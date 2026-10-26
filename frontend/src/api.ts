@@ -1010,6 +1010,16 @@ const recommendationBase = '/api/merchant/recommendations';
 export type CatalogMedia={url:string;type:string;title:Record<string,string>;visible:boolean;sha256?:string|null;sourceUrl?:string|null;sourceDomain?:string|null;sourceType?:string|null};
 export type CatalogInput={productId:string;version:number;name:Record<string,string>;description:Record<string,string>;itemNumber?:string|null;brand?:string|null;specification:Record<string,string>;model?:string|null;packaging?:string|null;categoryIds:string[];supplierId?:string|null;gallery:CatalogMedia[];translationsReviewed:boolean};
 export type CatalogProposal={value:CatalogInput;changes:string[];warnings:string[]};
+export type PriceAdjustment={id:number;version:number;productId:string;channel:string;currency:string;amount:number;unit?:string;startsAt:string;endsAt:string;status:'DRAFT'|'APPROVED'|'CANCELLED';sourceNote:string;createdBy:number;createdAt:string;updatedAt:string;approvedAt?:string;cancelledAt?:string};
+export type PricingInput={channel:string;currency:string;amount:number;startsAt:string;endsAt:string;sourceNote:string;version:number};
+export type PricingSheet={productId:string;regular:ProductSale|null;visibility:string;orderMethod:string;now:string;timezone:string;effective:{amount:number;currency:string;unit:string;regularAmount:number;adjustmentId?:number}|null;history:{value:PriceAdjustment;state:string}[]};
+export const productPricingApi={
+ get:(id:string)=>storeGet<PricingSheet>('/api/merchant/product-pricing/'+encodeURIComponent(id)),
+ draft:(id:string,value:PricingInput,adjustmentId?:number)=>adjustmentId?putJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/adjustments/'+adjustmentId,value):postJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/adjustments',value),
+ approve:(id:string,adjustment:PriceAdjustment)=>postJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/adjustments/'+adjustment.id+'/approve',{version:adjustment.version,confirmed:true}),
+ cancel:(id:string,adjustment:PriceAdjustment)=>postJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/adjustments/'+adjustment.id+'/cancel',{version:adjustment.version,confirmed:true}),
+ regular:(id:string,value:Omit<ProductSale,'reviewedBy'|'reviewedAt'>)=>putJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/regular',{...value,confirmed:true,replaceExisting:true})
+};
 export const productCatalogApi={
  get:(id:string)=>storeGet<{value:CatalogInput;canonical:boolean;sourceItemIds:number[]}>('/api/merchant/product-catalog/'+encodeURIComponent(id)),
  proposals:()=>storeGet<CatalogProposal[]>('/api/merchant/product-catalog'),
@@ -1333,7 +1343,7 @@ export const api = {
 };
 
 export type StoreTrip = { id: number; merchantId: number; merchantName: string; deliveryArea: string; deliveryDate: string };
-export type StoreProduct = { id: string; merchantId: number; name: Record<string, string>; description: Record<string, string>; brand: string; price: number; categoryId: string; images: string[]; recommendationReady?:boolean;currency?:string;saleUnit?:string;priceRevision?:number };
+export type StoreProduct = { id: string; merchantId: number; name: Record<string, string>; description: Record<string, string>; brand: string; price: number; categoryId: string; images: string[]; recommendationReady?:boolean;currency?:string;saleUnit?:string;priceRevision?:number;priceToken?:string;regularPrice?:number;priceAdjustmentId?:number;priceValidFrom?:string;priceValidUntil?:string };
 export type MerchantCustomer = { customerId: number; name: string; emailVerified: boolean; merchantApproved: boolean; approvedAt?: string };
 async function storeGet<T>(path: string): Promise<T> {
     const response = await authorizedFetch(path, undefined, { retryOnUnauthorized: !path.startsWith('/api/storefront/') });
@@ -1347,7 +1357,7 @@ export const storefrontApi = {
     approve: (id: number) => postJson<boolean, object>(`/api/merchant/customers/${id}/approve`, {}),
     resend: () => postJson<boolean, object>('/api/auth/email/resend', {}),
     verify: (code: string) => postJson<boolean, object>('/api/auth/email/verify', { code }),
-    checkout: (payload: { requestId: string; tripId: number; currency?:string; items: { productId: string; quantity: number;priceRevision?:number;currency?:string }[] }) =>
+    checkout: (payload: { requestId: string; tripId: number; currency?:string; items: { productId: string; quantity: number;priceRevision?:number;currency?:string;priceToken?:string }[] }) =>
         postJson<{ orderId: number; total: number;currency:string; status: string; emailVerified: boolean; merchantApproved: boolean }, typeof payload>('/api/checkout', payload)
 };
 

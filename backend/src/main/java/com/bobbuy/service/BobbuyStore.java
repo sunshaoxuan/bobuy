@@ -74,6 +74,7 @@ public class BobbuyStore {
     private final TripWorkflowService tripWorkflow;
     private final OrderHeaderRepository orderHeaderRepository;
     private final ProductRepository productRepository;
+    private final com.bobbuy.repository.ProductPriceAdjustmentRepository priceAdjustments;
     private final CategoryRepository categoryRepository;
     private final SupplierRepository supplierRepository;
     private final MerchantSkuRepository merchantSkuRepository;
@@ -111,6 +112,7 @@ public class BobbuyStore {
             TripWorkflowService tripWorkflow,
             OrderHeaderRepository orderHeaderRepository,
             ProductRepository productRepository,
+            com.bobbuy.repository.ProductPriceAdjustmentRepository priceAdjustments,
             CategoryRepository categoryRepository,
             SupplierRepository supplierRepository,
             MerchantSkuRepository merchantSkuRepository,
@@ -134,6 +136,7 @@ public class BobbuyStore {
         this.tripWorkflow = tripWorkflow;
         this.orderHeaderRepository = orderHeaderRepository;
         this.productRepository = productRepository;
+        this.priceAdjustments = priceAdjustments;
         this.categoryRepository = categoryRepository;
         this.supplierRepository = supplierRepository;
         this.merchantSkuRepository = merchantSkuRepository;
@@ -629,6 +632,7 @@ public class BobbuyStore {
     @Transactional
     public boolean deleteProduct(String id) {
         if (getProduct(id).isEmpty()) return false;
+        if(priceAdjustments.existsByProductId(id))throw new ApiException(ErrorCode.INVALID_REQUEST,"pricing.retain_history");
         if (!productRepository.existsById(id)) {
             return false;
         }
