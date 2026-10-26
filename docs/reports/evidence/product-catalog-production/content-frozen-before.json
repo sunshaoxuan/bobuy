@@ -1,0 +1,119 @@
+{
+  "bb_recommendation_post": {
+    "columns": [
+      "id",
+      "merchant_id",
+      "title",
+      "body",
+      "published",
+      "version",
+      "created_at",
+      "updated_at",
+      "published_at",
+      "publisher_id",
+      "publisher_name"
+    ],
+    "fingerprint": "2:f11bf087b1449a61fbd22da2d3dd1f61"
+  },
+  "bb_recommendation_item": {
+    "columns": [
+      "id",
+      "post_id",
+      "product_id",
+      "name",
+      "item_number",
+      "reference_price",
+      "image_hash",
+      "image_url",
+      "created_at",
+      "original_price",
+      "discount_amount",
+      "price_unit",
+      "offer_start",
+      "offer_end",
+      "coupon_start",
+      "coupon_end",
+      "offer_notes",
+      "category_ids",
+      "supplier_id",
+      "show_supplier",
+      "specification",
+      "description",
+      "translations",
+      "translated_source",
+      "gallery"
+    ],
+    "fingerprint": "152:8b755fdac31b52329a21886f0dfe46ea"
+  },
+  "bb_recommendation_image": {
+    "columns": [
+      "id",
+      "merchant_id",
+      "image_hash",
+      "content_type",
+      "content"
+    ],
+    "fingerprint": "566:565125a2bedf589e216370e37a3df64d"
+  },
+  "bb_category": {
+    "columns": [
+      "id",
+      "name",
+      "description",
+      "attribute_template",
+      "merchant_id",
+      "tag_key"
+    ],
+    "fingerprint": "16:4607ec17425b3382c765e6e1c698c682"
+  },
+  "bb_supplier": {
+    "columns": [
+      "id",
+      "name",
+      "description",
+      "contact_info",
+      "onboarding_rules",
+      "merchant_id"
+    ],
+    "fingerprint": "1:5eca0c23ecc43cd93e4b0bfc12f9a007"
+  },
+  "bb_product": {
+    "columns": [
+      "id",
+      "name",
+      "description",
+      "brand",
+      "base_price",
+      "weight",
+      "volume",
+      "media_gallery",
+      "storage_condition",
+      "order_method",
+      "category_id",
+      "merchant_skus",
+      "item_number",
+      "price_tiers",
+      "is_recommended",
+      "is_temporary",
+      "visibility_status",
+      "updated_at",
+      "attributes",
+      "merchant_id",
+      "sale",
+      "currency",
+      "record_version"
+    ],
+    "fingerprint": "142:917b0e6e262dc9126bfcf9c4c9dd24cc"
+  },
+  "bb_merchant_sku": {
+    "columns": [
+      "id",
+      "product_id",
+      "merchant_id",
+      "sku_code",
+      "last_price",
+      "stock_status"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  }
+}

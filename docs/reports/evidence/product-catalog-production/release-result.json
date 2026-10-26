@@ -1,0 +1,17 @@
+{
+  "release": "20261026.7",
+  "applicationHealth": "PASS",
+  "protectedState": "PASS",
+  "publicRegistration": "CLOSED_PENDING_SMTP_ABUSE_RECOVERY",
+  "browserVerification": "PASS_PUBLIC_FIELDS_ASSET_IDENTITIES_DESKTOP_MOBILE_AND_NORMAL_ADMIN_LOGIN_ENTRY",
+  "source": "c439e5b5483e179b7f928fef412ee144cd0bbdb3",
+  "ciRun": 40390070528,
+  "localPrivateMasterWorkflow": "PASS_VISIBLE_UI_SAVE_REOPEN_FOUR_LANGUAGES_GALLERY_AND_CLIENT_PREVIEW",
+  "productionPrivateMasterSave": false,
+  "realContentBackfill": "Pending normal operator UI; legacy recommendation display retained",
+  "contentPreservation": "PASS_ALL_PREEXISTING_COLUMNS_SEVEN_TABLES",
+  "migration": "V16_ADDITIVE_NULLABLE_RESTORE_VERIFIED",
+  "purchaseActivation": false,
+  "registrationGateChanged": false,
+  "mailSent": false
+}

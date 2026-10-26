@@ -1,0 +1,24 @@
+{
+  "scope": "Read-only production APIs, actual customer UI and normal admin login entry; no credentials, content writes, orders or payments",
+  "checks": {
+    "published152AllPreexistingPublicFieldsAndPurchaseStatePreserved": "PASS",
+    "normalVisibleAdminLoginEntry": "PASS"
+  },
+  "errors": [],
+  "writes": [
+    {
+      "method": "POST",
+      "path": "/cdn-cgi/rum"
+    },
+    {
+      "method": "POST",
+      "path": "/cdn-cgi/rum"
+    },
+    {
+      "method": "POST",
+      "path": "/cdn-cgi/rum"
+    }
+  ],
+  "result": "FAIL",
+  "failure": "AssertionError [ERR_ASSERTION]: StockMaster-\n    at file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/recommendation-release/scripts/verify-product-catalog-production.mjs:30:70"
+}

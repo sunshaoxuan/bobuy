@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "scope": "Read-only post-activation schema check; no real-content backfill",
+  "nullable": "YES",
+  "type": "jsonb",
+  "canonicalProfiles": 0,
+  "products": 142
+}

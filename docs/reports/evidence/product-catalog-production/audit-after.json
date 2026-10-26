@@ -1,0 +1,93 @@
+{
+  "phase": "after",
+  "dataMetadata": {
+    "posts": [
+      {
+        "id": 1,
+        "published": true,
+        "items": 122,
+        "classified": 121,
+        "supplier_assigned": 122,
+        "supplier_shown": 0
+      },
+      {
+        "id": 2,
+        "published": true,
+        "items": 30,
+        "classified": 30,
+        "supplier_assigned": 30,
+        "supplier_shown": 0
+      }
+    ],
+    "imageBlobs": 566,
+    "products": 142,
+    "migrations": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16"
+    ]
+  },
+  "configuredRelease": "20261026.7",
+  "source": "c439e5b5483e179b7f928fef412ee144cd0bbdb3",
+  "ciRun": 40390070528,
+  "containers": [
+    {
+      "name": "/bobuy-core-service",
+      "tag": "bobuy/core:20261026.7",
+      "id": "sha256:eae94ac735a5de6536d16692edbd6d4d338ebd2e16dd66a016bb68b94866ab55",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-ai-service",
+      "tag": "bobuy/ai:20261026.7",
+      "id": "sha256:cd89d74b07b4ab262eea879abec251448687ffe782b9d668ddb862d7f18684e8",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-im-service",
+      "tag": "bobuy/im:20261026.7",
+      "id": "sha256:c586776aa0854c553773869405b8ee166e7625f6f455d4257e9b0bf1d4dd2989",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-auth-service",
+      "tag": "bobuy/auth:20261026.7",
+      "id": "sha256:991e0bdd03e767946f24775c96e52b8fa6c8add784018d117a0db2c413b51cb4",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-gateway-service",
+      "tag": "bobuy/router:20261026.7",
+      "id": "sha256:548e3854fef767a2509b383768666a7994762ca4f5754787d981ca76b96a5252",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-frontend",
+      "tag": "bobuy/frontend:20261026.7",
+      "id": "sha256:3bd010d6abe2c02882e2e3f830b30983faf61e46951b659579d4740956c4974e",
+      "health": "running",
+      "restarts": 0
+    }
+  ],
+  "protectedStateUnchanged": true,
+  "backupRestore": "PASS",
+  "contentAndImageBytesPreserved": "PASS (seven frozen tables, latest pre-deploy snapshot)",
+  "result": "PASS"
+}

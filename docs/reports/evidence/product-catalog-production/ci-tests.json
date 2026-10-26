@@ -1,0 +1,32 @@
+{
+  "backend-test": {
+    "tests": [
+      211,
+      0,
+      0,
+      2
+    ],
+    "coverage": {
+      "coverage": "PASS",
+      "class": "BobbuyStore",
+      "counters": {
+        "LINE": {
+          "covered": 586,
+          "missed": 39,
+          "ratio": 0.9376,
+          "minimum": 0.9
+        },
+        "BRANCH": {
+          "covered": 192,
+          "missed": 59,
+          "ratio": 0.7649402390438247,
+          "minimum": 0.7
+        }
+      }
+    }
+  },
+  "frontend-quality": {
+    "files": 36,
+    "tests": 114
+  }
+}

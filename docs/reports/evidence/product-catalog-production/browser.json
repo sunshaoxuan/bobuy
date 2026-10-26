@@ -1,0 +1,35 @@
+{
+  "scope": "Read-only production APIs, actual customer UI and normal admin login entry; no credentials, content writes, orders or payments",
+  "checks": {
+    "published152AllPreexistingPublicFieldsAndPurchaseStatePreserved": "PASS",
+    "actualCustomerDesktopMobileAndDetail": "PASS",
+    "normalVisibleAdminLoginEntry": "PASS",
+    "acceptedMasterEditorAndCustomerAssetBytesServed": "PASS",
+    "masterEndpointRequiresAuthentication": "PASS"
+  },
+  "errors": [],
+  "writes": [],
+  "nonBusinessPosts": [
+    {
+      "method": "POST",
+      "path": "/cdn-cgi/rum"
+    },
+    {
+      "method": "POST",
+      "path": "/cdn-cgi/rum"
+    },
+    {
+      "method": "POST",
+      "path": "/cdn-cgi/rum"
+    },
+    {
+      "method": "POST",
+      "path": "/cdn-cgi/rum"
+    },
+    {
+      "method": "POST",
+      "path": "/cdn-cgi/rum"
+    }
+  ],
+  "result": "PASS"
+}
