@@ -67,7 +67,7 @@ class RecommendationIntegrationTest {
     @Test void createsReusesDeduplicatesUpdatesAndRetriesWithoutDuplicateProducts() throws Exception {
         var draft = create(admin); long before = products.count();
         var first = data(upload(draft,admin,"Tea","REC-TEA","150.50",image(123)));
-        assertThat(first.path("productCreated").asBoolean()).isFalse();
+        assertThat(first.path("productCreated").asBoolean()).isTrue();
         var current = first.path("detail"); String productId = current.at("/items/0/productId").asText();
         var retry = data(upload(draft,admin,"Tea","REC-TEA","150.50",image(123)));
         assertThat(retry.at("/detail/items").size()).isEqualTo(1);
@@ -78,15 +78,18 @@ class RecommendationIntegrationTest {
         assertThat(secondImage.at("/detail/items").size()).isEqualTo(2);
         var secondPost = data(upload(create(admin),admin,"Tea","REC-TEA","160",image(123)));
         assertThat(secondPost.path("imageReused").asBoolean()).isTrue();
-        assertThat(products.count()).isEqualTo(before); assertThat(images.count()).isEqualTo(2);
-        assertThat(first.at("/detail/items/0/productId").isNull()).isTrue();
+        assertThat(products.count()).isEqualTo(before+3); assertThat(images.count()).isEqualTo(2);
+        assertThat(products.findById(productId).orElseThrow().getVisibilityStatus()).isEqualTo(ProductVisibility.DRAFTER_ONLY);
+        assertThat(products.findById(productId).orElseThrow().getBasePrice()).isZero();
+        assertThat(products.findById(productId).orElseThrow().getPriceTiers()).isEmpty();
+        assertThat(data(mvc.perform(get("/api/storefront/products"))).toString()).doesNotContain(productId);
         mvc.perform(get(current.at("/items/0/imageUrl").asText())).andExpect(status().isOk()).andExpect(header().string("X-Content-Type-Options","nosniff"));
     }
     @Test void isolatesMerchantsAndRejectsNonMerchants() throws Exception {
         var draft = create(admin);
         data(upload(draft,admin,"Owner tea","SHARED-CODE","100",image(1)));
         var different = data(upload(create(other),other,"Other tea","SHARED-CODE","200",image(1)));
-        assertThat(different.path("productCreated").asBoolean()).isFalse();
+        assertThat(different.path("productCreated").asBoolean()).isTrue();
         mvc.perform(get(path(draft)).header("Authorization","Bearer " + other)).andExpect(status().isNotFound());
         upload(draft,other,"Intrusion","X","9",image(1)).andExpect(status().isNotFound());
         mvc.perform(get("/api/merchant/recommendations")).andExpect(status().isForbidden());
@@ -136,7 +139,7 @@ class RecommendationIntegrationTest {
         assertThat(data(mvc.perform(get("/api/storefront/recommendations"))).size()).isZero();
         data(mvc.perform(delete(path(withdrawn) + "/items/" + withdrawn.at("/items/0/id").asLong())
             .param("version",withdrawn.at("/post/version").asText()).header("Authorization","Bearer " + admin)));
-        assertThat(products.count()).isEqualTo(before); assertThat(items.count()).isZero();
+        assertThat(products.count()).isEqualTo(before+1); assertThat(products.existsById(productId)).isTrue(); assertThat(items.count()).isZero();
     }
     @Test void acceptsLargeBatchAndSerializesDuplicateRequests() throws Exception {
         var current = create(admin);
@@ -169,7 +172,7 @@ class RecommendationIntegrationTest {
         mvc.perform(get("/api/storefront/recommendations").param("page","-1")).andExpect(status().isBadRequest());
     }
 
-    @Test void preservesUnknownsOfferUnitsAndSeparateCouponPeriodsWithoutCatalogWrites() throws Exception {
+    @Test void preservesUnknownsOfferUnitsAndSeparateCouponPeriodsWithPrivateUnpricedProfiles() throws Exception {
         long catalogCount = products.count();
         var draft = create(admin);
         var imported = data(mvc.perform(multipart(path(draft)+"/images")
@@ -195,7 +198,57 @@ class RecommendationIntegrationTest {
         var publicPost = data(publish(data(edit(saved,admin,"Synthetic offers","Review source conditions")),"publish"));
         var visible = data(mvc.perform(get("/api/storefront/recommendations/"+publicPost.at("/post/id").asLong())));
         assertThat(visible.at("/items/0/referencePrice").isNull()).isTrue();
-        assertThat(products.count()).isEqualTo(catalogCount);
+        assertThat(products.count()).isEqualTo(catalogCount+2);
+        var profile=products.findById(saved.at("/items/0/productId").asText()).orElseThrow();
+        assertThat(profile.getVisibilityStatus()).isEqualTo(ProductVisibility.DRAFTER_ONLY);assertThat(profile.getBasePrice()).isZero();
+    }
+
+    @Test void explicitCatalogReusePreservesExistingProductAndRejectsForeignLinks() throws Exception {
+        var existing=products.findAll().stream().filter(p->p.getMerchantId().equals(1000L)).findFirst().orElseThrow();
+        String before=json.writeValueAsString(existing);
+        var current=data(upload(create(admin),admin,"Source-specific quote","00123","999",image(91))).path("detail");
+        var input=new java.util.HashMap<String,Object>();input.put("itemIds",List.of(current.at("/items/0/id").asLong()));input.put("productId",existing.getId());input.put("version",current.at("/post/version").asLong());
+        var linked=data(mvc.perform(put(path(current)+"/catalog").header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsString(input))));
+        assertThat(linked.at("/items/0/productId").asText()).isEqualTo(existing.getId());
+        assertThat(linked.at("/items/0/referencePrice").asInt()).isEqualTo(999);
+        assertThat(json.writeValueAsString(products.findById(existing.getId()).orElseThrow())).isEqualTo(before);
+        mvc.perform(put(path(linked)+"/catalog").header("Authorization","Bearer "+other).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsString(input))).andExpect(status().isNotFound());
+        assertThat(products.findByMerchantIdAndItemNumber(1000L,"00123")).isPresent();
+    }
+
+    @Test void oldUnlinkedItemsCanBuildCatalogThroughReviewedIdempotentBatch() throws Exception {
+        var current=data(upload(create(admin),admin,"Legacy","000001","1200",image(92))).path("detail");
+        var item=items.findById(current.at("/items/0/id").asLong()).orElseThrow();item.productId=null;items.saveAndFlush(item);
+        long count=products.count();var input=Map.of("itemIds",List.of(item.id),"version",current.at("/post/version").asLong());
+        String endpoint=path(current)+"/catalog";
+        var result=data(mvc.perform(put(endpoint).header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsString(input))));
+        assertThat(result.at("/items/0/productId").isNull()).isFalse();assertThat(result.at("/items/0/itemNumber").asText()).isEqualTo("000001");
+        data(mvc.perform(put(endpoint).header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsString(input))));
+        assertThat(products.count()).isEqualTo(count);assertThat(result.at("/post/published").asBoolean()).isFalse();
+    }
+
+    @Test void unpricedCatalogProfilesCannotBecomePurchasableThroughVisibilityOrQuantityChanges() throws Exception {
+        var current=data(upload(create(admin),admin,"Unpriced source","PENDING-001","1200",image(93))).path("detail");
+        String id=current.at("/items/0/productId").asText();var profile=products.findById(id).orElseThrow();
+        assertThat(profile.getBasePrice()).isZero();assertThat(profile.getOrderMethod()).isEqualTo(OrderMethod.PRE_ORDER);assertThat(id).startsWith("bobuy-rec-v1-");
+        profile.getAttributes().clear(); // Ordinary catalog edits cannot clear the immutable draft provenance guard.
+        String customer=tokens.createAccessToken(users.findById(1001L).orElseThrow());
+        for(var method:List.of(OrderMethod.PRE_ORDER,OrderMethod.DIRECT_BUY)) {
+            profile.setVisibilityStatus(ProductVisibility.PUBLIC);profile.setOrderMethod(method);profile.setBasePrice(12345);products.saveAndFlush(profile);
+            assertThat(data(mvc.perform(get("/api/storefront/products"))).toString()).doesNotContain(id);
+            for(int quantity:List.of(1,99,100))mvc.perform(post("/api/checkout").header("Authorization","Bearer "+customer).contentType(MediaType.APPLICATION_JSON)
+                .content(json.writeValueAsString(Map.of("requestId",UUID.randomUUID(),"tripId",2000,"items",List.of(Map.of("productId",id,"quantity",quantity)))))).andExpect(status().isBadRequest());
+        }
+        assertThat(data(mvc.perform(get(path(current)).header("Authorization","Bearer "+admin))).at("/items/0/referencePrice").asInt()).isEqualTo(1200);
+    }
+
+    @Test void catalogLinkRejectsForeignProductsAndAmbiguousCodeLookupsNeverPickAnOwner() throws Exception {
+        var own=data(upload(create(admin),admin,"Own offer","SAME-000","900",image(94))).path("detail");
+        var foreign=data(upload(create(other),other,"Foreign offer","SAME-000","1200",image(95))).path("detail");
+        mvc.perform(put(path(own)+"/catalog").header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON)
+            .content(json.writeValueAsString(Map.of("itemIds",List.of(own.at("/items/0/id").asLong()),"productId",foreign.at("/items/0/productId").asText(),"version",own.at("/post/version").asLong())))).andExpect(status().isNotFound());
+        assertThat(products.findByItemNumber("SAME-000")).isEmpty();
+        assertThat(products.findByMerchantIdAndItemNumber(1000L,"SAME-000").orElseThrow().getId()).isEqualTo(own.at("/items/0/productId").asText());
     }
 
     @Test void rejectsInvalidOfferDatesAndNumericJsonCodesAndCrossOwnerItemEdits() throws Exception {

@@ -20,17 +20,25 @@ public class RecommendationService {
     private final UserRepository users;
     private final AuditLogService audit;
     private final RecommendationTaxonomyService taxonomy;
+    private final RecommendationCatalogService catalog;
 
     public RecommendationService(RecommendationPostRepository posts, RecommendationItemRepository items,
             RecommendationImageRepository images, ProductRepository products, UserRepository users,
-            AuditLogService audit, RecommendationTaxonomyService taxonomy) {
+            AuditLogService audit, RecommendationTaxonomyService taxonomy, RecommendationCatalogService catalog) {
         this.posts = posts; this.items = items; this.images = images; this.products = products;
-        this.users = users; this.audit = audit; this.taxonomy = taxonomy;
+        this.users = users; this.audit = audit; this.taxonomy = taxonomy; this.catalog = catalog;
     }
-    public record Summary(Long id, String title, boolean published, long version, LocalDateTime updatedAt, java.time.Instant publishedAt, String publisherName, String coverImageUrl) {}
+    public record Summary(Long id, String title, boolean published, long version, LocalDateTime updatedAt, java.time.Instant publishedAt, String publisherName, String coverImageUrl, Long merchantId) {}
     public record Detail(Summary post, String body, List<RecommendationItem> items) {}
     public record Upload(Detail detail, boolean productCreated, boolean imageReused, boolean priceUpdated) {}
-    private Summary summary(RecommendationPost post, String cover) { return new Summary(post.id, post.title, post.published, post.version, post.updatedAt, post.publishedAt, post.publisherName, cover); }
+    private Summary summary(RecommendationPost post, String cover) { return new Summary(post.id, post.title, post.published, post.version, post.updatedAt, post.publishedAt, post.publisherName, cover, post.merchantId); }
+    public record PublicNode(Long id, String name) {}
+    @Transactional(readOnly = true)
+    public List<PublicNode> publicNodes() {
+        var nodes = new TreeMap<Long, String>();
+        posts.findByPublishedTrue().forEach(post -> nodes.put(post.merchantId, post.publisherName));
+        return nodes.entrySet().stream().map(e -> new PublicNode(e.getKey(), e.getValue())).toList();
+    }
     private Detail detail(RecommendationPost post) { return detail(post,false); }
     private Detail detail(RecommendationPost post,boolean publicView) {
         var linked = items.findByPostIdOrderById(post.id);
@@ -63,7 +71,13 @@ public class RecommendationService {
     }
     @Transactional(readOnly = true)
     public List<Detail> publicFeed(int page) {
-        var selected = posts.findByPublishedTrueOrderByPublishedAtDesc(PageRequest.of(Math.max(0, page), 20));
+        return publicFeed(page, null);
+    }
+    @Transactional(readOnly = true)
+    public List<Detail> publicFeed(int page, Long merchantId) {
+        var paging = PageRequest.of(Math.max(0, page), 20);
+        var selected = merchantId == null ? posts.findByPublishedTrueOrderByPublishedAtDesc(paging)
+            : posts.findByMerchantIdAndPublishedTrueOrderByPublishedAtDesc(merchantId, paging);
         if (selected.isEmpty()) return List.of();
         var grouped = items.findByPostIdInOrderById(selected.stream().map(p -> p.id).toList()).stream()
             .collect(java.util.stream.Collectors.groupingBy(i -> i.postId));
@@ -74,6 +88,11 @@ public class RecommendationService {
     }
     @Transactional(readOnly = true)
     public Detail get(Long id, boolean publicView) { return detail(publicView ? posts.findByIdAndPublishedTrue(id).orElseThrow(RecommendationService::missing) : owned(id),publicView); }
+    @Transactional(readOnly = true)
+    public Detail publicGet(Long id, Long merchantId) {
+        var post = posts.findByIdAndPublishedTrue(id).filter(p -> merchantId == null || merchantId.equals(p.merchantId)).orElseThrow(RecommendationService::missing);
+        return detail(post, true);
+    }
     @Transactional
     public Detail create() { var post = new RecommendationPost(); post.merchantId = owner(); return detail(posts.saveAndFlush(post)); }
 
@@ -128,11 +147,10 @@ public class RecommendationService {
         var item = duplicate.orElseGet(RecommendationItem::new);
         facts.apply(item);
         item.postId = id;
-        // Optional catalog link only. Recommendation facts never create stock or overwrite its USD selling price.
-        item.productId = code == null ? null : products.findByMerchantIdAndItemNumber(owner(), code).map(Product::getId).orElse(null);
         item.imageHash = image.hash(); item.imageUrl = "/api/storefront/recommendation-images/" + blob.id;
+        boolean productCreated=catalog.ensure(item,owner());
         items.saveAndFlush(item); touch(post);
-        return new Upload(detail(post), false, reused || duplicate.isPresent(), changed);
+        return new Upload(detail(post), productCreated, reused || duplicate.isPresent(), changed);
     }
 
     private static boolean sameFacts(RecommendationItem a, RecommendationItem b) {
@@ -153,8 +171,8 @@ public class RecommendationService {
         if (items.findByPostIdOrderById(id).stream().anyMatch(i -> !i.id.equals(itemId)
                 && Objects.equals(i.itemNumber,proposed.itemNumber) && i.imageHash.equals(item.imageHash)))
             throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.conflict");
-        facts.apply(item);
-        item.productId = item.itemNumber == null ? null : products.findByMerchantIdAndItemNumber(owner(),item.itemNumber).map(Product::getId).orElse(null);
+        if(!Objects.equals(item.itemNumber,proposed.itemNumber))item.productId=null;
+        facts.apply(item);catalog.ensure(item,owner());
         touch(post); return detail(post);
     }
 
@@ -180,6 +198,18 @@ public class RecommendationService {
             }
             if(updateSupplier) {item.supplierId=supplier;item.showSupplier=showSupplier;}
         }
+        touch(post);return detail(post);
+    }
+    @Transactional
+    public Detail catalog(Long id,List<Long> itemIds,String productId,long expectedVersion) {
+        lockOwner();var post=owned(id);editable(post);
+        var wanted=new HashSet<>(itemIds);
+        var selected=items.findByPostIdOrderById(id).stream().filter(i->wanted.contains(i.id)).toList();
+        if(selected.isEmpty()||selected.size()!=wanted.size())throw missing();
+        if(productId==null&&selected.stream().allMatch(i->i.productId!=null))return detail(post);
+        version(post,expectedVersion);
+        if(productId!=null){if(selected.size()!=1)throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.catalog");catalog.requireOwnership(productId,owner());selected.get(0).productId=productId;}
+        else selected.forEach(item->catalog.ensure(item,owner()));
         touch(post);return detail(post);
     }
 }

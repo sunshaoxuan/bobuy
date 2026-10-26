@@ -144,6 +144,9 @@ def main():
         run('docker', 'exec', 'bobuy-gateway', 'nginx', '-s', 'reload')
         run(*compose, 'stop', *applications[:-1])
         expected_database = database_fingerprint()
+        content_tables = ['bb_recommendation_post', 'bb_recommendation_item', 'bb_recommendation_image', 'bb_category', 'bb_supplier', 'bb_product', 'bb_merchant_sku']
+        frozen_content = {name: expected_database[name] for name in content_tables}
+        (stage / 'content-frozen-before.json').write_text(json.dumps(frozen_content, indent=2))
         with (backup / 'database.dump').open('wb') as output:
             run('docker', 'exec', 'bobuy-postgres', 'sh', '-c',
                 'pg_dump -U "$POSTGRES_USER" -d "$POSTGRES_DB" -Fc', stdout=output)
@@ -173,6 +176,10 @@ def main():
         run(*compose, 'up', '-d', '--no-deps', *applications[1:])
         for service in applications[1:-1]:
             healthy('bobuy-' + service)
+        current_database = database_fingerprint()
+        current_content = {name: current_database[name] for name in content_tables}
+        validate_restored_database(frozen_content, current_content)
+        (stage / 'content-frozen-after.json').write_text(json.dumps(current_content, indent=2))
         after = subprocess.check_output(['python3', str(snapshot)])
         (stage / 'protected-after.json').write_bytes(after)
         if json.loads(before) != json.loads(after):

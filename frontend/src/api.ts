@@ -981,7 +981,7 @@ export type AiOnboardingSuggestion = {
     };
 };
 
-export type RecommendationSummary = { id: number; title: string; published: boolean; version: number; updatedAt: string; publishedAt?: string; publisherName?: string; coverImageUrl?: string };
+export type RecommendationSummary = { id: number; title: string; published: boolean; version: number; updatedAt: string; publishedAt?: string; publisherName?: string; coverImageUrl?: string; merchantId?:number };
 export type RecommendationFacts = { name: string; itemNumber?: string | null; referencePrice?: number | null; originalPrice?: number | null; discountAmount?: number | null; priceUnit?: string | null; offerStart?: string | null; offerEnd?: string | null; couponStart?: string | null; couponEnd?: string | null; offerNotes?: string | null };
 export type RecommendationLabel = {id:string;name:Record<string,string>};
 export type RecommendationItem = RecommendationFacts & { id: number; productId?: string | null; currency?: 'JPY'; imageUrl: string; categoryIds?:string[]; categories?:RecommendationLabel[]; supplierId?:string|null; supplierName?:Record<string,string>|null; showSupplier?:boolean };
@@ -997,9 +997,11 @@ export const recommendationTaxonomyApi = {
 export type RecommendationDetail = { post: RecommendationSummary; body: string; items: RecommendationItem[] };
 const recommendationBase = '/api/merchant/recommendations';
 export const recommendationApi = {
+    catalog:(id:number,input:{itemIds:number[];productId?:string;version:number})=>putJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/catalog',input),
     list: (page: number) => storeGet<RecommendationSummary[]>(recommendationBase + '?page=' + page),
-    feed: (page: number) => storeGet<RecommendationDetail[]>('/api/storefront/recommendations?page=' + page),
-    get: (id: number, publicView = false) => storeGet<RecommendationDetail>((publicView ? '/api/storefront/recommendations/' : recommendationBase + '/') + id),
+    nodes: () => storeGet<{id:number;name:string}[]>('/api/storefront/recommendation-nodes'),
+    feed: (page: number, merchantId?:number) => storeGet<RecommendationDetail[]>('/api/storefront/recommendations?page=' + page + (merchantId ? '&merchantId='+merchantId : '')),
+    get: (id: number, publicView = false, merchantId?:number) => storeGet<RecommendationDetail>((publicView ? '/api/storefront/recommendations/' : recommendationBase + '/') + id + (publicView && merchantId ? '?merchantId='+merchantId : '')),
     create: () => postJson<RecommendationDetail, object>(recommendationBase, {}),
     save: (id: number, title: string, body: string, version: number) => putJson<RecommendationDetail, object>(recommendationBase + '/' + id, { title, body, version }),
     publish: (id: number, version: number, publish: boolean) => postJson<RecommendationDetail, object>(recommendationBase + '/' + id + (publish ? '/publish' : '/withdraw'), { version }),
@@ -1301,7 +1303,7 @@ export const api = {
 };
 
 export type StoreTrip = { id: number; merchantId: number; merchantName: string; deliveryArea: string; deliveryDate: string };
-export type StoreProduct = { id: string; merchantId: number; name: Record<string, string>; description: Record<string, string>; brand: string; price: number; categoryId: string; images: string[] };
+export type StoreProduct = { id: string; merchantId: number; name: Record<string, string>; description: Record<string, string>; brand: string; price: number; categoryId: string; images: string[]; recommendationReady?:boolean };
 export type MerchantCustomer = { customerId: number; name: string; emailVerified: boolean; merchantApproved: boolean; approvedAt?: string };
 async function storeGet<T>(path: string): Promise<T> {
     const response = await authorizedFetch(path, undefined, { retryOnUnauthorized: !path.startsWith('/api/storefront/') });

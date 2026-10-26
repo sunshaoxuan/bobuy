@@ -51,6 +51,7 @@ public class StorefrontService {
 
     public List<PublicProduct> publicProducts() {
         return products.findAll().stream().filter(p -> p.getVisibilityStatus() == ProductVisibility.PUBLIC)
+            .filter(p -> !RecommendationCatalogService.profile(p))
             .sorted(Comparator.comparing(Product::getId))
             .map(p -> new PublicProduct(p.getId(), p.getMerchantId(), p.getName(), p.getDescription(), p.getBrand(), p.getBasePrice(),
                 p.getCategoryId(), p.getMediaGallery().stream().filter(MediaGalleryItem::isVisible)
@@ -142,6 +143,7 @@ public class StorefrontService {
         for (var entry : quantities(request.items()).entrySet()) {
             Product product = products.findById(entry.getKey())
                 .filter(p -> p.getVisibilityStatus() == ProductVisibility.PUBLIC)
+                .filter(p -> !RecommendationCatalogService.profile(p))
                 .filter(p -> trip.getAgentId().equals(p.getMerchantId()))
                 .orElseThrow(() -> invalid("商品已下架，请刷新购物车"));
             if (!Double.isFinite(product.getBasePrice()) || product.getBasePrice() < 0) throw invalid("商品价格不可用");

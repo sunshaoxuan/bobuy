@@ -1,11 +1,11 @@
-import { Card, Empty, Grid, Select, Space, Spin, Tag, Typography } from 'antd';
-import { useEffect, useMemo, useState } from 'react';
+import { Alert, Card, Empty, Grid, Select, Space, Spin, Tag, Typography } from 'antd';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { api, type Order, type Trip } from '../api';
 import { useI18n } from '../i18n';
 
 const { Title, Text } = Typography;
 
-export default function ClientOrders() {
+export default function ClientOrders({node}:{node?:number}) {
   const { t } = useI18n();
   const screens = Grid.useBreakpoint();
   const isMobile = screens.md !== true;
@@ -13,39 +13,47 @@ export default function ClientOrders() {
   const [selectedTripId, setSelectedTripId] = useState<number>();
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error,setError]=useState('');
+  const generation=useRef(0);
   const formatAmount = (amount: number) =>
     new Intl.NumberFormat(undefined, { style: 'currency', currency: 'JPY' }).format(amount);
 
   useEffect(() => {
+    const request=++generation.current;
     let cancelled = false;
+    setLoading(true);setOrders([]);setTrips([]);setSelectedTripId(undefined);setError('');
     (async () => {
       try {
-        const tripList = await api.customerTrips();
-        if (cancelled) return;
+        const tripList = (await api.customerTrips()).filter(trip=>node===undefined||trip.agentId===node);
+        if (cancelled||request!==generation.current) return;
         setTrips(tripList);
         const firstTripId = tripList[0]?.id;
         if (firstTripId) {
           setSelectedTripId(firstTripId);
-          setOrders(await api.customerOrders(firstTripId));
+          const next=await api.customerOrders(firstTripId);if(!cancelled&&request===generation.current)setOrders(next);
         }
+      } catch(error) {if(!cancelled&&request===generation.current)setError((error as Error).message);
       } finally {
-        if (!cancelled) {
+        if (!cancelled&&request===generation.current) {
           setLoading(false);
         }
       }
     })();
     return () => {
       cancelled = true;
+      generation.current++;
     };
-  }, []);
+  }, [node]);
 
   const onTripChange = async (tripId: number) => {
+    const request=++generation.current;
     setSelectedTripId(tripId);
-    setLoading(true);
+    setLoading(true);setOrders([]);setError('');
     try {
-      setOrders(await api.customerOrders(tripId));
+      const next=await api.customerOrders(tripId);if(request===generation.current)setOrders(next);
+    } catch(error) {if(request===generation.current)setError((error as Error).message);
     } finally {
-      setLoading(false);
+      if(request===generation.current)setLoading(false);
     }
   };
 
@@ -78,7 +86,7 @@ export default function ClientOrders() {
         <Text type="secondary" data-testid="orders-summary">
           Orders: {summary.totalOrders} | Total: {formatAmount(summary.totalAmount)}
         </Text>
-        {loading ? (
+        {error?<Alert type="error" message={error}/>:loading ? (
           <Spin />
         ) : orders.length === 0 ? (
           <Empty description={t('orders.empty')} />

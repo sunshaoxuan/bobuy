@@ -28,6 +28,9 @@ public class RecommendationController {
     public record SourceImage(@NotNull @Valid RecommendationFacts facts, @NotBlank @Size(max=2048) String imageUrl, @Min(0) long version) {}
     public record Edit(@NotNull @Size(max = 200) String title, @NotNull @Size(max = 100000) String body, @Min(0) long version) {}
     public record Version(@Min(0) long version) {}
+    public record CatalogLink(@NotEmpty @Size(max=500) List<@NotNull Long> itemIds, @Size(max=255) String productId, @Min(0) long version) {}
+    @PutMapping("/api/merchant/recommendations/{id}/catalog")
+    public ApiResponse<?> catalog(@PathVariable Long id,@Valid @RequestBody CatalogLink input){return ApiResponse.success(service.catalog(id,input.itemIds(),input.productId(),input.version()));}
     @GetMapping("/api/merchant/recommendations")
     public ApiResponse<?> list(@RequestParam(defaultValue = "0") @Min(0) int page) { return ApiResponse.success(service.list(page)); }
     @PostMapping("/api/merchant/recommendations")
@@ -58,9 +61,11 @@ public class RecommendationController {
         return ApiResponse.success(service.editItem(id,itemId,request.facts(),request.version()));
     }
     @GetMapping("/api/storefront/recommendations")
-    public ApiResponse<?> publicList(@RequestParam(defaultValue = "0") @Min(0) int page) { return ApiResponse.success(service.publicFeed(page)); }
+    public ApiResponse<?> publicList(@RequestParam(defaultValue = "0") @Min(0) int page, @RequestParam(required = false) @Min(1) Long merchantId) { return ApiResponse.success(service.publicFeed(page, merchantId)); }
+    @GetMapping("/api/storefront/recommendation-nodes")
+    public ApiResponse<?> publicNodes() { return ApiResponse.success(service.publicNodes()); }
     @GetMapping("/api/storefront/recommendations/{id}")
-    public ApiResponse<?> publicGet(@PathVariable Long id) { return ApiResponse.success(service.get(id, true)); }
+    public ApiResponse<?> publicGet(@PathVariable Long id, @RequestParam(required = false) @Min(1) Long merchantId) { return ApiResponse.success(service.publicGet(id, merchantId)); }
     @GetMapping("/api/storefront/recommendation-images/{id}")
     public ResponseEntity<byte[]> image(@PathVariable String id) {
         var image = service.image(id);

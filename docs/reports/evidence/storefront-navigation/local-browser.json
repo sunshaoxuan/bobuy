@@ -1,0 +1,12 @@
+{
+  "scope": "Synthetic local normal UI only, six public official pictures; existing shared test containers. No production authentication, data access, publication or orders.",
+  "checks": {
+    "normalRegistrationCreatesPrivateLinkedProfilesAndSharedPreview": "PASS (reused prior accepted registration/preview; no re-import)",
+    "desktopRealNodeSelectSearchBackRefreshAndCardLayout": "PASS",
+    "mobileDrawerNavigationClosesAndNoOverflow": "PASS"
+  },
+  "errors": [],
+  "result": "PASS",
+  "syntheticPostWithdrawn": true,
+  "postId": "12"
+}

@@ -1,0 +1,10 @@
+{
+  "scope": "Synthetic prior snapshot clone in existing local PostgreSQL; no production access",
+  "checks": {
+    "V11PreservesAllExistingCatalogOffersCategoriesSuppliersImages": "PASS",
+    "sameOfficialCodeSourceVariantsDoNotCollide": "PASS",
+    "snapshotRestoresOriginalRowsAndGlobalUniqueConstraint": "PASS"
+  },
+  "result": "PASS",
+  "temporaryDatabaseRemoved": true
+}

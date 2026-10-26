@@ -75,7 +75,8 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
   }, [locale, t]);
   const value = useMemo(() => ({ locale, setLocale, t }), [locale, setLocale, t]);
 
-  return <I18nContext.Provider value={value}><ConfigProvider locale={componentLocales[locale]} theme={{ token: { colorPrimary: '#d93630', borderRadius: 8, fontFamily: 'Inter, "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif' } }}>{children}</ConfigProvider></I18nContext.Provider>;
+  const fontFamily=locale==='ja-JP'?'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", "Hiragino Sans", "Yu Gothic UI", "Noto Sans SC", sans-serif':'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Noto Sans JP", sans-serif';
+  return <I18nContext.Provider value={value}><ConfigProvider locale={componentLocales[locale]} theme={{ token: { colorPrimary: '#d93630', borderRadius: 8, fontFamily } }}>{children}</ConfigProvider></I18nContext.Provider>;
 }
 
 export function useI18n() {

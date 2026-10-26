@@ -9,6 +9,8 @@ import java.util.Optional;
 public interface RecommendationPostRepository extends JpaRepository<RecommendationPost, Long> {
     List<RecommendationPost> findByMerchantIdOrderByUpdatedAtDesc(Long merchantId, Pageable page);
     List<RecommendationPost> findByPublishedTrueOrderByPublishedAtDesc(Pageable page);
+    List<RecommendationPost> findByMerchantIdAndPublishedTrueOrderByPublishedAtDesc(Long merchantId, Pageable page);
+    List<RecommendationPost> findByPublishedTrue();
     Optional<RecommendationPost> findByIdAndMerchantId(Long id, Long merchantId);
     Optional<RecommendationPost> findByIdAndPublishedTrue(Long id);
 }

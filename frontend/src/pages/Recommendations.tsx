@@ -4,6 +4,9 @@ import { ArrowLeftOutlined, CheckOutlined, CopyOutlined, DeleteOutlined, EditOut
 import { Link, useSearchParams } from 'react-router-dom';
 import { recommendationApi as api, type RecommendationDetail, type RecommendationSummary, type RecommendationFacts } from '../api';
 import { FactsForm, OfferInfo, factsError, parseBatch, factFields } from '../components/RecommendationFacts';
+import {RecommendationPreview} from './PublicRecommendations';
+import RecommendationCatalog from '../components/RecommendationCatalog';
+import '../browse.css';
 import RecommendationClassification from '../components/RecommendationClassification';
 import { useI18n } from '../i18n';
 import '../recommendations.css';
@@ -160,8 +163,9 @@ export default function Recommendations() {
         {queue.length > PAGE_SIZE && <Pagination size="small" current={queuePage} pageSize={PAGE_SIZE} total={queue.length} showSizeChanger={false} onChange={setQueuePage} />}
       </section>}
       <RecommendationClassification detail={detail} onChanged={setDetail} onPendingChange={setClassificationPending} />
+      <RecommendationCatalog detail={detail} onChange={setDetail}/>
       <Button icon={<EyeOutlined />} onClick={() => setPreview(value => !value)}>{t('rec.draft_preview')}</Button>
-      {preview && <section className="rec-draft-preview"><h2>{title}</h2><p style={{whiteSpace:'pre-wrap'}}>{body}</p><div className="rec-product-grid">{detail.items.map(item => <article className="rec-product" key={item.id}><img src={item.imageUrl} alt={item.name} /><div><h3>{item.name}</h3><small>{item.itemNumber}</small><OfferInfo facts={item} /></div></article>)}</div></section>}
+      {preview && <RecommendationPreview key={detail.post.id} detail={{...detail,post:{...detail.post,title},body}}/>}
       <section className="rec-linked"><div className="rec-section-heading"><h2>{t('rec.products')} <span>({detail.items.length})</span></h2></div><div className="rec-product-grid">{detail.items.slice((itemPage - 1) * 12, itemPage * 12).map(item => <article key={item.id} className="rec-product"><img src={item.imageUrl} alt={item.name} /><div><h3>{item.name}</h3><small>{item.itemNumber}</small><OfferInfo facts={item} />
         {editingItem === item.id && <><FactsForm facts={editFacts} onChange={setEditFacts} disabled={busy} /><Button loading={busy} onClick={() => void run(async () => { const error = factsError(editFacts); if(error) throw new Error(t(error)); setDetail(await api.editItem(id,item.id,editFacts,detail.post.version)); setEditingItem(undefined); })}>{t('rec.save_item')}</Button><Button onClick={() => setEditingItem(undefined)}>{t('rec.cancel_edit')}</Button></>}
         </div>{!published && <div><Button aria-label={t('rec.edit_item')+': '+item.name} icon={<EditOutlined />} disabled={busy || writing} onClick={() => {setEditingItem(item.id);setEditFacts(Object.fromEntries(factFields.map(key => [key,item[key] ?? null])) as RecommendationFacts);}} />

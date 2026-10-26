@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Alert, Button, Empty, Image, Segmented, Spin, Tooltip } from 'antd';
+import { Alert, Button, Empty, Image, Input, Segmented, Spin, Tooltip } from 'antd';
 import { ArrowLeftOutlined, ArrowRightOutlined, CalendarOutlined, DownOutlined, ExpandOutlined, PlusOutlined, UpOutlined, UserOutlined } from '@ant-design/icons';
 import { Link, useParams, useSearchParams, useLocation } from 'react-router-dom';
 import { recommendationApi, type RecommendationDetail, type StoreProduct } from '../api';
@@ -7,8 +7,10 @@ import { localizedContent, useI18n } from '../i18n';
 import { OfferInfo } from '../components/RecommendationFacts';
 import '../recommendations.css';
 import {categoryChoices,filterRecommendations,UNCLASSIFIED} from '../recommendationFilters';
+import {scopedPath,selectedNode} from '../storeNavigation';
 
 type ShoppingProps = {
+  query?: string;
   products: StoreProduct[];
   quantities: Record<string, number>;
   onDetail: (product: StoreProduct) => void;
@@ -17,7 +19,7 @@ type ShoppingProps = {
 };
 const EXCERPT_LENGTH = 80;
 
-function RecommendationIssue({ detail, number, single, catalog, quantities, onDetail, onAdd, canBuy }: ShoppingProps & {
+export function RecommendationIssue({ detail, number, single, catalog, quantities, onDetail, onAdd, canBuy }: ShoppingProps & {
   detail: RecommendationDetail; number: number; single: boolean; catalog: Map<string, StoreProduct>;
 }) {
   const { t, locale } = useI18n();
@@ -41,7 +43,7 @@ function RecommendationIssue({ detail, number, single, catalog, quantities, onDe
     <header className="rec-issue-heading">
       {!single && <span className="rec-issue-number">{String(number).padStart(2, '0')}</span>}
       <div><Heading id={'rec-title-' + detail.post.id}>{single ? detail.post.title : <Link to={'/recommendations/' + detail.post.id+search}>{detail.post.title}</Link>}</Heading>
-        <div className="rec-publication"><span><UserOutlined /> {detail.post.publisherName}</span><time dateTime={detail.post.publishedAt}><CalendarOutlined /> {detail.post.publishedAt && new Date(detail.post.publishedAt).toLocaleDateString(locale)}</time></div>
+        {(detail.post.publisherName||detail.post.publishedAt)&&<div className="rec-publication">{detail.post.publisherName&&<span><UserOutlined /> {detail.post.publisherName}</span>}{detail.post.publishedAt&&<time dateTime={detail.post.publishedAt}><CalendarOutlined /> {new Date(detail.post.publishedAt).toLocaleDateString(locale)}</time>}</div>}
       </div>
     </header>
     <div className="rec-public-body" id={'rec-body-' + detail.post.id}>{shown.split(/\n\s*\n/).filter(Boolean).map((paragraph, index) => <p key={index}>{paragraph}</p>)}</div>
@@ -61,51 +63,78 @@ function RecommendationIssue({ detail, number, single, catalog, quantities, onDe
         {!!item.categories?.length&&<div className="rec-item-categories">{item.categories.map(category=><span key={category.id}>{localizedContent(category.name,locale)}</span>)}</div>}
         {item.showSupplier&&item.supplierName&&<small className="rec-supplier">{t('class.supplier')}: {localizedContent(item.supplierName,locale)}</small>}
         <OfferInfo facts={item} />
-        {!buyable && <small className="rec-pin-status">{t(product ? 'store.no_trips' : 'rec.reference_only')}</small>}
+        {!buyable && <small className="rec-pin-status">{t(item.productId ? 'catalog.not_available' : 'rec.reference_only')}</small>}
       </article>;
     })}</div>
     <Image.PreviewGroup items={detail.items.map(item => ({src:item.imageUrl,alt:item.name}))} preview={{rootClassName:'rec-image-preview',visible:preview !== undefined,current:preview ?? 0,onChange:setPreview,onVisibleChange:visible => { if (!visible) setPreview(undefined); }}} />
   </article>;
 }
 
+export function CategoryFilters({posts,category,onChoose}:{posts:RecommendationDetail[];category:string;onChoose:(value:string)=>void}) {
+  const {t,locale}=useI18n(),choices=categoryChoices(posts);
+  return <nav className="rec-category-filters" aria-label={t('class.filters')}>
+    <button type="button" aria-pressed={!category} onClick={()=>onChoose('')}>{t('class.all')} ({choices.total})</button>
+    {choices.categories.map(value=><button type="button" key={value.id} aria-pressed={category===value.id} onClick={()=>onChoose(value.id)}>{localizedContent(value.name,locale)} ({value.count})</button>)}
+    {!!choices.unclassified&&<button type="button" aria-pressed={category===UNCLASSIFIED} onClick={()=>onChoose(UNCLASSIFIED)}>{t('class.unclassified')} ({choices.unclassified})</button>}
+    {category&&category!==UNCLASSIFIED&&!choices.categories.some(value=>value.id===category)&&<button type="button" aria-pressed="true">{t('class.selected_filter')}</button>}
+  </nav>;
+}
+
+// The editor uses the same cards and filters as the public page, with local state
+// and no publishing, save, purchase or public draft endpoint.
+export function RecommendationPreview({detail}:{detail:RecommendationDetail}) {
+  const {t}=useI18n();const [category,setCategory]=useState(''),[device,setDevice]=useState('full'),[query,setQuery]=useState('');
+  const posts=[{...detail,items:detail.items.filter(item=>(item.name+' '+(item.itemNumber??'')).toLocaleLowerCase().includes(query.toLocaleLowerCase().trim()))}];
+  const visible=filterRecommendations(posts,category),catalog=new Map<string,StoreProduct>();
+  return <section className="rec-draft-preview"><p>{t('browse.preview_hint')}</p><Segmented aria-label={t('browse.preview_size')} value={device} onChange={value=>setDevice(String(value))} options={[{value:'full',label:t('browse.desktop')},{value:'mobile',label:t('browse.mobile')}]}/>
+    <div className="storefront browse-preview" data-device={device}><section className="recommendations rec-public">
+      <Input className="browse-search" aria-label={t('store.search')} placeholder={t('store.search')} value={query} onChange={event=>setQuery(event.target.value)} allowClear/>
+      <CategoryFilters posts={posts} category={category} onChoose={setCategory}/>
+      {visible.length?<RecommendationIssue detail={visible[0]} number={1} single catalog={catalog} products={[]} quantities={{}} onDetail={()=>{}} onAdd={()=>{}} canBuy={()=>false}/>:<Empty description={t('class.empty')}><Button onClick={()=>setCategory('')}>{t('class.all')}</Button></Empty>}
+    </section></div>
+  </section>;
+}
+
 export default function PublicRecommendations(props: ShoppingProps) {
   const { id } = useParams();
-  const { t,locale } = useI18n();
+  const { t } = useI18n();
   const [params,setParams]=useSearchParams();
   const category=params.get('category')??'';
-  const [page, setPage] = useState(0);
+  const node=selectedNode('?'+params.toString());
+  const [pagination,setPagination]=useState({node,page:0});
+  const page=pagination.node===node?pagination.page:0;
+  const setPage=(value:number)=>setPagination({node,page:value});
   const [mode, setMode] = useState<'all' | 'latest'>('all');
   const [posts, setPosts] = useState<RecommendationDetail[]>([]);
   const [busy, setBusy] = useState(true);
   const [error, setError] = useState('');
+  const [loadedKey,setLoadedKey]=useState('');
+  const requestKey=JSON.stringify([node,id,page]);
+  const pending=busy||loadedKey!==requestKey;
   const catalog = useMemo(() => new Map(props.products.map(product => [product.id, product])), [props.products]);
   useEffect(() => {
     let active = true;
     setBusy(true); setError(''); setPosts([]);
-    const request = id ? recommendationApi.get(Number(id), true).then(value => [value]) : recommendationApi.feed(page);
-    void request.then(value => { if (active) setPosts(value); }).catch(e => { if (active) setError((e as Error).message); }).finally(() => { if (active) setBusy(false); });
+    const request = node===-1 ? Promise.resolve([]) : id ? recommendationApi.get(Number(id), true, node).then(value => [value]) : recommendationApi.feed(page,node);
+    void request.then(value => { if (active) setPosts(value); }).catch(e => { if (active) setError((e as Error).message); }).finally(() => { if (active) {setLoadedKey(requestKey);setBusy(false);} });
     return () => { active = false; };
-  }, [id, page]);
-  const scope=mode==='latest'&&!id?posts.slice(0,1):posts;
-  const choices=categoryChoices(scope);
+  }, [id, page, node]);
+  const selected=pending?[]:mode==='latest'&&!id?posts.slice(0,1):posts;
+  const query=props.query?.trim().toLocaleLowerCase()??'';
+  const scope=query?selected.map(post=>({...post,items:post.items.filter(item=>(item.name+' '+(item.itemNumber??'')).toLocaleLowerCase().includes(query))})).filter(post=>post.items.length):selected;
   const visible=filterRecommendations(scope,category);
   function choose(value:string){if(value===category)return;const next=new URLSearchParams(params);if(value)next.set('category',value);else next.delete('category');setParams(next);}
 
   return <section className="recommendations rec-public">
-    <Link className="rec-back" to={id ? '/recommendations'+(params.size?'?'+params.toString():'') : '/'}><ArrowLeftOutlined /> {t(id ? 'rec.title' : 'store.catalog')}</Link>
+    <Link className="rec-back" to={id ? '/recommendations'+(params.size?'?'+params.toString():'') : scopedPath('/', '?'+params.toString())}><ArrowLeftOutlined /> {t(id ? 'rec.title' : 'store.catalog')}</Link>
     {!id && <header className="rec-feed-heading"><h1>{t('rec.title')}</h1><Segmented aria-label={t('rec.display_mode')} value={mode} options={[{value:'latest',label:t('rec.latest')},{value:'all',label:t('rec.multiple')}]} onChange={value => { setMode(value as 'all' | 'latest'); if (value === 'latest') setPage(0); }} /></header>}
-    {!busy&&!error&&<nav className="rec-category-filters" aria-label={t('class.filters')}>
-      <button type="button" aria-pressed={!category} onClick={()=>choose('')}>{t('class.all')} ({choices.total})</button>
-      {choices.categories.map(value=><button type="button" key={value.id} aria-pressed={category===value.id} onClick={()=>choose(value.id)}>{localizedContent(value.name,locale)} ({value.count})</button>)}
-      {!!choices.unclassified&&<button type="button" aria-pressed={category===UNCLASSIFIED} onClick={()=>choose(UNCLASSIFIED)}>{t('class.unclassified')} ({choices.unclassified})</button>}
-      {category&&category!==UNCLASSIFIED&&!choices.categories.some(value=>value.id===category)&&<button type="button" aria-pressed="true">{t('class.selected_filter')}</button>}
-    </nav>}
-    {busy ? <div className="rec-loading"><Spin /></div> : error ? <Alert type="error" message={error} /> : <>
+    {!pending&&!error&&<CategoryFilters posts={scope} category={category} onChoose={choose}/>}
+    {pending ? <div className="rec-loading"><Spin /></div> : error ? <Alert type="error" message={error} /> : <>
       {visible.length > 1 && <nav className="rec-issue-directory" aria-label={t('rec.contents')}>{visible.map((entry, index) => <a key={entry.post.id} href={'#recommendation-' + entry.post.id} title={entry.post.title}><span>{String(page * 20 + index + 1).padStart(2, '0')}</span><span>{entry.post.title}</span></a>)}</nav>}
       {visible.length ? visible.map((entry, index) => <div className="rec-issue-section" key={entry.post.id}>
         <RecommendationIssue {...props} catalog={catalog} detail={entry} number={page * 20 + index + 1} single={!!id} />
         {visible.length > 1 && <nav className="rec-issue-navigation" aria-label={t('rec.issue_navigation')}><a href="#" onClick={event => { event.preventDefault(); window.scrollTo(0, 0); }}><UpOutlined /> {t('rec.contents')}</a><div>{index > 0 && <a href={'#recommendation-' + visible[index - 1].post.id}><ArrowLeftOutlined /> {t('rec.previous_issue')}</a>}{index < visible.length - 1 && <a href={'#recommendation-' + visible[index + 1].post.id}>{t('rec.next_issue')} <ArrowRightOutlined /></a>}</div></nav>}
-      </div>) : <Empty description={t(category?'class.empty':'rec.empty_public')}>{category&&<Button onClick={()=>choose('')}>{t('class.all')}</Button>}</Empty>}
+      </div>) : <Empty description={t(category?'class.empty':query?'store.no_matches':'rec.empty_public')}>{category&&<Button onClick={()=>choose('')}>{t('class.all')}</Button>}</Empty>}
       {!id && mode === 'all' && <div className="rec-pagination"><Button disabled={!page} icon={<ArrowLeftOutlined />} onClick={() => { setPage(page - 1); window.scrollTo(0,0); }}>{t('rec.previous')}</Button><span>{page + 1}</span><Button disabled={posts.length < 20} icon={<ArrowRightOutlined />} onClick={() => { setPage(page + 1); window.scrollTo(0,0); }}>{t('rec.next')}</Button></div>}
     </>}
   </section>;

@@ -1,11 +1,11 @@
 import { Alert, Button, Card, Descriptions, Empty, Grid, Modal, Select, Space, Spin, Table, Tag, Typography, message } from 'antd';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { api, type CustomerBalanceLedgerEntry, type Trip } from '../api';
 import { useI18n } from '../i18n';
 
 const { Title, Text } = Typography;
 
-export default function ClientBilling() {
+export default function ClientBilling({node}:{node?:number}) {
   const { t } = useI18n();
   const screens = Grid.useBreakpoint();
   const isMobile = screens.md !== true;
@@ -14,44 +14,53 @@ export default function ClientBilling() {
   const [entries, setEntries] = useState<CustomerBalanceLedgerEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [confirmingKey, setConfirmingKey] = useState<string>();
+  const [error,setError]=useState('');
+  const generation=useRef(0);
 
   const formatAmount = (amount: number) =>
     new Intl.NumberFormat(undefined, { style: 'currency', currency: 'JPY' }).format(amount);
 
   const refreshEntries = async (tripId: number) => {
-    setEntries(await api.customerViewLedger(tripId));
+    const request=generation.current;
+    const next=await api.customerViewLedger(tripId);if(request===generation.current)setEntries(next);
   };
 
   useEffect(() => {
+    const request=++generation.current;
     let cancelled = false;
+    setLoading(true);setEntries([]);setTrips([]);setSelectedTripId(undefined);setError('');
     (async () => {
       try {
-        const tripList = await api.customerTrips();
-        if (cancelled) return;
+        const tripList = (await api.customerTrips()).filter(trip=>node===undefined||trip.agentId===node);
+        if (cancelled||request!==generation.current) return;
         setTrips(tripList);
         const firstTripId = tripList[0]?.id;
         if (firstTripId) {
           setSelectedTripId(firstTripId);
-          await refreshEntries(firstTripId);
+          const next=await api.customerViewLedger(firstTripId);if(!cancelled&&request===generation.current)setEntries(next);
         }
+      } catch(error) {if(!cancelled&&request===generation.current)setError((error as Error).message);
       } finally {
-        if (!cancelled) {
+        if (!cancelled&&request===generation.current) {
           setLoading(false);
         }
       }
     })();
     return () => {
       cancelled = true;
+      generation.current++;
     };
-  }, []);
+  }, [node]);
 
   const onTripChange = async (tripId: number) => {
+    const request=++generation.current;
     setSelectedTripId(tripId);
-    setLoading(true);
+    setLoading(true);setEntries([]);setError('');
     try {
       await refreshEntries(tripId);
+    } catch(error) {if(request===generation.current)setError((error as Error).message);
     } finally {
-      setLoading(false);
+      if(request===generation.current)setLoading(false);
     }
   };
 
@@ -62,15 +71,18 @@ export default function ClientBilling() {
       return;
     }
     const key = `${entry.businessId}-${action}`;
+    const request=generation.current;
     Modal.confirm({
       title: action === 'RECEIPT' ? t('billing.confirm_receipt_title') : t('billing.confirm_statement_title'),
       content: t('billing.confirm_irreversible'),
       okText: t('billing.confirm_action'),
       cancelText: t('common.cancel'),
       onOk: async () => {
+        if(request!==generation.current)return;
         try {
           setConfirmingKey(key);
           await api.confirmOwnLedger(selectedTripId, entry.businessId, action);
+          if(request!==generation.current)return;
           await refreshEntries(selectedTripId);
           message.success(t('billing.confirm_success'));
         } catch {
@@ -122,7 +134,7 @@ export default function ClientBilling() {
             description={t(selectedTrip.status === 'SETTLED' ? 'billing.frozen_settled' : selectedTrip.status === 'COMPLETED' ? 'billing.delivery_completed' : 'billing.freeze_stage_active')}
           />
         ) : null}
-        {loading ? (
+        {error?<Alert type="error" message={error}/>:loading ? (
           <Spin />
         ) : entries.length === 0 ? (
           <Empty description={t('procurement.no_ledger_data')} />
