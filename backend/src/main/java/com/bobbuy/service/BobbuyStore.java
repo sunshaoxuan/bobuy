@@ -74,6 +74,7 @@ public class BobbuyStore {
     private final TripWorkflowService tripWorkflow;
     private final OrderHeaderRepository orderHeaderRepository;
     private final ProductRepository productRepository;
+    private final ProductLifecycleService productLifecycle;
     private final com.bobbuy.repository.ProductPriceAdjustmentRepository priceAdjustments;
     private final CategoryRepository categoryRepository;
     private final SupplierRepository supplierRepository;
@@ -112,6 +113,7 @@ public class BobbuyStore {
             TripWorkflowService tripWorkflow,
             OrderHeaderRepository orderHeaderRepository,
             ProductRepository productRepository,
+            ProductLifecycleService productLifecycle,
             com.bobbuy.repository.ProductPriceAdjustmentRepository priceAdjustments,
             CategoryRepository categoryRepository,
             SupplierRepository supplierRepository,
@@ -136,6 +138,7 @@ public class BobbuyStore {
         this.tripWorkflow = tripWorkflow;
         this.orderHeaderRepository = orderHeaderRepository;
         this.productRepository = productRepository;
+        this.productLifecycle = productLifecycle;
         this.priceAdjustments = priceAdjustments;
         this.categoryRepository = categoryRepository;
         this.supplierRepository = supplierRepository;
@@ -519,7 +522,7 @@ public class BobbuyStore {
     }
 
     public Optional<Product> getProduct(String id) {
-        return productRepository.findById(id).filter(p -> com.bobbuy.security.MerchantScope.visible(p.getMerchantId()));
+        return productRepository.findById(id).filter(p -> !p.isDeleted()&&com.bobbuy.security.MerchantScope.visible(p.getMerchantId()));
     }
 
     public Optional<Product> findProductByItemNumber(String itemNumber) {
@@ -631,14 +634,7 @@ public class BobbuyStore {
 
     @Transactional
     public boolean deleteProduct(String id) {
-        if (getProduct(id).isEmpty()) return false;
-        if(priceAdjustments.existsByProductId(id))throw new ApiException(ErrorCode.INVALID_REQUEST,"pricing.retain_history");
-        if (!productRepository.existsById(id)) {
-            return false;
-        }
-        merchantSkuRepository.deleteByProductId(id);
-        productRepository.deleteById(id);
-        return true;
+        return productLifecycle.deleteOwned(id);
     }
 
     public List<Category> listCategories() {

@@ -23,6 +23,7 @@ const ZenAuditView = lazy(() => import('./pages/ZenAuditView'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const Users = lazy(() => import('./pages/Users'));
 const MailSettings = lazy(() => import('./pages/MailSettings'));
+const DeletedProducts = lazy(() => import('./pages/DeletedProducts'));
 
 const adminPages = [
   ['dashboard', 'nav.dashboard', Dashboard, AppstoreOutlined], ['trips', 'nav.trips', Trips, CalendarOutlined], ['orders', 'nav.orders', Orders, ShoppingOutlined],
@@ -37,7 +38,7 @@ function Admin() {
   const { t } = useI18n();
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const pages = [...(isMerchant ? adminPages : []), ...(user?.platformAdmin ? [['users', 'accounts.title', Users, TeamOutlined] as const, ['settings', 'mail.title', MailSettings, TagsOutlined] as const] : [])];
+  const pages = [...(isMerchant ? adminPages : []), ...(user?.platformAdmin ? [['users', 'accounts.title', Users, TeamOutlined] as const, ['settings', 'mail.title', MailSettings, TagsOutlined] as const, ['deleted-products', 'trash.title', DeletedProducts, TagsOutlined] as const] : [])];
   const menu = <Menu mode="inline" selectedKeys={[location.pathname]} items={pages.map(([path, label, , Icon]) => ({
     key: `/admin/${path}`, icon: <Icon />, label: <Link to={`/admin/${path}`} onClick={() => setOpen(false)}>{t(label)}</Link>
   }))} />;

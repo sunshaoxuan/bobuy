@@ -1,0 +1,26 @@
+{
+  "scope": "Mobile-only UI correction and anonymous/customer visibility on existing LOCAL fixture; no repeated article creation or production",
+  "checks": {
+    "mobileRestoreVisibleWithoutHorizontalScroll": "PASS",
+    "originalPrivateRecommendationAssociationRestored": "PASS",
+    "fixtureReturnedToUnpublishedLogicallyDeletedState": "PASS",
+    "anonymousCannotSeeRecycleBin": "PASS"
+  },
+  "writes": [
+    {
+      "method": "POST",
+      "path": "/api/auth/login"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/products/trash/restore"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/products/trash/delete"
+    }
+  ],
+  "errors": [],
+  "result": "FAIL",
+  "error": "TimeoutError: page.waitForURL: Timeout 30000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation to \"http://127.0.0.1:18080/\" until \"load\"\n  navigated to \"http://127.0.0.1:18080/admin/deleted-products\"\n============================================================"
+}

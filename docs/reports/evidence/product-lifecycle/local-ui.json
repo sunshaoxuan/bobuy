@@ -1,0 +1,44 @@
+{
+  "scope": "Existing shared LOCAL environment; synthetic article/product created, hidden and restored through visible UI only; no production writes",
+  "checks": {
+    "normalUiCreationAndPublishedOccurrence": "PASS",
+    "reviewDeleteReopenLinkedItemVisibleOnlyInAdminTrash": "PASS",
+    "themeRetainedEmptyCountsAndDirectItemHidden": "PASS",
+    "mobileRestoreExactOriginalRecommendationAndCounts": "PASS",
+    "fixtureUnpublishedAndLogicallyDeletedNoPublicPollution": "PASS"
+  },
+  "writes": [
+    {
+      "method": "POST",
+      "path": "/api/auth/login"
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/recommendations/13/publish"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/products/trash/delete"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/products/trash/restore"
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/recommendations/13/withdraw"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/products/trash/delete"
+    }
+  ],
+  "errors": [],
+  "postId": 13,
+  "resumedExistingSyntheticArticle": true,
+  "stage": "Return synthetic fixture to private inactive state through normal UI",
+  "baselineCards": 4,
+  "productId": "bobuy-rec-v1-6cfc3be4-77e5-39f5-aad9-2bd8c55c7fe9",
+  "itemId": 61,
+  "result": "PASS"
+}

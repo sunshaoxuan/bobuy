@@ -2,6 +2,20 @@ import type { Dictionary } from './types';
 import experience from './experience.ja-JP.json';
 
 const messages: Dictionary = {
+    'trash.title': '商品のごみ箱',
+    'trash.hint': '論理削除では商品情報、画像、取引履歴を保持します。関連するおすすめも非表示になり、復元すると再表示されます。ごみ箱はプラットフォーム管理者のみ閲覧できます。',
+    'trash.admin_only': 'プラットフォーム管理者のみ利用できます。',
+    'trash.deleted': '削除済み商品',
+    'trash.no_images': '商品画像のない項目を確認',
+    'trash.search': '商品名・仕入先ITEM・商品IDを検索',
+    'trash.references': '関連するおすすめ項目ID',
+    'trash.deleted_at': '削除日時',
+    'trash.active': '有効',
+    'trash.actions': '操作',
+    'trash.restore': '商品と関連するおすすめを復元',
+    'trash.review': '選択した商品とおすすめの関連を確認しました。復元可能な論理削除で非表示にします。',
+    'trash.remove': '選択した商品を論理削除',
+    'trash.conflict': '情報が変更されたか保存に失敗しました。再読み込みして確認してください。',
     'mail.save': 'メール設定を保存',
     'mail.reload': '再読み込み',
     "mail.title": "システム設定 · メール",

@@ -1,0 +1,26 @@
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
+import {chromium} from '../frontend/node_modules/playwright-core/index.mjs';
+const origin='http://127.0.0.1:18080';const out=new URL('../docs/reports/evidence/product-lifecycle/',import.meta.url);
+const prior=JSON.parse(readFileSync(new URL('local-ui.json',out),'utf8'));assert.equal(prior.result,'PASS');assert.equal(prior.postId,13);assert.equal(prior.itemId,61);
+const {productId,postId,itemId}=prior;
+const report={scope:'Mobile-only UI correction and anonymous/customer visibility on existing LOCAL fixture; no repeated article creation or production',checks:{},writes:[],errors:[]};
+const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});
+async function context(){const ctx=await browser.newContext({viewport:{width:390,height:844}});await ctx.addInitScript(()=>localStorage.setItem('bobbuy_locale','en-US'));return ctx;}
+const ctx=await context(),page=await ctx.newPage();page.setDefaultTimeout(12000);page.on('pageerror',e=>report.errors.push(e.message));page.on('request',r=>{if(!['GET','HEAD','OPTIONS'].includes(r.method()))report.writes.push({method:r.method(),path:new URL(r.url()).pathname});});
+async function response(action,path,method){const pending=page.waitForResponse(r=>new URL(r.url()).pathname===path&&r.request().method()===method).then(r=>({r}),error=>({error}));await action();const result=await pending;if(result.error)throw result.error;assert.equal(result.r.status(),200,await result.r.text());return (await result.r.json()).data;}
+async function shot(name){assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.screenshot({path:fileURLToPath(new URL(name+'.png',out)),animations:'disabled'});}
+try{
+ await page.goto(origin+'/admin/deleted-products');await page.locator('#username').fill('agent');await page.locator('#password').fill('agent-pass');await page.locator('button[type=submit]').click();await page.waitForURL(origin+'/admin/users');await page.goto(origin+'/admin/deleted-products');
+ await page.getByRole('textbox',{name:'Search name, supplier ITEM or product ID'}).fill(productId);const card=page.locator('article[data-product-id="'+productId+'"]');await card.waitFor();
+ const restore=card.getByRole('button',{name:'Restore product and recommendations'});const box=await restore.boundingBox();assert(box&&box.x>=0&&box.x+box.width<=390);await shot('mobile-deleted');report.checks.mobileRestoreVisibleWithoutHorizontalScroll='PASS';
+ await response(()=>restore.click(),'/api/admin/products/trash/restore','POST');await card.waitFor({state:'hidden'});
+ const detail=await response(()=>page.goto(origin+'/admin/recommendations?post='+postId),'/api/merchant/recommendations/'+postId,'GET');assert.equal(detail.post.published,false);assert.equal(detail.items.length,1);assert.equal(detail.items[0].id,itemId);assert.equal(detail.items[0].productId,productId);report.checks.originalPrivateRecommendationAssociationRestored='PASS';
+ await page.goto(origin+'/admin/deleted-products');await page.getByRole('button',{name:'Review products without images',exact:true}).click();await page.getByRole('textbox',{name:'Search name, supplier ITEM or product ID'}).fill(productId);await card.waitFor();await card.getByRole('checkbox').check();await page.getByRole('checkbox',{name:/I reviewed the selected products/}).check();await shot('mobile-reviewed');await response(()=>page.getByRole('button',{name:/Logically delete selected products \(1\)/}).click(),'/api/admin/products/trash/delete','POST');await card.waitFor({state:'hidden'});
+ const hidden=await response(()=>page.goto(origin+'/admin/recommendations?post='+postId),'/api/merchant/recommendations/'+postId,'GET');assert.equal(hidden.post.published,false);assert.equal(hidden.items.length,0);report.checks.fixtureReturnedToUnpublishedLogicallyDeletedState='PASS';
+ const anon=await context(),publicPage=await anon.newPage();await publicPage.goto(origin+'/admin/deleted-products');await publicPage.locator('#username').waitFor();assert.equal(await publicPage.locator('a[href="/admin/deleted-products"]').count(),0);assert(!(await publicPage.locator('body').innerText()).includes(productId));report.checks.anonymousCannotSeeRecycleBin='PASS';
+ await publicPage.locator('#username').fill('customer');await publicPage.locator('#password').fill('customer-pass');await publicPage.locator('button[type=submit]').click();await publicPage.locator('#username').waitFor({state:'hidden'});await publicPage.waitForURL(origin+'/');await publicPage.goto(origin+'/admin/deleted-products');await publicPage.waitForURL(origin+'/');assert.equal(await publicPage.locator('a[href="/admin/deleted-products"]').count(),0);assert(!(await publicPage.locator('body').innerText()).includes(productId));report.checks.customerDirectRouteAndMenuDenyDeletedData='PASS';
+ assert.equal(report.errors.length,0);report.result='PASS';
+}catch(error){report.result='FAIL';report.error=String(error);await page.screenshot({path:fileURLToPath(new URL('mobile-failure.png',out))});throw error;}
+finally{writeFileSync(new URL('mobile-ui.json',out),JSON.stringify(report,null,2)+'\n');await browser.close();}

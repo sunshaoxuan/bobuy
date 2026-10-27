@@ -42,8 +42,8 @@ public class RecommendationService {
     }
     private Detail detail(RecommendationPost post) { return detail(post,false); }
     private Detail detail(RecommendationPost post,boolean publicView) {
-        var linked = items.findByPostIdOrderById(post.id);
-        return new Detail(summary(post, linked.isEmpty()?null:publicView?(linked.get(0).gallery.isEmpty()?null:linked.get(0).gallery.get(0).url()):linked.get(0).imageUrl), post.body, taxonomy.display(linked,publicView));
+        var linked = taxonomy.display(items.findByPostIdOrderById(post.id),publicView);
+        return new Detail(summary(post, linked.isEmpty()?null:publicView?(linked.get(0).gallery.isEmpty()?null:linked.get(0).gallery.get(0).url()):linked.get(0).imageUrl), post.body, linked);
     }
     private Long owner() {
         Long owner = MerchantScope.current();
@@ -66,9 +66,7 @@ public class RecommendationService {
         var paging = PageRequest.of(Math.max(0, page), 20);
         var selected = posts.findByMerchantIdOrderByUpdatedAtDesc(owner(), paging);
         if (selected.isEmpty()) return List.of();
-        Map<Long, String> covers = new HashMap<>();
-        items.findCovers(selected.stream().map(p -> p.id).toList()).forEach(i -> covers.put(i.postId, i.imageUrl));
-        return selected.stream().map(p -> summary(p, covers.get(p.id))).toList();
+        return selected.stream().map(p -> detail(p).post()).toList();
     }
     @Transactional(readOnly = true)
     public List<Detail> publicFeed(int page) {
@@ -83,8 +81,8 @@ public class RecommendationService {
         var grouped = items.findByPostIdInOrderById(selected.stream().map(p -> p.id).toList()).stream()
             .collect(java.util.stream.Collectors.groupingBy(i -> i.postId));
         return selected.stream().map(post -> {
-            var linked = grouped.getOrDefault(post.id, List.of());
-            return new Detail(summary(post, linked.isEmpty()||linked.get(0).gallery.isEmpty()?null:linked.get(0).gallery.get(0).url()), post.body, taxonomy.display(linked,true));
+            var linked = taxonomy.display(grouped.getOrDefault(post.id, List.of()),true);
+            return new Detail(summary(post, linked.isEmpty()||linked.get(0).gallery.isEmpty()?null:linked.get(0).gallery.get(0).url()), post.body, linked);
         }).toList();
     }
     @Transactional(readOnly = true)
@@ -179,7 +177,16 @@ public class RecommendationService {
     }
 
     @Transactional(readOnly = true)
-    public RecommendationImage image(String id) { return images.findById(id).filter(i->"PUBLIC".equals(i.accessScope)).orElseThrow(RecommendationService::missing); }
+    public RecommendationImage image(String id) {
+        String url="/api/storefront/recommendation-images/"+id;
+        var deleted=products.deletedIds();
+        if(!deleted.isEmpty()){
+            var references=items.findAll().stream().filter(i->url.equals(i.imageUrl)||i.gallery.stream().anyMatch(p->url.equals(p.url()))).toList();
+            boolean activeMaster=products.findAll().stream().anyMatch(p->p.getMediaGallery().stream().anyMatch(m->url.equals(m.getUrl())));
+            if(!activeMaster&&!references.isEmpty()&&references.stream().allMatch(i->i.productId!=null&&deleted.contains(i.productId)))throw missing();
+        }
+        return images.findById(id).filter(i->"PUBLIC".equals(i.accessScope)).orElseThrow(RecommendationService::missing);
+    }
 
     @Transactional
     public Detail classify(Long id,List<Long> itemIds,List<String> categoryIds,String mode,boolean updateCategories,

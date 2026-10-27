@@ -23,7 +23,18 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "bb_product")
+@org.hibernate.annotations.SQLRestriction("deleted_at IS NULL")
 public class Product {
+    @com.fasterxml.jackson.annotation.JsonProperty(access=com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY)
+    private java.time.Instant deletedAt;
+    @com.fasterxml.jackson.annotation.JsonProperty(access=com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY)
+    private Long deletedBy;
+    public java.time.Instant getDeletedAt(){return deletedAt;}
+    public void setDeletedAt(java.time.Instant value){deletedAt=value;}
+    public Long getDeletedBy(){return deletedBy;}
+    public void setDeletedBy(Long value){deletedBy=value;}
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    public boolean isDeleted(){return deletedAt!=null;}
     @Id
     private String id;
 

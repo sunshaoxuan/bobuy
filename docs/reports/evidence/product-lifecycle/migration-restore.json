@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "scope": "Existing shared LOCAL PostgreSQL; isolated temporary database only; no production backup or data",
+  "postgresVersion": "18.6",
+  "tablesPreserved": 30,
+  "backupSha256": "433a4536ea256f760a521accb590cc86b27f48c0e8fd206896ba2c5ca60fb6a3",
+  "migrationSha256": "b5808d46a09aab230d507d4d04de86f64de3f4ec2da005ae1c633ce89fa6288c",
+  "allOriginalRowsAndImageBytesUnchanged": true,
+  "newDeletionFieldsNullAndAuditEmpty": true,
+  "actualLegacyBackupRestoreMatches": true,
+  "elapsedSeconds": 50.27,
+  "temporaryDatabaseRemoved": true
+}

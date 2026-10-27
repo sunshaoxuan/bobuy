@@ -60,7 +60,8 @@ public class RecommendationTaxonomyService {
     public List<RecommendationItem> display(List<RecommendationItem> source,boolean publicView) {
         Map<String,Product> productMap=new HashMap<>();products.findAllById(source.stream().map(i->i.productId).filter(Objects::nonNull).distinct().toList()).forEach(p->productMap.put(p.getId(),p));
         Map<Long,Long> owners=new HashMap<>();posts.findAllById(source.stream().map(i->i.postId).distinct().toList()).forEach(p->owners.put(p.id,p.merchantId));
-        var projected=source.stream().map(original->{
+        var deleted=products.deletedIds();
+        var projected=source.stream().filter(original->original.productId==null||!deleted.contains(original.productId)).map(original->{
             var item=new RecommendationItem();
             item.id=original.id;item.postId=original.postId;item.productId=original.productId;item.name=original.name;
             item.itemNumber=original.itemNumber;item.referencePrice=original.referencePrice;item.originalPrice=original.originalPrice;

@@ -8,6 +8,13 @@ import {
     storeAuthSession,
     type AuthenticatedUser
 } from './authStorage';
+
+export type ProductTrashRow={id:string;name:Record<string,string>;itemNumber:string|null;merchantId:number;deletedAt:string|null;deletedBy:number|null;version:number;imageCount:number;recommendationIds:number[]};
+export const productTrashApi={
+ list:(deleted=true)=>storeGet<ProductTrashRow[]>(`/api/admin/products/trash?deleted=${deleted}`),
+ remove:(rows:{id:string;version:number}[])=>postJson<boolean,typeof rows>('/api/admin/products/trash/delete',rows),
+ restore:(row:{id:string;version:number})=>postJson<boolean,typeof row>('/api/admin/products/trash/restore',row)
+};
 import { getStoredLocale, translate } from './i18n';
 
 export type Metrics = {

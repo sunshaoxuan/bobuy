@@ -26,6 +26,7 @@ class ProductPricingIntegrationTest {
  @Autowired MockMvc mvc;@Autowired ObjectMapper json;@Autowired BobbuyStore store;@Autowired ProductRepository products;
  @Autowired ProductPriceAdjustmentRepository adjustments;@Autowired UserRepository users;@Autowired JwtTokenService tokens;
  @Autowired ProductSaleService sales;@Autowired OrderHeaderRepository orders;
+ @Autowired org.springframework.jdbc.core.JdbcTemplate jdbc;
  @MockBean PricingTime time;
  String id,admin,other,buyer;Instant now=Instant.parse("2026-10-26T14:58:00Z");
  @BeforeEach void setup(){
@@ -34,7 +35,7 @@ class ProductPricingIntegrationTest {
   var customer=new User(9191L,"buyer",Role.CUSTOMER,0);customer.setUsername("pricing_buyer");users.save(customer);buyer=tokens.createAccessToken(customer);
   id="pricing-synthetic-"+UUID.randomUUID();var product=new Product();product.setId(id);product.setMerchantId(1000L);product.setName(Map.of("ja-JP","合成商品"));product.setBasePrice(77);product.setOrderMethod(OrderMethod.PRE_ORDER);product.setVisibilityStatus(ProductVisibility.PUBLIC);product.setSale(new ProductSale(new BigDecimal("1000"),"JPY","1個",null,null,3,1000L,now.minusSeconds(1),true));products.saveAndFlush(product);
  }
- @AfterEach void cleanup(){adjustments.deleteAll();products.deleteById(id);}
+ @AfterEach void cleanup(){adjustments.deleteAll();jdbc.update("delete from bb_product_lifecycle_event where product_id=?",id);products.deleteById(id);}
  String path(){return "/api/merchant/product-pricing/"+id;}
  JsonNode data(ResultActions result)throws Exception{return json.readTree(result.andExpect(status().isOk()).andReturn().getResponse().getContentAsString(java.nio.charset.StandardCharsets.UTF_8)).get("data");}
  ResultActions call(String method,String suffix,Object body,String token)throws Exception{return mvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request(org.springframework.http.HttpMethod.valueOf(method),path()+suffix).header("Authorization","Bearer "+token).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsString(body)));}
@@ -63,7 +64,11 @@ class ProductPricingIntegrationTest {
   for(String amount:List.of("0","-1","800.5","1000000001"))call("POST","/adjustments",input("JPY",amount,now.plusSeconds(1),now.plusSeconds(60),0),admin).andExpect(status().isBadRequest());
   call("POST","/adjustments",input("JPY","800",now,now,0),admin).andExpect(status().isBadRequest());
   var row=draft(now.plusSeconds(1),now.plusSeconds(60));String suffix="/adjustments/"+row.get("id").asLong();
-  mvc.perform(delete("/api/mobile/products/"+id).header("Authorization","Bearer "+admin)).andExpect(status().isBadRequest());assertThat(products.existsById(id)).isTrue();
+  mvc.perform(delete("/api/mobile/products/"+id).header("Authorization","Bearer "+admin)).andExpect(status().isOk());assertThat(products.existsById(id)).isFalse();
+  assertThat(adjustments.findAll()).hasSize(1);
+  long deletedVersion=jdbc.queryForObject("select record_version from bb_product where id=?",Long.class,id);
+  mvc.perform(post("/api/admin/products/trash/restore").header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsBytes(Map.of("id",id,"version",deletedVersion)))).andExpect(status().isOk());
+  assertThat(products.existsById(id)).isTrue();
   call("PUT",suffix,input("JPY","700",now.plusSeconds(1),now.plusSeconds(60),0),other).andExpect(status().isNotFound());
   data(call("PUT",suffix,input("JPY","700",now.plusSeconds(1),now.plusSeconds(60),0),admin));call("PUT",suffix,input("JPY","600",now.plusSeconds(1),now.plusSeconds(60),0),admin).andExpect(status().isBadRequest());
   call("POST",suffix+"/approve",Map.of("version",1,"confirmed",false),admin).andExpect(status().isBadRequest());

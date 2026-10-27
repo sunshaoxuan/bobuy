@@ -2,6 +2,20 @@ import type { Dictionary } from './types';
 import experience from './experience.zh-CN.json';
 
 const messages: Dictionary = {
+    'trash.title': '商品回收站',
+    'trash.hint': '逻辑删除保留商品资料、图片和历史业务记录。关联推荐同步隐藏，恢复时一并恢复。仅平台管理员可查看回收站。',
+    'trash.admin_only': '仅平台管理员可访问。',
+    'trash.deleted': '已删除商品',
+    'trash.no_images': '审阅无商品图项',
+    'trash.search': '搜索名称、供应商ITEM或商品ID',
+    'trash.references': '关联推荐条目ID',
+    'trash.deleted_at': '删除时间',
+    'trash.active': '正常',
+    'trash.actions': '操作',
+    'trash.restore': '恢复商品及关联推荐',
+    'trash.review': '已核对勾选商品及其推荐关联，使用可恢复的逻辑删除隐藏。',
+    'trash.remove': '逻辑删除所选商品',
+    'trash.conflict': '资料已变化或保存失败，请重新读取并核对后操作。',
     'mail.save': '保存邮件设置',
     'mail.reload': '重新加载',
     "mail.title": "系统设置 · 邮件",

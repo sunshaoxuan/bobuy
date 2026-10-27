@@ -58,7 +58,7 @@ public class ProductSaleService {
   return quoteAt(product,time.now());
  }
  public Optional<Quote> quoteAt(Product product,Instant now){
-  if(product.getVisibilityStatus()!=ProductVisibility.PUBLIC)return Optional.empty();
+  if(product.isDeleted()||product.getVisibilityStatus()!=ProductVisibility.PUBLIC)return Optional.empty();
   return effectiveAt(product,now);
  }
  public Optional<Quote> effectiveAt(Product product,Instant now){

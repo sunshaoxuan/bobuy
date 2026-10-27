@@ -1,0 +1,15 @@
+{
+  "scope": "Existing shared local containers only",
+  "migrationVersion": "20",
+  "allApplicationClassBytesMatchCandidate": true,
+  "applicationClassCount": 423,
+  "localOnlyLegacyMigrationResources": [
+    "BOOT-INF/classes/db/migration/V7__product_recommendations.sql",
+    "BOOT-INF/classes/db/migration/V8__ai_connection_settings.sql"
+  ],
+  "originalJarSha256": "1427d93b4579bc52da0bdb46532d99d8d986216fcd8542e7639436d702158834",
+  "candidateJarSha256": "92a3fb48e19436bb27b8ac4f2b7cce824ad801cd5607742e61edc43482b371e3",
+  "startupSeconds": 20.17,
+  "newContainersOrImages": false,
+  "productionChanged": false
+}

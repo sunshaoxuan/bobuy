@@ -1,0 +1,9 @@
+{
+  "scope": "Existing LOCAL customer fixture, ordinary visible login and direct navigation only; no product writes or credential reads",
+  "checks": {
+    "customerCannotSeeDeletedProducts": "PASS"
+  },
+  "loginStatus": 200,
+  "afterLoginUrl": "http://127.0.0.1:18080/",
+  "result": "PASS"
+}

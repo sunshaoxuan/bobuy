@@ -1,6 +1,20 @@
 import type { Dictionary } from './types';
 
 const messages: Dictionary = {
+    'trash.title': '商品回收站',
+    'trash.hint': '邏輯刪除保留商品資料、圖片和歷史業務紀錄。關聯推薦同步隱藏，還原時一併恢復。僅平台管理員可查看回收站。',
+    'trash.admin_only': '僅平台管理員可存取。',
+    'trash.deleted': '已刪除商品',
+    'trash.no_images': '審閱無商品圖項目',
+    'trash.search': '搜尋名稱、供應商ITEM或商品ID',
+    'trash.references': '關聯推薦項目ID',
+    'trash.deleted_at': '刪除時間',
+    'trash.active': '正常',
+    'trash.actions': '操作',
+    'trash.restore': '還原商品及關聯推薦',
+    'trash.review': '已核對勾選商品及其推薦關聯，使用可還原的邏輯刪除隱藏。',
+    'trash.remove': '邏輯刪除所選商品',
+    'trash.conflict': '資料已變更或儲存失敗，請重新讀取並核對後操作。',
     'mail.save': '儲存郵件設定',
     'mail.reload': '重新載入',
     "mail.title": "系統設定 · 郵件",

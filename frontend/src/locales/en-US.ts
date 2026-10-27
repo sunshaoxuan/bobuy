@@ -2,6 +2,20 @@ import type { Dictionary } from './types';
 import experience from './experience.en-US.json';
 
 const messages: Dictionary = {
+    'trash.title': 'Product recycle bin',
+    'trash.hint': 'Logical deletion preserves product data, images and historical records. Linked recommendations are hidden together and return on restore. Only platform administrators can view this recycle bin.',
+    'trash.admin_only': 'Platform administrator access required.',
+    'trash.deleted': 'Deleted products',
+    'trash.no_images': 'Review products without images',
+    'trash.search': 'Search name, supplier ITEM or product ID',
+    'trash.references': 'Linked recommendation IDs',
+    'trash.deleted_at': 'Deleted at',
+    'trash.active': 'Active',
+    'trash.actions': 'Actions',
+    'trash.restore': 'Restore product and recommendations',
+    'trash.review': 'I reviewed the selected products and their recommendation links. Hide them using recoverable logical deletion.',
+    'trash.remove': 'Logically delete selected products',
+    'trash.conflict': 'The data changed or could not be saved. Reload and review the selection again.',
     'mail.save': 'Save mail settings',
     'mail.reload': 'Reload',
     "mail.title": "System settings · Mail",
