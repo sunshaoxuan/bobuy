@@ -1,5 +1,8 @@
 # GUIDE-03: 自动化测试运行指南
 
+> 2026-10-27 候选更新：图片统一使用 PostgreSQL `bb_recommendation_image`；原对象存储服务已从候选代码与部署依赖移除。生产切换状态和回退步骤以 [PostgreSQL 18 升级与图片存储说明](../reports/POSTGRES18-STORAGE.md) 为准，不能直接把旧数据目录挂给18启动。
+
+
 **生效日期**: 2026-01-16  
 **状态**: 执行中
 
@@ -81,7 +84,7 @@ npm run e2e:ai:win
 - 前端：`RUN_AI_VISION_E2E=1`
 - 后端 profile：`SPRING_PROFILES_ACTIVE=dev,ai-hermes`（必须）
 - 外部模型：`bobbuy.ai.llm.edge.*` + `bobbuy.ai.llm.main.*` 可访问
-- 对象存储：MinIO 可访问（`bobbuy.minio.*`）
+- 对象存储：PostgreSQL 图片表 可访问（`bobbuy.minio.*`）
 - 样本图片：`sample/IMG_1484.jpg`、`sample/IMG_1638.jpg`
 - Sample golden：`docs/fixtures/ai-onboarding-sample-golden.json`
 - Sample 对比脚本：`pwsh /home/runner/work/bobbuy/bobbuy/scripts/verify-ai-onboarding-samples.ps1`

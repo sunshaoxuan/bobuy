@@ -33,6 +33,7 @@
     <spring-cloud-alibaba.version>2023.0.1.0</spring-cloud-alibaba.version>
     <resilience4j.version>2.2.0</resilience4j.version>
     <postgresql.version>42.7.11</postgresql.version>
+    <flyway.version>11.14.1</flyway.version>
     <tomcat.version>10.1.54</tomcat.version>
     <netty.version>4.1.132.Final</netty.version>
     <commons-fileupload.version>1.6.0</commons-fileupload.version>

@@ -1,0 +1,69 @@
+{
+  "allDataAndMetadata": "PASS",
+  "constraintInventoryAndSemantics": "PASS",
+  "targetParsedCanonicalizations": [
+    {
+      "relation": "bb_merchant_sku",
+      "constraint": "ck_bb_merchant_sku_stock_status"
+    },
+    {
+      "relation": "bb_order_header",
+      "constraint": "ck_bb_order_header_delivery_status"
+    },
+    {
+      "relation": "bb_order_header",
+      "constraint": "ck_bb_order_header_payment_method"
+    },
+    {
+      "relation": "bb_order_header",
+      "constraint": "ck_bb_order_header_payment_status"
+    },
+    {
+      "relation": "bb_order_header",
+      "constraint": "ck_bb_order_header_status"
+    },
+    {
+      "relation": "bb_product",
+      "constraint": "ck_bb_product_order_method"
+    },
+    {
+      "relation": "bb_product",
+      "constraint": "ck_bb_product_storage_condition"
+    },
+    {
+      "relation": "bb_product",
+      "constraint": "ck_bb_product_visibility_status"
+    },
+    {
+      "relation": "bb_product_price_adjustment",
+      "constraint": "bb_product_price_adjustment_status_check"
+    },
+    {
+      "relation": "bb_trip",
+      "constraint": "bb_trip_workflow_status_valid"
+    },
+    {
+      "relation": "bb_trip_logistics_tracking",
+      "constraint": "ck_bb_trip_logistics_tracking_channel"
+    },
+    {
+      "relation": "bb_trip_logistics_tracking",
+      "constraint": "ck_bb_trip_logistics_tracking_provider"
+    },
+    {
+      "relation": "bb_trip_logistics_tracking",
+      "constraint": "ck_bb_trip_logistics_tracking_status"
+    }
+  ],
+  "sourceVersion": "16.13",
+  "targetVersion": "18.6",
+  "tables": 30,
+  "restoreSeconds": 39.33,
+  "previousDataVolumeRetained": true,
+  "noParallelTestStack": true,
+  "productionChanged": false,
+  "rawConstraintTextDifferencesRetained": [
+    "constraints"
+  ],
+  "result": "PASS"
+}

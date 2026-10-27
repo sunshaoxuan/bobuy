@@ -1,0 +1,8 @@
+{
+  "onlyNamedSyntheticExpenseAndItsAuditRemoved": true,
+  "allPreexistingImageIdsRetained": true,
+  "privateImageRemovedOnlyIfNewAndUnreferenced": true,
+  "sequencesNotRewound": true,
+  "productionTouched": false,
+  "wholeDatabaseRestore": false
+}

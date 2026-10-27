@@ -12,18 +12,7 @@ services:
         limits:
           memory: 384M
           cpus: '1.0'
-  minio:
-    container_name: bobuy-minio
-    image: bobuy/minio:RELEASE.2025-10-15T17-29-55Z
-    build:
-      context: .
-      dockerfile: infra/minio.Dockerfile
-    ports: !reset []
-    deploy:
-      resources:
-        limits:
-          memory: 384M
-          cpus: '0.5'
+
   redis:
     container_name: bobuy-redis
     command: redis-server --appendonly yes --maxmemory 64mb --maxmemory-policy noeviction

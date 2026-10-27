@@ -1,5 +1,8 @@
 # RUNBOOK: BOBBuy 试运行部署
 
+> 2026-10-27 候选更新：图片统一使用 PostgreSQL `bb_recommendation_image`；原对象存储服务已从候选代码与部署依赖移除。生产切换状态和回退步骤以 [PostgreSQL 18 升级与图片存储说明](../reports/POSTGRES18-STORAGE.md) 为准，不能直接把旧数据目录挂给18启动。
+
+
 **适用范围**: 内部 / 小范围试运行  
 **不适用范围**: 高可用生产集群、TLS/域名证书、Secret Manager、监控告警自动化
 
@@ -53,7 +56,6 @@
 
 - Docker Engine + Docker Compose Plugin
 - 至少一台可运行全部容器的 Linux 主机
-- 可写磁盘目录：`data/postgres`、`data/minio`、`data/redis`、`data/rabbitmq`、`data/logs`
 - 计划使用的 AI provider：
   - **推荐**：Ollama / 私有兼容 gateway
   - **可选**：OpenAI-compatible `codex-bridge`，用于受控个人 Codex 订阅桥接服务
@@ -62,10 +64,10 @@
 
 数据库版本策略：
 
-- 试运行 Compose 固定使用 `postgres:15-alpine`。
+- 试运行 Compose 固定使用 `postgres:18.6-alpine3.23`。
 - 原因：避免继续承受 PostgreSQL 18 与 Flyway 10.15.2 的“高于已验证范围”提示风险。
 - 如后续要升级 PostgreSQL 大版本，需先单独验证 Flyway 兼容性并更新本文档。
-- 若旧环境已有 `./data/postgres_v18` 数据目录，切换到当前 Compose 前必须先停服务并把数据迁移 / 备份到 `./data/postgres`，不要在未迁移数据目录的情况下直接覆盖启动。
+- 若旧环境已有 `./data/postgres_v18` 数据目录，切换到当前 Compose 前必须先停服务并把数据迁移 / 备份到 `./data/postgres18`，不要在未迁移数据目录的情况下直接覆盖启动。
 - 当前内部试运行确认无历史业务数据，旧库 adoption / restore drill 不适用；上线按空库 Flyway 初始化、可选 seed、真实栈黑盒与备份恢复演练执行。若未来导入历史数据，必须重新启用旧库 adoption 门禁。
 
 ---
@@ -83,7 +85,6 @@
      - `BOBBUY_SECURITY_REFRESH_COOKIE_SECURE`
      - `BOBBUY_SECURITY_SERVICE_TOKEN`
     - `POSTGRES_PASSWORD`
-    - `MINIO_ROOT_PASSWORD`
     - `RABBITMQ_DEFAULT_PASS`
     - 可用 `openssl rand -base64 32` 生成 `BOBBUY_SECURITY_JWT_SECRET`
     - 可用第二次 `openssl rand -base64 32` 生成 `BOBBUY_SECURITY_SERVICE_TOKEN`
@@ -96,7 +97,6 @@
    - **本地桌面 Codex CLI 兜底**：仅在受控本机设置 `BOBBUY_AI_LLM_CODEX_COMMAND=codex`
 4. 仅限本地调试可保留的默认项：
    - `POSTGRES_PASSWORD=bobbuypassword`
-   - `MINIO_ROOT_PASSWORD=bobbuypassword`
    - `RABBITMQ_DEFAULT_PASS=bobbuypassword`
     - `BOBBUY_BIND_HOST=127.0.0.1`
 5. WebSocket / 聊天鉴权约束：
@@ -153,7 +153,7 @@ bash scripts/build-service-images.sh
 
 ```bash
 cd /home/runner/work/bobbuy/bobbuy
-docker compose up -d postgres minio redis rabbitmq nacos nacos-init core-service ai-service im-service auth-service gateway-service frontend gateway ocr-service
+docker compose up -d postgres redis rabbitmq nacos nacos-init core-service ai-service im-service auth-service gateway-service frontend gateway ocr-service
 ```
 
 观察关键服务：
@@ -256,8 +256,6 @@ Flyway 旧库 adoption / 回滚演练：
 - Gateway actuator: `http://127.0.0.1:${GATEWAY_HOST_PORT:-80}/api/actuator/health`
 - Gateway readiness: `http://127.0.0.1:${GATEWAY_HOST_PORT:-80}/api/actuator/health/readiness`
 - Nacos Console: `http://127.0.0.1:${NACOS_HOST_PORT:-8848}/nacos`
-- MinIO API: `http://127.0.0.1:${MINIO_API_HOST_PORT:-9000}`
-- MinIO Console: `http://127.0.0.1:${MINIO_CONSOLE_HOST_PORT:-9001}`
 - OCR Service: `http://127.0.0.1:${OCR_HOST_PORT:-8000}`
 
 2026-05-01 本地证据：在临时本地 secret 下，`postgres`、`minio`、`redis`、`rabbitmq`、`nacos`、`core-service`、`ai-service`、`im-service`、`auth-service`、`gateway-service` 均可进入 healthy；`gateway` 与 `frontend` running；`ocr-service` `/health` 返回 `{"status":"ok"}`。生产/试运行环境仍必须用 secret manager 或 `.env` 注入真实 `BOBBUY_SECURITY_JWT_SECRET` / `BOBBUY_SECURITY_SERVICE_TOKEN`，不得把临时测试 secret 写入 git。
@@ -358,9 +356,7 @@ docker compose logs -f nacos
     - 服务器不要默认依赖 Codex CLI
     - 确认 `ai-service` 作为服务外壳已启动，且不要把它误判为独立业务事实源
     - 前端若出现 `unconfigured` / `FAILED_RECOGNITION` / `PENDING_MANUAL_REVIEW`，按页面提示走重试或人工补录/复核
-5. **MinIO 上传失败**
-    - 检查 `MINIO_ROOT_USER` / `MINIO_ROOT_PASSWORD`
-    - 检查 `BOBBUY_MINIO_BUCKET`
+5. **PostgreSQL 图片表 上传失败**
 6. **边界误判**
     - 若发现文档、Runbook 或排障流程把 `ai-service` / `im-service` / `auth-service` 写成“独立微服务事实源”，应以 `ADR-01` 与当前 Runbook 为准进行修正
 7. **WebSocket 鉴权失败**
@@ -379,14 +375,14 @@ docker compose logs -f nacos
 
 ## 9. 回滚步骤
 
-回滚前提：先确认最近一次可用镜像 / 代码版本、数据库备份、MinIO 备份、Nacos 配置快照。
+回滚前提：先确认最近一次可用镜像 / 代码版本、数据库备份、PostgreSQL 图片表 备份、Nacos 配置快照。
 
 建议顺序：
 
 1. `docker compose down`
 2. 恢复 `.env` 到上一个已验证版本
 3. 恢复 PostgreSQL 备份
-4. 恢复 MinIO 对象与 Nacos 配置
+4. 恢复 PostgreSQL 图片表 对象与 Nacos 配置
 5. 重新启动：
    ```bash
    docker compose up -d --build
@@ -405,7 +401,7 @@ docker compose logs -f nacos
 部署前和升级前至少备份：
 
 - PostgreSQL 数据库
-- MinIO bucket 数据
+- PostgreSQL 图片表 bucket 数据
 - Nacos `infra/nacos/config/*.yaml` 对应配置快照
 - 当前 `.env`
 

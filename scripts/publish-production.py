@@ -7,7 +7,6 @@ from pathlib import Path
 import re
 import shutil
 import subprocess
-import tarfile
 import time
 
 
@@ -200,8 +199,6 @@ def main():
         with (backup / 'database.dump').open('wb') as output:
             run('docker', 'exec', 'bobuy-postgres', 'sh', '-c',
                 'pg_dump -U "$POSTGRES_USER" -d "$POSTGRES_DB" -Fc', stdout=output)
-        with tarfile.open(backup / 'objects.tar.gz', 'w:gz') as archive:
-            archive.add(root / 'data/minio', arcname='minio')
         database = 'bobuy_restore_' + args.release.replace('.', '_')
         run('docker', 'exec', 'bobuy-postgres', 'sh', '-c',
             'createdb -U "$POSTGRES_USER" ' + database)
@@ -215,7 +212,7 @@ def main():
                 'dropdb -U "$POSTGRES_USER" ' + database)
         (stage / 'backup-check.json').write_text(json.dumps({
             'databaseRestore': 'PASS', 'restoredMigrationHistoryAndSchema': 'PASS',
-            'temporaryDatabaseRemoved': True, 'objectsArchive': 'objects.tar.gz'}))
+            'temporaryDatabaseRemoved': True, 'imageStorage': 'PostgreSQL database.dump (including image bytea)'}))
         backup_verified = True
         Path('/etc/bobuy.env').write_text(re.sub(r'^BOBUY_RELEASE=.*$',
             'BOBUY_RELEASE=' + args.release, old_env, flags=re.M))

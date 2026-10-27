@@ -12,8 +12,6 @@ if __name__ == '__main__':
         'POSTGRES_DB': 'bobuy',
         'POSTGRES_USER': 'bobuy',
         'POSTGRES_PASSWORD': secrets.token_hex(32),
-        'MINIO_ROOT_USER': 'bobuyadmin',
-        'MINIO_ROOT_PASSWORD': secrets.token_hex(32),
         'RABBITMQ_DEFAULT_USER': 'bobuy',
         'RABBITMQ_DEFAULT_PASS': secrets.token_hex(32),
         'BOBBUY_SECURITY_JWT_SECRET': secrets.token_hex(64),

@@ -1,0 +1,9 @@
+{
+  "server": "18.6",
+  "driver": "42.7.11",
+  "flywayValidate": "PASS",
+  "migration": "19",
+  "jdbcJsonbByteaIdentityConstraintsRollback": "PASS",
+  "productionDataUsed": false,
+  "flywayNewerDatabaseWarning": false
+}

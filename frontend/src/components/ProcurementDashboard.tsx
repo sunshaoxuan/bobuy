@@ -40,6 +40,7 @@ import {
 } from '../api';
 import { useI18n } from '../i18n';
 import ChatWidget from './ChatWidget';
+import StoredImage from './StoredImage';
 import { usePollingTask } from '../hooks/usePollingTask';
 
 const { Text } = Typography;
@@ -312,7 +313,8 @@ export default function ProcurementDashboard() {
     }
     const preview = await api.expenseReceiptPreview(selectedTripId, expense.id);
     if (preview.previewUrl) {
-      window.open(preview.previewUrl, '_blank', 'noopener,noreferrer');
+      Modal.info({title:t('procurement.preview_receipt'),width:880,icon:null,
+        content:<StoredImage src={preview.previewUrl} alt={t('procurement.preview_receipt')} style={{width:'100%',maxHeight:'75vh',objectFit:'contain'}} />});
     }
   };
 
@@ -717,7 +719,7 @@ export default function ProcurementDashboard() {
                           </Tag>
                         </Space>
                         {receipt.thumbnailUrl ? (
-                          <img
+                          <StoredImage
                             src={receipt.thumbnailUrl}
                             alt={receipt.fileName || String(receipt.id)}
                             style={{ width: '100%', maxHeight: 180, objectFit: 'cover', borderRadius: 8 }}

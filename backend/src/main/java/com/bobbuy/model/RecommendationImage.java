@@ -11,5 +11,6 @@ public class RecommendationImage {
     @Column(nullable = false) public Long merchantId;
     @Column(nullable = false, length = 64) public String imageHash;
     @Column(nullable = false) public String contentType;
+    @Column(nullable=false,length=16) public String accessScope="PUBLIC";
     @JdbcTypeCode(SqlTypes.VARBINARY) @Column(nullable = false, columnDefinition = "bytea") public byte[] content;
 }

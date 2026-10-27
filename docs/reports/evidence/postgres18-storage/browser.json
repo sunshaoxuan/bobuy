@@ -1,0 +1,24 @@
+{
+  "scope": "Existing LOCAL synthetic fixture only; normal visible expense-image UI; no production data or restore",
+  "marker": "SYNTHETIC-PG18-IMAGE-20261027",
+  "checks": {
+    "visibleUploadToPostgres": "PASS",
+    "reopenAuthenticatedPrivatePreview": "PASS",
+    "privatePreviewMobile": "PASS",
+    "anonymousPrivateImageRejected": "PASS"
+  },
+  "errors": [],
+  "writes": [
+    {
+      "method": "POST",
+      "path": "/api/auth/login"
+    },
+    {
+      "method": "POST",
+      "path": "/api/procurement/2000/expenses"
+    }
+  ],
+  "expenseId": 2,
+  "tripId": 2000,
+  "imageUrl": "/api/merchant/media/ad8a9192-9a53-4ef5-9fb8-277e13aef871"
+}

@@ -1,0 +1,49 @@
+{
+  "scope": "production storage read-only audit",
+  "minioApiBucketInventory": [
+    {
+      "bucket": "bobbuy-media",
+      "objects": 0,
+      "bytes": 0,
+      "versions": 0,
+      "deleteMarkers": 0,
+      "versionListTruncated": false
+    }
+  ],
+  "postgres": {
+    "version": "PostgreSQL 15.19 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit",
+    "database": "bobuy",
+    "databaseBytes": 101252455,
+    "locale": {
+      "collate": "en_US.utf8",
+      "ctype": "en_US.utf8",
+      "provider": "c",
+      "storedVersion": null,
+      "actualVersion": null
+    },
+    "extensions": [
+      {
+        "name": "plpgsql",
+        "version": "1.0"
+      }
+    ],
+    "roles": [
+      {
+        "name": "bobuy",
+        "superuser": true,
+        "createRole": true,
+        "createDb": true,
+        "login": true,
+        "replication": true,
+        "bypassRls": true
+      }
+    ],
+    "receipts": 0,
+    "expenses": 0,
+    "receiptObjectRefs": 0,
+    "expenseObjectRefs": 0,
+    "tables": 27,
+    "sequences": 3
+  },
+  "legacyObjectUrlReferenceCounts": []
+}

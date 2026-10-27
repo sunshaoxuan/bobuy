@@ -24,6 +24,7 @@
     <spring-cloud.version>2023.0.1</spring-cloud.version>
     <spring-cloud-alibaba.version>2023.0.1.0</spring-cloud-alibaba.version>
     <postgresql.version>42.7.11</postgresql.version>
+    <flyway.version>11.14.1</flyway.version>
     <tomcat.version>10.1.54</tomcat.version>
     <netty.version>4.1.132.Final</netty.version>
     <commons-fileupload.version>1.6.0</commons-fileupload.version>
@@ -83,12 +84,12 @@
     <dependency>
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-core</artifactId>
-      <version>10.15.2</version>
+      <version>${flyway.version}</version>
     </dependency>
     <dependency>
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-database-postgresql</artifactId>
-      <version>10.15.2</version>
+      <version>${flyway.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -110,11 +111,6 @@
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.minio</groupId>
-      <artifactId>minio</artifactId>
-      <version>8.6.0</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -154,7 +150,7 @@
       <plugin>
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-maven-plugin</artifactId>
-        <version>10.15.2</version>
+        <version>${flyway.version}</version>
         <configuration>
           <locations>
             <location>filesystem:${project.basedir}/src/main/resources/db/migration</location>
@@ -164,7 +160,7 @@
           <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-database-postgresql</artifactId>
-            <version>10.15.2</version>
+            <version>${flyway.version}</version>
           </dependency>
         </dependencies>
       </plugin>

@@ -88,11 +88,10 @@ only in the root-only credential file; no universal default password. Rotation
 revoked the account's prior refresh sessions. Existing signed access JWTs retain
 their configured expiry; this operation did not rotate the shared signing key.
 
-The original MinIO container registries are unavailable. Build
-infra/minio.Dockerfile from the fixed upstream release into bobuy/minio.
-The upstream community repository is archived; track storage maintenance as an
-explicit residual risk. Replacing the storage engine requires its own verified
-migration and is outside this deployment's scope.
+The PostgreSQL-18 candidate removes the retired object-storage service and SDK.
+Image bytes are included in the existing PostgreSQL image table and database backup.
+See reports/POSTGRES18-STORAGE.md for the explicit cross-major cutover and rollback;
+never start 18 on the old 15/16 data directory.
 
 Start infrastructure, then core-service to apply Flyway migrations, then the
 remaining service shells and gateway. Only core owns Flyway. Back up the Bobuy
@@ -130,9 +129,9 @@ clearing is disabled. Missing and forged refresh CSRF tokens remain rejected.
 ## Remaining Product Limits
 
 External AI credentials and optional OCR are unconfigured. Two manual external
-AI tests are skipped. ImageStorageService currently builds object URLs from its
-internal MinIO endpoint, including signed previews. Public attachment URL behavior
-is unverified and needs a separate storage URL configuration change and tests.
+AI tests are skipped. The PostgreSQL-backed image candidate serves public product images separately from
+bearer-authenticated private receipt images. Production activation and its UI
+acceptance are recorded in reports/POSTGRES18-STORAGE.md.
 The merchant admin mobile full-page screenshot still shows excess blank overflow
 below its visible viewport. Record this as an existing visual failure, separate
 from functional login/reload checks. The public storefront now serves the accepted

@@ -1,0 +1,11 @@
+{
+  "scope": "same existing shared local PG18 fixture, preserved legacy V7/V8 resource bytes only",
+  "applicationClassBytesMatch": true,
+  "classCount": 418,
+  "V19Matches": true,
+  "retiredSdkAbsentFromPackagedLibraries": true,
+  "flywayLibraries": [
+    "flyway-core-11.14.1.jar",
+    "flyway-database-postgresql-11.14.1.jar"
+  ]
+}

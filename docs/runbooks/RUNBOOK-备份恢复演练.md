@@ -1,6 +1,9 @@
 # RUNBOOK: 备份恢复演练
 
-**适用范围**: 试运行 PostgreSQL、MinIO、Nacos 配置与 `.env` 边界  
+> 2026-10-27 候选更新：图片统一使用 PostgreSQL `bb_recommendation_image`；原对象存储服务已从候选代码与部署依赖移除。生产切换状态和回退步骤以 [PostgreSQL 18 升级与图片存储说明](../reports/POSTGRES18-STORAGE.md) 为准，不能直接把旧数据目录挂给18启动。
+
+
+**适用范围**: 试运行 PostgreSQL、PostgreSQL 图片表、Nacos 配置与 `.env` 边界
 **强约束**: 恢复验证必须在新库 / 新目录 / 独立路径进行，不得默认覆盖线上数据
 
 ---
@@ -10,7 +13,7 @@
 必须纳入备份的对象：
 
 1. PostgreSQL 业务库
-2. MinIO 对象数据
+2. PostgreSQL 图片表 对象数据
 3. Nacos 配置源（`infra/nacos/config/*.yaml`）与运行态导出快照
 4. `.env`（仅私有安全存储，不得提交真实 secret）
 
@@ -89,23 +92,21 @@ docker compose exec -T postgres psql \
 
 ---
 
-## 4. MinIO 备份
+### PostgreSQL 图片存储
+
+图片字节、内容类型、所属商家、访问范围及去重哈希统一存入 `bb_recommendation_image`。公开商品图保持原公开接口；采购凭证使用鉴权接口，不能用公开商品图接口读取。数据库备份包含图片，不再单独依赖对象存储；恢复后校验行数、每行摘要、图片二进制摘要和权限隔离。详见 [PostgreSQL 18 升级与图片存储说明](../reports/POSTGRES18-STORAGE.md)。
 
 ### 4.1 推荐方式：`mc mirror`
 
 先准备 `mc` 别名：
 
 ```bash
-mc alias set bobbuy http://127.0.0.1:${MINIO_API_HOST_PORT:-9000} \
-  "${MINIO_ROOT_USER:-bobbuyadmin}" \
-  "${MINIO_ROOT_PASSWORD:-bobbuypassword}"
 ```
 
 执行镜像备份：
 
 ```bash
 mkdir -p /tmp/bobbuy-backup/minio
-mc mirror --overwrite bobbuy/${BOBBUY_MINIO_BUCKET:-bobbuy-media} /tmp/bobbuy-backup/minio
 ```
 
 ### 4.2 备选方式：停机目录快照
@@ -124,14 +125,15 @@ tar -czf /tmp/bobbuy-backup/minio-data-$(date +%Y%m%d-%H%M%S).tgz data/minio
 
 ---
 
-## 5. MinIO 恢复验证
+### PostgreSQL 图片存储
+
+图片字节、内容类型、所属商家、访问范围及去重哈希统一存入 `bb_recommendation_image`。公开商品图保持原公开接口；采购凭证使用鉴权接口，不能用公开商品图接口读取。数据库备份包含图片，不再单独依赖对象存储；恢复后校验行数、每行摘要、图片二进制摘要和权限隔离。详见 [PostgreSQL 18 升级与图片存储说明](../reports/POSTGRES18-STORAGE.md)。
 
 ### 5.1 还原到独立目录或独立 bucket
 
 推荐恢复到验证 bucket，而不是直接覆盖正式 bucket：
 
 ```bash
-VERIFY_BUCKET="${BOBBUY_MINIO_BUCKET:-bobbuy-media}-restore-verify"
 mc mb --ignore-existing bobbuy/${VERIFY_BUCKET}
 mc mirror --overwrite /tmp/bobbuy-backup/minio bobbuy/${VERIFY_BUCKET}
 mc ls bobbuy/${VERIFY_BUCKET}
@@ -182,7 +184,7 @@ curl -fsS "http://127.0.0.1:${NACOS_HOST_PORT:-8848}/nacos/v1/cs/configs?dataId=
 禁止行为：
 
 - 提交真实 `.env`
-- 把 JWT secret、数据库密码、MinIO secret 写入文档或仓库
+- 把 JWT secret、数据库密码、PostgreSQL 图片表 secret 写入文档或仓库
 - 把恢复命令写成默认覆盖生产环境
 
 ---
@@ -258,9 +260,9 @@ baseline / migrate / validate 结果:
 ## 11. 本次任务建议执行顺序
 
 1. `docker compose config`
-2. 启动 `postgres` / `minio` / `nacos`（如环境允许）
+2. 启动 `postgres` / `nacos`（如环境允许）
 3. 先做 PostgreSQL 逻辑备份
 4. 恢复到独立验证库并验收
-5. 再做 MinIO / Nacos 配置备份与恢复验证
+5. 再做 PostgreSQL 图片表 / Nacos 配置备份与恢复验证
 6. 如涉及旧库 adoption，再补 baseline / validate / restore 记录
 7. 把结果写入执行报告

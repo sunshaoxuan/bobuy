@@ -179,7 +179,7 @@ public class RecommendationService {
     }
 
     @Transactional(readOnly = true)
-    public RecommendationImage image(String id) { return images.findById(id).orElseThrow(RecommendationService::missing); }
+    public RecommendationImage image(String id) { return images.findById(id).filter(i->"PUBLIC".equals(i.accessScope)).orElseThrow(RecommendationService::missing); }
 
     @Transactional
     public Detail classify(Long id,List<Long> itemIds,List<String> categoryIds,String mode,boolean updateCategories,

@@ -1,0 +1,12 @@
+{
+  "originalServerBackupHashesVerified": true,
+  "temporaryDatabaseAlreadyRemoved": "bobuy18_restore_20261027",
+  "temporaryDownloadedFilesRemoved": [
+    "database.dump",
+    "fingerprint.json",
+    "globals.sql",
+    "manifest.json"
+  ],
+  "originalServerBackupRetained": "/opt/bobuy/backups/pg18-preflight-20261027T024113Z",
+  "noProductionMutation": true
+}

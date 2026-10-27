@@ -44,7 +44,7 @@ BOBBuy 当前是一套以 **Spring Boot + React + PostgreSQL/MinIO + WebSocket(S
 ## 技术栈
 - **Backend**: Spring Boot 3 / Spring Cloud / Nacos / OpenFeign / Resilience4j / Spring Security / Spring Data JPA
 - **Frontend**: React 18 / Ant Design / Vite / Vitest / Playwright
-- **Storage**: PostgreSQL 15 / MinIO
+- **Storage**: PostgreSQL 18.6 (image bytes included)
 
 ## 试运行阶段服务边界
 
@@ -88,7 +88,6 @@ BOBBuy 当前是一套以 **Spring Boot + React + PostgreSQL/MinIO + WebSocket(S
     - `BOBBUY_SECURITY_JWT_SECRET`
     - `BOBBUY_SECURITY_SERVICE_TOKEN`
     - `POSTGRES_PASSWORD`
-    - `MINIO_ROOT_PASSWORD`
     - `RABBITMQ_DEFAULT_PASS`
 3. 校验并启动：
     ```bash
@@ -102,7 +101,6 @@ BOBBuy 当前是一套以 **Spring Boot + React + PostgreSQL/MinIO + WebSocket(S
 
 - Gateway / Frontend: `http://127.0.0.1`
 - Gateway API: `http://127.0.0.1/api`
-- MinIO Console: `http://127.0.0.1:9001`
 - Nacos Console: `http://127.0.0.1:8848/nacos`
 
 详细试运行步骤见 [docs/runbooks/RUNBOOK-试运行部署.md](docs/runbooks/RUNBOOK-试运行部署.md)。

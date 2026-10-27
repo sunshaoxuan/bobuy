@@ -24,11 +24,6 @@ spring:
     password: ${SPRING_RABBITMQ_PASSWORD:${RABBITMQ_DEFAULT_PASS:bobbuypassword}}
 
 bobbuy:
-  minio:
-    endpoint: ${BOBBUY_MINIO_ENDPOINT:http://minio:9000}
-    accessKey: ${BOBBUY_MINIO_ACCESS_KEY:${MINIO_ROOT_USER:bobbuyadmin}}
-    secretKey: ${BOBBUY_MINIO_SECRET_KEY:${MINIO_ROOT_PASSWORD:bobbuypassword}}
-    bucket: ${BOBBUY_MINIO_BUCKET:bobbuy-media}
   security:
     default-role: CUSTOMER
     service-token:

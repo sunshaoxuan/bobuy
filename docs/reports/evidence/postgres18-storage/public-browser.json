@@ -1,0 +1,11 @@
+{
+  "scope": "Existing local fixture public bytes; browser-only gallery binding because stored local published fixtures have no galleries; no database/content writes or production replay; checks image delivery rather than product/image matching",
+  "checks": {
+    "anonymousActualPublicBytes": "PASS",
+    "publicCardImageLoaded": "PASS",
+    "desktopAndMobileNoOverflow": "PASS"
+  },
+  "errors": [],
+  "writes": [],
+  "result": "PASS"
+}

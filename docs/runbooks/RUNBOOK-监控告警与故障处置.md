@@ -1,5 +1,8 @@
 # RUNBOOK: 监控告警与故障处置
 
+> 2026-10-27 候选更新：图片统一使用 PostgreSQL `bb_recommendation_image`；原对象存储服务已从候选代码与部署依赖移除。生产切换状态和回退步骤以 [PostgreSQL 18 升级与图片存储说明](../reports/POSTGRES18-STORAGE.md) 为准，不能直接把旧数据目录挂给18启动。
+
+
 **适用范围**: 内部 / 小范围试运行最小化生产运维基础  
 **不适用范围**: Prometheus/Grafana、集中日志平台、云告警平台、自动扩缩容
 
@@ -37,7 +40,6 @@ docker compose logs -f core-service
 docker compose logs -f ai-service
 docker compose logs -f im-service
 docker compose logs -f auth-service
-docker compose logs -f postgres minio rabbitmq nacos redis ocr-service
 ```
 
 ### 2.2 关键日志字段
@@ -95,7 +97,6 @@ docker compose logs -f postgres minio rabbitmq nacos redis ocr-service
 - `X-BOBBUY-SERVICE-TOKEN`
 - STOMP `CONNECT` header 中的 Bearer token
 - 用户密码
-- `MINIO_ROOT_PASSWORD` / 数据库密码 / 真实 secret
 - 完整小票图片 base64
 - 敏感票据原文的整段转储
 
@@ -117,7 +118,6 @@ curl -fsS http://127.0.0.1/health
 cd /home/runner/work/bobbuy/bobbuy
 docker compose ps
 docker compose exec postgres pg_isready -U "${POSTGRES_USER:-bobbuy}" -d "${POSTGRES_DB:-bobbuy}"
-curl -fsS http://127.0.0.1:${MINIO_API_HOST_PORT:-9000}/minio/health/live
 curl -fsS http://127.0.0.1:${NACOS_HOST_PORT:-8848}/nacos/v1/console/health/readiness
 docker compose exec rabbitmq rabbitmq-diagnostics -q check_running
 docker compose exec redis redis-cli ping
@@ -135,7 +135,6 @@ curl -fsS http://127.0.0.1:${OCR_HOST_PORT:-8000}/docs >/dev/null
 | im-service | `/actuator/health/readiness` + `ImServiceSmokeTest` | `docker compose logs --tail=100 im-service` |
 | auth-service | `/actuator/health/readiness` + `AuthServiceSmokeTest` | `docker compose logs --tail=100 auth-service` |
 | postgres | `pg_isready` | `docker compose logs --tail=100 postgres` |
-| minio | `/minio/health/live` | `docker compose logs --tail=100 minio` |
 | rabbitmq | `rabbitmq-diagnostics -q check_running` | `docker compose logs --tail=100 rabbitmq` |
 | nacos | `/nacos/v1/console/health/readiness` | `docker compose logs --tail=100 nacos` |
 | redis | `redis-cli ping` | `docker compose logs --tail=100 redis` |
@@ -173,7 +172,7 @@ curl -fsS -H "Authorization: Bearer <agent-token>" http://127.0.0.1/api/metrics
 | AI fallback 次数 | trace 中 `fallbackReason` | 查询 `fallbackReason` / `activeProvider` |
 | 人工复核待处理数 | 小票识别状态 | 查看采购小票列表中的 `PENDING_MANUAL_REVIEW` / `PENDING_REVIEW` |
 | PostgreSQL 连接失败 | 日志 | 搜索 `core-service` / `ai-service` / `im-service` / `auth-service` 中 datasource / connection error |
-| MinIO 上传失败 | 日志 | 搜索 `ImageStorageService` / `MinIO` error |
+| PostgreSQL 图片表 上传失败 | 日志 | 搜索 `ImageStorageService` / `PostgreSQL 图片表` error |
 | RabbitMQ 连接失败 | 日志 | 搜索 AMQP / STOMP connection error |
 | WebSocket 连接 / 断开异常 | `im-service` / `core-service` 日志 | 搜索 websocket / stomp / broker relay / chat forbidden / invalid websocket access token |
 | `/internal/**` 401 | gateway-service / 对应服务日志 | 搜索 internal service token / forged internal header / unauthorized internal endpoint |
@@ -249,17 +248,9 @@ curl -fsS -H "Authorization: Bearer <agent-token>" http://127.0.0.1/api/metrics
 - **缓解动作**: 恢复 PostgreSQL、验证磁盘空间、停止重复迁移；旧库 adoption 先备份再评估 baseline
 - **升级条件**: 数据损坏风险、需要恢复备份、或 migration 已部分执行
 
-### 5.6 MinIO 异常
+### PostgreSQL 图片存储
 
-- **触发条件**: 上传 / 预览失败、MinIO health fail
-- **影响范围**: 商品图片、小票原图/缩略图、媒体预览
-- **首查命令**:
-  ```bash
-  curl -fsS http://127.0.0.1:${MINIO_API_HOST_PORT:-9000}/minio/health/live
-  docker compose logs --tail=200 minio core-service ai-service
-  ```
-- **缓解动作**: 检查凭据、bucket、卷挂载；必要时暂停依赖媒体上传的操作
-- **升级条件**: 已有对象读写都失败，或怀疑数据目录损坏
+图片字节、内容类型、所属商家、访问范围及去重哈希统一存入 `bb_recommendation_image`。公开商品图保持原公开接口；采购凭证使用鉴权接口，不能用公开商品图接口读取。数据库备份包含图片，不再单独依赖对象存储；恢复后校验行数、每行摘要、图片二进制摘要和权限隔离。详见 [PostgreSQL 18 升级与图片存储说明](../reports/POSTGRES18-STORAGE.md)。
 
 ### 5.7 RabbitMQ 异常
 
@@ -339,14 +330,9 @@ curl -fsS -H "Authorization: Bearer <agent-token>" http://127.0.0.1/api/metrics
 - **回滚 / 恢复**: 按备份恢复 Runbook 恢复到新库验证
 - **事后记录**: 记录丢失窗口、恢复点、验收结果
 
-### 6.6 MinIO 不可用
+### PostgreSQL 图片存储
 
-- **现象**: 媒体上传 / 预览失败
-- **首查命令**: `docker compose logs --tail=200 minio core-service`
-- **常见原因**: 凭据错误、卷损坏、bucket 缺失
-- **缓解步骤**: 恢复 MinIO 服务，验证 bucket 与对象路径
-- **回滚 / 恢复**: 恢复对象备份或重新挂载已验证目录
-- **事后记录**: 记录影响对象范围与恢复耗时
+图片字节、内容类型、所属商家、访问范围及去重哈希统一存入 `bb_recommendation_image`。公开商品图保持原公开接口；采购凭证使用鉴权接口，不能用公开商品图接口读取。数据库备份包含图片，不再单独依赖对象存储；恢复后校验行数、每行摘要、图片二进制摘要和权限隔离。详见 [PostgreSQL 18 升级与图片存储说明](../reports/POSTGRES18-STORAGE.md)。
 
 ### 6.7 RabbitMQ 不可用
 

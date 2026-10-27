@@ -1101,6 +1101,12 @@ export const api = {
         ),
     users: () => fetchJson<User[]>('/api/users', fallback.users),
     adminUsers: () => fetchJson<ManagedUser[]>('/api/admin/users', []),
+    privateMedia: async (path:string) => {
+        if(!/^\/api\/merchant\/media\/[a-zA-Z0-9-]+$/.test(path)) throw new Error('Invalid media path');
+        const response=await authorizedFetch(path);
+        if(!response.ok) throw new Error(genericErrorMessage());
+        return response.blob();
+    },
     mailSettings: () => fetchJson<MailSettingsView | null>('/api/admin/settings/mail', null),
     saveMailSettings: (settings:MailSettingsEdit) => putJson<MailSettingsView,MailSettingsEdit>('/api/admin/settings/mail',settings),
     testMailSettings: (recipient:string) => postJson<string,{recipient:string}>('/api/admin/settings/mail/test',{recipient}),

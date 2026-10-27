@@ -171,7 +171,6 @@ required_keys="
 BOBBUY_SECURITY_JWT_SECRET
 BOBBUY_SECURITY_SERVICE_TOKEN
 POSTGRES_PASSWORD
-MINIO_ROOT_PASSWORD
 RABBITMQ_DEFAULT_PASS
 BOBBUY_AI_LLM_CODEX_BRIDGE_URL
 "
@@ -230,7 +229,7 @@ echo "step=build_service_images"
 bash scripts/build-service-images.sh </dev/null
 
 echo "step=compose_up"
-docker compose up -d --build postgres minio redis rabbitmq nacos nacos-init core-service ai-service im-service auth-service gateway-service frontend gateway ocr-service </dev/null
+docker compose up -d --build postgres redis rabbitmq nacos nacos-init core-service ai-service im-service auth-service gateway-service frontend gateway ocr-service </dev/null
 docker compose ps </dev/null
 
 echo "step=health_checks"
@@ -317,12 +316,9 @@ docker compose exec -T postgres psql -U bobbuy -d bobbuy_restore_verify < "$back
 docker compose exec -T postgres psql -U bobbuy -d bobbuy_restore_verify -c "SELECT COUNT(*) AS flyway_rows FROM flyway_schema_history;" </dev/null
 docker compose exec -T postgres psql -U bobbuy -d bobbuy_restore_verify -c "SELECT COUNT(*) AS products FROM bb_product;" </dev/null
 
-echo "step=minio_restore_probe"
-probe_file="$backup_dir/minio-probe.txt"
-echo "server-release-window $(date -Is)" > "$probe_file"
-docker compose cp "$probe_file" minio:/tmp/minio-probe.txt </dev/null
-docker compose exec -T minio sh -lc 'mc alias set local http://127.0.0.1:9000 "$MINIO_ROOT_USER" "$MINIO_ROOT_PASSWORD" >/dev/null && mc mb --ignore-existing local/bobbuy-restore-verify >/dev/null && mc cp /tmp/minio-probe.txt local/bobbuy-restore-verify/minio-probe.txt >/dev/null && mc stat local/bobbuy-restore-verify/minio-probe.txt >/dev/null' </dev/null
-echo "minio_restore_probe=pass"
+echo "step=postgres_image_restore_probe"
+docker compose exec -T postgres sh -lc 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -v ON_ERROR_STOP=1 -Atc "SELECT count(*),coalesce(sum(octet_length(content)),0) FROM bb_recommendation_image"' </dev/null
+echo "postgres_image_restore_probe=pass"
 
 echo "step=nacos_archive_probe"
 nacos_archive="$backup_dir/nacos-config-archive.txt"
