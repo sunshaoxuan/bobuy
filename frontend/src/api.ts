@@ -1039,6 +1039,8 @@ export const productCatalogApi={
  save:(rows:CatalogInput[])=>putJson<{value:CatalogInput;canonical:boolean;sourceItemIds:number[]}[],object>('/api/merchant/product-catalog',{rows,reviewed:true}),
  upload:async(id:string,file:File,sourceUrl:string,label:string)=>{const form=new FormData();form.set('file',file);form.set('sourceUrl',sourceUrl);form.set('label',label);form.set('verified','true');const response=await authorizedFetch('/api/merchant/product-catalog/'+encodeURIComponent(id)+'/images',{method:'POST',body:form});if(!response.ok)throw new Error(await parseErrorMessage(response));return parseSuccessPayload<CatalogMedia>(response);}
 };
+export type CurrencyDefinition={code:string;symbol:string;fractionDigits:number;name:string;saleEnabled:boolean};
+export const masterDataApi={currencies:()=>storeGet<CurrencyDefinition[]>('/api/merchant/currencies')};
 export const recommendationApi = {
     galleryOrder:(post:number,item:number,orderedIds:string[],version:number)=>putJson<RecommendationDetail,object>(recommendationBase+'/'+post+'/items/'+item+'/gallery',{orderedIds,version}),
     galleryUpload:async(post:number,item:number,file:File,input:{version:number;sourceUrl:string;assetKey:string;label:string;itemNumber?:string|null;verified:boolean})=>{
@@ -1046,7 +1048,6 @@ export const recommendationApi = {
         const response=await authorizedFetch(recommendationBase+'/'+post+'/items/'+item+'/gallery',{method:'POST',body:form});
         if(!response.ok)throw new Error(await parseErrorMessage(response));return parseSuccessPayload<RecommendationDetail>(response);
     },
-    currencies:()=>storeGet<{code:string;symbol:string;fractionDigits:number;name:string;saleEnabled:boolean}[]>('/api/merchant/currencies'),
     sales:(id:number,input:{reviews:SaleReview[];version:number;confirmedPreorder:boolean})=>putJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/sales',input),
     localize:(id:number,input:{rows:LocalizationRow[];version:number;reviewed:boolean})=>putJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/localizations',input),
     catalog:(id:number,input:{itemIds:number[];productId?:string;version:number})=>putJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/catalog',input),

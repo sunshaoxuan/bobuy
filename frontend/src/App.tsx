@@ -24,13 +24,15 @@ const LoginPage = lazy(() => import('./pages/LoginPage'));
 const Users = lazy(() => import('./pages/Users'));
 const MailSettings = lazy(() => import('./pages/MailSettings'));
 const DeletedProducts = lazy(() => import('./pages/DeletedProducts'));
+const Currencies = lazy(() => import('./pages/Currencies'));
 
 const adminPages = [
   ['dashboard', 'nav.dashboard', Dashboard, AppstoreOutlined], ['trips', 'nav.trips', Trips, CalendarOutlined], ['orders', 'nav.orders', Orders, ShoppingOutlined],
   ['order-desk', 'nav.order_desk', OrderDesk, ScanOutlined], ['procurement', 'nav.procurement', ProcurementHUD, InboxOutlined],
   ['picking', 'nav.picking', PickingMaster, CheckSquareOutlined], ['stock-master', 'nav.stock_master', StockMaster, TagsOutlined],
   ['recommendations', 'rec.title', Recommendations, ShopOutlined],
-  ['suppliers', 'nav.suppliers', Suppliers, ShopOutlined], ['customers', 'nav.customers', MerchantCustomers, TeamOutlined]
+  ['suppliers', 'nav.suppliers', Suppliers, ShopOutlined], ['customers', 'nav.customers', MerchantCustomers, TeamOutlined],
+  ['basic-data/currencies', 'currency.title', Currencies, TagsOutlined]
 ] as const;
 
 function Admin() {
@@ -39,9 +41,14 @@ function Admin() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const pages = [...(isMerchant ? adminPages : []), ...(user?.platformAdmin ? [['users', 'accounts.title', Users, TeamOutlined] as const, ['settings', 'mail.title', MailSettings, TagsOutlined] as const, ['deleted-products', 'trash.title', DeletedProducts, TagsOutlined] as const] : [])];
-  const menu = <Menu mode="inline" selectedKeys={[location.pathname]} items={pages.map(([path, label, , Icon]) => ({
+  const menuItems = pages.filter(([path]) => !path.startsWith('basic-data/')).map(([path, label, , Icon]) => ({
     key: `/admin/${path}`, icon: <Icon />, label: <Link to={`/admin/${path}`} onClick={() => setOpen(false)}>{t(label)}</Link>
-  }))} />;
+  }));
+  const menu = <Menu mode="inline" selectedKeys={[location.pathname]} items={[...menuItems, ...(isMerchant ? [{
+    type: 'group' as const, key: 'basic-data', label: t('nav.basic_data'), children: [{
+      key: '/admin/basic-data/currencies', icon: <TagsOutlined />, label: <Link to="/admin/basic-data/currencies" onClick={() => setOpen(false)}>{t('currency.title')}</Link>
+    }]
+  }] : [])]} />;
   if (!isAuthenticated) return <LoginPage />;
   if (!isMerchant && !user?.platformAdmin) return <Navigate to="/" replace />;
   const brand = <Link className="merchant-brand" to="/admin"><span className="brand-symbol">B<span /></span><strong>{t('app.brand')}</strong></Link>;
@@ -51,12 +58,13 @@ function Admin() {
       <div className="merchant-identity"><span className="merchant-avatar"><ShopOutlined /></span><div><strong>{user?.name}</strong><small>{t('admin.merchant')}</small></div></div>
     </aside>
     <div className="merchant-workspace"><header className="merchant-header"><Button className="merchant-menu-toggle" icon={<MenuOutlined />} aria-label={t('app.open_menu')} onClick={() => setOpen(true)} />
-      <div className="merchant-breadcrumb"><span>{t('admin.workspace')}</span><span>/</span><b className="merchant-mobile-brand">{t('app.brand')}</b><strong>{current ? t(current[1]) : t('zen_audit.scroll_title')}</strong></div>
+      <div className="merchant-breadcrumb"><span>{t('admin.workspace')}</span><span>/</span><b className="merchant-mobile-brand">{t('app.brand')}</b>{current?.[0].startsWith('basic-data/')&&<><span>{t('nav.basic_data')}</span><span>/</span></>}<strong>{current ? t(current[1]) : t('zen_audit.scroll_title')}</strong></div>
       <div className="merchant-header-tools"><LanguageSwitcher /><Tooltip title={t('admin.storefront')}><Link className="merchant-store-link" to="/" aria-label={t('admin.storefront')}><ShopOutlined /><span>{t('admin.storefront')}</span><ArrowUpOutlined rotate={45} /></Link></Tooltip>
       <Tooltip title={t('auth.logout')}><Button className="merchant-header-logout" icon={<LogoutOutlined />} aria-label={t('auth.logout')} onClick={() => void logout()} /></Tooltip></div></header>
     <main className="merchant-content">
       <Routes><Route index element={<Navigate to={user?.platformAdmin ? 'users' : 'dashboard'} replace />} />
         {pages.map(([path, , Page]) => <Route key={path} path={path} element={<Page />} />)}
+        {isMerchant&&<><Route path="basic-data" element={<Navigate to="currencies" replace />} /><Route path="currencies" element={<Navigate to="/admin/basic-data/currencies" replace />} /></>}
         <Route path="audit/:tripId" element={<ZenAuditView />} />
         <Route path="*" element={<Navigate to="/admin" replace />} /></Routes>
     </main></div>
