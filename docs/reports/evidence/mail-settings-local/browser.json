@@ -1,0 +1,19 @@
+{
+  "scope": "Existing shared LOCAL fixture; settings saved through visible UI only; no credential/key or message",
+  "checks": {
+    "visibleSaveDisabledNonSecretConfiguration": "PASS",
+    "reopenPasswordAbsentDeliveryAndTestsDisabled": "PASS",
+    "mobileNoHorizontalOverflow": "PASS"
+  },
+  "errors": [],
+  "writes": [
+    {
+      "method": "POST",
+      "path": "/api/auth/login"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/admin/settings/mail"
+    }
+  ]
+}

@@ -31,15 +31,16 @@ public class StorefrontService {
     private final JavaMailSender mail;
     private final String from;
     private final ProductSaleService sales;
+    private final MailSettingsService mailSettings;
     private final SecureRandom random = new SecureRandom();
 
     public StorefrontService(UserRepository users, TripRepository trips, ProductRepository products,
             OrderHeaderRepository orders, EmailChallengeRepository challenges, MerchantCustomerRepository relations,
             CheckoutIdentityRepository identities, AuthService auth, PasswordEncoder passwords,
-            JavaMailSender mail, @Value("${bobuy.mail.from:accounts@bobuy.cc}") String from,ProductSaleService sales) {
+            JavaMailSender mail, @Value("${bobuy.mail.from:accounts@bobuy.cc}") String from,ProductSaleService sales,MailSettingsService mailSettings) {
         this.users = users; this.trips = trips; this.products = products; this.orders = orders;
         this.challenges = challenges; this.relations = relations; this.identities = identities;
-        this.auth = auth; this.passwords = passwords; this.mail = mail; this.from = from; this.sales=sales;
+        this.auth = auth; this.passwords = passwords; this.mail = mail; this.from = from; this.sales=sales; this.mailSettings=mailSettings;
     }
 
     public List<PublicTrip> publicTrips() {
@@ -118,9 +119,9 @@ public class StorefrontService {
         challenge.sentAt = Instant.now(); challenge.expiresAt = challenge.sentAt.plusSeconds(600);
         challenges.save(challenge);
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(from); message.setTo(user.getEmail()); message.setSubject("Bobuy 邮箱验证码");
-        message.setText("您的邮箱验证码是 " + code + "，10 分钟内有效。请勿向他人透露。");
-        mail.send(message);
+        message.setFrom(from); message.setTo(user.getEmail());
+        VerificationMailTemplate.apply(message,code,org.springframework.context.i18n.LocaleContextHolder.getLocale());
+        if(!mailSettings.sendIfConfigured(message)) mail.send(message);
     }
 
     @Transactional

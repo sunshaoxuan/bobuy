@@ -1,0 +1,11 @@
+{
+  "scope": "existing shared LOCAL database only",
+  "legacyResourcesFromPriorWorkingLocalJar": [
+    "BOOT-INF/classes/db/migration/V7__product_recommendations.sql",
+    "BOOT-INF/classes/db/migration/V8__ai_connection_settings.sql"
+  ],
+  "allApplicationClassBytesMatchCandidate": true,
+  "applicationClassCount": 417,
+  "V18MatchesCandidate": true,
+  "sourceOrFlywayHistoryChanged": false
+}

@@ -21,6 +21,11 @@ export type Metrics = {
     slowEndpoints?: string[];
 };
 
+export type MailSettingsView = { version:number; enabled:boolean; host:string; port:number; tlsMode:'STARTTLS'|'TLS'; username:string;
+ fromAddress:string; replyTo:string; passwordStored:boolean; keyId:string|null; keyReady:boolean; updatedAt:string|null;
+ allowedHosts:string[]; testRecipients:string[] };
+export type MailSettingsEdit = Pick<MailSettingsView,'version'|'enabled'|'host'|'port'|'tlsMode'|'username'|'fromAddress'|'replyTo'> & {password?:string};
+
 export type Trip = {
     id: number;
     agentId: number;
@@ -1096,6 +1101,9 @@ export const api = {
         ),
     users: () => fetchJson<User[]>('/api/users', fallback.users),
     adminUsers: () => fetchJson<ManagedUser[]>('/api/admin/users', []),
+    mailSettings: () => fetchJson<MailSettingsView | null>('/api/admin/settings/mail', null),
+    saveMailSettings: (settings:MailSettingsEdit) => putJson<MailSettingsView,MailSettingsEdit>('/api/admin/settings/mail',settings),
+    testMailSettings: (recipient:string) => postJson<string,{recipient:string}>('/api/admin/settings/mail/test',{recipient}),
     customerTrips: () => fetchJson<Trip[]>('/api/customer/trips', []),
     customerOrders: (tripId: number) => fetchJson<Order[]>(`/api/customer/orders?tripId=${tripId}`, []),
     customerViewLedger: (tripId: number) => fetchJson<CustomerBalanceLedgerEntry[]>(`/api/customer/procurement/${tripId}/ledger`, []),

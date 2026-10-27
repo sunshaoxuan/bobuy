@@ -115,6 +115,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/procurement/*/ledger/*/confirm").hasAnyRole("CUSTOMER", "AGENT")
                 .requestMatchers("/api/procurement/**").hasRole("AGENT")
                 .requestMatchers("/api/admin/users/**").hasRole("PLATFORM_ADMIN")
+                .requestMatchers("/api/admin/settings/**").hasRole("PLATFORM_ADMIN")
                 .requestMatchers(HttpMethod.GET, "/api/users/**").hasRole("AGENT")
                 .requestMatchers("/api/users/**").denyAll()
                 .requestMatchers("/api/audit-logs/**").hasRole("AGENT")

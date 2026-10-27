@@ -1,0 +1,8 @@
+{
+  "scope": "shared LOCAL fixture only",
+  "backupRestore": "PASS",
+  "V18AdditiveEmptyStructures": "PASS",
+  "preexistingProductCountPreserved": 33,
+  "newTableRollbackInDisposableRestore": "PASS",
+  "productionChanges": false
+}
