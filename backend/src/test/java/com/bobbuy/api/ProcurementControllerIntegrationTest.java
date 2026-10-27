@@ -226,7 +226,7 @@ class ProcurementControllerIntegrationTest {
     mockMvc.perform(asAgent(post("/api/procurement/{tripId}/receipts", trip.getId())
             .contentType("application/json")
             .content("""
-                {"receipts":[{"fileName":"receipt-1.jpg","imageBase64":"data:image/jpeg;base64,aGVsbG8="}]}
+                {"receipts":[{"fileName":"receipt-1.jpg","imageBase64":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAEklEQVR4nGP4z8DAAMIM/4EAAB/uBfsL2WiLAAAAAElFTkSuQmCC"}]}
                 """)))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.meta.total").value(1))
@@ -342,7 +342,7 @@ class ProcurementControllerIntegrationTest {
     MvcResult uploadResult = mockMvc.perform(asAgent(post("/api/procurement/{tripId}/receipts", trip.getId())
             .contentType("application/json")
             .content("""
-                {"receipts":[{"fileName":"receipt-locked.jpg","imageBase64":"data:image/jpeg;base64,aGVsbG8="}]}
+                {"receipts":[{"fileName":"receipt-locked.jpg","imageBase64":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAEklEQVR4nGP4z8DAAMIM/4EAAB/uBfsL2WiLAAAAAElFTkSuQmCC"}]}
                 """)))
         .andExpect(status().isOk())
         .andReturn();
@@ -380,7 +380,7 @@ class ProcurementControllerIntegrationTest {
     MvcResult uploadResult = mockMvc.perform(asAgent(post("/api/procurement/{tripId}/receipts", trip.getId())
             .contentType("application/json")
             .content("""
-                {"receipts":[{"fileName":"receipt-pick.jpg","imageBase64":"data:image/jpeg;base64,aGVsbG8="}]}
+                {"receipts":[{"fileName":"receipt-pick.jpg","imageBase64":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAEklEQVR4nGP4z8DAAMIM/4EAAB/uBfsL2WiLAAAAAElFTkSuQmCC"}]}
                 """)))
         .andExpect(status().isOk())
         .andReturn();
@@ -406,7 +406,7 @@ class ProcurementControllerIntegrationTest {
     mockMvc.perform(asAgent(post("/api/procurement/{tripId}/receipts", trip.getId())
             .contentType("application/json")
             .content("""
-                {"receipts":[{"fileName":"receipt-locked.jpg","imageBase64":"data:image/jpeg;base64,aGVsbG8="}]}
+                {"receipts":[{"fileName":"receipt-locked.jpg","imageBase64":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAEklEQVR4nGP4z8DAAMIM/4EAAB/uBfsL2WiLAAAAAElFTkSuQmCC"}]}
                 """)))
         .andExpect(status().isBadRequest());
 
@@ -515,7 +515,7 @@ class ProcurementControllerIntegrationTest {
     MvcResult uploadResult = mockMvc.perform(asAgent(post("/api/procurement/{tripId}/receipts", trip.getId())
             .contentType("application/json")
             .content("""
-                {"receipts":[{"fileName":"receipt-pick.jpg","imageBase64":"data:image/jpeg;base64,aGVsbG8="}]}
+                {"receipts":[{"fileName":"receipt-pick.jpg","imageBase64":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAEklEQVR4nGP4z8DAAMIM/4EAAB/uBfsL2WiLAAAAAElFTkSuQmCC"}]}
                 """)))
         .andExpect(status().isOk())
         .andReturn();

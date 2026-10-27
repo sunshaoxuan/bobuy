@@ -1,0 +1,22 @@
+{
+  "baselineRun": 40379011132,
+  "candidateRun": 40445500145,
+  "candidateCommit": "21dd7468a6b854f8cb4bf309212c207332fca25d",
+  "baselineUniqueCves": 136,
+  "candidateUniqueCves": 133,
+  "candidateUniqueSeverities": {
+    "HIGH": 54,
+    "MEDIUM": 50,
+    "CRITICAL": 24,
+    "LOW": 5
+  },
+  "newIdentifiers": {},
+  "removedIdentifiers": [
+    "CVE-2020-29582",
+    "CVE-2025-48924",
+    "CVE-2026-53914"
+  ],
+  "flywayFindings": [],
+  "cleanSecurityClaim": false,
+  "existingRuntimeApplicabilityRecord": "docs/reports/DEPENDENCY-AUDIT-RELIABILITY.md"
+}
