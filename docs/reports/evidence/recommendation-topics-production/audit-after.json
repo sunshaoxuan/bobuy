@@ -1,0 +1,96 @@
+{
+  "phase": "after",
+  "dataMetadata": {
+    "posts": [
+      {
+        "id": 1,
+        "published": true,
+        "items": 122,
+        "classified": 121,
+        "supplier_assigned": 122,
+        "supplier_shown": 0
+      },
+      {
+        "id": 2,
+        "published": true,
+        "items": 30,
+        "classified": 30,
+        "supplier_assigned": 30,
+        "supplier_shown": 0
+      }
+    ],
+    "imageBlobs": 566,
+    "products": 142,
+    "canonicalProfiles": 142,
+    "confirmedSellingQuotes": 0,
+    "migrations": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17"
+    ]
+  },
+  "configuredRelease": "20261027.1",
+  "source": "ab9f458bd72c1e48de9a674af8f375f495aa1fcd",
+  "ciRun": 40432887133,
+  "containers": [
+    {
+      "name": "/bobuy-core-service",
+      "tag": "bobuy/core:20261027.1",
+      "id": "sha256:d06f0ec064a3b92732fb31f731db27b180522ae8bfd56dd93052969e1102f963",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-ai-service",
+      "tag": "bobuy/ai:20261027.1",
+      "id": "sha256:a4d9d4059b72ebaeef0b706c93abde452469e59833e2eed9ec56ad16dbff4cbb",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-im-service",
+      "tag": "bobuy/im:20261027.1",
+      "id": "sha256:786b8733a47d3385db8e013087180f6c8340e16c63bff2fd0815abb4e0113f8c",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-auth-service",
+      "tag": "bobuy/auth:20261027.1",
+      "id": "sha256:4519a71bf4069dd95666dd66a7ee5a64dda3ed6d54514c41028e8da069e735e4",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-gateway-service",
+      "tag": "bobuy/router:20261027.1",
+      "id": "sha256:82084bf055d01186d45b45a05a4f1742f5a0f29f399fefac8b97f7a99cc11156",
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/bobuy-frontend",
+      "tag": "bobuy/frontend:20261027.1",
+      "id": "sha256:3d8c8298c06c07fb9009d2b2440a1cff6bab5c645be89f08d92df03dff9a20f8",
+      "health": "running",
+      "restarts": 0
+    }
+  ],
+  "protectedStateUnchanged": true,
+  "backupRestore": "PASS",
+  "contentAndImageBytesPreserved": "PASS (nine frozen tables including orders and adjustments, latest pre-deploy snapshot)",
+  "result": "PASS"
+}

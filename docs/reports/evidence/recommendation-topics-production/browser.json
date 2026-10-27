@@ -1,0 +1,66 @@
+{
+  "scope": "Read-only production topic/category UI",
+  "checks": {
+    "topicScopeCountsAndStableOtherCategoryChoices": "PASS",
+    "switchTopicClearsInvalidCategoryAndHidesZeroChoices": "PASS",
+    "historyAndRefreshRestoreSelectedTopicAndCategory": "PASS",
+    "searchPersistsAcrossTopicsAndSourceOffersStaySeparate": "PASS",
+    "mobileAllAndBothTopicsNoHorizontalOverflow": "PASS",
+    "existingArticleRouteAndInvalidCategoryNormalization": "PASS"
+  },
+  "counts": [
+    {
+      "label": "all",
+      "total": 152,
+      "categories": 17
+    },
+    {
+      "label": "warehouse",
+      "total": 122,
+      "categories": 14
+    },
+    {
+      "label": "online",
+      "total": 30,
+      "categories": 11
+    },
+    {
+      "label": "online-refreshed",
+      "total": 30,
+      "categories": 11
+    },
+    {
+      "label": "all-search",
+      "total": 2,
+      "categories": 1
+    },
+    {
+      "label": "online-search",
+      "total": 1,
+      "categories": 1
+    },
+    {
+      "label": "mobile-online",
+      "total": 30,
+      "categories": 11
+    },
+    {
+      "label": "mobile-warehouse",
+      "total": 122,
+      "categories": 14
+    },
+    {
+      "label": "mobile-all",
+      "total": 152,
+      "categories": 17
+    },
+    {
+      "label": "legacy-direct-article",
+      "total": 122,
+      "categories": 14
+    }
+  ],
+  "errors": [],
+  "writes": [],
+  "result": "PASS"
+}

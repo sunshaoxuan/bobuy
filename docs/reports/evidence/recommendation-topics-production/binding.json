@@ -1,0 +1,89 @@
+{
+  "release": "20261027.1",
+  "source": "ab9f458bd72c1e48de9a674af8f375f495aa1fcd",
+  "ciRun": 40432887133,
+  "ciHeadSha": "ab9f458bd72c1e48de9a674af8f375f495aa1fcd",
+  "ciConclusion": "success",
+  "scope": "Frontend-only issue filtering and scoped category counts; unchanged backend images and V17 schema",
+  "purchaseActivation": false,
+  "registrationGateChanged": false,
+  "archiveSha256": "1e999b2c75637204bbe47d675f1e4d2c875916405473e426ae80b1e1fcb36a68",
+  "images": [
+    {
+      "tags": [
+        "bobuy/core:20261026.8",
+        "bobuy/core:20261026.9",
+        "bobuy/core:20261027.1"
+      ],
+      "id": "sha256:d06f0ec064a3b92732fb31f731db27b180522ae8bfd56dd93052969e1102f963"
+    },
+    {
+      "tags": [
+        "bobuy/ai:20261026.8",
+        "bobuy/ai:20261026.9",
+        "bobuy/ai:20261027.1"
+      ],
+      "id": "sha256:a4d9d4059b72ebaeef0b706c93abde452469e59833e2eed9ec56ad16dbff4cbb"
+    },
+    {
+      "tags": [
+        "bobuy/im:20261026.8",
+        "bobuy/im:20261026.9",
+        "bobuy/im:20261027.1"
+      ],
+      "id": "sha256:786b8733a47d3385db8e013087180f6c8340e16c63bff2fd0815abb4e0113f8c"
+    },
+    {
+      "tags": [
+        "bobuy/auth:20261026.8",
+        "bobuy/auth:20261026.9",
+        "bobuy/auth:20261027.1"
+      ],
+      "id": "sha256:4519a71bf4069dd95666dd66a7ee5a64dda3ed6d54514c41028e8da069e735e4"
+    },
+    {
+      "tags": [
+        "bobuy/router:20261026.8",
+        "bobuy/router:20261026.9",
+        "bobuy/router:20261027.1"
+      ],
+      "id": "sha256:82084bf055d01186d45b45a05a4f1742f5a0f29f399fefac8b97f7a99cc11156"
+    },
+    {
+      "tags": [
+        "bobuy/frontend:20261027.1"
+      ],
+      "id": "sha256:3d8c8298c06c07fb9009d2b2440a1cff6bab5c645be89f08d92df03dff9a20f8"
+    }
+  ],
+  "files": {
+    "docker-compose.yml": "ab7f454b9fdd40023f57bb620131dbaffbe2c5b83200f096881a139d3d6f1c6f",
+    "compose.production.yml": "a60d32e3f704af5bd08868dcf13f6a202eb70c871d73e94f2cb23dec35c49ac7",
+    "infra/nginx/bobuy.conf": "7efd7ee757f94d909a9e22acf44dd1587ee848756b63c40e11fe78f6eacb830a",
+    "scripts/publish-production.py": "b49ddff014381f73883aac07480b0cf82cc8e85b744276ee7a31c366130b04c7",
+    "frontend/dist/index.html": "0c82f9ffd397f971838e8c421c0e921000e1b02ea58cbcbf84e2bc2125ea9e0e",
+    "bobbuy-core/target/bobbuy-core-0.1.0.jar": "181e3d52d7bdbce0d6a6b38d29786d0a9e60d1fd977cf3a3d42b0f5a05945d79",
+    "bobbuy-ai/target/bobbuy-ai-0.1.0.jar": "ce70c4ed32977646aa47d65d995e9d8a5585b60603d02e2c29434e02907bf24d",
+    "bobbuy-im/target/bobbuy-im-0.1.0.jar": "a7d354e047c5f0b2e860afff7f4d61e30d57562ad42207aa651770017605e3a1",
+    "bobbuy-auth/target/bobbuy-auth-0.1.0.jar": "d77d4244c59d498f2fd0822c132698ed76261d84eee2c8152769b8ebb79d5100",
+    "bobbuy-gateway/target/bobbuy-gateway-0.1.0.jar": "1f1a7e3b2e49e9037acfa3609d70bce7dac3bc76842d5762d1590fcafa06b4d3"
+  },
+  "configurationLfSha256": {
+    "docker-compose.yml": "82105c00caa7a6c802bcb6a64c3923c4cfa693804a30b71fc66212134cee2b92",
+    "compose.production.yml": "1681b2307b554cb1b92ca0766927ead2228cc53c7b983edf9cc3e0e5182c1b5f",
+    "infra/nginx/bobuy.conf": "90fdc0d55a60382e7e07f0b7051c8bbfb137265a0d1aa195dfd321aa486b384e"
+  },
+  "artifactBuild": {
+    "acceptedSource": "ab9f458bd72c1e48de9a674af8f375f495aa1fcd",
+    "javaImagesRebuilt": 0,
+    "backendSource": "a3cb1154ff63874ef0b45bd2ee042e138cf8e604",
+    "frontendBuildReused": true,
+    "jars": {
+      "core": "181e3d52d7bdbce0d6a6b38d29786d0a9e60d1fd977cf3a3d42b0f5a05945d79",
+      "ai": "ce70c4ed32977646aa47d65d995e9d8a5585b60603d02e2c29434e02907bf24d",
+      "im": "a7d354e047c5f0b2e860afff7f4d61e30d57562ad42207aa651770017605e3a1",
+      "auth": "d77d4244c59d498f2fd0822c132698ed76261d84eee2c8152769b8ebb79d5100",
+      "gateway": "1f1a7e3b2e49e9037acfa3609d70bce7dac3bc76842d5762d1590fcafa06b4d3"
+    }
+  }
+}

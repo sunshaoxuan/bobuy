@@ -1,0 +1,17 @@
+{
+  "release": "20261027.1",
+  "applicationHealth": "PASS",
+  "protectedState": "PASS",
+  "publicRegistration": "CLOSED_PENDING_SMTP_ABUSE_RECOVERY",
+  "browserVerification": "PASS_PUBLIC_DATA_EFFECTIVE_PURCHASE_STATE_ASSET_IDENTITIES_DESKTOP_MOBILE_AND_NORMAL_ADMIN_LOGIN_ENTRY",
+  "source": "ab9f458bd72c1e48de9a674af8f375f495aa1fcd",
+  "ciRun": 40432887133,
+  "topicCategoryFiltering": "PASS_ALL_TWO_TOPICS_SCOPED_COUNTS_ZERO_HIDING_STALE_CATEGORY_SEARCH_HISTORY_REFRESH_DESKTOP_MOBILE",
+  "contentPreservation": "PASS_ALL_PREEXISTING_COLUMNS_NINE_TABLES_INCLUDING_ORDERS_AND_ADJUSTMENTS",
+  "migration": "NO_SCHEMA_CHANGE_EXISTING_V17_EMPTY_TABLE_PRESERVED_BACKUP_RESTORE_VERIFIED",
+  "productionAdjustmentRows": 0,
+  "productionPriceWrites": false,
+  "purchaseActivation": false,
+  "registrationGateChanged": false,
+  "mailSent": false
+}

@@ -1,0 +1,321 @@
+{
+  "conclusion": "success",
+  "headSha": "ab9f458bd72c1e48de9a674af8f375f495aa1fcd",
+  "jobs": [
+    {
+      "completedAt": "2026-10-27T01:30:44Z",
+      "conclusion": "success",
+      "databaseId": 121954589862,
+      "name": "frontend-quality",
+      "startedAt": "2026-10-27T01:29:44Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-27T01:29:45Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-27T01:29:44Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:29:50Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-10-27T01:29:45Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:29:55Z",
+          "conclusion": "success",
+          "name": "Set up Node.js",
+          "number": 3,
+          "startedAt": "2026-10-27T01:29:50Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:29:58Z",
+          "conclusion": "success",
+          "name": "Install dependencies",
+          "number": 4,
+          "startedAt": "2026-10-27T01:29:55Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:30:31Z",
+          "conclusion": "success",
+          "name": "Run frontend tests",
+          "number": 5,
+          "startedAt": "2026-10-27T01:29:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:30:42Z",
+          "conclusion": "success",
+          "name": "Build frontend",
+          "number": 6,
+          "startedAt": "2026-10-27T01:30:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:30:42Z",
+          "conclusion": "success",
+          "name": "Post Set up Node.js",
+          "number": 11,
+          "startedAt": "2026-10-27T01:30:42Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:30:42Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 12,
+          "startedAt": "2026-10-27T01:30:42Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:30:42Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 13,
+          "startedAt": "2026-10-27T01:30:42Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/sunshaoxuan/bobuy/actions/runs/40432887133/job/121954589862"
+    },
+    {
+      "completedAt": "2026-10-27T01:29:53Z",
+      "conclusion": "success",
+      "databaseId": 121954590013,
+      "name": "release-tools",
+      "startedAt": "2026-10-27T01:29:44Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-27T01:29:45Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-27T01:29:44Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:29:51Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-10-27T01:29:45Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:29:51Z",
+          "conclusion": "success",
+          "name": "Validate production release guards",
+          "number": 3,
+          "startedAt": "2026-10-27T01:29:51Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:29:52Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 6,
+          "startedAt": "2026-10-27T01:29:51Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:29:52Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 7,
+          "startedAt": "2026-10-27T01:29:52Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/sunshaoxuan/bobuy/actions/runs/40432887133/job/121954590013"
+    },
+    {
+      "completedAt": "2026-10-27T01:31:23Z",
+      "conclusion": "success",
+      "databaseId": 121954590227,
+      "name": "backend-test",
+      "startedAt": "2026-10-27T01:29:44Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-27T01:29:46Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-27T01:29:45Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:29:53Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-10-27T01:29:46Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:29:55Z",
+          "conclusion": "success",
+          "name": "Set up JDK 17",
+          "number": 3,
+          "startedAt": "2026-10-27T01:29:53Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:31:20Z",
+          "conclusion": "success",
+          "name": "Run backend tests",
+          "number": 4,
+          "startedAt": "2026-10-27T01:29:55Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:31:20Z",
+          "conclusion": "success",
+          "name": "Post Set up JDK 17",
+          "number": 7,
+          "startedAt": "2026-10-27T01:31:20Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:31:20Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 8,
+          "startedAt": "2026-10-27T01:31:20Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:31:20Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 9,
+          "startedAt": "2026-10-27T01:31:20Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/sunshaoxuan/bobuy/actions/runs/40432887133/job/121954590227"
+    },
+    {
+      "completedAt": "2026-10-27T01:29:42Z",
+      "conclusion": "skipped",
+      "databaseId": 121954590946,
+      "name": "maven-dependency-audit",
+      "startedAt": "2026-10-27T01:29:42Z",
+      "status": "completed",
+      "steps": [],
+      "url": "https://github.com/sunshaoxuan/bobuy/actions/runs/40432887133/job/121954590946"
+    },
+    {
+      "completedAt": "2026-10-27T01:29:42Z",
+      "conclusion": "skipped",
+      "databaseId": 121954591081,
+      "name": "playwright-e2e",
+      "startedAt": "2026-10-27T01:29:42Z",
+      "status": "completed",
+      "steps": [],
+      "url": "https://github.com/sunshaoxuan/bobuy/actions/runs/40432887133/job/121954591081"
+    },
+    {
+      "completedAt": "2026-10-27T01:29:42Z",
+      "conclusion": "skipped",
+      "databaseId": 121954591175,
+      "name": "postgres-migration-verify",
+      "startedAt": "2026-10-27T01:29:42Z",
+      "status": "completed",
+      "steps": [],
+      "url": "https://github.com/sunshaoxuan/bobuy/actions/runs/40432887133/job/121954591175"
+    },
+    {
+      "completedAt": "2026-10-27T01:32:28Z",
+      "conclusion": "success",
+      "databaseId": 121955151822,
+      "name": "docker-build",
+      "startedAt": "2026-10-27T01:31:25Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-27T01:31:27Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-27T01:31:26Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:31:33Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-10-27T01:31:27Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:31:35Z",
+          "conclusion": "success",
+          "name": "Set up JDK 17",
+          "number": 3,
+          "startedAt": "2026-10-27T01:31:33Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:31:49Z",
+          "conclusion": "success",
+          "name": "Build backend package for Docker image",
+          "number": 4,
+          "startedAt": "2026-10-27T01:31:35Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:32:01Z",
+          "conclusion": "success",
+          "name": "Build backend image",
+          "number": 5,
+          "startedAt": "2026-10-27T01:31:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:32:25Z",
+          "conclusion": "success",
+          "name": "Build frontend image",
+          "number": 6,
+          "startedAt": "2026-10-27T01:32:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:32:26Z",
+          "conclusion": "success",
+          "name": "Post Set up JDK 17",
+          "number": 11,
+          "startedAt": "2026-10-27T01:32:25Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:32:26Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 12,
+          "startedAt": "2026-10-27T01:32:26Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-27T01:32:26Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 13,
+          "startedAt": "2026-10-27T01:32:26Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/sunshaoxuan/bobuy/actions/runs/40432887133/job/121955151822"
+    }
+  ],
+  "status": "completed"
+}
