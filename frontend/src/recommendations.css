@@ -107,7 +107,9 @@ html[lang=en-US] .recommendations .ant-btn>span:not(.ant-btn-icon):not(.anticon)
 .rec-feed-heading .ant-segmented { padding:4px; background:#f3f3f3; border-radius:6px; }
 .rec-feed-heading .ant-segmented-item-label { min-height:44px; display:flex; align-items:center; justify-content:center; padding:8px 16px; line-height:1.5; }
 .rec-issue-directory { display:flex; gap:8px; overflow-x:auto; overscroll-behavior-x:contain; position:sticky; top:0; z-index:10; background:#fff; padding:12px 0; border-block:1px solid #e4e4e4; margin-bottom:32px; }
-.rec-issue-directory a { flex:0 0 auto; display:flex; align-items:center; gap:8px; min-height:44px; max-width:240px; padding:8px 12px; border:1px solid #dedede; border-radius:6px; color:#333; font-size:13px; text-decoration:none; }
+.rec-issue-directory a { flex:0 0 auto; display:flex; align-items:center; gap:8px; min-height:44px; max-width:280px; padding:8px 16px; border:1px solid #dedede; border-radius:22px; color:#333; background:#f5f5f3; font-size:14px; line-height:1.6; white-space:normal; overflow-wrap:anywhere; text-decoration:none; }
+.rec-issue-directory a[aria-current=page] {background:#252525;color:#fff;border-color:#252525;}
+.rec-issue-directory a:focus-visible {outline:3px solid #b32f35;outline-offset:2px;}
 .rec-issue-directory a>span:first-child { color:#a92b26; font-weight:650; }
 .rec-issue-directory a>span:last-child { white-space:normal; overflow:visible; text-overflow:clip; overflow-wrap:anywhere; }
 .rec-issue { scroll-margin-top:90px; }

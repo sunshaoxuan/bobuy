@@ -6,7 +6,7 @@ import { storefrontApi,recommendationApi, type RecommendationDetail, type StoreP
 import { localizedContent, useI18n } from '../i18n';
 import { OfferInfo } from '../components/RecommendationFacts';
 import '../recommendations.css';
-import {categoryChoices,filterRecommendations,UNCLASSIFIED} from '../recommendationFilters';
+import {availableCategory,categoryChoices,filterRecommendations,issueScope,readAllIssues,UNCLASSIFIED} from '../recommendationFilters';
 import {scopedPath,selectedNode} from '../storeNavigation';
 import {recommendationText} from '../recommendationText';
 import SellingPrice from '../components/SellingPrice';
@@ -56,7 +56,7 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
   return <article className="rec-issue" id={'recommendation-' + detail.post.id} aria-labelledby={'rec-title-' + detail.post.id}>
     <header className="rec-issue-heading">
       {!single && <span className="rec-issue-number">{String(number).padStart(2, '0')}</span>}
-      <div><Heading id={'rec-title-' + detail.post.id}>{single ? detail.post.title : <Link to={'/recommendations/' + detail.post.id+search}>{detail.post.title}</Link>}</Heading>
+      <div><Heading id={'rec-title-' + detail.post.id}>{single ? detail.post.title : <Link to={'/recommendations?'+new URLSearchParams({...Object.fromEntries(new URLSearchParams(search)),topic:String(detail.post.id)})}>{detail.post.title}</Link>}</Heading>
         {(detail.post.publisherName||detail.post.publishedAt)&&<div className="rec-publication">{detail.post.publisherName&&<span><UserOutlined /> {detail.post.publisherName}</span>}{detail.post.publishedAt&&<time dateTime={detail.post.publishedAt}><CalendarOutlined /> {new Date(detail.post.publishedAt).toLocaleDateString(locale)}</time>}</div>}
       </div>
     </header>
@@ -138,42 +138,39 @@ export default function PublicRecommendations(props: ShoppingProps) {
   const { t,locale } = useI18n();
   const [params,setParams]=useSearchParams();
   const category=params.get('category')??'';
+  const topic=id??params.get('topic')??'';
   const node=selectedNode('?'+params.toString());
-  const [pagination,setPagination]=useState({node,page:0});
-  const page=pagination.node===node?pagination.page:0;
-  const setPage=(value:number)=>setPagination({node,page:value});
-  const [mode, setMode] = useState<'all' | 'latest'>('all');
   const [posts, setPosts] = useState<RecommendationDetail[]>([]);
   const [busy, setBusy] = useState(true);
   const [error, setError] = useState('');
   const [loadedKey,setLoadedKey]=useState('');
-  const requestKey=JSON.stringify([node,id,page]);
+  const requestKey=JSON.stringify([node]);
   const pending=busy||loadedKey!==requestKey;
   const catalog = useMemo(() => new Map(props.products.map(product => [product.id, product])), [props.products]);
   useEffect(() => {
     let active = true;
     setBusy(true); setError(''); setPosts([]);
-    const request = node===-1 ? Promise.resolve([]) : id ? recommendationApi.get(Number(id), true, node).then(value => [value]) : recommendationApi.feed(page,node);
+    const request = node===-1 ? Promise.resolve([]) : readAllIssues(page=>recommendationApi.feed(page,node),()=>active);
     void request.then(value => { if (active) setPosts(value); }).catch(e => { if (active) setError((e as Error).message); }).finally(() => { if (active) {setLoadedKey(requestKey);setBusy(false);} });
     return () => { active = false; };
-  }, [id, page, node]);
-  const selected=pending?[]:mode==='latest'&&!id?posts.slice(0,1):posts;
+  }, [node]);
+  const selected=pending?[]:issueScope(posts,topic);
   const query=props.query?.trim().toLocaleLowerCase()??'';
   const scope=query?selected.map(post=>({...post,items:post.items.filter(item=>(recommendationText(item,locale).name+' '+(item.itemNumber??'')).toLocaleLowerCase().includes(query))})).filter(post=>post.items.length):selected;
-  const visible=filterRecommendations(scope,category);
-  function choose(value:string){if(value===category)return;const next=new URLSearchParams(params);if(value)next.set('category',value);else next.delete('category');setParams(next);}
+  const activeCategory=availableCategory(scope,category);
+  const visible=filterRecommendations(scope,activeCategory);
+  useEffect(()=>{if(pending||error||!category||activeCategory===category)return;const next=new URLSearchParams(params);next.delete('category');setParams(next,{replace:true});},[pending,error,category,activeCategory,params,setParams]);
+  function choose(value:string){if(value===activeCategory)return;const next=new URLSearchParams(params);next.delete('item');if(value)next.set('category',value);else next.delete('category');setParams(next);}
+  function topicPath(value:string){const next=new URLSearchParams(params);next.delete('item');if(value)next.set('topic',value);else next.delete('topic');const target=issueScope(posts,value),searched=query?target.map(post=>({...post,items:post.items.filter(item=>(recommendationText(item,locale).name+' '+(item.itemNumber??'')).toLocaleLowerCase().includes(query))})):target;if(!availableCategory(searched,category))next.delete('category');return '/recommendations'+(next.size?'?'+next.toString():'');}
 
   return <section className="recommendations rec-public">
-    <Link className="rec-back" to={id ? '/recommendations'+(params.size?'?'+params.toString():'') : scopedPath('/', '?'+params.toString())}><ArrowLeftOutlined /> {t(id ? 'rec.title' : 'store.catalog')}</Link>
-    {!id && <header className="rec-feed-heading"><h1>{t('rec.title')}</h1><Segmented aria-label={t('rec.display_mode')} value={mode} options={[{value:'latest',label:t('rec.latest')},{value:'all',label:t('rec.multiple')}]} onChange={value => { setMode(value as 'all' | 'latest'); if (value === 'latest') setPage(0); }} /></header>}
-    {!pending&&!error&&<CategoryFilters posts={scope} category={category} onChoose={choose}/>}
+    <Link className="rec-back" to={id ? topicPath('') : scopedPath('/', '?'+params.toString())}><ArrowLeftOutlined /> {t(id ? 'rec.title' : 'store.catalog')}</Link>
+    {!id && <header className="rec-feed-heading"><h1>{t('rec.title')}</h1></header>}
+    {!pending&&!error&&<><nav className="rec-issue-directory" aria-label={t('rec.contents')}><Link aria-current={!topic?'page':undefined} to={topicPath('')}>{t('class.all')}</Link>{posts.map(entry=><Link key={entry.post.id} aria-current={String(entry.post.id)===topic?'page':undefined} to={topicPath(String(entry.post.id))}>{entry.post.title}</Link>)}</nav><CategoryFilters posts={scope} category={activeCategory} onChoose={choose}/></>}
     {pending ? <div className="rec-loading"><Spin /></div> : error ? <Alert type="error" message={error} /> : <>
-      {visible.length > 1 && <nav className="rec-issue-directory" aria-label={t('rec.contents')}>{visible.map((entry, index) => <a key={entry.post.id} href={'#recommendation-' + entry.post.id} title={entry.post.title}><span>{String(page * 20 + index + 1).padStart(2, '0')}</span><span>{entry.post.title}</span></a>)}</nav>}
       {visible.length ? visible.map((entry, index) => <div className="rec-issue-section" key={entry.post.id}>
-        <RecommendationIssue {...props} catalog={catalog} detail={entry} number={page * 20 + index + 1} single={!!id} />
-        {visible.length > 1 && <nav className="rec-issue-navigation" aria-label={t('rec.issue_navigation')}><a href="#" onClick={event => { event.preventDefault(); window.scrollTo(0, 0); }}><UpOutlined /> {t('rec.contents')}</a><div>{index > 0 && <a href={'#recommendation-' + visible[index - 1].post.id}><ArrowLeftOutlined /> {t('rec.previous_issue')}</a>}{index < visible.length - 1 && <a href={'#recommendation-' + visible[index + 1].post.id}>{t('rec.next_issue')} <ArrowRightOutlined /></a>}</div></nav>}
-      </div>) : <Empty description={t(category?'class.empty':query?'store.no_matches':'rec.empty_public')}>{category&&<Button onClick={()=>choose('')}>{t('class.all')}</Button>}</Empty>}
-      {!id && mode === 'all' && <div className="rec-pagination"><Button disabled={!page} icon={<ArrowLeftOutlined />} onClick={() => { setPage(page - 1); window.scrollTo(0,0); }}>{t('rec.previous')}</Button><span>{page + 1}</span><Button disabled={posts.length < 20} icon={<ArrowRightOutlined />} onClick={() => { setPage(page + 1); window.scrollTo(0,0); }}>{t('rec.next')}</Button></div>}
+        <RecommendationIssue {...props} catalog={catalog} detail={entry} number={index + 1} single={!!topic} />
+      </div>) : <Empty description={t(query?'store.no_matches':'rec.empty_public')}/>}
     </>}
   </section>;
 }

@@ -26,12 +26,12 @@ describe('Recommendations', () => {
     expect(screen.queryByText(/END1/)).not.toBeInTheDocument();
     fireEvent.click(screen.getByRole('button',{name:/收起正文/}));
     expect(screen.queryByText(/END0/)).not.toBeInTheDocument();
-    fireEvent.click(screen.getByText('最新一期',{exact:true}));
-    expect(screen.queryByRole('heading',{name:'Second issue'})).not.toBeInTheDocument();
+    fireEvent.click(view.container.querySelector('.rec-issue-directory a[href*="topic=1"]')!);
+    await waitFor(()=>expect(screen.queryByRole('heading',{name:'Second issue'})).not.toBeInTheDocument());
     expect(view.container.querySelectorAll('.rec-public-products .rec-pin')).toHaveLength(2);
-    fireEvent.click(screen.getByText('多期推荐',{exact:true}));
-    expect(screen.getByRole('heading',{name:'Second issue'})).toBeInTheDocument();
-    expect(view.container.querySelector('.rec-issue-directory a[href="#recommendation-2"]')).toBeInTheDocument();
+    fireEvent.click(view.container.querySelector('.rec-issue-directory a')!);
+    await screen.findByRole('heading',{name:'Second issue'});
+    expect(view.container.querySelector('.rec-issue-directory a[href*="topic=2"]')).toBeInTheDocument();
   });
   it('uses the catalog product for details and cart, and disables missing products', async () => {
     mocks.feed.mockResolvedValue([detail]); const view=publicFeed(); await screen.findByRole('heading',{name:'Tea picks'});
@@ -43,7 +43,7 @@ describe('Recommendations', () => {
     expect(view.container.querySelectorAll('.product-add')[1]).toBeDisabled();
   });
   beforeEach(() => {
-    vi.clearAllMocks(); localStorage.clear(); mocks.get.mockResolvedValue(structuredClone(detail));
+    vi.clearAllMocks(); localStorage.clear(); mocks.get.mockResolvedValue(structuredClone(detail)); mocks.feed.mockResolvedValue([structuredClone(detail)]);
     URL.createObjectURL=vi.fn(()=>'blob:fixture'); URL.revokeObjectURL=vi.fn();
   });
   it('keeps a multi-page image batch and validates per-image metadata', async () => {
@@ -69,13 +69,13 @@ describe('Recommendations', () => {
   it('public articles render text without executing HTML', async () => {
     mocks.feed.mockResolvedValue([{...detail,post:{...detail.post,published:true,title:'<script>alert(1)</script>',coverImageUrl:'/tea.png'}}]);
     const view=render(<I18nProvider><MemoryRouter><PublicRecommendations {...shopping} /></MemoryRouter></I18nProvider>);
-    expect(await screen.findByText('<script>alert(1)</script>')).toBeInTheDocument();
+    expect(await screen.findByRole('heading',{name:'<script>alert(1)</script>'})).toBeInTheDocument();
     expect(view.container.querySelector('script')).toBeNull();
     expect(view.container.querySelector('.rec-products-heading a')).toHaveAttribute('href','/recommendations/1');
     expect(view.container.querySelector('.rec-public-products img')).toHaveAttribute('src','/tea.png');
   });
   it('shows the recorded publisher and server publication time with the article title', async () => {
-    mocks.get.mockResolvedValue({...detail,post:{...detail.post,published:true,publisherName:'Publication fixture',publishedAt:'2026-10-26T01:00:00Z'}});
+    mocks.feed.mockResolvedValue([{...detail,post:{...detail.post,published:true,publisherName:'Publication fixture',publishedAt:'2026-10-26T01:00:00Z'}}]);
     const view=render(<I18nProvider><MemoryRouter initialEntries={['/recommendations/1']}><Routes><Route path="/recommendations/:id" element={<PublicRecommendations {...shopping} />} /></Routes></MemoryRouter></I18nProvider>);
     expect(await screen.findByRole('heading',{level:1,name:'Tea picks'})).toBeInTheDocument();
     expect(screen.getByText(/Publication fixture/)).toBeInTheDocument();
