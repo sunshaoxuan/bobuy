@@ -16,7 +16,47 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
+@org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 class AiAgentControllerTest {
+
+    @Autowired org.springframework.test.web.servlet.MockMvc mvc;
+    @Autowired com.fasterxml.jackson.databind.ObjectMapper json;
+    @Autowired org.springframework.jdbc.core.JdbcTemplate jdbc;
+    @Autowired com.bobbuy.repository.UserRepository users;
+    @Autowired com.bobbuy.repository.ProductRepository products;
+    @Autowired com.bobbuy.security.JwtTokenService tokens;
+    @Autowired com.bobbuy.service.ProductSaleService sales;
+
+    @Test
+    void manualUiBlankCategorySavesOnePrivateUnpricedDraftWithActualForeignKey() throws Exception {
+        String sku = "SYNTHETIC-UI-EMPTY-CATEGORY-" + java.util.UUID.randomUUID();
+        jdbc.execute("alter table bb_product add constraint qa_product_category_fk foreign key(category_id) references bb_category(id)");
+        try {
+            var body = Map.of("name", "SYNTHETIC manual UI fixture", "price", 0,
+                "itemNumber", sku, "categoryId", "", "attributes", Map.of());
+            String token = tokens.createAccessToken(users.findById(1000L).orElseThrow());
+            String id = null;
+            for (int attempt = 0; attempt < 2; attempt++) {
+                var result = mvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post("/api/ai/onboard/confirm")
+                    .header("Authorization", "Bearer " + token)
+                    .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
+                    .content(json.writeValueAsBytes(body)))
+                    .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.status().isOk()).andReturn();
+                String saved = json.readTree(result.getResponse().getContentAsString()).path("data").path("product").path("id").asText();
+                if (id == null) id = saved; else assertThat(saved).isEqualTo(id);
+            }
+            Product product = products.findById(id).orElseThrow();
+            assertThat(product.getCategoryId()).isNull();
+            assertThat(product.getVisibilityStatus()).isEqualTo(ProductVisibility.DRAFTER_ONLY);
+            assertThat(product.getBasePrice()).isZero();
+            assertThat(product.getSale()).isNull();
+            assertThat(sales.quote(product)).isEmpty();
+            assertThat(product.getMerchantSkus()).isEmpty();
+        } finally {
+            products.findAll().stream().filter(p -> sku.equals(p.getItemNumber())).map(Product::getId).toList().forEach(products::deleteById);
+            jdbc.execute("alter table bb_product drop constraint qa_product_category_fk");
+        }
+    }
 
     @Autowired
     private BobbuyStore store;
