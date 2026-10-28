@@ -2,7 +2,7 @@ package com.bobbuy.service;
 import org.springframework.stereotype.Service;
 import java.util.Objects;
 
-/** No startup scan or automatic scheduler: migration activation is a separate operation. */
+/** One durable leased transfer. Scheduling and migration activation are explicit and separate. */
 @Service
 public class MediaTransferWorker {
  private final MediaBinaryService binaries;private final MediaObjectStore objects;

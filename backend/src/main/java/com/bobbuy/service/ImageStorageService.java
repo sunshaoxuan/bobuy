@@ -8,7 +8,7 @@ import java.util.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/** Image bytes live in the existing PostgreSQL image table. Receipts stay private. */
+/** Stable media identities retain the existing public/private authorization semantics. */
 @Service
 public class ImageStorageService {
  private final RecommendationImageRepository images;
@@ -32,7 +32,7 @@ public class ImageStorageService {
   String hash;
   try {var digest=MessageDigest.getInstance("SHA-256");digest.update(scope.getBytes(java.nio.charset.StandardCharsets.UTF_8));hash=HexFormat.of().formatHex(digest.digest(bytes));}
   catch(java.security.NoSuchAlgorithmException e){throw new IllegalStateException("Image hashing unavailable");}
-  var blob=images.findByMerchantIdAndImageHash(owner,hash).orElseGet(()->{
+  var blob=images.findByMerchantIdAndImageHash(owner,hash).map(existing->binaries.reuse(existing,image.content())).orElseGet(()->{
    var b=new RecommendationImage();b.id=UUID.randomUUID().toString();b.merchantId=owner;b.imageHash=hash;
    b.contentType=image.contentType();b.content=image.content();b.accessScope=scope;return binaries.persist(b);
   });

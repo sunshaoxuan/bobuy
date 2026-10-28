@@ -140,7 +140,7 @@ public class RecommendationService {
         version(post, expectedVersion);
         boolean changed = duplicate.isPresent() && !Objects.equals(duplicate.get().referencePrice, proposed.referencePrice);
         boolean reused = images.findByMerchantIdAndImageHash(owner(), image.hash()).isPresent();
-        var blob = images.findByMerchantIdAndImageHash(owner(), image.hash()).orElseGet(() -> {
+        var blob = images.findByMerchantIdAndImageHash(owner(), image.hash()).map(existing->binaries.reuse(existing,image.content())).orElseGet(() -> {
                 var value = new RecommendationImage(); value.id = UUID.randomUUID().toString(); value.merchantId = owner();
                 value.imageHash = image.hash(); value.contentType = image.contentType(); value.content = image.content(); return binaries.persist(value);
             });
@@ -239,7 +239,7 @@ public class RecommendationService {
         catch(Exception error){throw new ApiException(ErrorCode.INVALID_REQUEST,"gallery.invalid");}
         if(item.gallery.stream().anyMatch(p->p.hash().equals(image.hash())||p.assetKey().equals(assetKey)))return detail(post);
         if(item.gallery.size()>=100)throw new ApiException(ErrorCode.INVALID_REQUEST,"gallery.invalid");
-        var blob=images.findByMerchantIdAndImageHash(owner(),image.hash()).orElseGet(()->{var value=new RecommendationImage();value.id=UUID.randomUUID().toString();value.merchantId=owner();value.imageHash=image.hash();value.contentType=image.contentType();value.content=image.content();return binaries.persist(value);});
+        var blob=images.findByMerchantIdAndImageHash(owner(),image.hash()).map(existing->binaries.reuse(existing,image.content())).orElseGet(()->{var value=new RecommendationImage();value.id=UUID.randomUUID().toString();value.merchantId=owner();value.imageHash=image.hash();value.contentType=image.contentType();value.content=image.content();return binaries.persist(value);});
         var gallery=new ArrayList<>(item.gallery);gallery.add(new RecommendationItem.Picture(blob.id,"/api/storefront/recommendation-images/"+blob.id,image.hash(),sourceUrl,assetKey,label,java.time.Instant.now()));item.gallery=gallery;
         syncGallery(item);touch(post);return detail(post);
     }

@@ -98,7 +98,7 @@ public class ProductCatalogService {
  @Transactional public MediaGalleryItem upload(String id,RecommendationImageValidator.Image image,String sourceUrl,String label,boolean verified){
   owned(id,false);if(!verified||label==null||label.length()>200)throw invalid("gallery.invalid");
   try{var uri=java.net.URI.create(sourceUrl);if(!"https".equals(uri.getScheme())||uri.getHost()==null||uri.getUserInfo()!=null||uri.getRawQuery()!=null||uri.getRawFragment()!=null||sourceUrl.length()>2048)throw new IllegalArgumentException();}catch(Exception error){throw invalid("gallery.invalid");}
-  var blob=images.findByMerchantIdAndImageHash(owner(),image.hash()).orElseGet(()->{var value=new RecommendationImage();value.id=UUID.randomUUID().toString();value.merchantId=owner();value.imageHash=image.hash();value.contentType=image.contentType();value.content=image.content();return binaries.persist(value);});
+  var blob=images.findByMerchantIdAndImageHash(owner(),image.hash()).map(existing->binaries.reuse(existing,image.content())).orElseGet(()->{var value=new RecommendationImage();value.id=UUID.randomUUID().toString();value.merchantId=owner();value.imageHash=image.hash();value.contentType=image.contentType();value.content=image.content();return binaries.persist(value);});
   return media(new RecommendationItem.Picture(blob.id,"/api/storefront/recommendation-images/"+blob.id,image.hash(),sourceUrl,sourceUrl,label,Instant.now()));
  }
 }

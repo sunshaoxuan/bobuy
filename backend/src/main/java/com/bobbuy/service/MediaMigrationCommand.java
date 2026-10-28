@@ -14,7 +14,7 @@ import java.util.*;
  * Reads PG only; outputs metadata/checkpoints only, never a local-file product/image importer. */
 public final class MediaMigrationCommand {
  private static String env(String name,String fallback){String value=System.getenv(name);return value==null?fallback:value;}
- public static void main(String[] args){int exit=2;try{var result=execute(args);System.out.println("MEDIA_MIGRATION "+result.status()+" rows="+result.audit().mediaRows()+" verified="+result.audit().verifiedRows()+" retainedPG=true");exit=result.status().equals("INCOMPLETE")?3:0;}catch(Exception failure){System.err.println("Media migration stopped: "+failure.getClass().getSimpleName()+". No completion or deletion claimed.");}System.exit(exit);}
+ public static void main(String[] args){int exit=2;try{var result=execute(args);System.out.println("MEDIA_MIGRATION "+result.status()+" rows="+result.audit().mediaRows()+" verified="+result.audit().verifiedRows()+" pgRetainedRows="+result.audit().pgRetainedRows()+" objectOnlyRows="+result.audit().objectOnlyRows()+" existingPGBytesNotDeleted=true");exit=result.status().equals("INCOMPLETE")?3:0;}catch(Exception failure){System.err.println("Media migration stopped: "+failure.getClass().getSimpleName()+". No completion or deletion claimed.");}System.exit(exit);}
  public static MediaMigrationExecutor.Result execute(String[] args)throws Exception{
   var values=new HashMap<String,String>();var mode=MediaMigrationExecutor.Mode.DRY_RUN;boolean chosen=false;
   for(String arg:args){if(Set.of("--dry-run","--apply","--verify").contains(arg)){if(chosen)throw new IllegalArgumentException("Choose one migration mode");chosen=true;mode=arg.equals("--apply")?MediaMigrationExecutor.Mode.TRANSFER:arg.equals("--verify")?MediaMigrationExecutor.Mode.VERIFY:MediaMigrationExecutor.Mode.DRY_RUN;}else{int equals=arg.indexOf('=');if(equals<3||!Set.of("--report","--checkpoint","--batch","--max-pages","--max-transfers","--workers","--seconds").contains(arg.substring(0,equals))||values.put(arg.substring(0,equals),arg.substring(equals+1))!=null)throw new IllegalArgumentException("Unknown or duplicate migration option");}}
@@ -23,8 +23,8 @@ public final class MediaMigrationCommand {
   DataSource source=source();
   if(mode==MediaMigrationExecutor.Mode.DRY_RUN)return new MediaMigrationExecutor(source,null,null,null).run(options);
   if(mode==MediaMigrationExecutor.Mode.VERIFY){try(var store=objectStore()){return new MediaMigrationExecutor(source,null,null,store).run(options);}}
-  // Refuse schema changes. Applying V21 is a separate reviewed deployment step.
-  try(var c=source.getConnection();var s=c.createStatement();var r=s.executeQuery("select count(*) from flyway_schema_history where success and version='21'")){if(!r.next()||r.getInt(1)!=1)throw new IllegalStateException("Already applied V21 schema is required");}
+  // Refuse schema changes. Applying additive V21/V22 is a separate reviewed deployment step.
+  try(var c=source.getConnection();var s=c.createStatement();var r=s.executeQuery("select count(*) from flyway_schema_history where success and version in ('21','22')")){if(!r.next()||r.getInt(1)!=2)throw new IllegalStateException("Already applied V21/V22 schema is required");}
   try(var context=new AnnotationConfigApplicationContext()){
    context.getEnvironment().setActiveProfiles("media-migration-command");
    context.registerBean(DataSource.class,()->source);context.register(Configuration.class);context.refresh();return context.getBean(MediaMigrationExecutor.class).run(options);
