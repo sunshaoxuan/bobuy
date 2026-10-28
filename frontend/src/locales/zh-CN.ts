@@ -2,6 +2,8 @@ import type { Dictionary } from './types';
 import experience from './experience.zh-CN.json';
 
 const messages: Dictionary = {
+    'products.title': '商品档案管理',
+    'products.active': '在用商品',
     'trash.title': '商品回收站',
     'trash.hint': '逻辑删除保留商品资料、图片和历史业务记录。关联推荐同步隐藏，恢复时一并恢复。仅平台管理员可查看回收站。',
     'trash.admin_only': '仅平台管理员可访问。',
@@ -872,7 +874,14 @@ const messages: Dictionary = {
     "catalog.not_available": "暂未开放预订",
   "sale.title": "实际销售价格确认",
   "sale.hint": "先选择或建立产品档案。售价独立于 Costco 参考价；只启用已确认的 JPY 预订，不改变库存。",
-  "sale.currencies": "币种档案（与界面语言独立）",
+  "nav.basic_data": "基础档案",
+  "currency.title": "币种",
+  "currency.view": "查看基础档案中的币种",
+  "currency.reload": "重新读取",
+  "currency.status": "币种状态",
+  "currency.enabled": "已启用币种",
+  "currency.reserved": "已建档，暂未启用",
+  "currency.hint": "全站共用同一份币种档案，商品、调价单、推荐与订单仅引用。币种与界面语言独立；切换币种不自动换汇。本页只读，不改变售价或启用状态。",
   "sale.currency": "币种代码",
   "sale.symbol": "符号",
   "sale.digits": "小数位",

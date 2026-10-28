@@ -5,17 +5,17 @@ import {useI18n} from '../i18n';
 import {useUserRole} from '../context/UserRoleContext';
 import './productTrash.css';
 
-export default function DeletedProducts(){
+export default function DeletedProducts({embedded=false,refreshKey=0,onRestored}:{embedded?:boolean;refreshKey?:number;onRestored?:()=>void}={}){
  const {t,locale}=useI18n();const {user}=useUserRole();const screens=Grid.useBreakpoint();
  const [rows,setRows]=useState<ProductTrashRow[]>([]),[cleanup,setCleanup]=useState(false),[selected,setSelected]=useState<React.Key[]>([]),[reviewed,setReviewed]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState(''),[search,setSearch]=useState('');
  const load=async(mode:boolean)=>{setBusy(true);setError('');setReviewed(false);setSelected([]);try{const data=await productTrashApi.list(!mode);setRows(mode?data.filter(r=>r.imageCount===0):data);}catch{setError(t('accounts.load_error'));}finally{setBusy(false);}};
- useEffect(()=>{if(user?.platformAdmin)void load(cleanup);},[cleanup,user?.platformAdmin]);
+ useEffect(()=>{if(user?.platformAdmin)void load(cleanup);},[cleanup,user?.platformAdmin,refreshKey]);
  if(!user?.platformAdmin)return <Alert type="error" message={t('trash.admin_only')}/>;
  const remove=async()=>{setBusy(true);setError('');try{await productTrashApi.remove(rows.filter(r=>selected.includes(r.id)).map(({id,version})=>({id,version})));await load(cleanup);}catch{setError(t('trash.conflict'));}finally{setBusy(false);}};
- const restore=async(row:ProductTrashRow)=>{setBusy(true);setError('');try{await productTrashApi.restore({id:row.id,version:row.version});await load(cleanup);}catch{setError(t('trash.conflict'));}finally{setBusy(false);}};
+ const restore=async(row:ProductTrashRow)=>{setBusy(true);setError('');try{await productTrashApi.restore({id:row.id,version:row.version});await load(cleanup);onRestored?.();}catch{setError(t('trash.conflict'));}finally{setBusy(false);}};
  const display=(row:ProductTrashRow)=>row.name[locale]||row.name['ja-JP']||row.id;
  const visible=rows.filter(r=>[display(r),r.itemNumber||'',r.id].some(s=>s.toLowerCase().includes(search.toLowerCase())));
- return <section><h1>{t('trash.title')}</h1><Alert type="info" message={t('trash.hint')} style={{marginBottom:16}}/>
+ return <section>{!embedded&&<h1>{t('trash.title')}</h1>}<Alert type="info" message={t('trash.hint')} style={{marginBottom:16}}/>
  <Space wrap style={{marginBottom:16}}><Button disabled={busy} onClick={()=>setCleanup(false)} type={!cleanup?'primary':'default'}>{t('trash.deleted')}</Button><Button disabled={busy} onClick={()=>setCleanup(true)} type={cleanup?'primary':'default'}>{t('trash.no_images')}</Button><Button loading={busy} onClick={()=>void load(cleanup)}>{t('mail.reload')}</Button></Space>
  {error&&<Alert type="error" message={error} style={{marginBottom:16}}/>}
  <Input aria-label={t('trash.search')} placeholder={t('trash.search')} value={search} onChange={e=>{setSearch(e.target.value);setSelected([]);setReviewed(false);}} style={{marginBottom:16,maxWidth:500}}/>

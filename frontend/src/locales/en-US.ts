@@ -2,6 +2,8 @@ import type { Dictionary } from './types';
 import experience from './experience.en-US.json';
 
 const messages: Dictionary = {
+    'products.title': 'Product records',
+    'products.active': 'Active products',
     'trash.title': 'Product recycle bin',
     'trash.hint': 'Logical deletion preserves product data, images and historical records. Linked recommendations are hidden together and return on restore. Only platform administrators can view this recycle bin.',
     'trash.admin_only': 'Platform administrator access required.',
@@ -872,7 +874,14 @@ const messages: Dictionary = {
     "catalog.not_available": "Not open for booking yet",
   "sale.title": "Confirm selling prices",
   "sale.hint": "Link or create products first. Selling prices are separate from Costco reference prices. Enable only reviewed JPY pre-orders; stock is unchanged.",
-  "sale.currencies": "Currency master (independent of language)",
+  "nav.basic_data": "Basic data",
+  "currency.title": "Currencies",
+  "currency.view": "View currencies in Basic data",
+  "currency.reload": "Reload",
+  "currency.status": "Currency status",
+  "currency.enabled": "Enabled currency",
+  "currency.reserved": "Registered, not enabled",
+  "currency.hint": "Products, price adjustments, recommendations and orders reference one shared currency directory. Currency is independent of interface language; changing currency does not convert amounts. This page is read-only and does not change prices or availability.",
   "sale.currency": "Currency code",
   "sale.symbol": "Symbol",
   "sale.digits": "Fraction digits",
