@@ -1026,6 +1026,9 @@ const messages: Dictionary = {
   "pricing.overlap": "承認済み期間と重複しています。該当記録の取消または期間変更が必要です",
   "pricing.regular_conflict": "開始前・適用中の期間価格があるため、通常価格の通貨・単位は変更できません",
   "pricing.quote_changed": "価格または適用期間が変わりました。カートの価格を更新して再確認してください",
+  "rec.history": "過去のおすすめ",
+  "rec.history_topics": "過去の特集",
+  "rec.past_issue": "この特集に明記された特典期間はすべて終了しています。内容は参照用に保存されています。",
 };
 
 export default messages;

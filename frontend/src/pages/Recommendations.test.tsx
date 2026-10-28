@@ -21,7 +21,7 @@ describe('Recommendations', () => {
     const view=publicFeed(); await screen.findByRole('heading',{name:'Second issue'});
     expect(view.container.querySelectorAll('.rec-public-products .rec-pin')).toHaveLength(4);
     expect(screen.queryByText(/END0/)).not.toBeInTheDocument();
-    fireEvent.click(screen.getAllByRole('button',{name:/展开全文/})[0]);
+    fireEvent.click(screen.getByRole('heading',{name:'Tea picks'}).closest('article')!.querySelector('.rec-expand')!);
     expect(screen.getByText(/END0/)).toBeInTheDocument();
     expect(screen.queryByText(/END1/)).not.toBeInTheDocument();
     fireEvent.click(screen.getByRole('button',{name:/收起正文/}));

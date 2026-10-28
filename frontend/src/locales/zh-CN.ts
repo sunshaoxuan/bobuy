@@ -1026,6 +1026,9 @@ const messages: Dictionary = {
   "pricing.overlap": "存在重叠已确认期间，请取消冲突记录或调整期间",
   "pricing.regular_conflict": "仍有待生效或生效调价，不能改变常规价币种或计量单位",
   "pricing.quote_changed": "价格或适用期间已变化，请刷新购物车价格并重新确认",
+  "rec.history": "历史推荐",
+  "rec.history_topics": "历史期次",
+  "rec.past_issue": "本期注明的优惠期间均已结束，内容保留供查阅。",
 };
 
 export default messages;
