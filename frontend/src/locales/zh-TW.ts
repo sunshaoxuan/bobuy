@@ -1163,6 +1163,9 @@ const messages: Dictionary = {
   "pricing.overlap": "存在重疊已確認期間，請取消衝突紀錄或調整期間",
   "pricing.regular_conflict": "仍有待生效或生效調價，不能變更常規價幣別或計量單位",
   "pricing.quote_changed": "價格或適用期間已變化，請更新購物車價格並重新確認",
+  "rec.history": "歷史推薦",
+  "rec.history_topics": "歷史期次",
+  "rec.past_issue": "本期註明的優惠期間均已結束，內容保留供查閱。",
 };
 
 export default messages;

@@ -1026,6 +1026,9 @@ const messages: Dictionary = {
   "pricing.overlap": "An approved interval overlaps; cancel the conflicting record or change the interval",
   "pricing.regular_conflict": "Scheduled or active adjustments prevent changing the regular currency or unit",
   "pricing.quote_changed": "Price or applicable period changed; refresh cart prices and confirm again",
+  "rec.history": "Historical recommendations",
+  "rec.history_topics": "Past issues",
+  "rec.past_issue": "The stated offer periods in this issue have ended. Its content remains available for reference.",
 };
 
 export default messages;

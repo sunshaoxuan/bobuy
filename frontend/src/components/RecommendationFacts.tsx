@@ -1,6 +1,8 @@
 import { Input, InputNumber, Tag } from 'antd';
 import type { RecommendationFacts } from '../api';
 import { useI18n } from '../i18n';
+import {japanDate} from '../recommendationSchedule';
+export {japanDate} from '../recommendationSchedule';
 
 export const factFields = ['name','itemNumber','referencePrice','originalPrice','discountAmount','priceUnit','offerStart','offerEnd','couponStart','couponEnd','offerNotes'] as const;
 const prices = ['referencePrice','originalPrice','discountAmount'];
@@ -17,7 +19,6 @@ export function FactsForm({facts, onChange, disabled,identityReadOnly=false}: {f
   const {t} = useI18n();
   return <div className="rec-facts-form">{factFields.map(key => <label key={key}>{t('rec.fact.'+key)}{prices.includes(key) ? <InputNumber value={facts[key] as number | null} min={0} max={999999999999.99} precision={2} disabled={disabled} onChange={value => onChange({...facts,[key]:value})} /> : <Input type={dates.includes(key) ? 'date' : 'text'} value={facts[key] ?? ''} maxLength={key === 'offerNotes' ? 2000 : key === 'name' ? 200 : key === 'priceUnit' ? 100 : 255} disabled={disabled||(identityReadOnly&&(key==='name'||key==='itemNumber'))} onChange={event => onChange({...facts,[key]:event.target.value || null})} />}</label>)}</div>;
 }
-export function japanDate(now = new Date()) { return new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(now); }
 export function OfferInfo({facts,today=japanDate(),compact=false}: {facts: RecommendationFacts; today?: string;compact?:boolean}) {
   const {t,locale} = useI18n();
   const period = (start?: string | null,end?: string | null) => start && end ? start+' – '+end : start ? t('rec.from')+' '+start : end ? t('rec.until')+' '+end : t('rec.period_unknown');

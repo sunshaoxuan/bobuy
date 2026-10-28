@@ -168,3 +168,10 @@ html[lang=en-US] .recommendations .ant-btn>span:not(.ant-btn-icon):not(.anticon)
 .rec-supplier {display:block;color:#535e56;padding:4px;font-size:13px;overflow-wrap:anywhere;}
 @media(max-width:650px){.rec-classification {padding:12px;}.rec-classify-controls>div{align-items:stretch;flex-direction:column;}.rec-classify-controls .ant-select {width:100%;min-width:0;}.rec-classification .rec-section-heading{align-items:flex-start;}}
 .rec-sale-actual small {display:block;line-height:1.6;}
+.rec-history-topics,.rec-history-content { margin:16px 0; color:#626772; }
+.rec-history-topics>summary,.rec-history-content>summary { cursor:pointer; padding:12px 2px; min-height:44px; font-size:14px; }
+.rec-history-directory { display:flex; flex-wrap:wrap; gap:8px; padding:8px 0; }
+.rec-history-directory a { padding:10px 12px; border:1px solid #e5e7eb; border-radius:16px; color:inherit; overflow-wrap:anywhere; }
+.rec-history-directory a[aria-current=page] { color:#172239; background:#edf1f6; }
+.rec-history-content .rec-issue-heading h2 { font-size:20px; }
+.rec-history-note { color:#626772; font-size:14px; }

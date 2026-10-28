@@ -13,6 +13,7 @@ import SellingPrice from '../components/SellingPrice';
 import {RecommendationImageViewer} from '../components/RecommendationImageViewer';
 import {RecommendationName} from '../components/RecommendationName';
 import type {RecommendationItem} from '../api';
+import {arrangeIssues,useJapaneseDay} from '../recommendationSchedule';
 
 type ShoppingProps = {
   query?: string;
@@ -154,23 +155,32 @@ export default function PublicRecommendations(props: ShoppingProps) {
     void request.then(value => { if (active) setPosts(value); }).catch(e => { if (active) setError((e as Error).message); }).finally(() => { if (active) {setLoadedKey(requestKey);setBusy(false);} });
     return () => { active = false; };
   }, [node]);
-  const selected=pending?[]:issueScope(posts,topic);
+  const today=useJapaneseDay();
+  const arranged=useMemo(()=>arrangeIssues(posts,today),[posts,today]);
+  const ordered=useMemo(()=>[...arranged.current,...arranged.history],[arranged]);
+  const historyIds=useMemo(()=>new Set(arranged.history.map(entry=>entry.post.id)),[arranged]);
+  const selected=pending?[]:issueScope(ordered,topic);
   const query=props.query?.trim().toLocaleLowerCase()??'';
   const scope=query?selected.map(post=>({...post,items:post.items.filter(item=>(recommendationText(item,locale).name+' '+(item.itemNumber??'')).toLocaleLowerCase().includes(query))})).filter(post=>post.items.length):selected;
   const activeCategory=availableCategory(scope,category);
   const visible=filterRecommendations(scope,activeCategory);
   useEffect(()=>{if(pending||error||!category||activeCategory===category)return;const next=new URLSearchParams(params);next.delete('category');setParams(next,{replace:true});},[pending,error,category,activeCategory,params,setParams]);
   function choose(value:string){if(value===activeCategory)return;const next=new URLSearchParams(params);next.delete('item');if(value)next.set('category',value);else next.delete('category');setParams(next);}
-  function topicPath(value:string){const next=new URLSearchParams(params);next.delete('item');if(value)next.set('topic',value);else next.delete('topic');const target=issueScope(posts,value),searched=query?target.map(post=>({...post,items:post.items.filter(item=>(recommendationText(item,locale).name+' '+(item.itemNumber??'')).toLocaleLowerCase().includes(query))})):target;if(!availableCategory(searched,category))next.delete('category');return '/recommendations'+(next.size?'?'+next.toString():'');}
+  function topicPath(value:string){const next=new URLSearchParams(params);next.delete('item');if(value)next.set('topic',value);else next.delete('topic');const target=issueScope(ordered,value),searched=query?target.map(post=>({...post,items:post.items.filter(item=>(recommendationText(item,locale).name+' '+(item.itemNumber??'')).toLocaleLowerCase().includes(query))})):target;if(!availableCategory(searched,category))next.delete('category');return '/recommendations'+(next.size?'?'+next.toString():'');}
+  const currentVisible=topic?visible:visible.filter(entry=>!historyIds.has(entry.post.id));
+  const historyVisible=topic?[]:visible.filter(entry=>historyIds.has(entry.post.id));
+  const selectedHistory=!!topic&&historyIds.has(Number(topic));
+  const issue=(entry:RecommendationDetail,index:number)=><div className="rec-issue-section" key={entry.post.id}><RecommendationIssue {...props} catalog={catalog} detail={entry} number={index+1} single={!!topic}/></div>;
 
   return <section className="recommendations rec-public">
     <Link className="rec-back" to={id ? topicPath('') : scopedPath('/', '?'+params.toString())}><ArrowLeftOutlined /> {t(id ? 'rec.title' : 'store.catalog')}</Link>
     {!id && <header className="rec-feed-heading"><h1>{t('rec.title')}</h1></header>}
-    {!pending&&!error&&<><nav className="rec-issue-directory" aria-label={t('rec.contents')}><Link aria-current={!topic?'page':undefined} to={topicPath('')}>{t('class.all')}</Link>{posts.map(entry=><Link key={entry.post.id} aria-current={String(entry.post.id)===topic?'page':undefined} to={topicPath(String(entry.post.id))}>{entry.post.title}</Link>)}</nav><CategoryFilters posts={scope} category={activeCategory} onChoose={choose}/></>}
+    {!pending&&!error&&<><nav className="rec-issue-directory" aria-label={t('rec.contents')}><Link aria-current={!topic?'page':undefined} to={topicPath('')}>{t('class.all')}</Link>{arranged.current.map(entry=><Link key={entry.post.id} aria-current={String(entry.post.id)===topic?'page':undefined} to={topicPath(String(entry.post.id))}>{entry.post.title}</Link>)}</nav>
+      {!!arranged.history.length&&<details className="rec-history-topics" open={selectedHistory||undefined}><summary>{t('rec.history_topics')} ({arranged.history.length})</summary><nav className="rec-history-directory" aria-label={t('rec.history_topics')}>{arranged.history.map(entry=><Link key={entry.post.id} aria-current={String(entry.post.id)===topic?'page':undefined} to={topicPath(String(entry.post.id))}>{entry.post.title}</Link>)}</nav></details>}
+      <CategoryFilters posts={scope} category={activeCategory} onChoose={choose}/></>}
     {pending ? <div className="rec-loading"><Spin /></div> : error ? <Alert type="error" message={error} /> : <>
-      {visible.length ? visible.map((entry, index) => <div className="rec-issue-section" key={entry.post.id}>
-        <RecommendationIssue {...props} catalog={catalog} detail={entry} number={index + 1} single={!!topic} />
-      </div>) : <Empty description={t(query?'store.no_matches':'rec.empty_public')}/>}
+      {selectedHistory&&<p className="rec-history-note">{t('rec.past_issue')}</p>}
+      {visible.length ? <>{currentVisible.map(issue)}{!!historyVisible.length&&<details className="rec-history-content" open={!!(query||activeCategory)||undefined}><summary>{t('rec.history')} ({historyVisible.length})</summary>{historyVisible.map((entry,index)=>issue(entry,currentVisible.length+index))}</details>}</> : <Empty description={t(query?'store.no_matches':'rec.empty_public')}/>}
     </>}
   </section>;
 }
