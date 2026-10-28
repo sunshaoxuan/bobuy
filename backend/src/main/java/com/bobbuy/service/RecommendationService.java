@@ -183,7 +183,9 @@ public class RecommendationService {
         if(!deleted.isEmpty()){
             var references=items.findAll().stream().filter(i->url.equals(i.imageUrl)||i.gallery.stream().anyMatch(p->url.equals(p.url()))).toList();
             boolean activeMaster=products.findAll().stream().anyMatch(p->p.getMediaGallery().stream().anyMatch(m->url.equals(m.getUrl())));
-            if(!activeMaster&&!references.isEmpty()&&references.stream().allMatch(i->i.productId!=null&&deleted.contains(i.productId)))throw missing();
+            var converter=new com.bobbuy.model.converter.MediaGalleryJsonConverter();
+            boolean deletedMaster=products.deletedMediaGalleries().stream().filter(Objects::nonNull).map(converter::convertToEntityAttribute).anyMatch(gallery->gallery.stream().anyMatch(m->url.equals(m.getUrl())));
+            if(!activeMaster&&(deletedMaster||!references.isEmpty())&&references.stream().allMatch(i->i.productId!=null&&deleted.contains(i.productId)))throw missing();
         }
         return images.findById(id).filter(i->"PUBLIC".equals(i.accessScope)).orElseThrow(RecommendationService::missing);
     }
