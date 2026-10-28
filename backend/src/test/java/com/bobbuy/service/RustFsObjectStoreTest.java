@@ -11,6 +11,14 @@ import org.mockito.ArgumentCaptor;
 
 /** AWS SDK calls are mocked. These tests do not establish RustFS interoperability. */
 class RustFsObjectStoreTest {
+ @Test void migrationInventoryListsOnlyCasPrefixAndRequiresAdvancingServerCursor(){
+  var sdk=mock(S3Client.class);var adapter=new RustFsObjectStore(sdk,"bobuy-media");
+  when(sdk.listObjectsV2(any(ListObjectsV2Request.class))).thenReturn(ListObjectsV2Response.builder().contents(S3Object.builder().key("blobs/v1/sha256/ab/abc").size(12L).build()).isTruncated(true).nextContinuationToken("next").build());
+  var page=adapter.list("blobs/v1/sha256/",null);assertThat(page.objects()).containsExactly(new MediaObjectStore.ListedObject("blobs/v1/sha256/ab/abc",12));assertThat(page.nextToken()).isEqualTo("next");
+  var capture=ArgumentCaptor.forClass(ListObjectsV2Request.class);verify(sdk).listObjectsV2(capture.capture());assertThat(capture.getValue().bucket()).isEqualTo("bobuy-media");assertThat(capture.getValue().prefix()).isEqualTo("blobs/v1/sha256/");
+  assertThatThrownBy(()->adapter.list("",null)).hasMessageContaining("Only the media CAS prefix");
+  when(sdk.listObjectsV2(any(ListObjectsV2Request.class))).thenReturn(ListObjectsV2Response.builder().isTruncated(true).build());assertThatThrownBy(()->adapter.list("blobs/v1/sha256/",null)).hasMessageContaining("cursor");
+ }
  @Test void proposedPolicyUsesRustFsActionFamiliesAndArnResourcesWithoutBroadeningAllows() throws Exception {
   // RustFS 1.0.4 Statement::is_valid rejects mixed S3/admin families;
   // Resource::try_from requires a resource ARN, including for wildcard denies.

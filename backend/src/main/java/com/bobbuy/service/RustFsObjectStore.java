@@ -16,7 +16,7 @@ import java.util.*;
 
 /** Disabled until explicitly configured. Uses dedicated file credentials, no ambient AWS chain. */
 @Service
-public class RustFsObjectStore implements MediaObjectStore {
+public class RustFsObjectStore implements MediaObjectStore,AutoCloseable {
  private final S3Client client;private final String bucket;
  RustFsObjectStore(S3Client client,String bucket){this.client=client;this.bucket=bucket;}
  @org.springframework.beans.factory.annotation.Autowired
@@ -44,6 +44,13 @@ public class RustFsObjectStore implements MediaObjectStore {
   var factory=javax.net.ssl.TrustManagerFactory.getInstance(javax.net.ssl.TrustManagerFactory.getDefaultAlgorithm());factory.init(store);return factory.getTrustManagers();
  }
  private S3Client client(){if(client==null)throw new IllegalStateException("Object storage is disabled");return client;}
+ public boolean enabled(){return client!=null;}
+ @Override public ObjectPage list(String prefix,String token){
+  if(!"blobs/v1/sha256/".equals(prefix))throw new IllegalArgumentException("Only the media CAS prefix can be audited");
+  var page=client().listObjectsV2(ListObjectsV2Request.builder().bucket(bucket).prefix(prefix).continuationToken(token).maxKeys(1000).build());
+  if(Boolean.TRUE.equals(page.isTruncated())&&(page.nextContinuationToken()==null||page.nextContinuationToken().isBlank()))throw new IllegalStateException("Invalid object inventory cursor");
+  return new ObjectPage(page.contents().stream().map(o->new ListedObject(o.key(),o.size())).toList(),Boolean.TRUE.equals(page.isTruncated())?page.nextContinuationToken():null);
+ }
  @Override public void put(String key,byte[] bytes,String type,String hash){
   var s3=client();var metadata=Map.of("raw-sha256",hash);
   if(bytes.length<=5*1024*1024){s3.putObject(PutObjectRequest.builder().bucket(bucket).key(key).contentType(type).metadata(metadata).build(),RequestBody.fromBytes(bytes));return;}

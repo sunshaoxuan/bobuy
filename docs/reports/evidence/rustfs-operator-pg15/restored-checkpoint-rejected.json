@@ -1,0 +1,6 @@
+{
+  "status" : "STOPPED",
+  "readOnly" : false,
+  "sourceBytesRetained" : true,
+  "errorType" : "IllegalStateException"
+}

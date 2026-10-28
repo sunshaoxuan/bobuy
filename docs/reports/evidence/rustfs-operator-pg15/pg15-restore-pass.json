@@ -1,0 +1,12 @@
+{
+  "postgresVersion": "15.19",
+  "backupBytes": 80651632,
+  "backupSha256": "fd69d7521317f6792842ceac0e8b1209cd4228226c90eb5683eddabdc8ade033",
+  "allTableRowsAndImageBytesPreserved": true,
+  "constraintsAndSequencesPreserved": true,
+  "oldCheckpointRejectedOnRestoredDatabase": true,
+  "restoredDryRunMatchesSource": true,
+  "restoredDatabaseRemoved": true,
+  "productionChanged": false,
+  "at": "2026-10-28T03:18:30.507243+00:00"
+}
