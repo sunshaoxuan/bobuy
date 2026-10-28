@@ -1073,6 +1073,7 @@ const messages: Dictionary = {
   "gallery.previous": "上一張",
   "gallery.next": "下一張",
   "gallery.fit": "符合螢幕",
+  "gallery.inspect_hint": "點一下關閉 · 點兩下切換原圖與符合螢幕 · 放大後拖動查看細節",
   "gallery.native": "原圖尺寸 100%",
   "gallery.swipe_hint": "左右滑動切圖，點兩下查看原圖",
   "gallery.pan_hint": "拖動查看細節，點兩下恢復符合螢幕",

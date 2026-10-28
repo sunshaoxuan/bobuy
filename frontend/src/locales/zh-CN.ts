@@ -936,6 +936,7 @@ const messages: Dictionary = {
   "gallery.previous": "上一张",
   "gallery.next": "下一张",
   "gallery.fit": "适配屏幕",
+  "gallery.inspect_hint": "单击关闭 · 双击切换原图与适屏 · 放大后拖动查看细节",
   "gallery.native": "原图尺寸 100%",
   "gallery.swipe_hint": "左右滑动切图，双击查看原图",
   "gallery.pan_hint": "拖动查看细节，双击恢复适配",

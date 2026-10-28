@@ -1,9 +1,10 @@
-import {useEffect,useRef,useState} from 'react';
+import {useEffect,useRef,useState,useMemo} from 'react';
 import {Alert,Button,Checkbox,Drawer,Input,Select,Table,Tabs,Grid,Modal,Segmented,type InputRef} from 'antd';
 import {productCatalogApi,recommendationTaxonomyApi,type CatalogInput,type CatalogProposal,type RecommendationChoice} from '../api';
 import {localizedContent,useI18n} from '../i18n';
 import {PictureOutlined,UploadOutlined,CheckCircleOutlined,ArrowLeftOutlined,ArrowRightOutlined,DeleteOutlined,StarOutlined} from '@ant-design/icons';
 import './productCatalog.css';
+import {ImageLightbox} from './ImageLightbox';
 
 const languages=[{key:'ja-JP',label:'日本語'},{key:'zh-CN',label:'简体中文'},{key:'zh-TW',label:'繁體中文'},{key:'en-US',label:'English'}];
 export default function ProductCatalogPanel({entries,id,onChoose,onSaved}:{entries:{key:string;name:string}[];id?:string;onChoose:(id?:string)=>void;onSaved:(rows:CatalogInput[])=>void}){
@@ -11,7 +12,9 @@ export default function ProductCatalogPanel({entries,id,onChoose,onSaved}:{entri
  const [options,setOptions]=useState<{categories:RecommendationChoice[];suppliers:RecommendationChoice[]}>({categories:[],suppliers:[]});
  const [bulk,setBulk]=useState(false),[json,setJson]=useState(''),[rows,setRows]=useState<CatalogProposal[]>([]),[validated,setValidated]=useState(false),[selected,setSelected]=useState<React.Key[]>([]);
  const [source,setSource]=useState(''),[imageReviewed,setImageReviewed]=useState(false);const fileInput=useRef<HTMLInputElement>(null);
- const [activeImage,setActiveImage]=useState(0);
+ const [activeImage,setActiveImage]=useState(0),[imageOpen,setImageOpen]=useState(false);const imageOpener=useRef<HTMLButtonElement>(null);
+ const previewPictures=useMemo(()=>draft?.gallery.map(p=>({id:p.sha256||p.url,url:p.url,label:localizedContent(p.title??{},locale)}))??[],[draft?.gallery,locale]);
+ useEffect(()=>setImageOpen(false),[id]);
  const narrow=Grid.useBreakpoint().md===false;
  const [editorTab,setEditorTab]=useState('identity'),[language,setLanguage]=useState('ja-JP');const nameInput=useRef<InputRef>(null);
  const [sheetHeight,setSheetHeight]=useState<number|string>('80dvh'),[discardOpen,setDiscardOpen]=useState(false);
@@ -43,7 +46,7 @@ export default function ProductCatalogPanel({entries,id,onChoose,onSaved}:{entri
    {draft&&<fieldset className="product-catalog-form" disabled={busy}>
     <header className="catalog-editor-heading catalog-editor-heading-compact"><h2>{localizedContent(draft.name,locale)}</h2><p>{t('rec.code')}: {draft.itemNumber||t('rec.not_stated')}</p></header>
     <div className="catalog-compact-gallery">
-     <div className="catalog-compact-cover">{cover?<img src={cover.url} alt={cover.title?.[locale]||draft.name['ja-JP']}/>:<div className="record-no-image"><PictureOutlined/>{t('gallery.pending')}</div>}</div>
+     <button ref={imageOpener} type="button" className="catalog-compact-cover" aria-label={t('gallery.fullscreen')} disabled={!cover||busy} onClick={()=>setImageOpen(true)}>{cover?<img src={cover.url} alt={cover.title?.[locale]||draft.name['ja-JP']}/>:<div className="record-no-image"><PictureOutlined/>{t('gallery.pending')}</div>}</button>
      <div className="catalog-compact-tools"><div className="catalog-filmstrip">{draft.gallery.map((picture,index)=><button key={picture.url} type="button" aria-label={t('products.preview_image',{number:String(index+1)})} aria-pressed={index===Math.min(activeImage,draft.gallery.length-1)} onClick={()=>setActiveImage(index)}><img src={picture.url} alt=""/>{index===0&&<span className="catalog-cover-dot"/>}</button>)}</div>
       <div className="catalog-image-actions"><Button icon={<StarOutlined/>} disabled={!cover||activeImage===0} onClick={()=>{reorder(activeImage,0);setActiveImage(0);}}>{t(activeImage?'gallery.set_main':'gallery.main')}</Button><Button icon={<ArrowLeftOutlined/>} aria-label={t('master.move_up')} disabled={!cover||activeImage===0} onClick={()=>{reorder(activeImage,activeImage-1);setActiveImage(activeImage-1);}}/><Button icon={<ArrowRightOutlined/>} aria-label={t('master.move_down')} disabled={!cover||activeImage>=draft.gallery.length-1} onClick={()=>{reorder(activeImage,activeImage+1);setActiveImage(activeImage+1);}}/><Button danger icon={<DeleteOutlined/>} aria-label={t('store.remove')} disabled={!cover} onClick={()=>{patch({gallery:draft.gallery.filter((_,i)=>i!==activeImage)});setActiveImage(0);}}/><Button icon={<UploadOutlined/>} onClick={()=>setEditorTab('media')}>{t('products.add_images')}</Button></div>
      </div>
@@ -71,6 +74,7 @@ export default function ProductCatalogPanel({entries,id,onChoose,onSaved}:{entri
     ]}/>
    </fieldset>}
   </Drawer>
+  <ImageLightbox pictures={previewPictures} index={Math.min(activeImage,Math.max(0,previewPictures.length-1))} open={imageOpen&&!!id} name={draft?localizedContent(draft.name,locale):''} onIndexChange={setActiveImage} onClose={()=>setImageOpen(false)} returnFocus={imageOpener}/>
   <Modal title={t('products.unsaved')} open={discardOpen} onOk={()=>{setDiscardOpen(false);onChoose(undefined);}} onCancel={keepEditing} okText={t('products.discard')} cancelText={t('products.keep_editing')} zIndex={1200}>{t('products.unsaved_hint')}</Modal>
   <Drawer rootClassName="catalog-editor catalog-bulk-editor" title={t('master.bulk')} open={bulk} width={1050} onClose={()=>setBulk(false)} destroyOnClose>
    <p>{t('master.bulk_hint')}</p>{error&&<Alert type="error" message={warning(error)}/>}<Button loading={busy} onClick={()=>void suggestions()}>{t('master.suggestions')}</Button>

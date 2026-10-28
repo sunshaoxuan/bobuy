@@ -936,6 +936,7 @@ const messages: Dictionary = {
   "gallery.previous": "Previous image",
   "gallery.next": "Next image",
   "gallery.fit": "Fit to screen",
+  "gallery.inspect_hint": "Click/tap to close · Double-click/tap to toggle actual size · Drag when zoomed to inspect details",
   "gallery.native": "Original size 100%",
   "gallery.swipe_hint": "Swipe to change images; double tap for original size",
   "gallery.pan_hint": "Drag to inspect details; double tap to fit",

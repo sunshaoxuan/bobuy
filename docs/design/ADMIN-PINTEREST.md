@@ -8,6 +8,12 @@ The canonical editor opens on the right on desktop and from the bottom on mobile
 
 Maintain 44px touch targets, keyboard focus, native scrolling and reduced-motion behavior. Hover effects apply only to fine pointers. Image pixels remain untouched; contain fitting preserves packaging text and all image edges. Do not simulate corners with artwork or broad overlays.
 
+## Shared image inspection
+
+The catalog editor's main image opens the same fullscreen inspection component as the customer product detail. A single click/tap closes after a340ms double-tap window; a double click/tap toggles fitted/native pixels, and native-size dragging pans within the actual image edges without changing images or closing. Small sources are never enlarged beyond their natural size. Fit-mode swipes retain the existing continuous rail, neighbor reveal, bounded navigation and reduced-motion settling. Escape is captured by the fullscreen layer before underlying drawers can receive it; closing restores focus to the opener. The editor keeps its draft, selected tab/language and selected gallery image. The viewer makes no API calls, uploads or business writes.
+
+Acceptance uses the existing local Playwright/Vite environment with read-only fixtures. Mouse and CDP touch input cover double/single discrimination, held pan frames, native dimensions, small images, Escape/focus, unsaved drafts, image selection and the original customer swipe/vertical-scroll behavior. Official image pixels remain unchanged; synthetic2000x1600 and120x90 images exercise size boundaries. This batch is local only and requires its own production approval before push/deployment.
+
 ## Review evidence, 2026-10-28
 
 Base is production frontend5511dd4, retaining current application/storage414830e, PG18.6/V22 and RustFS object-only. This branch is a local visual candidate; no push or production activation is authorized by this review stage.

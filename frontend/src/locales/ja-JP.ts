@@ -936,6 +936,7 @@ const messages: Dictionary = {
   "gallery.previous": "前の画像",
   "gallery.next": "次の画像",
   "gallery.fit": "画面に合わせる",
+  "gallery.inspect_hint": "タップで閉じる · ダブルタップで原寸と画面表示を切替 · 拡大後はドラッグで細部を確認",
   "gallery.native": "原寸 100%",
   "gallery.swipe_hint": "左右にスワイプで切替、ダブルタップで原寸表示",
   "gallery.pan_hint": "ドラッグで細部を表示、ダブルタップで画面に合わせる",
