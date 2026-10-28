@@ -3,7 +3,7 @@ import {beforeEach,expect,it,vi} from 'vitest';
 import ProductPricingPanel,{jstInput,jstInstant} from './ProductPricingPanel';
 import {I18nProvider} from '../i18n';
 const mock=vi.hoisted(()=>({get:vi.fn(),draft:vi.fn(),approve:vi.fn(),cancel:vi.fn(),regular:vi.fn(),currencies:vi.fn()}));
-vi.mock('../api',()=>({productPricingApi:mock,masterDataApi:{currencies:mock.currencies}}));
+vi.mock('../api',()=>({productPricingApi:mock,recommendationApi:{currencies:mock.currencies}}));
 vi.mock('antd',async()=>{const actual=await vi.importActual<typeof import('antd')>('antd');return {...actual,Select:({options=[],value,onChange,disabled,...props}:any)=><select disabled={disabled} aria-label={props['aria-label']} value={value??''} onChange={event=>onChange?.(event.target.value)}>{options.map((option:any)=><option key={option.value} value={option.value}>{option.label}</option>)}</select>};});
 const row={id:42,version:0,productId:'p1',channel:'STOREFRONT',currency:'JPY',amount:800,startsAt:'2026-10-31T15:00:00Z',endsAt:'2026-11-01T15:00:00Z',status:'DRAFT',sourceNote:'Synthetic reviewed terms',createdAt:'2026-10-26T01:00:00Z'};
 const sheet={productId:'p1',regular:{amount:1000,currency:'JPY',unit:'1 item',revision:3,enabled:true},visibility:'DRAFTER_ONLY',orderMethod:'PRE_ORDER',now:'2026-10-26T01:00:00Z',timezone:'Asia/Tokyo',effective:{amount:1000,currency:'JPY',unit:'1 item',regularAmount:1000},history:[{value:row,state:'DRAFT'}]};

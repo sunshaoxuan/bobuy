@@ -2,8 +2,6 @@ import type { Dictionary } from './types';
 import experience from './experience.ja-JP.json';
 
 const messages: Dictionary = {
-    'products.title': '商品マスター管理',
-    'products.active': '有効な商品',
     'trash.title': '商品のごみ箱',
     'trash.hint': '論理削除では商品情報、画像、取引履歴を保持します。関連するおすすめも非表示になり、復元すると再表示されます。ごみ箱はプラットフォーム管理者のみ閲覧できます。',
     'trash.admin_only': 'プラットフォーム管理者のみ利用できます。',
@@ -874,14 +872,7 @@ const messages: Dictionary = {
     "catalog.not_available": "現在は予約受付前です",
   "sale.title": "実際の販売価格を確認",
   "sale.hint": "商品を登録・関連付けしてから販売価格を確認してください。参考価格とは別に、確認済みの JPY 予約販売のみを有効にします。在庫は変更しません。",
-  "nav.basic_data": "基本マスター",
-  "currency.title": "通貨",
-  "currency.view": "基本マスターの通貨を確認",
-  "currency.reload": "再読み込み",
-  "currency.status": "通貨の状態",
-  "currency.enabled": "有効な通貨",
-  "currency.reserved": "登録済み・未有効",
-  "currency.hint": "商品・価格調整・おすすめ・注文は共通の通貨マスターを参照します。通貨と表示言語は独立し、通貨の変更で金額は自動換算されません。この画面は参照専用で、販売価格や有効状態を変更しません。",
+  "sale.currencies": "通貨マスター（表示言語とは独立）",
   "sale.currency": "通貨コード",
   "sale.symbol": "記号",
   "sale.digits": "小数桁数",

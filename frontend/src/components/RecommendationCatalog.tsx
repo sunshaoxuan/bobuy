@@ -17,7 +17,7 @@ export default function RecommendationCatalog({detail,onChange}:{detail:Recommen
   {error&&<Alert type="error" message={error}/>}
   <Popconfirm title={t('catalog.confirm_build')} onConfirm={()=>void link(missing.map(item=>item.id))} disabled={!missing.length||busy}>
    <Button loading={busy} disabled={!missing.length||busy}>{t('catalog.build_missing',{count:missing.length})}</Button>
-  </Popconfirm><Link className="rec-stock-link" to="/admin/products">{t('products.title')}</Link>
+  </Popconfirm><Link className="rec-stock-link" to="/admin/stock-master">{t('nav.stock_master')}</Link>
 
   <Table rowKey="id" size="small" dataSource={detail.items} scroll={{x:700}} pagination={{pageSize:12,showSizeChanger:false}} columns={[
    {title:t('rec.name'),render:(_,item)=><><strong>{item.name}</strong><small>{item.itemNumber||t('rec.not_stated')}</small></>},

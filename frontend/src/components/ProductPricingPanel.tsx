@@ -1,6 +1,6 @@
 import {useEffect,useState} from 'react';
 import {Alert,Button,Checkbox,Collapse,Drawer,Input,InputNumber,Modal,Select,Table,Tag} from 'antd';
-import {productPricingApi,masterDataApi,type PriceAdjustment,type PricingInput,type PricingSheet,type ProductSale} from '../api';
+import {productPricingApi,recommendationApi,type PriceAdjustment,type PricingInput,type PricingSheet,type ProductSale} from '../api';
 import {useI18n} from '../i18n';
 import {formatMoney} from '../currency';
 import './productPricing.css';
@@ -15,7 +15,7 @@ export default function ProductPricingPanel({id,onClose,onSaved}:{id?:string;onC
  const [action,setAction]=useState<{kind:'approve'|'cancel';entry:PriceAdjustment}>(),[confirmed,setConfirmed]=useState(false);
  function accept(value:PricingSheet){setSheet(value);onSaved(value);setReviewed(false);setRegular(value.regular??{amount:0,currency:'JPY',unit:'',revision:0,enabled:false});}
  useEffect(()=>{if(!id)return;let active=true;setBusy(true);setError('');setSheet(undefined);setAction(undefined);setReviewed(false);setDraft({version:0,currency:'JPY',start:'',end:'',sourceNote:''});
-  void Promise.all([productPricingApi.get(id),masterDataApi.currencies()]).then(([value,codes])=>{if(active){setSheet(value);setCurrencies(codes);setRegular(value.regular??{amount:0,currency:'JPY',unit:'',revision:0,enabled:false});}}).catch(e=>{if(active)setError(e.message);}).finally(()=>{if(active)setBusy(false);});return()=>{active=false;};},[id]);
+  void Promise.all([productPricingApi.get(id),recommendationApi.currencies()]).then(([value,codes])=>{if(active){setSheet(value);setCurrencies(codes);setRegular(value.regular??{amount:0,currency:'JPY',unit:'',revision:0,enabled:false});}}).catch(e=>{if(active)setError(e.message);}).finally(()=>{if(active)setBusy(false);});return()=>{active=false;};},[id]);
  async function run(task:()=>Promise<PricingSheet>){setBusy(true);setError('');try{const result=await task();accept(result);return true;}catch(e){setError((e as Error).message);return false;}finally{setBusy(false);}}
  const date=(value:string)=>new Date(value).toLocaleString(locale,{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'});
  function edit(value:PriceAdjustment){setDraft({id:value.id,version:value.version,currency:value.currency,amount:value.amount,start:jstInput(value.startsAt),end:jstInput(value.endsAt),sourceNote:value.sourceNote});}

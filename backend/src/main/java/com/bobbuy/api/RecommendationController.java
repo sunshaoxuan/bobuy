@@ -24,7 +24,8 @@ public class RecommendationController {
     private final RecommendationService service;
     private final RecommendationSourceImage sourceImages;
     private final MediaBinaryService binaries;
-    public RecommendationController(RecommendationService service, RecommendationSourceImage sourceImages,MediaBinaryService binaries) { this.service = service; this.sourceImages = sourceImages;this.binaries=binaries; }
+    private final ProductSaleService currencyService;
+    public RecommendationController(RecommendationService service, RecommendationSourceImage sourceImages,MediaBinaryService binaries,ProductSaleService currencyService) { this.service = service; this.sourceImages = sourceImages;this.binaries=binaries;this.currencyService=currencyService; }
     public record ItemEdit(@NotNull @Valid RecommendationFacts facts, @Min(0) long version) {}
     public record SourceImage(@NotNull @Valid RecommendationFacts facts, @NotBlank @Size(max=2048) String imageUrl, @Min(0) long version) {}
     public record Edit(@NotNull @Size(max = 200) String title, @NotNull @Size(max = 100000) String body, @Min(0) long version) {}
@@ -50,6 +51,8 @@ public class RecommendationController {
     public record Sales(@NotEmpty @Size(max=500) @Valid List<ProductSaleService.Review> reviews,@Min(0) long version,boolean confirmedPreorder) {}
     @PutMapping("/api/merchant/recommendations/{id}/sales")
     public ApiResponse<?> sales(@PathVariable Long id,@Valid @RequestBody Sales input){return ApiResponse.success(service.reviewSales(id,input.reviews(),input.version(),input.confirmedPreorder()));}
+    @GetMapping({"/api/storefront/currencies","/api/merchant/currencies"})
+    public ApiResponse<?> currencies(){return ApiResponse.success(currencyService.currencies());}
     @GetMapping("/api/merchant/recommendations")
     public ApiResponse<?> list(@RequestParam(defaultValue = "0") @Min(0) int page) { return ApiResponse.success(service.list(page)); }
     @PostMapping("/api/merchant/recommendations")

@@ -182,7 +182,7 @@ const normalizeCategories = (categories: MobileCategory[]): MobileCategory[] =>
     attributeTemplate: normalizeCategoryTemplate(category.attributeTemplate)
   })) || [];
 
-export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{embedded?:boolean;refreshKey?:number;onDeleted?:()=>void}={}) {
+export default function StockMaster() {
   const { t, locale } = useI18n();
   const [categories, setCategories] = useState<MobileCategory[]>([]);
   const [suppliers, setSuppliers] = useState<MobileSupplier[]>([]);
@@ -280,7 +280,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
       setDataSource(mapped);
     });
     return () => { cancelled = true; };
-  }, [refreshKey]);
+  }, []);
 
 
   const getLocalizedFallback = (values?: L10nValues, fallback?: string) => {
@@ -335,7 +335,6 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
     try {
       await api.deleteProduct(key);
       setDataSource(dataSource.filter((item) => item.key !== key));
-      onDeleted?.();
       message.success(t('stock.msg.deleted'));
     } catch (err) {
       console.error('Delete failed:', err);
@@ -591,7 +590,6 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
     {
       title: t('stock.item.name'),
       dataIndex: 'name',
-      width: 220,
       render: (text: string, record: StockItem) => (
         <Input value={text} placeholder={t('stock.item.name_input_placeholder')} onChange={(e) => handleFieldChange(record.key, 'name', e.target.value)} />
       )
@@ -607,7 +605,6 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
     {
       title: t('stock.item.category'),
       dataIndex: 'category',
-      width: 150,
       render: (text: string, record: StockItem) => (
         <Input value={text} placeholder={t('stock.item.category_input_placeholder')} onChange={(e) => handleFieldChange(record.key, 'category', e.target.value)} />
       )
@@ -706,7 +703,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
 
   return (
     <div style={{ padding: isMobile ? `0 0 ${MOBILE_BOTTOM_PADDING} 0` : `0 0 ${DESKTOP_BOTTOM_PADDING} 0` }}>
-      {!embedded&&<Breadcrumb style={{ marginBottom: '1rem' }} items={[{ title: t('nav.dashboard') }, { title: t('products.title') }]} />}
+      <Breadcrumb style={{ marginBottom: '1rem' }} items={[{ title: t('nav.dashboard') }, { title: t('nav.stock_master') }]} />
       <ProductCatalogPanel id={catalogId} onChoose={setCatalogId} entries={dataSource.filter(row=>!row.isNew)} onSaved={values=>setDataSource(prior=>prior.map(row=>{const value=values.find(v=>v.productId===row.key);return value?{...row,catalogDriven:true,name:getLocalizedFallback(value.name,row.name),nameL10n:value.name,description:getLocalizedFallback(value.description,''),descriptionL10n:value.description,brand:value.brand??undefined,sku:value.itemNumber??undefined,category:value.categoryIds[0]??'',mediaGallery:value.gallery.map(p=>({id:p.sha256||p.url,url:p.url,type:p.type==='VIDEO'?'video' as const:'image' as const,title:p.title,visible:p.visible}))}:row;}))}/>
 
       <div className={`stock-toolbar ${isMobile ? 'stock-toolbar-mobile' : ''} ${toolbarCompact ? 'stock-toolbar-compact' : ''}`}>
@@ -769,7 +766,6 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
           <Table
             dataSource={filteredData}
             columns={columns}
-            scroll={{x:1400}}
             pagination={false}
             locale={{
               emptyText: (

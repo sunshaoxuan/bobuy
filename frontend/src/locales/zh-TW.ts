@@ -1,8 +1,6 @@
 import type { Dictionary } from './types';
 
 const messages: Dictionary = {
-    'products.title': '商品檔案管理',
-    'products.active': '使用中商品',
     'trash.title': '商品回收站',
     'trash.hint': '邏輯刪除保留商品資料、圖片和歷史業務紀錄。關聯推薦同步隱藏，還原時一併恢復。僅平台管理員可查看回收站。',
     'trash.admin_only': '僅平台管理員可存取。',
@@ -1011,14 +1009,7 @@ const messages: Dictionary = {
     "catalog.not_available": "暫未開放預訂",
   "sale.title": "實際銷售價格確認",
   "sale.hint": "先選擇或建立產品檔案。售價獨立於 Costco 參考價；只啟用已確認的 JPY 預訂，不變更庫存。",
-  "nav.basic_data": "基礎檔案",
-  "currency.title": "幣別",
-  "currency.view": "查看基礎檔案中的幣別",
-  "currency.reload": "重新讀取",
-  "currency.status": "幣別狀態",
-  "currency.enabled": "已啟用幣別",
-  "currency.reserved": "已建檔，暫未啟用",
-  "currency.hint": "全站共用同一份幣別檔案，商品、調價單、推薦與訂單僅引用。幣別與介面語言獨立；切換幣別不自動換匯。本頁唯讀，不改變售價或啟用狀態。",
+  "sale.currencies": "幣別檔案（與介面語言獨立）",
   "sale.currency": "幣別代碼",
   "sale.symbol": "符號",
   "sale.digits": "小數位",
