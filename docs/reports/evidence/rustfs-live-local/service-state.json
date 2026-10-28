@@ -1,0 +1,9 @@
+{
+  "bobuy-local-postgres-1": "exited",
+  "bobuy-local-backend-1": "exited",
+  "bobuy-local-web-1": "exited",
+  "bobuy-local-redis-1": "exited",
+  "bobuy-local-rabbitmq-1": "exited",
+  "bobuy-local-mail-1": "exited",
+  "bobuy-local-rustfs-1": "exited"
+}

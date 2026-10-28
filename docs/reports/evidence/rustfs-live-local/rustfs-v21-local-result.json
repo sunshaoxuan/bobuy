@@ -1,0 +1,18 @@
+{
+  "productionChanged": false,
+  "source": "existing local synthetic V20 fixture dump",
+  "flywayStartupTest": false,
+  "postgresVersion": "18.6",
+  "baselineTableCount": 31,
+  "imageBytes": "14:846106",
+  "v21DdlPreservesAllExistingRows": true,
+  "mediaTables": "4",
+  "restorePass": true,
+  "constraintCount": 292,
+  "sequencesPreserved": true,
+  "backupSha256": "d0ae4a6de641e73145059758480234597eb96a8dd8b57b25706532f484fa6798",
+  "existingBusinessFingerprint": "c135e88291728345edc70d0b3bd28f15a575ce1001280f5ada59bd891cdcdedf",
+  "temporaryDatabaseRemoved": true,
+  "originalStoppedStateRestored": true,
+  "utc": "2026-10-28T01:31:47.837045+00:00"
+}

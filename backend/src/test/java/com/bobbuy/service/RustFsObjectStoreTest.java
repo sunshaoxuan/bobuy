@@ -11,6 +11,23 @@ import org.mockito.ArgumentCaptor;
 
 /** AWS SDK calls are mocked. These tests do not establish RustFS interoperability. */
 class RustFsObjectStoreTest {
+ @Test void proposedPolicyUsesRustFsActionFamiliesAndArnResourcesWithoutBroadeningAllows() throws Exception {
+  // RustFS 1.0.4 Statement::is_valid rejects mixed S3/admin families;
+  // Resource::try_from requires a resource ARN, including for wildcard denies.
+  var policy=new com.fasterxml.jackson.databind.ObjectMapper().readTree(java.nio.file.Path.of("../infra/rustfs/media-policy.proposed.json").toFile());
+  var allows=new java.util.HashSet<String>();var denied=new java.util.HashSet<String>();
+  for(var statement:policy.get("Statement")){
+   var families=new java.util.HashSet<String>();
+   for(var action:statement.get("Action")){
+    var value=action.asText();families.add(value.split(":")[0]);
+    if(statement.get("Effect").asText().equals("Allow"))allows.add(value);else denied.add(value);
+   }
+   assertThat(families).hasSize(1);
+   for(var resource:statement.get("Resource"))assertThat(resource.asText()).startsWith("arn:aws:s3:::");
+  }
+  assertThat(allows).containsExactlyInAnyOrder("s3:ListBucket","s3:GetObject","s3:PutObject","s3:AbortMultipartUpload");
+  assertThat(denied).contains("s3:DeleteObject","s3:DeleteBucket","admin:*");
+ }
  @Test void disabledAdapterNeedsNoFilesAndRejectsInsecureEnabledEndpoint(){
   var disabled=new RustFsObjectStore(false,"","bobuy-media","missing-access","missing-secret","");
   assertThatThrownBy(()->disabled.get("test")).hasMessage("Object storage is disabled");disabled.close();
