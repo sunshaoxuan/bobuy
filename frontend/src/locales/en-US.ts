@@ -1041,6 +1041,13 @@ const messages: Dictionary = {
   "products.image_sources": "Image sources & order",
   "products.preview_image": "Preview image {number}",
   "products.workspace_hint": "Organize the details. Let the product lead.",
+  "products.unsaved": "Unsaved changes",
+  "products.unsaved_hint": "Keep editing or discard the unsaved changes? The saved product is unchanged.",
+  "products.discard": "Discard changes",
+  "products.keep_editing": "Keep editing",
+  "products.details_tab": "Product details",
+  "products.media_tab": "Images & sources",
+  "products.add_images": "Add images",
 };
 
 export default messages;

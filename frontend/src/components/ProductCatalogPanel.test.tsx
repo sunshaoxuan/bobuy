@@ -11,7 +11,7 @@ const value={productId:'p1',version:7,name:{'ja-JP':'日本商品','zh-CN':'中�
 beforeEach(()=>{vi.clearAllMocks();localStorage.setItem('bobbuy_locale','en-US');mock.get.mockResolvedValue({value,canonical:false,sourceItemIds:[1]});mock.options.mockResolvedValue({categories:[],suppliers:[]});mock.proposals.mockResolvedValue([{value,changes:['master.canonical_save'],warnings:[]}]);mock.preview.mockImplementation(async rows=>rows.map((value:unknown)=>({value,changes:[],warnings:[]})));mock.save.mockResolvedValue([{value:{...value,version:8},canonical:true}]);});
 it('edits four languages and requires review before versioned preview/save',async()=>{
  const onSaved=vi.fn();render(<I18nProvider><ProductCatalogPanel entries={[]} id="p1" onChoose={vi.fn()} onSaved={onSaved}/></I18nProvider>);
- await screen.findByDisplayValue('日本商品');expect(screen.getByRole('tab',{name:'繁體中文'})).toBeInTheDocument();
+ await screen.findByDisplayValue('000123');fireEvent.click(screen.getByRole('tab',{name:'Languages & descriptions'}));await screen.findByDisplayValue('日本商品');expect(screen.getByRole('radio',{name:'繁體中文'})).toBeInTheDocument();
  const save=screen.getByRole('button',{name:/confirm and save/i});expect(save).toBeDisabled();
  const checks=screen.getAllByRole('checkbox');fireEvent.click(checks[checks.length-1]);fireEvent.click(save);
  await waitFor(()=>expect(onSaved).toHaveBeenCalled());expect(mock.preview).toHaveBeenCalledWith([value]);expect(mock.save).toHaveBeenCalledWith([value]);
@@ -25,4 +25,17 @@ it('requires a successful preview again after bulk JSON correction',async()=>{
  expect((input as HTMLTextAreaElement).value).not.toContain('unrelated-no-source');
  fireEvent.change(input,{target:{value:'invalid'}});fireEvent.click(screen.getByRole('button',{name:/preview/i}));
  await waitFor(()=>expect(screen.getByRole('button',{name:/confirm and save/i})).toBeDisabled());expect(mock.save).not.toHaveBeenCalled();
+});
+it('keeps draft values across tabs and requires explicit discard on close',async()=>{
+ const choose=vi.fn();render(<I18nProvider><ProductCatalogPanel entries={[]} id="p1" onChoose={choose} onSaved={vi.fn()}/></I18nProvider>);
+ await screen.findByDisplayValue('000123');fireEvent.change(screen.getByLabelText('Brand'),{target:{value:'Draft brand'}});
+ fireEvent.click(screen.getByRole('tab',{name:'Languages & descriptions'}));fireEvent.click(screen.getByRole('tab',{name:'Product details'}));expect(screen.getByDisplayValue('Draft brand')).toBeInTheDocument();
+ fireEvent.click(screen.getByRole('button',{name:'Close'}));await screen.findByText('Unsaved changes');expect(choose).not.toHaveBeenCalled();fireEvent.click(screen.getByRole('button',{name:'Keep editing'}));expect(screen.getByDisplayValue('Draft brand')).toBeInTheDocument();
+ fireEvent.click(screen.getByRole('button',{name:'Close'}));fireEvent.click(await screen.findByRole('button',{name:'Discard changes'}));await waitFor(()=>expect(choose).toHaveBeenCalledWith(undefined));expect(mock.save).not.toHaveBeenCalled();
+});
+it('locates the Japanese required-name error in the copy tab without an API write',async()=>{
+ render(<I18nProvider><ProductCatalogPanel entries={[]} id="p1" onChoose={vi.fn()} onSaved={vi.fn()}/></I18nProvider>);
+ await screen.findByDisplayValue('000123');fireEvent.click(screen.getByRole('tab',{name:'Languages & descriptions'}));fireEvent.change(screen.getByRole('textbox',{name:'Name (translation only; no Japanese suffix) ja-JP'}),{target:{value:''}});
+ fireEvent.click(screen.getByRole('tab',{name:'Product details'}));const checks=screen.getAllByRole('checkbox');fireEvent.click(checks[checks.length-1]);fireEvent.click(screen.getByRole('button',{name:/confirm and save/i}));
+ await screen.findByText('Japanese source name is required');expect(screen.getByRole('tab',{name:'Languages & descriptions'})).toHaveAttribute('aria-selected','true');expect(screen.getByRole('textbox',{name:'Name (translation only; no Japanese suffix) ja-JP'})).toHaveFocus();expect(mock.preview).not.toHaveBeenCalled();expect(mock.save).not.toHaveBeenCalled();
 });

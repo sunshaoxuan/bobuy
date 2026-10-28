@@ -1041,6 +1041,13 @@ const messages: Dictionary = {
   "products.image_sources": "画像の出典と順序",
   "products.preview_image": "画像 {number} を表示",
   "products.workspace_hint": "商品を主役に、情報を分かりやすく整理。",
+  "products.unsaved": "未保存の変更があります",
+  "products.unsaved_hint": "編集を続けますか？破棄しても保存済みの商品情報は変わりません。",
+  "products.discard": "変更を破棄",
+  "products.keep_editing": "編集を続ける",
+  "products.details_tab": "商品情報",
+  "products.media_tab": "画像と出典",
+  "products.add_images": "画像を追加",
 };
 
 export default messages;

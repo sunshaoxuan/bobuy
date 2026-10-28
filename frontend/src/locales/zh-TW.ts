@@ -1178,6 +1178,13 @@ const messages: Dictionary = {
   "products.image_sources": "圖片來源與排序",
   "products.preview_image": "預覽第 {number} 張圖片",
   "products.workspace_hint": "讓商品成為主角，讓每一份資料井然有序。",
+  "products.unsaved": "尚有未儲存的修改",
+  "products.unsaved_hint": "繼續編輯，或放棄本次未儲存修改？已儲存的商品資料不會改變。",
+  "products.discard": "放棄修改",
+  "products.keep_editing": "繼續編輯",
+  "products.details_tab": "商品資料",
+  "products.media_tab": "圖片與來源",
+  "products.add_images": "新增圖片",
 };
 
 export default messages;
