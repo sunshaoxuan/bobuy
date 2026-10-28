@@ -2,6 +2,8 @@ import type { Dictionary } from './types';
 import experience from './experience.en-US.json';
 
 const messages: Dictionary = {
+    'products.title': 'Product records',
+    'products.active': 'Active products',
     'trash.title': 'Product recycle bin',
     'trash.hint': 'Logical deletion preserves product data, images and historical records. Linked recommendations are hidden together and return on restore. Only platform administrators can view this recycle bin.',
     'trash.admin_only': 'Platform administrator access required.',

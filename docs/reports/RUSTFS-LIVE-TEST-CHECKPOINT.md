@@ -1,5 +1,7 @@
 # RustFS approved local test checkpoint — 2026-10-28 01:35 UTC
 
+Historical first checkpoint. Later real application/Flyway and product-archive acceptance supersedes its pending items: see `PRODUCT-ARCHIVE-RUSTFS-APPLICATION-ACCEPTANCE.md` and final restoration evidence.
+
 Candidate base: `90ff0ebaf6c1415e002f881e0d7ace6cd5a81ce5`; policy/test corrections below are local uncommitted changes. This checkpoint is not a production release.
 
 Only the approved OHR0067 existing `bobuy-local` fixture was used. Production was not contacted or changed by these live tests; no production image bytes were copied. All six original containers were stopped before the test, and all six plus the new RustFS container are stopped again afterward. Existing volumes were not reset.

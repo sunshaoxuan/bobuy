@@ -2,6 +2,8 @@ import type { Dictionary } from './types';
 import experience from './experience.ja-JP.json';
 
 const messages: Dictionary = {
+    'products.title': '商品マスター管理',
+    'products.active': '有効な商品',
     'trash.title': '商品のごみ箱',
     'trash.hint': '論理削除では商品情報、画像、取引履歴を保持します。関連するおすすめも非表示になり、復元すると再表示されます。ごみ箱はプラットフォーム管理者のみ閲覧できます。',
     'trash.admin_only': 'プラットフォーム管理者のみ利用できます。',

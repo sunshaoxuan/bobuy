@@ -1,6 +1,8 @@
 import type { Dictionary } from './types';
 
 const messages: Dictionary = {
+    'products.title': '商品檔案管理',
+    'products.active': '使用中商品',
     'trash.title': '商品回收站',
     'trash.hint': '邏輯刪除保留商品資料、圖片和歷史業務紀錄。關聯推薦同步隱藏，還原時一併恢復。僅平台管理員可查看回收站。',
     'trash.admin_only': '僅平台管理員可存取。',

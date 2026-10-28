@@ -59,6 +59,14 @@ class ProductLifecycleIntegrationTest {
   assertThat(trash().size()).isZero();assertThat(data(mvc.perform(get("/api/storefront/recommendations/"+postIds.get(0)))).get("items").size()).isEqualTo(122);
   assertThat(products.findById(ids.get(0)).orElseThrow().getSale()).isNull();
  }
+ @Test void masterOnlyImageReferenceIsHiddenOnDeleteAndReturnsOnRestore()throws Exception{
+  var image=new RecommendationImage();image.id=prefix+"source";image.merchantId=9490L;image.imageHash=prefix+"master-only";image.contentType="image/png";image.accessScope="PUBLIC";image.content=new byte[]{8,7,6};binaries.persist(image);
+  String url="/api/storefront/recommendation-images/"+image.id,id=ids.get(20);var product=products.findById(id).orElseThrow();product.setMediaGallery(new ArrayList<>(List.of(new MediaGalleryItem(url,com.bobbuy.model.MediaType.IMAGE,Map.of("ja-JP","Synthetic master image")))));products.saveAndFlush(product);
+  mvc.perform(get(url)).andExpect(status().isOk());mvc.perform(delete("/api/mobile/products/"+id).header("Authorization","Bearer "+merchant)).andExpect(status().isOk());
+  mvc.perform(get(url)).andExpect(status().isNotFound());assertThat(images.existsById(image.id)).isTrue();
+  var row=trash();JsonNode deleted=null;for(var entry:row)if(id.equals(entry.get("id").asText()))deleted=entry;assertThat(deleted).isNotNull();
+  call("/restore",Map.of("id",id,"version",deleted.get("version").asLong()),admin).andExpect(status().isOk());mvc.perform(get(url)).andExpect(status().isOk());
+ }
  @Test void rejectsEveryNonAdministratorAndAtomicConflicts()throws Exception{
   for(String token:List.of(merchant,customer)){mvc.perform(get("/api/admin/products/trash").header("Authorization","Bearer "+token)).andExpect(status().isForbidden());
    mvc.perform(get("/api/admin/products/trash?deleted=false").header("Authorization","Bearer "+token)).andExpect(status().isForbidden());call("/delete",List.of(selection(ids.get(0))),token).andExpect(status().isForbidden());call("/restore",selection(ids.get(0)),token).andExpect(status().isForbidden());}

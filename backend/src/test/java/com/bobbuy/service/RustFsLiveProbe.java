@@ -29,7 +29,14 @@ public class RustFsLiveProbe {
   require("bobuy-media-test".equals(System.getenv("BOBBUY_MEDIA_RUSTFS_BUCKET")),"Only approved synthetic bucket permitted");
   ConfigurableApplicationContext context=null;int exit=1;
   try{
-   context=SpringApplication.run(BobbuyApplication.class,"--bobbuy.seed.enabled=false","--spring.jpa.hibernate.ddl-auto=validate","--server.port=8080");
+   boolean fresh="true".equals(System.getenv("BOBUY_RUSTFS_FRESH_FIXTURE"));
+   if(fresh){
+    String url=System.getenv("SPRING_DATASOURCE_URL");require("jdbc:postgresql://postgres:5432/bobuy_rustfs_app_test_20261028".equals(url),"Fresh migration limited to disposable local database");
+    var baseline=org.flywaydb.core.Flyway.configure().dataSource(url,System.getenv("SPRING_DATASOURCE_USERNAME"),System.getenv("SPRING_DATASOURCE_PASSWORD")).target("20").load();
+    if(baseline.info().current()==null){baseline.migrate();results.put("freshSyntheticFlywayV20Baseline",true);}
+    else {require("21".equals(baseline.info().current().getVersion().toString()),"Only this owned V21 fixture can resume");results.put("reusedSyntheticFlywayV21Fixture",true);}
+   }
+   context=SpringApplication.run(BobbuyApplication.class,"--bobbuy.seed.enabled="+fresh,"--spring.jpa.hibernate.ddl-auto=validate","--server.port=8080");
    run(context);results.put("pass",true);exit=0;
   }catch(Throwable error){results.put("pass",false);results.put("errorType",error.getClass().getSimpleName());results.put("reason",error instanceof AssertionError?error.getMessage():"Application/probe failed; inspect sanitized local log");}
   finally{if(context!=null)context.close();var text=new ObjectMapper().writeValueAsString(results);Files.writeString(Path.of("/tmp/rustfs-java-result.json"),text);System.out.println("BOBUY_RUSTFS_LIVE_RESULT="+text);}

@@ -2,6 +2,8 @@ import type { Dictionary } from './types';
 import experience from './experience.zh-CN.json';
 
 const messages: Dictionary = {
+    'products.title': '商品档案管理',
+    'products.active': '在用商品',
     'trash.title': '商品回收站',
     'trash.hint': '逻辑删除保留商品资料、图片和历史业务记录。关联推荐同步隐藏，恢复时一并恢复。仅平台管理员可查看回收站。',
     'trash.admin_only': '仅平台管理员可访问。',
