@@ -94,6 +94,9 @@ jobs:
       - name: Build backend package for Docker image
         run: mvn -B -DskipTests package --file backend/pom.xml
 
+      - name: Build actual production service packages
+        run: mvn -B -DskipTests package -pl bobbuy-core,bobbuy-ai,bobbuy-im,bobbuy-auth,bobbuy-gateway -am
+
       - name: Build backend image
         run: docker build backend -t bobbuy-backend-test
 
