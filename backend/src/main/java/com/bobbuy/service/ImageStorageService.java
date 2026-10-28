@@ -12,7 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ImageStorageService {
  private final RecommendationImageRepository images;
- public ImageStorageService(RecommendationImageRepository images) {this.images=images;}
+ private final MediaBinaryService binaries;
+ public ImageStorageService(RecommendationImageRepository images,MediaBinaryService binaries) {this.images=images;this.binaries=binaries;}
  /** Product photography retains its existing public media semantics. */
  @Transactional public String saveBase64(String value) {var saved=save(value,"PUBLIC");return saved==null?null:saved.publicUrl();}
  @Transactional public UploadResult saveBase64ToObject(String value) {return save(value,"PRIVATE");}
@@ -33,7 +34,7 @@ public class ImageStorageService {
   catch(java.security.NoSuchAlgorithmException e){throw new IllegalStateException("Image hashing unavailable");}
   var blob=images.findByMerchantIdAndImageHash(owner,hash).orElseGet(()->{
    var b=new RecommendationImage();b.id=UUID.randomUUID().toString();b.merchantId=owner;b.imageHash=hash;
-   b.contentType=image.contentType();b.content=image.content();b.accessScope=scope;return images.saveAndFlush(b);
+   b.contentType=image.contentType();b.content=image.content();b.accessScope=scope;return binaries.persist(b);
   });
   String url=scope.equals("PRIVATE")?"/api/merchant/media/"+blob.id:"/api/storefront/recommendation-images/"+blob.id;
   return new UploadResult("pg-image:"+blob.id,url);

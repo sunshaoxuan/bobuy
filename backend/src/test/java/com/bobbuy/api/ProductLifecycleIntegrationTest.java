@@ -22,6 +22,10 @@ class ProductLifecycleIntegrationTest {
  @Autowired ProductRepository products;@Autowired RecommendationItemRepository items;@Autowired RecommendationPostRepository posts;
  @Autowired UserRepository users;@Autowired JwtTokenService tokens;@Autowired JdbcTemplate jdbc;
  @Autowired RecommendationImageRepository images;
+ @Autowired com.bobbuy.service.MediaBinaryService binaries;
+ @Autowired com.bobbuy.service.MediaReferenceCatalog mediaCatalog;
+ @Autowired MediaReferenceRepository mediaReferences;
+ @Autowired MediaTransferRepository mediaTransfers;
  String admin,merchant,customer,prefix;List<String> ids=new ArrayList<>();List<Long> postIds=new ArrayList<>();
  @BeforeEach void setup(){store.seed();admin=tokens.createAccessToken(users.findById(1000L).orElseThrow());
   var owner=new User(9490L,"lifecycle-merchant",Role.AGENT,0);owner.setUsername("lifecycle_merchant");users.save(owner);merchant=tokens.createAccessToken(owner);
@@ -33,7 +37,7 @@ class ProductLifecycleIntegrationTest {
    int count=issue==0?122:30;for(int i=0;i<count;i++){int index=issue==0?i:112+i;var r=new RecommendationItem();r.postId=p.id;r.productId=ids.get(index);r.name="商品"+index;r.itemNumber="000"+index;r.imageHash=prefix+issue+"-"+i;r.imageUrl="/fixture-source.png";r.gallery=index<15?List.of():List.of(new RecommendationItem.Picture("fixture","/fixture-product.png","fixture","https://www.costco.co.jp/fixture","fixture","Product",java.time.Instant.now()));items.save(r);}}
   items.flush();
  }
- @AfterEach void cleanup(){for(Long id:postIds){items.deleteAll(items.findByPostIdOrderById(id));posts.deleteById(id);}for(String id:ids){jdbc.update("delete from bb_product_lifecycle_event where product_id=?",id);jdbc.update("update bb_product set deleted_at=null,deleted_by=null where id=?",id);}products.deleteAllById(ids);images.deleteById(prefix+"source");}
+ @AfterEach void cleanup(){for(Long id:postIds){items.deleteAll(items.findByPostIdOrderById(id));posts.deleteById(id);}for(String id:ids){jdbc.update("delete from bb_product_lifecycle_event where product_id=?",id);jdbc.update("update bb_product set deleted_at=null,deleted_by=null where id=?",id);}products.deleteAllById(ids);mediaTransfers.deleteById(prefix+"source");mediaReferences.deleteById(prefix+"source");images.deleteById(prefix+"source");}
  JsonNode data(ResultActions action)throws Exception{return json.readTree(action.andExpect(status().isOk()).andReturn().getResponse().getContentAsString()).get("data");}
  ResultActions call(String suffix,Object value,String token)throws Exception{return mvc.perform(post("/api/admin/products/trash"+suffix).header("Authorization","Bearer "+token).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsBytes(value)));}
  Map<String,Object> selection(String id){return Map.of("id",id,"version",products.findById(id).orElseThrow().getRecordVersion());}
@@ -65,14 +69,17 @@ class ProductLifecycleIntegrationTest {
   call("/delete",List.of(first),admin).andExpect(status().isOk());call("/restore",first,admin).andExpect(status().isBadRequest());assertThat(products.existsById(ids.get(0))).isFalse();
  }
  @Test void existingMerchantDeleteBecomesRecoverableAndCannotForgeRestore()throws Exception{
-  var image=new RecommendationImage();image.id=prefix+"source";image.merchantId=9490L;image.imageHash=prefix+"image";image.contentType="image/png";image.accessScope="PUBLIC";image.content=new byte[]{1,2,3};images.saveAndFlush(image);
+  var image=new RecommendationImage();image.id=prefix+"source";image.merchantId=9490L;image.imageHash=prefix+"image";image.contentType="image/png";image.accessScope="PUBLIC";image.content=new byte[]{1,2,3};binaries.persist(image);
   String url="/api/storefront/recommendation-images/"+image.id;var source=items.findByPostIdOrderById(postIds.get(0)).get(0);source.imageUrl=url;items.saveAndFlush(source);mvc.perform(get(url)).andExpect(status().isOk());
   String id=ids.get(0);mvc.perform(delete("/api/mobile/products/"+id).header("Authorization","Bearer "+merchant)).andExpect(status().isOk());
   mvc.perform(get(url)).andExpect(status().isNotFound());assertThat(images.existsById(image.id)).isTrue();
+  assertThat(mediaReferences.findById(image.id)).isPresent();assertThat(mediaCatalog.markGcCandidates()).doesNotContain(com.bobbuy.service.MediaBinaryService.sha(image.content));
   assertThat(jdbc.queryForObject("select count(*) from bb_product where id=?",Integer.class,id)).isEqualTo(1);
   assertThat(products.findByItemNumber("0000")).isEmpty();
   mvc.perform(patch("/api/mobile/products/"+id).header("Authorization","Bearer "+merchant).contentType(MediaType.APPLICATION_JSON).content("{\"deletedAt\":null}")).andExpect(status().isNotFound());
   assertThat(jdbc.queryForObject("select count(*) from bb_product_lifecycle_event where product_id=?",Integer.class,id)).isEqualTo(1);
+  var retained=trash().get(0);call("/restore",Map.of("id",id,"version",retained.get("version").asLong()),admin).andExpect(status().isOk());
+  mvc.perform(get(url)).andExpect(status().isOk());assertThat(mediaReferences.findById(image.id)).isPresent();
  }
  @Test void concurrentDeleteAndRestoreUseVersionAndKeepSingleAuditPerTransition()throws Exception{
   var row=selection(ids.get(0));var pool=java.util.concurrent.Executors.newFixedThreadPool(2);

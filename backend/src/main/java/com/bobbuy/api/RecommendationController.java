@@ -24,7 +24,8 @@ public class RecommendationController {
     private final RecommendationService service;
     private final RecommendationSourceImage sourceImages;
     private final ProductSaleService currencyService;
-    public RecommendationController(RecommendationService service, RecommendationSourceImage sourceImages,ProductSaleService currencyService) { this.service = service; this.sourceImages = sourceImages; this.currencyService=currencyService; }
+    private final MediaBinaryService binaries;
+    public RecommendationController(RecommendationService service, RecommendationSourceImage sourceImages,ProductSaleService currencyService,MediaBinaryService binaries) { this.service = service; this.sourceImages = sourceImages;this.currencyService=currencyService;this.binaries=binaries; }
     public record ItemEdit(@NotNull @Valid RecommendationFacts facts, @Min(0) long version) {}
     public record SourceImage(@NotNull @Valid RecommendationFacts facts, @NotBlank @Size(max=2048) String imageUrl, @Min(0) long version) {}
     public record Edit(@NotNull @Size(max = 200) String title, @NotNull @Size(max = 100000) String body, @Min(0) long version) {}
@@ -92,6 +93,6 @@ public class RecommendationController {
         var image = service.image(id);
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(image.contentType))
             .header("X-Content-Type-Options", "nosniff").header("Content-Disposition", "inline")
-            .cacheControl(CacheControl.maxAge(java.time.Duration.ofDays(30)).cachePublic().immutable()).body(image.content);
+            .cacheControl(CacheControl.maxAge(java.time.Duration.ofDays(30)).cachePublic().immutable()).body(binaries.read(image));
     }
 }

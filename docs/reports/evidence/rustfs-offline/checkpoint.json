@@ -1,0 +1,165 @@
+{
+  "stage": "OFFLINE_PREPARATION_ONLY",
+  "utc": "2026-10-28T00:47:11.009576+00:00",
+  "base": "d29e07cf327c37c59661cb96b080d521e30228f5",
+  "currencyExcluded": "f74704101685b173c3ff14c94a9e002695ea5928",
+  "branch": "bobuy/rustfs-preparation",
+  "tests": [
+    {
+      "name": "com.bobbuy.service.RustFsObjectStoreTest",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "reportSha256": "8f0719317c8c260a07f38d524ea276e45053a9ca4aaccd49ecf93c9f563a04cf"
+    },
+    {
+      "name": "com.bobbuy.api.MediaTransferIntegrationTest",
+      "tests": "14",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "reportSha256": "78bf1f39830be3533413d8b0b34ac00944d48773d710b1a6793b7ac5695e9803"
+    },
+    {
+      "name": "com.bobbuy.api.PostgresImageStorageIntegrationTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "reportSha256": "029d20775799b62138e8e29e76e7c78a3e909807f7c5fb626704e1ca3133185b"
+    },
+    {
+      "name": "com.bobbuy.api.ProductLifecycleIntegrationTest",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "reportSha256": "cd1b2bef73a7c6251e8fcd1761b4ae8b2d817432f9eb34f6ee20fddf1efab414"
+    },
+    {
+      "name": "com.bobbuy.api.RecommendationCommerceTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "reportSha256": "546376f9e638d0086ed1b0e75ad6f914c8ebc2f0f56141843ad7771fc692b1eb"
+    },
+    {
+      "name": "com.bobbuy.api.ProductCatalogIntegrationTest",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "reportSha256": "90026a93efe135bc45a9937a6984afcdbb7443a64f2248c69072b1d4c437390e"
+    }
+  ],
+  "testCount": 31,
+  "realS3Tested": false,
+  "migrationExecuted": false,
+  "credentialsCreated": false,
+  "sharedStackStarted": false,
+  "productionChanged": false,
+  "gcDeletionImplemented": false,
+  "sourceHashes": {
+    "backend/pom.xml": "f445c0b129314140c1bd4b73f68a0caea32daacc7a0a26f609167d82640d2069",
+    "backend/src/main/java/com/bobbuy/api/RecommendationController.java": "d04d14bcadb9167af1fd3e7b63291cf2809f6512550c984c8dde016044048517",
+    "backend/src/main/java/com/bobbuy/api/StoredMediaController.java": "f3fccc9de92e593a6e48e012cf8547e2642707208aa01a2067b51551282105ca",
+    "backend/src/main/java/com/bobbuy/repository/RecommendationImageRepository.java": "bd824399b2a36aed466fe8608612f18537bb856e354e0058edcbb9e68a7a146c",
+    "backend/src/main/java/com/bobbuy/service/ImageStorageService.java": "106eb6ca1367a7620ebe6353d4de4ac27701d9f9ccb01a6224bf55a7e24ad9b1",
+    "backend/src/main/java/com/bobbuy/service/ProductCatalogService.java": "5b60109329a55ad7c7e4df5be46bd56c3959cc387293971788bd7286fc60d679",
+    "backend/src/main/java/com/bobbuy/service/RecommendationService.java": "969760c0dcd8cb0c179e574d086a28061c5f7ca6363a377b5469e0ebd286f3d9",
+    "backend/src/test/java/com/bobbuy/api/ProductLifecycleIntegrationTest.java": "fce950f2c3cc8bf4589ab529bfcccd04cccdf8272a67dd14f5b6d9ff304772e7",
+    "backend/src/main/java/com/bobbuy/model/MediaBlob.java": "d1d6e0f2b34d4ca6eaf8cfad37f7c4d065fd23ee99f28024b8f742906fee8e8b",
+    "backend/src/main/java/com/bobbuy/model/MediaCatalogGuard.java": "e70da016dcd0e9a33e0a9de7d2c13bf32cefe0529c02f50c70571b9bfa1a7a70",
+    "backend/src/main/java/com/bobbuy/model/MediaReference.java": "ea46c1f52351bfd9b996a64d2a4046b6e678e2d33c71a5c3a10c0b3b24e898b0",
+    "backend/src/main/java/com/bobbuy/model/MediaTransfer.java": "8625ba713f9e70d1ddc236df3be94afe5e7ae1b74910575341da3b5920aa933f",
+    "backend/src/main/java/com/bobbuy/repository/MediaBlobRepository.java": "e91e2edb51fb4a16953292b4129e88deff4d1ac517b7fed27309425ea85a707b",
+    "backend/src/main/java/com/bobbuy/repository/MediaCatalogGuardRepository.java": "564e85fc9add6becb3d038431f7f5fdb9a06792421520156a35532dc4e63c198",
+    "backend/src/main/java/com/bobbuy/repository/MediaReferenceRepository.java": "fdc588af63c9b3a4296b1e89c72c5ac2cb227625eba2e88ec7d6179b0d4be63e",
+    "backend/src/main/java/com/bobbuy/repository/MediaTransferRepository.java": "4223baac41babbfea5f801f8017b5461a3edd1dca184a3a3efa505e2202f38e5",
+    "backend/src/main/java/com/bobbuy/service/MediaBinaryService.java": "8980fcd83ad991ae4c6965ddf71ec0571a1a0a307283b7ffaa3a8feca9d5b9a2",
+    "backend/src/main/java/com/bobbuy/service/MediaObjectStore.java": "ec3690bbb0d466f9ce4108870875edc63990006799b0aaaca0b72cf88cdbb8d0",
+    "backend/src/main/java/com/bobbuy/service/MediaReferenceCatalog.java": "d6610a0e831db390276532b30f75925de66d3bbd7bd20c3fc1fe448635e77e98",
+    "backend/src/main/java/com/bobbuy/service/MediaTransferWorker.java": "bb2c26bbbc0c7222869af57b9c8c210f13f2b47130d46bdf5965f1c10014ceb9",
+    "backend/src/main/java/com/bobbuy/service/RustFsObjectStore.java": "60059b613958ff961c51eb43f4c759db8dfb766b4237fa8d3b17b1983dc94828",
+    "backend/src/main/resources/db/migration/V21__media_transfer_outbox.sql": "ab5e867ce604ef7253eef69e7da8ac7bfb584f7bfcfb0f83c67967518b73cd57",
+    "backend/src/test/java/com/bobbuy/api/MediaTransferIntegrationTest.java": "fba3e7afffa613512817af4026c441e71ad97ecb97417a771ca767bde9ca14d7",
+    "backend/src/test/java/com/bobbuy/service/RustFsObjectStoreTest.java": "1a1b2ceedc5334dbff17f489529f04dd50d2ece0ae4109ebaa0fdafda248aad5",
+    "docs/reports/RUSTFS-MIGRATION-PLAN.md": "532f690e889612ae463f2f6f7e91fab2f9220e0e8b89678cf75603123425dbe6",
+    "docs/reports/RUSTFS-OFFLINE-CANDIDATE.md": "d0586486b9b5033f6e532de4e6c1619593228da00e7e85ce10b09c5ada0d45e9",
+    "docs/reports/RUSTFS-SPECIFIC-APPROVAL.md": "d377f858b5c7d00a9563e852b466ce6a1438c5447b9e8e706b1a18820b66ac9d",
+    "infra/rustfs/media-policy.proposed.json": "8c63585632a1090a8b85177d36363bace998083aff242b2e8e6ac0fe1036d55d"
+  },
+  "productionContentGroups": {
+    "sourceRows": 566,
+    "sourceBytes": 68743429,
+    "uniqueRawHashes": 566,
+    "uniqueContentBytes": 68743429,
+    "deduplicableBytes": 0,
+    "duplicateGroups": 0,
+    "maxReferencesToSameContent": 1,
+    "hashCollisionGroups": 0,
+    "readOnly": true
+  },
+  "productionNetwork": {
+    "bobuy-core-service": {
+      "networks": [
+        "bobuy-net"
+      ],
+      "ports": {},
+      "mountTargets": []
+    },
+    "bobuy-ai-service": {
+      "networks": [
+        "bobuy-net"
+      ],
+      "ports": {},
+      "mountTargets": []
+    },
+    "bobuy-gateway": {
+      "networks": [
+        "bobuy-net"
+      ],
+      "ports": {
+        "443/tcp": [
+          {
+            "HostIp": "",
+            "HostPort": "443"
+          }
+        ],
+        "80/tcp": [
+          {
+            "HostIp": "",
+            "HostPort": "80"
+          }
+        ]
+      },
+      "mountTargets": [
+        "/etc/letsencrypt",
+        "/etc/nginx/conf.d/default.conf",
+        "/var/log/nginx",
+        "/var/www/acme"
+      ]
+    },
+    "networkProperties": {
+      "bobuy-net": {
+        "driver": "bridge",
+        "internal": false,
+        "attachedNames": [
+          "bobuy-ai-service",
+          "bobuy-auth-service",
+          "bobuy-core-service",
+          "bobuy-frontend",
+          "bobuy-gateway",
+          "bobuy-gateway-service",
+          "bobuy-im-service",
+          "bobuy-nacos",
+          "bobuy-postgres",
+          "bobuy-rabbitmq",
+          "bobuy-redis"
+        ]
+      }
+    }
+  }
+}

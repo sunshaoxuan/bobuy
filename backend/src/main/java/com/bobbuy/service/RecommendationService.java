@@ -22,12 +22,13 @@ public class RecommendationService {
     private final RecommendationTaxonomyService taxonomy;
     private final RecommendationCatalogService catalog;
     private final ProductSaleService sales;
+    private final MediaBinaryService binaries;
 
     public RecommendationService(RecommendationPostRepository posts, RecommendationItemRepository items,
             RecommendationImageRepository images, ProductRepository products, UserRepository users,
-            AuditLogService audit, RecommendationTaxonomyService taxonomy, RecommendationCatalogService catalog, ProductSaleService sales) {
+            AuditLogService audit, RecommendationTaxonomyService taxonomy, RecommendationCatalogService catalog, ProductSaleService sales,MediaBinaryService binaries) {
         this.posts = posts; this.items = items; this.images = images; this.products = products;
-        this.users = users; this.audit = audit; this.taxonomy = taxonomy; this.catalog = catalog; this.sales=sales;
+        this.users = users; this.audit = audit; this.taxonomy = taxonomy; this.catalog = catalog; this.sales=sales;this.binaries=binaries;
     }
     public record Summary(Long id, String title, boolean published, long version, LocalDateTime updatedAt, java.time.Instant publishedAt, String publisherName, String coverImageUrl, Long merchantId) {}
     public record Detail(Summary post, String body, List<RecommendationItem> items) {}
@@ -141,7 +142,7 @@ public class RecommendationService {
         boolean reused = images.findByMerchantIdAndImageHash(owner(), image.hash()).isPresent();
         var blob = images.findByMerchantIdAndImageHash(owner(), image.hash()).orElseGet(() -> {
                 var value = new RecommendationImage(); value.id = UUID.randomUUID().toString(); value.merchantId = owner();
-                value.imageHash = image.hash(); value.contentType = image.contentType(); value.content = image.content(); return images.save(value);
+                value.imageHash = image.hash(); value.contentType = image.contentType(); value.content = image.content(); return binaries.persist(value);
             });
         var item = duplicate.orElseGet(RecommendationItem::new);
         facts.apply(item);
@@ -236,7 +237,7 @@ public class RecommendationService {
         catch(Exception error){throw new ApiException(ErrorCode.INVALID_REQUEST,"gallery.invalid");}
         if(item.gallery.stream().anyMatch(p->p.hash().equals(image.hash())||p.assetKey().equals(assetKey)))return detail(post);
         if(item.gallery.size()>=100)throw new ApiException(ErrorCode.INVALID_REQUEST,"gallery.invalid");
-        var blob=images.findByMerchantIdAndImageHash(owner(),image.hash()).orElseGet(()->{var value=new RecommendationImage();value.id=UUID.randomUUID().toString();value.merchantId=owner();value.imageHash=image.hash();value.contentType=image.contentType();value.content=image.content();return images.save(value);});
+        var blob=images.findByMerchantIdAndImageHash(owner(),image.hash()).orElseGet(()->{var value=new RecommendationImage();value.id=UUID.randomUUID().toString();value.merchantId=owner();value.imageHash=image.hash();value.contentType=image.contentType();value.content=image.content();return binaries.persist(value);});
         var gallery=new ArrayList<>(item.gallery);gallery.add(new RecommendationItem.Picture(blob.id,"/api/storefront/recommendation-images/"+blob.id,image.hash(),sourceUrl,assetKey,label,java.time.Instant.now()));item.gallery=gallery;
         syncGallery(item);touch(post);return detail(post);
     }

@@ -16,8 +16,9 @@ public class ProductCatalogService {
  private final ProductRepository products;private final RecommendationItemRepository items;
  private final RecommendationImageRepository images;private final RecommendationPostRepository posts;
  private final UserRepository users;private final RecommendationTaxonomyService taxonomy;
+ private final MediaBinaryService binaries;
  public ProductCatalogService(ProductRepository products,RecommendationItemRepository items,RecommendationImageRepository images,
-  RecommendationPostRepository posts,UserRepository users,RecommendationTaxonomyService taxonomy){this.products=products;this.items=items;this.images=images;this.posts=posts;this.users=users;this.taxonomy=taxonomy;}
+  RecommendationPostRepository posts,UserRepository users,RecommendationTaxonomyService taxonomy,MediaBinaryService binaries){this.products=products;this.items=items;this.images=images;this.posts=posts;this.users=users;this.taxonomy=taxonomy;this.binaries=binaries;}
  public record Input(String productId,long version,Map<String,String> name,Map<String,String> description,String itemNumber,String brand,
   Map<String,String> specification,String model,String packaging,List<String> categoryIds,String supplierId,List<MediaGalleryItem> gallery,boolean translationsReviewed) {}
  public record Profile(Input value,boolean canonical,List<Long> sourceItemIds) {}
@@ -97,7 +98,7 @@ public class ProductCatalogService {
  @Transactional public MediaGalleryItem upload(String id,RecommendationImageValidator.Image image,String sourceUrl,String label,boolean verified){
   owned(id,false);if(!verified||label==null||label.length()>200)throw invalid("gallery.invalid");
   try{var uri=java.net.URI.create(sourceUrl);if(!"https".equals(uri.getScheme())||uri.getHost()==null||uri.getUserInfo()!=null||uri.getRawQuery()!=null||uri.getRawFragment()!=null||sourceUrl.length()>2048)throw new IllegalArgumentException();}catch(Exception error){throw invalid("gallery.invalid");}
-  var blob=images.findByMerchantIdAndImageHash(owner(),image.hash()).orElseGet(()->{var value=new RecommendationImage();value.id=UUID.randomUUID().toString();value.merchantId=owner();value.imageHash=image.hash();value.contentType=image.contentType();value.content=image.content();return images.save(value);});
+  var blob=images.findByMerchantIdAndImageHash(owner(),image.hash()).orElseGet(()->{var value=new RecommendationImage();value.id=UUID.randomUUID().toString();value.merchantId=owner();value.imageHash=image.hash();value.contentType=image.contentType();value.content=image.content();return binaries.persist(value);});
   return media(new RecommendationItem.Picture(blob.id,"/api/storefront/recommendation-images/"+blob.id,image.hash(),sourceUrl,sourceUrl,label,Instant.now()));
  }
 }
