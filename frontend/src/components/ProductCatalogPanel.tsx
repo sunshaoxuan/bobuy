@@ -1,7 +1,8 @@
 import {useEffect,useRef,useState} from 'react';
-import {Alert,Button,Checkbox,Drawer,Input,Select,Table,Tabs} from 'antd';
+import {Alert,Button,Checkbox,Drawer,Input,Select,Table,Tabs,Grid} from 'antd';
 import {productCatalogApi,recommendationTaxonomyApi,type CatalogInput,type CatalogProposal,type RecommendationChoice} from '../api';
 import {localizedContent,useI18n} from '../i18n';
+import {PictureOutlined,UploadOutlined,CheckCircleOutlined} from '@ant-design/icons';
 import './productCatalog.css';
 
 const languages=[{key:'ja-JP',label:'日本語'},{key:'zh-CN',label:'简体中文'},{key:'zh-TW',label:'繁體中文'},{key:'en-US',label:'English'}];
@@ -10,7 +11,9 @@ export default function ProductCatalogPanel({entries,id,onChoose,onSaved}:{entri
  const [options,setOptions]=useState<{categories:RecommendationChoice[];suppliers:RecommendationChoice[]}>({categories:[],suppliers:[]});
  const [bulk,setBulk]=useState(false),[json,setJson]=useState(''),[rows,setRows]=useState<CatalogProposal[]>([]),[validated,setValidated]=useState(false),[selected,setSelected]=useState<React.Key[]>([]);
  const [source,setSource]=useState(''),[imageReviewed,setImageReviewed]=useState(false);const fileInput=useRef<HTMLInputElement>(null);
- useEffect(()=>{if(!id)return;let active=true;setBusy(true);setDraft(undefined);setError('');setReviewed(false);void Promise.all([productCatalogApi.get(id),recommendationTaxonomyApi.options()]).then(([profile,choices])=>{if(active){setDraft(profile.value);setCanonical(profile.canonical);setOptions(choices);}}).catch(e=>{if(active)setError(e.message);}).finally(()=>{if(active)setBusy(false);});return()=>{active=false;};},[id]);
+ const [activeImage,setActiveImage]=useState(0);
+ const narrow=Grid.useBreakpoint().md===false;
+ useEffect(()=>{if(!id)return;let active=true;setBusy(true);setActiveImage(0);setDraft(undefined);setError('');setReviewed(false);void Promise.all([productCatalogApi.get(id),recommendationTaxonomyApi.options()]).then(([profile,choices])=>{if(active){setDraft(profile.value);setCanonical(profile.canonical);setOptions(choices);}}).catch(e=>{if(active)setError(e.message);}).finally(()=>{if(active)setBusy(false);});return()=>{active=false;};},[id]);
  function patch(value:Partial<CatalogInput>){setDraft(prior=>prior?{...prior,...value}:prior);setReviewed(false);}
  function text(field:'name'|'description'|'specification',language:string,value:string){if(draft)patch({[field]:{...draft[field],[language]:value}});}
  async function saveOne(){if(!draft||!reviewed)return;setBusy(true);setError('');try{await productCatalogApi.preview([draft]);const result=await productCatalogApi.save([draft]);setDraft(result[0].value);setCanonical(true);setReviewed(false);onSaved(result.map(row=>row.value));}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
@@ -20,37 +23,44 @@ export default function ProductCatalogPanel({entries,id,onChoose,onSaved}:{entri
  async function upload(files:File[]){if(!draft||!imageReviewed||!source)return;setBusy(true);setError('');try{const pictures=[...draft.gallery];for(const file of files){const picture=await productCatalogApi.upload(draft.productId,file,source,file.name);if(!pictures.some(p=>p.url===picture.url||(p.sha256&&p.sha256===picture.sha256)))pictures.push(picture);}patch({gallery:pictures});setImageReviewed(false);if(fileInput.current)fileInput.current.value='';}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
  function reorder(index:number,next:number){if(!draft)return;const gallery=[...draft.gallery];const [picture]=gallery.splice(index,1);gallery.splice(next,0,picture);patch({gallery});}
  const warning=(value:string)=>{const [key,detail]=value.split(':');return t(key)+(detail?' · '+detail:'');};
- return <section className="product-catalog-panel"><h2>{t('master.title')}</h2><p>{t('master.hint')}</p>
-  <div className="product-catalog-actions"><Select aria-label={t('master.choose')} showSearch optionFilterProp="label" value={id} placeholder={t('master.choose')} onChange={onChoose} options={entries.map(row=>({value:row.key,label:row.name}))}/><Button onClick={()=>{setBulk(true);setError('');setReviewed(false);}}>{t('master.bulk')}</Button></div>
-  <Drawer title={t('master.title')} width="min(100vw,850px)" open={!!id} onClose={()=>onChoose(undefined)} destroyOnClose>
-   {error&&<Alert type="error" message={warning(error)}/>}<Alert type="info" message={t(canonical?'master.active':'master.not_adopted')}/>
+ const cover=draft?.gallery[Math.min(activeImage,(draft?.gallery.length??1)-1)];
+ return <section className="product-catalog-panel"><details className="catalog-utility-disclosure" open={!narrow}><summary><div className="catalog-utility-heading"><span className="catalog-utility-icon"><PictureOutlined/></span><div><h2>{t('master.title')}</h2><p>{t('master.hint')}</p></div></div></summary>
+  <div className="product-catalog-actions"><Select aria-label={t('master.choose')} showSearch optionFilterProp="label" value={id} placeholder={t('master.choose')} onChange={onChoose} options={entries.map(row=>({value:row.key,label:row.name}))}/><Button onClick={()=>{setBulk(true);setError('');setReviewed(false);}}>{t('master.bulk')}</Button></div></details>
+  <Drawer rootClassName="catalog-editor" title={t('master.title')} width={1120} open={!!id} onClose={()=>onChoose(undefined)} destroyOnClose>
+   {error&&<Alert type="error" message={warning(error)}/>}<div className="catalog-state-strip"><CheckCircleOutlined/>{t(canonical?'master.active':'master.not_adopted')}</div>
    {draft&&<fieldset className="product-catalog-form" disabled={busy}>
-    <p><strong>{t('rec.code')}: </strong>{draft.itemNumber||t('rec.not_stated')} · {draft.productId}</p>
+    <header className="catalog-editor-heading"><span>{t('products.identity')}</span><h2>{localizedContent(draft.name,locale)}</h2><p>{t('rec.code')}: {draft.itemNumber||t('rec.not_stated')}</p><small>{draft.productId}</small></header>
+    <div className="catalog-editor-layout"><div className="catalog-editor-fields"><section className="catalog-form-section"><h3><span>01</span>{t('products.identity')}</h3><div className="catalog-identity-grid">
     <label>{t('rec.code')}<Input value={draft.itemNumber??''} onChange={e=>patch({itemNumber:e.target.value||null})}/></label>
     <label>{t('stock.item.brand')}<Input value={draft.brand??''} onChange={e=>patch({brand:e.target.value||null})}/></label>
     <div className="product-catalog-pair"><label>{t('master.model')}<Input value={draft.model??''} onChange={e=>patch({model:e.target.value||null})}/></label><label>{t('master.packaging')}<Input value={draft.packaging??''} onChange={e=>patch({packaging:e.target.value||null})}/></label></div>
-    <Tabs defaultActiveKey="ja-JP" items={languages.map(language=>({...language,children:<div className="product-catalog-language">
+    </div></section><section className="catalog-form-section"><h3><span>02</span>{t('products.language_copy')}</h3><Tabs defaultActiveKey="ja-JP" items={languages.map(language=>({...language,children:<div className="product-catalog-language">
      <label>{t('master.names')}<Input aria-label={t('master.names')+' '+language.key} value={draft.name[language.key]??''} onChange={e=>text('name',language.key,e.target.value)}/></label>
      <label>{t('master.specifications')}<Input.TextArea rows={2} value={draft.specification[language.key]??''} onChange={e=>text('specification',language.key,e.target.value)}/></label>
      <label>{t('master.descriptions')}<Input.TextArea rows={4} value={draft.description[language.key]??''} onChange={e=>text('description',language.key,e.target.value)}/></label>
     </div>}))}/>
-    <label>{t('master.categories')}<Select disabled={busy} aria-label={t('master.categories')} mode="multiple" value={draft.categoryIds} onChange={categoryIds=>patch({categoryIds})} options={options.categories.map(c=>({value:c.id,label:localizedContent(c.name,locale)}))}/></label>
+    </section><section className="catalog-form-section"><h3><span>03</span>{t('products.organize')}</h3><label>{t('master.categories')}<Select disabled={busy} aria-label={t('master.categories')} mode="multiple" value={draft.categoryIds} onChange={categoryIds=>patch({categoryIds})} options={options.categories.map(c=>({value:c.id,label:localizedContent(c.name,locale)}))}/></label>
     <label>{t('master.supplier')}<Select disabled={busy} aria-label={t('master.supplier')} allowClear value={draft.supplierId??undefined} onChange={supplierId=>patch({supplierId:supplierId??null})} options={options.suppliers.map(c=>({value:c.id,label:localizedContent(c.name,locale)}))}/></label>
     <Checkbox checked={draft.translationsReviewed} onChange={e=>patch({translationsReviewed:e.target.checked})}>{t('master.translations_reviewed')}</Checkbox>
-    <h3>{t('gallery.manage')}</h3>{!draft.gallery.length&&<Alert message={t('gallery.pending')} type="info"/>}
+    </section></div><aside className="catalog-editor-visual"><section className="catalog-form-section"><h3><span><PictureOutlined/></span>{t('gallery.manage')}<small>{draft.gallery.length}</small></h3>
+    <div className="catalog-cover-preview">{cover?<img src={cover.url} alt={cover.title?.[locale]||draft.name['ja-JP']}/>:<div className="record-no-image"><PictureOutlined/>{t('gallery.pending')}</div>}</div>
+    <div className="catalog-filmstrip">{draft.gallery.map((picture,index)=><button key={picture.url} type="button" aria-label={t('products.preview_image',{number:String(index+1)})} aria-pressed={index===Math.min(activeImage,draft.gallery.length-1)} onClick={()=>setActiveImage(index)}><img src={picture.url} alt=""/></button>)}</div>
+    <p className="catalog-image-guidance">{t('products.original_images')}</p>
+    <details className="catalog-source-details"><summary>{t('products.image_sources')}</summary>
     <div className="product-catalog-images">{draft.gallery.map((picture,index)=><div key={picture.url}>
      <img src={picture.url} alt={picture.title?.[locale]||picture.title?.['ja-JP']||draft.name['ja-JP']}/>
      <label>{t('gallery.sources')}<Input value={picture.sourceUrl??''} onChange={e=>patch({gallery:draft.gallery.map((p,i)=>i===index?{...p,sourceUrl:e.target.value}:p)})}/></label>
      <div className="product-catalog-actions"><Button disabled={!index} onClick={()=>reorder(index,0)}>{t(index?'gallery.set_main':'gallery.main')}</Button><Button aria-label={t('master.move_up')} disabled={!index} onClick={()=>reorder(index,index-1)}>↑</Button><Button aria-label={t('master.move_down')} disabled={index===draft.gallery.length-1} onClick={()=>reorder(index,index+1)}>↓</Button><Button danger onClick={()=>patch({gallery:draft.gallery.filter((_,i)=>i!==index)})}>{t('store.remove')}</Button></div>
-    </div>)}</div>
+    </div>)}</div></details>
     <label>{t('gallery.sources')}<Input value={source} onChange={e=>setSource(e.target.value)} placeholder="https://…"/></label>
     <Checkbox checked={imageReviewed} onChange={e=>setImageReviewed(e.target.checked)}>{t('gallery.ack')}</Checkbox>
-    <input ref={fileInput} aria-label={t('gallery.files')} type="file" accept="image/png,image/jpeg" multiple disabled={!imageReviewed||!source||busy} onChange={e=>void upload(Array.from(e.target.files??[]))}/>
-    <p>{t('master.upload_hint')}</p><Checkbox checked={reviewed} onChange={e=>setReviewed(e.target.checked)}>{t('master.review')}</Checkbox>
+    <input className="catalog-file-input" ref={fileInput} aria-label={t('gallery.files')} type="file" accept="image/png,image/jpeg" multiple disabled={!imageReviewed||!source||busy} onChange={e=>void upload(Array.from(e.target.files??[]))}/>
+    <Button icon={<UploadOutlined/>} disabled={!imageReviewed||!source||busy} onClick={()=>fileInput.current?.click()}>{t('gallery.files')}</Button><p className="catalog-image-guidance">{t('master.upload_hint')}</p></section></aside></div>
+    <div className="catalog-review-bar"><Checkbox checked={reviewed} onChange={e=>setReviewed(e.target.checked)}>{t('master.review')}</Checkbox>
     <Button type="primary" loading={busy} disabled={!reviewed} onClick={()=>void saveOne()}>{t('master.save')}</Button>
-   </fieldset>}
+   </div></fieldset>}
   </Drawer>
-  <Drawer title={t('master.bulk')} open={bulk} width="min(100vw,1050px)" onClose={()=>setBulk(false)} destroyOnClose>
+  <Drawer rootClassName="catalog-editor catalog-bulk-editor" title={t('master.bulk')} open={bulk} width={1050} onClose={()=>setBulk(false)} destroyOnClose>
    <p>{t('master.bulk_hint')}</p>{error&&<Alert type="error" message={warning(error)}/>}<Button loading={busy} onClick={()=>void suggestions()}>{t('master.suggestions')}</Button>
    <Input.TextArea disabled={busy} aria-label={t('master.json')} rows={9} value={json} onChange={e=>{setJson(e.target.value);setValidated(false);setReviewed(false);}}/>
    <Button loading={busy} disabled={!json.trim()} onClick={()=>void preview()}>{t('rec.batch_preview')}</Button>

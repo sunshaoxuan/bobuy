@@ -1029,6 +1029,18 @@ const messages: Dictionary = {
   "rec.history": "Historical recommendations",
   "rec.history_topics": "Past issues",
   "rec.past_issue": "The stated offer periods in this issue have ended. Its content remains available for reference.",
+  "products.collection": "Product collection",
+  "products.collection_hint": "Browse your catalog visually; switch to management for bulk edits.",
+  "products.view": "View",
+  "products.gallery": "Image cards",
+  "products.manage": "Manage records",
+  "products.original_images": "Original images · no cropping",
+  "products.identity": "Product identity",
+  "products.language_copy": "Languages & descriptions",
+  "products.organize": "Classification & source",
+  "products.image_sources": "Image sources & order",
+  "products.preview_image": "Preview image {number}",
+  "products.workspace_hint": "Organize the details. Let the product lead.",
 };
 
 export default messages;

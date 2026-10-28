@@ -1029,6 +1029,18 @@ const messages: Dictionary = {
   "rec.history": "历史推荐",
   "rec.history_topics": "历史期次",
   "rec.past_issue": "本期注明的优惠期间均已结束，内容保留供查阅。",
+  "products.collection": "商品收藏库",
+  "products.collection_hint": "从图片浏览商品；批量修改时切换到管理视图。",
+  "products.view": "浏览方式",
+  "products.gallery": "图片卡片",
+  "products.manage": "紧凑管理",
+  "products.original_images": "完整原图 · 不裁切商品",
+  "products.identity": "商品识别信息",
+  "products.language_copy": "语言与介绍",
+  "products.organize": "分类与来源",
+  "products.image_sources": "图片来源与排序",
+  "products.preview_image": "预览第 {number} 张图片",
+  "products.workspace_hint": "让商品成为主角，让每一份资料井然有序。",
 };
 
 export default messages;

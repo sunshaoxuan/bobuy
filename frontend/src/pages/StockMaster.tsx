@@ -20,6 +20,7 @@ import {
   Row,
   Col,
   Checkbox
+  ,Segmented
 } from 'antd';
 import {
   PlusOutlined,
@@ -30,7 +31,7 @@ import {
   SearchOutlined,
   DollarOutlined,
   DatabaseOutlined,
-  CameraOutlined
+  CameraOutlined,PictureOutlined
 } from '@ant-design/icons';
 import { useI18n } from '../i18n';
 import L10nInput, { type L10nValues } from '../components/L10nInput';
@@ -39,6 +40,7 @@ import AiQuickAddModal from '../components/AiQuickAddModal';
 import ProductCatalogPanel from '../components/ProductCatalogPanel';
 import ProductPricingPanel from '../components/ProductPricingPanel';
 import { api, type CategoryAttributeTemplateField, type MobileCategory, type MobileSupplier, type AiOnboardingSuggestion } from '../api';
+import './productRecords.css';
 
 const { Title, Text } = Typography;
 
@@ -187,6 +189,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
   const [categories, setCategories] = useState<MobileCategory[]>([]);
   const [suppliers, setSuppliers] = useState<MobileSupplier[]>([]);
   const [searchText, setSearchText] = useState('');
+  const [recordView,setRecordView]=useState<'gallery'|'manage'>(embedded?'gallery':'manage');
   const [toolbarCompact, setToolbarCompact] = useState(false);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [isQuickAddVisible, setIsQuickAddVisible] = useState(false);
@@ -270,7 +273,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         mediaGallery: res.product.mediaGallery?.map((m, i) => ({
           id: `${res.product.id}-${i}`,
           url: m.url,
-          type: (m.type as 'image' | 'video') || 'image',
+          type: m.type?.toLowerCase()==='video'?'video':'image',
           title: m.title
         })) || [],
         priceTiers: res.product.priceTiers || [],
@@ -316,6 +319,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
   };
 
   const handleAddRow = () => {
+    setRecordView('manage');
     const newData: StockItem = {
       key: Date.now().toString(),
       name: '',
@@ -705,16 +709,16 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
   );
 
   return (
-    <div style={{ padding: isMobile ? `0 0 ${MOBILE_BOTTOM_PADDING} 0` : `0 0 ${DESKTOP_BOTTOM_PADDING} 0` }}>
+    <div className={embedded?'product-records-workspace':undefined} style={{ padding: isMobile ? `0 0 ${MOBILE_BOTTOM_PADDING} 0` : `0 0 ${DESKTOP_BOTTOM_PADDING} 0` }}>
       {!embedded&&<Breadcrumb style={{ marginBottom: '1rem' }} items={[{ title: t('nav.dashboard') }, { title: t('products.title') }]} />}
       <ProductCatalogPanel id={catalogId} onChoose={setCatalogId} entries={dataSource.filter(row=>!row.isNew)} onSaved={values=>setDataSource(prior=>prior.map(row=>{const value=values.find(v=>v.productId===row.key);return value?{...row,catalogDriven:true,name:getLocalizedFallback(value.name,row.name),nameL10n:value.name,description:getLocalizedFallback(value.description,''),descriptionL10n:value.description,brand:value.brand??undefined,sku:value.itemNumber??undefined,category:value.categoryIds[0]??'',mediaGallery:value.gallery.map(p=>({id:p.sha256||p.url,url:p.url,type:p.type==='VIDEO'?'video' as const:'image' as const,title:p.title,visible:p.visible}))}:row;}))}/>
 
       <div className={`stock-toolbar ${isMobile ? 'stock-toolbar-mobile' : ''} ${toolbarCompact ? 'stock-toolbar-compact' : ''}`}>
         <div style={{ minWidth: 0 }}>
           <Title level={3} style={{ margin: 0 }} className="stock-page-title" data-testid="stock-master-title">
-            {t('stock.master.title')}
+            {t(embedded?'products.collection':'stock.master.title')}{embedded&&<span className="record-count">{filteredData.length}</span>}
           </Title>
-          <Text type="secondary">{t('stock.master.subtitle')}</Text>
+          <Text type="secondary">{t(embedded?'products.collection_hint':'stock.master.subtitle')}</Text>
         </div>
 
         {isMobile ? (
@@ -737,7 +741,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
             </Space>
           </Space>
         ) : (
-          <Space direction="vertical" align="end">
+          <Space direction={embedded?'horizontal':'vertical'} align={embedded?'center':'end'} size={12} wrap={embedded}>
             <Input
               placeholder={t('stock.master.search_placeholder')}
               prefix={<SearchOutlined />}
@@ -761,8 +765,26 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         )}
       </div>
 
+      {embedded&&<div className="record-view-bar"><Segmented aria-label={t('products.view')} value={recordView} onChange={value=>setRecordView(value as 'gallery'|'manage')} options={[{label:t('products.gallery'),value:'gallery'},{label:t('products.manage'),value:'manage'}]}/><span>{t('products.original_images')}</span></div>}
+
       <ProductPricingPanel id={pricingId} onClose={()=>setPricingId(undefined)} onSaved={sheet=>setDataSource(prior=>prior.map(row=>row.key===sheet.productId?{...row,actualSale:sheet.regular??undefined}:row))}/>
-      {isMobile ? (
+      {embedded&&recordView==='gallery'?<div className="product-record-grid">{filteredData.map(item=>{
+        const image=item.mediaGallery?.find(media=>media.type==='image')?.url;
+        const name=getLocalizedFallback(item.nameL10n,item.name);
+        const category=categories.find(c=>c.id===item.category);
+        return <article className="product-record-pin" key={item.key}>
+          <button className="record-cover" onClick={()=>setCatalogId(item.key)} aria-label={t('store.detail_label',{name})}>
+            {image?<img src={image} alt={name} loading="lazy"/>:<span className="record-no-image"><InboxOutlined/>{t('gallery.pending')}</span>}
+            {!!item.mediaGallery?.length&&<span className="record-image-count"><PictureOutlined/> {item.mediaGallery.length}</span>}
+          </button>
+          <div className="record-caption"><div className="record-meta"><span>{item.sku||t('rec.not_stated')}</span><span>{t(item.isNew?'stock.status.new':'stock.status.modified')}</span></div>
+            <button className="record-title" onClick={()=>setCatalogId(item.key)}><h3>{name}</h3></button>
+            <p>{category?getLocalizedFallback(category.name):item.brand||t('master.title')}</p>
+            <div className="record-sale-state">{item.actualSale?`${item.actualSale.currency} ${item.actualSale.amount}`:t('sale.pending')}</div>
+            <div className="record-card-actions"><Button onClick={()=>setCatalogId(item.key)}>{t('master.title')}</Button><Button type="text" onClick={()=>setPricingId(item.key)}>{t('pricing.title')}</Button><Button type="text" danger icon={<DeleteOutlined/>} aria-label={t('trash.remove')+' '+name} onClick={()=>handleDelete(item.key)}/></div>
+          </div>
+        </article>;
+      })}{filteredData.length===0&&<div className="record-empty"><InboxOutlined/><p>{t('stock.empty')}</p></div>}</div>:isMobile ? (
         renderMobileCards()
       ) : (
         <Card styles={{ body: { padding: 0 } }} style={{ overflow: 'hidden', borderRadius: '0.75rem' }} className="app-shadow-medium">
@@ -1046,7 +1068,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
           />
         </Form>
       </Drawer>
-        <div className="stock-mobile-fab-group">
+        {(!embedded||recordView==='manage')&&<div className="stock-mobile-fab-group">
           <Button
             shape="circle"
             icon={<PlusOutlined />}
@@ -1055,7 +1077,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
             className="app-shadow-medium"
             onClick={handleAddRow}
           />
-        </div>
+        </div>}
       <AiQuickAddModal
         visible={isQuickAddVisible}
         onCancel={() => setIsQuickAddVisible(false)}

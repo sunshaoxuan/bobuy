@@ -1029,6 +1029,18 @@ const messages: Dictionary = {
   "rec.history": "過去のおすすめ",
   "rec.history_topics": "過去の特集",
   "rec.past_issue": "この特集に明記された特典期間はすべて終了しています。内容は参照用に保存されています。",
+  "products.collection": "商品コレクション",
+  "products.collection_hint": "画像で商品を確認。一括編集は管理表示へ切り替えます。",
+  "products.view": "表示方法",
+  "products.gallery": "画像カード",
+  "products.manage": "一覧管理",
+  "products.original_images": "元画像をそのまま表示",
+  "products.identity": "商品識別情報",
+  "products.language_copy": "言語と説明",
+  "products.organize": "分類と仕入先",
+  "products.image_sources": "画像の出典と順序",
+  "products.preview_image": "画像 {number} を表示",
+  "products.workspace_hint": "商品を主役に、情報を分かりやすく整理。",
 };
 
 export default messages;

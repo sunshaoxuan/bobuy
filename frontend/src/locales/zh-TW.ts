@@ -1166,6 +1166,18 @@ const messages: Dictionary = {
   "rec.history": "歷史推薦",
   "rec.history_topics": "歷史期次",
   "rec.past_issue": "本期註明的優惠期間均已結束，內容保留供查閱。",
+  "products.collection": "商品收藏庫",
+  "products.collection_hint": "從圖片瀏覽商品；批次修改時切換到管理視圖。",
+  "products.view": "瀏覽方式",
+  "products.gallery": "圖片卡片",
+  "products.manage": "精簡管理",
+  "products.original_images": "完整原圖 · 不裁切商品",
+  "products.identity": "商品識別資訊",
+  "products.language_copy": "語言與介紹",
+  "products.organize": "分類與來源",
+  "products.image_sources": "圖片來源與排序",
+  "products.preview_image": "預覽第 {number} 張圖片",
+  "products.workspace_hint": "讓商品成為主角，讓每一份資料井然有序。",
 };
 
 export default messages;

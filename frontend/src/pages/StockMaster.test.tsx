@@ -65,6 +65,17 @@ vi.mock('../api', () => ({
 
 import StockMaster from './StockMaster';
 
+it('uses the real uppercase IMAGE gallery in embedded browsing and retains editable management',async()=>{
+ setMatchMedia(false);
+ const spy=vi.spyOn(api,'products').mockResolvedValueOnce([{product:{id:'visual-uppercase',name:{'zh-CN':'官方图片商品'},categoryId:'cat-1000',basePrice:0,itemNumber:'000123',mediaGallery:[{url:'/official-synthetic.png',type:'IMAGE'}]},displayName:'官方图片商品',displayDescription:''}] as Awaited<ReturnType<typeof api.products>>);
+ window.localStorage.setItem('bobbuy_locale','zh-CN');
+ try{
+  render(<I18nProvider><StockMaster embedded/></I18nProvider>);
+  const image=await screen.findByRole('img',{name:'官方图片商品'});expect(image).toHaveAttribute('src','/official-synthetic.png');
+  fireEvent.click(screen.getByText('紧凑管理',{exact:true}));await screen.findByDisplayValue('000123');
+ }finally{spy.mockRestore();cleanup();}
+});
+
 const MOBILE_VIEWPORT_WIDTH = 375;
 const DESKTOP_VIEWPORT_WIDTH = 1280;
 
