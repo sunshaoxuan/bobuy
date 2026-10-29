@@ -4,6 +4,24 @@ The client follows Pinterest's image-first browsing direction while retaining th
 Bobuy brand. This is an overall visual requirement, not merely a category-chip
 interaction. Do not revert to a crowded header or heavy decorative typography.
 
+## Home and mobile shortcuts (2026-10-29)
+
+After successful initial loading, the bare home route shows trip finds when the
+current node has a bookable trip. Otherwise replace it with recommendations,
+preserving its query context. Use the existing server bookable-trip result
+(published, delivery date today or later); do not invent another date/status rule.
+An API failure must remain an error rather than being treated as an empty result.
+The explicit `/products` route always opens trip finds, including its empty state.
+Explicit recommendation, item, cart, account and checkout links are never subject
+to home redirection, including after authentication or browser history traversal.
+
+Product Picks precedes Trip finds in the main navigation. Only below the existing
+768px breakpoint, show four bottom shortcuts: Product Picks, Trip finds, Cart and
+My account. Preserve node context, accessible current state, at least 44px touch
+targets, keyboard focus, safe-area spacing and sufficient page-bottom padding.
+Keep desktop layout without the mobile bar. Image lightboxes and drawers appear
+above it and retain their existing gestures, focus and draft state.
+
 - Desktop: visible left navigation and node selector in one context. Discover,
   bookable trips, executed trips and product picks have clear labels and one
   selected state. Existing customer orders/bills retain their authorization.

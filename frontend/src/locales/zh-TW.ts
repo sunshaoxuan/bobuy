@@ -1,6 +1,7 @@
 import type { Dictionary } from './types';
 
 const messages: Dictionary = {
+    'browse.shortcuts': '快捷導覽',
     'products.title': '商品檔案管理',
     'products.active': '使用中商品',
     'trash.title': '商品回收站',

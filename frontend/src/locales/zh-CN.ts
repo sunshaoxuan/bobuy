@@ -2,6 +2,7 @@ import type { Dictionary } from './types';
 import experience from './experience.zh-CN.json';
 
 const messages: Dictionary = {
+    'browse.shortcuts': '快捷导航',
     'products.title': '商品档案管理',
     'products.active': '在用商品',
     'trash.title': '商品回收站',

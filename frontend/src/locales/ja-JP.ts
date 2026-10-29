@@ -2,6 +2,7 @@ import type { Dictionary } from './types';
 import experience from './experience.ja-JP.json';
 
 const messages: Dictionary = {
+    'browse.shortcuts': 'クイックナビゲーション',
     'products.title': '商品マスター管理',
     'products.active': '有効な商品',
     'trash.title': '商品のごみ箱',

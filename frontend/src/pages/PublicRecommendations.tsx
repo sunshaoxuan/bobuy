@@ -173,7 +173,7 @@ export default function PublicRecommendations(props: ShoppingProps) {
   const issue=(entry:RecommendationDetail,index:number)=><div className="rec-issue-section" key={entry.post.id}><RecommendationIssue {...props} catalog={catalog} detail={entry} number={index+1} single={!!topic}/></div>;
 
   return <section className="recommendations rec-public">
-    <Link className="rec-back" to={id ? topicPath('') : scopedPath('/', '?'+params.toString())}><ArrowLeftOutlined /> {t(id ? 'rec.title' : 'store.catalog')}</Link>
+    <Link className="rec-back" to={id ? topicPath('') : scopedPath('/products', '?'+params.toString())}><ArrowLeftOutlined /> {t(id ? 'rec.title' : 'store.catalog')}</Link>
     {!id && <header className="rec-feed-heading"><h1>{t('rec.title')}</h1></header>}
     {!pending&&!error&&<><nav className="rec-issue-directory" aria-label={t('rec.contents')}><Link aria-current={!topic?'page':undefined} to={topicPath('')}>{t('class.all')}</Link>{arranged.current.map(entry=><Link key={entry.post.id} aria-current={String(entry.post.id)===topic?'page':undefined} to={topicPath(String(entry.post.id))}>{entry.post.title}</Link>)}</nav>
       {!!arranged.history.length&&<details className="rec-history-topics" open={selectedHistory||undefined}><summary>{t('rec.history_topics')} ({arranged.history.length})</summary><nav className="rec-history-directory" aria-label={t('rec.history_topics')}>{arranged.history.map(entry=><Link key={entry.post.id} aria-current={String(entry.post.id)===topic?'page':undefined} to={topicPath(String(entry.post.id))}>{entry.post.title}</Link>)}</nav></details>}

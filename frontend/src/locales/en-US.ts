@@ -2,6 +2,7 @@ import type { Dictionary } from './types';
 import experience from './experience.en-US.json';
 
 const messages: Dictionary = {
+    'browse.shortcuts': 'Quick navigation',
     'products.title': 'Product records',
     'products.active': 'Active products',
     'trash.title': 'Product recycle bin',
