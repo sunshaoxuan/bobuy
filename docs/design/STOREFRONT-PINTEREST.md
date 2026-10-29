@@ -7,9 +7,15 @@ interaction. Do not revert to a crowded header or heavy decorative typography.
 ## Home and mobile shortcuts (2026-10-29)
 
 After successful initial loading, the bare home route shows trip finds when the
-current node has a bookable trip. Otherwise replace it with recommendations,
-preserving its query context. Use the existing server bookable-trip result
-(published, delivery date today or later); do not invent another date/status rule.
+current node has an upcoming published trip (delivery date today or later) or
+an IN_PROGRESS trip, including a trip still underway after its delivery date.
+Otherwise replace it with recommendations, preserving query context. The existing
+model has a delivery date and operational status, not a separate start timestamp.
+Stock, sellable-product counts and capacity do not determine display eligibility.
+Completed/settled trips stay in history. The opt-in `includeCurrent=true` public
+trip projection returns only the existing public summary fields. Ordinary trip
+queries, new-booking checks and checkout remain bookable-only; do not turn an
+in-progress browsing context into permission for a new booking.
 An API failure must remain an error rather than being treated as an empty result.
 The explicit `/products` route always opens trip finds, including its empty state.
 Explicit recommendation, item, cart, account and checkout links are never subject

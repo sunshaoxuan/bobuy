@@ -103,6 +103,7 @@ export default function Storefront() {
   const visibleNodes=[...nodes,...(privateNodes.userId===user?.id?privateNodes.ids:[]).filter(id=>!nodes.some(value=>value.id===id)).map(id=>({id,name:t('browse.node_number',{id})}))];
   const [cart, setCart] = useState<Cart>(readCart);
   const [trips, setTrips] = useState<StoreTrip[]>([]);
+  const [activeTrips, setActiveTrips] = useState<StoreTrip[]>([]);
   const [products, setProducts] = useState<StoreProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [browseLoaded, setBrowseLoaded] = useState(false);
@@ -117,11 +118,11 @@ export default function Storefront() {
   async function load() {
     setLoading(true); setBrowseLoaded(false); setError('');
     try {
-      const [nextTrips, nextProducts, recommendationNodes] = await Promise.all([storefrontApi.trips(), storefrontApi.products(), recommendationApi.nodes()]);
-      setTrips(nextTrips); setProducts(nextProducts);
+      const [nextTrips, nextActiveTrips, nextProducts, recommendationNodes] = await Promise.all([storefrontApi.trips(), storefrontApi.activeTrips(), storefrontApi.products(), recommendationApi.nodes()]);
+      setTrips(nextTrips); setActiveTrips(nextActiveTrips); setProducts(nextProducts);
       setBrowseLoaded(true);
       const choices=new Map(recommendationNodes.map(value=>[value.id,value.name]));
-      nextTrips.forEach(value=>choices.set(value.merchantId,value.merchantName));
+      nextActiveTrips.forEach(value=>choices.set(value.merchantId,value.merchantName));
       setNodes([...choices].map(([id,name])=>({id,name})).sort((a,b)=>a.name.localeCompare(b.name)));
       const preferred=nextTrips.find(value=>node===undefined||value.merchantId===node);
       setCart(prior => prior.tripId === null && preferred ? { ...prior, tripId: preferred.id } : prior);
@@ -148,7 +149,8 @@ export default function Storefront() {
   }, []);
   const trip = trips.find(t => t.id === cart.tripId);
   const scopedTrips = trips.filter(value=>node===undefined||value.merchantId===node);
-  const viewTrip = scopedTrips.find(value=>value.id===cart.tripId)??scopedTrips[0];
+  const scopedActiveTrips = activeTrips.filter(value=>node===undefined||value.merchantId===node);
+  const viewTrip = scopedActiveTrips.find(value=>value.id===cart.tripId)??scopedActiveTrips[0];
   const cartEntries = Object.entries(cart.items);
   const quantity = cartEntries.reduce((sum, [, value]) => sum + value, 0);
   const available = products.filter(p => p.merchantId === (node??viewTrip?.merchantId));
@@ -231,7 +233,7 @@ export default function Storefront() {
     <div className="store-header-actions"><LanguageSwitcher /><Link to={scopedPath('/account',location.search)} aria-label={t('store.account')}><UserOutlined /></Link><Badge count={quantity} size="small"><Link to={scopedPath('/cart',location.search)} aria-label={t('store.cart_label',{count:quantity})}><ShoppingCartOutlined /></Link></Badge></div></header>
     <main className="store-main">{error && <Alert type="error" message={error} action={<Button onClick={() => void load()}>{t('store.retry')}</Button>} closable onClose={() => setError('')} />}
       {loading ? <div className="store-loading"><Spin /></div> : <Suspense fallback={<Spin />}><Routes>
-        <Route index element={browseLoaded&&!scopedTrips.length?<Navigate to={'/recommendations'+location.search} replace/>:catalog} /><Route path="products" element={catalog}/><Route path="trips" element={bookable}/><Route path="client/trips" element={<ClientTrips node={node}/>}/><Route path="cart" element={basket} />
+        <Route index element={browseLoaded&&!scopedActiveTrips.length?<Navigate to={'/recommendations'+location.search} replace/>:catalog} /><Route path="products" element={catalog}/><Route path="trips" element={bookable}/><Route path="client/trips" element={<ClientTrips node={node}/>}/><Route path="cart" element={basket} />
         <Route path="checkout" element={<div className="checkout-layout">{receipt ? <section className="order-success"><CheckCircleOutlined /><h1>{t('store.submitted')}</h1><p>{t('store.order_number',{id:receipt.orderId})} · {money(receipt.total)}</p><Tag color="gold">{t('store.pending')}</Tag><div className="action-row"><Link to="/client/orders"><Button type="primary">{t('store.view_order')}</Button></Link><Link to="/"><Button>{t('store.continue')}</Button></Link></div></section> : <>{basket}{quantity > 0 && <section className="checkout-account">{!isAuthenticated ? <AccountForm checkout afterLogin={() => {}} /> : !user?.roles.includes('CUSTOMER') ? <Alert type="warning" message={t('store.customer_only')} action={<Button onClick={() => void logout()}>{t('store.switch_account')}</Button>} /> : <><h2>{t('store.confirm')}</h2><p>{user.name} · {user.email}</p>{!user.emailVerified && <Alert type="info" message={t('store.unverified_hint')} />}<Button type="primary" size="large" block loading={busy} disabled={invalidCart} onClick={() => void checkout()}>{t('store.submit')} · {money(total)}</Button><Link to="/account">{t('store.verify')}</Link></>}</section>}</>}</div>} />
         <Route path="login" element={isAuthenticated ? <Navigate to="/account" replace /> : <AccountForm afterLogin={() => navigate('/account')} />} />
         <Route path="account" element={isAuthenticated ? <section className="account-page"><h1>{t('store.account')}</h1><p>{user?.name}</p><EmailVerification /><div className="account-links"><Link to="/client/orders">{t('store.orders')} <ArrowRightOutlined /></Link><Link to="/client/billing">{t('store.billing')} <ArrowRightOutlined /></Link>{(user?.roles.includes('AGENT') || user?.platformAdmin) && <Link to="/admin">{t('store.admin')} <ArrowRightOutlined /></Link>}<Button icon={<LogoutOutlined />} onClick={() => void logout()}>{t('store.logout')}</Button></div></section> : <AccountForm afterLogin={() => {}} />} />

@@ -1374,6 +1374,7 @@ async function storeGet<T>(path: string): Promise<T> {
 }
 export const storefrontApi = {
     trips: () => storeGet<StoreTrip[]>('/api/storefront/trips'),
+    activeTrips: () => storeGet<StoreTrip[]>('/api/storefront/trips?includeCurrent=true'),
     products: () => storeGet<StoreProduct[]>('/api/storefront/products'),
     customers: () => storeGet<MerchantCustomer[]>('/api/merchant/customers'),
     approve: (id: number) => postJson<boolean, object>(`/api/merchant/customers/${id}/approve`, {}),

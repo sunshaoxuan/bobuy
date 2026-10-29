@@ -20,7 +20,9 @@ public class StorefrontController {
         this.storefront = storefront; this.auth = auth; this.cookies = cookies;
     }
     @GetMapping("/api/storefront/trips")
-    public ApiResponse<List<StorefrontService.PublicTrip>> trips() { return ApiResponse.success(storefront.publicTrips()); }
+    public ApiResponse<List<StorefrontService.PublicTrip>> trips(@RequestParam(defaultValue = "false") boolean includeCurrent) {
+        return ApiResponse.success(storefront.publicTrips(includeCurrent));
+    }
     @GetMapping("/api/storefront/products")
     public ApiResponse<List<StorefrontService.PublicProduct>> products() { return ApiResponse.success(storefront.publicProducts()); }
     @PostMapping("/api/auth/register")

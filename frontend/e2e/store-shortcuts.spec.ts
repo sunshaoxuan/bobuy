@@ -7,7 +7,8 @@ test.use({launchOptions:{executablePath:'C:/Program Files (x86)/Microsoft/Edge/A
 const out=process.env.BOBUY_SHORTCUT_OUTPUT;
 const gallery=[0,1].map(id=>({id:String(id),url:'/shortcut-fixture.svg',label:'Synthetic image '+id}));
 const detail={post:{id:3,title:'Synthetic recommendation issue',published:true,merchantId:1,version:1,publishedAt:'2026-10-29T00:00:00Z'},body:'Local navigation acceptance only',items:[{id:153,name:'Synthetic item',itemNumber:'TEST-NAV-001',gallery,categoryIds:[],description:'Read-only fixture',translations:{}}]};
-for(const mobile of [false,true])for(const hasTrip of [false,true])test(`shortcuts ${mobile?'mobile touch':'desktop'} ${hasTrip?'available trip':'no trips'}`,async({browser})=>{
+for(const mobile of [false,true])for(const state of ['no trips','available trip','in-progress trip'])test(`shortcuts ${mobile?'mobile touch':'desktop'} ${state}`,async({browser})=>{
+ const hasTrip=state==='available trip',hasActive=state!=='no trips';
  const context=await browser.newContext({viewport:mobile?{width:390,height:844}:{width:1440,height:1000},isMobile:mobile,hasTouch:mobile});
  const page=await context.newPage(),writes:string[]=[],errors:string[]=[];
  page.on('pageerror',e=>errors.push(e.message));
@@ -16,8 +17,8 @@ for(const mobile of [false,true])for(const hasTrip of [false,true])test(`shortcu
  await page.route('**/api/**',async route=>{
   const request=route.request(),url=new URL(request.url());if(request.method()!=='GET'){writes.push(request.method()+' '+url.pathname);await route.fulfill({status:405});return;}
   let data:unknown=[];
-  if(url.pathname==='/api/storefront/trips')data=hasTrip?[{id:11,merchantId:1,merchantName:'Synthetic node',deliveryArea:'Test destination',deliveryDate:'2099-11-01'}]:[];
-  if(url.pathname==='/api/storefront/products')data=hasTrip?[{id:'test-product',merchantId:1,name:{'en-US':'Synthetic trip product'},description:{},brand:'Fixture',price:100,images:['/shortcut-fixture.svg'],categoryId:''}]:[];
+  if(url.pathname==='/api/storefront/trips')data=(hasTrip||(hasActive&&url.searchParams.get('includeCurrent')==='true'))?[{id:11,merchantId:1,merchantName:'Synthetic node',deliveryArea:'Test destination',deliveryDate:hasTrip?'2099-11-01':'2026-10-01'}]:[];
+  if(url.pathname==='/api/storefront/products')data=hasActive?[{id:'test-product',merchantId:1,name:{'en-US':'Synthetic trip product'},description:{},brand:'Fixture',price:100,images:['/shortcut-fixture.svg'],categoryId:''}]:[];
   if(url.pathname==='/api/storefront/recommendation-nodes')data=[{id:1,name:'Synthetic node'}];
   if(url.pathname==='/api/storefront/recommendations')data=[detail];
   if(url.pathname==='/api/storefront/recommendations/3')data=detail;
@@ -25,13 +26,13 @@ for(const mobile of [false,true])for(const hasTrip of [false,true])test(`shortcu
  });
  try{
   await page.goto('/?node=1');
-  if(hasTrip){await expect(page.getByRole('heading',{name:'Synthetic trip product'})).toBeVisible();expect(new URL(page.url()).pathname).toBe('/');}
+  if(hasActive){await expect(page.getByRole('heading',{name:'Synthetic trip product'})).toBeVisible();expect(new URL(page.url()).pathname).toBe('/');}
   else {await expect(page).toHaveURL(/\/recommendations\?node=1$/);await expect(page.locator('.rec-pin')).toHaveCount(1);}
   const shortcuts=page.getByRole('navigation',{name:'Quick navigation'});
   if(mobile){
    await expect(shortcuts).toBeVisible();await expect(shortcuts.getByRole('link')).toHaveCount(4);
    for(const link of await shortcuts.getByRole('link').all()){const box=await link.boundingBox();expect(box!.height).toBeGreaterThanOrEqual(44);expect(box!.width).toBeGreaterThanOrEqual(44);}
-   expect((await shortcuts.boundingBox())!.y).toBeGreaterThan(700);await expect(shortcuts.locator('a[aria-current="page"]')).toHaveAttribute('href',hasTrip?'/products?node=1':'/recommendations?node=1');
+   expect((await shortcuts.boundingBox())!.y).toBeGreaterThan(700);await expect(shortcuts.locator('a[aria-current="page"]')).toHaveAttribute('href',hasActive?'/products?node=1':'/recommendations?node=1');
   }else{
    await expect(shortcuts).toBeHidden();await expect(page.locator('.browse-sidebar')).toBeVisible();
    expect(await page.locator('.browse-sidebar .browse-links>a').allTextContents()).toEqual(['Product Picks','Trip finds','Bookable trips','Executed trips','My account']);
@@ -59,7 +60,7 @@ for(const mobile of [false,true])for(const hasTrip of [false,true])test(`shortcu
    await page.evaluate(()=>window.scrollTo(0,0));
   }
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
-  if(out){await mkdir(out,{recursive:true});await page.screenshot({path:path.join(out,`${mobile?'mobile':'desktop'}-${hasTrip?'trip':'no-trip'}.png`),fullPage:false});}
+  if(out){await mkdir(out,{recursive:true});await page.screenshot({path:path.join(out,`${mobile?'mobile':'desktop'}-${state.replaceAll(' ','-')}.png`),fullPage:false});}
   expect(writes).toEqual([]);expect(errors).toEqual([]);
  }finally{await context.close();}
 });

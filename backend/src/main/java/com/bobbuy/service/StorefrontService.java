@@ -44,7 +44,13 @@ public class StorefrontService {
     }
 
     public List<PublicTrip> publicTrips() {
-        return trips.findAll().stream().filter(this::bookable)
+        return publicTrips(false);
+    }
+
+    /** Display context is broader than permission to place a new booking. */
+    public List<PublicTrip> publicTrips(boolean includeCurrent) {
+        return trips.findAll().stream().filter(t -> bookable(t)
+                || (includeCurrent && t.getStatus() == TripStatus.IN_PROGRESS && t.getDeliveryDate() != null))
             .sorted(Comparator.comparing(Trip::getDeliveryDate))
             .map(t -> new PublicTrip(t.getId(), t.getAgentId(),
                 users.findById(t.getAgentId()).map(User::getName).orElse("Bobuy"),

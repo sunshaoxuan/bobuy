@@ -3,19 +3,25 @@ import {MemoryRouter,useLocation,useNavigate} from 'react-router-dom';
 import {I18nProvider} from '../i18n';
 import {CART_KEY} from '../cart';
 import Storefront from './Storefront';
-const mocks=vi.hoisted(()=>({trips:vi.fn(),products:vi.fn(),nodes:vi.fn(),privateTrips:vi.fn(),role:{user:{id:7,name:'Fixture',roles:['CUSTOMER']},isCustomer:true,isAuthenticated:true,logout:vi.fn()}}));
-vi.mock('../api',()=>({api:{customerTrips:mocks.privateTrips},storefrontApi:{trips:mocks.trips,products:mocks.products},recommendationApi:{nodes:mocks.nodes}}));
+const mocks=vi.hoisted(()=>({trips:vi.fn(),activeTrips:vi.fn(),products:vi.fn(),nodes:vi.fn(),privateTrips:vi.fn(),role:{user:{id:7,name:'Fixture',roles:['CUSTOMER']},isCustomer:true,isAuthenticated:true,logout:vi.fn()}}));
+vi.mock('../api',()=>({api:{customerTrips:mocks.privateTrips},storefrontApi:{trips:mocks.trips,activeTrips:mocks.activeTrips,products:mocks.products},recommendationApi:{nodes:mocks.nodes}}));
 vi.mock('../context/UserRoleContext',()=>({useUserRole:()=>mocks.role}));
 vi.mock('./PublicRecommendations',()=>({default:()=> <h1>Recommendations fixture</h1>}));
 vi.mock('antd',async()=>{const actual=await vi.importActual<typeof import('antd')>('antd');return {...actual,Select:({id,value,onChange,options,'aria-label':label}:{id:string;value:number;onChange:(id:number)=>void;options:{value:number;label:string}[];'aria-label':string})=><select id={id} aria-label={label} value={value} onChange={event=>onChange(Number(event.target.value))}>{options.map(option=><option key={option.value} value={option.value}>{option.label}</option>)}</select>};});
 beforeEach(()=>{
  localStorage.clear();localStorage.setItem('bobbuy_locale','en-US');vi.clearAllMocks();mocks.role.user={id:7,name:'Fixture',roles:['CUSTOMER']};
  mocks.trips.mockResolvedValue([{id:11,merchantId:1,merchantName:'Public A',deliveryArea:'A',deliveryDate:'2026-11-01'},{id:22,merchantId:2,merchantName:'Public B',deliveryArea:'B',deliveryDate:'2026-11-02'}]);
+ mocks.activeTrips.mockImplementation(()=>mocks.trips());
  mocks.products.mockResolvedValue([1,2].map(id=>({id:String(id),merchantId:id,name:{'en-US':'Product '+id},description:{},brand:'Fixture',images:['/fixture.png'],price:10,categoryId:''})));
  mocks.nodes.mockResolvedValue([]);mocks.privateTrips.mockResolvedValue([{id:33,agentId:3,status:'COMPLETED',deliveryArea:'Private',deliveryDate:'2026-10-01'}]);
 });
 function LocationProbe(){const location=useLocation(),navigate=useNavigate();return <><output data-testid="route">{location.pathname+location.search}</output><button onClick={()=>navigate(-1)}>History back</button><button onClick={()=>navigate(1)}>History forward</button></>;}
 function startAt(path:string){return render(<I18nProvider><MemoryRouter initialEntries={[path]}><LocationProbe/><Storefront/></MemoryRouter></I18nProvider>);}
+it('retains in-progress trip content even when no new booking is possible',async()=>{
+ mocks.trips.mockResolvedValue([]);mocks.activeTrips.mockResolvedValue([{id:11,merchantId:1,merchantName:'Public A',deliveryArea:'Still underway',deliveryDate:'2026-10-01'}]);
+ startAt('/');await screen.findByRole('heading',{name:'Product 1'});expect(screen.getByTestId('route').textContent).toBe('/');
+ fireEvent.click(screen.getByRole('button',{name:'Add to cart: Product 1'}));await screen.findByRole('group',{name:'Choose a buying trip'});expect(document.querySelectorAll('.journey-picker .trip-choice')).toHaveLength(0);expect(JSON.parse(localStorage.getItem(CART_KEY)!).items).toEqual({});
+});
 it('defaults a successfully loaded empty home to recommendations without trapping explicit trip browsing or history',async()=>{
  mocks.trips.mockResolvedValue([]);startAt('/?node=2');
  await screen.findByRole('heading',{name:'Recommendations fixture'});expect(screen.getByTestId('route')).toHaveTextContent('/recommendations?node=2');
