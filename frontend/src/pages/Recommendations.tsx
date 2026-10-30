@@ -6,6 +6,7 @@ import { recommendationApi as api, type RecommendationDetail, type Recommendatio
 import { FactsForm, OfferInfo, factsError, parseBatch, factFields } from '../components/RecommendationFacts';
 import {RecommendationPreview} from './PublicRecommendations';
 import RecommendationCatalog from '../components/RecommendationCatalog';
+import RecommendationFromProduct from '../components/RecommendationFromProduct';
 import RecommendationLocalization from '../components/RecommendationLocalization';
 import RecommendationGallery from '../components/RecommendationGallery';
 import '../browse.css';
@@ -38,6 +39,7 @@ export default function Recommendations() {
   const [batch, setBatch] = useState('');
   const [preview, setPreview] = useState(false);
   const [classificationPending,setClassificationPending]=useState(false);
+  const [fromProductPending,setFromProductPending]=useState(false);
   const [editingItem, setEditingItem] = useState<number>();
   const [editFacts, setEditFacts] = useState<RecommendationFacts>({name:''});
   const urls = useRef(new Set<string>());
@@ -47,7 +49,7 @@ export default function Recommendations() {
   const published = detail?.post.published;
   const identity = (item: RecommendationDetail['items'][number]) => item.productId || 'recommendation:'+item.id;
   const products = [...new Map(detail?.items.map(item => [identity(item), item])).values()];
-  const pending = queue.some(item => item.status !== 'done') || editingItem !== undefined || !!batch.trim() || classificationPending;
+  const pending = queue.some(item => item.status !== 'done') || editingItem !== undefined || !!batch.trim() || classificationPending || fromProductPending;
   useEffect(() => () => { urls.current.forEach(url => URL.revokeObjectURL(url)); }, []);
   useEffect(() => {
     if (!dirty && !pending) return;
@@ -164,6 +166,7 @@ export default function Recommendations() {
           <div className="rec-upload-actions"><Tooltip title={t(item.status === 'failed' ? 'rec.retry' : 'rec.register')}><Button disabled={busy || item.status === 'done'} icon={item.status === 'failed' ? <ReloadOutlined /> : <UploadOutlined />} aria-label={t(item.status === 'failed' ? 'rec.retry' : 'rec.register')} onClick={() => void upload([item])} /></Tooltip><Tooltip title={t('rec.remove')}><Button disabled={busy} icon={<DeleteOutlined />} aria-label={t('rec.remove')} onClick={() => { URL.revokeObjectURL(item.preview); urls.current.delete(item.preview); setQueue(q => q.filter(value => value.key !== item.key)); setQueuePage(1); }} /></Tooltip></div></div>)}</div>
         {queue.length > PAGE_SIZE && <Pagination size="small" current={queuePage} pageSize={PAGE_SIZE} total={queue.length} showSizeChanger={false} onChange={setQueuePage} />}
       </section>}
+      <RecommendationFromProduct detail={detail} onChange={setDetail} onPendingChange={setFromProductPending}/>
       <RecommendationClassification detail={detail} onChanged={setDetail} onPendingChange={setClassificationPending} />
       <RecommendationCatalog detail={detail} onChange={setDetail}/>
       <RecommendationLocalization detail={detail} onChange={setDetail}/>

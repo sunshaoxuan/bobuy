@@ -2,6 +2,10 @@ import type { Dictionary } from './types';
 import experience from './experience.ja-JP.json';
 
 const messages: Dictionary = {
+    'catalog.from_product': '商品マスターから今号へ追加',
+    'catalog.from_product_hint': '商品情報・翻訳・公式画像を再利用し、今号の参考価格と条件だけを登録します。重複商品を作成せず、販売価格・在庫を変更しません。',
+    'catalog.from_product_review': '同一ITEM・仕様、公式画像一式、今号の割引条件を確認しました。',
+    'catalog.from_product_add': '選択した商品で今号に登録',
     'browse.shortcuts': 'クイックナビゲーション',
     'products.title': '商品マスター管理',
     'products.active': '有効な商品',

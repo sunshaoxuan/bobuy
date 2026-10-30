@@ -2,6 +2,10 @@ import type { Dictionary } from './types';
 import experience from './experience.en-US.json';
 
 const messages: Dictionary = {
+    'catalog.from_product': 'Add from product master',
+    'catalog.from_product_hint': 'Reuse product identity, translations and official gallery. Only this issue’s reference offer is registered; no duplicate product, selling price or stock is created.',
+    'catalog.from_product_review': 'I reviewed the exact ITEM/specification, complete official gallery and this issue’s offer conditions.',
+    'catalog.from_product_add': 'Register this issue with selected product',
     'browse.shortcuts': 'Quick navigation',
     'products.title': 'Product records',
     'products.active': 'Active products',

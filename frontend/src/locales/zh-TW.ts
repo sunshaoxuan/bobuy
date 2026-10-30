@@ -1,6 +1,10 @@
 import type { Dictionary } from './types';
 
 const messages: Dictionary = {
+    'catalog.from_product': '從商品主檔加入本期',
+    'catalog.from_product_hint': '沿用商品身分、多語資料及官方圖集，僅登記本期參考優惠，不重複建檔，不改實際售價或庫存。',
+    'catalog.from_product_review': '已核對相同 ITEM、規格、完整官方圖集及本期優惠條件。',
+    'catalog.from_product_add': '使用所選主檔登記本期',
     'browse.shortcuts': '快捷導覽',
     'products.title': '商品檔案管理',
     'products.active': '使用中商品',

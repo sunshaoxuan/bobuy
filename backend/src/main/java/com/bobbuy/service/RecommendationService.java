@@ -153,6 +153,37 @@ public class RecommendationService {
         return new Upload(detail(post), productCreated, reused || duplicate.isPresent(), changed);
     }
 
+    /** Explicit reviewed selection: reuse a master before registering issue-only offer facts. */
+    @Transactional
+    public Detail fromProduct(Long id,String productId,long productVersion,RecommendationFacts facts,long expectedVersion,boolean reviewed) {
+        lockOwner();var post=owned(id);editable(post);
+        var product=products.lockById(productId).filter(p->owner().equals(p.getMerchantId())&&!p.isDeleted()).orElseThrow(RecommendationService::missing);
+        if(!reviewed||product.getCatalogData()==null||!Objects.equals(product.getRecordVersion(),productVersion))
+            throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.conflict");
+        var item=new RecommendationItem();facts.apply(item);
+        if(!Objects.equals(item.itemNumber,product.getItemNumber())||!item.name.equals(ProductCatalogService.text(product.getName(),"ja-JP")))
+            throw new ApiException(ErrorCode.INVALID_REQUEST,"master.use_profile");
+        item.postId=id;item.productId=productId;
+        ProductCatalogProjection.apply(item,item,product);
+        if(item.gallery.isEmpty())throw new ApiException(ErrorCode.INVALID_REQUEST,"gallery.invalid");
+        String prefix="/api/storefront/recommendation-images/";
+        for(var picture:item.gallery){
+            if(picture.url()==null||!picture.url().startsWith(prefix)||picture.sourceUrl()==null||picture.hash()==null)
+                throw new ApiException(ErrorCode.INVALID_REQUEST,"gallery.invalid");
+            var image=images.findById(picture.url().substring(prefix.length())).filter(p->owner().equals(p.merchantId)&&"PUBLIC".equals(p.accessScope)).orElseThrow(RecommendationService::missing);
+            if(!picture.hash().equals(image.imageHash))throw new ApiException(ErrorCode.INVALID_REQUEST,"gallery.invalid");
+        }
+        item.imageUrl=item.gallery.get(0).url();item.imageHash=item.gallery.get(0).hash();
+        var duplicate=items.findByPostIdOrderById(id).stream().filter(i->productId.equals(i.productId)
+            &&Objects.equals(i.offerStart,item.offerStart)&&Objects.equals(i.offerEnd,item.offerEnd)
+            &&Objects.equals(i.couponStart,item.couponStart)&&Objects.equals(i.couponEnd,item.couponEnd)).findFirst();
+        if(duplicate.isPresent()){
+            if(sameFacts(duplicate.get(),item))return detail(post);
+            throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.conflict");
+        }
+        version(post,expectedVersion);items.saveAndFlush(item);touch(post);return detail(post);
+    }
+
     private static boolean sameFacts(RecommendationItem a, RecommendationItem b) {
         return Objects.equals(a.name,b.name) && Objects.equals(a.itemNumber,b.itemNumber)
             && equalPrice(a.referencePrice,b.referencePrice) && equalPrice(a.originalPrice,b.originalPrice)

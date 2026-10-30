@@ -2,6 +2,10 @@ import type { Dictionary } from './types';
 import experience from './experience.zh-CN.json';
 
 const messages: Dictionary = {
+    'catalog.from_product': '从商品主档加入本期',
+    'catalog.from_product_hint': '复用商品身份、多语资料及官方图集，仅登记本期参考优惠，不重复建档，不改实际售价或库存。',
+    'catalog.from_product_review': '已核对同一 ITEM、规格、完整官方图集及本期优惠条件。',
+    'catalog.from_product_add': '使用所选主档登记本期',
     'browse.shortcuts': '快捷导航',
     'products.title': '商品档案管理',
     'products.active': '在用商品',

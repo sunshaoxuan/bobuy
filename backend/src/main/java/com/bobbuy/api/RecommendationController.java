@@ -31,6 +31,12 @@ public class RecommendationController {
     public record Edit(@NotNull @Size(max = 200) String title, @NotNull @Size(max = 100000) String body, @Min(0) long version) {}
     public record Version(@Min(0) long version) {}
     public record CatalogLink(@NotEmpty @Size(max=500) List<@NotNull Long> itemIds, @Size(max=255) String productId, @Min(0) long version) {}
+    public record FromProduct(@NotBlank @Size(max=255) String productId,@Min(0) long productVersion,
+        @NotNull @Valid RecommendationFacts facts,@Min(0) long version,boolean reviewed) {}
+    @PostMapping("/api/merchant/recommendations/{id}/from-product")
+    public ApiResponse<?> fromProduct(@PathVariable Long id,@Valid @RequestBody FromProduct input){
+        return ApiResponse.success(service.fromProduct(id,input.productId(),input.productVersion(),input.facts(),input.version(),input.reviewed()));
+    }
     @PutMapping("/api/merchant/recommendations/{id}/catalog")
     public ApiResponse<?> catalog(@PathVariable Long id,@Valid @RequestBody CatalogLink input){return ApiResponse.success(service.catalog(id,input.itemIds(),input.productId(),input.version()));}
     @PostMapping(value="/api/merchant/recommendations/{id}/items/{itemId}/gallery",consumes=MediaType.MULTIPART_FORM_DATA_VALUE)

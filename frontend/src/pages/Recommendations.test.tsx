@@ -4,6 +4,7 @@ import { I18nProvider } from '../i18n';
 import Recommendations from './Recommendations';
 vi.mock('../components/RecommendationClassification',()=>({default:()=>null}));
 vi.mock('../components/RecommendationCatalog',()=>({default:()=>null}));
+vi.mock('../components/RecommendationFromProduct',()=>({default:()=>null}));
 vi.mock('../components/RecommendationGallery',()=>({default:()=>null}));
 vi.mock('../components/RecommendationLocalization',()=>({default:()=>null}));
 import PublicRecommendations from './PublicRecommendations';

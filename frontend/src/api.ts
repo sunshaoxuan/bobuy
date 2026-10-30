@@ -159,6 +159,8 @@ export type MobileSupplier = {
 
 export type MobileProductResponse = {
         product: {
+              recordVersion?: number;
+              catalogData?: unknown;
             id: string;
             name: Record<string, string>;
         description?: Record<string, string>;
@@ -1042,6 +1044,7 @@ export const productCatalogApi={
 export type CurrencyDefinition={code:string;symbol:string;fractionDigits:number;name:string;saleEnabled:boolean};
 export const masterDataApi={currencies:()=>storeGet<CurrencyDefinition[]>('/api/merchant/currencies')};
 export const recommendationApi = {
+    fromProduct:(id:number,input:{productId:string;productVersion:number;facts:RecommendationFacts;version:number;reviewed:boolean})=>postJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/from-product',input),
     galleryOrder:(post:number,item:number,orderedIds:string[],version:number)=>putJson<RecommendationDetail,object>(recommendationBase+'/'+post+'/items/'+item+'/gallery',{orderedIds,version}),
     galleryUpload:async(post:number,item:number,file:File,input:{version:number;sourceUrl:string;assetKey:string;label:string;itemNumber?:string|null;verified:boolean})=>{
         const form=new FormData();form.set('file',file);Object.entries(input).forEach(([key,value])=>{if(value!=null)form.set(key,String(value));});

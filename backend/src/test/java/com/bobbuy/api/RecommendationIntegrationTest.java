@@ -95,6 +95,27 @@ class RecommendationIntegrationTest {
         mvc.perform(get("/api/merchant/recommendations")).andExpect(status().isForbidden());
         assertThat(data(mvc.perform(get("/api/merchant/recommendations").header("Authorization","Bearer " + other))).size()).isEqualTo(1);
     }
+    @Test void registersExistingMasterBeforeIssueWithoutDuplicateProductAndRejectsForeignOwner() throws Exception {
+        var source=data(upload(create(admin),admin,"ごま油","00123","2178",image(624))).path("detail");
+        String productId=source.at("/items/0/productId").asText();
+        String imageUrl=source.at("/items/0/imageUrl").asText();
+        var blob=images.findById(imageUrl.substring(imageUrl.lastIndexOf('/')+1)).orElseThrow();
+        var product=products.findById(productId).orElseThrow();
+        product.setMediaGallery(List.of(ProductCatalogService.media(new RecommendationItem.Picture(blob.id,imageUrl,blob.imageHash,"https://www.costco.co.jp/exact-product.jpg","synthetic","瓶",java.time.Instant.now()))));
+        products.saveAndFlush(product);product=products.findById(productId).orElseThrow();
+        var draft=create(admin);long before=products.count(),mediaBefore=images.count();
+        String input=json.writeValueAsString(Map.of("productId",productId,"productVersion",product.getRecordVersion(),"facts",Map.of("name","ごま油","itemNumber","00123","originalPrice",2178,"discountAmount",440,"referencePrice",1738),"version",draft.at("/post/version").asLong(),"reviewed",true));
+        var result=data(mvc.perform(post(path(draft)+"/from-product").header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content(input)));
+        assertThat(result.at("/items/0/productId").asText()).isEqualTo(productId);
+        assertThat(result.at("/items/0/gallery").size()).isEqualTo(1);
+        assertThat(result.at("/items/0/referencePrice").decimalValue()).isEqualByComparingTo("1738");
+        data(mvc.perform(post(path(draft)+"/from-product").header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content(input)));
+        assertThat(items.findByPostIdOrderById(draft.at("/post/id").asLong())).hasSize(1);
+        assertThat(products.count()).isEqualTo(before);assertThat(images.count()).isEqualTo(mediaBefore);
+        mvc.perform(post(path(draft)+"/from-product").header("Authorization","Bearer "+other).contentType(MediaType.APPLICATION_JSON).content(input)).andExpect(status().isNotFound());
+        mvc.perform(post(path(draft)+"/from-product").contentType(MediaType.APPLICATION_JSON).content(input)).andExpect(status().isForbidden());
+        assertThat(products.findById(productId).orElseThrow().getBasePrice()).isZero();
+    }
     @Test void validatesImagesMetadataAndStaleEdits() throws Exception {
         var draft = create(admin);
         upload(draft,admin," ","X","1",image(1)).andExpect(status().isBadRequest());
