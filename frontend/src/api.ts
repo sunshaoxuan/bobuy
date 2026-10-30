@@ -1044,6 +1044,9 @@ export const productCatalogApi={
 export type CurrencyDefinition={code:string;symbol:string;fractionDigits:number;name:string;saleEnabled:boolean};
 export const masterDataApi={currencies:()=>storeGet<CurrencyDefinition[]>('/api/merchant/currencies')};
 export const recommendationApi = {
+    scanProduct:async(file:File)=>{const form=new FormData();form.set('file',file);const response=await authorizedFetch('/api/ai/recommendation-products/scan',{method:'POST',body:form});if(!response.ok)throw new Error(await parseErrorMessage(response));return parseSuccessPayload<{name:string;itemNumber:string;specification:string;brand:string;evidence:string;uncertain:boolean}>(response);},
+    researchProduct:(itemNumber:string,productUrl?:string)=>postJson<{itemNumber:string;name:string;description:string;productUrl:string;images:string[]}[],object>('/api/ai/recommendation-products/research',{itemNumber,productUrl}),
+    intake:async(id:number,input:{requestId:string;facts:RecommendationFacts;specification:string;brand:string;reviewed:boolean;displayUploadedImage:boolean;version:number;officialProductUrl?:string;officialImages:string[];existingProductId?:string;existingProductVersion?:number},file?:File)=>{const form=new FormData();form.set('input',new Blob([JSON.stringify(input)],{type:'application/json'}));if(file)form.set('file',file);const response=await authorizedFetch(recommendationBase+'/'+id+'/product-intake',{method:'POST',body:form});if(!response.ok)throw new Error(await parseErrorMessage(response));return parseSuccessPayload<{productId:string;productVersion:number;created:boolean;detail:RecommendationDetail}>(response);},
     fromProduct:(id:number,input:{productId:string;productVersion:number;facts:RecommendationFacts;version:number;reviewed:boolean})=>postJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/from-product',input),
     galleryOrder:(post:number,item:number,orderedIds:string[],version:number)=>putJson<RecommendationDetail,object>(recommendationBase+'/'+post+'/items/'+item+'/gallery',{orderedIds,version}),
     galleryUpload:async(post:number,item:number,file:File,input:{version:number;sourceUrl:string;assetKey:string;label:string;itemNumber?:string|null;verified:boolean})=>{
@@ -1158,6 +1161,8 @@ export const api = {
             text,
             targetLocale
         }),
+    recommendationWriting: (input:{step:'intent'|'prompt'|'draft';idea:string;brief:string;prompt:string;briefConfirmed:boolean;promptConfirmed:boolean;facts:string[]}) =>
+        postJson<{step:string;text:string;provider:string;model:string},object>('/api/ai/recommendation-writing',input),
     onboardScan: (base64Image: string, sampleId?: string) =>
         postJson<AiOnboardingSuggestion, { base64Image: string; sampleId?: string }>('/api/ai/onboard/scan', { base64Image, sampleId }),
     onboardConfirm: (suggestion: AiOnboardingSuggestion) =>

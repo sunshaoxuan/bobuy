@@ -31,10 +31,13 @@ public class AiSearchService {
     private String masterPassword;
 
     private String decryptedBraveKey;
+    private String initializationStatus="NOT_INITIALIZED";
+    public String initializationStatus(){return initializationStatus;}
 
     @PostConstruct
     public void init() {
         if (braveSalt == null || braveSalt.isBlank() || braveCiphertext == null || braveCiphertext.isBlank()) {
+            initializationStatus="CONFIGURATION_ABSENT";
             log.warn("Brave Search API key configuration is not present. Web research will be disabled.");
             return;
         }
@@ -43,9 +46,11 @@ public class AiSearchService {
             this.decryptedBraveKey = EncryptionUtils.decrypt(
                 masterPassword, braveSalt, braveNonce, braveCiphertext, braveTag, braveIterations
             );
+            initializationStatus="READY";
             log.info("Brave Search API Key successfully decrypted.");
         } catch (Exception e) {
-            log.error("CRITICAL: Failed to decrypt Brave Search API Key. Web research capabilities will be disabled.", e);
+            initializationStatus="DECRYPTION_FAILED_"+e.getClass().getSimpleName();
+            log.error("Search credential initialization failed ({}). Web research is disabled.",e.getClass().getSimpleName());
         }
     }
 
@@ -57,5 +62,27 @@ public class AiSearchService {
         // Implementation for Brave Search API call would go here
         log.info("Executing Brave Search for: {}", query);
         return "Stub results for: " + query;
+    }
+
+    /** Real search only; no stub text and no inferred product/image URLs. */
+    public boolean officialSearchConfigured(){return decryptedBraveKey!=null&&!decryptedBraveKey.isBlank();}
+    public java.util.List<String> officialProductUrls(String item) {
+        if (decryptedBraveKey == null || decryptedBraveKey.isBlank()) return java.util.List.of();
+        try {
+            var uri=org.springframework.web.util.UriComponentsBuilder.fromHttpUrl("https://api.search.brave.com/res/v1/web/search")
+                .queryParam("q","site:www.costco.co.jp \""+item+"\"").queryParam("count",5).build().encode().toUri();
+            var factory=new org.springframework.http.client.SimpleClientHttpRequestFactory();
+            factory.setConnectTimeout(java.time.Duration.ofSeconds(10));factory.setReadTimeout(java.time.Duration.ofSeconds(20));
+            String body=org.springframework.web.client.RestClient.builder().requestFactory(factory).build().get().uri(uri)
+                .header("X-Subscription-Token",decryptedBraveKey).retrieve().body(String.class);
+            var results=new com.fasterxml.jackson.databind.ObjectMapper().readTree(body).path("web").path("results");
+            var urls=new java.util.ArrayList<String>();
+            for(var row:results){String url=row.path("url").asText("");try{OfficialProductResearch.pageUri(url);urls.add(url);}catch(com.bobbuy.api.response.ApiException ignored){}}
+            return java.util.List.copyOf(urls);
+        } catch (Exception error) {
+            if(error instanceof org.springframework.web.client.RestClientResponseException response)throw new OfficialProductResearch.AccessFailure(response.getStatusCode().value(),"https://api.search.brave.com/res/v1/web/search","error.ai.web_search_failed");
+            // Never log authentication headers, provider body, or inferred substitute results.
+            throw new com.bobbuy.api.response.ApiException(com.bobbuy.api.response.ErrorCode.INVALID_REQUEST,"error.ai.web_search_failed");
+        }
     }
 }

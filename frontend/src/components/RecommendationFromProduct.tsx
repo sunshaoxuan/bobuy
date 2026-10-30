@@ -5,10 +5,11 @@ import {localizedContent,useI18n} from '../i18n';
 import {FactsForm,factsError,OfferInfo} from './RecommendationFacts';
 
 type Product={id:string;name:Record<string,string>;itemNumber?:string;recordVersion?:number;catalogData?:unknown};
-export default function RecommendationFromProduct({detail,onChange,onPendingChange}:{detail:RecommendationDetail;onChange:(value:RecommendationDetail)=>void;onPendingChange:(value:boolean)=>void}){
+export default function RecommendationFromProduct({detail,onChange,onPendingChange,suggestedProduct}:{detail:RecommendationDetail;onChange:(value:RecommendationDetail)=>void;onPendingChange:(value:boolean)=>void;suggestedProduct?:string}){
  const {t,locale}=useI18n();const [products,setProducts]=useState<Product[]>([]),[productId,setProductId]=useState<string>(),[facts,setFacts]=useState<RecommendationFacts>({name:''}),[reviewed,setReviewed]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState('');
  useEffect(()=>{let active=true;void api.products().then(rows=>{if(active)setProducts(rows.map(row=>row.product).filter(p=>p.catalogData));}).catch(e=>{if(active)setError(e.message);});return()=>{active=false;};},[detail.post.id]);
  useEffect(()=>{onPendingChange(!!productId);return()=>onPendingChange(false);},[productId,onPendingChange]);
+ useEffect(()=>{const p=products.find(p=>p.id===suggestedProduct);if(p){setProductId(p.id);setFacts({name:p.name['ja-JP']??'',itemNumber:p.itemNumber});setReviewed(false);setError('');}},[suggestedProduct,products]);
  if(detail.post.published)return null;
  const product=products.find(p=>p.id===productId);
  return <section className="rec-catalog-link rec-from-product"><h2>{t('catalog.from_product')}</h2><p>{t('catalog.from_product_hint')}</p>

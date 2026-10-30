@@ -7,6 +7,8 @@ import { FactsForm, OfferInfo, factsError, parseBatch, factFields } from '../com
 import {RecommendationPreview} from './PublicRecommendations';
 import RecommendationCatalog from '../components/RecommendationCatalog';
 import RecommendationFromProduct from '../components/RecommendationFromProduct';
+import RecommendationWritingAssistant from '../components/RecommendationWritingAssistant';
+import RecommendationProductIntake from '../components/RecommendationProductIntake';
 import RecommendationLocalization from '../components/RecommendationLocalization';
 import RecommendationGallery from '../components/RecommendationGallery';
 import '../browse.css';
@@ -40,6 +42,7 @@ export default function Recommendations() {
   const [preview, setPreview] = useState(false);
   const [classificationPending,setClassificationPending]=useState(false);
   const [fromProductPending,setFromProductPending]=useState(false);
+  const [intakePending,setIntakePending]=useState(false),[suggestedProduct,setSuggestedProduct]=useState<string>();
   const [editingItem, setEditingItem] = useState<number>();
   const [editFacts, setEditFacts] = useState<RecommendationFacts>({name:''});
   const urls = useRef(new Set<string>());
@@ -49,7 +52,7 @@ export default function Recommendations() {
   const published = detail?.post.published;
   const identity = (item: RecommendationDetail['items'][number]) => item.productId || 'recommendation:'+item.id;
   const products = [...new Map(detail?.items.map(item => [identity(item), item])).values()];
-  const pending = queue.some(item => item.status !== 'done') || editingItem !== undefined || !!batch.trim() || classificationPending || fromProductPending;
+  const pending = queue.some(item => item.status !== 'done') || editingItem !== undefined || !!batch.trim() || classificationPending || fromProductPending || intakePending;
   useEffect(() => () => { urls.current.forEach(url => URL.revokeObjectURL(url)); }, []);
   useEffect(() => {
     if (!dirty && !pending) return;
@@ -149,7 +152,10 @@ export default function Recommendations() {
         <label htmlFor="rec-body">{t('rec.body')}</label><Input.TextArea id="rec-body" value={body} maxLength={100000} rows={15} disabled={published || busy} onChange={e => setBody(e.target.value)} />
         {published && <div className="rec-public-link"><Link to={'/recommendations/' + id}>{t('rec.view')}</Link><Tooltip title={t('rec.copy')}><Button icon={<CopyOutlined />} aria-label={t('rec.copy')} onClick={() => void run(async () => { await navigator.clipboard.writeText(location.origin + '/recommendations/' + id); setNotice(t('rec.copied')); })} /></Tooltip></div>}
       </section></div>
-      {!published && <section className="rec-uploads"><div className="rec-section-heading"><h2>{t('rec.uploads')}</h2><div className="rec-action-group"><input ref={fileInput} type="file" multiple accept="image/png,image/jpeg" hidden onChange={e => choose(e.target.files)} /><Button icon={<PlusOutlined />} disabled={busy || writing} onClick={() => fileInput.current?.click()}>{t('rec.choose')}</Button><Button icon={<UploadOutlined />} disabled={busy || writing || !pending} onClick={() => void upload(queue)}>{t('rec.register_all')}</Button></div></div>
+      <RecommendationWritingAssistant detail={detail} onApply={value=>setBody(value)} onPendingChange={setWriting}/>
+      <RecommendationProductIntake detail={detail} onChange={setDetail} onPendingChange={setIntakePending} onExisting={setSuggestedProduct}/>
+      <RecommendationFromProduct detail={detail} onChange={setDetail} onPendingChange={setFromProductPending} suggestedProduct={suggestedProduct}/>
+      {!published && <details className="rec-advanced"><summary>{t('rec.ai.technical')}</summary><section className="rec-uploads"><div className="rec-section-heading"><h2>{t('rec.uploads')}</h2><div className="rec-action-group"><input ref={fileInput} type="file" multiple accept="image/png,image/jpeg" hidden onChange={e => choose(e.target.files)} /><Button icon={<PlusOutlined />} disabled={busy || writing} onClick={() => fileInput.current?.click()}>{t('rec.choose')}</Button><Button icon={<UploadOutlined />} disabled={busy || writing || !pending} onClick={() => void upload(queue)}>{t('rec.register_all')}</Button></div></div>
         <p>{t('rec.batch_help')}</p><label htmlFor="rec-batch">{t('rec.batch_label')}</label><Input.TextArea id="rec-batch" rows={5} value={batch} onChange={e => setBatch(e.target.value)} disabled={busy} />
         <Button disabled={busy || !batch.trim()} onClick={() => { try {
           const rows = parseBatch(batch);
@@ -165,12 +171,13 @@ export default function Recommendations() {
           <div className="rec-upload-status" role="status">{item.status === 'done' ? <span className="rec-success"><CheckOutlined /> {item.result}</span> : item.status === 'uploading' ? <Spin size="small" /> : <span className={item.error ? 'rec-error' : ''}>{item.error || t('rec.waiting')}</span>}</div></div>
           <div className="rec-upload-actions"><Tooltip title={t(item.status === 'failed' ? 'rec.retry' : 'rec.register')}><Button disabled={busy || item.status === 'done'} icon={item.status === 'failed' ? <ReloadOutlined /> : <UploadOutlined />} aria-label={t(item.status === 'failed' ? 'rec.retry' : 'rec.register')} onClick={() => void upload([item])} /></Tooltip><Tooltip title={t('rec.remove')}><Button disabled={busy} icon={<DeleteOutlined />} aria-label={t('rec.remove')} onClick={() => { URL.revokeObjectURL(item.preview); urls.current.delete(item.preview); setQueue(q => q.filter(value => value.key !== item.key)); setQueuePage(1); }} /></Tooltip></div></div>)}</div>
         {queue.length > PAGE_SIZE && <Pagination size="small" current={queuePage} pageSize={PAGE_SIZE} total={queue.length} showSizeChanger={false} onChange={setQueuePage} />}
-      </section>}
-      <RecommendationFromProduct detail={detail} onChange={setDetail} onPendingChange={setFromProductPending}/>
+      </section></details>}
+      <details className="rec-advanced"><summary>{t('rec.ai.management')}</summary>
       <RecommendationClassification detail={detail} onChanged={setDetail} onPendingChange={setClassificationPending} />
       <RecommendationCatalog detail={detail} onChange={setDetail}/>
       <RecommendationLocalization detail={detail} onChange={setDetail}/>
       <RecommendationGallery detail={detail} onChange={setDetail}/>
+      </details>
       <Button icon={<EyeOutlined />} onClick={() => setPreview(value => !value)}>{t('rec.draft_preview')}</Button>
       {preview && <RecommendationPreview key={detail.post.id} detail={{...detail,post:{...detail.post,title},body}}/>}
       <section className="rec-linked"><div className="rec-section-heading"><h2>{t('rec.products')} <span>({detail.items.length})</span></h2></div><div className="rec-product-grid">{detail.items.slice((itemPage - 1) * 12, itemPage * 12).map(item => <article key={item.id} className="rec-product"><img src={item.imageUrl} alt={item.name} /><div><h3>{item.name}</h3><small>{item.itemNumber}</small><OfferInfo facts={item} />

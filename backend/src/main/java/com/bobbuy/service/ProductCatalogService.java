@@ -79,7 +79,8 @@ public class ProductCatalogService {
   taxonomy.validate(value.categoryIds(),value.supplierId(),false);var urls=new HashSet<String>();
   for(var picture:value.gallery()){
    if(picture==null||picture.getType()!=MediaType.IMAGE||!urls.add(picture.getUrl()))throw invalid("gallery.invalid");
-   try{var uri=java.net.URI.create(picture.getSourceUrl());if(!"https".equals(uri.getScheme())||uri.getHost()==null||uri.getUserInfo()!=null||uri.getRawQuery()!=null||uri.getRawFragment()!=null||picture.getSourceUrl().length()>2048)throw new IllegalArgumentException();}catch(Exception e){throw invalid("master.image_source");}
+   boolean userProvided="USER_PROVIDED".equals(picture.getSourceType())&&picture.getSha256()!=null&&Objects.equals(picture.getSourceUrl(),"urn:bobuy:user-upload:"+picture.getSha256());
+   if(!userProvided)try{var uri=java.net.URI.create(picture.getSourceUrl());if(!"https".equals(uri.getScheme())||uri.getHost()==null||uri.getUserInfo()!=null||uri.getRawQuery()!=null||uri.getRawFragment()!=null||picture.getSourceUrl().length()>2048)throw new IllegalArgumentException();}catch(Exception e){throw invalid("master.image_source");}
    boolean existing=product.getMediaGallery().stream().anyMatch(p->Objects.equals(p.getUrl(),picture.getUrl()));
    if(!existing){String prefix="/api/storefront/recommendation-images/";if(picture.getUrl()==null||!picture.getUrl().startsWith(prefix)||!images.findById(picture.getUrl().substring(prefix.length())).filter(i->owner().equals(i.merchantId)).isPresent())throw invalid("gallery.invalid");}
   }
