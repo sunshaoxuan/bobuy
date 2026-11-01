@@ -1003,7 +1003,9 @@ export type AiOnboardingSuggestion = {
 };
 
 export type RecommendationSummary = { id: number; title: string; published: boolean; version: number; updatedAt: string; publishedAt?: string; publisherName?: string; coverImageUrl?: string; merchantId?:number };
-export type RecommendationFacts = { name: string; itemNumber?: string | null; referencePrice?: number | null; originalPrice?: number | null; discountAmount?: number | null; priceUnit?: string | null; offerStart?: string | null; offerEnd?: string | null; couponStart?: string | null; couponEnd?: string | null; offerNotes?: string | null };
+export type ReferenceOfferContext={supplierKey?:string;channel?:'COSTCO_WAREHOUSE'|'COSTCO_ONLINE';variantKey?:string;sourceMessageKey?:string;sourceUrl?:string;activityStart?:string|null;activityEnd?:string|null;activityApplies?:boolean;windowEvidence?:string;startSearchComplete?:boolean};
+export type ReferenceResolution={state:string;amount:number|null;itemIds:number[];unknownWindows:number};
+export type RecommendationFacts = { name: string; itemNumber?: string | null; referencePrice?: number | null; originalPrice?: number | null; discountAmount?: number | null; priceUnit?: string | null; offerStart?: string | null; offerEnd?: string | null; couponStart?: string | null; couponEnd?: string | null; offerNotes?: string | null;referenceContext?:ReferenceOfferContext|null;referenceQuote?:ReferenceResolution };
 export type RecommendationLabel = {id:string;name:Record<string,string>};
 export type RecommendationText={name:string;specification?:string|null;description?:string|null;offerNotes?:string|null};
 export type LocalizationRow={itemId:number;sourceHash:string;specification?:string|null;description?:string|null;translations:Record<string,RecommendationText>};
@@ -1045,6 +1047,7 @@ export const productCatalogApi={
 export type CurrencyDefinition={code:string;symbol:string;fractionDigits:number;name:string;saleEnabled:boolean};
 export const masterDataApi={currencies:()=>storeGet<CurrencyDefinition[]>('/api/merchant/currencies')};
 export const recommendationApi = {
+    referenceHistory:(post:number,item:number)=>storeGet<{id:number;recordedAt:string;facts:Record<string,unknown>}[]>(recommendationBase+'/'+post+'/items/'+item+'/reference-history'),
     fromProduct:(id:number,input:{productId:string;productVersion:number;facts:RecommendationFacts;version:number;reviewed:boolean})=>postJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/from-product',input),
     galleryOrder:(post:number,item:number,orderedIds:string[],version:number)=>putJson<RecommendationDetail,object>(recommendationBase+'/'+post+'/items/'+item+'/gallery',{orderedIds,version}),
     galleryUpload:async(post:number,item:number,file:File,input:{version:number;sourceUrl:string;assetKey:string;label:string;itemNumber?:string|null;verified:boolean})=>{
@@ -1067,7 +1070,7 @@ export const recommendationApi = {
     upload: async (id: number, file: File, name: string, itemNumber: string, referencePrice: number | null, version: number, facts?: RecommendationFacts) => {
         const body = new FormData();
         body.append('file', file);
-        for (const [key,value] of Object.entries(facts ?? {name,itemNumber,referencePrice})) if (value != null && value !== '') body.append(key,String(value));
+        for (const [key,value] of Object.entries(facts ?? {name,itemNumber,referencePrice})) if (key==='referenceContext'&&value&&typeof value==='object'){for(const [field,entry] of Object.entries(value))if(entry!=null)body.append('referenceContext.'+field,String(entry));}else if(key!=='referenceQuote'&&value!=null&&value!=='')body.append(key,String(value));
         body.append('version', String(version));
         const response = await authorizedFetch(recommendationBase + '/' + id + '/images', { method: 'POST', body });
         if (!response.ok) throw new Error(await parseErrorMessage(response));

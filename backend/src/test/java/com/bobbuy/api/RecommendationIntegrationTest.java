@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(print=org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrint.NONE)
 class RecommendationIntegrationTest {
     @Autowired MockMvc mvc;
     @Autowired ObjectMapper json;
@@ -71,14 +71,17 @@ class RecommendationIntegrationTest {
         var current = first.path("detail"); String productId = current.at("/items/0/productId").asText();
         var retry = data(upload(draft,admin,"Tea","REC-TEA","150.50",image(123)));
         assertThat(retry.at("/detail/items").size()).isEqualTo(1);
-        var changed = data(upload(current,admin,"Tea","REC-TEA","160",image(123)));
-        assertThat(changed.path("imageReused").asBoolean()).isTrue(); assertThat(changed.path("priceUpdated").asBoolean()).isTrue();
-        assertThat(changed.at("/detail/items/0/referencePrice").decimalValue()).isEqualByComparingTo("160");
-        var secondImage = data(upload(changed.path("detail"),admin,"Tea side","REC-TEA","160",image(456)));
-        assertThat(secondImage.at("/detail/items").size()).isEqualTo(2);
-        var secondPost = data(upload(create(admin),admin,"Tea","REC-TEA","160",image(123)));
-        assertThat(secondPost.path("imageReused").asBoolean()).isTrue();
-        assertThat(products.count()).isEqualTo(before+3); assertThat(images.count()).isEqualTo(2);
+        upload(current,admin,"Tea","REC-TEA","160",image(123)).andExpect(status().isBadRequest());
+        long itemId=current.at("/items/0/id").asLong();
+        var changed=data(mvc.perform(put(path(current)+"/items/"+itemId).header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON)
+            .content(json.writeValueAsString(Map.of("version",current.at("/post/version").asLong(),"facts",Map.of("name","Tea","itemNumber","REC-TEA","referencePrice",160))))));
+        var history=data(mvc.perform(get(path(current)+"/items/"+itemId+"/reference-history").header("Authorization","Bearer "+admin)));
+        assertThat(history.size()).isEqualTo(2);assertThat(history.at("/0/facts/referencePrice").decimalValue()).isEqualByComparingTo("150.50");assertThat(history.at("/1/facts/referencePrice").asInt()).isEqualTo(160);
+        mvc.perform(get(path(current)+"/items/"+itemId+"/reference-history").header("Authorization","Bearer "+other)).andExpect(status().isNotFound());
+        mvc.perform(get(path(current)+"/items/"+itemId+"/reference-history")).andExpect(status().isForbidden());
+        var secondImage=data(upload(changed,admin,"Tea side","REC-SIDE","160",image(456)));assertThat(secondImage.at("/detail/items").size()).isEqualTo(2);
+        upload(create(admin),admin,"Tea","REC-TEA","160",image(123)).andExpect(status().isBadRequest());
+        assertThat(products.count()).isEqualTo(before+2);assertThat(images.count()).isEqualTo(2);
         assertThat(products.findById(productId).orElseThrow().getVisibilityStatus()).isEqualTo(ProductVisibility.DRAFTER_ONLY);
         assertThat(products.findById(productId).orElseThrow().getBasePrice()).isZero();
         assertThat(products.findById(productId).orElseThrow().getPriceTiers()).isEmpty();
@@ -111,6 +114,10 @@ class RecommendationIntegrationTest {
         assertThat(result.at("/items/0/referencePrice").decimalValue()).isEqualByComparingTo("1738");
         data(mvc.perform(post(path(draft)+"/from-product").header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content(input)));
         assertThat(items.findByPostIdOrderById(draft.at("/post/id").asLong())).hasSize(1);
+        var next=json.readTree(input);((com.fasterxml.jackson.databind.node.ObjectNode)next).put("version",result.at("/post/version").asLong());
+        ((com.fasterxml.jackson.databind.node.ObjectNode)next.get("facts")).put("offerStart","2026-11-02").put("offerEnd","2026-11-08");
+        var differentWindow=data(mvc.perform(post(path(draft)+"/from-product").header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsBytes(next))));
+        assertThat(differentWindow.path("items").size()).isEqualTo(2);
         assertThat(products.count()).isEqualTo(before);assertThat(images.count()).isEqualTo(mediaBefore);
         mvc.perform(post(path(draft)+"/from-product").header("Authorization","Bearer "+other).contentType(MediaType.APPLICATION_JSON).content(input)).andExpect(status().isNotFound());
         mvc.perform(post(path(draft)+"/from-product").contentType(MediaType.APPLICATION_JSON).content(input)).andExpect(status().isForbidden());
@@ -178,7 +185,7 @@ class RecommendationIntegrationTest {
     }
     @Test void publicFeedGroupsAllImagesAndExcludesDraftsAcrossPages() throws Exception {
         var older = data(upload(create(admin),admin,"Tea","REC-FEED-1","100",image(1))).path("detail");
-        older = data(upload(older,admin,"Tea second photo","REC-FEED-1","100",image(2))).path("detail");
+        older = data(upload(older,admin,"Tea second product","REC-FEED-1-B","100",image(2))).path("detail");
         older = data(publish(data(edit(older,admin,"First issue","First complete body")),"publish"));
         var newer = data(upload(create(admin),admin,"Coffee","REC-FEED-2","200",image(3))).path("detail");
         newer = data(publish(data(edit(newer,admin,"Second issue","Second complete body")),"publish"));

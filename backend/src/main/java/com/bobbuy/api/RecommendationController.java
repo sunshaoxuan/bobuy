@@ -27,6 +27,8 @@ public class RecommendationController {
     private final ProductSaleService currencyService;
     public RecommendationController(RecommendationService service, RecommendationSourceImage sourceImages,MediaBinaryService binaries,ProductSaleService currencyService) { this.service = service; this.sourceImages = sourceImages;this.binaries=binaries;this.currencyService=currencyService; }
     public record ItemEdit(@NotNull @Valid RecommendationFacts facts, @Min(0) long version) {}
+    @GetMapping("/api/merchant/recommendations/{id}/items/{itemId}/reference-history")
+    public ApiResponse<?> referenceHistory(@PathVariable Long id,@PathVariable Long itemId){return ApiResponse.success(service.referenceHistory(id,itemId));}
     public record SourceImage(@NotNull @Valid RecommendationFacts facts, @NotBlank @Size(max=2048) String imageUrl, @Min(0) long version) {}
     public record Edit(@NotNull @Size(max = 200) String title, @NotNull @Size(max = 100000) String body, @Min(0) long version) {}
     public record Version(@Min(0) long version) {}

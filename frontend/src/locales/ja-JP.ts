@@ -2,6 +2,28 @@ import type { Dictionary } from './types';
 import experience from './experience.ja-JP.json';
 
 const messages: Dictionary = {
+    "ref.history": "参考見積の改訂履歴",
+    "ref.history_empty": "改訂スナップショットはありません。既存の出典は保持し、初回確認保存から履歴を記録します。",
+
+    "ref.source_window": "見積の出典とキャンペーン期間",
+    "ref.window_help": "商品別期間を優先。原文で適用が確認できる場合のみ共通期間を継承します。受信日時で推定しません。",
+    "ref.supplierKey": "仕入先識別子",
+    "ref.variantKey": "正確な仕様・バリエーション識別子",
+    "ref.sourceMessageKey": "元メール・キャンペーン識別子",
+    "ref.sourceUrl": "日付の出典リンク",
+    "ref.windowEvidence": "適用期間の原文根拠",
+    "ref.channel": "出典チャネル",
+    "ref.COSTCO_WAREHOUSE": "Costco 倉庫店",
+    "ref.COSTCO_ONLINE": "Costco Online",
+    "ref.activityStart": "共通開始日",
+    "ref.activityEnd": "共通終了日",
+    "ref.applies": "この共通期間が当該商品に適用されると確認済み",
+    "ref.searched": "商品欄・メイン画像・脚注を確認しても開始日根拠なし",
+    "ref.review_start": "開始日を確認中",
+    "ref.inherited": "確認済み共通期間を継承",
+    "ref.current": "現在判明している参考価格（販売価格ではありません）",
+    "ref.conflict": "同期間の価格が矛盾しています。要確認",
+    "ref.unknown": "確定できる有効期間はありません",
     'gallery.format_hint': 'JPEG・PNG・WebP・AVIF、最大8 MiB。WebP/AVIFはブラウザー内でサイズを変えずPNGに変換します。元ファイルは変更しません。',
     'gallery.conversion_failed': 'このブラウザーで画像を読み取れませんでした。JPEGまたはPNGを選択してください。アップロードは行っていません。',
     'catalog.from_product': '商品マスターから今号へ追加',

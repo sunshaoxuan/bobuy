@@ -5,11 +5,15 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "bb_recommendation_item", uniqueConstraints = @UniqueConstraint(columnNames = {"post_id", "product_id", "image_hash"}))
+@Table(name = "bb_recommendation_item", uniqueConstraints = @UniqueConstraint(columnNames = {"post_id", "offer_identity"}))
 public class RecommendationItem {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) public Long id;
     @Column(nullable = false) public Long postId;
     public String productId;
+    @Column(length=64) public String offerIdentity;
+    @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.JSON)
+    @Column(columnDefinition="jsonb") public ReferenceOfferContext referenceContext;
+    @Transient public com.bobbuy.service.ReferenceQuoteService.Resolution referenceQuote;
     @Transient public boolean catalogDriven;
     @Transient public String brand;
     @Transient public String model;

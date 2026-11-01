@@ -17,6 +17,8 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     Optional<Product> lockById(@org.springframework.data.repository.query.Param("id") String id);
     boolean existsByIdAndMerchantId(String id, Long merchantId);
     java.util.List<Product> findAllByMerchantIdAndItemNumber(Long merchantId, String itemNumber);
+    @org.springframework.data.jpa.repository.Query(value="select count(*) from bb_product where merchant_id=:owner and item_number=:code and deleted_at is not null",nativeQuery=true)
+    long deletedCodeCount(@org.springframework.data.repository.query.Param("owner") Long owner,@org.springframework.data.repository.query.Param("code") String code);
     java.util.List<Product> findAllByItemNumber(String itemNumber);
     // Ambiguous source variants require human selection; never pick an arbitrary row.
     default Optional<Product> findByMerchantIdAndItemNumber(Long merchantId, String itemNumber) {

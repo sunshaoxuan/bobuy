@@ -9,6 +9,7 @@ import RecommendationCatalog from '../components/RecommendationCatalog';
 import RecommendationFromProduct from '../components/RecommendationFromProduct';
 import RecommendationLocalization from '../components/RecommendationLocalization';
 import RecommendationGallery from '../components/RecommendationGallery';
+import ReferenceQuoteHistory from '../components/ReferenceQuoteHistory';
 import '../browse.css';
 import RecommendationClassification from '../components/RecommendationClassification';
 import { useI18n } from '../i18n';
@@ -155,7 +156,7 @@ export default function Recommendations() {
           const rows = parseBatch(batch);
           const additions = rows.map(row => { const fileEntry = row.fileName ? queue.find(entry => entry.file?.name === row.fileName && entry.status !== 'done') : undefined;
             if (!row.imageUrl && !fileEntry) throw new Error(t('rec.batch_image')+': '+row.fileName);
-            const facts = Object.fromEntries(factFields.map(key => [key,row[key] ?? null])) as RecommendationFacts;
+            const facts = Object.fromEntries(factFields.map(key => [key,row[key] ?? null])) as unknown as RecommendationFacts;
             return {...fileEntry,key:fileEntry?.key ?? nextKey.current++,preview:fileEntry?.preview ?? row.imageUrl!,imageUrl:row.imageUrl,facts,status:'waiting' as const,error:undefined}; });
           setQueue(current => [...current.filter(entry => !additions.some(value => value.key === entry.key)),...additions]); setQueuePage(1); setBatch(''); setError(''); setNotice(t('rec.batch_ready'));
         } catch(e) { setError(t('rec.batch_invalid')+' '+(e as Error).message.replace(/rec\.[a-z_]+/g,key => t(key))); } }}>{t('rec.batch_preview')}</Button>
@@ -173,9 +174,9 @@ export default function Recommendations() {
       <RecommendationGallery detail={detail} onChange={setDetail}/>
       <Button icon={<EyeOutlined />} onClick={() => setPreview(value => !value)}>{t('rec.draft_preview')}</Button>
       {preview && <RecommendationPreview key={detail.post.id} detail={{...detail,post:{...detail.post,title},body}}/>}
-      <section className="rec-linked"><div className="rec-section-heading"><h2>{t('rec.products')} <span>({detail.items.length})</span></h2></div><div className="rec-product-grid">{detail.items.slice((itemPage - 1) * 12, itemPage * 12).map(item => <article key={item.id} className="rec-product"><img src={item.imageUrl} alt={item.name} /><div><h3>{item.name}</h3><small>{item.itemNumber}</small><OfferInfo facts={item} />
+      <section className="rec-linked"><div className="rec-section-heading"><h2>{t('rec.products')} <span>({detail.items.length})</span></h2></div><div className="rec-product-grid">{detail.items.slice((itemPage - 1) * 12, itemPage * 12).map(item => <article key={item.id} className="rec-product"><img src={item.imageUrl} alt={item.name} /><div><h3>{item.name}</h3><small>{item.itemNumber}</small><OfferInfo facts={item} /><ReferenceQuoteHistory post={id} item={item.id}/>
         {editingItem === item.id && <>{item.catalogDriven&&<Alert type="info" message={t('master.use_profile')}/>}<FactsForm facts={editFacts} onChange={setEditFacts} disabled={busy} identityReadOnly={item.catalogDriven}/><Button loading={busy} onClick={() => void run(async () => { const error = factsError(editFacts); if(error) throw new Error(t(error)); setDetail(await api.editItem(id,item.id,editFacts,detail.post.version)); setEditingItem(undefined); })}>{t('rec.save_item')}</Button><Button onClick={() => setEditingItem(undefined)}>{t('rec.cancel_edit')}</Button></>}
-        </div>{!published && <div><Button aria-label={t('rec.edit_item')+': '+item.name} icon={<EditOutlined />} disabled={busy || writing} onClick={() => {setEditingItem(item.id);setEditFacts(Object.fromEntries(factFields.map(key => [key,({...item,...item.sourceFacts})[key] ?? null])) as RecommendationFacts);}} />
+        </div>{!published && <div><Button aria-label={t('rec.edit_item')+': '+item.name} icon={<EditOutlined />} disabled={busy || writing} onClick={() => {setEditingItem(item.id);setEditFacts({...Object.fromEntries(factFields.map(key => [key,({...item,...item.sourceFacts})[key] ?? null])),referenceContext:item.referenceContext} as RecommendationFacts);}} />
         <Tooltip title={t('rec.unlink')}><Button aria-label={t('rec.unlink')} icon={<DeleteOutlined />} disabled={busy || writing} onClick={() => void run(async () => { const next = await api.remove(id, item.id, detail.post.version); setDetail(next); setSelected(ids => ids.filter(key => next.items.some(value => identity(value) === key))); setItemPage(1); })} /></Tooltip></div>}</article>)}</div>
         {!detail.items.length && <Empty description={t('rec.no_products')} />}{detail.items.length > 12 && <Pagination current={itemPage} pageSize={12} total={detail.items.length} showSizeChanger={false} onChange={setItemPage} />}
       </section>

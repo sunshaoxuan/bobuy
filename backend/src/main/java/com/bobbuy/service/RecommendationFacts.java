@@ -1,6 +1,7 @@
 package com.bobbuy.service;
 
 import jakarta.validation.constraints.*;
+import jakarta.validation.Valid;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,9 +20,11 @@ public record RecommendationFacts(
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate offerEnd,
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate couponStart,
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate couponEnd,
-    @Size(max=2000) String offerNotes
+    @Size(max=2000) String offerNotes,
+    @Valid com.bobbuy.model.ReferenceOfferContext referenceContext
 ) {
     public void apply(RecommendationItem item) {
+        ReferenceOfferWindow.resolve(offerStart,offerEnd,referenceContext);
         if ((offerStart != null && offerEnd != null && offerStart.isAfter(offerEnd))
                 || (couponStart != null && couponEnd != null && couponStart.isAfter(couponEnd))
                 || (originalPrice != null && referencePrice != null && originalPrice.compareTo(referencePrice) < 0))
@@ -30,6 +33,7 @@ public record RecommendationFacts(
         item.originalPrice = originalPrice; item.discountAmount = discountAmount; item.priceUnit = clean(priceUnit);
         item.offerStart = offerStart; item.offerEnd = offerEnd; item.couponStart = couponStart; item.couponEnd = couponEnd;
         item.offerNotes = clean(offerNotes);
+        item.referenceContext = referenceContext;
     }
     private static String clean(String value) { return value == null || value.isBlank() ? null : value.trim(); }
 }

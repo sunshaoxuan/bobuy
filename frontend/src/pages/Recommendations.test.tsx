@@ -3,6 +3,8 @@ import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { I18nProvider } from '../i18n';
 import Recommendations from './Recommendations';
 vi.mock('../components/RecommendationClassification',()=>({default:()=>null}));
+// jsdom selector engine cannot parse Ant Select's generated :has selector.
+vi.mock('antd',async importOriginal=>{const actual=await importOriginal<typeof import('antd')>();return {...actual,Select:({options=[],onChange,value,...props}:any)=><select aria-label={props['aria-label']} value={value??''} onChange={e=>onChange?.(e.target.value)}><option value=""/>{options.map((o:any)=><option key={o.value} value={o.value}>{o.label}</option>)}</select>};});
 vi.mock('../components/RecommendationCatalog',()=>({default:()=>null}));
 vi.mock('../components/RecommendationFromProduct',()=>({default:()=>null}));
 vi.mock('../components/RecommendationGallery',()=>({default:()=>null}));

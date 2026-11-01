@@ -1,6 +1,28 @@
 import type { Dictionary } from './types';
 
 const messages: Dictionary = {
+    "ref.history": "參考報價修訂歷史",
+    "ref.history_empty": "尚無修訂快照；舊來源保留，首次審閱儲存後開始留史。",
+
+    "ref.source_window": "報價來源與活動期間",
+    "ref.window_help": "先核單品期間；僅在原文明確適用時繼承活動期間。不要以收信時間推定日期。",
+    "ref.supplierKey": "供應商識別",
+    "ref.variantKey": "準確規格／變體識別",
+    "ref.sourceMessageKey": "來源郵件／活動識別",
+    "ref.sourceUrl": "日期證據連結",
+    "ref.windowEvidence": "適用期間原文依據",
+    "ref.channel": "來源渠道",
+    "ref.COSTCO_WAREHOUSE": "Costco 倉庫店",
+    "ref.COSTCO_ONLINE": "Costco Online",
+    "ref.activityStart": "活動統一開始日",
+    "ref.activityEnd": "活動統一結束日",
+    "ref.applies": "已核此活動期間明確適用於本商品",
+    "ref.searched": "已查單品、活動主圖及註腳，仍無開始日證據",
+    "ref.review_start": "開始日待核",
+    "ref.inherited": "繼承已核活動期間",
+    "ref.current": "目前已知適用參考價（非售價）",
+    "ref.conflict": "同期間不同價，待核；未選擇報價",
+    "ref.unknown": "暫無可確定的有效期間",
     'gallery.format_hint': '支援 JPEG、PNG、WebP、AVIF，最大 8 MiB。WebP/AVIF 在瀏覽器內保持尺寸轉為 PNG，原檔案不變。',
     'gallery.conversion_failed': '此瀏覽器無法解碼圖片，請選擇 JPEG 或 PNG 版本；未上傳任何內容。',
     'catalog.from_product': '從商品主檔加入本期',

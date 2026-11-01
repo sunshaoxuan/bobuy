@@ -2,6 +2,28 @@ import type { Dictionary } from './types';
 import experience from './experience.en-US.json';
 
 const messages: Dictionary = {
+    "ref.history": "Reference quote revision history",
+    "ref.history_empty": "No snapshots yet. Legacy source facts are retained; reviewed saves start recording revisions.",
+
+    "ref.source_window": "Quote source and campaign window",
+    "ref.window_help": "Prefer item dates. Inherit a campaign window only when the source explicitly applies to this item. Never infer dates from receipt time.",
+    "ref.supplierKey": "Supplier identity",
+    "ref.variantKey": "Exact specification / variant identity",
+    "ref.sourceMessageKey": "Source message / campaign identity",
+    "ref.sourceUrl": "Date evidence URL",
+    "ref.windowEvidence": "Original window applicability evidence",
+    "ref.channel": "Source channel",
+    "ref.COSTCO_WAREHOUSE": "Costco warehouse",
+    "ref.COSTCO_ONLINE": "Costco Online",
+    "ref.activityStart": "Campaign start date",
+    "ref.activityEnd": "Campaign end date",
+    "ref.applies": "I verified this campaign window explicitly applies to this item",
+    "ref.searched": "Item, campaign header and footnotes checked; no start evidence found",
+    "ref.review_start": "Start date needs review",
+    "ref.inherited": "Inherited verified campaign window",
+    "ref.current": "Current known reference offer (not selling price)",
+    "ref.conflict": "Conflicting prices in this window; review required",
+    "ref.unknown": "No definite active window available",
     'gallery.format_hint': 'JPEG, PNG, WebP or AVIF, up to 8 MiB. WebP/AVIF are converted to PNG in this browser without resizing. Original files stay unchanged.',
     'gallery.conversion_failed': 'This browser could not decode the image. Choose a JPEG or PNG version; nothing was uploaded.',
     'catalog.from_product': 'Add from product master',

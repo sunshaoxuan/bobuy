@@ -20,7 +20,7 @@ describe('source offer facts',()=>{
     const view=render(<I18nProvider><OfferInfo today="2026-10-26" facts={{name:'Synthetic',referencePrice:400,originalPrice:500,discountAmount:100,priceUnit:'100g',offerEnd:'2026-10-26',couponEnd:'2026-10-20'}} /></I18nProvider>);
     expect(view.container.textContent).toContain('100g');expect(view.container.textContent).toContain('2026-10-20');
     expect(view.container.querySelector('.ant-tag')).toBeNull();
-    view.rerender(<I18nProvider><OfferInfo today="2026-10-27" facts={{name:'Synthetic',offerEnd:'2026-10-26'}} /></I18nProvider>);
+    view.rerender(<I18nProvider><OfferInfo today="2026-10-27" facts={{name:'Synthetic',offerStart:'2026-10-01',offerEnd:'2026-10-26'}} /></I18nProvider>);
     expect(view.container.querySelector('.ant-tag')).toBeInTheDocument();
   });
 });

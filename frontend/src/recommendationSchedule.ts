@@ -1,14 +1,15 @@
 import {useEffect,useState} from 'react';
 import type {RecommendationDetail,RecommendationFacts} from './api';
+import {resolvedOfferWindow} from './referenceOfferWindow';
 
 export function japanDate(now=new Date()){return new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(now);}
 function validDay(value:string|null|undefined):value is string{return !!value&&/^\d{4}-\d{2}-\d{2}$/.test(value)&&Number.isFinite(Date.parse(value))&&new Date(value).toISOString().slice(0,10)===value;}
 /** Only explicit item offer endings establish expiry. Coupon issuance alone is not redemption expiry. */
 export function itemOfferExpired(item:RecommendationFacts,today:string){
- if(!validDay(today)||!validDay(item.offerEnd)||today<=item.offerEnd)return false;
- if(item.offerStart&&(!validDay(item.offerStart)||item.offerStart>item.offerEnd))return false;
+ const {start,end}=resolvedOfferWindow(item);
+ if(!validDay(today)||!validDay(start)||!validDay(end)||today<=end||start>end)return false;
  // A still open, incomplete or contradictory second period is not evidence that every benefit has ended.
- if(item.couponStart||item.couponEnd){if(!validDay(item.couponEnd)||today<=item.couponEnd)return false;if(item.couponStart&&(!validDay(item.couponStart)||item.couponStart>item.couponEnd))return false;}
+ if(item.couponStart||item.couponEnd){if(!validDay(item.couponStart)||!validDay(item.couponEnd)||today<=item.couponEnd||item.couponStart>item.couponEnd)return false;}
  return true;
 }
 export function issueExpired(issue:RecommendationDetail,today:string){return issue.items.length>0&&issue.items.every(item=>itemOfferExpired(item,today));}

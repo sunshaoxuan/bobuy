@@ -2,6 +2,28 @@ import type { Dictionary } from './types';
 import experience from './experience.zh-CN.json';
 
 const messages: Dictionary = {
+    "ref.history": "参考报价修订历史",
+    "ref.history_empty": "尚无修订快照；旧来源保留，首次审阅保存后开始留史。",
+
+    "ref.source_window": "报价来源与活动窗口",
+    "ref.window_help": "先核单品窗口；仅在原文明确适用时继承活动窗口。不要用收信时间推定日期。",
+    "ref.supplierKey": "供应商标识",
+    "ref.variantKey": "准确规格／变体标识",
+    "ref.sourceMessageKey": "来源邮件／活动标识",
+    "ref.sourceUrl": "日期证据链接",
+    "ref.windowEvidence": "适用窗口原文依据",
+    "ref.channel": "来源渠道",
+    "ref.COSTCO_WAREHOUSE": "Costco 仓库店",
+    "ref.COSTCO_ONLINE": "Costco Online",
+    "ref.activityStart": "活动统一开始日",
+    "ref.activityEnd": "活动统一结束日",
+    "ref.applies": "已核此活动窗口明确适用于本商品",
+    "ref.searched": "已查单品、活动头图及脚注，仍无开始日证据",
+    "ref.review_start": "开始日待核",
+    "ref.inherited": "继承已核活动窗口",
+    "ref.current": "当前已知适用参考价（非售价）",
+    "ref.conflict": "同窗不同价，待核；未选择报价",
+    "ref.unknown": "暂无可确定的有效窗口",
     'gallery.format_hint': '支持 JPEG、PNG、WebP、AVIF，最大 8 MiB。WebP/AVIF 在浏览器内保持尺寸转为 PNG，原文件不变。',
     'gallery.conversion_failed': '此浏览器无法解码图片，请选择 JPEG 或 PNG 版本；未上传任何内容。',
     'catalog.from_product': '从商品主档加入本期',

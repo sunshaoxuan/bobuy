@@ -13,7 +13,7 @@ it('selects master before registration, keeps identity read-only and requires re
  await screen.findByText(/00123 · 芝麻油/);fireEvent.change(screen.getByRole('combobox'),{target:{value:'master'}});
  expect(screen.getByDisplayValue('ごま油')).toBeDisabled();expect(screen.getByDisplayValue('00123')).toBeDisabled();
  const submit=screen.getByRole('button',{name:'使用所选主档登记本期'});expect(submit).toBeDisabled();
- fireEvent.click(screen.getByRole('checkbox'));fireEvent.click(submit);await waitFor(()=>expect(mocks.fromProduct).toHaveBeenCalledWith(4,{productId:'master',productVersion:7,facts:{name:'ごま油',itemNumber:'00123'},version:2,reviewed:true}));
+ fireEvent.click(screen.getByRole('checkbox',{name:'已核对同一 ITEM、规格、完整官方图集及本期优惠条件。'}));fireEvent.click(submit);await waitFor(()=>expect(mocks.fromProduct).toHaveBeenCalledWith(4,{productId:'master',productVersion:7,facts:{name:'ごま油',itemNumber:'00123'},version:2,reviewed:true}));
  await waitFor(()=>expect(onChange).toHaveBeenCalled());expect(pending).toHaveBeenCalledWith(false);expect(view.container.querySelector('input[type=file]')).toBeNull();
 });
 it('does not offer registration for a published issue',()=>{render(<I18nProvider><RecommendationFromProduct detail={{...detail,post:{...detail.post,published:true}}} onChange={vi.fn()} onPendingChange={vi.fn()}/></I18nProvider>);expect(screen.queryByRole('combobox')).toBeNull();});

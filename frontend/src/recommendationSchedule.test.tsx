@@ -1,7 +1,7 @@
 import {act,renderHook} from '@testing-library/react';
 import {arrangeIssues,itemOfferExpired,issueExpired,japanDate,useJapaneseDay} from './recommendationSchedule';
 import type {RecommendationDetail,RecommendationFacts} from './api';
-const fact=(offerEnd?:string|null):RecommendationFacts=>({name:'Synthetic',offerEnd});
+const fact=(offerEnd?:string|null):RecommendationFacts=>({name:'Synthetic',offerStart:offerEnd?'2026-09-01':undefined,offerEnd});
 const issue=(id:number,facts:RecommendationFacts[],publishedAt?:string):RecommendationDetail=>({post:{id,title:'Synthetic '+id,published:true,version:1,updatedAt:'2099-01-01',publishedAt},body:'',items:facts.map((f,index)=>({...f,id:id*10+index,imageUrl:'',productId:'shared-fixture'}))});
 it('orders publication newest first with stable ID fallback without using edits or merging offers',()=>{
  const old=issue(1,[{...fact(),referencePrice:100}],'2026-10-01T00:00:00Z'),fresh=issue(2,[{...fact(),referencePrice:200}],'2026-10-28T00:00:00Z');const input=[old,issue(3,[fact()]),fresh,issue(4,[fact()])];
@@ -19,7 +19,8 @@ it('keeps mixed valid, future or unknown items current and archives only an enti
 it('does not hide an issue while its second period remains open or uncertain',()=>{
  expect(itemOfferExpired({...fact('2026-10-01'),couponEnd:'2026-10-30'},'2026-10-28')).toBe(false);
  expect(itemOfferExpired({...fact('2026-10-01'),couponStart:'2026-09-01'},'2026-10-28')).toBe(false);
- expect(itemOfferExpired({...fact('2026-10-01'),couponEnd:'2026-09-30'},'2026-10-28')).toBe(true);
+ expect(itemOfferExpired({...fact('2026-10-01'),couponEnd:'2026-09-30'},'2026-10-28')).toBe(false);
+ expect(itemOfferExpired({...fact('2026-10-01'),couponStart:'2026-09-01',couponEnd:'2026-09-30'},'2026-10-28')).toBe(true);
 });
 it('uses JST midnight regardless of the browser time zone',()=>{expect(japanDate(new Date('2026-10-28T14:59:59.999Z'))).toBe('2026-10-28');expect(japanDate(new Date('2026-10-28T15:00:00Z'))).toBe('2026-10-29');});
 it('updates an open page at JST midnight and after resume, and releases its timer',()=>{
