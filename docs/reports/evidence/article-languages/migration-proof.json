@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "server": "18.6",
+  "baseCommit": "2ce3aef9f42b481b9a61fe0c4849785f239e1d19",
+  "realFlyway23to24": true,
+  "allLegacyPostColumnsPreserved": true,
+  "legacyLocaleNotInferred": true,
+  "originalAndTranslatedArticleBackupRestore": true,
+  "priorQuoteHistoryRetained": true,
+  "preMigrationBackupRollbackToV23": true,
+  "productionDataUsed": false,
+  "migrationSha256": "5d34b932ba0fadd568bbc376d6041da169246ec1c0255a1b412a46e9266823cc"
+}

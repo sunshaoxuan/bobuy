@@ -10,6 +10,7 @@ import RecommendationFromProduct from '../components/RecommendationFromProduct';
 import RecommendationLocalization from '../components/RecommendationLocalization';
 import RecommendationGallery from '../components/RecommendationGallery';
 import ReferenceQuoteHistory from '../components/ReferenceQuoteHistory';
+import ArticleLanguages from '../components/ArticleLanguages';
 import '../browse.css';
 import RecommendationClassification from '../components/RecommendationClassification';
 import { useI18n } from '../i18n';
@@ -41,6 +42,7 @@ export default function Recommendations() {
   const [preview, setPreview] = useState(false);
   const [classificationPending,setClassificationPending]=useState(false);
   const [fromProductPending,setFromProductPending]=useState(false);
+  const [articlePending,setArticlePending]=useState(false);
   const [editingItem, setEditingItem] = useState<number>();
   const [editFacts, setEditFacts] = useState<RecommendationFacts>({name:''});
   const urls = useRef(new Set<string>());
@@ -50,7 +52,7 @@ export default function Recommendations() {
   const published = detail?.post.published;
   const identity = (item: RecommendationDetail['items'][number]) => item.productId || 'recommendation:'+item.id;
   const products = [...new Map(detail?.items.map(item => [identity(item), item])).values()];
-  const pending = queue.some(item => item.status !== 'done') || editingItem !== undefined || !!batch.trim() || classificationPending || fromProductPending;
+  const pending = queue.some(item => item.status !== 'done') || editingItem !== undefined || !!batch.trim() || classificationPending || fromProductPending||articlePending;
   useEffect(() => () => { urls.current.forEach(url => URL.revokeObjectURL(url)); }, []);
   useEffect(() => {
     if (!dirty && !pending) return;
@@ -142,12 +144,11 @@ export default function Recommendations() {
       <div className="rec-pagination"><Button disabled={!page} icon={<ArrowLeftOutlined />} onClick={() => setPage(page - 1)}>{t('rec.previous')}</Button><span>{page + 1}</span><Button disabled={list.length < 20} onClick={() => setPage(page + 1)}>{t('rec.next')}</Button></div></> : detail && <>
       <div className="rec-actions"><Popconfirm disabled={!dirty && !pending} title={t('rec.leave')} onConfirm={back}><Button aria-label={t('rec.back')} disabled={busy || writing} icon={<ArrowLeftOutlined />} onClick={() => { if (!dirty && !pending) back(); }}>{t('rec.back')}</Button></Popconfirm>
         <div className="rec-action-group">{published ? <><Link to={'/recommendations/' + id} target="_blank"><Button icon={<EyeOutlined />}>{t('rec.view')}</Button></Link><Button icon={<EditOutlined />} disabled={busy} onClick={() => void run(async () => { setDetail(await api.publish(id, detail.post.version, false)); })}>{t('rec.withdraw')}</Button></> : <>
-          <Button icon={<SaveOutlined />} loading={busy} disabled={writing} onClick={() => void run(async () => { await save(); setNotice(t('rec.saved')); })}>{t('rec.save')}</Button>
+          <Button icon={<SaveOutlined />} loading={busy} disabled={writing||articlePending} onClick={() => void run(async () => { await save(); setNotice(t('rec.saved')); })}>{t('rec.save')}</Button>
           <Button type="primary" icon={<SendOutlined />} disabled={busy || writing || pending || !detail.items.length || !title.trim() || !body.trim()} onClick={() => void publish()}>{t('rec.publish')}</Button></>}
         </div></div>
       {detail.post.publishedAt && <div className="rec-publication rec-publication-editor"><span>{t('rec.publisher')}: {detail.post.publisherName}</span><time dateTime={detail.post.publishedAt}>{t('rec.published_date')}: {new Date(detail.post.publishedAt).toLocaleString(locale)}</time></div>}
-      <div className="rec-editor-layout"><section className="rec-article"><h2>{t('rec.article')}</h2><label htmlFor="rec-title">{t('rec.article_title')}</label><Input id="rec-title" value={title} maxLength={200} disabled={published || busy} onChange={e => setTitle(e.target.value)} />
-        <label htmlFor="rec-body">{t('rec.body')}</label><Input.TextArea id="rec-body" value={body} maxLength={100000} rows={15} disabled={published || busy} onChange={e => setBody(e.target.value)} />
+      <div className="rec-editor-layout"><section className="rec-article"><h2>{t('rec.article')}</h2><ArticleLanguages key={detail.post.id} detail={detail} title={title} body={body} sourceDirty={dirty} disabled={published||busy} onTitle={setTitle} onBody={setBody} onChanged={next=>{setDetail(next);setTitle(next.post.title);setBody(next.body);}} onPending={setArticlePending}/>
         {published && <div className="rec-public-link"><Link to={'/recommendations/' + id}>{t('rec.view')}</Link><Tooltip title={t('rec.copy')}><Button icon={<CopyOutlined />} aria-label={t('rec.copy')} onClick={() => void run(async () => { await navigator.clipboard.writeText(location.origin + '/recommendations/' + id); setNotice(t('rec.copied')); })} /></Tooltip></div>}
       </section></div>
       {!published && <section className="rec-uploads"><div className="rec-section-heading"><h2>{t('rec.uploads')}</h2><div className="rec-action-group"><input ref={fileInput} type="file" multiple accept="image/png,image/jpeg" hidden onChange={e => choose(e.target.files)} /><Button icon={<PlusOutlined />} disabled={busy || writing} onClick={() => fileInput.current?.click()}>{t('rec.choose')}</Button><Button icon={<UploadOutlined />} disabled={busy || writing || !pending} onClick={() => void upload(queue)}>{t('rec.register_all')}</Button></div></div>

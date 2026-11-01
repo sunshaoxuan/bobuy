@@ -1002,7 +1002,7 @@ export type AiOnboardingSuggestion = {
     };
 };
 
-export type RecommendationSummary = { id: number; title: string; published: boolean; version: number; updatedAt: string; publishedAt?: string; publisherName?: string; coverImageUrl?: string; merchantId?:number };
+export type RecommendationSummary = { id: number; title: string; published: boolean; version: number; updatedAt: string; publishedAt?: string; publisherName?: string; coverImageUrl?: string; merchantId?:number;articleTitles?:Record<string,string> };
 export type ReferenceOfferContext={supplierKey?:string;channel?:'COSTCO_WAREHOUSE'|'COSTCO_ONLINE';variantKey?:string;sourceMessageKey?:string;sourceUrl?:string;activityStart?:string|null;activityEnd?:string|null;activityApplies?:boolean;windowEvidence?:string;startSearchComplete?:boolean};
 export type ReferenceResolution={state:string;amount:number|null;itemIds:number[];unknownWindows:number};
 export type RecommendationFacts = { name: string; itemNumber?: string | null; referencePrice?: number | null; originalPrice?: number | null; discountAmount?: number | null; priceUnit?: string | null; offerStart?: string | null; offerEnd?: string | null; couponStart?: string | null; couponEnd?: string | null; offerNotes?: string | null;referenceContext?:ReferenceOfferContext|null;referenceQuote?:ReferenceResolution };
@@ -1022,7 +1022,8 @@ export const recommendationTaxonomyApi = {
         : postJson<RecommendationChoice,object>('/api/merchant/recommendation-taxonomy/categories',{name,locale}),
     assign:(id:number,input:RecommendationAssignment)=>putJson<RecommendationDetail,RecommendationAssignment>(recommendationBase+'/'+id+'/classification',input)
 };
-export type RecommendationDetail = { post: RecommendationSummary; body: string; items: RecommendationItem[] };
+export type ArticleText={title:string;body:string;sourceHash:string;reviewedAt:string};
+export type RecommendationDetail = { post: RecommendationSummary; body: string; items: RecommendationItem[];articleSourceLocale?:string|null;articleSourceHash?:string;articleTranslations?:Record<string,ArticleText> };
 const recommendationBase = '/api/merchant/recommendations';
 export type CatalogMedia={url:string;type:string;title:Record<string,string>;visible:boolean;sha256?:string|null;sourceUrl?:string|null;sourceDomain?:string|null;sourceType?:string|null};
 export type CatalogInput={productId:string;version:number;name:Record<string,string>;description:Record<string,string>;itemNumber?:string|null;brand?:string|null;specification:Record<string,string>;model?:string|null;packaging?:string|null;categoryIds:string[];supplierId?:string|null;gallery:CatalogMedia[];translationsReviewed:boolean};
@@ -1047,6 +1048,8 @@ export const productCatalogApi={
 export type CurrencyDefinition={code:string;symbol:string;fractionDigits:number;name:string;saleEnabled:boolean};
 export const masterDataApi={currencies:()=>storeGet<CurrencyDefinition[]>('/api/merchant/currencies')};
 export const recommendationApi = {
+    articleLanguage:(id:number,input:{locale:string;title:string;body:string;sourceHash:string;version:number;reviewed:boolean})=>putJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/article-localizations',input),
+    articleHistory:(id:number)=>storeGet<{id:number;recordedAt:string;facts:{title:string;body:string;sourceLocale:string|null;translations:Record<string,ArticleText>}}[]>(recommendationBase+'/'+id+'/article-history'),
     referenceHistory:(post:number,item:number)=>storeGet<{id:number;recordedAt:string;facts:Record<string,unknown>}[]>(recommendationBase+'/'+post+'/items/'+item+'/reference-history'),
     fromProduct:(id:number,input:{productId:string;productVersion:number;facts:RecommendationFacts;version:number;reviewed:boolean})=>postJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/from-product',input),
     galleryOrder:(post:number,item:number,orderedIds:string[],version:number)=>putJson<RecommendationDetail,object>(recommendationBase+'/'+post+'/items/'+item+'/gallery',{orderedIds,version}),

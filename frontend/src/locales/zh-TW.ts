@@ -1,6 +1,18 @@
 import type { Dictionary } from './types';
 
 const messages: Dictionary = {
+    "article.source_tab": "日文原文",
+    "article.legacy": "舊稿原文語言未確認，以下保留原文。請先在後台核實日文原文，再補各語言譯文。",
+    "article.save_source_first": "請先儲存原文，再審閱譯文。",
+    "article.stale": "原文已變更；舊譯文保留，複核儲存後才對外使用。",
+    "article.manual": "人工編輯與核驗譯文；本功能尚未驗證自動翻譯服務。",
+    "article.confirm_source": "我已核實這是日文原文",
+    "article.review": "我已對照目前原文核驗本語言譯文",
+    "article.save_translation": "儲存本語言譯文",
+    "article.history": "文章修訂歷史",
+    "article.source_fallback": "目前語言的以下欄位缺少已核譯文，正在顯示保留原文。",
+    "article.field_source": "以下欄位缺譯，正在顯示日文原文：{fields}",
+    "article.pending_translations": "請先儲存標有 * 的待存譯文，再修改原文。",
     "ref.history": "參考報價修訂歷史",
     "ref.history_empty": "尚無修訂快照；舊來源保留，首次審閱儲存後開始留史。",
 

@@ -11,6 +11,11 @@ public class RecommendationPost {
     @Column(nullable = false) public Long merchantId;
     @Column(nullable = false, length = 200) public String title = "";
     @Column(nullable = false, columnDefinition = "text") public String body = "";
+    @Column(length=10) public String articleSourceLocale;
+    public record ArticleText(String title,String body,String sourceHash,java.time.Instant reviewedAt) {}
+    @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.JSON)
+    @Column(columnDefinition="jsonb",nullable=false)
+    public java.util.Map<String,ArticleText> articleTranslations=new java.util.HashMap<>();
     @Column(nullable = false) public boolean published;
     @Version public long version;
     @Column(nullable = false) public LocalDateTime createdAt = LocalDateTime.now();

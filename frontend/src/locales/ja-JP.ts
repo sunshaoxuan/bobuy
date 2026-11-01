@@ -2,6 +2,18 @@ import type { Dictionary } from './types';
 import experience from './experience.ja-JP.json';
 
 const messages: Dictionary = {
+    "article.source_tab": "日本語原文",
+    "article.legacy": "旧稿の原文言語は未確認です。原文を保持して表示します。編集画面で日本語原文を確認してから翻訳を追加してください。",
+    "article.save_source_first": "原文を保存してから翻訳を確認してください。",
+    "article.stale": "原文が変更されました。以前の翻訳は保持され、再確認後に公開表示されます。",
+    "article.manual": "翻訳を手動で編集・確認します。この機能の自動翻訳接続は未検証です。",
+    "article.confirm_source": "日本語原文であることを確認しました",
+    "article.review": "現在の原文と照合して翻訳を確認しました",
+    "article.save_translation": "この言語の翻訳を保存",
+    "article.history": "記事の改訂履歴",
+    "article.source_fallback": "この言語の確認済み翻訳がない項目は、保持された原文を表示しています。",
+    "article.field_source": "次の項目は未翻訳のため日本語原文を表示：{fields}",
+    "article.pending_translations": "原文の変更前に * の付いた翻訳を保存してください。",
     "ref.history": "参考見積の改訂履歴",
     "ref.history_empty": "改訂スナップショットはありません。既存の出典は保持し、初回確認保存から履歴を記録します。",
 

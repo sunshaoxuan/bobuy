@@ -64,6 +64,29 @@ class RecommendationIntegrationTest {
         return mvc.perform(post(path(post) + "/" + action).header("Authorization", "Bearer " + admin).contentType(MediaType.APPLICATION_JSON)
             .content("{\"version\":" + post.at("/post/version").asLong() + "}"));
     }
+    ResultActions article(JsonNode draft,String locale,String title,String body,String hash,boolean reviewed){
+        try{return mvc.perform(put(path(draft)+"/article-localizations").header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsString(Map.of("locale",locale,"title",title,"body",body,"sourceHash",hash,"version",draft.at("/post/version").asLong(),"reviewed",reviewed))));}catch(Exception e){throw new RuntimeException(e);}
+    }
+    @Test void articleLanguagesRetainSourcesInvalidateChangedTranslationsAndEnforceOwnership()throws Exception{
+        var draft=data(edit(create(admin),admin,"Japanese source","Original source body"));String hash=draft.path("articleSourceHash").asText();
+        String protectedEdit=json.writeValueAsString(Map.of("locale","zh-CN","title","blocked","body","blocked","sourceHash",hash,"version",draft.at("/post/version").asLong(),"reviewed",true));
+        mvc.perform(put(path(draft)+"/article-localizations").header("Authorization","Bearer "+other).contentType(MediaType.APPLICATION_JSON).content(protectedEdit)).andExpect(status().isNotFound());
+        String customer=tokens.createAccessToken(users.findById(1001L).orElseThrow());mvc.perform(put(path(draft)+"/article-localizations").header("Authorization","Bearer "+customer).contentType(MediaType.APPLICATION_JSON).content(protectedEdit)).andExpect(status().isForbidden());
+        for(String locale:List.of("zh-CN","zh-TW","en-US"))draft=data(article(draft,locale,locale+" title",locale+" body",hash,true));
+        assertThat(draft.path("articleTranslations").size()).isEqualTo(3);assertThat(draft.path("body").asText()).isEqualTo("Original source body");
+        article(draft,"fr-FR","bad","bad",hash,true).andExpect(status().isBadRequest());article(draft,"en-US","bad","bad","wrong-hash",true).andExpect(status().isBadRequest());article(draft,"en-US","bad","bad",hash,false).andExpect(status().isBadRequest());
+        var changed=data(edit(draft,admin,"Japanese source edited","Original source revised"));assertThat(changed.path("articleTranslations").size()).isEqualTo(3);assertThat(changed.path("articleSourceHash").asText()).isNotEqualTo(hash);
+        var withImage=data(upload(changed,admin,"SYNTHETIC source language","SYN-ARTICLE","100",image(991))).path("detail");var published=data(publish(withImage,"publish"));
+        var publicView=data(mvc.perform(get("/api/storefront/recommendations/"+published.at("/post/id").asLong())));assertThat(publicView.path("articleTranslations").size()).isZero();assertThat(publicView.path("body").asText()).isEqualTo("Original source revised");
+        var history=data(mvc.perform(get(path(published)+"/article-history").header("Authorization","Bearer "+admin)));assertThat(history.toString()).contains("Original source body","zh-CN body","Original source revised");
+        mvc.perform(get(path(published)+"/article-history").header("Authorization","Bearer "+other)).andExpect(status().isNotFound());mvc.perform(get(path(published)+"/article-history")).andExpect(status().isForbidden());
+    }
+    @Test void mixedLegacyArticleIsNotInferredOrOverwrittenByTranslation()throws Exception{
+        var draft=data(edit(create(admin),admin,"Mixed legacy title","Legacy mixed source retained"));var row=posts.findById(draft.at("/post/id").asLong()).orElseThrow();row.articleSourceLocale=null;posts.saveAndFlush(row);draft=data(mvc.perform(get(path(draft)).header("Authorization","Bearer "+admin)));
+        article(draft,"zh-CN","translated","translated",draft.path("articleSourceHash").asText(),true).andExpect(status().isBadRequest());
+        var confirmed=data(article(draft,"ja-JP","Reviewed Japanese source","Confirmed original",draft.path("articleSourceHash").asText(),true));assertThat(confirmed.path("articleSourceLocale").asText()).isEqualTo("ja-JP");
+        var history=data(mvc.perform(get(path(confirmed)+"/article-history").header("Authorization","Bearer "+admin)));assertThat(history.toString()).contains("Legacy mixed source retained","Confirmed original");
+    }
     @Test void multipartSourceContextDefaultsUncheckedFlagsAndBindsIsoDates() throws Exception {
         var draft=create(admin);
         var result=data(mvc.perform(multipart(path(draft)+"/images").file(new MockMultipartFile("file","synthetic.png","image/png",image(452)))

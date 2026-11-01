@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "backendCombined": {
+    "execSession": 53796,
+    "cases": 22,
+    "recommendationHttpCases": 16,
+    "masterReuseCases": 6
+  },
+  "finalOwnershipFocused": {
+    "execSession": 76597,
+    "cases": 1,
+    "changedTestOnly": "Added foreign-owner 404 and customer 403 write checks; runtime code unchanged"
+  },
+  "frontendCombined": {
+    "execSession": 11248,
+    "cases": 24
+  },
+  "finalTextHelperAffected": {
+    "execSession": 86188,
+    "cases": 6
+  },
+  "frontendBuild": {
+    "execSession": 18114,
+    "i18nKeys": 1221,
+    "typescriptVite": "PASS"
+  },
+  "corePackage": {
+    "execSession": 84082,
+    "result": "PASS"
+  },
+  "limitations": "Local checks only, no remote CI. Focused Maven run replaces the same class XML/text report; combined run receipt above retains the earlier successful scope."
+}

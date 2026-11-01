@@ -2,6 +2,18 @@ import type { Dictionary } from './types';
 import experience from './experience.en-US.json';
 
 const messages: Dictionary = {
+    "article.source_tab": "Japanese source",
+    "article.legacy": "Legacy source language is unconfirmed; the original is retained below. Verify the Japanese source in the editor before adding translations.",
+    "article.save_source_first": "Save the source before reviewing a translation.",
+    "article.stale": "Source changed. Earlier translations are retained but require review before public use.",
+    "article.manual": "Edit and review manually. Automatic translation has not been verified for this feature.",
+    "article.confirm_source": "I verified this is the Japanese source",
+    "article.review": "I checked this translation against the current source",
+    "article.save_translation": "Save this translation",
+    "article.history": "Article revision history",
+    "article.source_fallback": "The following fields have no reviewed translation for this language; retained source text is shown.",
+    "article.field_source": "Missing translations; Japanese source is shown for: {fields}",
+    "article.pending_translations": "Save translations marked * before changing the source.",
     "ref.history": "Reference quote revision history",
     "ref.history_empty": "No snapshots yet. Legacy source facts are retained; reviewed saves start recording revisions.",
 

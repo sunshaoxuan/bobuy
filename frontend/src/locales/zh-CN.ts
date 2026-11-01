@@ -2,6 +2,18 @@ import type { Dictionary } from './types';
 import experience from './experience.zh-CN.json';
 
 const messages: Dictionary = {
+    "article.source_tab": "日文原文",
+    "article.legacy": "旧稿原文语言未确认，以下保留原文。请先在后台核实日文原文，再补各语言译文。",
+    "article.save_source_first": "请先保存原文，再审阅译文。",
+    "article.stale": "原文已变更；旧译文保留，复核保存后才对外使用。",
+    "article.manual": "人工编辑与核验译文；本功能尚未验证自动翻译服务。",
+    "article.confirm_source": "我已核实这是日文原文",
+    "article.review": "我已对照当前原文核验本语言译文",
+    "article.save_translation": "保存本语言译文",
+    "article.history": "文章修订历史",
+    "article.source_fallback": "当前语言的以下字段缺少已核译文，正在展示保留原文。",
+    "article.field_source": "以下字段缺译，正在展示日文原文：{fields}",
+    "article.pending_translations": "请先保存标有 * 的待保存译文，再修改原文。",
     "ref.history": "参考报价修订历史",
     "ref.history_empty": "尚无修订快照；旧来源保留，首次审阅保存后开始留史。",
 

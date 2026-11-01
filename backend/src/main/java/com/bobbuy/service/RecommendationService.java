@@ -24,18 +24,20 @@ public class RecommendationService {
     private final ProductSaleService sales;
     private final MediaBinaryService binaries;
     private final ReferenceQuoteService referenceQuotes;
+    private final RecommendationArticleService articles;
 
     public RecommendationService(RecommendationPostRepository posts, RecommendationItemRepository items,
             RecommendationImageRepository images, ProductRepository products, UserRepository users,
-            AuditLogService audit, RecommendationTaxonomyService taxonomy, RecommendationCatalogService catalog, ProductSaleService sales,MediaBinaryService binaries,ReferenceQuoteService referenceQuotes) {
+            AuditLogService audit, RecommendationTaxonomyService taxonomy, RecommendationCatalogService catalog, ProductSaleService sales,MediaBinaryService binaries,ReferenceQuoteService referenceQuotes,RecommendationArticleService articles) {
         this.posts = posts; this.items = items; this.images = images; this.products = products;
         this.users = users; this.audit = audit; this.taxonomy = taxonomy; this.catalog = catalog; this.sales=sales;this.binaries=binaries;
         this.referenceQuotes=referenceQuotes;
+        this.articles=articles;
     }
-    public record Summary(Long id, String title, boolean published, long version, LocalDateTime updatedAt, java.time.Instant publishedAt, String publisherName, String coverImageUrl, Long merchantId) {}
-    public record Detail(Summary post, String body, List<RecommendationItem> items) {}
+    public record Summary(Long id, String title, boolean published, long version, LocalDateTime updatedAt, java.time.Instant publishedAt, String publisherName, String coverImageUrl, Long merchantId,java.util.Map<String,String> articleTitles) {}
+    public record Detail(Summary post, String body, List<RecommendationItem> items,String articleSourceLocale,String articleSourceHash,java.util.Map<String,RecommendationPost.ArticleText> articleTranslations) {}
     public record Upload(Detail detail, boolean productCreated, boolean imageReused, boolean priceUpdated) {}
-    private Summary summary(RecommendationPost post, String cover) { return new Summary(post.id, post.title, post.published, post.version, post.updatedAt, post.publishedAt, post.publisherName, cover, post.merchantId); }
+    private Summary summary(RecommendationPost post, String cover) { return new Summary(post.id, post.title, post.published, post.version, post.updatedAt, post.publishedAt, post.publisherName, cover, post.merchantId,articles.titles(post)); }
     public record PublicNode(Long id, String name) {}
     @Transactional(readOnly = true)
     public List<PublicNode> publicNodes() {
@@ -47,7 +49,7 @@ public class RecommendationService {
     private Detail detail(RecommendationPost post,boolean publicView) {
         var linked = taxonomy.display(items.findByPostIdOrderById(post.id),publicView);
         referenceQuotes.decorate(linked,publicView);
-        return new Detail(summary(post, linked.isEmpty()?null:publicView?(linked.get(0).gallery.isEmpty()?null:linked.get(0).gallery.get(0).url()):linked.get(0).imageUrl), post.body, linked);
+        return new Detail(summary(post, linked.isEmpty()?null:publicView?(linked.get(0).gallery.isEmpty()?null:linked.get(0).gallery.get(0).url()):linked.get(0).imageUrl), post.body, linked,post.articleSourceLocale,articles.sourceHash(post),publicView?articles.current(post):java.util.Map.copyOf(post.articleTranslations));
     }
     private Long owner() {
         Long owner = MerchantScope.current();
@@ -87,7 +89,7 @@ public class RecommendationService {
         return selected.stream().map(post -> {
             var linked = taxonomy.display(grouped.getOrDefault(post.id, List.of()),true);
             referenceQuotes.decorate(linked,true);
-            return new Detail(summary(post, linked.isEmpty()||linked.get(0).gallery.isEmpty()?null:linked.get(0).gallery.get(0).url()), post.body, linked);
+            return new Detail(summary(post, linked.isEmpty()||linked.get(0).gallery.isEmpty()?null:linked.get(0).gallery.get(0).url()), post.body, linked,post.articleSourceLocale,articles.sourceHash(post),articles.current(post));
         }).toList();
     }
     @Transactional(readOnly = true)
@@ -98,13 +100,18 @@ public class RecommendationService {
         return detail(post, true);
     }
     @Transactional
-    public Detail create() { var post = new RecommendationPost(); post.merchantId = owner(); return detail(posts.saveAndFlush(post)); }
+    public Detail create() { var post = new RecommendationPost(); post.merchantId = owner();post.articleSourceLocale="ja-JP"; return detail(posts.saveAndFlush(post)); }
 
     @Transactional
     public Detail save(Long id, String title, String body, long expectedVersion) {
         lockOwner(); var post = owned(id); editable(post); version(post, expectedVersion);
-        post.title = title.trim(); post.body = body.trim(); touch(post); return detail(post);
+        articles.snapshot(post);
+        post.title = title.trim(); post.body = body.trim();articles.snapshot(post); touch(post); return detail(post);
     }
+    @Transactional
+    public Detail articleLanguage(Long id,String locale,String title,String body,String sourceHash,long expectedVersion,boolean reviewed){lockOwner();var post=owned(id);editable(post);version(post,expectedVersion);articles.update(post,locale,title,body,sourceHash,reviewed);touch(post);return detail(post);}
+    @Transactional(readOnly=true)
+    public java.util.List<RecommendationArticleRevision> articleHistory(Long id){return articles.history(owned(id));}
     @Transactional
     public Detail publish(Long id, long expectedVersion, boolean publish) {
         lockOwner(); var post = owned(id);

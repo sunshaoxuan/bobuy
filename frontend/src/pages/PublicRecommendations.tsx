@@ -14,6 +14,7 @@ import {RecommendationImageViewer} from '../components/RecommendationImageViewer
 import {RecommendationName} from '../components/RecommendationName';
 import type {RecommendationItem} from '../api';
 import {arrangeIssues,useJapaneseDay} from '../recommendationSchedule';
+import {articleText,articleTitle} from '../recommendationArticle';
 
 type ShoppingProps = {
   query?: string;
@@ -42,9 +43,10 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
   function closeItem(){if(privatePreview)setLocalItem(undefined);else{const next=new URLSearchParams(params);next.delete('item');setParams(next,{replace:true});}}
 
   const grid = useRef<HTMLDivElement>(null);
-  const body = Array.from(detail.body);
+  const article=articleText(detail,locale);
+  const body = Array.from(article.body);
   const truncated = body.length > EXCERPT_LENGTH;
-  const shown = !expanded && truncated ? body.slice(0, EXCERPT_LENGTH).join('').replace(/\s+/g, ' ').trimEnd() + '…' : detail.body;
+  const shown = !expanded && truncated ? body.slice(0, EXCERPT_LENGTH).join('').replace(/\s+/g, ' ').trimEnd() + '…' : article.body;
   const Heading = single ? 'h1' : 'h2';
   useEffect(() => {
     if (!grid.current || typeof ResizeObserver === 'undefined') return;
@@ -57,10 +59,11 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
   return <article className="rec-issue" id={'recommendation-' + detail.post.id} aria-labelledby={'rec-title-' + detail.post.id}>
     <header className="rec-issue-heading">
       {!single && <span className="rec-issue-number">{String(number).padStart(2, '0')}</span>}
-      <div><Heading id={'rec-title-' + detail.post.id}>{single ? detail.post.title : <Link to={'/recommendations?'+new URLSearchParams({...Object.fromEntries(new URLSearchParams(search)),topic:String(detail.post.id)})}>{detail.post.title}</Link>}</Heading>
+      <div><Heading id={'rec-title-' + detail.post.id}>{single ? article.title : <Link to={'/recommendations?'+new URLSearchParams({...Object.fromEntries(new URLSearchParams(search)),topic:String(detail.post.id)})}>{article.title}</Link>}</Heading>
         {(detail.post.publisherName||detail.post.publishedAt)&&<div className="rec-publication">{detail.post.publisherName&&<span><UserOutlined /> {detail.post.publisherName}</span>}{detail.post.publishedAt&&<time dateTime={detail.post.publishedAt}><CalendarOutlined /> {new Date(detail.post.publishedAt).toLocaleDateString(locale)}</time>}</div>}
       </div>
     </header>
+    {(article.missingTitle||article.missingBody)&&<Alert type="info" showIcon message={t(article.sourceKnown?'article.source_fallback':'article.legacy')} description={[article.missingTitle?t('rec.article_title'):'',article.missingBody?t('rec.body'):''].filter(Boolean).join(' · ')}/>}
     <div className="rec-public-body" id={'rec-body-' + detail.post.id}>{shown.split(/\n\s*\n/).filter(Boolean).map((paragraph, index) => <p key={index}>{paragraph}</p>)}</div>
     {truncated && <Button type="text" className="rec-expand" aria-expanded={expanded} aria-controls={'rec-body-' + detail.post.id} icon={expanded ? <UpOutlined /> : <DownOutlined />} onClick={() => setExpanded(value => !value)}>{t(expanded ? 'rec.collapse' : 'rec.read_more')}</Button>}
     <div className="rec-products-heading"><h3>{t('rec.products')} <span>{detail.items.length}</span></h3>{!single && <Link to={'/recommendations/' + detail.post.id+search}>{t('rec.view')} <ArrowRightOutlined /></Link>}</div>
@@ -76,7 +79,7 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
           <button className="product-photo" aria-label={t('store.detail_label', {name:item.name})} onClick={() => openItem(item)}>{item.gallery?.[0]?.url?<img src={item.gallery[0].url} alt={text.name} loading={index < 2 && number === 1 ? 'eager' : 'lazy'} />:<span className="rec-no-product-image">{t('gallery.pending')}</span>}</button>
           <Tooltip title={buyable ? t('store.add_cart') : t('store.unavailable')}><button className="product-add" aria-label={t('store.add_label', {name:item.name})} disabled={!buyable} onClick={() => product && onAdd(product)}><PlusOutlined />{!!(item.productId && quantities[item.productId]) && <span className="product-count">{quantities[item.productId!]}</span>}</button></Tooltip>
           <Tooltip title={t('store.details')}><button className="rec-pin-preview" aria-label={t('store.details') + ': ' + text.name} onClick={() => openItem(item)}><ExpandOutlined /></button></Tooltip>
-          <div className="product-body"><button className="product-name" onClick={()=>openItem(item)}><h3 title={text.name}><RecommendationName text={text}/></h3></button>{text.specification&&<p className="rec-compact-spec">{text.specification}</p>}{text.missing&&<small>{t('translation.fallback')}</small>}</div>
+          <div className="product-body"><button className="product-name" onClick={()=>openItem(item)}><h3 title={text.name}><RecommendationName text={text}/></h3></button>{text.specification&&<p className="rec-compact-spec">{text.specification}</p>}{text.missing&&<small>{t('article.field_source',{fields:text.sourceFields.map(key=>t(key==='description'?'master.descriptions':key==='specification'?'master.specifications':'rec.fact.'+key)).join(' · ')})}</small>}</div>
         </div>
         <small className="rec-pin-code">{t('rec.code')}: {item.itemNumber || t('rec.not_stated')}</small>
         {!!item.categories?.length&&<div className="rec-item-categories">{item.categories.map(category=><span key={category.id}>{localizedContent(category.name,locale)}</span>)}</div>}
@@ -97,7 +100,7 @@ function RecommendationProductDetail({item,product,onClose,onAdd,canBuy}:{item?:
  if(!item)return null;const text=recommendationText(item,locale),gallery=item.gallery??[];
  return <Drawer className="rec-product-detail" title={t('store.details')} width="min(100vw,760px)" open={!!item} onClose={onClose}>
   <RecommendationImageViewer key={item.id} pictures={gallery} name={text.name}/>
-  <h1><RecommendationName text={text}/></h1><p>{t('rec.code')}: {item.itemNumber||t('rec.not_stated')}</p>{text.missing&&<Alert type="info" message={t('translation.fallback')}/>}
+  <h1><RecommendationName text={text}/></h1><p>{t('rec.code')}: {item.itemNumber||t('rec.not_stated')}</p>{text.missing&&<Alert type="info" message={t('article.field_source',{fields:text.sourceFields.map(key=>t(key==='description'?'master.descriptions':key==='specification'?'master.specifications':'rec.fact.'+key)).join(' · ')})}/>}
   {text.specification&&<p className="rec-detail-spec">{text.specification}</p>}
   {product&&<SellingPrice product={product}/>}
   <OfferInfo facts={{...item,offerNotes:text.offerNotes}}/>
@@ -175,8 +178,8 @@ export default function PublicRecommendations(props: ShoppingProps) {
   return <section className="recommendations rec-public">
     <Link className="rec-back" to={id ? topicPath('') : scopedPath('/products', '?'+params.toString())}><ArrowLeftOutlined /> {t(id ? 'rec.title' : 'store.catalog')}</Link>
     {!id && <header className="rec-feed-heading"><h1>{t('rec.title')}</h1></header>}
-    {!pending&&!error&&<><nav className="rec-issue-directory" aria-label={t('rec.contents')}><Link aria-current={!topic?'page':undefined} to={topicPath('')}>{t('class.all')}</Link>{arranged.current.map(entry=><Link key={entry.post.id} aria-current={String(entry.post.id)===topic?'page':undefined} to={topicPath(String(entry.post.id))}>{entry.post.title}</Link>)}</nav>
-      {!!arranged.history.length&&<details className="rec-history-topics" open={selectedHistory||undefined}><summary>{t('rec.history_topics')} ({arranged.history.length})</summary><nav className="rec-history-directory" aria-label={t('rec.history_topics')}>{arranged.history.map(entry=><Link key={entry.post.id} aria-current={String(entry.post.id)===topic?'page':undefined} to={topicPath(String(entry.post.id))}>{entry.post.title}</Link>)}</nav></details>}
+    {!pending&&!error&&<><nav className="rec-issue-directory" aria-label={t('rec.contents')}><Link aria-current={!topic?'page':undefined} to={topicPath('')}>{t('class.all')}</Link>{arranged.current.map(entry=><Link key={entry.post.id} aria-current={String(entry.post.id)===topic?'page':undefined} to={topicPath(String(entry.post.id))}>{articleTitle(entry.post,locale)}</Link>)}</nav>
+      {!!arranged.history.length&&<details className="rec-history-topics" open={selectedHistory||undefined}><summary>{t('rec.history_topics')} ({arranged.history.length})</summary><nav className="rec-history-directory" aria-label={t('rec.history_topics')}>{arranged.history.map(entry=><Link key={entry.post.id} aria-current={String(entry.post.id)===topic?'page':undefined} to={topicPath(String(entry.post.id))}>{articleTitle(entry.post,locale)}</Link>)}</nav></details>}
       <CategoryFilters posts={scope} category={activeCategory} onChoose={choose}/></>}
     {pending ? <div className="rec-loading"><Spin /></div> : error ? <Alert type="error" message={error} /> : <>
       {selectedHistory&&<p className="rec-history-note">{t('rec.past_issue')}</p>}

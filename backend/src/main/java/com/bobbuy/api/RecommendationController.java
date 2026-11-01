@@ -32,6 +32,11 @@ public class RecommendationController {
     public record SourceImage(@NotNull @Valid RecommendationFacts facts, @NotBlank @Size(max=2048) String imageUrl, @Min(0) long version) {}
     public record Edit(@NotNull @Size(max = 200) String title, @NotNull @Size(max = 100000) String body, @Min(0) long version) {}
     public record Version(@Min(0) long version) {}
+    public record ArticleLanguage(@NotBlank @Size(max=10) String locale,@NotNull @Size(max=200) String title,@NotNull @Size(max=100000) String body,@NotBlank @Size(max=64) String sourceHash,@Min(0) long version,boolean reviewed) {}
+    @PutMapping("/api/merchant/recommendations/{id}/article-localizations")
+    public ApiResponse<?> articleLanguage(@PathVariable Long id,@Valid @RequestBody ArticleLanguage input){return ApiResponse.success(service.articleLanguage(id,input.locale(),input.title(),input.body(),input.sourceHash(),input.version(),input.reviewed()));}
+    @GetMapping("/api/merchant/recommendations/{id}/article-history")
+    public ApiResponse<?> articleHistory(@PathVariable Long id){return ApiResponse.success(service.articleHistory(id));}
     public record CatalogLink(@NotEmpty @Size(max=500) List<@NotNull Long> itemIds, @Size(max=255) String productId, @Min(0) long version) {}
     public record FromProduct(@NotBlank @Size(max=255) String productId,@Min(0) long productVersion,
         @NotNull @Valid RecommendationFacts facts,@Min(0) long version,boolean reviewed) {}
