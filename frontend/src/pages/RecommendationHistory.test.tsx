@@ -5,7 +5,7 @@ import {I18nProvider} from '../i18n';
 import type {RecommendationDetail} from '../api';
 const mocks=vi.hoisted(()=>({feed:vi.fn()}));
 vi.mock('../api',()=>({recommendationApi:mocks,storefrontApi:{products:vi.fn().mockResolvedValue([])}}));
-const old:RecommendationDetail={post:{id:1,title:'Past fixture',published:true,version:1,updatedAt:'',publishedAt:'2026-10-01T00:00:00Z'},body:'',items:[{id:1,name:'Past item',imageUrl:'',offerEnd:'2026-10-01'}]};
+const old:RecommendationDetail={post:{id:1,title:'Past fixture',published:true,version:1,updatedAt:'',publishedAt:'2026-10-01T00:00:00Z'},body:'',items:[{id:1,name:'Past item',imageUrl:'',offerStart:'2026-09-28',offerEnd:'2026-10-01'}]};
 const mixed:RecommendationDetail={...old,post:{...old.post,id:2,title:'Mixed fixture',publishedAt:'2026-10-20T00:00:00Z'},items:[{...old.items[0],id:2,categoryIds:['a'],categories:[{id:'a',name:{'en-US':'A'}}]},{id:3,name:'Unknown item',imageUrl:'',categoryIds:['b'],categories:[{id:'b',name:{'en-US':'B'}}]}]};
 const fresh:RecommendationDetail={...old,post:{...old.post,id:3,title:'Newest fixture',publishedAt:'2026-10-28T00:00:00Z'},items:[{id:4,name:'New item',imageUrl:''}]};
 function open(path='/recommendations'){return render(<I18nProvider><MemoryRouter initialEntries={[path]}><PublicRecommendations products={[]} quantities={{}} onDetail={()=>{}} onAdd={()=>{}} canBuy={()=>false}/></MemoryRouter></I18nProvider>);}
@@ -18,4 +18,10 @@ it('keeps newest and mixed issues prominent while preserving collapsed historica
 });
 it('does not classify a mixed issue as expired after selecting only its expired-item category',async()=>{
  const view=open('/recommendations?topic=2&category=a');await screen.findByRole('heading',{name:'Mixed fixture'});expect(view.container.querySelector('.rec-history-note')).toBeNull();expect(screen.getByRole('button',{name:'A (1)'})).toHaveAttribute('aria-pressed','true');expect(screen.getByRole('button',{name:'B (1)'})).toBeVisible();expect(view.container.querySelectorAll('.rec-pin')).toHaveLength(1);
+});
+it('keeps an end-only source prominent until its start is established',async()=>{
+ mocks.feed.mockResolvedValue([{...old,items:[{...old.items[0],offerStart:null}]}]);
+ const view=open();await screen.findByRole('heading',{name:'Past fixture'});
+ expect([...view.container.querySelectorAll('.rec-issue-directory a')].map(a=>a.textContent)).toEqual(['All','Past fixture']);
+ expect(view.container.querySelector('.rec-history-topics')).toBeNull();expect(view.container.querySelector('.rec-history-content')).toBeNull();
 });

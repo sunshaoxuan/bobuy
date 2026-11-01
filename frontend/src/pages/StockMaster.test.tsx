@@ -66,6 +66,10 @@ vi.mock('../api', () => ({
 
 import StockMaster from './StockMaster';
 
+// Top-level cases must have the same isolation as the grouped cases. A timed
+// out async body must never later call cleanup() on the next case's mounted UI.
+afterEach(()=>{message.destroy();vi.restoreAllMocks();window.localStorage.clear();});
+
 it('waits for persistence and keeps the drawer and entered values when saving fails',async()=>{
  localStorage.setItem('bobbuy_locale','en-US');setMatchMedia(false);
  const success=vi.spyOn(message,'success');success.mockClear();
@@ -84,8 +88,9 @@ it('waits for persistence and keeps the drawer and entered values when saving fa
  expect(within(drawer).getByDisplayValue('SYNTHETIC-RETRY')).toBeInTheDocument();expect(success).not.toHaveBeenCalled();
  fireEvent.click(within(drawer).getByRole('button',{name:'Save & Close'}));
  await waitFor(()=>expect(screen.queryByRole('dialog')).not.toBeInTheDocument());expect(success).toHaveBeenCalledTimes(1);
- success.mockRestore();cleanup();localStorage.clear();
-});
+ // Two persistence attempts plus Drawer close animation can exceed five seconds
+ // under the hosted four-worker gate. Keep every state/assertion, with a bound.
+},15000);
 
 it('uses the real uppercase IMAGE gallery in embedded browsing and retains editable management',async()=>{
  setMatchMedia(false);
@@ -95,7 +100,7 @@ it('uses the real uppercase IMAGE gallery in embedded browsing and retains edita
   render(<I18nProvider><StockMaster embedded/></I18nProvider>);
   const image=await screen.findByRole('img',{name:'官方图片商品'});expect(image).toHaveAttribute('src','/official-synthetic.png');
   fireEvent.click(screen.getByText('紧凑管理',{exact:true}));await screen.findByDisplayValue('000123');
- }finally{spy.mockRestore();cleanup();}
+ }finally{spy.mockRestore();}
 });
 
 const MOBILE_VIEWPORT_WIDTH = 375;
