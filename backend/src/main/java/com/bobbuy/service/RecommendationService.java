@@ -112,7 +112,6 @@ public class RecommendationService {
         version(post, expectedVersion);
         if (publish && (post.title.isBlank() || post.body.isBlank() || items.findByPostIdOrderById(id).isEmpty()))
             throw new ApiException(ErrorCode.INVALID_REQUEST, "error.recommendation.incomplete");
-        post.published = publish;
         if (publish) {
             items.findByPostIdOrderById(id).forEach(item->referenceQuotes.snapshot(item,owner()));
             var publisher = users.findById(owner()).orElseThrow(RecommendationService::missing);
@@ -120,6 +119,9 @@ public class RecommendationService {
             post.publisherId = publisher.getId();
             post.publisherName = publisher.getName();
         }
+        // Queries/snapshot flushes above must not expose a partially published row
+        // to PostgreSQL's publication metadata constraint.
+        post.published = publish;
         touch(post);
         audit.logStatusChange("RecommendationPost", id, publish ? "DRAFT" : "PUBLISHED", publish ? "PUBLISHED" : "DRAFT", owner());
         return detail(post);

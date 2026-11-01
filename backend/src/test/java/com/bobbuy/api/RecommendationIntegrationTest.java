@@ -64,6 +64,18 @@ class RecommendationIntegrationTest {
         return mvc.perform(post(path(post) + "/" + action).header("Authorization", "Bearer " + admin).contentType(MediaType.APPLICATION_JSON)
             .content("{\"version\":" + post.at("/post/version").asLong() + "}"));
     }
+    @Test void multipartSourceContextDefaultsUncheckedFlagsAndBindsIsoDates() throws Exception {
+        var draft=create(admin);
+        var result=data(mvc.perform(multipart(path(draft)+"/images").file(new MockMultipartFile("file","synthetic.png","image/png",image(452)))
+            .header("Authorization","Bearer "+admin).param("name","Synthetic source binding").param("itemNumber","SYN-BINDING")
+            .param("referenceContext.supplierKey","SYNTHETIC").param("referenceContext.channel","COSTCO_WAREHOUSE")
+            .param("referenceContext.activityStart","2026-11-01").param("referenceContext.startSearchComplete","true")
+            .param("version",draft.at("/post/version").asText())));
+        assertThat(result.at("/detail/items/0/referenceContext/activityApplies").asBoolean()).isFalse();
+        assertThat(result.at("/detail/items/0/referenceContext/startSearchComplete").asBoolean()).isTrue();
+        assertThat(result.at("/detail/items/0/referenceContext/activityStart").asText()).isEqualTo("2026-11-01");
+        assertThat(result.at("/detail/items/0/offerStart").isNull()).isTrue();
+    }
     @Test void createsReusesDeduplicatesUpdatesAndRetriesWithoutDuplicateProducts() throws Exception {
         var draft = create(admin); long before = products.count();
         var first = data(upload(draft,admin,"Tea","REC-TEA","150.50",image(123)));
