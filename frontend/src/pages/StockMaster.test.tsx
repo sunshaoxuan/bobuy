@@ -1,4 +1,4 @@
-import { cleanup, render, screen, fireEvent, waitFor, waitForElementToBeRemoved, within } from '@testing-library/react';
+import { act, cleanup, render, screen, fireEvent, waitFor, waitForElementToBeRemoved, within } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { I18nProvider } from '../i18n';
 import React from 'react';
@@ -80,13 +80,16 @@ it('waits for persistence and keeps the drawer and entered values when saving fa
  fireEvent.click(screen.getAllByRole('button').find(button=>button.querySelector('.anticon-edit'))!);
  const drawer=screen.getByRole('dialog');
  const sku=within(drawer).getByDisplayValue('SKU-20934');fireEvent.change(sku,{target:{value:'SYNTHETIC-RETRY'}});
- fireEvent.click(within(drawer).getByRole('button',{name:'Save & Close'}));
+ const saveButton=within(drawer).getByRole('button',{name:'Save & Close'});
+ fireEvent.click(saveButton);
  await waitFor(()=>expect(reject).toBeTypeOf('function'));
  expect(screen.getByRole('dialog')).toBeInTheDocument();expect(success).not.toHaveBeenCalled();
- reject(new Error('Synthetic rejected save'));
- await waitFor(()=>expect(within(drawer).getByRole('button',{name:'Save & Close'})).not.toHaveClass('ant-btn-loading'));
+ await act(async()=>{reject(new Error('Synthetic rejected save'));});
+ // Ant's loading icon changes the accessible name while pending. Observe the
+ // original control instead of re-querying a temporarily different name.
+ await waitFor(()=>expect(saveButton).not.toHaveClass('ant-btn-loading'),{timeout:5000});
  expect(within(drawer).getByDisplayValue('SYNTHETIC-RETRY')).toBeInTheDocument();expect(success).not.toHaveBeenCalled();
- fireEvent.click(within(drawer).getByRole('button',{name:'Save & Close'}));
+ fireEvent.click(saveButton);
  await waitFor(()=>expect(screen.queryByRole('dialog')).not.toBeInTheDocument());expect(success).toHaveBeenCalledTimes(1);
  // Two persistence attempts plus Drawer close animation can exceed five seconds
  // under the hosted four-worker gate. Keep every state/assertion, with a bound.
