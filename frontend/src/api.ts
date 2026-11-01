@@ -1,4 +1,5 @@
 import { message } from 'antd';
+import { prepareImageUpload } from './imageUpload';
 import {
     clearAuthSession,
     getStoredAccessToken,
@@ -1039,7 +1040,7 @@ export const productCatalogApi={
  proposals:()=>storeGet<CatalogProposal[]>('/api/merchant/product-catalog'),
  preview:(rows:CatalogInput[])=>postJson<CatalogProposal[],object>('/api/merchant/product-catalog/preview',{rows,reviewed:false}),
  save:(rows:CatalogInput[])=>putJson<{value:CatalogInput;canonical:boolean;sourceItemIds:number[]}[],object>('/api/merchant/product-catalog',{rows,reviewed:true}),
- upload:async(id:string,file:File,sourceUrl:string,label:string)=>{const form=new FormData();form.set('file',file);form.set('sourceUrl',sourceUrl);form.set('label',label);form.set('verified','true');const response=await authorizedFetch('/api/merchant/product-catalog/'+encodeURIComponent(id)+'/images',{method:'POST',body:form});if(!response.ok)throw new Error(await parseErrorMessage(response));return parseSuccessPayload<CatalogMedia>(response);}
+ upload:async(id:string,file:File,sourceUrl:string,label:string)=>{const prepared=await prepareImageUpload(file);const form=new FormData();form.set('file',prepared);form.set('sourceUrl',sourceUrl);form.set('label',label);form.set('verified','true');const response=await authorizedFetch('/api/merchant/product-catalog/'+encodeURIComponent(id)+'/images',{method:'POST',body:form});if(!response.ok)throw new Error(await parseErrorMessage(response));return parseSuccessPayload<CatalogMedia>(response);}
 };
 export type CurrencyDefinition={code:string;symbol:string;fractionDigits:number;name:string;saleEnabled:boolean};
 export const masterDataApi={currencies:()=>storeGet<CurrencyDefinition[]>('/api/merchant/currencies')};
@@ -1161,7 +1162,10 @@ export const api = {
     onboardScan: (base64Image: string, sampleId?: string) =>
         postJson<AiOnboardingSuggestion, { base64Image: string; sampleId?: string }>('/api/ai/onboard/scan', { base64Image, sampleId }),
     onboardConfirm: (suggestion: AiOnboardingSuggestion) =>
-        postJson<MobileProductResponse, AiOnboardingSuggestion>('/api/ai/onboard/confirm', suggestion),
+        postJson<MobileProductResponse, AiOnboardingSuggestion>('/api/ai/onboard/confirm', {
+            ...suggestion,
+            mediaGallery: suggestion.mediaGallery?.map(media => ({...media, type: media.type?.toUpperCase()}))
+        }),
     products: () => fetchJson<MobileProductResponse[]>('/api/mobile/products', fallback.products),
     patchProduct: (id: string, patch: ProductPatch) =>
         patchJson<MobileProductResponse, ProductPatch>(`/api/mobile/products/${id}`, patch),

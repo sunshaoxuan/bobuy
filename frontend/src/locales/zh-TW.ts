@@ -1,6 +1,8 @@
 import type { Dictionary } from './types';
 
 const messages: Dictionary = {
+    'gallery.format_hint': '支援 JPEG、PNG、WebP、AVIF，最大 8 MiB。WebP/AVIF 在瀏覽器內保持尺寸轉為 PNG，原檔案不變。',
+    'gallery.conversion_failed': '此瀏覽器無法解碼圖片，請選擇 JPEG 或 PNG 版本；未上傳任何內容。',
     'catalog.from_product': '從商品主檔加入本期',
     'catalog.from_product_hint': '沿用商品身分、多語資料及官方圖集，僅登記本期參考優惠，不重複建檔，不改實際售價或庫存。',
     'catalog.from_product_review': '已核對相同 ITEM、規格、完整官方圖集及本期優惠條件。',

@@ -468,10 +468,11 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         await api.onboardConfirm({ ...suggestion, existingProductFound: true, existingProductId: item.key });
         setSyncStatus('saved');
       }
+      return true;
     } catch (err) {
       console.error('[Sync] Failed:', err);
       setSyncStatus('idle');
-      // message.error('Background sync failed');
+      return false;
     }
   };
 
@@ -512,42 +513,31 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
     form.resetFields();
   };
 
-  const saveEditingItem = (values: Partial<StockItem>, options: { closeAfterSave: boolean; showMessage: boolean }) => {
+  const saveEditingItem = async (values: Partial<StockItem>, options: { closeAfterSave: boolean; showMessage: boolean }) => {
     if (!editingItem) {
       return;
     }
-    setDataSource((prevData) => {
-      const index = prevData.findIndex((item) => editingItem.key === item.key);
-      if (index < 0) return prevData;
-      
-      const nextData = [...prevData];
-      const currentItem = nextData[index];
-      const rawValues = values as Partial<StockItem> & { merchantSkuEntries?: MerchantSkuEntry[] };
-      const { merchantSkuEntries, ...safeValues } = rawValues;
-      const merchantSkus = mapEntriesToMerchantSkus(merchantSkuEntries);
-      const nextNameL10n: L10nValues = values.nameL10n ?? currentItem.nameL10n ?? {};
-      const nextDescriptionL10n: L10nValues = values.descriptionL10n ?? currentItem.descriptionL10n ?? {};
-      
-      const updatedItem = {
-        ...currentItem,
-        ...safeValues,
-        nameL10n: nextNameL10n,
-        descriptionL10n: nextDescriptionL10n,
-        name: getLocalizedFallback(nextNameL10n, currentItem.name),
-        description: getLocalizedFallback(nextDescriptionL10n, currentItem.description),
-        mediaGallery: values.mediaGallery ?? currentItem.mediaGallery ?? [],
-        priceTiers: values.priceTiers ?? currentItem.priceTiers ?? [],
-        dynamicAttributes: values.dynamicAttributes ?? currentItem.dynamicAttributes ?? {},
-        merchantSkus
-      };
-      
-      nextData[index] = updatedItem;
-      
-      // Background sync to backend
-      syncItemToBackend(updatedItem);
-      
-      return nextData;
-    });
+    const currentItem = dataSource.find((item) => editingItem.key === item.key);
+    if (!currentItem) return;
+    const rawValues = values as Partial<StockItem> & { merchantSkuEntries?: MerchantSkuEntry[] };
+    const { merchantSkuEntries, ...safeValues } = rawValues;
+    const merchantSkus = mapEntriesToMerchantSkus(merchantSkuEntries);
+    const nextNameL10n: L10nValues = values.nameL10n ?? currentItem.nameL10n ?? {};
+    const nextDescriptionL10n: L10nValues = values.descriptionL10n ?? currentItem.descriptionL10n ?? {};
+    const updatedItem = {
+      ...currentItem,
+      ...safeValues,
+      nameL10n: nextNameL10n,
+      descriptionL10n: nextDescriptionL10n,
+      name: getLocalizedFallback(nextNameL10n, currentItem.name),
+      description: getLocalizedFallback(nextDescriptionL10n, currentItem.description),
+      mediaGallery: values.mediaGallery ?? currentItem.mediaGallery ?? [],
+      priceTiers: values.priceTiers ?? currentItem.priceTiers ?? [],
+      dynamicAttributes: values.dynamicAttributes ?? currentItem.dynamicAttributes ?? {},
+      merchantSkus
+    };
+    setDataSource(prior => prior.map(item => item.key === updatedItem.key ? updatedItem : item));
+    if (!await syncItemToBackend(updatedItem)) return;
 
     if (options.showMessage) {
       message.success(t('stock.drawer.update_success'));
@@ -576,7 +566,6 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         return;
       }
       saveEditingItem(form.getFieldsValue(true), { closeAfterSave: false, showMessage: false });
-      setSyncStatus('saved');
       clearAutosaveTimer();
     }, AUTOSAVE_DELAY_MS);
   };
@@ -831,7 +820,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
           isMobile ? null : (
             <Space>
                <Button onClick={closeDrawer}>{t('common.cancel')}</Button>
-              <Button onClick={handleDrawerSave} type="primary">
+              <Button onClick={handleDrawerSave} type="primary" loading={syncStatus === 'saving'}>
                 {t('stock.drawer.save')}
               </Button>
             </Space>

@@ -5,6 +5,7 @@ import {localizedContent,useI18n} from '../i18n';
 import {PictureOutlined,UploadOutlined,CheckCircleOutlined,ArrowLeftOutlined,ArrowRightOutlined,DeleteOutlined,StarOutlined} from '@ant-design/icons';
 import './productCatalog.css';
 import {ImageLightbox} from './ImageLightbox';
+import {IMAGE_UPLOAD_ACCEPT} from '../imageUpload';
 
 const languages=[{key:'ja-JP',label:'日本語'},{key:'zh-CN',label:'简体中文'},{key:'zh-TW',label:'繁體中文'},{key:'en-US',label:'English'}];
 export default function ProductCatalogPanel({entries,id,onChoose,onSaved}:{entries:{key:string;name:string}[];id?:string;onChoose:(id?:string)=>void;onSaved:(rows:CatalogInput[])=>void}){
@@ -68,7 +69,7 @@ export default function ProductCatalogPanel({entries,id,onChoose,onSaved}:{entri
      {key:'media',label:t('products.media_tab'),children:<div className="catalog-tab-content">{error&&editorTab==='media'&&<Alert type="error" message={warning(error)}/>}<p className="catalog-image-guidance">{t('products.original_images')}</p>
       {cover&&<label>{t('gallery.sources')}<Input value={cover.sourceUrl??''} onChange={e=>patch({gallery:draft.gallery.map((p,i)=>i===activeImage?{...p,sourceUrl:e.target.value}:p)})}/></label>}
       <div className="catalog-upload-group"><strong>{t('products.add_images')}</strong><label>{t('gallery.sources')}<Input value={source} onChange={e=>setSource(e.target.value)} placeholder="https://…"/></label><Checkbox checked={imageReviewed} onChange={e=>setImageReviewed(e.target.checked)}>{t('gallery.ack')}</Checkbox>
-       <input className="catalog-file-input" ref={fileInput} aria-label={t('gallery.files')} type="file" accept="image/png,image/jpeg" multiple disabled={!imageReviewed||!source||busy} onChange={e=>void upload(Array.from(e.target.files??[]))}/>
+       <p className="catalog-image-guidance">{t('gallery.format_hint')}</p><input className="catalog-file-input" ref={fileInput} aria-label={t('gallery.files')} type="file" accept={IMAGE_UPLOAD_ACCEPT} multiple disabled={!imageReviewed||!source||busy} onChange={e=>void upload(Array.from(e.target.files??[]))}/>
        <Button icon={<UploadOutlined/>} disabled={!imageReviewed||!source||busy} onClick={()=>fileInput.current?.click()}>{t('gallery.files')}</Button><p className="catalog-image-guidance">{t('master.upload_hint')}</p>
       </div></div>}
     ]}/>

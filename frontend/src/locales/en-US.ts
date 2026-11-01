@@ -2,6 +2,8 @@ import type { Dictionary } from './types';
 import experience from './experience.en-US.json';
 
 const messages: Dictionary = {
+    'gallery.format_hint': 'JPEG, PNG, WebP or AVIF, up to 8 MiB. WebP/AVIF are converted to PNG in this browser without resizing. Original files stay unchanged.',
+    'gallery.conversion_failed': 'This browser could not decode the image. Choose a JPEG or PNG version; nothing was uploaded.',
     'catalog.from_product': 'Add from product master',
     'catalog.from_product_hint': 'Reuse product identity, translations and official gallery. Only this issue’s reference offer is registered; no duplicate product, selling price or stock is created.',
     'catalog.from_product_review': 'I reviewed the exact ITEM/specification, complete official gallery and this issue’s offer conditions.',

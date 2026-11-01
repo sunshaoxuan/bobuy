@@ -2,6 +2,8 @@ import type { Dictionary } from './types';
 import experience from './experience.zh-CN.json';
 
 const messages: Dictionary = {
+    'gallery.format_hint': '支持 JPEG、PNG、WebP、AVIF，最大 8 MiB。WebP/AVIF 在浏览器内保持尺寸转为 PNG，原文件不变。',
+    'gallery.conversion_failed': '此浏览器无法解码图片，请选择 JPEG 或 PNG 版本；未上传任何内容。',
     'catalog.from_product': '从商品主档加入本期',
     'catalog.from_product_hint': '复用商品身份、多语资料及官方图集，仅登记本期参考优惠，不重复建档，不改实际售价或库存。',
     'catalog.from_product_review': '已核对同一 ITEM、规格、完整官方图集及本期优惠条件。',

@@ -3,6 +3,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { I18nProvider } from '../i18n';
 import React from 'react';
 import { api } from '../api';
+import {message} from 'antd';
 vi.mock('../components/ProductCatalogPanel',()=>({default:()=>null}));
 
 vi.mock('../api', () => ({
@@ -64,6 +65,27 @@ vi.mock('../api', () => ({
 }));
 
 import StockMaster from './StockMaster';
+
+it('waits for persistence and keeps the drawer and entered values when saving fails',async()=>{
+ localStorage.setItem('bobbuy_locale','en-US');setMatchMedia(false);
+ const success=vi.spyOn(message,'success');success.mockClear();
+ let reject!: (reason:Error)=>void;
+ vi.mocked(api.onboardConfirm).mockImplementationOnce(()=>new Promise((_,fail)=>{reject=fail;}));
+ renderWithI18n(<StockMaster/>);
+ await screen.findByDisplayValue('Organic Milk');
+ fireEvent.click(screen.getAllByRole('button').find(button=>button.querySelector('.anticon-edit'))!);
+ const drawer=screen.getByRole('dialog');
+ const sku=within(drawer).getByDisplayValue('SKU-20934');fireEvent.change(sku,{target:{value:'SYNTHETIC-RETRY'}});
+ fireEvent.click(within(drawer).getByRole('button',{name:'Save & Close'}));
+ await waitFor(()=>expect(reject).toBeTypeOf('function'));
+ expect(screen.getByRole('dialog')).toBeInTheDocument();expect(success).not.toHaveBeenCalled();
+ reject(new Error('Synthetic rejected save'));
+ await waitFor(()=>expect(within(drawer).getByRole('button',{name:'Save & Close'})).not.toHaveClass('ant-btn-loading'));
+ expect(within(drawer).getByDisplayValue('SYNTHETIC-RETRY')).toBeInTheDocument();expect(success).not.toHaveBeenCalled();
+ fireEvent.click(within(drawer).getByRole('button',{name:'Save & Close'}));
+ await waitFor(()=>expect(screen.queryByRole('dialog')).not.toBeInTheDocument());expect(success).toHaveBeenCalledTimes(1);
+ success.mockRestore();cleanup();localStorage.clear();
+});
 
 it('uses the real uppercase IMAGE gallery in embedded browsing and retains editable management',async()=>{
  setMatchMedia(false);

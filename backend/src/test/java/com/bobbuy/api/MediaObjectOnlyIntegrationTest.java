@@ -28,6 +28,18 @@ class MediaObjectOnlyIntegrationTest {
   when(objects.list(anyString(),nullable(String.class))).thenAnswer(call->new MediaObjectStore.ObjectPage(copied.entrySet().stream().map(e->new MediaObjectStore.ListedObject(e.getKey(),e.getValue().bytes().length)).toList(),null));
  }
  RecommendationImage input(String id,String scope){var row=new RecommendationImage();row.id="objectonly-"+id;row.merchantId=1000L;row.imageHash=MediaBinaryService.sha(id.getBytes());row.contentType="image/png";row.accessScope=scope;row.content=new byte[]{4,5,6};return row;}
+ @Test void browserConvertedPngIsIndependentlyValidatedAndSharesOnlyItsActualStoredBytes()throws Exception{
+  byte[] source;try(var stream=getClass().getResourceAsStream("/synthetic-converted.png")){source=Objects.requireNonNull(stream).readAllBytes();}
+  var checked=RecommendationImageValidator.validate(source);assertThat(checked.hash()).isEqualTo(MediaBinaryService.sha(source));assertThat(checked.contentType()).isEqualTo("image/png");
+  var before=javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(source));var after=javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(checked.content()));
+  assertThat(after.getWidth()).isEqualTo(128);assertThat(after.getHeight()).isEqualTo(96);
+  assertThat(after.getRGB(0,0,128,96,null,0,128)).containsExactly(before.getRGB(0,0,128,96,null,0,128));
+  var a=input("converted-public","PUBLIC");a.content=checked.content();a.contentType=checked.contentType();a.imageHash=checked.hash();
+  var b=input("converted-private","PRIVATE");b.merchantId=2000L;b.content=checked.content();b.contentType=checked.contentType();b.imageHash=checked.hash();
+  var saved=binaries.persist(a);binaries.reuse(saved,checked.content());binaries.persist(b);assertThat(images.count()).isEqualTo(2);assertThat(copied).hasSize(1);assertThat(refs.count()).isEqualTo(2);assertThat(blobs.count()).isEqualTo(1);
+  assertThat(binaries.read(saved)).containsExactly(checked.content());assertThat(saved.rawSha256).isEqualTo(MediaBinaryService.sha(checked.content()));
+  refs.deleteAll();assertThat(catalog.markGcCandidates()).isEmpty();assertThat(copied).hasSize(1);
+ }
  @Test void newUploadsHaveOnlyMetadataInPgAndShareAcrossPathsAndScopes()throws Exception{
   var a=binaries.persist(input("a","PUBLIC"));var b=binaries.persist(input("b","PRIVATE"));
   assertThat(images.findById(a.id).orElseThrow().content).isNull();assertThat(a.rawSha256).isEqualTo(MediaBinaryService.sha(new byte[]{4,5,6}));assertThat(a.byteLength).isEqualTo(3);assertThat(refs.count()).isEqualTo(2);assertThat(blobs.count()).isEqualTo(1);assertThat(copied).hasSize(1);verify(objects,times(1)).put(anyString(),any(),anyString(),anyString());assertThat(binaries.read(a)).containsExactly(4,5,6);

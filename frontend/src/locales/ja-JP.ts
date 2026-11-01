@@ -2,6 +2,8 @@ import type { Dictionary } from './types';
 import experience from './experience.ja-JP.json';
 
 const messages: Dictionary = {
+    'gallery.format_hint': 'JPEG・PNG・WebP・AVIF、最大8 MiB。WebP/AVIFはブラウザー内でサイズを変えずPNGに変換します。元ファイルは変更しません。',
+    'gallery.conversion_failed': 'このブラウザーで画像を読み取れませんでした。JPEGまたはPNGを選択してください。アップロードは行っていません。',
     'catalog.from_product': '商品マスターから今号へ追加',
     'catalog.from_product_hint': '商品情報・翻訳・公式画像を再利用し、今号の参考価格と条件だけを登録します。重複商品を作成せず、販売価格・在庫を変更しません。',
     'catalog.from_product_review': '同一ITEM・仕様、公式画像一式、今号の割引条件を確認しました。',
