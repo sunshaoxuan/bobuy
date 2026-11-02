@@ -14,6 +14,7 @@ import ArticleLanguages from '../components/ArticleLanguages';
 import '../browse.css';
 import RecommendationClassification from '../components/RecommendationClassification';
 import { useI18n } from '../i18n';
+import { IMAGE_UPLOAD_ACCEPT, prepareImageUpload } from '../imageUpload';
 import '../recommendations.css';
 
 type PendingImage = { key: number; file?: File; imageUrl?: string; preview: string; facts: RecommendationFacts; status: 'waiting' | 'uploading' | 'done' | 'failed'; error?: string; result?: string };
@@ -28,6 +29,8 @@ export default function Recommendations() {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [busy, setBusy] = useState(false);
+  const [preparing, setPreparing] = useState(false);
+  const selectionEpoch = useRef(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
@@ -52,8 +55,8 @@ export default function Recommendations() {
   const published = detail?.post.published;
   const identity = (item: RecommendationDetail['items'][number]) => item.productId || 'recommendation:'+item.id;
   const products = [...new Map(detail?.items.map(item => [identity(item), item])).values()];
-  const pending = queue.some(item => item.status !== 'done') || editingItem !== undefined || !!batch.trim() || classificationPending || fromProductPending||articlePending;
-  useEffect(() => () => { urls.current.forEach(url => URL.revokeObjectURL(url)); }, []);
+  const pending = preparing || queue.some(item => item.status !== 'done') || editingItem !== undefined || !!batch.trim() || classificationPending || fromProductPending||articlePending;
+  useEffect(() => () => { selectionEpoch.current++; urls.current.forEach(url => URL.revokeObjectURL(url)); }, []);
   useEffect(() => {
     if (!dirty && !pending) return;
     const prevent = (event: BeforeUnloadEvent) => { event.preventDefault(); event.returnValue = ''; };
@@ -62,6 +65,7 @@ export default function Recommendations() {
   }, [dirty, pending]);
   useEffect(() => {
     let active = true;
+    selectionEpoch.current++; setPreparing(false);
     urls.current.forEach(url => URL.revokeObjectURL(url)); urls.current.clear();
     setQueue([]); setQueuePage(1); setItemPage(1); setGenerated(''); setPrompt('');
     setEditingItem(undefined); setBatch(''); setPreview(false);
@@ -80,18 +84,27 @@ export default function Recommendations() {
     try { await action(); } catch (e) { setError((e as Error).message); } finally { setBusy(false); }
   }
   function clearQueue() { queue.forEach(item => { URL.revokeObjectURL(item.preview); urls.current.delete(item.preview); }); setQueue([]); setQueuePage(1); }
-  function back() { clearQueue(); setGenerated(''); setPrompt(''); setParams({}); }
+  function back() { selectionEpoch.current++; setPreparing(false); clearQueue(); setGenerated(''); setPrompt(''); setParams({}); }
   function change(key: number, value: Partial<PendingImage>) { setQueue(current => current.map(item => item.key === key ? { ...item, ...value } : item)); }
-  function choose(files: FileList | null) {
+  async function choose(files: FileList | null) {
     if (!files) return;
-    const additions: PendingImage[] = Array.from(files).map(file => {
-      const preview = URL.createObjectURL(file); urls.current.add(preview);
-      const invalid = !['image/jpeg', 'image/png'].includes(file.type) || file.size > 8 * 1024 * 1024 || file.size === 0;
-      return { key: nextKey.current++, file, preview, facts:{name: file.name.replace(/\.[^.]+$/, '').slice(0, 200)},
-        status: invalid ? 'failed' : 'waiting', error: invalid ? t('rec.image_rule') : undefined };
-    });
-    setQueue(current => [...current, ...additions]);
+    const epoch = selectionEpoch.current;
+    const originals = Array.from(files);
     if (fileInput.current) fileInput.current.value = '';
+    setPreparing(true);
+    const additions: PendingImage[] = [];
+    for (const original of originals) {
+      let file = original; let error: string | undefined;
+      try { file = await prepareImageUpload(original); }
+      catch (failure) { error = t(failure instanceof Error ? failure.message : 'gallery.invalid'); }
+      if (epoch !== selectionEpoch.current) {
+        additions.forEach(item => { URL.revokeObjectURL(item.preview); urls.current.delete(item.preview); });
+        return;
+      }
+      const preview = URL.createObjectURL(file); urls.current.add(preview);
+      additions.push({key:nextKey.current++,file,preview,facts:{name:original.name.replace(/\.[^.]+$/, '').slice(0,200)},status:error?'failed':'waiting',error});
+    }
+    setQueue(current => [...current,...additions]); setPreparing(false);
   }
   async function upload(entries: PendingImage[]) {
     if (!detail) return;
@@ -151,7 +164,8 @@ export default function Recommendations() {
       <div className="rec-editor-layout"><section className="rec-article"><h2>{t('rec.article')}</h2><ArticleLanguages key={detail.post.id} detail={detail} title={title} body={body} sourceDirty={dirty} disabled={published||busy} onTitle={setTitle} onBody={setBody} onChanged={next=>{setDetail(next);setTitle(next.post.title);setBody(next.body);}} onPending={setArticlePending}/>
         {published && <div className="rec-public-link"><Link to={'/recommendations/' + id}>{t('rec.view')}</Link><Tooltip title={t('rec.copy')}><Button icon={<CopyOutlined />} aria-label={t('rec.copy')} onClick={() => void run(async () => { await navigator.clipboard.writeText(location.origin + '/recommendations/' + id); setNotice(t('rec.copied')); })} /></Tooltip></div>}
       </section></div>
-      {!published && <section className="rec-uploads"><div className="rec-section-heading"><h2>{t('rec.uploads')}</h2><div className="rec-action-group"><input ref={fileInput} type="file" multiple accept="image/png,image/jpeg" hidden onChange={e => choose(e.target.files)} /><Button icon={<PlusOutlined />} disabled={busy || writing} onClick={() => fileInput.current?.click()}>{t('rec.choose')}</Button><Button icon={<UploadOutlined />} disabled={busy || writing || !pending} onClick={() => void upload(queue)}>{t('rec.register_all')}</Button></div></div>
+      {!published && <section className="rec-uploads"><div className="rec-section-heading"><h2>{t('rec.uploads')}</h2><div className="rec-action-group"><input ref={fileInput} type="file" multiple accept={IMAGE_UPLOAD_ACCEPT} hidden disabled={preparing} onChange={e => void choose(e.target.files)} /><Button icon={<PlusOutlined />} loading={preparing} disabled={busy || writing || preparing} onClick={() => fileInput.current?.click()}>{t('rec.choose')}</Button><Button icon={<UploadOutlined />} disabled={busy || writing || preparing || !pending} onClick={() => void upload(queue)}>{t('rec.register_all')}</Button></div></div>
+        <p>{t('gallery.format_hint')}</p>
         <p>{t('rec.batch_help')}</p><label htmlFor="rec-batch">{t('rec.batch_label')}</label><Input.TextArea id="rec-batch" rows={5} value={batch} onChange={e => setBatch(e.target.value)} disabled={busy} />
         <Button disabled={busy || !batch.trim()} onClick={() => { try {
           const rows = parseBatch(batch);
