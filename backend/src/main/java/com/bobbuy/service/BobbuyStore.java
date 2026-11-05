@@ -793,6 +793,7 @@ public class BobbuyStore {
             product.getBasePrice()
         );
         OrderProductSnapshot.capture(newLine,product);
+        newLine.setId(nextOrderIdentity());
 
         if (existing.isPresent()) {
             OrderHeader header = existing.get();
@@ -842,6 +843,7 @@ public class BobbuyStore {
         }
         normalizeLinePurchasedQuantities(order.getLines());
         order.setId(id);
+        order.retainProductIdentitiesFrom(existing);
         for (OrderLine line : order.getLines()) {
             if (line.getId() == null) {
                 line.setId(nextOrderIdentity());
@@ -958,6 +960,7 @@ public class BobbuyStore {
     }
 
     private OrderHeader saveOrderAndRefresh(OrderHeader order) {
+        order.retainProductIdentities();
         OrderHeader saved = orderHeaderRepository.saveAndFlush(order);
         tripWorkflow.refresh(order.getTripId());
         return saved;

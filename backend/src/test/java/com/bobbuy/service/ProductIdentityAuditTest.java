@@ -21,7 +21,7 @@ class ProductIdentityAuditTest {
   var posts=stub(RecommendationPostRepository.class,(p,m,a)->{if(m.getName().equals("findAllById"))return List.of(post);throw new AssertionError(m.getName());});
   SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("agent-1000","synthetic",List.of(new SimpleGrantedAuthority("ROLE_AGENT"))));
   try{
-   var service=new ProductCatalogService(products,items,null,posts,null,null,null);var audit=service.audit();
+   var service=new ProductCatalogService(products,items,null,posts,null,null,null,null);var audit=service.audit();
    assertThat(audit).hasSize(1);var row=audit.get(0);assertThat(row.current().canonical()).isFalse();assertThat(row.originalCatalogData()).isNull();assertThat(owned.getCatalogData()).isNull();
    assertThat(row.current().value().version()).isEqualTo(4);assertThat(row.current().sourceItemIds()).containsExactly(248L);
    assertThat(row.sources().get(0).offerStart()).isEqualTo(item.offerStart);assertThat(row.sources().get(0).referencePrice()).isEqualByComparingTo("1234");assertThat(row.sources().get(0).postVersion()).isEqualTo(11);

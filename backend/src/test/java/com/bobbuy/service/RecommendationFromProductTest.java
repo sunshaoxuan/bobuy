@@ -24,7 +24,7 @@ class RecommendationFromProductTest {
   var image=new RecommendationImage();image.id="img";image.merchantId=1000L;image.imageHash="hash";when(images.findById("img")).thenReturn(Optional.of(image));
  }
  @AfterEach void cleanup(){SecurityContextHolder.clearContext();}
- RecommendationFacts facts(){return new RecommendationFacts("ごま油","00123",new BigDecimal("1738"),new BigDecimal("2178"),new BigDecimal("440"),"1650g",null,null,null,null,"オンライン参考価格",null);}
+ RecommendationFacts facts(){return new RecommendationFacts("ごま油","00123",new BigDecimal("1738"),new BigDecimal("2178"),new BigDecimal("440"),"1650g",null,null,null,null,"オンライン参考価格",null,null,null,null,null);}
  @Test void reusesMasterAndGalleryWithoutProductOrBinaryWrites(){
   service.fromProduct(4L,"master",7L,facts(),post.version,true);
   var saved=org.mockito.ArgumentCaptor.forClass(RecommendationItem.class);verify(items).saveAndFlush(saved.capture());var item=saved.getValue();assertThat(item.productId).isEqualTo("master");assertThat(item.gallery).hasSize(1);assertThat(item.specification).isEqualTo("1650g");assertThat(item.showSupplier).isFalse();assertThat(item.referencePrice).isEqualByComparingTo("1738");verifyNoInteractions(catalog);verify(products,never()).save(any());

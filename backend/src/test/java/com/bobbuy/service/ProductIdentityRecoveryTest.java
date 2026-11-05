@@ -25,7 +25,13 @@ class ProductIdentityRecoveryTest {
   var users=stub(UserRepository.class,(p,m,a)->{if(m.getName().equals("lockById"))return Optional.of(new User(1000L,"fixture",Role.AGENT,0));throw new AssertionError(m.getName());});
   var categories=stub(CategoryRepository.class,(p,m,a)->{if(m.getName().equals("findAllById"))return List.of();throw new AssertionError(m.getName());});
   var taxonomy=new RecommendationTaxonomyService(categories,null,users,products,null);
-  return new ProductCatalogService(products,items,null,null,users,taxonomy,null);
+  var saved=new ArrayList<ProductCatalogRecovery>();
+  var recoveries=stub(ProductCatalogRecoveryRepository.class,(p,m,a)->switch(m.getName()){
+   case "findTopByProductIdAndMerchantIdOrderByVersionAfterDesc" -> saved.isEmpty()?Optional.empty():Optional.of(saved.get(saved.size()-1));
+   case "saveAndFlush" -> {saved.add((ProductCatalogRecovery)a[0]);yield a[0];}
+   default -> throw new AssertionError(m.getName());
+  });
+  return new ProductCatalogService(products,items,null,null,users,taxonomy,null,recoveries);
  }
  private Product product(){var p=new Product();p.setId("offline");p.setMerchantId(1000L);p.setRecordVersion(4L);p.setItemNumber("independent-ITEM");p.setBrand("Brand");p.setName(Map.of("ja-JP","Original"));return p;}
  private ProductCatalogService.Input rename(ProductCatalogService.Input v,String name){return new ProductCatalogService.Input(v.productId(),v.version(),Map.of("ja-JP",name),v.description(),v.itemNumber(),v.brand(),v.specification(),v.model(),v.packaging(),v.categoryIds(),v.supplierId(),v.gallery(),v.translationsReviewed());}

@@ -17,11 +17,12 @@ public class ProductCatalogService {
  private final RecommendationImageRepository images;private final RecommendationPostRepository posts;
  private final UserRepository users;private final RecommendationTaxonomyService taxonomy;
  private final MediaBinaryService binaries;
+ private final ProductCatalogRecoveryRepository recoveries;
  public ProductCatalogService(ProductRepository products,RecommendationItemRepository items,RecommendationImageRepository images,
-  RecommendationPostRepository posts,UserRepository users,RecommendationTaxonomyService taxonomy,MediaBinaryService binaries){this.products=products;this.items=items;this.images=images;this.posts=posts;this.users=users;this.taxonomy=taxonomy;this.binaries=binaries;}
+  RecommendationPostRepository posts,UserRepository users,RecommendationTaxonomyService taxonomy,MediaBinaryService binaries,ProductCatalogRecoveryRepository recoveries){this.products=products;this.items=items;this.images=images;this.posts=posts;this.users=users;this.taxonomy=taxonomy;this.binaries=binaries;this.recoveries=recoveries;}
  public record Input(String productId,long version,Map<String,String> name,Map<String,String> description,String itemNumber,String brand,
   Map<String,String> specification,String model,String packaging,List<String> categoryIds,String supplierId,List<MediaGalleryItem> gallery,boolean translationsReviewed) {}
- public record Profile(Input value,boolean canonical,List<Long> sourceItemIds) {}
+ public record Profile(Input value,boolean canonical,List<Long> sourceItemIds,String recoveryId) {public Profile(Input value,boolean canonical,List<Long> sourceItemIds){this(value,canonical,sourceItemIds,null);}}
  public record Proposal(Input value,List<String> changes,List<String> warnings) {}
  public record AuditSource(Long itemId,Long postId,long postVersion,boolean published,String title,String name,String itemNumber,String specification,
   java.math.BigDecimal referencePrice,java.math.BigDecimal originalPrice,java.math.BigDecimal discountAmount,
@@ -38,7 +39,17 @@ public class ProductCatalogService {
  private static String hash(Object value){try{return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(new com.fasterxml.jackson.databind.ObjectMapper().writeValueAsBytes(value)));}catch(Exception error){throw new IllegalStateException(error);}}
  public static boolean translationsCurrent(Product product){return product.getCatalogData()!=null&&sourceHash(product).equals(product.getCatalogData().translatedSource());}
  private Input input(Product product){var data=product.getCatalogData();return new Input(product.getId(),Objects.requireNonNullElse(product.getRecordVersion(),0L),Map.copyOf(product.getName()),Map.copyOf(product.getDescription()),product.getItemNumber(),product.getBrand(),data==null?Map.of():data.specification(),data==null?null:data.model(),data==null?null:data.packaging(),data==null?(product.getCategoryId()==null?List.of():List.of(product.getCategoryId())):data.categoryIds(),data==null?null:data.supplierId(),List.copyOf(product.getMediaGallery()),translationsCurrent(product));}
- @Transactional(readOnly=true) public Profile get(String id){var p=owned(id,false);return new Profile(input(p),p.getCatalogData()!=null,sources(id).stream().map(i->i.id).toList());}
+ private Profile profile(Product p){var latest=recoveries.findTopByProductIdAndMerchantIdOrderByVersionAfterDesc(p.getId(),owner()).filter(r->Objects.equals(p.getRecordVersion(),r.versionAfter));return new Profile(input(p),p.getCatalogData()!=null,sources(p.getId()).stream().map(i->i.id).toList(),latest.map(r->r.id).orElse(null));}
+ @Transactional(readOnly=true) public Profile get(String id){return profile(owned(id,false));}
+ private ProductCatalogRecovery checkpoint(Product p,String restoredFrom){var r=new ProductCatalogRecovery();r.id=UUID.randomUUID().toString();r.merchantId=owner();r.productId=p.getId();r.createdAt=Instant.now();r.restoredFromId=restoredFrom;r.original=ProductCatalogRecovery.capture(p,sources(p.getId()).stream().map(i->i.id).toList());return r;}
+ private void retainCheckpoint(ProductCatalogRecovery r,Product p){r.versionAfter=p.getRecordVersion();recoveries.saveAndFlush(r);}
+ @Transactional public Profile restore(String id,String checkpointId,long version,boolean reviewed){
+  if(!reviewed)throw invalid("master.review_required");if(checkpointId==null||checkpointId.isBlank()||checkpointId.length()>36)throw invalid("master.conflict");users.lockById(owner()).orElseThrow();var p=owned(id,true);
+  var prior=recoveries.findById(checkpointId).filter(r->owner().equals(r.merchantId)&&id.equals(r.productId)).orElseThrow(()->invalid("master.conflict"));
+  if(!Objects.equals(p.getRecordVersion(),version)||prior.versionAfter!=version||!sources(id).stream().map(i->i.id).toList().equals(prior.original.sourceItemIds()))throw invalid("master.conflict");
+  for(var image:prior.original.gallery()){String prefix="/api/storefront/recommendation-images/";if(image.getUrl()!=null&&image.getUrl().startsWith(prefix)&&images.findById(image.getUrl().substring(prefix.length())).filter(value->owner().equals(value.merchantId)).isEmpty())throw invalid("master.image_source");}
+  var redo=checkpoint(p,prior.id);prior.apply(p);products.saveAndFlush(p);retainCheckpoint(redo,p);return profile(p);
+ }
  /** Actual current values, not proposed corrections. Canonical=false requires separate rollback handling. */
  @Transactional(readOnly=true) public List<AuditRow> audit(){
   Long merchant=owner();var ownedProducts=products.findAll().stream().filter(p->merchant.equals(p.getMerchantId())).sorted(Comparator.comparing(Product::getId)).toList();
@@ -111,10 +122,11 @@ public class ProductCatalogService {
   if(!reviewed)throw invalid("master.review_required");users.lockById(owner()).orElseThrow();preview(values);
   var result=new ArrayList<Profile>();for(var value:values.stream().sorted(Comparator.comparing(Input::productId)).toList()){
    var p=owned(value.productId(),true);if(!Objects.equals(p.getRecordVersion(),value.version()))throw invalid("master.conflict");
+   var recovery=checkpoint(p,null);
    p.setName(clean(value.name(),400));p.setDescription(clean(value.description(),8000));p.setItemNumber(value.itemNumber());p.setBrand(value.brand());p.setCategoryId(value.categoryIds().isEmpty()?null:value.categoryIds().get(0));p.setMediaGallery(new ArrayList<>(value.gallery()));
    p.setCatalogData(new ProductCatalogData(clean(value.specification(),1000),value.model(),value.packaging(),List.copyOf(value.categoryIds()),value.supplierId(),null,owner(),Instant.now()));
    if(value.translationsReviewed()){var d=p.getCatalogData();p.setCatalogData(new ProductCatalogData(d.specification(),d.model(),d.packaging(),d.categoryIds(),d.supplierId(),sourceHash(p),d.reviewedBy(),d.reviewedAt()));}
-   products.saveAndFlush(p);result.add(new Profile(input(p),true,sources(p.getId()).stream().map(i->i.id).toList()));
+   products.saveAndFlush(p);retainCheckpoint(recovery,p);result.add(profile(p));
   }return result;
  }
  @Transactional public MediaGalleryItem upload(String id,RecommendationImageValidator.Image image,String sourceUrl,String label,boolean verified){

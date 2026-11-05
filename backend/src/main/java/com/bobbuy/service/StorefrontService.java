@@ -178,7 +178,7 @@ public class StorefrontService {
         }
         order.setCurrency(request.currency()==null?"JPY":request.currency());
         order.setTotalAmount(total.doubleValue());
-        orders.saveAndFlush(order);
+        order.retainProductIdentities();orders.saveAndFlush(order);
         String key = trip.getAgentId() + ":" + user.getId();
         if (!relations.existsById(key)) {
             MerchantCustomer relation = new MerchantCustomer(); relation.id = key;

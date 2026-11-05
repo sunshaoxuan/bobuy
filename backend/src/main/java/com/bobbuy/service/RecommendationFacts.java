@@ -27,10 +27,6 @@ public record RecommendationFacts(
     @Size(max=1000) String packaging,
     @Size(max=1000) String specification
 ) {
-    public RecommendationFacts(String name,String itemNumber,BigDecimal referencePrice,BigDecimal originalPrice,BigDecimal discountAmount,String priceUnit,
-        LocalDate offerStart,LocalDate offerEnd,LocalDate couponStart,LocalDate couponEnd,String offerNotes,com.bobbuy.model.ReferenceOfferContext referenceContext){
-        this(name,itemNumber,referencePrice,originalPrice,discountAmount,priceUnit,offerStart,offerEnd,couponStart,couponEnd,offerNotes,referenceContext,null,null,null,null);
-    }
     public void apply(RecommendationItem item) {
         ReferenceOfferWindow.resolve(offerStart,offerEnd,referenceContext);
         if ((offerStart != null && offerEnd != null && offerStart.isAfter(offerEnd))

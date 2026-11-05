@@ -1044,10 +1044,11 @@ export const productPricingApi={
 };
 export const productCatalogApi={
  audit:()=>storeGet<unknown[]>('/api/merchant/product-catalog/audit'),
- get:(id:string)=>storeGet<{value:CatalogInput;canonical:boolean;sourceItemIds:number[]}>('/api/merchant/product-catalog/'+encodeURIComponent(id)),
+ restore:(id:string,checkpointId:string,version:number)=>postJson<{value:CatalogInput;canonical:boolean;sourceItemIds:number[];recoveryId?:string},object>('/api/merchant/product-catalog/'+encodeURIComponent(id)+'/restore',{checkpointId,version,reviewed:true}),
+ get:(id:string)=>storeGet<{value:CatalogInput;canonical:boolean;sourceItemIds:number[];recoveryId?:string}>('/api/merchant/product-catalog/'+encodeURIComponent(id)),
  proposals:()=>storeGet<CatalogProposal[]>('/api/merchant/product-catalog'),
  preview:(rows:CatalogInput[])=>postJson<CatalogProposal[],object>('/api/merchant/product-catalog/preview',{rows,reviewed:false}),
- save:(rows:CatalogInput[])=>putJson<{value:CatalogInput;canonical:boolean;sourceItemIds:number[]}[],object>('/api/merchant/product-catalog',{rows,reviewed:true}),
+ save:(rows:CatalogInput[])=>putJson<{value:CatalogInput;canonical:boolean;sourceItemIds:number[];recoveryId?:string}[],object>('/api/merchant/product-catalog',{rows,reviewed:true}),
  upload:async(id:string,file:File,sourceUrl:string,label:string)=>{const prepared=await prepareImageUpload(file);const form=new FormData();form.set('file',prepared);form.set('sourceUrl',sourceUrl);form.set('label',label);form.set('verified','true');const response=await authorizedFetch('/api/merchant/product-catalog/'+encodeURIComponent(id)+'/images',{method:'POST',body:form});if(!response.ok)throw new Error(await parseErrorMessage(response));return parseSuccessPayload<CatalogMedia>(response);}
 };
 export type CurrencyDefinition={code:string;symbol:string;fractionDigits:number;name:string;saleEnabled:boolean};

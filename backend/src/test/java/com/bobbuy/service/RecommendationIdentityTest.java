@@ -6,6 +6,7 @@ import java.util.*;
 import static org.assertj.core.api.Assertions.*;
 
 class RecommendationIdentityTest {
+ @org.junit.jupiter.api.Test void multipartBindingHasOneResolvableConstructor(){org.assertj.core.api.Assertions.assertThat(org.springframework.beans.BeanUtils.getResolvableConstructor(RecommendationFacts.class).getParameterCount()).isEqualTo(16);}
  @Test void jsonFactsAcceptStructuredIdentityAndOldPayloads() throws Exception {
   var mapper=new com.fasterxml.jackson.databind.ObjectMapper();
   var facts=mapper.readValue("{\"name\":\"Diapers\",\"brand\":\"Pampers\",\"itemNumber\":\"0001\",\"model\":\"L\",\"packaging\":\"80 pieces x2\",\"specification\":\"80 pieces x2 packs\"}",RecommendationFacts.class);

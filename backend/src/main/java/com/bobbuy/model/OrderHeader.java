@@ -58,6 +58,30 @@ public class OrderHeader {
     public OrderHeader() {
     }
 
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name="product_identities",columnDefinition="jsonb")
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    private java.util.Map<String,OrderLineIdentity> productIdentities=new java.util.HashMap<>();
+
+    @jakarta.persistence.PostLoad @jakarta.persistence.PostPersist @jakarta.persistence.PostUpdate
+    public void hydrateProductIdentities(){
+        if(productIdentities==null)productIdentities=new java.util.HashMap<>();
+        if(lines!=null)for(var line:lines){var snapshot=productIdentities.get(String.valueOf(line.getId()));if(snapshot!=null)snapshot.apply(line);}
+    }
+    @jakarta.persistence.PrePersist @jakarta.persistence.PreUpdate
+    public void retainProductIdentities(){
+        var retained=new java.util.HashMap<String,OrderLineIdentity>(productIdentities==null?java.util.Map.of():productIdentities);
+        if(lines!=null)for(var line:lines)if(OrderLineIdentity.present(line)){
+            if(line.getId()==null)throw new IllegalStateException("Identity snapshot needs a stable order-line ID");
+            retained.put(String.valueOf(line.getId()),OrderLineIdentity.from(line));
+        }
+        productIdentities=retained;
+    }
+    public void retainProductIdentitiesFrom(OrderHeader original){
+        productIdentities=new java.util.HashMap<>(original.productIdentities==null?java.util.Map.of():original.productIdentities);
+        hydrateProductIdentities();
+    }
+
     public OrderHeader(String businessId, Long customerId, Long tripId) {
         this.businessId = businessId;
         this.customerId = customerId;
@@ -169,6 +193,10 @@ public class OrderHeader {
     public void addLine(OrderLine line) {
         this.lines.add(line);
         line.setHeaderId(this.id);
+        if(OrderLineIdentity.present(line)&&line.getId()!=null){
+            productIdentities=new java.util.HashMap<>(productIdentities==null?java.util.Map.of():productIdentities);
+            productIdentities.put(String.valueOf(line.getId()),OrderLineIdentity.from(line));
+        }
     }
 
     public LocalDateTime getReceiptConfirmedAt() {

@@ -7,6 +7,7 @@ import java.util.*;
 import static org.assertj.core.api.Assertions.*;
 
 class OrderProductSnapshotTest {
+ @Test void retainedSidecarDoesNotAttachToChangedSaleUnit(){var original=new OrderLine("p1","Diapers","pack",1,100);OrderProductSnapshot.capture(original,product());var snapshot=OrderLineIdentity.from(original);var changed=new OrderLine("p1","Diapers","kg",1,100);changed.setNames(original.getNames());snapshot.apply(changed);assertThat(changed.getBrand()).isNull();assertThat(changed.getSpec()).isEqualTo("kg");}
  @Test void procurementViewsRetainEveryDistinctPurchasedVariant(){
   var line=new OrderLine("p1","Diapers","pack",1,100);OrderProductSnapshot.capture(line,product());
   var snapshot=com.bobbuy.api.OrderIdentitySnapshot.from(line);line.getSpecifications().put("ja-JP","later change");assertThat(snapshot.specifications()).containsEntry("ja-JP","80 pieces x 2");

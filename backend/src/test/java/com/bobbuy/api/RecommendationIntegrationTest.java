@@ -43,6 +43,7 @@ class RecommendationIntegrationTest {
     }
     @AfterEach void cleanup() { items.deleteAll(); posts.deleteAll(); images.deleteAll(); }
     JsonNode data(ResultActions result) throws Exception {
+        result.andDo(r->{if(r.getResponse().getStatus()==500&&r.getResolvedException()!=null)throw new AssertionError("Recommendation request failed: "+r.getResolvedException().getMessage(),r.getResolvedException());});
         return json.readTree(result.andExpect(status().isOk()).andReturn().getResponse().getContentAsString()).get("data");
     }
     JsonNode create(String token) throws Exception { return data(mvc.perform(post("/api/merchant/recommendations").header("Authorization", "Bearer " + token))); }

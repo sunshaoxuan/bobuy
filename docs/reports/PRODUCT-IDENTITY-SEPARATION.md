@@ -1,5 +1,8 @@
 # Product identity separation — local candidate, 2026-11-05
 
+Recovery follow-up: see PRODUCT-IDENTITY-RECOVERY.md for the implemented sidecar/checkpoint solution and latest actual verification. Earlier blocker evidence below is historical.
+
+
 The existing model has brand, localized name/specification, model and packaging. Actual
 production readback shows concatenated names despite those fields, plus older recommendation
 profiles with empty brand/model/packaging. Independent ITEMs must remain independent.
