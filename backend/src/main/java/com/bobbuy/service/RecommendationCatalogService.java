@@ -44,14 +44,14 @@ public class RecommendationCatalogService {
         if(item.specification!=null)specifications.put("ja-JP",item.specification);
         boolean reviewed="REVIEWED".equals(item.getTranslationStatus());
         if(reviewed)item.translations.forEach((locale,text)->{names.put(locale,text.name());if(text.specification()!=null)specifications.put(locale,text.specification());});
-        product.setName(names);product.setDescription(RecommendationText.descriptions(item));
+        product.setName(names);product.setDescription(RecommendationText.descriptions(item));product.setBrand(item.brand);
         product.setItemNumber(item.itemNumber);product.setBasePrice(0);
         product.setOrderMethod(OrderMethod.PRE_ORDER);product.setVisibilityStatus(ProductVisibility.DRAFTER_ONLY);
         product.setAttributes(new HashMap<>(Map.of("recommendationProfile","true","recommendationSourceIssue",item.postId.toString(),"pricingStatus","REQUIRES_REVIEW")));
         if(context!=null&&context.supplierKey()!=null)product.getAttributes().put("referenceSupplierKey",context.supplierKey());
         product.setMediaGallery(item.gallery.stream().map(ProductCatalogService::media).collect(java.util.stream.Collectors.toCollection(ArrayList::new)));
         product.setCategoryId(item.categoryIds.isEmpty()?null:item.categoryIds.get(0));
-        product.setCatalogData(new ProductCatalogData(specifications,null,null,List.copyOf(item.categoryIds),item.supplierId,null,owner,java.time.Instant.now()));
+        product.setCatalogData(new ProductCatalogData(specifications,item.model,item.packaging,List.copyOf(item.categoryIds),item.supplierId,null,owner,java.time.Instant.now()));
         if(reviewed){var d=product.getCatalogData();product.setCatalogData(new ProductCatalogData(d.specification(),d.model(),d.packaging(),d.categoryIds(),d.supplierId(),ProductCatalogService.sourceHash(product),d.reviewedBy(),d.reviewedAt()));}
         products.saveAndFlush(product);item.productId=id;return true;
     }

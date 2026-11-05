@@ -1,6 +1,9 @@
 package com.bobbuy.api;
 
 public class ProcurementDeficitItemResponse {
+  private java.util.List<OrderIdentitySnapshot> snapshots=java.util.List.of();
+  public java.util.List<OrderIdentitySnapshot> getSnapshots(){return snapshots;}
+  public ProcurementDeficitItemResponse withSnapshots(java.util.List<OrderIdentitySnapshot> value){snapshots=java.util.List.copyOf(value);return this;}
   private final String skuId;
   private final String itemName;
   private final int deficitQuantity;

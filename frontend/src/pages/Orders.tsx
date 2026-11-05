@@ -1,3 +1,4 @@
+import {OrderProductIdentity,OrderSpecification} from '../components/OrderProductIdentity';
 import { Button, Card, Collapse, Form, Input, InputNumber, Select, Space, Table, Tag, Typography, message } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useEffect, useState } from 'react';
@@ -70,7 +71,8 @@ export default function Orders() {
   const lineColumns: ColumnsType<OrderLine> = [
     {
       title: t('orders.lines.item_name'),
-      dataIndex: 'itemName'
+      dataIndex: 'itemName',
+      render: (_value,record)=><OrderProductIdentity line={record}/>
     },
     {
       title: t('orders.lines.sku_id'),
@@ -79,7 +81,7 @@ export default function Orders() {
     {
       title: t('orders.lines.spec'),
       dataIndex: 'spec',
-      render: (value) => value || '-'
+      render: (_value,record) => <OrderSpecification line={record}/>
     },
     {
       title: t('orders.lines.quantity'),

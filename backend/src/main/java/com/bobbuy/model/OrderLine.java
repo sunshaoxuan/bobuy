@@ -5,6 +5,31 @@ package com.bobbuy.model;
  * 对齐设计文档: ARCH-11
  */
 public class OrderLine {
+    // Additive purchase-time metadata. Never repurpose legacy spec (often a sale unit).
+    private String brand;
+    private String itemNumber;
+    private String model;
+    private String packaging;
+    private String saleUnit;
+    private java.util.Map<String,String> specifications = new java.util.HashMap<>();
+    @com.fasterxml.jackson.annotation.JsonInclude(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY)
+    public String getBrand(){return brand;}
+    public void setBrand(String value){brand=value;}
+    @com.fasterxml.jackson.annotation.JsonInclude(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY)
+    public String getItemNumber(){return itemNumber;}
+    public void setItemNumber(String value){itemNumber=value;}
+    @com.fasterxml.jackson.annotation.JsonInclude(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY)
+    public String getModel(){return model;}
+    public void setModel(String value){model=value;}
+    @com.fasterxml.jackson.annotation.JsonInclude(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY)
+    public String getPackaging(){return packaging;}
+    public void setPackaging(String value){packaging=value;}
+    @com.fasterxml.jackson.annotation.JsonInclude(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY)
+    public String getSaleUnit(){return saleUnit;}
+    public void setSaleUnit(String value){saleUnit=value;}
+    @com.fasterxml.jackson.annotation.JsonInclude(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY)
+    public java.util.Map<String,String> getSpecifications(){return specifications;}
+    public void setSpecifications(java.util.Map<String,String> value){specifications=value==null?new java.util.HashMap<>():new java.util.HashMap<>(value);}
     private Long id; // 物理主键
     private Long headerId; // 头关联 ID
     private String skuId; // 商品唯一标识
@@ -135,6 +160,9 @@ public class OrderLine {
         boolean skuMatch = this.skuId != null && this.skuId.equals(other.skuId);
         boolean specMatch = (this.spec == null && other.spec == null) ||
                 (this.spec != null && this.spec.equals(other.spec));
-        return skuMatch && specMatch && java.util.Objects.equals(currency,other.currency) && Double.compare(unitPrice,other.unitPrice)==0;
+        return skuMatch && specMatch && java.util.Objects.equals(currency,other.currency) && Double.compare(unitPrice,other.unitPrice)==0
+            && java.util.Objects.equals(brand,other.brand) && java.util.Objects.equals(itemNumber,other.itemNumber)
+            && java.util.Objects.equals(model,other.model) && java.util.Objects.equals(packaging,other.packaging)
+            && java.util.Objects.equals(saleUnit,other.saleUnit) && java.util.Objects.equals(specifications,other.specifications);
     }
 }

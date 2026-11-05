@@ -1,3 +1,4 @@
+import {OrderProductIdentity,type OrderIdentity} from '../components/OrderProductIdentity';
 import { Button, Empty, Grid, Select, Space, Typography, message } from 'antd';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
@@ -22,6 +23,7 @@ type LiveFeedItem = {
 };
 
 type StatementLine = {
+  snapshot?:OrderIdentity;
   key: string;
   itemName: string;
   quantity: number;
@@ -202,6 +204,7 @@ export default function ClientHomeV2() {
         (order.lines ?? []).map((line) => ({
           key: `${order.id}-${line.skuId}`,
           itemName: line.itemName,
+          snapshot:line,
           quantity: line.quantity ?? 0,
           amount: Number(((line.quantity ?? 0) * (line.unitPrice ?? 0)).toFixed(2))
         }))
@@ -398,7 +401,7 @@ export default function ClientHomeV2() {
             ) : (
               statementLines.map((line) => (
                 <div key={line.key} className="zen-receipt-row">
-                  <span>{line.itemName}</span>
+                  <span>{line.snapshot?<OrderProductIdentity line={line.snapshot} includeSpecification/>:line.itemName}</span>
                   <span>{line.quantity}</span>
                   <span>{line.amount.toFixed(2)}</span>
                 </div>

@@ -792,6 +792,7 @@ public class BobbuyStore {
             request.getQuantity(),
             product.getBasePrice()
         );
+        OrderProductSnapshot.capture(newLine,product);
 
         if (existing.isPresent()) {
             OrderHeader header = existing.get();

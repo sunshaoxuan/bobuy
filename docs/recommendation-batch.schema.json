@@ -11,6 +11,10 @@
     "required": ["name"],
     "anyOf": [{"required": ["imageUrl"]}, {"required": ["fileName"]}],
     "properties": {
+      "brand": {"type":["string","null"],"maxLength":200,"description":"Verified brand, separate from the pure product name; unknown stays null."},
+      "model": {"type":["string","null"],"maxLength":300},
+      "packaging": {"type":["string","null"],"maxLength":1000,"description":"Preserve combinations such as80 pieces x2 packs."},
+      "specification": {"type":["string","null"],"maxLength":1000},
       "name": {"type": "string", "minLength": 1, "maxLength": 200, "pattern": "\\S"},
       "itemNumber": {"type": ["string", "null"], "maxLength": 255, "description": "String preserves leading zeros; never supply a JSON number. Omit/null when source omits it."},
       "currency": {"enum": ["JPY", null], "description": "All amounts are JPY; no conversion or inventory repricing."},

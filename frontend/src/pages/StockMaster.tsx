@@ -37,6 +37,7 @@ import { useI18n } from '../i18n';
 import L10nInput, { type L10nValues } from '../components/L10nInput';
 import MediaGallery, { type MediaItem } from '../components/MediaGallery';
 import AiQuickAddModal from '../components/AiQuickAddModal';
+import {ProductBrand} from '../components/ProductMetadata';
 import ProductCatalogPanel from '../components/ProductCatalogPanel';
 import ProductPricingPanel from '../components/ProductPricingPanel';
 import { api, type CategoryAttributeTemplateField, type MobileCategory, type MobileSupplier, type AiOnboardingSuggestion } from '../api';
@@ -57,6 +58,7 @@ interface StockItem {
   description?: string;
   descriptionL10n?: L10nValues;
   brand?: string;
+  specificationL10n?: L10nValues;
   sku?: string;
   mediaGallery?: MediaItem[];
   dynamicAttributes?: Record<string, string | number>;
@@ -269,6 +271,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         description: res.displayDescription,
         descriptionL10n: res.product.description,
         brand: res.product.brand,
+        specificationL10n:(res.product as unknown as {catalogData?:{specification?:L10nValues}}).catalogData?.specification,
         sku: res.product.itemNumber,
         mediaGallery: res.product.mediaGallery?.map((m, i) => ({
           id: `${res.product.id}-${i}`,
@@ -700,7 +703,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
   return (
     <div className={embedded?'product-records-workspace':undefined} style={{ padding: isMobile ? `0 0 ${MOBILE_BOTTOM_PADDING} 0` : `0 0 ${DESKTOP_BOTTOM_PADDING} 0` }}>
       {!embedded&&<Breadcrumb style={{ marginBottom: '1rem' }} items={[{ title: t('nav.dashboard') }, { title: t('products.title') }]} />}
-      <ProductCatalogPanel id={catalogId} onChoose={setCatalogId} entries={dataSource.filter(row=>!row.isNew)} onSaved={values=>setDataSource(prior=>prior.map(row=>{const value=values.find(v=>v.productId===row.key);return value?{...row,catalogDriven:true,name:getLocalizedFallback(value.name,row.name),nameL10n:value.name,description:getLocalizedFallback(value.description,''),descriptionL10n:value.description,brand:value.brand??undefined,sku:value.itemNumber??undefined,category:value.categoryIds[0]??'',mediaGallery:value.gallery.map(p=>({id:p.sha256||p.url,url:p.url,type:p.type==='VIDEO'?'video' as const:'image' as const,title:p.title,visible:p.visible}))}:row;}))}/>
+      <ProductCatalogPanel id={catalogId} onChoose={setCatalogId} entries={dataSource.filter(row=>!row.isNew)} onSaved={values=>setDataSource(prior=>prior.map(row=>{const value=values.find(v=>v.productId===row.key);return value?{...row,catalogDriven:true,name:getLocalizedFallback(value.name,row.name),nameL10n:value.name,specificationL10n:value.specification,description:getLocalizedFallback(value.description,''),descriptionL10n:value.description,brand:value.brand??undefined,sku:value.itemNumber??undefined,category:value.categoryIds[0]??'',mediaGallery:value.gallery.map(p=>({id:p.sha256||p.url,url:p.url,type:p.type==='VIDEO'?'video' as const:'image' as const,title:p.title,visible:p.visible}))}:row;}))}/>
 
       <div className={`stock-toolbar ${isMobile ? 'stock-toolbar-mobile' : ''} ${toolbarCompact ? 'stock-toolbar-compact' : ''}`}>
         <div style={{ minWidth: 0 }}>
@@ -768,7 +771,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
           </button>
           <div className="record-caption"><div className="record-meta"><span>{item.sku||t('rec.not_stated')}</span><span>{t(item.isNew?'stock.status.new':'stock.status.modified')}</span></div>
             <button className="record-title" onClick={()=>setCatalogId(item.key)}><h3>{name}</h3></button>
-            <p>{category?getLocalizedFallback(category.name):item.brand||t('master.title')}</p>
+            <ProductBrand brand={item.brand}/><p>{category?getLocalizedFallback(category.name):t('master.title')}</p>{getLocalizedFallback(item.specificationL10n,'')&&<p className="record-specification">{getLocalizedFallback(item.specificationL10n,'')}</p>}
             <div className="record-sale-state">{item.actualSale?`${item.actualSale.currency} ${item.actualSale.amount}`:t('sale.pending')}</div>
             <div className="record-card-actions"><Button onClick={()=>setCatalogId(item.key)}>{t('master.title')}</Button><Button type="text" onClick={()=>setPricingId(item.key)}>{t('pricing.title')}</Button><Button type="text" danger icon={<DeleteOutlined/>} aria-label={t('trash.remove')+' '+name} onClick={()=>handleDelete(item.key)}/></div>
           </div>

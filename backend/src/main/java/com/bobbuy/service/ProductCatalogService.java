@@ -23,6 +23,12 @@ public class ProductCatalogService {
   Map<String,String> specification,String model,String packaging,List<String> categoryIds,String supplierId,List<MediaGalleryItem> gallery,boolean translationsReviewed) {}
  public record Profile(Input value,boolean canonical,List<Long> sourceItemIds) {}
  public record Proposal(Input value,List<String> changes,List<String> warnings) {}
+ public record AuditSource(Long itemId,Long postId,long postVersion,boolean published,String title,String name,String itemNumber,String specification,
+  java.math.BigDecimal referencePrice,java.math.BigDecimal originalPrice,java.math.BigDecimal discountAmount,
+  java.time.LocalDate offerStart,java.time.LocalDate offerEnd,ReferenceOfferContext context,
+  java.time.LocalDate couponStart,java.time.LocalDate couponEnd,String priceUnit,String offerNotes,
+  RecommendationItem.SourceFacts sourceFacts) {}
+ public record AuditRow(Profile current,ProductCatalogData originalCatalogData,List<AuditSource> sources) {}
  private static ApiException invalid(String key){return new ApiException(ErrorCode.INVALID_REQUEST,key);}
  private Long owner(){var id=MerchantScope.current();if(id==null)throw new ApiException(ErrorCode.FORBIDDEN,"error.auth.forbidden");return id;}
  private Product owned(String id,boolean lock){return (lock?products.lockById(id):products.findById(id)).filter(p->owner().equals(p.getMerchantId())).orElseThrow(()->new ApiException(ErrorCode.RESOURCE_NOT_FOUND,"error.product.not_found"));}
@@ -33,6 +39,22 @@ public class ProductCatalogService {
  public static boolean translationsCurrent(Product product){return product.getCatalogData()!=null&&sourceHash(product).equals(product.getCatalogData().translatedSource());}
  private Input input(Product product){var data=product.getCatalogData();return new Input(product.getId(),Objects.requireNonNullElse(product.getRecordVersion(),0L),Map.copyOf(product.getName()),Map.copyOf(product.getDescription()),product.getItemNumber(),product.getBrand(),data==null?Map.of():data.specification(),data==null?null:data.model(),data==null?null:data.packaging(),data==null?(product.getCategoryId()==null?List.of():List.of(product.getCategoryId())):data.categoryIds(),data==null?null:data.supplierId(),List.copyOf(product.getMediaGallery()),translationsCurrent(product));}
  @Transactional(readOnly=true) public Profile get(String id){var p=owned(id,false);return new Profile(input(p),p.getCatalogData()!=null,sources(id).stream().map(i->i.id).toList());}
+ /** Actual current values, not proposed corrections. Canonical=false requires separate rollback handling. */
+ @Transactional(readOnly=true) public List<AuditRow> audit(){
+  Long merchant=owner();var ownedProducts=products.findAll().stream().filter(p->merchant.equals(p.getMerchantId())).sorted(Comparator.comparing(Product::getId)).toList();
+  if(ownedProducts.isEmpty())return List.of();
+  var sourceItems=items.findByProductIdInOrderById(ownedProducts.stream().map(Product::getId).toList());
+  var sourcePosts=posts.findAllById(sourceItems.stream().map(i->i.postId).distinct().toList()).stream().filter(p->merchant.equals(p.merchantId)).collect(java.util.stream.Collectors.toMap(p->p.id,p->p));
+  var grouped=sourceItems.stream().filter(i->sourcePosts.containsKey(i.postId)).collect(java.util.stream.Collectors.groupingBy(i->i.productId));
+  return ownedProducts.stream().map(p->{
+   var source=grouped.getOrDefault(p.getId(),List.of());
+   return new AuditRow(new Profile(input(p),p.getCatalogData()!=null,source.stream().map(i->i.id).toList()),p.getCatalogData(),source.stream().map(i->{
+    var post=sourcePosts.get(i.postId);
+    return new AuditSource(i.id,i.postId,post.version,post.published,post.title,i.name,i.itemNumber,i.specification,i.referencePrice,i.originalPrice,i.discountAmount,i.offerStart,i.offerEnd,i.referenceContext,
+     i.couponStart,i.couponEnd,i.priceUnit,i.offerNotes,new RecommendationItem.SourceFacts(i.name,i.itemNumber,i.specification,i.description,Map.copyOf(i.translations),i.translatedSource));
+   }).toList());
+  }).toList();
+ }
  @Transactional(readOnly=true) public List<Proposal> proposals(){return products.findAll().stream().filter(p->owner().equals(p.getMerchantId())).sorted(Comparator.comparing(Product::getId)).map(this::propose).toList();}
  private Proposal propose(Product product){
   var current=input(product);var source=sources(product.getId());var changes=new ArrayList<String>();var warnings=new ArrayList<String>();

@@ -171,7 +171,7 @@ public class StorefrontService {
                 ||(quote.revision()>0&&(i.priceRevision()==null||i.priceRevision()!=quote.revision()))))throw invalid("pricing.quote_changed");
             OrderLine line = new OrderLine(product.getId(), product.getName().getOrDefault("zh-CN", product.getName().values().stream().findFirst().orElse(product.getId())),
                 quote.unit(), entry.getValue(), quote.amount().doubleValue());
-            line.setNames(product.getName());line.setCurrency(quote.currency());line.setPriceRevision(quote.revision());line.setId(nextId());
+            OrderProductSnapshot.capture(line,product);line.setCurrency(quote.currency());line.setPriceRevision(quote.revision());line.setId(nextId());
             line.setQuotedAmount(quote.amount());line.setRegularAmount(quote.regularAmount());line.setPriceAdjustmentId(quote.adjustmentId());line.setPriceChannel(quote.channel());line.setPricedAt(pricedAt);
             order.addLine(line);
             total = total.add(quote.amount().multiply(BigDecimal.valueOf(entry.getValue())));

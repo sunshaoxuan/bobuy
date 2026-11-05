@@ -3,6 +3,11 @@ import {I18nProvider} from '../i18n';
 import {OfferInfo,factsError,parseBatch,japanDate} from './RecommendationFacts';
 
 describe('source offer facts',()=>{
+  it('keeps explicit identity fields separate through the normal form/batch contract',()=>{
+    const [row]=parseBatch(JSON.stringify([{name:'Diapers',brand:'Pampers',itemNumber:'independent-L',model:'Series',packaging:'80 pieces × 2 packs',specification:'L;80 pieces × 2',fileName:'reviewed.png'}]));
+    expect(row.name).toBe('Diapers');expect(row.brand).toBe('Pampers');expect(row.packaging).toBe('80 pieces × 2 packs');expect(row.specification).toBe('L;80 pieces × 2');
+    expect(factsError({...row,brand:123 as unknown as string})).toBeTruthy();expect(factsError({...row,model:'x'.repeat(301)})).toBeTruthy();
+  });
   it('keeps string codes, missing prices and single-ended dates without inventing facts',()=>{
     const [row]=parseBatch(JSON.stringify([{name:'Synthetic',itemNumber:'00123',imageUrl:'https://cds2.costcojapan.jp/cds/mail-images/test.png',offerEnd:'2026-11-22'}]));
     expect(row.itemNumber).toBe('00123');expect(row.referencePrice).toBeUndefined();expect(row.offerStart).toBeUndefined();

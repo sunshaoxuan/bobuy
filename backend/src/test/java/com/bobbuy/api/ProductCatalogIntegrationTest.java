@@ -20,6 +20,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest @AutoConfigureMockMvc
 class ProductCatalogIntegrationTest {
+ @Test void auditReturnsActualValuesReferencesAndPricesWithoutCanonicalizing() throws Exception {
+  var before=products.findById(id).orElseThrow();long version=before.getRecordVersion();
+  var response=json.readTree(mvc.perform(get("/api/merchant/product-catalog/audit").header("Authorization","Bearer "+admin)).andExpect(status().isOk()).andReturn().getResponse().getContentAsString()).path("data");
+  com.fasterxml.jackson.databind.JsonNode row=null;for(var value:response)if(id.equals(value.at("/current/value/productId").asText()))row=value;
+  assertThat(row).isNotNull();assertThat(row.at("/current/canonical").asBoolean()).isFalse();assertThat(row.get("originalCatalogData").isNull()).isTrue();
+  assertThat(row.at("/current/value/version").asLong()).isEqualTo(version);assertThat(row.get("sources")).hasSize(2);
+  assertThat(row.at("/sources/0/referencePrice").asInt()).isEqualTo(500);assertThat(row.at("/sources/1/referencePrice").asInt()).isEqualTo(600);
+  assertThat(products.findById(id).orElseThrow().getCatalogData()).isNull();
+  var otherData=json.readTree(mvc.perform(get("/api/merchant/product-catalog/audit").header("Authorization","Bearer "+other)).andExpect(status().isOk()).andReturn().getResponse().getContentAsString()).path("data");
+  for(var value:otherData)assertThat(value.at("/current/value/productId").asText()).isNotEqualTo(id);
+ }
  @Autowired MockMvc mvc; @Autowired ObjectMapper json; @Autowired BobbuyStore store;
  @Autowired ProductRepository products; @Autowired UserRepository users; @Autowired JwtTokenService tokens;
  @Autowired RecommendationItemRepository items; @Autowired RecommendationPostRepository posts;

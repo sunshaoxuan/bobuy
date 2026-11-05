@@ -1,3 +1,4 @@
+import {ProductBrand,ProductVariant} from '../components/ProductMetadata';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Alert, Button, Drawer, Empty, Input, Segmented, Spin, Tooltip } from 'antd';
 import { ArrowLeftOutlined, ArrowRightOutlined, CalendarOutlined, DownOutlined, ExpandOutlined, PlusOutlined, UpOutlined, UserOutlined } from '@ant-design/icons';
@@ -79,7 +80,7 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
           <button className="product-photo" aria-label={t('store.detail_label', {name:item.name})} onClick={() => openItem(item)}>{item.gallery?.[0]?.url?<img src={item.gallery[0].url} alt={text.name} loading={index < 2 && number === 1 ? 'eager' : 'lazy'} />:<span className="rec-no-product-image">{t('gallery.pending')}</span>}</button>
           <Tooltip title={buyable ? t('store.add_cart') : t('store.unavailable')}><button className="product-add" aria-label={t('store.add_label', {name:item.name})} disabled={!buyable} onClick={() => product && onAdd(product)}><PlusOutlined />{!!(item.productId && quantities[item.productId]) && <span className="product-count">{quantities[item.productId!]}</span>}</button></Tooltip>
           <Tooltip title={t('store.details')}><button className="rec-pin-preview" aria-label={t('store.details') + ': ' + text.name} onClick={() => openItem(item)}><ExpandOutlined /></button></Tooltip>
-          <div className="product-body"><button className="product-name" onClick={()=>openItem(item)}><h3 title={text.name}><RecommendationName text={text}/></h3></button>{text.specification&&<p className="rec-compact-spec">{text.specification}</p>}{text.missing&&<small>{t('article.field_source',{fields:text.sourceFields.map(key=>t(key==='description'?'master.descriptions':key==='specification'?'master.specifications':'rec.fact.'+key)).join(' · ')})}</small>}</div>
+          <div className="product-body"><ProductBrand brand={item.brand}/><button className="product-name" onClick={()=>openItem(item)}><h3 title={text.name}><RecommendationName text={text}/></h3></button>{text.specification&&<p className="rec-compact-spec">{text.specification}</p>}{text.missing&&<small>{t('article.field_source',{fields:text.sourceFields.map(key=>t(key==='description'?'master.descriptions':key==='specification'?'master.specifications':'rec.fact.'+key)).join(' · ')})}</small>}</div>
         </div>
         <small className="rec-pin-code">{t('rec.code')}: {item.itemNumber || t('rec.not_stated')}</small>
         {!!item.categories?.length&&<div className="rec-item-categories">{item.categories.map(category=><span key={category.id}>{localizedContent(category.name,locale)}</span>)}</div>}
@@ -100,7 +101,7 @@ function RecommendationProductDetail({item,product,onClose,onAdd,canBuy}:{item?:
  if(!item)return null;const text=recommendationText(item,locale),gallery=item.gallery??[];
  return <Drawer className="rec-product-detail" title={t('store.details')} width="min(100vw,760px)" open={!!item} onClose={onClose}>
   <RecommendationImageViewer key={item.id} pictures={gallery} name={text.name}/>
-  <h1><RecommendationName text={text}/></h1><p>{t('rec.code')}: {item.itemNumber||t('rec.not_stated')}</p>{text.missing&&<Alert type="info" message={t('article.field_source',{fields:text.sourceFields.map(key=>t(key==='description'?'master.descriptions':key==='specification'?'master.specifications':'rec.fact.'+key)).join(' · ')})}/>}
+  <ProductBrand brand={item.brand}/><h1><RecommendationName text={text}/></h1><ProductVariant model={item.model} packaging={item.packaging}/><p>{t('rec.code')}: {item.itemNumber||t('rec.not_stated')}</p>{text.missing&&<Alert type="info" message={t('article.field_source',{fields:text.sourceFields.map(key=>t(key==='description'?'master.descriptions':key==='specification'?'master.specifications':'rec.fact.'+key)).join(' · ')})}/>}
   {text.specification&&<p className="rec-detail-spec">{text.specification}</p>}
   {product&&<SellingPrice product={product}/>}
   <OfferInfo facts={{...item,offerNotes:text.offerNotes}}/>

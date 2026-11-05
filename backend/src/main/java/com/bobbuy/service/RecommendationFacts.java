@@ -21,8 +21,16 @@ public record RecommendationFacts(
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate couponStart,
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate couponEnd,
     @Size(max=2000) String offerNotes,
-    @Valid com.bobbuy.model.ReferenceOfferContext referenceContext
+    @Valid com.bobbuy.model.ReferenceOfferContext referenceContext,
+    @Size(max=200) String brand,
+    @Size(max=300) String model,
+    @Size(max=1000) String packaging,
+    @Size(max=1000) String specification
 ) {
+    public RecommendationFacts(String name,String itemNumber,BigDecimal referencePrice,BigDecimal originalPrice,BigDecimal discountAmount,String priceUnit,
+        LocalDate offerStart,LocalDate offerEnd,LocalDate couponStart,LocalDate couponEnd,String offerNotes,com.bobbuy.model.ReferenceOfferContext referenceContext){
+        this(name,itemNumber,referencePrice,originalPrice,discountAmount,priceUnit,offerStart,offerEnd,couponStart,couponEnd,offerNotes,referenceContext,null,null,null,null);
+    }
     public void apply(RecommendationItem item) {
         ReferenceOfferWindow.resolve(offerStart,offerEnd,referenceContext);
         if ((offerStart != null && offerEnd != null && offerStart.isAfter(offerEnd))
@@ -34,6 +42,8 @@ public record RecommendationFacts(
         item.offerStart = offerStart; item.offerEnd = offerEnd; item.couponStart = couponStart; item.couponEnd = couponEnd;
         item.offerNotes = clean(offerNotes);
         item.referenceContext = referenceContext;
+        item.brand=clean(brand);item.model=clean(model);item.packaging=clean(packaging);
+        if(specification!=null)item.specification=clean(specification);
     }
     private static String clean(String value) { return value == null || value.isBlank() ? null : value.trim(); }
 }

@@ -47,6 +47,7 @@ export type Trip = {
 };
 
 export type OrderLine = {
+    brand?:string|null;itemNumber?:string|null;model?:string|null;packaging?:string|null;saleUnit?:string|null;specifications?:Record<string,string>;
     id?: number;
     skuId: string;
     itemName: string;
@@ -279,6 +280,7 @@ export type CustomerBalanceLedgerEntry = {
     billingConfirmedBy?: string;
     paymentRecords?: CustomerPaymentRecord[];
     orderLines: {
+        snapshot?:import('./components/OrderProductIdentity').OrderIdentity;
         skuId: string;
         itemName: string;
     names?:Record<string,string>;currency?:string;priceRevision?:number;
@@ -366,6 +368,7 @@ export type ProcurementItemResponse = {
 };
 
 export type PickingChecklistItem = {
+    snapshot?:import('./components/OrderProductIdentity').OrderIdentity;
     skuId: string;
     itemName: string;
     names?:Record<string,string>;currency?:string;priceRevision?:number;
@@ -400,6 +403,7 @@ export type DeliveryPreparation = {
 };
 
 export type ProcurementDeficitItemResponse = {
+    snapshots?:import('./components/OrderProductIdentity').OrderIdentity[];
     skuId: string;
     itemName: string;
     names?:Record<string,string>;currency?:string;priceRevision?:number;
@@ -1005,7 +1009,7 @@ export type AiOnboardingSuggestion = {
 export type RecommendationSummary = { id: number; title: string; published: boolean; version: number; updatedAt: string; publishedAt?: string; publisherName?: string; coverImageUrl?: string; merchantId?:number;articleTitles?:Record<string,string> };
 export type ReferenceOfferContext={supplierKey?:string;channel?:'COSTCO_WAREHOUSE'|'COSTCO_ONLINE';variantKey?:string;sourceMessageKey?:string;sourceUrl?:string;activityStart?:string|null;activityEnd?:string|null;activityApplies?:boolean;windowEvidence?:string;startSearchComplete?:boolean};
 export type ReferenceResolution={state:string;amount:number|null;itemIds:number[];unknownWindows:number};
-export type RecommendationFacts = { name: string; itemNumber?: string | null; referencePrice?: number | null; originalPrice?: number | null; discountAmount?: number | null; priceUnit?: string | null; offerStart?: string | null; offerEnd?: string | null; couponStart?: string | null; couponEnd?: string | null; offerNotes?: string | null;referenceContext?:ReferenceOfferContext|null;referenceQuote?:ReferenceResolution };
+export type RecommendationFacts = { brand?:string|null;model?:string|null;packaging?:string|null;specification?:string|null; name: string; itemNumber?: string | null; referencePrice?: number | null; originalPrice?: number | null; discountAmount?: number | null; priceUnit?: string | null; offerStart?: string | null; offerEnd?: string | null; couponStart?: string | null; couponEnd?: string | null; offerNotes?: string | null;referenceContext?:ReferenceOfferContext|null;referenceQuote?:ReferenceResolution };
 export type RecommendationLabel = {id:string;name:Record<string,string>};
 export type RecommendationText={name:string;specification?:string|null;description?:string|null;offerNotes?:string|null};
 export type LocalizationRow={itemId:number;sourceHash:string;specification?:string|null;description?:string|null;translations:Record<string,RecommendationText>};
@@ -1039,6 +1043,7 @@ export const productPricingApi={
  regular:(id:string,value:Omit<ProductSale,'reviewedBy'|'reviewedAt'>)=>putJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/regular',{...value,confirmed:true,replaceExisting:true})
 };
 export const productCatalogApi={
+ audit:()=>storeGet<unknown[]>('/api/merchant/product-catalog/audit'),
  get:(id:string)=>storeGet<{value:CatalogInput;canonical:boolean;sourceItemIds:number[]}>('/api/merchant/product-catalog/'+encodeURIComponent(id)),
  proposals:()=>storeGet<CatalogProposal[]>('/api/merchant/product-catalog'),
  preview:(rows:CatalogInput[])=>postJson<CatalogProposal[],object>('/api/merchant/product-catalog/preview',{rows,reviewed:false}),

@@ -11,6 +11,7 @@ public class ProductCatalogController {
  public record Batch(List<ProductCatalogService.Input> rows,boolean reviewed) {}
  @GetMapping("/{id}") public ApiResponse<?> get(@PathVariable String id){return ApiResponse.success(service.get(id));}
  @GetMapping public ApiResponse<?> proposals(){return ApiResponse.success(service.proposals());}
+ @GetMapping("/audit") public ApiResponse<?> audit(){return ApiResponse.success(service.audit());}
  @PostMapping("/preview") public ApiResponse<?> preview(@RequestBody Batch input){return ApiResponse.success(service.preview(input.rows()));}
  @PutMapping public ApiResponse<?> save(@RequestBody Batch input){return ApiResponse.success(service.save(input.rows(),input.reviewed()));}
  @PostMapping(value="/{id}/images",consumes=org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE)

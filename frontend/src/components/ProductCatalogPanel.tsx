@@ -11,6 +11,7 @@ const languages=[{key:'ja-JP',label:'日本語'},{key:'zh-CN',label:'简体中�
 export default function ProductCatalogPanel({entries,id,onChoose,onSaved}:{entries:{key:string;name:string}[];id?:string;onChoose:(id?:string)=>void;onSaved:(rows:CatalogInput[])=>void}){
  const {t,locale}=useI18n();const [draft,setDraft]=useState<CatalogInput>(),[busy,setBusy]=useState(false),[error,setError]=useState(''),[reviewed,setReviewed]=useState(false),[canonical,setCanonical]=useState(false);
  const [options,setOptions]=useState<{categories:RecommendationChoice[];suppliers:RecommendationChoice[]}>({categories:[],suppliers:[]});
+ const [audit,setAudit]=useState('');
  const [bulk,setBulk]=useState(false),[json,setJson]=useState(''),[rows,setRows]=useState<CatalogProposal[]>([]),[validated,setValidated]=useState(false),[selected,setSelected]=useState<React.Key[]>([]);
  const [source,setSource]=useState(''),[imageReviewed,setImageReviewed]=useState(false);const fileInput=useRef<HTMLInputElement>(null);
  const [activeImage,setActiveImage]=useState(0),[imageOpen,setImageOpen]=useState(false);const imageOpener=useRef<HTMLButtonElement>(null);
@@ -78,7 +79,7 @@ export default function ProductCatalogPanel({entries,id,onChoose,onSaved}:{entri
   <ImageLightbox pictures={previewPictures} index={Math.min(activeImage,Math.max(0,previewPictures.length-1))} open={imageOpen&&!!id} name={draft?localizedContent(draft.name,locale):''} onIndexChange={setActiveImage} onClose={()=>setImageOpen(false)} returnFocus={imageOpener}/>
   <Modal title={t('products.unsaved')} open={discardOpen} onOk={()=>{setDiscardOpen(false);onChoose(undefined);}} onCancel={keepEditing} okText={t('products.discard')} cancelText={t('products.keep_editing')} zIndex={1200}>{t('products.unsaved_hint')}</Modal>
   <Drawer rootClassName="catalog-editor catalog-bulk-editor" title={t('master.bulk')} open={bulk} width={1050} onClose={()=>setBulk(false)} destroyOnClose>
-   <p>{t('master.bulk_hint')}</p>{error&&<Alert type="error" message={warning(error)}/>}<Button loading={busy} onClick={()=>void suggestions()}>{t('master.suggestions')}</Button>
+   <p>{t('master.bulk_hint')}</p><Button onClick={()=>{setBusy(true);setError('');void productCatalogApi.audit().then(rows=>setAudit(JSON.stringify(rows,null,2))).catch(e=>setError(e.message)).finally(()=>setBusy(false));}} disabled={busy}>{t('master.audit')}</Button>{audit&&<Input.TextArea readOnly aria-label={t('master.audit')} rows={8} value={audit}/>}{error&&<Alert type="error" message={warning(error)}/>}<Button loading={busy} onClick={()=>void suggestions()}>{t('master.suggestions')}</Button>
    <Input.TextArea disabled={busy} aria-label={t('master.json')} rows={9} value={json} onChange={e=>{setJson(e.target.value);setValidated(false);setReviewed(false);}}/>
    <Button loading={busy} disabled={!json.trim()} onClick={()=>void preview()}>{t('rec.batch_preview')}</Button>
    {!!rows.length&&<Table rowKey={row=>row.value.productId} dataSource={rows} scroll={{x:700}} pagination={{pageSize:10}} rowSelection={{selectedRowKeys:selected,onChange:setSelected}} columns={[
