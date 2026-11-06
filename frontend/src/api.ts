@@ -1027,7 +1027,10 @@ export const recommendationTaxonomyApi = {
     assign:(id:number,input:RecommendationAssignment)=>putJson<RecommendationDetail,RecommendationAssignment>(recommendationBase+'/'+id+'/classification',input)
 };
 export type ArticleText={title:string;body:string;sourceHash:string;reviewedAt:string};
-export type RecommendationDetail = { post: RecommendationSummary; body: string; items: RecommendationItem[];articleSourceLocale?:string|null;articleSourceHash?:string;articleTranslations?:Record<string,ArticleText> };
+export type ServiceTerms = {title:string;description:string;eligibility:string;regions:string;restrictions:string;cancellation:string;benefits:string[]};
+export type ServiceFee = {key:string;amount:number|null;descriptions:Record<string,string>};
+export type ServiceOffer = {sourceUrl:string|null;sourceText:string|null;provider:string;staff:number|null;hours:number|null;originalPrice:number|null;price:number|null;currency:'JPY';taxIncluded:boolean;fees:ServiceFee[];noExtraFees:boolean;applicationStart:string|null;applicationEnd:string|null;serviceStart:string|null;serviceEnd:string|null;terms:Record<string,ServiceTerms>;costsReviewed:boolean;windowsReviewed:boolean;reviewed:boolean};
+export type RecommendationDetail = { post: RecommendationSummary; body: string; items: RecommendationItem[];articleSourceLocale?:string|null;articleSourceHash?:string;articleTranslations?:Record<string,ArticleText>;serviceOffer?:ServiceOffer|null };
 const recommendationBase = '/api/merchant/recommendations';
 export type CatalogMedia={url:string;type:string;title:Record<string,string>;visible:boolean;sha256?:string|null;sourceUrl?:string|null;sourceDomain?:string|null;sourceType?:string|null};
 export type CatalogInput={productId:string;version:number;name:Record<string,string>;description:Record<string,string>;itemNumber?:string|null;brand?:string|null;specification:Record<string,string>;model?:string|null;packaging?:string|null;categoryIds:string[];supplierId?:string|null;gallery:CatalogMedia[];translationsReviewed:boolean};
@@ -1054,6 +1057,8 @@ export const productCatalogApi={
 export type CurrencyDefinition={code:string;symbol:string;fractionDigits:number;name:string;saleEnabled:boolean};
 export const masterDataApi={currencies:()=>storeGet<CurrencyDefinition[]>('/api/merchant/currencies')};
 export const recommendationApi = {
+    createService:(offer:ServiceOffer)=>postJson<RecommendationDetail,ServiceOffer>(recommendationBase+'/service-offers',offer),
+    saveService:(id:number,offer:ServiceOffer,version:number)=>putJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/service-offer',{offer,version}),
     articleLanguage:(id:number,input:{locale:string;title:string;body:string;sourceHash:string;version:number;reviewed:boolean})=>putJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/article-localizations',input),
     articleHistory:(id:number)=>storeGet<{id:number;recordedAt:string;facts:{title:string;body:string;sourceLocale:string|null;translations:Record<string,ArticleText>}}[]>(recommendationBase+'/'+id+'/article-history'),
     referenceHistory:(post:number,item:number)=>storeGet<{id:number;recordedAt:string;facts:Record<string,unknown>}[]>(recommendationBase+'/'+post+'/items/'+item+'/reference-history'),

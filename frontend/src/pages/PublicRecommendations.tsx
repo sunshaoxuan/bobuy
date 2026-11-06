@@ -7,7 +7,7 @@ import { storefrontApi,recommendationApi, type RecommendationDetail, type StoreP
 import { localizedContent, useI18n } from '../i18n';
 import { OfferInfo } from '../components/RecommendationFacts';
 import '../recommendations.css';
-import {availableCategory,categoryChoices,filterRecommendations,issueScope,readAllIssues,UNCLASSIFIED} from '../recommendationFilters';
+import {availableCategory,categoryChoices,filterRecommendations,issueScope,readAllIssues,searchRecommendations,UNCLASSIFIED} from '../recommendationFilters';
 import {scopedPath,selectedNode} from '../storeNavigation';
 import {recommendationText} from '../recommendationText';
 import SellingPrice from '../components/SellingPrice';
@@ -65,10 +65,11 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
       </div>
     </header>
     {(article.missingTitle||article.missingBody)&&<Alert type="info" showIcon message={t(article.sourceKnown?'article.source_fallback':'article.legacy')} description={[article.missingTitle?t('rec.article_title'):'',article.missingBody?t('rec.body'):''].filter(Boolean).join(' · ')}/>}
+    {detail.serviceOffer&&<span className="service-kind">{t('service.kind')}</span>}
     <div className="rec-public-body" id={'rec-body-' + detail.post.id}>{shown.split(/\n\s*\n/).filter(Boolean).map((paragraph, index) => <p key={index}>{paragraph}</p>)}</div>
     {truncated && <Button type="text" className="rec-expand" aria-expanded={expanded} aria-controls={'rec-body-' + detail.post.id} icon={expanded ? <UpOutlined /> : <DownOutlined />} onClick={() => setExpanded(value => !value)}>{t(expanded ? 'rec.collapse' : 'rec.read_more')}</Button>}
-    <div className="rec-products-heading"><h3>{t('rec.products')} <span>{detail.items.length}</span></h3>{!single && <Link to={'/recommendations/' + detail.post.id+search}>{t('rec.view')} <ArrowRightOutlined /></Link>}</div>
-    <div className="product-masonry rec-public-products" ref={grid}>{detail.items.map((item, index) => {
+    {!detail.serviceOffer&&<div className="rec-products-heading"><h3>{t('rec.products')} <span>{detail.items.length}</span></h3>{!single && <Link to={'/recommendations/' + detail.post.id+search}>{t('rec.view')} <ArrowRightOutlined /></Link>}</div>}
+    {!detail.serviceOffer&&<div className="product-masonry rec-public-products" ref={grid}>{detail.items.map((item, index) => {
       const text=recommendationText(item,locale);
       const product = item.productId ? catalog.get(item.productId) : undefined;
       const buyable = !!product && canBuy(product);
@@ -90,7 +91,7 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
         {product&&<SellingPrice product={product}/>}
         {!buyable && <small className="rec-pin-status">{t(readOnlyPreview?'rec.preview_only':item.productId ? 'catalog.not_available' : 'rec.reference_only')}</small>}
       </article>;
-    })}</div>
+    })}</div>}
     <RecommendationProductDetail item={opened} onClose={closeItem} product={opened?.productId?catalog.get(opened.productId):undefined} onAdd={onAdd} canBuy={canBuy}/>
 
   </article>;
@@ -125,9 +126,9 @@ export function CategoryFilters({posts,category,onChoose}:{posts:RecommendationD
 // The editor uses the same cards and filters as the public page, with local state
 // and no publishing, save, purchase or public draft endpoint.
 export function RecommendationPreview({detail}:{detail:RecommendationDetail}) {
-  const {t}=useI18n();const [category,setCategory]=useState(''),[device,setDevice]=useState('full'),[query,setQuery]=useState('');
+  const {t,locale}=useI18n();const [category,setCategory]=useState(''),[device,setDevice]=useState('full'),[query,setQuery]=useState('');
   const [products,setProducts]=useState<StoreProduct[]>([]);useEffect(()=>{let active=true;void storefrontApi.products().then(values=>{if(active)setProducts(values);}).catch(()=>{});return()=>{active=false;};},[detail.post.id]);
-  const posts=[{...detail,items:detail.items.filter(item=>(item.name+' '+(item.itemNumber??'')).toLocaleLowerCase().includes(query.toLocaleLowerCase().trim()))}];
+  const posts=searchRecommendations([detail],query,locale);
   const visible=filterRecommendations(posts,category),catalog=new Map(products.map(product=>[product.id,product]));
   return <section className="rec-draft-preview"><p>{t('browse.preview_hint')}</p><Segmented aria-label={t('browse.preview_size')} value={device} onChange={value=>setDevice(String(value))} options={[{value:'full',label:t('browse.desktop')},{value:'mobile',label:t('browse.mobile')}]}/>
     <div className="storefront browse-preview" data-device={device}><section className="recommendations rec-public">
@@ -165,12 +166,12 @@ export default function PublicRecommendations(props: ShoppingProps) {
   const historyIds=useMemo(()=>new Set(arranged.history.map(entry=>entry.post.id)),[arranged]);
   const selected=pending?[]:issueScope(ordered,topic);
   const query=props.query?.trim().toLocaleLowerCase()??'';
-  const scope=query?selected.map(post=>({...post,items:post.items.filter(item=>(recommendationText(item,locale).name+' '+(item.itemNumber??'')).toLocaleLowerCase().includes(query))})).filter(post=>post.items.length):selected;
+  const scope=searchRecommendations(selected,query,locale);
   const activeCategory=availableCategory(scope,category);
   const visible=filterRecommendations(scope,activeCategory);
   useEffect(()=>{if(pending||error||!category||activeCategory===category)return;const next=new URLSearchParams(params);next.delete('category');setParams(next,{replace:true});},[pending,error,category,activeCategory,params,setParams]);
   function choose(value:string){if(value===activeCategory)return;const next=new URLSearchParams(params);next.delete('item');if(value)next.set('category',value);else next.delete('category');setParams(next);}
-  function topicPath(value:string){const next=new URLSearchParams(params);next.delete('item');if(value)next.set('topic',value);else next.delete('topic');const target=issueScope(ordered,value),searched=query?target.map(post=>({...post,items:post.items.filter(item=>(recommendationText(item,locale).name+' '+(item.itemNumber??'')).toLocaleLowerCase().includes(query))})):target;if(!availableCategory(searched,category))next.delete('category');return '/recommendations'+(next.size?'?'+next.toString():'');}
+  function topicPath(value:string){const next=new URLSearchParams(params);next.delete('item');if(value)next.set('topic',value);else next.delete('topic');const searched=searchRecommendations(issueScope(ordered,value),query,locale);if(!availableCategory(searched,category))next.delete('category');return '/recommendations'+(next.size?'?'+next.toString():'');}
   const currentVisible=topic?visible:visible.filter(entry=>!historyIds.has(entry.post.id));
   const historyVisible=topic?[]:visible.filter(entry=>historyIds.has(entry.post.id));
   const selectedHistory=!!topic&&historyIds.has(Number(topic));

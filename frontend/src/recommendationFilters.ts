@@ -1,4 +1,10 @@
 import type {RecommendationDetail,RecommendationItem,RecommendationLabel} from './api';
+import {articleText} from './recommendationArticle';
+import {recommendationText} from './recommendationText';
+export function searchRecommendations(posts:RecommendationDetail[],query:string,locale:string){
+ const needle=query.trim().toLocaleLowerCase();if(!needle)return posts;
+ return posts.flatMap(post=>{if(post.serviceOffer){const text=articleText(post,locale);return (text.title+' '+text.body+' '+post.serviceOffer.provider).toLocaleLowerCase().includes(needle)?[post]:[];}const items=post.items.filter(item=>(recommendationText(item,locale).name+' '+(item.itemNumber??'')).toLocaleLowerCase().includes(needle));return items.length?[{...post,items}]:[];});
+}
 export const UNCLASSIFIED='__unclassified';
 export const itemCategories=(item:RecommendationItem)=>[...new Set(item.categoryIds??item.categories?.map(category=>category.id)??[])];
 export function filterRecommendations(posts:RecommendationDetail[],category:string) {

@@ -12,6 +12,7 @@ vi.mock('../components/RecommendationFromProduct',()=>({default:()=>null}));
 vi.mock('../components/RecommendationGallery',()=>({default:()=>null}));
 vi.mock('../components/RecommendationLocalization',()=>({default:()=>null}));
 import PublicRecommendations from './PublicRecommendations';
+import {serviceFixture} from '../serviceOffer.fixture';
 const mocks = vi.hoisted(() => ({ get:vi.fn(),list:vi.fn(),feed:vi.fn(),create:vi.fn(),save:vi.fn(),publish:vi.fn(),write:vi.fn(),upload:vi.fn(),remove:vi.fn() }));
 vi.mock('../api', () => ({ recommendationApi:mocks,storefrontApi:{products:vi.fn().mockResolvedValue([])} }));
 const detail = { post:{id:1,title:'Tea picks',published:false,version:2,updatedAt:'2026-10-26T10:00:00'},body:'Original body',items:[
@@ -21,6 +22,14 @@ function show() { return render(<I18nProvider><MemoryRouter initialEntries={['/a
 const shopping = { products:[{id:'p1',merchantId:1000,name:{'zh-CN':'Tea'},description:{},brand:'',price:120,categoryId:'',images:['/tea.png']}], quantities:{p1:2}, onDetail:vi.fn(), onAdd:vi.fn(), canBuy:()=>true };
 function publicFeed() { return render(<I18nProvider><MemoryRouter><PublicRecommendations {...shopping} /></MemoryRouter></I18nProvider>); }
 describe('Recommendations', () => {
+  it('renders a text-only service without product cards, cart controls or a zero-product warning',async()=>{
+    mocks.feed.mockResolvedValue([{...detail,post:{...detail.post,title:'Synthetic service',published:true},items:[],body:'Executive service with separately stated transport and cancellation terms.',serviceOffer:serviceFixture()}]);
+    const view=publicFeed();await screen.findByRole('heading',{name:'Synthetic service'});
+    expect(view.container.querySelector('.service-kind')).toBeInTheDocument();
+    expect(view.container.querySelectorAll('.rec-pin,.product-add,.rec-public-products')).toHaveLength(0);
+    expect(screen.getByText(/Executive service with separately/)).toBeInTheDocument();
+    expect(shopping.onAdd).not.toHaveBeenCalled();
+  });
   it('shows full image sets for multiple issues and independently expands their bodies', async () => {
     mocks.feed.mockResolvedValue([detail,{...detail,post:{...detail.post,id:2,title:'Second issue'},body:'Second body '.repeat(40)}].map((entry,index)=>({...entry,body:entry.body.repeat(index ? 1 : 50)+'END'+index})));
     const view=publicFeed(); await screen.findByRole('heading',{name:'Second issue'});

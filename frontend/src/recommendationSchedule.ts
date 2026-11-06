@@ -12,7 +12,7 @@ export function itemOfferExpired(item:RecommendationFacts,today:string){
  if(item.couponStart||item.couponEnd){if(!validDay(item.couponStart)||!validDay(item.couponEnd)||today<=item.couponEnd||item.couponStart>item.couponEnd)return false;}
  return true;
 }
-export function issueExpired(issue:RecommendationDetail,today:string){return issue.items.length>0&&issue.items.every(item=>itemOfferExpired(item,today));}
+export function issueExpired(issue:RecommendationDetail,today:string){if(issue.serviceOffer){const o=issue.serviceOffer;return validDay(today)&&validDay(o.applicationStart)&&validDay(o.serviceStart)&&validDay(o.applicationEnd)&&validDay(o.serviceEnd)&&o.applicationStart<=o.applicationEnd&&o.serviceStart<=o.serviceEnd&&today>o.serviceEnd&&today>o.applicationEnd;}return issue.items.length>0&&issue.items.every(item=>itemOfferExpired(item,today));}
 function published(issue:RecommendationDetail){const time=Date.parse(issue.post.publishedAt??'');return Number.isFinite(time)?time:0;}
 /** Sorting never rewrites source dates or combines shared products from different issues. */
 export function arrangeIssues(posts:RecommendationDetail[],today:string){

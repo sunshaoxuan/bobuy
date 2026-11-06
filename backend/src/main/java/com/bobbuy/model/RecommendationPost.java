@@ -16,6 +16,9 @@ public class RecommendationPost {
     @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.JSON)
     @Column(columnDefinition="jsonb",nullable=false)
     public java.util.Map<String,ArticleText> articleTranslations=new java.util.HashMap<>();
+    @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.JSON)
+    @Column(columnDefinition="jsonb") public RecommendationServiceOffer serviceOffer;
+    @Column(length=64) public String serviceSourceKey;
     @Column(nullable = false) public boolean published;
     @Version public long version;
     @Column(nullable = false) public LocalDateTime createdAt = LocalDateTime.now();
