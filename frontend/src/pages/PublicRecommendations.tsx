@@ -115,6 +115,7 @@ function RecommendationProductDetail({item,product,onClose,onAdd,canBuy}:{item?:
 
 export function CategoryFilters({posts,category,onChoose}:{posts:RecommendationDetail[];category:string;onChoose:(value:string)=>void}) {
   const {t,locale}=useI18n(),choices=categoryChoices(posts);
+  if(choices.total===0)return null;
   return <nav className="rec-category-filters" aria-label={t('class.filters')}>
     <button type="button" aria-pressed={!category} onClick={()=>onChoose('')}>{t('class.all')} ({choices.total})</button>
     {choices.categories.map(value=><button type="button" key={value.id} aria-pressed={category===value.id} onClick={()=>onChoose(value.id)}>{localizedContent(value.name,locale)} ({value.count})</button>)}

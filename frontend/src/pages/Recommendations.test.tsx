@@ -27,6 +27,7 @@ describe('Recommendations', () => {
     const view=publicFeed();await screen.findByRole('heading',{name:'Synthetic service'});
     expect(view.container.querySelector('.service-kind')).toBeInTheDocument();
     expect(view.container.querySelectorAll('.rec-pin,.product-add,.rec-public-products')).toHaveLength(0);
+    expect(view.container.querySelector('.rec-category-filters')).not.toBeInTheDocument();
     expect(screen.getByText(/Executive service with separately/)).toBeInTheDocument();
     expect(shopping.onAdd).not.toHaveBeenCalled();
   });
