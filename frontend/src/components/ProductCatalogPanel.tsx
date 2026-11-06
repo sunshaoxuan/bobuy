@@ -5,6 +5,7 @@ import {localizedContent,useI18n} from '../i18n';
 import {PictureOutlined,UploadOutlined,CheckCircleOutlined,ArrowLeftOutlined,ArrowRightOutlined,DeleteOutlined,StarOutlined} from '@ant-design/icons';
 import './productCatalog.css';
 import {ImageLightbox} from './ImageLightbox';
+import CatalogCategorySelect from './CatalogCategorySelect';
 import {IMAGE_UPLOAD_ACCEPT} from '../imageUpload';
 
 const languages=[{key:'ja-JP',label:'日本語'},{key:'zh-CN',label:'简体中文'},{key:'zh-TW',label:'繁體中文'},{key:'en-US',label:'English'}];
@@ -61,7 +62,7 @@ export default function ProductCatalogPanel({entries,id,onChoose,onSaved}:{entri
       <label>{t('stock.item.brand')}<Input maxLength={200} value={draft.brand??''} onChange={e=>patch({brand:e.target.value||null})}/></label>
       <label>{t('master.model')}<Input maxLength={300} value={draft.model??''} onChange={e=>patch({model:e.target.value||null})}/></label>
       <label>{t('master.packaging')}<Input maxLength={1000} value={draft.packaging??''} onChange={e=>patch({packaging:e.target.value||null})}/></label>
-      <label>{t('master.categories')}<Select disabled={busy} aria-label={t('master.categories')} mode="multiple" value={draft.categoryIds} onChange={categoryIds=>patch({categoryIds})} options={options.categories.map(c=>({value:c.id,label:localizedContent(c.name,locale)}))}/></label>
+      <label>{t('master.categories')}<CatalogCategorySelect key={draft.productId} disabled={busy} choices={options.categories} value={draft.categoryIds} onChange={categoryIds=>patch({categoryIds})}/></label>
       <label>{t('master.supplier')}<Select disabled={busy} aria-label={t('master.supplier')} allowClear value={draft.supplierId??undefined} onChange={supplierId=>patch({supplierId:supplierId??null})} options={options.suppliers.map(c=>({value:c.id,label:localizedContent(c.name,locale)}))}/></label>
      </div><small className="catalog-internal-id">{draft.productId}</small><small>{t('master.version')}: {draft.version}</small><details><summary>{t('master.references')} ({sourceItems.length})</summary><p>{sourceItems.join(', ')||t('rec.not_stated')}</p></details></div>},
      {key:'copy',label:t('products.language_copy'),children:<div className="catalog-tab-content">{error&&editorTab==='copy'&&<Alert type="error" message={warning(error)}/>}<Segmented className="catalog-language-switch" aria-label={t('products.language_copy')} value={language} onChange={value=>setLanguage(String(value))} options={languages.map(l=>({value:l.key,label:l.label}))}/><div className="product-catalog-language">

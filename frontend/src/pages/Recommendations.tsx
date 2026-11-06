@@ -1,3 +1,4 @@
+import RecommendationList from '../components/RecommendationList';
 import { useEffect, useRef, useState } from 'react';
 import { Alert, Button, Checkbox, Empty, Input, Pagination, Popconfirm, Spin, Tag, Tooltip } from 'antd';
 import { ArrowLeftOutlined, CheckOutlined, CopyOutlined, DeleteOutlined, EditOutlined, EyeOutlined, PlusOutlined, ReloadOutlined, SaveOutlined, SendOutlined, UploadOutlined } from '@ant-design/icons';
@@ -146,7 +147,7 @@ export default function Recommendations() {
     });
   }
   if (loading) return <div className="rec-loading"><Spin /></div>;
-  return <div className={'recommendations' + (detail ? ' rec-editing' : '')}>
+  return <div className={'recommendations' + (detail ? ' rec-editing' : ' rec-managing')}>
     <header className="rec-heading"><div><h1>{t('rec.title')}</h1>{detail && <Tag color={published ? 'green' : undefined}>{t(published ? 'rec.published' : 'rec.draft')}{dirty ? ' *' : ''}</Tag>}</div>
       {!id && <div className="rec-action-group"><Button onClick={()=>setServiceOpen(true)}>{t('service.kind')}</Button><Button type="primary" icon={<PlusOutlined />} loading={busy} onClick={() => void run(async () => { const post = await api.create(); setParams({ post: String(post.post.id) }); })}>{t('rec.new')}</Button></div>}
     </header>
@@ -155,7 +156,7 @@ export default function Recommendations() {
       else setList(await api.list(page));
     })}>{t('rec.reload')}</Button>} />}
     {notice && <Alert type="success" showIcon message={notice} />}
-    {!id ? <><div className="rec-list">{list.map(post => <Link key={post.id} to={'?post=' + post.id} className="rec-list-row"><EditOutlined /><div><h2>{post.title || t('rec.untitled')}</h2><time>{new Date(post.updatedAt).toLocaleString(locale)}</time>{post.publishedAt && <div className="rec-publication"><span>{t('rec.publisher')}: {post.publisherName}</span><time dateTime={post.publishedAt}>{t('rec.published_date')}: {new Date(post.publishedAt).toLocaleString(locale)}</time></div>}</div><Tag color={post.published ? 'green' : undefined}>{t(post.published ? 'rec.published' : 'rec.draft')}</Tag></Link>)}{!list.length && !error && <Empty description={t('rec.empty')} />}</div>
+    {!id ? <><RecommendationList posts={list} hasError={!!error} pending={busy} />
       <div className="rec-pagination"><Button disabled={!page} icon={<ArrowLeftOutlined />} onClick={() => setPage(page - 1)}>{t('rec.previous')}</Button><span>{page + 1}</span><Button disabled={list.length < 20} onClick={() => setPage(page + 1)}>{t('rec.next')}</Button></div></> : detail && <>
       <div className="rec-actions"><Popconfirm disabled={!dirty && !pending} title={t('rec.leave')} onConfirm={back}><Button aria-label={t('rec.back')} disabled={busy || writing} icon={<ArrowLeftOutlined />} onClick={() => { if (!dirty && !pending) back(); }}>{t('rec.back')}</Button></Popconfirm>
         <div className="rec-action-group">{published ? <><Link to={'/recommendations/' + id} target="_blank"><Button icon={<EyeOutlined />}>{t('rec.view')}</Button></Link><Button icon={<EditOutlined />} disabled={busy} onClick={() => void run(async () => { setDetail(await api.publish(id, detail.post.version, false)); })}>{t('rec.withdraw')}</Button></> : <>
