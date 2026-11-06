@@ -22,11 +22,18 @@ public class PublicProductCatalogService {
   var originals=published.isEmpty()?List.<RecommendationItem>of():items.findByPostIdInOrderById(published.stream().map(p->p.id).toList());
   var displayed=taxonomy.display(originals,true);quotes.decorate(displayed,true);
   var linked=new HashMap<String,List<RecommendationItem>>();for(var i:displayed)if(i.productId!=null)linked.computeIfAbsent(i.productId,k->new ArrayList<>()).add(i);
-  var eligible=products.findAll().stream().filter(p->!p.isDeleted()&&p.getVisibilityStatus()==ProductVisibility.PUBLIC).filter(p->merchantId==null||merchantId.equals(p.getMerchantId())).sorted(Comparator.comparing(Product::getId)).toList();
+  var eligible=products.findAll().stream().filter(p->!p.isDeleted()).filter(p->merchantId==null||merchantId.equals(p.getMerchantId()))
+   .filter(p->p.getVisibilityStatus()==ProductVisibility.PUBLIC||p.getVisibilityStatus()==ProductVisibility.DRAFTER_ONLY&&linked.getOrDefault(p.getId(),List.of()).stream().anyMatch(i->Objects.equals(owners.get(i.postId),p.getMerchantId())))
+   .sorted(Comparator.comparing(Product::getId)).toList();
   int size=24,start=(int)Math.min((long)page*size,eligible.size()),end=Math.min(start+size,eligible.size());
   var rows=eligible.subList(start,end).stream().map(p->{
    var offers=linked.getOrDefault(p.getId(),List.of()).stream().filter(i->Objects.equals(owners.get(i.postId),p.getMerchantId())).sorted(Comparator.comparing((RecommendationItem i)->i.postId).reversed().thenComparing(i->i.id)).map(i->new Offer(i.postId,i)).toList();
    var data=p.getCatalogData();var source=offers.isEmpty()?null:offers.get(0).facts();
+   // A reference-only master grants no new disclosure: reuse exactly its existing public DTO.
+   // In particular, an empty legacy gallery/brand must not fall back to private master fields.
+   if(p.getVisibilityStatus()!=ProductVisibility.PUBLIC){
+    return new Entry(p.getId(),p.getMerchantId(),Map.copyOf(legacyText(source,"name")),Map.copyOf(legacyText(source,"description")),source.brand,source.itemNumber,Map.copyOf(legacyText(source,"specification")),source.model,source.packaging,List.copyOf(source.gallery),List.copyOf(source.categories),offers,source.catalogDriven);
+   }
    var ids=data==null?(p.getCategoryId()==null?List.<String>of():List.of(p.getCategoryId())):data.categoryIds()==null?List.<String>of():data.categoryIds();
    var labels=categories.findAllById(ids).stream().map(c->new RecommendationItem.Label(c.getId(),c.getName())).toList();
    List<RecommendationItem.Picture> gallery=source==null||source.gallery==null||source.gallery.isEmpty()?p.getMediaGallery().stream().filter(m->m.isVisible()&&m.getType()==MediaType.IMAGE&&m.getUrl()!=null).map(m->new RecommendationItem.Picture(UUID.nameUUIDFromBytes(m.getUrl().getBytes(java.nio.charset.StandardCharsets.UTF_8)).toString(),m.getUrl(),null,m.getSourceUrl(),m.getUrl(),null,null)).toList():source.gallery;
