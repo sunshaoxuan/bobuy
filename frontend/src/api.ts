@@ -1390,6 +1390,13 @@ export const api = {
 
 export type StoreTrip = { id: number; merchantId: number; merchantName: string; deliveryArea: string; deliveryDate: string };
 export type StoreProduct = { id: string; merchantId: number; name: Record<string, string>; description: Record<string, string>; brand: string; price: number; categoryId: string; images: string[]; recommendationReady?:boolean;currency?:string;saleUnit?:string;priceRevision?:number;priceToken?:string;regularPrice?:number;priceAdjustmentId?:number;priceValidFrom?:string;priceValidUntil?:string };
+export type PublicCatalogEntry = {
+    productId:string; merchantId:number; name:Record<string,string>; description:Record<string,string>;
+    brand:string|null; itemNumber:string|null; specification:Record<string,string>; model:string|null; packaging:string|null;
+    gallery:RecommendationPicture[]; categories:RecommendationLabel[];
+    referenceOffers:{postId:number;facts:RecommendationItem}[]; reviewedMaster:boolean;
+};
+export type PublicCatalogPage = {items:PublicCatalogEntry[];page:number;size:number;total:number;hasNext:boolean};
 export type MerchantCustomer = { customerId: number; name: string; emailVerified: boolean; merchantApproved: boolean; approvedAt?: string };
 async function storeGet<T>(path: string): Promise<T> {
     const response = await authorizedFetch(path, undefined, { retryOnUnauthorized: !path.startsWith('/api/storefront/') });
@@ -1397,6 +1404,7 @@ async function storeGet<T>(path: string): Promise<T> {
     return parseSuccessPayload<T>(response);
 }
 export const storefrontApi = {
+    productCatalog: (page=0,merchantId?:number) => storeGet<PublicCatalogPage>('/api/storefront/product-catalog?'+new URLSearchParams({page:String(page),...(merchantId===undefined?{}:{merchantId:String(merchantId)})})),
     trips: () => storeGet<StoreTrip[]>('/api/storefront/trips'),
     activeTrips: () => storeGet<StoreTrip[]>('/api/storefront/trips?includeCurrent=true'),
     products: () => storeGet<StoreProduct[]>('/api/storefront/products'),

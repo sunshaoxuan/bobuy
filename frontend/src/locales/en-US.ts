@@ -2,6 +2,15 @@ import type { Dictionary } from './types';
 import experience from './experience.en-US.json';
 
 const messages: Dictionary = {
+    "catalog.result_count": "{shown} of {total} products",
+    "catalog.loading": "Loading products: {loaded}/{total}",
+    "catalog.load_error": "Unable to load the complete product catalog",
+    "catalog.retry": "Retry",
+    "catalog.incomplete": "The catalog is incomplete. Please retry.",
+    "catalog.changed": "The catalog changed while loading. Please retry.",
+    "catalog.empty": "No public products",
+    "catalog.source_language": "Source language: {language}",
+    "catalog.reference_count": "Reference offers ({count})",
     "service.kind": "Service / member offer",
     "service.edit": "Edit service offer",
     "service.help": "Services are separate from goods and stock. Enter sourced fees, conditions and four-language copy.",

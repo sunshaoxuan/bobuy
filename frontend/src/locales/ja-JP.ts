@@ -2,6 +2,15 @@ import type { Dictionary } from './types';
 import experience from './experience.ja-JP.json';
 
 const messages: Dictionary = {
+    "catalog.result_count": "{shown} / {total} 商品",
+    "catalog.loading": "商品を読み込み中：{loaded}/{total}",
+    "catalog.load_error": "商品一覧を最後まで読み込めませんでした",
+    "catalog.retry": "再試行",
+    "catalog.incomplete": "商品一覧の読み込みが完了していません。再試行してください。",
+    "catalog.changed": "読み込み中に商品一覧が更新されました。再試行してください。",
+    "catalog.empty": "公開商品はありません",
+    "catalog.source_language": "原文の言語：{language}",
+    "catalog.reference_count": "参考オファー（{count}）",
     "service.kind": "サービス・会員特典",
     "service.edit": "サービス案内を編集",
     "service.help": "商品・在庫とは別のサービス案内です。原文に沿って料金・条件と4言語の説明を入力してください。",

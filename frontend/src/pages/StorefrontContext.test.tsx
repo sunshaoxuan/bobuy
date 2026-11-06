@@ -3,8 +3,8 @@ import {MemoryRouter,useLocation,useNavigate} from 'react-router-dom';
 import {I18nProvider} from '../i18n';
 import {CART_KEY} from '../cart';
 import Storefront from './Storefront';
-const mocks=vi.hoisted(()=>({trips:vi.fn(),activeTrips:vi.fn(),products:vi.fn(),nodes:vi.fn(),privateTrips:vi.fn(),role:{user:{id:7,name:'Fixture',roles:['CUSTOMER']},isCustomer:true,isAuthenticated:true,logout:vi.fn()}}));
-vi.mock('../api',()=>({api:{customerTrips:mocks.privateTrips},storefrontApi:{trips:mocks.trips,activeTrips:mocks.activeTrips,products:mocks.products},recommendationApi:{nodes:mocks.nodes}}));
+const mocks=vi.hoisted(()=>({trips:vi.fn(),activeTrips:vi.fn(),products:vi.fn(),productCatalog:vi.fn(),nodes:vi.fn(),privateTrips:vi.fn(),role:{user:{id:7,name:'Fixture',roles:['CUSTOMER']},isCustomer:true,isAuthenticated:true,logout:vi.fn()}}));
+vi.mock('../api',()=>({api:{customerTrips:mocks.privateTrips},storefrontApi:{trips:mocks.trips,activeTrips:mocks.activeTrips,products:mocks.products,productCatalog:mocks.productCatalog},recommendationApi:{nodes:mocks.nodes}}));
 vi.mock('../context/UserRoleContext',()=>({useUserRole:()=>mocks.role}));
 vi.mock('./PublicRecommendations',()=>({default:()=> <h1>Recommendations fixture</h1>}));
 vi.mock('antd',async()=>{const actual=await vi.importActual<typeof import('antd')>('antd');return {...actual,Select:({id,value,onChange,options,'aria-label':label}:{id:string;value:number;onChange:(id:number)=>void;options:{value:number;label:string}[];'aria-label':string})=><select id={id} aria-label={label} value={value} onChange={event=>onChange(Number(event.target.value))}>{options.map(option=><option key={option.value} value={option.value}>{option.label}</option>)}</select>};});
@@ -13,6 +13,7 @@ beforeEach(()=>{
  mocks.trips.mockResolvedValue([{id:11,merchantId:1,merchantName:'Public A',deliveryArea:'A',deliveryDate:'2026-11-01'},{id:22,merchantId:2,merchantName:'Public B',deliveryArea:'B',deliveryDate:'2026-11-02'}]);
  mocks.activeTrips.mockImplementation(()=>mocks.trips());
  mocks.products.mockResolvedValue([1,2].map(id=>({id:String(id),merchantId:id,name:{'en-US':'Product '+id},description:{},brand:'Fixture',images:['/fixture.png'],price:10,categoryId:''})));
+ mocks.productCatalog.mockImplementation(async(page:number,node?:number)=>({items:[1,2].filter(id=>node===undefined||node===id).map(id=>({productId:String(id),merchantId:id,name:{'en-US':'Product '+id},description:{},specification:{},brand:'Fixture',itemNumber:String(id),model:null,packaging:null,gallery:[],categories:[],referenceOffers:[],reviewedMaster:true})),page,size:24,total:node===undefined?2:1,hasNext:false}));
  mocks.nodes.mockResolvedValue([]);mocks.privateTrips.mockResolvedValue([{id:33,agentId:3,status:'COMPLETED',deliveryArea:'Private',deliveryDate:'2026-10-01'}]);
 });
 function LocationProbe(){const location=useLocation(),navigate=useNavigate();return <><output data-testid="route">{location.pathname+location.search}</output><button onClick={()=>navigate(-1)}>History back</button><button onClick={()=>navigate(1)}>History forward</button></>;}
@@ -66,4 +67,13 @@ it('requires an explicit cart refresh even when an unchanged regular revision ha
  render(<I18nProvider><MemoryRouter initialEntries={['/cart?node=1']}><Storefront/></MemoryRouter></I18nProvider>);
  const refresh=await screen.findByRole('button',{name:'Review and update cart prices'});expect(JSON.parse(localStorage.getItem(CART_KEY)!).quotes['1'].price).toBe(10);
  fireEvent.click(refresh);await waitFor(()=>expect(JSON.parse(localStorage.getItem(CART_KEY)!).quotes['1']).toMatchObject({price:12,token:'new-effective-token'}));
+});
+
+it('shows all public catalog masters at products with no trips and retains purchase qualification',async()=>{
+ mocks.trips.mockResolvedValue([]);mocks.activeTrips.mockResolvedValue([]);mocks.products.mockResolvedValue([]);
+ startAt('/products');await screen.findByRole('heading',{name:'Product 1'});expect(screen.getByRole('heading',{name:'Product 2'})).toBeInTheDocument();
+ expect(mocks.productCatalog).toHaveBeenCalledWith(0,undefined);
+ expect(screen.getByRole('button',{name:'Add to cart: Product 1'})).toBeDisabled();
+ expect(document.querySelector('.catalog-master-card .rec-sale-actual')).toBeNull();
+ expect(screen.getByTestId('route')).toHaveTextContent('/products');
 });

@@ -2,6 +2,15 @@ import type { Dictionary } from './types';
 import experience from './experience.zh-CN.json';
 
 const messages: Dictionary = {
+    "catalog.result_count": "{shown} / {total} 件商品",
+    "catalog.loading": "正在加载商品：{loaded}/{total}",
+    "catalog.load_error": "完整商品目录加载失败",
+    "catalog.retry": "重试",
+    "catalog.incomplete": "商品目录尚未完整加载，请重试。",
+    "catalog.changed": "加载期间商品目录发生变化，请重试。",
+    "catalog.empty": "暂无公开商品",
+    "catalog.source_language": "原文语言：{language}",
+    "catalog.reference_count": "参考优惠（{count}）",
     "service.kind": "服务活动",
     "service.edit": "编辑服务活动",
     "service.help": "服务活动独立于商品与库存。请按来源填写费用、条件及四语说明。",

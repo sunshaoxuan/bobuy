@@ -1,6 +1,15 @@
 import type { Dictionary } from './types';
 
 const messages: Dictionary = {
+    "catalog.result_count": "{shown} / {total} 件商品",
+    "catalog.loading": "正在載入商品：{loaded}/{total}",
+    "catalog.load_error": "完整商品目錄載入失敗",
+    "catalog.retry": "重試",
+    "catalog.incomplete": "商品目錄尚未完整載入，請重試。",
+    "catalog.changed": "載入期間商品目錄發生變化，請重試。",
+    "catalog.empty": "暫無公開商品",
+    "catalog.source_language": "原文語言：{language}",
+    "catalog.reference_count": "參考優惠（{count}）",
     "service.kind": "服務活動",
     "service.edit": "編輯服務活動",
     "service.help": "服務活動獨立於商品與庫存。請依來源填寫費用、條件及四語說明。",
