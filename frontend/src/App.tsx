@@ -1,3 +1,4 @@
+import SiteMetadata from './components/SiteMetadata';
 import { lazy, Suspense, useState } from 'react';
 import { Button, Drawer, Menu, Spin, Tooltip } from 'antd';
 import { MenuOutlined, LogoutOutlined, AppstoreOutlined, CalendarOutlined, ShoppingOutlined, InboxOutlined, ScanOutlined, CheckSquareOutlined, TagsOutlined, TeamOutlined, ShopOutlined, ArrowUpOutlined } from '@ant-design/icons';
@@ -76,7 +77,7 @@ function Admin() {
 }
 
 export default function App() {
-  return <Suspense fallback={<div className="store-loading"><Spin /></div>}>
+  return <><SiteMetadata /><Suspense fallback={<div className="store-loading"><Spin /></div>}>
     <Routes><Route path="/admin/*" element={<Admin />} /><Route path="/*" element={<Storefront />} /></Routes>
-  </Suspense>;
+  </Suspense></>;
 }

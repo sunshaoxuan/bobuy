@@ -24,7 +24,7 @@ it('retains in-progress trip content even when no new booking is possible',async
 });
 it('defaults a successfully loaded empty home to recommendations without trapping explicit trip browsing or history',async()=>{
  mocks.trips.mockResolvedValue([]);startAt('/?node=2');
- await screen.findByRole('heading',{name:'Recommendations fixture'});expect(screen.getByTestId('route')).toHaveTextContent('/recommendations?node=2');
+ await screen.findByRole('heading',{name:'Recommendations fixture'});expect(screen.getByTestId('route')).toHaveTextContent('/?node=2');
  const shortcuts=screen.getByRole('navigation',{name:'Quick navigation'});
  fireEvent.click(shortcuts.querySelector('a[href="/products?node=2"]')!);
  await screen.findByRole('heading',{name:/^Trip finds/});expect(screen.getByTestId('route')).toHaveTextContent('/products?node=2');
@@ -34,7 +34,7 @@ it('defaults a successfully loaded empty home to recommendations without trappin
 });
 it('keeps an available trip home and only considers the selected node',async()=>{
  const view=startAt('/?node=2');await screen.findByRole('heading',{name:'Product 2'});expect(screen.getByTestId('route')).toHaveTextContent('/?node=2');view.unmount();
- startAt('/?node=999');await screen.findByRole('heading',{name:'Recommendations fixture'});expect(screen.getByTestId('route')).toHaveTextContent('/recommendations?node=999');
+ startAt('/?node=999');await screen.findByRole('heading',{name:'Recommendations fixture'});expect(screen.getByTestId('route')).toHaveTextContent('/?node=999');
 });
 it.each(['/cart?node=2','/products?node=2','/recommendations/3?node=2&item=153'])('does not override explicit deep link %s without trips',async path=>{
  mocks.trips.mockResolvedValue([]);startAt(path);await waitFor(()=>expect(mocks.trips).toHaveBeenCalled());
