@@ -1,4 +1,4 @@
-import {act,fireEvent,render,screen,waitFor} from '@testing-library/react';
+import {act,fireEvent,render,screen,waitFor,within} from '@testing-library/react';
 import {MemoryRouter,useLocation,useNavigate} from 'react-router-dom';
 import {I18nProvider} from '../i18n';
 import {CART_KEY} from '../cart';
@@ -18,6 +18,11 @@ beforeEach(()=>{
 });
 function LocationProbe(){const location=useLocation(),navigate=useNavigate();return <><output data-testid="route">{location.pathname+location.search}</output><button onClick={()=>navigate(-1)}>History back</button><button onClick={()=>navigate(1)}>History forward</button></>;}
 function startAt(path:string){return render(<I18nProvider><MemoryRouter initialEntries={[path]}><LocationProbe/><Storefront/></MemoryRouter></I18nProvider>);}
+function expectSelected(path:string){
+ for(const selector of ['.browse-sidebar .browse-links','.browse-mobile-shortcuts']){
+  const selected=document.querySelectorAll(selector+' a[aria-current="page"]');expect(selected).toHaveLength(1);expect(selected[0]).toHaveAttribute('href',path);
+ }
+}
 it('retains in-progress trip content even when no new booking is possible',async()=>{
  mocks.trips.mockResolvedValue([]);mocks.activeTrips.mockResolvedValue([{id:11,merchantId:1,merchantName:'Public A',deliveryArea:'Still underway',deliveryDate:'2026-10-01'}]);
  startAt('/');await screen.findByRole('heading',{name:'Product 1'});expect(screen.getByTestId('route').textContent).toBe('/');
@@ -26,12 +31,16 @@ it('retains in-progress trip content even when no new booking is possible',async
 it('defaults a successfully loaded empty home to recommendations without trapping explicit trip browsing or history',async()=>{
  mocks.trips.mockResolvedValue([]);startAt('/?node=2');
  await screen.findByRole('heading',{name:'Recommendations fixture'});expect(screen.getByTestId('route')).toHaveTextContent('/?node=2');
+ expectSelected('/recommendations?node=2');
  const shortcuts=screen.getByRole('navigation',{name:'Quick navigation'});
  fireEvent.click(shortcuts.querySelector('a[href="/products?node=2"]')!);
  await screen.findByRole('heading',{name:/^Trip finds/});expect(screen.getByTestId('route')).toHaveTextContent('/products?node=2');
+ expectSelected('/products?node=2');
  expect(shortcuts.querySelector('a[aria-current="page"]')).toHaveAttribute('href','/products?node=2');
  fireEvent.click(screen.getByRole('button',{name:'History back'}));await screen.findByRole('heading',{name:'Recommendations fixture'});
+ expectSelected('/recommendations?node=2');
  fireEvent.click(screen.getByRole('button',{name:'History forward'}));await screen.findByRole('heading',{name:/^Trip finds/});
+ expectSelected('/products?node=2');
 });
 it('keeps an available trip home and only considers the selected node',async()=>{
  const view=startAt('/?node=2');await screen.findByRole('heading',{name:'Product 2'});expect(screen.getByTestId('route')).toHaveTextContent('/?node=2');view.unmount();
@@ -76,4 +85,41 @@ it('shows all public catalog masters at products with no trips and retains purch
  expect(screen.getByRole('button',{name:'Add to cart: Product 1'})).toBeDisabled();
  expect(document.querySelector('.catalog-master-card .rec-sale-actual')).toBeNull();
  expect(screen.getByTestId('route')).toHaveTextContent('/products');
+});
+
+it.each([[false,false],[false,true],[true,false],[true,true]])('keeps cold/refresh entry coherent with persisted cart=%s and active trip=%s',async(persisted,active)=>{
+ const stored={tripId:11,requestId:crypto.randomUUID(),items:{'1':2},currency:'JPY'};
+ if(persisted)localStorage.setItem(CART_KEY,JSON.stringify(stored));
+ mocks.trips.mockResolvedValue([]);
+ let resolve!:(value:unknown)=>void;mocks.activeTrips.mockImplementation(()=>new Promise(done=>{resolve=done;}));
+ let view=startAt('/?node=2&category=kept');
+ await waitFor(()=>expect(mocks.activeTrips).toHaveBeenCalled());
+ expect(document.querySelector('.store-loading')).toBeInTheDocument();
+ expect(document.querySelector('.browse-sidebar a[aria-current="page"]')).toBeNull();expect(document.querySelector('.browse-mobile-shortcuts a[aria-current="page"]')).toBeNull();
+ await act(async()=>resolve(active?[{id:22,merchantId:2,merchantName:'Node 2',deliveryArea:'Underway',deliveryDate:'2026-10-01'}]:[]));
+ await screen.findByRole('heading',{name:active?'Product 2':'Recommendations fixture'});expectSelected((active?'/products':'/recommendations')+'?node=2');expect(screen.getByTestId('route').textContent).toBe('/?node=2&category=kept');
+ if(persisted)expect(JSON.parse(localStorage.getItem(CART_KEY)!).items).toEqual(stored.items);
+ view.unmount();mocks.activeTrips.mockResolvedValue(active?[{id:22,merchantId:2,merchantName:'Node 2',deliveryArea:'Underway',deliveryDate:'2026-10-01'}]:[]);
+ view=startAt('/?node=2&category=kept');await screen.findByRole('heading',{name:active?'Product 2':'Recommendations fixture'});expectSelected((active?'/products':'/recommendations')+'?node=2');expect(screen.getByTestId('route').textContent).toBe('/?node=2&category=kept');
+});
+
+it.each(['/products?node=2','/recommendations?node=2','/recommendations/3?node=2&item=153'])('matches explicit deep-link selection before and after load: %s',async path=>{
+ let resolve!:(value:unknown)=>void;mocks.activeTrips.mockImplementation(()=>new Promise(done=>{resolve=done;}));mocks.trips.mockResolvedValue([]);startAt(path);
+ const target=(path.startsWith('/products')?'/products':'/recommendations')+'?node=2';expectSelected(target);await waitFor(()=>expect(mocks.activeTrips).toHaveBeenCalled());await act(async()=>resolve([]));
+ await screen.findByRole('heading',{name:path.startsWith('/products')?'Product 2':'Recommendations fixture'});expectSelected(target);expect(screen.getByTestId('route').textContent).toBe(path);
+});
+
+it('keeps desktop menus, mobile drawer and history aligned after empty-home and explicit switches',async()=>{
+ mocks.trips.mockResolvedValue([]);mocks.activeTrips.mockResolvedValue([]);startAt('/?node=2');await screen.findByRole('heading',{name:'Recommendations fixture'});expectSelected('/recommendations?node=2');
+ fireEvent.click(screen.getByRole('button',{name:'Open navigation menu'}));await waitFor(()=>expect(document.querySelector('.browse-drawer .browse-links a[aria-current="page"]')).toHaveAttribute('href','/recommendations?node=2'));
+ fireEvent.click(document.querySelector('.browse-drawer a[href="/products?node=2"]')!);await screen.findByRole('heading',{name:'Product 2'});expectSelected('/products?node=2');
+ fireEvent.click(document.querySelector('.browse-sidebar a[href="/recommendations?node=2"]')!);await screen.findByRole('heading',{name:'Recommendations fixture'});expectSelected('/recommendations?node=2');
+ fireEvent.click(screen.getByRole('button',{name:'History back'}));await screen.findByRole('heading',{name:'Product 2'});expectSelected('/products?node=2');
+ fireEvent.click(screen.getByRole('button',{name:'History back'}));await screen.findByRole('heading',{name:'Recommendations fixture'});expectSelected('/recommendations?node=2');expect(screen.getByTestId('route').textContent).toBe('/?node=2');
+ fireEvent.click(screen.getByRole('button',{name:'History forward'}));await screen.findByRole('heading',{name:'Product 2'});expectSelected('/products?node=2');
+});
+it('pauses catalog batching during the existing cart-change confirmation and resumes after cancel',async()=>{
+ const values=Array.from({length:25},(_,i)=>({productId:'catalog'+i,merchantId:1,name:{'en-US':'Catalog '+i},description:{},specification:{},brand:'',itemNumber:String(i),model:null,packaging:null,gallery:[],categories:[],referenceOffers:[],reviewedMaster:true}));
+ mocks.productCatalog.mockImplementation(async(page:number)=>({items:values.slice(page*24,(page+1)*24),page,size:24,total:25,hasNext:page===0}));localStorage.setItem(CART_KEY,JSON.stringify({tripId:11,requestId:crypto.randomUUID(),items:{'1':1},currency:'JPY'}));startAt('/products?node=1');await screen.findByRole('heading',{name:'Catalog 0'});const load=screen.getByRole('button',{name:/24\/25/});expect(load).toBeEnabled();
+ fireEvent.change(screen.getByRole('combobox',{name:'Current node'}),{target:{value:'2'}});const dialog=await screen.findByRole('dialog');expect(load).toBeDisabled();fireEvent.click(within(dialog).getByRole('button',{name:/Keep/i}));await waitFor(()=>expect(load).toBeEnabled());expect(screen.getByTestId('route').textContent).toBe('/products?node=1');
 });

@@ -1,4 +1,4 @@
-import {useEffect,useMemo,useRef,useState} from 'react';
+import {useCallback,useEffect,useMemo,useRef,useState} from 'react';
 import {Alert,Button,Drawer,Empty,Modal,Spin,Tooltip} from 'antd';
 import {ArrowDownOutlined,PlusOutlined,ReloadOutlined} from '@ant-design/icons';
 import {Link,useLocation,useSearchParams} from 'react-router-dom';
@@ -9,15 +9,16 @@ import {RecommendationImageViewer} from '../components/RecommendationImageViewer
 import {OfferInfo} from '../components/RecommendationFacts';
 import SellingPrice from '../components/SellingPrice';
 import {selectedNode} from '../storeNavigation';
-import {catalogCategories,catalogSale,CATALOG_BATCH,CATALOG_UNCLASSIFIED,filterPublicCatalog,readPublicCatalog,searchPublicCatalog} from '../publicCatalog';
+import {catalogCategories,catalogSale,CATALOG_UNCLASSIFIED,filterPublicCatalog,readPublicCatalog,searchPublicCatalog} from '../publicCatalog';
 import ProductMarkerBadges from '../components/ProductMarkerBadges';
 import {readPublicMarkers} from '../productMarkers';
 import ProductMarkerEditor from '../components/ProductMarkerEditor';
 import {useUserRole} from '../context/UserRoleContext';
+import {useCatalogReveal} from '../useCatalogReveal';
 import '../recommendations.css';
 import '../public-catalog.css';
 
-type Props={query?:string;products:StoreProduct[];quantities:Record<string,number>;onAdd:(product:StoreProduct)=>void;canBuy:(product:StoreProduct)=>boolean};
+type Props={query?:string;products:StoreProduct[];quantities:Record<string,number>;onAdd:(product:StoreProduct)=>void;canBuy:(product:StoreProduct)=>boolean;autoPaused?:boolean};
 export function catalogText(values:Record<string,string>,locale:Locale) {
   const value=localizedContent(values,locale);
   const language=values[locale]?locale:Object.keys(values).find(key=>values[key]===value);
@@ -28,6 +29,9 @@ export default function PublicProductCatalog(props:Props) {
   const {t}=useI18n(),{user,isMerchant,isAuthenticated}=useUserRole();
   const [editing,setEditing]=useState<PublicCatalogEntry>(),[dirty,setDirty]=useState(false),[refresh,setRefresh]=useState(0);
   const busy=useRef(false),confirming=useRef(false);
+  const [details,setDetails]=useState({marked:false,all:false});
+  const onDetailChange=useCallback((kind:'marked'|'all',open:boolean)=>setDetails(previous=>previous[kind]===open?previous:{...previous,[kind]:open}),[]);
+  const autoPaused=!!props.autoPaused||!!editing||details.marked||details.all;
   useEffect(()=>{setEditing(undefined);setDirty(false);busy.current=false;},[user?.id,isMerchant,isAuthenticated]);
   const canEdit=(entry:PublicCatalogEntry)=>!!isAuthenticated&&isMerchant&&user?.id===entry.merchantId;
   const editable=editing&&canEdit(editing)?editing:undefined;
@@ -38,19 +42,19 @@ export default function PublicProductCatalog(props:Props) {
     confirming.current=true;
     Modal.confirm({title:t('marker.discard'),onOk:()=>{if(!busy.current)setEditing(undefined);},afterClose:()=>{confirming.current=false;}});
   }
-  return <><CatalogSection {...props} kind="marked" refresh={refresh} onEdit={openEditor} canEdit={canEdit}/><CatalogSection {...props} kind="all" refresh={refresh} onEdit={openEditor} canEdit={canEdit}/>
+  return <><CatalogSection {...props} autoPaused={autoPaused} kind="marked" refresh={refresh} onEdit={openEditor} canEdit={canEdit} onDetailChange={onDetailChange}/><CatalogSection {...props} autoPaused={autoPaused} kind="all" refresh={refresh} onEdit={openEditor} canEdit={canEdit} onDetailChange={onDetailChange}/>
     <Drawer className="marker-drawer" title={t('marker.assigned')} width="min(100vw,620px)" open={!!editable} onClose={closeEditor} maskClosable={false} destroyOnClose>
       {editable&&<ProductMarkerEditor key={String(user?.id)+':'+editable.productId} productId={editable.productId} onDirtyChange={setDirty} onBusyChange={value=>{busy.current=value;}} onSaved={()=>setRefresh(value=>value+1)}/>}
     </Drawer></>;
 }
-export function CatalogSection({query='',products,quantities,onAdd,canBuy,kind='all',refresh=0,onEdit,canEdit}:Props & {kind?:'all'|'marked';refresh?:number;onEdit?:(entry:PublicCatalogEntry)=>void;canEdit?:(entry:PublicCatalogEntry)=>boolean}) {
+export function CatalogSection({query='',products,quantities,onAdd,canBuy,kind='all',refresh=0,onEdit,canEdit,autoPaused=false,onDetailChange}:Props & {kind?:'all'|'marked';refresh?:number;onEdit?:(entry:PublicCatalogEntry)=>void;canEdit?:(entry:PublicCatalogEntry)=>boolean;onDetailChange?:(kind:'all'|'marked',open:boolean)=>void}) {
   const {t,locale}=useI18n(),location=useLocation();
   const [params,setParams]=useSearchParams();
   const node=selectedNode(location.search),scope=kind+':'+String(node??'all');
   const categoryKey=kind==='marked'?'markedCategory':'category';
   const category=params.get(categoryKey)??'';
   const [state,setState]=useState<{scope:string;entries:PublicCatalogEntry[];markers:Record<string,ProductMarkerDefinition[]>;complete:boolean;error:string;loaded:number;total?:number}>({scope:'',entries:[],markers:{},complete:false,error:'',loaded:0});
-  const [attempt,setAttempt]=useState(0),[limit,setLimit]=useState(CATALOG_BATCH),[detailId,setDetailId]=useState<string>();
+  const [attempt,setAttempt]=useState(0),[detailId,setDetailId]=useState<string>();
   useEffect(()=>{
     let active=true;
     setState({scope,entries:[],markers:{},complete:false,error:'',loaded:0});
@@ -62,14 +66,17 @@ export function CatalogSection({query='',products,quantities,onAdd,canBuy,kind='
     return()=>{active=false;};
   },[node,scope,kind,attempt,refresh]);
   useEffect(()=>{setDetailId(undefined);},[scope]);
-  useEffect(()=>{setLimit(CATALOG_BATCH);},[query,category,scope]);
   const current=state.scope===scope;
   const ready=current&&state.complete&&!state.error;
   const searched=useMemo(()=>searchPublicCatalog(ready?state.entries:[],query),[ready,state.entries,query]);
   const choices=useMemo(()=>catalogCategories(searched),[searched]);
   const filtered=useMemo(()=>filterPublicCatalog(searched,category),[searched,category]);
   const opened=ready?state.entries.find(entry=>entry.productId===detailId):undefined;
+  useEffect(()=>{onDetailChange?.(kind,!!opened);return()=>onDetailChange?.(kind,false);},[kind,!!opened,onDetailChange]);
+  const revealPaused=autoPaused||!!opened;
+  const {limit,sentinel,reveal}=useCatalogReveal(JSON.stringify([location.pathname,scope,query,category,refresh,attempt]),filtered.length,ready,revealPaused);
   const sale=opened?catalogSale(opened,products):undefined;
+  function openDetail(productId:string){onDetailChange?.(kind,true);setDetailId(productId);}
   function choose(value:string) {
     if(value===category)return;
     const next=new URLSearchParams(params);next.delete('item');
@@ -82,7 +89,7 @@ export function CatalogSection({query='',products,quantities,onAdd,canBuy,kind='
   const detailSpec=opened?catalogText(opened.specification,locale):undefined;
   const description=opened?catalogText(opened.description,locale):undefined;
   return <section className="recommendations rec-public public-product-catalog" aria-label={t(kind==='marked'?'marker.featured':'store.catalog')} aria-busy={!ready&&(!current||!state.error)}>
-    <header className="catalog-master-heading">{kind==='marked'?<h2>{t('marker.featured')}</h2>:<h1>{t('store.catalog')}</h1>}{ready&&<span role="status">{t('catalog.result_count',{shown:filtered.length,total:state.total??0})}</span>}</header>
+    <header className="catalog-master-heading">{kind==='marked'?<h2>{t('marker.featured')}</h2>:<h1>{t('store.catalog')}</h1>}{ready&&<span role="status">{t('catalog.result_count',{shown:Math.min(limit,filtered.length),total:state.total??0})}</span>}</header>
     {!current||(!state.complete&&!state.error)?<div className="catalog-progress" role="status"><Spin/><span>{t('catalog.loading',{loaded:current?state.loaded:0,total:current?(state.total??'?'):'?'})}</span></div>:state.error?<Alert type="error" showIcon message={t('catalog.load_error')} description={t(state.error)} action={<Button icon={<ReloadOutlined aria-hidden/>} onClick={()=>setAttempt(value=>value+1)}>{t('catalog.retry')}</Button>}/>:<>
       <nav className="rec-category-filters" aria-label={t('class.filters')}>
         <button type="button" aria-pressed={!category} onClick={()=>choose('')}>{t('class.all')} ({choices.total})</button>
@@ -95,24 +102,24 @@ export function CatalogSection({query='',products,quantities,onAdd,canBuy,kind='
         const product=catalogSale(entry,products),buyable=!!product&&canBuy(product);
         return <article className="store-product rec-pin catalog-master-card" key={entry.productId} data-product-id={entry.productId}>
           <div className="product-tile">
-            <button type="button" className="product-photo" aria-label={t('store.detail_label',{name:name.value})} onClick={()=>setDetailId(entry.productId)}>
+            <button type="button" className="product-photo" aria-label={t('store.detail_label',{name:name.value})} onClick={()=>openDetail(entry.productId)}>
               {entry.gallery[0]?.url?<img src={entry.gallery[0].url} alt={name.value} loading={index<2?'eager':'lazy'}/>:<span className="rec-no-product-image">{t('gallery.pending')}</span>}
             </button>
             <ProductMarkerBadges markers={state.markers[entry.productId]??[]} overlay/>
             <Tooltip title={t(buyable?'store.add_cart':'catalog.not_available')}><button type="button" className="product-add" disabled={!buyable} aria-label={t('store.add_label',{name:name.value})} onClick={()=>{if(product&&buyable)onAdd(product);}}><PlusOutlined aria-hidden/>{!!quantities[entry.productId]&&<span className="product-count">{quantities[entry.productId]}</span>}</button></Tooltip>
-            <div className="product-body"><ProductBrand brand={entry.brand}/><button type="button" className="product-name" onClick={()=>setDetailId(entry.productId)}><h2 lang={name.language}>{name.value||t('rec.not_stated')}</h2></button>{spec.value&&<p className="catalog-card-spec" lang={spec.language}>{spec.value}</p>}</div>
+            <div className="product-body"><ProductBrand brand={entry.brand}/><button type="button" className="product-name" onClick={()=>openDetail(entry.productId)}><h2 lang={name.language}>{name.value||t('rec.not_stated')}</h2></button>{spec.value&&<p className="catalog-card-spec" lang={spec.language}>{spec.value}</p>}</div>
           </div>
           {(name.fallback||spec.fallback)&&sourceNote(name.fallback?name:spec)}
           <small className="rec-pin-code">{t('rec.code')}: {entry.itemNumber||t('rec.not_stated')}</small>
           {product&&<SellingPrice product={product}/>}
-          {!!entry.referenceOffers.length&&<button type="button" className="catalog-offer-link" onClick={()=>setDetailId(entry.productId)}>{t('catalog.reference_count',{count:entry.referenceOffers.length})}</button>}
+          {!!entry.referenceOffers.length&&<button type="button" className="catalog-offer-link" onClick={()=>openDetail(entry.productId)}>{t('catalog.reference_count',{count:entry.referenceOffers.length})}</button>}
           {!buyable&&<small className="rec-pin-status">{t('catalog.not_available')}</small>}
           {canEdit?.(entry)&&<div className="marker-product-actions"><Button className="marker-product-trigger" onClick={()=>onEdit?.(entry)} aria-label={t('marker.assigned')+': '+name.value}>{t('marker.assigned')}</Button></div>}
         </article>;
       })}</div>:<Empty description={t(query||category?'store.no_matches':kind==='marked'?'marker.empty':'catalog.empty')}>{category&&<Button onClick={()=>choose('')}>{t('class.all')}</Button>}</Empty>}
-      {limit<filtered.length&&<div className="feed-loader"><Button icon={<ArrowDownOutlined aria-hidden/>} onClick={()=>setLimit(value=>Math.min(value+CATALOG_BATCH,filtered.length))}>{t('store.load_more')} ({Math.min(limit,filtered.length)}/{filtered.length})</Button></div>}
+      {limit<filtered.length&&<div className="feed-loader" ref={sentinel}><Button icon={<ArrowDownOutlined aria-hidden/>} disabled={revealPaused} onClick={reveal}>{t('store.load_more')} ({Math.min(limit,filtered.length)}/{filtered.length})</Button></div>}
     </>}
-    <Drawer className="rec-product-detail catalog-master-detail" title={t('store.details')} width="min(100vw,760px)" open={!!opened} onClose={()=>setDetailId(undefined)}>
+    <Drawer className="rec-product-detail catalog-master-detail" title={t('store.details')} width="min(100vw,760px)" open={!!opened} onClose={()=>{onDetailChange?.(kind,false);setDetailId(undefined);}}>
       {opened&&detailName&&detailSpec&&description&&<>
         <RecommendationImageViewer key={opened.productId} pictures={opened.gallery} name={detailName.value}/>
         <ProductMarkerBadges markers={state.markers[opened.productId]??[]}/>

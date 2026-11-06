@@ -5,16 +5,17 @@ import {useI18n} from '../i18n';
 import {useUserRole} from '../context/UserRoleContext';
 import {scopedPath} from '../storeNavigation';
 
-export default function StoreNavigation({nodes,node,open,onClose,onNodeChange,loading}:{
+export default function StoreNavigation({nodes,node,open,onClose,onNodeChange,loading,homePath='/products'}:{
   nodes:{id:number;name:string}[];node?:number;open:boolean;onClose:()=>void;
-  onNodeChange:(id?:number)=>void;loading:boolean;
+  onNodeChange:(id?:number)=>void;loading:boolean;homePath?:'/products'|'/recommendations'|null;
 }) {
   const {t}=useI18n(),location=useLocation(),{isCustomer}=useUserRole();
   const entries=[['/recommendations','rec.title',ShopOutlined],['/products','store.catalog',CompassOutlined],['/trips','browse.bookable',CalendarOutlined],
     ['/client/trips','browse.executed',CheckCircleOutlined],
     ...(isCustomer?[['/client/orders','store.orders',FileTextOutlined],['/client/billing','store.billing',WalletOutlined]] as const:[]),
     ['/account','store.account',UserOutlined]] as const;
-  const selected=(path:string)=>location.pathname===path||location.pathname.startsWith(path+'/')||(path==='/products'&&location.pathname==='/');
+  const pathname=location.pathname==='/'?homePath:location.pathname;
+  const selected=(path:string)=>pathname===path||!!pathname?.startsWith(path+'/');
   const contents=(mobile:boolean)=><>
     <Link className="browse-brand" to={scopedPath('/',location.search)} onClick={onClose}><span className="browse-brand-mark">B</span><strong>{t('app.brand')}</strong></Link>
     <section className="browse-node"><label htmlFor={mobile?'mobile-browse-node':'desktop-browse-node'}>{t('browse.node')}</label>
