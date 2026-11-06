@@ -5,6 +5,7 @@ import PublicProductCatalog from './PublicProductCatalog';
 import type {PublicCatalogEntry,PublicCatalogPage,StoreProduct} from '../api';
 const mocks=vi.hoisted(()=>({productCatalog:vi.fn(),markedCatalog:vi.fn(),publicAssignments:vi.fn()}));
 vi.mock('../api',()=>({storefrontApi:mocks,productMarkerApi:mocks}));
+vi.mock('../context/UserRoleContext',()=>({useUserRole:()=>({user:null,isMerchant:false,isAuthenticated:false})}));
 const row=(id:number,merchantId=1):PublicCatalogEntry=>({productId:String(id),merchantId,name:{'en-US':'Product '+id},description:{},specification:{},brand:'Brand',model:'',packaging:'',itemNumber:'ITEM'+id,gallery:[],categories:[],referenceOffers:[],reviewedMaster:true});
 const page=(items:PublicCatalogEntry[],index=0,total=items.length,hasNext=false):PublicCatalogPage=>({items,page:index,size:24,total,hasNext});
 const marker={id:'low',code:'low',badge:'少',name:{'en-US':'Low quantity'},description:{},color:'orange',sortOrder:0,enabled:true,version:0};

@@ -1,5 +1,5 @@
-import {useEffect,useMemo,useState} from 'react';
-import {Alert,Button,Drawer,Empty,Spin,Tooltip} from 'antd';
+import {useEffect,useMemo,useRef,useState} from 'react';
+import {Alert,Button,Drawer,Empty,Modal,Spin,Tooltip} from 'antd';
 import {ArrowDownOutlined,PlusOutlined,ReloadOutlined} from '@ant-design/icons';
 import {Link,useLocation,useSearchParams} from 'react-router-dom';
 import {storefrontApi,productMarkerApi,type ProductMarkerDefinition,type PublicCatalogEntry,type StoreProduct} from '../api';
@@ -12,6 +12,8 @@ import {selectedNode} from '../storeNavigation';
 import {catalogCategories,catalogSale,CATALOG_BATCH,CATALOG_UNCLASSIFIED,filterPublicCatalog,readPublicCatalog,searchPublicCatalog} from '../publicCatalog';
 import ProductMarkerBadges from '../components/ProductMarkerBadges';
 import {readPublicMarkers} from '../productMarkers';
+import ProductMarkerEditor from '../components/ProductMarkerEditor';
+import {useUserRole} from '../context/UserRoleContext';
 import '../recommendations.css';
 import '../public-catalog.css';
 
@@ -23,9 +25,25 @@ export function catalogText(values:Record<string,string>,locale:Locale) {
 }
 
 export default function PublicProductCatalog(props:Props) {
-  return <><CatalogSection {...props} kind="marked"/><CatalogSection {...props} kind="all"/></>;
+  const {t}=useI18n(),{user,isMerchant,isAuthenticated}=useUserRole();
+  const [editing,setEditing]=useState<PublicCatalogEntry>(),[dirty,setDirty]=useState(false),[refresh,setRefresh]=useState(0);
+  const busy=useRef(false),confirming=useRef(false);
+  useEffect(()=>{setEditing(undefined);setDirty(false);busy.current=false;},[user?.id,isMerchant,isAuthenticated]);
+  const canEdit=(entry:PublicCatalogEntry)=>!!isAuthenticated&&isMerchant&&user?.id===entry.merchantId;
+  const editable=editing&&canEdit(editing)?editing:undefined;
+  function openEditor(entry:PublicCatalogEntry){if(editing||busy.current||!canEdit(entry))return;setDirty(false);setEditing(entry);}
+  function closeEditor(){
+    if(busy.current||confirming.current)return;
+    if(!dirty){setEditing(undefined);return;}
+    confirming.current=true;
+    Modal.confirm({title:t('marker.discard'),onOk:()=>{if(!busy.current)setEditing(undefined);},afterClose:()=>{confirming.current=false;}});
+  }
+  return <><CatalogSection {...props} kind="marked" refresh={refresh} onEdit={openEditor} canEdit={canEdit}/><CatalogSection {...props} kind="all" refresh={refresh} onEdit={openEditor} canEdit={canEdit}/>
+    <Drawer className="marker-drawer" title={t('marker.assigned')} width="min(100vw,620px)" open={!!editable} onClose={closeEditor} maskClosable={false} destroyOnClose>
+      {editable&&<ProductMarkerEditor key={String(user?.id)+':'+editable.productId} productId={editable.productId} onDirtyChange={setDirty} onBusyChange={value=>{busy.current=value;}} onSaved={()=>setRefresh(value=>value+1)}/>}
+    </Drawer></>;
 }
-export function CatalogSection({query='',products,quantities,onAdd,canBuy,kind='all'}:Props & {kind?:'all'|'marked'}) {
+export function CatalogSection({query='',products,quantities,onAdd,canBuy,kind='all',refresh=0,onEdit,canEdit}:Props & {kind?:'all'|'marked';refresh?:number;onEdit?:(entry:PublicCatalogEntry)=>void;canEdit?:(entry:PublicCatalogEntry)=>boolean}) {
   const {t,locale}=useI18n(),location=useLocation();
   const [params,setParams]=useSearchParams();
   const node=selectedNode(location.search),scope=kind+':'+String(node??'all');
@@ -35,14 +53,15 @@ export function CatalogSection({query='',products,quantities,onAdd,canBuy,kind='
   const [attempt,setAttempt]=useState(0),[limit,setLimit]=useState(CATALOG_BATCH),[detailId,setDetailId]=useState<string>();
   useEffect(()=>{
     let active=true;
-    setState({scope,entries:[],markers:{},complete:false,error:'',loaded:0});setDetailId(undefined);setLimit(CATALOG_BATCH);
+    setState({scope,entries:[],markers:{},complete:false,error:'',loaded:0});
     const request=node===-1?Promise.resolve([]):readPublicCatalog(page=>kind==='marked'?productMarkerApi.markedCatalog(page,node):storefrontApi.productCatalog(page,node),()=>active,(loaded,total)=>{
       if(active)setState(previous=>({...previous,loaded,total}));
     });
     void request.then(async entries=>{const markers=await readPublicMarkers(entries.map(entry=>entry.productId),()=>active);if(active)setState({scope,entries,markers,complete:true,error:'',loaded:entries.length,total:entries.length});})
       .catch(error=>{if(active)setState(previous=>({...previous,error:(error as Error).message}));});
     return()=>{active=false;};
-  },[node,scope,kind,attempt]);
+  },[node,scope,kind,attempt,refresh]);
+  useEffect(()=>{setDetailId(undefined);},[scope]);
   useEffect(()=>{setLimit(CATALOG_BATCH);},[query,category,scope]);
   const current=state.scope===scope;
   const ready=current&&state.complete&&!state.error;
@@ -88,6 +107,7 @@ export function CatalogSection({query='',products,quantities,onAdd,canBuy,kind='
           {product&&<SellingPrice product={product}/>}
           {!!entry.referenceOffers.length&&<button type="button" className="catalog-offer-link" onClick={()=>setDetailId(entry.productId)}>{t('catalog.reference_count',{count:entry.referenceOffers.length})}</button>}
           {!buyable&&<small className="rec-pin-status">{t('catalog.not_available')}</small>}
+          {canEdit?.(entry)&&<div className="marker-product-actions"><Button className="marker-product-trigger" onClick={()=>onEdit?.(entry)} aria-label={t('marker.assigned')+': '+name.value}>{t('marker.assigned')}</Button></div>}
         </article>;
       })}</div>:<Empty description={t(query||category?'store.no_matches':kind==='marked'?'marker.empty':'catalog.empty')}>{category&&<Button onClick={()=>choose('')}>{t('class.all')}</Button>}</Empty>}
       {limit<filtered.length&&<div className="feed-loader"><Button icon={<ArrowDownOutlined aria-hidden/>} onClick={()=>setLimit(value=>Math.min(value+CATALOG_BATCH,filtered.length))}>{t('store.load_more')} ({Math.min(limit,filtered.length)}/{filtered.length})</Button></div>}
@@ -96,6 +116,7 @@ export function CatalogSection({query='',products,quantities,onAdd,canBuy,kind='
       {opened&&detailName&&detailSpec&&description&&<>
         <RecommendationImageViewer key={opened.productId} pictures={opened.gallery} name={detailName.value}/>
         <ProductMarkerBadges markers={state.markers[opened.productId]??[]}/>
+        {canEdit?.(opened)&&<div className="marker-product-actions"><Button className="marker-product-trigger" onClick={()=>onEdit?.(opened)}>{t('marker.assigned')}</Button></div>}
         <ProductBrand brand={opened.brand}/><h1 lang={detailName.language}>{detailName.value||t('rec.not_stated')}</h1>{sourceNote(detailName)}
         <ProductVariant model={opened.model} packaging={opened.packaging}/><p>{t('rec.code')}: {opened.itemNumber||t('rec.not_stated')}</p>
         {detailSpec.value&&<><p lang={detailSpec.language}>{detailSpec.value}</p>{sourceNote(detailSpec)}</>}
