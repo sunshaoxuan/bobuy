@@ -39,7 +39,7 @@ class PublicProductCatalogServiceTest {
    if(n<225){var i=new RecommendationItem();i.id=(long)n+1;i.postId=7L;i.productId=p.getId();i.name="Already published "+n;i.itemNumber="ITEM"+n;sources.add(i);}}
   when(posts.findByPublishedTrue()).thenReturn(List.of(post));when(items.findByPostIdInOrderById(List.of(7L))).thenReturn(sources);when(taxonomy.display(sources,true)).thenReturn(sources);when(products.findAll()).thenReturn(all);
   var returned=new HashSet<String>();for(int page=0;page<10;page++){var result=service.page(page,null);assertThat(result.total()).isEqualTo(225);for(var row:result.items())assertThat(returned.add(row.productId())).isTrue();assertThat(result.hasNext()).isEqualTo(page<9);}
-  assertThat(returned).hasSize(225).doesNotContain("prod225","prod237","prod238","prod253");verify(products,never()).save(any());
+  assertThat(returned).hasSize(225).doesNotContain("prod225","prod237","prod238","prod253");assertThat(service.visibleProductOwners(null)).hasSize(225).containsEntry("prod000",1001L).containsEntry("prod224",1001L);var selected=new HashSet<String>();for(int n=0;n<30;n++)selected.add(String.format("prod%03d",n));selected.addAll(List.of("prod225","prod238","missing"));assertThat(service.page(0,1001L,selected).total()).isEqualTo(30);assertThat(service.page(0,1001L,selected).items()).hasSize(24);assertThat(service.page(1,1001L,selected).items()).hasSize(6);verify(products,never()).save(any());
  }
  @Test void drafterProjectionNeverAddsPrivateMasterFieldsOrFallbackMedia(){
   var p=product("a",1);p.setVisibilityStatus(ProductVisibility.DRAFTER_ONLY);p.setBrand("PRIVATE BRAND");p.setDescription(Map.of("ja-JP","PRIVATE DESCRIPTION"));p.setItemNumber("PRIVATE ITEM");

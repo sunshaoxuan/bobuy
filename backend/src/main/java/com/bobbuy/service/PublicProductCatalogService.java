@@ -14,17 +14,31 @@ public class PublicProductCatalogService {
  public record Offer(Long postId,RecommendationItem facts){}
  public record Entry(String productId,Long merchantId,Map<String,String> name,Map<String,String> description,String brand,String itemNumber,Map<String,String> specification,String model,String packaging,List<RecommendationItem.Picture> gallery,List<RecommendationItem.Label> categories,List<Offer> referenceOffers,boolean reviewedMaster){}
  public record Page(List<Entry> items,int page,int size,long total,boolean hasNext){}
- @Transactional(readOnly=true)
- public Page page(int page,Long merchantId){
-  if(page<0||page>100000||merchantId!=null&&merchantId<1)throw new IllegalArgumentException("Invalid public catalog page");
+ private record Snapshot(List<Product> eligible,Map<Long,Long> owners,Map<String,List<RecommendationItem>> linked){}
+ private Snapshot snapshot(Long merchantId){
   var published=posts.findByPublishedTrue().stream().filter(p->merchantId==null||merchantId.equals(p.merchantId)).toList();
   Map<Long,Long> owners=new HashMap<>();published.forEach(p->owners.put(p.id,p.merchantId));
   var originals=published.isEmpty()?List.<RecommendationItem>of():items.findByPostIdInOrderById(published.stream().map(p->p.id).toList());
-  var displayed=taxonomy.display(originals,true);quotes.decorate(displayed,true);
+  var displayed=taxonomy.display(originals,true);
   var linked=new HashMap<String,List<RecommendationItem>>();for(var i:displayed)if(i.productId!=null)linked.computeIfAbsent(i.productId,k->new ArrayList<>()).add(i);
   var eligible=products.findAll().stream().filter(p->!p.isDeleted()).filter(p->merchantId==null||merchantId.equals(p.getMerchantId()))
    .filter(p->p.getVisibilityStatus()==ProductVisibility.PUBLIC||p.getVisibilityStatus()==ProductVisibility.DRAFTER_ONLY&&linked.getOrDefault(p.getId(),List.of()).stream().anyMatch(i->Objects.equals(owners.get(i.postId),p.getMerchantId())))
    .sorted(Comparator.comparing(Product::getId)).toList();
+  return new Snapshot(eligible,owners,linked);
+ }
+ /** Marker reads share exactly the browsing predicate; this is not sale authorization. */
+ @Transactional(readOnly=true)
+ public Map<String,Long> visibleProductOwners(Long merchantId){
+  if(merchantId!=null&&merchantId<1)throw new IllegalArgumentException("Invalid merchant");
+  var result=new LinkedHashMap<String,Long>();snapshot(merchantId).eligible().forEach(p->result.put(p.getId(),p.getMerchantId()));return Collections.unmodifiableMap(result);
+ }
+ @Transactional(readOnly=true)
+ public Page page(int page,Long merchantId){return page(page,merchantId,null);}
+ @Transactional(readOnly=true)
+ public Page page(int page,Long merchantId,Set<String> selectedProductIds){
+  if(page<0||page>100000||merchantId!=null&&merchantId<1)throw new IllegalArgumentException("Invalid public catalog page");
+  var snapshot=snapshot(merchantId);var owners=snapshot.owners();var linked=snapshot.linked();quotes.decorate(linked.values().stream().flatMap(List::stream).toList(),true);
+  var eligible=selectedProductIds==null?snapshot.eligible():snapshot.eligible().stream().filter(p->selectedProductIds.contains(p.getId())).toList();
   int size=24,start=(int)Math.min((long)page*size,eligible.size()),end=Math.min(start+size,eligible.size());
   var rows=eligible.subList(start,end).stream().map(p->{
    var offers=linked.getOrDefault(p.getId(),List.of()).stream().filter(i->Objects.equals(owners.get(i.postId),p.getMerchantId())).sorted(Comparator.comparing((RecommendationItem i)->i.postId).reversed().thenComparing(i->i.id)).map(i->new Offer(i.postId,i)).toList();

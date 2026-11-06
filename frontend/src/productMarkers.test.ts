@@ -1,0 +1,12 @@
+import {orderedMarkers,readPublicMarkers,validMarkerBadge} from './productMarkers';
+import type {ProductMarkerDefinition} from './api';
+const mocks=vi.hoisted(()=>({publicAssignments:vi.fn()}));
+vi.mock('./api',()=>({productMarkerApi:mocks}));
+const marker=(id:string,sortOrder=0,enabled=true):ProductMarkerDefinition=>({id,code:id,badge:'新',name:{'en-US':id},description:{},color:'green',sortOrder,enabled,version:0});
+beforeEach(()=>{vi.clearAllMocks();});
+it('accepts one Unicode codepoint and rejects control/markup/whitespace/multiple characters',()=>{for(const text of ['新','A','🆕'])expect(validMarkerBadge(text)).toBe(true);for(const text of ['','AB','新 品',' ','\n','<','&','"',"'",'é'])expect(validMarkerBadge(text)).toBe(false);});
+it('orders and deduplicates marker ids, filtering disabled only for public display',()=>{const values=[marker('b',1),marker('a',1),marker('d',0,false),marker('b',1)];expect(orderedMarkers(values).map(x=>x.id)).toEqual(['d','a','b']);expect(orderedMarkers(values,true).map(x=>x.id)).toEqual(['a','b']);});
+it('batches unique IDs at 100 and retains only enabled assignments',async()=>{mocks.publicAssignments.mockImplementation(async(ids:string[])=>ids.map(productId=>({productId,markers:[marker('d',0,false),marker('b')]})));const ids=Array.from({length:205},(_,i)=>String(i));const result=await readPublicMarkers([...ids,'1']);expect(mocks.publicAssignments.mock.calls.map(call=>call[0].length)).toEqual([100,100,5]);expect(Object.keys(result)).toHaveLength(205);expect(result['1'].map(x=>x.id)).toEqual(['b']);});
+it('does not call API for empty IDs',async()=>{expect(await readPublicMarkers([])).toEqual({});expect(mocks.publicAssignments).not.toHaveBeenCalled();});
+it('rejects unsolicited and duplicate product assignments',async()=>{mocks.publicAssignments.mockResolvedValue([{productId:'other',markers:[]}]);await expect(readPublicMarkers(['one'])).rejects.toThrow('marker.invalid_response');mocks.publicAssignments.mockResolvedValue([{productId:'one',markers:[]},{productId:'one',markers:[]}]);await expect(readPublicMarkers(['one'])).rejects.toThrow('marker.invalid_response');});
+it('stops after stale scope without starting another chunk',async()=>{let active=true;mocks.publicAssignments.mockImplementation(async()=>{active=false;return [];});expect(await readPublicMarkers(Array.from({length:101},(_,i)=>String(i)),()=>active)).toEqual({});expect(mocks.publicAssignments).toHaveBeenCalledTimes(1);});

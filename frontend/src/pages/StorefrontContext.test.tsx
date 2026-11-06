@@ -4,7 +4,7 @@ import {I18nProvider} from '../i18n';
 import {CART_KEY} from '../cart';
 import Storefront from './Storefront';
 const mocks=vi.hoisted(()=>({trips:vi.fn(),activeTrips:vi.fn(),products:vi.fn(),productCatalog:vi.fn(),nodes:vi.fn(),privateTrips:vi.fn(),role:{user:{id:7,name:'Fixture',roles:['CUSTOMER']},isCustomer:true,isAuthenticated:true,logout:vi.fn()}}));
-vi.mock('../api',()=>({api:{customerTrips:mocks.privateTrips},storefrontApi:{trips:mocks.trips,activeTrips:mocks.activeTrips,products:mocks.products,productCatalog:mocks.productCatalog},recommendationApi:{nodes:mocks.nodes}}));
+vi.mock('../api',()=>({api:{customerTrips:mocks.privateTrips},storefrontApi:{trips:mocks.trips,activeTrips:mocks.activeTrips,products:mocks.products,productCatalog:mocks.productCatalog},productMarkerApi:{markedCatalog:vi.fn(async()=>({items:[],page:0,size:24,total:0,hasNext:false})),publicAssignments:vi.fn(async()=>[])},recommendationApi:{nodes:mocks.nodes}}));
 vi.mock('../context/UserRoleContext',()=>({useUserRole:()=>mocks.role}));
 vi.mock('./PublicRecommendations',()=>({default:()=> <h1>Recommendations fixture</h1>}));
 vi.mock('antd',async()=>{const actual=await vi.importActual<typeof import('antd')>('antd');return {...actual,Select:({id,value,onChange,options,'aria-label':label}:{id:string;value:number;onChange:(id:number)=>void;options:{value:number;label:string}[];'aria-label':string})=><select id={id} aria-label={label} value={value} onChange={event=>onChange(Number(event.target.value))}>{options.map(option=><option key={option.value} value={option.value}>{option.label}</option>)}</select>};});

@@ -18,6 +18,7 @@ const OrderDesk = lazy(() => import('./pages/OrderDesk'));
 const ProcurementHUD = lazy(() => import('./pages/ProcurementHUD'));
 const PickingMaster = lazy(() => import('./pages/PickingMaster'));
 const ProductArchive = lazy(() => import('./pages/ProductArchive'));
+const ProductMarkers = lazy(() => import('./pages/ProductMarkers'));
 const Recommendations = lazy(() => import('./pages/Recommendations'));
 const Suppliers = lazy(() => import('./pages/Suppliers'));
 const MerchantCustomers = lazy(() => import('./pages/MerchantCustomers'));
@@ -31,6 +32,7 @@ const adminPages = [
   ['dashboard', 'nav.dashboard', Dashboard, AppstoreOutlined], ['trips', 'nav.trips', Trips, CalendarOutlined], ['orders', 'nav.orders', Orders, ShoppingOutlined],
   ['order-desk', 'nav.order_desk', OrderDesk, ScanOutlined], ['procurement', 'nav.procurement', ProcurementHUD, InboxOutlined],
   ['picking', 'nav.picking', PickingMaster, CheckSquareOutlined], ['products', 'products.title', ProductArchive, TagsOutlined],
+  ['product-markers', 'marker.title', ProductMarkers, TagsOutlined],
   ['recommendations', 'rec.title', Recommendations, ShopOutlined],
   ['suppliers', 'nav.suppliers', Suppliers, ShopOutlined], ['customers', 'nav.customers', MerchantCustomers, TeamOutlined],
   ['basic-data/currencies', 'currency.title', Currencies, TagsOutlined]

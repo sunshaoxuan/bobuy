@@ -12,6 +12,7 @@ import {
   Breadcrumb,
   Card,
   Drawer,
+  Tooltip,Modal,
   Form,
   Grid,
   Select,
@@ -23,7 +24,7 @@ import {
   ,Segmented
 } from 'antd';
 import {
-  PlusOutlined,
+  PlusOutlined,TagsOutlined,
   SaveOutlined,
   DeleteOutlined,
   InboxOutlined,
@@ -40,6 +41,7 @@ import AiQuickAddModal from '../components/AiQuickAddModal';
 import {ProductBrand} from '../components/ProductMetadata';
 import ProductCatalogPanel from '../components/ProductCatalogPanel';
 import ProductPricingPanel from '../components/ProductPricingPanel';
+import ProductMarkerEditor from '../components/ProductMarkerEditor';
 import { api, type CategoryAttributeTemplateField, type MobileCategory, type MobileSupplier, type AiOnboardingSuggestion } from '../api';
 import './productRecords.css';
 
@@ -251,6 +253,9 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
   }, [isMobile]);
 
   const [dataSource, setDataSource] = useState<StockItem[]>([]);
+  const [markerId,setMarkerId]=useState<string>(),[markerDirty,setMarkerDirty]=useState(false),[markerBusy,setMarkerBusy]=useState(false);
+  const openMarkers=(id:string)=>{setMarkerDirty(false);setMarkerBusy(false);setMarkerId(id);};
+  const closeMarkers=()=>{if(markerBusy)return;if(markerDirty)Modal.confirm({title:t('marker.discard'),onOk:()=>setMarkerId(undefined)});else setMarkerId(undefined);};
   const [catalogId,setCatalogId]=useState<string|undefined>(()=>new URLSearchParams(window.location.search).get('product')||undefined);
   const [pricingId,setPricingId]=useState<string>();
 
@@ -641,9 +646,10 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
       key: 'action',
       width: '8rem',
       render: (_: any, record: StockItem) => (
-        <Space>
+        <Space className="marker-product-actions" size={8} wrap>
           <Button size="small" disabled={record.isNew} onClick={()=>setCatalogId(record.key)}>{t('master.title')}</Button>
           <Button size="small" disabled={record.isNew} onClick={()=>setPricingId(record.key)}>{t('pricing.title')}</Button>
+          <Tooltip title={t('marker.assigned')}><Button className="marker-product-trigger" icon={<TagsOutlined aria-hidden/>} aria-label={t('marker.assigned')+' '+record.name} disabled={record.isNew} onClick={()=>openMarkers(record.key)}/></Tooltip>
           <Button type="text" icon={<EditOutlined />} onClick={() => record.catalogDriven?setCatalogId(record.key):openDrawer(record)} />
           <Button type="text" danger icon={<DeleteOutlined />} onClick={() => handleDelete(record.key)} />
         </Space>
@@ -678,9 +684,10 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
                 <Text className="stock-mobile-metric">
                   <DatabaseOutlined /> {item.stock}
                 </Text>
-                <Space size={4}>
+                <Space className="marker-product-actions" size={8} wrap>
                   <Button size="small" disabled={item.isNew} onClick={()=>setCatalogId(item.key)}>{t('master.title')}</Button>
                   <Button size="small" disabled={item.isNew} onClick={()=>setPricingId(item.key)}>{t('pricing.title')}</Button>
+                  <Tooltip title={t('marker.assigned')}><Button className="marker-product-trigger" icon={<TagsOutlined aria-hidden/>} aria-label={t('marker.assigned')+' '+localizedTitle} disabled={item.isNew} onClick={()=>openMarkers(item.key)}/></Tooltip>
                   <Button type="text" icon={<EditOutlined />} onClick={() => item.catalogDriven?setCatalogId(item.key):openDrawer(item)} aria-label={t('stock.master.edit_detail')} />
                   <Button type="text" danger icon={<DeleteOutlined />} onClick={() => handleDelete(item.key)} aria-label={t('stock.master.discard')} />
                 </Space>
@@ -703,6 +710,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
   return (
     <div className={embedded?'product-records-workspace':undefined} style={{ padding: isMobile ? `0 0 ${MOBILE_BOTTOM_PADDING} 0` : `0 0 ${DESKTOP_BOTTOM_PADDING} 0` }}>
       {!embedded&&<Breadcrumb style={{ marginBottom: '1rem' }} items={[{ title: t('nav.dashboard') }, { title: t('products.title') }]} />}
+      <Drawer className="marker-drawer" title={t('marker.assigned')} width="min(100vw,620px)" open={!!markerId} onClose={closeMarkers} maskClosable={false} destroyOnClose>{markerId&&<ProductMarkerEditor productId={markerId} onDirtyChange={setMarkerDirty} onBusyChange={setMarkerBusy}/>}</Drawer>
       <ProductCatalogPanel id={catalogId} onChoose={setCatalogId} entries={dataSource.filter(row=>!row.isNew)} onSaved={(values,canonical=true)=>setDataSource(prior=>prior.map(row=>{const value=values.find(v=>v.productId===row.key);return value?{...row,catalogDriven:canonical,name:getLocalizedFallback(value.name,row.name),nameL10n:value.name,specificationL10n:value.specification,description:getLocalizedFallback(value.description,''),descriptionL10n:value.description,brand:value.brand??undefined,sku:value.itemNumber??undefined,category:value.categoryIds[0]??'',mediaGallery:value.gallery.map(p=>({id:p.sha256||p.url,url:p.url,type:p.type==='VIDEO'?'video' as const:'image' as const,title:p.title,visible:p.visible}))}:row;}))}/>
 
       <div className={`stock-toolbar ${isMobile ? 'stock-toolbar-mobile' : ''} ${toolbarCompact ? 'stock-toolbar-compact' : ''}`}>
@@ -773,7 +781,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
             <button className="record-title" onClick={()=>setCatalogId(item.key)}><h3>{name}</h3></button>
             <ProductBrand brand={item.brand}/><p>{category?getLocalizedFallback(category.name):t('master.title')}</p>{getLocalizedFallback(item.specificationL10n,'')&&<p className="record-specification">{getLocalizedFallback(item.specificationL10n,'')}</p>}
             <div className="record-sale-state">{item.actualSale?`${item.actualSale.currency} ${item.actualSale.amount}`:t('sale.pending')}</div>
-            <div className="record-card-actions"><Button onClick={()=>setCatalogId(item.key)}>{t('master.title')}</Button><Button type="text" onClick={()=>setPricingId(item.key)}>{t('pricing.title')}</Button><Button type="text" danger icon={<DeleteOutlined/>} aria-label={t('trash.remove')+' '+name} onClick={()=>handleDelete(item.key)}/></div>
+            <div className="record-card-actions marker-product-actions"><Tooltip title={t('marker.assigned')}><Button className="marker-product-trigger" icon={<TagsOutlined aria-hidden/>} aria-label={t('marker.assigned')+' '+name} disabled={item.isNew} onClick={()=>openMarkers(item.key)}/></Tooltip><Button onClick={()=>setCatalogId(item.key)}>{t('master.title')}</Button><Button type="text" onClick={()=>setPricingId(item.key)}>{t('pricing.title')}</Button><Button type="text" danger icon={<DeleteOutlined/>} aria-label={t('trash.remove')+' '+name} onClick={()=>handleDelete(item.key)}/></div>
           </div>
         </article>;
       })}{filteredData.length===0&&<div className="record-empty"><InboxOutlined/><p>{t('stock.empty')}</p></div>}</div>:isMobile ? (

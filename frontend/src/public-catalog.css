@@ -1,5 +1,5 @@
 .catalog-master-heading { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; padding:12px 0; }
-.catalog-master-heading h1 { margin:0; font-size:22px; line-height:1.5; }
+.catalog-master-heading h1,.catalog-master-heading h2 { margin:0; font-size:22px; line-height:1.5; }
 .catalog-master-heading>span { color:#666; font-size:13px; }
 .catalog-progress { display:flex; align-items:center; justify-content:center; gap:12px; min-height:160px; }
 .catalog-master-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:24px 16px; align-items:start; }

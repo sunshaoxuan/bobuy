@@ -1403,6 +1403,21 @@ async function storeGet<T>(path: string): Promise<T> {
     if (!response.ok) throw new Error(await parseErrorMessage(response));
     return parseSuccessPayload<T>(response);
 }
+export type ProductMarkerColor = 'red'|'orange'|'gold'|'green'|'blue'|'purple'|'gray';
+export type ProductMarkerInput = {code:string;badge:string;name:Record<string,string>;description:Record<string,string>;color:ProductMarkerColor;sortOrder:number;enabled:boolean};
+export type ProductMarkerDefinition = ProductMarkerInput & {id:string;version:number};
+export type ProductMarkerAssignment = {productId:string;markerIds:string[];version:number};
+export type PublicMarkerAssignment = {productId:string;markers:ProductMarkerDefinition[]};
+export const productMarkerApi = {
+    list:()=>storeGet<ProductMarkerDefinition[]>('/api/merchant/product-markers'),
+    create:(input:ProductMarkerInput)=>postJson<ProductMarkerDefinition,ProductMarkerInput>('/api/merchant/product-markers',input),
+    update:(id:string,input:ProductMarkerInput & {version:number})=>putJson<ProductMarkerDefinition,typeof input>('/api/merchant/product-markers/'+encodeURIComponent(id),input),
+    defaults:()=>postJson<ProductMarkerDefinition[],object>('/api/merchant/product-markers/defaults',{}),
+    assignment:(id:string)=>storeGet<ProductMarkerAssignment>('/api/merchant/product-markers/products/'+encodeURIComponent(id)),
+    assign:(id:string,input:{markerIds:string[];version:number})=>putJson<ProductMarkerAssignment,typeof input>('/api/merchant/product-markers/products/'+encodeURIComponent(id),input),
+    publicAssignments:(ids:string[])=>storeGet<PublicMarkerAssignment[]>('/api/storefront/product-marker-assignments?'+new URLSearchParams({productIds:ids.join(',')})),
+    markedCatalog:(page=0,merchantId?:number)=>storeGet<PublicCatalogPage>('/api/storefront/marked-product-catalog?'+new URLSearchParams({page:String(page),...(merchantId===undefined?{}:{merchantId:String(merchantId)})}))
+};
 export const storefrontApi = {
     productCatalog: (page=0,merchantId?:number) => storeGet<PublicCatalogPage>('/api/storefront/product-catalog?'+new URLSearchParams({page:String(page),...(merchantId===undefined?{}:{merchantId:String(merchantId)})})),
     trips: () => storeGet<StoreTrip[]>('/api/storefront/trips'),

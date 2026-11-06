@@ -5,6 +5,7 @@ import React from 'react';
 import { api } from '../api';
 import {message} from 'antd';
 vi.mock('../components/ProductCatalogPanel',()=>({default:()=>null}));
+vi.mock('../components/ProductMarkerEditor',()=>({default:({productId}:{productId:string})=><output data-testid="marker-product-id">{productId}</output>}));
 
 vi.mock('../api', () => ({
   api: {
@@ -107,6 +108,13 @@ it('uses the real uppercase IMAGE gallery in embedded browsing and retains edita
 });
 
 const MOBILE_VIEWPORT_WIDTH = 375;
+it.each([false,true])('opens markers for the saved product at mobile=%s',async mobile=>{
+ setMatchMedia(mobile);window.localStorage.setItem('bobbuy_locale','en-US');
+ render(<I18nProvider><StockMaster/></I18nProvider>);
+ const entry=await screen.findByRole('button',{name:'Product markers Organic Milk'});
+ fireEvent.click(entry);expect(await screen.findByTestId('marker-product-id')).toHaveTextContent('prd-1000');
+});
+
 const DESKTOP_VIEWPORT_WIDTH = 1280;
 
 const createMatchMedia = (isMobile: boolean) => vi.fn().mockImplementation((query: string) => {
