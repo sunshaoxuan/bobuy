@@ -19,3 +19,43 @@ it('keeps sale eligibility pending until the bounded quote arrives and then uses
 it('renders source titles as text and retains explicit publication metadata on the selected issue',async()=>{mocks.get.mockResolvedValue({post:{...occurrence().post,title:'<script>alert(1)</script>',publisherName:'Publisher fixture',publishedAt:'2026-11-01T01:00:00Z'},body:'Plain body',items:[]});const view=mount('/recommendations/1');await screen.findByRole('heading',{name:'<script>alert(1)</script>'});expect(view.container.querySelector('script')).toBeNull();});
 it('fetches and displays full service restrictions only after the selected issue is explicitly opened',async()=>{const service=serviceFixture();mocks.get.mockResolvedValue({post:occurrence().post,body:'Explicit full service body',items:[],serviceOffer:service});mount('/recommendations?topic=1');await screen.findByText('Explicit full service body');expect(screen.getByText(service.terms['en-US'].restrictions)).toBeInTheDocument();expect(screen.getByText(service.terms['en-US'].cancellation)).toBeInTheDocument();expect(mocks.get).toHaveBeenCalledTimes(1);});
 it('returns from an explicit issue without dropping merchant, query or category context',async()=>{const view=mount('/recommendations/1?node=1&query=later&category=cat&item=900',{query:'later'});await screen.findByText('Explicit full body');expect(view.container.querySelector('.rec-back')).toHaveAttribute('href','/recommendations?node=1&query=later&category=cat');});
+
+it.each([
+  {sourceUrl:null,label:'',link:null,text:null},
+  {sourceUrl:undefined,label:'',link:null,text:null},
+  {sourceUrl:'',label:'',link:null,text:null},
+  {sourceUrl:'   ',label:'  ',link:null,text:null},
+  {sourceUrl:'not a URL',label:'',link:null,text:null},
+  {sourceUrl:'https://',label:'',link:null,text:null},
+  {sourceUrl:'javascript:alert(1)',label:'Existing label',link:null,text:'Existing label'},
+  {sourceUrl:null,label:'Existing label',link:null,text:'Existing label'},
+  {sourceUrl:'https://example.org/original',label:'',link:'https://example.org/original',text:'example.org'},
+  {sourceUrl:'https://example.org/original',label:'Original source',link:'https://example.org/original',text:'Original source'},
+])('keeps source attribution safe for $sourceUrl / $label',async({sourceUrl,label,link,text})=>{
+  mocks.get.mockResolvedValue({post:occurrence(961001).post,body:'Selected source issue',items:[{...occurrence(961001,981027).item!,imageUrl:'',description:'Source detail',gallery:[{id:'image',url:'/fixture.png',hash:'',assetKey:'',sourceUrl,label}]}]});
+  mount('/recommendations/961001?item=981027');await screen.findByText('Source detail');
+  const dialog=screen.getByRole('dialog');expect(dialog.querySelector('img[src="/fixture.png"]')).toBeInTheDocument();
+  const links=dialog.querySelectorAll('details a');expect(links).toHaveLength(link?1:0);
+  if(link){expect(links[0]).toHaveAttribute('href',link);expect(links[0]).toHaveTextContent(text!);expect(links[0]).toHaveAttribute('rel','noopener noreferrer');}
+  else if(text)expect(within(dialog).getByText(text)).toBeInTheDocument();
+  else expect(dialog.querySelector('details')).toBeNull();
+});
+it('keeps source attribution safe through detail close, item switch and return',async()=>{
+  mocks.browseItems.mockResolvedValue(browsePage([occurrence(1,1),occurrence(1,2)]));
+  mocks.get.mockResolvedValue({post:occurrence().post,body:'Selected source issue',items:[
+    {...occurrence(1,1).item!,imageUrl:'',description:'First source detail',gallery:[{id:'first',url:'/first.png',hash:'',assetKey:'',sourceUrl:null,label:''}]},
+    {...occurrence(1,2).item!,imageUrl:'',description:'Second source detail',gallery:[{id:'second',url:'/second.png',hash:'',assetKey:'',sourceUrl:'https://example.org/second',label:'Second source'}]},
+  ]});
+  const view=mount('/recommendations/1?item=1');await screen.findByText('First source detail');
+  fireEvent.click(within(screen.getByRole('dialog')).getByRole('button',{name:'Close'}));
+  await waitFor(()=>expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+  fireEvent.click(screen.getByRole('button',{name:'Product details: Item 2'}));
+  await screen.findByText('Second source detail');expect(within(screen.getByRole('dialog')).getByText('Second source')).toHaveAttribute('href','https://example.org/second');
+  fireEvent.click(within(screen.getByRole('dialog')).getByRole('button',{name:'Close'}));
+  await waitFor(()=>expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+  fireEvent.click(screen.getByRole('button',{name:'Product details: Item 1'}));await screen.findByText('First source detail');
+  expect(screen.getByRole('dialog').querySelector('details')).toBeNull();
+  fireEvent.click(within(screen.getByRole('dialog')).getByRole('button',{name:'Close'}));
+  await waitFor(()=>expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+  expect(view.container.querySelector('.rec-back')).toHaveAttribute('href','/recommendations');
+});

@@ -42,3 +42,7 @@ Original main/QA bind exact built assets/backend and run permitted real DB/HTTP/
 ## P2 detail action state precedence
 
 The detail footer uses the same `pricePending(productId)` precedence as its price region: pending text first, then verified eligible Add to cart, otherwise unavailable. Pending includes unverified failed quote reads and unresolved bookable context. Existing disabled/click conditions remain byte-for-byte unchanged; no new business state or resource key.
+
+## P1 attribution rendering boundary
+
+Parse optional gallery attribution with a guarded URL constructor. Only absolute HTTP(S) URLs with a hostname become external links. Prefer the supplied label, otherwise use that valid hostname. With an unusable URL, keep a supplied nonblank label as plain text; with neither usable field omit that attribution row and omit an empty source disclosure. Gallery image rendering remains independent. Closed details elements still evaluate JSX children, so parsing must be safe before disclosure is opened. No new translations or API semantics.

@@ -99,9 +99,15 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
   </article>;
 }
 
+function gallerySource(value:string|null|undefined){
+ if(!value)return undefined;
+ try{const url=new URL(value);return (url.protocol==='https:'||url.protocol==='http:')&&url.hostname?url:undefined;}catch{return undefined;}
+}
+
 function RecommendationProductDetail({item,product,onClose,onAdd,canBuy,purchasePending=false}:{item?:RecommendationItem;product?:StoreProduct;purchasePending?:boolean;onClose:()=>void;onAdd:(p:StoreProduct)=>void;canBuy:(p:StoreProduct)=>boolean}){
  const {t,locale}=useI18n();
  if(!item)return null;const text=recommendationText(item,locale),gallery=item.gallery??[];
+ const sources=gallery.map(picture=>({id:picture.id,source:gallerySource(picture.sourceUrl),label:picture.label?.trim()})).filter(picture=>picture.source||picture.label);
  return <Drawer className="rec-product-detail" title={t('store.details')} width="min(100vw,760px)" open={!!item} onClose={onClose}>
   <RecommendationImageViewer key={item.id} pictures={gallery} name={text.name}/>
   <ProductBrand brand={item.brand}/><h1><RecommendationName text={text}/></h1><ProductVariant model={item.model} packaging={item.packaging}/><p>{t('rec.code')}: {item.itemNumber||t('rec.not_stated')}</p>{text.missing&&<Alert type="info" message={t('article.field_source',{fields:text.sourceFields.map(key=>t(key==='description'?'master.descriptions':key==='specification'?'master.specifications':'rec.fact.'+key)).join(' · ')})}/>}
@@ -110,7 +116,7 @@ function RecommendationProductDetail({item,product,onClose,onAdd,canBuy,purchase
   <OfferInfo facts={{...item,offerNotes:text.offerNotes}}/>
   {text.description&&<section className="rec-detail-description"><h2>{t('store.details')}</h2>{text.description.split('\n').map((line,i)=><p key={i}>{line}</p>)}</section>}
   {item.showSupplier&&item.supplierName&&<p>{t('class.supplier')}: {localizedContent(item.supplierName,locale)}</p>}
-  {gallery.length>0&&<details><summary>{t('gallery.sources')}</summary>{gallery.map(picture=><p key={picture.id}><a href={picture.sourceUrl} target="_blank" rel="noopener noreferrer">{picture.label||new URL(picture.sourceUrl).hostname}</a></p>)}</details>}
+  {sources.length>0&&<details><summary>{t('gallery.sources')}</summary>{sources.map(picture=><p key={picture.id}>{picture.source?<a href={picture.source.href} target="_blank" rel="noopener noreferrer">{picture.label||picture.source.hostname}</a>:picture.label}</p>)}</details>}
   <Button type="primary" size="large" block disabled={purchasePending||!product||!canBuy(product)} onClick={()=>product&&onAdd(product)}>{t(purchasePending?'browse.sales_pending':product&&canBuy(product)?'store.add_cart':'catalog.not_available')}</Button>
  </Drawer>;
 }

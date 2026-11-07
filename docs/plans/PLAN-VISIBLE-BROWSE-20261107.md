@@ -19,3 +19,7 @@ Implementation/design: [VISIBLE-BROWSE-V1.md](../design/VISIBLE-BROWSE-V1.md). C
 ## P2 detail pending correction
 
 An opened product detail must label its disabled action as checking price/availability while the bounded sale read is pending or failed, or required purchase context is unresolved. Only completed checks may label it unavailable. Reuse existing text and preserve disabled/click eligibility guards. Scope: one detail button label and five focused regression cases; no backend/runtime change.
+
+## P1 recommendation image attribution correction
+
+A public selected recommendation item must remain readable when image sourceUrl is null, missing, empty or malformed. Keep the genuine image, valid HTTP(S) source links and supplied attribution labels. Do not invent source links. Required regression includes the QA route /recommendations/961001?item=981027 plus closing, switching and returning to item detail. No backend/API or purchase-rule change.

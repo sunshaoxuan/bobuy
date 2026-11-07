@@ -16,3 +16,9 @@ Source lineage is HEAD e26cab4 plus hash-bound permission-context and backend v1
 - Correct the open product-detail action label while price/availability or purchase context remains unverified; preserve disabled and click guards.
 - Add five regression cases for pending/rejected quotes, successful eligible quote, verified missing quote and unresolved purchase context.
 - Delta evidence lives in `frontend/test-results/visible-batch-20261107/p2-detail-pending`. Prior QA FAIL and build receipts remain immutable; changed frontend requires original-main artifact rebind and original-QA delta acceptance.
+
+## visible-browse-v1.frontend.20261107-p1-gallery-source — UNRELEASED
+
+- Fix public recommendation detail white screen for null/missing/invalid image source attribution. Preserve genuine images, valid links and supplied labels without generating invalid links.
+- Add ten attribution boundary cases and close/switch/return regression to the existing recommendation suite.
+- Based on committed 634e77c; source-only candidate, no build/runtime/push/production action by frontend owner. Original anonymous QA FAIL remains unchanged; main rebinds minimal assets and same QA rechecks affected detail/navigation.
