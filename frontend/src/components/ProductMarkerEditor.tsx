@@ -1,4 +1,4 @@
-import {useEffect,useRef,useState} from 'react';
+import {useEffect,useId,useRef,useState} from 'react';
 import {Alert,Button,Checkbox,Popconfirm,Spin} from 'antd';
 import {ClearOutlined,ReloadOutlined,SaveOutlined} from '@ant-design/icons';
 import {Link} from 'react-router-dom';
@@ -10,10 +10,11 @@ import ProductMarkerBadges from './ProductMarkerBadges';
 import '../product-markers.css';
 type Props={productId:string;onDirtyChange?:(dirty:boolean)=>void;onBusyChange?:(busy:boolean)=>void;onSaved?:(assignment:ProductMarkerAssignment)=>void};
 export default function ProductMarkerEditor(props:Props){
- const {isMerchant}=useUserRole();return isMerchant?<AssignmentEditor key={props.productId} {...props}/>:null;
+ const {isMerchant,isAuthenticated,loading,user}=useUserRole();return isMerchant&&isAuthenticated&&!loading&&user?<AssignmentEditor key={String(user.id)+':'+props.productId} {...props}/>:null;
 }
 function AssignmentEditor({productId,onDirtyChange,onBusyChange,onSaved}:Props){
  const {t,locale}=useI18n();
+ const navigationHint=useId();
  const [definitions,setDefinitions]=useState<ProductMarkerDefinition[]>([]),[saved,setSaved]=useState<ProductMarkerAssignment>(),[selected,setSelected]=useState<string[]>([]);
  const [loading,setLoading]=useState(true),[saving,setSaving]=useState(false),[error,setError]=useState(''),[attempt,setAttempt]=useState(0),[success,setSuccess]=useState(false);
  const mounted=useRef(true);useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;};},[]);
@@ -33,9 +34,11 @@ function AssignmentEditor({productId,onDirtyChange,onBusyChange,onSaved}:Props){
   {success&&<Alert type="success" showIcon message={t('marker.saved')}/>}
   {loading?<Spin/>:<>{saved&&<fieldset disabled={saving} className="marker-selection"><legend>{t('marker.assigned')}</legend>
    {definitions.map(marker=><div className="marker-choice" key={marker.id}><Checkbox checked={selected.includes(marker.id)} disabled={!selected.includes(marker.id)&&selected.length>=50} onChange={e=>{setSuccess(false);setSelected(ids=>e.target.checked?[...ids,marker.id]:ids.filter(id=>id!==marker.id));}} aria-label={localizedContent(marker.name,locale)}/><ProductMarkerBadges markers={[{...marker,enabled:true}]}/><span>{localizedContent(marker.name,locale)}{!marker.enabled&&<small>{t('marker.disabled')}</small>}</span></div>)}
-   {!definitions.length&&<Link to="/admin/product-markers">{t('marker.title')}</Link>}
+   {!definitions.length&&<p>{t('marker.no_definitions')}</p>}
   </fieldset>}
   <div className="marker-actions"><Button icon={<ClearOutlined aria-hidden/>} disabled={!saved||saving||!selected.length} onClick={()=>{setSelected([]);setSuccess(false);}}>{t('marker.clear')}</Button><Button type="primary" icon={<SaveOutlined aria-hidden/>} loading={saving} disabled={!dirty||loading} onClick={()=>void save()}>{t('marker.save')}</Button>{dirty?<Popconfirm title={t('marker.discard')} onConfirm={()=>setAttempt(v=>v+1)}><Button icon={<ReloadOutlined aria-hidden/>} disabled={saving}>{t('marker.reload')}</Button></Popconfirm>:reload}</div>
+  <p className="marker-draft-hint">{t('marker.draft_only')}</p>
   </>}
+  <div className="marker-definition-navigation">{loading||saving||dirty?<><span role="link" aria-disabled="true" tabIndex={0} aria-describedby={navigationHint}>{t('marker.manage_definitions')}</span><p id={navigationHint}>{t('marker.navigation_hint')}</p></>:<Link to="/admin/product-markers">{t('marker.manage_definitions')}</Link>}</div>
  </section>;
 }

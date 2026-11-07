@@ -34,7 +34,7 @@ export function RecommendationImageViewer({pictures,name}:{pictures:Recommendati
    <img className="rec-gallery-sizer" src={picture.url} alt="" aria-hidden="true" draggable={false}/>{rail}
   </div>
   <div className="rec-gallery-navigation"><button type="button" disabled={index===0} onClick={()=>change(index-1)} aria-label={t('gallery.previous')}>‹</button><span aria-live="polite">{index+1} / {pictures.length}</span><button type="button" disabled={index===pictures.length-1} onClick={()=>change(index+1)} aria-label={t('gallery.next')}>›</button></div>
-  <div className="rec-detail-thumbs">{pictures.map((p,i)=><button type="button" key={p.id} aria-label={t('gallery.view',{number:i+1})} aria-pressed={i===index} onClick={()=>change(i)}><img src={p.url} alt={p.label||name} draggable={false}/></button>)}</div>
+  <div className="rec-detail-thumbs">{pictures.map((p,i)=><button type="button" key={p.id} aria-label={t('gallery.view',{number:i+1})} aria-pressed={i===index} onClick={()=>change(i)}><img src={p.url} alt={p.label||name} loading="lazy" draggable={false}/></button>)}</div>
   <ImageLightbox pictures={pictures} index={index} open={open} name={name} onIndexChange={change} onClose={()=>{resetMotion();setOpen(false);}} returnFocus={opener}/>
  </div>;
 }

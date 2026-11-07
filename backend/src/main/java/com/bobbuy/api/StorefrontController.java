@@ -25,6 +25,8 @@ public class StorefrontController {
     }
     @GetMapping("/api/storefront/products")
     public ApiResponse<List<StorefrontService.PublicProduct>> products() { return ApiResponse.success(storefront.publicProducts()); }
+    @GetMapping("/api/storefront/product-sales")
+    public ApiResponse<List<StorefrontService.PublicProduct>> productSales(@RequestParam(defaultValue="") List<String> productIds) { return ApiResponse.success(storefront.publicProducts(productIds)); }
     @PostMapping("/api/auth/register")
     public ApiResponse<AuthService.SessionResult> register(@Valid @RequestBody StorefrontService.Registration request,
             HttpServletRequest httpRequest, HttpServletResponse response) {

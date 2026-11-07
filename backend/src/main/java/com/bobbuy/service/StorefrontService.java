@@ -58,10 +58,16 @@ public class StorefrontService {
     }
 
     public List<PublicProduct> publicProducts() {
+        return publicProducts(null);
+    }
+    /** Same sale policy, bounded requested identities; no new sale eligibility. */
+    public List<PublicProduct> publicProducts(List<String> ids) {
+        if(ids!=null&&(ids.isEmpty()||ids.size()>24||ids.stream().anyMatch(id->id==null||id.isBlank()||id.length()>255)||new HashSet<>(ids).size()!=ids.size()))throw new ApiException(ErrorCode.INVALID_REQUEST,"Invalid sale product IDs");
         return products.findAll().stream().sorted(Comparator.comparing(Product::getId))
+            .filter(p->ids==null||ids.contains(p.getId()))
             .filter(p->p.getVisibilityStatus()==ProductVisibility.PUBLIC)
-            .flatMap(p->sales.quote(p).stream().map(q->new PublicProduct(p.getId(),p.getMerchantId(),p.getName(),p.getDescription(),p.getBrand(),q.amount().doubleValue(),
-                p.getCategoryId(),p.getMediaGallery().stream().filter(MediaGalleryItem::isVisible).filter(m->m.getType()==MediaType.IMAGE).map(MediaGalleryItem::getUrl).toList(),
+            .flatMap(p->sales.quote(p).stream().map(q->new PublicProduct(p.getId(),p.getMerchantId(),p.getName(),ids==null?p.getDescription():Map.of(),p.getBrand(),q.amount().doubleValue(),
+                p.getCategoryId(),ids==null?p.getMediaGallery().stream().filter(MediaGalleryItem::isVisible).filter(m->m.getType()==MediaType.IMAGE).map(MediaGalleryItem::getUrl).toList():List.of(),
                 q.currency(),q.unit(),q.revision(),p.getOrderMethod()==OrderMethod.PRE_ORDER,q.priceToken(),q.regularAmount(),q.adjustmentId(),q.validFrom(),q.validUntil()))).toList();
     }
 

@@ -57,6 +57,10 @@ public class ProductMarkerService {
   var assignmentMap=new HashMap<String,ProductMarkerSet>();assignments.forEach(a->assignmentMap.put(a.productId,a));
   return ids.stream().filter(visible::containsKey).map(id->{var set=assignmentMap.get(id);var productOwner=visible.get(id);var markers=set==null||!Objects.equals(set.merchantId,productOwner)?List.<Definition>of():set.markerIds.stream().map(definitionMap::get).filter(Objects::nonNull).filter(d->d.enabled&&Objects.equals(d.merchantId,productOwner)).sorted(ordering()).map(this::view).toList();return new PublicAssignment(id,markers);}).toList();
  }
+ /** Internal public browse projection uses already-qualified owners in the same read snapshot. */
+ @Transactional(readOnly=true) public List<PublicAssignment> browseAssignments(Map<String,Long> owners){
+  return publicAssignments(List.copyOf(owners.keySet()),owners);
+ }
  @Transactional(readOnly=true) public Set<String> markedProductIds(Long merchantId){
   var owners=catalog.visibleProductOwners(merchantId);var all=List.copyOf(owners.keySet());var result=new HashSet<String>();for(int start=0;start<all.size();start+=100)publicAssignments(all.subList(start,Math.min(start+100,all.size())),owners).stream().filter(a->!a.markers().isEmpty()).forEach(a->result.add(a.productId()));return Set.copyOf(result);
  }

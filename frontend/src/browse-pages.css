@@ -1,0 +1,5 @@
+.server-browse-cards>.rec-pin { min-width:0; }
+.server-browse-cards .ant-btn { min-height:44px; max-width:100%; height:auto; white-space:normal; overflow-wrap:anywhere; }
+.server-browse-cards .catalog-offer-link { min-height:44px; max-width:100%; overflow-wrap:anywhere; text-align:start; }
+.service-summary { overflow-wrap:anywhere; line-height:1.6; }
+.service-summary p { margin:8px 0; }

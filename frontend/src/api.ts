@@ -1399,7 +1399,10 @@ export type PublicCatalogEntry = {
 export type PublicCatalogPage = {items:PublicCatalogEntry[];page:number;size:number;total:number;hasNext:boolean};
 export type MerchantCustomer = { customerId: number; name: string; emailVerified: boolean; merchantApproved: boolean; approvedAt?: string };
 async function storeGet<T>(path: string): Promise<T> {
-    const response = await authorizedFetch(path, undefined, { retryOnUnauthorized: !path.startsWith('/api/storefront/') });
+    const publicRead=path.startsWith('/api/storefront/');
+    const response = await authorizedFetch(path, publicRead?{cache:'no-store'}:undefined, { retryOnUnauthorized: !publicRead });
+    if (response.status===409) {const body=await response.clone().json().catch(()=>({}));if(body.errorCode==='BROWSE_CHANGED')throw new Error('browse.changed');}
+    if(response.status===400&&/\/api\/storefront\/(product-browse|recommendation-browse|product-sales)/.test(path))throw new Error('browse.invalid');
     if (!response.ok) throw new Error(await parseErrorMessage(response));
     return parseSuccessPayload<T>(response);
 }
@@ -1419,6 +1422,11 @@ export const productMarkerApi = {
     markedCatalog:(page=0,merchantId?:number)=>storeGet<PublicCatalogPage>('/api/storefront/marked-product-catalog?'+new URLSearchParams({page:String(page),...(merchantId===undefined?{}:{merchantId:String(merchantId)})}))
 };
 export const storefrontApi = {
+    productBrowse:(query:BrowseQuery)=>storeGet<BrowsePage<ProductBrowseCard>>('/api/storefront/product-browse?'+browseQuery(query)),
+    productDetail:(id:string,merchantId?:number)=>storeGet<{item:PublicCatalogEntry;markers:ProductMarkerDefinition[];revision:string}>('/api/storefront/product-browse/'+encodeURIComponent(id)+'?'+browseQuery({merchantId})),
+    productSales:(ids:string[])=>{if(!ids.length||ids.length>24||new Set(ids).size!==ids.length)return Promise.reject(new Error('browse.invalid'));return storeGet<StoreProduct[]>('/api/storefront/product-sales?'+new URLSearchParams({productIds:ids.join(',')}));},
+    browseItems:(query:BrowseQuery)=>storeGet<BrowsePage<RecommendationOccurrence>>('/api/storefront/recommendation-browse/items?'+browseQuery(query)),
+    browseIssues:(query:BrowseQuery)=>storeGet<IssueDirectoryPage>('/api/storefront/recommendation-browse/issues?'+browseQuery(query)),
     productCatalog: (page=0,merchantId?:number) => storeGet<PublicCatalogPage>('/api/storefront/product-catalog?'+new URLSearchParams({page:String(page),...(merchantId===undefined?{}:{merchantId:String(merchantId)})})),
     trips: () => storeGet<StoreTrip[]>('/api/storefront/trips'),
     activeTrips: () => storeGet<StoreTrip[]>('/api/storefront/trips?includeCurrent=true'),
@@ -1430,6 +1438,17 @@ export const storefrontApi = {
     checkout: (payload: { requestId: string; tripId: number; currency?:string; items: { productId: string; quantity: number;priceRevision?:number;currency?:string;priceToken?:string }[] }) =>
         postJson<{ orderId: number; total: number;currency:string; status: string; emailVerified: boolean; merchantApproved: boolean }, typeof payload>('/api/checkout', payload)
 };
+
+export type BrowseQuery={page?:number;merchantId?:number;query?:string;category?:string;locale?:string;marked?:boolean;revision?:string;issueId?:number;period?:'current'|'history'|'all'};
+function browseQuery(query:BrowseQuery){return new URLSearchParams(Object.entries(query).filter(([,value])=>value!==undefined).map(([key,value])=>[key,String(value)]));}
+export type BrowseFacet=RecommendationLabel&{count:number};
+export type BrowsePage<T>={items:T[];page:number;size:number;scopeTotal:number;matchedTotal:number;hasNext:boolean;revision:string;datasetRevision:string;categories:BrowseFacet[];unclassified:number;japanDay?:string;productOccurrences?:number;serviceCards?:number};
+export type ProductBrowseCard=Omit<PublicCatalogEntry,'gallery'|'description'|'referenceOffers'>&{image:RecommendationPicture|null;markers:ProductMarkerDefinition[]};
+export type RecommendationBrowseItem=Omit<RecommendationItem,'imageUrl'|'gallery'|'description'|'sourceFacts'>&{image:RecommendationPicture|null};
+export type ServiceBrowseCard=Pick<ServiceOffer,'provider'|'staff'|'hours'|'originalPrice'|'price'|'currency'|'taxIncluded'|'fees'|'noExtraFees'|'applicationStart'|'applicationEnd'|'serviceStart'|'serviceEnd'>;
+export type RecommendationOccurrence={key:string;post:RecommendationSummary;title:string;history:boolean;item:RecommendationBrowseItem|null;service:boolean;serviceSummary:ServiceBrowseCard|null};
+export type IssueDirectoryEntry={post:RecommendationSummary;title:string;history:boolean;itemCount:number;service:boolean};
+export type IssueDirectoryPage={items:IssueDirectoryEntry[];page:number;size:number;total:number;hasNext:boolean;revision:string;datasetRevision:string;japanDay:string};
 
 function buildChatCursorQuery(params?: { beforeId?: number; limit?: number }, hasExistingQuery = false) {
     if (!params?.beforeId && !params?.limit) {

@@ -1,3 +1,4 @@
+import RecommendationBrowse from './RecommendationBrowse';
 import {ProductBrand,ProductVariant} from '../components/ProductMetadata';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Alert, Button, Drawer, Empty, Input, Segmented, Spin, Tooltip } from 'antd';
@@ -7,18 +8,19 @@ import { storefrontApi,recommendationApi, type RecommendationDetail, type StoreP
 import { localizedContent, useI18n } from '../i18n';
 import { OfferInfo } from '../components/RecommendationFacts';
 import '../recommendations.css';
-import {availableCategory,categoryChoices,filterRecommendations,issueScope,readAllIssues,searchRecommendations,UNCLASSIFIED} from '../recommendationFilters';
+import {categoryChoices,filterRecommendations,searchRecommendations,UNCLASSIFIED} from '../recommendationFilters';
 import {scopedPath,selectedNode} from '../storeNavigation';
 import {recommendationText} from '../recommendationText';
 import SellingPrice from '../components/SellingPrice';
 import {RecommendationImageViewer} from '../components/RecommendationImageViewer';
 import {RecommendationName} from '../components/RecommendationName';
 import type {RecommendationItem} from '../api';
-import {arrangeIssues,useJapaneseDay} from '../recommendationSchedule';
+
 import {articleText,articleTitle} from '../recommendationArticle';
 
-type ShoppingProps = {
+export type ShoppingProps = {
   query?: string;
+  autoPaused?:boolean;purchasePending?:boolean;authKey?:string;onSales?:(values:StoreProduct[])=>void;
   readOnlyPreview?:boolean;
   products: StoreProduct[];
   quantities: Record<string, number>;
@@ -97,7 +99,7 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
   </article>;
 }
 
-function RecommendationProductDetail({item,product,onClose,onAdd,canBuy}:{item?:RecommendationItem;product?:StoreProduct;onClose:()=>void;onAdd:(p:StoreProduct)=>void;canBuy:(p:StoreProduct)=>boolean}){
+function RecommendationProductDetail({item,product,onClose,onAdd,canBuy,purchasePending=false}:{item?:RecommendationItem;product?:StoreProduct;purchasePending?:boolean;onClose:()=>void;onAdd:(p:StoreProduct)=>void;canBuy:(p:StoreProduct)=>boolean}){
  const {t,locale}=useI18n();
  if(!item)return null;const text=recommendationText(item,locale),gallery=item.gallery??[];
  return <Drawer className="rec-product-detail" title={t('store.details')} width="min(100vw,760px)" open={!!item} onClose={onClose}>
@@ -109,7 +111,7 @@ function RecommendationProductDetail({item,product,onClose,onAdd,canBuy}:{item?:
   {text.description&&<section className="rec-detail-description"><h2>{t('store.details')}</h2>{text.description.split('\n').map((line,i)=><p key={i}>{line}</p>)}</section>}
   {item.showSupplier&&item.supplierName&&<p>{t('class.supplier')}: {localizedContent(item.supplierName,locale)}</p>}
   {gallery.length>0&&<details><summary>{t('gallery.sources')}</summary>{gallery.map(picture=><p key={picture.id}><a href={picture.sourceUrl} target="_blank" rel="noopener noreferrer">{picture.label||new URL(picture.sourceUrl).hostname}</a></p>)}</details>}
-  <Button type="primary" size="large" block disabled={!product||!canBuy(product)} onClick={()=>product&&onAdd(product)}>{t(product&&canBuy(product)?'store.add_cart':'catalog.not_available')}</Button>
+  <Button type="primary" size="large" block disabled={purchasePending||!product||!canBuy(product)} onClick={()=>product&&onAdd(product)}>{t(purchasePending?'browse.sales_pending':product&&canBuy(product)?'store.add_cart':'catalog.not_available')}</Button>
  </Drawer>;
 }
 
@@ -140,53 +142,4 @@ export function RecommendationPreview({detail}:{detail:RecommendationDetail}) {
   </section>;
 }
 
-export default function PublicRecommendations(props: ShoppingProps) {
-  const { id } = useParams();
-  const { t,locale } = useI18n();
-  const [params,setParams]=useSearchParams();
-  const category=params.get('category')??'';
-  const topic=id??params.get('topic')??'';
-  const node=selectedNode('?'+params.toString());
-  const [posts, setPosts] = useState<RecommendationDetail[]>([]);
-  const [busy, setBusy] = useState(true);
-  const [error, setError] = useState('');
-  const [loadedKey,setLoadedKey]=useState('');
-  const requestKey=JSON.stringify([node]);
-  const pending=busy||loadedKey!==requestKey;
-  const catalog = useMemo(() => new Map(props.products.map(product => [product.id, product])), [props.products]);
-  useEffect(() => {
-    let active = true;
-    setBusy(true); setError(''); setPosts([]);
-    const request = node===-1 ? Promise.resolve([]) : readAllIssues(page=>recommendationApi.feed(page,node),()=>active);
-    void request.then(value => { if (active) setPosts(value); }).catch(e => { if (active) setError((e as Error).message); }).finally(() => { if (active) {setLoadedKey(requestKey);setBusy(false);} });
-    return () => { active = false; };
-  }, [node]);
-  const today=useJapaneseDay();
-  const arranged=useMemo(()=>arrangeIssues(posts,today),[posts,today]);
-  const ordered=useMemo(()=>[...arranged.current,...arranged.history],[arranged]);
-  const historyIds=useMemo(()=>new Set(arranged.history.map(entry=>entry.post.id)),[arranged]);
-  const selected=pending?[]:issueScope(ordered,topic);
-  const query=props.query?.trim().toLocaleLowerCase()??'';
-  const scope=searchRecommendations(selected,query,locale);
-  const activeCategory=availableCategory(scope,category);
-  const visible=filterRecommendations(scope,activeCategory);
-  useEffect(()=>{if(pending||error||!category||activeCategory===category)return;const next=new URLSearchParams(params);next.delete('category');setParams(next,{replace:true});},[pending,error,category,activeCategory,params,setParams]);
-  function choose(value:string){if(value===activeCategory)return;const next=new URLSearchParams(params);next.delete('item');if(value)next.set('category',value);else next.delete('category');setParams(next);}
-  function topicPath(value:string){const next=new URLSearchParams(params);next.delete('item');if(value)next.set('topic',value);else next.delete('topic');const searched=searchRecommendations(issueScope(ordered,value),query,locale);if(!availableCategory(searched,category))next.delete('category');return '/recommendations'+(next.size?'?'+next.toString():'');}
-  const currentVisible=topic?visible:visible.filter(entry=>!historyIds.has(entry.post.id));
-  const historyVisible=topic?[]:visible.filter(entry=>historyIds.has(entry.post.id));
-  const selectedHistory=!!topic&&historyIds.has(Number(topic));
-  const issue=(entry:RecommendationDetail,index:number)=><div className="rec-issue-section" key={entry.post.id}><RecommendationIssue {...props} catalog={catalog} detail={entry} number={index+1} single={!!topic}/></div>;
-
-  return <section className="recommendations rec-public">
-    <Link className="rec-back" to={id ? topicPath('') : scopedPath('/products', '?'+params.toString())}><ArrowLeftOutlined /> {t(id ? 'rec.title' : 'store.catalog')}</Link>
-    {!id && <header className="rec-feed-heading"><h1>{t('rec.title')}</h1></header>}
-    {!pending&&!error&&<><nav className="rec-issue-directory" aria-label={t('rec.contents')}><Link aria-current={!topic?'page':undefined} to={topicPath('')}>{t('class.all')}</Link>{arranged.current.map(entry=><Link key={entry.post.id} aria-current={String(entry.post.id)===topic?'page':undefined} to={topicPath(String(entry.post.id))}>{articleTitle(entry.post,locale)}</Link>)}</nav>
-      {!!arranged.history.length&&<details className="rec-history-topics" open={selectedHistory||undefined}><summary>{t('rec.history_topics')} ({arranged.history.length})</summary><nav className="rec-history-directory" aria-label={t('rec.history_topics')}>{arranged.history.map(entry=><Link key={entry.post.id} aria-current={String(entry.post.id)===topic?'page':undefined} to={topicPath(String(entry.post.id))}>{articleTitle(entry.post,locale)}</Link>)}</nav></details>}
-      <CategoryFilters posts={scope} category={activeCategory} onChoose={choose}/></>}
-    {pending ? <div className="rec-loading"><Spin /></div> : error ? <Alert type="error" message={error} /> : <>
-      {selectedHistory&&<p className="rec-history-note">{t('rec.past_issue')}</p>}
-      {visible.length ? <>{currentVisible.map(issue)}{!!historyVisible.length&&<details className="rec-history-content" open={!!(query||activeCategory)||undefined}><summary>{t('rec.history')} ({historyVisible.length})</summary>{historyVisible.map((entry,index)=>issue(entry,currentVisible.length+index))}</details>}</> : <Empty description={t(query?'store.no_matches':'rec.empty_public')}/>}
-    </>}
-  </section>;
-}
+export default function PublicRecommendations(props:ShoppingProps){return <RecommendationBrowse {...props} renderProduct={(item,product,close,pending)=><RecommendationProductDetail item={item} product={product} onClose={close} onAdd={props.onAdd} canBuy={props.canBuy} purchasePending={pending}/>}/>;}

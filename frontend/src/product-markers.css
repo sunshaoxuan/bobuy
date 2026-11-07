@@ -53,3 +53,13 @@
 
 .marker-product-actions { gap:8px; flex-wrap:wrap; }
 .marker-product-actions .marker-product-trigger.ant-btn { min-width:44px; min-height:44px; padding:6px; }
+.marker-management-scope { margin-bottom:16px; padding:12px 16px; border:1px solid #cbd8d0; border-radius:10px; background:#f4f7f5; color:#24372f; overflow-wrap:anywhere; }
+.marker-management-scope p { margin:4px 0 0; }
+.marker-product-actions { display:flex; align-items:center; border-top:1px solid #ddd; margin-top:12px; padding-top:10px; }
+.marker-product-actions>span { font-weight:600; }
+.marker-product-actions .marker-product-trigger.ant-btn { max-width:100%; white-space:normal; height:auto; overflow-wrap:anywhere; text-align:start; }
+.marker-product-context { display:flex; flex-direction:column; gap:8px; margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid #ddd; overflow-wrap:anywhere; }
+.marker-draft-hint,.marker-definition-navigation p { color:#595959; line-height:1.6; }
+.marker-definition-navigation { margin-top:16px; }
+.marker-definition-navigation>a,.marker-definition-navigation>[role=link] { display:inline-flex; align-items:center; min-height:44px; max-width:100%; overflow-wrap:anywhere; }
+.marker-definition-navigation>[aria-disabled=true] { color:#595959; }

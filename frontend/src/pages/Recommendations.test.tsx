@@ -1,3 +1,4 @@
+// Public first-batch/body/service/cart/XSS cases now live in RecommendationHistory.test.tsx.
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { I18nProvider } from '../i18n';
@@ -22,41 +23,6 @@ function show() { return render(<I18nProvider><MemoryRouter initialEntries={['/a
 const shopping = { products:[{id:'p1',merchantId:1000,name:{'zh-CN':'Tea'},description:{},brand:'',price:120,categoryId:'',images:['/tea.png']}], quantities:{p1:2}, onDetail:vi.fn(), onAdd:vi.fn(), canBuy:()=>true };
 function publicFeed() { return render(<I18nProvider><MemoryRouter><PublicRecommendations {...shopping} /></MemoryRouter></I18nProvider>); }
 describe('Recommendations', () => {
-  it('renders a text-only service without product cards, cart controls or a zero-product warning',async()=>{
-    mocks.feed.mockResolvedValue([{...detail,post:{...detail.post,title:'Synthetic service',published:true},items:[],body:'Executive service with separately stated transport and cancellation terms.',serviceOffer:serviceFixture()}]);
-    const view=publicFeed();await screen.findByRole('heading',{name:'Synthetic service'});
-    expect(view.container.querySelector('.service-kind')).toBeInTheDocument();
-    expect(view.container.querySelectorAll('.rec-pin,.product-add,.rec-public-products')).toHaveLength(0);
-    expect(view.container.querySelector('.rec-category-filters')).not.toBeInTheDocument();
-    expect(screen.getByText(/Executive service with separately/)).toBeInTheDocument();
-    expect(shopping.onAdd).not.toHaveBeenCalled();
-  });
-  it('shows full image sets for multiple issues and independently expands their bodies', async () => {
-    mocks.feed.mockResolvedValue([detail,{...detail,post:{...detail.post,id:2,title:'Second issue'},body:'Second body '.repeat(40)}].map((entry,index)=>({...entry,body:entry.body.repeat(index ? 1 : 50)+'END'+index})));
-    const view=publicFeed(); await screen.findByRole('heading',{name:'Second issue'});
-    expect(view.container.querySelectorAll('.rec-public-products .rec-pin')).toHaveLength(4);
-    expect(screen.queryByText(/END0/)).not.toBeInTheDocument();
-    fireEvent.click(screen.getByRole('heading',{name:'Tea picks'}).closest('article')!.querySelector('.rec-expand')!);
-    expect(screen.getByText(/END0/)).toBeInTheDocument();
-    expect(screen.queryByText(/END1/)).not.toBeInTheDocument();
-    fireEvent.click(screen.getByRole('button',{name:/收起正文/}));
-    expect(screen.queryByText(/END0/)).not.toBeInTheDocument();
-    fireEvent.click(view.container.querySelector('.rec-issue-directory a[href*="topic=1"]')!);
-    await waitFor(()=>expect(screen.queryByRole('heading',{name:'Second issue'})).not.toBeInTheDocument());
-    expect(view.container.querySelectorAll('.rec-public-products .rec-pin')).toHaveLength(2);
-    fireEvent.click(view.container.querySelector('.rec-issue-directory a')!);
-    await screen.findByRole('heading',{name:'Second issue'});
-    expect(view.container.querySelector('.rec-issue-directory a[href*="topic=2"]')).toBeInTheDocument();
-  });
-  it('uses the catalog product for details and cart, and disables missing products', async () => {
-    mocks.feed.mockResolvedValue([detail]); const view=publicFeed(); await screen.findByRole('heading',{name:'Tea picks'});
-    fireEvent.click(view.container.querySelectorAll('.product-photo')[0]);
-    expect(view.container.ownerDocument.querySelector('.rec-product-detail')).toBeInTheDocument();
-    fireEvent.click(view.container.querySelectorAll('.product-add')[0]);
-    expect(shopping.onAdd).toHaveBeenCalledWith(shopping.products[0]);
-    expect(shopping.onAdd.mock.calls[0][0].price).toBe(120);
-    expect(view.container.querySelectorAll('.product-add')[1]).toBeDisabled();
-  });
   beforeEach(() => {
     vi.clearAllMocks(); localStorage.clear(); mocks.get.mockResolvedValue(structuredClone(detail)); mocks.feed.mockResolvedValue([structuredClone(detail)]);
     preparation.prepare.mockImplementation(async(file:File)=>file);
@@ -104,23 +70,5 @@ describe('Recommendations', () => {
     view.unmount();finish(new File(['png'],'late.png',{type:'image/png'}));
     await Promise.resolve();await Promise.resolve();
     expect(URL.createObjectURL).not.toHaveBeenCalled();expect(mocks.upload).not.toHaveBeenCalled();
-  });
-  it('public articles render text without executing HTML', async () => {
-    mocks.feed.mockResolvedValue([{...detail,post:{...detail.post,published:true,title:'<script>alert(1)</script>',coverImageUrl:'/tea.png'}}]);
-    const view=render(<I18nProvider><MemoryRouter><PublicRecommendations {...shopping} /></MemoryRouter></I18nProvider>);
-    expect(await screen.findByRole('heading',{name:'<script>alert(1)</script>'})).toBeInTheDocument();
-    expect(view.container.querySelector('script')).toBeNull();
-    expect(view.container.querySelector('.rec-products-heading a')).toHaveAttribute('href','/recommendations/1');
-    expect(view.container.querySelector('.rec-public-products img')).toHaveAttribute('src','/tea.png');
-  });
-  it('shows the recorded publisher and server publication time with the article title', async () => {
-    mocks.feed.mockResolvedValue([{...detail,post:{...detail.post,published:true,publisherName:'Publication fixture',publishedAt:'2026-10-26T01:00:00Z'}}]);
-    const view=render(<I18nProvider><MemoryRouter initialEntries={['/recommendations/1']}><Routes><Route path="/recommendations/:id" element={<PublicRecommendations {...shopping} />} /></Routes></MemoryRouter></I18nProvider>);
-    expect(await screen.findByRole('heading',{level:1,name:'Tea picks'})).toBeInTheDocument();
-    expect(screen.getByText(/Publication fixture/)).toBeInTheDocument();
-    expect(view.container.querySelector('time')).toHaveAttribute('datetime','2026-10-26T01:00:00Z');
-    expect(view.container.querySelectorAll('.rec-public-products .product-tile')).toHaveLength(2);
-    fireEvent.click(view.container.querySelector('.rec-pin-preview')!);
-    expect(await screen.findByRole('dialog')).toBeInTheDocument();
   });
 });

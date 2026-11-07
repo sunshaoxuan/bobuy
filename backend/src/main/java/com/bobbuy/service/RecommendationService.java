@@ -95,6 +95,15 @@ public class RecommendationService {
     }
     @Transactional(readOnly = true)
     public Detail get(Long id, boolean publicView) { return detail(publicView ? posts.findByIdAndPublishedTrue(id).orElseThrow(RecommendationService::missing) : owned(id),publicView); }
+    /** Complete server-side oracle; only bounded summaries leave the browse controller. */
+    @Transactional(readOnly = true)
+    public List<Detail> publicBrowseEntries(Long merchantId) {
+        if(merchantId!=null&&merchantId<1)throw new IllegalArgumentException("Invalid merchant");
+        var selected=posts.findByPublishedTrue().stream().filter(p->merchantId==null||merchantId.equals(p.merchantId))
+            .sorted(Comparator.comparing((RecommendationPost p)->p.publishedAt,Comparator.nullsLast(Comparator.reverseOrder())).thenComparing(p->p.id,Comparator.reverseOrder())).toList();
+        var grouped=selected.isEmpty()?Map.<Long,List<RecommendationItem>>of():items.findByPostIdInOrderById(selected.stream().map(p->p.id).toList()).stream().collect(java.util.stream.Collectors.groupingBy(i->i.postId));
+        return selected.stream().map(post->{var linked=taxonomy.display(grouped.getOrDefault(post.id,List.of()),true);referenceQuotes.decorate(linked,true);return new Detail(summary(post,linked.isEmpty()||linked.get(0).gallery.isEmpty()?null:linked.get(0).gallery.get(0).url()),post.body,linked,post.articleSourceLocale,articles.sourceHash(post),articles.current(post),post.serviceOffer==null?null:post.serviceOffer.publicView());}).toList();
+    }
     @Transactional(readOnly = true)
     public Detail publicGet(Long id, Long merchantId) {
         var post = posts.findByIdAndPublishedTrue(id).filter(p -> merchantId == null || merchantId.equals(p.merchantId)).orElseThrow(RecommendationService::missing);

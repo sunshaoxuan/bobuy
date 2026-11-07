@@ -1,0 +1,76 @@
+package com.bobbuy.service;
+
+import com.bobbuy.model.RecommendationItem;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import java.security.MessageDigest;
+import java.util.*;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
+
+/** Stateless public read contract. Counts and rows come from one repeatable-read snapshot.
+ * No TTL cache: public publication/translation/marker changes are visible on the next read.
+ */
+@Service
+public class PublicProductBrowseService {
+ private final PublicProductCatalogService catalog;
+ private final ProductMarkerService markers;
+ private final ObjectMapper json=new ObjectMapper().findAndRegisterModules()
+   .configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS,true)
+   .configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY,true);
+ public PublicProductBrowseService(PublicProductCatalogService c,ProductMarkerService m){catalog=c;markers=m;}
+ public record Facet(String id,Map<String,String> name,long count){}
+ public record Card(String productId,Long merchantId,Map<String,String> name,String brand,String itemNumber,
+   Map<String,String> specification,String model,String packaging,RecommendationItem.Picture image,
+   List<RecommendationItem.Label> categories,List<ProductMarkerService.Definition> markers,boolean reviewedMaster){}
+ public record Browse(List<Card> items,int page,int size,long scopeTotal,long matchedTotal,boolean hasNext,
+   String revision,List<Facet> categories,long unclassified,String query,String category,String locale,String dataset,String datasetRevision){}
+ public record Detail(PublicProductCatalogService.Entry item,List<ProductMarkerService.Definition> markers,String revision){}
+ public static final class Changed extends RuntimeException { public Changed(){super("Public browse changed; restart at page 0");} }
+ public static final class Missing extends RuntimeException {}
+ private record Dataset(List<PublicProductCatalogService.Entry> entries,Map<String,List<ProductMarkerService.Definition>> markers){}
+ private Dataset dataset(Long merchant){
+  var entries=catalog.publicEntries(merchant,null);var owners=new LinkedHashMap<String,Long>();
+  entries.forEach(e->owners.put(e.productId(),e.merchantId()));
+  var byId=new TreeMap<String,List<ProductMarkerService.Definition>>();
+  markers.browseAssignments(owners).forEach(a->byId.put(a.productId(),a.markers()));
+  return new Dataset(entries,byId);
+ }
+ private String revision(Object value){try{return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(json.writeValueAsBytes(value)));}catch(Exception e){throw new IllegalStateException("Cannot version public projection",e);}}
+ private static String text(String value){return value==null?"":value;}
+ private static boolean matches(PublicProductCatalogService.Entry e,String needle){
+  var fields=new ArrayList<String>(List.of(e.productId(),text(e.itemNumber()),text(e.brand()),text(e.model()),text(e.packaging())));
+  fields.addAll(e.name().values());fields.addAll(e.specification().values());fields.addAll(e.description().values());
+  e.categories().forEach(c->fields.addAll(c.name().values()));
+  return String.join(" ",fields).toLowerCase(Locale.ROOT).contains(needle);
+ }
+ private static void validate(int page,Long merchant,String query,String category,String locale,String revision){
+  if(page<0||page>100000||merchant!=null&&merchant<1||query!=null&&query.length()>500||category!=null&&category.length()>255
+    ||!Set.of("ja-JP","zh-CN","zh-TW","en-US").contains(locale)||revision!=null&&!revision.matches("[0-9a-f]{64}"))throw new IllegalArgumentException("Invalid browse query");
+  if(page>0&&revision==null)throw new IllegalArgumentException("Continuation requires revision");
+ }
+ @Transactional(readOnly=true,isolation=Isolation.REPEATABLE_READ)
+ public Browse browse(int page,Long merchant,String query,String category,String locale,boolean marked,String expected){
+  validate(page,merchant,query,category,locale,expected);String q=text(query).strip().toLowerCase(Locale.ROOT),cat=text(category);
+  var data=dataset(merchant);String dataset=marked?"marked":"all";
+  String datasetVersion=revision(Arrays.asList("public-product-data-v1",merchant,java.time.LocalDate.now(java.time.ZoneId.of("Asia/Tokyo")),data));
+  String version=revision(Arrays.asList("public-product-browse-v1",datasetVersion,q,cat,locale,dataset));
+  if(expected!=null&&!expected.equals(version))throw new Changed();
+  var scope=data.entries().stream().filter(e->!marked||!data.markers().getOrDefault(e.productId(),List.of()).isEmpty()).filter(e->matches(e,q)).toList();
+  var labels=new LinkedHashMap<String,RecommendationItem.Label>();var counts=new LinkedHashMap<String,Long>();long unclassified=0;
+  for(var entry:scope){if(entry.categories().isEmpty())unclassified++;var seen=new HashSet<String>();for(var c:entry.categories())if(seen.add(c.id())){labels.put(c.id(),c);counts.merge(c.id(),1L,Long::sum);}}
+  var facets=counts.entrySet().stream().map(e->new Facet(e.getKey(),labels.get(e.getKey()).name(),e.getValue())).toList();
+  var filtered=scope.stream().filter(e->cat.isEmpty()||cat.equals("__unclassified")&&e.categories().isEmpty()||e.categories().stream().anyMatch(c->c.id().equals(cat))).toList();
+  int start=(int)Math.min((long)page*24,filtered.size()),end=Math.min(start+24,filtered.size());
+  var cards=filtered.subList(start,end).stream().map(e->new Card(e.productId(),e.merchantId(),e.name(),e.brand(),e.itemNumber(),e.specification(),e.model(),e.packaging(),e.gallery().isEmpty()?null:e.gallery().get(0),e.categories(),data.markers().getOrDefault(e.productId(),List.of()),e.reviewedMaster())).toList();
+  return new Browse(cards,page,24,scope.size(),filtered.size(),end<filtered.size(),version,facets,unclassified,q,cat,locale,dataset,datasetVersion);
+ }
+ @Transactional(readOnly=true,isolation=Isolation.REPEATABLE_READ)
+ public Detail detail(String id,Long merchant){
+  if(id==null||id.isBlank()||id.length()>255||merchant!=null&&merchant<1)throw new IllegalArgumentException("Invalid detail query");
+  var data=dataset(merchant);var item=data.entries().stream().filter(e->id.equals(e.productId())).findFirst().orElseThrow(Missing::new);
+  return new Detail(item,data.markers().getOrDefault(id,List.of()),revision(Arrays.asList("public-product-detail-v1",merchant,item,data.markers().get(id))));
+ }
+}

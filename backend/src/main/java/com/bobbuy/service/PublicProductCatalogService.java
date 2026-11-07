@@ -37,10 +37,17 @@ public class PublicProductCatalogService {
  @Transactional(readOnly=true)
  public Page page(int page,Long merchantId,Set<String> selectedProductIds){
   if(page<0||page>100000||merchantId!=null&&merchantId<1)throw new IllegalArgumentException("Invalid public catalog page");
+  var rows=publicEntries(merchantId,selectedProductIds);
+  int size=24,start=(int)Math.min((long)page*size,rows.size()),end=Math.min(start+size,rows.size());
+  return new Page(rows.subList(start,end),page,size,rows.size(),end<rows.size());
+ }
+ /** Shared safe projection for server-side browse/search; never returns private master fallbacks. */
+ @Transactional(readOnly=true)
+ public List<Entry> publicEntries(Long merchantId,Set<String> selectedProductIds){
+  if(merchantId!=null&&merchantId<1)throw new IllegalArgumentException("Invalid merchant");
   var snapshot=snapshot(merchantId);var owners=snapshot.owners();var linked=snapshot.linked();quotes.decorate(linked.values().stream().flatMap(List::stream).toList(),true);
   var eligible=selectedProductIds==null?snapshot.eligible():snapshot.eligible().stream().filter(p->selectedProductIds.contains(p.getId())).toList();
-  int size=24,start=(int)Math.min((long)page*size,eligible.size()),end=Math.min(start+size,eligible.size());
-  var rows=eligible.subList(start,end).stream().map(p->{
+  return eligible.stream().map(p->{
    var offers=linked.getOrDefault(p.getId(),List.of()).stream().filter(i->Objects.equals(owners.get(i.postId),p.getMerchantId())).sorted(Comparator.comparing((RecommendationItem i)->i.postId).reversed().thenComparing(i->i.id)).map(i->new Offer(i.postId,i)).toList();
    var data=p.getCatalogData();var source=offers.isEmpty()?null:offers.get(0).facts();
    // A reference-only master grants no new disclosure: reuse exactly its existing public DTO.
@@ -56,7 +63,7 @@ public class PublicProductCatalogService {
    if(data==null&&source!=null){names=legacyText(source,"name");descriptions=legacyText(source,"description");spec=legacyText(source,"specification");if(brand==null||brand.isBlank())brand=source.brand;model=source.model;pack=source.packaging;}
    else if(data!=null&&!ProductCatalogService.translationsCurrent(p)){names=sourceOnly(names);descriptions=sourceOnly(descriptions);spec=sourceOnly(spec);}
    return new Entry(p.getId(),p.getMerchantId(),Map.copyOf(names),Map.copyOf(descriptions),brand,p.getItemNumber(),Map.copyOf(spec),model,pack,List.copyOf(gallery),labels,offers,data!=null);
-  }).toList();return new Page(rows,page,size,eligible.size(),end<eligible.size());
+  }).toList();
  }
  private static Map<String,String> sourceOnly(Map<String,String> input){return input.get("ja-JP")==null?Map.of():Map.of("ja-JP",input.get("ja-JP"));}
  private static Map<String,String> legacyText(RecommendationItem i,String field){var result=new HashMap<String,String>();String original=field.equals("name")?i.name:field.equals("description")?i.description:i.specification;if(original!=null&&!original.isBlank())result.put("ja-JP",original);if("REVIEWED".equals(i.getTranslationStatus()))for(var e:i.translations.entrySet()){String value=field.equals("name")?e.getValue().name():field.equals("description")?e.getValue().description():e.getValue().specification();if(value!=null&&!value.isBlank())result.put(e.getKey(),value);}return result;}
