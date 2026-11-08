@@ -38,14 +38,15 @@ def friendly_maintenance_config(config, freeze_api, html):
     if '$' in page:
         raise RuntimeError('Nginx variables are forbidden in the static page')
     frozen = freeze_api(config)
-    root = 'location / {'
+    roots = list(re.finditer(r'location / \{\s*proxy_pass http://frontend:80;\s*\}', frozen))
     old_message = '{"message":"Release maintenance in progress"}'
-    if frozen.count(root) != 1 or frozen.count(old_message) != 1:
+    if len(roots) != 1 or frozen.count(old_message) != 1:
         raise RuntimeError('Known root route and API maintenance body required')
+    root = roots[0].group()
     # Escape once and consume these same verified bytes in the return directive.
     escaped = page.replace('\\', '\\\\').replace("'", "\\'").replace('\n', '\\n').replace('\r', '\\r')
     frozen = frozen.replace(old_message, '{"errorCode":"RELEASE_MAINTENANCE","message":"好物正在更新，请稍后重试"}', 1)
-    return frozen.replace(root, root + "\n        default_type text/html;\n        add_header Cache-Control no-store always;\n        return 503 '" + escaped + "';", 1)
+    return frozen.replace(root, root.replace('proxy_pass http://frontend:80;', "default_type text/html;\n        add_header Cache-Control no-store always;\n        return 503 '" + escaped + "';"), 1)
 
 def bound(directory, name, expected):
     if not isinstance(expected, str) or not re.fullmatch('[0-9a-f]{64}', expected):

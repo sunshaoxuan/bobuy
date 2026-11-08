@@ -160,3 +160,8 @@ For the existing single-instance replacement, display an honest temporary-unavai
 ## 2026-11-08 return geometry correction
 
 Retain obscured directory layout despite the AntD important hidden reset; keep it invisible and noninteractive. Public server-browse recommendation cards reserve a square photo viewing area before image metadata arrives, containing natural image ratios without crop/stretch. Portrait/landscape content may leave whitespace; source bytes and natural-size detail gallery are unchanged. Keep lazy requests and original input-time viewport/visible target rectangle. Image headers can change layout before load events: do not wait for all images or replace restoration with target centering. Preserve prior failures and measure both viewport and target document position. See mobile-recovery-r2 developer report and original-QA continuation.
+
+
+## 20261108.2 production acceptance
+
+Published17:01:55UTC on2026-11-08, web5095f376/exact782 core. Real1440px and358px public lists/details and directory/second-page two-level return passed with no clipping and0px viewport/target drift. The above pending design states remain historical; [actual release evidence](../reports/CONSUMER-UI-20261108-MOBILE-PRODUCTION.md) supplies the final boundary. Original image content, reference-price facts, conditions, provenance/history and permissions were retained.

@@ -1,5 +1,10 @@
 # Bobuy production deployment
 
+## Consumer UI 20261108.2 — 2026-11-08
+
+Current accepted web5095f376/core7828194/V27 reopened17:01:55UTC. Full schema/current38-table data and Costco master updates preserved; public1440/358 routes and exact resources passed. Core/web each retain only their running image after exact recoverable cleanup; rollback requires verified nonproduction archive re-upload/load, never old DB restoration. [Actual release and recovery/capacity boundaries](reports/CONSUMER-UI-20261108-MOBILE-PRODUCTION.md) supersede historical versions below.
+
+
 ## Recommendation release — 2026-10-26
 
 Published 20261026.1 from dc9a27c after exact-head CI 40285859378 passed.

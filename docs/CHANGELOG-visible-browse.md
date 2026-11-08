@@ -1,5 +1,12 @@
 # Candidate change history
 
+## 20261108.2 — PRODUCTION ACCEPTED
+
+- API reopened2026-11-08 17:01:55UTC. Web5095f376 plus exact reused782 core; three recommendation routes verified at1440/358px, stable second-page/Escape/focus and matching public assets. Seven consumer UI requirements, simpler card entry and friendly four-language maintenance are delivered.
+- V27/full schema/all38 current table fingerprints and Costco82799v2/560874v4/28668v4 galleries preserved.15 unused image IDs and10 exact recoverable image archives cleaned; core/web each retain one running image.25 other recovery archives retained pending proof.
+- [Actual production, data, tests, preserved matcher failure and capacity record](reports/CONSUMER-UI-20261108-MOBILE-PRODUCTION.md). Application CI and separately scoped publisher correction evidence are distinguished; prior failures remain.
+
+
 ## consumer-ui-20261108-mobile-r2 — DEVELOPER CORRECTION; NARROW QA PENDING
 
 - Use each component manifest revision/digests consistently in publisher image, pending identity and readiness checks; 20 isolated checks pass. Current fc57 core and unknown identities remain rejected.
