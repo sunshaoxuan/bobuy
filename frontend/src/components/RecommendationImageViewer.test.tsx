@@ -1,5 +1,7 @@
 import {describe,it,expect} from 'vitest';
-import {render,screen} from '@testing-library/react';
+import {fireEvent,render,screen} from '@testing-library/react';
+import {RecommendationImageViewer} from './RecommendationImageViewer';
+import {I18nProvider} from '../i18n';
 import {boundPan,dragOffset,swipeDirection} from './RecommendationImageViewer';
 import {RecommendationName} from './RecommendationName';
 
@@ -26,4 +28,11 @@ describe('localized name layout',()=>{
  it('does not repeat the Japanese name when no translated name is present',()=>{
   const {container}=render(<RecommendationName text={{primaryName:'原名'}}/>);expect(container.textContent).toBe('原名');expect(container.querySelector('.rec-name-original')).toBeNull();
  });
+});
+
+it('keeps the selected image across equivalent array rebuilds and omits consumer filename alt without changing provenance',()=>{
+ const pictures=[1,2,3].map(id=>({id:String(id),url:'/image-'+id+'.png',label:'internal-file-'+id+'.webp',sourceUrl:'https://source/'+id,assetKey:'asset-'+id,hash:'hash-'+id}));
+ const original=JSON.stringify(pictures);const tree=(values:typeof pictures)=><I18nProvider><RecommendationImageViewer consumer pictures={values} name="Product"/></I18nProvider>;
+ const view=render(tree(pictures));fireEvent.click(view.container.querySelectorAll('.rec-detail-thumbs button')[1]);expect(view.container.querySelector('.rec-gallery-navigation')).toHaveTextContent('2 / 3');
+ view.rerender(tree(pictures.map(p=>({...p}))));expect(view.container.querySelector('.rec-gallery-navigation')).toHaveTextContent('2 / 3');expect([...view.container.querySelectorAll('img')].every(img=>!img.alt.includes('internal-file'))).toBe(true);expect(JSON.stringify(pictures)).toBe(original);
 });

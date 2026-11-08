@@ -15,6 +15,7 @@ import static org.assertj.core.api.Assertions.*;
 class RecommendationNodeTest {
  @Autowired MockMvc mvc;@Autowired ObjectMapper json;@Autowired BobbuyStore store;
  @Autowired RecommendationPostRepository posts;@Autowired RecommendationItemRepository items;@Autowired RecommendationImageRepository images;
+ @Autowired UserRepository users;
  @BeforeEach void setup(){cleanup();store.seed();}
  @AfterEach void cleanup(){items.deleteAll();posts.deleteAll();images.deleteAll();}
  RecommendationPost post(Long owner,boolean published){var p=new RecommendationPost();p.merchantId=owner;p.title="Synthetic "+owner;p.body="Synthetic";p.published=published;p.publisherName="Node "+owner;p.publishedAt=java.time.Instant.now();return posts.saveAndFlush(p);}
@@ -25,8 +26,17 @@ class RecommendationNodeTest {
   mvc.perform(get("/api/storefront/recommendations/"+b.id+"?merchantId=1000")).andExpect(status().isNotFound());
   mvc.perform(get("/api/storefront/recommendations/"+draft.id)).andExpect(status().isNotFound());
   String nodes=mvc.perform(get("/api/storefront/recommendation-nodes")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-  assertThat(nodes).contains("Node 1000","Node 9090").doesNotContain("8080");
+  assertThat(nodes).contains(users.findById(1000L).orElseThrow().getName()).doesNotContain("Node 1000","Node 9090","8080");
+  assertThat(json.readTree(nodes).path("data").size()).isEqualTo(2);
   assertThat(json.readTree(mvc.perform(get("/api/storefront/recommendations?merchantId=7777")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString()).path("data").size()).isZero();
   mvc.perform(get("/api/storefront/recommendations?merchantId=0")).andExpect(status().isBadRequest());
+ }
+ @Test void currentPublicNameDoesNotRewritePublicationSnapshotOrRevealPrivateUsers()throws Exception {
+  var user=users.findById(1000L).orElseThrow();var original=user.getName();var published=post(1000L,true);post(8080L,false);
+  try{user.setName("Current merchant B");users.saveAndFlush(user);
+   var nodes=mvc.perform(get("/api/storefront/recommendation-nodes")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+   assertThat(nodes).contains("Current merchant B").doesNotContain("Node 1000","8080");
+   var unchanged=posts.findById(published.id).orElseThrow();assertThat(unchanged.publisherName).isEqualTo("Node 1000");assertThat(unchanged.merchantId).isEqualTo(1000L);assertThat(unchanged.version).isEqualTo(published.version);
+  }finally{user.setName(original);users.saveAndFlush(user);}
  }
 }

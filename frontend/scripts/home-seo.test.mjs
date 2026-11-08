@@ -3,7 +3,7 @@ test('initial home HTML supplies truthful brand, canonical, structured data, H1 
  const input=fs.readFileSync('index.html','utf8'),html=renderHome(input),d=new JSDOM(html).window.document;
  assert.equal(d.title,title);assert.equal(d.querySelector('meta[name="description"]').content,description);assert.equal(d.querySelector('link[rel="canonical"]').href,'https://bobuy.cc/');assert.equal(d.querySelectorAll('h1').length,1);assert.match(d.querySelector('h1').textContent,/宝宝败 Bobuy/);
  const graph=JSON.parse(d.querySelector('script[type="application/ld+json"]').textContent)['@graph'];assert.equal(graph[0].name,'宝宝败');assert.equal(graph[0].alternateName,'Bobuy');assert.ok(!graph.some(x=>x.address||x.telephone||x.legalName));
- assert.deepEqual([...d.querySelectorAll('main a')].map(x=>x.getAttribute('href')),['/recommendations','/products','/trips']);assert.ok(!/canonical/.test(input));assert.equal(d.querySelectorAll('script[type="module"]').length,1);
+ assert.equal(d.querySelectorAll('nav').length,1);assert.equal(d.querySelectorAll('main section nav').length,0);assert.deepEqual([...d.querySelectorAll('nav a')].map(x=>x.getAttribute('href')),['/recommendations','/products','/trips']);assert.ok(!/canonical/.test(input));assert.equal(d.querySelectorAll('script[type="module"]').length,1);
 });
 test('sitemap exposes only verified public entry URLs and robots advertises the real XML endpoint',()=>{
  const d=new JSDOM(fs.readFileSync('public/sitemap.xml','utf8'),{contentType:'application/xml'}).window.document;

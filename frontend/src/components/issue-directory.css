@@ -1,0 +1,25 @@
+.recommendation-directory-layout{min-width:0;display:flex;flex-direction:column;}
+.recommendation-directory-layout[data-wide=true]{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px;align-items:start;}
+.recommendation-primary{min-width:0;}
+.issue-directory{min-width:0;z-index:5;}
+.issue-directory[hidden]{display:block;visibility:hidden;pointer-events:none;}
+.issue-directory-floating{position:sticky;top:100px;align-self:start;}
+.issue-directory-surface{background:#fff;border:1px solid #e6e7e3;border-radius:18px;padding:10px;box-shadow:0 4px 18px #00000008;}
+.issue-directory-floating .issue-directory-surface{width:108px;max-width:100%;margin-left:auto;box-sizing:border-box;transition:width .18s ease;}
+.issue-directory-floating[data-expanded=true] .issue-directory-surface{width:300px;}
+.issue-directory-toggle,.issue-directory-more{width:100%;min-height:44px;border:0;background:transparent;color:#333;font:inherit;cursor:pointer;text-align:left;padding:8px;font-size:14px;}
+.issue-directory-toggle{font-weight:600;}.issue-directory-toggle span{float:right;}
+.issue-directory-current{display:block;color:#757b75;font-size:12px;padding:4px 8px;}
+.issue-directory .rec-issue-directory{display:block;max-height:min(480px,70dvh);overflow-y:auto;overflow-x:hidden;padding:0;margin:0;}
+.issue-directory ul{padding:0;margin:4px 0;list-style:none;}
+.issue-directory li a{display:flex;align-items:center;gap:12px;min-height:56px;margin:4px 0;padding:8px;color:inherit;border:1px solid transparent;border-radius:12px;text-decoration:none;box-sizing:border-box;}
+.issue-directory li a[aria-current=page]{border-color:#444;background:#f2f4ee;}
+.issue-directory-icon{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:62px;}.issue-directory-icon b{font-size:14px;}.issue-directory-icon small{font-size:10px;}
+.issue-directory-short{font-size:11px;line-height:1.4;max-width:66px;white-space:normal;overflow-wrap:anywhere;text-align:center;}
+.issue-directory[data-expanded=true] .issue-directory-short{display:none;}
+.issue-directory-title{min-width:0;font-size:14px;line-height:1.65;overflow-wrap:anywhere;white-space:normal;}
+.issue-directory-title small{display:block;color:#666;font-size:12px;}
+.issue-directory-floating[data-expanded=false] .issue-directory-title{display:none;}
+.issue-directory :focus-visible{outline:2px solid #525d4e;outline-offset:2px;}
+.issue-directory-inline{order:-1;margin:0 0 18px;}.issue-directory-inline .issue-directory-icon{min-width:72px;}
+@media(prefers-reduced-motion:reduce){.issue-directory-floating .issue-directory-surface{transition:none;}}

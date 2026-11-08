@@ -1337,6 +1337,14 @@ const messages: Dictionary = {
   "products.details_tab": "商品資料",
   "products.media_tab": "圖片與來源",
   "products.add_images": "新增圖片",
+  "detail.reference": "參考優惠（非售價）",
+  "detail.conditions": "優惠條件",
+  "detail.description": "商品介紹",
+  "detail.published_signature": "發布時署名",
+  "detail.published_date": "發布日期",
+  "directory.more": "更多期次",
+  "gallery.image_alt": "{name} · 圖片 {number}",
+  "browse.node_loading": "名稱載入中",
 };
 
 export default messages;

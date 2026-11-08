@@ -1,0 +1,708 @@
+{
+  "candidate": "consumer-ui-20261108-dev4",
+  "baseHead": "fc57d58e773f730158cc827a1c4d221ebce1a594",
+  "sourceDigest": "54df7134207712abc391ecfd5f6ecdb8fe3548381035e2b7293332a4b6fbda0d",
+  "sourceManifest": {
+    "path": "frontend/test-results/consumer-ui-20261108/r4/SOURCE-MANIFEST.json",
+    "bytes": 22675,
+    "sha256": "44b38dd95f00ef7fe4a1a46ad957551f792ec69c7d32a2487f05bada064270f6"
+  },
+  "lineEndingPolicy": "Original accepted worktree bytes retained above; Git stores CRLF as LF. CI must match gitLfSha256 exactly. No semantic source changes.",
+  "sourceFiles": [
+    {
+      "path": "backend/src/main/java/com/bobbuy/service/PublicProductBrowseService.java",
+      "bytes": 6719,
+      "sha256": "0369fc41ab50b8773c4e3afa30c1c4ec6341c240d160b3c3542d65481c320992",
+      "gitLfSha256": "0369fc41ab50b8773c4e3afa30c1c4ec6341c240d160b3c3542d65481c320992",
+      "gitLfBytes": 6719
+    },
+    {
+      "path": "backend/src/main/java/com/bobbuy/service/RecommendationService.java",
+      "bytes": 35842,
+      "sha256": "b5dbe719082b50bf5d58f5ad6fb2fd8b8c032e9090a75df2e9eb2ba927805687",
+      "gitLfSha256": "004223c33bf45a7e9b22552b94de8e2e2cedf53c0a0f86796d83fefa0e8fe616",
+      "gitLfBytes": 35440
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/RecommendationNodeTest.java",
+      "bytes": 3607,
+      "sha256": "fb9321045304693568b8bc17e8f71753f053620c1dab3e64c5e5f47f4574a1f8",
+      "gitLfSha256": "c18b2c683f3374873d15c3fb526f104b6c1535dd163d73cc4e27a310cf4f3cf4",
+      "gitLfBytes": 3565
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/PublicProductBrowseServiceTest.java",
+      "bytes": 5997,
+      "sha256": "cd6355c29b661c3901d588fe9d113eb3f24b9329f03801a7d2a7eb4406330d59",
+      "gitLfSha256": "cd6355c29b661c3901d588fe9d113eb3f24b9329f03801a7d2a7eb4406330d59",
+      "gitLfBytes": 5997
+    },
+    {
+      "path": "frontend/scripts/home-seo.test.mjs",
+      "bytes": 2124,
+      "sha256": "ec657485281748eac2c50a25c6742874b4835c6690d37db8fdbe328f950c87c6",
+      "gitLfSha256": "ec657485281748eac2c50a25c6742874b4835c6690d37db8fdbe328f950c87c6",
+      "gitLfBytes": 2124
+    },
+    {
+      "path": "frontend/scripts/prerender-home.mjs",
+      "bytes": 1861,
+      "sha256": "00eef211f5f15beb32031490f0f911e1b51f354968d14324488945589511bd16",
+      "gitLfSha256": "00eef211f5f15beb32031490f0f911e1b51f354968d14324488945589511bd16",
+      "gitLfBytes": 1861
+    },
+    {
+      "path": "frontend/src/api.ts",
+      "bytes": 70314,
+      "sha256": "382645658aa45ed68bf021e3d58c0f3b0420f1e57e3fb5b57ad90dc3209d595b",
+      "gitLfSha256": "b243c71f5badf68574760211bc0bd83388d19cffef88ebeeb41bd7e49363ea83",
+      "gitLfBytes": 68855
+    },
+    {
+      "path": "frontend/src/components/ConsumerDetail.tsx",
+      "bytes": 808,
+      "sha256": "3fe7117e3452d4bfb798eff0fe3dee1511d165f7b1aed2816c56a811166bf903",
+      "gitLfSha256": "3fe7117e3452d4bfb798eff0fe3dee1511d165f7b1aed2816c56a811166bf903",
+      "gitLfBytes": 808
+    },
+    {
+      "path": "frontend/src/components/HomeBrandIntro.tsx",
+      "bytes": 1400,
+      "sha256": "d322dc480fd3f2ff25367d1d66c72f56003f77978ccb0e2e93fb47dbe80d8ef5",
+      "gitLfSha256": "d322dc480fd3f2ff25367d1d66c72f56003f77978ccb0e2e93fb47dbe80d8ef5",
+      "gitLfBytes": 1400
+    },
+    {
+      "path": "frontend/src/components/ImageLightbox.tsx",
+      "bytes": 7987,
+      "sha256": "8791311b7d72b6b0cd542003a568efff2a30127a8315d4d6b69b9fcc84b0b175",
+      "gitLfSha256": "5ad8851450ad051f9a2c353c778ea2c2024c3f9cffdd8d8a3bc0f946923999e8",
+      "gitLfBytes": 7922
+    },
+    {
+      "path": "frontend/src/components/IssueDirectory.test.tsx",
+      "bytes": 4699,
+      "sha256": "40bdd2d91e2758cfb96f6f3eb64c69c8aa924211a498d27f1beff7fe3daa3ff9",
+      "gitLfSha256": "40bdd2d91e2758cfb96f6f3eb64c69c8aa924211a498d27f1beff7fe3daa3ff9",
+      "gitLfBytes": 4699
+    },
+    {
+      "path": "frontend/src/components/IssueDirectory.tsx",
+      "bytes": 5999,
+      "sha256": "7f7a4c26679d9f94281f56f150942aaf6e179368e3a1fdadc5e2ec3e5e71a4fd",
+      "gitLfSha256": "7f7a4c26679d9f94281f56f150942aaf6e179368e3a1fdadc5e2ec3e5e71a4fd",
+      "gitLfBytes": 5999
+    },
+    {
+      "path": "frontend/src/components/RecommendationImageViewer.test.tsx",
+      "bytes": 3042,
+      "sha256": "39832222ebd5725817cbc41be2d85252658a222e9ea73df00ad7e58f1cd473b1",
+      "gitLfSha256": "357e42442daa049508a4b9699e9ecf995aa308f5223785c098908109a0f80dae",
+      "gitLfBytes": 3004
+    },
+    {
+      "path": "frontend/src/components/RecommendationImageViewer.tsx",
+      "bytes": 5247,
+      "sha256": "6094df3a8a4982693e3e9a9566a54601b8ce5c2667d87c16e3e9e8452b7750df",
+      "gitLfSha256": "62b97c338b4af5e9646d208afb150955b217516806c4f86a15c433fcc2476e7b",
+      "gitLfBytes": 5205
+    },
+    {
+      "path": "frontend/src/components/ReservationAdd.test.tsx",
+      "bytes": 2106,
+      "sha256": "8db867bd54dc3a643eb0c3f9e9085a4fdca6847a39462e70cdcaa4ea78e28cb9",
+      "gitLfSha256": "8db867bd54dc3a643eb0c3f9e9085a4fdca6847a39462e70cdcaa4ea78e28cb9",
+      "gitLfBytes": 2106
+    },
+    {
+      "path": "frontend/src/components/ReservationAdd.tsx",
+      "bytes": 1709,
+      "sha256": "4bff060e18812bf20d65eb5689633cd0f7e87409d30ae08088e91c68bfcb66c6",
+      "gitLfSha256": "4bff060e18812bf20d65eb5689633cd0f7e87409d30ae08088e91c68bfcb66c6",
+      "gitLfBytes": 1709
+    },
+    {
+      "path": "frontend/src/components/consumer-detail.css",
+      "bytes": 2686,
+      "sha256": "dcf7922135d7a78a5dff9d4e5ef1a97489c2b101ecb5a307cb1014dae6e878fc",
+      "gitLfSha256": "dcf7922135d7a78a5dff9d4e5ef1a97489c2b101ecb5a307cb1014dae6e878fc",
+      "gitLfBytes": 2686
+    },
+    {
+      "path": "frontend/src/components/issue-directory.css",
+      "bytes": 2611,
+      "sha256": "90dacbb091e06827539eab24c1c15b3264a50b0cab47318e7547436f779c9269",
+      "gitLfSha256": "90dacbb091e06827539eab24c1c15b3264a50b0cab47318e7547436f779c9269",
+      "gitLfBytes": 2611
+    },
+    {
+      "path": "frontend/src/components/recommendationImageViewer.css",
+      "bytes": 3004,
+      "sha256": "aa0e0863a789f142910980b357f128e597d98b4544a430d91b53a144c8b19195",
+      "gitLfSha256": "945d0e4791f137826c3f82c05722c48277aca1957d9bf0ec0bdd35ccb06f0630",
+      "gitLfBytes": 2981
+    },
+    {
+      "path": "frontend/src/components/useDetailReturnFocus.test.tsx",
+      "bytes": 5246,
+      "sha256": "d3173e78c699fe1885c8606615ddbc06ed09d63e6128e99555f9d458e53fc327",
+      "gitLfSha256": "d3173e78c699fe1885c8606615ddbc06ed09d63e6128e99555f9d458e53fc327",
+      "gitLfBytes": 5246
+    },
+    {
+      "path": "frontend/src/components/useDetailReturnFocus.ts",
+      "bytes": 3346,
+      "sha256": "add0cab4cc1a3be1d358a2360e3bd83fb80547cbf3683ade449bbb0bdf4b24d6",
+      "gitLfSha256": "add0cab4cc1a3be1d358a2360e3bd83fb80547cbf3683ade449bbb0bdf4b24d6",
+      "gitLfBytes": 3346
+    },
+    {
+      "path": "frontend/src/locales/en-US.ts",
+      "bytes": 70238,
+      "sha256": "9ad8d31902b9206a66dc952ea0bf2352960f23144f9ce2b4687438548bb00595",
+      "gitLfSha256": "9ad8d31902b9206a66dc952ea0bf2352960f23144f9ce2b4687438548bb00595",
+      "gitLfBytes": 70238
+    },
+    {
+      "path": "frontend/src/locales/ja-JP.ts",
+      "bytes": 78399,
+      "sha256": "c77f2fa08e7592213f5a0fc55fb350e960664b816cf6c84f5dd0f5983ff8e13b",
+      "gitLfSha256": "c77f2fa08e7592213f5a0fc55fb350e960664b816cf6c84f5dd0f5983ff8e13b",
+      "gitLfBytes": 78399
+    },
+    {
+      "path": "frontend/src/locales/zh-CN.ts",
+      "bytes": 67513,
+      "sha256": "0c25fa36c8e6364cf4040d35c7b113c74058591d31f5dcadf65f1ca4e9da1b51",
+      "gitLfSha256": "0c25fa36c8e6364cf4040d35c7b113c74058591d31f5dcadf65f1ca4e9da1b51",
+      "gitLfBytes": 67513
+    },
+    {
+      "path": "frontend/src/locales/zh-TW.ts",
+      "bytes": 72465,
+      "sha256": "22711307d97d943f79765eb9ed401386460a7a4207e6a362e3f6dc1a296ee713",
+      "gitLfSha256": "22711307d97d943f79765eb9ed401386460a7a4207e6a362e3f6dc1a296ee713",
+      "gitLfBytes": 72465
+    },
+    {
+      "path": "frontend/src/pages/ProductMarkerCatalog.test.tsx",
+      "bytes": 4346,
+      "sha256": "71c8e03ba6f06acc963a24246af875d1715624559ed77055bbfbd06d3ab95d25",
+      "gitLfSha256": "71c8e03ba6f06acc963a24246af875d1715624559ed77055bbfbd06d3ab95d25",
+      "gitLfBytes": 4346
+    },
+    {
+      "path": "frontend/src/pages/PublicProductCatalog.test.tsx",
+      "bytes": 9374,
+      "sha256": "6d86d0ac8c76e7ef9091d0aee7f1fa02af3c349364bf4f792cabd7d71d3f9dd1",
+      "gitLfSha256": "6d86d0ac8c76e7ef9091d0aee7f1fa02af3c349364bf4f792cabd7d71d3f9dd1",
+      "gitLfBytes": 9374
+    },
+    {
+      "path": "frontend/src/pages/PublicProductCatalog.tsx",
+      "bytes": 16914,
+      "sha256": "89dcfa1ace3efd69b1d4966d8cacf2b5211974c317c7aecbab9e4ba0a3b452ee",
+      "gitLfSha256": "89dcfa1ace3efd69b1d4966d8cacf2b5211974c317c7aecbab9e4ba0a3b452ee",
+      "gitLfBytes": 16914
+    },
+    {
+      "path": "frontend/src/pages/PublicRecommendations.tsx",
+      "bytes": 14611,
+      "sha256": "d12d4d843550ff2df27445a8c9fe9171372bad62bc010544878b12a096169f3f",
+      "gitLfSha256": "de080cefd432f31fc4966fea34d7a43d752a7ecc01af5627c1ddffd67431ae9b",
+      "gitLfBytes": 14497
+    },
+    {
+      "path": "frontend/src/pages/RecommendationBrowse.tsx",
+      "bytes": 15110,
+      "sha256": "ff22bc6b47bcad61910e8d9f0a6ec290b6e759b56ae511033d9f1b07a25f3ead",
+      "gitLfSha256": "ff22bc6b47bcad61910e8d9f0a6ec290b6e759b56ae511033d9f1b07a25f3ead",
+      "gitLfBytes": 15110
+    },
+    {
+      "path": "frontend/src/pages/RecommendationHistory.test.tsx",
+      "bytes": 13572,
+      "sha256": "8a7db12062be0adaceb0e3c752b37da482dc6121e4a3b94d3f7a99c47542ef38",
+      "gitLfSha256": "8a7db12062be0adaceb0e3c752b37da482dc6121e4a3b94d3f7a99c47542ef38",
+      "gitLfBytes": 13572
+    },
+    {
+      "path": "frontend/src/pages/Storefront.tsx",
+      "bytes": 33733,
+      "sha256": "82d6f7b2a8f84e21f56cfbbd5b71cf6d702c5b8f19f8b3a5187a4153bea7ae0d",
+      "gitLfSha256": "51e24cc1cc480d424359111c95fbde70f758541add9ee2c5ad4090f5383db4df",
+      "gitLfBytes": 33511
+    },
+    {
+      "path": "frontend/src/pages/StorefrontContext.test.tsx",
+      "bytes": 11224,
+      "sha256": "a4f06c52474829bd7b1ed0b68accbf0c9b5c9c55ec1ed8857c26cbcc89dce6ca",
+      "gitLfSha256": "a4f06c52474829bd7b1ed0b68accbf0c9b5c9c55ec1ed8857c26cbcc89dce6ca",
+      "gitLfBytes": 11224
+    }
+  ],
+  "migrations": [
+    {
+      "path": "V10__recommendation_classification.sql",
+      "bytes": 910,
+      "sha256": "02b8b29ff7887806ee594d3b25de5b0c9e9db84d32811d1e9ccd85adadca59e2"
+    },
+    {
+      "path": "V11__catalog_source_variants.sql",
+      "bytes": 315,
+      "sha256": "430a6d9ab617b439bb567c2f7db4a093d8e205c9d16d9dac29f27353fb7b936d"
+    },
+    {
+      "path": "V12__legacy_catalog_variant_compatibility.sql",
+      "bytes": 282,
+      "sha256": "041664e6ccf2d2625229cff43a9a6c1d414fce4e40fe57d973cd7085a0005727"
+    },
+    {
+      "path": "V13__currency_and_reviewed_sale.sql",
+      "bytes": 789,
+      "sha256": "5ef2ae767bdb1f52a8c4ce63b488d7becb8e74462680265da2e35c8aa22cd231"
+    },
+    {
+      "path": "V14__recommendation_localizations.sql",
+      "bytes": 313,
+      "sha256": "330fb1bff2ca33b69eb87ccc541b3304556598bf6e3da6e47f0f0499428b17c0"
+    },
+    {
+      "path": "V15__recommendation_product_gallery.sql",
+      "bytes": 83,
+      "sha256": "fba8096ac3edf5a29bcc5beaafdd4c9c95858fcdb796d7afa5365f9e0be2c851"
+    },
+    {
+      "path": "V16__product_catalog_metadata.sql",
+      "bytes": 134,
+      "sha256": "f0d5955e742cf7b75a286de15e9b0aa9f08ca6e9d79ec73cbe6e50d85b31949e"
+    },
+    {
+      "path": "V17__product_price_adjustments.sql",
+      "bytes": 916,
+      "sha256": "786782040a48d6a222f8c77294ed272398d1a5355520bc861dee2031b4bfa8fd"
+    },
+    {
+      "path": "V18__encrypted_mail_settings.sql",
+      "bytes": 742,
+      "sha256": "20b54dc9c22348e2da38e2977a12507142d6a3fe513713b60b49b09de140b5d9"
+    },
+    {
+      "path": "V19__postgres_image_access_scope.sql",
+      "bytes": 293,
+      "sha256": "f9f76ef6334c09b4d9bc7ee61b78f41ecc746fe0b92706165c328cf754a109c1"
+    },
+    {
+      "path": "V1__baseline_schema.sql",
+      "bytes": 11160,
+      "sha256": "89fef3446be7e5318cea10779421846009090f22254fd4debf9802249ea87ded"
+    },
+    {
+      "path": "V20__product_logical_deletion.sql",
+      "bytes": 466,
+      "sha256": "b5808d46a09aab230d507d4d04de86f64de3f4ec2da005ae1c633ce89fa6288c"
+    },
+    {
+      "path": "V21__media_transfer_outbox.sql",
+      "bytes": 1393,
+      "sha256": "ba4ea01e3405faa01b24fce4150bbdbe134422426dc6d7142ebf70c607972121"
+    },
+    {
+      "path": "V22__object_only_media_metadata.sql",
+      "bytes": 884,
+      "sha256": "b15bfcecd3f080f2162a9e8f1285ba1a6e449b8ee4fee4a94bec5e1d04e855e9"
+    },
+    {
+      "path": "V23__reference_offer_windows.sql",
+      "bytes": 913,
+      "sha256": "8d14a990664c110d50fd8b069f6b26df4bd593c6d6be5cfcdf5cc3932c60938d"
+    },
+    {
+      "path": "V24__recommendation_article_languages.sql",
+      "bytes": 864,
+      "sha256": "5d34b932ba0fadd568bbc376d6041da169246ec1c0255a1b412a46e9266823cc"
+    },
+    {
+      "path": "V25__reversible_product_identity.sql",
+      "bytes": 691,
+      "sha256": "0203502f52b80253259df9b60d2bd60b31f67fc374475bbed66b2be6dc2ae368"
+    },
+    {
+      "path": "V26__recommendation_service_offers.sql",
+      "bytes": 501,
+      "sha256": "0ffd1cd243511ff43d1066b86e331e680c19aedd9bf5226f84ff9295e45f3e90"
+    },
+    {
+      "path": "V27__explicit_product_markers.sql",
+      "bytes": 1368,
+      "sha256": "8135ea648c892378ebe2234ee0247c43a89e1d4d040d4898305966768b9e2f83"
+    },
+    {
+      "path": "V2__refresh_token_sessions.sql",
+      "bytes": 1015,
+      "sha256": "dce126be2485adeb4e2558f05eb3e5658fdce52d65face2d26906ab1852eb597"
+    },
+    {
+      "path": "V3__product_attributes_jsonb.sql",
+      "bytes": 221,
+      "sha256": "02d42dec0bc001bde96d218247870f74c664845e2a11c5dc88f4774a214df6b4"
+    },
+    {
+      "path": "V4__customer_storefront.sql",
+      "bytes": 2036,
+      "sha256": "f90542df6c2759e445000f04bc622712dbff6a4bf542542942e6fb6c995b6276"
+    },
+    {
+      "path": "V5__user_role_sets.sql",
+      "bytes": 643,
+      "sha256": "f36fb732a0683f963ecfc0000efd808f2ab906dd938f04e2ae4b6227db155572"
+    },
+    {
+      "path": "V6__regional_delivery_trips.sql",
+      "bytes": 1950,
+      "sha256": "66a00ea876f19ad9b985450943c0aabdc6879b7f35094ef0f261abc4909774bf"
+    },
+    {
+      "path": "V7__product_recommendations.sql",
+      "bytes": 2019,
+      "sha256": "eaceeded61150fe5332cc1ed7634d65b20feaa85b294e2957101e5ef6c57ef94"
+    },
+    {
+      "path": "V9__recommendation_offer_facts.sql",
+      "bytes": 1228,
+      "sha256": "fff1adc3e4eacdfb810b1f0082dceaf9facb85dbcebd6533148582353d477190"
+    }
+  ],
+  "acceptedBackendClasses": [
+    {
+      "path": "com/bobbuy/service/PublicProductBrowseService$Browse.class",
+      "sha256": "164401abdbd9a5250d0d0ca986b5d647184f82cfc1e1f0aeff4312490c4e80cf"
+    },
+    {
+      "path": "com/bobbuy/service/PublicProductBrowseService$Card.class",
+      "sha256": "aefdfd709b2e8047852bf9a9bfdd93fe2b9dc1c87de186ba130767f035bcb452"
+    },
+    {
+      "path": "com/bobbuy/service/PublicProductBrowseService$Changed.class",
+      "sha256": "27fdd01c05e6c02064326df23e597e22af8f1c4be73e9577cb1ce26ea96942e4"
+    },
+    {
+      "path": "com/bobbuy/service/PublicProductBrowseService$Dataset.class",
+      "sha256": "ecd70ede0772fb1103bb46630a99092318722aca3291f3cec639d1f79249499d"
+    },
+    {
+      "path": "com/bobbuy/service/PublicProductBrowseService$Detail.class",
+      "sha256": "80ecb56bc9e7c712ea7a16c44598682565946d98a97f19b63581985927535d56"
+    },
+    {
+      "path": "com/bobbuy/service/PublicProductBrowseService$Facet.class",
+      "sha256": "a7ce590630b6e8804a958b02fc9bd58c3f28f7a555d8b3a63cf5abe4b22929b6"
+    },
+    {
+      "path": "com/bobbuy/service/PublicProductBrowseService$Missing.class",
+      "sha256": "4af806f6031884bbba93e05c0c0357462726ac134ac343ad3ee3b3205ca464f3"
+    },
+    {
+      "path": "com/bobbuy/service/PublicProductBrowseService.class",
+      "sha256": "3f0eca73ac11f13fa2146365a44437d24e4e34cbb3917fd728845ef6502df6bd"
+    },
+    {
+      "path": "com/bobbuy/service/RecommendationService$Detail.class",
+      "sha256": "f24187dcb1ed401abc9e72d9de0073056a48c934842c1d75b07115dbccd2a9e2"
+    },
+    {
+      "path": "com/bobbuy/service/RecommendationService$Localization.class",
+      "sha256": "c2f14f67049f5c9d4f97b4ec65911b3d422a893b7cdfca31e1ff061d86822bc1"
+    },
+    {
+      "path": "com/bobbuy/service/RecommendationService$PublicNode.class",
+      "sha256": "1bf18637d4a45bb951908c5d0a1a79aab9b66d0df2840ef0a00a2184711a38ed"
+    },
+    {
+      "path": "com/bobbuy/service/RecommendationService$Summary.class",
+      "sha256": "30ce577e410581df4c1042c9e03ab6f5dabf0e0c5b74f64a9618db55149559ef"
+    },
+    {
+      "path": "com/bobbuy/service/RecommendationService$Upload.class",
+      "sha256": "2b2f150a5bca0d5d267c44ca7cbb8a03fb5270d6e344f8881aa1c3b7b817eb7c"
+    },
+    {
+      "path": "com/bobbuy/service/RecommendationService.class",
+      "sha256": "b5d2fc59354184ef5cc9b38f672456a55655de63ab0dcbb10fff7f1e8d1d5383"
+    }
+  ],
+  "frontendFiles": [
+    {
+      "path": "assets/ClientBilling-Dx3vQpRJ.js",
+      "bytes": 6038,
+      "sha256": "153c52a3d14e5ab58354e7279a0b091e5a5b13e7160c4049d5bd54103ddc8c38"
+    },
+    {
+      "path": "assets/ClientChat-DV5gJTIm.js",
+      "bytes": 2028,
+      "sha256": "47cab8601310a12427d1bac9c91d2c7921563c34827cddc31b44b94fee6b51a4"
+    },
+    {
+      "path": "assets/ClientOrders-ChEjvzLs.js",
+      "bytes": 2577,
+      "sha256": "0ebcd6eed57e13843b05e05df2e8eff4cd40b264ab109df6329910e82573f0c9"
+    },
+    {
+      "path": "assets/ClientTrips-DXHCutp0.js",
+      "bytes": 1981,
+      "sha256": "126514bebbf5553159669c5516ea5918deb51e6b503eb5176394928b3722a4a6"
+    },
+    {
+      "path": "assets/Currencies-B1mUG9Nn.js",
+      "bytes": 1035,
+      "sha256": "8c5dfac0df406c911d661046bcdd58564766a2b841993b8abde601f1e3ed5047"
+    },
+    {
+      "path": "assets/Dashboard-DCIbhOeM.js",
+      "bytes": 2962,
+      "sha256": "f14b6d4b3a08d50174f7e702202bb00302312cee083a22b7246857d901f863ea"
+    },
+    {
+      "path": "assets/LoginPage-CA2Dxo75.js",
+      "bytes": 2047,
+      "sha256": "49b58a2f4726db47669b7cfdf83f9721653d300e1d64cdb548844cb60985cc53"
+    },
+    {
+      "path": "assets/MailSettings-DVe7MYf6.js",
+      "bytes": 3291,
+      "sha256": "df6a6c09136a07aa9529e7b8f28a5054b66828fbc272a6a17f6c2becfb3e4213"
+    },
+    {
+      "path": "assets/MerchantCustomers-BcGybZKW.js",
+      "bytes": 1173,
+      "sha256": "8c452c403caa33cc2a26e9027ae3d9808841ad2cefa164183f0d46c68a6eab64"
+    },
+    {
+      "path": "assets/OrderDesk-Bv2RmSWd.js",
+      "bytes": 5660,
+      "sha256": "d15f412ea73104eb793910b7b0e13491e43d03ef672f6044f9bd3af6dbad3c76"
+    },
+    {
+      "path": "assets/Orders-RUJLlj1d.js",
+      "bytes": 9927,
+      "sha256": "0a64bf3a7fdb60afeb7b34c6d00ec406082d97ab40f721ed0a5b9dc1b2e56139"
+    },
+    {
+      "path": "assets/PickingMaster-CWdC_BGF.js",
+      "bytes": 4477,
+      "sha256": "a3bb07fe130cfdaba59d0a16095bea19f666a83b317119330ec33eb671d629b6"
+    },
+    {
+      "path": "assets/ProcurementHUD-CiCC0U0o.js",
+      "bytes": 183,
+      "sha256": "693a98ebd522f3f4354b939ed904fa99df04dd6ea355015265b2f49eca68b71b"
+    },
+    {
+      "path": "assets/ProductArchive-CZnFHFSq.css",
+      "bytes": 677,
+      "sha256": "c8a58d28df01b1f1d68ed8d21d7ce401e26297e9f93bc6b1a28f07ef0bdb728b"
+    },
+    {
+      "path": "assets/ProductArchive-lH1K84T0.js",
+      "bytes": 4878,
+      "sha256": "d62afc397cdac5ab83ecdfa65231d64921c137069a2a3c3757051802fddcf134"
+    },
+    {
+      "path": "assets/ProductMarkers-9Er_BYnW.js",
+      "bytes": 5915,
+      "sha256": "e8433803e82fd4bd5495638dc85dac6f5b62693a6af55a1a40e0ee916beff258"
+    },
+    {
+      "path": "assets/PublicProductCatalog-Bc2UuWfl.js",
+      "bytes": 11140,
+      "sha256": "47dee728d6298a10320eb57d009071b4254934a99a88d46e3b2863b92a20533d"
+    },
+    {
+      "path": "assets/PublicRecommendations-BoeAY1WO.css",
+      "bytes": 2916,
+      "sha256": "53c2ac77a70aff0abc0bd9b2c785c9aff3b4e62854275518aedd2a933dd05fdc"
+    },
+    {
+      "path": "assets/PublicRecommendations-cBqPK8wG.js",
+      "bytes": 28606,
+      "sha256": "ac02c53d22a80809e6a233c091ca9d7be6a3677b2d26b090e474ed68801c984a"
+    },
+    {
+      "path": "assets/RecommendationImageViewer-BLGubOv4.css",
+      "bytes": 19096,
+      "sha256": "7074e216014e842797a7ee02f8dca7538ef5ec21e8db2e28efd65040e93746b8"
+    },
+    {
+      "path": "assets/RecommendationImageViewer-ukXI3O3S.js",
+      "bytes": 10117,
+      "sha256": "0b6983f64808aa597d240634fe31ee6bd7530067ddbdd040f9ecbc52518162e7"
+    },
+    {
+      "path": "assets/Recommendations-BR6eX9U6.css",
+      "bytes": 3749,
+      "sha256": "a5fc8fb0758186d686acf3fbaca080c3d3851f65ab05221e30061df81abe3ef8"
+    },
+    {
+      "path": "assets/Recommendations-I6aWUXfM.js",
+      "bytes": 48319,
+      "sha256": "f827c5d44ca336791a6bbecea8fdc3844047f24749391ce1a660347182a5a200"
+    },
+    {
+      "path": "assets/Suppliers-BEaghypN.js",
+      "bytes": 3471,
+      "sha256": "f4b9c15eeec8c3376cfa0349a0b75c2c58918facde80121bbb400dbd86aac03d"
+    },
+    {
+      "path": "assets/Trips-DkT88ia-.js",
+      "bytes": 3270,
+      "sha256": "925ec8d227c581bf3ddfe8a31d221f036f766256e378e8fbdfd447205fb73270"
+    },
+    {
+      "path": "assets/Users-CpdpLx0J.js",
+      "bytes": 5896,
+      "sha256": "db6c6365ac7945849bb4f7de6aaa75a23788ed6461fda71270fc72a9f67a732b"
+    },
+    {
+      "path": "assets/audit-view-Btci-waB.js",
+      "bytes": 7359,
+      "sha256": "535e4bef1c652e0fb1e6ea55483e897ad16570eb03566ec43dc2de37b1067fc4"
+    },
+    {
+      "path": "assets/chat-flow-BM0yegL4.js",
+      "bytes": 327460,
+      "sha256": "edc52113d799b07af8caecf940b2f22995e5a8d9ba1aab78c9c481e3f4bca6b0"
+    },
+    {
+      "path": "assets/index-DHfwoG7_.css",
+      "bytes": 64211,
+      "sha256": "76c14b5e3cd2d821d7d7adb533cf0e705c4b61d4b9414c49861074b568a909c2"
+    },
+    {
+      "path": "assets/index-qhcDvMYy.js",
+      "bytes": 51969,
+      "sha256": "ad8ee687990e7d3656aeed03d4663b89fe2ec25c3884b39f7405c52aaed2e2c6"
+    },
+    {
+      "path": "assets/procurement-dashboard-CNf9Ms6s.js",
+      "bytes": 30360,
+      "sha256": "05b650f03be5753054a521d1a654ac3860eb697db2b94befadd9bfc5290a9cde"
+    },
+    {
+      "path": "assets/products/chicken.png",
+      "bytes": 779816,
+      "sha256": "6d27a9305a0bfa7caacce28e45d92cdb2bc27ce7d6082b733f4ac1ee55797d9b"
+    },
+    {
+      "path": "assets/products/croissants.png",
+      "bytes": 832854,
+      "sha256": "27bbf1f4a055af022cf029cdb929c9d78a55f2b25b087965b8ebb4c245977100"
+    },
+    {
+      "path": "assets/products/matcha-muffins.jpg",
+      "bytes": 824351,
+      "sha256": "652dfcc95454cf539e9056bdd2aea050a003467ac5e304d0ba4856c38d688793"
+    },
+    {
+      "path": "assets/products/milk.png",
+      "bytes": 526467,
+      "sha256": "73c02467723cc54ba5668a0691383620946ad9b88a33b422b5b3ddadbd617cb3"
+    },
+    {
+      "path": "assets/products/paper_towels.png",
+      "bytes": 504710,
+      "sha256": "f4e28f967564ab68dd7e75cda0e765e0c6d251e13b3c305ca02f33561c9aa843"
+    },
+    {
+      "path": "assets/products/spinach.png",
+      "bytes": 572315,
+      "sha256": "9b12209d94b35e100df3e56e1e788e7fbd2114879e701961153d79fc82163b3b"
+    },
+    {
+      "path": "assets/products/strawberries.png",
+      "bytes": 848062,
+      "sha256": "2a97ccf4f6cb040699c6438af58b76233f88b468b6436c6d2f49619ca7dbade5"
+    },
+    {
+      "path": "assets/stock-master-BFrBc308.css",
+      "bytes": 30239,
+      "sha256": "c9b9ea596f7997bde382ebbb4cd7d67a40a987951ce0752663e437ee376d1987"
+    },
+    {
+      "path": "assets/stock-master-DJVbsrNH.js",
+      "bytes": 75588,
+      "sha256": "a2c37369a8cde2f7f6aa2243e6a7b050c281b92fd6faf657281fd5149088420e"
+    },
+    {
+      "path": "assets/vendor-Cbcxn-SB.js",
+      "bytes": 1410583,
+      "sha256": "c8cf82831009328b3d505128b7e2b2209907c55535560c7aec063d3139ebb3d6"
+    },
+    {
+      "path": "home.html",
+      "bytes": 2007,
+      "sha256": "85f5737918bc4f6d29771b511a50de2c805ce02e2ac0d89c1ef0d22eb50ec87f"
+    },
+    {
+      "path": "index.html",
+      "bytes": 843,
+      "sha256": "8ded1639926a162b7cb1fbaac3cd3eeba5b95743517302e6c7b0da5084c0a8c4"
+    },
+    {
+      "path": "robots.txt",
+      "bytes": 92,
+      "sha256": "7bab727878c9f5f8e4d50adc97a70cd653080546880f2bdbe08aad15d4ed5486"
+    },
+    {
+      "path": "sitemap.xml",
+      "bytes": 306,
+      "sha256": "4607f858f3c86de05374b0c727feb2bb5d5d4a47bff6ace18559078f00316981"
+    }
+  ],
+  "localQaJar": {
+    "path": "backend/target/bobbuy-backend-0.1.0.jar",
+    "bytes": 105209386,
+    "sha256": "1ac5d916ca78498e04ffaad0338af38505fde17c455f991cc34aeb8c6cc84a5b"
+  },
+  "previousProductionCoreJarSha256": "abb95d7a751ac2397f21d3a5079490e370d98b150b8f68cd9cd28b497f970547",
+  "qa": {
+    "receiptPath": "frontend/test-results/consumer-ui-20261108/qa-r4/QA-RECEIPT.json",
+    "receiptSha256": "47181bdd981376cf68319a3028569c59bf9853416434a02ce14663431d61dc55",
+    "report": {
+      "path": "docs/reports/CONSUMER-UI-20261108-R4-QA.md",
+      "bytes": 10783,
+      "sha256": "dacecf6ad09ce6fc736f812598671110218349f92775c34607e10d03fb96556b"
+    },
+    "counts": {
+      "PASS": 12,
+      "FAIL": 0,
+      "NOT_RUN_NON_BLOCKING": 1
+    },
+    "statuses": {
+      "D1": "PASS_REUSED",
+      "D2": "PASS_NEW_AND_REUSED_SCROLL_ISSUE_CLOSED",
+      "D3": "PASS_NEW_AND_REUSED_VISIBLE_RETURN",
+      "D4": "PASS_NEW_AND_REUSED_SCROLL_AND_ROUTING",
+      "D5": "PASS_REUSED",
+      "D6": "PASS_REUSED_WITHIN_MOCK_BOUNDARY",
+      "D7": "PASS_REUSED",
+      "D8": "PASS_REUSED_AND_ANONYMOUS_READBACK",
+      "D9": "PASS_READBACK_AND_PRESERVATION",
+      "D10": "NOT_RUN_ACCEPTED_LIMITATION_NON_BLOCKING",
+      "D11": "PASS_NEW_REQUEST_BUDGET_AND_REUSED",
+      "D12": "PASS_REUSED_PRIOR_TWO_P2_CLOSED",
+      "D13": "PASS_REUSED_WITHIN_MOCK_AND_ANONYMOUS_READ_BOUNDARY"
+    },
+    "localCandidateAccepted": true,
+    "releaseAccepted": false,
+    "limitation": "D10 actual speech NOT_RUN accepted as nonblocking by PM; keyboard/ARIA/native AX passed.",
+    "checks": "13 independently executed browser sequences, 7 hook tests; all original six scroll failures closed with zero pre-open/post-close delta and visible focus."
+  },
+  "production": {
+    "currentlyAcceptedSource": "fc57d58e773f730158cc827a1c4d221ebce1a594",
+    "currentlyAcceptedVersion": "20261107.1",
+    "schema": 27,
+    "observedInThisPreparation": false,
+    "activationAllowed": false,
+    "dataPolicy": "Preserve all current data. No migration replay/database restore. Fresh private consistent V27 backup and current business fingerprints required at activation."
+  }
+}

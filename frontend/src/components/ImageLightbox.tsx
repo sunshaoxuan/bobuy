@@ -8,7 +8,7 @@ export type LightboxPicture={id:string;url:string;label?:string};
 export const IMAGE_TAP_DELAY=340;
 
 /** Shared customer/admin viewer. A tap waits for a possible second tap; drags never close. */
-export function ImageLightbox({pictures,index,open,name,onIndexChange,onClose,returnFocus}:{pictures:LightboxPicture[];index:number;open:boolean;name:string;onIndexChange:(index:number)=>void;onClose:()=>void;returnFocus?:RefObject<HTMLElement>}){
+export function ImageLightbox({pictures,index,open,name,onIndexChange,onClose,returnFocus,consumer=false}:{pictures:LightboxPicture[];index:number;open:boolean;name:string;onIndexChange:(index:number)=>void;onClose:()=>void;returnFocus?:RefObject<HTMLElement>;consumer?:boolean}){
  const {t}=useI18n();const picture=pictures[index];
  const [zoom,setZoom]=useState(false),[dimensions,setDimensions]=useState({url:'',w:0,h:0}),[viewport,setViewport]=useState({w:0,h:0}),[pan,setPan]=useState({x:0,y:0});
  const [stage,setStage]=useState<HTMLDivElement|null>(null),[motion,setMotion]=useState({offset:0,settling:false}),[ready,setReady]=useState(false);
@@ -54,11 +54,12 @@ export function ImageLightbox({pictures,index,open,name,onIndexChange,onClose,re
  }
  function cancel(){const g=gesture.current;if(!g)return;gesture.current=null;clearTap();suppress.current=Date.now()+500;if(g.axis==='x'&&!zoom)settle(0,g.width);}
  const fit=natural.w&&viewport.w?Math.min(1,viewport.w/natural.w,viewport.h/natural.h):0;
- const rail=<div className="rec-gallery-rail" data-settling={motion.settling} style={{transform:`translateX(${motion.offset}px)`}}>{[-1,0,1].map(slot=>{const p=pictures[index+slot];return <div className="rec-gallery-slide" key={slot} style={{left:`${slot*100}%`}} aria-hidden={slot!==0}>{p&&<img src={p.url} alt={slot===0?(p.label||name):''} draggable={false}/>}</div>;})}</div>;
+ const label=(p:LightboxPicture,i:number)=>consumer?t('gallery.image_alt',{name,number:i+1}):p.label||name;
+ const rail=<div className="rec-gallery-rail" data-settling={motion.settling} style={{transform:`translateX(${motion.offset}px)`}}>{[-1,0,1].map(slot=>{const p=pictures[index+slot];return <div className="rec-gallery-slide" key={slot} style={{left:`${slot*100}%`}} aria-hidden={slot!==0}>{p&&<img src={p.url} alt={slot===0?label(p,index):''} draggable={false}/>}</div>;})}</div>;
  return <Modal open={open&&!!picture} onCancel={close} afterOpenChange={setReady} afterClose={()=>returnFocus?.current?.focus()} footer={null} title={t('gallery.fullscreen')} rootClassName="rec-gallery-fullscreen" width="100vw" centered destroyOnClose zIndex={1400}>
   <div className="rec-gallery-tools"><button type="button" disabled={index===0} onClick={()=>change(index-1)} aria-label={t('gallery.previous')}>‹</button><span aria-live="polite">{index+1} / {pictures.length}</span><button type="button" disabled={index===pictures.length-1} onClick={()=>change(index+1)} aria-label={t('gallery.next')}>›</button><button type="button" disabled={!canZoom} aria-pressed={zoom} onClick={toggleZoom}>{zoom?t('gallery.fit'):t('gallery.native')}</button></div>
   <div ref={setStage} className="rec-gallery-stage" data-ready={ready} data-zoom={zoom} role="group" aria-label={name} onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={cancel} onLostPointerCapture={cancel} onDoubleClick={event=>event.preventDefault()}>
-   {!zoom&&rail}{picture&&<img className="rec-gallery-native" key={picture.url} src={picture.url} alt={zoom?(picture.label||name):''} aria-hidden={!zoom} draggable={false} onLoad={event=>setDimensions({url:picture.url,w:event.currentTarget.naturalWidth,h:event.currentTarget.naturalHeight})} style={{width:natural.w?(zoom?natural.w:natural.w*fit):undefined,height:natural.h?(zoom?natural.h:natural.h*fit):undefined,visibility:zoom&&fit?'visible':'hidden',transform:`translate(calc(-50% + ${pan.x}px),calc(-50% + ${pan.y}px))`}}/>}
+   {!zoom&&rail}{picture&&<img className="rec-gallery-native" key={picture.url} src={picture.url} alt={zoom?label(picture,index):''} aria-hidden={!zoom} draggable={false} onLoad={event=>setDimensions({url:picture.url,w:event.currentTarget.naturalWidth,h:event.currentTarget.naturalHeight})} style={{width:natural.w?(zoom?natural.w:natural.w*fit):undefined,height:natural.h?(zoom?natural.h:natural.h*fit):undefined,visibility:zoom&&fit?'visible':'hidden',transform:`translate(calc(-50% + ${pan.x}px),calc(-50% + ${pan.y}px))`}}/>}
   </div><p className="rec-gallery-hint">{t('gallery.inspect_hint')}</p>
  </Modal>;
 }

@@ -7,14 +7,15 @@ export {boundPan,dragOffset,swipeDirection} from './imageGestures';
 import './recommendationImageViewer.css';
 
 /** Inline fit swipes navigate. The shared fullscreen viewer owns native-size panning. */
-export function RecommendationImageViewer({pictures,name}:{pictures:RecommendationPicture[];name:string}){
+export function RecommendationImageViewer({pictures,name,consumer=false}:{pictures:RecommendationPicture[];name:string;consumer?:boolean}){
  const {t}=useI18n();const [index,setIndex]=useState(0),[open,setOpen]=useState(false);
  const opener=useRef<HTMLDivElement>(null),[motion,setMotion]=useState({offset:0,settling:false});
  const settlement=useRef<ReturnType<typeof setTimeout>|null>(null),suppress=useRef(0);
  const gesture=useRef<{id:number;x:number;y:number;width:number;axis:''|'x'|'y';moved:boolean}|null>(null);
  function resetMotion(){if(settlement.current!==null)clearTimeout(settlement.current);settlement.current=null;gesture.current=null;setMotion({offset:0,settling:false});}
  const picture=pictures[index];
- useEffect(()=>{resetMotion();setIndex(0);setOpen(false);},[pictures]);
+ const pictureIdentity=JSON.stringify(pictures.map(p=>[p.id,p.url]));
+ useEffect(()=>{resetMotion();setIndex(0);setOpen(false);},[pictureIdentity]);
  useEffect(()=>()=>{if(settlement.current!==null)clearTimeout(settlement.current);},[]);
  function change(next:number){resetMotion();setIndex(Math.max(0,Math.min(pictures.length-1,next)));}
  function settle(direction:number,width:number){
@@ -28,13 +29,14 @@ export function RecommendationImageViewer({pictures,name}:{pictures:Recommendati
  function cancel(){const g=gesture.current;if(!g)return;gesture.current=null;if(g.axis==='x')settle(0,g.width);suppress.current=Date.now()+500;}
  function activate(){if(Date.now()>=suppress.current)setOpen(true);}
  if(!picture)return <div className="rec-no-product-image">{t('gallery.pending')}</div>;
- const rail=<div className="rec-gallery-rail" data-settling={motion.settling} style={{transform:`translateX(${motion.offset}px)`}}>{[-1,0,1].map(slot=>{const p=pictures[index+slot];return <div className="rec-gallery-slide" key={slot} style={{left:`${slot*100}%`}} aria-hidden={slot!==0}>{p&&<img src={p.url} alt={slot===0?(p.label||name):''} draggable={false}/>}</div>;})}</div>;
+ const label=(p:RecommendationPicture,i:number)=>consumer?t('gallery.image_alt',{name,number:i+1}):p.label||name;
+ const rail=<div className="rec-gallery-rail" data-settling={motion.settling} style={{transform:`translateX(${motion.offset}px)`}}>{[-1,0,1].map(slot=>{const p=pictures[index+slot];return <div className="rec-gallery-slide" key={slot} style={{left:`${slot*100}%`}} aria-hidden={slot!==0}>{p&&<img src={p.url} alt={slot===0?label(p,index):''} draggable={false}/>}</div>;})}</div>;
  return <div className="rec-detail-gallery">
   <div ref={opener} className="rec-gallery-inline" role="button" tabIndex={0} aria-label={t('gallery.fullscreen')} onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={cancel} onLostPointerCapture={cancel} onClick={activate} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate();}else if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();change(index+(e.key==='ArrowLeft'?-1:1));}}}>
    <img className="rec-gallery-sizer" src={picture.url} alt="" aria-hidden="true" draggable={false}/>{rail}
   </div>
   <div className="rec-gallery-navigation"><button type="button" disabled={index===0} onClick={()=>change(index-1)} aria-label={t('gallery.previous')}>‹</button><span aria-live="polite">{index+1} / {pictures.length}</span><button type="button" disabled={index===pictures.length-1} onClick={()=>change(index+1)} aria-label={t('gallery.next')}>›</button></div>
-  <div className="rec-detail-thumbs">{pictures.map((p,i)=><button type="button" key={p.id} aria-label={t('gallery.view',{number:i+1})} aria-pressed={i===index} onClick={()=>change(i)}><img src={p.url} alt={p.label||name} loading="lazy" draggable={false}/></button>)}</div>
-  <ImageLightbox pictures={pictures} index={index} open={open} name={name} onIndexChange={change} onClose={()=>{resetMotion();setOpen(false);}} returnFocus={opener}/>
+  <div className="rec-detail-thumbs">{pictures.map((p,i)=><button type="button" key={p.id} aria-label={t('gallery.view',{number:i+1})} aria-pressed={i===index} onClick={()=>change(i)}><img src={p.url} alt={label(p,i)} loading="lazy" draggable={false}/></button>)}</div>
+  <ImageLightbox consumer={consumer} pictures={pictures} index={index} open={open} name={name} onIndexChange={change} onClose={()=>{resetMotion();setOpen(false);}} returnFocus={opener}/>
  </div>;
 }

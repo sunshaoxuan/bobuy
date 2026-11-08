@@ -1200,6 +1200,14 @@ const messages: Dictionary = {
   "products.details_tab": "Product details",
   "products.media_tab": "Images & sources",
   "products.add_images": "Add images",
+  "detail.reference": "Reference offer (not a selling price)",
+  "detail.conditions": "Offer conditions",
+  "detail.description": "About this product",
+  "detail.published_signature": "Name at publication",
+  "detail.published_date": "Published on",
+  "directory.more": "More issues",
+  "gallery.image_alt": "{name} · Image {number}",
+  "browse.node_loading": "Loading name",
 };
 
 export default messages;

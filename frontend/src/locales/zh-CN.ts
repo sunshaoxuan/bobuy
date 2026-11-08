@@ -1200,6 +1200,14 @@ const messages: Dictionary = {
   "products.details_tab": "商品资料",
   "products.media_tab": "图片与来源",
   "products.add_images": "添加图片",
+  "detail.reference": "参考优惠（非售价）",
+  "detail.conditions": "优惠条件",
+  "detail.description": "商品介绍",
+  "detail.published_signature": "发布时署名",
+  "detail.published_date": "发布日期",
+  "directory.more": "更多期次",
+  "gallery.image_alt": "{name} · 图片 {number}",
+  "browse.node_loading": "名称加载中",
 };
 
 export default messages;

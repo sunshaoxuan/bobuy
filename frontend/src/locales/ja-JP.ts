@@ -1200,6 +1200,14 @@ const messages: Dictionary = {
   "products.details_tab": "商品情報",
   "products.media_tab": "画像と出典",
   "products.add_images": "画像を追加",
+  "detail.reference": "参考特典（販売価格ではありません）",
+  "detail.conditions": "特典の条件",
+  "detail.description": "商品について",
+  "detail.published_signature": "公開時の表示名",
+  "detail.published_date": "公開日",
+  "directory.more": "ほかの号を見る",
+  "gallery.image_alt": "{name} · 画像 {number}",
+  "browse.node_loading": "名前を読み込み中",
 };
 
 export default messages;

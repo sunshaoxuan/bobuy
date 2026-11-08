@@ -41,9 +41,11 @@ public class RecommendationService {
     public record PublicNode(Long id, String name) {}
     @Transactional(readOnly = true)
     public List<PublicNode> publicNodes() {
-        var nodes = new TreeMap<Long, String>();
-        posts.findByPublishedTrue().forEach(post -> nodes.put(post.merchantId, post.publisherName));
-        return nodes.entrySet().stream().map(e -> new PublicNode(e.getKey(), e.getValue())).toList();
+        var ids = new TreeSet<Long>();
+        posts.findByPublishedTrue().forEach(post -> { if(post.merchantId!=null)ids.add(post.merchantId); });
+        var names = new HashMap<Long,String>();
+        users.findAllById(ids).forEach(user -> names.put(user.getId(),user.getName()==null?"":user.getName().trim()));
+        return ids.stream().map(id -> new PublicNode(id,names.getOrDefault(id,""))).toList();
     }
     private Detail detail(RecommendationPost post) { return detail(post,false); }
     private Detail detail(RecommendationPost post,boolean publicView) {
