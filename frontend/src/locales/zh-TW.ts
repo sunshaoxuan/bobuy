@@ -1,6 +1,9 @@
 import type { Dictionary } from './types';
 
 const messages: Dictionary = {
+    "maintenance.title": "好物正在更新",
+    "maintenance.description": "我們正在更新頁面，服務暫時無法使用。請稍後再試，你的購物車內容會保留。",
+    "maintenance.retry": "重新載入",
     "browse.current": "目前推薦",
     "browse.entries": "推薦內容",
     "browse.result_count": "已顯示 {shown} / {total} 則內容",
@@ -1207,7 +1210,7 @@ const messages: Dictionary = {
   "gallery.original": "內部原始促銷圖（不作商品主圖）",
   "gallery.view": "查看第 {number} 張商品圖",
   "gallery.sources": "官方圖片來源",
-  "rec.conditions_detail": "查看詳情與重要適用條件",
+  "rec.conditions_detail": "查看詳情",
   'sale.fill_unit': '為所選未填項統一設定單位',
   'rec.preview_only': '審閱預覽，不操作購物車',
   'sale.private': '產品仍為私有；確認報價不會公開或開放購買。',

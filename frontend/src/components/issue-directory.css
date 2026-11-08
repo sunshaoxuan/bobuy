@@ -1,8 +1,8 @@
 .recommendation-directory-layout{min-width:0;display:flex;flex-direction:column;}
 .recommendation-directory-layout[data-wide=true]{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px;align-items:start;}
-.recommendation-primary{min-width:0;}
+.recommendation-primary{min-width:0;width:100%;}
 .issue-directory{min-width:0;z-index:5;}
-.issue-directory[hidden]{display:block;visibility:hidden;pointer-events:none;}
+.issue-directory[hidden]{display:block!important;visibility:hidden;pointer-events:none;}
 .issue-directory-floating{position:sticky;top:100px;align-self:start;}
 .issue-directory-surface{background:#fff;border:1px solid #e6e7e3;border-radius:18px;padding:10px;box-shadow:0 4px 18px #00000008;}
 .issue-directory-floating .issue-directory-surface{width:108px;max-width:100%;margin-left:auto;box-sizing:border-box;transition:width .18s ease;}

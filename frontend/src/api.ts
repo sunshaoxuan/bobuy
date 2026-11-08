@@ -848,6 +848,9 @@ export async function refreshAuthSession(): Promise<AuthSessionResponse | null> 
 async function parseErrorMessage(response: Response): Promise<string> {
     try {
         const payload = (await response.json()) as ApiErrorResponse;
+        if (response.status === 503 && (payload?.errorCode === 'RELEASE_MAINTENANCE' || payload?.message === 'Release maintenance in progress')) {
+            return translate(getStoredLocale(), 'maintenance.title');
+        }
         if (payload?.message) {
             return payload.message;
         }

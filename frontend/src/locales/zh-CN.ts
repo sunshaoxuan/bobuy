@@ -2,6 +2,9 @@ import type { Dictionary } from './types';
 import experience from './experience.zh-CN.json';
 
 const messages: Dictionary = {
+    "maintenance.title": "好物正在更新",
+    "maintenance.description": "我们正在更新页面，服务暂时不可用。请稍后重试，你的购物车内容会保留。",
+    "maintenance.retry": "重新加载",
     "browse.current": "当前推荐",
     "browse.entries": "推荐内容",
     "browse.result_count": "已显示 {shown} / {total} 条内容",
@@ -1070,7 +1073,7 @@ const messages: Dictionary = {
   "gallery.original": "内部原始促销图（不作商品主图）",
   "gallery.view": "查看第 {number} 张商品图",
   "gallery.sources": "官方图片来源",
-  "rec.conditions_detail": "查看详情与重要适用条件",
+  "rec.conditions_detail": "查看详情",
   'sale.fill_unit': '为所选未填项统一设置单位',
   'rec.preview_only': '审阅预览，不操作购物车',
   'sale.private': '产品仍为私有；确认报价不会公开或开放购买。',

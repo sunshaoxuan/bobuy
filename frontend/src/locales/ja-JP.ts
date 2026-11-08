@@ -2,6 +2,9 @@ import type { Dictionary } from './types';
 import experience from './experience.ja-JP.json';
 
 const messages: Dictionary = {
+    "maintenance.title": "ただいま更新しています",
+    "maintenance.description": "ページの更新中は、一時的にサービスをご利用いただけません。しばらくしてから再度お試しください。カートの内容は保持されます。",
+    "maintenance.retry": "再読み込み",
     "browse.current": "現在のおすすめ",
     "browse.entries": "おすすめ内容",
     "browse.result_count": "{total} 件中 {shown} 件を表示",
@@ -1070,7 +1073,7 @@ const messages: Dictionary = {
   "gallery.original": "元の販促画像（管理用・商品画像には使用しません）",
   "gallery.view": "商品画像 {number} を表示",
   "gallery.sources": "公式画像の出典",
-  "rec.conditions_detail": "詳細・重要な適用条件を確認",
+  "rec.conditions_detail": "詳細を見る",
   'sale.fill_unit': '未入力の販売単位を一括設定',
   'rec.preview_only': '確認用プレビュー',
   'sale.private': '商品は非公開です。価格確認だけでは公開・購入可能になりません。',

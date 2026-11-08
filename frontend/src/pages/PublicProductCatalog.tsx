@@ -8,6 +8,7 @@ import {ProductBrand,ProductVariant} from '../components/ProductMetadata';
 import {RecommendationImageViewer} from '../components/RecommendationImageViewer';
 import {ConsumerDetail,DetailOffer} from '../components/ConsumerDetail';
 import ReservationAdd from '../components/ReservationAdd';
+import {openCardDetail} from '../components/openCardDetail';
 import SellingPrice from '../components/SellingPrice';
 import {selectedNode} from '../storeNavigation';
 import {useBrowsePages,useSectionActivation,useNextBrowsePage,useBoundedSales} from '../browsePaging';
@@ -97,7 +98,7 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   function sourceNote(text:ReturnType<typeof catalogText>) {
     return text.fallback?<small className="catalog-source">{t('catalog.source_language',{language:text.language??''})}</small>:null;
   }
-  function management(entry:PublicCatalogEntry){return canEdit?.(entry)?<div className="marker-product-actions" role="group" aria-label={t('marker.actions')+': '+catalogText(entry.name,locale).value}><span>{t('marker.actions')}</span><Button className="marker-product-trigger" onClick={()=>onEdit?.(entry)} aria-label={t('marker.set')+': '+catalogText(entry.name,locale).value}>{t('marker.set')}</Button></div>:null;}
+  function management(entry:PublicCatalogEntry){return canEdit?.(entry)?<div className="marker-product-actions" data-card-action role="group" aria-label={t('marker.actions')+': '+catalogText(entry.name,locale).value}><span>{t('marker.actions')}</span><Button className="marker-product-trigger" onClick={()=>onEdit?.(entry)} aria-label={t('marker.set')+': '+catalogText(entry.name,locale).value}>{t('marker.set')}</Button></div>:null;}
   const detailName=opened?catalogText(opened.name,locale):undefined;
   const detailSpec=opened?catalogText(opened.specification,locale):undefined;
   const description=opened?catalogText(opened.description,locale):undefined;
@@ -111,7 +112,7 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
       {filtered.length?<div className="catalog-master-grid">{filtered.map((entry,index)=>{
         const name=catalogText(entry.name,locale),spec=catalogText(entry.specification,locale);
         const product=sales.quotes[entry.productId],pending=pricePending(entry.productId),buyable=!pending&&!!product&&canBuy(product);
-        return <article className="store-product rec-pin catalog-master-card" key={entry.productId} data-product-id={entry.productId}>
+        return <article className="store-product rec-pin catalog-master-card" key={entry.productId} data-product-id={entry.productId} data-card-detail onClick={event=>openCardDetail(event,()=>openDetail(entry.productId))}>
           <div className="product-tile">
             <button type="button" className="product-photo" aria-label={t('store.detail_label',{name:name.value})} onClick={()=>openDetail(entry.productId)}>
               {entry.gallery[0]?.url?<img src={entry.gallery[0].url} alt={name.value} loading={index<2?'eager':'lazy'} onError={event=>{event.currentTarget.style.display='none';}}/>:<span className="rec-no-product-image">{t('gallery.pending')}</span>}

@@ -2,6 +2,9 @@ import type { Dictionary } from './types';
 import experience from './experience.en-US.json';
 
 const messages: Dictionary = {
+    "maintenance.title": "Good things are getting an update",
+    "maintenance.description": "The service is temporarily unavailable while we update the site. Please try again shortly. Your cart is kept on this device.",
+    "maintenance.retry": "Reload",
     "browse.current": "Current offers",
     "browse.entries": "Offers",
     "browse.result_count": "{shown} of {total} entries",
@@ -1070,7 +1073,7 @@ const messages: Dictionary = {
   "gallery.original": "Original promotion artwork (internal evidence only)",
   "gallery.view": "View product image {number}",
   "gallery.sources": "Official image sources",
-  "rec.conditions_detail": "View details and important conditions",
+  "rec.conditions_detail": "View details",
   'sale.fill_unit': 'Fill missing sale units',
   'rec.preview_only': 'Review preview only',
   'sale.private': 'Product is private. Confirming its quote does not publish it or enable purchases.',

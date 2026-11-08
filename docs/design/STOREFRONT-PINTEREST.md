@@ -147,3 +147,16 @@ Detail images are a gallery, not a hover-preview target. Inline horizontal swipe
 Translated names and the parenthesized Japanese original occupy separate semantic display lines in both cards and detail. Keep raw source names unchanged; ja-JP and missing-translation fallback do not repeat parentheses. Long text must wrap without horizontal page overflow.
 
 Recommendation issue directory titles, article headings and product names must display in full with natural wrapping, without ellipsis, line clamp or fixed-height clipping. Verify long Chinese, Japanese and English strings at desktop and mobile widths; hover tooltips do not substitute for visible text.
+
+## 2026-11-08 mobile containment and release status
+
+The recommendation primary uses100% of its actual containing block in the column layout; inherited auto margins must not let intrinsic product content widen it. Measure both columns' photo/name controls against the viewport, including long text and the initial directory load. Keep desktop's separate directory column and the existing bounded paging/metadata requests.
+
+Product photo/name remain the native accessible detail controls; clicking ordinary card copy shares that existing action. Remove redundant detail-preview controls without removing actual price, period, coupon or purchase conditions, and keep other card actions isolated. Preserve original pre-input scroll and the real opener on return.
+
+For the existing single-instance replacement, display an honest temporary-unavailable503, without calling it a hot switch. Use one restrained Bobuy status card, readable mobile typography, four-language copy and a44px manual retry control; no ETA or repeated automatic requests. A no-external-resource whole-page equivalent may be returned503 by the scoped publisher during its API freeze. Preserve local cart contents and all server data. Scope and actual developer evidence are in `CONSUMER-UI-20261108-MOBILE-RECOVERY-R1.md`; independent/final-artifact acceptance remains separate.
+
+
+## 2026-11-08 return geometry correction
+
+Retain obscured directory layout despite the AntD important hidden reset; keep it invisible and noninteractive. Public server-browse recommendation cards reserve a square photo viewing area before image metadata arrives, containing natural image ratios without crop/stretch. Portrait/landscape content may leave whitespace; source bytes and natural-size detail gallery are unchanged. Keep lazy requests and original input-time viewport/visible target rectangle. Image headers can change layout before load events: do not wait for all images or replace restoration with target centering. Preserve prior failures and measure both viewport and target document position. See mobile-recovery-r2 developer report and original-QA continuation.

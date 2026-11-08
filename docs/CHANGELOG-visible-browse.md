@@ -1,5 +1,18 @@
 # Candidate change history
 
+## consumer-ui-20261108-mobile-r2 — DEVELOPER CORRECTION; NARROW QA PENDING
+
+- Use each component manifest revision/digests consistently in publisher image, pending identity and readiness checks; 20 isolated checks pass. Current fc57 core and unknown identities remain rejected.
+- Keep hidden directory geometry despite AntD reset; reserve public recommendation card photo geometry while containing natural images. Original624px observation mismatch is proven; genuine112/266px late-image failures are retained and repaired. Final three original return paths, including two-level Escape, have0px scroll/rectangle drift.
+- [Exact correction and preserved evidence](reports/CONSUMER-UI-20261108-MOBILE-RECOVERY-R2.md). Independent delta QA, new CI/artifact/native nginx and production gates remain pending. No production operation.
+
+
+## consumer-ui-20261108-mobile-r1 — DEVELOPER DELTA; INDEPENDENT QA PENDING
+
+- Reproduced the real1159/761px mobile recommendation primary widths; constrain the column-flex primary to100% of its containing block. Home/current/selected issue fit at360/375/390px, desktop directory remains separate. Existing detail simplification is included.
+- Add four-language maintenance503 presentation, manual retry and a standalone responsive503 page. Prepare an unbound maintenance/core-reuse adapter delta; acceptedf71 safety/lifecycle guards remain unchanged. No production switch or deletion.
+- 79 unique affected tests pass (six rerun after a test-only type correction), final type/i18n pass. Six native keyboard return paths have0px scroll delta; right-card copy pointer and maintenance retry pass. Fullscreen wait errors are retained for independent replay; final built artifact, second-page/hover delta and native new nginx parse are not claimed passed. [Exact scope, root cause and QA continuation](reports/CONSUMER-UI-20261108-MOBILE-RECOVERY-R1.md).
+
 ## consumer-ui-20261108-dev4 - INDEPENDENT LOCAL ACCEPTANCE; REMOTE GATES PENDING
 
 - Independent R4 QA: 12 PASS, zero FAIL; actual speech NOT_RUN is an accepted nonblocking limitation. All six genuine scroll failures closed with zero pre-open/post-close delta, identical visible target rectangles and stable focus. Earlier failures remain historical evidence.
@@ -58,3 +71,20 @@ Source lineage is HEAD e26cab4 plus hash-bound permission-context and backend v1
 - Fix public recommendation detail white screen for null/missing/invalid image source attribution. Preserve genuine images, valid links and supplied labels without generating invalid links.
 - Add ten attribution boundary cases and close/switch/return regression to the existing recommendation suite.
 - Based on committed 634e77c; source-only candidate, no build/runtime/push/production action by frontend owner. Original anonymous QA FAIL remains unchanged; main rebinds minimal assets and same QA rechecks affected detail/navigation.
+
+## production-v27-resume-readiness-r2 — LOCAL TOOLING, NOT DEPLOYED (2026-11-07)
+
+- The fc57d58 / 20261107.1 production attempt applied additive V27 but failed application readiness; old 20261106.5 / bec7b519 applications and original nginx/compose were restored. No old database was restored. Public acceptance remains unknown after a production-host HTTP 403; it was not retried or bypassed.
+- Add a separate exact-V27 application resume operator. Pin Flyway checksum and column/default/constraint/index contracts; reject V26, partial/changed/newer schema and missing independent delta QA or current schema-27 backup. Do not replay the original migration action.
+- Replace only core/frontend; keep unrelated AI/IM/auth/router writers running. Use bounded, identity-bound readiness/recovery with diagnostics, grounded in observed 102.6/107.6-second startups that exceeded the original 90-attempt wait. Preserve original configuration ownership guards and V27/customer writes.
+- New offline tests execute the actual resume/recovery flow against synthetic host I/O. Application packages, hosted CI, original application QA and r1 code/failure history are reused unchanged; no build, upload, service replacement, migration, browser operation or activation occurred in this tooling revision.
+- Requirements, diagnosis, design, delta tests and frozen input hashes: `frontend/test-results/recommendation-source-p1-20261107/PRODUCTION-V27-RESUME-HANDOFF.md` and `PRODUCTION-V27-RESUME-RECEIPT.json`. Independent resume QA and actual production/public verification remain pending.
+
+## 20261107.1 / fc57d58 - DEPLOYED AND PUBLIC ACCEPTED (2026-11-08)
+
+- Actual core/frontend application-only resume completed at 2026-11-08 05:05:55 UTC on the original host. Exact candidate and existing production package reused; no new application build, migration replay or database restore.
+- Current PostgreSQL 18.6/V27 private consistent backup is verified and retained; all 38 existing business-table row counts/content fingerprints and the exact V27 contract match after activation. Ten protected service identities/images/revisions/health remain unchanged.
+- Production core JAR and all 45 HTML/assets/SEO files plus frontend nginx config match the accepted package. Normal production-host public HTTPS returned 200; real anonymous desktop/mobile public browse, automatic pagination, facets, product/recommendation detail and reload/close passed. Actual loaded asset responses match accepted hashes; settled screenshots retained.
+- Earlier release failure and this round's verification-harness failures are preserved. Corrected public RecommendationDetail.post.id assertion, bounded network wait and current DOM selectors; no application fix was made or retested as new independent QA. Original exact CI and independent application/r2 QA were reused.
+- Original operator status remains application-only/public-pending by design; supplementary server receipt records actual public acceptance at 2026-11-08T05:16:03.639928+00:00, SHA256 c868c73fa3b785b865a5ca2a493fc4616cff7421ab1e29892efc1de59525c258.
+- Requirements/design: docs/plans/PLAN-VISIBLE-BROWSE-20261107.md and docs/design/VISIBLE-BROWSE-V1.md. Actual timeline, data/backup/hash/UI proof, limitations and ownership return: frontend/test-results/recommendation-source-p1-20261107/PRODUCTION-RESUME-20261108-OUTCOME.json. New homepage/name/navigation/commerce/AI/image-source requests stay outside this batch.
