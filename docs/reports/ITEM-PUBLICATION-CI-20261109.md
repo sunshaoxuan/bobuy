@@ -58,3 +58,17 @@ mock/browser results are reused only within their original exact scope.
 No shared index/stage/commit/push, local JVM/Docker/PG/service, browser, content edit,
 production upload/backup/migration/activation or deployment occurred in this preparation.
 All old failure records and 44-file manifests remain intact.
+
+## First exact CI failure and minimal correction
+
+Commit 09d4c6e6644c1e4d2132c76776ce4538cf21c6c0, CI 42645738275 failed. Backend job 129258384951 and PostgreSQL job 129258384459 both failed testCompile at PublicCatalogRealProjectionNoAgentTest.java:58:35 because p was never bound in the canonical projection fixture. CodeQL 42645743918 Java build failed for that same compiler error; its Actions and JS/TS analyses passed. Dependency workflow 42645748869 passed.
+
+The minimal Java correction binds the already-created projection to var p. Original assertions, the second already-public occurrence and snapshot behavior stay unchanged. No application implementation/constraint is relaxed. The actual V27->V28 populated 38-table preservation step passed; no Java tests or later V28->V31/publication/recovery PG method ran because test compilation failed. The original logs are retained under the CI monitor directory.
+
+Frontend job 129258384858 separately ran 470 methods across 89 files: 469 passed, one failed (keeps an article draft through conflict/reload and requires a fresh review and new attempt, save spy had zero calls). Its original assertion/log remain. A separate frontend owner is investigating that precise difference; this Java fix does not claim to close it. Formal web/core OCI construction was skipped, so no formal artifact is accepted from this run. New Java/PG/recovery execution remains NOT_RUN until a subsequent exact CI succeeds. Recovery stays UNBOUND.
+
+### Frontend fixture completion for the same fix1
+
+FE fix1 is test-only: RecommendationsItemPublication.test.tsx adds three lines waiting for Reload settlement (enabled and no ant-btn-loading), then waits for the fresh review checkbox after saving. The original exact save(8, Kept local draft, Saved article body, 7), new version/hash, review and new UUID assertions are unchanged. Official CI42645738275 remains469PASS/1FAIL; unmodified local target passed. A bounded same-fresh-result100ms GET settlement probe reproduced original calls0 with disabled=false/loading=true; the fixed test passed the identical probe with loading=false. The final targeted3-file group passed23/23(10 publication+9 FromProduct+4 P2 revision race), not summed with overlapping control executions. No application source, API guard, old44 manifest, index, report or accepted file changed by this FE task. Remote CI/formal browser/Java/PG are NOT_RUN here.
+
+This precise fix1 changes only test fixtures plus this report/accepted metadata. The prior CI failures and original assertions remain retained. No application implementation, schema SQL, P2 late-response guard, required-class list or recovery policy changes. Full new Java/PG/CI acceptance is still pending; frontend narrow fixture checks do not turn the previous failed full suite into a pass.

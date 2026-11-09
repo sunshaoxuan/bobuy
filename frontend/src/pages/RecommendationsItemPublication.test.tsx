@@ -74,8 +74,11 @@ it('keeps an article draft through conflict/reload and requires a fresh review a
  const fresh={...clone(draft),post:{...draft.post,version:7},items:[{...ready,publicationReviewHash:'b'.repeat(64)},missing]};mocks.get.mockResolvedValueOnce(fresh);
  fireEvent.click(screen.getByRole('button',{name:/Reload$/}));await waitFor(()=>expect(mocks.get).toHaveBeenCalledTimes(2));
  expect(screen.getByDisplayValue('Kept local draft')).toBeInTheDocument();expect(mocks.publishItem).toHaveBeenCalledTimes(1);
+ // The GET spy advances when reload starts; Ant's loading button still swallows clicks until it settles.
+ await waitFor(()=>{const save=screen.getByRole('button',{name:/Save Draft$/});expect(save).toBeEnabled();expect(save).not.toHaveClass('ant-btn-loading');});
  const saved={...fresh,post:{...fresh.post,title:'Kept local draft',version:8}};mocks.save.mockResolvedValue(saved);
  fireEvent.click(screen.getByRole('button',{name:/Save Draft$/}));await waitFor(()=>expect(mocks.save).toHaveBeenCalledWith(8,'Kept local draft','Saved article body',7));
+ await waitFor(()=>expect(card('Ready Tea').getByRole('checkbox',{name:/I checked this item/})).toBeEnabled());
  await waitFor(()=>expect(publishButton()).toBeDisabled());mocks.publishItem.mockResolvedValue(published(saved));review();fireEvent.click(publishButton());
  await waitFor(()=>expect(mocks.publishItem).toHaveBeenCalledTimes(2));
  expect(mocks.publishItem.mock.calls[1][2]).toMatchObject({version:8,sourceHash:'b'.repeat(64),reviewed:true});expect(mocks.publishItem.mock.calls[1][2].requestId).not.toBe(mocks.publishItem.mock.calls[0][2].requestId);

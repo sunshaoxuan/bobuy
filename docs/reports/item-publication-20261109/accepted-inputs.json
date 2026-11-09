@@ -1,8 +1,8 @@
 {
-  "candidate": "Item publication V31 precise CI source candidate; test/tool delta runtime pending",
-  "baseHead": "82b8daf7fe275d6dd623b36621f1cf2596dc0e98",
+  "candidate": "Item publication V31 fix1: retained failed CI; minimal Java/frontend fixture correction",
+  "baseHead": "09d4c6e6644c1e4d2132c76776ce4538cf21c6c0",
   "sourceDigestAlgorithm": "sha256-json-utf8-sourceFiles-v1",
-  "sourceDigest": "4409731af40c1f9f36708759aab15ba776dabaf440ebd0f9a5514e75d2e6689c",
+  "sourceDigest": "5799ede6a3966ef1e2f9280818b371bab045d7483324f66f04106db41a10275c",
   "lineEndingPolicy": "Exact canonical Git-filtered bytes, cross-checked by git hash-object; excludes self-referential accepted manifest and unrelated protected files.",
   "sourceFiles": [
     {
@@ -2022,8 +2022,8 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/service/PublicCatalogRealProjectionNoAgentTest.java",
-      "gitLfBytes": 13224,
-      "gitLfSha256": "6d16e168600f59ac2519e7d8b9412d88f7aee22a47560d714c914706286b3792"
+      "gitLfBytes": 13230,
+      "gitLfSha256": "66f708b9f7052801a0c65799df26b8b8f5aba903708380638ce3c3ff72eb2205"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/service/PublicProductBrowseServiceTest.java",
@@ -2152,8 +2152,8 @@
     },
     {
       "path": "docs/reports/ITEM-PUBLICATION-CI-20261109.md",
-      "gitLfBytes": 4172,
-      "gitLfSha256": "ad0dd7ba5e7d3833666934ea84b98a52960162609834fd5c790b9e50be57af0a"
+      "gitLfBytes": 6984,
+      "gitLfSha256": "2d46951704867a1455f50a398a3e0385025e9027427d7e6dbe690819eb0bcbbf"
     },
     {
       "path": "docs/reports/RECOMMENDATION-ITEM-PUBLICATION-BACKEND-20261109.md",
@@ -3152,8 +3152,8 @@
     },
     {
       "path": "frontend/src/pages/RecommendationsItemPublication.test.tsx",
-      "gitLfBytes": 11321,
-      "gitLfSha256": "9931f3342b45aae40fc0cb3881549e5b540eda03bcf3c1af21f44c8eb408a5f6"
+      "gitLfBytes": 11697,
+      "gitLfSha256": "52be86e72f6f198b646be8e3d81da38952f2b064b4cc1f27f4929dad714971f5"
     },
     {
       "path": "frontend/src/pages/RecommendationsRevisionRace.test.tsx",
@@ -3686,7 +3686,7 @@
     "requirement": "Recover only an exact tested PENDING-aware package; otherwise controlled maintenance and forward correction. Never restore an old database."
   },
   "qa": {
-    "status": "P2_SOURCE_QA_ACCEPTED_TEST_AND_CI_DELTA_RUNTIME_PENDING",
+    "status": "P2_SOURCE_QA_REUSED_FIRST_CI_FAILURE_RETAINED_FIX1_PENDING_REMOTE_CI",
     "acceptedForPreciseCommitAndNormalRemoteCi": true,
     "sourceOnly": true,
     "backendRuntimeAccepted": false,
@@ -3697,6 +3697,39 @@
     "artifactAndFormalBrowserAcceptance": "PENDING",
     "packagedJarRecoveryAcceptance": "NOT_RUN",
     "productionPublishAllowed": false,
-    "committedReport": "docs/reports/ITEM-PUBLICATION-CI-20261109.md"
+    "committedReport": "docs/reports/ITEM-PUBLICATION-CI-20261109.md",
+    "firstExactCiFailure": {
+      "source": "09d4c6e6644c1e4d2132c76776ce4538cf21c6c0",
+      "ci": 42645738275,
+      "codeql": 42645743918,
+      "dependency": 42645748869,
+      "backend": "FAIL_TEST_COMPILE_UNBOUND_P",
+      "postgres": "V27_TO_V28_PASS_THEN_TEST_COMPILE_FAIL",
+      "frontend": {
+        "total": 470,
+        "pass": 469,
+        "fail": 1
+      },
+      "formalArtifact": "NOT_BUILT"
+    },
+    "postQaChanges": [
+      {
+        "path": "backend/src/test/java/com/bobbuy/service/PublicCatalogRealProjectionNoAgentTest.java",
+        "reason": "Bind the already-created fixture projection to p; all assertions and second occurrence retained"
+      },
+      {
+        "path": "frontend/src/pages/RecommendationsItemPublication.test.tsx",
+        "reason": "Wait for actual Reload loading settlement and enabled review control; retain every original assertion"
+      },
+      {
+        "path": "docs/reports/ITEM-PUBLICATION-CI-20261109.md",
+        "reason": "Retain actual failed CI and exact scoped fixture evidence"
+      }
+    ],
+    "fix1FrontendEvidence": {
+      "path": ".task-tmp/item-publication-fe-ci-fix1-20261109/RECEIPT.json",
+      "sha256": "898eb5989b5fffc36126ec5787887b7c86be30ad5d92e33ae1d06085a918ad87",
+      "summary": "23 unique targeted PASS; bounded original FAIL→fixed PASS; original local target PASS and official FAIL retained"
+    }
   }
 }
