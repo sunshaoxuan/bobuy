@@ -37,6 +37,7 @@ jobs:
           python -B -m unittest discover -s scripts -p test_postgres18_backup.py
           python -B -m unittest discover -s scripts -p test_prepare_ci_release_artifacts.py
           python -B -m unittest discover -s scripts -p test_verify_checkout_upgrade.py
+          python -B -m unittest discover -s scripts -p test_verify_amendment_onboarding_upgrade.py
           python -B scripts/check-production-isolation.py
 
   backend-test:
@@ -119,7 +120,7 @@ jobs:
       - name: Bind core and web release artifacts
         run: >-
           python scripts/prepare-ci-release-artifacts.py
-          --accepted-inputs docs/reports/c2-cart-20261109/accepted-inputs.json
+          --accepted-inputs docs/reports/c3-r13-20261109/accepted-inputs.json
           --output "$RUNNER_TEMP/bobuy-release-artifact"
 
       - name: Retain exact core and web artifacts
@@ -164,12 +165,17 @@ jobs:
           BOBBUY_ISOLATED_CI_POSTGRES: 'true'
         run: python -B scripts/verify-checkout-upgrade.py
 
-      - name: Run C1/C2 transaction, checkout and locking regressions on the isolated PostgreSQL service
+      - name: Verify populated V28 to V29 to V30 preservation on the isolated PostgreSQL service
+        env:
+          BOBBUY_ISOLATED_CI_POSTGRES: 'true'
+        run: python -B scripts/verify-amendment-onboarding-upgrade.py
+
+      - name: Run C1/C2/C3/R13 transaction, checkout, amendment and job locking regressions on the isolated PostgreSQL service
         env:
           BOBBUY_ISOLATED_CI_POSTGRES: 'true'
         run: >-
           mvn -B --file backend/pom.xml
-          -Dtest=SelfProfileServiceTest,StorefrontIntegrationTest,CheckoutFingerprintTest,OrderDeliverySnapshotTest,ProductIdentityCompatibilityIntegrationTest#actualStoredOrderJsonRemainsStrictOldReaderCompatibleAndSidecarSurvivesOldShapeUpdate
+          -Dtest=SelfProfileServiceTest,StorefrontIntegrationTest,CheckoutFingerprintTest,OrderDeliverySnapshotTest,ProductIdentityCompatibilityIntegrationTest#actualStoredOrderJsonRemainsStrictOldReaderCompatibleAndSidecarSurvivesOldShapeUpdate,CustomerOrderAmendmentIntegrationTest,CostcoOnboardingPersistenceIntegrationTest
           -Dspring.datasource.url=jdbc:postgresql://127.0.0.1:5432/bobbuy
           -Dspring.datasource.driver-class-name=org.postgresql.Driver
           -Dspring.datasource.username=bobbuy
@@ -177,14 +183,15 @@ jobs:
           -Dspring.jpa.hibernate.ddl-auto=validate
           -Dspring.flyway.enabled=true test
 
-      - name: Retain C2 PostgreSQL migration and transaction reports
+      - name: Retain C2/C3/R13 PostgreSQL migration and transaction reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: c2-postgres-${{ github.sha }}
+          name: c3-r13-postgres-${{ github.sha }}
           path: |
             backend/target/surefire-reports/
             backend/target/c2-upgrade-preservation.json
+            backend/target/c3-r13-upgrade-preservation.json
           if-no-files-found: error
           retention-days: 14
 

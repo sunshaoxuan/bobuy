@@ -57,6 +57,15 @@ def schema_acceptance(accepted, actual, baseline=None):
     versions = [int(name.group(1)) for name in names]
     if identity == (27, 27, False) and versions and max(versions) == 27:
         return {'schemaBefore': 27, 'schemaAfter': 27, 'migrationChanges': False}
+    if identity == (28, 30, True):
+        additions = {'V29__customer_order_amendments.sql', 'V30__costco_onboarding_jobs.sql'}
+        if (baseline is None or (baseline.get('schemaBefore'), baseline.get('schemaAfter'), baseline.get('migrationChanges')) != (27, 28, True)
+                or [entry for entry in actual if entry['path'] not in additions] != baseline['migrations']
+                or {entry['path'] for entry in actual if entry['path'] in additions} != additions
+                or len(actual) != len(baseline['migrations']) + 2 or max(versions) != 30
+                or len(set(versions)) != len(versions)):
+            raise RuntimeError('C3/R13 requires the exact unchanged C2 V28 list plus only its V29 and V30 migrations')
+        return {'schemaBefore': 28, 'schemaAfter': 30, 'migrationChanges': True}
     if identity != (27, 28, True) or baseline is None or baseline.get('schemaAfter') != 27 or baseline.get('migrationChanges') is not False:
         raise RuntimeError('Unaccepted schema transition')
     previous = baseline['migrations']
@@ -80,8 +89,13 @@ def migration_baseline(accepted):
         return None
     binding = accepted.get('migrationBaseline', {})
     path = Path(binding.get('path', ''))
-    if path.as_posix() != 'docs/reports/c1-profile-20261109/accepted-inputs.json' or digest(path) != binding.get('sha256'):
-        raise RuntimeError('Exact prior V27 migration manifest required')
+    identity = (accepted.get('schemaBefore'), accepted.get('schemaAfter'), accepted.get('migrationChanges'))
+    expected_path = ('docs/reports/c2-cart-20261109/accepted-inputs.json' if identity == (28, 30, True)
+                     else 'docs/reports/c1-profile-20261109/accepted-inputs.json')
+    if path.as_posix() != expected_path or digest(path) != binding.get('sha256'):
+        raise RuntimeError('Exact prior migration manifest required')
+    if identity == (28, 30, True) and binding['sha256'] != '48bbcc808d0a0761e112b720c276592afe52f9979031a9975247065efeb277ba':
+        raise RuntimeError('C3/R13 requires the immutable accepted C2 V28 manifest')
     return json.loads(path.read_text())
 
 
@@ -104,7 +118,7 @@ def main():
             raise RuntimeError('Accepted application source differs: ' + entry['path'])
     migration_root = Path('backend/src/main/resources/db/migration')
     schema = schema_acceptance(accepted, files(migration_root), migration_baseline(accepted))
-    if schema['migrationChanges']:
+    if (schema['schemaBefore'], schema['schemaAfter'], schema['migrationChanges']) == (27, 28, True):
         checkout_migration_acceptance((migration_root / 'V28__checkout_delivery_snapshot.sql').read_bytes())
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=False)
