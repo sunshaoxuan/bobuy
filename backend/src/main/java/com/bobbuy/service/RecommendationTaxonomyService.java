@@ -61,7 +61,13 @@ public class RecommendationTaxonomyService {
         Map<String,Product> productMap=new HashMap<>();products.findAllById(source.stream().map(i->i.productId).filter(Objects::nonNull).distinct().toList()).forEach(p->productMap.put(p.getId(),p));
         Map<Long,Long> owners=new HashMap<>();posts.findAllById(source.stream().map(i->i.postId).distinct().toList()).forEach(p->owners.put(p.id,p.merchantId));
         var deleted=products.deletedIds();
-        var projected=source.stream().filter(original->original.productId==null||!deleted.contains(original.productId)).map(original->{
+        var projected=source.stream().filter(original->!publicView||RecommendationPublication.visible(original))
+          .filter(original->original.productId==null||!deleted.contains(original.productId)).map(original->{
+            if(RecommendationPublication.visible(original)){
+                var retained=RecommendationPublication.project(original,original.publicationSnapshot);
+                if(!publicView)retained.sourceFacts=RecommendationPublication.sourceFacts(original.publicationSnapshot);
+                return retained;
+            }
             var item=new RecommendationItem();
             item.id=original.id;item.postId=original.postId;item.productId=original.productId;item.name=original.name;
             item.referenceContext=original.referenceContext;item.offerIdentity=original.offerIdentity;
@@ -75,6 +81,11 @@ public class RecommendationTaxonomyService {
             item.categoryIds=List.copyOf(original.categoryIds);item.showSupplier=original.showSupplier;item.supplierId=original.supplierId;
             var product=productMap.get(item.productId);
             if(product!=null&&Objects.equals(owners.get(item.postId),product.getMerchantId()))ProductCatalogProjection.apply(item,original,product);
+            item.publicationState=original.publicationState;item.publishedAt=original.publishedAt;
+            if(product!=null&&Objects.equals(owners.get(item.postId),product.getMerchantId())){
+                var review=RecommendationPublication.candidate(original,product);
+                item.publicationReviewHash=review.reviewHash();item.publicationProductVersion=review.productVersion();
+            }
             if(!publicView&&item.catalogDriven)item.sourceFacts=new RecommendationItem.SourceFacts(original.name,original.itemNumber,original.specification,original.description,original.translations,original.getTranslationSource());
             return item;
         }).toList();

@@ -12,7 +12,9 @@ export default function RecommendationClassification({detail,onChanged,onPending
  const [supplierId,setSupplierId]=useState<string|null>(null),[updateSupplier,setUpdateSupplier]=useState(false),[showSupplier,setShowSupplier]=useState(false);
  const [busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState('');
  const [manage,setManage]=useState(false),[kind,setKind]=useState<'category'|'supplier'>('category'),[editId,setEditId]=useState<string>(),[label,setLabel]=useState('');
- const locked=detail.post.published;
+ const editable=(item:RecommendationDetail['items'][number])=>item.publicationState==='PENDING'||(!detail.post.published&&item.publicationState===undefined);
+ const locked=!detail.items.some(editable);
+ useEffect(()=>setSelected(prior=>prior.filter(id=>detail.items.some(item=>item.id===id&&editable(item)))),[detail.items,detail.post.published]);
  useEffect(()=>onPendingChange(selected.length>0&&(updateCategories||updateSupplier)),[selected.length,updateCategories,updateSupplier,onPendingChange]);
  async function load(){setChoices(await taxonomy.options());}
  useEffect(()=>{void load().catch(e=>setError((e as Error).message));},[]);
@@ -28,9 +30,9 @@ export default function RecommendationClassification({detail,onChanged,onPending
   {error&&<Alert type="error" message={error} showIcon/>}{notice&&<Alert type="success" message={notice} showIcon/>}
   <p>{t('class.help')}</p>
   <Input aria-label={t('class.search')} placeholder={t('class.search')} value={search} onChange={e=>{setSearch(e.target.value);setSelected([]);}} allowClear/>
-  <div className="rec-classify-selection"><Button disabled={locked||busy||!rows.length} onClick={()=>setSelected(rows.map(item=>item.id))}>{t('class.select_results',{count:rows.length})}</Button><Button disabled={!selected.length||busy} onClick={()=>setSelected([])}>{t('class.clear')}</Button><strong>{t('class.selected',{count:selected.length})}</strong></div>
+  <div className="rec-classify-selection"><Button disabled={locked||busy||!rows.length} onClick={()=>setSelected(rows.filter(editable).map(item=>item.id))}>{t('class.select_results',{count:rows.length})}</Button><Button disabled={!selected.length||busy} onClick={()=>setSelected([])}>{t('class.clear')}</Button><strong>{t('class.selected',{count:selected.length})}</strong></div>
   <Table rowKey="id" size="small" dataSource={rows} pagination={{pageSize:12,showSizeChanger:false}} scroll={{x:620}}
-   rowSelection={{selectedRowKeys:selected,preserveSelectedRowKeys:true,onChange:keys=>setSelected(keys),getCheckboxProps:()=>({disabled:locked||busy})}}
+   rowSelection={{selectedRowKeys:selected,preserveSelectedRowKeys:true,onChange:keys=>setSelected(keys),getCheckboxProps:item=>({disabled:!editable(item)||busy})}}
    columns={[
     {title:t('rec.name'),render:(_,item)=><span className="rec-classify-name"><img src={item.imageUrl} alt=""/><span>{item.name}<small>{item.itemNumber}</small></span></span>},
     {title:t('class.categories'),render:(_,item)=>item.categories?.length?item.categories.map(category=><Tag key={category.id}>{localizedContent(category.name,locale)}</Tag>):t('class.unclassified')},
@@ -45,7 +47,7 @@ export default function RecommendationClassification({detail,onChanged,onPending
     <Checkbox disabled={!updateSupplier||!supplierId||busy} checked={showSupplier} onChange={e=>setShowSupplier(e.target.checked)}>{t('class.show_supplier')}</Checkbox>
    </div>
    <Popconfirm title={t('class.confirm',{count:selected.length})} onConfirm={()=>void run(async()=>{
-    const next=await taxonomy.assign(detail.post.id,{itemIds:selected.map(Number),categoryIds,categoryMode:mode,updateCategories,supplierId,updateSupplier,showSupplier,version:detail.post.version});
+    const next=await taxonomy.assign(detail.post.id,{itemIds:selected.map(Number).filter(id=>detail.items.some(item=>item.id===id&&editable(item))),categoryIds,categoryMode:mode,updateCategories,supplierId,updateSupplier,showSupplier,version:detail.post.version});
     onChanged(next);setSelected([]);setNotice(t('class.saved'));
    })}><Button type="primary" loading={busy} disabled={!selected.length||(!updateCategories&&!updateSupplier)}>{t('class.apply')}</Button></Popconfirm>
   </div>}

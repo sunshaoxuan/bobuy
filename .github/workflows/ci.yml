@@ -119,7 +119,7 @@ jobs:
       - name: Bind core and web release artifacts
         run: >-
           python scripts/prepare-ci-release-artifacts.py
-          --accepted-inputs docs/reports/c2-cart-20261109/accepted-inputs.json
+          --accepted-inputs docs/reports/item-publication-20261109/accepted-inputs.json
           --output "$RUNNER_TEMP/bobuy-release-artifact"
 
       - name: Retain exact core and web artifacts
@@ -177,14 +177,54 @@ jobs:
           -Dspring.jpa.hibernate.ddl-auto=validate
           -Dspring.flyway.enabled=true test
 
-      - name: Retain C2 PostgreSQL migration and transaction reports
+      - name: Verify populated V28 to V31 preservation before publication runtime tests
+        env:
+          BOBBUY_ISOLATED_CI_POSTGRES: 'true'
+        run: >-
+          mvn -B --file backend/pom.xml
+          -Dtest=RecommendationPublicationMigrationIntegrationTest
+          -Dspring.datasource.url=jdbc:postgresql://127.0.0.1:5432/bobbuy
+          -Dspring.datasource.driver-class-name=org.postgresql.Driver
+          -Dspring.datasource.username=bobbuy
+          -Dspring.datasource.password=bobbuypassword
+          -Dspring.jpa.hibernate.ddl-auto=validate
+          -Dspring.flyway.enabled=false test
+
+      - name: Run publication authentication, concurrency and rollback on the same isolated V31 PostgreSQL
+        env:
+          BOBBUY_ISOLATED_CI_POSTGRES: 'true'
+        run: >-
+          mvn -B --file backend/pom.xml
+          -Dtest=RecommendationItemPublicationIntegrationTest
+          -Dspring.datasource.url=jdbc:postgresql://127.0.0.1:5432/bobbuy
+          -Dspring.datasource.driver-class-name=org.postgresql.Driver
+          -Dspring.datasource.username=bobbuy
+          -Dspring.datasource.password=bobbuypassword
+          -Dspring.jpa.hibernate.ddl-auto=validate
+          -Dspring.flyway.enabled=true test
+
+      - name: Run PENDING-aware application recovery read isolation on the same isolated V31 PostgreSQL
+        env:
+          BOBBUY_ISOLATED_CI_POSTGRES: 'true'
+        run: >-
+          mvn -B --file backend/pom.xml
+          -Dtest=RecommendationPublicationRecoveryIntegrationTest
+          -Dspring.datasource.url=jdbc:postgresql://127.0.0.1:5432/bobbuy
+          -Dspring.datasource.driver-class-name=org.postgresql.Driver
+          -Dspring.datasource.username=bobbuy
+          -Dspring.datasource.password=bobbuypassword
+          -Dspring.jpa.hibernate.ddl-auto=validate
+          -Dspring.flyway.enabled=false test
+
+      - name: Retain C2 and item-publication PostgreSQL migration and transaction reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: c2-postgres-${{ github.sha }}
+          name: item-publication-postgres-${{ github.sha }}
           path: |
             backend/target/surefire-reports/
             backend/target/c2-upgrade-preservation.json
+            backend/target/item-publication-upgrade-preservation.json
           if-no-files-found: error
           retention-days: 14
 

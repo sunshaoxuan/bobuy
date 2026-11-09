@@ -1021,7 +1021,8 @@ export type LocalizationRow={itemId:number;sourceHash:string;specification?:stri
 export type ProductSale={amount:number;currency:string;unit:string;validFrom?:string|null;validThrough?:string|null;revision:number;enabled:boolean};
 export type SaleReview={itemId:number;amount:number;currency:string;unit:string;validFrom?:string|null;validThrough?:string|null;revision:number;replaceExisting:boolean;enabled:boolean};
 export type RecommendationPicture={id:string;url:string;hash:string;sourceUrl:string;assetKey:string;label:string};
-export type RecommendationItem = RecommendationFacts & {catalogDriven?:boolean;sourceFacts?:{name:string;itemNumber?:string|null;specification?:string|null;description?:string|null;translations:Record<string,RecommendationText>;translationSource:string};brand?:string|null;model?:string|null;packaging?:string|null;gallery?:RecommendationPicture[];specification?:string|null;description?:string|null;translations?:Record<string,RecommendationText>;translationSource?:string;translationStatus?:string; id: number; productId?: string | null; currency?: 'JPY'; imageUrl: string; categoryIds?:string[]; categories?:RecommendationLabel[]; supplierId?:string|null; supplierName?:Record<string,string>|null; showSupplier?:boolean };
+export type RecommendationPublicationInput={requestId:string;version:number;productVersion:number;sourceHash:string;reviewed:true};
+export type RecommendationItem = RecommendationFacts & {publicationState?:'PENDING'|'PUBLISHED';publicationReviewHash?:string;publicationProductVersion?:number|null;publicationLegacy?:boolean;publishedAt?:string;catalogDriven?:boolean;sourceFacts?:{name:string;itemNumber?:string|null;specification?:string|null;description?:string|null;translations:Record<string,RecommendationText>;translationSource:string};brand?:string|null;model?:string|null;packaging?:string|null;gallery?:RecommendationPicture[];specification?:string|null;description?:string|null;translations?:Record<string,RecommendationText>;translationSource?:string;translationStatus?:string; id: number; productId?: string | null; currency?: 'JPY'; imageUrl: string; categoryIds?:string[]; categories?:RecommendationLabel[]; supplierId?:string|null; supplierName?:Record<string,string>|null; showSupplier?:boolean };
 export type RecommendationChoice = RecommendationLabel & {editable:boolean};
 export type RecommendationAssignment = {itemIds:number[];categoryIds:string[];categoryMode:'add'|'remove'|'replace';updateCategories:boolean;supplierId:string|null;updateSupplier:boolean;showSupplier:boolean;version:number};
 export const recommendationTaxonomyApi = {
@@ -1061,13 +1062,19 @@ export const productCatalogApi={
 };
 export type CurrencyDefinition={code:string;symbol:string;fractionDigits:number;name:string;saleEnabled:boolean};
 export const masterDataApi={currencies:()=>storeGet<CurrencyDefinition[]>('/api/merchant/currencies')};
+async function recommendationMutation<T>(url:string,body:object):Promise<T> {
+    const response=await authorizedFetch(url,{method:'POST',body:JSON.stringify(body)},{withJsonContentType:true});
+    if(!response.ok){if(response.status===401)clearAuthSession();throw Object.assign(new Error(await parseErrorMessage(response)),{status:response.status});}
+    return parseSuccessPayload<T>(response);
+}
 export const recommendationApi = {
     createService:(offer:ServiceOffer)=>postJson<RecommendationDetail,ServiceOffer>(recommendationBase+'/service-offers',offer),
     saveService:(id:number,offer:ServiceOffer,version:number)=>putJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/service-offer',{offer,version}),
     articleLanguage:(id:number,input:{locale:string;title:string;body:string;sourceHash:string;version:number;reviewed:boolean})=>putJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/article-localizations',input),
     articleHistory:(id:number)=>storeGet<{id:number;recordedAt:string;facts:{title:string;body:string;sourceLocale:string|null;translations:Record<string,ArticleText>}}[]>(recommendationBase+'/'+id+'/article-history'),
     referenceHistory:(post:number,item:number)=>storeGet<{id:number;recordedAt:string;facts:Record<string,unknown>}[]>(recommendationBase+'/'+post+'/items/'+item+'/reference-history'),
-    fromProduct:(id:number,input:{productId:string;productVersion:number;facts:RecommendationFacts;version:number;reviewed:boolean})=>postJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/from-product',input),
+    fromProduct:(id:number,input:{productId:string;productVersion:number;facts:RecommendationFacts;version:number;reviewed:boolean})=>recommendationMutation<RecommendationDetail>(recommendationBase+'/'+id+'/from-product',input),
+    publishItem:(postId:number,itemId:number,input:RecommendationPublicationInput)=>recommendationMutation<RecommendationDetail>(recommendationBase+'/'+postId+'/items/'+itemId+'/publish',input),
     galleryOrder:(post:number,item:number,orderedIds:string[],version:number)=>putJson<RecommendationDetail,object>(recommendationBase+'/'+post+'/items/'+item+'/gallery',{orderedIds,version}),
     galleryUpload:async(post:number,item:number,file:File,input:{version:number;sourceUrl:string;assetKey:string;label:string;itemNumber?:string|null;verified:boolean})=>{
         const form=new FormData();form.set('file',file);Object.entries(input).forEach(([key,value])=>{if(value!=null)form.set(key,String(value));});

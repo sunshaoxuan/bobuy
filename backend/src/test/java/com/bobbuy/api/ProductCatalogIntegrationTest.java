@@ -1,4 +1,5 @@
 package com.bobbuy.api;
+import static com.bobbuy.test.RecommendationPublicationFixtures.*;
 
 import com.bobbuy.model.*;
 import com.bobbuy.repository.*;
@@ -43,12 +44,12 @@ class ProductCatalogIntegrationTest {
   p.setItemNumber("000123");p.setBasePrice(123);p.setVisibilityStatus(ProductVisibility.DRAFTER_ONLY);
   p.setMediaGallery(new ArrayList<>(List.of(new MediaGalleryItem("/synthetic-official.png",com.bobbuy.model.MediaType.IMAGE,Map.of("ja-JP","Product")))));products.saveAndFlush(p);
   for(int price:List.of(500,600)){
-   var post=new RecommendationPost();post.merchantId=1000L;post.title="Synthetic source";post.published=true;post=posts.saveAndFlush(post);postIds.add(post.id);
+   var post=new RecommendationPost();post.merchantId=1000L;post.title="Synthetic source";legacyPost(post);post=posts.saveAndFlush(post);postIds.add(post.id);
    var item=new RecommendationItem();item.postId=post.id;item.productId=id;item.name="日本の商品";item.itemNumber="000123";
    item.specification="2個入";item.imageHash=UUID.randomUUID().toString();item.imageUrl="/synthetic-original.png";item.referencePrice=BigDecimal.valueOf(price);
    item.gallery=List.of(new RecommendationItem.Picture("fixture", "/synthetic-official.png","fixture","https://www.costco.co.jp/product/000123","fixture","Product",java.time.Instant.now()));
    item.translations=Map.of("zh-CN",new RecommendationItem.Text("中文商品","2个装",null,null),"zh-TW",new RecommendationItem.Text("中文商品繁體","2個裝",null,null));
-   item.translatedSource=item.getTranslationSource();sourceIds.add(items.saveAndFlush(item).id);
+   item.translatedSource=item.getTranslationSource();legacyItem(item,post);sourceIds.add(items.saveAndFlush(item).id);
   }
  }
  @AfterEach void cleanup(){items.deleteAllById(sourceIds);posts.deleteAllById(postIds);products.deleteById(id);}
@@ -64,10 +65,20 @@ class ProductCatalogIntegrationTest {
   ((ObjectNode)row.get("name")).put("ja-JP","主档商品");row.put("translationsReviewed",true);
   data(request("PUT",Map.of("rows",List.of(row),"reviewed",true),admin));
   var saved=products.findById(id).orElseThrow();assertThat(saved.getBasePrice()).isEqualTo(123);assertThat(saved.getSale()).isNull();assertThat(saved.getVisibilityStatus()).isEqualTo(ProductVisibility.DRAFTER_ONLY);
-  assertThat(feed(0).get("name").asText()).isEqualTo("主档商品");assertThat(feed(1).get("name").asText()).isEqualTo("主档商品");
+  // Existing issues retain migrated source facts; editing today's master never rewrites history.
+  assertThat(feed(0).get("name").asText()).isEqualTo("日本の商品");assertThat(feed(1).get("name").asText()).isEqualTo("日本の商品");
+  assertThat(items.findById(sourceIds.get(0)).orElseThrow().publicationSnapshot.productVersion()).isNull();
   assertThat(feed(0).get("referencePrice").asInt()).isEqualTo(500);assertThat(feed(1).get("referencePrice").asInt()).isEqualTo(600);
   assertThat(items.findById(sourceIds.get(0)).orElseThrow().name).isEqualTo("日本の商品");
   request("PUT",Map.of("rows",List.of(row),"reviewed",true),admin).andExpect(status().isBadRequest());
+  // A new explicitly reviewed occurrence binds the newer master through the real authenticated API.
+  var next=data(mvc.perform(post("/api/merchant/recommendations").header("Authorization","Bearer "+admin)));long nextId=next.at("/post/id").asLong();postIds.add(nextId);
+  next=data(mvc.perform(put("/api/merchant/recommendations/"+nextId).header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsString(Map.of("title","Synthetic next master version","body","New reviewed occurrence","version",next.at("/post/version").asLong())))));
+  next=data(mvc.perform(post("/api/merchant/recommendations/"+nextId+"/from-product").header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsString(Map.of("productId",id,"productVersion",saved.getRecordVersion(),"facts",Map.of("name","New occurrence source","itemNumber","000123","referencePrice",700,"priceUnit","per pack"),"version",next.at("/post/version").asLong(),"reviewed",true)))));
+  long nextItem=next.at("/items/0/id").asLong();sourceIds.add(nextItem);next=data(publishPending(mvc,json,items,next,admin));
+  var newest=data(mvc.perform(get("/api/storefront/recommendations/"+nextId))).at("/items/0");assertThat(newest.path("name").asText()).isEqualTo("主档商品");assertThat(newest.path("referencePrice").asInt()).isEqualTo(700);
+  var published=items.findById(nextItem).orElseThrow();assertThat(published.publicationSnapshot.legacy()).isFalse();assertThat(published.publicationSnapshot.productVersion()).isEqualTo(products.findById(id).orElseThrow().getRecordVersion());assertThat(published.publicationSnapshot.reviewHash()).matches("[0-9a-f]{64}");
+  assertThat(feed(0).get("name").asText()).isEqualTo("日本の商品");assertThat(feed(1).get("name").asText()).isEqualTo("日本の商品");
  }
  @Test void rejectsCrossTenantDuplicateAndCompositeNamesWithoutPartialSave()throws Exception{
   var row=proposal();request("PUT",Map.of("rows",List.of(row),"reviewed",true),other).andExpect(status().isNotFound());
@@ -93,6 +104,6 @@ class ProductCatalogIntegrationTest {
   var stale=original.deepCopy();stale.put("version",original.get("version").asLong()+1);cases.add(stale);
   for(var bad:cases){request("PUT",Map.of("rows",List.of(bad),"reviewed",true),admin).andExpect(status().isBadRequest());assertThat(products.findById(id).orElseThrow().getCatalogData()).isNull();}
   original.put("translationsReviewed",false);data(request("PUT",Map.of("rows",List.of(original),"reviewed",true),admin));
-  assertThat(feed(0).get("translations")).isEmpty();assertThat(feed(0).get("name").asText()).isEqualTo("日本の商品");
+  assertThat(feed(0).get("translations")).hasSize(2);assertThat(feed(0).at("/translations/zh-TW/name").asText()).isEqualTo("中文商品繁體");assertThat(feed(0).get("name").asText()).isEqualTo("日本の商品"); // Historical translations remain unchanged when today's master becomes unreviewed.
  }
 }

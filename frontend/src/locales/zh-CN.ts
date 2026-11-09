@@ -2,6 +2,21 @@ import type { Dictionary } from './types';
 import experience from './experience.zh-CN.json';
 
 const messages: Dictionary = {
+  "rec.item.current_spec": "当前商品档案规格",
+  "rec.item.reloaded_review": "已显示最新商品档案，原报价和来源条件已保留。请对照当前规格重新核对，再次审核后提交。",
+  "rec.item.pending": "待审核",
+  "rec.item.public": "已公开",
+  "rec.item.publish": "公开这一商品",
+  "rec.item.review": "我已核对这一商品的来源、价格与期限、四语和图片。",
+  "rec.item.append_hint": "本期保持在线。新增商品先待审，逐件审核公开，不影响已公开商品。",
+  "rec.item.first_hint": "准备好一个商品即可单独公开，其他待审商品继续保密。",
+  "rec.item.conflict": "本期或商品档案已变化。草稿已保留，请重读最新版本，核对后重新审核。",
+  "rec.item.retry": "重试这次公开",
+  "rec.item.published_notice": "这一商品已公开，其他待审商品仍未公开。",
+  "rec.item.not_ready": "当前商品版本或来源审核信息不完整。请完善这一商品并重读后再公开。",
+  "rec.item.catalog_version": "商品档案版本：{version}",
+  "rec.item.save_article": "请先保存正文，再公开单件商品。",
+  "rec.item.unconfirmed": "尚未确认公开结果，请重试同一次操作。",
   "profile.title": "本人资料",
   "profile.name": "姓名",
   "profile.phone": "手机号（选填）",

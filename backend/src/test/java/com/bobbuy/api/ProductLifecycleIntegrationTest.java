@@ -1,4 +1,5 @@
 package com.bobbuy.api;
+import static com.bobbuy.test.RecommendationPublicationFixtures.*;
 import com.bobbuy.model.*;
 import com.bobbuy.repository.*;
 import com.bobbuy.service.BobbuyStore;
@@ -33,8 +34,8 @@ class ProductLifecycleIntegrationTest {
   prefix="lifecycle-"+UUID.randomUUID()+"-";
   for(int i=0;i<142;i++){var p=new Product();p.setId(prefix+i);p.setMerchantId(9490L);p.setItemNumber("000"+i);p.setName(new HashMap<>(Map.of("ja-JP","商品"+i)));p.setVisibilityStatus(ProductVisibility.DRAFTER_ONLY);
    if(i>=15)p.setMediaGallery(new ArrayList<>(List.of(new MediaGalleryItem("/fixture-product.png",com.bobbuy.model.MediaType.IMAGE,Map.of("ja-JP","商品")))));products.save(p);ids.add(p.getId());}products.flush();
-  for(int issue=0;issue<2;issue++){var p=new RecommendationPost();p.merchantId=9490L;p.title="Synthetic period "+issue;p.published=true;p=posts.saveAndFlush(p);postIds.add(p.id);
-   int count=issue==0?122:30;for(int i=0;i<count;i++){int index=issue==0?i:112+i;var r=new RecommendationItem();r.postId=p.id;r.productId=ids.get(index);r.name="商品"+index;r.itemNumber="000"+index;r.imageHash=prefix+issue+"-"+i;r.imageUrl="/fixture-source.png";r.gallery=index<15?List.of():List.of(new RecommendationItem.Picture("fixture","/fixture-product.png","fixture","https://www.costco.co.jp/fixture","fixture","Product",java.time.Instant.now()));items.save(r);}}
+  for(int issue=0;issue<2;issue++){var p=new RecommendationPost();p.merchantId=9490L;p.title="Synthetic period "+issue;legacyPost(p);p=posts.saveAndFlush(p);postIds.add(p.id);
+   int count=issue==0?122:30;for(int i=0;i<count;i++){int index=issue==0?i:112+i;var r=new RecommendationItem();r.postId=p.id;r.productId=ids.get(index);r.name="商品"+index;r.itemNumber="000"+index;r.imageHash=prefix+issue+"-"+i;r.imageUrl="/fixture-source.png";r.gallery=index<15?List.of():List.of(new RecommendationItem.Picture("fixture","/fixture-product.png","fixture","https://www.costco.co.jp/fixture","fixture","Product",java.time.Instant.now()));legacyItem(r,p);items.save(r);}}
   items.flush();
  }
  @AfterEach void cleanup(){for(Long id:postIds){items.deleteAll(items.findByPostIdOrderById(id));posts.deleteById(id);}for(String id:ids){jdbc.update("delete from bb_product_lifecycle_event where product_id=?",id);jdbc.update("update bb_product set deleted_at=null,deleted_by=null where id=?",id);}products.deleteAllById(ids);mediaTransfers.deleteById(prefix+"source");mediaReferences.deleteById(prefix+"source");images.deleteById(prefix+"source");}

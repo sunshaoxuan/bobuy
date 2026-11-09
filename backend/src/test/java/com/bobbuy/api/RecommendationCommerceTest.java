@@ -1,4 +1,5 @@
 package com.bobbuy.api;
+import static com.bobbuy.test.RecommendationPublicationFixtures.*;
 import com.bobbuy.model.*;
 import com.bobbuy.repository.*;
 import com.bobbuy.service.*;
@@ -89,7 +90,7 @@ class RecommendationCommerceTest {
   detail=data(putBody(path()+"/items/"+item()+"/gallery",Map.of("version",Long.valueOf(version()),"orderedIds",List.of(gallery.get(1).get("id").asText(),gallery.get(0).get("id").asText())),admin));
   assertThat(detail.at("/items/0/imageUrl").asText()).isEqualTo(original);
   detail=data(putBody(path(),Map.of("title","Synthetic","body","Synthetic test only","version",Long.valueOf(version())),admin));
-  detail=data(mvc.perform(post(path()+"/publish").header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content("{\"version\":"+version()+"}")));
+  detail=data(publishPending(mvc,json,items,detail,admin));
   var publicDetail=data(mvc.perform(get("/api/storefront/recommendations/"+detail.at("/post/id").asLong())));
   assertThat(publicDetail.at("/items/0/imageUrl").asText()).isEqualTo(gallery.get(1).get("url").asText());assertThat(publicDetail.toString()).doesNotContain(original);
   // Published content can be linked without withdrawal; publication remains true.

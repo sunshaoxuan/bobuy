@@ -6,13 +6,15 @@ public final class ProductCatalogProjection {
  private ProductCatalogProjection(){}
  public static void apply(RecommendationItem item,RecommendationItem original,Product product){
   if(product==null||product.getCatalogData()==null)return;var data=product.getCatalogData();item.catalogDriven=true;
+  boolean sourceReviewed="REVIEWED".equals(original.getTranslationStatus());
+  var originalTranslations=Map.copyOf(original.translations);
   item.name=ProductCatalogService.text(product.getName(),"ja-JP");item.itemNumber=product.getItemNumber();
   item.specification=ProductCatalogService.text(data.specification(),"ja-JP");item.description=ProductCatalogService.text(product.getDescription(),"ja-JP");
   item.categoryIds=List.copyOf(data.categoryIds());item.supplierId=data.supplierId();item.brand=product.getBrand();item.model=data.model();item.packaging=data.packaging();
   var translations=new HashMap<String,RecommendationItem.Text>();
   if(ProductCatalogService.translationsCurrent(product))for(String locale:List.of("zh-CN","zh-TW","en-US")){
    String name=ProductCatalogService.text(product.getName(),locale);if(name.isBlank())continue;
-   var sourceText="REVIEWED".equals(original.getTranslationStatus())?original.translations.get(locale):null;
+   var sourceText=sourceReviewed?originalTranslations.get(locale):null;
    translations.put(locale,new RecommendationItem.Text(name,ProductCatalogService.text(data.specification(),locale),ProductCatalogService.text(product.getDescription(),locale),sourceText==null?null:sourceText.offerNotes()));
   }
   item.translations=translations;item.translatedSource=item.getTranslationSource();

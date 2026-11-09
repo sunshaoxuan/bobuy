@@ -57,6 +57,16 @@ def schema_acceptance(accepted, actual, baseline=None):
     versions = [int(name.group(1)) for name in names]
     if identity == (27, 27, False) and versions and max(versions) == 27:
         return {'schemaBefore': 27, 'schemaAfter': 27, 'migrationChanges': False}
+    if identity == (28, 31, True):
+        if (baseline is None or (baseline.get('schemaBefore'), baseline.get('schemaAfter'), baseline.get('migrationChanges')) != (27, 28, True)):
+            raise RuntimeError('V31 requires the exact prior C2/V28 migration manifest')
+        previous = baseline['migrations']
+        old_part = [entry for entry in actual if entry['path'] != 'V31__recommendation_item_publication.sql']
+        added = [entry for entry in actual if entry['path'] == 'V31__recommendation_item_publication.sql']
+        if (old_part != previous or len(added) != 1 or max(versions) != 31
+                or any(version > 28 for version in versions if version != 31)):
+            raise RuntimeError('V31 requires unchanged V28 migrations plus only its exact V31 migration')
+        return {'schemaBefore': 28, 'schemaAfter': 31, 'migrationChanges': True}
     if identity != (27, 28, True) or baseline is None or baseline.get('schemaAfter') != 27 or baseline.get('migrationChanges') is not False:
         raise RuntimeError('Unaccepted schema transition')
     previous = baseline['migrations']
@@ -75,13 +85,44 @@ def checkout_migration_acceptance(content):
         raise RuntimeError('C2 migration must add only the two nullable columns without defaults or data writes')
 
 
+def publication_migration_acceptance(content):
+    # Exact source-QA migration, canonical Git LF bytes. New SQL requires a new review.
+    canonical = content.decode('utf-8').replace('\r\n', '\n').encode('utf-8')
+    if hashlib.sha256(canonical).hexdigest() != 'a291fbe1edc4c2645cc87f932cb68feff71e1a3d20e9ca8f173842ca45e75312':
+        raise RuntimeError('V31 publication migration differs from its exact reviewed bytes')
+
+
+def recovery_contract(schema):
+    if schema['schemaAfter'] == 31:
+        return {
+            'status': 'UNBOUND_EXACT_V31_AWARE_ARCHIVE_AND_PG_RUNTIME_REQUIRED',
+            'oldV28CoreAllowed': False, 'oldDatabaseRestoreAllowed': False,
+            'metadataOrClassPresenceIsRuntimeProof': False,
+            'fallback': 'CONTROLLED_MAINTENANCE_AND_FORWARD_FIX_IF_NO_VERIFIED_AWARE_ARTIFACT',
+            'requirement': 'Only an exact PENDING-aware core/JAR proven on V31 PG and independently hash-bound in a recoverable archive may be restored.',
+        }
+    return None
+
+
+def rollback_description(schema):
+    if schema['schemaAfter'] == 31:
+        return ('V31 data must stay intact. Old V28 core ignores PENDING and is not a recovery target. '
+                'Restore only the exact PENDING-aware artifact proven on V31 PG and hash-bound in an independently verified recovery archive; '
+                'otherwise keep controlled maintenance and forward-fix. This capture leaves recovery UNBOUND and authorizes no activation.')
+    return ('Compatible application-only recovery after fresh preflight; retain V'
+            + str(schema['schemaAfter']) + ' and all newer customer writes. Never restore an old database.')
+
+
 def migration_baseline(accepted):
     if not accepted.get('migrationChanges'):
         return None
     binding = accepted.get('migrationBaseline', {})
     path = Path(binding.get('path', ''))
-    if path.as_posix() != 'docs/reports/c1-profile-20261109/accepted-inputs.json' or digest(path) != binding.get('sha256'):
-        raise RuntimeError('Exact prior V27 migration manifest required')
+    prior = ('docs/reports/c2-cart-20261109/accepted-inputs.json'
+             if (accepted.get('schemaBefore'), accepted.get('schemaAfter')) == (28, 31)
+             else 'docs/reports/c1-profile-20261109/accepted-inputs.json')
+    if path.as_posix() != prior or digest(path) != binding.get('sha256'):
+        raise RuntimeError('Exact prior migration manifest required')
     return json.loads(path.read_text())
 
 
@@ -104,8 +145,10 @@ def main():
             raise RuntimeError('Accepted application source differs: ' + entry['path'])
     migration_root = Path('backend/src/main/resources/db/migration')
     schema = schema_acceptance(accepted, files(migration_root), migration_baseline(accepted))
-    if schema['migrationChanges']:
+    if schema['migrationChanges'] and schema['schemaAfter'] == 28:
         checkout_migration_acceptance((migration_root / 'V28__checkout_delivery_snapshot.sql').read_bytes())
+    if schema['schemaAfter'] == 31:
+        publication_migration_acceptance((migration_root / 'V31__recommendation_item_publication.sql').read_bytes())
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=False)
     core_jar = output / 'core.jar'
@@ -158,7 +201,7 @@ def main():
                 **schema, 'migrationBaseline': accepted.get('migrationBaseline'),
                 'migrations': accepted['migrations'], 'independentApplicationQa': accepted['qa'],
                 'independentArtifactQa': 'PENDING', 'productionStaged': False, 'productionActivated': False,
-                'rollback': 'Compatible application-only recovery after fresh preflight; retain V' + str(schema['schemaAfter']) + ' and all newer customer writes. Never restore an old database.',
+                'rollback': rollback_description(schema), 'recoveryGate': recovery_contract(schema),
                 'byteDifferencePolicy': 'Source is exact. Any compile/web byte differences require explicit artifact QA binding; no equality is inferred.'}
     (output / 'artifact.json').write_text(json.dumps(manifest, indent=2) + '\n')
     print(json.dumps({k: manifest[k] for k in ['source', 'archiveBytes', 'archiveSha256', 'coreJarSha256',

@@ -35,7 +35,9 @@ public class ReferenceQuoteService {
  public void decorate(List<RecommendationItem> visible,boolean publicView){
   var productIds=visible.stream().map(i->i.productId).filter(Objects::nonNull).distinct().toList();
   var published=new HashSet<>(posts.findByPublishedTrue().stream().map(p->p.id).toList());
-  var candidates=productIds.isEmpty()?List.<RecommendationItem>of():items.findByProductIdInOrderById(productIds).stream().filter(i->published.contains(i.postId)).toList();
+  var candidates=productIds.isEmpty()?List.<RecommendationItem>of():items.findByProductIdInOrderById(productIds).stream()
+   .filter(i->published.contains(i.postId)&&RecommendationPublication.visible(i))
+   .map(i->RecommendationPublication.project(i,i.publicationSnapshot)).toList();
   var now=Instant.now();for(var item:visible){item.referenceQuote=resolve(item,candidates,now);if(publicView&&item.referenceContext!=null){var c=item.referenceContext;item.referenceContext=new ReferenceOfferContext(null,c.channel(),null,null,c.sourceUrl(),c.activityStart(),c.activityEnd(),c.activityApplies(),c.windowEvidence(),c.startSearchComplete());}}
  }
  private static boolean filled(String s){return s!=null&&!s.isBlank();}

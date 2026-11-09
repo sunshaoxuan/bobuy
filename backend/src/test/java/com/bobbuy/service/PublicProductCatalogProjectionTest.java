@@ -1,4 +1,5 @@
 package com.bobbuy.service;
+import static com.bobbuy.test.RecommendationPublicationFixtures.*;
 import com.bobbuy.model.*;
 import com.bobbuy.repository.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +24,7 @@ class PublicProductCatalogProjectionTest {
   var visible=new MediaGalleryItem();visible.setType(MediaType.IMAGE);visible.setVisible(true);visible.setUrl("https://example.invalid/visible.jpg");var hidden=new MediaGalleryItem();hidden.setType(MediaType.IMAGE);hidden.setVisible(false);hidden.setUrl("https://example.invalid/PRIVATE.jpg");p.setMediaGallery(List.of(visible,hidden));
   if(canonical)p.setCatalogData(new ProductCatalogData(Map.of("ja-JP","Master spec"),"Master model","2 x 10",List.of(),null,null,null,null));
   original=new RecommendationItem();original.id=1L;original.postId=7L;original.productId=p.getId();original.name="Original published name";original.itemNumber="SOURCE ITEM";original.specification="Source spec";original.description="Published description";original.imageUrl="https://example.invalid/PRIVATE_RAW_IMAGE";
-  var post=new RecommendationPost();post.id=7L;post.merchantId=1001L;post.published=true;
+  var post=new RecommendationPost();post.id=7L;post.merchantId=1001L;legacyPost(post);if(canonical)reviewedReadItem(original,p,post);else legacyItem(original,post);
   when(products.findAll()).thenReturn(List.of(p));when(products.findAllById(any())).thenReturn(List.of(p));when(products.deletedIds()).thenReturn(Set.of());when(posts.findByPublishedTrue()).thenReturn(List.of(post));when(posts.findAllById(any())).thenReturn(List.of(post));when(items.findByPostIdInOrderById(List.of(7L))).thenReturn(List.of(original));when(items.findByProductIdInOrderById(any())).thenReturn(List.of(original));
  }
  @Test void legacyDrafterFieldsExactlyReusePublishedProjectionWithoutMasterFallback(){setup(false);var published=taxonomy.display(List.of(original),true).get(0);var entry=catalog.page(0,null).items().get(0);assertThat(entry.name()).containsEntry("ja-JP",published.name);assertThat(entry.description()).containsEntry("ja-JP",published.description);assertThat(entry.specification()).containsEntry("ja-JP",published.specification);assertThat(entry.brand()).isNull();assertThat(entry.itemNumber()).isEqualTo(published.itemNumber);assertThat(entry.gallery()).isEqualTo(published.gallery).isEmpty();assertThat(entry.categories()).isEqualTo(published.categories);assertThat(entry.referenceOffers().get(0).facts().imageUrl).isNull();assertThat(p.getBrand()).isEqualTo("Master brand");verify(products,never()).save(any());}
