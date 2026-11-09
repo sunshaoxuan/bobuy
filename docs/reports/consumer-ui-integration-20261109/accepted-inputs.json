@@ -1,9 +1,9 @@
 {
   "candidateKind": "CONSUMER_UI_WITH_REVIEWED_ISSUE_DATE_V1",
-  "candidate": "Complete5746 consumer UI plus exact6bf source-date metadata and00e60 navigation repair",
-  "baseHead": "5746dc71508744161fc3bb0797dd45e6228b05aa",
+  "candidate": "Complete5746 consumer UI plus exact6bf source-date metadata and00e60 navigation repair; Fix1 waits for existing loading animation before exact disabled assertion",
+  "baseHead": "1f30f8fc7a87e184b6af264384f81810505a0e86",
   "sourceDigestAlgorithm": "sha256-json-utf8-sourceFiles-v1",
-  "sourceDigest": "8064965a8a84fc453c1e34e6c3b2a860f30adf2fa3c2c401f303d04b3bea252e",
+  "sourceDigest": "4025f6fa2302a69b76a8e58a98758af7cfcfcfcf308a7e2228646bf5306abdd5",
   "sourceFileCount": 713,
   "sourceFiles": [
     {
@@ -2178,8 +2178,8 @@
     },
     {
       "path": "docs/reports/CONSUMER-UI-COMPLETE-20261109.md",
-      "gitLfBytes": 3790,
-      "gitLfSha256": "0098d69e23fc75b2f8fe70c040f33c9d22d1e751f778288381412fdb44d917c3"
+      "gitLfBytes": 4309,
+      "gitLfSha256": "8e00b8dcf43885b0f2f8f66be63f3055ed0108ae9810677345b5462c93c8bc55"
     },
     {
       "path": "docs/reports/CONSUMER-UI-INTEGRATION-20261109.md",
@@ -2633,8 +2633,8 @@
     },
     {
       "path": "frontend/src/components/PublishedArticleRevision.test.tsx",
-      "gitLfBytes": 14790,
-      "gitLfSha256": "9904aa0cf3a7d2a6456b5c87e8a7bdf4b993ac75401cc3662f9977ac9aadf2ea"
+      "gitLfBytes": 14809,
+      "gitLfSha256": "26aefd5e8b4b64825382ca0d298e082960fa7821ebc88471b40f799d5b2e318d"
     },
     {
       "path": "frontend/src/components/PublishedArticleRevision.tsx",
@@ -4033,7 +4033,27 @@
       "normalDateEditor": "owner AGENT; reviewed source needed; no automatic inference/backfill",
       "globalRouterRepairIncluded": true,
       "productionActions": 0,
-      "localHeavyServices": 0
+      "localHeavyServices": 0,
+      "fix1": {
+        "base": "1f30f8fc7a87e184b6af264384f81810505a0e86",
+        "firstCiRun": 42669746299,
+        "firstPgJob": 129342814692,
+        "firstPgArtifact": 13699180218,
+        "firstPgArtifactSha256": "5c711b405b93cd3d4febf5765362155ae7261ab31f380e5790949428e6172a96",
+        "changedSourceRows": [
+          "docs/reports/CONSUMER-UI-COMPLETE-20261109.md",
+          "frontend/src/components/PublishedArticleRevision.test.tsx"
+        ],
+        "applicationBackendSqlUnchanged": true,
+        "newPg": "REUSE_EXACT1f30_COMBINED_PG_SOURCE",
+        "failureLog": ".task-tmp/consumer-ui-complete-20261109/frontend-r1-job.log",
+        "originalFrontend": {
+          "pass": 583,
+          "fail": 1,
+          "total": 584
+        },
+        "noAssertionRelaxed": true
+      }
     }
   },
   "qa": {
