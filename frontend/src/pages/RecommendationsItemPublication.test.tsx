@@ -1,5 +1,5 @@
 import {act,fireEvent,render,screen,waitFor,within} from '@testing-library/react';
-import {MemoryRouter,useNavigate} from 'react-router-dom';
+import {createMemoryRouter,RouterProvider,useNavigate} from 'react-router-dom';
 import {I18nProvider,translate} from '../i18n';
 import {serviceFixture} from '../serviceOffer.fixture';
 import {storeAuthSession} from '../authStorage';
@@ -21,11 +21,12 @@ const draft={post:{id:8,title:'Original issue',version:4,published:false,updated
 const clone=<T,>(value:T):T=>structuredClone(value);
 function published(value:any,itemId=801){return {...clone(value),post:{...value.post,published:true,version:value.post.version+1},items:value.items.map((item:any)=>item.id===itemId?{...item,publicationState:'PUBLISHED'}:{...item})};}
 function RouteControl(){const navigate=useNavigate();return <button onClick={()=>navigate('/admin/recommendations?post=2')}>Other issue</button>;}
-function show(postId=8){return render(<I18nProvider><MemoryRouter initialEntries={['/admin/recommendations?post='+postId]}><RouteControl/><Recommendations/></MemoryRouter></I18nProvider>);}
+function show(postId=8){const router=createMemoryRouter([{path:'*',element:<><RouteControl/><Recommendations/></>}],{initialEntries:['/admin/recommendations?post='+postId]});return render(<I18nProvider><RouterProvider router={router}/></I18nProvider>);}
 const card=(name:string)=>within(screen.getByRole('heading',{name}).closest('article')!);
 function review(name='Ready Tea'){fireEvent.click(card(name).getByRole('checkbox',{name:/I checked this item/}));}
 const publishButton=(name='Ready Tea')=>card(name).getByRole('button',{name:'Publish this item: '+name});
-beforeEach(()=>{localStorage.clear();localStorage.setItem('bobbuy_locale','en-US');vi.resetAllMocks();mocks.get.mockResolvedValue(clone(draft));});
+beforeEach(async()=>{localStorage.clear();localStorage.setItem('bobbuy_locale','en-US');vi.resetAllMocks();mocks.get.mockResolvedValue(clone(draft));const {transferableAbortController}=await vi.importActual<{transferableAbortController:()=>AbortController}>('node:util');vi.stubGlobal('AbortController',class {constructor(){return transferableAbortController();}});});
+afterEach(()=>vi.unstubAllGlobals());
 
 it('publishes a ready post8 item alone while 1731065 stays pending; synchronous double clicks send once',async()=>{
  let finish!:(value:any)=>void;mocks.publishItem.mockImplementation(()=>new Promise(resolve=>finish=resolve));

@@ -1,14 +1,14 @@
 {
-  "candidate": "Item publication V31 precise CI source candidate; test/tool delta runtime pending",
-  "baseHead": "3fdd94b3c57061aa9e41dc43e09dc21ef948a0a8",
+  "candidate": "V31 individual publication plus live bf0 article revision and00e navigation; independent combined runtime pending",
+  "baseHead": "d460784e8a2187352fc9e37b8148a275da6be19f",
   "sourceDigestAlgorithm": "sha256-json-utf8-sourceFiles-v1",
-  "sourceDigest": "83f3c03553b73487736fb5c4fde9ec4ab2a33f96acfe9efcc46dcce4462d7864",
+  "sourceDigest": "ac2f20044b468314147ad78a78f2fffbe4618b7ac05c3e91544c779008f39536",
   "lineEndingPolicy": "Exact canonical Git-filtered bytes, cross-checked by git hash-object; excludes self-referential accepted manifest and unrelated protected files.",
   "sourceFiles": [
     {
       "path": ".github/workflows/ci.yml",
-      "gitLfBytes": 10916,
-      "gitLfSha256": "21a41cf6f8962bd8b210e80b84cfe64150290a09184cfb891b8f72b11e9129ba"
+      "gitLfBytes": 11548,
+      "gitLfSha256": "53b9b39fa5f4eea952ff9b124c476206da4f29d1056ccf8ece1e056beed16515"
     },
     {
       "path": "backend/Dockerfile",
@@ -357,8 +357,8 @@
     },
     {
       "path": "backend/src/main/java/com/bobbuy/api/RecommendationController.java",
-      "gitLfBytes": 11047,
-      "gitLfSha256": "facdc9bac9d91133bef3c6cee1218623dd2dcf16dc0de38a802d22c7952d21d6"
+      "gitLfBytes": 12435,
+      "gitLfSha256": "f4cd382f6bd5b0020634f4bf10e0fb20061e5cdb0b8a2fb26cffcc994cb5486e"
     },
     {
       "path": "backend/src/main/java/com/bobbuy/api/RecommendationTaxonomyController.java",
@@ -1327,8 +1327,8 @@
     },
     {
       "path": "backend/src/main/java/com/bobbuy/service/RecommendationArticleService.java",
-      "gitLfBytes": 3034,
-      "gitLfSha256": "3ac907a8de52219bf0b1f9ecb30dae502da04eda5085242cd5e5e55fc1ea349e"
+      "gitLfBytes": 9374,
+      "gitLfSha256": "96cb3d023c9b8721e1cc9aa1d0c81c82a4a65d4ae70a983f1950d104a86bf4fa"
     },
     {
       "path": "backend/src/main/java/com/bobbuy/service/RecommendationCatalogService.java",
@@ -1352,8 +1352,8 @@
     },
     {
       "path": "backend/src/main/java/com/bobbuy/service/RecommendationService.java",
-      "gitLfBytes": 39878,
-      "gitLfSha256": "c27f46b709492a2bde438cd85ea824e503f2d6f0541273aec9e2fb5641072233"
+      "gitLfBytes": 41692,
+      "gitLfSha256": "3ef6a50f9ee4de5c4e052c528efab8b79ea3cd0baf65072c7e2fc809c926ecbf"
     },
     {
       "path": "backend/src/main/java/com/bobbuy/service/RecommendationSourceImage.java",
@@ -1771,6 +1771,11 @@
       "gitLfSha256": "764e4f38ac43dd30833ec85254fa05138ec058eca59e917034533efaa5fdaa02"
     },
     {
+      "path": "backend/src/test/java/com/bobbuy/api/RecommendationArticleRevisionIntegrationTest.java",
+      "gitLfBytes": 18213,
+      "gitLfSha256": "63495f26d19135c8630a608151cbaf3e096e42c18cdfa2943c4f0c3255b65ae2"
+    },
+    {
       "path": "backend/src/test/java/com/bobbuy/api/RecommendationClassificationTest.java",
       "gitLfBytes": 9720,
       "gitLfSha256": "eb3dd163dff7b1429e027a9ceb816d2a8178502704e8a60b1e81e4c8979eaf4c"
@@ -1787,8 +1792,8 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/RecommendationItemPublicationIntegrationTest.java",
-      "gitLfBytes": 13725,
-      "gitLfSha256": "67a881e83675bc311c667d2529c526ba790076b06b8d11719f9dc237f0cfcfa0"
+      "gitLfBytes": 18163,
+      "gitLfSha256": "8b660fc2975123aa22f964b5b76fc252c89447bedf7f196bcfa38affc345a782"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/RecommendationNodeTest.java",
@@ -2046,6 +2051,11 @@
       "gitLfSha256": "60182efb64017992763a625151abff2b90387e669494344fb9b498eac141539d"
     },
     {
+      "path": "backend/src/test/java/com/bobbuy/service/RecommendationArticleRevisionTest.java",
+      "gitLfBytes": 12517,
+      "gitLfSha256": "e90c64d70239c07118ab79fa2dea2896818ad0cf89e0d22047285e9678a59a72"
+    },
+    {
       "path": "backend/src/test/java/com/bobbuy/service/RecommendationFromProductTest.java",
       "gitLfBytes": 6444,
       "gitLfSha256": "be49c85877a334f9385f1237c88580babd6c4fd5799f438942d39e53f87f12a0"
@@ -2149,6 +2159,11 @@
       "path": "docs/reports/C2-CART-20261109.md",
       "gitLfBytes": 14328,
       "gitLfSha256": "0053aa2aef77e88778694281976fa514bae38629303f10e288c07de78ff04078"
+    },
+    {
+      "path": "docs/reports/ITEM-ARTICLE-INTEGRATION-20261109.md",
+      "gitLfBytes": 4430,
+      "gitLfSha256": "b1a55f765dd8fc60b0fd891972143ab5c3f935fc414797ac9fc4e828f74e8412"
     },
     {
       "path": "docs/reports/ITEM-PUBLICATION-CI-20261109.md",
@@ -2327,8 +2342,8 @@
     },
     {
       "path": "frontend/src/api.ts",
-      "gitLfBytes": 71054,
-      "gitLfSha256": "6418f3f5c98415cfac6fbea1f8b96fb72536d070429ba06ed7fe8560ef98ea18"
+      "gitLfBytes": 71959,
+      "gitLfSha256": "f98a8af196e801343141d9481b6ee5097aa5f84b1043ef774d5a8c938d0261f8"
     },
     {
       "path": "frontend/src/authStorage.test.ts",
@@ -2397,8 +2412,8 @@
     },
     {
       "path": "frontend/src/components/ArticleLanguages.tsx",
-      "gitLfBytes": 4780,
-      "gitLfSha256": "4f2df4172da473d8ba9a8f05ae5ad6a657014a062952c71330a4066649004feb"
+      "gitLfBytes": 5596,
+      "gitLfSha256": "89d11d818ecc90b86ee2d0e50a59619db7faa610d018ce8bd4711111de3cb256"
     },
     {
       "path": "frontend/src/components/AttributeDiffTable.tsx",
@@ -2591,6 +2606,16 @@
       "gitLfSha256": "d43bfd40326ed67466a54a4f77348568c4207a3ca4777ac7ab2f6cd100b4ec83"
     },
     {
+      "path": "frontend/src/components/PublishedArticleRevision.test.tsx",
+      "gitLfBytes": 14790,
+      "gitLfSha256": "9904aa0cf3a7d2a6456b5c87e8a7bdf4b993ac75401cc3662f9977ac9aadf2ea"
+    },
+    {
+      "path": "frontend/src/components/PublishedArticleRevision.tsx",
+      "gitLfBytes": 12077,
+      "gitLfSha256": "a912e0ea42968d2d339367cc5ef8c18fa02962fc107b67faae63aaad6ae81517"
+    },
+    {
       "path": "frontend/src/components/RecommendationCatalog.tsx",
       "gitLfBytes": 3915,
       "gitLfSha256": "f717b1466e84a05f495552757fc86528468e843009ac8131fab7e8935f64c4e7"
@@ -2694,6 +2719,16 @@
       "path": "frontend/src/components/ReservationAdd.tsx",
       "gitLfBytes": 1709,
       "gitLfSha256": "4bff060e18812bf20d65eb5689633cd0f7e87409d30ae08088e91c68bfcb66c6"
+    },
+    {
+      "path": "frontend/src/components/SafeArticleText.test.tsx",
+      "gitLfBytes": 3670,
+      "gitLfSha256": "f2b74b17fc45718827bd10eba130627e17dbe608666e7bd473b97cec9cd82fd1"
+    },
+    {
+      "path": "frontend/src/components/SafeArticleText.tsx",
+      "gitLfBytes": 1102,
+      "gitLfSha256": "5f6ddc4adc61f49d95b839958f1a465924574f82bc726e3aa42adfbf7e973908"
     },
     {
       "path": "frontend/src/components/SellingPrice.test.tsx",
@@ -2867,8 +2902,8 @@
     },
     {
       "path": "frontend/src/locales/en-US.ts",
-      "gitLfBytes": 74722,
-      "gitLfSha256": "b7398b38e59d3001dd8db13f0b1ae50851565f17414d5000ea8c48904e2d38a0"
+      "gitLfBytes": 76327,
+      "gitLfSha256": "9e7cdcca042530bd15b23efac004a1d1f57c07303fd623d6372b15a8f773458d"
     },
     {
       "path": "frontend/src/locales/experience.en-US.json",
@@ -2887,8 +2922,8 @@
     },
     {
       "path": "frontend/src/locales/ja-JP.ts",
-      "gitLfBytes": 83977,
-      "gitLfSha256": "8b8d90876985923fcca7e60c41ba60be7235e1e622ac278043e881832448c20b"
+      "gitLfBytes": 85991,
+      "gitLfSha256": "cfe94e85a3c173bb2af77a412405cff1ef2c23fa41f74c486b7e67d1dd0932d4"
     },
     {
       "path": "frontend/src/locales/types.ts",
@@ -2897,18 +2932,18 @@
     },
     {
       "path": "frontend/src/locales/zh-CN.ts",
-      "gitLfBytes": 71803,
-      "gitLfSha256": "7fae31843e396d3c2847eea62f9ad44f54b55de15b9d15695632dbebfbe0e68f"
+      "gitLfBytes": 73359,
+      "gitLfSha256": "4ae620523f44bdb270e3f2f5fa117f5e21823ce06f46b7fe9f453a645f75e7ae"
     },
     {
       "path": "frontend/src/locales/zh-TW.ts",
-      "gitLfBytes": 76803,
-      "gitLfSha256": "5d1d6578c60f0982950eda62889b8e2e7da68a1a0d6db73b585549a891c4a18b"
+      "gitLfBytes": 78359,
+      "gitLfSha256": "1bb9bb97d3337e4e11f28f8975b9fb0fdfa5d209e8532f2d7b91ccb408503aa9"
     },
     {
       "path": "frontend/src/main.tsx",
-      "gitLfBytes": 533,
-      "gitLfSha256": "17f9ff412e485752a25257eb0c9f21df329157416b467273137c448d968160d6"
+      "gitLfBytes": 680,
+      "gitLfSha256": "48a662508f9482ece37e3589fbf9e7e1ba62f6b4e228cef5114b17d683eb2c43"
     },
     {
       "path": "frontend/src/mediaUploadApi.test.ts",
@@ -3022,8 +3057,8 @@
     },
     {
       "path": "frontend/src/pages/LoginPage.test.tsx",
-      "gitLfBytes": 1949,
-      "gitLfSha256": "e739cf61c59a15fc974b3b0d560feb7a5d1d7a6a6525311b8f4dfe1434fa9242"
+      "gitLfBytes": 2261,
+      "gitLfSha256": "73b2b08c9387da87388058d1f9d9608350a121b9d2a7b82ec964a375ff034c95"
     },
     {
       "path": "frontend/src/pages/LoginPage.tsx",
@@ -3122,13 +3157,13 @@
     },
     {
       "path": "frontend/src/pages/PublicRecommendations.tsx",
-      "gitLfBytes": 14183,
-      "gitLfSha256": "990e95949f38547a56016549204042720516cf627937345afbc26e331e5cc438"
+      "gitLfBytes": 14335,
+      "gitLfSha256": "e2fada4373242388fce655476a89e6615964ce85cd6d7ba93cae610b7900f215"
     },
     {
       "path": "frontend/src/pages/RecommendationBrowse.tsx",
-      "gitLfBytes": 15162,
-      "gitLfSha256": "2481a15d3c958d7dda26502d7e4a01d06b75887b8913da9ef29fe52896aa14e8"
+      "gitLfBytes": 15281,
+      "gitLfSha256": "5d0ff84bf2a6fe9cd774620817a873037f7280ae323693b8f0a55d254144278e"
     },
     {
       "path": "frontend/src/pages/RecommendationCategories.test.tsx",
@@ -3141,24 +3176,34 @@
       "gitLfSha256": "19544df42237ac641a228cf5c110dce723d1253198ce2265833b3312c8e9c977"
     },
     {
+      "path": "frontend/src/pages/Recommendations.articleRevision.test.tsx",
+      "gitLfBytes": 5976,
+      "gitLfSha256": "f2bbc940581c71bc917810c6fd5c3e5b85e133dbbd60b53824bd514f80a43f39"
+    },
+    {
+      "path": "frontend/src/pages/Recommendations.navigation.test.tsx",
+      "gitLfBytes": 7934,
+      "gitLfSha256": "b9f0d31a379e8bf4e34c17bf178464bca1e95eaf8f5d3e0ceb812ae4a2932b15"
+    },
+    {
       "path": "frontend/src/pages/Recommendations.test.tsx",
-      "gitLfBytes": 6460,
-      "gitLfSha256": "a3941499a54e5901cd2de33c34401da3235961dbc30892cf4debf759aba8dfbd"
+      "gitLfBytes": 6554,
+      "gitLfSha256": "dfe3ea64e1c179f7889521f17596f9f63502235ab030dcf36b257873a3d7a0bf"
     },
     {
       "path": "frontend/src/pages/Recommendations.tsx",
-      "gitLfBytes": 26300,
-      "gitLfSha256": "5fd0cde97183e944d99fe83e7e611d9ecff706a1fd6ac73c2414b1921c3444fe"
+      "gitLfBytes": 28688,
+      "gitLfSha256": "4d4d9e03be29028fc2c32a165a38384f240eb842836a4e484bd80bbfdd81f59f"
     },
     {
       "path": "frontend/src/pages/RecommendationsItemPublication.test.tsx",
-      "gitLfBytes": 11697,
-      "gitLfSha256": "52be86e72f6f198b646be8e3d81da38952f2b064b4cc1f27f4929dad714971f5"
+      "gitLfBytes": 12041,
+      "gitLfSha256": "da4f8556049fff7e57efb0cd474bae7e3ebf8f400e19fe31907c06d275db716a"
     },
     {
       "path": "frontend/src/pages/RecommendationsRevisionRace.test.tsx",
-      "gitLfBytes": 6330,
-      "gitLfSha256": "2e37e5331e81407c07838bcc374b82da1fd25dd0d9400f70cb67ef20f6d405d4"
+      "gitLfBytes": 6410,
+      "gitLfSha256": "000e8930339f62e442e937235e9cc5329db8500f08925be11805bc655d633f74"
     },
     {
       "path": "frontend/src/pages/StockMaster.test.tsx",
@@ -3172,8 +3217,8 @@
     },
     {
       "path": "frontend/src/pages/StoreNavigation.test.tsx",
-      "gitLfBytes": 5473,
-      "gitLfSha256": "b48a01e06a9d56945fcb72157efb317d497ed7119ec75507bff45d01660b7d7c"
+      "gitLfBytes": 5830,
+      "gitLfSha256": "4c7ab27f0a2d574c00a07d9bc8487085e92572c9b6b1784463c76c335f446583"
     },
     {
       "path": "frontend/src/pages/Storefront.tsx",
@@ -3437,8 +3482,8 @@
     },
     {
       "path": "scripts/capture-item-publication-inputs.mjs",
-      "gitLfBytes": 10011,
-      "gitLfSha256": "5252652962770aeb0bb4cd68cab9df78b950559f301a1afe70b409b280c3546e"
+      "gitLfBytes": 11839,
+      "gitLfSha256": "fabe9c2bf5f65fddf6eadb51a0f031d58b78946f841aa89d702030cb1f827359"
     },
     {
       "path": "scripts/prepare-ci-release-artifacts.py",
@@ -3606,6 +3651,7 @@
   "requiredBackendClasses": [
     "com/bobbuy/api/CustomerBalanceLedgerResponse.class",
     "com/bobbuy/api/RecommendationController$ArticleLanguage.class",
+    "com/bobbuy/api/RecommendationController$ArticleRevisionInput.class",
     "com/bobbuy/api/RecommendationController$CatalogLink.class",
     "com/bobbuy/api/RecommendationController$Edit.class",
     "com/bobbuy/api/RecommendationController$FromProduct.class",
@@ -3642,7 +3688,12 @@
     "com/bobbuy/service/PublicProductBrowseService$Facet.class",
     "com/bobbuy/service/PublicProductBrowseService$Missing.class",
     "com/bobbuy/service/PublicProductBrowseService.class",
+    "com/bobbuy/service/RecommendationArticleService$ReviewedText.class",
+    "com/bobbuy/service/RecommendationArticleService$RevisionConflict.class",
+    "com/bobbuy/service/RecommendationArticleService$RevisionReceipt.class",
+    "com/bobbuy/service/RecommendationArticleService.class",
     "com/bobbuy/service/RecommendationPublication.class",
+    "com/bobbuy/service/RecommendationService$ArticleRevision.class",
     "com/bobbuy/service/RecommendationService$Detail.class",
     "com/bobbuy/service/RecommendationService$Localization.class",
     "com/bobbuy/service/RecommendationService$PublicNode.class",
@@ -3678,7 +3729,15 @@
     "evidenceSha256": "a41e3f608f661a3a807915a75540dc8f2553fd85746567b4a09565cad672849d",
     "historicalObservationOnly": true,
     "freshPreflightRequired": true,
-    "articleBaselineIntegrationRequired": true
+    "articleBaselineIntegrationRequired": false
+  },
+  "retainedLiveArticle": {
+    "coreSource": "bf0ca746f2612c797ad2427d6e204007e94fc04b",
+    "webSource": "00e60cd9d5df63e422156a1368508e6b07a757f5",
+    "exactPriorAppAcceptance": "6fb8b9e635818810552a763afb877be995eadf0307b65c12485f674ef927f3af",
+    "integrationSourceOnly": true,
+    "combinedIndependentAcceptance": "PENDING",
+    "newDirectorySchema28_1Included": false
   },
   "schemaBefore": 28,
   "schemaAfter": 31,

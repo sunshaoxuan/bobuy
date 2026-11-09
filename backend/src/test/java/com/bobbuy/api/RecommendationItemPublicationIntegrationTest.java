@@ -124,4 +124,35 @@ class RecommendationItemPublicationIntegrationTest {
         assertTrue(RecommendationPublication.visible(items.findById(ready.id).orElseThrow()));
         assertEquals(1,history.findByMerchantIdAndItemIdOrderById(1000L,ready.id).size());
     }
+    JsonNode reviseCurrentArticle(String suffix)throws Exception{
+        var current=getMerchant();var texts=new TreeMap<String,Object>();
+        for(String locale:List.of("ja-JP","zh-CN","zh-TW","en-US"))texts.put(locale,Map.of("title",locale+" reviewed "+suffix,"body",locale+" short reviewed body "+suffix));
+        return data(mvc.perform(put(path()+"/article-revision").header("Authorization","Bearer "+token).contentType(MediaType.APPLICATION_JSON)
+            .content(json.writeValueAsString(Map.of("requestId",UUID.randomUUID(),"version",current.at("/post/version").asLong(),"sourceHash",current.path("articleSourceHash").asText(),"reviewed",true,"articles",texts)))));
+    }
+    @Test void publishedSevenItemsCanAppendEighthBetweenAtomicArticleRevisionsWithoutWithdrawingOrRewritingHistory()throws Exception{
+        data(publish(ready.id,body(getMerchant(),ready.id,UUID.randomUUID()),token));
+        for(int i=2;i<=7;i++){var existing=item("EXISTING-"+i,true);data(publish(existing.id,body(getMerchant(),existing.id,UUID.randomUUID()),token));}
+        var originalPost=posts.findById(issue.id).orElseThrow();var publishedRows=new TreeMap<Long,String>();
+        for(var existing:items.findByPostIdOrderById(issue.id))if(RecommendationPublication.visible(existing))publishedRows.put(existing.id,json.writeValueAsString(existing));
+        assertEquals(7,publishedRows.size());var first=reviseCurrentArticle("before append");assertTrue(first.path("current").asBoolean());
+        assertEquals(4,first.at("/detail/articleTranslations").size());
+        // Prepare only an owned synthetic master; the actual association is added via the normal API.
+        var staged=item("EIGHTH",true);items.deleteById(staged.id);items.flush();var master=products.findById(staged.productId).orElseThrow();
+        var facts=new RecommendationFacts(ProductCatalogService.text(master.getName(),"ja-JP"),master.getItemNumber(),BigDecimal.TEN,null,null,"per pack",null,null,null,null,null,staged.referenceContext,null,null,null,"24 cartons of 200ml");
+        var current=getMerchant();var addition=Map.of("productId",master.getId(),"productVersion",master.getRecordVersion(),"facts",facts,"version",current.at("/post/version").asLong(),"reviewed",true);
+        var added=data(mvc.perform(post(path()+"/from-product").header("Authorization","Bearer "+token).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsString(addition))));
+        var eighth=items.findByPostIdOrderById(issue.id).stream().filter(i->master.getId().equals(i.productId)).findFirst().orElseThrow();
+        assertEquals("PENDING",eighth.publicationState);assertEquals(first.path("articleSourceHash").asText(),added.path("articleSourceHash").asText());
+        var publicBefore=data(mvc.perform(get("/api/storefront/recommendations/"+issue.id)));assertEquals(7,publicBefore.path("items").size());assertFalse(publicBefore.toString().contains("1731065"));assertFalse(publicBefore.toString().contains("EIGHTH"));
+        data(publish(eighth.id,body(getMerchant(),eighth.id,UUID.randomUUID()),token));
+        var second=reviseCurrentArticle("after append");assertTrue(second.path("current").asBoolean());assertEquals(4,second.at("/detail/articleTranslations").size());
+        var publicAfter=data(mvc.perform(get("/api/storefront/recommendations/"+issue.id)));assertEquals(8,publicAfter.path("items").size());assertFalse(publicAfter.toString().contains("1731065"));
+        for(String locale:List.of("ja-JP","zh-CN","zh-TW","en-US"))assertEquals(locale+" short reviewed body after append",publicAfter.path("articleTranslations").path(locale).path("body").asText());
+        for(var saved:publishedRows.entrySet())assertEquals(saved.getValue(),json.writeValueAsString(items.findById(saved.getKey()).orElseThrow()));
+        var after=posts.findById(issue.id).orElseThrow();assertTrue(after.published);assertEquals(originalPost.publishedAt,after.publishedAt);assertEquals(originalPost.createdAt,after.createdAt);
+        var articleHistory=data(mvc.perform(get(path()+"/article-history").header("Authorization","Bearer "+token))).toString();
+        assertTrue(articleHistory.contains("Synthetic source body retained"));assertTrue(articleHistory.contains("short reviewed body before append"));assertTrue(articleHistory.contains("short reviewed body after append"));
+        assertEquals("PENDING",items.findById(pending.id).orElseThrow().publicationState);
+    }
 }

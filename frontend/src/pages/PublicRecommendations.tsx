@@ -1,3 +1,4 @@
+import SafeArticleText from '../components/SafeArticleText';
 import RecommendationBrowse from './RecommendationBrowse';
 import {ConsumerDetail,DetailOffer} from '../components/ConsumerDetail';
 import ReservationAdd from '../components/ReservationAdd';
@@ -73,7 +74,7 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
     </header>
     {(article.missingTitle||article.missingBody)&&<Alert type="info" showIcon message={t(article.sourceKnown?'article.source_fallback':'article.legacy')} description={[article.missingTitle?t('rec.article_title'):'',article.missingBody?t('rec.body'):''].filter(Boolean).join(' · ')}/>}
     {detail.serviceOffer&&<span className="service-kind">{t('service.kind')}</span>}
-    <div className="rec-public-body" id={'rec-body-' + detail.post.id}>{shown.split(/\n\s*\n/).filter(Boolean).map((paragraph, index) => <p key={index}>{paragraph}</p>)}</div>
+    <div className="rec-public-body" id={'rec-body-' + detail.post.id}>{shown.split(/\n\s*\n/).filter(Boolean).map((paragraph, index) => <p key={index} style={{overflowWrap:'anywhere'}}>{!expanded&&truncated?paragraph:<SafeArticleText text={paragraph}/>}</p>)}</div>
     {truncated && <Button type="text" className="rec-expand" aria-expanded={expanded} aria-controls={'rec-body-' + detail.post.id} icon={expanded ? <UpOutlined /> : <DownOutlined />} onClick={() => setExpanded(value => !value)}>{t(expanded ? 'rec.collapse' : 'rec.read_more')}</Button>}
     {!detail.serviceOffer&&<div className="rec-products-heading"><h3>{t('rec.products')} <span>{detail.items.length}</span></h3>{!single && <Link to={'/recommendations/' + detail.post.id+search}>{t('rec.view')} <ArrowRightOutlined /></Link>}</div>}
     {!detail.serviceOffer&&<div className="product-masonry rec-public-products" ref={grid}>{detail.items.map((item, index) => {

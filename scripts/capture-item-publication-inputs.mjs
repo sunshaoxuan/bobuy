@@ -53,6 +53,24 @@ const candidatePaths=[
  'frontend/src/pages/RecommendationsRevisionRace.test.tsx',
  'frontend/src/recommendationPublicationApi.test.ts',
 ];
+const articleInputs=[
+ 'backend/src/main/java/com/bobbuy/api/RecommendationController.java',
+ 'backend/src/main/java/com/bobbuy/service/RecommendationArticleService.java',
+ 'backend/src/main/java/com/bobbuy/service/RecommendationService.java',
+ 'backend/src/test/java/com/bobbuy/api/RecommendationArticleRevisionIntegrationTest.java',
+ 'backend/src/test/java/com/bobbuy/service/RecommendationArticleRevisionTest.java',
+ 'frontend/src/api.ts','frontend/src/components/ArticleLanguages.tsx',
+ 'frontend/src/components/PublishedArticleRevision.test.tsx','frontend/src/components/PublishedArticleRevision.tsx',
+ 'frontend/src/components/SafeArticleText.test.tsx','frontend/src/components/SafeArticleText.tsx',
+ 'frontend/src/locales/en-US.ts','frontend/src/locales/ja-JP.ts','frontend/src/locales/zh-CN.ts','frontend/src/locales/zh-TW.ts',
+ 'frontend/src/main.tsx','frontend/src/pages/LoginPage.test.tsx','frontend/src/pages/PublicRecommendations.tsx',
+ 'frontend/src/pages/RecommendationBrowse.tsx','frontend/src/pages/Recommendations.articleRevision.test.tsx',
+ 'frontend/src/pages/Recommendations.navigation.test.tsx','frontend/src/pages/Recommendations.test.tsx',
+ 'frontend/src/pages/Recommendations.tsx','frontend/src/pages/StoreNavigation.test.tsx',
+ 'docs/reports/ITEM-ARTICLE-INTEGRATION-20261109.md',
+];
+assert.equal(candidatePaths.length,46);
+candidatePaths.push(...articleInputs.filter(path=>!candidatePaths.includes(path)));
 const ciPaths=[
  '.github/workflows/ci.yml','scripts/prepare-ci-release-artifacts.py',
  'scripts/test_prepare_ci_release_artifacts.py','scripts/capture-item-publication-inputs.mjs',
@@ -71,7 +89,7 @@ const canonical=file=>{
 };
 const baseline=JSON.parse(fs.readFileSync(baselinePath,'utf8'));
 assert.equal(baseline.schemaBefore,27);assert.equal(baseline.schemaAfter,28);assert.equal(baseline.migrationChanges,true);
-assert.equal(candidatePaths.length,46);
+assert.equal(new Set(candidatePaths).size,candidatePaths.length);
 const allowed=new Set([...candidatePaths,...ciPaths]);
 for(const entry of baseline.sourceFiles)if(!allowed.has(entry.path)){
  assert.equal(sha(canonical(entry.path)),entry.gitLfSha256,'Unrelated inherited source drift: '+entry.path);
@@ -107,7 +125,7 @@ const baselineBytes=canonical(baselinePath);
 assert.equal(crypto.createHash('sha1').update('blob '+baselineBytes.length+'\0').update(baselineBytes).digest('hex'),
  git(['hash-object','--path='+baselinePath,baselinePath]));
 const manifest={
- candidate:'Item publication V31 precise CI source candidate; test/tool delta runtime pending',
+ candidate:'V31 individual publication plus live bf0 article revision and00e navigation; independent combined runtime pending',
  baseHead:git(['rev-parse','HEAD']),sourceDigestAlgorithm:'sha256-json-utf8-sourceFiles-v1',
  sourceDigest:sha(Buffer.from(JSON.stringify(sourceFiles))),
  lineEndingPolicy:'Exact canonical Git-filtered bytes, cross-checked by git hash-object; excludes self-referential accepted manifest and unrelated protected files.',
@@ -117,7 +135,11 @@ const manifest={
  productionBaselineObserved:{release:'20261109.4',schema:28,
   core:'bf0ca746f2612c797ad2427d6e204007e94fc04b',web:'00e60cd9d5df63e422156a1368508e6b07a757f5',
   evidenceSha256:'a41e3f608f661a3a807915a75540dc8f2553fd85746567b4a09565cad672849d',
-  historicalObservationOnly:true,freshPreflightRequired:true,articleBaselineIntegrationRequired:true},
+  historicalObservationOnly:true,freshPreflightRequired:true,articleBaselineIntegrationRequired:false},
+ retainedLiveArticle:{coreSource:'bf0ca746f2612c797ad2427d6e204007e94fc04b',
+  webSource:'00e60cd9d5df63e422156a1368508e6b07a757f5',
+  exactPriorAppAcceptance:'6fb8b9e635818810552a763afb877be995eadf0307b65c12485f674ef927f3af',
+  integrationSourceOnly:true,combinedIndependentAcceptance:'PENDING',newDirectorySchema28_1Included:false},
  schemaBefore:28,schemaAfter:31,migrationChanges:true,
  migrationBaseline:{path:baselinePath,sha256:sha(baselineBytes)},
  recoveryGate:{status:'UNBOUND_EXACT_V31_AWARE_ARCHIVE_AND_PG_RUNTIME_REQUIRED',oldV28CoreAllowed:false,

@@ -1,10 +1,18 @@
-import {useEffect,useRef,useState} from 'react';
+import {useCallback,useEffect,useRef,useState} from 'react';
 import {Alert,Button,Checkbox,Input,Tabs} from 'antd';
 import {recommendationApi,type RecommendationDetail} from '../api';
 import {useI18n} from '../i18n';
+import PublishedArticleRevision from './PublishedArticleRevision';
 type Draft={title:string;body:string};
 const locales=['ja-JP','zh-CN','zh-TW','en-US'];
-export default function ArticleLanguages({detail,title,body,sourceDirty,disabled,onTitle,onBody,onChanged,onPending}:{detail:RecommendationDetail;title:string;body:string;sourceDirty:boolean;disabled:boolean;onTitle:(v:string)=>void;onBody:(v:string)=>void;onChanged:(v:RecommendationDetail)=>void;onPending:(v:boolean)=>void}){
+type Props={detail:RecommendationDetail;title:string;body:string;sourceDirty:boolean;disabled:boolean;onTitle:(v:string)=>void;onBody:(v:string)=>void;onChanged:(v:RecommendationDetail)=>void|boolean;onPending:(v:boolean)=>void};
+export default function ArticleLanguages(props:Props){
+ const mode=useRef({id:props.detail.post.id,published:false,pending:false});if(mode.current.id!==props.detail.post.id)mode.current={id:props.detail.post.id,published:false,pending:false};
+ const report=useCallback((pending:boolean)=>{mode.current.pending=pending;props.onPending(pending);},[props.onPending]);
+ const published=(props.detail.post.published&&!props.detail.serviceOffer)||(mode.current.published&&mode.current.pending);mode.current.published=published;
+ return published?<PublishedArticleRevision detail={props.detail} disabled={props.disabled} onChanged={props.onChanged} onPending={report}/>:<DraftArticleLanguages {...props} onPending={report}/>;
+}
+function DraftArticleLanguages({detail,title,body,sourceDirty,disabled,onTitle,onBody,onChanged,onPending}:Props){
  const {t}=useI18n();const [locale,setLocale]=useState('ja-JP'),[drafts,setDrafts]=useState<Record<string,Draft>>({}),[reviewed,setReviewed]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState('');
  const [history,setHistory]=useState<Awaited<ReturnType<typeof recommendationApi.articleHistory>>>();const active=useRef(true);
  useEffect(()=>{active.current=true;return()=>{active.current=false;};},[]);

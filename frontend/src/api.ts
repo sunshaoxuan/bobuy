@@ -1033,6 +1033,10 @@ export const recommendationTaxonomyApi = {
     assign:(id:number,input:RecommendationAssignment)=>putJson<RecommendationDetail,RecommendationAssignment>(recommendationBase+'/'+id+'/classification',input)
 };
 export type ArticleText={title:string;body:string;sourceHash:string;reviewedAt:string};
+export type ArticleRevisionLocale='ja-JP'|'zh-CN'|'zh-TW'|'en-US';
+export type ArticleRevisionArticles=Record<ArticleRevisionLocale,{title:string;body:string}>;
+export type ArticleRevisionInput={requestId:string;version:number;sourceHash:string;reviewed:true;articles:ArticleRevisionArticles};
+export type ArticleRevisionReceipt={detail:RecommendationDetail;requestId:string;previousSourceHash:string;articleSourceHash:string;appliedVersion:number;replayed:boolean;current:boolean};
 export type ServiceTerms = {title:string;description:string;eligibility:string;regions:string;restrictions:string;cancellation:string;benefits:string[]};
 export type ServiceFee = {key:string;amount:number|null;descriptions:Record<string,string>};
 export type ServiceOffer = {sourceUrl:string|null;sourceText:string|null;provider:string;staff:number|null;hours:number|null;originalPrice:number|null;price:number|null;currency:'JPY';taxIncluded:boolean;fees:ServiceFee[];noExtraFees:boolean;applicationStart:string|null;applicationEnd:string|null;serviceStart:string|null;serviceEnd:string|null;terms:Record<string,ServiceTerms>;costsReviewed:boolean;windowsReviewed:boolean;reviewed:boolean};
@@ -1068,6 +1072,11 @@ async function recommendationMutation<T>(url:string,body:object):Promise<T> {
     return parseSuccessPayload<T>(response);
 }
 export const recommendationApi = {
+    articleRevision:async(id:number,input:ArticleRevisionInput)=>{
+        const response=await authorizedFetch(recommendationBase+'/'+id+'/article-revision',{method:'PUT',body:JSON.stringify(input)},{withJsonContentType:true});
+        if(!response.ok)throw Object.assign(new Error(await parseErrorMessage(response)),{status:response.status});
+        return parseSuccessPayload<ArticleRevisionReceipt>(response);
+    },
     createService:(offer:ServiceOffer)=>postJson<RecommendationDetail,ServiceOffer>(recommendationBase+'/service-offers',offer),
     saveService:(id:number,offer:ServiceOffer,version:number)=>putJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/service-offer',{offer,version}),
     articleLanguage:(id:number,input:{locale:string;title:string;body:string;sourceHash:string;version:number;reviewed:boolean})=>putJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/article-localizations',input),

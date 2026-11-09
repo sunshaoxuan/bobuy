@@ -1,5 +1,5 @@
 import {act,fireEvent,render,screen,waitFor} from '@testing-library/react';
-import {MemoryRouter} from 'react-router-dom';
+import {createMemoryRouter,RouterProvider} from 'react-router-dom';
 import {I18nProvider,translate} from '../i18n';
 import Recommendations from './Recommendations';
 const m=vi.hoisted(()=>({get:vi.fn(),list:vi.fn(),publishItem:vi.fn(),publish:vi.fn(),save:vi.fn(),products:vi.fn(),fromProduct:vi.fn(),newer:undefined as any}));
@@ -19,7 +19,7 @@ const product={product:{id:'qa-master',name:{'ja-JP':'Synthetic Master','en-US':
 const snapshot=(version:number)=>({...structuredClone(initial),post:{...initial.post,version,published:true},items:[...initial.items,{id:80,name:version===5?'Earlier pending addition':version===6?'Current public revision6':'Accepted legal revision7',imageUrl:'/synthetic.png',publicationState:version===5?'PENDING':'PUBLISHED'}]});
 beforeEach(()=>{vi.resetAllMocks();localStorage.clear();localStorage.setItem('bobbuy_locale','en-US');m.get.mockResolvedValue(structuredClone(initial));m.products.mockResolvedValue([structuredClone(product)]);m.newer=snapshot(6);});
 async function selectDraft(){
- render(<I18nProvider><MemoryRouter initialEntries={['/admin/recommendations?post=9']}><Recommendations/></MemoryRouter></I18nProvider>);
+ const router=createMemoryRouter([{path:'*',element:<Recommendations/>}],{initialEntries:['/admin/recommendations?post=9']});render(<I18nProvider><RouterProvider router={router}/></I18nProvider>);
  await screen.findByRole('option',{name:/QA-123.*Synthetic Master/});
  fireEvent.change(screen.getByRole('combobox',{name:translate('en-US','catalog.select_profile')}),{target:{value:'qa-master'}});
  fireEvent.change(screen.getByLabelText('Local title'),{target:{value:'Keep my article draft'}});

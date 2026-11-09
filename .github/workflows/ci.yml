@@ -216,7 +216,20 @@ jobs:
           -Dspring.jpa.hibernate.ddl-auto=validate
           -Dspring.flyway.enabled=false test
 
-      - name: Retain C2 and item-publication PostgreSQL migration and transaction reports
+      - name: Run retained atomic article revision regressions on the same isolated V31 PostgreSQL
+        env:
+          BOBBUY_ISOLATED_CI_POSTGRES: 'true'
+        run: >-
+          mvn -B --file backend/pom.xml
+          -Dtest=RecommendationArticleRevisionIntegrationTest
+          -Dspring.datasource.url=jdbc:postgresql://127.0.0.1:5432/bobbuy
+          -Dspring.datasource.driver-class-name=org.postgresql.Driver
+          -Dspring.datasource.username=bobbuy
+          -Dspring.datasource.password=bobbuypassword
+          -Dspring.jpa.hibernate.ddl-auto=validate
+          -Dspring.flyway.enabled=true test
+
+      - name: Retain C2, item-publication and atomic article PostgreSQL migration and transaction reports
         if: always()
         uses: actions/upload-artifact@v4
         with:

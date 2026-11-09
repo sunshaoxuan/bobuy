@@ -1,5 +1,5 @@
 import {act,fireEvent,render,screen,waitFor} from '@testing-library/react';
-import {MemoryRouter,useLocation,useNavigate} from 'react-router-dom';
+import {MemoryRouter,createMemoryRouter,RouterProvider,useLocation,useNavigate} from 'react-router-dom';
 import {I18nProvider} from '../i18n';
 import StoreNavigation from '../components/StoreNavigation';
 import PublicRecommendations,{RecommendationPreview} from './PublicRecommendations';
@@ -13,7 +13,8 @@ vi.mock('antd',async()=>{const actual=await vi.importActual<typeof import('antd'
 const detail=(id:number,name:string)=>({post:{id,title:name,published:false,version:1,updatedAt:'',merchantId:id},body:'Synthetic preview',items:[
  {id:1,name:'Multi',itemNumber:'00123',imageUrl:'/fixture.png',categoryIds:['a','b'],categories:[{id:'a',name:{'en-US':'Food'}},{id:'b',name:{'en-US':'Home'}}],showSupplier:false,supplierName:{'en-US':'Hidden supplier'}},
  {id:2,name:'Unclassified',imageUrl:'/fixture.png',categoryIds:[]}]});
-beforeEach(()=>{localStorage.setItem('bobbuy_locale','en-US');vi.clearAllMocks();});
+beforeEach(async()=>{localStorage.setItem('bobbuy_locale','en-US');vi.clearAllMocks();const {transferableAbortController}=await vi.importActual<{transferableAbortController:()=>AbortController}>('node:util');vi.stubGlobal('AbortController',class {constructor(){return transferableAbortController();}});});
+afterEach(()=>{vi.unstubAllGlobals();});
 it('keeps node context in links and exact active state without inventing valid nodes',()=>{
  expect(selectedNode('?node=1000')).toBe(1000);expect(selectedNode('?node=oops')).toBe(-1);expect(selectedNode('')).toBeUndefined();
  expect(scopedPath('/trips','?node=1000&category=a')).toBe('/trips?node=1000');
@@ -35,7 +36,8 @@ function RaceHarness(){const navigate=useNavigate(),location=useLocation();retur
 it('clears prior node immediately and ignores a stale response, then restores browser back',async()=>{
  let resolveA!:(value:unknown)=>void;const first=new Promise(resolve=>{resolveA=resolve;});
  mocks.feed.mockImplementation((_page,node)=>node===1?first:Promise.resolve([detail(2,'Node B issue')]));
- render(<I18nProvider><MemoryRouter initialEntries={['/recommendations?node=1']}><RaceHarness/></MemoryRouter></I18nProvider>);
+ const router=createMemoryRouter([{path:'*',element:<RaceHarness/>}],{initialEntries:['/recommendations?node=1']});
+ render(<I18nProvider><RouterProvider router={router}/></I18nProvider>);
  fireEvent.click(screen.getByRole('button',{name:'Node B'}));await screen.findAllByRole('button',{name:'Node B issue'});
  await act(async()=>resolveA([detail(1,'Stale A')]));expect(screen.queryAllByRole('button',{name:'Stale A'})).toHaveLength(0);
  fireEvent.click(screen.getByRole('button',{name:'Back'}));await screen.findAllByRole('button',{name:'Stale A'});
