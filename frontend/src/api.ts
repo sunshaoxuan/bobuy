@@ -159,6 +159,11 @@ export type MobileSupplier = {
     contactInfo?: string;
     onboardingRules?: Record<string, any>;
 };
+export type CostcoOnboardingJobView = {
+ id:string;state:'QUEUED'|'AI_INTAKE'|'EVIDENCE_FETCH'|'AI_REVIEW'|'COMMITTING'|'COMPLETED'|'NEEDS_INPUT'|'RETRY_WAIT'|'FAILED'|'CANCELLED';
+ revision:number;itemNumber?:string;productId?:string;productVersion?:number;failureCode?:string;stage?:string;
+ candidate?:{itemNumber:string;brand?:string;name:string;model?:string;specification?:string;packaging?:string;translatedNames:Record<string,string>;referencePrices?:{kind:string;amount:number|string;currency:string;channel?:string;taxStatus?:string;quantityBasis?:string;validFrom?:string;validUntil?:string;timeZone?:string;conditions?:string;sourceUrl:string;sourceSha256:string}[]};
+};
 
 export type MobileProductResponse = {
         product: {
@@ -854,6 +859,7 @@ async function parseErrorMessage(response: Response): Promise<string> {
             return translate(getStoredLocale(), 'maintenance.title');
         }
         if (payload?.message) {
+            if(payload.message.startsWith('onboarding.'))return translate(getStoredLocale(),payload.message);
             return payload.message;
         }
     } catch {
@@ -1103,6 +1109,16 @@ export const recommendationApi = {
 };
 
 export const api = {
+    costcoOnboarding:{
+        status:()=>fetchJson<{workerEnabled:boolean}>('/api/ai/costco-onboarding/status',{workerEnabled:false}),
+        number:(input:{requestId:string;supplierId:string;market:string;itemNumber:string})=>postJson<CostcoOnboardingJobView,typeof input>('/api/ai/costco-onboarding',input),
+        photo:async(input:{requestId:string;supplierId:string;market:string},file:File)=>{
+            const body=new FormData();body.set('requestId',input.requestId);body.set('supplierId',input.supplierId);body.set('market',input.market);body.set('file',file);
+            const response=await authorizedFetch('/api/ai/costco-onboarding/photo',{method:'POST',body});if(!response.ok)throw new Error(await parseErrorMessage(response));return parseSuccessPayload<CostcoOnboardingJobView>(response);
+        },
+        list:()=>fetchJson<CostcoOnboardingJobView[]>('/api/ai/costco-onboarding',[]),
+        get:(id:string)=>fetchJson<CostcoOnboardingJobView>('/api/ai/costco-onboarding/'+encodeURIComponent(id),null as unknown as CostcoOnboardingJobView)
+    },
     auth: {
         register: (payload: { username: string; password: string; email: string }) =>
             postJson<AuthSessionResponse, typeof payload>('/api/auth/register', payload, { includeAccessToken: false, retryOnUnauthorized: false }),

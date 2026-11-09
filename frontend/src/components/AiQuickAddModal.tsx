@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import { Modal, Upload, Button, Steps, Result, Spin, message, Space, Typography, Alert, Card, Divider, Progress, Form, Input, InputNumber, Row, Col } from 'antd';
 import type { RcFile } from 'antd/es/upload';
 import { CameraOutlined, UploadOutlined, FileSearchOutlined, GlobalOutlined, CheckCircleOutlined, PictureOutlined, InfoCircleOutlined } from '@ant-design/icons';
-import { api, type AiOnboardingSuggestion } from '../api';
+import { api, type AiOnboardingSuggestion,type CostcoOnboardingJobView } from '../api';
 import { useI18n } from '../i18n';
 import AttributeDiffTable from './AttributeDiffTable';
 
@@ -13,9 +13,10 @@ interface AiQuickAddModalProps {
   visible: boolean;
   onCancel: () => void;
   onSuccess: (suggestion: AiOnboardingSuggestion) => void;
+  durable?:{ready:boolean;enqueuePhoto:(file:File)=>Promise<CostcoOnboardingJobView>;onQueued:(job:CostcoOnboardingJobView)=>void};
 }
 
-const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, onSuccess }) => {
+const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, onSuccess,durable }) => {
   const { t } = useI18n();
   const [currentStep, setCurrentStep] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -23,6 +24,8 @@ const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, on
 
   const [suggestion, setSuggestion] = useState<AiOnboardingSuggestion | null>(null);
   const [scanError, setScanError] = useState<string | null>(null);
+  const [queuedJob,setQueuedJob]=useState<CostcoOnboardingJobView>();
+  const queuePending=useRef(false);
   const [form] = Form.useForm();
   const lowConfidence = (suggestion?.matchScore ?? 100) < 70;
   const historicalImage = suggestion?.verificationTarget?.mediaGallery?.find((item) => item.type === 'IMAGE' || item.type === 'image')?.url;
@@ -35,11 +38,19 @@ const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, on
       setFileList([]);
       setSuggestion(null);
       setScanError(null);
+      setQueuedJob(undefined);
       form.resetFields();
     }
   }, [visible, form]);
 
   const handleUpload = (file: RcFile) => {
+    if(durable){
+      if(!durable.ready||queuePending.current||queuedJob)return false;
+      queuePending.current=true;
+      setLoading(true);setScanError(null);
+      durable.enqueuePhoto(file).then(job=>{setQueuedJob(job);durable.onQueued(job);}).catch(error=>setScanError(error instanceof Error?error.message:t('onboarding.retry_attempt'))).finally(()=>{queuePending.current=false;setLoading(false);});
+      return false;
+    }
     setLoading(true);
     setCurrentStep(1);
 
@@ -173,6 +184,14 @@ const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, on
   ];
   const stageByStep = ['UPLOAD', 'SCANNING', 'RESEARCHING', 'ENRICHING', 'SUCCESS'] as const;
 
+  if(durable)return <Modal title={t('stock.ai_quick_add.title')} open={visible} onCancel={loading?undefined:onCancel} footer={null} destroyOnClose>
+    {!durable.ready&&<Alert type="info" message={t('onboarding.choose_supplier')}/>}
+    {scanError&&<Alert type="warning" message={scanError}/>}
+    <Upload accept="image/png,image/jpeg" beforeUpload={handleUpload} showUploadList={false} disabled={!durable.ready||loading||!!queuedJob}>
+      <Button icon={<CameraOutlined/>} loading={loading} disabled={!durable.ready||!!queuedJob}>{t('stock.master.quick_snap')}</Button>
+    </Upload>
+    {queuedJob&&<Alert type="success" message={t('onboarding.queued')} description={t('onboarding.state.'+queuedJob.state)}/>}
+  </Modal>;
   return (
     <Modal
       title={t('stock.ai_quick_add.title')}
