@@ -26,6 +26,7 @@ const candidatePaths=[
  'backend/src/test/java/com/bobbuy/api/RecommendationClassificationTest.java',
  'backend/src/test/java/com/bobbuy/api/RecommendationCommerceTest.java',
  'backend/src/test/java/com/bobbuy/api/RecommendationIntegrationTest.java',
+ 'backend/src/test/java/com/bobbuy/api/RecommendationNodeTest.java',
  'backend/src/test/java/com/bobbuy/api/RecommendationItemPublicationIntegrationTest.java',
  'backend/src/test/java/com/bobbuy/api/RecommendationPublicationMigrationIntegrationTest.java',
  'backend/src/test/java/com/bobbuy/service/PublicBrowseProjectionCompatibilityTest.java',
@@ -33,6 +34,7 @@ const candidatePaths=[
  'backend/src/test/java/com/bobbuy/service/PublicProductCatalogProjectionTest.java',
  'backend/src/test/java/com/bobbuy/service/PublicProductCatalogServiceTest.java',
  'backend/src/test/java/com/bobbuy/service/RecommendationItemPublicationTest.java',
+ 'backend/src/test/java/com/bobbuy/service/ReferenceQuoteTest.java',
  'backend/src/test/java/com/bobbuy/test/RecommendationPublicationFixtures.java',
  'docs/reports/RECOMMENDATION-ITEM-PUBLICATION-BACKEND-20261109.md',
  'docs/reports/RECOMMENDATION-ITEM-PUBLICATION-FRONTEND-20261109.md',
@@ -69,7 +71,7 @@ const canonical=file=>{
 };
 const baseline=JSON.parse(fs.readFileSync(baselinePath,'utf8'));
 assert.equal(baseline.schemaBefore,27);assert.equal(baseline.schemaAfter,28);assert.equal(baseline.migrationChanges,true);
-assert.equal(candidatePaths.length,44);
+assert.equal(candidatePaths.length,46);
 const allowed=new Set([...candidatePaths,...ciPaths]);
 for(const entry of baseline.sourceFiles)if(!allowed.has(entry.path)){
  assert.equal(sha(canonical(entry.path)),entry.gitLfSha256,'Unrelated inherited source drift: '+entry.path);
@@ -91,7 +93,7 @@ const migrations=sourceFiles.filter(entry=>entry.path.startsWith(migrationRoot))
 assert.deepEqual(migrations.filter(entry=>entry.path!=='V31__recommendation_item_publication.sql'),baseline.migrations);
 assert.equal(migrations.length,baseline.migrations.length+1);
 assert.equal(migrations.find(entry=>entry.path==='V31__recommendation_item_publication.sql').sha256,
- 'a291fbe1edc4c2645cc87f932cb68feff71e1a3d20e9ca8f173842ca45e75312');
+ 'db1a7f96ea5017fabfadd5f52809fe0357816da6433ebb31d723deac900773a7');
 assert.ok(!migrations.some(entry=>/^V(?:29|30)__/.test(entry.path)));
 const required=new Set(baseline.requiredBackendClasses);
 for(const file of candidatePaths.filter(file=>file.startsWith('backend/src/main/java/')&&file.endsWith('.java'))){
@@ -111,7 +113,11 @@ const manifest={
  lineEndingPolicy:'Exact canonical Git-filtered bytes, cross-checked by git hash-object; excludes self-referential accepted manifest and unrelated protected files.',
  sourceFiles,migrations,requiredBackendClasses,acceptedBackendClasses:null,
  compiledByteAcceptance:'PENDING_INDEPENDENT_ARTIFACT_QA',frontendFiles:null,
- previousProductionCoreJarSha256:'00642cb993516e072e4e416e1d579f8f6d2ef55ae668715828475b808aec276c',
+ previousProductionCoreJarSha256:'4475712c830410b082720df1085f18e7e9b14e3a19cb899aba72c8580693c7ec',
+ productionBaselineObserved:{release:'20261109.4',schema:28,
+  core:'bf0ca746f2612c797ad2427d6e204007e94fc04b',web:'00e60cd9d5df63e422156a1368508e6b07a757f5',
+  evidenceSha256:'a41e3f608f661a3a807915a75540dc8f2553fd85746567b4a09565cad672849d',
+  historicalObservationOnly:true,freshPreflightRequired:true,articleBaselineIntegrationRequired:true},
  schemaBefore:28,schemaAfter:31,migrationChanges:true,
  migrationBaseline:{path:baselinePath,sha256:sha(baselineBytes)},
  recoveryGate:{status:'UNBOUND_EXACT_V31_AWARE_ARCHIVE_AND_PG_RUNTIME_REQUIRED',oldV28CoreAllowed:false,
@@ -126,7 +132,12 @@ const manifest={
   committedReport:'docs/reports/ITEM-PUBLICATION-CI-20261109.md'},
 };
 fs.mkdirSync('docs/reports/item-publication-20261109',{recursive:true});
-fs.writeFileSync(target,JSON.stringify(manifest,null,2)+'\n',{flag:'wx'});
+const replacement=process.argv.find(arg=>arg.startsWith('--replace-expected='))?.slice('--replace-expected='.length);
+if(replacement){
+ assert.match(replacement,/^[0-9a-f]{64}$/);
+ assert.equal(sha(fs.readFileSync(target)),replacement,'Previous accepted manifest changed; do not overwrite');
+}
+fs.writeFileSync(target,JSON.stringify(manifest,null,2)+'\n',{flag:replacement?'w':'wx'});
 console.log(JSON.stringify({path:target,sha256:sha(fs.readFileSync(target)),sourceDigest:manifest.sourceDigest,
  sourceFiles:sourceFiles.length,requiredBackendClasses:requiredBackendClasses.length,migrations:migrations.length,
  schema:'28 -> 31',recovery:manifest.recoveryGate.status,productionPublishAllowed:false}));

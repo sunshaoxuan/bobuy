@@ -156,6 +156,58 @@ class RecommendationItemPublicationTest {
         assertDoesNotThrow(()->json.readValue(valid+"}",RecommendationController.ItemPublication.class));
         for(String field:List.of("merchantId","userId","publicationState","publishedBy"))assertThrows(Exception.class,()->json.readValue(valid+",\""+field+"\":1000}",RecommendationController.ItemPublication.class));
     }
+    @Test void syntheticLegacyCutoverKeepsTheAlreadyVisibleCartonAndOnlyPublishesTheLaterRecipeInItsNewIssue()throws Exception{
+        var p8=post(8);var original=item(p8,271,"SYNTHETIC-CARTON");var master=productRows.get(original.productId);
+        original.name="Synthetic source bottle name";original.specification="Original synthetic bottle wording";
+        original.originalPrice=new BigDecimal("12");original.discountAmount=new BigDecimal("2");original.offerNotes="Synthetic tax included; original offer conditions";
+        master.getName().replaceAll((locale,name)->"Confirmed synthetic carton");master.setBrand("Confirmed synthetic brand");refreshTranslations(master);
+        original.offerIdentity=quotes.identity(original);String sourceHash=RecommendationPublication.candidate(original,null).reviewHash();
+        var sourceBefore=json.valueToTree(RecommendationPublication.candidate(original,null));
+        // Fixed82's public path copied the source, then applied the same-owner catalog projection.
+        var old82=new RecommendationItem();old82.id=original.id;old82.postId=original.postId;old82.productId=original.productId;
+        old82.name=original.name;old82.itemNumber=original.itemNumber;old82.specification=original.specification;old82.description=original.description;
+        old82.translations=new TreeMap<>(original.translations);old82.translatedSource=original.translatedSource;old82.gallery=List.copyOf(original.gallery);
+        old82.referencePrice=original.referencePrice;old82.originalPrice=original.originalPrice;old82.discountAmount=original.discountAmount;old82.priceUnit=original.priceUnit;
+        old82.offerStart=original.offerStart;old82.offerEnd=original.offerEnd;old82.couponStart=original.couponStart;old82.couponEnd=original.couponEnd;
+        old82.referenceContext=original.referenceContext;old82.offerNotes=original.offerNotes;old82.imageHash=original.imageHash;old82.imageUrl=original.imageUrl;
+        old82.categoryIds=List.copyOf(original.categoryIds);old82.supplierId=original.supplierId;old82.showSupplier=original.showSupplier;
+        assertEquals(p8.merchantId,master.getMerchantId());ProductCatalogProjection.apply(old82,original,master);
+        old82.imageHash=null;old82.imageUrl=old82.gallery.isEmpty()?null:old82.gallery.get(0).url();
+        assertEquals("24 cartons of 200ml",old82.specification);assertEquals("Confirmed synthetic carton",old82.name);assertEquals("Confirmed synthetic brand",old82.brand);assertFalse(old82.gallery.isEmpty());
+        // Negative control: the former catalog=null migration re-exposed the old source.
+        var formerCutover=RecommendationPublication.project(original,RecommendationPublication.candidate(original,null));
+        assertEquals("Original synthetic bottle wording",formerCutover.specification);
+        assertNotEquals(old82.specification,formerCutover.specification);assertNotEquals(old82.gallery,formerCutover.gallery);
+        // Synthetic equivalent of the SQL cutover copy: original review/version remains unknown.
+        var cutover=(com.fasterxml.jackson.databind.node.ObjectNode)json.valueToTree(RecommendationPublication.candidate(original,master));
+        cutover.put("legacy",true).putNull("productVersion").putNull("productSourceHash").putNull("reviewHash");
+        cutover.put("legacyDisplayProductVersion",2L).put("legacyDisplayProvenance","VISIBLE_AT_V31_CUTOVER");
+        original.publicationSnapshot=json.treeToValue(cutover,RecommendationPublicationSnapshot.class);original.publicationState="PUBLISHED";
+        original.publishedAt=Instant.parse("2026-01-01T00:00:00Z");original.publishedBy=1000L;p8.published=true;p8.publishedAt=original.publishedAt;p8.publisherId=1000L;p8.publisherName="Synthetic cutover publisher";
+        byte[] frozen=json.writeValueAsBytes(original.publicationSnapshot);var shown=service.publicGet(8L,null).items().get(0);
+        assertEquals(old82.name,shown.name);assertEquals(old82.specification,shown.specification);assertEquals(old82.brand,shown.brand);assertEquals(old82.gallery,shown.gallery);assertEquals(old82.imageUrl,shown.imageUrl);
+        assertNull(original.publicationSnapshot.productVersion());assertNull(original.publicationSnapshot.productSourceHash());assertNull(original.publicationSnapshot.reviewHash());
+        assertEquals(Long.valueOf(2),original.publicationSnapshot.legacyDisplayProductVersion());assertEquals("VISIBLE_AT_V31_CUTOVER",original.publicationSnapshot.legacyDisplayProvenance());
+        assertNull(shown.publicationProductVersion);assertTrue(shown.publicationLegacy);assertEquals(sourceBefore,json.valueToTree(RecommendationPublication.candidate(original,null)));
+        // A real recipe change belongs to the later issue, not to the earlier cutover occurrence.
+        master.setRecordVersion(3L);master.getName().replaceAll((locale,name)->"Synthetic recipe v3 carton");master.setBrand("Synthetic recipe v3 brand");
+        var specs=new HashMap<>(master.getCatalogData().specification());specs.replaceAll((locale,spec)->"12 cartons of synthetic new recipe 250ml");
+        master.setCatalogData(new ProductCatalogData(specs,"Synthetic model v3","12 cartons",List.of(),null,null,1000L,Instant.parse("2026-02-01T00:00:00Z")));
+        var image=new MediaGalleryItem("/api/storefront/recommendation-images/synthetic-v3",MediaType.IMAGE,Map.of("ja-JP","Synthetic recipe v3"),true,"https://www.costco.co.jp/synthetic-v3.jpg","www.costco.co.jp","OFFICIAL_PRODUCT");image.setSha256("c".repeat(64));master.setMediaGallery(new ArrayList<>(List.of(image)));refreshTranslations(master);
+        var storedImage=new RecommendationImage();storedImage.id="synthetic-v3";storedImage.merchantId=1000L;storedImage.imageHash="c".repeat(64);storedImage.accessScope="PUBLIC";imageRows.put(storedImage.id,storedImage);
+        var p9=post(9);var next=new RecommendationItem();next.id=272L;next.postId=p9.id;next.productId=master.getId();next.itemNumber=master.getItemNumber();next.name="Synthetic recipe v3 source";next.specification="Synthetic recipe v3 source pack";
+        next.referencePrice=new BigDecimal("20");next.priceUnit=original.priceUnit;next.offerStart=original.offerStart;next.offerEnd=original.offerEnd;
+        next.referenceContext=new ReferenceOfferContext("COSTCO","COSTCO_ONLINE","recipe-v3-SYNTHETIC-CARTON","synthetic-recipe-message-9","https://www.costco.co.jp/source/9",null,null,false,null,true);next.offerIdentity=quotes.identity(next);itemRows.put(next.id,next);
+        assertEquals("PENDING",next.publicationState);assertNull(next.publicationSnapshot);assertThrows(ApiException.class,()->service.publicGet(9L,null));
+        assertTrue(service.publicBrowseEntries(null).stream().flatMap(detail->detail.items().stream()).noneMatch(row->row.id.equals(next.id)));
+        var browse=new PublicRecommendationBrowseService(service);assertEquals(0,browse.page(0,null,9L,"en-US","all","","",null).scopeTotal());
+        var beforePublish=catalog.page(0,null).items().get(0);assertEquals(old82.name,beforePublish.name().get("ja-JP"));assertEquals(old82.specification,beforePublish.specification().get("ja-JP"));assertEquals(old82.gallery,beforePublish.gallery());assertTrue(beforePublish.referenceOffers().stream().noneMatch(offer->offer.postId().equals(9L)));
+        publish(p9,next);var later=service.publicGet(9L,null).items().get(0);assertEquals("Synthetic recipe v3 carton",later.name);assertEquals("12 cartons of synthetic new recipe 250ml",later.specification);assertEquals("Synthetic recipe v3 brand",later.brand);assertEquals(image.getUrl(),later.gallery.get(0).url());assertEquals(Long.valueOf(3),later.publicationProductVersion);assertEquals(0,new BigDecimal("20").compareTo(later.referencePrice));
+        var retained=service.publicGet(8L,null).items().get(0);assertEquals(old82.name,retained.name);assertEquals(old82.specification,retained.specification);assertEquals(old82.brand,retained.brand);assertEquals(old82.gallery,retained.gallery);assertEquals(old82.imageUrl,retained.imageUrl);
+        assertEquals(0,BigDecimal.TEN.compareTo(retained.referencePrice));assertEquals(0,BigDecimal.TEN.compareTo(retained.referenceQuote.amount()));assertEquals(original.originalPrice,retained.originalPrice);assertEquals(original.discountAmount,retained.discountAmount);assertEquals(original.priceUnit,retained.priceUnit);assertEquals(original.offerNotes,retained.offerNotes);assertEquals(original.referenceContext.channel(),retained.referenceContext.channel());assertEquals(original.referenceContext.sourceUrl(),retained.referenceContext.sourceUrl());assertEquals(original.offerStart,retained.offerStart);assertEquals(original.offerEnd,retained.offerEnd);
+        assertArrayEquals(frozen,json.writeValueAsBytes(original.publicationSnapshot));assertEquals(sourceBefore,json.valueToTree(RecommendationPublication.candidate(original,null)));assertEquals(sourceHash,RecommendationPublication.candidate(original,null).reviewHash());assertEquals(quotes.identity(original),original.offerIdentity);
+        assertEquals("Synthetic source bottle name",original.name);assertEquals("Original synthetic bottle wording",original.specification);assertEquals("b".repeat(64),original.imageHash);assertEquals("/api/storefront/recommendation-images/source-SYNTHETIC-CARTON",original.imageUrl);
+    }
     @Test void legacyVersionRemainsUnknownAndStoredIssueFactsBeatAnUnrelatedCurrentMaster()throws Exception{
         var p=post(8);var i=item(p,271,"47506");var node=json.valueToTree(RecommendationPublication.candidate(i,null));
         ((com.fasterxml.jackson.databind.node.ObjectNode)node).put("legacy",true).putNull("reviewHash");

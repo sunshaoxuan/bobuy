@@ -86,3 +86,31 @@ Three other test fixtures are aligned with real authenticated workflows: node po
 Real isolated PG from CI42647734584 contains34 unique XML methods:32 PASS/1 FAIL/1 ERROR,0 skipped. C1/C2 29 pass and V28->V31 migration2 genuinely pass. All38 old-table column fingerprints/history prefix are unchanged, only8 item columns added. V31 proof bytes31ab59e2408158880a69e7da43af8272562ee97317e11b1ca52861598025403a were captured before synthetic cleanup. API3 then had concurrency PASS plus the two fixture failures above; recovery2 was skipped. Supporting ZIP13688881651 is not a formal release artifact.
 
 All7 fix2 source files are frozen with owner manifests. No local Java/javac/H2/PG/JVM/Docker/service ran for these new sources; their runtime acceptance is NOT_RUN pending the next exact remote CI. Earlier unchanged FE and migration subset evidence is reused only within its exact scope, not promoted to a full new backend/PG pass. The61 required class names,28 SQL files, V28->V31 transition and UNBOUND recovery policy remain exact. Old V28 is still not a recovery target; exact aware-JAR/archive runtime proof or controlled maintenance/forward correction remains mandatory. No production action or deployment is authorised here.
+
+## Visible-at-cutover correction
+
+The resumed eight-file patch starts at 3fdd94b3, with all paused evidence retained.
+The previous legacy migration copied only source text/gallery, although the V28 public
+projection already displayed the confirmed same-owner master correction. That would
+silently turn the confirmed carton specification/gallery back into obsolete source copy.
+V31 now retains that already-visible metadata in the immutable occurrence snapshot,
+with explicit `VISIBLE_AT_V31_CUTOVER` provenance and its cutover product version.
+The original publication-time master version/review remain UNKNOWN. Source facts,
+offer amounts, tax/unit/channel/windows, sourceHash, original images and associations
+are unchanged; no live price/stock is copied. Unlinked, deleted and foreign masters are
+not borrowed. Subsequent recipe/packaging changes require a separate reviewed occurrence
+and cannot rewrite the earlier snapshot. Draft posts and newly added rows remain PENDING.
+
+The pure regression includes the former catalog=null negative control and checks the
+confirmed carton/gallery, frozen source, later recipe isolation, pending public feed/
+catalog exclusion and independent publication. The existing isolated PG migration class
+now has three methods: complete old-column/history preservation, unknown-shape rejection,
+and later recipe/pending isolation. The recovery class remains two rollback-only methods.
+These new Java/PG methods require the exact new CI; prior green runs are not substituted.
+
+Manifest replacement requires the exact previous file SHA, retaining independent review
+and all runtime/recovery gates as pending. This is a V31 source candidate, not a production
+release: current production is 20261109.4 / bf0 core / 00e web / V28, with live article
+editing and content changes. Those application changes must be integrated and protected
+before any later production release; the independent frozen 48433bd7/V28.1 package is
+not changed or included here. PENDING-aware archived application recovery remains UNBOUND.

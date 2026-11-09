@@ -36,14 +36,14 @@ public final class RecommendationPublication {
             item.name,item.itemNumber,item.specification,item.description,new TreeMap<>(item.translations),item.translatedSource,
             item.referencePrice,item.originalPrice,item.discountAmount,item.priceUnit,item.offerStart,item.offerEnd,item.couponStart,item.couponEnd,
             item.offerNotes,item.referenceContext,List.copyOf(item.gallery),List.copyOf(item.categoryIds),item.supplierId,item.showSupplier,
-            item.imageHash,item.imageUrl,item.offerIdentity,catalog);
+            item.imageHash,item.imageUrl,item.offerIdentity,catalog,null,null);
         String reviewHash=hash(Arrays.asList("recommendation-item-review-v1",item.id,item.postId,item.productId,content));
         // Serialize/deserialize once to detach mutable nested media/maps from the live master.
         try{return JSON.readValue(JSON.writeValueAsBytes(new RecommendationPublicationSnapshot(content.version(),false,content.productVersion(),content.productSourceHash(),reviewHash,
             content.name(),content.itemNumber(),content.specification(),content.description(),content.translations(),content.translatedSource(),
             content.referencePrice(),content.originalPrice(),content.discountAmount(),content.priceUnit(),content.offerStart(),content.offerEnd(),content.couponStart(),content.couponEnd(),
             content.offerNotes(),content.referenceContext(),content.gallery(),content.categoryIds(),content.supplierId(),content.showSupplier(),
-            content.imageHash(),content.imageUrl(),content.offerIdentity(),content.catalog())),RecommendationPublicationSnapshot.class);}
+            content.imageHash(),content.imageUrl(),content.offerIdentity(),content.catalog(),null,null)),RecommendationPublicationSnapshot.class);}
         catch(Exception e){throw new IllegalStateException("Cannot retain publication snapshot",e);}
     }
     public static RecommendationItem project(RecommendationItem identity,RecommendationPublicationSnapshot s) {

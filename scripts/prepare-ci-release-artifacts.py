@@ -88,7 +88,7 @@ def checkout_migration_acceptance(content):
 def publication_migration_acceptance(content):
     # Exact source-QA migration, canonical Git LF bytes. New SQL requires a new review.
     canonical = content.decode('utf-8').replace('\r\n', '\n').encode('utf-8')
-    if hashlib.sha256(canonical).hexdigest() != 'a291fbe1edc4c2645cc87f932cb68feff71e1a3d20e9ca8f173842ca45e75312':
+    if hashlib.sha256(canonical).hexdigest() != 'db1a7f96ea5017fabfadd5f52809fe0357816da6433ebb31d723deac900773a7':
         raise RuntimeError('V31 publication migration differs from its exact reviewed bytes')
 
 

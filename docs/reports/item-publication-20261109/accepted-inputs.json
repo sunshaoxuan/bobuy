@@ -1,8 +1,8 @@
 {
-  "candidate": "Item publication V31 fix2: retain historical quote source identity; real publication fixture corrections",
-  "baseHead": "61934df5e5469d0e841606c637518cb852e909cd",
+  "candidate": "Item publication V31 precise CI source candidate; test/tool delta runtime pending",
+  "baseHead": "3fdd94b3c57061aa9e41dc43e09dc21ef948a0a8",
   "sourceDigestAlgorithm": "sha256-json-utf8-sourceFiles-v1",
-  "sourceDigest": "599a8bace3755c665e46ab5c59b57b18e20b79b42763a948f42424d19fd672f8",
+  "sourceDigest": "83f3c03553b73487736fb5c4fde9ec4ab2a33f96acfe9efcc46dcce4462d7864",
   "lineEndingPolicy": "Exact canonical Git-filtered bytes, cross-checked by git hash-object; excludes self-referential accepted manifest and unrelated protected files.",
   "sourceFiles": [
     {
@@ -747,8 +747,8 @@
     },
     {
       "path": "backend/src/main/java/com/bobbuy/model/RecommendationPublicationSnapshot.java",
-      "gitLfBytes": 1001,
-      "gitLfSha256": "41337fe01ab47138a6efa43f170c9af89b0f388ab35bdba6c7ce781c4ecc4ae5"
+      "gitLfBytes": 1150,
+      "gitLfSha256": "d097fe6380ab43f0dcee7ed6d0fe242645d5d7e04c83673bfdd7ececf695de7a"
     },
     {
       "path": "backend/src/main/java/com/bobbuy/model/RecommendationServiceOffer.java",
@@ -1347,8 +1347,8 @@
     },
     {
       "path": "backend/src/main/java/com/bobbuy/service/RecommendationPublication.java",
-      "gitLfBytes": 8680,
-      "gitLfSha256": "b17ef8e9a978d10431db44639e60223793815d6f7cf2f168bb4c2faa99bc3df5"
+      "gitLfBytes": 8700,
+      "gitLfSha256": "2332d0291e080676777de7b41807a4f753dc6dcfbd49d4006a501ae876005f30"
     },
     {
       "path": "backend/src/main/java/com/bobbuy/service/RecommendationService.java",
@@ -1582,8 +1582,8 @@
     },
     {
       "path": "backend/src/main/resources/db/migration/V31__recommendation_item_publication.sql",
-      "gitLfBytes": 3333,
-      "gitLfSha256": "a291fbe1edc4c2645cc87f932cb68feff71e1a3d20e9ca8f173842ca45e75312"
+      "gitLfBytes": 4260,
+      "gitLfSha256": "db1a7f96ea5017fabfadd5f52809fe0357816da6433ebb31d723deac900773a7"
     },
     {
       "path": "backend/src/main/resources/db/migration/V3__product_attributes_jsonb.sql",
@@ -1797,13 +1797,13 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/RecommendationPublicationMigrationIntegrationTest.java",
-      "gitLfBytes": 16949,
-      "gitLfSha256": "8138654d5f4b582626031f64cb1f2e84e80a85526179ab95fcea567cc8b2fa3b"
+      "gitLfBytes": 29436,
+      "gitLfSha256": "7f8df5c12f966774685404cb25b3db457d51997108d2acb55638095ca5d1ed8b"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/RecommendationPublicationRecoveryIntegrationTest.java",
-      "gitLfBytes": 25367,
-      "gitLfSha256": "3d36ded73ec00955be6b12987f49aec83b11646219ef9627ac5bfaf790f69c6b"
+      "gitLfBytes": 25377,
+      "gitLfSha256": "2834be95724d278a5705ecd125fb692bf2bdadb38b8dcfe0bad5362eed473779"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/RequestMetricsServiceTest.java",
@@ -2057,8 +2057,8 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/service/RecommendationItemPublicationTest.java",
-      "gitLfBytes": 21036,
-      "gitLfSha256": "1f56933785b7efd4a3d8a9f7efb9f55c58e4bd59bbb6b1abced9302e3dc8e0f8"
+      "gitLfBytes": 30336,
+      "gitLfSha256": "868092c872097f531ea28567d7605a5779c59811d5efd9647b61ae3e9a6b99cf"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/service/RecommendationSourceImageTest.java",
@@ -2152,8 +2152,8 @@
     },
     {
       "path": "docs/reports/ITEM-PUBLICATION-CI-20261109.md",
-      "gitLfBytes": 10740,
-      "gitLfSha256": "4e416d676862b4806f709ad0ba1d18dba03778c4b751c0707c5702c2a2afd471"
+      "gitLfBytes": 12785,
+      "gitLfSha256": "59353b430d754ced16fbfd2f8484b9f2a1b36f184c510dae9db3786e44673d23"
     },
     {
       "path": "docs/reports/RECOMMENDATION-ITEM-PUBLICATION-BACKEND-20261109.md",
@@ -3437,13 +3437,13 @@
     },
     {
       "path": "scripts/capture-item-publication-inputs.mjs",
-      "gitLfBytes": 9216,
-      "gitLfSha256": "e7b6abea3d76e8869405fb1ff3bc3fa85df514ec2d13cced109771e18179f77b"
+      "gitLfBytes": 10011,
+      "gitLfSha256": "5252652962770aeb0bb4cd68cab9df78b950559f301a1afe70b409b280c3546e"
     },
     {
       "path": "scripts/prepare-ci-release-artifacts.py",
       "gitLfBytes": 12822,
-      "gitLfSha256": "dc0860e741764031cfb290581cea500a226a26108520097c30b28d190a04ec9e"
+      "gitLfSha256": "f8343e42990654bc0308de523e816ea343e19a691b2932680285046c680e1028"
     },
     {
       "path": "scripts/test_prepare_ci_release_artifacts.py",
@@ -3569,8 +3569,8 @@
     },
     {
       "path": "V31__recommendation_item_publication.sql",
-      "bytes": 3333,
-      "sha256": "a291fbe1edc4c2645cc87f932cb68feff71e1a3d20e9ca8f173842ca45e75312"
+      "bytes": 4260,
+      "sha256": "db1a7f96ea5017fabfadd5f52809fe0357816da6433ebb31d723deac900773a7"
     },
     {
       "path": "V3__product_attributes_jsonb.sql",
@@ -3669,7 +3669,17 @@
   "acceptedBackendClasses": null,
   "compiledByteAcceptance": "PENDING_INDEPENDENT_ARTIFACT_QA",
   "frontendFiles": null,
-  "previousProductionCoreJarSha256": "00642cb993516e072e4e416e1d579f8f6d2ef55ae668715828475b808aec276c",
+  "previousProductionCoreJarSha256": "4475712c830410b082720df1085f18e7e9b14e3a19cb899aba72c8580693c7ec",
+  "productionBaselineObserved": {
+    "release": "20261109.4",
+    "schema": 28,
+    "core": "bf0ca746f2612c797ad2427d6e204007e94fc04b",
+    "web": "00e60cd9d5df63e422156a1368508e6b07a757f5",
+    "evidenceSha256": "a41e3f608f661a3a807915a75540dc8f2553fd85746567b4a09565cad672849d",
+    "historicalObservationOnly": true,
+    "freshPreflightRequired": true,
+    "articleBaselineIntegrationRequired": true
+  },
   "schemaBefore": 28,
   "schemaAfter": 31,
   "migrationChanges": true,
@@ -3686,113 +3696,17 @@
     "requirement": "Recover only an exact tested PENDING-aware package; otherwise controlled maintenance and forward correction. Never restore an old database."
   },
   "qa": {
-    "status": "REAL_FIX1_FAILURE_RETAINED_SEVEN_SOURCE_FIX2_PENDING_REMOTE_CI",
+    "status": "P2_SOURCE_QA_ACCEPTED_TEST_AND_CI_DELTA_RUNTIME_PENDING",
     "acceptedForPreciseCommitAndNormalRemoteCi": true,
     "sourceOnly": true,
     "backendRuntimeAccepted": false,
     "migrationRuntimeAccepted": false,
     "receiptSha256": "23933dbf97087ed5513fe3b7ec8268c9bbeb797296f3cd638d53a36f0cf85600",
     "receiptProvenance": "Parent-reported original independent late-response P2 source QA, 15/15; not extended to new Java/CI tests",
-    "postQaTestAndCiDeltaIndependentReview": "PENDING_FIX2_DIFFERENCE_REVIEW",
+    "postQaTestAndCiDeltaIndependentReview": "PENDING",
     "artifactAndFormalBrowserAcceptance": "PENDING",
     "packagedJarRecoveryAcceptance": "NOT_RUN",
     "productionPublishAllowed": false,
-    "committedReport": "docs/reports/ITEM-PUBLICATION-CI-20261109.md",
-    "firstExactCiFailure": {
-      "source": "09d4c6e6644c1e4d2132c76776ce4538cf21c6c0",
-      "ci": 42645738275,
-      "codeql": 42645743918,
-      "dependency": 42645748869,
-      "backend": "FAIL_TEST_COMPILE_UNBOUND_P",
-      "postgres": "V27_TO_V28_PASS_THEN_TEST_COMPILE_FAIL",
-      "frontend": {
-        "total": 470,
-        "pass": 469,
-        "fail": 1
-      },
-      "formalArtifact": "NOT_BUILT"
-    },
-    "postQaChanges": [
-      {
-        "path": "backend/src/test/java/com/bobbuy/service/PublicCatalogRealProjectionNoAgentTest.java",
-        "reason": "Bind the already-created fixture projection to p; all assertions and second occurrence retained"
-      },
-      {
-        "path": "frontend/src/pages/RecommendationsItemPublication.test.tsx",
-        "reason": "Wait for actual Reload loading settlement and enabled review control; retain every original assertion"
-      },
-      {
-        "path": "docs/reports/ITEM-PUBLICATION-CI-20261109.md",
-        "reason": "Retain actual failed CI and exact scoped fixture evidence"
-      }
-    ],
-    "fix1FrontendEvidence": {
-      "path": ".task-tmp/item-publication-fe-ci-fix1-20261109/RECEIPT.json",
-      "sha256": "898eb5989b5fffc36126ec5787887b7c86be30ad5d92e33ae1d06085a918ad87",
-      "summary": "23 unique targeted PASS; bounded original FAIL→fixed PASS; original local target PASS and official FAIL retained"
-    },
-    "secondExactCiFailure": {
-      "source": "61934df5e5469d0e841606c637518cb852e909cd",
-      "ci": 42647734584,
-      "codeql": "42647739486_SUCCESS",
-      "dependency": "42647745037_SUCCESS",
-      "backend": {
-        "total": 434,
-        "pass": 420,
-        "fail": 7,
-        "error": 1,
-        "skip": 6
-      },
-      "frontend": {
-        "total": 470,
-        "pass": 470,
-        "build": "PASS_EXACT_UNCHANGED_FRONTEND"
-      },
-      "postgres": {
-        "uniqueXml": 34,
-        "pass": 32,
-        "fail": 1,
-        "error": 1,
-        "skip": 0,
-        "v28To31": "PASS_EXACT_MIGRATION_SOURCE_SUBSET",
-        "recovery2": "SKIPPED"
-      },
-      "artifact": "NOT_BUILT_BACKEND_FAILED"
-    },
-    "fix2Components": [
-      {
-        "owner": "API fixture",
-        "path": ".task-tmp/item-publication-ci-20261109/fix2/api-fixture/MANIFEST.json",
-        "sha256": "ec47a42ded0da8fa68583c7e6c9a916d28e086f6bba9ae4c07c9351608d855b2"
-      },
-      {
-        "owner": "Quote identity",
-        "path": ".task-tmp/item-publication-quote-fix-20261109/MANIFEST.json",
-        "sha256": "aa06265cd00f44b9aa5ad19dea775f1e1f9bfe3c1d2a2254db3d4c8abdaccbe9"
-      },
-      {
-        "owner": "Legacy fixtures",
-        "path": ".task-tmp/item-publication-three-fixtures-fix2-20261109/MANIFEST.json",
-        "sha256": "72dca36b08f407bde773e502e26b43ef7db9d785d5d005250c10331b01385bed"
-      }
-    ],
-    "fix2ChangedApplicationSource": [
-      "backend/src/main/java/com/bobbuy/service/ReferenceQuoteService.java"
-    ],
-    "fix2TestSources": [
-      "backend/src/test/java/com/bobbuy/api/RecommendationItemPublicationIntegrationTest.java",
-      "backend/src/test/java/com/bobbuy/service/ReferenceQuoteTest.java",
-      "backend/src/test/java/com/bobbuy/service/PublicCatalogRealProjectionNoAgentTest.java",
-      "backend/src/test/java/com/bobbuy/api/RecommendationCommerceTest.java",
-      "backend/src/test/java/com/bobbuy/api/RecommendationNodeTest.java",
-      "backend/src/test/java/com/bobbuy/api/ProductCatalogIntegrationTest.java"
-    ],
-    "fix2Runtime": "NOT_RUN",
-    "unchangedMigrationSubsetEvidence": {
-      "path": ".task-tmp/item-publication-ci-20261109/fix1/monitor/PG-XML-AND-PRESERVATION.json",
-      "sha256": "6b324769d9cc08e79a33f3f4b5dd9ae51e231959e1058e952c83b5b617da6e56",
-      "v31ProofSha256": "31ab59e2408158880a69e7da43af8272562ee97317e11b1ca52861598025403a",
-      "scope": "Exact unchanged SQL and migration test only; not fix2 publication/recovery runtime"
-    }
+    "committedReport": "docs/reports/ITEM-PUBLICATION-CI-20261109.md"
   }
 }

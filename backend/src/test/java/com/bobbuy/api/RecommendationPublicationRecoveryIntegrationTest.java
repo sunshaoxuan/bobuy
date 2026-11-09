@@ -208,7 +208,7 @@ class RecommendationPublicationRecoveryIntegrationTest {
                 1,true,null,null,null,item.name,item.itemNumber,item.specification,item.description,
                 Map.of(),null,item.referencePrice,item.originalPrice,item.discountAmount,item.priceUnit,
                 null,null,null,null,item.offerNotes,null,List.copyOf(item.gallery),
-                List.of(),null,false,item.imageHash,item.imageUrl,null,null);
+                List.of(),null,false,item.imageHash,item.imageUrl,null,null,null,null);
         }
         em.persist(item);
         allItemIds.add(item.id);
