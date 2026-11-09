@@ -55,6 +55,19 @@ public class OrderHeader {
     @Column(columnDefinition = "jsonb")
     private List<OrderLine> lines = new ArrayList<>(); // 嵌套行条目
 
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "delivery_snapshot", columnDefinition = "jsonb")
+    @com.fasterxml.jackson.annotation.JsonProperty(access = com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY)
+    private OrderDeliverySnapshot deliverySnapshot;
+    @Column(name = "checkout_payload_hash", length = 64)
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    private String checkoutPayloadHash;
+    public OrderDeliverySnapshot getDeliverySnapshot() { return deliverySnapshot; }
+    public void setDeliverySnapshot(OrderDeliverySnapshot value) { deliverySnapshot = value; }
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    public String getCheckoutPayloadHash() { return checkoutPayloadHash; }
+    public void setCheckoutPayloadHash(String value) { checkoutPayloadHash = value; }
+
     public OrderHeader() {
     }
 
@@ -78,6 +91,8 @@ public class OrderHeader {
         productIdentities=retained;
     }
     public void retainProductIdentitiesFrom(OrderHeader original){
+        deliverySnapshot = original.deliverySnapshot;
+        checkoutPayloadHash = original.checkoutPayloadHash;
         productIdentities=new java.util.HashMap<>(original.productIdentities==null?java.util.Map.of():original.productIdentities);
         hydrateProductIdentities();
     }

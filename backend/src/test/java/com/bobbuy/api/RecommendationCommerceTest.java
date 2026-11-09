@@ -58,7 +58,7 @@ class RecommendationCommerceTest {
   // from sale confirmation. No application operation auto-publishes products.
   saved.setVisibilityStatus(ProductVisibility.PUBLIC);saved=products.saveAndFlush(saved);
   var feed=data(mvc.perform(get("/api/storefront/products")));assertThat(feed.toString()).contains(product(),"100g","JPY");
-  var customer=new User(9091L,"buyer",Role.CUSTOMER,0);customer.setUsername("commerce_buyer");users.save(customer);String buyer=tokens.createAccessToken(customer);
+  var customer=new User(9091L,"buyer",Role.CUSTOMER,0);customer.setUsername("commerce_buyer");customer.setDefaultAddress(users.findById(1001L).orElseThrow().getDefaultAddress());users.save(customer);String buyer=tokens.createAccessToken(customer);
   UUID request=UUID.randomUUID();var line=new HashMap<String,Object>(Map.of("productId",product(),"quantity",2,"priceRevision",1,"currency","JPY"));
   line.put("priceToken",data(mvc.perform(get("/api/storefront/products"))).findValuesAsText("priceToken").stream().findFirst().orElseThrow());
   var body=Map.of("requestId",request,"tripId",2000,"currency","JPY","items",List.of(line));

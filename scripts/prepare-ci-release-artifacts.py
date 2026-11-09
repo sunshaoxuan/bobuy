@@ -39,6 +39,52 @@ def class_acceptance(accepted):
     return required, None
 
 
+def source_digest_acceptance(accepted):
+    algorithm = accepted.get('sourceDigestAlgorithm')
+    if algorithm is not None:
+        value = json.dumps(accepted['sourceFiles'], ensure_ascii=False, separators=(',', ':')).encode('utf-8')
+        if algorithm != 'sha256-json-utf8-sourceFiles-v1' or hashlib.sha256(value).hexdigest() != accepted['sourceDigest']:
+            raise RuntimeError('Accepted source-list digest differs')
+
+
+def schema_acceptance(accepted, actual, baseline=None):
+    if actual != accepted['migrations']:
+        raise RuntimeError('Accepted migration bytes/list changed')
+    identity = (accepted.get('schemaBefore', 27), accepted.get('schemaAfter', 27), accepted.get('migrationChanges', False))
+    names = [re.fullmatch(r'V(\d+)__.+\.sql', entry['path']) for entry in actual]
+    if not names or any(name is None for name in names):
+        raise RuntimeError('Invalid accepted migration filename')
+    versions = [int(name.group(1)) for name in names]
+    if identity == (27, 27, False) and versions and max(versions) == 27:
+        return {'schemaBefore': 27, 'schemaAfter': 27, 'migrationChanges': False}
+    if identity != (27, 28, True) or baseline is None or baseline.get('schemaAfter') != 27 or baseline.get('migrationChanges') is not False:
+        raise RuntimeError('Unaccepted schema transition')
+    previous = baseline['migrations']
+    old_part = [entry for entry in actual if entry['path'] != 'V28__checkout_delivery_snapshot.sql']
+    added = [entry for entry in actual if entry['path'] == 'V28__checkout_delivery_snapshot.sql']
+    if old_part != previous or len(added) != 1 or max(versions) != 28:
+        raise RuntimeError('C2 requires the exact unchanged V27 list plus only its V28 migration')
+    return {'schemaBefore': 27, 'schemaAfter': 28, 'migrationChanges': True}
+
+
+def checkout_migration_acceptance(content):
+    text = re.sub(r'--[^\n]*', '', content.decode('utf-8'))
+    statements = [' '.join(value.split()).lower() for value in text.split(';') if value.strip()]
+    if statements != ['alter table bb_order_header add column delivery_snapshot jsonb',
+                      'alter table bb_order_header add column checkout_payload_hash varchar(64)']:
+        raise RuntimeError('C2 migration must add only the two nullable columns without defaults or data writes')
+
+
+def migration_baseline(accepted):
+    if not accepted.get('migrationChanges'):
+        return None
+    binding = accepted.get('migrationBaseline', {})
+    path = Path(binding.get('path', ''))
+    if path.as_posix() != 'docs/reports/c1-profile-20261109/accepted-inputs.json' or digest(path) != binding.get('sha256'):
+        raise RuntimeError('Exact prior V27 migration manifest required')
+    return json.loads(path.read_text())
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
@@ -51,13 +97,15 @@ def main():
     if run('git', 'status', '--porcelain', '--untracked-files=no'):
         raise RuntimeError('Tracked checkout changed during CI')
     accepted = json.loads(args.accepted_inputs.read_text())
+    source_digest_acceptance(accepted)
     required_classes, expected_classes = class_acceptance(accepted)
     for entry in accepted['sourceFiles']:
         if digest(Path(entry['path'])) != entry['gitLfSha256']:
             raise RuntimeError('Accepted application source differs: ' + entry['path'])
     migration_root = Path('backend/src/main/resources/db/migration')
-    if files(migration_root) != accepted['migrations']:
-        raise RuntimeError('V27 migration bytes/list changed')
+    schema = schema_acceptance(accepted, files(migration_root), migration_baseline(accepted))
+    if schema['migrationChanges']:
+        checkout_migration_acceptance((migration_root / 'V28__checkout_delivery_snapshot.sql').read_bytes())
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=False)
     core_jar = output / 'core.jar'
@@ -107,10 +155,10 @@ def main():
                 'frontendIndexSha256': digest(web / 'index.html'), 'frontendFiles': web_files,
                 'frontendMatchesAcceptedBytes': web_files == accepted['frontendFiles'] if accepted.get('frontendFiles') is not None else None,
                 'nginxSha256': digest(output / 'frontend-nginx.conf'),
-                'schemaBefore': 27, 'schemaAfter': 27, 'migrationChanges': False,
+                **schema, 'migrationBaseline': accepted.get('migrationBaseline'),
                 'migrations': accepted['migrations'], 'independentApplicationQa': accepted['qa'],
                 'independentArtifactQa': 'PENDING', 'productionStaged': False, 'productionActivated': False,
-                'rollback': 'Application-only after fresh production preflight; retain V27 and all newer customer writes. Never restore an old database.',
+                'rollback': 'Compatible application-only recovery after fresh preflight; retain V' + str(schema['schemaAfter']) + ' and all newer customer writes. Never restore an old database.',
                 'byteDifferencePolicy': 'Source is exact. Any compile/web byte differences require explicit artifact QA binding; no equality is inferred.'}
     (output / 'artifact.json').write_text(json.dumps(manifest, indent=2) + '\n')
     print(json.dumps({k: manifest[k] for k in ['source', 'archiveBytes', 'archiveSha256', 'coreJarSha256',

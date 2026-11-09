@@ -191,7 +191,7 @@ export default function ClientBilling({node}:{node?:number}) {
                         {
                           key: 'delivery-address',
                           label: t('billing.delivery_address'),
-                          children: entry.deliveryAddressSummary || t('billing.no_delivery_address')
+                          children: <>{entry.deliveryAddressSummary || t('billing.no_delivery_address')}{entry.deliveryAddressSource==='CURRENT_PROFILE_LEGACY_FALLBACK'&&<p>{t('checkout.legacy_address_fallback')}</p>}</>
                         },
                         {
                           key: 'receipt',

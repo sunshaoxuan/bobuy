@@ -113,6 +113,8 @@ class UserManagementIntegrationTest {
         var response = mvc.perform(post("/api/auth/register-account").contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsString(request)))
             .andExpect(status().isOk()).andExpect(jsonPath("$.data.user.roles.length()").value(1)).andExpect(jsonPath("$.data.user.roles[0]").value("CUSTOMER")).andExpect(jsonPath("$.data.user.platformAdmin").value(false)).andReturn();
         String token = json.readTree(response.getResponse().getContentAsString()).at("/data/accessToken").asText();
+        mvc.perform(patch("/api/auth/profile").header("Authorization","Bearer "+token).contentType(MediaType.APPLICATION_JSON)
+            .content("{\"defaultAddress\":{\"contactName\":\"Buyer\",\"countryRegion\":\"Japan\",\"city\":\"Tokyo\",\"addressLine\":\"Fixture street\"}}")).andExpect(status().isOk());
         mvc.perform(get("/api/admin/users").header("Authorization", "Bearer " + token)).andExpect(status().isForbidden());
         mvc.perform(put("/api/users/1000").header("Authorization", "Bearer " + token).contentType(MediaType.APPLICATION_JSON)
             .content("{\"name\":\"forged\",\"roles\":[\"AGENT\"],\"platformAdmin\":true}")).andExpect(status().isForbidden());

@@ -34,6 +34,7 @@ public class StorefrontService {
     private final MailSettingsService mailSettings;
     private final SecureRandom random = new SecureRandom();
     @org.springframework.beans.factory.annotation.Autowired private SelfProfileService profiles;
+    @jakarta.persistence.PersistenceContext private jakarta.persistence.EntityManager entities;
 
     public StorefrontService(UserRepository users, TripRepository trips, ProductRepository products,
             OrderHeaderRepository orders, EmailChallengeRepository challenges, MerchantCustomerRepository relations,
@@ -143,9 +144,14 @@ public class StorefrontService {
     public CheckoutResult checkout(Authentication authentication, Checkout request) {
         User user = lockedCustomer(authentication);
         String businessId = "WEB-" + user.getId() + "-" + request.requestId();
+        String payloadHash = CheckoutFingerprint.of(request);
         Optional<OrderHeader> prior = orders.findByBusinessId(businessId);
         if (prior.isPresent()) {
             OrderHeader existing = prior.get();
+            if (existing.getCheckoutPayloadHash() != null) {
+                if (!existing.getCheckoutPayloadHash().equals(payloadHash)) throw invalid("checkout.request_conflict");
+                return result(existing, user);
+            }
             Map<String, Integer> previous = new TreeMap<>();
             existing.getLines().forEach(l -> previous.put(l.getSkuId(), l.getQuantity()));
             if (!existing.getTripId().equals(request.tripId()) || !previous.equals(quantities(request.items())) || !existing.getCurrency().equals(request.currency()==null?"JPY":request.currency())) {
@@ -153,9 +159,13 @@ public class StorefrontService {
             }
             return result(existing, user);
         }
+        // Retry of an existing order must precede this NEW-order profile requirement.
+        var delivery = OrderDeliverySnapshot.capture(user.getDefaultAddress());
         Trip trip = trips.findByIdForUpdate(request.tripId()).filter(this::bookable)
             .orElseThrow(() -> invalid("该行程暂不可下单，请重新选择"));
         OrderHeader order = new OrderHeader(businessId, user.getId(), trip.getId());
+        order.setDeliverySnapshot(delivery);
+        order.setCheckoutPayloadHash(payloadHash);
         order.setId(nextId());
         BigDecimal total = BigDecimal.ZERO;
         var quantities=quantities(request.items());
@@ -241,8 +251,12 @@ public class StorefrontService {
         return new CheckoutResult(order.getId(), order.getTotalAmount(), order.getStatus().name(), user.getEmailVerifiedAt() != null, approved,order.getCurrency());
     }
     private User lockedCustomer(Authentication authentication) {
-        return users.lockById(auth.currentUser(authentication).id()).filter(u -> u.hasRole(Role.CUSTOMER))
+        User user = users.lockById(auth.currentUser(authentication).id())
             .orElseThrow(() -> new ApiException(ErrorCode.FORBIDDEN, "请使用客户账户下单"));
+        // Auth lookup can already have attached this entity before waiting on the lock.
+        entities.refresh(user, jakarta.persistence.LockModeType.PESSIMISTIC_WRITE);
+        if (!user.hasRole(Role.CUSTOMER)) throw new ApiException(ErrorCode.FORBIDDEN, "请使用客户账户下单");
+        return user;
     }
     private boolean bookable(Trip trip) {
         return trip.getStatus() == TripStatus.PUBLISHED && trip.getDeliveryDate() != null && !trip.getDeliveryDate().isBefore(LocalDate.now());
@@ -256,10 +270,10 @@ public class StorefrontService {
     public record PublicTrip(Long id, Long merchantId, String merchantName, String deliveryArea, LocalDate deliveryDate) {}
     public record PublicProduct(String id, Long merchantId, Map<String,String> name, Map<String,String> description, String brand,
         double price, String categoryId, List<String> images,String currency,String saleUnit,long priceRevision,boolean recommendationReady,String priceToken,BigDecimal regularPrice,Long priceAdjustmentId,Instant priceValidFrom,Instant priceValidUntil) {}
-    public record Item(@NotBlank @Size(max = 255) String productId, @Min(1) @Max(99) int quantity,Long priceRevision,String currency,@Size(max=64) String priceToken) {
+    public record Item(@NotBlank @Size(max = 255) String productId, @Min(1) @Max(99) int quantity,@PositiveOrZero Long priceRevision,@Pattern(regexp="[A-Z]{3}") String currency,@Size(max=64) String priceToken) {
         public Item(String productId,int quantity){this(productId,quantity,null,null,null);}
     }
-    public record Checkout(@NotNull UUID requestId, @NotNull Long tripId, @NotEmpty @Size(max = 50) List<@Valid Item> items,String currency) {
+    public record Checkout(@NotNull UUID requestId, @NotNull Long tripId, @NotEmpty @Size(max = 50) List<@NotNull @Valid Item> items,@Pattern(regexp="[A-Z]{3}") String currency) {
         public Checkout(UUID requestId,Long tripId,List<Item> items){this(requestId,tripId,items,"JPY");}
     }
     public record CheckoutResult(Long orderId, double total, String status, boolean emailVerified, boolean merchantApproved,String currency) {}

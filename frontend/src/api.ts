@@ -60,6 +60,7 @@ export type OrderLine = {
 };
 
 export type Order = {
+    deliverySnapshot?: {version:number;contactName:string;countryRegion:string;city:string;addressLine:string;phone?:string|null;postalCode?:string|null}|null;
     currency?:string;
     id: number;
     businessId: string;
@@ -267,6 +268,7 @@ export type CustomerBalanceLedgerEntry = {
     settlementStatus: string;
     deliveryStatus?: string;
     deliveryAddressSummary?: string;
+    deliveryAddressSource?:'ORDER_SNAPSHOT'|'CURRENT_PROFILE_LEGACY_FALLBACK';
     deliveryContactName?: string;
     deliveryContactPhone?: string;
     deliveryLatitude?: number;
