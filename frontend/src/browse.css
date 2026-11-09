@@ -44,6 +44,7 @@
 .browse-drawer .ant-drawer-header {border:0;}.browse-drawer .ant-drawer-body {padding:8px 18px 24px;}.browse-drawer .ant-drawer-close {min-width:44px;min-height:44px;}.browse-drawer .browse-brand {margin-bottom:26px;}
 .browse-preview {padding:20px 8px;border-radius:20px;min-height:0!important;margin:16px auto;max-width:100%;}.browse-preview[data-device=mobile] {max-width:390px;}.browse-preview .rec-public {padding:0!important;}.browse-preview .rec-issue-heading h1 {font-size:24px;}.browse-preview[data-device=mobile] .product-masonry {grid-template-columns:repeat(2,minmax(0,1fr));}.browse-preview[data-device=mobile] .product-photo img {max-height:320px;}
 .storefront.browse-preview .rec-pin .product-body {inset:auto;}
+.storefront.browse-shell .rec-pin .product-body {inset:auto;overflow-wrap:anywhere;}
 .storefront .store-bottom {display:none!important;}
 .browse-mobile-shortcuts {display:none;}
 @media(max-width:767px){

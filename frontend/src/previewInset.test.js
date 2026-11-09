@@ -26,7 +26,7 @@ function cascade(width,preview,order,removeFix=false){
    if(!active)return;
    for(const selector of rule.selectors){
     if(!element.matches(selector))continue;
-    if(removeFix&&selector==='.storefront.browse-preview .rec-pin .product-body')continue;
+    if(removeFix&&['.storefront.browse-preview .rec-pin .product-body','.storefront.browse-shell .rec-pin .product-body'].includes(selector))continue;
     rule.walkDecls(declaration=>{
      if(!relevant.has(declaration.prop))return;
      // Reject unsupported specificity rather than silently mis-model a new rule.
@@ -58,12 +58,20 @@ it.each([358,390])('removes the evidenced relative offset at %spx, including lat
   expect(tile.left+tile.width).toBeLessThan(cardRight);
  }
 });
-it.each([358,390,600,601,767,2022])('preserves public card positioning at %spx',width=>{
- for(const order of [lateRecommendation,earlyRecommendation])expect(cascade(width,false,order)).toEqual(cascade(width,false,order,true));
+it.each([358,390,600,601,767,2022])('keeps public card bodies in normal flow at %spx in both stylesheet orders',width=>{
+ const previous=cascade(width,false,lateRecommendation,true);
+ if(width<=600)expect(previous).toMatchObject({position:'relative',left:'12px',right:'12px',bottom:'12px'});
+ for(const order of [lateRecommendation,earlyRecommendation])expect(cascade(width,false,order)).toMatchObject({position:'relative',top:'auto',right:'auto',bottom:'auto',left:'auto'});
+ if(width>600)expect(cascade(width,false,lateRecommendation)).toEqual(previous);
 });
 it('keeps desktop preview in normal flow without adding clipping or pointer changes',()=>{
  expect(cascade(2022,true,lateRecommendation)).toMatchObject({position:'relative',top:'auto',right:'auto',bottom:'auto',left:'auto'});
  const ast=postcss.parse(sheets['browse.css']);
  const fix=ast.nodes.find(node=>node.type==='rule'&&node.selector==='.storefront.browse-preview .rec-pin .product-body');
  expect(fix?.type==='rule'&&fix.nodes.map(node=>node.type==='decl'?node.prop:null)).toEqual(['inset']);
+});
+it('limits the public fix to inset and wrapping, preserving clipping, pointer and price rules',()=>{
+ const ast=postcss.parse(sheets['browse.css']);
+ const fix=ast.nodes.find(node=>node.type==='rule'&&node.selector==='.storefront.browse-shell .rec-pin .product-body');
+ expect(fix?.type==='rule'&&fix.nodes.map(node=>node.type==='decl'?`${node.prop}:${node.value}`:null)).toEqual(['inset:auto','overflow-wrap:anywhere']);
 });

@@ -1,7 +1,7 @@
 {
-  "candidate": "C1 self profile R2 and private preview correction",
-  "baseHead": "4696e0f81f70848e86734b7ca905516ecdb5626b",
-  "sourceDigest": "205900c648e37abb0051570e39e407f4960490e450648d9a2eec1757b22aa0c7",
+  "candidate": "C1 public storefront card inset and long-spec wrapping follow-up",
+  "baseHead": "9da862014222b48a03730d804d26a7dcadb37b67",
+  "sourceDigest": "0f41eb0dae932f468ef7a34e3227a07a6f9acd269255a5b45950b4d42d24f323",
   "lineEndingPolicy": "Exact staged Git blob bytes, including unchanged binary fixtures; excludes this self-referential manifest",
   "sourceFiles": [
     {
@@ -2070,6 +2070,11 @@
       "gitLfSha256": "db496aab42de288b6d481aebab7a5705a6d0036f4a2026e7c8391b0dd90708a2"
     },
     {
+      "path": "docs/reports/C1-PUBLIC-CARD-INSET-20261109.md",
+      "gitLfBytes": 2747,
+      "gitLfSha256": "24b1a716d0d775849b2b37acff95c85fe37970ee3a1a0a88e7e01b744d7f83b5"
+    },
+    {
       "path": "docs/reports/C1-REGISTRATION-PROFILE-20261109.md",
       "gitLfBytes": 5525,
       "gitLfSha256": "f4befd19a9cca0e864abc077be4edd503a15f1c5df5474f4ad18f6477924b437"
@@ -2256,8 +2261,8 @@
     },
     {
       "path": "frontend/src/browse.css",
-      "gitLfBytes": 16986,
-      "gitLfSha256": "01597cfcadd9d5c1c8d90aedca2f2bcbcdf14c1f73abded0b2c48bbd117eb712"
+      "gitLfBytes": 17071,
+      "gitLfSha256": "9c3124bdc29f96c355959739201a7e8b88108fe57d11e2b1fd552cde72083a58"
     },
     {
       "path": "frontend/src/browseApi.test.ts",
@@ -3121,8 +3126,8 @@
     },
     {
       "path": "frontend/src/previewInset.test.js",
-      "gitLfBytes": 4055,
-      "gitLfSha256": "e8b86eb1b42995b0950763276de5c92759c9d369598668cd77a9150f36cc45b1"
+      "gitLfBytes": 4871,
+      "gitLfSha256": "36bc3a536e9dd1d9601df67f4355a328df42be2bbf1b12b1bcb4ece51a22896e"
     },
     {
       "path": "frontend/src/previewQuoteLabels.test.tsx",
@@ -3469,14 +3474,14 @@
   "frontendFiles": null,
   "previousProductionCoreJarSha256": null,
   "qa": {
-    "receiptSha256": "d76507d75befaa9deb7d3a32f560c598e101b4c039eac1801289d6ae8b7b32d1",
-    "reportSha256": "b105e6ae4746ccac2111c37c5918dc5a847f529e846f6dc7d2b495346c967dab",
+    "receiptSha256": "5bc858fcad0dcbcf897e1e9e993d36bf93c3354162492d733284b05ee5a7d458",
+    "reportSha256": "3babc074fd675bcf9c59e3ff29eddc117c835d82ca584313243173a34d04235b",
     "acceptedForPreciseCommitAndNormalRemoteCi": true,
     "backendRuntimeAccepted": false,
     "releaseReady": false,
-    "sourceDeltaSha256": "50f9b4fc4b0635272868859042d68822a330b1de880aab8e2717215734265670",
+    "sourceDeltaSha256": "4e8892ecbe30a84737757aaa4830c401e700c7868eef9b6cd6686c779cf01ad1",
     "sourceCombinedPatchSha256": "655dddf881585fc3913144dab96fda2feff7bdf7a5030b419485383bccda4781",
-    "committedReport": "docs/reports/C1-REGISTRATION-PROFILE-20261109.md",
+    "committedReport": "docs/reports/C1-PUBLIC-CARD-INSET-20261109.md",
     "postQaChanges": [
       {
         "path": "backend/src/test/java/com/bobbuy/api/StorefrontIntegrationTest.java",
@@ -3484,7 +3489,36 @@
         "failedRunId": 42551690269,
         "affectedIndependentReview": "PENDING"
       }
-    ]
+    ],
+    "previousC1Qa": {
+      "receiptSha256": "d76507d75befaa9deb7d3a32f560c598e101b4c039eac1801289d6ae8b7b32d1",
+      "reportSha256": "b105e6ae4746ccac2111c37c5918dc5a847f529e846f6dc7d2b495346c967dab",
+      "acceptedForPreciseCommitAndNormalRemoteCi": true,
+      "backendRuntimeAccepted": false,
+      "releaseReady": false,
+      "sourceDeltaSha256": "50f9b4fc4b0635272868859042d68822a330b1de880aab8e2717215734265670",
+      "sourceCombinedPatchSha256": "655dddf881585fc3913144dab96fda2feff7bdf7a5030b419485383bccda4781",
+      "committedReport": "docs/reports/C1-REGISTRATION-PROFILE-20261109.md",
+      "postQaChanges": [
+        {
+          "path": "backend/src/test/java/com/bobbuy/api/StorefrontIntegrationTest.java",
+          "reason": "Isolated PostgreSQL fixture cleanup for refresh-session user/rotation foreign keys; application implementation and business assertions unchanged",
+          "failedRunId": 42551690269,
+          "affectedIndependentReview": "PENDING"
+        }
+      ]
+    },
+    "sourceOnly": true,
+    "formalBuildAndNonProductionBrowserAcceptance": "PENDING_REQUIRED_BEFORE_PUBLISH",
+    "productionPublishAllowed": false,
+    "unchangedC1BackendEvidence": {
+      "source": "9da862014222b48a03730d804d26a7dcadb37b67",
+      "ciRun": 42552596645,
+      "coreJarSha256": "a5793c033ed6b6778dfd4b7e27dfa26d532f36d933d1108de5c34adf0c58e75a",
+      "postgresUnit": 8,
+      "postgresIntegration": 10,
+      "logicUnchanged": true
+    }
   },
   "schemaBefore": 27,
   "schemaAfter": 27,
