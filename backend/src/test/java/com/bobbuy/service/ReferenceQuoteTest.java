@@ -1,4 +1,5 @@
 package com.bobbuy.service;
+import static com.bobbuy.test.RecommendationPublicationFixtures.*;
 import com.bobbuy.model.*;
 import com.bobbuy.repository.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -53,8 +54,26 @@ class ReferenceQuoteTest {
  @Test void publicProjectionNeverUsesDraftQuotesAndRedactsInternalSourceIdentity(){
   var repository=mock(RecommendationItemRepository.class);var posts=mock(RecommendationPostRepository.class);var service=new ReferenceQuoteService(mock(ReferenceQuoteRevisionRepository.class),new ObjectMapper().findAndRegisterModules(),repository,posts);
   var today=LocalDate.now(ZoneId.of("Asia/Tokyo"));var visible=item(1,"100",today.minusDays(1).toString(),today.plusDays(1).toString());var draft=item(2,"1",today.minusDays(1).toString(),today.plusDays(1).toString());draft.postId=2L;
-  var published=new RecommendationPost();published.id=1L;when(posts.findByPublishedTrue()).thenReturn(List.of(published));when(repository.findByProductIdInOrderById(List.of("master"))).thenReturn(List.of(visible,draft));
+  var published=new RecommendationPost();published.id=1L;published.merchantId=1000L;legacyPost(published);legacyItem(visible,published);
+  assertThat(RecommendationPublication.visible(visible)).isTrue();assertThat(RecommendationPublication.visible(draft)).isFalse();
+  when(posts.findByPublishedTrue()).thenReturn(List.of(published));when(repository.findByProductIdInOrderById(List.of("master"))).thenReturn(List.of(visible,draft));
   service.decorate(List.of(visible),true);assertThat(visible.referenceQuote.state()).isEqualTo("ACTIVE");assertThat(visible.referenceQuote.amount()).isEqualByComparingTo("100");assertThat(visible.referenceContext.sourceMessageKey()).isNull();assertThat(visible.referenceContext.supplierKey()).isNull();
   var unlinked=item(3,"1",null,null);unlinked.productId=null;service.decorate(List.of(unlinked),true);assertThat(unlinked.referenceContext.sourceMessageKey()).isNull();
+ }
+ @Test void frozenSourceItemScopesQuotesDespiteCatalogDisplayAndLaterLiveEdits()throws Exception{
+  var repository=mock(RecommendationItemRepository.class);var posts=mock(RecommendationPostRepository.class);var json=new ObjectMapper().findAndRegisterModules();var service=new ReferenceQuoteService(mock(ReferenceQuoteRevisionRepository.class),json,repository,posts);
+  var post=new RecommendationPost();post.id=1L;post.merchantId=1000L;legacyPost(post);when(posts.findByPublishedTrue()).thenReturn(List.of(post));
+  var master=new Product();master.setId("master");master.setMerchantId(1000L);master.setName(Map.of("ja-JP","Displayed master"));master.setItemNumber("MASTER ITEM");master.setCatalogData(new ProductCatalogData(Map.of("ja-JP","Frozen master spec"),null,null,List.of(),null,null,null,null));
+  var original=item(1,"100","2000-01-01","2099-01-01");original.itemNumber="SOURCE ITEM";original.imageUrl="https://example.invalid/source-price-image.jpg";original.imageHash="a".repeat(64);reviewedReadItem(original,master,post);
+  byte[] frozen=json.writeValueAsBytes(original.publicationSnapshot);var display=RecommendationPublication.project(original,original.publicationSnapshot);assertThat(display.itemNumber).isEqualTo("MASTER ITEM");
+  when(repository.findByProductIdInOrderById(List.of("master"))).thenReturn(List.of(original));service.decorate(List.of(display),true);
+  assertThat(display.referenceQuote.state()).isEqualTo("NO_ACTIVE_OFFER");assertThat(display.referenceQuote.amount()).isNull();
+  var matching=item(2,"80","2000-01-01","2099-01-01");matching.itemNumber="MASTER ITEM";reviewedReadItem(matching,master,post);
+  // Editing either live row cannot rewrite its previously public occurrence or lend it a new quote scope.
+  original.itemNumber="MASTER ITEM";original.referencePrice=BigDecimal.ONE;original.imageUrl="https://example.invalid/edited-source.jpg";master.setItemNumber("EDITED MASTER ITEM");
+  when(repository.findByProductIdInOrderById(List.of("master"))).thenReturn(List.of(original,matching));var retainedDisplay=RecommendationPublication.project(original,original.publicationSnapshot);service.decorate(List.of(retainedDisplay),true);
+  assertThat(retainedDisplay.itemNumber).isEqualTo("MASTER ITEM");assertThat(retainedDisplay.referenceQuote.state()).isEqualTo("ACTIVE");assertThat(retainedDisplay.referenceQuote.amount()).isEqualByComparingTo("80");assertThat(retainedDisplay.referenceQuote.itemIds()).containsExactly(2L);
+  assertThat(json.writeValueAsBytes(original.publicationSnapshot)).containsExactly(frozen);assertThat(original.publicationSnapshot.itemNumber()).isEqualTo("SOURCE ITEM");assertThat(original.publicationSnapshot.referencePrice()).isEqualByComparingTo("100");assertThat(original.publicationSnapshot.imageUrl()).isEqualTo("https://example.invalid/source-price-image.jpg");
+  assertThat(retainedDisplay.referenceContext.sourceMessageKey()).isNull();assertThat(original.publicationSnapshot.referenceContext().sourceMessageKey()).isEqualTo("mail-1");
  }
 }

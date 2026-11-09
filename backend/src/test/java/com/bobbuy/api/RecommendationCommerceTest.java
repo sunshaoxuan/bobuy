@@ -90,6 +90,15 @@ class RecommendationCommerceTest {
   detail=data(putBody(path()+"/items/"+item()+"/gallery",Map.of("version",Long.valueOf(version()),"orderedIds",List.of(gallery.get(1).get("id").asText(),gallery.get(0).get("id").asText())),admin));
   assertThat(detail.at("/items/0/imageUrl").asText()).isEqualTo(original);
   detail=data(putBody(path(),Map.of("title","Synthetic","body","Synthetic test only","version",Long.valueOf(version())),admin));
+  // Explicitly review the actual verified pictures in their selected order, preserving their bytes/hash provenance.
+  // The generic publication helper otherwise fills URL-only legacy master media with a different synthetic image.
+  com.fasterxml.jackson.databind.node.ObjectNode profile=null;
+  for(var proposal:data(mvc.perform(get("/api/merchant/product-catalog").header("Authorization","Bearer "+admin))))if(product().equals(proposal.at("/value/productId").asText()))profile=(com.fasterxml.jackson.databind.node.ObjectNode)proposal.get("value");
+  assertThat(profile).isNotNull();var retainedGallery=items.findById(item()).orElseThrow().gallery;
+  profile.set("gallery",json.valueToTree(retainedGallery.stream().map(ProductCatalogService::media).toList()));profile.put("translationsReviewed",true);
+  assertThat(profile.at("/gallery/0/url").asText()).isEqualTo(gallery.get(1).get("url").asText());
+  data(putBody("/api/merchant/product-catalog",Map.of("rows",List.of(profile),"reviewed",true),admin));
+  assertThat(items.findById(item()).orElseThrow().gallery).isEqualTo(retainedGallery);
   detail=data(publishPending(mvc,json,items,detail,admin));
   var publicDetail=data(mvc.perform(get("/api/storefront/recommendations/"+detail.at("/post/id").asLong())));
   assertThat(publicDetail.at("/items/0/imageUrl").asText()).isEqualTo(gallery.get(1).get("url").asText());assertThat(publicDetail.toString()).doesNotContain(original);

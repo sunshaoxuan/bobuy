@@ -75,7 +75,19 @@ class RecommendationItemPublicationIntegrationTest {
     @Test void authenticatedFirstPublicationAndPublicReadPathsKeepPendingHidden()throws Exception{
         var draft=getMerchant();String request=body(draft,ready.id,UUID.randomUUID());
         mvc.perform(get("/api/storefront/recommendations/"+issue.id)).andExpect(status().isNotFound());
-        publish(ready.id,request,other).andExpect(status().isNotFound());publish(ready.id,request,customer).andExpect(status().isForbidden());mvc.perform(post(path()+"/items/"+ready.id+"/publish").contentType(MediaType.APPLICATION_JSON).content(request)).andExpect(status().isForbidden());
+        long beforeVersion=posts.findById(issue.id).orElseThrow().version;
+        int beforeHistory=history.findByMerchantIdAndItemIdOrderById(1000L,ready.id).size();
+        publish(ready.id,request,other).andExpect(status().isNotFound());publish(ready.id,request,customer).andExpect(status().isForbidden());
+        // Existing SecurityConfig distinguishes anonymous 401 from authenticated CUSTOMER 403.
+        // Keep this request genuinely anonymous; do not manufacture a principal to obtain 403.
+        mvc.perform(post(path()+"/items/"+ready.id+"/publish").contentType(MediaType.APPLICATION_JSON).content(request)).andExpect(status().isUnauthorized());
+        assertEquals(beforeVersion,posts.findById(issue.id).orElseThrow().version);
+        assertFalse(posts.findById(issue.id).orElseThrow().published);
+        var denied=items.findById(ready.id).orElseThrow();
+        assertEquals("PENDING",denied.publicationState);assertNull(denied.publicationSnapshot);
+        assertNull(denied.publishedBy);assertNull(denied.publicationRequestId);assertNull(denied.publicationRequestHash);
+        assertEquals(beforeHistory,history.findByMerchantIdAndItemIdOrderById(1000L,ready.id).size());
+        assertEquals(2,items.findByPostIdOrderById(issue.id).size());
         var live=data(publish(ready.id,request,token));assertTrue(live.at("/post/published").asBoolean());
         var view=data(mvc.perform(get("/api/storefront/recommendations/"+issue.id)));assertEquals(1,view.path("items").size());assertFalse(view.toString().contains("1731065"));assertFalse(view.toString().contains("publicationSnapshot"));
         assertEquals(1,data(mvc.perform(get("/api/storefront/recommendation-browse/items").param("issueId",issue.id.toString()).param("period","all"))).path("scopeTotal").asLong());
@@ -91,10 +103,25 @@ class RecommendationItemPublicationIntegrationTest {
         var changed=(com.fasterxml.jackson.databind.node.ObjectNode)json.readTree(request);changed.put("sourceHash","0".repeat(64));publish(ready.id,json.writeValueAsString(changed),token).andExpect(status().isConflict());
     }
     @Test void rollbackAfterBothFlushesLeavesNoPublicationAndSameKeyCanRetry()throws Exception{
-        var snapshot=RecommendationPublication.candidate(ready,products.findById(ready.productId).orElseThrow());var key=UUID.randomUUID();long version=issue.version;
+        // Review the persisted merchant DTO, exactly as the client does. The detached fixture
+        // still holds TEN(scale0), while numeric(14,2) reads 10.00; neither the amount nor
+        // the service's strict evidence/hash guard should be changed to hide that mismatch.
+        assertEquals(0,ready.referencePrice.compareTo(items.findById(ready.id).orElseThrow().referencePrice));
+        var key=UUID.randomUUID();var reviewed=json.readTree(body(getMerchant(),ready.id,key));
+        long version=reviewed.path("version").asLong(),productVersion=reviewed.path("productVersion").asLong();
+        String sourceHash=reviewed.path("sourceHash").asText();
         SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("1000",null,AuthorityUtils.createAuthorityList("ROLE_AGENT")));
-        new TransactionTemplate(transactions).execute(status->{service.publishItem(issue.id,ready.id,key,version,snapshot.productVersion(),snapshot.reviewHash(),true);status.setRollbackOnly();return null;});
+        new TransactionTemplate(transactions).execute(status->{
+            var live=service.publishItem(issue.id,ready.id,key,version,productVersion,sourceHash,true);
+            assertTrue(live.post().published());assertTrue(posts.findById(issue.id).orElseThrow().published);
+            assertTrue(RecommendationPublication.visible(items.findById(ready.id).orElseThrow()));
+            assertNotNull(items.findById(ready.id).orElseThrow().publicationSnapshot);
+            assertEquals(1,history.findByMerchantIdAndItemIdOrderById(1000L,ready.id).size());
+            status.setRollbackOnly();return null;
+        });
         assertFalse(posts.findById(issue.id).orElseThrow().published);assertEquals("PENDING",items.findById(ready.id).orElseThrow().publicationState);assertTrue(history.findByMerchantIdAndItemIdOrderById(1000L,ready.id).isEmpty());
-        service.publishItem(issue.id,ready.id,key,version,snapshot.productVersion(),snapshot.reviewHash(),true);assertTrue(posts.findById(issue.id).orElseThrow().published);
+        service.publishItem(issue.id,ready.id,key,version,productVersion,sourceHash,true);assertTrue(posts.findById(issue.id).orElseThrow().published);
+        assertTrue(RecommendationPublication.visible(items.findById(ready.id).orElseThrow()));
+        assertEquals(1,history.findByMerchantIdAndItemIdOrderById(1000L,ready.id).size());
     }
 }

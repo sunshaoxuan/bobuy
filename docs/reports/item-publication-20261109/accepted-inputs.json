@@ -1,8 +1,8 @@
 {
-  "candidate": "Item publication V31 fix1: retained failed CI; minimal Java/frontend fixture correction",
-  "baseHead": "09d4c6e6644c1e4d2132c76776ce4538cf21c6c0",
+  "candidate": "Item publication V31 fix2: retain historical quote source identity; real publication fixture corrections",
+  "baseHead": "61934df5e5469d0e841606c637518cb852e909cd",
   "sourceDigestAlgorithm": "sha256-json-utf8-sourceFiles-v1",
-  "sourceDigest": "5799ede6a3966ef1e2f9280818b371bab045d7483324f66f04106db41a10275c",
+  "sourceDigest": "599a8bace3755c665e46ab5c59b57b18e20b79b42763a948f42424d19fd672f8",
   "lineEndingPolicy": "Exact canonical Git-filtered bytes, cross-checked by git hash-object; excludes self-referential accepted manifest and unrelated protected files.",
   "sourceFiles": [
     {
@@ -1382,8 +1382,8 @@
     },
     {
       "path": "backend/src/main/java/com/bobbuy/service/ReferenceQuoteService.java",
-      "gitLfBytes": 6093,
-      "gitLfSha256": "461a850a6eeb07cfac5a8bbd827764b921ff24fff2a785da2705b7e5e39799e2"
+      "gitLfBytes": 6267,
+      "gitLfSha256": "26963983ed10e70067d597c134ce4cc92ec3b65123eec001197f694bfee5e819"
     },
     {
       "path": "backend/src/main/java/com/bobbuy/service/RefreshTokenService.java",
@@ -1737,8 +1737,8 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/ProductCatalogIntegrationTest.java",
-      "gitLfBytes": 11999,
-      "gitLfSha256": "96d711705a75c70fb2d22001736612a80552edcadb4ce04bb31939e047832e6b"
+      "gitLfBytes": 14367,
+      "gitLfSha256": "82c7c99ad8be16b18ae78f6965d524a6ea3ce6bbd41d67afb36a84687a6eb4cb"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/ProductIdentityCompatibilityIntegrationTest.java",
@@ -1777,8 +1777,8 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/RecommendationCommerceTest.java",
-      "gitLfBytes": 10962,
-      "gitLfSha256": "4f6757be359d4542a9ad43cec3611a3be97b00fa0b4f3ac1f47ef9b93bf65cd2"
+      "gitLfBytes": 12056,
+      "gitLfSha256": "da9cf4a0efe3c62c75563bc397988c2ed779649dd94240fba7460a06410d19dc"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/RecommendationIntegrationTest.java",
@@ -1787,13 +1787,13 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/RecommendationItemPublicationIntegrationTest.java",
-      "gitLfBytes": 11675,
-      "gitLfSha256": "35ef0ad2b07fab062e9b3253171cf53594001129442c6f02e39903268319919c"
+      "gitLfBytes": 13725,
+      "gitLfSha256": "67a881e83675bc311c667d2529c526ba790076b06b8d11719f9dc237f0cfcfa0"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/RecommendationNodeTest.java",
-      "gitLfBytes": 3565,
-      "gitLfSha256": "c18b2c683f3374873d15c3fb526f104b6c1535dd163d73cc4e27a310cf4f3cf4"
+      "gitLfBytes": 4526,
+      "gitLfSha256": "58f193920f8a4091226e9855e9015eed8a23417eb80061aae55f8f41e9a01cac"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/RecommendationPublicationMigrationIntegrationTest.java",
@@ -2022,8 +2022,8 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/service/PublicCatalogRealProjectionNoAgentTest.java",
-      "gitLfBytes": 13230,
-      "gitLfSha256": "66f708b9f7052801a0c65799df26b8b8f5aba903708380638ce3c3ff72eb2205"
+      "gitLfBytes": 13548,
+      "gitLfSha256": "ecd1f6262245cda13654a2d5715949cb85397e2e2a02b6c7cf3ee57cd20fa1ad"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/service/PublicProductBrowseServiceTest.java",
@@ -2077,8 +2077,8 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/service/ReferenceQuoteTest.java",
-      "gitLfBytes": 6833,
-      "gitLfSha256": "ff7eb29e0ab6eaeae0563d550a675ecb61c94c3263a1cff61369c701c655ad6a"
+      "gitLfBytes": 10120,
+      "gitLfSha256": "decb2e77c77562b6b8505d4c8eae4c4d429b11295276f4e89b00a6d0150cc2c6"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/service/RustFsLiveProbe.java",
@@ -2152,8 +2152,8 @@
     },
     {
       "path": "docs/reports/ITEM-PUBLICATION-CI-20261109.md",
-      "gitLfBytes": 6984,
-      "gitLfSha256": "2d46951704867a1455f50a398a3e0385025e9027427d7e6dbe690819eb0bcbbf"
+      "gitLfBytes": 10740,
+      "gitLfSha256": "4e416d676862b4806f709ad0ba1d18dba03778c4b751c0707c5702c2a2afd471"
     },
     {
       "path": "docs/reports/RECOMMENDATION-ITEM-PUBLICATION-BACKEND-20261109.md",
@@ -3686,14 +3686,14 @@
     "requirement": "Recover only an exact tested PENDING-aware package; otherwise controlled maintenance and forward correction. Never restore an old database."
   },
   "qa": {
-    "status": "P2_SOURCE_QA_REUSED_FIRST_CI_FAILURE_RETAINED_FIX1_PENDING_REMOTE_CI",
+    "status": "REAL_FIX1_FAILURE_RETAINED_SEVEN_SOURCE_FIX2_PENDING_REMOTE_CI",
     "acceptedForPreciseCommitAndNormalRemoteCi": true,
     "sourceOnly": true,
     "backendRuntimeAccepted": false,
     "migrationRuntimeAccepted": false,
     "receiptSha256": "23933dbf97087ed5513fe3b7ec8268c9bbeb797296f3cd638d53a36f0cf85600",
     "receiptProvenance": "Parent-reported original independent late-response P2 source QA, 15/15; not extended to new Java/CI tests",
-    "postQaTestAndCiDeltaIndependentReview": "PENDING",
+    "postQaTestAndCiDeltaIndependentReview": "PENDING_FIX2_DIFFERENCE_REVIEW",
     "artifactAndFormalBrowserAcceptance": "PENDING",
     "packagedJarRecoveryAcceptance": "NOT_RUN",
     "productionPublishAllowed": false,
@@ -3730,6 +3730,69 @@
       "path": ".task-tmp/item-publication-fe-ci-fix1-20261109/RECEIPT.json",
       "sha256": "898eb5989b5fffc36126ec5787887b7c86be30ad5d92e33ae1d06085a918ad87",
       "summary": "23 unique targeted PASS; bounded original FAIL→fixed PASS; original local target PASS and official FAIL retained"
+    },
+    "secondExactCiFailure": {
+      "source": "61934df5e5469d0e841606c637518cb852e909cd",
+      "ci": 42647734584,
+      "codeql": "42647739486_SUCCESS",
+      "dependency": "42647745037_SUCCESS",
+      "backend": {
+        "total": 434,
+        "pass": 420,
+        "fail": 7,
+        "error": 1,
+        "skip": 6
+      },
+      "frontend": {
+        "total": 470,
+        "pass": 470,
+        "build": "PASS_EXACT_UNCHANGED_FRONTEND"
+      },
+      "postgres": {
+        "uniqueXml": 34,
+        "pass": 32,
+        "fail": 1,
+        "error": 1,
+        "skip": 0,
+        "v28To31": "PASS_EXACT_MIGRATION_SOURCE_SUBSET",
+        "recovery2": "SKIPPED"
+      },
+      "artifact": "NOT_BUILT_BACKEND_FAILED"
+    },
+    "fix2Components": [
+      {
+        "owner": "API fixture",
+        "path": ".task-tmp/item-publication-ci-20261109/fix2/api-fixture/MANIFEST.json",
+        "sha256": "ec47a42ded0da8fa68583c7e6c9a916d28e086f6bba9ae4c07c9351608d855b2"
+      },
+      {
+        "owner": "Quote identity",
+        "path": ".task-tmp/item-publication-quote-fix-20261109/MANIFEST.json",
+        "sha256": "aa06265cd00f44b9aa5ad19dea775f1e1f9bfe3c1d2a2254db3d4c8abdaccbe9"
+      },
+      {
+        "owner": "Legacy fixtures",
+        "path": ".task-tmp/item-publication-three-fixtures-fix2-20261109/MANIFEST.json",
+        "sha256": "72dca36b08f407bde773e502e26b43ef7db9d785d5d005250c10331b01385bed"
+      }
+    ],
+    "fix2ChangedApplicationSource": [
+      "backend/src/main/java/com/bobbuy/service/ReferenceQuoteService.java"
+    ],
+    "fix2TestSources": [
+      "backend/src/test/java/com/bobbuy/api/RecommendationItemPublicationIntegrationTest.java",
+      "backend/src/test/java/com/bobbuy/service/ReferenceQuoteTest.java",
+      "backend/src/test/java/com/bobbuy/service/PublicCatalogRealProjectionNoAgentTest.java",
+      "backend/src/test/java/com/bobbuy/api/RecommendationCommerceTest.java",
+      "backend/src/test/java/com/bobbuy/api/RecommendationNodeTest.java",
+      "backend/src/test/java/com/bobbuy/api/ProductCatalogIntegrationTest.java"
+    ],
+    "fix2Runtime": "NOT_RUN",
+    "unchangedMigrationSubsetEvidence": {
+      "path": ".task-tmp/item-publication-ci-20261109/fix1/monitor/PG-XML-AND-PRESERVATION.json",
+      "sha256": "6b324769d9cc08e79a33f3f4b5dd9ae51e231959e1058e952c83b5b617da6e56",
+      "v31ProofSha256": "31ab59e2408158880a69e7da43af8272562ee97317e11b1ca52861598025403a",
+      "scope": "Exact unchanged SQL and migration test only; not fix2 publication/recovery runtime"
     }
   }
 }
