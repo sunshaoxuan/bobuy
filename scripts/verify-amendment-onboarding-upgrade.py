@@ -186,7 +186,7 @@ INSERT INTO bb_product_catalog_recovery(id,merchant_id,product_id,version_after,
 INSERT INTO bb_order_header(id,business_id,customer_id,status,payment_status,delivery_status,total_amount,currency,lines,product_identities,delivery_snapshot,checkout_payload_hash)
  VALUES(-293003,'CI-C3-R13-V28-HISTORICAL',-293002,'NEW','UNPAID','PENDING_DELIVERY',123.5,'JPY',
  '[{"id":-293004,"skuId":"ci-c3-r13-historical-product","itemName":"Synthetic historical","spec":"pack","quantity":2,"unitPrice":61.75}]'::jsonb,
- '{"-293004":{"productId":"ci-c3-r13-historical-product","itemNumber":"CI-293001"}}'::jsonb,
+ '{"-293004":{"skuId":"ci-c3-r13-historical-product","itemName":"Synthetic historical","names":{},"brand":"Synthetic","itemNumber":"CI-293001","model":"CI-HISTORICAL","packaging":"Synthetic box","specifications":{"en-US":"Synthetic historical pack"},"saleUnit":"pack"}}'::jsonb,
  '{"version":1,"contactName":"Synthetic original","countryRegion":"JP","city":"Tokyo","addressLine":"Synthetic street","phone":"synthetic-phone"}'::jsonb,
  repeat('a',64));
 COMMIT;""")

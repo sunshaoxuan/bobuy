@@ -63,7 +63,18 @@ class OrderLineStorageTest {
         var reloaded=reload(header);assertNull(reloaded.getLines().get(0).getBrand());assertNull(reloaded.getLines().get(0).getSaleUnit());assertTrue(reloaded.getLines().get(0).getSpecifications().isEmpty());
         // Sale-unit facts must agree with the legacy spec used by the identity compatibility guard.
         var before=identities(header);line.setSaleUnit(line.getSpec());assertNotEquals(before,identities(header));assertEquals(line.getSpec(),reload(header).getLines().get(0).getSaleUnit());
-        assertThrows(UnsupportedOperationException.class,()->line.getSpecifications().put("en-US","silent mutation"));
+        before=identities(header);line.getSpecifications().put("en-US","tracked mutation");
+        assertNotEquals(before,identities(header));assertEquals("tracked mutation",reload(header).getLines().get(0).getSpecifications().get("en-US"));
+    }
+
+    @Test void mutableSpecificationMapAndItsBackedViewsAllTrackSidecarChanges() throws Exception {
+        var header=header(example());var values=header.getLines().get(0).getSpecifications();
+        var operations=List.<Runnable>of(()->values.put("en-US","put"),()->values.entrySet().iterator().next().setValue("entry"),
+            ()->values.replaceAll((key,value)->"replace"),()->values.compute("en-US",(key,value)->"compute"),
+            ()->values.keySet().remove("en-US"),()->values.putAll(Map.of("en-US","bulk","ja-JP","second")),
+            ()->values.values().remove("second"),()->{var iterator=values.entrySet().iterator();iterator.next();iterator.remove();},
+            ()->values.put("en-US","clear"),values::clear);
+        for(var operation:operations){var before=identities(header);operation.run();assertNotEquals(before,identities(header));assertEquals(values,reload(header).getLines().get(0).getSpecifications());}
     }
 
     @Test void ownerCallbacksDoNotLeakAcrossHeadersOrRemovedLines() throws Exception {

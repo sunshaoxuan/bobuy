@@ -38,13 +38,23 @@ public class OrderWriteCoordinator {
     public void trips(Collection<Long> ids) { ids.stream().filter(Objects::nonNull).distinct().sorted().forEach(this::trip); }
     /** Caller must hold the trip lock identified by a scalar locator, before loading this order. */
     public OrderHeader order(Long id) {
+        var attached=entities.find(OrderHeader.class,id);
+        // A pre-lock authorization read may have attached an old @Version. A locking
+        // query checks that version before refresh can run; discard only that unlocked
+        // snapshot after holding the trip lock. Retain this transaction's own locked edits.
+        if(attached!=null){if(writeLocked(attached))return attached;entities.detach(attached);}
         var order = orders.findByIdForUpdate(id).orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND,"error.order.not_found"));
         entities.refresh(order, LockModeType.PESSIMISTIC_WRITE); return order;
     }
     public List<OrderHeader> orders(Long tripId) {
+        var held=new java.util.HashSet<Long>();
+        for(var attached:orders.findByTripId(tripId)){
+            if(writeLocked(attached))held.add(attached.getId());else entities.detach(attached);
+        }
         var result = orders.findByTripIdForUpdate(tripId);
-        result.forEach(o -> entities.refresh(o, LockModeType.PESSIMISTIC_WRITE)); return result;
+        result.stream().filter(o->!held.contains(o.getId())).forEach(o -> entities.refresh(o, LockModeType.PESSIMISTIC_WRITE)); return result;
     }
+    private boolean writeLocked(OrderHeader order){var mode=entities.getLockMode(order);return mode==LockModeType.PESSIMISTIC_WRITE||mode==LockModeType.PESSIMISTIC_FORCE_INCREMENT;}
     public OrderHeader existing(Long id) {
         Long tripId = orders.locate(id).orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND,"error.order.not_found")).getTripId();
         if (tripId!=null) {var trip=trip(tripId);com.bobbuy.security.MerchantScope.require(trip.getAgentId());}

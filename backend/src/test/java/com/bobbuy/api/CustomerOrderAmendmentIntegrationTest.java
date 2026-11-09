@@ -97,6 +97,13 @@ class CustomerOrderAmendmentIntegrationTest {
         tx.execute(status->{var order=writers.existing(orderId);var line=order.getLines().get(0);line.setBrand(null);line.setItemNumber(null);line.setModel(null);line.setPackaging(null);line.setSpecifications(Map.of());line.setSaleUnit(null);orders.flush();return null;});
         var cleared=orders.findById(orderId).orElseThrow();assertEquals(version+2,cleared.getOrderRevision());assertNull(cleared.getLines().get(0).getBrand());assertNull(cleared.getLines().get(0).getSaleUnit());
     }
+    @Test void mutableSpecificationMapAlonePersistsAndAdvancesRevision() {
+        long version=orders.findById(orderId).orElseThrow().getOrderRevision();
+        tx.execute(status->{var order=writers.existing(orderId);order.getLines().get(0).getSpecifications().put("en-US","Synthetic map edit");orders.flush();return null;});
+        var changed=orders.findById(orderId).orElseThrow();assertEquals(version+1,changed.getOrderRevision());assertEquals("Synthetic map edit",changed.getLines().get(0).getSpecifications().get("en-US"));
+        tx.execute(status->{var order=writers.existing(orderId);order.getLines().get(0).getSpecifications().entrySet().stream().filter(entry->entry.getKey().equals("en-US")).findFirst().orElseThrow().setValue("Synthetic entry edit");orders.flush();return null;});
+        var replaced=orders.findById(orderId).orElseThrow();assertEquals(version+2,replaced.getOrderRevision());assertEquals("Synthetic entry edit",replaced.getLines().get(0).getSpecifications().get("en-US"));
+    }
     @Test void authenticatedEndpointWhitelistSaveReopenAndCheckoutRetryPreserveOneOrder() throws Exception {
         mvc.perform(get("/api/customer/orders/"+orderId+"/amendment")).andExpect(status().isUnauthorized());
         var request=input(UUID.randomUUID().toString(),3);
@@ -135,7 +142,7 @@ class CustomerOrderAmendmentIntegrationTest {
     @Test void customerWinningTripLockIsPreservedByQueuedMerchantStatusCommand() throws Exception {
         var request=input(UUID.randomUUID().toString(),3);
         var results=queuedRace(()->service.amend(customer,orderId,request),()->store.updateOrderStatus(orderId,OrderStatus.CONFIRMED),true);
-        assertInstanceOf(CustomerOrderAmendmentView.class,results.get(0));assertInstanceOf(OrderHeader.class,results.get(1));
+        assertInstanceOf(CustomerOrderAmendmentView.class,results.get(0));assertInstanceOf(OrderHeader.class,results.get(1),()->failureDetails(results.get(1)));
         var current=orders.findById(orderId).orElseThrow();assertEquals(OrderStatus.CONFIRMED,current.getStatus());assertEquals(3,current.getLines().get(0).getQuantity());assertEquals(PaymentStatus.UNPAID,current.getPaymentStatus());
     }
     @Test void queuedStaleMerchantReplacementCannotOverwriteCustomerRevision() throws Exception {
@@ -172,4 +179,5 @@ class CustomerOrderAmendmentIntegrationTest {
     }
     static void await(CountDownLatch latch){try{if(!latch.await(5,TimeUnit.SECONDS))throw new IllegalStateException("Test lock timeout");}catch(InterruptedException e){Thread.currentThread().interrupt();throw new IllegalStateException(e);}}
     static String jsonColumn(Object value){return value instanceof byte[] bytes?new String(bytes,java.nio.charset.StandardCharsets.UTF_8):value.toString();}
+    static String failureDetails(Object value){if(value instanceof Throwable error){var text=new java.io.StringWriter();error.printStackTrace(new java.io.PrintWriter(text));return text.toString();}return String.valueOf(value);}
 }

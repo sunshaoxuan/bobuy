@@ -78,6 +78,12 @@ class AmendmentOnboardingUpgradeTest(unittest.TestCase):
         self.assertEqual(set(history[0]),state_fields)
         self.assertEqual(set(history[0]['catalogData']),catalog_fields)
         self.assertIsInstance(history[0]['sourceItemIds'],list)
+        identities=[value['-293004'] for value in objects if isinstance(value,dict) and '-293004' in value]
+        self.assertEqual(len(identities),1)
+        self.assertEqual(set(identities[0]),{'skuId','itemName','names','brand','itemNumber','model','packaging','specifications','saleUnit'})
+        self.assertEqual(identities[0]['skuId'],'ci-c3-r13-historical-product')
+        self.assertEqual(identities[0]['itemName'],'Synthetic historical')
+        self.assertEqual(identities[0]['saleUnit'],'pack')
 
     def test_old_rows_or_snapshot_rewrite_or_loss_rejects(self):
         for version in [29,30]:

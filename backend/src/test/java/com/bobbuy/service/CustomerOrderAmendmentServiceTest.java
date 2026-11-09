@@ -130,4 +130,24 @@ class CustomerOrderAmendmentServiceTest {
         var second=service.preview(authentication,9L);assertEquals(first.revision(),second.revision());assertEquals(first,second);
         verify(orders,never()).saveAndFlush(any());
     }
+    @Test void queuedWriterDropsOnlyUnlockedAttachedVersionBeforeTakingFreshOrderLock() throws Exception {
+        var tripRepo=mock(TripRepository.class);var orderRepo=mock(OrderHeaderRepository.class);var entityManager=mock(EntityManager.class);
+        var stale=order;var fresh=new OrderHeader("SYNTHETIC-ORDER",2L,7L);fresh.setId(9L);setVersion(fresh,1L);
+        when(entityManager.find(OrderHeader.class,9L)).thenReturn(stale);when(entityManager.getLockMode(stale)).thenReturn(LockModeType.NONE);
+        var detached=new java.util.concurrent.atomic.AtomicBoolean();doAnswer(i->{detached.set(true);return null;}).when(entityManager).detach(stale);
+        when(orderRepo.findByIdForUpdate(9L)).thenAnswer(i->{assertTrue(detached.get(),"locking an attached old version fails before refresh");return Optional.of(fresh);});
+        var coordinator=new OrderWriteCoordinator(tripRepo,orderRepo,entityManager);assertSame(fresh,coordinator.order(9L));assertEquals(1L,fresh.getOrderRevision());
+        var sequence=inOrder(entityManager,orderRepo);sequence.verify(entityManager).detach(stale);sequence.verify(orderRepo).findByIdForUpdate(9L);sequence.verify(entityManager).refresh(fresh,LockModeType.PESSIMISTIC_WRITE);
+        when(entityManager.find(OrderHeader.class,9L)).thenReturn(fresh);when(entityManager.getLockMode(fresh)).thenReturn(LockModeType.PESSIMISTIC_WRITE);
+        fresh.setStatus(OrderStatus.CONFIRMED);clearInvocations(entityManager,orderRepo);assertSame(fresh,coordinator.order(9L));assertEquals(OrderStatus.CONFIRMED,fresh.getStatus());
+        verify(entityManager,never()).detach(any());verify(entityManager,never()).refresh(any(),any(LockModeType.class));verify(orderRepo,never()).findByIdForUpdate(anyLong());
+    }
+    @Test void bulkWriterRefreshesQueuedSnapshotsAndRetainsItsOwnLockedEdits() {
+        var tripRepo=mock(TripRepository.class);var orderRepo=mock(OrderHeaderRepository.class);var entityManager=mock(EntityManager.class);
+        var stale=order;var fresh=new OrderHeader("FRESH",2L,7L);fresh.setId(9L);var held=new OrderHeader("HELD",2L,7L);held.setId(10L);held.setStatus(OrderStatus.CONFIRMED);
+        when(orderRepo.findByTripId(7L)).thenReturn(List.of(stale,held));when(orderRepo.findByTripIdForUpdate(7L)).thenReturn(List.of(fresh,held));when(entityManager.getLockMode(stale)).thenReturn(LockModeType.NONE);when(entityManager.getLockMode(held)).thenReturn(LockModeType.PESSIMISTIC_WRITE);
+        var coordinator=new OrderWriteCoordinator(tripRepo,orderRepo,entityManager);assertEquals(List.of(fresh,held),coordinator.orders(7L));
+        var sequence=inOrder(entityManager,orderRepo);sequence.verify(orderRepo).findByTripId(7L);sequence.verify(entityManager).detach(stale);sequence.verify(orderRepo).findByTripIdForUpdate(7L);sequence.verify(entityManager).refresh(fresh,LockModeType.PESSIMISTIC_WRITE);
+        assertEquals(OrderStatus.CONFIRMED,held.getStatus());verify(entityManager,never()).detach(held);verify(entityManager,never()).refresh(held,LockModeType.PESSIMISTIC_WRITE);
+    }
 }

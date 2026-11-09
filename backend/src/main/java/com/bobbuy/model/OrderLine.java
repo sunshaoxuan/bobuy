@@ -44,8 +44,31 @@ public class OrderLine {
     public String getSaleUnit(){return saleUnit;}
     public void setSaleUnit(String value){if(!java.util.Objects.equals(saleUnit,value)){saleUnit=value;identityChanged();}}
     @com.fasterxml.jackson.annotation.JsonInclude(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY)
-    public java.util.Map<String,String> getSpecifications(){return java.util.Collections.unmodifiableMap(specifications);}
+    public java.util.Map<String,String> getSpecifications(){return new SpecificationMap();}
     public void setSpecifications(java.util.Map<String,String> value){var changed=value==null?new java.util.HashMap<String,String>():new java.util.HashMap<>(value);if(!java.util.Objects.equals(specifications,changed)){specifications=changed;identityChanged();}}
+    /** Preserve the existing mutable Map API while observing every backed-view write. */
+    private final class SpecificationMap extends java.util.AbstractMap<String,String> {
+        @Override public String put(String key,String value){boolean changed=!specifications.containsKey(key)||!java.util.Objects.equals(specifications.get(key),value);String previous=specifications.put(key,value);if(changed)identityChanged();return previous;}
+        @Override public String remove(Object key){boolean present=specifications.containsKey(key);String previous=specifications.remove(key);if(present)identityChanged();return previous;}
+        @Override public void clear(){if(!specifications.isEmpty()){specifications.clear();identityChanged();}}
+        @Override public java.util.Set<java.util.Map.Entry<String,String>> entrySet(){return new java.util.AbstractSet<>() {
+            @Override public int size(){return specifications.size();}
+            @Override public java.util.Iterator<java.util.Map.Entry<String,String>> iterator(){
+                var backing=specifications;var iterator=backing.entrySet().iterator();
+                return new java.util.Iterator<>() {
+                    @Override public boolean hasNext(){return iterator.hasNext();}
+                    @Override public java.util.Map.Entry<String,String> next(){
+                        var entry=iterator.next();return new java.util.Map.Entry<>() {
+                            public String getKey(){return entry.getKey();}public String getValue(){return entry.getValue();}
+                            public String setValue(String value){String previous=entry.setValue(value);if(backing==specifications&&!java.util.Objects.equals(previous,value))identityChanged();return previous;}
+                            public boolean equals(Object other){return entry.equals(other);}public int hashCode(){return entry.hashCode();}
+                        };
+                    }
+                    @Override public void remove(){iterator.remove();if(backing==specifications)identityChanged();}
+                };
+            }
+        };}
+    }
     private Long id; // 物理主键
     private Long headerId; // 头关联 ID
     private String skuId; // 商品唯一标识
