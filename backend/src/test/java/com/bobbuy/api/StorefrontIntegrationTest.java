@@ -135,6 +135,9 @@ class StorefrontIntegrationTest {
         mvc.perform(get("/api/customer/orders").header("Authorization","Bearer "+bearer)).andExpect(status().isOk())
             .andExpect(jsonPath("$.data[0].deliverySnapshot.city").value("Tokyo")).andExpect(jsonPath("$.data[0].deliverySnapshot.addressLine").value("Original street"))
             .andExpect(jsonPath("$.data[0].checkoutPayloadHash").doesNotExist());
+        // NEW orders are intentionally excluded from the financial ledger. Keep that rule.
+        mvc.perform(get("/api/customer/procurement/2000/ledger").header("Authorization","Bearer "+bearer)).andExpect(status().isOk()).andExpect(jsonPath("$.data").isEmpty());
+        created.setStatus(OrderStatus.CONFIRMED);orders.saveAndFlush(created); // Isolated test fixture only, no customer status endpoint.
         mvc.perform(get("/api/customer/procurement/2000/ledger").header("Authorization","Bearer "+bearer)).andExpect(status().isOk())
             .andExpect(jsonPath("$.data[0].deliveryAddressSource").value("ORDER_SNAPSHOT")).andExpect(jsonPath("$.data[0].deliveryAddressSummary").value("Japan Tokyo Original street"));
         mvc.perform(patch("/api/auth/profile").header("Authorization","Bearer "+bearer).contentType(MediaType.APPLICATION_JSON).content("{\"defaultAddress\":null}")).andExpect(status().isOk());

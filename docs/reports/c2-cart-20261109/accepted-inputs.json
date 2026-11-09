@@ -1,8 +1,8 @@
 {
-  "candidate": "C2.2 cart isolation / checkout / V28; independent R2 source QA accepted, runtime/formal gates pending",
+  "candidate": "C2.2.1 isolated CI fixture correction; runtime and differential fixture review pending",
   "baseHead": "76647177c47daf670d70a3c08c66aa9f63e0e60a",
   "sourceDigestAlgorithm": "sha256-json-utf8-sourceFiles-v1",
-  "sourceDigest": "5b26b0a1cc48363bcb1f616cd2bdb8b8c772d9d9c8d0e0b3b5b13ee9ff50ef9c",
+  "sourceDigest": "030163217daa2b2d0b2437f510f821aa0d5d4e38e14304242f51a393377262b3",
   "lineEndingPolicy": "Exact canonical Git-filtered blob bytes, SHA1 cross-checked against git hash-object; unchanged binaries byte-for-byte. Excludes this self-referential manifest and unrelated protected dirty files.",
   "sourceFiles": [
     {
@@ -1727,8 +1727,8 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/ProductIdentityCompatibilityIntegrationTest.java",
-      "gitLfBytes": 11355,
-      "gitLfSha256": "37c9dc69376e1874bcaa1c3a5873e6665992fdc5a3ecdd5ea77ca7de94c14383"
+      "gitLfBytes": 11493,
+      "gitLfSha256": "a7ca8b813a2dbcccd7de60acdb87ffcc67371d531f0f4ee3dc29209321f7a400"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/ProductLifecycleIntegrationTest.java",
@@ -1797,8 +1797,8 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/StorefrontIntegrationTest.java",
-      "gitLfBytes": 32843,
-      "gitLfSha256": "7c5c6ac22a2b71112ecf3b4be136320bd73e26024fec11183cef3ebeb76344c5"
+      "gitLfBytes": 33249,
+      "gitLfSha256": "606eb9f6e653dfd79207d9120c69d567f928ea3295e67f39cc7d5ff7641f8170"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/TripControllerIntegrationTest.java",
@@ -2107,8 +2107,8 @@
     },
     {
       "path": "docs/reports/C2-CART-20261109.md",
-      "gitLfBytes": 13458,
-      "gitLfSha256": "09d7792493a27bf178bf8e2cee78b64d4763195e5e7068c1fde880f0704dcc80"
+      "gitLfBytes": 14328,
+      "gitLfSha256": "0053aa2aef77e88778694281976fa514bae38629303f10e288c07de78ff04078"
     },
     {
       "path": "frontend/Dockerfile",
@@ -3559,7 +3559,7 @@
   "frontendFiles": null,
   "previousProductionCoreJarSha256": "a5793c033ed6b6778dfd4b7e27dfa26d532f36d933d1108de5c34adf0c58e75a",
   "qa": {
-    "status": "PASS_INDEPENDENT_R2_SOURCE_QA_RUNTIME_PENDING",
+    "status": "R2_APPLICATION_QA_REUSED_CI_FIXTURE_DELTA_REVIEW_PENDING",
     "acceptedForPreciseCommitAndNormalRemoteCi": true,
     "sourceOnly": true,
     "backendRuntimeAccepted": false,
@@ -3577,7 +3577,27 @@
     "acceptedRawCandidateSourceDigest": "fed39d17bfac51172928d8f7fe0b8b85b874d590389865ebdabb138fb8722977",
     "acceptedCiCanonicalSourceDigest": "5b26b0a1cc48363bcb1f616cd2bdb8b8c772d9d9c8d0e0b3b5b13ee9ff50ef9c",
     "issuer": "ENGINEERING_EXACT_BINDING_OF_ORIGINAL_INDEPENDENT_R2_SOURCE_QA",
-    "formalArtifactOrBrowserAccepted": false
+    "formalArtifactOrBrowserAccepted": false,
+    "postQaChanges": [
+      {
+        "path": "backend/src/test/java/com/bobbuy/api/StorefrontIntegrationTest.java",
+        "reason": "Respect existing NEW financial-ledger exclusion; assert snapshot after synthetic confirmation",
+        "failedRunId": 42589048412,
+        "affectedIndependentReview": "PENDING"
+      },
+      {
+        "path": "backend/src/test/java/com/bobbuy/api/ProductIdentityCompatibilityIntegrationTest.java",
+        "reason": "Supply existing published-post CHECK fields to isolated PG fixture",
+        "failedRunId": 42589048412,
+        "affectedIndependentReview": "PENDING"
+      },
+      {
+        "path": "docs/reports/C2-CART-20261109.md",
+        "reason": "Record actual CI failure and narrow fixture fix",
+        "failedRunId": 42589048412,
+        "affectedIndependentReview": "PENDING"
+      }
+    ]
   },
   "schemaBefore": 27,
   "schemaAfter": 28,

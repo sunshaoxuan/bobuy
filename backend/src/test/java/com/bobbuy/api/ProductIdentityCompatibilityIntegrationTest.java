@@ -35,7 +35,7 @@ class ProductIdentityCompatibilityIntegrationTest {
 
  @BeforeEach void setup()throws Exception{requireIsolatedTestDatasource();isolatedDatasourceValidated=true;recoveries.deleteAll();store.seed();token=tokens.createAccessToken(users.findById(1000L).orElseThrow());
   var p=new Product();id="identity-recovery-"+UUID.randomUUID();p.setId(id);p.setMerchantId(1000L);p.setItemNumber("ITEM-80x2");p.setBrand("Brand");p.setName(Map.of("ja-JP","Original full name"));p.setBasePrice(123);products.saveAndFlush(p);
-  var post=new RecommendationPost();post.merchantId=1000L;post.title="Synthetic original";post.published=true;post=posts.saveAndFlush(post);postId=post.id;
+  var post=new RecommendationPost();post.merchantId=1000L;post.title="Synthetic original";post.body="Synthetic source body";post.published=true;post.publishedAt=java.time.Instant.now();post.publisherId=1000L;post.publisherName="Synthetic merchant";post=posts.saveAndFlush(post);postId=post.id;
   var item=new RecommendationItem();item.postId=postId;item.productId=id;item.name="Immutable source";item.itemNumber="ITEM-80x2";item.referencePrice=new BigDecimal("300");item.offerStart=java.time.LocalDate.of(2026,11,6);item.offerEnd=java.time.LocalDate.of(2026,11,8);item.imageHash=UUID.randomUUID().toString();item.imageUrl="/synthetic.png";itemId=items.saveAndFlush(item).id;
  }
  @AfterEach void cleanup(){if(!isolatedDatasourceValidated)return;recoveries.deleteAll();items.deleteById(itemId);posts.deleteById(postId);products.deleteById(id);orders.findById(990099L).ifPresent(orders::delete);}
