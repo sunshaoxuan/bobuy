@@ -2,10 +2,13 @@ package com.bobbuy.api;
 
 import com.bobbuy.api.response.GlobalExceptionHandler;
 import com.bobbuy.service.RecommendationIssueDateService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import java.time.*;
 import org.junit.jupiter.api.*;
 import org.springframework.context.support.StaticMessageSource;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.mockito.ArgumentMatchers.*;
@@ -18,7 +21,13 @@ class RecommendationIssueDateControllerTest {
     MockMvc mvc;
     final String path="/api/merchant/recommendations/12/issue-date";
     final String body="{\"issueDate\":\"2026-10-31\",\"sourceRef\":\"message:source-12\",\"sourceHash\":\""+"a".repeat(64)+"\",\"version\":3,\"reviewed\":true}";
-    @BeforeEach void setup(){var messages=new StaticMessageSource();messages.setUseCodeAsDefaultMessage(true);mvc=MockMvcBuilders.standaloneSetup(new RecommendationIssueDateController(service)).setControllerAdvice(new GlobalExceptionHandler(messages)).build();}
+    @BeforeEach void setup(){
+        var messages=new StaticMessageSource();messages.setUseCodeAsDefaultMessage(true);
+        // Standalone MVC does not apply Boot's ISO date serialization default.
+        var mapper=new ObjectMapper().findAndRegisterModules().disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        mvc=MockMvcBuilders.standaloneSetup(new RecommendationIssueDateController(service))
+            .setMessageConverters(new MappingJackson2HttpMessageConverter(mapper)).setControllerAdvice(new GlobalExceptionHandler(messages)).build();
+    }
     @Test void sourceReviewWireReturnsServerOwnedMetadataAndCalendarDate()throws Exception{
         when(service.save(eq(12L),any())).thenReturn(new RecommendationIssueDateService.Review(LocalDate.of(2026,10,31),"message:source-12","a".repeat(64),7L,Instant.parse("2026-11-01T00:00:00Z"),"REVIEWED_SOURCE",4));
         mvc.perform(put(path).contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isOk()).andExpect(jsonPath("$.data.issueDate").value("2026-10-31")).andExpect(jsonPath("$.data.reviewedBy").value(7)).andExpect(jsonPath("$.data.source").value("REVIEWED_SOURCE")).andExpect(jsonPath("$.data.version").value(4));

@@ -1,8 +1,8 @@
 {
-  "candidate": "Issue-date backend and normal owner editor wiring on fixed menu R7; source QA, exact CI and combined artifact acceptance pending",
-  "baseHead": "d0895bcdd8d9f2c60cad889e0c625565f1ec348c",
+  "candidate": "Issue-date normal owner wiring fix1: standalone ISO mapper correction only; exact new CI pending",
+  "baseHead": "623a03c8df22edc94299bccbfe6ed71e3bc35578",
   "sourceDigestAlgorithm": "sha256-json-utf8-sourceFiles-v1",
-  "sourceDigest": "408a4ae160b467a6e1d3c3e93e536bd8cb0c5b8d77625e8bd4c1b426aa3c2919",
+  "sourceDigest": "6021185d8f5e6516338914cc7c757b3700138603ba37f01f983ea686cf52ddcb",
   "lineEndingPolicy": "Canonical Git-filtered bytes, batch SHA1 checked; all 675 C2 paths retained and unchanged paths checked, fixed d089 parent checked; this self-referential input file excluded.",
   "sourceFiles": [
     {
@@ -1787,8 +1787,8 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/RecommendationDirectoryMetadataHttpTest.java",
-      "gitLfBytes": 3605,
-      "gitLfSha256": "4d3491a8edbe46c06f101a33511e45af6821485a49b1c9ec0a943395cc9b4c1f"
+      "gitLfBytes": 4107,
+      "gitLfSha256": "1cd1e23e25bc4e812bae3aaa3d2de3cdc54726ae1eb4df8835ef6de227241c9b"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/RecommendationIntegrationTest.java",
@@ -1797,8 +1797,8 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/RecommendationIssueDateControllerTest.java",
-      "gitLfBytes": 3485,
-      "gitLfSha256": "6c9e48eb8c576c0f4ae4e432123ffe4b5a5175be561ad5d7935cdbd156a41bb8"
+      "gitLfBytes": 3987,
+      "gitLfSha256": "35b783ec3fc3a2befe8dc242a308a07d138c764526fdc83277ff958453216d51"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/RecommendationIssueDateIntegrationTest.java",
@@ -2167,8 +2167,8 @@
     },
     {
       "path": "docs/reports/ISSUE-DATE-WIRED-CI-20261109.md",
-      "gitLfBytes": 3343,
-      "gitLfSha256": "cf1bb1d37b672f601d2f0bec88f46ef9634461d54bfc73eecf5b558f79475166"
+      "gitLfBytes": 5972,
+      "gitLfSha256": "67efd75d3caed6fabf6c99af15ddd40510452eaeeb14cd3058f69794eb32d261"
     },
     {
       "path": "docs/reports/RECOMMENDATION-ISSUE-DATE-EDITOR-20261109.md",
@@ -3713,7 +3713,7 @@
   "previousProductionCoreJarSha256": "00642cb993516e072e4e416e1d579f8f6d2ef55ae668715828475b808aec276c",
   "previousCoreSource": "82b8daf7fe275d6dd623b36621f1cf2596dc0e98",
   "qa": {
-    "status": "PENDING_WIRED_SOURCE_QA_AND_EXACT_REMOTE_CI",
+    "status": "PENDING_FIX1_SOURCE_QA_AND_EXACT_REMOTE_CI",
     "sourceOnly": true,
     "wiredIndependentSourceQa": "NOT_RUN",
     "backendRuntimeAccepted": false,
@@ -3728,7 +3728,79 @@
       "migrationBaselineSha256": "48bbcc808d0a0761e112b720c276592afe52f9979031a9975247065efeb277ba"
     },
     "committedReport": "docs/reports/ISSUE-DATE-WIRED-CI-20261109.md",
-    "old82ApplicationBoot": "NOT_RUN"
+    "old82ApplicationBoot": "NOT_RUN",
+    "fix1JavaRuntime": "NOT_RUN",
+    "sourceCorrections": {
+      "priorAcceptedSource": "623a03c8df22edc94299bccbfe6ed71e3bc35578",
+      "priorAcceptedSha256": "ab2809278f944a18c15b63e78590bd86ba748b3fa90ab8b50458568af6f99d74",
+      "changedRows": [
+        {
+          "path": "backend/src/test/java/com/bobbuy/api/RecommendationDirectoryMetadataHttpTest.java",
+          "before": {
+            "path": "backend/src/test/java/com/bobbuy/api/RecommendationDirectoryMetadataHttpTest.java",
+            "gitLfBytes": 3605,
+            "gitLfSha256": "4d3491a8edbe46c06f101a33511e45af6821485a49b1c9ec0a943395cc9b4c1f"
+          },
+          "after": {
+            "path": "backend/src/test/java/com/bobbuy/api/RecommendationDirectoryMetadataHttpTest.java",
+            "gitLfBytes": 4107,
+            "gitLfSha256": "1cd1e23e25bc4e812bae3aaa3d2de3cdc54726ae1eb4df8835ef6de227241c9b"
+          }
+        },
+        {
+          "path": "backend/src/test/java/com/bobbuy/api/RecommendationIssueDateControllerTest.java",
+          "before": {
+            "path": "backend/src/test/java/com/bobbuy/api/RecommendationIssueDateControllerTest.java",
+            "gitLfBytes": 3485,
+            "gitLfSha256": "6c9e48eb8c576c0f4ae4e432123ffe4b5a5175be561ad5d7935cdbd156a41bb8"
+          },
+          "after": {
+            "path": "backend/src/test/java/com/bobbuy/api/RecommendationIssueDateControllerTest.java",
+            "gitLfBytes": 3987,
+            "gitLfSha256": "35b783ec3fc3a2befe8dc242a308a07d138c764526fdc83277ff958453216d51"
+          }
+        },
+        {
+          "path": "docs/reports/ISSUE-DATE-WIRED-CI-20261109.md",
+          "before": {
+            "path": "docs/reports/ISSUE-DATE-WIRED-CI-20261109.md",
+            "gitLfBytes": 3343,
+            "gitLfSha256": "cf1bb1d37b672f601d2f0bec88f46ef9634461d54bfc73eecf5b558f79475166"
+          },
+          "after": {
+            "path": "docs/reports/ISSUE-DATE-WIRED-CI-20261109.md",
+            "gitLfBytes": 5972,
+            "gitLfSha256": "67efd75d3caed6fabf6c99af15ddd40510452eaeeb14cd3058f69794eb32d261"
+          }
+        }
+      ],
+      "unchangedRows": 699,
+      "originalHttpAssertions": "UNCHANGED"
+    },
+    "previousExactCI": {
+      "runId": 42651744734,
+      "backend": {
+        "tests": 441,
+        "passed": 434,
+        "failures": 2,
+        "errors": 0,
+        "skipped": 5
+      },
+      "postgres": {
+        "status": "PASS",
+        "uniqueTests": 35,
+        "reportArtifact": 13691035303,
+        "zipSha256": "6296cd15d58c91c0edd83c62cfb201249f5877ff79113ab7b2515103cf512c0e"
+      },
+      "frontend": {
+        "tests": 527,
+        "passed": 527,
+        "build": "PASS"
+      },
+      "codeqlRunId": 42651750069,
+      "dependencyRunId": 42651756063,
+      "dockerAndFormalArtifacts": "SKIPPED_BACKEND_FAILURE"
+    }
   },
   "schemaBefore": 28,
   "schemaAfter": "28.1",
