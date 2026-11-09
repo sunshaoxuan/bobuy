@@ -15,7 +15,8 @@ public class RecommendationArticleService {
  public Map<String,RecommendationPost.ArticleText> current(RecommendationPost p){var result=new HashMap<String,RecommendationPost.ArticleText>();String hash=sourceHash(p);p.articleTranslations.forEach((locale,text)->{if(hash.equals(text.sourceHash()))result.put(locale,text);});return Map.copyOf(result);}
  public Map<String,String> titles(RecommendationPost p){var result=new HashMap<String,String>();current(p).forEach((locale,text)->{if(text.title()!=null&&!text.title().isBlank())result.put(locale,text.title());});return Map.copyOf(result);}
  public void snapshot(RecommendationPost p){
-  if(p.id==null)return;var facts=new TreeMap<String,Object>();facts.put("sourceLocale",p.articleSourceLocale);facts.put("title",p.title);facts.put("body",p.body);facts.put("translations",new TreeMap<>(p.articleTranslations));if(p.serviceOffer!=null)facts.put("serviceOffer",p.serviceOffer);String hash=hash(facts);
+  if(p.id==null)return;var facts=new TreeMap<String,Object>();facts.put("sourceLocale",p.articleSourceLocale);facts.put("title",p.title);facts.put("body",p.body);facts.put("translations",new TreeMap<>(p.articleTranslations));if(p.serviceOffer!=null)facts.put("serviceOffer",p.serviceOffer);
+  if(p.hasReviewedIssueDate()){var review=new TreeMap<String,Object>();review.put("issueDate",p.issueDate.toString());review.put("sourceRef",p.issueDateSourceRef);review.put("sourceHash",p.issueDateSourceHash);review.put("reviewedBy",p.issueDateReviewedBy);review.put("reviewedAt",p.issueDateReviewedAt.toString());facts.put("issueDateReview",review);}String hash=hash(facts);
   if(revisions.findFirstByPostIdOrderByIdDesc(p.id).filter(row->hash.equals(row.factsHash)).isPresent())return;
   var row=new RecommendationArticleRevision();row.postId=p.id;row.merchantId=p.merchantId;row.factsHash=hash;row.facts=facts;row.recordedAt=Instant.now();revisions.saveAndFlush(row);
  }

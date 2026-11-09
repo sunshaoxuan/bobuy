@@ -47,33 +47,64 @@ def source_digest_acceptance(accepted):
             raise RuntimeError('Accepted source-list digest differs')
 
 
-C2_V28_BASELINE = 'docs/reports/c2-cart-20261109/accepted-inputs.json'
-C2_V28_BASELINE_SHA256 = '48bbcc808d0a0761e112b720c276592afe52f9979031a9975247065efeb277ba'
+ISSUE_DATE_MIGRATION = 'V28_1__recommendation_issue_date.sql'
+ISSUE_DATE_SHA256 = 'd742bea25cb8ef3d205c9e2a4992d25024a372b5ab9dc38dc915f0ebbb91224e'
+C2_BASELINE = 'docs/reports/c2-cart-20261109/accepted-inputs.json'
+C2_BASELINE_SHA256 = '48bbcc808d0a0761e112b720c276592afe52f9979031a9975247065efeb277ba'
+
+
+def version_tuple(value):
+    if isinstance(value, bool) or not isinstance(value, (str, int)) or not re.fullmatch(r'\d+(?:[._]\d+)*', str(value)):
+        raise RuntimeError('Invalid Flyway version; floating-point versions are not accepted')
+    parts = tuple(int(part) for part in re.split(r'[._]', str(value)))
+    while len(parts) > 1 and parts[-1] == 0:
+        parts = parts[:-1]
+    return parts
+
+
+def migration_version(path):
+    match = re.fullmatch(r'V(\d+(?:[._]\d+)*)__[^/]+\.sql', path)
+    if match is None:
+        raise RuntimeError('Invalid accepted migration filename')
+    return version_tuple(match.group(1))
 
 
 def schema_acceptance(accepted, actual, baseline=None):
     if actual != accepted['migrations']:
         raise RuntimeError('Accepted migration bytes/list changed')
     identity = (accepted.get('schemaBefore', 27), accepted.get('schemaAfter', 27), accepted.get('migrationChanges', False))
-    names = [re.fullmatch(r'V(\d+)__.+\.sql', entry['path']) for entry in actual]
-    if not names or any(name is None for name in names):
-        raise RuntimeError('Invalid accepted migration filename')
-    versions = [int(name.group(1)) for name in names]
-    if identity == (27, 27, False) and versions and max(versions) == 27:
+    version_tuple(identity[0])
+    version_tuple(identity[1])
+    versions = [migration_version(entry['path']) for entry in actual]
+    if not versions or len(set(versions)) != len(versions) or not isinstance(identity[2], bool):
+        raise RuntimeError('Missing/duplicate normalized migration version or invalid migration flag')
+    legacy_names = all(re.fullmatch(r'V\d+__.+\.sql', entry['path']) for entry in actual)
+    if identity == (27, 27, False) and legacy_names and max(versions) == (27,):
         return {'schemaBefore': 27, 'schemaAfter': 27, 'migrationChanges': False}
-    if identity == (28, 28, False):
-        if (type(accepted.get('schemaBefore')) is not int or type(accepted.get('schemaAfter')) is not int
-                or accepted.get('migrationChanges') is not False or baseline is None
-                or (baseline.get('schemaBefore'), baseline.get('schemaAfter'), baseline.get('migrationChanges')) != (27, 28, True)
-                or actual != baseline.get('migrations') or max(versions) != 28):
-            raise RuntimeError('Unchanged V28 capture requires the exact prior C2 migration inventory')
-        return {'schemaBefore': 28, 'schemaAfter': 28, 'migrationChanges': False}
+    if identity == (28, '28.1', True):
+        old_part = [entry for entry in actual if entry['path'] != ISSUE_DATE_MIGRATION]
+        added = [entry for entry in actual if entry['path'] == ISSUE_DATE_MIGRATION]
+        if (baseline is None or (baseline.get('schemaBefore'), baseline.get('schemaAfter'), baseline.get('migrationChanges')) != (27, 28, True)
+                or old_part != baseline['migrations'] or len(added) != 1
+                or added[0].get('sha256') != ISSUE_DATE_SHA256 or len(actual) != len(old_part) + 1
+                or not old_part or max(migration_version(entry['path']) for entry in old_part) != (28,)
+                or max(versions) != (28, 1) or not all(re.fullmatch(r'V\d+__.+\.sql', entry['path']) for entry in old_part)):
+            raise RuntimeError('Issue dates require the exact immutable C2 V28 prefix plus only the pinned V28.1 migration')
+        return {'schemaBefore': 28, 'schemaAfter': '28.1', 'migrationChanges': True}
+    if identity == (28, 30, True):
+        additions = {'V29__customer_order_amendments.sql', 'V30__costco_onboarding_jobs.sql'}
+        if (not legacy_names or baseline is None or (baseline.get('schemaBefore'), baseline.get('schemaAfter'), baseline.get('migrationChanges')) != (27, 28, True)
+                or [entry for entry in actual if entry['path'] not in additions] != baseline['migrations']
+                or {entry['path'] for entry in actual if entry['path'] in additions} != additions
+                or len(actual) != len(baseline['migrations']) + 2 or max(versions) != (30,)):
+            raise RuntimeError('C3/R13 requires the exact unchanged C2 V28 list plus only its V29 and V30 migrations')
+        return {'schemaBefore': 28, 'schemaAfter': 30, 'migrationChanges': True}
     if identity != (27, 28, True) or baseline is None or baseline.get('schemaAfter') != 27 or baseline.get('migrationChanges') is not False:
         raise RuntimeError('Unaccepted schema transition')
     previous = baseline['migrations']
     old_part = [entry for entry in actual if entry['path'] != 'V28__checkout_delivery_snapshot.sql']
     added = [entry for entry in actual if entry['path'] == 'V28__checkout_delivery_snapshot.sql']
-    if old_part != previous or len(added) != 1 or max(versions) != 28:
+    if not legacy_names or old_part != previous or len(added) != 1 or max(versions) != (28,):
         raise RuntimeError('C2 requires the exact unchanged V27 list plus only its V28 migration')
     return {'schemaBefore': 27, 'schemaAfter': 28, 'migrationChanges': True}
 
@@ -86,20 +117,23 @@ def checkout_migration_acceptance(content):
         raise RuntimeError('C2 migration must add only the two nullable columns without defaults or data writes')
 
 
+def issue_date_migration_acceptance(content):
+    if hashlib.sha256(content).hexdigest() != ISSUE_DATE_SHA256:
+        raise RuntimeError('Only the reviewed byte-exact V28.1 issue-date migration is accepted')
+
+
 def migration_baseline(accepted):
-    if (accepted.get('schemaBefore'), accepted.get('schemaAfter'), accepted.get('migrationChanges')) == (28, 28, False):
-        binding = accepted.get('migrationBaseline', {})
-        path = Path(binding.get('path', ''))
-        if (path.as_posix() != C2_V28_BASELINE or binding.get('sha256') != C2_V28_BASELINE_SHA256
-                or digest(path) != C2_V28_BASELINE_SHA256):
-            raise RuntimeError('Exact immutable C2 V28 baseline required for web-only capture')
-        return json.loads(path.read_text())
     if not accepted.get('migrationChanges'):
         return None
     binding = accepted.get('migrationBaseline', {})
     path = Path(binding.get('path', ''))
-    if path.as_posix() != 'docs/reports/c1-profile-20261109/accepted-inputs.json' or digest(path) != binding.get('sha256'):
-        raise RuntimeError('Exact prior V27 migration manifest required')
+    identity = (accepted.get('schemaBefore'), accepted.get('schemaAfter'), accepted.get('migrationChanges'))
+    c2_prefix = identity in {(28, 30, True), (28, '28.1', True)}
+    expected_path = C2_BASELINE if c2_prefix else 'docs/reports/c1-profile-20261109/accepted-inputs.json'
+    if path.as_posix() != expected_path or digest(path) != binding.get('sha256'):
+        raise RuntimeError('Exact prior migration manifest required')
+    if c2_prefix and binding['sha256'] != C2_BASELINE_SHA256:
+        raise RuntimeError('The immutable accepted C2 V28 manifest is required')
     return json.loads(path.read_text())
 
 
@@ -122,8 +156,10 @@ def main():
             raise RuntimeError('Accepted application source differs: ' + entry['path'])
     migration_root = Path('backend/src/main/resources/db/migration')
     schema = schema_acceptance(accepted, files(migration_root), migration_baseline(accepted))
-    if schema['migrationChanges']:
+    if (schema['schemaBefore'], schema['schemaAfter'], schema['migrationChanges']) == (27, 28, True):
         checkout_migration_acceptance((migration_root / 'V28__checkout_delivery_snapshot.sql').read_bytes())
+    if (schema['schemaBefore'], schema['schemaAfter'], schema['migrationChanges']) == (28, '28.1', True):
+        issue_date_migration_acceptance((migration_root / ISSUE_DATE_MIGRATION).read_bytes())
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=False)
     core_jar = output / 'core.jar'

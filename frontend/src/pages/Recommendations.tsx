@@ -13,6 +13,7 @@ import RecommendationGallery from '../components/RecommendationGallery';
 import ReferenceQuoteHistory from '../components/ReferenceQuoteHistory';
 import ArticleLanguages from '../components/ArticleLanguages';
 import RecommendationServiceEditor from '../components/RecommendationServiceEditor';
+import RecommendationIssueDatePanel,{applyRecommendationIssueDate} from '../components/RecommendationIssueDatePanel';
 import '../browse.css';
 import RecommendationClassification from '../components/RecommendationClassification';
 import { useI18n } from '../i18n';
@@ -48,6 +49,8 @@ export default function Recommendations() {
   const [classificationPending,setClassificationPending]=useState(false);
   const [fromProductPending,setFromProductPending]=useState(false);
   const [articlePending,setArticlePending]=useState(false);
+  const [issueDatePending,setIssueDatePending]=useState(false);
+  const activePostId=useRef(id);activePostId.current=id;
   const [serviceOpen,setServiceOpen]=useState(false);
   const [editingItem, setEditingItem] = useState<number>();
   const [editFacts, setEditFacts] = useState<RecommendationFacts>({name:''});
@@ -58,7 +61,7 @@ export default function Recommendations() {
   const published = detail?.post.published;
   const identity = (item: RecommendationDetail['items'][number]) => item.productId || 'recommendation:'+item.id;
   const products = [...new Map(detail?.items.map(item => [identity(item), item])).values()];
-  const pending = preparing || queue.some(item => item.status !== 'done') || editingItem !== undefined || !!batch.trim() || classificationPending || fromProductPending||articlePending||serviceOpen;
+  const pending = preparing || queue.some(item => item.status !== 'done') || editingItem !== undefined || !!batch.trim() || classificationPending || fromProductPending||articlePending||issueDatePending||serviceOpen;
   useEffect(() => () => { selectionEpoch.current++; urls.current.forEach(url => URL.revokeObjectURL(url)); }, []);
   useEffect(() => {
     if (!dirty && !pending) return;
@@ -73,6 +76,7 @@ export default function Recommendations() {
     setQueue([]); setQueuePage(1); setItemPage(1); setGenerated(''); setPrompt('');
     setEditingItem(undefined); setBatch(''); setPreview(false);
     setClassificationPending(false);
+    setIssueDatePending(false);
     setLoading(true); setError(''); setNotice(''); setDetail(undefined);
     const request = id ? api.get(id) : api.list(page);
     void request.then(value => {
@@ -151,7 +155,7 @@ export default function Recommendations() {
     <header className="rec-heading"><div><h1>{t('rec.title')}</h1>{detail && <Tag color={published ? 'green' : undefined}>{t(published ? 'rec.published' : 'rec.draft')}{dirty ? ' *' : ''}</Tag>}</div>
       {!id && <div className="rec-action-group"><Button onClick={()=>setServiceOpen(true)}>{t('service.kind')}</Button><Button type="primary" icon={<PlusOutlined />} loading={busy} onClick={() => void run(async () => { const post = await api.create(); setParams({ post: String(post.post.id) }); })}>{t('rec.new')}</Button></div>}
     </header>
-    {error && <Alert type="error" showIcon message={error} action={<Button icon={<ReloadOutlined />} onClick={() => void run(async () => {
+    {error && <Alert type="error" showIcon message={error} action={<Button aria-label={t('rec.reload')} icon={<ReloadOutlined aria-hidden/>} onClick={() => void run(async () => {
       if (id) { const value = await api.get(id); setDetail(value); if (!dirty) { setTitle(value.post.title); setBody(value.body); } }
       else setList(await api.list(page));
     })}>{t('rec.reload')}</Button>} />}
@@ -164,6 +168,10 @@ export default function Recommendations() {
           <Button type="primary" icon={<SendOutlined />} disabled={busy || writing || pending || (!detail.serviceOffer&&!detail.items.length) || !title.trim() || !body.trim()} onClick={() => void publish()}>{t('rec.publish')}</Button></>}
         </div></div>
       {detail.post.publishedAt && <div className="rec-publication rec-publication-editor"><span>{t('rec.publisher')}: {detail.post.publisherName}</span><time dateTime={detail.post.publishedAt}>{t('rec.published_date')}: {new Date(detail.post.publishedAt).toLocaleString(locale)}</time></div>}
+      <RecommendationIssueDatePanel post={detail.post} disabled={busy||writing||preparing||classificationPending||fromProductPending||articlePending||serviceOpen}
+        onPendingChange={value=>{if(activePostId.current===detail.post.id)setIssueDatePending(value);}}
+        onVersionConflict={()=>{if(activePostId.current===detail.post.id)setError(t('issueDate.parentConflict'));}}
+        onSaved={(value,expectedVersion)=>{const postId=detail.post.id;if(activePostId.current===postId)setDetail(current=>current?applyRecommendationIssueDate(current,postId,expectedVersion,value)??current:current);}}/>
       <div className="rec-editor-layout"><section className="rec-article"><h2>{t('rec.article')}</h2>{detail.serviceOffer?<div className="rec-public-body"><Tag>{t('service.kind')}</Tag>{body.split(/\n\s*\n/).map((p,i)=><p key={i}>{p}</p>)}</div>:<ArticleLanguages key={detail.post.id} detail={detail} title={title} body={body} sourceDirty={dirty} disabled={published||busy} onTitle={setTitle} onBody={setBody} onChanged={next=>{setDetail(next);setTitle(next.post.title);setBody(next.body);}} onPending={setArticlePending}/>}
         {published && <div className="rec-public-link"><Link to={'/recommendations/' + id}>{t('rec.view')}</Link><Tooltip title={t('rec.copy')}><Button icon={<CopyOutlined />} aria-label={t('rec.copy')} onClick={() => void run(async () => { await navigator.clipboard.writeText(location.origin + '/recommendations/' + id); setNotice(t('rec.copied')); })} /></Tooltip></div>}
       </section></div>

@@ -1,0 +1,231 @@
+{
+  "format": "BOBUY_ISSUE_DATE_WIRED_FRONTEND_V1",
+  "parentHead": "d0895bcdd8d9f2c60cad889e0c625565f1ec348c",
+  "status": "APPLIED_SOURCE_LOCAL_TESTED_INDEPENDENT_WIRED_QA_PENDING",
+  "sources": {
+    "r7": {
+      "path": ".task-tmp/menu-contrast-20261109/r7-lifecycle/MANIFEST.json",
+      "sha256": "29bb354b4ec6d144d7419a9e133b819258b32ab48ae1486824cf55042f7b2859"
+    },
+    "editor": {
+      "path": ".task-tmp/date-editor-20261109/MANIFEST.json",
+      "sha256": "a5e0814e92b183a60a3c565a48d3fdd9ce88f060756de881bcabe2f808c31aaf"
+    },
+    "wiring": {
+      "path": ".task-tmp/date-editor-20261109/wiring/MANIFEST.json",
+      "sha256": "4a2bff00e56ac86138ebad3bd6fad4ae627b2035f307e24f9a1ce129838e377b"
+    }
+  },
+  "appliedReceiptSha256": "37c5cd7ccf8d01dc6f33dd1398746b3d0071f8c3575e5fd3a21caf58a41918d2",
+  "overriddenR7Paths": [
+    "frontend/src/api.ts",
+    "frontend/src/locales/en-US.ts",
+    "frontend/src/locales/ja-JP.ts",
+    "frontend/src/locales/zh-CN.ts",
+    "frontend/src/locales/zh-TW.ts"
+  ],
+  "wiringPaths": [
+    "docs/reports/RECOMMENDATION-ISSUE-DATE-WIRING-20261109.md",
+    "frontend/src/api.issueDate.test.ts",
+    "frontend/src/api.ts",
+    "frontend/src/components/RecommendationIssueDatePanel.test.tsx",
+    "frontend/src/components/RecommendationIssueDatePanel.tsx",
+    "frontend/src/locales/en-US.ts",
+    "frontend/src/locales/ja-JP.ts",
+    "frontend/src/locales/zh-CN.ts",
+    "frontend/src/locales/zh-TW.ts",
+    "frontend/src/pages/Recommendations.tsx",
+    "frontend/src/pages/RecommendationsIssueDate.test.tsx"
+  ],
+  "files": [
+    {
+      "path": "docs/reports/RECOMMENDATION-ISSUE-DATE-EDITOR-20261109.md",
+      "bytes": 4843,
+      "sha256": "28885a9316e7f6ec793bc5120f21c6471ee89cfd187869be6d809d0f2ce0afb7",
+      "gitLfBytes": 4843,
+      "canonicalSha256": "28885a9316e7f6ec793bc5120f21c6471ee89cfd187869be6d809d0f2ce0afb7",
+      "origin": "EDITOR",
+      "parentBlobSha1": null
+    },
+    {
+      "path": "docs/reports/RECOMMENDATION-ISSUE-DATE-WIRING-20261109.md",
+      "bytes": 3489,
+      "sha256": "182a84d401b9ba993a9fdb271731c79d99606a1dd446ac45721ef9644aaecefb",
+      "gitLfBytes": 3474,
+      "canonicalSha256": "6923f73d17cd0877afac48c07bf973ab57c9c50c46d5b585d56c7efbe105ce0e",
+      "origin": "WIRING",
+      "parentBlobSha1": null
+    },
+    {
+      "path": "docs/reports/RECOMMENDATION-MENU-20261109.md",
+      "bytes": 5414,
+      "sha256": "8170c862423f0584f5fe88391fb085867fc49d9a574b67d9633b5156c9eb8c54",
+      "gitLfBytes": 5414,
+      "canonicalSha256": "8170c862423f0584f5fe88391fb085867fc49d9a574b67d9633b5156c9eb8c54",
+      "origin": "R7",
+      "parentBlobSha1": "978e59e6ddb88851acf2c4f3f6ff760b823dff36"
+    },
+    {
+      "path": "docs/reports/RECOMMENDATION-MENU-LIFECYCLE-R7-20261109.md",
+      "bytes": 5376,
+      "sha256": "22b059e9575531da7f073698fca85e904cadaae75128b1e4abe9c2153dc380b7",
+      "gitLfBytes": 5376,
+      "canonicalSha256": "22b059e9575531da7f073698fca85e904cadaae75128b1e4abe9c2153dc380b7",
+      "origin": "R7",
+      "parentBlobSha1": "441da84c9578f15a2dbed83786c00618cbaa33ef"
+    },
+    {
+      "path": "frontend/src/api.issueDate.test.ts",
+      "bytes": 4660,
+      "sha256": "b484f8e75ed3e3649ec0171d8bd92b684de9b7187c65069ee38de290d8a74970",
+      "gitLfBytes": 4634,
+      "canonicalSha256": "3deb0b6abf6210e396dede18ef7545fbf97e8fb9b580adf79100f84e49885d11",
+      "origin": "WIRING",
+      "parentBlobSha1": null
+    },
+    {
+      "path": "frontend/src/api.ts",
+      "bytes": 74201,
+      "sha256": "9f7c40b14760f19b330f6b288122d98a3ea779743de3d3d5b572bede9e61004d",
+      "gitLfBytes": 72705,
+      "canonicalSha256": "325c04dc6da3d28f4ed26593aef52c8a4f591976f2d160c0d0ff70c4df4dd6b9",
+      "origin": "WIRING",
+      "parentBlobSha1": "332fae5a48960d7d0b7bde8eaabded55808a15a1"
+    },
+    {
+      "path": "frontend/src/components/issue-directory.css",
+      "bytes": 3836,
+      "sha256": "60f1599669ed06294e4657a973eeec3a7734776cdb64f06fac69c5795995ea51",
+      "gitLfBytes": 3804,
+      "canonicalSha256": "cd0a20531a40704ca0ad5f71af49d0343882c840513304c51757010013729cfe",
+      "origin": "R7",
+      "parentBlobSha1": "1338f9cfd1bbc7a19c95782b506d2a2f15e2e201"
+    },
+    {
+      "path": "frontend/src/components/IssueDirectory.test.tsx",
+      "bytes": 13124,
+      "sha256": "50ba0a7d404b6dfbda2a455f3ffee36403d850fe0ff793ea64510c0c847017d4",
+      "gitLfBytes": 13058,
+      "canonicalSha256": "0ed013717433ab7d2629961eec48a55b3aaefe0633c76bc300e9b17e43bee262",
+      "origin": "R7",
+      "parentBlobSha1": "9c793890417f98510fc9dbea01ce5a529b535adf"
+    },
+    {
+      "path": "frontend/src/components/IssueDirectory.tsx",
+      "bytes": 7944,
+      "sha256": "2feef69d135c72bfaa0bb939c7f24029d22724c11f67ea3d7d05fece7989f07a",
+      "gitLfBytes": 7944,
+      "canonicalSha256": "2feef69d135c72bfaa0bb939c7f24029d22724c11f67ea3d7d05fece7989f07a",
+      "origin": "R7",
+      "parentBlobSha1": "d7b9eaea784d48922d6b3d1a70db223e66348ce1"
+    },
+    {
+      "path": "frontend/src/components/RecommendationIssueDateEditor.test.tsx",
+      "bytes": 15400,
+      "sha256": "e383d3d54d63aef325755c0feccd80c4881f1106c63dfcc029f08ce91f7c54d8",
+      "gitLfBytes": 15400,
+      "canonicalSha256": "e383d3d54d63aef325755c0feccd80c4881f1106c63dfcc029f08ce91f7c54d8",
+      "origin": "EDITOR",
+      "parentBlobSha1": null
+    },
+    {
+      "path": "frontend/src/components/RecommendationIssueDateEditor.tsx",
+      "bytes": 11043,
+      "sha256": "0754fd7d610f86a51eed2019a11d582b6dd58f992258363d42ecb1d975a29a0f",
+      "gitLfBytes": 11043,
+      "canonicalSha256": "0754fd7d610f86a51eed2019a11d582b6dd58f992258363d42ecb1d975a29a0f",
+      "origin": "EDITOR",
+      "parentBlobSha1": null
+    },
+    {
+      "path": "frontend/src/components/RecommendationIssueDatePanel.test.tsx",
+      "bytes": 6574,
+      "sha256": "1858e14289a36231ae81106ffde1a09ae3893a2603b4da534ecd82de647f66bb",
+      "gitLfBytes": 6537,
+      "canonicalSha256": "6e0a24a7a9d0f5410ea5e6aa917bf98abd0bcd1f327a6f1b8c2cadb1097013b2",
+      "origin": "WIRING",
+      "parentBlobSha1": null
+    },
+    {
+      "path": "frontend/src/components/RecommendationIssueDatePanel.tsx",
+      "bytes": 5904,
+      "sha256": "e1bb7691f963e911ea5c4179810bf7d3eb20fc9cd9a0d0bfc7905169ec04764a",
+      "gitLfBytes": 5855,
+      "canonicalSha256": "0609d008c43d7f33c3c712fb4e7c9d0f8896d5189d7027420663be7dbbefba66",
+      "origin": "WIRING",
+      "parentBlobSha1": null
+    },
+    {
+      "path": "frontend/src/locales/en-US.ts",
+      "bytes": 76758,
+      "sha256": "f81de036ec49788d45d4a213d57e2f7cc2f797fdf2cf50144a5956778f11a29e",
+      "gitLfBytes": 75469,
+      "canonicalSha256": "22a6749b5a05e519cc9d9ee518e9f5d0c8df0e9fc2e2ea155bd893c49b84cf6b",
+      "origin": "WIRING",
+      "parentBlobSha1": "5eb49323043d32a865dafed7ca4ec4c6700c1465"
+    },
+    {
+      "path": "frontend/src/locales/ja-JP.ts",
+      "bytes": 86189,
+      "sha256": "e33c5bab66e8fbb2187545dc90eeef78ebfad0617ee1bd0ec1a46e5e5b0a4074",
+      "gitLfBytes": 84900,
+      "canonicalSha256": "820a0bc19104e2d5d40ef4f37c298f482f6a90ed574ab55fb4f4dd946ab60824",
+      "origin": "WIRING",
+      "parentBlobSha1": "43a1b0e4e78dfbd93b386c909abe4879acee0e00"
+    },
+    {
+      "path": "frontend/src/locales/zh-CN.ts",
+      "bytes": 73851,
+      "sha256": "b6d1804a967b3954c5c9a347ec9d96705b922e5335719cb187a655fab628e0ca",
+      "gitLfBytes": 72562,
+      "canonicalSha256": "533507d01f9ccd462db29f193f1973db427b87b37a31f797d46eae87139dd4e3",
+      "origin": "WIRING",
+      "parentBlobSha1": "285912a3f5d448728456ab9bf1afcc353ca8bf15"
+    },
+    {
+      "path": "frontend/src/locales/zh-TW.ts",
+      "bytes": 79033,
+      "sha256": "5c267071cd9f32cfa0804273ed8534d3c75cf255616220a221669d62387bbace",
+      "gitLfBytes": 77607,
+      "canonicalSha256": "5355b9b83b7cc319ef2d62ca24ccc4b101e24719a6ac86eaab7e0c21a29ee915",
+      "origin": "WIRING",
+      "parentBlobSha1": "2c6e65a72416076865d2f86297125f8ac755bc75"
+    },
+    {
+      "path": "frontend/src/pages/RecommendationBrowse.tsx",
+      "bytes": 15333,
+      "sha256": "b6224f2604ee7615f8b79a1d32aeb0157825a6cf2ef0102495f618d10ce501ee",
+      "gitLfBytes": 15235,
+      "canonicalSha256": "d27458d1505c4814b11d65f4ba92698ab7fc24f243d490a2c1d58dec55f839a7",
+      "origin": "R7",
+      "parentBlobSha1": "bf6f3ee1c89df8a1b67ceb5c78c3d1d97d18f9b7"
+    },
+    {
+      "path": "frontend/src/pages/Recommendations.tsx",
+      "bytes": 20885,
+      "sha256": "44d053afec53157329be9f05d907beaf3dde7c619ca04ddaa4fb174088bc1b08",
+      "gitLfBytes": 20673,
+      "canonicalSha256": "f063c1580bf2da88bd7a8d0a571e517cdcc7d81568ded335af556d13b8081721",
+      "origin": "WIRING",
+      "parentBlobSha1": "b0b9a4cedc46292d40e5a2a77df385287292ce99"
+    },
+    {
+      "path": "frontend/src/pages/RecommendationsIssueDate.test.tsx",
+      "bytes": 7854,
+      "sha256": "b1e047c1c5f784c4b828ed34a0026de6f633dff3e628bd69ac81ff367633bffd",
+      "gitLfBytes": 7822,
+      "canonicalSha256": "42345faee0f9aef335e6f739c0a694241f29caa2c2bfb153e7f74e0c00e2c520",
+      "origin": "WIRING",
+      "parentBlobSha1": null
+    }
+  ],
+  "fileCount": 20,
+  "acceptance": {
+    "wiringUniqueCases": 27,
+    "wiringTypecheck": "PASS_VIRTUAL_OVERLAY",
+    "editor41": "REUSED_NOT_ADDED",
+    "independentWiredSourceQa": "NOT_RUN",
+    "formalCombinedPackage": "NOT_RUN",
+    "productionPublishAllowed": false
+  }
+}
