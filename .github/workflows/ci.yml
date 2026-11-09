@@ -120,7 +120,7 @@ jobs:
       - name: Bind core and web release artifacts
         run: >-
           python scripts/prepare-ci-release-artifacts.py
-          --accepted-inputs docs/reports/article-digest-editor-20261109/accepted-inputs.json
+          --accepted-inputs docs/reports/consumer-ui-integration-20261109/accepted-inputs.json
           --output "$RUNNER_TEMP/bobuy-release-artifact"
 
       - name: Retain exact core and web artifacts
