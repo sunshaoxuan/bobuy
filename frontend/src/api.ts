@@ -1459,7 +1459,7 @@ export type ProductBrowseCard=Omit<PublicCatalogEntry,'gallery'|'description'|'r
 export type RecommendationBrowseItem=Omit<RecommendationItem,'imageUrl'|'gallery'|'description'|'sourceFacts'>&{image:RecommendationPicture|null};
 export type ServiceBrowseCard=Pick<ServiceOffer,'provider'|'staff'|'hours'|'originalPrice'|'price'|'currency'|'taxIncluded'|'fees'|'noExtraFees'|'applicationStart'|'applicationEnd'|'serviceStart'|'serviceEnd'>;
 export type RecommendationOccurrence={key:string;post:RecommendationSummary;title:string;history:boolean;item:RecommendationBrowseItem|null;service:boolean;serviceSummary:ServiceBrowseCard|null};
-export type IssueDirectoryEntry={post:RecommendationSummary;title:string;history:boolean;itemCount:number;service:boolean};
+export type IssueDirectoryEntry={post:RecommendationSummary;title:string;history:boolean;itemCount:number;service:boolean;publicItemCount?:number;issueDate?:string|null;issueDateSource?:'REVIEWED_SOURCE'|'UNKNOWN';suppliers?:RecommendationLabel[]};
 export type IssueDirectoryPage={items:IssueDirectoryEntry[];page:number;size:number;total:number;hasNext:boolean;revision:string;datasetRevision:string;japanDay:string};
 
 function buildChatCursorQuery(params?: { beforeId?: number; limit?: number }, hasExistingQuery = false) {

@@ -1,6 +1,9 @@
 import type { Dictionary } from './types';
 
 const messages: Dictionary = {
+  "directory.public_count": "{count} 項公開內容",
+  "directory.issue_date": "期次日期",
+  "directory.date_unknown": "期次日期未知",
   "profile.title": "本人資料",
   "profile.name": "姓名",
   "profile.phone": "手機號碼（選填）",

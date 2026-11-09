@@ -2,6 +2,9 @@ import type { Dictionary } from './types';
 import experience from './experience.zh-CN.json';
 
 const messages: Dictionary = {
+  "directory.public_count": "{count} 项公开内容",
+  "directory.issue_date": "期次日期",
+  "directory.date_unknown": "期次日期未知",
   "profile.title": "本人资料",
   "profile.name": "姓名",
   "profile.phone": "手机号（选填）",

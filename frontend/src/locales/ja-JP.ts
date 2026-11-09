@@ -2,6 +2,9 @@ import type { Dictionary } from './types';
 import experience from './experience.ja-JP.json';
 
 const messages: Dictionary = {
+  "directory.public_count": "公開中 {count} 件",
+  "directory.issue_date": "号の日付",
+  "directory.date_unknown": "号の日付不明",
   "profile.title": "本人情報",
   "profile.name": "氏名",
   "profile.phone": "電話番号（任意）",

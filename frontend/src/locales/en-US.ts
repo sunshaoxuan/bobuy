@@ -2,6 +2,9 @@ import type { Dictionary } from './types';
 import experience from './experience.en-US.json';
 
 const messages: Dictionary = {
+  "directory.public_count": "{count} public items",
+  "directory.issue_date": "Issue date",
+  "directory.date_unknown": "Issue date unknown",
   "profile.title": "Your details",
   "profile.name": "Name",
   "profile.phone": "Phone (optional)",

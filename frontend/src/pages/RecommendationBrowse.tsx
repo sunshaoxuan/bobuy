@@ -83,7 +83,8 @@ export default function RecommendationBrowse(props:Props){
  const article=displayFull?articleText(displayFull,locale):undefined;
  const allTopics=new URLSearchParams(params);allTopics.delete('topic');allTopics.delete('item');
  const backPath=listTopic?'/recommendations'+(allTopics.size?'?'+allTopics.toString():''):scopedPath('/products',location.search);
- const directory=<IssueDirectory wide={wide} primaryReady={primaryReady===identity} obscured={!!itemId||!!props.autoPaused} refresh={refresh} query={props.query} authKey={common.authKey} checkDataset={checkDataset} onRefresh={restart} selected={displayFull?{id:displayFull.post.id,title:article?.title??displayFull.post.title,publishedAt:displayFull.post.publishedAt,itemCount:displayFull.serviceOffer?1:displayFull.items.length}:undefined}/>;
+ // The article is usable before its below-fold item list activates; its navigation can preload a light directory page.
+ const directory=<IssueDirectory wide={wide} primaryReady={primaryReady===identity||!!displayFull} obscured={!!itemId||!!props.autoPaused} refresh={refresh} query={props.query} authKey={common.authKey} checkDataset={checkDataset} onRefresh={restart} selected={displayFull?{id:displayFull.post.id,title:article?.title??displayFull.post.title,publishedAt:displayFull.post.publishedAt}:undefined}/>;
  return <div ref={layout} className="recommendation-directory-layout" data-wide={wide}><section className="recommendations rec-public recommendation-primary"><Link className="rec-back" to={backPath}>{t(listTopic?'rec.title':'store.catalog')}</Link><header className="rec-feed-heading"><h1 tabIndex={-1} data-detail-focus-fallback>{article?.title??t('rec.title')}</h1></header>
   {changed&&<BrowseError error="browse.changed" changed retry={restart} refresh={restart}/>}
   {node===-1||rawTopic&&!topic?<Alert type="error" message={t('browse.invalid')}/>:<>
