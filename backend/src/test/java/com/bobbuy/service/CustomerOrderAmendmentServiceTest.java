@@ -109,4 +109,12 @@ class CustomerOrderAmendmentServiceTest {
         when(entityManager.find(Trip.class,7L)).thenReturn(trip);when(entityManager.getLockMode(trip)).thenReturn(LockModeType.PESSIMISTIC_WRITE);
         coordinator.trip(7L);verify(entityManager,times(1)).refresh(trip,LockModeType.PESSIMISTIC_WRITE);
     }
+    @Test void optionalTripLockPreservesMissingUpdateContractButRequiredLockStillRejects() {
+        var tripRepo=mock(TripRepository.class);var orderRepo=mock(OrderHeaderRepository.class);var entityManager=mock(EntityManager.class);
+        when(tripRepo.findByIdForUpdate(99L)).thenReturn(Optional.empty());
+        var coordinator=new OrderWriteCoordinator(tripRepo,orderRepo,entityManager);
+        assertTrue(coordinator.tripIfPresent(99L).isEmpty());
+        assertEquals(ErrorCode.RESOURCE_NOT_FOUND,assertThrows(ApiException.class,()->coordinator.trip(99L)).getErrorCode());
+        verify(entityManager,never()).refresh(any(),any(LockModeType.class));
+    }
 }

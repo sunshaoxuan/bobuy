@@ -165,4 +165,32 @@ public class OrderLine {
             && java.util.Objects.equals(model,other.model) && java.util.Objects.equals(packaging,other.packaging)
             && java.util.Objects.equals(saleUnit,other.saleUnit) && java.util.Objects.equals(specifications,other.specifications);
     }
+
+    /** Hibernate snapshots JSON by value. Identity equality makes every loaded list dirty,
+     * causing read-only queries to update the order and advance its optimistic revision. */
+    @Override
+    public boolean equals(Object value) {
+        if (this == value) return true;
+        if (!(value instanceof OrderLine other)) return false;
+        return quantity == other.quantity && purchasedQuantity == other.purchasedQuantity
+                && priceRevision == other.priceRevision && Double.compare(unitPrice, other.unitPrice) == 0
+                && pickingConfirmed == other.pickingConfirmed
+                && java.util.Objects.equals(id, other.id) && java.util.Objects.equals(headerId, other.headerId)
+                && java.util.Objects.equals(skuId, other.skuId) && java.util.Objects.equals(names, other.names)
+                && java.util.Objects.equals(itemName, other.itemName) && java.util.Objects.equals(spec, other.spec)
+                && java.util.Objects.equals(currency, other.currency)
+                && java.util.Objects.equals(quotedAmount, other.quotedAmount) && java.util.Objects.equals(regularAmount, other.regularAmount)
+                && java.util.Objects.equals(priceAdjustmentId, other.priceAdjustmentId) && java.util.Objects.equals(priceChannel, other.priceChannel)
+                && java.util.Objects.equals(pricedAt, other.pricedAt) && java.util.Objects.equals(brand, other.brand)
+                && java.util.Objects.equals(itemNumber, other.itemNumber) && java.util.Objects.equals(model, other.model)
+                && java.util.Objects.equals(packaging, other.packaging) && java.util.Objects.equals(saleUnit, other.saleUnit)
+                && java.util.Objects.equals(specifications, other.specifications);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(id, headerId, skuId, names, itemName, spec, quantity, purchasedQuantity,
+                currency, priceRevision, quotedAmount, regularAmount, priceAdjustmentId, priceChannel, pricedAt,
+                unitPrice, pickingConfirmed, brand, itemNumber, model, packaging, saleUnit, specifications);
+    }
 }

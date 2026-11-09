@@ -70,6 +70,22 @@ class CustomerOrderAmendmentIntegrationTest {
         var view=service.preview(customer,orderId);var line=view.lines().get(0);
         return new CustomerOrderAmendmentRequest(key,view.revision(),List.of(new CustomerOrderAmendmentRequest.Line(line.productId(),quantity,line.priceToken(),line.priceRevision(),line.currency())),null);
     }
+    @Test void readOnlyPreviewsKeepRevisionStableButActualEditAdvancesAndRejectsStaleInput() {
+        long version=orders.findById(orderId).orElseThrow().getOrderRevision();
+        var request=input(UUID.randomUUID().toString(),3);
+        for(int attempt=0;attempt<3;attempt++) {
+            var view=service.preview(customer,orderId);
+            assertTrue(view.editable());assertEquals(request.expectedRevision(),view.revision());
+            assertEquals(version,orders.findById(orderId).orElseThrow().getOrderRevision(),"read-only query must not advance revision");
+        }
+        var changed=service.amend(customer,orderId,request);
+        assertNotEquals(request.expectedRevision(),changed.revision());
+        assertEquals(version+1,orders.findById(orderId).orElseThrow().getOrderRevision());
+        var stale=new CustomerOrderAmendmentRequest(UUID.randomUUID().toString(),request.expectedRevision(),request.lines(),null);
+        assertThrows(org.springframework.orm.ObjectOptimisticLockingFailureException.class,()->service.amend(customer,orderId,stale));
+        assertEquals(version+1,orders.findById(orderId).orElseThrow().getOrderRevision());
+        assertEquals(3,orders.findById(orderId).orElseThrow().getLines().get(0).getQuantity());
+    }
     @Test void authenticatedEndpointWhitelistSaveReopenAndCheckoutRetryPreserveOneOrder() throws Exception {
         mvc.perform(get("/api/customer/orders/"+orderId+"/amendment")).andExpect(status().isUnauthorized());
         var request=input(UUID.randomUUID().toString(),3);

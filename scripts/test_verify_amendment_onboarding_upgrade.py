@@ -49,6 +49,19 @@ class AmendmentOnboardingUpgradeTest(unittest.TestCase):
         for version in [29,30]:
             with self.subTest(version=version):module.assert_stage(*self.stage(version))
 
+    def test_v28_synthetic_users_use_the_actual_v5_role_set_storage(self):
+        # The first real PG run rejected a V1-only `role` column before migration.
+        # Check the submitted fixture against the retained role-set migration.
+        with patch.object(module,'sql') as sql:
+            module.seed_v28()
+        fixture=sql.call_args.args[0]
+        role_migration=(module.ROOT/'backend/src/main/resources/db/migration/V5__user_role_sets.sql').read_text()
+        self.assertIn('DROP COLUMN role',role_migration)
+        self.assertIn('username,roles,email',fixture)
+        self.assertNotIn('username,role,email',fixture)
+        self.assertIn("'[\"AGENT\"]'::jsonb",fixture)
+        self.assertIn("'[\"CUSTOMER\"]'::jsonb",fixture)
+
     def test_old_rows_or_snapshot_rewrite_or_loss_rejects(self):
         for version in [29,30]:
             for rows in [{},{'bb_order_header':'0:lost'},{'bb_order_header':'1:changed-delivery-snapshot'}]:

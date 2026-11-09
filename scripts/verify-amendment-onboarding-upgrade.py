@@ -174,9 +174,9 @@ def assert_stage(before_columns, after_columns, before_rows, after_rows, before_
 
 def seed_v28():
     sql("""BEGIN;
-INSERT INTO bb_user(id,name,username,role,email,default_address) VALUES
- (-293001,'Synthetic C3/R13 merchant','ci-c3-r13-agent','AGENT','ci-c3-r13-agent@example.invalid',NULL),
- (-293002,'Synthetic historical customer','ci-c3-r13-customer','CUSTOMER','ci-c3-r13-customer@example.invalid','{"contactName":"Synthetic original","countryRegion":"JP","city":"Tokyo","addressLine":"Synthetic street"}'::jsonb);
+INSERT INTO bb_user(id,name,username,roles,email,default_address) VALUES
+ (-293001,'Synthetic C3/R13 merchant','ci-c3-r13-agent','["AGENT"]'::jsonb,'ci-c3-r13-agent@example.invalid',NULL),
+ (-293002,'Synthetic historical customer','ci-c3-r13-customer','["CUSTOMER"]'::jsonb,'ci-c3-r13-customer@example.invalid','{"contactName":"Synthetic original","countryRegion":"JP","city":"Tokyo","addressLine":"Synthetic street"}'::jsonb);
 INSERT INTO bb_product(id,merchant_id,name,item_number,base_price,currency,record_version,catalog_data)
  VALUES('ci-c3-r13-historical-product',-293001,'{"en-US":"Synthetic historical product"}'::jsonb,'CI-293001',61.75,'JPY',2,'{"synthetic":true,"history":"retain"}'::jsonb);
 INSERT INTO bb_product_lifecycle_event(id,product_id,action,actor_id,occurred_at)

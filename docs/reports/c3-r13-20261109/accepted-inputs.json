@@ -1,9 +1,9 @@
 {
-  "candidate": "C3/R13 serial source integration; exact CI and artifact QA pending",
+  "candidate": "C3/R13 exact CI correction: JSON value equality, optional trip contract, explicit test revision and V28 synthetic role-set fixture",
   "baseHead": "82b8daf7fe275d6dd623b36621f1cf2596dc0e98",
   "sourceMerge": "82f5948cdf50c165da347fde7f091dbfadfa1225",
   "sourceDigestAlgorithm": "sha256-json-utf8-sourceFiles-v1",
-  "sourceDigest": "9656b188ae9dced2873b9a4551d2076e4db8bacf3277710c94bf6a911dda5443",
+  "sourceDigest": "bfac27f135576e79c0755da49f6804f26bb75f0fdd1e55000fb0ad6b3c734848",
   "lineEndingPolicy": "Exact canonical Git-filtered blob bytes, SHA1 cross-checked against git hash-object; unchanged binaries byte-for-byte. Excludes this self-referential manifest and unrelated protected dirty files.",
   "sourceFiles": [
     {
@@ -663,8 +663,8 @@
     },
     {
       "path": "backend/src/main/java/com/bobbuy/model/OrderLine.java",
-      "gitLfBytes": 6591,
-      "gitLfSha256": "11f08bc86ea22084901aa93c0ef7cf05eb36cf66e6d9b6306a3d9b1d3ff8b7b0"
+      "gitLfBytes": 8734,
+      "gitLfSha256": "cab29b48cf73dce8a745ab4a4e9d8ed24b5f4151c44f08b30716f03a521dff34"
     },
     {
       "path": "backend/src/main/java/com/bobbuy/model/OrderLineIdentity.java",
@@ -1168,8 +1168,8 @@
     },
     {
       "path": "backend/src/main/java/com/bobbuy/service/BobbuyStore.java",
-      "gitLfBytes": 52897,
-      "gitLfSha256": "4764c571a093acf7a8d6064a393e68c065c3dda7ce18a353007d1de6ab392a91"
+      "gitLfBytes": 52893,
+      "gitLfSha256": "a7a1f49699edb4abc894d1ea71268b22443ac0668365342d08756032ac51e7b4"
     },
     {
       "path": "backend/src/main/java/com/bobbuy/service/ChatAuthorizationService.java",
@@ -1403,8 +1403,8 @@
     },
     {
       "path": "backend/src/main/java/com/bobbuy/service/OrderWriteCoordinator.java",
-      "gitLfBytes": 2772,
-      "gitLfSha256": "c11f9490efca8f1366c786fbde048495ab43a3897a27597e6da299b07b10bd3a"
+      "gitLfBytes": 2921,
+      "gitLfSha256": "bb2b7f6b754d06efc8adf92ea8cad86587d8cd9bcf9b38397a0c20640397541b"
     },
     {
       "path": "backend/src/main/java/com/bobbuy/service/PricingTime.java",
@@ -1823,8 +1823,8 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/CustomerOrderAmendmentIntegrationTest.java",
-      "gitLfBytes": 13278,
-      "gitLfSha256": "0996fd8573d228072a8f6241845de632827de4b82fbc5596eaded83c4577a51f"
+      "gitLfBytes": 14545,
+      "gitLfSha256": "10788843275b056889edb3de6625e89661837a5bef32c5c695b49d67c81d9b10"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/FinancialAuditIntegrationTest.java",
@@ -1873,8 +1873,8 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/OrderControllerTest.java",
-      "gitLfBytes": 2831,
-      "gitLfSha256": "9846dbb41464976f104e4e99ba6a7058a9364b65d425ebe0503c205c4b43cc34"
+      "gitLfBytes": 2923,
+      "gitLfSha256": "bd37cb14c88518ebab70dedb782067b88f4dade45d2c41e0b8b2ed09842a0098"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/PostgresImageStorageIntegrationTest.java",
@@ -2022,6 +2022,11 @@
       "gitLfSha256": "1128bd82c769f0d970b166da8fcca8035c95e8e71534b3d8aa994988a9647500"
     },
     {
+      "path": "backend/src/test/java/com/bobbuy/model/OrderLineValueTest.java",
+      "gitLfBytes": 3223,
+      "gitLfSha256": "4965939f5c395ddf4183b353caf7d443c51be311accdc51698ea7260a2ee5b2d"
+    },
+    {
       "path": "backend/src/test/java/com/bobbuy/repository/CostcoOnboardingAttemptHistoryTest.java",
       "gitLfBytes": 6004,
       "gitLfSha256": "0ef6ef391df138c1bb50896534e2a0cc1ed6471cf42c3296e32688bbba1ef3aa"
@@ -2118,8 +2123,8 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/service/CustomerOrderAmendmentServiceTest.java",
-      "gitLfBytes": 11524,
-      "gitLfSha256": "7f05f8d57172369735c4d7fa17e9d3490c5f7018f72566b1a9217178e4c67b65"
+      "gitLfBytes": 12191,
+      "gitLfSha256": "7eca7c59cc9a35d56b7ff912c74a2f1185df3ee1e39a405f2629f1cb73316533"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/service/IdentityMigrationRecoveryTest.java",
@@ -2338,8 +2343,8 @@
     },
     {
       "path": "docs/reports/C3-R13-INTEGRATION-20261109.md",
-      "gitLfBytes": 3188,
-      "gitLfSha256": "b04b55d7cb366407c518e676fcc388807929c6ef0f8ae5b51de1c8a009650372"
+      "gitLfBytes": 4778,
+      "gitLfSha256": "34b8ac07a0a488d9f6e575864221a4f9a5c3cc6abb5fbc0158356f39b635863e"
     },
     {
       "path": "docs/reports/C3-R2-PRODUCT-IDENTITY-20261109.md",
@@ -3668,8 +3673,8 @@
     },
     {
       "path": "scripts/test_verify_amendment_onboarding_upgrade.py",
-      "gitLfBytes": 7841,
-      "gitLfSha256": "68e87add9bc7113839a1d44c7ccf4a9b7f3a1ba147f69318df82c9086666bde5"
+      "gitLfBytes": 8587,
+      "gitLfSha256": "54c3f958f1946ca742789832f7d9103b8a70f5d9cfd2d60ad894f1537cc638db"
     },
     {
       "path": "scripts/test_verify_checkout_upgrade.py",
@@ -3678,8 +3683,8 @@
     },
     {
       "path": "scripts/verify-amendment-onboarding-upgrade.py",
-      "gitLfBytes": 17129,
-      "gitLfSha256": "c8afe542eead84f926c8d58c08cc21581092f4b1a639f688875a50d71ea99e8e"
+      "gitLfBytes": 17152,
+      "gitLfSha256": "9420be3c3243eba807022e52085956c8fecfda2d30e0bcec4869ea6243417da3"
     },
     {
       "path": "scripts/verify-checkout-upgrade.py",
@@ -3944,8 +3949,30 @@
       "i18n": "PASS",
       "resourceKeys": 1457
     },
-    "newCiDeltaIndependentQa": "PENDING",
-    "formalBuildAndNonProductionBrowserAcceptance": "PENDING_REQUIRED_BEFORE_PUBLISH"
+    "newCiDeltaIndependentQa": "PENDING_AFFECTED_BACKEND_SOURCE_AND_CI_FIX_REVIEW",
+    "formalBuildAndNonProductionBrowserAcceptance": "PENDING_REQUIRED_BEFORE_PUBLISH",
+    "postCiFix": {
+      "failedCommit": "e41a63f38707ef3d9330d8d851201954df4cffe8",
+      "failedRun": 42611769108,
+      "files": [
+        "backend/src/main/java/com/bobbuy/model/OrderLine.java",
+        "backend/src/main/java/com/bobbuy/service/BobbuyStore.java",
+        "backend/src/main/java/com/bobbuy/service/OrderWriteCoordinator.java",
+        "backend/src/test/java/com/bobbuy/api/CustomerOrderAmendmentIntegrationTest.java",
+        "backend/src/test/java/com/bobbuy/api/OrderControllerTest.java",
+        "backend/src/test/java/com/bobbuy/model/OrderLineValueTest.java",
+        "backend/src/test/java/com/bobbuy/service/CustomerOrderAmendmentServiceTest.java",
+        "docs/reports/C3-R13-INTEGRATION-20261109.md",
+        "scripts/test_verify_amendment_onboarding_upgrade.py",
+        "scripts/verify-amendment-onboarding-upgrade.py"
+      ],
+      "backendManifestSha256": "7a8dd371d900f5ee75e97b8d5328b0bc02efda2b32a0b32c6af1924b90e10bca",
+      "pureTests": 15,
+      "sourceCompile": "PASS_RELEASE17_NARROW_NOT_RUNTIME",
+      "fixturePureTests": 13,
+      "springAndPgClosure": "NOT_RUN_PENDING_NEW_CI",
+      "originalFailuresRetained": true
+    }
   },
   "schemaBefore": 28,
   "schemaAfter": 30,

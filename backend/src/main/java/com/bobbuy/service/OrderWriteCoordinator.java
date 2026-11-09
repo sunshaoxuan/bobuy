@@ -25,11 +25,15 @@ public class OrderWriteCoordinator {
         this.trips = trips; this.orders = orders; this.entities = entities;
     }
     public Trip trip(Long id) {
+        return tripIfPresent(id).orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND,"error.trip.not_found"));
+    }
+    public java.util.Optional<Trip> tripIfPresent(Long id) {
         var attached=entities.find(Trip.class,id);
         // A repeated helper call must retain changes already made under this transaction's lock.
-        if(attached!=null&&entities.getLockMode(attached)==LockModeType.PESSIMISTIC_WRITE)return attached;
-        var trip = trips.findByIdForUpdate(id).orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND,"error.trip.not_found"));
-        entities.refresh(trip, LockModeType.PESSIMISTIC_WRITE); return trip;
+        if(attached!=null&&entities.getLockMode(attached)==LockModeType.PESSIMISTIC_WRITE)return java.util.Optional.of(attached);
+        return trips.findByIdForUpdate(id).map(trip -> {
+            entities.refresh(trip, LockModeType.PESSIMISTIC_WRITE); return trip;
+        });
     }
     public void trips(Collection<Long> ids) { ids.stream().filter(Objects::nonNull).distinct().sorted().forEach(this::trip); }
     /** Caller must hold the trip lock identified by a scalar locator, before loading this order. */

@@ -491,7 +491,7 @@ public class BobbuyStore {
 
     @Transactional
     public Optional<Trip> updateTrip(Long id, Trip input) {
-        return Optional.of(orderWriters.trip(id))
+        return orderWriters.tripIfPresent(id)
                 .filter(trip -> com.bobbuy.security.MerchantScope.visible(trip.getAgentId()))
                 .filter(trip -> isTripVisibleToCustomer(trip.getId()))
                 .map(trip -> {
