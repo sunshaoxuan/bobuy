@@ -133,8 +133,8 @@ class RecommendationItemPublicationIntegrationTest {
     @Test void publishedSevenItemsCanAppendEighthBetweenAtomicArticleRevisionsWithoutWithdrawingOrRewritingHistory()throws Exception{
         data(publish(ready.id,body(getMerchant(),ready.id,UUID.randomUUID()),token));
         for(int i=2;i<=7;i++){var existing=item("EXISTING-"+i,true);data(publish(existing.id,body(getMerchant(),existing.id,UUID.randomUUID()),token));}
-        var originalPost=posts.findById(issue.id).orElseThrow();var publishedRows=new TreeMap<Long,String>();
-        for(var existing:items.findByPostIdOrderById(issue.id))if(RecommendationPublication.visible(existing))publishedRows.put(existing.id,json.writeValueAsString(existing));
+        var originalPost=posts.findById(issue.id).orElseThrow();var publishedRows=new TreeMap<Long,String>();var publishedSnapshots=new TreeMap<Long,String>();
+        for(var existing:items.findByPostIdOrderById(issue.id))if(RecommendationPublication.visible(existing)){publishedRows.put(existing.id,json.writeValueAsString(existing));publishedSnapshots.put(existing.id,json.writeValueAsString(existing.publicationSnapshot));}
         assertEquals(7,publishedRows.size());var first=reviseCurrentArticle("before append");assertTrue(first.path("current").asBoolean());
         assertEquals(4,first.at("/detail/articleTranslations").size());
         // Prepare only an owned synthetic master; the actual association is added via the normal API.
@@ -150,6 +150,7 @@ class RecommendationItemPublicationIntegrationTest {
         var publicAfter=data(mvc.perform(get("/api/storefront/recommendations/"+issue.id)));assertEquals(8,publicAfter.path("items").size());assertFalse(publicAfter.toString().contains("1731065"));
         for(String locale:List.of("ja-JP","zh-CN","zh-TW","en-US"))assertEquals(locale+" short reviewed body after append",publicAfter.path("articleTranslations").path(locale).path("body").asText());
         for(var saved:publishedRows.entrySet())assertEquals(saved.getValue(),json.writeValueAsString(items.findById(saved.getKey()).orElseThrow()));
+        for(var saved:publishedSnapshots.entrySet())assertEquals(saved.getValue(),json.writeValueAsString(items.findById(saved.getKey()).orElseThrow().publicationSnapshot));
         var after=posts.findById(issue.id).orElseThrow();assertTrue(after.published);assertEquals(originalPost.publishedAt,after.publishedAt);assertEquals(originalPost.createdAt,after.createdAt);
         var articleHistory=data(mvc.perform(get(path()+"/article-history").header("Authorization","Bearer "+token))).toString();
         assertTrue(articleHistory.contains("Synthetic source body retained"));assertTrue(articleHistory.contains("short reviewed body before append"));assertTrue(articleHistory.contains("short reviewed body after append"));

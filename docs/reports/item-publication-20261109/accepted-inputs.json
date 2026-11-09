@@ -1,8 +1,8 @@
 {
   "candidate": "V31 individual publication plus live bf0 article revision and00e navigation; independent combined runtime pending",
-  "baseHead": "d460784e8a2187352fc9e37b8148a275da6be19f",
+  "baseHead": "6f3487a413d7c4823d40b8f191f6f2ce3e518e84",
   "sourceDigestAlgorithm": "sha256-json-utf8-sourceFiles-v1",
-  "sourceDigest": "ac2f20044b468314147ad78a78f2fffbe4618b7ac05c3e91544c779008f39536",
+  "sourceDigest": "0858f587888cfc59668389e88811ae6dc1c041fb26727fca55401952d1bd15a5",
   "lineEndingPolicy": "Exact canonical Git-filtered bytes, cross-checked by git hash-object; excludes self-referential accepted manifest and unrelated protected files.",
   "sourceFiles": [
     {
@@ -1792,8 +1792,8 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/RecommendationItemPublicationIntegrationTest.java",
-      "gitLfBytes": 18163,
-      "gitLfSha256": "8b660fc2975123aa22f964b5b76fc252c89447bedf7f196bcfa38affc345a782"
+      "gitLfBytes": 18479,
+      "gitLfSha256": "256f5a82ac71760c2c7feb321258ffdf139aa01a89617c82dd0c1ed0a9cebd58"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/RecommendationNodeTest.java",
@@ -2162,8 +2162,8 @@
     },
     {
       "path": "docs/reports/ITEM-ARTICLE-INTEGRATION-20261109.md",
-      "gitLfBytes": 4430,
-      "gitLfSha256": "b1a55f765dd8fc60b0fd891972143ab5c3f935fc414797ac9fc4e828f74e8412"
+      "gitLfBytes": 5129,
+      "gitLfSha256": "fabdd2c6e93fc3c519c1d8e3600fd01b596b9fbf606038378c706b7e0eb6ea68"
     },
     {
       "path": "docs/reports/ITEM-PUBLICATION-CI-20261109.md",
@@ -3197,8 +3197,8 @@
     },
     {
       "path": "frontend/src/pages/RecommendationsItemPublication.test.tsx",
-      "gitLfBytes": 12041,
-      "gitLfSha256": "da4f8556049fff7e57efb0cd474bae7e3ebf8f400e19fe31907c06d275db716a"
+      "gitLfBytes": 12044,
+      "gitLfSha256": "25a12a870e95aca6549d3cf49f4e2b9e2449ce5a4210cf28fb2bc2dbb178e51a"
     },
     {
       "path": "frontend/src/pages/RecommendationsRevisionRace.test.tsx",

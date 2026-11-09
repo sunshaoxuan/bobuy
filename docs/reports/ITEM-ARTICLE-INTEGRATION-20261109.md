@@ -61,3 +61,14 @@ stored columns and must enter a new fresh baseline before any later production a
 The affected10-case publication group then passed10/10 with its original strict
 assertions unchanged. The preceding52 PASS/1 FAIL and AbortSignal error remain
 recorded separately; overlapping runs are not added. Type/i18n passed1417 keys.
+
+## First exact CI and fixture-only fix1
+
+6f3487a413d7c4823d40b8f191f6f2ce3e518e84 / CI42682705065 passed all507 frontend
+methods, then its build failed TS2322 because the newly adapted test afterEach
+returned VitestUtils. Fix1 uses a void block around the same cleanup call; no test
+assertion or application source changes. The full original failure remains retained.
+The cross-feature API test also explicitly compares internal publicationSnapshot
+bytes, since ordinary entity JSON intentionally omits that private field. This adds
+strict preservation coverage without weakening any earlier assertion. New Java/PG
+execution is required for that assertion; earlier successes are kept within scope.

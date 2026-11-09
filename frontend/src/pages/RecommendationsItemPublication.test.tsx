@@ -26,7 +26,7 @@ const card=(name:string)=>within(screen.getByRole('heading',{name}).closest('art
 function review(name='Ready Tea'){fireEvent.click(card(name).getByRole('checkbox',{name:/I checked this item/}));}
 const publishButton=(name='Ready Tea')=>card(name).getByRole('button',{name:'Publish this item: '+name});
 beforeEach(async()=>{localStorage.clear();localStorage.setItem('bobbuy_locale','en-US');vi.resetAllMocks();mocks.get.mockResolvedValue(clone(draft));const {transferableAbortController}=await vi.importActual<{transferableAbortController:()=>AbortController}>('node:util');vi.stubGlobal('AbortController',class {constructor(){return transferableAbortController();}});});
-afterEach(()=>vi.unstubAllGlobals());
+afterEach(()=>{vi.unstubAllGlobals();});
 
 it('publishes a ready post8 item alone while 1731065 stays pending; synchronous double clicks send once',async()=>{
  let finish!:(value:any)=>void;mocks.publishItem.mockImplementation(()=>new Promise(resolve=>finish=resolve));
