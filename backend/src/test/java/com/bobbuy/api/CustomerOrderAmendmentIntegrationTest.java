@@ -53,18 +53,63 @@ class CustomerOrderAmendmentIntegrationTest {
     @MockBean JavaMailSender mail;
     User user;Authentication customer;Long orderId;String token;StorefrontService.Checkout checkout;
     TransactionTemplate tx;
-    @BeforeEach void isolatedFixture() {
-        String url=environment.getProperty("spring.datasource.url","");
-        assertTrue(url.startsWith("jdbc:h2:mem:")||("true".equals(System.getenv("BOBBUY_ISOLATED_CI_POSTGRES"))&&(url.startsWith("jdbc:postgresql://localhost:")||url.startsWith("jdbc:postgresql://127.0.0.1:"))),"Refuse unproved non-isolated C3 datasource before seeding");
+    boolean isolatedDatasourceValidated;Long fixtureMerchantId;String fixtureUsername,fixtureEmail,fixtureBusinessId;
+    void requireIsolatedDatasource() throws java.sql.SQLException {
+        try(var connection=jdbc.getDataSource().getConnection()){
+            var metadata=connection.getMetaData();String url=metadata.getURL();
+            boolean memory=url.matches("jdbc:h2:mem:bobbuy(?:;.*)?")&&"H2".equals(metadata.getDatabaseProductName());
+            boolean hosted="jdbc:postgresql://127.0.0.1:5432/bobbuy".equals(url)&&"PostgreSQL".equals(metadata.getDatabaseProductName())
+                &&"bobbuy".equals(connection.getCatalog())&&"bobbuy".equals(metadata.getUserName())
+                &&"true".equals(System.getenv("GITHUB_ACTIONS"))&&"true".equals(System.getenv("CI"))
+                &&"sunshaoxuan/bobuy".equals(System.getenv("GITHUB_REPOSITORY"))&&"postgres-migration-verify".equals(System.getenv("GITHUB_JOB"))
+                &&"true".equals(System.getenv("BOBBUY_ISOLATED_CI_POSTGRES"));
+            assertTrue(memory||hosted,"Refuse unproved non-isolated C3 datasource before seeding or cleanup");
+        }
+    }
+    @BeforeEach void isolatedFixture() throws java.sql.SQLException {
+        requireIsolatedDatasource();isolatedDatasourceValidated=true;
         store.seed();tx=new TransactionTemplate(transactions);
         String unique=UUID.randomUUID().toString();long id=1_000_000_000L+(UUID.randomUUID().getLeastSignificantBits()&0xffffff);
-        user=new User(id,"Synthetic C3",Role.CUSTOMER,0);user.setUsername("c3-"+unique);user.setEnabled(true);user.setEmail("c3-"+unique+"@example.invalid");
+        fixtureUsername="c3-"+unique;fixtureEmail="c3-"+unique+"@example.invalid";
+        user=new User(id,"Synthetic C3",Role.CUSTOMER,0);user.setUsername(fixtureUsername);user.setEnabled(true);user.setEmail(fixtureEmail);
         var address=new User.UserAddress();address.setContactName("Original");address.setCountryRegion("JP");address.setCity("Tokyo");address.setAddressLine("Synthetic street");user.setDefaultAddress(address);users.saveAndFlush(user);
         var trip=trips.findById(2000L).orElseThrow();trip.setStatus(TripStatus.PUBLISHED);trip.setDeliveryDate(LocalDate.now().plusDays(2));trips.saveAndFlush(trip);
+        fixtureMerchantId=trip.getAgentId();
         customer=new UsernamePasswordAuthenticationToken(String.valueOf(id),null,AuthorityUtils.createAuthorityList("ROLE_CUSTOMER"));token=jwt.createAccessToken(user);
         var product=storefront.publicProducts().stream().filter(p->p.id().equals("prd-1000")).findFirst().orElseThrow();
         checkout=new StorefrontService.Checkout(UUID.randomUUID(),2000L,List.of(new StorefrontService.Item(product.id(),1,product.priceRevision(),product.currency(),product.priceToken())),product.currency());
+        fixtureBusinessId="WEB-"+id+"-"+checkout.requestId();
         orderId=storefront.checkout(customer,checkout).orderId();
+    }
+    @AfterEach void removeOnlyThisFixturesSyntheticRows() throws java.sql.SQLException {
+        if(!isolatedDatasourceValidated||tx==null||user==null||user.getId()==null||fixtureUsername==null||fixtureEmail==null)return;
+        requireIsolatedDatasource();Long customerId=user.getId();
+        tx.executeWithoutResult(status->{
+            var persisted=users.findById(customerId);if(persisted.isEmpty())return;
+            assertEquals(fixtureUsername,persisted.get().getUsername());assertEquals(fixtureEmail,persisted.get().getEmail());
+            if(fixtureBusinessId!=null)orders.findByBusinessId(fixtureBusinessId).ifPresent(order->{
+                if(orderId!=null)assertEquals(orderId,order.getId());
+                assertEquals(fixtureBusinessId,order.getBusinessId());orderId=order.getId();
+            });
+            if(orderId!=null){
+                // Private receipts have no FK, so clean only this fixture's explicit identity markers.
+                var owned=jdbc.query("select id,request_id from bb_customer_order_amendment where customer_id=? and order_id=?",
+                    (row,index)->new String[]{row.getString("id"),row.getString("request_id")},customerId,orderId);
+                for(var receipt:owned){assertNotNull(receipt[1]);assertEquals(UUID.fromString(receipt[1]).toString(),receipt[1]);assertEquals(customerId+":"+receipt[1],receipt[0]);
+                    assertEquals(1,jdbc.update("delete from bb_customer_order_amendment where id=? and customer_id=? and order_id=? and request_id=?",receipt[0],customerId,orderId,receipt[1]));}
+            }
+            if(fixtureMerchantId!=null){
+                String key=fixtureMerchantId+":"+customerId;
+                var owned=jdbc.query("select id,merchant_id,customer_id from bb_merchant_customer where id=?",(row,index)->new Object[]{row.getString("id"),row.getLong("merchant_id"),row.getLong("customer_id")},key);
+                assertTrue(owned.size()<=1);
+                for(var relation:owned){assertEquals(key,relation[0]);assertEquals(fixtureMerchantId,relation[1]);assertEquals(customerId,relation[2]);
+                    assertEquals(1,jdbc.update("delete from bb_merchant_customer where id=? and merchant_id=? and customer_id=?",key,fixtureMerchantId,customerId));}
+            }
+            if(orderId!=null)orders.findById(orderId).ifPresent(order->{assertEquals(fixtureBusinessId,order.getBusinessId());orders.delete(order);});
+            orders.flush();users.delete(persisted.get());users.flush();
+            assertTrue(jdbc.queryForList("select id from bb_customer_order_amendment where customer_id=?",String.class,customerId).isEmpty());
+            assertTrue(jdbc.queryForList("select id from bb_merchant_customer where customer_id=?",String.class,customerId).isEmpty());
+        });
     }
     CustomerOrderAmendmentRequest input(String key,int quantity) {
         var view=service.preview(customer,orderId);var line=view.lines().get(0);

@@ -1,9 +1,9 @@
 {
-  "candidate": "C3/R13 isolated post-preservation fixture dependency cleanup; exact PostgreSQL closure pending",
+  "candidate": "C3/R13 owned C3 checkout fixture teardown; exact PostgreSQL closure pending",
   "baseHead": "82b8daf7fe275d6dd623b36621f1cf2596dc0e98",
   "sourceMerge": "82f5948cdf50c165da347fde7f091dbfadfa1225",
   "sourceDigestAlgorithm": "sha256-json-utf8-sourceFiles-v1",
-  "sourceDigest": "0a815ee49e91e97cf896fa0ac471e67689ae3d143107c3c36030aea79c4a11c0",
+  "sourceDigest": "4fa3046df0032f6cbaf83571fcda65132af7f8c6a3437f20857b8ef9cb204d10",
   "lineEndingPolicy": "Exact canonical Git-filtered blob bytes, SHA1 cross-checked against git hash-object; unchanged binaries byte-for-byte. Excludes this self-referential manifest and unrelated protected dirty files.",
   "sourceFiles": [
     {
@@ -1828,8 +1828,8 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/CustomerOrderAmendmentIntegrationTest.java",
-      "gitLfBytes": 17320,
-      "gitLfSha256": "4800d21ae847837c7a1d5b43c23362ab95326a617f9f2a79c66a83aed2476e9f"
+      "gitLfBytes": 21195,
+      "gitLfSha256": "d41e5277e82ca958d38051363d4316eba8f9220a78998bb8c889999fd81b5130"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/FinancialAuditIntegrationTest.java",
@@ -2353,8 +2353,8 @@
     },
     {
       "path": "docs/reports/C3-R13-INTEGRATION-20261109.md",
-      "gitLfBytes": 11701,
-      "gitLfSha256": "bd89bf2fc1ea4be1a78b1a39d9cdc965799d6bd5198d274fe005d21aba523fff"
+      "gitLfBytes": 14603,
+      "gitLfSha256": "6947129e71e355f40b048ba141eaff14633d5c4c05933227eaf55d9abd1368e9"
     },
     {
       "path": "docs/reports/C3-R2-PRODUCT-IDENTITY-20261109.md",
@@ -3968,6 +3968,60 @@
     "newCiDeltaIndependentQa": "PENDING_AFFECTED_BACKEND_SOURCE_AND_CI_FIX_REVIEW",
     "formalBuildAndNonProductionBrowserAcceptance": "PENDING_REQUIRED_BEFORE_PUBLISH",
     "postCiFix": {
+      "failedCommit": "6887dc75789940a325074208874915d4962ea0b7",
+      "failedRun": 42624535480,
+      "files": [
+        "backend/src/test/java/com/bobbuy/api/CustomerOrderAmendmentIntegrationTest.java",
+        "docs/reports/C3-R13-INTEGRATION-20261109.md"
+      ],
+      "testManifestSha256": "fae34afa807d9782864c8f6a74e4a2cae112f371fa85715e76959fc1c534f4c7",
+      "testSourceSha256": "d41e5277e82ca958d38051363d4316eba8f9220a78998bb8c889999fd81b5130",
+      "monitorReceiptSha256": "50e896ae49f7bb24ff5467bcc9952f44063bb5d7fd6271fb95e52c8637c951f1",
+      "previousRunBackend": {
+        "tests": 531,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 8,
+        "status": "PASS",
+        "c3PureSubset": 24,
+        "c3H2IntegrationSubset": 11,
+        "subsetsOverlapTotal": true
+      },
+      "previousRunPostgres": {
+        "tests": 46,
+        "failures": 0,
+        "errors": 11,
+        "onboardingUniquePass": 6,
+        "c1c2PurePass": 12,
+        "storefrontPass": 16,
+        "c3Pass": 1,
+        "c3SetupErrors": 10,
+        "compatibilitySetupErrors": 1,
+        "status": "FAIL_C3_OWNED_MEMBERSHIP_TEARDOWN"
+      },
+      "previousRunFixtureCleanup": {
+        "status": "PASS_OFFICIAL_PG_LOG",
+        "proofSha256": "a23a0aa5ae408dcb10443b6289bdd03af86d94a03bc683ff7f43315d5bdb9989",
+        "artifactBytesIndependentlyRead": false
+      },
+      "previousRunMigrationStages": [
+        28,
+        29,
+        30
+      ],
+      "previousArtifact": {
+        "id": 13677368053,
+        "accepted": false,
+        "reason": "overall_failed_run_not_bound_or_accepted"
+      },
+      "allBackendMainSourceUnchanged": true,
+      "localJvmOrPg": "NOT_RUN_REMOTE_CI_REQUIRED",
+      "newC3IntegrationMethods": 11,
+      "postgresFixtureTeardownAndClosure": "NOT_RUN_PENDING_NEW_EXACT_CI",
+      "affectedIndependentQa": "PENDING",
+      "originalFailuresRetained": true
+    },
+    "previousCiFix": {
       "failedCommit": "24a0cb956705ae635897d7313384a03367179917",
       "failedRun": 42621768865,
       "files": [
@@ -4010,48 +4064,6 @@
       "allJavaSourceUnchanged": true,
       "localJvmOrPg": "NOT_RUN_REMOTE_CI_REQUIRED",
       "postgresCleanupAndClosure": "NOT_RUN_PENDING_NEW_EXACT_CI",
-      "affectedIndependentQa": "PENDING",
-      "originalFailuresRetained": true
-    },
-    "previousCiFix": {
-      "failedCommit": "292624a7e319ff7d777999882b2048632919b9ed",
-      "failedRun": 42617821790,
-      "files": [
-        "backend/src/main/java/com/bobbuy/model/OrderLine.java",
-        "backend/src/main/java/com/bobbuy/service/OrderWriteCoordinator.java",
-        "backend/src/test/java/com/bobbuy/api/CustomerOrderAmendmentIntegrationTest.java",
-        "backend/src/test/java/com/bobbuy/model/OrderLineStorageTest.java",
-        "backend/src/test/java/com/bobbuy/service/CustomerOrderAmendmentServiceTest.java",
-        "docs/reports/C3-R13-INTEGRATION-20261109.md",
-        "scripts/test_verify_amendment_onboarding_upgrade.py",
-        "scripts/verify-amendment-onboarding-upgrade.py"
-      ],
-      "backendManifestSha256": "50ef11a1caad0fd4dce7d0a1296089ae45606e2afacb4ad05a08fc679f4eed82",
-      "monitorReceiptSha256": "ca601499e626a001e409e48a24b94d586414f39ce371bd571698a529a15e924e",
-      "previousRunBackend": {
-        "tests": 527,
-        "failures": 1,
-        "errors": 1,
-        "skipped": 8
-      },
-      "previousRunPostgres": {
-        "tests": 45,
-        "setupErrors": 27,
-        "onboardingUniquePass": 6,
-        "c1c2PurePass": 12,
-        "c3MethodsBlocked": 10
-      },
-      "previousRunMigrationStages": [
-        28,
-        29,
-        30
-      ],
-      "fixturePureTests": 14,
-      "fixtureReceiptSha256": "eb9c6da55b5cdcba042a0d71f6696c9c39d5b1cf19af859376839629ec7c6711",
-      "localNewJava": "NOT_RUN_HOSPITAL_RUNTIME_WINDOW_REMOTE_CI_USED",
-      "newPureJavaMethods": 24,
-      "newC3IntegrationMethods": 11,
-      "springAndPgClosure": "NOT_RUN_PENDING_NEW_EXACT_CI",
       "affectedIndependentQa": "PENDING",
       "originalFailuresRetained": true
     }
