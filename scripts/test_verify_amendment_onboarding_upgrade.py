@@ -1,7 +1,9 @@
 """Pure negative boundaries only; no PG, JVM, container, network or production calls."""
 import copy
+import json
 import importlib.util
 from pathlib import Path
+import tempfile
 import unittest
 from unittest.mock import patch
 
@@ -11,6 +13,22 @@ spec.loader.exec_module(module)
 
 
 class AmendmentOnboardingUpgradeTest(unittest.TestCase):
+    CI_ENV={'GITHUB_ACTIONS':'true','GITHUB_EVENT_NAME':'workflow_dispatch','GITHUB_JOB':'postgres-migration-verify','BOBBUY_ISOLATED_CI_POSTGRES':'true'}
+
+    def cleanup_receipt_path(self, path):
+        return path.parent/'surefire-reports'/'c3-r13-fixture-cleanup.json'
+
+    def cleanup_proof(self, directory):
+        fingerprints={f'table_{index}': '0:synthetic' for index in range(38)}
+        proof={'scope':'EXISTING_EPHEMERAL_HOSTED_CI_POSTGRES_ONLY','status':'PASS','schemaBefore':28,'schemaAfter':30,
+               'migrationBaselineSha256':module.BASELINE_SHA256,
+               'schemaStages':[29,30],'originalBusinessTables':38,'businessTables':42,'allOldColumnsAndValuesPreserved':True,
+               'businessDatasourceUsed':False,'noDatabaseRestore':True,'initialFingerprints':fingerprints,'finalOldColumnFingerprints':fingerprints,
+               'stages':[{'schemaAfter':version,'status':'PASS','allOldColumnsAndValuesPreserved':True} for version in [29,30]]}
+        path=Path(directory)/'c3-r13-upgrade-preservation.json'
+        path.write_text(json.dumps(proof))
+        return path,proof
+
     def setUp(self):
         self.old=[{'table_name':'bb_order_header','column_name':'id','ordinal_position':1,'data_type':'bigint','udt_name':'int8',
                    'character_maximum_length':None,'is_nullable':'NO','column_default':None}]
@@ -140,3 +158,89 @@ class AmendmentOnboardingUpgradeTest(unittest.TestCase):
     def test_unknown_stage_cannot_be_inferred_as_a_success(self):
         args=self.stage(29);args[-1]=31
         with self.assertRaises(RuntimeError):module.assert_stage(*args)
+
+    def test_cleanup_requires_existing_complete_unchanged_preservation_proof(self):
+        with tempfile.TemporaryDirectory() as directory,patch.dict(module.os.environ,self.CI_ENV,clear=True),patch.object(module,'sql') as sql:
+            path=Path(directory)/'missing.json'
+            with self.assertRaises(FileNotFoundError):module.cleanup_fixture_dependencies(path)
+            path,proof=self.cleanup_proof(directory)
+            for field,value in [('status','FAIL'),('schemaAfter',29),('migrationBaselineSha256','wrong'),('businessDatasourceUsed',True),('allOldColumnsAndValuesPreserved',False),('stages',[]),('finalOldColumnFingerprints',{})]:
+                path.write_text(json.dumps({**proof,field:value}))
+                with self.subTest(field=field),self.assertRaises(RuntimeError):module.cleanup_fixture_dependencies(path)
+            sql.assert_not_called()
+
+    def test_cleanup_environment_guard_runs_before_proof_or_connection(self):
+        with tempfile.TemporaryDirectory() as directory,patch.object(module,'sql') as sql:
+            for key in self.CI_ENV:
+                with patch.dict(module.os.environ,{**self.CI_ENV,key:'wrong'},clear=True),self.subTest(key=key),self.assertRaises(RuntimeError):
+                    module.cleanup_fixture_dependencies(Path(directory)/'missing.json')
+            sql.assert_not_called()
+
+    def test_cleanup_rejects_missing_dependency_without_delete_or_pass(self):
+        with tempfile.TemporaryDirectory() as directory,patch.dict(module.os.environ,self.CI_ENV,clear=True):
+            path,_=self.cleanup_proof(directory)
+            for kind in module.FIXTURE_DEPENDENCIES:
+                observed=copy.deepcopy(module.FIXTURE_DEPENDENCIES);observed[kind]=[]
+                with patch.object(module,'sql',return_value=json.dumps(observed)) as sql,self.subTest(kind=kind),self.assertRaises(RuntimeError):module.cleanup_fixture_dependencies(path)
+                self.assertEqual(sql.call_count,1);self.assertFalse(self.cleanup_receipt_path(path).exists())
+
+    def test_cleanup_rejects_extra_dependency_without_delete_or_pass(self):
+        with tempfile.TemporaryDirectory() as directory,patch.dict(module.os.environ,self.CI_ENV,clear=True):
+            path,_=self.cleanup_proof(directory)
+            for kind in module.FIXTURE_DEPENDENCIES:
+                observed=copy.deepcopy(module.FIXTURE_DEPENDENCIES);observed[kind].append({**observed[kind][0],'id':'unknown'})
+                with patch.object(module,'sql',return_value=json.dumps(observed)) as sql,self.subTest(kind=kind),self.assertRaises(RuntimeError):module.cleanup_fixture_dependencies(path)
+                self.assertEqual(sql.call_count,1);self.assertFalse(self.cleanup_receipt_path(path).exists())
+
+    def test_cleanup_rejects_foreign_id_product_actor_or_merchant(self):
+        with tempfile.TemporaryDirectory() as directory,patch.dict(module.os.environ,self.CI_ENV,clear=True):
+            path,_=self.cleanup_proof(directory)
+            for kind,rows in module.FIXTURE_DEPENDENCIES.items():
+                for field,value in rows[0].items():
+                    observed=copy.deepcopy(module.FIXTURE_DEPENDENCIES);observed[kind][0][field]=value+1 if isinstance(value,int) else 'foreign'
+                    with patch.object(module,'sql',return_value=json.dumps(observed)) as sql,self.subTest(kind=kind,field=field),self.assertRaises(RuntimeError):module.cleanup_fixture_dependencies(path)
+                    self.assertEqual(sql.call_count,1);self.assertFalse(self.cleanup_receipt_path(path).exists())
+
+    def test_cleanup_executes_only_two_ordered_guarded_deletes_after_proof_then_binds_receipt(self):
+        with tempfile.TemporaryDirectory() as directory,patch.dict(module.os.environ,self.CI_ENV,clear=True):
+            path,_=self.cleanup_proof(directory);original=path.read_bytes();receipt_path=self.cleanup_receipt_path(path);calls=[]
+            def execute(statement):
+                self.assertEqual(path.read_bytes(),original);self.assertFalse(receipt_path.exists());calls.append(statement)
+                if len(calls)==1:
+                    self.assertNotIn('DELETE',statement);return json.dumps(module.FIXTURE_DEPENDENCIES)
+                self.assertTrue(statement.startswith('BEGIN;'));self.assertTrue(statement.rstrip().endswith('COMMIT;'))
+                self.assertIn('FOR UPDATE',statement);self.assertIn('RAISE EXCEPTION',statement)
+                deletes=[line.strip() for line in statement.splitlines() if line.strip().startswith('DELETE FROM')]
+                self.assertEqual(len(deletes),2)
+                self.assertTrue(deletes[0].startswith('DELETE FROM bb_product_lifecycle_event WHERE'))
+                self.assertTrue(deletes[1].startswith('DELETE FROM bb_product_catalog_recovery WHERE'))
+                for statement,identity,owner in [(deletes[0],'ci-c3-r13-lifecycle-history','actor_id=-293001'),(deletes[1],'ci-c3-r13-catalog-history','merchant_id=-293001')]:
+                    self.assertIn("id='"+identity+"'",statement);self.assertIn("product_id='ci-c3-r13-historical-product'",statement);self.assertIn(owner,statement);self.assertIn('RETURNING id INTO',statement)
+                return json.dumps(module.FIXTURE_DELETED)
+            with patch.object(module,'sql',side_effect=execute),patch('builtins.print'):receipt=module.cleanup_fixture_dependencies(path)
+            self.assertEqual(len(calls),2);self.assertEqual(path.read_bytes(),original)
+            self.assertEqual(receipt,json.loads(receipt_path.read_text()));self.assertEqual(receipt['preservationProofSha256'],module.sha(original))
+            self.assertTrue(receipt['productOrderUserRowsRetained']);self.assertEqual(receipt['deleted'],module.FIXTURE_DELETED)
+
+    def test_cleanup_sql_failure_or_unexpected_result_never_writes_pass(self):
+        with tempfile.TemporaryDirectory() as directory,patch.dict(module.os.environ,self.CI_ENV,clear=True):
+            path,_=self.cleanup_proof(directory)
+            for results in [[RuntimeError('read failed')],[json.dumps(module.FIXTURE_DEPENDENCIES),RuntimeError('transaction failed')],[json.dumps(module.FIXTURE_DEPENDENCIES),json.dumps({'lifecycle':[],'catalog':[]})]]:
+                with patch.object(module,'sql',side_effect=results),self.subTest(results=results),self.assertRaises(RuntimeError):module.cleanup_fixture_dependencies(path)
+                self.assertFalse(self.cleanup_receipt_path(path).exists())
+
+    def test_cleanup_proof_change_during_transaction_never_writes_pass(self):
+        with tempfile.TemporaryDirectory() as directory,patch.dict(module.os.environ,self.CI_ENV,clear=True):
+            path,_=self.cleanup_proof(directory);calls=[]
+            def execute(statement):
+                calls.append(statement)
+                if len(calls)==1:return json.dumps(module.FIXTURE_DEPENDENCIES)
+                path.write_text('changed proof');return json.dumps(module.FIXTURE_DELETED)
+            with patch.object(module,'sql',side_effect=execute),self.assertRaises(RuntimeError):module.cleanup_fixture_dependencies(path)
+            self.assertFalse(self.cleanup_receipt_path(path).exists())
+
+    def test_cleanup_does_not_overwrite_existing_receipt_or_replay_deletes(self):
+        with tempfile.TemporaryDirectory() as directory,patch.dict(module.os.environ,self.CI_ENV,clear=True),patch.object(module,'sql') as sql:
+            path,_=self.cleanup_proof(directory);receipt_path=self.cleanup_receipt_path(path);receipt_path.parent.mkdir();receipt_path.write_text('retained prior outcome')
+            with self.assertRaises(RuntimeError):module.cleanup_fixture_dependencies(path)
+            sql.assert_not_called();self.assertEqual(receipt_path.read_text(),'retained prior outcome')

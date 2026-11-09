@@ -192,6 +192,79 @@ INSERT INTO bb_order_header(id,business_id,customer_id,status,payment_status,del
 COMMIT;""")
 
 
+FIXTURE_DEPENDENCIES = {
+    'product': [{'id': 'ci-c3-r13-historical-product', 'merchant_id': -293001}],
+    'lifecycle': [{'id': 'ci-c3-r13-lifecycle-history', 'product_id': 'ci-c3-r13-historical-product', 'action': 'RESTORE', 'actor_id': -293001}],
+    'catalog': [{'id': 'ci-c3-r13-catalog-history', 'product_id': 'ci-c3-r13-historical-product', 'merchant_id': -293001, 'version_after': 2}],
+}
+FIXTURE_DELETED = {'lifecycle': ['ci-c3-r13-lifecycle-history'], 'catalog': ['ci-c3-r13-catalog-history']}
+
+
+def cleanup_fixture_dependencies(proof_path):
+    """After immutable migration proof, release only our two FK dependencies.
+
+    This is not business seed behavior. It is confined to the same explicitly
+    permitted, ephemeral hosted-CI database and leaves product/order/user rows.
+    """
+    require_isolated_ci(os.environ)  # Before even a read query.
+    proof_path = Path(proof_path)
+    # Existing workflow uploads this whole directory; keep the new receipt without
+    # changing the immutable preservation report or broadening workflow permissions.
+    receipt_path = proof_path.parent / 'surefire-reports' / 'c3-r13-fixture-cleanup.json'
+    raw = proof_path.read_bytes()
+    proof = json.loads(raw)
+    initial = proof.get('initialFingerprints', {})
+    if (proof.get('scope') != 'EXISTING_EPHEMERAL_HOSTED_CI_POSTGRES_ONLY'
+            or proof.get('status') != 'PASS' or proof.get('schemaBefore') != 28 or proof.get('schemaAfter') != 30
+            or proof.get('schemaStages') != [29, 30] or proof.get('originalBusinessTables') != 38 or proof.get('businessTables') != 42
+            or proof.get('migrationBaselineSha256') != BASELINE_SHA256
+            or proof.get('allOldColumnsAndValuesPreserved') is not True or proof.get('businessDatasourceUsed') is not False
+            or proof.get('noDatabaseRestore') is not True or len(initial) != 38
+            or proof.get('finalOldColumnFingerprints') != initial
+            or len(proof.get('stages', [])) != 2
+            or any(stage.get('status') != 'PASS' or stage.get('schemaAfter') != version
+                   or stage.get('allOldColumnsAndValuesPreserved') is not True
+                   for stage, version in zip(proof.get('stages', []), [29, 30]))):
+        raise RuntimeError('Completed unchanged populated migration proof required before fixture cleanup')
+    if receipt_path.exists():
+        raise RuntimeError('Existing cleanup receipt must not be overwritten or replayed')
+    observed = json.loads(sql("""SELECT json_build_object(
+ 'product',(SELECT coalesce(json_agg(x),'[]') FROM (SELECT id,merchant_id FROM bb_product WHERE id='ci-c3-r13-historical-product') x),
+ 'lifecycle',(SELECT coalesce(json_agg(x ORDER BY id),'[]') FROM (SELECT id,product_id,action,actor_id FROM bb_product_lifecycle_event WHERE product_id='ci-c3-r13-historical-product' OR id='ci-c3-r13-lifecycle-history') x),
+ 'catalog',(SELECT coalesce(json_agg(x ORDER BY id),'[]') FROM (SELECT id,product_id,merchant_id,version_after FROM bb_product_catalog_recovery WHERE product_id='ci-c3-r13-historical-product' OR id='ci-c3-r13-catalog-history') x));"""))
+    if observed != FIXTURE_DEPENDENCIES:
+        raise RuntimeError('Unexpected synthetic fixture dependency identity or count; refuse cleanup')
+    deleted = json.loads(sql("""BEGIN;
+DO $fixture_cleanup$
+DECLARE removed_lifecycle text; removed_catalog text;
+BEGIN
+ PERFORM 1 FROM bb_product WHERE id='ci-c3-r13-historical-product' AND merchant_id=-293001 FOR UPDATE;
+ IF NOT FOUND THEN RAISE EXCEPTION 'Unexpected synthetic product owner'; END IF;
+ IF (SELECT count(*) FROM bb_product_lifecycle_event WHERE product_id='ci-c3-r13-historical-product')<>1
+    OR (SELECT count(*) FROM bb_product_lifecycle_event WHERE id='ci-c3-r13-lifecycle-history' AND product_id='ci-c3-r13-historical-product' AND actor_id=-293001 AND action='RESTORE')<>1
+    OR (SELECT count(*) FROM bb_product_catalog_recovery WHERE product_id='ci-c3-r13-historical-product')<>1
+    OR (SELECT count(*) FROM bb_product_catalog_recovery WHERE id='ci-c3-r13-catalog-history' AND product_id='ci-c3-r13-historical-product' AND merchant_id=-293001 AND version_after=2)<>1
+ THEN RAISE EXCEPTION 'Synthetic dependency changed before deletion'; END IF;
+ DELETE FROM bb_product_lifecycle_event WHERE id='ci-c3-r13-lifecycle-history' AND product_id='ci-c3-r13-historical-product' AND actor_id=-293001 AND action='RESTORE' RETURNING id INTO removed_lifecycle;
+ IF removed_lifecycle IS DISTINCT FROM 'ci-c3-r13-lifecycle-history' THEN RAISE EXCEPTION 'Unexpected lifecycle deletion'; END IF;
+ DELETE FROM bb_product_catalog_recovery WHERE id='ci-c3-r13-catalog-history' AND product_id='ci-c3-r13-historical-product' AND merchant_id=-293001 AND version_after=2 RETURNING id INTO removed_catalog;
+ IF removed_catalog IS DISTINCT FROM 'ci-c3-r13-catalog-history' THEN RAISE EXCEPTION 'Unexpected catalog deletion'; END IF;
+END;
+$fixture_cleanup$;
+SELECT json_build_object('lifecycle',ARRAY['ci-c3-r13-lifecycle-history'],'catalog',ARRAY['ci-c3-r13-catalog-history']);
+COMMIT;"""))
+    if deleted != FIXTURE_DELETED or proof_path.read_bytes() != raw:
+        raise RuntimeError('Unexpected cleanup result or changed migration proof; no cleanup PASS receipt')
+    receipt = {'scope': 'EXISTING_EPHEMERAL_HOSTED_CI_POSTGRES_ONLY', 'stage': 'POST_PRESERVATION_FIXTURE_DEPENDENCIES_ONLY',
+               'status': 'PASS', 'preservationProofFile': proof_path.name, 'preservationProofSha256': sha(raw), 'preservationProofUnchanged': True,
+               'deleted': deleted, 'productOrderUserRowsRetained': True, 'businessDatasourceUsed': False}
+    receipt_path.parent.mkdir(parents=True, exist_ok=True)
+    with receipt_path.open('x', encoding='utf-8') as output:
+        output.write(json.dumps(receipt, indent=2) + '\n')
+    print(json.dumps(receipt))
+    return receipt
+
+
 def main():
     require_isolated_ci(os.environ)  # Before any connection, seed, Maven or SQL.
     baseline = verify_migration_inputs()
@@ -235,6 +308,7 @@ def main():
     output.parent.mkdir(parents=True,exist_ok=True)
     output.write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps({key:value for key,value in report.items() if key not in {'initialFingerprints','finalOldColumnFingerprints','stages'}}))
+    cleanup_fixture_dependencies(output)
 
 
 if __name__=='__main__':

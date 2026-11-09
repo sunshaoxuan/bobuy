@@ -1,9 +1,9 @@
 {
-  "candidate": "C3/R13 queued writer and mutable specification Map correction; exact remote CI pending",
+  "candidate": "C3/R13 isolated post-preservation fixture dependency cleanup; exact PostgreSQL closure pending",
   "baseHead": "82b8daf7fe275d6dd623b36621f1cf2596dc0e98",
   "sourceMerge": "82f5948cdf50c165da347fde7f091dbfadfa1225",
   "sourceDigestAlgorithm": "sha256-json-utf8-sourceFiles-v1",
-  "sourceDigest": "973e6b7703d25200b7c47d918bd50b85bedd0b95273505ffb4b4914562d0ab06",
+  "sourceDigest": "0a815ee49e91e97cf896fa0ac471e67689ae3d143107c3c36030aea79c4a11c0",
   "lineEndingPolicy": "Exact canonical Git-filtered blob bytes, SHA1 cross-checked against git hash-object; unchanged binaries byte-for-byte. Excludes this self-referential manifest and unrelated protected dirty files.",
   "sourceFiles": [
     {
@@ -2353,8 +2353,8 @@
     },
     {
       "path": "docs/reports/C3-R13-INTEGRATION-20261109.md",
-      "gitLfBytes": 9252,
-      "gitLfSha256": "0f7af9044ac6d9c1d0dad9445b7d552d99e5cc4374d376ed4f129f313031ce2b"
+      "gitLfBytes": 11701,
+      "gitLfSha256": "bd89bf2fc1ea4be1a78b1a39d9cdc965799d6bd5198d274fe005d21aba523fff"
     },
     {
       "path": "docs/reports/C3-R2-PRODUCT-IDENTITY-20261109.md",
@@ -3683,8 +3683,8 @@
     },
     {
       "path": "scripts/test_verify_amendment_onboarding_upgrade.py",
-      "gitLfBytes": 10372,
-      "gitLfSha256": "71778262c36de84666eafe27bc2df08e6494e374f09634d061921107927c711a"
+      "gitLfBytes": 19253,
+      "gitLfSha256": "437120a97e475a23f1b41ad575be6799f4a4aa8644538de456edbe4d48ca29f0"
     },
     {
       "path": "scripts/test_verify_checkout_upgrade.py",
@@ -3693,8 +3693,8 @@
     },
     {
       "path": "scripts/verify-amendment-onboarding-upgrade.py",
-      "gitLfBytes": 17886,
-      "gitLfSha256": "1b6c456856929a680a8ce1b2db0cf5e29de3b7a8d04d511b2dd0dc1275a40be6"
+      "gitLfBytes": 23768,
+      "gitLfSha256": "462e0204ad6e1655a97fe64e39bcd1decfbdae2b642e936f218aafe196814a95"
     },
     {
       "path": "scripts/verify-checkout-upgrade.py",
@@ -3968,6 +3968,52 @@
     "newCiDeltaIndependentQa": "PENDING_AFFECTED_BACKEND_SOURCE_AND_CI_FIX_REVIEW",
     "formalBuildAndNonProductionBrowserAcceptance": "PENDING_REQUIRED_BEFORE_PUBLISH",
     "postCiFix": {
+      "failedCommit": "24a0cb956705ae635897d7313384a03367179917",
+      "failedRun": 42621768865,
+      "files": [
+        "docs/reports/C3-R13-INTEGRATION-20261109.md",
+        "scripts/test_verify_amendment_onboarding_upgrade.py",
+        "scripts/verify-amendment-onboarding-upgrade.py"
+      ],
+      "fixtureManifestSha256": "e07791f68acb8ad48f157d8501a52cacad57dec82c655c6351ca2e422bfcb52c",
+      "monitorReceiptSha256": "d5ebce8819fe40d7feeb5421b027ad95b6baa7dcc2b6d7ed28d71e371662c01f",
+      "previousRunBackend": {
+        "tests": 531,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 8,
+        "status": "PASS",
+        "c3PureSubset": 24,
+        "c3H2IntegrationSubset": 11,
+        "subsetsOverlapTotal": true
+      },
+      "previousRunPostgres": {
+        "tests": 46,
+        "setupErrors": 28,
+        "onboardingUniquePass": 6,
+        "c1c2PurePass": 12,
+        "c3MethodsBlocked": 11,
+        "status": "FAIL_FIXTURE_FK"
+      },
+      "previousRunMigrationStages": [
+        28,
+        29,
+        30
+      ],
+      "previousArtifact": {
+        "id": 13676068343,
+        "accepted": false,
+        "reason": "overall_failed_run_not_bound_or_accepted"
+      },
+      "fixturePureTests": 23,
+      "fixtureReceiptSha256": "4a5356ec95909a8d6e2d848c31f5cfb53cf8afe80e0c74b0d5cca8ec00eb23be",
+      "allJavaSourceUnchanged": true,
+      "localJvmOrPg": "NOT_RUN_REMOTE_CI_REQUIRED",
+      "postgresCleanupAndClosure": "NOT_RUN_PENDING_NEW_EXACT_CI",
+      "affectedIndependentQa": "PENDING",
+      "originalFailuresRetained": true
+    },
+    "previousCiFix": {
       "failedCommit": "292624a7e319ff7d777999882b2048632919b9ed",
       "failedRun": 42617821790,
       "files": [
@@ -4005,33 +4051,6 @@
       "localNewJava": "NOT_RUN_HOSPITAL_RUNTIME_WINDOW_REMOTE_CI_USED",
       "newPureJavaMethods": 24,
       "newC3IntegrationMethods": 11,
-      "springAndPgClosure": "NOT_RUN_PENDING_NEW_EXACT_CI",
-      "affectedIndependentQa": "PENDING",
-      "originalFailuresRetained": true
-    },
-    "previousCiFix": {
-      "failedCommit": "214427655d0ddde09ecb2e783306bf03e3d57499",
-      "failedRun": 42614311891,
-      "files": [
-        "backend/src/main/java/com/bobbuy/model/OrderHeader.java",
-        "backend/src/main/java/com/bobbuy/model/OrderLine.java",
-        "backend/src/main/java/com/bobbuy/model/OrderLineStorageJavaType.java",
-        "backend/src/test/java/com/bobbuy/api/CustomerOrderAmendmentIntegrationTest.java",
-        "backend/src/test/java/com/bobbuy/model/OrderLineStorageTest.java",
-        "backend/src/test/java/com/bobbuy/service/CustomerOrderAmendmentServiceTest.java",
-        "docs/reports/C3-R13-INTEGRATION-20261109.md",
-        "scripts/test_verify_amendment_onboarding_upgrade.py",
-        "scripts/verify-amendment-onboarding-upgrade.py"
-      ],
-      "backendManifestSha256": "96a2e594b1d31422b1a67285e11cd95217387de0494db2747d17ec4120715426",
-      "localNewJava": "NOT_RUN_HOSPITAL_RUNTIME_WINDOW_REMOTE_CI_USED",
-      "fixturePureTests": 14,
-      "previousRunRealPgOnboardingUniquePass": 6,
-      "previousRunMigrationStages": [
-        28,
-        29,
-        30
-      ],
       "springAndPgClosure": "NOT_RUN_PENDING_NEW_EXACT_CI",
       "affectedIndependentQa": "PENDING",
       "originalFailuresRetained": true
