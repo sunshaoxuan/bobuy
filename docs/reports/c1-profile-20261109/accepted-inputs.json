@@ -1,7 +1,7 @@
 {
   "candidate": "C1 self profile R2 and private preview correction",
   "baseHead": "4696e0f81f70848e86734b7ca905516ecdb5626b",
-  "sourceDigest": "c60d878713d92d6f8f8d15cc35f00266501c752b532f117d5337302f36efc82e",
+  "sourceDigest": "205900c648e37abb0051570e39e407f4960490e450648d9a2eec1757b22aa0c7",
   "lineEndingPolicy": "Exact staged Git blob bytes, including unchanged binary fixtures; excludes this self-referential manifest",
   "sourceFiles": [
     {
@@ -1781,8 +1781,8 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/StorefrontIntegrationTest.java",
-      "gitLfBytes": 23171,
-      "gitLfSha256": "18b1aab8c5dff264f6b20a96fa55236a89ec991fea15288e6ad1765483b6725f"
+      "gitLfBytes": 23305,
+      "gitLfSha256": "cc5926fe595043ea1ef1e3a58e21b957a21addd34958adf401c066aef2fb2c63"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/TripControllerIntegrationTest.java",
@@ -2071,8 +2071,8 @@
     },
     {
       "path": "docs/reports/C1-REGISTRATION-PROFILE-20261109.md",
-      "gitLfBytes": 4550,
-      "gitLfSha256": "488b288c1a222d63c0c1f1657dd4d54365b2fb3b0114364a1aeba6b97207d399"
+      "gitLfBytes": 5525,
+      "gitLfSha256": "f4befd19a9cca0e864abc077be4edd503a15f1c5df5474f4ad18f6477924b437"
     },
     {
       "path": "frontend/Dockerfile",
@@ -3476,7 +3476,15 @@
     "releaseReady": false,
     "sourceDeltaSha256": "50f9b4fc4b0635272868859042d68822a330b1de880aab8e2717215734265670",
     "sourceCombinedPatchSha256": "655dddf881585fc3913144dab96fda2feff7bdf7a5030b419485383bccda4781",
-    "committedReport": "docs/reports/C1-REGISTRATION-PROFILE-20261109.md"
+    "committedReport": "docs/reports/C1-REGISTRATION-PROFILE-20261109.md",
+    "postQaChanges": [
+      {
+        "path": "backend/src/test/java/com/bobbuy/api/StorefrontIntegrationTest.java",
+        "reason": "Isolated PostgreSQL fixture cleanup for refresh-session user/rotation foreign keys; application implementation and business assertions unchanged",
+        "failedRunId": 42551690269,
+        "affectedIndependentReview": "PENDING"
+      }
+    ]
   },
   "schemaBefore": 27,
   "schemaAfter": 27,

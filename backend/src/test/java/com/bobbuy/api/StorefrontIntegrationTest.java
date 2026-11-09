@@ -32,14 +32,15 @@ class StorefrontIntegrationTest {
     @Autowired ProductRepository products;
     @Autowired OrderHeaderRepository orders;
     @Autowired EmailChallengeRepository challenges;
+    @Autowired RefreshTokenSessionRepository refreshSessions;
     @Autowired MerchantCustomerRepository relations;
     @Autowired ProductSaleService sales;
     @MockBean JavaMailSender mail;
 
     @BeforeEach void setup() {
-        challenges.deleteAll(); relations.deleteAll(); store.seed();
+        refreshSessions.deleteAllInBatch(); challenges.deleteAll(); relations.deleteAll(); store.seed();
     }
-    @AfterEach void cleanup() { challenges.deleteAll(); relations.deleteAll(); }
+    @AfterEach void cleanup() { refreshSessions.deleteAllInBatch(); challenges.deleteAll(); relations.deleteAll(); }
 
     JsonNode register(String name) throws Exception {
         return json.readTree(mvc.perform(post("/api/auth/register").contentType(MediaType.APPLICATION_JSON)
