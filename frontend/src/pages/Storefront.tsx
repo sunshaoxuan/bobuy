@@ -22,6 +22,7 @@ import {scopedPath,selectedNode} from '../storeNavigation';
 import '../browse.css';
 import {formatMoney} from '../currency';
 import MaintenanceNotice,{isMaintenanceError} from '../components/MaintenanceNotice';
+import {AccountProfile} from './AccountProfile';
 
 const ClientOrders = lazy(() => import('./ClientOrders'));
 const PublicRecommendations = lazy(() => import('./PublicRecommendations'));
@@ -64,7 +65,7 @@ export function AccountForm({ afterLogin, checkout = false }: { afterLogin: () =
   </section>;
 }
 
-function EmailVerification() {
+export function EmailVerification({refresh}: {refresh:()=>Promise<void>}) {
   const { t } = useI18n();
   const { user } = useUserRole();
   const [busy, setBusy] = useState(false);
@@ -82,9 +83,7 @@ function EmailVerification() {
     {notice && <Alert type="success" message={notice} />}{error && <Alert type="error" message={error} />}
     <Form layout="vertical" onFinish={({ code }) => void run(async () => {
       await storefrontApi.verify(code);
-      const current = await api.auth.me();
-      const { getStoredAccessToken, getStoredAccessTokenExpiresAt, getStoredRefreshTokenExpiresAt } = await import('../authStorage');
-      storeAuthSession({ accessToken: getStoredAccessToken()!, accessTokenExpiresAt: getStoredAccessTokenExpiresAt(), refreshTokenExpiresAt: getStoredRefreshTokenExpiresAt(), user: current });
+      await refresh();
     }, t('store.verify_success'))}>
       <Form.Item label={t('store.code')} name="code" rules={[{ required: true, pattern: /^[0-9]{6}$/, message: t('store.code_required') }]}>
         <Input inputMode="numeric" maxLength={6} autoComplete="one-time-code" size="large" /></Form.Item>
@@ -253,7 +252,7 @@ export default function Storefront() {
         <Route index element={<><HomeBrandIntro/>{showHomeRecommendations?<PublicRecommendations query={search} products={products} quantities={cart.items} onDetail={setDetail} onAdd={addRecommendation} canBuy={canBuyRecommendation} onSales={receiveSales} purchasePending={!tripsReady||authLoading} authKey={authKey} autoPaused={navigationOpen||tripPicker||!!detail||!!quantityProduct||cartConfirmationOpen}/>:rootCatalog}</>} /><Route path="products" element={<PublicProductCatalog query={search} products={products} quantities={cart.items} onAdd={addRecommendation} canBuy={canBuyRecommendation} onSales={receiveSales} purchasePending={!tripsReady||authLoading} autoPaused={navigationOpen||tripPicker||!!detail||!!quantityProduct||cartConfirmationOpen}/>}/><Route path="trips" element={tripsReady?bookable:<Spin/>}/><Route path="client/trips" element={<ClientTrips node={node}/>}/><Route path="cart" element={basket} />
         <Route path="checkout" element={<div className="checkout-layout">{receipt ? <section className="order-success"><CheckCircleOutlined /><h1>{t('store.submitted')}</h1><p>{t('store.order_number',{id:receipt.orderId})} · {money(receipt.total)}</p><Tag color="gold">{t('store.pending')}</Tag><div className="action-row"><Link to="/client/orders"><Button type="primary">{t('store.view_order')}</Button></Link><Link to="/"><Button>{t('store.continue')}</Button></Link></div></section> : <>{basket}{quantity > 0 && <section className="checkout-account">{!isAuthenticated ? <AccountForm checkout afterLogin={() => {}} /> : !user?.roles.includes('CUSTOMER') ? <Alert type="warning" message={t('store.customer_only')} action={<Button onClick={() => void logout()}>{t('store.switch_account')}</Button>} /> : <><h2>{t('store.confirm')}</h2><p>{user.name} · {user.email}</p>{!user.emailVerified && <Alert type="info" message={t('store.unverified_hint')} />}<Button type="primary" size="large" block loading={busy} disabled={invalidCart} onClick={() => void checkout()}>{t('store.submit')} · {totalText}</Button><Link to="/account">{t('store.verify')}</Link></>}</section>}</>}</div>} />
         <Route path="login" element={isAuthenticated ? <Navigate to="/account" replace /> : <AccountForm afterLogin={() => navigate('/account')} />} />
-        <Route path="account" element={isAuthenticated ? <section className="account-page"><h1>{t('store.account')}</h1><p>{user?.name}</p><EmailVerification /><div className="account-links"><Link to="/client/orders">{t('store.orders')} <ArrowRightOutlined /></Link><Link to="/client/billing">{t('store.billing')} <ArrowRightOutlined /></Link>{(user?.roles.includes('AGENT') || user?.platformAdmin) && <Link to="/admin">{t('store.admin')} <ArrowRightOutlined /></Link>}<Button icon={<LogoutOutlined />} onClick={() => void logout()}>{t('store.logout')}</Button></div></section> : <AccountForm afterLogin={() => {}} />} />
+        <Route path="account" element={isAuthenticated ? <section className="account-page"><h1>{t('store.account')}</h1><p>{user?.name}</p>{user&&<AccountProfile key={user.id} userId={user.id} verification={(refresh,profile)=><EmailVerification key={profile.email} refresh={refresh}/>}/>}<div className="account-links"><Link to="/client/orders">{t('store.orders')} <ArrowRightOutlined /></Link><Link to="/client/billing">{t('store.billing')} <ArrowRightOutlined /></Link>{(user?.roles.includes('AGENT') || user?.platformAdmin) && <Link to="/admin">{t('store.admin')} <ArrowRightOutlined /></Link>}<Button icon={<LogoutOutlined />} onClick={() => void logout()}>{t('store.logout')}</Button></div></section> : <AccountForm afterLogin={() => {}} />} />
         <Route path="recommendations" element={<PublicRecommendations query={search} products={products} quantities={cart.items} onDetail={setDetail} onAdd={addRecommendation} canBuy={canBuyRecommendation} onSales={receiveSales} purchasePending={!tripsReady||authLoading} authKey={authKey} autoPaused={navigationOpen||tripPicker||!!detail||!!quantityProduct||cartConfirmationOpen}/>} />
         <Route path="recommendations/:id" element={<PublicRecommendations query={search} products={products} quantities={cart.items} onDetail={setDetail} onAdd={addRecommendation} canBuy={canBuyRecommendation} onSales={receiveSales} purchasePending={!tripsReady||authLoading} authKey={authKey} autoPaused={navigationOpen||tripPicker||!!detail||!!quantityProduct||cartConfirmationOpen}/>} />
         <Route path="client/orders" element={<ProtectedRoute allowedRoles={['CUSTOMER']}><ClientOrders key={String(node)+':'+user?.id} node={node}/></ProtectedRoute>} />

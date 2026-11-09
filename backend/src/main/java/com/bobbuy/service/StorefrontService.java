@@ -33,6 +33,7 @@ public class StorefrontService {
     private final ProductSaleService sales;
     private final MailSettingsService mailSettings;
     private final SecureRandom random = new SecureRandom();
+    @org.springframework.beans.factory.annotation.Autowired private SelfProfileService profiles;
 
     public StorefrontService(UserRepository users, TripRepository trips, ProductRepository products,
             OrderHeaderRepository orders, EmailChallengeRepository challenges, MerchantCustomerRepository relations,
@@ -101,7 +102,7 @@ public class StorefrontService {
 
     @Transactional
     public void resend(Authentication authentication) {
-        User user = users.lockById(auth.currentUser(authentication).id()).orElseThrow();
+        User user = profiles.lockCurrent(authentication);
         if (user.getEmailVerifiedAt() != null) return;
         EmailChallenge prior = challenges.findById(user.getId()).orElse(null);
         if (prior != null && prior.sentAt.plusSeconds(60).isAfter(Instant.now())) {
@@ -112,7 +113,7 @@ public class StorefrontService {
 
     @Transactional(noRollbackFor = ApiException.class)
     public void verify(Authentication authentication, String code) {
-        User user = users.lockById(auth.currentUser(authentication).id()).orElseThrow();
+        User user = profiles.lockCurrent(authentication);
         if (user.getEmailVerifiedAt() != null) return;
         EmailChallenge challenge = challenges.findById(user.getId()).orElseThrow(() -> invalid("请重新获取验证码"));
         if (challenge.attempts >= 5 || !challenge.expiresAt.isAfter(Instant.now())) throw invalid("验证码已失效");
@@ -121,7 +122,9 @@ public class StorefrontService {
         if (!passwords.matches(code, challenge.codeHash)) throw invalid("验证码不正确");
         user.setEmailVerifiedAt(Instant.now());
         users.save(user);
-        challenges.delete(challenge);
+        // Consumed codes stay unusable, but sentAt must survive verification so
+        // changing the email immediately afterwards cannot reset the throttle.
+        SelfProfileService.invalidateChallenge(challenges, user.getId());
     }
 
     private void sendChallenge(User user) {

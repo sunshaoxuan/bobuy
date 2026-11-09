@@ -138,10 +138,151 @@ class StorefrontIntegrationTest {
         verifyCode(token(registration),code).andExpect(status().isBadRequest());
         challenge.expiresAt=Instant.now().plusSeconds(60); challenges.save(challenge);
         verifyCode(token(registration),code).andExpect(status().isOk());
-        assertThat(challenges.findById(id)).isEmpty(); assertThat(users.findById(id).orElseThrow().getEmailVerifiedAt()).isNotNull();
+        var consumed = challenges.findById(id).orElseThrow();
+        assertThat(consumed.attempts).isEqualTo(5); assertThat(consumed.expiresAt).isEqualTo(Instant.EPOCH);
+        assertThat(users.findById(id).orElseThrow().getEmailVerifiedAt()).isNotNull();
         assertThat(relations.findByMerchantId(1000L)).isEmpty();
     }
     ResultActions verifyCode(String token, String code) throws Exception {
         return mvc.perform(post("/api/auth/email/verify").header("Authorization","Bearer "+token).contentType(MediaType.APPLICATION_JSON).content("{\"code\":\""+code+"\"}"));
+    }
+
+    ResultActions profilePatch(String token, String body) throws Exception {
+        return mvc.perform(patch("/api/auth/profile").header("Authorization", "Bearer " + token)
+            .contentType(MediaType.APPLICATION_JSON).content(body));
+    }
+
+    @Test void selfProfileSavesReopensPreservesOmissionsAndClearsOptionalFields() throws Exception {
+        JsonNode registration = register("self_profile"); String bearer = token(registration);
+        profilePatch(bearer, """
+            {"name":"Customer Name","phone":"123","defaultAddress":{"city":"Tokyo","addressLine":"Street"},
+             "socialAccounts":[{"platform":"Line","handle":"person","displayName":"Name"}]}
+            """).andExpect(status().isOk()).andExpect(jsonPath("$.data.name").value("Customer Name"));
+        profilePatch(bearer, "{\"defaultAddress\":{\"city\":\"Osaka\"}}")
+            .andExpect(status().isOk()).andExpect(jsonPath("$.data.defaultAddress.addressLine").value("Street"))
+            .andExpect(jsonPath("$.data.phone").value("123"));
+        mvc.perform(get("/api/auth/profile").header("Authorization", "Bearer " + bearer))
+            .andExpect(status().isOk()).andExpect(jsonPath("$.data.defaultAddress.city").value("Osaka"))
+            .andExpect(jsonPath("$.data.socialAccounts[0].verified").value(false))
+            .andExpect(jsonPath("$.data.roles").doesNotExist()).andExpect(jsonPath("$.data.note").doesNotExist());
+        mvc.perform(get("/api/auth/me").header("Authorization", "Bearer " + bearer))
+            .andExpect(status().isOk()).andExpect(jsonPath("$.data.name").value("Customer Name"))
+            .andExpect(jsonPath("$.data.phone").doesNotExist());
+        profilePatch(bearer, "{\"phone\":null,\"defaultAddress\":null,\"socialAccounts\":[]}")
+            .andExpect(status().isOk()).andExpect(jsonPath("$.data.phone").doesNotExist())
+            .andExpect(jsonPath("$.data.defaultAddress").doesNotExist()).andExpect(jsonPath("$.data.socialAccounts").isEmpty());
+    }
+
+    @Test void selfProfileRejectsIdentityAndTrustedFieldsAndOtherUserSelection() throws Exception {
+        JsonNode first = register("profile_first"), second = register("profile_second");
+        for (String field : List.of("id", "userId", "username", "roles", "platformAdmin", "merchantId", "emailVerified", "emailVerifiedAt", "note")) {
+            profilePatch(token(first), "{\"" + field + "\":null}").andExpect(status().isBadRequest());
+        }
+        for (String field : List.of("verified", "note", "userId")) {
+            profilePatch(token(first), "{\"socialAccounts\":[{\"platform\":\"Line\",\"handle\":\"x\",\"" + field + "\":true}]}")
+                .andExpect(status().isBadRequest());
+        }
+        profilePatch(token(first), "{\"defaultAddress\":{\"userId\":1}}").andExpect(status().isBadRequest());
+        mvc.perform(get("/api/auth/profile").param("userId", second.at("/user/id").asText()).header("Authorization", "Bearer " + token(first)))
+            .andExpect(status().isOk()).andExpect(jsonPath("$.data.id").value(first.at("/user/id").asLong()));
+        mvc.perform(get("/api/auth/profile")).andExpect(status().isUnauthorized());
+        mvc.perform(patch("/api/auth/profile").contentType(MediaType.APPLICATION_JSON).content("{}"))
+            .andExpect(status().isUnauthorized());
+        mvc.perform(patch("/api/users/" + second.at("/user/id").asLong()).header("Authorization", "Bearer " + token(first))
+            .contentType(MediaType.APPLICATION_JSON).content("{}" )).andExpect(status().isForbidden());
+    }
+
+    @Test void emailChangeNormalizesRejectsDuplicatesAndInvalidatesOldCodeWithoutResettingCooldown() throws Exception {
+        JsonNode first = register("profile_email"), second = register("profile_taken");
+        ArgumentCaptor<SimpleMailMessage> sent = ArgumentCaptor.forClass(SimpleMailMessage.class); verify(mail, atLeastOnce()).send(sent.capture());
+        String oldCode = sent.getAllValues().get(0).getText().replaceAll(".*?([0-9]{6}).*", "$1");
+        long id = first.at("/user/id").asLong(); Instant sentAt = challenges.findById(id).orElseThrow().sentAt;
+        profilePatch(token(first), "{\"email\":\" PROFILE_TAKEN@EXAMPLE.COM \"}").andExpect(status().isBadRequest());
+        profilePatch(token(first), "{\"email\":null}").andExpect(status().isBadRequest());
+        profilePatch(token(first), "{\"email\":\" \"}").andExpect(status().isBadRequest());
+        profilePatch(token(first), "{\"email\":\" NEW_TARGET@EXAMPLE.COM \"}")
+            .andExpect(status().isOk()).andExpect(jsonPath("$.data.email").value("new_target@example.com"))
+            .andExpect(jsonPath("$.data.emailVerified").value(false));
+        assertThat(challenges.findById(id).orElseThrow().sentAt).isEqualTo(sentAt);
+        verifyCode(token(first), oldCode).andExpect(status().isBadRequest());
+        mvc.perform(post("/api/auth/email/resend").header("Authorization", "Bearer " + token(first))).andExpect(status().isBadRequest());
+        verify(mail, times(2)).send(any(SimpleMailMessage.class)); // Saving does not send.
+        var expired = challenges.findById(id).orElseThrow(); expired.sentAt = Instant.now().minusSeconds(61).truncatedTo(java.time.temporal.ChronoUnit.MILLIS); challenges.save(expired);
+        doThrow(new com.bobbuy.api.response.ApiException(com.bobbuy.api.response.ErrorCode.INVALID_REQUEST, "SMTP test unavailable"))
+            .when(mail).send(any(SimpleMailMessage.class));
+        mvc.perform(post("/api/auth/email/resend").header("Authorization", "Bearer " + token(first))).andExpect(status().isBadRequest());
+        var failed = challenges.findById(id).orElseThrow();
+        assertThat(failed.attempts).isEqualTo(5); assertThat(failed.expiresAt).isEqualTo(Instant.EPOCH);
+        assertThat(failed.sentAt).isEqualTo(expired.sentAt);
+        doNothing().when(mail).send(any(SimpleMailMessage.class));
+        mvc.perform(post("/api/auth/email/resend").header("Authorization", "Bearer " + token(first))).andExpect(status().isOk());
+        verify(mail, atLeastOnce()).send(sent.capture());
+        assertThat(sent.getValue().getTo()).containsExactly("new_target@example.com");
+        String code = sent.getValue().getText().replaceAll(".*?([0-9]{6}).*", "$1");
+        verifyCode(token(first), code).andExpect(status().isOk());
+        mvc.perform(get("/api/auth/profile").header("Authorization", "Bearer " + token(first)))
+            .andExpect(status().isOk()).andExpect(jsonPath("$.data.emailVerified").value(true));
+        mvc.perform(get("/api/auth/me").header("Authorization", "Bearer " + token(first)))
+            .andExpect(status().isOk()).andExpect(jsonPath("$.data.emailVerified").value(true));
+    }
+
+    @Test void concurrentOldVerificationAndEmailChangeCannotVerifyTheNewAddress() throws Exception {
+        JsonNode registration = register("profile_race");
+        long id = registration.at("/user/id").asLong(); Instant sentAt = challenges.findById(id).orElseThrow().sentAt;
+        ArgumentCaptor<SimpleMailMessage> sent = ArgumentCaptor.forClass(SimpleMailMessage.class); verify(mail).send(sent.capture());
+        String code = sent.getValue().getText().replaceAll(".*?([0-9]{6}).*", "$1");
+        var executor = java.util.concurrent.Executors.newFixedThreadPool(2);
+        var start = new java.util.concurrent.CountDownLatch(1);
+        try {
+            var changing = executor.submit(() -> { start.await(); return profilePatch(token(registration), "{\"email\":\"race_new@example.com\"}").andReturn().getResponse().getStatus(); });
+            var verifying = executor.submit(() -> { start.await(); return verifyCode(token(registration), code).andReturn().getResponse().getStatus(); });
+            start.countDown();
+            assertThat(changing.get(10, java.util.concurrent.TimeUnit.SECONDS)).isEqualTo(200);
+            assertThat(verifying.get(10, java.util.concurrent.TimeUnit.SECONDS)).isIn(200, 400);
+            User user = users.findById(registration.at("/user/id").asLong()).orElseThrow();
+            assertThat(user.getEmail()).isEqualTo("race_new@example.com"); assertThat(user.getEmailVerifiedAt()).isNull();
+            verifyCode(token(registration), code).andExpect(status().isBadRequest());
+            var consumed = challenges.findById(id).orElseThrow();
+            assertThat(consumed.sentAt).isEqualTo(sentAt); assertThat(consumed.attempts).isEqualTo(5);
+            mvc.perform(post("/api/auth/email/resend").header("Authorization", "Bearer " + token(registration))).andExpect(status().isBadRequest());
+            verify(mail, times(1)).send(any(SimpleMailMessage.class));
+        } finally { executor.shutdownNow(); }
+    }
+
+    @Test void verifiedThenChangedEmailRetainsCooldownAndFailedSendCannotReplaceConsumedCode() throws Exception {
+        JsonNode registration = register("verified_cooldown"); String bearer = token(registration);
+        long id = registration.at("/user/id").asLong();
+        ArgumentCaptor<SimpleMailMessage> sent = ArgumentCaptor.forClass(SimpleMailMessage.class); verify(mail).send(sent.capture());
+        String oldCode = sent.getValue().getText().replaceAll(".*?([0-9]{6}).*", "$1");
+        Instant sentAt = challenges.findById(id).orElseThrow().sentAt;
+        verifyCode(bearer, oldCode).andExpect(status().isOk());
+        var consumed = challenges.findById(id).orElseThrow();
+        assertThat(consumed.sentAt).isEqualTo(sentAt); assertThat(consumed.attempts).isEqualTo(5);
+        assertThat(consumed.expiresAt).isEqualTo(Instant.EPOCH);
+        profilePatch(bearer, "{\"email\":\"verified_changed@example.com\"}").andExpect(status().isOk());
+        profilePatch(bearer, "{\"email\":\"verified_after_cooldown@example.com\"}").andExpect(status().isOk());
+        assertThat(users.findById(id).orElseThrow().getEmailVerifiedAt()).isNull();
+        verifyCode(bearer, oldCode).andExpect(status().isBadRequest());
+        mvc.perform(post("/api/auth/email/resend").header("Authorization", "Bearer " + bearer)).andExpect(status().isBadRequest());
+        assertThat(challenges.findById(id).orElseThrow().sentAt).isEqualTo(sentAt);
+        verify(mail, times(1)).send(any(SimpleMailMessage.class));
+
+        // Move only the isolated test's clock fixture past the throttle, without sleeping.
+        consumed = challenges.findById(id).orElseThrow();
+        consumed.sentAt = Instant.now().minusSeconds(61).truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
+        challenges.save(consumed);
+        doThrow(new org.springframework.mail.MailSendException("synthetic SMTP failure after verification"))
+            .when(mail).send(any(SimpleMailMessage.class));
+        mvc.perform(post("/api/auth/email/resend").header("Authorization", "Bearer " + bearer)).andExpect(status().isInternalServerError());
+        var failed = challenges.findById(id).orElseThrow();
+        assertThat(failed.sentAt).isEqualTo(consumed.sentAt); assertThat(failed.codeHash).isEqualTo(consumed.codeHash);
+        assertThat(failed.attempts).isEqualTo(5); assertThat(failed.expiresAt).isEqualTo(Instant.EPOCH);
+        doNothing().when(mail).send(any(SimpleMailMessage.class));
+        mvc.perform(post("/api/auth/email/resend").header("Authorization", "Bearer " + bearer)).andExpect(status().isOk());
+        verify(mail, times(3)).send(sent.capture()); assertThat(sent.getValue().getTo()).containsExactly("verified_after_cooldown@example.com");
+        assertThat(challenges.findById(id).orElseThrow().attempts).isZero();
+        String newCode = sent.getValue().getText().replaceAll(".*?([0-9]{6}).*", "$1");
+        verifyCode(bearer, newCode).andExpect(status().isOk());
+        assertThat(users.findById(id).orElseThrow().getEmailVerifiedAt()).isNotNull();
     }
 }

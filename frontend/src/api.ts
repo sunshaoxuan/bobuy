@@ -1425,6 +1425,8 @@ export const productMarkerApi = {
     markedCatalog:(page=0,merchantId?:number)=>storeGet<PublicCatalogPage>('/api/storefront/marked-product-catalog?'+new URLSearchParams({page:String(page),...(merchantId===undefined?{}:{merchantId:String(merchantId)})}))
 };
 export const storefrontApi = {
+    profile: () => storeGet<SelfProfile>('/api/auth/profile'),
+    saveProfile: (payload: SelfProfilePatch) => patchJson<SelfProfile, SelfProfilePatch>('/api/auth/profile', payload),
     productBrowse:(query:BrowseQuery)=>storeGet<BrowsePage<ProductBrowseCard>>('/api/storefront/product-browse?'+browseQuery(query)),
     productDetail:(id:string,merchantId?:number)=>storeGet<{item:PublicCatalogEntry;markers:ProductMarkerDefinition[];revision:string}>('/api/storefront/product-browse/'+encodeURIComponent(id)+'?'+browseQuery({merchantId})),
     productSales:(ids:string[])=>{if(!ids.length||ids.length>24||new Set(ids).size!==ids.length)return Promise.reject(new Error('browse.invalid'));return storeGet<StoreProduct[]>('/api/storefront/product-sales?'+new URLSearchParams({productIds:ids.join(',')}));},
@@ -1441,6 +1443,11 @@ export const storefrontApi = {
     checkout: (payload: { requestId: string; tripId: number; currency?:string; items: { productId: string; quantity: number;priceRevision?:number;currency?:string;priceToken?:string }[] }) =>
         postJson<{ orderId: number; total: number;currency:string; status: string; emailVerified: boolean; merchantApproved: boolean }, typeof payload>('/api/checkout', payload)
 };
+
+export type SelfAddress = {contactName?:string|null;phone?:string|null;countryRegion?:string|null;city?:string|null;addressLine?:string|null;postalCode?:string|null;latitude?:number|null;longitude?:number|null};
+export type SelfSocialInput = {platform:string;handle:string;displayName?:string|null};
+export type SelfProfile = {id:number;username:string;name:string;email:string;emailVerified:boolean;phone?:string|null;defaultAddress?:SelfAddress|null;socialAccounts:Array<SelfSocialInput & {verified:boolean}>};
+export type SelfProfilePatch = {name?:string;email?:string;phone?:string|null;defaultAddress?:SelfAddress|null;socialAccounts?:SelfSocialInput[]};
 
 export type BrowseQuery={page?:number;merchantId?:number;query?:string;category?:string;locale?:string;marked?:boolean;revision?:string;issueId?:number;period?:'current'|'history'|'all'};
 function browseQuery(query:BrowseQuery){return new URLSearchParams(Object.entries(query).filter(([,value])=>value!==undefined).map(([key,value])=>[key,String(value)]));}
