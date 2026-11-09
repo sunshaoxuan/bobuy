@@ -2,6 +2,7 @@
 import importlib.util
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 import hashlib
 import json
 
@@ -73,3 +74,33 @@ class SchemaAcceptanceTest(unittest.TestCase):
             module.source_digest_acceptance({**accepted, 'sourceDigest': 'stale'})
         with self.assertRaises(RuntimeError):
             module.source_digest_acceptance({**accepted, 'sourceDigestAlgorithm': 'unknown'})
+
+
+class UnchangedV28WebCaptureTest(unittest.TestCase):
+    def setUp(self):
+        self.migrations = [{'path': 'V27__explicit_product_markers.sql', 'bytes': 3, 'sha256': 'old'}, {'path': 'V28__checkout_delivery_snapshot.sql', 'bytes': 4, 'sha256': 'new'}]
+        self.base = {'schemaBefore': 27, 'schemaAfter': 28, 'migrationChanges': True, 'migrations': self.migrations}
+        self.accepted = {'schemaBefore': 28, 'schemaAfter': 28, 'migrationChanges': False, 'migrations': self.migrations}
+
+    def test_exact_unchanged_v28_inventory_is_accepted_without_migration(self):
+        self.assertEqual(module.schema_acceptance(self.accepted, self.migrations, self.base), {'schemaBefore': 28, 'schemaAfter': 28, 'migrationChanges': False})
+
+    def test_changed_missing_extra_or_unbound_v28_inventory_is_rejected(self):
+        for actual in [self.migrations[:-1], [{**self.migrations[0], 'sha256': 'changed'}, self.migrations[1]], self.migrations + [{'path': 'V29__unexpected.sql', 'bytes': 2, 'sha256': 'new'}]]:
+            with self.subTest(actual=actual), self.assertRaises(RuntimeError):
+                module.schema_acceptance({**self.accepted, 'migrations': actual}, actual, self.base)
+        with self.assertRaises(RuntimeError):
+            module.schema_acceptance(self.accepted, self.migrations)
+        for fields in [{'schemaBefore': 28.0}, {'schemaAfter': 28.0}, {'migrationChanges': 0}, {'migrationChanges': True}]:
+            with self.subTest(fields=fields), self.assertRaises(RuntimeError):
+                module.schema_acceptance({**self.accepted, **fields}, self.migrations, self.base)
+
+    def test_actual_immutable_c2_binding_is_read_and_wrong_path_or_digest_rejects(self):
+        binding = {'path': module.C2_V28_BASELINE, 'sha256': module.C2_V28_BASELINE_SHA256}
+        value = module.migration_baseline({**self.accepted, 'migrationBaseline': binding})
+        self.assertEqual((value['schemaBefore'], value['schemaAfter'], value['migrationChanges']), (27, 28, True))
+        for wrong in [{}, {'path': 'unrelated.json', 'sha256': module.C2_V28_BASELINE_SHA256}, {**binding, 'sha256': 'changed'}]:
+            with self.subTest(wrong=wrong), self.assertRaises(RuntimeError):
+                module.migration_baseline({**self.accepted, 'migrationBaseline': wrong})
+        with patch.object(module, 'digest', return_value='changed'), self.assertRaises(RuntimeError):
+            module.migration_baseline({**self.accepted, 'migrationBaseline': binding})

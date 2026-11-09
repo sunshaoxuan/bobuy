@@ -47,6 +47,10 @@ def source_digest_acceptance(accepted):
             raise RuntimeError('Accepted source-list digest differs')
 
 
+C2_V28_BASELINE = 'docs/reports/c2-cart-20261109/accepted-inputs.json'
+C2_V28_BASELINE_SHA256 = '48bbcc808d0a0761e112b720c276592afe52f9979031a9975247065efeb277ba'
+
+
 def schema_acceptance(accepted, actual, baseline=None):
     if actual != accepted['migrations']:
         raise RuntimeError('Accepted migration bytes/list changed')
@@ -57,6 +61,13 @@ def schema_acceptance(accepted, actual, baseline=None):
     versions = [int(name.group(1)) for name in names]
     if identity == (27, 27, False) and versions and max(versions) == 27:
         return {'schemaBefore': 27, 'schemaAfter': 27, 'migrationChanges': False}
+    if identity == (28, 28, False):
+        if (type(accepted.get('schemaBefore')) is not int or type(accepted.get('schemaAfter')) is not int
+                or accepted.get('migrationChanges') is not False or baseline is None
+                or (baseline.get('schemaBefore'), baseline.get('schemaAfter'), baseline.get('migrationChanges')) != (27, 28, True)
+                or actual != baseline.get('migrations') or max(versions) != 28):
+            raise RuntimeError('Unchanged V28 capture requires the exact prior C2 migration inventory')
+        return {'schemaBefore': 28, 'schemaAfter': 28, 'migrationChanges': False}
     if identity != (27, 28, True) or baseline is None or baseline.get('schemaAfter') != 27 or baseline.get('migrationChanges') is not False:
         raise RuntimeError('Unaccepted schema transition')
     previous = baseline['migrations']
@@ -76,6 +87,13 @@ def checkout_migration_acceptance(content):
 
 
 def migration_baseline(accepted):
+    if (accepted.get('schemaBefore'), accepted.get('schemaAfter'), accepted.get('migrationChanges')) == (28, 28, False):
+        binding = accepted.get('migrationBaseline', {})
+        path = Path(binding.get('path', ''))
+        if (path.as_posix() != C2_V28_BASELINE or binding.get('sha256') != C2_V28_BASELINE_SHA256
+                or digest(path) != C2_V28_BASELINE_SHA256):
+            raise RuntimeError('Exact immutable C2 V28 baseline required for web-only capture')
+        return json.loads(path.read_text())
     if not accepted.get('migrationChanges'):
         return None
     binding = accepted.get('migrationBaseline', {})
