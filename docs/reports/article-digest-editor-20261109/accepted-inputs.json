@@ -1,9 +1,9 @@
 {
   "candidateKind": "ARTICLE_DIGEST_EDITOR_V1",
-  "candidate": "Reviewed published four-language atomic revision; no schema migration",
-  "baseHead": "82b8daf7fe275d6dd623b36621f1cf2596dc0e98",
+  "candidate": "Published article revision Fix1: exact synthetic fixture teardown; no production code or schema change",
+  "baseHead": "f1bfbadb1ed2c1d900791cd708989df519471792",
   "sourceDigestAlgorithm": "sha256-json-utf8-sourceFiles-v1",
-  "sourceDigest": "54d18df7cd2a4f1b24f550638e3e5a95d99171bc927f83e7f9e883b5f015596f",
+  "sourceDigest": "1fb73212c22c321471772d315f98478167acb42a7243be3218bf684535e1ba27",
   "sourceFileCount": 686,
   "sourceFiles": [
     {
@@ -1758,8 +1758,8 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/RecommendationArticleRevisionIntegrationTest.java",
-      "gitLfBytes": 11805,
-      "gitLfSha256": "7a92a135a4d663d95e31d96b08a2c95ce254c02c19b602f2300ed11a0499c345"
+      "gitLfBytes": 17952,
+      "gitLfSha256": "ab01d0d005d45aa0a071525919edd2e4ed5fe347b08a50d528a4aa4f6e60a7bf"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/RecommendationClassificationTest.java",
@@ -2108,8 +2108,8 @@
     },
     {
       "path": "docs/reports/ARTICLE-DIGEST-EDITOR-20261109.md",
-      "gitLfBytes": 2305,
-      "gitLfSha256": "09beca0a69277ae10ffe79b0c9e27e94466cedb39ee37a0779de36b4604d3b37"
+      "gitLfBytes": 3161,
+      "gitLfSha256": "fb5ba17937ea7eef05b11088e364f758b2fbbab95d855312414a364659952baa"
     },
     {
       "path": "docs/reports/C1-PUBLIC-CARD-INSET-20261109.md",
@@ -3685,10 +3685,26 @@
     "baseArtifact": {
       "path": ".task-tmp/c2-ci-20261109/fix1/package/ci-artifact.json",
       "sha256": "40acddac08f5f0ef1fea125fbba1e5d187bdceb0eac646fe671d006186eecf15"
+    },
+    "fix1": {
+      "base": "f1bfbadb1ed2c1d900791cd708989df519471792",
+      "previousAcceptedInputsSha256": "25c656f704fee72ae4e2a4ee7182722e6825114b783e1f1b620c5329c0af3227",
+      "firstCiRun": 42640911961,
+      "firstPostgresArtifact": 13684534660,
+      "firstPostgresArtifactSha256": "6f9c5ce041234a6f33db336eb1954e573638cb7fb9e05fcd090dfd9df27003fd",
+      "originalUniquePgCases": 35,
+      "originalArticleSixPass": true,
+      "originalLaterFixtureErrors": 17,
+      "changedSourceRows": [
+        "backend/src/test/java/com/bobbuy/api/RecommendationArticleRevisionIntegrationTest.java",
+        "docs/reports/ARTICLE-DIGEST-EDITOR-20261109.md"
+      ],
+      "unchangedSourceRows": 684,
+      "noLocalJavaPgDockerRun": true
     }
   },
   "qa": {
-    "status": "SOURCE_FROZEN_REMOTE_CI_AND_INDEPENDENT_ARTIFACT_RUNTIME_PENDING",
+    "status": "FIX1_FIXTURE_ISOLATION_REAL_REMOTE_CI_RERUN_PENDING",
     "sourceOnly": true,
     "backendRuntimeAccepted": false,
     "migrationRuntimeAccepted": false,

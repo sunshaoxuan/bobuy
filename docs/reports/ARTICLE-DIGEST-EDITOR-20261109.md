@@ -34,3 +34,15 @@ Required next gates are actual remote Java17 and isolated PostgreSQL transaction
 complete artifact binding, independent review, and a formal nonproduction browser
 save/reopen journey. Production content is not edited by this candidate preparation.
 Source drafts and operational receipts remain private local evidence, not repo data.
+
+First remote CI `42640911961` on `f1bfbadb` passed all six new real PostgreSQL
+article scenarios and the populated V27-to-V28 preservation step. The combined
+35-case PostgreSQL group failed with 17 later fixture setup errors: synthetic
+article posts retained a user FK while existing compatibility/storefront tests
+reseeded users. The original XML/logs are retained. Fix1 changes only this test
+class's fixture ownership and teardown: random per-case markers, exact item/post/
+user identities, completed worker checks, foreign-FK refusal, and inverse cleanup
+in one transaction. Immutable article history remains retained; no constraint,
+seed routine, product code or original assertion is weakened. The same six
+scenarios plus the full original PostgreSQL group require a real remote rerun.
+No local JVM, PostgreSQL or Docker run was performed for Fix1.
