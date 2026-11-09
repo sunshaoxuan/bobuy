@@ -178,11 +178,11 @@ INSERT INTO bb_user(id,name,username,roles,email,default_address) VALUES
  (-293001,'Synthetic C3/R13 merchant','ci-c3-r13-agent','["AGENT"]'::jsonb,'ci-c3-r13-agent@example.invalid',NULL),
  (-293002,'Synthetic historical customer','ci-c3-r13-customer','["CUSTOMER"]'::jsonb,'ci-c3-r13-customer@example.invalid','{"contactName":"Synthetic original","countryRegion":"JP","city":"Tokyo","addressLine":"Synthetic street"}'::jsonb);
 INSERT INTO bb_product(id,merchant_id,name,item_number,base_price,currency,record_version,catalog_data)
- VALUES('ci-c3-r13-historical-product',-293001,'{"en-US":"Synthetic historical product"}'::jsonb,'CI-293001',61.75,'JPY',2,'{"synthetic":true,"history":"retain"}'::jsonb);
+ VALUES('ci-c3-r13-historical-product',-293001,'{"en-US":"Synthetic historical product"}'::jsonb,'CI-293001',61.75,'JPY',2,'{"specification":{"en-US":"Synthetic historical pack"},"model":"CI-HISTORICAL","packaging":"Synthetic box","categoryIds":[],"supplierId":null,"translatedSource":null,"reviewedBy":null,"reviewedAt":null}'::jsonb);
 INSERT INTO bb_product_lifecycle_event(id,product_id,action,actor_id,occurred_at)
  VALUES('ci-c3-r13-lifecycle-history','ci-c3-r13-historical-product','RESTORE',-293001,'2026-01-01T00:00:00Z');
 INSERT INTO bb_product_catalog_recovery(id,merchant_id,product_id,version_after,created_at,original)
- VALUES('ci-c3-r13-catalog-history',-293001,'ci-c3-r13-historical-product',2,'2026-01-01T00:00:00Z','{"synthetic":true,"version":1}'::jsonb);
+ VALUES('ci-c3-r13-catalog-history',-293001,'ci-c3-r13-historical-product',2,'2026-01-01T00:00:00Z','{"name":{"en-US":"Synthetic previous product"},"description":{"en-US":"Synthetic retained catalog history"},"itemNumber":"CI-293001","brand":"Synthetic","categoryId":null,"catalogData":{"specification":{"en-US":"Synthetic previous pack"},"model":"CI-PRIOR","packaging":"Synthetic box","categoryIds":[],"supplierId":null,"translatedSource":null,"reviewedBy":null,"reviewedAt":null},"gallery":[],"sourceItemIds":[]}'::jsonb);
 INSERT INTO bb_order_header(id,business_id,customer_id,status,payment_status,delivery_status,total_amount,currency,lines,product_identities,delivery_snapshot,checkout_payload_hash)
  VALUES(-293003,'CI-C3-R13-V28-HISTORICAL',-293002,'NEW','UNPAID','PENDING_DELIVERY',123.5,'JPY',
  '[{"id":-293004,"skuId":"ci-c3-r13-historical-product","itemName":"Synthetic historical","spec":"pack","quantity":2,"unitPrice":61.75}]'::jsonb,

@@ -117,4 +117,17 @@ class CustomerOrderAmendmentServiceTest {
         assertEquals(ErrorCode.RESOURCE_NOT_FOUND,assertThrows(ApiException.class,()->coordinator.trip(99L)).getErrorCode());
         verify(entityManager,never()).refresh(any(),any(LockModeType.class));
     }
+    @Test void previewHashIsIdenticalAcrossRealStorageMapperAndSidecarReload() throws Exception {
+        order.getLines().get(0).setBrand("Synthetic brand");order.getLines().get(0).setSaleUnit("pack");order.retainProductIdentities();
+        var first=service.preview(authentication,9L);var original=order;
+        var reloaded=json.readValue(json.writeValueAsBytes(original),OrderHeader.class);
+        var storage=com.bobbuy.config.OrderStorageJsonConfiguration.storageMapper();
+        var type=storage.getTypeFactory().constructCollectionType(List.class,OrderLine.class);
+        reloaded.setLines(storage.readValue(storage.writeValueAsString(original.getLines()),type));
+        assertNull(reloaded.getLines().get(0).getBrand());
+        reloaded.retainProductIdentitiesFrom(original);order=reloaded;
+        assertEquals("Synthetic brand",order.getLines().get(0).getBrand());
+        var second=service.preview(authentication,9L);assertEquals(first.revision(),second.revision());assertEquals(first,second);
+        verify(orders,never()).saveAndFlush(any());
+    }
 }

@@ -1,9 +1,9 @@
 {
-  "candidate": "C3/R13 exact CI correction: JSON value equality, optional trip contract, explicit test revision and V28 synthetic role-set fixture",
+  "candidate": "C3/R13 actual Hibernate storage-mapper revision correction; exact remote CI pending",
   "baseHead": "82b8daf7fe275d6dd623b36621f1cf2596dc0e98",
   "sourceMerge": "82f5948cdf50c165da347fde7f091dbfadfa1225",
   "sourceDigestAlgorithm": "sha256-json-utf8-sourceFiles-v1",
-  "sourceDigest": "bfac27f135576e79c0755da49f6804f26bb75f0fdd1e55000fb0ad6b3c734848",
+  "sourceDigest": "2c0d2050863f90e8bf234f9cd3099ee7553b4cb097a6e6a5b28b502631124518",
   "lineEndingPolicy": "Exact canonical Git-filtered blob bytes, SHA1 cross-checked against git hash-object; unchanged binaries byte-for-byte. Excludes this self-referential manifest and unrelated protected dirty files.",
   "sourceFiles": [
     {
@@ -658,18 +658,23 @@
     },
     {
       "path": "backend/src/main/java/com/bobbuy/model/OrderHeader.java",
-      "gitLfBytes": 9370,
-      "gitLfSha256": "c1d3294b89851062544e2c8203fa8e80127993f6ff61766ec336d26bcb575b68"
+      "gitLfBytes": 10627,
+      "gitLfSha256": "bb4a561853b3cd0d60d58d049ccd782ea9adf15fe98f177c59ed70d2c1e5cd49"
     },
     {
       "path": "backend/src/main/java/com/bobbuy/model/OrderLine.java",
-      "gitLfBytes": 8734,
-      "gitLfSha256": "cab29b48cf73dce8a745ab4a4e9d8ed24b5f4151c44f08b30716f03a521dff34"
+      "gitLfBytes": 10440,
+      "gitLfSha256": "af55c009f743108e709dcf24060f577f39f8992c468898c0487cf33b3a0f4712"
     },
     {
       "path": "backend/src/main/java/com/bobbuy/model/OrderLineIdentity.java",
       "gitLfBytes": 1258,
       "gitLfSha256": "7030982dfe5ea7f528a3465d587fe678bdee4db6c2de5eafd225c0ac40471be1"
+    },
+    {
+      "path": "backend/src/main/java/com/bobbuy/model/OrderLineStorageJavaType.java",
+      "gitLfBytes": 3541,
+      "gitLfSha256": "f68de56c929e28942fadde16583684dfb6ddfa4f6d0a6ad85e8057e5d2dcb38a"
     },
     {
       "path": "backend/src/main/java/com/bobbuy/model/OrderMethod.java",
@@ -1823,8 +1828,8 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/CustomerOrderAmendmentIntegrationTest.java",
-      "gitLfBytes": 14545,
-      "gitLfSha256": "10788843275b056889edb3de6625e89661837a5bef32c5c695b49d67c81d9b10"
+      "gitLfBytes": 16044,
+      "gitLfSha256": "0f61b96acbcce32adb20d16abc80f75253d1706fe96f3f5e80d8efdd782b1530"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/FinancialAuditIntegrationTest.java",
@@ -2022,6 +2027,11 @@
       "gitLfSha256": "1128bd82c769f0d970b166da8fcca8035c95e8e71534b3d8aa994988a9647500"
     },
     {
+      "path": "backend/src/test/java/com/bobbuy/model/OrderLineStorageTest.java",
+      "gitLfBytes": 7693,
+      "gitLfSha256": "81cc51319b101be904e5bbfe25b24f5ece5207f90e12276b8d4299320ec96069"
+    },
+    {
       "path": "backend/src/test/java/com/bobbuy/model/OrderLineValueTest.java",
       "gitLfBytes": 3223,
       "gitLfSha256": "4965939f5c395ddf4183b353caf7d443c51be311accdc51698ea7260a2ee5b2d"
@@ -2123,8 +2133,8 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/service/CustomerOrderAmendmentServiceTest.java",
-      "gitLfBytes": 12191,
-      "gitLfSha256": "7eca7c59cc9a35d56b7ff912c74a2f1185df3ee1e39a405f2629f1cb73316533"
+      "gitLfBytes": 13263,
+      "gitLfSha256": "cb2cf0a8169cac4b1cdca45dd86408ca8d8f4b882df7cb32d11aed279c2a4b0a"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/service/IdentityMigrationRecoveryTest.java",
@@ -2343,8 +2353,8 @@
     },
     {
       "path": "docs/reports/C3-R13-INTEGRATION-20261109.md",
-      "gitLfBytes": 4778,
-      "gitLfSha256": "34b8ac07a0a488d9f6e575864221a4f9a5c3cc6abb5fbc0158356f39b635863e"
+      "gitLfBytes": 6271,
+      "gitLfSha256": "031d99483e4623abf9c80df6ee67c58a8771a68aae6de773f96df6b4c14457ea"
     },
     {
       "path": "docs/reports/C3-R2-PRODUCT-IDENTITY-20261109.md",
@@ -3673,8 +3683,8 @@
     },
     {
       "path": "scripts/test_verify_amendment_onboarding_upgrade.py",
-      "gitLfBytes": 8587,
-      "gitLfSha256": "54c3f958f1946ca742789832f7d9103b8a70f5d9cfd2d60ad894f1537cc638db"
+      "gitLfBytes": 9863,
+      "gitLfSha256": "8600a3e66d921b346874d21a7d6815af853e5922b42bfbc86067c5bf69d147ea"
     },
     {
       "path": "scripts/test_verify_checkout_upgrade.py",
@@ -3683,8 +3693,8 @@
     },
     {
       "path": "scripts/verify-amendment-onboarding-upgrade.py",
-      "gitLfBytes": 17152,
-      "gitLfSha256": "9420be3c3243eba807022e52085956c8fecfda2d30e0bcec4869ea6243417da3"
+      "gitLfBytes": 17700,
+      "gitLfSha256": "1f5b25368d2ef5be6fecb3bcb21cd2bb9042ddb408fe4220f12492609e76436e"
     },
     {
       "path": "scripts/verify-checkout-upgrade.py",
@@ -3852,6 +3862,8 @@
     "com/bobbuy/model/EmailChallenge.class",
     "com/bobbuy/model/OrderDeliverySnapshot.class",
     "com/bobbuy/model/OrderHeader.class",
+    "com/bobbuy/model/OrderLine.class",
+    "com/bobbuy/model/OrderLineStorageJavaType.class",
     "com/bobbuy/repository/CostcoOnboardingJobRepository.class",
     "com/bobbuy/repository/CustomerOrderAmendmentReceiptRepository.class",
     "com/bobbuy/repository/JdbcCostcoOnboardingJobRepository.class",
@@ -3952,6 +3964,33 @@
     "newCiDeltaIndependentQa": "PENDING_AFFECTED_BACKEND_SOURCE_AND_CI_FIX_REVIEW",
     "formalBuildAndNonProductionBrowserAcceptance": "PENDING_REQUIRED_BEFORE_PUBLISH",
     "postCiFix": {
+      "failedCommit": "214427655d0ddde09ecb2e783306bf03e3d57499",
+      "failedRun": 42614311891,
+      "files": [
+        "backend/src/main/java/com/bobbuy/model/OrderHeader.java",
+        "backend/src/main/java/com/bobbuy/model/OrderLine.java",
+        "backend/src/main/java/com/bobbuy/model/OrderLineStorageJavaType.java",
+        "backend/src/test/java/com/bobbuy/api/CustomerOrderAmendmentIntegrationTest.java",
+        "backend/src/test/java/com/bobbuy/model/OrderLineStorageTest.java",
+        "backend/src/test/java/com/bobbuy/service/CustomerOrderAmendmentServiceTest.java",
+        "docs/reports/C3-R13-INTEGRATION-20261109.md",
+        "scripts/test_verify_amendment_onboarding_upgrade.py",
+        "scripts/verify-amendment-onboarding-upgrade.py"
+      ],
+      "backendManifestSha256": "96a2e594b1d31422b1a67285e11cd95217387de0494db2747d17ec4120715426",
+      "localNewJava": "NOT_RUN_HOSPITAL_RUNTIME_WINDOW_REMOTE_CI_USED",
+      "fixturePureTests": 14,
+      "previousRunRealPgOnboardingUniquePass": 6,
+      "previousRunMigrationStages": [
+        28,
+        29,
+        30
+      ],
+      "springAndPgClosure": "NOT_RUN_PENDING_NEW_EXACT_CI",
+      "affectedIndependentQa": "PENDING",
+      "originalFailuresRetained": true
+    },
+    "previousCiFix": {
       "failedCommit": "e41a63f38707ef3d9330d8d851201954df4cffe8",
       "failedRun": 42611769108,
       "files": [

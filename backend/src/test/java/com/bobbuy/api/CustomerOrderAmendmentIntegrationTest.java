@@ -86,6 +86,17 @@ class CustomerOrderAmendmentIntegrationTest {
         assertEquals(version+1,orders.findById(orderId).orElseThrow().getOrderRevision());
         assertEquals(3,orders.findById(orderId).orElseThrow().getLines().get(0).getQuantity());
     }
+    @Test void metadataOnlyChangesAdvanceRevisionAndSurviveWithoutExpandingLegacyLineJson() {
+        long version=orders.findById(orderId).orElseThrow().getOrderRevision();
+        tx.execute(status->{var order=writers.existing(orderId);order.getLines().get(0).setBrand("Synthetic changed brand");orders.flush();return null;});
+        var changed=orders.findById(orderId).orElseThrow();assertEquals(version+1,changed.getOrderRevision());
+        assertEquals("Synthetic changed brand",changed.getLines().get(0).getBrand());
+        var raw=jdbc.queryForMap("select lines, product_identities from bb_order_header where id = ?",orderId);
+        String lines=jsonColumn(raw.get("lines")),identities=jsonColumn(raw.get("product_identities"));
+        assertFalse(lines.contains("\"brand\""));assertTrue(identities.contains("Synthetic changed brand"));
+        tx.execute(status->{var order=writers.existing(orderId);var line=order.getLines().get(0);line.setBrand(null);line.setItemNumber(null);line.setModel(null);line.setPackaging(null);line.setSpecifications(Map.of());line.setSaleUnit(null);orders.flush();return null;});
+        var cleared=orders.findById(orderId).orElseThrow();assertEquals(version+2,cleared.getOrderRevision());assertNull(cleared.getLines().get(0).getBrand());assertNull(cleared.getLines().get(0).getSaleUnit());
+    }
     @Test void authenticatedEndpointWhitelistSaveReopenAndCheckoutRetryPreserveOneOrder() throws Exception {
         mvc.perform(get("/api/customer/orders/"+orderId+"/amendment")).andExpect(status().isUnauthorized());
         var request=input(UUID.randomUUID().toString(),3);
@@ -160,4 +171,5 @@ class CustomerOrderAmendmentIntegrationTest {
         } finally {release.countDown();pool.shutdownNow();assertTrue(pool.awaitTermination(5,TimeUnit.SECONDS));}
     }
     static void await(CountDownLatch latch){try{if(!latch.await(5,TimeUnit.SECONDS))throw new IllegalStateException("Test lock timeout");}catch(InterruptedException e){Thread.currentThread().interrupt();throw new IllegalStateException(e);}}
+    static String jsonColumn(Object value){return value instanceof byte[] bytes?new String(bytes,java.nio.charset.StandardCharsets.UTF_8):value.toString();}
 }

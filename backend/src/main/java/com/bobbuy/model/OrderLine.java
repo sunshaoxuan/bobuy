@@ -5,6 +5,22 @@ package com.bobbuy.model;
  * 对齐设计文档: ARCH-11
  */
 public class OrderLine {
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    private transient Object identityOwner;
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    private transient Runnable identityChanged;
+    void observeIdentity(Object owner, Runnable listener) { identityOwner=owner;identityChanged=listener; }
+    private void identityChanged() { if(identityChanged!=null)identityChanged.run(); }
+    OrderLine forOwner(Object owner) {
+        if(identityOwner==null||identityOwner==owner)return this;
+        var copy=new OrderLine();
+        copy.id=id;copy.headerId=headerId;copy.skuId=skuId;copy.names=new java.util.HashMap<>(names);
+        copy.itemName=itemName;copy.spec=spec;copy.quantity=quantity;copy.purchasedQuantity=purchasedQuantity;
+        copy.currency=currency;copy.priceRevision=priceRevision;copy.quotedAmount=quotedAmount;copy.regularAmount=regularAmount;
+        copy.priceAdjustmentId=priceAdjustmentId;copy.priceChannel=priceChannel;copy.pricedAt=pricedAt;copy.unitPrice=unitPrice;copy.pickingConfirmed=pickingConfirmed;
+        copy.brand=brand;copy.itemNumber=itemNumber;copy.model=model;copy.packaging=packaging;copy.saleUnit=saleUnit;copy.specifications=new java.util.HashMap<>(specifications);
+        return copy;
+    }
     // Additive purchase-time metadata. Never repurpose legacy spec (often a sale unit).
     private String brand;
     private String itemNumber;
@@ -14,22 +30,22 @@ public class OrderLine {
     private java.util.Map<String,String> specifications = new java.util.HashMap<>();
     @com.fasterxml.jackson.annotation.JsonInclude(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY)
     public String getBrand(){return brand;}
-    public void setBrand(String value){brand=value;}
+    public void setBrand(String value){if(!java.util.Objects.equals(brand,value)){brand=value;identityChanged();}}
     @com.fasterxml.jackson.annotation.JsonInclude(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY)
     public String getItemNumber(){return itemNumber;}
-    public void setItemNumber(String value){itemNumber=value;}
+    public void setItemNumber(String value){if(!java.util.Objects.equals(itemNumber,value)){itemNumber=value;identityChanged();}}
     @com.fasterxml.jackson.annotation.JsonInclude(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY)
     public String getModel(){return model;}
-    public void setModel(String value){model=value;}
+    public void setModel(String value){if(!java.util.Objects.equals(model,value)){model=value;identityChanged();}}
     @com.fasterxml.jackson.annotation.JsonInclude(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY)
     public String getPackaging(){return packaging;}
-    public void setPackaging(String value){packaging=value;}
+    public void setPackaging(String value){if(!java.util.Objects.equals(packaging,value)){packaging=value;identityChanged();}}
     @com.fasterxml.jackson.annotation.JsonInclude(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY)
     public String getSaleUnit(){return saleUnit;}
-    public void setSaleUnit(String value){saleUnit=value;}
+    public void setSaleUnit(String value){if(!java.util.Objects.equals(saleUnit,value)){saleUnit=value;identityChanged();}}
     @com.fasterxml.jackson.annotation.JsonInclude(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY)
-    public java.util.Map<String,String> getSpecifications(){return specifications;}
-    public void setSpecifications(java.util.Map<String,String> value){specifications=value==null?new java.util.HashMap<>():new java.util.HashMap<>(value);}
+    public java.util.Map<String,String> getSpecifications(){return java.util.Collections.unmodifiableMap(specifications);}
+    public void setSpecifications(java.util.Map<String,String> value){var changed=value==null?new java.util.HashMap<String,String>():new java.util.HashMap<>(value);if(!java.util.Objects.equals(specifications,changed)){specifications=changed;identityChanged();}}
     private Long id; // 物理主键
     private Long headerId; // 头关联 ID
     private String skuId; // 商品唯一标识

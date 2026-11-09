@@ -64,6 +64,7 @@ public class OrderHeader {
     @Enumerated(EnumType.STRING)
     private DeliveryStatus deliveryStatus;
     @JdbcTypeCode(SqlTypes.JSON)
+    @org.hibernate.annotations.JavaType(OrderLineStorageJavaType.class)
     @Column(columnDefinition = "jsonb")
     private List<OrderLine> lines = new ArrayList<>(); // 嵌套行条目
 
@@ -91,7 +92,21 @@ public class OrderHeader {
     @jakarta.persistence.PostLoad @jakarta.persistence.PostPersist @jakarta.persistence.PostUpdate
     public void hydrateProductIdentities(){
         if(productIdentities==null)productIdentities=new java.util.HashMap<>();
-        if(lines!=null)for(var line:lines){var snapshot=productIdentities.get(String.valueOf(line.getId()));if(snapshot!=null)snapshot.apply(line);}
+        if(lines!=null)for(var line:lines)if(line!=null){
+            line.observeIdentity(this,null);
+            var snapshot=productIdentities.get(String.valueOf(line.getId()));if(snapshot!=null)snapshot.apply(line);
+            observeIdentity(line);
+        }
+    }
+    private OrderLine observeIdentity(OrderLine value){
+        var line=value.forOwner(this);
+        line.observeIdentity(this,()->{
+            if(line.getId()==null||lines==null||lines.stream().noneMatch(current->current==line))return;
+            var retained=new java.util.HashMap<>(productIdentities==null?java.util.Map.of():productIdentities);
+            // Explicit clears are facts too; do not resurrect an older nonempty snapshot.
+            retained.put(String.valueOf(line.getId()),OrderLineIdentity.from(line));productIdentities=retained;
+        });
+        return line;
     }
     @jakarta.persistence.PrePersist @jakarta.persistence.PreUpdate
     public void retainProductIdentities(){
@@ -211,14 +226,19 @@ public class OrderHeader {
     }
 
     public List<OrderLine> getLines() {
+        // A merge can replace field-access JSON values after @PostLoad. Rebind on
+        // access as well so later metadata edits still update this header's sidecar.
+        if(lines!=null)for(int index=0;index<lines.size();index++)if(lines.get(index)!=null)lines.set(index,observeIdentity(lines.get(index)));
         return lines;
     }
 
     public void setLines(List<OrderLine> lines) {
-        this.lines = lines;
+        this.lines = lines==null?null:new ArrayList<>();
+        if(lines!=null)for(var line:lines)this.lines.add(line==null?null:observeIdentity(line));
     }
 
     public void addLine(OrderLine line) {
+        line=observeIdentity(line);
         this.lines.add(line);
         line.setHeaderId(this.id);
         if(OrderLineIdentity.present(line)&&line.getId()!=null){

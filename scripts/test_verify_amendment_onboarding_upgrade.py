@@ -62,6 +62,23 @@ class AmendmentOnboardingUpgradeTest(unittest.TestCase):
         self.assertIn("'[\"AGENT\"]'::jsonb",fixture)
         self.assertIn("'[\"CUSTOMER\"]'::jsonb",fixture)
 
+    def test_catalog_and_recovery_fixture_json_use_real_persisted_record_fields(self):
+        # Real PG preservation passed, but its invalid JSON later prevented the
+        # transaction group from loading these synthetic historical entities.
+        with patch.object(module,'sql') as sql:
+            module.seed_v28()
+        import json,re
+        objects=[json.loads(value) for value in re.findall(r"'([^']*)'::jsonb",sql.call_args.args[0])]
+        metadata=[value for value in objects if isinstance(value,dict) and value.get('model')=='CI-HISTORICAL']
+        history=[value for value in objects if isinstance(value,dict) and value.get('name',{}).get('en-US')=='Synthetic previous product']
+        self.assertEqual(len(metadata),1);self.assertEqual(len(history),1)
+        catalog_fields={'specification','model','packaging','categoryIds','supplierId','translatedSource','reviewedBy','reviewedAt'}
+        state_fields={'name','description','itemNumber','brand','categoryId','catalogData','gallery','sourceItemIds'}
+        self.assertEqual(set(metadata[0]),catalog_fields)
+        self.assertEqual(set(history[0]),state_fields)
+        self.assertEqual(set(history[0]['catalogData']),catalog_fields)
+        self.assertIsInstance(history[0]['sourceItemIds'],list)
+
     def test_old_rows_or_snapshot_rewrite_or_loss_rejects(self):
         for version in [29,30]:
             for rows in [{},{'bb_order_header':'0:lost'},{'bb_order_header':'1:changed-delivery-snapshot'}]:
