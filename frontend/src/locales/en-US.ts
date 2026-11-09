@@ -285,6 +285,8 @@ const messages: Dictionary = {
     "rec.next": "Next",
     "rec.back": "Back to List",
     "rec.leave": "Leave with unsaved content or pending images?",
+    "article.leave_discard": "Discard and leave",
+    "article.leave_stay": "Keep editing",
     "rec.article": "Article",
     "rec.article_title": "Title",
     "rec.body": "Body",

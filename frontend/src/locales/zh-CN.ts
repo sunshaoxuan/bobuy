@@ -285,6 +285,8 @@ const messages: Dictionary = {
     "rec.next": "下一页",
     "rec.back": "返回列表",
     "rec.leave": "有未保存的内容或待登记图片，确定离开？",
+    "article.leave_discard": "放弃草稿并离开",
+    "article.leave_stay": "继续编辑",
     "rec.article": "文章内容",
     "rec.article_title": "文章标题",
     "rec.body": "正文",

@@ -285,6 +285,8 @@ const messages: Dictionary = {
     "rec.next": "次へ",
     "rec.back": "一覧へ",
     "rec.leave": "未保存の内容や未登録の画像があります。移動しますか？",
+    "article.leave_discard": "破棄して移動",
+    "article.leave_stay": "編集を続ける",
     "rec.article": "記事",
     "rec.article_title": "タイトル",
     "rec.body": "本文",
