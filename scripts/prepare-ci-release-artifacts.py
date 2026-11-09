@@ -9,6 +9,9 @@ import re
 import subprocess
 import zipfile
 
+ARTICLE_BASELINE_PATH = 'docs/reports/c2-cart-20261109/accepted-inputs.json'
+ARTICLE_BASELINE_SHA256 = '48bbcc808d0a0761e112b720c276592afe52f9979031a9975247065efeb277ba'
+
 
 def run(*args):
     return subprocess.check_output(args, text=True).strip()
@@ -30,16 +33,22 @@ def files(root):
 def class_acceptance(accepted):
     expected = accepted.get('acceptedBackendClasses')
     if expected is not None:
+        if 'requiredBackendClassCount' in accepted and accepted['requiredBackendClassCount'] != len(expected):
+            raise RuntimeError('Accepted exact class count differs')
         return [entry['path'] for entry in expected], {entry['path']: entry['sha256'] for entry in expected}
     required = accepted.get('requiredBackendClasses', [])
     if accepted.get('compiledByteAcceptance') != 'PENDING_INDEPENDENT_ARTIFACT_QA' or not required:
         raise RuntimeError('Source-only acceptance requires explicit pending artifact QA and required classes')
     if len(set(required)) != len(required) or any(not re.fullmatch(r'com/bobbuy/[A-Za-z0-9_/$]+\.class', path) for path in required):
         raise RuntimeError('Invalid required backend classes')
+    if 'requiredBackendClassCount' in accepted and accepted['requiredBackendClassCount'] != len(required):
+        raise RuntimeError('Required class count differs')
     return required, None
 
 
 def source_digest_acceptance(accepted):
+    if 'sourceFileCount' in accepted and accepted['sourceFileCount'] != len(accepted['sourceFiles']):
+        raise RuntimeError('Accepted source count differs')
     algorithm = accepted.get('sourceDigestAlgorithm')
     if algorithm is not None:
         value = json.dumps(accepted['sourceFiles'], ensure_ascii=False, separators=(',', ':')).encode('utf-8')
@@ -55,6 +64,13 @@ def schema_acceptance(accepted, actual, baseline=None):
     if not names or any(name is None for name in names):
         raise RuntimeError('Invalid accepted migration filename')
     versions = [int(name.group(1)) for name in names]
+    if identity == (28, 28, False):
+        if (accepted.get('candidateKind') != 'ARTICLE_DIGEST_EDITOR_V1' or baseline is None
+                or baseline.get('schemaBefore') != 27 or baseline.get('schemaAfter') != 28
+                or baseline.get('migrationChanges') is not True or len(actual) != 27
+                or max(versions) != 28 or actual != baseline['migrations']):
+            raise RuntimeError('Article requires the exact C2 V1..V28 manifest with no SQL change')
+        return {'schemaBefore': 28, 'schemaAfter': 28, 'migrationChanges': False}
     if identity == (27, 27, False) and versions and max(versions) == 27:
         return {'schemaBefore': 27, 'schemaAfter': 27, 'migrationChanges': False}
     if identity != (27, 28, True) or baseline is None or baseline.get('schemaAfter') != 27 or baseline.get('migrationChanges') is not False:
@@ -76,6 +92,15 @@ def checkout_migration_acceptance(content):
 
 
 def migration_baseline(accepted):
+    if (accepted.get('schemaBefore'), accepted.get('schemaAfter'), accepted.get('migrationChanges')) == (28, 28, False):
+        binding = accepted.get('migrationBaseline', {})
+        path = Path(binding.get('path', ''))
+        if (accepted.get('candidateKind') != 'ARTICLE_DIGEST_EDITOR_V1'
+                or path.as_posix() != ARTICLE_BASELINE_PATH
+                or binding.get('sha256') != ARTICLE_BASELINE_SHA256
+                or digest(path) != ARTICLE_BASELINE_SHA256):
+            raise RuntimeError('Exact C2 accepted migration baseline required for article V28')
+        return json.loads(path.read_text())
     if not accepted.get('migrationChanges'):
         return None
     binding = accepted.get('migrationBaseline', {})
@@ -147,6 +172,7 @@ def main():
     archive = output / 'images.tar'
     subprocess.run(['docker', 'save', '--output', str(archive), *[e['tag'] for e in images]], check=True)
     manifest = {'source': source, 'version': 'ci-' + source, 'acceptedApplicationSourceDigest': accepted['sourceDigest'],
+                'acceptedSourceFileCount': len(accepted['sourceFiles']), 'requiredBackendClassCount': len(required_classes),
                 'repository': os.environ.get('GITHUB_REPOSITORY'), 'runId': os.environ.get('GITHUB_RUN_ID'),
                 'runAttempt': os.environ.get('GITHUB_RUN_ATTEMPT'), 'images': images,
                 'archiveSha256': digest(archive), 'archiveBytes': archive.stat().st_size,

@@ -2,6 +2,21 @@ import type { Dictionary } from './types';
 import experience from './experience.en-US.json';
 
 const messages: Dictionary = {
+  "article.revision_title": "Revise published article in four languages",
+  "article.revision_help": "Save all four reviewed versions together. Publication time, public link and product relationships stay unchanged.",
+  "article.revision_review": "I reviewed all four complete language versions",
+  "article.revision_save": "Save all four versions",
+  "article.revision_read_latest": "Load latest (keep draft)",
+  "article.revision_conflict": "The article changed. Keep your draft, load the latest version and review again.",
+  "article.revision_newer_response": "A newer article is already loaded. Your draft has been kept.",
+  "article.revision_invalid_result": "The saved article response could not be verified. Your draft has been kept.",
+  "article.revision_saved": "All four language versions saved.",
+  "article.revision_replayed": "This four-language revision was already saved.",
+  "article.revision_saved_newer": "This revision was saved, but a newer version exists. Your draft is kept; load latest and review.",
+  "article.revision_rebased": "Latest version loaded. Your four-language draft is unchanged. Review all four versions again.",
+  "article.revision_session_changed": "Session changed. Reopen the article or review your retained draft before retrying.",
+  "article.revision_not_published": "This is no longer a published goods article. Your draft is retained.",
+  "article.revision_url_help": "Paste complete http:// or https:// source URLs in the body. Public readers can open these links.",
   "profile.title": "Your details",
   "profile.name": "Name",
   "profile.phone": "Phone (optional)",

@@ -2,6 +2,7 @@ package com.bobbuy.api;
 
 import com.bobbuy.api.response.*;
 import com.bobbuy.service.*;
+import com.bobbuy.service.RecommendationArticleService.ReviewedText;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import org.springframework.http.*;
@@ -38,6 +39,21 @@ public class RecommendationController {
     @PutMapping("/api/merchant/recommendations/{id}/service-offer")
     public ApiResponse<?> saveService(@PathVariable Long id,@Valid @RequestBody ServiceEdit input){return ApiResponse.success(service.saveService(id,input.offer(),input.version()));}
     public record ArticleLanguage(@NotBlank @Size(max=10) String locale,@NotNull @Size(max=200) String title,@NotNull @Size(max=100000) String body,@NotBlank @Size(max=64) String sourceHash,@Min(0) long version,boolean reviewed) {}
+    public record ArticleRevisionInput(@NotNull java.util.UUID requestId,@NotNull @Min(0) Long version,
+        @NotNull @Pattern(regexp="[a-f0-9]{64}") String sourceHash,boolean reviewed,
+        @NotNull @Size(min=4,max=4) java.util.Map<String,@NotNull @Valid ReviewedText> articles){
+        @com.fasterxml.jackson.annotation.JsonAnySetter public void unexpected(String name,Object value){throw new IllegalArgumentException("Unexpected article revision field");}
+    }
+    @ExceptionHandler(RecommendationArticleService.RevisionConflict.class)
+    public ResponseEntity<ApiError> articleRevisionConflict(RecommendationArticleService.RevisionConflict exception){
+        var locale=org.springframework.context.i18n.LocaleContextHolder.getLocale();
+        String message=java.util.ResourceBundle.getBundle("messages",locale).getString("error.recommendation.conflict");
+        return ResponseEntity.status(409).body(new ApiError(ErrorCode.INVALID_REQUEST.name(),message));
+    }
+    @PutMapping("/api/merchant/recommendations/{id}/article-revision")
+    public ApiResponse<?> reviseArticle(@PathVariable Long id,@Valid @RequestBody ArticleRevisionInput input){
+        return ApiResponse.success(service.reviseArticle(id,input.requestId(),input.version(),input.sourceHash(),input.reviewed(),input.articles()));
+    }
     @PutMapping("/api/merchant/recommendations/{id}/article-localizations")
     public ApiResponse<?> articleLanguage(@PathVariable Long id,@Valid @RequestBody ArticleLanguage input){return ApiResponse.success(service.articleLanguage(id,input.locale(),input.title(),input.body(),input.sourceHash(),input.version(),input.reviewed()));}
     @GetMapping("/api/merchant/recommendations/{id}/article-history")

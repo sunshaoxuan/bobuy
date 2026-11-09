@@ -1,5 +1,5 @@
 import RecommendationList from '../components/RecommendationList';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, Button, Checkbox, Empty, Input, Pagination, Popconfirm, Spin, Tag, Tooltip } from 'antd';
 import { ArrowLeftOutlined, CheckOutlined, CopyOutlined, DeleteOutlined, EditOutlined, EyeOutlined, PlusOutlined, ReloadOutlined, SaveOutlined, SendOutlined, UploadOutlined } from '@ant-design/icons';
 import { Link, useSearchParams } from 'react-router-dom';
@@ -12,6 +12,7 @@ import RecommendationLocalization from '../components/RecommendationLocalization
 import RecommendationGallery from '../components/RecommendationGallery';
 import ReferenceQuoteHistory from '../components/ReferenceQuoteHistory';
 import ArticleLanguages from '../components/ArticleLanguages';
+import {mergeArticleEditor,readArticleSession,useArticleSession,type ArticleEditorState} from '../components/PublishedArticleRevision';
 import RecommendationServiceEditor from '../components/RecommendationServiceEditor';
 import '../browse.css';
 import RecommendationClassification from '../components/RecommendationClassification';
@@ -27,9 +28,21 @@ export default function Recommendations() {
   const id = Number(params.get('post')) || undefined;
   const [list, setList] = useState<RecommendationSummary[]>([]);
   const [page, setPage] = useState(0);
-  const [detail, setDetail] = useState<RecommendationDetail>();
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
+  const session=useArticleSession();
+  const [editor,setEditor]=useState<ArticleEditorState&{actorKey:string}>({actorKey:session.actorKey,title:'',body:''});
+  const editorRef=useRef(editor),alive=useRef(true),loadScope=useRef<{id?:number;page:number;actorKey:string}>();
+  const stamp=JSON.stringify([id,page,session.actorKey,session.token,session.generation]),currentStamp=useRef(stamp);currentStamp.current=stamp;
+  const scopeCurrent=()=>alive.current&&currentStamp.current===stamp&&readArticleSession().actorKey===session.actorKey&&readArticleSession().token===session.token&&session.currentGeneration()===session.generation;
+  useEffect(()=>{alive.current=true;return()=>{alive.current=false;};},[]);
+  const detail=editor.actorKey===session.actorKey?editor.detail:undefined,title=editor.title,body=editor.body;
+  const setDetail=useCallback((next:RecommendationDetail|undefined,syncSource=false)=>{
+    if(!scopeCurrent()||(next&&id!==undefined&&next.post.id!==id))return false;
+    const prior=editorRef.current,owned=prior.actorKey===session.actorKey?prior:{title:'',body:''};
+    const value=next?mergeArticleEditor(owned,next,syncSource):{title:'',body:''};if(value===prior)return false;
+    const accepted={...value,actorKey:session.actorKey};editorRef.current=accepted;setEditor(accepted);return true;
+  },[stamp]);
+  const setTitle=useCallback((value:string)=>{if(scopeCurrent()){const next={...editorRef.current,title:value};editorRef.current=next;setEditor(next);}},[stamp]);
+  const setBody=useCallback((value:string)=>{if(scopeCurrent()){const next={...editorRef.current,body:value};editorRef.current=next;setEditor(next);}},[stamp]);
   const [busy, setBusy] = useState(false);
   const [preparing, setPreparing] = useState(false);
   const selectionEpoch = useRef(0);
@@ -66,25 +79,31 @@ export default function Recommendations() {
     window.addEventListener('beforeunload', prevent);
     return () => window.removeEventListener('beforeunload', prevent);
   }, [dirty, pending]);
+  useEffect(()=>{
+    if(!articlePending)return;
+    const confirmLink=(event:MouseEvent)=>{
+      if(event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+      const link=event.target instanceof Element?event.target.closest('a[href]'):null;
+      if(!(link instanceof HTMLAnchorElement)||link.hasAttribute('download')||(link.target&&link.target!=='_self'))return;
+      const url=new URL(link.href,location.href);
+      if(!['http:','https:'].includes(url.protocol)||(url.origin===location.origin&&url.pathname===location.pathname&&url.search===location.search))return;
+      if(!window.confirm(t('rec.leave'))){event.preventDefault();event.stopPropagation();}
+    };
+    document.addEventListener('click',confirmLink,true);
+    return()=>document.removeEventListener('click',confirmLink,true);
+  },[articlePending,t]);
   useEffect(() => {
-    let active = true;
-    selectionEpoch.current++; setPreparing(false);
-    urls.current.forEach(url => URL.revokeObjectURL(url)); urls.current.clear();
-    setQueue([]); setQueuePage(1); setItemPage(1); setGenerated(''); setPrompt('');
-    setEditingItem(undefined); setBatch(''); setPreview(false);
-    setClassificationPending(false);
-    setLoading(true); setError(''); setNotice(''); setDetail(undefined);
-    const request = id ? api.get(id) : api.list(page);
-    void request.then(value => {
-      if (!active) return;
-      if (Array.isArray(value)) setList(value);
-      else { setDetail(value); setTitle(value.post.title); setBody(value.body); setSelected([...new Set(value.items.map(identity))]); }
-    }).catch(e => { if (active) setError((e as Error).message); }).finally(() => { if (active) setLoading(false); });
-    return () => { active = false; };
-  }, [id, page]);
+    let active=true;const prior=loadScope.current,reset=!prior||prior.id!==id||prior.page!==page||prior.actorKey!==session.actorKey;loadScope.current={id,page,actorKey:session.actorKey};
+    if(reset){selectionEpoch.current++;setPreparing(false);urls.current.forEach(url=>URL.revokeObjectURL(url));urls.current.clear();setQueue([]);setQueuePage(1);setItemPage(1);setGenerated('');setPrompt('');setEditingItem(undefined);setBatch('');setPreview(false);setClassificationPending(false);setArticlePending(false);setFromProductPending(false);setBusy(false);setWriting(false);setList([]);setLoading(true);setDetail(undefined);}
+    if(!reset){setBusy(false);setWriting(false);}setError('');setNotice('');
+    const request=id?api.get(id):api.list(page);
+    void request.then(value=>{if(!active||!scopeCurrent())return;if(Array.isArray(value))setList(value);else if(setDetail(value))setSelected([...new Set(value.items.map(identity))]);}).catch(e=>{if(active&&scopeCurrent())setError((e as Error).message);}).finally(()=>{if(active&&scopeCurrent())setLoading(false);});
+    return()=>{active=false;};
+  }, [id,page,session.actorKey,session.token,session.generation]);
+
   async function run(action: () => Promise<void>) {
-    setBusy(true); setError(''); setNotice('');
-    try { await action(); } catch (e) { setError((e as Error).message); } finally { setBusy(false); }
+    if(!scopeCurrent())return;setBusy(true); setError(''); setNotice('');
+    try { await action(); } catch (e) { if(scopeCurrent())setError((e as Error).message); } finally { if(scopeCurrent())setBusy(false); }
   }
   function clearQueue() { queue.forEach(item => { URL.revokeObjectURL(item.preview); urls.current.delete(item.preview); }); setQueue([]); setQueuePage(1); }
   function back() { selectionEpoch.current++; setPreparing(false); clearQueue(); setGenerated(''); setPrompt(''); setParams({}); }
@@ -126,7 +145,7 @@ export default function Recommendations() {
           const result = entry.file
             ? await api.upload(current.post.id, entry.file, entry.facts.name.trim(), entry.facts.itemNumber?.trim() || '', entry.facts.referencePrice ?? null, current.post.version,entry.facts)
             : await api.sourceImage(current.post.id,entry.imageUrl!,entry.facts,current.post.version);
-          current = result.detail; setDetail(current);
+          current = result.detail; if(!setDetail(current))return;
           const linked = current.items.find(item => (item.itemNumber || '') === (entry.facts.itemNumber?.trim() || '') && item.name === entry.facts.name.trim());
           if (linked) setSelected(ids => [...new Set([...ids, identity(linked)])]);
           change(entry.key, { status: 'done', result: [t('rec.facts_registered'), ...(result.imageReused ? [t('rec.image_reused')] : [])].join(' · ') });
@@ -137,34 +156,34 @@ export default function Recommendations() {
   async function save() {
     if (!detail) return undefined;
     const saved = await api.save(detail.post.id, title, body, detail.post.version);
-    setDetail(saved); setTitle(saved.post.title); setBody(saved.body); return saved;
+    if(!setDetail(saved,true))throw Error(t('article.revision_newer_response'));return saved;
   }
   async function publish() {
     await run(async () => {
       const saved = dirty ? await save() : detail;
       if (!saved) return;
-      setDetail(await api.publish(saved.post.id, saved.post.version, true)); setNotice(t('rec.published'));
+      if(setDetail(await api.publish(saved.post.id, saved.post.version, true),true))setNotice(t('rec.published'));
     });
   }
-  if (loading) return <div className="rec-loading"><Spin /></div>;
+  if (loading||editor.actorKey!==session.actorKey) return <div className="rec-loading"><Spin /></div>;
   return <div className={'recommendations' + (detail ? ' rec-editing' : ' rec-managing')}>
     <header className="rec-heading"><div><h1>{t('rec.title')}</h1>{detail && <Tag color={published ? 'green' : undefined}>{t(published ? 'rec.published' : 'rec.draft')}{dirty ? ' *' : ''}</Tag>}</div>
       {!id && <div className="rec-action-group"><Button onClick={()=>setServiceOpen(true)}>{t('service.kind')}</Button><Button type="primary" icon={<PlusOutlined />} loading={busy} onClick={() => void run(async () => { const post = await api.create(); setParams({ post: String(post.post.id) }); })}>{t('rec.new')}</Button></div>}
     </header>
     {error && <Alert type="error" showIcon message={error} action={<Button icon={<ReloadOutlined />} onClick={() => void run(async () => {
-      if (id) { const value = await api.get(id); setDetail(value); if (!dirty) { setTitle(value.post.title); setBody(value.body); } }
+      if (id) { const value = await api.get(id); setDetail(value); }
       else setList(await api.list(page));
     })}>{t('rec.reload')}</Button>} />}
     {notice && <Alert type="success" showIcon message={notice} />}
     {!id ? <><RecommendationList posts={list} hasError={!!error} pending={busy} />
       <div className="rec-pagination"><Button disabled={!page} icon={<ArrowLeftOutlined />} onClick={() => setPage(page - 1)}>{t('rec.previous')}</Button><span>{page + 1}</span><Button disabled={list.length < 20} onClick={() => setPage(page + 1)}>{t('rec.next')}</Button></div></> : detail && <>
       <div className="rec-actions"><Popconfirm disabled={!dirty && !pending} title={t('rec.leave')} onConfirm={back}><Button aria-label={t('rec.back')} disabled={busy || writing} icon={<ArrowLeftOutlined />} onClick={() => { if (!dirty && !pending) back(); }}>{t('rec.back')}</Button></Popconfirm>
-        <div className="rec-action-group">{published ? <><Link to={'/recommendations/' + id} target="_blank"><Button icon={<EyeOutlined />}>{t('rec.view')}</Button></Link><Button icon={<EditOutlined />} disabled={busy} onClick={() => void run(async () => { setDetail(await api.publish(id, detail.post.version, false)); })}>{t('rec.withdraw')}</Button></> : <>
+        <div className="rec-action-group">{published ? <><Link to={'/recommendations/' + id} target="_blank"><Button icon={<EyeOutlined />}>{t('rec.view')}</Button></Link><Button icon={<EditOutlined />} disabled={busy||articlePending||dirty} onClick={() => void run(async () => { setDetail(await api.publish(id, detail.post.version, false)); })}>{t('rec.withdraw')}</Button></> : <>
           {detail.serviceOffer?<Button onClick={()=>setServiceOpen(true)}>{t('service.edit')}</Button>:<Button icon={<SaveOutlined />} loading={busy} disabled={writing||articlePending} onClick={() => void run(async () => { await save(); setNotice(t('rec.saved')); })}>{t('rec.save')}</Button>}
           <Button type="primary" icon={<SendOutlined />} disabled={busy || writing || pending || (!detail.serviceOffer&&!detail.items.length) || !title.trim() || !body.trim()} onClick={() => void publish()}>{t('rec.publish')}</Button></>}
         </div></div>
       {detail.post.publishedAt && <div className="rec-publication rec-publication-editor"><span>{t('rec.publisher')}: {detail.post.publisherName}</span><time dateTime={detail.post.publishedAt}>{t('rec.published_date')}: {new Date(detail.post.publishedAt).toLocaleString(locale)}</time></div>}
-      <div className="rec-editor-layout"><section className="rec-article"><h2>{t('rec.article')}</h2>{detail.serviceOffer?<div className="rec-public-body"><Tag>{t('service.kind')}</Tag>{body.split(/\n\s*\n/).map((p,i)=><p key={i}>{p}</p>)}</div>:<ArticleLanguages key={detail.post.id} detail={detail} title={title} body={body} sourceDirty={dirty} disabled={published||busy} onTitle={setTitle} onBody={setBody} onChanged={next=>{setDetail(next);setTitle(next.post.title);setBody(next.body);}} onPending={setArticlePending}/>}
+      <div className="rec-editor-layout"><section className="rec-article"><h2>{t('rec.article')}</h2>{detail.serviceOffer?<div className="rec-public-body"><Tag>{t('service.kind')}</Tag>{body.split(/\n\s*\n/).map((p,i)=><p key={i}>{p}</p>)}</div>:<ArticleLanguages key={detail.post.id} detail={detail} title={title} body={body} sourceDirty={dirty} disabled={busy} onTitle={setTitle} onBody={setBody} onChanged={next=>setDetail(next,true)} onPending={setArticlePending}/>}
         {published && <div className="rec-public-link"><Link to={'/recommendations/' + id}>{t('rec.view')}</Link><Tooltip title={t('rec.copy')}><Button icon={<CopyOutlined />} aria-label={t('rec.copy')} onClick={() => void run(async () => { await navigator.clipboard.writeText(location.origin + '/recommendations/' + id); setNotice(t('rec.copied')); })} /></Tooltip></div>}
       </section></div>
       {!published && !detail.serviceOffer && <section className="rec-uploads"><div className="rec-section-heading"><h2>{t('rec.uploads')}</h2><div className="rec-action-group"><input ref={fileInput} type="file" multiple accept={IMAGE_UPLOAD_ACCEPT} hidden disabled={preparing} onChange={e => void choose(e.target.files)} /><Button icon={<PlusOutlined />} loading={preparing} disabled={busy || writing || preparing} onClick={() => fileInput.current?.click()}>{t('rec.choose')}</Button><Button icon={<UploadOutlined />} disabled={busy || writing || preparing || !pending} onClick={() => void upload(queue)}>{t('rec.register_all')}</Button></div></div>
@@ -199,6 +218,6 @@ export default function Recommendations() {
         {!detail.items.length && <Empty description={t('rec.no_products')} />}{detail.items.length > 12 && <Pagination current={itemPage} pageSize={12} total={detail.items.length} showSizeChanger={false} onChange={setItemPage} />}
       </section>}
     </>}
-    {serviceOpen&&<RecommendationServiceEditor key={detail?.post.id??'new-service'} detail={detail?.serviceOffer?detail:undefined} onClose={()=>setServiceOpen(false)} onSaved={next=>{setServiceOpen(false);setDetail(next);setTitle(next.post.title);setBody(next.body);if(!id)setParams({post:String(next.post.id)});}}/>}
+    {serviceOpen&&<RecommendationServiceEditor key={detail?.post.id??'new-service'} detail={detail?.serviceOffer?detail:undefined} onClose={()=>setServiceOpen(false)} onSaved={next=>{setServiceOpen(false);setDetail(next,true);if(!id)setParams({post:String(next.post.id)});}}/>}
   </div>;
 }

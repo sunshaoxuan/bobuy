@@ -4,6 +4,7 @@ from pathlib import Path
 import unittest
 import hashlib
 import json
+from unittest.mock import patch
 
 spec = importlib.util.spec_from_file_location('ci_artifacts', Path(__file__).with_name('prepare-ci-release-artifacts.py'))
 module = importlib.util.module_from_spec(spec)
@@ -73,3 +74,57 @@ class SchemaAcceptanceTest(unittest.TestCase):
             module.source_digest_acceptance({**accepted, 'sourceDigest': 'stale'})
         with self.assertRaises(RuntimeError):
             module.source_digest_acceptance({**accepted, 'sourceDigestAlgorithm': 'unknown'})
+
+
+class ArticleSchemaAcceptanceTest(unittest.TestCase):
+    def setUp(self):
+        self.root = Path(__file__).resolve().parents[1]
+        self.path = self.root / module.ARTICLE_BASELINE_PATH
+        self.baseline = json.loads(self.path.read_text(encoding='utf-8'))
+        self.migrations = self.baseline['migrations']
+        self.accepted = {'candidateKind': 'ARTICLE_DIGEST_EDITOR_V1', 'schemaBefore': 28,
+                         'schemaAfter': 28, 'migrationChanges': False, 'migrations': self.migrations,
+                         'migrationBaseline': {'path': module.ARTICLE_BASELINE_PATH,
+                                               'sha256': module.ARTICLE_BASELINE_SHA256}}
+
+    def test_article_exact_unchanged_27_migrations_is_accepted(self):
+        self.assertEqual(module.schema_acceptance(self.accepted, self.migrations, self.baseline),
+                         {'schemaBefore': 28, 'schemaAfter': 28, 'migrationChanges': False})
+
+    def test_changed_deleted_added_or_reordered_sql_is_rejected(self):
+        for actual in [[{**self.migrations[0], 'sha256': 'changed'}, *self.migrations[1:]],
+                       self.migrations[:-1], [*self.migrations, {'path': 'V29__unexpected.sql'}],
+                       list(reversed(self.migrations))]:
+            with self.subTest(actual=actual), self.assertRaises(RuntimeError):
+                module.schema_acceptance({**self.accepted, 'migrations': actual}, actual, self.baseline)
+
+    def test_article_kind_baseline_and_schema_cannot_be_broadened(self):
+        for change in [{'candidateKind': 'anything'}, {'schemaAfter': 29}, {'migrationChanges': True}, {'schemaBefore': 27}]:
+            with self.subTest(change=change), self.assertRaises(RuntimeError):
+                module.schema_acceptance({**self.accepted, **change}, self.migrations, self.baseline)
+        with self.assertRaises(RuntimeError):
+            module.schema_acceptance(self.accepted, self.migrations, None)
+
+    def test_article_baseline_is_fixed_path_and_exact_c2_bytes(self):
+        with patch.object(module, 'digest', return_value=module.ARTICLE_BASELINE_SHA256), patch.object(Path, 'read_text', return_value=json.dumps(self.baseline)):
+            self.assertEqual(module.migration_baseline(self.accepted), self.baseline)
+        for binding in [{'path': 'other.json', 'sha256': module.ARTICLE_BASELINE_SHA256},
+                        {'path': module.ARTICLE_BASELINE_PATH, 'sha256': '0' * 64}]:
+            with self.subTest(binding=binding), self.assertRaises(RuntimeError):
+                module.migration_baseline({**self.accepted, 'migrationBaseline': binding})
+        with patch.object(module, 'digest', return_value='0' * 64), self.assertRaises(RuntimeError):
+            module.migration_baseline(self.accepted)
+
+    def test_real_committed_c2_baseline_hash_stays_bound(self):
+        canonical = self.path.read_bytes().replace(b'\r\n', b'\n')
+        self.assertEqual(hashlib.sha256(canonical).hexdigest(), module.ARTICLE_BASELINE_SHA256)
+
+    def test_dynamic_source_and_class_counts_cannot_lie(self):
+        with self.assertRaises(RuntimeError):
+            module.source_digest_acceptance({'sourceFiles': [], 'sourceFileCount': 675})
+        with self.assertRaises(RuntimeError):
+            module.class_acceptance({'compiledByteAcceptance': 'PENDING_INDEPENDENT_ARTIFACT_QA',
+                                     'requiredBackendClasses': ['com/bobbuy/Real.class'], 'requiredBackendClassCount': 34})
+        with self.assertRaises(RuntimeError):
+            module.class_acceptance({'acceptedBackendClasses': [{'path': 'com/bobbuy/Real.class', 'sha256': 'actual'}],
+                                     'requiredBackendClassCount': 34})

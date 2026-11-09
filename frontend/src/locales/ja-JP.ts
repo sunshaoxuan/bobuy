@@ -2,6 +2,21 @@ import type { Dictionary } from './types';
 import experience from './experience.ja-JP.json';
 
 const messages: Dictionary = {
+  "article.revision_title": "公開済み記事を4言語まとめて改訂",
+  "article.revision_help": "4言語の全文を確認して一括保存します。公開日時、公開URL、商品との関連は変わりません。",
+  "article.revision_review": "4言語すべてのタイトルと本文を確認しました",
+  "article.revision_save": "4言語の全文を保存",
+  "article.revision_read_latest": "最新版を読み込む（下書きを保持）",
+  "article.revision_conflict": "記事が更新されています。下書きは保持しました。最新版を読み込み、再確認してください。",
+  "article.revision_newer_response": "より新しい記事を読み込み済みです。下書きは保持しています。",
+  "article.revision_invalid_result": "保存結果を確認できませんでした。4言語の下書きは保持しています。",
+  "article.revision_saved": "4言語の記事を一括保存しました。",
+  "article.revision_replayed": "この4言語の改訂は保存済みです。重複保存はしません。",
+  "article.revision_saved_newer": "この改訂は保存済みですが、さらに新しい版があります。下書きを保持したまま最新版を読み込み、再確認してください。",
+  "article.revision_rebased": "最新版を読み込みました。4言語の下書きは変更していません。全文を再確認してください。",
+  "article.revision_session_changed": "ログイン状態が変わりました。記事を開き直すか、保持した下書きを確認してから再試行してください。",
+  "article.revision_not_published": "現在は公開済みの商品記事ではありません。下書きは保持しています。",
+  "article.revision_url_help": "本文に完全な http:// または https:// の出典URLを貼り付けると、公開ページから開けます。",
   "profile.title": "本人情報",
   "profile.name": "氏名",
   "profile.phone": "電話番号（任意）",

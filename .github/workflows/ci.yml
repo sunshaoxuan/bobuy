@@ -37,6 +37,7 @@ jobs:
           python -B -m unittest discover -s scripts -p test_postgres18_backup.py
           python -B -m unittest discover -s scripts -p test_prepare_ci_release_artifacts.py
           python -B -m unittest discover -s scripts -p test_verify_checkout_upgrade.py
+          node --test scripts/test_capture_article_inputs.mjs
           python -B scripts/check-production-isolation.py
 
   backend-test:
@@ -119,7 +120,7 @@ jobs:
       - name: Bind core and web release artifacts
         run: >-
           python scripts/prepare-ci-release-artifacts.py
-          --accepted-inputs docs/reports/c2-cart-20261109/accepted-inputs.json
+          --accepted-inputs docs/reports/article-digest-editor-20261109/accepted-inputs.json
           --output "$RUNNER_TEMP/bobuy-release-artifact"
 
       - name: Retain exact core and web artifacts
@@ -169,7 +170,7 @@ jobs:
           BOBBUY_ISOLATED_CI_POSTGRES: 'true'
         run: >-
           mvn -B --file backend/pom.xml
-          -Dtest=SelfProfileServiceTest,StorefrontIntegrationTest,CheckoutFingerprintTest,OrderDeliverySnapshotTest,ProductIdentityCompatibilityIntegrationTest#actualStoredOrderJsonRemainsStrictOldReaderCompatibleAndSidecarSurvivesOldShapeUpdate
+          -Dtest=SelfProfileServiceTest,StorefrontIntegrationTest,CheckoutFingerprintTest,OrderDeliverySnapshotTest,ProductIdentityCompatibilityIntegrationTest#actualStoredOrderJsonRemainsStrictOldReaderCompatibleAndSidecarSurvivesOldShapeUpdate,RecommendationArticleRevisionIntegrationTest
           -Dspring.datasource.url=jdbc:postgresql://127.0.0.1:5432/bobbuy
           -Dspring.datasource.driver-class-name=org.postgresql.Driver
           -Dspring.datasource.username=bobbuy
