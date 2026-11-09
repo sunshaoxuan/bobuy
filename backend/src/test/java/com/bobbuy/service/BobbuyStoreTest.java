@@ -182,6 +182,7 @@ class BobbuyStoreTest {
 
     OrderHeader updated = new OrderHeader(created.getBusinessId(), 1001L, 2000L);
     updated.setStatus(OrderStatus.CONFIRMED);
+    updated.setExpectedOrderRevision(created.getOrderRevision());
     assertThat(store.updateOrder(created.getId(), updated)).isPresent();
     assertThat(store.getOrder(created.getId()).orElseThrow().getStatus()).isEqualTo(OrderStatus.CONFIRMED);
 
@@ -230,11 +231,13 @@ class BobbuyStoreTest {
         });
 
     created.setStatus(OrderStatus.CONFIRMED);
+    created.setExpectedOrderRevision(store.getOrder(created.getId()).orElseThrow().getOrderRevision());
     store.updateOrder(created.getId(), created);
     assertThatThrownBy(() -> store.updateOrderStatus(created.getId(), OrderStatus.DELIVERED))
         .isInstanceOf(ApiException.class);
 
     created.setStatus(OrderStatus.PURCHASED);
+    created.setExpectedOrderRevision(store.getOrder(created.getId()).orElseThrow().getOrderRevision());
     store.updateOrder(created.getId(), created);
     assertThatThrownBy(() -> store.updateOrderStatus(created.getId(), OrderStatus.SETTLED))
         .isInstanceOf(ApiException.class);
@@ -242,11 +245,13 @@ class BobbuyStoreTest {
         .isInstanceOf(ApiException.class);
 
     created.setStatus(OrderStatus.DELIVERED);
+    created.setExpectedOrderRevision(store.getOrder(created.getId()).orElseThrow().getOrderRevision());
     store.updateOrder(created.getId(), created);
     assertThatThrownBy(() -> store.updateOrderStatus(created.getId(), OrderStatus.CONFIRMED))
         .isInstanceOf(ApiException.class);
 
     created.setStatus(OrderStatus.SETTLED);
+    created.setExpectedOrderRevision(store.getOrder(created.getId()).orElseThrow().getOrderRevision());
     store.updateOrder(created.getId(), created);
     assertThatThrownBy(() -> store.updateOrderStatus(created.getId(), OrderStatus.NEW))
         .isInstanceOf(ApiException.class);

@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class StorefrontService {
+    @org.springframework.beans.factory.annotation.Autowired private OrderWriteCoordinator orderWriters;
     private final UserRepository users;
     private final TripRepository trips;
     private final ProductRepository products;
@@ -161,7 +162,7 @@ public class StorefrontService {
         }
         // Retry of an existing order must precede this NEW-order profile requirement.
         var delivery = OrderDeliverySnapshot.capture(user.getDefaultAddress());
-        Trip trip = trips.findByIdForUpdate(request.tripId()).filter(this::bookable)
+        Trip trip = Optional.of(orderWriters.trip(request.tripId())).filter(this::bookable)
             .orElseThrow(() -> invalid("该行程暂不可下单，请重新选择"));
         OrderHeader order = new OrderHeader(businessId, user.getId(), trip.getId());
         order.setDeliverySnapshot(delivery);

@@ -82,6 +82,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class ProcurementHudService {
+  @org.springframework.beans.factory.annotation.Autowired private OrderWriteCoordinator orderWriters;
   private static final String UNCATEGORIZED = "UNCATEGORIZED";
   private static final String OCR_STATUS_NOT_UPLOADED = "NOT_UPLOADED";
   private static final String OCR_STATUS_PENDING = "PENDING";
@@ -325,20 +326,26 @@ public class ProcurementHudService {
       return ReconcileInventoryResult.empty();
     }
 
-    List<OrderHeader> draftOrders = orderHeaderRepository.findByStatusForUpdate(OrderStatus.NEW);
-    List<OrderHeader> candidateOrders = draftOrders.stream()
+    // Metadata/read selection first; never hold global order locks while waiting for a trip.
+    List<OrderHeader> draftOrders = orderHeaderRepository.findByStatusOrderByCreatedAtAscIdAsc(OrderStatus.NEW);
+    List<OrderHeader> selectedOrders = draftOrders.stream()
+        .filter(order -> tripRepository.findById(order.getTripId()).map(t -> com.bobbuy.security.MerchantScope.visible(t.getAgentId())).orElse(false))
         .filter(order -> safeLines(order).stream().anyMatch(line -> Objects.equals(line.getSkuId(), productId)))
         .sorted(Comparator
             .comparing(OrderHeader::getCreatedAt, Comparator.nullsLast(Comparator.naturalOrder()))
             .thenComparing(OrderHeader::getId))
         .toList();
 
-    if (candidateOrders.isEmpty()) {
+    if (selectedOrders.isEmpty()) {
       return ReconcileInventoryResult.empty();
     }
 
-    Long targetTripId = candidateOrders.get(0).getTripId();
+    Long targetTripId = selectedOrders.get(0).getTripId();
     ensureTripMutable(targetTripId);
+    List<OrderHeader> candidateOrders = orderWriters.orders(targetTripId).stream()
+        .filter(order -> order.getStatus()==OrderStatus.NEW)
+        .filter(order -> safeLines(order).stream().anyMatch(line -> Objects.equals(line.getSkuId(),productId)))
+        .sorted(Comparator.comparing(OrderHeader::getCreatedAt,Comparator.nullsLast(Comparator.naturalOrder())).thenComparing(OrderHeader::getId)).toList();
     int remaining = quantity;
     int reconciled = 0;
     List<OrderHeader> changedOrders = new ArrayList<>();
@@ -613,8 +620,7 @@ public class ProcurementHudService {
 
   @Transactional
   public void finalizeTripSettlement(Long tripId) {
-    Trip trip = tripRepository.findByIdForUpdate(tripId)
-        .orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.trip.not_found"));
+    Trip trip = orderWriters.trip(tripId);
     com.bobbuy.security.MerchantScope.require(trip.getAgentId());
     if (trip.getStatus() == TripStatus.SETTLED) {
       throw new ApiException(ErrorCode.INVALID_REQUEST, "error.procurement.settlement.already_settled");
@@ -665,8 +671,7 @@ public class ProcurementHudService {
     if (request == null || request.getAction() == null || request.getAction().isBlank()) {
       throw new ApiException(ErrorCode.INVALID_REQUEST, "error.procurement.billing.confirm.invalid");
     }
-    Trip trip = tripRepository.findByIdForUpdate(tripId)
-        .orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.trip.not_found"));
+    Trip trip = orderWriters.trip(tripId);
     ensureBillingMutable(trip);
     OrderHeader order = getSettlementRelevantTripOrderByBusinessId(tripId, businessId);
     if (customerIdentityResolver.isCustomer(authentication)) {
@@ -863,8 +868,7 @@ public class ProcurementHudService {
   public CustomerPaymentRecordResponse recordOfflinePayment(Long tripId,
                                                             CustomerPaymentRecordRequest request,
                                                             Authentication authentication) {
-    Trip trip = tripRepository.findByIdForUpdate(tripId)
-        .orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.trip.not_found"));
+    Trip trip = orderWriters.trip(tripId);
     ensureBillingMutable(trip);
     if (request == null || request.getBusinessId() == null || request.getBusinessId().isBlank()
         || request.getPaymentMethod() == null || request.getPaymentMethod().isBlank()
@@ -1111,8 +1115,7 @@ public class ProcurementHudService {
   }
 
   private void ensureBillingMutable(Trip trip) {
-    Trip locked = tripRepository.findByIdForUpdate(trip.getId())
-        .orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.trip.not_found"));
+    Trip locked = orderWriters.trip(trip.getId());
     if (locked.getStatus() == TripStatus.SETTLED) {
       throw new ApiException(ErrorCode.INVALID_REQUEST, "error.trip.settlement_frozen");
     }
@@ -1122,8 +1125,8 @@ public class ProcurementHudService {
     if (tripId == null) {
       return;
     }
-    Trip trip = tripRepository.findByIdForUpdate(tripId)
-        .orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.trip.not_found"));
+    Trip trip = orderWriters.trip(tripId);
+    com.bobbuy.security.MerchantScope.require(trip.getAgentId());
     if (trip.isSettlementFrozen()) {
       throw new ApiException(ErrorCode.INVALID_REQUEST, "error.trip.settlement_frozen");
     }
@@ -1134,6 +1137,17 @@ public class ProcurementHudService {
       throw new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.trip.not_found");
     }
     ensureTripMutable(trip.getId());
+  }
+
+  /** The same trip lock as customer edits protects receipt allocation commitments. */
+  public boolean hasOrderProcurementCommitment(OrderHeader order) {
+    for (var receipt : procurementReceiptRepository.findByTripIdOrderByUploadedAtDescIdDesc(order.getTripId())) {
+      var result = receipt.getReconciliationResult();
+      if (!Objects.equals("REVIEWED",stringValue(result.get("reviewStatus")))) continue;
+      for (String field : List.of("matchedOrderLines","missingOrderedItems","unmatchedReceiptItems"))
+        if (objectList(result.get(field)).stream().anyMatch(item -> Objects.equals(order.getBusinessId(),stringValue(item.get("businessId"))))) return true;
+    }
+    return false;
   }
 
   private String resolveOperatorName(Authentication authentication) {

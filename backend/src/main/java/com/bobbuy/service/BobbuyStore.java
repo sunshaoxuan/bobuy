@@ -65,6 +65,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
 public class BobbuyStore {
+    @org.springframework.beans.factory.annotation.Autowired private OrderWriteCoordinator orderWriters;
     private static final Logger log = LoggerFactory.getLogger(BobbuyStore.class);
     private static final Long SYSTEM_USER_ID = 0L;
 
@@ -490,7 +491,7 @@ public class BobbuyStore {
 
     @Transactional
     public Optional<Trip> updateTrip(Long id, Trip input) {
-        return tripRepository.findByIdForUpdate(id)
+        return Optional.of(orderWriters.trip(id))
                 .filter(trip -> com.bobbuy.security.MerchantScope.visible(trip.getAgentId()))
                 .filter(trip -> isTripVisibleToCustomer(trip.getId()))
                 .map(trip -> {
@@ -504,6 +505,7 @@ public class BobbuyStore {
     @Transactional
     public boolean deleteTrip(Long id) {
         if (getTrip(id).isEmpty()) return false;
+        orderWriters.trip(id);
         if (!tripRepository.existsById(id)) {
             return false;
         }
@@ -717,6 +719,9 @@ public class BobbuyStore {
 
     @Transactional
     public OrderHeader upsertOrder(OrderHeader headerInput) {
+        var located = orderHeaderRepository.findByBusinessId(headerInput.getBusinessId());
+        Long locatedTripId = located.map(OrderHeader::getTripId).orElse(null);
+        orderWriters.trips(java.util.Arrays.asList(headerInput.getTripId(), locatedTripId));
         if (com.bobbuy.security.MerchantScope.current() != null) {
             requireOwnedTrip(headerInput.getTripId());
             orderHeaderRepository.findByBusinessId(headerInput.getBusinessId()).ifPresent(o -> requireOwnedTrip(o.getTripId()));
@@ -732,7 +737,9 @@ public class BobbuyStore {
         }
         normalizeLinePurchasedQuantities(headerInput.getLines());
         ensureOrderLinesMutable(headerInput.getTripId());
-        Optional<OrderHeader> existingOptional = orderHeaderRepository.findByBusinessIdForUpdate(headerInput.getBusinessId());
+        Optional<OrderHeader> existingOptional = located.map(o -> orderWriters.order(o.getId()));
+        if (existingOptional.isPresent() && !java.util.Objects.equals(locatedTripId,existingOptional.get().getTripId()))
+            throw new org.springframework.orm.ObjectOptimisticLockingFailureException(OrderHeader.class,existingOptional.get().getId());
 
         if (existingOptional.isEmpty()) {
             ensureOrderLinesMutable(headerInput.getTripId());
@@ -772,8 +779,7 @@ public class BobbuyStore {
 
     @Transactional
     public OrderHeader quickOrder(Long tripId, OrderPlacementRequest request) {
-        Trip trip = tripRepository.findById(tripId)
-            .orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.trip.not_found"));
+        Trip trip = orderWriters.trip(tripId);
         ensureOrderLinesMutable(trip.getId());
         Product product = productRepository.findById(request.getSkuId())
             .orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.product.not_found"));
@@ -781,6 +787,7 @@ public class BobbuyStore {
         com.bobbuy.security.MerchantScope.require(product.getMerchantId());
 
         Optional<OrderHeader> existing = orderHeaderRepository.findByBusinessIdAndTripIdForUpdate(request.getBusinessId(), tripId);
+        existing = existing.map(o -> orderWriters.order(o.getId()));
 
         String itemName = product.getName().getOrDefault("zh-CN", 
             product.getName().isEmpty() ? "Unknown Item" : product.getName().values().iterator().next());
@@ -827,13 +834,18 @@ public class BobbuyStore {
         if (existingOptional.isEmpty()) {
             return Optional.empty();
         }
-        OrderHeader existing = existingOptional.orElseThrow();
-        Long previousTripId = existing.getTripId();
+        Long previousTripId = existingOptional.orElseThrow().getTripId();
+        orderWriters.trips(java.util.Arrays.asList(previousTripId,order.getTripId()));
+        OrderHeader existing = orderWriters.order(id);
+        if (!java.util.Objects.equals(previousTripId,existing.getTripId()))
+            throw new org.springframework.orm.ObjectOptimisticLockingFailureException(OrderHeader.class,id);
         getTrip(order.getTripId()).orElseThrow(() -> new ApiException(ErrorCode.FORBIDDEN, "无权操作此行程"));
         ensureOrderLinesMutable(existing.getTripId());
         ensureOrderLinesMutable(order.getTripId());
+        if (existing.getCustomerId()!=null && !java.util.Objects.equals(order.getExpectedOrderRevision(),existing.getOrderRevision()))
+            throw new org.springframework.orm.ObjectOptimisticLockingFailureException(OrderHeader.class,id);
         if (order.getPaymentStatus() == null) {
-            order.setPaymentStatus(PaymentStatus.UNPAID);
+            order.setPaymentStatus(existing.getPaymentStatus());
         }
         if (order.getCreatedAt() == null) {
             order.setCreatedAt(existing.getCreatedAt() != null ? existing.getCreatedAt() : LocalDateTime.now());
@@ -858,8 +870,9 @@ public class BobbuyStore {
 
     @Transactional
     public OrderHeader updateOrderStatus(Long id, OrderStatus nextStatus) {
-        OrderHeader order = getOrder(id)
+        getOrder(id)
                 .orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.order.not_found"));
+        OrderHeader order = orderWriters.existing(id);
         return applyOrderStatusTransition(order, nextStatus);
     }
 
@@ -869,6 +882,7 @@ public class BobbuyStore {
         if (removed.isEmpty()) {
             return false;
         }
+        removed = Optional.of(orderWriters.existing(id));
         ensureOrderLinesMutable(removed.orElseThrow().getTripId());
         orderHeaderRepository.deleteById(id);
         tripWorkflow.refresh(removed.orElseThrow().getTripId());
@@ -879,7 +893,8 @@ public class BobbuyStore {
     public List<OrderHeader> bulkUpdateOrderStatus(Long tripId, OrderStatus targetStatus) {
         getTrip(tripId)
                 .orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.trip.not_found"));
-        List<OrderHeader> eligible = listOrders(tripId).stream()
+        orderWriters.trip(tripId);
+        List<OrderHeader> eligible = orderWriters.orders(tripId).stream()
                 .filter(order -> isValidStatusTransition(order.getStatus(), targetStatus))
                 .collect(Collectors.toList());
         if (eligible.isEmpty()) {
@@ -945,7 +960,7 @@ public class BobbuyStore {
             throw new ApiException(ErrorCode.INVALID_STATUS, "error.order.invalid_status");
         }
         if (order.getTripId() != null) {
-            Trip trip = tripRepository.findByIdForUpdate(order.getTripId()).orElseThrow();
+            Trip trip = orderWriters.trip(order.getTripId());
             if (trip.isSettlementFrozen() && nextStatus != OrderStatus.SETTLED) {
                 throw new ApiException(ErrorCode.INVALID_REQUEST, "error.trip.settlement_frozen");
             }
@@ -970,7 +985,7 @@ public class BobbuyStore {
         if (tripId == null) {
             return;
         }
-        Optional<Trip> tripOptional = tripRepository.findByIdForUpdate(tripId);
+        Optional<Trip> tripOptional = Optional.of(orderWriters.trip(tripId));
         if (tripOptional.isEmpty()) {
             return;
         }

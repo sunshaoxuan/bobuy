@@ -27,6 +27,18 @@ import java.util.List;
 public class OrderHeader {
     @Id
     private Long id; // 物理主键
+    @jakarta.persistence.Version
+    @Column(name = "order_revision", nullable = false)
+    @com.fasterxml.jackson.annotation.JsonProperty(access = com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY)
+    private Long orderRevision;
+    public Long getOrderRevision() { return orderRevision; }
+
+    @jakarta.persistence.Transient
+    @com.fasterxml.jackson.annotation.JsonProperty(access = com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY)
+    private Long expectedOrderRevision;
+    public Long getExpectedOrderRevision() { return expectedOrderRevision; }
+    public void setExpectedOrderRevision(Long value) { expectedOrderRevision = value; }
+
     @Column(name = "business_id", nullable = false, length = 64)
     private String businessId; // 业务幂等标识 (Event ID)
     private Long customerId; // 客户 ID
@@ -91,6 +103,7 @@ public class OrderHeader {
         productIdentities=retained;
     }
     public void retainProductIdentitiesFrom(OrderHeader original){
+        orderRevision = original.orderRevision;
         deliverySnapshot = original.deliverySnapshot;
         checkoutPayloadHash = original.checkoutPayloadHash;
         productIdentities=new java.util.HashMap<>(original.productIdentities==null?java.util.Map.of():original.productIdentities);

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TripWorkflowService {
+  @org.springframework.beans.factory.annotation.Autowired private OrderWriteCoordinator orderWriters;
   private final TripRepository trips;
   private final OrderHeaderRepository orders;
   private final AuditLogService audit;
@@ -24,8 +25,7 @@ public class TripWorkflowService {
   @Transactional
   public void refresh(Long tripId) {
     if (tripId == null) return;
-    var trip = trips.findByIdForUpdate(tripId).orElseThrow(() -> new com.bobbuy.api.response.ApiException(
-        com.bobbuy.api.response.ErrorCode.RESOURCE_NOT_FOUND, "error.trip.not_found"));
+    var trip = orderWriters.trip(tripId);
     if (trip.isSettlementFrozen()) return;
     orders.flush();
     var active = orders.findByTripId(tripId).stream()
