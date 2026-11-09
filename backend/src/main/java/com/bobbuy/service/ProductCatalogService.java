@@ -119,13 +119,33 @@ public class ProductCatalogService {
  }
  @Transactional(readOnly=true) public List<Proposal> preview(List<Input> values){if(values==null||values.isEmpty()||values.size()>500)throw invalid("master.invalid");var ids=new HashSet<String>();return values.stream().map(value->{if(value==null||value.productId()==null||value.productId().isBlank()||!ids.add(value.productId()))throw invalid("master.invalid");var p=owned(value.productId(),false);if(!Objects.equals(p.getRecordVersion(),value.version()))throw invalid("master.conflict");validate(value,p);return new Proposal(value,List.of("master.canonical_save"),List.of());}).toList();}
  @Transactional public List<Profile> save(List<Input> values,boolean reviewed){
-  if(!reviewed)throw invalid("master.review_required");users.lockById(owner()).orElseThrow();preview(values);
+  if(!reviewed)throw invalid("master.review_required");return saveValidated(values,null,null);
+ }
+ /** Internal AI path: immutable server job proof, never an HTTP reviewed flag or human-review claim. */
+ @Transactional public List<Profile> saveAutomated(CostcoOnboardingJob job,CostcoOnboardingDecision.Candidate candidate,String candidateHash,List<Input> values){
+  if(job==null||candidate==null||candidate.target()==null||job.state()!=CostcoOnboardingJob.State.COMMITTING||!Long.valueOf(job.merchantId()).equals(owner())
+   ||!CostcoNumberOnboardingService.candidateHash(candidate).equals(candidateHash)||values==null||values.size()!=1||values.get(0)==null||values.get(0).translationsReviewed())throw invalid("master.review_required");
+  var last=job.decisions().isEmpty()?null:job.decisions().get(job.decisions().size()-1);
+  if(last==null||last.stage()!=CostcoOnboardingDecision.Stage.ADMISSION||last.verdict()!=CostcoOnboardingDecision.Verdict.ACCEPT||last.trace()==null
+   ||!CostcoNumberOnboardingService.REQUIRED_NODE.equals(last.endpoint())||!job.inputHash().equals(last.inputHash())||last.candidate()==null||!candidateHash.equals(CostcoNumberOnboardingService.candidateHash(last.candidate())))throw invalid("master.review_required");
+  var input=values.get(0);if(!candidate.target().productId().equals(input.productId())||candidate.target().version()!=input.version()||!job.supplierId().equals(input.supplierId())
+   ||!Objects.equals(input.itemNumber(),candidate.itemNumber())||!Objects.equals(input.name(),candidate.translatedNames()))throw invalid("master.invalid");
+  return saveValidated(values,job,candidate);
+ }
+ private List<Profile> saveValidated(List<Input> values,CostcoOnboardingJob automaticJob,CostcoOnboardingDecision.Candidate automaticCandidate){
+  boolean automated=automaticJob!=null;users.lockById(owner()).orElseThrow();preview(values);
   var result=new ArrayList<Profile>();for(var value:values.stream().sorted(Comparator.comparing(Input::productId)).toList()){
    var p=owned(value.productId(),true);if(!Objects.equals(p.getRecordVersion(),value.version()))throw invalid("master.conflict");
+   if(automated){
+    if(!sourceHash(p).equals(automaticCandidate.target().sourceHash())||p.getCatalogData()==null||!automaticJob.supplierId().equals(p.getCatalogData().supplierId())||!automaticJob.market().equals(p.getAttributes().get("sourceMarket")))throw invalid("master.conflict");
+    var specification=new LinkedHashMap<>(p.getCatalogData().specification());if(automaticCandidate.specification()!=null)specification.put("ja-JP",automaticCandidate.specification());
+    if(!Objects.equals(value.specification(),specification)||!Objects.equals(value.description(),p.getDescription())||!Objects.equals(value.brand(),automaticCandidate.brand()==null?p.getBrand():automaticCandidate.brand())
+     ||!Objects.equals(value.model(),automaticCandidate.model()==null?p.getCatalogData().model():automaticCandidate.model())||!Objects.equals(value.packaging(),automaticCandidate.packaging()==null?p.getCatalogData().packaging():automaticCandidate.packaging()))throw invalid("master.invalid");
+   }
    var recovery=checkpoint(p,null);
    p.setName(clean(value.name(),400));p.setDescription(clean(value.description(),8000));p.setItemNumber(value.itemNumber());p.setBrand(value.brand());p.setCategoryId(value.categoryIds().isEmpty()?null:value.categoryIds().get(0));p.setMediaGallery(new ArrayList<>(value.gallery()));
-   p.setCatalogData(new ProductCatalogData(clean(value.specification(),1000),value.model(),value.packaging(),List.copyOf(value.categoryIds()),value.supplierId(),null,owner(),Instant.now()));
-   if(value.translationsReviewed()){var d=p.getCatalogData();p.setCatalogData(new ProductCatalogData(d.specification(),d.model(),d.packaging(),d.categoryIds(),d.supplierId(),sourceHash(p),d.reviewedBy(),d.reviewedAt()));}
+   p.setCatalogData(new ProductCatalogData(clean(value.specification(),1000),value.model(),value.packaging(),List.copyOf(value.categoryIds()),value.supplierId(),null,automated?null:owner(),automated?null:Instant.now()));
+   if(!automated&&value.translationsReviewed()){var d=p.getCatalogData();p.setCatalogData(new ProductCatalogData(d.specification(),d.model(),d.packaging(),d.categoryIds(),d.supplierId(),sourceHash(p),d.reviewedBy(),d.reviewedAt()));}
    products.saveAndFlush(p);retainCheckpoint(recovery,p);result.add(profile(p));
   }return result;
  }

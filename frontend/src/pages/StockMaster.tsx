@@ -37,7 +37,7 @@ import {
 import { useI18n } from '../i18n';
 import L10nInput, { type L10nValues } from '../components/L10nInput';
 import MediaGallery, { type MediaItem } from '../components/MediaGallery';
-import AiQuickAddModal from '../components/AiQuickAddModal';
+import CostcoOnboardingPanel from '../components/CostcoOnboardingPanel';
 import {ProductBrand} from '../components/ProductMetadata';
 import ProductCatalogPanel from '../components/ProductCatalogPanel';
 import ProductPricingPanel from '../components/ProductPricingPanel';
@@ -1078,11 +1078,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
             onClick={handleAddRow}
           />
         </div>}
-      <AiQuickAddModal
-        visible={isQuickAddVisible}
-        onCancel={() => setIsQuickAddVisible(false)}
-        onSuccess={handleQuickAddSuccess}
-      />
+      <CostcoOnboardingPanel suppliers={suppliers} photoOpen={isQuickAddVisible} onPhotoClose={()=>setIsQuickAddVisible(false)} onOpenProduct={setCatalogId}/>
     </div>
   );
 }
