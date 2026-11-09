@@ -177,6 +177,8 @@ class RecommendationPublicationRecoveryIntegrationTest {
         post.merchantId=merchant;post.title=title+" "+nonce;post.body=OLD_BODY;
         post.articleSourceLocale="ja-JP";post.published=true;post.publishedAt=TIME.plusSeconds(offset);
         post.publisherId=merchant;post.publisherName="Synthetic recovery merchant";
+        post.issueDate=LocalDate.of(2026,1,1).plusDays(offset);post.issueDateSourceRef="synthetic:reviewed-date-"+offset;
+        post.issueDateSourceHash="d".repeat(64);post.issueDateReviewedBy=merchant;post.issueDateReviewedAt=TIME;
         post.createdAt=LOCAL_TIME;post.updatedAt=LOCAL_TIME;em.persist(post);return post;
     }
     void item(RecommendationPost post,int sequence,boolean published) {
@@ -277,6 +279,9 @@ class RecommendationPublicationRecoveryIntegrationTest {
         for(var page:List.of(directory,directory1))for(var row:page.path("items")){
             long id=row.at("/post/id").asLong();
             assertEquals(id==mixed.id?25:1,row.path("itemCount").asInt());
+            assertEquals(id==mixed.id?25:1,row.path("publicItemCount").asInt());
+            assertEquals("REVIEWED_SOURCE",row.path("issueDateSource").asText());
+            assertEquals(row.path("issueDate").asText(),row.at("/post/issueDate").asText());
             assertEquals(imageUrl(publicImage),row.at("/post/coverImageUrl").asText());
         }
         var occurrences=data(get("/api/storefront/recommendation-browse/items")

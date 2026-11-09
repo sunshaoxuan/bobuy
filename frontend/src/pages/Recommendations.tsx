@@ -15,6 +15,7 @@ import ReferenceQuoteHistory from '../components/ReferenceQuoteHistory';
 import ArticleLanguages from '../components/ArticleLanguages';
 import {mergeArticleEditor,readArticleSession,useArticleSession,type ArticleEditorState} from '../components/PublishedArticleRevision';
 import RecommendationServiceEditor from '../components/RecommendationServiceEditor';
+import RecommendationIssueDatePanel,{applyRecommendationIssueDate} from '../components/RecommendationIssueDatePanel';
 import '../browse.css';
 import RecommendationClassification from '../components/RecommendationClassification';
 import { useI18n } from '../i18n';
@@ -63,6 +64,8 @@ export default function Recommendations() {
   const [classificationPending,setClassificationPending]=useState(false);
   const [fromProductPending,setFromProductPending]=useState(false);
   const [articlePending,setArticlePending]=useState(false);
+  const [issueDatePending,setIssueDatePending]=useState(false);
+  const activePostId=useRef(id);activePostId.current=id;
   const [serviceOpen,setServiceOpen]=useState(false);
   const [editingItem, setEditingItem] = useState<number>();
   const [editFacts, setEditFacts] = useState<RecommendationFacts>({name:''});
@@ -81,14 +84,14 @@ export default function Recommendations() {
   const publicationSignature=(item:RecommendationItem)=>JSON.stringify([detail?.post.id,detail?.post.version,item.publicationReviewHash,item.publicationProductVersion]);
   const publicationReady=(item:RecommendationItem)=>!!item.publicationReviewHash&&/^[0-9a-f]{64}$/.test(item.publicationReviewHash)&&Number.isSafeInteger(item.publicationProductVersion)&&(item.publicationProductVersion??-1)>=0;
   const editableDetail=detail?{...detail,items:detail.items.filter(item=>!isItemPublic(item))}:undefined;
-  const publicationBlocked=busy||writing||preparing||editingItem!==undefined||!!batch.trim()||classificationPending||fromProductPending||articlePending||serviceOpen||dirty||!title.trim()||!body.trim();
+  const publicationBlocked=busy||writing||preparing||editingItem!==undefined||!!batch.trim()||classificationPending||fromProductPending||articlePending||issueDatePending||serviceOpen||dirty||!title.trim()||!body.trim();
   useEffect(()=>{let prior=publicationIdentity();return subscribeToAuthChanges(()=>{const next=publicationIdentity();if(next!==prior){prior=next;selectionEpoch.current++;setAuthEpoch(value=>value+1);}});},[]);
   const identity = (item: RecommendationDetail['items'][number]) => item.productId || 'recommendation:'+item.id;
   function receiveProductDetail(next:RecommendationDetail){
     const current=editorRef.current.detail;return current&&currentPost.current===next.post.id&&current.post.id===next.post.id&&Number.isSafeInteger(next.post.version)&&next.post.version>=current.post.version?setDetail(next):false;
   }
   const products = [...new Map(detail?.items.map(item => [identity(item), item])).values()];
-  const pending = preparing || queue.some(item => item.status !== 'done') || editingItem !== undefined || !!batch.trim() || classificationPending || fromProductPending||articlePending||serviceOpen||publicationRetries.size>0||publicationConflicts.size>0;
+  const pending = preparing || queue.some(item => item.status !== 'done') || editingItem !== undefined || !!batch.trim() || classificationPending || fromProductPending||articlePending||issueDatePending||serviceOpen||publicationRetries.size>0||publicationConflicts.size>0;
   const navigation = useBlocker(({currentLocation,nextLocation}) => !!detail && (dirty || pending) &&
     (currentLocation.pathname !== nextLocation.pathname || currentLocation.search !== nextLocation.search));
   useEffect(()=>{if(!detail&&navigation.state==='blocked')navigation.reset();},[detail,navigation]);
@@ -101,7 +104,7 @@ export default function Recommendations() {
   }, [dirty, pending]);
   useEffect(() => {
     let active=true;const prior=loadScope.current,reset=!prior||prior.id!==id||prior.page!==page||prior.actorKey!==session.actorKey;loadScope.current={id,page,actorKey:session.actorKey};
-    if(reset){selectionEpoch.current++;setPreparing(false);urls.current.forEach(url=>URL.revokeObjectURL(url));urls.current.clear();setQueue([]);setQueuePage(1);setItemPage(1);setGenerated('');setPrompt('');setEditingItem(undefined);setBatch('');setPreview(false);setClassificationPending(false);setArticlePending(false);setFromProductPending(false);setBusy(false);setWriting(false);setList([]);setLoading(true);setDetail(undefined);setPublicationReviews({});setPublicationRetries(new Set());setPublicationConflicts(new Set());publicationAttempts.current.clear();publicationInFlight.current=false;}
+    if(reset){selectionEpoch.current++;setPreparing(false);urls.current.forEach(url=>URL.revokeObjectURL(url));urls.current.clear();setQueue([]);setQueuePage(1);setItemPage(1);setGenerated('');setPrompt('');setEditingItem(undefined);setBatch('');setPreview(false);setClassificationPending(false);setArticlePending(false);setIssueDatePending(false);setFromProductPending(false);setBusy(false);setWriting(false);setList([]);setLoading(true);setDetail(undefined);setPublicationReviews({});setPublicationRetries(new Set());setPublicationConflicts(new Set());publicationAttempts.current.clear();publicationInFlight.current=false;}
     if(!reset){selectionEpoch.current++;publicationInFlight.current=false;setPublicationReviews({});setBusy(false);setWriting(false);}setError('');setNotice('');
     const request=id?api.get(id):api.list(page);
     void request.then(value=>{if(!active||!scopeCurrent())return;if(Array.isArray(value))setList(value);else if(setDetail(value))setSelected([...new Set(value.items.map(identity))]);}).catch(e=>{if(active&&scopeCurrent())setError((e as Error).message);}).finally(()=>{if(active&&scopeCurrent())setLoading(false);});
@@ -211,16 +214,21 @@ export default function Recommendations() {
     <header className="rec-heading"><div><h1>{t('rec.title')}</h1>{detail && <Tag color={published ? 'green' : undefined}>{t(published ? 'rec.published' : 'rec.draft')}{dirty ? ' *' : ''}</Tag>}</div>
       {!id && <div className="rec-action-group"><Button onClick={()=>setServiceOpen(true)}>{t('service.kind')}</Button><Button type="primary" icon={<PlusOutlined />} loading={busy} onClick={() => void run(async () => { const post = await api.create(); setParams({ post: String(post.post.id) }); })}>{t('rec.new')}</Button></div>}
     </header>
-    {error && <Alert type="error" showIcon message={error} action={<Button disabled={busy} icon={<ReloadOutlined />} onClick={()=>void reloadLatest()}>{t('rec.reload')}</Button>} />}
+    {error && <Alert type="error" showIcon message={error} action={<Button aria-label={t('rec.reload')} disabled={busy} icon={<ReloadOutlined aria-hidden/>} onClick={()=>void reloadLatest()}>{t('rec.reload')}</Button>} />}
     {notice && <Alert type="success" showIcon message={notice} />}
     {!id ? <><RecommendationList posts={list} hasError={!!error} pending={busy} />
       <div className="rec-pagination"><Button disabled={!page} icon={<ArrowLeftOutlined />} onClick={() => setPage(page - 1)}>{t('rec.previous')}</Button><span>{page + 1}</span><Button disabled={list.length < 20} onClick={() => setPage(page + 1)}>{t('rec.next')}</Button></div></> : detail && <>
       <div className="rec-actions"><Button aria-label={t('rec.back')} disabled={busy || writing} icon={<ArrowLeftOutlined />} onClick={back}>{t('rec.back')}</Button>
-        <div className="rec-action-group">{published ? <><Link to={'/recommendations/' + id} target="_blank"><Button icon={<EyeOutlined />}>{t('rec.view')}</Button></Link>{detail.serviceOffer&&<Button icon={<EditOutlined />} disabled={busy} onClick={() => void run(async () => { setDetail(await api.publish(id, detail.post.version, false)); })}>{t('rec.withdraw')}</Button>}</> : <>
+        <div className="rec-action-group">{published ? <><Link to={'/recommendations/' + id} target="_blank"><Button icon={<EyeOutlined />}>{t('rec.view')}</Button></Link>{detail.serviceOffer&&<Button icon={<EditOutlined />} disabled={busy||articlePending||issueDatePending||dirty} onClick={() => void run(async () => { setDetail(await api.publish(id, detail.post.version, false)); })}>{t('rec.withdraw')}</Button>}</> : <>
           {detail.serviceOffer?<Button onClick={()=>setServiceOpen(true)}>{t('service.edit')}</Button>:<Button icon={<SaveOutlined />} loading={busy} disabled={writing||articlePending} onClick={() => void run(async () => { await save(); setNotice(t('rec.saved')); })}>{t('rec.save')}</Button>}
           {detail.serviceOffer&&<Button type="primary" icon={<SendOutlined />} disabled={busy || writing || pending || !title.trim() || !body.trim()} onClick={() => void publish()}>{t('rec.publish')}</Button>}</>}
         </div></div>
       {detail.post.publishedAt && <div className="rec-publication rec-publication-editor"><span>{t('rec.publisher')}: {detail.post.publisherName}</span><time dateTime={detail.post.publishedAt}>{t('rec.published_date')}: {new Date(detail.post.publishedAt).toLocaleString(locale)}</time></div>}
+      <RecommendationIssueDatePanel post={detail.post} disabled={busy||writing||preparing||classificationPending||fromProductPending||articlePending||serviceOpen}
+        onPendingChange={value=>{if(activePostId.current===detail.post.id)setIssueDatePending(value);}}
+        onVersionConflict={()=>{if(activePostId.current===detail.post.id)setError(t('issueDate.parentConflict'));}}
+        onSaved={(value,expectedVersion)=>{if(activePostId.current!==detail.post.id)return;const current=editorRef.current.detail;
+          if(current){const next=applyRecommendationIssueDate(current,detail.post.id,expectedVersion,value);if(next)setDetail(next);}}}/>
       <div className="rec-editor-layout"><section className="rec-article"><h2>{t('rec.article')}</h2>{detail.serviceOffer?<div className="rec-public-body"><Tag>{t('service.kind')}</Tag>{body.split(/\n\s*\n/).map((p,i)=><p key={i}>{p}</p>)}</div>:<ArticleLanguages key={detail.post.id} detail={detail} title={title} body={body} sourceDirty={dirty} disabled={busy} onTitle={setTitle} onBody={setBody} onChanged={next=>setDetail(next,true)} onPending={setArticlePending}/>}
         {published && <div className="rec-public-link"><Link to={'/recommendations/' + id}>{t('rec.view')}</Link><Tooltip title={t('rec.copy')}><Button icon={<CopyOutlined />} aria-label={t('rec.copy')} onClick={() => void run(async () => { await navigator.clipboard.writeText(location.origin + '/recommendations/' + id); setNotice(t('rec.copied')); })} /></Tooltip></div>}
       </section></div>

@@ -1,6 +1,6 @@
 import SafeArticleText from '../components/SafeArticleText';
 import RecommendationBrowse from './RecommendationBrowse';
-import {ConsumerDetail,DetailOffer} from '../components/ConsumerDetail';
+import {ConsumerDetail,DetailOffer,ProductDetailCode} from '../components/ConsumerDetail';
 import ReservationAdd from '../components/ReservationAdd';
 import {useDetailReturnFocus} from '../components/useDetailReturnFocus';
 import {openCardDetail} from '../components/openCardDetail';
@@ -107,7 +107,7 @@ function RecommendationProductDetail({item,product,onClose,onAdd,canBuy,purchase
  if(!item)return null;const text=recommendationText(item,locale),gallery=item.gallery??[];
  return <Drawer className="rec-product-detail consumer-detail-drawer" title={t('store.details')} width="min(1120px,100vw)" open={!!item} onClose={onClose}>
   <ConsumerDetail media={<RecommendationImageViewer consumer key={item.id} pictures={gallery} name={text.name}/>}>
-  <ProductBrand brand={item.brand}/><h1><RecommendationName text={text}/></h1><ProductVariant model={item.model} packaging={item.packaging}/><p>{t('rec.code')}: {item.itemNumber||t('rec.not_stated')}</p>{text.missing&&<Alert type="info" message={t('article.field_source',{fields:text.sourceFields.map(key=>t(key==='description'?'master.descriptions':key==='specification'?'master.specifications':'rec.fact.'+key)).join(' · ')})}/>}
+  <ProductBrand brand={item.brand}/><h1><RecommendationName text={text}/></h1><ProductDetailCode value={item.itemNumber}/><ProductVariant model={item.model} packaging={item.packaging}/>{text.missing&&<Alert type="info" message={t('article.field_source',{fields:text.sourceFields.map(key=>t(key==='description'?'master.descriptions':key==='specification'?'master.specifications':'rec.fact.'+key)).join(' · ')})}/>}
   {text.specification&&<p className="rec-detail-spec">{text.specification}</p>}
   {product&&<SellingPrice product={product}/>}
   <DetailOffer facts={{...item,offerNotes:text.offerNotes}}/>

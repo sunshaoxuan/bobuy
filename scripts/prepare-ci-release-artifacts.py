@@ -9,6 +9,11 @@ import re
 import subprocess
 import zipfile
 
+ARTICLE_BASELINE_PATH = 'docs/reports/c2-cart-20261109/accepted-inputs.json'
+ARTICLE_BASELINE_SHA256 = '48bbcc808d0a0761e112b720c276592afe52f9979031a9975247065efeb277ba'
+ISSUE_DATE_MIGRATION = 'V28_1__recommendation_issue_date.sql'
+ISSUE_DATE_SHA256 = 'd742bea25cb8ef3d205c9e2a4992d25024a372b5ab9dc38dc915f0ebbb91224e'
+
 
 def run(*args):
     return subprocess.check_output(args, text=True).strip()
@@ -30,16 +35,22 @@ def files(root):
 def class_acceptance(accepted):
     expected = accepted.get('acceptedBackendClasses')
     if expected is not None:
+        if 'requiredBackendClassCount' in accepted and accepted['requiredBackendClassCount'] != len(expected):
+            raise RuntimeError('Accepted exact class count differs')
         return [entry['path'] for entry in expected], {entry['path']: entry['sha256'] for entry in expected}
     required = accepted.get('requiredBackendClasses', [])
     if accepted.get('compiledByteAcceptance') != 'PENDING_INDEPENDENT_ARTIFACT_QA' or not required:
         raise RuntimeError('Source-only acceptance requires explicit pending artifact QA and required classes')
     if len(set(required)) != len(required) or any(not re.fullmatch(r'com/bobbuy/[A-Za-z0-9_/$]+\.class', path) for path in required):
         raise RuntimeError('Invalid required backend classes')
+    if 'requiredBackendClassCount' in accepted and accepted['requiredBackendClassCount'] != len(required):
+        raise RuntimeError('Required class count differs')
     return required, None
 
 
 def source_digest_acceptance(accepted):
+    if 'sourceFileCount' in accepted and accepted['sourceFileCount'] != len(accepted['sourceFiles']):
+        raise RuntimeError('Accepted source count differs')
     algorithm = accepted.get('sourceDigestAlgorithm')
     if algorithm is not None:
         value = json.dumps(accepted['sourceFiles'], ensure_ascii=False, separators=(',', ':')).encode('utf-8')
@@ -47,15 +58,40 @@ def source_digest_acceptance(accepted):
             raise RuntimeError('Accepted source-list digest differs')
 
 
+def version_tuple(value):
+    if isinstance(value, bool) or not isinstance(value, (str, int)) or not re.fullmatch(r'\d+(?:[._]\d+)*', str(value)):
+        raise RuntimeError('Invalid Flyway version; floating-point versions are not accepted')
+    parts = tuple(int(part) for part in re.split(r'[._]', str(value)))
+    while len(parts) > 1 and parts[-1] == 0:
+        parts = parts[:-1]
+    return parts
+
+
+def migration_version(path):
+    match = re.fullmatch(r'V(\d+(?:[._]\d+)*)__[^/]+\.sql', path)
+    if match is None:
+        raise RuntimeError('Invalid accepted migration filename')
+    return version_tuple(match.group(1))
+
+
 def schema_acceptance(accepted, actual, baseline=None):
     if actual != accepted['migrations']:
         raise RuntimeError('Accepted migration bytes/list changed')
     identity = (accepted.get('schemaBefore', 27), accepted.get('schemaAfter', 27), accepted.get('migrationChanges', False))
-    names = [re.fullmatch(r'V(\d+)__.+\.sql', entry['path']) for entry in actual]
-    if not names or any(name is None for name in names):
-        raise RuntimeError('Invalid accepted migration filename')
-    versions = [int(name.group(1)) for name in names]
-    if identity == (27, 27, False) and versions and max(versions) == 27:
+    version_tuple(identity[0])
+    version_tuple(identity[1])
+    versions = [migration_version(entry['path']) for entry in actual]
+    if not versions or len(set(versions)) != len(versions) or not isinstance(identity[2], bool):
+        raise RuntimeError('Missing/duplicate normalized migration version or invalid migration flag')
+    legacy_names = all(re.fullmatch(r'V\d+__.+\.sql', entry['path']) for entry in actual)
+    if identity == (28, 28, False):
+        if (accepted.get('candidateKind') != 'ARTICLE_DIGEST_EDITOR_V1' or baseline is None
+                or baseline.get('schemaBefore') != 27 or baseline.get('schemaAfter') != 28
+                or baseline.get('migrationChanges') is not True or len(actual) != 27
+                or not legacy_names or max(versions) != (28,) or actual != baseline['migrations']):
+            raise RuntimeError('Article requires the exact C2 V1..V28 manifest with no SQL change')
+        return {'schemaBefore': 28, 'schemaAfter': 28, 'migrationChanges': False}
+    if identity == (27, 27, False) and legacy_names and max(versions) == (27,):
         return {'schemaBefore': 27, 'schemaAfter': 27, 'migrationChanges': False}
     if identity == (28, 31, True):
         if (baseline is None or (baseline.get('schemaBefore'), baseline.get('schemaAfter'), baseline.get('migrationChanges')) != (27, 28, True)):
@@ -63,16 +99,36 @@ def schema_acceptance(accepted, actual, baseline=None):
         previous = baseline['migrations']
         old_part = [entry for entry in actual if entry['path'] != 'V31__recommendation_item_publication.sql']
         added = [entry for entry in actual if entry['path'] == 'V31__recommendation_item_publication.sql']
-        if (old_part != previous or len(added) != 1 or max(versions) != 31
-                or any(version > 28 for version in versions if version != 31)):
+        if (old_part != previous or len(added) != 1 or max(versions) != (31,)
+                or any(version > (28,) for version in versions if version != (31,))):
             raise RuntimeError('V31 requires unchanged V28 migrations plus only its exact V31 migration')
         return {'schemaBefore': 28, 'schemaAfter': 31, 'migrationChanges': True}
+    if identity == ('28.1', 31, True):
+        if (baseline is None or (baseline.get('schemaBefore'), baseline.get('schemaAfter'), baseline.get('migrationChanges')) != (28, '28.1', True)):
+            raise RuntimeError('Combined publication requires the accepted UI V28.1 migration baseline')
+        old_part = [entry for entry in actual if entry['path'] != 'V31__recommendation_item_publication.sql']
+        added = [entry for entry in actual if entry['path'] == 'V31__recommendation_item_publication.sql']
+        if (old_part != baseline['migrations'] or len(added) != 1 or max(versions) != (31,)
+                or any(version > (28, 1) for version in versions if version != (31,))
+                or sum(entry['path'] == ISSUE_DATE_MIGRATION and entry.get('sha256') == ISSUE_DATE_SHA256 for entry in old_part) != 1):
+            raise RuntimeError('Only exact accepted V28.1 prefix plus reviewed V31 is allowed')
+        return {'schemaBefore': '28.1', 'schemaAfter': 31, 'migrationChanges': True}
+    if identity == (28, '28.1', True):
+        old_part = [entry for entry in actual if entry['path'] != ISSUE_DATE_MIGRATION]
+        added = [entry for entry in actual if entry['path'] == ISSUE_DATE_MIGRATION]
+        if (baseline is None or (baseline.get('schemaBefore'), baseline.get('schemaAfter'), baseline.get('migrationChanges')) != (27, 28, True)
+                or old_part != baseline['migrations'] or len(added) != 1
+                or added[0].get('sha256') != ISSUE_DATE_SHA256 or len(actual) != len(old_part) + 1
+                or not old_part or max(migration_version(entry['path']) for entry in old_part) != (28,)
+                or max(versions) != (28, 1) or not all(re.fullmatch(r'V\d+__.+\.sql', entry['path']) for entry in old_part)):
+            raise RuntimeError('Issue dates require the exact immutable C2 V28 prefix plus only the pinned V28.1 migration')
+        return {'schemaBefore': 28, 'schemaAfter': '28.1', 'migrationChanges': True}
     if identity != (27, 28, True) or baseline is None or baseline.get('schemaAfter') != 27 or baseline.get('migrationChanges') is not False:
         raise RuntimeError('Unaccepted schema transition')
     previous = baseline['migrations']
     old_part = [entry for entry in actual if entry['path'] != 'V28__checkout_delivery_snapshot.sql']
     added = [entry for entry in actual if entry['path'] == 'V28__checkout_delivery_snapshot.sql']
-    if old_part != previous or len(added) != 1 or max(versions) != 28:
+    if not legacy_names or old_part != previous or len(added) != 1 or max(versions) != (28,):
         raise RuntimeError('C2 requires the exact unchanged V27 list plus only its V28 migration')
     return {'schemaBefore': 27, 'schemaAfter': 28, 'migrationChanges': True}
 
@@ -111,9 +167,37 @@ def rollback_description(schema):
                 'otherwise keep controlled maintenance and forward-fix. This capture leaves recovery UNBOUND and authorizes no activation.')
     return ('Compatible application-only recovery after fresh preflight; retain V'
             + str(schema['schemaAfter']) + ' and all newer customer writes. Never restore an old database.')
+def issue_date_migration_acceptance(content):
+    if hashlib.sha256(content).hexdigest() != ISSUE_DATE_SHA256:
+        raise RuntimeError('Only the reviewed byte-exact V28.1 issue-date migration is accepted')
 
 
 def migration_baseline(accepted):
+    if (accepted.get('schemaBefore'), accepted.get('schemaAfter'), accepted.get('migrationChanges')) == ('28.1', 31, True):
+        binding = accepted.get('migrationBaseline', {})
+        path = Path(binding.get('path', ''))
+        expected = '6a20f67e81919a0bf53088183e5bc0473a94885654fce867ec36356cf9e519f9'
+        if (path.as_posix() != 'docs/reports/consumer-ui-integration-20261109/accepted-inputs.json'
+                or binding.get('sha256') != expected or digest(path) != expected):
+            raise RuntimeError('The unchanged accepted48433 UI V28.1 manifest is required')
+        return json.loads(path.read_text())
+    if (accepted.get('schemaBefore'), accepted.get('schemaAfter'), accepted.get('migrationChanges')) == (28, 28, False):
+        binding = accepted.get('migrationBaseline', {})
+        path = Path(binding.get('path', ''))
+        if (accepted.get('candidateKind') != 'ARTICLE_DIGEST_EDITOR_V1'
+                or path.as_posix() != ARTICLE_BASELINE_PATH
+                or binding.get('sha256') != ARTICLE_BASELINE_SHA256
+                or digest(path) != ARTICLE_BASELINE_SHA256):
+            raise RuntimeError('Exact C2 accepted migration baseline required for article V28')
+        return json.loads(path.read_text())
+    if (accepted.get('schemaBefore'), accepted.get('schemaAfter'), accepted.get('migrationChanges')) == (28, '28.1', True):
+        binding = accepted.get('migrationBaseline', {})
+        path = Path(binding.get('path', ''))
+        if (path.as_posix() != ARTICLE_BASELINE_PATH
+                or binding.get('sha256') != ARTICLE_BASELINE_SHA256
+                or digest(path) != ARTICLE_BASELINE_SHA256):
+            raise RuntimeError('The immutable accepted C2 V28 manifest is required')
+        return json.loads(path.read_text())
     if not accepted.get('migrationChanges'):
         return None
     binding = accepted.get('migrationBaseline', {})
@@ -145,10 +229,14 @@ def main():
             raise RuntimeError('Accepted application source differs: ' + entry['path'])
     migration_root = Path('backend/src/main/resources/db/migration')
     schema = schema_acceptance(accepted, files(migration_root), migration_baseline(accepted))
-    if schema['migrationChanges'] and schema['schemaAfter'] == 28:
+    if (schema['schemaBefore'], schema['schemaAfter'], schema['migrationChanges']) == (27, 28, True):
         checkout_migration_acceptance((migration_root / 'V28__checkout_delivery_snapshot.sql').read_bytes())
+    if (schema['schemaBefore'], schema['schemaAfter'], schema['migrationChanges']) == (28, '28.1', True):
+        issue_date_migration_acceptance((migration_root / ISSUE_DATE_MIGRATION).read_bytes())
     if schema['schemaAfter'] == 31:
         publication_migration_acceptance((migration_root / 'V31__recommendation_item_publication.sql').read_bytes())
+        if schema['schemaBefore'] == '28.1':
+            issue_date_migration_acceptance((migration_root / ISSUE_DATE_MIGRATION).read_bytes())
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=False)
     core_jar = output / 'core.jar'
@@ -190,6 +278,7 @@ def main():
     archive = output / 'images.tar'
     subprocess.run(['docker', 'save', '--output', str(archive), *[e['tag'] for e in images]], check=True)
     manifest = {'source': source, 'version': 'ci-' + source, 'acceptedApplicationSourceDigest': accepted['sourceDigest'],
+                'acceptedSourceFileCount': len(accepted['sourceFiles']), 'requiredBackendClassCount': len(required_classes),
                 'repository': os.environ.get('GITHUB_REPOSITORY'), 'runId': os.environ.get('GITHUB_RUN_ID'),
                 'runAttempt': os.environ.get('GITHUB_RUN_ATTEMPT'), 'images': images,
                 'archiveSha256': digest(archive), 'archiveBytes': archive.stat().st_size,

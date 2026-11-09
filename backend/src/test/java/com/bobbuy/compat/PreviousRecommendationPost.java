@@ -1,0 +1,31 @@
+// Exact 82b8daf7 V28 RecommendationPost columns; only package/class names and the shared type import differ.
+package com.bobbuy.compat;
+
+import com.bobbuy.model.RecommendationServiceOffer;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "bb_recommendation_post")
+public class PreviousRecommendationPost {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
+    @Column(nullable = false) public Long merchantId;
+    @Column(nullable = false, length = 200) public String title = "";
+    @Column(nullable = false, columnDefinition = "text") public String body = "";
+    @Column(length=10) public String articleSourceLocale;
+    public record ArticleText(String title,String body,String sourceHash,java.time.Instant reviewedAt) {}
+    @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.JSON)
+    @Column(columnDefinition="jsonb",nullable=false)
+    public java.util.Map<String,ArticleText> articleTranslations=new java.util.HashMap<>();
+    @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.JSON)
+    @Column(columnDefinition="jsonb") public RecommendationServiceOffer serviceOffer;
+    @Column(length=64) public String serviceSourceKey;
+    @Column(nullable = false) public boolean published;
+    @Version public long version;
+    @Column(nullable = false) public LocalDateTime createdAt = LocalDateTime.now();
+    @Column(nullable = false) public LocalDateTime updatedAt = LocalDateTime.now();
+    public java.time.Instant publishedAt;
+    public Long publisherId;
+    @Column(length = 255) public String publisherName;
+}

@@ -53,7 +53,7 @@ class RecommendationPublicationMigrationIntegrationTest {
         assertTrue(Files.isRegularFile(migrations.resolve("V28__checkout_delivery_snapshot.sql")));
         assertTrue(Files.isRegularFile(migrations.resolve("V31__recommendation_item_publication.sql")));
         var flyway=Flyway.configure().dataSource(URL,"bobbuy","bobbuypassword").locations("filesystem:"+migrations)
-            .target("28").cleanDisabled(false).load();
+            .target("28.1").cleanDisabled(false).load();
         flyway.clean();flyway.migrate();flyway.validate();
         connection=DriverManager.getConnection(URL,"bobbuy","bobbuypassword");
         actualPostgres(connection);
@@ -80,6 +80,7 @@ class RecommendationPublicationMigrationIntegrationTest {
                 +"\"sourceMessageKey\":\"synthetic-original\",\"sourceUrl\":\"https://example.invalid/original-terms\","
                 +"\"activityStart\":\"2026-01-01\",\"activityEnd\":\"2026-01-31\",\"activityApplies\":true,"
                 +"\"windowEvidence\":\"Original terms apply\",\"startSearchComplete\":true}'::jsonb WHERE id=-310001");
+            execute("UPDATE bb_recommendation_post SET issue_date='2026-11-08',issue_date_source_ref='synthetic:reviewed-issue-date',issue_date_source_hash=repeat('d',64),issue_date_reviewed_by=1000,issue_date_reviewed_at='2026-11-09T00:00:00Z' WHERE id=-310001");
             connection.commit();fixtureCommitted=true;
         }catch(Exception error){connection.rollback();throw error;}
         finally{connection.setAutoCommit(true);}
@@ -103,7 +104,7 @@ class RecommendationPublicationMigrationIntegrationTest {
         assertEquals("Cutover visible brand",visibleAtV31Cutover.brand);
         assertEquals(List.of("https://example.invalid/legacy-carton.jpg"),visibleAtV31Cutover.gallery.stream().map(RecommendationItem.Picture::url).toList());
         oldColumns=columns();beforeRows=fingerprints(oldColumns);beforeHistory=history();assertEquals(38,oldColumns.size());
-        assertTrue(beforeHistory.get(beforeHistory.size()-1).contains(":28:V28__checkout_delivery_snapshot.sql:"));
+        assertTrue(beforeHistory.get(beforeHistory.size()-1).contains(":28.1:V28_1__recommendation_issue_date.sql:"));
         assertTrue(beforeHistory.stream().allMatch(value->value.endsWith(":true")));
         var target=Flyway.configure().dataSource(URL,"bobbuy","bobbuypassword").locations("filesystem:"+migrations).target("31").load();
         target.migrate();target.validate();
@@ -244,7 +245,7 @@ class RecommendationPublicationMigrationIntegrationTest {
         var proof=new LinkedHashMap<String,Object>();
         proof.put("scope","EXISTING_EPHEMERAL_HOSTED_CI_POSTGRES_ONLY");
         proof.put("status","PASS_PRESERVATION_ASSERTIONS_ONLY");
-        proof.put("schemaBefore",28);proof.put("schemaAfter",31);proof.put("businessTables",oldColumns.size());
+        proof.put("schemaBefore","28.1");proof.put("schemaAfter",31);proof.put("businessTables",oldColumns.size());
         proof.put("beforeColumns",oldColumns);proof.put("afterColumns",afterColumns);
         proof.put("beforeFingerprints",beforeRows);proof.put("afterFingerprints",fingerprints(oldColumns));
         proof.put("priorMigrationHistory",beforeHistory);proof.put("migrationHistory",after);

@@ -65,7 +65,9 @@ public class RecommendationArticleService {
   post.articleSourceLocale="ja-JP";post.title=texts.get("ja-JP").title();post.body=texts.get("ja-JP").body();post.articleTranslations=translations;
   return nextHash;
  }
- private TreeMap<String,Object> facts(RecommendationPost p){var facts=new TreeMap<String,Object>();facts.put("sourceLocale",p.articleSourceLocale);facts.put("title",p.title);facts.put("body",p.body);facts.put("translations",new TreeMap<>(p.articleTranslations));if(p.serviceOffer!=null)facts.put("serviceOffer",p.serviceOffer);return facts;}
+ private TreeMap<String,Object> facts(RecommendationPost p){var facts=new TreeMap<String,Object>();facts.put("sourceLocale",p.articleSourceLocale);facts.put("title",p.title);facts.put("body",p.body);facts.put("translations",new TreeMap<>(p.articleTranslations));if(p.serviceOffer!=null)facts.put("serviceOffer",p.serviceOffer);
+  // Date evidence belongs to history, never to the four-language article source hash.
+  if(p.hasReviewedIssueDate()){var review=new TreeMap<String,Object>();review.put("issueDate",p.issueDate.toString());review.put("sourceRef",p.issueDateSourceRef);review.put("sourceHash",p.issueDateSourceHash);review.put("reviewedBy",p.issueDateReviewedBy);review.put("reviewedAt",p.issueDateReviewedAt.toString());facts.put("issueDateReview",review);}return facts;}
  public Map<String,RecommendationPost.ArticleText> current(RecommendationPost p){return view(p,true);}
  public Map<String,RecommendationPost.ArticleText> all(RecommendationPost p){return view(p,false);}
  private Map<String,RecommendationPost.ArticleText> view(RecommendationPost p,boolean publicView){

@@ -4,6 +4,7 @@ from pathlib import Path
 import unittest
 import hashlib
 import json
+from unittest.mock import patch
 
 spec = importlib.util.spec_from_file_location('ci_artifacts', Path(__file__).with_name('prepare-ci-release-artifacts.py'))
 module = importlib.util.module_from_spec(spec)
@@ -73,6 +74,46 @@ class SchemaAcceptanceTest(unittest.TestCase):
             module.source_digest_acceptance({**accepted, 'sourceDigest': 'stale'})
         with self.assertRaises(RuntimeError):
             module.source_digest_acceptance({**accepted, 'sourceDigestAlgorithm': 'unknown'})
+
+
+class CombinedUiPublicationSchemaAcceptanceTest(unittest.TestCase):
+    def setUp(self):
+        self.path = Path('docs/reports/consumer-ui-integration-20261109/accepted-inputs.json')
+        self.baseline = json.loads(self.path.read_text(encoding='utf-8'))
+        sql = Path('backend/src/main/resources/db/migration/V31__recommendation_item_publication.sql')
+        self.suffix = {'path': sql.name, 'bytes': sql.stat().st_size, 'sha256': module.digest(sql)}
+        self.actual = self.baseline['migrations'] + [self.suffix]
+        self.accepted = {'schemaBefore': '28.1', 'schemaAfter': 31, 'migrationChanges': True,
+                         'migrations': self.actual, 'migrationBaseline': {
+                             'path': self.path.as_posix(), 'sha256': module.digest(self.path)}}
+
+    def test_exact_immutable_ui_prefix_plus_only_v31_passes(self):
+        baseline = module.migration_baseline(self.accepted)
+        self.assertEqual(module.schema_acceptance(self.accepted, self.actual, baseline),
+                         {'schemaBefore': '28.1', 'schemaAfter': 31, 'migrationChanges': True})
+
+    def test_old_baseline_float_version_and_changed_prefix_reject(self):
+        for before in [28, 28.1, '28_1']:
+            with self.subTest(before=before), self.assertRaises(RuntimeError):
+                module.schema_acceptance({**self.accepted, 'schemaBefore': before}, self.actual, self.baseline)
+        for prefix in [None, {**self.baseline, 'schemaAfter': 28}, {**self.baseline, 'migrations': []}]:
+            with self.subTest(prefix=prefix), self.assertRaises(RuntimeError):
+                module.schema_acceptance(self.accepted, self.actual, prefix)
+
+    def test_date_sql_missing_drift_extra_and_duplicate_reject(self):
+        for actual in [self.actual[:-2] + [self.suffix],
+                       [{**v, 'sha256': 'wrong'} if v['path'] == module.ISSUE_DATE_MIGRATION else v for v in self.actual],
+                       self.actual + [{'path': 'V29__unrelated.sql'}], self.actual + [self.suffix]]:
+            with self.subTest(actual=actual), self.assertRaises(RuntimeError):
+                module.schema_acceptance({**self.accepted, 'migrations': actual}, actual, self.baseline)
+
+    def test_exact_baseline_hash_and_pending_aware_recovery_still_required(self):
+        for path, digest in [('other.json', module.digest(self.path)), (self.path.as_posix(), '0' * 64)]:
+            with self.subTest(path=path), self.assertRaises(RuntimeError):
+                module.migration_baseline({**self.accepted, 'migrationBaseline': {'path': path, 'sha256': digest}})
+        recovery = module.recovery_contract(self.accepted)
+        self.assertFalse(recovery['oldV28CoreAllowed'])
+        self.assertEqual(recovery['status'], 'UNBOUND_EXACT_V31_AWARE_ARCHIVE_AND_PG_RUNTIME_REQUIRED')
 
 
 class PublicationSchemaAcceptanceTest(unittest.TestCase):
@@ -148,3 +189,118 @@ class PublicationSchemaAcceptanceTest(unittest.TestCase):
         self.assertIn('authorizes no activation', description)
         self.assertIsNone(module.recovery_contract(self.baseline))
         self.assertIn('retain V28', module.rollback_description(self.baseline))
+class ArticleSchemaAcceptanceTest(unittest.TestCase):
+    def setUp(self):
+        self.root = Path(__file__).resolve().parents[1]
+        self.path = self.root / module.ARTICLE_BASELINE_PATH
+        self.baseline = json.loads(self.path.read_text(encoding='utf-8'))
+        self.migrations = self.baseline['migrations']
+        self.accepted = {'candidateKind': 'ARTICLE_DIGEST_EDITOR_V1', 'schemaBefore': 28,
+                         'schemaAfter': 28, 'migrationChanges': False, 'migrations': self.migrations,
+                         'migrationBaseline': {'path': module.ARTICLE_BASELINE_PATH,
+                                               'sha256': module.ARTICLE_BASELINE_SHA256}}
+
+    def test_article_exact_unchanged_27_migrations_is_accepted(self):
+        self.assertEqual(module.schema_acceptance(self.accepted, self.migrations, self.baseline),
+                         {'schemaBefore': 28, 'schemaAfter': 28, 'migrationChanges': False})
+
+    def test_changed_deleted_added_or_reordered_sql_is_rejected(self):
+        for actual in [[{**self.migrations[0], 'sha256': 'changed'}, *self.migrations[1:]],
+                       self.migrations[:-1], [*self.migrations, {'path': 'V29__unexpected.sql'}],
+                       list(reversed(self.migrations))]:
+            with self.subTest(actual=actual), self.assertRaises(RuntimeError):
+                module.schema_acceptance({**self.accepted, 'migrations': actual}, actual, self.baseline)
+
+    def test_article_kind_baseline_and_schema_cannot_be_broadened(self):
+        for change in [{'candidateKind': 'anything'}, {'schemaAfter': 29}, {'migrationChanges': True}, {'schemaBefore': 27}]:
+            with self.subTest(change=change), self.assertRaises(RuntimeError):
+                module.schema_acceptance({**self.accepted, **change}, self.migrations, self.baseline)
+        with self.assertRaises(RuntimeError):
+            module.schema_acceptance(self.accepted, self.migrations, None)
+
+    def test_article_baseline_is_fixed_path_and_exact_c2_bytes(self):
+        with patch.object(module, 'digest', return_value=module.ARTICLE_BASELINE_SHA256), patch.object(Path, 'read_text', return_value=json.dumps(self.baseline)):
+            self.assertEqual(module.migration_baseline(self.accepted), self.baseline)
+        for binding in [{'path': 'other.json', 'sha256': module.ARTICLE_BASELINE_SHA256},
+                        {'path': module.ARTICLE_BASELINE_PATH, 'sha256': '0' * 64}]:
+            with self.subTest(binding=binding), self.assertRaises(RuntimeError):
+                module.migration_baseline({**self.accepted, 'migrationBaseline': binding})
+        with patch.object(module, 'digest', return_value='0' * 64), self.assertRaises(RuntimeError):
+            module.migration_baseline(self.accepted)
+
+    def test_real_committed_c2_baseline_hash_stays_bound(self):
+        canonical = self.path.read_bytes().replace(b'\r\n', b'\n')
+        self.assertEqual(hashlib.sha256(canonical).hexdigest(), module.ARTICLE_BASELINE_SHA256)
+
+    def test_dynamic_source_and_class_counts_cannot_lie(self):
+        with self.assertRaises(RuntimeError):
+            module.source_digest_acceptance({'sourceFiles': [], 'sourceFileCount': 675})
+        with self.assertRaises(RuntimeError):
+            module.class_acceptance({'compiledByteAcceptance': 'PENDING_INDEPENDENT_ARTIFACT_QA',
+                                     'requiredBackendClasses': ['com/bobbuy/Real.class'], 'requiredBackendClassCount': 34})
+        with self.assertRaises(RuntimeError):
+            module.class_acceptance({'acceptedBackendClasses': [{'path': 'com/bobbuy/Real.class', 'sha256': 'actual'}],
+                                     'requiredBackendClassCount': 34})
+
+
+class IssueDateSchemaAcceptanceTest(unittest.TestCase):
+    def setUp(self):
+        self.old = [{'path': 'V27__explicit_product_markers.sql', 'bytes': 3, 'sha256': 'old'},
+                    {'path': 'V28__checkout_delivery_snapshot.sql', 'bytes': 4, 'sha256': 'c2'}]
+        self.added = {'path': module.ISSUE_DATE_MIGRATION, 'bytes': 1172, 'sha256': module.ISSUE_DATE_SHA256}
+        self.baseline = {'schemaBefore': 27, 'schemaAfter': 28, 'migrationChanges': True, 'migrations': self.old}
+        self.accepted = {'schemaBefore': 28, 'schemaAfter': '28.1', 'migrationChanges': True, 'migrations': self.old + [self.added]}
+
+    def test_exact_pinned_28_1_suffix_and_c2_prefix_pass(self):
+        self.assertEqual(module.schema_acceptance(self.accepted, self.accepted['migrations'], self.baseline),
+                         {'schemaBefore': 28, 'schemaAfter': '28.1', 'migrationChanges': True})
+
+    def test_unknown_extra_missing_renamed_or_changed_migration_rejects(self):
+        cases = [self.old, self.old + [{**self.added, 'sha256': 'drift'}],
+                 [{**self.old[0], 'sha256': 'drift'}, self.old[1], self.added],
+                 self.old + [self.added, {'path': 'V29__customer_order_amendments.sql', 'sha256': 'extra'}],
+                 self.old + [{**self.added, 'path': 'V28.1__recommendation_issue_date.sql'}],
+                 self.old + [{**self.added, 'path': 'V28_2__recommendation_issue_date.sql'}],
+                 self.old + [self.added, {**self.added, 'path': 'V28_01__another.sql'}]]
+        for actual in cases:
+            with self.subTest(actual=actual), self.assertRaises(RuntimeError):
+                module.schema_acceptance({**self.accepted, 'migrations': actual}, actual, self.baseline)
+
+    def test_baseline_and_schema_identity_cannot_be_relaxed(self):
+        for changes in [{'schemaBefore': 27}, {'schemaAfter': 28}, {'schemaAfter': 28.1}, {'schemaAfter': '28_1'},
+                        {'migrationChanges': False}, {'migrationChanges': 1}]:
+            with self.subTest(changes=changes), self.assertRaises(RuntimeError):
+                module.schema_acceptance({**self.accepted, **changes}, self.accepted['migrations'], self.baseline)
+        for baseline in [None, {**self.baseline, 'migrations': []}, {**self.baseline, 'schemaAfter': 27}]:
+            with self.subTest(baseline=baseline), self.assertRaises(RuntimeError):
+                module.schema_acceptance(self.accepted, self.accepted['migrations'], baseline)
+
+    def test_fixed_c2_baseline_path_and_hash_are_required(self):
+        value = {**self.accepted, 'migrationBaseline': {'path': module.ARTICLE_BASELINE_PATH, 'sha256': module.ARTICLE_BASELINE_SHA256}}
+        with patch.object(module, 'digest', return_value=module.ARTICLE_BASELINE_SHA256), patch.object(Path, 'read_text', return_value=json.dumps(self.baseline)):
+            self.assertEqual(module.migration_baseline(value), self.baseline)
+        for path, digest in [('docs/reports/c1-profile-20261109/accepted-inputs.json', module.ARTICLE_BASELINE_SHA256),
+                             (module.ARTICLE_BASELINE_PATH, 'wrong')]:
+            with patch.object(module, 'digest', return_value=digest), self.assertRaises(RuntimeError):
+                module.migration_baseline({**value, 'migrationBaseline': {'path': path, 'sha256': digest}})
+
+    def test_real_sql_is_byte_pinned_not_only_named(self):
+        sql = (Path(__file__).resolve().parents[1] / 'backend/src/main/resources/db/migration' / module.ISSUE_DATE_MIGRATION).read_bytes()
+        module.issue_date_migration_acceptance(sql)
+        with self.assertRaises(RuntimeError):
+            module.issue_date_migration_acceptance(sql + b'\nUPDATE bb_recommendation_post SET issue_date=CURRENT_DATE;')
+
+    def test_tuple_normalization_matches_flyway_without_float_collapsing(self):
+        self.assertEqual(module.version_tuple('028_01_0'), (28, 1))
+        self.assertEqual(module.migration_version('V28.1__example.sql'), (28, 1))
+        self.assertGreater(module.version_tuple('28.10'), module.version_tuple('28.2'))
+        for value in [28.1, True, '28..1', '-28', '28_1_sql']:
+            with self.subTest(value=value), self.assertRaises(RuntimeError):
+                module.version_tuple(value)
+
+    def test_legacy_branches_do_not_accept_new_decimal_inventory(self):
+        for value, baseline in [({'schemaBefore': 27, 'schemaAfter': 27, 'migrationChanges': False}, None),
+                                ({'schemaBefore': 27, 'schemaAfter': 28, 'migrationChanges': True}, {'schemaAfter': 27, 'migrationChanges': False, 'migrations': self.old[:-1]}),
+                                ({'schemaBefore': 28, 'schemaAfter': 30, 'migrationChanges': True}, self.baseline)]:
+            with self.subTest(value=value), self.assertRaises(RuntimeError):
+                module.schema_acceptance({**value, 'migrations': self.accepted['migrations']}, self.accepted['migrations'], baseline)

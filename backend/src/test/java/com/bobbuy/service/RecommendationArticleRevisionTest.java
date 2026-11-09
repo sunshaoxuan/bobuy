@@ -77,6 +77,15 @@ class RecommendationArticleRevisionTest {
   var stored=json.readValue(json.writeValueAsBytes(rows.get(0)),RecommendationArticleRevision.class);rows.set(0,stored);var reconstructed=new RecommendationArticleService((RecommendationArticleRevisionRepository)Proxy.newProxyInstance(getClass().getClassLoader(),new Class<?>[]{RecommendationArticleRevisionRepository.class},(p,m,a)->{if(m.getName().equals("findByMerchantIdAndPostIdOrderById"))return List.copyOf(rows);throw new UnsupportedOperationException(m.getName());}),json);
   var replay=reconstructed.replay(post,id,payload).orElseThrow();assertEquals(before,replay.previousSourceHash());assertEquals(1,replay.appliedVersion());assertEquals(1,rows.size());
  }
+ @Test void reviewedIssueDateSurvivesAtomicArticleHistoryWithoutChangingArticleHash(){
+  String legacy=articles.sourceHash(post);post.issueDate=java.time.LocalDate.parse("2026-10-31");post.issueDateSourceRef="message:synthetic-date-source";post.issueDateSourceHash="a".repeat(64);post.issueDateReviewedBy=1000L;post.issueDateReviewedAt=Instant.parse("2026-11-09T12:00:00Z");
+  assertEquals(legacy,articles.sourceHash(post));articles.snapshot(post);
+  var input=articles.reviewedTexts(texts(),true);String payload=articles.revisionPayloadHash(post,0,legacy,input);String canonical=articles.applyReviewedRevision(post,input);post.version=1;
+  articles.recordRevision(post,UUID.randomUUID(),payload,legacy,0,1000L);assertEquals(2,rows.size());
+  var date=(Map<?,?>)rows.get(1).facts.get("issueDateReview");assertEquals("2026-10-31",date.get("issueDate"));assertEquals("message:synthetic-date-source",date.get("sourceRef"));assertEquals("a".repeat(64),date.get("sourceHash"));assertTrue(rows.get(1).facts.containsKey("revisionRequest"));
+  post.issueDate=java.time.LocalDate.parse("2026-11-01");articles.snapshot(post);assertEquals(canonical,articles.sourceHash(post));assertEquals(4,articles.current(post).size());
+  assertEquals("2026-10-31",date.get("issueDate"));assertEquals("2026-11-01",((Map<?,?>)rows.get(2).facts.get("issueDateReview")).get("issueDate"));
+ }
  @Test void sameUuidDifferentPayloadConflictsAndNeverMutatesHistory(){
   String before=articles.sourceHash(post);var id=UUID.randomUUID();String payload=articles.revisionPayloadHash(post,0,before,texts());articles.applyReviewedRevision(post,texts());post.version=1;articles.recordRevision(post,id,payload,before,0,1000L);
   assertThrows(RecommendationArticleService.RevisionConflict.class,()->articles.replay(post,id,"f".repeat(64)));assertEquals(1,rows.size());

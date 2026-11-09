@@ -1,5 +1,7 @@
 import { message } from 'antd';
 import { prepareImageUpload } from './imageUpload';
+import type {RecommendationIssueDateReview,RecommendationIssueDateRequest} from './components/RecommendationIssueDateEditor';
+export type {RecommendationIssueDateReview,RecommendationIssueDateRequest} from './components/RecommendationIssueDateEditor';
 import {
     clearAuthSession,
     getStoredAccessToken,
@@ -1011,7 +1013,7 @@ export type AiOnboardingSuggestion = {
     };
 };
 
-export type RecommendationSummary = { id: number; title: string; published: boolean; version: number; updatedAt: string; publishedAt?: string; publisherName?: string; coverImageUrl?: string; merchantId?:number;articleTitles?:Record<string,string> };
+export type RecommendationSummary = { id: number; title: string; published: boolean; version: number; updatedAt: string; publishedAt?: string; publisherName?: string; coverImageUrl?: string; merchantId?:number;articleTitles?:Record<string,string>;issueDate?:string|null;issueDateSource?:'REVIEWED_SOURCE'|'UNKNOWN' };
 export type ReferenceOfferContext={supplierKey?:string;channel?:'COSTCO_WAREHOUSE'|'COSTCO_ONLINE';variantKey?:string;sourceMessageKey?:string;sourceUrl?:string;activityStart?:string|null;activityEnd?:string|null;activityApplies?:boolean;windowEvidence?:string;startSearchComplete?:boolean};
 export type ReferenceResolution={state:string;amount:number|null;itemIds:number[];unknownWindows:number};
 export type RecommendationFacts = { brand?:string|null;model?:string|null;packaging?:string|null;specification?:string|null; name: string; itemNumber?: string | null; referencePrice?: number | null; originalPrice?: number | null; discountAmount?: number | null; priceUnit?: string | null; offerStart?: string | null; offerEnd?: string | null; couponStart?: string | null; couponEnd?: string | null; offerNotes?: string | null;referenceContext?:ReferenceOfferContext|null;referenceQuote?:ReferenceResolution };
@@ -1071,12 +1073,29 @@ async function recommendationMutation<T>(url:string,body:object):Promise<T> {
     if(!response.ok){if(response.status===401)clearAuthSession();throw Object.assign(new Error(await parseErrorMessage(response)),{status:response.status});}
     return parseSuccessPayload<T>(response);
 }
+function issueDateFailure(status:number,errorCode?:string){return Object.assign(new Error(genericErrorMessage()),{status,errorCode});}
+async function requestRecommendationIssueDate(id:number,accessToken:string,method:'GET'|'PUT',input?:Readonly<RecommendationIssueDateRequest>):Promise<RecommendationIssueDateReview>{
+    const current=()=>typeof accessToken==='string'&&!!accessToken&&getStoredAccessToken()===accessToken;
+    if(!Number.isSafeInteger(id)||id<1||!current())throw issueDateFailure(409,'SESSION_CHANGED');
+    if(method==='PUT'&&(!input||input.reviewed!==true))throw issueDateFailure(400,'INVALID_REQUEST');
+    const body=method==='PUT'?JSON.stringify({issueDate:input!.issueDate,sourceRef:input!.sourceRef,sourceHash:input!.sourceHash,version:input!.version,reviewed:true}):undefined;
+    // Deliberately bind this operation to its captured token. Never retry a date write through another session.
+    const response=await fetch(recommendationBase+'/'+id+'/issue-date',{method,credentials:'same-origin',cache:'no-store',headers:{'Accept-Language':getStoredLocale(),Authorization:'Bearer '+accessToken,...(method==='PUT'?{'Content-Type':'application/json'}:{})},body});
+    if(!current())throw issueDateFailure(409,'SESSION_CHANGED');
+    if(!response.ok){let errorCode:string|undefined;try{const value=await response.json() as {errorCode?:unknown};if(typeof value.errorCode==='string'&&/^[A-Z_]{1,100}$/.test(value.errorCode))errorCode=value.errorCode;}catch{/* Keep the original HTTP status. */}throw issueDateFailure(response.status,errorCode);}
+    const value=await response.json() as ApiResponse<RecommendationIssueDateReview>;
+    if(!current())throw issueDateFailure(409,'SESSION_CHANGED');
+    if(value?.status!=='success'||!value.data)throw issueDateFailure(200,'INVALID_RESPONSE');
+    return value.data;
+}
 export const recommendationApi = {
     articleRevision:async(id:number,input:ArticleRevisionInput)=>{
         const response=await authorizedFetch(recommendationBase+'/'+id+'/article-revision',{method:'PUT',body:JSON.stringify(input)},{withJsonContentType:true});
         if(!response.ok)throw Object.assign(new Error(await parseErrorMessage(response)),{status:response.status});
         return parseSuccessPayload<ArticleRevisionReceipt>(response);
     },
+    getIssueDate:(id:number,accessToken:string)=>requestRecommendationIssueDate(id,accessToken,'GET'),
+    saveIssueDate:(id:number,input:Readonly<RecommendationIssueDateRequest>,accessToken:string)=>requestRecommendationIssueDate(id,accessToken,'PUT',input),
     createService:(offer:ServiceOffer)=>postJson<RecommendationDetail,ServiceOffer>(recommendationBase+'/service-offers',offer),
     saveService:(id:number,offer:ServiceOffer,version:number)=>putJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/service-offer',{offer,version}),
     articleLanguage:(id:number,input:{locale:string;title:string;body:string;sourceHash:string;version:number;reviewed:boolean})=>putJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/article-localizations',input),
@@ -1475,7 +1494,7 @@ export type ProductBrowseCard=Omit<PublicCatalogEntry,'gallery'|'description'|'r
 export type RecommendationBrowseItem=Omit<RecommendationItem,'imageUrl'|'gallery'|'description'|'sourceFacts'>&{image:RecommendationPicture|null};
 export type ServiceBrowseCard=Pick<ServiceOffer,'provider'|'staff'|'hours'|'originalPrice'|'price'|'currency'|'taxIncluded'|'fees'|'noExtraFees'|'applicationStart'|'applicationEnd'|'serviceStart'|'serviceEnd'>;
 export type RecommendationOccurrence={key:string;post:RecommendationSummary;title:string;history:boolean;item:RecommendationBrowseItem|null;service:boolean;serviceSummary:ServiceBrowseCard|null};
-export type IssueDirectoryEntry={post:RecommendationSummary;title:string;history:boolean;itemCount:number;service:boolean};
+export type IssueDirectoryEntry={post:RecommendationSummary;title:string;history:boolean;itemCount:number;service:boolean;publicItemCount?:number;issueDate?:string|null;issueDateSource?:'REVIEWED_SOURCE'|'UNKNOWN';suppliers?:RecommendationLabel[]};
 export type IssueDirectoryPage={items:IssueDirectoryEntry[];page:number;size:number;total:number;hasNext:boolean;revision:string;datasetRevision:string;japanDay:string};
 
 function buildChatCursorQuery(params?: { beforeId?: number; limit?: number }, hasExistingQuery = false) {
