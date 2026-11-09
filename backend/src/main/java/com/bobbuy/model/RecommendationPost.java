@@ -26,4 +26,18 @@ public class RecommendationPost {
     public java.time.Instant publishedAt;
     public Long publisherId;
     @Column(length = 255) public String publisherName;
+    public java.time.LocalDate issueDate;
+    @Column(length = 2048) public String issueDateSourceRef;
+    @Column(length = 64) public String issueDateSourceHash;
+    public Long issueDateReviewedBy;
+    public java.time.Instant issueDateReviewedAt;
+
+    /** A publication/edit timestamp or a partially populated review is never an issue date. */
+    public boolean hasReviewedIssueDate() {
+        return issueDate!=null&&issueDateSourceRef!=null&&!issueDateSourceRef.isBlank()
+            &&issueDateSourceHash!=null&&issueDateSourceHash.matches("[0-9a-f]{64}")
+            &&issueDateReviewedBy!=null&&issueDateReviewedBy>0&&issueDateReviewedAt!=null;
+    }
+    public java.time.LocalDate reviewedIssueDate(){return hasReviewedIssueDate()?issueDate:null;}
+    public String issueDateSource(){return hasReviewedIssueDate()?"REVIEWED_SOURCE":"UNKNOWN";}
 }

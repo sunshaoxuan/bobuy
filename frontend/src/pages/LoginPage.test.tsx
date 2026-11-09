@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { createMemoryRouter, RouterProvider, Route, Routes } from 'react-router-dom';
 import LoginPage from './LoginPage';
 import { UserRoleProvider } from '../context/UserRoleContext';
 import { I18nProvider } from '../i18n';
@@ -20,7 +20,10 @@ vi.mock('../api', () => ({
 }));
 
 describe('LoginPage', () => {
-  beforeEach(() => {
+  afterEach(()=>{vi.unstubAllGlobals();});
+  beforeEach(async () => {
+    const {transferableAbortController}=await vi.importActual<{transferableAbortController:()=>AbortController}>('node:util');
+    vi.stubGlobal('AbortController',class {constructor(){return transferableAbortController();}});
     localStorage.clear();
     mocks.login.mockReset();
     mocks.me.mockReset();
@@ -39,12 +42,10 @@ describe('LoginPage', () => {
     render(
       <I18nProvider>
         <UserRoleProvider>
-          <MemoryRouter initialEntries={['/login']}>
-            <Routes>
+          <RouterProvider router={createMemoryRouter([{path:'*',element:<Routes>
               <Route path="/login" element={<LoginPage />} />
           <Route path="/admin/dashboard" element={<div>dashboard-home</div>} />
-            </Routes>
-          </MemoryRouter>
+            </Routes>}],{initialEntries:['/login']})}/>
         </UserRoleProvider>
       </I18nProvider>
     );

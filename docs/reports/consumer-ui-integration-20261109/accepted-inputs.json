@@ -1,15 +1,15 @@
 {
-  "candidateKind": "ARTICLE_DIGEST_EDITOR_V1",
-  "candidate": "Combined consumer UI: exact article core bf0 + menu R7 d089 + detail R4 b659; no migration",
-  "baseHead": "bf0ca746f2612c797ad2427d6e204007e94fc04b",
+  "candidateKind": "CONSUMER_UI_WITH_REVIEWED_ISSUE_DATE_V1",
+  "candidate": "Complete5746 consumer UI plus exact6bf source-date metadata and00e60 navigation repair",
+  "baseHead": "5746dc71508744161fc3bb0797dd45e6228b05aa",
   "sourceDigestAlgorithm": "sha256-json-utf8-sourceFiles-v1",
-  "sourceDigest": "6f338413e760734d6c08273013230d3cf16ab46566410c994290237575de8ced",
-  "sourceFileCount": 691,
+  "sourceDigest": "8064965a8a84fc453c1e34e6c3b2a860f30adf2fa3c2c401f303d04b3bea252e",
+  "sourceFileCount": 713,
   "sourceFiles": [
     {
       "path": ".github/workflows/ci.yml",
-      "gitLfBytes": 9064,
-      "gitLfSha256": "05bf606641b5ee608db795a79d52f32280087471ab69c54da9e78443c3f79da3"
+      "gitLfBytes": 9588,
+      "gitLfSha256": "c0ce293b514b0bd934be8590eb300a7a03bae018c04cad308ed95caa08973fd4"
     },
     {
       "path": "backend/Dockerfile",
@@ -360,6 +360,16 @@
       "path": "backend/src/main/java/com/bobbuy/api/RecommendationController.java",
       "gitLfBytes": 11654,
       "gitLfSha256": "e252955f9a64bfb9dc955af2e7d66141daca31463fb94e5a91d29f6cdc1f1de4"
+    },
+    {
+      "path": "backend/src/main/java/com/bobbuy/api/RecommendationIssueDateController.java",
+      "gitLfBytes": 1229,
+      "gitLfSha256": "958569a0f336976c80cee5c0dacb00eee9f126b032b436b2cdf61c97eeee2de6"
+    },
+    {
+      "path": "backend/src/main/java/com/bobbuy/api/RecommendationIssueDateRequest.java",
+      "gitLfBytes": 625,
+      "gitLfSha256": "a15801125cae9f1b6a5f77e278b7b22630dabcac0d6dfda000c162fe4134ffb8"
     },
     {
       "path": "backend/src/main/java/com/bobbuy/api/RecommendationTaxonomyController.java",
@@ -743,8 +753,8 @@
     },
     {
       "path": "backend/src/main/java/com/bobbuy/model/RecommendationPost.java",
-      "gitLfBytes": 1450,
-      "gitLfSha256": "15961a9f7cb572f1c16e38b8371f76164c42c64868f7927961396e81e0646fa7"
+      "gitLfBytes": 2305,
+      "gitLfSha256": "70ecf2da7f578a811f8377ce5188c6e3a29aaaada262124fa3b336c73bd86efb"
     },
     {
       "path": "backend/src/main/java/com/bobbuy/model/RecommendationServiceOffer.java",
@@ -983,8 +993,8 @@
     },
     {
       "path": "backend/src/main/java/com/bobbuy/repository/RecommendationPostRepository.java",
-      "gitLfBytes": 952,
-      "gitLfSha256": "5203d7a7f43a66ce2c7d1c7b2f3f0df49a9e75fb3e5de8271799bc98214b3b2a"
+      "gitLfBytes": 1403,
+      "gitLfSha256": "3be9d660751d4251057625d832617da958768662cdb1da254694cc563e73e994"
     },
     {
       "path": "backend/src/main/java/com/bobbuy/repository/ReferenceQuoteRevisionRepository.java",
@@ -1318,13 +1328,13 @@
     },
     {
       "path": "backend/src/main/java/com/bobbuy/service/PublicRecommendationBrowseService.java",
-      "gitLfBytes": 10540,
-      "gitLfSha256": "d6563cf7d04589f3ce815918bbb0069fc2a564dc88e752c7331d7ae032392e23"
+      "gitLfBytes": 12128,
+      "gitLfSha256": "a6b6d645245bc86d55cb365ae0779379d6fcb6649af2c8d7316b0488fd068bba"
     },
     {
       "path": "backend/src/main/java/com/bobbuy/service/RecommendationArticleService.java",
-      "gitLfBytes": 9374,
-      "gitLfSha256": "96cb3d023c9b8721e1cc9aa1d0c81c82a4a65d4ae70a983f1950d104a86bf4fa"
+      "gitLfBytes": 9814,
+      "gitLfSha256": "e89eda7bde6a17ece5464dce1495ee9e3e451177a4c93e4d8e1026f19dc86331"
     },
     {
       "path": "backend/src/main/java/com/bobbuy/service/RecommendationCatalogService.java",
@@ -1342,9 +1352,14 @@
       "gitLfSha256": "bba7dea511117b2d00d09fcda518fe23fc5e806da4c31e4d4cb750fd5d8beb3e"
     },
     {
+      "path": "backend/src/main/java/com/bobbuy/service/RecommendationIssueDateService.java",
+      "gitLfBytes": 4340,
+      "gitLfSha256": "2ec75e6020b01e609a093af3fefac67dcc6978f7477c12e907e3f46e62d36a82"
+    },
+    {
       "path": "backend/src/main/java/com/bobbuy/service/RecommendationService.java",
-      "gitLfBytes": 37254,
-      "gitLfSha256": "35637145f00dfe6666d2542376033e9d6d6c1c711c84c1d965e6bbba7c118826"
+      "gitLfBytes": 37716,
+      "gitLfSha256": "ee086006eea766166cb7b52ac09beade751c53c39bf236da58026d8a0a20685f"
     },
     {
       "path": "backend/src/main/java/com/bobbuy/service/RecommendationSourceImage.java",
@@ -1562,6 +1577,11 @@
       "gitLfSha256": "8135ea648c892378ebe2234ee0247c43a89e1d4d040d4898305966768b9e2f83"
     },
     {
+      "path": "backend/src/main/resources/db/migration/V28_1__recommendation_issue_date.sql",
+      "gitLfBytes": 1172,
+      "gitLfSha256": "d742bea25cb8ef3d205c9e2a4992d25024a372b5ab9dc38dc915f0ebbb91224e"
+    },
+    {
       "path": "backend/src/main/resources/db/migration/V28__checkout_delivery_snapshot.sql",
       "gitLfBytes": 303,
       "gitLfSha256": "0319fbc4e12e87f033416bed9e4918ae584d2e0bfa6a35525eda9a597f518443"
@@ -1772,9 +1792,24 @@
       "gitLfSha256": "43fae04591c89171f78e2a3040f8ef66d4268bb02a1ee5a194db9652f88ddc36"
     },
     {
+      "path": "backend/src/test/java/com/bobbuy/api/RecommendationDirectoryMetadataHttpTest.java",
+      "gitLfBytes": 4107,
+      "gitLfSha256": "1cd1e23e25bc4e812bae3aaa3d2de3cdc54726ae1eb4df8835ef6de227241c9b"
+    },
+    {
       "path": "backend/src/test/java/com/bobbuy/api/RecommendationIntegrationTest.java",
       "gitLfBytes": 31179,
       "gitLfSha256": "e58bded29e2c4da574077d68b4f14aeb6271405fec2346e9c38f6261cde081d6"
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/RecommendationIssueDateControllerTest.java",
+      "gitLfBytes": 3987,
+      "gitLfSha256": "35b783ec3fc3a2befe8dc242a308a07d138c764526fdc83277ff958453216d51"
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/RecommendationIssueDateIntegrationTest.java",
+      "gitLfBytes": 11785,
+      "gitLfSha256": "a616076c4f524dc2c10d742fa740eb9b10b6ce111afcf009711fd877e0c7481e"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/api/RecommendationNodeTest.java",
@@ -1847,6 +1882,11 @@
       "gitLfSha256": "dbae3b83e664bfb1ac79cf4dc12dcf2cef8f0ac3c3de3522dbf8aa428609a835"
     },
     {
+      "path": "backend/src/test/java/com/bobbuy/compat/PreviousRecommendationPost.java",
+      "gitLfBytes": 1621,
+      "gitLfSha256": "3f6fa84c4a17da9ba65faf51fe64ce89c3a7267d979f87426f1e151e00264909"
+    },
+    {
       "path": "backend/src/test/java/com/bobbuy/config/WebSocketAuthenticationChannelInterceptorTest.java",
       "gitLfBytes": 5512,
       "gitLfSha256": "4b6c3091b876ec33f67d3a3cd775626f588a9ca0f783d4be2f5f4fb0a30fc6da"
@@ -1860,6 +1900,11 @@
       "path": "backend/src/test/java/com/bobbuy/model/ModelTest.java",
       "gitLfBytes": 8704,
       "gitLfSha256": "1128bd82c769f0d970b166da8fcca8035c95e8e71534b3d8aa994988a9647500"
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/repository/RecommendationIssueDateMigrationIntegrationTest.java",
+      "gitLfBytes": 8367,
+      "gitLfSha256": "fe7783da8edb2086027cf44854b7b3b642851eba52152e773b7841f63a312fcc"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/security/CustomerIdentityResolverTest.java",
@@ -2018,13 +2063,13 @@
     },
     {
       "path": "backend/src/test/java/com/bobbuy/service/PublicRecommendationBrowseServiceTest.java",
-      "gitLfBytes": 6453,
-      "gitLfSha256": "60182efb64017992763a625151abff2b90387e669494344fb9b498eac141539d"
+      "gitLfBytes": 13419,
+      "gitLfSha256": "5292f7f8447071ba738ca1bdf5b0e9da967433096ccd82a8d70b967b3675c487"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/service/RecommendationArticleRevisionTest.java",
-      "gitLfBytes": 12517,
-      "gitLfSha256": "e90c64d70239c07118ab79fa2dea2896818ad0cf89e0d22047285e9678a59a72"
+      "gitLfBytes": 13881,
+      "gitLfSha256": "9eba53acf387467920b43da783cde75e25042e3a0e00364b6e7eca37d4ec5f04"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/service/RecommendationFromProductTest.java",
@@ -2035,6 +2080,11 @@
       "path": "backend/src/test/java/com/bobbuy/service/RecommendationIdentityTest.java",
       "gitLfBytes": 2765,
       "gitLfSha256": "a74df8d5a50bc631589dca241ab4bda6da0ed03e3f610baf58f20ffc08f16738"
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/RecommendationIssueDateServiceTest.java",
+      "gitLfBytes": 7588,
+      "gitLfSha256": "5bed16f4f21609b6f99c35c32d3452a462a6dd821bc40c3f5bd5ba262b56fce2"
     },
     {
       "path": "backend/src/test/java/com/bobbuy/service/RecommendationSourceImageTest.java",
@@ -2125,6 +2175,16 @@
       "path": "docs/reports/C2-CART-20261109.md",
       "gitLfBytes": 14328,
       "gitLfSha256": "0053aa2aef77e88778694281976fa514bae38629303f10e288c07de78ff04078"
+    },
+    {
+      "path": "docs/reports/CONSUMER-UI-COMPLETE-20261109.md",
+      "gitLfBytes": 3790,
+      "gitLfSha256": "0098d69e23fc75b2f8fe70c040f33c9d22d1e751f778288381412fdb44d917c3"
+    },
+    {
+      "path": "docs/reports/CONSUMER-UI-INTEGRATION-20261109.md",
+      "gitLfBytes": 2439,
+      "gitLfSha256": "0a021bf55cd6709185d9a00cd4f81e534a2fbd6c515ff0c6842abef0120d586d"
     },
     {
       "path": "docs/reports/c2-cart-20261109/accepted-inputs.json",
@@ -2287,14 +2347,19 @@
       "gitLfSha256": "b9391a2980d581427c5721ca9cf973df0a36d200455e3dd5ca4f8a0744d12d7e"
     },
     {
+      "path": "frontend/src/api.issueDate.test.ts",
+      "gitLfBytes": 4634,
+      "gitLfSha256": "3deb0b6abf6210e396dede18ef7545fbf97e8fb9b580adf79100f84e49885d11"
+    },
+    {
       "path": "frontend/src/api.test.ts",
       "gitLfBytes": 6568,
       "gitLfSha256": "d209cd1ef2097854856b770f96153d20cad19422cb983e015744014a9b76808c"
     },
     {
       "path": "frontend/src/api.ts",
-      "gitLfBytes": 71195,
-      "gitLfSha256": "e245b70519514abc2cd1526ce900809f6a24c6532bdcf79c93631b857cf484fc"
+      "gitLfBytes": 73610,
+      "gitLfSha256": "7779cc60ca0e0570f8b52898b4c00b689eda72efc8ee16e986f4ac1a86258745"
     },
     {
       "path": "frontend/src/authStorage.test.ts",
@@ -2387,6 +2452,11 @@
       "gitLfSha256": "3a84f7a43d6ddd9ad49a887468597269139359091523eba879442a30ba44b6a6"
     },
     {
+      "path": "frontend/src/components/CatalogReferenceHistory.tsx",
+      "gitLfBytes": 2169,
+      "gitLfSha256": "de56b6496e70ed6f4cf342aef5c227fc088d5e69025af477ee1d3fe1e853b051"
+    },
+    {
       "path": "frontend/src/components/ChatWidget.test.tsx",
       "gitLfBytes": 9147,
       "gitLfSha256": "ce2595197357d4c5b36599df1b56fbd719682dedf94425aeb42f6bc2045b56c7"
@@ -2395,6 +2465,11 @@
       "path": "frontend/src/components/ChatWidget.tsx",
       "gitLfBytes": 42775,
       "gitLfSha256": "e7943627cfb6525f2fd1fe5bdf5db8c2d372a9d76465f40d289b9b82d81b9537"
+    },
+    {
+      "path": "frontend/src/components/ConsumerDetail.test.tsx",
+      "gitLfBytes": 6315,
+      "gitLfSha256": "3613f46fc62a8208353cab4eb9096e3c1bf37403abdd13eaa3b4590c8a481afe"
     },
     {
       "path": "frontend/src/components/ConsumerDetail.tsx",
@@ -2610,6 +2685,26 @@
       "path": "frontend/src/components/RecommendationImageViewer.tsx",
       "gitLfBytes": 5205,
       "gitLfSha256": "62b97c338b4af5e9646d208afb150955b217516806c4f86a15c433fcc2476e7b"
+    },
+    {
+      "path": "frontend/src/components/RecommendationIssueDateEditor.test.tsx",
+      "gitLfBytes": 15400,
+      "gitLfSha256": "e383d3d54d63aef325755c0feccd80c4881f1106c63dfcc029f08ce91f7c54d8"
+    },
+    {
+      "path": "frontend/src/components/RecommendationIssueDateEditor.tsx",
+      "gitLfBytes": 11043,
+      "gitLfSha256": "0754fd7d610f86a51eed2019a11d582b6dd58f992258363d42ecb1d975a29a0f"
+    },
+    {
+      "path": "frontend/src/components/RecommendationIssueDatePanel.test.tsx",
+      "gitLfBytes": 6537,
+      "gitLfSha256": "6e0a24a7a9d0f5410ea5e6aa917bf98abd0bcd1f327a6f1b8c2cadb1097013b2"
+    },
+    {
+      "path": "frontend/src/components/RecommendationIssueDatePanel.tsx",
+      "gitLfBytes": 5855,
+      "gitLfSha256": "0609d008c43d7f33c3c712fb4e7c9d0f8896d5189d7027420663be7dbbefba66"
     },
     {
       "path": "frontend/src/components/RecommendationList.test.tsx",
@@ -2848,8 +2943,8 @@
     },
     {
       "path": "frontend/src/locales/en-US.ts",
-      "gitLfBytes": 75151,
-      "gitLfSha256": "490d17cd83bac8dd624dea9757634c81fa2c72583293b1a8b2600e206c8167b0"
+      "gitLfBytes": 77189,
+      "gitLfSha256": "ec8f7674b62cd89d61d46cd8db7d6fcf584a614d4c291a345a325db78a837598"
     },
     {
       "path": "frontend/src/locales/experience.en-US.json",
@@ -2868,8 +2963,8 @@
     },
     {
       "path": "frontend/src/locales/ja-JP.ts",
-      "gitLfBytes": 84481,
-      "gitLfSha256": "1950d7497c09683e97552d39e8ae357139afb70daa15ee7744dbbbd248f4cfe9"
+      "gitLfBytes": 87036,
+      "gitLfSha256": "9c8e1ea9c0bef713b3f102a35bdee03cc04f763508502345f4c5e1be46c4edf2"
     },
     {
       "path": "frontend/src/locales/types.ts",
@@ -2878,18 +2973,18 @@
     },
     {
       "path": "frontend/src/locales/zh-CN.ts",
-      "gitLfBytes": 72260,
-      "gitLfSha256": "ebbda3b865ee51dce47cf12ea7ea7181040773b09f47a9cbab5b5b07cce4f1a6"
+      "gitLfBytes": 74228,
+      "gitLfSha256": "fcad9929e4e581ea11df10ae064acb9ed5ff73390e558c4d43bc158d2c02ad5d"
     },
     {
       "path": "frontend/src/locales/zh-TW.ts",
-      "gitLfBytes": 77248,
-      "gitLfSha256": "fa560ecdca02aa218d4385d26d61c3445a13592201c1b366f2e0f239d183d8e1"
+      "gitLfBytes": 79273,
+      "gitLfSha256": "8b1eed71a54650bdb0726fd94040951079a671ab40f8e13f55986c9aed2ad7f0"
     },
     {
       "path": "frontend/src/main.tsx",
-      "gitLfBytes": 533,
-      "gitLfSha256": "17f9ff412e485752a25257eb0c9f21df329157416b467273137c448d968160d6"
+      "gitLfBytes": 680,
+      "gitLfSha256": "48a662508f9482ece37e3589fbf9e7e1ba62f6b4e228cef5114b17d683eb2c43"
     },
     {
       "path": "frontend/src/mediaUploadApi.test.ts",
@@ -3003,8 +3098,8 @@
     },
     {
       "path": "frontend/src/pages/LoginPage.test.tsx",
-      "gitLfBytes": 1949,
-      "gitLfSha256": "e739cf61c59a15fc974b3b0d560feb7a5d1d7a6a6525311b8f4dfe1434fa9242"
+      "gitLfBytes": 2261,
+      "gitLfSha256": "73b2b08c9387da87388058d1f9d9608350a121b9d2a7b82ec964a375ff034c95"
     },
     {
       "path": "frontend/src/pages/LoginPage.tsx",
@@ -3123,18 +3218,28 @@
     },
     {
       "path": "frontend/src/pages/Recommendations.articleRevision.test.tsx",
-      "gitLfBytes": 5970,
-      "gitLfSha256": "1df57222dd48d766c32f3673f13edcbb39f5ad6d6e75b3e08214092649118f68"
+      "gitLfBytes": 6027,
+      "gitLfSha256": "9d9064d64e49bf78f29d0a955620634cb635c0de190c8b513d2029e01499085b"
+    },
+    {
+      "path": "frontend/src/pages/Recommendations.navigation.test.tsx",
+      "gitLfBytes": 7934,
+      "gitLfSha256": "b9f0d31a379e8bf4e34c17bf178464bca1e95eaf8f5d3e0ceb812ae4a2932b15"
     },
     {
       "path": "frontend/src/pages/Recommendations.test.tsx",
-      "gitLfBytes": 6541,
-      "gitLfSha256": "62f17d52f78d7a4d74e762f6c5cb2a63cadb9cf7fb8618c0bdf10b7aa4dd763a"
+      "gitLfBytes": 6635,
+      "gitLfSha256": "338505517699a0b14c8c1aba598874747a6aa911b431826484a7232f6b62f6a2"
     },
     {
       "path": "frontend/src/pages/Recommendations.tsx",
-      "gitLfBytes": 22539,
-      "gitLfSha256": "99a102ef20dc7ded43f8a1b7926009195c60956c5e626abe174040bfad88f3e6"
+      "gitLfBytes": 22945,
+      "gitLfSha256": "b1bed312fc6565eec09b609bd20859f44576a24a3cde9d85f3a70456fe196c74"
+    },
+    {
+      "path": "frontend/src/pages/RecommendationsIssueDate.test.tsx",
+      "gitLfBytes": 9077,
+      "gitLfSha256": "9d2363ed0330f196d75363ca1ded1cdc86123c6399778df5e161aed7812f77c9"
     },
     {
       "path": "frontend/src/pages/StockMaster.test.tsx",
@@ -3148,8 +3253,8 @@
     },
     {
       "path": "frontend/src/pages/StoreNavigation.test.tsx",
-      "gitLfBytes": 5473,
-      "gitLfSha256": "b48a01e06a9d56945fcb72157efb317d497ed7119ec75507bff45d01660b7d7c"
+      "gitLfBytes": 5830,
+      "gitLfSha256": "4c7ab27f0a2d574c00a07d9bc8487085e92572c9b6b1784463c76c335f446583"
     },
     {
       "path": "frontend/src/pages/Storefront.tsx",
@@ -3235,6 +3340,16 @@
       "path": "frontend/src/product-markers.css",
       "gitLfBytes": 5067,
       "gitLfSha256": "03c4602f628fa1a7ad04bee87365bd74e6787f6165aa8c3c6c8cf4d57c729071"
+    },
+    {
+      "path": "frontend/src/productDetailContent.test.ts",
+      "gitLfBytes": 5629,
+      "gitLfSha256": "20f4e01971acca1b36e56f73791ebad4cc9703e2c2d7d87c9f9b55eeb04c005d"
+    },
+    {
+      "path": "frontend/src/productDetailContent.ts",
+      "gitLfBytes": 2398,
+      "gitLfSha256": "c3e2cb4049ccb1155e24ddd590002215f7df8f1ac07d3dc273c7ffcea9f7b245"
     },
     {
       "path": "frontend/src/productMarkerApi.test.ts",
@@ -3412,9 +3527,14 @@
       "gitLfSha256": "e699a4fceb2e02c356423ab852c093477fac835b05dbefb64ea3f140776ae411"
     },
     {
+      "path": "scripts/capture-issue-date-inputs.mjs",
+      "gitLfBytes": 11589,
+      "gitLfSha256": "d72bef04274a30316a31c76bcb7de8926370ba3140da5b96fd1477648a9a17fb"
+    },
+    {
       "path": "scripts/prepare-ci-release-artifacts.py",
-      "gitLfBytes": 12017,
-      "gitLfSha256": "7eb5f9db9a8353a9dfe072bc935d73d0335d8dc8a7411de4c0fe67576714a468"
+      "gitLfBytes": 14994,
+      "gitLfSha256": "5489b95d6a852bfafa7bfa4eeb94044c0567facf9904f3393265446d70c3791b"
     },
     {
       "path": "scripts/test_capture_article_inputs.mjs",
@@ -3422,9 +3542,14 @@
       "gitLfSha256": "5f27eec4f3f5eb9a8021e524bae967efef3a831c658c439756c3120b47f110b3"
     },
     {
+      "path": "scripts/test_capture_issue_date_inputs.mjs",
+      "gitLfBytes": 5807,
+      "gitLfSha256": "896a9df7b944ac8bf061700804f989dadffb1fb8de518752b39341d55c0cdb07"
+    },
+    {
       "path": "scripts/test_prepare_ci_release_artifacts.py",
-      "gitLfBytes": 8884,
-      "gitLfSha256": "83763490d6c496ce6ebfed88496b4f2d6403b144d68c5bce65f18b006de07e99"
+      "gitLfBytes": 13816,
+      "gitLfSha256": "d370b6d82434cf50bb22804fb1795646038c08b39e0669e47456bd59d880a72a"
     },
     {
       "path": "scripts/test_verify_checkout_upgrade.py",
@@ -3432,34 +3557,19 @@
       "gitLfSha256": "20ef395d8c53bad2ae739d5fc6f46d9fe9c05ba129aa099341206d5e00d1917d"
     },
     {
+      "path": "scripts/test_verify_issue_date_upgrade.py",
+      "gitLfBytes": 11574,
+      "gitLfSha256": "5a9acdf4dc42a8e40eede8b536ab354fd79381750a706b0cef2a74cad6fb6a79"
+    },
+    {
       "path": "scripts/verify-checkout-upgrade.py",
       "gitLfBytes": 5968,
       "gitLfSha256": "3df04f06a2c5142fec37d4f6ae6c680a4c11e25b5e4b4a67926f563da02017dd"
     },
     {
-      "path": "docs/reports/CONSUMER-UI-INTEGRATION-20261109.md",
-      "gitLfBytes": 2439,
-      "gitLfSha256": "0a021bf55cd6709185d9a00cd4f81e534a2fbd6c515ff0c6842abef0120d586d"
-    },
-    {
-      "path": "frontend/src/components/CatalogReferenceHistory.tsx",
-      "gitLfBytes": 2169,
-      "gitLfSha256": "de56b6496e70ed6f4cf342aef5c227fc088d5e69025af477ee1d3fe1e853b051"
-    },
-    {
-      "path": "frontend/src/components/ConsumerDetail.test.tsx",
-      "gitLfBytes": 6315,
-      "gitLfSha256": "3613f46fc62a8208353cab4eb9096e3c1bf37403abdd13eaa3b4590c8a481afe"
-    },
-    {
-      "path": "frontend/src/productDetailContent.test.ts",
-      "gitLfBytes": 5629,
-      "gitLfSha256": "20f4e01971acca1b36e56f73791ebad4cc9703e2c2d7d87c9f9b55eeb04c005d"
-    },
-    {
-      "path": "frontend/src/productDetailContent.ts",
-      "gitLfBytes": 2398,
-      "gitLfSha256": "c3e2cb4049ccb1155e24ddd590002215f7df8f1ac07d3dc273c7ffcea9f7b245"
+      "path": "scripts/verify-issue-date-upgrade.py",
+      "gitLfBytes": 17198,
+      "gitLfSha256": "e63add1ee8072857509b58f3568fbaceb58481d6f91a237826c8bcb2db4c663d"
     }
   ],
   "lineEndingPolicy": "Canonical Git-filtered bytes cross-checked against git hash-object; explicit approved scopes only; protected dirty files excluded.",
@@ -3560,6 +3670,11 @@
       "sha256": "8135ea648c892378ebe2234ee0247c43a89e1d4d040d4898305966768b9e2f83"
     },
     {
+      "path": "V28_1__recommendation_issue_date.sql",
+      "bytes": 1172,
+      "sha256": "d742bea25cb8ef3d205c9e2a4992d25024a372b5ab9dc38dc915f0ebbb91224e"
+    },
+    {
       "path": "V28__checkout_delivery_snapshot.sql",
       "bytes": 303,
       "sha256": "0319fbc4e12e87f033416bed9e4918ae584d2e0bfa6a35525eda9a597f518443"
@@ -3601,8 +3716,8 @@
     }
   ],
   "schemaBefore": 28,
-  "schemaAfter": 28,
-  "migrationChanges": false,
+  "schemaAfter": "28.1",
+  "migrationChanges": true,
   "migrationBaseline": {
     "path": "docs/reports/c2-cart-20261109/accepted-inputs.json",
     "sha256": "48bbcc808d0a0761e112b720c276592afe52f9979031a9975247065efeb277ba"
@@ -3622,10 +3737,14 @@
     "com/bobbuy/api/RecommendationController$SourceImage.class",
     "com/bobbuy/api/RecommendationController$Version.class",
     "com/bobbuy/api/RecommendationController.class",
+    "com/bobbuy/api/RecommendationIssueDateController.class",
+    "com/bobbuy/api/RecommendationIssueDateRequest.class",
     "com/bobbuy/api/SelfProfileController.class",
     "com/bobbuy/model/EmailChallenge.class",
     "com/bobbuy/model/OrderDeliverySnapshot.class",
     "com/bobbuy/model/OrderHeader.class",
+    "com/bobbuy/model/RecommendationPost.class",
+    "com/bobbuy/repository/RecommendationPostRepository.class",
     "com/bobbuy/service/AuthService$UserProfile.class",
     "com/bobbuy/service/CheckoutFingerprint$1Quote.class",
     "com/bobbuy/service/CheckoutFingerprint.class",
@@ -3638,10 +3757,16 @@
     "com/bobbuy/service/PublicProductBrowseService$Facet.class",
     "com/bobbuy/service/PublicProductBrowseService$Missing.class",
     "com/bobbuy/service/PublicProductBrowseService.class",
+    "com/bobbuy/service/PublicRecommendationBrowseService$Issue.class",
+    "com/bobbuy/service/PublicRecommendationBrowseService$SupplierLabel.class",
+    "com/bobbuy/service/PublicRecommendationBrowseService.class",
     "com/bobbuy/service/RecommendationArticleService$ReviewedText.class",
     "com/bobbuy/service/RecommendationArticleService$RevisionConflict.class",
     "com/bobbuy/service/RecommendationArticleService$RevisionReceipt.class",
     "com/bobbuy/service/RecommendationArticleService.class",
+    "com/bobbuy/service/RecommendationIssueDateService$Changed.class",
+    "com/bobbuy/service/RecommendationIssueDateService$Review.class",
+    "com/bobbuy/service/RecommendationIssueDateService.class",
     "com/bobbuy/service/RecommendationService$ArticleRevision.class",
     "com/bobbuy/service/RecommendationService$Detail.class",
     "com/bobbuy/service/RecommendationService$Localization.class",
@@ -3661,7 +3786,7 @@
     "com/bobbuy/service/StorefrontService.class",
     "com/bobbuy/service/UserManagementService.class"
   ],
-  "requiredBackendClassCount": 52,
+  "requiredBackendClassCount": 62,
   "acceptedBackendClasses": null,
   "compiledByteAcceptance": "PENDING_INDEPENDENT_ARTIFACT_QA",
   "frontendFiles": null,
@@ -3844,14 +3969,79 @@
       "appliedUiFiles": 17,
       "unchangedArticleBackendFiles": 5,
       "noLocalRuntime": true
+    },
+    "completeIntegration": {
+      "base": "5746dc71508744161fc3bb0797dd45e6228b05aa",
+      "date": "6bf95a94d77f7daf0d067641b9f11bd6cc815ba0",
+      "navigation": "00e60cd9d5df63e422156a1368508e6b07a757f5",
+      "reviewedScope": [
+        ".github/workflows/ci.yml",
+        "backend/src/main/java/com/bobbuy/api/RecommendationIssueDateController.java",
+        "backend/src/main/java/com/bobbuy/api/RecommendationIssueDateRequest.java",
+        "backend/src/main/java/com/bobbuy/model/RecommendationPost.java",
+        "backend/src/main/java/com/bobbuy/repository/RecommendationPostRepository.java",
+        "backend/src/main/java/com/bobbuy/service/PublicRecommendationBrowseService.java",
+        "backend/src/main/java/com/bobbuy/service/RecommendationArticleService.java",
+        "backend/src/main/java/com/bobbuy/service/RecommendationIssueDateService.java",
+        "backend/src/main/java/com/bobbuy/service/RecommendationService.java",
+        "backend/src/main/resources/db/migration/V28_1__recommendation_issue_date.sql",
+        "backend/src/test/java/com/bobbuy/api/RecommendationDirectoryMetadataHttpTest.java",
+        "backend/src/test/java/com/bobbuy/api/RecommendationIssueDateControllerTest.java",
+        "backend/src/test/java/com/bobbuy/api/RecommendationIssueDateIntegrationTest.java",
+        "backend/src/test/java/com/bobbuy/compat/PreviousRecommendationPost.java",
+        "backend/src/test/java/com/bobbuy/repository/RecommendationIssueDateMigrationIntegrationTest.java",
+        "backend/src/test/java/com/bobbuy/service/PublicRecommendationBrowseServiceTest.java",
+        "backend/src/test/java/com/bobbuy/service/RecommendationArticleRevisionTest.java",
+        "backend/src/test/java/com/bobbuy/service/RecommendationIssueDateServiceTest.java",
+        "docs/reports/CONSUMER-UI-COMPLETE-20261109.md",
+        "frontend/src/api.issueDate.test.ts",
+        "frontend/src/api.ts",
+        "frontend/src/components/RecommendationIssueDateEditor.test.tsx",
+        "frontend/src/components/RecommendationIssueDateEditor.tsx",
+        "frontend/src/components/RecommendationIssueDatePanel.test.tsx",
+        "frontend/src/components/RecommendationIssueDatePanel.tsx",
+        "frontend/src/locales/en-US.ts",
+        "frontend/src/locales/ja-JP.ts",
+        "frontend/src/locales/zh-CN.ts",
+        "frontend/src/locales/zh-TW.ts",
+        "frontend/src/main.tsx",
+        "frontend/src/pages/LoginPage.test.tsx",
+        "frontend/src/pages/Recommendations.articleRevision.test.tsx",
+        "frontend/src/pages/Recommendations.navigation.test.tsx",
+        "frontend/src/pages/Recommendations.test.tsx",
+        "frontend/src/pages/Recommendations.tsx",
+        "frontend/src/pages/RecommendationsIssueDate.test.tsx",
+        "frontend/src/pages/StoreNavigation.test.tsx",
+        "scripts/capture-issue-date-inputs.mjs",
+        "scripts/prepare-ci-release-artifacts.py",
+        "scripts/test_capture_issue_date_inputs.mjs",
+        "scripts/test_prepare_ci_release_artifacts.py",
+        "scripts/test_verify_issue_date_upgrade.py",
+        "scripts/verify-issue-date-upgrade.py"
+      ],
+      "oldSqlPrefixUnchanged": true,
+      "onlyAddedSql": "V28_1__recommendation_issue_date.sql",
+      "oldUiVisualSourcesUnchanged": [
+        "frontend/src/components/IssueDirectory.tsx",
+        "frontend/src/components/issue-directory.css",
+        "frontend/src/components/ConsumerDetail.tsx",
+        "frontend/src/pages/PublicRecommendations.tsx",
+        "frontend/src/pages/RecommendationBrowse.tsx"
+      ],
+      "sourceReview": "prior5746 static55/55 reused only for unchanged source",
+      "dateAndArticleHistoryMerge": true,
+      "normalDateEditor": "owner AGENT; reviewed source needed; no automatic inference/backfill",
+      "globalRouterRepairIncluded": true,
+      "productionActions": 0,
+      "localHeavyServices": 0
     }
   },
   "qa": {
-    "status": "INTEGRATED_SOURCE_APPLIED_REMOTE_CI_AND_INDEPENDENT_FORMAL_PACKAGE_QA_PENDING",
+    "status": "COMPLETE_SOURCE_FROZEN_REMOTE_COMBINED_CI_AND_INDEPENDENT_QA_PENDING",
     "sourceOnly": true,
     "backendRuntimeAccepted": false,
     "migrationRuntimeAccepted": false,
-    "formalBuildAndNonProductionBrowserAcceptance": "PENDING_REQUIRED_BEFORE_PUBLISH",
+    "formalBuildAndNonProductionBrowserAcceptance": "PENDING_REQUIRED",
     "productionPublishAllowed": false,
     "committedReport": "docs/reports/CONSUMER-UI-INTEGRATION-20261109.md",
     "lightweightSnapshotChecks": {
@@ -3861,6 +4051,7 @@
       "componentUniqueTotal": 86,
       "files": 8
     },
-    "originalIndependentPackageQaNotSuperseded": true
+    "originalIndependentPackageQaNotSuperseded": true,
+    "old82Bf0WholeApplicationOnV28_1": "NOT_RUN"
   }
 }

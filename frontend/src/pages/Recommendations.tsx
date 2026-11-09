@@ -1,8 +1,8 @@
 import RecommendationList from '../components/RecommendationList';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Alert, Button, Checkbox, Empty, Input, Pagination, Popconfirm, Spin, Tag, Tooltip } from 'antd';
+import { Alert, Button, Checkbox, Empty, Input, Modal, Pagination, Spin, Tag, Tooltip } from 'antd';
 import { ArrowLeftOutlined, CheckOutlined, CopyOutlined, DeleteOutlined, EditOutlined, EyeOutlined, PlusOutlined, ReloadOutlined, SaveOutlined, SendOutlined, UploadOutlined } from '@ant-design/icons';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useBlocker, useSearchParams } from 'react-router-dom';
 import { recommendationApi as api, type RecommendationDetail, type RecommendationSummary, type RecommendationFacts } from '../api';
 import { FactsForm, OfferInfo, factsError, parseBatch, factFields } from '../components/RecommendationFacts';
 import {RecommendationPreview} from './PublicRecommendations';
@@ -14,6 +14,7 @@ import ReferenceQuoteHistory from '../components/ReferenceQuoteHistory';
 import ArticleLanguages from '../components/ArticleLanguages';
 import {mergeArticleEditor,readArticleSession,useArticleSession,type ArticleEditorState} from '../components/PublishedArticleRevision';
 import RecommendationServiceEditor from '../components/RecommendationServiceEditor';
+import RecommendationIssueDatePanel,{applyRecommendationIssueDate} from '../components/RecommendationIssueDatePanel';
 import '../browse.css';
 import RecommendationClassification from '../components/RecommendationClassification';
 import { useI18n } from '../i18n';
@@ -61,6 +62,8 @@ export default function Recommendations() {
   const [classificationPending,setClassificationPending]=useState(false);
   const [fromProductPending,setFromProductPending]=useState(false);
   const [articlePending,setArticlePending]=useState(false);
+  const [issueDatePending,setIssueDatePending]=useState(false);
+  const activePostId=useRef(id);activePostId.current=id;
   const [serviceOpen,setServiceOpen]=useState(false);
   const [editingItem, setEditingItem] = useState<number>();
   const [editFacts, setEditFacts] = useState<RecommendationFacts>({name:''});
@@ -71,7 +74,10 @@ export default function Recommendations() {
   const published = detail?.post.published;
   const identity = (item: RecommendationDetail['items'][number]) => item.productId || 'recommendation:'+item.id;
   const products = [...new Map(detail?.items.map(item => [identity(item), item])).values()];
-  const pending = preparing || queue.some(item => item.status !== 'done') || editingItem !== undefined || !!batch.trim() || classificationPending || fromProductPending||articlePending||serviceOpen;
+  const pending = preparing || queue.some(item => item.status !== 'done') || editingItem !== undefined || !!batch.trim() || classificationPending || fromProductPending||articlePending||issueDatePending||serviceOpen;
+  const navigation = useBlocker(({currentLocation,nextLocation}) => !!detail && (dirty || pending) &&
+    (currentLocation.pathname !== nextLocation.pathname || currentLocation.search !== nextLocation.search));
+  useEffect(()=>{if(!detail&&navigation.state==='blocked')navigation.reset();},[detail,navigation]);
   useEffect(() => () => { selectionEpoch.current++; urls.current.forEach(url => URL.revokeObjectURL(url)); }, []);
   useEffect(() => {
     if (!dirty && !pending) return;
@@ -79,22 +85,9 @@ export default function Recommendations() {
     window.addEventListener('beforeunload', prevent);
     return () => window.removeEventListener('beforeunload', prevent);
   }, [dirty, pending]);
-  useEffect(()=>{
-    if(!articlePending)return;
-    const confirmLink=(event:MouseEvent)=>{
-      if(event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
-      const link=event.target instanceof Element?event.target.closest('a[href]'):null;
-      if(!(link instanceof HTMLAnchorElement)||link.hasAttribute('download')||(link.target&&link.target!=='_self'))return;
-      const url=new URL(link.href,location.href);
-      if(!['http:','https:'].includes(url.protocol)||(url.origin===location.origin&&url.pathname===location.pathname&&url.search===location.search))return;
-      if(!window.confirm(t('rec.leave'))){event.preventDefault();event.stopPropagation();}
-    };
-    document.addEventListener('click',confirmLink,true);
-    return()=>document.removeEventListener('click',confirmLink,true);
-  },[articlePending,t]);
   useEffect(() => {
     let active=true;const prior=loadScope.current,reset=!prior||prior.id!==id||prior.page!==page||prior.actorKey!==session.actorKey;loadScope.current={id,page,actorKey:session.actorKey};
-    if(reset){selectionEpoch.current++;setPreparing(false);urls.current.forEach(url=>URL.revokeObjectURL(url));urls.current.clear();setQueue([]);setQueuePage(1);setItemPage(1);setGenerated('');setPrompt('');setEditingItem(undefined);setBatch('');setPreview(false);setClassificationPending(false);setArticlePending(false);setFromProductPending(false);setBusy(false);setWriting(false);setList([]);setLoading(true);setDetail(undefined);}
+    if(reset){selectionEpoch.current++;setPreparing(false);urls.current.forEach(url=>URL.revokeObjectURL(url));urls.current.clear();setQueue([]);setQueuePage(1);setItemPage(1);setGenerated('');setPrompt('');setEditingItem(undefined);setBatch('');setPreview(false);setClassificationPending(false);setArticlePending(false);setIssueDatePending(false);setFromProductPending(false);setBusy(false);setWriting(false);setList([]);setLoading(true);setDetail(undefined);}
     if(!reset){setBusy(false);setWriting(false);}setError('');setNotice('');
     const request=id?api.get(id):api.list(page);
     void request.then(value=>{if(!active||!scopeCurrent())return;if(Array.isArray(value))setList(value);else if(setDetail(value))setSelected([...new Set(value.items.map(identity))]);}).catch(e=>{if(active&&scopeCurrent())setError((e as Error).message);}).finally(()=>{if(active&&scopeCurrent())setLoading(false);});
@@ -105,8 +98,8 @@ export default function Recommendations() {
     if(!scopeCurrent())return;setBusy(true); setError(''); setNotice('');
     try { await action(); } catch (e) { if(scopeCurrent())setError((e as Error).message); } finally { if(scopeCurrent())setBusy(false); }
   }
-  function clearQueue() { queue.forEach(item => { URL.revokeObjectURL(item.preview); urls.current.delete(item.preview); }); setQueue([]); setQueuePage(1); }
-  function back() { selectionEpoch.current++; setPreparing(false); clearQueue(); setGenerated(''); setPrompt(''); setParams({}); }
+  // Route-scoped cleanup runs only after navigation is accepted, never on Cancel.
+  function back() { setParams({}); }
   function change(key: number, value: Partial<PendingImage>) { setQueue(current => current.map(item => item.key === key ? { ...item, ...value } : item)); }
   async function choose(files: FileList | null) {
     if (!files) return;
@@ -167,22 +160,29 @@ export default function Recommendations() {
   }
   if (loading||editor.actorKey!==session.actorKey) return <div className="rec-loading"><Spin /></div>;
   return <div className={'recommendations' + (detail ? ' rec-editing' : ' rec-managing')}>
+    <Modal open={navigation.state==='blocked'} title={t('rec.leave')} okText={t('article.leave_discard')} cancelText={t('article.leave_stay')}
+      onOk={()=>{if(navigation.state==='blocked')navigation.proceed();}} onCancel={()=>{if(navigation.state==='blocked')navigation.reset();}} />
     <header className="rec-heading"><div><h1>{t('rec.title')}</h1>{detail && <Tag color={published ? 'green' : undefined}>{t(published ? 'rec.published' : 'rec.draft')}{dirty ? ' *' : ''}</Tag>}</div>
       {!id && <div className="rec-action-group"><Button onClick={()=>setServiceOpen(true)}>{t('service.kind')}</Button><Button type="primary" icon={<PlusOutlined />} loading={busy} onClick={() => void run(async () => { const post = await api.create(); setParams({ post: String(post.post.id) }); })}>{t('rec.new')}</Button></div>}
     </header>
-    {error && <Alert type="error" showIcon message={error} action={<Button icon={<ReloadOutlined />} onClick={() => void run(async () => {
+    {error && <Alert type="error" showIcon message={error} action={<Button aria-label={t('rec.reload')} icon={<ReloadOutlined aria-hidden/>} onClick={() => void run(async () => {
       if (id) { const value = await api.get(id); setDetail(value); }
       else setList(await api.list(page));
     })}>{t('rec.reload')}</Button>} />}
     {notice && <Alert type="success" showIcon message={notice} />}
     {!id ? <><RecommendationList posts={list} hasError={!!error} pending={busy} />
       <div className="rec-pagination"><Button disabled={!page} icon={<ArrowLeftOutlined />} onClick={() => setPage(page - 1)}>{t('rec.previous')}</Button><span>{page + 1}</span><Button disabled={list.length < 20} onClick={() => setPage(page + 1)}>{t('rec.next')}</Button></div></> : detail && <>
-      <div className="rec-actions"><Popconfirm disabled={!dirty && !pending} title={t('rec.leave')} onConfirm={back}><Button aria-label={t('rec.back')} disabled={busy || writing} icon={<ArrowLeftOutlined />} onClick={() => { if (!dirty && !pending) back(); }}>{t('rec.back')}</Button></Popconfirm>
+      <div className="rec-actions"><Button aria-label={t('rec.back')} disabled={busy || writing} icon={<ArrowLeftOutlined />} onClick={back}>{t('rec.back')}</Button>
         <div className="rec-action-group">{published ? <><Link to={'/recommendations/' + id} target="_blank"><Button icon={<EyeOutlined />}>{t('rec.view')}</Button></Link><Button icon={<EditOutlined />} disabled={busy||articlePending||dirty} onClick={() => void run(async () => { setDetail(await api.publish(id, detail.post.version, false)); })}>{t('rec.withdraw')}</Button></> : <>
           {detail.serviceOffer?<Button onClick={()=>setServiceOpen(true)}>{t('service.edit')}</Button>:<Button icon={<SaveOutlined />} loading={busy} disabled={writing||articlePending} onClick={() => void run(async () => { await save(); setNotice(t('rec.saved')); })}>{t('rec.save')}</Button>}
           <Button type="primary" icon={<SendOutlined />} disabled={busy || writing || pending || (!detail.serviceOffer&&!detail.items.length) || !title.trim() || !body.trim()} onClick={() => void publish()}>{t('rec.publish')}</Button></>}
         </div></div>
       {detail.post.publishedAt && <div className="rec-publication rec-publication-editor"><span>{t('rec.publisher')}: {detail.post.publisherName}</span><time dateTime={detail.post.publishedAt}>{t('rec.published_date')}: {new Date(detail.post.publishedAt).toLocaleString(locale)}</time></div>}
+      <RecommendationIssueDatePanel post={detail.post} disabled={busy||writing||preparing||classificationPending||fromProductPending||articlePending||serviceOpen}
+        onPendingChange={value=>{if(activePostId.current===detail.post.id)setIssueDatePending(value);}}
+        onVersionConflict={()=>{if(activePostId.current===detail.post.id)setError(t('issueDate.parentConflict'));}}
+        onSaved={(value,expectedVersion)=>{if(activePostId.current!==detail.post.id)return;const current=editorRef.current.detail;
+          if(current){const next=applyRecommendationIssueDate(current,detail.post.id,expectedVersion,value);if(next)setDetail(next);}}}/>
       <div className="rec-editor-layout"><section className="rec-article"><h2>{t('rec.article')}</h2>{detail.serviceOffer?<div className="rec-public-body"><Tag>{t('service.kind')}</Tag>{body.split(/\n\s*\n/).map((p,i)=><p key={i}>{p}</p>)}</div>:<ArticleLanguages key={detail.post.id} detail={detail} title={title} body={body} sourceDirty={dirty} disabled={busy} onTitle={setTitle} onBody={setBody} onChanged={next=>setDetail(next,true)} onPending={setArticlePending}/>}
         {published && <div className="rec-public-link"><Link to={'/recommendations/' + id}>{t('rec.view')}</Link><Tooltip title={t('rec.copy')}><Button icon={<CopyOutlined />} aria-label={t('rec.copy')} onClick={() => void run(async () => { await navigator.clipboard.writeText(location.origin + '/recommendations/' + id); setNotice(t('rec.copied')); })} /></Tooltip></div>}
       </section></div>

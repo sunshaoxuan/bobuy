@@ -12,7 +12,10 @@ public class PublicRecommendationBrowseService {
  private final RecommendationService recommendations;
  private final ObjectMapper json=new ObjectMapper().findAndRegisterModules().configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS,true).configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY,true);
  public PublicRecommendationBrowseService(RecommendationService r){recommendations=r;}
- public record Issue(RecommendationService.Summary post,String title,boolean history,long itemCount,boolean service){}
+ /** itemCount is the legacy query-match count; publicItemCount is the whole issue's public product occurrences. */
+ public record SupplierLabel(String id,Map<String,String> name){}
+ public record Issue(RecommendationService.Summary post,String title,boolean history,long itemCount,boolean service,
+   long publicItemCount,List<SupplierLabel> suppliers,LocalDate issueDate,String issueDateSource){}
  public record Directory(List<Issue> items,int page,int size,long total,boolean hasNext,String revision,String japanDay,String datasetRevision){}
  public record ItemCard(Long id,String productId,String name,String brand,String itemNumber,String specification,String model,String packaging,
    Map<String,RecommendationItem.Text> translations,String translationStatus,List<RecommendationItem.Label> categories,
@@ -51,16 +54,33 @@ public class PublicRecommendationBrowseService {
  }
  private static List<String> ids(RecommendationItem i){return i.categoryIds==null?i.categories.stream().map(RecommendationItem.Label::id).distinct().toList():i.categoryIds.stream().distinct().toList();}
  private static boolean period(boolean history,String period){return period.equals("all")||history==period.equals("history");}
+ /** Sort only an explicitly sourced issue date. Publication/edit timestamps are not issue dates. */
+ static Comparator<Issue> issueOrder(){return Comparator.comparing(Issue::issueDate,Comparator.nullsLast(Comparator.reverseOrder()))
+   .thenComparing(i->i.post().id(),Comparator.nullsLast(Comparator.reverseOrder()));}
+ private static List<SupplierLabel> publicSuppliers(RecommendationService.Detail d){
+  var found=new TreeMap<String,SupplierLabel>();
+  for(var item:d.items()){
+   if(!item.showSupplier||item.supplierId==null||item.supplierId.isBlank()||item.supplierName==null)continue;
+   var names=new TreeMap<String,String>();item.supplierName.forEach((locale,name)->{if(locale!=null&&!locale.isBlank()&&name!=null&&!name.isBlank())names.put(locale,name);});
+   if(!names.isEmpty())found.putIfAbsent(item.supplierId,new SupplierLabel(item.supplierId,Collections.unmodifiableMap(names)));
+  }
+  return List.copyOf(found.values());
+ }
+ private static Issue directoryIssue(RecommendationService.Detail d,LocalDate day,String query,String locale){
+  // Public browse entries already apply the server's public-item projection; do not reintroduce private items here.
+  return new Issue(d.post(),title(d,locale),expired(d,day),d.serviceOffer()!=null?1:d.items().stream().filter(i->search(new Row(d,i,expired(d,day)),query,locale)).count(),
+    d.serviceOffer()!=null,d.items().size(),publicSuppliers(d),d.post().issueDate(),d.post().issueDateSource());
+ }
  private static ItemCard card(RecommendationItem i){var translations=new TreeMap<String,RecommendationItem.Text>();if("REVIEWED".equals(i.getTranslationStatus()))i.translations.forEach((k,t)->translations.put(k,new RecommendationItem.Text(t.name(),t.specification(),null,t.offerNotes())));
   return new ItemCard(i.id,i.productId,i.name,i.brand,i.itemNumber,i.specification,i.model,i.packaging,translations,i.getTranslationStatus(),i.categories,i.gallery.isEmpty()?null:i.gallery.get(0),i.referencePrice,i.originalPrice,i.discountAmount,i.priceUnit,"JPY",i.offerStart,i.offerEnd,i.couponStart,i.couponEnd,i.offerNotes,i.referenceContext,i.referenceQuote);
  }
  @Transactional(readOnly=true,isolation=Isolation.REPEATABLE_READ)
  public Directory directory(int page,Long merchant,String locale,String period,String query,String expected){
   validate(page,merchant,null,locale,period,query,"",expected);var day=today();var data=recommendations.publicBrowseEntries(merchant);String q=text(query).strip().toLowerCase(Locale.ROOT);
-  var datasetVersion=revision(Arrays.asList("recommendation-data-v1",merchant,day,data));var version=revision(Arrays.asList("recommendation-directory-v1",datasetVersion,locale,period,q));if(expected!=null&&!expected.equals(version))throw new PublicProductBrowseService.Changed();
-  var scoped=data.stream().filter(d->period(expired(d,day),period)).filter(d->d.serviceOffer()!=null?search(new Row(d,null,expired(d,day)),q,locale):d.items().stream().anyMatch(i->search(new Row(d,i,expired(d,day)),q,locale))||q.isEmpty()).toList();
+  var datasetVersion=revision(Arrays.asList("recommendation-data-v1",merchant,day,data));var version=revision(Arrays.asList("recommendation-directory-v2",datasetVersion,locale,period,q));if(expected!=null&&!expected.equals(version))throw new PublicProductBrowseService.Changed();
+  var scoped=data.stream().filter(d->period(expired(d,day),period)).filter(d->d.serviceOffer()!=null?search(new Row(d,null,expired(d,day)),q,locale):d.items().stream().anyMatch(i->search(new Row(d,i,expired(d,day)),q,locale))||q.isEmpty()).map(d->directoryIssue(d,day,q,locale)).sorted(issueOrder()).toList();
   int start=(int)Math.min((long)page*20,scoped.size()),end=Math.min(start+20,scoped.size());
-  return new Directory(scoped.subList(start,end).stream().map(d->new Issue(d.post(),title(d,locale),expired(d,day),d.serviceOffer()!=null?1:d.items().stream().filter(i->search(new Row(d,i,expired(d,day)),q,locale)).count(),d.serviceOffer()!=null)).toList(),page,20,scoped.size(),end<scoped.size(),version,day.toString(),datasetVersion);
+  return new Directory(scoped.subList(start,end),page,20,scoped.size(),end<scoped.size(),version,day.toString(),datasetVersion);
  }
  @Transactional(readOnly=true,isolation=Isolation.REPEATABLE_READ)
  public Page page(int page,Long merchant,Long issue,String locale,String period,String query,String category,String expected){

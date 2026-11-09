@@ -34,10 +34,12 @@ public class RecommendationService {
         this.referenceQuotes=referenceQuotes;
         this.articles=articles;
     }
-    public record Summary(Long id, String title, boolean published, long version, LocalDateTime updatedAt, java.time.Instant publishedAt, String publisherName, String coverImageUrl, Long merchantId,java.util.Map<String,String> articleTitles) {}
+    public record Summary(Long id, String title, boolean published, long version, LocalDateTime updatedAt, java.time.Instant publishedAt, String publisherName, String coverImageUrl, Long merchantId,java.util.Map<String,String> articleTitles,java.time.LocalDate issueDate,String issueDateSource) {
+        public Summary(Long id,String title,boolean published,long version,LocalDateTime updatedAt,java.time.Instant publishedAt,String publisherName,String coverImageUrl,Long merchantId,java.util.Map<String,String> articleTitles){this(id,title,published,version,updatedAt,publishedAt,publisherName,coverImageUrl,merchantId,articleTitles,null,"UNKNOWN");}
+    }
     public record Detail(Summary post, String body, List<RecommendationItem> items,String articleSourceLocale,String articleSourceHash,java.util.Map<String,RecommendationPost.ArticleText> articleTranslations,RecommendationServiceOffer serviceOffer) {}
     public record Upload(Detail detail, boolean productCreated, boolean imageReused, boolean priceUpdated) {}
-    private Summary summary(RecommendationPost post, String cover) { return new Summary(post.id, post.title, post.published, post.version, post.updatedAt, post.publishedAt, post.publisherName, cover, post.merchantId,articles.titles(post)); }
+    private Summary summary(RecommendationPost post, String cover) { return new Summary(post.id, post.title, post.published, post.version, post.updatedAt, post.publishedAt, post.publisherName, cover, post.merchantId,articles.titles(post),post.reviewedIssueDate(),post.issueDateSource()); }
     public record PublicNode(Long id, String name) {}
     @Transactional(readOnly = true)
     public List<PublicNode> publicNodes() {
