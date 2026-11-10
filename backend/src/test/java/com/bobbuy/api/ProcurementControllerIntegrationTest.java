@@ -198,6 +198,7 @@ class ProcurementControllerIntegrationTest {
   void customerCanConfirmReceiptAndBillingForOwnLedger() throws Exception {
     store.getOrderByBusinessId("20260117001").ifPresent(order -> {
       order.setStatus(com.bobbuy.model.OrderStatus.CONFIRMED);
+      order.setExpectedOrderRevision(order.getOrderRevision());
       store.updateOrder(order.getId(), order);
     });
     mockMvc.perform(asCustomer(post("/api/procurement/{tripId}/ledger/{businessId}/confirm", 2000L, "20260117001")

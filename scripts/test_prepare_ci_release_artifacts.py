@@ -304,3 +304,36 @@ class IssueDateSchemaAcceptanceTest(unittest.TestCase):
                                 ({'schemaBefore': 28, 'schemaAfter': 30, 'migrationChanges': True}, self.baseline)]:
             with self.subTest(value=value), self.assertRaises(RuntimeError):
                 module.schema_acceptance({**value, 'migrations': self.accepted['migrations']}, self.accepted['migrations'], baseline)
+class AmendmentOnboardingSchemaAcceptanceTest(unittest.TestCase):
+    def setUp(self):
+        self.old = [{'path': 'V28__checkout_delivery_snapshot.sql', 'bytes': 4, 'sha256': 'unchanged-c2'}]
+        self.added = [{'path': 'V29__customer_order_amendments.sql', 'bytes': 5, 'sha256': 'c3'},
+                      {'path': 'V30__costco_onboarding_jobs.sql', 'bytes': 6, 'sha256': 'r13'}]
+        self.baseline = {'schemaBefore': 27, 'schemaAfter': 28, 'migrationChanges': True, 'migrations': self.old}
+        self.accepted = {'schemaBefore': 28, 'schemaAfter': 30, 'migrationChanges': True, 'migrations': self.old + self.added}
+
+    def test_exact_c2_prefix_and_only_reviewed_additions_are_accepted(self):
+        self.assertEqual(module.schema_acceptance(self.accepted, self.accepted['migrations'], self.baseline),
+                         {'schemaBefore': 28, 'schemaAfter': 30, 'migrationChanges': True})
+
+    def test_drift_missing_misrepresented_or_extra_migrations_reject(self):
+        for changes in [self.old + self.added[:1], [{**self.old[0], 'sha256': 'changed'}] + self.added,
+                        self.old + self.added + [{'path': 'V31__unexpected.sql'}],
+                        self.old + self.added + [self.added[0]]]:
+            with self.subTest(changes=changes), self.assertRaises(RuntimeError):
+                module.schema_acceptance({**self.accepted, 'migrations': changes}, changes, self.baseline)
+        for baseline in [None, {**self.baseline, 'schemaAfter': 27}, {**self.baseline, 'migrationChanges': False}]:
+            with self.subTest(baseline=baseline), self.assertRaises(RuntimeError):
+                module.schema_acceptance(self.accepted, self.accepted['migrations'], baseline)
+        with self.assertRaises(RuntimeError):
+            module.schema_acceptance({**self.accepted, 'schemaBefore': 27}, self.accepted['migrations'], self.baseline)
+
+    def test_baseline_requires_fixed_c2_manifest_path_and_bytes(self):
+        sha = '48bbcc808d0a0761e112b720c276592afe52f9979031a9975247065efeb277ba'
+        path = 'docs/reports/c2-cart-20261109/accepted-inputs.json'
+        accepted = {**self.accepted, 'migrationBaseline': {'path': path, 'sha256': sha}}
+        with patch.object(module, 'digest', return_value=sha), patch.object(Path, 'read_text', return_value=json.dumps(self.baseline)):
+            self.assertEqual(module.migration_baseline(accepted), self.baseline)
+        for binding in [{'path': path, 'sha256': 'changed'}, {'path': '../unsafe.json', 'sha256': sha}]:
+            with self.subTest(binding=binding), patch.object(module, 'digest', return_value=binding['sha256']), self.assertRaises(RuntimeError):
+                module.migration_baseline({**accepted, 'migrationBaseline': binding})

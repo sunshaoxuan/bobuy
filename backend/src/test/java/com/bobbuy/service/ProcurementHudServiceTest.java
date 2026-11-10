@@ -196,6 +196,7 @@ class ProcurementHudServiceTest {
   void confirmCustomerLedgerRequiresReceiptBeforeBilling() {
     store.getOrderByBusinessId("20260117001").ifPresent(order -> {
       order.setStatus(OrderStatus.CONFIRMED);
+      order.setExpectedOrderRevision(order.getOrderRevision());
       store.updateOrder(order.getId(), order);
     });
     LedgerConfirmationRequest request = new LedgerConfirmationRequest();

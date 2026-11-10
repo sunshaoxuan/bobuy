@@ -44,6 +44,7 @@ class OrderControllerTest {
 
     OrderHeader updatePayload = new OrderHeader("ORD-TEST", 1001L, 2000L);
     updatePayload.setStatus(OrderStatus.CONFIRMED);
+    updatePayload.setExpectedOrderRevision(fetched.getBody().getData().getOrderRevision());
     ResponseEntity<ApiResponse<OrderHeader>> updated = controller.update(created.getId(), updatePayload);
     assertThat(updated.getBody().getData().getStatus()).isEqualTo(OrderStatus.CONFIRMED);
 

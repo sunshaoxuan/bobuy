@@ -62,6 +62,7 @@ export type OrderLine = {
 };
 
 export type Order = {
+    orderRevision?: number;
     deliverySnapshot?: {version:number;contactName:string;countryRegion:string;city:string;addressLine:string;phone?:string|null;postalCode?:string|null}|null;
     currency?:string;
     id: number;
@@ -81,6 +82,13 @@ export type Order = {
     billingConfirmedBy?: string;
     lines: OrderLine[];
 };
+
+export type CustomerAmendmentLine = {productId:string;quantity:number;priceToken?:string|null;priceRevision?:number|null;currency?:string|null};
+export type CustomerAmendmentDelivery = {contactName:string;phone?:string|null;countryRegion:string;city:string;addressLine:string;postalCode?:string|null};
+export type CustomerAmendmentProduct = {id:string;name:Record<string,string>;amount:number;currency:string;unit:string;priceRevision:number;priceToken:string;brand?:string|null;itemNumber?:string|null;model?:string|null;packaging?:string|null;specifications?:Record<string,string>};
+export type CustomerAmendmentSnapshot = Omit<CustomerAmendmentProduct,'amount'|'currency'|'priceRevision'|'priceToken'>;
+export type CustomerAmendmentView = {orderId:number;revision:string;reason:string;editable:boolean;lines:CustomerAmendmentLine[];delivery:CustomerAmendmentDelivery|null;merchantId:number;tripId:number;currency:string;totalAmount:number;products:CustomerAmendmentProduct[];originalProducts?:CustomerAmendmentSnapshot[]};
+export type CustomerAmendmentInput = {requestId:string;expectedRevision:string;lines:CustomerAmendmentLine[];delivery?:CustomerAmendmentDelivery};
 
 export type User = {
     id: number;
@@ -915,6 +923,16 @@ async function postJson<TResponse, TBody>(url: string, body: TBody, options?: Re
     return parseSuccessPayload(response);
 }
 
+async function customerAmendmentRequest(orderId:number,input?:CustomerAmendmentInput):Promise<CustomerAmendmentView> {
+    const response=await authorizedFetch(`/api/customer/orders/${orderId}/amendment`,input?{method:'PATCH',body:JSON.stringify(input)}:undefined,input?{withJsonContentType:true}:undefined);
+    if(!response.ok) {
+        if(response.status===401)clearAuthSession();
+        const error=Object.assign(new Error(await parseErrorMessage(response)),{status:response.status});
+        throw error;
+    }
+    return parseSuccessPayload<CustomerAmendmentView>(response);
+}
+
 async function patchJson<TResponse, TBody>(url: string, body: TBody, options?: RequestOptions): Promise<TResponse> {
     const response = await authorizedFetch(url, {
         method: 'PATCH',
@@ -1203,6 +1221,9 @@ export const api = {
     testMailSettings: (recipient:string) => postJson<string,{recipient:string}>('/api/admin/settings/mail/test',{recipient}),
     customerTrips: () => fetchJson<Trip[]>('/api/customer/trips', []),
     customerOrders: (tripId: number) => fetchJson<Order[]>(`/api/customer/orders?tripId=${tripId}`, []),
+    customerAmendment: (orderId:number) => customerAmendmentRequest(orderId),
+    amendOwnOrder: (orderId:number,input:CustomerAmendmentInput) => customerAmendmentRequest(orderId,input),
+    updateOrder: (order:Order) => putJson<Order,Order & {expectedOrderRevision?:number}>(`/api/orders/${order.id}`,{...order,expectedOrderRevision:order.orderRevision}),
     customerViewLedger: (tripId: number) => fetchJson<CustomerBalanceLedgerEntry[]>(`/api/customer/procurement/${tripId}/ledger`, []),
     confirmOwnLedger: (tripId: number, businessId: string, action: 'RECEIPT' | 'BILLING') =>
         postJson<CustomerBalanceLedgerEntry, { action: 'RECEIPT' | 'BILLING' }>(`/api/customer/procurement/${tripId}/ledger/${encodeURIComponent(businessId)}/confirm`, { action }),

@@ -59,7 +59,7 @@ public class GlobalExceptionHandler {
     return ResponseEntity.status(404).body(new ApiError(ErrorCode.RESOURCE_NOT_FOUND.name(), message));
   }
 
-  @ExceptionHandler({org.springframework.orm.ObjectOptimisticLockingFailureException.class,jakarta.persistence.OptimisticLockException.class})
+  @ExceptionHandler({org.springframework.orm.ObjectOptimisticLockingFailureException.class,jakarta.persistence.OptimisticLockException.class,org.springframework.dao.PessimisticLockingFailureException.class})
   public ResponseEntity<ApiError> handleConcurrentEdit(Exception exception) {
     String message=messageSource.getMessage("sale.conflict",null,LocaleContextHolder.getLocale());
     return ResponseEntity.status(409).body(new ApiError(ErrorCode.INVALID_REQUEST.name(),message));

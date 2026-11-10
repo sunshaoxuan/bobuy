@@ -123,6 +123,15 @@ def schema_acceptance(accepted, actual, baseline=None):
                 or max(versions) != (28, 1) or not all(re.fullmatch(r'V\d+__.+\.sql', entry['path']) for entry in old_part)):
             raise RuntimeError('Issue dates require the exact immutable C2 V28 prefix plus only the pinned V28.1 migration')
         return {'schemaBefore': 28, 'schemaAfter': '28.1', 'migrationChanges': True}
+    if identity == (28, 30, True):
+        additions = {'V29__customer_order_amendments.sql', 'V30__costco_onboarding_jobs.sql'}
+        if (baseline is None or (baseline.get('schemaBefore'), baseline.get('schemaAfter'), baseline.get('migrationChanges')) != (27, 28, True)
+                or [entry for entry in actual if entry['path'] not in additions] != baseline['migrations']
+                or {entry['path'] for entry in actual if entry['path'] in additions} != additions
+                or len(actual) != len(baseline['migrations']) + 2 or max(versions) != (30,)
+                or len(set(versions)) != len(versions)):
+            raise RuntimeError('C3/R13 requires the exact unchanged C2 V28 list plus only its V29 and V30 migrations')
+        return {'schemaBefore': 28, 'schemaAfter': 30, 'migrationChanges': True}
     if identity != (27, 28, True) or baseline is None or baseline.get('schemaAfter') != 27 or baseline.get('migrationChanges') is not False:
         raise RuntimeError('Unaccepted schema transition')
     previous = baseline['migrations']
@@ -203,10 +212,12 @@ def migration_baseline(accepted):
     binding = accepted.get('migrationBaseline', {})
     path = Path(binding.get('path', ''))
     prior = ('docs/reports/c2-cart-20261109/accepted-inputs.json'
-             if (accepted.get('schemaBefore'), accepted.get('schemaAfter')) == (28, 31)
+             if (accepted.get('schemaBefore'), accepted.get('schemaAfter')) in {(28, 30), (28, 31)}
              else 'docs/reports/c1-profile-20261109/accepted-inputs.json')
     if path.as_posix() != prior or digest(path) != binding.get('sha256'):
         raise RuntimeError('Exact prior migration manifest required')
+    if (accepted.get('schemaBefore'), accepted.get('schemaAfter')) == (28, 30) and binding['sha256'] != '48bbcc808d0a0761e112b720c276592afe52f9979031a9975247065efeb277ba':
+        raise RuntimeError('C3/R13 requires the immutable accepted C2 V28 manifest')
     return json.loads(path.read_text())
 
 

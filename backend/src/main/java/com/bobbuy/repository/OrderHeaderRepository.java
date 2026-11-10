@@ -12,6 +12,19 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OrderHeaderRepository extends JpaRepository<OrderHeader, Long> {
+    interface Location { Long getId(); Long getTripId(); }
+    @Query("select o.id as id, o.tripId as tripId from OrderHeader o where o.id = :id")
+    Optional<Location> locate(@Param("id") Long id);
+    @Query("select o.tripId from OrderHeader o where o.id = :id")
+    Optional<Long> findTripIdForOrder(@Param("id") Long id);
+
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    @Query("select o from OrderHeader o where o.id = :id")
+    Optional<OrderHeader> findByIdForUpdate(@Param("id") Long id);
+
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    @Query("select o from OrderHeader o where o.tripId = :tripId order by o.id")
+    List<OrderHeader> findByTripIdForUpdate(@Param("tripId") Long tripId);
     Optional<OrderHeader> findByBusinessId(String businessId);
 
     List<OrderHeader> findByTripId(Long tripId);
