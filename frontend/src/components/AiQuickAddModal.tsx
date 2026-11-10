@@ -17,6 +17,11 @@ interface AiQuickAddModalProps {
 }
 
 const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, onSuccess,durable }) => {
+  scan?: (file: File) => Promise<AiOnboardingSuggestion>;
+  recommendation?: boolean;
+}
+
+const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, onSuccess,scan,recommendation=false }) => {
   const { t } = useI18n();
   const [currentStep, setCurrentStep] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -27,11 +32,16 @@ const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, on
   const [queuedJob,setQueuedJob]=useState<CostcoOnboardingJobView>();
   const queuePending=useRef(false);
   const [form] = Form.useForm();
+  const scanEpoch = useRef(0);
+  const readerRef = useRef<FileReader>();
+  const submitted = useRef(false);
   const lowConfidence = (suggestion?.matchScore ?? 100) < 70;
   const historicalImage = suggestion?.verificationTarget?.mediaGallery?.find((item) => item.type === 'IMAGE' || item.type === 'image')?.url;
   const manualEntryMode = Boolean(scanError);
 
   React.useEffect(() => {
+    scanEpoch.current++;
+    readerRef.current?.abort?.();
     if (visible) {
       setCurrentStep(0);
       setLoading(false);
@@ -39,8 +49,10 @@ const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, on
       setSuggestion(null);
       setScanError(null);
       setQueuedJob(undefined);
+      submitted.current=false;
       form.resetFields();
     }
+    return () => { scanEpoch.current++; readerRef.current?.abort?.(); };
   }, [visible, form]);
 
   const handleUpload = (file: RcFile) => {
@@ -51,23 +63,26 @@ const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, on
       durable.enqueuePhoto(file).then(job=>{setQueuedJob(job);durable.onQueued(job);}).catch(error=>setScanError(error instanceof Error?error.message:t('onboarding.retry_attempt'))).finally(()=>{queuePending.current=false;setLoading(false);});
       return false;
     }
+    if (!(recommendation?['image/jpeg','image/png']:['image/jpeg','image/png','image/webp']).includes(file.type) || !file.size || file.size>8*1024*1024) {
+      message.error(t('rec.image_rule')); return false;
+    }
+    const epoch=++scanEpoch.current;
+    submitted.current=false;
+    readerRef.current?.abort?.();
     setLoading(true);
     setCurrentStep(1);
 
     const reader = new FileReader();
+    readerRef.current=reader;
     reader.onload = async () => {
       const base64 = reader.result as string;
+      if(epoch!==scanEpoch.current)return;
       try {
         setScanError(null);
         // Inject the original photo into the suggestion
-        const result = await api.onboardScan(base64, file.name);
+        const result = scan ? await scan(file) : await api.onboardScan(base64, file.name);
+        if(epoch!==scanEpoch.current)return;
         setSuggestion({ ...result, originalPhotoBase64: base64 });
-        setCurrentStep(2);
-        await new Promise(resolve => setTimeout(resolve, 800));
-        
-        setCurrentStep(3);
-        await new Promise(resolve => setTimeout(resolve, 500));
-
         setCurrentStep(FINAL_STEP);
         form.setFieldsValue({
           name: result.name,
@@ -84,6 +99,7 @@ const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, on
         });
         setLoading(false);
       } catch (error) {
+        if(epoch!==scanEpoch.current)return;
         logError(error);
         setLoading(false);
         const errorMessage = error instanceof Error ? error.message : t('stock.ai_quick_add.failed');
@@ -128,6 +144,7 @@ const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, on
       }
     };
     reader.onerror = () => {
+      if(epoch!==scanEpoch.current)return;
       setLoading(false);
       setCurrentStep(0);
       message.error(t('stock.ai_quick_add.failed'));
@@ -143,6 +160,8 @@ const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, on
   const handleFinish = () => {
     form.validateFields().then((values) => {
       if (suggestion) {
+        if(submitted.current)return;
+        submitted.current=true;
         const nextAttributes = Object.fromEntries(
           Object.entries({ ...suggestion.attributes, ...values.attributes })
             .filter(([, value]) => value !== undefined && value !== null && String(value).trim() !== '')
@@ -159,6 +178,8 @@ const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, on
   const handleSaveAsNew = () => {
     form.validateFields().then((values) => {
       if (suggestion) {
+        if(submitted.current)return;
+        submitted.current=true;
         const nextAttributes = Object.fromEntries(
           Object.entries({ ...suggestion.attributes, ...values.attributes })
             .filter(([, value]) => value !== undefined && value !== null && String(value).trim() !== '')
@@ -196,9 +217,9 @@ const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, on
     <Modal
       title={t('stock.ai_quick_add.title')}
       open={visible}
-      onCancel={onCancel}
+      onCancel={()=>{scanEpoch.current++;readerRef.current?.abort?.();setLoading(false);onCancel();}}
         footer={currentStep === FINAL_STEP ? [
-        suggestion?.verificationTarget || manualEntryMode ? (
+        !recommendation && (suggestion?.verificationTarget || manualEntryMode) ? (
           <Button key="save-as-new" onClick={handleSaveAsNew}>
             {t('stock.ai_quick_add.save_as_new')}
           </Button>
@@ -209,7 +230,7 @@ const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, on
           onClick={handleFinish}
           disabled={Boolean(suggestion?.verificationTarget) && lowConfidence}
         >
-          {t('stock.master.publish')}
+          {t(recommendation?'rec.intake.review':'stock.master.publish')}
         </Button>
       ].filter(Boolean) : null}
       width={880}
@@ -218,18 +239,18 @@ const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, on
     >
       <div style={{ padding: '24px 0' }}>
         <Steps
-          current={currentStep}
-          items={steps.map(s => ({ title: s.title, icon: s.icon }))}
+          current={recommendation?(currentStep===FINAL_STEP?2:currentStep):currentStep}
+          items={(recommendation?[steps[0],steps[1],{title:t('rec.intake.review'),icon:<CheckCircleOutlined/>}]:steps).map(s => ({ title: s.title, icon: s.icon, status: scanError ? 'wait' as const : undefined }))}
           size="small"
           style={{ marginBottom: 32 }}
           data-testid="ai-onboarding-steps"
-          data-stage={stageByStep[currentStep]}
+          data-stage={scanError?'MANUAL_REVIEW':recommendation&&currentStep===FINAL_STEP?'CANDIDATE_REVIEW':stageByStep[currentStep]}
         />
 
         {currentStep === 0 && (
-          <div style={{ textAlign: 'center', padding: '40px 0' }}>
+          <div style={{ textAlign: 'center', padding: '40px 0' }} tabIndex={0} onPaste={e=>{const image=Array.from(e.clipboardData.files).find(file=>file.type.startsWith('image/'));if(image){e.preventDefault();handleUpload(image as RcFile);}}} aria-label={t('rec.ai.paste')}>
             <Upload.Dragger
-              accept="image/*"
+              accept={recommendation?'image/png,image/jpeg':'image/png,image/jpeg,image/webp'}
               beforeUpload={handleUpload}
               showUploadList={false}
               multiple={false}
@@ -352,7 +373,7 @@ const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, on
                     <Text strong>{t('stock.ai_quick_add.history_image')}</Text>
                     <div style={{ marginTop: 8, border: '1px solid #f0f0f0', borderRadius: 8, minHeight: 180, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', background: '#fafafa' }}>
                       {historicalImage ? (
-                        <img src={historicalImage} alt={t('stock.ai_quick_add.history_image')} style={{ width: '100%', objectFit: 'cover' }} />
+                        <img src={historicalImage} alt={t('stock.ai_quick_add.history_image')} style={{ width: '100%', objectFit: 'contain' }} />
                       ) : (
                         <Text type="secondary">{t('stock.ai_quick_add.no_history_image')}</Text>
                       )}
@@ -362,7 +383,7 @@ const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, on
                     <Text strong>{t('stock.ai_quick_add.current_image')}</Text>
                     <div style={{ marginTop: 8, border: '1px solid #f0f0f0', borderRadius: 8, minHeight: 180, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', background: '#fafafa' }}>
                       {suggestion?.originalPhotoBase64 ? (
-                        <img src={suggestion.originalPhotoBase64} alt={t('stock.ai_quick_add.current_image')} style={{ width: '100%', objectFit: 'cover' }} />
+                        <img src={suggestion.originalPhotoBase64} alt={t('stock.ai_quick_add.current_image')} style={{ width: '100%', objectFit: 'contain' }} />
                       ) : (
                         <Text type="secondary">{t('stock.ai_quick_add.no_current_image')}</Text>
                       )}
@@ -415,9 +436,9 @@ const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, on
                     </Form.Item>
                   </Col>
                   <Col span={12}>
-                    <Form.Item name="price" label={t('stock.item.price')}>
+                    {!recommendation&&<Form.Item name="price" label={t('stock.item.price')}>
                       <InputNumber prefix="$" style={{ width: '100%' }} placeholder="0.00" />
-                    </Form.Item>
+                    </Form.Item>}
                   </Col>
                 </Row>
                 <Row gutter={16}>

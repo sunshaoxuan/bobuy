@@ -126,6 +126,27 @@ class RecommendationIntegrationTest {
         assertThat(data(mvc.perform(get("/api/storefront/products"))).toString()).doesNotContain(productId);
         mvc.perform(get(current.at("/items/0/imageUrl").asText())).andExpect(status().isOk()).andExpect(header().string("X-Content-Type-Options","nosniff"));
     }
+    @Test void imageIntakePreservesCluePrivacyCreatesMasterFirstAndRetriesWithoutDuplication() throws Exception {
+        var draft=create(admin);String endpoint=path(draft)+"/product-intake";long productCount=products.count(),imageCount=images.count();
+        var input=new HashMap<String,Object>();input.put("requestId","synthetic-clue-only-request");input.put("facts",Map.of("name","合成テスト商品","itemNumber","INTAKE-CLUE-001"));input.put("specification","2-pack");input.put("brand","Synthetic");input.put("reviewed",true);input.put("displayUploadedImage",false);input.put("version",draft.at("/post/version").asLong());input.put("officialImages",List.of());
+        var clue=data(mvc.perform(multipart(endpoint).file(new MockMultipartFile("input","","application/json",json.writeValueAsBytes(input))).file(new MockMultipartFile("file","synthetic.png","image/png",image(185))).header("Authorization","Bearer "+admin)));
+        assertThat(clue.at("/detail/items").size()).isZero();assertThat(images.count()).isEqualTo(imageCount);assertThat(products.count()).isEqualTo(productCount+1);
+        var privateMaster=products.findById(clue.path("productId").asText()).orElseThrow();assertThat(privateMaster.getVisibilityStatus()).isEqualTo(ProductVisibility.DRAFTER_ONLY);assertThat(privateMaster.getMediaGallery()).isEmpty();assertThat(privateMaster.getBasePrice()).isZero();assertThat(privateMaster.getSale()).isNull();
+        input.put("requestId","synthetic-displayed-request");input.put("facts",Map.of("name","合成テスト商品2","itemNumber","INTAKE-DISPLAY-002"));input.put("displayUploadedImage",true);
+        var displayed=data(mvc.perform(multipart(endpoint).file(new MockMultipartFile("input","","application/json",json.writeValueAsBytes(input))).file(new MockMultipartFile("file","synthetic.png","image/png",image(185))).header("Authorization","Bearer "+admin)));
+        assertThat(displayed.at("/detail/items").size()).isEqualTo(1);assertThat(images.count()).isEqualTo(imageCount+1);assertThat(products.count()).isEqualTo(productCount+2);
+        var retry=data(mvc.perform(multipart(endpoint).file(new MockMultipartFile("input","","application/json",json.writeValueAsBytes(input))).file(new MockMultipartFile("file","renamed.png","image/png",image(185))).header("Authorization","Bearer "+admin)));
+        assertThat(retry.path("created").asBoolean()).isFalse();assertThat(retry.at("/detail/items").size()).isEqualTo(1);assertThat(products.count()).isEqualTo(productCount+2);assertThat(images.count()).isEqualTo(imageCount+1);
+        var master=products.findById(displayed.path("productId").asText()).orElseThrow();assertThat(master.getMediaGallery().get(0).getSourceType()).isEqualTo("USER_PROVIDED");assertThat(master.getMediaGallery().get(0).getSourceUrl()).startsWith("urn:bobuy:user-upload:");assertThat(master.getBasePrice()).isZero();
+        input.put("requestId","synthetic-existing-enrichment");input.put("existingProductId",privateMaster.getId());input.put("existingProductVersion",privateMaster.getRecordVersion());input.put("facts",Map.of("name","合成テスト商品","itemNumber","INTAKE-CLUE-001"));input.put("version",displayed.at("/detail/post/version").asLong());
+        var enriched=data(mvc.perform(multipart(endpoint).file(new MockMultipartFile("input","","application/json",json.writeValueAsBytes(input))).file(new MockMultipartFile("file","synthetic.png","image/png",image(185))).header("Authorization","Bearer "+admin)));
+        assertThat(enriched.path("productId").asText()).isEqualTo(privateMaster.getId());assertThat(enriched.path("created").asBoolean()).isFalse();assertThat(enriched.at("/detail/items").size()).isEqualTo(2);assertThat(products.count()).isEqualTo(productCount+2);assertThat(images.count()).isEqualTo(imageCount+1);
+        var enrichedRetry=data(mvc.perform(multipart(endpoint).file(new MockMultipartFile("input","","application/json",json.writeValueAsBytes(input))).file(new MockMultipartFile("file","renamed.png","image/png",image(185))).header("Authorization","Bearer "+admin)));
+        assertThat(enrichedRetry.at("/detail/items").size()).isEqualTo(2);assertThat(products.count()).isEqualTo(productCount+2);
+        String productId=master.getId();assertThat(data(mvc.perform(get("/api/storefront/products"))).toString()).doesNotContain(productId);
+        mvc.perform(multipart(endpoint).file(new MockMultipartFile("input","","application/json",json.writeValueAsBytes(input))).header("Authorization","Bearer "+other)).andExpect(status().isNotFound());
+        mvc.perform(multipart(endpoint).file(new MockMultipartFile("input","","application/json",json.writeValueAsBytes(input)))).andExpect(status().isForbidden());
+    }
     @Test void isolatesMerchantsAndRejectsNonMerchants() throws Exception {
         var draft = create(admin);
         data(upload(draft,admin,"Owner tea","SHARED-CODE","100",image(1)));

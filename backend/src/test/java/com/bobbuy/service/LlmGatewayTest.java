@@ -92,6 +92,23 @@ class LlmGatewayTest {
   }
 
   @Test
+  void bridgeVisionCarriesImageWhenNoEdgeConfigured() throws Exception {
+    AtomicReference<String> body=new AtomicReference<>();
+    bridgeServer=HttpServer.create(new InetSocketAddress("127.0.0.1",0),0);
+    bridgeServer.createContext("/v1/models",exchange->writeJson(exchange,200,"{\"data\":[]}"));
+    bridgeServer.createContext("/v1/chat/completions",exchange->{body.set(new String(exchange.getRequestBody().readAllBytes(),StandardCharsets.UTF_8));writeJson(exchange,200,"{\"choices\":[{\"message\":{\"content\":\"synthetic visual result\"}}]}");});bridgeServer.start();
+    var gateway=new LlmGateway(new ObjectMapper(),"","fixture","codex-bridge","",1,"http://127.0.0.1:"+bridgeServer.getAddress().getPort()+"/v1","fixture","synthetic-test-key",5,"","","","",200000,"",1,"",""," ");
+    gateway.initializeMainProvider();assertThat(gateway.generate("Read synthetic image",null,java.util.List.of("data:image/png;base64,eA=="))).contains("synthetic visual result");
+    var content=new ObjectMapper().readTree(body.get()).path("messages").get(0).path("content");assertThat(content.get(0).path("text").asText()).isEqualTo("Read synthetic image");assertThat(content.get(1).path("image_url").path("url").asText()).isEqualTo("data:image/png;base64,eA==");
+  }
+
+  @Test
+  void remotePlainHttpNeverReceivesCredentials(){
+    var gateway=new LlmGateway(new ObjectMapper(),"","fixture","codex-bridge","",1,"http://example.invalid/v1","fixture","synthetic-not-a-real-secret",1,"","","","",200000,"",1,"","","");
+    gateway.initializeMainProvider();assertThat(gateway.getActiveMainProvider()).isEqualTo("unconfigured");assertThat(gateway.generate("Synthetic",null,null)).isEmpty();
+  }
+
+  @Test
   void unavailableCodexCommandIsNotSelectedAsMainProvider() {
     LlmGateway gateway = new LlmGateway(
         new ObjectMapper(),

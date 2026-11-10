@@ -197,6 +197,10 @@ public class LlmGateway {
     public Optional<String> generate(String prompt, String targetModel, List<String> base64Images) {
         boolean isVision = (base64Images != null && !base64Images.isEmpty()) || (targetModel != null && targetModel.contains("llava"));
 
+        if(isVision && (edgeUrl==null || edgeUrl.isBlank()) && "codex-bridge".equals(resolveActiveMainProvider())) {
+            return generateWithCodexBridge(prompt,targetModel,base64Images);
+        }
+
         if (!isVision && "codex".equals(resolveActiveMainProvider())) {
             return generateWithCodex(prompt);
         }
@@ -351,10 +355,16 @@ public class LlmGateway {
     }
 
     private boolean isCodexBridgeConfigured() {
-        return codexBridgeUrl != null && !codexBridgeUrl.isBlank() && resolveCodexBridgeApiKey().isPresent();
+        return secureBridgeUrl() && resolveCodexBridgeApiKey().isPresent();
+    }
+
+    private boolean secureBridgeUrl() {
+        try{var uri=URI.create(codexBridgeUrl);String host=uri.getHost();return host!=null&&uri.getUserInfo()==null&&uri.getRawQuery()==null&&uri.getRawFragment()==null&&("https".equals(uri.getScheme())||"http".equals(uri.getScheme())&&java.util.Set.of("127.0.0.1","localhost","[::1]","::1").contains(host));}
+        catch(Exception error){return false;}
     }
 
     private boolean isCodexBridgeAvailable() {
+        if(!secureBridgeUrl())return false;
         Optional<String> apiKey = resolveCodexBridgeApiKey();
         if (codexBridgeUrl == null || codexBridgeUrl.isBlank() || apiKey.isEmpty()) {
             return false;
@@ -599,6 +609,11 @@ public class LlmGateway {
     }
 
     private Optional<String> generateWithCodexBridge(String prompt, String targetModel) {
+        return generateWithCodexBridge(prompt,targetModel,null);
+    }
+
+    private Optional<String> generateWithCodexBridge(String prompt, String targetModel,List<String> images) {
+        if(!secureBridgeUrl())return Optional.empty();
         Optional<String> apiKey = resolveCodexBridgeApiKey();
         if (codexBridgeUrl == null || codexBridgeUrl.isBlank() || apiKey.isEmpty()) {
             log.warn("Codex Bridge is not configured.");
@@ -609,7 +624,11 @@ public class LlmGateway {
         Map<String, Object> payload = new LinkedHashMap<>();
         payload.put("model", model);
         payload.put("stream", false);
-        payload.put("messages", List.of(Map.of("role", "user", "content", prompt)));
+        if(images!=null&&!images.isEmpty()){
+            var content=new java.util.ArrayList<Map<String,Object>>();content.add(Map.of("type","text","text",prompt));
+            for(String image:images)content.add(Map.of("type","image_url","image_url",Map.of("url",image.startsWith("data:")?image:"data:image/png;base64,"+image)));
+            payload.put("messages",List.of(Map.of("role","user","content",content)));
+        }else payload.put("messages", List.of(Map.of("role", "user", "content", prompt)));
 
         try {
             SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();

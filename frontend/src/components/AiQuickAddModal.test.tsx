@@ -31,7 +31,30 @@ const renderModal = (onSuccess = vi.fn()) =>
   );
 
 describe('AiQuickAddModal', () => {
+  it('ignores a scan that finishes after closing and reopening', async () => {
+    localStorage.setItem('bobbuy_locale','en-US');
+    let finish:(value:unknown)=>void=()=>{};
+    onboardScanMock.mockReturnValueOnce(new Promise(resolve=>{finish=resolve;}));
+    const onSuccess=vi.fn(),onCancel=vi.fn();
+    const view=render(<I18nProvider><AiQuickAddModal visible onCancel={onCancel} onSuccess={onSuccess}/></I18nProvider>);
+    fireEvent.change(document.querySelector('input[type="file"]')!,{target:{files:[new File(['synthetic'],'synthetic.png',{type:'image/png'})]}});
+    await waitFor(()=>expect(onboardScanMock).toHaveBeenCalledTimes(1));
+    view.rerender(<I18nProvider><AiQuickAddModal visible={false} onCancel={onCancel} onSuccess={onSuccess}/></I18nProvider>);
+    view.rerender(<I18nProvider><AiQuickAddModal visible onCancel={onCancel} onSuccess={onSuccess}/></I18nProvider>);
+    finish({name:'Late candidate',attributes:{}});
+    await waitFor(()=>expect(screen.queryByDisplayValue('Late candidate')).not.toBeInTheDocument());
+    expect(onSuccess).not.toHaveBeenCalled();
+  });
+
+  it('accepts pasted images through the same scan path',async()=>{
+    localStorage.setItem('bobbuy_locale','en-US');renderModal();
+    const zone=screen.getByLabelText('Paste, drop or choose a product image');
+    fireEvent.paste(zone,{clipboardData:{files:[new File(['synthetic'],'paste.png',{type:'image/png'})]}});
+    await waitFor(()=>expect(onboardScanMock).toHaveBeenCalledWith('data:image/png;base64,ZmFrZQ==','paste.png'));
+  });
+
   beforeEach(() => {
+    localStorage.setItem('bobbuy_locale','zh-CN');
     onboardScanMock.mockResolvedValue({
       name: 'Acme Orange Box 1kg',
       brand: 'Acme',

@@ -9,7 +9,7 @@ type Product={id:string;name:Record<string,string>;itemNumber?:string;recordVers
 type Attempt={postId:number;productId:string;productVersion:number;facts:RecommendationFacts;version:number;reviewed:true};
 const identity=()=>JSON.stringify([getStoredUser()?.id,getStoredUser()?.roles,getStoredAccessToken()]);
 
-export default function RecommendationFromProduct({detail,onChange,onPendingChange}:{detail:RecommendationDetail;onChange:(value:RecommendationDetail)=>void;onPendingChange:(value:boolean)=>void}){
+export default function RecommendationFromProduct({detail,onChange,onPendingChange,suggestedProduct}:{detail:RecommendationDetail;onChange:(value:RecommendationDetail)=>void;onPendingChange:(value:boolean)=>void;suggestedProduct?:string}){
  const {t,locale}=useI18n();
  const [products,setProducts]=useState<Product[]>([]),[productId,setProductId]=useState<string>(),[facts,setFacts]=useState<RecommendationFacts>({name:''}),[reviewed,setReviewed]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState(''),[conflict,setConflict]=useState(false),[authEpoch,setAuthEpoch]=useState(0);
  const epoch=useRef(0),inFlight=useRef(false),attempt=useRef<Attempt>(),currentPost=useRef(detail.post.id);
@@ -25,6 +25,7 @@ export default function RecommendationFromProduct({detail,onChange,onPendingChan
   return()=>{active=false;epoch.current++;};
  },[detail.post.id,authEpoch]);
  useEffect(()=>{onPendingChange(!!productId||busy);return()=>onPendingChange(false);},[productId,busy,onPendingChange]);
+ useEffect(()=>{const next=products.find(p=>p.id===suggestedProduct);if(!next)return;attempt.current=undefined;setProductId(next.id);setFacts({name:next.name['ja-JP']??'',itemNumber:next.itemNumber});setReviewed(false);setReloaded(false);setConflict(false);setError('');},[suggestedProduct,products]);
  const product=products.find(p=>p.id===productId);
  function changed(){attempt.current=undefined;setReviewed(false);setReloaded(false);setError('');}
  function acceptDetail(next:RecommendationDetail){

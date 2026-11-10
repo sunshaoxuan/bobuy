@@ -1,0 +1,8 @@
+{
+  "scope": "Real Chrome local UI with synthetic scan/search/save fixtures, not real AI or official search success",
+  "checks": {},
+  "result": "FAIL",
+  "error": "Error: page.goto: net::ERR_NETWORK_ACCESS_DENIED at http://127.0.0.1:4173/admin/recommendations?post=4\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:4173/admin/recommendations?post=4\", waiting until \"load\"\u001b[22m\n",
+  "page": "インターネット アクセスがブロックされています\n\nファイアウォールまたはウイルス対策ソフトウェアによって接続がブロックされた可能性があります。\n\n次をお試しください\n\n接続を確認する\nファイアウォールとウイルス対策の設定を確認する\nWindows ネットワーク診断ツールを実行する\nERR_NETWORK_ACCESS_DENIED\n詳細",
+  "writes": []
+}

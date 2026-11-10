@@ -9,6 +9,8 @@ import { FactsForm, OfferInfo, factsError, parseBatch, factFields } from '../com
 import {RecommendationPreview} from './PublicRecommendations';
 import RecommendationCatalog from '../components/RecommendationCatalog';
 import RecommendationFromProduct from '../components/RecommendationFromProduct';
+import RecommendationWritingAssistant from '../components/RecommendationWritingAssistant';
+import RecommendationProductIntake from '../components/RecommendationProductIntake';
 import RecommendationLocalization from '../components/RecommendationLocalization';
 import RecommendationGallery from '../components/RecommendationGallery';
 import ReferenceQuoteHistory from '../components/ReferenceQuoteHistory';
@@ -67,6 +69,7 @@ export default function Recommendations() {
   const [issueDatePending,setIssueDatePending]=useState(false);
   const activePostId=useRef(id);activePostId.current=id;
   const [serviceOpen,setServiceOpen]=useState(false);
+  const [intakePending,setIntakePending]=useState(false),[suggestedProduct,setSuggestedProduct]=useState<string>();
   const [editingItem, setEditingItem] = useState<number>();
   const [editFacts, setEditFacts] = useState<RecommendationFacts>({name:''});
   const [publicationReviews,setPublicationReviews]=useState<Record<number,string>>({});
@@ -91,7 +94,7 @@ export default function Recommendations() {
     const current=editorRef.current.detail;return current&&currentPost.current===next.post.id&&current.post.id===next.post.id&&Number.isSafeInteger(next.post.version)&&next.post.version>=current.post.version?setDetail(next):false;
   }
   const products = [...new Map(detail?.items.map(item => [identity(item), item])).values()];
-  const pending = preparing || queue.some(item => item.status !== 'done') || editingItem !== undefined || !!batch.trim() || classificationPending || fromProductPending||articlePending||issueDatePending||serviceOpen||publicationRetries.size>0||publicationConflicts.size>0;
+  const pending = preparing || queue.some(item => item.status !== 'done') || editingItem !== undefined || !!batch.trim() || classificationPending || fromProductPending||articlePending||issueDatePending||serviceOpen||intakePending||publicationRetries.size>0||publicationConflicts.size>0;
   const navigation = useBlocker(({currentLocation,nextLocation}) => !!detail && (dirty || pending) &&
     (currentLocation.pathname !== nextLocation.pathname || currentLocation.search !== nextLocation.search));
   useEffect(()=>{if(!detail&&navigation.state==='blocked')navigation.reset();},[detail,navigation]);
@@ -104,7 +107,7 @@ export default function Recommendations() {
   }, [dirty, pending]);
   useEffect(() => {
     let active=true;const prior=loadScope.current,reset=!prior||prior.id!==id||prior.page!==page||prior.actorKey!==session.actorKey;loadScope.current={id,page,actorKey:session.actorKey};
-    if(reset){selectionEpoch.current++;setPreparing(false);urls.current.forEach(url=>URL.revokeObjectURL(url));urls.current.clear();setQueue([]);setQueuePage(1);setItemPage(1);setGenerated('');setPrompt('');setEditingItem(undefined);setBatch('');setPreview(false);setClassificationPending(false);setArticlePending(false);setIssueDatePending(false);setFromProductPending(false);setBusy(false);setWriting(false);setList([]);setLoading(true);setDetail(undefined);setPublicationReviews({});setPublicationRetries(new Set());setPublicationConflicts(new Set());publicationAttempts.current.clear();publicationInFlight.current=false;}
+    if(reset){selectionEpoch.current++;setPreparing(false);urls.current.forEach(url=>URL.revokeObjectURL(url));urls.current.clear();setQueue([]);setQueuePage(1);setItemPage(1);setGenerated('');setPrompt('');setEditingItem(undefined);setBatch('');setPreview(false);setClassificationPending(false);setArticlePending(false);setIssueDatePending(false);setFromProductPending(false);setIntakePending(false);setSuggestedProduct(undefined);setBusy(false);setWriting(false);setList([]);setLoading(true);setDetail(undefined);setPublicationReviews({});setPublicationRetries(new Set());setPublicationConflicts(new Set());publicationAttempts.current.clear();publicationInFlight.current=false;}
     if(!reset){selectionEpoch.current++;publicationInFlight.current=false;setPublicationReviews({});setBusy(false);setWriting(false);}setError('');setNotice('');
     const request=id?api.get(id):api.list(page);
     void request.then(value=>{if(!active||!scopeCurrent())return;if(Array.isArray(value))setList(value);else if(setDetail(value))setSelected([...new Set(value.items.map(identity))]);}).catch(e=>{if(active&&scopeCurrent())setError((e as Error).message);}).finally(()=>{if(active&&scopeCurrent())setLoading(false);});
@@ -232,6 +235,7 @@ export default function Recommendations() {
       <div className="rec-editor-layout"><section className="rec-article"><h2>{t('rec.article')}</h2>{detail.serviceOffer?<div className="rec-public-body"><Tag>{t('service.kind')}</Tag>{body.split(/\n\s*\n/).map((p,i)=><p key={i}>{p}</p>)}</div>:<ArticleLanguages key={detail.post.id} detail={detail} title={title} body={body} sourceDirty={dirty} disabled={busy} onTitle={setTitle} onBody={setBody} onChanged={next=>setDetail(next,true)} onPending={setArticlePending}/>}
         {published && <div className="rec-public-link"><Link to={'/recommendations/' + id}>{t('rec.view')}</Link><Tooltip title={t('rec.copy')}><Button icon={<CopyOutlined />} aria-label={t('rec.copy')} onClick={() => void run(async () => { await navigator.clipboard.writeText(location.origin + '/recommendations/' + id); setNotice(t('rec.copied')); })} /></Tooltip></div>}
       </section></div>
+      {!detail.serviceOffer&&!published&&<><RecommendationWritingAssistant key={detail.post.id} detail={detail} onApply={setBody} onPendingChange={setWriting}/><RecommendationProductIntake key={detail.post.id} detail={detail} onChange={receiveProductDetail} onPendingChange={setIntakePending} onExisting={setSuggestedProduct}/></>}
       {!detail.serviceOffer && <section className="rec-uploads"><div className="rec-section-heading"><h2>{t('rec.uploads')}</h2><div className="rec-action-group"><input ref={fileInput} type="file" multiple accept={IMAGE_UPLOAD_ACCEPT} hidden disabled={preparing} onChange={e => void choose(e.target.files)} /><Button icon={<PlusOutlined />} loading={preparing} disabled={busy || writing || preparing} onClick={() => fileInput.current?.click()}>{t('rec.choose')}</Button><Button icon={<UploadOutlined />} disabled={busy || writing || preparing || !pending} onClick={() => void upload(queue)}>{t('rec.register_all')}</Button></div></div>
         <p>{t('gallery.format_hint')}</p>
         <p>{t('rec.batch_help')}</p><label htmlFor="rec-batch">{t('rec.batch_label')}</label><Input.TextArea id="rec-batch" rows={5} value={batch} onChange={e => setBatch(e.target.value)} disabled={busy} />
@@ -250,7 +254,7 @@ export default function Recommendations() {
           <div className="rec-upload-actions"><Tooltip title={t(item.status === 'failed' ? 'rec.retry' : 'rec.register')}><Button disabled={busy || item.status === 'done'} icon={item.status === 'failed' ? <ReloadOutlined /> : <UploadOutlined />} aria-label={t(item.status === 'failed' ? 'rec.retry' : 'rec.register')} onClick={() => void upload([item])} /></Tooltip><Tooltip title={t('rec.remove')}><Button disabled={busy} icon={<DeleteOutlined />} aria-label={t('rec.remove')} onClick={() => { URL.revokeObjectURL(item.preview); urls.current.delete(item.preview); setQueue(q => q.filter(value => value.key !== item.key)); setQueuePage(1); }} /></Tooltip></div></div>)}</div>
         {queue.length > PAGE_SIZE && <Pagination size="small" current={queuePage} pageSize={PAGE_SIZE} total={queue.length} showSizeChanger={false} onChange={setQueuePage} />}
       </section>}
-      {!detail.serviceOffer&&<><RecommendationFromProduct detail={detail} onChange={receiveProductDetail} onPendingChange={setFromProductPending}/>
+      {!detail.serviceOffer&&<><RecommendationFromProduct detail={detail} onChange={receiveProductDetail} onPendingChange={setFromProductPending} suggestedProduct={suggestedProduct}/>
       {!!editableDetail?.items.length&&<><RecommendationClassification detail={editableDetail} onChanged={setDetail} onPendingChange={setClassificationPending} />
       <RecommendationCatalog detail={editableDetail} onChange={setDetail}/>
       <RecommendationLocalization detail={editableDetail} onChange={setDetail}/>

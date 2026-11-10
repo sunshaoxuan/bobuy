@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@org.springframework.context.annotation.Profile("mock-search")
 public class MockWebSearchService implements WebSearchService {
   @Override
   public List<SearchResult> search(String query) {

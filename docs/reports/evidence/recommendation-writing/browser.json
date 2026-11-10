@@ -1,0 +1,38 @@
+{
+  "scope": "Real local Chrome UI, synthetic API fixtures; not real AI success or production writes",
+  "checks": {
+    "threeConfirmationsAndNoAutosave": "PASS",
+    "mobileNoOverflow": "PASS"
+  },
+  "result": "PASS",
+  "calls": [
+    {
+      "step": "intent",
+      "idea": "Weekend groceries for families",
+      "brief": "",
+      "prompt": "",
+      "briefConfirmed": false,
+      "promptConfirmed": false,
+      "facts": []
+    },
+    {
+      "step": "prompt",
+      "idea": "Weekend groceries for families",
+      "brief": "Audience: busy families. Tone: practical.",
+      "prompt": "",
+      "briefConfirmed": true,
+      "promptConfirmed": false,
+      "facts": []
+    },
+    {
+      "step": "draft",
+      "idea": "Weekend groceries for families",
+      "brief": "Audience: busy families. Tone: practical.",
+      "prompt": "Edited prompt: only reviewed facts.",
+      "briefConfirmed": true,
+      "promptConfirmed": true,
+      "facts": []
+    }
+  ],
+  "writes": 0
+}
