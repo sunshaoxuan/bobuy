@@ -1332,6 +1332,22 @@ const messages: Dictionary = {
   "rating.invalid": "请输入 0–5 星，支持半星；未评分不能公开星级。",
   "rating.review_required": "保存前请核对星级。",
   "rating.value": "商品星级：{value} / 5",
+  "service.basis": "服务形式",
+  "service.staff_hours": "按人数／工时",
+  "service.task_packages": "按套餐参考",
+  "service.packages": "参考套餐",
+  "service.package_hint": "各套餐按范围分别列价，不合计为统一服务价。附加条件请在费用说明中列明。",
+  "service.package_item": "套餐 {index}",
+  "service.package_name": "套餐名称",
+  "service.package_scope": "服务范围及适用条件",
+  "service.package_originalPrice": "有来源的套餐原价（JPY含税，可空）",
+  "service.package_price": "套餐参考价（JPY含税）",
+  "service.package_reference": "套餐参考价（非实时）",
+  "service.add_package": "增加套餐",
+  "service.fee_kind": "费用形式",
+  "service.fee_fixed": "明确固定金额",
+  "service.fee_conditional": "条件说明（不计总价）",
+  "service.change_basis": "更改形式将清空费用与套餐，保留四语说明和来源。继续？",
 };
 
 export default messages;

@@ -1332,6 +1332,22 @@ const messages: Dictionary = {
   "rating.invalid": "0～5を0.5刻みで入力してください。未評価は公開できません。",
   "rating.review_required": "保存前に評価を確認してください。",
   "rating.value": "商品の評価：5点中{value}点",
+  "service.basis": "サービス形式",
+  "service.staff_hours": "人数・時間別",
+  "service.task_packages": "パッケージ別の参考情報",
+  "service.packages": "参考パッケージ",
+  "service.package_hint": "範囲ごとに参考料金を表示します。全体の合計料金ではありません。追加条件は費用の説明に記載してください。",
+  "service.package_item": "パッケージ {index}",
+  "service.package_name": "パッケージ名",
+  "service.package_scope": "対象範囲・適用条件",
+  "service.package_originalPrice": "出典で確認した通常パッケージ料金（税込JPY・任意）",
+  "service.package_price": "パッケージ参考料金（税込JPY）",
+  "service.package_reference": "パッケージ参考料金（非リアルタイム）",
+  "service.add_package": "パッケージを追加",
+  "service.fee_kind": "費用の種類",
+  "service.fee_fixed": "確認済みの固定額",
+  "service.fee_conditional": "条件の説明（合計に算入しない）",
+  "service.change_basis": "形式を変更すると料金とパッケージを消去します。四言語の説明と出典は残ります。続けますか？",
 };
 
 export default messages;

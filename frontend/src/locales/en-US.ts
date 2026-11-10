@@ -1332,6 +1332,22 @@ const messages: Dictionary = {
   "rating.invalid": "Enter 0–5 stars in half-star steps; an unrated product cannot show stars.",
   "rating.review_required": "Review the rating before saving.",
   "rating.value": "Product rating: {value} out of 5",
+  "service.basis": "Service format",
+  "service.staff_hours": "Staff and hours",
+  "service.task_packages": "Package references",
+  "service.packages": "Reference packages",
+  "service.package_hint": "List each package and its scope separately. Prices are not a combined service total. State additional conditions in the fee notes.",
+  "service.package_item": "Package {index}",
+  "service.package_name": "Package name",
+  "service.package_scope": "Scope and conditions",
+  "service.package_originalPrice": "Sourced regular package price (JPY incl. tax, optional)",
+  "service.package_price": "Reference package price (JPY incl. tax)",
+  "service.package_reference": "Reference package price (not live)",
+  "service.add_package": "Add package",
+  "service.fee_kind": "Fee type",
+  "service.fee_fixed": "Confirmed fixed amount",
+  "service.fee_conditional": "Conditional note (no total)",
+  "service.change_basis": "Changing format clears fees and packages. Four-language copy and source are kept. Continue?",
 };
 
 export default messages;
