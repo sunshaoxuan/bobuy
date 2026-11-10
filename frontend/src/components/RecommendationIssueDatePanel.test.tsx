@@ -35,3 +35,22 @@ it('another post, advanced parent or unexplained version jump cannot receive a d
  expect(applyRecommendationIssueDate(detail(),9,3,reviewed())).toBeUndefined();expect(applyRecommendationIssueDate({...detail(),post:{...post,version:5}},8,3,reviewed())).toBeUndefined();expect(applyRecommendationIssueDate(detail(),8,3,reviewed(8))).toBeUndefined();expect(applyRecommendationIssueDate(detail(),8,3,unknown(3))).toBeUndefined();
 });
 it('a same-version no-op review remains a metadata-only merge',()=>{const before=detail(),next=applyRecommendationIssueDate(before,8,3,reviewed(3))!;expect(next.post.version).toBe(3);expect(next.items).toBe(before.items);expect(next.post.publishedAt).toBe(before.post.publishedAt);});
+
+it('never fills an unknown date from an old title or the later publication instant',async()=>{
+ render(tree({post:{...post,title:'Synthetic source issue 2026-11-08',publishedAt:'2026-11-09T12:53:30Z'}}));
+ fireEvent.click(screen.getByRole('button',{name:en['issueDate.title']}));await screen.findByLabelText(en['issueDate.date']);
+ expect(screen.getByLabelText(en['issueDate.date'])).toHaveValue('');expect(screen.getByLabelText(en['issueDate.reference'])).toHaveValue('');expect(screen.getByLabelText(en['issueDate.hash'])).toHaveValue('');
+ expect(screen.getByRole('checkbox',{name:en['issueDate.reviewed']})).not.toBeChecked();expect(screen.getByRole('button',{name:en['issueDate.save']})).toBeDisabled();expect(mocks.saveIssueDate).not.toHaveBeenCalled();
+});
+
+it('reviews a November8 source on a November9 publication through the owner form without changing article or111 relationships',async()=>{
+ const currentPost={...post,publishedAt:'2026-11-09T12:53:30Z'},sourceRef='message:synthetic-nov8-bound-source',sourceHash='a'.repeat(64);
+ const accepted:Review={...reviewed(),issueDate:'2026-11-08',sourceRef,sourceHash,reviewedBy:42,reviewedAt:'2026-11-10T00:00:00Z'};
+ mocks.saveIssueDate.mockResolvedValue(accepted);const saved=vi.fn(),before={...detail(),post:currentPost};
+ render(tree({post:currentPost,onSaved:saved}));fireEvent.click(screen.getByRole('button',{name:en['issueDate.title']}));await screen.findByLabelText(en['issueDate.date']);
+ fireEvent.change(screen.getByLabelText(en['issueDate.date']),{target:{value:'2026-11-08'}});fireEvent.change(screen.getByLabelText(en['issueDate.reference']),{target:{value:sourceRef}});fireEvent.change(screen.getByLabelText(en['issueDate.hash']),{target:{value:sourceHash}});
+ expect(screen.getByRole('button',{name:en['issueDate.save']})).toBeDisabled();fireEvent.click(screen.getByRole('checkbox',{name:en['issueDate.reviewed']}));fireEvent.click(screen.getByRole('button',{name:en['issueDate.save']}));await screen.findByText(en['issueDate.saved']);
+ expect(mocks.saveIssueDate).toHaveBeenCalledTimes(1);expect(mocks.saveIssueDate).toHaveBeenCalledWith(8,{issueDate:'2026-11-08',sourceRef,sourceHash,version:3,reviewed:true},'synthetic-token-a');
+ expect(Object.keys(mocks.saveIssueDate.mock.calls[0][1]).sort()).toEqual(['issueDate','reviewed','sourceHash','sourceRef','version']);expect(saved).toHaveBeenCalledWith(accepted,3);
+ const next=applyRecommendationIssueDate(before,8,3,accepted)!;expect(next.post.issueDate).toBe('2026-11-08');expect(next.post.publishedAt).toBe('2026-11-09T12:53:30Z');expect(next.items).toBe(before.items);expect(next.items).toHaveLength(111);expect(next.body).toBe(before.body);expect(next.articleSourceHash).toBe(before.articleSourceHash);expect(next.post).not.toHaveProperty('reviewedBy');expect(next.post).not.toHaveProperty('sourceHash');
+});

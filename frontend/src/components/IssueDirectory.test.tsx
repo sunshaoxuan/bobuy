@@ -42,18 +42,18 @@ it('uses the server public total rather than query matches and never inserts sel
 it('omits missing public metadata on an old server instead of falling back to query count, publisher or title',async()=>{
  mocks.browseIssues.mockResolvedValue(page([{...row(9,'Costco 2026-11-01'),post:{...row(9).post,publisherName:'An operator'},publicItemCount:undefined,suppliers:undefined}]));
  const view=render(tree({primaryReady:true}));const link=await screen.findByRole('link',{name:/Costco 2026-11-01/});
- expect(link).toHaveAccessibleName(/Issue date unknown/);expect(link).not.toHaveAccessibleName(/public items|An operator|Published on/);expect(view.container.querySelector('.issue-directory-count')).toBeNull();expect(view.container.querySelector('.issue-directory-supplier-compact')).toBeNull();
+ expect(link).toHaveAccessibleName(/Issue date awaiting source verification/);expect(link).not.toHaveAccessibleName(/public items|An operator|Published on/);expect(view.container.querySelector('.issue-directory-count')).toBeNull();expect(view.container.querySelector('.issue-directory-supplier-compact')).toBeNull();
 });
 it('renders the issue LocalDate independently from publication time and keeps the server order',async()=>{
- mocks.browseIssues.mockResolvedValue(page([{...row(7),issueDate:'2026-11-04'}, {...row(9),issueDate:'2026-11-09'}]));
+ mocks.browseIssues.mockResolvedValue(page([{...row(7),issueDate:'2026-11-04',issueDateSource:'REVIEWED_SOURCE'}, {...row(9),issueDate:'2026-11-09',issueDateSource:'REVIEWED_SOURCE'}]));
  const view=render(tree({primaryReady:true}));await screen.findByRole('link',{name:/Issue 7/});
  expect([...view.container.querySelectorAll('.issue-directory-date')].map(e=>e.getAttribute('datetime'))).toEqual(['2026-11-04','2026-11-09']);
  expect([...view.container.querySelectorAll('a')].map(e=>e.getAttribute('href')?.split('topic=')[1])).toEqual(['7','9']);
  expect(screen.getByRole('link',{name:/Issue 7/})).toHaveAccessibleName(/Issue date: 11\/04\/2026/);
 });
 it.each(['2026-02-29','2026-11-01T00:00:00Z','not a date'])('does not turn invalid issue date %s into a guessed calendar day',async issueDate=>{
- mocks.browseIssues.mockResolvedValue(page([{...row(9),issueDate}]));const view=render(tree({primaryReady:true}));
- expect(await screen.findByRole('link',{name:/Issue 9/})).toHaveAccessibleName(/Issue date unknown/);expect(view.container.querySelector('.issue-directory-date')).toBeNull();
+ mocks.browseIssues.mockResolvedValue(page([{...row(9),issueDate,issueDateSource:'REVIEWED_SOURCE'}]));const view=render(tree({primaryReady:true}));
+ expect(await screen.findByRole('link',{name:/Issue 9/})).toHaveAccessibleName(/Issue date awaiting source verification/);expect(view.container.querySelector('.issue-directory-date')).toBeNull();
 });
 it('keeps all actual supplier names accessible while compact text can be abbreviated',async()=>{
  const suppliers=[{id:'a',name:{'en-US':'Official warehouse'}},{id:'b',name:{'en-US':'A very long second supplier name'}},{id:'a',name:{'en-US':'Official warehouse'}}];
@@ -61,6 +61,29 @@ it('keeps all actual supplier names accessible while compact text can be abbrevi
  expect(link).toHaveAccessibleName(/Official warehouse · A very long second supplier name/);expect(view.container.querySelector('.issue-directory-supplier-compact')?.textContent).toBe('Official warehouse · A very long second supplier name');
  fireEvent.click(screen.getByRole('button',{name:/Issue index/}));expect(view.container.querySelector('.issue-directory-suppliers')?.textContent).toContain('A very long second supplier name');
 });
-it.each([['en-US','Issue date unknown','7 public items'],['zh-CN','期次日期未知','7 项公开内容'],['zh-TW','期次日期未知','7 項公開內容'],['ja-JP','号の日付不明','公開中 7 件']])('labels unknown dates and real public counts in %s',async(locale,unknown,total)=>{
- localStorage.setItem('bobbuy_locale',locale);const view=render(tree({primaryReady:true}));const link=await screen.findByRole('link',{name:/Issue 1/});expect(link).toHaveAccessibleName(expect.stringContaining(unknown));expect(link).toHaveAccessibleName(expect.stringContaining(total));expect(view.container.querySelector('.issue-directory-date-unknown small')?.textContent).toBe(unknown);
+it.each([['en-US','Issue date awaiting source verification','To verify','7 public items'],['zh-CN','期次日期待核对','待核对','7 项公开内容'],['zh-TW','期次日期待核對','待核對','7 項公開內容'],['ja-JP','号の日付は出典確認待ち','確認待ち','公開中 7 件']])('labels unverified dates and real public counts in %s',async(locale,unverified,compact,total)=>{
+ localStorage.setItem('bobbuy_locale',locale);const view=render(tree({primaryReady:true}));const link=await screen.findByRole('link',{name:/Issue 1/});expect(link).toHaveAccessibleName(expect.stringContaining(unverified));expect(link).toHaveAccessibleName(expect.stringContaining(total));expect(view.container.querySelector('.issue-directory-date-unknown small')?.textContent).toBe(compact);
+ fireEvent.click(screen.getByRole('button',{name:/Issue index|期数目录|期數目錄|記事一覧/}));expect(view.container.querySelector('.issue-directory-date-unknown small')).toBeNull();expect(view.container.querySelectorAll('.issue-directory-date-status')).toHaveLength(1);expect(view.container.querySelector('.issue-directory-date-status')?.textContent).toBe(unverified);expect(view.container.querySelectorAll('.issue-directory-date-note')).toHaveLength(1);
+});
+
+it('keeps title dates as original text and shows only one pending status per expanded card',async()=>{
+ mocks.browseIssues.mockResolvedValue(page([row(9,'Original issue (2026/11/9)'),row(8,'Warehouse picks'),row(7,'Original issue (2026/11/4)')]));
+ const view=render(tree({primaryReady:true,selected:{id:9,title:'Original issue (2026/11/9)'}}));await screen.findByRole('link',{name:/Original issue \(2026\/11\/9\)/});fireEvent.click(screen.getByRole('button',{name:/Issue index/}));
+ expect(view.container.querySelectorAll('.issue-directory-date')).toHaveLength(0);expect(view.container.querySelectorAll('.issue-directory-date-unknown small')).toHaveLength(0);expect(view.container.querySelectorAll('.issue-directory-date-status')).toHaveLength(3);expect(view.container.querySelectorAll('.issue-directory-date-note')).toHaveLength(1);expect(view.container.querySelectorAll('[aria-current="page"]')).toHaveLength(1);
+ expect(view.container.querySelector('.issue-directory-date-note')?.textContent).toContain('Dates in titles retain the original wording');expect(screen.getByRole('link',{name:/Warehouse picks/})).toHaveAccessibleName(/awaiting source verification/);
+});
+it('does not turn an unreviewed or conflicting DTO date into a confirmed issue calendar',async()=>{
+ mocks.browseIssues.mockResolvedValue(page([{...row(9),issueDate:'2026-11-09'}, {...row(8),issueDate:'2026-11-08',issueDateSource:'REVIEWED_SOURCE',post:{...row(8).post,issueDate:'2026-11-07',issueDateSource:'REVIEWED_SOURCE'}}]));
+ const view=render(tree({primaryReady:true}));await screen.findByRole('link',{name:/Issue 9/});expect(view.container.querySelectorAll('.issue-directory-date')).toHaveLength(0);expect(screen.getByRole('link',{name:/Issue 8/})).toHaveAccessibleName(/awaiting source verification/);
+});
+it('uses the reviewed calendar even when a title or publication timestamp describes a different date',async()=>{
+ mocks.browseIssues.mockResolvedValue(page([{...row(9,'Campaign ends 2026/11/15'),issueDate:'2026-11-09',issueDateSource:'REVIEWED_SOURCE',post:{...row(9).post,publishedAt:'2026-11-10T23:59:59Z',issueDate:'2026-11-09',issueDateSource:'REVIEWED_SOURCE'}}]));
+ const view=render(tree({primaryReady:true}));const link=await screen.findByRole('link',{name:/Campaign ends/});expect(link).toHaveAccessibleName(/Issue date: 11\/09\/2026/);expect(view.container.querySelector('.issue-directory-date')?.getAttribute('datetime')).toBe('2026-11-09');expect(view.container.querySelector('.issue-directory-date-note')).toBeNull();
+});
+it('retains server date and same-day ID order after an old issue is edited or receives more items',async()=>{
+ const first=[{...row(9),issueDate:'2026-11-09',issueDateSource:'REVIEWED_SOURCE'},{...row(7),issueDate:'2026-11-09',issueDateSource:'REVIEWED_SOURCE'},row(8)];mocks.browseIssues.mockResolvedValueOnce(page(first)).mockResolvedValueOnce(page(first.map(r=>r.post.id===7?{...r,publicItemCount:37,post:{...r.post,updatedAt:'2099-12-31T23:59:59',publishedAt:'2099-12-31T23:59:59Z'}}:r)));
+ const view=render(tree({primaryReady:true,selected:{id:7,title:'Issue 7'}}));await screen.findByRole('link',{name:/Issue 9/});expect([...view.container.querySelectorAll('a')].map(a=>a.getAttribute('href')?.split('topic=')[1])).toEqual(['9','7','8']);view.rerender(tree({primaryReady:true,refresh:1,selected:{id:7,title:'Issue 7'}}));await screen.findByRole('link',{name:/Issue 7.*37 public items/});expect([...view.container.querySelectorAll('a')].map(a=>a.getAttribute('href')?.split('topic=')[1])).toEqual(['9','7','8']);expect(view.container.querySelectorAll('[aria-current="page"]')).toHaveLength(1);
+});
+it.each(['en-US','zh-CN','zh-TW','ja-JP'])('keeps a reviewed LocalDate on the same UTC calendar day in %s',async locale=>{
+ localStorage.setItem('bobbuy_locale',locale);mocks.browseIssues.mockResolvedValue(page([{...row(9),issueDate:'2026-12-31',issueDateSource:'REVIEWED_SOURCE'}]));const view=render(tree({primaryReady:true}));await screen.findByRole('link',{name:/Issue 9/});expect(view.container.querySelector('.issue-directory-date')?.getAttribute('datetime')).toBe('2026-12-31');expect(view.container.querySelector('.issue-directory-date b')?.textContent).toBe('31');
 });
