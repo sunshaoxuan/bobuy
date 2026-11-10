@@ -200,15 +200,6 @@ def migration_baseline(accepted):
                 or binding.get('sha256') != expected or digest(path) != expected):
             raise RuntimeError('The unchanged accepted48433 UI V28.1 manifest is required')
         return json.loads(path.read_text())
-    if (accepted.get('schemaBefore'), accepted.get('schemaAfter'), accepted.get('migrationChanges')) == (28, 28, False):
-        binding = accepted.get('migrationBaseline', {})
-        path = Path(binding.get('path', ''))
-        if (accepted.get('candidateKind') not in (None, 'ARTICLE_DIGEST_EDITOR_V1')
-                or path.as_posix() != ARTICLE_BASELINE_PATH
-                or binding.get('sha256') != ARTICLE_BASELINE_SHA256
-                or digest(path) != ARTICLE_BASELINE_SHA256):
-            raise RuntimeError('Exact C2 accepted migration baseline required for article V28')
-        return json.loads(path.read_text())
     if (accepted.get('schemaBefore'), accepted.get('schemaAfter'), accepted.get('migrationChanges')) == (28, '28.1', True):
         binding = accepted.get('migrationBaseline', {})
         path = Path(binding.get('path', ''))

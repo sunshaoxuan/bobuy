@@ -14,14 +14,11 @@ interface AiQuickAddModalProps {
   onCancel: () => void;
   onSuccess: (suggestion: AiOnboardingSuggestion) => void;
   durable?:{ready:boolean;enqueuePhoto:(file:File)=>Promise<CostcoOnboardingJobView>;onQueued:(job:CostcoOnboardingJobView)=>void};
-}
-
-const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, onSuccess,durable }) => {
   scan?: (file: File) => Promise<AiOnboardingSuggestion>;
   recommendation?: boolean;
 }
 
-const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, onSuccess,scan,recommendation=false }) => {
+const AiQuickAddModal: React.FC<AiQuickAddModalProps> = ({ visible, onCancel, onSuccess,durable,scan,recommendation=false }) => {
   const { t } = useI18n();
   const [currentStep, setCurrentStep] = useState(0);
   const [loading, setLoading] = useState(false);

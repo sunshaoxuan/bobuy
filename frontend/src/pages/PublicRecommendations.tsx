@@ -20,7 +20,6 @@ import SellingPrice from '../components/SellingPrice';
 import {RecommendationImageViewer} from '../components/RecommendationImageViewer';
 import {RecommendationName} from '../components/RecommendationName';
 import type {RecommendationItem} from '../api';
-import {arrangeIssues,useJapaneseDay} from '../recommendationSchedule';
 
 import {articleText,articleTitle} from '../recommendationArticle';
 
