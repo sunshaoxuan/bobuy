@@ -14,6 +14,20 @@ beforeEach(()=>{installCartLocks();vi.clearAllMocks();localStorage.clear();local
 function Probe(){const location=useLocation(),navigate=useNavigate();return <><output data-testid="route">{location.pathname+location.search}</output><button onClick={()=>navigate(-1)}>Back</button><button onClick={()=>navigate(1)}>Forward</button></>;}
 function mount(path:string){return render(<I18nProvider><MemoryRouter initialEntries={[path]}><Probe/><Storefront/></MemoryRouter></I18nProvider>);}
 function selected(path:string){for(const selector of ['.browse-sidebar','.browse-mobile-shortcuts'])expect(document.querySelector(selector+' a[aria-current="page"]')).toHaveAttribute('href',path);}
+it.each(['/products','/recommendations','/trips'])('keeps identity, node scope and cart while opening hidden-selector navigation on %s',async path=>{
+ const cart={tripId:11,requestId:crypto.randomUUID(),items:{p:2},currency:'JPY',quotes:{p:{price:10,currency:'JPY',revision:1,token:'existing'}}};
+ commitDraft('user:7','',cart);const before=readDraft('user:7');const identity=structuredClone(mocks.role.user);
+ mount(path+'?node=1');await waitFor(()=>expect(mocks.nodes).toHaveBeenCalled());
+ fireEvent.click(screen.getByRole('button',{name:'Open navigation menu'}));
+ await waitFor(()=>expect(document.querySelector('.browse-drawer .ant-drawer-body')).toBeInTheDocument());
+ expect(screen.queryByRole('combobox',{hidden:true})).not.toBeInTheDocument();
+ expect(document.querySelector('.browse-node')).toBeNull();
+ expect(screen.getByTestId('route').textContent).toBe(path+'?node=1');
+ expect(readDraft('user:7')).toEqual(before);expect(mocks.role.user).toEqual(identity);
+ fireEvent.click(document.querySelector('.ant-drawer-close')!);
+ expect(readDraft('user:7')).toEqual(before);expect(screen.getByTestId('route').textContent).toBe(path+'?node=1');
+ expect(screen.queryByText('Change merchant')).not.toBeInTheDocument();
+});
 it.each(['/products','/recommendations','/recommendations/99?item=900'])('renders direct route %s without waiting for metadata or full products',async path=>{mocks.trips.mockImplementation(()=>new Promise(()=>{}));mocks.activeTrips.mockImplementation(()=>new Promise(()=>{}));mount(path);await screen.findByRole('heading',{name:path.startsWith('/products')?'Catalog fixture':'Recommendations fixture'});expect(mocks.products).not.toHaveBeenCalled();expect(mocks.nodes).not.toHaveBeenCalled();expect(mocks.privateTrips).not.toHaveBeenCalled();expect(screen.getByTestId('eligibility')).toHaveTextContent('true');expect(screen.getByTestId('route').textContent).toBe(path);});
 it.each([false,true])('keeps root choice and both menus consistent for active=%s while normal trips are delayed',async active=>{let finish!:(value:unknown)=>void;mocks.activeTrips.mockImplementation(()=>new Promise(done=>{finish=done;}));mocks.trips.mockImplementation(()=>new Promise(()=>{}));mount('/?node=1');expect(document.querySelector('.browse-sidebar a[aria-current]')).toBeNull();await act(async()=>finish(active?[{id:11,merchantId:1,merchantName:'Shop',deliveryArea:'Area',deliveryDate:'2026-11-10'}]:[]));await screen.findByRole('heading',{name:active?'Catalog fixture':'Recommendations fixture'});selected((active?'/products':'/recommendations')+'?node=1');expect(mocks.products).not.toHaveBeenCalled();if(active)expect(screen.getByTestId('scope')).toHaveTextContent('1');});
 it('does not mistake failed active-trip metadata for an empty-trip recommendation default',async()=>{mocks.activeTrips.mockRejectedValue(Error('metadata unavailable'));mount('/');await screen.findByRole('heading',{name:'Catalog fixture'});await screen.findByText('metadata unavailable');selected('/products');});
