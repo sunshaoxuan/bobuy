@@ -93,6 +93,26 @@ def schema_acceptance(accepted, actual, baseline=None):
         return {'schemaBefore': 28, 'schemaAfter': 28, 'migrationChanges': False}
     if identity == (27, 27, False) and legacy_names and max(versions) == (27,):
         return {'schemaBefore': 27, 'schemaAfter': 27, 'migrationChanges': False}
+    if identity == (28, 31, True):
+        if (baseline is None or (baseline.get('schemaBefore'), baseline.get('schemaAfter'), baseline.get('migrationChanges')) != (27, 28, True)):
+            raise RuntimeError('V31 requires the exact prior C2/V28 migration manifest')
+        previous = baseline['migrations']
+        old_part = [entry for entry in actual if entry['path'] != 'V31__recommendation_item_publication.sql']
+        added = [entry for entry in actual if entry['path'] == 'V31__recommendation_item_publication.sql']
+        if (old_part != previous or len(added) != 1 or max(versions) != (31,)
+                or any(version > (28,) for version in versions if version != (31,))):
+            raise RuntimeError('V31 requires unchanged V28 migrations plus only its exact V31 migration')
+        return {'schemaBefore': 28, 'schemaAfter': 31, 'migrationChanges': True}
+    if identity == ('28.1', 31, True):
+        if (baseline is None or (baseline.get('schemaBefore'), baseline.get('schemaAfter'), baseline.get('migrationChanges')) != (28, '28.1', True)):
+            raise RuntimeError('Combined publication requires the accepted UI V28.1 migration baseline')
+        old_part = [entry for entry in actual if entry['path'] != 'V31__recommendation_item_publication.sql']
+        added = [entry for entry in actual if entry['path'] == 'V31__recommendation_item_publication.sql']
+        if (old_part != baseline['migrations'] or len(added) != 1 or max(versions) != (31,)
+                or any(version > (28, 1) for version in versions if version != (31,))
+                or sum(entry['path'] == ISSUE_DATE_MIGRATION and entry.get('sha256') == ISSUE_DATE_SHA256 for entry in old_part) != 1):
+            raise RuntimeError('Only exact accepted V28.1 prefix plus reviewed V31 is allowed')
+        return {'schemaBefore': '28.1', 'schemaAfter': 31, 'migrationChanges': True}
     if identity == (28, '28.1', True):
         old_part = [entry for entry in actual if entry['path'] != ISSUE_DATE_MIGRATION]
         added = [entry for entry in actual if entry['path'] == ISSUE_DATE_MIGRATION]
@@ -121,12 +141,46 @@ def checkout_migration_acceptance(content):
         raise RuntimeError('C2 migration must add only the two nullable columns without defaults or data writes')
 
 
+def publication_migration_acceptance(content):
+    # Exact source-QA migration, canonical Git LF bytes. New SQL requires a new review.
+    canonical = content.decode('utf-8').replace('\r\n', '\n').encode('utf-8')
+    if hashlib.sha256(canonical).hexdigest() != 'db1a7f96ea5017fabfadd5f52809fe0357816da6433ebb31d723deac900773a7':
+        raise RuntimeError('V31 publication migration differs from its exact reviewed bytes')
+
+
+def recovery_contract(schema):
+    if schema['schemaAfter'] == 31:
+        return {
+            'status': 'UNBOUND_EXACT_V31_AWARE_ARCHIVE_AND_PG_RUNTIME_REQUIRED',
+            'oldV28CoreAllowed': False, 'oldDatabaseRestoreAllowed': False,
+            'metadataOrClassPresenceIsRuntimeProof': False,
+            'fallback': 'CONTROLLED_MAINTENANCE_AND_FORWARD_FIX_IF_NO_VERIFIED_AWARE_ARTIFACT',
+            'requirement': 'Only an exact PENDING-aware core/JAR proven on V31 PG and independently hash-bound in a recoverable archive may be restored.',
+        }
+    return None
+
+
+def rollback_description(schema):
+    if schema['schemaAfter'] == 31:
+        return ('V31 data must stay intact. Old V28 core ignores PENDING and is not a recovery target. '
+                'Restore only the exact PENDING-aware artifact proven on V31 PG and hash-bound in an independently verified recovery archive; '
+                'otherwise keep controlled maintenance and forward-fix. This capture leaves recovery UNBOUND and authorizes no activation.')
+    return ('Compatible application-only recovery after fresh preflight; retain V'
+            + str(schema['schemaAfter']) + ' and all newer customer writes. Never restore an old database.')
 def issue_date_migration_acceptance(content):
     if hashlib.sha256(content).hexdigest() != ISSUE_DATE_SHA256:
         raise RuntimeError('Only the reviewed byte-exact V28.1 issue-date migration is accepted')
 
 
 def migration_baseline(accepted):
+    if (accepted.get('schemaBefore'), accepted.get('schemaAfter'), accepted.get('migrationChanges')) == ('28.1', 31, True):
+        binding = accepted.get('migrationBaseline', {})
+        path = Path(binding.get('path', ''))
+        expected = '6a20f67e81919a0bf53088183e5bc0473a94885654fce867ec36356cf9e519f9'
+        if (path.as_posix() != 'docs/reports/consumer-ui-integration-20261109/accepted-inputs.json'
+                or binding.get('sha256') != expected or digest(path) != expected):
+            raise RuntimeError('The unchanged accepted48433 UI V28.1 manifest is required')
+        return json.loads(path.read_text())
     if (accepted.get('schemaBefore'), accepted.get('schemaAfter'), accepted.get('migrationChanges')) == (28, 28, False):
         binding = accepted.get('migrationBaseline', {})
         path = Path(binding.get('path', ''))
@@ -148,8 +202,11 @@ def migration_baseline(accepted):
         return None
     binding = accepted.get('migrationBaseline', {})
     path = Path(binding.get('path', ''))
-    if path.as_posix() != 'docs/reports/c1-profile-20261109/accepted-inputs.json' or digest(path) != binding.get('sha256'):
-        raise RuntimeError('Exact prior V27 migration manifest required')
+    prior = ('docs/reports/c2-cart-20261109/accepted-inputs.json'
+             if (accepted.get('schemaBefore'), accepted.get('schemaAfter')) == (28, 31)
+             else 'docs/reports/c1-profile-20261109/accepted-inputs.json')
+    if path.as_posix() != prior or digest(path) != binding.get('sha256'):
+        raise RuntimeError('Exact prior migration manifest required')
     return json.loads(path.read_text())
 
 
@@ -176,6 +233,10 @@ def main():
         checkout_migration_acceptance((migration_root / 'V28__checkout_delivery_snapshot.sql').read_bytes())
     if (schema['schemaBefore'], schema['schemaAfter'], schema['migrationChanges']) == (28, '28.1', True):
         issue_date_migration_acceptance((migration_root / ISSUE_DATE_MIGRATION).read_bytes())
+    if schema['schemaAfter'] == 31:
+        publication_migration_acceptance((migration_root / 'V31__recommendation_item_publication.sql').read_bytes())
+        if schema['schemaBefore'] == '28.1':
+            issue_date_migration_acceptance((migration_root / ISSUE_DATE_MIGRATION).read_bytes())
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=False)
     core_jar = output / 'core.jar'
@@ -229,7 +290,7 @@ def main():
                 **schema, 'migrationBaseline': accepted.get('migrationBaseline'),
                 'migrations': accepted['migrations'], 'independentApplicationQa': accepted['qa'],
                 'independentArtifactQa': 'PENDING', 'productionStaged': False, 'productionActivated': False,
-                'rollback': 'Compatible application-only recovery after fresh preflight; retain V' + str(schema['schemaAfter']) + ' and all newer customer writes. Never restore an old database.',
+                'rollback': rollback_description(schema), 'recoveryGate': recovery_contract(schema),
                 'byteDifferencePolicy': 'Source is exact. Any compile/web byte differences require explicit artifact QA binding; no equality is inferred.'}
     (output / 'artifact.json').write_text(json.dumps(manifest, indent=2) + '\n')
     print(json.dumps({k: manifest[k] for k in ['source', 'archiveBytes', 'archiveSha256', 'coreJarSha256',

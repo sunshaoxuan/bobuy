@@ -1,4 +1,5 @@
 package com.bobbuy.api;
+import static com.bobbuy.test.RecommendationPublicationFixtures.legacyItem;
 import com.bobbuy.model.*;
 import com.bobbuy.repository.*;
 import com.bobbuy.service.BobbuyStore;
@@ -16,9 +17,20 @@ class RecommendationNodeTest {
  @Autowired MockMvc mvc;@Autowired ObjectMapper json;@Autowired BobbuyStore store;
  @Autowired RecommendationPostRepository posts;@Autowired RecommendationItemRepository items;@Autowired RecommendationImageRepository images;
  @Autowired UserRepository users;
+ final java.util.List<Long> fixtureOwnerIds=new java.util.ArrayList<>();
  @BeforeEach void setup(){cleanup();store.seed();}
- @AfterEach void cleanup(){items.deleteAll();posts.deleteAll();images.deleteAll();}
- RecommendationPost post(Long owner,boolean published){var p=new RecommendationPost();p.merchantId=owner;p.title="Synthetic "+owner;p.body="Synthetic";p.published=published;p.publisherName="Node "+owner;p.publishedAt=java.time.Instant.now();return posts.saveAndFlush(p);}
+ @AfterEach void cleanup(){items.deleteAll();posts.deleteAll();images.deleteAll();users.deleteAllById(fixtureOwnerIds);fixtureOwnerIds.clear();}
+ RecommendationPost post(Long owner,boolean published){
+  if(!users.existsById(owner)){var user=new User(owner,"Synthetic merchant "+owner,Role.AGENT,0);user.setUsername("synthetic_node_"+owner);users.saveAndFlush(user);fixtureOwnerIds.add(owner);}
+  var p=new RecommendationPost();p.merchantId=owner;p.title="Synthetic "+owner;p.body="Synthetic";p.published=published;p.publisherId=owner;p.publisherName="Node "+owner;p.publishedAt=java.time.Instant.now();p=posts.saveAndFlush(p);
+  if(published){
+   // Historical read fixture: V31 retains source facts without claiming a current master review.
+   var item=new RecommendationItem();item.postId=p.id;item.name="Synthetic historical node item "+owner;
+   item.imageHash="a".repeat(64);item.imageUrl="/synthetic-node-"+owner+".png";legacyItem(item,p);items.saveAndFlush(item);
+   assertThat(item.publicationSnapshot.legacy()).isTrue();assertThat(item.publicationSnapshot.catalog()).isNull();assertThat(item.publicationSnapshot.productVersion()).isNull();
+  }
+  return p;
+ }
  @Test void nodeFiltersOnlyNarrowExistingPublicDataAndNeverExposeDraftNodes()throws Exception {
   var a=post(1000L,true);var b=post(9090L,true);var draft=post(8080L,false);
   String feed=mvc.perform(get("/api/storefront/recommendations?merchantId=1000")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();

@@ -1,4 +1,5 @@
 package com.bobbuy.api;
+import static com.bobbuy.test.RecommendationPublicationFixtures.*;
 
 import com.bobbuy.model.*;
 import com.bobbuy.repository.*;
@@ -62,6 +63,7 @@ class RecommendationIntegrationTest {
             .content(json.writeValueAsString(Map.of("title",title,"body",body,"version",post.at("/post/version").asLong()))));
     }
     ResultActions publish(JsonNode post, String action) throws Exception {
+        if(action.equals("publish"))return publishPending(mvc,json,items,post,admin);
         return mvc.perform(post(path(post) + "/" + action).header("Authorization", "Bearer " + admin).contentType(MediaType.APPLICATION_JSON)
             .content("{\"version\":" + post.at("/post/version").asLong() + "}"));
     }
@@ -181,8 +183,8 @@ class RecommendationIntegrationTest {
         String cover = withImage.at("/items/0/imageUrl").asText();
         assertThat(live.at("/post/coverImageUrl").asText()).isEqualTo(cover);
         var publicList = data(mvc.perform(get("/api/storefront/recommendations")));
-        assertThat(publicList.get(0).at("/post/coverImageUrl").isNull()).isTrue();
-        assertThat(publicList.get(0).at("/items/0/imageUrl").isNull()).isTrue(); // Original promo remains internal evidence.
+        assertThat(publicList.get(0).at("/post/coverImageUrl").asText()).isNotEqualTo(cover).startsWith("/api/storefront/recommendation-images/");
+        assertThat(publicList.get(0).at("/items/0/imageUrl").asText()).isNotEqualTo(cover).startsWith("/api/storefront/recommendation-images/"); // Only the separately reviewed product image is public.
         assertThat(publicList.get(0).path("body").asText()).contains("<script>");
         assertThat(publicList.get(0).path("items").size()).isEqualTo(1);
         assertThat(live.at("/post/title").asText()).isEqualTo("Tea recommendation");
@@ -202,9 +204,9 @@ class RecommendationIntegrationTest {
         mvc.perform(get("/api/storefront/recommendations/" + id)).andExpect(status().isNotFound());
         String productId = withdrawn.at("/items/0/productId").asText();
         assertThat(data(mvc.perform(get("/api/storefront/recommendations"))).size()).isZero();
-        data(mvc.perform(delete(path(withdrawn) + "/items/" + withdrawn.at("/items/0/id").asLong())
-            .param("version",withdrawn.at("/post/version").asText()).header("Authorization","Bearer " + admin)));
-        assertThat(products.count()).isEqualTo(before+1); assertThat(products.existsById(productId)).isTrue(); assertThat(items.count()).isZero();
+        mvc.perform(delete(path(withdrawn) + "/items/" + withdrawn.at("/items/0/id").asLong())
+            .param("version",withdrawn.at("/post/version").asText()).header("Authorization","Bearer " + admin)).andExpect(status().isBadRequest());
+        assertThat(products.count()).isEqualTo(before+1); assertThat(products.existsById(productId)).isTrue(); assertThat(items.count()).isEqualTo(1); // Withdrawal cannot erase an already-public occurrence.
     }
     @Test void acceptsLargeBatchAndSerializesDuplicateRequests() throws Exception {
         var current = create(admin);

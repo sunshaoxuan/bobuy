@@ -4,6 +4,7 @@ import com.bobbuy.model.*;
 import com.bobbuy.repository.*;
 import com.bobbuy.security.JwtTokenService;
 import com.bobbuy.service.*;
+import com.bobbuy.test.RecommendationPublicationFixtures;
 import com.fasterxml.jackson.databind.*;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -94,6 +95,8 @@ class RecommendationArticleRevisionIntegrationTest {
  List<Map<String,String>> itemRows(){return jdbc.query("SELECT * FROM bb_recommendation_item WHERE post_id=? ORDER BY id",(rs,n)->{var row=new TreeMap<String,String>();for(int i=1;i<=rs.getMetaData().getColumnCount();i++)row.put(rs.getMetaData().getColumnLabel(i),rs.getString(i));return row;},post.id);}
  @Test void published111ItemsPricesDatesSourceHashesAndGallerySurviveFourLanguageRevisionAndReplay()throws Exception{
   var linked=new ArrayList<RecommendationItem>();for(int i=0;i<111;i++){var item=new RecommendationItem();item.postId=post.id;item.name="Synthetic unchanged item "+fixtureTag+" "+i;item.itemNumber="SYN-ARTICLE-"+fixtureTag+"-"+i;item.imageHash="a".repeat(64);item.imageUrl="/api/storefront/recommendation-images/synthetic-"+fixtureTag+"-"+i;item.referencePrice=new BigDecimal("100.00");item.originalPrice=new BigDecimal("120.00");item.discountAmount=new BigDecimal("20.00");item.offerStart=java.time.LocalDate.of(2026,11,9);item.offerEnd=java.time.LocalDate.of(2026,11,15);item.gallery=List.of(new RecommendationItem.Picture("synthetic-"+fixtureTag+"-"+i,item.imageUrl,item.imageHash,"https://www.costco.co.jp/synthetic","synthetic","Original",Instant.parse("2026-11-09T00:00:00Z")));linked.add(item);}items.saveAllAndFlush(linked);linked.forEach(item->fixtureItems.add(new FixtureItem(item.id,item.postId,item.itemNumber,item.imageUrl)));
+  // Existing public associations are migrated history, never new unreviewed PENDING items.
+  linked.forEach(item->RecommendationPublicationFixtures.legacyItem(item,post));items.saveAllAndFlush(linked);
   var before=itemRows();Instant publishedAt=post.publishedAt;var createdAt=post.createdAt;String previous=articles.sourceHash(post);var input=payload();var saved=data(putRevision(input,owner));
   assertThat(saved.path("replayed").asBoolean()).isFalse();assertThat(saved.path("current").asBoolean()).isTrue();assertThat(saved.path("articleSourceHash").asText()).isNotEqualTo(previous);assertThat(saved.at("/detail/articleTranslations").size()).isEqualTo(4);assertThat(itemRows()).isEqualTo(before);
   var after=posts.findById(post.id).orElseThrow();assertThat(after.published).isTrue();assertThat(after.publishedAt).isEqualTo(publishedAt);assertThat(after.createdAt).isEqualTo(createdAt);assertThat(after.publisherId).isEqualTo(post.publisherId);assertThat(after.publisherName).isEqualTo(post.publisherName);assertThat(after.version).isEqualTo(post.version+1);

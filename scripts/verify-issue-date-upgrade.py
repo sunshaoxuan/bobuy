@@ -47,6 +47,11 @@ def verify_migration_inputs():
     expected = {entry['path']: entry['sha256'] for entry in baseline['migrations']}
     expected[MIGRATION] = MIGRATION_SHA256
     actual = {path.name: sha(path.read_bytes()) for path in (ROOT / 'backend/src/main/resources/db/migration').iterdir() if path.is_file()}
+    # The successor may carry exactly the already-reviewed V31 suffix. It is not
+    # applied by this target28.1 proof; unknown or changed future SQL still fails.
+    publication = 'V31__recommendation_item_publication.sql'
+    if publication in actual:
+        expected[publication] = 'db1a7f96ea5017fabfadd5f52809fe0357816da6433ebb31d723deac900773a7'
     if actual != expected:
         raise RuntimeError('Old migration drift or missing/unknown/unpinned issue-date migration')
     return baseline

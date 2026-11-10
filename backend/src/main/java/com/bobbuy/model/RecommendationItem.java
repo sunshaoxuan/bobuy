@@ -10,6 +10,19 @@ public class RecommendationItem {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) public Long id;
     @Column(nullable = false) public Long postId;
     public String productId;
+    @Column(nullable=false,length=12) public String publicationState="PENDING";
+    public java.time.Instant publishedAt;
+    @com.fasterxml.jackson.annotation.JsonIgnore public Long publishedBy;
+    @com.fasterxml.jackson.annotation.JsonIgnore @Column(length=36) public String publicationRequestId;
+    @com.fasterxml.jackson.annotation.JsonIgnore @Column(length=64) public String publicationRequestHash;
+    @com.fasterxml.jackson.annotation.JsonIgnore public Long linkedProductVersion;
+    @com.fasterxml.jackson.annotation.JsonIgnore @Column(length=64) public String additionPayloadHash;
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.JSON)
+    @Column(columnDefinition="jsonb") public RecommendationPublicationSnapshot publicationSnapshot;
+    @Transient public String publicationReviewHash;
+    @Transient public Long publicationProductVersion;
+    @Transient public boolean publicationLegacy;
     @Column(length=64) public String offerIdentity;
     @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.JSON)
     @Column(columnDefinition="jsonb") public ReferenceOfferContext referenceContext;

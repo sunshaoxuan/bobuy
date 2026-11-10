@@ -44,7 +44,7 @@ public class RecommendationService {
     @Transactional(readOnly = true)
     public List<PublicNode> publicNodes() {
         var ids = new TreeSet<Long>();
-        posts.findByPublishedTrue().forEach(post -> { if(post.merchantId!=null)ids.add(post.merchantId); });
+        publicBrowseEntries(null).forEach(detail -> { if(detail.post().merchantId()!=null)ids.add(detail.post().merchantId()); });
         var names = new HashMap<Long,String>();
         users.findAllById(ids).forEach(user -> names.put(user.getId(),user.getName()==null?"":user.getName().trim()));
         return ids.stream().map(id -> new PublicNode(id,names.getOrDefault(id,""))).toList();
@@ -85,20 +85,12 @@ public class RecommendationService {
     }
     @Transactional(readOnly = true)
     public List<Detail> publicFeed(int page, Long merchantId) {
-        var paging = PageRequest.of(Math.max(0, page), 20);
-        var selected = merchantId == null ? posts.findByPublishedTrueOrderByPublishedAtDesc(paging)
-            : posts.findByMerchantIdAndPublishedTrueOrderByPublishedAtDesc(merchantId, paging);
-        if (selected.isEmpty()) return List.of();
-        var grouped = items.findByPostIdInOrderById(selected.stream().map(p -> p.id).toList()).stream()
-            .collect(java.util.stream.Collectors.groupingBy(i -> i.postId));
-        return selected.stream().map(post -> {
-            var linked = taxonomy.display(grouped.getOrDefault(post.id, List.of()),true);
-            referenceQuotes.decorate(linked,true);
-            return new Detail(summary(post, linked.isEmpty()||linked.get(0).gallery.isEmpty()?null:linked.get(0).gallery.get(0).url()), post.body, linked,post.articleSourceLocale,articles.sourceHash(post),articles.current(post),post.serviceOffer==null?null:post.serviceOffer.publicView());
-        }).toList();
+        var visible=publicBrowseEntries(merchantId);
+        int start=(int)Math.min((long)Math.max(0,page)*20,visible.size()),end=Math.min(start+20,visible.size());
+        return visible.subList(start,end);
     }
     @Transactional(readOnly = true)
-    public Detail get(Long id, boolean publicView) { return detail(publicView ? posts.findByIdAndPublishedTrue(id).orElseThrow(RecommendationService::missing) : owned(id),publicView); }
+    public Detail get(Long id, boolean publicView) { return publicView?publicGet(id,null):detail(owned(id),false); }
     /** Complete server-side oracle; only bounded summaries leave the browse controller. */
     @Transactional(readOnly = true)
     public List<Detail> publicBrowseEntries(Long merchantId) {
@@ -106,12 +98,15 @@ public class RecommendationService {
         var selected=posts.findByPublishedTrue().stream().filter(p->merchantId==null||merchantId.equals(p.merchantId))
             .sorted(Comparator.comparing((RecommendationPost p)->p.publishedAt,Comparator.nullsLast(Comparator.reverseOrder())).thenComparing(p->p.id,Comparator.reverseOrder())).toList();
         var grouped=selected.isEmpty()?Map.<Long,List<RecommendationItem>>of():items.findByPostIdInOrderById(selected.stream().map(p->p.id).toList()).stream().collect(java.util.stream.Collectors.groupingBy(i->i.postId));
-        return selected.stream().map(post->{var linked=taxonomy.display(grouped.getOrDefault(post.id,List.of()),true);referenceQuotes.decorate(linked,true);return new Detail(summary(post,linked.isEmpty()||linked.get(0).gallery.isEmpty()?null:linked.get(0).gallery.get(0).url()),post.body,linked,post.articleSourceLocale,articles.sourceHash(post),articles.current(post),post.serviceOffer==null?null:post.serviceOffer.publicView());}).toList();
+        return selected.stream().map(post->{var linked=taxonomy.display(grouped.getOrDefault(post.id,List.of()),true);referenceQuotes.decorate(linked,true);return new Detail(summary(post,linked.isEmpty()||linked.get(0).gallery.isEmpty()?null:linked.get(0).gallery.get(0).url()),post.body,linked,post.articleSourceLocale,articles.sourceHash(post),articles.current(post),post.serviceOffer==null?null:post.serviceOffer.publicView());})
+            .filter(detail->detail.serviceOffer()!=null||!detail.items().isEmpty()).toList();
     }
     @Transactional(readOnly = true)
     public Detail publicGet(Long id, Long merchantId) {
         var post = posts.findByIdAndPublishedTrue(id).filter(p -> merchantId == null || merchantId.equals(p.merchantId)).orElseThrow(RecommendationService::missing);
-        return detail(post, true);
+        var result=detail(post, true);
+        if(result.serviceOffer()==null&&result.items().isEmpty())throw missing();
+        return result;
     }
     @Transactional
     public Detail create() { var post = new RecommendationPost(); post.merchantId = owner();post.articleSourceLocale="ja-JP"; return detail(posts.saveAndFlush(post)); }
@@ -164,7 +159,7 @@ public class RecommendationService {
         if (post.published == publish) return detail(post);
         version(post, expectedVersion);
         var linked=items.findByPostIdOrderById(id);
-        if (publish && (post.title.isBlank() || post.body.isBlank() || (post.serviceOffer==null&&linked.isEmpty())))
+        if (publish && (post.title.isBlank() || post.body.isBlank() || (post.serviceOffer==null&&linked.stream().noneMatch(RecommendationPublication::visible))))
             throw new ApiException(ErrorCode.INVALID_REQUEST, "error.recommendation.incomplete");
         if (publish) {
             if(post.serviceOffer!=null){var verified=post.serviceOffer.normalized();if(!linked.isEmpty()||!verified.sourceKey().equals(post.serviceSourceKey)||!post.title.equals(verified.terms().get("ja-JP").title())||!post.body.equals(verified.article("ja-JP"))||articles.current(post).size()!=3)throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.incomplete");}
@@ -181,17 +176,58 @@ public class RecommendationService {
         audit.logStatusChange("RecommendationPost", id, publish ? "DRAFT" : "PUBLISHED", publish ? "PUBLISHED" : "DRAFT", owner());
         return detail(post);
     }
+    /** One explicit reviewed occurrence, serialized with all merchant/master writers. */
+    @Transactional
+    public Detail publishItem(Long id,Long itemId,UUID requestId,long expectedVersion,long productVersion,String sourceHash,boolean reviewed) {
+        lockOwner();var post=owned(id);goodsOnly(post);
+        if(requestId==null||sourceHash==null||!sourceHash.matches("[0-9a-f]{64}")||!reviewed||productVersion<0)
+            throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.incomplete");
+        var item=items.findById(itemId).filter(value->id.equals(value.postId)).orElseThrow(RecommendationService::missing);
+        String requestHash=RecommendationPublication.requestHash(id,itemId,requestId,expectedVersion,productVersion,sourceHash,reviewed);
+        var previous=items.findByPublishedByAndPublicationRequestId(owner(),requestId.toString());
+        if(previous.isPresent()){
+            var prior=previous.get();
+            if(item.id.equals(prior.id)&&RecommendationPublication.visible(prior)&&requestHash.equals(prior.publicationRequestHash))return detail(post);
+            throw publicationConflict(itemId);
+        }
+        if(RecommendationPublication.visible(item)||post.version!=expectedVersion)throw publicationConflict(itemId);
+        RecommendationPublication.pending(item);
+        if(post.title.isBlank()||post.body.isBlank())throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.incomplete");
+        var product=item.productId==null?null:products.lockById(item.productId)
+            .filter(value->owner().equals(value.getMerchantId())&&!value.isDeleted()).orElseThrow(RecommendationService::missing);
+        if(product==null||!Objects.equals(product.getRecordVersion(),productVersion))throw publicationConflict(itemId);
+        var snapshot=RecommendationPublication.candidate(item,product);
+        if(!sourceHash.equals(snapshot.reviewHash()))throw publicationConflict(itemId);
+        RecommendationPublication.requireReady(item,product,snapshot);
+        var shown=RecommendationPublication.project(item,snapshot);taxonomy.validate(shown.categoryIds,shown.supplierId,shown.showSupplier);
+        String prefix="/api/storefront/recommendation-images/";
+        for(var picture:shown.gallery){
+            var image=images.findById(picture.url().substring(prefix.length())).filter(value->owner().equals(value.merchantId)&&"PUBLIC".equals(value.accessScope)).orElseThrow(RecommendationService::missing);
+            if(!picture.hash().equals(image.imageHash))throw new ApiException(ErrorCode.INVALID_REQUEST,"gallery.invalid");
+        }
+        referenceQuotes.snapshot(item,owner());
+        item.publicationSnapshot=snapshot;item.publicationState="PUBLISHED";item.publishedAt=java.time.Instant.now().truncatedTo(java.time.temporal.ChronoUnit.MICROS);
+        item.publishedBy=owner();item.publicationRequestId=requestId.toString();item.publicationRequestHash=requestHash;
+        items.saveAndFlush(item);
+        if(!post.published){
+            var publisher=users.findById(owner()).orElseThrow(RecommendationService::missing);
+            post.publishedAt=item.publishedAt;post.publisherId=publisher.getId();post.publisherName=publisher.getName();post.published=true;
+        }
+        touch(post);audit.logStatusChange("RecommendationItem",item.id,"PENDING","PUBLISHED",owner());return detail(post);
+    }
+    private static org.springframework.orm.ObjectOptimisticLockingFailureException publicationConflict(Long itemId){return new org.springframework.orm.ObjectOptimisticLockingFailureException(RecommendationItem.class,itemId);}
     @Transactional
     public Detail removeItem(Long id, Long itemId, long expectedVersion) {
-        lockOwner(); var post = owned(id); editable(post); version(post, expectedVersion);
+        lockOwner(); var post = owned(id); goodsOnly(post); version(post, expectedVersion);
         var item = items.findById(itemId).filter(i -> i.postId.equals(id)).orElseThrow(RecommendationService::missing);
+        RecommendationPublication.pending(item);
         referenceQuotes.snapshot(item,owner());
         items.delete(item); touch(post); return detail(post);
     }
 
     @Transactional
     public Upload upload(Long id, RecommendationFacts facts, long expectedVersion, RecommendationImageValidator.Image image) {
-        lockOwner(); var post = owned(id); editable(post);goodsOnly(post);
+        lockOwner(); var post = owned(id); goodsOnly(post);
         var proposed = new RecommendationItem(); facts.apply(proposed);
         String code = proposed.itemNumber;
         var currentItems = items.findByPostIdOrderById(id);
@@ -223,14 +259,23 @@ public class RecommendationService {
     /** Explicit reviewed selection: reuse a master before registering issue-only offer facts. */
     @Transactional
     public Detail fromProduct(Long id,String productId,long productVersion,RecommendationFacts facts,long expectedVersion,boolean reviewed) {
-        lockOwner();var post=owned(id);editable(post);goodsOnly(post);
+        lockOwner();var post=owned(id);goodsOnly(post);
+        if(!reviewed)throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.conflict");
+        String additionHash=RecommendationPublication.additionHash(id,productId,productVersion,facts);
+        if(items.findByPostIdAndAdditionPayloadHash(id,additionHash).isPresent())return detail(post);
+        var proposed=new RecommendationItem();facts.apply(proposed);proposed.postId=id;proposed.productId=productId;
+        var prior=items.findByPostIdOrderById(id).stream().filter(i->productId.equals(i.productId)&&Objects.equals(referenceQuotes.identity(i),referenceQuotes.identity(proposed))).findFirst();
+        if(prior.isPresent()&&Objects.equals(prior.get().linkedProductVersion,productVersion)){
+            if(prior.get().additionPayloadHash==null&&sameFacts(prior.get(),proposed))return detail(post);
+            throw publicationConflict(prior.get().id);
+        }
         var product=products.lockById(productId).filter(p->owner().equals(p.getMerchantId())&&!p.isDeleted()).orElseThrow(RecommendationService::missing);
         if(!reviewed||product.getCatalogData()==null||!Objects.equals(product.getRecordVersion(),productVersion))
             throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.conflict");
         var item=new RecommendationItem();facts.apply(item);
         if(!Objects.equals(item.itemNumber,product.getItemNumber())||!item.name.equals(ProductCatalogService.text(product.getName(),"ja-JP")))
             throw new ApiException(ErrorCode.INVALID_REQUEST,"master.use_profile");
-        item.postId=id;item.productId=productId;
+        item.postId=id;item.productId=productId;item.linkedProductVersion=productVersion;item.additionPayloadHash=additionHash;
         ProductCatalogProjection.apply(item,item,product);
         if(item.gallery.isEmpty())throw new ApiException(ErrorCode.INVALID_REQUEST,"gallery.invalid");
         String prefix="/api/storefront/recommendation-images/";
@@ -244,7 +289,7 @@ public class RecommendationService {
         item.offerIdentity=referenceQuotes.identity(item);
         var duplicate=items.findByPostIdOrderById(id).stream().filter(i->productId.equals(i.productId)&&Objects.equals(referenceQuotes.identity(i),item.offerIdentity)).findFirst();
         if(duplicate.isPresent()){
-            if(sameFacts(duplicate.get(),item))return detail(post);
+            if(duplicate.get().additionPayloadHash==null&&sameFacts(duplicate.get(),item))return detail(post);
             throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.conflict");
         }
         version(post,expectedVersion);items.saveAndFlush(item);referenceQuotes.snapshot(item,owner());touch(post);return detail(post);
@@ -263,8 +308,9 @@ public class RecommendationService {
 
     @Transactional
     public Detail editItem(Long id, Long itemId, RecommendationFacts facts, long expectedVersion) {
-        lockOwner(); var post = owned(id); editable(post); version(post,expectedVersion);
+        lockOwner(); var post = owned(id); goodsOnly(post); version(post,expectedVersion);
         var item = items.findById(itemId).filter(i -> i.postId.equals(id)).orElseThrow(RecommendationService::missing);
+        RecommendationPublication.pending(item);
         var proposed = new RecommendationItem(); facts.apply(proposed);
         referenceQuotes.snapshot(item,owner());
         if(item.productId!=null&&products.findById(item.productId).map(p->p.getCatalogData()!=null).orElse(false)&&(!Objects.equals(item.name,proposed.name)||!Objects.equals(item.itemNumber,proposed.itemNumber)))throw new ApiException(ErrorCode.INVALID_REQUEST,"master.use_profile");
@@ -296,7 +342,7 @@ public class RecommendationService {
     @Transactional
     public Detail classify(Long id,List<Long> itemIds,List<String> categoryIds,String mode,boolean updateCategories,
             String supplierId,boolean updateSupplier,boolean showSupplier,long expectedVersion) {
-        lockOwner();var post=owned(id);editable(post);version(post,expectedVersion);
+        lockOwner();var post=owned(id);goodsOnly(post);version(post,expectedVersion);
         if(!updateCategories&&!updateSupplier)throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.classification");
         var categories=new ArrayList<>(new LinkedHashSet<>(categoryIds));
         String supplier=supplierId==null||supplierId.isBlank()?null:supplierId;
@@ -304,6 +350,7 @@ public class RecommendationService {
         var wanted=new HashSet<>(itemIds);
         var selected=items.findByPostIdOrderById(id).stream().filter(i->wanted.contains(i.id)).toList();
         if(selected.size()!=wanted.size())throw missing();
+        selected.forEach(RecommendationPublication::pending);
         for(var item:selected) {
             var master=item.productId==null?null:products.findById(item.productId).map(Product::getCatalogData).orElse(null);
             if(master!=null){
@@ -336,6 +383,7 @@ public class RecommendationService {
         String sourceUrl,String assetKey,String label,String itemNumber,boolean verified){
         lockOwner();var post=owned(id);version(post,expectedVersion);
         var item=items.findById(itemId).filter(i->i.postId.equals(id)).orElseThrow(RecommendationService::missing);
+        RecommendationPublication.pending(item);
         if(!verified||!Objects.equals(item.itemNumber,itemNumber)||assetKey==null||assetKey.isBlank()||assetKey.length()>2048||assetKey.matches(".*[?@#\\r\\n].*")||label==null||label.length()>200)throw new ApiException(ErrorCode.INVALID_REQUEST,"gallery.invalid");
         try{var uri=java.net.URI.create(sourceUrl);if(!"https".equals(uri.getScheme())||uri.getHost()==null||uri.getUserInfo()!=null||uri.getRawQuery()!=null||uri.getRawFragment()!=null||sourceUrl.length()>2048)throw new IllegalArgumentException();}
         catch(Exception error){throw new ApiException(ErrorCode.INVALID_REQUEST,"gallery.invalid");}
@@ -349,6 +397,7 @@ public class RecommendationService {
     public Detail gallery(Long id,Long itemId,long expectedVersion,List<String> orderedIds){
         lockOwner();var post=owned(id);version(post,expectedVersion);
         var item=items.findById(itemId).filter(i->i.postId.equals(id)).orElseThrow(RecommendationService::missing);
+        RecommendationPublication.pending(item);
         if(orderedIds.size()>100||new HashSet<>(orderedIds).size()!=orderedIds.size())throw new ApiException(ErrorCode.INVALID_REQUEST,"gallery.invalid");
         item.gallery=orderedIds.stream().map(key->item.gallery.stream().filter(p->p.id().equals(key)).findFirst().orElseThrow(RecommendationService::missing)).toList();
         syncGallery(item);touch(post);return detail(post);
@@ -362,6 +411,7 @@ public class RecommendationService {
         for(var row:rows){
             if(row==null)throw new ApiException(ErrorCode.INVALID_REQUEST,"translation.invalid");
             var item=linked.stream().filter(i->i.id.equals(row.itemId())).findFirst().orElseThrow(RecommendationService::missing);
+            RecommendationPublication.pending(item);
             boolean canonical=item.productId!=null&&products.findById(item.productId).map(p->p.getCatalogData()!=null).orElse(false);
             if(canonical){
                 if(!Objects.equals(Objects.toString(item.specification,""),Objects.toString(row.specification(),""))||!Objects.equals(Objects.toString(item.description,""),Objects.toString(row.description(),"")))throw new ApiException(ErrorCode.INVALID_REQUEST,"master.use_profile");
@@ -396,6 +446,7 @@ public class RecommendationService {
         for(var review:reviews){
             if(review==null)throw new ApiException(ErrorCode.INVALID_REQUEST,"sale.invalid");
             var item=linked.stream().filter(i->i.id.equals(review.itemId())).findFirst().orElseThrow(RecommendationService::missing);
+            RecommendationPublication.pending(item);
             if(item.productId==null||!seen.add(item.productId))throw new ApiException(ErrorCode.INVALID_REQUEST,"sale.duplicate");
             sales.review(item,owner(),review);
         }
@@ -409,6 +460,7 @@ public class RecommendationService {
         var selected=items.findByPostIdOrderById(id).stream().filter(i->wanted.contains(i.id)).toList();
         if(selected.isEmpty()||selected.size()!=wanted.size())throw missing();
         if(productId==null&&selected.stream().allMatch(i->i.productId!=null))return detail(post);
+        selected.forEach(RecommendationPublication::pending);
         version(post,expectedVersion);
         selected.forEach(item->referenceQuotes.snapshot(item,owner()));
         if(productId!=null){if(selected.size()!=1)throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.catalog");catalog.requireOwnership(productId,owner());selected.get(0).productId=productId;}

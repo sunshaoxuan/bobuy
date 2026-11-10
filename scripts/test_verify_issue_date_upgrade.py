@@ -137,6 +137,13 @@ class IssueDateUpgradeGuardTest(unittest.TestCase):
             (migration_root / module.MIGRATION).write_bytes((REAL_ROOT / 'backend/src/main/resources/db/migration' / module.MIGRATION).read_bytes())
             with patch.object(module, 'ROOT', root), patch.object(module, 'BASELINE_SHA256', module.sha(raw)):
                 self.assertEqual(module.verify_migration_inputs(), baseline)
+                future = migration_root / 'V31__recommendation_item_publication.sql'
+                future.write_bytes((REAL_ROOT / 'backend/src/main/resources/db/migration' / future.name).read_bytes().replace(b'\r\n', b'\n'))
+                self.assertEqual(module.verify_migration_inputs(), baseline)
+                future.write_bytes(future.read_bytes() + b'\n-- changed future migration')
+                with self.assertRaises(RuntimeError):
+                    module.verify_migration_inputs()
+                future.unlink()
                 (migration_root / 'V29__unexpected.sql').write_text('-- unknown')
                 with self.assertRaises(RuntimeError):
                     module.verify_migration_inputs()

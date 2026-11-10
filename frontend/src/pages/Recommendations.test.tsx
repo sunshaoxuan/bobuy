@@ -38,15 +38,10 @@ describe('Recommendations', () => {
     expect(await screen.findAllByText('请填写商品名称，其他信息仅在来源注明时填写。')).toHaveLength(6);
     expect(view.container.querySelector('.ant-pagination-item-5')).toBeInTheDocument();
   });
-  it('saves and publishes the returned version', async () => {
-    mocks.save.mockResolvedValue({...detail,post:{...detail.post,title:'Updated picks',version:3}});
-    mocks.publish.mockResolvedValue({...detail,post:{...detail.post,title:'Updated picks',version:4,published:true}});
-    show(); await screen.findByDisplayValue('Tea picks');
-    fireEvent.change(screen.getByLabelText('文章标题'),{target:{value:'Updated picks'}});
-    fireEvent.click(screen.getByRole('button',{name:/发表文章/}));
-    await waitFor(()=>expect(mocks.publish).toHaveBeenCalledWith(1,3,true));
-    expect(mocks.save).toHaveBeenCalledWith(1,'Updated picks','Original body',2);
-    expect(await screen.findByRole('button',{name:/撤回编辑/})).toBeInTheDocument();
+  it('saves the returned article version without publishing the whole product issue',async()=>{
+    localStorage.setItem('bobbuy_locale','en-US');mocks.save.mockResolvedValue({...detail,post:{...detail.post,title:'Updated picks',version:3}});
+    show();await screen.findByDisplayValue('Tea picks');fireEvent.change(screen.getByLabelText('Title'),{target:{value:'Updated picks'}});fireEvent.click(screen.getByRole('button',{name:/Save Draft$/}));
+    await waitFor(()=>expect(mocks.save).toHaveBeenCalledWith(1,'Updated picks','Original body',2));expect(mocks.publish).not.toHaveBeenCalled();expect(screen.queryByRole('button',{name:'Publish Recommendation'})).toBeNull();
   });
   it('prepares modern picker images before registration and submits the normalized PNG',async()=>{
     const converted=new File(['decoded pixels'],'official.png',{type:'image/png'});

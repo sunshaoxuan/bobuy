@@ -2,6 +2,21 @@ import type { Dictionary } from './types';
 import experience from './experience.ja-JP.json';
 
 const messages: Dictionary = {
+  "rec.item.current_spec": "現在の商品仕様",
+  "rec.item.reloaded_review": "最新の商品情報を表示しています。元の参考価格と出典条件は保持しています。現在の仕様と照合し、改めて確認してから送信してください。",
+  "rec.item.pending": "審査待ち",
+  "rec.item.public": "公開済み",
+  "rec.item.publish": "この商品を公開",
+  "rec.item.review": "この商品の出典、価格と期間、4言語の内容、画像を確認しました。",
+  "rec.item.append_hint": "この号は公開を継続します。追加商品は審査後に個別公開し、公開済みの商品は表示を維持します。",
+  "rec.item.first_hint": "準備できた商品から個別に公開できます。ほかの審査待ち商品は非公開のままです。",
+  "rec.item.conflict": "この号または商品情報が更新されました。下書きは保持しています。最新版を再読み込みし、内容を再確認してください。",
+  "rec.item.retry": "今回の公開を再試行",
+  "rec.item.published_notice": "この商品を公開しました。ほかの審査待ち商品は引き続き非公開です。",
+  "rec.item.not_ready": "現在の商品バージョンまたは出典確認情報が不足しています。内容を整えて再読み込みしてから公開してください。",
+  "rec.item.catalog_version": "商品情報バージョン：{version}",
+  "rec.item.save_article": "商品を個別公開する前に本文を保存してください。",
+  "rec.item.unconfirmed": "公開結果を確認できませんでした。同じ操作を再試行してください。",
   "article.revision_title": "公開済み記事を4言語まとめて改訂",
   "article.revision_help": "4言語の全文を確認して一括保存します。公開日時、公開URL、商品との関連は変わりません。",
   "article.revision_review": "4言語すべてのタイトルと本文を確認しました",

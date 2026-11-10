@@ -4,7 +4,7 @@ import {I18nProvider} from '../i18n';
 import {storeAuthSession} from '../authStorage';
 import Recommendations from './Recommendations';
 import en from '../locales/en-US';
-const mocks=vi.hoisted(()=>({get:vi.fn(),list:vi.fn(),getIssueDate:vi.fn(),saveIssueDate:vi.fn(),observe:vi.fn()}));
+const mocks=vi.hoisted(()=>({get:vi.fn(),list:vi.fn(),getIssueDate:vi.fn(),saveIssueDate:vi.fn(),publishItem:vi.fn(),observe:vi.fn()}));
 vi.mock('../api',()=>({recommendationApi:mocks,storefrontApi:{products:vi.fn().mockResolvedValue([])}}));
 vi.mock('../components/ArticleLanguages',()=>({default:(props:any)=>{mocks.observe(props.detail);return <><input aria-label="Article title" value={props.title} disabled={props.disabled} onChange={e=>props.onTitle(e.target.value)}/><textarea aria-label="Article body" value={props.body} disabled={props.disabled} onChange={e=>props.onBody(e.target.value)}/></>;}}));
 vi.mock('../components/RecommendationClassification',()=>({default:()=>null}));vi.mock('../components/RecommendationCatalog',()=>({default:()=>null}));vi.mock('../components/RecommendationFromProduct',()=>({default:()=>null}));vi.mock('../components/RecommendationGallery',()=>({default:()=>null}));vi.mock('../components/RecommendationLocalization',()=>({default:()=>null}));vi.mock('../components/ReferenceQuoteHistory',()=>({default:()=>null}));vi.mock('../components/RecommendationServiceEditor',()=>({default:()=>null}));vi.mock('./PublicRecommendations',()=>({default:()=>null,RecommendationPreview:()=>null}));
@@ -17,6 +17,17 @@ async function open(){fireEvent.click(await screen.findByRole('button',{name:en[
 function fill(){fireEvent.change(screen.getByLabelText(en['issueDate.date']),{target:{value:'2026-10-31'}});fireEvent.change(screen.getByLabelText(en['issueDate.reference']),{target:{value:'message:source-8'}});fireEvent.change(screen.getByLabelText(en['issueDate.hash']),{target:{value:hash}});fireEvent.click(screen.getByRole('checkbox',{name:en['issueDate.reviewed']}));}
 beforeEach(async()=>{const {transferableAbortController}=await vi.importActual<{transferableAbortController:()=>AbortController}>('node:util');vi.stubGlobal('AbortController',class {constructor(){return transferableAbortController();}});localStorage.clear();localStorage.setItem('bobbuy_locale','en-US');storeAuthSession({accessToken:'synthetic-owner-token',user:{id:42,username:'synthetic-owner',name:'Synthetic owner',roles:['AGENT']}});Object.values(mocks).forEach(mock=>mock.mockReset());mocks.get.mockResolvedValue(detail());mocks.getIssueDate.mockResolvedValue(unknown());mocks.saveIssueDate.mockResolvedValue(reviewed());});
 afterEach(()=>{vi.unstubAllGlobals();});
+it('an unsaved date review blocks item publication, and its saved version requires item review again',async()=>{
+ const original=detail(true);original.items=original.items.map((item,n)=>({...item,publicationState:n?'PUBLISHED':'PENDING',publicationReviewHash:hash,publicationProductVersion:1})) as typeof original.items;
+ mocks.get.mockResolvedValue(original);show();await screen.findByDisplayValue(original.post.title);
+ const review=()=>screen.getByRole('checkbox',{name:en['rec.item.review']+': '+original.items[0].name});
+ const publish=()=>screen.getByRole('button',{name:en['rec.item.publish']+': '+original.items[0].name});
+ fireEvent.click(review());await open();fill();
+ expect(publish()).toBeDisabled();expect(mocks.publishItem).not.toHaveBeenCalled();
+ fireEvent.click(screen.getByRole('button',{name:en['issueDate.save']}));await screen.findByText(en['issueDate.saved']);
+ await waitFor(()=>expect(observed().post.version).toBe(4));expect(observed().items).toBe(original.items);
+ expect(review()).not.toBeChecked();expect(publish()).toBeDisabled();expect(mocks.publishItem).not.toHaveBeenCalled();
+});
 it.each([false,true])('the normal owned page exposes date review for published=%s and updates only metadata',async published=>{
  const original=detail(published);mocks.get.mockResolvedValue(original);show();await screen.findByDisplayValue(original.post.title);if(!published){fireEvent.change(screen.getByLabelText('Article title'),{target:{value:'Retained article draft'}});fireEvent.change(screen.getByLabelText('Article body'),{target:{value:'Retained body draft'}});}await open();fill();fireEvent.click(screen.getByRole('button',{name:en['issueDate.save']}));await screen.findByText(en['issueDate.saved']);
  expect(mocks.saveIssueDate).toHaveBeenCalledWith(8,{issueDate:'2026-10-31',sourceRef:'message:source-8',sourceHash:hash,version:3,reviewed:true},'synthetic-owner-token');

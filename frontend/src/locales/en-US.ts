@@ -2,6 +2,21 @@ import type { Dictionary } from './types';
 import experience from './experience.en-US.json';
 
 const messages: Dictionary = {
+  "rec.item.current_spec": "Current product specification",
+  "rec.item.reloaded_review": "The latest product information is shown. Your original offer and source context are kept; compare them with the current specification before reviewing again.",
+  "rec.item.pending": "Pending review",
+  "rec.item.public": "Published",
+  "rec.item.publish": "Publish this item",
+  "rec.item.review": "I checked this item’s sources, price and dates, translations and images.",
+  "rec.item.append_hint": "This issue stays online. Added items remain pending until each is reviewed and published.",
+  "rec.item.first_hint": "Publish each ready item separately. Other pending items stay private.",
+  "rec.item.conflict": "The issue or product changed. Your draft is kept. Reload the latest version, check the facts and review again.",
+  "rec.item.retry": "Retry this publication",
+  "rec.item.published_notice": "This item is published. Other pending items remain private.",
+  "rec.item.not_ready": "The current product version or source review is unavailable. Complete this item and reload before publishing.",
+  "rec.item.catalog_version": "Product archive version: {version}",
+  "rec.item.save_article": "Save the article text before publishing an item.",
+  "rec.item.unconfirmed": "The publication result was not confirmed. Retry this same attempt.",
   "article.revision_title": "Revise published article in four languages",
   "article.revision_help": "Save all four reviewed versions together. Publication time, public link and product relationships stay unchanged.",
   "article.revision_review": "I reviewed all four complete language versions",

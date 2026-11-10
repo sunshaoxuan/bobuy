@@ -76,6 +76,119 @@ class SchemaAcceptanceTest(unittest.TestCase):
             module.source_digest_acceptance({**accepted, 'sourceDigestAlgorithm': 'unknown'})
 
 
+class CombinedUiPublicationSchemaAcceptanceTest(unittest.TestCase):
+    def setUp(self):
+        self.path = Path('docs/reports/consumer-ui-integration-20261109/accepted-inputs.json')
+        self.baseline = json.loads(self.path.read_text(encoding='utf-8'))
+        sql = Path('backend/src/main/resources/db/migration/V31__recommendation_item_publication.sql')
+        self.suffix = {'path': sql.name, 'bytes': sql.stat().st_size, 'sha256': module.digest(sql)}
+        self.actual = self.baseline['migrations'] + [self.suffix]
+        self.accepted = {'schemaBefore': '28.1', 'schemaAfter': 31, 'migrationChanges': True,
+                         'migrations': self.actual, 'migrationBaseline': {
+                             'path': self.path.as_posix(), 'sha256': module.digest(self.path)}}
+
+    def test_exact_immutable_ui_prefix_plus_only_v31_passes(self):
+        baseline = module.migration_baseline(self.accepted)
+        self.assertEqual(module.schema_acceptance(self.accepted, self.actual, baseline),
+                         {'schemaBefore': '28.1', 'schemaAfter': 31, 'migrationChanges': True})
+
+    def test_old_baseline_float_version_and_changed_prefix_reject(self):
+        for before in [28, 28.1, '28_1']:
+            with self.subTest(before=before), self.assertRaises(RuntimeError):
+                module.schema_acceptance({**self.accepted, 'schemaBefore': before}, self.actual, self.baseline)
+        for prefix in [None, {**self.baseline, 'schemaAfter': 28}, {**self.baseline, 'migrations': []}]:
+            with self.subTest(prefix=prefix), self.assertRaises(RuntimeError):
+                module.schema_acceptance(self.accepted, self.actual, prefix)
+
+    def test_date_sql_missing_drift_extra_and_duplicate_reject(self):
+        for actual in [self.actual[:-2] + [self.suffix],
+                       [{**v, 'sha256': 'wrong'} if v['path'] == module.ISSUE_DATE_MIGRATION else v for v in self.actual],
+                       self.actual + [{'path': 'V29__unrelated.sql'}], self.actual + [self.suffix]]:
+            with self.subTest(actual=actual), self.assertRaises(RuntimeError):
+                module.schema_acceptance({**self.accepted, 'migrations': actual}, actual, self.baseline)
+
+    def test_exact_baseline_hash_and_pending_aware_recovery_still_required(self):
+        for path, digest in [('other.json', module.digest(self.path)), (self.path.as_posix(), '0' * 64)]:
+            with self.subTest(path=path), self.assertRaises(RuntimeError):
+                module.migration_baseline({**self.accepted, 'migrationBaseline': {'path': path, 'sha256': digest}})
+        recovery = module.recovery_contract(self.accepted)
+        self.assertFalse(recovery['oldV28CoreAllowed'])
+        self.assertEqual(recovery['status'], 'UNBOUND_EXACT_V31_AWARE_ARCHIVE_AND_PG_RUNTIME_REQUIRED')
+
+
+class PublicationSchemaAcceptanceTest(unittest.TestCase):
+    def setUp(self):
+        self.previous = [
+            {'path': 'V27__explicit_product_markers.sql', 'bytes': 3, 'sha256': 'old27'},
+            {'path': 'V28__checkout_delivery_snapshot.sql', 'bytes': 4, 'sha256': 'old28'},
+        ]
+        self.added = {'path': 'V31__recommendation_item_publication.sql', 'bytes': 5, 'sha256': 'new31'}
+        self.actual = self.previous + [self.added]
+        self.baseline = {'schemaBefore': 27, 'schemaAfter': 28, 'migrationChanges': True,
+                         'migrations': self.previous}
+        self.accepted = {'schemaBefore': 28, 'schemaAfter': 31, 'migrationChanges': True,
+                         'migrations': self.actual}
+
+    def test_publication_allows_only_the_direct_reviewed_28_to_31_transition(self):
+        self.assertEqual(module.schema_acceptance(self.accepted, self.actual, self.baseline),
+                         {'schemaBefore': 28, 'schemaAfter': 31, 'migrationChanges': True})
+        for change in [{'schemaBefore': 27}, {'schemaAfter': 30}, {'migrationChanges': False}]:
+            with self.subTest(change=change), self.assertRaises(RuntimeError):
+                module.schema_acceptance({**self.accepted, **change}, self.actual, self.baseline)
+
+    def test_publication_requires_actual_exact_prior_v28_manifest(self):
+        for baseline in [None, {**self.baseline, 'schemaBefore': 26},
+                         {**self.baseline, 'schemaAfter': 27},
+                         {**self.baseline, 'migrationChanges': False},
+                         {**self.baseline, 'migrations': []}]:
+            with self.subTest(baseline=baseline), self.assertRaises(RuntimeError):
+                module.schema_acceptance(self.accepted, self.actual, baseline)
+
+    def test_old_byte_drift_missing_duplicate_and_c3_r13_migrations_reject(self):
+        candidates = [
+            [{**self.previous[0], 'sha256': 'drift'}, self.previous[1], self.added],
+            self.previous,
+            self.actual + [self.added],
+            self.actual + [{'path': 'V29__customer_order_amendment.sql'}],
+            self.actual + [{'path': 'V30__costco_onboarding.sql'}],
+            self.actual + [{'path': 'V32__unknown.sql'}],
+        ]
+        for actual in candidates:
+            with self.subTest(actual=actual), self.assertRaises(RuntimeError):
+                module.schema_acceptance({**self.accepted, 'migrations': actual}, actual, self.baseline)
+
+    def test_v31_sql_acceptance_is_pinned_to_exact_reviewed_source(self):
+        content = Path('backend/src/main/resources/db/migration/V31__recommendation_item_publication.sql').read_bytes()
+        module.publication_migration_acceptance(content)
+        for changed in [content+b'\nDELETE FROM bb_recommendation_item;',
+                        content.replace(b"DEFAULT 'PENDING'", b"DEFAULT 'PUBLISHED'"),
+                        content.replace(b') IS TRUE)', b'))')]:
+            self.assertNotEqual(content, changed)
+            with self.subTest(changed=changed[-80:]), self.assertRaises(RuntimeError):
+                module.publication_migration_acceptance(changed)
+
+    def test_v31_baseline_path_and_hash_cannot_reuse_the_v27_binding(self):
+        path = Path('docs/reports/c2-cart-20261109/accepted-inputs.json')
+        accepted = {**self.accepted, 'migrationBaseline': {'path': path.as_posix(), 'sha256': module.digest(path)}}
+        self.assertEqual(module.migration_baseline(accepted)['schemaAfter'], 28)
+        for binding in [{'path': 'docs/reports/c1-profile-20261109/accepted-inputs.json',
+                         'sha256': module.digest(Path('docs/reports/c1-profile-20261109/accepted-inputs.json'))},
+                        {'path': path.as_posix(), 'sha256': 'wrong'}]:
+            with self.subTest(binding=binding), self.assertRaises(RuntimeError):
+                module.migration_baseline({**accepted, 'migrationBaseline': binding})
+
+    def test_capture_never_claims_v31_runtime_or_old_v28_recovery_acceptance(self):
+        contract = module.recovery_contract(self.accepted)
+        self.assertEqual(contract['status'], 'UNBOUND_EXACT_V31_AWARE_ARCHIVE_AND_PG_RUNTIME_REQUIRED')
+        self.assertFalse(contract['oldV28CoreAllowed'])
+        self.assertFalse(contract['oldDatabaseRestoreAllowed'])
+        self.assertFalse(contract['metadataOrClassPresenceIsRuntimeProof'])
+        self.assertIn('PENDING-aware core/JAR', contract['requirement'])
+        description = module.rollback_description(self.accepted)
+        self.assertIn('keep controlled maintenance and forward-fix', description)
+        self.assertIn('authorizes no activation', description)
+        self.assertIsNone(module.recovery_contract(self.baseline))
+        self.assertIn('retain V28', module.rollback_description(self.baseline))
 class ArticleSchemaAcceptanceTest(unittest.TestCase):
     def setUp(self):
         self.root = Path(__file__).resolve().parents[1]

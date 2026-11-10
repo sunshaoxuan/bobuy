@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface RecommendationItemRepository extends JpaRepository<RecommendationItem, Long> {
+    java.util.Optional<RecommendationItem> findByPublishedByAndPublicationRequestId(Long publishedBy,String publicationRequestId);
+    java.util.Optional<RecommendationItem> findByPostIdAndAdditionPayloadHash(Long postId,String additionPayloadHash);
     List<RecommendationItem> findByPostIdOrderById(Long postId);
     List<RecommendationItem> findByProductIdInOrderById(java.util.Collection<String> productIds);
     List<RecommendationItem> findByPostIdInOrderById(List<Long> postIds);

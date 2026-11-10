@@ -1,6 +1,21 @@
 import type { Dictionary } from './types';
 
 const messages: Dictionary = {
+  "rec.item.current_spec": "目前商品檔案規格",
+  "rec.item.reloaded_review": "已顯示最新商品檔案，原報價及來源條件已保留。請對照目前規格重新核對，再次審核後提交。",
+  "rec.item.pending": "待審核",
+  "rec.item.public": "已公開",
+  "rec.item.publish": "公開這項商品",
+  "rec.item.review": "我已核對這項商品的來源、價格與期間、四語及圖片。",
+  "rec.item.append_hint": "本期維持上線。新增商品先待審，逐項審核公開，不影響已公開商品。",
+  "rec.item.first_hint": "準備好一項商品即可單獨公開，其他待審商品繼續保密。",
+  "rec.item.conflict": "本期或商品檔案已變更。草稿已保留，請重新讀取最新版本，核對後再次審核。",
+  "rec.item.retry": "重試這次公開",
+  "rec.item.published_notice": "這項商品已公開，其他待審商品仍未公開。",
+  "rec.item.not_ready": "目前商品版本或來源審核資訊不完整。請完善這項商品並重新讀取後再公開。",
+  "rec.item.catalog_version": "商品檔案版本：{version}",
+  "rec.item.save_article": "請先儲存內文，再公開單項商品。",
+  "rec.item.unconfirmed": "尚未確認公開結果，請重試同一次操作。",
   "article.revision_title": "四語同步修訂已發布文章",
   "article.revision_help": "審核後一次儲存四語全文。發布時間、公開連結及商品關聯維持不變。",
   "article.revision_review": "我已核對四種語言的完整標題與正文",

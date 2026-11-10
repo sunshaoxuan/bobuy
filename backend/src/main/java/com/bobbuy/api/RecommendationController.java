@@ -33,6 +33,14 @@ public class RecommendationController {
     public record SourceImage(@NotNull @Valid RecommendationFacts facts, @NotBlank @Size(max=2048) String imageUrl, @Min(0) long version) {}
     public record Edit(@NotNull @Size(max = 200) String title, @NotNull @Size(max = 100000) String body, @Min(0) long version) {}
     public record Version(@Min(0) long version) {}
+    public record ItemPublication(@NotNull java.util.UUID requestId,@NotNull @Min(0) Long version,
+        @NotNull @Min(0) Long productVersion,@NotBlank @Pattern(regexp="[0-9a-f]{64}") String sourceHash,boolean reviewed) {
+        @com.fasterxml.jackson.annotation.JsonAnySetter public void rejectUnknown(String key,Object value){throw new IllegalArgumentException("Unexpected publication field");}
+    }
+    @PostMapping("/api/merchant/recommendations/{id}/items/{itemId}/publish")
+    public ApiResponse<?> publishItem(@PathVariable Long id,@PathVariable Long itemId,@Valid @RequestBody ItemPublication input){
+        return ApiResponse.success(service.publishItem(id,itemId,input.requestId(),input.version(),input.productVersion(),input.sourceHash(),input.reviewed()));
+    }
     public record ServiceEdit(@NotNull com.bobbuy.model.RecommendationServiceOffer offer,@Min(0) long version) {}
     @PostMapping("/api/merchant/recommendations/service-offers")
     public ApiResponse<?> createService(@RequestBody com.bobbuy.model.RecommendationServiceOffer offer){return ApiResponse.success(service.createService(offer));}

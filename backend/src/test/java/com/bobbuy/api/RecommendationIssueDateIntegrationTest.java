@@ -4,6 +4,7 @@ import com.bobbuy.model.*;
 import com.bobbuy.repository.*;
 import com.bobbuy.security.JwtTokenService;
 import com.bobbuy.service.RecommendationArticleService;
+import com.bobbuy.test.RecommendationPublicationFixtures;
 import com.fasterxml.jackson.databind.*;
 import java.math.BigDecimal;
 import java.time.*;
@@ -39,7 +40,7 @@ class RecommendationIssueDateIntegrationTest {
     User user(long id,Role role){var u=new User(id,"SYNTHETIC issue date "+id,role,0);u.setUsername("issue-date-"+UUID.randomUUID());return users.saveAndFlush(u);}
     RecommendationPost issue(){
         var p=new RecommendationPost();p.merchantId=owner.getId();p.title="SYNTHETIC source issue";p.body="Retained original source body";p.articleSourceLocale="ja-JP";p.published=true;p.publishedAt=Instant.parse("2026-11-08T23:30:00Z");p.publisherId=owner.getId();p.publisherName=owner.getName();p=posts.saveAndFlush(p);
-        var i=new RecommendationItem();i.postId=p.id;i.name="SYNTHETIC medicine reference only";i.itemNumber="SYN-DATE";i.specification="24 cartons";i.description="Reference only; not permission to purchase";i.imageHash="synthetic-original-image";i.imageUrl="https://example.invalid/original.png";i.referencePrice=new BigDecimal("265.00");i.gallery=List.of(new RecommendationItem.Picture("synthetic-image","https://example.invalid/original.png","hash","https://example.invalid/source","synthetic-key","Original",Instant.parse("2026-11-01T00:00:00Z")));items.saveAndFlush(i);return p;
+        var i=new RecommendationItem();i.postId=p.id;i.name="SYNTHETIC medicine reference only";i.itemNumber="SYN-DATE";i.specification="24 cartons";i.description="Reference only; not permission to purchase";i.imageHash="synthetic-original-image";i.imageUrl="https://example.invalid/original.png";i.referencePrice=new BigDecimal("265.00");i.gallery=List.of(new RecommendationItem.Picture("synthetic-image","https://example.invalid/original.png","hash","https://example.invalid/source","synthetic-key","Original",Instant.parse("2026-11-01T00:00:00Z")));RecommendationPublicationFixtures.legacyItem(i,p);items.saveAndFlush(i);return p;
     }
     @BeforeEach void setup(){long n=9_000_000_000L+Integer.toUnsignedLong(UUID.randomUUID().hashCode())*4;owner=user(n,Role.AGENT);other=user(n+1,Role.AGENT);customer=user(n+2,Role.CUSTOMER);ownerToken=tokens.createAccessToken(owner);otherToken=tokens.createAccessToken(other);customerToken=tokens.createAccessToken(customer);issue=issue();}
     String path(RecommendationPost p){return "/api/merchant/recommendations/"+p.id+"/issue-date";}

@@ -1,4 +1,5 @@
 package com.bobbuy.api;
+import static com.bobbuy.test.RecommendationPublicationFixtures.*;
 
 import com.bobbuy.model.*;
 import com.bobbuy.repository.*;
@@ -54,13 +55,18 @@ class RecommendationClassificationTest {
   assertThat(assigned.at("/items/0/itemNumber").asText()).isEqualTo("00123");assertThat(assigned.at("/items/0/referencePrice").asInt()).isEqualTo(400);
   assertThat(assigned.at("/items/0/imageHash").asText()).isEqualTo(originalHash);assertThat(assigned.at("/post/published").asBoolean()).isFalse();
   var saved=data(mvc.perform(put(path(assigned)).header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsString(Map.of("title","Synthetic classifications","body","Synthetic source facts","version",assigned.at("/post/version").asLong())))));
-  var live=data(mvc.perform(post(path(saved)+"/publish").header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content("{\"version\":"+saved.at("/post/version").asLong()+"}")));
+  var live=data(publishPending(mvc,json,items,saved,admin));
   var visible=data(mvc.perform(get("/api/storefront/recommendations/"+live.at("/post/id").asLong())));
   assertThat(visible.at("/items/0/supplierId").isNull()).isTrue();assertThat(visible.at("/items/0/supplierName").isNull()).isTrue();assertThat(visible.at("/items/0/categories").size()).isEqualTo(2);
   assign(live,admin,ids,List.of(a),"replace","fixture-supplier",true).andExpect(status().isBadRequest());
   var withdrawn=data(mvc.perform(post(path(live)+"/withdraw").header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content("{\"version\":"+live.at("/post/version").asLong()+"}")));
-  var shown=data(assign(withdrawn,admin,ids,List.of(b),"remove","fixture-supplier",true));assertThat(shown.at("/items/0/categoryIds").size()).isEqualTo(1);
-  data(mvc.perform(post(path(shown)+"/publish").header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content("{\"version\":"+shown.at("/post/version").asLong()+"}")));
+  assign(withdrawn,admin,ids,List.of(b),"remove","fixture-supplier",true).andExpect(status().isBadRequest());
+  assertThat(items.findByPostIdOrderById(withdrawn.at("/post/id").asLong())).hasSize(2); // Withdrawal preserves both frozen public relationships.
+  var next=image(draft(),"NEXT-SUPPLIER");var nextIds=List.of(next.at("/items/0/id").asLong());
+  next=data(assign(next,admin,nextIds,List.of(a,b),"add","fixture-supplier",false));
+  var shown=data(assign(next,admin,nextIds,List.of(b),"remove","fixture-supplier",true));assertThat(shown.at("/items/0/categoryIds").size()).isEqualTo(1);
+  shown=data(mvc.perform(put(path(shown)).header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsString(Map.of("title","New reviewed supplier disclosure","body","Synthetic next publication","version",shown.at("/post/version").asLong())))));
+  shown=data(publishPending(mvc,json,items,shown,admin));
   assertThat(data(mvc.perform(get("/api/storefront/recommendations/"+shown.at("/post/id").asLong()))).at("/items/0/supplierName/en-US").asText()).isEqualTo("Fixture Warehouse");
  }
  @Test void rejectsForeignRecordsCrossPostSelectionAndStaleVersionAtomically()throws Exception{
