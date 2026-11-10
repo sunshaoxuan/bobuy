@@ -1056,6 +1056,11 @@ export const productPricingApi={
  cancel:(id:string,adjustment:PriceAdjustment)=>postJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/adjustments/'+adjustment.id+'/cancel',{version:adjustment.version,confirmed:true}),
  regular:(id:string,value:Omit<ProductSale,'reviewedBy'|'reviewedAt'>)=>putJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/regular',{...value,confirmed:true,replaceExisting:true})
 };
+export type ProductRatingValue={stars:number|null;publicVisible:boolean;version:number};
+export const productRatingApi={
+ get:(id:string)=>storeGet<ProductRatingValue>('/api/merchant/product-ratings/'+encodeURIComponent(id)),
+ save:(id:string,input:ProductRatingValue)=>putJson<ProductRatingValue,object>('/api/merchant/product-ratings/'+encodeURIComponent(id),{...input,reviewed:true})
+};
 export const productCatalogApi={
  audit:()=>storeGet<unknown[]>('/api/merchant/product-catalog/audit'),
  restore:(id:string,checkpointId:string,version:number)=>postJson<{value:CatalogInput;canonical:boolean;sourceItemIds:number[];recoveryId?:string},object>('/api/merchant/product-catalog/'+encodeURIComponent(id)+'/restore',{checkpointId,version,reviewed:true}),
@@ -1423,7 +1428,7 @@ export const api = {
 
 export type StoreTrip = { id: number; merchantId: number; merchantName: string; deliveryArea: string; deliveryDate: string };
 export type StoreProduct = { id: string; merchantId: number; name: Record<string, string>; description: Record<string, string>; brand: string; price: number; categoryId: string; images: string[]; recommendationReady?:boolean;currency?:string;saleUnit?:string;priceRevision?:number;priceToken?:string;regularPrice?:number;priceAdjustmentId?:number;priceValidFrom?:string;priceValidUntil?:string };
-export type PublicCatalogEntry = {
+export type PublicCatalogEntry = {rating?:number|null;
     productId:string; merchantId:number; name:Record<string,string>; description:Record<string,string>;
     brand:string|null; itemNumber:string|null; specification:Record<string,string>; model:string|null; packaging:string|null;
     gallery:RecommendationPicture[]; categories:RecommendationLabel[];
@@ -1484,7 +1489,7 @@ function browseQuery(query:BrowseQuery){return new URLSearchParams(Object.entrie
 export type BrowseFacet=RecommendationLabel&{count:number};
 export type BrowsePage<T>={items:T[];page:number;size:number;scopeTotal:number;matchedTotal:number;hasNext:boolean;revision:string;datasetRevision:string;categories:BrowseFacet[];unclassified:number;markedScopeTotal?:number;japanDay?:string;productOccurrences?:number;serviceCards?:number};
 export type ProductBrowseCard=Omit<PublicCatalogEntry,'gallery'|'description'|'referenceOffers'>&{image:RecommendationPicture|null;markers:ProductMarkerDefinition[]};
-export type RecommendationBrowseItem=Omit<RecommendationItem,'imageUrl'|'gallery'|'description'|'sourceFacts'>&{image:RecommendationPicture|null};
+export type RecommendationBrowseItem=Omit<RecommendationItem,'imageUrl'|'gallery'|'description'|'sourceFacts'>&{image:RecommendationPicture|null;rating?:number|null};
 export type ServiceBrowseCard=Pick<ServiceOffer,'provider'|'staff'|'hours'|'originalPrice'|'price'|'currency'|'taxIncluded'|'fees'|'noExtraFees'|'applicationStart'|'applicationEnd'|'serviceStart'|'serviceEnd'>;
 export type RecommendationOccurrence={key:string;post:RecommendationSummary;title:string;history:boolean;item:RecommendationBrowseItem|null;service:boolean;serviceSummary:ServiceBrowseCard|null};
 export type IssueDirectoryEntry={post:RecommendationSummary;title:string;history:boolean;itemCount:number;service:boolean;publicItemCount?:number;issueDate?:string|null;issueDateSource?:'REVIEWED_SOURCE'|'UNKNOWN';suppliers?:RecommendationLabel[]};

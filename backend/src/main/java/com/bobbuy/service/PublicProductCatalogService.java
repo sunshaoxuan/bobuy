@@ -8,11 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 /** Browsing is independent of sale readiness and trip availability. No private/draft expansion. */
 @Service
 public class PublicProductCatalogService {
- private final ProductRepository products;private final RecommendationPostRepository posts;private final RecommendationItemRepository items;
+ private final ProductRatingService ratings;private final ProductRepository products;private final RecommendationPostRepository posts;private final RecommendationItemRepository items;
  private final RecommendationTaxonomyService taxonomy;private final ReferenceQuoteService quotes;private final CategoryRepository categories;
- public PublicProductCatalogService(ProductRepository p,RecommendationPostRepository r,RecommendationItemRepository i,RecommendationTaxonomyService t,ReferenceQuoteService q,CategoryRepository c){products=p;posts=r;items=i;taxonomy=t;quotes=q;categories=c;}
+ public PublicProductCatalogService(ProductRepository p,RecommendationPostRepository r,RecommendationItemRepository i,RecommendationTaxonomyService t,ReferenceQuoteService q,CategoryRepository c){this(p,r,i,t,q,c,null);} @org.springframework.beans.factory.annotation.Autowired public PublicProductCatalogService(ProductRepository p,RecommendationPostRepository r,RecommendationItemRepository i,RecommendationTaxonomyService t,ReferenceQuoteService q,CategoryRepository c,ProductRatingService rating){ratings=rating;products=p;posts=r;items=i;taxonomy=t;quotes=q;categories=c;}
  public record Offer(Long postId,RecommendationItem facts){}
- public record Entry(String productId,Long merchantId,Map<String,String> name,Map<String,String> description,String brand,String itemNumber,Map<String,String> specification,String model,String packaging,List<RecommendationItem.Picture> gallery,List<RecommendationItem.Label> categories,List<Offer> referenceOffers,boolean reviewedMaster){}
+ public record Entry(String productId,Long merchantId,Map<String,String> name,Map<String,String> description,String brand,String itemNumber,Map<String,String> specification,String model,String packaging,List<RecommendationItem.Picture> gallery,List<RecommendationItem.Label> categories,List<Offer> referenceOffers,boolean reviewedMaster,java.math.BigDecimal rating){public Entry(String productId,Long merchantId,Map<String,String> name,Map<String,String> description,String brand,String itemNumber,Map<String,String> specification,String model,String packaging,List<RecommendationItem.Picture> gallery,List<RecommendationItem.Label> categories,List<Offer> referenceOffers,boolean reviewedMaster){this(productId,merchantId,name,description,brand,itemNumber,specification,model,packaging,gallery,categories,referenceOffers,reviewedMaster,null);}}
  public record Page(List<Entry> items,int page,int size,long total,boolean hasNext){}
  private record Snapshot(List<Product> eligible,Map<Long,Long> owners,Map<String,List<RecommendationItem>> linked){}
  private Snapshot snapshot(Long merchantId){
@@ -47,6 +47,7 @@ public class PublicProductCatalogService {
   if(merchantId!=null&&merchantId<1)throw new IllegalArgumentException("Invalid merchant");
   var snapshot=snapshot(merchantId);var owners=snapshot.owners();var linked=snapshot.linked();quotes.decorate(linked.values().stream().flatMap(List::stream).toList(),true);
   var eligible=selectedProductIds==null?snapshot.eligible():snapshot.eligible().stream().filter(p->selectedProductIds.contains(p.getId())).toList();
+  var visibleOwners=new HashMap<String,Long>();eligible.forEach(p->visibleOwners.put(p.getId(),p.getMerchantId()));var publicRatings=ratings==null?Map.<String,java.math.BigDecimal>of():ratings.publicRatings(visibleOwners);
   return eligible.stream().map(p->{
    var offers=linked.getOrDefault(p.getId(),List.of()).stream().filter(i->Objects.equals(owners.get(i.postId),p.getMerchantId())).sorted(Comparator.comparing((RecommendationItem i)->i.postId).reversed().thenComparing(i->i.id)).map(i->new Offer(i.postId,i)).toList();
    var data=p.getCatalogData();var source=offers.isEmpty()?null:offers.get(0).facts();
@@ -62,7 +63,7 @@ public class PublicProductCatalogService {
    Map<String,String> names=p.getName(),descriptions=p.getDescription(),spec=data==null?Map.of():data.specification();String brand=p.getBrand(),model=data==null?null:data.model(),pack=data==null?null:data.packaging();
    if(data==null&&source!=null){names=legacyText(source,"name");descriptions=legacyText(source,"description");spec=legacyText(source,"specification");if(brand==null||brand.isBlank())brand=source.brand;model=source.model;pack=source.packaging;}
    else if(data!=null&&!ProductCatalogService.translationsCurrent(p)){names=sourceOnly(names);descriptions=sourceOnly(descriptions);spec=sourceOnly(spec);}
-   return new Entry(p.getId(),p.getMerchantId(),Map.copyOf(names),Map.copyOf(descriptions),brand,p.getItemNumber(),Map.copyOf(spec),model,pack,List.copyOf(gallery),labels,offers,data!=null);
+   return new Entry(p.getId(),p.getMerchantId(),Map.copyOf(names),Map.copyOf(descriptions),brand,p.getItemNumber(),Map.copyOf(spec),model,pack,List.copyOf(gallery),labels,offers,data!=null,publicRatings.get(p.getId()));
   }).toList();
  }
  private static Map<String,String> sourceOnly(Map<String,String> input){return input.get("ja-JP")==null?Map.of():Map.of("ja-JP",input.get("ja-JP"));}

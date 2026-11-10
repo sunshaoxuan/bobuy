@@ -1308,6 +1308,15 @@ const messages: Dictionary = {
   "issueDate.invalidHash": "出典内容の64桁の SHA-256 を入力してください。",
   "issueDate.unavailable": "現在の店舗セッションと本人の特集が必要です。",
   "issueDate.parentConflict": "特集のバージョンが変更されました。日付と記事の下書きは保持されています。本ページを更新して最新内容を確認し、出典を再確認してください。",
+  "rating.title": "商品の評価",
+  "rating.hint": "販売者が管理する商品評価であり、購入者レビュー件数ではありません。未評価は非表示です。評価と商品説明は別々に保存します。",
+  "rating.visible": "この評価を公開する",
+  "rating.review": "商品の評価を確認しました",
+  "rating.save": "評価を保存",
+  "rating.saved": "評価を保存しました",
+  "rating.invalid": "0～5を0.5刻みで入力してください。未評価は公開できません。",
+  "rating.review_required": "保存前に評価を確認してください。",
+  "rating.value": "商品の評価：5点中{value}点",
 };
 
 export default messages;

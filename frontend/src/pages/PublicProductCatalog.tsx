@@ -1,3 +1,4 @@
+import {ProductStars} from '../components/ProductRating';
 import {useCallback,useEffect,useMemo,useRef,useState} from 'react';
 import {Alert,Button,Drawer,Empty,Modal,Spin,Tooltip} from 'antd';
 import {ArrowDownOutlined,PlusOutlined,ReloadOutlined} from '@ant-design/icons';
@@ -47,7 +48,7 @@ export default function PublicProductCatalog(props:Props) {
   useEffect(()=>{setDatasetChanged(false);},[group]);
   const checkDataset=(kind:string,token:string)=>{if(Object.entries(dataset.current.tokens).some(([key,value])=>key!==kind&&value!==token)){setDatasetChanged(true);return false;}dataset.current.tokens[kind]=token;return true;};
   function refreshCatalog(){setDatasetChanged(false);setRefresh(value=>value+1);}
-  useEffect(()=>{const update=()=>{if(document.visibilityState==='visible')refreshCatalog();};document.addEventListener('visibilitychange',update);return()=>document.removeEventListener('visibilitychange',update);},[]);
+  // Visibility alone is not a dataset change. Explicit refresh, identity and Japanese-day changes remain authoritative.
   const autoPaused=!!props.autoPaused||!!editing||details.marked||details.all||datasetChanged;
   const manager=!!isAuthenticated&&!loading&&isMerchant&&!!user;
   useEffect(()=>{setEditing(undefined);setDirty(false);busy.current=false;},[user?.id,isMerchant,isAuthenticated,loading]);
@@ -123,11 +124,11 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
             </button>
             <ProductMarkerBadges markers={state.markers[entry.productId]??[]} overlay/>
             <ReservationAdd allowed={buyable} quote={product} name={name.value} count={quantities[entry.productId]} onAdd={()=>{if(product&&buyable)onAdd(product);}}/>
-            <div className="product-body"><ProductBrand brand={entry.brand}/><button type="button" className="product-name" onClick={()=>openDetail(entry.productId)}><h2 lang={name.language}>{name.value||t('rec.not_stated')}</h2></button>{spec.value&&<p className="catalog-card-spec" lang={spec.language}>{spec.value}</p>}</div>
+            <div className="product-body"><ProductBrand brand={entry.brand}/><button type="button" className="product-name" onClick={()=>openDetail(entry.productId)}><h2 lang={name.language} title={name.value}>{name.value||t('rec.not_stated')}</h2></button>{spec.value&&<p className="catalog-card-spec" lang={spec.language}>{spec.value}</p>}</div>
           </div>
           {(name.fallback||spec.fallback)&&sourceNote(name.fallback?name:spec)}
           <small className="rec-pin-code">{t('rec.code')}: {entry.itemNumber||t('rec.not_stated')}</small>
-          {!pending&&product&&<SellingPrice product={product}/>}
+          <ProductStars value={entry.rating}/>{!pending&&product&&<SellingPrice product={product}/>}
           {!!entry.referenceOffers.length&&<button type="button" className="catalog-offer-link" onClick={()=>openDetail(entry.productId)}>{t('catalog.reference_count',{count:entry.referenceOffers.length})}</button>}
           {management(entry)}
         </article>;

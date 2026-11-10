@@ -9,9 +9,11 @@ import org.springframework.transaction.annotation.*;
 /** Occurrences are (postId,itemId), never deduplicated across distinct published offers. */
 @Service
 public class PublicRecommendationBrowseService {
- private final RecommendationService recommendations;
+ private final RecommendationService recommendations;private final ProductRatingService ratings;
  private final ObjectMapper json=new ObjectMapper().findAndRegisterModules().configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS,true).configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY,true);
- public PublicRecommendationBrowseService(RecommendationService r){recommendations=r;}
+ public PublicRecommendationBrowseService(RecommendationService r){this(r,null);}
+ @org.springframework.beans.factory.annotation.Autowired public PublicRecommendationBrowseService(RecommendationService r,ProductRatingService ratings){recommendations=r;this.ratings=ratings;}
+ private Map<String,java.math.BigDecimal> ratings(List<RecommendationService.Detail> data){var owners=new HashMap<String,Long>();for(var d:data)for(var i:d.items())if(i.productId!=null)owners.put(i.productId,d.post().merchantId());return ratings==null?Map.of():ratings.publicRatings(owners);}
  /** itemCount is the legacy query-match count; publicItemCount is the whole issue's public product occurrences. */
  public record SupplierLabel(String id,Map<String,String> name){}
  public record Issue(RecommendationService.Summary post,String title,boolean history,long itemCount,boolean service,
@@ -21,7 +23,7 @@ public class PublicRecommendationBrowseService {
    Map<String,RecommendationItem.Text> translations,String translationStatus,List<RecommendationItem.Label> categories,
    RecommendationItem.Picture image,java.math.BigDecimal referencePrice,java.math.BigDecimal originalPrice,java.math.BigDecimal discountAmount,
    String priceUnit,String currency,LocalDate offerStart,LocalDate offerEnd,LocalDate couponStart,LocalDate couponEnd,String offerNotes,
-   ReferenceOfferContext referenceContext,ReferenceQuoteService.Resolution referenceQuote){}
+   ReferenceOfferContext referenceContext,ReferenceQuoteService.Resolution referenceQuote,java.math.BigDecimal rating){}
  public record ServiceCard(String provider,Integer staff,java.math.BigDecimal hours,java.math.BigDecimal originalPrice,
    java.math.BigDecimal price,String currency,Boolean taxIncluded,List<RecommendationServiceOffer.Fee> fees,boolean noExtraFees,
    LocalDate applicationStart,LocalDate applicationEnd,LocalDate serviceStart,LocalDate serviceEnd){}
@@ -71,13 +73,13 @@ public class PublicRecommendationBrowseService {
   return new Issue(d.post(),title(d,locale),expired(d,day),d.serviceOffer()!=null?1:d.items().stream().filter(i->search(new Row(d,i,expired(d,day)),query,locale)).count(),
     d.serviceOffer()!=null,d.items().size(),publicSuppliers(d),d.post().issueDate(),d.post().issueDateSource());
  }
- private static ItemCard card(RecommendationItem i){var translations=new TreeMap<String,RecommendationItem.Text>();if("REVIEWED".equals(i.getTranslationStatus()))i.translations.forEach((k,t)->translations.put(k,new RecommendationItem.Text(t.name(),t.specification(),null,t.offerNotes())));
-  return new ItemCard(i.id,i.productId,i.name,i.brand,i.itemNumber,i.specification,i.model,i.packaging,translations,i.getTranslationStatus(),i.categories,i.gallery.isEmpty()?null:i.gallery.get(0),i.referencePrice,i.originalPrice,i.discountAmount,i.priceUnit,"JPY",i.offerStart,i.offerEnd,i.couponStart,i.couponEnd,i.offerNotes,i.referenceContext,i.referenceQuote);
+ private static ItemCard card(RecommendationItem i,java.math.BigDecimal rating){var translations=new TreeMap<String,RecommendationItem.Text>();if("REVIEWED".equals(i.getTranslationStatus()))i.translations.forEach((k,t)->translations.put(k,new RecommendationItem.Text(t.name(),t.specification(),null,t.offerNotes())));
+  return new ItemCard(i.id,i.productId,i.name,i.brand,i.itemNumber,i.specification,i.model,i.packaging,translations,i.getTranslationStatus(),i.categories,i.gallery.isEmpty()?null:i.gallery.get(0),i.referencePrice,i.originalPrice,i.discountAmount,i.priceUnit,"JPY",i.offerStart,i.offerEnd,i.couponStart,i.couponEnd,i.offerNotes,i.referenceContext,i.referenceQuote,rating);
  }
  @Transactional(readOnly=true,isolation=Isolation.REPEATABLE_READ)
  public Directory directory(int page,Long merchant,String locale,String period,String query,String expected){
   validate(page,merchant,null,locale,period,query,"",expected);var day=today();var data=recommendations.publicBrowseEntries(merchant);String q=text(query).strip().toLowerCase(Locale.ROOT);
-  var datasetVersion=revision(Arrays.asList("recommendation-data-v1",merchant,day,data));var version=revision(Arrays.asList("recommendation-directory-v2",datasetVersion,locale,period,q));if(expected!=null&&!expected.equals(version))throw new PublicProductBrowseService.Changed();
+  var datasetVersion=revision(Arrays.asList("recommendation-data-v1",merchant,day,data,ratings(data)));var version=revision(Arrays.asList("recommendation-directory-v2",datasetVersion,locale,period,q));if(expected!=null&&!expected.equals(version))throw new PublicProductBrowseService.Changed();
   var scoped=data.stream().filter(d->period(expired(d,day),period)).filter(d->d.serviceOffer()!=null?search(new Row(d,null,expired(d,day)),q,locale):d.items().stream().anyMatch(i->search(new Row(d,i,expired(d,day)),q,locale))||q.isEmpty()).map(d->directoryIssue(d,day,q,locale)).sorted(issueOrder()).toList();
   int start=(int)Math.min((long)page*20,scoped.size()),end=Math.min(start+20,scoped.size());
   return new Directory(scoped.subList(start,end),page,20,scoped.size(),end<scoped.size(),version,day.toString(),datasetVersion);
@@ -85,14 +87,14 @@ public class PublicRecommendationBrowseService {
  @Transactional(readOnly=true,isolation=Isolation.REPEATABLE_READ)
  public Page page(int page,Long merchant,Long issue,String locale,String period,String query,String category,String expected){
   validate(page,merchant,issue,locale,period,query,category,expected);var day=today();var data=recommendations.publicBrowseEntries(merchant);String q=text(query).strip().toLowerCase(Locale.ROOT),cat=text(category);
-  String datasetVersion=revision(Arrays.asList("recommendation-data-v1",merchant,day,data));String version=revision(Arrays.asList("recommendation-occurrences-v1",datasetVersion,issue,locale,period,q,cat));if(expected!=null&&!expected.equals(version))throw new PublicProductBrowseService.Changed();
+  String datasetVersion=revision(Arrays.asList("recommendation-data-v1",merchant,day,data,ratings(data)));String version=revision(Arrays.asList("recommendation-occurrences-v1",datasetVersion,issue,locale,period,q,cat));if(expected!=null&&!expected.equals(version))throw new PublicProductBrowseService.Changed();
   var scope=new ArrayList<Row>();for(var d:data){boolean history=expired(d,day);if(issue!=null&&!issue.equals(d.post().id())||!period(history,period))continue;if(d.serviceOffer()!=null){var r=new Row(d,null,history);if(search(r,q,locale))scope.add(r);}else for(var i:d.items()){var r=new Row(d,i,history);if(search(r,q,locale))scope.add(r);}}
   var labels=new LinkedHashMap<String,RecommendationItem.Label>();var counts=new LinkedHashMap<String,Long>();long unclassified=0,services=0;
   for(var r:scope){if(r.item()==null){services++;continue;}var ids=ids(r.item());if(ids.isEmpty())unclassified++;var seen=new HashSet<String>();for(var c:r.item().categories)if(ids.contains(c.id())&&seen.add(c.id())){labels.put(c.id(),c);counts.merge(c.id(),1L,Long::sum);}}
   var facets=counts.entrySet().stream().map(e->new PublicProductBrowseService.Facet(e.getKey(),labels.get(e.getKey()).name(),e.getValue())).toList();
   var filtered=scope.stream().filter(r->cat.isEmpty()||r.item()!=null&&(cat.equals("__unclassified")?ids(r.item()).isEmpty():ids(r.item()).contains(cat))).toList();
   int start=(int)Math.min((long)page*24,filtered.size()),end=Math.min(start+24,filtered.size());
-  var rows=filtered.subList(start,end).stream().map(r->{var s=r.detail().serviceOffer();return new Occurrence(r.detail().post().id()+":"+(r.item()==null?"service":r.item().id),r.detail().post(),title(r.detail(),locale),r.history(),r.item()==null?null:card(r.item()),r.item()==null,s==null?null:new ServiceCard(s.provider(),s.staff(),s.hours(),s.originalPrice(),s.price(),s.currency(),s.taxIncluded(),s.fees(),s.noExtraFees(),s.applicationStart(),s.applicationEnd(),s.serviceStart(),s.serviceEnd()));}).toList();
+  var publicRatings=ratings(data);var rows=filtered.subList(start,end).stream().map(r->{var s=r.detail().serviceOffer();return new Occurrence(r.detail().post().id()+":"+(r.item()==null?"service":r.item().id),r.detail().post(),title(r.detail(),locale),r.history(),r.item()==null?null:card(r.item(),r.item().productId==null?null:publicRatings.get(r.item().productId)),r.item()==null,s==null?null:new ServiceCard(s.provider(),s.staff(),s.hours(),s.originalPrice(),s.price(),s.currency(),s.taxIncluded(),s.fees(),s.noExtraFees(),s.applicationStart(),s.applicationEnd(),s.serviceStart(),s.serviceEnd()));}).toList();
   return new Page(rows,page,24,scope.size(),filtered.size(),scope.size()-services,services,end<filtered.size(),version,facets,unclassified,day.toString(),datasetVersion);
  }
 }

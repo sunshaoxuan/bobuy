@@ -1308,6 +1308,15 @@ const messages: Dictionary = {
   "issueDate.invalidHash": "请输入来源内容的 64 位 SHA-256。",
   "issueDate.unavailable": "需要当前商家会话及本人期次。",
   "issueDate.parentConflict": "期次版本已变化，日期和文章草稿已保留。请刷新本页核对最新内容，再重新审核来源。",
+  "rating.title": "商品星级",
+  "rating.hint": "由商家维护的商品评价，不代表顾客评价数量。未评分默认隐藏；星级与商品文案分别保存。",
+  "rating.visible": "公开显示此星级",
+  "rating.review": "已核对本商品星级",
+  "rating.save": "保存星级",
+  "rating.saved": "星级已保存",
+  "rating.invalid": "请输入 0–5 星，支持半星；未评分不能公开星级。",
+  "rating.review_required": "保存前请核对星级。",
+  "rating.value": "商品星级：{value} / 5",
 };
 
 export default messages;

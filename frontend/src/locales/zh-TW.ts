@@ -1445,6 +1445,15 @@ const messages: Dictionary = {
   "issueDate.invalidHash": "請輸入來源內容的 64 位 SHA-256。",
   "issueDate.unavailable": "需要目前商家工作階段及本人的期次。",
   "issueDate.parentConflict": "期次版本已變更，日期與文章草稿已保留。請重新整理本頁核對最新內容，再重新審核來源。",
+  "rating.title": "商品星級",
+  "rating.hint": "由商家維護的商品評價，不代表顧客評價數量。未評分預設隱藏；星級與商品文案分別儲存。",
+  "rating.visible": "公開顯示此星級",
+  "rating.review": "已核對本商品星級",
+  "rating.save": "儲存星級",
+  "rating.saved": "星級已儲存",
+  "rating.invalid": "請輸入 0–5 星，支援半星；未評分不能公開星級。",
+  "rating.review_required": "儲存前請核對星級。",
+  "rating.value": "商品星級：{value} / 5",
 };
 
 export default messages;

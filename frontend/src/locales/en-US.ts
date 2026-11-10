@@ -1308,6 +1308,15 @@ const messages: Dictionary = {
   "issueDate.invalidHash": "Enter the source content’s 64-character SHA-256.",
   "issueDate.unavailable": "A current merchant session and an owned issue are required.",
   "issueDate.parentConflict": "The issue version changed. Date and article drafts are kept. Reload this page to review current content, then review the source again.",
+  "rating.title": "Product rating",
+  "rating.hint": "Merchant-maintained product rating, not a customer review count. Unrated products stay hidden. Rating changes are saved separately from product copy.",
+  "rating.visible": "Show this rating publicly",
+  "rating.review": "I have reviewed this product rating",
+  "rating.save": "Save rating",
+  "rating.saved": "Rating saved",
+  "rating.invalid": "Enter 0–5 stars in half-star steps; an unrated product cannot show stars.",
+  "rating.review_required": "Review the rating before saving.",
+  "rating.value": "Product rating: {value} out of 5",
 };
 
 export default messages;

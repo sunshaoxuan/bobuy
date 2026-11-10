@@ -1,3 +1,4 @@
+import {ProductStars} from '../components/ProductRating';
 import SafeArticleText from '../components/SafeArticleText';
 import {useEffect,useRef,useState,type ReactNode} from 'react';
 import {Alert,Button,Empty,Spin} from 'antd';
@@ -43,12 +44,13 @@ function Occurrences({period,topic,refresh,paused,checkDataset,onChanged,onSales
    const text=item?recommendationText(item,locale):undefined,quote=item?.productId?sale.quotes[item.productId]:undefined,pending=!!item?.productId&&(!sale.done.has(item.productId)||!!purchasePending),buyable=!pending&&!!quote&&canBuy(quote);
    return <article className="store-product rec-pin" key={row.key} data-occurrence-key={row.key} data-card-detail={item?true:undefined} onClick={event=>{if(item)openCardDetail(event,trigger=>openItem(row.post.id,item.id,trigger));}}>
     {item&&<ReservationAdd allowed={buyable} quote={quote} name={text?.name??item.name} count={item.productId?quantities[item.productId]:undefined} onAdd={()=>{if(quote&&buyable)onAdd(quote);}}/>}
-    <button type="button" className="catalog-offer-link" onClick={()=>openIssue(row.post.id)}>{row.title}</button><div className="rec-publication">{row.post.publisherName&&<span>{t('detail.published_signature')}: {row.post.publisherName}</span>}{row.post.publishedAt&&<time dateTime={row.post.publishedAt}>{new Date(row.post.publishedAt).toLocaleDateString(locale)}</time>}</div>{row.history&&<small>{t('rec.past_issue')}</small>}
+
     {row.service&&row.serviceSummary?<><h3>{row.title}</h3><span>{t('service.kind')}</span><ServiceSummary offer={row.serviceSummary}/><Button onClick={()=>openIssue(row.post.id)}>{t('rec.conditions_detail')}</Button></>:item&&text?<>
-     <div className="product-tile"><button type="button" className="product-photo" data-detail-trigger="photo" aria-label={t('store.detail_label',{name:text.name})} onClick={event=>openItem(row.post.id,item.id,event.currentTarget)}>{row.item?.image?.url?<img src={row.item.image.url} alt={text.name} loading={index<2?'eager':'lazy'} onError={event=>{event.currentTarget.style.display='none';}}/>:<span>{t('gallery.pending')}</span>}</button><div className="product-body"><ProductBrand brand={item.brand}/><button type="button" className="product-name" data-detail-trigger="name" onClick={event=>openItem(row.post.id,item.id,event.currentTarget)}><h3><RecommendationName text={text}/></h3></button>{text.specification&&<p>{text.specification}</p>}</div></div>
+     <div className="product-tile"><button type="button" className="product-photo" data-detail-trigger="photo" aria-label={t('store.detail_label',{name:text.name})} onClick={event=>openItem(row.post.id,item.id,event.currentTarget)}>{row.item?.image?.url?<img src={row.item.image.url} alt={text.name} loading={index<2?'eager':'lazy'} onError={event=>{event.currentTarget.style.display='none';}}/>:<span>{t('gallery.pending')}</span>}</button><div className="product-body"><ProductBrand brand={item.brand}/><button type="button" className="product-name" data-detail-trigger="name" onClick={event=>openItem(row.post.id,item.id,event.currentTarget)}><h3 title={text.name}><RecommendationName text={text}/></h3></button>{text.specification&&<p>{text.specification}</p>}</div></div>
      <p>{t('rec.code')}: {item.itemNumber||t('rec.not_stated')}</p><ProductVariant model={item.model} packaging={item.packaging}/><OfferInfo facts={{...item,offerNotes:text.offerNotes}} today={data.page?.japanDay} compact/>
-     {quote&&!pending&&<SellingPrice product={quote}/>}
+     <ProductStars value={row.item?.rating}/>{quote&&!pending&&<SellingPrice product={quote}/>}
     </>:null}
+    <footer className="product-card-source"><button type="button" className="catalog-offer-link" onClick={()=>openIssue(row.post.id)}>{row.title}</button><div className="rec-publication">{row.post.publisherName&&<span>{t('detail.published_signature')}: {row.post.publisherName}</span>}{row.post.publishedAt&&<time dateTime={row.post.publishedAt}>{new Date(row.post.publishedAt).toLocaleDateString(locale)}</time>}</div>{row.history&&<small>{t('rec.past_issue')}</small>}</footer>
    </article>;
   })}</div>}
   {data.page?.hasNext&&<div className="feed-loader" ref={sentinel}><Button loading={data.busy} disabled={paused||data.changed||!!data.error} onClick={data.next}>{t('store.load_more')} ({data.items.length}/{data.page.matchedTotal})</Button></div>}
@@ -67,7 +69,7 @@ export default function RecommendationBrowse(props:Props){
  useEffect(()=>{setChanged(false);},[identity]);
  function checkDataset(key:string,token:string){if(Object.entries(dataset.current.tokens).some(([other,value])=>other!==key&&value!==token)){setChanged(true);return false;}dataset.current.tokens[key]=token;return true;}
  function restart(){setChanged(false);setRefresh(value=>value+1);}
- useEffect(()=>{const update=()=>{if(document.visibilityState==='visible')restart();};document.addEventListener('visibilitychange',update);return()=>document.removeEventListener('visibilitychange',update);},[]);
+ // Visibility alone is not a dataset change. Explicit refresh, identity and Japanese-day changes remain authoritative.
  const selectedKey=JSON.stringify([location.pathname,topic,node,props.query??'',params.get('category'),locale,refresh,day,props.authKey]);
  const [selected,setSelected]=useState<{key:string;detail?:RecommendationDetail;error:string}>({key:'',error:''});
  useEffect(()=>{if(!topic||node===-1)return;let active=true;setSelected({key:selectedKey,error:''});void recommendationApi.get(topic,true,node).then(detail=>{if(active){if(detail.post.id!==topic||node!==undefined&&detail.post.merchantId!==node)throw Error('browse.invalid');setSelected({key:selectedKey,detail,error:''});}}).catch(error=>{if(active)setSelected({key:selectedKey,error:error.message});});return()=>{active=false;};},[selectedKey]);

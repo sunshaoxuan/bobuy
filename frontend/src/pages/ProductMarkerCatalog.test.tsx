@@ -1,4 +1,4 @@
-import {fireEvent,render,screen,within,waitFor} from '@testing-library/react';
+import {act,fireEvent,render,screen,within,waitFor} from '@testing-library/react';
 import {MemoryRouter} from 'react-router-dom';
 import {I18nProvider} from '../i18n';
 import PublicProductCatalog from './PublicProductCatalog';
@@ -12,3 +12,11 @@ it('pages marked and all streams independently without fetching unseen pages',as
 it('makes shared dataset mismatch visible and does not commit the mismatched second section',async()=>{mocks.productBrowse.mockImplementation(async q=>browsePage([productCard(q.marked?'marked':'all')],{datasetRevision:q.marked?'old':'new'}));mount();await screen.findAllByRole('alert');expect(screen.getAllByText('The catalog changed. Refresh to load a consistent version.').length).toBeGreaterThan(0);expect(document.querySelectorAll('.catalog-master-card')).toHaveLength(1);});
 it('removes the whole marked region only for confirmed unfiltered-scope zero, with no extra fetch',async()=>{mocks.productBrowse.mockImplementation(async q=>q.marked?browsePage([],{markedScopeTotal:0}):browsePage([productCard()],{markedScopeTotal:0}));mount();await within(screen.getByRole('region',{name:'Trip finds'})).findByRole('heading',{name:'Product'});await waitFor(()=>expect(screen.queryByRole('region',{name:'Marked products'})).not.toBeInTheDocument());expect(screen.queryByText('No marked products yet')).not.toBeInTheDocument();expect(mocks.productBrowse).toHaveBeenCalledTimes(2);});
 it('retains a resettable empty marked filter when other marked products exist in the current public scope',async()=>{mocks.productBrowse.mockImplementation(async q=>q.marked?browsePage([],{scopeTotal:0,matchedTotal:0,markedScopeTotal:5}):browsePage([productCard()],{markedScopeTotal:5}));mount();const marked=screen.getByRole('region',{name:'Marked products'});await waitFor(()=>expect(marked).toHaveAttribute('aria-busy','false'));expect(marked).toBeInTheDocument();expect(marked.querySelector('.rec-category-filters')).toBeInTheDocument();});
+it('retains loaded pages and does not refetch either stream on repeated visibility/focus events',async()=>{
+ vi.spyOn(document,'visibilityState','get').mockReturnValue('visible');
+ mocks.productBrowse.mockImplementation(async q=>browsePage([productCard(q.page?'next':'p')],{page:q.page,scopeTotal:2,matchedTotal:2,hasNext:q.page===0}));mount();
+ const all=screen.getByRole('region',{name:'Trip finds'});await within(all).findByRole('heading',{name:'Product'});fireEvent.click(within(all).getByRole('button',{name:/Load more/}));await within(all).findByRole('heading',{name:'next'});
+ const calls=mocks.productBrowse.mock.calls.length;await act(async()=>{for(let i=0;i<3;i++){fireEvent.blur(window);fireEvent(document,new Event('visibilitychange'));fireEvent.focus(window);fireEvent(document,new Event('visibilitychange'));}});
+ expect(mocks.productBrowse).toHaveBeenCalledTimes(calls);expect(within(all).getByRole('heading',{name:'next'})).toBeInTheDocument();expect(within(all).getByRole('heading',{name:'Product'})).toBeInTheDocument();
+});
+afterEach(()=>vi.restoreAllMocks());
