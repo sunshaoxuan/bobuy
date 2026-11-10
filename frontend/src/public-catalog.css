@@ -28,8 +28,12 @@
 .storefront.browse-shell .catalog-master-grid .product-body{position:relative;inset:auto;}
 .storefront.browse-shell .catalog-master-grid .product-name h2,
 .storefront.browse-shell .catalog-master-grid .product-name h3{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-height:1.55;height:3.1em;overflow:hidden;overflow-wrap:anywhere;margin:0 0 6px;}
-.storefront.browse-shell .catalog-master-grid .rec-sale-actual>strong,
-.storefront.browse-shell .catalog-master-grid .rec-offer-info>strong{display:block;color:#171717;font-size:clamp(21px,2vw,28px);font-weight:750;line-height:1.35;overflow-wrap:anywhere;}
+.storefront.browse-shell .catalog-master-grid .card-sale-value,
+.storefront.browse-shell .catalog-master-grid .card-reference-value{display:block;color:#171717;font-size:clamp(21px,2vw,28px);font-weight:750;line-height:1.35;overflow-wrap:anywhere;}
+.storefront.browse-shell .catalog-master-grid .card-price-label,
+.storefront.browse-shell .catalog-master-grid .card-price-unit{display:block;color:#626262;font-size:12px;line-height:1.5;overflow-wrap:anywhere;}
+.storefront.browse-shell .catalog-master-grid .product-model,
+.storefront.browse-shell .catalog-master-grid .product-packaging{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:12px;line-height:1.5;overflow-wrap:anywhere;}
 .storefront.browse-shell .catalog-master-grid .catalog-source,
 .storefront.browse-shell .catalog-master-grid .catalog-offer-link{order:10;font-size:12px;}
 .product-card-source{order:10;margin-top:auto;padding-top:12px;color:#626262;font-size:12px;line-height:1.5;overflow-wrap:anywhere;}
