@@ -56,16 +56,14 @@ export default function IssueDirectory({wide,primaryReady,obscured,refresh,query
   <div className="issue-directory-surface"><button ref={toggle} type="button" className="issue-directory-toggle" aria-expanded={expanded} aria-controls={id} onClick={()=>{if(pinned)close();else{suppressed.current=false;setPinned(true);setExpanded(true);setRequested(identity);}}}>{t('rec.contents')} <span aria-hidden="true">{expanded?'−':'＋'}</span></button>
   {!selected&&<small className="issue-directory-current">{t('browse.current')}</small>}
   <nav id={id} aria-label={t('rec.contents')} className="rec-issue-directory" hidden={!wide&&!expanded}>
-   {(expanded||!wide)&&shown.some(row=>!calendar(row.issueDate,row.issueDateSource))&&<p className="issue-directory-date-note">{t('directory.date_review_hint')}</p>}
    {shown.length>0&&<ul>{shown.map(row=>{const {issue,published,primary:day}=dates(row),supplier=suppliers(row);return <li key={row.id}><Link to={path(row.id)} aria-current={row.id===selected?.id?'page':undefined} aria-label={label(row)}>
     <span className="issue-directory-icon" aria-hidden="true">
-     {day?<time className="issue-directory-date" data-date-kind={day.kind} dateTime={day.value} title={dateLabel(day)}><span className="issue-directory-month">{day.month}</span><b>{day.day}</b><small>{day.year}</small><small className="issue-directory-date-kind">{t(day.kind==='issue'?'directory.issue_date':'directory.published_short')}</small></time>:<span className="issue-directory-date-unknown" title={t('directory.date_unknown')}><CalendarOutlined/>{wide&&!expanded&&<small>{t('directory.date_pending_short')}</small>}</span>}
+     {day?<time className="issue-directory-date" data-date-kind={day.kind} dateTime={day.value} title={dateLabel(day)}><span className="issue-directory-month">{day.month}</span><b>{day.day}</b><small>{day.year}</small></time>:<span className="issue-directory-date-unknown" title={t('directory.date_unknown')}><CalendarOutlined/></span>}
      {row.publicItemCount!==undefined&&<span className="issue-directory-count" title={t('directory.public_count',{count:row.publicItemCount})}><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5 14 5 8 8.5 2 5 8 1.5Zm-6 7L8 12l6-3.5M2 12l6 3.5 6-3.5"/></svg><b>{row.publicItemCount}</b></span>}
      {supplier&&<small className="issue-directory-supplier-compact">{supplier}</small>}
     </span>
     <span className="issue-directory-title"><span className="issue-directory-title-copy">{row.title}</span>{day&&<small className="issue-directory-date-status">{t(day.kind==='issue'?'directory.issue_date':'directory.published_date')}: <time dateTime={day.value}>{day.label}</time></small>}
-     {issue&&published&&<small className="issue-directory-published-at">{t('directory.published_date')}: <time dateTime={published.value}>{published.label}</time></small>}
-     {!issue&&(expanded||!wide)&&<small className="issue-directory-date-review-status">{t('directory.date_unknown')}</small>}{supplier&&<small className="issue-directory-suppliers">{t('class.supplier')}: {supplier}</small>}</span>
+     {supplier&&<small className="issue-directory-suppliers">{t('class.supplier')}: {supplier}</small>}</span>
    </Link></li>;})}</ul>}
    {data.busy&&<Spin/>}{data.error&&<BrowseError error={data.error} changed={data.changed} retry={data.retry} refresh={onRefresh}/>}
    {data.page&&!rows.length&&<Empty description={t('store.no_matches')}/>}
