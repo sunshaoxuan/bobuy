@@ -23,12 +23,32 @@ public class RecommendationController {
     }
     private final RecommendationService service;
     private final RecommendationSourceImage sourceImages;
-    public RecommendationController(RecommendationService service, RecommendationSourceImage sourceImages) { this.service = service; this.sourceImages = sourceImages; }
+    private final MediaBinaryService binaries;
+    private final ProductSaleService currencyService;
+    public RecommendationController(RecommendationService service, RecommendationSourceImage sourceImages,MediaBinaryService binaries,ProductSaleService currencyService) { this.service = service; this.sourceImages = sourceImages;this.binaries=binaries;this.currencyService=currencyService; }
     public record ItemEdit(@NotNull @Valid RecommendationFacts facts, @Min(0) long version) {}
+    @GetMapping("/api/merchant/recommendations/{id}/items/{itemId}/reference-history")
+    public ApiResponse<?> referenceHistory(@PathVariable Long id,@PathVariable Long itemId){return ApiResponse.success(service.referenceHistory(id,itemId));}
     public record SourceImage(@NotNull @Valid RecommendationFacts facts, @NotBlank @Size(max=2048) String imageUrl, @Min(0) long version) {}
     public record Edit(@NotNull @Size(max = 200) String title, @NotNull @Size(max = 100000) String body, @Min(0) long version) {}
     public record Version(@Min(0) long version) {}
+    public record ServiceEdit(@NotNull com.bobbuy.model.RecommendationServiceOffer offer,@Min(0) long version) {}
+    @PostMapping("/api/merchant/recommendations/service-offers")
+    public ApiResponse<?> createService(@RequestBody com.bobbuy.model.RecommendationServiceOffer offer){return ApiResponse.success(service.createService(offer));}
+    @PutMapping("/api/merchant/recommendations/{id}/service-offer")
+    public ApiResponse<?> saveService(@PathVariable Long id,@Valid @RequestBody ServiceEdit input){return ApiResponse.success(service.saveService(id,input.offer(),input.version()));}
+    public record ArticleLanguage(@NotBlank @Size(max=10) String locale,@NotNull @Size(max=200) String title,@NotNull @Size(max=100000) String body,@NotBlank @Size(max=64) String sourceHash,@Min(0) long version,boolean reviewed) {}
+    @PutMapping("/api/merchant/recommendations/{id}/article-localizations")
+    public ApiResponse<?> articleLanguage(@PathVariable Long id,@Valid @RequestBody ArticleLanguage input){return ApiResponse.success(service.articleLanguage(id,input.locale(),input.title(),input.body(),input.sourceHash(),input.version(),input.reviewed()));}
+    @GetMapping("/api/merchant/recommendations/{id}/article-history")
+    public ApiResponse<?> articleHistory(@PathVariable Long id){return ApiResponse.success(service.articleHistory(id));}
     public record CatalogLink(@NotEmpty @Size(max=500) List<@NotNull Long> itemIds, @Size(max=255) String productId, @Min(0) long version) {}
+    public record FromProduct(@NotBlank @Size(max=255) String productId,@Min(0) long productVersion,
+        @NotNull @Valid RecommendationFacts facts,@Min(0) long version,boolean reviewed) {}
+    @PostMapping("/api/merchant/recommendations/{id}/from-product")
+    public ApiResponse<?> fromProduct(@PathVariable Long id,@Valid @RequestBody FromProduct input){
+        return ApiResponse.success(service.fromProduct(id,input.productId(),input.productVersion(),input.facts(),input.version(),input.reviewed()));
+    }
     @PutMapping("/api/merchant/recommendations/{id}/catalog")
     public ApiResponse<?> catalog(@PathVariable Long id,@Valid @RequestBody CatalogLink input){return ApiResponse.success(service.catalog(id,input.itemIds(),input.productId(),input.version()));}
     @PostMapping(value="/api/merchant/recommendations/{id}/items/{itemId}/gallery",consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -89,6 +109,6 @@ public class RecommendationController {
         var image = service.image(id);
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(image.contentType))
             .header("X-Content-Type-Options", "nosniff").header("Content-Disposition", "inline")
-            .cacheControl(CacheControl.maxAge(java.time.Duration.ofDays(30)).cachePublic().immutable()).body(image.content);
+            .cacheControl(CacheControl.maxAge(java.time.Duration.ofDays(30)).cachePublic().immutable()).body(binaries.read(image));
     }
 }

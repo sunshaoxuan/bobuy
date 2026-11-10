@@ -12,5 +12,11 @@ public class RecommendationImage {
     @Column(nullable = false, length = 64) public String imageHash;
     @Column(nullable = false) public String contentType;
     @Column(nullable=false,length=16) public String accessScope="PUBLIC";
-    @JdbcTypeCode(SqlTypes.VARBINARY) @Column(nullable = false, columnDefinition = "bytea") public byte[] content;
+    @JdbcTypeCode(SqlTypes.VARBINARY) @Column(columnDefinition = "bytea") public byte[] content;
+    @Column(nullable=false,length=64) public String rawSha256;
+    @Column(nullable=false) public long byteLength;
+    @PrePersist @PreUpdate public void metadata(){
+        if(content!=null){rawSha256=com.bobbuy.service.MediaBinaryService.sha(content);byteLength=content.length;}
+        if(rawSha256==null||!rawSha256.matches("[0-9a-f]{64}")||byteLength<1)throw new IllegalStateException("Invalid media metadata");
+    }
 }

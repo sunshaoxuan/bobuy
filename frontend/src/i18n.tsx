@@ -70,7 +70,7 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
   const t = useCallback((key: string, values?: Record<string, string | number>) => translate(locale, key, values), [locale]);
   useEffect(() => {
     document.documentElement.lang = locale;
-    document.title = t('app.brand');
+    if (!document.querySelector('title[data-bobuy-page-title]')) document.title = t('app.brand');
     dayjs.locale(dateLocales[locale]);
   }, [locale, t]);
   const value = useMemo(() => ({ locale, setLocale, t }), [locale, setLocale, t]);

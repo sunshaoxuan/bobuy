@@ -20,9 +20,13 @@ public class StorefrontController {
         this.storefront = storefront; this.auth = auth; this.cookies = cookies;
     }
     @GetMapping("/api/storefront/trips")
-    public ApiResponse<List<StorefrontService.PublicTrip>> trips() { return ApiResponse.success(storefront.publicTrips()); }
+    public ApiResponse<List<StorefrontService.PublicTrip>> trips(@RequestParam(defaultValue = "false") boolean includeCurrent) {
+        return ApiResponse.success(storefront.publicTrips(includeCurrent));
+    }
     @GetMapping("/api/storefront/products")
     public ApiResponse<List<StorefrontService.PublicProduct>> products() { return ApiResponse.success(storefront.publicProducts()); }
+    @GetMapping("/api/storefront/product-sales")
+    public ApiResponse<List<StorefrontService.PublicProduct>> productSales(@RequestParam(defaultValue="") List<String> productIds) { return ApiResponse.success(storefront.publicProducts(productIds)); }
     @PostMapping("/api/auth/register")
     public ApiResponse<AuthService.SessionResult> register(@Valid @RequestBody StorefrontService.Registration request,
             HttpServletRequest httpRequest, HttpServletResponse response) {

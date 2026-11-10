@@ -5,7 +5,7 @@ import StoreNavigation from '../components/StoreNavigation';
 import PublicRecommendations,{RecommendationPreview} from './PublicRecommendations';
 import {selectedNode,scopedPath} from '../storeNavigation';
 const mocks=vi.hoisted(()=>({feed:vi.fn(),get:vi.fn(),products:vi.fn().mockResolvedValue([])}));
-vi.mock('../api',()=>({recommendationApi:mocks,storefrontApi:{products:mocks.products}}));
+vi.mock('../api',()=>({recommendationApi:mocks,storefrontApi:{products:mocks.products,productSales:mocks.products,browseItems:async(q:{page:number;merchantId?:number})=>{const posts=await mocks.feed(q.page,q.merchantId);const items=posts.flatMap((post:any)=>post.items.map((item:any)=>({key:post.post.id+':'+item.id,post:post.post,title:post.post.title,history:false,service:false,serviceSummary:null,item:{...item,image:null}})));return {items,page:0,size:24,scopeTotal:items.length,matchedTotal:items.length,hasNext:false,revision:'r',datasetRevision:'d',categories:[],unclassified:items.length};}}}));
 vi.mock('../context/UserRoleContext',()=>({useUserRole:()=>({isCustomer:true})}));
 // JSDOM's selector engine cannot parse AntD Select's adjacent :has selector.
 // These tests exercise routing/races; the real Select is covered in Chromium.
@@ -20,7 +20,8 @@ it('keeps node context in links and exact active state without inventing valid n
  render(<I18nProvider><MemoryRouter initialEntries={['/recommendations/1?node=1000']}><StoreNavigation nodes={[{id:1000,name:'Node A'}]} node={1000} open={false} onClose={vi.fn()} onNodeChange={vi.fn()} loading={false}/></MemoryRouter></I18nProvider>);
  expect(screen.getByRole('link',{name:'Product Picks'})).toHaveAttribute('aria-current','page');
  expect(screen.getByRole('link',{name:'Bookable trips'})).toHaveAttribute('href','/trips?node=1000');
- expect(screen.getByRole('link',{name:'Discover'})).not.toHaveAttribute('aria-current');
+ expect(screen.getByRole('link',{name:'Trip finds'})).not.toHaveAttribute('aria-current');
+ expect([...document.querySelectorAll('.browse-links a')].slice(0,2).map(a=>a.textContent)).toEqual(['Product Picks','Trip finds']);
 });
 it('previews the same customer filters/cards without public draft reads or writes',()=>{
  const {container}=render(<I18nProvider><MemoryRouter><RecommendationPreview detail={detail(1,'Draft preview')}/></MemoryRouter></I18nProvider>);
@@ -35,9 +36,9 @@ it('clears prior node immediately and ignores a stale response, then restores br
  let resolveA!:(value:unknown)=>void;const first=new Promise(resolve=>{resolveA=resolve;});
  mocks.feed.mockImplementation((_page,node)=>node===1?first:Promise.resolve([detail(2,'Node B issue')]));
  render(<I18nProvider><MemoryRouter initialEntries={['/recommendations?node=1']}><RaceHarness/></MemoryRouter></I18nProvider>);
- fireEvent.click(screen.getByRole('button',{name:'Node B'}));await screen.findByRole('heading',{name:'Node B issue'});
- await act(async()=>resolveA([detail(1,'Stale A')]));expect(screen.queryByRole('heading',{name:'Stale A'})).not.toBeInTheDocument();
- fireEvent.click(screen.getByRole('button',{name:'Back'}));await screen.findByRole('heading',{name:'Stale A'});
- expect(screen.queryByRole('heading',{name:'Node B issue'})).not.toBeInTheDocument();
+ fireEvent.click(screen.getByRole('button',{name:'Node B'}));await screen.findAllByRole('button',{name:'Node B issue'});
+ await act(async()=>resolveA([detail(1,'Stale A')]));expect(screen.queryAllByRole('button',{name:'Stale A'})).toHaveLength(0);
+ fireEvent.click(screen.getByRole('button',{name:'Back'}));await screen.findAllByRole('button',{name:'Stale A'});
+ expect(screen.queryAllByRole('button',{name:'Node B issue'})).toHaveLength(0);
  await waitFor(()=>expect(mocks.feed).toHaveBeenLastCalledWith(0,1));
 });

@@ -1,0 +1,10 @@
+import {productMarkerApi,type ProductMarkerInput} from './api';
+import {clearAuthSession} from './authStorage';
+const input:ProductMarkerInput={code:'new',badge:'新',name:{'ja-JP':'新','zh-CN':'新','zh-TW':'新','en-US':'New'},description:{},color:'green',sortOrder:0,enabled:true};
+beforeEach(()=>{localStorage.clear();clearAuthSession();vi.restoreAllMocks();});
+it('uses explicit versioned definition and assignment APIs without stock/order fields',async()=>{const fetchMock=vi.fn().mockResolvedValue({ok:true,status:200,json:async()=>({status:'success',data:[]})});vi.stubGlobal('fetch',fetchMock);
+ await productMarkerApi.list();await productMarkerApi.create(input);await productMarkerApi.update('marker/1',{...input,version:4});await productMarkerApi.defaults();await productMarkerApi.assignment('product/1');await productMarkerApi.assign('product/1',{markerIds:[],version:9});
+ expect(fetchMock.mock.calls.map(call=>String(call[0]).split('/api/')[1])).toEqual(['merchant/product-markers','merchant/product-markers','merchant/product-markers/marker%2F1','merchant/product-markers/defaults','merchant/product-markers/products/product%2F1','merchant/product-markers/products/product%2F1']);
+ expect(JSON.parse(fetchMock.mock.calls[1][1].body)).toEqual(input);expect(JSON.parse(fetchMock.mock.calls[2][1].body).version).toBe(4);expect(JSON.parse(fetchMock.mock.calls[3][1].body)).toEqual({});expect(JSON.parse(fetchMock.mock.calls[5][1].body)).toEqual({markerIds:[],version:9});
+});
+it('unwraps public marker batches and independently scoped marked pages',async()=>{const data=[{productId:'one',markers:[]}];const fetchMock=vi.fn().mockResolvedValue({ok:true,status:200,json:async()=>({status:'success',data})});vi.stubGlobal('fetch',fetchMock);expect(await productMarkerApi.publicAssignments(['one','two'])).toEqual(data);expect(String(fetchMock.mock.calls[0][0])).toContain('productIds=one%2Ctwo');await productMarkerApi.markedCatalog(2,8);expect(String(fetchMock.mock.calls[1][0])).toContain('/api/storefront/marked-product-catalog?page=2&merchantId=8');});

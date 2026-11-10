@@ -44,6 +44,17 @@
 .browse-drawer .ant-drawer-header {border:0;}.browse-drawer .ant-drawer-body {padding:8px 18px 24px;}.browse-drawer .ant-drawer-close {min-width:44px;min-height:44px;}.browse-drawer .browse-brand {margin-bottom:26px;}
 .browse-preview {padding:20px 8px;border-radius:20px;min-height:0!important;margin:16px auto;max-width:100%;}.browse-preview[data-device=mobile] {max-width:390px;}.browse-preview .rec-public {padding:0!important;}.browse-preview .rec-issue-heading h1 {font-size:24px;}.browse-preview[data-device=mobile] .product-masonry {grid-template-columns:repeat(2,minmax(0,1fr));}.browse-preview[data-device=mobile] .product-photo img {max-height:320px;}
 .storefront .store-bottom {display:none!important;}
+.browse-mobile-shortcuts {display:none;}
+@media(max-width:767px){
+  .browse-mobile-shortcuts {position:fixed;inset:auto 0 0;z-index:30;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:8px max(8px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));background:#fffffff5;border-top:1px solid #ededed;box-shadow:0 -3px 18px #00000006;}
+  .browse-mobile-shortcuts>a {display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;min-height:52px;padding:5px 2px;border-radius:16px;text-decoration:none;color:#696966;font-size:11px;line-height:1.3;text-align:center;overflow-wrap:anywhere;}
+  .browse-shortcut-icon {display:flex;align-items:center;justify-content:center;min-height:24px;font-size:22px;}
+  .browse-shortcut-icon .anticon {font-size:22px;}
+  .browse-mobile-shortcuts>a.active {background:#f1f1ee;color:#222;font-weight:600;}
+  .browse-mobile-shortcuts>a:focus-visible {outline:2px solid #777773;outline-offset:-2px;}
+  .browse-mobile-shortcuts>a:active {background:#e8e8e4;}
+  .storefront .store-header-actions>a,.storefront .store-header-actions>.ant-badge {display:none;}
+}
 @media(max-width:1099px){.browse-sidebar {width:216px;padding:26px 12px;}.storefront.browse-shell .store-main {padding-inline:24px;}.storefront .product-masonry {grid-template-columns:repeat(3,minmax(0,1fr));}.browse-links a {padding-inline:12px;font-size:14px;}}
 @media(max-width:767px){.browse-sidebar {display:none;}.storefront .browse-menu-toggle {display:inline-flex;border:0;border-radius:50%;width:44px;height:44px;}.storefront.browse-shell .store-header {height:68px;padding:0 12px;}.browse-context {gap:4px;}.browse-context-node {max-width:120px;font-size:13px;}.storefront .store-header-actions {gap:0;}.storefront .language-switcher {padding:0 8px;}.storefront .store-header-actions a {width:40px;}.storefront.browse-shell .store-main {padding:8px 16px 32px;}.storefront.browse-shell h1 {font-size:25px;}.storefront .product-masonry {grid-template-columns:repeat(2,minmax(0,1fr));}.storefront .product-photo {border-radius:16px;}.storefront .product-photo img {max-height:330px;}.storefront .product-body {padding:10px 2px 4px;}.storefront .product-name h2,.storefront .rec-pin .product-body h3 {font-size:14px;}.storefront .product-price,.storefront .rec-pin .product-body .product-price {font-size:17px;}.storefront .rec-public {padding:0;}.storefront .rec-issue-heading h1,.storefront .rec-issue-heading h2 {font-size:22px;}.storefront .rec-category-filters {margin-bottom:16px;}.storefront .catalog-toolbar {padding:18px 0;min-height:84px;height:auto;flex-wrap:wrap;}.storefront .catalog-toolbar h1 {font-size:22px;}.storefront .catalog-toolbar>.ant-input-affix-wrapper {width:100%;margin:0;}.storefront .journey-strip {margin:0;}.journey-trigger {padding:12px;}.browse-trip-grid {grid-template-columns:minmax(0,1fr);gap:16px;}.browse-trip-card {padding:24px;}.browse-preview {padding:12px 0;}}
 
@@ -73,3 +84,4 @@
 @media(hover:hover) and (pointer:fine){.storefront .rec-pin:hover {box-shadow:0 4px 14px #00000016;}.storefront .rec-pin .product-photo:hover img {transform:none;}}
 @media(prefers-reduced-motion:reduce){.storefront .rec-pin {transition:none;}}
 @media(max-width:767px){.storefront .rec-pin {padding:8px;border-radius:20px;}}
+@media(max-width:767px){.storefront.browse-shell .store-main {padding-bottom:calc(108px + env(safe-area-inset-bottom));}}

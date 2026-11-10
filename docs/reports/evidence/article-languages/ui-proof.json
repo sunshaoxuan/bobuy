@@ -1,0 +1,20 @@
+{
+  "baseCommit": "2ce3aef9f42b481b9a61fe0c4849785f239e1d19",
+  "realPgBackend": true,
+  "uiOnlyBusinessWrites": true,
+  "checks": [
+    "threeIndependentTranslationsSavedAndTabDraftsRetained",
+    "normalBackendReopenRetainsTranslations",
+    "fourLanguagePublicBodiesLocaleRefreshAndFieldLevelSourceNotice",
+    "sourceEditRetainsTranslationAndExplicitReReview",
+    "realMobileTouchSaveReopenAndRetainedOriginalManualHistory"
+  ],
+  "result": "PASS",
+  "editUrl": "http://127.0.0.1:18080/admin/recommendations?post=1",
+  "publicUrl": "http://127.0.0.1:18080/recommendations/1",
+  "testedCoreJarSha256": "ec2804a04bc85eb5109ff9cb1dcb40f6130281192eb9078ba902efa65532c686",
+  "testedFrontendIndexSha256": "577bfb48a76099f261167f29c33808a0fb5a053f597f2f12add75d8ee721e21c",
+  "recordedAtUtc": "2026-11-01T07:50:18.400691+00:00",
+  "automaticAiTranslationCalled": false,
+  "productionContentModified": false
+}

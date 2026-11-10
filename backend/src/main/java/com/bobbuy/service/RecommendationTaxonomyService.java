@@ -64,6 +64,7 @@ public class RecommendationTaxonomyService {
         var projected=source.stream().filter(original->original.productId==null||!deleted.contains(original.productId)).map(original->{
             var item=new RecommendationItem();
             item.id=original.id;item.postId=original.postId;item.productId=original.productId;item.name=original.name;
+            item.referenceContext=original.referenceContext;item.offerIdentity=original.offerIdentity;
             item.itemNumber=original.itemNumber;item.referencePrice=original.referencePrice;item.originalPrice=original.originalPrice;
             item.discountAmount=original.discountAmount;item.priceUnit=original.priceUnit;item.offerStart=original.offerStart;
             item.offerEnd=original.offerEnd;item.couponStart=original.couponStart;item.couponEnd=original.couponEnd;

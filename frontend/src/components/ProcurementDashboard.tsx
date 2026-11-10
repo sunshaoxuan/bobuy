@@ -1,3 +1,4 @@
+import {OrderProductIdentity,type OrderIdentity} from './OrderProductIdentity';
 import { useCallback, useEffect, useMemo, useRef, useState, type ChangeEvent } from 'react';
 import {
   Alert,
@@ -31,6 +32,7 @@ import {
   type LogisticsTracking,
   type Order,
   type PickingChecklist,
+  type PickingChecklistItem,
   type ProcurementReceipt,
   type ProfitSharingConfig,
   type ProcurementDeficitItemResponse,
@@ -46,6 +48,7 @@ import { usePollingTask } from '../hooks/usePollingTask';
 const { Text } = Typography;
 
 type ReconcileDetailRow = {
+  snapshot?:OrderIdentity;
   key: string;
   skuId: string;
   itemName: string;
@@ -1083,7 +1086,7 @@ export default function ProcurementDashboard() {
                           />
                         )
                       },
-                      { title: t('orders.lines.item_name'), dataIndex: 'itemName', key: 'itemName' },
+                      { title: t('orders.lines.item_name'), dataIndex: 'itemName', key: 'itemName',render:(value:string,row:PickingChecklistItem)=>row.snapshot?<OrderProductIdentity line={row.snapshot} includeSpecification/>:value },
                       { title: t('orders.lines.sku_id'), dataIndex: 'skuId', key: 'skuId' },
                       {
                         title: t('procurement.picking_quantity'),
@@ -1119,7 +1122,7 @@ export default function ProcurementDashboard() {
           scroll={tableScroll}
           columns={[
             { title: t('orders.lines.sku_id'), dataIndex: 'skuId', key: 'skuId' },
-            { title: t('orders.lines.item_name'), dataIndex: 'itemName', key: 'itemName' },
+            { title: t('orders.lines.item_name'), dataIndex: 'itemName', key: 'itemName',render:(value:string,row:ProcurementDeficitItemResponse)=>row.snapshots?.length?<>{row.snapshots.map((line,i)=><section key={i}><OrderProductIdentity line={line} includeSpecification/></section>)}</>:value },
             { title: t('procurement.deficit_quantity') || 'Deficit Qty', dataIndex: 'deficitQuantity', key: 'deficitQuantity' },
              {
                title: t('procurement.priority') || 'Priority',
@@ -1168,7 +1171,7 @@ export default function ProcurementDashboard() {
             scroll={tableScroll}
             columns={[
               { title: t('orders.lines.sku_id'), dataIndex: 'skuId', key: 'skuId' },
-              { title: t('orders.lines.item_name'), dataIndex: 'itemName', key: 'itemName' },
+              { title: t('orders.lines.item_name'), dataIndex: 'itemName', key: 'itemName', render:(value:string,row:ReconcileDetailRow)=>row.snapshot?<OrderProductIdentity line={row.snapshot} includeSpecification/>:value },
               { title: t('procurement.reconcile_quantity'), dataIndex: 'purchasedQuantity', key: 'purchasedQuantity' },
               { title: t('procurement.business_id'), dataIndex: 'businessId', key: 'businessId' },
               {
@@ -1224,6 +1227,7 @@ function buildReconcileRows(orders: Order[]): ReconcileDetailRow[] {
         key: `${order.id}-${line.skuId}-${line.itemName}`,
         skuId: line.skuId,
         itemName: line.itemName,
+        snapshot:line,
         businessId: order.businessId,
         purchasedQuantity: line.purchasedQuantity ?? 0
       }))

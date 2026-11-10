@@ -5,6 +5,12 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 class MediaGalleryCompatibilityTest {
+ @Test void legacyLowercaseUiPayloadIsRejectedButCanonicalEnumIsAccepted()throws Exception{
+  var mapper=new ObjectMapper();
+  assertThatThrownBy(()->mapper.readValue("{\"url\":\"/synthetic.png\",\"type\":\"image\"}",MediaGalleryItem.class))
+    .isInstanceOf(com.fasterxml.jackson.databind.exc.InvalidFormatException.class);
+  assertThat(mapper.readValue("{\"url\":\"/synthetic.png\",\"type\":\"IMAGE\"}",MediaGalleryItem.class).getType()).isEqualTo(MediaType.IMAGE);
+ }
  @Test void retainsLegacyOptionalHashAndSourceMetadataOnRoundTrip()throws Exception{
   var mapper=new ObjectMapper();
   var media=mapper.readValue("{\"url\":\"/synthetic.png\",\"type\":\"IMAGE\",\"visible\":true,\"sha256\":\"legacy-fixture-hash\",\"sourceDomain\":\"example.invalid\",\"title\":{\"en-US\":\"Synthetic\"}}",MediaGalleryItem.class);

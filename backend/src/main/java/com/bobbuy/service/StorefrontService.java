@@ -44,7 +44,13 @@ public class StorefrontService {
     }
 
     public List<PublicTrip> publicTrips() {
-        return trips.findAll().stream().filter(this::bookable)
+        return publicTrips(false);
+    }
+
+    /** Display context is broader than permission to place a new booking. */
+    public List<PublicTrip> publicTrips(boolean includeCurrent) {
+        return trips.findAll().stream().filter(t -> bookable(t)
+                || (includeCurrent && t.getStatus() == TripStatus.IN_PROGRESS && t.getDeliveryDate() != null))
             .sorted(Comparator.comparing(Trip::getDeliveryDate))
             .map(t -> new PublicTrip(t.getId(), t.getAgentId(),
                 users.findById(t.getAgentId()).map(User::getName).orElse("Bobuy"),
@@ -52,10 +58,16 @@ public class StorefrontService {
     }
 
     public List<PublicProduct> publicProducts() {
+        return publicProducts(null);
+    }
+    /** Same sale policy, bounded requested identities; no new sale eligibility. */
+    public List<PublicProduct> publicProducts(List<String> ids) {
+        if(ids!=null&&(ids.isEmpty()||ids.size()>24||ids.stream().anyMatch(id->id==null||id.isBlank()||id.length()>255)||new HashSet<>(ids).size()!=ids.size()))throw new ApiException(ErrorCode.INVALID_REQUEST,"Invalid sale product IDs");
         return products.findAll().stream().sorted(Comparator.comparing(Product::getId))
+            .filter(p->ids==null||ids.contains(p.getId()))
             .filter(p->p.getVisibilityStatus()==ProductVisibility.PUBLIC)
-            .flatMap(p->sales.quote(p).stream().map(q->new PublicProduct(p.getId(),p.getMerchantId(),p.getName(),p.getDescription(),p.getBrand(),q.amount().doubleValue(),
-                p.getCategoryId(),p.getMediaGallery().stream().filter(MediaGalleryItem::isVisible).filter(m->m.getType()==MediaType.IMAGE).map(MediaGalleryItem::getUrl).toList(),
+            .flatMap(p->sales.quote(p).stream().map(q->new PublicProduct(p.getId(),p.getMerchantId(),p.getName(),ids==null?p.getDescription():Map.of(),p.getBrand(),q.amount().doubleValue(),
+                p.getCategoryId(),ids==null?p.getMediaGallery().stream().filter(MediaGalleryItem::isVisible).filter(m->m.getType()==MediaType.IMAGE).map(MediaGalleryItem::getUrl).toList():List.of(),
                 q.currency(),q.unit(),q.revision(),p.getOrderMethod()==OrderMethod.PRE_ORDER,q.priceToken(),q.regularAmount(),q.adjustmentId(),q.validFrom(),q.validUntil()))).toList();
     }
 
@@ -165,14 +177,14 @@ public class StorefrontService {
                 ||(quote.revision()>0&&(i.priceRevision()==null||i.priceRevision()!=quote.revision()))))throw invalid("pricing.quote_changed");
             OrderLine line = new OrderLine(product.getId(), product.getName().getOrDefault("zh-CN", product.getName().values().stream().findFirst().orElse(product.getId())),
                 quote.unit(), entry.getValue(), quote.amount().doubleValue());
-            line.setNames(product.getName());line.setCurrency(quote.currency());line.setPriceRevision(quote.revision());line.setId(nextId());
+            OrderProductSnapshot.capture(line,product);line.setCurrency(quote.currency());line.setPriceRevision(quote.revision());line.setId(nextId());
             line.setQuotedAmount(quote.amount());line.setRegularAmount(quote.regularAmount());line.setPriceAdjustmentId(quote.adjustmentId());line.setPriceChannel(quote.channel());line.setPricedAt(pricedAt);
             order.addLine(line);
             total = total.add(quote.amount().multiply(BigDecimal.valueOf(entry.getValue())));
         }
         order.setCurrency(request.currency()==null?"JPY":request.currency());
         order.setTotalAmount(total.doubleValue());
-        orders.saveAndFlush(order);
+        order.retainProductIdentities();orders.saveAndFlush(order);
         String key = trip.getAgentId() + ":" + user.getId();
         if (!relations.existsById(key)) {
             MerchantCustomer relation = new MerchantCustomer(); relation.id = key;

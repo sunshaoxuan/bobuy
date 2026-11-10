@@ -1,0 +1,29 @@
+{
+  "status" : "DRY_RUN",
+  "readOnly" : true,
+  "sourceBytesRetained" : true,
+  "scanComplete" : false,
+  "transfersAttempted" : 0,
+  "checkpointAfter" : null,
+  "audit" : {
+    "mediaRows" : 586,
+    "rawBytes" : 70518654,
+    "uniqueBlobs" : 525,
+    "uniqueBytes" : 63177975,
+    "sharedBytes" : 7340679,
+    "boundRows" : 586,
+    "verifiedRows" : 586,
+    "pendingRows" : 0,
+    "metadataErrors" : 0,
+    "objectErrors" : 0,
+    "listedObjects" : 0,
+    "listedBytes" : 0,
+    "extraObjects" : 0,
+    "schemaReady" : true,
+    "sourceStable" : true,
+    "complete" : false,
+    "sourceFingerprint" : "2fb761b8196c64500c98a1aae32ec3aaa9d1a36271029969da983911109d8365",
+    "problemMediaIds" : [ ]
+  },
+  "at" : "2026-10-28T03:18:28.952057810Z"
+}

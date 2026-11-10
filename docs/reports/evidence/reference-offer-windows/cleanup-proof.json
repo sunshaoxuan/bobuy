@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "syntheticDatabasesRemoved": 3,
+  "originalServiceStateAndImagesRestored": {
+    "postgres": {
+      "status": "exited",
+      "image": "sha256:1a0c23d53c1ad77468c8653fa6eed4f4105cfbef9e6f027bc1dfeb16949a8c29"
+    },
+    "backend": {
+      "status": "created",
+      "image": "sha256:0d4b99fbe2e8e4a16b7a89e092febfb000fd175806241149c544e31ed0a52e10"
+    },
+    "web": {
+      "status": "created",
+      "image": "sha256:45b49182a3e1d3cd1330a26b8455ff61b10112e0abe7ac6ee01b4ca3ceea5f4c"
+    },
+    "redis": {
+      "status": "exited",
+      "image": "sha256:efc27681bf81e6ed55cb581718b7818c6c04c39b1f9aa40854edd3ea2241b6ed"
+    },
+    "rabbitmq": {
+      "status": "exited",
+      "image": "sha256:606d8c0d6b3c18d1da9afc53bc7cdb2a8d5486df91b5a9830e9e07626c9ae281"
+    },
+    "mail": {
+      "status": "exited",
+      "image": "sha256:e22dce5b36f93c77082e204a3942fb6b283b7896e057458400a4c88344c3df68"
+    }
+  },
+  "originalVolumesRetained": true,
+  "otherProjectsModified": false
+}

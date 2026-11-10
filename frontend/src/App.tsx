@@ -1,3 +1,4 @@
+import SiteMetadata from './components/SiteMetadata';
 import { lazy, Suspense, useState } from 'react';
 import { Button, Drawer, Menu, Spin, Tooltip } from 'antd';
 import { MenuOutlined, LogoutOutlined, AppstoreOutlined, CalendarOutlined, ShoppingOutlined, InboxOutlined, ScanOutlined, CheckSquareOutlined, TagsOutlined, TeamOutlined, ShopOutlined, ArrowUpOutlined } from '@ant-design/icons';
@@ -8,6 +9,7 @@ import './storefront.css';
 import './merchant.css';
 import { useI18n } from './i18n';
 import LanguageSwitcher from './components/LanguageSwitcher';
+import LegacyProductRoute from './components/LegacyProductRoute';
 
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Trips = lazy(() => import('./pages/Trips'));
@@ -15,7 +17,8 @@ const Orders = lazy(() => import('./pages/Orders'));
 const OrderDesk = lazy(() => import('./pages/OrderDesk'));
 const ProcurementHUD = lazy(() => import('./pages/ProcurementHUD'));
 const PickingMaster = lazy(() => import('./pages/PickingMaster'));
-const StockMaster = lazy(() => import('./pages/StockMaster'));
+const ProductArchive = lazy(() => import('./pages/ProductArchive'));
+const ProductMarkers = lazy(() => import('./pages/ProductMarkers'));
 const Recommendations = lazy(() => import('./pages/Recommendations'));
 const Suppliers = lazy(() => import('./pages/Suppliers'));
 const MerchantCustomers = lazy(() => import('./pages/MerchantCustomers'));
@@ -23,13 +26,13 @@ const ZenAuditView = lazy(() => import('./pages/ZenAuditView'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const Users = lazy(() => import('./pages/Users'));
 const MailSettings = lazy(() => import('./pages/MailSettings'));
-const DeletedProducts = lazy(() => import('./pages/DeletedProducts'));
 const Currencies = lazy(() => import('./pages/Currencies'));
 
 const adminPages = [
   ['dashboard', 'nav.dashboard', Dashboard, AppstoreOutlined], ['trips', 'nav.trips', Trips, CalendarOutlined], ['orders', 'nav.orders', Orders, ShoppingOutlined],
   ['order-desk', 'nav.order_desk', OrderDesk, ScanOutlined], ['procurement', 'nav.procurement', ProcurementHUD, InboxOutlined],
-  ['picking', 'nav.picking', PickingMaster, CheckSquareOutlined], ['stock-master', 'nav.stock_master', StockMaster, TagsOutlined],
+  ['picking', 'nav.picking', PickingMaster, CheckSquareOutlined], ['products', 'products.title', ProductArchive, TagsOutlined],
+  ['product-markers', 'marker.title', ProductMarkers, TagsOutlined],
   ['recommendations', 'rec.title', Recommendations, ShopOutlined],
   ['suppliers', 'nav.suppliers', Suppliers, ShopOutlined], ['customers', 'nav.customers', MerchantCustomers, TeamOutlined],
   ['basic-data/currencies', 'currency.title', Currencies, TagsOutlined]
@@ -40,7 +43,7 @@ function Admin() {
   const { t } = useI18n();
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const pages = [...(isMerchant ? adminPages : []), ...(user?.platformAdmin ? [['users', 'accounts.title', Users, TeamOutlined] as const, ['settings', 'mail.title', MailSettings, TagsOutlined] as const, ['deleted-products', 'trash.title', DeletedProducts, TagsOutlined] as const] : [])];
+  const pages = [...(isMerchant ? adminPages : []), ...(user?.platformAdmin&&!isMerchant?[['products', 'products.title', ProductArchive, TagsOutlined] as const]:[]), ...(user?.platformAdmin ? [['users', 'accounts.title', Users, TeamOutlined] as const, ['settings', 'mail.title', MailSettings, TagsOutlined] as const] : [])];
   const menuItems = pages.filter(([path]) => !path.startsWith('basic-data/')).map(([path, label, , Icon]) => ({
     key: `/admin/${path}`, icon: <Icon />, label: <Link to={`/admin/${path}`} onClick={() => setOpen(false)}>{t(label)}</Link>
   }));
@@ -64,6 +67,7 @@ function Admin() {
     <main className="merchant-content">
       <Routes><Route index element={<Navigate to={user?.platformAdmin ? 'users' : 'dashboard'} replace />} />
         {pages.map(([path, , Page]) => <Route key={path} path={path} element={<Page />} />)}
+        <Route path="stock-master" element={<LegacyProductRoute/>}/><Route path="deleted-products" element={<LegacyProductRoute deleted/>}/>
         {isMerchant&&<><Route path="basic-data" element={<Navigate to="currencies" replace />} /><Route path="currencies" element={<Navigate to="/admin/basic-data/currencies" replace />} /></>}
         <Route path="audit/:tripId" element={<ZenAuditView />} />
         <Route path="*" element={<Navigate to="/admin" replace />} /></Routes>
@@ -75,7 +79,7 @@ function Admin() {
 }
 
 export default function App() {
-  return <Suspense fallback={<div className="store-loading"><Spin /></div>}>
+  return <><SiteMetadata /><Suspense fallback={<div className="store-loading"><Spin /></div>}>
     <Routes><Route path="/admin/*" element={<Admin />} /><Route path="/*" element={<Storefront />} /></Routes>
-  </Suspense>;
+  </Suspense></>;
 }

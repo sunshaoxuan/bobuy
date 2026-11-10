@@ -5,17 +5,34 @@ import {I18nProvider} from '../i18n';
 // jsdom's selector engine cannot parse Ant Select's :has sibling selector.
 // Exercise the panel contract here; real Select behavior is covered in browser acceptance.
 vi.mock('antd',async()=>{const actual=await vi.importActual<typeof import('antd')>('antd');return {...actual,Select:({options=[],value,onChange,...props}:any)=><select aria-label={props['aria-label']} value={value??''} onChange={event=>onChange?.(event.target.value)}><option value=""/>{options.map((option:any)=><option key={option.value} value={option.value}>{option.label}</option>)}</select>};});
-const mock=vi.hoisted(()=>({get:vi.fn(),proposals:vi.fn(),preview:vi.fn(),save:vi.fn(),upload:vi.fn(),options:vi.fn()}));
+const mock=vi.hoisted(()=>({get:vi.fn(),restore:vi.fn(),audit:vi.fn(),proposals:vi.fn(),preview:vi.fn(),save:vi.fn(),upload:vi.fn(),options:vi.fn()}));
 vi.mock('../api',()=>({productCatalogApi:mock,recommendationTaxonomyApi:{options:mock.options}}));
 const value={productId:'p1',version:7,name:{'ja-JP':'日本商品','zh-CN':'中文商品','zh-TW':'繁體商品','en-US':'Product'},description:{},itemNumber:'000123',brand:null,specification:{'ja-JP':'2個'},model:null,packaging:null,categoryIds:[],supplierId:null,gallery:[],translationsReviewed:true};
 beforeEach(()=>{vi.clearAllMocks();localStorage.setItem('bobbuy_locale','en-US');mock.get.mockResolvedValue({value,canonical:false,sourceItemIds:[1]});mock.options.mockResolvedValue({categories:[],suppliers:[]});mock.proposals.mockResolvedValue([{value,changes:['master.canonical_save'],warnings:[]}]);mock.preview.mockImplementation(async rows=>rows.map((value:unknown)=>({value,changes:[],warnings:[]})));mock.save.mockResolvedValue([{value:{...value,version:8},canonical:true}]);});
 it('edits four languages and requires review before versioned preview/save',async()=>{
  const onSaved=vi.fn();render(<I18nProvider><ProductCatalogPanel entries={[]} id="p1" onChoose={vi.fn()} onSaved={onSaved}/></I18nProvider>);
- await screen.findByDisplayValue('日本商品');expect(screen.getByRole('tab',{name:'繁體中文'})).toBeInTheDocument();
+ await screen.findByDisplayValue('000123');fireEvent.click(screen.getByRole('tab',{name:'Languages & descriptions'}));await screen.findByDisplayValue('日本商品');expect(screen.getByRole('radio',{name:'繁體中文'})).toBeInTheDocument();
  const save=screen.getByRole('button',{name:/confirm and save/i});expect(save).toBeDisabled();
  const checks=screen.getAllByRole('checkbox');fireEvent.click(checks[checks.length-1]);fireEvent.click(save);
  await waitFor(()=>expect(onSaved).toHaveBeenCalled());expect(mock.preview).toHaveBeenCalledWith([value]);expect(mock.save).toHaveBeenCalledWith([value]);
  expect(mock.save.mock.calls[0][0][0]).not.toHaveProperty('basePrice');expect(mock.save.mock.calls[0][0][0]).not.toHaveProperty('sale');
+});
+it('exports actual audit originals without previewing or canonicalizing legacy masters',async()=>{
+ const original={current:{value,canonical:false,sourceItemIds:[248]},originalCatalogData:null,sources:[{itemId:248,postId:7,referencePrice:1234}]};mock.audit.mockResolvedValue([original]);
+ render(<I18nProvider><ProductCatalogPanel entries={[]} onChoose={vi.fn()} onSaved={vi.fn()}/></I18nProvider>);
+ fireEvent.click(screen.getByRole('button',{name:/review and complete/i}));fireEvent.click(await screen.findByRole('button',{name:'Read original masters and linked issues (read only)'}));
+ const input=await screen.findByRole('textbox',{name:'Read original masters and linked issues (read only)'});expect(JSON.parse((input as HTMLTextAreaElement).value)).toEqual([original]);expect(input).toHaveAttribute('readonly');
+ expect(mock.preview).not.toHaveBeenCalled();expect(mock.save).not.toHaveBeenCalled();
+});
+it('restores a complete checkpoint explicitly and reports legacy state without saving it as canonical',async()=>{
+ mock.get.mockResolvedValue({value,canonical:true,sourceItemIds:[1],recoveryId:'checkpoint-1'});
+ mock.restore.mockResolvedValue({value:{...value,version:8},canonical:false,sourceItemIds:[1],recoveryId:'redo-1'});
+ const onSaved=vi.fn();render(<I18nProvider><ProductCatalogPanel entries={[]} id="p1" onChoose={vi.fn()} onSaved={onSaved}/></I18nProvider>);
+ fireEvent.click(await screen.findByRole('button',{name:'Restore previous master'}));
+ expect(screen.getByRole('dialog',{name:'Restore previous master'}).closest('.ant-modal-wrap')).toHaveStyle({zIndex:'1200'});
+ expect(mock.restore).not.toHaveBeenCalled();fireEvent.click(screen.getByRole('button',{name:'OK'}));
+ await waitFor(()=>expect(mock.restore).toHaveBeenCalledWith('p1','checkpoint-1',7));
+ await waitFor(()=>expect(onSaved).toHaveBeenCalledWith([{...value,version:8}],false));expect(mock.save).not.toHaveBeenCalled();
 });
 it('requires a successful preview again after bulk JSON correction',async()=>{
  mock.proposals.mockResolvedValue([{value,changes:['master.canonical_save'],warnings:[]},{value:{...value,productId:'unrelated-no-source'},changes:[],warnings:['master.no_source']}]);
@@ -25,4 +42,17 @@ it('requires a successful preview again after bulk JSON correction',async()=>{
  expect((input as HTMLTextAreaElement).value).not.toContain('unrelated-no-source');
  fireEvent.change(input,{target:{value:'invalid'}});fireEvent.click(screen.getByRole('button',{name:/preview/i}));
  await waitFor(()=>expect(screen.getByRole('button',{name:/confirm and save/i})).toBeDisabled());expect(mock.save).not.toHaveBeenCalled();
+});
+it('keeps draft values across tabs and requires explicit discard on close',async()=>{
+ const choose=vi.fn();render(<I18nProvider><ProductCatalogPanel entries={[]} id="p1" onChoose={choose} onSaved={vi.fn()}/></I18nProvider>);
+ await screen.findByDisplayValue('000123');fireEvent.change(screen.getByLabelText('Brand'),{target:{value:'Draft brand'}});
+ fireEvent.click(screen.getByRole('tab',{name:'Languages & descriptions'}));fireEvent.click(screen.getByRole('tab',{name:'Product details'}));expect(screen.getByDisplayValue('Draft brand')).toBeInTheDocument();
+ fireEvent.click(screen.getByRole('button',{name:'Close'}));await screen.findByText('Unsaved changes');expect(choose).not.toHaveBeenCalled();fireEvent.click(screen.getByRole('button',{name:'Keep editing'}));expect(screen.getByDisplayValue('Draft brand')).toBeInTheDocument();
+ fireEvent.click(screen.getByRole('button',{name:'Close'}));fireEvent.click(await screen.findByRole('button',{name:'Discard changes'}));await waitFor(()=>expect(choose).toHaveBeenCalledWith(undefined));expect(mock.save).not.toHaveBeenCalled();
+});
+it('locates the Japanese required-name error in the copy tab without an API write',async()=>{
+ render(<I18nProvider><ProductCatalogPanel entries={[]} id="p1" onChoose={vi.fn()} onSaved={vi.fn()}/></I18nProvider>);
+ await screen.findByDisplayValue('000123');fireEvent.click(screen.getByRole('tab',{name:'Languages & descriptions'}));fireEvent.change(screen.getByRole('textbox',{name:'Name (translation only; no Japanese suffix) ja-JP'}),{target:{value:''}});
+ fireEvent.click(screen.getByRole('tab',{name:'Product details'}));const checks=screen.getAllByRole('checkbox');fireEvent.click(checks[checks.length-1]);fireEvent.click(screen.getByRole('button',{name:/confirm and save/i}));
+ await screen.findByText('Japanese source name is required');expect(screen.getByRole('tab',{name:'Languages & descriptions'})).toHaveAttribute('aria-selected','true');expect(screen.getByRole('textbox',{name:'Name (translation only; no Japanese suffix) ja-JP'})).toHaveFocus();expect(mock.preview).not.toHaveBeenCalled();expect(mock.save).not.toHaveBeenCalled();
 });

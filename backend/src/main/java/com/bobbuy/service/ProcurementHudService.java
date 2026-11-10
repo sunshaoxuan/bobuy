@@ -1,6 +1,7 @@
 package com.bobbuy.service;
 
 import com.bobbuy.api.ProcurementDeficitItemResponse;
+import com.bobbuy.api.OrderIdentitySnapshot;
 import com.bobbuy.api.ProcurementHudResponse;
 import com.bobbuy.api.CustomerBalanceLedgerResponse;
 import com.bobbuy.api.CustomerBalanceSummaryResponse;
@@ -284,6 +285,7 @@ public class ProcurementHudService {
             sku,
             key -> new DeficitAggregate(key, line.getItemName(), order.getCreatedAt()));
         aggregate.required += required;
+        aggregate.snapshots.add(OrderIdentitySnapshot.from(line));
         aggregate.purchased += purchased;
         aggregate.deficit += deficit;
         if (order.getCreatedAt() != null && (aggregate.firstSeenAt == null || order.getCreatedAt().isBefore(aggregate.firstSeenAt))) {
@@ -307,7 +309,7 @@ public class ProcurementHudService {
                             item.priority(),
                             product.map(Product::isTemporary).orElse(false),
                             product.map(p -> p.getVisibilityStatus() != null ? p.getVisibilityStatus().name() : "PUBLIC").orElse("PUBLIC")
-                    );
+                    ).withSnapshots(new ArrayList<>(item.snapshots));
                 })
                 .collect(Collectors.toList());
   }
@@ -1037,7 +1039,7 @@ public class ProcurementHudService {
             Math.max(line.getQuantity(), 0),
             round2(line.getUnitPrice()),
             Math.max(line.getPurchasedQuantity(), 0),
-            buildDifferenceNote(line)))
+            buildDifferenceNote(line)).withSnapshot(OrderIdentitySnapshot.from(line)))
         .toList();
     double totalReceivable = safeLines(order).stream()
         .mapToDouble(line -> {
@@ -1457,7 +1459,7 @@ public class ProcurementHudService {
           Math.max(line.getQuantity(), 0),
           pickedQuantity,
           line.isPickingConfirmed(),
-          new ArrayList<>(labels)));
+          new ArrayList<>(labels)).withSnapshot(OrderIdentitySnapshot.from(line)));
     }
     return items;
   }
@@ -1703,6 +1705,7 @@ public class ProcurementHudService {
   }
 
   private static final class DeficitAggregate {
+    private final LinkedHashSet<OrderIdentitySnapshot> snapshots=new LinkedHashSet<>();
     private final String skuId;
     private final String itemName;
     private int required;

@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "width": 390,
+  "height": 844,
+  "isMobile": true,
+  "hasTouch": true,
+  "normalLogin": true,
+  "uiTouchSaveReopen": true,
+  "retainedHistory": true,
+  "isolatedSyntheticDatabase": true
+}

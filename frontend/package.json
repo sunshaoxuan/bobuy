@@ -15,7 +15,9 @@
     "e2e:prepare": "node -e \"const fs = require('node:fs'); const { execSync } = require('node:child_process'); const { chromium } = require('@playwright/test'); let executable = ''; try { executable = chromium.executablePath(); } catch (error) {} if (!executable || !fs.existsSync(executable)) { execSync('npx playwright install chromium', { stdio: 'inherit' }); }\"",
     "e2e": "npm run e2e:prepare && playwright test",
     "e2e:ai": "npm run e2e:prepare && node -e \"const { spawnSync } = require('node:child_process'); const env = { ...process.env, RUN_AI_VISION_E2E: '1' }; const result = spawnSync('npx', ['playwright', 'test', 'e2e/ai_onboarding.spec.ts'], { stdio: 'inherit', env, shell: true }); if (result.error) console.error(result.error); process.exit(result.status ?? 1);\"",
-    "e2e:ai:win": "npm run e2e:ai"
+    "e2e:ai:win": "npm run e2e:ai",
+    "postbuild": "node scripts/prerender-home.mjs",
+    "check:seo": "node --test scripts/home-seo.test.mjs"
   },
   "dependencies": {
     "@stomp/stompjs": "^7.3.0",

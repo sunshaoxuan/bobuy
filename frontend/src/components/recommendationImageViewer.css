@@ -1,4 +1,4 @@
-.rec-gallery-inline {position:relative;display:flex;justify-content:center;align-items:center;min-height:160px;border-radius:20px;overflow:hidden;touch-action:pan-y;cursor:zoom-in;user-select:none;}
+.rec-detail-gallery .rec-gallery-inline {position:relative;display:flex;justify-content:center;align-items:center;min-height:160px;border-radius:20px;overflow:hidden;touch-action:pan-y;cursor:zoom-in;user-select:none;}
 .rec-gallery-inline>img {max-width:100%;max-height:520px;width:auto;height:auto;object-fit:contain;border-radius:20px;pointer-events:none;}
 .rec-gallery-inline:focus-visible,.rec-gallery-navigation button:focus-visible,.rec-detail-thumbs button:focus-visible,.rec-gallery-fullscreen button:focus-visible {outline:2px solid #727270;outline-offset:3px;}
 .rec-gallery-navigation,.rec-gallery-tools {display:flex;justify-content:center;align-items:center;gap:16px;padding:10px 0;font-variant-numeric:tabular-nums;}

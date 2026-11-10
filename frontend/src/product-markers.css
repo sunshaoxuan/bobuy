@@ -1,0 +1,65 @@
+.marker-management,.marker-assignment { min-width:0; color:#242424; }
+.marker-heading { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:20px; }
+.marker-heading h1 { margin:0; font-size:22px; line-height:1.5; }
+.marker-actions { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.marker-actions .ant-btn,.marker-management .ant-table .ant-btn { min-height:44px; height:auto; white-space:normal; }
+.marker-management .ant-alert,.marker-assignment .ant-alert { margin-bottom:16px; }
+.marker-code { display:block; color:#666; overflow-wrap:anywhere; }
+.marker-form fieldset,.marker-selection { margin:0; padding:0; border:0; min-width:0; }
+.marker-form label { display:flex; flex-direction:column; gap:6px; margin-bottom:16px; font-size:14px; }
+.marker-form .ant-input,.marker-form .ant-input-number,.marker-form .ant-select { width:100%; }
+.marker-form-row { display:grid; grid-template-columns:1fr 2fr 1fr; gap:12px; }
+.marker-locale { border-top:1px solid #ddd; padding-top:16px; }
+.marker-locale h2 { font-size:16px; line-height:1.5; margin:0 0 12px; }
+.marker-form .marker-actions { margin-top:20px; }
+.marker-form .ant-checkbox-wrapper { flex-direction:row; align-items:center; min-height:44px; }
+.marker-choice { display:flex; align-items:center; gap:10px; min-height:44px; padding:8px 0; }
+.marker-choice>span:last-child { min-width:0; overflow-wrap:anywhere; }
+.marker-choice small { display:block; color:#666; }
+.marker-selection legend { font-size:16px; margin-bottom:12px; }
+.marker-selection { margin-bottom:20px; }
+.marker-assignment .ant-checkbox-wrapper { min-width:24px; min-height:44px; display:flex; align-items:center; }
+.product-marker-badges { display:flex; flex-wrap:wrap; align-items:center; gap:6px; list-style:none; margin:0; padding:0; }
+.product-marker-badges li { display:flex; min-width:0; }
+.product-marker-badge { display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; padding:3px; box-sizing:border-box; flex:none; border-radius:4px; font-size:16px; line-height:1; font-weight:600; letter-spacing:0; }
+.marker-image-overlay { position:absolute; top:8px; left:8px; z-index:2; max-width:calc(100% - 60px); pointer-events:none; }
+.marker-image-overlay li { pointer-events:auto; }
+.marker-image-overlay .product-marker-badge {
+ font-weight:700;
+ background-image:linear-gradient(145deg,rgba(255,255,255,.12),transparent 45%,rgba(0,0,0,.08));
+ box-shadow:0 0 0 1.5px #fff,0 0 0 2.5px rgba(0,0,0,.38),0 3px 7px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.45);
+}
+@media(forced-colors:active) {
+ .marker-image-overlay .product-marker-badge { background-image:none; box-shadow:none; outline:1px solid CanvasText; }
+}
+.marker-more { background:#fff; color:#242424; font-size:11px; }
+.marker-color-red { background:#a52626; color:#fff; }
+.marker-color-orange { background:#a33e0d; color:#fff; }
+.marker-color-gold { background:#f3d560; color:#302700; }
+.marker-color-green { background:#236443; color:#fff; }
+.marker-color-blue { background:#225b93; color:#fff; }
+.marker-color-purple { background:#754283; color:#fff; }
+.marker-color-gray { background:#53585b; color:#fff; }
+.marker-color-option { display:inline-flex; gap:8px; align-items:center; }
+.marker-swatch { display:inline-block; width:16px; height:16px; border:1px solid #777; border-radius:2px; }
+.marker-drawer .ant-drawer-close { width:44px; height:44px; margin-inline-end:8px; }
+.catalog-master-detail .product-marker-badges { margin:12px 0; }
+@media(max-width:767px) {
+ .marker-form-row { grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+ .marker-heading { align-items:flex-start; }
+ .marker-management .ant-table-wrapper { max-width:100%; }
+ .marker-actions .ant-btn { max-width:100%; overflow-wrap:anywhere; }
+}
+
+.marker-product-actions { gap:8px; flex-wrap:wrap; }
+.marker-product-actions .marker-product-trigger.ant-btn { min-width:44px; min-height:44px; padding:6px; }
+.marker-management-scope { margin-bottom:16px; padding:12px 16px; border:1px solid #cbd8d0; border-radius:10px; background:#f4f7f5; color:#24372f; overflow-wrap:anywhere; }
+.marker-management-scope p { margin:4px 0 0; }
+.marker-product-actions { display:flex; align-items:center; border-top:1px solid #ddd; margin-top:12px; padding-top:10px; }
+.marker-product-actions>span { font-weight:600; }
+.marker-product-actions .marker-product-trigger.ant-btn { max-width:100%; white-space:normal; height:auto; overflow-wrap:anywhere; text-align:start; }
+.marker-product-context { display:flex; flex-direction:column; gap:8px; margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid #ddd; overflow-wrap:anywhere; }
+.marker-draft-hint,.marker-definition-navigation p { color:#595959; line-height:1.6; }
+.marker-definition-navigation { margin-top:16px; }
+.marker-definition-navigation>a,.marker-definition-navigation>[role=link] { display:inline-flex; align-items:center; min-height:44px; max-width:100%; overflow-wrap:anywhere; }
+.marker-definition-navigation>[aria-disabled=true] { color:#595959; }

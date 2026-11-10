@@ -1,0 +1,5 @@
+{
+  "pass": false,
+  "errorType": "ApplicationContextException",
+  "reason": "Application/probe failed; inspect sanitized local log"
+}

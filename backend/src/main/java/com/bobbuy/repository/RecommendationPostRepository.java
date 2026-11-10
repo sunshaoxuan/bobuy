@@ -13,4 +13,5 @@ public interface RecommendationPostRepository extends JpaRepository<Recommendati
     List<RecommendationPost> findByPublishedTrue();
     Optional<RecommendationPost> findByIdAndMerchantId(Long id, Long merchantId);
     Optional<RecommendationPost> findByIdAndPublishedTrue(Long id);
+    Optional<RecommendationPost> findByMerchantIdAndServiceSourceKey(Long merchantId,String serviceSourceKey);
 }

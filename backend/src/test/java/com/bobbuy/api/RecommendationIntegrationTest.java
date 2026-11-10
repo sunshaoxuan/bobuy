@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(print=org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrint.NONE)
 class RecommendationIntegrationTest {
     @Autowired MockMvc mvc;
     @Autowired ObjectMapper json;
@@ -43,6 +43,7 @@ class RecommendationIntegrationTest {
     }
     @AfterEach void cleanup() { items.deleteAll(); posts.deleteAll(); images.deleteAll(); }
     JsonNode data(ResultActions result) throws Exception {
+        result.andDo(r->{if(r.getResponse().getStatus()==500&&r.getResolvedException()!=null)throw new AssertionError("Recommendation request failed: "+r.getResolvedException().getMessage(),r.getResolvedException());});
         return json.readTree(result.andExpect(status().isOk()).andReturn().getResponse().getContentAsString()).get("data");
     }
     JsonNode create(String token) throws Exception { return data(mvc.perform(post("/api/merchant/recommendations").header("Authorization", "Bearer " + token))); }
@@ -64,6 +65,41 @@ class RecommendationIntegrationTest {
         return mvc.perform(post(path(post) + "/" + action).header("Authorization", "Bearer " + admin).contentType(MediaType.APPLICATION_JSON)
             .content("{\"version\":" + post.at("/post/version").asLong() + "}"));
     }
+    ResultActions article(JsonNode draft,String locale,String title,String body,String hash,boolean reviewed){
+        try{return mvc.perform(put(path(draft)+"/article-localizations").header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsString(Map.of("locale",locale,"title",title,"body",body,"sourceHash",hash,"version",draft.at("/post/version").asLong(),"reviewed",reviewed))));}catch(Exception e){throw new RuntimeException(e);}
+    }
+    @Test void articleLanguagesRetainSourcesInvalidateChangedTranslationsAndEnforceOwnership()throws Exception{
+        var draft=data(edit(create(admin),admin,"Japanese source","Original source body"));String hash=draft.path("articleSourceHash").asText();
+        String protectedEdit=json.writeValueAsString(Map.of("locale","zh-CN","title","blocked","body","blocked","sourceHash",hash,"version",draft.at("/post/version").asLong(),"reviewed",true));
+        mvc.perform(put(path(draft)+"/article-localizations").header("Authorization","Bearer "+other).contentType(MediaType.APPLICATION_JSON).content(protectedEdit)).andExpect(status().isNotFound());
+        String customer=tokens.createAccessToken(users.findById(1001L).orElseThrow());mvc.perform(put(path(draft)+"/article-localizations").header("Authorization","Bearer "+customer).contentType(MediaType.APPLICATION_JSON).content(protectedEdit)).andExpect(status().isForbidden());
+        for(String locale:List.of("zh-CN","zh-TW","en-US"))draft=data(article(draft,locale,locale+" title",locale+" body",hash,true));
+        assertThat(draft.path("articleTranslations").size()).isEqualTo(3);assertThat(draft.path("body").asText()).isEqualTo("Original source body");
+        article(draft,"fr-FR","bad","bad",hash,true).andExpect(status().isBadRequest());article(draft,"en-US","bad","bad","wrong-hash",true).andExpect(status().isBadRequest());article(draft,"en-US","bad","bad",hash,false).andExpect(status().isBadRequest());
+        var changed=data(edit(draft,admin,"Japanese source edited","Original source revised"));assertThat(changed.path("articleTranslations").size()).isEqualTo(3);assertThat(changed.path("articleSourceHash").asText()).isNotEqualTo(hash);
+        var withImage=data(upload(changed,admin,"SYNTHETIC source language","SYN-ARTICLE","100",image(991))).path("detail");var published=data(publish(withImage,"publish"));
+        var publicView=data(mvc.perform(get("/api/storefront/recommendations/"+published.at("/post/id").asLong())));assertThat(publicView.path("articleTranslations").size()).isZero();assertThat(publicView.path("body").asText()).isEqualTo("Original source revised");
+        var history=data(mvc.perform(get(path(published)+"/article-history").header("Authorization","Bearer "+admin)));assertThat(history.toString()).contains("Original source body","zh-CN body","Original source revised");
+        mvc.perform(get(path(published)+"/article-history").header("Authorization","Bearer "+other)).andExpect(status().isNotFound());mvc.perform(get(path(published)+"/article-history")).andExpect(status().isForbidden());
+    }
+    @Test void mixedLegacyArticleIsNotInferredOrOverwrittenByTranslation()throws Exception{
+        var draft=data(edit(create(admin),admin,"Mixed legacy title","Legacy mixed source retained"));var row=posts.findById(draft.at("/post/id").asLong()).orElseThrow();row.articleSourceLocale=null;posts.saveAndFlush(row);draft=data(mvc.perform(get(path(draft)).header("Authorization","Bearer "+admin)));
+        article(draft,"zh-CN","translated","translated",draft.path("articleSourceHash").asText(),true).andExpect(status().isBadRequest());
+        var confirmed=data(article(draft,"ja-JP","Reviewed Japanese source","Confirmed original",draft.path("articleSourceHash").asText(),true));assertThat(confirmed.path("articleSourceLocale").asText()).isEqualTo("ja-JP");
+        var history=data(mvc.perform(get(path(confirmed)+"/article-history").header("Authorization","Bearer "+admin)));assertThat(history.toString()).contains("Legacy mixed source retained","Confirmed original");
+    }
+    @Test void multipartSourceContextDefaultsUncheckedFlagsAndBindsIsoDates() throws Exception {
+        var draft=create(admin);
+        var result=data(mvc.perform(multipart(path(draft)+"/images").file(new MockMultipartFile("file","synthetic.png","image/png",image(452)))
+            .header("Authorization","Bearer "+admin).param("name","Synthetic source binding").param("itemNumber","SYN-BINDING")
+            .param("referenceContext.supplierKey","SYNTHETIC").param("referenceContext.channel","COSTCO_WAREHOUSE")
+            .param("referenceContext.activityStart","2026-11-01").param("referenceContext.startSearchComplete","true")
+            .param("version",draft.at("/post/version").asText())));
+        assertThat(result.at("/detail/items/0/referenceContext/activityApplies").asBoolean()).isFalse();
+        assertThat(result.at("/detail/items/0/referenceContext/startSearchComplete").asBoolean()).isTrue();
+        assertThat(result.at("/detail/items/0/referenceContext/activityStart").asText()).isEqualTo("2026-11-01");
+        assertThat(result.at("/detail/items/0/offerStart").isNull()).isTrue();
+    }
     @Test void createsReusesDeduplicatesUpdatesAndRetriesWithoutDuplicateProducts() throws Exception {
         var draft = create(admin); long before = products.count();
         var first = data(upload(draft,admin,"Tea","REC-TEA","150.50",image(123)));
@@ -71,14 +107,17 @@ class RecommendationIntegrationTest {
         var current = first.path("detail"); String productId = current.at("/items/0/productId").asText();
         var retry = data(upload(draft,admin,"Tea","REC-TEA","150.50",image(123)));
         assertThat(retry.at("/detail/items").size()).isEqualTo(1);
-        var changed = data(upload(current,admin,"Tea","REC-TEA","160",image(123)));
-        assertThat(changed.path("imageReused").asBoolean()).isTrue(); assertThat(changed.path("priceUpdated").asBoolean()).isTrue();
-        assertThat(changed.at("/detail/items/0/referencePrice").decimalValue()).isEqualByComparingTo("160");
-        var secondImage = data(upload(changed.path("detail"),admin,"Tea side","REC-TEA","160",image(456)));
-        assertThat(secondImage.at("/detail/items").size()).isEqualTo(2);
-        var secondPost = data(upload(create(admin),admin,"Tea","REC-TEA","160",image(123)));
-        assertThat(secondPost.path("imageReused").asBoolean()).isTrue();
-        assertThat(products.count()).isEqualTo(before+3); assertThat(images.count()).isEqualTo(2);
+        upload(current,admin,"Tea","REC-TEA","160",image(123)).andExpect(status().isBadRequest());
+        long itemId=current.at("/items/0/id").asLong();
+        var changed=data(mvc.perform(put(path(current)+"/items/"+itemId).header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON)
+            .content(json.writeValueAsString(Map.of("version",current.at("/post/version").asLong(),"facts",Map.of("name","Tea","itemNumber","REC-TEA","referencePrice",160))))));
+        var history=data(mvc.perform(get(path(current)+"/items/"+itemId+"/reference-history").header("Authorization","Bearer "+admin)));
+        assertThat(history.size()).isEqualTo(2);assertThat(history.at("/0/facts/referencePrice").decimalValue()).isEqualByComparingTo("150.50");assertThat(history.at("/1/facts/referencePrice").asInt()).isEqualTo(160);
+        mvc.perform(get(path(current)+"/items/"+itemId+"/reference-history").header("Authorization","Bearer "+other)).andExpect(status().isNotFound());
+        mvc.perform(get(path(current)+"/items/"+itemId+"/reference-history")).andExpect(status().isForbidden());
+        var secondImage=data(upload(changed,admin,"Tea side","REC-SIDE","160",image(456)));assertThat(secondImage.at("/detail/items").size()).isEqualTo(2);
+        upload(create(admin),admin,"Tea","REC-TEA","160",image(123)).andExpect(status().isBadRequest());
+        assertThat(products.count()).isEqualTo(before+2);assertThat(images.count()).isEqualTo(2);
         assertThat(products.findById(productId).orElseThrow().getVisibilityStatus()).isEqualTo(ProductVisibility.DRAFTER_ONLY);
         assertThat(products.findById(productId).orElseThrow().getBasePrice()).isZero();
         assertThat(products.findById(productId).orElseThrow().getPriceTiers()).isEmpty();
@@ -94,6 +133,31 @@ class RecommendationIntegrationTest {
         upload(draft,other,"Intrusion","X","9",image(1)).andExpect(status().isNotFound());
         mvc.perform(get("/api/merchant/recommendations")).andExpect(status().isForbidden());
         assertThat(data(mvc.perform(get("/api/merchant/recommendations").header("Authorization","Bearer " + other))).size()).isEqualTo(1);
+    }
+    @Test void registersExistingMasterBeforeIssueWithoutDuplicateProductAndRejectsForeignOwner() throws Exception {
+        var source=data(upload(create(admin),admin,"ごま油","00123","2178",image(624))).path("detail");
+        String productId=source.at("/items/0/productId").asText();
+        String imageUrl=source.at("/items/0/imageUrl").asText();
+        var blob=images.findById(imageUrl.substring(imageUrl.lastIndexOf('/')+1)).orElseThrow();
+        var product=products.findById(productId).orElseThrow();
+        product.setMediaGallery(List.of(ProductCatalogService.media(new RecommendationItem.Picture(blob.id,imageUrl,blob.imageHash,"https://www.costco.co.jp/exact-product.jpg","synthetic","瓶",java.time.Instant.now()))));
+        products.saveAndFlush(product);product=products.findById(productId).orElseThrow();
+        var draft=create(admin);long before=products.count(),mediaBefore=images.count();
+        String input=json.writeValueAsString(Map.of("productId",productId,"productVersion",product.getRecordVersion(),"facts",Map.of("name","ごま油","itemNumber","00123","originalPrice",2178,"discountAmount",440,"referencePrice",1738),"version",draft.at("/post/version").asLong(),"reviewed",true));
+        var result=data(mvc.perform(post(path(draft)+"/from-product").header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content(input)));
+        assertThat(result.at("/items/0/productId").asText()).isEqualTo(productId);
+        assertThat(result.at("/items/0/gallery").size()).isEqualTo(1);
+        assertThat(result.at("/items/0/referencePrice").decimalValue()).isEqualByComparingTo("1738");
+        data(mvc.perform(post(path(draft)+"/from-product").header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content(input)));
+        assertThat(items.findByPostIdOrderById(draft.at("/post/id").asLong())).hasSize(1);
+        var next=json.readTree(input);((com.fasterxml.jackson.databind.node.ObjectNode)next).put("version",result.at("/post/version").asLong());
+        ((com.fasterxml.jackson.databind.node.ObjectNode)next.get("facts")).put("offerStart","2026-11-02").put("offerEnd","2026-11-08");
+        var differentWindow=data(mvc.perform(post(path(draft)+"/from-product").header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsBytes(next))));
+        assertThat(differentWindow.path("items").size()).isEqualTo(2);
+        assertThat(products.count()).isEqualTo(before);assertThat(images.count()).isEqualTo(mediaBefore);
+        mvc.perform(post(path(draft)+"/from-product").header("Authorization","Bearer "+other).contentType(MediaType.APPLICATION_JSON).content(input)).andExpect(status().isNotFound());
+        mvc.perform(post(path(draft)+"/from-product").contentType(MediaType.APPLICATION_JSON).content(input)).andExpect(status().isForbidden());
+        assertThat(products.findById(productId).orElseThrow().getBasePrice()).isZero();
     }
     @Test void validatesImagesMetadataAndStaleEdits() throws Exception {
         var draft = create(admin);
@@ -157,7 +221,7 @@ class RecommendationIntegrationTest {
     }
     @Test void publicFeedGroupsAllImagesAndExcludesDraftsAcrossPages() throws Exception {
         var older = data(upload(create(admin),admin,"Tea","REC-FEED-1","100",image(1))).path("detail");
-        older = data(upload(older,admin,"Tea second photo","REC-FEED-1","100",image(2))).path("detail");
+        older = data(upload(older,admin,"Tea second product","REC-FEED-1-B","100",image(2))).path("detail");
         older = data(publish(data(edit(older,admin,"First issue","First complete body")),"publish"));
         var newer = data(upload(create(admin),admin,"Coffee","REC-FEED-2","200",image(3))).path("detail");
         newer = data(publish(data(edit(newer,admin,"Second issue","Second complete body")),"publish"));

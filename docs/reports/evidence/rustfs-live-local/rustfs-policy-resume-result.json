@@ -1,0 +1,8 @@
+{
+  "info": "200",
+  "policy": "200",
+  "attach": "200",
+  "stage": "SCOPED_TEST_POLICY_BOUND",
+  "allServicesStopped": true,
+  "utc": "2026-10-28T01:32:40.290511+00:00"
+}

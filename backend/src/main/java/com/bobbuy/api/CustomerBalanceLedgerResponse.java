@@ -204,6 +204,9 @@ public class CustomerBalanceLedgerResponse {
   }
 
   public static class LedgerOrderLineResponse {
+    private OrderIdentitySnapshot snapshot;
+    public OrderIdentitySnapshot getSnapshot(){return snapshot;}
+    public LedgerOrderLineResponse withSnapshot(OrderIdentitySnapshot value){snapshot=value;return this;}
     private final String skuId;
     private final String itemName;
     private final int orderedQuantity;

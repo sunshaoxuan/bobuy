@@ -1,0 +1,55 @@
+{
+  "baseCommit": "7b2e6a3619414c02d27a465e32a68c65130b732b",
+  "acceptanceFixes": [
+    "optionalMultipartBooleans",
+    "publicationConstraintFlushOrder"
+  ],
+  "realPgBackend": true,
+  "uiOnlyWrites": true,
+  "checks": [
+    "unknownStartSavedAndReopened",
+    "verifiedCampaignInheritanceSavedAndReopened",
+    "itemOverrideAndImmutablePriceHistory",
+    "sameMasterSameImageNewWindowSavedAndReopened",
+    "overlapConflictNotReceiptPriorityAndOnlineIsolated",
+    "real390pxBackendReopen"
+  ],
+  "itemCount": 3,
+  "productIds": [
+    "bobuy-rec-v1-e1c91f27-5d6f-33dd-9db0-c5c5262f4030"
+  ],
+  "imageHashes": [
+    "9609b4b0c64b105a4d3c49486c6cfb94bfaf5f382bcfa133ef4476f3321ead12"
+  ],
+  "resolutions": [
+    {
+      "state": "CONFLICT",
+      "amount": null,
+      "itemIds": [
+        1,
+        2
+      ],
+      "unknownWindows": 0
+    },
+    {
+      "state": "CONFLICT",
+      "amount": null,
+      "itemIds": [
+        1,
+        2
+      ],
+      "unknownWindows": 0
+    },
+    {
+      "state": "ACTIVE",
+      "amount": 999,
+      "itemIds": [
+        3
+      ],
+      "unknownWindows": 0
+    }
+  ],
+  "url": "http://127.0.0.1:18080/admin/recommendations?post=1",
+  "result": "PASS",
+  "errors": []
+}

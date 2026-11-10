@@ -224,7 +224,7 @@ body {
 
 .stock-mobile-card-body {
   display: grid;
-  grid-template-columns: 4.25rem minmax(0, 1fr) auto;
+  grid-template-columns: 4.25rem minmax(0, 1fr);
   gap: 0.625rem;
   align-items: center;
 }
@@ -248,10 +248,18 @@ body {
 }
 
 .stock-mobile-side {
+  grid-column: 1 / -1;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.25rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stock-mobile-side > .ant-space {
+  flex-wrap: wrap;
+  margin-inline-start: auto;
+  max-inline-size: 100%;
 }
 
 .stock-mobile-metric {

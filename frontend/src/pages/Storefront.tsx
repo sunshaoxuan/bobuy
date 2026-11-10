@@ -1,4 +1,8 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import HomeBrandIntro from '../components/HomeBrandIntro';
+import {ConsumerDetail} from '../components/ConsumerDetail';
+import SellingPrice from '../components/SellingPrice';
+import {liveReservationQuote} from '../components/ReservationAdd';
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, Badge, Button, Drawer, Empty, Form, Input, InputNumber, Modal, Segmented, Spin, Tag } from 'antd';
 import { ArrowLeftOutlined, ArrowRightOutlined, CalendarOutlined, CheckCircleOutlined, CloseOutlined, DeleteOutlined,
   LogoutOutlined, MailOutlined, MenuOutlined, MinusOutlined, PlusOutlined, SearchOutlined, ShoppingCartOutlined, ShopOutlined, UserOutlined } from '@ant-design/icons';
@@ -8,17 +12,19 @@ import { storeAuthSession } from '../authStorage';
 import { useUserRole } from '../context/UserRoleContext';
 import { CART_KEY, changeQuantity, emptyCart, readCart, type Cart } from '../cart';
 import ProtectedRoute from '../components/ProtectedRoute';
-import ProductFeed from '../components/ProductFeed';
+
 import LanguageSwitcher from '../components/LanguageSwitcher';
 import { localizedContent, useI18n } from '../i18n';
 import '../product-feed.css';
 import StoreNavigation from '../components/StoreNavigation';
+import StoreMobileNavigation from '../components/StoreMobileNavigation';
 import {scopedPath,selectedNode} from '../storeNavigation';
 import '../browse.css';
 import {formatMoney} from '../currency';
 
 const ClientOrders = lazy(() => import('./ClientOrders'));
 const PublicRecommendations = lazy(() => import('./PublicRecommendations'));
+const PublicProductCatalog = lazy(() => import('./PublicProductCatalog'));
 const ClientBilling = lazy(() => import('./ClientBilling'));
 const ClientChat = lazy(() => import('./ClientChat'));
 const ClientTrips = lazy(() => import('./ClientTrips'));
@@ -91,21 +97,34 @@ export default function Storefront() {
   const { t, locale } = useI18n();
   const text = (value: Record<string,string>) => localizedContent(value,locale);
   const money = (value: number,currency='JPY') => formatMoney(value,currency,locale);
-  const { user, isAuthenticated, isCustomer, logout } = useUserRole();
+  const { user, isAuthenticated, isCustomer, logout, loading:authLoading } = useUserRole();
   const navigate = useNavigate();
   const location = useLocation();
-  const searchable=location.pathname==='/'||location.pathname==='/trips'||location.pathname.startsWith('/recommendations');
+  const searchable=location.pathname==='/'||location.pathname==='/products'||location.pathname==='/trips'||location.pathname.startsWith('/recommendations');
   const node = selectedNode(location.search);
+  const currentNode=useRef(node);currentNode.current=node;
+  const contextLife=useRef(true),bookableGeneration=useRef(0),activeGeneration=useRef(0);
+  useEffect(()=>{contextLife.current=true;return()=>{contextLife.current=false;bookableGeneration.current++;activeGeneration.current++;};},[]);
   const [navigationOpen,setNavigationOpen] = useState(false);
-  const [nodes,setNodes] = useState<{id:number;name:string}[]>([]);
+  const [cartConfirmationOpen,setCartConfirmationOpen] = useState(false);
+  const [publicNodes,setPublicNodes] = useState<{id:number;name:string}[]>();
+  const [nodeNameError,setNodeNameError]=useState(false);
+  const needsNodeNames=node!==undefined||navigationOpen;
   const [privateNodes,setPrivateNodes]=useState<{userId?:number;ids:number[]}>({ids:[]});
-  const visibleNodes=[...nodes,...(privateNodes.userId===user?.id?privateNodes.ids:[]).filter(id=>!nodes.some(value=>value.id===id)).map(id=>({id,name:t('browse.node_number',{id})}))];
   const [cart, setCart] = useState<Cart>(readCart);
   const [trips, setTrips] = useState<StoreTrip[]>([]);
+  const [activeTrips, setActiveTrips] = useState<StoreTrip[]>([]);
   const [products, setProducts] = useState<StoreProduct[]>([]);
   const [loading, setLoading] = useState(true);
+  const [browseLoaded, setBrowseLoaded] = useState(false);
   const [error, setError] = useState('');
-  const [search, setSearch] = useState('');
+  const search=new URLSearchParams(location.search).get('query')??'';
+  function setSearch(value:string){const params=new URLSearchParams(location.search);if(value)params.set('query',value);else params.delete('query');navigate({pathname:location.pathname,search:params.toString()},{replace:true});}
+  const [tripsReady,setTripsReady]=useState(false),[cartPricesReady,setCartPricesReady]=useState(false),[cartPriceAttempt,setCartPriceAttempt]=useState(0);
+  const needsCart=location.pathname==='/cart'||location.pathname==='/checkout';
+  const shoppingContext=location.pathname==='/'||location.pathname==='/products'||location.pathname.startsWith('/recommendations')||location.pathname==='/trips'||needsCart;
+  const authKey=JSON.stringify([user?.id,user?.roles,isAuthenticated,authLoading]);
+  const receiveSales=useCallback((values:StoreProduct[])=>setProducts(previous=>{const next=new Map(previous.map(product=>[product.id,product]));values.forEach(value=>next.set(value.id,value));return [...next.values()];}),[]);
   const [detail, setDetail] = useState<StoreProduct>();
   const [quantityProduct, setQuantityProduct] = useState<StoreProduct>();
   const [draftQuantity, setDraftQuantity] = useState(1);
@@ -113,31 +132,32 @@ export default function Storefront() {
   const [busy, setBusy] = useState(false);
   const [receipt, setReceipt] = useState<{ orderId: number; total: number;currency?:string }>();
   async function load() {
-    setLoading(true); setError('');
-    try {
-      const [nextTrips, nextProducts, recommendationNodes] = await Promise.all([storefrontApi.trips(), storefrontApi.products(), recommendationApi.nodes()]);
-      setTrips(nextTrips); setProducts(nextProducts);
-      const choices=new Map(recommendationNodes.map(value=>[value.id,value.name]));
-      nextTrips.forEach(value=>choices.set(value.merchantId,value.merchantName));
-      setNodes([...choices].map(([id,name])=>({id,name})).sort((a,b)=>a.name.localeCompare(b.name)));
-      const preferred=nextTrips.find(value=>node===undefined||value.merchantId===node);
-      setCart(prior => prior.tripId === null && preferred ? { ...prior, tripId: preferred.id } : prior);
-    } catch (e) { setError((e as Error).message); } finally { setLoading(false); }
+    const generation=++bookableGeneration.current;setError('');setTripsReady(false);
+    try {const nextTrips=await storefrontApi.trips();if(!contextLife.current||generation!==bookableGeneration.current)return;setTrips(nextTrips);setTripsReady(true);const preferred=nextTrips.find(value=>currentNode.current===undefined||value.merchantId===currentNode.current);setCart(prior=>prior.tripId===null&&preferred?{...prior,tripId:preferred.id}:prior);}catch(error){if(contextLife.current&&generation===bookableGeneration.current)setError(t((error as Error).message));}
   }
-  useEffect(() => { void load(); }, []);
+  async function loadActive(){const generation=++activeGeneration.current;setLoading(true);setBrowseLoaded(false);try{const values=await storefrontApi.activeTrips();if(contextLife.current&&generation===activeGeneration.current){setActiveTrips(values);setBrowseLoaded(true);}}catch(error){if(contextLife.current&&generation===activeGeneration.current)setError(t((error as Error).message));}finally{if(contextLife.current&&generation===activeGeneration.current)setLoading(false);}}
+  useEffect(()=>{if(shoppingContext){void load();void loadActive();}},[shoppingContext]);
+  useEffect(()=>{if(!needsNodeNames||publicNodes!==undefined)return;let active=true;setNodeNameError(false);void recommendationApi.nodes().then(values=>{if(active)setPublicNodes(values);}).catch(error=>{if(active){setNodeNameError(true);setError(t(error.message));}});return()=>{active=false;};},[needsNodeNames]);
+  const nameChoices=new Map([...trips,...activeTrips].map(value=>[value.merchantId,value.merchantName]));
+  publicNodes?.forEach(value=>nameChoices.set(value.id,value.name||t('browse.node_number',{id:value.id})));
+  const merchantName=(journey:StoreTrip)=>nameChoices.get(journey.merchantId)??journey.merchantName;
+  const nodes=[...nameChoices].map(([id,name])=>({id,name}));
+  const visibleNodes=[...nodes,...(privateNodes.userId===user?.id?privateNodes.ids:[]).filter(id=>!nodes.some(value=>value.id===id)).map(id=>({id,name:t('browse.node_number',{id})}))];
+  const cartIds=JSON.stringify(Object.keys(cart.items).sort());
+  useEffect(()=>{if(!needsCart)return;let active=true;setCartPricesReady(false);const ids=JSON.parse(cartIds) as string[];void (async()=>{const values:StoreProduct[]=[];for(let offset=0;offset<ids.length;offset+=24)values.push(...await storefrontApi.productSales(ids.slice(offset,offset+24)));if(active){setProducts(previous=>[...previous.filter(value=>!ids.includes(value.id)),...values]);setCartPricesReady(true);}})().catch(error=>{if(active)setError(t(error.message));});return()=>{active=false;};},[needsCart,cartIds,authKey,cartPriceAttempt]);
   useEffect(()=>{setDetail(prior=>prior?products.find(p=>p.id===prior.id):prior);setQuantityProduct(prior=>prior?products.find(p=>p.id===prior.id):prior);},[products]);
   useEffect(()=>{
     const now=Date.now(),boundaries=products.map(p=>Date.parse(p.priceValidUntil??'')).filter(value=>Number.isFinite(value)&&value>now);
-    if(!boundaries.length)return;
-    const timer=window.setTimeout(()=>{void storefrontApi.products().then(setProducts).catch(e=>setError((e as Error).message));},Math.min(2147483647,Math.max(100,Math.min(...boundaries)-now+100)));
+    if(!needsCart||!boundaries.length)return;
+    const timer=window.setTimeout(()=>{setCartPriceAttempt(value=>value+1);},Math.min(2147483647,Math.max(100,Math.min(...boundaries)-now+100)));
     return()=>window.clearTimeout(timer);
-  },[products]);
+  },[products,needsCart]);
   useEffect(()=>{
     let active=true;setPrivateNodes({userId:user?.id,ids:[]});
-    if(isCustomer)void api.customerTrips().then(values=>{if(active)setPrivateNodes({userId:user?.id,ids:[...new Set(values.map(value=>value.agentId))]});}).catch(()=>{ /* Public browsing stays available; private pages show their own errors. */ });
+    if(!authLoading&&isAuthenticated&&isCustomer&&(navigationOpen||location.pathname.startsWith('/client/')))void api.customerTrips().then(values=>{if(active)setPrivateNodes({userId:user?.id,ids:[...new Set(values.map(value=>value.agentId))]});}).catch(()=>{ /* Public browsing stays available; private pages show their own errors. */ });
     return()=>{active=false;};
-  },[user?.id,isCustomer]);
-  useEffect(() => {setNavigationOpen(false);setSearch('');setDetail(undefined);setQuantityProduct(undefined);setTripPicker(false);},[location.pathname,node]);
+  },[user?.id,isCustomer,isAuthenticated,authLoading,navigationOpen,location.pathname]);
+  useEffect(() => {setNavigationOpen(false);setDetail(undefined);setQuantityProduct(undefined);setTripPicker(false);},[location.pathname,node]);
   useEffect(() => { try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch { setError(t('store.storage_error')); } }, [cart]);
   useEffect(() => {
     const sync = (event: StorageEvent) => { if (event.key === CART_KEY) setCart(readCart()); };
@@ -145,14 +165,19 @@ export default function Storefront() {
   }, []);
   const trip = trips.find(t => t.id === cart.tripId);
   const scopedTrips = trips.filter(value=>node===undefined||value.merchantId===node);
-  const viewTrip = scopedTrips.find(value=>value.id===cart.tripId)??scopedTrips[0];
+  const scopedActiveTrips = activeTrips.filter(value=>node===undefined||value.merchantId===node);
+  const showHomeRecommendations=browseLoaded&&!scopedActiveTrips.length;
+  const homeNavigationPath=loading?null:showHomeRecommendations?'/recommendations':'/products';
+  const viewTrip = scopedActiveTrips.find(value=>value.id===cart.tripId)??scopedActiveTrips[0];
   const cartEntries = Object.entries(cart.items);
   const quantity = cartEntries.reduce((sum, [, value]) => sum + value, 0);
-  const available = products.filter(p => p.merchantId === (node??viewTrip?.merchantId));
-  const shown = available.filter(p => `${text(p.name)} ${p.brand} ${text(p.description)}`.toLowerCase().includes(search.toLowerCase()));
-  const canBuyRecommendation=(product:StoreProduct)=>product.recommendationReady===true&&trips.some(journey=>journey.merchantId===product.merchantId);
+  const canBookProduct=(product:StoreProduct)=>!authLoading&&tripsReady&&liveReservationQuote(product)&&trips.some(journey=>journey.merchantId===product.merchantId);
+  const canBuyRecommendation=(product:StoreProduct)=>canBookProduct(product)&&product.recommendationReady===true;
+  const canBuyRootProduct=(product:StoreProduct)=>canBookProduct(product)&&product.merchantId===(node??viewTrip?.merchantId);
   const total = cartEntries.reduce((sum,[id,qty])=>sum+(cart.quotes?.[id]?.price??products.find(p=>p.id===id)?.price??0)*qty,0);
-  const invalidCart = !trip || cartEntries.some(([id]) => !products.some(p => p.id === id && p.merchantId === trip.merchantId && (p.currency??'JPY')===(cart.currency??'JPY') && (!p.priceToken||cart.quotes?.[id]?.token===p.priceToken) && (!(p.priceRevision??0)||(cart.quotes?.[id]?.revision===p.priceRevision&&cart.quotes?.[id]?.price===p.price&&cart.quotes?.[id]?.currency===p.currency))));
+  const totalKnown=cartEntries.every(([id])=>Number.isFinite(cart.quotes?.[id]?.price)||products.some(value=>value.id===id));
+  const totalText=totalKnown?money(total,cart.currency):t(cartPricesReady?'rec.not_stated':'browse.sales_pending');
+  const invalidCart = !tripsReady || needsCart&&!cartPricesReady || !trip || cartEntries.some(([id]) => !products.some(p => p.id === id && p.merchantId === trip.merchantId && (p.currency??'JPY')===(cart.currency??'JPY') && (!p.priceToken||cart.quotes?.[id]?.token===p.priceToken) && (!(p.priceRevision??0)||(cart.quotes?.[id]?.revision===p.priceRevision&&cart.quotes?.[id]?.price===p.price&&cart.quotes?.[id]?.currency===p.currency))));
   function change(id:string,value:number){const product=products.find(p=>p.id===id);if(!product&&value>0)return;
     setCart(prior=>{const next=changeQuantity(prior,id,value);const quotes={...prior.quotes};if(value<=0)delete quotes[id];else quotes[id]={price:product!.price,currency:product!.currency??'JPY',revision:product!.priceRevision??0,token:product!.priceToken};return {...next,currency:product?.currency??prior.currency??'JPY',quotes};});setReceipt(undefined);
   }
@@ -164,12 +189,13 @@ export default function Storefront() {
       return {...next,currency:product.currency??'JPY',quotes:{...prior.quotes,[product.id]:{price:product.price,currency:product.currency??'JPY',revision:product.priceRevision??0,token:product.priceToken}}};});setReceipt(undefined);
   }
   function configureQuantity(product: StoreProduct) {
+    if(!canBookProduct(product))return;
     if (product.merchantId !== trip?.merchantId) { setDetail(undefined); setTripPicker(true); return; }
     setDraftQuantity(cart.items[product.id] || 1); setQuantityProduct(product); setDetail(undefined);
   }
   function choose(next: StoreTrip, after?:()=>void) {
     const apply = () => {setCart(prior => ({ ...prior, tripId: next.id, requestId: crypto.randomUUID(), items: trip?.merchantId === next.merchantId ? prior.items : {} }));after?.();};
-    if (quantity && trip?.merchantId !== next.merchantId) Modal.confirm({ title: t('store.change_merchant_confirm'), okText: t('store.change_merchant'), cancelText: t('store.keep_cart'), onOk: apply });
+    if (quantity && trip?.merchantId !== next.merchantId) {setCartConfirmationOpen(true);Modal.confirm({ title: t('store.change_merchant_confirm'), okText: t('store.change_merchant'), cancelText: t('store.keep_cart'), onOk: apply,afterClose:()=>setCartConfirmationOpen(false) });}
     else apply();
   }
   function changeNode(next?:number) {
@@ -184,7 +210,7 @@ export default function Storefront() {
     try {
       const result = await storefrontApi.checkout({ requestId: cart.requestId, tripId: trip.id,currency:cart.currency??'JPY', items: cartEntries.map(([productId, qty]) => ({ productId, quantity: qty,priceRevision:cart.quotes?.[productId]?.revision,currency:cart.quotes?.[productId]?.currency,priceToken:cart.quotes?.[productId]?.token })) });
       setReceipt(result); setCart({ ...emptyCart(), tripId: trip.id });
-    } catch (e) { setError(t((e as Error).message));void storefrontApi.products().then(setProducts).catch(()=>{}); } finally { setBusy(false); }
+    } catch (e) { setError(t((e as Error).message));setCartPriceAttempt(value=>value+1); } finally { setBusy(false); }
   }
   function stepper(product: StoreProduct, count: number) {
     return <div className="quantity-control"><Button icon={count === 1 ? <DeleteOutlined /> : <MinusOutlined />} aria-label={t('store.decrease',{name:text(product.name)})} onClick={() => change(product.id, count - 1)} />
@@ -195,53 +221,47 @@ export default function Storefront() {
   }
   const basket = <section className="basket"><div className="section-heading"><h1>{t('store.cart')} <small>{t('store.item_count',{count:quantity})}</small></h1><Link to="/">{t('store.continue')} <ArrowRightOutlined /></Link></div>
     {quantity === 0 ? <Empty description={t('store.cart_empty')}><Link to="/"><Button type="primary">{t('store.browse')}</Button></Link></Empty> : <>
-      {trip && <div className="basket-trip"><CalendarOutlined /><div><strong>{trip.deliveryArea}</strong><p>{trip.deliveryDate} · {trip.merchantName}</p></div></div>}
-      {invalidCart && <Alert type="warning" message={t('store.cart_invalid')} action={<Button onClick={()=>{setCart(prior=>({...prior,requestId:crypto.randomUUID(),quotes:Object.fromEntries(products.filter(p=>prior.items[p.id]&&(p.currency??'JPY')===(prior.currency??'JPY')).map(p=>[p.id,{price:p.price,currency:p.currency??'JPY',revision:p.priceRevision??0,token:p.priceToken}]))}));}}>{t('sale.refresh_cart')}</Button>}/>}
+      {trip && <div className="basket-trip"><CalendarOutlined /><div><strong>{trip.deliveryArea}</strong><p>{trip.deliveryDate} · {merchantName(trip)}</p></div></div>}
+      {invalidCart && <Alert type="warning" message={t(!cartPricesReady||!tripsReady?'browse.sales_pending':'store.cart_invalid')} action={<Button disabled={!cartPricesReady||!tripsReady} onClick={()=>{setCart(prior=>({...prior,requestId:crypto.randomUUID(),quotes:Object.fromEntries(products.filter(p=>prior.items[p.id]&&(p.currency??'JPY')===(prior.currency??'JPY')).map(p=>[p.id,{price:p.price,currency:p.currency??'JPY',revision:p.priceRevision??0,token:p.priceToken}]))}));}}>{t('sale.refresh_cart')}</Button>}/>}
       <div className="basket-lines">{cartEntries.map(([id, qty]) => {
         const product = products.find(p => p.id === id);
         return product ? <article className="basket-line" key={id}><div className="basket-photo">{image(product)}</div><div><h2>{text(product.name)}</h2><p>{money(cart.quotes?.[id]?.price??product.price,product.currency)} / {product.saleUnit}</p>{stepper(product, qty)}</div><strong>{money((cart.quotes?.[id]?.price??product.price)*qty,product.currency)}</strong></article> :
-          <article key={id} className="basket-line"><span>{t('store.unavailable')}</span><Button icon={<DeleteOutlined />} onClick={() => change(id, 0)}>{t('store.remove')}</Button></article>;
+          <article key={id} className="basket-line"><span>{t(cartPricesReady?'store.unavailable':'browse.sales_pending')}</span><Button icon={<DeleteOutlined />} onClick={() => change(id, 0)}>{t('store.remove')}</Button></article>;
       })}</div>
-      <div className="basket-total"><span>{t('store.total')} <small>{cart.currency??'JPY'}</small></span><strong>{money(total,cart.currency)}</strong></div>
+      <div className="basket-total"><span>{t('store.total')} <small>{cart.currency??'JPY'}</small></span><strong>{totalText}</strong></div>
       <p className="muted">{t('store.payment_hint')}</p>
       {location.pathname !== '/checkout' && <Button block size="large" type="primary" disabled={invalidCart} onClick={() => navigate('/checkout')}>{t('store.checkout')} <ArrowRightOutlined /></Button>}
     </>}
   </section>;
   const tripChoices = <div className="trip-list" role="group" aria-label={t('store.choose_trip')}>{scopedTrips.map(journey => <button key={journey.id} className={`trip-choice ${cart.tripId === journey.id ? 'selected' : ''}`} onClick={() => { choose(journey); setTripPicker(false); }} aria-pressed={cart.tripId === journey.id}>
-        <span className="trip-date">{journey.deliveryDate.slice(5).replace('-', '/')}<small>{t('store.delivery_date')}</small></span><span className="trip-route"><strong>{journey.deliveryArea}</strong><small>{journey.merchantName}</small></span>
+        <span className="trip-date">{journey.deliveryDate.slice(5).replace('-', '/')}<small>{t('store.delivery_date')}</small></span><span className="trip-route"><strong>{journey.deliveryArea}</strong><small>{merchantName(journey)}</small></span>
         {cart.tripId === journey.id && <CheckCircleOutlined />}</button>)}</div>;
-  const catalog = <div className="catalog-experience"><section className="journey-strip">
-      <button className="journey-trigger" onClick={() => setTripPicker(true)} aria-label={t('store.choose_trip')}><CalendarOutlined /><span><small>{viewTrip ? `${viewTrip.deliveryDate.slice(5).replace('-', '.')} ${t('store.delivery_date')} · ${viewTrip.merchantName}` : t('store.trip')}</small><strong>{viewTrip ? <>{viewTrip.deliveryArea}</> : t('store.no_trips')}</strong></span><ArrowRightOutlined /></button>
-    </section>
-    <section className="catalog" aria-label={t('store.catalog')}><div className="catalog-toolbar"><h1>{t('store.catalog')}<span>{t('store.product_count',{count:available.length})}</span></h1>
-      </div>
-      <ProductFeed products={shown} quantities={cart.items} onAdd={configureQuantity} onDetail={setDetail} />
-      {!shown.length && !loading && <Empty description={search ? t('store.no_matches') : t('store.no_products')} />}
-    </section></div>;
   const bookable=<section className="browse-trip-page"><header className="browse-page-heading"><span>{t('browse.plan')}</span><h1>{t('browse.bookable')}</h1><p>{t('browse.bookable_hint')}</p></header>
-    {scopedTrips.length?<div className="browse-trip-grid">{scopedTrips.filter(journey=>(journey.deliveryArea+' '+journey.merchantName+' '+journey.deliveryDate).toLocaleLowerCase().includes(search.toLocaleLowerCase())).map(journey=><article className="browse-trip-card" key={journey.id}><CalendarOutlined/><time dateTime={journey.deliveryDate}>{journey.deliveryDate}</time><h2>{journey.deliveryArea}</h2><p>{journey.merchantName}</p><Button onClick={()=>choose(journey,()=>navigate('/?'+new URLSearchParams({node:String(journey.merchantId)})))}>{t('store.browse')}<ArrowRightOutlined/></Button></article>)}</div>:<Empty description={t('store.no_trips')}/>}
+    {scopedTrips.length?<div className="browse-trip-grid">{scopedTrips.filter(journey=>(journey.deliveryArea+' '+merchantName(journey)+' '+journey.deliveryDate).toLocaleLowerCase().includes(search.toLocaleLowerCase())).map(journey=><article className="browse-trip-card" key={journey.id}><CalendarOutlined/><time dateTime={journey.deliveryDate}>{journey.deliveryDate}</time><h2>{journey.deliveryArea}</h2><p>{merchantName(journey)}</p><Button onClick={()=>choose(journey,()=>navigate('/products?'+new URLSearchParams({node:String(journey.merchantId)})))}>{t('store.browse')}<ArrowRightOutlined/></Button></article>)}</div>:<Empty description={t('store.no_trips')}/>}
   </section>;
-  return <div className={`storefront browse-shell ${(location.pathname === '/' || location.pathname.startsWith('/recommendations')) ? 'storefront-catalog' : ''}`}>
-    <StoreNavigation nodes={visibleNodes} node={node} loading={loading} open={navigationOpen} onClose={()=>setNavigationOpen(false)} onNodeChange={changeNode}/>
-    <div className="browse-workspace"><header className="store-header"><div className="browse-context"><Button className="browse-menu-toggle" icon={<MenuOutlined/>} aria-label={t('app.open_menu')} aria-expanded={navigationOpen} onClick={()=>setNavigationOpen(value=>!value)}/><Link className="browse-mobile-brand" to={scopedPath('/',location.search)}>{t('app.brand')}</Link><span className="browse-context-node">{node===undefined?t('browse.all_nodes'):visibleNodes.find(value=>value.id===node)?.name??t('browse.unavailable_node')}</span></div>
+  const rootCatalog=<><section className="journey-strip"><button className="journey-trigger" onClick={()=>setTripPicker(true)} aria-label={t('store.choose_trip')}><CalendarOutlined/><span><small>{viewTrip?viewTrip.deliveryDate+' · '+merchantName(viewTrip):t('store.trip')}</small><strong>{viewTrip?viewTrip.deliveryArea:t('store.no_trips')}</strong></span><ArrowRightOutlined/></button></section><PublicProductCatalog query={search} products={products} quantities={cart.items} onAdd={configureQuantity} canBuy={canBuyRootProduct} merchantId={node??viewTrip?.merchantId} purchasePending={!tripsReady||authLoading} onSales={receiveSales} autoPaused={navigationOpen||tripPicker||!!detail||!!quantityProduct||cartConfirmationOpen}/></>;
+  return <div className={`storefront browse-shell ${(location.pathname === '/' || location.pathname === '/products' || location.pathname.startsWith('/recommendations')) ? 'storefront-catalog' : ''}`}>
+    <StoreNavigation nodes={visibleNodes} node={node} loading={loading} homePath={homeNavigationPath} open={navigationOpen} onClose={()=>setNavigationOpen(false)} onNodeChange={changeNode}/>
+    <div className="browse-workspace"><header className="store-header"><div className="browse-context"><Button className="browse-menu-toggle" icon={<MenuOutlined/>} aria-label={t('app.open_menu')} aria-expanded={navigationOpen} onClick={()=>setNavigationOpen(value=>!value)}/><Link className="browse-mobile-brand" to={scopedPath('/',location.search)}>{t('app.brand')}</Link><span className="browse-context-node">{node===undefined?t('browse.all_nodes'):visibleNodes.find(value=>value.id===node)?.name??t(needsNodeNames&&publicNodes===undefined&&!nodeNameError?'browse.node_loading':'browse.unavailable_node')}</span></div>
     {searchable&&<Input className="browse-search" prefix={<SearchOutlined/>} aria-label={t('store.search')} placeholder={t('store.search')} allowClear value={search} onChange={event=>setSearch(event.target.value)}/>}
     <div className="store-header-actions"><LanguageSwitcher /><Link to={scopedPath('/account',location.search)} aria-label={t('store.account')}><UserOutlined /></Link><Badge count={quantity} size="small"><Link to={scopedPath('/cart',location.search)} aria-label={t('store.cart_label',{count:quantity})}><ShoppingCartOutlined /></Link></Badge></div></header>
-    <main className="store-main">{error && <Alert type="error" message={error} action={<Button onClick={() => void load()}>{t('store.retry')}</Button>} closable onClose={() => setError('')} />}
-      {loading ? <div className="store-loading"><Spin /></div> : <Suspense fallback={<Spin />}><Routes>
-        <Route index element={catalog} /><Route path="trips" element={bookable}/><Route path="client/trips" element={<ClientTrips node={node}/>}/><Route path="cart" element={basket} />
-        <Route path="checkout" element={<div className="checkout-layout">{receipt ? <section className="order-success"><CheckCircleOutlined /><h1>{t('store.submitted')}</h1><p>{t('store.order_number',{id:receipt.orderId})} · {money(receipt.total)}</p><Tag color="gold">{t('store.pending')}</Tag><div className="action-row"><Link to="/client/orders"><Button type="primary">{t('store.view_order')}</Button></Link><Link to="/"><Button>{t('store.continue')}</Button></Link></div></section> : <>{basket}{quantity > 0 && <section className="checkout-account">{!isAuthenticated ? <AccountForm checkout afterLogin={() => {}} /> : !user?.roles.includes('CUSTOMER') ? <Alert type="warning" message={t('store.customer_only')} action={<Button onClick={() => void logout()}>{t('store.switch_account')}</Button>} /> : <><h2>{t('store.confirm')}</h2><p>{user.name} · {user.email}</p>{!user.emailVerified && <Alert type="info" message={t('store.unverified_hint')} />}<Button type="primary" size="large" block loading={busy} disabled={invalidCart} onClick={() => void checkout()}>{t('store.submit')} · {money(total)}</Button><Link to="/account">{t('store.verify')}</Link></>}</section>}</>}</div>} />
+    <main className="store-main">{error && <Alert type="error" message={error} action={<Button onClick={() => {void load();void loadActive();setCartPriceAttempt(value=>value+1);}}>{t('store.retry')}</Button>} closable onClose={() => setError('')} />}
+      {location.pathname==='/'&&loading ? <div className="store-loading"><Spin /></div> : <Suspense fallback={<Spin />}><Routes>
+        <Route index element={<><HomeBrandIntro/>{showHomeRecommendations?<PublicRecommendations query={search} products={products} quantities={cart.items} onDetail={setDetail} onAdd={addRecommendation} canBuy={canBuyRecommendation} onSales={receiveSales} purchasePending={!tripsReady||authLoading} authKey={authKey} autoPaused={navigationOpen||tripPicker||!!detail||!!quantityProduct||cartConfirmationOpen}/>:rootCatalog}</>} /><Route path="products" element={<PublicProductCatalog query={search} products={products} quantities={cart.items} onAdd={addRecommendation} canBuy={canBuyRecommendation} onSales={receiveSales} purchasePending={!tripsReady||authLoading} autoPaused={navigationOpen||tripPicker||!!detail||!!quantityProduct||cartConfirmationOpen}/>}/><Route path="trips" element={tripsReady?bookable:<Spin/>}/><Route path="client/trips" element={<ClientTrips node={node}/>}/><Route path="cart" element={basket} />
+        <Route path="checkout" element={<div className="checkout-layout">{receipt ? <section className="order-success"><CheckCircleOutlined /><h1>{t('store.submitted')}</h1><p>{t('store.order_number',{id:receipt.orderId})} · {money(receipt.total)}</p><Tag color="gold">{t('store.pending')}</Tag><div className="action-row"><Link to="/client/orders"><Button type="primary">{t('store.view_order')}</Button></Link><Link to="/"><Button>{t('store.continue')}</Button></Link></div></section> : <>{basket}{quantity > 0 && <section className="checkout-account">{!isAuthenticated ? <AccountForm checkout afterLogin={() => {}} /> : !user?.roles.includes('CUSTOMER') ? <Alert type="warning" message={t('store.customer_only')} action={<Button onClick={() => void logout()}>{t('store.switch_account')}</Button>} /> : <><h2>{t('store.confirm')}</h2><p>{user.name} · {user.email}</p>{!user.emailVerified && <Alert type="info" message={t('store.unverified_hint')} />}<Button type="primary" size="large" block loading={busy} disabled={invalidCart} onClick={() => void checkout()}>{t('store.submit')} · {totalText}</Button><Link to="/account">{t('store.verify')}</Link></>}</section>}</>}</div>} />
         <Route path="login" element={isAuthenticated ? <Navigate to="/account" replace /> : <AccountForm afterLogin={() => navigate('/account')} />} />
         <Route path="account" element={isAuthenticated ? <section className="account-page"><h1>{t('store.account')}</h1><p>{user?.name}</p><EmailVerification /><div className="account-links"><Link to="/client/orders">{t('store.orders')} <ArrowRightOutlined /></Link><Link to="/client/billing">{t('store.billing')} <ArrowRightOutlined /></Link>{(user?.roles.includes('AGENT') || user?.platformAdmin) && <Link to="/admin">{t('store.admin')} <ArrowRightOutlined /></Link>}<Button icon={<LogoutOutlined />} onClick={() => void logout()}>{t('store.logout')}</Button></div></section> : <AccountForm afterLogin={() => {}} />} />
-        <Route path="recommendations" element={<PublicRecommendations query={search} products={products} quantities={cart.items} onDetail={setDetail} onAdd={addRecommendation} canBuy={canBuyRecommendation} />} />
-        <Route path="recommendations/:id" element={<PublicRecommendations query={search} products={products} quantities={cart.items} onDetail={setDetail} onAdd={addRecommendation} canBuy={canBuyRecommendation} />} />
+        <Route path="recommendations" element={<PublicRecommendations query={search} products={products} quantities={cart.items} onDetail={setDetail} onAdd={addRecommendation} canBuy={canBuyRecommendation} onSales={receiveSales} purchasePending={!tripsReady||authLoading} authKey={authKey} autoPaused={navigationOpen||tripPicker||!!detail||!!quantityProduct||cartConfirmationOpen}/>} />
+        <Route path="recommendations/:id" element={<PublicRecommendations query={search} products={products} quantities={cart.items} onDetail={setDetail} onAdd={addRecommendation} canBuy={canBuyRecommendation} onSales={receiveSales} purchasePending={!tripsReady||authLoading} authKey={authKey} autoPaused={navigationOpen||tripPicker||!!detail||!!quantityProduct||cartConfirmationOpen}/>} />
         <Route path="client/orders" element={<ProtectedRoute allowedRoles={['CUSTOMER']}><ClientOrders key={String(node)+':'+user?.id} node={node}/></ProtectedRoute>} />
         <Route path="client/billing" element={<ProtectedRoute allowedRoles={['CUSTOMER']}><ClientBilling key={String(node)+':'+user?.id} node={node}/></ProtectedRoute>} />
         <Route path="client/chat" element={<ProtectedRoute allowedRoles={['CUSTOMER']}><ClientChat /></ProtectedRoute>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes></Suspense>}
     </main></div>
-    <Drawer className="product-detail" title={t('store.details')} placement="right" width="min(100vw, 480px)" open={!!detail} onClose={() => setDetail(undefined)} closeIcon={<CloseOutlined />}>
-      {detail && <><div className="detail-photo">{image(detail)}</div><small>{detail.brand}</small><h2>{text(detail.name)}</h2><p>{text(detail.description)}</p><h3>{money(detail.price,detail.currency)} <small>{detail.saleUnit}</small></h3><Button type="primary" size="large" block disabled={!trips.some(journey => journey.merchantId === detail.merchantId)} icon={detail.merchantId === trip?.merchantId ? <PlusOutlined /> : <CalendarOutlined />} onClick={() => configureQuantity(detail)}>{t(detail.merchantId === trip?.merchantId ? 'store.set_quantity' : 'store.choose_trip')}</Button></>}
+    <StoreMobileNavigation quantity={quantity} homePath={homeNavigationPath}/>
+    <Drawer className="product-detail consumer-detail-drawer" title={t('store.details')} placement="right" width="min(1120px,100vw)" open={!!detail} onClose={() => setDetail(undefined)} closeIcon={<CloseOutlined />}>
+      {detail && <ConsumerDetail media={<div className="detail-photo">{image(detail)}</div>}><small>{detail.brand}</small><h1>{text(detail.name)}</h1>{locale!=='ja-JP'&&detail.name['ja-JP']&&detail.name['ja-JP']!==text(detail.name)&&<p lang="ja">（{detail.name['ja-JP']}）</p>}<SellingPrice product={detail}/><section><h2>{t('detail.description')}</h2><p>{text(detail.description)}</p></section><Button type="primary" size="large" block disabled={!trips.some(journey => journey.merchantId === detail.merchantId)} icon={detail.merchantId === trip?.merchantId ? <PlusOutlined /> : <CalendarOutlined />} onClick={() => configureQuantity(detail)}>{t(detail.merchantId === trip?.merchantId ? 'store.set_quantity' : 'store.choose_trip')}</Button></ConsumerDetail>}
     </Drawer>
     <Drawer className="journey-picker" title={t('store.trip')} placement="bottom" height="auto" open={tripPicker} onClose={() => setTripPicker(false)}>{tripChoices}{!scopedTrips.length && <Empty description={t('store.no_trips')} />}</Drawer>
     <Drawer className="quantity-sheet" title={t('store.quantity_title')} placement="bottom" height="auto" open={!!quantityProduct} onClose={() => setQuantityProduct(undefined)} destroyOnClose>

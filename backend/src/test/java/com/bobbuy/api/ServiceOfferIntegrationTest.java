@@ -1,0 +1,45 @@
+package com.bobbuy.api;
+import com.bobbuy.model.*;import com.bobbuy.repository.*;import com.bobbuy.security.JwtTokenService;import com.bobbuy.service.*;
+import com.fasterxml.jackson.databind.*;import com.fasterxml.jackson.databind.node.*;import java.util.*;
+import org.junit.jupiter.api.*;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;import org.springframework.boot.test.context.SpringBootTest;import org.springframework.http.MediaType;import org.springframework.test.web.servlet.*;
+import static org.assertj.core.api.Assertions.*;import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+@SpringBootTest(properties="spring.datasource.url=jdbc:h2:mem:service_offer_gate;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE")
+@AutoConfigureMockMvc(print=org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrint.NONE)
+class ServiceOfferIntegrationTest {
+ @Autowired MockMvc mvc;@Autowired ObjectMapper json;@Autowired BobbuyStore store;@Autowired UserRepository users;@Autowired JwtTokenService tokens;@Autowired RecommendationPostRepository posts;@Autowired RecommendationItemRepository items;@Autowired ProductRepository products;
+ String token,other;
+ @BeforeEach void setup(){items.deleteAll();posts.deleteAll();store.seed();token=tokens.createAccessToken(users.findById(1000L).orElseThrow());var u=new User(9091L,"Other service merchant",Role.AGENT,0);u.setUsername("service_other");users.save(u);other=tokens.createAccessToken(u);}
+ @AfterEach void cleanup(){items.deleteAll();posts.deleteAll();}
+ ObjectNode offer(){var n=json.createObjectNode();n.put("sourceUrl","https://outlook.live.com/owa/?ItemID=SYNTHETIC-SERVICE-MAIL&viewmodel=ReadMessageItem");n.put("sourceText","Synthetic original member service terms, not production mail");n.put("provider","Synthetic Bears");n.put("staff",2);n.put("hours",3);n.put("originalPrice",31020);n.put("price",26400);n.put("currency","JPY");n.put("taxIncluded",true);n.put("noExtraFees",false);n.put("applicationEnd","2026-11-30");n.put("serviceEnd","2026-12-11");n.put("costsReviewed",true);n.put("windowsReviewed",true);n.put("reviewed",true);
+  var fee=n.putArray("fees").addObject();fee.put("key","transport");fee.put("amount",990);var labels=fee.putObject("descriptions");var terms=n.putObject("terms");for(String l:RecommendationServiceOffer.LOCALES){labels.put(l,l+" per staff transport");var t=terms.putObject(l);t.put("title",l+" service title");t.put("description",l+" introduction");t.put("eligibility",l+" Executive only");t.put("regions",l+" selected areas only");t.put("restrictions",l+" no stacking");t.put("cancellation",l+" previous day17:00 onward100% service fee");t.putArray("benefits").add(l+" separate benefit1").add(l+" separate benefit2");}return n;
+ }
+ JsonNode data(ResultActions action)throws Exception{var result=action.andExpect(status().isOk()).andReturn();return json.readTree(result.getResponse().getContentAsByteArray()).path("data");}
+ ResultActions create(ObjectNode input)throws Exception{return mvc.perform(post("/api/merchant/recommendations/service-offers").header("Authorization","Bearer "+token).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsBytes(input)));}
+ ResultActions save(JsonNode d,ObjectNode input,String auth)throws Exception{return mvc.perform(put("/api/merchant/recommendations/"+d.at("/post/id").asLong()+"/service-offer").header("Authorization","Bearer "+auth).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsBytes(Map.of("offer",input,"version",d.at("/post/version").asLong()))));}
+ ResultActions publish(JsonNode d)throws Exception{return mvc.perform(post("/api/merchant/recommendations/"+d.at("/post/id").asLong()+"/publish").header("Authorization","Bearer "+token).contentType(MediaType.APPLICATION_JSON).content("{\"version\":"+d.at("/post/version").asLong()+"}"));}
+ @Test void serviceWithoutProductsSavesReopensPublishesAndRetainsFourLanguagesWithoutExposingMail()throws Exception{
+  long count=products.count();var created=data(create(offer()));assertThat(created.path("items")).isEmpty();assertThat(created.path("articleTranslations").size()).isEqualTo(3);assertThat(products.count()).isEqualTo(count);
+  var reread=data(mvc.perform(get("/api/merchant/recommendations/"+created.at("/post/id").asLong()).header("Authorization","Bearer "+token)));assertThat(reread.path("serviceOffer")).isEqualTo(created.path("serviceOffer"));
+  var published=data(publish(reread));assertThat(published.at("/post/published").asBoolean()).isTrue();var publicView=data(mvc.perform(get("/api/storefront/recommendations/"+created.at("/post/id").asLong())));assertThat(publicView.at("/serviceOffer/sourceUrl").isNull()).isTrue();assertThat(publicView.at("/serviceOffer/sourceText").isNull()).isTrue();assertThat(publicView.at("/articleTranslations/en-US/body").asText()).contains("en-US introduction","JPY 26400","per staff transport","？");assertThat(items.count()).isZero();assertThat(products.count()).isEqualTo(count);
+ }
+ @Test void repeatedOriginalIsIdempotentButChangedSourceOrFactsCannotOverwrite()throws Exception{
+  var input=offer();var first=data(create(input));var second=data(create(input));assertThat(second.at("/post/id")).isEqualTo(first.at("/post/id"));assertThat(posts.count()).isEqualTo(1);
+  input.put("sourceText","Different original body");create(input).andExpect(status().isBadRequest());assertThat(posts.count()).isEqualTo(1);
+ }
+ @Test void updateKeepsSourceImmutableUsesVersionAndRetainsHistory()throws Exception{
+  var input=offer();var first=data(create(input));((ObjectNode)input.at("/terms/ja-JP")).put("title","Revised synthetic service");var saved=data(save(first,input,token));assertThat(saved.at("/post/version").asLong()).isGreaterThan(first.at("/post/version").asLong());assertThat(data(save(first,input,token)).at("/post/version")).isEqualTo(saved.at("/post/version"));
+  input.put("price",25000);save(first,input,token).andExpect(status().isBadRequest());save(saved,input,other).andExpect(status().isNotFound());input.put("sourceText","Changed source");save(saved,input,token).andExpect(status().isBadRequest());
+  var history=data(mvc.perform(get("/api/merchant/recommendations/"+first.at("/post/id").asLong()+"/article-history").header("Authorization","Bearer "+token)));assertThat(history.toString()).contains("serviceOffer","26400","Revised synthetic service");
+ }
+ @Test void incompleteFeesTranslationsReviewAndContradictoryFactsAreRejected()throws Exception{
+  for(String bad:List.of("fees","translation","price","dates","review","currency","feeAmount")){var x=offer();switch(bad){case "fees"->x.putArray("fees");case "translation"->((ObjectNode)x.path("terms")).remove("en-US");case "price"->x.put("originalPrice",1);case "dates"->x.put("applicationEnd","2026-12-20");case "review"->x.put("windowsReviewed",false);case "currency"->x.put("currency","USD");case "feeAmount"->((ObjectNode)x.at("/fees/0")).put("amount",-1);}create(x).andExpect(status().isBadRequest());}assertThat(posts.count()).isZero();
+ }
+ @Test void forgedProductFieldsAndMixingProductsIntoServiceAreRejected()throws Exception{
+  var forged=offer();forged.put("productId","fake-id");create(forged).andExpect(status().isBadRequest());var service=data(create(offer()));
+  mvc.perform(post("/api/merchant/recommendations/"+service.at("/post/id").asLong()+"/from-product").header("Authorization","Bearer "+token).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsBytes(Map.of("productId","fake-id","productVersion",0,"facts",Map.of("name","fake","itemNumber","123"),"version",service.at("/post/version").asLong(),"reviewed",true)))).andExpect(status().isBadRequest());
+  mvc.perform(put("/api/merchant/recommendations/"+service.at("/post/id").asLong()).header("Authorization","Bearer "+token).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsBytes(Map.of("title","bypass","body","bypass","version",service.at("/post/version").asLong())))).andExpect(status().isBadRequest());assertThat(items.count()).isZero();
+ }
+ @Test void legacyGoodsWithoutProductsStillCannotPublishOrBeConvertedByServiceUpdate()throws Exception{
+  var goods=data(mvc.perform(post("/api/merchant/recommendations").header("Authorization","Bearer "+token)));goods=data(mvc.perform(put("/api/merchant/recommendations/"+goods.at("/post/id").asLong()).header("Authorization","Bearer "+token).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsBytes(Map.of("title","Goods","body","Goods body","version",goods.at("/post/version").asLong())))));publish(goods).andExpect(status().isBadRequest());save(goods,offer(),token).andExpect(status().isBadRequest());
+ }
+}

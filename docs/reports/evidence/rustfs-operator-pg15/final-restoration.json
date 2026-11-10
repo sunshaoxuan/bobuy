@@ -1,0 +1,45 @@
+{
+  "originalPg18VolumeAndSummaryRestored": {
+    "version": 20,
+    "images": 14,
+    "bytes": 846106,
+    "products": 34,
+    "recommendations": 60
+  },
+  "allOriginalImagesAndStoppedStatesRestored": true,
+  "backendTestMountsRemoved": true,
+  "onlyOwnedSyntheticPg15VolumeRemoved": "bobuy-local_rustfs_pg15_test_20261028",
+  "verifiedSyntheticBackupRetained": true,
+  "states": {
+    "bobuy-local-postgres-1": {
+      "running": false,
+      "image": "sha256:1a0c23d53c1ad77468c8653fa6eed4f4105cfbef9e6f027bc1dfeb16949a8c29"
+    },
+    "bobuy-local-backend-1": {
+      "running": false,
+      "image": "sha256:0d4b99fbe2e8e4a16b7a89e092febfb000fd175806241149c544e31ed0a52e10"
+    },
+    "bobuy-local-web-1": {
+      "running": false,
+      "image": "sha256:45b49182a3e1d3cd1330a26b8455ff61b10112e0abe7ac6ee01b4ca3ceea5f4c"
+    },
+    "bobuy-local-redis-1": {
+      "running": false,
+      "image": "sha256:efc27681bf81e6ed55cb581718b7818c6c04c39b1f9aa40854edd3ea2241b6ed"
+    },
+    "bobuy-local-rabbitmq-1": {
+      "running": false,
+      "image": "sha256:606d8c0d6b3c18d1da9afc53bc7cdb2a8d5486df91b5a9830e9e07626c9ae281"
+    },
+    "bobuy-local-mail-1": {
+      "running": false,
+      "image": "sha256:e22dce5b36f93c77082e204a3942fb6b283b7896e057458400a4c88344c3df68"
+    },
+    "bobuy-local-rustfs-1": {
+      "running": false,
+      "image": "sha256:e287e99762a4a3e7b706526e01f2ff755f67db165e9be9f6b907adc6fb6d6ee1"
+    }
+  },
+  "productionChanged": false,
+  "at": "2026-10-28T03:19:42.340123+00:00"
+}

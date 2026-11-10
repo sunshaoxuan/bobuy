@@ -1,0 +1,28 @@
+{
+  "firstWriteAt" : "2026-10-28T03:03:41.416737843Z",
+  "newRowsBehindCursor" : 20,
+  "sourceUpdates" : 5,
+  "lastWriteAt" : "2026-10-28T03:03:46.759325832Z",
+  "inventory" : {
+    "mediaRows" : 586,
+    "rawBytes" : 70518654,
+    "uniqueBlobs" : 525,
+    "uniqueBytes" : 63177975,
+    "sharedBytes" : 7340679,
+    "boundRows" : 470,
+    "verifiedRows" : 75,
+    "pendingRows" : 511,
+    "metadataErrors" : 0,
+    "objectErrors" : 0,
+    "listedObjects" : 0,
+    "listedBytes" : 0,
+    "extraObjects" : 0,
+    "schemaReady" : true,
+    "sourceStable" : true,
+    "complete" : false,
+    "sourceFingerprint" : "2fb761b8196c64500c98a1aae32ec3aaa9d1a36271029969da983911109d8365",
+    "problemMediaIds" : [ ]
+  },
+  "productionChanged" : false,
+  "at" : "2026-10-28T03:03:47.746743370Z"
+}

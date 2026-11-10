@@ -65,6 +65,12 @@ public class GlobalExceptionHandler {
     return ResponseEntity.status(409).body(new ApiError(ErrorCode.INVALID_REQUEST.name(),message));
   }
 
+  @ExceptionHandler(com.bobbuy.service.MediaStorageUnavailableException.class)
+  public ResponseEntity<ApiError> handleMediaUnavailable(com.bobbuy.service.MediaStorageUnavailableException exception) {
+    String message=messageSource.getMessage("error.internal",null,LocaleContextHolder.getLocale());
+    return ResponseEntity.status(503).body(new ApiError("SERVICE_UNAVAILABLE",message));
+  }
+
   @ExceptionHandler(Exception.class)
   public ResponseEntity<ApiError> handleUnexpected(Exception ex) {
     if (log.isDebugEnabled()) {

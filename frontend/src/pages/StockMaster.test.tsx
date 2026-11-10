@@ -1,9 +1,11 @@
-import { cleanup, render, screen, fireEvent, waitFor, waitForElementToBeRemoved, within } from '@testing-library/react';
+import { act, cleanup, render, screen, fireEvent, waitFor, waitForElementToBeRemoved, within } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { I18nProvider } from '../i18n';
 import React from 'react';
 import { api } from '../api';
+import {message} from 'antd';
 vi.mock('../components/ProductCatalogPanel',()=>({default:()=>null}));
+vi.mock('../components/ProductMarkerEditor',()=>({default:({productId}:{productId:string})=><output data-testid="marker-product-id">{productId}</output>}));
 
 vi.mock('../api', () => ({
   api: {
@@ -65,7 +67,54 @@ vi.mock('../api', () => ({
 
 import StockMaster from './StockMaster';
 
+// Top-level cases must have the same isolation as the grouped cases. A timed
+// out async body must never later call cleanup() on the next case's mounted UI.
+afterEach(()=>{message.destroy();vi.restoreAllMocks();window.localStorage.clear();});
+
+it('waits for persistence and keeps the drawer and entered values when saving fails',async()=>{
+ localStorage.setItem('bobbuy_locale','en-US');setMatchMedia(false);
+ const success=vi.spyOn(message,'success');success.mockClear();
+ let reject!: (reason:Error)=>void;
+ vi.mocked(api.onboardConfirm).mockImplementationOnce(()=>new Promise((_,fail)=>{reject=fail;}));
+ renderWithI18n(<StockMaster/>);
+ await screen.findByDisplayValue('Organic Milk');
+ fireEvent.click(screen.getAllByRole('button').find(button=>button.querySelector('.anticon-edit'))!);
+ const drawer=screen.getByRole('dialog');
+ const sku=within(drawer).getByDisplayValue('SKU-20934');fireEvent.change(sku,{target:{value:'SYNTHETIC-RETRY'}});
+ const saveButton=within(drawer).getByRole('button',{name:'Save & Close'});
+ fireEvent.click(saveButton);
+ await waitFor(()=>expect(reject).toBeTypeOf('function'));
+ expect(screen.getByRole('dialog')).toBeInTheDocument();expect(success).not.toHaveBeenCalled();
+ await act(async()=>{reject(new Error('Synthetic rejected save'));});
+ // Ant's loading icon changes the accessible name while pending. Observe the
+ // original control instead of re-querying a temporarily different name.
+ await waitFor(()=>expect(saveButton).not.toHaveClass('ant-btn-loading'),{timeout:5000});
+ expect(within(drawer).getByDisplayValue('SYNTHETIC-RETRY')).toBeInTheDocument();expect(success).not.toHaveBeenCalled();
+ fireEvent.click(saveButton);
+ await waitFor(()=>expect(screen.queryByRole('dialog')).not.toBeInTheDocument());expect(success).toHaveBeenCalledTimes(1);
+ // Two persistence attempts plus Drawer close animation can exceed five seconds
+ // under the hosted four-worker gate. Keep every state/assertion, with a bound.
+},15000);
+
+it('uses the real uppercase IMAGE gallery in embedded browsing and retains editable management',async()=>{
+ setMatchMedia(false);
+ const spy=vi.spyOn(api,'products').mockResolvedValueOnce([{product:{id:'visual-uppercase',name:{'zh-CN':'官方图片商品'},categoryId:'cat-1000',basePrice:0,itemNumber:'000123',mediaGallery:[{url:'/official-synthetic.png',type:'IMAGE'}]},displayName:'官方图片商品',displayDescription:''}] as Awaited<ReturnType<typeof api.products>>);
+ window.localStorage.setItem('bobbuy_locale','zh-CN');
+ try{
+  render(<I18nProvider><StockMaster embedded/></I18nProvider>);
+  const image=await screen.findByRole('img',{name:'官方图片商品'});expect(image).toHaveAttribute('src','/official-synthetic.png');
+  fireEvent.click(screen.getByText('紧凑管理',{exact:true}));await screen.findByDisplayValue('000123');
+ }finally{spy.mockRestore();}
+});
+
 const MOBILE_VIEWPORT_WIDTH = 375;
+it.each([false,true])('opens markers for the saved product at mobile=%s',async mobile=>{
+ setMatchMedia(mobile);window.localStorage.setItem('bobbuy_locale','en-US');
+ render(<I18nProvider><StockMaster/></I18nProvider>);
+ const entry=await screen.findByRole('button',{name:'Product markers Organic Milk'});
+ fireEvent.click(entry);expect(await screen.findByTestId('marker-product-id')).toHaveTextContent('prd-1000');
+});
+
 const DESKTOP_VIEWPORT_WIDTH = 1280;
 
 const createMatchMedia = (isMobile: boolean) => vi.fn().mockImplementation((query: string) => {

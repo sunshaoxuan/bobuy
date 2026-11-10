@@ -3,6 +3,9 @@ package com.bobbuy.api;
 import java.util.List;
 
 public class PickingChecklistItemResponse {
+  private OrderIdentitySnapshot snapshot;
+  public OrderIdentitySnapshot getSnapshot(){return snapshot;}
+  public PickingChecklistItemResponse withSnapshot(OrderIdentitySnapshot value){snapshot=value;return this;}
   private final String skuId;
   private final String itemName;
   private final int orderedQuantity;

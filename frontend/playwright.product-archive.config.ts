@@ -1,0 +1,2 @@
+import {defineConfig} from '@playwright/test';
+export default defineConfig({testDir:'./e2e',testMatch:'product-archive.local.spec.ts',workers:1,timeout:90_000,expect:{timeout:15_000},reporter:'list',use:{baseURL:'http://127.0.0.1:18080',actionTimeout:10_000,navigationTimeout:30_000,screenshot:'only-on-failure',trace:'retain-on-failure',launchOptions:process.env.BOBUY_BROWSER_PATH?{executablePath:process.env.BOBUY_BROWSER_PATH}:{}}});

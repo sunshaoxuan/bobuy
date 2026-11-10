@@ -15,7 +15,7 @@ it('serves the shared read-only directory on direct and compatibility routes in 
  show('/admin/currencies');expect(await screen.findByRole('heading',{name:'Currencies'})).toBeInTheDocument();
  expect(screen.getByRole('link',{name:'Currencies'})).toHaveAttribute('href','/admin/basic-data/currencies');
  expect(screen.getAllByText('Basic data').length).toBeGreaterThanOrEqual(2);
- expect(screen.getByText('JPY')).toBeInTheDocument();expect(screen.getByText('USD')).toBeInTheDocument();
+ expect(await screen.findByText('JPY')).toBeInTheDocument();expect(screen.getByText('USD')).toBeInTheDocument();
  expect(screen.queryByRole('spinbutton')).not.toBeInTheDocument();
  const reload=screen.getByRole('button',{name:/Reload/});await waitFor(()=>expect(reload).not.toHaveClass('ant-btn-loading'));
  fireEvent.click(reload);await waitFor(()=>expect(state.currencies).toHaveBeenCalledTimes(2));

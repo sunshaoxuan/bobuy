@@ -12,6 +12,7 @@ import {
   Breadcrumb,
   Card,
   Drawer,
+  Tooltip,Modal,
   Form,
   Grid,
   Select,
@@ -20,9 +21,10 @@ import {
   Row,
   Col,
   Checkbox
+  ,Segmented
 } from 'antd';
 import {
-  PlusOutlined,
+  PlusOutlined,TagsOutlined,
   SaveOutlined,
   DeleteOutlined,
   InboxOutlined,
@@ -30,15 +32,18 @@ import {
   SearchOutlined,
   DollarOutlined,
   DatabaseOutlined,
-  CameraOutlined
+  CameraOutlined,PictureOutlined
 } from '@ant-design/icons';
 import { useI18n } from '../i18n';
 import L10nInput, { type L10nValues } from '../components/L10nInput';
 import MediaGallery, { type MediaItem } from '../components/MediaGallery';
 import AiQuickAddModal from '../components/AiQuickAddModal';
+import {ProductBrand} from '../components/ProductMetadata';
 import ProductCatalogPanel from '../components/ProductCatalogPanel';
 import ProductPricingPanel from '../components/ProductPricingPanel';
+import ProductMarkerEditor from '../components/ProductMarkerEditor';
 import { api, type CategoryAttributeTemplateField, type MobileCategory, type MobileSupplier, type AiOnboardingSuggestion } from '../api';
+import './productRecords.css';
 
 const { Title, Text } = Typography;
 
@@ -55,6 +60,7 @@ interface StockItem {
   description?: string;
   descriptionL10n?: L10nValues;
   brand?: string;
+  specificationL10n?: L10nValues;
   sku?: string;
   mediaGallery?: MediaItem[];
   dynamicAttributes?: Record<string, string | number>;
@@ -182,11 +188,12 @@ const normalizeCategories = (categories: MobileCategory[]): MobileCategory[] =>
     attributeTemplate: normalizeCategoryTemplate(category.attributeTemplate)
   })) || [];
 
-export default function StockMaster() {
+export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{embedded?:boolean;refreshKey?:number;onDeleted?:()=>void}={}) {
   const { t, locale } = useI18n();
   const [categories, setCategories] = useState<MobileCategory[]>([]);
   const [suppliers, setSuppliers] = useState<MobileSupplier[]>([]);
   const [searchText, setSearchText] = useState('');
+  const [recordView,setRecordView]=useState<'gallery'|'manage'>(embedded?'gallery':'manage');
   const [toolbarCompact, setToolbarCompact] = useState(false);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [isQuickAddVisible, setIsQuickAddVisible] = useState(false);
@@ -246,6 +253,9 @@ export default function StockMaster() {
   }, [isMobile]);
 
   const [dataSource, setDataSource] = useState<StockItem[]>([]);
+  const [markerId,setMarkerId]=useState<string>(),[markerDirty,setMarkerDirty]=useState(false),[markerBusy,setMarkerBusy]=useState(false);
+  const openMarkers=(id:string)=>{setMarkerDirty(false);setMarkerBusy(false);setMarkerId(id);};
+  const closeMarkers=()=>{if(markerBusy)return;if(markerDirty)Modal.confirm({title:t('marker.discard'),onOk:()=>setMarkerId(undefined)});else setMarkerId(undefined);};
   const [catalogId,setCatalogId]=useState<string|undefined>(()=>new URLSearchParams(window.location.search).get('product')||undefined);
   const [pricingId,setPricingId]=useState<string>();
 
@@ -266,11 +276,12 @@ export default function StockMaster() {
         description: res.displayDescription,
         descriptionL10n: res.product.description,
         brand: res.product.brand,
+        specificationL10n:(res.product as unknown as {catalogData?:{specification?:L10nValues}}).catalogData?.specification,
         sku: res.product.itemNumber,
         mediaGallery: res.product.mediaGallery?.map((m, i) => ({
           id: `${res.product.id}-${i}`,
           url: m.url,
-          type: (m.type as 'image' | 'video') || 'image',
+          type: m.type?.toLowerCase()==='video'?'video':'image',
           title: m.title
         })) || [],
         priceTiers: res.product.priceTiers || [],
@@ -280,7 +291,7 @@ export default function StockMaster() {
       setDataSource(mapped);
     });
     return () => { cancelled = true; };
-  }, []);
+  }, [refreshKey]);
 
 
   const getLocalizedFallback = (values?: L10nValues, fallback?: string) => {
@@ -316,6 +327,7 @@ export default function StockMaster() {
   };
 
   const handleAddRow = () => {
+    setRecordView('manage');
     const newData: StockItem = {
       key: Date.now().toString(),
       name: '',
@@ -335,6 +347,7 @@ export default function StockMaster() {
     try {
       await api.deleteProduct(key);
       setDataSource(dataSource.filter((item) => item.key !== key));
+      onDeleted?.();
       message.success(t('stock.msg.deleted'));
     } catch (err) {
       console.error('Delete failed:', err);
@@ -463,10 +476,11 @@ export default function StockMaster() {
         await api.onboardConfirm({ ...suggestion, existingProductFound: true, existingProductId: item.key });
         setSyncStatus('saved');
       }
+      return true;
     } catch (err) {
       console.error('[Sync] Failed:', err);
       setSyncStatus('idle');
-      // message.error('Background sync failed');
+      return false;
     }
   };
 
@@ -507,42 +521,31 @@ export default function StockMaster() {
     form.resetFields();
   };
 
-  const saveEditingItem = (values: Partial<StockItem>, options: { closeAfterSave: boolean; showMessage: boolean }) => {
+  const saveEditingItem = async (values: Partial<StockItem>, options: { closeAfterSave: boolean; showMessage: boolean }) => {
     if (!editingItem) {
       return;
     }
-    setDataSource((prevData) => {
-      const index = prevData.findIndex((item) => editingItem.key === item.key);
-      if (index < 0) return prevData;
-      
-      const nextData = [...prevData];
-      const currentItem = nextData[index];
-      const rawValues = values as Partial<StockItem> & { merchantSkuEntries?: MerchantSkuEntry[] };
-      const { merchantSkuEntries, ...safeValues } = rawValues;
-      const merchantSkus = mapEntriesToMerchantSkus(merchantSkuEntries);
-      const nextNameL10n: L10nValues = values.nameL10n ?? currentItem.nameL10n ?? {};
-      const nextDescriptionL10n: L10nValues = values.descriptionL10n ?? currentItem.descriptionL10n ?? {};
-      
-      const updatedItem = {
-        ...currentItem,
-        ...safeValues,
-        nameL10n: nextNameL10n,
-        descriptionL10n: nextDescriptionL10n,
-        name: getLocalizedFallback(nextNameL10n, currentItem.name),
-        description: getLocalizedFallback(nextDescriptionL10n, currentItem.description),
-        mediaGallery: values.mediaGallery ?? currentItem.mediaGallery ?? [],
-        priceTiers: values.priceTiers ?? currentItem.priceTiers ?? [],
-        dynamicAttributes: values.dynamicAttributes ?? currentItem.dynamicAttributes ?? {},
-        merchantSkus
-      };
-      
-      nextData[index] = updatedItem;
-      
-      // Background sync to backend
-      syncItemToBackend(updatedItem);
-      
-      return nextData;
-    });
+    const currentItem = dataSource.find((item) => editingItem.key === item.key);
+    if (!currentItem) return;
+    const rawValues = values as Partial<StockItem> & { merchantSkuEntries?: MerchantSkuEntry[] };
+    const { merchantSkuEntries, ...safeValues } = rawValues;
+    const merchantSkus = mapEntriesToMerchantSkus(merchantSkuEntries);
+    const nextNameL10n: L10nValues = values.nameL10n ?? currentItem.nameL10n ?? {};
+    const nextDescriptionL10n: L10nValues = values.descriptionL10n ?? currentItem.descriptionL10n ?? {};
+    const updatedItem = {
+      ...currentItem,
+      ...safeValues,
+      nameL10n: nextNameL10n,
+      descriptionL10n: nextDescriptionL10n,
+      name: getLocalizedFallback(nextNameL10n, currentItem.name),
+      description: getLocalizedFallback(nextDescriptionL10n, currentItem.description),
+      mediaGallery: values.mediaGallery ?? currentItem.mediaGallery ?? [],
+      priceTiers: values.priceTiers ?? currentItem.priceTiers ?? [],
+      dynamicAttributes: values.dynamicAttributes ?? currentItem.dynamicAttributes ?? {},
+      merchantSkus
+    };
+    setDataSource(prior => prior.map(item => item.key === updatedItem.key ? updatedItem : item));
+    if (!await syncItemToBackend(updatedItem)) return;
 
     if (options.showMessage) {
       message.success(t('stock.drawer.update_success'));
@@ -571,7 +574,6 @@ export default function StockMaster() {
         return;
       }
       saveEditingItem(form.getFieldsValue(true), { closeAfterSave: false, showMessage: false });
-      setSyncStatus('saved');
       clearAutosaveTimer();
     }, AUTOSAVE_DELAY_MS);
   };
@@ -590,6 +592,7 @@ export default function StockMaster() {
     {
       title: t('stock.item.name'),
       dataIndex: 'name',
+      width: 220,
       render: (text: string, record: StockItem) => (
         <Input value={text} placeholder={t('stock.item.name_input_placeholder')} onChange={(e) => handleFieldChange(record.key, 'name', e.target.value)} />
       )
@@ -605,6 +608,7 @@ export default function StockMaster() {
     {
       title: t('stock.item.category'),
       dataIndex: 'category',
+      width: 150,
       render: (text: string, record: StockItem) => (
         <Input value={text} placeholder={t('stock.item.category_input_placeholder')} onChange={(e) => handleFieldChange(record.key, 'category', e.target.value)} />
       )
@@ -642,9 +646,10 @@ export default function StockMaster() {
       key: 'action',
       width: '8rem',
       render: (_: any, record: StockItem) => (
-        <Space>
+        <Space className="marker-product-actions" size={8} wrap>
           <Button size="small" disabled={record.isNew} onClick={()=>setCatalogId(record.key)}>{t('master.title')}</Button>
           <Button size="small" disabled={record.isNew} onClick={()=>setPricingId(record.key)}>{t('pricing.title')}</Button>
+          <Tooltip title={t('marker.assigned')}><Button className="marker-product-trigger" icon={<TagsOutlined aria-hidden/>} aria-label={t('marker.assigned')+' '+record.name} disabled={record.isNew} onClick={()=>openMarkers(record.key)}/></Tooltip>
           <Button type="text" icon={<EditOutlined />} onClick={() => record.catalogDriven?setCatalogId(record.key):openDrawer(record)} />
           <Button type="text" danger icon={<DeleteOutlined />} onClick={() => handleDelete(record.key)} />
         </Space>
@@ -679,9 +684,10 @@ export default function StockMaster() {
                 <Text className="stock-mobile-metric">
                   <DatabaseOutlined /> {item.stock}
                 </Text>
-                <Space size={4}>
+                <Space className="marker-product-actions" size={8} wrap>
                   <Button size="small" disabled={item.isNew} onClick={()=>setCatalogId(item.key)}>{t('master.title')}</Button>
                   <Button size="small" disabled={item.isNew} onClick={()=>setPricingId(item.key)}>{t('pricing.title')}</Button>
+                  <Tooltip title={t('marker.assigned')}><Button className="marker-product-trigger" icon={<TagsOutlined aria-hidden/>} aria-label={t('marker.assigned')+' '+localizedTitle} disabled={item.isNew} onClick={()=>openMarkers(item.key)}/></Tooltip>
                   <Button type="text" icon={<EditOutlined />} onClick={() => item.catalogDriven?setCatalogId(item.key):openDrawer(item)} aria-label={t('stock.master.edit_detail')} />
                   <Button type="text" danger icon={<DeleteOutlined />} onClick={() => handleDelete(item.key)} aria-label={t('stock.master.discard')} />
                 </Space>
@@ -702,16 +708,17 @@ export default function StockMaster() {
   );
 
   return (
-    <div style={{ padding: isMobile ? `0 0 ${MOBILE_BOTTOM_PADDING} 0` : `0 0 ${DESKTOP_BOTTOM_PADDING} 0` }}>
-      <Breadcrumb style={{ marginBottom: '1rem' }} items={[{ title: t('nav.dashboard') }, { title: t('nav.stock_master') }]} />
-      <ProductCatalogPanel id={catalogId} onChoose={setCatalogId} entries={dataSource.filter(row=>!row.isNew)} onSaved={values=>setDataSource(prior=>prior.map(row=>{const value=values.find(v=>v.productId===row.key);return value?{...row,catalogDriven:true,name:getLocalizedFallback(value.name,row.name),nameL10n:value.name,description:getLocalizedFallback(value.description,''),descriptionL10n:value.description,brand:value.brand??undefined,sku:value.itemNumber??undefined,category:value.categoryIds[0]??'',mediaGallery:value.gallery.map(p=>({id:p.sha256||p.url,url:p.url,type:p.type==='VIDEO'?'video' as const:'image' as const,title:p.title,visible:p.visible}))}:row;}))}/>
+    <div className={embedded?'product-records-workspace':undefined} style={{ padding: isMobile ? `0 0 ${MOBILE_BOTTOM_PADDING} 0` : `0 0 ${DESKTOP_BOTTOM_PADDING} 0` }}>
+      {!embedded&&<Breadcrumb style={{ marginBottom: '1rem' }} items={[{ title: t('nav.dashboard') }, { title: t('products.title') }]} />}
+      <Drawer className="marker-drawer" title={t('marker.assigned')} width="min(100vw,620px)" open={!!markerId} onClose={closeMarkers} maskClosable={false} destroyOnClose>{markerId&&<ProductMarkerEditor productId={markerId} onDirtyChange={setMarkerDirty} onBusyChange={setMarkerBusy}/>}</Drawer>
+      <ProductCatalogPanel id={catalogId} onChoose={setCatalogId} entries={dataSource.filter(row=>!row.isNew)} onSaved={(values,canonical=true)=>setDataSource(prior=>prior.map(row=>{const value=values.find(v=>v.productId===row.key);return value?{...row,catalogDriven:canonical,name:getLocalizedFallback(value.name,row.name),nameL10n:value.name,specificationL10n:value.specification,description:getLocalizedFallback(value.description,''),descriptionL10n:value.description,brand:value.brand??undefined,sku:value.itemNumber??undefined,category:value.categoryIds[0]??'',mediaGallery:value.gallery.map(p=>({id:p.sha256||p.url,url:p.url,type:p.type==='VIDEO'?'video' as const:'image' as const,title:p.title,visible:p.visible}))}:row;}))}/>
 
       <div className={`stock-toolbar ${isMobile ? 'stock-toolbar-mobile' : ''} ${toolbarCompact ? 'stock-toolbar-compact' : ''}`}>
         <div style={{ minWidth: 0 }}>
           <Title level={3} style={{ margin: 0 }} className="stock-page-title" data-testid="stock-master-title">
-            {t('stock.master.title')}
+            {t(embedded?'products.collection':'stock.master.title')}{embedded&&<span className="record-count">{filteredData.length}</span>}
           </Title>
-          <Text type="secondary">{t('stock.master.subtitle')}</Text>
+          <Text type="secondary">{t(embedded?'products.collection_hint':'stock.master.subtitle')}</Text>
         </div>
 
         {isMobile ? (
@@ -734,7 +741,7 @@ export default function StockMaster() {
             </Space>
           </Space>
         ) : (
-          <Space direction="vertical" align="end">
+          <Space direction={embedded?'horizontal':'vertical'} align={embedded?'center':'end'} size={12} wrap={embedded}>
             <Input
               placeholder={t('stock.master.search_placeholder')}
               prefix={<SearchOutlined />}
@@ -758,14 +765,33 @@ export default function StockMaster() {
         )}
       </div>
 
+      {embedded&&<div className="record-view-bar"><Segmented aria-label={t('products.view')} value={recordView} onChange={value=>setRecordView(value as 'gallery'|'manage')} options={[{label:t('products.gallery'),value:'gallery'},{label:t('products.manage'),value:'manage'}]}/><span>{t('products.original_images')}</span></div>}
+
       <ProductPricingPanel id={pricingId} onClose={()=>setPricingId(undefined)} onSaved={sheet=>setDataSource(prior=>prior.map(row=>row.key===sheet.productId?{...row,actualSale:sheet.regular??undefined}:row))}/>
-      {isMobile ? (
+      {embedded&&recordView==='gallery'?<div className="product-record-grid">{filteredData.map(item=>{
+        const image=item.mediaGallery?.find(media=>media.type==='image')?.url;
+        const name=getLocalizedFallback(item.nameL10n,item.name);
+        const category=categories.find(c=>c.id===item.category);
+        return <article className="product-record-pin" key={item.key}>
+          <button className="record-cover" onClick={()=>setCatalogId(item.key)} aria-label={t('store.detail_label',{name})}>
+            {image?<img src={image} alt={name} loading="lazy"/>:<span className="record-no-image"><InboxOutlined/>{t('gallery.pending')}</span>}
+            {!!item.mediaGallery?.length&&<span className="record-image-count"><PictureOutlined/> {item.mediaGallery.length}</span>}
+          </button>
+          <div className="record-caption"><div className="record-meta"><span>{item.sku||t('rec.not_stated')}</span><span>{t(item.isNew?'stock.status.new':'stock.status.modified')}</span></div>
+            <button className="record-title" onClick={()=>setCatalogId(item.key)}><h3>{name}</h3></button>
+            <ProductBrand brand={item.brand}/><p>{category?getLocalizedFallback(category.name):t('master.title')}</p>{getLocalizedFallback(item.specificationL10n,'')&&<p className="record-specification">{getLocalizedFallback(item.specificationL10n,'')}</p>}
+            <div className="record-sale-state">{item.actualSale?`${item.actualSale.currency} ${item.actualSale.amount}`:t('sale.pending')}</div>
+            <div className="record-card-actions marker-product-actions"><Tooltip title={t('marker.assigned')}><Button className="marker-product-trigger" icon={<TagsOutlined aria-hidden/>} aria-label={t('marker.assigned')+' '+name} disabled={item.isNew} onClick={()=>openMarkers(item.key)}/></Tooltip><Button onClick={()=>setCatalogId(item.key)}>{t('master.title')}</Button><Button type="text" onClick={()=>setPricingId(item.key)}>{t('pricing.title')}</Button><Button type="text" danger icon={<DeleteOutlined/>} aria-label={t('trash.remove')+' '+name} onClick={()=>handleDelete(item.key)}/></div>
+          </div>
+        </article>;
+      })}{filteredData.length===0&&<div className="record-empty"><InboxOutlined/><p>{t('stock.empty')}</p></div>}</div>:isMobile ? (
         renderMobileCards()
       ) : (
         <Card styles={{ body: { padding: 0 } }} style={{ overflow: 'hidden', borderRadius: '0.75rem' }} className="app-shadow-medium">
           <Table
             dataSource={filteredData}
             columns={columns}
+            scroll={{x:1400}}
             pagination={false}
             locale={{
               emptyText: (
@@ -805,7 +831,7 @@ export default function StockMaster() {
           isMobile ? null : (
             <Space>
                <Button onClick={closeDrawer}>{t('common.cancel')}</Button>
-              <Button onClick={handleDrawerSave} type="primary">
+              <Button onClick={handleDrawerSave} type="primary" loading={syncStatus === 'saving'}>
                 {t('stock.drawer.save')}
               </Button>
             </Space>
@@ -1042,7 +1068,7 @@ export default function StockMaster() {
           />
         </Form>
       </Drawer>
-        <div className="stock-mobile-fab-group">
+        {(!embedded||recordView==='manage')&&<div className="stock-mobile-fab-group">
           <Button
             shape="circle"
             icon={<PlusOutlined />}
@@ -1051,7 +1077,7 @@ export default function StockMaster() {
             className="app-shadow-medium"
             onClick={handleAddRow}
           />
-        </div>
+        </div>}
       <AiQuickAddModal
         visible={isQuickAddVisible}
         onCancel={() => setIsQuickAddVisible(false)}

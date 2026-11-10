@@ -94,11 +94,37 @@ jobs:
       - name: Build backend package for Docker image
         run: mvn -B -DskipTests package --file backend/pom.xml
 
+      - name: Build actual production service packages
+        run: mvn -B -DskipTests package -pl bobbuy-core,bobbuy-ai,bobbuy-im,bobbuy-auth,bobbuy-gateway -am
+
       - name: Build backend image
         run: docker build backend -t bobbuy-backend-test
 
+      - name: Build source-labelled production core image
+        run: >-
+          docker build . --file Dockerfile.service --build-arg MODULE=bobbuy-core
+          --label org.opencontainers.image.revision="$GITHUB_SHA"
+          --label org.opencontainers.image.version="ci-$GITHUB_SHA"
+          --tag "bobuy/core:ci-$GITHUB_SHA"
+
       - name: Build frontend image
-        run: docker build frontend -t bobbuy-frontend-test
+        run: >-
+          docker build frontend -t bobbuy-frontend-test
+          --tag "bobuy/frontend:ci-$GITHUB_SHA"
+          --label org.opencontainers.image.revision="$GITHUB_SHA"
+          --label org.opencontainers.image.version="ci-$GITHUB_SHA"
+
+      - name: Bind core and web release artifacts
+        run: python scripts/prepare-ci-release-artifacts.py --output "$RUNNER_TEMP/bobuy-release-artifact"
+
+      - name: Retain exact core and web artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: core-web-${{ github.sha }}
+          path: ${{ runner.temp }}/bobuy-release-artifact/
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 14
 
   postgres-migration-verify:
     name: postgres-migration-verify

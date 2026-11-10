@@ -1,0 +1,13 @@
+{
+  "freshSyntheticFlywayV20Baseline": true,
+  "actualFlywayV21Startup": true,
+  "pgConcurrentBindingsAndSharedHash": true,
+  "realSdkConcurrentOutboxVerified": true,
+  "idempotentScopedBackfill": true,
+  "realPgTransactionRollback": true,
+  "actualHttpPrivateIsolation": true,
+  "syntheticDatabaseRowsCleaned": true,
+  "pass": false,
+  "errorType": "AssertionError",
+  "reason": "Deleted product media hidden"
+}

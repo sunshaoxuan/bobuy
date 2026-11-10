@@ -197,7 +197,7 @@ public class AiAgentController {
 
         newProduct.setStorageCondition(suggestion.storageCondition());
         newProduct.setOrderMethod(suggestion.orderMethod());
-        newProduct.setCategoryId(suggestion.categoryId());
+        newProduct.setCategoryId(suggestion.categoryId() == null || suggestion.categoryId().isBlank() ? null : suggestion.categoryId());
         newProduct.setItemNumber(suggestion.itemNumber());
         newProduct.setTemporary(true);
         newProduct.setVisibilityStatus(targetVisibility != null ? targetVisibility : ProductVisibility.DRAFTER_ONLY);
