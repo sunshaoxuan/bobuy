@@ -1,9 +1,33 @@
 # Bears PostgreSQL and exact-JAR continuation
 
-This is a prepared test path, **not executed PG, Java17, JAR or recovery evidence**.
+This records the prepared path and its later execution. Actual Java17/PG2 results
+are in `.task-tmp/service-task-packages-20261110/java17-pg-run-r4/`; the exact
+formal JAR API/new-process recovery was independently accepted in
+`formal-jar-runtime-r2/REPORT.md` (SHA256
+`c2d811970e6ab0061cd73e8b581521b717aa42db97c8facaf5bb7ee4a94edc3e`).
+Accepted core JAR SHA256:
+`8c6ac3c5f75ccb17d02ca935e7171432b162f0d1f3e996a1097179406f12c63f`.
+Do not rebuild or rerun that unchanged core just for a frontend integration.
 It does not block the independent accepted c378 frontend release. No CI push or
-new database/container is required by the test code; use the existing admitted
+new database is required by the test code; use the existing admitted
 synthetic test stack and a real resource window, with hospital priority.
+
+## Confirmed compile/runtime split
+
+Use the existing host JDK22.0.2 with `maven.compiler.release=17` for compilation,
+then the cached Linux Java17 JRE for actual Surefire and formal-JAR processes.
+An additional Java17 JDK installation is unnecessary. The compiler host remains
+22; do not report it as17. Spring Boot parent3.2.4 maps `maven.compiler.release`
+to `java.version`17, and the retained original logs record `javac [debug release
+17]`. All570 inspected own class files have major61; they predate the new PG
+class, which still requires compilation.
+
+Maven3.9.9 already has a POSIX `bin/mvn` in the same installed distribution.
+Surefire3.1.2's cached plugin descriptor supports `jvm`, `forkCount` and its
+direct `test` goal. Compile on Windows, then run that direct goal in the cached
+JRE image with the existing Maven distribution/repository mounted. The test now
+rejects a non17 runtime before registering datasource properties. Exact standard
+commands and the confirmed synthetic PG boundary are in `RUN-JAVA17-PG.md`.
 
 ## Prepared PostgreSQL tests
 
@@ -37,27 +61,29 @@ Two new methods are prepared:
    cross-merchant/customer/anonymous writes rejected, original source URL/body/key
    unchanged by rejected attempts.
 
-Inside the **existing approved Java17/Maven test runner** attached to that same
-local test network, with the source checkout as working directory and only the
-existing synthetic DB identity supplied through environment:
+After host test compilation, inside the cached Java17 JRE attached to the local
+test network, with the existing Maven POSIX distribution/repository mounted,
+the checkout as working directory and synthetic DB identity from environment:
 
 ```sh
 # Required environment, from the existing synthetic fixture identity only:
 # BOBBUY_SERVICE_OFFER_PG=true
 # BOBBUY_SERVICE_TEST_DB_USER=bobuy
 # BOBBUY_SERVICE_TEST_DB_PASSWORD=<existing synthetic credential; do not log>
-mvn -B --file backend/pom.xml \
+# JAVA_TOOL_OPTIONS=-javaagent:/m2/repository/net/bytebuddy/byte-buddy-agent/1.14.12/byte-buddy-agent-1.14.12.jar
+/bin/sh /opt/maven/bin/mvn -o -B --file backend/pom.xml \
+  -Dmaven.repo.local=/m2/repository -Djvm=/opt/java/openjdk/bin/java \
+  -DforkCount=1 -DfailIfNoTests=true \
   -Dtest=ServiceOfferPostgresIntegrationTest \
   '-Dbobbuy.test.serviceOffer.jdbcUrl=jdbc:postgresql://postgres:5432/bobuy?currentSchema=c2_qa_82b8daf7' \
-  test
+  org.apache.maven.plugins:maven-surefire-plugin:3.1.2:test
 ```
 
 Use ordinary Maven, not the OHR host's `mvn -> mvnd` alias. Current source records
 show local PG has no published host port; do not invent127.0.0.1:15432 or open a
-new port. The test-runner's actual image/runtime/network identity and retained PG
-container/volume/schema must be checked at the future admitted run. Its image ID
-is not established by this preparation. Current host Java22/target17 results do
-not satisfy an actual Java17 run.
+new port. Recheck the test-runner's actual identity and retained PG boundary at
+execution. The cached JRE image is now pinned in RUN-JAVA17-PG.md. Current host
+Java22/release17 alone does not satisfy an actual Java17 run.
 
 The alternate existing hosted service uses URL
 `jdbc:postgresql://127.0.0.1:5432/bobbuy`, user `bobbuy`, and requires actual
@@ -67,17 +93,24 @@ locally or create a public push to obtain this run. No workflow was triggered.
 Both targets must already have the exact accepted V28.1 schema; this suite does
 not run Flyway to make an unknown database fit. Stop if the schema differs.
 
+The PG profile disables the generic test application's dev role injection,
+preserving a genuinely anonymous401 check. On the existing JRE17, preload the
+already cached Byte Buddy agent through `JAVA_TOOL_OPTIONS`; setting only
+`jacocoArgLine` as a user property did not preload it in the actual direct-goal
+run. Original initialization errors and the original401/403 fixture failure are
+retained in runs1-3. No permission assertion was relaxed.
+
 ## Exact formal application and recovery inputs
 
 The PG suite is Spring/MockMvc against source. It is **not** the production core
 wrapper startup or a new-process recovery test. The actual formal artifacts
 still need to be built and independently bound after the test-source candidate
 is frozen and necessary real PG validation is accepted. Repository standard
-packaging commands in a confirmed Java17 build runtime are:
+packaging commands on the host JDK22 with explicit Java17 API target are:
 
 ```sh
-mvn -B --file backend/pom.xml -DskipTests package
-mvn -B -DskipTests package -pl bobbuy-core -am
+mvn -B --file backend/pom.xml -Dmaven.compiler.release=17 -DskipTests package
+mvn -B -Dmaven.compiler.release=17 -DskipTests package -pl bobbuy-core -am
 ```
 
 The production application is `bobbuy-core/target/bobbuy-core-0.1.0.jar`, containing

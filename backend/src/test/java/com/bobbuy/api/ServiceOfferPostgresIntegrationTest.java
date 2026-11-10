@@ -37,6 +37,7 @@ class ServiceOfferPostgresIntegrationTest {
  static final String HOSTED="jdbc:postgresql://127.0.0.1:5432/bobbuy";
  static String targetUrl,targetSchema,targetUser;
  @DynamicPropertySource static void isolatedTarget(DynamicPropertyRegistry registry){
+  if(Runtime.version().feature()!=17)throw new IllegalStateException("Bears PG acceptance requires an actual Java17 test JVM; compile host may differ");
   if(!"true".equals(System.getenv("BOBBUY_SERVICE_OFFER_PG")))throw new IllegalStateException("Explicit synthetic PG opt-in required");
   targetUrl=System.getProperty("bobbuy.test.serviceOffer.jdbcUrl","");
   boolean local=LOCAL.equals(targetUrl);
