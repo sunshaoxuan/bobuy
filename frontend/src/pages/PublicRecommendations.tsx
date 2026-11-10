@@ -1,11 +1,13 @@
+import SafeArticleText from '../components/SafeArticleText';
 import RecommendationBrowse from './RecommendationBrowse';
-import {ConsumerDetail,DetailOffer} from '../components/ConsumerDetail';
+import {ConsumerDetail,DetailOffer,ProductDetailCode} from '../components/ConsumerDetail';
 import ReservationAdd from '../components/ReservationAdd';
 import {useDetailReturnFocus} from '../components/useDetailReturnFocus';
+import {openCardDetail} from '../components/openCardDetail';
 import {ProductBrand,ProductVariant} from '../components/ProductMetadata';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Alert, Button, Drawer, Empty, Input, Segmented, Spin, Tooltip } from 'antd';
-import { ArrowLeftOutlined, ArrowRightOutlined, CalendarOutlined, DownOutlined, ExpandOutlined, PlusOutlined, UpOutlined, UserOutlined } from '@ant-design/icons';
+import { Alert, Button, Drawer, Empty, Input, Segmented, Spin } from 'antd';
+import { ArrowLeftOutlined, ArrowRightOutlined, CalendarOutlined, DownOutlined, PlusOutlined, UpOutlined, UserOutlined } from '@ant-design/icons';
 import { Link, useParams, useSearchParams, useLocation } from 'react-router-dom';
 import { storefrontApi,recommendationApi, type RecommendationDetail, type StoreProduct } from '../api';
 import { localizedContent, useI18n } from '../i18n';
@@ -72,28 +74,26 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
     </header>
     {(article.missingTitle||article.missingBody)&&<Alert type="info" showIcon message={t(article.sourceKnown?'article.source_fallback':'article.legacy')} description={[article.missingTitle?t('rec.article_title'):'',article.missingBody?t('rec.body'):''].filter(Boolean).join(' · ')}/>}
     {detail.serviceOffer&&<span className="service-kind">{t('service.kind')}</span>}
-    <div className="rec-public-body" id={'rec-body-' + detail.post.id}>{shown.split(/\n\s*\n/).filter(Boolean).map((paragraph, index) => <p key={index}>{paragraph}</p>)}</div>
+    <div className="rec-public-body" id={'rec-body-' + detail.post.id}>{shown.split(/\n\s*\n/).filter(Boolean).map((paragraph, index) => <p key={index} style={{overflowWrap:'anywhere'}}>{!expanded&&truncated?paragraph:<SafeArticleText text={paragraph}/>}</p>)}</div>
     {truncated && <Button type="text" className="rec-expand" aria-expanded={expanded} aria-controls={'rec-body-' + detail.post.id} icon={expanded ? <UpOutlined /> : <DownOutlined />} onClick={() => setExpanded(value => !value)}>{t(expanded ? 'rec.collapse' : 'rec.read_more')}</Button>}
     {!detail.serviceOffer&&<div className="rec-products-heading"><h3>{t('rec.products')} <span>{detail.items.length}</span></h3>{!single && <Link to={'/recommendations/' + detail.post.id+search}>{t('rec.view')} <ArrowRightOutlined /></Link>}</div>}
     {!detail.serviceOffer&&<div className="product-masonry rec-public-products" ref={grid}>{detail.items.map((item, index) => {
       const text=recommendationText(item,locale);
       const product = item.productId ? catalog.get(item.productId) : undefined;
       const buyable = !!product && canBuy(product);
-      return <article className="store-product rec-pin" key={item.id} data-occurrence-key={`${detail.post.id}:${item.id}`} data-pressed={pressedItem===item.id||undefined}
+      return <article className="store-product rec-pin" key={item.id} data-occurrence-key={`${detail.post.id}:${item.id}`} data-card-detail data-pressed={pressedItem===item.id||undefined} onClick={event=>openCardDetail(event,trigger=>openItem(item,trigger))}
         onPointerDown={event=>{if(event.pointerType!=='mouse')setPressedItem(item.id);}}
         onPointerUp={()=>setPressedItem(undefined)} onPointerCancel={()=>setPressedItem(undefined)}
         onPointerLeave={()=>setPressedItem(undefined)} onLostPointerCapture={()=>setPressedItem(undefined)}>
         <div className={'product-tile product-shape-' + index % 4}>
-          <button className="product-photo" data-detail-trigger="photo" aria-label={t('store.detail_label', {name:item.name})} onClick={event => openItem(item,event.currentTarget)}>{item.gallery?.[0]?.url?<img src={item.gallery[0].url} alt={text.name} loading={index < 2 && number === 1 ? 'eager' : 'lazy'} />:<span className="rec-no-product-image">{t('gallery.pending')}</span>}</button>
+          <button type="button" className="product-photo" data-detail-trigger="photo" aria-label={t('store.detail_label', {name:text.name})} onClick={event => openItem(item,event.currentTarget)}>{item.gallery?.[0]?.url?<img src={item.gallery[0].url} alt={text.name} loading={index < 2 && number === 1 ? 'eager' : 'lazy'} />:<span className="rec-no-product-image">{t('gallery.pending')}</span>}</button>
           <ReservationAdd allowed={buyable} quote={product} name={text.name} count={item.productId?quantities[item.productId]:undefined} onAdd={()=>{if(product&&buyable)onAdd(product);}}/>
-          <Tooltip title={t('store.details')}><button className="rec-pin-preview" data-detail-trigger="preview" aria-label={t('store.details') + ': ' + text.name} onClick={event => openItem(item,event.currentTarget)}><ExpandOutlined /></button></Tooltip>
-          <div className="product-body"><ProductBrand brand={item.brand}/><button className="product-name" data-detail-trigger="name" onClick={event=>openItem(item,event.currentTarget)}><h3 title={text.name}><RecommendationName text={text}/></h3></button>{text.specification&&<p className="rec-compact-spec">{text.specification}</p>}{text.missing&&<small>{t('article.field_source',{fields:text.sourceFields.map(key=>t(key==='description'?'master.descriptions':key==='specification'?'master.specifications':'rec.fact.'+key)).join(' · ')})}</small>}</div>
+          <div className="product-body"><ProductBrand brand={item.brand}/><button type="button" className="product-name" data-detail-trigger="name" onClick={event=>openItem(item,event.currentTarget)}><h3 title={text.name}><RecommendationName text={text}/></h3></button>{text.specification&&<p className="rec-compact-spec">{text.specification}</p>}{text.missing&&<small>{t('article.field_source',{fields:text.sourceFields.map(key=>t(key==='description'?'master.descriptions':key==='specification'?'master.specifications':'rec.fact.'+key)).join(' · ')})}</small>}</div>
         </div>
         <small className="rec-pin-code">{t('rec.code')}: {item.itemNumber || t('rec.not_stated')}</small>
         {!!item.categories?.length&&<div className="rec-item-categories">{item.categories.map(category=><span key={category.id}>{localizedContent(category.name,locale)}</span>)}</div>}
         {item.showSupplier&&item.supplierName&&<small className="rec-supplier">{t('class.supplier')}: {localizedContent(item.supplierName,locale)}</small>}
         <OfferInfo facts={{...item,offerNotes:text.offerNotes}} compact/>
-        {!!(text.offerNotes||text.description)&&<button className="rec-condition-link" data-detail-trigger="conditions" onClick={event=>openItem(item,event.currentTarget)}>{t('rec.conditions_detail')}</button>}
         {product&&<SellingPrice product={product}/>}
       </article>;
     })}</div>}
@@ -107,7 +107,7 @@ function RecommendationProductDetail({item,product,onClose,onAdd,canBuy,purchase
  if(!item)return null;const text=recommendationText(item,locale),gallery=item.gallery??[];
  return <Drawer className="rec-product-detail consumer-detail-drawer" title={t('store.details')} width="min(1120px,100vw)" open={!!item} onClose={onClose}>
   <ConsumerDetail media={<RecommendationImageViewer consumer key={item.id} pictures={gallery} name={text.name}/>}>
-  <ProductBrand brand={item.brand}/><h1><RecommendationName text={text}/></h1><ProductVariant model={item.model} packaging={item.packaging}/><p>{t('rec.code')}: {item.itemNumber||t('rec.not_stated')}</p>{text.missing&&<Alert type="info" message={t('article.field_source',{fields:text.sourceFields.map(key=>t(key==='description'?'master.descriptions':key==='specification'?'master.specifications':'rec.fact.'+key)).join(' · ')})}/>}
+  <ProductBrand brand={item.brand}/><h1><RecommendationName text={text}/></h1><ProductDetailCode value={item.itemNumber}/><ProductVariant model={item.model} packaging={item.packaging}/>{text.missing&&<Alert type="info" message={t('article.field_source',{fields:text.sourceFields.map(key=>t(key==='description'?'master.descriptions':key==='specification'?'master.specifications':'rec.fact.'+key)).join(' · ')})}/>}
   {text.specification&&<p className="rec-detail-spec">{text.specification}</p>}
   {product&&<SellingPrice product={product}/>}
   <DetailOffer facts={{...item,offerNotes:text.offerNotes}}/>

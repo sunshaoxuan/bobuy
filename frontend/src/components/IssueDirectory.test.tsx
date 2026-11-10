@@ -3,13 +3,120 @@ import {MemoryRouter} from 'react-router-dom';
 import {I18nProvider} from '../i18n';
 import IssueDirectory from './IssueDirectory';
 const mocks=vi.hoisted(()=>({browseIssues:vi.fn()}));vi.mock('../api',()=>({storefrontApi:mocks}));
-const row=(id:number,title='Issue '+id)=>({post:{id,publishedAt:'2026-11-01T00:00:00Z'},title,itemCount:3,history:false,service:false});
-const page=(items=[row(1)],extra={})=>({items,page:0,size:20,total:items.length,hasNext:false,revision:'directory',datasetRevision:'dataset',...extra});
+const row=(id:number,title='Issue '+id)=>({post:{id,publishedAt:'2026-11-01T00:00:00Z'},title,itemCount:3,publicItemCount:7,issueDate:null as string|null,issueDateSource:'UNKNOWN',suppliers:[] as {id:string;name:Record<string,string>}[],history:false,service:false});
+const page=(items:unknown[]=[row(1)],extra={})=>({items,page:0,size:20,total:items.length,hasNext:false,revision:'directory',datasetRevision:'dataset',...extra});
 const props={wide:true,primaryReady:false,obscured:false,refresh:0,checkDataset:()=>true,onRefresh:vi.fn()};
 function tree(extra={}){return <I18nProvider><MemoryRouter initialEntries={['/recommendations?node=7&query=q&category=c&item=3']}><IssueDirectory {...props} {...extra}/></MemoryRouter></I18nProvider>;}
 beforeEach(()=>{vi.clearAllMocks();localStorage.setItem('bobbuy_locale','en-US');mocks.browseIssues.mockResolvedValue(page());});
-it('waits for primary cards then fetches one light page, retaining it across hover/focus/collapse',async()=>{const view=render(tree());fireEvent.mouseEnter(view.container.querySelector('aside')!);expect(mocks.browseIssues).not.toHaveBeenCalled();view.rerender(tree({primaryReady:true}));await screen.findByRole('link',{name:/Issue 1/});expect(mocks.browseIssues).toHaveBeenCalledTimes(1);const link=screen.getByRole('link',{name:/Issue 1/});expect(link).toHaveAttribute('href','/recommendations?node=7&query=q&category=c&topic=1');for(let i=0;i<3;i++){fireEvent.mouseEnter(view.container.querySelector('aside')!);fireEvent.mouseLeave(view.container.querySelector('aside')!);}fireEvent.focus(screen.getByRole('button',{name:/Issue index/}));expect(mocks.browseIssues).toHaveBeenCalledTimes(1);});
-it('keeps at most four compact clues, the actual selected issue, accessible full titles and manual pagination',async()=>{mocks.browseIssues.mockResolvedValueOnce(page(Array.from({length:20},(_,i)=>row(i+1)),{total:21,hasNext:true})).mockResolvedValueOnce(page([row(21)],{page:1,total:21}));const view=render(tree({primaryReady:true,selected:{id:99,title:'Selected off-page issue',itemCount:4}}));await waitFor(()=>expect(view.container.querySelectorAll('a')).toHaveLength(4));expect(screen.getByRole('link',{name:/Selected off-page issue/})).toHaveAttribute('aria-current','page');fireEvent.click(screen.getByRole('button',{name:/Issue index/}));expect(view.container.querySelectorAll('a')).toHaveLength(21);fireEvent.click(screen.getByRole('button',{name:'More issues'}));await screen.findByRole('link',{name:/Issue 21 ·/});expect(mocks.browseIssues.mock.calls[1][0]).toMatchObject({page:1,revision:'directory',merchantId:7,query:'',period:'all'});});
-it('offers a labelled narrow-screen entry without prefetch, Escape closes and does not reopen on returned focus',async()=>{const view=render(tree({wide:false,primaryReady:true}));const toggle=screen.getByRole('button',{name:/Issue index/});expect(mocks.browseIssues).not.toHaveBeenCalled();fireEvent.click(toggle);await screen.findByRole('link',{name:/Issue 1/});fireEvent.keyDown(toggle,{key:'Escape'});expect(toggle).toHaveAttribute('aria-expanded','false');expect(toggle).toHaveFocus();fireEvent.focus(toggle);expect(toggle).toHaveAttribute('aria-expanded','false');view.rerender(tree({wide:false,primaryReady:true,obscured:true}));expect(view.container.querySelector('aside')).toHaveAttribute('hidden');expect(mocks.browseIssues).toHaveBeenCalledTimes(1);});
-it('discards a late response from an older query scope',async()=>{let finish!:(value:ReturnType<typeof page>)=>void;mocks.browseIssues.mockImplementationOnce(()=>new Promise(resolve=>{finish=resolve;})).mockResolvedValueOnce(page([row(2,'Fresh issue')]));const view=render(tree({primaryReady:true,query:'old'}));view.rerender(tree({primaryReady:true,query:'new'}));await screen.findByRole('link',{name:/Fresh issue/});await act(async()=>finish(page([row(1,'Stale issue')])));expect(screen.queryByRole('link',{name:/Stale issue/})).not.toBeInTheDocument();});
-it('closes a mouse-hovered directory on Escape even when keyboard focus started outside',async()=>{const view=render(tree({primaryReady:true}));const link=await screen.findByRole('link',{name:/Issue 1/});fireEvent.mouseEnter(view.container.querySelector('aside')!);const toggle=screen.getByRole('button',{name:/Issue index/});expect(toggle).toHaveAttribute('aria-expanded','true');fireEvent.keyDown(window,{key:'Escape'});expect(toggle).toHaveAttribute('aria-expanded','false');expect(toggle).toHaveFocus();fireEvent.focus(link);expect(toggle).toHaveAttribute('aria-expanded','true');});
+
+function mountOpen(element:React.ReactElement){const view=render(element);fireEvent.click(screen.getByRole('button',{name:/Issue index|期数目录|期數目錄|記事一覧/}));return view;}
+it.each([true,false])('starts closed with no directory request or layout placeholder (wide=%s)',async wide=>{
+ const view=render(tree({wide,primaryReady:true}));expect(screen.queryByRole('navigation')).not.toBeInTheDocument();expect(view.container.querySelector('aside')).toBeNull();expect(mocks.browseIssues).not.toHaveBeenCalled();
+ const trigger=screen.getByRole('button',{name:'Issue index'});expect(trigger).toHaveAttribute('aria-expanded','false');fireEvent.click(trigger);await screen.findByRole('link',{name:/Issue 1/});expect(screen.getByRole('dialog')).toBeInTheDocument();expect(mocks.browseIssues).toHaveBeenCalledTimes(1);
+});
+it('keeps server order, unique current selection, bounded pagination and the scoped route',async()=>{
+ mocks.browseIssues.mockResolvedValueOnce(page(Array.from({length:20},(_,i)=>row(i+1)),{total:21,hasNext:true})).mockResolvedValueOnce(page([row(21)],{page:1,total:21}));mountOpen(tree({selected:{id:7,title:'Issue 7'}}));await screen.findByRole('link',{name:/Issue 1 /});
+ expect(document.querySelectorAll('[aria-current="page"]')).toHaveLength(1);expect(screen.getByRole('link',{name:/Issue 7 /})).toHaveAttribute('href','/recommendations?node=7&query=q&category=c&topic=7');
+ expect([...document.querySelectorAll('nav a')].map(a=>a.getAttribute('href')?.split('topic=')[1])).toEqual(Array.from({length:20},(_,i)=>String(i+1)));
+ fireEvent.click(screen.getByRole('button',{name:'More issues'}));await screen.findByRole('link',{name:/Issue 21 /});expect(mocks.browseIssues.mock.calls[1][0]).toMatchObject({page:1,revision:'directory',merchantId:7,period:'all'});
+});
+it('closes with Escape and restores the trigger; reopening reuses loaded metadata',async()=>{
+ mountOpen(tree());await screen.findByRole('link',{name:/Issue 1/});const trigger=screen.getByRole('button',{name:'Issue index'});fireEvent.keyDown(screen.getByRole('dialog'),{key:'Escape',keyCode:27});await waitFor(()=>expect(trigger).toHaveAttribute('aria-expanded','false'));await waitFor(()=>expect(trigger).toHaveFocus());fireEvent.click(trigger);await screen.findByRole('link',{name:/Issue 1/});expect(mocks.browseIssues).toHaveBeenCalledTimes(1);
+});
+it('closes after selecting an issue and retains filters without reopening',async()=>{
+ mountOpen(tree());fireEvent.click(await screen.findByRole('link',{name:/Issue 1/}));await waitFor(()=>expect(screen.getByRole('button',{name:'Issue index'})).toHaveAttribute('aria-expanded','false'));expect(mocks.browseIssues).toHaveBeenCalledTimes(1);
+});
+it('discards a late query response and waits for an explicit open in the new scope',async()=>{
+ let finish!:(v:ReturnType<typeof page>)=>void;mocks.browseIssues.mockImplementationOnce(()=>new Promise(r=>finish=r)).mockResolvedValueOnce(page([row(2,'Fresh issue')]));const view=mountOpen(tree({query:'old'}));await waitFor(()=>expect(mocks.browseIssues).toHaveBeenCalledTimes(1));view.rerender(tree({query:'new'}));await waitFor(()=>expect(screen.getByRole('button',{name:'Issue index'})).toHaveAttribute('aria-expanded','false'));fireEvent.click(screen.getByRole('button',{name:'Issue index'}));await screen.findByRole('link',{name:/Fresh issue/});await act(async()=>finish(page([row(1,'Stale issue')])));expect(screen.queryByRole('link',{name:/Stale issue/})).not.toBeInTheDocument();
+});
+it('hides and closes the directory when a product detail or other modal owns interaction',async()=>{
+ const view=mountOpen(tree());await screen.findByRole('link',{name:/Issue 1/});view.rerender(tree({obscured:true}));await waitFor(()=>expect(document.querySelector('.issue-directory-launcher')).toHaveAttribute('hidden'));expect(screen.queryByRole('button',{name:'Issue index'})).not.toBeInTheDocument();
+});
+it('uses the server public total rather than query matches and never inserts selected fallback totals',async()=>{
+ mocks.browseIssues.mockResolvedValue(page([{...row(9),itemCount:1,publicItemCount:36}]));
+ const view=mountOpen(tree({primaryReady:true,query:'one match',selected:{id:8,title:'Off-page',itemCount:999,publicItemCount:999}}));
+ const link=await screen.findByRole('link',{name:/Issue 9/});expect(link).toHaveAccessibleName(/36 public items/);expect(link).not.toHaveAccessibleName(/1 public items/);
+ expect(screen.queryByRole('link',{name:/Off-page/})).not.toBeInTheDocument();expect(document.body.querySelectorAll('.issue-directory-count')).toHaveLength(1);
+});
+it('retains the actual publication date when other public metadata is missing without inventing count, supplier or source date',async()=>{
+ mocks.browseIssues.mockResolvedValue(page([{...row(9,'Costco 2026-11-01'),post:{...row(9).post,publisherName:'An operator'},publicItemCount:undefined,suppliers:undefined}]));
+ const view=mountOpen(tree({primaryReady:true}));const link=await screen.findByRole('link',{name:/Costco 2026-11-01/});
+ expect(link).toHaveAccessibleName(/Issue date awaiting source verification/);expect(link).toHaveAccessibleName(/Published on \(Japan time\): 11\/01\/2026/);expect(link).not.toHaveAccessibleName(/public items|An operator/);expect(document.body.querySelector('.issue-directory-count')).toBeNull();expect(document.body.querySelector('.issue-directory-supplier-compact')).toBeNull();expect(document.body.querySelector('.issue-directory-date')?.getAttribute('data-date-kind')).toBe('publication');
+});
+it('renders the issue LocalDate independently from publication time and keeps the server order',async()=>{
+ mocks.browseIssues.mockResolvedValue(page([{...row(7),issueDate:'2026-11-04',issueDateSource:'REVIEWED_SOURCE'}, {...row(9),issueDate:'2026-11-09',issueDateSource:'REVIEWED_SOURCE'}]));
+ const view=mountOpen(tree({primaryReady:true}));await screen.findByRole('link',{name:/Issue 7/});
+ expect([...document.body.querySelectorAll('.issue-directory-date')].map(e=>e.getAttribute('datetime'))).toEqual(['2026-11-04','2026-11-09']);
+ expect([...document.body.querySelectorAll('a')].map(e=>e.getAttribute('href')?.split('topic=')[1])).toEqual(['7','9']);
+ expect(screen.getByRole('link',{name:/Issue 7/})).toHaveAccessibleName(/Issue date: 11\/04\/2026/);
+});
+it.each(['2026-02-29','2026-11-01T00:00:00Z','not a date'])('does not turn invalid issue date %s into a guessed calendar day',async issueDate=>{
+ mocks.browseIssues.mockResolvedValue(page([{...row(9),issueDate,issueDateSource:'REVIEWED_SOURCE'}]));const view=mountOpen(tree({primaryReady:true}));
+ expect(await screen.findByRole('link',{name:/Issue 9/})).toHaveAccessibleName(/Issue date awaiting source verification/);expect(document.body.querySelector('[data-date-kind="issue"]')).toBeNull();expect(document.body.querySelector('[data-date-kind="publication"]')?.getAttribute('datetime')).toBe('2026-11-01T00:00:00Z');
+});
+it('keeps all actual supplier names accessible while compact text can be abbreviated',async()=>{
+ const suppliers=[{id:'a',name:{'en-US':'Official warehouse'}},{id:'b',name:{'en-US':'A very long second supplier name'}},{id:'a',name:{'en-US':'Official warehouse'}}];
+ mocks.browseIssues.mockResolvedValue(page([{...row(9),suppliers}]));const view=mountOpen(tree({primaryReady:true}));const link=await screen.findByRole('link',{name:/Issue 9/});
+ expect(link).toHaveAccessibleName(/Official warehouse · A very long second supplier name/);expect(document.body.querySelector('.issue-directory-supplier-compact')?.textContent).toBe('Official warehouse · A very long second supplier name');
+ expect(document.body.querySelector('.issue-directory-suppliers')?.textContent).toContain('A very long second supplier name');
+});
+it.each([['en-US','Issue date awaiting source verification','To verify','7 public items'],['zh-CN','期次日期待核对','待核对','7 项公开内容'],['zh-TW','期次日期待核對','待核對','7 項公開內容'],['ja-JP','号の日付は出典確認待ち','確認待ち','公開中 7 件']])('labels an unverified source with no known publication date and real counts in %s',async(locale,unverified,compact,total)=>{
+ localStorage.setItem('bobbuy_locale',locale);mocks.browseIssues.mockResolvedValue(page([{...row(1),post:{id:1,publishedAt:undefined}}]));const view=mountOpen(tree({primaryReady:true}));const link=await screen.findByRole('link',{name:/Issue 1/});expect(link).toHaveAccessibleName(expect.stringContaining(unverified));expect(link).toHaveAccessibleName(expect.stringContaining(total));expect(document.body.querySelector('.issue-directory-date-unknown small')?.textContent).toBeUndefined();
+ expect(document.body.querySelector('.issue-directory-date-unknown small')).toBeNull();expect(document.body.querySelectorAll('.issue-directory-date-review-status')).toHaveLength(0);expect(document.body.querySelector('.issue-directory-date-review-status')?.textContent).toBeUndefined();expect(document.body.querySelectorAll('.issue-directory-date-note')).toHaveLength(0);
+});
+
+it('keeps title dates as original text and shows only one pending status per expanded card',async()=>{
+ mocks.browseIssues.mockResolvedValue(page([row(9,'Original issue (2026/11/9)'),row(8,'Warehouse picks'),row(7,'Original issue (2026/11/4)')]));
+ const view=mountOpen(tree({primaryReady:true,selected:{id:9,title:'Original issue (2026/11/9)'}}));await screen.findByRole('link',{name:/Original issue \(2026\/11\/9\)/});
+ expect(document.body.querySelectorAll('[data-date-kind="issue"]')).toHaveLength(0);expect(document.body.querySelectorAll('[data-date-kind="publication"]')).toHaveLength(3);expect(document.body.querySelectorAll('.issue-directory-date-unknown small')).toHaveLength(0);expect(document.body.querySelectorAll('.issue-directory-date-review-status')).toHaveLength(0);expect(document.body.querySelectorAll('.issue-directory-date-note')).toHaveLength(0);expect(document.body.querySelectorAll('[aria-current="page"]')).toHaveLength(1);
+ expect(document.body.querySelector('.issue-directory-date-note')).toBeNull();expect(screen.getByRole('link',{name:/Warehouse picks/})).toHaveAccessibleName(/awaiting source verification/);expect(screen.getByRole('link',{name:/Warehouse picks/})).toHaveAccessibleName(/Published on \(Japan time\)/);
+});
+it('does not turn an unreviewed or conflicting DTO date into a confirmed issue calendar',async()=>{
+ mocks.browseIssues.mockResolvedValue(page([{...row(9),issueDate:'2026-11-09'}, {...row(8),issueDate:'2026-11-08',issueDateSource:'REVIEWED_SOURCE',post:{...row(8).post,issueDate:'2026-11-07',issueDateSource:'REVIEWED_SOURCE'}}]));
+ const view=mountOpen(tree({primaryReady:true}));await screen.findByRole('link',{name:/Issue 9/});expect(document.body.querySelectorAll('[data-date-kind="issue"]')).toHaveLength(0);expect(document.body.querySelectorAll('[data-date-kind="publication"]')).toHaveLength(2);expect(screen.getByRole('link',{name:/Issue 8/})).toHaveAccessibleName(/awaiting source verification/);
+});
+it('uses the reviewed calendar even when a title or publication timestamp describes a different date',async()=>{
+ mocks.browseIssues.mockResolvedValue(page([{...row(9,'Campaign ends 2026/11/15'),issueDate:'2026-11-09',issueDateSource:'REVIEWED_SOURCE',post:{...row(9).post,publishedAt:'2026-11-10T23:59:59Z',issueDate:'2026-11-09',issueDateSource:'REVIEWED_SOURCE'}}]));
+ const view=mountOpen(tree({primaryReady:true}));const link=await screen.findByRole('link',{name:/Campaign ends/});expect(link).toHaveAccessibleName(/Issue date: 11\/09\/2026/);expect(document.body.querySelector('.issue-directory-date')?.getAttribute('datetime')).toBe('2026-11-09');expect(document.body.querySelector('.issue-directory-date-note')).toBeNull();
+});
+it('retains server date and same-day ID order after an old issue is edited or receives more items',async()=>{
+ const first=[{...row(9),issueDate:'2026-11-09',issueDateSource:'REVIEWED_SOURCE'},{...row(7),issueDate:'2026-11-09',issueDateSource:'REVIEWED_SOURCE'},row(8)];mocks.browseIssues.mockResolvedValueOnce(page(first)).mockResolvedValueOnce(page(first.map(r=>r.post.id===7?{...r,publicItemCount:37,post:{...r.post,updatedAt:'2099-12-31T23:59:59',publishedAt:'2099-12-31T23:59:59Z'}}:r)));
+ const view=mountOpen(tree({primaryReady:true,selected:{id:7,title:'Issue 7'}}));await screen.findByRole('link',{name:/Issue 9/});expect([...document.body.querySelectorAll('a')].map(a=>a.getAttribute('href')?.split('topic=')[1])).toEqual(['9','7','8']);view.rerender(tree({primaryReady:true,refresh:1,selected:{id:7,title:'Issue 7'}}));fireEvent.click(screen.getByRole('button',{name:'Issue index'}));await screen.findByRole('link',{name:/Issue 7.*37 public items/});expect([...document.body.querySelectorAll('a')].map(a=>a.getAttribute('href')?.split('topic=')[1])).toEqual(['9','7','8']);expect(document.body.querySelectorAll('[aria-current="page"]')).toHaveLength(1);
+});
+it.each(['en-US','zh-CN','zh-TW','ja-JP'])('keeps a reviewed LocalDate on the same UTC calendar day in %s',async locale=>{
+ localStorage.setItem('bobbuy_locale',locale);mocks.browseIssues.mockResolvedValue(page([{...row(9),issueDate:'2026-12-31',issueDateSource:'REVIEWED_SOURCE'}]));const view=mountOpen(tree({primaryReady:true}));await screen.findByRole('link',{name:/Issue 9/});expect(document.body.querySelector('.issue-directory-date')?.getAttribute('datetime')).toBe('2026-12-31');expect(document.body.querySelector('.issue-directory-date b')?.textContent).toBe('31');
+});
+
+it('keeps a November8 source date distinct from its actual November9 publication',async()=>{
+ const publishedAt='2026-11-09T12:53:30.082912Z';mocks.browseIssues.mockResolvedValue(page([{...row(8,'Synthetic November8 source'),issueDate:'2026-11-08',issueDateSource:'REVIEWED_SOURCE',post:{...row(8).post,publishedAt}}]));
+ const view=mountOpen(tree({primaryReady:true,wide:false,selected:{id:8,title:'Synthetic November8 source'}}));await waitFor(()=>expect(document.body.querySelectorAll('nav a')).toHaveLength(1));
+ const link=screen.getByRole('link',{name:/Synthetic November8 source/});expect(link).toHaveAccessibleName(/Issue date: 11\/08\/2026/);expect(link).toHaveAccessibleName(/Published on \(Japan time\): 11\/09\/2026/);expect(link).not.toHaveAccessibleName(/awaiting source verification/);
+ expect(document.body.querySelector('.issue-directory-date')?.getAttribute('data-date-kind')).toBe('issue');expect(document.body.querySelector('.issue-directory-date')?.getAttribute('datetime')).toBe('2026-11-08');expect(document.body.querySelector('.issue-directory-published-at time')?.getAttribute('datetime')).toBeUndefined();expect(document.body.querySelectorAll('.issue-directory-date-status')).toHaveLength(1);expect(document.body.querySelectorAll('.issue-directory-published-at')).toHaveLength(0);expect(document.body.querySelectorAll('[aria-current="page"]')).toHaveLength(1);
+});
+it('shows a reviewed issue date alone if publication metadata is absent',async()=>{
+ mocks.browseIssues.mockResolvedValue(page([{...row(8),issueDate:'2026-11-08',issueDateSource:'REVIEWED_SOURCE',post:{id:8,publishedAt:undefined}}]));
+ const view=mountOpen(tree({primaryReady:true}));const link=await screen.findByRole('link',{name:/Issue 8/});expect(link).toHaveAccessibleName(/Issue date: 11\/08\/2026/);expect(link).not.toHaveAccessibleName(/Published on|awaiting source verification/);expect(document.body.querySelector('.issue-directory-date')?.getAttribute('data-date-kind')).toBe('issue');expect(document.body.querySelector('.issue-directory-published-at')).toBeNull();
+});
+it.each([undefined,'','not a date','2026-11-09','2026-11-09T00:00:00','2026-02-30T00:00:00Z','2026-11-09T24:00:00Z'])('does not invent a publication date from missing or invalid timestamp %s',async publishedAt=>{
+ mocks.browseIssues.mockResolvedValue(page([{...row(8,'Title contains 2026/11/08'),post:{id:8,publishedAt,updatedAt:'2099-12-31T23:59:59Z'}}]));
+ const view=mountOpen(tree({primaryReady:true}));const link=await screen.findByRole('link',{name:/Title contains/});expect(link).not.toHaveAccessibleName(/Published on/);expect(link).toHaveAccessibleName(/Issue date awaiting source verification/);expect(document.body.querySelector('.issue-directory-date')).toBeNull();expect(document.body.querySelector('.issue-directory-date-unknown')).not.toBeNull();
+});
+it.each([['en-US','Published on (Japan time)'],['zh-CN','发布日期（日本时间）'],['zh-TW','發佈日期（日本時間）'],['ja-JP','公開日（日本時間）']])('labels the actual publication fallback and Japan-day boundary in %s',async(locale,publishedLabel)=>{
+ const publishedAt='2026-11-08T23:30:00Z';localStorage.setItem('bobbuy_locale',locale);mocks.browseIssues.mockResolvedValue(page([{...row(8),post:{id:8,publishedAt}}]));
+ const view=mountOpen(tree({primaryReady:true,wide:false}));await waitFor(()=>expect(document.body.querySelectorAll('nav a')).toHaveLength(1));
+ const link=screen.getByRole('link',{name:/Issue 8/});expect(link).toHaveAccessibleName(expect.stringContaining(publishedLabel));expect(document.body.querySelector('.issue-directory-date')?.getAttribute('data-date-kind')).toBe('publication');expect(document.body.querySelector('.issue-directory-date')?.getAttribute('datetime')).toBe(publishedAt);expect(document.body.querySelector('.issue-directory-date b')?.textContent).toBe('09');expect(document.body.querySelectorAll('.issue-directory-date-status')).toHaveLength(1);expect(document.body.querySelectorAll('.issue-directory-date-review-status')).toHaveLength(0);expect(document.body.querySelector('.issue-directory-published-at')).toBeNull();expect(document.body.querySelector('.issue-directory-date-unknown')).toBeNull();
+});
+it('does not sort unreviewed issues by publication or edit timestamps or pin the selected issue',async()=>{
+ const ordered=[{...row(6),issueDate:'2026-11-08',issueDateSource:'REVIEWED_SOURCE'}, {...row(3),post:{id:3,publishedAt:'2026-11-01T00:00:00Z'}},{...row(2),post:{id:2,publishedAt:'2026-11-09T00:00:00Z'}},{...row(1),post:{id:1,publishedAt:undefined}}];
+ mocks.browseIssues.mockResolvedValueOnce(page(ordered)).mockResolvedValueOnce(page(ordered.map(r=>r.post.id===3?{...r,publicItemCount:8,post:{...r.post,updatedAt:'2099-12-31T23:59:59Z'}}:r)));
+ const view=mountOpen(tree({primaryReady:true,selected:{id:2,title:'Issue 2'}}));await screen.findByRole('link',{name:/Issue 6/});expect([...document.body.querySelectorAll('a')].map(a=>a.getAttribute('href')?.split('topic=')[1])).toEqual(['6','3','2','1']);view.rerender(tree({primaryReady:true,refresh:1,selected:{id:2,title:'Issue 2'}}));fireEvent.click(screen.getByRole('button',{name:'Issue index'}));await screen.findByRole('link',{name:/Issue 3.*8 public items/});expect([...document.body.querySelectorAll('a')].map(a=>a.getAttribute('href')?.split('topic=')[1])).toEqual(['6','3','2','1']);expect(document.body.querySelectorAll('[aria-current="page"]')).toHaveLength(1);
+});
+
+// Design revision: one visible date line, explicit provenance retained in accessible name.
+it.each(['en-US','zh-CN','zh-TW','ja-JP'].flatMap(locale=>[true,false].map(wide=>[locale,wide] as const)))('uses one date hierarchy in %s wide=%s',async(locale,wide)=>{
+ localStorage.setItem('bobbuy_locale',locale);mocks.browseIssues.mockResolvedValue(page([{...row(9),issueDate:'2026-11-08',issueDateSource:'REVIEWED_SOURCE',post:{id:9,publishedAt:'2026-11-09T12:00:00Z'}},{...row(3),post:{id:3,publishedAt:'2026-10-27T23:30:00Z'}},{...row(1),post:{id:1,publishedAt:undefined}}]));
+ const view=mountOpen(tree({primaryReady:true,wide,selected:{id:9,title:'Issue 9'}}));await waitFor(()=>expect(document.body.querySelectorAll('nav a')).toHaveLength(3));
+ const links=[...document.body.querySelectorAll('nav a')];expect(links.map(a=>a.getAttribute('href')?.split('topic=')[1])).toEqual(['9','3','1']);expect(document.body.querySelectorAll('[aria-current="page"]')).toHaveLength(1);
+ expect(links.map(a=>a.querySelectorAll('.issue-directory-date-status').length)).toEqual([1,1,0]);expect(links[0].querySelector('time')?.getAttribute('datetime')).toBe('2026-11-08');expect(links[1].querySelector('.issue-directory-date b')?.textContent).toBe('28');
+ expect(document.body.querySelectorAll('.issue-directory-date-kind,.issue-directory-date-review-status,.issue-directory-date-note,.issue-directory-published-at')).toHaveLength(0);expect(links[2].querySelector('.issue-directory-date-unknown')).not.toBeNull();expect(document.body.querySelectorAll('.issue-directory-date-unknown small')).toHaveLength(0);
+});

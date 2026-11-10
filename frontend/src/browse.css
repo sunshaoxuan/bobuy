@@ -43,6 +43,8 @@
 .browse-trip-grid {display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;}.browse-trip-card {padding:26px;border:1px solid #eee;border-radius:24px;background:#fafafa;display:flex;flex-direction:column;align-items:flex-start;gap:12px;}.browse-trip-card>.anticon {font-size:28px;color:#d93630;margin-bottom:14px;}.browse-trip-card time {font-size:14px;color:#666;}.browse-trip-card h2 {font-size:22px;line-height:1.5;}.browse-trip-card p {color:#777;margin:0;}.browse-trip-card .ant-btn {border-radius:22px;margin-top:12px;}.browse-trip-card>a {display:flex;align-items:center;gap:10px;min-height:44px;color:#a9342e;}
 .browse-drawer .ant-drawer-header {border:0;}.browse-drawer .ant-drawer-body {padding:8px 18px 24px;}.browse-drawer .ant-drawer-close {min-width:44px;min-height:44px;}.browse-drawer .browse-brand {margin-bottom:26px;}
 .browse-preview {padding:20px 8px;border-radius:20px;min-height:0!important;margin:16px auto;max-width:100%;}.browse-preview[data-device=mobile] {max-width:390px;}.browse-preview .rec-public {padding:0!important;}.browse-preview .rec-issue-heading h1 {font-size:24px;}.browse-preview[data-device=mobile] .product-masonry {grid-template-columns:repeat(2,minmax(0,1fr));}.browse-preview[data-device=mobile] .product-photo img {max-height:320px;}
+.storefront.browse-preview .rec-pin .product-body {inset:auto;}
+.storefront.browse-shell .rec-pin .product-body {inset:auto;overflow-wrap:anywhere;}
 .storefront .store-bottom {display:none!important;}
 .browse-mobile-shortcuts {display:none;}
 @media(max-width:767px){

@@ -1031,7 +1031,7 @@ public class ProcurementHudService {
   }
 
   private CustomerBalanceLedgerResponse buildLedgerEntry(Trip trip, OrderHeader order) {
-    CustomerProfileSnapshot customerProfile = resolveCustomerProfile(order.getCustomerId());
+    CustomerProfileSnapshot customerProfile = resolveCustomerProfile(order);
     List<CustomerBalanceLedgerResponse.LedgerOrderLineResponse> orderLines = safeLines(order).stream()
         .map(line -> new CustomerBalanceLedgerResponse.LedgerOrderLineResponse(
             line.getSkuId(),
@@ -1082,7 +1082,7 @@ public class ProcurementHudService {
         order.getBillingConfirmedAt(),
         order.getBillingConfirmedBy(),
         paymentRecords,
-        orderLines);
+        orderLines).withDeliveryAddressSource(order.getDeliverySnapshot() == null ? "CURRENT_PROFILE_LEGACY_FALLBACK" : "ORDER_SNAPSHOT");
   }
 
   private String resolveSettlementStatus(OrderHeader order) {
@@ -1380,6 +1380,15 @@ public class ProcurementHudService {
     return order.getDeliveryStatus() == null ? DeliveryStatus.PENDING_DELIVERY : order.getDeliveryStatus();
   }
 
+  private CustomerProfileSnapshot resolveCustomerProfile(OrderHeader order) {
+    var snapshot = order.getDeliverySnapshot();
+    if (snapshot == null) return resolveCustomerProfile(order.getCustomerId()); // Explicit legacy fallback, not historical facts.
+    String name = userRepository.findById(order.getCustomerId()).map(com.bobbuy.model.User::getName).orElse(null);
+    String summary = java.util.stream.Stream.of(snapshot.countryRegion(), snapshot.city(), snapshot.addressLine(), snapshot.postalCode())
+        .filter(value -> value != null && !value.isBlank()).collect(Collectors.joining(" "));
+    return new CustomerProfileSnapshot(name, summary, snapshot.contactName(), snapshot.phone(), null, null);
+  }
+
   private CustomerProfileSnapshot resolveCustomerProfile(Long customerId) {
     return userRepository.findById(customerId)
         .map(user -> {
@@ -1405,7 +1414,7 @@ public class ProcurementHudService {
   }
 
   private PickingChecklistResponse buildPickingChecklistResponse(OrderHeader order, ReviewedReceiptSnapshot receiptSnapshot) {
-    CustomerProfileSnapshot customerProfile = resolveCustomerProfile(order.getCustomerId());
+    CustomerProfileSnapshot customerProfile = resolveCustomerProfile(order);
     List<PickingChecklistItemResponse> items = buildPickingItems(order, receiptSnapshot);
     boolean readyForDelivery = !items.isEmpty() && items.stream().allMatch(PickingChecklistItemResponse::isChecked);
     return new PickingChecklistResponse(
@@ -1419,7 +1428,7 @@ public class ProcurementHudService {
   }
 
   private DeliveryPreparationResponse buildDeliveryPreparationResponse(OrderHeader order, ReviewedReceiptSnapshot receiptSnapshot) {
-    CustomerProfileSnapshot customerProfile = resolveCustomerProfile(order.getCustomerId());
+    CustomerProfileSnapshot customerProfile = resolveCustomerProfile(order);
     List<PickingChecklistItemResponse> items = buildPickingItems(order, receiptSnapshot);
     if (items.isEmpty()) {
       return null;

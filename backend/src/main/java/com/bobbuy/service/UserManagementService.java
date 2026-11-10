@@ -23,6 +23,7 @@ public class UserManagementService {
     private final EmailChallengeRepository challenges;
     private final PasswordEncoder passwords;
     private final AuthService auth;
+    @org.springframework.beans.factory.annotation.Autowired private SelfProfileService profiles;
 
     public UserManagementService(UserRepository users, CheckoutIdentityRepository identities,
             EmailChallengeRepository challenges, PasswordEncoder passwords, AuthService auth) {
@@ -45,7 +46,7 @@ public class UserManagementService {
 
     @Transactional
     public Account update(Long id, Edit request, Authentication authentication) {
-        User user = users.lockById(id).orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.user.not_found"));
+        User user = profiles.lock(id);
         validate(request, user);
         if (!request.enabled() && auth.currentUser(authentication).id().equals(id)) throw invalid("error.users.self_disable");
         apply(user, request);
@@ -69,7 +70,7 @@ public class UserManagementService {
         String email = request.email().trim().toLowerCase(Locale.ROOT);
         if (!Objects.equals(user.getEmail(), email)) {
             user.setEmailVerifiedAt(null);
-            challenges.findById(user.getId()).ifPresent(challenges::delete);
+            SelfProfileService.invalidateChallenge(challenges, user.getId());
         }
         user.setUsername(request.username().toLowerCase(Locale.ROOT));
         user.setName(request.name().trim()); user.setEmail(email);

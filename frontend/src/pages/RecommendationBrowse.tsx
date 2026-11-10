@@ -1,3 +1,5 @@
+import {ProductStars} from '../components/ProductRating';
+import SafeArticleText from '../components/SafeArticleText';
 import {useEffect,useRef,useState,type ReactNode} from 'react';
 import {Alert,Button,Empty,Spin} from 'antd';
 import {Link,useLocation,useParams,useSearchParams} from 'react-router-dom';
@@ -16,6 +18,7 @@ import SellingPrice from '../components/SellingPrice';
 import IssueDirectory from '../components/IssueDirectory';
 import ReservationAdd from '../components/ReservationAdd';
 import {useDetailReturnFocus} from '../components/useDetailReturnFocus';
+import {openCardDetail} from '../components/openCardDetail';
 import type {ShoppingProps} from './PublicRecommendations';
 import '../public-catalog.css';
 import '../browse-pages.css';
@@ -39,14 +42,15 @@ function Occurrences({period,topic,refresh,paused,checkDataset,onChanged,onSales
   {!data.page&&!data.error?<Spin/>:!data.items.length?<Empty description={t('store.no_matches')}/>:<div className="catalog-master-grid server-browse-cards">{data.items.map((row,index)=>{
    const item=row.item?{...row.item,imageUrl:row.item.image?.url??''} as RecommendationItem:undefined;
    const text=item?recommendationText(item,locale):undefined,quote=item?.productId?sale.quotes[item.productId]:undefined,pending=!!item?.productId&&(!sale.done.has(item.productId)||!!purchasePending),buyable=!pending&&!!quote&&canBuy(quote);
-   return <article className="store-product rec-pin" key={row.key} data-occurrence-key={row.key}>
+   return <article className="store-product rec-pin" key={row.key} data-occurrence-key={row.key} data-card-detail={item?true:undefined} onClick={event=>{if(item)openCardDetail(event,trigger=>openItem(row.post.id,item.id,trigger));}}>
     {item&&<ReservationAdd allowed={buyable} quote={quote} name={text?.name??item.name} count={item.productId?quantities[item.productId]:undefined} onAdd={()=>{if(quote&&buyable)onAdd(quote);}}/>}
-    <button type="button" className="catalog-offer-link" onClick={()=>openIssue(row.post.id)}>{row.title}</button><div className="rec-publication">{row.post.publisherName&&<span>{t('detail.published_signature')}: {row.post.publisherName}</span>}{row.post.publishedAt&&<time dateTime={row.post.publishedAt}>{new Date(row.post.publishedAt).toLocaleDateString(locale)}</time>}</div>{row.history&&<small>{t('rec.past_issue')}</small>}
+
     {row.service&&row.serviceSummary?<><h3>{row.title}</h3><span>{t('service.kind')}</span><ServiceSummary offer={row.serviceSummary}/><Button onClick={()=>openIssue(row.post.id)}>{t('rec.conditions_detail')}</Button></>:item&&text?<>
-     <div className="product-tile"><button type="button" className="product-photo" data-detail-trigger="photo" aria-label={t('store.detail_label',{name:text.name})} onClick={event=>openItem(row.post.id,item.id,event.currentTarget)}>{row.item?.image?.url?<img src={row.item.image.url} alt={text.name} loading={index<2?'eager':'lazy'} onError={event=>{event.currentTarget.style.display='none';}}/>:<span>{t('gallery.pending')}</span>}</button><div className="product-body"><ProductBrand brand={item.brand}/><button type="button" className="product-name" data-detail-trigger="name" onClick={event=>openItem(row.post.id,item.id,event.currentTarget)}><h3><RecommendationName text={text}/></h3></button>{text.specification&&<p>{text.specification}</p>}</div></div>
+     <div className="product-tile"><button type="button" className="product-photo" data-detail-trigger="photo" aria-label={t('store.detail_label',{name:text.name})} onClick={event=>openItem(row.post.id,item.id,event.currentTarget)}>{row.item?.image?.url?<img src={row.item.image.url} alt={text.name} loading={index<2?'eager':'lazy'} onError={event=>{event.currentTarget.style.display='none';}}/>:<span>{t('gallery.pending')}</span>}</button><div className="product-body"><ProductBrand brand={item.brand}/><button type="button" className="product-name" data-detail-trigger="name" onClick={event=>openItem(row.post.id,item.id,event.currentTarget)}><h3 title={text.name}><RecommendationName text={text}/></h3></button>{text.specification&&<p className="catalog-card-spec" title={text.specification}>{text.specification}</p>}</div></div>
      <p>{t('rec.code')}: {item.itemNumber||t('rec.not_stated')}</p><ProductVariant model={item.model} packaging={item.packaging}/><OfferInfo facts={{...item,offerNotes:text.offerNotes}} today={data.page?.japanDay} compact/>
-     <Button data-detail-trigger="conditions" onClick={event=>openItem(row.post.id,item.id,event.currentTarget)}>{t('rec.conditions_detail')}</Button>{quote&&!pending&&<SellingPrice product={quote}/>}
+     <ProductStars value={row.item?.rating}/>{quote&&!pending&&<SellingPrice product={quote} compact/>}
     </>:null}
+    <footer className="product-card-source"><button type="button" className="catalog-offer-link" onClick={()=>openIssue(row.post.id)}>{row.title}</button><div className="rec-publication">{row.post.publisherName&&<span>{t('detail.published_signature')}: {row.post.publisherName}</span>}{row.post.publishedAt&&<time dateTime={row.post.publishedAt}>{new Date(row.post.publishedAt).toLocaleDateString(locale)}</time>}</div>{row.history&&<small>{t('rec.past_issue')}</small>}</footer>
    </article>;
   })}</div>}
   {data.page?.hasNext&&<div className="feed-loader" ref={sentinel}><Button loading={data.busy} disabled={paused||data.changed||!!data.error} onClick={data.next}>{t('store.load_more')} ({data.items.length}/{data.page.matchedTotal})</Button></div>}
@@ -65,7 +69,7 @@ export default function RecommendationBrowse(props:Props){
  useEffect(()=>{setChanged(false);},[identity]);
  function checkDataset(key:string,token:string){if(Object.entries(dataset.current.tokens).some(([other,value])=>other!==key&&value!==token)){setChanged(true);return false;}dataset.current.tokens[key]=token;return true;}
  function restart(){setChanged(false);setRefresh(value=>value+1);}
- useEffect(()=>{const update=()=>{if(document.visibilityState==='visible')restart();};document.addEventListener('visibilitychange',update);return()=>document.removeEventListener('visibilitychange',update);},[]);
+ // Visibility alone is not a dataset change. Explicit refresh, identity and Japanese-day changes remain authoritative.
  const selectedKey=JSON.stringify([location.pathname,topic,node,props.query??'',params.get('category'),locale,refresh,day,props.authKey]);
  const [selected,setSelected]=useState<{key:string;detail?:RecommendationDetail;error:string}>({key:'',error:''});
  useEffect(()=>{if(!topic||node===-1)return;let active=true;setSelected({key:selectedKey,error:''});void recommendationApi.get(topic,true,node).then(detail=>{if(active){if(detail.post.id!==topic||node!==undefined&&detail.post.merchantId!==node)throw Error('browse.invalid');setSelected({key:selectedKey,detail,error:''});}}).catch(error=>{if(active)setSelected({key:selectedKey,error:error.message});});return()=>{active=false;};},[selectedKey]);
@@ -82,11 +86,12 @@ export default function RecommendationBrowse(props:Props){
  const article=displayFull?articleText(displayFull,locale):undefined;
  const allTopics=new URLSearchParams(params);allTopics.delete('topic');allTopics.delete('item');
  const backPath=listTopic?'/recommendations'+(allTopics.size?'?'+allTopics.toString():''):scopedPath('/products',location.search);
- const directory=<IssueDirectory wide={wide} primaryReady={primaryReady===identity} obscured={!!itemId||!!props.autoPaused} refresh={refresh} query={props.query} authKey={common.authKey} checkDataset={checkDataset} onRefresh={restart} selected={displayFull?{id:displayFull.post.id,title:article?.title??displayFull.post.title,publishedAt:displayFull.post.publishedAt,itemCount:displayFull.serviceOffer?1:displayFull.items.length}:undefined}/>;
+ // The article is usable before its below-fold item list activates; its navigation can preload a light directory page.
+ const directory=<IssueDirectory wide={wide} primaryReady={primaryReady===identity||!!displayFull} obscured={!!itemId||!!props.autoPaused} refresh={refresh} query={props.query} authKey={common.authKey} checkDataset={checkDataset} onRefresh={restart} selected={displayFull?{id:displayFull.post.id,title:article?.title??displayFull.post.title,publishedAt:displayFull.post.publishedAt}:undefined}/>;
  return <div ref={layout} className="recommendation-directory-layout" data-wide={wide}><section className="recommendations rec-public recommendation-primary"><Link className="rec-back" to={backPath}>{t(listTopic?'rec.title':'store.catalog')}</Link><header className="rec-feed-heading"><h1 tabIndex={-1} data-detail-focus-fallback>{article?.title??t('rec.title')}</h1></header>
   {changed&&<BrowseError error="browse.changed" changed retry={restart} refresh={restart}/>}
   {node===-1||rawTopic&&!topic?<Alert type="error" message={t('browse.invalid')}/>:<>
-   {listTopic&&(selected.error?<BrowseError error={selected.error} retry={restart} refresh={restart}/>:!displayFull?<Spin/>:<article>{(article?.missingTitle||article?.missingBody)&&<Alert type="info" message={t(article.sourceKnown?'article.source_fallback':'article.legacy')}/>}<div className="rec-publication">{displayFull.post.publisherName&&<span>{t('detail.published_signature')}: {displayFull.post.publisherName}</span>}{displayFull.post.publishedAt&&<time dateTime={displayFull.post.publishedAt}>{new Date(displayFull.post.publishedAt).toLocaleDateString(locale)}</time>}</div><div className="rec-public-body">{article?.body.split('\n').map((text,index)=><p key={index}>{text}</p>)}</div>{displayFull.serviceOffer&&<><ServiceSummary offer={displayFull.serviceOffer}/>{Object.entries(displayFull.serviceOffer.terms[locale]??displayFull.serviceOffer.terms['ja-JP']??{}).map(([key,value])=><section key={key}><h2>{t('service.'+key)}</h2>{Array.isArray(value)?value.map((line,i)=><p key={i}>{line}</p>):<p>{value}</p>}</section>)}</>}</article>)}
+   {listTopic&&(selected.error?<BrowseError error={selected.error} retry={restart} refresh={restart}/>:!displayFull?<Spin/>:<article>{(article?.missingTitle||article?.missingBody)&&<Alert type="info" message={t(article.sourceKnown?'article.source_fallback':'article.legacy')}/>}<div className="rec-publication">{displayFull.post.publisherName&&<span>{t('detail.published_signature')}: {displayFull.post.publisherName}</span>}{displayFull.post.publishedAt&&<time dateTime={displayFull.post.publishedAt}>{new Date(displayFull.post.publishedAt).toLocaleDateString(locale)}</time>}</div><div className="rec-public-body">{article?.body.split('\n').map((text,index)=><p key={index} style={{overflowWrap:'anywhere'}}><SafeArticleText text={text}/></p>)}</div>{displayFull.serviceOffer&&<><ServiceSummary offer={displayFull.serviceOffer}/>{Object.entries(displayFull.serviceOffer.terms[locale]??displayFull.serviceOffer.terms['ja-JP']??{}).map(([key,value])=><section key={key}><h2>{t('service.'+key)}</h2>{Array.isArray(value)?value.map((line,i)=><p key={i}>{line}</p>):<p>{value}</p>}</section>)}</>}</article>)}
    <Occurrences {...common} period={listTopic?'all':'current'} topic={listTopic} onReady={()=>setPrimaryReady(identity)}/>
    {!listTopic&&<details open={history} onToggle={event=>setHistory(event.currentTarget.open)}><summary>{t('rec.history')}</summary>{history&&<Occurrences {...common} period="history"/>}</details>}
   </>}

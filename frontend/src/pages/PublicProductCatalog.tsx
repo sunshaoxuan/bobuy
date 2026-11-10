@@ -1,3 +1,4 @@
+import {ProductStars} from '../components/ProductRating';
 import {useCallback,useEffect,useMemo,useRef,useState} from 'react';
 import {Alert,Button,Drawer,Empty,Modal,Spin,Tooltip} from 'antd';
 import {ArrowDownOutlined,PlusOutlined,ReloadOutlined} from '@ant-design/icons';
@@ -6,8 +7,11 @@ import {storefrontApi,productMarkerApi,type ProductMarkerDefinition,type PublicC
 import {localizedContent,useI18n,type Locale} from '../i18n';
 import {ProductBrand,ProductVariant} from '../components/ProductMetadata';
 import {RecommendationImageViewer} from '../components/RecommendationImageViewer';
-import {ConsumerDetail,DetailOffer} from '../components/ConsumerDetail';
+import {ConsumerDetail,ProductDetailCode} from '../components/ConsumerDetail';
 import ReservationAdd from '../components/ReservationAdd';
+import CatalogReferenceHistory from '../components/CatalogReferenceHistory';
+import {productDetailContent} from '../productDetailContent';
+import {openCardDetail} from '../components/openCardDetail';
 import SellingPrice from '../components/SellingPrice';
 import {selectedNode} from '../storeNavigation';
 import {useBrowsePages,useSectionActivation,useNextBrowsePage,useBoundedSales} from '../browsePaging';
@@ -44,7 +48,7 @@ export default function PublicProductCatalog(props:Props) {
   useEffect(()=>{setDatasetChanged(false);},[group]);
   const checkDataset=(kind:string,token:string)=>{if(Object.entries(dataset.current.tokens).some(([key,value])=>key!==kind&&value!==token)){setDatasetChanged(true);return false;}dataset.current.tokens[kind]=token;return true;};
   function refreshCatalog(){setDatasetChanged(false);setRefresh(value=>value+1);}
-  useEffect(()=>{const update=()=>{if(document.visibilityState==='visible')refreshCatalog();};document.addEventListener('visibilitychange',update);return()=>document.removeEventListener('visibilitychange',update);},[]);
+  // Visibility alone is not a dataset change. Explicit refresh, identity and Japanese-day changes remain authoritative.
   const autoPaused=!!props.autoPaused||!!editing||details.marked||details.all||datasetChanged;
   const manager=!!isAuthenticated&&!loading&&isMerchant&&!!user;
   useEffect(()=>{setEditing(undefined);setDirty(false);busy.current=false;},[user?.id,isMerchant,isAuthenticated,loading]);
@@ -97,10 +101,12 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   function sourceNote(text:ReturnType<typeof catalogText>) {
     return text.fallback?<small className="catalog-source">{t('catalog.source_language',{language:text.language??''})}</small>:null;
   }
-  function management(entry:PublicCatalogEntry){return canEdit?.(entry)?<div className="marker-product-actions" role="group" aria-label={t('marker.actions')+': '+catalogText(entry.name,locale).value}><span>{t('marker.actions')}</span><Button className="marker-product-trigger" onClick={()=>onEdit?.(entry)} aria-label={t('marker.set')+': '+catalogText(entry.name,locale).value}>{t('marker.set')}</Button></div>:null;}
+  function management(entry:PublicCatalogEntry){return canEdit?.(entry)?<div className="marker-product-actions" data-card-action role="group" aria-label={t('marker.actions')+': '+catalogText(entry.name,locale).value}><span>{t('marker.actions')}</span><Button className="marker-product-trigger" onClick={()=>onEdit?.(entry)} aria-label={t('marker.set')+': '+catalogText(entry.name,locale).value}>{t('marker.set')}</Button></div>:null;}
   const detailName=opened?catalogText(opened.name,locale):undefined;
-  const detailSpec=opened?catalogText(opened.specification,locale):undefined;
-  const description=opened?catalogText(opened.description,locale):undefined;
+  const content=useMemo(()=>opened?productDetailContent(opened,locale):undefined,[opened,locale]);
+  const originalSpec=opened?catalogText(opened.specification,locale):undefined,originalDescription=opened?catalogText(opened.description,locale):undefined;
+  const detailSpec=content&&originalSpec?{...originalSpec,value:content.specification,language:content.specification===originalSpec.value?originalSpec.language:undefined,fallback:content.specification===originalSpec.value&&originalSpec.fallback}:undefined;
+  const description=content&&originalDescription?{...originalDescription,value:content.description,language:content.description===originalDescription.value?originalDescription.language:undefined,fallback:content.description===originalDescription.value&&originalDescription.fallback}:undefined;
   const hideMarked=kind==='marked'&&ready&&!browse.error&&browse.page?.markedScopeTotal===0;
   return <>{!hideMarked&&<section ref={activation.element} className="recommendations rec-public public-product-catalog" aria-label={t(kind==='marked'?'marker.featured':'store.catalog')} aria-busy={browse.busy}>
     <header className="catalog-master-heading">{kind==='marked'?<h2>{t('marker.featured')}</h2>:<h1>{t('store.catalog')}</h1>}{ready&&<span role="status">{t('catalog.result_count',{shown:filtered.length,total:browse.page!.matchedTotal})}</span>}</header>
@@ -111,18 +117,18 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
       {filtered.length?<div className="catalog-master-grid">{filtered.map((entry,index)=>{
         const name=catalogText(entry.name,locale),spec=catalogText(entry.specification,locale);
         const product=sales.quotes[entry.productId],pending=pricePending(entry.productId),buyable=!pending&&!!product&&canBuy(product);
-        return <article className="store-product rec-pin catalog-master-card" key={entry.productId} data-product-id={entry.productId}>
+        return <article className="store-product rec-pin catalog-master-card" key={entry.productId} data-product-id={entry.productId} data-card-detail onClick={event=>openCardDetail(event,()=>openDetail(entry.productId))}>
           <div className="product-tile">
             <button type="button" className="product-photo" aria-label={t('store.detail_label',{name:name.value})} onClick={()=>openDetail(entry.productId)}>
               {entry.gallery[0]?.url?<img src={entry.gallery[0].url} alt={name.value} loading={index<2?'eager':'lazy'} onError={event=>{event.currentTarget.style.display='none';}}/>:<span className="rec-no-product-image">{t('gallery.pending')}</span>}
             </button>
             <ProductMarkerBadges markers={state.markers[entry.productId]??[]} overlay/>
             <ReservationAdd allowed={buyable} quote={product} name={name.value} count={quantities[entry.productId]} onAdd={()=>{if(product&&buyable)onAdd(product);}}/>
-            <div className="product-body"><ProductBrand brand={entry.brand}/><button type="button" className="product-name" onClick={()=>openDetail(entry.productId)}><h2 lang={name.language}>{name.value||t('rec.not_stated')}</h2></button>{spec.value&&<p className="catalog-card-spec" lang={spec.language}>{spec.value}</p>}</div>
+            <div className="product-body"><ProductBrand brand={entry.brand}/><button type="button" className="product-name" onClick={()=>openDetail(entry.productId)}><h2 lang={name.language} title={name.value}>{name.value||t('rec.not_stated')}</h2></button>{spec.value&&<p className="catalog-card-spec" lang={spec.language}>{spec.value}</p>}</div>
           </div>
           {(name.fallback||spec.fallback)&&sourceNote(name.fallback?name:spec)}
           <small className="rec-pin-code">{t('rec.code')}: {entry.itemNumber||t('rec.not_stated')}</small>
-          {!pending&&product&&<SellingPrice product={product}/>}
+          <ProductStars value={entry.rating}/>{!pending&&product&&<SellingPrice product={product} compact/>}
           {!!entry.referenceOffers.length&&<button type="button" className="catalog-offer-link" onClick={()=>openDetail(entry.productId)}>{t('catalog.reference_count',{count:entry.referenceOffers.length})}</button>}
           {management(entry)}
         </article>;
@@ -136,14 +142,11 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
         <ProductMarkerBadges markers={detail.markers??[]}/>
         {management(opened)}
         <ProductBrand brand={opened.brand}/><h1 lang={detailName.language}><span className="rec-name-local">{detailName.value||t('rec.not_stated')}</span>{locale!=='ja-JP'&&opened.name['ja-JP']&&opened.name['ja-JP']!==detailName.value&&<span className="rec-name-original" lang="ja">（{opened.name['ja-JP']}）</span>}</h1>{sourceNote(detailName)}
-        <ProductVariant model={opened.model} packaging={opened.packaging}/><p>{t('rec.code')}: {opened.itemNumber||t('rec.not_stated')}</p>
+        <ProductDetailCode value={opened.itemNumber}/><ProductVariant model={content?.model} packaging={content?.packaging}/>
         {detailSpec.value&&<><p lang={detailSpec.language}>{detailSpec.value}</p>{sourceNote(detailSpec)}</>}
         {sale&&!pricePending(opened.productId)&&<SellingPrice product={sale}/>}
         {description.value&&<section><h2>{t('detail.description')}</h2>{sourceNote(description)}<div lang={description.language}>{description.value.split('\n').map((line,index)=><p key={index}>{line}</p>)}</div></section>}
-        {!!opened.referenceOffers.length&&<section className="catalog-reference-history"><h2>{t('catalog.reference_count',{count:opened.referenceOffers.length})}</h2>{opened.referenceOffers.map(offer=>{
-          const next=new URLSearchParams(location.search);next.set('item',String(offer.facts.id));
-          return <section key={offer.postId+':'+offer.facts.id}><Link to={'/recommendations/'+offer.postId+'?'+next.toString()}>{t('catalog.source_issue',{id:offer.postId})}</Link>{offer.facts.referenceContext?.channel&&<p>{t('ref.channel')}: {t('ref.'+offer.facts.referenceContext.channel)}</p>}<DetailOffer facts={offer.facts}/></section>;
-        })}</section>}
+        {content&&<CatalogReferenceHistory entry={opened} content={content}/> }
         <Button type="primary" size="large" block icon={<PlusOutlined aria-hidden/>} disabled={pricePending(opened.productId)||!sale||!canBuy(sale)} onClick={()=>{if(sale&&!pricePending(opened.productId)&&canBuy(sale))onAdd(sale);}}>{t(pricePending(opened.productId)?'browse.sales_pending':sale&&canBuy(sale)?'store.add_cart':'catalog.not_available')}</Button>
       </ConsumerDetail>}
     </Drawer>
