@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class CustomerBalanceLedgerResponse {
+  private String deliveryAddressSource = "CURRENT_PROFILE_LEGACY_FALLBACK";
+  public String getDeliveryAddressSource() { return deliveryAddressSource; }
+  public CustomerBalanceLedgerResponse withDeliveryAddressSource(String value) { deliveryAddressSource = value; return this; }
   private final Long tripId;
   private final String businessId;
   private final Long customerId;

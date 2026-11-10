@@ -1,6 +1,6 @@
 // Public first-batch/body/service/cart/XSS cases now live in RecommendationHistory.test.tsx.
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { MemoryRouter, Routes, Route } from 'react-router-dom';
+import { MemoryRouter, Routes, Route, createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { I18nProvider } from '../i18n';
 import Recommendations from './Recommendations';
 const preparation = vi.hoisted(()=>({prepare:vi.fn()}));
@@ -19,7 +19,7 @@ vi.mock('../api', () => ({ recommendationApi:mocks,storefrontApi:{products:vi.fn
 const detail = { post:{id:1,title:'Tea picks',published:false,version:2,updatedAt:'2026-10-26T10:00:00'},body:'Original body',items:[
   {id:1,productId:'p1',name:'Tea',itemNumber:'TEA',referencePrice:100,imageUrl:'/source-tea.png',gallery:[{id:'img1',url:'/tea.png',hash:'fixture1',sourceUrl:'https://www.costco.co.jp/p/tea',assetKey:'tea',label:'Tea'}]},
   {id:2,productId:'p2',name:'Coffee',itemNumber:'COFFEE',referencePrice:200,imageUrl:'/source-coffee.png',gallery:[{id:'img2',url:'/coffee.png',hash:'fixture2',sourceUrl:'https://www.costco.co.jp/p/coffee',assetKey:'coffee',label:'Coffee'}]}] };
-function show() { return render(<I18nProvider><MemoryRouter initialEntries={['/admin/recommendations?post=1']}><Recommendations /></MemoryRouter></I18nProvider>); }
+function show() { const router=createMemoryRouter([{path:'*',element:<Recommendations/>}],{initialEntries:['/admin/recommendations?post=1']});return render(<I18nProvider><RouterProvider router={router}/></I18nProvider>); }
 const shopping = { products:[{id:'p1',merchantId:1000,name:{'zh-CN':'Tea'},description:{},brand:'',price:120,categoryId:'',images:['/tea.png']}], quantities:{p1:2}, onDetail:vi.fn(), onAdd:vi.fn(), canBuy:()=>true };
 function publicFeed() { return render(<I18nProvider><MemoryRouter><PublicRecommendations {...shopping} /></MemoryRouter></I18nProvider>); }
 describe('Recommendations', () => {

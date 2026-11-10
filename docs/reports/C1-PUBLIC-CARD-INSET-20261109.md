@@ -1,0 +1,13 @@
+# Public storefront card layout follow-up
+
+At narrow viewport widths, the public recommendation card body inherited relative left/right offsets from recommendation styles. Long specification strings could also extend beyond the card after the offset alone was removed. The accepted source change scopes normal insets and unrestricted text wrapping to `.storefront.browse-shell .rec-pin .product-body`. The existing private-preview rule is retained.
+
+The source delta contains only `frontend/src/browse.css` and `frontend/src/previewInset.test.js`. Account/profile/backend, quotation translations, data, images, prices and eligibility rules are unchanged. Source QA independently passed 10 CSS contract cases. The developer's 12 tests include the same CSS cases and two unchanged translation cases; these counts are not added together.
+
+The previous formal build was commit `9da862014222b48a03730d804d26a7dcadb37b67`, CI run `42552596645`, artifact `13646461090`. Its retained ZIP SHA256 is `1236c72e9907fea2aee9d1413120fc9ffeaced02c2b40c6244b8ca2255ec2774`; its image archive SHA256 is `2f09f326161caebd3303b7480ad6705d3c7f5e79b4086fd9ef3060cdc92c1bf9`. This is the exact formal failing-build negative control. The production attempt was rolled back to the prior applications while keeping all current V27 data.
+
+Temporary browser CSS injection and pure cascade contracts established the local cause and supported this patch. They do not accept the final build for publication. The exact new CI web bundle, lazy CSS/chunks and OCI payload must be independently tested in a nonproduction real browser using read-only representative real public data. Required coverage includes multiple phone widths, long specifications, per-card/text/control bounds, appended pages, detail and keyboard return behavior, and the same-condition previous formal-build negative control. No production deployment is authorized by this source review alone.
+
+The existing CI workflow and artifact-capture logic are retained. The accepted-input manifest is refreshed from the exact staged Git blobs, with unchanged V27 migrations and backend-class requirements. C1 PostgreSQL, exact core and publisher guard evidence remains reusable only for its unchanged inputs. Formal artifact QA and real-browser acceptance remain pending until the new artifact exists and is independently checked.
+
+Real public replay material must stay in ignored local evidence, with original response bytes, status, URLs and hashes. It must not include private account data or be committed to the repository. A static preview must explicitly disable the normal Vite API/WebSocket proxies; it must not infer a working backend from an unproven loopback probe or silently send requests to port 8080.

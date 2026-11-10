@@ -35,6 +35,11 @@ jobs:
         run: |
           python -B -m unittest discover -s scripts -p test_publish_production.py
           python -B -m unittest discover -s scripts -p test_postgres18_backup.py
+          python -B -m unittest discover -s scripts -p test_prepare_ci_release_artifacts.py
+          python -B -m unittest discover -s scripts -p test_verify_checkout_upgrade.py
+          python -B -m unittest discover -s scripts -p test_verify_issue_date_upgrade.py
+          node --test scripts/test_capture_article_inputs.mjs
+          node --test scripts/test_capture_issue_date_inputs.mjs
           python -B scripts/check-production-isolation.py
 
   backend-test:
@@ -115,7 +120,10 @@ jobs:
           --label org.opencontainers.image.version="ci-$GITHUB_SHA"
 
       - name: Bind core and web release artifacts
-        run: python scripts/prepare-ci-release-artifacts.py --output "$RUNNER_TEMP/bobuy-release-artifact"
+        run: >-
+          python scripts/prepare-ci-release-artifacts.py
+          --accepted-inputs docs/reports/consumer-ui-integration-20261109/accepted-inputs.json
+          --output "$RUNNER_TEMP/bobuy-release-artifact"
 
       - name: Retain exact core and web artifacts
         uses: actions/upload-artifact@v4
@@ -154,14 +162,40 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Run Flyway migration verification
+      - name: Verify populated V27 to V28 preservation on the isolated PostgreSQL service
+        env:
+          BOBBUY_ISOLATED_CI_POSTGRES: 'true'
+        run: python -B scripts/verify-checkout-upgrade.py
+
+      - name: Verify populated V28 to V28.1 source-date preservation on the same isolated PostgreSQL service
+        env:
+          BOBBUY_ISOLATED_CI_POSTGRES: 'true'
+        run: python -B scripts/verify-issue-date-upgrade.py
+
+      - name: Run C1/C2, article and issue-date regressions on the isolated PostgreSQL service
+        env:
+          BOBBUY_ISOLATED_CI_POSTGRES: 'true'
         run: >-
           mvn -B --file backend/pom.xml
-          -Dflyway.url=jdbc:postgresql://127.0.0.1:5432/bobbuy
-          -Dflyway.user=bobbuy
-          -Dflyway.password=bobbuypassword
-          -Dflyway.cleanDisabled=false
-          flyway:clean flyway:migrate flyway:validate
+          -Dtest=SelfProfileServiceTest,StorefrontIntegrationTest,CheckoutFingerprintTest,OrderDeliverySnapshotTest,ProductIdentityCompatibilityIntegrationTest#actualStoredOrderJsonRemainsStrictOldReaderCompatibleAndSidecarSurvivesOldShapeUpdate,RecommendationArticleRevisionIntegrationTest,RecommendationIssueDateIntegrationTest,RecommendationIssueDateMigrationIntegrationTest
+          -Dspring.datasource.url=jdbc:postgresql://127.0.0.1:5432/bobbuy
+          -Dspring.datasource.driver-class-name=org.postgresql.Driver
+          -Dspring.datasource.username=bobbuy
+          -Dspring.datasource.password=bobbuypassword
+          -Dspring.jpa.hibernate.ddl-auto=validate
+          -Dspring.flyway.enabled=true test
+
+      - name: Retain C2 PostgreSQL migration and transaction reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: c2-postgres-${{ github.sha }}
+          path: |
+            backend/target/surefire-reports/
+            backend/target/c2-upgrade-preservation.json
+            backend/target/issue-date-upgrade-preservation.json
+          if-no-files-found: error
+          retention-days: 14
 
   playwright-e2e:
     name: playwright-e2e

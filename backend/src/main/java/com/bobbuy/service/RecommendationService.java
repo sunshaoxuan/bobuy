@@ -34,10 +34,12 @@ public class RecommendationService {
         this.referenceQuotes=referenceQuotes;
         this.articles=articles;
     }
-    public record Summary(Long id, String title, boolean published, long version, LocalDateTime updatedAt, java.time.Instant publishedAt, String publisherName, String coverImageUrl, Long merchantId,java.util.Map<String,String> articleTitles) {}
+    public record Summary(Long id, String title, boolean published, long version, LocalDateTime updatedAt, java.time.Instant publishedAt, String publisherName, String coverImageUrl, Long merchantId,java.util.Map<String,String> articleTitles,java.time.LocalDate issueDate,String issueDateSource) {
+        public Summary(Long id,String title,boolean published,long version,LocalDateTime updatedAt,java.time.Instant publishedAt,String publisherName,String coverImageUrl,Long merchantId,java.util.Map<String,String> articleTitles){this(id,title,published,version,updatedAt,publishedAt,publisherName,coverImageUrl,merchantId,articleTitles,null,"UNKNOWN");}
+    }
     public record Detail(Summary post, String body, List<RecommendationItem> items,String articleSourceLocale,String articleSourceHash,java.util.Map<String,RecommendationPost.ArticleText> articleTranslations,RecommendationServiceOffer serviceOffer) {}
     public record Upload(Detail detail, boolean productCreated, boolean imageReused, boolean priceUpdated) {}
-    private Summary summary(RecommendationPost post, String cover) { return new Summary(post.id, post.title, post.published, post.version, post.updatedAt, post.publishedAt, post.publisherName, cover, post.merchantId,articles.titles(post)); }
+    private Summary summary(RecommendationPost post, String cover) { return new Summary(post.id, post.title, post.published, post.version, post.updatedAt, post.publishedAt, post.publisherName, cover, post.merchantId,articles.titles(post),post.reviewedIssueDate(),post.issueDateSource()); }
     public record PublicNode(Long id, String name) {}
     @Transactional(readOnly = true)
     public List<PublicNode> publicNodes() {
@@ -51,7 +53,7 @@ public class RecommendationService {
     private Detail detail(RecommendationPost post,boolean publicView) {
         var linked = taxonomy.display(items.findByPostIdOrderById(post.id),publicView);
         referenceQuotes.decorate(linked,publicView);
-        return new Detail(summary(post, linked.isEmpty()?null:publicView?(linked.get(0).gallery.isEmpty()?null:linked.get(0).gallery.get(0).url()):linked.get(0).imageUrl), post.body, linked,post.articleSourceLocale,articles.sourceHash(post),publicView?articles.current(post):java.util.Map.copyOf(post.articleTranslations),post.serviceOffer==null?null:publicView?post.serviceOffer.publicView():post.serviceOffer);
+        return new Detail(summary(post, linked.isEmpty()?null:publicView?(linked.get(0).gallery.isEmpty()?null:linked.get(0).gallery.get(0).url()):linked.get(0).imageUrl), post.body, linked,post.articleSourceLocale,articles.sourceHash(post),publicView?articles.current(post):articles.all(post),post.serviceOffer==null?null:publicView?post.serviceOffer.publicView():post.serviceOffer);
     }
     private Long owner() {
         Long owner = MerchantScope.current();
@@ -137,6 +139,23 @@ public class RecommendationService {
     }
     @Transactional
     public Detail articleLanguage(Long id,String locale,String title,String body,String sourceHash,long expectedVersion,boolean reviewed){lockOwner();var post=owned(id);editable(post);goodsOnly(post);version(post,expectedVersion);articles.update(post,locale,title,body,sourceHash,reviewed);touch(post);return detail(post);}
+    public record ArticleRevision(Detail detail,UUID requestId,String previousSourceHash,String articleSourceHash,long appliedVersion,boolean replayed,boolean current) {}
+    @Transactional
+    public ArticleRevision reviseArticle(Long id,UUID requestId,long expectedVersion,String expectedSource,boolean reviewed,Map<String,RecommendationArticleService.ReviewedText> input){
+        lockOwner();var post=owned(id);goodsOnly(post);
+        if(requestId==null||expectedVersion<0||expectedSource==null||!expectedSource.matches("[a-f0-9]{64}"))throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.invalid");
+        var texts=articles.reviewedTexts(input,reviewed);String payloadHash=articles.revisionPayloadHash(post,expectedVersion,expectedSource,texts);
+        var replay=articles.replay(post,requestId,payloadHash);
+        if(replay.isPresent())return articleRevision(post,replay.get(),true);
+        if(!post.published)throw new ApiException(ErrorCode.INVALID_STATUS,"error.recommendation.published");
+        if(post.version!=expectedVersion||!articles.sourceHash(post).equals(expectedSource))throw new RecommendationArticleService.RevisionConflict();
+        articles.snapshot(post);articles.applyReviewedRevision(post,texts);touch(post);
+        var receipt=articles.recordRevision(post,requestId,payloadHash,expectedSource,expectedVersion,owner());
+        return articleRevision(post,receipt,false);
+    }
+    private ArticleRevision articleRevision(RecommendationPost post,RecommendationArticleService.RevisionReceipt receipt,boolean replayed){
+        return new ArticleRevision(detail(post),receipt.requestId(),receipt.previousSourceHash(),receipt.articleSourceHash(),receipt.appliedVersion(),replayed,post.version==receipt.appliedVersion()&&articles.sourceHash(post).equals(receipt.articleSourceHash()));
+    }
     @Transactional(readOnly=true)
     public java.util.List<RecommendationArticleRevision> articleHistory(Long id){return articles.history(owned(id));}
     @Transactional

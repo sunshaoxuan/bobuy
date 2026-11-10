@@ -1,5 +1,7 @@
 import { message } from 'antd';
 import { prepareImageUpload } from './imageUpload';
+import type {RecommendationIssueDateReview,RecommendationIssueDateRequest} from './components/RecommendationIssueDateEditor';
+export type {RecommendationIssueDateReview,RecommendationIssueDateRequest} from './components/RecommendationIssueDateEditor';
 import {
     clearAuthSession,
     getStoredAccessToken,
@@ -60,6 +62,7 @@ export type OrderLine = {
 };
 
 export type Order = {
+    deliverySnapshot?: {version:number;contactName:string;countryRegion:string;city:string;addressLine:string;phone?:string|null;postalCode?:string|null}|null;
     currency?:string;
     id: number;
     businessId: string;
@@ -267,6 +270,7 @@ export type CustomerBalanceLedgerEntry = {
     settlementStatus: string;
     deliveryStatus?: string;
     deliveryAddressSummary?: string;
+    deliveryAddressSource?:'ORDER_SNAPSHOT'|'CURRENT_PROFILE_LEGACY_FALLBACK';
     deliveryContactName?: string;
     deliveryContactPhone?: string;
     deliveryLatitude?: number;
@@ -848,6 +852,9 @@ export async function refreshAuthSession(): Promise<AuthSessionResponse | null> 
 async function parseErrorMessage(response: Response): Promise<string> {
     try {
         const payload = (await response.json()) as ApiErrorResponse;
+        if (response.status === 503 && (payload?.errorCode === 'RELEASE_MAINTENANCE' || payload?.message === 'Release maintenance in progress')) {
+            return translate(getStoredLocale(), 'maintenance.title');
+        }
         if (payload?.message) {
             return payload.message;
         }
@@ -1006,7 +1013,7 @@ export type AiOnboardingSuggestion = {
     };
 };
 
-export type RecommendationSummary = { id: number; title: string; published: boolean; version: number; updatedAt: string; publishedAt?: string; publisherName?: string; coverImageUrl?: string; merchantId?:number;articleTitles?:Record<string,string> };
+export type RecommendationSummary = { id: number; title: string; published: boolean; version: number; updatedAt: string; publishedAt?: string; publisherName?: string; coverImageUrl?: string; merchantId?:number;articleTitles?:Record<string,string>;issueDate?:string|null;issueDateSource?:'REVIEWED_SOURCE'|'UNKNOWN' };
 export type ReferenceOfferContext={supplierKey?:string;channel?:'COSTCO_WAREHOUSE'|'COSTCO_ONLINE';variantKey?:string;sourceMessageKey?:string;sourceUrl?:string;activityStart?:string|null;activityEnd?:string|null;activityApplies?:boolean;windowEvidence?:string;startSearchComplete?:boolean};
 export type ReferenceResolution={state:string;amount:number|null;itemIds:number[];unknownWindows:number};
 export type RecommendationFacts = { brand?:string|null;model?:string|null;packaging?:string|null;specification?:string|null; name: string; itemNumber?: string | null; referencePrice?: number | null; originalPrice?: number | null; discountAmount?: number | null; priceUnit?: string | null; offerStart?: string | null; offerEnd?: string | null; couponStart?: string | null; couponEnd?: string | null; offerNotes?: string | null;referenceContext?:ReferenceOfferContext|null;referenceQuote?:ReferenceResolution };
@@ -1027,6 +1034,10 @@ export const recommendationTaxonomyApi = {
     assign:(id:number,input:RecommendationAssignment)=>putJson<RecommendationDetail,RecommendationAssignment>(recommendationBase+'/'+id+'/classification',input)
 };
 export type ArticleText={title:string;body:string;sourceHash:string;reviewedAt:string};
+export type ArticleRevisionLocale='ja-JP'|'zh-CN'|'zh-TW'|'en-US';
+export type ArticleRevisionArticles=Record<ArticleRevisionLocale,{title:string;body:string}>;
+export type ArticleRevisionInput={requestId:string;version:number;sourceHash:string;reviewed:true;articles:ArticleRevisionArticles};
+export type ArticleRevisionReceipt={detail:RecommendationDetail;requestId:string;previousSourceHash:string;articleSourceHash:string;appliedVersion:number;replayed:boolean;current:boolean};
 export type ServiceTerms = {title:string;description:string;eligibility:string;regions:string;restrictions:string;cancellation:string;benefits:string[]};
 export type ServiceFee = {key:string;amount:number|null;descriptions:Record<string,string>};
 export type ServiceOffer = {sourceUrl:string|null;sourceText:string|null;provider:string;staff:number|null;hours:number|null;originalPrice:number|null;price:number|null;currency:'JPY';taxIncluded:boolean;fees:ServiceFee[];noExtraFees:boolean;applicationStart:string|null;applicationEnd:string|null;serviceStart:string|null;serviceEnd:string|null;terms:Record<string,ServiceTerms>;costsReviewed:boolean;windowsReviewed:boolean;reviewed:boolean};
@@ -1045,6 +1056,11 @@ export const productPricingApi={
  cancel:(id:string,adjustment:PriceAdjustment)=>postJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/adjustments/'+adjustment.id+'/cancel',{version:adjustment.version,confirmed:true}),
  regular:(id:string,value:Omit<ProductSale,'reviewedBy'|'reviewedAt'>)=>putJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/regular',{...value,confirmed:true,replaceExisting:true})
 };
+export type ProductRatingValue={stars:number|null;publicVisible:boolean;version:number};
+export const productRatingApi={
+ get:(id:string)=>storeGet<ProductRatingValue>('/api/merchant/product-ratings/'+encodeURIComponent(id)),
+ save:(id:string,input:ProductRatingValue)=>putJson<ProductRatingValue,object>('/api/merchant/product-ratings/'+encodeURIComponent(id),{...input,reviewed:true})
+};
 export const productCatalogApi={
  audit:()=>storeGet<unknown[]>('/api/merchant/product-catalog/audit'),
  restore:(id:string,checkpointId:string,version:number)=>postJson<{value:CatalogInput;canonical:boolean;sourceItemIds:number[];recoveryId?:string},object>('/api/merchant/product-catalog/'+encodeURIComponent(id)+'/restore',{checkpointId,version,reviewed:true}),
@@ -1056,7 +1072,29 @@ export const productCatalogApi={
 };
 export type CurrencyDefinition={code:string;symbol:string;fractionDigits:number;name:string;saleEnabled:boolean};
 export const masterDataApi={currencies:()=>storeGet<CurrencyDefinition[]>('/api/merchant/currencies')};
+function issueDateFailure(status:number,errorCode?:string){return Object.assign(new Error(genericErrorMessage()),{status,errorCode});}
+async function requestRecommendationIssueDate(id:number,accessToken:string,method:'GET'|'PUT',input?:Readonly<RecommendationIssueDateRequest>):Promise<RecommendationIssueDateReview>{
+    const current=()=>typeof accessToken==='string'&&!!accessToken&&getStoredAccessToken()===accessToken;
+    if(!Number.isSafeInteger(id)||id<1||!current())throw issueDateFailure(409,'SESSION_CHANGED');
+    if(method==='PUT'&&(!input||input.reviewed!==true))throw issueDateFailure(400,'INVALID_REQUEST');
+    const body=method==='PUT'?JSON.stringify({issueDate:input!.issueDate,sourceRef:input!.sourceRef,sourceHash:input!.sourceHash,version:input!.version,reviewed:true}):undefined;
+    // Deliberately bind this operation to its captured token. Never retry a date write through another session.
+    const response=await fetch(recommendationBase+'/'+id+'/issue-date',{method,credentials:'same-origin',cache:'no-store',headers:{'Accept-Language':getStoredLocale(),Authorization:'Bearer '+accessToken,...(method==='PUT'?{'Content-Type':'application/json'}:{})},body});
+    if(!current())throw issueDateFailure(409,'SESSION_CHANGED');
+    if(!response.ok){let errorCode:string|undefined;try{const value=await response.json() as {errorCode?:unknown};if(typeof value.errorCode==='string'&&/^[A-Z_]{1,100}$/.test(value.errorCode))errorCode=value.errorCode;}catch{/* Keep the original HTTP status. */}throw issueDateFailure(response.status,errorCode);}
+    const value=await response.json() as ApiResponse<RecommendationIssueDateReview>;
+    if(!current())throw issueDateFailure(409,'SESSION_CHANGED');
+    if(value?.status!=='success'||!value.data)throw issueDateFailure(200,'INVALID_RESPONSE');
+    return value.data;
+}
 export const recommendationApi = {
+    articleRevision:async(id:number,input:ArticleRevisionInput)=>{
+        const response=await authorizedFetch(recommendationBase+'/'+id+'/article-revision',{method:'PUT',body:JSON.stringify(input)},{withJsonContentType:true});
+        if(!response.ok)throw Object.assign(new Error(await parseErrorMessage(response)),{status:response.status});
+        return parseSuccessPayload<ArticleRevisionReceipt>(response);
+    },
+    getIssueDate:(id:number,accessToken:string)=>requestRecommendationIssueDate(id,accessToken,'GET'),
+    saveIssueDate:(id:number,input:Readonly<RecommendationIssueDateRequest>,accessToken:string)=>requestRecommendationIssueDate(id,accessToken,'PUT',input),
     createService:(offer:ServiceOffer)=>postJson<RecommendationDetail,ServiceOffer>(recommendationBase+'/service-offers',offer),
     saveService:(id:number,offer:ServiceOffer,version:number)=>putJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/service-offer',{offer,version}),
     articleLanguage:(id:number,input:{locale:string;title:string;body:string;sourceHash:string;version:number;reviewed:boolean})=>putJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/article-localizations',input),
@@ -1390,7 +1428,7 @@ export const api = {
 
 export type StoreTrip = { id: number; merchantId: number; merchantName: string; deliveryArea: string; deliveryDate: string };
 export type StoreProduct = { id: string; merchantId: number; name: Record<string, string>; description: Record<string, string>; brand: string; price: number; categoryId: string; images: string[]; recommendationReady?:boolean;currency?:string;saleUnit?:string;priceRevision?:number;priceToken?:string;regularPrice?:number;priceAdjustmentId?:number;priceValidFrom?:string;priceValidUntil?:string };
-export type PublicCatalogEntry = {
+export type PublicCatalogEntry = {rating?:number|null;
     productId:string; merchantId:number; name:Record<string,string>; description:Record<string,string>;
     brand:string|null; itemNumber:string|null; specification:Record<string,string>; model:string|null; packaging:string|null;
     gallery:RecommendationPicture[]; categories:RecommendationLabel[];
@@ -1422,6 +1460,8 @@ export const productMarkerApi = {
     markedCatalog:(page=0,merchantId?:number)=>storeGet<PublicCatalogPage>('/api/storefront/marked-product-catalog?'+new URLSearchParams({page:String(page),...(merchantId===undefined?{}:{merchantId:String(merchantId)})}))
 };
 export const storefrontApi = {
+    profile: () => storeGet<SelfProfile>('/api/auth/profile'),
+    saveProfile: (payload: SelfProfilePatch) => patchJson<SelfProfile, SelfProfilePatch>('/api/auth/profile', payload),
     productBrowse:(query:BrowseQuery)=>storeGet<BrowsePage<ProductBrowseCard>>('/api/storefront/product-browse?'+browseQuery(query)),
     productDetail:(id:string,merchantId?:number)=>storeGet<{item:PublicCatalogEntry;markers:ProductMarkerDefinition[];revision:string}>('/api/storefront/product-browse/'+encodeURIComponent(id)+'?'+browseQuery({merchantId})),
     productSales:(ids:string[])=>{if(!ids.length||ids.length>24||new Set(ids).size!==ids.length)return Promise.reject(new Error('browse.invalid'));return storeGet<StoreProduct[]>('/api/storefront/product-sales?'+new URLSearchParams({productIds:ids.join(',')}));},
@@ -1439,15 +1479,20 @@ export const storefrontApi = {
         postJson<{ orderId: number; total: number;currency:string; status: string; emailVerified: boolean; merchantApproved: boolean }, typeof payload>('/api/checkout', payload)
 };
 
+export type SelfAddress = {contactName?:string|null;phone?:string|null;countryRegion?:string|null;city?:string|null;addressLine?:string|null;postalCode?:string|null;latitude?:number|null;longitude?:number|null};
+export type SelfSocialInput = {platform:string;handle:string;displayName?:string|null};
+export type SelfProfile = {id:number;username:string;name:string;email:string;emailVerified:boolean;phone?:string|null;defaultAddress?:SelfAddress|null;socialAccounts:Array<SelfSocialInput & {verified:boolean}>};
+export type SelfProfilePatch = {name?:string;email?:string;phone?:string|null;defaultAddress?:SelfAddress|null;socialAccounts?:SelfSocialInput[]};
+
 export type BrowseQuery={page?:number;merchantId?:number;query?:string;category?:string;locale?:string;marked?:boolean;revision?:string;issueId?:number;period?:'current'|'history'|'all'};
 function browseQuery(query:BrowseQuery){return new URLSearchParams(Object.entries(query).filter(([,value])=>value!==undefined).map(([key,value])=>[key,String(value)]));}
 export type BrowseFacet=RecommendationLabel&{count:number};
 export type BrowsePage<T>={items:T[];page:number;size:number;scopeTotal:number;matchedTotal:number;hasNext:boolean;revision:string;datasetRevision:string;categories:BrowseFacet[];unclassified:number;markedScopeTotal?:number;japanDay?:string;productOccurrences?:number;serviceCards?:number};
 export type ProductBrowseCard=Omit<PublicCatalogEntry,'gallery'|'description'|'referenceOffers'>&{image:RecommendationPicture|null;markers:ProductMarkerDefinition[]};
-export type RecommendationBrowseItem=Omit<RecommendationItem,'imageUrl'|'gallery'|'description'|'sourceFacts'>&{image:RecommendationPicture|null};
+export type RecommendationBrowseItem=Omit<RecommendationItem,'imageUrl'|'gallery'|'description'|'sourceFacts'>&{image:RecommendationPicture|null;rating?:number|null};
 export type ServiceBrowseCard=Pick<ServiceOffer,'provider'|'staff'|'hours'|'originalPrice'|'price'|'currency'|'taxIncluded'|'fees'|'noExtraFees'|'applicationStart'|'applicationEnd'|'serviceStart'|'serviceEnd'>;
 export type RecommendationOccurrence={key:string;post:RecommendationSummary;title:string;history:boolean;item:RecommendationBrowseItem|null;service:boolean;serviceSummary:ServiceBrowseCard|null};
-export type IssueDirectoryEntry={post:RecommendationSummary;title:string;history:boolean;itemCount:number;service:boolean};
+export type IssueDirectoryEntry={post:RecommendationSummary;title:string;history:boolean;itemCount:number;service:boolean;publicItemCount?:number;issueDate?:string|null;issueDateSource?:'REVIEWED_SOURCE'|'UNKNOWN';suppliers?:RecommendationLabel[]};
 export type IssueDirectoryPage={items:IssueDirectoryEntry[];page:number;size:number;total:number;hasNext:boolean;revision:string;datasetRevision:string;japanDay:string};
 
 function buildChatCursorQuery(params?: { beforeId?: number; limit?: number }, hasExistingQuery = false) {

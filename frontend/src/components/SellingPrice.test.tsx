@@ -11,3 +11,7 @@ it('shows an adjusted selling amount separately from regular price and its expli
 it('does not advertise a discount interval when only a regular quote applies',()=>{
  localStorage.setItem('bobbuy_locale','en-US');const view=render(<I18nProvider><SellingPrice product={product}/></I18nProvider>);expect(view.container.querySelector('del')).toBeNull();expect(view.container.textContent).not.toContain('Applicable interval');expect(view.container.textContent).toContain('800');
 });
+it.each(['en-US','zh-CN','zh-TW','ja-JP'])('keeps only the actual amount prominent in compact %s cards',locale=>{
+ localStorage.setItem('bobbuy_locale',locale);const view=render(<I18nProvider><SellingPrice compact product={{...product,currency:'USD',price:12.34,regularPrice:15,priceAdjustmentId:42,priceValidFrom:'2026-10-26T15:00:00Z',priceValidUntil:'2026-10-26T16:00:00Z'}}/></I18nProvider>);
+ const amount=view.container.querySelector('.card-sale-value')!;expect(amount.textContent).toContain('12.34');expect(amount.textContent).not.toContain('100g');expect(view.container.querySelector('.card-price-unit')).toHaveTextContent('/ 100g');expect(view.container.querySelector('.card-price-label')?.textContent).toBeTruthy();expect(view.container.querySelector('del')?.textContent).toContain('15');expect(view.container.textContent).toContain('JST');
+});

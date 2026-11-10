@@ -101,6 +101,7 @@ export default function ClientOrders({node}:{node?:number}) {
                     <Tag>{order.status}</Tag>
                   </Space>
                   <Text>{order.businessId}</Text>
+                  <Text type="secondary">{order.deliverySnapshot?[order.deliverySnapshot.contactName,order.deliverySnapshot.countryRegion,order.deliverySnapshot.city,order.deliverySnapshot.addressLine,order.deliverySnapshot.postalCode].filter(Boolean).join(' · '):t('checkout.legacy_address')}</Text>
                   <Text type="secondary">
                     {t('orders.table.items')}: {order.lines?.length ?? 0}
                   </Text>

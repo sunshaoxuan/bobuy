@@ -32,7 +32,7 @@ class ProductPricingIntegrationTest {
  @BeforeEach void setup(){
   adjustments.deleteAll();store.seed();when(time.now()).thenReturn(now);admin=tokens.createAccessToken(users.findById(1000L).orElseThrow());
   var stranger=new User(9190L,"other",Role.AGENT,0);stranger.setUsername("pricing_other");users.save(stranger);other=tokens.createAccessToken(stranger);
-  var customer=new User(9191L,"buyer",Role.CUSTOMER,0);customer.setUsername("pricing_buyer");users.save(customer);buyer=tokens.createAccessToken(customer);
+  var customer=new User(9191L,"buyer",Role.CUSTOMER,0);customer.setUsername("pricing_buyer");customer.setDefaultAddress(users.findById(1001L).orElseThrow().getDefaultAddress());users.save(customer);buyer=tokens.createAccessToken(customer);
   id="pricing-synthetic-"+UUID.randomUUID();var product=new Product();product.setId(id);product.setMerchantId(1000L);product.setName(Map.of("ja-JP","合成商品"));product.setBasePrice(77);product.setOrderMethod(OrderMethod.PRE_ORDER);product.setVisibilityStatus(ProductVisibility.PUBLIC);product.setSale(new ProductSale(new BigDecimal("1000"),"JPY","1個",null,null,3,1000L,now.minusSeconds(1),true));products.saveAndFlush(product);
  }
  @AfterEach void cleanup(){adjustments.deleteAll();jdbc.update("delete from bb_product_lifecycle_event where product_id=?",id);products.deleteById(id);}
