@@ -12,6 +12,7 @@
 
 - 前端110个唯一用例：目录48、两列表/档案47、评分15。评分首轮13PASS/2FAIL来自整数格式化为2.0/4.0的测试显示比较，原JSON保留，数值语义补验2PASS；未重复计数。两个焦点回归明确将 visibilityState 设为 visible 后补验通过。
 - 类型检查、1448语言键、`npm run build`（含首页预渲染）exit0。构建存在既有 vendor chunk 体积警告，不记为失败；仓库未配置单独 lint script。
+- 后补焦点负例的清理回调曾返回 Vitest 对象，最终类型检查报2项TS2322；仅将回调改为显式void后，最终 `tsc --noEmit` exit0。原3a48d30提交保留，正式输入必须使用后继修正版。
 - 宿主JDK22以 `--release17` 编译291个产品源及102个测试源成功。缓存镜像中的真实Java17.0.21运行新增7单元和2API方法，9个唯一方法最终通过。
 - 原API鉴权夹具1FAIL（开发默认CUSTOMER注入使匿名返回403而预期401）已保留；只关闭该测试的开发身份注入和seed开关，严格匿名401／跨商家404／无部分写断言未放宽，单方法补验PASS。H2合成事务，不接共享PG。自有两容器均已移除，2026-11-10T11:29:49Z后验无该段在途。
 
@@ -19,6 +20,6 @@
 
 参考图官方消费端物化在 Windows `os.setxattr` 失败，像素 NOT_READ；不手工绕过。当前构建为本地普通前端产物，尚非 Node20正式OCI绑定。最终四语真实桌面/手机、抽屉焦点/遮罩/背景滚动/导航、星级保存重开、失焦保滚动/筛选/分页/购物/草稿均需正式包验收。
 
-Java17/H2不替代真实PG：已准备复用同两事务场景的 `ProductRatingPostgresIntegrationTest`，默认禁用。必须先证实 `bobuy-local-postgres-1` 为现有非生产测试实例且没有医院冲突，再以新 `cards_rating_*` schema运行Flyway至28.2；不得指向public或原c2/Bears schema，不全库重置。执行前后须核旧schema表/数据指纹，事务回滚自有合成数据。最终同hash正式core JAR的新进程保存/恢复、旧应用兼容／可执行恢复尚NOT_RUN。
+Java17/H2不替代真实PG：已准备复用同两事务场景的 `ProductRatingPostgresIntegrationTest`，默认禁用。它拒绝已有namespace，先在新 `cards_rating_*` schema迁至28.1并存合成主档哨兵，再实际Flyway迁至28.2，逐旧表比对全部行及列结构指纹，确保旧产品不自动生成评分；随后运行两个事务API场景。该入口尚NOT_RUN。必须先证实 `bobuy-local-postgres-1` 为现有非生产测试实例且没有医院冲突；不得指向public或原c2/Bears schema，不全库重置。执行前后还须核那些保留schema表/数据指纹，事务回滚本次API合成数据，保留独立namespace哨兵及失败证据。最终同hash正式core JAR的新进程保存/恢复、旧应用兼容／可执行恢复尚NOT_RUN。
 
 公开GitHub不推送，不使用待答 raw CDT 或旧中止CDP。未上传任何新包，无SSH、生产备份／迁移／切换、真实内容或交易写入。后续发布需精确core/web及恢复输入、必要独验与当时鲜活内容窗口，不能复用已归还旧窗。

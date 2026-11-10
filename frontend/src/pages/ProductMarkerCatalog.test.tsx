@@ -19,4 +19,4 @@ it('retains loaded pages and does not refetch either stream on repeated visibili
  const calls=mocks.productBrowse.mock.calls.length;await act(async()=>{for(let i=0;i<3;i++){fireEvent.blur(window);fireEvent(document,new Event('visibilitychange'));fireEvent.focus(window);fireEvent(document,new Event('visibilitychange'));}});
  expect(mocks.productBrowse).toHaveBeenCalledTimes(calls);expect(within(all).getByRole('heading',{name:'next'})).toBeInTheDocument();expect(within(all).getByRole('heading',{name:'Product'})).toBeInTheDocument();
 });
-afterEach(()=>vi.restoreAllMocks());
+afterEach(()=>{vi.restoreAllMocks();});
