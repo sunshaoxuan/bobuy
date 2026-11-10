@@ -24,7 +24,7 @@ public class PublicRecommendationBrowseService {
    ReferenceOfferContext referenceContext,ReferenceQuoteService.Resolution referenceQuote){}
  public record ServiceCard(String provider,Integer staff,java.math.BigDecimal hours,java.math.BigDecimal originalPrice,
    java.math.BigDecimal price,String currency,Boolean taxIncluded,List<RecommendationServiceOffer.Fee> fees,boolean noExtraFees,
-   LocalDate applicationStart,LocalDate applicationEnd,LocalDate serviceStart,LocalDate serviceEnd){}
+   LocalDate applicationStart,LocalDate applicationEnd,LocalDate serviceStart,LocalDate serviceEnd,RecommendationServiceOffer.Basis basis,List<RecommendationServiceOffer.PackageOption> packages){}
  public record Occurrence(String key,RecommendationService.Summary post,String title,boolean history,ItemCard item,boolean service,ServiceCard serviceSummary){}
  public record Page(List<Occurrence> items,int page,int size,long scopeTotal,long matchedTotal,long productOccurrences,long serviceCards,
    boolean hasNext,String revision,List<PublicProductBrowseService.Facet> categories,long unclassified,String japanDay,String datasetRevision){}
@@ -92,7 +92,7 @@ public class PublicRecommendationBrowseService {
   var facets=counts.entrySet().stream().map(e->new PublicProductBrowseService.Facet(e.getKey(),labels.get(e.getKey()).name(),e.getValue())).toList();
   var filtered=scope.stream().filter(r->cat.isEmpty()||r.item()!=null&&(cat.equals("__unclassified")?ids(r.item()).isEmpty():ids(r.item()).contains(cat))).toList();
   int start=(int)Math.min((long)page*24,filtered.size()),end=Math.min(start+24,filtered.size());
-  var rows=filtered.subList(start,end).stream().map(r->{var s=r.detail().serviceOffer();return new Occurrence(r.detail().post().id()+":"+(r.item()==null?"service":r.item().id),r.detail().post(),title(r.detail(),locale),r.history(),r.item()==null?null:card(r.item()),r.item()==null,s==null?null:new ServiceCard(s.provider(),s.staff(),s.hours(),s.originalPrice(),s.price(),s.currency(),s.taxIncluded(),s.fees(),s.noExtraFees(),s.applicationStart(),s.applicationEnd(),s.serviceStart(),s.serviceEnd()));}).toList();
+  var rows=filtered.subList(start,end).stream().map(r->{var s=r.detail().serviceOffer();return new Occurrence(r.detail().post().id()+":"+(r.item()==null?"service":r.item().id),r.detail().post(),title(r.detail(),locale),r.history(),r.item()==null?null:card(r.item()),r.item()==null,s==null?null:new ServiceCard(s.provider(),s.staff(),s.hours(),s.originalPrice(),s.price(),s.currency(),s.taxIncluded(),s.fees(),s.noExtraFees(),s.applicationStart(),s.applicationEnd(),s.serviceStart(),s.serviceEnd(),s.effectiveBasis(),s.packages()));}).toList();
   return new Page(rows,page,24,scope.size(),filtered.size(),scope.size()-services,services,end<filtered.size(),version,facets,unclassified,day.toString(),datasetVersion);
  }
 }

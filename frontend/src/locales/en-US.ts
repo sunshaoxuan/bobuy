@@ -1304,6 +1304,22 @@ const messages: Dictionary = {
   "issueDate.invalidHash": "Enter the source content’s 64-character SHA-256.",
   "issueDate.unavailable": "A current merchant session and an owned issue are required.",
   "issueDate.parentConflict": "The issue version changed. Date and article drafts are kept. Reload this page to review current content, then review the source again.",
+  "service.basis": "Service format",
+  "service.staff_hours": "Staff and hours",
+  "service.task_packages": "Package references",
+  "service.packages": "Reference packages",
+  "service.package_hint": "List each package and its scope separately. Prices are not a combined service total. State additional conditions in the fee notes.",
+  "service.package_item": "Package {index}",
+  "service.package_name": "Package name",
+  "service.package_scope": "Scope and conditions",
+  "service.package_originalPrice": "Sourced regular package price (JPY incl. tax, optional)",
+  "service.package_price": "Reference package price (JPY incl. tax)",
+  "service.package_reference": "Reference package price (not live)",
+  "service.add_package": "Add package",
+  "service.fee_kind": "Fee type",
+  "service.fee_fixed": "Confirmed fixed amount",
+  "service.fee_conditional": "Conditional note (no total)",
+  "service.change_basis": "Changing format clears fees and packages. Four-language copy and source are kept. Continue?",
 };
 
 export default messages;

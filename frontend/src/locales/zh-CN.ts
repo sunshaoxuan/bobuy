@@ -1304,6 +1304,22 @@ const messages: Dictionary = {
   "issueDate.invalidHash": "请输入来源内容的 64 位 SHA-256。",
   "issueDate.unavailable": "需要当前商家会话及本人期次。",
   "issueDate.parentConflict": "期次版本已变化，日期和文章草稿已保留。请刷新本页核对最新内容，再重新审核来源。",
+  "service.basis": "服务形式",
+  "service.staff_hours": "按人数／工时",
+  "service.task_packages": "按套餐参考",
+  "service.packages": "参考套餐",
+  "service.package_hint": "各套餐按范围分别列价，不合计为统一服务价。附加条件请在费用说明中列明。",
+  "service.package_item": "套餐 {index}",
+  "service.package_name": "套餐名称",
+  "service.package_scope": "服务范围及适用条件",
+  "service.package_originalPrice": "有来源的套餐原价（JPY含税，可空）",
+  "service.package_price": "套餐参考价（JPY含税）",
+  "service.package_reference": "套餐参考价（非实时）",
+  "service.add_package": "增加套餐",
+  "service.fee_kind": "费用形式",
+  "service.fee_fixed": "明确固定金额",
+  "service.fee_conditional": "条件说明（不计总价）",
+  "service.change_basis": "更改形式将清空费用与套餐，保留四语说明和来源。继续？",
 };
 
 export default messages;
