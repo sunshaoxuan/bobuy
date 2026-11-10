@@ -20,6 +20,7 @@
 .issue-directory-date-note{margin:4px 8px 10px;color:#566150;font-size:12px;line-height:1.6;}
 .issue-directory-date{display:grid;grid-template-columns:1fr;min-width:50px;line-height:1.15;}
 .issue-directory-month{font-size:11px;font-weight:600;}.issue-directory-date b{font-size:24px;letter-spacing:-.04em;}.issue-directory-date small{font-size:10px;}
+.issue-directory-date .issue-directory-date-kind{margin-top:2px;font-weight:600;line-height:1.35;overflow-wrap:anywhere;}
 .issue-directory-date-unknown{display:flex;flex-direction:column;align-items:center;gap:4px;max-width:62px;line-height:1.35;overflow-wrap:anywhere;}
 .issue-directory-date-unknown .anticon{font-size:23px;}.issue-directory-date-unknown small{font-size:10px;font-weight:500;}
 .issue-directory-count{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-width:36px;padding:2px 5px;box-sizing:border-box;border:1px solid #68725f;border-radius:20px;color:#34412f;background:#f3f6ef;font-size:11px;line-height:1.5;}
