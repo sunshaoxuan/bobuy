@@ -1,10 +1,10 @@
 {
   "candidateKind": "CONSUMER_UI_WITH_REVIEWED_ISSUE_DATE_V1",
-  "candidate": "Complete5746 consumer UI plus exact6bf source-date metadata and00e60 navigation repair; Fix1 waits for existing loading animation before exact disabled assertion",
-  "baseHead": "1f30f8fc7a87e184b6af264384f81810505a0e86",
+  "candidate": "Date-display clarity and hidden storefront node selector on exact production48433; frontend-only followup, source acceptance only",
+  "baseHead": "a787030263a1da5394ae756b774c434a8bf8bdc0",
   "sourceDigestAlgorithm": "sha256-json-utf8-sourceFiles-v1",
-  "sourceDigest": "4025f6fa2302a69b76a8e58a98758af7cfcfcfcf308a7e2228646bf5306abdd5",
-  "sourceFileCount": 713,
+  "sourceDigest": "2a6e6eb70244db9c8d69305b114d49dc59155c1a779c92b1507904189a0f0940",
+  "sourceFileCount": 714,
   "sourceFiles": [
     {
       "path": ".github/workflows/ci.yml",
@@ -2493,13 +2493,13 @@
     },
     {
       "path": "frontend/src/components/IssueDirectory.test.tsx",
-      "gitLfBytes": 13058,
-      "gitLfSha256": "0ed013717433ab7d2629961eec48a55b3aaefe0633c76bc300e9b17e43bee262"
+      "gitLfBytes": 24307,
+      "gitLfSha256": "f00aac29d3b212885a9e6e5612b86cd7945171b7297c12d0296e2d39718dfd69"
     },
     {
       "path": "frontend/src/components/IssueDirectory.tsx",
-      "gitLfBytes": 7944,
-      "gitLfSha256": "2feef69d135c72bfaa0bb939c7f24029d22724c11f67ea3d7d05fece7989f07a"
+      "gitLfBytes": 10400,
+      "gitLfSha256": "3d1cb74887571dffec8fd0418ad0700ca307ce6d1ed1a9310a24eb28183ca31d"
     },
     {
       "path": "frontend/src/components/L10nInput.test.tsx",
@@ -2698,8 +2698,8 @@
     },
     {
       "path": "frontend/src/components/RecommendationIssueDatePanel.test.tsx",
-      "gitLfBytes": 6537,
-      "gitLfSha256": "6e0a24a7a9d0f5410ea5e6aa917bf98abd0bcd1f327a6f1b8c2cadb1097013b2"
+      "gitLfBytes": 9377,
+      "gitLfSha256": "df20cc40e9f726246c09c852ec86919be3d3694c48ce60b5e9c071e97fb32f50"
     },
     {
       "path": "frontend/src/components/RecommendationIssueDatePanel.tsx",
@@ -2802,9 +2802,14 @@
       "gitLfSha256": "df3bc72532b800063ef247e4bf4adccea15ac3b2d4dd7f6edea51dff272383b0"
     },
     {
+      "path": "frontend/src/components/StoreNavigation.hiddenNode.test.tsx",
+      "gitLfBytes": 3430,
+      "gitLfSha256": "dcf0a910c760feb1032063a27df743cc409361bd521a5fbc80e414ba08be98dc"
+    },
+    {
       "path": "frontend/src/components/StoreNavigation.tsx",
-      "gitLfBytes": 2789,
-      "gitLfSha256": "a8fd2e6eb3f703f3e0d757dfc184dcad73d1355b3cb6d082e1a31f00cc4ae181"
+      "gitLfBytes": 2064,
+      "gitLfSha256": "2911a928195295275b2be272097a32f268ac3e3727eea867587441b109fa9ee2"
     },
     {
       "path": "frontend/src/components/StoredImage.test.tsx",
@@ -2833,8 +2838,8 @@
     },
     {
       "path": "frontend/src/components/issue-directory.css",
-      "gitLfBytes": 3804,
-      "gitLfSha256": "cd0a20531a40704ca0ad5f71af49d0343882c840513304c51757010013729cfe"
+      "gitLfBytes": 4114,
+      "gitLfSha256": "714668680a001744b5a98e50c2118250fb0fa70a1c65e3e949e087c5f92b5361"
     },
     {
       "path": "frontend/src/components/maintenance-notice.css",
@@ -2943,8 +2948,8 @@
     },
     {
       "path": "frontend/src/locales/en-US.ts",
-      "gitLfBytes": 77189,
-      "gitLfSha256": "ec8f7674b62cd89d61d46cd8db7d6fcf584a614d4c291a345a325db78a837598"
+      "gitLfBytes": 77538,
+      "gitLfSha256": "46f0909fcd11bc06b436906b1ce5afbe88c31a7271ce57316f072a2be4add134"
     },
     {
       "path": "frontend/src/locales/experience.en-US.json",
@@ -2963,8 +2968,8 @@
     },
     {
       "path": "frontend/src/locales/ja-JP.ts",
-      "gitLfBytes": 87036,
-      "gitLfSha256": "9c8e1ea9c0bef713b3f102a35bdee03cc04f763508502345f4c5e1be46c4edf2"
+      "gitLfBytes": 87383,
+      "gitLfSha256": "acac4d1fb71bb9e6dcead2feae4e396bb2eea873f2292e9a1754f0ea200f1aee"
     },
     {
       "path": "frontend/src/locales/types.ts",
@@ -2973,13 +2978,13 @@
     },
     {
       "path": "frontend/src/locales/zh-CN.ts",
-      "gitLfBytes": 74228,
-      "gitLfSha256": "fcad9929e4e581ea11df10ae064acb9ed5ff73390e558c4d43bc158d2c02ad5d"
+      "gitLfBytes": 74536,
+      "gitLfSha256": "b68c81bde17b78fb99e7708e96e6c9ea5a0c54b6bb0dc5f535d0261a3df3825f"
     },
     {
       "path": "frontend/src/locales/zh-TW.ts",
-      "gitLfBytes": 79273,
-      "gitLfSha256": "8b1eed71a54650bdb0726fd94040951079a671ab40f8e13f55986c9aed2ad7f0"
+      "gitLfBytes": 79581,
+      "gitLfSha256": "fb918a05f2ec6630fc5b56b2f036019cd2fcd6c29351985da65997f3d86e1a57"
     },
     {
       "path": "frontend/src/main.tsx",
@@ -3268,8 +3273,8 @@
     },
     {
       "path": "frontend/src/pages/StorefrontContext.test.tsx",
-      "gitLfBytes": 11226,
-      "gitLfSha256": "ec561a9ffcd01fad7b0d762223b1d9493910e66e946880f3f7511282f1922a50"
+      "gitLfBytes": 12454,
+      "gitLfSha256": "f9f6cec2d76b95879b0c88d834bfe1ac050c3979f3444f97b2acf57faba07372"
     },
     {
       "path": "frontend/src/pages/Suppliers.test.tsx",
@@ -4054,24 +4059,124 @@
         },
         "noAssertionRelaxed": true
       }
+    },
+    "uiFollowup": {
+      "applicationSourceCommit": "a787030263a1da5394ae756b774c434a8bf8bdc0",
+      "liveBase": "48433bd7c9bd60b1f77d46a572800d38d0ef0a7a",
+      "previousAcceptedInputsSha256": "6a20f67e81919a0bf53088183e5bc0473a94885654fce867ec36356cf9e519f9",
+      "reviewedChangedPaths": [
+        "frontend/src/components/IssueDirectory.test.tsx",
+        "frontend/src/components/IssueDirectory.tsx",
+        "frontend/src/components/RecommendationIssueDatePanel.test.tsx",
+        "frontend/src/components/StoreNavigation.hiddenNode.test.tsx",
+        "frontend/src/components/StoreNavigation.tsx",
+        "frontend/src/components/issue-directory.css",
+        "frontend/src/locales/en-US.ts",
+        "frontend/src/locales/ja-JP.ts",
+        "frontend/src/locales/zh-CN.ts",
+        "frontend/src/locales/zh-TW.ts",
+        "frontend/src/pages/StorefrontContext.test.tsx"
+      ],
+      "updatedSourceRows": [
+        "frontend/src/components/IssueDirectory.test.tsx",
+        "frontend/src/components/IssueDirectory.tsx",
+        "frontend/src/components/RecommendationIssueDatePanel.test.tsx",
+        "frontend/src/components/StoreNavigation.tsx",
+        "frontend/src/components/issue-directory.css",
+        "frontend/src/locales/en-US.ts",
+        "frontend/src/locales/ja-JP.ts",
+        "frontend/src/locales/zh-CN.ts",
+        "frontend/src/locales/zh-TW.ts",
+        "frontend/src/pages/StorefrontContext.test.tsx"
+      ],
+      "addedSourceRows": [
+        "frontend/src/components/StoreNavigation.hiddenNode.test.tsx"
+      ],
+      "applicationBackendAndSqlUnchanged": true,
+      "productionSchema": "28.1",
+      "productionSqlRequired": false,
+      "schemaMetadataNote": "Original V28 to V28.1 build/migration lineage retained for the existing capture contract. Production is already V28.1; this followup must not replay SQL.",
+      "bindingRule": "Application source is bound to a787 and714 canonical source rows. The metadata-only commit identifies the private build; no GitHub run or hosted CI is asserted.",
+      "priorQaSnapshot": {
+        "status": "COMPLETE_SOURCE_FROZEN_REMOTE_COMBINED_CI_AND_INDEPENDENT_QA_PENDING",
+        "sourceOnly": true,
+        "backendRuntimeAccepted": false,
+        "migrationRuntimeAccepted": false,
+        "formalBuildAndNonProductionBrowserAcceptance": "PENDING_REQUIRED",
+        "productionPublishAllowed": false,
+        "committedReport": "docs/reports/CONSUMER-UI-INTEGRATION-20261109.md",
+        "lightweightSnapshotChecks": {
+          "typeDiagnostics": 0,
+          "i18n": "PASS",
+          "componentUniquePassed": 86,
+          "componentUniqueTotal": 86,
+          "files": 8
+        },
+        "originalIndependentPackageQaNotSuperseded": true,
+        "old82Bf0WholeApplicationOnV28_1": "NOT_RUN"
+      },
+      "privateWebRoute": {
+        "kind": "LOCAL_PRIVATE_WEB_BUILD_V1",
+        "frontendTree": "49ab49f5a70e022c80679897ec2f9ac1014efca1",
+        "recipeInputs": [
+          {
+            "path": "frontend/Dockerfile",
+            "bytes": 454,
+            "sha256": "c016f86b2fc30c80d5c1d84398aafced91a5cc0a98665036ffa0f9231ff51cd4"
+          },
+          {
+            "path": "frontend/package-lock.json",
+            "bytes": 214193,
+            "sha256": "41eb3aa6e16a58d52831ad3089e8f0b39fea9aa52e725178f6399fb06899cda7"
+          },
+          {
+            "path": "frontend/nginx.conf",
+            "bytes": 723,
+            "sha256": "5a652087a5674719fe7c69455400f84e5591da85a0cad9efdcd620556ffb4ea5"
+          }
+        ],
+        "preserveCoreSource": "48433bd7c9bd60b1f77d46a572800d38d0ef0a7a",
+        "preserveSchema": "28.1",
+        "sqlAllowed": false,
+        "updates": [
+          "frontend"
+        ],
+        "provenanceReady": false,
+        "formalArtifact": "NOT_RUN",
+        "publicPush": "DENIED_NOT_RETRIED"
+      }
     }
   },
   "qa": {
-    "status": "COMPLETE_SOURCE_FROZEN_REMOTE_COMBINED_CI_AND_INDEPENDENT_QA_PENDING",
+    "status": "LOCAL_UI_SOURCE_ACCEPTED_PRIVATE_WEB_BUILD_ARTIFACT_BROWSER_PENDING",
     "sourceOnly": true,
     "backendRuntimeAccepted": false,
     "migrationRuntimeAccepted": false,
-    "formalBuildAndNonProductionBrowserAcceptance": "PENDING_REQUIRED",
+    "formalBuildAndNonProductionBrowserAcceptance": "NOT_RUN",
     "productionPublishAllowed": false,
     "committedReport": "docs/reports/CONSUMER-UI-INTEGRATION-20261109.md",
     "lightweightSnapshotChecks": {
       "typeDiagnostics": 0,
-      "i18n": "PASS",
-      "componentUniquePassed": 86,
-      "componentUniqueTotal": 86,
-      "files": 8
+      "i18n": "PASS1439 keys",
+      "combinedInteractionUniquePassed": 8,
+      "combinedInteractionUniqueTotal": 8,
+      "reusedStandaloneDateTests": 50,
+      "reusedStandaloneNodeTests": 54,
+      "countsNotAdded": true
     },
     "originalIndependentPackageQaNotSuperseded": true,
-    "old82Bf0WholeApplicationOnV28_1": "NOT_RUN"
+    "old82Bf0WholeApplicationOnV28_1": "NOT_RUN",
+    "sourceReviewReceipts": [
+      {
+        "commit": "90b6a039ba282899cccb268998e35f849ac03a91",
+        "sha256": "73fe08be10e384e1612268324847a8835617c83caec158b8c8b3593276575c55"
+      },
+      {
+        "commit": "5a92e3e651b4402fc8e40c8f869669a3f88289cd",
+        "sha256": "5468b97a748393e80d54eded74f3828242aac1426b01869108c804535da2f280"
+      }
+    ],
+    "localCombinedReceiptSha256": "189418b1f77e9db3d5453b054d8a2065eacc954bcc47f91470d5f06d0443fee0",
+    "hostedCi": "NOT_RUN; not required by the private web provenance route"
   }
 }
