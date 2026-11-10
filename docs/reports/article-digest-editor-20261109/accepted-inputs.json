@@ -1,10 +1,10 @@
 {
   "candidateKind": "ARTICLE_DIGEST_EDITOR_V1",
-  "candidate": "Published article revision Fix1: exact synthetic fixture teardown; no production code or schema change",
-  "baseHead": "f1bfbadb1ed2c1d900791cd708989df519471792",
+  "candidate": "Article navigation repair: router-owned leave confirmation before POP/PUSH/REPLACE; frontend only",
+  "baseHead": "bf0ca746f2612c797ad2427d6e204007e94fc04b",
   "sourceDigestAlgorithm": "sha256-json-utf8-sourceFiles-v1",
-  "sourceDigest": "1fb73212c22c321471772d315f98478167acb42a7243be3218bf684535e1ba27",
-  "sourceFileCount": 686,
+  "sourceDigest": "628d2ea0fa9f9aa1a0ba0f448446f1476f53bdd5293bb23a38d9636cb5953417",
+  "sourceFileCount": 688,
   "sourceFiles": [
     {
       "path": ".github/workflows/ci.yml",
@@ -2112,6 +2112,11 @@
       "gitLfSha256": "fb5ba17937ea7eef05b11088e364f758b2fbbab95d855312414a364659952baa"
     },
     {
+      "path": "docs/reports/ARTICLE-NAVIGATION-FIX-20261109.md",
+      "gitLfBytes": 3274,
+      "gitLfSha256": "ee401525f71a997f6cd123e4c55106fc3eb7ca9620b757aec1e3b3a4e185bcf4"
+    },
+    {
       "path": "docs/reports/C1-PUBLIC-CARD-INSET-20261109.md",
       "gitLfBytes": 2747,
       "gitLfSha256": "24b1a716d0d775849b2b37acff95c85fe37970ee3a1a0a88e7e01b744d7f83b5"
@@ -2848,8 +2853,8 @@
     },
     {
       "path": "frontend/src/locales/en-US.ts",
-      "gitLfBytes": 74894,
-      "gitLfSha256": "7debc2340a81c57a829b4013c8c1561370efce9ab4b0b04acbbc0381ba21c01e"
+      "gitLfBytes": 74986,
+      "gitLfSha256": "18255a50f93bb909006df95238692f064e8ede8366c8643801ea2cef8cfa1d45"
     },
     {
       "path": "frontend/src/locales/experience.en-US.json",
@@ -2868,8 +2873,8 @@
     },
     {
       "path": "frontend/src/locales/ja-JP.ts",
-      "gitLfBytes": 84214,
-      "gitLfSha256": "8122a7380ac13ef35de53eda5d6e450270cd9a76149a605941f2441eefb2072c"
+      "gitLfBytes": 84313,
+      "gitLfSha256": "413e9a8cf1a9d5139d1ca2e507c0102e92f73ec87ab3418ab7cbc66e15696e0a"
     },
     {
       "path": "frontend/src/locales/types.ts",
@@ -2878,18 +2883,18 @@
     },
     {
       "path": "frontend/src/locales/zh-CN.ts",
-      "gitLfBytes": 72003,
-      "gitLfSha256": "a88f55befe0fe4c9a22a62106eec045c102bd6146fa26a9342078090202de293"
+      "gitLfBytes": 72099,
+      "gitLfSha256": "e4023be461d1391239cd72462b2d5b584a4e0c8fe5e07c16daeb3c61535eb95a"
     },
     {
       "path": "frontend/src/locales/zh-TW.ts",
-      "gitLfBytes": 76991,
-      "gitLfSha256": "5152b537c0327403669911a35b03e027d55e829c4efb50eb105decb0163a2bb8"
+      "gitLfBytes": 77087,
+      "gitLfSha256": "eb451b43a8667b2d146fc3cde2df309caaea966b5509469b06b789a8f5a47f54"
     },
     {
       "path": "frontend/src/main.tsx",
-      "gitLfBytes": 533,
-      "gitLfSha256": "17f9ff412e485752a25257eb0c9f21df329157416b467273137c448d968160d6"
+      "gitLfBytes": 680,
+      "gitLfSha256": "48a662508f9482ece37e3589fbf9e7e1ba62f6b4e228cef5114b17d683eb2c43"
     },
     {
       "path": "frontend/src/mediaUploadApi.test.ts",
@@ -3003,8 +3008,8 @@
     },
     {
       "path": "frontend/src/pages/LoginPage.test.tsx",
-      "gitLfBytes": 1949,
-      "gitLfSha256": "e739cf61c59a15fc974b3b0d560feb7a5d1d7a6a6525311b8f4dfe1434fa9242"
+      "gitLfBytes": 2261,
+      "gitLfSha256": "73b2b08c9387da87388058d1f9d9608350a121b9d2a7b82ec964a375ff034c95"
     },
     {
       "path": "frontend/src/pages/LoginPage.tsx",
@@ -3123,18 +3128,23 @@
     },
     {
       "path": "frontend/src/pages/Recommendations.articleRevision.test.tsx",
-      "gitLfBytes": 5970,
-      "gitLfSha256": "1df57222dd48d766c32f3673f13edcbb39f5ad6d6e75b3e08214092649118f68"
+      "gitLfBytes": 6027,
+      "gitLfSha256": "9d9064d64e49bf78f29d0a955620634cb635c0de190c8b513d2029e01499085b"
+    },
+    {
+      "path": "frontend/src/pages/Recommendations.navigation.test.tsx",
+      "gitLfBytes": 7934,
+      "gitLfSha256": "b9f0d31a379e8bf4e34c17bf178464bca1e95eaf8f5d3e0ceb812ae4a2932b15"
     },
     {
       "path": "frontend/src/pages/Recommendations.test.tsx",
-      "gitLfBytes": 6541,
-      "gitLfSha256": "62f17d52f78d7a4d74e762f6c5cb2a63cadb9cf7fb8618c0bdf10b7aa4dd763a"
+      "gitLfBytes": 6635,
+      "gitLfSha256": "338505517699a0b14c8c1aba598874747a6aa911b431826484a7232f6b62f6a2"
     },
     {
       "path": "frontend/src/pages/Recommendations.tsx",
-      "gitLfBytes": 22539,
-      "gitLfSha256": "99a102ef20dc7ded43f8a1b7926009195c60956c5e626abe174040bfad88f3e6"
+      "gitLfBytes": 21969,
+      "gitLfSha256": "fcdae522901e3d62525ce59b06692588401096913bc81b6ee5330eb60ed16583"
     },
     {
       "path": "frontend/src/pages/StockMaster.test.tsx",
@@ -3148,8 +3158,8 @@
     },
     {
       "path": "frontend/src/pages/StoreNavigation.test.tsx",
-      "gitLfBytes": 5473,
-      "gitLfSha256": "b48a01e06a9d56945fcb72157efb317d497ed7119ec75507bff45d01660b7d7c"
+      "gitLfBytes": 5830,
+      "gitLfSha256": "4c7ab27f0a2d574c00a07d9bc8487085e92572c9b6b1784463c76c335f446583"
     },
     {
       "path": "frontend/src/pages/Storefront.tsx",
@@ -3701,10 +3711,36 @@
       ],
       "unchangedSourceRows": 684,
       "noLocalJavaPgDockerRun": true
+    },
+    "navigationRepair": {
+      "base": "bf0ca746f2612c797ad2427d6e204007e94fc04b",
+      "previousAcceptedInputsSha256": "1c350a28ece0811fc426529c697ce80bdfdd2794885991be572338af20722204",
+      "sourcePaths": [
+        "docs/reports/ARTICLE-NAVIGATION-FIX-20261109.md",
+        "frontend/src/locales/en-US.ts",
+        "frontend/src/locales/ja-JP.ts",
+        "frontend/src/locales/zh-CN.ts",
+        "frontend/src/locales/zh-TW.ts",
+        "frontend/src/main.tsx",
+        "frontend/src/pages/LoginPage.test.tsx",
+        "frontend/src/pages/Recommendations.articleRevision.test.tsx",
+        "frontend/src/pages/Recommendations.navigation.test.tsx",
+        "frontend/src/pages/Recommendations.test.tsx",
+        "frontend/src/pages/Recommendations.tsx",
+        "frontend/src/pages/StoreNavigation.test.tsx"
+      ],
+      "backendAndMigrationsUnchanged": true,
+      "reuseExactCoreSource": "bf0ca746f2612c797ad2427d6e204007e94fc04b",
+      "reuseCoreCi": 42643671437,
+      "reuseCorePg": "35 cases:23 integration+12 unit; original exact JAR only",
+      "originalRealBackFailureReportSha256": "ed030e45fdbbb683e0c5160e98a744ae8f294d4fa617e0a011b550fe3b5d3320",
+      "globalRouterInitializationChanged": true,
+      "newWebRuntime": "NOT_RUN",
+      "localHeavyOrProductionActions": 0
     }
   },
   "qa": {
-    "status": "FIX1_FIXTURE_ISOLATION_REAL_REMOTE_CI_RERUN_PENDING",
+    "status": "NAVIGATION_REPAIR_REMOTE_CI_AND_INDEPENDENT_FORMAL_WEB_QA_PENDING",
     "sourceOnly": true,
     "backendRuntimeAccepted": false,
     "migrationRuntimeAccepted": false,
