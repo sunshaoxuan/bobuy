@@ -1,0 +1,9 @@
+{
+  "scope": "geometry only; screenshot review required separately",
+  "desktop": "PASS",
+  "phone390": "PASS",
+  "largeGapNegative": "REJECTED",
+  "phoneTwoColumnNegative": "REJECTED",
+  "actualDesktopGap": 20.0,
+  "actualColumnBottomDifference": 0.0
+}

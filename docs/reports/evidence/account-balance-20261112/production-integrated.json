@@ -1,0 +1,57 @@
+{
+  "source": "606deb375b125d41e451dad555bb306f70f0fae3",
+  "release": "20261112.5",
+  "desktop": {
+    "boxes": {
+      "address": {
+        "bottom": 939.28125,
+        "height": 608.9375,
+        "width": 510,
+        "x": 850,
+        "y": 330.34375
+      },
+      "basic": {
+        "bottom": 653.4375,
+        "height": 323.09375,
+        "width": 510,
+        "x": 320,
+        "y": 330.34375
+      },
+      "verification": {
+        "bottom": 939.28125,
+        "height": 265.84375,
+        "width": 510,
+        "x": 320,
+        "y": 673.4375
+      }
+    },
+    "overflow": false,
+    "scripts": [
+      "/assets/index-CBs8Mwj9.js"
+    ],
+    "styles": [
+      "/assets/index-rtJFeJk2.css"
+    ],
+    "viewport": [
+      1440,
+      900
+    ]
+  },
+  "phone": {
+    "addressX": 16,
+    "barBackgrounds": [
+      "rgb(255, 255, 255)",
+      "rgb(255, 255, 255)"
+    ],
+    "basicX": 16,
+    "overflow": false,
+    "verificationX": 16,
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  "network": [],
+  "productionProfileOrOrderWrites": 0,
+  "accountInputsUnchanged": true
+}
