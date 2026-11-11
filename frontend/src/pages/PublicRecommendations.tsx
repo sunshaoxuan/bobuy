@@ -5,6 +5,8 @@ import '../public-catalog.css';
 import RecommendationBrowse from './RecommendationBrowse';
 import {ConsumerDetail,DetailOffer,ProductDetailCode,ProductDetailSpecs} from '../components/ConsumerDetail';
 import ReservationAdd from '../components/ReservationAdd';
+import CatalogReferenceHistory from '../components/CatalogReferenceHistory';
+import type {PublicCatalogEntry} from '../api';
 import {useDetailReturnFocus} from '../components/useDetailReturnFocus';
 import {ProductBrand} from '../components/ProductMetadata';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -80,14 +82,22 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
 }
 
 function RecommendationProductDetail({item,product,onClose,onAdd,canBuy,purchasePending=false}:{item?:RecommendationItem;product?:StoreProduct;purchasePending?:boolean;onClose:()=>void;onAdd:(p:StoreProduct)=>void;canBuy:(p:StoreProduct)=>boolean}){
- const {t,locale}=useI18n();
+ const {t,locale}=useI18n(),location=useLocation(),node=selectedNode(location.search),privatePreview=location.pathname.startsWith('/admin');
+ const [attempt,setAttempt]=useState(0);
+ const [references,setReferences]=useState<{key:string;entry?:PublicCatalogEntry;error?:boolean}>();
+ const referenceKey=`${item?.productId}:${item?.itemNumber}:${node}`;
+ useEffect(()=>{let active=true;setReferences(undefined);
+  if(!item?.productId||node===-1||privatePreview)return;
+  void storefrontApi.productDetail(item.productId,node).then(result=>{if(active){if(result.item.productId!==item.productId||result.item.itemNumber!==item.itemNumber)throw Error('browse.invalid');setReferences({key:referenceKey,entry:result.item});}}).catch(()=>{if(active)setReferences({key:referenceKey,error:true});});
+  return()=>{active=false;};
+ },[referenceKey,attempt,privatePreview]);
  if(!item)return null;const text=recommendationText(item,locale),gallery=item.gallery??[];
  return <Drawer className="rec-product-detail consumer-detail-drawer" title={<ProductDetailCode value={item.itemNumber}/>} width="min(1120px,100vw)" open={!!item} onClose={onClose}>
   <ConsumerDetail media={<RecommendationImageViewer consumer key={item.id} pictures={gallery} name={text.name}/>}>
   <ProductBrand brand={item.brand}/><h1><RecommendationName text={text}/></h1>
-  <ProductDetailSpecs model={item.model} packaging={item.packaging} specification={text.specification}/>{text.missing&&<Alert type="info" message={t('article.field_source',{fields:text.sourceFields.map(key=>t(key==='description'?'master.descriptions':key==='specification'?'master.specifications':'rec.fact.'+key)).join(' · ')})}/>}
+  <ProductDetailSpecs model={item.model} packaging={item.packaging}/>{text.missing&&<Alert type="info" message={t('article.field_source',{fields:text.sourceFields.map(key=>t(key==='description'?'master.descriptions':key==='specification'?'master.specifications':'rec.fact.'+key)).join(' · ')})}/>}
   {product&&<SellingPrice product={product}/>}
-  <DetailOffer facts={{...item,offerNotes:text.offerNotes}}/>
+  {item.productId&&!privatePreview?(references?.key===referenceKey?(references.entry?<CatalogReferenceHistory entry={references.entry}/>:<Alert type="warning" message={t('catalog.load_error')} action={<Button onClick={()=>setAttempt(value=>value+1)}>{t('catalog.retry')}</Button>}/>):<Spin/>):<DetailOffer facts={item}/> }
   {text.description&&<section className="rec-detail-description"><h2>{t('detail.description')}</h2>{text.description.split('\n').map((line,i)=><p key={i}>{line}</p>)}</section>}
   {item.showSupplier&&item.supplierName&&<p>{t('class.supplier')}: {localizedContent(item.supplierName,locale)}</p>}
   <Button type="primary" size="large" block disabled={purchasePending||!product||!canBuy(product)} onClick={()=>product&&onAdd(product)}>{t(purchasePending?'browse.sales_pending':product&&canBuy(product)?'store.add_cart':'catalog.not_available')}</Button>

@@ -12,6 +12,8 @@ import {ConsumerDetail,ProductDetailCode,ProductDetailSpecs} from '../components
 import ReservationAdd from '../components/ReservationAdd';
 import CatalogReferenceHistory from '../components/CatalogReferenceHistory';
 import {productDetailContent} from '../productDetailContent';
+import {selectReferenceOffers} from '../referencePriceDisplay';
+import {recommendationText} from '../recommendationText';
 import SellingPrice from '../components/SellingPrice';
 import {selectedNode} from '../storeNavigation';
 import {useBrowsePages,useSectionActivation,useNextBrowsePage,useBoundedSales} from '../browsePaging';
@@ -111,9 +113,10 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   function management(entry:CatalogIdentity){return canEdit?.(entry)?<div className="marker-product-actions" data-card-action role="group" aria-label={t('marker.actions')+': '+catalogText(entry.name,locale).value}><span>{t('marker.actions')}</span><Button className="marker-product-trigger" onClick={()=>onEdit?.(entry)} aria-label={t('marker.set')+': '+catalogText(entry.name,locale).value}>{t('marker.set')}</Button></div>:null;}
   const detailName=opened?catalogText(opened.name,locale):undefined;
   const content=useMemo(()=>opened?productDetailContent(opened,locale):undefined,[opened,locale]);
-  const originalSpec=opened?catalogText(opened.specification,locale):undefined,originalDescription=opened?catalogText(opened.description,locale):undefined;
-  const detailSpec=content&&originalSpec?{...originalSpec,value:content.specification,language:content.specification===originalSpec.value?originalSpec.language:undefined,fallback:content.specification===originalSpec.value&&originalSpec.fallback}:undefined;
-  const description=content&&originalDescription?{...originalDescription,value:content.description,language:content.description===originalDescription.value?originalDescription.language:undefined,fallback:content.description===originalDescription.value&&originalDescription.fallback}:undefined;
+  const originalDescription=opened?catalogText(opened.description,locale):undefined;
+  const mainReference=opened?selectReferenceOffers(opened).main:undefined;
+  const descriptionValue=content?.description||(mainReference?recommendationText(mainReference.facts,locale).description:'')||'';
+  const description=content&&originalDescription?{...originalDescription,value:descriptionValue,language:descriptionValue===originalDescription.value?originalDescription.language:undefined,fallback:descriptionValue===originalDescription.value&&originalDescription.fallback}:undefined;
   const hideMarked=kind==='marked'&&ready&&!browse.error&&browse.page?.markedScopeTotal===0;
   return <>{!hideMarked&&<section ref={activation.element} className="recommendations rec-public public-product-catalog" aria-label={t(kind==='marked'?'marker.featured':'store.catalog')} aria-busy={browse.busy}>
     <header className="catalog-master-heading">{kind==='marked'?<h2>{t('marker.featured')}</h2>:<h1>{t('store.catalog')}</h1>}{ready&&<span role="status">{t('catalog.result_count',{shown:filtered.length,total:browse.page!.matchedTotal})}</span>}<ProductSort value={sort} onChange={setSort}/></header>
@@ -131,14 +134,14 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
     </section>}
     <Drawer className="rec-product-detail catalog-master-detail consumer-detail-drawer" title={opened?<ProductDetailCode value={opened.itemNumber}/>:t('store.details')} width="min(1120px,100vw)" open={!!detailId} onClose={closeDetail}>
       {detailId&&!opened&&(detail.error?<BrowseError error={detail.error} retry={()=>setDetailAttempt(value=>value+1)} refresh={reload}/>:<Spin/>)}
-      {opened&&detailName&&detailSpec&&description&&<ConsumerDetail media={<RecommendationImageViewer consumer key={opened.productId} pictures={opened.gallery} name={detailName.value}/>}>
+      {opened&&detailName&&description&&<ConsumerDetail media={<RecommendationImageViewer consumer key={opened.productId} pictures={opened.gallery} name={detailName.value}/>}>
         <ProductMarkerBadges markers={detail.markers??[]}/>
         {management(opened)}
         <ProductBrand brand={opened.brand}/><h1 lang={detailName.language}><span className="rec-name-local">{detailName.value||t('rec.not_stated')}</span>{locale!=='ja-JP'&&opened.name['ja-JP']&&opened.name['ja-JP']!==detailName.value&&<span className="rec-name-original" lang="ja">（{opened.name['ja-JP']}）</span>}</h1>{sourceNote(detailName)}
-        <ProductDetailSpecs model={content?.model} packaging={content?.packaging} specification={detailSpec.value} specificationLanguage={detailSpec.language}/>{detailSpec.value&&sourceNote(detailSpec)}
+        <ProductDetailSpecs model={content?.model} packaging={content?.packaging} specification={!mainReference?catalogText(opened.specification,locale).value:undefined} specificationLanguage={!mainReference?catalogText(opened.specification,locale).language:undefined}/>
         {sale&&!pricePending(opened.productId)&&<SellingPrice product={sale}/>}
+        {content&&<CatalogReferenceHistory entry={opened}/> }
         {description.value&&<section><h2>{t('detail.description')}</h2>{sourceNote(description)}<div lang={description.language}>{description.value.split('\n').map((line,index)=><p key={index}>{line}</p>)}</div></section>}
-        {content&&<CatalogReferenceHistory entry={opened} content={content}/> }
         <Button type="primary" size="large" block icon={<PlusOutlined aria-hidden/>} disabled={pricePending(opened.productId)||!sale||!canBuy(sale)} onClick={()=>{if(sale&&!pricePending(opened.productId)&&canBuy(sale))onAdd(sale);}}>{t(pricePending(opened.productId)?'browse.sales_pending':sale&&canBuy(sale)?'store.add_cart':'catalog.not_available')}</Button>
       </ConsumerDetail>}
     </Drawer>
