@@ -1,0 +1,73 @@
+{
+  "status": {
+    "phase": "FRONTEND_HEALTHY",
+    "source": "a3b0d1796a8d44d25b65ffd673d3d7c8a2378039",
+    "at": "2026-11-11T16:31:40Z",
+    "imagesChanged": [
+      "frontend"
+    ],
+    "databaseChanged": false,
+    "otherServicesUnchanged": true,
+    "exactFrontendFiles": 79
+  },
+  "exactFrontendFiles": 79,
+  "frontendImage": "sha256:cf82a90acf09497c65a1c3cf2fc399d0ac5b7973c08cb19df62b39be26a08ffe",
+  "frontendRestarts": 0,
+  "otherServices": {
+    "core-service": {
+      "image": "sha256:1c9e1fee6377042ca7964f9d642f78661e5737e0f9ea4ed6d834345ea24cf567",
+      "health": "healthy",
+      "restarts": 0
+    },
+    "ai-service": {
+      "image": "sha256:e17c56f30483def52fb4c3e58d7ef7fad8dced0f89ff23109ab380cdca32fa48",
+      "health": "healthy",
+      "restarts": 0
+    },
+    "im-service": {
+      "image": "sha256:3c286b1672db0eca6df4803085d7f5ba9cc475c4542a4f93302ee5c74277369a",
+      "health": "healthy",
+      "restarts": 0
+    },
+    "auth-service": {
+      "image": "sha256:6863ae4b03b28b8fbd8666fb15b1599cca6a8b9911bbbd1cf555d9d4b8a3eabb",
+      "health": "healthy",
+      "restarts": 0
+    },
+    "gateway-service": {
+      "image": "sha256:71354226154b2ca27ff7ddaaf90923f0954db9cabac363564447322030d21dcd",
+      "health": "healthy",
+      "restarts": 0
+    },
+    "postgres": {
+      "image": "sha256:1a0c23d53c1ad77468c8653fa6eed4f4105cfbef9e6f027bc1dfeb16949a8c29",
+      "health": "healthy",
+      "restarts": 0
+    },
+    "rustfs": {
+      "image": "sha256:e287e99762a4a3e7b706526e01f2ff755f67db165e9be9f6b907adc6fb6d6ee1",
+      "health": "running",
+      "restarts": 0
+    },
+    "gateway": {
+      "image": "sha256:892bb2152464f0c5d8972593a5f5afaf8054552580b699d95f8ff4af08c2d33d",
+      "health": "running",
+      "restarts": 0
+    },
+    "redis": {
+      "image": "sha256:858f009f9709ce576febc734aa78b8f6d624b82571f9ddb6bda4377c833b3499",
+      "health": "healthy",
+      "restarts": 0
+    },
+    "nacos": {
+      "image": "sha256:cca69ab12348b43d95c9b2c1d8d31d5a8d56e634ed4232a510423a9346090a70",
+      "health": "healthy",
+      "restarts": 0
+    },
+    "rabbitmq": {
+      "image": "sha256:606d8c0d6b3c18d1da9afc53bc7cdb2a8d5486df91b5a9830e9e07626c9ae281",
+      "health": "healthy",
+      "restarts": 0
+    }
+  }
+}

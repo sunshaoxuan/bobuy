@@ -1,0 +1,80 @@
+{
+  "result": "PASS",
+  "firstSource": "d158c0dee361af765c0588689a7e851206bac0e8",
+  "finalSource": "a3b0d1796a8d44d25b65ffd673d3d7c8a2378039",
+  "relatedTests": 76,
+  "finalStructureTests": 52,
+  "finalLanguageTests": 24,
+  "countsOverlap": true,
+  "browserCases": 16,
+  "glyphAndActionRegions": 64,
+  "sourceContent": "published 66517 read-only plus clearly labeled synthetic boundaries",
+  "backend": "unchanged",
+  "logs": {
+    "frontend/detail-tests-final.log": {
+      "sha256": "48bf8ae9eb4c9ad20b5798f29564b5f8707de5df93f225c355984cb31db7c893",
+      "tail": [
+        " ✓ src/components/RecommendationImageViewer.test.tsx  (6 tests) 104ms",
+        " ✓ src/components/SellingPrice.test.tsx  (6 tests) 226ms",
+        "",
+        " Test Files  6 passed (6)",
+        "      Tests  76 passed (76)",
+        "   Start at  00:51:45",
+        "   Duration  26.42s (transform 755ms, setup 3.14s, collect 28.84s, tests 7.00s, environment 5.03s, prepare 974ms)",
+        ""
+      ]
+    },
+    "frontend/detail-tests-accepted.log": {
+      "sha256": "746ef25b2339dcf63f44ea908d7241dfcd509475808a1e49ec1385a27f805320",
+      "tail": [
+        "",
+        " ✓ src/components/ConsumerDetail.test.tsx  (8 tests) 344ms",
+        "",
+        " Test Files  3 passed (3)",
+        "      Tests  52 passed (52)",
+        "   Start at  01:00:19",
+        "   Duration  19.72s (transform 657ms, setup 1.74s, collect 19.32s, tests 4.89s, environment 2.62s, prepare 489ms)",
+        ""
+      ]
+    },
+    "frontend/detail-tests-language.log": {
+      "sha256": "3a54a5109b1a716d984389bda7204277c98a314794a2bc290e47cb15616ae4d6",
+      "tail": [
+        " ✓ src/components/ConsumerDetail.test.tsx  (8 tests) 370ms",
+        " ✓ src/pages/PublicProductCatalog.test.tsx  (16 tests) 1627ms",
+        "",
+        " Test Files  2 passed (2)",
+        "      Tests  24 passed (24)",
+        "   Start at  01:28:58",
+        "   Duration  9.91s (transform 516ms, setup 1.40s, collect 11.99s, tests 2.00s, environment 2.23s, prepare 367ms)",
+        ""
+      ]
+    },
+    "frontend/detail-build-release.log": {
+      "sha256": "14e97278aa786348d2051a9b81e86e5d962c31f06c9d7d803fa45994f0f472c1",
+      "tail": [
+        "dist/assets/Table-1hDrZZQq.js                         147.12 kB │ gzip:  47.47 kB",
+        "dist/assets/index-CfcujxRj.js                       1,138.39 kB │ gzip: 392.96 kB",
+        "✓ built in 6.64s",
+        "",
+        "> bobbuy-frontend@0.1.0 postbuild",
+        "> node scripts/prerender-home.mjs",
+        "",
+        "Generated home-only crawlable HTML; SPA detail/admin template retains no shared home canonical."
+      ]
+    },
+    "frontend/detail-build-language.log": {
+      "sha256": "cee406b73fd38ad4a5f575ab0e839377b5cbcd1d9b1e66644c0cd6de5dc6168c",
+      "tail": [
+        "dist/assets/Table-C_XCGCPd.js                         147.12 kB │ gzip:  47.47 kB",
+        "dist/assets/index-Bk3chwaw.js                       1,138.47 kB │ gzip: 393.00 kB",
+        "✓ built in 6.56s",
+        "",
+        "> bobbuy-frontend@0.1.0 postbuild",
+        "> node scripts/prerender-home.mjs",
+        "",
+        "Generated home-only crawlable HTML; SPA detail/admin template retains no shared home canonical."
+      ]
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "data": "synthetic; not production facts",
+  "results": [
+    {
+      "scenario": "unknown",
+      "result": "PASS"
+    },
+    {
+      "scenario": "zero",
+      "result": "PASS"
+    },
+    {
+      "scenario": "max",
+      "result": "PASS"
+    }
+  ]
+}

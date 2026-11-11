@@ -1,0 +1,1154 @@
+[
+  {
+    "width": 360,
+    "locale": "zh-CN",
+    "control": "source",
+    "ink": [
+      3,
+      15,
+      114,
+      28
+    ],
+    "margins": [
+      3,
+      15,
+      3,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.5
+    ],
+    "signedY": -0.5,
+    "budget": 1.3,
+    "box": {
+      "x": 113,
+      "y": 580.96875,
+      "width": 117.15625,
+      "height": 44,
+      "top": 580.96875,
+      "right": 230.15625,
+      "bottom": 624.96875,
+      "left": 113,
+      "font": "13px / 21.45px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "cds2.costcojapan.jp"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 360,
+    "locale": "zh-CN",
+    "control": "action",
+    "ink": [
+      3,
+      3,
+      321,
+      43
+    ],
+    "margins": [
+      3,
+      3,
+      3,
+      3
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "signedY": 0.0,
+    "budget": 2,
+    "box": {
+      "x": 18,
+      "y": 779.609375,
+      "width": 324,
+      "height": 46,
+      "top": 779.609375,
+      "right": 342,
+      "bottom": 825.609375,
+      "left": 18,
+      "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "\u6682\u672a\u5f00\u653e\u9884\u8ba2"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 360,
+    "locale": "ja-JP",
+    "control": "source",
+    "ink": [
+      3,
+      15,
+      114,
+      28
+    ],
+    "margins": [
+      3,
+      15,
+      3,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.5
+    ],
+    "signedY": -0.5,
+    "budget": 1.3,
+    "box": {
+      "x": 113,
+      "y": 558.890625,
+      "width": 117.15625,
+      "height": 44,
+      "top": 558.890625,
+      "right": 230.15625,
+      "bottom": 602.890625,
+      "left": 113,
+      "font": "13px / 21.45px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+      "text": "cds2.costcojapan.jp"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 360,
+    "locale": "ja-JP",
+    "control": "action",
+    "ink": [
+      3,
+      3,
+      321,
+      43
+    ],
+    "margins": [
+      3,
+      3,
+      3,
+      3
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "signedY": 0.0,
+    "budget": 2,
+    "box": {
+      "x": 18,
+      "y": 780.28125,
+      "width": 324,
+      "height": 46,
+      "top": 780.28125,
+      "right": 342,
+      "bottom": 826.28125,
+      "left": 18,
+      "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+      "text": "\u73fe\u5728\u306f\u4e88\u7d04\u53d7\u4ed8\u524d\u3067\u3059"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 360,
+    "locale": "en-US",
+    "control": "source",
+    "ink": [
+      3,
+      15,
+      114,
+      28
+    ],
+    "margins": [
+      3,
+      15,
+      3,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.5
+    ],
+    "signedY": -0.5,
+    "budget": 1.3,
+    "box": {
+      "x": 113,
+      "y": 535.640625,
+      "width": 117.15625,
+      "height": 44,
+      "top": 535.640625,
+      "right": 230.15625,
+      "bottom": 579.640625,
+      "left": 113,
+      "font": "13px / 21.45px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "cds2.costcojapan.jp"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 360,
+    "locale": "en-US",
+    "control": "action",
+    "ink": [
+      3,
+      3,
+      321,
+      43
+    ],
+    "margins": [
+      3,
+      3,
+      3,
+      3
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "signedY": 0.0,
+    "budget": 2,
+    "box": {
+      "x": 18,
+      "y": 779.78125,
+      "width": 324,
+      "height": 46,
+      "top": 779.78125,
+      "right": 342,
+      "bottom": 825.78125,
+      "left": 18,
+      "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "Not open for booking yet"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 360,
+    "locale": "zh-TW",
+    "control": "source",
+    "ink": [
+      3,
+      15,
+      114,
+      28
+    ],
+    "margins": [
+      3,
+      15,
+      3,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.5
+    ],
+    "signedY": -0.5,
+    "budget": 1.3,
+    "box": {
+      "x": 113,
+      "y": 580.96875,
+      "width": 117.15625,
+      "height": 44,
+      "top": 580.96875,
+      "right": 230.15625,
+      "bottom": 624.96875,
+      "left": 113,
+      "font": "13px / 21.45px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "cds2.costcojapan.jp"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 360,
+    "locale": "zh-TW",
+    "control": "action",
+    "ink": [
+      3,
+      3,
+      321,
+      43
+    ],
+    "margins": [
+      3,
+      3,
+      3,
+      3
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "signedY": 0.0,
+    "budget": 2,
+    "box": {
+      "x": 18,
+      "y": 779.609375,
+      "width": 324,
+      "height": 46,
+      "top": 779.609375,
+      "right": 342,
+      "bottom": 825.609375,
+      "left": 18,
+      "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "\u66ab\u672a\u958b\u653e\u9810\u8a02"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 390,
+    "locale": "zh-CN",
+    "control": "source",
+    "ink": [
+      3,
+      15,
+      114,
+      28
+    ],
+    "margins": [
+      3,
+      15,
+      3,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.5
+    ],
+    "signedY": -0.5,
+    "budget": 1.3,
+    "box": {
+      "x": 113,
+      "y": 580.96875,
+      "width": 117.15625,
+      "height": 44,
+      "top": 580.96875,
+      "right": 230.15625,
+      "bottom": 624.96875,
+      "left": 113,
+      "font": "13px / 21.45px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "cds2.costcojapan.jp"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 390,
+    "locale": "zh-CN",
+    "control": "action",
+    "ink": [
+      3,
+      3,
+      351,
+      43
+    ],
+    "margins": [
+      3,
+      3,
+      3,
+      3
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "signedY": 0.0,
+    "budget": 2,
+    "box": {
+      "x": 18,
+      "y": 779.609375,
+      "width": 354,
+      "height": 46,
+      "top": 779.609375,
+      "right": 372,
+      "bottom": 825.609375,
+      "left": 18,
+      "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "\u6682\u672a\u5f00\u653e\u9884\u8ba2"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 390,
+    "locale": "ja-JP",
+    "control": "source",
+    "ink": [
+      3,
+      16,
+      114,
+      29
+    ],
+    "margins": [
+      3,
+      16,
+      3,
+      15
+    ],
+    "centerError": [
+      0.0,
+      0.5
+    ],
+    "signedY": 0.5,
+    "budget": 1.3,
+    "box": {
+      "x": 113,
+      "y": 558.40625,
+      "width": 117.15625,
+      "height": 44,
+      "top": 558.40625,
+      "right": 230.15625,
+      "bottom": 602.40625,
+      "left": 113,
+      "font": "13px / 21.45px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+      "text": "cds2.costcojapan.jp"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 390,
+    "locale": "ja-JP",
+    "control": "action",
+    "ink": [
+      3,
+      3,
+      351,
+      43
+    ],
+    "margins": [
+      3,
+      3,
+      3,
+      3
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "signedY": 0.0,
+    "budget": 2,
+    "box": {
+      "x": 18,
+      "y": 779.796875,
+      "width": 354,
+      "height": 46,
+      "top": 779.796875,
+      "right": 372,
+      "bottom": 825.796875,
+      "left": 18,
+      "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+      "text": "\u73fe\u5728\u306f\u4e88\u7d04\u53d7\u4ed8\u524d\u3067\u3059"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 390,
+    "locale": "en-US",
+    "control": "source",
+    "ink": [
+      3,
+      15,
+      114,
+      28
+    ],
+    "margins": [
+      3,
+      15,
+      3,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.5
+    ],
+    "signedY": -0.5,
+    "budget": 1.3,
+    "box": {
+      "x": 113,
+      "y": 558.640625,
+      "width": 117.15625,
+      "height": 44,
+      "top": 558.640625,
+      "right": 230.15625,
+      "bottom": 602.640625,
+      "left": 113,
+      "font": "13px / 21.45px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "cds2.costcojapan.jp"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 390,
+    "locale": "en-US",
+    "control": "action",
+    "ink": [
+      3,
+      3,
+      351,
+      43
+    ],
+    "margins": [
+      3,
+      3,
+      3,
+      3
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "signedY": 0.0,
+    "budget": 2,
+    "box": {
+      "x": 18,
+      "y": 780.03125,
+      "width": 354,
+      "height": 46,
+      "top": 780.03125,
+      "right": 372,
+      "bottom": 826.03125,
+      "left": 18,
+      "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "Not open for booking yet"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 390,
+    "locale": "zh-TW",
+    "control": "source",
+    "ink": [
+      3,
+      15,
+      114,
+      28
+    ],
+    "margins": [
+      3,
+      15,
+      3,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.5
+    ],
+    "signedY": -0.5,
+    "budget": 1.3,
+    "box": {
+      "x": 113,
+      "y": 580.96875,
+      "width": 117.15625,
+      "height": 44,
+      "top": 580.96875,
+      "right": 230.15625,
+      "bottom": 624.96875,
+      "left": 113,
+      "font": "13px / 21.45px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "cds2.costcojapan.jp"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 390,
+    "locale": "zh-TW",
+    "control": "action",
+    "ink": [
+      3,
+      3,
+      351,
+      43
+    ],
+    "margins": [
+      3,
+      3,
+      3,
+      3
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "signedY": 0.0,
+    "budget": 2,
+    "box": {
+      "x": 18,
+      "y": 779.609375,
+      "width": 354,
+      "height": 46,
+      "top": 779.609375,
+      "right": 372,
+      "bottom": 825.609375,
+      "left": 18,
+      "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "\u66ab\u672a\u958b\u653e\u9810\u8a02"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 510,
+    "locale": "zh-CN",
+    "control": "source",
+    "ink": [
+      3,
+      15,
+      114,
+      28
+    ],
+    "margins": [
+      3,
+      15,
+      3,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.5
+    ],
+    "signedY": -0.5,
+    "budget": 1.3,
+    "box": {
+      "x": 113,
+      "y": 603.96875,
+      "width": 117.15625,
+      "height": 44,
+      "top": 603.96875,
+      "right": 230.15625,
+      "bottom": 647.96875,
+      "left": 113,
+      "font": "13px / 21.45px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "cds2.costcojapan.jp"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 510,
+    "locale": "zh-CN",
+    "control": "action",
+    "ink": [
+      3,
+      3,
+      471,
+      43
+    ],
+    "margins": [
+      3,
+      3,
+      3,
+      3
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "signedY": 0.0,
+    "budget": 2,
+    "box": {
+      "x": 18,
+      "y": 779.859375,
+      "width": 474,
+      "height": 46,
+      "top": 779.859375,
+      "right": 492,
+      "bottom": 825.859375,
+      "left": 18,
+      "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "\u6682\u672a\u5f00\u653e\u9884\u8ba2"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 510,
+    "locale": "ja-JP",
+    "control": "source",
+    "ink": [
+      3,
+      15,
+      114,
+      28
+    ],
+    "margins": [
+      3,
+      15,
+      3,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.5
+    ],
+    "signedY": -0.5,
+    "budget": 1.3,
+    "box": {
+      "x": 113,
+      "y": 581.609375,
+      "width": 117.15625,
+      "height": 44,
+      "top": 581.609375,
+      "right": 230.15625,
+      "bottom": 625.609375,
+      "left": 113,
+      "font": "13px / 21.45px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+      "text": "cds2.costcojapan.jp"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 510,
+    "locale": "ja-JP",
+    "control": "action",
+    "ink": [
+      3,
+      3,
+      471,
+      43
+    ],
+    "margins": [
+      3,
+      3,
+      3,
+      3
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "signedY": 0.0,
+    "budget": 2,
+    "box": {
+      "x": 18,
+      "y": 780.25,
+      "width": 474,
+      "height": 46,
+      "top": 780.25,
+      "right": 492,
+      "bottom": 826.25,
+      "left": 18,
+      "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+      "text": "\u73fe\u5728\u306f\u4e88\u7d04\u53d7\u4ed8\u524d\u3067\u3059"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 510,
+    "locale": "en-US",
+    "control": "source",
+    "ink": [
+      3,
+      15,
+      114,
+      28
+    ],
+    "margins": [
+      3,
+      15,
+      3,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.5
+    ],
+    "signedY": -0.5,
+    "budget": 1.3,
+    "box": {
+      "x": 113,
+      "y": 581.84375,
+      "width": 117.15625,
+      "height": 44,
+      "top": 581.84375,
+      "right": 230.15625,
+      "bottom": 625.84375,
+      "left": 113,
+      "font": "13px / 21.45px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "cds2.costcojapan.jp"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 510,
+    "locale": "en-US",
+    "control": "action",
+    "ink": [
+      3,
+      3,
+      471,
+      43
+    ],
+    "margins": [
+      3,
+      3,
+      3,
+      3
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "signedY": 0.0,
+    "budget": 2,
+    "box": {
+      "x": 18,
+      "y": 780.484375,
+      "width": 474,
+      "height": 46,
+      "top": 780.484375,
+      "right": 492,
+      "bottom": 826.484375,
+      "left": 18,
+      "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "Not open for booking yet"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 510,
+    "locale": "zh-TW",
+    "control": "source",
+    "ink": [
+      3,
+      15,
+      114,
+      28
+    ],
+    "margins": [
+      3,
+      15,
+      3,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.5
+    ],
+    "signedY": -0.5,
+    "budget": 1.3,
+    "box": {
+      "x": 113,
+      "y": 603.96875,
+      "width": 117.15625,
+      "height": 44,
+      "top": 603.96875,
+      "right": 230.15625,
+      "bottom": 647.96875,
+      "left": 113,
+      "font": "13px / 21.45px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "cds2.costcojapan.jp"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 510,
+    "locale": "zh-TW",
+    "control": "action",
+    "ink": [
+      3,
+      3,
+      471,
+      43
+    ],
+    "margins": [
+      3,
+      3,
+      3,
+      3
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "signedY": 0.0,
+    "budget": 2,
+    "box": {
+      "x": 18,
+      "y": 779.859375,
+      "width": 474,
+      "height": 46,
+      "top": 779.859375,
+      "right": 492,
+      "bottom": 825.859375,
+      "left": 18,
+      "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "\u66ab\u672a\u958b\u653e\u9810\u8a02"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 1440,
+    "locale": "zh-CN",
+    "control": "source",
+    "ink": [
+      3,
+      15,
+      114,
+      29
+    ],
+    "margins": [
+      3,
+      15,
+      3,
+      15
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "signedY": 0.0,
+    "budget": 1.4000000000000001,
+    "box": {
+      "x": 1050.59375,
+      "y": 575.25,
+      "width": 117.15625,
+      "height": 44,
+      "top": 575.25,
+      "right": 1167.75,
+      "bottom": 619.25,
+      "left": 1050.59375,
+      "font": "13px / 21.45px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "cds2.costcojapan.jp"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 1440,
+    "locale": "zh-CN",
+    "control": "action",
+    "ink": [
+      3,
+      3,
+      475,
+      43
+    ],
+    "margins": [
+      3,
+      3,
+      3,
+      3
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "signedY": 0.0,
+    "budget": 2,
+    "box": {
+      "x": 937.59375,
+      "y": 751.140625,
+      "width": 478.40625,
+      "height": 46,
+      "top": 751.140625,
+      "right": 1416,
+      "bottom": 797.140625,
+      "left": 937.59375,
+      "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "\u6682\u672a\u5f00\u653e\u9884\u8ba2"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 1440,
+    "locale": "ja-JP",
+    "control": "source",
+    "ink": [
+      3,
+      15,
+      114,
+      29
+    ],
+    "margins": [
+      3,
+      15,
+      3,
+      15
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "signedY": 0.0,
+    "budget": 1.4000000000000001,
+    "box": {
+      "x": 1050.59375,
+      "y": 550.453125,
+      "width": 117.15625,
+      "height": 44,
+      "top": 550.453125,
+      "right": 1167.75,
+      "bottom": 594.453125,
+      "left": 1050.59375,
+      "font": "13px / 21.45px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+      "text": "cds2.costcojapan.jp"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 1440,
+    "locale": "ja-JP",
+    "control": "action",
+    "ink": [
+      3,
+      3,
+      475,
+      43
+    ],
+    "margins": [
+      3,
+      3,
+      3,
+      3
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "signedY": 0.0,
+    "budget": 2,
+    "box": {
+      "x": 937.59375,
+      "y": 749.09375,
+      "width": 478.40625,
+      "height": 46,
+      "top": 749.09375,
+      "right": 1416,
+      "bottom": 795.09375,
+      "left": 937.59375,
+      "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+      "text": "\u73fe\u5728\u306f\u4e88\u7d04\u53d7\u4ed8\u524d\u3067\u3059"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 1440,
+    "locale": "en-US",
+    "control": "source",
+    "ink": [
+      3,
+      14,
+      114,
+      28
+    ],
+    "margins": [
+      3,
+      14,
+      3,
+      16
+    ],
+    "centerError": [
+      0.0,
+      1.0
+    ],
+    "signedY": -1.0,
+    "budget": 1.4000000000000001,
+    "box": {
+      "x": 1050.59375,
+      "y": 599.125,
+      "width": 117.15625,
+      "height": 44,
+      "top": 599.125,
+      "right": 1167.75,
+      "bottom": 643.125,
+      "left": 1050.59375,
+      "font": "13px / 21.45px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "cds2.costcojapan.jp"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 1440,
+    "locale": "en-US",
+    "control": "action",
+    "ink": [
+      3,
+      3,
+      475,
+      43
+    ],
+    "margins": [
+      3,
+      3,
+      3,
+      3
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "signedY": 0.0,
+    "budget": 2,
+    "box": {
+      "x": 937.59375,
+      "y": 797.765625,
+      "width": 478.40625,
+      "height": 46,
+      "top": 797.765625,
+      "right": 1416,
+      "bottom": 843.765625,
+      "left": 937.59375,
+      "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "Not open for booking yet"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 1440,
+    "locale": "zh-TW",
+    "control": "source",
+    "ink": [
+      3,
+      15,
+      114,
+      29
+    ],
+    "margins": [
+      3,
+      15,
+      3,
+      15
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "signedY": 0.0,
+    "budget": 1.4000000000000001,
+    "box": {
+      "x": 1050.59375,
+      "y": 575.25,
+      "width": 117.15625,
+      "height": 44,
+      "top": 575.25,
+      "right": 1167.75,
+      "bottom": 619.25,
+      "left": 1050.59375,
+      "font": "13px / 21.45px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "cds2.costcojapan.jp"
+    },
+    "passBudget": true
+  },
+  {
+    "width": 1440,
+    "locale": "zh-TW",
+    "control": "action",
+    "ink": [
+      3,
+      3,
+      475,
+      43
+    ],
+    "margins": [
+      3,
+      3,
+      3,
+      3
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "signedY": 0.0,
+    "budget": 2,
+    "box": {
+      "x": 937.59375,
+      "y": 751.140625,
+      "width": 478.40625,
+      "height": 46,
+      "top": 751.140625,
+      "right": 1416,
+      "bottom": 797.140625,
+      "left": 937.59375,
+      "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+      "text": "\u66ab\u672a\u958b\u653e\u9810\u8a02"
+    },
+    "passBudget": true
+  }
+]

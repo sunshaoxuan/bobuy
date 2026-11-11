@@ -1,0 +1,37 @@
+Here is the detailed review of the product detail screen against your design rules and constraints:
+
+---
+
+### 1. Executive Assessment
+The layout is **production-ready and strictly conforms** to all defined constraints. There are **no critical layout defects, text clippings, or visual collisions**. The visual hierarchy cleanly guides the eye from product identity to pricing, technical specifications, and legal/source disclosures.
+
+---
+
+### 2. Defects vs. Localization Wrapping
+
+* **Actual Clipping / Overlap Defects:** **None.**
+  * All container boundaries, padding (16dp/pt standard gutter), card radii, and divider lines render cleanly.
+  * Strikethrough on `原价: ¥3,498` renders precisely through the font center without clipping adjacent elements.
+  * Links, unit labels, and badge borders have adequate touch and visual buffers.
+* **Localization Line Wrapping (Not a Defect):**
+  * **`规格与计量明细`:** Wraps to two lines (`规格与计量` / `明细`) because the specification key column is set to ~4–5 em width (matching standard 4-character Chinese labels like `包装明细`). The value column is top-aligned to the first baseline, which is standard practice in CJK tabular layouts.
+  * **`日本时间，含起止日`:** Naturally placed as a secondary caption directly underneath the date range `2026-11-09 – 2026-11-22` rather than forcing horizontal stretch or truncation.
+
+---
+
+### 3. Layout & Hierarchy Review
+
+| Section | Spec Compliance | Observations |
+| :--- | :--- | :--- |
+| **Drawer Header** | **Pass** | `✕` close button and `No.66517` high-contrast black pill badge sit cleanly in the fixed drawer header before media. The pill is vertically centered with the dismiss action. |
+| **Media Carousel** | **Pass** | Main card is proportional with rounded corners; pagination badge (`< 1 / 4 >`) is centered; thumbnail active state (black outline on My Melody) is distinct and uncluttered. |
+| **Title & Subtitle** | **Pass** | Muted brand prefix (`KOWA / 興和`), prominent H1 title (`卡通地板坐垫`), and subdued Japanese original title (`キャラクターフロアクッション`) maintain clear typographic hierarchy. |
+| **Specifications** | **Pass** | Label/value rows are clearly divided from the title by a hairline separator. Label-to-value key pairs have consistent horizontal spacing. |
+| **Price Card** | **Pass** | **Exact adherence to user-approved card style:**<br>1. Card header places title `参考售价（非实时）` left, currency flag `JPY` top-right.<br>2. Reference price (`原价: ¥3,498`) and red discount (`折扣金额: -¥700`) sit strictly **above** the right-aligned active price.<br>3. `¥ 2,798` sits dominant and right-aligned with unit `/ 各種1点` underneath.<br>4. Divider cleanly sets apart Channel, Validity Period, and Hyperlinked Source facts below. |
+| **Offer Conditions** | **Pass** | Extracted outside the grey price container into independent section `优惠条件`. Body copy has 100% visibility with no nested scroll or truncation. |
+| **Action Footer** | **Pass** | `暂未开放预订` CTA renders in standard disabled state with consistent corner radius and ample bottom breathing room. |
+
+---
+
+### 4. Capability Confirmation
+The current implementation successfully validates that complex multi-currency, multi-tier pricing (original strike price, absolute discount delta, and primary selling price) alongside multi-source metadata can be represented concisely without visual crowding or data loss.

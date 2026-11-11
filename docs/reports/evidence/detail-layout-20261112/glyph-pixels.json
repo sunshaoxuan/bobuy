@@ -1,0 +1,706 @@
+[
+  {
+    "locale": "zh-CN",
+    "width": 360,
+    "control": "code",
+    "ink": [
+      12,
+      9,
+      73,
+      19
+    ],
+    "innerMargins": [
+      12,
+      9,
+      11,
+      9
+    ],
+    "centerError": [
+      0.5,
+      0.0
+    ],
+    "budget": 1.0
+  },
+  {
+    "locale": "zh-CN",
+    "width": 360,
+    "control": "close",
+    "ink": [
+      16,
+      16,
+      28,
+      28
+    ],
+    "innerMargins": [
+      16,
+      16,
+      16,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "budget": 1.2000000000000002
+  },
+  {
+    "locale": "ja-JP",
+    "width": 360,
+    "control": "code",
+    "ink": [
+      12,
+      9,
+      73,
+      19
+    ],
+    "innerMargins": [
+      12,
+      9,
+      11,
+      9
+    ],
+    "centerError": [
+      0.5,
+      0.0
+    ],
+    "budget": 1.0
+  },
+  {
+    "locale": "ja-JP",
+    "width": 360,
+    "control": "close",
+    "ink": [
+      16,
+      16,
+      28,
+      28
+    ],
+    "innerMargins": [
+      16,
+      16,
+      16,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "budget": 1.2000000000000002
+  },
+  {
+    "locale": "en-US",
+    "width": 360,
+    "control": "code",
+    "ink": [
+      12,
+      9,
+      73,
+      19
+    ],
+    "innerMargins": [
+      12,
+      9,
+      11,
+      9
+    ],
+    "centerError": [
+      0.5,
+      0.0
+    ],
+    "budget": 1.0
+  },
+  {
+    "locale": "en-US",
+    "width": 360,
+    "control": "close",
+    "ink": [
+      16,
+      16,
+      28,
+      28
+    ],
+    "innerMargins": [
+      16,
+      16,
+      16,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "budget": 1.2000000000000002
+  },
+  {
+    "locale": "zh-TW",
+    "width": 360,
+    "control": "code",
+    "ink": [
+      12,
+      9,
+      73,
+      19
+    ],
+    "innerMargins": [
+      12,
+      9,
+      11,
+      9
+    ],
+    "centerError": [
+      0.5,
+      0.0
+    ],
+    "budget": 1.0
+  },
+  {
+    "locale": "zh-TW",
+    "width": 360,
+    "control": "close",
+    "ink": [
+      16,
+      16,
+      28,
+      28
+    ],
+    "innerMargins": [
+      16,
+      16,
+      16,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "budget": 1.2000000000000002
+  },
+  {
+    "locale": "zh-CN",
+    "width": 390,
+    "control": "code",
+    "ink": [
+      12,
+      9,
+      73,
+      19
+    ],
+    "innerMargins": [
+      12,
+      9,
+      11,
+      9
+    ],
+    "centerError": [
+      0.5,
+      0.0
+    ],
+    "budget": 1.0
+  },
+  {
+    "locale": "zh-CN",
+    "width": 390,
+    "control": "close",
+    "ink": [
+      16,
+      16,
+      28,
+      28
+    ],
+    "innerMargins": [
+      16,
+      16,
+      16,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "budget": 1.2000000000000002
+  },
+  {
+    "locale": "ja-JP",
+    "width": 390,
+    "control": "code",
+    "ink": [
+      12,
+      9,
+      73,
+      19
+    ],
+    "innerMargins": [
+      12,
+      9,
+      11,
+      9
+    ],
+    "centerError": [
+      0.5,
+      0.0
+    ],
+    "budget": 1.0
+  },
+  {
+    "locale": "ja-JP",
+    "width": 390,
+    "control": "close",
+    "ink": [
+      16,
+      16,
+      28,
+      28
+    ],
+    "innerMargins": [
+      16,
+      16,
+      16,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "budget": 1.2000000000000002
+  },
+  {
+    "locale": "en-US",
+    "width": 390,
+    "control": "code",
+    "ink": [
+      12,
+      9,
+      73,
+      19
+    ],
+    "innerMargins": [
+      12,
+      9,
+      11,
+      9
+    ],
+    "centerError": [
+      0.5,
+      0.0
+    ],
+    "budget": 1.0
+  },
+  {
+    "locale": "en-US",
+    "width": 390,
+    "control": "close",
+    "ink": [
+      16,
+      16,
+      28,
+      28
+    ],
+    "innerMargins": [
+      16,
+      16,
+      16,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "budget": 1.2000000000000002
+  },
+  {
+    "locale": "zh-TW",
+    "width": 390,
+    "control": "code",
+    "ink": [
+      12,
+      9,
+      73,
+      19
+    ],
+    "innerMargins": [
+      12,
+      9,
+      11,
+      9
+    ],
+    "centerError": [
+      0.5,
+      0.0
+    ],
+    "budget": 1.0
+  },
+  {
+    "locale": "zh-TW",
+    "width": 390,
+    "control": "close",
+    "ink": [
+      16,
+      16,
+      28,
+      28
+    ],
+    "innerMargins": [
+      16,
+      16,
+      16,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "budget": 1.2000000000000002
+  },
+  {
+    "locale": "zh-CN",
+    "width": 510,
+    "control": "code",
+    "ink": [
+      12,
+      9,
+      73,
+      19
+    ],
+    "innerMargins": [
+      12,
+      9,
+      11,
+      9
+    ],
+    "centerError": [
+      0.5,
+      0.0
+    ],
+    "budget": 1.0
+  },
+  {
+    "locale": "zh-CN",
+    "width": 510,
+    "control": "close",
+    "ink": [
+      16,
+      16,
+      28,
+      28
+    ],
+    "innerMargins": [
+      16,
+      16,
+      16,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "budget": 1.2000000000000002
+  },
+  {
+    "locale": "ja-JP",
+    "width": 510,
+    "control": "code",
+    "ink": [
+      12,
+      9,
+      73,
+      19
+    ],
+    "innerMargins": [
+      12,
+      9,
+      11,
+      9
+    ],
+    "centerError": [
+      0.5,
+      0.0
+    ],
+    "budget": 1.0
+  },
+  {
+    "locale": "ja-JP",
+    "width": 510,
+    "control": "close",
+    "ink": [
+      16,
+      16,
+      28,
+      28
+    ],
+    "innerMargins": [
+      16,
+      16,
+      16,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "budget": 1.2000000000000002
+  },
+  {
+    "locale": "en-US",
+    "width": 510,
+    "control": "code",
+    "ink": [
+      12,
+      9,
+      73,
+      19
+    ],
+    "innerMargins": [
+      12,
+      9,
+      11,
+      9
+    ],
+    "centerError": [
+      0.5,
+      0.0
+    ],
+    "budget": 1.0
+  },
+  {
+    "locale": "en-US",
+    "width": 510,
+    "control": "close",
+    "ink": [
+      16,
+      16,
+      28,
+      28
+    ],
+    "innerMargins": [
+      16,
+      16,
+      16,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "budget": 1.2000000000000002
+  },
+  {
+    "locale": "zh-TW",
+    "width": 510,
+    "control": "code",
+    "ink": [
+      12,
+      9,
+      73,
+      19
+    ],
+    "innerMargins": [
+      12,
+      9,
+      11,
+      9
+    ],
+    "centerError": [
+      0.5,
+      0.0
+    ],
+    "budget": 1.0
+  },
+  {
+    "locale": "zh-TW",
+    "width": 510,
+    "control": "close",
+    "ink": [
+      16,
+      16,
+      28,
+      28
+    ],
+    "innerMargins": [
+      16,
+      16,
+      16,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "budget": 1.2000000000000002
+  },
+  {
+    "locale": "zh-CN",
+    "width": 1440,
+    "control": "code",
+    "ink": [
+      12,
+      9,
+      73,
+      19
+    ],
+    "innerMargins": [
+      12,
+      9,
+      11,
+      9
+    ],
+    "centerError": [
+      0.5,
+      0.0
+    ],
+    "budget": 1.0
+  },
+  {
+    "locale": "zh-CN",
+    "width": 1440,
+    "control": "close",
+    "ink": [
+      16,
+      16,
+      28,
+      28
+    ],
+    "innerMargins": [
+      16,
+      16,
+      16,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "budget": 1.2000000000000002
+  },
+  {
+    "locale": "ja-JP",
+    "width": 1440,
+    "control": "code",
+    "ink": [
+      12,
+      9,
+      73,
+      19
+    ],
+    "innerMargins": [
+      12,
+      9,
+      11,
+      9
+    ],
+    "centerError": [
+      0.5,
+      0.0
+    ],
+    "budget": 1.0
+  },
+  {
+    "locale": "ja-JP",
+    "width": 1440,
+    "control": "close",
+    "ink": [
+      16,
+      16,
+      28,
+      28
+    ],
+    "innerMargins": [
+      16,
+      16,
+      16,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "budget": 1.2000000000000002
+  },
+  {
+    "locale": "en-US",
+    "width": 1440,
+    "control": "code",
+    "ink": [
+      12,
+      9,
+      73,
+      19
+    ],
+    "innerMargins": [
+      12,
+      9,
+      11,
+      9
+    ],
+    "centerError": [
+      0.5,
+      0.0
+    ],
+    "budget": 1.0
+  },
+  {
+    "locale": "en-US",
+    "width": 1440,
+    "control": "close",
+    "ink": [
+      16,
+      16,
+      28,
+      28
+    ],
+    "innerMargins": [
+      16,
+      16,
+      16,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "budget": 1.2000000000000002
+  },
+  {
+    "locale": "zh-TW",
+    "width": 1440,
+    "control": "code",
+    "ink": [
+      12,
+      9,
+      73,
+      19
+    ],
+    "innerMargins": [
+      12,
+      9,
+      11,
+      9
+    ],
+    "centerError": [
+      0.5,
+      0.0
+    ],
+    "budget": 1.0
+  },
+  {
+    "locale": "zh-TW",
+    "width": 1440,
+    "control": "close",
+    "ink": [
+      16,
+      16,
+      28,
+      28
+    ],
+    "innerMargins": [
+      16,
+      16,
+      16,
+      16
+    ],
+    "centerError": [
+      0.0,
+      0.0
+    ],
+    "budget": 1.2000000000000002
+  }
+]

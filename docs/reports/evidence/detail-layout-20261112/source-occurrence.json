@@ -1,0 +1,17 @@
+{
+  "post": {
+    "id": 8,
+    "version": 180
+  },
+  "item": {
+    "id": 343,
+    "productId": "1cfc194a-d903-468d-b8dc-47ce8b02e24b",
+    "itemNumber": "66517",
+    "referencePrice": 2798,
+    "originalPrice": 3498,
+    "discountAmount": 700,
+    "offerStart": "2026-11-09",
+    "offerEnd": "2026-11-22"
+  },
+  "evidence": "Minimal published occurrence identity and price facts; no mail or account metadata retained"
+}
