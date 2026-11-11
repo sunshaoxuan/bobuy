@@ -1,0 +1,16 @@
+{
+  "source": "245eb3ae1b5738d63d6013de90e7a84fb5e46862",
+  "result": "PASS",
+  "frontendTests": 760,
+  "backendTests": 660,
+  "backendSkipped": 24,
+  "configuredJacoco": "PASS",
+  "browserCases": 16,
+  "sourceInputs": {
+    "frontend/frontend-gate.log": "7b046f66cffa057c536575784e34380027c8ee1d3b8c219bea96ced9dc96542c",
+    "backend-coverage-gate.log": "fb4d50b395cb8788877be97aea47710a69ac366c2964064f2760468f81b08d9e",
+    "frontend/build-final.log": "55cc6213717d3f1bd320843fe40f77c078c58830079767f046b63a8ff42bf637",
+    "docs/reports/evidence/card-price-name-20261111/final-matrix.json": "fbde0f2436aa834b22716ca9061478ed06e27f4f61c8fdcf9e0a07b37a378040",
+    "docs/reports/evidence/card-price-name-20261111/glyph-pixels.json": "c54bc261dec5ad7a5182222227d36dbb2b964d7dd03a94a61b11d3daad728510"
+  }
+}

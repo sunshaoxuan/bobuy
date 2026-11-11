@@ -1,0 +1,14 @@
+import {chromium} from '@playwright/test';import fs from 'node:fs';import assert from 'node:assert/strict';
+const out='../docs/reports/evidence/card-price-name-20261111';const payload=JSON.parse(fs.readFileSync(out+'/production-data.json','utf8'));
+const first=payload.data.items[0].item;first.referencePrice=999999999998;first.originalPrice=999999999999;first.discountAmount=1;first.name='長い日本語名称'.repeat(25);first.translations['zh-CN'].name='用于验证最长品名及最大参考价格的合成商品名称'.repeat(5);
+const second=payload.data.items[1].item;second.originalPrice=second.referencePrice;second.discountAmount=null;
+const browser=await chromium.launch({channel:'chrome',headless:true}),page=await browser.newPage({viewport:{width:360,height:1200}});
+await page.addInitScript(()=>localStorage.setItem('bobbuy_locale','zh-CN'));await page.route('**/api/storefront/recommendation-browse/items?*',route=>route.fulfill({json:payload}));
+await page.goto('http://127.0.0.1:5182/recommendations');const cards=page.locator('.compact-product-card');await cards.first().waitFor();await page.waitForTimeout(500);
+assert.equal(await cards.nth(1).locator('del').count(),0);assert.equal(await cards.first().locator('.card-reference-value').textContent(),'999,999,999,998');
+const native=cards.first().locator('.compact-card-native-name');assert(await native.evaluate(e=>e.scrollWidth>e.clientWidth&&getComputedStyle(e).whiteSpace==='nowrap'&&getComputedStyle(e).textOverflow==='ellipsis'));
+const money=await cards.first().locator('.card-money').evaluate(e=>({width:e.clientWidth,scroll:e.scrollWidth}));assert(money.scroll<=money.width+1);
+assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+await page.screenshot({path:out+'/synthetic-max-360.png'});
+await native.evaluate(e=>e.style.whiteSpace='normal');assert.equal(await native.evaluate(e=>getComputedStyle(e).whiteSpace==='nowrap'),false);
+fs.writeFileSync(out+'/synthetic-max.json',JSON.stringify({result:'PASS',data:'synthetic long names, max valid price, no-discount; wrapping negative rejected',money},null,2));await browser.close();console.log('PASS bounded stress and wrapping negative');

@@ -1,0 +1,29 @@
+{
+  "status": {
+    "phase": "WRITES_OPEN",
+    "source": "245eb3ae1b5738d63d6013de90e7a84fb5e46862",
+    "at": "2026-11-11T14:42:20Z",
+    "seconds": 158.55,
+    "sqlMigration": false,
+    "contentUnchanged": true
+  },
+  "exactFrontendFiles": 79,
+  "jarSha256": "55c6c6ba2fda5aefbeb10888b4dd73baa17ed54ea1fb60b381c70e4b92d77805",
+  "images": [
+    {
+      "name": "core-service",
+      "tag": "bobuy/core:20261111.5",
+      "imageId": "sha256:1c9e1fee6377042ca7964f9d642f78661e5737e0f9ea4ed6d834345ea24cf567"
+    },
+    {
+      "name": "frontend",
+      "tag": "bobuy/frontend:20261111.5",
+      "imageId": "sha256:5fc7aa79261d46abcf9cd4969a5cb4c0faa42c2da752d3fda8d6ae9406ee4e8c"
+    }
+  ],
+  "backup": {
+    "sha256": "4ecde7a0826ecfacf7b1150df16f252495967930c48e6c7c66b0416a2c11b1b0",
+    "tocLines": 301,
+    "databaseRestoreForbidden": true
+  }
+}

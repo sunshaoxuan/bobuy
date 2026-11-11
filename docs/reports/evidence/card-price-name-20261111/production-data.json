@@ -1,0 +1,2496 @@
+{
+  "status": "success",
+  "data": {
+    "items": [
+      {
+        "key": "8:271",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 271,
+          "productId": "a9237488-fb7d-4945-860f-72c7952846e5",
+          "name": "クランチー オーツ＆ハニー グラノーラバー",
+          "brand": "NATURE VALLEY",
+          "itemNumber": "61432",
+          "specification": "1袋42g（2枚入り）×40袋。合計1680g。80枚は40袋×2枚の計算値。原産国スペイン。",
+          "model": null,
+          "packaging": "42g×40袋（1袋2枚入り）",
+          "translations": {
+            "en-US": {
+              "name": "Crunchy Oats & Honey granola bars",
+              "specification": "40 packs of 42g, 2 bars per pack; total 1680g. 80 bars is calculated as 40 × 2. Country of origin: Spain.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. Original email wording “42g×40枚” is preserved. The official same-ITEM carton, individual pack and Japanese label confirm 40 packs of42g,2bars per pack;80bars is calculated. Source: https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/sun08d/pc_index.html"
+            },
+            "zh-CN": {
+              "name": "燕麦蜂蜜脆格兰诺拉棒",
+              "specification": "每袋42g（内含2条）×40袋；总重1680g。共80条为40袋×2条的计算值。原产国西班牙。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种因仓库店而异。原邮件“42g×40枚”原文保留；同ITEM官方包装、单包和日文标签确认是42g×40袋，每袋2条。80条为计算值。来源：https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/sun08d/pc_index.html"
+            },
+            "zh-TW": {
+              "name": "燕麥蜂蜜脆格蘭諾拉棒",
+              "specification": "每袋42g（內含2條）×40袋；總重1680g。共80條為40袋×2條的計算值。原產國西班牙。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項因倉庫店而異。原郵件「42g×40枚」原文保留；同ITEM官方包裝、單包和日文標籤確認為42g×40袋，每袋2條。80條為計算值。來源：https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/sun08d/pc_index.html"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "bcecc9c308a154ccd411c95f0404b8feae60d3208673ed5993a60c0894d2584b",
+            "url": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+            "hash": "bcecc9c308a154ccd411c95f0404b8feae60d3208673ed5993a60c0894d2584b",
+            "sourceUrl": "https://www.costco.co.jp/c/NATURE-VALLEY-CRUNCHY-OatsHoney-40-Packs/p/61432",
+            "assetKey": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-08T17:35:40.715633828Z"
+          },
+          "referencePrice": 1598,
+          "originalPrice": 1998,
+          "discountAmount": 400,
+          "priceUnit": "1箱（42g×40袋）",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-22",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員限定、在庫・取扱いは倉庫店で異なる場合があります。メール表記「42g×40枚」は原文として保存し、同ITEM公式包装・単包・日本語ラベルで42g×40袋（1袋2枚）と確認。80枚は計算値。https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/sun08d/pc_index.html",
+          "referenceContext": null,
+          "referenceQuote": {
+            "state": "UNSCOPED",
+            "amount": null,
+            "itemIds": [],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:272",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 272,
+          "productId": "a11d28d5-08e5-463c-96e7-69b37e452cfe",
+          "name": "液体洗濯洗剤",
+          "brand": "Attack ZERO",
+          "itemNumber": "78900",
+          "specification": "つめかえ2900g。通常タイプ。ドラム式専用（ITEM78901）とは別商品。",
+          "model": null,
+          "packaging": "つめかえ2900g",
+          "translations": {
+            "en-US": {
+              "name": "Liquid laundry detergent",
+              "specification": "2900g refill, general type. Separate from drum-type detergent ITEM78901.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. General type; separate from drum-specific ITEM78901."
+            },
+            "zh-CN": {
+              "name": "液体洗衣液",
+              "specification": "补充装2900g，普通型；与滚筒洗衣机专用款（ITEM78901）为不同商品。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。普通型，与滚筒专用款ITEM78901为不同商品。"
+            },
+            "zh-TW": {
+              "name": "液體洗衣精",
+              "specification": "補充裝2900g，一般型；與滾筒洗衣機專用款（ITEM78901）為不同商品。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。一般型，與滾筒專用款ITEM78901為不同商品。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "d98d76bbd25af05b385cedd33b4e8a6915a9c78fe41569e81e4f3bfad7231a4d",
+            "url": "/api/storefront/recommendation-images/8826c999-74e3-432f-b389-fc0677368d68",
+            "hash": "d98d76bbd25af05b385cedd33b4e8a6915a9c78fe41569e81e4f3bfad7231a4d",
+            "sourceUrl": "https://www.costco.co.jp/Subscription/Attack-Zero-Liquid-Laundry-Detergent-2900g/p/78900",
+            "assetKey": "/api/storefront/recommendation-images/8826c999-74e3-432f-b389-fc0677368d68",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-09T09:34:51.467356418Z"
+          },
+          "referencePrice": 2348,
+          "originalPrice": 2938,
+          "discountAmount": 590,
+          "priceUnit": "2900g",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-22",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。通常タイプ。ドラム式専用ITEM78901とは別商品。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s78900.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/22",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 2348,
+            "itemIds": [
+              272
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:273",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 273,
+          "productId": "49067b03-bc1b-4682-b795-958ed70155a4",
+          "name": "ドラム式専用 液体洗濯洗剤",
+          "brand": "Attack ZERO",
+          "itemNumber": "78901",
+          "specification": "つめかえ2900g。ドラム式洗濯機専用。通常タイプ（ITEM78900）とは別商品。",
+          "model": null,
+          "packaging": "つめかえ2900g",
+          "translations": {
+            "en-US": {
+              "name": "Drum-type liquid laundry detergent",
+              "specification": "2900g refill, for drum-type washing machines. Separate from general detergent ITEM78900.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. For drum-type washing machines; separate from general-type ITEM78900."
+            },
+            "zh-CN": {
+              "name": "滚筒洗衣机专用液体洗衣液",
+              "specification": "补充装2900g，滚筒洗衣机专用；与普通型（ITEM78900）为不同商品。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。滚筒洗衣机专用，与普通型ITEM78900为不同商品。"
+            },
+            "zh-TW": {
+              "name": "滾筒洗衣機專用液體洗衣精",
+              "specification": "補充裝2900g，滾筒洗衣機專用；與一般型（ITEM78900）為不同商品。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。滾筒洗衣機專用，與一般型ITEM78900為不同商品。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "3093f95921d29e4935898542986ce2a4f1355f82459990db3eb968d565261276",
+            "url": "/api/storefront/recommendation-images/47a9e61e-06f7-47b5-8756-866f207d7ceb",
+            "hash": "3093f95921d29e4935898542986ce2a4f1355f82459990db3eb968d565261276",
+            "sourceUrl": "https://www.costco.co.jp/c/Attack-Zero-Drum-type-Liquid-Laundry-Detergent-2900g/p/78901",
+            "assetKey": "/api/storefront/recommendation-images/47a9e61e-06f7-47b5-8756-866f207d7ceb",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-09T09:35:33.581727204Z"
+          },
+          "referencePrice": 2348,
+          "originalPrice": 2938,
+          "discountAmount": 590,
+          "priceUnit": "2900g",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-22",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。ドラム式洗濯機専用。通常タイプITEM78900とは別商品。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s78901.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/22",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 2348,
+            "itemIds": [
+              273
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:274",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 274,
+          "productId": "5ce8299c-fbca-4e62-8d95-ff987011c9da",
+          "name": "ニオイ専用 液体洗濯洗剤",
+          "brand": "NANOX one",
+          "itemNumber": "57407",
+          "specification": "業務用4kg。参考400回分は水30L・洗剤10gの場合。",
+          "model": null,
+          "packaging": "業務用4kg",
+          "translations": {
+            "en-US": {
+              "name": "Odor-control liquid laundry detergent",
+              "specification": "4kg commercial-size pack. Reference400uses assumes30L of water and10g of detergent per use.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. Reference 400 uses assumes 30L of water and 10g of detergent per use."
+            },
+            "zh-CN": {
+              "name": "去异味液体洗衣液",
+              "specification": "商用4kg。约400次为每次用水30L、洗衣液10g的参考值。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。400次为每次用水30L、洗衣液10g时的参考值。"
+            },
+            "zh-TW": {
+              "name": "除異味液體洗衣精",
+              "specification": "商用4kg。約400次為每次用水30L、洗衣精10g的參考值。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。400次為每次用水30L、洗衣精10g時的參考值。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "646df2838bb79d0172f8cb59615426b5c793d2908525685c5cf625449722ad8e",
+            "url": "/api/storefront/recommendation-images/0a599456-ea4d-45c0-a807-322ac1f4dc82",
+            "hash": "646df2838bb79d0172f8cb59615426b5c793d2908525685c5cf625449722ad8e",
+            "sourceUrl": "https://www.costco.co.jp/c/Lion-Nanox-One-for-Deodorant-Liquid-Detergent-4kg/p/57407",
+            "assetKey": "/api/storefront/recommendation-images/0a599456-ea4d-45c0-a807-322ac1f4dc82",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-08T17:56:19.229880591Z"
+          },
+          "referencePrice": 2678,
+          "originalPrice": 3348,
+          "discountAmount": 670,
+          "priceUnit": "4kg",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-15",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。400回分は水30L・洗剤10g使用時の参考値。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s57407.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/15",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 2678,
+            "itemIds": [
+              274
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:275",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 275,
+          "productId": "330be8fb-a9dd-4977-b670-3eb783890ce9",
+          "name": "エアジェット",
+          "brand": "バスマジックリン",
+          "itemNumber": "69347",
+          "specification": "ハーバルシトラスの香り。つめかえ2300ml。",
+          "model": null,
+          "packaging": "つめかえ2300ml／ハーバルシトラスの香り",
+          "translations": {
+            "en-US": {
+              "name": "Air Jet bathroom cleaner",
+              "specification": "Herbal Citrus scent,2300ml refill.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. Herbal Citrus scent, refill."
+            },
+            "zh-CN": {
+              "name": "浴室清洁喷雾",
+              "specification": "草本柑橘香型，补充装2300ml。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。草本柑橘香型，补充装。"
+            },
+            "zh-TW": {
+              "name": "浴室清潔噴霧",
+              "specification": "草本柑橘香型，補充裝2300ml。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。草本柑橘香型，補充裝。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "8a6667401b76a3388fb91db812f8adf4681878b829f0dfb350d20d636709f5f4",
+            "url": "/api/storefront/recommendation-images/ac1a7cbd-9e02-43dc-a0d2-c3c0990382e7",
+            "hash": "8a6667401b76a3388fb91db812f8adf4681878b829f0dfb350d20d636709f5f4",
+            "sourceUrl": "https://www.costco.co.jp/Cleaning-Laundry-Pet-supplies-Household-Essentials/Detergents-Cleaning-Supplies/Cleaning-Supplies/Bath-Magiclean-Air-Jet-Herbal-Citrus-Refill-2300ml/p/69347",
+            "assetKey": "/api/storefront/recommendation-images/ac1a7cbd-9e02-43dc-a0d2-c3c0990382e7",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-09T09:18:27.459662197Z"
+          },
+          "referencePrice": 878,
+          "originalPrice": 1098,
+          "discountAmount": 220,
+          "priceUnit": "2300ml",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-15",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。ハーバルシトラスの香り、つめかえ用。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s69347.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/15",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 878,
+            "itemIds": [
+              275
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:276",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 276,
+          "productId": "b3b6d91c-f1c4-47d8-914b-60ec0a11b26d",
+          "name": "ジャバEX 一つ穴用",
+          "brand": "スクラビングバブル",
+          "itemNumber": "92021",
+          "specification": "200g×2個。一つ穴用。公式英語タイトルの×1に対し、日本語タイトル・包装・メールは×2。",
+          "model": null,
+          "packaging": "200g×2個",
+          "translations": {
+            "en-US": {
+              "name": "Java EX single-hole bathtub pipe cleaner",
+              "specification": "200g×2packs for single-hole bathtubs. The official English title says×1; Japanese title, package and email agree on×2.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. For single-hole bathtubs. The official English title says ×1, while the Japanese title, package and email agree on 200g ×2 packs."
+            },
+            "zh-CN": {
+              "name": "单孔浴缸管道清洁剂",
+              "specification": "200g×2个，适用于单孔浴缸。官网英文标题写×1，日文标题、包装和邮件一致为×2。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。适用于单孔浴缸。官网英文标题×1与日文标题、包装和邮件一致的200g×2个不同，保留该错异。"
+            },
+            "zh-TW": {
+              "name": "單孔浴缸管道清潔劑",
+              "specification": "200g×2個，適用於單孔浴缸。官網英文標題寫×1，日文標題、包裝和郵件一致為×2。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。適用於單孔浴缸。官網英文標題×1與日文標題、包裝和郵件一致的200g×2個不同，保留該錯異。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "05bf01ceee5955d6dca1869aa16fb9778922f14859ada96c71831d5c76e42b57",
+            "url": "/api/storefront/recommendation-images/4487add2-8886-4f15-9475-785e29ef8fe1",
+            "hash": "05bf01ceee5955d6dca1869aa16fb9778922f14859ada96c71831d5c76e42b57",
+            "sourceUrl": "https://www.costco.co.jp/c/Scrubbing-Bubble-Java-Ex-Bathtub-Cleaner-200g-x-1/p/92021",
+            "assetKey": "/api/storefront/recommendation-images/4487add2-8886-4f15-9475-785e29ef8fe1",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-09T09:17:41.751126863Z"
+          },
+          "referencePrice": 460,
+          "originalPrice": 580,
+          "discountAmount": 120,
+          "priceUnit": "200g×2個",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-22",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。一つ穴用。公式英語タイトル×1に対し、日本語タイトル・包装・メールは200g×2個で一致。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s92021.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/22",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 460,
+            "itemIds": [
+              276
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:277",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 277,
+          "productId": "8b8ecfca-5824-4594-bea1-922ede028682",
+          "name": "お風呂を丸ごと防カビ",
+          "brand": "カビキラー",
+          "itemNumber": "69326",
+          "specification": "やさしいシトラスの香り。本体容器1個＋カートリッジ5個。",
+          "model": null,
+          "packaging": "本体容器1個＋カートリッジ5個／やさしいシトラス",
+          "translations": {
+            "en-US": {
+              "name": "Bathroom mold-prevention product",
+              "specification": "Gentle Citrus scent;1container plus5cartridges.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. Gentle Citrus scent. The official online offer ending November 8 does not replace this warehouse offer for November 9–22."
+            },
+            "zh-CN": {
+              "name": "浴室防霉用品",
+              "specification": "柔和柑橘香型，容器1个＋替换芯5个。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。柔和柑橘香型。官网线上报价的11/8期限不替代本期仓库店11/9–11/22期间。"
+            },
+            "zh-TW": {
+              "name": "浴室防霉用品",
+              "specification": "柔和柑橘香型，容器1個＋替換芯5個。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。柔和柑橘香型。官網線上報價的11/8期限不替代本期倉庫店11/9–11/22期間。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "1ad8fc5fec64436f0cecb286c2bbdf1190e2d9df19cc29b30a46d4b017d89509",
+            "url": "/api/storefront/recommendation-images/d4c8ebec-2581-4483-9062-94887883f518",
+            "hash": "1ad8fc5fec64436f0cecb286c2bbdf1190e2d9df19cc29b30a46d4b017d89509",
+            "sourceUrl": "https://www.costco.co.jp/Cleaning-Laundry-Pet-supplies-Household-Essentials/Detergents-Cleaning-Supplies/Cleaning-Supplies/Kabi-Killer-Antifungal-Agent-for-Bath-container-5-cartridges/p/69326",
+            "assetKey": "/api/storefront/recommendation-images/d4c8ebec-2581-4483-9062-94887883f518",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-09T09:16:53.855100582Z"
+          },
+          "referencePrice": 1888,
+          "originalPrice": 2398,
+          "discountAmount": 510,
+          "priceUnit": "本体容器1個＋カートリッジ5個",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-22",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。やさしいシトラスの香り。公式オンラインの11/8期限は本期倉庫店11/9～11/22を置き換えません。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s69326.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/22",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 1888,
+            "itemIds": [
+              277
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:278",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 278,
+          "productId": "5dcd2470-3ba5-49b2-86f7-a299d5992f3e",
+          "name": "洗たく槽カビキラー",
+          "brand": "カビキラー",
+          "itemNumber": "76524",
+          "specification": "550g×8本。",
+          "model": null,
+          "packaging": "550g×8本",
+          "translations": {
+            "en-US": {
+              "name": "Washing-machine tub cleaner",
+              "specification": "550g×8bottles.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. 550g ×8-bottle set."
+            },
+            "zh-CN": {
+              "name": "洗衣机槽清洁剂",
+              "specification": "550g×8瓶。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。550g×8瓶套装。"
+            },
+            "zh-TW": {
+              "name": "洗衣機槽清潔劑",
+              "specification": "550g×8瓶。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。550g×8瓶套裝。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "691fdf1ad3e8572021f55e68e485b4535fc6071fa269e46d1a709adf62d655b6",
+            "url": "/api/storefront/recommendation-images/dc7a9037-5e84-4d45-90b0-1340e0251275",
+            "hash": "691fdf1ad3e8572021f55e68e485b4535fc6071fa269e46d1a709adf62d655b6",
+            "sourceUrl": "https://www.costco.co.jp/Seasonal/Autumn-Rain-Essentials/Kabi-Killer-Washing-Machine-Cleaner-550g-x-8/p/76524",
+            "assetKey": "/api/storefront/recommendation-images/dc7a9037-5e84-4d45-90b0-1340e0251275",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-09T09:19:58.970631680Z"
+          },
+          "referencePrice": 1328,
+          "originalPrice": 1668,
+          "discountAmount": 340,
+          "priceUnit": "550g×8本",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-22",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。550g×8本セット。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s76524.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/22",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 1328,
+            "itemIds": [
+              278
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:279",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 279,
+          "productId": "726bcdbe-017f-41d9-a096-4bbf5bf3ac40",
+          "name": "トイレスタンプ 最強抗菌",
+          "brand": "スクラビングバブル",
+          "itemNumber": "62299",
+          "specification": "シャインミント。持ち手＋つけかえ7本、42回分。包装原文：本体製品1個とつけかえ用2本パック3個が入っています。8本のジェルではありません。",
+          "model": null,
+          "packaging": "持ち手＋つけかえ7本／シャインミント／42回分",
+          "translations": {
+            "en-US": {
+              "name": "Toilet gel stamp cleaner",
+              "specification": "Shine Mint;handle plus7refills,42stamps. Not8gel refills. Package wording:1main product and3two-refill packs.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. Shine Mint; handle plus7refills,42stamps, not8gel refills."
+            },
+            "zh-CN": {
+              "name": "马桶凝胶印章清洁剂",
+              "specification": "清新薄荷香型。手柄＋7支补充装，共42次印章用量；并非8支凝胶。原包装说明为1件本体产品加3组每组2支补充装。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。清新薄荷香型。持手＋7份补充装，共42次印章用量，不是8份凝胶。"
+            },
+            "zh-TW": {
+              "name": "馬桶凝膠印章清潔劑",
+              "specification": "清新薄荷香型。手柄＋7支補充裝，共42次印章用量；並非8支凝膠。原包裝說明為1件本體產品加3組每組2支補充裝。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。清新薄荷香型。持手＋7份補充裝，共42次印章用量，不是8份凝膠。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "d902cfaf18e88b1abad78b17ecd3bf48d031784a268b35845c01ad012f4a2940",
+            "url": "/api/storefront/recommendation-images/de83ee91-f176-4eaa-9415-899a9d0f67d7",
+            "hash": "d902cfaf18e88b1abad78b17ecd3bf48d031784a268b35845c01ad012f4a2940",
+            "sourceUrl": "https://www.costco.co.jp/Cleaning-Laundry-Pet-supplies-Household-Essentials/Detergents-Cleaning-Supplies/Cleaning-Supplies/Scrubbing-Bubbles-Toilet-Bowl-Stamp-Cleaner/p/62299",
+            "assetKey": "/api/storefront/recommendation-images/de83ee91-f176-4eaa-9415-899a9d0f67d7",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-09T09:30:18.724431562Z"
+          },
+          "referencePrice": 1398,
+          "originalPrice": 1768,
+          "discountAmount": 370,
+          "priceUnit": "持ち手＋つけかえ7本",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-22",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。シャインミント。持ち手＋つけかえ7本、42回分。8本のジェルではありません。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s62299.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/22",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 1398,
+            "itemIds": [
+              279
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:280",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 280,
+          "productId": "4990375f-483a-4f6b-8f92-fa32226fe32a",
+          "name": "泡パック",
+          "brand": "トイレマジックリン",
+          "itemNumber": "73059",
+          "specification": "サボン＆シトラスの香り、つめかえ1080ml×3袋。4.5回分は本体に対する詰替容量で、使用回数ではありません。",
+          "model": null,
+          "packaging": "つめかえ1080ml×3袋／サボン＆シトラス",
+          "translations": {
+            "en-US": {
+              "name": "Foaming toilet cleaner",
+              "specification": "Soap & Citrus scent;1080ml×3refill bags. The4.5refills claim refers to bottle capacity, not4.5cleaning uses.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. Soap & Citrus scent, refill."
+            },
+            "zh-CN": {
+              "name": "马桶泡沫清洁剂",
+              "specification": "皂香与柑橘香型，补充装1080ml×3袋。包装4.5回分是相对本体容量的补充倍数，不是仅能使用4.5次。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。皂香与柑橘香型，补充装。"
+            },
+            "zh-TW": {
+              "name": "馬桶泡沫清潔劑",
+              "specification": "皂香與柑橘香型，補充裝1080ml×3袋。包裝4.5回分是相對本體容量的補充倍數，不是僅能使用4.5次。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。皂香與柑橘香型，補充裝。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "7806cf4576f221f04cf0ca25bf8dc472075ddaecfd080a16d99de20c47e6bf03",
+            "url": "/api/storefront/recommendation-images/0f3911c3-457b-42b3-ab22-edfe295ddf2b",
+            "hash": "7806cf4576f221f04cf0ca25bf8dc472075ddaecfd080a16d99de20c47e6bf03",
+            "sourceUrl": "https://www.costco.co.jp/Cleaning-Laundry-Pet-supplies-Household-Essentials/Detergents-Cleaning-Supplies/Cleaning-Supplies/Toilet-Magiclyn-Form-Spray-Refill-1080ml-x-3/p/73059",
+            "assetKey": "/api/storefront/recommendation-images/0f3911c3-457b-42b3-ab22-edfe295ddf2b",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-09T09:29:31.091889038Z"
+          },
+          "referencePrice": 1518,
+          "originalPrice": 1898,
+          "discountAmount": 380,
+          "priceUnit": "1080ml×3袋",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-22",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。サボン＆シトラスの香り、つめかえ用。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s73059.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/22",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 1518,
+            "itemIds": [
+              280
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:281",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 281,
+          "productId": "ce120d04-cdbe-44f4-b409-153f05eef930",
+          "name": "キッチン泡ハイター",
+          "brand": "花王",
+          "itemNumber": "62298",
+          "specification": "本体1000ml×1本＋つけかえ1000ml×2本。合計3本・3000ml。塩素系：まぜるな危険。",
+          "model": null,
+          "packaging": "本体1000ml×1本＋つけかえ1000ml×2本",
+          "translations": {
+            "en-US": {
+              "name": "Kitchen foaming bleach cleaner",
+              "specification": "1×1000ml bottle plus2×1000ml refills;3bottles,3000ml total. Chlorine bleach:danger—do not mix with other products.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. 3bottles,3000ml total. Chlorine bleach: danger, do not mix."
+            },
+            "zh-CN": {
+              "name": "厨房泡沫漂白清洁剂",
+              "specification": "本体1000ml×1瓶＋补充装1000ml×2瓶，共3瓶、3000ml。氯系：切勿与其他产品混合。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。共3瓶、3000ml。氯系，切勿混合。"
+            },
+            "zh-TW": {
+              "name": "廚房泡沫漂白清潔劑",
+              "specification": "本體1000ml×1瓶＋補充裝1000ml×2瓶，共3瓶、3000ml。氯系：切勿與其他產品混合。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。共3瓶、3000ml。氯系，切勿混合。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "3f0d0013cabc260870752267b3c94f670863190e61fb3343408aa54f9749626a",
+            "url": "/api/storefront/recommendation-images/5d7e01fa-64c1-4b50-a061-532e2acf81e2",
+            "hash": "3f0d0013cabc260870752267b3c94f670863190e61fb3343408aa54f9749626a",
+            "sourceUrl": "https://www.costco.co.jp/c/KAO-Kitchen-Foam-Bleach-1000ml-Bottle-1000ml-Refill-x-2-set/p/62298",
+            "assetKey": "/api/storefront/recommendation-images/5d7e01fa-64c1-4b50-a061-532e2acf81e2",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-09T09:28:46.976286289Z"
+          },
+          "referencePrice": 1428,
+          "originalPrice": 1788,
+          "discountAmount": 360,
+          "priceUnit": "本体1000ml＋つけかえ1000ml×2本",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-22",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。合計3本・3000ml。塩素系、まぜるな危険。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s62298.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/22",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 1428,
+            "itemIds": [
+              281
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:282",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 282,
+          "productId": "6bfb4c16-4d92-474e-b4d3-572b6c58a7f9",
+          "name": "いれるだけバブルーン トイレボウル用",
+          "brand": "らくハピ",
+          "itemNumber": "72262",
+          "specification": "正味量180g×6袋。1回に1袋（180g）。日本製。製造元：アース製薬株式会社。公式仕様表の160g×6に対し、メール・公式商品名・背面表示は180g×6で一致。",
+          "model": null,
+          "packaging": "180g×6袋",
+          "translations": {
+            "en-US": {
+              "name": "Bubbloon foaming toilet-bowl cleaner",
+              "specification": "Net180g×6bags;one180g bag per use. Made in Japan by Earth Corporation. The website specification table says160g×6;email,official title and back label agree on180g×6.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. Use one180g bag at a time. Made in Japan. Official back label, product title and mail confirm180g ×6bags."
+            },
+            "zh-CN": {
+              "name": "马桶泡沫清洁剂",
+              "specification": "净含量180g×6袋，每次1袋（180g）。日本制造，制造商为地球制药株式会社。官网规格表160g×6与邮件、官网标题和背标一致的180g×6不符，保留该来源错异。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。每次使用1袋（180g），日本制造。官网背标、商品名和邮件确认180g×6袋。"
+            },
+            "zh-TW": {
+              "name": "馬桶泡沫清潔劑",
+              "specification": "淨含量180g×6袋，每次1袋（180g）。日本製造，製造商為地球製藥株式會社。官網規格表160g×6與郵件、官網標題和背標一致的180g×6不符，保留該來源錯異。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。每次使用1袋（180g），日本製造。官網背標、商品名和郵件確認180g×6袋。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "7f1e9cb9fc901f9b400ce88201ee18ba840fe464f3a6a5365a44a0e9b4621755",
+            "url": "/api/storefront/recommendation-images/0008f7a7-ac6e-4cc7-8902-212a7852da83",
+            "hash": "7f1e9cb9fc901f9b400ce88201ee18ba840fe464f3a6a5365a44a0e9b4621755",
+            "sourceUrl": "https://www.costco.co.jp/Cleaning-Laundry-Pet-supplies-Household-Essentials/Detergents-Cleaning-Supplies/Cleaning-Supplies/Rakuhapi-Bubbloon-Form-Toilet-Bowl-Cleaner-180g-x-6-pc/p/72262",
+            "assetKey": "/api/storefront/recommendation-images/0008f7a7-ac6e-4cc7-8902-212a7852da83",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-09T03:06:42.951707335Z"
+          },
+          "referencePrice": 1478,
+          "originalPrice": 1858,
+          "discountAmount": 380,
+          "priceUnit": "180g×6袋",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-22",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。1回に1袋（180g）。日本製。公式背面表示・商品名・メールで180g×6を確認。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s72262.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/22",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 1478,
+            "itemIds": [
+              282
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:283",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 283,
+          "productId": "faf0a00e-409f-43e1-8580-e8d7c0becb2e",
+          "name": "ジェルマジックボール",
+          "brand": "arFUM",
+          "itemNumber": "89400",
+          "specification": "Amore（アモーレ）、ベルガモットとジャスミンの香り。105個入り、つめかえ用。日本製。",
+          "model": null,
+          "packaging": "105個入り／つめかえ用／Amore",
+          "translations": {
+            "en-US": {
+              "name": "Gel Magic Ball laundry detergent",
+              "specification": "Amore,bergamot and jasmine scent.105-count refill pack,made in Japan.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. Amore, bergamot and jasmine scent, refill pack."
+            },
+            "zh-CN": {
+              "name": "洗衣凝珠",
+              "specification": "Amore系列，佛手柑与茉莉香型。105颗补充装，日本制造。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。Amore系列，佛手柑与茉莉香型，补充装。"
+            },
+            "zh-TW": {
+              "name": "洗衣凝珠",
+              "specification": "Amore系列，佛手柑與茉莉香型。105顆補充裝，日本製造。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。Amore系列，佛手柑與茉莉香型，補充裝。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "1da5d07addfd9ebc7462f3b9a122b5c055f11349ef1260f87896c0f6f9480b6c",
+            "url": "/api/storefront/recommendation-images/ee664e95-decb-41b6-b89a-ccdffb7aa89a",
+            "hash": "1da5d07addfd9ebc7462f3b9a122b5c055f11349ef1260f87896c0f6f9480b6c",
+            "sourceUrl": "https://www.costco.co.jp/c/arFUM-Ball-type-Laundry-Detergent-105-CT/p/89400",
+            "assetKey": "/api/storefront/recommendation-images/ee664e95-decb-41b6-b89a-ccdffb7aa89a",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-09T09:19:11.403840720Z"
+          },
+          "referencePrice": 2628,
+          "originalPrice": 3288,
+          "discountAmount": 660,
+          "priceUnit": "105個入り",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-22",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。Amore、ベルガモットとジャスミンの香り。つめかえ用。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s89400.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/22",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 2628,
+            "itemIds": [
+              283
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:284",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 284,
+          "productId": "39e8bbdd-6d09-4922-8c0d-0eba2d77802b",
+          "name": "オーガニック白いちじく",
+          "brand": "デルタインターナショナル",
+          "itemNumber": "41096",
+          "specification": "620g。トルコ産。くだもの屋さんシリーズ。",
+          "model": null,
+          "packaging": "620g",
+          "translations": {
+            "en-US": {
+              "name": "Organic dried white figs",
+              "specification": "620g. Product of Turkey. Kudamonoyasan range.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. Product of Turkey, Kudamonoyasan range."
+            },
+            "zh-CN": {
+              "name": "有机白无花果干",
+              "specification": "620g，土耳其产；くだもの屋さん系列。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。土耳其产，くだもの屋さん系列。"
+            },
+            "zh-TW": {
+              "name": "有機白無花果乾",
+              "specification": "620g，土耳其產；くだもの屋さん系列。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。土耳其產，くだもの屋さん系列。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "11e5a2f2405d4085d55ca35470a36b957189e1631248d8fd8823d3f842a4944b",
+            "url": "/api/storefront/recommendation-images/0d908725-c439-4781-b66f-500f3a7ecdb3",
+            "hash": "11e5a2f2405d4085d55ca35470a36b957189e1631248d8fd8823d3f842a4944b",
+            "sourceUrl": "https://www.costco.co.jp/c/Organic-Dried-White-Fig-620/p/41096",
+            "assetKey": "/api/storefront/recommendation-images/0d908725-c439-4781-b66f-500f3a7ecdb3",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-09T04:21:38.266903677Z"
+          },
+          "referencePrice": 1598,
+          "originalPrice": 1998,
+          "discountAmount": 400,
+          "priceUnit": "620g",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-15",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。トルコ産、くだもの屋さんシリーズ。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s41096.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/15",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 1598,
+            "itemIds": [
+              284
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:285",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 285,
+          "productId": "62acb0af-3d5e-487f-b0d9-56a2f9bed74d",
+          "name": "レッドペッパーソース",
+          "brand": "TABASCO",
+          "itemNumber": "67488",
+          "specification": "350ml。製造元McIlhenny Co.（メール表記MC.ILHENNY CO.）。",
+          "model": null,
+          "packaging": "350ml",
+          "translations": {
+            "en-US": {
+              "name": "Red pepper sauce",
+              "specification": "350ml. Manufacturer McIlhenny Co.; original mail wording MC.ILHENNY CO.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. "
+            },
+            "zh-CN": {
+              "name": "红辣椒调味酱",
+              "specification": "350ml，制造商McIlhenny Co.（邮件原文MC.ILHENNY CO.）。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。"
+            },
+            "zh-TW": {
+              "name": "紅辣椒調味醬",
+              "specification": "350ml，製造商McIlhenny Co.（郵件原文MC.ILHENNY CO.）。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "c79f629e9c1e238b31954b26d1d5bfe8709d3666fb2468c82bd53e121b12dd87",
+            "url": "/api/storefront/recommendation-images/3980ceec-0d7e-481c-94e6-f101f97d15bc",
+            "hash": "c79f629e9c1e238b31954b26d1d5bfe8709d3666fb2468c82bd53e121b12dd87",
+            "sourceUrl": "https://www.costco.co.jp/Food-Beverage/Pantry-Dry-Goods/Sauces/TABASCO-PEPPER-SAUCE/p/67488",
+            "assetKey": "/api/storefront/recommendation-images/3980ceec-0d7e-481c-94e6-f101f97d15bc",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-09T03:16:42.703680605Z"
+          },
+          "referencePrice": 878,
+          "originalPrice": 1098,
+          "discountAmount": 220,
+          "priceUnit": "350ml",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-15",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s67488.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/15",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 878,
+            "itemIds": [
+              285
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:286",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 286,
+          "productId": "ead7b100-2e45-4921-9e7d-6fcd4d6a2f99",
+          "name": "チョコレートクレープ",
+          "brand": "ST MICHEL",
+          "itemNumber": "45954",
+          "specification": "30g×20個、合計600g。個包装、フランス製。チョコレートとヘーゼルナッツ風味のフィリング。",
+          "model": null,
+          "packaging": "30g×20個／合計600g／個包装",
+          "translations": {
+            "en-US": {
+              "name": "Chocolate crêpes",
+              "specification": "20 individually wrapped30g crêpes,600g total. Made in France. Chocolate and hazelnut flavoured filling.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. Individually wrapped, made in France; chocolate and hazelnut flavoured filling."
+            },
+            "zh-CN": {
+              "name": "巧克力可丽饼",
+              "specification": "30g×20个，共600g，独立包装，法国制造；巧克力与榛子风味夹心。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。独立包装，法国制造；巧克力与榛子风味夹心。"
+            },
+            "zh-TW": {
+              "name": "巧克力可麗餅",
+              "specification": "30g×20個，共600g，獨立包裝，法國製造；巧克力與榛子風味夾心。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。獨立包裝，法國製造；巧克力與榛子風味夾心。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "0f5e75359fd241ffb47b3a876a6e8dd5097590885055b1ba5e16115e66d87334",
+            "url": "/api/storefront/recommendation-images/058430ba-b4de-4fac-bab2-c0a94dc8db63",
+            "hash": "0f5e75359fd241ffb47b3a876a6e8dd5097590885055b1ba5e16115e66d87334",
+            "sourceUrl": "https://www.costco.co.jp/c/FRENCH-CHOCOLATE-CREPES-30g-x-20/p/45954",
+            "assetKey": "/api/storefront/recommendation-images/058430ba-b4de-4fac-bab2-c0a94dc8db63",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-09T04:20:39.326861662Z"
+          },
+          "referencePrice": 788,
+          "originalPrice": 988,
+          "discountAmount": 200,
+          "priceUnit": "30g×20個",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-15",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。個包装。フランス製。チョコレートとヘーゼルナッツ風味のフィリング。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s45954.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/15",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 788,
+            "itemIds": [
+              286
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:287",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 287,
+          "productId": "85544695-9f84-4998-9b93-60fe549c75cf",
+          "name": "二十穀",
+          "brand": "カネスコーポレーション",
+          "itemNumber": "31551",
+          "specification": "30g×38袋、合計1140g。もち麦入り。",
+          "model": null,
+          "packaging": "30g×38袋／合計1140g",
+          "translations": {
+            "en-US": {
+              "name": "Twenty-grain blend",
+              "specification": "38×30g packets,1140g total. Includes mochi barley.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. 1140g total; includes mochi barley."
+            },
+            "zh-CN": {
+              "name": "二十谷物混合包",
+              "specification": "30g×38袋，共1140g，含もち麦（糯大麦）。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。合计1140g，含糯大麦。"
+            },
+            "zh-TW": {
+              "name": "二十穀物混合包",
+              "specification": "30g×38袋，共1140g，含もち麥（糯大麥）。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。合計1140g，含糯大麥。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "24cef08a5392c2d1d345b6d195e38e1b9ddecfafc7471c8827b743a310ccf7b8",
+            "url": "/api/storefront/recommendation-images/37100a47-dfb7-4f9d-9d2d-cc36b8dbe5f7",
+            "hash": "24cef08a5392c2d1d345b6d195e38e1b9ddecfafc7471c8827b743a310ccf7b8",
+            "sourceUrl": "https://www.costco.co.jp/c/RICE-MILLET-ASSORT-1140g/p/31551",
+            "assetKey": "/api/storefront/recommendation-images/37100a47-dfb7-4f9d-9d2d-cc36b8dbe5f7",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-09T04:18:37.277572245Z"
+          },
+          "referencePrice": 1598,
+          "originalPrice": 1998,
+          "discountAmount": 400,
+          "priceUnit": "30g×38袋",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-22",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。合計1140g。もち麦入り。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s31551.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/22",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 1598,
+            "itemIds": [
+              287
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:288",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 288,
+          "productId": "fbfee300-0286-4d8e-a20c-50203df901a1",
+          "name": "あんバター",
+          "brand": "久世福商店",
+          "itemNumber": "68806",
+          "specification": "400g×2個、合計800g。北海道産小豆使用。",
+          "model": null,
+          "packaging": "400g×2個／合計800g",
+          "translations": {
+            "en-US": {
+              "name": "Red bean butter spread",
+              "specification": "2×400g jars,800g total. Made with Hokkaido-grown adzuki beans.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. Made with Hokkaido-grown adzuki beans; this does not mean all ingredients are from Hokkaido."
+            },
+            "zh-CN": {
+              "name": "红豆黄油酱",
+              "specification": "400g×2罐，共800g，使用北海道产红豆。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。使用北海道产红豆，不代表所有原料均产自北海道。"
+            },
+            "zh-TW": {
+              "name": "紅豆奶油醬",
+              "specification": "400g×2罐，共800g，使用北海道產紅豆。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。使用北海道產紅豆，不代表所有原料均產自北海道。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "42c7fd5b1d23c5134efb410f8c0154053e4b9ddcc8782af8b7372e984f248824",
+            "url": "/api/storefront/recommendation-images/1ae52851-45e9-4b40-b84e-ad45d50bd1be",
+            "hash": "42c7fd5b1d23c5134efb410f8c0154053e4b9ddcc8782af8b7372e984f248824",
+            "sourceUrl": "https://www.costco.co.jp/c/SWEET-BEAN-PASTE-BUTTER/p/68806",
+            "assetKey": "/api/storefront/recommendation-images/1ae52851-45e9-4b40-b84e-ad45d50bd1be",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-09T04:11:43.582085235Z"
+          },
+          "referencePrice": 1038,
+          "originalPrice": 1298,
+          "discountAmount": 260,
+          "priceUnit": "400g×2個",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-15",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。北海道産小豆使用。すべての原材料が北海道産という意味ではありません。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s68806.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/15",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 1038,
+            "itemIds": [
+              288
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:289",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 289,
+          "productId": "284e0c28-de67-4720-9271-8288e22c9c5a",
+          "name": "C＆レモン",
+          "brand": "日東紅茶",
+          "itemNumber": "68104",
+          "specification": "スティック60本入り。",
+          "model": null,
+          "packaging": "スティック60本入り",
+          "translations": {
+            "en-US": {
+              "name": "C & Lemon drink powder",
+              "specification": "60sticks.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. 60 sticks per pack."
+            },
+            "zh-CN": {
+              "name": "C＆柠檬粉末冲饮",
+              "specification": "60条装。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。60条装。"
+            },
+            "zh-TW": {
+              "name": "C＆檸檬粉末沖飲",
+              "specification": "60條裝。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。60條裝。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "b84457befdf8ba0860cae9f91626ae305e9c3010e17aacd4931f39233f42acb5",
+            "url": "/api/storefront/recommendation-images/4e1fb2db-af5d-451c-9a94-621021d83937",
+            "hash": "b84457befdf8ba0860cae9f91626ae305e9c3010e17aacd4931f39233f42acb5",
+            "sourceUrl": "https://www.costco.co.jp/Food-Beverage/Water-Beverages/Drink-Mixes/C-LEMON-POWDER-STICKS-60packs/p/68104",
+            "assetKey": "/api/storefront/recommendation-images/4e1fb2db-af5d-451c-9a94-621021d83937",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-09T04:19:45.797231245Z"
+          },
+          "referencePrice": 1198,
+          "originalPrice": 1498,
+          "discountAmount": 300,
+          "priceUnit": "60本",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-22",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。スティック60本入り。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s68104.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/22",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 1198,
+            "itemIds": [
+              289
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:290",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 290,
+          "productId": "27abf1ee-9432-4297-8d06-2652d1a5323a",
+          "name": "鮭フレーク",
+          "brand": "umios",
+          "itemNumber": "82378",
+          "specification": "200g×3個、合計600g。",
+          "model": null,
+          "packaging": "200g×3個／合計600g",
+          "translations": {
+            "en-US": {
+              "name": "Salmon flakes",
+              "specification": "3×200g jars,600g total.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. umios brand; 600g total."
+            },
+            "zh-CN": {
+              "name": "三文鱼碎",
+              "specification": "200g×3罐，共600g。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。umios品牌，共600g。"
+            },
+            "zh-TW": {
+              "name": "鮭魚碎",
+              "specification": "200g×3罐，共600g。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。umios品牌，共600g。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "b6b1e66557c597dd1dd82eebe7c8959bec4988455095b5cb55ba42b56df2d65a",
+            "url": "/api/storefront/recommendation-images/148dec1f-86bf-4cad-9a25-a0dcd01f2eb4",
+            "hash": "b6b1e66557c597dd1dd82eebe7c8959bec4988455095b5cb55ba42b56df2d65a",
+            "sourceUrl": "https://www.costco.co.jp/Food-Beverage/Pantry-Dry-Goods/Canned-Jarred-Soup/SALMON-FLAKES-200g-x-3/p/82378",
+            "assetKey": "/api/storefront/recommendation-images/148dec1f-86bf-4cad-9a25-a0dcd01f2eb4",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-09T04:15:15.292788137Z"
+          },
+          "referencePrice": 1438,
+          "originalPrice": 1798,
+          "discountAmount": 360,
+          "priceUnit": "200g×3個",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-15",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。umios、合計600g。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s82378.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/15",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 1438,
+            "itemIds": [
+              290
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:291",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 291,
+          "productId": "c67ca6b4-c00e-45f2-94b4-a992f4507573",
+          "name": "4種のフルーツ こんにゃくゼリー",
+          "brand": "雪国アグリ",
+          "itemNumber": "57361",
+          "specification": "1600g、目安個数80個。重量で管理しており、個数は異なる場合があります。りんご・マンゴー・ぶどう・ピーチ。日本製。メール原文「80袋」は出典として保存。",
+          "model": null,
+          "packaging": "1600g／目安個数80個",
+          "translations": {
+            "en-US": {
+              "name": "Four-fruit konjac jelly",
+              "specification": "1600g,approximately80pieces. Sold by weight; actual count may vary. Apple,mango,grape and peach flavours. Made in Japan. Original mail wording80bags is preserved as source.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. 1600g, approximately80 pieces; weight-managed, so actual count may vary. Original mail wording “80 bags” retained; not necessarily20 of each flavor."
+            },
+            "zh-CN": {
+              "name": "四种水果味魔芋果冻",
+              "specification": "1600g，参考数量约80个；按重量管理，实际个数可能变化。苹果、芒果、葡萄、桃子四种口味，日本制造。邮件原文“80袋”保留为来源。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。1600g，参考数量约80个；按重量管理，实际个数可能变化。邮件原文“80袋”保留，并非每种口味各20个。"
+            },
+            "zh-TW": {
+              "name": "四種水果風味蒟蒻果凍",
+              "specification": "1600g，參考數量約80個；按重量管理，實際個數可能變化。蘋果、芒果、葡萄、桃子四種口味，日本製造。郵件原文「80袋」保留為來源。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。1600g，參考數量約80個；按重量管理，實際個數可能變化。郵件原文「80袋」保留，並非每種口味各20個。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "0f3e18961612de1cd3d96ad2d2fa0252c1c7b136f32c939c7cb8608622b4715e",
+            "url": "/api/storefront/recommendation-images/9934f832-5fde-4131-8d91-264cd9e31d7b",
+            "hash": "0f3e18961612de1cd3d96ad2d2fa0252c1c7b136f32c939c7cb8608622b4715e",
+            "sourceUrl": "https://www.costco.co.jp/c/4-Fruit-Konjac-Jelly-80Pieces/p/57361",
+            "assetKey": "/api/storefront/recommendation-images/9934f832-5fde-4131-8d91-264cd9e31d7b",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-09T04:14:00.860933164Z"
+          },
+          "referencePrice": 878,
+          "originalPrice": 1098,
+          "discountAmount": 220,
+          "priceUnit": "1600g",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-22",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。目安個数80個。重量で管理しており個数は異なる場合があります。メール原文80袋を保持。4種各20個とは限りません。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s57361.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/22",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 878,
+            "itemIds": [
+              291
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:292",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 292,
+          "productId": "a97bd423-b7fc-4297-8cbe-bb284073d971",
+          "name": "ミニチュア",
+          "brand": "SNICKERS",
+          "itemNumber": "506829",
+          "specification": "1020g。メーカー：マース。",
+          "model": null,
+          "packaging": "1020g",
+          "translations": {
+            "en-US": {
+              "name": "Minis chocolate bars",
+              "specification": "1020g. Manufacturer:Mars.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. Manufactured by Mars,1020g; no guaranteed piece count."
+            },
+            "zh-CN": {
+              "name": "迷你巧克力棒",
+              "specification": "1020g，制造商为玛氏。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。制造商玛氏，1020g；不保证具体颗数。"
+            },
+            "zh-TW": {
+              "name": "迷你巧克力棒",
+              "specification": "1020g，製造商為瑪氏。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。製造商瑪氏，1020g；不保證具體顆數。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "7bcc149f212e7590f882d14ec19aad5707d03fbd8b3c66d2e3a7db4c8edc98dd",
+            "url": "/api/storefront/recommendation-images/5941215e-18bc-4f25-b4ba-def8fe070e8c",
+            "hash": "7bcc149f212e7590f882d14ec19aad5707d03fbd8b3c66d2e3a7db4c8edc98dd",
+            "sourceUrl": "https://www.costco.co.jp/c/Mars-Snickers-Miniature-1020g/p/506829",
+            "assetKey": "/api/storefront/recommendation-images/5941215e-18bc-4f25-b4ba-def8fe070e8c",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-09T04:16:08.222043286Z"
+          },
+          "referencePrice": 1598,
+          "originalPrice": 1998,
+          "discountAmount": 400,
+          "priceUnit": "1020g",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-15",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。製造元マース。個数の保証はありません。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s506829.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/15",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 1598,
+            "itemIds": [
+              292
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:293",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 293,
+          "productId": "e97cb643-f220-4df7-ba4f-67b6bac35661",
+          "name": "レッドグレープフルーツカップ",
+          "brand": "VITA+",
+          "itemNumber": "35087",
+          "specification": "198g×12カップ。表示重量はカップ内容量で、水切り後の果肉重量ではありません。要冷蔵。",
+          "model": null,
+          "packaging": "198g×12カップ",
+          "translations": {
+            "en-US": {
+              "name": "Red grapefruit cups",
+              "specification": "12×198g cups. Labelled cup net content, not drained fruit weight. Keep refrigerated.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. Keep refrigerated.198g is labelled cup net content, not drained fruit weight. Offer November9–15."
+            },
+            "zh-CN": {
+              "name": "红西柚杯",
+              "specification": "198g×12杯。标称为杯装净含量，并非沥干后的果肉重量。需冷藏。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。需冷藏。198g为杯装标称净含量，并非沥干后果肉重量。优惠为11/9–11/15。"
+            },
+            "zh-TW": {
+              "name": "紅葡萄柚杯",
+              "specification": "198g×12杯。標稱為杯裝淨含量，並非瀝乾後的果肉重量。需冷藏。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。需冷藏。198g為杯裝標稱淨含量，並非瀝乾後果肉重量。優惠為11/9–11/15。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "3dabe2ec560eb43883910274a8fb1c84e2a289e1f52b65e0449daf1f95e7be78",
+            "url": "/api/storefront/recommendation-images/2adb9bd4-a5ee-440a-b378-a36786b5b69b",
+            "hash": "3dabe2ec560eb43883910274a8fb1c84e2a289e1f52b65e0449daf1f95e7be78",
+            "sourceUrl": "https://www.costco.co.jp/Fresh-Frozen-Chilled/Others/VITA-Red-Grapefruit-Cup-198g-x-12/p/35087",
+            "assetKey": "/api/storefront/recommendation-images/2adb9bd4-a5ee-440a-b378-a36786b5b69b",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-09T03:18:46.323027482Z"
+          },
+          "referencePrice": 1968,
+          "originalPrice": 2468,
+          "discountAmount": 500,
+          "priceUnit": "198g×12カップ",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-15",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。要冷蔵。198gはカップ内容量で、水切り後果肉重量ではありません。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s35087.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/15",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 1968,
+            "itemIds": [
+              293
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      },
+      {
+        "key": "8:294",
+        "post": {
+          "id": 8,
+          "title": "今週の倉庫店セレクト｜買い足し候補3品",
+          "published": true,
+          "version": 180,
+          "updatedAt": "2026-11-10T00:12:18.468941",
+          "publishedAt": "2026-11-09T12:53:30.082912Z",
+          "publisherName": "宝宝败-东京",
+          "coverImageUrl": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+          "merchantId": 1001,
+          "articleTitles": {
+            "ja-JP": "今週の倉庫店セレクト｜買い足し候補3品",
+            "zh-CN": "本周仓库精选｜3款补货重点",
+            "zh-TW": "本週倉庫精選｜3款補貨重點",
+            "en-US": "This week’s warehouse picks: three useful buys"
+          },
+          "issueDate": "2026-11-08",
+          "issueDateSource": "REVIEWED_SOURCE"
+        },
+        "title": "本周仓库精选｜3款补货重点",
+        "history": false,
+        "item": {
+          "id": 294,
+          "productId": "ba1001c9-4f81-47e0-8b65-4507242effb6",
+          "name": "ポン・デ・ケージョ",
+          "brand": "Baker John",
+          "itemNumber": "570288",
+          "specification": "冷凍、24個入り。包装のGluten Free表示は、乳不使用・アレルゲン不使用を意味しません。",
+          "model": null,
+          "packaging": "冷凍24個入り",
+          "translations": {
+            "en-US": {
+              "name": "Pão de queijo cheese bread",
+              "specification": "24 frozen pieces. The package Gluten Free claim does not mean dairy-free or allergen-free.",
+              "description": null,
+              "offerNotes": "Tax-inclusive Costco warehouse reference price; online shopping excluded. Valid membership required. Stock and selection may vary by warehouse. 24 frozen pieces. Gluten Free does not mean dairy-free or allergen-free."
+            },
+            "zh-CN": {
+              "name": "巴西奶酪面包",
+              "specification": "冷冻24个装。包装标示Gluten Free不代表无乳或无过敏原。",
+              "description": null,
+              "offerNotes": "Costco仓库店限定，含税参考价格；线上购物不适用。仅限有效会员，库存和在售品种可能因仓库店而异。冷冻24个装。Gluten Free不代表无乳或无过敏原。"
+            },
+            "zh-TW": {
+              "name": "巴西起司麵包",
+              "specification": "冷凍24個裝。包裝標示Gluten Free不代表無乳或無過敏原。",
+              "description": null,
+              "offerNotes": "Costco倉庫店限定，含稅參考價格；線上購物不適用。僅限有效會員，庫存和販售品項可能因倉庫店而異。冷凍24個裝。Gluten Free不代表無乳或無過敏原。"
+            }
+          },
+          "translationStatus": "REVIEWED",
+          "categories": [],
+          "image": {
+            "id": "86426c0597a0274c30f32f3d847e0a0a6d98703057182a39798e6c4fc5ed75e6",
+            "url": "/api/storefront/recommendation-images/0c0c5bc1-6f3a-4103-aa6f-ac7fb260d98e",
+            "hash": "86426c0597a0274c30f32f3d847e0a0a6d98703057182a39798e6c4fc5ed75e6",
+            "sourceUrl": "https://www.costco.co.jp/c/Frozen-Baker-John-pao-de-Queijo-24-units/p/570288",
+            "assetKey": "/api/storefront/recommendation-images/0c0c5bc1-6f3a-4103-aa6f-ac7fb260d98e",
+            "label": "front.jpg",
+            "verifiedAt": "2026-11-08T19:21:10.170504423Z"
+          },
+          "referencePrice": 998,
+          "originalPrice": 1298,
+          "discountAmount": 300,
+          "priceUnit": "24個",
+          "currency": "JPY",
+          "offerStart": "2026-11-09",
+          "offerEnd": "2026-11-15",
+          "couponStart": null,
+          "couponEnd": null,
+          "offerNotes": "コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。冷凍。Gluten Free表示は乳不使用・アレルゲン不使用を意味しません。",
+          "referenceContext": {
+            "supplierKey": null,
+            "channel": "COSTCO_WAREHOUSE",
+            "variantKey": null,
+            "sourceMessageKey": null,
+            "sourceUrl": "https://cds2.costcojapan.jp/cds/mail-images/upz/261108_bz7j/img08/s570288.jpg",
+            "activityStart": null,
+            "activityEnd": null,
+            "activityApplies": false,
+            "windowEvidence": "メール商品別表示：11/9～11/15",
+            "startSearchComplete": false
+          },
+          "referenceQuote": {
+            "state": "ACTIVE",
+            "amount": 998,
+            "itemIds": [
+              294
+            ],
+            "unknownWindows": 0
+          },
+          "rating": null
+        },
+        "service": false,
+        "serviceSummary": null
+      }
+    ],
+    "page": 0,
+    "size": 24,
+    "scopeTotal": 370,
+    "matchedTotal": 370,
+    "productOccurrences": 370,
+    "serviceCards": 0,
+    "hasNext": true,
+    "revision": "05cbd0b8df489bc4147b9294cc48b3c5f07a459e5d7986db1474e781e33702e8",
+    "categories": [
+      {
+        "id": "rec-cat-c6361385-e640-43b1-bcd6-c8e137a38944",
+        "name": {
+          "en-US": "Snacks & Sweets",
+          "ja-JP": "お菓子・スイーツ",
+          "zh-CN": "零食甜点",
+          "zh-TW": "零食甜點"
+        },
+        "count": 15
+      },
+      {
+        "id": "rec-cat-cca98698-2a0b-4b19-962c-cb7099383ed6",
+        "name": {
+          "en-US": "Appliances & Electronics",
+          "ja-JP": "家電・デジタル",
+          "zh-CN": "家电数码",
+          "zh-TW": "家電數碼"
+        },
+        "count": 50
+      },
+      {
+        "id": "rec-cat-50910d92-e2d1-4513-bbe9-67b48aa0d2ab",
+        "name": {
+          "zh-CN": "个护美妆"
+        },
+        "count": 32
+      },
+      {
+        "id": "rec-cat-fea0c6af-d6d5-4272-b2e8-00e12369e891",
+        "name": {
+          "zh-CN": "营养健康"
+        },
+        "count": 15
+      },
+      {
+        "id": "rec-cat-1c529036-074f-4ee7-b90b-e3520078cd65",
+        "name": {
+          "zh-CN": "生鲜熟食"
+        },
+        "count": 20
+      },
+      {
+        "id": "rec-cat-2063ab89-007b-4bd9-99c9-7e93df26555c",
+        "name": {
+          "en-US": "Cleaning & Paper Goods",
+          "ja-JP": "清掃・紙製品",
+          "zh-CN": "清洁纸品",
+          "zh-TW": "清潔紙品"
+        },
+        "count": 12
+      },
+      {
+        "id": "rec-cat-f0d226fe-50ec-45aa-80d9-e2c6739e413b",
+        "name": {
+          "en-US": "Staples, Instant Foods & Seasonings",
+          "ja-JP": "主食・即席食品・調味料",
+          "zh-CN": "主食速食与调味",
+          "zh-TW": "主食即食與調味"
+        },
+        "count": 38
+      },
+      {
+        "id": "rec-cat-9b0483b3-e181-40c9-9f78-9d4a6eccd087",
+        "name": {
+          "en-US": "Clothing & Accessories",
+          "ja-JP": "衣料・ファッション小物",
+          "zh-CN": "服饰配件",
+          "zh-TW": "服飾配件"
+        },
+        "count": 16
+      },
+      {
+        "id": "rec-cat-2f5df3db-d087-41bd-a5cd-4877255f26da",
+        "name": {
+          "zh-CN": "运动户外"
+        },
+        "count": 9
+      },
+      {
+        "id": "rec-cat-cfa0eccb-a517-4acc-9e36-790aa24f0a2f",
+        "name": {
+          "en-US": "Furniture & Bedding",
+          "ja-JP": "家具・寝具",
+          "zh-CN": "家居床品",
+          "zh-TW": "家居寢具"
+        },
+        "count": 27
+      },
+      {
+        "id": "rec-cat-1964d686-358d-483c-a667-a559ac97e99c",
+        "name": {
+          "en-US": "Beverages & Alcohol",
+          "ja-JP": "飲料・酒類",
+          "zh-CN": "饮品酒水",
+          "zh-TW": "飲品酒水"
+        },
+        "count": 17
+      },
+      {
+        "id": "rec-cat-b5e71be9-140a-4bb6-8146-838f666f2591",
+        "name": {
+          "en-US": "Hardware & Automotive",
+          "ja-JP": "工具・カー用品",
+          "zh-CN": "五金车品",
+          "zh-TW": "五金車用"
+        },
+        "count": 4
+      },
+      {
+        "id": "rec-cat-63f84168-6c55-4d74-aabb-50a2ab6c5ad5",
+        "name": {
+          "zh-CN": "厨房用品"
+        },
+        "count": 2
+      },
+      {
+        "id": "rec-cat-5eafbfd0-4f29-47e9-b7d2-4658a4e31ab8",
+        "name": {
+          "zh-CN": "玩具积木"
+        },
+        "count": 2
+      },
+      {
+        "id": "rec-cat-ac7d5703-9bed-4a87-bc30-46d4231964f2",
+        "name": {
+          "zh-CN": "乳品"
+        },
+        "count": 2
+      },
+      {
+        "id": "rec-cat-77f5c9a1-df87-4305-b6d4-125e09da732a",
+        "name": {
+          "zh-CN": "宠物"
+        },
+        "count": 2
+      }
+    ],
+    "unclassified": 107,
+    "japanDay": "2026-11-11",
+    "datasetRevision": "fdd3dd88ccae72a84d2a2709d643dcdc05a9e6aad31359e2948d851a6f2a3c02"
+  },
+  "meta": null
+}

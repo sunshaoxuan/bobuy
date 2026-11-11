@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "data": "synthetic long names, max valid price, no-discount; wrapping negative rejected",
+  "money": {
+    "width": 140,
+    "scroll": 140
+  }
+}

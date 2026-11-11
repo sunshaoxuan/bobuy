@@ -1,0 +1,27 @@
+### Concrete Defects & Observations
+
+1. **Unclosed Parenthesis on Truncation (Card 1):**
+   * Left card subtitle truncates to `（クランチー オーツ＆ハニ...` due to pure CSS `text-overflow: ellipsis`. Because the closing parenthesis is clipped, it leaves an unclosed bracket `（...`. *(If programmatic formatting is possible, trimming before ellipsis and appending `...)` produces a cleaner look, though standard CSS truncation is acceptable if automated).*
+2. **Star Rating Contrast is Low:**
+   * The unfilled/empty star icons (`★★★★★`) and `暂无评分` use a very light gray that borders on low accessibility contrast against the pure white card background.
+3. **Spacing Between Strikethrough and Discount Tag:**
+   * In `1,998 JPY -400 JPY`, the space separating the struck-out original price from the red discount amount is slightly tight. On smaller viewports or with wider 5-digit amounts (e.g. `12,998 JPY`), this row risks colliding or wrapping unexpectedly if fixed widths are used.
+
+---
+
+### Requirement & Element Breakdown
+
+| Check Item | Status | Observation |
+| :--- | :---: | :--- |
+| **Subtitle Placement & Spacing** | **Passed** | Directly follows the translated name with zero extra line gap; adheres to single-line constraint. |
+| **Truncation & Ellipsis** | **Passed** | Card 1 cleanly truncates with `...` without breaking onto a second line or pushing down metadata. |
+| **Cross-Card Alignment** | **Passed** | With the reserved title space accommodating potential multi-line titles, `产品编号`, star ratings, `参考价`, and final prices are strictly aligned horizontally across both cards. |
+| **Strikethrough & Red Reductions** | **Passed** | Original prices are properly struck through with legible gray strikethrough lines; negative reductions (`-400 JPY`, `-590 JPY`) stand out clearly in red. |
+| **Clipping & Bounds** | **Passed** | No accidental card edge clipping. Inner padding is balanced on left, right, and bottom borders. |
+| **Typography & Hierarchy** | **Passed** | Hierarchy is clear: Brand (small uppercase) $\rightarrow$ Chinese Title (bold primary) $\rightarrow$ Japanese Subtitle (muted secondary) $\rightarrow$ Product Code $\rightarrow$ Price. |
+
+---
+
+### Overall Assessment
+
+**Ready for deployment.** The layout strictly adheres to the updated subtitle rule (immediate attachment, single-line clamp, truncation). The reserved space below the subtitle functions as intended, keeping product codes and price blocks harmoniously aligned across asymmetric title heights without visual breakage.
