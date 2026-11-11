@@ -75,8 +75,8 @@
     "frontend/src/cart.test.ts": "191cdd4e4fbb7aed31a1fc0fe6b6da7333b2aa8054ca319883d29d15aac69d30",
     "frontend/src/cart.ts": "146567cd2927ecdbfc7210a50aff62e78e609a055ea7fe6bc6e3197576dcbf04",
     "frontend/src/cartIsolation.test.tsx": "4a1eeaa07e199e90d858960ec9ce829b3d11cf3f1e793d8cdaf50b78de3398f7",
-    "frontend/src/components/AccountShortcuts.test.tsx": "b8ee01d0a42b465ae398923c779ec216b9f8a0422fe3cbfef8046d63c810662f",
-    "frontend/src/components/AccountShortcuts.tsx": "ef07bc64df14e8d132686130de941deec21987f365f10d9352a150208f896159",
+    "frontend/src/components/AccountShortcuts.test.tsx": "52e5d117290567004819c15b7f929fe03c3f50fa870e734ef78f0c87516594ee",
+    "frontend/src/components/AccountShortcuts.tsx": "766fe1036061f149f315f7f4c7eeef16367c30c19a930c543c7d48b7da6d9b57",
     "frontend/src/components/AiQuickAddModal.test.tsx": "2d15a4fd79466223ba3f1886dd038b4f60f53a8ce904680153df1ac044c53460",
     "frontend/src/components/AiQuickAddModal.tsx": "f62df917c05558019dbdef2206ddd021582b8bf3ec619f643d7d3acb509101d3",
     "frontend/src/components/AiQuickAddModalDurable.test.tsx": "fe20c5b8be05574cf31a7ac625f29737189a8d37166dcfdafaf31acb16805e1c",
@@ -273,7 +273,7 @@
     "frontend/src/pages/StockMaster.test.tsx": "591124d179910b688a238773f0b8bd1e3690948d1247136b03820065d3a22fa9",
     "frontend/src/pages/StockMaster.tsx": "7460a3316f3a729b7c0505d91b652ee883760d53172c02150e0e5d5f6ad943c1",
     "frontend/src/pages/StoreNavigation.test.tsx": "b8e0b62fab7880e77769cb2bf91d227cb8a06851b55f01f9439e9640f6b5a561",
-    "frontend/src/pages/Storefront.tsx": "7718b3b4a9e64a0d26e356369c2ba2105ee38db662afec439cd7b9c9b38ea800",
+    "frontend/src/pages/Storefront.tsx": "0b2af2f1f15c1b93ae4f58f10de630798a43cbbd980485a342971a333ff55bc6",
     "frontend/src/pages/StorefrontCommerce.test.tsx": "c4f4f2762d594d60f12bae89997fab9287485916e68626e45bac4ccfcdb00ae8",
     "frontend/src/pages/StorefrontContext.test.tsx": "cf894fa89fc408554b7ac811ae2692c60e0c77e6801b5b172aab5fcb0d73259a",
     "frontend/src/pages/Suppliers.test.tsx": "31ac777d8d27b988b00ac22d1cc9dd14ec219490258f819b5b59a3976fb33f30",
@@ -327,7 +327,7 @@
     "frontend/vite.config.ts": "f57faeafbc94e7ecce46f3dfb4cffb89b815eb20a2c0dd5676cbcfec21e4d889",
     "frontend/vitest.config.ts": "ef95279f229eb4054f6e1774f4ef9396e714737792b12375a2656ff7f293f0b2"
   },
-  "sha256": "31ad8cc6ab12dfdaf0bacd7038893872a7b0b392a3ff7cd7d74a28afddb05fe5",
+  "sha256": "73153b743ef5e0ce99c0d6ca1672536f7f7a190ca32f11de339eb1d3e557b5e5",
   "node": "20.19.0",
   "testCommand": "vitest run --coverage",
   "build": "i18n, tsc, vite build, prerender-home"

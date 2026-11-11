@@ -278,7 +278,7 @@ export default function Storefront() {
           <header className="account-heading"><div><h1>{t('store.account')}</h1><p>{user?.name}</p></div>
             <div className="account-utilities">{isCustomer&&<Link to="/client/billing">{t('store.billing')}</Link>}<Button type="text" icon={<LogoutOutlined />} onClick={() => void logout()}>{t('store.logout')}</Button></div>
           </header>
-          <AccountShortcuts canManage={!!(user?.roles.includes('AGENT')||user?.platformAdmin)} canOrder={isCustomer}/>
+          <AccountShortcuts canManage={!!(user?.roles.includes('AGENT')||user?.platformAdmin)} ordersPath={isCustomer?'/client/orders':user?.roles.includes('AGENT')?'/admin/orders':undefined}/>
           {user&&<AccountProfile key={user.id} userId={user.id} verification={(refresh,profile)=><EmailVerification key={profile.email} refresh={refresh}/>}/>}</section> : <AccountForm afterLogin={() => {}} />} />
         <Route path="recommendations" element={<PublicRecommendations query={search} products={products} quantities={cart.items} onDetail={setDetail} onAdd={addRecommendation} canBuy={canBuyRecommendation} onSales={receiveSales} purchasePending={!tripsReady||authLoading} authKey={authKey} autoPaused={navigationOpen||tripPicker||!!detail||!!quantityProduct||cartConfirmationOpen}/>} />
         <Route path="recommendations/:id" element={<PublicRecommendations query={search} products={products} quantities={cart.items} onDetail={setDetail} onAdd={addRecommendation} canBuy={canBuyRecommendation} onSales={receiveSales} purchasePending={!tripsReady||authLoading} authKey={authKey} autoPaused={navigationOpen||tripPicker||!!detail||!!quantityProduct||cartConfirmationOpen}/>} />

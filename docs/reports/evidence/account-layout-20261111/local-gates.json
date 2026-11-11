@@ -14,15 +14,19 @@
   "typecheck": "PASS",
   "productionBuild": "PASS",
   "formalSuiteInputSha256": "31450592c1b3d357897a7824c8833ea72a923f2d266d9c9390192f823507c985",
-  "frontendInputSha256": "31ad8cc6ab12dfdaf0bacd7038893872a7b0b392a3ff7cd7d74a28afddb05fe5",
+  "frontendInputSha256": "73153b743ef5e0ce99c0d6ca1672536f7f7a190ca32f11de339eb1d3e557b5e5",
   "changedAfterFullSuite": [
+    "frontend/src/components/AccountShortcuts.test.tsx",
+    "frontend/src/components/AccountShortcuts.tsx",
     "frontend/src/components/CompactProductCard.test.tsx",
     "frontend/src/components/CompactProductCard.tsx",
     "frontend/src/components/ProductRating.test.tsx",
     "frontend/src/components/ProductRating.tsx",
+    "frontend/src/pages/Storefront.tsx",
     "frontend/src/public-catalog.css"
   ],
   "affectedTestsAfterMainSync": 51,
+  "finalRoleRouteTests": 65,
   "nativeControls": 113,
   "visualPixelFailures": 0
 }
