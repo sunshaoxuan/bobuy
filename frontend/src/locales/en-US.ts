@@ -1466,4 +1466,5 @@ Object.assign(messages,{
  "review.reread":"Keep draft and reload current version",
  "review.title":"Product reviews","review.none":"No ratings yet","review.write":"Your rating and review","review.login":"Sign in to rate and review","review.score":"Your score (1–5, half-point steps)","review.comment":"Your review (optional)","review.save":"Save your review","review.saved":"Your review was saved","review.count":"{count} ratings","review.read_write":"Read or write reviews","review.more":"Load more reviews","review.retry":"Reload"
 });
+Object.assign(messages,{"card.reference": "Reference price", "card.reference_past": "Past reference price", "card.reference_future": "Upcoming reference price", "card.reference_undated": "Undated reference price", "card.price_unknown": "Price unconfirmed"});
 export default messages;

@@ -1,0 +1,133 @@
+{
+  "result": "PASS",
+  "baseline": [
+    {
+      "file": "assets/PublicProductCatalog-C5dfonFg.js",
+      "bytes": 12505,
+      "gzip": 4660,
+      "sha256": "edcfae636c588068d2928b149d51bd9a8898ca3e9640d686ded8e5b5d3679986"
+    },
+    {
+      "file": "assets/RecommendationImageViewer-Bgim0w9y.js",
+      "bytes": 10670,
+      "gzip": 3987,
+      "sha256": "f9a6f6ff005df1241c2edeccf6dd7b8c28a5f82437d45c16f14610d9e7c1bac5"
+    },
+    {
+      "file": "assets/chat-flow-CnbBv43Y.js",
+      "bytes": 402154,
+      "gzip": 125971,
+      "sha256": "aac91eebadb416ccb84ce636d6a9629a5572c7c08fe73764b9b7aa32fb79ecaa"
+    },
+    {
+      "file": "assets/index-BS0q-gsA.js",
+      "bytes": 64525,
+      "gzip": 19763,
+      "sha256": "a7991f1f8ae7717ebf37690daf823cf9a99cb7a9ae06bdd704d8514d4f28539e"
+    },
+    {
+      "file": "assets/procurement-dashboard-B5in9UvG.js",
+      "bytes": 30360,
+      "gzip": 8396,
+      "sha256": "a80ea8c68ca5e2ba575cb9f939cacad007cacdf1ae352763d440bf2171815620"
+    },
+    {
+      "file": "assets/stock-master-BJeiqg96.js",
+      "bytes": 91152,
+      "gzip": 27039,
+      "sha256": "7731424661eb26a15b0ba7102ec545f4592d70debf3ce28d146e0fedc23f6ae2"
+    },
+    {
+      "file": "assets/vendor-UdMao7IF.js",
+      "bytes": 1460728,
+      "gzip": 454517,
+      "sha256": "4441bc59845e1bde32dfdce98815812d54ecabcad9e3be68d4005d9c90cb2953"
+    }
+  ],
+  "candidate": [
+    {
+      "file": "assets/ImageLightbox-B7iQbgoI.js",
+      "bytes": 18049,
+      "gzip": 7106,
+      "sha256": "c648df4eaf363e4dd4754e82386965c0d0899a76146c20498105089b946de864"
+    },
+    {
+      "file": "assets/ProductMarkerBadges-B4AaYe9C.js",
+      "bytes": 1144,
+      "gzip": 623,
+      "sha256": "238b54e3f8a2a77aa0974497d3c9c97ae980732c49867a4833bd7be9e5eb53d4"
+    },
+    {
+      "file": "assets/ProductMarkerEditor-dqFA2r9N.js",
+      "bytes": 4479,
+      "gzip": 2003,
+      "sha256": "b8e04e7ff2090da4f94cbb089412743b5590698bd39237ea687766aad7c87670"
+    },
+    {
+      "file": "assets/ProductMetadata-BvhDpo3g.js",
+      "bytes": 480,
+      "gzip": 289,
+      "sha256": "f9d3fa8432cdf6773c98d6c28bb622d4cde5bdb71a5f4da8600cdff6803c0e83"
+    },
+    {
+      "file": "assets/PublicProductCatalog-C_Daw3Xf.js",
+      "bytes": 12421,
+      "gzip": 4883,
+      "sha256": "83caf424884de0d6a7e8a314857012f32fff846990d34e528faf1f4f1b438101"
+    },
+    {
+      "file": "assets/RecommendationImageViewer-BLxxswKQ.js",
+      "bytes": 13602,
+      "gzip": 4953,
+      "sha256": "e5f87ad279e647317d75cc0dda5793550b061ed50ac4cc509b0f0b93ef6c1d6a"
+    },
+    {
+      "file": "assets/ReloadOutlined-CEP7mjut.js",
+      "bytes": 986,
+      "gzip": 609,
+      "sha256": "b146d881faa9f58c32d82bd916cd8f37208683ed53adcf8b67faaed18e158fb6"
+    },
+    {
+      "file": "assets/SaveOutlined-DIQbz6vf.js",
+      "bytes": 726,
+      "gzip": 465,
+      "sha256": "87f504000f77aa2fd8e829bcf45332f41a633ece7a49cfc99e4ca614107923a0"
+    },
+    {
+      "file": "assets/index-BvaWa9xn.js",
+      "bytes": 4568,
+      "gzip": 1815,
+      "sha256": "6ba88bf76ea9bd079287566fd0e0be133fc0e310f928d1f941bd7ed2929fe333"
+    },
+    {
+      "file": "assets/index-CFemXd4y.js",
+      "bytes": 4139,
+      "gzip": 1708,
+      "sha256": "375bf8306b5418d9019980f51814a7f251b6f9c79dc995d53b58c620a91d9152"
+    },
+    {
+      "file": "assets/index-CFzqh9Cf.js",
+      "bytes": 8495,
+      "gzip": 3178,
+      "sha256": "8a8d40c7632804fb40ad9090961e660c51b896a31761e66a743c5b50ff3d363a"
+    },
+    {
+      "file": "assets/index-Cld7-vS8.js",
+      "bytes": 1226356,
+      "gzip": 387985,
+      "sha256": "c63f58465f7e281fa0db25e0a3395179ba15611630dd430c63b6a1ae18921522"
+    }
+  ],
+  "beforeGzip": 644333,
+  "afterGzip": 415617,
+  "reduction": 0.35496552248604374,
+  "recommendationGraph": [
+    "assets/ImageLightbox-B7iQbgoI.js",
+    "assets/ProductMetadata-BvhDpo3g.js",
+    "assets/PublicRecommendations-COr8eFS8.js",
+    "assets/RecommendationImageViewer-BLxxswKQ.js",
+    "assets/index-BvaWa9xn.js",
+    "assets/index-Cld7-vS8.js"
+  ],
+  "method": "Real original public-catalog request graph vs new Vite static dependency closure; same gzip implementation, no dynamic admin/chat routes"
+}

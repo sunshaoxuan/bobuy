@@ -1,0 +1,524 @@
+[
+  {
+    "image": "catalog-390-native.png",
+    "card": 0,
+    "role": "name",
+    "background": {
+      "height": 55.390625,
+      "width": 143.5,
+      "x": 27,
+      "y": 455.84375
+    },
+    "glyph": {
+      "x": 31,
+      "y": 465,
+      "width": 72,
+      "height": 10
+    },
+    "margins": {
+      "left": 4,
+      "top": 10,
+      "right": 68,
+      "bottom": 37
+    },
+    "alignment": "left; two-line name slot, currency and amount share baseline"
+  },
+  {
+    "image": "catalog-390-native.png",
+    "card": 0,
+    "role": "price",
+    "background": {
+      "height": 32.390625,
+      "width": 147.5,
+      "x": 25,
+      "y": 599.984375
+    },
+    "glyph": {
+      "x": 37,
+      "y": 609,
+      "width": 38,
+      "height": 17
+    },
+    "margins": {
+      "left": 2,
+      "top": 10,
+      "right": 1,
+      "bottom": 7
+    },
+    "alignment": "left; two-line name slot, currency and amount share baseline",
+    "marginsToCard": {
+      "left": 21,
+      "right": 106.5
+    }
+  },
+  {
+    "image": "catalog-390-native.png",
+    "card": 1,
+    "role": "name",
+    "background": {
+      "height": 55.390625,
+      "width": 143.5,
+      "x": 204.5,
+      "y": 455.84375
+    },
+    "glyph": {
+      "x": 209,
+      "y": 463,
+      "width": 104,
+      "height": 13
+    },
+    "margins": {
+      "left": 5,
+      "top": 8,
+      "right": 35,
+      "bottom": 36
+    },
+    "alignment": "left; two-line name slot, currency and amount share baseline"
+  },
+  {
+    "image": "catalog-390-native.png",
+    "card": 1,
+    "role": "price",
+    "background": {
+      "height": 32.390625,
+      "width": 147.5,
+      "x": 202.5,
+      "y": 599.984375
+    },
+    "glyph": {
+      "x": 215,
+      "y": 609,
+      "width": 37,
+      "height": 17
+    },
+    "margins": {
+      "left": 2,
+      "top": 10,
+      "right": 2,
+      "bottom": 7
+    },
+    "alignment": "left; two-line name slot, currency and amount share baseline",
+    "marginsToCard": {
+      "left": 21.5,
+      "right": 107.0
+    }
+  },
+  {
+    "image": "catalog-390-long-native.png",
+    "card": 0,
+    "role": "name",
+    "background": {
+      "height": 55.390625,
+      "width": 143.5,
+      "x": 27,
+      "y": 112.84375
+    },
+    "glyph": {
+      "x": 31,
+      "y": 122,
+      "width": 72,
+      "height": 10
+    },
+    "margins": {
+      "left": 4,
+      "top": 10,
+      "right": 68,
+      "bottom": 37
+    },
+    "alignment": "left; two-line name slot, currency and amount share baseline"
+  },
+  {
+    "image": "catalog-390-long-native.png",
+    "card": 0,
+    "role": "price",
+    "background": {
+      "height": 32.390625,
+      "width": 147.5,
+      "x": 25,
+      "y": 256.984375
+    },
+    "glyph": {
+      "x": 37,
+      "y": 266,
+      "width": 38,
+      "height": 17
+    },
+    "margins": {
+      "left": 2,
+      "top": 10,
+      "right": 1,
+      "bottom": 7
+    },
+    "alignment": "left; two-line name slot, currency and amount share baseline",
+    "marginsToCard": {
+      "left": 21,
+      "right": 106.5
+    }
+  },
+  {
+    "image": "catalog-390-long-native.png",
+    "card": 1,
+    "role": "name",
+    "background": {
+      "height": 55.390625,
+      "width": 143.5,
+      "x": 204.5,
+      "y": 112.84375
+    },
+    "glyph": {
+      "x": 209,
+      "y": 120,
+      "width": 104,
+      "height": 13
+    },
+    "margins": {
+      "left": 5,
+      "top": 8,
+      "right": 35,
+      "bottom": 36
+    },
+    "alignment": "left; two-line name slot, currency and amount share baseline"
+  },
+  {
+    "image": "catalog-390-long-native.png",
+    "card": 1,
+    "role": "price",
+    "background": {
+      "height": 32.390625,
+      "width": 147.5,
+      "x": 202.5,
+      "y": 256.984375
+    },
+    "glyph": {
+      "x": 215,
+      "y": 266,
+      "width": 37,
+      "height": 17
+    },
+    "margins": {
+      "left": 2,
+      "top": 10,
+      "right": 2,
+      "bottom": 7
+    },
+    "alignment": "left; two-line name slot, currency and amount share baseline",
+    "marginsToCard": {
+      "left": 21.5,
+      "right": 107.0
+    }
+  },
+  {
+    "image": "catalog-390-long-native.png",
+    "card": 2,
+    "role": "name",
+    "background": {
+      "height": 55.390625,
+      "width": 143.5,
+      "x": 27,
+      "y": 523.875
+    },
+    "glyph": {
+      "x": 32,
+      "y": 533,
+      "width": 133,
+      "height": 35
+    },
+    "margins": {
+      "left": 5,
+      "top": 10,
+      "right": 6,
+      "bottom": 12
+    },
+    "alignment": "left; two-line name slot, currency and amount share baseline"
+  },
+  {
+    "image": "catalog-390-long-native.png",
+    "card": 2,
+    "role": "price",
+    "background": {
+      "height": 20.921875,
+      "width": 147.5,
+      "x": 25,
+      "y": 686.015625
+    },
+    "glyph": {
+      "x": 35,
+      "y": 691,
+      "width": 135,
+      "height": 13
+    },
+    "margins": {
+      "left": 1,
+      "top": 5,
+      "right": 1,
+      "bottom": 3
+    },
+    "alignment": "left; two-line name slot, currency and amount share baseline",
+    "marginsToCard": {
+      "left": 19,
+      "right": 11.5
+    }
+  },
+  {
+    "image": "catalog-390-long-native.png",
+    "card": 3,
+    "role": "name",
+    "background": {
+      "height": 55.390625,
+      "width": 143.5,
+      "x": 204.5,
+      "y": 523.875
+    },
+    "glyph": {
+      "x": 208,
+      "y": 531,
+      "width": 107,
+      "height": 13
+    },
+    "margins": {
+      "left": 4,
+      "top": 8,
+      "right": 33,
+      "bottom": 36
+    },
+    "alignment": "left; two-line name slot, currency and amount share baseline"
+  },
+  {
+    "image": "catalog-390-long-native.png",
+    "card": 3,
+    "role": "price",
+    "background": {
+      "height": 32.390625,
+      "width": 147.5,
+      "x": 202.5,
+      "y": 668.015625
+    },
+    "glyph": {
+      "x": 216,
+      "y": 677,
+      "width": 56,
+      "height": 20
+    },
+    "margins": {
+      "left": 3,
+      "top": 9,
+      "right": 1,
+      "bottom": 4
+    },
+    "alignment": "left; two-line name slot, currency and amount share baseline",
+    "marginsToCard": {
+      "left": 22.5,
+      "right": 87.0
+    }
+  },
+  {
+    "image": "recommendations-390-native.png",
+    "card": 0,
+    "role": "name",
+    "background": {
+      "height": 55.390625,
+      "width": 143.5,
+      "x": 27,
+      "y": 573.34375
+    },
+    "glyph": {
+      "x": 31,
+      "y": 582,
+      "width": 72,
+      "height": 10
+    },
+    "margins": {
+      "left": 4,
+      "top": 9,
+      "right": 68,
+      "bottom": 37
+    },
+    "alignment": "left; two-line name slot, currency and amount share baseline"
+  },
+  {
+    "image": "recommendations-390-native.png",
+    "card": 0,
+    "role": "price",
+    "background": {
+      "height": 32.390625,
+      "width": 147.5,
+      "x": 25,
+      "y": 717.484375
+    },
+    "glyph": {
+      "x": 37,
+      "y": 726,
+      "width": 38,
+      "height": 17
+    },
+    "margins": {
+      "left": 2,
+      "top": 9,
+      "right": 1,
+      "bottom": 7
+    },
+    "alignment": "left; two-line name slot, currency and amount share baseline",
+    "marginsToCard": {
+      "left": 21,
+      "right": 106.5
+    }
+  },
+  {
+    "image": "recommendations-390-native.png",
+    "card": 1,
+    "role": "name",
+    "background": {
+      "height": 55.390625,
+      "width": 143.5,
+      "x": 204.5,
+      "y": 573.34375
+    },
+    "glyph": {
+      "x": 209,
+      "y": 582,
+      "width": 130,
+      "height": 35
+    },
+    "margins": {
+      "left": 5,
+      "top": 9,
+      "right": 9,
+      "bottom": 12
+    },
+    "alignment": "left; two-line name slot, currency and amount share baseline"
+  },
+  {
+    "image": "recommendations-390-native.png",
+    "card": 1,
+    "role": "price",
+    "background": {
+      "height": 20.921875,
+      "width": 147.5,
+      "x": 202.5,
+      "y": 735.484375
+    },
+    "glyph": {
+      "x": 212,
+      "y": 740,
+      "width": 135,
+      "height": 13
+    },
+    "margins": {
+      "left": 1,
+      "top": 5,
+      "right": 1,
+      "bottom": 4
+    },
+    "alignment": "left; two-line name slot, currency and amount share baseline",
+    "marginsToCard": {
+      "left": 18.5,
+      "right": 12.0
+    }
+  },
+  {
+    "image": "recommendations-390-native.png",
+    "role": "directory-icon",
+    "background": {
+      "height": 48,
+      "width": 48,
+      "x": 311,
+      "y": 172
+    },
+    "ink": [
+      4,
+      4,
+      24,
+      24
+    ],
+    "centerError": 0.0,
+    "hitArea": [
+      48,
+      48
+    ],
+    "innerFrameInset": 1,
+    "glyphMargins": [
+      13,
+      13,
+      13,
+      13
+    ],
+    "minimumTitleGap": 12
+  },
+  {
+    "image": "recommendations-360-native.png",
+    "card": 0,
+    "role": "name",
+    "background": {
+      "height": 55.390625,
+      "width": 128.5,
+      "x": 27,
+      "y": 558.34375
+    },
+    "glyph": {
+      "x": 31,
+      "y": 567,
+      "width": 72,
+      "height": 10
+    },
+    "margins": {
+      "left": 4,
+      "top": 9,
+      "right": 53,
+      "bottom": 37
+    },
+    "alignment": "left; two-line name slot, currency and amount share baseline"
+  },
+  {
+    "image": "recommendations-360-native.png",
+    "card": 1,
+    "role": "name",
+    "background": {
+      "height": 55.390625,
+      "width": 128.5,
+      "x": 189.5,
+      "y": 558.34375
+    },
+    "glyph": {
+      "x": 194,
+      "y": 567,
+      "width": 84,
+      "height": 35
+    },
+    "margins": {
+      "left": 5,
+      "top": 9,
+      "right": 40,
+      "bottom": 12
+    },
+    "alignment": "left; two-line name slot, currency and amount share baseline"
+  },
+  {
+    "image": "recommendations-360-native.png",
+    "role": "directory-icon",
+    "background": {
+      "height": 48,
+      "width": 48,
+      "x": 281,
+      "y": 172
+    },
+    "ink": [
+      4,
+      4,
+      24,
+      24
+    ],
+    "centerError": 0.0,
+    "hitArea": [
+      48,
+      48
+    ],
+    "innerFrameInset": 1,
+    "glyphMargins": [
+      13,
+      13,
+      13,
+      13
+    ],
+    "minimumTitleGap": 12
+  }
+]

@@ -1,0 +1,216 @@
+{
+  "cards": [
+    {
+      "brand": {
+        "height": 18,
+        "width": 128.5,
+        "x": 27,
+        "y": 540.34375
+      },
+      "buttons": [
+        {
+          "name": "商品详情：Short name",
+          "rect": {
+            "height": 132.5,
+            "width": 132.5,
+            "x": 25,
+            "y": 397.84375
+          }
+        },
+        {
+          "name": "Short name",
+          "rect": {
+            "height": 55.390625,
+            "width": 128.5,
+            "x": 27,
+            "y": 558.34375
+          }
+        },
+        {
+          "name": "商品星级：4.3 / 5",
+          "rect": {
+            "height": 52,
+            "width": 132.5,
+            "x": 25,
+            "y": 651.484375
+          }
+        }
+      ],
+      "card": {
+        "height": 388.265625,
+        "width": 150.5,
+        "x": 16,
+        "y": 388.84375
+      },
+      "code": {
+        "height": 22,
+        "width": 132.5,
+        "x": 25,
+        "y": 625.484375
+      },
+      "heading": {
+        "height": 43.390625,
+        "width": 122.5,
+        "x": 30,
+        "y": 561.34375
+      },
+      "money": {
+        "height": 32.390625,
+        "width": 132.5,
+        "x": 25,
+        "y": 710.484375
+      },
+      "name": {
+        "height": 55.390625,
+        "width": 128.5,
+        "x": 27,
+        "y": 558.34375
+      },
+      "price": {
+        "height": 32.390625,
+        "width": 39.984375,
+        "x": 35.671875,
+        "y": 710.484375
+      }
+    },
+    {
+      "brand": {
+        "height": 18,
+        "width": 128.5,
+        "x": 189.5,
+        "y": 540.34375
+      },
+      "buttons": [
+        {
+          "name": "商品详情：Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name ",
+          "rect": {
+            "height": 132.5,
+            "width": 132.5,
+            "x": 187.5,
+            "y": 397.84375
+          }
+        },
+        {
+          "name": "Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name ",
+          "rect": {
+            "height": 55.390625,
+            "width": 128.5,
+            "x": 189.5,
+            "y": 558.34375
+          }
+        },
+        {
+          "name": "暂无评分",
+          "rect": {
+            "height": 52,
+            "width": 132.5,
+            "x": 187.5,
+            "y": 651.484375
+          }
+        }
+      ],
+      "card": {
+        "height": 388.265625,
+        "width": 150.5,
+        "x": 178.5,
+        "y": 388.84375
+      },
+      "code": {
+        "height": 22,
+        "width": 132.5,
+        "x": 187.5,
+        "y": 625.484375
+      },
+      "heading": {
+        "height": 43.390625,
+        "width": 122.5,
+        "x": 192.5,
+        "y": 561.34375
+      },
+      "money": {
+        "height": 18.625,
+        "width": 132.5,
+        "x": 187.5,
+        "y": 728.484375
+      },
+      "name": {
+        "height": 55.390625,
+        "width": 128.5,
+        "x": 189.5,
+        "y": 558.34375
+      },
+      "price": {
+        "height": 18.625,
+        "width": 121.125,
+        "x": 196.5,
+        "y": 728.484375
+      }
+    },
+    {
+      "brand": {
+        "height": 18,
+        "width": 128.5,
+        "x": 27,
+        "y": 948.609375
+      },
+      "buttons": [
+        {
+          "name": "商品详情：商品名称测试 商品名称测试 商品名称测试",
+          "rect": {
+            "height": 132.5,
+            "width": 132.5,
+            "x": 25,
+            "y": 806.109375
+          }
+        },
+        {
+          "name": "商品名称测试 商品名称测试 商品名称测试",
+          "rect": {
+            "height": 55.390625,
+            "width": 128.5,
+            "x": 27,
+            "y": 966.609375
+          }
+        }
+      ],
+      "card": {
+        "height": 345.640625,
+        "width": 150.5,
+        "x": 16,
+        "y": 797.109375
+      },
+      "code": {
+        "height": 22,
+        "width": 132.5,
+        "x": 25,
+        "y": 1033.75
+      },
+      "heading": {
+        "height": 43.390625,
+        "width": 122.5,
+        "x": 30,
+        "y": 969.609375
+      },
+      "money": null,
+      "name": {
+        "height": 55.390625,
+        "width": 128.5,
+        "x": 27,
+        "y": 966.609375
+      },
+      "price": null
+    }
+  ],
+  "launcher": {
+    "height": 48,
+    "width": 48,
+    "x": 281,
+    "y": 172
+  },
+  "scrollY": 0,
+  "url": "http://127.0.0.1:5180/recommendations?node=1000",
+  "viewport": [
+    360,
+    800
+  ]
+}

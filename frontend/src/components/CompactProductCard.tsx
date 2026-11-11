@@ -1,0 +1,43 @@
+import {useEffect,useState,type ReactNode} from 'react';
+import type {CardReference,StoreProduct,RecommendationFacts} from '../api';
+import {resolvedOfferWindow} from '../referenceOfferWindow';
+import {useI18n} from '../i18n';
+import CardPrice from './CardPrice';
+import {ProductBrand} from './ProductMetadata';
+import {ProductStars} from './ProductRating';
+import {openCardDetail} from './openCardDetail';
+
+export function referenceForCard(facts:RecommendationFacts&{id:number;currency?:string},postId:number,today?:string):CardReference|undefined{
+ if(facts.referencePrice==null)return undefined;
+ const window=resolvedOfferWindow(facts);
+ return {amount:facts.referencePrice,currency:facts.currency??'JPY',unit:facts.priceUnit,postId,itemId:facts.id,state:!today||!window.start||!window.end?'UNKNOWN':today>window.end?'EXPIRED':today<window.start?'FUTURE':'ACTIVE'};
+}
+
+/** One public product-card hierarchy; source facts and conditions stay in detail. */
+export default function CompactProductCard({name,language,brand,itemNumber,image,productId,rating,quote,reference,pending=false,eager=false,eagerRating=false,heading=2,occurrenceKey,onOpen,overlay,actions}:{
+ name:string;language?:string;brand?:string|null;itemNumber?:string|null;image?:string|null;
+ productId?:string|null;rating?:number|null;quote?:StoreProduct;reference?:CardReference|null;
+ pending?:boolean;eager?:boolean;eagerRating?:boolean;heading?:2|3;occurrenceKey?:string;
+ onOpen:(trigger:HTMLButtonElement)=>void;overlay?:ReactNode;actions?:ReactNode;
+}){
+ const {t}=useI18n(),Heading=heading===3?'h3':'h2';
+ const [pressed,setPressed]=useState(false);
+ useEffect(()=>{const clear=()=>setPressed(false);window.addEventListener('blur',clear);return()=>window.removeEventListener('blur',clear);},[]);
+ const actual=!pending&&quote,kind=actual?'sale':reference?.amount!=null?'reference':'unknown';
+ const referenceLabel=t(reference?.state==='EXPIRED'?'card.reference_past':reference?.state==='FUTURE'?'card.reference_future':reference?.state==='UNKNOWN'?'card.reference_undated':'card.reference');
+ return <article className="store-product rec-pin catalog-master-card compact-product-card" data-product-id={productId??undefined} data-occurrence-key={occurrenceKey} data-card-detail data-pressed={pressed||undefined} onClick={event=>openCardDetail(event,onOpen)} onPointerDown={event=>{if(event.pointerType!=='mouse')setPressed(true);}} onPointerUp={()=>setPressed(false)} onPointerCancel={()=>setPressed(false)} onPointerLeave={()=>setPressed(false)} onLostPointerCapture={()=>setPressed(false)}>
+  <div className="product-tile">
+   <button type="button" className="product-photo" data-detail-trigger="photo" aria-label={t('store.detail_label',{name})} onClick={event=>onOpen(event.currentTarget)}>
+    {image?<img src={image} alt={name} loading={eager?'eager':'lazy'} onError={event=>{event.currentTarget.style.display='none';}}/>:<span className="rec-no-product-image">{t('gallery.pending')}</span>}
+   </button>
+   {overlay}
+   <div className="product-body"><div className="compact-card-brand"><ProductBrand brand={brand}/></div><button type="button" className="product-name" data-detail-trigger="name" onClick={event=>onOpen(event.currentTarget)}><Heading lang={language} title={name}>{name||t('rec.not_stated')}</Heading></button></div>
+  </div>
+  <small className="rec-pin-code" title={itemNumber??''}>{t('rec.code')}: {itemNumber||t('rec.not_stated')}</small>
+  <ProductStars value={rating} productId={productId} eager={eagerRating}/>
+  <div className="compact-card-price" data-price-kind={kind} data-price-source-post={kind==='reference'?reference?.postId:undefined} data-price-source-item={kind==='reference'?reference?.itemId:undefined}>
+   {actual?<><CardPrice amount={actual.price} currency={actual.currency}/>{actual.saleUnit&&<small className="card-price-unit" title={actual.saleUnit}>/ {actual.saleUnit}</small>}</>:reference?.amount!=null?<><small className="card-price-label">{referenceLabel}</small><CardPrice amount={reference.amount} currency={reference.currency} kind="reference"/>{reference.unit&&<small className="card-price-unit" title={reference.unit}>/ {reference.unit}</small>}</>:<small className="card-price-label">{t('card.price_unknown')}</small>}
+  </div>
+  {actions}
+ </article>;
+}

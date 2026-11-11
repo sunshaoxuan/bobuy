@@ -1603,4 +1603,5 @@ Object.assign(messages,{
  "review.reread":"保留草稿並重讀目前版本",
  "review.title":"商品評價","review.none":"暫無評分","review.write":"我的評分與評價","review.login":"登入後評分和評價","review.score":"我的評分（1至5分，每檔0.5分）","review.comment":"我的評價（選填）","review.save":"儲存我的評價","review.saved":"評價已儲存","review.count":"{count}人評分","review.read_write":"查看或撰寫評價","review.more":"載入更多評價","review.retry":"重新載入"
 });
+Object.assign(messages,{"card.reference": "參考價", "card.reference_past": "往期參考價", "card.reference_future": "預告參考價", "card.reference_undated": "日期待核參考價", "card.price_unknown": "價格待確認"});
 export default messages;

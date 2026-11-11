@@ -22,9 +22,13 @@ public class PublicProductBrowseService {
    .configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY,true);
  public PublicProductBrowseService(PublicProductCatalogService c,ProductMarkerService m){catalog=c;markers=m;}
  public record Facet(String id,Map<String,String> name,long count){}
+ public record CardReference(java.math.BigDecimal amount,String currency,String unit,Long postId,Long itemId,String state){}
  public record Card(String productId,Long merchantId,Map<String,String> name,String brand,String itemNumber,
    Map<String,String> specification,String model,String packaging,RecommendationItem.Picture image,
-   List<RecommendationItem.Label> categories,List<ProductMarkerService.Definition> markers,boolean reviewedMaster,java.math.BigDecimal rating){}
+   List<RecommendationItem.Label> categories,List<ProductMarkerService.Definition> markers,boolean reviewedMaster,java.math.BigDecimal rating,CardReference reference){}
+ private static CardReference reference(PublicProductCatalogService.Entry entry){
+  return entry.referenceOffers().stream().filter(offer->offer.facts().referencePrice!=null).findFirst().map(offer->{var facts=offer.facts();return new CardReference(facts.referencePrice,"JPY",facts.priceUnit,offer.postId(),facts.id,ReferenceOfferWindow.resolve(facts.offerStart,facts.offerEnd,facts.referenceContext).state(java.time.Instant.now()));}).orElse(null);
+ }
  public record Browse(List<Card> items,int page,int size,long scopeTotal,long matchedTotal,boolean hasNext,
    String revision,List<Facet> categories,long unclassified,String query,String category,String locale,String dataset,String datasetRevision,long markedScopeTotal){}
  public record Detail(PublicProductCatalogService.Entry item,List<ProductMarkerService.Definition> markers,String revision){}
@@ -64,7 +68,7 @@ public class PublicProductBrowseService {
   var facets=counts.entrySet().stream().map(e->new Facet(e.getKey(),labels.get(e.getKey()).name(),e.getValue())).toList();
   var filtered=scope.stream().filter(e->cat.isEmpty()||cat.equals("__unclassified")&&e.categories().isEmpty()||e.categories().stream().anyMatch(c->c.id().equals(cat))).toList();
   int start=(int)Math.min((long)page*24,filtered.size()),end=Math.min(start+24,filtered.size());
-  var cards=filtered.subList(start,end).stream().map(e->new Card(e.productId(),e.merchantId(),e.name(),e.brand(),e.itemNumber(),e.specification(),e.model(),e.packaging(),e.gallery().isEmpty()?null:e.gallery().get(0),e.categories(),data.markers().getOrDefault(e.productId(),List.of()),e.reviewedMaster(),e.rating())).toList();
+  var cards=filtered.subList(start,end).stream().map(e->new Card(e.productId(),e.merchantId(),e.name(),e.brand(),e.itemNumber(),e.specification(),e.model(),e.packaging(),e.gallery().isEmpty()?null:e.gallery().get(0),e.categories(),data.markers().getOrDefault(e.productId(),List.of()),e.reviewedMaster(),e.rating(),reference(e))).toList();
   long markedScopeTotal=data.entries().stream().filter(e->!data.markers().getOrDefault(e.productId(),List.of()).isEmpty()).count();
   return new Browse(cards,page,24,scope.size(),filtered.size(),end<filtered.size(),version,facets,unclassified,q,cat,locale,dataset,datasetVersion,markedScopeTotal);
  }

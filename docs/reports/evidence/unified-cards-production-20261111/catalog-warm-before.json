@@ -1,0 +1,29 @@
+[
+  {
+    "requestId": "72664.231",
+    "url": "https://bobuy.cc/api/storefront/product-browse?page=0&merchantId=1001&query=&category=&locale=zh-CN&marked=false",
+    "status": 200,
+    "ttfbMs": 1412.999,
+    "start": 281329.00589,
+    "durationMs": 1419.497000053525,
+    "bytes": 12166
+  },
+  {
+    "requestId": "72664.292",
+    "url": "https://bobuy.cc/api/storefront/product-browse?page=0&merchantId=1001&query=&category=&locale=zh-CN&marked=false",
+    "status": 200,
+    "ttfbMs": 1861.662,
+    "start": 281330.870896,
+    "durationMs": 1862.7269999706186,
+    "bytes": 12065
+  },
+  {
+    "requestId": "72664.377",
+    "url": "https://bobuy.cc/api/storefront/product-browse?page=0&merchantId=1001&query=&category=&locale=zh-CN&marked=false",
+    "status": 200,
+    "ttfbMs": 2472.678,
+    "start": 281333.150683,
+    "durationMs": 2476.901000016369,
+    "bytes": 12061
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "frontendTests": 757,
+  "frontendFiles": 114,
+  "frontendFailures": 0,
+  "backendTests": 651,
+  "backendPassed": 627,
+  "backendSkipped": 24,
+  "backendFailures": 0,
+  "configuredJacoco": "PASS",
+  "i18nKeys": 1607,
+  "typescript": "PASS",
+  "build": "PASS",
+  "sqlMigration": false,
+  "sourceInputsSha256": "058df93954c063a8e79ce5ecdb56d75068c47af021084e7f571ba4df905f4013",
+  "frontendGateSha256": "243adb5993558c012dd1345f1122dd1ca08d20320a9ff1d79f246cbf69ddceea",
+  "backendLogSha256": "02def1baf138244e17afee26a2229a903260249643e8d9716a3be6c9e5533200"
+}

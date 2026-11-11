@@ -1,0 +1,1327 @@
+[
+  {
+    "name": "recommendations-390",
+    "cards": [
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "980",
+        "priceFont": "24px",
+        "priceScroll": 40,
+        "priceWidth": 39.984375,
+        "rect": {
+          "height": 397.5625,
+          "width": 165.5,
+          "x": 16,
+          "y": 388.84375
+        },
+        "text": "商品图片待核Short name产品编号: TEST-14.3 / 5¥980/ pack"
+      },
+      {
+        "kind": "reference",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "999,999,999,999.99",
+        "priceFont": "15.5px",
+        "priceScroll": 136,
+        "priceWidth": 136.046875,
+        "rect": {
+          "height": 397.5625,
+          "width": 165.5,
+          "x": 193.5,
+          "y": 388.84375
+        },
+        "text": "商品图片待核Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name 产品编号: TEST-2暂无评分日期待核参考价¥999,999,999,999.99/ maximum price test unit"
+      },
+      {
+        "kind": "unknown",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "priceFont": null,
+        "rect": {
+          "height": 648.015625,
+          "width": 165.5,
+          "x": 16,
+          "y": 806.40625
+        },
+        "text": "商品图片待核商品名称测试 商品名称测试 商品名称测试产品编号: TEST-3暂无评分价格待确认"
+      }
+    ],
+    "overflow": false,
+    "url": "http://127.0.0.1:5180/recommendations?node=1000",
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  {
+    "name": "recommendations-360",
+    "cards": [
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "980",
+        "priceFont": "24px",
+        "priceScroll": 40,
+        "priceWidth": 39.984375,
+        "rect": {
+          "height": 388.265625,
+          "width": 150.5,
+          "x": 16,
+          "y": 388.84375
+        },
+        "text": "商品图片待核Short name产品编号: TEST-14.3 / 5¥980/ pack"
+      },
+      {
+        "kind": "reference",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "999,999,999,999.99",
+        "priceFont": "13.8px",
+        "priceScroll": 121,
+        "priceWidth": 121.125,
+        "rect": {
+          "height": 388.265625,
+          "width": 150.5,
+          "x": 178.5,
+          "y": 388.84375
+        },
+        "text": "商品图片待核Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name 产品编号: TEST-2暂无评分日期待核参考价¥999,999,999,999.99/ maximum price test unit"
+      },
+      {
+        "kind": "unknown",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "priceFont": null,
+        "rect": {
+          "height": 744.015625,
+          "width": 150.5,
+          "x": 16,
+          "y": 797.109375
+        },
+        "text": "商品图片待核商品名称测试 商品名称测试 商品名称测试产品编号: TEST-3暂无评分价格待确认"
+      }
+    ],
+    "overflow": false,
+    "url": "http://127.0.0.1:5180/recommendations?node=1000",
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "name": "recommendations-1440",
+    "cards": [
+      {
+        "kind": "sale",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "price": "980",
+        "priceFont": "28px",
+        "priceScroll": 47,
+        "priceWidth": 46.640625,
+        "rect": {
+          "height": 657.421875,
+          "width": 211.390625,
+          "x": 272,
+          "y": 362.84375
+        },
+        "text": "商品图片待核Short name产品编号: TEST-14.3 / 5¥980/ pack"
+      },
+      {
+        "kind": "reference",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "price": "999,999,999,999.99",
+        "priceFont": "20.1px",
+        "priceScroll": 176,
+        "priceWidth": 176.421875,
+        "rect": {
+          "height": 657.421875,
+          "width": 211.40625,
+          "x": 499.390625,
+          "y": 362.84375
+        },
+        "text": "商品图片待核Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name 产品编号: TEST-2暂无评分日期待核参考价¥999,999,999,999.99/ maximum price test unit"
+      },
+      {
+        "kind": "unknown",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "priceFont": null,
+        "rect": {
+          "height": 657.421875,
+          "width": 211.390625,
+          "x": 726.796875,
+          "y": 362.84375
+        },
+        "text": "商品图片待核商品名称测试 商品名称测试 商品名称测试产品编号: TEST-3暂无评分价格待确认"
+      }
+    ],
+    "overflow": false,
+    "url": "http://127.0.0.1:5180/recommendations?node=1000",
+    "viewport": [
+      1440,
+      900
+    ]
+  },
+  {
+    "name": "issue-1440",
+    "cards": [
+      {
+        "kind": "sale",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "price": "980",
+        "priceFont": "28px",
+        "priceScroll": 47,
+        "priceWidth": 46.640625,
+        "rect": {
+          "height": 456.78125,
+          "width": 211.390625,
+          "x": 272,
+          "y": 494.390625
+        },
+        "text": "商品图片待核Short name产品编号: TEST-14.3 / 5¥980/ pack"
+      },
+      {
+        "kind": "reference",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "price": "999,999,999,999.99",
+        "priceFont": "20.1px",
+        "priceScroll": 176,
+        "priceWidth": 176.421875,
+        "rect": {
+          "height": 456.78125,
+          "width": 211.40625,
+          "x": 499.390625,
+          "y": 494.390625
+        },
+        "text": "商品图片待核Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name 产品编号: TEST-2暂无评分日期待核参考价¥999,999,999,999.99/ maximum price test unit"
+      },
+      {
+        "kind": "unknown",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "priceFont": null,
+        "rect": {
+          "height": 456.78125,
+          "width": 211.390625,
+          "x": 726.796875,
+          "y": 494.390625
+        },
+        "text": "商品图片待核商品名称测试 商品名称测试 商品名称测试产品编号: TEST-3暂无评分价格待确认"
+      }
+    ],
+    "overflow": false,
+    "url": "http://127.0.0.1:5180/recommendations?node=1000&topic=931111",
+    "viewport": [
+      1440,
+      900
+    ]
+  },
+  {
+    "name": "issue-390",
+    "cards": [
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "980",
+        "priceFont": "24px",
+        "priceScroll": 40,
+        "priceWidth": 39.984375,
+        "rect": {
+          "height": 397.5625,
+          "width": 165.5,
+          "x": 16,
+          "y": 566.890625
+        },
+        "text": "商品图片待核Short name产品编号: TEST-14.3 / 5¥980/ pack"
+      },
+      {
+        "kind": "reference",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "999,999,999,999.99",
+        "priceFont": "15.5px",
+        "priceScroll": 136,
+        "priceWidth": 136.046875,
+        "rect": {
+          "height": 397.5625,
+          "width": 165.5,
+          "x": 193.5,
+          "y": 566.890625
+        },
+        "text": "商品图片待核Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name 产品编号: TEST-2暂无评分日期待核参考价¥999,999,999,999.99/ maximum price test unit"
+      },
+      {
+        "kind": "unknown",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "priceFont": null,
+        "rect": {
+          "height": 352.640625,
+          "width": 165.5,
+          "x": 16,
+          "y": 984.453125
+        },
+        "text": "商品图片待核商品名称测试 商品名称测试 商品名称测试产品编号: TEST-3暂无评分价格待确认"
+      }
+    ],
+    "overflow": false,
+    "url": "http://127.0.0.1:5180/recommendations?node=1000&topic=931111",
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  {
+    "name": "issue-360",
+    "cards": [
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "980",
+        "priceFont": "24px",
+        "priceScroll": 40,
+        "priceWidth": 39.984375,
+        "rect": {
+          "height": 388.265625,
+          "width": 150.5,
+          "x": 16,
+          "y": 566.890625
+        },
+        "text": "商品图片待核Short name产品编号: TEST-14.3 / 5¥980/ pack"
+      },
+      {
+        "kind": "reference",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "999,999,999,999.99",
+        "priceFont": "13.8px",
+        "priceScroll": 121,
+        "priceWidth": 121.125,
+        "rect": {
+          "height": 388.265625,
+          "width": 150.5,
+          "x": 178.5,
+          "y": 566.890625
+        },
+        "text": "商品图片待核Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name 产品编号: TEST-2暂无评分日期待核参考价¥999,999,999,999.99/ maximum price test unit"
+      },
+      {
+        "kind": "unknown",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "priceFont": null,
+        "rect": {
+          "height": 345.640625,
+          "width": 150.5,
+          "x": 16,
+          "y": 975.15625
+        },
+        "text": "商品图片待核商品名称测试 商品名称测试 商品名称测试产品编号: TEST-3暂无评分价格待确认"
+      }
+    ],
+    "overflow": false,
+    "url": "http://127.0.0.1:5180/recommendations?node=1000&topic=931111",
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "name": "history-360",
+    "cards": [
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "980",
+        "priceFont": "24px",
+        "priceScroll": 40,
+        "priceWidth": 39.984375,
+        "rect": {
+          "height": 388.265625,
+          "width": 150.5,
+          "x": 16,
+          "y": -87.15625
+        },
+        "text": "商品图片待核Short name产品编号: TEST-14.3 / 5¥980/ pack"
+      },
+      {
+        "kind": "reference",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "999,999,999,999.99",
+        "priceFont": "13.8px",
+        "priceScroll": 121,
+        "priceWidth": 121.125,
+        "rect": {
+          "height": 388.265625,
+          "width": 150.5,
+          "x": 178.5,
+          "y": -87.15625
+        },
+        "text": "商品图片待核Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name 产品编号: TEST-2暂无评分日期待核参考价¥999,999,999,999.99/ maximum price test unit"
+      },
+      {
+        "kind": "unknown",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "priceFont": null,
+        "rect": {
+          "height": 345.640625,
+          "width": 150.5,
+          "x": 16,
+          "y": 321.109375
+        },
+        "text": "商品图片待核商品名称测试 商品名称测试 商品名称测试产品编号: TEST-3暂无评分价格待确认"
+      },
+      {
+        "kind": "unknown",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "priceFont": null,
+        "rect": {
+          "height": 345.640625,
+          "width": 150.5,
+          "x": 16,
+          "y": 842.34375
+        },
+        "text": "商品图片待核商品名称测试 商品名称测试 商品名称测试产品编号: TEST-3暂无评分价格待确认"
+      }
+    ],
+    "overflow": false,
+    "url": "http://127.0.0.1:5180/recommendations?node=1000&category=__unclassified",
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "name": "history-390",
+    "cards": [
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "980",
+        "priceFont": "24px",
+        "priceScroll": 40,
+        "priceWidth": 39.984375,
+        "rect": {
+          "height": 397.5625,
+          "width": 165.5,
+          "x": 16,
+          "y": -87.15625
+        },
+        "text": "商品图片待核Short name产品编号: TEST-14.3 / 5¥980/ pack"
+      },
+      {
+        "kind": "reference",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "999,999,999,999.99",
+        "priceFont": "15.5px",
+        "priceScroll": 136,
+        "priceWidth": 136.046875,
+        "rect": {
+          "height": 397.5625,
+          "width": 165.5,
+          "x": 193.5,
+          "y": -87.15625
+        },
+        "text": "商品图片待核Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name 产品编号: TEST-2暂无评分日期待核参考价¥999,999,999,999.99/ maximum price test unit"
+      },
+      {
+        "kind": "unknown",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "priceFont": null,
+        "rect": {
+          "height": 352.640625,
+          "width": 165.5,
+          "x": 16,
+          "y": 330.40625
+        },
+        "text": "商品图片待核商品名称测试 商品名称测试 商品名称测试产品编号: TEST-3暂无评分价格待确认"
+      },
+      {
+        "kind": "unknown",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "priceFont": null,
+        "rect": {
+          "height": 352.640625,
+          "width": 165.5,
+          "x": 16,
+          "y": 858.640625
+        },
+        "text": "商品图片待核商品名称测试 商品名称测试 商品名称测试产品编号: TEST-3暂无评分价格待确认"
+      }
+    ],
+    "overflow": false,
+    "url": "http://127.0.0.1:5180/recommendations?node=1000&category=__unclassified",
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  {
+    "name": "history-1440",
+    "cards": [
+      {
+        "kind": "sale",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "price": "980",
+        "priceFont": "28px",
+        "priceScroll": 47,
+        "priceWidth": 46.640625,
+        "rect": {
+          "height": 456.78125,
+          "width": 211.390625,
+          "x": 272,
+          "y": -113.15625
+        },
+        "text": "商品图片待核Short name产品编号: TEST-14.3 / 5¥980/ pack"
+      },
+      {
+        "kind": "reference",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "price": "999,999,999,999.99",
+        "priceFont": "20.1px",
+        "priceScroll": 176,
+        "priceWidth": 176.421875,
+        "rect": {
+          "height": 456.78125,
+          "width": 211.40625,
+          "x": 499.390625,
+          "y": -113.15625
+        },
+        "text": "商品图片待核Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name 产品编号: TEST-2暂无评分日期待核参考价¥999,999,999,999.99/ maximum price test unit"
+      },
+      {
+        "kind": "unknown",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "priceFont": null,
+        "rect": {
+          "height": 456.78125,
+          "width": 211.390625,
+          "x": 726.796875,
+          "y": -113.15625
+        },
+        "text": "商品图片待核商品名称测试 商品名称测试 商品名称测试产品编号: TEST-3暂无评分价格待确认"
+      },
+      {
+        "kind": "unknown",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "priceFont": null,
+        "rect": {
+          "height": 405.640625,
+          "width": 211.390625,
+          "x": 272,
+          "y": 525.21875
+        },
+        "text": "商品图片待核商品名称测试 商品名称测试 商品名称测试产品编号: TEST-3暂无评分价格待确认"
+      }
+    ],
+    "overflow": false,
+    "url": "http://127.0.0.1:5180/recommendations?node=1000&category=__unclassified",
+    "viewport": [
+      1440,
+      900
+    ]
+  },
+  {
+    "name": "catalog-1440",
+    "cards": [
+      {
+        "kind": "sale",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "price": "980",
+        "priceFont": "28px",
+        "priceScroll": 47,
+        "priceWidth": 46.640625,
+        "rect": {
+          "height": 456.765625,
+          "width": 211.390625,
+          "x": 272,
+          "y": 249.6875
+        },
+        "text": "Bobuy Select · 鲜食Short name产品编号: 来源未注明4.3 / 5¥980/ pack"
+      },
+      {
+        "kind": "sale",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "price": "698",
+        "priceFont": "28px",
+        "priceScroll": 47,
+        "priceWidth": 46.640625,
+        "rect": {
+          "height": 456.765625,
+          "width": 211.40625,
+          "x": 499.390625,
+          "y": 249.6875
+        },
+        "text": "Bobuy Select · 烘焙黄油可颂 · 6 个装产品编号: 来源未注明暂无评分¥698"
+      },
+      {
+        "kind": "reference",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "price": "999,999,999,999.99",
+        "priceFont": "20.1px",
+        "priceScroll": 176,
+        "priceWidth": 176.421875,
+        "rect": {
+          "height": 456.765625,
+          "width": 211.390625,
+          "x": 726.796875,
+          "y": 249.6875
+        },
+        "text": "商品图片待核Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name 产品编号: TEST-2暂无评分日期待核参考价¥999,999,999,999.99/ maximum price test unit"
+      },
+      {
+        "kind": "sale",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "price": "1,498",
+        "priceFont": "28px",
+        "priceScroll": 69,
+        "priceWidth": 69.21875,
+        "rect": {
+          "height": 456.765625,
+          "width": 211.40625,
+          "x": 954.1875,
+          "y": 249.6875
+        },
+        "text": "Bobuy Select · 日用厨房纸巾 · 家庭装产品编号: 来源未注明暂无评分¥1,498"
+      },
+      {
+        "kind": "sale",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "price": "298",
+        "priceFont": "28px",
+        "priceScroll": 47,
+        "priceWidth": 46.640625,
+        "rect": {
+          "height": 456.765625,
+          "width": 211.390625,
+          "x": 1181.59375,
+          "y": 249.6875
+        },
+        "text": "Bobuy Select · 蔬菜新鲜菠菜 · 300g产品编号: 来源未注明暂无评分¥298"
+      },
+      {
+        "kind": "sale",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "price": "1,280",
+        "priceFont": "28px",
+        "priceScroll": 69,
+        "priceWidth": 69.21875,
+        "rect": {
+          "height": 431.453125,
+          "width": 211.390625,
+          "x": 272,
+          "y": 730.453125
+        },
+        "text": "Bobuy Select · 鲜果鲜采草莓 · 400g产品编号: 来源未注明暂无评分¥1,280"
+      },
+      {
+        "kind": "sale",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "price": "798",
+        "priceFont": "28px",
+        "priceScroll": 47,
+        "priceWidth": 46.640625,
+        "rect": {
+          "height": 431.453125,
+          "width": 211.40625,
+          "x": 499.390625,
+          "y": 730.453125
+        },
+        "text": "コストコホールセールジャパン抹茶玛芬 · 6 个装产品编号: 59363暂无评分¥798"
+      }
+    ],
+    "overflow": false,
+    "url": "http://127.0.0.1:5180/products?node=1000",
+    "viewport": [
+      1440,
+      900
+    ]
+  },
+  {
+    "name": "catalog-390",
+    "cards": [
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "980",
+        "priceFont": "24px",
+        "priceScroll": 40,
+        "priceWidth": 39.984375,
+        "rect": {
+          "height": 391.03125,
+          "width": 165.5,
+          "x": 16,
+          "y": 271.34375
+        },
+        "text": "Bobuy Select · 鲜食Short name产品编号: 来源未注明4.3 / 5¥980/ pack"
+      },
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "698",
+        "priceFont": "24px",
+        "priceScroll": 40,
+        "priceWidth": 39.984375,
+        "rect": {
+          "height": 391.03125,
+          "width": 165.5,
+          "x": 193.5,
+          "y": 271.34375
+        },
+        "text": "Bobuy Select · 烘焙黄油可颂 · 6 个装产品编号: 来源未注明暂无评分¥698"
+      },
+      {
+        "kind": "reference",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "999,999,999,999.99",
+        "priceFont": "15.5px",
+        "priceScroll": 136,
+        "priceWidth": 136.046875,
+        "rect": {
+          "height": 397.5625,
+          "width": 165.5,
+          "x": 16,
+          "y": 682.375
+        },
+        "text": "商品图片待核Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name 产品编号: TEST-2暂无评分日期待核参考价¥999,999,999,999.99/ maximum price test unit"
+      },
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "1,498",
+        "priceFont": "24px",
+        "priceScroll": 59,
+        "priceWidth": 59.328125,
+        "rect": {
+          "height": 397.5625,
+          "width": 165.5,
+          "x": 193.5,
+          "y": 682.375
+        },
+        "text": "Bobuy Select · 日用厨房纸巾 · 家庭装产品编号: 来源未注明暂无评分¥1,498"
+      },
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "298",
+        "priceFont": "24px",
+        "priceScroll": 40,
+        "priceWidth": 39.984375,
+        "rect": {
+          "height": 373.03125,
+          "width": 165.5,
+          "x": 16,
+          "y": 1099.9375
+        },
+        "text": "Bobuy Select · 蔬菜新鲜菠菜 · 300g产品编号: 来源未注明暂无评分¥298"
+      },
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "1,280",
+        "priceFont": "24px",
+        "priceScroll": 59,
+        "priceWidth": 59.328125,
+        "rect": {
+          "height": 373.03125,
+          "width": 165.5,
+          "x": 193.5,
+          "y": 1099.9375
+        },
+        "text": "Bobuy Select · 鲜果鲜采草莓 · 400g产品编号: 来源未注明暂无评分¥1,280"
+      },
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "798",
+        "priceFont": "24px",
+        "priceScroll": 40,
+        "priceWidth": 39.984375,
+        "rect": {
+          "height": 373.03125,
+          "width": 165.5,
+          "x": 16,
+          "y": 1492.96875
+        },
+        "text": "コストコホールセールジャパン抹茶玛芬 · 6 个装产品编号: 59363暂无评分¥798"
+      }
+    ],
+    "overflow": false,
+    "url": "http://127.0.0.1:5180/products?node=1000",
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  {
+    "name": "catalog-360",
+    "cards": [
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "980",
+        "priceFont": "24px",
+        "priceScroll": 40,
+        "priceWidth": 39.984375,
+        "rect": {
+          "height": 384.03125,
+          "width": 150.5,
+          "x": 16,
+          "y": 271.34375
+        },
+        "text": "Bobuy Select · 鲜食Short name产品编号: 来源未注明4.3 / 5¥980/ pack"
+      },
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "698",
+        "priceFont": "24px",
+        "priceScroll": 40,
+        "priceWidth": 39.984375,
+        "rect": {
+          "height": 384.03125,
+          "width": 150.5,
+          "x": 178.5,
+          "y": 271.34375
+        },
+        "text": "Bobuy Select · 烘焙黄油可颂 · 6 个装产品编号: 来源未注明暂无评分¥698"
+      },
+      {
+        "kind": "reference",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "999,999,999,999.99",
+        "priceFont": "13.8px",
+        "priceScroll": 121,
+        "priceWidth": 121.125,
+        "rect": {
+          "height": 388.265625,
+          "width": 150.5,
+          "x": 16,
+          "y": 675.375
+        },
+        "text": "商品图片待核Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name 产品编号: TEST-2暂无评分日期待核参考价¥999,999,999,999.99/ maximum price test unit"
+      },
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "1,498",
+        "priceFont": "24px",
+        "priceScroll": 59,
+        "priceWidth": 59.328125,
+        "rect": {
+          "height": 388.265625,
+          "width": 150.5,
+          "x": 178.5,
+          "y": 675.375
+        },
+        "text": "Bobuy Select · 日用厨房纸巾 · 家庭装产品编号: 来源未注明暂无评分¥1,498"
+      },
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "298",
+        "priceFont": "24px",
+        "priceScroll": 40,
+        "priceWidth": 39.984375,
+        "rect": {
+          "height": 366.03125,
+          "width": 150.5,
+          "x": 16,
+          "y": 1083.640625
+        },
+        "text": "Bobuy Select · 蔬菜新鲜菠菜 · 300g产品编号: 来源未注明暂无评分¥298"
+      },
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "1,280",
+        "priceFont": "24px",
+        "priceScroll": 59,
+        "priceWidth": 59.328125,
+        "rect": {
+          "height": 366.03125,
+          "width": 150.5,
+          "x": 178.5,
+          "y": 1083.640625
+        },
+        "text": "Bobuy Select · 鲜果鲜采草莓 · 400g产品编号: 来源未注明暂无评分¥1,280"
+      },
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "798",
+        "priceFont": "24px",
+        "priceScroll": 40,
+        "priceWidth": 39.984375,
+        "rect": {
+          "height": 366.03125,
+          "width": 150.5,
+          "x": 16,
+          "y": 1469.671875
+        },
+        "text": "コストコホールセールジャパン抹茶玛芬 · 6 个装产品编号: 59363暂无评分¥798"
+      }
+    ],
+    "overflow": false,
+    "url": "http://127.0.0.1:5180/products?node=1000",
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "name": "recommendations-360-final",
+    "cards": [
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "980",
+        "priceFont": "24px",
+        "priceScroll": 40,
+        "priceWidth": 39.984375,
+        "rect": {
+          "height": 388.265625,
+          "width": 150.5,
+          "x": 16,
+          "y": 388.84375
+        },
+        "text": "商品图片待核Short name产品编号: TEST-14.3 / 5¥980/ pack"
+      },
+      {
+        "kind": "reference",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "999,999,999,999.99",
+        "priceFont": "13.8px",
+        "priceScroll": 121,
+        "priceWidth": 121.125,
+        "rect": {
+          "height": 388.265625,
+          "width": 150.5,
+          "x": 178.5,
+          "y": 388.84375
+        },
+        "text": "商品图片待核Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name 产品编号: TEST-2暂无评分日期待核参考价¥999,999,999,999.99/ maximum price test unit"
+      },
+      {
+        "kind": "unknown",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "priceFont": null,
+        "rect": {
+          "height": 345.640625,
+          "width": 150.5,
+          "x": 16,
+          "y": 797.109375
+        },
+        "text": "商品图片待核商品名称测试 商品名称测试 商品名称测试产品编号: TEST-3暂无评分价格待确认"
+      }
+    ],
+    "overflow": false,
+    "url": "http://127.0.0.1:5180/recommendations?node=1000",
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "name": "recommendations-390-final",
+    "cards": [
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "980",
+        "priceFont": "24px",
+        "priceScroll": 40,
+        "priceWidth": 39.984375,
+        "rect": {
+          "height": 397.5625,
+          "width": 165.5,
+          "x": 16,
+          "y": 388.84375
+        },
+        "text": "商品图片待核Short name产品编号: TEST-14.3 / 5¥980/ pack"
+      },
+      {
+        "kind": "reference",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "999,999,999,999.99",
+        "priceFont": "15.5px",
+        "priceScroll": 136,
+        "priceWidth": 136.046875,
+        "rect": {
+          "height": 397.5625,
+          "width": 165.5,
+          "x": 193.5,
+          "y": 388.84375
+        },
+        "text": "商品图片待核Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name 产品编号: TEST-2暂无评分日期待核参考价¥999,999,999,999.99/ maximum price test unit"
+      },
+      {
+        "kind": "unknown",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "priceFont": null,
+        "rect": {
+          "height": 352.640625,
+          "width": 165.5,
+          "x": 16,
+          "y": 806.40625
+        },
+        "text": "商品图片待核商品名称测试 商品名称测试 商品名称测试产品编号: TEST-3暂无评分价格待确认"
+      }
+    ],
+    "overflow": false,
+    "url": "http://127.0.0.1:5180/recommendations?node=1000",
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  {
+    "name": "recommendations-1440-final",
+    "cards": [
+      {
+        "kind": "sale",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "price": "980",
+        "priceFont": "28px",
+        "priceScroll": 47,
+        "priceWidth": 46.640625,
+        "rect": {
+          "height": 456.78125,
+          "width": 211.390625,
+          "x": 272,
+          "y": 362.84375
+        },
+        "text": "商品图片待核Short name产品编号: TEST-14.3 / 5¥980/ pack"
+      },
+      {
+        "kind": "reference",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "price": "999,999,999,999.99",
+        "priceFont": "20.1px",
+        "priceScroll": 176,
+        "priceWidth": 176.421875,
+        "rect": {
+          "height": 456.78125,
+          "width": 211.40625,
+          "x": 499.390625,
+          "y": 362.84375
+        },
+        "text": "商品图片待核Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name 产品编号: TEST-2暂无评分日期待核参考价¥999,999,999,999.99/ maximum price test unit"
+      },
+      {
+        "kind": "unknown",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "priceFont": null,
+        "rect": {
+          "height": 456.78125,
+          "width": 211.390625,
+          "x": 726.796875,
+          "y": 362.84375
+        },
+        "text": "商品图片待核商品名称测试 商品名称测试 商品名称测试产品编号: TEST-3暂无评分价格待确认"
+      }
+    ],
+    "overflow": false,
+    "url": "http://127.0.0.1:5180/recommendations?node=1000",
+    "viewport": [
+      1440,
+      900
+    ]
+  },
+  {
+    "name": "preview-1440-phone-mode",
+    "cards": [
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "980",
+        "priceFont": "24px",
+        "priceScroll": 40,
+        "priceWidth": 39.984375,
+        "rect": {
+          "height": 426.6875,
+          "width": 181,
+          "x": 641.5,
+          "y": 991.640625
+        },
+        "text": "商品图片待核Short name产品编号: TEST-14.3 / 5¥980/ pack"
+      },
+      {
+        "kind": "reference",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "999,999,999,999.99",
+        "priceFont": "16.7px",
+        "priceScroll": 147,
+        "priceWidth": 146.578125,
+        "rect": {
+          "height": 426.6875,
+          "width": 181,
+          "x": 834.5,
+          "y": 991.640625
+        },
+        "text": "商品图片待核Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name 产品编号: TEST-2暂无评分日期待核参考价¥999,999,999,999.99/ maximum price test unit"
+      },
+      {
+        "kind": "unknown",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "priceFont": null,
+        "rect": {
+          "height": 380.140625,
+          "width": 181,
+          "x": 641.5,
+          "y": 1438.328125
+        },
+        "text": "商品图片待核商品名称测试 商品名称测试 商品名称测试产品编号: TEST-3暂无评分价格待确认"
+      }
+    ],
+    "overflow": false,
+    "url": "http://127.0.0.1:5180/admin/recommendations?post=-31111",
+    "viewport": [
+      1440,
+      900
+    ]
+  },
+  {
+    "name": "preview-390",
+    "cards": [
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "980",
+        "priceFont": "24px",
+        "priceScroll": 40,
+        "priceWidth": 39.984375,
+        "rect": {
+          "height": 385.859375,
+          "width": 148.5,
+          "x": 33,
+          "y": 2603.078125
+        },
+        "text": "商品图片待核Short name产品编号: TEST-14.3 / 5¥980/ pack"
+      },
+      {
+        "kind": "reference",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "999,999,999,999.99",
+        "priceFont": "13.5px",
+        "priceScroll": 119,
+        "priceWidth": 118.5,
+        "rect": {
+          "height": 385.859375,
+          "width": 148.5,
+          "x": 193.5,
+          "y": 2603.078125
+        },
+        "text": "商品图片待核Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name 产品编号: TEST-2暂无评分日期待核参考价¥999,999,999,999.99/ maximum price test unit"
+      },
+      {
+        "kind": "unknown",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "priceFont": null,
+        "rect": {
+          "height": 343.640625,
+          "width": 148.5,
+          "x": 33,
+          "y": 3008.9375
+        },
+        "text": "商品图片待核商品名称测试 商品名称测试 商品名称测试产品编号: TEST-3暂无评分价格待确认"
+      }
+    ],
+    "overflow": false,
+    "url": "http://127.0.0.1:5180/admin/recommendations?post=-31111",
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  {
+    "name": "preview-360",
+    "cards": [
+      {
+        "kind": "sale",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "980",
+        "priceFont": "24px",
+        "priceScroll": 40,
+        "priceWidth": 39.984375,
+        "rect": {
+          "height": 368.5625,
+          "width": 133.5,
+          "x": 33,
+          "y": 2702.84375
+        },
+        "text": "商品图片待核Short name产品编号: TEST-14.3 / 5¥980/ pack"
+      },
+      {
+        "kind": "reference",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "price": "999,999,999,999.99",
+        "priceFont": "11.8px",
+        "priceScroll": 104,
+        "priceWidth": 103.578125,
+        "rect": {
+          "height": 368.5625,
+          "width": 133.5,
+          "x": 178.5,
+          "y": 2702.84375
+        },
+        "text": "商品图片待核Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name 产品编号: TEST-2暂无评分日期待核参考价¥999,999,999,999.99/ maximum price test unit"
+      },
+      {
+        "kind": "unknown",
+        "nameHeight": 55.390625,
+        "paragraphs": 0,
+        "priceFont": null,
+        "rect": {
+          "height": 328.640625,
+          "width": 133.5,
+          "x": 33,
+          "y": 3091.40625
+        },
+        "text": "商品图片待核商品名称测试 商品名称测试 商品名称测试产品编号: TEST-3暂无评分价格待确认"
+      }
+    ],
+    "overflow": false,
+    "url": "http://127.0.0.1:5180/admin/recommendations?post=-31111",
+    "viewport": [
+      360,
+      800
+    ]
+  },
+  {
+    "name": "preview-1440",
+    "cards": [
+      {
+        "kind": "sale",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "price": "980",
+        "priceFont": "28px",
+        "priceScroll": 47,
+        "priceWidth": 46.640625,
+        "rect": {
+          "height": 505.75,
+          "width": 253.75,
+          "x": 297,
+          "y": 941.359375
+        },
+        "text": "商品图片待核Short name产品编号: TEST-14.3 / 5¥980/ pack"
+      },
+      {
+        "kind": "reference",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "price": "999,999,999,999.99",
+        "priceFont": "25px",
+        "priceScroll": 219,
+        "priceWidth": 219.421875,
+        "rect": {
+          "height": 505.75,
+          "width": 253.75,
+          "x": 566.75,
+          "y": 941.359375
+        },
+        "text": "商品图片待核Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name 产品编号: TEST-2暂无评分日期待核参考价¥999,999,999,999.99/ maximum price test unit"
+      },
+      {
+        "kind": "unknown",
+        "nameHeight": 58.5,
+        "paragraphs": 0,
+        "priceFont": null,
+        "rect": {
+          "height": 505.75,
+          "width": 253.75,
+          "x": 836.5,
+          "y": 941.359375
+        },
+        "text": "商品图片待核商品名称测试 商品名称测试 商品名称测试产品编号: TEST-3暂无评分价格待确认"
+      }
+    ],
+    "overflow": false,
+    "url": "http://127.0.0.1:5180/admin/recommendations?post=-31111",
+    "viewport": [
+      1440,
+      900
+    ]
+  },
+  {
+    "name": "home-1440",
+    "count": 32,
+    "overflow": false,
+    "url": "http://127.0.0.1:5180/",
+    "width": 1440
+  },
+  {
+    "name": "home-390",
+    "count": 32,
+    "overflow": false,
+    "url": "http://127.0.0.1:5180/",
+    "width": 390
+  },
+  {
+    "name": "home-360",
+    "count": 32,
+    "overflow": false,
+    "url": "http://127.0.0.1:5180/",
+    "width": 360
+  }
+]

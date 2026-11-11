@@ -1542,7 +1542,8 @@ export type BrowseQuery={page?:number;merchantId?:number;query?:string;category?
 function browseQuery(query:BrowseQuery){return new URLSearchParams(Object.entries(query).filter(([,value])=>value!==undefined).map(([key,value])=>[key,String(value)]));}
 export type BrowseFacet=RecommendationLabel&{count:number};
 export type BrowsePage<T>={items:T[];page:number;size:number;scopeTotal:number;matchedTotal:number;hasNext:boolean;revision:string;datasetRevision:string;categories:BrowseFacet[];unclassified:number;markedScopeTotal?:number;japanDay?:string;productOccurrences?:number;serviceCards?:number};
-export type ProductBrowseCard=Omit<PublicCatalogEntry,'gallery'|'description'|'referenceOffers'>&{image:RecommendationPicture|null;markers:ProductMarkerDefinition[]};
+export type CardReference={amount:number;currency:string;unit?:string|null;postId:number;itemId:number;state:'ACTIVE'|'EXPIRED'|'FUTURE'|'UNKNOWN'};
+export type ProductBrowseCard=Omit<PublicCatalogEntry,'gallery'|'description'|'referenceOffers'>&{image:RecommendationPicture|null;markers:ProductMarkerDefinition[];reference?:CardReference|null};
 export type RecommendationBrowseItem=Omit<RecommendationItem,'imageUrl'|'gallery'|'description'|'sourceFacts'>&{image:RecommendationPicture|null;rating?:number|null};
 export type ServiceBrowseCard=Pick<ServiceOffer,'provider'|'staff'|'hours'|'originalPrice'|'price'|'currency'|'taxIncluded'|'fees'|'noExtraFees'|'applicationStart'|'applicationEnd'|'serviceStart'|'serviceEnd'|'basis'|'packages'>;
 export type RecommendationOccurrence={key:string;post:RecommendationSummary;title:string;history:boolean;item:RecommendationBrowseItem|null;service:boolean;serviceSummary:ServiceBrowseCard|null};

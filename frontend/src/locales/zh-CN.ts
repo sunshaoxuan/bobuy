@@ -1466,4 +1466,5 @@ Object.assign(messages,{
  "review.reread":"保留草稿并重读当前版本",
  "review.title":"商品评价","review.none":"暂无评分","review.write":"我的评分与评价","review.login":"登录后评分和评价","review.score":"我的评分（1至5分，每档0.5分）","review.comment":"我的评价（选填）","review.save":"保存我的评价","review.saved":"评价已保存","review.count":"{count}人评分","review.read_write":"查看或撰写评价","review.more":"加载更多评价","review.retry":"重新加载"
 });
+Object.assign(messages,{"card.reference": "参考价", "card.reference_past": "往期参考价", "card.reference_future": "预告参考价", "card.reference_undated": "日期待核参考价", "card.price_unknown": "价格待确认"});
 export default messages;

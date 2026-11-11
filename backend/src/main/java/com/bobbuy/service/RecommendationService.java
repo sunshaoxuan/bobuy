@@ -44,7 +44,11 @@ public class RecommendationService {
     @Transactional(readOnly = true)
     public List<PublicNode> publicNodes() {
         var ids = new TreeSet<Long>();
-        publicBrowseEntries(null).forEach(detail -> { if(detail.post().merchantId()!=null)ids.add(detail.post().merchantId()); });
+        var published=posts.findByPublishedTrue();
+        var deleted=products.deletedIds();
+        var withItems=published.isEmpty()?Set.<Long>of():items.findByPostIdInOrderById(published.stream().map(p->p.id).toList()).stream()
+            .filter(RecommendationPublication::visible).filter(i->i.productId==null||!deleted.contains(i.productId)).map(i->i.postId).collect(java.util.stream.Collectors.toSet());
+        published.stream().filter(p->p.serviceOffer!=null||withItems.contains(p.id)).map(p->p.merchantId).filter(Objects::nonNull).forEach(ids::add);
         var names = new HashMap<Long,String>();
         users.findAllById(ids).forEach(user -> names.put(user.getId(),user.getName()==null?"":user.getName().trim()));
         return ids.stream().map(id -> new PublicNode(id,names.getOrDefault(id,""))).toList();
@@ -97,8 +101,10 @@ public class RecommendationService {
         if(merchantId!=null&&merchantId<1)throw new IllegalArgumentException("Invalid merchant");
         var selected=posts.findByPublishedTrue().stream().filter(p->merchantId==null||merchantId.equals(p.merchantId))
             .sorted(Comparator.comparing((RecommendationPost p)->p.publishedAt,Comparator.nullsLast(Comparator.reverseOrder())).thenComparing(p->p.id,Comparator.reverseOrder())).toList();
-        var grouped=selected.isEmpty()?Map.<Long,List<RecommendationItem>>of():items.findByPostIdInOrderById(selected.stream().map(p->p.id).toList()).stream().collect(java.util.stream.Collectors.groupingBy(i->i.postId));
-        return selected.stream().map(post->{var linked=taxonomy.display(grouped.getOrDefault(post.id,List.of()),true);referenceQuotes.decorate(linked,true);return new Detail(summary(post,linked.isEmpty()||linked.get(0).gallery.isEmpty()?null:linked.get(0).gallery.get(0).url()),post.body,linked,post.articleSourceLocale,articles.sourceHash(post),articles.current(post),post.serviceOffer==null?null:post.serviceOffer.publicView());})
+        var displayed=selected.isEmpty()?List.<RecommendationItem>of():taxonomy.display(items.findByPostIdInOrderById(selected.stream().map(p->p.id).toList()),true);
+        if(!displayed.isEmpty())referenceQuotes.decorate(displayed,true);
+        var grouped=displayed.stream().collect(java.util.stream.Collectors.groupingBy(i->i.postId));
+        return selected.stream().map(post->{var linked=grouped.getOrDefault(post.id,List.of());return new Detail(summary(post,linked.isEmpty()||linked.get(0).gallery.isEmpty()?null:linked.get(0).gallery.get(0).url()),post.body,linked,post.articleSourceLocale,articles.sourceHash(post),articles.current(post),post.serviceOffer==null?null:post.serviceOffer.publicView());})
             .filter(detail->detail.serviceOffer()!=null||!detail.items().isEmpty()).toList();
     }
     @Transactional(readOnly = true)

@@ -1,11 +1,11 @@
 import SafeArticleText from '../components/SafeArticleText';
-import {ProductReviewStars} from '../components/ProductRating';
+import CompactProductCard,{referenceForCard} from '../components/CompactProductCard';
+import {useJapaneseDay} from '../recommendationSchedule';
 import '../public-catalog.css';
 import RecommendationBrowse from './RecommendationBrowse';
 import {ConsumerDetail,DetailOffer,ProductDetailCode} from '../components/ConsumerDetail';
 import ReservationAdd from '../components/ReservationAdd';
 import {useDetailReturnFocus} from '../components/useDetailReturnFocus';
-import {openCardDetail} from '../components/openCardDetail';
 import {ProductBrand,ProductVariant} from '../components/ProductMetadata';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Alert, Button, Drawer, Empty, Input, Segmented, Spin } from 'antd';
@@ -13,7 +13,6 @@ import { ArrowLeftOutlined, ArrowRightOutlined, CalendarOutlined, DownOutlined, 
 import { Link, useParams, useSearchParams, useLocation } from 'react-router-dom';
 import { storefrontApi,recommendationApi, type RecommendationDetail, type StoreProduct } from '../api';
 import { localizedContent, useI18n } from '../i18n';
-import { OfferInfo } from '../components/RecommendationFacts';
 import '../recommendations.css';
 import {categoryChoices,filterRecommendations,searchRecommendations,UNCLASSIFIED} from '../recommendationFilters';
 import {scopedPath,selectedNode} from '../storeNavigation';
@@ -43,8 +42,7 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
   const { t, locale } = useI18n();
   const {search}=useLocation();
   const [expanded, setExpanded] = useState(false);
-  const [pressedItem,setPressedItem]=useState<number>();
-  useEffect(()=>{const clear=()=>setPressedItem(undefined);window.addEventListener('blur',clear);return()=>window.removeEventListener('blur',clear);},[]);
+  const today=useJapaneseDay();
   const [localItem,setLocalItem]=useState<number>();
   const [params,setParams]=useSearchParams();
   const privatePreview=useLocation().pathname.startsWith('/admin');
@@ -74,21 +72,7 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
       const text=recommendationText(item,locale);
       const product = item.productId ? catalog.get(item.productId) : undefined;
       const buyable = !!product && canBuy(product);
-      return <article className="store-product rec-pin" key={item.id} data-occurrence-key={`${detail.post.id}:${item.id}`} data-card-detail data-pressed={pressedItem===item.id||undefined} onClick={event=>openCardDetail(event,trigger=>openItem(item,trigger))}
-        onPointerDown={event=>{if(event.pointerType!=='mouse')setPressedItem(item.id);}}
-        onPointerUp={()=>setPressedItem(undefined)} onPointerCancel={()=>setPressedItem(undefined)}
-        onPointerLeave={()=>setPressedItem(undefined)} onLostPointerCapture={()=>setPressedItem(undefined)}>
-        <div className="product-tile">
-          <button type="button" className="product-photo" data-detail-trigger="photo" aria-label={t('store.detail_label', {name:text.name})} onClick={event => openItem(item,event.currentTarget)}>{item.gallery?.[0]?.url?<img src={item.gallery[0].url} alt={text.name} loading={index < 2 && number === 1 ? 'eager' : 'lazy'} />:<span className="rec-no-product-image">{t('gallery.pending')}</span>}</button>
-          <ReservationAdd allowed={buyable} quote={product} name={text.name} count={item.productId?quantities[item.productId]:undefined} onAdd={()=>{if(product&&buyable)onAdd(product);}}/>
-          <div className="product-body"><ProductBrand brand={item.brand}/><button type="button" className="product-name" data-detail-trigger="name" onClick={event=>openItem(item,event.currentTarget)}><h3 title={text.name}><RecommendationName text={text}/></h3></button>{text.specification&&<p className="rec-compact-spec">{text.specification}</p>}{text.missing&&<small>{t('article.field_source',{fields:text.sourceFields.map(key=>t(key==='description'?'master.descriptions':key==='specification'?'master.specifications':'rec.fact.'+key)).join(' · ')})}</small>}</div>
-        </div>
-        <small className="rec-pin-code">{t('rec.code')}: {item.itemNumber || t('rec.not_stated')}</small>
-        {!!item.categories?.length&&<div className="rec-item-categories">{item.categories.map(category=><span key={category.id}>{localizedContent(category.name,locale)}</span>)}</div>}
-        {item.showSupplier&&item.supplierName&&<small className="rec-supplier">{t('class.supplier')}: {localizedContent(item.supplierName,locale)}</small>}
-        <OfferInfo facts={{...item,offerNotes:text.offerNotes}} compact/>
-        <ProductReviewStars productId={item.productId}/>{product&&<SellingPrice product={product} compact/>}
-      </article>;
+      return <CompactProductCard key={item.id} productId={item.productId} occurrenceKey={`${detail.post.id}:${item.id}`} heading={3} name={text.name} brand={item.brand} itemNumber={item.itemNumber} image={item.gallery?.[0]?.url} quote={product} reference={referenceForCard(item,detail.post.id,today)} eager={index<2&&number===1} eagerRating onOpen={trigger=>openItem(item,trigger)} overlay={<ReservationAdd allowed={buyable} quote={product} name={text.name} count={item.productId?quantities[item.productId]:undefined} onAdd={()=>{if(product&&buyable)onAdd(product);}}/>}/>;
     })}</div>}
     <RecommendationProductDetail item={opened} onClose={closeItem} product={opened?.productId?catalog.get(opened.productId):undefined} onAdd={onAdd} canBuy={canBuy}/>
 

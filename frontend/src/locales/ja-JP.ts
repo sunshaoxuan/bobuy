@@ -1466,4 +1466,5 @@ Object.assign(messages,{
  "review.reread":"下書きを保持して現在の版を再読込",
  "review.title":"商品レビュー","review.none":"評価はまだありません","review.write":"自分の評価とレビュー","review.login":"ログインして評価する","review.score":"評価（1〜5、0.5刻み）","review.comment":"レビュー（任意）","review.save":"レビューを保存","review.saved":"レビューを保存しました","review.count":"{count}件の評価","review.read_write":"レビューを読む・書く","review.more":"さらに読み込む","review.retry":"再読み込み"
 });
+Object.assign(messages,{"card.reference": "参考価格", "card.reference_past": "過去の参考価格", "card.reference_future": "予告参考価格", "card.reference_undated": "期間未確認の参考価格", "card.price_unknown": "価格未確認"});
 export default messages;

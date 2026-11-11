@@ -1,5 +1,13 @@
 # Candidate change history
 
+## 20261111.3 compact cards, candidate accepted locally
+
+- 好物推荐、本程好物及客户预览共用精简商品卡片。保留两行名称、同行等高、独立后续行、五颗灰星及用户均分，大字金额完整单行缩放。完整规格与优惠条件保留在详情。
+- 来源参考价明确标注其窗口状态；只有优惠金额且缺少售价时显示价格待确认。期数目录入口归入标题行，服务活动独立通栏，避免遮挡或拉高商品卡片。
+- 公开首屏 JavaScript gzip 体积减少 35.5%；批量读取推荐分类和报价，节点列表使用轻量可见性读取，无标记时省去重复目录请求。数据库保持 V32，无迁移、无新依赖。
+- 前端 114 文件 757 项通过；后端 651 项中 627 通过、24 条件跳过、零失败，覆盖率门禁通过。生产速度与页面验收随发布回执补录。
+- [任务及证据](reports/UNIFIED-PRODUCT-CARDS-20261111.md)。
+
 ## 20261108.2 — PRODUCTION ACCEPTED
 
 - API reopened2026-11-08 17:01:55UTC. Web5095f376 plus exact reused782 core; three recommendation routes verified at1440/358px, stable second-page/Escape/focus and matching public assets. Seven consumer UI requirements, simpler card entry and friendly four-language maintenance are delivered.

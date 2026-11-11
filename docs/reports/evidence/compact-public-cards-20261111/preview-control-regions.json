@@ -1,0 +1,227 @@
+{
+  "cards": [
+    {
+      "brand": {
+        "height": 18,
+        "width": 223.75,
+        "x": 312,
+        "y": 6176.109375
+      },
+      "card": {
+        "height": 505.75,
+        "width": 253.75,
+        "x": 297,
+        "y": 5921.359375
+      },
+      "code": {
+        "height": 22,
+        "width": 231.75,
+        "x": 308,
+        "y": 6266.359375
+      },
+      "controls": [
+        {
+          "rect": {
+            "height": 231.75,
+            "width": 231.75,
+            "x": 308,
+            "y": 5932.359375
+          },
+          "text": "商品详情：Short name"
+        },
+        {
+          "rect": {
+            "height": 58.5,
+            "width": 223.75,
+            "x": 312,
+            "y": 6194.109375
+          },
+          "text": "Short name"
+        },
+        {
+          "rect": {
+            "height": 44,
+            "width": 231.75,
+            "x": 308,
+            "y": 6292.359375
+          },
+          "text": "商品星级：4.3 / 5"
+        }
+      ],
+      "heading": {
+        "height": 46.5,
+        "width": 217.75,
+        "x": 315,
+        "y": 6197.109375
+      },
+      "money": {
+        "height": 37.796875,
+        "width": 231.75,
+        "x": 308,
+        "y": 6343.359375
+      },
+      "name": {
+        "height": 58.5,
+        "width": 223.75,
+        "x": 312,
+        "y": 6194.109375
+      },
+      "price": {
+        "height": 37.796875,
+        "width": 46.640625,
+        "x": 318.671875,
+        "y": 6343.359375
+      },
+      "stars": {
+        "height": 44,
+        "width": 231.75,
+        "x": 308,
+        "y": 6292.359375
+      }
+    },
+    {
+      "brand": {
+        "height": 18,
+        "width": 223.75,
+        "x": 581.75,
+        "y": 6176.109375
+      },
+      "card": {
+        "height": 505.75,
+        "width": 253.75,
+        "x": 566.75,
+        "y": 5921.359375
+      },
+      "code": {
+        "height": 22,
+        "width": 231.75,
+        "x": 577.75,
+        "y": 6266.359375
+      },
+      "controls": [
+        {
+          "rect": {
+            "height": 231.75,
+            "width": 231.75,
+            "x": 577.75,
+            "y": 5932.359375
+          },
+          "text": "商品详情：Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name "
+        },
+        {
+          "rect": {
+            "height": 58.5,
+            "width": 223.75,
+            "x": 581.75,
+            "y": 6194.109375
+          },
+          "text": "Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name "
+        },
+        {
+          "rect": {
+            "height": 44,
+            "width": 231.75,
+            "x": 577.75,
+            "y": 6292.359375
+          },
+          "text": "暂无评分"
+        }
+      ],
+      "heading": {
+        "height": 46.5,
+        "width": 217.75,
+        "x": 584.75,
+        "y": 6197.109375
+      },
+      "money": {
+        "height": 33.75,
+        "width": 231.75,
+        "x": 577.75,
+        "y": 6361.359375
+      },
+      "name": {
+        "height": 58.5,
+        "width": 223.75,
+        "x": 581.75,
+        "y": 6194.109375
+      },
+      "price": {
+        "height": 33.75,
+        "width": 219.421875,
+        "x": 588.421875,
+        "y": 6361.359375
+      },
+      "stars": {
+        "height": 44,
+        "width": 231.75,
+        "x": 577.75,
+        "y": 6292.359375
+      }
+    },
+    {
+      "brand": {
+        "height": 18,
+        "width": 223.75,
+        "x": 851.5,
+        "y": 6176.109375
+      },
+      "card": {
+        "height": 505.75,
+        "width": 253.75,
+        "x": 836.5,
+        "y": 5921.359375
+      },
+      "code": {
+        "height": 22,
+        "width": 231.75,
+        "x": 847.5,
+        "y": 6266.359375
+      },
+      "controls": [
+        {
+          "rect": {
+            "height": 231.75,
+            "width": 231.75,
+            "x": 847.5,
+            "y": 5932.359375
+          },
+          "text": "商品详情：商品名称测试 商品名称测试 商品名称测试"
+        },
+        {
+          "rect": {
+            "height": 58.5,
+            "width": 223.75,
+            "x": 851.5,
+            "y": 6194.109375
+          },
+          "text": "商品名称测试 商品名称测试 商品名称测试"
+        }
+      ],
+      "heading": {
+        "height": 46.5,
+        "width": 217.75,
+        "x": 854.5,
+        "y": 6197.109375
+      },
+      "money": null,
+      "name": {
+        "height": 58.5,
+        "width": 223.75,
+        "x": 851.5,
+        "y": 6194.109375
+      },
+      "price": null,
+      "stars": {
+        "height": 44,
+        "width": 231.75,
+        "x": 847.5,
+        "y": 6292.359375
+      }
+    }
+  ],
+  "url": "http://127.0.0.1:5180/admin/recommendations?post=-31111",
+  "viewport": [
+    1440,
+    900
+  ]
+}

@@ -11,10 +11,8 @@ export default defineConfig({
     chunkSizeWarningLimit: 1400,
     rollupOptions: {
       output: {
+        onlyExplicitManualChunks: true,
         manualChunks(id) {
-          if (id.includes('node_modules')) {
-            return 'vendor';
-          }
           if (id.includes('/src/components/ChatWidget')) {
             return 'chat-flow';
           }

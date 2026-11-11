@@ -11,7 +11,7 @@ vi.mock('../context/UserRoleContext',()=>({useUserRole:()=>({isCustomer:true})})
 // These tests exercise routing/races; the real Select is covered in Chromium.
 vi.mock('antd',async()=>{const actual=await vi.importActual<typeof import('antd')>('antd');return {...actual,Select:(props:{id:string;'aria-label':string;value:number;onChange:(value:number)=>void;options:{value:number;label:string;disabled?:boolean}[]})=><select id={props.id} aria-label={props['aria-label']} value={props.value} onChange={event=>props.onChange(Number(event.target.value))}>{props.options.map(option=><option key={option.value} value={option.value} disabled={option.disabled}>{option.label}</option>)}</select>};});
 const detail=(id:number,name:string)=>({post:{id,title:name,published:false,version:1,updatedAt:'',merchantId:id},body:'Synthetic preview',items:[
- {id:1,name:'Multi',itemNumber:'00123',imageUrl:'/fixture.png',categoryIds:['a','b'],categories:[{id:'a',name:{'en-US':'Food'}},{id:'b',name:{'en-US':'Home'}}],showSupplier:false,supplierName:{'en-US':'Hidden supplier'}},
+ {id:1,name:name+' product',itemNumber:'00123',imageUrl:'/fixture.png',categoryIds:['a','b'],categories:[{id:'a',name:{'en-US':'Food'}},{id:'b',name:{'en-US':'Home'}}],showSupplier:false,supplierName:{'en-US':'Hidden supplier'}},
  {id:2,name:'Unclassified',imageUrl:'/fixture.png',categoryIds:[]}]});
 beforeEach(async()=>{localStorage.setItem('bobbuy_locale','en-US');vi.clearAllMocks();const {transferableAbortController}=await vi.importActual<{transferableAbortController:()=>AbortController}>('node:util');vi.stubGlobal('AbortController',class {constructor(){return transferableAbortController();}});});
 afterEach(()=>{vi.unstubAllGlobals();});
@@ -38,9 +38,9 @@ it('clears prior node immediately and ignores a stale response, then restores br
  mocks.feed.mockImplementation((_page,node)=>node===1?first:Promise.resolve([detail(2,'Node B issue')]));
  const router=createMemoryRouter([{path:'*',element:<RaceHarness/>}],{initialEntries:['/recommendations?node=1']});
  render(<I18nProvider><RouterProvider router={router}/></I18nProvider>);
- fireEvent.click(screen.getByRole('button',{name:'Node B'}));await screen.findAllByRole('button',{name:'Node B issue'});
- await act(async()=>resolveA([detail(1,'Stale A')]));expect(screen.queryAllByRole('button',{name:'Stale A'})).toHaveLength(0);
- fireEvent.click(screen.getByRole('button',{name:'Back'}));await screen.findAllByRole('button',{name:'Stale A'});
- expect(screen.queryAllByRole('button',{name:'Node B issue'})).toHaveLength(0);
+ fireEvent.click(screen.getByRole('button',{name:'Node B'}));await screen.findAllByRole('button',{name:'Node B issue product'});
+ await act(async()=>resolveA([detail(1,'Stale A')]));expect(screen.queryAllByRole('button',{name:'Stale A product'})).toHaveLength(0);
+ fireEvent.click(screen.getByRole('button',{name:'Back'}));await screen.findAllByRole('button',{name:'Stale A product'});
+ expect(screen.queryAllByRole('button',{name:'Node B issue product'})).toHaveLength(0);
  await waitFor(()=>expect(mocks.feed).toHaveBeenLastCalledWith(0,1));
 });
