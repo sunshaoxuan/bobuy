@@ -1,0 +1,104 @@
+[
+  {
+    "name": "production-catalog-desktop",
+    "viewport": [
+      1440,
+      900
+    ],
+    "nativeScreenshot": "production-catalog-desktop.png",
+    "originalPixelCrop": "production-catalog-desktop-cards.png",
+    "crop": [
+      270,
+      257,
+      1395,
+      730
+    ],
+    "visual": "PASS",
+    "review": "Primary reviewed final original viewport and lossless crop; Gemini advice and evidence-based dispositions retained separately."
+  },
+  {
+    "name": "production-recommendations-desktop",
+    "viewport": [
+      1440,
+      900
+    ],
+    "nativeScreenshot": "production-recommendations-desktop.png",
+    "originalPixelCrop": "production-recommendations-desktop-cards.png",
+    "crop": [
+      270,
+      370,
+      1395,
+      843
+    ],
+    "visual": "PASS",
+    "review": "Primary reviewed final original viewport and lossless crop; Gemini advice and evidence-based dispositions retained separately."
+  },
+  {
+    "name": "production-catalog-phone",
+    "viewport": [
+      390,
+      844
+    ],
+    "nativeScreenshot": "production-catalog-phone.png",
+    "originalPixelCrop": "production-catalog-phone-cards.png",
+    "crop": [
+      14,
+      279,
+      361,
+      693
+    ],
+    "visual": "PASS",
+    "review": "Primary reviewed final original viewport and lossless crop; Gemini advice and evidence-based dispositions retained separately."
+  },
+  {
+    "name": "production-recommendations-phone",
+    "viewport": [
+      390,
+      844
+    ],
+    "nativeScreenshot": "production-recommendations-phone.png",
+    "originalPixelCrop": "production-recommendations-phone-cards.png",
+    "crop": [
+      14,
+      316,
+      361,
+      730
+    ],
+    "visual": "PASS",
+    "review": "Primary reviewed final original viewport and lossless crop; Gemini advice and evidence-based dispositions retained separately."
+  },
+  {
+    "name": "production-catalog-narrow",
+    "viewport": [
+      360,
+      800
+    ],
+    "nativeScreenshot": "production-catalog-narrow.png",
+    "originalPixelCrop": "production-catalog-narrow-cards.png",
+    "crop": [
+      14,
+      279,
+      331,
+      686
+    ],
+    "visual": "PASS",
+    "review": "Primary reviewed final original viewport and lossless crop; Gemini advice and evidence-based dispositions retained separately."
+  },
+  {
+    "name": "production-recommendations-narrow",
+    "viewport": [
+      360,
+      800
+    ],
+    "nativeScreenshot": "production-recommendations-narrow.png",
+    "originalPixelCrop": "production-recommendations-narrow-cards.png",
+    "crop": [
+      14,
+      296,
+      331,
+      703
+    ],
+    "visual": "PASS",
+    "review": "Primary reviewed final original viewport and lossless crop; Gemini advice and evidence-based dispositions retained separately."
+  }
+]

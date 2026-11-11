@@ -1,0 +1,3328 @@
+{
+  "command": "mvn -B -ntp -o -f backend/pom.xml -DjacocoDataFile=<task-owned image-read.exec> verify",
+  "tests": [
+    {
+      "className": "com.bobbuy.api.AiAgentControllerTest",
+      "name": "confirmOnboardCreatesNewProductWhenMatchScoreIsTooLow",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AiAgentControllerTest",
+      "name": "confirmOnboardReusesExistingProductWhenRetryFindsSameItemNumber",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AiAgentControllerTest",
+      "name": "manualUiBlankCategorySavesOnePrivateUnpricedDraftWithActualForeignKey",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AiProductOnboardingServiceTest",
+      "name": "testOnboardFromPhotoRejectsDeniedSources",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AiProductOnboardingServiceTest",
+      "name": "testSemanticVerificationDetectsSpecChangeAndBuildsDiffs",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AiProductOnboardingServiceTest",
+      "name": "testNameLevelCandidatesPreferBrandAndItemNumberSignals",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AiProductOnboardingServiceTest",
+      "name": "testSupplierRulesAreInjectedIntoOcrFirstPrompt",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AiProductOnboardingServiceTest",
+      "name": "testOnboardFromPhotoReportsOcrFailureWithoutCallingLlm",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AiProductOnboardingServiceTest",
+      "name": "testOnboardFromPhotoSuccess",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AiProductOnboardingServiceTest",
+      "name": "testOnboardFromPhotoNormalizesAliasesIntoStructuredFields",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AiProductOnboardingServiceTest",
+      "name": "testOnboardFromPhotoStripsDataUrlPrefixBeforeVisionCall",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AuthControllerIntegrationTest",
+      "name": "serviceTokenHeadersCannotRefreshWithoutRefreshToken",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AuthControllerIntegrationTest",
+      "name": "missingOrForgedRefreshTokenIsRejected",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AuthControllerIntegrationTest",
+      "name": "rotatedRefreshTokenCannotBeReusedAndNewRefreshTokenRemainsUsable",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AuthControllerIntegrationTest",
+      "name": "refreshReturnsNewAccessAndRefreshTokens",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AuthControllerIntegrationTest",
+      "name": "bearerReadPreservesCsrfCookieForSubsequentRefresh",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AuthControllerIntegrationTest",
+      "name": "invalidCredentialsReturnUnauthorized",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AuthControllerIntegrationTest",
+      "name": "missingOrForgedCsrfTokenIsRejected",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AuthControllerIntegrationTest",
+      "name": "invalidCredentialsUseTheRequestedLanguage",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AuthControllerIntegrationTest",
+      "name": "refreshedCustomerTokenKeepsCustomerPermissions",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AuthControllerIntegrationTest",
+      "name": "meReturnsAuthenticatedUserFromBearerToken",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AuthControllerIntegrationTest",
+      "name": "logoutRevokesRefreshToken",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AuthControllerIntegrationTest",
+      "name": "loginReturnsAccessTokenAndSetsRefreshCookies",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AuthRefreshConcurrencyIntegrationTest",
+      "name": "concurrentRefreshOnlySucceedsOnce",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AuthRefreshConcurrencyIntegrationTest",
+      "name": "independentLoginsRefreshConcurrentlyAndLogoutIsSessionScoped",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.AuthRefreshTokenExpiryIntegrationTest",
+      "name": "expiredRefreshTokenIsRejected",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ChatControllerSecurityIntegrationTest",
+      "name": "customerBearerTokenCannotReadOtherCustomersOrderChat",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ChatControllerSecurityIntegrationTest",
+      "name": "forgedHeaderCannotAccessChatWhenHeaderAuthDisabled",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ChatControllerSecurityIntegrationTest",
+      "name": "customerBearerTokenCanReadOwnOrderChat",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ChatControllerSecurityIntegrationTest",
+      "name": "customerBearerTokenCannotSendIntoOtherCustomersOrderChat",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.CostcoOnboardingControllerTest",
+      "name": "photoQueuesOwnedOriginalHashThroughSameJobPath",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.CostcoOnboardingControllerTest",
+      "name": "agentQueuesUsingOnlyServerPrincipalAndDoesNotRunPipeline",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.CostcoOnboardingControllerTest",
+      "name": "changedPayloadUnderSameExplicitIntentIsAConflict",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.CostcoOnboardingControllerTest",
+      "name": "quotaIsTyped429WithARecoverableRetryHint",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.CostcoOnboardingControllerTest",
+      "name": "requestRejectsIdentityApprovalAndPriceFieldsEvenWhenUnknownPropertiesIgnored",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.CostcoOnboardingControllerTest",
+      "name": "disabledWorkerDoesNotAcceptForeverQueuedTasks",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.CostcoOnboardingControllerTest",
+      "name": "readsAreAlwaysScopedToPrincipalAndViewDoesNotContainPrivatePhoto",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.CostcoOnboardingControllerTest",
+      "name": "customerOrStringPrincipalCannotBorrowAgentScope",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.CostcoOnboardingControllerTest",
+      "name": "otherMerchantsSupplierIsNotAccepted",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.CurrencyDirectoryIntegrationTest",
+      "name": "sharedDirectoryRetainsBothReadContractsAndMerchantBoundary",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.CustomerOrderAmendmentIntegrationTest",
+      "name": "metadataOnlyChangesAdvanceRevisionAndSurviveWithoutExpandingLegacyLineJson",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.CustomerOrderAmendmentIntegrationTest",
+      "name": "rollbackAfterBothFlushesRestoresOriginalOrderAndAllowsSameKeyRetry",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.CustomerOrderAmendmentIntegrationTest",
+      "name": "mutableSpecificationMapAlonePersistsAndAdvancesRevision",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.CustomerOrderAmendmentIntegrationTest",
+      "name": "customerWinningTripLockIsPreservedByQueuedMerchantStatusCommand",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.CustomerOrderAmendmentIntegrationTest",
+      "name": "queuedStaleMerchantReplacementCannotOverwriteCustomerRevision",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.CustomerOrderAmendmentIntegrationTest",
+      "name": "readOnlyPreviewsKeepRevisionStableButActualEditAdvancesAndRejectsStaleInput",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.CustomerOrderAmendmentIntegrationTest",
+      "name": "simultaneousSameUserKeyAppliesOnceAndChangedReplayIsRejected",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.CustomerOrderAmendmentIntegrationTest",
+      "name": "merchantConfirmationWinningTripLockPreventsCustomerEdit",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.CustomerOrderAmendmentIntegrationTest",
+      "name": "authenticatedEndpointWhitelistSaveReopenAndCheckoutRetryPreserveOneOrder",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.CustomerOrderAmendmentIntegrationTest",
+      "name": "realPreviousEntityMappingRetainsV29RevisionAndPrivateHistory",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.CustomerOrderAmendmentIntegrationTest",
+      "name": "currentOwnershipIsRequiredForReceiptReplayAndSameOwnerPaidReplayNeverWrites",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.FinancialAuditIntegrationTest",
+      "name": "testAuditIntegrityAndLogRetrieval",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.InternalServiceTokenIntegrationTest",
+      "name": "internalEndpointRejectsWrongServiceToken",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.InternalServiceTokenIntegrationTest",
+      "name": "validServiceTokenDoesNotImpersonateCurrentUser",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.InternalServiceTokenIntegrationTest",
+      "name": "internalEndpointAcceptsValidServiceTokenWithoutUserJwt",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.InternalServiceTokenIntegrationTest",
+      "name": "internalEndpointRejectsMissingServiceToken",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MailSettingsIntegrationTest",
+      "name": "persistsOnlyAuthenticatedCiphertextAndBlankPasswordKeepsItOnReopen",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MailSettingsIntegrationTest",
+      "name": "rejectsInsecureTlsUnapprovedHostsHeaderInjectionAndStaleSave",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MailSettingsIntegrationTest",
+      "name": "controlledTestUsesOnlyApprovedRecipientSavedConfigAndRateLimit",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MailSettingsIntegrationTest",
+      "name": "onlyPlatformAdministratorCanReadWriteOrTest",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MailSettingsIntegrationTest",
+      "name": "parsingValidationAndTransportFailureDoNotLeakSubmittedPassword(CapturedOutput)",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MailSettingsIntegrationTest",
+      "name": "registrationDeliveryUsesSameSavedIdentityAndFailsClosedWhenDisabledOrTampered",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaMigrationExecutorTest",
+      "name": "dryRunNeverEnqueuesOrContactsObjectStore",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaMigrationExecutorTest",
+      "name": "reportCannotOverwriteCheckpointOrUnrelatedOperatorFiles",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaMigrationExecutorTest",
+      "name": "sourceTargetMismatchAndHeldCheckpointLockStopWithoutChangingCheckpoint",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaMigrationExecutorTest",
+      "name": "independentVerifyDetectsCorruptionAndDoesNotRewriteIt",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaMigrationExecutorTest",
+      "name": "boundedCheckpointResumesAndIncludesLowerIdIncrementWithoutRepeatingWrites",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaMigrationExecutorTest",
+      "name": "concurrentSourceChangePreventsAFalseVerifiedReport",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaObjectOnlyIntegrationTest",
+      "name": "existingPgCopyIsPreservedAndReadSwitchCanReturnToPg",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaObjectOnlyIntegrationTest",
+      "name": "newUploadsHaveOnlyMetadataInPgAndShareAcrossPathsAndScopes",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaObjectOnlyIntegrationTest",
+      "name": "repeatUploadAndCursorReplayNeverRehydrateOrDuplicate",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaObjectOnlyIntegrationTest",
+      "name": "rollbackRetainsSafeOrphanAndNeverDeletesObjects",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaObjectOnlyIntegrationTest",
+      "name": "objectOnlyMissingOrCorruptObjectFailsClosedWithoutInventedPgFallback",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaObjectOnlyIntegrationTest",
+      "name": "failedUploadDoesNotCommitAndLostResponseCanRetrySameKey",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaObjectOnlyIntegrationTest",
+      "name": "existingIdentityCannotBeOverwrittenAndCorruptCasCannotBeReplaced",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaObjectOnlyIntegrationTest",
+      "name": "browserConvertedPngIsIndependentlyValidatedAndSharesOnlyItsActualStoredBytes",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaObjectOnlyIntegrationTest",
+      "name": "controllerMapsUnavailableTo503WithoutLeakingAdapterDetails",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaObjectOnlyIntegrationTest",
+      "name": "concurrentUploadsAndRestorableLogicalReferencesRetainOneObject",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaTransferIntegrationTest",
+      "name": "verifiedCopyKeepsPgBytesAndCorruptionOrOutageFallsBack",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaTransferIntegrationTest",
+      "name": "sourceChangeDuringTransferInvalidatesOldVerification",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaTransferIntegrationTest",
+      "name": "finalPermanentFixtureReleaseOnlyCreatesDelayedReviewAndNewReferenceCancelsIt",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaTransferIntegrationTest",
+      "name": "damagedReferenceCountCannotCollectRetainedMedia",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaTransferIntegrationTest",
+      "name": "incorrectHashMetadataNeverMarksComplete",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaTransferIntegrationTest",
+      "name": "cursorBackfillIsIdempotentAndLaterLowerIdInsertHasItsOwnOutbox",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaTransferIntegrationTest",
+      "name": "twoConcurrentClaimsCannotOwnSameLease",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaTransferIntegrationTest",
+      "name": "lostUploadResponseRetriesSameImmutableKeyWithoutDroppingPg",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaTransferIntegrationTest",
+      "name": "mismatchedBlobMetadataRejectsBindingAndRollsBackNewMedia",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaTransferIntegrationTest",
+      "name": "pgAndOutboxCommitOrRollbackTogether",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaTransferIntegrationTest",
+      "name": "expiredLeaseCanResumeButStaleCompletionCannotWin",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaTransferIntegrationTest",
+      "name": "unauthorizedPrivateRequestsNeverReachObjectStorage",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaTransferIntegrationTest",
+      "name": "identicalBytesAcrossPublicPrivatePathsShareOnePhysicalObject",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MediaTransferIntegrationTest",
+      "name": "concurrentDifferentMediaUploadsBindOneBlobWithoutLostReferences",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MetricsControllerTest",
+      "name": "metricsIncludesLatencyAndCounts",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MobileProductControllerTest",
+      "name": "getUsesFallbackLocaleForDisplayFields",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.MobileProductControllerTest",
+      "name": "patchMergesLocalizedFieldsIncrementally",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.OrderControllerIntegrationTest",
+      "name": "testLoggingInterceptorAndTraceId",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.OrderControllerIntegrationTest",
+      "name": "updateStatusAcceptsCaseInsensitiveEnumValues",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.OrderControllerTest",
+      "name": "orderCrudRejectsMissing",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.OrderControllerTest",
+      "name": "orderCrudFlow",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.PostgresImageStorageIntegrationTest",
+      "name": "publicCatalogPhotoAndPrivateReceiptNeverShareAnAccessIdentity",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.PostgresImageStorageIntegrationTest",
+      "name": "storesDeduplicatedValidatedPrivateBytesAndProtectsBothImageRoutes",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.PostgresImageStorageIntegrationTest",
+      "name": "rejectsMalformedOversizedOrNonImagePayloadsAndMissingMerchantIdentity",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProcurementControllerIntegrationTest",
+      "name": "offlinePaymentRejectsInvalidPayload",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProcurementControllerIntegrationTest",
+      "name": "deliveryPreparationAndPickingChecklistSupportReadyForDeliveryFlow",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProcurementControllerIntegrationTest",
+      "name": "logisticsEndpointsSupportTrackingAndSettlementReminderTrigger",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProcurementControllerIntegrationTest",
+      "name": "exportEndpointReturnsCsvAndPdf",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProcurementControllerIntegrationTest",
+      "name": "deficitReturnsMissingItemsWithPriority",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProcurementControllerIntegrationTest",
+      "name": "offlinePaymentEndpointsReturnTripAndCustomerBalances",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProcurementControllerIntegrationTest",
+      "name": "settledTripRejectsOfflinePaymentAndReceiptReviewMutation",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProcurementControllerIntegrationTest",
+      "name": "auditLogAndLedgerEndpointsReturnFinancialData",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProcurementControllerIntegrationTest",
+      "name": "hudReturnsRealtimeProfitAndCategoryCompletion",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProcurementControllerIntegrationTest",
+      "name": "offlinePaymentRejectsUnsupportedMethod",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProcurementControllerIntegrationTest",
+      "name": "completedTripAllowsConfirmationAndRejectsProcurementMutation",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProcurementControllerIntegrationTest",
+      "name": "balanceSummaryAndLedgerExcludesNewAndCancelledOrders",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProcurementControllerIntegrationTest",
+      "name": "customerCanConfirmReceiptAndBillingForOwnLedger",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProcurementControllerIntegrationTest",
+      "name": "expensesEndpointCreatesAndListsTripExpense",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProcurementControllerIntegrationTest",
+      "name": "customerStatementPdfEndpointReturnsDocument",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProcurementControllerIntegrationTest",
+      "name": "receiptWorkbenchEndpointsUploadAndSaveReconciliation",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProcurementControllerIntegrationTest",
+      "name": "profitSharingEndpointsSupportReadAndUpdateWithAuditLog",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductCatalogIntegrationTest",
+      "name": "rejectsUnownedGalleryAndKeepsLegacyContentVisible",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductCatalogIntegrationTest",
+      "name": "explicitReviewedSaveProjectsMasterWithoutChangingSourceOffersOrSale",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductCatalogIntegrationTest",
+      "name": "auditReturnsActualValuesReferencesAndPricesWithoutCanonicalizing",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductCatalogIntegrationTest",
+      "name": "rejectsCrossTenantDuplicateAndCompositeNamesWithoutPartialSave",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductCatalogIntegrationTest",
+      "name": "validatesWholeBatchBeforeWritesAndInvalidatesUnreviewedTranslations",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductIdentityCompatibilityIntegrationTest",
+      "name": "restoreRequiresReviewedCurrentOwnerAndDoesNotAcceptAnotherMerchantsCheckpoint",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductIdentityCompatibilityIntegrationTest",
+      "name": "legacyFullRestoreAndRedoPreserveOriginalSourceQuotesMembershipAndPrice",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductIdentityCompatibilityIntegrationTest",
+      "name": "changedMembershipCannotBeSilentlyOverwrittenByRestore",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductIdentityCompatibilityIntegrationTest",
+      "name": "actualStoredOrderJsonRemainsStrictOldReaderCompatibleAndSidecarSurvivesOldShapeUpdate",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductLifecycleIntegrationTest",
+      "name": "existingMerchantDeleteBecomesRecoverableAndCannotForgeRestore",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductLifecycleIntegrationTest",
+      "name": "concurrentDeleteAndRestoreUseVersionAndKeepSingleAuditPerTransition",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductLifecycleIntegrationTest",
+      "name": "hidesFifteenAndRestoresExactLinksWithoutPhysicalDeletion",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductLifecycleIntegrationTest",
+      "name": "rejectsEveryNonAdministratorAndAtomicConflicts",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductLifecycleIntegrationTest",
+      "name": "masterOnlyImageReferenceIsHiddenOnDeleteAndReturnsOnRestore",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductMarkerIntegrationTest",
+      "name": "realPersistenceVersionRetryClearAndNegativeVersion",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductMarkerIntegrationTest",
+      "name": "malformedAndOversizedPublicQueriesFail400",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductMarkerIntegrationTest",
+      "name": "foreignDefinitionCannotBeAttachedToOwnReferenceProduct",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductMarkerIntegrationTest",
+      "name": "referenceOnlyMarkersReuseExactlyPublicCatalogAndDisappearOnWithdrawal",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductMarkerIntegrationTest",
+      "name": "defaultsAreExplicitIdempotentAndNeverAssignProducts",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductMarkerIntegrationTest",
+      "name": "anonymousCustomerAndForeignOwnerCannotMutateOrReadMerchantAssignments",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductMarkerIntegrationTest",
+      "name": "disableAndReenableDefinitionRetainsAssignmentAndDoesNotChangeProductPrice",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductPricingIntegrationTest",
+      "name": "adjacentIntervalsAllowedOverlapRejectedAndConcurrentApprovalsSerialize",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductPricingIntegrationTest",
+      "name": "draftOwnershipVersionsPrecisionAndApprovalSafety",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductPricingIntegrationTest",
+      "name": "staleCartRejectedAndOrderKeepsExactPriceSnapshotAfterCancelAndRegularChange",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductPricingIntegrationTest",
+      "name": "jstMidnightHalfOpenBoundariesRestoreRegularAndNeverMutateIt",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductRatingIntegrationTest",
+      "name": "publicReferenceCanBeReviewedWithoutBecomingSaleReady",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductRatingIntegrationTest",
+      "name": "customersAndAgentsContributeAndEditingKeepsCount",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductRatingIntegrationTest",
+      "name": "anonymousInvalidStaleAndPrivateRequestsCannotMutate",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductRatingIntegrationTest",
+      "name": "unpublishedPendingAndForeignOwnerReferencesRemainPrivate",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ProductRatingPostgresIntegrationTest",
+      "name": "publicReferenceCanBeReviewedWithoutBecomingSaleReady",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.api.ProductRatingPostgresIntegrationTest",
+      "name": "customersAndAgentsContributeAndEditingKeepsCount",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.api.ProductRatingPostgresIntegrationTest",
+      "name": "anonymousInvalidStaleAndPrivateRequestsCannotMutate",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.api.ProductRatingPostgresIntegrationTest",
+      "name": "unpublishedPendingAndForeignOwnerReferencesRemainPrivate",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.api.PublicBrowseHttpContractTest",
+      "name": "recommendationEmptyDirectoryAndOccurrenceCountsRemainExplicit",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.PublicBrowseHttpContractTest",
+      "name": "boundedSaleEndpointRejectsMissingOrDuplicateIdsBeforeDataAccess",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.PublicBrowseHttpContractTest",
+      "name": "productSummaryDetailValidationAndStaleRevisionHaveExplicitWireContract",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.PublicProductCatalogHttpTest",
+      "name": "anonymousGetUsesSuccessEnvelopeAndCompletePagingMetadata",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.PublicProductCatalogHttpTest",
+      "name": "anonymousCannotTurnCatalogReadIntoWriteOrReadMerchantCatalog",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.PublicProductCatalogHttpTest",
+      "name": "invalidBoundsAndMalformedQueryFailBeforeService",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationArticleRevisionIntegrationTest",
+      "name": "concurrentDifferentIntentsAtOneVersionAcceptExactlyOneAndPreservePublication",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationArticleRevisionIntegrationTest",
+      "name": "sameUuidDifferentPayloadConflictsAndOlderReplayReturnsCurrentDetailWithoutReverting",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationArticleRevisionIntegrationTest",
+      "name": "exceptionAfterPostFlushRollsBackAllFourLanguagesVersionAndHistory",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationArticleRevisionIntegrationTest",
+      "name": "published111ItemsPricesDatesSourceHashesAndGallerySurviveFourLanguageRevisionAndReplay",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationArticleRevisionIntegrationTest",
+      "name": "rejectsForeignCustomerAnonymousUnreviewedPartialUnknownAndStaleWithoutWrites",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationArticleRevisionIntegrationTest",
+      "name": "concurrentSameUuidGetsOnePersistentRevisionAndTwoConsistentReceipts",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationClassificationTest",
+      "name": "bulkCategoriesAndSupplierPrivacyPreserveSourceFacts",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationClassificationTest",
+      "name": "supplierCreationCannotTakeOverAnotherOwnersExistingRecord",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationClassificationTest",
+      "name": "rejectsForeignRecordsCrossPostSelectionAndStaleVersionAtomically",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationCommerceTest",
+      "name": "reviewedJpyQuoteEnforcesPriceRevisionCurrencyUnitsAndCheckoutIdempotence",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationCommerceTest",
+      "name": "translationsAreReviewedSourceBoundAndGalleryIsOrderedDeduplicatedWithoutChangingSource",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationDirectoryMetadataHttpTest",
+      "name": "directoryWireKeepsMatchedAndPublicCountsDistinctAndDoesNotInventIssueDate",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationDirectoryMetadataHttpTest",
+      "name": "reviewedIssueDateIsSerializedAsSameCalendarDayOnPostAndDirectoryCard",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIntegrationTest",
+      "name": "oldUnlinkedItemsCanBuildCatalogThroughReviewedIdempotentBatch",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIntegrationTest",
+      "name": "articleLanguagesRetainSourcesInvalidateChangedTranslationsAndEnforceOwnership",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIntegrationTest",
+      "name": "acceptsLargeBatchAndSerializesDuplicateRequests",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIntegrationTest",
+      "name": "multipartSourceContextDefaultsUncheckedFlagsAndBindsIsoDates",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIntegrationTest",
+      "name": "createsReusesDeduplicatesUpdatesAndRetriesWithoutDuplicateProducts",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIntegrationTest",
+      "name": "rejectsInvalidOfferDatesAndNumericJsonCodesAndCrossOwnerItemEdits",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIntegrationTest",
+      "name": "imageIntakePreservesCluePrivacyCreatesMasterFirstAndRetriesWithoutDuplication",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIntegrationTest",
+      "name": "preservesUnknownsOfferUnitsAndSeparateCouponPeriodsWithPrivateUnpricedProfiles",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIntegrationTest",
+      "name": "mixedLegacyArticleIsNotInferredOrOverwrittenByTranslation",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIntegrationTest",
+      "name": "registersExistingMasterBeforeIssueWithoutDuplicateProductAndRejectsForeignOwner",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIntegrationTest",
+      "name": "validatesImagesMetadataAndStaleEdits",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIntegrationTest",
+      "name": "unpricedCatalogProfilesCannotBecomePurchasableThroughVisibilityOrQuantityChanges",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIntegrationTest",
+      "name": "explicitCatalogReusePreservesExistingProductAndRejectsForeignLinks",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIntegrationTest",
+      "name": "isolatesMerchantsAndRejectsNonMerchants",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIntegrationTest",
+      "name": "catalogLinkRejectsForeignProductsAndAmbiguousCodeLookupsNeverPickAnOwner",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIntegrationTest",
+      "name": "publicFeedGroupsAllImagesAndExcludesDraftsAcrossPages",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIntegrationTest",
+      "name": "publishesWithdrawsAndPreservesProductWhenUnlinked",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIssueDateControllerTest",
+      "name": "staleReviewHasExplicit409AndUnknownReadHasNoInventedDate",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIssueDateControllerTest",
+      "name": "invalidDateHashAndVersionAreRejectedBeforeService",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIssueDateControllerTest",
+      "name": "clientIdentityAndUnknownFieldsAreRejectedBeforeService",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIssueDateControllerTest",
+      "name": "sourceReviewWireReturnsServerOwnedMetadataAndCalendarDate",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIssueDateIntegrationTest",
+      "name": "dateAndAtomicFourLanguageRevisionShareVersionAndHistoryWithoutChangingItemFacts",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIssueDateIntegrationTest",
+      "name": "saveAndReopenRetainSourceHistoryPublicationPriceImagesAndArticleHash",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIssueDateIntegrationTest",
+      "name": "publicDateSortingUsesExplicitCalendarDayBeforePagingAndUnknownLast",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationIssueDateIntegrationTest",
+      "name": "ownershipRolesReviewWhitelistAndStaleVersionAreEnforced",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationItemPublicationIntegrationTest",
+      "name": "simultaneousSameRequestPublishesOnceAndChangedReplayIsConflict",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationItemPublicationIntegrationTest",
+      "name": "authenticatedFirstPublicationAndPublicReadPathsKeepPendingHidden",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationItemPublicationIntegrationTest",
+      "name": "rollbackAfterBothFlushesLeavesNoPublicationAndSameKeyCanRetry",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationItemPublicationIntegrationTest",
+      "name": "publishedSevenItemsCanAppendEighthBetweenAtomicArticleRevisionsWithoutWithdrawingOrRewritingHistory",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationNodeTest",
+      "name": "nodeFiltersOnlyNarrowExistingPublicDataAndNeverExposeDraftNodes",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationNodeTest",
+      "name": "currentPublicNameDoesNotRewritePublicationSnapshotOrRevealPrivateUsers",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationPublicationMigrationIntegrationTest",
+      "name": "unknownPublicationShapeCannotPassSqlNullCheckOrBeInferredAsPublished",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationPublicationMigrationIntegrationTest",
+      "name": "laterRecipeAndPendingCandidateCannotRewriteCutoverPublicDisplay",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationPublicationMigrationIntegrationTest",
+      "name": "migrationPreservesEveryOldColumnSourceOfferAssetHistoryAndPriorFlywayPrefix",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationPublicationRecoveryIntegrationTest",
+      "name": "restoredAwareApplicationFiltersPendingAcrossRealPublicHttpAndPageBoundaries",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationPublicationRecoveryIntegrationTest",
+      "name": "freshEntityManagerAndNewHttpSessionRetainIsolationWithoutDataRepair",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationWritingControllerTest",
+      "name": "stepsRequireExplicitConfirmedInputs",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationWritingControllerTest",
+      "name": "confirmedDraftCarriesOnlyReviewedFactsAndNoPublication",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationWritingControllerTest",
+      "name": "usesRealGatewayAndDoesNotManufactureSuccessfulOutput",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RecommendationWritingControllerTest",
+      "name": "customerCannotCallModel",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RequestMetricsServiceTest",
+      "name": "handlesEmptySamples",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.RequestMetricsServiceTest",
+      "name": "calculatesPercentilesAndSlowEndpoints",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.response.GlobalExceptionHandlerTest",
+      "name": "resolveStatusMappings",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.response.GlobalExceptionHandlerTest",
+      "name": "handlesApiException",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.response.GlobalExceptionHandlerTest",
+      "name": "handlesValidationException",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.response.GlobalExceptionHandlerTest",
+      "name": "handlesUnexpectedException",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.response.ResponseTest",
+      "name": "apiExceptionTest",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.response.ResponseTest",
+      "name": "apiResponseSuccess",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.response.ResponseTest",
+      "name": "apiErrorTest",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.response.ResponseTest",
+      "name": "apiResponseSuccessWithMeta",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.SecurityAuthorizationIntegrationTest",
+      "name": "customerWithNoMatchingOrdersGetsEmptyList",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.SecurityAuthorizationIntegrationTest",
+      "name": "customerWithUnrecognizedIdentityGetsEmptyList",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.SecurityAuthorizationIntegrationTest",
+      "name": "customerCanReadOwnOrderDetail",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.SecurityAuthorizationIntegrationTest",
+      "name": "customerCanConfirmOwnLedger",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.SecurityAuthorizationIntegrationTest",
+      "name": "agentCanReadAllOrdersWithoutFilter",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.SecurityAuthorizationIntegrationTest",
+      "name": "agentCanReadAnyOrderDetail",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.SecurityAuthorizationIntegrationTest",
+      "name": "customerCanReadScopedLedgerOnly",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.SecurityAuthorizationIntegrationTest",
+      "name": "customerCanReadOnlyOwnOrders",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.SecurityAuthorizationIntegrationTest",
+      "name": "customerIsForbiddenFromBackofficeApisButCanReadOrders",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.SecurityAuthorizationIntegrationTest",
+      "name": "agentCanAccessKeyBackofficeApis",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.SecurityAuthorizationIntegrationTest",
+      "name": "customerCannotReadOtherCustomerOrderDetail",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.SecurityAuthorizationProductionModeIntegrationTest",
+      "name": "forgedHeaderCannotElevateWithoutBearerToken",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.SecurityAuthorizationProductionModeIntegrationTest",
+      "name": "customerBearerTokenCanOnlyReadOwnOrders",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.SecurityAuthorizationProductionModeIntegrationTest",
+      "name": "agentBearerTokenCanAccessAgentOnlyApi",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.SecurityAuthorizationProductionModeIntegrationTest",
+      "name": "unauthenticatedProtectedApiReturns401",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.SecurityAuthorizationProductionModeIntegrationTest",
+      "name": "customerBearerTokenStillCannotAccessAgentOnlyApiEvenWithForgedHeader",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ServiceOfferIntegrationTest",
+      "name": "serviceWithoutProductsSavesReopensPublishesAndRetainsFourLanguagesWithoutExposingMail",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ServiceOfferIntegrationTest",
+      "name": "forgedProductFieldsAndMixingProductsIntoServiceAreRejected",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ServiceOfferIntegrationTest",
+      "name": "updateKeepsSourceImmutableUsesVersionAndRetainsHistory",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ServiceOfferIntegrationTest",
+      "name": "incompleteFeesTranslationsReviewAndContradictoryFactsAreRejected",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ServiceOfferIntegrationTest",
+      "name": "taskPackagesSaveReopenPublishAndExposeOnlyIndependentPublicPrices",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ServiceOfferIntegrationTest",
+      "name": "legacyGoodsWithoutProductsStillCannotPublishOrBeConvertedByServiceUpdate",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ServiceOfferIntegrationTest",
+      "name": "repeatedOriginalIsIdempotentButChangedSourceOrFactsCannotOverwrite",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ServiceOfferIntegrationTest",
+      "name": "packageRetrySourceOwnershipAndStaleVersionUseTheExistingGuards",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.ServiceOfferPostgresIntegrationTest",
+      "name": "sameCandidateReopensOldAndPackageJsonAndPublishesAccurateCards",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.api.ServiceOfferPostgresIntegrationTest",
+      "name": "packageSourceRetryVersionOwnershipAndPrivateSourceRemainBound",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.api.StorefrontIntegrationTest",
+      "name": "concurrentIdenticalCheckoutUsesOneOrderAndOneImmutableSnapshot",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.StorefrontIntegrationTest",
+      "name": "publicCatalogExcludesDraftsAndPrivateFields",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.StorefrontIntegrationTest",
+      "name": "emailChangeNormalizesRejectsDuplicatesAndInvalidatesOldCodeWithoutResettingCooldown",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.StorefrontIntegrationTest",
+      "name": "checkoutRequiresCompleteAddressOnlyForNewOrderAndRetainsOrderAndLedgerSnapshot",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.StorefrontIntegrationTest",
+      "name": "unverifiedCheckoutUsesServerPriceAndIsIdempotent",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.StorefrontIntegrationTest",
+      "name": "failedQuoteLeavesNoPartialOrderOrRelationshipAndSameKeyValidRetrySucceeds",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.StorefrontIntegrationTest",
+      "name": "selfProfileRejectsIdentityAndTrustedFieldsAndOtherUserSelection",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.StorefrontIntegrationTest",
+      "name": "emailCodeExpiresIsOneTimeAndLocksAfterFiveFailures",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.StorefrontIntegrationTest",
+      "name": "verifiedThenChangedEmailRetainsCooldownAndFailedSendCannotReplaceConsumedCode",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.StorefrontIntegrationTest",
+      "name": "concurrentSameKeyDifferentPayloadCreatesOneOrderAndRejectsTheOther",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.StorefrontIntegrationTest",
+      "name": "concurrentOldVerificationAndEmailChangeCannotVerifyTheNewAddress",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.StorefrontIntegrationTest",
+      "name": "merchantApprovalIsPairScopedAndRequiresOwnOrder",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.StorefrontIntegrationTest",
+      "name": "concurrentProfileChangeAndCheckoutCaptureOneCompleteAddressUnderTheUserLock",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.StorefrontIntegrationTest",
+      "name": "selfProfileSavesReopensPreservesOmissionsAndClearsOptionalFields",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.StorefrontIntegrationTest",
+      "name": "registrationValidationAndMailFailureLeaveNoPartialAccount",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.StorefrontIntegrationTest",
+      "name": "legacySuccessfulCheckoutRetryDoesNotRequireAddressOrBackfillHistoricalFacts",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.TripControllerIntegrationTest",
+      "name": "procurementListAggregatesItems",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.TripControllerIntegrationTest",
+      "name": "bulkUpdateTripOrdersStatus",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.TripControllerIntegrationTest",
+      "name": "manualTripStatusEndpointIsRemoved",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.TripControllerIntegrationTest",
+      "name": "anotherMerchantCannotEditTripAndCustomerCannotCreate",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.TripControllerIntegrationTest",
+      "name": "createUsesSignedInMerchantAndRejectsLegacyControls",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.TripControllerTest",
+      "name": "editRegionalDeliveryAndReadItBack",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.UserControllerTest",
+      "name": "userCrudRejectsMissing",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.UserControllerTest",
+      "name": "userCrudFlow",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.UserManagementIntegrationTest",
+      "name": "editPreservesProfileAndPasswordAndRevokesExistingTokenImmediately",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.UserManagementIntegrationTest",
+      "name": "platformCreatesAllCombinationsAndProtectsGlobalAccess",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.UserManagementIntegrationTest",
+      "name": "allSelfRegistrationForcesCustomerAndIgnoresForgedMerchantFields",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.UserManagementIntegrationTest",
+      "name": "validationRejectsDuplicatesShortPasswordsAndSelfDisable",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.api.UserManagementIntegrationTest",
+      "name": "accountRegistrationNeedsNoRoleAndReplayCannotElevate",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.config.WebSocketAuthenticationChannelInterceptorTest",
+      "name": "connectWithInvalidBearerTokenIsRejected",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.config.WebSocketAuthenticationChannelInterceptorTest",
+      "name": "connectWithoutBearerTokenIsRejected",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.config.WebSocketAuthenticationChannelInterceptorTest",
+      "name": "connectWithValidBearerTokenEstablishesAuthenticatedPrincipal",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.config.WebSocketAuthenticationChannelInterceptorTest",
+      "name": "unauthorizedSubscriptionIsRejected",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.config.WebSocketAuthenticationChannelInterceptorTest",
+      "name": "subscribeUsesCurrentPrincipalForChatAuthorization",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.MediaGalleryCompatibilityTest",
+      "name": "retainsLegacyOptionalHashAndSourceMetadataOnRoundTrip",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.MediaGalleryCompatibilityTest",
+      "name": "legacyLowercaseUiPayloadIsRejectedButCanonicalEnumIsAccepted",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.ModelTest",
+      "name": "orderHeaderAndLineTest",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.ModelTest",
+      "name": "metricsTest",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.ModelTest",
+      "name": "auditLogTest",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.ModelTest",
+      "name": "userTest",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.ModelTest",
+      "name": "productAndRelatedMasterDataModelsTest",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.ModelTest",
+      "name": "tripTest",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.OrderLineStorageTest",
+      "name": "mutableSpecificationMapAndItsBackedViewsAllTrackSidecarChanges",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.OrderLineStorageTest",
+      "name": "ownerCallbacksDoNotLeakAcrossHeadersOrRemovedLines",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.OrderLineStorageTest",
+      "name": "postLoadHydrationDoesNotDirtyLinesOrSidecar",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.OrderLineStorageTest",
+      "name": "allSeventeenPersistedFieldsStillDetectActualChanges",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.OrderLineStorageTest",
+      "name": "realStorageMixinReproducesLostSnapshotMetadataButSqlEqualityUsesOnlyStoredFields",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.OrderLineStorageTest",
+      "name": "metadataOnlyEditsDirtySidecarAndClearsAreNotResurrected",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.OrderLineValueTest",
+      "name": "jsonSnapshotEqualsOriginalIncludingPriceAndIdentity",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.OrderLineValueTest",
+      "name": "everyPersistedLineFieldParticipatesInDirtyChecking",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.OrderLineValueTest",
+      "name": "equalJsonSnapshotsStillDetectInPlaceQuantityChanges",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.RecommendationServiceOfferTest",
+      "name": "articleHandlesNullHoursPriceAndConditionalAmountsInEveryLocale",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.RecommendationServiceOfferTest",
+      "name": "staffHoursAndReviewRequirementsRemainStrict",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.RecommendationServiceOfferTest",
+      "name": "conditionalAmountCannotBeZeroAndFixedFeeCannotBeUnknown",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.RecommendationServiceOfferTest",
+      "name": "unknownTypesAndForgedNestedFieldsAreRejected",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.RecommendationServiceOfferTest",
+      "name": "legacyJsonStillReadsAndWritesWithoutNewBranchFields",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.RecommendationServiceOfferTest",
+      "name": "independentPackagePricesRemainIndependentAndPrivateSourceIsRemoved",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.model.RecommendationServiceOfferTest",
+      "name": "packageModeRejectsUnifiedAmountsAndMissingOrDuplicateOptions",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.repository.CostcoOnboardingAttemptHistoryTest",
+      "name": "committingOnlyReclaimsForReconciliationWithoutResetOrHistoryAppend",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.repository.CostcoOnboardingAttemptHistoryTest",
+      "name": "exhaustionArchivesFinalUnarchivedAttemptBeforeReplacingItsFailureCode",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.repository.CostcoOnboardingAttemptHistoryTest",
+      "name": "retryAndCrashedStagesArchiveOldColumnPayloadInTheSameUpdateThatClearsCurrentDecisions",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.repository.CostcoOnboardingPersistenceIntegrationTest",
+      "name": "retryAndCrashReclaimPreserveThreeActualJsonbAttemptSnapshotsAndFenceOldLeases",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.repository.CostcoOnboardingPersistenceIntegrationTest",
+      "name": "concurrentSameIntentUsesOneRealRowAndPreservesOwnerIsolation",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.repository.CostcoOnboardingPersistenceIntegrationTest",
+      "name": "actualOwnerRowLockMakesPendingBudgetAtomicAcrossIndependentTransactions",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.repository.CostcoOnboardingPersistenceIntegrationTest",
+      "name": "realJsonbEvidenceAndJdbcJpaTransactionsRoundTripAndRollbackTogether",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.repository.CostcoOnboardingPersistenceIntegrationTest",
+      "name": "committingReclaimsOnlyForReconciliationAndDuplicateSubmissionCannotResetOrCreate",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.repository.CostcoOnboardingPersistenceIntegrationTest",
+      "name": "actualByteaEvidenceBudgetIsOwnerScopedAndSameHashRetryDoesNotConsumeCapacity",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.repository.CostcoOnboardingQuotaTest",
+      "name": "pendingQuotaRejectsBeforeAnyInsert",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.repository.CostcoOnboardingQuotaTest",
+      "name": "revokedActorCannotReserveOrInsertBudgetedWork",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.repository.CostcoOnboardingQuotaTest",
+      "name": "newEvidenceOverCapacityDoesNotInsertOrDeleteAnyByte",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.repository.CostcoOnboardingQuotaTest",
+      "name": "rollingDailyQuotaIsSeparateAndStillInsideOwnerLock",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.repository.CostcoOnboardingQuotaTest",
+      "name": "sameExplicitKeyIsReturnedBeforeBudgetChecksOrInsert",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.repository.CostcoOnboardingQuotaTest",
+      "name": "sameEvidenceHashReusesOriginalBytesBeforeCapacityChecks",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.repository.RecommendationIssueDateMigrationIntegrationTest",
+      "name": "oldFlywayDiscoveryValidatesFuture28_1AndDoesNotReplayAnyMigration",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.repository.RecommendationIssueDateMigrationIntegrationTest",
+      "name": "exactPreviousPostColumnMappingUpdatesOldFieldsWithoutErasingDateEvidence",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.repository.RecommendationIssueDateMigrationIntegrationTest",
+      "name": "nullableUpgradeAndCompletenessConstraintKeepOldRowsUnknown",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.security.CustomerIdentityResolverTest",
+      "name": "unrecognizedFormatReturnsEmpty(String)[1]",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.security.CustomerIdentityResolverTest",
+      "name": "unrecognizedFormatReturnsEmpty(String)[2]",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.security.CustomerIdentityResolverTest",
+      "name": "unrecognizedFormatReturnsEmpty(String)[3]",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.security.CustomerIdentityResolverTest",
+      "name": "unrecognizedFormatReturnsEmpty(String)[4]",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.security.CustomerIdentityResolverTest",
+      "name": "unrecognizedFormatReturnsEmpty(String)[5]",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.security.CustomerIdentityResolverTest",
+      "name": "prefixedFormatExtractsCorrectId",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.security.CustomerIdentityResolverTest",
+      "name": "prefixedFormatIsResolved(String)[1]",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.security.CustomerIdentityResolverTest",
+      "name": "prefixedFormatIsResolved(String)[2]",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.security.CustomerIdentityResolverTest",
+      "name": "prefixedFormatIsResolved(String)[3]",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.security.CustomerIdentityResolverTest",
+      "name": "prefixedFormatIsResolved(String)[4]",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.security.CustomerIdentityResolverTest",
+      "name": "pureNumericIdIsResolved",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.security.CustomerIdentityResolverTest",
+      "name": "blankReturnsEmpty",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.security.CustomerIdentityResolverTest",
+      "name": "nullReturnsEmpty",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.security.InternalServiceTokenFilterTest",
+      "name": "invalidTokenIsRejected",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.security.InternalServiceTokenFilterTest",
+      "name": "validTokenStoresInternalServiceIdentity",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.security.InternalServiceTokenFilterTest",
+      "name": "internalEndpointRequiresConfiguredToken",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.AiVisionIntegrationManualTest",
+      "name": "testImg1638MuffinIncremental",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.service.AiVisionIntegrationManualTest",
+      "name": "testImg1484Seafood",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.service.AuditLogServiceTest",
+      "name": "logStatusChangeStoresCompleteEntry",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.AuditLogServiceTest",
+      "name": "logEntriesHaveUniqueIdsAndListIsIsolated",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyReleaseGateTest",
+      "name": "quickOrderUsesCatalogPriceAndMergesRepeatedBusinessOrder",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyReleaseGateTest",
+      "name": "acceptanceFixturesAreConsistentAndExistingDataIsNotReseeded",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyReleaseGateTest",
+      "name": "catalogMetadataAndReferenceTiersDoNotOverwriteBasePrice",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreCoverageTest",
+      "name": "testDefensiveNullChecksAndBranches",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreCoverageTest",
+      "name": "testMissedBranchesInUserAndTrip",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreCoverageTest",
+      "name": "testMissedBranchesInUpsertOrder",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreCoverageTest",
+      "name": "testMissedBranchesInBulkUpdate",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreCoverageTest",
+      "name": "testMissedBranchesInListOrders",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreSeedDisabledIntegrationTest",
+      "name": "doesNotSeedDataByDefault",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreSeedEnabledIntegrationTest",
+      "name": "seedsDataWhenExplicitlyEnabled",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreTest",
+      "name": "userLifecycleTests",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreTest",
+      "name": "updateOrderStatusRejectsMissingOrder",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreTest",
+      "name": "idempotencyMergeTest",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreTest",
+      "name": "preOrderSupportsNullTripAndDesiredDeliveryWindow",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreTest",
+      "name": "procurementListAggregatesBySku",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreTest",
+      "name": "updatesOrderStatusAndLogsCounts",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreTest",
+      "name": "productPatchMergesLocalizedFieldsAndKeepsExistingValues",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreTest",
+      "name": "emptyAndCancelledTripsStayOpen",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreTest",
+      "name": "settlementFrozenTripBlocksOrderMutationAndDeletion",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreTest",
+      "name": "businessProgressUpdatesTripAndAuditsOnlyChanges",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreTest",
+      "name": "getOrderByBusinessIdReturnsOptional",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreTest",
+      "name": "updateOrderUpdatesExistingAndRejectsMissing",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreTest",
+      "name": "orderLifecycleAndCalculations",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreTest",
+      "name": "orderStatusCountsWithEmpty",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreTest",
+      "name": "tripLifecycleTests",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreTest",
+      "name": "updateOrderStatusRejectsInvalidTransitions",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreTest",
+      "name": "productMasterDataCrudAndLookupCoverage",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreTest",
+      "name": "completedTripLocksOrderLineMutations",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreTest",
+      "name": "listOrdersFiltersByTripId",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.BobbuyStoreTest",
+      "name": "listProductsPrioritizesRecommendedThenLatestUpdated",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ChatServiceTest",
+      "name": "sendMessagePublishesPrivateMessagesToStableTopic",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ChatServiceTest",
+      "name": "sendMessageAddsNormalizedBusinessMetadataForImageMessages",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ChatServiceTest",
+      "name": "getTripConversationSliceUsesIdCursorPagination",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CheckoutFingerprintTest",
+      "name": "canonicalAcrossRequestIdsLineOrderAndEquivalentAggregatedQuantities",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CheckoutFingerprintTest",
+      "name": "sameQuantityWithChangedQuoteIsDifferentAndAmbiguousDuplicateQuotesAreRejected",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoCatalogCommitterTest",
+      "name": "aQueryOnlySourceNeedsCanonicalEvidenceBeforeAnyUploadOrSave",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoCatalogCommitterTest",
+      "name": "revokedActorCannotSpendOrWriteThroughAnOldQueuedJob",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoCatalogCommitterTest",
+      "name": "missingEngineTraceNeverBecomesReviewedCatalogWrite",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoCatalogCommitterTest",
+      "name": "savingRetainsAllKnownSpecificationLanguagesWhenAiOmitsOrUpdatesJapanese",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoCatalogCommitterTest",
+      "name": "aUniqueMatchStillNeedsAnExplicitModelReviewedTarget",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoCatalogCommitterTest",
+      "name": "unknownNewMasterSellingPriceStaysInTaskWithoutCreatingAZeroPricedProduct",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoCatalogCommitterTest",
+      "name": "knownCatalogValidationBecomesNeedsInputButUnknownStorageFailureRemainsUncertain",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoNumberOnboardingServiceTest",
+      "name": "revokedScopeBeforeExecutionDoesNotReachAnyExternalStage",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoNumberOnboardingServiceTest",
+      "name": "uncertaintyOrWrongSaveReceiptStaysCommittingWithoutASecondCreate",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoNumberOnboardingServiceTest",
+      "name": "candidateHashBindsPackagingAndIgnoresTranslationMapInsertionOrder",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoNumberOnboardingServiceTest",
+      "name": "merchantSupplierAndMarketAreDistinctAndOwnerCannotReadAnotherJob",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoNumberOnboardingServiceTest",
+      "name": "numberAndPhotoUseTheSameFiveStagesAndReopenReceiptBeforeCompletion",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoNumberOnboardingServiceTest",
+      "name": "nonAcceptSemanticDecisionsNeverBecomeSuccessfulImports",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoNumberOnboardingServiceTest",
+      "name": "reusesSameIntentAndRejectsDifferentPayloadUnderSameKey",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoNumberOnboardingServiceTest",
+      "name": "duplicateConcurrentExecuteCannotRunTheSameStageTwice",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoNumberOnboardingServiceTest",
+      "name": "normalizesProtocolOnlyAndRetainsLeadingZeroes",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoNumberOnboardingServiceTest",
+      "name": "missingAndStaleEvidenceDoNotReachCatalog",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoNumberOnboardingServiceTest",
+      "name": "missingPinnedCapabilityNeedsInputRatherThanAnAutomaticRetryLoop",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoNumberOnboardingServiceTest",
+      "name": "failedClaimDoesNotRunAnyExternalPort",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoNumberOnboardingServiceTest",
+      "name": "requiresExactlyOneInputAndVerifiedPhotoReceiptShape",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoNumberOnboardingServiceTest",
+      "name": "recoveredDurableCommitReceiptCompletesWithoutAnotherCreate",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoNumberOnboardingServiceTest",
+      "name": "rejectsWrongNodeInputAndEvidenceBindings",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoNumberOnboardingServiceTest",
+      "name": "candidateHashBindsReferenceWindowAndReviewedTarget",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPinnedStageReviewerTest",
+      "name": "semanticAmbiguityComesFromModelAndActualTextIsBoundToTrace",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPinnedStageReviewerTest",
+      "name": "plannerInitialSeedIsFetchedRoutingOnlyAndNeverMarksDiscoveryComplete",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPinnedStageReviewerTest",
+      "name": "admissionTargetMustBindActualOwnedMasterVersionAndSourceHash",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPinnedStageReviewerTest",
+      "name": "xhtmlAndJsonLdAreActualRetrievedInputForBothReviewAndDiscovery",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPinnedStageReviewerTest",
+      "name": "photoIntakeAndImageReviewUseVerifiedActualPixelsNotOnlyUrls",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPinnedStageReviewerTest",
+      "name": "plannerSecondRoundReadsActualDocumentAndDoesNotCallMockSearch",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPinnedStageReviewerTest",
+      "name": "revocationBeforeRedirectStopsNextDnsAndHttpRequest",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPinnedStageReviewerTest",
+      "name": "wrongBytesAndPrivilegeFieldsNeverReachAcceptedDecision",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPinnedStageReviewerTest",
+      "name": "missingCapabilityIsActionableNeedsInputNotPretendVision",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPinnedStageReviewerTest",
+      "name": "admissionCannotSelectAnImageNeverViewedByImageStage",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPublicEvidenceFetcherTest",
+      "name": "incompleteDiscoveryStopsAfterThreeRoundsAndDoesNotRepeatDownloads",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPublicEvidenceFetcherTest",
+      "name": "refusesImageWithoutFetchedDocumentAndDoesNotAskTransport",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPublicEvidenceFetcherTest",
+      "name": "redirectsAreResolvedAndValidatedAgainBeforeAnyNewConnection",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPublicEvidenceFetcherTest",
+      "name": "httpParserHandlesBoundedLengthAndChunkedBodies",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPublicEvidenceFetcherTest",
+      "name": "httpParserRejectsAmbiguousTruncatedLargeAndCompressedBodies",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPublicEvidenceFetcherTest",
+      "name": "localPrivateReservedAndCloudMetadataAddressesNeverPass",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPublicEvidenceFetcherTest",
+      "name": "documentThenRealDecodedImageKeepsExactBytesQueryAndParentEvidenceHash",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPublicEvidenceFetcherTest",
+      "name": "rejectsHttpCredentialsFragmentsPortsAndDowngradeRedirects",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPublicEvidenceFetcherTest",
+      "name": "duplicateIncompleteDiscoveryStopsAsNeedsEvidenceAndCompleteEmptyRoundCanFinish",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPublicEvidenceFetcherTest",
+      "name": "mixedDnsAnswerFailsBeforeConnecting",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPublicEvidenceFetcherTest",
+      "name": "redirectLoopAndExcessiveHopsAreBounded",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPublicEvidenceFetcherTest",
+      "name": "refusesCanonicalDocumentThatWasOnlyProposed",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPublicEvidenceFetcherTest",
+      "name": "discoveryMustBindNodeAndActualInputHash",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPublicEvidenceFetcherTest",
+      "name": "dnsRebindingCannotCauseTransportToResolveASecondAddress",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPublicEvidenceFetcherTest",
+      "name": "actualImageDecoderRejectsCorruptOrMismatchedImageMime",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPublicEvidenceFetcherTest",
+      "name": "oversizedUnsupportedEncodedAndForbiddenSourcesAreNotEvidence",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CostcoPublicEvidenceFetcherTest",
+      "name": "boundedSecondDiscoveryUsesActuallyFetchedDocumentsBeforeProposingImage",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CustomerOrderAmendmentPolicyTest",
+      "name": "ownUncommittedOrderOnlyAndRevisionConflict",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CustomerOrderAmendmentPolicyTest",
+      "name": "rejectsPrivilegeFieldsEvenWithUnknownPropertiesGloballyIgnored",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CustomerOrderAmendmentPolicyTest",
+      "name": "statusPaymentAndFulfillmentMatrixNeverAllowsFundsOrProcurementChanges",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CustomerOrderAmendmentPolicyTest",
+      "name": "fingerprintCanonicalizesLinesButBindsIdentityRevisionAndDeliveryIntent",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CustomerOrderAmendmentServiceTest",
+      "name": "existingReceiptDoesNotBypassCurrentOwnerAfterMerchantReassignment",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CustomerOrderAmendmentServiceTest",
+      "name": "allProcurementPaymentAndFulfillmentCommitmentsFailClosed",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CustomerOrderAmendmentServiceTest",
+      "name": "tripOrderLocksRefreshPreviouslyAttachedSnapshotsInOneDirection",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CustomerOrderAmendmentServiceTest",
+      "name": "unchangedRetryReplaysOriginalResultButChangedPayloadCannotReuseKey",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CustomerOrderAmendmentServiceTest",
+      "name": "queuedWriterDropsOnlyUnlockedAttachedVersionBeforeTakingFreshOrderLock",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CustomerOrderAmendmentServiceTest",
+      "name": "optionalTripLockPreservesMissingUpdateContractButRequiredLockStillRejects",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CustomerOrderAmendmentServiceTest",
+      "name": "ownPrincipalAndFreshRoleAreRequiredWithoutLeakingOtherOrder",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CustomerOrderAmendmentServiceTest",
+      "name": "bulkWriterRefreshesQueuedSnapshotsAndRetainsItsOwnLockedEdits",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CustomerOrderAmendmentServiceTest",
+      "name": "rejectsStaleRevisionAndChangedLiveQuoteWithoutAnySave",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CustomerOrderAmendmentServiceTest",
+      "name": "previewHashIsIdenticalAcrossRealStorageMapperAndSidecarReload",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.CustomerOrderAmendmentServiceTest",
+      "name": "savesOnlyUncommittedLinesAndOrderAddressWithAtomicHistoryReceipt",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ExistingAiConnectionManualTest",
+      "name": "existingConnectionAnswersSyntheticText",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.service.ExistingOfficialResearchManualTest",
+      "name": "exactOfficialSearchWithExistingEncryptedSearchCredential",
+      "status": "SKIP"
+    },
+    {
+      "className": "com.bobbuy.service.IdentityMigrationRecoveryTest",
+      "name": "additiveMigrationOldVersionValidationAndBackupRestoreKeepSidecars",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.LlmGatewayPinnedTest",
+      "name": "exactModelDiscoveryAndOneV1PathAndUnknownUsageRemainUnknown",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.LlmGatewayPinnedTest",
+      "name": "unsupportedOrAmbiguousModelNeverCallsCompletion",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.LlmGatewayPinnedTest",
+      "name": "completionMustAttestSameModelAndCompleteJsonObject",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.LlmGatewayPinnedTest",
+      "name": "actualImageStaysOnPinnedChatRouteAndRequiresDiscoveredVision",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.LlmGatewayPinnedTest",
+      "name": "configurationIsMetadataOnlyAndWrongNodeFailsBeforeNetwork",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.LlmGatewayPinnedTest",
+      "name": "actualSubscriberCancelsOversizedBodiesAndImageBytesCannotMutate",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.LlmGatewayPinnedTest",
+      "name": "redirectRateAndTransportFailureNeverInvokeFallbackOrPrintBody",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.LlmGatewayPinnedTest",
+      "name": "imageAndPromptBudgetsRejectBeforeCompletion",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.LlmGatewayTest",
+      "name": "generateFallsBackToCodexBridgeWhenOllamaReturnsEmptyResponse",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.LlmGatewayTest",
+      "name": "unavailableCodexCommandIsNotSelectedAsMainProvider",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.LlmGatewayTest",
+      "name": "bridgeVisionCarriesImageWhenNoEdgeConfigured",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.LlmGatewayTest",
+      "name": "remotePlainHttpNeverReceivesCredentials",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.LocalizedJsonbReaderServiceTest",
+      "name": "fallsBackToDefaultLocaleWhenAppLocaleMissing",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.LocalizedJsonbReaderServiceTest",
+      "name": "readsExactLocaleFirst",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.LocalizedJsonbReaderServiceTest",
+      "name": "fallsBackToFirstAvailableWhenNoDefaultLocale",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.MailSecretCipherTest",
+      "name": "authenticatedRandomEncryptionBindsIdentityAndSupportsRetainedRotationKeys",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.MailSecretCipherTest",
+      "name": "missingOrInvalidExternalKeyFailsClosedWithoutSecretInErrors",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.MediaIncrementWorkerTest",
+      "name": "overlappingCyclesNeverDoubleClaim",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.MediaIncrementWorkerTest",
+      "name": "boundedCyclesRecoverAfterFailureAndStopAndRestart",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.MediaIncrementWorkerTest",
+      "name": "invalidResourceBoundsAreRejected",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.OfficialProductResearchTest",
+      "name": "neverGuessesSkuFromPathNameOrImage",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.OfficialProductResearchTest",
+      "name": "relatedStructuredSkuCannotBeUsedAsThePageProduct",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.OfficialProductResearchTest",
+      "name": "costcoLowercaseProductSchemaIsAccepted",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.OfficialProductResearchTest",
+      "name": "noProductGroupVariantsOrUntrustedHosts",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.OfficialProductResearchTest",
+      "name": "exactStructuredSkuAndAllSafeImagesOnly",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.OfficialProductResearchTest",
+      "name": "collectsOriginalAnglesOnlyFromMatchingPrimaryGallery",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.OrderDeliverySnapshotTest",
+      "name": "immutableSnapshotRequiresAddressButNotPhonePostalOrGeolocation",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.OrderDeliverySnapshotTest",
+      "name": "managementReplacementPreservesCheckoutMetadataAndLegacyRemainsUnknown",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.OrderProductSnapshotTest",
+      "name": "procurementViewsRetainEveryDistinctPurchasedVariant",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.OrderProductSnapshotTest",
+      "name": "additiveJsonRoundTripAndHistoricalRowsRemainReadable",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.OrderProductSnapshotTest",
+      "name": "snapshotsAreIndependentAndKeepLegacySaleUnit",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.OrderProductSnapshotTest",
+      "name": "differentItemOrSnapshotMustNotMerge",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.OrderProductSnapshotTest",
+      "name": "retainedSidecarDoesNotAttachToChangedSaleUnit",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProcurementHudServiceTest",
+      "name": "customerBalanceCarryForwardIgnoresCancelledNewAndFutureOrders",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProcurementHudServiceTest",
+      "name": "deliveredTripAllowsConfirmationAndPaymentBeforeFinalSettlement",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProcurementHudServiceTest",
+      "name": "manualReconcileTransfersPurchasedQuantityBetweenOrders",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProcurementHudServiceTest",
+      "name": "manualReconcileIsBlockedWhenTripSettlementFrozen",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProcurementHudServiceTest",
+      "name": "getHudStatsSubtractsTripExpensesFromProfit",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProcurementHudServiceTest",
+      "name": "settlementRequiresDeliveryAndRejectsDuplicatePayout",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProcurementHudServiceTest",
+      "name": "reconcileInventoryFillsDraftOrdersByCreationOrderWithinSameTrip",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProcurementHudServiceTest",
+      "name": "settledTripBlocksCustomerConfirmationAndOfflinePayment",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProcurementHudServiceTest",
+      "name": "reconcileInventoryWithDetailsReturnsAllocatedBusinessIds",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProcurementHudServiceTest",
+      "name": "getHudStatsUsesProductPhysicalMetricsInsteadOfStaticUnitWeight",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProcurementHudServiceTest",
+      "name": "confirmCustomerLedgerRequiresReceiptBeforeBilling",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProcurementHudServiceTest",
+      "name": "reconcileInventoryStopsAtTargetTripWhenSameProductExistsInOtherTrips",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProcurementHudServiceTest",
+      "name": "customerBalanceCarryForwardSupportsOverpaymentAndUnderpayment",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProcurementReceiptRecognitionServiceTest",
+      "name": "recognizeFallsBackWhenAiUnavailable",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProcurementReceiptRecognitionServiceTest",
+      "name": "recognizeUsesAiExtractionWhenAvailable",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProcurementReceiptRecognitionServiceTest",
+      "name": "recognizeCapturesFailureReasonWhenAiThrows",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProductCatalogAutomatedTest",
+      "name": "automaticSaveDoesNotImpersonateHumanReviewAndManualSaveStillRequiresConfirmation",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProductIdentityAuditTest",
+      "name": "projectionDoesNotChangeStoredSourceOrPrice",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProductIdentityAuditTest",
+      "name": "actualAuditKeepsLegacyStateSeparatesTenantsAndPreservesQuoteWindows",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProductIdentityRecoveryTest",
+      "name": "actualPreviousStrictOrderShapeRejectsNewSnapshotFieldsButReadsUntouchedHistory",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProductIdentityRecoveryTest",
+      "name": "restoringOrdinaryFieldsCannotUndoLegacyCanonicalization",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProductIdentityRecoveryTest",
+      "name": "canonicalFieldRecoveryRestoresMetadataWithoutChangingIdentityOrSale",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProductMarkerServiceTest",
+      "name": "markedSectionRetainsAllSharedEligibleReferenceMastersBeyondOneBatch",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProductMarkerServiceTest",
+      "name": "definitionCodeAndVersionCannotBeOverwritten",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProductMarkerServiceTest",
+      "name": "ownerCannotAssignOtherOwnersProduct",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProductMarkerServiceTest",
+      "name": "defaultBootstrapIsIdempotentAndNeverMarksAnyProduct",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProductMarkerServiceTest",
+      "name": "sameSetRetryIsNoOpButDifferentStaleSetFails",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProductMarkerServiceTest",
+      "name": "badgeColorAndFourLocaleValidationFailClosed",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProductMarkerServiceTest",
+      "name": "unknownAndForeignDefinitionsAreRejected",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProductMarkerServiceTest",
+      "name": "firstAssignmentRevisionDiffersFromAbsentAndDoesNotMutateProduct",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProductMarkerServiceTest",
+      "name": "noRoleCannotReadOrMutateDefinitions",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProductMarkerServiceTest",
+      "name": "publicReadUsesSharedCatalogEligibilityAndExcludesDisabledAndForeignMarkers",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProductRatingServiceTest",
+      "name": "coherentAverageDistributionAndNoReviewState",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProductRatingServiceTest",
+      "name": "acceptsAllNineScoresAndRejectsOtherScores",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProductRatingServiceTest",
+      "name": "staleVersionNeverWrites",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProductRatingServiceTest",
+      "name": "privateProductsCannotExposeReviewData",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ProductRatingServiceTest",
+      "name": "locksProductAndUsesAuthenticatedAuthor",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicBrowseProjectionCompatibilityTest",
+      "name": "boundedSalesOnlyQuoteRequestedPublicIdsAndSuppressUnopenedDetails",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicBrowseProjectionCompatibilityTest",
+      "name": "safeProjectionAndExistingPageAgreeWithoutExpandingPrivateOrForeignFields",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicBrowseProjectionCompatibilityTest",
+      "name": "migratedHistoryFixtureRetainsOnlyStoredSourceFactsAndNeverInventsMasterVersion",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicCatalogRealProjectionNoAgentTest",
+      "name": "drafterProjectionNeverAddsPrivateMasterFieldsOrFallbackMedia",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicCatalogRealProjectionNoAgentTest",
+      "name": "legacyEmptySourceBrandAndGalleryDoNotEraseKnownMasterEvidence",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicCatalogRealProjectionNoAgentTest",
+      "name": "onlyCurrentSameOwnerPublishedSourcesGrantDrafterEligibility",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicCatalogRealProjectionNoAgentTest",
+      "name": "privateDeletedAndUnknownVisibilityNeverExpandThroughCatalog",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicCatalogRealProjectionNoAgentTest",
+      "name": "canonicalDrafterUsesExactlyAlreadyPublicMasterProjectionAndVisibleMedia",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicCatalogRealProjectionNoAgentTest",
+      "name": "withdrawalRemovesDrafterEntryWithoutChangingVisibilityOrSaleData",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicCatalogRealProjectionNoAgentTest",
+      "name": "legacyDrafterFieldsExactlyReusePublishedProjectionWithoutMasterFallback",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicCatalogRealProjectionNoAgentTest",
+      "name": "productionShapeIncludes225OwnedPublishedMastersButNot13UnpublishedOr16Deleted",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicCatalogRealProjectionNoAgentTest",
+      "name": "foreignPostCannotSupplyMetadataToAnotherMerchantMaster",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicCatalogRealProjectionNoAgentTest",
+      "name": "invalidQueryRejectedAndPageBeyondEndIsEmpty",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicCatalogRealProjectionNoAgentTest",
+      "name": "merchantFilterDoesNotReturnOtherOwners",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicCatalogRealProjectionNoAgentTest",
+      "name": "allPagesIncludeUnpricedPublicMastersWithoutAnyTrip",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicProductBrowseServiceTest",
+      "name": "emptyAndExactMultipleDoNotRequireTerminalExtraPage",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicProductBrowseServiceTest",
+      "name": "pageCountsFacetsAndContinuationUseCompleteRange",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicProductBrowseServiceTest",
+      "name": "compactReferenceRetainsZeroAmountSourceAndWindowAndRevisionsChangeWithFacts",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicProductBrowseServiceTest",
+      "name": "markedScopeCountPrecedesSearchCategoryAndPagingWithoutExtraCatalogRead",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicProductBrowseServiceTest",
+      "name": "searchFindsLaterPageAndFacetsPrecedeCategory",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicProductBrowseServiceTest",
+      "name": "revisionRejectsMutationQueryLocaleAndMarkerChanges",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicProductBrowseServiceTest",
+      "name": "invalidContinuationRejectedBeforeAnyDataRead",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicProductBrowseServiceTest",
+      "name": "markedAndUnclassifiedCountsAndDetailsAreSafeSubset",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicProductCatalogProjectionTest",
+      "name": "canonicalDrafterUsesExactlyAlreadyPublicMasterProjectionAndVisibleMedia",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicProductCatalogProjectionTest",
+      "name": "withdrawalRemovesDrafterEntryWithoutChangingVisibilityOrSaleData",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicProductCatalogProjectionTest",
+      "name": "legacyDrafterFieldsExactlyReusePublishedProjectionWithoutMasterFallback",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicProductCatalogServiceTest",
+      "name": "drafterProjectionNeverAddsPrivateMasterFieldsOrFallbackMedia",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicProductCatalogServiceTest",
+      "name": "legacyEmptySourceBrandAndGalleryDoNotEraseKnownMasterEvidence",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicProductCatalogServiceTest",
+      "name": "onlyCurrentSameOwnerPublishedSourcesGrantDrafterEligibility",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicProductCatalogServiceTest",
+      "name": "privateDeletedAndUnknownVisibilityNeverExpandThroughCatalog",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicProductCatalogServiceTest",
+      "name": "productionShapeIncludes225OwnedPublishedMastersButNot13UnpublishedOr16Deleted",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicProductCatalogServiceTest",
+      "name": "foreignPostCannotSupplyMetadataToAnotherMerchantMaster",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicProductCatalogServiceTest",
+      "name": "invalidQueryRejectedAndPageBeyondEndIsEmpty",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicProductCatalogServiceTest",
+      "name": "merchantFilterDoesNotReturnOtherOwners",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicProductCatalogServiceTest",
+      "name": "allPagesIncludeUnpricedPublicMastersWithoutAnyTrip",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicRecommendationBrowseServiceTest",
+      "name": "unknownDateDirectorySortsBeforePaginationAndIgnoresIncomingRepositoryOrder",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicRecommendationBrowseServiceTest",
+      "name": "expiryRetainsUnknownStartAndOpenCouponAndSupportsInheritedWindow",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicRecommendationBrowseServiceTest",
+      "name": "directoryAndItemsShareDatasetRevisionButNotQueryTokens",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicRecommendationBrowseServiceTest",
+      "name": "directorySupplierAggregationUsesWholeIssueAndOnlyPublicNamedAssociations",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicRecommendationBrowseServiceTest",
+      "name": "issueScopeCategoryAndHistoryAreAppliedBeforePaging",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicRecommendationBrowseServiceTest",
+      "name": "invalidQueriesDoNotReadRepository",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicRecommendationBrowseServiceTest",
+      "name": "occurrencesAcrossIssuesRemainDistinctWith24BatchAndGlobalFacets",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicRecommendationBrowseServiceTest",
+      "name": "directoryConsumesSameReviewedCalendarDateFieldForOrderingAndDisplay",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicRecommendationBrowseServiceTest",
+      "name": "fullPublicCountIsLocaleAndSearchIndependentWhileMatchingIssueSetIsFiltered",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicRecommendationBrowseServiceTest",
+      "name": "missingIssueDateIsExplicitUnknownNeverPublicationEditOrOfferDate",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicRecommendationBrowseServiceTest",
+      "name": "directorySeparatesMatchedCountFromWholePublicIssueCount",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicRecommendationBrowseServiceTest",
+      "name": "localeSearchMatchesTranslationAndOriginalWithReviewStatus",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicRecommendationBrowseServiceTest",
+      "name": "taskPackageProjectionKeepsSeparateScopesAndPricesWithoutSourceOrProductIdentity",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicRecommendationBrowseServiceTest",
+      "name": "servicesAreSeparateCardsNeverFakeProductOccurrences",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicRecommendationBrowseServiceTest",
+      "name": "explicitIssueDateComparatorUsesDateDescendingStableIdsAndUnknownLast",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.PublicRecommendationBrowseServiceTest",
+      "name": "editsAndAppendDoNotUseUpdatedOrPublicationTimestampsToPromoteOldUnknownIssue",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationArticleRevisionTest",
+      "name": "sameUuidDifferentPayloadConflictsAndNeverMutatesHistory",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationArticleRevisionTest",
+      "name": "sameUuidReplaySurvivesSerializationAndServiceReconstruction",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationArticleRevisionTest",
+      "name": "snapshotsKeepOldFullTextAndNewFourLanguagesWithDurableActorReceipt",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationArticleRevisionTest",
+      "name": "unknownTopLevelOrTextIdentityFieldsAreRejectedEvenWithGlobalUnknownsDisabled",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationArticleRevisionTest",
+      "name": "legacyHashRemainsExactAndMixedSourceIsNeverInferred",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationArticleRevisionTest",
+      "name": "ordinaryLegacyLanguageUpdateDoesNotAdoptAtomicHash",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationArticleRevisionTest",
+      "name": "canonicalRecognitionRequiresSourceMatchFourBoundLanguagesAndSameServerReview",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationArticleRevisionTest",
+      "name": "missingUnreviewedOversizedOrBlankLanguageDoesNotChangeAnything",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationArticleRevisionTest",
+      "name": "canonicalHashIgnoresReviewTimeAndMapOrderButPreservesNormalizedText",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationArticleRevisionTest",
+      "name": "payloadBindsPostOwnerVersionAndOldSourceHash",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationArticleRevisionTest",
+      "name": "reviewedIssueDateSurvivesAtomicArticleHistoryWithoutChangingArticleHash",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationArticleRevisionTest",
+      "name": "allFourLanguagesBecomeCurrentTogetherAndTranslationOnlyRevisionChangesHash",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationArticleRevisionTest",
+      "name": "unreviewedOrStaleLegacyTextsCannotMasqueradeAsCanonical",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationFromProductTest",
+      "name": "samePeriodDifferentOfferConflictsButDifferentPeriodStaysIndependent",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationFromProductTest",
+      "name": "rejectsMissingGalleryPublishedAndWrongIdentity",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationFromProductTest",
+      "name": "rejectsStaleMasterAndPost",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationFromProductTest",
+      "name": "rejectsOtherOwnerDeletedUnreviewedAndPrivateMedia",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationFromProductTest",
+      "name": "reusesMasterAndGalleryWithoutProductOrBinaryWrites",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationFromProductTest",
+      "name": "retryDoesNotCreateSecondItem",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationIdentityTest",
+      "name": "createPreservesExplicitFieldsAndIndependentItemNumbers",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationIdentityTest",
+      "name": "multipartBindingHasOneResolvableConstructor",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationIdentityTest",
+      "name": "jsonFactsAcceptStructuredIdentityAndOldPayloads",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationImageAuthorizationReadTest",
+      "name": "unrelatedDeletedImageDoesNotHidePublicStandaloneImage",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationImageAuthorizationReadTest",
+      "name": "noDeletedProductsSkipAllAssociationScans",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationImageAuthorizationReadTest",
+      "name": "privateScopeRemainsDeniedDespiteLiveAssociation",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationImageAuthorizationReadTest",
+      "name": "deletedGalleryAssociationIsDenied",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationImageAuthorizationReadTest",
+      "name": "unlinkedRecommendationSharingExactImageKeepsItAvailable",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationImageAuthorizationReadTest",
+      "name": "activeMasterSharingExactImageKeepsItAvailable",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationImageAuthorizationReadTest",
+      "name": "liveRecommendationSharingExactImageKeepsItAvailable",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationImageAuthorizationReadTest",
+      "name": "deletedDirectAssociationIsDenied",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationImageAuthorizationReadTest",
+      "name": "similarPrefixDoesNotAuthorizeDeletedImage",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationIssueDateServiceTest",
+      "name": "sameFactsAtCurrentVersionDoNotRewriteReviewerTimeOrHistory",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationIssueDateServiceTest",
+      "name": "correctedDateRetainsBeforeAndAfterEvidenceAndAcceptsHttpsReference",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationIssueDateServiceTest",
+      "name": "rejectedSourceReviewNeverTouchesPostOrHistory",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationIssueDateServiceTest",
+      "name": "absentOrPartialReviewReadsUnknownWithoutLeakingUnreviewedReference",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationIssueDateServiceTest",
+      "name": "staleVersionRefusesWithoutHistoryOrWrite",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationIssueDateServiceTest",
+      "name": "persistsReviewedCalendarEvidenceWithServerIdentityAndKeepsPublicationFacts",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationIssueDateServiceTest",
+      "name": "crossMerchantLookupIsBoundToAuthenticatedOwner",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationIssueDateServiceTest",
+      "name": "customerAndAnonymousCannotReadOrWriteEvenWithKnownPostId",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationItemPublicationTest",
+      "name": "sevenPublicItemsStayOnlineWhileAnEighthIsAppendedAndThenPublished",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationItemPublicationTest",
+      "name": "currentVersionAndEvidenceHashBothBindTheDecision",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationItemPublicationTest",
+      "name": "permissionFailuresCannotReadOrPublishOtherMerchantItems",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationItemPublicationTest",
+      "name": "publishedItemsCannotBeMutatedOrRemovedThroughPendingEditors",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationItemPublicationTest",
+      "name": "firstReadyItemOpensIssueWithoutPendingLeakThroughDetailBrowseDirectoryCatalogOrCover",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationItemPublicationTest",
+      "name": "fromProductLostResponseRetryRecognizesTheCreatedVersionEvenAfterMasterChange",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationItemPublicationTest",
+      "name": "pendingQuotationDoesNotInfluencePublicPriceResolution",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationItemPublicationTest",
+      "name": "changedMasterDoesNotRewriteAnOlderIssueOrItsQuoteAndSource",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationItemPublicationTest",
+      "name": "legacyVersionRemainsUnknownAndStoredIssueFactsBeatAnUnrelatedCurrentMaster",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationItemPublicationTest",
+      "name": "publicationDtoRejectsIdentityAndPermissionFields",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationItemPublicationTest",
+      "name": "lostResponseReplayIsIdempotentButChangedBodyOrCrossItemKeyConflicts",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationItemPublicationTest",
+      "name": "newlyAddedDraftIsNeverMadePublicByTheOldWholeIssueButton",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationItemPublicationTest",
+      "name": "syntheticLegacyCutoverKeepsTheAlreadyVisibleCartonAndOnlyPublishesTheLaterRecipeInItsNewIssue",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationItemPublicationTest",
+      "name": "missingReviewSourceTranslationOrVerifiedImageCannotPublish",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationProductIntakeTest",
+      "name": "explicitPhotoIsTypedAsUserProvidedAndMasterPrecedesLink",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationProductIntakeTest",
+      "name": "customerCannotCreateOrStore",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationProductIntakeTest",
+      "name": "exactItemAndSpecDoesNotCreateDuplicate",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationProductIntakeTest",
+      "name": "clueOnlyIsPrivateAndNeverPersistedOrLinkedEvenOnRetry",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationPublicReadBatchTest",
+      "name": "feedBatchesTaxonomyAndReferencesOnceWhileRetainingEveryOccurrence",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationPublicReadBatchTest",
+      "name": "nodeDirectoryReadsVisibilityWithoutBuildingFullProductOrQuoteProjections",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RecommendationSourceImageTest",
+      "name": "rejectsNonOfficialHostsPortsCredentialsAndRedirectTargetsBeforeNetwork",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ReferenceMigrationTest",
+      "name": "retainsLegacyRowsAndSeparatesWindowsFromImageIdentity",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ReferenceProductIdentityTest",
+      "name": "exactSupplierItemVariantReusesMasterAcrossIssuesAndChannelsWithoutPriceWrites",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ReferenceProductIdentityTest",
+      "name": "newProductIdentityDoesNotContainIssueOrOfferWindow",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ReferenceProductIdentityTest",
+      "name": "ambiguousOrDeletedExistingCodesRequireExplicitReviewRatherThanNewProfiles",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ReferenceQuoteTest",
+      "name": "overlappingDifferentPricesConflictInsteadOfChoosingNewerMail",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ReferenceQuoteTest",
+      "name": "itemDatesWinAndOnlyExplicitlyApplicableActivityCanFillMissingBounds",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ReferenceQuoteTest",
+      "name": "channelsUnitsVariantsAndIncompleteDatesNeverMerge",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ReferenceQuoteTest",
+      "name": "jstInclusiveEndFutureAndFallbackUseOnlyKnownWindows",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ReferenceQuoteTest",
+      "name": "publicProjectionNeverUsesDraftQuotesAndRedactsInternalSourceIdentity",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ReferenceQuoteTest",
+      "name": "inheritedWindowRequiresEvidenceAndCannotProduceAnInvertedItemRange",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ReferenceQuoteTest",
+      "name": "unknownStartNeverUsesReceiptTimeOrBecomesExpired",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ReferenceQuoteTest",
+      "name": "frozenSourceItemScopesQuotesDespiteCatalogDisplayAndLaterLiveEdits",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ReferenceQuoteTest",
+      "name": "identitiesExcludeImagesAndAllowIndependentPeriodsAndHistoryAtoBtoA",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RustFsObjectStoreTest",
+      "name": "simplePutStoresExactTypeAndRawHashWithoutBucketOrAclAdministration",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RustFsObjectStoreTest",
+      "name": "readsValidateHeadLengthAndTypeBeforeReturningBytes",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RustFsObjectStoreTest",
+      "name": "proposedPolicyUsesRustFsActionFamiliesAndArnResourcesWithoutBroadeningAllows",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RustFsObjectStoreTest",
+      "name": "multipartCompletesInOrderAndFailureAbortsWithoutLeakingProviderMessage",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RustFsObjectStoreTest",
+      "name": "migrationInventoryListsOnlyCasPrefixAndRequiresAdvancingServerCursor",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.RustFsObjectStoreTest",
+      "name": "disabledAdapterNeedsNoFilesAndRejectsInsecureEnabledEndpoint",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.SelfProfileServiceTest",
+      "name": "optionalAddressOmissionAndClearAreDistinctAndCoordinatesAreBounded",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.SelfProfileServiceTest",
+      "name": "databaseUniqueConstraintRaceIsReturnedAsADuplicateRequest",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.SelfProfileServiceTest",
+      "name": "socialIdentityChangeDoesNotInheritTrustedVerificationOrInternalNote",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.SelfProfileServiceTest",
+      "name": "duplicateInvalidOrNonStringEmailIsRejected",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.SelfProfileServiceTest",
+      "name": "changingEmailPreservesThrottleButSameNormalizedEmailKeepsVerification",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.SelfProfileServiceTest",
+      "name": "disabledAccountIsRejectedForSelfWhileAdminCanStillLockItForReenable",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.SelfProfileServiceTest",
+      "name": "refreshesLockedEntityBeforeApplyingOnlyPresentFields",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.SelfProfileServiceTest",
+      "name": "rejectsUnknownIdentityAndNestedVerificationFields",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.ServiceOfferMigrationTest",
+      "name": "nullableAdditionsPreserveLegacyIssuesAndEnforceSourcePairAndIdempotency",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.SmtpDeliveryTest",
+      "name": "alwaysVerifiesServerIdentityRequiresEncryptionAndBoundsNetworkWaits",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.StorefrontTripVisibilityTest",
+      "name": "upcomingAndTodayRemainVisibleIndependentOfProductAvailability",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.StorefrontTripVisibilityTest",
+      "name": "inProgressStaysCurrentUntilItsActualStatusChangesEvenAfterDeliveryDate",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.StorefrontTripVisibilityTest",
+      "name": "ordinaryPublicQueryRemainsBookableOnlyAndDisplayOptInDoesNotBroadenFields",
+      "status": "PASS"
+    },
+    {
+      "className": "com.bobbuy.service.VerificationMailTemplateTest",
+      "name": "fourLocalesUseCorrectSiteAndSameCodeWithoutLocaleAffectingIdentity",
+      "status": "PASS"
+    }
+  ],
+  "jacocoRootCounters": {
+    "INSTRUCTION": {
+      "missed": 13207,
+      "covered": 66344
+    },
+    "BRANCH": {
+      "missed": 3217,
+      "covered": 5312
+    },
+    "LINE": {
+      "missed": 1715,
+      "covered": 8815
+    },
+    "COMPLEXITY": {
+      "missed": 3225,
+      "covered": 4332
+    },
+    "METHOD": {
+      "missed": 508,
+      "covered": 2768
+    }
+  },
+  "configuredCheck": "PASS"
+}

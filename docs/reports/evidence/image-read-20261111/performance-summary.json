@@ -1,0 +1,37 @@
+{
+  "result": "PASS",
+  "method": "Same IAB browser, 390x844, public production node 1001; three cache-enabled reloads and separate browser-cache-disabled reload; requestWillBeSent/loadingFinished timestamps; server and CDN not reset",
+  "beforeWarmMs": [
+    1419.497000053525,
+    1862.7269999706186,
+    2476.901000016369
+  ],
+  "afterWarmMs": [
+    1328.8299999549054,
+    1041.5090000024065,
+    753.0529999639839
+  ],
+  "beforeMedianMs": 1862.7269999706186,
+  "afterMedianMs": 1041.5090000024065,
+  "firstTwoColdImages": [
+    {
+      "url": "https://bobuy.cc/api/storefront/recommendation-images/e5d42bc7-e135-46dd-ae28-2e689ad56ed6",
+      "bytes": 143736,
+      "ttfbMs": 1048.614,
+      "requestDurationMs": 1050.6509999977425,
+      "navigationToCompleteMs": 2290.329000039492
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/recommendation-images/badef57a-fe6f-4f1b-bfd2-e721b3459be5",
+      "bytes": 1559848,
+      "ttfbMs": 1373.26,
+      "requestDurationMs": 1397.4840000155382,
+      "navigationToCompleteMs": 2637.267000041902
+    }
+  ],
+  "firstTwoColdCompleteMs": 2637.267000041902,
+  "frontendBundleReduction": 0.35496552248604374,
+  "frontendSource": "8bfb479",
+  "coreSource": "b8b7158",
+  "warmReduction": 0.4408686833772021
+}

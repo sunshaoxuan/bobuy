@@ -1,0 +1,5 @@
+{
+  "exitCode": 0,
+  "stdout": "{\"result\": \"PASS\", \"at\": \"2026-11-11T11:55:40.884918+00:00\", \"removedContainers\": [], \"removedTags\": [{\"tag\": \"bobuy/core:20261111.3\", \"image\": \"sha256:00037cd4e71207e4d4d97caa178179da97792d4cb73b3bad5a3aa73896d3b57a\", \"exitCode\": 0, \"output\": \"Untagged: bobuy/core:20261111.3\\nDeleted: sha256:00037cd4e71207e4d4d97caa178179da97792d4cb73b3bad5a3aa73896d3b57a\\n\", \"error\": \"\"}], \"removedStagingArchiveBytes\": 0, \"runningContainersUnchanged\": true, \"databaseBackupsRetained\": true, \"globalPrune\": false}\n",
+  "stderr": ""
+}

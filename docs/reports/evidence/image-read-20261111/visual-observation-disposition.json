@@ -1,0 +1,55 @@
+{
+  "initialHeaderHeight": 120,
+  "initialHeadingY": 177.875,
+  "headerToHeadingGap": 57.875,
+  "headingDirectoryCenterError": 0.0,
+  "brandSlotHeight": 18,
+  "sameRowTitleTopSpread": 0.015625,
+  "geminiObservations": "Brandless title shift refuted by actual 18px slot, paired pixel view and <=0.016px title-top spread. Header observation came from the 80px scrolled state; zero-scroll native screenshot and 57.875px gap verify initial layout. Offscreen blank images were lazy-loaded; real keyboard navigation loaded all four. External advice is retained independently; primary agent owns the final judgement.",
+  "narrowTitleGlyphs": [
+    {
+      "card": 0,
+      "role": "left-aligned two-line title",
+      "glyph": [
+        31,
+        475,
+        110,
+        35
+      ],
+      "hitArea": {
+        "height": 55.390625,
+        "width": 128.5,
+        "x": 27,
+        "y": 468.34375
+      },
+      "margins": [
+        4,
+        7,
+        15,
+        14
+      ]
+    },
+    {
+      "card": 1,
+      "role": "left-aligned two-line title",
+      "glyph": [
+        193,
+        475,
+        111,
+        35
+      ],
+      "hitArea": {
+        "height": 55.390625,
+        "width": 128.5,
+        "x": 189.5,
+        "y": 468.34375
+      },
+      "margins": [
+        4,
+        7,
+        14,
+        14
+      ]
+    }
+  ]
+}

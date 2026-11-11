@@ -1,0 +1,5 @@
+{
+  "exitCode": 0,
+  "stdout": "{\"exitCode\": 0, \"stdout\": \"\", \"stderr\": \"\", \"status\": {\"phase\": \"WRITES_OPEN\", \"at\": \"2026-11-11T11:43:31Z\", \"source\": \"b8b7158054e855a3bc52eb6a41f966dc804e9dac\", \"seconds\": 162.26, \"databaseVersion\": 32, \"sqlMigration\": false, \"imagesUpdated\": [\"core-service\"], \"contentUnchanged\": true}}\n",
+  "stderr": ""
+}

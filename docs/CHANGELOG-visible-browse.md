@@ -1,10 +1,10 @@
 # Candidate change history
 
-## 20261111.4 image authorization reads, candidate accepted locally
+## 20261111.4 production accepted
 
 - 图片访问权限读取仅投影商品图集及推荐关联字段，保留 PUBLIC 范围、软删除拒绝、共享引用及完整 URL 精确比较，减少逐图完整实体读取。
 - 9 项权限正反例、真实 PostgreSQL 投影及 HTTP 检查通过。正式后端 660 项中 636 通过、24 条件跳过，零失败，覆盖率门禁通过。复用 8bfb479 前端制品及 757 项前端测试，无数据库迁移。
-- 生产图片冷缓存及最终健康回执随发布补录。
+- 生产首排两图禁缓存完成时间 4.96s 降至 2.64s，目录暖读中位数 1.86s 降至 1.04s；最终 601.7 秒、14 次健康采样通过且零重启，替换的旧 Core 已清理。实际截图和签名见 [最终证据](reports/evidence/image-read-20261111/README.md)。
 
 ## 20261111.3 compact cards, candidate accepted locally
 

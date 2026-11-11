@@ -1,0 +1,40 @@
+{
+  "result": "PASS",
+  "core": {
+    "id": "4b4db3641bf691040332e373658fb38736174ffcf2b4d9c8ec51496b513bf7f1",
+    "image": "sha256:1917e200c69a6f94d40326493cd904d13ca3c005269bb604c8335f746b6ae566",
+    "revision": "b8b7158054e855a3bc52eb6a41f966dc804e9dac",
+    "health": "healthy",
+    "restarts": 0,
+    "startedAt": "2026-11-11T11:41:13.958631986Z"
+  },
+  "frontend": {
+    "id": "8fb3a133a6095c3bffa67278d24a8037342b86d55dcb2ba001201edc859bfcff",
+    "image": "sha256:13cead62b2f1a4d09dfdfae46c359fa1d31832e3096fa2a077527f4bf9cf343b",
+    "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+    "health": "running",
+    "restarts": 0,
+    "startedAt": "2026-11-11T11:06:13.146712118Z"
+  },
+  "databaseVersion": "32",
+  "sqlMigration": false,
+  "publicHttp": {
+    "home": 200,
+    "products": 200,
+    "reviews": 200,
+    "productCount": 24,
+    "sampleReviewCount": 0,
+    "distributionBins": 9,
+    "path": "HTTPS origin; public CDN separately checked in real browser"
+  },
+  "protectedUnchanged": true,
+  "configuredGates": "PASS",
+  "functional": "PASS",
+  "geometry": "PASS",
+  "visual": "PASS",
+  "performance": "PASS",
+  "stabilitySeconds": 601.7,
+  "stabilitySamples": 14,
+  "oldCoreRemoved": true,
+  "backupsRetained": true
+}

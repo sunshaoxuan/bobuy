@@ -1,0 +1,359 @@
+{
+  "at": "2026-11-11T11:55:42.971831+00:00",
+  "status": {
+    "phase": "WRITES_OPEN",
+    "at": "2026-11-11T11:43:31Z",
+    "source": "b8b7158054e855a3bc52eb6a41f966dc804e9dac",
+    "seconds": 162.26,
+    "databaseVersion": 32,
+    "sqlMigration": false,
+    "imagesUpdated": [
+      "core-service"
+    ],
+    "contentUnchanged": true
+  },
+  "coreJarSha256": "098f1aabfc33dfe7fcf46df306273310945da2ed86647f9032e8d689a374195e",
+  "containers": {
+    "core-service": {
+      "id": "4b4db3641bf691040332e373658fb38736174ffcf2b4d9c8ec51496b513bf7f1",
+      "image": "sha256:1917e200c69a6f94d40326493cd904d13ca3c005269bb604c8335f746b6ae566",
+      "revision": "b8b7158054e855a3bc52eb6a41f966dc804e9dac",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-11-11T11:41:13.958631986Z"
+    },
+    "frontend": {
+      "id": "8fb3a133a6095c3bffa67278d24a8037342b86d55dcb2ba001201edc859bfcff",
+      "image": "sha256:13cead62b2f1a4d09dfdfae46c359fa1d31832e3096fa2a077527f4bf9cf343b",
+      "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+      "health": "running",
+      "restarts": 0,
+      "startedAt": "2026-11-11T11:06:13.146712118Z"
+    }
+  },
+  "history": [
+    {
+      "installed_rank": 1,
+      "version": "1",
+      "script": "V1__baseline_schema.sql",
+      "checksum": -61108690,
+      "success": true
+    },
+    {
+      "installed_rank": 2,
+      "version": "2",
+      "script": "V2__refresh_token_sessions.sql",
+      "checksum": 875571210,
+      "success": true
+    },
+    {
+      "installed_rank": 3,
+      "version": "3",
+      "script": "V3__product_attributes_jsonb.sql",
+      "checksum": 2137541239,
+      "success": true
+    },
+    {
+      "installed_rank": 4,
+      "version": "4",
+      "script": "V4__customer_storefront.sql",
+      "checksum": 1289168936,
+      "success": true
+    },
+    {
+      "installed_rank": 5,
+      "version": "5",
+      "script": "V5__user_role_sets.sql",
+      "checksum": 138128310,
+      "success": true
+    },
+    {
+      "installed_rank": 6,
+      "version": "6",
+      "script": "V6__regional_delivery_trips.sql",
+      "checksum": -1381036153,
+      "success": true
+    },
+    {
+      "installed_rank": 7,
+      "version": "7",
+      "script": "V7__product_recommendations.sql",
+      "checksum": 180735127,
+      "success": true
+    },
+    {
+      "installed_rank": 8,
+      "version": "9",
+      "script": "V9__recommendation_offer_facts.sql",
+      "checksum": -688720859,
+      "success": true
+    },
+    {
+      "installed_rank": 9,
+      "version": "10",
+      "script": "V10__recommendation_classification.sql",
+      "checksum": 1921972435,
+      "success": true
+    },
+    {
+      "installed_rank": 10,
+      "version": "11",
+      "script": "V11__catalog_source_variants.sql",
+      "checksum": 1482338030,
+      "success": true
+    },
+    {
+      "installed_rank": 11,
+      "version": "12",
+      "script": "V12__legacy_catalog_variant_compatibility.sql",
+      "checksum": 1018056134,
+      "success": true
+    },
+    {
+      "installed_rank": 12,
+      "version": "13",
+      "script": "V13__currency_and_reviewed_sale.sql",
+      "checksum": -1626804536,
+      "success": true
+    },
+    {
+      "installed_rank": 13,
+      "version": "14",
+      "script": "V14__recommendation_localizations.sql",
+      "checksum": -1895405431,
+      "success": true
+    },
+    {
+      "installed_rank": 14,
+      "version": "15",
+      "script": "V15__recommendation_product_gallery.sql",
+      "checksum": 2075064081,
+      "success": true
+    },
+    {
+      "installed_rank": 15,
+      "version": "16",
+      "script": "V16__product_catalog_metadata.sql",
+      "checksum": 2007865342,
+      "success": true
+    },
+    {
+      "installed_rank": 16,
+      "version": "17",
+      "script": "V17__product_price_adjustments.sql",
+      "checksum": -1526404061,
+      "success": true
+    },
+    {
+      "installed_rank": 17,
+      "version": "18",
+      "script": "V18__encrypted_mail_settings.sql",
+      "checksum": 1800274322,
+      "success": true
+    },
+    {
+      "installed_rank": 18,
+      "version": "19",
+      "script": "V19__postgres_image_access_scope.sql",
+      "checksum": -1435531544,
+      "success": true
+    },
+    {
+      "installed_rank": 19,
+      "version": "20",
+      "script": "V20__product_logical_deletion.sql",
+      "checksum": -1777451984,
+      "success": true
+    },
+    {
+      "installed_rank": 20,
+      "version": "21",
+      "script": "V21__media_transfer_outbox.sql",
+      "checksum": 1158085533,
+      "success": true
+    },
+    {
+      "installed_rank": 21,
+      "version": "22",
+      "script": "V22__object_only_media_metadata.sql",
+      "checksum": 282376610,
+      "success": true
+    },
+    {
+      "installed_rank": 22,
+      "version": "23",
+      "script": "V23__reference_offer_windows.sql",
+      "checksum": -1095905402,
+      "success": true
+    },
+    {
+      "installed_rank": 23,
+      "version": "24",
+      "script": "V24__recommendation_article_languages.sql",
+      "checksum": 1504519504,
+      "success": true
+    },
+    {
+      "installed_rank": 24,
+      "version": "25",
+      "script": "V25__reversible_product_identity.sql",
+      "checksum": 166368124,
+      "success": true
+    },
+    {
+      "installed_rank": 25,
+      "version": "26",
+      "script": "V26__recommendation_service_offers.sql",
+      "checksum": -866209850,
+      "success": true
+    },
+    {
+      "installed_rank": 26,
+      "version": "27",
+      "script": "V27__explicit_product_markers.sql",
+      "checksum": -1017511264,
+      "success": true
+    },
+    {
+      "installed_rank": 27,
+      "version": "28",
+      "script": "V28__checkout_delivery_snapshot.sql",
+      "checksum": -1352681989,
+      "success": true
+    },
+    {
+      "installed_rank": 28,
+      "version": "28.1",
+      "script": "V28_1__recommendation_issue_date.sql",
+      "checksum": -708289696,
+      "success": true
+    },
+    {
+      "installed_rank": 29,
+      "version": "28.2",
+      "script": "V28_2__product_rating.sql",
+      "checksum": 1805532871,
+      "success": true
+    },
+    {
+      "installed_rank": 30,
+      "version": "29",
+      "script": "V29__customer_order_amendments.sql",
+      "checksum": -1231025769,
+      "success": true
+    },
+    {
+      "installed_rank": 31,
+      "version": "30",
+      "script": "V30__costco_onboarding_jobs.sql",
+      "checksum": -344474371,
+      "success": true
+    },
+    {
+      "installed_rank": 32,
+      "version": "31",
+      "script": "V31__recommendation_item_publication.sql",
+      "checksum": 1431704188,
+      "success": true
+    },
+    {
+      "installed_rank": 33,
+      "version": "32",
+      "script": "V32__user_product_reviews.sql",
+      "checksum": -538346819,
+      "success": true
+    }
+  ],
+  "frontendFiles": {
+    "index.html": "1d807205c0b127047cb56b8e8130d962a0094b79e379d9f6240f94cff8470556",
+    "robots.txt": "871fb754da59b3ea07dbb080c1dd36f766d33004d80e5ab3ebfd128163eaf52c",
+    "home.html": "4c2a04808d34dbc3093e99db87c3ec3abce76cc7a5ab794dd2b3d7299d1da3d1",
+    "assets/Collapse-mUF2bXcA.js": "ce970cc9230286c2974ef454940110b86119920fc7fc38e16c9eb28b4d0f5e29",
+    "assets/ProductMarkerBadges-YtkPTPIq.css": "0d4312f15309eb7ed571b6e37c0020d1edc79b2478331f01dd8c2dcd01dcdb2c",
+    "assets/index-2jJoMMGW.js": "152103d85b0a4c8204a087cd1346dfb1038295c0a7be9a23aae5ea59f73419cc",
+    "assets/EditOutlined-CK6wHicU.js": "145cfc2b78ea8b93f2e1ab3ac655271c1e1cc5e2adb084cd8cf31772a164aa71",
+    "assets/Recommendations-BR6eX9U6.css": "a5fc8fb0758186d686acf3fbaca080c3d3851f65ab05221e30061df81abe3ef8",
+    "assets/products/matcha-muffins.jpg": "652dfcc95454cf539e9056bdd2aea050a003467ac5e304d0ba4856c38d688793",
+    "assets/products/milk.png": "73c02467723cc54ba5668a0691383620946ad9b88a33b422b5b3ddadbd617cb3",
+    "assets/products/paper_towels.png": "f4e28f967564ab68dd7e75cda0e765e0c6d251e13b3c305ca02f33561c9aa843",
+    "assets/products/strawberries.png": "2a97ccf4f6cb040699c6438af58b76233f88b468b6436c6d2f49619ca7dbade5",
+    "assets/products/chicken.png": "6d27a9305a0bfa7caacce28e45d92cdb2bc27ce7d6082b733f4ac1ee55797d9b",
+    "assets/products/spinach.png": "9b12209d94b35e100df3e56e1e788e7fbd2114879e701961153d79fc82163b3b",
+    "assets/products/croissants.png": "27bbf1f4a055af022cf029cdb929c9d78a55f2b25b087965b8ebb4c245977100",
+    "assets/styleChecker-D1QJmx94.js": "4ef703045b5c91f6cdcfed1b57b59fb7153740f52e6d7aea2e31c8f0559b0421",
+    "assets/OrderProductIdentity-Chy5NHcs.js": "d7d5eb1ec7a912df542a840e6d8348569a77770f91840e1e225e7d51f96b4c68",
+    "assets/AiQuickAddModal-BJYMPZti.js": "bd144fe235675758c6f34b978d8a7fc52afe6003bf2af5fbac282283c93d6a22",
+    "assets/PublicRecommendations-COr8eFS8.js": "ddc2eddc80c42534919d5b78022d1416cf2c330343b725e5552b92f621656c92",
+    "assets/RecommendationImageViewer-BLxxswKQ.js": "e5f87ad279e647317d75cc0dda5793550b061ed50ac4cc509b0f0b93ef6c1d6a",
+    "assets/ClientOrders-DXjzLH2C.js": "1037bee80e7236f96a62cb32c3654cc7796988b40c4e09aeb875a6bb5571ddb1",
+    "assets/Recommendations-4jEvLXZk.js": "91ac339a776850afdb06113abc45e3ddb9fc871b574ab9480ba030a01cc57a66",
+    "assets/ProcurementHUD-CYK8ek4p.js": "3d2ca378664667ddb2ed32b7efafd72542fe20ca5fdeede1ba4567180299ed8f",
+    "assets/index-B4rrZzfi.js": "b21f3f5df244cf663af21eca11c0856e149c2eb6f4d35e67977b4d551247bc6c",
+    "assets/ImageLightbox-BPxkg2H0.css": "e2730b30d937b6766dedba079a9255c076aee6f2daea6a8dbd16cefb153b6151",
+    "assets/PickingMaster-D-cWw9Ad.js": "fb192b7bd1b7f4ef6e6fca631a4abeedd2907c28c60202a38d2568e107aa9c54",
+    "assets/index-CD68CvGi.js": "166c83d0757362c0ba58fcfa9ab8f3845458ba880908edd305de491954797dda",
+    "assets/Suppliers-BGPhlpQF.js": "2cf663454209a67805e07bd6ced9bf3fe192f5e05fb2496cc35de7028308db27",
+    "assets/index-Co3LxVIo.js": "4230a9026efc760401f6537b848bee5dfab9d7abe2861f016d736280ddbcee0b",
+    "assets/stock-master-OZMP8LMe.js": "e019f29f02a4523a84f92ef8d2a087d645e6c0a082ad1b06747b6a23a15f51a1",
+    "assets/MailSettings-6q-TCPjh.js": "3d3ba3e08c1fd5677ba5ad5c15d63580a392c59d9b397b19f3eec287f953867c",
+    "assets/ProductMarkerEditor-dqFA2r9N.js": "b8e04e7ff2090da4f94cbb089412743b5590698bd39237ea687766aad7c87670",
+    "assets/WarningOutlined-PLGY3UBV.js": "23ae45dfae3a2290e9bc1b22d6bf3fe8663e43c479f49430462201b38d4a8d25",
+    "assets/useBreakpoint-BCg_-d7v.js": "4fbb62d47f9c0ad2cdb834f1859646a44c390d141c68684d896dc9e9cf09f162",
+    "assets/ClientChat-OOqn9kt0.js": "051e30f599ed0936cbdb5e7e785abfcf1eacbe261dd5f65f816889f02aeace5c",
+    "assets/MerchantCustomers-D7KMtyxy.js": "4e1b6581d466b74b7fe128bc7351288d0aa55e38e52e5f271f38ef5ddc1b9a9f",
+    "assets/Dashboard-MTZrxzaV.js": "9100272e9121cdd8361151397e886102d05328766cc725cb792de778922b8f05",
+    "assets/index-qvMruRtp.js": "7116f39e9d749de6be4c4189744c3c16ddf4675a868666324cde4ea95a30351a",
+    "assets/index-VecNOwh-.js": "6368c2da3f2f54792c8e86e8590f712074e50e1fd28dc61aab4e4d6ba6ba0e1b",
+    "assets/index-CZkpOfNQ.js": "e8c6284acb2bdf0e8bbdb32f68715d2c897846c0a599f60ec8a8b03a8708dc3e",
+    "assets/Pagination-DwUE3YnC.js": "4857bb4ebe8d9f031c9f6a431c8afd0532b1e42efa5fceaab09a14b9ee3490e1",
+    "assets/index-DXJAUSYo.js": "8becd076e01f5492005ba93cdfef84c3dbca0ca0ab8301db1caa6356c98de929",
+    "assets/OrderDesk-DhfD79zn.js": "f6cd2b02459635c6ec2b623c674e98fc696d5e1fd49498a0fd593e52a97f037a",
+    "assets/index-BvaWa9xn.js": "6ba88bf76ea9bd079287566fd0e0be133fc0e310f928d1f941bd7ed2929fe333",
+    "assets/Currencies-y4hltM6P.js": "4af92eed0e0c21acf4df1b844a556f4dd7f0b1e56059ad0cd8c85c3c5527b2e7",
+    "assets/RecommendationImageViewer-ILdPQ99W.css": "e7e048dad2c9ed20723701917e72bbe17f695111062cb04d734fab987a03acb4",
+    "assets/ProductMarkerBadges-B4AaYe9C.js": "238b54e3f8a2a77aa0974497d3c9c97ae980732c49867a4833bd7be9e5eb53d4",
+    "assets/ProductMetadata-BvhDpo3g.js": "f9d3fa8432cdf6773c98d6c28bb622d4cde5bdb71a5f4da8600cdff6803c0e83",
+    "assets/useNetworkStatus-DolnwcFL.js": "39824691a9b22048059abf9b183fd768be38a9341e7ccd12a4f228bfaaee7e26",
+    "assets/procurement-dashboard-DGv3JbfR.js": "fab161e313430b72c613451f432bca1bb5bdffbf5277f333200a3afd1732fa94",
+    "assets/SaveOutlined-DIQbz6vf.js": "87f504000f77aa2fd8e829bcf45332f41a633ece7a49cfc99e4ca614107923a0",
+    "assets/CheckOutlined-ENEIrmFE.js": "6d118d24f8e3fe4bc8200bfd1928e56e6d2df8a913b397104a2cc2541a291ec3",
+    "assets/chat-flow-BOcgwOgX.js": "52e7cbf09fa4b9e39a9abc6bbebffb8846cafe0f6d2ecbc800d750607d17cc07",
+    "assets/ClientTrips-tsWmtGse.js": "d299fde7aca7cd205d14ea35094f5187ccc62053c88ba2537881474a906155d0",
+    "assets/SendOutlined-vMDlhp_G.js": "48fcf3316b6a238508951bb2245b13ccc678fb982ca604b80e620fe32bc2c855",
+    "assets/ArrowLeftOutlined-BaHq3pHw.js": "f731f8c2117f7f0764d266166d5cecf8e3ab744e12cc544a251c8b75811f02e1",
+    "assets/ProductArchive-s4Q_DEzK.css": "6465f1715caf52425d5ea85939c370f6f9e520bba19c3f16157f1256fa0d96b4",
+    "assets/Users-BzzM5HGi.js": "af2e2e531cb7594c2ae68635ea06117ad760d152bf756974ae1c6ce2352f26cb",
+    "assets/ClientBilling-B_tTL8ZQ.js": "433c475f1e70ce59bacdc23fb6d9c3db4f2390481a9809f2d88e78857dee4076",
+    "assets/LoginPage-Dh03ykJ0.js": "bd01b0245607c9e60003805d64f942149f69b6daf2dde692aa1cce716802b5ee",
+    "assets/ReloadOutlined-CEP7mjut.js": "b146d881faa9f58c32d82bd916cd8f37208683ed53adcf8b67faaed18e158fb6",
+    "assets/index-DZQr4a7U.css": "49b178d6038128d7021af973500faef7060df458749020be4f6b7867080f187e",
+    "assets/index-Cld7-vS8.js": "c63f58465f7e281fa0db25e0a3395179ba15611630dd430c63b6a1ae18921522",
+    "assets/Table-DnWViUuY.js": "bf2e713a6a05b2c2699547e2d98f3f0cde8bdf44e69cc9204e9c500ca47c8f37",
+    "assets/PublicRecommendations-DhYyKoQc.css": "57228e6abd81d4b8c752bf45697153f2ce08d5660413c4638cf9f3bcee8ab2d5",
+    "assets/Orders-kp3-FTId.js": "79050f2fb57d5e7a6f5f421140478f5a56f58ac6f3534bfe3a009b7896bddd04",
+    "assets/ProductMarkers-BIPC5tMX.js": "6eb2944a6c3868be0fb5702e94f470d2a5f4f1627e4c4b7bd950380b523c1b7c",
+    "assets/CameraOutlined-DoAe1dEp.js": "d6a059efd13328f89095b08a8366f68660891c967b86a87074e95a6bf83eb217",
+    "assets/ImageLightbox-B7iQbgoI.js": "c648df4eaf363e4dd4754e82386965c0d0899a76146c20498105089b946de864",
+    "assets/audit-view-BMcqpxkt.js": "f53dde5328422a9d2049b5014e766a9ff2bcfc2a1c579f43bf8dbf902c82bfd1",
+    "assets/ProductArchive-Dh81hUD2.js": "c6da19e648eeab7920ab89687fadae036e0bc84e65e122c5ac0df6185c7225d9",
+    "assets/index-CFzqh9Cf.js": "8a8d40c7632804fb40ad9090961e660c51b896a31761e66a743c5b50ff3d363a",
+    "assets/Breadcrumb-BDisYzHF.js": "d458bf4324718699626c87cff0dc3a3a2c6bfe7b298e8210b8df49f1f00f3f21",
+    "assets/index-B2G66qiV.js": "bdd5e43d32053a0ef061120efd7bfe559716df0d4f3031752943efec9f906e95",
+    "assets/index-CFemXd4y.js": "375bf8306b5418d9019980f51814a7f251b6f9c79dc995d53b58c620a91d9152",
+    "assets/Trips-B-dzM0CW.js": "18b025c879a2e4cb05dd9cebf47e3446bf54b190957eacd779742481c3b58724",
+    "assets/PublicProductCatalog-C_Daw3Xf.js": "83caf424884de0d6a7e8a314857012f32fff846990d34e528faf1f4f1b438101",
+    "release-maintenance.html": "fd6059855891b905e3e8609a1304ceec2ca4ca9959757485a29184624e08fc99",
+    "sitemap.xml": "0986903ffb96564ae8f0dff111ef27f4d5184235c1d467b88c11f250f9d148a0"
+  },
+  "protectedUnchanged": true,
+  "http": {
+    "home": 200,
+    "products": 200,
+    "reviews": 200,
+    "productCount": 24,
+    "sampleReviewCount": 0,
+    "distributionBins": 9,
+    "path": "HTTPS origin; public CDN separately checked in real browser"
+  },
+  "backupSha256": null
+}
