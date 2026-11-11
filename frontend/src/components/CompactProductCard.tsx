@@ -30,7 +30,7 @@ export default function CompactProductCard({name,originalName,language,brand,ite
  const actual=!pending&&quote,kind=actual?'sale':reference?.amount!=null?'reference':'unknown';
  const referenceLabel=t(reference?.state==='EXPIRED'?'card.reference_past':reference?.state==='FUTURE'?'card.reference_future':reference?.state==='UNKNOWN'?'card.reference_undated':'card.reference');
  return <article className="store-product rec-pin catalog-master-card compact-product-card" data-product-id={productId??undefined} data-occurrence-key={occurrenceKey} data-card-detail data-pressed={pressed||undefined} onClick={event=>openCardDetail(event,onOpen)} onPointerDown={event=>{if(event.pointerType!=='mouse')setPressed(true);}} onPointerUp={()=>setPressed(false)} onPointerCancel={()=>setPressed(false)} onPointerLeave={()=>setPressed(false)} onLostPointerCapture={()=>setPressed(false)}>
-  <small className="rec-pin-code" title={`${t('rec.code')}: ${itemNumber||t('rec.not_stated')}`}><span className="compact-card-code-label">{t('rec.code')}:</span><span className="compact-card-code-value">{itemNumber||t('rec.not_stated')}</span></small>
+  <small className="rec-pin-code" title={`${t('rec.code')}: ${itemNumber||t('rec.not_stated')}`}><span className="compact-card-code-value">No.{itemNumber||'?'}</span></small>
   <div className="product-tile">
    <button type="button" className="product-photo" data-detail-trigger="photo" aria-label={t('store.detail_label',{name})} onClick={event=>onOpen(event.currentTarget)}>
     {image?<img src={image} alt={name} loading={eager?'eager':'lazy'} onError={event=>{event.currentTarget.style.display='none';}}/>:<span className="rec-no-product-image">{t('gallery.pending')}</span>}
