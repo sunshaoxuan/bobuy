@@ -1,30 +1,18 @@
 {
+  "source": "d18180d89ea22ae297971d927ab0526277075dff",
   "desktop": {
-    "height": 720,
-    "name": {
-      "bottom": 474.84375,
-      "height": 44,
-      "left": 297,
-      "right": 715.5,
-      "top": 430.84375,
-      "width": 418.5,
-      "x": 297,
-      "y": 430.84375
-    },
+    "height": 900,
     "overflow": false,
+    "profileLoaded": true,
     "scripts": [
-      "/assets/index-DUosJ-K3.js"
-    ],
-    "sections": [
-      "profile-basic-title",
-      "profile-address-title",
-      "profile-social-title"
+      "/assets/index-Bd1s8gna.js"
     ],
     "styles": [
       "/assets/index-CzodR8gn.css"
     ],
-    "width": 1280
+    "width": 1440
   },
+  "accountRelatedSourcesUnchangedAfterMainSync": true,
   "network": [
     {
       "method": "Network.responseReceived",
@@ -34,26 +22,26 @@
     {
       "method": "Network.responseReceived",
       "url": "http://127.0.0.1:5179/assets/index-CzodR8gn.css",
-      "status": 304
+      "status": 200
     },
     {
       "method": "Network.responseReceived",
-      "url": "http://127.0.0.1:5179/assets/index-DUosJ-K3.js",
-      "status": 304
+      "url": "http://127.0.0.1:5179/assets/index-Bd1s8gna.js",
+      "status": 200
+    },
+    {
+      "method": "Network.responseReceived",
+      "url": "http://127.0.0.1:5179/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "Network.responseReceived",
+      "url": "http://127.0.0.1:5179/api/auth/me",
+      "status": 200
     },
     {
       "method": "Network.responseReceived",
       "url": "http://127.0.0.1:5179/api/auth/profile",
-      "status": 200
-    },
-    {
-      "method": "Network.responseReceived",
-      "url": "http://127.0.0.1:5179/api/auth/me",
-      "status": 200
-    },
-    {
-      "method": "Network.responseReceived",
-      "url": "http://127.0.0.1:5179/api/auth/me",
       "status": 200
     }
   ],
@@ -62,5 +50,5 @@
     "orders": "/client/orders",
     "merchant": "/admin/dashboard"
   },
-  "adminFixtureLimitation": "Existing isolated local Core reports null-id aggregate errors on admin dashboard. Account profile requests and customer order navigation succeed; no production data was changed."
+  "adminFixtureLimitation": "Existing isolated local Core null-id aggregate errors occur on the separate admin dashboard; account profile and customer orders succeed. Production admin route is checked separately."
 }

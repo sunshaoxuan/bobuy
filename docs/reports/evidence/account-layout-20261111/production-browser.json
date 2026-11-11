@@ -1,0 +1,91 @@
+{
+  "source": "6880d273769f518684642d112c4f0b2b4bb6d2b2",
+  "environment": "production",
+  "viewports": [
+    [
+      1440,
+      900
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      360,
+      800
+    ]
+  ],
+  "menus": [
+    {
+      "label": "我的资料",
+      "path": "/account"
+    },
+    {
+      "label": "我的订单",
+      "path": "/admin/orders"
+    },
+    {
+      "label": "商家维护",
+      "path": "/admin"
+    }
+  ],
+  "profileBlocks": [
+    "基本资料",
+    "收货地址",
+    "社交账号",
+    "邮箱验证"
+  ],
+  "horizontalOverflow": false,
+  "orderRoute": {
+    "hasError": false,
+    "headings": [],
+    "path": "/admin/orders"
+  },
+  "maintenanceRoute": {
+    "hasError": false,
+    "path": "/admin/users",
+    "tableRows": 2,
+    "title": "用户管理"
+  },
+  "apiStatuses": [
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/profile",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/trips",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/profile",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/trips",
+      "status": 200
+    }
+  ],
+  "siteConsoleErrors": 0,
+  "extensionErrors": {
+    "count": 2,
+    "origin": "autofill overlay extension"
+  },
+  "productionDataWrites": 0,
+  "privateScreenshots": "private/ excluded from git"
+}
