@@ -56,7 +56,7 @@
 .compact-product-card .compact-card-brand .product-brand{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:11px;line-height:18px}
 .storefront .rec-pin.compact-product-card .rec-pin-code{display:inline-flex;align-items:center;justify-content:center;align-self:flex-start;max-width:100%;box-sizing:border-box;overflow:hidden;white-space:nowrap;margin:0 0 6px;padding:4px 10px;border-radius:999px;background:#171717;color:#fff;font-size:14px;line-height:20px;font-weight:700;text-align:center}
 .compact-card-code-value{min-width:0;overflow:hidden;text-overflow:ellipsis}
-.compact-product-card .compact-card-price{margin-top:4px;padding-inline:3px;text-align:right}
+.compact-product-card .compact-card-price{margin-top:auto;padding:4px 3px 0;text-align:right}
 .compact-product-card .compact-card-price .card-money{justify-content:flex-end}
 .compact-product-card .compact-card-price .compact-card-discount{justify-content:flex-end;padding-inline:0}
 .compact-product-card .compact-card-price :is(.card-price-label,.card-price-unit){overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
@@ -70,9 +70,11 @@
 .storefront:is(.browse-shell,.browse-preview) .catalog-master-grid .product-name{padding:3px;min-height:44px}
 
 /* Keep name layout independent of inline-button baselines and translation length. */
-.storefront:is(.browse-shell,.browse-preview) .catalog-master-grid .product-name{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;height:calc(3.1em + 24px);font-size:14px}
+.storefront:is(.browse-shell,.browse-preview) .catalog-master-grid .product-name{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;height:auto;font-size:14px}
 .storefront:is(.browse-shell,.browse-preview) .catalog-master-grid .product-name :is(h2,h3){flex:none;height:auto;max-height:3.1em;margin:0}
 .compact-product-card .compact-card-native-name{display:block;flex:none;height:18px;line-height:18px;font-size:11px;font-weight:400;color:#626262;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:start}
 .compact-product-card .compact-card-discount{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 6px;min-height:18px;font-size:11px;line-height:18px;padding:0 3px}
 .compact-product-card .compact-card-discount del{color:#626262}
 .compact-product-card .compact-card-reduction{color:#b42318;font-weight:600}
+.storefront:is(.browse-shell,.browse-preview) .product-rating[data-unrated]{height:44px;min-height:44px;flex-direction:row;justify-content:flex-start}
+.storefront .compact-product-card .product-body{padding-bottom:4px}
