@@ -3,12 +3,12 @@
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f7f8f4;color:#242b29;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;padding:24px}main{width:100%;max-width:560px;margin:12vh auto;background:#fff;border:1px solid #e6e7e3;border-radius:28px;padding:32px}.brand{display:flex;align-items:center;gap:12px;margin-bottom:28px;color:#666f66;font-size:14px}.brand b{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;background:#c74036;color:#fff;font-size:26px}h1{font-size:26px;line-height:1.45;margin:0 0 14px}p{font-size:15px;line-height:1.85;margin:0 0 24px;overflow-wrap:anywhere}button{border:1px solid #d5dcd2;background:#f2f5ee;color:inherit;border-radius:24px;min-height:44px;padding:10px 22px;font:inherit;cursor:pointer;max-width:100%}button:focus-visible{outline:3px solid #525d4e;outline-offset:4px}@media(max-width:600px){body{padding:16px}main{margin:8vh auto;padding:26px 22px;border-radius:24px}h1{font-size:23px}}
 </style>
-<main aria-live="polite"><div class="brand"><b aria-hidden="true">B</b><span>宝宝败 Bobuy</span></div><h1 id="heading">好物正在更新</h1><p id="description">我们正在更新页面，服务暂时不可用。请稍后重试，你的购物车内容会保留。</p><button id="retry" type="button" onclick="location.reload()">重新加载</button></main>
+<main aria-live="polite"><div class="brand"><b aria-hidden="true">B</b><span>宝宝败 Bobuy</span></div><h1 id="heading">网站正在更新</h1><p id="description">我们正在更新页面，服务暂时不可用。请稍后重试，你的购物车内容会保留。</p><button id="retry" type="button" onclick="location.reload()">重新加载</button></main>
 <script>
 const copy={
-'zh-CN':['好物正在更新','我们正在更新页面，服务暂时不可用。请稍后重试，你的购物车内容会保留。','重新加载'],
-'zh-TW':['好物正在更新','我們正在更新頁面，服務暫時無法使用。請稍後再試，你的購物車內容會保留。','重新載入'],
+'zh-CN':['网站正在更新','我们正在更新页面，服务暂时不可用。请稍后重试，你的购物车内容会保留。','重新加载'],
+'zh-TW':['網站正在更新','我們正在更新頁面，服務暫時無法使用。請稍後再試，你的購物車內容會保留。','重新載入'],
 'ja-JP':['ただいま更新しています','ページの更新中は、一時的にサービスをご利用いただけません。しばらくしてから再度お試しください。カートの内容は保持されます。','再読み込み'],
-'en-US':['Good things are getting an update','The service is temporarily unavailable while we update the site. Please try again shortly. Your cart is kept on this device.','Reload']};
+'en-US':['The site is being updated','The service is temporarily unavailable while we update the site. Please try again shortly. Your cart is kept on this device.','Reload']};
 let locale;try{locale=localStorage.getItem('bobbuy_locale')}catch{}if(!copy[locale])locale=navigator.language.startsWith('ja')?'ja-JP':/zh-(TW|HK|Hant)/i.test(navigator.language)?'zh-TW':navigator.language.startsWith('zh')?'zh-CN':'en-US';document.documentElement.lang=locale;['heading','description','retry'].forEach((id,index)=>document.getElementById(id).textContent=copy[locale][index]);
 </script></html>

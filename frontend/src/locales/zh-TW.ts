@@ -128,7 +128,7 @@ const messages: Dictionary = {
   "profile.save": "儲存資料",
   "profile.saved": "資料已儲存",
   "profile.required": "請填寫有效內容",
-    "maintenance.title": "好物正在更新",
+    "maintenance.title": "網站正在更新",
     "maintenance.description": "我們正在更新頁面，服務暫時無法使用。請稍後再試，你的購物車內容會保留。",
     "maintenance.retry": "重新載入",
     "browse.current": "目前推薦",

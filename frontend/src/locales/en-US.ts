@@ -129,7 +129,7 @@ const messages: Dictionary = {
   "profile.save": "Save details",
   "profile.saved": "Details saved",
   "profile.required": "Enter a valid value",
-    "maintenance.title": "Good things are getting an update",
+    "maintenance.title": "The site is being updated",
     "maintenance.description": "The service is temporarily unavailable while we update the site. Please try again shortly. Your cart is kept on this device.",
     "maintenance.retry": "Reload",
     "browse.current": "Current offers",
