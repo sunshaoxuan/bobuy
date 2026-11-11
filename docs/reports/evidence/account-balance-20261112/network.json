@@ -1,0 +1,782 @@
+[
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/react-router-dom.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/chunk-WLVDZ35E.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/chunk-5WRI5ZAA.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/chunk-OK6QCXRL.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/release-test-gate-20261111/frontend/node_modules/vite/dist/client/env.mjs",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/@react-refresh",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/App.tsx?t=1794438352002",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/antd.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/@ant-design_icons.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/chunk-4IORVOQR.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/chunk-A5IHQ2VJ.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/context/UserRoleContext.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/styles.css",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/i18n.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/antd_locale_zh_CN.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/antd_locale_zh_TW.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/antd_locale_en_US.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/antd_locale_ja_JP.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/dayjs.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/dayjs_locale_zh-cn.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/dayjs_locale_zh-tw.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/dayjs_locale_ja.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/chunk-AQ44CXY7.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/SiteMetadata.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/storefront.css",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/merchant.css",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/LegacyProductRoute.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/LanguageSwitcher.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/pages/Storefront.tsx?t=1794438352002",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/authStorage.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/api.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/locales/zh-CN.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/locales/en-US.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/locales/zh-TW.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/locales/ja-JP.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/seo.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/SellingPrice.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/HomeBrandIntro.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/ReservationAdd.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/cart.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/ConsumerDetail.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/useCartDraft.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/product-feed.css",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/ProtectedRoute.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/pages/CheckoutAddress.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/StoreMobileNavigation.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/StoreNavigation.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/storeNavigation.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/browse.css",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/currency.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/MaintenanceNotice.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/AccountShortcuts.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/pages/AccountProfile.tsx?t=1794438352002",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/imageUpload.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/locales/experience.zh-CN.json?import",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/locales/experience.en-US.json?import",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/locales/experience.ja-JP.json?import",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/home-brand.css",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/referenceOfferWindow.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/recommendationSchedule.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/productDetailContent.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/CardPrice.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/consumer-detail.css",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/maintenance-notice.css",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/account.css?t=1794438352002",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/recommendationText.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/api/auth/me",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/api/auth/profile",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/api/auth/me",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/api/auth/profile",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/api/auth/me",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/api/auth/me",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/api/auth/me",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/api/auth/profile",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/api/auth/me",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/api/auth/profile",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/api/auth/me",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/api/auth/profile",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/account",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/main.tsx?t=1794438352002",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/@vite/client",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/react.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/react-dom_client.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/react-router-dom.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/chunk-WLVDZ35E.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/chunk-5WRI5ZAA.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/chunk-OK6QCXRL.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/release-test-gate-20261111/frontend/node_modules/vite/dist/client/env.mjs",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/i18n.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/@react-refresh",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/App.tsx?t=1794438352002",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/antd.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/@ant-design_icons.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/context/UserRoleContext.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/chunk-4IORVOQR.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/chunk-A5IHQ2VJ.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/antd_locale_zh_CN.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/antd_locale_zh_TW.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/antd_locale_en_US.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/antd_locale_ja_JP.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/dayjs.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/dayjs_locale_zh-cn.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/dayjs_locale_zh-tw.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/dayjs_locale_ja.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/node_modules/.vite/deps/chunk-AQ44CXY7.js?v=eaae56d6",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/styles.css",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/SiteMetadata.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/storefront.css",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/merchant.css",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/LanguageSwitcher.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/pages/Storefront.tsx?t=1794438352002",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/LegacyProductRoute.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/authStorage.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/api.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/locales/en-US.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/locales/zh-CN.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/locales/ja-JP.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/locales/zh-TW.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/seo.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/HomeBrandIntro.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/ConsumerDetail.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/SellingPrice.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/ReservationAdd.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/ProtectedRoute.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/pages/CheckoutAddress.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/useCartDraft.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/product-feed.css",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/cart.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/StoreMobileNavigation.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/StoreNavigation.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/storeNavigation.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/currency.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/browse.css",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/MaintenanceNotice.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/pages/AccountProfile.tsx?t=1794438352002",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/AccountShortcuts.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/imageUpload.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/locales/experience.zh-CN.json?import",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/locales/experience.en-US.json?import",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/locales/experience.ja-JP.json?import",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/home-brand.css",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/referenceOfferWindow.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/productDetailContent.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/consumer-detail.css",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/CardPrice.tsx",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/recommendationSchedule.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/components/maintenance-notice.css",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/account.css?t=1794438352002",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/src/recommendationText.ts",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/api/auth/me",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/api/auth/profile",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/api/auth/me",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/api/auth/profile",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/api/auth/me",
+    "status": 200
+  },
+  {
+    "method": "Network.responseReceived",
+    "url": "http://127.0.0.1:5180/api/auth/me",
+    "status": 200
+  }
+]
