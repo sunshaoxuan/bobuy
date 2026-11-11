@@ -6,6 +6,17 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 class PublicRecommendationBrowseServiceTest {
+ @Test void priceSortUsesDisplayedExpiredOrFutureReferenceAndLeavesUnknownPricesLast(){
+  for(int year:new int[]{2000,2999}){
+   var discounted=item(1);discounted.referencePrice=new java.math.BigDecimal("100");discounted.originalPrice=new java.math.BigDecimal("300");discounted.discountAmount=new java.math.BigDecimal("200");discounted.offerStart=LocalDate.of(year,1,1);discounted.offerEnd=LocalDate.of(year,1,2);
+   var regular=item(2);regular.referencePrice=new java.math.BigDecimal("200");
+   var unknown=item(3);unknown.referencePrice=new java.math.BigDecimal("50");unknown.discountAmount=new java.math.BigDecimal("50");unknown.offerStart=discounted.offerStart;unknown.offerEnd=discounted.offerEnd;
+   recommendations.rows=List.of(issue(1,List.of(discounted,regular,unknown)));
+   assertThat(ReferencePriceDisplay.of(discounted,Instant.now()).amount()).isEqualByComparingTo("300");
+   assertThat(service.page(0,null,null,"ja-JP","all","","",null,"price-asc").items()).extracting(row->row.item().id()).containsExactly(2L,1L,3L);
+   assertThat(service.page(0,null,null,"ja-JP","all","","",null,"price-desc").items()).extracting(row->row.item().id()).containsExactly(1L,2L,3L);
+  }
+ }
  private static class Recommendations extends RecommendationService {
   List<Detail> rows=List.of();int reads;
   Recommendations(){super(null,null,null,null,null,null,null,null,null,null,null,null);}
