@@ -1,0 +1,16 @@
+{
+  "source": "deac521fdb5c10e4accc2d4cc368fb494ab61801",
+  "phase": "CLEANED",
+  "at": "2026-11-11T23:51:23Z",
+  "accountLayoutSeconds": 1735.3,
+  "removedOnly": [
+    "bobuy/frontend:20261112.detail-layout.2"
+  ],
+  "alreadyAbsent": [
+    "bobuy/frontend:20261112.account-balance"
+  ],
+  "currentImage": "sha256:5ae6a26f18e1b5a5986284873f16634363e21cfe0bc604f294b512840c9fa06b",
+  "rollbackPreserved": "bobuy/frontend:20261112.5",
+  "databaseWrites": false,
+  "protectedUnchanged": true
+}

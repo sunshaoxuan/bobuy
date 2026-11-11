@@ -1,0 +1,11 @@
+{
+  "acceptedLayoutSource": "d2ffb059bad921de51d2b61267095e52e6357c42",
+  "integratedSource": "deac521fdb5c10e4accc2d4cc368fb494ab61801",
+  "unchanged": {
+    "frontend/src/pages/AccountProfile.tsx": "1e39f6dfb2bdd17a52c59d2305634fbbe8a0792aa7a942b7666a9dedaf495c39",
+    "frontend/src/account.css": "a8ce9f8eaba3256c9f438117c89bc4f077df77bf67c1256ab95478e067e6916c",
+    "frontend/package-lock.json": "41eb3aa6e16a58d52831ad3089e8f0b39fea9aa52e725178f6399fb06899cda7",
+    "frontend/nginx.conf": "5a652087a5674719fe7c69455400f84e5591da85a0cad9efdcd620556ffb4ea5",
+    "frontend/vite.config.ts": "dcfeb849f3a183e3b1998efaef8f6eda0742b0b0663b0d65867c125816296d27"
+  }
+}
