@@ -1,0 +1,346 @@
+{
+  "boxes": {
+    "address": {
+      "bottom": 409.28125,
+      "height": 608.9375,
+      "width": 510,
+      "x": 850,
+      "y": -199.65625
+    },
+    "basic": {
+      "bottom": 123.4375,
+      "height": 323.09375,
+      "width": 510,
+      "x": 320,
+      "y": -199.65625
+    },
+    "save": {
+      "bottom": 852.375,
+      "height": 48,
+      "width": 1040,
+      "x": 320,
+      "y": 804.375
+    },
+    "social": {
+      "bottom": 784.375,
+      "height": 355.09375,
+      "width": 1040,
+      "x": 320,
+      "y": 429.28125
+    },
+    "verification": {
+      "bottom": 409.28125,
+      "height": 265.84375,
+      "width": 510,
+      "x": 320,
+      "y": 143.4375
+    }
+  },
+  "controls": [
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "Shibuya 1-2-3",
+      "labelRect": {
+        "bottom": 200.4375,
+        "height": 44,
+        "left": 875,
+        "right": 1335,
+        "top": 156.4375,
+        "width": 460,
+        "x": 875,
+        "y": 156.4375
+      },
+      "rect": {
+        "bottom": 200.4375,
+        "height": 44,
+        "left": 875,
+        "right": 1335,
+        "top": 156.4375,
+        "width": 460,
+        "x": 875,
+        "y": 156.4375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "150-0002",
+      "labelRect": {
+        "bottom": 294.4375,
+        "height": 44,
+        "left": 875,
+        "right": 1097,
+        "top": 250.4375,
+        "width": 222,
+        "x": 875,
+        "y": 250.4375
+      },
+      "rect": {
+        "bottom": 294.4375,
+        "height": 44,
+        "left": 875,
+        "right": 1097,
+        "top": 250.4375,
+        "width": 222,
+        "x": 875,
+        "y": 250.4375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgb(180, 43, 37)",
+      "label": "清空地址",
+      "labelRect": {
+        "bottom": 373.28125,
+        "height": 22,
+        "left": 1264,
+        "right": 1320,
+        "top": 351.28125,
+        "width": 56,
+        "x": 1264,
+        "y": 351.28125
+      },
+      "rect": {
+        "bottom": 384.28125,
+        "height": 44,
+        "left": 1249,
+        "right": 1335,
+        "top": 340.28125,
+        "width": 86,
+        "x": 1249,
+        "y": 340.28125
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "LINE",
+      "labelRect": {
+        "bottom": 695.375,
+        "height": 44,
+        "left": 345,
+        "right": 630.328125,
+        "top": 651.375,
+        "width": 285.328125,
+        "x": 345,
+        "y": 651.375
+      },
+      "rect": {
+        "bottom": 695.375,
+        "height": 44,
+        "left": 345,
+        "right": 630.328125,
+        "top": 651.375,
+        "width": 285.328125,
+        "x": 345,
+        "y": 651.375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "@aiko-tan",
+      "labelRect": {
+        "bottom": 695.375,
+        "height": 44,
+        "left": 646.328125,
+        "right": 931.65625,
+        "top": 651.375,
+        "width": 285.328125,
+        "x": 646.328125,
+        "y": 651.375
+      },
+      "rect": {
+        "bottom": 695.375,
+        "height": 44,
+        "left": 646.328125,
+        "right": 931.65625,
+        "top": 651.375,
+        "width": 285.328125,
+        "x": 646.328125,
+        "y": 651.375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "Aiko Tan",
+      "labelRect": {
+        "bottom": 695.375,
+        "height": 44,
+        "left": 947.65625,
+        "right": 1233,
+        "top": 651.375,
+        "width": 285.34375,
+        "x": 947.65625,
+        "y": 651.375
+      },
+      "rect": {
+        "bottom": 695.375,
+        "height": 44,
+        "left": 947.65625,
+        "right": 1233,
+        "top": 651.375,
+        "width": 285.34375,
+        "x": 947.65625,
+        "y": 651.375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgb(180, 43, 37)",
+      "label": "移除账号",
+      "labelRect": {
+        "bottom": 684.375,
+        "height": 22,
+        "left": 1264,
+        "right": 1320,
+        "top": 662.375,
+        "width": 56,
+        "x": 1264,
+        "y": 662.375
+      },
+      "rect": {
+        "bottom": 695.375,
+        "height": 44,
+        "left": 1249,
+        "right": 1335,
+        "top": 651.375,
+        "width": 86,
+        "x": 1249,
+        "y": 651.375
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "添加社交账号",
+      "labelRect": {
+        "bottom": 748.375,
+        "height": 22,
+        "left": 360,
+        "right": 444,
+        "top": 726.375,
+        "width": 84,
+        "x": 360,
+        "y": 726.375
+      },
+      "rect": {
+        "bottom": 759.375,
+        "height": 44,
+        "left": 345,
+        "right": 459,
+        "top": 715.375,
+        "width": 114,
+        "x": 345,
+        "y": 715.375
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "color": "rgb(255, 255, 255)",
+      "label": "保存资料",
+      "labelRect": {
+        "bottom": 837.375,
+        "height": 22,
+        "left": 1262,
+        "right": 1318,
+        "top": 815.375,
+        "width": 56,
+        "x": 1262,
+        "y": 815.375
+      },
+      "rect": {
+        "bottom": 848.375,
+        "height": 44,
+        "left": 1220,
+        "right": 1360,
+        "top": 804.375,
+        "width": 140,
+        "x": 1220,
+        "y": 804.375
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "",
+      "labelRect": {
+        "bottom": 384.28125,
+        "height": 44,
+        "left": 345,
+        "right": 611,
+        "top": 340.28125,
+        "width": 266,
+        "x": 345,
+        "y": 340.28125
+      },
+      "rect": {
+        "bottom": 384.28125,
+        "height": 44,
+        "left": 345,
+        "right": 611,
+        "top": 340.28125,
+        "width": 266,
+        "x": 345,
+        "y": 340.28125
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgb(255, 255, 255)",
+      "label": "验证邮箱",
+      "labelRect": {
+        "bottom": 373.28125,
+        "height": 22,
+        "left": 638,
+        "right": 694,
+        "top": 351.28125,
+        "width": 56,
+        "x": 638,
+        "y": 351.28125
+      },
+      "rect": {
+        "bottom": 384.28125,
+        "height": 44,
+        "left": 623,
+        "right": 709,
+        "top": 340.28125,
+        "width": 86,
+        "x": 623,
+        "y": 340.28125
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "重新发送",
+      "labelRect": {
+        "bottom": 373.28125,
+        "height": 22,
+        "left": 734,
+        "right": 790,
+        "top": 351.28125,
+        "width": 56,
+        "x": 734,
+        "y": 351.28125
+      },
+      "rect": {
+        "bottom": 384.28125,
+        "height": 44,
+        "left": 719,
+        "right": 805,
+        "top": 340.28125,
+        "width": 86,
+        "x": 719,
+        "y": 340.28125
+      },
+      "tag": "BUTTON"
+    }
+  ],
+  "height": 900,
+  "nestedForms": 0,
+  "overflow": false,
+  "scrollY": 530,
+  "width": 1440
+}

@@ -1,0 +1,16 @@
+### 1. Visible Bleed-Through, Clipping, Overlap, and Evidence Check
+
+* **Visible Content Bleed-Through:** None observed. Across all states (top, mid-scroll, bottom), the background of both the top bar and bottom navigation is fully opaque white. Underneath content cleanly passes behind the bars without ghosting, translucency, or text collision behind icons/text.
+* **Clipping / Cutoff:** None observed. Content correctly hides behind the boundaries of both fixed bars as expected during scrolling.
+* **Overlap / Occlusion of Controls:** None observed. In the bottom save state, the primary call-to-action (`保存资料`) sits fully clear of the bottom navigation bar with adequate breathing room; it is not covered or clipped.
+* **Missing Evidence:** None. The three provided captures fully cover:
+  1. **Initial top state:** Initial offset below the header.
+  2. **Mid-scroll verification:** Both bars with scrollable cards actively passing beneath them.
+  3. **Bottom save state:** Clearance of the terminal actionable element above the bottom navigation bar.
+
+---
+
+### 2. Defect Resolution Assessment
+
+* **Mobile Fixed Top Header (Opaque Background):** **Resolved.** The header maintains a clean, opaque white backdrop preventing content collision during scrolling.
+* **Mobile Fixed Bottom Navigation (Opaque Background):** **Resolved.** The bottom navigation maintains a solid opaque white backdrop, prevents content bleed-through, and leaves interactive terminal elements fully accessible.

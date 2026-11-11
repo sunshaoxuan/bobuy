@@ -1,0 +1,146 @@
+{
+  "boxes": {
+    "address": {
+      "bottom": 1241.5625,
+      "height": 754.09375,
+      "width": 343,
+      "x": 16,
+      "y": 487.46875
+    },
+    "basic": {
+      "bottom": 109.53125,
+      "height": 429.1875,
+      "width": 343,
+      "x": 16,
+      "y": -319.65625
+    },
+    "save": {
+      "bottom": 1918.65625,
+      "height": 48,
+      "width": 343,
+      "x": 16,
+      "y": 1870.65625
+    },
+    "social": {
+      "bottom": 1854.65625,
+      "height": 597.09375,
+      "width": 343,
+      "x": 16,
+      "y": 1257.5625
+    },
+    "verification": {
+      "bottom": 471.46875,
+      "height": 345.9375,
+      "width": 343,
+      "x": 16,
+      "y": 125.53125
+    }
+  },
+  "controls": [
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "Aiko Tan",
+      "labelRect": {
+        "bottom": 693.5625,
+        "height": 44,
+        "left": 33,
+        "right": 342,
+        "top": 649.5625,
+        "width": 309,
+        "x": 33,
+        "y": 649.5625
+      },
+      "rect": {
+        "bottom": 693.5625,
+        "height": 44,
+        "left": 33,
+        "right": 342,
+        "top": 649.5625,
+        "width": 309,
+        "x": 33,
+        "y": 649.5625
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "",
+      "labelRect": {
+        "bottom": 384.46875,
+        "height": 44,
+        "left": 33,
+        "right": 342,
+        "top": 340.46875,
+        "width": 309,
+        "x": 33,
+        "y": 340.46875
+      },
+      "rect": {
+        "bottom": 384.46875,
+        "height": 44,
+        "left": 33,
+        "right": 342,
+        "top": 340.46875,
+        "width": 309,
+        "x": 33,
+        "y": 340.46875
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgb(255, 255, 255)",
+      "label": "验证邮箱",
+      "labelRect": {
+        "bottom": 439.46875,
+        "height": 22,
+        "left": 48,
+        "right": 104,
+        "top": 417.46875,
+        "width": 56,
+        "x": 48,
+        "y": 417.46875
+      },
+      "rect": {
+        "bottom": 450.46875,
+        "height": 44,
+        "left": 33,
+        "right": 119,
+        "top": 406.46875,
+        "width": 86,
+        "x": 33,
+        "y": 406.46875
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "重新发送",
+      "labelRect": {
+        "bottom": 439.46875,
+        "height": 22,
+        "left": 144,
+        "right": 200,
+        "top": 417.46875,
+        "width": 56,
+        "x": 144,
+        "y": 417.46875
+      },
+      "rect": {
+        "bottom": 450.46875,
+        "height": 44,
+        "left": 129,
+        "right": 215,
+        "top": 406.46875,
+        "width": 86,
+        "x": 129,
+        "y": 406.46875
+      },
+      "tag": "BUTTON"
+    }
+  ],
+  "height": 844,
+  "nestedForms": 0,
+  "overflow": false,
+  "scrollY": 635,
+  "width": 390
+}

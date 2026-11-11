@@ -1,0 +1,371 @@
+{
+  "boxes": {
+    "address": {
+      "bottom": 939.28125,
+      "height": 608.9375,
+      "width": 510,
+      "x": 842.5,
+      "y": 330.34375
+    },
+    "basic": {
+      "bottom": 653.4375,
+      "height": 323.09375,
+      "width": 510,
+      "x": 312.5,
+      "y": 330.34375
+    },
+    "save": {
+      "bottom": 1382.375,
+      "height": 48,
+      "width": 1040,
+      "x": 312.5,
+      "y": 1334.375
+    },
+    "social": {
+      "bottom": 1314.375,
+      "height": 355.09375,
+      "width": 1040,
+      "x": 312.5,
+      "y": 959.28125
+    },
+    "verification": {
+      "bottom": 939.28125,
+      "height": 265.84375,
+      "width": 510,
+      "x": 312.5,
+      "y": 673.4375
+    }
+  },
+  "controls": [
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "退出登录",
+      "labelRect": {
+        "bottom": 134.671875,
+        "height": 22,
+        "left": 1281.5,
+        "right": 1337.5,
+        "top": 112.671875,
+        "width": 56,
+        "x": 1281.5,
+        "y": 112.671875
+      },
+      "rect": {
+        "bottom": 145.671875,
+        "height": 44,
+        "left": 1244.5,
+        "right": 1352.5,
+        "top": 101.671875,
+        "width": 108,
+        "x": 1244.5,
+        "y": 101.671875
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "color": "rgb(189, 41, 36)",
+      "label": "我的资料",
+      "labelRect": {
+        "bottom": 226.59375,
+        "height": 22.5,
+        "left": 466.828125,
+        "right": 526.828125,
+        "top": 204.09375,
+        "width": 60,
+        "x": 466.828125,
+        "y": 204.09375
+      },
+      "rect": {
+        "bottom": 247.34375,
+        "height": 64,
+        "left": 312.5,
+        "right": 651.15625,
+        "top": 183.34375,
+        "width": 338.65625,
+        "x": 312.5,
+        "y": 183.34375
+      },
+      "tag": "A"
+    },
+    {
+      "color": "rgb(35, 35, 35)",
+      "label": "我的订单",
+      "labelRect": {
+        "bottom": 226.59375,
+        "height": 22.5,
+        "left": 817.484375,
+        "right": 877.484375,
+        "top": 204.09375,
+        "width": 60,
+        "x": 817.484375,
+        "y": 204.09375
+      },
+      "rect": {
+        "bottom": 247.34375,
+        "height": 64,
+        "left": 663.15625,
+        "right": 1001.828125,
+        "top": 183.34375,
+        "width": 338.671875,
+        "x": 663.15625,
+        "y": 183.34375
+      },
+      "tag": "A"
+    },
+    {
+      "color": "rgb(35, 35, 35)",
+      "label": "商家维护",
+      "labelRect": {
+        "bottom": 226.59375,
+        "height": 22.5,
+        "left": 1168.15625,
+        "right": 1228.15625,
+        "top": 204.09375,
+        "width": 60,
+        "x": 1168.15625,
+        "y": 204.09375
+      },
+      "rect": {
+        "bottom": 247.34375,
+        "height": 64,
+        "left": 1013.828125,
+        "right": 1352.484375,
+        "top": 183.34375,
+        "width": 338.65625,
+        "x": 1013.828125,
+        "y": 183.34375
+      },
+      "tag": "A"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "Aiko Tan",
+      "labelRect": {
+        "bottom": 500.34375,
+        "height": 44,
+        "left": 337.5,
+        "right": 559.5,
+        "top": 456.34375,
+        "width": 222,
+        "x": 337.5,
+        "y": 456.34375
+      },
+      "rect": {
+        "bottom": 500.34375,
+        "height": 44,
+        "left": 337.5,
+        "right": 559.5,
+        "top": 456.34375,
+        "width": 222,
+        "x": 337.5,
+        "y": 456.34375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "<redacted>",
+      "labelRect": {
+        "bottom": 500.34375,
+        "height": 44,
+        "left": 575.5,
+        "right": 797.5,
+        "top": 456.34375,
+        "width": 222,
+        "x": 575.5,
+        "y": 456.34375
+      },
+      "rect": {
+        "bottom": 500.34375,
+        "height": 44,
+        "left": 575.5,
+        "right": 797.5,
+        "top": 456.34375,
+        "width": 222,
+        "x": 575.5,
+        "y": 456.34375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "<redacted>",
+      "labelRect": {
+        "bottom": 594.34375,
+        "height": 44,
+        "left": 337.5,
+        "right": 797.5,
+        "top": 550.34375,
+        "width": 460,
+        "x": 337.5,
+        "y": 550.34375
+      },
+      "rect": {
+        "bottom": 594.34375,
+        "height": 44,
+        "left": 337.5,
+        "right": 797.5,
+        "top": 550.34375,
+        "width": 460,
+        "x": 337.5,
+        "y": 550.34375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "Aiko Tan",
+      "labelRect": {
+        "bottom": 542.4375,
+        "height": 44,
+        "left": 867.5,
+        "right": 1089.5,
+        "top": 498.4375,
+        "width": 222,
+        "x": 867.5,
+        "y": 498.4375
+      },
+      "rect": {
+        "bottom": 542.4375,
+        "height": 44,
+        "left": 867.5,
+        "right": 1089.5,
+        "top": 498.4375,
+        "width": 222,
+        "x": 867.5,
+        "y": 498.4375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "<redacted>",
+      "labelRect": {
+        "bottom": 542.4375,
+        "height": 44,
+        "left": 1105.5,
+        "right": 1327.5,
+        "top": 498.4375,
+        "width": 222,
+        "x": 1105.5,
+        "y": 498.4375
+      },
+      "rect": {
+        "bottom": 542.4375,
+        "height": 44,
+        "left": 1105.5,
+        "right": 1327.5,
+        "top": 498.4375,
+        "width": 222,
+        "x": 1105.5,
+        "y": 498.4375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "Japan",
+      "labelRect": {
+        "bottom": 636.4375,
+        "height": 44,
+        "left": 867.5,
+        "right": 1089.5,
+        "top": 592.4375,
+        "width": 222,
+        "x": 867.5,
+        "y": 592.4375
+      },
+      "rect": {
+        "bottom": 636.4375,
+        "height": 44,
+        "left": 867.5,
+        "right": 1089.5,
+        "top": 592.4375,
+        "width": 222,
+        "x": 867.5,
+        "y": 592.4375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "Tokyo",
+      "labelRect": {
+        "bottom": 636.4375,
+        "height": 44,
+        "left": 1105.5,
+        "right": 1327.5,
+        "top": 592.4375,
+        "width": 222,
+        "x": 1105.5,
+        "y": 592.4375
+      },
+      "rect": {
+        "bottom": 636.4375,
+        "height": 44,
+        "left": 1105.5,
+        "right": 1327.5,
+        "top": 592.4375,
+        "width": 222,
+        "x": 1105.5,
+        "y": 592.4375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "Shibuya 1-2-3",
+      "labelRect": {
+        "bottom": 730.4375,
+        "height": 44,
+        "left": 867.5,
+        "right": 1327.5,
+        "top": 686.4375,
+        "width": 460,
+        "x": 867.5,
+        "y": 686.4375
+      },
+      "rect": {
+        "bottom": 730.4375,
+        "height": 44,
+        "left": 867.5,
+        "right": 1327.5,
+        "top": 686.4375,
+        "width": 460,
+        "x": 867.5,
+        "y": 686.4375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "150-0002",
+      "labelRect": {
+        "bottom": 824.4375,
+        "height": 44,
+        "left": 867.5,
+        "right": 1089.5,
+        "top": 780.4375,
+        "width": 222,
+        "x": 867.5,
+        "y": 780.4375
+      },
+      "rect": {
+        "bottom": 824.4375,
+        "height": 44,
+        "left": 867.5,
+        "right": 1089.5,
+        "top": 780.4375,
+        "width": 222,
+        "x": 867.5,
+        "y": 780.4375
+      },
+      "tag": "INPUT"
+    }
+  ],
+  "height": 900,
+  "nestedForms": 0,
+  "overflow": false,
+  "scrollY": 0,
+  "width": 1440
+}
