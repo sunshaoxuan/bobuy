@@ -6,6 +6,11 @@ spring:
           enabled: true
           lower-case-service-id: true
       routes:
+        # Self-profile is implemented by Core; keep login/refresh on Auth.
+        - id: self-profile-route
+          uri: lb://core-service
+          predicates:
+            - Path=/api/auth/profile
         - id: auth-route
           uri: lb://auth-service
           predicates:

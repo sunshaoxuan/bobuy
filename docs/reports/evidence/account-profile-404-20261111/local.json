@@ -1,0 +1,22 @@
+{
+  "localOnly": true,
+  "unauthenticatedGetAndPatch": 401,
+  "checks": [
+    {
+      "syntheticRole": "customer",
+      "login": 200,
+      "read": 200,
+      "sameValueSave": 200,
+      "reread": 200,
+      "forbiddenFieldsRejected": true
+    },
+    {
+      "syntheticRole": "agent",
+      "login": 200,
+      "read": 200,
+      "sameValueSave": 200,
+      "reread": 200,
+      "forbiddenFieldsRejected": true
+    }
+  ]
+}
