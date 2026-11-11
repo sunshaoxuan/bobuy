@@ -1,0 +1,11 @@
+{
+  "phase": "FRONTEND_HEALTHY",
+  "source": "efa19779e3aada1cb3b5081cd97d01cb308d96ff",
+  "at": "2026-11-11T15:23:17Z",
+  "imagesChanged": [
+    "frontend"
+  ],
+  "databaseChanged": false,
+  "otherServicesUnchanged": true,
+  "exactFrontendFiles": 79
+}
