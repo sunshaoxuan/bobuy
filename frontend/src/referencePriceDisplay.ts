@@ -16,7 +16,7 @@ export function referencePriceDisplay(facts:RecommendationFacts,today:string){
 
 /** Latest occurrence within each channel, with strict same-product identity. */
 export function selectReferenceOffers(entry:PublicCatalogEntry){
- const rows=entry.referenceOffers.filter(row=>row.facts.productId===entry.productId&&!!entry.itemNumber&&row.facts.itemNumber===entry.itemNumber)
+ const rows=entry.referenceOffers.filter(row=>row.facts.productId===entry.productId&&row.facts.itemNumber===entry.itemNumber)
   .sort((a,b)=>b.postId-a.postId||b.facts.id-a.facts.id);
  const warehouse=rows.find(row=>row.facts.referenceContext?.channel==='COSTCO_WAREHOUSE');
  const online=rows.find(row=>row.facts.referenceContext?.channel==='COSTCO_ONLINE');

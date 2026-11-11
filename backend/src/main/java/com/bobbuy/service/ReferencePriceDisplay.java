@@ -20,7 +20,7 @@ public record ReferencePriceDisplay(BigDecimal amount,BigDecimal originalPrice,B
  }
  public static Optional<PublicProductCatalogService.Offer> main(PublicProductCatalogService.Entry entry){
   return entry.referenceOffers().stream()
-   .filter(row->Objects.equals(row.facts().productId,entry.productId())&&entry.itemNumber()!=null&&!entry.itemNumber().isBlank()&&Objects.equals(row.facts().itemNumber,entry.itemNumber()))
+   .filter(row->Objects.equals(row.facts().productId,entry.productId())&&Objects.equals(row.facts().itemNumber,entry.itemNumber()))
    .sorted(Comparator.comparingInt((PublicProductCatalogService.Offer row)->channel(row.facts())).thenComparing(PublicProductCatalogService.Offer::postId,Comparator.reverseOrder()).thenComparing(row->row.facts().id,Comparator.reverseOrder())).findFirst();
  }
  private static int channel(RecommendationItem facts){var c=facts.referenceContext==null?null:facts.referenceContext.channel();return "COSTCO_WAREHOUSE".equals(c)?0:"COSTCO_ONLINE".equals(c)?1:2;}
