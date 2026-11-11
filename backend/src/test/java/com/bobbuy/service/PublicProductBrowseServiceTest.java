@@ -6,9 +6,10 @@ import static org.assertj.core.api.Assertions.*;
 
 class PublicProductBrowseServiceTest {
  @Test void compactReferenceRetainsZeroAmountSourceAndWindowAndRevisionsChangeWithFacts(){
-  var base=row(0,null);var facts=new RecommendationItem();facts.id=901L;facts.referencePrice=java.math.BigDecimal.ZERO;facts.priceUnit="pack";facts.offerStart=java.time.LocalDate.of(2000,1,1);facts.offerEnd=java.time.LocalDate.of(2000,1,2);
+  var base=row(0,null);var facts=new RecommendationItem();facts.id=901L;facts.referencePrice=java.math.BigDecimal.ZERO;facts.originalPrice=new java.math.BigDecimal("500");facts.discountAmount=new java.math.BigDecimal("500");facts.priceUnit="pack";facts.offerStart=java.time.LocalDate.of(2000,1,1);facts.offerEnd=java.time.LocalDate.of(2000,1,2);
   catalog.rows=List.of(new PublicProductCatalogService.Entry(base.productId(),base.merchantId(),base.name(),base.description(),base.brand(),base.itemNumber(),base.specification(),base.model(),base.packaging(),base.gallery(),base.categories(),List.of(new PublicProductCatalogService.Offer(7L,facts)),false));
   var before=service.browse(0,null,"","","en-US",false,null);var reference=before.items().get(0).reference();assertThat(reference.amount()).isEqualByComparingTo("0");assertThat(reference.currency()).isEqualTo("JPY");assertThat(reference.postId()).isEqualTo(7L);assertThat(reference.itemId()).isEqualTo(901L);assertThat(reference.state()).isEqualTo("EXPIRED");
+  assertThat(reference.originalPrice()).isEqualByComparingTo("500");assertThat(reference.discountAmount()).isEqualByComparingTo("500");
   facts.referencePrice=new java.math.BigDecimal("999999999999.99");assertThatThrownBy(()->service.browse(1,null,"","","en-US",false,before.revision())).isInstanceOf(PublicProductBrowseService.Changed.class);
   facts.referencePrice=null;assertThat(service.browse(0,null,"","","en-US",false,null).items().get(0).reference()).isNull();
  }

@@ -72,7 +72,7 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
       const text=recommendationText(item,locale);
       const product = item.productId ? catalog.get(item.productId) : undefined;
       const buyable = !!product && canBuy(product);
-      return <CompactProductCard key={item.id} productId={item.productId} occurrenceKey={`${detail.post.id}:${item.id}`} heading={3} name={text.name} brand={item.brand} itemNumber={item.itemNumber} image={item.gallery?.[0]?.url} quote={product} reference={referenceForCard(item,detail.post.id,today)} eager={index<2&&number===1} eagerRating onOpen={trigger=>openItem(item,trigger)} overlay={<ReservationAdd allowed={buyable} quote={product} name={text.name} count={item.productId?quantities[item.productId]:undefined} onAdd={()=>{if(product&&buyable)onAdd(product);}}/>}/>;
+      return <CompactProductCard key={item.id} productId={item.productId} occurrenceKey={`${detail.post.id}:${item.id}`} heading={3} name={text.primaryName} originalName={text.originalName} brand={item.brand} itemNumber={item.itemNumber} image={item.gallery?.[0]?.url} quote={product} reference={referenceForCard(item,detail.post.id,today)} eager={index<2&&number===1} eagerRating onOpen={trigger=>openItem(item,trigger)} overlay={<ReservationAdd allowed={buyable} quote={product} name={text.name} count={item.productId?quantities[item.productId]:undefined} onAdd={()=>{if(product&&buyable)onAdd(product);}}/>}/>;
     })}</div>}
     <RecommendationProductDetail item={opened} onClose={closeItem} product={opened?.productId?catalog.get(opened.productId):undefined} onAdd={onAdd} canBuy={canBuy}/>
 

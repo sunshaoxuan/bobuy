@@ -22,12 +22,12 @@ public class PublicProductBrowseService {
    .configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY,true);
  public PublicProductBrowseService(PublicProductCatalogService c,ProductMarkerService m){catalog=c;markers=m;}
  public record Facet(String id,Map<String,String> name,long count){}
- public record CardReference(java.math.BigDecimal amount,String currency,String unit,Long postId,Long itemId,String state){}
+ public record CardReference(java.math.BigDecimal amount,String currency,String unit,Long postId,Long itemId,String state,java.math.BigDecimal originalPrice,java.math.BigDecimal discountAmount){}
  public record Card(String productId,Long merchantId,Map<String,String> name,String brand,String itemNumber,
    Map<String,String> specification,String model,String packaging,RecommendationItem.Picture image,
    List<RecommendationItem.Label> categories,List<ProductMarkerService.Definition> markers,boolean reviewedMaster,java.math.BigDecimal rating,CardReference reference){}
  private static CardReference reference(PublicProductCatalogService.Entry entry){
-  return entry.referenceOffers().stream().filter(offer->offer.facts().referencePrice!=null).findFirst().map(offer->{var facts=offer.facts();return new CardReference(facts.referencePrice,"JPY",facts.priceUnit,offer.postId(),facts.id,ReferenceOfferWindow.resolve(facts.offerStart,facts.offerEnd,facts.referenceContext).state(java.time.Instant.now()));}).orElse(null);
+  return entry.referenceOffers().stream().filter(offer->offer.facts().referencePrice!=null).findFirst().map(offer->{var facts=offer.facts();return new CardReference(facts.referencePrice,"JPY",facts.priceUnit,offer.postId(),facts.id,ReferenceOfferWindow.resolve(facts.offerStart,facts.offerEnd,facts.referenceContext).state(java.time.Instant.now()),facts.originalPrice,facts.discountAmount);}).orElse(null);
  }
  public record Browse(List<Card> items,int page,int size,long scopeTotal,long matchedTotal,boolean hasNext,
    String revision,List<Facet> categories,long unclassified,String query,String category,String locale,String dataset,String datasetRevision,long markedScopeTotal){}

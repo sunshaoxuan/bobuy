@@ -10,17 +10,21 @@ import {openCardDetail} from './openCardDetail';
 export function referenceForCard(facts:RecommendationFacts&{id:number;currency?:string},postId:number,today?:string):CardReference|undefined{
  if(facts.referencePrice==null)return undefined;
  const window=resolvedOfferWindow(facts);
- return {amount:facts.referencePrice,currency:facts.currency??'JPY',unit:facts.priceUnit,postId,itemId:facts.id,state:!today||!window.start||!window.end?'UNKNOWN':today>window.end?'EXPIRED':today<window.start?'FUTURE':'ACTIVE'};
+ return {amount:facts.referencePrice,originalPrice:facts.originalPrice,discountAmount:facts.discountAmount,currency:facts.currency??'JPY',unit:facts.priceUnit,postId,itemId:facts.id,state:!today||!window.start||!window.end?'UNKNOWN':today>window.end?'EXPIRED':today<window.start?'FUTURE':'ACTIVE'};
 }
 
 /** One public product-card hierarchy; source facts and conditions stay in detail. */
-export default function CompactProductCard({name,language,brand,itemNumber,image,productId,rating,quote,reference,pending=false,eager=false,eagerRating=false,heading=2,occurrenceKey,onOpen,overlay,actions}:{
- name:string;language?:string;brand?:string|null;itemNumber?:string|null;image?:string|null;
+export default function CompactProductCard({name,originalName,language,brand,itemNumber,image,productId,rating,quote,reference,pending=false,eager=false,eagerRating=false,heading=2,occurrenceKey,onOpen,overlay,actions}:{
+ name:string;originalName?:string;language?:string;brand?:string|null;itemNumber?:string|null;image?:string|null;
  productId?:string|null;rating?:number|null;quote?:StoreProduct;reference?:CardReference|null;
  pending?:boolean;eager?:boolean;eagerRating?:boolean;heading?:2|3;occurrenceKey?:string;
  onOpen:(trigger:HTMLButtonElement)=>void;overlay?:ReactNode;actions?:ReactNode;
 }){
- const {t}=useI18n(),Heading=heading===3?'h3':'h2';
+ const {t,locale}=useI18n(),Heading=heading===3?'h3':'h2';
+ const nativeName=locale!=='ja-JP'?originalName?.trim():undefined;
+ const original=reference?.originalPrice;
+ const reduction=reference&&original!=null&&Number.isFinite(original)&&original>reference.amount?Math.round((original-reference.amount)*100)/100:undefined;
+ const money=(value:number)=>new Intl.NumberFormat(locale,{maximumFractionDigits:2}).format(value)+' '+(reference?.currency??'JPY');
  const [pressed,setPressed]=useState(false);
  useEffect(()=>{const clear=()=>setPressed(false);window.addEventListener('blur',clear);return()=>window.removeEventListener('blur',clear);},[]);
  const actual=!pending&&quote,kind=actual?'sale':reference?.amount!=null?'reference':'unknown';
@@ -31,12 +35,12 @@ export default function CompactProductCard({name,language,brand,itemNumber,image
     {image?<img src={image} alt={name} loading={eager?'eager':'lazy'} onError={event=>{event.currentTarget.style.display='none';}}/>:<span className="rec-no-product-image">{t('gallery.pending')}</span>}
    </button>
    {overlay}
-   <div className="product-body"><div className="compact-card-brand"><ProductBrand brand={brand}/></div><button type="button" className="product-name" data-detail-trigger="name" onClick={event=>onOpen(event.currentTarget)}><Heading lang={language} title={name}>{name||t('rec.not_stated')}</Heading></button></div>
+   <div className="product-body"><div className="compact-card-brand"><ProductBrand brand={brand}/></div><button type="button" className="product-name" data-detail-trigger="name" onClick={event=>onOpen(event.currentTarget)}><Heading lang={language} title={name}>{name||t('rec.not_stated')}</Heading>{locale!=='ja-JP'&&<small className="compact-card-native-name" lang="ja" title={nativeName}>{nativeName?`（${nativeName}）`:'\u00a0'}</small>}</button></div>
   </div>
   <small className="rec-pin-code" title={itemNumber??''}>{t('rec.code')}: {itemNumber||t('rec.not_stated')}</small>
   <ProductStars value={rating} productId={productId} eager={eagerRating}/>
   <div className="compact-card-price" data-price-kind={kind} data-price-source-post={kind==='reference'?reference?.postId:undefined} data-price-source-item={kind==='reference'?reference?.itemId:undefined}>
-   {actual?<><CardPrice amount={actual.price} currency={actual.currency}/>{actual.saleUnit&&<small className="card-price-unit" title={actual.saleUnit}>/ {actual.saleUnit}</small>}</>:reference?.amount!=null?<><small className="card-price-label">{referenceLabel}</small><CardPrice amount={reference.amount} currency={reference.currency} kind="reference"/>{reference.unit&&<small className="card-price-unit" title={reference.unit}>/ {reference.unit}</small>}</>:<small className="card-price-label">{t('card.price_unknown')}</small>}
+   {actual?<><CardPrice amount={actual.price} currency={actual.currency}/>{actual.saleUnit&&<small className="card-price-unit" title={actual.saleUnit}>/ {actual.saleUnit}</small>}</>:reference?.amount!=null?<><small className="card-price-label">{referenceLabel}</small><div className="compact-card-discount">{reduction!=null&&<><del title={t('detail.original_price')}>{money(original!)}</del><span className="compact-card-reduction" aria-label={t('detail.discount_amount')}>−{money(reduction)}</span></>}</div><CardPrice amount={reference.amount} currency={reference.currency} kind="reference"/>{reference.unit&&<small className="card-price-unit" title={reference.unit}>/ {reference.unit}</small>}</>:<small className="card-price-label">{t('card.price_unknown')}</small>}
   </div>
   {actions}
  </article>;
