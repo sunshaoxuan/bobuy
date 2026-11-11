@@ -54,8 +54,12 @@
 .card-money{display:flex;align-items:baseline;gap:4px;max-width:100%;min-width:0;margin-block:3px}.card-money .card-currency{flex:none;color:#626262;font-size:clamp(9px,calc(var(--card-amount-size,28px)*.55),12px);font-weight:500;line-height:1}.card-money>strong{flex:0 1 auto;min-width:0;white-space:nowrap;overflow-wrap:normal!important;word-break:normal;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
 .compact-product-card .compact-card-brand{height:18px;min-width:0;overflow:hidden}
 .compact-product-card .compact-card-brand .product-brand{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:11px;line-height:18px}
-.compact-product-card .rec-pin-code{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-block:4px;font-size:12px;line-height:18px}
-.compact-product-card .compact-card-price{margin-top:4px}
+.storefront .rec-pin.compact-product-card .rec-pin-code{display:flex;align-items:center;gap:4px;align-self:stretch;overflow:hidden;white-space:nowrap;margin:0 0 6px;padding:4px 10px;border-radius:999px;background:#171717;color:#fff;font-size:14px;line-height:20px;font-weight:700}
+.compact-card-code-label{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.compact-card-code-value{flex:none;max-width:calc(100% - 4px);overflow:hidden;text-overflow:ellipsis}
+.compact-product-card .compact-card-price{margin-top:4px;padding-inline:3px;text-align:right}
+.compact-product-card .compact-card-price .card-money{justify-content:flex-end}
+.compact-product-card .compact-card-price .compact-card-discount{justify-content:flex-end;padding-inline:0}
 .compact-product-card .compact-card-price :is(.card-price-label,.card-price-unit){overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .compact-product-card .product-name :is(h2,h3){font-size:14px;color:#242424;font-weight:600}
 .card-service-title{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-height:1.55;height:3.1em;font-size:15px;overflow:hidden;overflow-wrap:anywhere;margin:0 0 6px}
