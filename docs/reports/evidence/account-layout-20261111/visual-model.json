@@ -1,0 +1,9 @@
+{
+  "proModel": "gemini-3.1-pro-high",
+  "proAttempts": 2,
+  "proResult": "upstream_error, no image response",
+  "selectedModel": "gemini-3.8-flash-high",
+  "catalogQueriedPerRequest": true,
+  "minimalImage": "solid white, actual response passed",
+  "reviewData": "synthetic local profile screenshots only"
+}

@@ -1,0 +1,343 @@
+{
+  "blocks": [
+    {
+      "height": 411.6875,
+      "width": 343,
+      "x": 16,
+      "y": -1307.65625
+    },
+    {
+      "height": 748.59375,
+      "width": 343,
+      "x": 16,
+      "y": -879.96875
+    },
+    {
+      "height": 571.59375,
+      "width": 343,
+      "x": 16,
+      "y": -115.375
+    },
+    {
+      "height": 311.984375,
+      "width": 343,
+      "x": 16,
+      "y": 536.21875
+    }
+  ],
+  "contentBottom": 775,
+  "controls": [
+    {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px",
+      "classes": "ant-input css-dev-only-do-not-override-p28o4 ant-input-outlined",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [],
+      "id": "socialAccounts_0_platform",
+      "label": "input",
+      "labelRect": null,
+      "padding": [
+        "3.5px",
+        "11px",
+        "4.5px",
+        "11px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 309,
+        "x": 33,
+        "y": 75.21875
+      },
+      "tag": "INPUT"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px",
+      "classes": "ant-input css-dev-only-do-not-override-p28o4 ant-input-outlined",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [],
+      "id": "socialAccounts_0_handle",
+      "label": "input",
+      "labelRect": null,
+      "padding": [
+        "3.5px",
+        "11px",
+        "4.5px",
+        "11px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 309,
+        "x": 33,
+        "y": 165.21875
+      },
+      "tag": "INPUT"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px",
+      "classes": "ant-input css-dev-only-do-not-override-p28o4 ant-input-outlined",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [],
+      "id": "socialAccounts_0_displayName",
+      "label": "input",
+      "labelRect": null,
+      "padding": [
+        "3.5px",
+        "11px",
+        "4.5px",
+        "11px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 309,
+        "x": 33,
+        "y": 255.21875
+      },
+      "tag": "INPUT"
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "border": "1px",
+      "classes": "ant-btn css-dev-only-do-not-override-p28o4 ant-btn-text ant-btn-dangerous",
+      "color": "rgb(180, 43, 37)",
+      "icons": [],
+      "id": "",
+      "label": "移除账号",
+      "labelRect": null,
+      "padding": [
+        "7px",
+        "14px",
+        "7px",
+        "14px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 86,
+        "x": 33,
+        "y": 315.21875
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px",
+      "classes": "ant-btn css-dev-only-do-not-override-p28o4 ant-btn-default",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [],
+      "id": "",
+      "label": "添加社交账号",
+      "labelRect": null,
+      "padding": [
+        "7px",
+        "14px",
+        "7px",
+        "14px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 114,
+        "x": 33,
+        "y": 391.21875
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "background": "rgb(217, 54, 48)",
+      "border": "1px",
+      "classes": "ant-btn css-dev-only-do-not-override-p28o4 ant-btn-primary",
+      "color": "rgb(255, 255, 255)",
+      "icons": [],
+      "id": "",
+      "label": "保存资料",
+      "labelRect": null,
+      "padding": [
+        "7px",
+        "14px",
+        "7px",
+        "14px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 343,
+        "x": 16,
+        "y": 472.21875
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px",
+      "classes": "ant-input ant-input-lg css-dev-only-do-not-override-p28o4 ant-input-outlined",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [],
+      "id": "code",
+      "label": "input",
+      "labelRect": null,
+      "padding": [
+        "3.5px",
+        "11px",
+        "4.5px",
+        "11px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 309,
+        "x": 33,
+        "y": 715.203125
+      },
+      "tag": "INPUT"
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "border": "0px",
+      "classes": "",
+      "color": "rgb(35, 35, 35)",
+      "icons": [
+        {
+          "height": 22,
+          "width": 22,
+          "x": 39.625,
+          "y": 790.5
+        }
+      ],
+      "id": "",
+      "label": "好物推荐",
+      "labelRect": {
+        "height": 13,
+        "width": 40,
+        "x": 30.625,
+        "y": 817.5
+      },
+      "padding": [
+        "5px",
+        "2px",
+        "5px",
+        "2px"
+      ],
+      "rect": {
+        "height": 52,
+        "width": 85.25,
+        "x": 8,
+        "y": 784
+      },
+      "tag": "A"
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "border": "0px",
+      "classes": "",
+      "color": "rgb(35, 35, 35)",
+      "icons": [
+        {
+          "height": 22,
+          "width": 22,
+          "x": 130.875,
+          "y": 790.5
+        }
+      ],
+      "id": "",
+      "label": "本程好物",
+      "labelRect": {
+        "height": 13,
+        "width": 40,
+        "x": 121.875,
+        "y": 817.5
+      },
+      "padding": [
+        "5px",
+        "2px",
+        "5px",
+        "2px"
+      ],
+      "rect": {
+        "height": 52,
+        "width": 85.25,
+        "x": 99.25,
+        "y": 784
+      },
+      "tag": "A"
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "border": "0px",
+      "classes": "",
+      "color": "rgb(35, 35, 35)",
+      "icons": [
+        {
+          "height": 22,
+          "width": 22,
+          "x": 222.125,
+          "y": 790.5
+        }
+      ],
+      "id": "",
+      "label": "购物车",
+      "labelRect": {
+        "height": 13,
+        "width": 30,
+        "x": 218.125,
+        "y": 817.5
+      },
+      "padding": [
+        "5px",
+        "2px",
+        "5px",
+        "2px"
+      ],
+      "rect": {
+        "height": 52,
+        "width": 85.25,
+        "x": 190.5,
+        "y": 784
+      },
+      "tag": "A"
+    },
+    {
+      "background": "rgb(241, 241, 238)",
+      "border": "0px",
+      "classes": "active",
+      "color": "rgb(34, 34, 34)",
+      "icons": [
+        {
+          "height": 22,
+          "width": 22,
+          "x": 313.375,
+          "y": 790.5
+        }
+      ],
+      "id": "",
+      "label": "我的账户",
+      "labelRect": {
+        "height": 13,
+        "width": 40,
+        "x": 304.375,
+        "y": 817.5
+      },
+      "padding": [
+        "5px",
+        "2px",
+        "5px",
+        "2px"
+      ],
+      "rect": {
+        "height": 52,
+        "width": 85.25,
+        "x": 281.75,
+        "y": 784
+      },
+      "tag": "A"
+    }
+  ],
+  "headerBottom": 68,
+  "height": 844,
+  "main": {
+    "height": 2422.203125,
+    "width": 343,
+    "x": 16,
+    "y": -1574
+  },
+  "overflow": false,
+  "scrollY": 1650,
+  "width": 390
+}

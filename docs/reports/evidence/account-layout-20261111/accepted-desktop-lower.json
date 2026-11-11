@@ -1,0 +1,226 @@
+{
+  "blocks": [
+    {
+      "height": 399.59375,
+      "width": 508,
+      "x": 312.5,
+      "y": -389.65625
+    },
+    {
+      "height": 570.59375,
+      "width": 508,
+      "x": 844.5,
+      "y": -389.65625
+    },
+    {
+      "height": 329.59375,
+      "width": 1040,
+      "x": 312.5,
+      "y": 204.9375
+    },
+    {
+      "height": 296.890625,
+      "width": 1040,
+      "x": 312.5,
+      "y": 630.53125
+    }
+  ],
+  "contentBottom": 900,
+  "controls": [
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "border": "1px",
+      "classes": "ant-btn css-dev-only-do-not-override-p28o4 ant-btn-text ant-btn-dangerous",
+      "color": "rgb(180, 43, 37)",
+      "icons": [],
+      "id": "",
+      "label": "清空地址",
+      "labelRect": null,
+      "padding": [
+        "7px",
+        "14px",
+        "7px",
+        "14px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 86,
+        "x": 1241.5,
+        "y": 111.9375
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px",
+      "classes": "ant-input css-dev-only-do-not-override-p28o4 ant-input-outlined",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [],
+      "id": "socialAccounts_0_platform",
+      "label": "input",
+      "labelRect": null,
+      "padding": [
+        "3.5px",
+        "11px",
+        "4.5px",
+        "11px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 285.328125,
+        "x": 337.5,
+        "y": 401.53125
+      },
+      "tag": "INPUT"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px",
+      "classes": "ant-input css-dev-only-do-not-override-p28o4 ant-input-outlined",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [],
+      "id": "socialAccounts_0_handle",
+      "label": "input",
+      "labelRect": null,
+      "padding": [
+        "3.5px",
+        "11px",
+        "4.5px",
+        "11px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 285.328125,
+        "x": 638.828125,
+        "y": 401.53125
+      },
+      "tag": "INPUT"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px",
+      "classes": "ant-input css-dev-only-do-not-override-p28o4 ant-input-outlined",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [],
+      "id": "socialAccounts_0_displayName",
+      "label": "input",
+      "labelRect": null,
+      "padding": [
+        "3.5px",
+        "11px",
+        "4.5px",
+        "11px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 285.34375,
+        "x": 940.15625,
+        "y": 401.53125
+      },
+      "tag": "INPUT"
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "border": "1px",
+      "classes": "ant-btn css-dev-only-do-not-override-p28o4 ant-btn-text ant-btn-dangerous",
+      "color": "rgb(180, 43, 37)",
+      "icons": [],
+      "id": "",
+      "label": "移除账号",
+      "labelRect": null,
+      "padding": [
+        "7px",
+        "14px",
+        "7px",
+        "14px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 86,
+        "x": 1241.5,
+        "y": 401.53125
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px",
+      "classes": "ant-btn css-dev-only-do-not-override-p28o4 ant-btn-default",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [],
+      "id": "",
+      "label": "添加社交账号",
+      "labelRect": null,
+      "padding": [
+        "7px",
+        "14px",
+        "7px",
+        "14px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 114,
+        "x": 337.5,
+        "y": 465.53125
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "background": "rgb(217, 54, 48)",
+      "border": "1px",
+      "classes": "ant-btn css-dev-only-do-not-override-p28o4 ant-btn-primary",
+      "color": "rgb(255, 255, 255)",
+      "icons": [],
+      "id": "",
+      "label": "保存资料",
+      "labelRect": null,
+      "padding": [
+        "7px",
+        "14px",
+        "7px",
+        "14px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 140,
+        "x": 1212.5,
+        "y": 558.53125
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px",
+      "classes": "ant-input ant-input-lg css-dev-only-do-not-override-p28o4 ant-input-outlined",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [],
+      "id": "code",
+      "label": "input",
+      "labelRect": null,
+      "padding": [
+        "3.5px",
+        "11px",
+        "4.5px",
+        "11px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 560,
+        "x": 337.5,
+        "y": 790.421875
+      },
+      "tag": "INPUT"
+    }
+  ],
+  "headerBottom": 76,
+  "height": 900,
+  "main": {
+    "height": 1559.421875,
+    "width": 1040,
+    "x": 312.5,
+    "y": -632
+  },
+  "overflow": false,
+  "scrollY": 720,
+  "width": 1440
+}

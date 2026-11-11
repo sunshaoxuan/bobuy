@@ -1,0 +1,16 @@
+{
+  "hover": {
+    "border": "rgb(230, 97, 87)",
+    "color": "rgb(230, 97, 87)",
+    "dangerous": false,
+    "focus": false,
+    "hover": true
+  },
+  "normal": {
+    "border": "rgb(217, 217, 217)",
+    "color": "rgba(0, 0, 0, 0.88)",
+    "dangerous": false,
+    "focus": false,
+    "hover": false
+  }
+}

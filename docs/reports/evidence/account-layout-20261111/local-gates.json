@@ -1,0 +1,28 @@
+{
+  "tests": 765,
+  "passed": 765,
+  "failed": 0,
+  "skipped": 0,
+  "coverageCommandExit": 0,
+  "coverage": {
+    "lines": 81.85,
+    "statements": 81.85,
+    "branches": 81.82,
+    "functions": 59.56
+  },
+  "i18nKeys": 1610,
+  "typecheck": "PASS",
+  "productionBuild": "PASS",
+  "formalSuiteInputSha256": "31450592c1b3d357897a7824c8833ea72a923f2d266d9c9390192f823507c985",
+  "frontendInputSha256": "31ad8cc6ab12dfdaf0bacd7038893872a7b0b392a3ff7cd7d74a28afddb05fe5",
+  "changedAfterFullSuite": [
+    "frontend/src/components/CompactProductCard.test.tsx",
+    "frontend/src/components/CompactProductCard.tsx",
+    "frontend/src/components/ProductRating.test.tsx",
+    "frontend/src/components/ProductRating.tsx",
+    "frontend/src/public-catalog.css"
+  ],
+  "affectedTestsAfterMainSync": 51,
+  "nativeControls": 113,
+  "visualPixelFailures": 0
+}
