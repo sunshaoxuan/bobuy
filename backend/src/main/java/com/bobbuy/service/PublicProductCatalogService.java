@@ -54,7 +54,7 @@ public class PublicProductCatalogService {
    // A reference-only master grants no new disclosure: reuse exactly its existing public DTO.
    // In particular, an empty legacy gallery/brand must not fall back to private master fields.
    if(p.getVisibilityStatus()!=ProductVisibility.PUBLIC){
-    return new Entry(p.getId(),p.getMerchantId(),Map.copyOf(legacyText(source,"name")),Map.copyOf(legacyText(source,"description")),source.brand,source.itemNumber,Map.copyOf(legacyText(source,"specification")),source.model,source.packaging,List.copyOf(source.gallery),List.copyOf(source.categories),offers,source.catalogDriven);
+    return new Entry(p.getId(),p.getMerchantId(),Map.copyOf(legacyText(source,"name")),Map.copyOf(legacyText(source,"description")),source.brand,source.itemNumber,Map.copyOf(legacyText(source,"specification")),source.model,source.packaging,List.copyOf(source.gallery),List.copyOf(source.categories),offers,source.catalogDriven,publicRatings.get(p.getId()));
    }
    var ids=data==null?(p.getCategoryId()==null?List.<String>of():List.of(p.getCategoryId())):data.categoryIds()==null?List.<String>of():data.categoryIds();
    var labels=categories.findAllById(ids).stream().map(c->new RecommendationItem.Label(c.getId(),c.getName())).toList();

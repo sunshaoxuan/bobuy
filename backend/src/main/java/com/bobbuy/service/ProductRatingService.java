@@ -27,7 +27,13 @@ public class ProductRatingService {
   if(input==null||input.stars()==null||input.version()<0||input.stars().compareTo(BigDecimal.ONE)<0||input.stars().compareTo(new BigDecimal("5"))>0||input.stars().multiply(new BigDecimal("2")).stripTrailingZeros().scale()>0||input.comment()!=null&&input.comment().length()>2000)throw invalid("rating.invalid");
  }
  private Long author(){var auth=SecurityContextHolder.getContext().getAuthentication();if(auth==null||!(auth.getPrincipal() instanceof BobbuyAuthenticatedUser user)||user.id()==null)throw new ApiException(ErrorCode.UNAUTHORIZED,"error.auth.unauthorized");return user.id();}
- private Product visible(String id,boolean lock){return (lock?products.lockById(id):products.findById(id)).filter(p->!p.isDeleted()&&p.getVisibilityStatus()==ProductVisibility.PUBLIC).orElseThrow(()->new ApiException(ErrorCode.RESOURCE_NOT_FOUND,"error.product.not_found"));}
+ private Set<String> reviewableIds(Collection<Product> candidates){
+  var result=new HashSet<String>();var references=new ArrayList<String>();
+  for(var p:candidates)if(!p.isDeleted()){if(p.getVisibilityStatus()==ProductVisibility.PUBLIC)result.add(p.getId());else if(p.getVisibilityStatus()==ProductVisibility.DRAFTER_ONLY)references.add(p.getId());}
+  if(!references.isEmpty())products.publicReviewLinks(references).stream().filter(RecommendationPublication::visible).map(i->i.productId).forEach(result::add);
+  return result;
+ }
+ private Product visible(String id,boolean lock){return (lock?products.lockById(id):products.findById(id)).filter(p->reviewableIds(List.of(p)).contains(id)).orElseThrow(()->new ApiException(ErrorCode.RESOURCE_NOT_FOUND,"error.product.not_found"));}
  private static Value value(ProductReview row){return row==null?new Value(null,"",0,null):new Value(row.stars,row.comment,row.version,row.updatedAt);}
  @Transactional(readOnly=true) public Value get(String id){var user=author();visible(id,false);return value(reviews.findByProductIdAndUserId(id,user).orElse(null));}
  @Transactional public Value save(String id,Input input){
@@ -46,7 +52,8 @@ public class ProductRatingService {
  @Transactional(readOnly=true) public Summary summary(String id){visible(id,false);return aggregates(List.of(id)).get(id);}
  @Transactional(readOnly=true) public ReviewPage list(String id,int page){visible(id,false);if(page<0||page>10000)throw invalid("rating.invalid");var rows=reviews.findByProductIdOrderByUpdatedAtDescIdDesc(id,PageRequest.of(page,20));return new ReviewPage(rows.stream().map(r->new Entry(r.id,r.stars,r.comment,r.updatedAt)).toList(),rows.hasNext());}
  @Transactional(readOnly=true) public Map<String,BigDecimal> publicRatings(Map<String,Long> visibleOwners){
-  var ids=new ArrayList<String>();for(var p:products.findAllById(visibleOwners.keySet()))if(!p.isDeleted()&&p.getVisibilityStatus()==ProductVisibility.PUBLIC&&Objects.equals(p.getMerchantId(),visibleOwners.get(p.getId())))ids.add(p.getId());
+  var owned=new ArrayList<Product>();for(var p:products.findAllById(visibleOwners.keySet()))if(Objects.equals(p.getMerchantId(),visibleOwners.get(p.getId())))owned.add(p);
+  var ids=new ArrayList<>(reviewableIds(owned));
   var result=new TreeMap<String,BigDecimal>();aggregates(ids).forEach((id,summary)->{if(summary.average()!=null)result.put(id,summary.average());});return Collections.unmodifiableMap(result);
  }
 }

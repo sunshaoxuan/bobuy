@@ -6,6 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product, String> {
+    // Same owned, published association used by the reference-only public catalog.
+    // Snapshot validity is checked with RecommendationPublication.visible in the service.
+    @org.springframework.data.jpa.repository.Query("select i from RecommendationItem i, RecommendationPost post, Product p where i.productId=p.id and i.postId=post.id and post.published=true and post.merchantId=p.merchantId and i.productId in :ids and i.publicationState='PUBLISHED'")
+    java.util.List<com.bobbuy.model.RecommendationItem> publicReviewLinks(@org.springframework.data.repository.query.Param("ids") java.util.Collection<String> ids);
     // Internal scalar IDs only: normal ORM queries always exclude deleted products.
     @org.springframework.data.jpa.repository.Query(value="select id from bb_product where deleted_at is not null",nativeQuery=true)
     java.util.Set<String> deletedIds();
