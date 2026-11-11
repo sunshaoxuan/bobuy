@@ -1,0 +1,20 @@
+{
+  "applicationErrors": 0,
+  "extensionErrors": 2,
+  "warnings": [
+    {
+      "message": "@ali/tongyi-next-theme: antd 未安装，Antd 主题配置将不可用",
+      "url": "chrome-extension://hbfhdcdeikaehendoojplfpjcfifnlme/content-scripts/content.js"
+    },
+    {
+      "message": "@ali/tongyi-next-theme: antd 未安装，Antd 主题配置将不可用",
+      "url": "chrome-extension://hbfhdcdeikaehendoojplfpjcfifnlme/content-scripts/content.js"
+    },
+    {
+      "message": "@ali/tongyi-next-theme: @ant-design/cssinjs 未安装，Antd 主题配置将不可用",
+      "url": "chrome-extension://hbfhdcdeikaehendoojplfpjcfifnlme/content-scripts/content.js"
+    }
+  ],
+  "extensionErrorSource": "chrome-extension://jbkfoedolllekgbhcbcoahefnbanhhlh/content/bootstrap-autofill-overlay.js",
+  "scope": "No extension or browser configuration was changed."
+}
