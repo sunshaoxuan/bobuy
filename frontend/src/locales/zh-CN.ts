@@ -2,6 +2,22 @@ import type { Dictionary } from './types';
 import experience from './experience.zh-CN.json';
 
 const messages: Dictionary = {
+ "review.text_scroll": "评价较长时，可在输入框内上下滚动查看",
+ "review.history_scroll": "评价列表较长时，可在弹窗内上下滚动查看",
+
+ "review.change_to_save": "修改星级或评价后可保存",
+ "sort.label": "商品排序",
+ "sort.default": "默认排序",
+ "sort.price-asc": "价格从低到高（同币种）",
+ "sort.price-desc": "价格从高到低（同币种）",
+ "sort.rating-asc": "评分从低到高",
+ "sort.rating-desc": "评分从高到低",
+ "sort.heat-desc": "人气从高到低",
+ "sort.heat-asc": "人气从低到高",
+ "heat.label": "热度",
+ "heat.unavailable": "暂不可用",
+ "heat.error": "热度读取或计数失败，请刷新重试",
+
   "rec.item.current_spec": "当前商品档案规格",
   "rec.item.reloaded_review": "已显示最新商品档案，原报价和来源条件已保留。请对照当前规格重新核对，再次审核后提交。",
   "rec.item.pending": "待审核",

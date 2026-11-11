@@ -104,6 +104,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/auth/register-account").permitAll()
                 .requestMatchers("/api/customer/**").hasRole("CUSTOMER")
                 .requestMatchers(HttpMethod.GET, "/api/storefront/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/storefront/product-popularity/*/click").permitAll()
                 .requestMatchers("/api/checkout/**").hasRole("CUSTOMER")
                 .requestMatchers("/api/auth/email/**").authenticated()
                 .requestMatchers("/api/merchant/**").hasRole("AGENT")

@@ -1,0 +1,294 @@
+{
+  "environment": "existing bobuy-local, isolated PostgreSQL schema",
+  "schema": "engagement_c7c7f8193858",
+  "originalJarSha256": "91319e567762fb22d7f48d4c3a443017999b24b13136d74c1ea99c4ea6142c8e",
+  "originalImage": "bobuy/local-backend:restore-91319e56-20261112",
+  "jarSha256": "f2bf99e238274ddee763abba0a775278d92c7d9644bdf5c59e2422cfeff47f31",
+  "checks": {
+    "populatedMigrationIdempotentRetainsOldRows": "PASS",
+    "concurrent120ClicksNoLoss": "PASS",
+    "averageEditPermissionsRelinkRetainsOwnership": "PASS",
+    "globalSortPaginationRevisionAndPrivateNegative": "PASS",
+    "displayedSalePriceAndRatingDirections": "PASS",
+    "restartPersistence": "PASS",
+    "maximumBigintExactRepresentation": "PASS",
+    "browserExit": 0,
+    "originalLocalServiceAndPublicDataRestored": "PASS"
+  },
+  "beforePublicFingerprints": {
+    "bb_ai_connection": [
+      "0d3ff4ca0eb7a9c7e02132018eb33218",
+      "59135ce619fbb9063e79a06724520bb9"
+    ],
+    "bb_category": [
+      "a8c217aadbd0152004ce39431496899c",
+      "45f2359e9c5afc1cd060998ae13d0f2a"
+    ],
+    "bb_chat_message": [
+      "d751713988987e9331980363e24189ce",
+      "978a1c26a897011d2d157bd51e246482"
+    ],
+    "bb_checkout_identity": [
+      "bfeb6a51b55a083b2e7b2f7fc23072f5",
+      "e8cc510346c8d63d9778e5cd8b769a36"
+    ],
+    "bb_currency": [
+      "241de6507c43f21e228bd51716904529",
+      "005a13aae39b6ed6d1f5b23771ab351e"
+    ],
+    "bb_customer_payment_ledger": [
+      "d751713988987e9331980363e24189ce",
+      "33cc62b7c69c56c6410975552296cddf"
+    ],
+    "bb_email_challenge": [
+      "243bb071553f7bc5bdf461e716fed943",
+      "6c7262dab83884e0ab1a0156c4fd37de"
+    ],
+    "bb_experience_mapping": [
+      "d751713988987e9331980363e24189ce",
+      "be571e4f33a9b7aaa19cb9b5b89f0cf0"
+    ],
+    "bb_financial_audit_log": [
+      "d751713988987e9331980363e24189ce",
+      "9603a86ac8d78406bbc44dc686f1c636"
+    ],
+    "bb_mail_settings": [
+      "9fad67fe2f6ed8bf7af277f025a246e7",
+      "8501a27e54db23f1af7b9a2aa83605cc"
+    ],
+    "bb_mail_settings_event": [
+      "80deea6ce3007967fd74c9f10b615c6a",
+      "476241b5b7c10535c2079a648e5027db"
+    ],
+    "bb_merchant_customer": [
+      "b014da0b42540b18183cb9586bafe89a",
+      "b4d7d653adaf879fc428bf5aacb9cd4b"
+    ],
+    "bb_merchant_sku": [
+      "75984dcb4cd9e0fe79daf537162eb175",
+      "26c3a99a4abd6c6f9439b60ea4161379"
+    ],
+    "bb_order_header": [
+      "b97f53fc60bf78c59443fb3981c488d6",
+      "c505997c432c24089cc111e76e7cde61"
+    ],
+    "bb_procurement_receipt": [
+      "d751713988987e9331980363e24189ce",
+      "7ecbc6339220da65a756f861d7bf191f"
+    ],
+    "bb_product": [
+      "a2157b801d598449bfb37b2e7359194e",
+      "887766fb829e49b6f3768f4b347ddddc"
+    ],
+    "bb_product_lifecycle_event": [
+      "0a477e73eefe0a401d9b63f9ce60fb35",
+      "64afff67a7b23bcd9ef11f67e1c21c55"
+    ],
+    "bb_product_price_adjustment": [
+      "a00bcd0ccb6c8b3112f660e3c078538b",
+      "397d6af37200a5dfab2e605c1f3ea947"
+    ],
+    "bb_recommendation_image": [
+      "02619fb2130567e4b8c10231e428fdc8",
+      "81ce01edc7e6bd1b8c3e7763bf803f7c"
+    ],
+    "bb_recommendation_item": [
+      "19cb1b33aa41c5318361ab19bc7b513b",
+      "58e91d79248ce7bc1f9d213cf7004d7b"
+    ],
+    "bb_recommendation_post": [
+      "d0597cbda27144948ace4417d94468a6",
+      "15f930ed1220a40d87ae59ae3f748357"
+    ],
+    "bb_refresh_token_session": [
+      "569c54ee5222f208edba3cd5b24378a1",
+      "c6a5f8da2a8d63ff9e11784929999ec8"
+    ],
+    "bb_supplier": [
+      "e56e9652413f2c40beaa62b07a345d05",
+      "a8d9ea7a441fd626b906cfb436bff7da"
+    ],
+    "bb_trip": [
+      "61310679e893a9d903fbcb5175381ad5",
+      "668a41943e7894c738ddad87c184a1b3"
+    ],
+    "bb_trip_expense": [
+      "d751713988987e9331980363e24189ce",
+      "ea82691d2396d45cee3a8192b692d88e"
+    ],
+    "bb_trip_logistics_tracking": [
+      "d751713988987e9331980363e24189ce",
+      "fea24abdda1863db7fc4cc7d1bbe6d83"
+    ],
+    "bb_trip_profit_share_config": [
+      "d751713988987e9331980363e24189ce",
+      "4646f3296571b8347ca8b8217f588e4b"
+    ],
+    "bb_user": [
+      "06fae8b5dd7354e5ea19ef94379e5d71",
+      "8879f51c27b195f54b066a3072caf43d"
+    ],
+    "partner_wallets": [
+      "c626b07cd3f5cdffe1735cf30af0806c",
+      "a04158d3c115f0c1a25e8cbf01b9fb3f"
+    ],
+    "wallet_transactions": [
+      "d751713988987e9331980363e24189ce",
+      "9c55e9849e0515bafae2f5fed713e324"
+    ]
+  },
+  "beforeProtectedFingerprints": {
+    "bb_category": [
+      "31c3a5a85f38288156f57c1e918c6ac7",
+      "abfee6ebd34babb83b229fcb18da846f"
+    ],
+    "bb_chat_message": [
+      "d751713988987e9331980363e24189ce",
+      "cdb51d246d4ac0c8b4a07f151bbc7a0b"
+    ],
+    "bb_checkout_identity": [
+      "d751713988987e9331980363e24189ce",
+      "39a4db6d25ad3524fff9c6c75b5f06e2"
+    ],
+    "bb_currency": [
+      "241de6507c43f21e228bd51716904529",
+      "d8e5318c1a2cd1c679679a41a838545d"
+    ],
+    "bb_customer_payment_ledger": [
+      "d751713988987e9331980363e24189ce",
+      "000daac8b82233f3a5058cd30d3731ee"
+    ],
+    "bb_email_challenge": [
+      "d751713988987e9331980363e24189ce",
+      "454b00a26dd36d6d8af15c522ed974e0"
+    ],
+    "bb_experience_mapping": [
+      "d751713988987e9331980363e24189ce",
+      "4837ca700530e7ad58506bb5475ae086"
+    ],
+    "bb_financial_audit_log": [
+      "d751713988987e9331980363e24189ce",
+      "afcc669287679eece2e6f7759c58f0fe"
+    ],
+    "bb_mail_settings": [
+      "d751713988987e9331980363e24189ce",
+      "190cfefebd613f322fca98f464d3d8fd"
+    ],
+    "bb_mail_settings_event": [
+      "d751713988987e9331980363e24189ce",
+      "8ea338125df28c1525a52e6d1a2010c1"
+    ],
+    "bb_media_blob": [
+      "d751713988987e9331980363e24189ce",
+      "9aefe9d395ae84bf7102d473044dd93b"
+    ],
+    "bb_media_catalog_guard": [
+      "61f914e4fc3dc54959ce1800944b5bfd",
+      "654d5c32db684b5263871a26f35017c8"
+    ],
+    "bb_media_reference": [
+      "d751713988987e9331980363e24189ce",
+      "e010e6ef94e07c871ec873bfda1756a7"
+    ],
+    "bb_media_transfer": [
+      "d751713988987e9331980363e24189ce",
+      "6bf9d0efd9b0812fee86669c40a0442b"
+    ],
+    "bb_merchant_customer": [
+      "d751713988987e9331980363e24189ce",
+      "6a4700b88ce00c8162ac4cab0ee9c99a"
+    ],
+    "bb_merchant_sku": [
+      "75984dcb4cd9e0fe79daf537162eb175",
+      "7a9ea58fdfab6eb398b234969c829451"
+    ],
+    "bb_order_header": [
+      "9c900d474cb45749ec8325ea2cf2695c",
+      "2e8cefd5a7652e83aa0afd2b84d875fb"
+    ],
+    "bb_procurement_receipt": [
+      "d751713988987e9331980363e24189ce",
+      "0eee2b7007fb77edfa0c7b79d23b52ee"
+    ],
+    "bb_product": [
+      "c522c68562cc6bc7ac75c2d56855f032",
+      "c34a4da02cbc7224df799a54a6bf05bc"
+    ],
+    "bb_product_catalog_recovery": [
+      "d751713988987e9331980363e24189ce",
+      "ee7ccfbccae3842424221fc1028443bd"
+    ],
+    "bb_product_lifecycle_event": [
+      "d751713988987e9331980363e24189ce",
+      "b90a4ce911c4fa8ea6d63fcbe69039e2"
+    ],
+    "bb_product_marker_definition": [
+      "c8a04db76f525ba5467e135459490c65",
+      "5a48027dee0685be1dcaf5e7b9a7ba42"
+    ],
+    "bb_product_marker_set": [
+      "96f84245302f2ad157dc70c2ee9ad8e3",
+      "419291aecf625218a77ec05647f07ba3"
+    ],
+    "bb_product_price_adjustment": [
+      "d751713988987e9331980363e24189ce",
+      "e70b9dbfe6ab88f4fa94c6adf4e6c990"
+    ],
+    "bb_recommendation_article_revision": [
+      "e274321dd1c7a917c35d68332e7ae43e",
+      "700db147d955d65f01f12aa43fe81200"
+    ],
+    "bb_recommendation_image": [
+      "d751713988987e9331980363e24189ce",
+      "edeec4ad9dbb3840524d598a535f3e2b"
+    ],
+    "bb_recommendation_item": [
+      "211858a5ccc3cf72d7d9775e324ac348",
+      "35d02c5edfdf591955531ff2a037e892"
+    ],
+    "bb_recommendation_post": [
+      "17d069027cfbfb855ffd2e3cc8a44a58",
+      "54355a40009ffece25045ca1d63a7b53"
+    ],
+    "bb_reference_quote_revision": [
+      "d751713988987e9331980363e24189ce",
+      "4242d2815dcf8843c7fb68ba761c6dd7"
+    ],
+    "bb_refresh_token_session": [
+      "73c9a0e830337e6311625aea7aacac92",
+      "d25c0466463ea8029b2efd7b77e2942f"
+    ],
+    "bb_supplier": [
+      "394fcbb72ae6e49418e6b73d6f2a7922",
+      "48426b37204b363f62951ef84fd0a137"
+    ],
+    "bb_trip": [
+      "25f20cdcabb33357aa386c5e2add3c7e",
+      "0f6e45487f17b146fb174a51540688d3"
+    ],
+    "bb_trip_expense": [
+      "d751713988987e9331980363e24189ce",
+      "1fbec9c1a1a740104b8e63085da3c6d0"
+    ],
+    "bb_trip_logistics_tracking": [
+      "d751713988987e9331980363e24189ce",
+      "6995448c8e2024b75426c2839447eb26"
+    ],
+    "bb_trip_profit_share_config": [
+      "d751713988987e9331980363e24189ce",
+      "27aa3d665b169828ba8b69774bcb6f45"
+    ],
+    "bb_user": [
+      "bc633f640c729b52b618afb13a7b0e74",
+      "e81161aadc00fe2b2a9d43645a8e530d"
+    ],
+    "partner_wallets": [
+      "d751713988987e9331980363e24189ce",
+      "09304d85fffe7c9f02f772d1c784a411"
+    ],
+    "wallet_transactions": [
+      "d751713988987e9331980363e24189ce",
+      "46c829e05312acf39c49b4a2f67ff8ff"
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "taskRoot": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\product-engagement-20261111",
+  "removed": [
+    "frontend\\node_modules",
+    "frontend\\dist",
+    "backend\\target",
+    "implement-engagement.py",
+    "integrate-ui.py",
+    "fix-tests.py",
+    "retire-draft.py",
+    "align-rating.py",
+    "finish-visual.py",
+    "align-prices.py",
+    "recover-local.py",
+    "recover-jar-layer.py",
+    "finish-scroll.py"
+  ],
+  "stoppedTaskProcessIds": [
+    83816,
+    63676,
+    87904,
+    62888
+  ],
+  "retiredSchema": "engagement_e74d44b87059",
+  "status": "PASS"
+}

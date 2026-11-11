@@ -1,6 +1,7 @@
 import {fireEvent,render,screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {openCardDetail} from './openCardDetail';
+import {createPortal} from 'react-dom';
 
 function Card({open,action=()=>{}}:{open:(trigger:HTMLButtonElement)=>void;action?:()=>void}){
  return <article data-testid="card" onClick={event=>openCardDetail(event,open)}>
@@ -34,4 +35,8 @@ it('keeps selecting text and modified/secondary clicks from unexpectedly opening
 });
 it('does nothing for a card without an enabled native product opener',()=>{
  const open=vi.fn();render(<article onClick={event=>openCardDetail(event,open)}><p>Service summary</p><button className="product-photo" disabled>Unavailable photo</button></article>);fireEvent.click(screen.getByText('Service summary'));expect(open).not.toHaveBeenCalled();
+});
+it('does not interpret star clicks in a portaled review dialog as card clicks',()=>{
+ const open=vi.fn();render(<article onClick={event=>openCardDetail(event,open)}><button className="product-photo">Photo</button>{createPortal(<span data-testid="portal-star">Star</span>,document.body)}</article>);
+ fireEvent.click(screen.getByTestId('portal-star'));expect(open).not.toHaveBeenCalled();
 });

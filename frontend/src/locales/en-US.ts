@@ -2,6 +2,22 @@ import type { Dictionary } from './types';
 import experience from './experience.en-US.json';
 
 const messages: Dictionary = {
+ "review.text_scroll": "Scroll inside the field to read a long review",
+ "review.history_scroll": "Scroll inside the dialog to read a long review list",
+
+ "review.change_to_save": "Change your stars or review to enable saving",
+ "sort.label": "Sort products",
+ "sort.default": "Default order",
+ "sort.price-asc": "Price: low to high (same currency)",
+ "sort.price-desc": "Price: high to low (same currency)",
+ "sort.rating-asc": "Rating: low to high",
+ "sort.rating-desc": "Rating: high to low",
+ "sort.heat-desc": "Popularity: high to low",
+ "sort.heat-asc": "Popularity: low to high",
+ "heat.label": "Views",
+ "heat.unavailable": "Unavailable",
+ "heat.error": "Could not load or record views. Please reload to retry",
+
   "rec.item.current_spec": "Current product specification",
   "rec.item.reloaded_review": "The latest product information is shown. Your original offer and source context are kept; compare them with the current specification before reviewing again.",
   "rec.item.pending": "Pending review",

@@ -1,3 +1,4 @@
+import ProductSort from '../components/ProductSort';
 import CompactProductCard from '../components/CompactProductCard';
 import {useCallback,useEffect,useMemo,useRef,useState} from 'react';
 import {Alert,Button,Drawer,Empty,Modal,Spin,Tooltip} from 'antd';
@@ -75,10 +76,11 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   const [params,setParams]=useSearchParams();
   const node=merchantId??selectedNode(location.search),scope=kind+':'+String(node??'all');
   const categoryKey=kind==='marked'?'markedCategory':'category',category=params.get(categoryKey)??'';
+  const [sort,setSort]=useState('default');
   const [attempt,setAttempt]=useState(0),[detailAttempt,setDetailAttempt]=useState(0);
-  const identity=JSON.stringify([location.pathname,scope,query,category,locale,refresh,attempt,authKey]);
+  const identity=JSON.stringify([location.pathname,scope,query,category,locale,refresh,attempt,authKey,sort]);
   const activation=useSectionActivation(identity);
-  const browse=useBrowsePages<ProductBrowseCard>(identity,(page,revision)=>storefrontApi.productBrowse({page,revision,merchantId:node,query,category,locale,marked:kind==='marked'}),entry=>entry.productId,enabled&&activation.active&&node!==-1,acceptDataset,24,autoPaused||!!params.get('product'));
+  const browse=useBrowsePages<ProductBrowseCard>(identity,(page,revision)=>storefrontApi.productBrowse({page,revision,merchantId:node,query,category,locale,marked:kind==='marked',sort}),entry=>entry.productId,enabled&&activation.active&&node!==-1,acceptDataset,24,autoPaused||!!params.get('product'));
   useEffect(()=>{if(kind==="all"&&typeof browse.page?.markedScopeTotal==="number")onMarkedScope?.(browse.page.markedScopeTotal);},[kind,browse.page?.markedScopeTotal,onMarkedScope]);
   const filtered=browse.items;
   const markers=Object.fromEntries(browse.items.map(entry=>[entry.productId,entry.markers]));
@@ -114,7 +116,7 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   const description=content&&originalDescription?{...originalDescription,value:content.description,language:content.description===originalDescription.value?originalDescription.language:undefined,fallback:content.description===originalDescription.value&&originalDescription.fallback}:undefined;
   const hideMarked=kind==='marked'&&ready&&!browse.error&&browse.page?.markedScopeTotal===0;
   return <>{!hideMarked&&<section ref={activation.element} className="recommendations rec-public public-product-catalog" aria-label={t(kind==='marked'?'marker.featured':'store.catalog')} aria-busy={browse.busy}>
-    <header className="catalog-master-heading">{kind==='marked'?<h2>{t('marker.featured')}</h2>:<h1>{t('store.catalog')}</h1>}{ready&&<span role="status">{t('catalog.result_count',{shown:filtered.length,total:browse.page!.matchedTotal})}</span>}</header>
+    <header className="catalog-master-heading">{kind==='marked'?<h2>{t('marker.featured')}</h2>:<h1>{t('store.catalog')}</h1>}{ready&&<span role="status">{t('catalog.result_count',{shown:filtered.length,total:browse.page!.matchedTotal})}</span>}<ProductSort value={sort} onChange={setSort}/></header>
     <BrowseError error={node===-1?'browse.invalid':browse.error} changed={browse.changed} retry={browse.retry} refresh={reload}/>
     {sales.error&&<BrowseError error={sales.error} retry={sales.retry} refresh={sales.retry}/>}
     {!ready?(browse.error||node===-1?null:<div className="catalog-progress" role="status"><Spin/><span>{t('browse.loading')}</span></div>):<>

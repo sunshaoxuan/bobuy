@@ -2,6 +2,22 @@ import type { Dictionary } from './types';
 import experience from './experience.ja-JP.json';
 
 const messages: Dictionary = {
+ "review.text_scroll": "長いコメントは入力欄内を上下にスクロールして確認できます",
+ "review.history_scroll": "長い評価一覧はダイアログ内を上下にスクロールできます",
+
+ "review.change_to_save": "星またはコメントを変更すると保存できます",
+ "sort.label": "並び替え",
+ "sort.default": "標準",
+ "sort.price-asc": "価格が安い順（同一通貨）",
+ "sort.price-desc": "価格が高い順（同一通貨）",
+ "sort.rating-asc": "評価が低い順",
+ "sort.rating-desc": "評価が高い順",
+ "sort.heat-desc": "人気が高い順",
+ "sort.heat-asc": "人気が低い順",
+ "heat.label": "人気",
+ "heat.unavailable": "取得できません",
+ "heat.error": "人気の読み込みまたは記録に失敗しました。再読み込みしてください",
+
   "rec.item.current_spec": "現在の商品仕様",
   "rec.item.reloaded_review": "最新の商品情報を表示しています。元の参考価格と出典条件は保持しています。現在の仕様と照合し、改めて確認してから送信してください。",
   "rec.item.pending": "審査待ち",
