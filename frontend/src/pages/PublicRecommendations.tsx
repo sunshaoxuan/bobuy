@@ -3,10 +3,10 @@ import CompactProductCard,{referenceForCard} from '../components/CompactProductC
 import {useJapaneseDay} from '../recommendationSchedule';
 import '../public-catalog.css';
 import RecommendationBrowse from './RecommendationBrowse';
-import {ConsumerDetail,DetailOffer,ProductDetailCode} from '../components/ConsumerDetail';
+import {ConsumerDetail,DetailOffer,ProductDetailCode,ProductDetailSpecs} from '../components/ConsumerDetail';
 import ReservationAdd from '../components/ReservationAdd';
 import {useDetailReturnFocus} from '../components/useDetailReturnFocus';
-import {ProductBrand,ProductVariant} from '../components/ProductMetadata';
+import {ProductBrand} from '../components/ProductMetadata';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Alert, Button, Drawer, Empty, Input, Segmented, Spin } from 'antd';
 import { ArrowLeftOutlined, ArrowRightOutlined, CalendarOutlined, DownOutlined, PlusOutlined, UpOutlined, UserOutlined } from '@ant-design/icons';
@@ -82,10 +82,10 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
 function RecommendationProductDetail({item,product,onClose,onAdd,canBuy,purchasePending=false}:{item?:RecommendationItem;product?:StoreProduct;purchasePending?:boolean;onClose:()=>void;onAdd:(p:StoreProduct)=>void;canBuy:(p:StoreProduct)=>boolean}){
  const {t,locale}=useI18n();
  if(!item)return null;const text=recommendationText(item,locale),gallery=item.gallery??[];
- return <Drawer className="rec-product-detail consumer-detail-drawer" title={t('store.details')} width="min(1120px,100vw)" open={!!item} onClose={onClose}>
+ return <Drawer className="rec-product-detail consumer-detail-drawer" title={<ProductDetailCode value={item.itemNumber}/>} width="min(1120px,100vw)" open={!!item} onClose={onClose}>
   <ConsumerDetail media={<RecommendationImageViewer consumer key={item.id} pictures={gallery} name={text.name}/>}>
-  <ProductBrand brand={item.brand}/><h1><RecommendationName text={text}/></h1><ProductDetailCode value={item.itemNumber}/><ProductVariant model={item.model} packaging={item.packaging}/>{text.missing&&<Alert type="info" message={t('article.field_source',{fields:text.sourceFields.map(key=>t(key==='description'?'master.descriptions':key==='specification'?'master.specifications':'rec.fact.'+key)).join(' · ')})}/>}
-  {text.specification&&<p className="rec-detail-spec">{text.specification}</p>}
+  <ProductBrand brand={item.brand}/><h1><RecommendationName text={text}/></h1>
+  <ProductDetailSpecs model={item.model} packaging={item.packaging} specification={text.specification}/>{text.missing&&<Alert type="info" message={t('article.field_source',{fields:text.sourceFields.map(key=>t(key==='description'?'master.descriptions':key==='specification'?'master.specifications':'rec.fact.'+key)).join(' · ')})}/>}
   {product&&<SellingPrice product={product}/>}
   <DetailOffer facts={{...item,offerNotes:text.offerNotes}}/>
   {text.description&&<section className="rec-detail-description"><h2>{t('detail.description')}</h2>{text.description.split('\n').map((line,i)=><p key={i}>{line}</p>)}</section>}
