@@ -1,0 +1,206 @@
+{
+  "boxes": {
+    "address": {
+      "bottom": 14.5625,
+      "height": 754.09375,
+      "width": 313,
+      "x": 16,
+      "y": -739.53125
+    },
+    "basic": {
+      "bottom": -1111.46875,
+      "height": 429.1875,
+      "width": 313,
+      "x": 16,
+      "y": -1540.65625
+    },
+    "save": {
+      "bottom": 691.65625,
+      "height": 48,
+      "width": 313,
+      "x": 16,
+      "y": 643.65625
+    },
+    "social": {
+      "bottom": 627.65625,
+      "height": 597.09375,
+      "width": 313,
+      "x": 16,
+      "y": 30.5625
+    },
+    "verification": {
+      "bottom": -755.53125,
+      "height": 339.9375,
+      "width": 313,
+      "x": 16,
+      "y": -1095.46875
+    }
+  },
+  "chrome": [
+    {
+      "className": "store-header",
+      "color": "rgb(255, 255, 255)"
+    },
+    {
+      "className": "browse-mobile-shortcuts",
+      "color": "rgb(255, 255, 255)"
+    }
+  ],
+  "controls": [
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "LINE",
+      "labelRect": {
+        "bottom": 290.65625,
+        "height": 44,
+        "left": 33,
+        "right": 312,
+        "top": 246.65625,
+        "width": 279,
+        "x": 33,
+        "y": 246.65625
+      },
+      "rect": {
+        "bottom": 290.65625,
+        "height": 44,
+        "left": 33,
+        "right": 312,
+        "top": 246.65625,
+        "width": 279,
+        "x": 33,
+        "y": 246.65625
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "@aiko-tan",
+      "labelRect": {
+        "bottom": 380.65625,
+        "height": 44,
+        "left": 33,
+        "right": 312,
+        "top": 336.65625,
+        "width": 279,
+        "x": 33,
+        "y": 336.65625
+      },
+      "rect": {
+        "bottom": 380.65625,
+        "height": 44,
+        "left": 33,
+        "right": 312,
+        "top": 336.65625,
+        "width": 279,
+        "x": 33,
+        "y": 336.65625
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "Aiko Tan",
+      "labelRect": {
+        "bottom": 470.65625,
+        "height": 44,
+        "left": 33,
+        "right": 312,
+        "top": 426.65625,
+        "width": 279,
+        "x": 33,
+        "y": 426.65625
+      },
+      "rect": {
+        "bottom": 470.65625,
+        "height": 44,
+        "left": 33,
+        "right": 312,
+        "top": 426.65625,
+        "width": 279,
+        "x": 33,
+        "y": 426.65625
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgb(180, 43, 37)",
+      "label": "移除账号",
+      "labelRect": {
+        "bottom": 519.65625,
+        "height": 22,
+        "left": 48,
+        "right": 104,
+        "top": 497.65625,
+        "width": 56,
+        "x": 48,
+        "y": 497.65625
+      },
+      "rect": {
+        "bottom": 530.65625,
+        "height": 44,
+        "left": 33,
+        "right": 119,
+        "top": 486.65625,
+        "width": 86,
+        "x": 33,
+        "y": 486.65625
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "添加社交账号",
+      "labelRect": {
+        "bottom": 595.65625,
+        "height": 22,
+        "left": 48,
+        "right": 132,
+        "top": 573.65625,
+        "width": 84,
+        "x": 48,
+        "y": 573.65625
+      },
+      "rect": {
+        "bottom": 606.65625,
+        "height": 44,
+        "left": 33,
+        "right": 147,
+        "top": 562.65625,
+        "width": 114,
+        "x": 33,
+        "y": 562.65625
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "color": "rgb(255, 255, 255)",
+      "label": "保存资料",
+      "labelRect": {
+        "bottom": 676.65625,
+        "height": 22,
+        "left": 144.5,
+        "right": 200.5,
+        "top": 654.65625,
+        "width": 56,
+        "x": 144.5,
+        "y": 654.65625
+      },
+      "rect": {
+        "bottom": 687.65625,
+        "height": 44,
+        "left": 16,
+        "right": 329,
+        "top": 643.65625,
+        "width": 313,
+        "x": 16,
+        "y": 643.65625
+      },
+      "tag": "BUTTON"
+    }
+  ],
+  "height": 800,
+  "nestedForms": 0,
+  "overflow": false,
+  "scrollY": 1856,
+  "width": 360
+}

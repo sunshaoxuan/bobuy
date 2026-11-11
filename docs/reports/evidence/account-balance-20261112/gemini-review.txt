@@ -1,0 +1,43 @@
+### 1. Concrete Visible Defects & Missing Evidence
+
+* **Missing Mobile Views (Incomplete Evidence):** The mobile screenshots do not show the bottom of the "收货地址" card, the entire "社交账号" section, or the primary "保存资料" action. It is impossible to verify whether the sticky bottom navigation bar permanently obscures the primary submit action at the scroll end.
+* **Desktop Address Card Vertical Stretching / Dead Space:** The two-column grid stretches the right-hand Address card to match the combined height of the two stacked left cards (`基本资料` + `邮箱验证`). This leaves an excessive vertical void below the "邮政编码" field, stranding the "清空地址" action unnaturally at the bottom right.
+* **Divider Inconsistency Across Breakpoints:** Mobile cards (Images 2 & 3) feature a subtle horizontal divider line directly beneath each card header (`基本资料`, `邮箱验证`, `收货地址`). Desktop cards (Image 1) omit this divider entirely across all sections.
+* **Row Alignment in "社交账号" (Desktop):** The "移除账号" link button is vertically aligned with the inputs ("平台", "账号", "显示名称"), but lacks a label above it. This leaves an empty notch in the label line and produces awkward vertical centering relative to the adjacent input fields.
+* **Unbalanced Field Width for Postal Code:** On desktop, "国家/地区" and "城市" form a 50/50 two-column row, but "邮政编码" is hard-capped to half-width with no counterpart on the right, creating a ragged bottom boundary before the excessive whitespace.
+
+---
+
+### 2. Systematic Assessment
+
+* **Balance & Hierarchy:**
+  * *Desktop:* Stacking Basic Details and Email Verification on the left successfully solves the previous oversized void beneath Basic Details. However, the right card inherits full stretch, transferring the void problem to the Address card unless its internal alignment or height distribution is addressed.
+  * *Mobile:* Hierarchy is clean and logical. The single-column stack respects the user's sequential workflow (Identity $\rightarrow$ Verification $\rightarrow$ Shipping).
+* **Whitespace & Layout:**
+  * The outer grid gutters between the left and right desktop columns and between the stacked cards are consistent.
+  * Mobile card padding and outer margin conform well to standard 360px viewport boundaries without horizontal overflow.
+* **Field Spacing & Alignment:**
+  * Input label-to-control spacing and inter-field vertical margins are consistent across both desktop and mobile.
+  * In desktop Basic Details, the 2-column split for Name and Phone alongside full-width Email fits naturally within the column width.
+* **Title, Icon & Border Alignment:**
+  * Title/icon badge pairings (soft red rounded container with centered line-art icon) are aligned consistently across all cards.
+  * Outer border weights, corner radii, and color values match the restrained red/neutral palette.
+  * As noted, the card header bottom border exists on mobile but is missing on desktop.
+* **Actions & Touch Targets:**
+  * "验证邮箱" (filled red) and "重新发送" (outlined neutral) on desktop and mobile provide clear priority differentiation.
+  * "清空地址" on desktop is isolated in the bottom-right corner of the Address card. On mobile, its placement is cut off in the provided screens.
+  * The global "保存资料" button is positioned at the far bottom-right on desktop; ensure adequate bottom padding on mobile (`pb-[nav_height]`) so this critical button clears the sticky bottom navigation bar.
+* **Narrow Text & Typography:**
+  * The verification disclaimer and email change helper text wrap cleanly to two lines on 360px viewports without awkward character breaks or clipping.
+
+---
+
+### 3. Required Fixes Only
+
+1. **Card Header Divider Synchronization:** Decide on header dividers and apply uniformly (either display the subtle line below the header on both desktop and mobile, or remove it from mobile).
+2. **Normalize Address Card Height / Alignment (Desktop):**
+   * Do not let the address card flex-stretch its inner space arbitrarily. Align "清空地址" consistently relative to the postal code input (or within a unified card footer) rather than floating detached across a large empty void.
+3. **Align "移除账号" Button (Desktop):**
+   * Adjust the social account row flex/grid so "移除账号" is explicitly baseline- or center-aligned with the input boxes, accounting for the height of the label row above the adjacent fields.
+4. **Ensure Mobile Scroll Clearance:**
+   * Verify that the mobile container has sufficient bottom padding (`padding-bottom: calc(env(safe-area-inset-bottom) + [tabbar-height] + 16px)`) so "保存资料" and the bottom-most fields are fully accessible above the fixed bottom navigation bar.
