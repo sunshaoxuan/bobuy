@@ -1,0 +1,22 @@
+{
+  "source": "efa19779e3aada1cb3b5081cd97d01cb308d96ff",
+  "result": "PASS",
+  "frontendFull": {
+    "total": 761,
+    "passed": 760,
+    "timedOut": 1
+  },
+  "finalAffectedPass": 101,
+  "finalRelatedLogSha256": "41aa699e9769a9736684f664606aa7643409b15ce8ed5d95511f02b9bd4ea437",
+  "backend": "unchanged; reuse 20261111.5",
+  "browserCases": 16,
+  "bindings": {
+    "frontend/test-number-right-frozen.log": "d178d6dbec821c466704acbf1d745934bff6989871cbfd590d609e7df52755e4",
+    "frontend/test-number-right-final-focused.log": "3481750a887b0445b1a5baff14ca430d7c8a8a14ef84570a9c905ef4015d8363",
+    "frontend/test-number-right-related.log": "41aa699e9769a9736684f664606aa7643409b15ce8ed5d95511f02b9bd4ea437",
+    "frontend/test-number-right-v2.log": "304ed12721bead946f7389ffdf2e0cd8cb98750bdc0fef904edadac905c77026",
+    "frontend/build-number-right-v2-final.log": "86c0967f4b25311be5fbb4f1395ce9aa3783c297ec06eae3e62b5bb439ed6812",
+    "docs/reports/evidence/card-code-right-price-20261111/v2/candidate-matrix.json": "556833963a7fa202453b0843466fc8857776c682b7587d02420cb962099276c2",
+    "docs/reports/evidence/card-code-right-price-20261111/v2/glyph-pixels.json": "98e9fe9c6c94b1f62aab7ceee2df2a73de1af75fe40cd322fb03c27a251068b9"
+  }
+}

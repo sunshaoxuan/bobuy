@@ -1,0 +1,91 @@
+{
+  "result": "PASS",
+  "source": "efa19779e3aada1cb3b5081cd97d01cb308d96ff",
+  "fullDiagnostic": {
+    "total": 761,
+    "passed": 760,
+    "timedOut": 1
+  },
+  "finalNoBadgeAndFailedSuiteRetest": {
+    "files": 4,
+    "passed": 60
+  },
+  "relatedRetest": {
+    "files": 15,
+    "passed": 146
+  },
+  "finalRatingAndCardRetest": {
+    "files": 9,
+    "passed": 101
+  },
+  "countsOverlap": true,
+  "backend": "unchanged, reused 20261111.5 evidence",
+  "build": "PASS including TypeScript, 1607 i18n keys and actual final dist",
+  "logs": {
+    "frontend/test-number-right-frozen.log": {
+      "sha256": "d178d6dbec821c466704acbf1d745934bff6989871cbfd590d609e7df52755e4",
+      "summary": [
+        "If this is a long-running test, pass a timeout value as the last argument or configure it globally with \"testTimeout\".",
+        "⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯",
+        "",
+        " Test Files  1 failed | 113 passed (114)",
+        "      Tests  1 failed | 760 passed (761)",
+        "   Start at  00:02:37",
+        "   Duration  308.93s (transform 5.59s, setup 97.71s, collect 643.40s, tests 224.24s, environment 153.73s, prepare 29.85s)",
+        ""
+      ]
+    },
+    "frontend/test-number-right-final-focused.log": {
+      "sha256": "3481750a887b0445b1a5baff14ca430d7c8a8a14ef84570a9c905ef4015d8363",
+      "summary": [
+        " ✓ src/pages/PublicProductCatalog.test.tsx  (16 tests) 1215ms",
+        " ✓ src/components/CompactProductCard.test.tsx  (10 tests) 235ms",
+        "",
+        " Test Files  4 passed (4)",
+        "      Tests  60 passed (60)",
+        "   Start at  00:08:57",
+        "   Duration  29.02s (transform 646ms, setup 1.97s, collect 15.38s, tests 7.33s, environment 2.89s, prepare 593ms)",
+        ""
+      ]
+    },
+    "frontend/test-number-right-related.log": {
+      "sha256": "41aa699e9769a9736684f664606aa7643409b15ce8ed5d95511f02b9bd4ea437",
+      "summary": [
+        " ✓ src/pages/RecommendationBrowse.test.tsx  (2 tests) 631ms",
+        " ✓ src/pages/ServiceSummary.test.tsx  (5 tests) 125ms",
+        "",
+        " Test Files  15 passed (15)",
+        "      Tests  146 passed (146)",
+        "   Start at  00:11:03",
+        "   Duration  88.47s (transform 1.94s, setup 11.37s, collect 100.78s, tests 27.17s, environment 17.61s, prepare 3.71s)",
+        ""
+      ]
+    },
+    "frontend/test-number-right-v2.log": {
+      "sha256": "304ed12721bead946f7389ffdf2e0cd8cb98750bdc0fef904edadac905c77026",
+      "summary": [
+        " ✓ src/pages/ProductMarkerCatalog.test.tsx  (7 tests) 738ms",
+        " ✓ src/components/CompactProductCard.test.tsx  (10 tests) 224ms",
+        "",
+        " Test Files  9 passed (9)",
+        "      Tests  101 passed (101)",
+        "   Start at  00:18:13",
+        "   Duration  43.52s (transform 984ms, setup 5.96s, collect 50.16s, tests 12.62s, environment 8.84s, prepare 1.64s)",
+        ""
+      ]
+    },
+    "frontend/build-number-right-v2-final.log": {
+      "sha256": "86c0967f4b25311be5fbb4f1395ce9aa3783c297ec06eae3e62b5bb439ed6812",
+      "summary": [
+        "dist/assets/Table-gRuPd_I7.js                         147.12 kB │ gzip:  47.47 kB",
+        "dist/assets/index-BZAnqgwO.js                       1,132.83 kB │ gzip: 391.04 kB",
+        "✓ built in 6.64s",
+        "",
+        "> bobbuy-frontend@0.1.0 postbuild",
+        "> node scripts/prerender-home.mjs",
+        "",
+        "Generated home-only crawlable HTML; SPA detail/admin template retains no shared home canonical."
+      ]
+    }
+  }
+}

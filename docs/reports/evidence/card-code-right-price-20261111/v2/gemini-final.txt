@@ -1,0 +1,45 @@
+### 1. Concrete Defects
+* **None detected**: The rendered cards fully adhere to all visual and structural requirements without layout glitches, orphan spaces, or clipping.
+
+---
+
+### 2. Extracted Badges & Prices
+
+#### **Left Card (Nature Valley)**
+* **Badge:** `No.61432` (Content-sized black pill, bold white text)
+* **Brand / Name:** NATURE VALLEY / 燕麦蜂蜜脆格兰诺拉棒
+* **Subtitle:** `(クランチー オーツ＆ハニ...`
+* **Reference Tag:** `参考价`
+* **Original / Strikethrough Price:** `1,990 JPY`
+* **Discount:** `-400 JPY`
+* **Final Price:** `¥ 1,598`
+* **Unit:** `/ 1箱 (42g×40袋)`
+
+#### **Right Card (Attack ZERO)**
+* **Badge:** `No.78900` (Content-sized black pill, bold white text)
+* **Brand / Name:** Attack ZERO / 液体洗衣液
+* **Subtitle:** `(液体洗濯洗剤)`
+* **Reference Tag:** `参考价`
+* **Original / Strikethrough Price:** `2,938 JPY`
+* **Discount:** `-590 JPY`
+* **Final Price:** `¥ 2,348`
+* **Unit:** `/ 2900g`
+
+---
+
+### 3. Assessment Against Requirements
+
+1. **Top Black Pill Badges (`No.61432` / `No.78900`):**
+   * **Pass.** Both badges are content-sized capsules with rounded corners, solid black fill, and centered bold white text.
+
+2. **No Reserved Blank Title Row:**
+   * **Pass.** The old product code slot above/within the text area has been completely collapsed. The brand and product title directly follow the product image without redundant vertical spacing.
+
+3. **Unrated State (Five Gray Stars Only):**
+   * **Pass.** Both cards show exactly 5 muted gray stars without any adjacent text, numerical rating, or count.
+
+4. **Right-Aligned Prices and Units:**
+   * **Pass.** The reference label (`参考价`), original/discount line, main price (`¥ ...`), and packaging units are all cleanly right-aligned.
+
+5. **Japanese Subtitle on Single Line Immediately After Name:**
+   * **Pass.** Positioned directly beneath the translated Chinese product title on a single line (Card 1 cleanly truncates with an ellipsis; Card 2 fits fully).

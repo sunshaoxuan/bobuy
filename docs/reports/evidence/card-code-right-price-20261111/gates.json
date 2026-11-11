@@ -1,0 +1,21 @@
+{
+  "source": "5c95053f4355e9ef7d0110f25b14fe8cc05bdab2",
+  "result": "PASS",
+  "frontendFull": {
+    "total": 761,
+    "passed": 760,
+    "timedOut": 1
+  },
+  "finalAffectedPass": 60,
+  "finalRelatedLogSha256": "41aa699e9769a9736684f664606aa7643409b15ce8ed5d95511f02b9bd4ea437",
+  "backend": "unchanged; reuse 20261111.5",
+  "browserCases": 16,
+  "bindings": {
+    "frontend/test-number-right-frozen.log": "d178d6dbec821c466704acbf1d745934bff6989871cbfd590d609e7df52755e4",
+    "frontend/test-number-right-final-focused.log": "3481750a887b0445b1a5baff14ca430d7c8a8a14ef84570a9c905ef4015d8363",
+    "frontend/test-number-right-related.log": "41aa699e9769a9736684f664606aa7643409b15ce8ed5d95511f02b9bd4ea437",
+    "frontend/build-number-right-no.log": "5b4c2f319c706bbaa68acd40f8b61f552b9981b53050887a55dc92c9a05b9aa9",
+    "docs/reports/evidence/card-code-right-price-20261111/candidate-matrix.json": "85e71be82b5960379ed2256aae66f0b8cd23aff5181dbccf8efb45a466ac3b40",
+    "docs/reports/evidence/card-code-right-price-20261111/glyph-pixels.json": "8e89dc1e39bacab441ec0693976a1f256ab2503359723d9e0802b9768905f8b4"
+  }
+}
