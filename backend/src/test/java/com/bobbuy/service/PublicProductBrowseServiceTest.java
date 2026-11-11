@@ -11,6 +11,8 @@ class PublicProductBrowseServiceTest {
   var wrong=new RecommendationItem();wrong.id=3L;wrong.productId="other";wrong.itemNumber=base.itemNumber();wrong.referenceContext=warehouse.referenceContext;
   var entry=new PublicProductCatalogService.Entry(base.productId(),base.merchantId(),base.name(),base.description(),base.brand(),base.itemNumber(),base.specification(),base.model(),base.packaging(),base.gallery(),base.categories(),List.of(new PublicProductCatalogService.Offer(9L,online),new PublicProductCatalogService.Offer(5L,warehouse),new PublicProductCatalogService.Offer(99L,wrong)),false);
   assertThat(ReferencePriceDisplay.main(entry).orElseThrow().facts()).isSameAs(warehouse);
+  warehouse.itemNumber=null;var absent=new PublicProductCatalogService.Entry(base.productId(),base.merchantId(),base.name(),base.description(),base.brand(),null,base.specification(),base.model(),base.packaging(),base.gallery(),base.categories(),List.of(new PublicProductCatalogService.Offer(5L,warehouse)),false);
+  assertThat(ReferencePriceDisplay.main(absent).orElseThrow().facts()).isSameAs(warehouse);warehouse.itemNumber="another-item";assertThat(ReferencePriceDisplay.main(absent)).isEmpty();
  }
  @Test void compactReferenceRetainsZeroAmountSourceAndWindowAndRevisionsChangeWithFacts(){
   var base=row(0,null);var facts=new RecommendationItem();facts.id=901L;facts.productId=base.productId();facts.itemNumber=base.itemNumber();facts.referencePrice=java.math.BigDecimal.ZERO;facts.originalPrice=new java.math.BigDecimal("500");facts.discountAmount=new java.math.BigDecimal("500");facts.priceUnit="pack";facts.offerStart=java.time.LocalDate.of(2000,1,1);facts.offerEnd=java.time.LocalDate.of(2000,1,2);
