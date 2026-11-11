@@ -1,0 +1,44 @@
+{
+  "environment": "https://bobuy.cc/account",
+  "source": "400773a142de7a5f3d692fae7f9c4d694ef17eb9",
+  "productionWritesPerformed": false,
+  "before": {
+    "profile": 404,
+    "me": 200,
+    "refresh": 200
+  },
+  "after": [
+    {
+      "url": "https://bobuy.cc/api/auth/me",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/auth/profile",
+      "status": 200
+    }
+  ],
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 900,
+      "loaded": true,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "loaded": true,
+      "horizontalOverflow": false
+    },
+    {
+      "error": false,
+      "fields": 10,
+      "height": 800,
+      "overflow": false,
+      "width": 360
+    }
+  ],
+  "reloadLoaded": true,
+  "returnNavigationLoaded": true,
+  "consoleEntriesAfterRelease": 5
+}
