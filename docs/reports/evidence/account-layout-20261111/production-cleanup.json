@@ -1,0 +1,10 @@
+{
+  "phase": "CLEANED",
+  "at": "2026-11-11T15:55:08Z",
+  "source": "6880d273769f518684642d112c4f0b2b4bb6d2b2",
+  "removedOnly": ["bobuy/frontend:20261112.account-layout", "bobuy/frontend:20261112.2"],
+  "alreadyAbsent": [],
+  "databaseUnchanged": true,
+  "verifiedBeforeDeletion": ["600-second observation", "all deployed static resource SHA256", "current frontend image and revision", "frontend restart count zero", "nginx config", "other service container identities unchanged", "protected services unchanged", "old images unused by all containers"],
+  "currentImage": "sha256:5d6f799019ea822d5fac5d083f48e55aaa514b0728f85b66b45d791fca565ec1"
+}

@@ -10,6 +10,16 @@ const account=(id=1):SelfProfile=>({id,username:'user-'+id,name:'Person '+id,ema
 function mount(locale='en-US',id=1){localStorage.setItem('bobbuy_locale',locale);return render(<I18nProvider><AccountProfile key={id} userId={id} verification={(refresh,profile)=><button onClick={()=>void refresh()}>{profile.emailVerified?'Verified test':'Refresh test'}</button>}/></I18nProvider>);}
 beforeEach(()=>{vi.clearAllMocks();localStorage.clear();mocks.id=1;mocks.token='session-a';mocks.profile.mockResolvedValue(account());mocks.me.mockResolvedValue({...account(),roles:['CUSTOMER']});mocks.save.mockResolvedValue(account());});
 
+it('exposes address and social fields in named regions without opening accordions',async()=>{
+ mount();await screen.findByDisplayValue('Person 1');
+ expect(screen.getByRole('region',{name:'Basic details'})).toBeInTheDocument();
+ expect(screen.getByRole('region',{name:'Delivery address (optional)'})).toBeInTheDocument();
+ expect(screen.getByRole('region',{name:'Social accounts (optional)'})).toBeInTheDocument();
+ expect(screen.getByDisplayValue('Tokyo')).toBeVisible();
+ expect(screen.getByDisplayValue('person')).toBeVisible();
+ expect(document.querySelector('details')).toBeNull();
+});
+
 it.each(['en-US','ja-JP','zh-CN','zh-TW'])('loads and saves self details in %s',async locale=>{
  mount(locale);
  await screen.findByDisplayValue('Person 1');

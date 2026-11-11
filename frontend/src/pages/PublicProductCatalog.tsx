@@ -6,9 +6,9 @@ import {ArrowDownOutlined,PlusOutlined,ReloadOutlined} from '@ant-design/icons';
 import {Link,useLocation,useSearchParams} from 'react-router-dom';
 import {storefrontApi,productMarkerApi,type ProductMarkerDefinition,type PublicCatalogEntry,type ProductBrowseCard,type StoreProduct} from '../api';
 import {localizedContent,useI18n,type Locale} from '../i18n';
-import {ProductBrand,ProductVariant} from '../components/ProductMetadata';
+import {ProductBrand} from '../components/ProductMetadata';
 import {RecommendationImageViewer} from '../components/RecommendationImageViewer';
-import {ConsumerDetail,ProductDetailCode} from '../components/ConsumerDetail';
+import {ConsumerDetail,ProductDetailCode,ProductDetailSpecs} from '../components/ConsumerDetail';
 import ReservationAdd from '../components/ReservationAdd';
 import CatalogReferenceHistory from '../components/CatalogReferenceHistory';
 import {productDetailContent} from '../productDetailContent';
@@ -129,14 +129,13 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
       {browse.page?.hasNext&&<div className="feed-loader" ref={sentinel}><Button loading={browse.busy} disabled={revealPaused||browse.changed||!!browse.error} icon={<ArrowDownOutlined aria-hidden/>} onClick={browse.next}>{t('store.load_more')} ({filtered.length}/{browse.page.matchedTotal})</Button></div>}
     </>}
     </section>}
-    <Drawer className="rec-product-detail catalog-master-detail consumer-detail-drawer" title={t('store.details')} width="min(1120px,100vw)" open={!!detailId} onClose={closeDetail}>
+    <Drawer className="rec-product-detail catalog-master-detail consumer-detail-drawer" title={opened?<ProductDetailCode value={opened.itemNumber}/>:t('store.details')} width="min(1120px,100vw)" open={!!detailId} onClose={closeDetail}>
       {detailId&&!opened&&(detail.error?<BrowseError error={detail.error} retry={()=>setDetailAttempt(value=>value+1)} refresh={reload}/>:<Spin/>)}
       {opened&&detailName&&detailSpec&&description&&<ConsumerDetail media={<RecommendationImageViewer consumer key={opened.productId} pictures={opened.gallery} name={detailName.value}/>}>
         <ProductMarkerBadges markers={detail.markers??[]}/>
         {management(opened)}
         <ProductBrand brand={opened.brand}/><h1 lang={detailName.language}><span className="rec-name-local">{detailName.value||t('rec.not_stated')}</span>{locale!=='ja-JP'&&opened.name['ja-JP']&&opened.name['ja-JP']!==detailName.value&&<span className="rec-name-original" lang="ja">（{opened.name['ja-JP']}）</span>}</h1>{sourceNote(detailName)}
-        <ProductDetailCode value={opened.itemNumber}/><ProductVariant model={content?.model} packaging={content?.packaging}/>
-        {detailSpec.value&&<><p lang={detailSpec.language}>{detailSpec.value}</p>{sourceNote(detailSpec)}</>}
+        <ProductDetailSpecs model={content?.model} packaging={content?.packaging} specification={detailSpec.value} specificationLanguage={detailSpec.language}/>{detailSpec.value&&sourceNote(detailSpec)}
         {sale&&!pricePending(opened.productId)&&<SellingPrice product={sale}/>}
         {description.value&&<section><h2>{t('detail.description')}</h2>{sourceNote(description)}<div lang={description.language}>{description.value.split('\n').map((line,index)=><p key={index}>{line}</p>)}</div></section>}
         {content&&<CatalogReferenceHistory entry={opened} content={content}/> }

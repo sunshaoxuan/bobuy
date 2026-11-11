@@ -1,0 +1,11 @@
+# Card code and price layout evidence
+
+The final accepted production input is **20261112.2**, source `efa19779e3aada1cb3b5081cd97d01cb308d96ff`, in **v2/**. Root-level evidence retains the preceding 20261112.1 state for comparison, before the user's density and unrated-caption corrections. Root visual acceptance does not cover those corrections.
+
+Final behavior: content-sized black pill with centered bold white `No.` plus the exact product code, before the image; price, original/discount and unit groups right aligned; natural title height without the retired code-row space; five gray stars only when unrated. Accessible rating labels and real score values remain.
+
+v2/browser-validator.mjs is the exact browser validation source executed from frontend with the existing Playwright dependency. v2/glyph-validator.py records actual screenshot ink, and v2/spacing-comparison.json compares identical viewports. The validators are retained as evidence; preserve their documented frontend working-directory context when replaying. v2/production-matrix.json and production screenshots cover four languages at 360/390/462/1440px. v2/test-results.json distinguishes the full diagnostic timeout from the successful focused/related retests; their counts overlap. Backend inputs and runtime were unchanged.
+
+The price/unit **typographic right edges** differ by at most 1px in DOM measurements. Screenshot ink measurements independently record the fullwidth Japanese closing-parenthesis sidebearing, which can leave its visible ink 8px short of the line edge; this is not additional CSS padding. CJK punctuation spacing is described in the [W3C text specification](https://www.w3.org/TR/css-text-4/#text-spacing-trim-property). The main agent reviewed the original-size screenshots and the independently sourced Gemini review; no custom source-text substitution or glyph offset was introduced.
+
+v2/production-binding.json binds the exact frontend image and 79 dist files. Only frontend changed. Other service identities were preserved and all service restart counts were zero. Both prior frontend images remain available for application rollback; no database, credentials, schema or production content was changed.

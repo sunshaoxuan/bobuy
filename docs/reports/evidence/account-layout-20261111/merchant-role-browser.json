@@ -1,0 +1,50 @@
+{
+  "height": 844,
+  "links": [
+    {
+      "href": "/account",
+      "label": "我的资料",
+      "rect": {
+        "bottom": 244,
+        "height": 81,
+        "left": 16,
+        "right": 125,
+        "top": 163,
+        "width": 109,
+        "x": 16,
+        "y": 163
+      }
+    },
+    {
+      "href": "/admin/orders",
+      "label": "我的订单",
+      "rect": {
+        "bottom": 244,
+        "height": 81,
+        "left": 133,
+        "right": 242,
+        "top": 163,
+        "width": 109,
+        "x": 133,
+        "y": 163
+      }
+    },
+    {
+      "href": "/admin",
+      "label": "商家维护",
+      "rect": {
+        "bottom": 244,
+        "height": 81,
+        "left": 250,
+        "right": 359,
+        "top": 163,
+        "width": 109,
+        "x": 250,
+        "y": 163
+      }
+    }
+  ],
+  "overflow": false,
+  "script": "/assets/index-BRSuRmts.js",
+  "width": 390
+}

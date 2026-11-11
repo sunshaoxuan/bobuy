@@ -1,0 +1,54 @@
+{
+  "source": "d18180d89ea22ae297971d927ab0526277075dff",
+  "desktop": {
+    "height": 900,
+    "overflow": false,
+    "profileLoaded": true,
+    "scripts": [
+      "/assets/index-Bd1s8gna.js"
+    ],
+    "styles": [
+      "/assets/index-CzodR8gn.css"
+    ],
+    "width": 1440
+  },
+  "accountRelatedSourcesUnchangedAfterMainSync": true,
+  "network": [
+    {
+      "method": "Network.responseReceived",
+      "url": "http://127.0.0.1:5179/account",
+      "status": 200
+    },
+    {
+      "method": "Network.responseReceived",
+      "url": "http://127.0.0.1:5179/assets/index-CzodR8gn.css",
+      "status": 200
+    },
+    {
+      "method": "Network.responseReceived",
+      "url": "http://127.0.0.1:5179/assets/index-Bd1s8gna.js",
+      "status": 200
+    },
+    {
+      "method": "Network.responseReceived",
+      "url": "http://127.0.0.1:5179/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "Network.responseReceived",
+      "url": "http://127.0.0.1:5179/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "Network.responseReceived",
+      "url": "http://127.0.0.1:5179/api/auth/profile",
+      "status": 200
+    }
+  ],
+  "consoleErrors": [],
+  "navigation": {
+    "orders": "/client/orders",
+    "merchant": "/admin/dashboard"
+  },
+  "adminFixtureLimitation": "Existing isolated local Core null-id aggregate errors occur on the separate admin dashboard; account profile and customer orders succeed. Production admin route is checked separately."
+}

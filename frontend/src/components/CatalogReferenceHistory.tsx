@@ -2,7 +2,7 @@ import {Link,useLocation} from 'react-router-dom';
 import type {PublicCatalogEntry} from '../api';
 import {useI18n} from '../i18n';
 import {productDetailContent} from '../productDetailContent';
-import {DetailOffer} from './ConsumerDetail';
+import {DetailOffer,ProductDetailCode} from './ConsumerDetail';
 
 /** One source occurrence remains one row, including equal prices from different channels/periods. */
 export default function CatalogReferenceHistory({entry,content}:{entry:PublicCatalogEntry;content:ReturnType<typeof productDetailContent>}){
@@ -15,7 +15,7 @@ export default function CatalogReferenceHistory({entry,content}:{entry:PublicCat
    return <section className="consumer-reference-occurrence" key={row.key} data-reference-key={row.key} data-product-id={row.facts.productId??''}>
     <header><Link to={'/recommendations/'+row.postId+'?'+next.toString()}>{t('catalog.source_issue',{id:row.postId})}</Link></header>
     {row.name&&<h3 className="consumer-history-name">{row.name}</h3>}
-    {row.itemNumber&&<p className="consumer-product-code"><span>{t('rec.code')}</span><strong>{row.itemNumber}</strong></p>}
+    {row.itemNumber&&<ProductDetailCode value={row.itemNumber}/>}
     {row.specification&&<p className="consumer-reference-spec">{row.specification}</p>}
     {(row.model||row.packaging)&&<p className="consumer-reference-variant">{[row.model,row.packaging].filter(Boolean).join(' · ')}</p>}
     {row.description&&<div className="consumer-reference-description">{row.description.split('\n').map((line,index)=><p key={index}>{line}</p>)}</div>}

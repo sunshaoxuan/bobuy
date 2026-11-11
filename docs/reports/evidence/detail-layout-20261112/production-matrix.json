@@ -1,0 +1,3154 @@
+[
+  {
+    "width": 360,
+    "locale": "zh-CN",
+    "metrics": {
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 61,
+        "top": 0,
+        "right": 360,
+        "bottom": 61,
+        "left": 0,
+        "text": "No.66517",
+        "style": {
+          "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(45, 41, 38)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "code": {
+        "x": 64,
+        "y": 16,
+        "width": 83.6875,
+        "height": 28,
+        "top": 16,
+        "right": 147.6875,
+        "bottom": 44,
+        "left": 64,
+        "text": "No.66517",
+        "style": {
+          "font": "600 16px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 23, 23)",
+          "radius": "999px"
+        }
+      },
+      "codeText": {
+        "x": 74,
+        "y": 20,
+        "width": 63.6875,
+        "height": 20,
+        "top": 20,
+        "right": 137.6875,
+        "bottom": 40,
+        "left": 74,
+        "text": "No.66517",
+        "style": {
+          "font": "700 14px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "close": {
+        "x": 12,
+        "y": 8,
+        "width": 44,
+        "height": 44,
+        "top": 8,
+        "right": 56,
+        "bottom": 52,
+        "left": 12,
+        "text": "",
+        "style": {
+          "font": "600 16px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "6px"
+        }
+      },
+      "image": {
+        "x": 18,
+        "y": 79,
+        "width": 324,
+        "height": 488,
+        "top": 79,
+        "right": 342,
+        "bottom": 567,
+        "left": 18,
+        "text": "‹1 / 4›",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(250, 250, 250)",
+          "radius": "20px"
+        }
+      },
+      "title": {
+        "x": 18,
+        "y": 611,
+        "width": 324,
+        "height": 58.390625,
+        "top": 611,
+        "right": 342,
+        "bottom": 669.390625,
+        "left": 18,
+        "text": "卡通地板坐垫（キャラクターフロアクッション）",
+        "style": {
+          "font": "750 24px / 33.6px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(23, 23, 23)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "specs": {
+        "x": 18,
+        "y": 689.390625,
+        "width": 324,
+        "height": 113.390625,
+        "top": 689.390625,
+        "right": 342,
+        "bottom": 802.78125,
+        "left": 18,
+        "text": "包装明细約85×85×14cm／各種1点／非電動规格与计量明细约85×85×14cm，可将脚伸入的非电动坐垫，各角色单件选择，并非3件装。",
+        "style": {
+          "font": "14px / 23.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "offer": {
+        "x": 18,
+        "y": 822.78125,
+        "width": 324,
+        "height": 306.1875,
+        "top": 822.78125,
+        "right": 342,
+        "bottom": 1128.96875,
+        "left": 18,
+        "text": "参考售价（非实时）JPY原价: ¥3,498折扣金额: −¥700¥2,798/ 各種1点来源渠道Costco 仓库店优惠 / 兑换期间2026-11-09 – 2026-11-22 日本时间，含起止日来源cds2.costcojapan.jp",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(245, 245, 243)",
+          "radius": "20px"
+        }
+      },
+      "price": {
+        "x": 34,
+        "y": 896.359375,
+        "width": 292,
+        "height": 40.5,
+        "top": 896.359375,
+        "right": 326,
+        "bottom": 936.859375,
+        "left": 34,
+        "text": "¥2,798",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "unit": {
+        "x": 271.34375,
+        "y": 938.859375,
+        "width": 54.65625,
+        "height": 20.796875,
+        "top": 938.859375,
+        "right": 326,
+        "bottom": 959.65625,
+        "left": 271.34375,
+        "text": "/ 各種1点",
+        "style": {
+          "font": "13px / 20.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(98, 98, 98)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "conditions": {
+        "x": 18,
+        "y": 1148.96875,
+        "width": 324,
+        "height": 98.640625,
+        "top": 1148.96875,
+        "right": 342,
+        "bottom": 1247.609375,
+        "left": 18,
+        "text": "优惠条件Costco仓库店含税参考价，不适用于线上；仅限有效会员，库存及售卖情况以各仓库为准。约85×85×14cm，可将脚伸入的非电动坐垫，各款单件，不是3件装。",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "bodyWidth": 360,
+      "bodyScrollWidth": 360
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 360,
+    "locale": "ja-JP",
+    "metrics": {
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 61,
+        "top": 0,
+        "right": 360,
+        "bottom": 61,
+        "left": 0,
+        "text": "No.66517",
+        "style": {
+          "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(45, 41, 38)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "code": {
+        "x": 64,
+        "y": 16,
+        "width": 83.6875,
+        "height": 28,
+        "top": 16,
+        "right": 147.6875,
+        "bottom": 44,
+        "left": 64,
+        "text": "No.66517",
+        "style": {
+          "font": "600 16px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 23, 23)",
+          "radius": "999px"
+        }
+      },
+      "codeText": {
+        "x": 74,
+        "y": 20,
+        "width": 63.6875,
+        "height": 20,
+        "top": 20,
+        "right": 137.6875,
+        "bottom": 40,
+        "left": 74,
+        "text": "No.66517",
+        "style": {
+          "font": "700 14px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "close": {
+        "x": 12,
+        "y": 8,
+        "width": 44,
+        "height": 44,
+        "top": 8,
+        "right": 56,
+        "bottom": 52,
+        "left": 12,
+        "text": "",
+        "style": {
+          "font": "600 16px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "6px"
+        }
+      },
+      "image": {
+        "x": 18,
+        "y": 79,
+        "width": 324,
+        "height": 488,
+        "top": 79,
+        "right": 342,
+        "bottom": 567,
+        "left": 18,
+        "text": "‹1 / 4›",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(250, 250, 250)",
+          "radius": "20px"
+        }
+      },
+      "title": {
+        "x": 18,
+        "y": 611,
+        "width": 324,
+        "height": 67.1875,
+        "top": 611,
+        "right": 342,
+        "bottom": 678.1875,
+        "left": 18,
+        "text": "キャラクターフロアクッション",
+        "style": {
+          "font": "750 24px / 33.6px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(23, 23, 23)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "specs": {
+        "x": 18,
+        "y": 698.1875,
+        "width": 324,
+        "height": 137.1875,
+        "top": 698.1875,
+        "right": 342,
+        "bottom": 835.375,
+        "left": 18,
+        "text": "包装・入数約85×85×14cm／各種1点／非電動仕様・内容量約85×85×14cm。足を入れられる非電動クッション、各キャラクター1点。3個セットではありません。",
+        "style": {
+          "font": "14px / 23.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "offer": {
+        "x": 18,
+        "y": 855.375,
+        "width": 324,
+        "height": 336.515625,
+        "top": 855.375,
+        "right": 342,
+        "bottom": 1191.890625,
+        "left": 18,
+        "text": "参考価格（リアルタイムではありません）JPY通常価格: ¥3,498値引き額: −¥700¥2,798/ 各種1点出典チャネルCostco 倉庫店割引・引換期間2026-11-09 – 2026-11-22 日本時間・開始日と終了日を含む出典cds2.costcojapan.jp",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(245, 245, 243)",
+          "radius": "20px"
+        }
+      },
+      "price": {
+        "x": 34,
+        "y": 937.84375,
+        "width": 292,
+        "height": 40.5,
+        "top": 937.84375,
+        "right": 326,
+        "bottom": 978.34375,
+        "left": 34,
+        "text": "¥2,798",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "unit": {
+        "x": 271.34375,
+        "y": 980.34375,
+        "width": 54.65625,
+        "height": 20.796875,
+        "top": 980.34375,
+        "right": 326,
+        "bottom": 1001.140625,
+        "left": 271.34375,
+        "text": "/ 各種1点",
+        "style": {
+          "font": "13px / 20.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(98, 98, 98)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "conditions": {
+        "x": 18,
+        "y": 1211.890625,
+        "width": 324,
+        "height": 121.390625,
+        "top": 1211.890625,
+        "right": 342,
+        "bottom": 1333.28125,
+        "left": 18,
+        "text": "特典の条件コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。約85×85×14cm。足を入れる非電動クッション、各種1点で3個セットではありません。",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "bodyWidth": 360,
+      "bodyScrollWidth": 360
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 360,
+    "locale": "en-US",
+    "metrics": {
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 61,
+        "top": 0,
+        "right": 360,
+        "bottom": 61,
+        "left": 0,
+        "text": "No.66517",
+        "style": {
+          "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(45, 41, 38)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "code": {
+        "x": 64,
+        "y": 16,
+        "width": 83.6875,
+        "height": 28,
+        "top": 16,
+        "right": 147.6875,
+        "bottom": 44,
+        "left": 64,
+        "text": "No.66517",
+        "style": {
+          "font": "600 16px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 23, 23)",
+          "radius": "999px"
+        }
+      },
+      "codeText": {
+        "x": 74,
+        "y": 20,
+        "width": 63.6875,
+        "height": 20,
+        "top": 20,
+        "right": 137.6875,
+        "bottom": 40,
+        "left": 74,
+        "text": "No.66517",
+        "style": {
+          "font": "700 14px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "close": {
+        "x": 12,
+        "y": 8,
+        "width": 44,
+        "height": 44,
+        "top": 8,
+        "right": 56,
+        "bottom": 52,
+        "left": 12,
+        "text": "",
+        "style": {
+          "font": "600 16px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "6px"
+        }
+      },
+      "image": {
+        "x": 18,
+        "y": 79,
+        "width": 324,
+        "height": 488,
+        "top": 79,
+        "right": 342,
+        "bottom": 567,
+        "left": 18,
+        "text": "‹1 / 4›",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(250, 250, 250)",
+          "radius": "20px"
+        }
+      },
+      "title": {
+        "x": 18,
+        "y": 611,
+        "width": 324,
+        "height": 58.390625,
+        "top": 611,
+        "right": 342,
+        "bottom": 669.390625,
+        "left": 18,
+        "text": "Character floor cushion（キャラクターフロアクッション）",
+        "style": {
+          "font": "750 24px / 33.6px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(23, 23, 23)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "specs": {
+        "x": 18,
+        "y": 689.390625,
+        "width": 324,
+        "height": 137.1875,
+        "top": 689.390625,
+        "right": 342,
+        "bottom": 826.578125,
+        "left": 18,
+        "text": "Packaging約85×85×14cm／各種1点／非電動Specification and unitsApprox.85×85×14cm. Non-electric floor cushion with foot opening,one character option per unit,not a3-pack.",
+        "style": {
+          "font": "14px / 23.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "offer": {
+        "x": 18,
+        "y": 846.578125,
+        "width": 324,
+        "height": 349.0625,
+        "top": 846.578125,
+        "right": 342,
+        "bottom": 1195.640625,
+        "left": 18,
+        "text": "Reference price (not real time)JPYOriginal price: ¥3,498Discount amount: −¥700¥2,798/ 各種1点Source channelCostco warehouseOffer / redemption period2026-11-09 – 2026-11-22 Japan time, dates inclusiveSourcecds2.costcojapan.jp",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(245, 245, 243)",
+          "radius": "20px"
+        }
+      },
+      "price": {
+        "x": 34,
+        "y": 920.15625,
+        "width": 292,
+        "height": 40.5,
+        "top": 920.15625,
+        "right": 326,
+        "bottom": 960.65625,
+        "left": 34,
+        "text": "¥2,798",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "unit": {
+        "x": 271.34375,
+        "y": 962.65625,
+        "width": 54.65625,
+        "height": 20.796875,
+        "top": 962.65625,
+        "right": 326,
+        "bottom": 983.453125,
+        "left": 271.34375,
+        "text": "/ 各種1点",
+        "style": {
+          "font": "13px / 20.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(98, 98, 98)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "conditions": {
+        "x": 18,
+        "y": 1215.640625,
+        "width": 324,
+        "height": 144.140625,
+        "top": 1215.640625,
+        "right": 342,
+        "bottom": 1359.78125,
+        "left": 18,
+        "text": "Offer conditionsCostco warehouse tax-inclusive reference price;online excluded. Valid membership required;availability varies by warehouse.Approx.85×85×14cm,non-electric cushion with foot opening. One character option per unit,not a3-pack.",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "bodyWidth": 360,
+      "bodyScrollWidth": 360
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 360,
+    "locale": "zh-TW",
+    "metrics": {
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 61,
+        "top": 0,
+        "right": 360,
+        "bottom": 61,
+        "left": 0,
+        "text": "No.66517",
+        "style": {
+          "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(45, 41, 38)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "code": {
+        "x": 64,
+        "y": 16,
+        "width": 83.6875,
+        "height": 28,
+        "top": 16,
+        "right": 147.6875,
+        "bottom": 44,
+        "left": 64,
+        "text": "No.66517",
+        "style": {
+          "font": "600 16px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 23, 23)",
+          "radius": "999px"
+        }
+      },
+      "codeText": {
+        "x": 74,
+        "y": 20,
+        "width": 63.6875,
+        "height": 20,
+        "top": 20,
+        "right": 137.6875,
+        "bottom": 40,
+        "left": 74,
+        "text": "No.66517",
+        "style": {
+          "font": "700 14px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "close": {
+        "x": 12,
+        "y": 8,
+        "width": 44,
+        "height": 44,
+        "top": 8,
+        "right": 56,
+        "bottom": 52,
+        "left": 12,
+        "text": "",
+        "style": {
+          "font": "600 16px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "6px"
+        }
+      },
+      "image": {
+        "x": 18,
+        "y": 79,
+        "width": 324,
+        "height": 488,
+        "top": 79,
+        "right": 342,
+        "bottom": 567,
+        "left": 18,
+        "text": "‹1 / 4›",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(250, 250, 250)",
+          "radius": "20px"
+        }
+      },
+      "title": {
+        "x": 18,
+        "y": 611,
+        "width": 324,
+        "height": 58.390625,
+        "top": 611,
+        "right": 342,
+        "bottom": 669.390625,
+        "left": 18,
+        "text": "卡通地板坐墊（キャラクターフロアクッション）",
+        "style": {
+          "font": "750 24px / 33.6px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(23, 23, 23)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "specs": {
+        "x": 18,
+        "y": 689.390625,
+        "width": 324,
+        "height": 113.390625,
+        "top": 689.390625,
+        "right": 342,
+        "bottom": 802.78125,
+        "left": 18,
+        "text": "包裝明細約85×85×14cm／各種1点／非電動規格與計量明細約85×85×14cm，可將腳伸入的非電動坐墊，各角色單件選擇，並非3件裝。",
+        "style": {
+          "font": "14px / 23.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "offer": {
+        "x": 18,
+        "y": 822.78125,
+        "width": 324,
+        "height": 306.1875,
+        "top": 822.78125,
+        "right": 342,
+        "bottom": 1128.96875,
+        "left": 18,
+        "text": "參考售價（非即時）JPY原價: ¥3,498折扣金額: −¥700¥2,798/ 各種1点來源渠道Costco 倉庫店優惠／兌換期間2026-11-09 – 2026-11-22 日本時間，包含起訖日來源cds2.costcojapan.jp",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(245, 245, 243)",
+          "radius": "20px"
+        }
+      },
+      "price": {
+        "x": 34,
+        "y": 896.359375,
+        "width": 292,
+        "height": 40.5,
+        "top": 896.359375,
+        "right": 326,
+        "bottom": 936.859375,
+        "left": 34,
+        "text": "¥2,798",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "unit": {
+        "x": 271.34375,
+        "y": 938.859375,
+        "width": 54.65625,
+        "height": 20.796875,
+        "top": 938.859375,
+        "right": 326,
+        "bottom": 959.65625,
+        "left": 271.34375,
+        "text": "/ 各種1点",
+        "style": {
+          "font": "13px / 20.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(98, 98, 98)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "conditions": {
+        "x": 18,
+        "y": 1148.96875,
+        "width": 324,
+        "height": 98.640625,
+        "top": 1148.96875,
+        "right": 342,
+        "bottom": 1247.609375,
+        "left": 18,
+        "text": "優惠條件Costco倉庫店含稅參考價，不適用於線上；僅限有效會員，庫存及販售情況以各倉庫為準。約85×85×14cm，可將腳伸入的非電動坐墊，各款單件，不是3件裝。",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "bodyWidth": 360,
+      "bodyScrollWidth": 360
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 390,
+    "locale": "zh-CN",
+    "metrics": {
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 61,
+        "top": 0,
+        "right": 390,
+        "bottom": 61,
+        "left": 0,
+        "text": "No.66517",
+        "style": {
+          "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(45, 41, 38)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "code": {
+        "x": 64,
+        "y": 16,
+        "width": 83.6875,
+        "height": 28,
+        "top": 16,
+        "right": 147.6875,
+        "bottom": 44,
+        "left": 64,
+        "text": "No.66517",
+        "style": {
+          "font": "600 16px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 23, 23)",
+          "radius": "999px"
+        }
+      },
+      "codeText": {
+        "x": 74,
+        "y": 20,
+        "width": 63.6875,
+        "height": 20,
+        "top": 20,
+        "right": 137.6875,
+        "bottom": 40,
+        "left": 74,
+        "text": "No.66517",
+        "style": {
+          "font": "700 14px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "close": {
+        "x": 12,
+        "y": 8,
+        "width": 44,
+        "height": 44,
+        "top": 8,
+        "right": 56,
+        "bottom": 52,
+        "left": 12,
+        "text": "",
+        "style": {
+          "font": "600 16px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "6px"
+        }
+      },
+      "image": {
+        "x": 18,
+        "y": 79,
+        "width": 354,
+        "height": 518,
+        "top": 79,
+        "right": 372,
+        "bottom": 597,
+        "left": 18,
+        "text": "‹1 / 4›",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(250, 250, 250)",
+          "radius": "20px"
+        }
+      },
+      "title": {
+        "x": 18,
+        "y": 641,
+        "width": 354,
+        "height": 58.390625,
+        "top": 641,
+        "right": 372,
+        "bottom": 699.390625,
+        "left": 18,
+        "text": "卡通地板坐垫（キャラクターフロアクッション）",
+        "style": {
+          "font": "750 24px / 33.6px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(23, 23, 23)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "specs": {
+        "x": 18,
+        "y": 719.390625,
+        "width": 354,
+        "height": 113.390625,
+        "top": 719.390625,
+        "right": 372,
+        "bottom": 832.78125,
+        "left": 18,
+        "text": "包装明细約85×85×14cm／各種1点／非電動规格与计量明细约85×85×14cm，可将脚伸入的非电动坐垫，各角色单件选择，并非3件装。",
+        "style": {
+          "font": "14px / 23.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "offer": {
+        "x": 18,
+        "y": 852.78125,
+        "width": 354,
+        "height": 306.1875,
+        "top": 852.78125,
+        "right": 372,
+        "bottom": 1158.96875,
+        "left": 18,
+        "text": "参考售价（非实时）JPY原价: ¥3,498折扣金额: −¥700¥2,798/ 各種1点来源渠道Costco 仓库店优惠 / 兑换期间2026-11-09 – 2026-11-22 日本时间，含起止日来源cds2.costcojapan.jp",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(245, 245, 243)",
+          "radius": "20px"
+        }
+      },
+      "price": {
+        "x": 34,
+        "y": 926.359375,
+        "width": 322,
+        "height": 40.5,
+        "top": 926.359375,
+        "right": 356,
+        "bottom": 966.859375,
+        "left": 34,
+        "text": "¥2,798",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "unit": {
+        "x": 301.34375,
+        "y": 968.859375,
+        "width": 54.65625,
+        "height": 20.796875,
+        "top": 968.859375,
+        "right": 356,
+        "bottom": 989.65625,
+        "left": 301.34375,
+        "text": "/ 各種1点",
+        "style": {
+          "font": "13px / 20.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(98, 98, 98)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "conditions": {
+        "x": 18,
+        "y": 1178.96875,
+        "width": 354,
+        "height": 98.640625,
+        "top": 1178.96875,
+        "right": 372,
+        "bottom": 1277.609375,
+        "left": 18,
+        "text": "优惠条件Costco仓库店含税参考价，不适用于线上；仅限有效会员，库存及售卖情况以各仓库为准。约85×85×14cm，可将脚伸入的非电动坐垫，各款单件，不是3件装。",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "bodyWidth": 390,
+      "bodyScrollWidth": 390
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 390,
+    "locale": "ja-JP",
+    "metrics": {
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 61,
+        "top": 0,
+        "right": 390,
+        "bottom": 61,
+        "left": 0,
+        "text": "No.66517",
+        "style": {
+          "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(45, 41, 38)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "code": {
+        "x": 64,
+        "y": 16,
+        "width": 83.6875,
+        "height": 28,
+        "top": 16,
+        "right": 147.6875,
+        "bottom": 44,
+        "left": 64,
+        "text": "No.66517",
+        "style": {
+          "font": "600 16px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 23, 23)",
+          "radius": "999px"
+        }
+      },
+      "codeText": {
+        "x": 74,
+        "y": 20,
+        "width": 63.6875,
+        "height": 20,
+        "top": 20,
+        "right": 137.6875,
+        "bottom": 40,
+        "left": 74,
+        "text": "No.66517",
+        "style": {
+          "font": "700 14px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "close": {
+        "x": 12,
+        "y": 8,
+        "width": 44,
+        "height": 44,
+        "top": 8,
+        "right": 56,
+        "bottom": 52,
+        "left": 12,
+        "text": "",
+        "style": {
+          "font": "600 16px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "6px"
+        }
+      },
+      "image": {
+        "x": 18,
+        "y": 79,
+        "width": 354,
+        "height": 518,
+        "top": 79,
+        "right": 372,
+        "bottom": 597,
+        "left": 18,
+        "text": "‹1 / 4›",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(250, 250, 250)",
+          "radius": "20px"
+        }
+      },
+      "title": {
+        "x": 18,
+        "y": 641,
+        "width": 354,
+        "height": 33.59375,
+        "top": 641,
+        "right": 372,
+        "bottom": 674.59375,
+        "left": 18,
+        "text": "キャラクターフロアクッション",
+        "style": {
+          "font": "750 24px / 33.6px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(23, 23, 23)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "specs": {
+        "x": 18,
+        "y": 694.59375,
+        "width": 354,
+        "height": 137.1875,
+        "top": 694.59375,
+        "right": 372,
+        "bottom": 831.78125,
+        "left": 18,
+        "text": "包装・入数約85×85×14cm／各種1点／非電動仕様・内容量約85×85×14cm。足を入れられる非電動クッション、各キャラクター1点。3個セットではありません。",
+        "style": {
+          "font": "14px / 23.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "offer": {
+        "x": 18,
+        "y": 851.78125,
+        "width": 354,
+        "height": 327.625,
+        "top": 851.78125,
+        "right": 372,
+        "bottom": 1179.40625,
+        "left": 18,
+        "text": "参考価格（リアルタイムではありません）JPY通常価格: ¥3,498値引き額: −¥700¥2,798/ 各種1点出典チャネルCostco 倉庫店割引・引換期間2026-11-09 – 2026-11-22 日本時間・開始日と終了日を含む出典cds2.costcojapan.jp",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(245, 245, 243)",
+          "radius": "20px"
+        }
+      },
+      "price": {
+        "x": 34,
+        "y": 925.359375,
+        "width": 322,
+        "height": 40.5,
+        "top": 925.359375,
+        "right": 356,
+        "bottom": 965.859375,
+        "left": 34,
+        "text": "¥2,798",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "unit": {
+        "x": 301.34375,
+        "y": 967.859375,
+        "width": 54.65625,
+        "height": 20.796875,
+        "top": 967.859375,
+        "right": 356,
+        "bottom": 988.65625,
+        "left": 301.34375,
+        "text": "/ 各種1点",
+        "style": {
+          "font": "13px / 20.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(98, 98, 98)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "conditions": {
+        "x": 18,
+        "y": 1199.40625,
+        "width": 354,
+        "height": 121.390625,
+        "top": 1199.40625,
+        "right": 372,
+        "bottom": 1320.796875,
+        "left": 18,
+        "text": "特典の条件コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。約85×85×14cm。足を入れる非電動クッション、各種1点で3個セットではありません。",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "bodyWidth": 390,
+      "bodyScrollWidth": 390
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 390,
+    "locale": "en-US",
+    "metrics": {
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 61,
+        "top": 0,
+        "right": 390,
+        "bottom": 61,
+        "left": 0,
+        "text": "No.66517",
+        "style": {
+          "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(45, 41, 38)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "code": {
+        "x": 64,
+        "y": 16,
+        "width": 83.6875,
+        "height": 28,
+        "top": 16,
+        "right": 147.6875,
+        "bottom": 44,
+        "left": 64,
+        "text": "No.66517",
+        "style": {
+          "font": "600 16px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 23, 23)",
+          "radius": "999px"
+        }
+      },
+      "codeText": {
+        "x": 74,
+        "y": 20,
+        "width": 63.6875,
+        "height": 20,
+        "top": 20,
+        "right": 137.6875,
+        "bottom": 40,
+        "left": 74,
+        "text": "No.66517",
+        "style": {
+          "font": "700 14px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "close": {
+        "x": 12,
+        "y": 8,
+        "width": 44,
+        "height": 44,
+        "top": 8,
+        "right": 56,
+        "bottom": 52,
+        "left": 12,
+        "text": "",
+        "style": {
+          "font": "600 16px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "6px"
+        }
+      },
+      "image": {
+        "x": 18,
+        "y": 79,
+        "width": 354,
+        "height": 518,
+        "top": 79,
+        "right": 372,
+        "bottom": 597,
+        "left": 18,
+        "text": "‹1 / 4›",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(250, 250, 250)",
+          "radius": "20px"
+        }
+      },
+      "title": {
+        "x": 18,
+        "y": 641,
+        "width": 354,
+        "height": 58.390625,
+        "top": 641,
+        "right": 372,
+        "bottom": 699.390625,
+        "left": 18,
+        "text": "Character floor cushion（キャラクターフロアクッション）",
+        "style": {
+          "font": "750 24px / 33.6px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(23, 23, 23)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "specs": {
+        "x": 18,
+        "y": 719.390625,
+        "width": 354,
+        "height": 137.1875,
+        "top": 719.390625,
+        "right": 372,
+        "bottom": 856.578125,
+        "left": 18,
+        "text": "Packaging約85×85×14cm／各種1点／非電動Specification and unitsApprox.85×85×14cm. Non-electric floor cushion with foot opening,one character option per unit,not a3-pack.",
+        "style": {
+          "font": "14px / 23.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "offer": {
+        "x": 18,
+        "y": 876.578125,
+        "width": 354,
+        "height": 349.0625,
+        "top": 876.578125,
+        "right": 372,
+        "bottom": 1225.640625,
+        "left": 18,
+        "text": "Reference price (not real time)JPYOriginal price: ¥3,498Discount amount: −¥700¥2,798/ 各種1点Source channelCostco warehouseOffer / redemption period2026-11-09 – 2026-11-22 Japan time, dates inclusiveSourcecds2.costcojapan.jp",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(245, 245, 243)",
+          "radius": "20px"
+        }
+      },
+      "price": {
+        "x": 34,
+        "y": 950.15625,
+        "width": 322,
+        "height": 40.5,
+        "top": 950.15625,
+        "right": 356,
+        "bottom": 990.65625,
+        "left": 34,
+        "text": "¥2,798",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "unit": {
+        "x": 301.34375,
+        "y": 992.65625,
+        "width": 54.65625,
+        "height": 20.796875,
+        "top": 992.65625,
+        "right": 356,
+        "bottom": 1013.453125,
+        "left": 301.34375,
+        "text": "/ 各種1点",
+        "style": {
+          "font": "13px / 20.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(98, 98, 98)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "conditions": {
+        "x": 18,
+        "y": 1245.640625,
+        "width": 354,
+        "height": 121.390625,
+        "top": 1245.640625,
+        "right": 372,
+        "bottom": 1367.03125,
+        "left": 18,
+        "text": "Offer conditionsCostco warehouse tax-inclusive reference price;online excluded. Valid membership required;availability varies by warehouse.Approx.85×85×14cm,non-electric cushion with foot opening. One character option per unit,not a3-pack.",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "bodyWidth": 390,
+      "bodyScrollWidth": 390
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 390,
+    "locale": "zh-TW",
+    "metrics": {
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 61,
+        "top": 0,
+        "right": 390,
+        "bottom": 61,
+        "left": 0,
+        "text": "No.66517",
+        "style": {
+          "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(45, 41, 38)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "code": {
+        "x": 64,
+        "y": 16,
+        "width": 83.6875,
+        "height": 28,
+        "top": 16,
+        "right": 147.6875,
+        "bottom": 44,
+        "left": 64,
+        "text": "No.66517",
+        "style": {
+          "font": "600 16px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 23, 23)",
+          "radius": "999px"
+        }
+      },
+      "codeText": {
+        "x": 74,
+        "y": 20,
+        "width": 63.6875,
+        "height": 20,
+        "top": 20,
+        "right": 137.6875,
+        "bottom": 40,
+        "left": 74,
+        "text": "No.66517",
+        "style": {
+          "font": "700 14px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "close": {
+        "x": 12,
+        "y": 8,
+        "width": 44,
+        "height": 44,
+        "top": 8,
+        "right": 56,
+        "bottom": 52,
+        "left": 12,
+        "text": "",
+        "style": {
+          "font": "600 16px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "6px"
+        }
+      },
+      "image": {
+        "x": 18,
+        "y": 79,
+        "width": 354,
+        "height": 518,
+        "top": 79,
+        "right": 372,
+        "bottom": 597,
+        "left": 18,
+        "text": "‹1 / 4›",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(250, 250, 250)",
+          "radius": "20px"
+        }
+      },
+      "title": {
+        "x": 18,
+        "y": 641,
+        "width": 354,
+        "height": 58.390625,
+        "top": 641,
+        "right": 372,
+        "bottom": 699.390625,
+        "left": 18,
+        "text": "卡通地板坐墊（キャラクターフロアクッション）",
+        "style": {
+          "font": "750 24px / 33.6px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(23, 23, 23)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "specs": {
+        "x": 18,
+        "y": 719.390625,
+        "width": 354,
+        "height": 113.390625,
+        "top": 719.390625,
+        "right": 372,
+        "bottom": 832.78125,
+        "left": 18,
+        "text": "包裝明細約85×85×14cm／各種1点／非電動規格與計量明細約85×85×14cm，可將腳伸入的非電動坐墊，各角色單件選擇，並非3件裝。",
+        "style": {
+          "font": "14px / 23.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "offer": {
+        "x": 18,
+        "y": 852.78125,
+        "width": 354,
+        "height": 306.1875,
+        "top": 852.78125,
+        "right": 372,
+        "bottom": 1158.96875,
+        "left": 18,
+        "text": "參考售價（非即時）JPY原價: ¥3,498折扣金額: −¥700¥2,798/ 各種1点來源渠道Costco 倉庫店優惠／兌換期間2026-11-09 – 2026-11-22 日本時間，包含起訖日來源cds2.costcojapan.jp",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(245, 245, 243)",
+          "radius": "20px"
+        }
+      },
+      "price": {
+        "x": 34,
+        "y": 926.359375,
+        "width": 322,
+        "height": 40.5,
+        "top": 926.359375,
+        "right": 356,
+        "bottom": 966.859375,
+        "left": 34,
+        "text": "¥2,798",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "unit": {
+        "x": 301.34375,
+        "y": 968.859375,
+        "width": 54.65625,
+        "height": 20.796875,
+        "top": 968.859375,
+        "right": 356,
+        "bottom": 989.65625,
+        "left": 301.34375,
+        "text": "/ 各種1点",
+        "style": {
+          "font": "13px / 20.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(98, 98, 98)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "conditions": {
+        "x": 18,
+        "y": 1178.96875,
+        "width": 354,
+        "height": 98.640625,
+        "top": 1178.96875,
+        "right": 372,
+        "bottom": 1277.609375,
+        "left": 18,
+        "text": "優惠條件Costco倉庫店含稅參考價，不適用於線上；僅限有效會員，庫存及販售情況以各倉庫為準。約85×85×14cm，可將腳伸入的非電動坐墊，各款單件，不是3件裝。",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "bodyWidth": 390,
+      "bodyScrollWidth": 390
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 510,
+    "locale": "zh-CN",
+    "metrics": {
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 510,
+        "height": 61,
+        "top": 0,
+        "right": 510,
+        "bottom": 61,
+        "left": 0,
+        "text": "No.66517",
+        "style": {
+          "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(45, 41, 38)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "code": {
+        "x": 64,
+        "y": 16,
+        "width": 83.6875,
+        "height": 28,
+        "top": 16,
+        "right": 147.6875,
+        "bottom": 44,
+        "left": 64,
+        "text": "No.66517",
+        "style": {
+          "font": "600 16px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 23, 23)",
+          "radius": "999px"
+        }
+      },
+      "codeText": {
+        "x": 74,
+        "y": 20,
+        "width": 63.6875,
+        "height": 20,
+        "top": 20,
+        "right": 137.6875,
+        "bottom": 40,
+        "left": 74,
+        "text": "No.66517",
+        "style": {
+          "font": "700 14px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "close": {
+        "x": 12,
+        "y": 8,
+        "width": 44,
+        "height": 44,
+        "top": 8,
+        "right": 56,
+        "bottom": 52,
+        "left": 12,
+        "text": "",
+        "style": {
+          "font": "600 16px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "6px"
+        }
+      },
+      "image": {
+        "x": 18,
+        "y": 79,
+        "width": 474,
+        "height": 638,
+        "top": 79,
+        "right": 492,
+        "bottom": 717,
+        "left": 18,
+        "text": "‹1 / 4›",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(250, 250, 250)",
+          "radius": "20px"
+        }
+      },
+      "title": {
+        "x": 18,
+        "y": 761,
+        "width": 474,
+        "height": 58.390625,
+        "top": 761,
+        "right": 492,
+        "bottom": 819.390625,
+        "left": 18,
+        "text": "卡通地板坐垫（キャラクターフロアクッション）",
+        "style": {
+          "font": "750 24px / 33.6px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(23, 23, 23)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "specs": {
+        "x": 18,
+        "y": 839.390625,
+        "width": 474,
+        "height": 113.390625,
+        "top": 839.390625,
+        "right": 492,
+        "bottom": 952.78125,
+        "left": 18,
+        "text": "包装明细約85×85×14cm／各種1点／非電動规格与计量明细约85×85×14cm，可将脚伸入的非电动坐垫，各角色单件选择，并非3件装。",
+        "style": {
+          "font": "14px / 23.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "offer": {
+        "x": 18,
+        "y": 972.78125,
+        "width": 474,
+        "height": 306.1875,
+        "top": 972.78125,
+        "right": 492,
+        "bottom": 1278.96875,
+        "left": 18,
+        "text": "参考售价（非实时）JPY原价: ¥3,498折扣金额: −¥700¥2,798/ 各種1点来源渠道Costco 仓库店优惠 / 兑换期间2026-11-09 – 2026-11-22 日本时间，含起止日来源cds2.costcojapan.jp",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(245, 245, 243)",
+          "radius": "20px"
+        }
+      },
+      "price": {
+        "x": 34,
+        "y": 1046.359375,
+        "width": 442,
+        "height": 40.5,
+        "top": 1046.359375,
+        "right": 476,
+        "bottom": 1086.859375,
+        "left": 34,
+        "text": "¥2,798",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "unit": {
+        "x": 421.34375,
+        "y": 1088.859375,
+        "width": 54.65625,
+        "height": 20.796875,
+        "top": 1088.859375,
+        "right": 476,
+        "bottom": 1109.65625,
+        "left": 421.34375,
+        "text": "/ 各種1点",
+        "style": {
+          "font": "13px / 20.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(98, 98, 98)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "conditions": {
+        "x": 18,
+        "y": 1298.96875,
+        "width": 474,
+        "height": 75.890625,
+        "top": 1298.96875,
+        "right": 492,
+        "bottom": 1374.859375,
+        "left": 18,
+        "text": "优惠条件Costco仓库店含税参考价，不适用于线上；仅限有效会员，库存及售卖情况以各仓库为准。约85×85×14cm，可将脚伸入的非电动坐垫，各款单件，不是3件装。",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "bodyWidth": 510,
+      "bodyScrollWidth": 510
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 510,
+    "locale": "ja-JP",
+    "metrics": {
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 510,
+        "height": 61,
+        "top": 0,
+        "right": 510,
+        "bottom": 61,
+        "left": 0,
+        "text": "No.66517",
+        "style": {
+          "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(45, 41, 38)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "code": {
+        "x": 64,
+        "y": 16,
+        "width": 83.6875,
+        "height": 28,
+        "top": 16,
+        "right": 147.6875,
+        "bottom": 44,
+        "left": 64,
+        "text": "No.66517",
+        "style": {
+          "font": "600 16px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 23, 23)",
+          "radius": "999px"
+        }
+      },
+      "codeText": {
+        "x": 74,
+        "y": 20,
+        "width": 63.6875,
+        "height": 20,
+        "top": 20,
+        "right": 137.6875,
+        "bottom": 40,
+        "left": 74,
+        "text": "No.66517",
+        "style": {
+          "font": "700 14px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "close": {
+        "x": 12,
+        "y": 8,
+        "width": 44,
+        "height": 44,
+        "top": 8,
+        "right": 56,
+        "bottom": 52,
+        "left": 12,
+        "text": "",
+        "style": {
+          "font": "600 16px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "6px"
+        }
+      },
+      "image": {
+        "x": 18,
+        "y": 79,
+        "width": 474,
+        "height": 638,
+        "top": 79,
+        "right": 492,
+        "bottom": 717,
+        "left": 18,
+        "text": "‹1 / 4›",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(250, 250, 250)",
+          "radius": "20px"
+        }
+      },
+      "title": {
+        "x": 18,
+        "y": 761,
+        "width": 474,
+        "height": 33.59375,
+        "top": 761,
+        "right": 492,
+        "bottom": 794.59375,
+        "left": 18,
+        "text": "キャラクターフロアクッション",
+        "style": {
+          "font": "750 24px / 33.6px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(23, 23, 23)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "specs": {
+        "x": 18,
+        "y": 814.59375,
+        "width": 474,
+        "height": 113.390625,
+        "top": 814.59375,
+        "right": 492,
+        "bottom": 927.984375,
+        "left": 18,
+        "text": "包装・入数約85×85×14cm／各種1点／非電動仕様・内容量約85×85×14cm。足を入れられる非電動クッション、各キャラクター1点。3個セットではありません。",
+        "style": {
+          "font": "14px / 23.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "offer": {
+        "x": 18,
+        "y": 947.984375,
+        "width": 474,
+        "height": 327.625,
+        "top": 947.984375,
+        "right": 492,
+        "bottom": 1275.609375,
+        "left": 18,
+        "text": "参考価格（リアルタイムではありません）JPY通常価格: ¥3,498値引き額: −¥700¥2,798/ 各種1点出典チャネルCostco 倉庫店割引・引換期間2026-11-09 – 2026-11-22 日本時間・開始日と終了日を含む出典cds2.costcojapan.jp",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(245, 245, 243)",
+          "radius": "20px"
+        }
+      },
+      "price": {
+        "x": 34,
+        "y": 1021.5625,
+        "width": 442,
+        "height": 40.5,
+        "top": 1021.5625,
+        "right": 476,
+        "bottom": 1062.0625,
+        "left": 34,
+        "text": "¥2,798",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "unit": {
+        "x": 421.34375,
+        "y": 1064.0625,
+        "width": 54.65625,
+        "height": 20.796875,
+        "top": 1064.0625,
+        "right": 476,
+        "bottom": 1084.859375,
+        "left": 421.34375,
+        "text": "/ 各種1点",
+        "style": {
+          "font": "13px / 20.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(98, 98, 98)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "conditions": {
+        "x": 18,
+        "y": 1295.609375,
+        "width": 474,
+        "height": 98.640625,
+        "top": 1295.609375,
+        "right": 492,
+        "bottom": 1394.25,
+        "left": 18,
+        "text": "特典の条件コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。約85×85×14cm。足を入れる非電動クッション、各種1点で3個セットではありません。",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "bodyWidth": 510,
+      "bodyScrollWidth": 510
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 510,
+    "locale": "en-US",
+    "metrics": {
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 510,
+        "height": 61,
+        "top": 0,
+        "right": 510,
+        "bottom": 61,
+        "left": 0,
+        "text": "No.66517",
+        "style": {
+          "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(45, 41, 38)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "code": {
+        "x": 64,
+        "y": 16,
+        "width": 83.6875,
+        "height": 28,
+        "top": 16,
+        "right": 147.6875,
+        "bottom": 44,
+        "left": 64,
+        "text": "No.66517",
+        "style": {
+          "font": "600 16px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 23, 23)",
+          "radius": "999px"
+        }
+      },
+      "codeText": {
+        "x": 74,
+        "y": 20,
+        "width": 63.6875,
+        "height": 20,
+        "top": 20,
+        "right": 137.6875,
+        "bottom": 40,
+        "left": 74,
+        "text": "No.66517",
+        "style": {
+          "font": "700 14px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "close": {
+        "x": 12,
+        "y": 8,
+        "width": 44,
+        "height": 44,
+        "top": 8,
+        "right": 56,
+        "bottom": 52,
+        "left": 12,
+        "text": "",
+        "style": {
+          "font": "600 16px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "6px"
+        }
+      },
+      "image": {
+        "x": 18,
+        "y": 79,
+        "width": 474,
+        "height": 638,
+        "top": 79,
+        "right": 492,
+        "bottom": 717,
+        "left": 18,
+        "text": "‹1 / 4›",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(250, 250, 250)",
+          "radius": "20px"
+        }
+      },
+      "title": {
+        "x": 18,
+        "y": 761,
+        "width": 474,
+        "height": 58.390625,
+        "top": 761,
+        "right": 492,
+        "bottom": 819.390625,
+        "left": 18,
+        "text": "Character floor cushion（キャラクターフロアクッション）",
+        "style": {
+          "font": "750 24px / 33.6px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(23, 23, 23)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "specs": {
+        "x": 18,
+        "y": 839.390625,
+        "width": 474,
+        "height": 113.390625,
+        "top": 839.390625,
+        "right": 492,
+        "bottom": 952.78125,
+        "left": 18,
+        "text": "Packaging約85×85×14cm／各種1点／非電動Specification and unitsApprox.85×85×14cm. Non-electric floor cushion with foot opening,one character option per unit,not a3-pack.",
+        "style": {
+          "font": "14px / 23.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "offer": {
+        "x": 18,
+        "y": 972.78125,
+        "width": 474,
+        "height": 349.0625,
+        "top": 972.78125,
+        "right": 492,
+        "bottom": 1321.84375,
+        "left": 18,
+        "text": "Reference price (not real time)JPYOriginal price: ¥3,498Discount amount: −¥700¥2,798/ 各種1点Source channelCostco warehouseOffer / redemption period2026-11-09 – 2026-11-22 Japan time, dates inclusiveSourcecds2.costcojapan.jp",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(245, 245, 243)",
+          "radius": "20px"
+        }
+      },
+      "price": {
+        "x": 34,
+        "y": 1046.359375,
+        "width": 442,
+        "height": 40.5,
+        "top": 1046.359375,
+        "right": 476,
+        "bottom": 1086.859375,
+        "left": 34,
+        "text": "¥2,798",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "unit": {
+        "x": 421.34375,
+        "y": 1088.859375,
+        "width": 54.65625,
+        "height": 20.796875,
+        "top": 1088.859375,
+        "right": 476,
+        "bottom": 1109.65625,
+        "left": 421.34375,
+        "text": "/ 各種1点",
+        "style": {
+          "font": "13px / 20.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(98, 98, 98)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "conditions": {
+        "x": 18,
+        "y": 1341.84375,
+        "width": 474,
+        "height": 98.640625,
+        "top": 1341.84375,
+        "right": 492,
+        "bottom": 1440.484375,
+        "left": 18,
+        "text": "Offer conditionsCostco warehouse tax-inclusive reference price;online excluded. Valid membership required;availability varies by warehouse.Approx.85×85×14cm,non-electric cushion with foot opening. One character option per unit,not a3-pack.",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "bodyWidth": 510,
+      "bodyScrollWidth": 510
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 510,
+    "locale": "zh-TW",
+    "metrics": {
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 510,
+        "height": 61,
+        "top": 0,
+        "right": 510,
+        "bottom": 61,
+        "left": 0,
+        "text": "No.66517",
+        "style": {
+          "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(45, 41, 38)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "code": {
+        "x": 64,
+        "y": 16,
+        "width": 83.6875,
+        "height": 28,
+        "top": 16,
+        "right": 147.6875,
+        "bottom": 44,
+        "left": 64,
+        "text": "No.66517",
+        "style": {
+          "font": "600 16px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 23, 23)",
+          "radius": "999px"
+        }
+      },
+      "codeText": {
+        "x": 74,
+        "y": 20,
+        "width": 63.6875,
+        "height": 20,
+        "top": 20,
+        "right": 137.6875,
+        "bottom": 40,
+        "left": 74,
+        "text": "No.66517",
+        "style": {
+          "font": "700 14px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "close": {
+        "x": 12,
+        "y": 8,
+        "width": 44,
+        "height": 44,
+        "top": 8,
+        "right": 56,
+        "bottom": 52,
+        "left": 12,
+        "text": "",
+        "style": {
+          "font": "600 16px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "6px"
+        }
+      },
+      "image": {
+        "x": 18,
+        "y": 79,
+        "width": 474,
+        "height": 638,
+        "top": 79,
+        "right": 492,
+        "bottom": 717,
+        "left": 18,
+        "text": "‹1 / 4›",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(250, 250, 250)",
+          "radius": "20px"
+        }
+      },
+      "title": {
+        "x": 18,
+        "y": 761,
+        "width": 474,
+        "height": 58.390625,
+        "top": 761,
+        "right": 492,
+        "bottom": 819.390625,
+        "left": 18,
+        "text": "卡通地板坐墊（キャラクターフロアクッション）",
+        "style": {
+          "font": "750 24px / 33.6px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(23, 23, 23)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "specs": {
+        "x": 18,
+        "y": 839.390625,
+        "width": 474,
+        "height": 113.390625,
+        "top": 839.390625,
+        "right": 492,
+        "bottom": 952.78125,
+        "left": 18,
+        "text": "包裝明細約85×85×14cm／各種1点／非電動規格與計量明細約85×85×14cm，可將腳伸入的非電動坐墊，各角色單件選擇，並非3件裝。",
+        "style": {
+          "font": "14px / 23.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "offer": {
+        "x": 18,
+        "y": 972.78125,
+        "width": 474,
+        "height": 306.1875,
+        "top": 972.78125,
+        "right": 492,
+        "bottom": 1278.96875,
+        "left": 18,
+        "text": "參考售價（非即時）JPY原價: ¥3,498折扣金額: −¥700¥2,798/ 各種1点來源渠道Costco 倉庫店優惠／兌換期間2026-11-09 – 2026-11-22 日本時間，包含起訖日來源cds2.costcojapan.jp",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(245, 245, 243)",
+          "radius": "20px"
+        }
+      },
+      "price": {
+        "x": 34,
+        "y": 1046.359375,
+        "width": 442,
+        "height": 40.5,
+        "top": 1046.359375,
+        "right": 476,
+        "bottom": 1086.859375,
+        "left": 34,
+        "text": "¥2,798",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "unit": {
+        "x": 421.34375,
+        "y": 1088.859375,
+        "width": 54.65625,
+        "height": 20.796875,
+        "top": 1088.859375,
+        "right": 476,
+        "bottom": 1109.65625,
+        "left": 421.34375,
+        "text": "/ 各種1点",
+        "style": {
+          "font": "13px / 20.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(98, 98, 98)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "conditions": {
+        "x": 18,
+        "y": 1298.96875,
+        "width": 474,
+        "height": 75.890625,
+        "top": 1298.96875,
+        "right": 492,
+        "bottom": 1374.859375,
+        "left": 18,
+        "text": "優惠條件Costco倉庫店含稅參考價，不適用於線上；僅限有效會員，庫存及販售情況以各倉庫為準。約85×85×14cm，可將腳伸入的非電動坐墊，各款單件，不是3件裝。",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "bodyWidth": 510,
+      "bodyScrollWidth": 510
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 1440,
+    "locale": "zh-CN",
+    "metrics": {
+      "header": {
+        "x": 320,
+        "y": 0,
+        "width": 1120,
+        "height": 61,
+        "top": 0,
+        "right": 1440,
+        "bottom": 61,
+        "left": 320,
+        "text": "No.66517",
+        "style": {
+          "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(45, 41, 38)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "code": {
+        "x": 384,
+        "y": 16,
+        "width": 83.6875,
+        "height": 28,
+        "top": 16,
+        "right": 467.6875,
+        "bottom": 44,
+        "left": 384,
+        "text": "No.66517",
+        "style": {
+          "font": "600 16px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 23, 23)",
+          "radius": "999px"
+        }
+      },
+      "codeText": {
+        "x": 394,
+        "y": 20,
+        "width": 63.6875,
+        "height": 20,
+        "top": 20,
+        "right": 457.6875,
+        "bottom": 40,
+        "left": 394,
+        "text": "No.66517",
+        "style": {
+          "font": "700 14px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "close": {
+        "x": 332,
+        "y": 8,
+        "width": 44,
+        "height": 44,
+        "top": 8,
+        "right": 376,
+        "bottom": 52,
+        "left": 332,
+        "text": "",
+        "style": {
+          "font": "600 16px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "6px"
+        }
+      },
+      "image": {
+        "x": 344,
+        "y": 85,
+        "width": 561.59375,
+        "height": 718,
+        "top": 85,
+        "right": 905.59375,
+        "bottom": 803,
+        "left": 344,
+        "text": "‹1 / 4›",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(250, 250, 250)",
+          "radius": "20px"
+        }
+      },
+      "title": {
+        "x": 937.59375,
+        "y": 109,
+        "width": 478.40625,
+        "height": 63.984375,
+        "top": 109,
+        "right": 1416,
+        "bottom": 172.984375,
+        "left": 937.59375,
+        "text": "卡通地板坐垫（キャラクターフロアクッション）",
+        "style": {
+          "font": "750 28px / 39.2px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(23, 23, 23)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "specs": {
+        "x": 937.59375,
+        "y": 192.984375,
+        "width": 478.40625,
+        "height": 113.390625,
+        "top": 192.984375,
+        "right": 1416,
+        "bottom": 306.375,
+        "left": 937.59375,
+        "text": "包装明细約85×85×14cm／各種1点／非電動规格与计量明细约85×85×14cm，可将脚伸入的非电动坐垫，各角色单件选择，并非3件装。",
+        "style": {
+          "font": "14px / 23.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "offer": {
+        "x": 937.59375,
+        "y": 326.375,
+        "width": 478.40625,
+        "height": 308.875,
+        "top": 326.375,
+        "right": 1416,
+        "bottom": 635.25,
+        "left": 937.59375,
+        "text": "参考售价（非实时）JPY原价: ¥3,498折扣金额: −¥700¥2,798/ 各種1点来源渠道Costco 仓库店优惠 / 兑换期间2026-11-09 – 2026-11-22 日本时间，含起止日来源cds2.costcojapan.jp",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(245, 245, 243)",
+          "radius": "20px"
+        }
+      },
+      "price": {
+        "x": 953.59375,
+        "y": 399.953125,
+        "width": 446.40625,
+        "height": 43.1875,
+        "top": 399.953125,
+        "right": 1400,
+        "bottom": 443.140625,
+        "left": 953.59375,
+        "text": "¥2,798",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "unit": {
+        "x": 1345.34375,
+        "y": 445.140625,
+        "width": 54.65625,
+        "height": 20.796875,
+        "top": 445.140625,
+        "right": 1400,
+        "bottom": 465.9375,
+        "left": 1345.34375,
+        "text": "/ 各種1点",
+        "style": {
+          "font": "13px / 20.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(98, 98, 98)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "conditions": {
+        "x": 937.59375,
+        "y": 655.25,
+        "width": 478.40625,
+        "height": 75.890625,
+        "top": 655.25,
+        "right": 1416,
+        "bottom": 731.140625,
+        "left": 937.59375,
+        "text": "优惠条件Costco仓库店含税参考价，不适用于线上；仅限有效会员，库存及售卖情况以各仓库为准。约85×85×14cm，可将脚伸入的非电动坐垫，各款单件，不是3件装。",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "bodyWidth": 1120,
+      "bodyScrollWidth": 1120
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 1440,
+    "locale": "ja-JP",
+    "metrics": {
+      "header": {
+        "x": 320,
+        "y": 0,
+        "width": 1120,
+        "height": 61,
+        "top": 0,
+        "right": 1440,
+        "bottom": 61,
+        "left": 320,
+        "text": "No.66517",
+        "style": {
+          "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(45, 41, 38)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "code": {
+        "x": 384,
+        "y": 16,
+        "width": 83.6875,
+        "height": 28,
+        "top": 16,
+        "right": 467.6875,
+        "bottom": 44,
+        "left": 384,
+        "text": "No.66517",
+        "style": {
+          "font": "600 16px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 23, 23)",
+          "radius": "999px"
+        }
+      },
+      "codeText": {
+        "x": 394,
+        "y": 20,
+        "width": 63.6875,
+        "height": 20,
+        "top": 20,
+        "right": 457.6875,
+        "bottom": 40,
+        "left": 394,
+        "text": "No.66517",
+        "style": {
+          "font": "700 14px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "close": {
+        "x": 332,
+        "y": 8,
+        "width": 44,
+        "height": 44,
+        "top": 8,
+        "right": 376,
+        "bottom": 52,
+        "left": 332,
+        "text": "",
+        "style": {
+          "font": "600 16px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "6px"
+        }
+      },
+      "image": {
+        "x": 344,
+        "y": 85,
+        "width": 561.59375,
+        "height": 718,
+        "top": 85,
+        "right": 905.59375,
+        "bottom": 803,
+        "left": 344,
+        "text": "‹1 / 4›",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(250, 250, 250)",
+          "radius": "20px"
+        }
+      },
+      "title": {
+        "x": 937.59375,
+        "y": 109,
+        "width": 478.40625,
+        "height": 39.1875,
+        "top": 109,
+        "right": 1416,
+        "bottom": 148.1875,
+        "left": 937.59375,
+        "text": "キャラクターフロアクッション",
+        "style": {
+          "font": "750 28px / 39.2px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(23, 23, 23)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "specs": {
+        "x": 937.59375,
+        "y": 168.1875,
+        "width": 478.40625,
+        "height": 113.390625,
+        "top": 168.1875,
+        "right": 1416,
+        "bottom": 281.578125,
+        "left": 937.59375,
+        "text": "包装・入数約85×85×14cm／各種1点／非電動仕様・内容量約85×85×14cm。足を入れられる非電動クッション、各キャラクター1点。3個セットではありません。",
+        "style": {
+          "font": "14px / 23.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "offer": {
+        "x": 937.59375,
+        "y": 301.578125,
+        "width": 478.40625,
+        "height": 308.875,
+        "top": 301.578125,
+        "right": 1416,
+        "bottom": 610.453125,
+        "left": 937.59375,
+        "text": "参考価格（リアルタイムではありません）JPY通常価格: ¥3,498値引き額: −¥700¥2,798/ 各種1点出典チャネルCostco 倉庫店割引・引換期間2026-11-09 – 2026-11-22 日本時間・開始日と終了日を含む出典cds2.costcojapan.jp",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(245, 245, 243)",
+          "radius": "20px"
+        }
+      },
+      "price": {
+        "x": 953.59375,
+        "y": 375.15625,
+        "width": 446.40625,
+        "height": 43.1875,
+        "top": 375.15625,
+        "right": 1400,
+        "bottom": 418.34375,
+        "left": 953.59375,
+        "text": "¥2,798",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "unit": {
+        "x": 1345.34375,
+        "y": 420.34375,
+        "width": 54.65625,
+        "height": 20.796875,
+        "top": 420.34375,
+        "right": 1400,
+        "bottom": 441.140625,
+        "left": 1345.34375,
+        "text": "/ 各種1点",
+        "style": {
+          "font": "13px / 20.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(98, 98, 98)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "conditions": {
+        "x": 937.59375,
+        "y": 630.453125,
+        "width": 478.40625,
+        "height": 98.640625,
+        "top": 630.453125,
+        "right": 1416,
+        "bottom": 729.09375,
+        "left": 937.59375,
+        "text": "特典の条件コストコ倉庫店限定・税込参考価格。オンライン対象外。有効会員対象、在庫・取扱いは倉庫店で異なる場合があります。約85×85×14cm。足を入れる非電動クッション、各種1点で3個セットではありません。",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "bodyWidth": 1120,
+      "bodyScrollWidth": 1120
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 1440,
+    "locale": "en-US",
+    "metrics": {
+      "header": {
+        "x": 320,
+        "y": 0,
+        "width": 1120,
+        "height": 61,
+        "top": 0,
+        "right": 1440,
+        "bottom": 61,
+        "left": 320,
+        "text": "No.66517",
+        "style": {
+          "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(45, 41, 38)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "code": {
+        "x": 384,
+        "y": 16,
+        "width": 83.6875,
+        "height": 28,
+        "top": 16,
+        "right": 467.6875,
+        "bottom": 44,
+        "left": 384,
+        "text": "No.66517",
+        "style": {
+          "font": "600 16px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 23, 23)",
+          "radius": "999px"
+        }
+      },
+      "codeText": {
+        "x": 394,
+        "y": 20,
+        "width": 63.6875,
+        "height": 20,
+        "top": 20,
+        "right": 457.6875,
+        "bottom": 40,
+        "left": 394,
+        "text": "No.66517",
+        "style": {
+          "font": "700 14px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "close": {
+        "x": 332,
+        "y": 8,
+        "width": 44,
+        "height": 44,
+        "top": 8,
+        "right": 376,
+        "bottom": 52,
+        "left": 332,
+        "text": "",
+        "style": {
+          "font": "600 16px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "6px"
+        }
+      },
+      "image": {
+        "x": 344,
+        "y": 85,
+        "width": 561.59375,
+        "height": 718,
+        "top": 85,
+        "right": 905.59375,
+        "bottom": 803,
+        "left": 344,
+        "text": "‹1 / 4›",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(250, 250, 250)",
+          "radius": "20px"
+        }
+      },
+      "title": {
+        "x": 937.59375,
+        "y": 109,
+        "width": 478.40625,
+        "height": 63.984375,
+        "top": 109,
+        "right": 1416,
+        "bottom": 172.984375,
+        "left": 937.59375,
+        "text": "Character floor cushion（キャラクターフロアクッション）",
+        "style": {
+          "font": "750 28px / 39.2px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(23, 23, 23)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "specs": {
+        "x": 937.59375,
+        "y": 192.984375,
+        "width": 478.40625,
+        "height": 113.390625,
+        "top": 192.984375,
+        "right": 1416,
+        "bottom": 306.375,
+        "left": 937.59375,
+        "text": "Packaging約85×85×14cm／各種1点／非電動Specification and unitsApprox.85×85×14cm. Non-electric floor cushion with foot opening,one character option per unit,not a3-pack.",
+        "style": {
+          "font": "14px / 23.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "offer": {
+        "x": 937.59375,
+        "y": 326.375,
+        "width": 478.40625,
+        "height": 351.75,
+        "top": 326.375,
+        "right": 1416,
+        "bottom": 678.125,
+        "left": 937.59375,
+        "text": "Reference price (not real time)JPYOriginal price: ¥3,498Discount amount: −¥700¥2,798/ 各種1点Source channelCostco warehouseOffer / redemption period2026-11-09 – 2026-11-22 Japan time, dates inclusiveSourcecds2.costcojapan.jp",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(245, 245, 243)",
+          "radius": "20px"
+        }
+      },
+      "price": {
+        "x": 953.59375,
+        "y": 399.953125,
+        "width": 446.40625,
+        "height": 43.1875,
+        "top": 399.953125,
+        "right": 1400,
+        "bottom": 443.140625,
+        "left": 953.59375,
+        "text": "¥2,798",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "unit": {
+        "x": 1345.34375,
+        "y": 445.140625,
+        "width": 54.65625,
+        "height": 20.796875,
+        "top": 445.140625,
+        "right": 1400,
+        "bottom": 465.9375,
+        "left": 1345.34375,
+        "text": "/ 各種1点",
+        "style": {
+          "font": "13px / 20.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(98, 98, 98)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "conditions": {
+        "x": 937.59375,
+        "y": 698.125,
+        "width": 478.40625,
+        "height": 98.640625,
+        "top": 698.125,
+        "right": 1416,
+        "bottom": 796.765625,
+        "left": 937.59375,
+        "text": "Offer conditionsCostco warehouse tax-inclusive reference price;online excluded. Valid membership required;availability varies by warehouse.Approx.85×85×14cm,non-electric cushion with foot opening. One character option per unit,not a3-pack.",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "bodyWidth": 1120,
+      "bodyScrollWidth": 1120
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 1440,
+    "locale": "zh-TW",
+    "metrics": {
+      "header": {
+        "x": 320,
+        "y": 0,
+        "width": 1120,
+        "height": 61,
+        "top": 0,
+        "right": 1440,
+        "bottom": 61,
+        "left": 320,
+        "text": "No.66517",
+        "style": {
+          "font": "16px / 24px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(45, 41, 38)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "code": {
+        "x": 384,
+        "y": 16,
+        "width": 83.6875,
+        "height": 28,
+        "top": 16,
+        "right": 467.6875,
+        "bottom": 44,
+        "left": 384,
+        "text": "No.66517",
+        "style": {
+          "font": "600 16px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(23, 23, 23)",
+          "radius": "999px"
+        }
+      },
+      "codeText": {
+        "x": 394,
+        "y": 20,
+        "width": 63.6875,
+        "height": 20,
+        "top": 20,
+        "right": 457.6875,
+        "bottom": 40,
+        "left": 394,
+        "text": "No.66517",
+        "style": {
+          "font": "700 14px / 20px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "close": {
+        "x": 332,
+        "y": 8,
+        "width": 44,
+        "height": 44,
+        "top": 8,
+        "right": 376,
+        "bottom": 52,
+        "left": 332,
+        "text": "",
+        "style": {
+          "font": "600 16px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "6px"
+        }
+      },
+      "image": {
+        "x": 344,
+        "y": 85,
+        "width": 561.59375,
+        "height": 718,
+        "top": 85,
+        "right": 905.59375,
+        "bottom": 803,
+        "left": 344,
+        "text": "‹1 / 4›",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(250, 250, 250)",
+          "radius": "20px"
+        }
+      },
+      "title": {
+        "x": 937.59375,
+        "y": 109,
+        "width": 478.40625,
+        "height": 63.984375,
+        "top": 109,
+        "right": 1416,
+        "bottom": 172.984375,
+        "left": 937.59375,
+        "text": "卡通地板坐墊（キャラクターフロアクッション）",
+        "style": {
+          "font": "750 28px / 39.2px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(23, 23, 23)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "specs": {
+        "x": 937.59375,
+        "y": 192.984375,
+        "width": 478.40625,
+        "height": 113.390625,
+        "top": 192.984375,
+        "right": 1416,
+        "bottom": 306.375,
+        "left": 937.59375,
+        "text": "包裝明細約85×85×14cm／各種1点／非電動規格與計量明細約85×85×14cm，可將腳伸入的非電動坐墊，各角色單件選擇，並非3件裝。",
+        "style": {
+          "font": "14px / 23.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "offer": {
+        "x": 937.59375,
+        "y": 326.375,
+        "width": 478.40625,
+        "height": 308.875,
+        "top": 326.375,
+        "right": 1416,
+        "bottom": 635.25,
+        "left": 937.59375,
+        "text": "參考售價（非即時）JPY原價: ¥3,498折扣金額: −¥700¥2,798/ 各種1点來源渠道Costco 倉庫店優惠／兌換期間2026-11-09 – 2026-11-22 日本時間，包含起訖日來源cds2.costcojapan.jp",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgb(245, 245, 243)",
+          "radius": "20px"
+        }
+      },
+      "price": {
+        "x": 953.59375,
+        "y": 399.953125,
+        "width": 446.40625,
+        "height": 43.1875,
+        "top": 399.953125,
+        "right": 1400,
+        "bottom": 443.140625,
+        "left": 953.59375,
+        "text": "¥2,798",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "unit": {
+        "x": 1345.34375,
+        "y": 445.140625,
+        "width": 54.65625,
+        "height": 20.796875,
+        "top": 445.140625,
+        "right": 1400,
+        "bottom": 465.9375,
+        "left": 1345.34375,
+        "text": "/ 各種1点",
+        "style": {
+          "font": "13px / 20.8px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(98, 98, 98)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "conditions": {
+        "x": 937.59375,
+        "y": 655.25,
+        "width": 478.40625,
+        "height": 75.890625,
+        "top": 655.25,
+        "right": 1416,
+        "bottom": 731.140625,
+        "left": 937.59375,
+        "text": "優惠條件Costco倉庫店含稅參考價，不適用於線上；僅限有效會員，庫存及販售情況以各倉庫為準。約85×85×14cm，可將腳伸入的非電動坐墊，各款單件，不是3件裝。",
+        "style": {
+          "font": "14px / 16.1px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+          "color": "rgb(41, 43, 43)",
+          "background": "rgba(0, 0, 0, 0)",
+          "radius": "0px"
+        }
+      },
+      "bodyWidth": 1120,
+      "bodyScrollWidth": 1120
+    },
+    "errors": [],
+    "failed": []
+  }
+]

@@ -2,7 +2,7 @@ import {render,screen,waitFor,within} from '@testing-library/react';
 import {MemoryRouter} from 'react-router-dom';
 import {beforeEach,expect,it,vi} from 'vitest';
 import {I18nProvider} from '../i18n';
-import {DetailOffer} from './ConsumerDetail';
+import {DetailOffer,ProductDetailCode,ProductDetailSpecs} from './ConsumerDetail';
 import {CatalogSection} from '../pages/PublicProductCatalog';
 import {browsePage,productCard} from '../test/browseFixtures';
 const mocks=vi.hoisted(()=>({productBrowse:vi.fn(),productDetail:vi.fn(),productSales:vi.fn(),publicAssignments:vi.fn()}));
@@ -11,8 +11,9 @@ const source={name:'FX medicine',itemNumber:'26440',specification:'240 tablets',
 beforeEach(()=>{vi.clearAllMocks();localStorage.setItem('bobbuy_locale','en-US');});
 it('labels historical reference price as not real time and shows each source amount only once',()=>{
  const view=render(<I18nProvider><DetailOffer facts={source}/></I18nProvider>);
- expect(screen.getByRole('heading',{name:'Reference price (not real time)'})).toBeInTheDocument();expect(view.container.textContent?.match(/2,820/g)).toHaveLength(1);expect(view.container.textContent).toContain('660');expect(view.container.textContent).toContain('3,480');
+ expect(screen.getByRole('heading',{name:'Reference price (not real time)'})).toBeInTheDocument();expect(view.container.textContent?.match(/2,820/g)).toHaveLength(1);expect(view.container.textContent?.match(/JPY/g)).toHaveLength(1);expect(view.container.textContent).toContain('660');expect(view.container.textContent).toContain('3,480');
 });
+it('keeps exact code identity and separates labeled product facts without dropping values',()=>{const v=render(<I18nProvider><ProductDetailCode value="00123"/><ProductDetailSpecs model="M1" packaging="One unit" specification="85 × 85 × 14 cm" specificationLanguage="ja-JP"/></I18nProvider>);expect(v.container.querySelector('.consumer-product-code strong')).toHaveTextContent('No.00123');expect(v.container.querySelectorAll('.consumer-product-specs dd')).toHaveLength(3);expect(screen.getByText('85 × 85 × 14 cm')).toHaveAttribute('lang','ja-JP');});
 it('does not repeat equal original/reference prices or infer a reduction',()=>{
  const view=render(<I18nProvider><DetailOffer facts={{...source,referencePrice:500,originalPrice:500,discountAmount:null,referenceQuote:undefined}}/></I18nProvider>);expect(view.container.textContent?.match(/500/g)).toHaveLength(1);expect(view.container.textContent).not.toContain('Discount amount');
 });
@@ -36,6 +37,6 @@ it('renders the real catalog detail entry once while retaining both source-price
  mocks.productBrowse.mockResolvedValue(browsePage([card]));mocks.productSales.mockResolvedValue([]);mocks.productDetail.mockResolvedValue({item:{...card,description:{'en-US':'New current-master text must not overwrite historical introductions'},gallery:[],referenceOffers:[{postId:7,facts:first},{postId:5,facts:second}]},markers:[],revision:'detail'});
  const onAdd=vi.fn();render(<I18nProvider><MemoryRouter initialEntries={['/products?product=p']}><CatalogSection products={[]} quantities={{}} onAdd={onAdd} canBuy={()=>false}/></MemoryRouter></I18nProvider>);
  const dialog=within(await screen.findByRole('dialog'));await dialog.findByText(shared);expect(dialog.getAllByText(shared)).toHaveLength(1);expect(dialog.queryByText('New current-master text must not overwrite historical introductions')).not.toBeInTheDocument();
- const root=screen.getByRole('dialog');expect(root.querySelectorAll('.consumer-product-code strong')).toHaveLength(1);expect(root.querySelector('.consumer-product-code strong')).toHaveTextContent('26440');expect(root.querySelectorAll('[data-reference-key]')).toHaveLength(2);expect(root.querySelectorAll('.consumer-reference-price')).toHaveLength(2);expect(root.textContent?.match(/2,820/g)).toHaveLength(1);expect(root.textContent?.match(/3,300/g)).toHaveLength(1);expect(dialog.getByText('Costco Online')).toBeInTheDocument();expect(dialog.getByText('Costco warehouse')).toBeInTheDocument();
+ const root=screen.getByRole('dialog');expect(root.querySelectorAll('.consumer-product-code strong')).toHaveLength(1);expect(root.querySelector('.ant-drawer-title .consumer-product-code strong')).toHaveTextContent('No.26440');expect(root.querySelector('.consumer-detail-info>.consumer-product-code')).toBeNull();expect(root.querySelectorAll('[data-reference-key]')).toHaveLength(2);expect(root.querySelectorAll('.consumer-reference-price')).toHaveLength(2);expect(root.textContent?.match(/2,820/g)).toHaveLength(1);expect(root.textContent?.match(/3,300/g)).toHaveLength(1);expect(dialog.getByText('Costco Online')).toBeInTheDocument();expect(dialog.getByText('Costco warehouse')).toBeInTheDocument();
  await waitFor(()=>expect(dialog.getByRole('button',{name:'Not open for booking yet'})).toBeDisabled());expect(onAdd).not.toHaveBeenCalled();
 });

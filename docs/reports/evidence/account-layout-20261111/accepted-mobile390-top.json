@@ -1,0 +1,409 @@
+{
+  "blocks": [
+    {
+      "height": 411.6875,
+      "width": 343,
+      "x": 16,
+      "y": 342.34375
+    },
+    {
+      "height": 748.59375,
+      "width": 343,
+      "x": 16,
+      "y": 770.03125
+    },
+    {
+      "height": 571.59375,
+      "width": 343,
+      "x": 16,
+      "y": 1534.625
+    },
+    {
+      "height": 311.984375,
+      "width": 343,
+      "x": 16,
+      "y": 2186.21875
+    }
+  ],
+  "contentBottom": 775,
+  "controls": [
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "border": "0px",
+      "classes": "",
+      "color": "rgb(35, 35, 35)",
+      "icons": [],
+      "id": "",
+      "label": "我的账单",
+      "labelRect": null,
+      "padding": [
+        "5px",
+        "8px",
+        "7px",
+        "8px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 72,
+        "x": 287,
+        "y": 76
+      },
+      "tag": "A"
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "border": "1px",
+      "classes": "ant-btn css-dev-only-do-not-override-p28o4 ant-btn-text",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [
+        {
+          "height": 14,
+          "width": 14,
+          "x": 266,
+          "y": 140.75
+        }
+      ],
+      "id": "",
+      "label": "退出登录",
+      "labelRect": null,
+      "padding": [
+        "7px",
+        "14px",
+        "7px",
+        "14px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 108,
+        "x": 251,
+        "y": 126
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "background": "rgb(255, 245, 244)",
+      "border": "1px",
+      "classes": "active",
+      "color": "rgb(189, 41, 36)",
+      "icons": [
+        {
+          "height": 20,
+          "width": 20,
+          "x": 60.5,
+          "y": 199
+        }
+      ],
+      "id": "",
+      "label": "我的资料",
+      "labelRect": {
+        "height": 19.5,
+        "width": 52,
+        "x": 44.5,
+        "y": 231.75
+      },
+      "padding": [
+        "8px",
+        "6px",
+        "8px",
+        "6px"
+      ],
+      "rect": {
+        "height": 81,
+        "width": 109,
+        "x": 16,
+        "y": 190
+      },
+      "tag": "A"
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "border": "1px",
+      "classes": "",
+      "color": "rgb(35, 35, 35)",
+      "icons": [
+        {
+          "height": 20,
+          "width": 20,
+          "x": 177.5,
+          "y": 199
+        }
+      ],
+      "id": "",
+      "label": "我的订单",
+      "labelRect": {
+        "height": 19.5,
+        "width": 52,
+        "x": 161.5,
+        "y": 231.75
+      },
+      "padding": [
+        "8px",
+        "6px",
+        "8px",
+        "6px"
+      ],
+      "rect": {
+        "height": 81,
+        "width": 109,
+        "x": 133,
+        "y": 190
+      },
+      "tag": "A"
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "border": "1px",
+      "classes": "",
+      "color": "rgb(35, 35, 35)",
+      "icons": [
+        {
+          "height": 20,
+          "width": 20,
+          "x": 294.5,
+          "y": 199
+        }
+      ],
+      "id": "",
+      "label": "商家维护",
+      "labelRect": {
+        "height": 19.5,
+        "width": 52,
+        "x": 278.5,
+        "y": 231.75
+      },
+      "padding": [
+        "8px",
+        "6px",
+        "8px",
+        "6px"
+      ],
+      "rect": {
+        "height": 81,
+        "width": 109,
+        "x": 250,
+        "y": 190
+      },
+      "tag": "A"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px",
+      "classes": "ant-input css-dev-only-do-not-override-p28o4 ant-input-outlined ant-input-status-success",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [],
+      "id": "name",
+      "label": "input",
+      "labelRect": null,
+      "padding": [
+        "3.5px",
+        "11px",
+        "4.5px",
+        "11px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 309,
+        "x": 33,
+        "y": 436.84375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px",
+      "classes": "ant-input css-dev-only-do-not-override-p28o4 ant-input-outlined ant-input-status-success",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [],
+      "id": "email",
+      "label": "input",
+      "labelRect": null,
+      "padding": [
+        "3.5px",
+        "11px",
+        "4.5px",
+        "11px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 309,
+        "x": 33,
+        "y": 530.84375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px",
+      "classes": "ant-input css-dev-only-do-not-override-p28o4 ant-input-outlined ant-input-status-success",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [],
+      "id": "phone",
+      "label": "input",
+      "labelRect": null,
+      "padding": [
+        "3.5px",
+        "11px",
+        "4.5px",
+        "11px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 309,
+        "x": 33,
+        "y": 689.03125
+      },
+      "tag": "INPUT"
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "border": "0px",
+      "classes": "",
+      "color": "rgb(35, 35, 35)",
+      "icons": [
+        {
+          "height": 22,
+          "width": 22,
+          "x": 39.625,
+          "y": 790.5
+        }
+      ],
+      "id": "",
+      "label": "好物推荐",
+      "labelRect": {
+        "height": 13,
+        "width": 40,
+        "x": 30.625,
+        "y": 817.5
+      },
+      "padding": [
+        "5px",
+        "2px",
+        "5px",
+        "2px"
+      ],
+      "rect": {
+        "height": 52,
+        "width": 85.25,
+        "x": 8,
+        "y": 784
+      },
+      "tag": "A"
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "border": "0px",
+      "classes": "",
+      "color": "rgb(35, 35, 35)",
+      "icons": [
+        {
+          "height": 22,
+          "width": 22,
+          "x": 130.875,
+          "y": 790.5
+        }
+      ],
+      "id": "",
+      "label": "本程好物",
+      "labelRect": {
+        "height": 13,
+        "width": 40,
+        "x": 121.875,
+        "y": 817.5
+      },
+      "padding": [
+        "5px",
+        "2px",
+        "5px",
+        "2px"
+      ],
+      "rect": {
+        "height": 52,
+        "width": 85.25,
+        "x": 99.25,
+        "y": 784
+      },
+      "tag": "A"
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "border": "0px",
+      "classes": "",
+      "color": "rgb(35, 35, 35)",
+      "icons": [
+        {
+          "height": 22,
+          "width": 22,
+          "x": 222.125,
+          "y": 790.5
+        }
+      ],
+      "id": "",
+      "label": "购物车",
+      "labelRect": {
+        "height": 13,
+        "width": 30,
+        "x": 218.125,
+        "y": 817.5
+      },
+      "padding": [
+        "5px",
+        "2px",
+        "5px",
+        "2px"
+      ],
+      "rect": {
+        "height": 52,
+        "width": 85.25,
+        "x": 190.5,
+        "y": 784
+      },
+      "tag": "A"
+    },
+    {
+      "background": "rgb(241, 241, 238)",
+      "border": "0px",
+      "classes": "active",
+      "color": "rgb(34, 34, 34)",
+      "icons": [
+        {
+          "height": 22,
+          "width": 22,
+          "x": 313.375,
+          "y": 790.5
+        }
+      ],
+      "id": "",
+      "label": "我的账户",
+      "labelRect": {
+        "height": 13,
+        "width": 40,
+        "x": 304.375,
+        "y": 817.5
+      },
+      "padding": [
+        "5px",
+        "2px",
+        "5px",
+        "2px"
+      ],
+      "rect": {
+        "height": 52,
+        "width": 85.25,
+        "x": 281.75,
+        "y": 784
+      },
+      "tag": "A"
+    }
+  ],
+  "headerBottom": 68,
+  "height": 844,
+  "main": {
+    "height": 2422.203125,
+    "width": 343,
+    "x": 16,
+    "y": 76
+  },
+  "overflow": false,
+  "scrollY": 0,
+  "width": 390
+}

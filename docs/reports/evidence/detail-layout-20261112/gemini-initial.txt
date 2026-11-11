@@ -1,0 +1,39 @@
+### 1. Image & Input Validation
+* **Product Code:** `No.66517`
+* **Price Data:**
+  * Current Reference Price: `¥ 2,798` (JPY)
+  * Original Price: `¥3,498`
+  * Discount: `-¥700`
+  * Unit: `/ 各種1点`
+
+---
+
+### 2. Actual Defects & UI Inconsistencies
+
+#### A. Excessive Blank Space
+* **Massive Bottom Dead Space:** There is an extensive, unusable white void extending beneath the `暂未开放预订` button. The drawer content height is not properly fitted or constrained to the viewport/sheet boundary.
+
+#### B. Top Badge (`No.66517`) Positioning & Centering
+* **Header Alignment & Imbalance:** The `No.66517` pill badge sits immediately adjacent to the top-left `✕` close button without sufficient margin or logical alignment. It is neither centered along the drawer's horizontal axis nor clearly grouped with the close control, creating an awkward, floating appearance in the top safe area.
+
+#### C. Grid & Key-Value Label Alignment
+* **Uneven Label Wrapping in Specs:** In the upper specifications table, `规格与计量明细` breaks across two lines (`规格与计量` / `明细`), while `包装明细` is a single line, causing uneven vertical height distribution and misaligned baseline pairings with their corresponding values.
+* **Jagged Rows in Price Card:** Under the price section:
+  * `优惠 / 兑换期间` has a split label and multi-line value (`日本时间，含起止日`), which interrupts the tight one-line cadence of `来源渠道` and `来源`.
+  * The link `cds2.costcojapan.jp` sits slightly off-axis compared to the text rows above it.
+
+#### D. Price Block Formatting & Flow
+* **Right-Heavy Float:** The reference price block combines a right-aligned currency tag (`JPY`), right-aligned strike-through original price, right-aligned red discount amount, and right-aligned main price + unit. This creates an unbalanced, hollow space directly underneath the left-aligned `参考售价 (非实时)` header.
+* **Floating Unit Descriptor:** The sub-label `/ 各種1点` is isolated directly below the large price number, detached from the primary quantity/packaging descriptors above.
+
+#### E. Redundancy Across Cards
+* The exact string `"约85×85×14cm，可将脚伸入的非电动坐垫，各角色单件选择，并非3件装。"` appears verbatim in **both** the upper `规格与计量明细` row and the lower `优惠条件` card, adding unnecessary visual noise and vertical height.
+
+---
+
+### 3. Overall Assessment
+
+* **Hierarchy & Structure:** The drawer establishes clear top-to-bottom grouping (Media Gallery → Core Titles & Specs → Commercial Pricing Box → Primary Action). Information is legible and readable, but spacing discipline degrades toward the bottom.
+* **Top Header Cleanliness:** Moving `No.66517` to the absolute top fulfills the user's requirement, but it needs a dedicated header bar structure (e.g., standard layout with `✕` pinned left and `No.66517` centered in the app-bar title slot or anchored symmetrically).
+* **Price Card Hierarchy:** The price container carries too many disparate styles (small red discount badge text, strikethrough, large bold numeral, external URL, disclaimer paragraph). Consolidating the price hierarchy (aligning original price, discount tag, and current price on a unified baseline) would significantly improve scanability.
+* **Action Area:** The disabled state (`暂未开放预订`) is correctly communicated with muted text and an inactive background, but it should anchor either as a sticky bottom sheet footer with proper bottom safe-area padding or mark the definite end of the scrollable content.

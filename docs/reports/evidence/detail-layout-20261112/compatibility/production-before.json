@@ -1,0 +1,7 @@
+{
+  "frontend": {
+    "source": "d158c0dee361af765c0588689a7e851206bac0e8",
+    "image": "sha256:225cae213c23fa986dee097feb1397c093f80618d1956e7679ecc497200be73c",
+    "tag": "bobuy/frontend:20261112.detail-layout"
+  }
+}

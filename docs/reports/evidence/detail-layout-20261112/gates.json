@@ -1,0 +1,22 @@
+{
+  "source": "d158c0dee361af765c0588689a7e851206bac0e8",
+  "result": "PASS",
+  "tests": {
+    "initialRelated": 76,
+    "finalStructure": 52,
+    "countsOverlap": true
+  },
+  "browserCases": 16,
+  "controls": 64,
+  "backend": "unchanged",
+  "bindings": {
+    "frontend/detail-tests-final.log": "48bf8ae9eb4c9ad20b5798f29564b5f8707de5df93f225c355984cb31db7c893",
+    "frontend/detail-tests-accepted.log": "746ef25b2339dcf63f44ea908d7241dfcd509475808a1e49ec1385a27f805320",
+    "frontend/detail-build-release.log": "14e97278aa786348d2051a9b81e86e5d962c31f06c9d7d803fa45994f0f472c1",
+    "docs/reports/evidence/detail-layout-20261112/candidate-matrix.json": "0ae7edbbff51b5d794b0261a67c43054ff284b4574937666e91a51b8c624d1b2",
+    "docs/reports/evidence/detail-layout-20261112/glyph-pixels.json": "c22bf77510727f2ae5f1cf8956d5e01d7a35c19daaa634c15428174a4954563e",
+    "docs/reports/evidence/detail-layout-20261112/action-glyph-pixels.json": "93178d609b9a272658cd1f6ef5f735e9ac80786818d7b15876b76f13d477dc39",
+    "docs/reports/evidence/detail-layout-20261112/synthetic-results.json": "6df8a2a358bf903ae59cf7f8385d12c1df4b63a45e5851c355aaddfcf1a71c09",
+    "docs/reports/evidence/detail-layout-20261112/candidate-catalog-gallery.json": "0e8d0c8e9e93429ad9d4e13d7ebabbcd8123100cb0f85122fffebe51732a42fb"
+  }
+}

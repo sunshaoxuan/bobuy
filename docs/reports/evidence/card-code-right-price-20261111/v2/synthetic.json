@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "data": "synthetic",
+  "cases": [
+    "leading zero code",
+    "missing code",
+    "250-character code",
+    "maximum valid price",
+    "unknown price",
+    "left-aligned code and price negatives rejected"
+  ]
+}

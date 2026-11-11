@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "sameCssFiles": 7,
+  "css": {
+    "assets/ProductMarkerBadges-YtkPTPIq.css": "0d4312f15309eb7ed571b6e37c0020d1edc79b2478331f01dd8c2dcd01dcdb2c",
+    "assets/Recommendations-BR6eX9U6.css": "a5fc8fb0758186d686acf3fbaca080c3d3851f65ab05221e30061df81abe3ef8",
+    "assets/RecommendationImageViewer-ILdPQ99W.css": "e7e048dad2c9ed20723701917e72bbe17f695111062cb04d734fab987a03acb4",
+    "assets/ProductArchive-s4Q_DEzK.css": "6465f1715caf52425d5ea85939c370f6f9e520bba19c3f16157f1256fa0d96b4",
+    "assets/PublicRecommendations-DhYyKoQc.css": "57228e6abd81d4b8c752bf45697153f2ce08d5660413c4638cf9f3bcee8ab2d5",
+    "assets/ImageLightbox-BuglK55p.css": "e7e1cfd68370f4b4d68b5ccec296a13d7c75ffe2ee697ebcab16d6d72f2c1e2d",
+    "assets/index-BoK23GCv.css": "afc133a17ad995a3f47d68bdeeffcbfdfbe7e96812ee36d3268aed5ee2e9726e"
+  },
+  "scope": "only catalog specification language attribute changed; reuse unchanged recommendation/geometry evidence"
+}
