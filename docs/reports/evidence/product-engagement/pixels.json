@@ -1,0 +1,881 @@
+{
+  "method": "Native select and heat: actual screenshot foreground pixels. Rating: final SVG path bounds transformed into browser pixels, independent role=radio hotzones.",
+  "checks": [
+    {
+      "file": "products-sort-final-1440.png",
+      "background": [
+        218,
+        45
+      ],
+      "visibleInk": [
+        19,
+        17,
+        72,
+        29
+      ],
+      "marginsLTRBottom": [
+        18,
+        16,
+        145,
+        15
+      ],
+      "verticalCenterError": 0.5,
+      "verticalBudget": 1.2000000000000002,
+      "result": "PASS"
+    },
+    {
+      "file": "products-heat-final-1440.png",
+      "background": [
+        193,
+        25
+      ],
+      "visibleInk": [
+        133,
+        7,
+        189,
+        18
+      ],
+      "marginsLTRBottom": [
+        133,
+        7,
+        4,
+        7
+      ],
+      "verticalCenterError": 0.0,
+      "verticalBudget": "baseline-aligned status, no centering requirement",
+      "result": "PASS"
+    },
+    {
+      "file": "recommendations-sort-final-1440.png",
+      "background": [
+        218,
+        44
+      ],
+      "visibleInk": [
+        19,
+        17,
+        72,
+        29
+      ],
+      "marginsLTRBottom": [
+        18,
+        16,
+        145,
+        14
+      ],
+      "verticalCenterError": 1.0,
+      "verticalBudget": 1.2000000000000002,
+      "result": "PASS"
+    },
+    {
+      "file": "recommendations-heat-final-1440.png",
+      "background": [
+        193,
+        25
+      ],
+      "visibleInk": [
+        133,
+        7,
+        189,
+        18
+      ],
+      "marginsLTRBottom": [
+        133,
+        7,
+        4,
+        7
+      ],
+      "verticalCenterError": 0.0,
+      "verticalBudget": "baseline-aligned status, no centering requirement",
+      "result": "PASS"
+    },
+    {
+      "file": "products-sort-final-768.png",
+      "background": [
+        218,
+        45
+      ],
+      "visibleInk": [
+        19,
+        17,
+        72,
+        29
+      ],
+      "marginsLTRBottom": [
+        18,
+        16,
+        145,
+        15
+      ],
+      "verticalCenterError": 0.5,
+      "verticalBudget": 1.2000000000000002,
+      "result": "PASS"
+    },
+    {
+      "file": "products-heat-final-768.png",
+      "background": [
+        222,
+        25
+      ],
+      "visibleInk": [
+        162,
+        7,
+        219,
+        18
+      ],
+      "marginsLTRBottom": [
+        162,
+        7,
+        3,
+        7
+      ],
+      "verticalCenterError": 0.0,
+      "verticalBudget": "baseline-aligned status, no centering requirement",
+      "result": "PASS"
+    },
+    {
+      "file": "recommendations-sort-final-768.png",
+      "background": [
+        218,
+        44
+      ],
+      "visibleInk": [
+        19,
+        17,
+        72,
+        29
+      ],
+      "marginsLTRBottom": [
+        18,
+        16,
+        145,
+        14
+      ],
+      "verticalCenterError": 1.0,
+      "verticalBudget": 1.2000000000000002,
+      "result": "PASS"
+    },
+    {
+      "file": "recommendations-heat-final-768.png",
+      "background": [
+        222,
+        25
+      ],
+      "visibleInk": [
+        162,
+        7,
+        219,
+        18
+      ],
+      "marginsLTRBottom": [
+        162,
+        7,
+        3,
+        7
+      ],
+      "verticalCenterError": 0.0,
+      "verticalBudget": "baseline-aligned status, no centering requirement",
+      "result": "PASS"
+    },
+    {
+      "file": "products-sort-final-320.png",
+      "background": [
+        273,
+        45
+      ],
+      "visibleInk": [
+        19,
+        17,
+        72,
+        29
+      ],
+      "marginsLTRBottom": [
+        18,
+        16,
+        200,
+        15
+      ],
+      "verticalCenterError": 0.5,
+      "verticalBudget": 1.2000000000000002,
+      "result": "PASS"
+    },
+    {
+      "file": "products-heat-final-320.png",
+      "background": [
+        113,
+        25
+      ],
+      "visibleInk": [
+        53,
+        7,
+        108,
+        18
+      ],
+      "marginsLTRBottom": [
+        53,
+        7,
+        5,
+        7
+      ],
+      "verticalCenterError": 0.0,
+      "verticalBudget": "baseline-aligned status, no centering requirement",
+      "result": "PASS"
+    },
+    {
+      "file": "recommendations-sort-final-320.png",
+      "background": [
+        273,
+        44
+      ],
+      "visibleInk": [
+        19,
+        17,
+        72,
+        29
+      ],
+      "marginsLTRBottom": [
+        18,
+        16,
+        200,
+        14
+      ],
+      "verticalCenterError": 1.0,
+      "verticalBudget": 1.2000000000000002,
+      "result": "PASS"
+    },
+    {
+      "file": "recommendations-heat-final-320.png",
+      "background": [
+        113,
+        25
+      ],
+      "visibleInk": [
+        53,
+        7,
+        108,
+        18
+      ],
+      "marginsLTRBottom": [
+        53,
+        7,
+        5,
+        7
+      ],
+      "verticalCenterError": 0.0,
+      "verticalBudget": "baseline-aligned status, no centering requirement",
+      "result": "PASS"
+    },
+    {
+      "file": "review-textarea-max-320.png",
+      "background": [
+        240,
+        73
+      ],
+      "scrollbarWidth": 8,
+      "visibleInk": [
+        9,
+        7,
+        217,
+        67
+      ],
+      "marginsLTRBottom": [
+        8,
+        6,
+        14,
+        5
+      ],
+      "result": "PASS: complete text rows retain glyph clearance at both scroll boundaries"
+    },
+    {
+      "file": "review-textarea-max-end-320.png",
+      "background": [
+        240,
+        73
+      ],
+      "scrollbarWidth": 8,
+      "visibleInk": [
+        9,
+        7,
+        217,
+        67
+      ],
+      "marginsLTRBottom": [
+        8,
+        6,
+        14,
+        5
+      ],
+      "result": "PASS: complete text rows retain glyph clearance at both scroll boundaries"
+    },
+    {
+      "file": "stars-hover-desktop.png",
+      "star": 1,
+      "hotzone": {
+        "x": 427,
+        "y": 263.703125,
+        "width": 32,
+        "height": 50,
+        "right": 459,
+        "bottom": 313.703125,
+        "icons": [
+          {
+            "x": 430.71156248024533,
+            "y": 275.82789102622445,
+            "width": 24.576755932399237,
+            "height": 23.46954686301092
+          }
+        ]
+      },
+      "visiblePath": {
+        "x": 430.71156248024533,
+        "y": 275.82789102622445,
+        "width": 24.576755932399237,
+        "height": 23.46954686301092
+      },
+      "marginsLTRBottom": [
+        3.711562480245334,
+        12.12476602622445,
+        3.7116815873554287,
+        14.405687110764632
+      ],
+      "centerErrorsXY": [
+        5.955355504738691e-05,
+        1.140460542270091
+      ],
+      "budget": 2,
+      "result": "PASS"
+    },
+    {
+      "file": "stars-hover-desktop.png",
+      "star": 2,
+      "hotzone": {
+        "x": 467,
+        "y": 263.703125,
+        "width": 32,
+        "height": 50,
+        "right": 499,
+        "bottom": 313.703125,
+        "icons": [
+          {
+            "x": 470.71156248024533,
+            "y": 275.82789102622445,
+            "width": 24.576755932399237,
+            "height": 23.46954686301092
+          }
+        ]
+      },
+      "visiblePath": {
+        "x": 470.71156248024533,
+        "y": 275.82789102622445,
+        "width": 24.576755932399237,
+        "height": 23.46954686301092
+      },
+      "marginsLTRBottom": [
+        3.711562480245334,
+        12.12476602622445,
+        3.7116815873554287,
+        14.405687110764632
+      ],
+      "centerErrorsXY": [
+        5.955355504738691e-05,
+        1.140460542270091
+      ],
+      "budget": 2,
+      "result": "PASS"
+    },
+    {
+      "file": "stars-hover-desktop.png",
+      "star": 3,
+      "hotzone": {
+        "x": 507,
+        "y": 263.703125,
+        "width": 32,
+        "height": 50,
+        "right": 539,
+        "bottom": 313.703125,
+        "icons": [
+          {
+            "x": 510.71156248024533,
+            "y": 275.82789102622445,
+            "width": 24.576755932399237,
+            "height": 23.46954686301092
+          }
+        ]
+      },
+      "visiblePath": {
+        "x": 510.71156248024533,
+        "y": 275.82789102622445,
+        "width": 24.576755932399237,
+        "height": 23.46954686301092
+      },
+      "marginsLTRBottom": [
+        3.711562480245334,
+        12.12476602622445,
+        3.7116815873554287,
+        14.405687110764632
+      ],
+      "centerErrorsXY": [
+        5.955355504738691e-05,
+        1.140460542270091
+      ],
+      "budget": 2,
+      "result": "PASS"
+    },
+    {
+      "file": "stars-hover-desktop.png",
+      "star": 4,
+      "hotzone": {
+        "x": 545.4000244140625,
+        "y": 261.203125,
+        "width": 35.199951171875,
+        "height": 55,
+        "right": 580.5999755859375,
+        "bottom": 316.203125,
+        "icons": [
+          {
+            "x": 549.482730952266,
+            "y": 274.54037983885274,
+            "width": 27.034432111594697,
+            "height": 25.816502108869656
+          }
+        ]
+      },
+      "visiblePath": {
+        "x": 549.482730952266,
+        "y": 274.54037983885274,
+        "width": 27.034432111594697,
+        "height": 25.816502108869656
+      },
+      "marginsLTRBottom": [
+        4.082706538203524,
+        13.337254838852743,
+        4.082812522076779,
+        15.8462430522776
+      ],
+      "centerErrorsXY": [
+        5.299193662722246e-05,
+        1.2544941067124
+      ],
+      "budget": 2,
+      "result": "PASS"
+    },
+    {
+      "file": "stars-hover-desktop.png",
+      "star": 5,
+      "hotzone": {
+        "x": 587,
+        "y": 263.703125,
+        "width": 32,
+        "height": 50,
+        "right": 619,
+        "bottom": 313.703125,
+        "icons": [
+          {
+            "x": 590.7115624802453,
+            "y": 275.82789102622445,
+            "width": 24.576755932399124,
+            "height": 23.46954686301092
+          }
+        ]
+      },
+      "visiblePath": {
+        "x": 590.7115624802453,
+        "y": 275.82789102622445,
+        "width": 24.576755932399124,
+        "height": 23.46954686301092
+      },
+      "marginsLTRBottom": [
+        3.711562480245334,
+        12.12476602622445,
+        3.7116815873555424,
+        14.405687110764632
+      ],
+      "centerErrorsXY": [
+        5.955355504738691e-05,
+        1.140460542270091
+      ],
+      "budget": 2,
+      "result": "PASS"
+    },
+    {
+      "file": "stars-long-text-320.png",
+      "star": 1,
+      "hotzone": {
+        "x": 35,
+        "y": 321.703125,
+        "width": 32,
+        "height": 50,
+        "right": 67,
+        "bottom": 371.703125,
+        "icons": [
+          {
+            "x": 38.71156248024532,
+            "y": 333.82789102622445,
+            "width": 24.57675593239921,
+            "height": 23.46954686301092
+          }
+        ]
+      },
+      "visiblePath": {
+        "x": 38.71156248024532,
+        "y": 333.82789102622445,
+        "width": 24.57675593239921,
+        "height": 23.46954686301092
+      },
+      "marginsLTRBottom": [
+        3.7115624802453198,
+        12.12476602622445,
+        3.7116815873554714,
+        14.405687110764632
+      ],
+      "centerErrorsXY": [
+        5.955355507580862e-05,
+        1.140460542270091
+      ],
+      "budget": 2,
+      "result": "PASS"
+    },
+    {
+      "file": "stars-long-text-320.png",
+      "star": 2,
+      "hotzone": {
+        "x": 75,
+        "y": 321.703125,
+        "width": 32,
+        "height": 50,
+        "right": 107,
+        "bottom": 371.703125,
+        "icons": [
+          {
+            "x": 78.71156248024532,
+            "y": 333.82789102622445,
+            "width": 24.576755932399195,
+            "height": 23.46954686301092
+          }
+        ]
+      },
+      "visiblePath": {
+        "x": 78.71156248024532,
+        "y": 333.82789102622445,
+        "width": 24.576755932399195,
+        "height": 23.46954686301092
+      },
+      "marginsLTRBottom": [
+        3.7115624802453198,
+        12.12476602622445,
+        3.7116815873554856,
+        14.405687110764632
+      ],
+      "centerErrorsXY": [
+        5.955355507580862e-05,
+        1.140460542270091
+      ],
+      "budget": 2,
+      "result": "PASS"
+    },
+    {
+      "file": "stars-long-text-320.png",
+      "star": 3,
+      "hotzone": {
+        "x": 115,
+        "y": 321.703125,
+        "width": 32,
+        "height": 50,
+        "right": 147,
+        "bottom": 371.703125,
+        "icons": [
+          {
+            "x": 118.71156248024532,
+            "y": 333.82789102622445,
+            "width": 24.576755932399195,
+            "height": 23.46954686301092
+          }
+        ]
+      },
+      "visiblePath": {
+        "x": 118.71156248024532,
+        "y": 333.82789102622445,
+        "width": 24.576755932399195,
+        "height": 23.46954686301092
+      },
+      "marginsLTRBottom": [
+        3.7115624802453198,
+        12.12476602622445,
+        3.7116815873554856,
+        14.405687110764632
+      ],
+      "centerErrorsXY": [
+        5.955355507580862e-05,
+        1.140460542270091
+      ],
+      "budget": 2,
+      "result": "PASS"
+    },
+    {
+      "file": "stars-long-text-320.png",
+      "star": 4,
+      "hotzone": {
+        "x": 155,
+        "y": 321.703125,
+        "width": 32,
+        "height": 50,
+        "right": 187,
+        "bottom": 371.703125,
+        "icons": [
+          {
+            "x": 158.7115624802453,
+            "y": 333.82789102622445,
+            "width": 24.57675593239921,
+            "height": 23.46954686301092
+          }
+        ]
+      },
+      "visiblePath": {
+        "x": 158.7115624802453,
+        "y": 333.82789102622445,
+        "width": 24.57675593239921,
+        "height": 23.46954686301092
+      },
+      "marginsLTRBottom": [
+        3.7115624802453056,
+        12.12476602622445,
+        3.7116815873554856,
+        14.405687110764632
+      ],
+      "centerErrorsXY": [
+        5.955355510423033e-05,
+        1.140460542270091
+      ],
+      "budget": 2,
+      "result": "PASS"
+    },
+    {
+      "file": "stars-long-text-320.png",
+      "star": 5,
+      "hotzone": {
+        "x": 195,
+        "y": 321.703125,
+        "width": 32,
+        "height": 50,
+        "right": 227,
+        "bottom": 371.703125,
+        "icons": [
+          {
+            "x": 198.7115624802453,
+            "y": 333.82789102622445,
+            "width": 24.57675593239921,
+            "height": 23.46954686301092
+          }
+        ]
+      },
+      "visiblePath": {
+        "x": 198.7115624802453,
+        "y": 333.82789102622445,
+        "width": 24.57675593239921,
+        "height": 23.46954686301092
+      },
+      "marginsLTRBottom": [
+        3.7115624802453056,
+        12.12476602622445,
+        3.7116815873554856,
+        14.405687110764632
+      ],
+      "centerErrorsXY": [
+        5.955355510423033e-05,
+        1.140460542270091
+      ],
+      "budget": 2,
+      "result": "PASS"
+    },
+    {
+      "file": "stars-mobile-320.png",
+      "star": 1,
+      "hotzone": {
+        "x": 35,
+        "y": 271.703125,
+        "width": 32,
+        "height": 50,
+        "right": 67,
+        "bottom": 321.703125,
+        "icons": [
+          {
+            "x": 38.71156248024532,
+            "y": 283.82789102622445,
+            "width": 24.57675593239921,
+            "height": 23.46954686301092
+          }
+        ]
+      },
+      "visiblePath": {
+        "x": 38.71156248024532,
+        "y": 283.82789102622445,
+        "width": 24.57675593239921,
+        "height": 23.46954686301092
+      },
+      "marginsLTRBottom": [
+        3.7115624802453198,
+        12.12476602622445,
+        3.7116815873554714,
+        14.405687110764632
+      ],
+      "centerErrorsXY": [
+        5.955355507580862e-05,
+        1.140460542270091
+      ],
+      "budget": 2,
+      "result": "PASS"
+    },
+    {
+      "file": "stars-mobile-320.png",
+      "star": 2,
+      "hotzone": {
+        "x": 75,
+        "y": 271.703125,
+        "width": 32,
+        "height": 50,
+        "right": 107,
+        "bottom": 321.703125,
+        "icons": [
+          {
+            "x": 78.71156248024532,
+            "y": 283.82789102622445,
+            "width": 24.576755932399195,
+            "height": 23.46954686301092
+          }
+        ]
+      },
+      "visiblePath": {
+        "x": 78.71156248024532,
+        "y": 283.82789102622445,
+        "width": 24.576755932399195,
+        "height": 23.46954686301092
+      },
+      "marginsLTRBottom": [
+        3.7115624802453198,
+        12.12476602622445,
+        3.7116815873554856,
+        14.405687110764632
+      ],
+      "centerErrorsXY": [
+        5.955355507580862e-05,
+        1.140460542270091
+      ],
+      "budget": 2,
+      "result": "PASS"
+    },
+    {
+      "file": "stars-mobile-320.png",
+      "star": 3,
+      "hotzone": {
+        "x": 115,
+        "y": 271.703125,
+        "width": 32,
+        "height": 50,
+        "right": 147,
+        "bottom": 321.703125,
+        "icons": [
+          {
+            "x": 118.71156248024532,
+            "y": 283.82789102622445,
+            "width": 24.576755932399195,
+            "height": 23.46954686301092
+          }
+        ]
+      },
+      "visiblePath": {
+        "x": 118.71156248024532,
+        "y": 283.82789102622445,
+        "width": 24.576755932399195,
+        "height": 23.46954686301092
+      },
+      "marginsLTRBottom": [
+        3.7115624802453198,
+        12.12476602622445,
+        3.7116815873554856,
+        14.405687110764632
+      ],
+      "centerErrorsXY": [
+        5.955355507580862e-05,
+        1.140460542270091
+      ],
+      "budget": 2,
+      "result": "PASS"
+    },
+    {
+      "file": "stars-mobile-320.png",
+      "star": 4,
+      "hotzone": {
+        "x": 155,
+        "y": 271.703125,
+        "width": 32,
+        "height": 50,
+        "right": 187,
+        "bottom": 321.703125,
+        "icons": [
+          {
+            "x": 158.7115624802453,
+            "y": 283.82789102622445,
+            "width": 24.57675593239921,
+            "height": 23.46954686301092
+          }
+        ]
+      },
+      "visiblePath": {
+        "x": 158.7115624802453,
+        "y": 283.82789102622445,
+        "width": 24.57675593239921,
+        "height": 23.46954686301092
+      },
+      "marginsLTRBottom": [
+        3.7115624802453056,
+        12.12476602622445,
+        3.7116815873554856,
+        14.405687110764632
+      ],
+      "centerErrorsXY": [
+        5.955355510423033e-05,
+        1.140460542270091
+      ],
+      "budget": 2,
+      "result": "PASS"
+    },
+    {
+      "file": "stars-mobile-320.png",
+      "star": 5,
+      "hotzone": {
+        "x": 195,
+        "y": 271.703125,
+        "width": 32,
+        "height": 50,
+        "right": 227,
+        "bottom": 321.703125,
+        "icons": [
+          {
+            "x": 198.7115624802453,
+            "y": 283.82789102622445,
+            "width": 24.57675593239921,
+            "height": 23.46954686301092
+          }
+        ]
+      },
+      "visiblePath": {
+        "x": 198.7115624802453,
+        "y": 283.82789102622445,
+        "width": 24.57675593239921,
+        "height": 23.46954686301092
+      },
+      "marginsLTRBottom": [
+        3.7115624802453056,
+        12.12476602622445,
+        3.7116815873554856,
+        14.405687110764632
+      ],
+      "centerErrorsXY": [
+        5.955355510423033e-05,
+        1.140460542270091
+      ],
+      "budget": 2,
+      "result": "PASS"
+    }
+  ]
+}

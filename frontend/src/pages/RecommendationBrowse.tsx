@@ -1,3 +1,4 @@
+import ProductSort from '../components/ProductSort';
 import CompactProductCard,{referenceForCard} from '../components/CompactProductCard';
 import CardPrice from '../components/CardPrice';
 import SafeArticleText from '../components/SafeArticleText';
@@ -31,15 +32,16 @@ export function ServiceSummary({offer,compact=false}:{offer:ServiceBrowseCard;co
 
 function Occurrences({period,topic,refresh,paused,checkDataset,onChanged,onSales,purchasePending,query='',quantities,onAdd,canBuy,openItem,openIssue,authKey,onReady}:ShoppingProps&{period:'current'|'history'|'all';topic?:number;refresh:number;paused:boolean;checkDataset:(key:string,token:string)=>boolean;onChanged:()=>void;openItem:(post:number,item:number,trigger:HTMLElement)=>void;openIssue:(post:number)=>void;onReady?:()=>void}){
  const {t,locale}=useI18n(),location=useLocation(),[params,setParams]=useSearchParams(),node=selectedNode(location.search),category=params.get('category')??'';
- const identity=JSON.stringify([location.pathname,node,topic,period,query,category,locale,refresh,authKey]);
+ const [sort,setSort]=useState('default');
+ const identity=JSON.stringify([location.pathname,node,topic,period,query,category,locale,refresh,authKey,sort]);
  const activation=useSectionActivation(identity);
- const data=useBrowsePages<RecommendationOccurrence>(identity,(page,revision)=>storefrontApi.browseItems({page,revision,merchantId:node,issueId:topic,period,query,category,locale}),row=>row.key,activation.active&&node!==-1,token=>checkDataset(period,token),24,paused);
+ const data=useBrowsePages<RecommendationOccurrence>(identity,(page,revision)=>storefrontApi.browseItems({page,revision,merchantId:node,issueId:topic,period,query,category,locale,sort}),row=>row.key,activation.active&&node!==-1,token=>checkDataset(period,token),24,paused);
  const sale=useBoundedSales([...new Set(data.items.flatMap(row=>row.item?.productId?[row.item.productId]:[]))],identity,onSales);
  const sentinel=useNextBrowsePage(identity,!!data.page?.hasNext&&!data.busy&&!data.error,paused,data.next);
  useEffect(()=>{if(data.page)onReady?.();},[data.page?.revision,identity]);
  function choose(value:string){const next=new URLSearchParams(params);next.delete('item');if(value)next.set('category',value);else next.delete('category');setParams(next);}
  return <section ref={activation.element} aria-label={t(period==='history'?'rec.history':topic?'browse.entries':'browse.current')} aria-busy={data.busy} data-detail-list-ready={!!data.page||!!data.error}>
-  <h2>{t(period==='history'?'rec.history':topic?'browse.entries':'browse.current')}</h2>
+  <header className="product-sort-heading"><h2>{t(period==='history'?'rec.history':topic?'browse.entries':'browse.current')}</h2><ProductSort value={sort} onChange={setSort}/></header>
   {data.page&&<span role="status">{t('browse.result_count',{shown:data.items.length,total:data.page.matchedTotal})}</span>}
   <BrowseFilters page={data.page} category={category} onChoose={choose}/><BrowseError error={data.error} changed={data.changed} retry={data.retry} refresh={onChanged}/><BrowseError error={sale.error} retry={sale.retry} refresh={sale.retry}/>
   {!data.page&&!data.error?<Spin/>:!data.items.length?<Empty description={t('store.no_matches')}/>:<div className="catalog-master-grid server-browse-cards">{data.items.map((row,index)=>{

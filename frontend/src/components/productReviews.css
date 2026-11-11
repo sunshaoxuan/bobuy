@@ -1,7 +1,7 @@
 .review-stars-button{border:0;background:transparent;text-align:start;font:inherit;cursor:pointer;width:100%;min-height:44px;padding:6px 3px;border-radius:8px}.review-stars-button .ant-rate{pointer-events:none}.review-stars-button:focus-visible{outline:2px solid #795908;outline-offset:2px}.review-distribution{width:min(280px,75vw);display:flex;flex-direction:column;gap:8px}.review-distribution .ant-btn{min-height:44px;height:auto;white-space:normal}.review-bin{display:grid;grid-template-columns:28px 1fr 32px;gap:8px;align-items:center;font-size:12px}.review-bin-track{height:7px;background:#eee;border-radius:6px;overflow:hidden}.review-bin-track>span{height:100%;display:block;background:#795908}.product-review-editor{display:flex;flex-direction:column;gap:14px}.product-review-editor label{display:flex;flex-direction:column;gap:8px}.product-review-editor .ant-btn{min-height:44px;align-self:flex-start}.product-review-dialog .ant-modal-body{max-height:75dvh;overflow-y:auto;padding:3px}.review-comments{margin-top:24px}.review-comments article{border-top:1px solid #e7e7e1;padding:16px 0;overflow-wrap:anywhere}.review-comments article time{float:right;font-size:12px;color:#666}.review-comments article p{white-space:pre-wrap;line-height:1.6}.product-rating{min-height:44px}
 .product-rating .ant-rate-star:not(:last-child){margin-inline-end:2px}@media(max-width:767px){.product-rating .ant-rate{font-size:14px}.product-rating{gap:6px}}
-.product-review-editor .ant-input-number{min-height:44px}.product-review-editor .ant-input-number-input{height:42px}.product-review-dialog .ant-modal-close{width:44px;height:44px;top:8px;right:8px}
-.review-bin{grid-template-columns:28px minmax(0,1fr) minmax(32px,max-content)}@media(max-width:767px){.product-review-editor .ant-input-number-handler-wrap{display:none}}
+.product-review-dialog .ant-modal-close{width:44px;height:44px;top:8px;right:8px}
+.review-bin{grid-template-columns:28px minmax(0,1fr) minmax(32px,max-content)}
 .product-rating .ant-rate-star-zero :is(.ant-rate-star-first,.ant-rate-star-second){color:#b9b9b2}
 .product-review-dialog .ant-btn{min-height:44px}
 html:has(.product-review-dialog),body:has(.product-review-dialog){overflow:hidden}
@@ -9,3 +9,35 @@ html:has(.product-review-dialog),body:has(.product-review-dialog){overflow:hidde
 .review-comments>.ant-btn{width:100%}
 @media(max-width:767px){.browse-preview .product-rating{flex-direction:column;align-items:flex-start;justify-content:center;gap:2px;height:52px;min-height:52px}}
 @media(max-width:375px){.product-rating{flex-direction:column;align-items:flex-start;justify-content:center;gap:2px;height:52px;min-height:52px}}
+
+.product-popularity{display:flex;align-items:center;justify-content:flex-end;gap:4px;min-height:24px;padding:4px 3px;margin-top:auto;color:#805321;font-size:11px;line-height:16px;white-space:nowrap}.product-popularity .anticon{color:#bb571c}.product-sort{min-width:200px;min-height:44px;height:44px;max-width:100%;margin-left:auto}.product-sort-heading{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 0}.catalog-master-heading{flex-wrap:wrap;gap:12px}.product-review-editor .ant-rate{align-self:flex-start;line-height:44px;font-size:26px}.product-review-editor .ant-rate-star:not(:last-child){margin-inline-end:8px}.product-review-editor .ant-rate-star{min-height:44px}.product-review-editor .ant-rate:focus-visible{outline:2px solid #795908;outline-offset:3px}.product-review-editor .ant-rate-star-first,.product-review-editor .ant-rate-star-second{color:#b9b9b2}.product-review-editor .ant-rate-star-full .ant-rate-star-second,.product-review-editor .ant-rate-star-half .ant-rate-star-first{color:#ad7900}
+@media(max-width:375px){.product-sort{min-width:0;width:100%}.product-sort-heading{align-items:stretch}.catalog-master-heading .product-sort{flex-basis:100%}}
+
+.product-popularity{flex-wrap:wrap;white-space:normal}.product-popularity>span:last-child{min-width:0;max-width:100%;overflow-wrap:anywhere;text-align:right}
+
+.product-sort{border:1px solid #d9d9d9;border-radius:8px;padding:8px 30px 8px 12px;background:#fff;color:#282828;font:inherit;font-size:14px;line-height:22px}.product-sort:focus-visible{outline:2px solid #795908;outline-offset:2px}
+
+
+
+
+
+.product-review-editor .ant-rate-star{padding:0}
+.product-review-editor .ant-rate-star>div[role=radio]{position:relative;width:32px;height:50px;padding:0}
+.product-review-editor .ant-rate-star-first,.product-review-editor .ant-rate-star-second{display:flex;align-items:center;height:100%;box-sizing:border-box;padding-left:3px}
+.product-review-editor .ant-rate-star-second{width:100%;padding-right:3px}
+.product-review-editor .ant-rate-star-first>.anticon,.product-review-editor .ant-rate-star-second>.anticon{display:block;flex:0 0 26px;width:26px;height:26px;line-height:26px}
+.product-review-editor .ant-rate-star svg{display:block}
+
+.product-popularity{flex-wrap:nowrap;white-space:nowrap}.product-popularity>span:last-child{overflow-wrap:normal}.product-rating .ant-rate-star-zero :is(.ant-rate-star-first,.ant-rate-star-second){color:#73736c}.review-save-hint{color:#595952;line-height:1.5}
+
+.product-review-editor textarea.ant-input{resize:none;line-height:22px;padding:8px;scrollbar-gutter:stable;scrollbar-width:auto;scrollbar-color:auto}
+.product-review-editor .ant-input-textarea-show-count{margin-bottom:18px}
+.review-scroll-hint{color:#595952;font-size:12px;line-height:1.5}
+.product-review-dialog .ant-modal-body{scrollbar-gutter:stable;scrollbar-width:auto;scrollbar-color:auto}
+.product-review-editor textarea::-webkit-scrollbar,.product-review-dialog .ant-modal-body::-webkit-scrollbar{width:8px}
+.product-review-editor textarea::-webkit-scrollbar-track,.product-review-dialog .ant-modal-body::-webkit-scrollbar-track{background:#eee}
+.product-review-editor textarea::-webkit-scrollbar-thumb,.product-review-dialog .ant-modal-body::-webkit-scrollbar-thumb{background:#73736c;border-radius:4px}
+
+/* The show-count wrapper owns the border; its textarea shows three complete rows. */
+.product-review-editor textarea.ant-input{box-sizing:border-box;height:72px;min-height:72px;max-height:72px;line-height:24px;padding:0 8px;overflow-y:scroll}
+.product-review-dialog .ant-modal-body{overflow-y:scroll}

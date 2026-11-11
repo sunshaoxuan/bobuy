@@ -1538,7 +1538,7 @@ export type SelfSocialInput = {platform:string;handle:string;displayName?:string
 export type SelfProfile = {id:number;username:string;name:string;email:string;emailVerified:boolean;phone?:string|null;defaultAddress?:SelfAddress|null;socialAccounts:Array<SelfSocialInput & {verified:boolean}>};
 export type SelfProfilePatch = {name?:string;email?:string;phone?:string|null;defaultAddress?:SelfAddress|null;socialAccounts?:SelfSocialInput[]};
 
-export type BrowseQuery={page?:number;merchantId?:number;query?:string;category?:string;locale?:string;marked?:boolean;revision?:string;issueId?:number;period?:'current'|'history'|'all'};
+export type BrowseQuery={sort?:string;page?:number;merchantId?:number;query?:string;category?:string;locale?:string;marked?:boolean;revision?:string;issueId?:number;period?:'current'|'history'|'all'};
 function browseQuery(query:BrowseQuery){return new URLSearchParams(Object.entries(query).filter(([,value])=>value!==undefined).map(([key,value])=>[key,String(value)]));}
 export type BrowseFacet=RecommendationLabel&{count:number};
 export type BrowsePage<T>={items:T[];page:number;size:number;scopeTotal:number;matchedTotal:number;hasNext:boolean;revision:string;datasetRevision:string;categories:BrowseFacet[];unclassified:number;markedScopeTotal?:number;japanDay?:string;productOccurrences?:number;serviceCards?:number};

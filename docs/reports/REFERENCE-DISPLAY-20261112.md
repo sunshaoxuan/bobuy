@@ -21,3 +21,9 @@ Pin source, image digests, current production base, exact gates and scoped opera
 ## Evidence
 
 Pending implementation and validation. Initial investigation: source occurrences each render DetailOffer and source headings; expired state is displayed alongside raw discounted referencePrice. Backend catalogue takes first reference source. Existing catalogue revision already includes the Japan calendar day and frontend has a midnight rollover hook.
+
+## Integration checkpoint
+
+2026-11-12 08:16 JST: concurrent authorized engagement release 20261112.3 is activating ebea743. Its changes add price/rating/popularity sorting, click heat and rating controls, plus V33. This task must preserve those deployed features. Merge that exact commit before a new activation, verify its runtime completion and actual V33 baseline. The only merge conflict is the browse revision/clock block; preserve both sort inputs and one captured Japan-day clock, and use effective display prices for sorting. Earlier backend full gate (663 tests, zero failures, 24 conditional skips, actual fresh JaCoCo check PASS) describes the pre-integration tree. New Java browse inputs invalidate that tree's final full gate; run one full merged backend gate and union frontend regression. Earlier browser retry was invalidated by actual production maintenance HTTP503, with zero final screenshots accepted from that run. Preserve historical/source data and do not rerun migrations in this task.
+
+External advisory: Claude opus request returned no available accounts; DeepSeek exact deepseek-flash/high advised explicit identity, deterministic channel selection, date boundaries and stale async-result protection. Gemini Pro image attempt returned upstream_error; Gemini 3.8 Flash high successfully identified both prices. Final visual review follows final running screenshots.
