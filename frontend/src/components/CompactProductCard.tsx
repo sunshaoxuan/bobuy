@@ -1,6 +1,6 @@
 import {useEffect,useState,type ReactNode} from 'react';
 import type {CardReference,StoreProduct,RecommendationFacts} from '../api';
-import {resolvedOfferWindow} from '../referenceOfferWindow';
+import {referencePriceDisplay} from '../referencePriceDisplay';
 import {useI18n} from '../i18n';
 import CardPrice from './CardPrice';
 import {ProductBrand} from './ProductMetadata';
@@ -8,9 +8,8 @@ import {ProductStars} from './ProductRating';
 import {openCardDetail} from './openCardDetail';
 
 export function referenceForCard(facts:RecommendationFacts&{id:number;currency?:string},postId:number,today?:string):CardReference|undefined{
- if(facts.referencePrice==null)return undefined;
- const window=resolvedOfferWindow(facts);
- return {amount:facts.referencePrice,originalPrice:facts.originalPrice,discountAmount:facts.discountAmount,currency:facts.currency??'JPY',unit:facts.priceUnit,postId,itemId:facts.id,state:!today||!window.start||!window.end?'UNKNOWN':today>window.end?'EXPIRED':today<window.start?'FUTURE':'ACTIVE'};
+ const display=referencePriceDisplay(facts,today??'');if(display.amount==null)return undefined;
+ return {...display,amount:display.amount,currency:facts.currency??'JPY',unit:facts.priceUnit,postId,itemId:facts.id,state:display.state as CardReference['state']};
 }
 
 /** One public product-card hierarchy; source facts and conditions stay in detail. */
