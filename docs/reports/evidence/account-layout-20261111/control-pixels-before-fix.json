@@ -1,0 +1,2912 @@
+{
+  "controls": 113,
+  "measurements": [
+    {
+      "image": "final-agent360.png",
+      "label": "退出登录",
+      "tag": "BUTTON",
+      "ink": [
+        236,
+        91,
+        313,
+        105
+      ],
+      "dy": 0.0,
+      "dx": 0.5,
+      "tolerance": 1.4,
+      "margins": [
+        14,
+        14,
+        15,
+        14
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-agent360.png",
+      "label": "我的资料",
+      "tag": "A",
+      "ink": [
+        67,
+        210,
+        118,
+        222
+      ],
+      "dy": 0.5,
+      "dx": 0.25,
+      "tolerance": 1.2,
+      "margins": [
+        50,
+        46,
+        49.5,
+        21
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "final-agent360.png",
+      "label": "商家维护",
+      "tag": "A",
+      "ink": [
+        228,
+        210,
+        278,
+        222
+      ],
+      "dy": 0.5,
+      "dx": 0.25,
+      "tolerance": 1.2,
+      "margins": [
+        50.5,
+        46,
+        50.0,
+        21
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "final-agent360.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        45,
+        427,
+        96,
+        437
+      ],
+      "dy": 0.156,
+      "dx": 102.0,
+      "tolerance": 1.0,
+      "margins": [
+        11,
+        16.156,
+        215,
+        15.844
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-agent360.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        521,
+        157,
+        534
+      ],
+      "dy": 1.656,
+      "dx": 71.0,
+      "tolerance": 1.3,
+      "margins": [
+        12,
+        16.156,
+        154,
+        12.844
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-agent360.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        47,
+        679,
+        161,
+        689
+      ],
+      "dy": 0.031,
+      "dx": 68.5,
+      "tolerance": 1.0,
+      "margins": [
+        13,
+        15.969,
+        150,
+        16.031
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-agent360.png",
+      "label": "好物推荐",
+      "tag": "A",
+      "ink": [
+        28,
+        748,
+        67,
+        785
+      ],
+      "dy": 0.5,
+      "dx": 0.125,
+      "tolerance": 2,
+      "margins": [
+        19,
+        7,
+        19.25,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-agent360.png",
+      "label": "本程好物",
+      "tag": "A",
+      "ink": [
+        112,
+        747,
+        151,
+        785
+      ],
+      "dy": 0.0,
+      "dx": 0.625,
+      "tolerance": 2,
+      "margins": [
+        19.75,
+        6,
+        18.5,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-agent360.png",
+      "label": "购物车",
+      "tag": "A",
+      "ink": [
+        200,
+        750,
+        229,
+        785
+      ],
+      "dy": 1.5,
+      "dx": 0.375,
+      "tolerance": 2,
+      "margins": [
+        24.5,
+        9,
+        23.75,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-agent360.png",
+      "label": "我的账户",
+      "tag": "A",
+      "ink": [
+        278,
+        748,
+        316,
+        785
+      ],
+      "dy": 0.5,
+      "dx": 0.375,
+      "tolerance": 2,
+      "margins": [
+        19.25,
+        7,
+        20.0,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-desktop-lower.png",
+      "label": "清空地址",
+      "tag": "BUTTON",
+      "ink": [
+        1266,
+        127,
+        1319,
+        140
+      ],
+      "dy": 0.438,
+      "dx": 0.5,
+      "tolerance": 1.3,
+      "margins": [
+        16,
+        14.062,
+        15,
+        14.938
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-desktop-lower.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        358,
+        419,
+        384,
+        429
+      ],
+      "dy": 0.469,
+      "dx": 116.664,
+      "tolerance": 1.0,
+      "margins": [
+        12,
+        16.469,
+        245.328,
+        15.531
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-desktop-lower.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        659,
+        419,
+        722,
+        430
+      ],
+      "dy": 0.969,
+      "dx": 98.492,
+      "tolerance": 1.1,
+      "margins": [
+        11.672,
+        16.469,
+        208.656,
+        14.531
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-desktop-lower.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        960,
+        419,
+        1011,
+        429
+      ],
+      "dy": 0.469,
+      "dx": 104.828,
+      "tolerance": 1.0,
+      "margins": [
+        11.344,
+        16.469,
+        221.0,
+        15.531
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-desktop-lower.png",
+      "label": "移除账号",
+      "tag": "BUTTON",
+      "ink": [
+        1265,
+        418,
+        1319,
+        430
+      ],
+      "dy": 0.469,
+      "dx": 0.0,
+      "tolerance": 1.2,
+      "margins": [
+        15,
+        15.469,
+        15,
+        14.531
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-desktop-lower.png",
+      "label": "添加社交账号",
+      "tag": "BUTTON",
+      "ink": [
+        361,
+        481,
+        443,
+        494
+      ],
+      "dy": 0.031,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        15,
+        14.469,
+        15,
+        14.531
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-desktop-lower.png",
+      "label": "保存资料",
+      "tag": "BUTTON",
+      "ink": [
+        1263,
+        574,
+        1317,
+        587
+      ],
+      "dy": 0.031,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        42,
+        14.469,
+        42,
+        14.531
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-desktop-top.png",
+      "label": "我的账单",
+      "tag": "A",
+      "ink": [
+        1170,
+        118,
+        1223,
+        130
+      ],
+      "dy": 0.328,
+      "dx": 0.0,
+      "tolerance": 1.2,
+      "margins": [
+        8.5,
+        15.328,
+        8.5,
+        14.672
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-desktop-top.png",
+      "label": "退出登录",
+      "tag": "BUTTON",
+      "ink": [
+        1260,
+        116,
+        1336,
+        130
+      ],
+      "dy": 0.672,
+      "dx": 0.5,
+      "tolerance": 1.4,
+      "margins": [
+        14.5,
+        13.328,
+        15.5,
+        14.672
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-desktop-top.png",
+      "label": "我的资料",
+      "tag": "A",
+      "ink": [
+        439,
+        206,
+        526,
+        224
+      ],
+      "dy": 0.344,
+      "dx": 0.672,
+      "tolerance": 1.8,
+      "margins": [
+        125.5,
+        21.656,
+        124.156,
+        22.344
+      ],
+      "height": 64,
+      "centered": true
+    },
+    {
+      "image": "final-desktop-top.png",
+      "label": "我的订单",
+      "tag": "A",
+      "ink": [
+        789,
+        205,
+        877,
+        225
+      ],
+      "dy": 0.344,
+      "dx": 0.508,
+      "tolerance": 2,
+      "margins": [
+        124.844,
+        20.656,
+        123.828,
+        21.344
+      ],
+      "height": 64,
+      "centered": true
+    },
+    {
+      "image": "final-desktop-top.png",
+      "label": "商家维护",
+      "tag": "A",
+      "ink": [
+        1139,
+        206,
+        1227,
+        224
+      ],
+      "dy": 0.344,
+      "dx": 0.156,
+      "tolerance": 1.8,
+      "margins": [
+        124.172,
+        21.656,
+        124.484,
+        22.344
+      ],
+      "height": 64,
+      "centered": true
+    },
+    {
+      "image": "final-desktop-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        351,
+        448,
+        432,
+        461
+      ],
+      "dy": 1.656,
+      "dx": 175.0,
+      "tolerance": 1.3,
+      "margins": [
+        12.5,
+        16.156,
+        362.5,
+        12.844
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-desktop-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        351,
+        542,
+        520,
+        555
+      ],
+      "dy": 1.656,
+      "dx": 131.0,
+      "tolerance": 1.3,
+      "margins": [
+        12.5,
+        16.156,
+        274.5,
+        12.844
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-desktop-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        351,
+        678,
+        466,
+        688
+      ],
+      "dy": 0.062,
+      "dx": 158.0,
+      "tolerance": 1.0,
+      "margins": [
+        12.5,
+        16.062,
+        328.5,
+        15.938
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-desktop-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        882,
+        490,
+        933,
+        500
+      ],
+      "dy": 0.062,
+      "dx": 72.5,
+      "tolerance": 1.0,
+      "margins": [
+        11.5,
+        16.062,
+        156.5,
+        15.938
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-desktop-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        1120,
+        490,
+        1235,
+        500
+      ],
+      "dy": 0.062,
+      "dx": 39.5,
+      "tolerance": 1.0,
+      "margins": [
+        12.5,
+        16.062,
+        91.5,
+        15.938
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-desktop-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        882,
+        584,
+        916,
+        597
+      ],
+      "dy": 1.562,
+      "dx": 81.0,
+      "tolerance": 1.3,
+      "margins": [
+        11.5,
+        16.062,
+        173.5,
+        12.938
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-desktop-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        1119,
+        584,
+        1154,
+        597
+      ],
+      "dy": 1.562,
+      "dx": 80.5,
+      "tolerance": 1.3,
+      "margins": [
+        11.5,
+        16.062,
+        172.5,
+        12.938
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-desktop-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        882,
+        678,
+        967,
+        691
+      ],
+      "dy": 1.562,
+      "dx": 174.0,
+      "tolerance": 1.3,
+      "margins": [
+        11.5,
+        16.062,
+        359.5,
+        12.938
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-desktop-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        883,
+        772,
+        939,
+        782
+      ],
+      "dy": 0.062,
+      "dx": 69.0,
+      "tolerance": 1.0,
+      "margins": [
+        12.5,
+        16.062,
+        150.5,
+        15.938
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-desktop-top.png",
+      "label": "清空地址",
+      "tag": "BUTTON",
+      "ink": [
+        1258,
+        848,
+        1312,
+        860
+      ],
+      "dy": 0.062,
+      "dx": 0.5,
+      "tolerance": 1.2,
+      "margins": [
+        15.5,
+        15.062,
+        14.5,
+        14.938
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-english360.png",
+      "label": "My bills",
+      "tag": "A",
+      "ink": [
+        275,
+        93,
+        320,
+        106
+      ],
+      "dy": 1.5,
+      "dx": 0.266,
+      "tolerance": 1.3,
+      "margins": [
+        8.531,
+        16,
+        8.0,
+        13
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-english360.png",
+      "label": "Sign out",
+      "tag": "BUTTON",
+      "ink": [
+        240,
+        141,
+        313,
+        156
+      ],
+      "dy": 0.5,
+      "dx": 0.648,
+      "tolerance": 1.5,
+      "margins": [
+        13.703,
+        14,
+        15.0,
+        13
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-english360.png",
+      "label": "Your details",
+      "tag": "A",
+      "ink": [
+        32,
+        238,
+        99,
+        248
+      ],
+      "dy": 0.5,
+      "dx": 0.0,
+      "tolerance": 1.0,
+      "margins": [
+        15,
+        47,
+        15,
+        22
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "final-english360.png",
+      "label": "My orders",
+      "tag": "A",
+      "ink": [
+        144,
+        238,
+        202,
+        251
+      ],
+      "dy": 2.0,
+      "dx": 0.5,
+      "tolerance": 1.3,
+      "margins": [
+        20,
+        47,
+        19,
+        19
+      ],
+      "height": 81,
+      "centered": false
+    },
+    {
+      "image": "final-english360.png",
+      "label": "Merchant workspace",
+      "tag": "A",
+      "ink": [
+        249,
+        228,
+        310,
+        261
+      ],
+      "dy": 2.0,
+      "dx": 0.0,
+      "tolerance": 2,
+      "margins": [
+        18,
+        37,
+        18,
+        9
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "final-english360.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        45,
+        506,
+        96,
+        516
+      ],
+      "dy": 0.156,
+      "dx": 102.0,
+      "tolerance": 1.0,
+      "margins": [
+        11,
+        16.156,
+        215,
+        15.844
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-english360.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        600,
+        157,
+        613
+      ],
+      "dy": 1.656,
+      "dx": 71.0,
+      "tolerance": 1.3,
+      "margins": [
+        12,
+        16.156,
+        154,
+        12.844
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-english360.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        39,
+        748,
+        306,
+        779
+      ],
+      "dy": 0.469,
+      "dx": 0.0,
+      "tolerance": 2,
+      "margins": [
+        5,
+        5.969,
+        5,
+        5.031
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-english360.png",
+      "label": "Product Picks",
+      "tag": "A",
+      "ink": [
+        19,
+        748,
+        77,
+        784
+      ],
+      "dy": 0.0,
+      "dx": 0.375,
+      "tolerance": 2,
+      "margins": [
+        10,
+        7,
+        9.25,
+        7
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-english360.png",
+      "label": "Trip finds",
+      "tag": "A",
+      "ink": [
+        111,
+        747,
+        151,
+        786
+      ],
+      "dy": 0.5,
+      "dx": 0.125,
+      "tolerance": 2,
+      "margins": [
+        18.75,
+        6,
+        18.5,
+        5
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-english360.png",
+      "label": "Cart",
+      "tag": "A",
+      "ink": [
+        204,
+        750,
+        224,
+        784
+      ],
+      "dy": 1.0,
+      "dx": 0.125,
+      "tolerance": 2,
+      "margins": [
+        28.5,
+        9,
+        28.75,
+        7
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-english360.png",
+      "label": "My account",
+      "tag": "A",
+      "ink": [
+        272,
+        748,
+        324,
+        786
+      ],
+      "dy": 1.0,
+      "dx": 0.625,
+      "tolerance": 2,
+      "margins": [
+        13.25,
+        7,
+        12.0,
+        5
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-japanese360.png",
+      "label": "請求明細",
+      "tag": "A",
+      "ink": [
+        266,
+        91,
+        320,
+        104
+      ],
+      "dy": 0.5,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        8,
+        14,
+        8,
+        15
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-japanese360.png",
+      "label": "ログアウト",
+      "tag": "BUTTON",
+      "ink": [
+        222,
+        141,
+        311,
+        155
+      ],
+      "dy": 0.0,
+      "dx": 1.5,
+      "tolerance": 1.4,
+      "margins": [
+        14,
+        14,
+        17,
+        14
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-japanese360.png",
+      "label": "本人情報",
+      "tag": "A",
+      "ink": [
+        40,
+        237,
+        90,
+        249
+      ],
+      "dy": 0.5,
+      "dx": 0.5,
+      "tolerance": 1.2,
+      "margins": [
+        23,
+        46,
+        24,
+        21
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "final-japanese360.png",
+      "label": "注文履歴",
+      "tag": "A",
+      "ink": [
+        147,
+        237,
+        198,
+        249
+      ],
+      "dy": 0.5,
+      "dx": 0.0,
+      "tolerance": 1.2,
+      "margins": [
+        23,
+        46,
+        23,
+        21
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "final-japanese360.png",
+      "label": "出店者管理",
+      "tag": "A",
+      "ink": [
+        248,
+        237,
+        311,
+        249
+      ],
+      "dy": 0.5,
+      "dx": 0.0,
+      "tolerance": 1.2,
+      "margins": [
+        17,
+        46,
+        17,
+        21
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "final-japanese360.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        45,
+        506,
+        96,
+        516
+      ],
+      "dy": 0.156,
+      "dx": 102.0,
+      "tolerance": 1.0,
+      "margins": [
+        11,
+        16.156,
+        215,
+        15.844
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-japanese360.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        600,
+        157,
+        613
+      ],
+      "dy": 1.656,
+      "dx": 71.0,
+      "tolerance": 1.3,
+      "margins": [
+        12,
+        16.156,
+        154,
+        12.844
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-japanese360.png",
+      "label": "おすすめ商品",
+      "tag": "A",
+      "ink": [
+        19,
+        748,
+        77,
+        785
+      ],
+      "dy": 0.5,
+      "dx": 0.375,
+      "tolerance": 2,
+      "margins": [
+        10,
+        7,
+        9.25,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-japanese360.png",
+      "label": "今回の商品",
+      "tag": "A",
+      "ink": [
+        107,
+        747,
+        155,
+        785
+      ],
+      "dy": 0.0,
+      "dx": 0.125,
+      "tolerance": 2,
+      "margins": [
+        14.75,
+        6,
+        14.5,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-japanese360.png",
+      "label": "カート",
+      "tag": "A",
+      "ink": [
+        201,
+        750,
+        228,
+        784
+      ],
+      "dy": 1.0,
+      "dx": 0.375,
+      "tolerance": 2,
+      "margins": [
+        25.5,
+        9,
+        24.75,
+        7
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-japanese360.png",
+      "label": "マイアカウント",
+      "tag": "A",
+      "ink": [
+        264,
+        748,
+        331,
+        784
+      ],
+      "dy": 0.0,
+      "dx": 0.125,
+      "tolerance": 2,
+      "margins": [
+        5.25,
+        7,
+        5.0,
+        7
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-mobile360-top.png",
+      "label": "我的账单",
+      "tag": "A",
+      "ink": [
+        266,
+        91,
+        320,
+        104
+      ],
+      "dy": 0.5,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        8,
+        14,
+        8,
+        15
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile360-top.png",
+      "label": "退出登录",
+      "tag": "BUTTON",
+      "ink": [
+        236,
+        141,
+        313,
+        155
+      ],
+      "dy": 0.0,
+      "dx": 0.5,
+      "tolerance": 1.4,
+      "margins": [
+        14,
+        14,
+        15,
+        14
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile360-top.png",
+      "label": "我的资料",
+      "tag": "A",
+      "ink": [
+        40,
+        237,
+        91,
+        249
+      ],
+      "dy": 0.5,
+      "dx": 0.0,
+      "tolerance": 1.2,
+      "margins": [
+        23,
+        46,
+        23,
+        21
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "final-mobile360-top.png",
+      "label": "我的订单",
+      "tag": "A",
+      "ink": [
+        147,
+        237,
+        198,
+        249
+      ],
+      "dy": 0.5,
+      "dx": 0.0,
+      "tolerance": 1.2,
+      "margins": [
+        23,
+        46,
+        23,
+        21
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "final-mobile360-top.png",
+      "label": "商家维护",
+      "tag": "A",
+      "ink": [
+        254,
+        237,
+        304,
+        249
+      ],
+      "dy": 0.5,
+      "dx": 0.5,
+      "tolerance": 1.2,
+      "margins": [
+        23,
+        46,
+        24,
+        21
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "final-mobile360-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        454,
+        127,
+        467
+      ],
+      "dy": 1.656,
+      "dx": 86.0,
+      "tolerance": 1.3,
+      "margins": [
+        12,
+        16.156,
+        184,
+        12.844
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-mobile360-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        548,
+        215,
+        561
+      ],
+      "dy": 1.656,
+      "dx": 42.0,
+      "tolerance": 1.3,
+      "margins": [
+        12,
+        16.156,
+        96,
+        12.844
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-mobile360-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        47,
+        706,
+        161,
+        716
+      ],
+      "dy": 0.031,
+      "dx": 68.5,
+      "tolerance": 1.0,
+      "margins": [
+        13,
+        15.969,
+        150,
+        16.031
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile360-top.png",
+      "label": "好物推荐",
+      "tag": "A",
+      "ink": [
+        28,
+        748,
+        67,
+        785
+      ],
+      "dy": 0.5,
+      "dx": 0.125,
+      "tolerance": 2,
+      "margins": [
+        19,
+        7,
+        19.25,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-mobile360-top.png",
+      "label": "本程好物",
+      "tag": "A",
+      "ink": [
+        112,
+        747,
+        151,
+        785
+      ],
+      "dy": 0.0,
+      "dx": 0.625,
+      "tolerance": 2,
+      "margins": [
+        19.75,
+        6,
+        18.5,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-mobile360-top.png",
+      "label": "购物车",
+      "tag": "A",
+      "ink": [
+        200,
+        750,
+        229,
+        785
+      ],
+      "dy": 1.5,
+      "dx": 0.375,
+      "tolerance": 2,
+      "margins": [
+        24.5,
+        9,
+        23.75,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-mobile360-top.png",
+      "label": "我的账户",
+      "tag": "A",
+      "ink": [
+        278,
+        748,
+        316,
+        785
+      ],
+      "dy": 0.5,
+      "dx": 0.375,
+      "tolerance": 2,
+      "margins": [
+        19.25,
+        7,
+        20.0,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-address.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        45,
+        124,
+        96,
+        134
+      ],
+      "dy": 0.375,
+      "dx": 117.0,
+      "tolerance": 1.0,
+      "margins": [
+        11,
+        16.375,
+        245,
+        15.625
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-address.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        47,
+        218,
+        161,
+        228
+      ],
+      "dy": 0.375,
+      "dx": 83.5,
+      "tolerance": 1.0,
+      "margins": [
+        13,
+        16.375,
+        180,
+        15.625
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-address.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        45,
+        312,
+        79,
+        325
+      ],
+      "dy": 1.875,
+      "dx": 125.5,
+      "tolerance": 1.3,
+      "margins": [
+        11,
+        16.375,
+        262,
+        12.625
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-mobile390-address.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        45,
+        406,
+        80,
+        419
+      ],
+      "dy": 1.875,
+      "dx": 125.0,
+      "tolerance": 1.3,
+      "margins": [
+        11,
+        16.375,
+        261,
+        12.625
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-mobile390-address.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        500,
+        130,
+        513
+      ],
+      "dy": 1.875,
+      "dx": 99.5,
+      "tolerance": 1.3,
+      "margins": [
+        12,
+        16.375,
+        211,
+        12.625
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-mobile390-address.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        47,
+        594,
+        103,
+        604
+      ],
+      "dy": 0.375,
+      "dx": 112.5,
+      "tolerance": 1.0,
+      "margins": [
+        13,
+        16.375,
+        238,
+        15.625
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-address.png",
+      "label": "清空地址",
+      "tag": "BUTTON",
+      "ink": [
+        272,
+        669,
+        326,
+        682
+      ],
+      "dy": 0.125,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        15,
+        14.375,
+        15,
+        14.625
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-address.png",
+      "label": "好物推荐",
+      "tag": "A",
+      "ink": [
+        32,
+        792,
+        71,
+        829
+      ],
+      "dy": 0.5,
+      "dx": 0.125,
+      "tolerance": 2,
+      "margins": [
+        23,
+        7,
+        22.75,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-address.png",
+      "label": "本程好物",
+      "tag": "A",
+      "ink": [
+        123,
+        791,
+        162,
+        829
+      ],
+      "dy": 0.0,
+      "dx": 0.375,
+      "tolerance": 2,
+      "margins": [
+        23.25,
+        6,
+        22.5,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-address.png",
+      "label": "购物车",
+      "tag": "A",
+      "ink": [
+        219,
+        794,
+        247,
+        829
+      ],
+      "dy": 1.5,
+      "dx": 0.125,
+      "tolerance": 2,
+      "margins": [
+        28.5,
+        9,
+        28.25,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-address.png",
+      "label": "我的账户",
+      "tag": "A",
+      "ink": [
+        304,
+        792,
+        343,
+        829
+      ],
+      "dy": 0.5,
+      "dx": 0.125,
+      "tolerance": 2,
+      "margins": [
+        22.75,
+        7,
+        23.0,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-bottom.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        70,
+        108,
+        81
+      ],
+      "dy": 0.281,
+      "dx": 110.5,
+      "tolerance": 1.1,
+      "margins": [
+        12,
+        15.781,
+        233,
+        15.219
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-bottom.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        45,
+        160,
+        96,
+        170
+      ],
+      "dy": 0.219,
+      "dx": 117.0,
+      "tolerance": 1.0,
+      "margins": [
+        11,
+        15.781,
+        245,
+        16.219
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-bottom.png",
+      "label": "移除账号",
+      "tag": "BUTTON",
+      "ink": [
+        49,
+        219,
+        102,
+        231
+      ],
+      "dy": 0.219,
+      "dx": 0.5,
+      "tolerance": 1.2,
+      "margins": [
+        15,
+        14.781,
+        16,
+        15.219
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-bottom.png",
+      "label": "添加社交账号",
+      "tag": "BUTTON",
+      "ink": [
+        49,
+        294,
+        131,
+        307
+      ],
+      "dy": 0.719,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        15,
+        13.781,
+        15,
+        15.219
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-bottom.png",
+      "label": "保存资料",
+      "tag": "BUTTON",
+      "ink": [
+        160,
+        375,
+        215,
+        388
+      ],
+      "dy": 0.719,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        143,
+        13.781,
+        143,
+        15.219
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-bottom.png",
+      "label": "验证邮箱",
+      "tag": "BUTTON",
+      "ink": [
+        49,
+        686,
+        103,
+        699
+      ],
+      "dy": 0.703,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        15,
+        13.797,
+        15,
+        15.203
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-bottom.png",
+      "label": "重新发送",
+      "tag": "BUTTON",
+      "ink": [
+        145,
+        686,
+        199,
+        699
+      ],
+      "dy": 0.703,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        15,
+        13.797,
+        15,
+        15.203
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-bottom.png",
+      "label": "好物推荐",
+      "tag": "A",
+      "ink": [
+        32,
+        792,
+        71,
+        829
+      ],
+      "dy": 0.5,
+      "dx": 0.125,
+      "tolerance": 2,
+      "margins": [
+        23,
+        7,
+        22.75,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-bottom.png",
+      "label": "本程好物",
+      "tag": "A",
+      "ink": [
+        123,
+        791,
+        162,
+        829
+      ],
+      "dy": 0.0,
+      "dx": 0.375,
+      "tolerance": 2,
+      "margins": [
+        23.25,
+        6,
+        22.5,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-bottom.png",
+      "label": "购物车",
+      "tag": "A",
+      "ink": [
+        219,
+        794,
+        247,
+        829
+      ],
+      "dy": 1.5,
+      "dx": 0.125,
+      "tolerance": 2,
+      "margins": [
+        28.5,
+        9,
+        28.25,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-bottom.png",
+      "label": "我的账户",
+      "tag": "A",
+      "ink": [
+        304,
+        792,
+        343,
+        829
+      ],
+      "dy": 0.5,
+      "dx": 0.125,
+      "tolerance": 2,
+      "margins": [
+        22.75,
+        7,
+        23.0,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-social.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        92,
+        72,
+        102
+      ],
+      "dy": 0.219,
+      "dx": 128.5,
+      "tolerance": 1.0,
+      "margins": [
+        12,
+        15.781,
+        269,
+        16.219
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-social.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        182,
+        108,
+        193
+      ],
+      "dy": 0.281,
+      "dx": 110.5,
+      "tolerance": 1.1,
+      "margins": [
+        12,
+        15.781,
+        233,
+        15.219
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-social.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        45,
+        272,
+        96,
+        282
+      ],
+      "dy": 0.219,
+      "dx": 117.0,
+      "tolerance": 1.0,
+      "margins": [
+        11,
+        15.781,
+        245,
+        16.219
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-social.png",
+      "label": "移除账号",
+      "tag": "BUTTON",
+      "ink": [
+        49,
+        331,
+        102,
+        343
+      ],
+      "dy": 0.219,
+      "dx": 0.5,
+      "tolerance": 1.2,
+      "margins": [
+        15,
+        14.781,
+        16,
+        15.219
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-social.png",
+      "label": "添加社交账号",
+      "tag": "BUTTON",
+      "ink": [
+        49,
+        406,
+        131,
+        419
+      ],
+      "dy": 0.719,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        15,
+        13.781,
+        15,
+        15.219
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-social.png",
+      "label": "保存资料",
+      "tag": "BUTTON",
+      "ink": [
+        160,
+        487,
+        215,
+        500
+      ],
+      "dy": 0.719,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        143,
+        13.781,
+        143,
+        15.219
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-social.png",
+      "label": "验证邮箱",
+      "tag": "BUTTON",
+      "ink": [
+        39,
+        790,
+        113,
+        821
+      ],
+      "dy": 0.297,
+      "dx": 0.0,
+      "tolerance": 2,
+      "margins": [
+        5,
+        5.797,
+        5,
+        5.203
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-social.png",
+      "label": "重新发送",
+      "tag": "BUTTON",
+      "ink": [
+        135,
+        791,
+        158,
+        821
+      ],
+      "dy": 0.797,
+      "dx": 25.5,
+      "tolerance": 2,
+      "margins": [
+        5,
+        6.797,
+        56,
+        5.203
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-mobile390-social.png",
+      "label": "好物推荐",
+      "tag": "A",
+      "ink": [
+        32,
+        792,
+        71,
+        829
+      ],
+      "dy": 0.5,
+      "dx": 0.125,
+      "tolerance": 2,
+      "margins": [
+        23,
+        7,
+        22.75,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-social.png",
+      "label": "本程好物",
+      "tag": "A",
+      "ink": [
+        123,
+        791,
+        162,
+        829
+      ],
+      "dy": 0.0,
+      "dx": 0.375,
+      "tolerance": 2,
+      "margins": [
+        23.25,
+        6,
+        22.5,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-social.png",
+      "label": "购物车",
+      "tag": "A",
+      "ink": [
+        219,
+        794,
+        247,
+        829
+      ],
+      "dy": 1.5,
+      "dx": 0.125,
+      "tolerance": 2,
+      "margins": [
+        28.5,
+        9,
+        28.25,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-social.png",
+      "label": "我的账户",
+      "tag": "A",
+      "ink": [
+        304,
+        792,
+        343,
+        829
+      ],
+      "dy": 0.5,
+      "dx": 0.125,
+      "tolerance": 2,
+      "margins": [
+        22.75,
+        7,
+        23.0,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-top.png",
+      "label": "我的账单",
+      "tag": "A",
+      "ink": [
+        296,
+        91,
+        350,
+        104
+      ],
+      "dy": 0.5,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        8,
+        14,
+        8,
+        15
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-top.png",
+      "label": "退出登录",
+      "tag": "BUTTON",
+      "ink": [
+        266,
+        141,
+        343,
+        155
+      ],
+      "dy": 0.0,
+      "dx": 0.5,
+      "tolerance": 1.4,
+      "margins": [
+        14,
+        14,
+        15,
+        14
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-top.png",
+      "label": "我的资料",
+      "tag": "A",
+      "ink": [
+        45,
+        237,
+        96,
+        249
+      ],
+      "dy": 0.5,
+      "dx": 0.0,
+      "tolerance": 1.2,
+      "margins": [
+        28,
+        46,
+        28,
+        21
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-top.png",
+      "label": "我的订单",
+      "tag": "A",
+      "ink": [
+        162,
+        237,
+        213,
+        249
+      ],
+      "dy": 0.5,
+      "dx": 0.0,
+      "tolerance": 1.2,
+      "margins": [
+        28,
+        46,
+        28,
+        21
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-top.png",
+      "label": "商家维护",
+      "tag": "A",
+      "ink": [
+        279,
+        237,
+        329,
+        249
+      ],
+      "dy": 0.5,
+      "dx": 0.5,
+      "tolerance": 1.2,
+      "margins": [
+        28,
+        46,
+        29,
+        21
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        454,
+        127,
+        467
+      ],
+      "dy": 1.656,
+      "dx": 101.0,
+      "tolerance": 1.3,
+      "margins": [
+        12,
+        16.156,
+        214,
+        12.844
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-mobile390-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        548,
+        215,
+        561
+      ],
+      "dy": 1.656,
+      "dx": 57.0,
+      "tolerance": 1.3,
+      "margins": [
+        12,
+        16.156,
+        126,
+        12.844
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-mobile390-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        47,
+        706,
+        161,
+        716
+      ],
+      "dy": 0.031,
+      "dx": 83.5,
+      "tolerance": 1.0,
+      "margins": [
+        13,
+        15.969,
+        180,
+        16.031
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-top.png",
+      "label": "好物推荐",
+      "tag": "A",
+      "ink": [
+        32,
+        792,
+        71,
+        829
+      ],
+      "dy": 0.5,
+      "dx": 0.125,
+      "tolerance": 2,
+      "margins": [
+        23,
+        7,
+        22.75,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-top.png",
+      "label": "本程好物",
+      "tag": "A",
+      "ink": [
+        123,
+        791,
+        162,
+        829
+      ],
+      "dy": 0.0,
+      "dx": 0.375,
+      "tolerance": 2,
+      "margins": [
+        23.25,
+        6,
+        22.5,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-top.png",
+      "label": "购物车",
+      "tag": "A",
+      "ink": [
+        219,
+        794,
+        247,
+        829
+      ],
+      "dy": 1.5,
+      "dx": 0.125,
+      "tolerance": 2,
+      "margins": [
+        28.5,
+        9,
+        28.25,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    },
+    {
+      "image": "final-mobile390-top.png",
+      "label": "我的账户",
+      "tag": "A",
+      "ink": [
+        304,
+        792,
+        343,
+        829
+      ],
+      "dy": 0.5,
+      "dx": 0.125,
+      "tolerance": 2,
+      "margins": [
+        22.75,
+        7,
+        23.0,
+        6
+      ],
+      "height": 52,
+      "centered": true
+    }
+  ],
+  "failures": [
+    {
+      "image": "final-agent360.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        521,
+        157,
+        534
+      ],
+      "dy": 1.656,
+      "dx": 71.0,
+      "tolerance": 1.3,
+      "margins": [
+        12,
+        16.156,
+        154,
+        12.844
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-desktop-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        351,
+        448,
+        432,
+        461
+      ],
+      "dy": 1.656,
+      "dx": 175.0,
+      "tolerance": 1.3,
+      "margins": [
+        12.5,
+        16.156,
+        362.5,
+        12.844
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-desktop-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        351,
+        542,
+        520,
+        555
+      ],
+      "dy": 1.656,
+      "dx": 131.0,
+      "tolerance": 1.3,
+      "margins": [
+        12.5,
+        16.156,
+        274.5,
+        12.844
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-desktop-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        882,
+        584,
+        916,
+        597
+      ],
+      "dy": 1.562,
+      "dx": 81.0,
+      "tolerance": 1.3,
+      "margins": [
+        11.5,
+        16.062,
+        173.5,
+        12.938
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-desktop-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        1119,
+        584,
+        1154,
+        597
+      ],
+      "dy": 1.562,
+      "dx": 80.5,
+      "tolerance": 1.3,
+      "margins": [
+        11.5,
+        16.062,
+        172.5,
+        12.938
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-desktop-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        882,
+        678,
+        967,
+        691
+      ],
+      "dy": 1.562,
+      "dx": 174.0,
+      "tolerance": 1.3,
+      "margins": [
+        11.5,
+        16.062,
+        359.5,
+        12.938
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-english360.png",
+      "label": "My bills",
+      "tag": "A",
+      "ink": [
+        275,
+        93,
+        320,
+        106
+      ],
+      "dy": 1.5,
+      "dx": 0.266,
+      "tolerance": 1.3,
+      "margins": [
+        8.531,
+        16,
+        8.0,
+        13
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-english360.png",
+      "label": "My orders",
+      "tag": "A",
+      "ink": [
+        144,
+        238,
+        202,
+        251
+      ],
+      "dy": 2.0,
+      "dx": 0.5,
+      "tolerance": 1.3,
+      "margins": [
+        20,
+        47,
+        19,
+        19
+      ],
+      "height": 81,
+      "centered": false
+    },
+    {
+      "image": "final-english360.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        600,
+        157,
+        613
+      ],
+      "dy": 1.656,
+      "dx": 71.0,
+      "tolerance": 1.3,
+      "margins": [
+        12,
+        16.156,
+        154,
+        12.844
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-japanese360.png",
+      "label": "ログアウト",
+      "tag": "BUTTON",
+      "ink": [
+        222,
+        141,
+        311,
+        155
+      ],
+      "dy": 0.0,
+      "dx": 1.5,
+      "tolerance": 1.4,
+      "margins": [
+        14,
+        14,
+        17,
+        14
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-japanese360.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        600,
+        157,
+        613
+      ],
+      "dy": 1.656,
+      "dx": 71.0,
+      "tolerance": 1.3,
+      "margins": [
+        12,
+        16.156,
+        154,
+        12.844
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-mobile360-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        454,
+        127,
+        467
+      ],
+      "dy": 1.656,
+      "dx": 86.0,
+      "tolerance": 1.3,
+      "margins": [
+        12,
+        16.156,
+        184,
+        12.844
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-mobile360-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        548,
+        215,
+        561
+      ],
+      "dy": 1.656,
+      "dx": 42.0,
+      "tolerance": 1.3,
+      "margins": [
+        12,
+        16.156,
+        96,
+        12.844
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-mobile390-address.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        45,
+        312,
+        79,
+        325
+      ],
+      "dy": 1.875,
+      "dx": 125.5,
+      "tolerance": 1.3,
+      "margins": [
+        11,
+        16.375,
+        262,
+        12.625
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-mobile390-address.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        45,
+        406,
+        80,
+        419
+      ],
+      "dy": 1.875,
+      "dx": 125.0,
+      "tolerance": 1.3,
+      "margins": [
+        11,
+        16.375,
+        261,
+        12.625
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-mobile390-address.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        500,
+        130,
+        513
+      ],
+      "dy": 1.875,
+      "dx": 99.5,
+      "tolerance": 1.3,
+      "margins": [
+        12,
+        16.375,
+        211,
+        12.625
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-mobile390-social.png",
+      "label": "重新发送",
+      "tag": "BUTTON",
+      "ink": [
+        135,
+        791,
+        158,
+        821
+      ],
+      "dy": 0.797,
+      "dx": 25.5,
+      "tolerance": 2,
+      "margins": [
+        5,
+        6.797,
+        56,
+        5.203
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-mobile390-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        454,
+        127,
+        467
+      ],
+      "dy": 1.656,
+      "dx": 101.0,
+      "tolerance": 1.3,
+      "margins": [
+        12,
+        16.156,
+        214,
+        12.844
+      ],
+      "height": 44,
+      "centered": false
+    },
+    {
+      "image": "final-mobile390-top.png",
+      "label": "input",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        548,
+        215,
+        561
+      ],
+      "dy": 1.656,
+      "dx": 57.0,
+      "tolerance": 1.3,
+      "margins": [
+        12,
+        16.156,
+        126,
+        12.844
+      ],
+      "height": 44,
+      "centered": false
+    }
+  ],
+  "result": "FAIL"
+}

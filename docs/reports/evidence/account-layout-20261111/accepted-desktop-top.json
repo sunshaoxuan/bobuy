@@ -1,0 +1,430 @@
+{
+  "blocks": [
+    {
+      "height": 399.59375,
+      "width": 508,
+      "x": 312.5,
+      "y": 330.34375
+    },
+    {
+      "height": 570.59375,
+      "width": 508,
+      "x": 844.5,
+      "y": 330.34375
+    },
+    {
+      "height": 329.59375,
+      "width": 1040,
+      "x": 312.5,
+      "y": 924.9375
+    },
+    {
+      "height": 296.890625,
+      "width": 1040,
+      "x": 312.5,
+      "y": 1350.53125
+    }
+  ],
+  "contentBottom": 900,
+  "controls": [
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "border": "0px",
+      "classes": "",
+      "color": "rgb(35, 35, 35)",
+      "icons": [],
+      "id": "",
+      "label": "我的账单",
+      "labelRect": null,
+      "padding": [
+        "7px",
+        "8px",
+        "9px",
+        "8px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 72,
+        "x": 1160.5,
+        "y": 101.671875
+      },
+      "tag": "A"
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "border": "1px",
+      "classes": "ant-btn css-dev-only-do-not-override-p28o4 ant-btn-text",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [
+        {
+          "height": 14,
+          "width": 14,
+          "x": 1259.5,
+          "y": 116.421875
+        }
+      ],
+      "id": "",
+      "label": "退出登录",
+      "labelRect": null,
+      "padding": [
+        "7px",
+        "14px",
+        "7px",
+        "14px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 108,
+        "x": 1244.5,
+        "y": 101.671875
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "background": "rgb(255, 245, 244)",
+      "border": "1px",
+      "classes": "active",
+      "color": "rgb(189, 41, 36)",
+      "icons": [
+        {
+          "height": 20,
+          "width": 20,
+          "x": 436.828125,
+          "y": 205.34375
+        }
+      ],
+      "id": "",
+      "label": "我的资料",
+      "labelRect": {
+        "height": 22.5,
+        "width": 60,
+        "x": 466.828125,
+        "y": 204.09375
+      },
+      "padding": [
+        "12px",
+        "12px",
+        "12px",
+        "12px"
+      ],
+      "rect": {
+        "height": 64,
+        "width": 338.65625,
+        "x": 312.5,
+        "y": 183.34375
+      },
+      "tag": "A"
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "border": "1px",
+      "classes": "",
+      "color": "rgb(35, 35, 35)",
+      "icons": [
+        {
+          "height": 20,
+          "width": 20,
+          "x": 787.484375,
+          "y": 205.34375
+        }
+      ],
+      "id": "",
+      "label": "我的订单",
+      "labelRect": {
+        "height": 22.5,
+        "width": 60,
+        "x": 817.484375,
+        "y": 204.09375
+      },
+      "padding": [
+        "12px",
+        "12px",
+        "12px",
+        "12px"
+      ],
+      "rect": {
+        "height": 64,
+        "width": 338.671875,
+        "x": 663.15625,
+        "y": 183.34375
+      },
+      "tag": "A"
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "border": "1px",
+      "classes": "",
+      "color": "rgb(35, 35, 35)",
+      "icons": [
+        {
+          "height": 20,
+          "width": 20,
+          "x": 1138.15625,
+          "y": 205.34375
+        }
+      ],
+      "id": "",
+      "label": "商家维护",
+      "labelRect": {
+        "height": 22.5,
+        "width": 60,
+        "x": 1168.15625,
+        "y": 204.09375
+      },
+      "padding": [
+        "12px",
+        "12px",
+        "12px",
+        "12px"
+      ],
+      "rect": {
+        "height": 64,
+        "width": 338.65625,
+        "x": 1013.828125,
+        "y": 183.34375
+      },
+      "tag": "A"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px",
+      "classes": "ant-input css-dev-only-do-not-override-p28o4 ant-input-outlined ant-input-status-success",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [],
+      "id": "name",
+      "label": "input",
+      "labelRect": null,
+      "padding": [
+        "3.5px",
+        "11px",
+        "4.5px",
+        "11px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 458,
+        "x": 337.5,
+        "y": 430.84375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px",
+      "classes": "ant-input css-dev-only-do-not-override-p28o4 ant-input-outlined ant-input-status-success",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [],
+      "id": "email",
+      "label": "input",
+      "labelRect": null,
+      "padding": [
+        "3.5px",
+        "11px",
+        "4.5px",
+        "11px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 458,
+        "x": 337.5,
+        "y": 524.84375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px",
+      "classes": "ant-input css-dev-only-do-not-override-p28o4 ant-input-outlined ant-input-status-success",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [],
+      "id": "phone",
+      "label": "input",
+      "labelRect": null,
+      "padding": [
+        "3.5px",
+        "11px",
+        "4.5px",
+        "11px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 458,
+        "x": 337.5,
+        "y": 660.9375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px",
+      "classes": "ant-input css-dev-only-do-not-override-p28o4 ant-input-outlined ant-input-status-success",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [],
+      "id": "defaultAddress_contactName",
+      "label": "input",
+      "labelRect": null,
+      "padding": [
+        "3.5px",
+        "11px",
+        "4.5px",
+        "11px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 221,
+        "x": 869.5,
+        "y": 472.9375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px",
+      "classes": "ant-input css-dev-only-do-not-override-p28o4 ant-input-outlined ant-input-status-success",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [],
+      "id": "defaultAddress_phone",
+      "label": "input",
+      "labelRect": null,
+      "padding": [
+        "3.5px",
+        "11px",
+        "4.5px",
+        "11px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 221,
+        "x": 1106.5,
+        "y": 472.9375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px",
+      "classes": "ant-input css-dev-only-do-not-override-p28o4 ant-input-outlined ant-input-status-success",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [],
+      "id": "defaultAddress_countryRegion",
+      "label": "input",
+      "labelRect": null,
+      "padding": [
+        "3.5px",
+        "11px",
+        "4.5px",
+        "11px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 221,
+        "x": 869.5,
+        "y": 566.9375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px",
+      "classes": "ant-input css-dev-only-do-not-override-p28o4 ant-input-outlined ant-input-status-success",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [],
+      "id": "defaultAddress_city",
+      "label": "input",
+      "labelRect": null,
+      "padding": [
+        "3.5px",
+        "11px",
+        "4.5px",
+        "11px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 221,
+        "x": 1106.5,
+        "y": 566.9375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px",
+      "classes": "ant-input css-dev-only-do-not-override-p28o4 ant-input-outlined ant-input-status-success",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [],
+      "id": "defaultAddress_addressLine",
+      "label": "input",
+      "labelRect": null,
+      "padding": [
+        "3.5px",
+        "11px",
+        "4.5px",
+        "11px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 458,
+        "x": 869.5,
+        "y": 660.9375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px",
+      "classes": "ant-input css-dev-only-do-not-override-p28o4 ant-input-outlined ant-input-status-success",
+      "color": "rgba(0, 0, 0, 0.88)",
+      "icons": [],
+      "id": "defaultAddress_postalCode",
+      "label": "input",
+      "labelRect": null,
+      "padding": [
+        "3.5px",
+        "11px",
+        "4.5px",
+        "11px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 221,
+        "x": 869.5,
+        "y": 754.9375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "border": "1px",
+      "classes": "ant-btn css-dev-only-do-not-override-p28o4 ant-btn-text ant-btn-dangerous",
+      "color": "rgb(180, 43, 37)",
+      "icons": [],
+      "id": "",
+      "label": "清空地址",
+      "labelRect": null,
+      "padding": [
+        "7px",
+        "14px",
+        "7px",
+        "14px"
+      ],
+      "rect": {
+        "height": 44,
+        "width": 86,
+        "x": 1241.5,
+        "y": 831.9375
+      },
+      "tag": "BUTTON"
+    }
+  ],
+  "headerBottom": 76,
+  "height": 900,
+  "main": {
+    "height": 1559.421875,
+    "width": 1040,
+    "x": 312.5,
+    "y": 88
+  },
+  "overflow": false,
+  "scrollY": 0,
+  "width": 1440
+}

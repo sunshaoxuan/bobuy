@@ -1,0 +1,66 @@
+{
+  "desktop": {
+    "height": 720,
+    "name": {
+      "bottom": 474.84375,
+      "height": 44,
+      "left": 297,
+      "right": 715.5,
+      "top": 430.84375,
+      "width": 418.5,
+      "x": 297,
+      "y": 430.84375
+    },
+    "overflow": false,
+    "scripts": [
+      "/assets/index-DUosJ-K3.js"
+    ],
+    "sections": [
+      "profile-basic-title",
+      "profile-address-title",
+      "profile-social-title"
+    ],
+    "styles": [
+      "/assets/index-CzodR8gn.css"
+    ],
+    "width": 1280
+  },
+  "network": [
+    {
+      "method": "Network.responseReceived",
+      "url": "http://127.0.0.1:5179/account",
+      "status": 200
+    },
+    {
+      "method": "Network.responseReceived",
+      "url": "http://127.0.0.1:5179/assets/index-CzodR8gn.css",
+      "status": 304
+    },
+    {
+      "method": "Network.responseReceived",
+      "url": "http://127.0.0.1:5179/assets/index-DUosJ-K3.js",
+      "status": 304
+    },
+    {
+      "method": "Network.responseReceived",
+      "url": "http://127.0.0.1:5179/api/auth/profile",
+      "status": 200
+    },
+    {
+      "method": "Network.responseReceived",
+      "url": "http://127.0.0.1:5179/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "Network.responseReceived",
+      "url": "http://127.0.0.1:5179/api/auth/me",
+      "status": 200
+    }
+  ],
+  "consoleErrors": [],
+  "navigation": {
+    "orders": "/client/orders",
+    "merchant": "/admin/dashboard"
+  },
+  "adminFixtureLimitation": "Existing isolated local Core reports null-id aggregate errors on admin dashboard. Account profile requests and customer order navigation succeed; no production data was changed."
+}
