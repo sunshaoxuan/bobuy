@@ -133,7 +133,7 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
         <ProductMarkerBadges markers={detail.markers??[]}/>
         {management(opened)}
         <ProductBrand brand={opened.brand}/><h1 lang={detailName.language}><span className="rec-name-local">{detailName.value||t('rec.not_stated')}</span>{locale!=='ja-JP'&&opened.name['ja-JP']&&opened.name['ja-JP']!==detailName.value&&<span className="rec-name-original" lang="ja">（{opened.name['ja-JP']}）</span>}</h1>{sourceNote(detailName)}
-        <ProductDetailSpecs model={content?.model} packaging={content?.packaging} specification={detailSpec.value}/>{detailSpec.value&&sourceNote(detailSpec)}
+        <ProductDetailSpecs model={content?.model} packaging={content?.packaging} specification={detailSpec.value} specificationLanguage={detailSpec.language}/>{detailSpec.value&&sourceNote(detailSpec)}
         {sale&&!pricePending(opened.productId)&&<SellingPrice product={sale}/>}
         {description.value&&<section><h2>{t('detail.description')}</h2>{sourceNote(description)}<div lang={description.language}>{description.value.split('\n').map((line,index)=><p key={index}>{line}</p>)}</div></section>}
         {content&&<CatalogReferenceHistory entry={opened} content={content}/> }

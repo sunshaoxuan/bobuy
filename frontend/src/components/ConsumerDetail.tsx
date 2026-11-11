@@ -13,10 +13,10 @@ export function ConsumerDetail({media,children}:{media:ReactNode;children:ReactN
 export function ProductDetailCode({value}:{value?:string|null}){
  const {t}=useI18n();return <p className="consumer-product-code" title={`${t('rec.code')}: ${value||t('rec.not_stated')}`}><strong>No.{value||'?'}</strong></p>;
 }
-export function ProductDetailSpecs({model,packaging,specification}:{model?:string|null;packaging?:string|null;specification?:string|null}){
+export function ProductDetailSpecs({model,packaging,specification,specificationLanguage}:{model?:string|null;packaging?:string|null;specification?:string|null;specificationLanguage?:string}){
  const {t}=useI18n();
- const rows=[['master.model',model],['master.packaging',packaging],['master.specifications',specification]].filter(([,value])=>!!value);
- return rows.length?<dl className="consumer-product-specs">{rows.map(([key,value])=><div key={key}><dt>{t(key!)}</dt><dd>{value}</dd></div>)}</dl>:null;
+ const rows:Array<[string,string|null|undefined]>=[['master.model',model],['master.packaging',packaging],['master.specifications',specification]];
+ return rows.some(([,value])=>!!value)?<dl className="consumer-product-specs">{rows.filter(([,value])=>!!value).map(([key,value])=><div key={key}><dt>{t(key)}</dt><dd lang={key==='master.specifications'?specificationLanguage:undefined}>{value}</dd></div>)}</dl>:null;
 }
 export function DetailOffer({facts,heading=true}:{facts:DetailReferenceFacts;heading?:boolean}){
  const {t,locale}=useI18n(),window=resolvedOfferWindow(facts),today=japanDate();
