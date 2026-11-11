@@ -130,8 +130,8 @@
     "frontend/src/components/ProductMetadata.tsx": "01d14a59224bc1ad13c8492fb256894f956010299cea33c0ab9b3be1741fd1f6",
     "frontend/src/components/ProductPricingPanel.test.tsx": "a6bbb713103dfa1d3a352dfb0965a1abdc62f501ed3a9277138db9ab39df1abd",
     "frontend/src/components/ProductPricingPanel.tsx": "3b86388cab6664e73a535e92fbbe24bf00e2cd0fb5020dfecb5ef92408194e24",
-    "frontend/src/components/ProductRating.test.tsx": "63a45ae09bf50720397d7b029757b4e97b19a87b2dc6e06e7b64e8c19a9ebbea",
-    "frontend/src/components/ProductRating.tsx": "08c388a2dabe9cb7da07bd0120f431a6dbf4e995ecb3aa941418a4abfd3c7610",
+    "frontend/src/components/ProductRating.test.tsx": "1f7dbaa9fe320cf9da8f13a69bf4cbfbb8a02ab220ce4ea434a2e891a1bd595c",
+    "frontend/src/components/ProductRating.tsx": "64463ef1f5197c003bb4675c57e5e0a7ca1f25febd4d148304f1982b29ffc6dc",
     "frontend/src/components/ProtectedRoute.test.tsx": "72850a31ac1a968a1e64351b5f38c156d90f5a74b74805de5f0a678c2bd8c394",
     "frontend/src/components/ProtectedRoute.tsx": "7e8383b842041bbd7535efac82b83cfa4aad600d82449d14b7c2be4e7313a536",
     "frontend/src/components/PublishedArticleRevision.test.tsx": "5c50e57fec559ce6e63c6da3e9c7ac35362858f3c559281eeed0e81d8878aa4c",
@@ -295,7 +295,7 @@
     "frontend/src/productMarkerApi.test.ts": "6d64248a69186e07d2cd79df6c15db9f1f581ae546c5f3ed8755121243b09ed7",
     "frontend/src/productMarkers.test.ts": "1cb9c079120c88603a8d81067a85bb316b2b26e3fd46db55005877d0052ba058",
     "frontend/src/productMarkers.ts": "70f12526f2485f9b3bfd59d0d82ce934a88d47c436bb42ca656da63e5ae82994",
-    "frontend/src/public-catalog.css": "2d263db435d62f1fd44d8b88d9bbb2dc0151ae48b23f1b57d7a92af424cb9c0b",
+    "frontend/src/public-catalog.css": "56ee9fb3711be9228fce64e63fc6cbef453a6c430e20adca7e0db006d82bb06d",
     "frontend/src/publicCatalog.test.ts": "900991215ae23ca7164c2ecf18eb0db951bb9abcb707d4550ed8da56c4f6eef2",
     "frontend/src/publicCatalog.ts": "2fcd81e9c2b78ea7373c079d90c935089028885a9847042d388d266f72a33ea0",
     "frontend/src/publicCatalogApi.test.ts": "1fb0d332c40b95c67565aafb92a8a3056a3bf11704cf2f8b3fc07946b66bfedc",
@@ -327,7 +327,7 @@
     "frontend/vite.config.ts": "f57faeafbc94e7ecce46f3dfb4cffb89b815eb20a2c0dd5676cbcfec21e4d889",
     "frontend/vitest.config.ts": "ef95279f229eb4054f6e1774f4ef9396e714737792b12375a2656ff7f293f0b2"
   },
-  "sha256": "f847fb4e5708f2d7294b9331358a984c51e2de85c571125ff7bf719a31266d48",
+  "sha256": "31ad8cc6ab12dfdaf0bacd7038893872a7b0b392a3ff7cd7d74a28afddb05fe5",
   "node": "20.19.0",
   "testCommand": "vitest run --coverage",
   "build": "i18n, tsc, vite build, prerender-home"

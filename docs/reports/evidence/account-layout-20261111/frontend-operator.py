@@ -1,7 +1,7 @@
 """Publish the accepted account layout by replacing only the frontend container."""
 from pathlib import Path
 import argparse,fcntl,hashlib,importlib.util,json,os,shutil,subprocess,time
-ROOT=Path('/opt/bobuy');STAGE=ROOT/'releases/20261112.3'
+ROOT=Path('/opt/bobuy');STAGE=ROOT/'releases/20261112.account-layout'
 LIBRARY=ROOT/'releases/20261111.1/release_operator.py'
 LIBRARY_SHA='5fddec223ef6f1d38402c8a11c1f99877ffc93f9d7d4b5afeb1271752c5610ac'
 ROUTE_SHA='a5a7bc6a3a796cc4b3ee261287a08a877a680934d53fe85a0a240ea385d3f9c5'
