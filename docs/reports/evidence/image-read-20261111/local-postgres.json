@@ -1,0 +1,23 @@
+{
+  "database": "bobuy_cards_20261111",
+  "deletedProducts": 3,
+  "image": "compact-image-probe-20261111",
+  "requests": [
+    {
+      "status": 200,
+      "bytes": 68,
+      "ms": 5099.26
+    },
+    {
+      "status": 200,
+      "bytes": 68,
+      "ms": 28.68
+    },
+    {
+      "status": 200,
+      "bytes": 68,
+      "ms": 26.11
+    }
+  ],
+  "result": "PASS"
+}

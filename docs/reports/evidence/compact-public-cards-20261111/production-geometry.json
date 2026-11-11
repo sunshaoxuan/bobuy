@@ -1,0 +1,277 @@
+[
+  {
+    "name": "production-catalog-390",
+    "viewport": [
+      390,
+      844
+    ],
+    "imageSize": [
+      375,
+      5592
+    ],
+    "cards": 24,
+    "rows": 12,
+    "rowHeights": [
+      409.03125,
+      409.03125,
+      409.03125,
+      409.03125,
+      409.03125,
+      409.03125,
+      409.03125,
+      409.03125,
+      409.03125,
+      409.03125,
+      409.03125,
+      391.03125
+    ],
+    "geometry": "PASS",
+    "visual": "PENDING_PRIMARY_REVIEW",
+    "crop": [
+      14,
+      279,
+      361,
+      693
+    ]
+  },
+  {
+    "name": "production-catalog-1440",
+    "viewport": [
+      1440,
+      900
+    ],
+    "imageSize": [
+      1425,
+      2866
+    ],
+    "cards": 24,
+    "rows": 5,
+    "rowHeights": [
+      467.453125,
+      467.453125,
+      467.453125,
+      467.453125,
+      467.453125
+    ],
+    "geometry": "PASS",
+    "visual": "PENDING_PRIMARY_REVIEW",
+    "crop": [
+      270,
+      257,
+      1395,
+      730
+    ]
+  },
+  {
+    "name": "production-catalog-360",
+    "viewport": [
+      360,
+      800
+    ],
+    "imageSize": [
+      345,
+      5508
+    ],
+    "cards": 24,
+    "rows": 12,
+    "rowHeights": [
+      402.03125,
+      402.03125,
+      402.03125,
+      402.03125,
+      402.03125,
+      402.03125,
+      402.03125,
+      402.03125,
+      402.03125,
+      402.03125,
+      402.03125,
+      384.03125
+    ],
+    "geometry": "PASS",
+    "visual": "PENDING_PRIMARY_REVIEW",
+    "crop": [
+      14,
+      279,
+      331,
+      686
+    ]
+  },
+  {
+    "name": "production-recommendations-1440",
+    "viewport": [
+      1440,
+      900
+    ],
+    "imageSize": [
+      1425,
+      3004
+    ],
+    "cards": 24,
+    "rows": 5,
+    "rowHeights": [
+      467.453125,
+      467.453125,
+      467.453125,
+      467.453125,
+      467.453125
+    ],
+    "geometry": "PASS",
+    "visual": "PENDING_PRIMARY_REVIEW",
+    "crop": [
+      270,
+      370,
+      1395,
+      843
+    ]
+  },
+  {
+    "name": "production-recommendations-390",
+    "viewport": [
+      390,
+      844
+    ],
+    "imageSize": [
+      375,
+      5753
+    ],
+    "cards": 24,
+    "rows": 12,
+    "rowHeights": [
+      409.03125,
+      409.03125,
+      409.03125,
+      409.03125,
+      409.03125,
+      409.03125,
+      409.03125,
+      409.03125,
+      409.03125,
+      409.03125,
+      409.03125,
+      409.03125
+    ],
+    "geometry": "PASS",
+    "visual": "PENDING_PRIMARY_REVIEW",
+    "crop": [
+      14,
+      396,
+      361,
+      810
+    ]
+  },
+  {
+    "name": "production-recommendations-360",
+    "viewport": [
+      360,
+      800
+    ],
+    "imageSize": [
+      345,
+      5669
+    ],
+    "cards": 24,
+    "rows": 12,
+    "rowHeights": [
+      402.03125,
+      402.03125,
+      402.03125,
+      402.03125,
+      402.03125,
+      402.03125,
+      402.03125,
+      402.03125,
+      402.03125,
+      402.03125,
+      402.03125,
+      402.03125
+    ],
+    "geometry": "PASS",
+    "visual": "PENDING_PRIMARY_REVIEW",
+    "crop": [
+      14,
+      396,
+      331,
+      803
+    ]
+  },
+  {
+    "name": "production-issue-1440",
+    "viewport": [
+      1440,
+      900
+    ],
+    "imageSize": [
+      1425,
+      1974
+    ],
+    "cards": 7,
+    "rows": 2,
+    "rowHeights": [
+      467.453125,
+      467.453125
+    ],
+    "geometry": "PASS",
+    "visual": "PENDING_PRIMARY_REVIEW",
+    "crop": [
+      270,
+      932,
+      1395,
+      1405
+    ]
+  },
+  {
+    "name": "production-issue-390",
+    "viewport": [
+      390,
+      844
+    ],
+    "imageSize": [
+      375,
+      3159
+    ],
+    "cards": 7,
+    "rows": 4,
+    "rowHeights": [
+      409.03125,
+      409.03125,
+      409.03125,
+      409.03125
+    ],
+    "geometry": "PASS",
+    "visual": "PENDING_PRIMARY_REVIEW",
+    "crop": [
+      14,
+      1352,
+      361,
+      1766
+    ]
+  },
+  {
+    "name": "production-issue-360",
+    "viewport": [
+      360,
+      800
+    ],
+    "imageSize": [
+      345,
+      3186
+    ],
+    "cards": 7,
+    "rows": 4,
+    "rowHeights": [
+      402.03125,
+      402.03125,
+      402.03125,
+      402.03125
+    ],
+    "geometry": "PASS",
+    "visual": "PENDING_PRIMARY_REVIEW",
+    "crop": [
+      14,
+      1408,
+      331,
+      1815
+    ]
+  }
+]

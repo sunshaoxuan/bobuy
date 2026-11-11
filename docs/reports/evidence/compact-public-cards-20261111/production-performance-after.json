@@ -1,0 +1,1666 @@
+[
+  {
+    "label": "initial-new-release",
+    "at": "2026-11-11T11:10:08.046Z",
+    "requests": [
+      {
+        "url": "https://bobuy.cc/products?node=1001",
+        "status": 200,
+        "start": 285637.344874,
+        "ttfbMs": 60.304,
+        "fromCache": false,
+        "durationMs": 61.262000002898276,
+        "bytes": 1166
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-DZQr4a7U.css",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-Cld7-vS8.js",
+        "status": 200,
+        "start": 285637.435127,
+        "ttfbMs": 53.771,
+        "fromCache": false,
+        "durationMs": 69.9410000233911,
+        "bytes": 377224
+      },
+      {
+        "url": "https://bobuy.cc/assets/RecommendationImageViewer-ILdPQ99W.css",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-CFzqh9Cf.js",
+        "status": 200,
+        "start": 285637.614964,
+        "ttfbMs": 26.297,
+        "fromCache": false,
+        "durationMs": 27.62299997266382,
+        "bytes": 3849
+      },
+      {
+        "url": "https://bobuy.cc/assets/ReloadOutlined-CEP7mjut.js",
+        "status": 200,
+        "start": 285637.614875,
+        "ttfbMs": 27.335,
+        "fromCache": false,
+        "durationMs": 28.912999958265573,
+        "bytes": 1124
+      },
+      {
+        "url": "https://bobuy.cc/assets/ImageLightbox-B7iQbgoI.js",
+        "status": 200,
+        "start": 285637.611468,
+        "ttfbMs": 36.682,
+        "fromCache": false,
+        "durationMs": 37.35699999378994,
+        "bytes": 8124
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMetadata-BvhDpo3g.js",
+        "status": 200,
+        "start": 285637.611403,
+        "ttfbMs": 40.204,
+        "fromCache": false,
+        "durationMs": 40.98299995530397,
+        "bytes": 775
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMarkerBadges-B4AaYe9C.js",
+        "status": 200,
+        "start": 285637.614523,
+        "ttfbMs": 37.116,
+        "fromCache": false,
+        "durationMs": 38.25899999355897,
+        "bytes": 1139
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMarkerBadges-YtkPTPIq.css",
+        "status": 200,
+        "start": 285637.614614,
+        "ttfbMs": 39.737,
+        "fromCache": false,
+        "durationMs": 41.93999996641651,
+        "bytes": 2025
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMarkerEditor-dqFA2r9N.js",
+        "status": 200,
+        "start": 285637.61479,
+        "ttfbMs": 41.348,
+        "fromCache": false,
+        "durationMs": 42.33999998541549,
+        "bytes": 2611
+      },
+      {
+        "url": "https://bobuy.cc/assets/RecommendationImageViewer-BLxxswKQ.js",
+        "status": 200,
+        "start": 285637.611336,
+        "ttfbMs": 44.847,
+        "fromCache": false,
+        "durationMs": 46.495000016875565,
+        "bytes": 5712
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-CFemXd4y.js",
+        "status": 200,
+        "start": 285637.61509,
+        "ttfbMs": 41.318,
+        "fromCache": false,
+        "durationMs": 42.89000004064292,
+        "bytes": 2271
+      },
+      {
+        "url": "https://bobuy.cc/assets/SaveOutlined-DIQbz6vf.js",
+        "status": 200,
+        "start": 285637.615035,
+        "ttfbMs": 42.209,
+        "fromCache": false,
+        "durationMs": 45.00099999131635,
+        "bytes": 979
+      },
+      {
+        "url": "https://bobuy.cc/assets/PublicProductCatalog-C_Daw3Xf.js",
+        "status": 200,
+        "start": 285637.611155,
+        "ttfbMs": 45.265,
+        "fromCache": false,
+        "durationMs": 46.96700000204146,
+        "bytes": 5656
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-BvaWa9xn.js",
+        "status": 200,
+        "start": 285637.611753,
+        "ttfbMs": 48.515,
+        "fromCache": false,
+        "durationMs": 50.1139999832958,
+        "bytes": 2373
+      },
+      {
+        "url": "https://bobuy.cc/assets/ImageLightbox-BPxkg2H0.css",
+        "status": 200,
+        "start": 285637.613015,
+        "ttfbMs": 50.377,
+        "fromCache": false,
+        "durationMs": 51.61199998110533,
+        "bytes": 3678
+      },
+      {
+        "url": "https://bobuy.cc/cdn-cgi/rum?",
+        "status": 204,
+        "start": 285637.669294,
+        "ttfbMs": 10.743,
+        "fromCache": false,
+        "durationMs": 11.516999977175146,
+        "bytes": 447
+      },
+      {
+        "url": "https://bobuy.cc/favicon.ico",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/trips?includeCurrent=true",
+        "status": 200,
+        "start": 285637.627975,
+        "ttfbMs": 69.108,
+        "fromCache": false,
+        "durationMs": 72.31499999761581,
+        "bytes": 654
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/trips",
+        "status": 200,
+        "start": 285637.627812,
+        "ttfbMs": 80.864,
+        "fromCache": false,
+        "durationMs": 81.40999998431653,
+        "bytes": 651
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-nodes",
+        "status": 200,
+        "start": 285637.628598,
+        "ttfbMs": 736.651,
+        "fromCache": false,
+        "durationMs": 737.416000047233,
+        "bytes": 686
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-browse?page=0&merchantId=1001&query=&category=&locale=zh-CN&marked=false",
+        "status": 200,
+        "start": 285637.684623,
+        "ttfbMs": 1276.306,
+        "fromCache": false,
+        "durationMs": 1276.791000040248,
+        "bytes": 12441
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/e5d42bc7-e135-46dd-ae28-2e689ad56ed6",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/badef57a-fe6f-4f1b-bfd2-e721b3459be5",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/22953f1c-a3ca-4efb-8939-3861dfd43437",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/063ad525-52a2-45dd-96b1-7a17dd252558",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/57b03030-3ed9-4bf5-8a10-f8e170cc7d84",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/331187f7-d0f5-468f-83aa-324a613a4f19",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/65a36f72-8834-4784-ac33-8f40ee42a3b4",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/124710c0-5214-40dc-9dbf-fc14f97b2ca1",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/6c97f77e-0ac8-4d48-b8f9-6ceb5f1754fb",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/19344070-72b8-45ab-8b15-c5c5ca5d9600",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-sales?productIds=018775a1-c531-4d89-bb61-5148b6a1df05%2C0451e987-1bc1-498d-8494-a7b9be9adbb7%2C08ee57fc-9c54-47a6-81b7-01b70d0b2092%2C0a516c2c-9f7d-46a8-a983-661959673738%2C0b38036f-3e99-420c-b870-89fe35d7a723%2C124bb802-8805-4a61-bead-687b3967a20d%2C12e3ced1-eedc-436a-8d50-94b1bf424508%2C133ee647-df82-436d-8a5c-cc5ee8f51c16%2C13804fbc-23cf-41bb-ad5e-2c5ad2affb65%2C13dfefdb-ef8b-4248-ae08-4453e63820a1%2C17ba61b2-32ad-4fbc-a992-6c51c781d20e%2C18e7bdb3-8437-4fbd-9d6c-a55817d03e4b%2C1b90522f-68d8-4cfb-95de-24b7b92917ed%2C1cfc194a-d903-468d-b8dc-47ce8b02e24b%2C1d124bb9-fc3b-4e72-869a-c4e36d436111%2C1d3770b1-37c9-4198-bc43-ddf183dd3989%2C1f2ec151-c468-417c-8597-8308e6ef659e%2C1f630007-3a30-469e-8cee-dc7a3917d654%2C2065969a-c23e-492d-8b77-ee6a963496bc%2C225a37ee-fd64-437e-9345-7c910a63f89c%2C233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d%2C2388eca8-ae4a-40bf-80ba-c3b2901f2b47%2C238b4d55-fa1f-447d-afa2-df07e45ccdfc%2C23e418a0-a3d9-471b-b0cc-76e555e210eb",
+        "status": 200,
+        "start": 285639.022948,
+        "ttfbMs": 136.902,
+        "fromCache": false,
+        "durationMs": 137.4000000068918,
+        "bytes": 655
+      }
+    ]
+  },
+  {
+    "label": "warm-1",
+    "at": "2026-11-11T11:10:22.860Z",
+    "requests": [
+      {
+        "url": "https://bobuy.cc/products?node=1001",
+        "status": 200,
+        "start": 285650.41021,
+        "ttfbMs": 11.876,
+        "fromCache": false,
+        "durationMs": 12.512999994214624,
+        "bytes": 545
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-Cld7-vS8.js",
+        "status": 200,
+        "start": 285637.435127,
+        "ttfbMs": 53.771,
+        "fromCache": false,
+        "durationMs": 13001.46300002234,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-DZQr4a7U.css",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/assets/PublicProductCatalog-C_Daw3Xf.js",
+        "status": 200,
+        "start": 285637.611155,
+        "ttfbMs": 45.265,
+        "fromCache": false,
+        "durationMs": 12875.654000032227,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/RecommendationImageViewer-BLxxswKQ.js",
+        "status": 200,
+        "start": 285637.611336,
+        "ttfbMs": 44.847,
+        "fromCache": false,
+        "durationMs": 12875.697000010405,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMetadata-BvhDpo3g.js",
+        "status": 200,
+        "start": 285637.611403,
+        "ttfbMs": 40.204,
+        "fromCache": false,
+        "durationMs": 12875.723999983165,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/ImageLightbox-B7iQbgoI.js",
+        "status": 200,
+        "start": 285637.611468,
+        "ttfbMs": 36.682,
+        "fromCache": false,
+        "durationMs": 12875.751000014134,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-BvaWa9xn.js",
+        "status": 200,
+        "start": 285637.611753,
+        "ttfbMs": 48.515,
+        "fromCache": false,
+        "durationMs": 12875.568000017665,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/ImageLightbox-BPxkg2H0.css",
+        "status": 200,
+        "start": 285637.613015,
+        "ttfbMs": 50.377,
+        "fromCache": false,
+        "durationMs": 12874.620000016876,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/RecommendationImageViewer-ILdPQ99W.css",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMarkerBadges-B4AaYe9C.js",
+        "status": 200,
+        "start": 285637.614523,
+        "ttfbMs": 37.116,
+        "fromCache": false,
+        "durationMs": 12873.375999974087,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMarkerBadges-YtkPTPIq.css",
+        "status": 200,
+        "start": 285637.614614,
+        "ttfbMs": 39.737,
+        "fromCache": false,
+        "durationMs": 12873.446999990847,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMarkerEditor-dqFA2r9N.js",
+        "status": 200,
+        "start": 285637.61479,
+        "ttfbMs": 41.348,
+        "fromCache": false,
+        "durationMs": 12873.374999966472,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/ReloadOutlined-CEP7mjut.js",
+        "status": 200,
+        "start": 285637.614875,
+        "ttfbMs": 27.335,
+        "fromCache": false,
+        "durationMs": 12873.360999976285,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-CFzqh9Cf.js",
+        "status": 200,
+        "start": 285637.614964,
+        "ttfbMs": 26.297,
+        "fromCache": false,
+        "durationMs": 12873.33699996816,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/SaveOutlined-DIQbz6vf.js",
+        "status": 200,
+        "start": 285637.615035,
+        "ttfbMs": 42.209,
+        "fromCache": false,
+        "durationMs": 12873.33099998068,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-CFemXd4y.js",
+        "status": 200,
+        "start": 285637.61509,
+        "ttfbMs": 41.318,
+        "fromCache": false,
+        "durationMs": 12873.358000011649,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/favicon.ico",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/trips?includeCurrent=true",
+        "status": 200,
+        "start": 285650.496799,
+        "ttfbMs": 38.114,
+        "fromCache": false,
+        "durationMs": 38.5779999778606,
+        "bytes": 655
+      },
+      {
+        "url": "https://bobuy.cc/cdn-cgi/rum?",
+        "status": 204,
+        "start": 285650.525315,
+        "ttfbMs": 20.271,
+        "fromCache": false,
+        "durationMs": 20.614000037312508,
+        "bytes": 443
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/trips",
+        "status": 200,
+        "start": 285650.49657,
+        "ttfbMs": 71.662,
+        "fromCache": false,
+        "durationMs": 72.17800000216812,
+        "bytes": 656
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-nodes",
+        "status": 200,
+        "start": 285650.497277,
+        "ttfbMs": 473.181,
+        "fromCache": false,
+        "durationMs": 473.6980000161566,
+        "bytes": 694
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-browse?page=0&merchantId=1001&query=&category=&locale=zh-CN&marked=false",
+        "status": 200,
+        "start": 285650.547536,
+        "ttfbMs": 1234.592,
+        "fromCache": false,
+        "durationMs": 1235.4149999446236,
+        "bytes": 12441
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/e5d42bc7-e135-46dd-ae28-2e689ad56ed6",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/badef57a-fe6f-4f1b-bfd2-e721b3459be5",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/22953f1c-a3ca-4efb-8939-3861dfd43437",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/063ad525-52a2-45dd-96b1-7a17dd252558",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/57b03030-3ed9-4bf5-8a10-f8e170cc7d84",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/331187f7-d0f5-468f-83aa-324a613a4f19",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/65a36f72-8834-4784-ac33-8f40ee42a3b4",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/124710c0-5214-40dc-9dbf-fc14f97b2ca1",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/6c97f77e-0ac8-4d48-b8f9-6ceb5f1754fb",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/19344070-72b8-45ab-8b15-c5c5ca5d9600",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/15ecbeeb-8c9b-43e1-9a5b-a44c53d4e3d6",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/30aff115-f411-4a5a-a193-a77af61c469d",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/4ec44235-7ee8-4d39-bc77-7a24ad2b3bb2",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/b880a89e-cfc6-42ec-b49b-d3a6e323f8fa",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/7b61f7ff-a769-4cf2-b7e1-cf33e8b08643",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/0e2cc6e9-c6ff-43ce-be80-5bcce146a5ba",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/775288fb-c134-49a2-8704-b95a2e0ceb6d",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/6e6d01fd-8aac-42b3-90d3-3f76d627c24b",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/2329db85-1d7a-463b-8caf-aa4d69599b10",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/9adefe75-43ec-441c-a3e0-abb0df72b967",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/e5b4db2b-0bbe-499f-8335-fd28bd35b0d0",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-sales?productIds=018775a1-c531-4d89-bb61-5148b6a1df05%2C0451e987-1bc1-498d-8494-a7b9be9adbb7%2C08ee57fc-9c54-47a6-81b7-01b70d0b2092%2C0a516c2c-9f7d-46a8-a983-661959673738%2C0b38036f-3e99-420c-b870-89fe35d7a723%2C124bb802-8805-4a61-bead-687b3967a20d%2C12e3ced1-eedc-436a-8d50-94b1bf424508%2C133ee647-df82-436d-8a5c-cc5ee8f51c16%2C13804fbc-23cf-41bb-ad5e-2c5ad2affb65%2C13dfefdb-ef8b-4248-ae08-4453e63820a1%2C17ba61b2-32ad-4fbc-a992-6c51c781d20e%2C18e7bdb3-8437-4fbd-9d6c-a55817d03e4b%2C1b90522f-68d8-4cfb-95de-24b7b92917ed%2C1cfc194a-d903-468d-b8dc-47ce8b02e24b%2C1d124bb9-fc3b-4e72-869a-c4e36d436111%2C1d3770b1-37c9-4198-bc43-ddf183dd3989%2C1f2ec151-c468-417c-8597-8308e6ef659e%2C1f630007-3a30-469e-8cee-dc7a3917d654%2C2065969a-c23e-492d-8b77-ee6a963496bc%2C225a37ee-fd64-437e-9345-7c910a63f89c%2C233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d%2C2388eca8-ae4a-40bf-80ba-c3b2901f2b47%2C238b4d55-fa1f-447d-afa2-df07e45ccdfc%2C23e418a0-a3d9-471b-b0cc-76e555e210eb",
+        "status": 200,
+        "start": 285651.8576,
+        "ttfbMs": 1201.47,
+        "fromCache": false,
+        "durationMs": 1201.9830000353977,
+        "bytes": 650
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/09a94fb4-2538-4ca7-b0e9-7c7533ce246d",
+        "status": 200,
+        "start": 285651.824956,
+        "ttfbMs": 3147.94,
+        "fromCache": false,
+        "durationMs": 3223.1629999587312,
+        "bytes": 312068
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/b3174d20-ce28-4e95-a5e7-96463a8ddd20",
+        "status": 200,
+        "start": 285651.825931,
+        "ttfbMs": 3226.735,
+        "fromCache": false,
+        "durationMs": 3231.605999986641,
+        "bytes": 447725
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/329cc838-3a35-4338-b52f-e50c6e823d6c",
+        "status": 200,
+        "start": 285651.828087,
+        "ttfbMs": 3252.676,
+        "fromCache": false,
+        "durationMs": 3262.415000004694,
+        "bytes": 919216
+      }
+    ]
+  },
+  {
+    "label": "warm-2",
+    "at": "2026-11-11T11:10:32.627Z",
+    "requests": [
+      {
+        "url": "https://bobuy.cc/products?node=1001",
+        "status": 200,
+        "start": 285657.196724,
+        "ttfbMs": 10.781,
+        "fromCache": false,
+        "durationMs": 11.289999994914979,
+        "bytes": 543
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-Cld7-vS8.js",
+        "status": 200,
+        "start": 285637.435127,
+        "ttfbMs": 53.771,
+        "fromCache": false,
+        "durationMs": 19794.168000051286,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-DZQr4a7U.css",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/assets/PublicProductCatalog-C_Daw3Xf.js",
+        "status": 200,
+        "start": 285637.611155,
+        "ttfbMs": 45.265,
+        "fromCache": false,
+        "durationMs": 19667.809000005946,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/RecommendationImageViewer-BLxxswKQ.js",
+        "status": 200,
+        "start": 285637.611336,
+        "ttfbMs": 44.847,
+        "fromCache": false,
+        "durationMs": 19667.811000021175,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMetadata-BvhDpo3g.js",
+        "status": 200,
+        "start": 285637.611403,
+        "ttfbMs": 40.204,
+        "fromCache": false,
+        "durationMs": 19667.880999972112,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/ImageLightbox-B7iQbgoI.js",
+        "status": 200,
+        "start": 285637.611468,
+        "ttfbMs": 36.682,
+        "fromCache": false,
+        "durationMs": 19667.906999995466,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-BvaWa9xn.js",
+        "status": 200,
+        "start": 285637.611753,
+        "ttfbMs": 48.515,
+        "fromCache": false,
+        "durationMs": 19667.688000015914,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/ImageLightbox-BPxkg2H0.css",
+        "status": 200,
+        "start": 285637.613015,
+        "ttfbMs": 50.377,
+        "fromCache": false,
+        "durationMs": 19666.620999982115,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/RecommendationImageViewer-ILdPQ99W.css",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMarkerBadges-B4AaYe9C.js",
+        "status": 200,
+        "start": 285637.614523,
+        "ttfbMs": 37.116,
+        "fromCache": false,
+        "durationMs": 19665.399999998044,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMarkerBadges-YtkPTPIq.css",
+        "status": 200,
+        "start": 285637.614614,
+        "ttfbMs": 39.737,
+        "fromCache": false,
+        "durationMs": 19665.42799997842,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMarkerEditor-dqFA2r9N.js",
+        "status": 200,
+        "start": 285637.61479,
+        "ttfbMs": 41.348,
+        "fromCache": false,
+        "durationMs": 19665.42799997842,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/ReloadOutlined-CEP7mjut.js",
+        "status": 200,
+        "start": 285637.614875,
+        "ttfbMs": 27.335,
+        "fromCache": false,
+        "durationMs": 19665.480999974534,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-CFzqh9Cf.js",
+        "status": 200,
+        "start": 285637.614964,
+        "ttfbMs": 26.297,
+        "fromCache": false,
+        "durationMs": 19665.528999990784,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/SaveOutlined-DIQbz6vf.js",
+        "status": 200,
+        "start": 285637.615035,
+        "ttfbMs": 42.209,
+        "fromCache": false,
+        "durationMs": 19665.58599995915,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-CFemXd4y.js",
+        "status": 200,
+        "start": 285637.61509,
+        "ttfbMs": 41.318,
+        "fromCache": false,
+        "durationMs": 19665.621000051033,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/favicon.ico",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/cdn-cgi/rum?",
+        "status": 204,
+        "start": 285657.306702,
+        "ttfbMs": 7.359,
+        "fromCache": false,
+        "durationMs": 7.7550000278279185,
+        "bytes": 446
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/trips",
+        "status": 200,
+        "start": 285657.288466,
+        "ttfbMs": 33.443,
+        "fromCache": false,
+        "durationMs": 34.01900001335889,
+        "bytes": 651
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/trips?includeCurrent=true",
+        "status": 200,
+        "start": 285657.288651,
+        "ttfbMs": 34.572,
+        "fromCache": false,
+        "durationMs": 35.05599999334663,
+        "bytes": 656
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-nodes",
+        "status": 200,
+        "start": 285657.289236,
+        "ttfbMs": 368.446,
+        "fromCache": false,
+        "durationMs": 368.95500001264736,
+        "bytes": 688
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-browse?page=0&merchantId=1001&query=&category=&locale=zh-CN&marked=false",
+        "status": 200,
+        "start": 285657.323427,
+        "ttfbMs": 1138.214,
+        "fromCache": false,
+        "durationMs": 1139.0389999723993,
+        "bytes": 12447
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/e5d42bc7-e135-46dd-ae28-2e689ad56ed6",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/badef57a-fe6f-4f1b-bfd2-e721b3459be5",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/22953f1c-a3ca-4efb-8939-3861dfd43437",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/063ad525-52a2-45dd-96b1-7a17dd252558",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/57b03030-3ed9-4bf5-8a10-f8e170cc7d84",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/331187f7-d0f5-468f-83aa-324a613a4f19",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/65a36f72-8834-4784-ac33-8f40ee42a3b4",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/124710c0-5214-40dc-9dbf-fc14f97b2ca1",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/6c97f77e-0ac8-4d48-b8f9-6ceb5f1754fb",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/19344070-72b8-45ab-8b15-c5c5ca5d9600",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/15ecbeeb-8c9b-43e1-9a5b-a44c53d4e3d6",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/30aff115-f411-4a5a-a193-a77af61c469d",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/4ec44235-7ee8-4d39-bc77-7a24ad2b3bb2",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/b880a89e-cfc6-42ec-b49b-d3a6e323f8fa",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/7b61f7ff-a769-4cf2-b7e1-cf33e8b08643",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/0e2cc6e9-c6ff-43ce-be80-5bcce146a5ba",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/775288fb-c134-49a2-8704-b95a2e0ceb6d",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/6e6d01fd-8aac-42b3-90d3-3f76d627c24b",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/2329db85-1d7a-463b-8caf-aa4d69599b10",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/9adefe75-43ec-441c-a3e0-abb0df72b967",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/09a94fb4-2538-4ca7-b0e9-7c7533ce246d",
+        "status": 200,
+        "start": 285651.824956,
+        "ttfbMs": 3147.94,
+        "fromCache": false,
+        "durationMs": 6673.812999972142,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/e5b4db2b-0bbe-499f-8335-fd28bd35b0d0",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/b3174d20-ce28-4e95-a5e7-96463a8ddd20",
+        "status": 200,
+        "start": 285651.825931,
+        "ttfbMs": 3226.735,
+        "fromCache": false,
+        "durationMs": 6674.271000025328,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/329cc838-3a35-4338-b52f-e50c6e823d6c",
+        "status": 200,
+        "start": 285651.828087,
+        "ttfbMs": 3252.676,
+        "fromCache": false,
+        "durationMs": 6673.008000012487,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-sales?productIds=018775a1-c531-4d89-bb61-5148b6a1df05%2C0451e987-1bc1-498d-8494-a7b9be9adbb7%2C08ee57fc-9c54-47a6-81b7-01b70d0b2092%2C0a516c2c-9f7d-46a8-a983-661959673738%2C0b38036f-3e99-420c-b870-89fe35d7a723%2C124bb802-8805-4a61-bead-687b3967a20d%2C12e3ced1-eedc-436a-8d50-94b1bf424508%2C133ee647-df82-436d-8a5c-cc5ee8f51c16%2C13804fbc-23cf-41bb-ad5e-2c5ad2affb65%2C13dfefdb-ef8b-4248-ae08-4453e63820a1%2C17ba61b2-32ad-4fbc-a992-6c51c781d20e%2C18e7bdb3-8437-4fbd-9d6c-a55817d03e4b%2C1b90522f-68d8-4cfb-95de-24b7b92917ed%2C1cfc194a-d903-468d-b8dc-47ce8b02e24b%2C1d124bb9-fc3b-4e72-869a-c4e36d436111%2C1d3770b1-37c9-4198-bc43-ddf183dd3989%2C1f2ec151-c468-417c-8597-8308e6ef659e%2C1f630007-3a30-469e-8cee-dc7a3917d654%2C2065969a-c23e-492d-8b77-ee6a963496bc%2C225a37ee-fd64-437e-9345-7c910a63f89c%2C233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d%2C2388eca8-ae4a-40bf-80ba-c3b2901f2b47%2C238b4d55-fa1f-447d-afa2-df07e45ccdfc%2C23e418a0-a3d9-471b-b0cc-76e555e210eb",
+        "status": 200,
+        "start": 285658.534048,
+        "ttfbMs": 117.114,
+        "fromCache": false,
+        "durationMs": 117.64700000640005,
+        "bytes": 649
+      }
+    ]
+  },
+  {
+    "label": "warm-3",
+    "at": "2026-11-11T11:10:45.664Z",
+    "requests": [
+      {
+        "url": "https://bobuy.cc/products?node=1001",
+        "status": 200,
+        "start": 285666.992342,
+        "ttfbMs": 11.051,
+        "fromCache": false,
+        "durationMs": 12.16699997894466,
+        "bytes": 540
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-Cld7-vS8.js",
+        "status": 200,
+        "start": 285637.435127,
+        "ttfbMs": 53.771,
+        "fromCache": false,
+        "durationMs": 29589.797000051476,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-DZQr4a7U.css",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/assets/PublicProductCatalog-C_Daw3Xf.js",
+        "status": 200,
+        "start": 285637.611155,
+        "ttfbMs": 45.265,
+        "fromCache": false,
+        "durationMs": 29503.64599999739,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/RecommendationImageViewer-BLxxswKQ.js",
+        "status": 200,
+        "start": 285637.611336,
+        "ttfbMs": 44.847,
+        "fromCache": false,
+        "durationMs": 29503.771000017878,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMetadata-BvhDpo3g.js",
+        "status": 200,
+        "start": 285637.611403,
+        "ttfbMs": 40.204,
+        "fromCache": false,
+        "durationMs": 29503.949999983888,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/ImageLightbox-B7iQbgoI.js",
+        "status": 200,
+        "start": 285637.611468,
+        "ttfbMs": 36.682,
+        "fromCache": false,
+        "durationMs": 29504.133000038564,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-BvaWa9xn.js",
+        "status": 200,
+        "start": 285637.611753,
+        "ttfbMs": 48.515,
+        "fromCache": false,
+        "durationMs": 29503.971999976784,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/ImageLightbox-BPxkg2H0.css",
+        "status": 200,
+        "start": 285637.613015,
+        "ttfbMs": 50.377,
+        "fromCache": false,
+        "durationMs": 29502.908999973442,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/RecommendationImageViewer-ILdPQ99W.css",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMarkerBadges-B4AaYe9C.js",
+        "status": 200,
+        "start": 285637.614523,
+        "ttfbMs": 37.116,
+        "fromCache": false,
+        "durationMs": 29501.74999999581,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMarkerBadges-YtkPTPIq.css",
+        "status": 200,
+        "start": 285637.614614,
+        "ttfbMs": 39.737,
+        "fromCache": false,
+        "durationMs": 29501.790999958757,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMarkerEditor-dqFA2r9N.js",
+        "status": 200,
+        "start": 285637.61479,
+        "ttfbMs": 41.348,
+        "fromCache": false,
+        "durationMs": 29501.774000003934,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/ReloadOutlined-CEP7mjut.js",
+        "status": 200,
+        "start": 285637.614875,
+        "ttfbMs": 27.335,
+        "fromCache": false,
+        "durationMs": 29501.7939999816,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-CFzqh9Cf.js",
+        "status": 200,
+        "start": 285637.614964,
+        "ttfbMs": 26.297,
+        "fromCache": false,
+        "durationMs": 29501.925999997184,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/SaveOutlined-DIQbz6vf.js",
+        "status": 200,
+        "start": 285637.615035,
+        "ttfbMs": 42.209,
+        "fromCache": false,
+        "durationMs": 29502.160999982152,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-CFemXd4y.js",
+        "status": 200,
+        "start": 285637.61509,
+        "ttfbMs": 41.318,
+        "fromCache": false,
+        "durationMs": 29502.226000011433,
+        "bytes": 0
+      },
+      {
+        "url": "https://bobuy.cc/favicon.ico",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/cdn-cgi/rum?",
+        "status": 204,
+        "start": 285667.159012,
+        "ttfbMs": 8.448,
+        "fromCache": false,
+        "durationMs": 8.763999969232827,
+        "bytes": 442
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/trips",
+        "status": 200,
+        "start": 285667.129391,
+        "ttfbMs": 43.156,
+        "fromCache": false,
+        "durationMs": 43.50599995814264,
+        "bytes": 650
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/trips?includeCurrent=true",
+        "status": 200,
+        "start": 285667.130778,
+        "ttfbMs": 44.498,
+        "fromCache": false,
+        "durationMs": 45.00199999893084,
+        "bytes": 651
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-nodes",
+        "status": 200,
+        "start": 285667.130984,
+        "ttfbMs": 247.932,
+        "fromCache": false,
+        "durationMs": 248.58600000152364,
+        "bytes": 691
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-browse?page=0&merchantId=1001&query=&category=&locale=zh-CN&marked=false",
+        "status": 200,
+        "start": 285667.180166,
+        "ttfbMs": 909.534,
+        "fromCache": false,
+        "durationMs": 910.4640000150539,
+        "bytes": 12443
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/e5d42bc7-e135-46dd-ae28-2e689ad56ed6",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/badef57a-fe6f-4f1b-bfd2-e721b3459be5",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/22953f1c-a3ca-4efb-8939-3861dfd43437",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/063ad525-52a2-45dd-96b1-7a17dd252558",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/57b03030-3ed9-4bf5-8a10-f8e170cc7d84",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/331187f7-d0f5-468f-83aa-324a613a4f19",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/65a36f72-8834-4784-ac33-8f40ee42a3b4",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/124710c0-5214-40dc-9dbf-fc14f97b2ca1",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/6c97f77e-0ac8-4d48-b8f9-6ceb5f1754fb",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/19344070-72b8-45ab-8b15-c5c5ca5d9600",
+        "status": 200,
+        "fromCache": true,
+        "bytes": 0,
+        "timingNote": "Cache timing.requestTime may be from the original request; excluded from duration comparisons"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-sales?productIds=018775a1-c531-4d89-bb61-5148b6a1df05%2C0451e987-1bc1-498d-8494-a7b9be9adbb7%2C08ee57fc-9c54-47a6-81b7-01b70d0b2092%2C0a516c2c-9f7d-46a8-a983-661959673738%2C0b38036f-3e99-420c-b870-89fe35d7a723%2C124bb802-8805-4a61-bead-687b3967a20d%2C12e3ced1-eedc-436a-8d50-94b1bf424508%2C133ee647-df82-436d-8a5c-cc5ee8f51c16%2C13804fbc-23cf-41bb-ad5e-2c5ad2affb65%2C13dfefdb-ef8b-4248-ae08-4453e63820a1%2C17ba61b2-32ad-4fbc-a992-6c51c781d20e%2C18e7bdb3-8437-4fbd-9d6c-a55817d03e4b%2C1b90522f-68d8-4cfb-95de-24b7b92917ed%2C1cfc194a-d903-468d-b8dc-47ce8b02e24b%2C1d124bb9-fc3b-4e72-869a-c4e36d436111%2C1d3770b1-37c9-4198-bc43-ddf183dd3989%2C1f2ec151-c468-417c-8597-8308e6ef659e%2C1f630007-3a30-469e-8cee-dc7a3917d654%2C2065969a-c23e-492d-8b77-ee6a963496bc%2C225a37ee-fd64-437e-9345-7c910a63f89c%2C233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d%2C2388eca8-ae4a-40bf-80ba-c3b2901f2b47%2C238b4d55-fa1f-447d-afa2-df07e45ccdfc%2C23e418a0-a3d9-471b-b0cc-76e555e210eb",
+        "status": 200,
+        "start": 285668.146302,
+        "ttfbMs": 106.893,
+        "fromCache": false,
+        "durationMs": 110.54600001079962,
+        "bytes": 654
+      }
+    ]
+  },
+  {
+    "label": "browser-cache-disabled",
+    "at": "2026-11-11T11:11:15.010Z",
+    "requests": [
+      {
+        "url": "https://bobuy.cc/products?node=1001",
+        "status": 200,
+        "start": 285701.346484,
+        "ttfbMs": 83.716,
+        "fromCache": false,
+        "durationMs": 84.33100004913285,
+        "bytes": 1168
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-DZQr4a7U.css",
+        "status": 200,
+        "start": 285701.452411,
+        "ttfbMs": 42.547,
+        "fromCache": false,
+        "durationMs": 44.135000032838434,
+        "bytes": 16950
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-Cld7-vS8.js",
+        "status": 200,
+        "start": 285701.452232,
+        "ttfbMs": 18.631,
+        "fromCache": false,
+        "durationMs": 37.42399998009205,
+        "bytes": 376714
+      },
+      {
+        "url": "https://bobuy.cc/assets/ImageLightbox-BPxkg2H0.css",
+        "status": 200,
+        "start": 285701.54897,
+        "ttfbMs": 21.634,
+        "fromCache": false,
+        "durationMs": 22.477000020444393,
+        "bytes": 3680
+      },
+      {
+        "url": "https://bobuy.cc/assets/ImageLightbox-B7iQbgoI.js",
+        "status": 200,
+        "start": 285701.548821,
+        "ttfbMs": 13.425,
+        "fromCache": false,
+        "durationMs": 14.098000014200807,
+        "bytes": 8051
+      },
+      {
+        "url": "https://bobuy.cc/assets/RecommendationImageViewer-BLxxswKQ.js",
+        "status": 200,
+        "start": 285701.548366,
+        "ttfbMs": 16.181,
+        "fromCache": false,
+        "durationMs": 17.395999981090426,
+        "bytes": 5717
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-CFemXd4y.js",
+        "status": 200,
+        "start": 285701.550234,
+        "ttfbMs": 18.438,
+        "fromCache": false,
+        "durationMs": 19.00299999397248,
+        "bytes": 2266
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMetadata-BvhDpo3g.js",
+        "status": 200,
+        "start": 285701.548467,
+        "ttfbMs": 24.325,
+        "fromCache": false,
+        "durationMs": 26.61100000841543,
+        "bytes": 780
+      },
+      {
+        "url": "https://bobuy.cc/assets/ReloadOutlined-CEP7mjut.js",
+        "status": 200,
+        "start": 285701.549958,
+        "ttfbMs": 22.652,
+        "fromCache": false,
+        "durationMs": 23.738999967463315,
+        "bytes": 1123
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-BvaWa9xn.js",
+        "status": 200,
+        "start": 285701.548914,
+        "ttfbMs": 23.673,
+        "fromCache": false,
+        "durationMs": 24.64499999769032,
+        "bytes": 2373
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-CFzqh9Cf.js",
+        "status": 200,
+        "start": 285701.550076,
+        "ttfbMs": 30.36,
+        "fromCache": false,
+        "durationMs": 30.98500001942739,
+        "bytes": 3852
+      },
+      {
+        "url": "https://bobuy.cc/assets/PublicProductCatalog-C_Daw3Xf.js",
+        "status": 200,
+        "start": 285701.547761,
+        "ttfbMs": 32.725,
+        "fromCache": false,
+        "durationMs": 33.53600000264123,
+        "bytes": 5659
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMarkerBadges-YtkPTPIq.css",
+        "status": 200,
+        "start": 285701.549399,
+        "ttfbMs": 34.182,
+        "fromCache": false,
+        "durationMs": 35.30499996850267,
+        "bytes": 2031
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMarkerEditor-dqFA2r9N.js",
+        "status": 200,
+        "start": 285701.549474,
+        "ttfbMs": 38.114,
+        "fromCache": false,
+        "durationMs": 38.4479999775067,
+        "bytes": 2617
+      },
+      {
+        "url": "https://bobuy.cc/assets/RecommendationImageViewer-ILdPQ99W.css",
+        "status": 200,
+        "start": 285701.549079,
+        "ttfbMs": 39.702,
+        "fromCache": false,
+        "durationMs": 40.210000006482005,
+        "bytes": 5661
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMarkerBadges-B4AaYe9C.js",
+        "status": 200,
+        "start": 285701.549278,
+        "ttfbMs": 40.09,
+        "fromCache": false,
+        "durationMs": 40.692999958992004,
+        "bytes": 1143
+      },
+      {
+        "url": "https://bobuy.cc/assets/SaveOutlined-DIQbz6vf.js",
+        "status": 200,
+        "start": 285701.550161,
+        "ttfbMs": 46.777,
+        "fromCache": false,
+        "durationMs": 47.49700002139434,
+        "bytes": 975
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/trips",
+        "status": 200,
+        "start": 285701.559209,
+        "ttfbMs": 41.137,
+        "fromCache": false,
+        "durationMs": 41.79799999110401,
+        "bytes": 655
+      },
+      {
+        "url": "https://bobuy.cc/cdn-cgi/rum?",
+        "status": 204,
+        "start": 285701.595151,
+        "ttfbMs": 8.546,
+        "fromCache": false,
+        "durationMs": 8.876999956555665,
+        "bytes": 446
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/trips?includeCurrent=true",
+        "status": 200,
+        "start": 285701.559566,
+        "ttfbMs": 49.554,
+        "fromCache": false,
+        "durationMs": 50.12899998109788,
+        "bytes": 650
+      },
+      {
+        "url": "https://bobuy.cc/favicon.ico",
+        "status": 200,
+        "start": 285701.595928,
+        "ttfbMs": 13.94,
+        "fromCache": false,
+        "durationMs": 14.876000001095235,
+        "bytes": 920
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-nodes",
+        "status": 200,
+        "start": 285701.559701,
+        "ttfbMs": 393.889,
+        "fromCache": false,
+        "durationMs": 395.016000024043,
+        "bytes": 691
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-browse?page=0&merchantId=1001&query=&category=&locale=zh-CN&marked=false",
+        "status": 200,
+        "start": 285701.620949,
+        "ttfbMs": 849.093,
+        "fromCache": false,
+        "durationMs": 849.7980000101961,
+        "bytes": 12637
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-sales?productIds=018775a1-c531-4d89-bb61-5148b6a1df05%2C0451e987-1bc1-498d-8494-a7b9be9adbb7%2C08ee57fc-9c54-47a6-81b7-01b70d0b2092%2C0a516c2c-9f7d-46a8-a983-661959673738%2C0b38036f-3e99-420c-b870-89fe35d7a723%2C124bb802-8805-4a61-bead-687b3967a20d%2C12e3ced1-eedc-436a-8d50-94b1bf424508%2C133ee647-df82-436d-8a5c-cc5ee8f51c16%2C13804fbc-23cf-41bb-ad5e-2c5ad2affb65%2C13dfefdb-ef8b-4248-ae08-4453e63820a1%2C17ba61b2-32ad-4fbc-a992-6c51c781d20e%2C18e7bdb3-8437-4fbd-9d6c-a55817d03e4b%2C1b90522f-68d8-4cfb-95de-24b7b92917ed%2C1cfc194a-d903-468d-b8dc-47ce8b02e24b%2C1d124bb9-fc3b-4e72-869a-c4e36d436111%2C1d3770b1-37c9-4198-bc43-ddf183dd3989%2C1f2ec151-c468-417c-8597-8308e6ef659e%2C1f630007-3a30-469e-8cee-dc7a3917d654%2C2065969a-c23e-492d-8b77-ee6a963496bc%2C225a37ee-fd64-437e-9345-7c910a63f89c%2C233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d%2C2388eca8-ae4a-40bf-80ba-c3b2901f2b47%2C238b4d55-fa1f-447d-afa2-df07e45ccdfc%2C23e418a0-a3d9-471b-b0cc-76e555e210eb",
+        "status": 200,
+        "start": 285702.528307,
+        "ttfbMs": 1726.309,
+        "fromCache": false,
+        "durationMs": 1727.1010000258684,
+        "bytes": 657
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/e5d42bc7-e135-46dd-ae28-2e689ad56ed6",
+        "status": 200,
+        "start": 285702.532383,
+        "ttfbMs": 2737.554,
+        "fromCache": false,
+        "durationMs": 2739.0419999719597,
+        "bytes": 143740
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/063ad525-52a2-45dd-96b1-7a17dd252558",
+        "status": 200,
+        "start": 285702.548447,
+        "ttfbMs": 2737.316,
+        "fromCache": false,
+        "durationMs": 2915.8820000011474,
+        "bytes": 1379428
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/331187f7-d0f5-468f-83aa-324a613a4f19",
+        "status": 200,
+        "start": 285702.548704,
+        "ttfbMs": 3124.012,
+        "fromCache": false,
+        "durationMs": 3125.4399999743327,
+        "bytes": 158328
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/65a36f72-8834-4784-ac33-8f40ee42a3b4",
+        "status": 200,
+        "start": 285702.548775,
+        "ttfbMs": 3379.79,
+        "fromCache": false,
+        "durationMs": 3408.298000053037,
+        "bytes": 690322
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/124710c0-5214-40dc-9dbf-fc14f97b2ca1",
+        "status": 200,
+        "start": 285702.549131,
+        "ttfbMs": 3445.869,
+        "fromCache": false,
+        "durationMs": 3446.6450000181794,
+        "bytes": 108762
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/6c97f77e-0ac8-4d48-b8f9-6ceb5f1754fb",
+        "status": 200,
+        "start": 285702.568932,
+        "ttfbMs": 3495.061,
+        "fromCache": false,
+        "durationMs": 3496.8859999789856,
+        "bytes": 256080
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/22953f1c-a3ca-4efb-8939-3861dfd43437",
+        "status": 200,
+        "start": 285702.548156,
+        "ttfbMs": 3529.624,
+        "fromCache": false,
+        "durationMs": 3530.3980000317097,
+        "bytes": 153337
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/57b03030-3ed9-4bf5-8a10-f8e170cc7d84",
+        "status": 200,
+        "start": 285702.548585,
+        "ttfbMs": 3619.375,
+        "fromCache": false,
+        "durationMs": 3634.3850000412203,
+        "bytes": 1627871
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/19344070-72b8-45ab-8b15-c5c5ca5d9600",
+        "status": 200,
+        "start": 285702.569084,
+        "ttfbMs": 3680.007,
+        "fromCache": false,
+        "durationMs": 3681.0939999995753,
+        "bytes": 244804
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/badef57a-fe6f-4f1b-bfd2-e721b3459be5",
+        "status": 200,
+        "start": 285702.532794,
+        "ttfbMs": 3729.255,
+        "fromCache": false,
+        "durationMs": 3769.596000027377,
+        "bytes": 1559811
+      }
+    ]
+  }
+]

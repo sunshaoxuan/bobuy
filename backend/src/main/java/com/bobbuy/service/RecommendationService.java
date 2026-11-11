@@ -336,11 +336,11 @@ public class RecommendationService {
         String url="/api/storefront/recommendation-images/"+id;
         var deleted=products.deletedIds();
         if(!deleted.isEmpty()){
-            var references=items.findAll().stream().filter(i->url.equals(i.imageUrl)||i.gallery.stream().anyMatch(p->url.equals(p.url()))).toList();
-            boolean activeMaster=products.findAll().stream().anyMatch(p->p.getMediaGallery().stream().anyMatch(m->url.equals(m.getUrl())));
             var converter=new com.bobbuy.model.converter.MediaGalleryJsonConverter();
+            var references=items.imageReferences().stream().filter(i->url.equals(i.getImageUrl())||i.getGallery().stream().anyMatch(p->url.equals(p.url()))).toList();
+            boolean activeMaster=products.activeMediaGalleries().stream().filter(Objects::nonNull).map(converter::convertToEntityAttribute).anyMatch(gallery->gallery.stream().anyMatch(m->url.equals(m.getUrl())));
             boolean deletedMaster=products.deletedMediaGalleries().stream().filter(Objects::nonNull).map(converter::convertToEntityAttribute).anyMatch(gallery->gallery.stream().anyMatch(m->url.equals(m.getUrl())));
-            if(!activeMaster&&(deletedMaster||!references.isEmpty())&&references.stream().allMatch(i->i.productId!=null&&deleted.contains(i.productId)))throw missing();
+            if(!activeMaster&&(deletedMaster||!references.isEmpty())&&references.stream().allMatch(i->i.getProductId()!=null&&deleted.contains(i.getProductId())))throw missing();
         }
         return images.findById(id).filter(i->"PUBLIC".equals(i.accessScope)).orElseThrow(RecommendationService::missing);
     }

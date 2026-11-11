@@ -1,0 +1,117 @@
+{
+  "at": "2026-11-11T11:25:37.124Z",
+  "truncated": false,
+  "hasMore": false,
+  "responses": [
+    {
+      "url": "https://bobuy.cc/recommendations?node=1001",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-DZQr4a7U.css",
+      "status": 200
+    },
+    {
+      "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-Cld7-vS8.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/ImageLightbox-BPxkg2H0.css",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/RecommendationImageViewer-ILdPQ99W.css",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/PublicRecommendations-DhYyKoQc.css",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/RecommendationImageViewer-BLxxswKQ.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/ProductMetadata-BvhDpo3g.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/ImageLightbox-B7iQbgoI.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-BvaWa9xn.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/PublicRecommendations-COr8eFS8.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/trips",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/favicon.ico",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/trips?includeCurrent=true",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/cdn-cgi/rum?",
+      "status": 204
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/recommendation-nodes",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/recommendation-browse/items?page=0&merchantId=1001&period=current&query=&category=&locale=zh-CN",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/recommendation-images/8826c999-74e3-432f-b389-fc0677368d68",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/recommendation-images/47a9e61e-06f7-47b5-8756-866f207d7ceb",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/recommendation-images/0a599456-ea4d-45c0-a807-322ac1f4dc82",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/recommendation-images/ac1a7cbd-9e02-43dc-a0d2-c3c0990382e7",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/recommendation-images/4487add2-8886-4f15-9475-785e29ef8fe1",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/recommendation-images/d4c8ebec-2581-4483-9062-94887883f518",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/recommendation-images/dc7a9037-5e84-4d45-90b0-1340e0251275",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/product-sales?productIds=27abf1ee-9432-4297-8d06-2652d1a5323a%2C284e0c28-de67-4720-9271-8288e22c9c5a%2C330be8fb-a9dd-4977-b670-3eb783890ce9%2C39e8bbdd-6d09-4922-8c0d-0eba2d77802b%2C49067b03-bc1b-4682-b795-958ed70155a4%2C4990375f-483a-4f6b-8f92-fa32226fe32a%2C5ce8299c-fbca-4e62-8d95-ff987011c9da%2C5dcd2470-3ba5-49b2-86f7-a299d5992f3e%2C62acb0af-3d5e-487f-b0d9-56a2f9bed74d%2C6bfb4c16-4d92-474e-b4d3-572b6c58a7f9%2C726bcdbe-017f-41d9-a096-4bbf5bf3ac40%2C85544695-9f84-4998-9b93-60fe549c75cf%2C8b8ecfca-5824-4594-bea1-922ede028682%2Ca11d28d5-08e5-463c-96e7-69b37e452cfe%2Ca9237488-fb7d-4945-860f-72c7952846e5%2Ca97bd423-b7fc-4297-8cbe-bb284073d971%2Cb3b6d91c-f1c4-47d8-914b-60ec0a11b26d%2Cba1001c9-4f81-47e0-8b65-4507242effb6%2Cc67ca6b4-c00e-45f2-94b4-a992f4507573%2Cce120d04-cdbe-44f4-b409-153f05eef930%2Ce97cb643-f220-4df7-ba4f-67b6bac35661%2Cead7b100-2e45-4921-9e7d-6fcd4d6a2f99%2Cfaf0a00e-409f-43e1-8580-e8d7c0becb2e%2Cfbfee300-0286-4d8e-a20c-50203df901a1",
+      "status": 200
+    }
+  ],
+  "failures": [],
+  "console": []
+}

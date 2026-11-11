@@ -1,0 +1,62 @@
+
+  - button "Close":
+    - img "close":
+  - generic: 商品详情
+  - button "全屏查看商品图":
+    - img "Men's Keshimin男士护肤霜 · 图片 1"
+  - button "上一张" [disabled]: ‹
+  - generic: 1 / 3
+  - button "下一张": ›
+  - button "查看第 1 张商品图" [pressed]:
+    - img "Men's Keshimin男士护肤霜 · 图片 1"
+  - button "查看第 2 张商品图":
+    - img "Men's Keshimin男士护肤霜 · 图片 2"
+  - button "查看第 3 张商品图":
+    - img "Men's Keshimin男士护肤霜 · 图片 3"
+  - heading "Men's Keshimin男士护肤霜 （メンズケシミン シミ対策クリーム）" [level=1]:
+    - generic: Men's Keshimin男士护肤霜
+    - generic: （メンズケシミン シミ対策クリーム）
+  - paragraph:
+    - generic: 产品编号
+    - strong: "77839"
+  - paragraph: 20g×2
+  - region "参考售价（非实时）":
+    - heading "参考售价（非实时）" [level=2]
+    - link "来源期次 7":
+      - /url: /recommendations/7?node=1001&product=0451e987-1bc1-498d-8494-a7b9be9adbb7&productSection=all&item=236
+    - strong: JPY ¥1,528
+    - generic: / 20g×2本
+    - text: "原价:"
+    - deletion: JPY ¥1,828
+    - generic: "折扣金额: JPY ¥300"
+    - term: 来源渠道
+    - definition: Costco Online
+    - term: 优惠 / 兑换期间
+    - definition: 2026-11-02 – 2026-11-08 日本时间，含起止日
+    - term: 来源
+    - definition:
+      - link "来源":
+        - /url: https://www.costco.co.jp/Health-Beauty-Medicine/Beauty-Care/Beauty-Care/Mens-Keshimin-Medicated-Spot-Care-Cream-20g-x-2/p/77839
+    - generic: 优惠期间已结束
+    - paragraph: "当前已知适用参考价（非售价）: 暂无可确定的有效窗口"
+    - heading "优惠条件" [level=3]
+    - paragraph: 2026/11/4 Costco Online邮件，含税参考信息，仓库店价格可能不同。 单品官网核验窗口：2026/11/2–2026/11/8，日本时间，含起止日。 不代表Bobuy实际售价、库存或开放购买。
+    - link "来源期次 5":
+      - /url: /recommendations/5?node=1001&product=0451e987-1bc1-498d-8494-a7b9be9adbb7&productSection=all&item=195
+    - strong: JPY ¥1,198
+    - text: "原价:"
+    - deletion: JPY ¥1,498
+    - generic: "折扣金额: JPY ¥300"
+    - term: 来源渠道
+    - definition: Costco 仓库店
+    - term: 优惠 / 兑换期间
+    - definition: 2026-11-02 – 2026-11-08 日本时间，含起止日
+    - term: 来源
+    - definition:
+      - link "来源":
+        - /url: https://cds2.costcojapan.jp/cds/mail-images/upz/261101_imgx/img01/s77839.jpg
+    - generic: 优惠期间已结束
+    - heading "优惠条件" [level=3]
+    - paragraph: 来源：2026/11/1 Costco日本仓库店《SHOP EARLY BLACK FRIDAY!》，ITEM 77839。本条所列价格、计量单位及优惠窗口按原信单品资料登记；未知日期保持待核，不以收信时间推定。优惠价格含税，Online不适用。店头价格、供应和库存可能变化；这不是Bobuy售价、库存或购买开放通知。
+  - button "暂未开放预订" [disabled]:
+    - generic: 暂未开放预订

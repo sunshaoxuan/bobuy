@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "backend": {
+    "tests": 660,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 24
+  },
+  "passed": 636,
+  "configuredJacoco": "PASS",
+  "focusedAuthorizationTests": 9,
+  "realPostgres": "PASS",
+  "frontend": "reused exact 8bfb479 frontend; 757 tests, unchanged bytes",
+  "sqlMigration": false,
+  "sourceInputsSha256": "b268dffa5ce2a05457ac018ecacad5e37963de2a692d7a217c6a748821069307",
+  "coreJarSha256": "098f1aabfc33dfe7fcf46df306273310945da2ed86647f9032e8d689a374195e",
+  "backendLogSha256": "7bba30b0c209d0dec6497815c9d4f9f41f985f36319a6ea378443f3f14b8a572"
+}

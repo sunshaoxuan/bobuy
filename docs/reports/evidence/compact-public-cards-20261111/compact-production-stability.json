@@ -1,0 +1,426 @@
+{
+  "result": "PASS",
+  "seconds": 601.8,
+  "samples": [
+    {
+      "at": "2026-11-11T11:09:37.873122+00:00",
+      "containers": {
+        "core-service": {
+          "id": "a01c8da8157bdb0dfe2663c3d71edd09d93f0a37294e2b9577a3eccfd7e79e05",
+          "image": "sha256:00037cd4e71207e4d4d97caa178179da97792d4cb73b3bad5a3aa73896d3b57a",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "healthy",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.144995111Z"
+        },
+        "frontend": {
+          "id": "8fb3a133a6095c3bffa67278d24a8037342b86d55dcb2ba001201edc859bfcff",
+          "image": "sha256:13cead62b2f1a4d09dfdfae46c359fa1d31832e3096fa2a077527f4bf9cf343b",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "running",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.146712118Z"
+        }
+      },
+      "http": {
+        "home": 200,
+        "products": 200,
+        "reviews": 200,
+        "productCount": 24,
+        "sampleReviewCount": 0,
+        "distributionBins": 9,
+        "path": "HTTPS origin; public CDN separately checked in real browser"
+      }
+    },
+    {
+      "at": "2026-11-11T11:10:25.041586+00:00",
+      "containers": {
+        "core-service": {
+          "id": "a01c8da8157bdb0dfe2663c3d71edd09d93f0a37294e2b9577a3eccfd7e79e05",
+          "image": "sha256:00037cd4e71207e4d4d97caa178179da97792d4cb73b3bad5a3aa73896d3b57a",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "healthy",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.144995111Z"
+        },
+        "frontend": {
+          "id": "8fb3a133a6095c3bffa67278d24a8037342b86d55dcb2ba001201edc859bfcff",
+          "image": "sha256:13cead62b2f1a4d09dfdfae46c359fa1d31832e3096fa2a077527f4bf9cf343b",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "running",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.146712118Z"
+        }
+      },
+      "http": {
+        "home": 200,
+        "products": 200,
+        "reviews": 200,
+        "productCount": 24,
+        "sampleReviewCount": 0,
+        "distributionBins": 9,
+        "path": "HTTPS origin; public CDN separately checked in real browser"
+      }
+    },
+    {
+      "at": "2026-11-11T11:11:13.436532+00:00",
+      "containers": {
+        "core-service": {
+          "id": "a01c8da8157bdb0dfe2663c3d71edd09d93f0a37294e2b9577a3eccfd7e79e05",
+          "image": "sha256:00037cd4e71207e4d4d97caa178179da97792d4cb73b3bad5a3aa73896d3b57a",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "healthy",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.144995111Z"
+        },
+        "frontend": {
+          "id": "8fb3a133a6095c3bffa67278d24a8037342b86d55dcb2ba001201edc859bfcff",
+          "image": "sha256:13cead62b2f1a4d09dfdfae46c359fa1d31832e3096fa2a077527f4bf9cf343b",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "running",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.146712118Z"
+        }
+      },
+      "http": {
+        "home": 200,
+        "products": 200,
+        "reviews": 200,
+        "productCount": 24,
+        "sampleReviewCount": 0,
+        "distributionBins": 9,
+        "path": "HTTPS origin; public CDN separately checked in real browser"
+      }
+    },
+    {
+      "at": "2026-11-11T11:12:00.646561+00:00",
+      "containers": {
+        "core-service": {
+          "id": "a01c8da8157bdb0dfe2663c3d71edd09d93f0a37294e2b9577a3eccfd7e79e05",
+          "image": "sha256:00037cd4e71207e4d4d97caa178179da97792d4cb73b3bad5a3aa73896d3b57a",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "healthy",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.144995111Z"
+        },
+        "frontend": {
+          "id": "8fb3a133a6095c3bffa67278d24a8037342b86d55dcb2ba001201edc859bfcff",
+          "image": "sha256:13cead62b2f1a4d09dfdfae46c359fa1d31832e3096fa2a077527f4bf9cf343b",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "running",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.146712118Z"
+        }
+      },
+      "http": {
+        "home": 200,
+        "products": 200,
+        "reviews": 200,
+        "productCount": 24,
+        "sampleReviewCount": 0,
+        "distributionBins": 9,
+        "path": "HTTPS origin; public CDN separately checked in real browser"
+      }
+    },
+    {
+      "at": "2026-11-11T11:12:48.019036+00:00",
+      "containers": {
+        "core-service": {
+          "id": "a01c8da8157bdb0dfe2663c3d71edd09d93f0a37294e2b9577a3eccfd7e79e05",
+          "image": "sha256:00037cd4e71207e4d4d97caa178179da97792d4cb73b3bad5a3aa73896d3b57a",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "healthy",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.144995111Z"
+        },
+        "frontend": {
+          "id": "8fb3a133a6095c3bffa67278d24a8037342b86d55dcb2ba001201edc859bfcff",
+          "image": "sha256:13cead62b2f1a4d09dfdfae46c359fa1d31832e3096fa2a077527f4bf9cf343b",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "running",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.146712118Z"
+        }
+      },
+      "http": {
+        "home": 200,
+        "products": 200,
+        "reviews": 200,
+        "productCount": 24,
+        "sampleReviewCount": 0,
+        "distributionBins": 9,
+        "path": "HTTPS origin; public CDN separately checked in real browser"
+      }
+    },
+    {
+      "at": "2026-11-11T11:13:34.955255+00:00",
+      "containers": {
+        "core-service": {
+          "id": "a01c8da8157bdb0dfe2663c3d71edd09d93f0a37294e2b9577a3eccfd7e79e05",
+          "image": "sha256:00037cd4e71207e4d4d97caa178179da97792d4cb73b3bad5a3aa73896d3b57a",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "healthy",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.144995111Z"
+        },
+        "frontend": {
+          "id": "8fb3a133a6095c3bffa67278d24a8037342b86d55dcb2ba001201edc859bfcff",
+          "image": "sha256:13cead62b2f1a4d09dfdfae46c359fa1d31832e3096fa2a077527f4bf9cf343b",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "running",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.146712118Z"
+        }
+      },
+      "http": {
+        "home": 200,
+        "products": 200,
+        "reviews": 200,
+        "productCount": 24,
+        "sampleReviewCount": 0,
+        "distributionBins": 9,
+        "path": "HTTPS origin; public CDN separately checked in real browser"
+      }
+    },
+    {
+      "at": "2026-11-11T11:14:22.065431+00:00",
+      "containers": {
+        "core-service": {
+          "id": "a01c8da8157bdb0dfe2663c3d71edd09d93f0a37294e2b9577a3eccfd7e79e05",
+          "image": "sha256:00037cd4e71207e4d4d97caa178179da97792d4cb73b3bad5a3aa73896d3b57a",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "healthy",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.144995111Z"
+        },
+        "frontend": {
+          "id": "8fb3a133a6095c3bffa67278d24a8037342b86d55dcb2ba001201edc859bfcff",
+          "image": "sha256:13cead62b2f1a4d09dfdfae46c359fa1d31832e3096fa2a077527f4bf9cf343b",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "running",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.146712118Z"
+        }
+      },
+      "http": {
+        "home": 200,
+        "products": 200,
+        "reviews": 200,
+        "productCount": 24,
+        "sampleReviewCount": 0,
+        "distributionBins": 9,
+        "path": "HTTPS origin; public CDN separately checked in real browser"
+      }
+    },
+    {
+      "at": "2026-11-11T11:15:09.332524+00:00",
+      "containers": {
+        "core-service": {
+          "id": "a01c8da8157bdb0dfe2663c3d71edd09d93f0a37294e2b9577a3eccfd7e79e05",
+          "image": "sha256:00037cd4e71207e4d4d97caa178179da97792d4cb73b3bad5a3aa73896d3b57a",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "healthy",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.144995111Z"
+        },
+        "frontend": {
+          "id": "8fb3a133a6095c3bffa67278d24a8037342b86d55dcb2ba001201edc859bfcff",
+          "image": "sha256:13cead62b2f1a4d09dfdfae46c359fa1d31832e3096fa2a077527f4bf9cf343b",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "running",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.146712118Z"
+        }
+      },
+      "http": {
+        "home": 200,
+        "products": 200,
+        "reviews": 200,
+        "productCount": 24,
+        "sampleReviewCount": 0,
+        "distributionBins": 9,
+        "path": "HTTPS origin; public CDN separately checked in real browser"
+      }
+    },
+    {
+      "at": "2026-11-11T11:15:56.391257+00:00",
+      "containers": {
+        "core-service": {
+          "id": "a01c8da8157bdb0dfe2663c3d71edd09d93f0a37294e2b9577a3eccfd7e79e05",
+          "image": "sha256:00037cd4e71207e4d4d97caa178179da97792d4cb73b3bad5a3aa73896d3b57a",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "healthy",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.144995111Z"
+        },
+        "frontend": {
+          "id": "8fb3a133a6095c3bffa67278d24a8037342b86d55dcb2ba001201edc859bfcff",
+          "image": "sha256:13cead62b2f1a4d09dfdfae46c359fa1d31832e3096fa2a077527f4bf9cf343b",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "running",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.146712118Z"
+        }
+      },
+      "http": {
+        "home": 200,
+        "products": 200,
+        "reviews": 200,
+        "productCount": 24,
+        "sampleReviewCount": 0,
+        "distributionBins": 9,
+        "path": "HTTPS origin; public CDN separately checked in real browser"
+      }
+    },
+    {
+      "at": "2026-11-11T11:16:43.356361+00:00",
+      "containers": {
+        "core-service": {
+          "id": "a01c8da8157bdb0dfe2663c3d71edd09d93f0a37294e2b9577a3eccfd7e79e05",
+          "image": "sha256:00037cd4e71207e4d4d97caa178179da97792d4cb73b3bad5a3aa73896d3b57a",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "healthy",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.144995111Z"
+        },
+        "frontend": {
+          "id": "8fb3a133a6095c3bffa67278d24a8037342b86d55dcb2ba001201edc859bfcff",
+          "image": "sha256:13cead62b2f1a4d09dfdfae46c359fa1d31832e3096fa2a077527f4bf9cf343b",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "running",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.146712118Z"
+        }
+      },
+      "http": {
+        "home": 200,
+        "products": 200,
+        "reviews": 200,
+        "productCount": 24,
+        "sampleReviewCount": 0,
+        "distributionBins": 9,
+        "path": "HTTPS origin; public CDN separately checked in real browser"
+      }
+    },
+    {
+      "at": "2026-11-11T11:17:30.632441+00:00",
+      "containers": {
+        "core-service": {
+          "id": "a01c8da8157bdb0dfe2663c3d71edd09d93f0a37294e2b9577a3eccfd7e79e05",
+          "image": "sha256:00037cd4e71207e4d4d97caa178179da97792d4cb73b3bad5a3aa73896d3b57a",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "healthy",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.144995111Z"
+        },
+        "frontend": {
+          "id": "8fb3a133a6095c3bffa67278d24a8037342b86d55dcb2ba001201edc859bfcff",
+          "image": "sha256:13cead62b2f1a4d09dfdfae46c359fa1d31832e3096fa2a077527f4bf9cf343b",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "running",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.146712118Z"
+        }
+      },
+      "http": {
+        "home": 200,
+        "products": 200,
+        "reviews": 200,
+        "productCount": 24,
+        "sampleReviewCount": 0,
+        "distributionBins": 9,
+        "path": "HTTPS origin; public CDN separately checked in real browser"
+      }
+    },
+    {
+      "at": "2026-11-11T11:18:17.536010+00:00",
+      "containers": {
+        "core-service": {
+          "id": "a01c8da8157bdb0dfe2663c3d71edd09d93f0a37294e2b9577a3eccfd7e79e05",
+          "image": "sha256:00037cd4e71207e4d4d97caa178179da97792d4cb73b3bad5a3aa73896d3b57a",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "healthy",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.144995111Z"
+        },
+        "frontend": {
+          "id": "8fb3a133a6095c3bffa67278d24a8037342b86d55dcb2ba001201edc859bfcff",
+          "image": "sha256:13cead62b2f1a4d09dfdfae46c359fa1d31832e3096fa2a077527f4bf9cf343b",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "running",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.146712118Z"
+        }
+      },
+      "http": {
+        "home": 200,
+        "products": 200,
+        "reviews": 200,
+        "productCount": 24,
+        "sampleReviewCount": 0,
+        "distributionBins": 9,
+        "path": "HTTPS origin; public CDN separately checked in real browser"
+      }
+    },
+    {
+      "at": "2026-11-11T11:19:04.294959+00:00",
+      "containers": {
+        "core-service": {
+          "id": "a01c8da8157bdb0dfe2663c3d71edd09d93f0a37294e2b9577a3eccfd7e79e05",
+          "image": "sha256:00037cd4e71207e4d4d97caa178179da97792d4cb73b3bad5a3aa73896d3b57a",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "healthy",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.144995111Z"
+        },
+        "frontend": {
+          "id": "8fb3a133a6095c3bffa67278d24a8037342b86d55dcb2ba001201edc859bfcff",
+          "image": "sha256:13cead62b2f1a4d09dfdfae46c359fa1d31832e3096fa2a077527f4bf9cf343b",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "running",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.146712118Z"
+        }
+      },
+      "http": {
+        "home": 200,
+        "products": 200,
+        "reviews": 200,
+        "productCount": 24,
+        "sampleReviewCount": 0,
+        "distributionBins": 9,
+        "path": "HTTPS origin; public CDN separately checked in real browser"
+      }
+    },
+    {
+      "at": "2026-11-11T11:19:35.789614+00:00",
+      "containers": {
+        "core-service": {
+          "id": "a01c8da8157bdb0dfe2663c3d71edd09d93f0a37294e2b9577a3eccfd7e79e05",
+          "image": "sha256:00037cd4e71207e4d4d97caa178179da97792d4cb73b3bad5a3aa73896d3b57a",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "healthy",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.144995111Z"
+        },
+        "frontend": {
+          "id": "8fb3a133a6095c3bffa67278d24a8037342b86d55dcb2ba001201edc859bfcff",
+          "image": "sha256:13cead62b2f1a4d09dfdfae46c359fa1d31832e3096fa2a077527f4bf9cf343b",
+          "revision": "8bfb479e520c391e6ab1485e87be4ce55c9dca3e",
+          "health": "running",
+          "restarts": 0,
+          "startedAt": "2026-11-11T11:06:13.146712118Z"
+        }
+      },
+      "http": {
+        "home": 200,
+        "products": 200,
+        "reviews": 200,
+        "productCount": 24,
+        "sampleReviewCount": 0,
+        "distributionBins": 9,
+        "path": "HTTPS origin; public CDN separately checked in real browser"
+      }
+    }
+  ]
+}
