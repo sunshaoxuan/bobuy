@@ -22,22 +22,22 @@ class ProductRatingPostgresIntegrationTest extends ProductRatingIntegrationTest 
   properties.add("spring.datasource.driver-class-name",()->"org.postgresql.Driver");
   properties.add("spring.jpa.hibernate.ddl-auto",()->"validate");properties.add("spring.jpa.properties.hibernate.default_schema",()->schema);
   properties.add("spring.flyway.enabled",()->"true");properties.add("spring.flyway.schemas",()->schema);properties.add("spring.flyway.default-schema",()->schema);
-  properties.add("spring.flyway.target",()->"28.2");properties.add("spring.flyway.clean-disabled",()->"true");
+  properties.add("spring.flyway.target",()->"32");properties.add("spring.flyway.clean-disabled",()->"true");
   properties.add("spring.sql.init.mode",()->"never");
  }
  private static void preservePopulatedMigration(String url,String schema,String password){
   try(var connection=DriverManager.getConnection(url,"bobuy",password)){
    try(var query=connection.prepareStatement("select count(*) from pg_namespace where nspname=?")){query.setString(1,schema);try(var row=query.executeQuery()){row.next();if(row.getInt(1)!=0)throw new IllegalStateException("Fresh owned namespace required; existing schema is retained, never reset");}}
-   Flyway.configure().dataSource(url,"bobuy",password).schemas(schema).defaultSchema(schema).cleanDisabled(true).target("28.1").load().migrate();
+   Flyway.configure().dataSource(url,"bobuy",password).schemas(schema).defaultSchema(schema).cleanDisabled(true).target("31").load().migrate();
    try(var sql=connection.createStatement()){
     sql.execute("insert into bb_user(id,name,username,roles) values(98732099,'Synthetic migration sentinel','rating-migration-synthetic','[\"AGENT\"]'::jsonb)");
     sql.execute("insert into bb_product(id,merchant_id,name,description,base_price,attributes,media_gallery) values('rating-migration-sentinel',98732099,'{\"ja-JP\":\"Synthetic retained product\"}'::jsonb,'{}'::jsonb,321,'{}'::jsonb,'[]'::jsonb)");
    }
    var tables=new ArrayList<String>();try(var query=connection.prepareStatement("select tablename from pg_tables where schemaname=? and tablename<>'flyway_schema_history' order by tablename")){query.setString(1,schema);try(var rows=query.executeQuery()){while(rows.next())tables.add(rows.getString(1));}}
    var before=fingerprint(connection,schema,tables);
-   Flyway.configure().dataSource(url,"bobuy",password).schemas(schema).defaultSchema(schema).cleanDisabled(true).target("28.2").load().migrate();
+   Flyway.configure().dataSource(url,"bobuy",password).schemas(schema).defaultSchema(schema).cleanDisabled(true).target("32").load().migrate();
    if(!before.equals(fingerprint(connection,schema,tables)))throw new IllegalStateException("Rating migration changed an existing table shape or retained row");
-   try(var query=connection.createStatement();var rows=query.executeQuery("select count(*) from bb_product_rating")){rows.next();if(rows.getLong(1)!=0)throw new IllegalStateException("Old products must not acquire synthetic ratings");}
+   try(var query=connection.createStatement();var rows=query.executeQuery("select count(*) from bb_product_review")){rows.next();if(rows.getLong(1)!=0)throw new IllegalStateException("Old merchant scores must not acquire synthetic user reviews");}
    System.out.println("RATING_POPULATED_MIGRATION_PASS oldTables="+tables.size()+" retainedSyntheticProduct=1 defaultRatingRows=0");
   }catch(SQLException failure){throw new IllegalStateException("Isolated rating migration check failed; retain owned schema and failure",failure);}
  }

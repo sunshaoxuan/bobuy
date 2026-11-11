@@ -26,7 +26,7 @@ export default function DeletedProducts({embedded=false,refreshKey=0,onRestored}
   {title:t('trash.deleted_at'),render:(_,r:ProductTrashRow)=>r.deletedAt?new Date(r.deletedAt).toLocaleString():t('trash.active')},
   ...(!cleanup?[{title:t('trash.actions'),render:(_:unknown,r:ProductTrashRow)=><Button disabled={busy} onClick={()=>void restore(r)}>{t('trash.restore')}</Button>}]:[])
  ]}/>:<div className="product-trash-cards" aria-busy={busy}>{!visible.length&&!busy&&<Empty/>}{visible.map(row=><article className="product-trash-card" key={row.id} data-product-id={row.id}>
-  <header>{cleanup&&<Checkbox disabled={busy} aria-label={display(row)} checked={selected.includes(row.id)} onChange={e=>{setSelected(prior=>e.target.checked?[...prior,row.id]:prior.filter(id=>id!==row.id));setReviewed(false);}}/>}<strong>{display(row)}</strong></header>
+  <header>{cleanup&&<Checkbox disabled={busy} aria-label={display(row)} checked={selected.includes(row.id)} onChange={e=>{setSelected(prior=>e.target.checked?[...prior,row.id]:prior.filter(id=>id!==row.id));setReviewed(false);}}/>}<strong title={display(row)}>{display(row)}</strong></header>
   <small>{row.id}</small><dl><dt>{t('rec.code')}</dt><dd>{row.itemNumber||'—'}</dd><dt>{t('trash.references')}</dt><dd>{row.recommendationIds.join(', ')||'—'}</dd><dt>{t('trash.deleted_at')}</dt><dd>{row.deletedAt?new Date(row.deletedAt).toLocaleString():t('trash.active')}</dd></dl>
   {!cleanup&&<Button block disabled={busy} onClick={()=>void restore(row)}>{t('trash.restore')}</Button>}
  </article>)}</div>}

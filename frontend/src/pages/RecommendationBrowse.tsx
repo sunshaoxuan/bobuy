@@ -1,4 +1,5 @@
 import {ProductStars} from '../components/ProductRating';
+import CardPrice from '../components/CardPrice';
 import SafeArticleText from '../components/SafeArticleText';
 import {useEffect,useRef,useState,type ReactNode} from 'react';
 import {Alert,Button,Empty,Spin} from 'antd';
@@ -24,11 +25,12 @@ import '../public-catalog.css';
 import '../browse-pages.css';
 
 type Props=ShoppingProps&{renderProduct:(item:RecommendationItem|undefined,product:StoreProduct|undefined,close:()=>void,pending:boolean)=>ReactNode};
-export function ServiceSummary({offer}:{offer:ServiceBrowseCard}){
+export function ServiceSummary({offer,compact=false}:{offer:ServiceBrowseCard;compact?:boolean}){
  const {t,locale}=useI18n(),packages=offer.basis==='TASK_PACKAGES';
  const tax=t(offer.taxIncluded===true?'browse.tax_included':offer.taxIncluded===false?'browse.tax_excluded':'rec.not_stated');
+ const price=(amount:number|null|undefined,label:string)=>compact?<><small className="card-price-label">{label}</small><CardPrice amount={amount} currency={offer.currency} kind="reference"/></>:<strong>{label}: {amount?.toLocaleString(locale)??t('rec.not_stated')} {offer.currency}</strong>;
  return <div className="service-summary"><p>{t('service.provider')}: {offer.provider}</p>
-  {packages?<><p>{t('service.task_packages')}</p>{offer.packages?.map(option=>{const text=option.terms[locale]??option.terms['ja-JP'];return <section key={option.key} className="service-package-summary"><h4>{text?.name}</h4><p>{text?.scope}</p><p>{option.originalPrice!=null&&<del>{option.originalPrice.toLocaleString(locale)} {offer.currency} </del>}<strong>{t('service.package_reference')}: {option.price?.toLocaleString(locale)??t('rec.not_stated')} {offer.currency}</strong> · {tax}</p></section>;})}</>:<><p>{t('service.staff')}: {offer.staff??t('rec.not_stated')} · {t('service.hours')}: {offer.hours??t('rec.not_stated')}</p><p>{offer.originalPrice!=null&&<del>{offer.originalPrice.toLocaleString(locale)} {offer.currency} </del>}<strong>{t('browse.service_price')}: {offer.price?.toLocaleString(locale)??t('rec.not_stated')} {offer.currency}</strong> · {tax}</p></>}
+  {packages?<><p>{t('service.task_packages')}</p>{offer.packages?.map(option=>{const text=option.terms[locale]??option.terms['ja-JP'];return <section key={option.key} className="service-package-summary"><h4>{text?.name}</h4><p>{text?.scope}</p><div>{option.originalPrice!=null&&<del>{option.originalPrice.toLocaleString(locale)} {offer.currency} </del>}{price(option.price,t('service.package_reference'))} · {tax}</div></section>;})}</>:<><p>{t('service.staff')}: {offer.staff??t('rec.not_stated')} · {t('service.hours')}: {offer.hours??t('rec.not_stated')}</p><div>{offer.originalPrice!=null&&<del>{offer.originalPrice.toLocaleString(locale)} {offer.currency} </del>}{price(offer.price,t('browse.service_price'))} · {tax}</div></>}
   <p>{t('service.fees')}: {offer.noExtraFees?t('service.noExtraFees'):offer.fees.length?'':t('rec.not_stated')}</p>{offer.fees.map(fee=><p key={fee.key}>{localizedContent(fee.descriptions,locale)}{fee.kind!=='CONDITIONAL'&&<>: {fee.amount?.toLocaleString(locale)??t('rec.not_stated')} {offer.currency}</>}</p>)}<p>{t('service.applicationStart')}: {offer.applicationStart??'?'} — {offer.applicationEnd??'?'}</p><p>{t('service.serviceStart')}: {offer.serviceStart??'?'} — {offer.serviceEnd??'?'}</p></div>;
 }
 
@@ -51,10 +53,10 @@ function Occurrences({period,topic,refresh,paused,checkDataset,onChanged,onSales
    return <article className="store-product rec-pin" key={row.key} data-occurrence-key={row.key} data-card-detail={item?true:undefined} onClick={event=>{if(item)openCardDetail(event,trigger=>openItem(row.post.id,item.id,trigger));}}>
     {item&&<ReservationAdd allowed={buyable} quote={quote} name={text?.name??item.name} count={item.productId?quantities[item.productId]:undefined} onAdd={()=>{if(quote&&buyable)onAdd(quote);}}/>}
 
-    {row.service&&row.serviceSummary?<><h3>{row.title}</h3><span>{t('service.kind')}</span><ServiceSummary offer={row.serviceSummary}/><Button onClick={()=>openIssue(row.post.id)}>{t('rec.conditions_detail')}</Button></>:item&&text?<>
+    {row.service&&row.serviceSummary?<><h3 className="card-service-title" title={row.title}>{row.title}</h3><span>{t('service.kind')}</span><ServiceSummary offer={row.serviceSummary} compact/><Button onClick={()=>openIssue(row.post.id)}>{t('rec.conditions_detail')}</Button></>:item&&text?<>
      <div className="product-tile"><button type="button" className="product-photo" data-detail-trigger="photo" aria-label={t('store.detail_label',{name:text.name})} onClick={event=>openItem(row.post.id,item.id,event.currentTarget)}>{row.item?.image?.url?<img src={row.item.image.url} alt={text.name} loading={index<2?'eager':'lazy'} onError={event=>{event.currentTarget.style.display='none';}}/>:<span>{t('gallery.pending')}</span>}</button><div className="product-body"><ProductBrand brand={item.brand}/><button type="button" className="product-name" data-detail-trigger="name" onClick={event=>openItem(row.post.id,item.id,event.currentTarget)}><h3 title={text.name}><RecommendationName text={text}/></h3></button>{text.specification&&<p className="catalog-card-spec" title={text.specification}>{text.specification}</p>}</div></div>
      <p>{t('rec.code')}: {item.itemNumber||t('rec.not_stated')}</p><ProductVariant model={item.model} packaging={item.packaging}/><OfferInfo facts={{...item,offerNotes:text.offerNotes}} today={data.page?.japanDay} compact/>
-     <ProductStars value={row.item?.rating}/>{quote&&!pending&&<SellingPrice product={quote} compact/>}
+     <ProductStars value={row.item?.rating} productId={item.productId}/>{quote&&!pending&&<SellingPrice product={quote} compact/>}
     </>:null}
     <footer className="product-card-source"><button type="button" className="catalog-offer-link" onClick={()=>openIssue(row.post.id)}>{row.title}</button><div className="rec-publication">{row.post.publisherName&&<span>{t('detail.published_signature')}: {row.post.publisherName}</span>}{row.post.publishedAt&&<time dateTime={row.post.publishedAt}>{new Date(row.post.publishedAt).toLocaleDateString(locale)}</time>}</div>{row.history&&<small>{t('rec.past_issue')}</small>}</footer>
    </article>;

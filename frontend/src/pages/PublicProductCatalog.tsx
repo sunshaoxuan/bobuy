@@ -128,7 +128,7 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
           </div>
           {(name.fallback||spec.fallback)&&sourceNote(name.fallback?name:spec)}
           <small className="rec-pin-code">{t('rec.code')}: {entry.itemNumber||t('rec.not_stated')}</small>
-          <ProductStars value={entry.rating}/>{!pending&&product&&<SellingPrice product={product} compact/>}
+          <ProductStars value={entry.rating} productId={entry.productId}/>{!pending&&product&&<SellingPrice product={product} compact/>}
           {!!entry.referenceOffers.length&&<button type="button" className="catalog-offer-link" onClick={()=>openDetail(entry.productId)}>{t('catalog.reference_count',{count:entry.referenceOffers.length})}</button>}
           {management(entry)}
         </article>;

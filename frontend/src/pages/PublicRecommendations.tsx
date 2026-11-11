@@ -1,4 +1,6 @@
 import SafeArticleText from '../components/SafeArticleText';
+import {ProductReviewStars} from '../components/ProductRating';
+import '../public-catalog.css';
 import RecommendationBrowse from './RecommendationBrowse';
 import {ConsumerDetail,DetailOffer,ProductDetailCode} from '../components/ConsumerDetail';
 import ReservationAdd from '../components/ReservationAdd';
@@ -51,20 +53,11 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
   function openItem(item:RecommendationItem,trigger:HTMLElement){rememberFocus(trigger,`${detail.post.id}:${item.id}`);if(privatePreview)setLocalItem(item.id);else{const next=new URLSearchParams(params);next.set('item',String(item.id));setParams(next);}}
   function closeItem(){if(privatePreview)setLocalItem(undefined);else{const next=new URLSearchParams(params);next.delete('item');setParams(next,{replace:true});}}
 
-  const grid = useRef<HTMLDivElement>(null);
   const article=articleText(detail,locale);
   const body = Array.from(article.body);
   const truncated = body.length > EXCERPT_LENGTH;
   const shown = !expanded && truncated ? body.slice(0, EXCERPT_LENGTH).join('').replace(/\s+/g, ' ').trimEnd() + '…' : article.body;
   const Heading = single ? 'h1' : 'h2';
-  useEffect(() => {
-    if (!grid.current || typeof ResizeObserver === 'undefined') return;
-    const observer = new ResizeObserver(entries => entries.forEach(entry => {
-      (entry.target as HTMLElement).style.gridRowEnd = 'span ' + Math.ceil((entry.target.getBoundingClientRect().height + 12) / 13);
-    }));
-    Array.from(grid.current.children).forEach(card => observer.observe(card));
-    return () => observer.disconnect();
-  }, [detail]);
   return <article ref={focusRoot} className="rec-issue" id={'recommendation-' + detail.post.id} aria-labelledby={'rec-title-' + detail.post.id}>
     <header className="rec-issue-heading">
       {!single && <span className="rec-issue-number">{String(number).padStart(2, '0')}</span>}
@@ -77,7 +70,7 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
     <div className="rec-public-body" id={'rec-body-' + detail.post.id}>{shown.split(/\n\s*\n/).filter(Boolean).map((paragraph, index) => <p key={index} style={{overflowWrap:'anywhere'}}>{!expanded&&truncated?paragraph:<SafeArticleText text={paragraph}/>}</p>)}</div>
     {truncated && <Button type="text" className="rec-expand" aria-expanded={expanded} aria-controls={'rec-body-' + detail.post.id} icon={expanded ? <UpOutlined /> : <DownOutlined />} onClick={() => setExpanded(value => !value)}>{t(expanded ? 'rec.collapse' : 'rec.read_more')}</Button>}
     {!detail.serviceOffer&&<div className="rec-products-heading"><h3>{t('rec.products')} <span>{detail.items.length}</span></h3>{!single && <Link to={'/recommendations/' + detail.post.id+search}>{t('rec.view')} <ArrowRightOutlined /></Link>}</div>}
-    {!detail.serviceOffer&&<div className="product-masonry rec-public-products" ref={grid}>{detail.items.map((item, index) => {
+    {!detail.serviceOffer&&<div className="catalog-master-grid rec-public-products">{detail.items.map((item, index) => {
       const text=recommendationText(item,locale);
       const product = item.productId ? catalog.get(item.productId) : undefined;
       const buyable = !!product && canBuy(product);
@@ -85,7 +78,7 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
         onPointerDown={event=>{if(event.pointerType!=='mouse')setPressedItem(item.id);}}
         onPointerUp={()=>setPressedItem(undefined)} onPointerCancel={()=>setPressedItem(undefined)}
         onPointerLeave={()=>setPressedItem(undefined)} onLostPointerCapture={()=>setPressedItem(undefined)}>
-        <div className={'product-tile product-shape-' + index % 4}>
+        <div className="product-tile">
           <button type="button" className="product-photo" data-detail-trigger="photo" aria-label={t('store.detail_label', {name:text.name})} onClick={event => openItem(item,event.currentTarget)}>{item.gallery?.[0]?.url?<img src={item.gallery[0].url} alt={text.name} loading={index < 2 && number === 1 ? 'eager' : 'lazy'} />:<span className="rec-no-product-image">{t('gallery.pending')}</span>}</button>
           <ReservationAdd allowed={buyable} quote={product} name={text.name} count={item.productId?quantities[item.productId]:undefined} onAdd={()=>{if(product&&buyable)onAdd(product);}}/>
           <div className="product-body"><ProductBrand brand={item.brand}/><button type="button" className="product-name" data-detail-trigger="name" onClick={event=>openItem(item,event.currentTarget)}><h3 title={text.name}><RecommendationName text={text}/></h3></button>{text.specification&&<p className="rec-compact-spec">{text.specification}</p>}{text.missing&&<small>{t('article.field_source',{fields:text.sourceFields.map(key=>t(key==='description'?'master.descriptions':key==='specification'?'master.specifications':'rec.fact.'+key)).join(' · ')})}</small>}</div>
@@ -94,7 +87,7 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
         {!!item.categories?.length&&<div className="rec-item-categories">{item.categories.map(category=><span key={category.id}>{localizedContent(category.name,locale)}</span>)}</div>}
         {item.showSupplier&&item.supplierName&&<small className="rec-supplier">{t('class.supplier')}: {localizedContent(item.supplierName,locale)}</small>}
         <OfferInfo facts={{...item,offerNotes:text.offerNotes}} compact/>
-        {product&&<SellingPrice product={product}/>}
+        <ProductReviewStars productId={item.productId}/>{product&&<SellingPrice product={product} compact/>}
       </article>;
     })}</div>}
     <RecommendationProductDetail item={opened} onClose={closeItem} product={opened?.productId?catalog.get(opened.productId):undefined} onAdd={onAdd} canBuy={canBuy}/>
@@ -130,7 +123,7 @@ export function CategoryFilters({posts,category,onChoose}:{posts:RecommendationD
 }
 
 // The editor uses the same cards and filters as the public page, with local state
-// and no publishing, save, purchase or public draft endpoint.
+// and no article publishing/saving, purchase or public draft endpoint.
 export function RecommendationPreview({detail}:{detail:RecommendationDetail}) {
   const {t,locale}=useI18n();const [category,setCategory]=useState(''),[device,setDevice]=useState('full'),[query,setQuery]=useState('');
   const [products,setProducts]=useState<StoreProduct[]>([]);useEffect(()=>{let active=true;void storefrontApi.products().then(values=>{if(active)setProducts(values);}).catch(()=>{});return()=>{active=false;};},[detail.post.id]);

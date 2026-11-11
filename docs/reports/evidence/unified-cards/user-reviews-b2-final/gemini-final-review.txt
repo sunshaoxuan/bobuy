@@ -1,0 +1,18 @@
+### Concrete Visible Defects & Uncertainties
+
+* **Phone Long-Price Catalog (Image 2 — Top Search Region):** Ghosted watermark text (`Long product name...`) peeks out from directly beneath the rounded search bar container.
+* **Phone Editor (Image 4 — Top App Bar):** A diffuse dark blur artifact hovers over the header menu/title area (`≡ 宝宝败`).
+* **Phone Record Cards (Image 5 — Left Card Price Slot):** Left placeholder reads `尚未确认售价` without a currency baseline anchor, whereas the adjacent card displays `¥ 980`. Confirm whether unpriced records intentionally omit the currency symbol.
+* **Histogram Snippet (Image 7 — Bottom Edge):** The bottom container boundary clips into trailing text strokes below the action button.
+
+---
+
+### Criteria Evaluation
+
+* **Row-Local Structure:** **PASS.** In both desktop and phone viewports, cards match heights strictly within their respective rows. Subsequent rows (e.g., spinach/strawberry in Image 2, chicken cards in Image 5) compute their heights independently based on their own content without inheriting previous row dimensions.
+* **One-Line Amount Integrity:** **PASS.** Extreme values (`¥ 999,999,999,999` and `¥ 999,999,999,999.99`) dynamically downscale font size, maintaining strict single-line baselines alongside the currency glyph without wrapping or clipping commas/decimals across catalog, preview, and editor screens.
+* **Ordinary-Price Hierarchy:** **PASS.** Standard values (`¥ 298`, `¥ 980`, `¥ 1,498`, `¥ 1,234`) comfortably maintain prominent 24–28px visual weight. Redundant actual-price labels have been excised, while secondary reference metadata (`参考售价 (非实时)`, `/ pack`) remains clearly subordinated.
+* **Grayscale Placeholders & Ratings:** **PASS.** Unrated products consistently display five muted gray stars alongside `暂无评分`. In narrow preview viewports (Image 3), rating clusters adhere to the specified two-line stack (stars top, score/status below).
+* **Action Grouping:** **PASS.** Review, edit, revision history, and publication toggles in the editor/record views are cleanly compartmentalized into distinct card footer tiers with legible secondary styling.
+* **Corner Completeness & Artwork:** **PASS.** Consistent border-radius applies across catalog containers, modal sheets, and neutral image placeholders (`商品图片待核`).
+* **Review Readability:** **PASS.** The review modal cleanly separates the entry form, score input, character counter (`36 / 2000`), and historical review entries with legible timestamps and body copy.

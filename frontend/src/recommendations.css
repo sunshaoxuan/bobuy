@@ -142,6 +142,7 @@ html[lang=en-US] .recommendations .ant-btn>span:not(.ant-btn-icon):not(.anticon)
 .rec-offer-info p { margin:4px 0; white-space:pre-wrap; }
 .rec-offer-info .ant-tag { white-space:normal; }
 .rec-product { align-items:start; }
+.rec-product-grid{grid-auto-rows:auto;align-items:stretch}.rec-product{height:100%;min-width:0;flex-direction:column}.rec-product>img{width:100%;height:auto;aspect-ratio:1;object-fit:contain}.rec-product>div{width:100%}.rec-product>div>h3{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-height:1.55;height:3.1em;overflow:hidden;overflow-wrap:anywhere}.rec-product .card-reference-value{display:block;color:#171717;font-size:clamp(24px,2vw,28px);font-weight:750;line-height:1.35;overflow-wrap:anywhere}.rec-product .card-price-label,.rec-product .card-price-unit{display:block;color:#626262;font-size:12px;line-height:1.5}.rec-product button{min-height:44px}
 .rec-product>div { min-width:0; }
 .rec-upload-fields { min-width:0; }
 .rec-upload-fields>.rec-facts-form { grid-column:1/-1; }
@@ -193,3 +194,5 @@ html[lang=en-US] .recommendations .ant-btn>span:not(.ant-btn-icon):not(.anticon)
 .rec-intake-research{margin:20px 0;padding:18px;border-radius:18px;background:#f7f8f3;}.rec-intake-research>button{margin:12px 0;}
 .rec-intake-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-top:16px;}.rec-intake-gallery>div{padding:10px;border-radius:14px;background:#fff;}.rec-intake-gallery img{width:100%;height:160px;object-fit:contain;display:block;margin-bottom:10px;}.rec-intake-photo{display:block;max-width:100%;width:160px;height:160px;object-fit:contain;margin:12px 0;}
 .rec-product-intake-modal .ant-modal-body{max-height:70dvh;overflow:auto;padding-right:6px;}.rec-product-intake-modal .ant-modal-footer .ant-btn{max-width:100%;white-space:normal;min-height:40px;height:auto;}.rec-product-intake-modal label{line-height:1.6;}.rec-product-intake-modal .ant-checkbox-wrapper{align-items:flex-start;margin:12px 0;}
+.rec-product-grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:24px 16px}.rec-product .ant-btn{max-width:100%;white-space:normal;padding:4px 6px;height:auto}.rec-product .rec-product-actions{display:flex;flex-wrap:wrap;gap:8px;flex:none;margin-top:auto}.rec-product:has(.rec-facts-form){grid-column:1/-1}@media(max-width:767px){.rec-product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 12px}}
+.rec-product-actions .ant-btn{min-width:44px;min-height:44px}

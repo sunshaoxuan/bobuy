@@ -1,0 +1,13 @@
+{
+  "frozen_inputs": 509,
+  "changed": [],
+  "surefire": {
+    "tests": 644,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 22
+  },
+  "configured_jacoco_gate": "PASS",
+  "jar_sha256": "17cd9bd947f0c19fbfe068aeb8838b0e379d198747ba7470d54ce536b3164cac",
+  "command": "mvn -B -ntp -o -f backend/pom.xml -DjacocoDataFile=C:/workspace/codex-work/user-reviews-20261111/coverage/formal.exec test jacoco:check@check"
+}

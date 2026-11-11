@@ -1,0 +1,51 @@
+Here is the visual and UX review of the revised mobile modal across the top and scrolled-bottom states:
+
+---
+
+### 1. Header & Fixed Controls
+* **Header Stability:** The header (`商品评价` + `✕` close icon) remains cleanly anchored at the top across both states.
+* **Separation & Overlap:** When scrolled (Image 2), the list items scroll cleanly under the header container with zero bleed-through or overlapping text against the title/close button.
+* **Close Button:** Positioned with ample hit clearance in the top-right corner, aligning with standard mobile modal conventions.
+
+---
+
+### 2. Scroll Container & Viewport Clipping
+* **Boundary Behavior:** In the top state (Image 1), the cut-off text line at the very bottom is standard, healthy list clipping at the scroll container edge (not a clipped layout or overflow bug).
+* **Scroll Lock & Containment:** The background backdrop remains properly dimmed and scroll-locked with no horizontal jitter or dual-scroll leak. All scrolling is strictly confined to the review body.
+* **Bottom State Containment:** In the scrolled state (Image 2), the entire end-of-list section, including the pagination button (`加载更多评价`), scrolls into complete view with clear margin above the modal’s bottom curve.
+
+---
+
+### 3. Corners, Geometry & Spacing
+* **Modal Card Corners:** Consistent, smooth corner radii (`~16px`) across all four corners, with equal side gutters anchoring the modal horizontally over the backdrop.
+* **Internal Margins:** Left and right content margins remain balanced throughout (approx. 16px–20px), giving comfortable breathing space to review rows, dates, and form controls.
+* **Dividers:** Divider lines between review entries are lightweight, uniform, and end before the scroll boundary without causing visual clutter.
+
+---
+
+### 4. Readability & Typography
+* **Visual Hierarchy:** Distinct distinction between bold primary scores (`2.5 / 5`), muted dates (`2026/11/11`), and review body text.
+* **Character Counter:** `0 / 2000` is well-placed immediately below the textarea without colliding with the submission button.
+* **Date Alignment:** Right-aligned dates maintain sufficient clearance from the right-hand scrollbar gutter and do not wrap or truncate.
+
+---
+
+### 5. Action Alignment & Touch Ergonomics
+* **Pagination Button (`加载更多评价`):**
+  * Full-width inside modal content padding.
+  * Meets standard accessible tap target height (~44px).
+  * Centered label with comfortable vertical padding and clean border delineation.
+* **Submit Button (`保存我的评价`):**
+  * Disabled state is clear (muted text and subtle border), preventing accidental duplicate taps before input.
+* **Rating Input:** The rating field has a clear outline, though if it is a selector/dropdown, adding placeholder text (e.g. *“请选择评分”*) would further improve affordance when empty.
+
+---
+
+### 6. Scrollbar Notes
+* The visible track and stepper arrows are artifacts of desktop/DevTools mobile emulation; in real iOS/Android WebViews, this will automatically render as a native floating auto-hiding scroll indicator. Crucially, the current track does not overlap any text or date labels.
+
+---
+
+### Verdict
+**PASS (Approved)**
+The scrolling containment, corner radii, sticky header separation, and full-width 44px pagination action are correctly implemented and meet mobile production standards. No layout defects or control overlaps detected.

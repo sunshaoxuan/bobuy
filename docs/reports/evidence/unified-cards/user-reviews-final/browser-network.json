@@ -1,0 +1,740 @@
+[
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/stock-master-NdbwtJ2b.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/stock-master-C7MG0oE2.css",
+    "status": 304,
+    "resource": "Stylesheet"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/index-DZQr4a7U.css",
+    "status": 304,
+    "resource": "Stylesheet"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/vendor-C8_NgJl9.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/RecommendationImageViewer-DcDgCurN.css",
+    "status": 304,
+    "resource": "Stylesheet"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/PublicProductCatalog-CLy50sOB.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/RecommendationImageViewer-BwYG729G.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/auth/me",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/trips?includeCurrent=true",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/trips",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/recommendation-nodes",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-browse?page=0&merchantId=1000&query=&category=&locale=zh-CN&marked=true",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-browse?page=0&merchantId=1000&query=&category=&locale=zh-CN&marked=false",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/chicken.png",
+    "status": 200,
+    "resource": "Image"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/croissants.png",
+    "status": 200,
+    "resource": "Image"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/milk.png",
+    "status": 200,
+    "resource": "Image"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/paper_towels.png",
+    "status": 200,
+    "resource": "Image"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/spinach.png",
+    "status": 200,
+    "resource": "Image"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/strawberries.png",
+    "status": 200,
+    "resource": "Image"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/matcha-muffins.jpg",
+    "status": 200,
+    "resource": "Image"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-sales?productIds=demo-chicken%2Cdemo-croissants%2Cdemo-milk%2Cdemo-paper_towels%2Cdemo-spinach%2Cdemo-strawberries%2Cprd-1638",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/demo-chicken",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/product-reviews/demo-chicken/mine",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/demo-chicken/comments?page=0",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/demo-chicken",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/product-reviews/demo-chicken/mine",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/demo-chicken/comments?page=0",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/account",
+    "status": 200,
+    "resource": "Document"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/index-DZQr4a7U.css",
+    "status": 304,
+    "resource": "Stylesheet"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/stock-master-C7MG0oE2.css",
+    "status": 304,
+    "resource": "Stylesheet"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/index-baeKJc5U.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/procurement-dashboard-Be75EFEw.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/chat-flow-Dh1RXKCZ.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/stock-master-NdbwtJ2b.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/vendor-C8_NgJl9.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/auth/me",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/auth/profile",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/auth/me",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/auth/logout",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/admin",
+    "status": 200,
+    "resource": "Document"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/index-baeKJc5U.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/stock-master-C7MG0oE2.css",
+    "status": 304,
+    "resource": "Stylesheet"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/index-DZQr4a7U.css",
+    "status": 304,
+    "resource": "Stylesheet"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/procurement-dashboard-Be75EFEw.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/chat-flow-Dh1RXKCZ.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/stock-master-NdbwtJ2b.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/vendor-C8_NgJl9.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/LoginPage-lJnzMbrV.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/auth/login",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/auth/me",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/Users-BSn3I3ML.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/admin/users",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/admin/products",
+    "status": 200,
+    "resource": "Document"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/index-baeKJc5U.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/stock-master-C7MG0oE2.css",
+    "status": 304,
+    "resource": "Stylesheet"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/index-DZQr4a7U.css",
+    "status": 304,
+    "resource": "Stylesheet"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/procurement-dashboard-Be75EFEw.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/stock-master-NdbwtJ2b.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/chat-flow-Dh1RXKCZ.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/vendor-C8_NgJl9.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/ProductArchive-wsW_CRrz.css",
+    "status": 200,
+    "resource": "Stylesheet"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/ProductArchive-CQURcq33.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/auth/me",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/mobile/suppliers",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/ai/costco-onboarding/status",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/mobile/categories",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/mobile/products",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/ai/costco-onboarding",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/demo-chicken",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/demo-paper_towels",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/demo-spinach",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/chicken.png",
+    "status": 200,
+    "resource": "Image"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/demo-croissants",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/demo-milk",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/paper_towels.png",
+    "status": 200,
+    "resource": "Image"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/prd-1638",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/demo-strawberries",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/spinach.png",
+    "status": 200,
+    "resource": "Image"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/croissants.png",
+    "status": 200,
+    "resource": "Image"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/ai/costco-onboarding/status",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/ai/costco-onboarding",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/ai/costco-onboarding/status",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/ai/costco-onboarding",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/ai/costco-onboarding",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/ai/costco-onboarding/status",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/ai/costco-onboarding/status",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/ai/costco-onboarding",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/ai/costco-onboarding",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/ai/costco-onboarding/status",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/ai/costco-onboarding/status",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/ai/costco-onboarding",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/ai/costco-onboarding/status",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/ai/costco-onboarding",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/ai/costco-onboarding/status",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/ai/costco-onboarding",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/admin/recommendations?post=-31111",
+    "status": 200,
+    "resource": "Document"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/index-baeKJc5U.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/procurement-dashboard-Be75EFEw.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/chat-flow-Dh1RXKCZ.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/stock-master-C7MG0oE2.css",
+    "status": 304,
+    "resource": "Stylesheet"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/stock-master-NdbwtJ2b.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/index-DZQr4a7U.css",
+    "status": 304,
+    "resource": "Stylesheet"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/vendor-C8_NgJl9.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/Recommendations-DY0np8pq.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/PublicRecommendations-Dm7WSVCK.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/RecommendationImageViewer-BwYG729G.js",
+    "status": 200,
+    "resource": "Script"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/RecommendationImageViewer-DcDgCurN.css",
+    "status": 200,
+    "resource": "Stylesheet"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/PublicRecommendations-Br9AyG72.css",
+    "status": 200,
+    "resource": "Stylesheet"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/Recommendations-BR6eX9U6.css",
+    "status": 200,
+    "resource": "Stylesheet"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/auth/me",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/merchant/recommendations/-31111",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/mobile/products",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/chicken.png",
+    "status": 200,
+    "resource": "Image"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/milk.png",
+    "status": 200,
+    "resource": "Image"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/spinach.png",
+    "status": 200,
+    "resource": "Image"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/merchant/recommendation-taxonomy",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/mobile/products",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/demo-chicken",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/demo-milk",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/mobile/products",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/demo-milk",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/demo-chicken",
+    "status": 200,
+    "resource": "Fetch"
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/products",
+    "status": 200,
+    "resource": "Fetch"
+  }
+]

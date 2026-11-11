@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "node": "20.19.0",
+  "commands": ["node_modules/typescript/bin/tsc", "scripts/check-i18n.mjs", "node_modules/vite/bin/vite.js build", "scripts/prerender-home.mjs"],
+  "i18nKeys": 1602,
+  "viteVersion": "5.4.21",
+  "transformedModules": 3132,
+  "buildSeconds": 21.48,
+  "prerender": "Generated home-only crawlable HTML; SPA detail/admin template retains no shared home canonical.",
+  "warnings": ["Existing vendor chunk exceeds configured 1400 kB warning threshold"],
+  "sourceInputs": "frontend-c1-inputs.json",
+  "assetBinding": "user-reviews-b2-final/loaded-asset-binding.json"
+}

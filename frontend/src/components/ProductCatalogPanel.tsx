@@ -1,4 +1,4 @@
-import ProductRatingEditor from './ProductRating';
+import ProductReviewEditor from './ProductRating';
 import {useEffect,useRef,useState,useMemo} from 'react';
 import {Alert,Button,Checkbox,Drawer,Input,Select,Table,Tabs,Grid,Modal,Segmented,type InputRef} from 'antd';
 import {productCatalogApi,recommendationTaxonomyApi,type CatalogInput,type CatalogProposal,type RecommendationChoice} from '../api';
@@ -67,7 +67,7 @@ export default function ProductCatalogPanel({entries,id,onChoose,onSaved}:{entri
       <label>{t('master.categories')}<CatalogCategorySelect key={draft.productId} disabled={busy} choices={options.categories} value={draft.categoryIds} onChange={categoryIds=>patch({categoryIds})}/></label>
       <label>{t('master.supplier')}<Select disabled={busy} aria-label={t('master.supplier')} allowClear value={draft.supplierId??undefined} onChange={supplierId=>patch({supplierId:supplierId??null})} options={options.suppliers.map(c=>({value:c.id,label:localizedContent(c.name,locale)}))}/></label>
      </div><small className="catalog-internal-id">{draft.productId}</small><small>{t('master.version')}: {draft.version}</small><details><summary>{t('master.references')} ({sourceItems.length})</summary><p>{sourceItems.join(', ')||t('rec.not_stated')}</p></details></div>},
-     {key:'rating',label:t('rating.title'),children:<ProductRatingEditor key={draft.productId} id={draft.productId} onDirtyChange={setRatingDirty} onBusyChange={setRatingBusy}/>},
+     {key:'rating',label:t('review.title'),children:<ProductReviewEditor key={draft.productId} id={draft.productId} onDirtyChange={setRatingDirty} onBusyChange={setRatingBusy}/>},
      {key:'copy',label:t('products.language_copy'),children:<div className="catalog-tab-content">{error&&editorTab==='copy'&&<Alert type="error" message={warning(error)}/>}<Segmented className="catalog-language-switch" aria-label={t('products.language_copy')} value={language} onChange={value=>setLanguage(String(value))} options={languages.map(l=>({value:l.key,label:l.label}))}/><div className="product-catalog-language">
       <label>{t('master.names')}<Input ref={nameInput} maxLength={400} aria-label={t('master.names')+' '+language} aria-invalid={error==='master.japanese_required'&&language==='ja-JP'} value={draft.name[language]??''} onChange={e=>text('name',language,e.target.value)}/></label>
       <label>{t('master.specifications')}<Input.TextArea rows={2} maxLength={1000} value={draft.specification[language]??''} onChange={e=>text('specification',language,e.target.value)}/></label>

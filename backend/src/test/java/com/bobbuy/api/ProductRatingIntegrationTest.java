@@ -1,5 +1,4 @@
 package com.bobbuy.api;
-
 import com.bobbuy.model.*;
 import com.bobbuy.repository.*;
 import com.bobbuy.security.JwtTokenService;
@@ -15,37 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.assertj.core.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-/** Each method owns only synthetic transactional rows; no global seed/reset or business records. */
 @SpringBootTest(properties={"bobbuy.security.header-auth.enabled=false","bobbuy.seed.enabled=false","bobbuy.seed.force-reset-on-invoke=false"}) @AutoConfigureMockMvc @Transactional
 class ProductRatingIntegrationTest {
- @Autowired MockMvc mvc;@Autowired ObjectMapper json;@Autowired ProductRepository products;
- @Autowired UserRepository users;@Autowired ProductRatingRepository ratings;@Autowired JwtTokenService tokens;
- String id,owner,foreign;final long ownerId=98732101L,foreignId=98732102L;
- @BeforeEach void setup(){
-  assertThat(users.findById(ownerId)).isEmpty();assertThat(users.findById(foreignId)).isEmpty();
-  var user=new User(ownerId,"Synthetic rating owner",Role.AGENT,0);user.setUsername("rating-owner-synthetic");users.saveAndFlush(user);owner=tokens.createAccessToken(user);
-  var other=new User(foreignId,"Synthetic rating foreign",Role.AGENT,0);other.setUsername("rating-foreign-synthetic");users.saveAndFlush(other);foreign=tokens.createAccessToken(other);
-  var product=new Product();id="rating-synthetic-"+UUID.randomUUID();product.setId(id);product.setMerchantId(ownerId);product.setName(Map.of("ja-JP","評価テスト"));product.setBasePrice(123);product.setVisibilityStatus(ProductVisibility.PUBLIC);products.saveAndFlush(product);
- }
- JsonNode getRating() throws Exception{return json.readTree(mvc.perform(get("/api/merchant/product-ratings/"+id).header("Authorization","Bearer "+owner)).andExpect(status().isOk()).andReturn().getResponse().getContentAsString()).path("data");}
- String input(String stars,boolean visible,long version){return "{\"stars\":"+stars+",\"publicVisible\":"+visible+",\"version\":"+version+",\"reviewed\":true}";}
- void save(String input) throws Exception{mvc.perform(put("/api/merchant/product-ratings/"+id).header("Authorization","Bearer "+owner).contentType(MediaType.APPLICATION_JSON).content(input)).andExpect(status().isOk());}
- @Test void nullDefaultExplicitSaveReopenHideAndPublicProjection() throws Exception{
-  assertThat(getRating().path("stars").isNull()).isTrue();assertThat(getRating().path("publicVisible").asBoolean()).isFalse();assertThat(ratings.findById(id)).isEmpty();
-  var before=products.findById(id).orElseThrow().getRecordVersion();save(input("4.5",true,0));
-  assertThat(getRating().path("stars").asDouble()).isEqualTo(4.5);assertThat(getRating().path("version").asLong()).isEqualTo(1);
-  var visible=json.readTree(mvc.perform(get("/api/storefront/product-browse/"+id)).andExpect(status().isOk()).andReturn().getResponse().getContentAsString()).at("/data/item/rating");assertThat(visible.asDouble()).isEqualTo(4.5);
-  save(input("4.5",false,1));assertThat(json.readTree(mvc.perform(get("/api/storefront/product-browse/"+id)).andExpect(status().isOk()).andReturn().getResponse().getContentAsString()).at("/data/item/rating").isNull()).isTrue();
-  save(input("null",false,2));assertThat(getRating().path("stars").isNull()).isTrue();assertThat(products.findById(id).orElseThrow().getRecordVersion()).isEqualTo(before);assertThat(products.findById(id).orElseThrow().getBasePrice()).isEqualTo(123);
- }
- @Test void ownershipVersionAndValidationFailWithoutPartialWrite() throws Exception{
-  var url="/api/merchant/product-ratings/"+id;
-  mvc.perform(put(url).contentType(MediaType.APPLICATION_JSON).content(input("5",true,0))).andExpect(status().isUnauthorized());
-  mvc.perform(put(url).header("Authorization","Bearer "+foreign).contentType(MediaType.APPLICATION_JSON).content(input("5",true,0))).andExpect(status().isNotFound());
-  for(var invalid:List.of(input("5.5",true,0),input("4.25",false,0),input("null",true,0)))mvc.perform(put(url).header("Authorization","Bearer "+owner).contentType(MediaType.APPLICATION_JSON).content(invalid)).andExpect(status().isBadRequest());
-  assertThat(ratings.findById(id)).isEmpty();save(input("3",false,0));
-  mvc.perform(put(url).header("Authorization","Bearer "+owner).contentType(MediaType.APPLICATION_JSON).content(input("5",true,0))).andExpect(status().isBadRequest());
-  assertThat(getRating().path("stars").asDouble()).isEqualTo(3);assertThat(getRating().path("publicVisible").asBoolean()).isFalse();
- }
+ @Autowired MockMvc mvc;@Autowired ObjectMapper json;@Autowired ProductRepository products;@Autowired UserRepository users;@Autowired ProductReviewRepository reviews;@Autowired JwtTokenService tokens;
+ String id,agent,customer;
+ @BeforeEach void setup(){var a=new User(98732101L,"Synthetic agent",Role.AGENT,0);a.setUsername("review-agent");users.saveAndFlush(a);agent=tokens.createAccessToken(a);var c=new User(98732102L,"Synthetic customer",Role.CUSTOMER,0);c.setUsername("review-customer");users.saveAndFlush(c);customer=tokens.createAccessToken(c);var p=new Product();id="user-review-"+UUID.randomUUID();p.setId(id);p.setMerchantId(a.getId());p.setName(Map.of("ja-JP","Synthetic review product"));p.setVisibilityStatus(ProductVisibility.PUBLIC);products.saveAndFlush(p);}
+ String input(String score,String text,long version)throws Exception{return json.writeValueAsString(Map.of("stars",new java.math.BigDecimal(score),"comment",text,"version",version));}
+ void save(String token,String score,String text,long version)throws Exception{mvc.perform(put("/api/product-reviews/"+id+"/mine").header("Authorization","Bearer "+token).contentType(MediaType.APPLICATION_JSON).content(input(score,text,version))).andExpect(status().isOk());}
+ @Test void customersAndAgentsContributeAndEditingKeepsCount()throws Exception{save(agent,"5","Agent review",0);save(customer,"2.5","<script>plain text</script>",0);var summary=json.readTree(mvc.perform(get("/api/storefront/product-reviews/"+id)).andExpect(status().isOk()).andReturn().getResponse().getContentAsString()).path("data");assertThat(summary.path("average").asDouble()).isEqualTo(3.75);assertThat(summary.path("count").asInt()).isEqualTo(2);save(customer,"4.5","Edited",1);var next=json.readTree(mvc.perform(get("/api/storefront/product-reviews/"+id)).andReturn().getResponse().getContentAsString()).path("data");assertThat(next.path("count").asInt()).isEqualTo(2);assertThat(next.path("average").asDouble()).isEqualTo(4.75);var comments=mvc.perform(get("/api/storefront/product-reviews/"+id+"/comments")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();assertThat(comments).doesNotContain("userId","username","password","email");}
+ @Test void anonymousInvalidStaleAndPrivateRequestsCannotMutate()throws Exception{String url="/api/product-reviews/"+id+"/mine";mvc.perform(put(url).contentType(MediaType.APPLICATION_JSON).content(input("5","",0))).andExpect(status().isUnauthorized());for(String value:List.of("0","0.5","1.1","5.5"))mvc.perform(put(url).header("Authorization","Bearer "+customer).contentType(MediaType.APPLICATION_JSON).content(input(value,"",0))).andExpect(status().isBadRequest());save(customer,"4","",0);mvc.perform(put(url).header("Authorization","Bearer "+customer).contentType(MediaType.APPLICATION_JSON).content(input("5","stale",0))).andExpect(status().isConflict());assertThat(reviews.findByProductIdAndUserId(id,98732102L).orElseThrow().stars).isEqualByComparingTo("4");var p=products.findById(id).orElseThrow();p.setVisibilityStatus(ProductVisibility.DRAFTER_ONLY);products.saveAndFlush(p);mvc.perform(get("/api/storefront/product-reviews/"+id)).andExpect(status().isNotFound());}
 }

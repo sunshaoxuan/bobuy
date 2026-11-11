@@ -1,0 +1,73 @@
+{
+  "result": "PASS",
+  "controls": [
+    {
+      "viewport": {
+        "h": 844,
+        "w": 390
+      },
+      "usable_frame": {
+        "bottom": 780.71875,
+        "height": 44,
+        "left": 35,
+        "right": 340,
+        "top": 736.71875,
+        "width": 305,
+        "x": 35,
+        "y": 736.71875
+      },
+      "ink": [
+        146,
+        752,
+        229,
+        765
+      ],
+      "margins": [
+        111,
+        15.28125,
+        111,
+        15.71875
+      ],
+      "center_error": [
+        0.0,
+        0.21875
+      ],
+      "tolerance": 1.3,
+      "result": "PASS"
+    },
+    {
+      "viewport": {
+        "h": 800,
+        "w": 360
+      },
+      "usable_frame": {
+        "bottom": 736.71875,
+        "height": 44,
+        "left": 35,
+        "right": 310,
+        "top": 692.71875,
+        "width": 275,
+        "x": 35,
+        "y": 692.71875
+      },
+      "ink": [
+        131,
+        708,
+        214,
+        721
+      ],
+      "margins": [
+        96,
+        15.28125,
+        96,
+        15.71875
+      ],
+      "center_error": [
+        0.0,
+        0.21875
+      ],
+      "tolerance": 1.3,
+      "result": "PASS"
+    }
+  ]
+}

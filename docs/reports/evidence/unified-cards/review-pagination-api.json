@@ -1,0 +1,49 @@
+{
+  "result": "PASS",
+  "count": 21,
+  "firstPage": 20,
+  "secondPage": 1,
+  "summary": {
+    "average": 2.857143,
+    "count": 21,
+    "sum": 60.0,
+    "distribution": [
+      {
+        "stars": 1,
+        "count": 2
+      },
+      {
+        "stars": 1.5,
+        "count": 3
+      },
+      {
+        "stars": 2,
+        "count": 3
+      },
+      {
+        "stars": 2.5,
+        "count": 3
+      },
+      {
+        "stars": 3,
+        "count": 2
+      },
+      {
+        "stars": 3.5,
+        "count": 2
+      },
+      {
+        "stars": 4,
+        "count": 2
+      },
+      {
+        "stars": 4.5,
+        "count": 2
+      },
+      {
+        "stars": 5,
+        "count": 2
+      }
+    ]
+  }
+}

@@ -5,7 +5,9 @@ import {storeAuthSession} from '../authStorage';
 import Recommendations from './Recommendations';
 import en from '../locales/en-US';
 const mocks=vi.hoisted(()=>({get:vi.fn(),list:vi.fn(),getIssueDate:vi.fn(),saveIssueDate:vi.fn(),publishItem:vi.fn(),observe:vi.fn()}));
-vi.mock('../api',()=>({recommendationApi:mocks,storefrontApi:{products:vi.fn().mockResolvedValue([])}}));
+vi.mock('../api',()=>({api:{products:vi.fn().mockResolvedValue([])},recommendationApi:mocks,storefrontApi:{products:vi.fn().mockResolvedValue([])}}));
+// This suite checks date/parent draft state; rating rendering and I/O have their own tests.
+vi.mock('../components/ProductRating',()=>({default:()=>null,ProductStars:()=>null,ProductReviewStars:()=>null}));
 vi.mock('../components/ArticleLanguages',()=>({default:(props:any)=>{mocks.observe(props.detail);return <><input aria-label="Article title" value={props.title} disabled={props.disabled} onChange={e=>props.onTitle(e.target.value)}/><textarea aria-label="Article body" value={props.body} disabled={props.disabled} onChange={e=>props.onBody(e.target.value)}/></>;}}));
 vi.mock('../components/RecommendationClassification',()=>({default:()=>null}));vi.mock('../components/RecommendationCatalog',()=>({default:()=>null}));vi.mock('../components/RecommendationFromProduct',()=>({default:()=>null}));vi.mock('../components/RecommendationGallery',()=>({default:()=>null}));vi.mock('../components/RecommendationLocalization',()=>({default:()=>null}));vi.mock('../components/ReferenceQuoteHistory',()=>({default:()=>null}));vi.mock('../components/RecommendationServiceEditor',()=>({default:()=>null}));vi.mock('./PublicRecommendations',()=>({default:()=>null,RecommendationPreview:()=>null}));
 const hash='a'.repeat(64),unknown=(version=3)=>({issueDate:null,sourceRef:null,sourceHash:null,reviewedBy:null,reviewedAt:null,source:'UNKNOWN',version});

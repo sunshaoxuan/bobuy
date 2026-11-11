@@ -17,7 +17,7 @@ class IdentityMigrationRecoveryTest {
    s.execute("create table bb_order_header(id bigint primary key,lines jsonb)");s.execute("insert into bb_order_header values(1,'[]' format json)");
   }
   Path current=Files.createDirectory(temp.resolve("current")),old=Files.createDirectory(temp.resolve("old"));
-  Files.copy(Path.of("src/main/resources/db/migration/V25__reversible_product_identity.sql"),current.resolve("V25__reversible_product_identity.sql"));
+  try(var source=IdentityMigrationRecoveryTest.class.getResourceAsStream("/db/migration/V25__reversible_product_identity.sql")){assertThat(source).isNotNull();Files.copy(source,current.resolve("V25__reversible_product_identity.sql"));}
   var next=Flyway.configure().dataSource(url,"sa","").locations("filesystem:"+current).baselineVersion("24").baselineOnMigrate(true).load();
   assertThat(next.migrate().migrationsExecuted).isEqualTo(1);
   try(var c=DriverManager.getConnection(url,"sa","");var s=c.createStatement()){

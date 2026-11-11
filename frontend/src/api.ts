@@ -1082,10 +1082,14 @@ export const productPricingApi={
  cancel:(id:string,adjustment:PriceAdjustment)=>postJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/adjustments/'+adjustment.id+'/cancel',{version:adjustment.version,confirmed:true}),
  regular:(id:string,value:Omit<ProductSale,'reviewedBy'|'reviewedAt'>)=>putJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/regular',{...value,confirmed:true,replaceExisting:true})
 };
-export type ProductRatingValue={stars:number|null;publicVisible:boolean;version:number};
-export const productRatingApi={
- get:(id:string)=>storeGet<ProductRatingValue>('/api/merchant/product-ratings/'+encodeURIComponent(id)),
- save:(id:string,input:ProductRatingValue)=>putJson<ProductRatingValue,object>('/api/merchant/product-ratings/'+encodeURIComponent(id),{...input,reviewed:true})
+export type ProductReviewValue={stars:number|null;comment:string;version:number;updatedAt:string|null};
+export type ProductReviewSummary={average:number|null;count:number;sum:number;distribution:{stars:number;count:number}[]};
+export type ProductReviewEntry={id:number;stars:number;comment:string;updatedAt:string};
+export const productReviewApi={
+ get:(id:string)=>storeGet<ProductReviewValue>('/api/product-reviews/'+encodeURIComponent(id)+'/mine'),
+ save:(id:string,input:Pick<ProductReviewValue,'stars'|'comment'|'version'>)=>putJson<ProductReviewValue,object>('/api/product-reviews/'+encodeURIComponent(id)+'/mine',input),
+ summary:(id:string)=>storeGet<ProductReviewSummary>('/api/storefront/product-reviews/'+encodeURIComponent(id)),
+ comments:(id:string,page=0)=>storeGet<{items:ProductReviewEntry[];hasNext:boolean}>('/api/storefront/product-reviews/'+encodeURIComponent(id)+'/comments?page='+page)
 };
 export const productCatalogApi={
  audit:()=>storeGet<unknown[]>('/api/merchant/product-catalog/audit'),

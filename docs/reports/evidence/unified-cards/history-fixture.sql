@@ -1,0 +1,5 @@
+-- Rendering fixture in isolated bobuy_cards_20261111 only.
+UPDATE bb_recommendation_item SET offer_start='2026-01-01',offer_end='2026-01-02',publication_snapshot=publication_snapshot||jsonb_build_object('offerStart','2026-01-01','offerEnd','2026-01-02') WHERE post_id=931111 AND item_number='TEST-3';
+INSERT INTO bb_recommendation_post SELECT (jsonb_populate_record(NULL::bb_recommendation_post,to_jsonb(p)||jsonb_build_object('id',931112,'title','Synthetic historical product issue'))).* FROM bb_recommendation_post p WHERE id=931111 ON CONFLICT(id) DO NOTHING;
+INSERT INTO bb_recommendation_item(post_id,name,item_number,reference_price,image_hash,image_url,publication_state,published_at,published_by,offer_start,offer_end,publication_snapshot)
+SELECT 931112,name,item_number,reference_price,image_hash,image_url,publication_state,published_at,published_by,offer_start,offer_end,publication_snapshot FROM bb_recommendation_item WHERE post_id=931111 AND item_number='TEST-3' AND NOT EXISTS(SELECT 1 FROM bb_recommendation_item WHERE post_id=931112);

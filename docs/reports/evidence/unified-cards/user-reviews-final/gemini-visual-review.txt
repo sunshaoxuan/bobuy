@@ -1,0 +1,89 @@
+### 1. Concrete Visible Defects, Uncertainties, and Missing Evidence (by Image and Region)
+
+#### Image 1: Desktop Public Catalog
+* **Visible Defects:** None observed that violate specifications.
+  * *Note on Wrapping & Clamping:* Card 3 (`Long product name...`) clamps to exactly two lines. Synthetic maximum price `999,999,999,999` wraps cleanly after the comma group (`999,999,999,` on line 1, `999` on line 2), keeping complete digit groups intact.
+* **Uncertainties:** The lower half of the second card row is clipped at the bottom margin; this is consistent with standard viewport cropping during capture.
+* **Missing Evidence:** No expanded states or active dropdowns visible; cannot verify whether additional metadata rows (e.g., `/ pack`, `原文语言`) force a variable minimum height across different desktop resolutions.
+
+---
+
+#### Image 2: Phone Public Catalog
+* **Visible Defects:**
+  * **Card Height Uniformity vs. Internal Spacing:** Card 1 contains two additional metadata rows (`/ pack` and `原文语言: ja-JP`), while Card 2 terminates after the price. Although the outer card containers align to the same bottom boundary, Card 2 leaves substantial empty space at the bottom without vertical distribution.
+* **Uncertainties:** The bottom navigation bar is fixed over the page content; the tops of the second-row cards are partially obscured behind it.
+* **Missing Evidence:** Behavior of multi-line titles when paired with the maximum synthetic price on mobile public cards is not shown here (tested separately in preview).
+
+---
+
+#### Image 3: Desktop Phone-Preview Mode
+* **Visible Defects:**
+  * **Rating Element Unintended Line Wrap (Card 1, annotated in red):** Inside Card 1, the star rating container breaks into two lines—the 5 stars are on line 1, and the numeric score `4.3 / 5` drops to line 2. The flex container lacks sufficient horizontal space or `flex-wrap: nowrap` protection.
+* **Uncertainties:** Card 1 has an outer dark border denoting an active/selected state, whereas Card 2 does not. This appears to be an editor selection state rather than a styling bug.
+* **Missing Evidence:** Whether the preview frame supports responsive resizing or if the breakpoint is statically fixed.
+
+---
+
+#### Image 4: Phone Preview
+* **Visible Defects:**
+  * **Rating Element Line Wrap (Card 1 & Card 2, Card 1 annotated in red):**
+    * Card 1: 5 stars on line 1, `4.3 / 5` wrapped to line 2.
+    * Card 2: 5 gray stars on line 1, `暂无评分` wrapped to line 2. Both columns exhibit container width starvation for the rating row in this viewport.
+  * **Content Occlusion by Fixed Bottom Bar:** The fixed bottom bar (`保存草稿`) covers the bottom of both preview cards, occluding the `实际售价` block of Card 1.
+* **Uncertainties:** Whether the scroll container has sufficient bottom padding (`padding-bottom` / `safe-area-inset`) to let cards scroll fully clear of the floating bottom bar when scrolled to the end.
+* **Missing Evidence:** Scrolled-to-bottom state within this exact preview view.
+
+---
+
+#### Image 5: Phone Editor
+* **Visible Defects:**
+  * **Mobile Hover Tooltip Artifact (Card 1 bottom, annotated in pink):** A dark tooltip (`解除关联`) with a pointer arrow is displayed directly above the trash icon. On a touch device, hover-based tooltips either persist awkwardly upon tap or obstruct adjacent interactive elements.
+* **Uncertainties:**
+  * Card 1 checkbox has a red circular outline, whereas Card 2 has a neutral gray border. It is uncertain from the visual whether this represents a form validation error state or an inspection overlay.
+  * Rating row in this view (`★★★★½ 4.3 / 5`) does *not* wrap, contrasting with Image 4. This indicates layout divergence between preview cards and editor cards.
+* **Missing Evidence:** Disabled vs. active tap interaction on `公开这一商品`.
+
+---
+
+#### Image 6: Phone Product Records
+* **Visible Defects:**
+  * **Structural Asymmetry / Missing Image Slot (Top-Left Card vs. Top-Right Card):** Top-left card (`抹茶套装`) completely omits the image area, starting immediately with text metadata. Top-right card (`鲜鸡胸肉 · 1kg`) includes a full-bleed photo header. This causes total vertical misalignment between the two columns for titles, tags, rating stars, prices, and footer actions.
+  * **Touch Target Crowding (Top-Right Card, annotated in pink):** The action button `售价与调价` and the red trash icon sit immediately adjacent to each other with minimal horizontal separation, presenting a high misclick risk on touch screens.
+* **Uncertainties:** Top-left card shows `尚未确认售价` without a large numerical price block, which further exacerbates row mismatch.
+* **Missing Evidence:** Behavior when a card has an image placeholder instead of complete omission.
+
+---
+
+#### Image 7: Phone Trash ("已删除商品")
+* **Visible Defects:** None observed.
+  * Title clamping functions as intended (Card 1 title clamps to 2 lines with trailing ellipsis).
+  * Key-value metadata rows (`产品编号`, `关联推荐条目ID`, `删除时间`) maintain consistent column alignment using em-dashes `—` for null states.
+  * Recovery buttons (`恢复商品及关联推荐`) span full card width with ample touch padding.
+* **Uncertainties:** None.
+* **Missing Evidence:** Pagination or infinite scroll loading state when the list contains dozens of records.
+
+---
+
+#### Image 8: Phone User-Review Form (Modal)
+* **Visible Defects:** None observed on form inputs or typography.
+* **Uncertainties:**
+  * The backdrop dimming covers the page, but the bottom navigation bar remains visible beneath the scrim.
+  * The vertical scrollbar on the right edge spans the entire screen height, leaving it uncertain whether the modal body scrolls independently if review items exceed screen height.
+* **Missing Evidence:** Keyboard-open state (whether the numeric score or textarea gets obscured when the mobile virtual keyboard appears).
+
+---
+
+#### Image 9: Rating Distribution Original-Size Detail
+* **Visible Defects:** None observed.
+  * Layout, bar proportions (4.5 and 4 showing 50% gold fill for 1 count each; others at 0% gray), typography, and button placement are visually intact and aligned.
+* **Uncertainties:** Popover anchor origin and placement relative to the trigger element cannot be seen in isolation.
+* **Missing Evidence:** Rendering when counts reach double or triple digits (potential numeric label overflow on the right).
+
+---
+
+### 2. Thematic UI/UX Assessment
+
+| Theme | Assessment & Concrete Observations |
+| :--- | :--- |
+| **Equal Card Structure** | **Mixed / Inconsistent across modules.**<br>• *Public Catalog (Images 1, 2):* Outer containers maintain equal row heights, but differing metadata line counts cause unbalanced empty bottom padding.<br>• *Product Records (Image 6):* **Severe structural defect.** The top-left card omits the image container entirely, while the top-right card contains an image, destroying column symmetry and row alignment. |
+| **Big

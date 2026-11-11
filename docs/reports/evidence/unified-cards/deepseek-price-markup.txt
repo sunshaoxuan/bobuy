@@ -1,0 +1,80 @@
+## Change summary
+
+- `CardPrice.tsx`: currency marker now renders **only** the known symbol; unknown currencies fall back to the code. The real code is kept as `title` and `aria-label` on the marker. Group/`wbr` algorithm, zero handling, and unknown-currency digit defaults are untouched.
+- `SellingPrice.tsx`: compact mode no longer renders the `sale.actual` label. The full-detail branch is byte-for-byte unchanged.
+
+## Minimal unified diff
+
+```diff
+--- a/frontend/src/components/CardPrice.tsx
++++ b/frontend/src/components/CardPrice.tsx
+@@ -8,4 +8,4 @@ export default function CardPrice({amount,currency='JPY',kind='sale'}:{amount?:nu
+  const definition=currencies[currency as keyof typeof currencies],groups:string[]=[];let group='';
+  for(const part of new Intl.NumberFormat(locale,{minimumFractionDigits:definition?.digits??2,maximumFractionDigits:Math.max(definition?.digits??2,Number.isInteger(amount)?0:2)}).formatToParts(amount)){group+=part.value;if(part.type==='group'){groups.push(group);group='';}}
+  if(group)groups.push(group);
+- return <div className="card-money"><small className="card-currency">{currency} {definition?.symbol??''}</small><strong className={className}>{groups.map((value,index)=><Fragment key={index}><span className="card-number-segment">{value}</span>{index<groups.length-1&&<wbr/>}</Fragment>)}</strong></div>;
++ return <div className="card-money"><small className="card-currency" title={currency} aria-label={currency}>{definition?.symbol??currency}</small><strong className={className}>{groups.map((value,index)=><Fragment key={index}><span className="card-number-segment">{value}</span>{index<groups.length-1&&<wbr/>}</Fragment>)}</strong></div>;
+ }
+```
+
+```diff
+--- a/frontend/src/components/SellingPrice.tsx
++++ b/frontend/src/components/SellingPrice.tsx
+@@ -7,3 +7,3 @@ export default function SellingPrice({product,compact=false}:{product:StoreProduc
+  const date=(value:string)=>new Date(value).toLocaleString(locale,{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'});
+- return <div className="rec-sale-actual">{compact?<><small className="card-price-label">{t('sale.actual')}</small><CardPrice amount={product.price} currency={product.currency}/>{product.saleUnit&&<small className="card-price-unit">/ {product.saleUnit}</small>}</>:<strong>{t('sale.actual')}: {formatMoney(product.price,product.currency,locale)}{product.saleUnit&&' / '+product.saleUnit}</strong>}
++ return <div className="rec-sale-actual">{compact?<><CardPrice amount={product.price} currency={product.currency}/>{product.saleUnit&&<small className="card-price-unit">/ {product.saleUnit}</small>}</>:<strong>{t('sale.actual')}: {formatMoney(product.price,product.currency,locale)}{product.saleUnit&&' / '+product.saleUnit}</strong>}
+   {product.priceAdjustmentId&&<><small>{t('pricing.regular')}: <del>{formatMoney(product.regularPrice??product.price,product.currency,locale)}</del></small><small>{t('pricing.period')}: {product.priceValidFrom&&date(product.priceValidFrom)} → {product.priceValidUntil&&date(product.priceValidUntil)} JST · {t('pricing.end_exclusive')}</small></>}
+  </div>;
+```
+
+## Semantic regression assertions
+
+Assumes `useI18n` is mocked with `locale: 'en-US'` and `t: key => key`.
+
+**CardPrice**
+
+- **Known currency keeps code accessible, not visible**
+  - `marker = screen.getByTitle('USD')`
+  - `expect(marker).toBe(screen.getByLabelText('USD'))`
+  - `expect(marker.textContent).toBe('$')` — no `USD` text in the visible marker.
+  - Other visible amount text does not contain `USD`.
+
+- **Unknown currency falls back to code**
+  - Render `currency="ZZZ"`, `amount={10}`.
+  - `screen.getByLabelText('ZZZ').textContent === 'ZZZ'`
+  - `screen.getByTitle('ZZZ')` is the same element.
+  - Does not throw on missing `currencies.ZZZ`.
+
+- **True zero remains a value**
+  - Render `amount={0}`, `currency="USD"`.
+  - `screen.queryByText('rec.not_stated')` is `null`.
+  - `.card-money` text contains formatted zero (`0.00` with USD defaults).
+  - `.card-number-segment` elements exist.
+
+- **Null / undefined stays “not stated”**
+  - Renders `rec.not_stated`.
+  - No `.card-currency` / no `aria-label` for the currency.
+
+- **Grouping and `wbr` invariants**
+  - Render a grouped amount such as `1234567` JPY with `locale='en-US'`.
+  - `segments = [...container.querySelectorAll('.card-number-segment')]`
+  - `expect(segments.map(s => s.textContent).join('')).toBe(fullFormattedString)` from the same `Intl.NumberFormat` options.
+  - `expect(container.querySelectorAll('wbr')).toHaveLength(segments.length - 1)`.
+  - This confirms complete groups are preserved and `wbr` only appears between them.
+
+**SellingPrice**
+
+- **Compact omits only the label**
+  - `render(<SellingPrice product={product} compact />)`
+  - `expect(container.querySelector('.card-price-label')).toBeNull()`
+  - `expect(container.textContent).not.toContain('sale.actual')`
+  - `expect(screen.getByLabelText(product.currency)).toBeTruthy()` — `CardPrice` still rendered.
+  - Sale unit markup remains: `expect(container.textContent).toContain('/ ' + product.saleUnit)` when `product.saleUnit` is set.
+  - Adjustment/period markup still renders when `priceAdjustmentId` is set.
+
+- **Full detail markup unchanged**
+  - `render(<SellingPrice product={product} />)`
+  - `expect(container.textContent).toContain('sale.actual: ' + formatMoney(product.price, product.currency, locale))`
+  - Unit suffix still appended in the full branch.
+  - Adjustments/period text unchanged in both modes.

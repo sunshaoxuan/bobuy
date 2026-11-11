@@ -1379,7 +1379,7 @@ const messages: Dictionary = {
   "rating.review": "I have reviewed this product rating",
   "rating.save": "Save rating",
   "rating.saved": "Rating saved",
-  "rating.invalid": "Enter 0–5 stars in half-star steps; an unrated product cannot show stars.",
+  "rating.invalid": "Use 1–5 points in half-point steps and a review of at most 2000 characters.",
   "rating.review_required": "Review the rating before saving.",
   "rating.value": "Product rating: {value} out of 5",
   "service.basis": "Service format",
@@ -1462,4 +1462,8 @@ const messages: Dictionary = {
   "rec.intake.uploaded": "Uploaded clue image",
 };
 
+Object.assign(messages,{
+ "review.reread":"Keep draft and reload current version",
+ "review.title":"Product reviews","review.none":"No ratings yet","review.write":"Your rating and review","review.login":"Sign in to rate and review","review.score":"Your score (1–5, half-point steps)","review.comment":"Your review (optional)","review.save":"Save your review","review.saved":"Your review was saved","review.count":"{count} ratings","review.read_write":"Read or write reviews","review.more":"Load more reviews","review.retry":"Reload"
+});
 export default messages;

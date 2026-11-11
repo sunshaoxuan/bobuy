@@ -4,8 +4,8 @@ import {I18nProvider,translate} from '../i18n';
 import {serviceFixture} from '../serviceOffer.fixture';
 import {storeAuthSession} from '../authStorage';
 import Recommendations from './Recommendations';
-const mocks=vi.hoisted(()=>({get:vi.fn(),list:vi.fn(),publishItem:vi.fn(),publish:vi.fn(),save:vi.fn()}));
-vi.mock('../api',()=>({recommendationApi:mocks,storefrontApi:{products:vi.fn().mockResolvedValue([])}}));
+const mocks=vi.hoisted(()=>({get:vi.fn(),list:vi.fn(),publishItem:vi.fn(),publish:vi.fn(),save:vi.fn(),products:vi.fn()}));
+vi.mock('../api',()=>({api:{products:mocks.products},recommendationApi:mocks,storefrontApi:{products:mocks.products}}));
 vi.mock('../components/RecommendationList',()=>({default:()=>null}));
 vi.mock('../components/RecommendationClassification',()=>({default:({detail}:any)=><div data-testid="classification-items">{detail.items.map((item:any)=>item.id).join(',')}</div>}));
 vi.mock('../components/RecommendationCatalog',()=>({default:()=>null}));
@@ -25,7 +25,7 @@ function show(postId=8){const router=createMemoryRouter([{path:'*',element:<><Ro
 const card=(name:string)=>within(screen.getByRole('heading',{name}).closest('article')!);
 function review(name='Ready Tea'){fireEvent.click(card(name).getByRole('checkbox',{name:/I checked this item/}));}
 const publishButton=(name='Ready Tea')=>card(name).getByRole('button',{name:'Publish this item: '+name});
-beforeEach(async()=>{localStorage.clear();localStorage.setItem('bobbuy_locale','en-US');vi.resetAllMocks();mocks.get.mockResolvedValue(clone(draft));const {transferableAbortController}=await vi.importActual<{transferableAbortController:()=>AbortController}>('node:util');vi.stubGlobal('AbortController',class {constructor(){return transferableAbortController();}});});
+beforeEach(async()=>{localStorage.clear();localStorage.setItem('bobbuy_locale','en-US');vi.resetAllMocks();mocks.products.mockResolvedValue([]);mocks.get.mockResolvedValue(clone(draft));const {transferableAbortController}=await vi.importActual<{transferableAbortController:()=>AbortController}>('node:util');vi.stubGlobal('AbortController',class {constructor(){return transferableAbortController();}});});
 afterEach(()=>{vi.unstubAllGlobals();});
 
 it('publishes a ready post8 item alone while 1731065 stays pending; synchronous double clicks send once',async()=>{

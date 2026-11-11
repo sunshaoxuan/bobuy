@@ -1,0 +1,824 @@
+[
+  {
+    "surface": "home",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "rows": [
+      {
+        "clamp": "2",
+        "height": 739.265625,
+        "prices": [
+          {
+            "size": "28px",
+            "text": "1,234 JPY"
+          },
+          {
+            "size": "28px",
+            "text": "JPY ¥980"
+          }
+        ],
+        "rating": "4.5 / 5",
+        "title": "Short name",
+        "width": 211.390625
+      },
+      {
+        "clamp": "2",
+        "height": 739.265625,
+        "prices": [
+          {
+            "size": "28px",
+            "text": "999,999,999,999.99 JPY"
+          },
+          {
+            "size": "28px",
+            "text": "JPY ¥999,999,999,999"
+          }
+        ],
+        "title": "Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name ",
+        "width": 211.40625
+      },
+      {
+        "clamp": "2",
+        "height": 739.265625,
+        "prices": [
+          {
+            "size": "28px",
+            "text": "来源未注明"
+          }
+        ],
+        "title": "商品名称测试 商品名称测试 商品名称测试",
+        "width": 211.390625
+      },
+      {
+        "clamp": "none",
+        "height": 739.265625,
+        "prices": [],
+        "title": "Costco-JP-合成服务验收（2026/11/6）",
+        "width": 211.40625
+      }
+    ]
+  },
+  {
+    "surface": "catalog",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "rows": [
+      {
+        "clamp": "2",
+        "height": 581.921875,
+        "prices": [
+          {
+            "size": "28px",
+            "text": "JPY ¥298"
+          }
+        ],
+        "title": "回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名",
+        "width": 211.390625
+      },
+      {
+        "clamp": "2",
+        "height": 581.921875,
+        "prices": [
+          {
+            "size": "28px",
+            "text": "JPY ¥980"
+          }
+        ],
+        "rating": "4.5 / 5",
+        "title": "Short name",
+        "width": 211.40625
+      },
+      {
+        "clamp": "2",
+        "height": 581.921875,
+        "prices": [
+          {
+            "size": "28px",
+            "text": "JPY ¥698"
+          }
+        ],
+        "title": "黄油可颂 · 6 个装",
+        "width": 211.390625
+      },
+      {
+        "clamp": "2",
+        "height": 581.921875,
+        "prices": [
+          {
+            "size": "28px",
+            "text": "JPY ¥999,999,999,999"
+          }
+        ],
+        "title": "Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name ",
+        "width": 211.40625
+      },
+      {
+        "clamp": "2",
+        "height": 581.921875,
+        "prices": [
+          {
+            "size": "28px",
+            "text": "JPY ¥1,498"
+          }
+        ],
+        "title": "厨房纸巾 · 家庭装",
+        "width": 211.390625
+      },
+      {
+        "clamp": "2",
+        "height": 581.921875,
+        "prices": [
+          {
+            "size": "28px",
+            "text": "JPY ¥298"
+          }
+        ],
+        "title": "新鲜菠菜 · 300g",
+        "width": 211.390625
+      },
+      {
+        "clamp": "2",
+        "height": 581.921875,
+        "prices": [
+          {
+            "size": "28px",
+            "text": "JPY ¥1,280"
+          }
+        ],
+        "title": "鲜采草莓 · 400g",
+        "width": 211.40625
+      },
+      {
+        "clamp": "2",
+        "height": 581.921875,
+        "prices": [
+          {
+            "size": "28px",
+            "text": "JPY ¥798"
+          }
+        ],
+        "title": "抹茶玛芬 · 6 个装",
+        "width": 211.390625
+      }
+    ]
+  },
+  {
+    "surface": "recommendations",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "rows": [
+      {
+        "clamp": "2",
+        "height": 739.265625,
+        "prices": [
+          {
+            "size": "28px",
+            "text": "1,234 JPY"
+          },
+          {
+            "size": "28px",
+            "text": "JPY ¥980"
+          }
+        ],
+        "rating": "4.5 / 5",
+        "title": "Short name",
+        "width": 211.390625
+      },
+      {
+        "clamp": "2",
+        "height": 739.265625,
+        "prices": [
+          {
+            "size": "28px",
+            "text": "999,999,999,999.99 JPY"
+          },
+          {
+            "size": "28px",
+            "text": "JPY ¥999,999,999,999"
+          }
+        ],
+        "title": "Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name ",
+        "width": 211.40625
+      },
+      {
+        "clamp": "2",
+        "height": 739.265625,
+        "prices": [
+          {
+            "size": "28px",
+            "text": "来源未注明"
+          }
+        ],
+        "title": "商品名称测试 商品名称测试 商品名称测试",
+        "width": 211.390625
+      },
+      {
+        "clamp": "none",
+        "height": 739.265625,
+        "prices": [],
+        "title": "Costco-JP-合成服务验收（2026/11/6）",
+        "width": 211.40625
+      }
+    ]
+  },
+  {
+    "surface": "issue",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "rows": [
+      {
+        "clamp": "2",
+        "height": 739.265625,
+        "prices": [
+          {
+            "size": "28px",
+            "text": "1,234 JPY"
+          },
+          {
+            "size": "28px",
+            "text": "JPY ¥980"
+          }
+        ],
+        "rating": "4.5 / 5",
+        "title": "Short name",
+        "width": 211.390625
+      },
+      {
+        "clamp": "2",
+        "height": 739.265625,
+        "prices": [
+          {
+            "size": "28px",
+            "text": "999,999,999,999.99 JPY"
+          },
+          {
+            "size": "28px",
+            "text": "JPY ¥999,999,999,999"
+          }
+        ],
+        "title": "Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name ",
+        "width": 211.40625
+      },
+      {
+        "clamp": "2",
+        "height": 739.265625,
+        "prices": [
+          {
+            "size": "28px",
+            "text": "来源未注明"
+          }
+        ],
+        "title": "商品名称测试 商品名称测试 商品名称测试",
+        "width": 211.390625
+      }
+    ]
+  },
+  {
+    "surface": "records",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "rows": [
+      {
+        "clamp": "2",
+        "height": 623.984375,
+        "prices": [],
+        "title": "抹茶套装",
+        "width": 263.25
+      },
+      {
+        "clamp": "2",
+        "height": 623.984375,
+        "prices": [
+          {
+            "size": "28px",
+            "text": "JPY 980"
+          }
+        ],
+        "rating": "4.5 / 5",
+        "title": "鲜鸡胸肉 · 1kg",
+        "width": 263.25
+      },
+      {
+        "clamp": "2",
+        "height": 623.984375,
+        "prices": [],
+        "title": "厨房纸巾 · 家庭装",
+        "width": 263.25
+      },
+      {
+        "clamp": "2",
+        "height": 623.984375,
+        "prices": [],
+        "title": "回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名",
+        "width": 263.25
+      },
+      {
+        "clamp": "2",
+        "height": 623.984375,
+        "prices": [],
+        "title": "新鲜菠菜 · 300g",
+        "width": 263.25
+      },
+      {
+        "clamp": "2",
+        "height": 623.984375,
+        "prices": [],
+        "title": "黄油可颂 · 6 个装",
+        "width": 263.25
+      },
+      {
+        "clamp": "2",
+        "height": 623.984375,
+        "prices": [
+          {
+            "size": "28px",
+            "text": "JPY 999,999,999,999"
+          }
+        ],
+        "title": "全脂鲜牛奶 · 1L",
+        "width": 263.25
+      },
+      {
+        "clamp": "2",
+        "height": 623.984375,
+        "prices": [],
+        "title": "鲜采草莓 · 400g",
+        "width": 263.25
+      },
+      {
+        "clamp": "2",
+        "height": 623.984375,
+        "prices": [],
+        "title": "抹茶玛芬 · 6 个装",
+        "width": 263.25
+      }
+    ]
+  },
+  {
+    "surface": "editor",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "rows": [
+      {
+        "clamp": "2",
+        "height": 953.21875,
+        "prices": [
+          {
+            "size": "28px",
+            "text": "1,234 JPY"
+          }
+        ],
+        "rating": "4.5 / 5",
+        "title": "Short name",
+        "width": 548.5
+      },
+      {
+        "clamp": "2",
+        "height": 953.21875,
+        "prices": [
+          {
+            "size": "28px",
+            "text": "999,999,999,999.99 JPY"
+          }
+        ],
+        "title": "Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name ",
+        "width": 548.5
+      },
+      {
+        "clamp": "2",
+        "height": 953.21875,
+        "prices": [
+          {
+            "size": "28px",
+            "text": "来源未注明"
+          }
+        ],
+        "title": "商品名称测试 商品名称测试 商品名称测试",
+        "width": 548.5
+      }
+    ]
+  },
+  {
+    "surface": "home",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rows": [
+      {
+        "clamp": "2",
+        "height": 680.65625,
+        "prices": [
+          {
+            "size": "24px",
+            "text": "1,234 JPY"
+          },
+          {
+            "size": "24px",
+            "text": "JPY ¥980"
+          }
+        ],
+        "rating": "4.5 / 5",
+        "title": "Short name",
+        "width": 165.5
+      },
+      {
+        "clamp": "2",
+        "height": 680.65625,
+        "prices": [
+          {
+            "size": "24px",
+            "text": "999,999,999,999.99 JPY"
+          },
+          {
+            "size": "24px",
+            "text": "JPY ¥999,999,999,999"
+          }
+        ],
+        "title": "Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name ",
+        "width": 165.5
+      },
+      {
+        "clamp": "2",
+        "height": 680.65625,
+        "prices": [
+          {
+            "size": "24px",
+            "text": "来源未注明"
+          }
+        ],
+        "title": "商品名称测试 商品名称测试 商品名称测试",
+        "width": 165.5
+      },
+      {
+        "clamp": "none",
+        "height": 680.65625,
+        "prices": [],
+        "title": "Costco-JP-合成服务验收（2026/11/6）",
+        "width": 165.5
+      }
+    ]
+  },
+  {
+    "surface": "catalog",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rows": [
+      {
+        "clamp": "2",
+        "height": 550.4375,
+        "prices": [
+          {
+            "size": "24px",
+            "text": "JPY ¥298"
+          }
+        ],
+        "title": "回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名",
+        "width": 165.5
+      },
+      {
+        "clamp": "2",
+        "height": 550.4375,
+        "prices": [
+          {
+            "size": "24px",
+            "text": "JPY ¥980"
+          }
+        ],
+        "rating": "4.5 / 5",
+        "title": "Short name",
+        "width": 165.5
+      },
+      {
+        "clamp": "2",
+        "height": 550.4375,
+        "prices": [
+          {
+            "size": "24px",
+            "text": "JPY ¥698"
+          }
+        ],
+        "title": "黄油可颂 · 6 个装",
+        "width": 165.5
+      },
+      {
+        "clamp": "2",
+        "height": 550.4375,
+        "prices": [
+          {
+            "size": "24px",
+            "text": "JPY ¥999,999,999,999"
+          }
+        ],
+        "title": "Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name ",
+        "width": 165.5
+      },
+      {
+        "clamp": "2",
+        "height": 550.4375,
+        "prices": [
+          {
+            "size": "24px",
+            "text": "JPY ¥1,498"
+          }
+        ],
+        "title": "厨房纸巾 · 家庭装",
+        "width": 165.5
+      },
+      {
+        "clamp": "2",
+        "height": 550.4375,
+        "prices": [
+          {
+            "size": "24px",
+            "text": "JPY ¥298"
+          }
+        ],
+        "title": "新鲜菠菜 · 300g",
+        "width": 165.5
+      },
+      {
+        "clamp": "2",
+        "height": 550.4375,
+        "prices": [
+          {
+            "size": "24px",
+            "text": "JPY ¥1,280"
+          }
+        ],
+        "title": "鲜采草莓 · 400g",
+        "width": 165.5
+      },
+      {
+        "clamp": "2",
+        "height": 550.4375,
+        "prices": [
+          {
+            "size": "24px",
+            "text": "JPY ¥798"
+          }
+        ],
+        "title": "抹茶玛芬 · 6 个装",
+        "width": 165.5
+      }
+    ]
+  },
+  {
+    "surface": "recommendations",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rows": [
+      {
+        "clamp": "2",
+        "height": 680.65625,
+        "prices": [
+          {
+            "size": "24px",
+            "text": "1,234 JPY"
+          },
+          {
+            "size": "24px",
+            "text": "JPY ¥980"
+          }
+        ],
+        "rating": "4.5 / 5",
+        "title": "Short name",
+        "width": 165.5
+      },
+      {
+        "clamp": "2",
+        "height": 680.65625,
+        "prices": [
+          {
+            "size": "24px",
+            "text": "999,999,999,999.99 JPY"
+          },
+          {
+            "size": "24px",
+            "text": "JPY ¥999,999,999,999"
+          }
+        ],
+        "title": "Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name ",
+        "width": 165.5
+      },
+      {
+        "clamp": "2",
+        "height": 680.65625,
+        "prices": [
+          {
+            "size": "24px",
+            "text": "来源未注明"
+          }
+        ],
+        "title": "商品名称测试 商品名称测试 商品名称测试",
+        "width": 165.5
+      },
+      {
+        "clamp": "none",
+        "height": 680.65625,
+        "prices": [],
+        "title": "Costco-JP-合成服务验收（2026/11/6）",
+        "width": 165.5
+      }
+    ]
+  },
+  {
+    "surface": "issue",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rows": [
+      {
+        "clamp": "2",
+        "height": 680.65625,
+        "prices": [
+          {
+            "size": "24px",
+            "text": "1,234 JPY"
+          },
+          {
+            "size": "24px",
+            "text": "JPY ¥980"
+          }
+        ],
+        "rating": "4.5 / 5",
+        "title": "Short name",
+        "width": 165.5
+      },
+      {
+        "clamp": "2",
+        "height": 680.65625,
+        "prices": [
+          {
+            "size": "24px",
+            "text": "999,999,999,999.99 JPY"
+          },
+          {
+            "size": "24px",
+            "text": "JPY ¥999,999,999,999"
+          }
+        ],
+        "title": "Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name ",
+        "width": 165.5
+      },
+      {
+        "clamp": "2",
+        "height": 680.65625,
+        "prices": [
+          {
+            "size": "24px",
+            "text": "来源未注明"
+          }
+        ],
+        "title": "商品名称测试 商品名称测试 商品名称测试",
+        "width": 165.5
+      }
+    ]
+  },
+  {
+    "surface": "records",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rows": [
+      {
+        "clamp": "2",
+        "height": 527.3125,
+        "prices": [],
+        "title": "抹茶套装",
+        "width": 165.5
+      },
+      {
+        "clamp": "2",
+        "height": 527.3125,
+        "prices": [
+          {
+            "size": "24px",
+            "text": "JPY 980"
+          }
+        ],
+        "rating": "4.5 / 5",
+        "title": "鲜鸡胸肉 · 1kg",
+        "width": 165.5
+      },
+      {
+        "clamp": "2",
+        "height": 527.3125,
+        "prices": [],
+        "title": "厨房纸巾 · 家庭装",
+        "width": 165.5
+      },
+      {
+        "clamp": "2",
+        "height": 527.3125,
+        "prices": [],
+        "title": "回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名回收站长商品名",
+        "width": 165.5
+      },
+      {
+        "clamp": "2",
+        "height": 527.3125,
+        "prices": [],
+        "title": "新鲜菠菜 · 300g",
+        "width": 165.5
+      },
+      {
+        "clamp": "2",
+        "height": 527.3125,
+        "prices": [],
+        "title": "黄油可颂 · 6 个装",
+        "width": 165.5
+      },
+      {
+        "clamp": "2",
+        "height": 527.3125,
+        "prices": [
+          {
+            "size": "24px",
+            "text": "JPY 999,999,999,999"
+          }
+        ],
+        "title": "全脂鲜牛奶 · 1L",
+        "width": 165.5
+      },
+      {
+        "clamp": "2",
+        "height": 527.3125,
+        "prices": [],
+        "title": "鲜采草莓 · 400g",
+        "width": 165.5
+      },
+      {
+        "clamp": "2",
+        "height": 527.3125,
+        "prices": [],
+        "title": "抹茶玛芬 · 6 个装",
+        "width": 165.5
+      }
+    ]
+  },
+  {
+    "surface": "editor",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rows": [
+      {
+        "clamp": "2",
+        "height": 783.015625,
+        "prices": [
+          {
+            "size": "24px",
+            "text": "1,234 JPY"
+          }
+        ],
+        "rating": "4.5 / 5",
+        "title": "Short name",
+        "width": 343
+      },
+      {
+        "clamp": "2",
+        "height": 783.015625,
+        "prices": [
+          {
+            "size": "24px",
+            "text": "999,999,999,999.99 JPY"
+          }
+        ],
+        "title": "Long product name Long product name Long product name Long product name Long product name Long product name Long product name Long product name ",
+        "width": 343
+      },
+      {
+        "clamp": "2",
+        "height": 783.015625,
+        "prices": [
+          {
+            "size": "24px",
+            "text": "来源未注明"
+          }
+        ],
+        "title": "商品名称测试 商品名称测试 商品名称测试",
+        "width": 343
+      }
+    ]
+  }
+]

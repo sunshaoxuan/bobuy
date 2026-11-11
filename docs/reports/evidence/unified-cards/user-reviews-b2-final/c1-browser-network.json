@@ -1,0 +1,502 @@
+[
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/admin/products?view=deleted",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/index-Dn3gaDbM.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/procurement-dashboard-B5in9UvG.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/stock-master-D1e6JAmP.css",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/chat-flow-CnbBv43Y.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/index-DZQr4a7U.css",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/stock-master-BCk0ytMC.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/vendor-UdMao7IF.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/ProductArchive-PGzbEDKr.css",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/ProductArchive-BHbf2oxL.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/auth/me",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/admin/products/trash?deleted=true",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/products?node=1000",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/index-Dn3gaDbM.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/procurement-dashboard-B5in9UvG.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/stock-master-D1e6JAmP.css",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/stock-master-BCk0ytMC.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/chat-flow-CnbBv43Y.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/index-DZQr4a7U.css",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/vendor-UdMao7IF.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/RecommendationImageViewer-ILdPQ99W.css",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/PublicProductCatalog-C5DGiTa8.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/RecommendationImageViewer-CFAgvuiI.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/auth/me",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/trips",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/trips?includeCurrent=true",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-browse?page=0&merchantId=1000&query=&category=&locale=zh-CN&marked=true",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-browse?page=0&merchantId=1000&query=&category=&locale=zh-CN&marked=false",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/chicken.png",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/recommendation-nodes",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/croissants.png",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/milk.png",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/paper_towels.png",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/spinach.png",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/matcha-muffins.jpg",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/strawberries.png",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-sales?productIds=demo-chicken%2Cdemo-croissants%2Cdemo-milk%2Cdemo-paper_towels%2Cdemo-spinach%2Cdemo-strawberries%2Cprd-1638%2Creview-pagination-c1-20261111",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/review-pagination-c1-20261111",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/review-pagination-c1-20261111/comments?page=0",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/product-reviews/review-pagination-c1-20261111/mine",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/products?node=1000",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/index-_cTq0nAb.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/procurement-dashboard-j-PLccdn.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/stock-master-BsBMdFFl.css",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/index-DZQr4a7U.css",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/stock-master-DX3mNlkL.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/chat-flow-BjzKyczt.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/vendor-CqHPAcO7.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/RecommendationImageViewer-ILdPQ99W.css",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/RecommendationImageViewer-CjIz1BKB.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/PublicProductCatalog-B8j4dXdb.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/auth/me",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/trips",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/trips?includeCurrent=true",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/recommendation-nodes",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-browse?page=0&merchantId=1000&query=&category=&locale=zh-CN&marked=true",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-browse?page=0&merchantId=1000&query=&category=&locale=zh-CN&marked=false",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/chicken.png",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/croissants.png",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/milk.png",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/paper_towels.png",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/spinach.png",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/strawberries.png",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/matcha-muffins.jpg",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-sales?productIds=demo-chicken%2Cdemo-croissants%2Cdemo-milk%2Cdemo-paper_towels%2Cdemo-spinach%2Cdemo-strawberries%2Cprd-1638%2Creview-pagination-c1-20261111",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/review-pagination-c1-20261111",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-browse/review-pagination-c1-20261111?merchantId=1000",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/review-pagination-c1-20261111",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/product-reviews/review-pagination-c1-20261111/mine",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/review-pagination-c1-20261111/comments?page=0",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/review-pagination-c1-20261111/comments?page=1",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/review-pagination-c1-20261111",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/product-reviews/review-pagination-c1-20261111/mine",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/review-pagination-c1-20261111/comments?page=0",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-reviews/review-pagination-c1-20261111/comments?page=1",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/products?node=1000",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/index-_cTq0nAb.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/procurement-dashboard-j-PLccdn.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/stock-master-BsBMdFFl.css",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/index-DZQr4a7U.css",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/chat-flow-BjzKyczt.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/stock-master-DX3mNlkL.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/vendor-CqHPAcO7.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/RecommendationImageViewer-ILdPQ99W.css",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/PublicProductCatalog-B8j4dXdb.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/RecommendationImageViewer-CjIz1BKB.js",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/trips",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/auth/me",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/trips?includeCurrent=true",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/recommendation-nodes",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-browse?page=0&merchantId=1000&query=&category=&locale=zh-CN&marked=true",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-browse?page=0&merchantId=1000&query=&category=&locale=zh-CN&marked=false",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/chicken.png",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/croissants.png",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/milk.png",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/spinach.png",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/paper_towels.png",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/strawberries.png",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/assets/products/matcha-muffins.jpg",
+    "status": 200
+  },
+  {
+    "type": "response",
+    "url": "http://127.0.0.1:5180/api/storefront/product-sales?productIds=demo-chicken%2Cdemo-croissants%2Cdemo-milk%2Cdemo-paper_towels%2Cdemo-spinach%2Cdemo-strawberries%2Cprd-1638",
+    "status": 200
+  }
+]

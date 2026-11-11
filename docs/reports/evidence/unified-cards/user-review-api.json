@@ -1,0 +1,22 @@
+{
+  "result": "PASS",
+  "product": "review-contract-522aa7e44941",
+  "concurrentProduct": "review-contract-522aa7e44941-race",
+  "checks": [
+    "legacy excluded",
+    "nine valid score values",
+    "customer and agent parity",
+    "edit keeps count",
+    "mean and histogram coherence",
+    "anonymous rejected",
+    "range and length rejected",
+    "stale version rejected",
+    "author impersonation ignored",
+    "public review privacy",
+    "concurrent create one winner",
+    "concurrent update one winner",
+    "PostgreSQL exact-score constraints",
+    "private and deleted inaccessible",
+    "obsolete merchant endpoint removed"
+  ]
+}

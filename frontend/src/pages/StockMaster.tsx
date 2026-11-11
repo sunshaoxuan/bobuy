@@ -44,10 +44,13 @@ import ProductPricingPanel from '../components/ProductPricingPanel';
 import ProductMarkerEditor from '../components/ProductMarkerEditor';
 import { api, type CategoryAttributeTemplateField, type MobileCategory, type MobileSupplier, type AiOnboardingSuggestion } from '../api';
 import './productRecords.css';
+import {ProductReviewStars} from '../components/ProductRating';
+import CardPrice from '../components/CardPrice';
 
 const { Title, Text } = Typography;
 
 interface StockItem {
+  visibilityStatus?: string;
   catalogDriven?:boolean;
   key: string;
   name: string;
@@ -88,7 +91,7 @@ const MOBILE_DRAWER_HEIGHT = '82vh';
 const MOBILE_TOOLBAR_COMPACT_SCROLL_THRESHOLD = 24;
 const MOBILE_DYNAMIC_GUTTER = 16;
 const DESKTOP_DYNAMIC_GUTTER = 8;
-const DEFAULT_STOCK_THUMBNAIL = '/assets/products/milk.png';
+const DEFAULT_STOCK_THUMBNAIL = 'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160"><rect width="160" height="160" fill="#f5f5f3"/><path d="M48 48h64v64H48zM48 96l20-20 16 16 12-12 16 16" fill="none" stroke="#999" stroke-width="3"/></svg>');
 
 const PRICE_FRACTION_DIGITS = 2;
 const MOBILE_BOTTOM_PADDING = '7rem';
@@ -265,6 +268,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
       if (cancelled) return;
       const mapped: StockItem[] = result.map(res => ({
         key: res.product.id,
+        visibilityStatus:res.product.visibilityStatus,
         catalogDriven:!!(res.product as unknown as {catalogData?:unknown}).catalogData,
         name: res.displayName,
         nameL10n: res.product.name,
@@ -382,6 +386,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
       // 2. Map the response (now with real DB ID) back to the UI
       const newItem: StockItem = {
         key: product.id,
+        visibilityStatus:product.visibilityStatus,
         name: response.displayName,
         nameL10n: product.name,
         category: product.categoryId || '',
@@ -658,16 +663,16 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
   ];
 
   const renderMobileCards = () => (
-    <Space direction="vertical" size={12} style={{ width: '100%' }}>
+    <div className="stock-mobile-grid">
       {filteredData.map((item) => {
         const image = getStockThumbnail(item);
         const localizedTitle = getLocalizedFallback(item.nameL10n, item.name);
         return (
           <Card key={item.key} className="stock-mobile-card app-shadow-low">
             <div className="stock-mobile-card-body">
-              <img src={image} alt={localizedTitle} className="stock-mobile-thumb" />
+              <img src={image} alt={localizedTitle} className="stock-mobile-thumb" onError={event=>{event.currentTarget.onerror=null;event.currentTarget.src=DEFAULT_STOCK_THUMBNAIL;}} />
               <div className="stock-mobile-main">
-                <Text strong className="stock-mobile-title">
+                <Text strong className="stock-mobile-title" title={localizedTitle}>
                   {localizedTitle}
                 </Text>
                   <Space size={8} wrap>
@@ -678,9 +683,11 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
                   </Space>
               </div>
               <div className="stock-mobile-side">
-                <Text className="stock-mobile-metric">
-                  <DollarOutlined /> {formatPrice.format(item.price)}
-                </Text>
+                <ProductReviewStars productId={item.isNew||item.visibilityStatus==='DRAFTER_ONLY'?undefined:item.key}/>
+                <div className="stock-mobile-metric stock-mobile-price">
+                  {!item.actualSale&&<small className="card-price-label">{t('stock.item.price_per_unit')}</small>}
+                  <CardPrice amount={item.actualSale?.amount??item.price} currency={item.actualSale?.currency}/>
+                </div>
                 <Text className="stock-mobile-metric">
                   <DatabaseOutlined /> {item.stock}
                 </Text>
@@ -704,7 +711,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
           </Space>
         </Card>
       ) : null}
-    </Space>
+    </div>
   );
 
   return (
@@ -774,13 +781,13 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         const category=categories.find(c=>c.id===item.category);
         return <article className="product-record-pin" key={item.key}>
           <button className="record-cover" onClick={()=>setCatalogId(item.key)} aria-label={t('store.detail_label',{name})}>
-            {image?<img src={image} alt={name} loading="lazy"/>:<span className="record-no-image"><InboxOutlined/>{t('gallery.pending')}</span>}
+            {image?<img src={image} alt={name} loading="lazy" onError={event=>{event.currentTarget.onerror=null;event.currentTarget.src=DEFAULT_STOCK_THUMBNAIL;}}/>:<span className="record-no-image"><InboxOutlined/>{t('gallery.pending')}</span>}
             {!!item.mediaGallery?.length&&<span className="record-image-count"><PictureOutlined/> {item.mediaGallery.length}</span>}
           </button>
           <div className="record-caption"><div className="record-meta"><span>{item.sku||t('rec.not_stated')}</span><span>{t(item.isNew?'stock.status.new':'stock.status.modified')}</span></div>
             <button className="record-title" onClick={()=>setCatalogId(item.key)}><h3>{name}</h3></button>
             <ProductBrand brand={item.brand}/><p>{category?getLocalizedFallback(category.name):t('master.title')}</p>{getLocalizedFallback(item.specificationL10n,'')&&<p className="record-specification">{getLocalizedFallback(item.specificationL10n,'')}</p>}
-            <div className="record-sale-state">{item.actualSale?`${item.actualSale.currency} ${item.actualSale.amount}`:t('sale.pending')}</div>
+            <ProductReviewStars productId={item.isNew||item.visibilityStatus==='DRAFTER_ONLY'?undefined:item.key}/><div className="record-sale-state">{item.actualSale?<CardPrice amount={item.actualSale.amount} currency={item.actualSale.currency}/>:t('sale.pending')}</div>
             <div className="record-card-actions marker-product-actions"><Tooltip title={t('marker.assigned')}><Button className="marker-product-trigger" icon={<TagsOutlined aria-hidden/>} aria-label={t('marker.assigned')+' '+name} disabled={item.isNew} onClick={()=>openMarkers(item.key)}/></Tooltip><Button onClick={()=>setCatalogId(item.key)}>{t('master.title')}</Button><Button type="text" onClick={()=>setPricingId(item.key)}>{t('pricing.title')}</Button><Button type="text" danger icon={<DeleteOutlined/>} aria-label={t('trash.remove')+' '+name} onClick={()=>handleDelete(item.key)}/></div>
           </div>
         </article>;

@@ -8,6 +8,13 @@ afterEach(() => {
   cleanup();
 });
 
+// jsdom has no layout engine; browser resize behavior is exercised separately.
+globalThis.ResizeObserver = class {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
+
 if (!window.matchMedia) {
   window.matchMedia = (query: string) => ({
     matches: false,

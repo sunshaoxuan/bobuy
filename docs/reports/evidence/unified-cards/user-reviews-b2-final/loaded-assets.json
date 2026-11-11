@@ -1,0 +1,10 @@
+{
+  "scripts": [
+    "http://127.0.0.1:5180/assets/index-BS0q-gsA.js"
+  ],
+  "styles": [
+    "http://127.0.0.1:5180/assets/stock-master-iH-9Asdy.css",
+    "http://127.0.0.1:5180/assets/index-DZQr4a7U.css",
+    "http://127.0.0.1:5180/assets/RecommendationImageViewer-ILdPQ99W.css"
+  ]
+}

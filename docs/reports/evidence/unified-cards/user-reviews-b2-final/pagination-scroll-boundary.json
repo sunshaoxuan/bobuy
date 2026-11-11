@@ -1,0 +1,16 @@
+{
+  "bodyOverflow": "clip hidden",
+  "htmlOverflow": "clip hidden",
+  "viewport": {
+    "h": 800,
+    "w": 360
+  },
+  "wrap": [
+    {
+      "client": 800,
+      "clientW": 360,
+      "scroll": 800,
+      "scrollW": 360
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import {render,screen,fireEvent,waitFor} from '@testing-library/react';
+import {StyleProvider} from '@ant-design/cssinjs';
 import {MemoryRouter} from 'react-router-dom';
 import {beforeEach,describe,it,expect,vi} from 'vitest';
 import {I18nProvider} from '../i18n';
@@ -7,7 +8,8 @@ const mocks=vi.hoisted(()=>({products:vi.fn(),scan:vi.fn(),research:vi.fn(),save
 vi.mock('../api',()=>({api:{products:()=>mocks.products()},recommendationApi:{scanProduct:(...a:unknown[])=>mocks.scan(...a),researchProduct:(...a:unknown[])=>mocks.research(...a),intake:(...a:unknown[])=>mocks.save(...a)}}));
 vi.mock('./AiQuickAddModal',()=>({default:({visible,scan,onSuccess}:any)=>visible?<button onClick={async()=>{const value=await scan(new File(['synthetic'],'clue.png',{type:'image/png'}));onSuccess({...value,originalPhotoBase64:'data:image/png;base64,eA=='});}}>Read synthetic image</button>:null}));
 const detail={post:{id:4,title:'Draft',version:3,published:false,updatedAt:''},body:'Keep original',items:[]};
-function mount(){const changed=vi.fn(),existing=vi.fn();render(<MemoryRouter><I18nProvider><RecommendationProductIntake detail={detail} onChange={changed} onExisting={existing} onPendingChange={()=>{}}/></I18nProvider></MemoryRouter>);return {changed,existing};}
+// Keep Ant Design's injected selectors out of jsdom's stylesheet matcher.
+function mount(){const changed=vi.fn(),existing=vi.fn();render(<StyleProvider container={document.createElement('div')}><MemoryRouter><I18nProvider><RecommendationProductIntake detail={detail} onChange={changed} onExisting={existing} onPendingChange={()=>{}}/></I18nProvider></MemoryRouter></StyleProvider>);return {changed,existing};}
 async function open(){fireEvent.click(screen.getByText('Add a product from an image'));fireEvent.click(screen.getByText('Read synthetic image'));await screen.findByText('Review product candidate');}
 describe('product intake',()=>{
  beforeEach(()=>{vi.clearAllMocks();localStorage.setItem('bobbuy_locale','en-US');mocks.products.mockResolvedValue([]);mocks.scan.mockResolvedValue({name:'合成商品',itemNumber:'00123',specification:'2-pack',brand:'Synthetic',evidence:'ITEM #00123',uncertain:true});mocks.research.mockResolvedValue([]);mocks.save.mockResolvedValue({productId:'private-fixture',productVersion:0,created:true,detail});});

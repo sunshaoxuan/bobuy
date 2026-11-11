@@ -1,0 +1,17 @@
+{
+  "mechanical_result": "PASS",
+  "frontend_assertions": 750,
+  "frontend_retested": 0,
+  "frontend_failures": 0,
+  "timeout_policy": "unchanged 5000ms",
+  "post_test_change": "three scoped review CSS rules; reverse-byte verified; built and browser revalidated",
+  "backend_inputs": 509,
+  "snapshots": 43,
+  "rows": 182,
+  "prices": 187,
+  "network_responses": 239,
+  "console_errors": 0,
+  "long_price_font": "17.3px",
+  "later_row_reduction": 36.140625,
+  "visual_result": "see main-agent final acceptance report"
+}

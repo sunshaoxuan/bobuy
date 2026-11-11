@@ -3,6 +3,7 @@ import type { RecommendationFacts } from '../api';
 import { useI18n } from '../i18n';
 import {japanDate} from '../recommendationSchedule';
 import {resolvedOfferWindow} from '../referenceOfferWindow';
+import CardPrice from './CardPrice';
 export {japanDate} from '../recommendationSchedule';
 
 export const factFields = ['name','brand','itemNumber','model','packaging','specification','referencePrice','originalPrice','discountAmount','priceUnit','offerStart','offerEnd','couponStart','couponEnd','offerNotes'] as const;
@@ -38,7 +39,7 @@ export function OfferInfo({facts,today=japanDate(),compact=false}: {facts: Recom
   const period = (start?: string | null,end?: string | null) => start && end ? start+' – '+end : start ? t('rec.from')+' '+start : end ? t('rec.until')+' '+end : t('rec.period_unknown');
   return <div className="rec-offer-info">
     <div>{facts.originalPrice != null && <del>{t('rec.fact.originalPrice')}: {facts.originalPrice.toLocaleString(locale)} JPY</del>}</div>
-    {compact?<div className="card-reference-price"><small className="card-price-label">{t('detail.reference')}</small><strong className="card-reference-value">{facts.referencePrice == null ? t('rec.not_stated') : facts.referencePrice.toLocaleString(locale)+' JPY'}</strong>{facts.priceUnit&&<small className="card-price-unit">/ {facts.priceUnit}</small>}</div>:<strong>{t('rec.fact.referencePrice')}: {facts.referencePrice == null ? t('rec.not_stated') : facts.referencePrice.toLocaleString(locale)+' JPY'}{facts.priceUnit && ' / '+facts.priceUnit}</strong>}
+    {compact?<div className="card-reference-price"><small className="card-price-label">{t('detail.reference')}</small><CardPrice amount={facts.referencePrice} kind="reference"/>{facts.priceUnit&&<small className="card-price-unit">/ {facts.priceUnit}</small>}</div>:<strong>{t('rec.fact.referencePrice')}: {facts.referencePrice == null ? t('rec.not_stated') : facts.referencePrice.toLocaleString(locale)+' JPY'}{facts.priceUnit && ' / '+facts.priceUnit}</strong>}
     {facts.discountAmount != null && <div>{t('rec.fact.discountAmount')}: {facts.discountAmount.toLocaleString(locale)} JPY{facts.priceUnit && ' / '+facts.priceUnit}</div>}
     <div className="rec-offer-period">{t('rec.offer_period')}: {window.start||(!facts.referenceContext?.startSearchComplete?t('ref.review_start'):'？')} – {window.end||'？'} <small>{t('rec.japan_dates')}</small>{facts.referenceContext?.activityApplies&&(!facts.offerStart||!facts.offerEnd)&&<small> · {t('ref.inherited')}</small>}</div>
     {complete&&today>window.end! ? <Tag color="default">{t('rec.expired')}</Tag> : complete&&today<window.start! ? <Tag color="blue">{t('rec.upcoming')}</Tag> : null}

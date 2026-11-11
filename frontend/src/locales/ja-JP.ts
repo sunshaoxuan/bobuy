@@ -1379,7 +1379,7 @@ const messages: Dictionary = {
   "rating.review": "商品の評価を確認しました",
   "rating.save": "評価を保存",
   "rating.saved": "評価を保存しました",
-  "rating.invalid": "0～5を0.5刻みで入力してください。未評価は公開できません。",
+  "rating.invalid": "評価は1〜5の0.5刻み、レビューは2000文字以内で入力してください。",
   "rating.review_required": "保存前に評価を確認してください。",
   "rating.value": "商品の評価：5点中{value}点",
   "service.basis": "サービス形式",
@@ -1462,4 +1462,8 @@ const messages: Dictionary = {
   "rec.intake.uploaded": "アップロードした手がかり画像",
 };
 
+Object.assign(messages,{
+ "review.reread":"下書きを保持して現在の版を再読込",
+ "review.title":"商品レビュー","review.none":"評価はまだありません","review.write":"自分の評価とレビュー","review.login":"ログインして評価する","review.score":"評価（1〜5、0.5刻み）","review.comment":"レビュー（任意）","review.save":"レビューを保存","review.saved":"レビューを保存しました","review.count":"{count}件の評価","review.read_write":"レビューを読む・書く","review.more":"さらに読み込む","review.retry":"再読み込み"
+});
 export default messages;

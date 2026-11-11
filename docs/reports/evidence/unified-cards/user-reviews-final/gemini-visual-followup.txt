@@ -1,0 +1,20 @@
+### Resolved Crop, Tooltip, and Occlusion Concerns
+1. **Fixed Footer Clearance:** The scrollable area provides sufficient bottom clearance; sale prices, units, and card footers sit cleanly above the fixed bottom bar (`保存草稿` and back button) without overlap.
+2. **Artwork and Corners:** Full image slots are visible; the chicken photo and the placeholder box both conform cleanly to top-corner radii without clipping flaws, and the counter badge (`1`) renders intact.
+3. **Editor Resting State:** Clearing pointer/focus confirms that the revision history pill, status badges (`待审核`), version string, verification checkbox, primary action button (`公开这一商品`), and paired action targets (pencil/trash) rest without persistent tooltip clippings, stray focus rings, or hover shifts.
+4. **Action Target Baselines:** The bottom edit and trash action icons share a precise bottom baseline with an 8px horizontal separation, fulfilling touch requirements.
+
+---
+
+### Remaining Visible Defects
+1. **Extreme Number Wrapping:** Extremely large prices (e.g., `999,999,999,999.99` and `999,999,999,999`) wrap into 2–3 disjointed lines (`999,999,` / `999,` / `999.99`), visually fragmenting commas and currencies. A fluid font-size clamp or `white-space: nowrap` overflow fallback is needed.
+2. **Inconsistent Rating Row Behavior:** While Image 2 adheres to the 52px two-line rating stack (stars over label), Image 1 displays stars and labels inline on cards of identical column width, indicating an inconsistent breakpoint or container-width trigger.
+3. **Uneven Card Bottom Alignment:** Content height differences (e.g., multiline warnings vs. single-line entries) cause the left and right card bottoms to misalign horizontally, creating staggered grid footers.
+4. **Checkbox Copy Density:** The verification disclaimer beside the checkbox wraps across four tight lines, crowding the container immediately above the full-width `公开这一商品` button.
+
+---
+
+### Artwork, Corners, Hierarchy, and Tap Grouping Evaluation
+* **Artwork & Corners:** Visual assets conform to the card curvature. The placeholder icon box visually balances photographic slots, and image corners match surrounding container bounds.
+* **Visual Hierarchy:** Good luminance contrast. Heavy bold prices (`980`, `1,234`) anchor the eye, while metadata, units (`/ pack`), and unconfirmed text states remain muted and secondary. Badges (`待审核`, `BOBBuy Select`) clearly communicate lifecycle state.
+* **Tap Grouping:** The 44px action buttons at card bottoms maintain adequate touch target sizing. The 6px internal card action gaps and 8px editor button baselines provide distinct hit boundaries without overcrowding tap paths.

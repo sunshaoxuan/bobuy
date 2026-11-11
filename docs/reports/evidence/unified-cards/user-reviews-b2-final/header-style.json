@@ -1,0 +1,12 @@
+[
+  {
+    "backdrop": "blur(12px)",
+    "background": "rgba(255, 255, 255, 0.85)",
+    "class": "merchant-header"
+  },
+  {
+    "backdrop": "none",
+    "background": "rgba(0, 0, 0, 0)",
+    "class": "rec-heading"
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "h": 44,
+    "scrollX": 0,
+    "scrollY": 166,
+    "selector": ".product-review-dialog .ant-modal-close",
+    "w": 44,
+    "x": 322.5,
+    "y": 116
+  },
+  {
+    "h": 44,
+    "scrollX": 0,
+    "scrollY": 166,
+    "selector": ".product-review-editor .ant-input-number",
+    "w": 90,
+    "x": 27.5,
+    "y": 290.90625
+  },
+  {
+    "h": 74,
+    "scrollX": 0,
+    "scrollY": 166,
+    "selector": ".product-review-editor textarea",
+    "w": 318,
+    "x": 28.5,
+    "y": 379.90625
+  },
+  {
+    "h": 44,
+    "scrollX": 0,
+    "scrollY": 166,
+    "selector": ".product-review-editor .ant-btn",
+    "w": 116,
+    "x": 27.5,
+    "y": 468.90625
+  }
+]

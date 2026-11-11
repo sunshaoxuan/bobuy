@@ -1,0 +1,270 @@
+{
+  "method": "original browser JPEG glyph/icon pixels; fixed budgets; screenshot-to-viewport scale recorded",
+  "controls": [
+    {
+      "view": "mobile",
+      "role": "close",
+      "image": "native-ink-mobile-0.png",
+      "frame": [
+        12.0,
+        12.0,
+        56.0,
+        56.0
+      ],
+      "usable": [
+        13.0,
+        13.0,
+        55.0,
+        55.0
+      ],
+      "ink": [
+        28,
+        28,
+        40,
+        40
+      ],
+      "glyph_margins": [
+        15.0,
+        15.0,
+        15.0,
+        15.0
+      ],
+      "center_error_x": 0.0,
+      "center_error_y": 0.0,
+      "tolerance": 1.2000000000000002,
+      "geometry": "PASS"
+    },
+    {
+      "view": "mobile",
+      "role": "score",
+      "image": "native-ink-mobile-1.png",
+      "frame": [
+        12.0,
+        12.90625,
+        102.0,
+        56.90625
+      ],
+      "usable": [
+        13.0,
+        13.90625,
+        101.0,
+        55.90625
+      ],
+      "ink": [
+        24,
+        30,
+        41,
+        40
+      ],
+      "glyph_margins": [
+        11.0,
+        16.09375,
+        60.0,
+        15.90625
+      ],
+      "center_error_x": null,
+      "center_error_y": 0.09375,
+      "tolerance": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "view": "mobile",
+      "role": "comment",
+      "image": "native-ink-mobile-2.png",
+      "frame": [
+        12.0,
+        12.90625,
+        330.0,
+        86.90625
+      ],
+      "usable": [
+        13.0,
+        13.90625,
+        329.0,
+        85.90625
+      ],
+      "ink": [
+        24,
+        21,
+        306,
+        56
+      ],
+      "glyph_margins": [
+        11.0,
+        7.09375,
+        23.0,
+        29.90625
+      ],
+      "center_error_x": null,
+      "center_error_y": null,
+      "tolerance": 2,
+      "geometry": "PASS"
+    },
+    {
+      "view": "mobile",
+      "role": "save",
+      "image": "native-ink-mobile-3.png",
+      "frame": [
+        12.0,
+        12.90625,
+        128.0,
+        56.90625
+      ],
+      "usable": [
+        13.0,
+        13.90625,
+        127.0,
+        55.90625
+      ],
+      "ink": [
+        29,
+        28,
+        111,
+        41
+      ],
+      "glyph_margins": [
+        16.0,
+        14.09375,
+        16.0,
+        14.90625
+      ],
+      "center_error_x": 0.0,
+      "center_error_y": 0.40625,
+      "tolerance": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "view": "desktop",
+      "role": "close",
+      "image": "native-ink-desktop-0.png",
+      "frame": [
+        12.0,
+        12.0,
+        56.0,
+        56.0
+      ],
+      "usable": [
+        13.0,
+        13.0,
+        55.0,
+        55.0
+      ],
+      "ink": [
+        28,
+        28,
+        40,
+        40
+      ],
+      "glyph_margins": [
+        15.0,
+        15.0,
+        15.0,
+        15.0
+      ],
+      "center_error_x": 0.0,
+      "center_error_y": 0.0,
+      "tolerance": 1.2000000000000002,
+      "geometry": "PASS"
+    },
+    {
+      "view": "desktop",
+      "role": "score",
+      "image": "native-ink-desktop-1.png",
+      "frame": [
+        12.0,
+        12.90625,
+        102.0,
+        56.90625
+      ],
+      "usable": [
+        13.0,
+        13.90625,
+        101.0,
+        55.90625
+      ],
+      "ink": [
+        24,
+        30,
+        41,
+        40
+      ],
+      "glyph_margins": [
+        11.0,
+        16.09375,
+        60.0,
+        15.90625
+      ],
+      "center_error_x": null,
+      "center_error_y": 0.09375,
+      "tolerance": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "view": "desktop",
+      "role": "comment",
+      "image": "native-ink-desktop-2.png",
+      "frame": [
+        12.0,
+        12.90625,
+        596.0,
+        86.90625
+      ],
+      "usable": [
+        13.0,
+        13.90625,
+        595.0,
+        85.90625
+      ],
+      "ink": [
+        24,
+        21,
+        410,
+        34
+      ],
+      "glyph_margins": [
+        11.0,
+        7.09375,
+        185.0,
+        51.90625
+      ],
+      "center_error_x": null,
+      "center_error_y": null,
+      "tolerance": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "view": "desktop",
+      "role": "save",
+      "image": "native-ink-desktop-3.png",
+      "frame": [
+        12.0,
+        12.90625,
+        128.0,
+        56.90625
+      ],
+      "usable": [
+        13.0,
+        13.90625,
+        127.0,
+        55.90625
+      ],
+      "ink": [
+        29,
+        28,
+        111,
+        41
+      ],
+      "glyph_margins": [
+        16.0,
+        14.09375,
+        16.0,
+        14.90625
+      ],
+      "center_error_x": 0.0,
+      "center_error_y": 0.40625,
+      "tolerance": 1.3,
+      "geometry": "PASS"
+    }
+  ],
+  "result": "PASS"
+}

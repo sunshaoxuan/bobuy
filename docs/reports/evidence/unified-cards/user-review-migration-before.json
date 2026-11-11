@@ -1,0 +1,174 @@
+{
+  "bb_category": {
+    "rows": "31c3a5a85f38288156f57c1e918c6ac7",
+    "columns": "54f126d08b5d31884ce8fe541e1ce4d1"
+  },
+  "bb_chat_message": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "e149eb321af669ea6515b153f0084fa3"
+  },
+  "bb_checkout_identity": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "cc4f06beff83a03c312dce35ae6b383e"
+  },
+  "bb_costco_onboarding_commit": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "27d0aabfbf6d699014b2543316406261"
+  },
+  "bb_costco_onboarding_evidence": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "daa8ec0663a23a7ff329af539292f55d"
+  },
+  "bb_costco_onboarding_job": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "dcf793d5a061021129e236be2a46e753"
+  },
+  "bb_currency": {
+    "rows": "241de6507c43f21e228bd51716904529",
+    "columns": "2f2341766d8e61ca2cf905d15171be25"
+  },
+  "bb_customer_order_amendment": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "42df086e33e40aafdb2976773677b100"
+  },
+  "bb_customer_payment_ledger": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "f383cf5039a2731dd965d8167619f87a"
+  },
+  "bb_email_challenge": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "525f56c81f002dba823ef6e9fc36770f"
+  },
+  "bb_experience_mapping": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "4cf04fc32e301cb9b8ec52c9ebf704f8"
+  },
+  "bb_financial_audit_log": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "29424c0c1d625f519a1b56585eb9541d"
+  },
+  "bb_mail_settings": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "622ace404b014616e53496f582893039"
+  },
+  "bb_mail_settings_event": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "8691665621203523cfb15d30f183903f"
+  },
+  "bb_media_blob": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "92b0337ed5622b5cd8c26b7eec672148"
+  },
+  "bb_media_catalog_guard": {
+    "rows": "61f914e4fc3dc54959ce1800944b5bfd",
+    "columns": "b2a028c6cd64701574a52102dd0cc04e"
+  },
+  "bb_media_reference": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "a7fb76c83e19a4955486828ae21a7b6c"
+  },
+  "bb_media_transfer": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "b7647037817c9e7534e99d5ebf7c7eff"
+  },
+  "bb_merchant_customer": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "0684b0962f1bbc2c5a0993da9018bf11"
+  },
+  "bb_merchant_sku": {
+    "rows": "75984dcb4cd9e0fe79daf537162eb175",
+    "columns": "a7f541319d7f9c2cd793837c3116a992"
+  },
+  "bb_order_header": {
+    "rows": "a3969d323b6fbf85d01f77a6c68eabe5",
+    "columns": "0cc4594d62cf72a23496edf92381bbcc"
+  },
+  "bb_procurement_receipt": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "f926d7138461a2c7f59d2c9bb0eda1b6"
+  },
+  "bb_product": {
+    "rows": "5f3755ce2663b25c11b77c7d3cbd7386",
+    "columns": "e4ff30f6c29b93776bb1a97f1d4fd0c8"
+  },
+  "bb_product_catalog_recovery": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "603dd4e6f7a302e55886d8ca555a40c2"
+  },
+  "bb_product_lifecycle_event": {
+    "rows": "148939b854ea443aebe9435556cdae37",
+    "columns": "3c26e5f911e2174cc0692965f07923c2"
+  },
+  "bb_product_marker_definition": {
+    "rows": "c8a04db76f525ba5467e135459490c65",
+    "columns": "aa725a29f1fb0ae11f27684ef8df17df"
+  },
+  "bb_product_marker_set": {
+    "rows": "96f84245302f2ad157dc70c2ee9ad8e3",
+    "columns": "95bbffdb89d610e4146932f6ae483d44"
+  },
+  "bb_product_price_adjustment": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "4b143a039539c45a06f3c5a699fc5fb2"
+  },
+  "bb_product_rating": {
+    "rows": "e41a8e49bd736168cd6c579a32651b1f",
+    "columns": "2b668f3bafdb3faafc3b7b7ccf55da9c"
+  },
+  "bb_recommendation_article_revision": {
+    "rows": "e274321dd1c7a917c35d68332e7ae43e",
+    "columns": "55d68ba8617ccd9bdf580e651a1bfe42"
+  },
+  "bb_recommendation_image": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "0fba2531dce7d715c54cbc6f97dc2a00"
+  },
+  "bb_recommendation_item": {
+    "rows": "6995253a5057eea2c8ef8fca931b025a",
+    "columns": "970738b5aa2fc09b7b747bc3fc41a851"
+  },
+  "bb_recommendation_post": {
+    "rows": "463f894709504d32ef441c9805fab337",
+    "columns": "d5e3634234d147e9f476cd1e8de66498"
+  },
+  "bb_reference_quote_revision": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "b974bd8c671aaac915fbe82ae20b9130"
+  },
+  "bb_refresh_token_session": {
+    "rows": "5c5bb10b43aa4817016702733a091270",
+    "columns": "dfa7fb1053a9752588cf650ecd64fcf1"
+  },
+  "bb_supplier": {
+    "rows": "394fcbb72ae6e49418e6b73d6f2a7922",
+    "columns": "09fc7c2b547bac49e744e5b289e64330"
+  },
+  "bb_trip": {
+    "rows": "25f20cdcabb33357aa386c5e2add3c7e",
+    "columns": "d1dab43aa9b29da69bc92bdebacf65d9"
+  },
+  "bb_trip_expense": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "b64a101ceeb3ea7d2e956733d9fca378"
+  },
+  "bb_trip_logistics_tracking": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "5d2d815a4ed4854508bf9314299a3cba"
+  },
+  "bb_trip_profit_share_config": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "a83110aec3615691986bb68a67b31679"
+  },
+  "bb_user": {
+    "rows": "bc633f640c729b52b618afb13a7b0e74",
+    "columns": "b439016733a42c77544c97502999d899"
+  },
+  "partner_wallets": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "dd06225177222534a761241108c9bbaa"
+  },
+  "wallet_transactions": {
+    "rows": "d751713988987e9331980363e24189ce",
+    "columns": "b9ab89695c339667dd0969d4a66c3dc7"
+  }
+}

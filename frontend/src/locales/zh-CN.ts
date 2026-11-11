@@ -1379,7 +1379,7 @@ const messages: Dictionary = {
   "rating.review": "已核对本商品星级",
   "rating.save": "保存星级",
   "rating.saved": "星级已保存",
-  "rating.invalid": "请输入 0–5 星，支持半星；未评分不能公开星级。",
+  "rating.invalid": "评分须为1至5分、每档0.5分，评价最多2000字。",
   "rating.review_required": "保存前请核对星级。",
   "rating.value": "商品星级：{value} / 5",
   "service.basis": "服务形式",
@@ -1462,4 +1462,8 @@ const messages: Dictionary = {
   "rec.intake.uploaded": "上传的线索图片",
 };
 
+Object.assign(messages,{
+ "review.reread":"保留草稿并重读当前版本",
+ "review.title":"商品评价","review.none":"暂无评分","review.write":"我的评分与评价","review.login":"登录后评分和评价","review.score":"我的评分（1至5分，每档0.5分）","review.comment":"我的评价（选填）","review.save":"保存我的评价","review.saved":"评价已保存","review.count":"{count}人评分","review.read_write":"查看或撰写评价","review.more":"加载更多评价","review.retry":"重新加载"
+});
 export default messages;
