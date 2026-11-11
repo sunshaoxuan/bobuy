@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "removedTaskOwnedOutputs": [".task-tmp", "backend/target", "bobbuy-common/target", "task-cache/vitest-temp", "task-cache/release-coverage"],
+  "localSyntheticImageProbeRemoved": true,
+  "activeLocalCoreJarAndFrontendDistRetained": true,
+  "dependencyJunctionUntouched": true,
+  "formalEvidenceRetained": true,
+  "productionDatabaseBackupsRetained": true,
+  "checkedPowerShellSha256": "4e97dc43b19e18ffd2e67a4d535858150527d0c01bfea93c1b1083976624ee33"
+}
