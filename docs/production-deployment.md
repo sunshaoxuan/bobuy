@@ -1,5 +1,13 @@
 # Bobuy production deployment
 
+## 新增基础档案的轻量发布规则，2026-11-12
+
+本节约束后续新增独立基础档案的小功能，优先于下文历史版本的通用备份和停写步骤。适用条件为仅增加参考表、预制数据及查询选择接口，保留已有业务数据且旧应用兼容。采用版本化、幂等SQL或脚本直接导入，验证来源、数量、唯一性、父子关系和重复执行；受影响测试与项目必要门禁通过后直接上线，随后完成实际版本、数据、接口及受影响页面验收。用户已授权这类小功能的常规发布。
+
+默认复用现有异地流式备份，按运行证据核实覆盖和恢复位置，未知项如实记录；不默认额外全量快照、全局停写或全业务表聚合校验。应用回退保留新增参考表，失败优先兼容应用回退或前向修复，禁止旧快照覆盖已恢复写入的数据。涉及业务数据改写或删除、破坏性结构变化、旧应用不兼容、真实锁冲突或恢复缺口时，再记录具体风险、必要措施及最小作用范围。
+
+本次规则来源及实际交付证据见 [交付记录](reports/GEOGRAPHIC-MASTER-20261112.md)，项目入口为 `AGENTS.md`，执行技能为 `.agents/skills/bobuy-rapid-production/SKILL.md`。下文带版本号的快照和停写要求保留为对应历史发布的恢复约束。
+
 ## Consumer UI 20261108.2 — 2026-11-08
 
 Current accepted web5095f376/core7828194/V27 reopened17:01:55UTC. Full schema/current38-table data and Costco master updates preserved; public1440/358 routes and exact resources passed. Core/web each retain only their running image after exact recoverable cleanup; rollback requires verified nonproduction archive re-upload/load, never old DB restoration. [Actual release and recovery/capacity boundaries](reports/CONSUMER-UI-20261108-MOBILE-PRODUCTION.md) supersede historical versions below.
