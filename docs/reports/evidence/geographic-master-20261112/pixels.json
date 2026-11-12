@@ -1,0 +1,3021 @@
+{
+  "result": "PASS",
+  "method": "Measure actual rasterized glyphs in native browser PNGs against fixed budgets.\n\nDOM boxes locate controls and text regions only. Ink bounds come from screenshot\npixels with >=24 RGB-channel contrast to the measured flat background. This is\na geometric measurement, not a visual acceptance decision.\n",
+  "fixedBudgets": {
+    "inkMargin": 3,
+    "centerTolerance": "min(2px, inkHeight * 10%)",
+    "hotHeight": 44,
+    "adjacentHotGap": 6
+  },
+  "measurements": [
+    {
+      "state": "desktop-japan",
+      "control": "重新读取",
+      "backgroundUsableInner": [
+        1313,
+        119,
+        1399,
+        161
+      ],
+      "actualInkBounds": [
+        1328,
+        133,
+        1384,
+        146
+      ],
+      "hotArea": {
+        "x": 1312,
+        "y": 118,
+        "width": 88,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        15,
+        14,
+        15,
+        15
+      ],
+      "verticalCenterError": 0.5,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "desktop-japan",
+      "control": "日本 (JP)",
+      "backgroundUsableInner": [
+        273,
+        234.46875,
+        636.328125,
+        276.46875
+      ],
+      "actualInkBounds": [
+        286,
+        248,
+        337,
+        262
+      ],
+      "hotArea": {
+        "x": 272,
+        "y": 233.46875,
+        "width": 365.328125,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        13,
+        13.53125,
+        299.328125,
+        14.46875
+      ],
+      "verticalCenterError": 0.46875,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.4000000000000001,
+      "geometry": "PASS"
+    },
+    {
+      "state": "desktop-japan",
+      "control": "选择省县",
+      "backgroundUsableInner": [
+        654.328125,
+        234.46875,
+        1017.65625,
+        276.46875
+      ],
+      "actualInkBounds": [
+        666,
+        248,
+        721,
+        261
+      ],
+      "hotArea": {
+        "x": 653.328125,
+        "y": 233.46875,
+        "width": 365.328125,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11.671875,
+        13.53125,
+        296.65625,
+        15.46875
+      ],
+      "verticalCenterError": 0.96875,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "desktop-japan",
+      "control": "选择市/区",
+      "backgroundUsableInner": [
+        1035.65625,
+        234.46875,
+        1399.0,
+        276.46875
+      ],
+      "actualInkBounds": [
+        1047,
+        248,
+        1108,
+        262
+      ],
+      "hotArea": {
+        "x": 1034.65625,
+        "y": 233.46875,
+        "width": 365.34375,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11.34375,
+        13.53125,
+        291.0,
+        14.46875
+      ],
+      "verticalCenterError": 0.46875,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.4000000000000001,
+      "geometry": "PASS"
+    },
+    {
+      "state": "desktop-japan",
+      "control": "pagination arrow",
+      "backgroundUsableInner": [
+        1141,
+        1560.625,
+        1183,
+        1602.625
+      ],
+      "actualInkBounds": [
+        1159,
+        1576,
+        1165,
+        1586
+      ],
+      "hotArea": {
+        "x": 1140,
+        "y": 1559.625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.375,
+        18,
+        16.625
+      ],
+      "verticalCenterError": 0.625,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "desktop-japan",
+      "control": "1",
+      "backgroundUsableInner": [
+        1193,
+        1560.625,
+        1235,
+        1602.625
+      ],
+      "actualInkBounds": [
+        1212,
+        1577,
+        1216,
+        1587
+      ],
+      "hotArea": {
+        "x": 1192,
+        "y": 1559.625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        19,
+        16.375,
+        19,
+        15.625
+      ],
+      "verticalCenterError": 0.375,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "desktop-japan",
+      "control": "2",
+      "backgroundUsableInner": [
+        1245,
+        1560.625,
+        1287,
+        1602.625
+      ],
+      "actualInkBounds": [
+        1263,
+        1577,
+        1269,
+        1587
+      ],
+      "hotArea": {
+        "x": 1244,
+        "y": 1559.625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        16.375,
+        18,
+        15.625
+      ],
+      "verticalCenterError": 0.375,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "desktop-japan",
+      "control": "3",
+      "backgroundUsableInner": [
+        1297,
+        1560.625,
+        1339,
+        1602.625
+      ],
+      "actualInkBounds": [
+        1315,
+        1577,
+        1321,
+        1587
+      ],
+      "hotArea": {
+        "x": 1296,
+        "y": 1559.625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        16.375,
+        18,
+        15.625
+      ],
+      "verticalCenterError": 0.375,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "desktop-japan",
+      "control": "pagination arrow",
+      "backgroundUsableInner": [
+        1349,
+        1560.625,
+        1391,
+        1602.625
+      ],
+      "actualInkBounds": [
+        1367,
+        1576,
+        1374,
+        1586
+      ],
+      "hotArea": {
+        "x": 1348,
+        "y": 1559.625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.375,
+        17,
+        16.625
+      ],
+      "verticalCenterError": 0.625,
+      "horizontalCenterError": 0.5,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "desktop-tokyo",
+      "control": "重新读取",
+      "backgroundUsableInner": [
+        1313,
+        119,
+        1399,
+        161
+      ],
+      "actualInkBounds": [
+        1328,
+        133,
+        1384,
+        146
+      ],
+      "hotArea": {
+        "x": 1312,
+        "y": 118,
+        "width": 88,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        15,
+        14,
+        15,
+        15
+      ],
+      "verticalCenterError": 0.5,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "desktop-tokyo",
+      "control": "日本 (JP)",
+      "backgroundUsableInner": [
+        273,
+        234.46875,
+        636.328125,
+        276.46875
+      ],
+      "actualInkBounds": [
+        286,
+        248,
+        337,
+        262
+      ],
+      "hotArea": {
+        "x": 272,
+        "y": 233.46875,
+        "width": 365.328125,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        13,
+        13.53125,
+        299.328125,
+        14.46875
+      ],
+      "verticalCenterError": 0.46875,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.4000000000000001,
+      "geometry": "PASS"
+    },
+    {
+      "state": "desktop-tokyo",
+      "control": "東京都 (JP-13)",
+      "backgroundUsableInner": [
+        654.328125,
+        234.46875,
+        1017.65625,
+        276.46875
+      ],
+      "actualInkBounds": [
+        666,
+        248,
+        753,
+        262
+      ],
+      "hotArea": {
+        "x": 653.328125,
+        "y": 233.46875,
+        "width": 365.328125,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11.671875,
+        13.53125,
+        264.65625,
+        14.46875
+      ],
+      "verticalCenterError": 0.46875,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.4000000000000001,
+      "geometry": "PASS"
+    },
+    {
+      "state": "desktop-tokyo",
+      "control": "千代田区 (JP-13101)",
+      "backgroundUsableInner": [
+        1035.65625,
+        234.46875,
+        1399.0,
+        276.46875
+      ],
+      "actualInkBounds": [
+        1047,
+        248,
+        1171,
+        262
+      ],
+      "hotArea": {
+        "x": 1034.65625,
+        "y": 233.46875,
+        "width": 365.34375,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11.34375,
+        13.53125,
+        228.0,
+        14.46875
+      ],
+      "verticalCenterError": 0.46875,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.4000000000000001,
+      "geometry": "PASS"
+    },
+    {
+      "state": "desktop-tokyo",
+      "control": "pagination arrow",
+      "backgroundUsableInner": [
+        1089,
+        1560.625,
+        1131,
+        1602.625
+      ],
+      "actualInkBounds": [
+        1107,
+        1576,
+        1113,
+        1586
+      ],
+      "hotArea": {
+        "x": 1088,
+        "y": 1559.625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.375,
+        18,
+        16.625
+      ],
+      "verticalCenterError": 0.625,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "desktop-tokyo",
+      "control": "1",
+      "backgroundUsableInner": [
+        1141,
+        1560.625,
+        1183,
+        1602.625
+      ],
+      "actualInkBounds": [
+        1160,
+        1577,
+        1164,
+        1587
+      ],
+      "hotArea": {
+        "x": 1140,
+        "y": 1559.625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        19,
+        16.375,
+        19,
+        15.625
+      ],
+      "verticalCenterError": 0.375,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "desktop-tokyo",
+      "control": "2",
+      "backgroundUsableInner": [
+        1193,
+        1560.625,
+        1235,
+        1602.625
+      ],
+      "actualInkBounds": [
+        1211,
+        1577,
+        1217,
+        1587
+      ],
+      "hotArea": {
+        "x": 1192,
+        "y": 1559.625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        16.375,
+        18,
+        15.625
+      ],
+      "verticalCenterError": 0.375,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "desktop-tokyo",
+      "control": "3",
+      "backgroundUsableInner": [
+        1245,
+        1560.625,
+        1287,
+        1602.625
+      ],
+      "actualInkBounds": [
+        1263,
+        1577,
+        1269,
+        1587
+      ],
+      "hotArea": {
+        "x": 1244,
+        "y": 1559.625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        16.375,
+        18,
+        15.625
+      ],
+      "verticalCenterError": 0.375,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "desktop-tokyo",
+      "control": "4",
+      "backgroundUsableInner": [
+        1297,
+        1560.625,
+        1339,
+        1602.625
+      ],
+      "actualInkBounds": [
+        1315,
+        1577,
+        1321,
+        1587
+      ],
+      "hotArea": {
+        "x": 1296,
+        "y": 1559.625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        16.375,
+        18,
+        15.625
+      ],
+      "verticalCenterError": 0.375,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "desktop-tokyo",
+      "control": "pagination arrow",
+      "backgroundUsableInner": [
+        1349,
+        1560.625,
+        1391,
+        1602.625
+      ],
+      "actualInkBounds": [
+        1367,
+        1576,
+        1374,
+        1586
+      ],
+      "hotArea": {
+        "x": 1348,
+        "y": 1559.625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.375,
+        17,
+        16.625
+      ],
+      "verticalCenterError": 0.625,
+      "horizontalCenterError": 0.5,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-tokyo",
+      "control": "重新读取",
+      "backgroundUsableInner": [
+        257,
+        95,
+        343,
+        137
+      ],
+      "actualInkBounds": [
+        272,
+        109,
+        328,
+        122
+      ],
+      "hotArea": {
+        "x": 256,
+        "y": 94,
+        "width": 88,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        15,
+        14,
+        15,
+        15
+      ],
+      "verticalCenterError": 0.5,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-tokyo",
+      "control": "日本 (JP)",
+      "backgroundUsableInner": [
+        17,
+        234.203125,
+        343,
+        276.203125
+      ],
+      "actualInkBounds": [
+        30,
+        248,
+        81,
+        262
+      ],
+      "hotArea": {
+        "x": 16,
+        "y": 233.203125,
+        "width": 328,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        13,
+        13.796875,
+        262,
+        14.203125
+      ],
+      "verticalCenterError": 0.203125,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.4000000000000001,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-tokyo",
+      "control": "東京都 (JP-13)",
+      "backgroundUsableInner": [
+        17,
+        320.59375,
+        343,
+        362.59375
+      ],
+      "actualInkBounds": [
+        28,
+        335,
+        115,
+        349
+      ],
+      "hotArea": {
+        "x": 16,
+        "y": 319.59375,
+        "width": 328,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11,
+        14.40625,
+        228,
+        13.59375
+      ],
+      "verticalCenterError": 0.40625,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.4000000000000001,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-tokyo",
+      "control": "千代田区 (JP-13101)",
+      "backgroundUsableInner": [
+        17,
+        406.984375,
+        343,
+        448.984375
+      ],
+      "actualInkBounds": [
+        28,
+        421,
+        152,
+        435
+      ],
+      "hotArea": {
+        "x": 16,
+        "y": 405.984375,
+        "width": 328,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11,
+        14.015625,
+        191,
+        13.984375
+      ],
+      "verticalCenterError": 0.015625,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.4000000000000001,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-tokyo",
+      "control": "pagination arrow",
+      "backgroundUsableInner": [
+        33,
+        1764.328125,
+        75,
+        1806.328125
+      ],
+      "actualInkBounds": [
+        51,
+        1780,
+        57,
+        1790
+      ],
+      "hotArea": {
+        "x": 32,
+        "y": 1763.328125,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.671875,
+        18,
+        16.328125
+      ],
+      "verticalCenterError": 0.328125,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-tokyo",
+      "control": "1",
+      "backgroundUsableInner": [
+        85,
+        1764.328125,
+        127,
+        1806.328125
+      ],
+      "actualInkBounds": [
+        104,
+        1780,
+        108,
+        1790
+      ],
+      "hotArea": {
+        "x": 84,
+        "y": 1763.328125,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        19,
+        15.671875,
+        19,
+        16.328125
+      ],
+      "verticalCenterError": 0.328125,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-tokyo",
+      "control": "2",
+      "backgroundUsableInner": [
+        137,
+        1764.328125,
+        179,
+        1806.328125
+      ],
+      "actualInkBounds": [
+        155,
+        1780,
+        161,
+        1790
+      ],
+      "hotArea": {
+        "x": 136,
+        "y": 1763.328125,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.671875,
+        18,
+        16.328125
+      ],
+      "verticalCenterError": 0.328125,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-tokyo",
+      "control": "3",
+      "backgroundUsableInner": [
+        189,
+        1764.328125,
+        231,
+        1806.328125
+      ],
+      "actualInkBounds": [
+        207,
+        1780,
+        213,
+        1790
+      ],
+      "hotArea": {
+        "x": 188,
+        "y": 1763.328125,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.671875,
+        18,
+        16.328125
+      ],
+      "verticalCenterError": 0.328125,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-tokyo",
+      "control": "4",
+      "backgroundUsableInner": [
+        241,
+        1764.328125,
+        283,
+        1806.328125
+      ],
+      "actualInkBounds": [
+        259,
+        1780,
+        265,
+        1790
+      ],
+      "hotArea": {
+        "x": 240,
+        "y": 1763.328125,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.671875,
+        18,
+        16.328125
+      ],
+      "verticalCenterError": 0.328125,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-tokyo",
+      "control": "pagination arrow",
+      "backgroundUsableInner": [
+        293,
+        1764.328125,
+        335,
+        1806.328125
+      ],
+      "actualInkBounds": [
+        311,
+        1780,
+        318,
+        1790
+      ],
+      "hotArea": {
+        "x": 292,
+        "y": 1763.328125,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.671875,
+        17,
+        16.328125
+      ],
+      "verticalCenterError": 0.328125,
+      "horizontalCenterError": 0.5,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-ward",
+      "control": "重新读取",
+      "backgroundUsableInner": [
+        257,
+        95,
+        343,
+        137
+      ],
+      "actualInkBounds": [
+        272,
+        109,
+        328,
+        122
+      ],
+      "hotArea": {
+        "x": 256,
+        "y": 94,
+        "width": 88,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        15,
+        14,
+        15,
+        15
+      ],
+      "verticalCenterError": 0.5,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-ward",
+      "control": "日本 (JP)",
+      "backgroundUsableInner": [
+        17,
+        234.203125,
+        343,
+        276.203125
+      ],
+      "actualInkBounds": [
+        30,
+        248,
+        81,
+        262
+      ],
+      "hotArea": {
+        "x": 16,
+        "y": 233.203125,
+        "width": 328,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        13,
+        13.796875,
+        262,
+        14.203125
+      ],
+      "verticalCenterError": 0.203125,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.4000000000000001,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-ward",
+      "control": "北海道 (JP-01)",
+      "backgroundUsableInner": [
+        17,
+        320.59375,
+        343,
+        362.59375
+      ],
+      "actualInkBounds": [
+        28,
+        335,
+        115,
+        349
+      ],
+      "hotArea": {
+        "x": 16,
+        "y": 319.59375,
+        "width": 328,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11,
+        14.40625,
+        228,
+        13.59375
+      ],
+      "verticalCenterError": 0.40625,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.4000000000000001,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-ward",
+      "control": "札幌市中央区 (JP-01101)",
+      "backgroundUsableInner": [
+        17,
+        406.984375,
+        343,
+        448.984375
+      ],
+      "actualInkBounds": [
+        28,
+        421,
+        180,
+        435
+      ],
+      "hotArea": {
+        "x": 16,
+        "y": 405.984375,
+        "width": 328,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11,
+        14.015625,
+        163,
+        13.984375
+      ],
+      "verticalCenterError": 0.015625,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.4000000000000001,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-ward",
+      "control": "pagination arrow",
+      "backgroundUsableInner": [
+        33,
+        1764.328125,
+        75,
+        1806.328125
+      ],
+      "actualInkBounds": [
+        51,
+        1780,
+        57,
+        1790
+      ],
+      "hotArea": {
+        "x": 32,
+        "y": 1763.328125,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.671875,
+        18,
+        16.328125
+      ],
+      "verticalCenterError": 0.328125,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-ward",
+      "control": "1",
+      "backgroundUsableInner": [
+        85,
+        1764.328125,
+        127,
+        1806.328125
+      ],
+      "actualInkBounds": [
+        104,
+        1780,
+        108,
+        1790
+      ],
+      "hotArea": {
+        "x": 84,
+        "y": 1763.328125,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        19,
+        15.671875,
+        19,
+        16.328125
+      ],
+      "verticalCenterError": 0.328125,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-ward",
+      "control": "2",
+      "backgroundUsableInner": [
+        137,
+        1764.328125,
+        179,
+        1806.328125
+      ],
+      "actualInkBounds": [
+        155,
+        1780,
+        161,
+        1790
+      ],
+      "hotArea": {
+        "x": 136,
+        "y": 1763.328125,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.671875,
+        18,
+        16.328125
+      ],
+      "verticalCenterError": 0.328125,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-ward",
+      "control": "10",
+      "backgroundUsableInner": [
+        241,
+        1764.328125,
+        283,
+        1806.328125
+      ],
+      "actualInkBounds": [
+        255,
+        1780,
+        269,
+        1790
+      ],
+      "hotArea": {
+        "x": 240,
+        "y": 1763.328125,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        14,
+        15.671875,
+        14,
+        16.328125
+      ],
+      "verticalCenterError": 0.328125,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-ward",
+      "control": "pagination arrow",
+      "backgroundUsableInner": [
+        293,
+        1764.328125,
+        335,
+        1806.328125
+      ],
+      "actualInkBounds": [
+        311,
+        1780,
+        318,
+        1790
+      ],
+      "hotArea": {
+        "x": 292,
+        "y": 1763.328125,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.671875,
+        17,
+        16.328125
+      ],
+      "verticalCenterError": 0.328125,
+      "horizontalCenterError": 0.5,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-long-municipality",
+      "control": "重新读取",
+      "backgroundUsableInner": [
+        257,
+        95,
+        343,
+        137
+      ],
+      "actualInkBounds": [
+        272,
+        109,
+        328,
+        122
+      ],
+      "hotArea": {
+        "x": 256,
+        "y": 94,
+        "width": 88,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        15,
+        14,
+        15,
+        15
+      ],
+      "verticalCenterError": 0.5,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-long-municipality",
+      "control": "日本 (JP)",
+      "backgroundUsableInner": [
+        17,
+        234.203125,
+        343,
+        276.203125
+      ],
+      "actualInkBounds": [
+        30,
+        248,
+        81,
+        262
+      ],
+      "hotArea": {
+        "x": 16,
+        "y": 233.203125,
+        "width": 328,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        13,
+        13.796875,
+        262,
+        14.203125
+      ],
+      "verticalCenterError": 0.203125,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.4000000000000001,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-long-municipality",
+      "control": "山梨県 (JP-19)",
+      "backgroundUsableInner": [
+        17,
+        320.59375,
+        343,
+        362.59375
+      ],
+      "actualInkBounds": [
+        29,
+        335,
+        115,
+        349
+      ],
+      "hotArea": {
+        "x": 16,
+        "y": 319.59375,
+        "width": 328,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        12,
+        14.40625,
+        228,
+        13.59375
+      ],
+      "verticalCenterError": 0.40625,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.4000000000000001,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-long-municipality",
+      "control": "南都留郡富士河口湖町 (JP-19430)",
+      "backgroundUsableInner": [
+        17,
+        406.984375,
+        343,
+        448.984375
+      ],
+      "actualInkBounds": [
+        28,
+        421,
+        236,
+        435
+      ],
+      "hotArea": {
+        "x": 16,
+        "y": 405.984375,
+        "width": 328,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11,
+        14.015625,
+        107,
+        13.984375
+      ],
+      "verticalCenterError": 0.015625,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.4000000000000001,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-long-municipality",
+      "control": "pagination arrow",
+      "backgroundUsableInner": [
+        137,
+        1764.328125,
+        179,
+        1806.328125
+      ],
+      "actualInkBounds": [
+        155,
+        1780,
+        161,
+        1790
+      ],
+      "hotArea": {
+        "x": 136,
+        "y": 1763.328125,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.671875,
+        18,
+        16.328125
+      ],
+      "verticalCenterError": 0.328125,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-long-municipality",
+      "control": "1",
+      "backgroundUsableInner": [
+        189,
+        1764.328125,
+        231,
+        1806.328125
+      ],
+      "actualInkBounds": [
+        208,
+        1780,
+        212,
+        1790
+      ],
+      "hotArea": {
+        "x": 188,
+        "y": 1763.328125,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        19,
+        15.671875,
+        19,
+        16.328125
+      ],
+      "verticalCenterError": 0.328125,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-long-municipality",
+      "control": "2",
+      "backgroundUsableInner": [
+        241,
+        1764.328125,
+        283,
+        1806.328125
+      ],
+      "actualInkBounds": [
+        259,
+        1780,
+        265,
+        1790
+      ],
+      "hotArea": {
+        "x": 240,
+        "y": 1763.328125,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.671875,
+        18,
+        16.328125
+      ],
+      "verticalCenterError": 0.328125,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-long-municipality",
+      "control": "pagination arrow",
+      "backgroundUsableInner": [
+        293,
+        1764.328125,
+        335,
+        1806.328125
+      ],
+      "actualInkBounds": [
+        311,
+        1780,
+        318,
+        1790
+      ],
+      "hotArea": {
+        "x": 292,
+        "y": 1763.328125,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.671875,
+        17,
+        16.328125
+      ],
+      "verticalCenterError": 0.328125,
+      "horizontalCenterError": 0.5,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-country-only",
+      "control": "重新读取",
+      "backgroundUsableInner": [
+        257,
+        95,
+        343,
+        137
+      ],
+      "actualInkBounds": [
+        272,
+        109,
+        328,
+        122
+      ],
+      "hotArea": {
+        "x": 256,
+        "y": 94,
+        "width": 88,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        15,
+        14,
+        15,
+        15
+      ],
+      "verticalCenterError": 0.5,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-country-only",
+      "control": "美国 (US)",
+      "backgroundUsableInner": [
+        17,
+        234.203125,
+        343,
+        276.203125
+      ],
+      "actualInkBounds": [
+        28,
+        248,
+        85,
+        262
+      ],
+      "hotArea": {
+        "x": 16,
+        "y": 233.203125,
+        "width": 328,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11,
+        13.796875,
+        258,
+        14.203125
+      ],
+      "verticalCenterError": 0.203125,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.4000000000000001,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-country-only",
+      "control": "选择省县",
+      "backgroundUsableInner": [
+        17,
+        320.59375,
+        343,
+        362.59375
+      ],
+      "actualInkBounds": [
+        28,
+        335,
+        84,
+        348
+      ],
+      "hotArea": {
+        "x": 16,
+        "y": 319.59375,
+        "width": 328,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11,
+        14.40625,
+        259,
+        14.59375
+      ],
+      "verticalCenterError": 0.09375,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "mobile-country-only",
+      "control": "选择市/区",
+      "backgroundUsableInner": [
+        17,
+        406.984375,
+        343,
+        448.984375
+      ],
+      "actualInkBounds": [
+        28,
+        421,
+        89,
+        435
+      ],
+      "hotArea": {
+        "x": 16,
+        "y": 405.984375,
+        "width": 328,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11,
+        14.015625,
+        254,
+        13.984375
+      ],
+      "verticalCenterError": 0.015625,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.4000000000000001,
+      "geometry": "PASS"
+    },
+    {
+      "state": "ja-JP-mobile",
+      "control": "再読み込み",
+      "backgroundUsableInner": [
+        243,
+        95,
+        343,
+        137
+      ],
+      "actualInkBounds": [
+        258,
+        109,
+        328,
+        122
+      ],
+      "hotArea": {
+        "x": 242,
+        "y": 94,
+        "width": 102,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        15,
+        14,
+        15,
+        15
+      ],
+      "verticalCenterError": 0.5,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "ja-JP-mobile",
+      "control": "日本 (JP)",
+      "backgroundUsableInner": [
+        17,
+        261.390625,
+        343,
+        303.390625
+      ],
+      "actualInkBounds": [
+        30,
+        275,
+        81,
+        289
+      ],
+      "hotArea": {
+        "x": 16,
+        "y": 260.390625,
+        "width": 328,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        13,
+        13.609375,
+        262,
+        14.390625
+      ],
+      "verticalCenterError": 0.390625,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.4000000000000001,
+      "geometry": "PASS"
+    },
+    {
+      "state": "ja-JP-mobile",
+      "control": "都道府県を選択",
+      "backgroundUsableInner": [
+        17,
+        347.78125,
+        343,
+        389.78125
+      ],
+      "actualInkBounds": [
+        28,
+        362,
+        126,
+        375
+      ],
+      "hotArea": {
+        "x": 16,
+        "y": 346.78125,
+        "width": 328,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11,
+        14.21875,
+        217,
+        14.78125
+      ],
+      "verticalCenterError": 0.28125,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "ja-JP-mobile",
+      "control": "市区町村を選択",
+      "backgroundUsableInner": [
+        17,
+        434.171875,
+        343,
+        476.171875
+      ],
+      "actualInkBounds": [
+        28,
+        448,
+        126,
+        461
+      ],
+      "hotArea": {
+        "x": 16,
+        "y": 433.171875,
+        "width": 328,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11,
+        13.828125,
+        217,
+        15.171875
+      ],
+      "verticalCenterError": 0.671875,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "ja-JP-mobile",
+      "control": "pagination arrow",
+      "backgroundUsableInner": [
+        85,
+        1791.515625,
+        127,
+        1833.515625
+      ],
+      "actualInkBounds": [
+        103,
+        1807,
+        109,
+        1817
+      ],
+      "hotArea": {
+        "x": 84,
+        "y": 1790.515625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.484375,
+        18,
+        16.515625
+      ],
+      "verticalCenterError": 0.515625,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "ja-JP-mobile",
+      "control": "1",
+      "backgroundUsableInner": [
+        137,
+        1791.515625,
+        179,
+        1833.515625
+      ],
+      "actualInkBounds": [
+        156,
+        1808,
+        160,
+        1818
+      ],
+      "hotArea": {
+        "x": 136,
+        "y": 1790.515625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        19,
+        16.484375,
+        19,
+        15.515625
+      ],
+      "verticalCenterError": 0.484375,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "ja-JP-mobile",
+      "control": "2",
+      "backgroundUsableInner": [
+        189,
+        1791.515625,
+        231,
+        1833.515625
+      ],
+      "actualInkBounds": [
+        207,
+        1808,
+        213,
+        1818
+      ],
+      "hotArea": {
+        "x": 188,
+        "y": 1790.515625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        16.484375,
+        18,
+        15.515625
+      ],
+      "verticalCenterError": 0.484375,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "ja-JP-mobile",
+      "control": "3",
+      "backgroundUsableInner": [
+        241,
+        1791.515625,
+        283,
+        1833.515625
+      ],
+      "actualInkBounds": [
+        259,
+        1808,
+        265,
+        1818
+      ],
+      "hotArea": {
+        "x": 240,
+        "y": 1790.515625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        16.484375,
+        18,
+        15.515625
+      ],
+      "verticalCenterError": 0.484375,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "ja-JP-mobile",
+      "control": "pagination arrow",
+      "backgroundUsableInner": [
+        293,
+        1791.515625,
+        335,
+        1833.515625
+      ],
+      "actualInkBounds": [
+        311,
+        1807,
+        318,
+        1817
+      ],
+      "hotArea": {
+        "x": 292,
+        "y": 1790.515625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.484375,
+        17,
+        16.515625
+      ],
+      "verticalCenterError": 0.515625,
+      "horizontalCenterError": 0.5,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "ja-JP-desktop",
+      "control": "再読み込み",
+      "backgroundUsableInner": [
+        1299,
+        119,
+        1399,
+        161
+      ],
+      "actualInkBounds": [
+        1314,
+        133,
+        1384,
+        146
+      ],
+      "hotArea": {
+        "x": 1298,
+        "y": 118,
+        "width": 102,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        15,
+        14,
+        15,
+        15
+      ],
+      "verticalCenterError": 0.5,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "ja-JP-desktop",
+      "control": "日本 (JP)",
+      "backgroundUsableInner": [
+        273,
+        234.46875,
+        636.328125,
+        276.46875
+      ],
+      "actualInkBounds": [
+        286,
+        248,
+        337,
+        262
+      ],
+      "hotArea": {
+        "x": 272,
+        "y": 233.46875,
+        "width": 365.328125,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        13,
+        13.53125,
+        299.328125,
+        14.46875
+      ],
+      "verticalCenterError": 0.46875,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.4000000000000001,
+      "geometry": "PASS"
+    },
+    {
+      "state": "ja-JP-desktop",
+      "control": "都道府県を選択",
+      "backgroundUsableInner": [
+        654.328125,
+        234.46875,
+        1017.65625,
+        276.46875
+      ],
+      "actualInkBounds": [
+        666,
+        248,
+        763,
+        261
+      ],
+      "hotArea": {
+        "x": 653.328125,
+        "y": 233.46875,
+        "width": 365.328125,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11.671875,
+        13.53125,
+        254.65625,
+        15.46875
+      ],
+      "verticalCenterError": 0.96875,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "ja-JP-desktop",
+      "control": "市区町村を選択",
+      "backgroundUsableInner": [
+        1035.65625,
+        234.46875,
+        1399.0,
+        276.46875
+      ],
+      "actualInkBounds": [
+        1047,
+        248,
+        1144,
+        261
+      ],
+      "hotArea": {
+        "x": 1034.65625,
+        "y": 233.46875,
+        "width": 365.34375,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11.34375,
+        13.53125,
+        255.0,
+        15.46875
+      ],
+      "verticalCenterError": 0.96875,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "ja-JP-desktop",
+      "control": "pagination arrow",
+      "backgroundUsableInner": [
+        1141,
+        1560.625,
+        1183,
+        1602.625
+      ],
+      "actualInkBounds": [
+        1159,
+        1576,
+        1165,
+        1586
+      ],
+      "hotArea": {
+        "x": 1140,
+        "y": 1559.625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.375,
+        18,
+        16.625
+      ],
+      "verticalCenterError": 0.625,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "ja-JP-desktop",
+      "control": "1",
+      "backgroundUsableInner": [
+        1193,
+        1560.625,
+        1235,
+        1602.625
+      ],
+      "actualInkBounds": [
+        1212,
+        1577,
+        1216,
+        1587
+      ],
+      "hotArea": {
+        "x": 1192,
+        "y": 1559.625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        19,
+        16.375,
+        19,
+        15.625
+      ],
+      "verticalCenterError": 0.375,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "ja-JP-desktop",
+      "control": "2",
+      "backgroundUsableInner": [
+        1245,
+        1560.625,
+        1287,
+        1602.625
+      ],
+      "actualInkBounds": [
+        1263,
+        1577,
+        1269,
+        1587
+      ],
+      "hotArea": {
+        "x": 1244,
+        "y": 1559.625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        16.375,
+        18,
+        15.625
+      ],
+      "verticalCenterError": 0.375,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "ja-JP-desktop",
+      "control": "3",
+      "backgroundUsableInner": [
+        1297,
+        1560.625,
+        1339,
+        1602.625
+      ],
+      "actualInkBounds": [
+        1315,
+        1577,
+        1321,
+        1587
+      ],
+      "hotArea": {
+        "x": 1296,
+        "y": 1559.625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        16.375,
+        18,
+        15.625
+      ],
+      "verticalCenterError": 0.375,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "ja-JP-desktop",
+      "control": "pagination arrow",
+      "backgroundUsableInner": [
+        1349,
+        1560.625,
+        1391,
+        1602.625
+      ],
+      "actualInkBounds": [
+        1367,
+        1576,
+        1374,
+        1586
+      ],
+      "hotArea": {
+        "x": 1348,
+        "y": 1559.625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.375,
+        17,
+        16.625
+      ],
+      "verticalCenterError": 0.625,
+      "horizontalCenterError": 0.5,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "en-US-mobile",
+      "control": "Reload",
+      "backgroundUsableInner": [
+        270.75,
+        95,
+        343.0,
+        137
+      ],
+      "actualInkBounds": [
+        286,
+        111,
+        328,
+        121
+      ],
+      "hotArea": {
+        "x": 269.75,
+        "y": 94,
+        "width": 74.25,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        15.25,
+        16,
+        15.0,
+        16
+      ],
+      "verticalCenterError": 0.0,
+      "horizontalCenterError": 0.125,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "en-US-mobile",
+      "control": "South Georgia & South Sandwich Islands (GS)",
+      "backgroundUsableInner": [
+        17,
+        261.390625,
+        343,
+        303.390625
+      ],
+      "actualInkBounds": [
+        28,
+        277,
+        309,
+        290
+      ],
+      "hotArea": {
+        "x": 16,
+        "y": 260.390625,
+        "width": 328,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11,
+        15.609375,
+        34,
+        13.390625
+      ],
+      "verticalCenterError": 1.109375,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "en-US-mobile",
+      "control": "Select a prefecture",
+      "backgroundUsableInner": [
+        17,
+        347.78125,
+        343,
+        389.78125
+      ],
+      "actualInkBounds": [
+        28,
+        363,
+        142,
+        376
+      ],
+      "hotArea": {
+        "x": 16,
+        "y": 346.78125,
+        "width": 328,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11,
+        15.21875,
+        201,
+        13.78125
+      ],
+      "verticalCenterError": 0.71875,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "en-US-mobile",
+      "control": "Select a city/ward",
+      "backgroundUsableInner": [
+        17,
+        434.171875,
+        343,
+        476.171875
+      ],
+      "actualInkBounds": [
+        28,
+        449,
+        136,
+        462
+      ],
+      "hotArea": {
+        "x": 16,
+        "y": 433.171875,
+        "width": 328,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11,
+        14.828125,
+        207,
+        14.171875
+      ],
+      "verticalCenterError": 0.328125,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "en-US-desktop",
+      "control": "Reload",
+      "backgroundUsableInner": [
+        1326.75,
+        119,
+        1399.0,
+        161
+      ],
+      "actualInkBounds": [
+        1342,
+        135,
+        1384,
+        145
+      ],
+      "hotArea": {
+        "x": 1325.75,
+        "y": 118,
+        "width": 74.25,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        15.25,
+        16,
+        15.0,
+        16
+      ],
+      "verticalCenterError": 0.0,
+      "horizontalCenterError": 0.125,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "en-US-desktop",
+      "control": "South Georgia & South Sandwich Islands (GS)",
+      "backgroundUsableInner": [
+        273,
+        234.46875,
+        636.328125,
+        276.46875
+      ],
+      "actualInkBounds": [
+        284,
+        250,
+        565,
+        263
+      ],
+      "hotArea": {
+        "x": 272,
+        "y": 233.46875,
+        "width": 365.328125,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11,
+        15.53125,
+        71.328125,
+        13.46875
+      ],
+      "verticalCenterError": 1.03125,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "en-US-desktop",
+      "control": "Select a prefecture",
+      "backgroundUsableInner": [
+        654.328125,
+        234.46875,
+        1017.65625,
+        276.46875
+      ],
+      "actualInkBounds": [
+        666,
+        249,
+        780,
+        262
+      ],
+      "hotArea": {
+        "x": 653.328125,
+        "y": 233.46875,
+        "width": 365.328125,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11.671875,
+        14.53125,
+        237.65625,
+        14.46875
+      ],
+      "verticalCenterError": 0.03125,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "en-US-desktop",
+      "control": "Select a city/ward",
+      "backgroundUsableInner": [
+        1035.65625,
+        234.46875,
+        1399.0,
+        276.46875
+      ],
+      "actualInkBounds": [
+        1047,
+        249,
+        1155,
+        262
+      ],
+      "hotArea": {
+        "x": 1034.65625,
+        "y": 233.46875,
+        "width": 365.34375,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11.34375,
+        14.53125,
+        244.0,
+        14.46875
+      ],
+      "verticalCenterError": 0.03125,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "zh-TW-mobile",
+      "control": "重新讀取",
+      "backgroundUsableInner": [
+        257,
+        95,
+        343,
+        137
+      ],
+      "actualInkBounds": [
+        272,
+        109,
+        328,
+        122
+      ],
+      "hotArea": {
+        "x": 256,
+        "y": 94,
+        "width": 88,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        15,
+        14,
+        15,
+        15
+      ],
+      "verticalCenterError": 0.5,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "zh-TW-mobile",
+      "control": "日本 (JP)",
+      "backgroundUsableInner": [
+        17,
+        234.203125,
+        343,
+        276.203125
+      ],
+      "actualInkBounds": [
+        30,
+        248,
+        81,
+        262
+      ],
+      "hotArea": {
+        "x": 16,
+        "y": 233.203125,
+        "width": 328,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        13,
+        13.796875,
+        262,
+        14.203125
+      ],
+      "verticalCenterError": 0.203125,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.4000000000000001,
+      "geometry": "PASS"
+    },
+    {
+      "state": "zh-TW-mobile",
+      "control": "選擇省縣",
+      "backgroundUsableInner": [
+        17,
+        320.59375,
+        343,
+        362.59375
+      ],
+      "actualInkBounds": [
+        28,
+        335,
+        84,
+        348
+      ],
+      "hotArea": {
+        "x": 16,
+        "y": 319.59375,
+        "width": 328,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11,
+        14.40625,
+        259,
+        14.59375
+      ],
+      "verticalCenterError": 0.09375,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "zh-TW-mobile",
+      "control": "選擇市/區",
+      "backgroundUsableInner": [
+        17,
+        406.984375,
+        343,
+        448.984375
+      ],
+      "actualInkBounds": [
+        28,
+        421,
+        89,
+        435
+      ],
+      "hotArea": {
+        "x": 16,
+        "y": 405.984375,
+        "width": 328,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11,
+        14.015625,
+        254,
+        13.984375
+      ],
+      "verticalCenterError": 0.015625,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.4000000000000001,
+      "geometry": "PASS"
+    },
+    {
+      "state": "zh-TW-mobile",
+      "control": "pagination arrow",
+      "backgroundUsableInner": [
+        85,
+        1764.328125,
+        127,
+        1806.328125
+      ],
+      "actualInkBounds": [
+        103,
+        1780,
+        109,
+        1790
+      ],
+      "hotArea": {
+        "x": 84,
+        "y": 1763.328125,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.671875,
+        18,
+        16.328125
+      ],
+      "verticalCenterError": 0.328125,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "zh-TW-mobile",
+      "control": "1",
+      "backgroundUsableInner": [
+        137,
+        1764.328125,
+        179,
+        1806.328125
+      ],
+      "actualInkBounds": [
+        156,
+        1780,
+        160,
+        1790
+      ],
+      "hotArea": {
+        "x": 136,
+        "y": 1763.328125,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        19,
+        15.671875,
+        19,
+        16.328125
+      ],
+      "verticalCenterError": 0.328125,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "zh-TW-mobile",
+      "control": "2",
+      "backgroundUsableInner": [
+        189,
+        1764.328125,
+        231,
+        1806.328125
+      ],
+      "actualInkBounds": [
+        207,
+        1780,
+        213,
+        1790
+      ],
+      "hotArea": {
+        "x": 188,
+        "y": 1763.328125,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.671875,
+        18,
+        16.328125
+      ],
+      "verticalCenterError": 0.328125,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "zh-TW-mobile",
+      "control": "3",
+      "backgroundUsableInner": [
+        241,
+        1764.328125,
+        283,
+        1806.328125
+      ],
+      "actualInkBounds": [
+        259,
+        1780,
+        265,
+        1790
+      ],
+      "hotArea": {
+        "x": 240,
+        "y": 1763.328125,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.671875,
+        18,
+        16.328125
+      ],
+      "verticalCenterError": 0.328125,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "zh-TW-mobile",
+      "control": "pagination arrow",
+      "backgroundUsableInner": [
+        293,
+        1764.328125,
+        335,
+        1806.328125
+      ],
+      "actualInkBounds": [
+        311,
+        1780,
+        318,
+        1790
+      ],
+      "hotArea": {
+        "x": 292,
+        "y": 1763.328125,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.671875,
+        17,
+        16.328125
+      ],
+      "verticalCenterError": 0.328125,
+      "horizontalCenterError": 0.5,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "zh-TW-desktop",
+      "control": "重新讀取",
+      "backgroundUsableInner": [
+        1313,
+        119,
+        1399,
+        161
+      ],
+      "actualInkBounds": [
+        1328,
+        133,
+        1384,
+        146
+      ],
+      "hotArea": {
+        "x": 1312,
+        "y": 118,
+        "width": 88,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        15,
+        14,
+        15,
+        15
+      ],
+      "verticalCenterError": 0.5,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "zh-TW-desktop",
+      "control": "日本 (JP)",
+      "backgroundUsableInner": [
+        273,
+        234.46875,
+        636.328125,
+        276.46875
+      ],
+      "actualInkBounds": [
+        286,
+        248,
+        337,
+        262
+      ],
+      "hotArea": {
+        "x": 272,
+        "y": 233.46875,
+        "width": 365.328125,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        13,
+        13.53125,
+        299.328125,
+        14.46875
+      ],
+      "verticalCenterError": 0.46875,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.4000000000000001,
+      "geometry": "PASS"
+    },
+    {
+      "state": "zh-TW-desktop",
+      "control": "選擇省縣",
+      "backgroundUsableInner": [
+        654.328125,
+        234.46875,
+        1017.65625,
+        276.46875
+      ],
+      "actualInkBounds": [
+        666,
+        248,
+        721,
+        261
+      ],
+      "hotArea": {
+        "x": 653.328125,
+        "y": 233.46875,
+        "width": 365.328125,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11.671875,
+        13.53125,
+        296.65625,
+        15.46875
+      ],
+      "verticalCenterError": 0.96875,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.3,
+      "geometry": "PASS"
+    },
+    {
+      "state": "zh-TW-desktop",
+      "control": "選擇市/區",
+      "backgroundUsableInner": [
+        1035.65625,
+        234.46875,
+        1399.0,
+        276.46875
+      ],
+      "actualInkBounds": [
+        1047,
+        248,
+        1107,
+        262
+      ],
+      "hotArea": {
+        "x": 1034.65625,
+        "y": 233.46875,
+        "width": 365.34375,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        11.34375,
+        13.53125,
+        292.0,
+        14.46875
+      ],
+      "verticalCenterError": 0.46875,
+      "horizontalCenterError": null,
+      "allowedCenterError": 1.4000000000000001,
+      "geometry": "PASS"
+    },
+    {
+      "state": "zh-TW-desktop",
+      "control": "pagination arrow",
+      "backgroundUsableInner": [
+        1141,
+        1560.625,
+        1183,
+        1602.625
+      ],
+      "actualInkBounds": [
+        1159,
+        1576,
+        1165,
+        1586
+      ],
+      "hotArea": {
+        "x": 1140,
+        "y": 1559.625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.375,
+        18,
+        16.625
+      ],
+      "verticalCenterError": 0.625,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "zh-TW-desktop",
+      "control": "1",
+      "backgroundUsableInner": [
+        1193,
+        1560.625,
+        1235,
+        1602.625
+      ],
+      "actualInkBounds": [
+        1212,
+        1577,
+        1216,
+        1587
+      ],
+      "hotArea": {
+        "x": 1192,
+        "y": 1559.625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        19,
+        16.375,
+        19,
+        15.625
+      ],
+      "verticalCenterError": 0.375,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "zh-TW-desktop",
+      "control": "2",
+      "backgroundUsableInner": [
+        1245,
+        1560.625,
+        1287,
+        1602.625
+      ],
+      "actualInkBounds": [
+        1263,
+        1577,
+        1269,
+        1587
+      ],
+      "hotArea": {
+        "x": 1244,
+        "y": 1559.625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        16.375,
+        18,
+        15.625
+      ],
+      "verticalCenterError": 0.375,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "zh-TW-desktop",
+      "control": "3",
+      "backgroundUsableInner": [
+        1297,
+        1560.625,
+        1339,
+        1602.625
+      ],
+      "actualInkBounds": [
+        1315,
+        1577,
+        1321,
+        1587
+      ],
+      "hotArea": {
+        "x": 1296,
+        "y": 1559.625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        16.375,
+        18,
+        15.625
+      ],
+      "verticalCenterError": 0.375,
+      "horizontalCenterError": 0.0,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    },
+    {
+      "state": "zh-TW-desktop",
+      "control": "pagination arrow",
+      "backgroundUsableInner": [
+        1349,
+        1560.625,
+        1391,
+        1602.625
+      ],
+      "actualInkBounds": [
+        1367,
+        1576,
+        1374,
+        1586
+      ],
+      "hotArea": {
+        "x": 1348,
+        "y": 1559.625,
+        "width": 44,
+        "height": 44
+      },
+      "marginsLeftTopRightBottom": [
+        18,
+        15.375,
+        17,
+        16.625
+      ],
+      "verticalCenterError": 0.625,
+      "horizontalCenterError": 0.5,
+      "allowedCenterError": 1.0,
+      "geometry": "PASS"
+    }
+  ],
+  "failures": []
+}

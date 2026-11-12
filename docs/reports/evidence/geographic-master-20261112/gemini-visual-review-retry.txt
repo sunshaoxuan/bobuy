@@ -1,0 +1,26 @@
+### 1. Visible Defects & Doubts by Screenshot and Area
+
+#### Screenshot 2 (Narrow Mobile)
+* **Defect — Header / Nav Bar Overlap (Mid-page area):** The mobile global navigation bar (`☰ 宝宝败 ...`) appears out of flow mid-screen, directly overlapping and partially obscuring the top portion of the "当前选择" (Current Selection) summary card.
+* **Defect / Doubt — Summary Label Obscured:** The prefix label ("当前选择") is not visible in the summary card (likely hidden beneath the misplaced mobile header), leaving only the path values visible.
+* **Doubt — Missing Table Column ("市/区档案" table):** The "日文读音" (Japanese reading) column present on desktop is absent on mobile. Needs confirmation whether this is an intentional responsive omission or unintentional overflow/hiding.
+
+#### Screenshot 1 (Desktop)
+* **Doubt — Footer Text:** Contains a minor copy typo ("47 个个都道府县" double character) and future audit date ("2026-11-12"), though outside the primary interactive components.
+
+---
+
+### 2. Dimension Assessment
+
+* **Layout:**
+  * *Desktop:* Clean, well-spaced structure. 3-column input row, full-width selection summary, and table flow naturally.
+  * *Mobile:* 3 selects stack vertically as expected, but the layout tree is disrupted by the mid-page mobile header collision.
+* **Clipped Text:**
+  * *Desktop:* None visible; labels and cell data display fully.
+  * *Mobile:* Long strings (e.g., `南都留郡富士河口湖町 (JP-19430)`) fit within the select field without clipping. Only the summary container label appears clipped/covered by the overlapping nav bar.
+* **Alignment:**
+  * *Desktop:* Precise vertical grid alignment across filter labels, controls, and table columns.
+  * *Mobile:* Inputs align cleanly to full width; reload button stays right-aligned to the page title; pagination shifts cleanly from desktop right-aligned to centered.
+* **360px Responsiveness:**
+  * Filter stacking and 2-column table adaptation fit the narrow 360px width without horizontal overflow.
+  * Fails clean mobile responsiveness due to the misplaced/floating navigation bar occluding page content.

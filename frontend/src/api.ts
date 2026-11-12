@@ -1101,7 +1101,11 @@ export const productCatalogApi={
  upload:async(id:string,file:File,sourceUrl:string,label:string)=>{const prepared=await prepareImageUpload(file);const form=new FormData();form.set('file',prepared);form.set('sourceUrl',sourceUrl);form.set('label',label);form.set('verified','true');const response=await authorizedFetch('/api/merchant/product-catalog/'+encodeURIComponent(id)+'/images',{method:'POST',body:form});if(!response.ok)throw new Error(await parseErrorMessage(response));return parseSuccessPayload<CatalogMedia>(response);}
 };
 export type CurrencyDefinition={code:string;symbol:string;fractionDigits:number;name:string;saleEnabled:boolean};
-export const masterDataApi={currencies:()=>storeGet<CurrencyDefinition[]>('/api/merchant/currencies')};
+export type GeographicArea={code:string;parentCode:string|null;level:1|2|3;name:string;reading:string|null};
+export const masterDataApi={
+ currencies:()=>storeGet<CurrencyDefinition[]>('/api/merchant/currencies'),
+ geographicAreas:(parentCode?:string)=>storeGet<GeographicArea[]>('/api/storefront/geographic-areas'+(parentCode===undefined?'':'?'+new URLSearchParams({parentCode})))
+};
 async function recommendationMutation<T>(url:string,body:object):Promise<T> {
     const response=await authorizedFetch(url,{method:'POST',body:JSON.stringify(body)},{withJsonContentType:true});
     if(!response.ok){if(response.status===401)clearAuthSession();throw Object.assign(new Error(await parseErrorMessage(response)),{status:response.status});}
