@@ -1,0 +1,392 @@
+{
+  "scope": "Read-only synthetic readiness; no key or password; mail writes blocked",
+  "matrix": [
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "screenshot": "ready-local-zh-CN-1440.png",
+      "controls": [
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "mail.briconbric.com",
+          "type": "field",
+          "w": 312.546875,
+          "x": 297,
+          "y": 372.015625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "STARTTLS · 587",
+          "type": "field",
+          "w": 312.5625,
+          "x": 629.546875,
+          "y": 372.015625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "field",
+          "type": "field",
+          "w": 312.546875,
+          "x": 297,
+          "y": 466.015625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "field",
+          "type": "field",
+          "w": 312.5625,
+          "x": 629.546875,
+          "y": 466.015625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "field",
+          "type": "field",
+          "w": 312.546875,
+          "x": 297,
+          "y": 560.015625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "field",
+          "type": "field",
+          "w": 312.5625,
+          "x": 629.546875,
+          "y": 560.015625
+        },
+        {
+          "disabled": false,
+          "h": 28,
+          "text": "",
+          "type": "switch",
+          "w": 48,
+          "x": 894.109375,
+          "y": 687.0625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "保存邮件设置",
+          "type": "button",
+          "w": 140,
+          "x": 297,
+          "y": 764.109375
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "重新加载",
+          "type": "button",
+          "w": 112,
+          "x": 445,
+          "y": 764.109375
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "postmaster@bobuy.cc",
+          "type": "field",
+          "w": 358.890625,
+          "x": 1016.109375,
+          "y": 494.953125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "发送测试信",
+          "type": "button",
+          "w": 358.890625,
+          "x": 1016.109375,
+          "y": 550.953125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "检查表单",
+          "type": "button",
+          "w": 358.890625,
+          "x": 1016.109375,
+          "y": 645.046875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "服务器配置要求",
+          "type": "disclosure",
+          "w": 358.890625,
+          "x": 1016.109375,
+          "y": 939.515625
+        }
+      ],
+      "overflow": false,
+      "viewport": [
+        1440,
+        1000
+      ]
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "screenshot": "ready-local-zh-CN-390.png",
+      "controls": [
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "mail.briconbric.com",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 351.671875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "STARTTLS · 587",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 445.671875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "field",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 539.671875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "field",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 633.671875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "field",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 727.671875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "field",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 821.671875
+        },
+        {
+          "disabled": false,
+          "h": 28,
+          "text": "",
+          "type": "switch",
+          "w": 48,
+          "x": 309,
+          "y": 959.765625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "保存邮件设置",
+          "type": "button",
+          "w": 324,
+          "x": 33,
+          "y": 1047.859375
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "重新加载",
+          "type": "button",
+          "w": 324,
+          "x": 33,
+          "y": 1099.859375
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "postmaster@bobuy.cc",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 1441.890625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "发送测试信",
+          "type": "button",
+          "w": 324,
+          "x": 33,
+          "y": 1497.890625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "检查表单",
+          "type": "button",
+          "w": 324,
+          "x": 33,
+          "y": 1591.984375
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "服务器配置要求",
+          "type": "disclosure",
+          "w": 324,
+          "x": 33,
+          "y": 1874.453125
+        }
+      ],
+      "overflow": false,
+      "viewport": [
+        1038,
+        2662
+      ]
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "screenshot": "ready-local-zh-CN-320.png",
+      "controls": [
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "mail.briconbric.com",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 373.765625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "STARTTLS · 587",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 467.765625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "field",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 561.765625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "field",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 655.765625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "field",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 749.765625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "field",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 843.765625
+        },
+        {
+          "disabled": false,
+          "h": 28,
+          "text": "",
+          "type": "switch",
+          "w": 48,
+          "x": 239,
+          "y": 998.640625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "保存邮件设置",
+          "type": "button",
+          "w": 254,
+          "x": 33,
+          "y": 1086.734375
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "重新加载",
+          "type": "button",
+          "w": 254,
+          "x": 33,
+          "y": 1138.734375
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "postmaster@bobuy.cc",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 1480.765625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "发送测试信",
+          "type": "button",
+          "w": 254,
+          "x": 33,
+          "y": 1536.765625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "检查表单",
+          "type": "button",
+          "w": 254,
+          "x": 33,
+          "y": 1630.859375
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "text": "服务器配置要求",
+          "type": "disclosure",
+          "w": 254,
+          "x": 33,
+          "y": 1934.921875
+        }
+      ],
+      "overflow": false,
+      "viewport": [
+        1038,
+        3244
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4614 @@
+{
+  "result": "PASS",
+  "controls": [
+    {
+      "locale": "en-US",
+      "width": 1440,
+      "control": 0,
+      "type": "field",
+      "text": "mail.briconbric.com",
+      "box": [
+        297,
+        540,
+        313,
+        44
+      ],
+      "ink": [
+        311,
+        557,
+        596,
+        567
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 1440,
+      "control": 1,
+      "type": "field",
+      "text": "STARTTLS \u00b7 587",
+      "box": [
+        630,
+        561,
+        313,
+        44
+      ],
+      "ink": [
+        643,
+        578,
+        928,
+        588
+      ],
+      "margins": [
+        13,
+        17,
+        15,
+        17
+      ],
+      "centerError": [
+        -1.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 1440,
+      "control": 2,
+      "type": "field",
+      "text": "field",
+      "box": [
+        297,
+        655,
+        313,
+        44
+      ],
+      "ink": [
+        311,
+        671,
+        448,
+        684
+      ],
+      "margins": [
+        14,
+        16,
+        162,
+        15
+      ],
+      "centerError": [
+        -74.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 1440,
+      "control": 3,
+      "type": "field",
+      "text": "field",
+      "box": [
+        630,
+        655,
+        313,
+        44
+      ],
+      "ink": [
+        643,
+        671,
+        780,
+        684
+      ],
+      "margins": [
+        13,
+        16,
+        163,
+        15
+      ],
+      "centerError": [
+        -75.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 1440,
+      "control": 4,
+      "type": "field",
+      "text": "field",
+      "box": [
+        297,
+        749,
+        313,
+        44
+      ],
+      "ink": [
+        311,
+        765,
+        448,
+        778
+      ],
+      "margins": [
+        14,
+        16,
+        162,
+        15
+      ],
+      "centerError": [
+        -74.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 1440,
+      "control": 5,
+      "type": "field",
+      "text": "field",
+      "box": [
+        630,
+        749,
+        313,
+        44
+      ],
+      "ink": [
+        644,
+        752,
+        940,
+        790
+      ],
+      "margins": [
+        14,
+        3,
+        3,
+        3
+      ],
+      "centerError": [
+        5.5,
+        0.0
+      ],
+      "centerBudget": 2,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 1440,
+      "control": 7,
+      "type": "button",
+      "text": "Save mail settings",
+      "box": [
+        297,
+        953,
+        166,
+        44
+      ],
+      "ink": [
+        315,
+        969,
+        446,
+        983
+      ],
+      "margins": [
+        18,
+        16,
+        17,
+        14
+      ],
+      "centerError": [
+        0.5,
+        1.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 1440,
+      "control": 8,
+      "type": "button",
+      "text": "Reload",
+      "box": [
+        471,
+        953,
+        98,
+        44
+      ],
+      "ink": [
+        488,
+        968,
+        552,
+        982
+      ],
+      "margins": [
+        17,
+        15,
+        17,
+        15
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 1440,
+      "control": 9,
+      "type": "field",
+      "text": "Approved test recipient",
+      "box": [
+        1016,
+        495,
+        359,
+        44
+      ],
+      "ink": [
+        1029,
+        511,
+        1363,
+        524
+      ],
+      "margins": [
+        13,
+        16,
+        12,
+        15
+      ],
+      "centerError": [
+        0.5,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 1440,
+      "control": 10,
+      "type": "button",
+      "text": "Send test message",
+      "box": [
+        1016,
+        551,
+        359,
+        44
+      ],
+      "ink": [
+        1127,
+        566,
+        1264,
+        581
+      ],
+      "margins": [
+        111,
+        15,
+        111,
+        14
+      ],
+      "centerError": [
+        0.0,
+        0.5
+      ],
+      "centerBudget": 1.5,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 1440,
+      "control": 11,
+      "type": "button",
+      "text": "Check form",
+      "box": [
+        1016,
+        667,
+        359,
+        44
+      ],
+      "ink": [
+        1161,
+        684,
+        1230,
+        694
+      ],
+      "margins": [
+        145,
+        17,
+        145,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 1440,
+      "control": 12,
+      "type": "disclosure",
+      "text": "Server setup requirements",
+      "box": [
+        1016,
+        1005,
+        359,
+        44
+      ],
+      "ink": [
+        1019,
+        1021,
+        1372,
+        1034
+      ],
+      "margins": [
+        3,
+        16,
+        3,
+        15
+      ],
+      "centerError": [
+        0.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 390,
+      "control": 0,
+      "type": "field",
+      "text": "mail.briconbric.com",
+      "box": [
+        33,
+        614,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        631,
+        343,
+        641
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 390,
+      "control": 1,
+      "type": "field",
+      "text": "STARTTLS \u00b7 587",
+      "box": [
+        33,
+        729,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        746,
+        343,
+        756
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 390,
+      "control": 2,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        823,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        839,
+        183,
+        852
+      ],
+      "margins": [
+        14,
+        16,
+        174,
+        15
+      ],
+      "centerError": [
+        -80.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 390,
+      "control": 3,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        917,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        933,
+        183,
+        946
+      ],
+      "margins": [
+        14,
+        16,
+        174,
+        15
+      ],
+      "centerError": [
+        -80.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 390,
+      "control": 4,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        1011,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        1027,
+        183,
+        1040
+      ],
+      "margins": [
+        14,
+        16,
+        174,
+        15
+      ],
+      "centerError": [
+        -80.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 390,
+      "control": 5,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        1105,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        1121,
+        255,
+        1134
+      ],
+      "margins": [
+        14,
+        16,
+        102,
+        15
+      ],
+      "centerError": [
+        -44.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 390,
+      "control": 7,
+      "type": "button",
+      "text": "Save mail settings",
+      "box": [
+        33,
+        1353,
+        324,
+        44
+      ],
+      "ink": [
+        130,
+        1369,
+        261,
+        1383
+      ],
+      "margins": [
+        97,
+        16,
+        96,
+        14
+      ],
+      "centerError": [
+        0.5,
+        1.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 390,
+      "control": 8,
+      "type": "button",
+      "text": "Reload",
+      "box": [
+        33,
+        1405,
+        324,
+        44
+      ],
+      "ink": [
+        163,
+        1420,
+        226,
+        1434
+      ],
+      "margins": [
+        130,
+        15,
+        131,
+        15
+      ],
+      "centerError": [
+        -0.5,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 390,
+      "control": 9,
+      "type": "field",
+      "text": "Approved test recipient",
+      "box": [
+        33,
+        1747,
+        324,
+        44
+      ],
+      "ink": [
+        46,
+        1763,
+        345,
+        1776
+      ],
+      "margins": [
+        13,
+        16,
+        12,
+        15
+      ],
+      "centerError": [
+        0.5,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 390,
+      "control": 10,
+      "type": "button",
+      "text": "Send test message",
+      "box": [
+        33,
+        1803,
+        324,
+        44
+      ],
+      "ink": [
+        126,
+        1818,
+        263,
+        1833
+      ],
+      "margins": [
+        93,
+        15,
+        94,
+        14
+      ],
+      "centerError": [
+        -0.5,
+        0.5
+      ],
+      "centerBudget": 1.5,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 390,
+      "control": 11,
+      "type": "button",
+      "text": "Check form",
+      "box": [
+        33,
+        1919,
+        324,
+        44
+      ],
+      "ink": [
+        161,
+        1936,
+        229,
+        1946
+      ],
+      "margins": [
+        128,
+        17,
+        128,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 390,
+      "control": 12,
+      "type": "disclosure",
+      "text": "Server setup requirements",
+      "box": [
+        33,
+        2267,
+        324,
+        44
+      ],
+      "ink": [
+        36,
+        2283,
+        354,
+        2296
+      ],
+      "margins": [
+        3,
+        16,
+        3,
+        15
+      ],
+      "centerError": [
+        0.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 320,
+      "control": 0,
+      "type": "field",
+      "text": "mail.briconbric.com",
+      "box": [
+        33,
+        733,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        750,
+        273,
+        760
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 320,
+      "control": 1,
+      "type": "field",
+      "text": "STARTTLS \u00b7 587",
+      "box": [
+        33,
+        847,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        864,
+        273,
+        874
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 320,
+      "control": 2,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        941,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        957,
+        183,
+        970
+      ],
+      "margins": [
+        14,
+        16,
+        104,
+        15
+      ],
+      "centerError": [
+        -45.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 320,
+      "control": 3,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        1035,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        1051,
+        183,
+        1064
+      ],
+      "margins": [
+        14,
+        16,
+        104,
+        15
+      ],
+      "centerError": [
+        -45.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 320,
+      "control": 4,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        1129,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        1145,
+        183,
+        1158
+      ],
+      "margins": [
+        14,
+        16,
+        104,
+        15
+      ],
+      "centerError": [
+        -45.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 320,
+      "control": 5,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        1223,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        1239,
+        255,
+        1252
+      ],
+      "margins": [
+        14,
+        16,
+        32,
+        15
+      ],
+      "centerError": [
+        -9.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 320,
+      "control": 7,
+      "type": "button",
+      "text": "Save mail settings",
+      "box": [
+        33,
+        1472,
+        254,
+        44
+      ],
+      "ink": [
+        95,
+        1488,
+        226,
+        1502
+      ],
+      "margins": [
+        62,
+        16,
+        61,
+        14
+      ],
+      "centerError": [
+        0.5,
+        1.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 320,
+      "control": 8,
+      "type": "button",
+      "text": "Reload",
+      "box": [
+        33,
+        1524,
+        254,
+        44
+      ],
+      "ink": [
+        128,
+        1539,
+        191,
+        1553
+      ],
+      "margins": [
+        95,
+        15,
+        96,
+        15
+      ],
+      "centerError": [
+        -0.5,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 320,
+      "control": 9,
+      "type": "field",
+      "text": "Approved test recipient",
+      "box": [
+        33,
+        1888,
+        254,
+        44
+      ],
+      "ink": [
+        46,
+        1904,
+        275,
+        1917
+      ],
+      "margins": [
+        13,
+        16,
+        12,
+        15
+      ],
+      "centerError": [
+        0.5,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 320,
+      "control": 10,
+      "type": "button",
+      "text": "Send test message",
+      "box": [
+        33,
+        1944,
+        254,
+        44
+      ],
+      "ink": [
+        91,
+        1959,
+        228,
+        1974
+      ],
+      "margins": [
+        58,
+        15,
+        59,
+        14
+      ],
+      "centerError": [
+        -0.5,
+        0.5
+      ],
+      "centerBudget": 1.5,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 320,
+      "control": 11,
+      "type": "button",
+      "text": "Check form",
+      "box": [
+        33,
+        2060,
+        254,
+        44
+      ],
+      "ink": [
+        126,
+        2077,
+        194,
+        2087
+      ],
+      "margins": [
+        93,
+        17,
+        93,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "en-US",
+      "width": 320,
+      "control": 12,
+      "type": "disclosure",
+      "text": "Server setup requirements",
+      "box": [
+        33,
+        2429,
+        254,
+        44
+      ],
+      "ink": [
+        36,
+        2445,
+        284,
+        2458
+      ],
+      "margins": [
+        3,
+        16,
+        3,
+        15
+      ],
+      "centerError": [
+        0.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 1440,
+      "control": 0,
+      "type": "field",
+      "text": "mail.briconbric.com",
+      "box": [
+        297,
+        540,
+        313,
+        44
+      ],
+      "ink": [
+        311,
+        557,
+        596,
+        567
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 1440,
+      "control": 1,
+      "type": "field",
+      "text": "STARTTLS \u00b7 587",
+      "box": [
+        630,
+        540,
+        313,
+        44
+      ],
+      "ink": [
+        643,
+        557,
+        928,
+        567
+      ],
+      "margins": [
+        13,
+        17,
+        15,
+        17
+      ],
+      "centerError": [
+        -1.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 1440,
+      "control": 2,
+      "type": "field",
+      "text": "field",
+      "box": [
+        297,
+        634,
+        313,
+        44
+      ],
+      "ink": [
+        311,
+        650,
+        448,
+        663
+      ],
+      "margins": [
+        14,
+        16,
+        162,
+        15
+      ],
+      "centerError": [
+        -74.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 1440,
+      "control": 3,
+      "type": "field",
+      "text": "field",
+      "box": [
+        630,
+        634,
+        313,
+        44
+      ],
+      "ink": [
+        643,
+        650,
+        780,
+        663
+      ],
+      "margins": [
+        13,
+        16,
+        163,
+        15
+      ],
+      "centerError": [
+        -75.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 1440,
+      "control": 4,
+      "type": "field",
+      "text": "field",
+      "box": [
+        297,
+        728,
+        313,
+        44
+      ],
+      "ink": [
+        311,
+        744,
+        448,
+        757
+      ],
+      "margins": [
+        14,
+        16,
+        162,
+        15
+      ],
+      "centerError": [
+        -74.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 1440,
+      "control": 5,
+      "type": "field",
+      "text": "field",
+      "box": [
+        630,
+        728,
+        313,
+        44
+      ],
+      "ink": [
+        644,
+        731,
+        940,
+        769
+      ],
+      "margins": [
+        14,
+        3,
+        3,
+        3
+      ],
+      "centerError": [
+        5.5,
+        0.0
+      ],
+      "centerBudget": 2,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 1440,
+      "control": 7,
+      "type": "button",
+      "text": "\u30e1\u30fc\u30eb\u8a2d\u5b9a\u3092\u4fdd\u5b58",
+      "box": [
+        297,
+        932,
+        168,
+        44
+      ],
+      "ink": [
+        315,
+        947,
+        448,
+        960
+      ],
+      "margins": [
+        18,
+        15,
+        17,
+        16
+      ],
+      "centerError": [
+        0.5,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 1440,
+      "control": 8,
+      "type": "button",
+      "text": "\u518d\u8aad\u307f\u8fbc\u307f",
+      "box": [
+        473,
+        932,
+        126,
+        44
+      ],
+      "ink": [
+        490,
+        947,
+        581,
+        961
+      ],
+      "margins": [
+        17,
+        15,
+        18,
+        15
+      ],
+      "centerError": [
+        -0.5,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 1440,
+      "control": 9,
+      "type": "field",
+      "text": "\u627f\u8a8d\u6e08\u307f\u30c6\u30b9\u30c8\u5b9b\u5148",
+      "box": [
+        1016,
+        495,
+        359,
+        44
+      ],
+      "ink": [
+        1029,
+        510,
+        1363,
+        523
+      ],
+      "margins": [
+        13,
+        15,
+        12,
+        16
+      ],
+      "centerError": [
+        0.5,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 1440,
+      "control": 10,
+      "type": "button",
+      "text": "\u30c6\u30b9\u30c8\u30e1\u30fc\u30eb\u3092\u9001\u4fe1",
+      "box": [
+        1016,
+        551,
+        359,
+        44
+      ],
+      "ink": [
+        1122,
+        566,
+        1269,
+        580
+      ],
+      "margins": [
+        106,
+        15,
+        106,
+        15
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 1440,
+      "control": 11,
+      "type": "button",
+      "text": "\u30d5\u30a9\u30fc\u30e0\u3092\u78ba\u8a8d",
+      "box": [
+        1016,
+        667,
+        359,
+        44
+      ],
+      "ink": [
+        1149,
+        682,
+        1244,
+        695
+      ],
+      "margins": [
+        133,
+        15,
+        131,
+        16
+      ],
+      "centerError": [
+        1.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 1440,
+      "control": 12,
+      "type": "disclosure",
+      "text": "\u30b5\u30fc\u30d0\u30fc\u306e\u8a2d\u5b9a\u8981\u4ef6",
+      "box": [
+        1016,
+        983,
+        359,
+        44
+      ],
+      "ink": [
+        1019,
+        998,
+        1372,
+        1012
+      ],
+      "margins": [
+        3,
+        15,
+        3,
+        15
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 390,
+      "control": 0,
+      "type": "field",
+      "text": "mail.briconbric.com",
+      "box": [
+        33,
+        589,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        606,
+        343,
+        616
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 390,
+      "control": 1,
+      "type": "field",
+      "text": "STARTTLS \u00b7 587",
+      "box": [
+        33,
+        683,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        700,
+        343,
+        710
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 390,
+      "control": 2,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        777,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        793,
+        183,
+        806
+      ],
+      "margins": [
+        14,
+        16,
+        174,
+        15
+      ],
+      "centerError": [
+        -80.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 390,
+      "control": 3,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        871,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        887,
+        183,
+        900
+      ],
+      "margins": [
+        14,
+        16,
+        174,
+        15
+      ],
+      "centerError": [
+        -80.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 390,
+      "control": 4,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        965,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        981,
+        183,
+        994
+      ],
+      "margins": [
+        14,
+        16,
+        174,
+        15
+      ],
+      "centerError": [
+        -80.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 390,
+      "control": 5,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        1059,
+        324,
+        44
+      ],
+      "ink": [
+        48,
+        1075,
+        303,
+        1088
+      ],
+      "margins": [
+        15,
+        16,
+        54,
+        15
+      ],
+      "centerError": [
+        -19.5,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 390,
+      "control": 7,
+      "type": "button",
+      "text": "\u30e1\u30fc\u30eb\u8a2d\u5b9a\u3092\u4fdd\u5b58",
+      "box": [
+        33,
+        1285,
+        324,
+        44
+      ],
+      "ink": [
+        129,
+        1300,
+        261,
+        1313
+      ],
+      "margins": [
+        96,
+        15,
+        96,
+        16
+      ],
+      "centerError": [
+        0.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 390,
+      "control": 8,
+      "type": "button",
+      "text": "\u518d\u8aad\u307f\u8fbc\u307f",
+      "box": [
+        33,
+        1337,
+        324,
+        44
+      ],
+      "ink": [
+        149,
+        1352,
+        240,
+        1366
+      ],
+      "margins": [
+        116,
+        15,
+        117,
+        15
+      ],
+      "centerError": [
+        -0.5,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 390,
+      "control": 9,
+      "type": "field",
+      "text": "\u627f\u8a8d\u6e08\u307f\u30c6\u30b9\u30c8\u5b9b\u5148",
+      "box": [
+        33,
+        1702,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        1717,
+        345,
+        1730
+      ],
+      "margins": [
+        14,
+        15,
+        12,
+        16
+      ],
+      "centerError": [
+        1.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 390,
+      "control": 10,
+      "type": "button",
+      "text": "\u30c6\u30b9\u30c8\u30e1\u30fc\u30eb\u3092\u9001\u4fe1",
+      "box": [
+        33,
+        1758,
+        324,
+        44
+      ],
+      "ink": [
+        121,
+        1773,
+        268,
+        1787
+      ],
+      "margins": [
+        88,
+        15,
+        89,
+        15
+      ],
+      "centerError": [
+        -0.5,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 390,
+      "control": 11,
+      "type": "button",
+      "text": "\u30d5\u30a9\u30fc\u30e0\u3092\u78ba\u8a8d",
+      "box": [
+        33,
+        1874,
+        324,
+        44
+      ],
+      "ink": [
+        148,
+        1889,
+        243,
+        1902
+      ],
+      "margins": [
+        115,
+        15,
+        114,
+        16
+      ],
+      "centerError": [
+        0.5,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 390,
+      "control": 12,
+      "type": "disclosure",
+      "text": "\u30b5\u30fc\u30d0\u30fc\u306e\u8a2d\u5b9a\u8981\u4ef6",
+      "box": [
+        33,
+        2178,
+        324,
+        44
+      ],
+      "ink": [
+        36,
+        2193,
+        354,
+        2207
+      ],
+      "margins": [
+        3,
+        15,
+        3,
+        15
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 320,
+      "control": 0,
+      "type": "field",
+      "text": "mail.briconbric.com",
+      "box": [
+        33,
+        686,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        703,
+        273,
+        713
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 320,
+      "control": 1,
+      "type": "field",
+      "text": "STARTTLS \u00b7 587",
+      "box": [
+        33,
+        780,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        797,
+        273,
+        807
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 320,
+      "control": 2,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        874,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        890,
+        183,
+        903
+      ],
+      "margins": [
+        14,
+        16,
+        104,
+        15
+      ],
+      "centerError": [
+        -45.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 320,
+      "control": 3,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        968,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        984,
+        183,
+        997
+      ],
+      "margins": [
+        14,
+        16,
+        104,
+        15
+      ],
+      "centerError": [
+        -45.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 320,
+      "control": 4,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        1062,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        1078,
+        183,
+        1091
+      ],
+      "margins": [
+        14,
+        16,
+        104,
+        15
+      ],
+      "centerError": [
+        -45.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 320,
+      "control": 5,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        1156,
+        254,
+        44
+      ],
+      "ink": [
+        48,
+        1173,
+        272,
+        1185
+      ],
+      "margins": [
+        15,
+        17,
+        15,
+        15
+      ],
+      "centerError": [
+        0.0,
+        1.0
+      ],
+      "centerBudget": 1.2000000000000002,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 320,
+      "control": 7,
+      "type": "button",
+      "text": "\u30e1\u30fc\u30eb\u8a2d\u5b9a\u3092\u4fdd\u5b58",
+      "box": [
+        33,
+        1404,
+        254,
+        44
+      ],
+      "ink": [
+        94,
+        1419,
+        226,
+        1432
+      ],
+      "margins": [
+        61,
+        15,
+        61,
+        16
+      ],
+      "centerError": [
+        0.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 320,
+      "control": 8,
+      "type": "button",
+      "text": "\u518d\u8aad\u307f\u8fbc\u307f",
+      "box": [
+        33,
+        1456,
+        254,
+        44
+      ],
+      "ink": [
+        114,
+        1471,
+        205,
+        1485
+      ],
+      "margins": [
+        81,
+        15,
+        82,
+        15
+      ],
+      "centerError": [
+        -0.5,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 320,
+      "control": 9,
+      "type": "field",
+      "text": "\u627f\u8a8d\u6e08\u307f\u30c6\u30b9\u30c8\u5b9b\u5148",
+      "box": [
+        33,
+        1820,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        1835,
+        275,
+        1848
+      ],
+      "margins": [
+        14,
+        15,
+        12,
+        16
+      ],
+      "centerError": [
+        1.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 320,
+      "control": 10,
+      "type": "button",
+      "text": "\u30c6\u30b9\u30c8\u30e1\u30fc\u30eb\u3092\u9001\u4fe1",
+      "box": [
+        33,
+        1876,
+        254,
+        44
+      ],
+      "ink": [
+        86,
+        1891,
+        233,
+        1905
+      ],
+      "margins": [
+        53,
+        15,
+        54,
+        15
+      ],
+      "centerError": [
+        -0.5,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 320,
+      "control": 11,
+      "type": "button",
+      "text": "\u30d5\u30a9\u30fc\u30e0\u3092\u78ba\u8a8d",
+      "box": [
+        33,
+        1992,
+        254,
+        44
+      ],
+      "ink": [
+        113,
+        2007,
+        208,
+        2020
+      ],
+      "margins": [
+        80,
+        15,
+        79,
+        16
+      ],
+      "centerError": [
+        0.5,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 320,
+      "control": 12,
+      "type": "disclosure",
+      "text": "\u30b5\u30fc\u30d0\u30fc\u306e\u8a2d\u5b9a\u8981\u4ef6",
+      "box": [
+        33,
+        2339,
+        254,
+        44
+      ],
+      "ink": [
+        36,
+        2355,
+        284,
+        2369
+      ],
+      "margins": [
+        3,
+        16,
+        3,
+        14
+      ],
+      "centerError": [
+        0.0,
+        1.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 1440,
+      "control": 0,
+      "type": "field",
+      "text": "mail.briconbric.com",
+      "box": [
+        297,
+        493,
+        313,
+        44
+      ],
+      "ink": [
+        311,
+        510,
+        596,
+        520
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 1440,
+      "control": 1,
+      "type": "field",
+      "text": "STARTTLS \u00b7 587",
+      "box": [
+        630,
+        493,
+        313,
+        44
+      ],
+      "ink": [
+        643,
+        510,
+        928,
+        520
+      ],
+      "margins": [
+        13,
+        17,
+        15,
+        17
+      ],
+      "centerError": [
+        -1.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 1440,
+      "control": 2,
+      "type": "field",
+      "text": "field",
+      "box": [
+        297,
+        587,
+        313,
+        44
+      ],
+      "ink": [
+        311,
+        603,
+        448,
+        616
+      ],
+      "margins": [
+        14,
+        16,
+        162,
+        15
+      ],
+      "centerError": [
+        -74.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 1440,
+      "control": 3,
+      "type": "field",
+      "text": "field",
+      "box": [
+        630,
+        587,
+        313,
+        44
+      ],
+      "ink": [
+        643,
+        603,
+        780,
+        616
+      ],
+      "margins": [
+        13,
+        16,
+        163,
+        15
+      ],
+      "centerError": [
+        -75.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 1440,
+      "control": 4,
+      "type": "field",
+      "text": "field",
+      "box": [
+        297,
+        681,
+        313,
+        44
+      ],
+      "ink": [
+        311,
+        697,
+        448,
+        710
+      ],
+      "margins": [
+        14,
+        16,
+        162,
+        15
+      ],
+      "centerError": [
+        -74.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 1440,
+      "control": 5,
+      "type": "field",
+      "text": "field",
+      "box": [
+        630,
+        681,
+        313,
+        44
+      ],
+      "ink": [
+        643,
+        684,
+        940,
+        722
+      ],
+      "margins": [
+        13,
+        3,
+        3,
+        3
+      ],
+      "centerError": [
+        5.0,
+        0.0
+      ],
+      "centerBudget": 2,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 1440,
+      "control": 7,
+      "type": "button",
+      "text": "\u5132\u5b58\u90f5\u4ef6\u8a2d\u5b9a",
+      "box": [
+        297,
+        885,
+        140,
+        44
+      ],
+      "ink": [
+        315,
+        900,
+        419,
+        913
+      ],
+      "margins": [
+        18,
+        15,
+        18,
+        16
+      ],
+      "centerError": [
+        0.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 1440,
+      "control": 8,
+      "type": "button",
+      "text": "\u91cd\u65b0\u8f09\u5165",
+      "box": [
+        445,
+        885,
+        112,
+        44
+      ],
+      "ink": [
+        462,
+        900,
+        539,
+        914
+      ],
+      "margins": [
+        17,
+        15,
+        18,
+        15
+      ],
+      "centerError": [
+        -0.5,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 1440,
+      "control": 9,
+      "type": "field",
+      "text": "\u5df2\u6838\u51c6\u6e2c\u8a66\u6536\u4ef6\u4eba",
+      "box": [
+        1016,
+        495,
+        359,
+        44
+      ],
+      "ink": [
+        1030,
+        510,
+        1363,
+        523
+      ],
+      "margins": [
+        14,
+        15,
+        12,
+        16
+      ],
+      "centerError": [
+        1.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 1440,
+      "control": 10,
+      "type": "button",
+      "text": "\u5bc4\u9001\u6e2c\u8a66\u4fe1",
+      "box": [
+        1016,
+        551,
+        359,
+        44
+      ],
+      "ink": [
+        1150,
+        566,
+        1240,
+        580
+      ],
+      "margins": [
+        134,
+        15,
+        135,
+        15
+      ],
+      "centerError": [
+        -0.5,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 1440,
+      "control": 11,
+      "type": "button",
+      "text": "\u6aa2\u67e5\u8868\u55ae",
+      "box": [
+        1016,
+        645,
+        359,
+        44
+      ],
+      "ink": [
+        1168,
+        660,
+        1223,
+        673
+      ],
+      "margins": [
+        152,
+        15,
+        152,
+        16
+      ],
+      "centerError": [
+        0.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 1440,
+      "control": 12,
+      "type": "disclosure",
+      "text": "\u4f3a\u670d\u5668\u8a2d\u5b9a\u8981\u6c42",
+      "box": [
+        1016,
+        940,
+        359,
+        44
+      ],
+      "ink": [
+        1019,
+        955,
+        1372,
+        969
+      ],
+      "margins": [
+        3,
+        15,
+        3,
+        15
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 390,
+      "control": 0,
+      "type": "field",
+      "text": "mail.briconbric.com",
+      "box": [
+        33,
+        520,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        537,
+        343,
+        547
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 390,
+      "control": 1,
+      "type": "field",
+      "text": "STARTTLS \u00b7 587",
+      "box": [
+        33,
+        614,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        631,
+        343,
+        641
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 390,
+      "control": 2,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        708,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        724,
+        183,
+        737
+      ],
+      "margins": [
+        14,
+        16,
+        174,
+        15
+      ],
+      "centerError": [
+        -80.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 390,
+      "control": 3,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        802,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        818,
+        183,
+        831
+      ],
+      "margins": [
+        14,
+        16,
+        174,
+        15
+      ],
+      "centerError": [
+        -80.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 390,
+      "control": 4,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        896,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        912,
+        183,
+        925
+      ],
+      "margins": [
+        14,
+        16,
+        174,
+        15
+      ],
+      "centerError": [
+        -80.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 390,
+      "control": 5,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        990,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        1006,
+        186,
+        1019
+      ],
+      "margins": [
+        14,
+        16,
+        171,
+        15
+      ],
+      "centerError": [
+        -78.5,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 390,
+      "control": 7,
+      "type": "button",
+      "text": "\u5132\u5b58\u90f5\u4ef6\u8a2d\u5b9a",
+      "box": [
+        33,
+        1216,
+        324,
+        44
+      ],
+      "ink": [
+        143,
+        1231,
+        247,
+        1244
+      ],
+      "margins": [
+        110,
+        15,
+        110,
+        16
+      ],
+      "centerError": [
+        0.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 390,
+      "control": 8,
+      "type": "button",
+      "text": "\u91cd\u65b0\u8f09\u5165",
+      "box": [
+        33,
+        1268,
+        324,
+        44
+      ],
+      "ink": [
+        156,
+        1283,
+        233,
+        1297
+      ],
+      "margins": [
+        123,
+        15,
+        124,
+        15
+      ],
+      "centerError": [
+        -0.5,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 390,
+      "control": 9,
+      "type": "field",
+      "text": "\u5df2\u6838\u51c6\u6e2c\u8a66\u6536\u4ef6\u4eba",
+      "box": [
+        33,
+        1610,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        1625,
+        345,
+        1638
+      ],
+      "margins": [
+        14,
+        15,
+        12,
+        16
+      ],
+      "centerError": [
+        1.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 390,
+      "control": 10,
+      "type": "button",
+      "text": "\u5bc4\u9001\u6e2c\u8a66\u4fe1",
+      "box": [
+        33,
+        1666,
+        324,
+        44
+      ],
+      "ink": [
+        149,
+        1681,
+        240,
+        1695
+      ],
+      "margins": [
+        116,
+        15,
+        117,
+        15
+      ],
+      "centerError": [
+        -0.5,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 390,
+      "control": 11,
+      "type": "button",
+      "text": "\u6aa2\u67e5\u8868\u55ae",
+      "box": [
+        33,
+        1760,
+        324,
+        44
+      ],
+      "ink": [
+        168,
+        1775,
+        222,
+        1788
+      ],
+      "margins": [
+        135,
+        15,
+        135,
+        16
+      ],
+      "centerError": [
+        0.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 390,
+      "control": 12,
+      "type": "disclosure",
+      "text": "\u4f3a\u670d\u5668\u8a2d\u5b9a\u8981\u6c42",
+      "box": [
+        33,
+        2043,
+        324,
+        44
+      ],
+      "ink": [
+        36,
+        2058,
+        354,
+        2072
+      ],
+      "margins": [
+        3,
+        15,
+        3,
+        15
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 320,
+      "control": 0,
+      "type": "field",
+      "text": "mail.briconbric.com",
+      "box": [
+        33,
+        589,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        606,
+        273,
+        616
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 320,
+      "control": 1,
+      "type": "field",
+      "text": "STARTTLS \u00b7 587",
+      "box": [
+        33,
+        683,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        700,
+        273,
+        710
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 320,
+      "control": 2,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        777,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        793,
+        183,
+        806
+      ],
+      "margins": [
+        14,
+        16,
+        104,
+        15
+      ],
+      "centerError": [
+        -45.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 320,
+      "control": 3,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        871,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        887,
+        183,
+        900
+      ],
+      "margins": [
+        14,
+        16,
+        104,
+        15
+      ],
+      "centerError": [
+        -45.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 320,
+      "control": 4,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        965,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        981,
+        183,
+        994
+      ],
+      "margins": [
+        14,
+        16,
+        104,
+        15
+      ],
+      "centerError": [
+        -45.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 320,
+      "control": 5,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        1059,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        1075,
+        186,
+        1088
+      ],
+      "margins": [
+        14,
+        16,
+        101,
+        15
+      ],
+      "centerError": [
+        -43.5,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 320,
+      "control": 7,
+      "type": "button",
+      "text": "\u5132\u5b58\u90f5\u4ef6\u8a2d\u5b9a",
+      "box": [
+        33,
+        1285,
+        254,
+        44
+      ],
+      "ink": [
+        108,
+        1300,
+        212,
+        1313
+      ],
+      "margins": [
+        75,
+        15,
+        75,
+        16
+      ],
+      "centerError": [
+        0.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 320,
+      "control": 8,
+      "type": "button",
+      "text": "\u91cd\u65b0\u8f09\u5165",
+      "box": [
+        33,
+        1337,
+        254,
+        44
+      ],
+      "ink": [
+        121,
+        1352,
+        198,
+        1366
+      ],
+      "margins": [
+        88,
+        15,
+        89,
+        15
+      ],
+      "centerError": [
+        -0.5,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 320,
+      "control": 9,
+      "type": "field",
+      "text": "\u5df2\u6838\u51c6\u6e2c\u8a66\u6536\u4ef6\u4eba",
+      "box": [
+        33,
+        1679,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        1694,
+        275,
+        1707
+      ],
+      "margins": [
+        14,
+        15,
+        12,
+        16
+      ],
+      "centerError": [
+        1.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 320,
+      "control": 10,
+      "type": "button",
+      "text": "\u5bc4\u9001\u6e2c\u8a66\u4fe1",
+      "box": [
+        33,
+        1735,
+        254,
+        44
+      ],
+      "ink": [
+        114,
+        1750,
+        205,
+        1764
+      ],
+      "margins": [
+        81,
+        15,
+        82,
+        15
+      ],
+      "centerError": [
+        -0.5,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 320,
+      "control": 11,
+      "type": "button",
+      "text": "\u6aa2\u67e5\u8868\u55ae",
+      "box": [
+        33,
+        1852,
+        254,
+        44
+      ],
+      "ink": [
+        133,
+        1867,
+        187,
+        1880
+      ],
+      "margins": [
+        100,
+        15,
+        100,
+        16
+      ],
+      "centerError": [
+        0.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 320,
+      "control": 12,
+      "type": "disclosure",
+      "text": "\u4f3a\u670d\u5668\u8a2d\u5b9a\u8981\u6c42",
+      "box": [
+        33,
+        2156,
+        254,
+        44
+      ],
+      "ink": [
+        36,
+        2171,
+        284,
+        2185
+      ],
+      "margins": [
+        3,
+        15,
+        3,
+        15
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 0,
+      "type": "field",
+      "text": "mail.briconbric.com",
+      "box": [
+        297,
+        493,
+        313,
+        44
+      ],
+      "ink": [
+        311,
+        510,
+        596,
+        520
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 1,
+      "type": "field",
+      "text": "STARTTLS \u00b7 587",
+      "box": [
+        630,
+        493,
+        313,
+        44
+      ],
+      "ink": [
+        643,
+        510,
+        928,
+        520
+      ],
+      "margins": [
+        13,
+        17,
+        15,
+        17
+      ],
+      "centerError": [
+        -1.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 2,
+      "type": "field",
+      "text": "field",
+      "box": [
+        297,
+        587,
+        313,
+        44
+      ],
+      "ink": [
+        311,
+        603,
+        448,
+        616
+      ],
+      "margins": [
+        14,
+        16,
+        162,
+        15
+      ],
+      "centerError": [
+        -74.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 3,
+      "type": "field",
+      "text": "field",
+      "box": [
+        630,
+        587,
+        313,
+        44
+      ],
+      "ink": [
+        643,
+        603,
+        780,
+        616
+      ],
+      "margins": [
+        13,
+        16,
+        163,
+        15
+      ],
+      "centerError": [
+        -75.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 4,
+      "type": "field",
+      "text": "field",
+      "box": [
+        297,
+        681,
+        313,
+        44
+      ],
+      "ink": [
+        311,
+        697,
+        448,
+        710
+      ],
+      "margins": [
+        14,
+        16,
+        162,
+        15
+      ],
+      "centerError": [
+        -74.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 5,
+      "type": "field",
+      "text": "field",
+      "box": [
+        630,
+        681,
+        313,
+        44
+      ],
+      "ink": [
+        643,
+        684,
+        940,
+        722
+      ],
+      "margins": [
+        13,
+        3,
+        3,
+        3
+      ],
+      "centerError": [
+        5.0,
+        0.0
+      ],
+      "centerBudget": 2,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 7,
+      "type": "button",
+      "text": "\u4fdd\u5b58\u90ae\u4ef6\u8bbe\u7f6e",
+      "box": [
+        297,
+        885,
+        140,
+        44
+      ],
+      "ink": [
+        315,
+        900,
+        419,
+        913
+      ],
+      "margins": [
+        18,
+        15,
+        18,
+        16
+      ],
+      "centerError": [
+        0.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 8,
+      "type": "button",
+      "text": "\u91cd\u65b0\u52a0\u8f7d",
+      "box": [
+        445,
+        885,
+        112,
+        44
+      ],
+      "ink": [
+        462,
+        900,
+        540,
+        914
+      ],
+      "margins": [
+        17,
+        15,
+        17,
+        15
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 9,
+      "type": "field",
+      "text": "\u5df2\u6279\u51c6\u6d4b\u8bd5\u6536\u4ef6\u4eba",
+      "box": [
+        1016,
+        495,
+        359,
+        44
+      ],
+      "ink": [
+        1030,
+        510,
+        1363,
+        523
+      ],
+      "margins": [
+        14,
+        15,
+        12,
+        16
+      ],
+      "centerError": [
+        1.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 10,
+      "type": "button",
+      "text": "\u53d1\u9001\u6d4b\u8bd5\u4fe1",
+      "box": [
+        1016,
+        551,
+        359,
+        44
+      ],
+      "ink": [
+        1150,
+        566,
+        1240,
+        580
+      ],
+      "margins": [
+        134,
+        15,
+        135,
+        15
+      ],
+      "centerError": [
+        -0.5,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 11,
+      "type": "button",
+      "text": "\u68c0\u67e5\u8868\u5355",
+      "box": [
+        1016,
+        645,
+        359,
+        44
+      ],
+      "ink": [
+        1168,
+        660,
+        1223,
+        673
+      ],
+      "margins": [
+        152,
+        15,
+        152,
+        16
+      ],
+      "centerError": [
+        0.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 12,
+      "type": "disclosure",
+      "text": "\u670d\u52a1\u5668\u914d\u7f6e\u8981\u6c42",
+      "box": [
+        1016,
+        940,
+        359,
+        44
+      ],
+      "ink": [
+        1019,
+        955,
+        1372,
+        969
+      ],
+      "margins": [
+        3,
+        15,
+        3,
+        15
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 0,
+      "type": "field",
+      "text": "mail.briconbric.com",
+      "box": [
+        33,
+        520,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        537,
+        343,
+        547
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 1,
+      "type": "field",
+      "text": "STARTTLS \u00b7 587",
+      "box": [
+        33,
+        614,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        631,
+        343,
+        641
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 2,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        708,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        724,
+        183,
+        737
+      ],
+      "margins": [
+        14,
+        16,
+        174,
+        15
+      ],
+      "centerError": [
+        -80.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 3,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        802,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        818,
+        183,
+        831
+      ],
+      "margins": [
+        14,
+        16,
+        174,
+        15
+      ],
+      "centerError": [
+        -80.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 4,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        896,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        912,
+        183,
+        925
+      ],
+      "margins": [
+        14,
+        16,
+        174,
+        15
+      ],
+      "centerError": [
+        -80.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 5,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        990,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        1006,
+        186,
+        1019
+      ],
+      "margins": [
+        14,
+        16,
+        171,
+        15
+      ],
+      "centerError": [
+        -78.5,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 7,
+      "type": "button",
+      "text": "\u4fdd\u5b58\u90ae\u4ef6\u8bbe\u7f6e",
+      "box": [
+        33,
+        1216,
+        324,
+        44
+      ],
+      "ink": [
+        143,
+        1231,
+        247,
+        1244
+      ],
+      "margins": [
+        110,
+        15,
+        110,
+        16
+      ],
+      "centerError": [
+        0.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 8,
+      "type": "button",
+      "text": "\u91cd\u65b0\u52a0\u8f7d",
+      "box": [
+        33,
+        1268,
+        324,
+        44
+      ],
+      "ink": [
+        156,
+        1283,
+        233,
+        1297
+      ],
+      "margins": [
+        123,
+        15,
+        124,
+        15
+      ],
+      "centerError": [
+        -0.5,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 9,
+      "type": "field",
+      "text": "\u5df2\u6279\u51c6\u6d4b\u8bd5\u6536\u4ef6\u4eba",
+      "box": [
+        33,
+        1610,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        1625,
+        345,
+        1638
+      ],
+      "margins": [
+        14,
+        15,
+        12,
+        16
+      ],
+      "centerError": [
+        1.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 10,
+      "type": "button",
+      "text": "\u53d1\u9001\u6d4b\u8bd5\u4fe1",
+      "box": [
+        33,
+        1666,
+        324,
+        44
+      ],
+      "ink": [
+        149,
+        1681,
+        240,
+        1695
+      ],
+      "margins": [
+        116,
+        15,
+        117,
+        15
+      ],
+      "centerError": [
+        -0.5,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 11,
+      "type": "button",
+      "text": "\u68c0\u67e5\u8868\u5355",
+      "box": [
+        33,
+        1760,
+        324,
+        44
+      ],
+      "ink": [
+        168,
+        1775,
+        222,
+        1788
+      ],
+      "margins": [
+        135,
+        15,
+        135,
+        16
+      ],
+      "centerError": [
+        0.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 12,
+      "type": "disclosure",
+      "text": "\u670d\u52a1\u5668\u914d\u7f6e\u8981\u6c42",
+      "box": [
+        33,
+        2043,
+        324,
+        44
+      ],
+      "ink": [
+        36,
+        2058,
+        354,
+        2072
+      ],
+      "margins": [
+        3,
+        15,
+        3,
+        15
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 0,
+      "type": "field",
+      "text": "mail.briconbric.com",
+      "box": [
+        33,
+        589,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        606,
+        273,
+        616
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 1,
+      "type": "field",
+      "text": "STARTTLS \u00b7 587",
+      "box": [
+        33,
+        683,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        700,
+        273,
+        710
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 2,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        777,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        793,
+        183,
+        806
+      ],
+      "margins": [
+        14,
+        16,
+        104,
+        15
+      ],
+      "centerError": [
+        -45.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 3,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        871,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        887,
+        183,
+        900
+      ],
+      "margins": [
+        14,
+        16,
+        104,
+        15
+      ],
+      "centerError": [
+        -45.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 4,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        965,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        981,
+        183,
+        994
+      ],
+      "margins": [
+        14,
+        16,
+        104,
+        15
+      ],
+      "centerError": [
+        -45.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 5,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        1059,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        1075,
+        186,
+        1088
+      ],
+      "margins": [
+        14,
+        16,
+        101,
+        15
+      ],
+      "centerError": [
+        -43.5,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 7,
+      "type": "button",
+      "text": "\u4fdd\u5b58\u90ae\u4ef6\u8bbe\u7f6e",
+      "box": [
+        33,
+        1285,
+        254,
+        44
+      ],
+      "ink": [
+        108,
+        1300,
+        212,
+        1313
+      ],
+      "margins": [
+        75,
+        15,
+        75,
+        16
+      ],
+      "centerError": [
+        0.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 8,
+      "type": "button",
+      "text": "\u91cd\u65b0\u52a0\u8f7d",
+      "box": [
+        33,
+        1337,
+        254,
+        44
+      ],
+      "ink": [
+        121,
+        1352,
+        198,
+        1366
+      ],
+      "margins": [
+        88,
+        15,
+        89,
+        15
+      ],
+      "centerError": [
+        -0.5,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 9,
+      "type": "field",
+      "text": "\u5df2\u6279\u51c6\u6d4b\u8bd5\u6536\u4ef6\u4eba",
+      "box": [
+        33,
+        1679,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        1694,
+        275,
+        1707
+      ],
+      "margins": [
+        14,
+        15,
+        12,
+        16
+      ],
+      "centerError": [
+        1.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 10,
+      "type": "button",
+      "text": "\u53d1\u9001\u6d4b\u8bd5\u4fe1",
+      "box": [
+        33,
+        1735,
+        254,
+        44
+      ],
+      "ink": [
+        114,
+        1750,
+        205,
+        1764
+      ],
+      "margins": [
+        81,
+        15,
+        82,
+        15
+      ],
+      "centerError": [
+        -0.5,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 11,
+      "type": "button",
+      "text": "\u68c0\u67e5\u8868\u5355",
+      "box": [
+        33,
+        1852,
+        254,
+        44
+      ],
+      "ink": [
+        133,
+        1867,
+        187,
+        1880
+      ],
+      "margins": [
+        100,
+        15,
+        100,
+        16
+      ],
+      "centerError": [
+        0.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 12,
+      "type": "disclosure",
+      "text": "\u670d\u52a1\u5668\u914d\u7f6e\u8981\u6c42",
+      "box": [
+        33,
+        2156,
+        254,
+        44
+      ],
+      "ink": [
+        36,
+        2171,
+        284,
+        2185
+      ],
+      "margins": [
+        3,
+        15,
+        3,
+        15
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "left",
+      "pass": true
+    }
+  ],
+  "failures": []
+}

@@ -1,0 +1,31 @@
+{
+  "source": "f4fae3d05d61c2b697cba4f6ac62f07b55d58790",
+  "result": "PASS",
+  "ci": {
+    "conclusion": "success",
+    "headSha": "f4fae3d05d61c2b697cba4f6ac62f07b55d58790",
+    "status": "completed",
+    "url": "https://github.com/sunshaoxuan/bobuy/actions/runs/43140249364"
+  },
+  "tests": 10,
+  "i18nKeys": 1665,
+  "build": "PASS",
+  "functional": "PASS",
+  "screenshots": 12,
+  "actualInkControls": 144,
+  "readyStateInkControls": 36,
+  "reuseBoundary": "Only selected recipient CSS changed; prior placeholders and behavior unchanged",
+  "visual": "PASS",
+  "selfInbox": "PASS",
+  "sourceFiles": {
+    "frontend/src/pages/MailSettings.tsx": "949a3af035facb2a9e8049bd3abad513f3473f15c0d82852e0609996e6533cbd",
+    "frontend/src/pages/MailSettings.css": "a48f09b96e0ca14df382c5abb9ca5ebfb04d2e9ca3af5aec76978c9dec3b1d7c",
+    "frontend/src/pages/MailSettings.test.tsx": "c3f75110322401497d85ec2c0b167278cc15b0685b24bbc1af7d59e9a2af3e84",
+    "frontend/package-lock.json": "65076ca75b4b9e93f390aae56660356aea71c0317f639037faf24ab44924642e",
+    "frontend/nginx.conf": "c3a97167ab58eddd51c62453001d5fe2a5aabd807521d418feb0e21ff985a959",
+    "frontend/src/locales/en-US.ts": "d8b364e4b0024780d8111f11c2b66e6fb42d2c103173f83a55822e5d232c51e1",
+    "frontend/src/locales/ja-JP.ts": "0488929b255a6309e129de683dfbcf529498521aab5130e838787d5fe31092ba",
+    "frontend/src/locales/zh-CN.ts": "486f3aec64190217f3d9bdb35d285dfd9f4840bb1c92261d97770cb00943be07",
+    "frontend/src/locales/zh-TW.ts": "bd97193f2b70fa46493e5571ac61bc308c123a7c912ba3854766a9638e226656"
+  }
+}

@@ -1,0 +1,1769 @@
+{
+  "scope": "final running assets; language-ready waits; geometry matches captured scrollbar-hidden canvas",
+  "matrix": [
+    {
+      "locale": "en-US",
+      "width": 1440,
+      "screenshot": "final-en-US-1440.png",
+      "capturedSize": {
+        "height": 1110,
+        "width": 1440
+      },
+      "controls": [
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "mail.briconbric.com",
+          "type": "field",
+          "w": 312.546875,
+          "x": 297,
+          "y": 540.296875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "STARTTLS · 587",
+          "type": "field",
+          "w": 312.5625,
+          "x": 629.546875,
+          "y": 560.890625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 312.546875,
+          "x": 297,
+          "y": 654.890625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 312.5625,
+          "x": 629.546875,
+          "y": 654.890625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 312.546875,
+          "x": 297,
+          "y": 748.890625
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 312.5625,
+          "x": 629.546875,
+          "y": 748.890625
+        },
+        {
+          "disabled": true,
+          "h": 28,
+          "insidePanel": true,
+          "text": "",
+          "type": "switch",
+          "w": 48,
+          "x": 894.109375,
+          "y": 875.9375
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "Save mail settings",
+          "type": "button",
+          "w": 166.46875,
+          "x": 297,
+          "y": 952.984375
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "Reload",
+          "type": "button",
+          "w": 98.25,
+          "x": 471.46875,
+          "y": 952.984375
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "Approved test recipient",
+          "type": "field",
+          "w": 358.890625,
+          "x": 1016.109375,
+          "y": 494.953125
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "Send test message",
+          "type": "button",
+          "w": 358.890625,
+          "x": 1016.109375,
+          "y": 550.953125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "Check form",
+          "type": "button",
+          "w": 358.890625,
+          "x": 1016.109375,
+          "y": 667.140625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "Server setup requirements",
+          "type": "disclosure",
+          "w": 358.890625,
+          "x": 1016.109375,
+          "y": 1004.796875
+        }
+      ],
+      "heading": "System settings · Mail",
+      "overflow": false,
+      "viewport": [
+        1440,
+        1000
+      ]
+    },
+    {
+      "locale": "en-US",
+      "width": 390,
+      "screenshot": "final-en-US-390.png",
+      "capturedSize": {
+        "height": 2356,
+        "width": 390
+      },
+      "controls": [
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "mail.briconbric.com",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 614.234375
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "STARTTLS · 587",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 728.828125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 822.828125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 916.828125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 1010.828125
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 1104.828125
+        },
+        {
+          "disabled": true,
+          "h": 28,
+          "insidePanel": true,
+          "text": "",
+          "type": "switch",
+          "w": 48,
+          "x": 309,
+          "y": 1253.96875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "Save mail settings",
+          "type": "button",
+          "w": 324,
+          "x": 33,
+          "y": 1353.109375
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "Reload",
+          "type": "button",
+          "w": 324,
+          "x": 33,
+          "y": 1405.109375
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "Approved test recipient",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 1747.140625
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "Send test message",
+          "type": "button",
+          "w": 324,
+          "x": 33,
+          "y": 1803.140625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "Check form",
+          "type": "button",
+          "w": 324,
+          "x": 33,
+          "y": 1919.328125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "Server setup requirements",
+          "type": "disclosure",
+          "w": 324,
+          "x": 33,
+          "y": 2266.578125
+        }
+      ],
+      "heading": "System settings · Mail",
+      "overflow": false,
+      "viewport": [
+        390,
+        1000
+      ]
+    },
+    {
+      "locale": "en-US",
+      "width": 320,
+      "screenshot": "final-en-US-320.png",
+      "capturedSize": {
+        "height": 2518,
+        "width": 320
+      },
+      "controls": [
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "mail.briconbric.com",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 732.65625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "STARTTLS · 587",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 847.25
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 941.25
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 1035.25
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 1129.25
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 1223.25
+        },
+        {
+          "disabled": true,
+          "h": 28,
+          "insidePanel": true,
+          "text": "",
+          "type": "switch",
+          "w": 48,
+          "x": 239,
+          "y": 1372.390625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "Save mail settings",
+          "type": "button",
+          "w": 254,
+          "x": 33,
+          "y": 1471.53125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "Reload",
+          "type": "button",
+          "w": 254,
+          "x": 33,
+          "y": 1523.53125
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "Approved test recipient",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 1887.65625
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "Send test message",
+          "type": "button",
+          "w": 254,
+          "x": 33,
+          "y": 1943.65625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "Check form",
+          "type": "button",
+          "w": 254,
+          "x": 33,
+          "y": 2059.84375
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "Server setup requirements",
+          "type": "disclosure",
+          "w": 254,
+          "x": 33,
+          "y": 2428.6875
+        }
+      ],
+      "heading": "System settings · Mail",
+      "overflow": false,
+      "viewport": [
+        320,
+        1000
+      ]
+    },
+    {
+      "locale": "ja-JP",
+      "width": 1440,
+      "screenshot": "final-ja-JP-1440.png",
+      "capturedSize": {
+        "height": 1088,
+        "width": 1440
+      },
+      "controls": [
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "mail.briconbric.com",
+          "type": "field",
+          "w": 312.546875,
+          "x": 297,
+          "y": 540.296875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "STARTTLS · 587",
+          "type": "field",
+          "w": 312.5625,
+          "x": 629.546875,
+          "y": 540.296875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 312.546875,
+          "x": 297,
+          "y": 634.296875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 312.5625,
+          "x": 629.546875,
+          "y": 634.296875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 312.546875,
+          "x": 297,
+          "y": 728.296875
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 312.5625,
+          "x": 629.546875,
+          "y": 728.296875
+        },
+        {
+          "disabled": true,
+          "h": 28,
+          "insidePanel": true,
+          "text": "",
+          "type": "switch",
+          "w": 48,
+          "x": 894.109375,
+          "y": 855.34375
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "メール設定を保存",
+          "type": "button",
+          "w": 168,
+          "x": 297,
+          "y": 932.390625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "再読み込み",
+          "type": "button",
+          "w": 126,
+          "x": 473,
+          "y": 932.390625
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "承認済みテスト宛先",
+          "type": "field",
+          "w": 358.890625,
+          "x": 1016.109375,
+          "y": 494.953125
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "テストメールを送信",
+          "type": "button",
+          "w": 358.890625,
+          "x": 1016.109375,
+          "y": 550.953125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "フォームを確認",
+          "type": "button",
+          "w": 358.890625,
+          "x": 1016.109375,
+          "y": 667.140625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "サーバーの設定要件",
+          "type": "disclosure",
+          "w": 358.890625,
+          "x": 1016.109375,
+          "y": 983.203125
+        }
+      ],
+      "heading": "システム設定 · メール",
+      "overflow": false,
+      "viewport": [
+        1440,
+        1000
+      ]
+    },
+    {
+      "locale": "ja-JP",
+      "width": 390,
+      "screenshot": "final-ja-JP-390.png",
+      "capturedSize": {
+        "height": 2267,
+        "width": 390
+      },
+      "controls": [
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "mail.briconbric.com",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 589.1875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "STARTTLS · 587",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 683.1875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 777.1875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 871.1875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 965.1875
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 1059.1875
+        },
+        {
+          "disabled": true,
+          "h": 28,
+          "insidePanel": true,
+          "text": "",
+          "type": "switch",
+          "w": 48,
+          "x": 309,
+          "y": 1197.28125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "メール設定を保存",
+          "type": "button",
+          "w": 324,
+          "x": 33,
+          "y": 1285.375
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "再読み込み",
+          "type": "button",
+          "w": 324,
+          "x": 33,
+          "y": 1337.375
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "承認済みテスト宛先",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 1701.5
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "テストメールを送信",
+          "type": "button",
+          "w": 324,
+          "x": 33,
+          "y": 1757.5
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "フォームを確認",
+          "type": "button",
+          "w": 324,
+          "x": 33,
+          "y": 1873.6875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "サーバーの設定要件",
+          "type": "disclosure",
+          "w": 324,
+          "x": 33,
+          "y": 2177.75
+        }
+      ],
+      "heading": "システム設定 · メール",
+      "overflow": false,
+      "viewport": [
+        390,
+        1000
+      ]
+    },
+    {
+      "locale": "ja-JP",
+      "width": 320,
+      "screenshot": "final-ja-JP-320.png",
+      "capturedSize": {
+        "height": 2428,
+        "width": 320
+      },
+      "controls": [
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "mail.briconbric.com",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 685.515625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "STARTTLS · 587",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 779.515625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 873.515625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 967.515625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 1061.515625
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 1155.515625
+        },
+        {
+          "disabled": true,
+          "h": 28,
+          "insidePanel": true,
+          "text": "",
+          "type": "switch",
+          "w": 48,
+          "x": 239,
+          "y": 1304.65625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "メール設定を保存",
+          "type": "button",
+          "w": 254,
+          "x": 33,
+          "y": 1403.796875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "再読み込み",
+          "type": "button",
+          "w": 254,
+          "x": 33,
+          "y": 1455.796875
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "承認済みテスト宛先",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 1819.921875
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "テストメールを送信",
+          "type": "button",
+          "w": 254,
+          "x": 33,
+          "y": 1875.921875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "フォームを確認",
+          "type": "button",
+          "w": 254,
+          "x": 33,
+          "y": 1992.109375
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "サーバーの設定要件",
+          "type": "disclosure",
+          "w": 254,
+          "x": 33,
+          "y": 2339.359375
+        }
+      ],
+      "heading": "システム設定 · メール",
+      "overflow": false,
+      "viewport": [
+        320,
+        1000
+      ]
+    },
+    {
+      "locale": "zh-TW",
+      "width": 1440,
+      "screenshot": "final-zh-TW-1440.png",
+      "capturedSize": {
+        "height": 1045,
+        "width": 1440
+      },
+      "controls": [
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "mail.briconbric.com",
+          "type": "field",
+          "w": 312.546875,
+          "x": 297,
+          "y": 493.15625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "STARTTLS · 587",
+          "type": "field",
+          "w": 312.5625,
+          "x": 629.546875,
+          "y": 493.15625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 312.546875,
+          "x": 297,
+          "y": 587.15625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 312.5625,
+          "x": 629.546875,
+          "y": 587.15625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 312.546875,
+          "x": 297,
+          "y": 681.15625
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 312.5625,
+          "x": 629.546875,
+          "y": 681.15625
+        },
+        {
+          "disabled": true,
+          "h": 28,
+          "insidePanel": true,
+          "text": "",
+          "type": "switch",
+          "w": 48,
+          "x": 894.109375,
+          "y": 808.203125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "儲存郵件設定",
+          "type": "button",
+          "w": 140,
+          "x": 297,
+          "y": 885.25
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "重新載入",
+          "type": "button",
+          "w": 112,
+          "x": 445,
+          "y": 885.25
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "已核准測試收件人",
+          "type": "field",
+          "w": 358.890625,
+          "x": 1016.109375,
+          "y": 494.953125
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "寄送測試信",
+          "type": "button",
+          "w": 358.890625,
+          "x": 1016.109375,
+          "y": 550.953125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "檢查表單",
+          "type": "button",
+          "w": 358.890625,
+          "x": 1016.109375,
+          "y": 645.046875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "伺服器設定要求",
+          "type": "disclosure",
+          "w": 358.890625,
+          "x": 1016.109375,
+          "y": 939.515625
+        }
+      ],
+      "heading": "系統設定 · 郵件",
+      "overflow": false,
+      "viewport": [
+        1440,
+        1000
+      ]
+    },
+    {
+      "locale": "zh-TW",
+      "width": 390,
+      "screenshot": "final-zh-TW-390.png",
+      "capturedSize": {
+        "height": 2132,
+        "width": 390
+      },
+      "controls": [
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "mail.briconbric.com",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 519.953125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "STARTTLS · 587",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 613.953125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 707.953125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 801.953125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 895.953125
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 989.953125
+        },
+        {
+          "disabled": true,
+          "h": 28,
+          "insidePanel": true,
+          "text": "",
+          "type": "switch",
+          "w": 48,
+          "x": 309,
+          "y": 1128.046875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "儲存郵件設定",
+          "type": "button",
+          "w": 324,
+          "x": 33,
+          "y": 1216.140625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "重新載入",
+          "type": "button",
+          "w": 324,
+          "x": 33,
+          "y": 1268.140625
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "已核准測試收件人",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 1610.171875
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "寄送測試信",
+          "type": "button",
+          "w": 324,
+          "x": 33,
+          "y": 1666.171875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "檢查表單",
+          "type": "button",
+          "w": 324,
+          "x": 33,
+          "y": 1760.265625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "伺服器設定要求",
+          "type": "disclosure",
+          "w": 324,
+          "x": 33,
+          "y": 2042.734375
+        }
+      ],
+      "heading": "系統設定 · 郵件",
+      "overflow": false,
+      "viewport": [
+        390,
+        1000
+      ]
+    },
+    {
+      "locale": "zh-TW",
+      "width": 320,
+      "screenshot": "final-zh-TW-320.png",
+      "capturedSize": {
+        "height": 2245,
+        "width": 320
+      },
+      "controls": [
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "mail.briconbric.com",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 589.1875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "STARTTLS · 587",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 683.1875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 777.1875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 871.1875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 965.1875
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 1059.1875
+        },
+        {
+          "disabled": true,
+          "h": 28,
+          "insidePanel": true,
+          "text": "",
+          "type": "switch",
+          "w": 48,
+          "x": 239,
+          "y": 1197.28125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "儲存郵件設定",
+          "type": "button",
+          "w": 254,
+          "x": 33,
+          "y": 1285.375
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "重新載入",
+          "type": "button",
+          "w": 254,
+          "x": 33,
+          "y": 1337.375
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "已核准測試收件人",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 1679.40625
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "寄送測試信",
+          "type": "button",
+          "w": 254,
+          "x": 33,
+          "y": 1735.40625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "檢查表單",
+          "type": "button",
+          "w": 254,
+          "x": 33,
+          "y": 1851.59375
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "伺服器設定要求",
+          "type": "disclosure",
+          "w": 254,
+          "x": 33,
+          "y": 2155.65625
+        }
+      ],
+      "heading": "系統設定 · 郵件",
+      "overflow": false,
+      "viewport": [
+        320,
+        1000
+      ]
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "screenshot": "final-zh-CN-1440.png",
+      "capturedSize": {
+        "height": 1045,
+        "width": 1440
+      },
+      "controls": [
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "mail.briconbric.com",
+          "type": "field",
+          "w": 312.546875,
+          "x": 297,
+          "y": 493.15625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "STARTTLS · 587",
+          "type": "field",
+          "w": 312.5625,
+          "x": 629.546875,
+          "y": 493.15625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 312.546875,
+          "x": 297,
+          "y": 587.15625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 312.5625,
+          "x": 629.546875,
+          "y": 587.15625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 312.546875,
+          "x": 297,
+          "y": 681.15625
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 312.5625,
+          "x": 629.546875,
+          "y": 681.15625
+        },
+        {
+          "disabled": true,
+          "h": 28,
+          "insidePanel": true,
+          "text": "",
+          "type": "switch",
+          "w": 48,
+          "x": 894.109375,
+          "y": 808.203125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "保存邮件设置",
+          "type": "button",
+          "w": 140,
+          "x": 297,
+          "y": 885.25
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "重新加载",
+          "type": "button",
+          "w": 112,
+          "x": 445,
+          "y": 885.25
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "已批准测试收件人",
+          "type": "field",
+          "w": 358.890625,
+          "x": 1016.109375,
+          "y": 494.953125
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "发送测试信",
+          "type": "button",
+          "w": 358.890625,
+          "x": 1016.109375,
+          "y": 550.953125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "检查表单",
+          "type": "button",
+          "w": 358.890625,
+          "x": 1016.109375,
+          "y": 645.046875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "服务器配置要求",
+          "type": "disclosure",
+          "w": 358.890625,
+          "x": 1016.109375,
+          "y": 939.515625
+        }
+      ],
+      "heading": "系统设置 · 邮件",
+      "overflow": false,
+      "viewport": [
+        1440,
+        1000
+      ]
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "screenshot": "final-zh-CN-390.png",
+      "capturedSize": {
+        "height": 2132,
+        "width": 390
+      },
+      "controls": [
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "mail.briconbric.com",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 519.953125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "STARTTLS · 587",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 613.953125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 707.953125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 801.953125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 895.953125
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 989.953125
+        },
+        {
+          "disabled": true,
+          "h": 28,
+          "insidePanel": true,
+          "text": "",
+          "type": "switch",
+          "w": 48,
+          "x": 309,
+          "y": 1128.046875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "保存邮件设置",
+          "type": "button",
+          "w": 324,
+          "x": 33,
+          "y": 1216.140625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "重新加载",
+          "type": "button",
+          "w": 324,
+          "x": 33,
+          "y": 1268.140625
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "已批准测试收件人",
+          "type": "field",
+          "w": 324,
+          "x": 33,
+          "y": 1610.171875
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "发送测试信",
+          "type": "button",
+          "w": 324,
+          "x": 33,
+          "y": 1666.171875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "检查表单",
+          "type": "button",
+          "w": 324,
+          "x": 33,
+          "y": 1760.265625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "服务器配置要求",
+          "type": "disclosure",
+          "w": 324,
+          "x": 33,
+          "y": 2042.734375
+        }
+      ],
+      "heading": "系统设置 · 邮件",
+      "overflow": false,
+      "viewport": [
+        390,
+        1000
+      ]
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "screenshot": "final-zh-CN-320.png",
+      "capturedSize": {
+        "height": 2245,
+        "width": 320
+      },
+      "controls": [
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "mail.briconbric.com",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 589.1875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "STARTTLS · 587",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 683.1875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 777.1875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 871.1875
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 965.1875
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "field",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 1059.1875
+        },
+        {
+          "disabled": true,
+          "h": 28,
+          "insidePanel": true,
+          "text": "",
+          "type": "switch",
+          "w": 48,
+          "x": 239,
+          "y": 1197.28125
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "保存邮件设置",
+          "type": "button",
+          "w": 254,
+          "x": 33,
+          "y": 1285.375
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "重新加载",
+          "type": "button",
+          "w": 254,
+          "x": 33,
+          "y": 1337.375
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "已批准测试收件人",
+          "type": "field",
+          "w": 254,
+          "x": 33,
+          "y": 1679.40625
+        },
+        {
+          "disabled": true,
+          "h": 44,
+          "insidePanel": true,
+          "text": "发送测试信",
+          "type": "button",
+          "w": 254,
+          "x": 33,
+          "y": 1735.40625
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "检查表单",
+          "type": "button",
+          "w": 254,
+          "x": 33,
+          "y": 1851.59375
+        },
+        {
+          "disabled": false,
+          "h": 44,
+          "insidePanel": true,
+          "text": "服务器配置要求",
+          "type": "disclosure",
+          "w": 254,
+          "x": 33,
+          "y": 2155.65625
+        }
+      ],
+      "heading": "系统设置 · 邮件",
+      "overflow": false,
+      "viewport": [
+        320,
+        1000
+      ]
+    }
+  ]
+}

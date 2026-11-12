@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "inbox": "INBOX",
+  "subject": "Bobuy SMTP test",
+  "selfToSelf": true,
+  "fixedTokenFreeBody": true,
+  "messagesMatchingSubject": 1,
+  "readOnly": true,
+  "imapCertificateVerified": true
+}

@@ -1,0 +1,12 @@
+{
+  "cancelRetainsDraft": true,
+  "confirmRestoresSaved": true,
+  "formatCheckWorks": true,
+  "apiResponses": [
+    {
+      "url": "http://127.0.0.1:5181/api/admin/settings/mail",
+      "status": 200
+    }
+  ],
+  "applicationErrors": []
+}

@@ -1,0 +1,15 @@
+{
+  "version": "20261112.mail-settings.3",
+  "passwordEditable": true,
+  "passwordEmpty": true,
+  "testAvailable": true,
+  "automaticSoleRecipient": true,
+  "productionViewports": [
+    1440,
+    390,
+    320
+  ],
+  "additionalMailSent": false,
+  "savePersistence": "Existing actual production SAVE_PASSWORD plus reload verified; blank credential retention and new UI save behavior covered by 10 focused tests and actual local save/reload",
+  "consoleAndNetwork": "Actual local final JS had zero application errors and 200 settings response; reused because mail JS is unchanged by final CSS correction. Production assets and settings loaded with exact server byte checks. Optional extra final live save/telemetry capture was interrupted by browser extension automation gate; no unobserved save claimed."
+}

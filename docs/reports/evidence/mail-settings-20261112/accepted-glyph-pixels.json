@@ -1,0 +1,1158 @@
+{
+  "result": "PASS",
+  "controls": [
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 0,
+      "type": "field",
+      "text": "mail.briconbric.com",
+      "box": [
+        297,
+        372,
+        313,
+        44
+      ],
+      "ink": [
+        311,
+        389,
+        596,
+        399
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 1,
+      "type": "field",
+      "text": "STARTTLS \u00b7 587",
+      "box": [
+        630,
+        372,
+        313,
+        44
+      ],
+      "ink": [
+        643,
+        389,
+        928,
+        399
+      ],
+      "margins": [
+        13,
+        17,
+        15,
+        17
+      ],
+      "centerError": [
+        -1.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 2,
+      "type": "field",
+      "text": "field",
+      "box": [
+        297,
+        466,
+        313,
+        44
+      ],
+      "ink": [
+        311,
+        482,
+        448,
+        495
+      ],
+      "margins": [
+        14,
+        16,
+        162,
+        15
+      ],
+      "centerError": [
+        -74.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 3,
+      "type": "field",
+      "text": "field",
+      "box": [
+        630,
+        466,
+        313,
+        44
+      ],
+      "ink": [
+        643,
+        482,
+        780,
+        495
+      ],
+      "margins": [
+        13,
+        16,
+        163,
+        15
+      ],
+      "centerError": [
+        -75.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 4,
+      "type": "field",
+      "text": "field",
+      "box": [
+        297,
+        560,
+        313,
+        44
+      ],
+      "ink": [
+        311,
+        576,
+        448,
+        589
+      ],
+      "margins": [
+        14,
+        16,
+        162,
+        15
+      ],
+      "centerError": [
+        -74.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 5,
+      "type": "field",
+      "text": "field",
+      "box": [
+        630,
+        560,
+        313,
+        44
+      ],
+      "ink": [
+        644,
+        577,
+        794,
+        589
+      ],
+      "margins": [
+        14,
+        17,
+        149,
+        15
+      ],
+      "centerError": [
+        -67.5,
+        1.0
+      ],
+      "centerBudget": 1.2000000000000002,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 7,
+      "type": "button",
+      "text": "\u4fdd\u5b58\u90ae\u4ef6\u8bbe\u7f6e",
+      "box": [
+        297,
+        764,
+        140,
+        44
+      ],
+      "ink": [
+        315,
+        779,
+        419,
+        792
+      ],
+      "margins": [
+        18,
+        15,
+        18,
+        16
+      ],
+      "centerError": [
+        0.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 8,
+      "type": "button",
+      "text": "\u91cd\u65b0\u52a0\u8f7d",
+      "box": [
+        445,
+        764,
+        112,
+        44
+      ],
+      "ink": [
+        462,
+        779,
+        540,
+        793
+      ],
+      "margins": [
+        17,
+        15,
+        17,
+        15
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 9,
+      "type": "field",
+      "text": "postmaster@bobuy.cc",
+      "box": [
+        1016,
+        495,
+        359,
+        44
+      ],
+      "ink": [
+        1030,
+        511,
+        1361,
+        524
+      ],
+      "margins": [
+        14,
+        16,
+        14,
+        15
+      ],
+      "centerError": [
+        0.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 10,
+      "type": "button",
+      "text": "\u53d1\u9001\u6d4b\u8bd5\u4fe1",
+      "box": [
+        1016,
+        551,
+        359,
+        44
+      ],
+      "ink": [
+        1150,
+        566,
+        1241,
+        580
+      ],
+      "margins": [
+        134,
+        15,
+        134,
+        15
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 11,
+      "type": "button",
+      "text": "\u68c0\u67e5\u8868\u5355",
+      "box": [
+        1016,
+        645,
+        359,
+        44
+      ],
+      "ink": [
+        1168,
+        660,
+        1223,
+        673
+      ],
+      "margins": [
+        152,
+        15,
+        152,
+        16
+      ],
+      "centerError": [
+        0.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "control": 12,
+      "type": "disclosure",
+      "text": "\u670d\u52a1\u5668\u914d\u7f6e\u8981\u6c42",
+      "box": [
+        1016,
+        940,
+        359,
+        44
+      ],
+      "ink": [
+        1019,
+        955,
+        1372,
+        969
+      ],
+      "margins": [
+        3,
+        15,
+        3,
+        15
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 0,
+      "type": "field",
+      "text": "mail.briconbric.com",
+      "box": [
+        33,
+        352,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        369,
+        343,
+        379
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 1,
+      "type": "field",
+      "text": "STARTTLS \u00b7 587",
+      "box": [
+        33,
+        446,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        463,
+        343,
+        473
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 2,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        540,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        556,
+        183,
+        569
+      ],
+      "margins": [
+        14,
+        16,
+        174,
+        15
+      ],
+      "centerError": [
+        -80.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 3,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        634,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        650,
+        183,
+        663
+      ],
+      "margins": [
+        14,
+        16,
+        174,
+        15
+      ],
+      "centerError": [
+        -80.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 4,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        728,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        744,
+        183,
+        757
+      ],
+      "margins": [
+        14,
+        16,
+        174,
+        15
+      ],
+      "centerError": [
+        -80.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 5,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        822,
+        324,
+        44
+      ],
+      "ink": [
+        48,
+        839,
+        197,
+        851
+      ],
+      "margins": [
+        15,
+        17,
+        160,
+        15
+      ],
+      "centerError": [
+        -72.5,
+        1.0
+      ],
+      "centerBudget": 1.2000000000000002,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 7,
+      "type": "button",
+      "text": "\u4fdd\u5b58\u90ae\u4ef6\u8bbe\u7f6e",
+      "box": [
+        33,
+        1048,
+        324,
+        44
+      ],
+      "ink": [
+        143,
+        1063,
+        247,
+        1076
+      ],
+      "margins": [
+        110,
+        15,
+        110,
+        16
+      ],
+      "centerError": [
+        0.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 8,
+      "type": "button",
+      "text": "\u91cd\u65b0\u52a0\u8f7d",
+      "box": [
+        33,
+        1100,
+        324,
+        44
+      ],
+      "ink": [
+        156,
+        1115,
+        233,
+        1129
+      ],
+      "margins": [
+        123,
+        15,
+        124,
+        15
+      ],
+      "centerError": [
+        -0.5,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 9,
+      "type": "field",
+      "text": "postmaster@bobuy.cc",
+      "box": [
+        33,
+        1442,
+        324,
+        44
+      ],
+      "ink": [
+        47,
+        1458,
+        343,
+        1471
+      ],
+      "margins": [
+        14,
+        16,
+        14,
+        15
+      ],
+      "centerError": [
+        0.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 10,
+      "type": "button",
+      "text": "\u53d1\u9001\u6d4b\u8bd5\u4fe1",
+      "box": [
+        33,
+        1498,
+        324,
+        44
+      ],
+      "ink": [
+        149,
+        1513,
+        240,
+        1527
+      ],
+      "margins": [
+        116,
+        15,
+        117,
+        15
+      ],
+      "centerError": [
+        -0.5,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 11,
+      "type": "button",
+      "text": "\u68c0\u67e5\u8868\u5355",
+      "box": [
+        33,
+        1592,
+        324,
+        44
+      ],
+      "ink": [
+        168,
+        1607,
+        222,
+        1620
+      ],
+      "margins": [
+        135,
+        15,
+        135,
+        16
+      ],
+      "centerError": [
+        0.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "control": 12,
+      "type": "disclosure",
+      "text": "\u670d\u52a1\u5668\u914d\u7f6e\u8981\u6c42",
+      "box": [
+        33,
+        1874,
+        324,
+        44
+      ],
+      "ink": [
+        36,
+        1890,
+        354,
+        1904
+      ],
+      "margins": [
+        3,
+        16,
+        3,
+        14
+      ],
+      "centerError": [
+        0.0,
+        1.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 0,
+      "type": "field",
+      "text": "mail.briconbric.com",
+      "box": [
+        33,
+        374,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        391,
+        273,
+        401
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 1,
+      "type": "field",
+      "text": "STARTTLS \u00b7 587",
+      "box": [
+        33,
+        468,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        485,
+        273,
+        495
+      ],
+      "margins": [
+        14,
+        17,
+        14,
+        17
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.0,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 2,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        562,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        578,
+        183,
+        591
+      ],
+      "margins": [
+        14,
+        16,
+        104,
+        15
+      ],
+      "centerError": [
+        -45.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 3,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        656,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        672,
+        183,
+        685
+      ],
+      "margins": [
+        14,
+        16,
+        104,
+        15
+      ],
+      "centerError": [
+        -45.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 4,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        750,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        766,
+        183,
+        779
+      ],
+      "margins": [
+        14,
+        16,
+        104,
+        15
+      ],
+      "centerError": [
+        -45.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 5,
+      "type": "field",
+      "text": "field",
+      "box": [
+        33,
+        844,
+        254,
+        44
+      ],
+      "ink": [
+        48,
+        861,
+        197,
+        873
+      ],
+      "margins": [
+        15,
+        17,
+        90,
+        15
+      ],
+      "centerError": [
+        -37.5,
+        1.0
+      ],
+      "centerBudget": 1.2000000000000002,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 7,
+      "type": "button",
+      "text": "\u4fdd\u5b58\u90ae\u4ef6\u8bbe\u7f6e",
+      "box": [
+        33,
+        1087,
+        254,
+        44
+      ],
+      "ink": [
+        108,
+        1102,
+        212,
+        1115
+      ],
+      "margins": [
+        75,
+        15,
+        75,
+        16
+      ],
+      "centerError": [
+        0.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 8,
+      "type": "button",
+      "text": "\u91cd\u65b0\u52a0\u8f7d",
+      "box": [
+        33,
+        1139,
+        254,
+        44
+      ],
+      "ink": [
+        121,
+        1154,
+        198,
+        1168
+      ],
+      "margins": [
+        88,
+        15,
+        89,
+        15
+      ],
+      "centerError": [
+        -0.5,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 9,
+      "type": "field",
+      "text": "postmaster@bobuy.cc",
+      "box": [
+        33,
+        1481,
+        254,
+        44
+      ],
+      "ink": [
+        47,
+        1497,
+        273,
+        1510
+      ],
+      "margins": [
+        14,
+        16,
+        14,
+        15
+      ],
+      "centerError": [
+        0.0,
+        0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "left",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 10,
+      "type": "button",
+      "text": "\u53d1\u9001\u6d4b\u8bd5\u4fe1",
+      "box": [
+        33,
+        1537,
+        254,
+        44
+      ],
+      "ink": [
+        114,
+        1552,
+        205,
+        1566
+      ],
+      "margins": [
+        81,
+        15,
+        82,
+        15
+      ],
+      "centerError": [
+        -0.5,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 11,
+      "type": "button",
+      "text": "\u68c0\u67e5\u8868\u5355",
+      "box": [
+        33,
+        1631,
+        254,
+        44
+      ],
+      "ink": [
+        133,
+        1646,
+        187,
+        1659
+      ],
+      "margins": [
+        100,
+        15,
+        100,
+        16
+      ],
+      "centerError": [
+        0.0,
+        -0.5
+      ],
+      "centerBudget": 1.3,
+      "horizontalAlignment": "center",
+      "pass": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 320,
+      "control": 12,
+      "type": "disclosure",
+      "text": "\u670d\u52a1\u5668\u914d\u7f6e\u8981\u6c42",
+      "box": [
+        33,
+        1935,
+        254,
+        44
+      ],
+      "ink": [
+        36,
+        1950,
+        284,
+        1964
+      ],
+      "margins": [
+        3,
+        15,
+        3,
+        15
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerBudget": 1.4000000000000001,
+      "horizontalAlignment": "left",
+      "pass": true
+    }
+  ],
+  "failures": []
+}

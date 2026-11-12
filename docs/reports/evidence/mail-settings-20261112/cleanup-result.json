@@ -1,0 +1,11 @@
+{
+  "formalEvidenceRetained": true,
+  "protectedRecoveryRetained": true,
+  "removed": [
+    "frontend/node_modules junction only",
+    ".task-tmp",
+    "frontend/dist"
+  ],
+  "result": "PASS",
+  "root": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\mail-settings-20261112"
+}
