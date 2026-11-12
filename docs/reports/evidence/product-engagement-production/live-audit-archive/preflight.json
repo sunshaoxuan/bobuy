@@ -1,0 +1,17 @@
+{
+  "result": "PASS",
+  "source": "724f9c098cb869aac07d180e8e5d1776faa1beb3",
+  "baseMain": "bea15cd85da8c9149e63d9dab753e09df4c2f98e",
+  "candidate": "5db372b985e9a020483d52091c0265a2cc358e42",
+  "tree": "9bf228bc95ad895de221017e6e871fdc19928074",
+  "sourceFilesUnchanged": 14,
+  "rawEvidenceBytesUnchanged": 13,
+  "runtimeInputsEqualToMain": true,
+  "localRefObservations": {},
+  "remoteRefObservations": {},
+  "sharedExistingFileChanges": {},
+  "sharedNewFiles": {},
+  "sharedStatusUnchanged": true,
+  "protectionReview": "PASS",
+  "productionOperations": 0
+}
