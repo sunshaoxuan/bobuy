@@ -1,0 +1,28 @@
+{
+  "frontend": {
+    "id": "c04bfcb440786c05ba7ff930a3c1e0876af5455a49ac869964c64293bf93c4bc",
+    "image": "sha256:1f596d5e9a48962fa23c123d43eb5155cc325db3bd988cf2a8c4e8e1da82f805",
+    "tag": "bobuy/frontend:20261112.product-fact-localization",
+    "revision": "ea7b7fec29ee5d413cfac2e2025c0f93819e4fc6",
+    "project": "bobuy",
+    "startedAt": "2026-11-12T06:09:00.104342154Z",
+    "health": "running"
+  },
+  "core": {
+    "id": "f69d14b56310913656ca241ac29e2a1c388747f8ed032cf79ba6fa09001dfe9a",
+    "image": "sha256:9293d344191f43cc18cc6a88c18814590bf1c15c22d6a456baa2792ea897ea59",
+    "tag": "bobuy/core:20261112.product-introductions.2",
+    "revision": "5a9bb64ab8cda965018bddacfe9471c1081ca34b",
+    "project": "bobuy",
+    "startedAt": "2026-11-12T03:16:09.867889136Z",
+    "health": "healthy"
+  },
+  "schema": "33",
+  "rollbackFrontendImageId": "sha256:5740727b6801a888be885691ef112955729aecf50bfab2c8f779bc038058fd9a",
+  "composeRecoveryExists": true,
+  "result": "PASS",
+  "verifiedExternalAssets": 16,
+  "networkRequests": 65,
+  "consoleErrors": 0,
+  "failedNetworkRequests": 0
+}

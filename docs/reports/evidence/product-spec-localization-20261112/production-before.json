@@ -1,0 +1,21 @@
+{
+  "frontend": {
+    "id": "a2a2525229deac402b1195bccd23367b0ae8ff81be1e4c85edf96a15b45c1586",
+    "image": "sha256:5740727b6801a888be885691ef112955729aecf50bfab2c8f779bc038058fd9a",
+    "tag": "bobuy/frontend:20261112.gallery-upload-feedback",
+    "revision": "c3bb160c7a8f0541b06089e2a3eacca05008198d",
+    "project": "bobuy",
+    "startedAt": "2026-11-12T04:53:04.954188216Z",
+    "health": "running"
+  },
+  "core": {
+    "id": "f69d14b56310913656ca241ac29e2a1c388747f8ed032cf79ba6fa09001dfe9a",
+    "image": "sha256:9293d344191f43cc18cc6a88c18814590bf1c15c22d6a456baa2792ea897ea59",
+    "tag": "bobuy/core:20261112.product-introductions.2",
+    "revision": "5a9bb64ab8cda965018bddacfe9471c1081ca34b",
+    "project": "bobuy",
+    "startedAt": "2026-11-12T03:16:09.867889136Z",
+    "health": "healthy"
+  },
+  "schema": "33"
+}

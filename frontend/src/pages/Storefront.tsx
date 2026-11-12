@@ -1,3 +1,4 @@
+import {productFactText} from '../productFactText';
 import HomeBrandIntro from '../components/HomeBrandIntro';
 import {ConsumerDetail} from '../components/ConsumerDetail';
 import SellingPrice from '../components/SellingPrice';
@@ -246,7 +247,7 @@ export default function Storefront() {
       {invalidCart && <Alert type="warning" message={t(!cartPricesReady||!tripsReady?'browse.sales_pending':'store.cart_invalid')} action={<Button disabled={!cartPricesReady||!tripsReady} onClick={()=>{setCart(prior=>({...prior,requestId:crypto.randomUUID(),quotes:Object.fromEntries(products.filter(p=>prior.items[p.id]&&(p.currency??'JPY')===(prior.currency??'JPY')).map(p=>[p.id,{price:p.price,currency:p.currency??'JPY',revision:p.priceRevision??0,token:p.priceToken}]))}));}}>{t('sale.refresh_cart')}</Button>}/>}
       <div className="basket-lines">{cartEntries.map(([id, qty]) => {
         const product = products.find(p => p.id === id);
-        return product ? <article className="basket-line" key={id}><div className="basket-photo">{image(product)}</div><div><h2>{text(product.name)}</h2><p>{money(cart.quotes?.[id]?.price??product.price,product.currency)} / {product.saleUnit}</p>{stepper(product, qty)}</div><strong>{money((cart.quotes?.[id]?.price??product.price)*qty,product.currency)}</strong></article> :
+        return product ? <article className="basket-line" key={id}><div className="basket-photo">{image(product)}</div><div><h2>{text(product.name)}</h2><p>{money(cart.quotes?.[id]?.price??product.price,product.currency)} / {productFactText(product.saleUnit,locale)}</p>{stepper(product, qty)}</div><strong>{money((cart.quotes?.[id]?.price??product.price)*qty,product.currency)}</strong></article> :
           <article key={id} className="basket-line"><span>{t(cartPricesReady?'store.unavailable':'browse.sales_pending')}</span><Button icon={<DeleteOutlined />} onClick={() => change(id, 0)}>{t('store.remove')}</Button></article>;
       })}</div>
       <div className="basket-total"><span>{t('store.total')} <small>{cart.currency??'JPY'}</small></span><strong>{totalText}</strong></div>

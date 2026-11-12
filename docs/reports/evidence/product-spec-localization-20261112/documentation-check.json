@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "applicationSource": "ea7b7fec29ee5d413cfac2e2025c0f93819e4fc6",
+  "applicationDirectoriesUnchanged": true,
+  "localReadmeLinksChecked": 14,
+  "officialImagesVerified": 4,
+  "originalPixelCropParentsVerified": 8,
+  "jsonParsed": 42,
+  "cleanup": "Independent absence and socket verification passed",
+  "temporaryWorktree": "Completed isolated code checkout and formal documents retained; unrelated root checkout and preexistingplan63 preserved",
+  "branch": "codex-product-spec-localization-20261112",
+  "branchNaming": "Remote refs/heads/codex exists, so nested codex/* cannot be pushed. No remote branch was deleted; this task uses the repository-compatible flat name."
+}

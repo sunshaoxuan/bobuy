@@ -1,0 +1,147 @@
+{
+  "result": "PASS",
+  "source": "ea7b7fec29ee5d413cfac2e2025c0f93819e4fc6",
+  "primary": "Complete final eight locale/viewport PNGs and original-pixel crops inspected; factual quantities remain complete, no clipping or horizontal page overflow; prices/units right aligned; original Japanese title/brand identifiers intentionally retained",
+  "external": "Gemini3.8 Flash High reviewed EN/JA corrected states and initial CN/TW states. Fresh Japanese frame confirms amount/unit complete. Ordinary continuous Japanese title wrapping retains the accepted unchanged title layout.",
+  "capture": "Per-tab metrics + ordinary navigation + zero-origin viewport PNG; stale compositor frame superseded; offline crops verified byte-for-byte",
+  "images": [
+    {
+      "parent": "candidate-en-mobile.png",
+      "parentSha256": "4bdc6003c4a42f5691dfa49eda6bbe734ac77c20899584a1103ec1a77227dcf6",
+      "pixelSize": [
+        320,
+        1000
+      ],
+      "crop": "candidate-en-mobile-info.png",
+      "cropBox": [
+        12,
+        350,
+        308,
+        985
+      ],
+      "cropSha256": "bd6ecab17bebff79fd22cb4cd495dbb9fc73ebde9bd45a3f585ed066acc18ed6",
+      "originalPixels": true
+    },
+    {
+      "parent": "candidate-en-desktop.png",
+      "parentSha256": "bdf84b7752367c09e3f9f11e99ced64751cb4b57cf01f4a11e848606ca34f7f7",
+      "pixelSize": [
+        1440,
+        1000
+      ],
+      "crop": "candidate-en-desktop-info.png",
+      "cropBox": [
+        915,
+        80,
+        1420,
+        700
+      ],
+      "cropSha256": "9ab65a7767e51687ee7b2063fde4770677928332ea56a41d57e44239f39cffbc",
+      "originalPixels": true
+    },
+    {
+      "parent": "candidate-ja-mobile.png",
+      "parentSha256": "f7de3b6b24a6132436c29bb47ad9171c7e47bddf40840f44724c00c09f29cf42",
+      "pixelSize": [
+        320,
+        1000
+      ],
+      "crop": "candidate-ja-mobile-info.png",
+      "cropBox": [
+        12,
+        350,
+        308,
+        985
+      ],
+      "cropSha256": "8665ee37e28aa733b43d6ce1f0d9691c32e0161d159f748dc89a6086f26e7e1d",
+      "originalPixels": true
+    },
+    {
+      "parent": "candidate-ja-desktop.png",
+      "parentSha256": "f7b8fa265ad58a97f643daa9003d59a7da432fe1f626ecc2a6a2c60142eee47f",
+      "pixelSize": [
+        1440,
+        1000
+      ],
+      "crop": "candidate-ja-desktop-info.png",
+      "cropBox": [
+        915,
+        80,
+        1420,
+        700
+      ],
+      "cropSha256": "54cf9ae90fee301fdd7dd3ab2523f877746288a76994852542cf76ad10537d94",
+      "originalPixels": true
+    },
+    {
+      "parent": "candidate-cn-mobile.png",
+      "parentSha256": "de38071d4e946b451c5f8e92dea3f62be627344d5f9c55ada96854ad67e2b20d",
+      "pixelSize": [
+        320,
+        1000
+      ],
+      "crop": "candidate-cn-mobile-info.png",
+      "cropBox": [
+        12,
+        350,
+        308,
+        985
+      ],
+      "cropSha256": "34b1bc5b64f4b00a1b433bc716d22a5f4443bf715b7008e7e453bad8c1490988",
+      "originalPixels": true
+    },
+    {
+      "parent": "candidate-cn-desktop.png",
+      "parentSha256": "e754664dbcb21eccdfa854ec2a57c261a326a5246db69d16b0eea99290b2cabf",
+      "pixelSize": [
+        1440,
+        1000
+      ],
+      "crop": "candidate-cn-desktop-info.png",
+      "cropBox": [
+        915,
+        80,
+        1420,
+        700
+      ],
+      "cropSha256": "5a687e36ed9c090d069cffead463e6f10aa2d8f80b82ea7867d633bf63b8f06f",
+      "originalPixels": true
+    },
+    {
+      "parent": "candidate-tw-mobile.png",
+      "parentSha256": "38a6ebae6a30a929ef8c7fc02a181443bbad5577c3d8a5f67366db16631853fe",
+      "pixelSize": [
+        320,
+        1000
+      ],
+      "crop": "candidate-tw-mobile-info.png",
+      "cropBox": [
+        12,
+        350,
+        308,
+        985
+      ],
+      "cropSha256": "e33b72ce2f7d32b32f477a04f7d1481a01a12bf4d64a53a94519af111f533a99",
+      "originalPixels": true
+    },
+    {
+      "parent": "candidate-tw-desktop.png",
+      "parentSha256": "724a17bc6d6acc30627924d486a21197f8d14675472f7c27709fb98ef340eff9",
+      "pixelSize": [
+        1440,
+        1000
+      ],
+      "crop": "candidate-tw-desktop-info.png",
+      "cropBox": [
+        915,
+        80,
+        1420,
+        700
+      ],
+      "cropSha256": "b467d7a35bdeea285f5c30b5046a410d41c09b4e66213e3a56e451b982738560",
+      "originalPixels": true
+    }
+  ],
+  "changedControls": "No interactive controls added or geometrically modified; existing CSS/markup/hit areas retained",
+  "budgets": "Existing gutters and control geometry unchanged; body text stays within the recorded320/1440 viewport and price-card padding"
+}

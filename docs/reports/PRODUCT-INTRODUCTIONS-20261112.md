@@ -1,6 +1,54 @@
 # Product introductions, 2026-11-12
 
-## Final acceptance
+## Follow-up batch: official numbered descriptions and multilingual specifications
+
+Final follow-up result: PASS. Frontend `ea7b7fec29ee5d413cfac2e2025c0f93819e4fc6` went live at2026-11-12 15:09:01 Japan time as `20261112.product-fact-localization`. The original gallery-upload changes are included. Core5a9bb64 remains the same healthy container and schemaV33 is unchanged. [Production acceptance and screenshot manifest](evidence/product-spec-localization-20261112/acceptance.json) records current runtime, content and individual UI results. [PR70](https://github.com/sunshaoxuan/bobuy/pull/70) tracks repository integration; the application tree remains the frozen released candidate.
+
+| Follow-up requirement | Result | Actual evidence |
+|---|---|---|
+| Official numbered introductions | PASS for4 newly resolved | Official exact-ITEM image pixels, source URL/SHA, normal reviewed/version-checked merchant UI save and fresh readback.97443,93588,92956,92495 each advanced1 to2 once. |
+| Packaging/model/specification/unit language | PASS for known source literals |245 reviewed four-language entries cover327 distinct known source values, including all389 master model/packaging values and public immutable offer units. International codes/units and numeric tokens preserved. |
+| Card and detail presentation | PASS | Actual No.61432 card shows an English unit with full title, separate Japanese small name, No. badge,1598 price,1998 strike-through and400 red reduction. Four locales at1440/320 catalogue detail and360 recommendation detail; longest unit and translated-spec warning checked. |
+| Existing price behavior | PASS | No.77839 has one warehouse1498 card, small Online1828 annotation and no expired discount. All325 public entries and every historical/public field compare equal before and after delivery. |
+| Tests/build/security | PASS | Initial stable full frontend run120 files/818 tests; final affected union8 files/48 tests; final production build; exact application-source three-language CodeQL success. Backend inputs are identical to core5a9bb64. |
+| Runtime/network identity | PASS |82 running-container files match the frozen manifest.16 already-successful browser response bodies match exact SHA256;65 captured requests have0 failures and application console has0 errors. An independent Python asset request received403 and was not retried; captured successful browser responses provide byte evidence. |
+| Geometry/visual | PASS | Primary inspected eight whole PNGs and byte-identical original-pixel crops.320px bottom views show the complete introduction and46px CTA, with its bottom near982px. Prices/units remain right aligned and there is no unintended horizontal text overflow. Gemini reviewed the revised states; final source-frame selection remains the primary agent's responsibility. |
+| Protected data/recovery | PASS | Frontend-only replacement, same core container/schema and protected services.4 introduction saves were the only intentional content changes; prices, stock, visibility, images and snapshots are preserved. Prior frontend image and scoped compose recovery are retained. |
+| Remaining identity gaps | Explicitly pending9 | Current table below and `unresolved-products.json`; these products are excluded from the complete count and their publication status is preserved. |
+
+User correction: numbered products may use explanations recognized by Costco or the product brand. Packaging/specification information must follow the selected Japanese, Simplified Chinese, Traditional Chinese or English language. Resume the same product-introduction objective and the existing authorization to verify and deploy. The previous introduction acceptance remains historical; packaging/price-unit localization is newly required and pending.
+
+Method: reconcile latest main and current production before mutation, retaining the gallery-upload-feedback release and other concurrent work. Revisit the five numbered pending records using official/brand-recognized sources, separating verified identity from package/variant uncertainty. Inventory actual current packaging, specification, model prose and reference price units across all public products and original linked source facts. Reuse existing translation/review/data contracts where sufficient; resolve the concrete display/data gap with the smallest maintainable implementation. Keep exact quantities, dimensions, ITEM identity and immutable historical price/source records. Localized display must describe the same source fact, including historical pack differences. Model codes and international units remain their factual identifiers.
+
+Completion: every identified packaging/specification and price-unit value displays appropriate four-language text in cards, catalogue details and recommendation details; numbered pending introductions are saved where official identity can be verified, with specific residual evidence gaps reported. Use normal version-checked UI saves for business content. Test unsupported/stale/mismatched identity boundaries, quantity preservation, four-language mobile/desktop wrapping and current public readback. Follow the existing source-bound release guards and protected-service/recovery rules. Batch independent copy and code work, freeze once, run affected checks and mandatory CI, then deploy and verify production. New longer metadata requires fresh final screenshots and Gemini review; no customer orders or unrelated stack/configuration changes.
+
+Initial observable gap: existing specification has a four-language map, while packaging/model and historical priceUnit are single strings and rendered directly. Determine the existing approved translation model before selecting the implementation. The earlier decision to leave Japanese packaging and units unchanged is superseded by this explicit correction.
+
+Implementation decision: use the existing frontend translation-resource pattern for exact, reviewed source literals in packaging, descriptive models and units. Prefer existing reviewed four-language specification values. No database, snapshot, master identity or price changes are needed to translate the presentation vocabulary. A typed shared helper resolves exact literals only, preserves international codes/units and leaves unknown source facts intact; a frozen current-catalogue coverage check rejects missing translations before delivery. Extend this resource when a new source literal enters the content workflow. Do not guess by substring replacement or infer quantities. The earlier JSONB-overlay advisory is rejected: old core has strict JSON record readers and writers reconstruct known fields, so that design would weaken rollback and require unnecessary migration. Source-backed numbered introductions remain a separate normal-UI content save within this batch.
+
+Visual budget: retain existing layout, gutters and controls. Test desktop1440 and mobile320/360, four languages, longest packaging/unit strings and model prose. New text must remain within existing content columns without horizontal overflow; price and small unit remain right aligned. No new interactive controls. Existing control geometry is unchanged; inspect complete screenshots and original-pixel detail crops before acceptance.
+
+Follow-up content result: four exact numbered products97443,93588,92956,92495 were verified from Costco's official2026-11-08 newsletter cards and saved via the normal reviewed UI. Each advanced version1 to2 exactly once, all other submitted fields unchanged. A fresh389-row UI audit confirms380 complete four-language introductions and9 remaining. Packaging/model source literals from all389 masters and public historical reference units are covered by245 reviewed translation entries;327 distinct source literals include unchanged international codes/units. See `evidence/product-spec-localization-20261112/coverage.json`, `official-sources.json`, `four-readback.json` and `unresolved-products.json`.
+
+Final candidate correction: the first stable full frontend run passed120 files/818 tests. Gemini identified English refill terminology inconsistency and an awkward Japanese heading wrap at320px. Corrected only the affected copy, with nonbreaking English quantity groups and a concise Japanese non-real-time label; the exact reviewed specification resource also suppresses a misleading source-language warning for the one previously untranslated Short specification. Final focused union:8 files/48 tests passed, final production build passed. Backend/schema/price/history inputs remain unchanged. Reuse the completed broad run for unaffected inputs; these explicit copy/field-warning changes invalidate the affected tests/build and English/Japanese visual evidence, which received new checks and screenshots. Exact application-source CodeQL and production verification subsequently passed.
+
+### Current9 pending products
+
+| 商品 | 仍缺少的资料 |
+|---|---|
+| 有机白无花果，未编号 | 品牌、ITEM或条码、包装或对应官方页面；鲜果与果干身份尚不明确。 |
+| Kirkland杏仁粉1.36kg，No.206609 | 包装ITEM、条码或官方对应证明；现有编号206609与[官方28609](https://www.costco.co.jp/c/Kirkland-Signature-ALMOND-FLOUR-136kg/p/28609)不一致。 |
+| 泡沫洗手液补充装，未编号 | 品牌系列、ITEM或条码、容量及标签或对应官方页面。 |
+| 除味液体洗衣液，未编号 | 品牌系列及款式、ITEM或条码、容量及包装标签。 |
+| W除菌餐具洗涤剂，未编号 | 品牌系列、香型或款式、ITEM或条码及包装标签。 |
+| 去霉清洁剂，未编号 | 品牌系列、产品类型、ITEM或条码及标签或对应官方页面。 |
+| 液体洗衣液，未编号 | 品牌系列、普通或滚筒适用类型、香型配方、ITEM或条码及标签。 |
+| 折叠桌，未编号 | 品牌型号、ITEM、尺寸材质及标签或对应官方页面。 |
+| Air Jet，未编号 | 品牌、商品类别、ITEM、具体款式及包装标签。 |
+
+Content maintenance: preserve existing four-language specification maps. Extend the exact-literal translation resource and its source-bound coverage fixture when a new packaging/model/price-unit literal is introduced; review equivalents and quantity combinations before publication. Unknown facts remain source facts and are reported by the coverage check. Do not translate historical units using a newer pack's facts.
+
+## Historical acceptance before the specification follow-up
 
 Result: PASS for the resumed296-save, four-language display, production delivery and13-item missing-evidence list. Core5a9bb64 is healthy; frontend3a8b11a became live at2026-11-12T03:29:15Z and its scoped operator verified unchanged core/protected services. The later main integration adds documentation and audit archives only; application inputs equal3a8b11a.
 
@@ -30,7 +78,7 @@ Normal merchant UI saved all296 remaining introductions. Fresh389-row audit conf
 
 Fast-forwarded to released main bea15cd, including social-platform and email-settings changes. Backend source/dependencies/configuration remain identical to the671-test accepted inputs. Frontend integrated tests first exposed jsdom's missing Element.scroll implementation in the existing account validation test; a test-only no-layout shim was added. A subsequent run failed on Windows TEMP file access. Task-local ASCII TEMP plus one worker resolved the environment failure:9 files,89 tests passed, zero unhandled errors; production build passed. This is the bounded rerun reason and final frontend acceptance input. Gemini Flash review accepted readability/wrapping at360px and requested long-copy/scroll evidence, to be completed on production. Current running base verified: core a14f032, frontend ec24fa9. No database migration.
 
-## Unresolved13 products and missing evidence
+## Historical13 pending products before the official-mail follow-up
 
 | Item | Product | Required evidence |
 |---|---|---|
