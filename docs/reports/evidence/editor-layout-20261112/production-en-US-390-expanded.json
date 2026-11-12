@@ -1,0 +1,39 @@
+{
+  "width": 390,
+  "height": 3830,
+  "controls": [
+    {
+      "label": "Re-read saved source",
+      "rect": {
+        "x": 50,
+        "y": 522.4375,
+        "width": 164.171875,
+        "height": 44
+      },
+      "tag": "BUTTON",
+      "color": "rgba(0, 0, 0, 0.88)"
+    },
+    {
+      "label": "Save issue date",
+      "rect": {
+        "x": 50,
+        "y": 1040.265625,
+        "width": 126.21875,
+        "height": 44
+      },
+      "tag": "BUTTON",
+      "color": "rgb(116, 116, 123)"
+    },
+    {
+      "label": "Use saved values",
+      "rect": {
+        "x": 184.21875,
+        "y": 1040.265625,
+        "width": 136.296875,
+        "height": 44
+      },
+      "tag": "BUTTON",
+      "color": "rgba(0, 0, 0, 0.88)"
+    }
+  ]
+}

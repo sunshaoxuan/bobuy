@@ -1,0 +1,18 @@
+{
+  "source": "012013ad330f81f8c293148564860ed31fd7178c",
+  "result": "PASS",
+  "ci": "success",
+  "ciUrl": "https://github.com/sunshaoxuan/bobuy/actions/runs/43135189573",
+  "focusedTests": 78,
+  "typecheck": "PASS",
+  "i18nKeys": 1610,
+  "build": "PASS",
+  "nativeControlPixels": "PASS",
+  "browserMatrix": 12,
+  "visual": "PASS",
+  "buildLogSha256": "ea19fccaa6944bc8423eb62acfaedeb0279ae0af0f4cac18c183d07b239049f8",
+  "toolbarRetest": 12,
+  "countsOverlap": true,
+  "initialTestSource": "e4c3f83",
+  "unchangedRatingAndDateTestsReused": 66
+}

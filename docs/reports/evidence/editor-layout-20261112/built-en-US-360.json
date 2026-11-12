@@ -1,0 +1,95 @@
+{
+  "width": 360,
+  "height": 1000,
+  "overflow": false,
+  "controls": [
+    {
+      "label": "Back to List",
+      "rect": {
+        "x": 16,
+        "y": 142.1875,
+        "width": 131.859375,
+        "height": 44
+      },
+      "tag": "BUTTON",
+      "color": "rgba(0, 0, 0, 0.88)"
+    },
+    {
+      "label": "Save Draft",
+      "rect": {
+        "x": 155.859375,
+        "y": 142.1875,
+        "width": 125.359375,
+        "height": 44
+      },
+      "tag": "BUTTON",
+      "color": "rgb(255, 255, 255)"
+    },
+    {
+      "label": "Issue date and source",
+      "rect": {
+        "x": 131.1875,
+        "y": 244.1875,
+        "width": 195.8125,
+        "height": 44
+      },
+      "tag": "BUTTON",
+      "color": "rgba(0, 0, 0, 0.88)"
+    },
+    {
+      "label": "Japanese source",
+      "rect": {
+        "x": 33,
+        "y": 304.1875,
+        "width": 108.546875,
+        "height": 44
+      },
+      "tag": "DIV",
+      "color": "rgba(0, 0, 0, 0.88)"
+    },
+    {
+      "label": "zh-CN",
+      "rect": {
+        "x": 153.546875,
+        "y": 304.1875,
+        "width": 47,
+        "height": 44
+      },
+      "tag": "DIV",
+      "color": "rgba(0, 0, 0, 0.88)"
+    },
+    {
+      "label": "zh-TW",
+      "rect": {
+        "x": 212.546875,
+        "y": 304.1875,
+        "width": 48.5625,
+        "height": 44
+      },
+      "tag": "DIV",
+      "color": "rgba(0, 0, 0, 0.88)"
+    },
+    {
+      "label": "en-US",
+      "rect": {
+        "x": 273.109375,
+        "y": 304.1875,
+        "width": 45.90625,
+        "height": 44
+      },
+      "tag": "DIV",
+      "color": "rgba(0, 0, 0, 0.88)"
+    },
+    {
+      "label": "Article revision history",
+      "rect": {
+        "x": 33,
+        "y": 828.625,
+        "width": 168.46875,
+        "height": 44
+      },
+      "tag": "BUTTON",
+      "color": "rgba(0, 0, 0, 0.88)"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "width": 390,
+  "height": 3766,
+  "controls": [
+    {
+      "label": "保存済みの出典を再読込",
+      "rect": {
+        "x": 50,
+        "y": 495.25,
+        "width": 186,
+        "height": 44
+      },
+      "tag": "BUTTON",
+      "color": "rgba(0, 0, 0, 0.88)"
+    },
+    {
+      "label": "特集日を保存",
+      "rect": {
+        "x": 50,
+        "y": 1003.578125,
+        "width": 116,
+        "height": 44
+      },
+      "tag": "BUTTON",
+      "color": "rgb(116, 116, 123)"
+    },
+    {
+      "label": "保存済みの値を使用",
+      "rect": {
+        "x": 174,
+        "y": 1003.578125,
+        "width": 158,
+        "height": 44
+      },
+      "tag": "BUTTON",
+      "color": "rgba(0, 0, 0, 0.88)"
+    }
+  ]
+}

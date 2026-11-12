@@ -1,0 +1,39 @@
+{
+  "width": 360,
+  "height": 3642,
+  "controls": [
+    {
+      "label": "重新讀取已儲存的來源",
+      "rect": {
+        "x": 50,
+        "y": 495.25,
+        "width": 172,
+        "height": 44
+      },
+      "tag": "BUTTON",
+      "color": "rgba(0, 0, 0, 0.88)"
+    },
+    {
+      "label": "儲存期次日期",
+      "rect": {
+        "x": 50,
+        "y": 965.09375,
+        "width": 116,
+        "height": 44
+      },
+      "tag": "BUTTON",
+      "color": "rgb(116, 116, 123)"
+    },
+    {
+      "label": "使用已儲存的值",
+      "rect": {
+        "x": 50,
+        "y": 1017.09375,
+        "width": 130,
+        "height": 44
+      },
+      "tag": "BUTTON",
+      "color": "rgba(0, 0, 0, 0.88)"
+    }
+  ]
+}

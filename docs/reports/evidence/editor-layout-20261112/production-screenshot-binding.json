@@ -1,0 +1,218 @@
+[
+  {
+    "production": "production-en-US-1440-article.png",
+    "built": "built-en-US-1440-article.png",
+    "exactScreenshotBytes": true,
+    "sha256": "da89ed3f83b77e4f412b8fcdc060f7cd1f3407749d35865f9ab800ab5be956c3"
+  },
+  {
+    "production": "production-en-US-1440-header.png",
+    "built": "built-en-US-1440-header.png",
+    "exactScreenshotBytes": true,
+    "sha256": "561a04a090d25cde227563b6fe57ffe5a1f985c31a46de417b5e94d230bb05fa"
+  },
+  {
+    "production": "production-en-US-1440.png",
+    "built": "built-en-US-1440.png",
+    "exactScreenshotBytes": true,
+    "sha256": "8c1a151ecf3c8c3f39e445baf2938a4b73d570145bd732a4edd69602f0afa81e"
+  },
+  {
+    "production": "production-en-US-360-article.png",
+    "built": "built-en-US-360-article.png",
+    "exactScreenshotBytes": true,
+    "sha256": "d076d9523ccab25c8feb1c1b78f1274876296f3b8e43287fe9cc2ae0962cafca"
+  },
+  {
+    "production": "production-en-US-360-header.png",
+    "built": "built-en-US-360-header.png",
+    "exactScreenshotBytes": true,
+    "sha256": "cb9a06c597a4132dcaae1889e110ca790ba3a606b8430a071aced0968974c6a9"
+  },
+  {
+    "production": "production-en-US-360.png",
+    "built": "built-en-US-360.png",
+    "exactScreenshotBytes": true,
+    "sha256": "d042bfae1ee15162e56cf254e29b2024d031ec3392e87377829aa613ce9d99cb"
+  },
+  {
+    "production": "production-en-US-390-article.png",
+    "built": "built-en-US-390-article.png",
+    "exactScreenshotBytes": true,
+    "sha256": "3d7dd9438478c8e103bd9d930b448abf31e36dec334398423ed8bbf1111a6012"
+  },
+  {
+    "production": "production-en-US-390-header.png",
+    "built": "built-en-US-390-header.png",
+    "exactScreenshotBytes": true,
+    "sha256": "e184e404dd2549340633d357faf86583e38c5e49262f8d31cf226d041a1057ae"
+  },
+  {
+    "production": "production-en-US-390.png",
+    "built": "built-en-US-390.png",
+    "exactScreenshotBytes": true,
+    "sha256": "a5d72f6a9b874a31a6bad70f38c47f54aec429691c3ef63b7ef5344f18d21d9c"
+  },
+  {
+    "production": "production-ja-JP-1440-article.png",
+    "built": "built-ja-JP-1440-article.png",
+    "exactScreenshotBytes": true,
+    "sha256": "eb802c3ae7b0bf3192c43dccfd614196bff78c94fd6bae7a64fd7f71c2c65c4f"
+  },
+  {
+    "production": "production-ja-JP-1440-header.png",
+    "built": "built-ja-JP-1440-header.png",
+    "exactScreenshotBytes": true,
+    "sha256": "7b296ed9840b110deeb7e6f1c04359fac54985db7347efcb5f8e11aec0fb6b39"
+  },
+  {
+    "production": "production-ja-JP-1440.png",
+    "built": "built-ja-JP-1440.png",
+    "exactScreenshotBytes": true,
+    "sha256": "69bd3d1810acde1f844518537dd691ec2772573e090082a12c7a5929e38580e3"
+  },
+  {
+    "production": "production-ja-JP-360-article.png",
+    "built": "built-ja-JP-360-article.png",
+    "exactScreenshotBytes": true,
+    "sha256": "b3ab14ae73cd7718a3c79fb27e0ae8a4c91c17f818efa585a03a2672dad36179"
+  },
+  {
+    "production": "production-ja-JP-360-header.png",
+    "built": "built-ja-JP-360-header.png",
+    "exactScreenshotBytes": true,
+    "sha256": "bc1227a9706aec7595cba942051323828e94ad622cf325822117d086178a5538"
+  },
+  {
+    "production": "production-ja-JP-360.png",
+    "built": "built-ja-JP-360.png",
+    "exactScreenshotBytes": true,
+    "sha256": "077c7768f07c6b25db3544d486011225f87c15ee85d08fef7a12176d4c9b26fd"
+  },
+  {
+    "production": "production-ja-JP-390-article.png",
+    "built": "built-ja-JP-390-article.png",
+    "exactScreenshotBytes": true,
+    "sha256": "7ac8e61fb9db12d7d4ffe8fcf35bdb572093ea110ac1910d1014f7b42aa7b0a8"
+  },
+  {
+    "production": "production-ja-JP-390-header.png",
+    "built": "built-ja-JP-390-header.png",
+    "exactScreenshotBytes": true,
+    "sha256": "dcc72e2cb5e19af5715a43086a8b007293992df28769ed1c0ca4ffb17a690e17"
+  },
+  {
+    "production": "production-ja-JP-390.png",
+    "built": "built-ja-JP-390.png",
+    "exactScreenshotBytes": true,
+    "sha256": "b02b8b08dea95681f3a67bd978257de195034f76940f02dff0d19fc3da0761fa"
+  },
+  {
+    "production": "production-zh-CN-1440-article.png",
+    "built": "built-zh-CN-1440-article.png",
+    "exactScreenshotBytes": true,
+    "sha256": "9821dfd735433de47909806665608a6de0b4f158cb0ddeaca01e3c107c5e6fe9"
+  },
+  {
+    "production": "production-zh-CN-1440-header.png",
+    "built": "built-zh-CN-1440-header.png",
+    "exactScreenshotBytes": true,
+    "sha256": "b9c43ace2f2f42cacc1437bd24f4916b2db4f4bebc276fed1d468010b847d5de"
+  },
+  {
+    "production": "production-zh-CN-1440.png",
+    "built": "built-zh-CN-1440.png",
+    "exactScreenshotBytes": true,
+    "sha256": "02dafec7035457cb0f1da5598907cfc42f82327f001f60571452555050217136"
+  },
+  {
+    "production": "production-zh-CN-360-article.png",
+    "built": "built-zh-CN-360-article.png",
+    "exactScreenshotBytes": true,
+    "sha256": "fb6f9e75924eabc1d15c177c59b9dafa2d36792c0a91a06d6223b6e2a8d1f91c"
+  },
+  {
+    "production": "production-zh-CN-360-header.png",
+    "built": "built-zh-CN-360-header.png",
+    "exactScreenshotBytes": true,
+    "sha256": "4ba4a2123ca1b8d0e20c40f1c00cd44d26eef6d1c3d2fbc937e79dcf68877f00"
+  },
+  {
+    "production": "production-zh-CN-360.png",
+    "built": "built-zh-CN-360.png",
+    "exactScreenshotBytes": true,
+    "sha256": "ec73c93c098d3ceac652a0dc64ed9fb9233b961c1ecf2b67295e2f4833b837be"
+  },
+  {
+    "production": "production-zh-CN-390-article.png",
+    "built": "built-zh-CN-390-article.png",
+    "exactScreenshotBytes": true,
+    "sha256": "959b77df3e0de090c7b054756926020dda34aece8daed8ab5390547164777daa"
+  },
+  {
+    "production": "production-zh-CN-390-header.png",
+    "built": "built-zh-CN-390-header.png",
+    "exactScreenshotBytes": true,
+    "sha256": "b8562506c88b32d4d8d42a4ae40836b859bb6bd5c40696e9c087a2cf1a712965"
+  },
+  {
+    "production": "production-zh-CN-390.png",
+    "built": "built-zh-CN-390.png",
+    "exactScreenshotBytes": true,
+    "sha256": "940565d870cb785630139399db944d899b027eda60d60c6b547ad364526300cd"
+  },
+  {
+    "production": "production-zh-TW-1440-article.png",
+    "built": "built-zh-TW-1440-article.png",
+    "exactScreenshotBytes": true,
+    "sha256": "491353016f824a433c184991a3108dde0da65500d968244bbaf5252daf534cdd"
+  },
+  {
+    "production": "production-zh-TW-1440-header.png",
+    "built": "built-zh-TW-1440-header.png",
+    "exactScreenshotBytes": true,
+    "sha256": "9e03ac8129db51c5ef257ad5217e9732095b2aed5f594811565af987a064e2fe"
+  },
+  {
+    "production": "production-zh-TW-1440.png",
+    "built": "built-zh-TW-1440.png",
+    "exactScreenshotBytes": true,
+    "sha256": "7b2af9d75e349569ea534afb82f1ed8dd95e25686918bc9bfc346bb5d81e5f62"
+  },
+  {
+    "production": "production-zh-TW-360-article.png",
+    "built": "built-zh-TW-360-article.png",
+    "exactScreenshotBytes": true,
+    "sha256": "a83bc5cb3f23d06318f2de263a4b9b206637ef539cd37cdbfd40068571d2defc"
+  },
+  {
+    "production": "production-zh-TW-360-header.png",
+    "built": "built-zh-TW-360-header.png",
+    "exactScreenshotBytes": true,
+    "sha256": "04e717cb54d79d53d04c917eee54055c5a82abacc1645cb3e90e627a922775cc"
+  },
+  {
+    "production": "production-zh-TW-360.png",
+    "built": "built-zh-TW-360.png",
+    "exactScreenshotBytes": true,
+    "sha256": "65728d9f0c8ac58609e83bdcb0b7f5255d3061aee38b5fd2a61b895c3ec4a276"
+  },
+  {
+    "production": "production-zh-TW-390-article.png",
+    "built": "built-zh-TW-390-article.png",
+    "exactScreenshotBytes": true,
+    "sha256": "0becc6d8c15e088547270ab56cee35112ef74e3fdc1020a9a5f536a3970b77c0"
+  },
+  {
+    "production": "production-zh-TW-390-header.png",
+    "built": "built-zh-TW-390-header.png",
+    "exactScreenshotBytes": true,
+    "sha256": "7e69a7de6b13b31b8641b15ae03ceadbbb170262b96e1e2b818a5e70b31f6311"
+  },
+  {
+    "production": "production-zh-TW-390.png",
+    "built": "built-zh-TW-390.png",
+    "exactScreenshotBytes": true,
+    "sha256": "23aaddc79392629351397278be8393e68711807c5fa734e17be7aafc0322ec6b"
+  }
+]

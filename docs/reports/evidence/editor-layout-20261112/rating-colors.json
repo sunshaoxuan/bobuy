@@ -1,0 +1,86 @@
+{
+  "colors": [
+    [
+      {
+        "state": "ant-rate-star ant-rate-star-full",
+        "first": "rgba(0, 0, 0, 0.06)",
+        "second": "rgb(245, 166, 35)"
+      },
+      {
+        "state": "ant-rate-star ant-rate-star-full",
+        "first": "rgba(0, 0, 0, 0.06)",
+        "second": "rgb(245, 166, 35)"
+      },
+      {
+        "state": "ant-rate-star ant-rate-star-full",
+        "first": "rgba(0, 0, 0, 0.06)",
+        "second": "rgb(245, 166, 35)"
+      },
+      {
+        "state": "ant-rate-star ant-rate-star-full",
+        "first": "rgba(0, 0, 0, 0.06)",
+        "second": "rgb(245, 166, 35)"
+      },
+      {
+        "state": "ant-rate-star ant-rate-star-full",
+        "first": "rgba(0, 0, 0, 0.06)",
+        "second": "rgb(245, 166, 35)"
+      }
+    ],
+    [
+      {
+        "state": "ant-rate-star ant-rate-star-zero",
+        "first": "rgb(211, 213, 216)",
+        "second": "rgb(211, 213, 216)"
+      },
+      {
+        "state": "ant-rate-star ant-rate-star-zero",
+        "first": "rgb(211, 213, 216)",
+        "second": "rgb(211, 213, 216)"
+      },
+      {
+        "state": "ant-rate-star ant-rate-star-zero",
+        "first": "rgb(211, 213, 216)",
+        "second": "rgb(211, 213, 216)"
+      },
+      {
+        "state": "ant-rate-star ant-rate-star-zero",
+        "first": "rgb(211, 213, 216)",
+        "second": "rgb(211, 213, 216)"
+      },
+      {
+        "state": "ant-rate-star ant-rate-star-zero",
+        "first": "rgb(211, 213, 216)",
+        "second": "rgb(211, 213, 216)"
+      }
+    ],
+    [
+      {
+        "state": "ant-rate-star ant-rate-star-full",
+        "first": "rgba(0, 0, 0, 0.06)",
+        "second": "rgb(245, 166, 35)"
+      },
+      {
+        "state": "ant-rate-star ant-rate-star-full",
+        "first": "rgba(0, 0, 0, 0.06)",
+        "second": "rgb(245, 166, 35)"
+      },
+      {
+        "state": "ant-rate-star ant-rate-star-full",
+        "first": "rgba(0, 0, 0, 0.06)",
+        "second": "rgb(245, 166, 35)"
+      },
+      {
+        "state": "ant-rate-star ant-rate-star-half ant-rate-star-active",
+        "first": "rgb(245, 166, 35)",
+        "second": "rgb(211, 213, 216)"
+      },
+      {
+        "state": "ant-rate-star ant-rate-star-zero",
+        "first": "rgb(211, 213, 216)",
+        "second": "rgb(211, 213, 216)"
+      }
+    ]
+  ],
+  "errors": []
+}

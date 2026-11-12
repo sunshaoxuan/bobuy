@@ -1,0 +1,95 @@
+{
+  "width": 1440,
+  "height": 1000,
+  "overflow": false,
+  "controls": [
+    {
+      "label": "返回列表",
+      "rect": {
+        "x": 1152,
+        "y": 118,
+        "width": 118,
+        "height": 44
+      },
+      "tag": "BUTTON",
+      "color": "rgba(0, 0, 0, 0.88)"
+    },
+    {
+      "label": "保存草稿",
+      "rect": {
+        "x": 1278,
+        "y": 118,
+        "width": 118,
+        "height": 44
+      },
+      "tag": "BUTTON",
+      "color": "rgb(255, 255, 255)"
+    },
+    {
+      "label": "期次日期与来源",
+      "rect": {
+        "x": 1211,
+        "y": 236,
+        "width": 160,
+        "height": 44
+      },
+      "tag": "BUTTON",
+      "color": "rgba(0, 0, 0, 0.88)"
+    },
+    {
+      "label": "日文原文",
+      "rect": {
+        "x": 301,
+        "y": 296,
+        "width": 64,
+        "height": 44
+      },
+      "tag": "DIV",
+      "color": "rgba(0, 0, 0, 0.88)"
+    },
+    {
+      "label": "zh-CN",
+      "rect": {
+        "x": 397,
+        "y": 296,
+        "width": 47,
+        "height": 44
+      },
+      "tag": "DIV",
+      "color": "rgba(0, 0, 0, 0.88)"
+    },
+    {
+      "label": "zh-TW",
+      "rect": {
+        "x": 476,
+        "y": 296,
+        "width": 48.5625,
+        "height": 44
+      },
+      "tag": "DIV",
+      "color": "rgba(0, 0, 0, 0.88)"
+    },
+    {
+      "label": "en-US",
+      "rect": {
+        "x": 556.5625,
+        "y": 296,
+        "width": 45.90625,
+        "height": 44
+      },
+      "tag": "DIV",
+      "color": "rgba(0, 0, 0, 0.88)"
+    },
+    {
+      "label": "文章修订历史",
+      "rect": {
+        "x": 301,
+        "y": 820.4375,
+        "width": 116,
+        "height": 44
+      },
+      "tag": "BUTTON",
+      "color": "rgba(0, 0, 0, 0.88)"
+    }
+  ]
+}

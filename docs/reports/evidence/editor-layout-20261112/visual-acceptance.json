@@ -1,0 +1,32 @@
+{
+  "source": "012013ad330f81f8c293148564860ed31fd7178c",
+  "result": "PASS",
+  "functional": "PASS",
+  "geometry": "PASS",
+  "visual": "PASS",
+  "reviewer": "primary agent",
+  "environment": "production build at localhost:4187, synthetic fixture",
+  "screenshots": {
+    "built-zh-CN-1440.png": "02dafec7035457cb0f1da5598907cfc42f82327f001f60571452555050217136",
+    "built-zh-CN-390.png": "940565d870cb785630139399db944d899b027eda60d60c6b547ad364526300cd",
+    "built-en-US-360.png": "d042bfae1ee15162e56cf254e29b2024d031ec3392e87377829aa613ce9d99cb",
+    "built-en-US-360-expanded.png": "9fce85fd48c6be74b011425952fee485ff578c912a540c905c968f4611443b95",
+    "built-rating-1440-2.png": "fbbea8affb3a8bf9bb98a78ffc2b8204e07c66c21dc6bf6f4878f05448ee9ce0",
+    "built-rating-editor-390.png": "3c08b55480e00e4158e342da1cc8094f33210d64ee3c608a071f67bc0c0aab22",
+    "built-zh-CN-1440-header.png": "b9c43ace2f2f42cacc1437bd24f4916b2db4f4bebc276fed1d468010b847d5de",
+    "built-zh-CN-390-header.png": "b8562506c88b32d4d8d42a4ae40836b859bb6bd5c40696e9c087a2cf1a712965"
+  },
+  "gemini": "gemini-3.8-flash-high advisory in gemini-final.txt",
+  "adjudication": {
+    "halfStar": "Original-size built-rating-1440-2.png and editor screenshot show a clean orange left half and gray right half; scaled whole-page advisory incorrectly judged it absent.",
+    "dateHierarchy": "Default collapsed date disclosure is attached to the article heading. Deliberate expansion uses a distinct shaded form and retains editable article below; four-language three-viewport interaction and overflow checks pass.",
+    "emptyMaster": "Synthetic case deliberately returns an empty master list. No product facts or controls changed."
+  },
+  "tests": {
+    "initialSource": "e4c3f83",
+    "initialPassed": 78,
+    "finalToolbarPassed": 12,
+    "countsOverlap": true,
+    "unchangedTestsReused": 66
+  }
+}
