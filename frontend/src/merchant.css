@@ -1,6 +1,8 @@
 .merchant-shell { display:grid; grid-template-columns:232px minmax(0,1fr); min-height:100dvh; background:#f7f7f8; color:#242428; letter-spacing:0; font-family:Inter,"Noto Sans SC","Microsoft YaHei",system-ui,sans-serif; }
 .merchant-shell *, .merchant-drawer * { letter-spacing:0; }
 .merchant-sidebar { width:auto; position:sticky; top:0; height:100dvh; display:flex; flex-direction:column; background:#fff; border-right:1px solid #ebebed; padding:28px 16px 16px; }
+.merchant-sidebar>.ant-menu { flex:1; min-height:0; overflow-y:auto; overflow-x:hidden; }
+.merchant-sidebar>.merchant-brand,.merchant-sidebar>.merchant-nav-label,.merchant-sidebar>.merchant-identity { flex-shrink:0; }
 .merchant-brand { display:flex; align-items:center; gap:12px; color:#19191c; text-decoration:none; min-height:44px; }
 .merchant-brand strong { font-size:23px; font-weight:750; }
 .brand-symbol { position:relative; display:grid; place-items:center; flex:none; width:36px; height:36px; color:#fff; background:#d93630; border-radius:12px; font-size:25px; font-weight:800; }
