@@ -15,6 +15,11 @@ spring:
           uri: lb://auth-service
           predicates:
             - Path=/api/auth/**
+        # Durable Costco intake is implemented by Core, including its worker status.
+        - id: costco-onboarding-route
+          uri: lb://core-service
+          predicates:
+            - Path=/api/ai/costco-onboarding,/api/ai/costco-onboarding/**
         - id: ai-route
           uri: lb://ai-service
           predicates:
