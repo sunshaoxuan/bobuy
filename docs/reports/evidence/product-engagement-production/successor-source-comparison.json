@@ -1,0 +1,22 @@
+{
+  "backend/src/main/java/com/bobbuy/service/PublicRecommendationBrowseService.java": {
+    "ours": "779e4cd32007204fd2a802de6e20fb60e35c2d44315cd3d75f62bb56155bd316",
+    "liveSource": "1b0b1cb169a8badab8e86de291fd5f8aff1696812eab502928aec010096c1d67"
+  },
+  "backend/src/main/java/com/bobbuy/service/ProductPopularityService.java": {
+    "ours": "5ea8fba6c04a59faba4149b9925716c376c4889b35228366028469053241ee96",
+    "liveSource": "5ea8fba6c04a59faba4149b9925716c376c4889b35228366028469053241ee96"
+  },
+  "frontend/src/components/ProductPopularity.tsx": {
+    "ours": "dbcfef47f956c642e4754c96a02d796fb5a2a0f1ca5592f3581a1b232531f0b9",
+    "liveSource": "dbcfef47f956c642e4754c96a02d796fb5a2a0f1ca5592f3581a1b232531f0b9"
+  },
+  "frontend/src/components/ProductRating.tsx": {
+    "ours": "0654c766371423ec4780079370e15a5de2444d99ee24e6bbcd927dddebcdacd1",
+    "liveSource": "0654c766371423ec4780079370e15a5de2444d99ee24e6bbcd927dddebcdacd1"
+  },
+  "frontend/src/components/ProductSort.tsx": {
+    "ours": "29740df0d3ae85d93e2f529a4f0f9ee1353e858dd732486c95798d8cfcbbbf0e",
+    "liveSource": "29740df0d3ae85d93e2f529a4f0f9ee1353e858dd732486c95798d8cfcbbbf0e"
+  }
+}

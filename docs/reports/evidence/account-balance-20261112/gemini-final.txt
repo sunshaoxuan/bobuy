@@ -1,0 +1,17 @@
+### 1. Concrete Defects and Missing Evidence
+
+* **Defect: Scrolled content leaks above the mobile top app bar (Images 2 & 3)**
+  In both mobile views, when content is scrolled, underlying text and elements bleed visibly into the space *above* the mobile header (e.g., `aiko@bobbuy.test` and helper text visible above the top edge in Image 3; card title/icon poking above the bar in Image 2). The top header appears to be styled as a floating or inset element without an opaque, full-width `top: 0` backdrop, allowing scrolled content to peek out over the top gutter.
+* **Defect: Unblurred content bleed-through on mobile bottom navigation bar (Image 3)**
+  In Image 3, form inputs and labels (`国家或地区`) are sharply visible underneath the bottom navigation bar (`好物推荐` icon area). The bottom bar lacks a solid opaque background (`background-color: #ffffff`) or an active `backdrop-filter: blur(...)` with adequate opacity, causing text and border collisions with the fixed nav items during mid-scroll.
+* **Missing Evidence: Initial scroll / top-of-page state on mobile**
+  While mid-scroll (Image 3) and bottom-scroll (Image 2) verify single-column stacking and CTA clearance, the initial un-scrolled top of the page on mobile (showing header, page title, profile overview, and tab switching) is not captured.
+
+---
+
+### 2. Verdict on Overall Composition
+
+* **Desktop Composition: Excellent (Resolved)**
+  Consolidating the verification code input and actions (`[输入框] [验证邮箱] [重新发送]`) onto a single horizontal row successfully compresses the left column height. The bottom baseline of "邮箱验证" now aligns almost exactly with the "清空地址" action in the "收货地址" card, eliminating the previous dead space below the postal code input. The two-column grid is well-balanced, and the full-width bottom card leads cleanly into the right-aligned primary CTA (`保存资料`).
+* **Mobile Composition & Spacing: Structurally Sound, Needs Layering Fixes**
+  The single-column flow functions well. On mobile, the verification section appropriately stacks the input above the dual action buttons (`验证邮箱` / `重新发送`), avoiding horizontal cramping. As confirmed in Image 2, the `保存资料` button maintains comfortable clearance above the fixed bottom navigation bar. Once the mobile fixed nav opacity/masking (both top and bottom bars) is resolved, the composition is ready for release.

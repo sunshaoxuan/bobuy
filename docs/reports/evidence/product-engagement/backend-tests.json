@@ -1,0 +1,1250 @@
+{
+  "source": "Maven Surefire retained reports from full run plus final 33-test focused rerun",
+  "suites": 124,
+  "tests": 662,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 24,
+  "details": [
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.AiAgentControllerTest",
+      "time": "33.704",
+      "tests": "3",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.AiProductOnboardingServiceTest",
+      "time": "13.519",
+      "tests": "8",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.AuthControllerIntegrationTest",
+      "time": "5.634",
+      "tests": "12",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.AuthRefreshConcurrencyIntegrationTest",
+      "time": "8.773",
+      "tests": "2",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.AuthRefreshTokenExpiryIntegrationTest",
+      "time": "7.862",
+      "tests": "1",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.ChatControllerSecurityIntegrationTest",
+      "time": "7.788",
+      "tests": "4",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.CostcoOnboardingControllerTest",
+      "time": "0.728",
+      "tests": "9",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.CurrencyDirectoryIntegrationTest",
+      "time": "0.33",
+      "tests": "1",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.CustomerOrderAmendmentIntegrationTest",
+      "time": "12.187",
+      "tests": "11",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.FinancialAuditIntegrationTest",
+      "time": "0.043",
+      "tests": "1",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.InternalServiceTokenIntegrationTest",
+      "time": "6.084",
+      "tests": "4",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.MailSettingsIntegrationTest",
+      "time": "6.868",
+      "tests": "6",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.MediaMigrationExecutorTest",
+      "time": "8.426",
+      "tests": "6",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.MediaObjectOnlyIntegrationTest",
+      "time": "6.312",
+      "tests": "10",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.MediaTransferIntegrationTest",
+      "time": "9.638",
+      "tests": "14",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.MetricsControllerTest",
+      "time": "0.23",
+      "tests": "1",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.MobileProductControllerTest",
+      "time": "0.42",
+      "tests": "2",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.OrderControllerIntegrationTest",
+      "time": "0.423",
+      "tests": "2",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.OrderControllerTest",
+      "time": "0.401",
+      "tests": "2",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.PostgresImageStorageIntegrationTest",
+      "time": "0.258",
+      "tests": "3",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.ProcurementControllerIntegrationTest",
+      "time": "4.199",
+      "tests": "17",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.ProductCatalogIntegrationTest",
+      "time": "1.961",
+      "tests": "5",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.ProductIdentityCompatibilityIntegrationTest",
+      "time": "0.872",
+      "tests": "4",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.ProductLifecycleIntegrationTest",
+      "time": "3.752",
+      "tests": "5",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.ProductMarkerIntegrationTest",
+      "time": "5.257",
+      "tests": "7",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.ProductPricingIntegrationTest",
+      "time": "5.85",
+      "tests": "4",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.ProductRatingIntegrationTest",
+      "time": "26.658",
+      "tests": "4",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.ProductRatingPostgresIntegrationTest",
+      "time": "0.0",
+      "tests": "4",
+      "errors": "0",
+      "skipped": "4",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.PublicBrowseHttpContractTest",
+      "time": "0.239",
+      "tests": "3",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.PublicProductCatalogHttpTest",
+      "time": "3.675",
+      "tests": "3",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.RecommendationArticleRevisionIntegrationTest",
+      "time": "4.582",
+      "tests": "6",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.RecommendationClassificationTest",
+      "time": "1.797",
+      "tests": "3",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.RecommendationCommerceTest",
+      "time": "1.006",
+      "tests": "2",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.RecommendationDirectoryMetadataHttpTest",
+      "time": "0.053",
+      "tests": "2",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.RecommendationIntegrationTest",
+      "time": "14.178",
+      "tests": "17",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.RecommendationIssueDateControllerTest",
+      "time": "0.275",
+      "tests": "4",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.RecommendationIssueDateIntegrationTest",
+      "time": "0.216",
+      "tests": "4",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.RecommendationItemPublicationIntegrationTest",
+      "time": "6.223",
+      "tests": "4",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.RecommendationNodeTest",
+      "time": "0.373",
+      "tests": "2",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.RecommendationPublicationMigrationIntegrationTest",
+      "time": "0.0",
+      "tests": "3",
+      "errors": "0",
+      "skipped": "3",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.RecommendationPublicationRecoveryIntegrationTest",
+      "time": "0.0",
+      "tests": "2",
+      "errors": "0",
+      "skipped": "2",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.RecommendationWritingControllerTest",
+      "time": "0.011",
+      "tests": "4",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.RequestMetricsServiceTest",
+      "time": "0.002",
+      "tests": "2",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.response.GlobalExceptionHandlerTest",
+      "time": "0.467",
+      "tests": "4",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.response.ResponseTest",
+      "time": "0.016",
+      "tests": "4",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.SecurityAuthorizationIntegrationTest",
+      "time": "1.66",
+      "tests": "11",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.SecurityAuthorizationProductionModeIntegrationTest",
+      "time": "0.876",
+      "tests": "5",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.ServiceOfferIntegrationTest",
+      "time": "5.216",
+      "tests": "8",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.ServiceOfferPostgresIntegrationTest",
+      "time": "0.0",
+      "tests": "2",
+      "errors": "0",
+      "skipped": "2",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.StorefrontIntegrationTest",
+      "time": "12.51",
+      "tests": "16",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.TripControllerIntegrationTest",
+      "time": "1.071",
+      "tests": "5",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.TripControllerTest",
+      "time": "0.169",
+      "tests": "1",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.UserControllerTest",
+      "time": "0.399",
+      "tests": "2",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.api.UserManagementIntegrationTest",
+      "time": "2.893",
+      "tests": "5",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.config.WebSocketAuthenticationChannelInterceptorTest",
+      "time": "0.614",
+      "tests": "5",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.model.MediaGalleryCompatibilityTest",
+      "time": "0.011",
+      "tests": "2",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.model.ModelTest",
+      "time": "0.004",
+      "tests": "6",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.model.OrderLineStorageTest",
+      "time": "0.05",
+      "tests": "6",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.model.OrderLineValueTest",
+      "time": "0.02",
+      "tests": "3",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.model.RecommendationServiceOfferTest",
+      "time": "0.066",
+      "tests": "7",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.repository.CostcoOnboardingAttemptHistoryTest",
+      "time": "0.659",
+      "tests": "3",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.repository.CostcoOnboardingPersistenceIntegrationTest",
+      "time": "0.002",
+      "tests": "6",
+      "errors": "0",
+      "skipped": "6",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.repository.CostcoOnboardingQuotaTest",
+      "time": "0.062",
+      "tests": "6",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.repository.RecommendationIssueDateMigrationIntegrationTest",
+      "time": "0.0",
+      "tests": "3",
+      "errors": "0",
+      "skipped": "3",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.security.CustomerIdentityResolverTest",
+      "time": "0.085",
+      "tests": "13",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.security.InternalServiceTokenFilterTest",
+      "time": "0.007",
+      "tests": "3",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.AiVisionIntegrationManualTest",
+      "time": "0.0",
+      "tests": "2",
+      "errors": "0",
+      "skipped": "2",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.AuditLogServiceTest",
+      "time": "0.003",
+      "tests": "2",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.BobbuyReleaseGateTest",
+      "time": "0.831",
+      "tests": "3",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.BobbuyStoreCoverageTest",
+      "time": "1.039",
+      "tests": "5",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.BobbuyStoreSeedDisabledIntegrationTest",
+      "time": "6.544",
+      "tests": "1",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.BobbuyStoreSeedEnabledIntegrationTest",
+      "time": "3.292",
+      "tests": "1",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.BobbuyStoreTest",
+      "time": "2.261",
+      "tests": "20",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.ChatServiceTest",
+      "time": "2.313",
+      "tests": "3",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.CheckoutFingerprintTest",
+      "time": "0.002",
+      "tests": "2",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.CostcoCatalogCommitterTest",
+      "time": "0.411",
+      "tests": "7",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.CostcoNumberOnboardingServiceTest",
+      "time": "0.03",
+      "tests": "16",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.CostcoPinnedStageReviewerTest",
+      "time": "0.083",
+      "tests": "10",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.CostcoPublicEvidenceFetcherTest",
+      "time": "0.089",
+      "tests": "17",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.CustomerOrderAmendmentPolicyTest",
+      "time": "0.009",
+      "tests": "4",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.CustomerOrderAmendmentServiceTest",
+      "time": "1.316",
+      "tests": "11",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.ExistingAiConnectionManualTest",
+      "time": "0.0",
+      "tests": "1",
+      "errors": "0",
+      "skipped": "1",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.ExistingOfficialResearchManualTest",
+      "time": "0.0",
+      "tests": "1",
+      "errors": "0",
+      "skipped": "1",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.IdentityMigrationRecoveryTest",
+      "time": "0.393",
+      "tests": "1",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.LlmGatewayPinnedTest",
+      "time": "0.017",
+      "tests": "8",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.LlmGatewayTest",
+      "time": "0.315",
+      "tests": "4",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.LocalizedJsonbReaderServiceTest",
+      "time": "0.002",
+      "tests": "3",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.MailSecretCipherTest",
+      "time": "0.022",
+      "tests": "2",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.MediaIncrementWorkerTest",
+      "time": "0.12",
+      "tests": "3",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.OfficialProductResearchTest",
+      "time": "0.007",
+      "tests": "6",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.OrderDeliverySnapshotTest",
+      "time": "0.005",
+      "tests": "2",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.OrderProductSnapshotTest",
+      "time": "0.006",
+      "tests": "5",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.ProcurementHudServiceTest",
+      "time": "1.735",
+      "tests": "13",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.ProcurementReceiptRecognitionServiceTest",
+      "time": "0.012",
+      "tests": "3",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.ProductBrowseOrderTest",
+      "time": "0.02",
+      "tests": "2",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.ProductCatalogAutomatedTest",
+      "time": "0.677",
+      "tests": "1",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.ProductIdentityAuditTest",
+      "time": "0.016",
+      "tests": "2",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.ProductIdentityRecoveryTest",
+      "time": "0.038",
+      "tests": "3",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.ProductMarkerServiceTest",
+      "time": "0.239",
+      "tests": "10",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.ProductRatingServiceTest",
+      "time": "0.115",
+      "tests": "5",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.PublicBrowseProjectionCompatibilityTest",
+      "time": "0.02",
+      "tests": "3",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.PublicCatalogRealProjectionNoAgentTest",
+      "time": "0.09",
+      "tests": "12",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.PublicProductBrowseServiceTest",
+      "time": "0.192",
+      "tests": "8",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.PublicProductCatalogProjectionTest",
+      "time": "0.211",
+      "tests": "3",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.PublicProductCatalogServiceTest",
+      "time": "0.129",
+      "tests": "9",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.PublicRecommendationBrowseServiceTest",
+      "time": "0.376",
+      "tests": "16",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.RecommendationArticleRevisionTest",
+      "time": "0.053",
+      "tests": "13",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.RecommendationFromProductTest",
+      "time": "0.345",
+      "tests": "6",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.RecommendationIdentityTest",
+      "time": "0.009",
+      "tests": "3",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.RecommendationImageAuthorizationReadTest",
+      "time": "0.013",
+      "tests": "9",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.RecommendationIssueDateServiceTest",
+      "time": "0.025",
+      "tests": "8",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.RecommendationItemPublicationTest",
+      "time": "0.285",
+      "tests": "14",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.RecommendationProductIntakeTest",
+      "time": "0.265",
+      "tests": "4",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.RecommendationPublicReadBatchTest",
+      "time": "0.152",
+      "tests": "2",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.RecommendationSourceImageTest",
+      "time": "0.005",
+      "tests": "1",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.ReferenceMigrationTest",
+      "time": "0.02",
+      "tests": "1",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.ReferenceProductIdentityTest",
+      "time": "0.007",
+      "tests": "3",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.ReferenceQuoteTest",
+      "time": "0.032",
+      "tests": "9",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.RustFsObjectStoreTest",
+      "time": "0.754",
+      "tests": "6",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.SelfProfileServiceTest",
+      "time": "0.151",
+      "tests": "8",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.ServiceOfferMigrationTest",
+      "time": "0.033",
+      "tests": "1",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.SmtpDeliveryTest",
+      "time": "0.013",
+      "tests": "1",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.StorefrontTripVisibilityTest",
+      "time": "0.069",
+      "tests": "3",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+      "version": "3.0",
+      "name": "com.bobbuy.service.VerificationMailTemplateTest",
+      "time": "0.002",
+      "tests": "1",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    }
+  ]
+}

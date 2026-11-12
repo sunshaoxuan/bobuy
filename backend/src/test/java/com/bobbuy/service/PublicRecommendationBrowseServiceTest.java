@@ -6,6 +6,17 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 class PublicRecommendationBrowseServiceTest {
+ @Test void priceSortingUsesRestoredOriginalAndFutureRegularPriceWithActualSalesFirst(){
+  var expired=item(1);expired.productId="p1";expired.referencePrice=new java.math.BigDecimal("100");expired.originalPrice=new java.math.BigDecimal("1000");expired.offerEnd=LocalDate.of(2000,1,1);
+  var ordinary=item(2);ordinary.productId="p2";ordinary.referencePrice=new java.math.BigDecimal("500");
+  var future=item(3);future.productId="p3";future.referencePrice=new java.math.BigDecimal("50");future.originalPrice=new java.math.BigDecimal("800");future.offerStart=LocalDate.of(2099,1,1);
+  var unknown=item(4);unknown.productId="p4";unknown.referencePrice=new java.math.BigDecimal("25");unknown.discountAmount=new java.math.BigDecimal("5");unknown.offerEnd=LocalDate.of(2000,1,1);
+  recommendations.rows=List.of(issue(1,List.of(expired,ordinary,future,unknown)));
+  assertThat(service.page(0,null,null,"ja-JP","all","","",null,"price-asc").items()).extracting(r->r.item().id()).containsExactly(2L,3L,1L,4L);
+  assertThat(service.page(0,null,null,"ja-JP","all","","",null,"price-desc").items()).extracting(r->r.item().id()).containsExactly(1L,3L,2L,4L);
+  var actual=new PublicBrowsePriceService(null,null){@Override public Map<String,Price> prices(Collection<String> ids){return Map.of("p1",new Price(new java.math.BigDecimal("300"),"JPY"));}};
+  assertThat(new PublicRecommendationBrowseService(recommendations,null,null,actual).page(0,null,null,"ja-JP","all","","",null,"price-asc").items()).extracting(r->r.item().id()).containsExactly(1L,2L,3L,4L);assertThat(expired.referencePrice).isEqualByComparingTo("100");
+ }
  private static class Recommendations extends RecommendationService {
   List<Detail> rows=List.of();int reads;
   Recommendations(){super(null,null,null,null,null,null,null,null,null,null,null,null);}

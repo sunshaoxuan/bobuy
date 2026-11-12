@@ -1,0 +1,752 @@
+[
+  {
+    "route": "products",
+    "name": "all-sort-directions",
+    "width": 1440,
+    "check": "PASS: all seven options reorder complete-scope API results"
+  },
+  {
+    "route": "products",
+    "name": "sort",
+    "width": 1440,
+    "file": "products-sort-final-1440.png",
+    "bounds": {
+      "width": 218,
+      "height": 44
+    },
+    "padding": [
+      8,
+      30,
+      8,
+      12
+    ],
+    "border": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "text": "默认排序价格从低到高（同币种）价格从高到低（同币种）评分从低到高评分从高到低人气从高到低人气从低到高",
+    "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+    "roles": [],
+    "overflow": false,
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "route": "products",
+    "name": "heat",
+    "width": 1440,
+    "file": "products-heat-final-1440.png",
+    "bounds": {
+      "width": 192.390625,
+      "height": 24
+    },
+    "padding": [
+      4,
+      3,
+      4,
+      3
+    ],
+    "border": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "text": " 热度138",
+    "font": "11px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+    "roles": [],
+    "overflow": false,
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "route": "products",
+    "name": "maximum-card",
+    "width": 1440,
+    "file": "products-maximum-card-final-1440.png",
+    "bounds": {
+      "width": 214.40625,
+      "height": 463.59375
+    },
+    "padding": [
+      10,
+      10,
+      10,
+      10
+    ],
+    "border": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "text": "QA验收商品 01（验收商品 01）产品编号: 来源未注明暂无评分¥101 热度9,223,372万亿",
+    "font": "15px / 24.75px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+    "roles": [
+      {
+        "x": 516.390625,
+        "y": 510.828125,
+        "width": 15,
+        "height": 15.125
+      },
+      {
+        "x": 533.390625,
+        "y": 510.828125,
+        "width": 15,
+        "height": 15.125
+      },
+      {
+        "x": 550.390625,
+        "y": 510.828125,
+        "width": 15,
+        "height": 15.125
+      },
+      {
+        "x": 567.390625,
+        "y": 510.828125,
+        "width": 15,
+        "height": 15.125
+      },
+      {
+        "x": 584.390625,
+        "y": 510.828125,
+        "width": 15,
+        "height": 15.125
+      }
+    ],
+    "overflow": false,
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "route": "recommendations",
+    "name": "all-sort-directions",
+    "width": 1440,
+    "check": "PASS: all seven options reorder complete-scope API results"
+  },
+  {
+    "route": "recommendations",
+    "name": "sort",
+    "width": 1440,
+    "file": "recommendations-sort-final-1440.png",
+    "bounds": {
+      "width": 218,
+      "height": 44
+    },
+    "padding": [
+      8,
+      30,
+      8,
+      12
+    ],
+    "border": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "text": "默认排序价格从低到高（同币种）价格从高到低（同币种）评分从低到高评分从高到低人气从高到低人气从低到高",
+    "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+    "roles": [],
+    "overflow": false,
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "route": "recommendations",
+    "name": "heat",
+    "width": 1440,
+    "file": "recommendations-heat-final-1440.png",
+    "bounds": {
+      "width": 192.390625,
+      "height": 24
+    },
+    "padding": [
+      4,
+      3,
+      4,
+      3
+    ],
+    "border": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "text": " 热度139",
+    "font": "11px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+    "roles": [],
+    "overflow": false,
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "route": "recommendations",
+    "name": "maximum-card",
+    "width": 1440,
+    "file": "recommendations-maximum-card-final-1440.png",
+    "bounds": {
+      "width": 214.40625,
+      "height": 463.59375
+    },
+    "padding": [
+      10,
+      10,
+      10,
+      10
+    ],
+    "border": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "text": "验收商品 01 产品编号: 来源未注明暂无评分¥101 热度9,223,372万亿",
+    "font": "15px / 24.75px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+    "roles": [
+      {
+        "x": 516.390625,
+        "y": 511.078125,
+        "width": 15,
+        "height": 15.125
+      },
+      {
+        "x": 533.390625,
+        "y": 511.078125,
+        "width": 15,
+        "height": 15.125
+      },
+      {
+        "x": 550.390625,
+        "y": 511.078125,
+        "width": 15,
+        "height": 15.125
+      },
+      {
+        "x": 567.390625,
+        "y": 511.078125,
+        "width": 15,
+        "height": 15.125
+      },
+      {
+        "x": 584.390625,
+        "y": 511.078125,
+        "width": 15,
+        "height": 15.125
+      }
+    ],
+    "overflow": false,
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "route": "products",
+    "name": "sort",
+    "width": 768,
+    "file": "products-sort-final-768.png",
+    "bounds": {
+      "width": 218,
+      "height": 44
+    },
+    "padding": [
+      8,
+      30,
+      8,
+      12
+    ],
+    "border": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "text": "默认排序价格从低到高（同币种）价格从高到低（同币种）评分从低到高评分从高到低人气从高到低人气从低到高",
+    "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+    "roles": [],
+    "overflow": false,
+    "viewport": {
+      "width": 768,
+      "height": 900
+    }
+  },
+  {
+    "route": "products",
+    "name": "heat",
+    "width": 768,
+    "file": "products-heat-final-768.png",
+    "bounds": {
+      "width": 222,
+      "height": 24
+    },
+    "padding": [
+      4,
+      3,
+      4,
+      3
+    ],
+    "border": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "text": " 热度139",
+    "font": "11px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+    "roles": [],
+    "overflow": false,
+    "viewport": {
+      "width": 768,
+      "height": 900
+    }
+  },
+  {
+    "route": "products",
+    "name": "maximum-card",
+    "width": 768,
+    "file": "products-maximum-card-final-768.png",
+    "bounds": {
+      "width": 244,
+      "height": 487.78125
+    },
+    "padding": [
+      10,
+      10,
+      10,
+      10
+    ],
+    "border": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "text": "QA验收商品 01（验收商品 01）产品编号: 来源未注明暂无评分¥101 热度9,223,372万亿",
+    "font": "15px / 24.75px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+    "roles": [
+      {
+        "x": 514,
+        "y": 540.421875,
+        "width": 15,
+        "height": 15.125
+      },
+      {
+        "x": 531,
+        "y": 540.421875,
+        "width": 15,
+        "height": 15.125
+      },
+      {
+        "x": 548,
+        "y": 540.421875,
+        "width": 15,
+        "height": 15.125
+      },
+      {
+        "x": 565,
+        "y": 540.421875,
+        "width": 15,
+        "height": 15.125
+      },
+      {
+        "x": 582,
+        "y": 540.421875,
+        "width": 15,
+        "height": 15.125
+      }
+    ],
+    "overflow": false,
+    "viewport": {
+      "width": 768,
+      "height": 900
+    }
+  },
+  {
+    "route": "recommendations",
+    "name": "sort",
+    "width": 768,
+    "file": "recommendations-sort-final-768.png",
+    "bounds": {
+      "width": 218,
+      "height": 44
+    },
+    "padding": [
+      8,
+      30,
+      8,
+      12
+    ],
+    "border": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "text": "默认排序价格从低到高（同币种）价格从高到低（同币种）评分从低到高评分从高到低人气从高到低人气从低到高",
+    "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+    "roles": [],
+    "overflow": false,
+    "viewport": {
+      "width": 768,
+      "height": 900
+    }
+  },
+  {
+    "route": "recommendations",
+    "name": "heat",
+    "width": 768,
+    "file": "recommendations-heat-final-768.png",
+    "bounds": {
+      "width": 222,
+      "height": 24
+    },
+    "padding": [
+      4,
+      3,
+      4,
+      3
+    ],
+    "border": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "text": " 热度139",
+    "font": "11px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+    "roles": [],
+    "overflow": false,
+    "viewport": {
+      "width": 768,
+      "height": 900
+    }
+  },
+  {
+    "route": "recommendations",
+    "name": "maximum-card",
+    "width": 768,
+    "file": "recommendations-maximum-card-final-768.png",
+    "bounds": {
+      "width": 244,
+      "height": 487.78125
+    },
+    "padding": [
+      10,
+      10,
+      10,
+      10
+    ],
+    "border": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "text": "验收商品 01 产品编号: 来源未注明暂无评分¥101 热度9,223,372万亿",
+    "font": "15px / 24.75px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+    "roles": [
+      {
+        "x": 514,
+        "y": 540.671875,
+        "width": 15,
+        "height": 15.125
+      },
+      {
+        "x": 531,
+        "y": 540.671875,
+        "width": 15,
+        "height": 15.125
+      },
+      {
+        "x": 548,
+        "y": 540.671875,
+        "width": 15,
+        "height": 15.125
+      },
+      {
+        "x": 565,
+        "y": 540.671875,
+        "width": 15,
+        "height": 15.125
+      },
+      {
+        "x": 582,
+        "y": 540.671875,
+        "width": 15,
+        "height": 15.125
+      }
+    ],
+    "overflow": false,
+    "viewport": {
+      "width": 768,
+      "height": 900
+    }
+  },
+  {
+    "route": "products",
+    "name": "sort",
+    "width": 320,
+    "file": "products-sort-final-320.png",
+    "bounds": {
+      "width": 273,
+      "height": 44
+    },
+    "padding": [
+      8,
+      30,
+      8,
+      12
+    ],
+    "border": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "text": "默认排序价格从低到高（同币种）价格从高到低（同币种）评分从低到高评分从高到低人气从高到低人气从低到高",
+    "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+    "roles": [],
+    "overflow": false,
+    "viewport": {
+      "width": 320,
+      "height": 900
+    }
+  },
+  {
+    "route": "products",
+    "name": "heat",
+    "width": 320,
+    "file": "products-heat-final-320.png",
+    "bounds": {
+      "width": 112.5,
+      "height": 24
+    },
+    "padding": [
+      4,
+      3,
+      4,
+      3
+    ],
+    "border": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "text": " 热度139",
+    "font": "11px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+    "roles": [],
+    "overflow": false,
+    "viewport": {
+      "width": 320,
+      "height": 900
+    }
+  },
+  {
+    "route": "products",
+    "name": "maximum-card",
+    "width": 320,
+    "file": "products-maximum-card-final-320.png",
+    "bounds": {
+      "width": 130.5,
+      "height": 378.28125
+    },
+    "padding": [
+      8,
+      8,
+      8,
+      8
+    ],
+    "border": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "text": "QA验收商品 01（验收商品 01）产品编号: 来源未注明暂无评分¥101 热度9,223,372万亿",
+    "font": "15px / 24.75px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+    "roles": [
+      {
+        "x": 170.5,
+        "y": 419.203125,
+        "width": 14,
+        "height": 14.25
+      },
+      {
+        "x": 186.5,
+        "y": 419.203125,
+        "width": 14,
+        "height": 14.25
+      },
+      {
+        "x": 202.5,
+        "y": 419.203125,
+        "width": 14,
+        "height": 14.25
+      },
+      {
+        "x": 218.5,
+        "y": 419.203125,
+        "width": 14,
+        "height": 14.25
+      },
+      {
+        "x": 234.5,
+        "y": 419.203125,
+        "width": 14,
+        "height": 14.25
+      }
+    ],
+    "overflow": false,
+    "viewport": {
+      "width": 320,
+      "height": 900
+    }
+  },
+  {
+    "route": "products",
+    "name": "exact-count-tooltip",
+    "width": 320,
+    "check": "PASS: complete count visible, no detail opened or count mutation"
+  },
+  {
+    "route": "recommendations",
+    "name": "sort",
+    "width": 320,
+    "file": "recommendations-sort-final-320.png",
+    "bounds": {
+      "width": 273,
+      "height": 44
+    },
+    "padding": [
+      8,
+      30,
+      8,
+      12
+    ],
+    "border": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "text": "默认排序价格从低到高（同币种）价格从高到低（同币种）评分从低到高评分从高到低人气从高到低人气从低到高",
+    "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+    "roles": [],
+    "overflow": false,
+    "viewport": {
+      "width": 320,
+      "height": 900
+    }
+  },
+  {
+    "route": "recommendations",
+    "name": "heat",
+    "width": 320,
+    "file": "recommendations-heat-final-320.png",
+    "bounds": {
+      "width": 112.5,
+      "height": 24
+    },
+    "padding": [
+      4,
+      3,
+      4,
+      3
+    ],
+    "border": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "text": " 热度139",
+    "font": "11px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+    "roles": [],
+    "overflow": false,
+    "viewport": {
+      "width": 320,
+      "height": 900
+    }
+  },
+  {
+    "route": "recommendations",
+    "name": "maximum-card",
+    "width": 320,
+    "file": "recommendations-maximum-card-final-320.png",
+    "bounds": {
+      "width": 130.5,
+      "height": 378.28125
+    },
+    "padding": [
+      8,
+      8,
+      8,
+      8
+    ],
+    "border": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "text": "验收商品 01 产品编号: 来源未注明暂无评分¥101 热度9,223,372万亿",
+    "font": "15px / 24.75px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+    "roles": [
+      {
+        "x": 170.5,
+        "y": 418.703125,
+        "width": 14,
+        "height": 14.25
+      },
+      {
+        "x": 186.5,
+        "y": 418.703125,
+        "width": 14,
+        "height": 14.25
+      },
+      {
+        "x": 202.5,
+        "y": 418.703125,
+        "width": 14,
+        "height": 14.25
+      },
+      {
+        "x": 218.5,
+        "y": 418.703125,
+        "width": 14,
+        "height": 14.25
+      },
+      {
+        "x": 234.5,
+        "y": 418.703125,
+        "width": 14,
+        "height": 14.25
+      }
+    ],
+    "overflow": false,
+    "viewport": {
+      "width": 320,
+      "height": 900
+    }
+  },
+  {
+    "route": "recommendations",
+    "name": "exact-count-tooltip",
+    "width": 320,
+    "check": "PASS: complete count visible, no detail opened or count mutation"
+  }
+]

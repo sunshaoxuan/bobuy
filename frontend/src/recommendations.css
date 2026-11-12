@@ -79,12 +79,6 @@ html[lang=en-US] .recommendations .ant-btn>span:not(.ant-btn-icon):not(.anticon)
 @media (max-width:1000px) { .rec-editor-layout { grid-template-columns:minmax(0,1fr); gap:24px; }.rec-ai { border-left:0; border-top:1px solid #dfe4e1; padding:24px 0 0; }.rec-upload-fields { grid-template-columns:minmax(0,1fr) minmax(135px,1fr); }.rec-upload-fields label:first-child { grid-column:1/-1; }.rec-upload-actions { padding-top:26px; } }
 @media (max-width:600px) {
   .recommendations h1 { font-size:23px; }.rec-heading { align-items:flex-start; }.rec-heading>button { flex-shrink:0; }
-  .rec-editing { padding-bottom:90px; }
-  .rec-actions { position:fixed; z-index:100; bottom:0; left:0; right:0; margin:0; padding:12px 16px calc(12px + env(safe-area-inset-bottom)); border-top:1px solid #dfe4e1; border-bottom:0; box-shadow:0 -3px 12px #242b290a; gap:8px; }
-  .rec-actions>.ant-popover-open, .rec-actions>button { flex:0 0 44px; }
-  .rec-actions>.ant-btn { width:44px; padding:10px; }.rec-actions>.ant-btn>span:not(.anticon):not(.ant-btn-icon) { display:none; }.rec-actions>.ant-btn .anticon { font-size:16px; }
-  .rec-actions .rec-action-group { flex:1; flex-wrap:nowrap; justify-content:flex-end; }
-  .rec-actions .rec-action-group>.ant-btn { flex:1; padding-inline:10px; }
   .rec-section-heading { flex-wrap:wrap; margin-bottom:12px; }
   .rec-uploads .rec-section-heading>.rec-action-group { width:100%; }.rec-uploads .rec-section-heading .ant-btn { flex:1; }
   .rec-upload-row { grid-template-columns:1fr auto; gap:16px; padding:24px 0; }
@@ -196,3 +190,35 @@ html[lang=en-US] .recommendations .ant-btn>span:not(.ant-btn-icon):not(.anticon)
 .rec-product-intake-modal .ant-modal-body{max-height:70dvh;overflow:auto;padding-right:6px;}.rec-product-intake-modal .ant-modal-footer .ant-btn{max-width:100%;white-space:normal;min-height:40px;height:auto;}.rec-product-intake-modal label{line-height:1.6;}.rec-product-intake-modal .ant-checkbox-wrapper{align-items:flex-start;margin:12px 0;}
 .rec-product-grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:24px 16px}.rec-product .ant-btn{max-width:100%;white-space:normal;padding:4px 6px;height:auto}.rec-product .rec-product-actions{display:flex;flex-wrap:wrap;gap:8px;flex:none;margin-top:auto}.rec-product:has(.rec-facts-form){grid-column:1/-1}@media(max-width:767px){.rec-product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 12px}}
 .rec-product-actions .ant-btn{min-width:44px;min-height:44px}
+
+/* Article editor: keep page actions together and give writing a clear surface. */
+.rec-editing { max-width:1120px; }
+.rec-editing>.rec-heading { align-items:center; flex-wrap:wrap; padding-bottom:24px; margin-bottom:24px; border-bottom:1px solid #e1e4df; }
+.rec-editing .rec-heading .rec-actions { gap:8px; margin:0; padding:0; border:0; background:transparent; justify-content:flex-start; flex-wrap:wrap; }
+.rec-article-heading { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:16px; }
+.rec-article-heading h2 { margin:0; }
+.rec-article-heading .rec-issue-date-host { min-width:0; max-width:100%; }
+.rec-article-heading .rec-issue-date-host:has(>button[aria-expanded=true]) { flex-basis:100%; }
+.rec-article-heading .rec-issue-date-editor { margin-top:16px; padding:16px; border:1px solid #e1e4df; border-radius:12px; background:#f7f8f4; }
+.rec-article-heading .rec-issue-date-editor h3 { margin:0 0 12px; }
+.rec-article-heading .rec-issue-date-editor p { line-height:1.7; margin:0 0 16px; }
+.rec-article-heading .rec-issue-date-editor label:not(.ant-checkbox-wrapper) { margin-top:16px; }
+.rec-article-heading .rec-issue-date-editor .ant-checkbox-wrapper { display:flex; align-items:flex-start; gap:0; margin:16px 0; line-height:1.6; }
+.rec-article-heading .rec-issue-date-editor .ant-btn { margin:0 8px 8px 0; max-width:100%; }
+.rec-article-heading .rec-issue-date-editor dd { margin:4px 0 12px; line-height:1.6; }
+.rec-editing .rec-article { padding:24px; border:1px solid #e1e4df; border-radius:16px; background:#fff; }
+.rec-editing .rec-article-heading h2 { font-size:20px; font-weight:650; }
+html[lang=en-US] .rec-editing .rec-article .ant-tabs-tab:first-child .ant-tabs-tab-btn { position:relative; top:-1px; }
+html[lang=en-US] .rec-article-heading .rec-issue-date-editor .ant-btn-primary>span:not(.ant-btn-icon):not(.anticon) { top:0; }
+.rec-editing .rec-article>.ant-tabs { margin-bottom:20px; }
+.rec-editing .rec-article>.ant-tabs .ant-tabs-nav { margin-bottom:0; }
+.rec-editing .rec-article>.ant-tabs .ant-tabs-tab { min-height:44px; padding:10px 4px; }
+.rec-editing .rec-article>input { margin-bottom:0; }
+.rec-editing .rec-article>textarea { margin-bottom:8px; padding:12px; border-radius:10px; }
+.rec-editing .rec-article>.ant-btn { margin-top:12px; }
+@media(max-width:650px) {
+ .rec-editing>.rec-heading { gap:16px; padding-bottom:20px; margin-bottom:20px; }
+ .rec-editing .rec-heading .rec-actions { width:100%; }
+ .rec-editing .rec-article { padding:16px; border-radius:12px; }
+ .rec-editing .rec-article .ant-tabs-tab+.ant-tabs-tab { margin-left:12px; }
+}

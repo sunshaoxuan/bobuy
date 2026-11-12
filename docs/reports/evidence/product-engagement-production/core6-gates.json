@@ -1,0 +1,22 @@
+{
+  "source": "312fbf28047c36003751d183840ea164152df000",
+  "result": "PASS",
+  "backend": {
+    "tests": 666,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 24
+  },
+  "configuredJacoco": "PASS",
+  "coverage": {
+    "LINE": 0.9453125,
+    "BRANCH": 0.7777777777777778
+  },
+  "frontend": "UNCHANGED_PRODUCTION_deac521; retain exact running artifact; reference gates and live behavior bound separately",
+  "logs": {
+    "backend-core6-coverage.log": "38afd8c199364a22b102426c9836254aa9e33ff1a18ee3a07dc097ce9c07b32d",
+    "core6-package.log": "ca77e66c4cf4ffd7e08c84c820b4edb4802bb4f656d9ca8c475231229ae4c7d0",
+    "reference-sort-red.log": "aedec62877b58798d78a602129edf450ab5f2ed10a9825b00ca23f0fab571b86",
+    "reference-sort-green.log": "13eafb16254404ddab89be4403e27a2ce454073220bfa4c3e6d47d05fa249120"
+  }
+}

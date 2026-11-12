@@ -1,0 +1,396 @@
+{
+  "boxes": {
+    "address": {
+      "bottom": 497.28125,
+      "height": 608.9375,
+      "width": 510,
+      "x": 850,
+      "y": -111.65625
+    },
+    "basic": {
+      "bottom": 211.4375,
+      "height": 323.09375,
+      "width": 510,
+      "x": 320,
+      "y": -111.65625
+    },
+    "save": {
+      "bottom": 940.375,
+      "height": 48,
+      "width": 1040,
+      "x": 320,
+      "y": 892.375
+    },
+    "social": {
+      "bottom": 872.375,
+      "height": 355.09375,
+      "width": 1040,
+      "x": 320,
+      "y": 517.28125
+    },
+    "verification": {
+      "bottom": 497.28125,
+      "height": 265.84375,
+      "width": 510,
+      "x": 320,
+      "y": 231.4375
+    }
+  },
+  "controls": [
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "<redacted>",
+      "labelRect": {
+        "bottom": 152.34375,
+        "height": 44,
+        "left": 345,
+        "right": 805,
+        "top": 108.34375,
+        "width": 460,
+        "x": 345,
+        "y": 108.34375
+      },
+      "rect": {
+        "bottom": 152.34375,
+        "height": 44,
+        "left": 345,
+        "right": 805,
+        "top": 108.34375,
+        "width": 460,
+        "x": 345,
+        "y": 108.34375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "Japan",
+      "labelRect": {
+        "bottom": 194.4375,
+        "height": 44,
+        "left": 875,
+        "right": 1097,
+        "top": 150.4375,
+        "width": 222,
+        "x": 875,
+        "y": 150.4375
+      },
+      "rect": {
+        "bottom": 194.4375,
+        "height": 44,
+        "left": 875,
+        "right": 1097,
+        "top": 150.4375,
+        "width": 222,
+        "x": 875,
+        "y": 150.4375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "Tokyo",
+      "labelRect": {
+        "bottom": 194.4375,
+        "height": 44,
+        "left": 1113,
+        "right": 1335,
+        "top": 150.4375,
+        "width": 222,
+        "x": 1113,
+        "y": 150.4375
+      },
+      "rect": {
+        "bottom": 194.4375,
+        "height": 44,
+        "left": 1113,
+        "right": 1335,
+        "top": 150.4375,
+        "width": 222,
+        "x": 1113,
+        "y": 150.4375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "Shibuya 1-2-3",
+      "labelRect": {
+        "bottom": 288.4375,
+        "height": 44,
+        "left": 875,
+        "right": 1335,
+        "top": 244.4375,
+        "width": 460,
+        "x": 875,
+        "y": 244.4375
+      },
+      "rect": {
+        "bottom": 288.4375,
+        "height": 44,
+        "left": 875,
+        "right": 1335,
+        "top": 244.4375,
+        "width": 460,
+        "x": 875,
+        "y": 244.4375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "150-0002",
+      "labelRect": {
+        "bottom": 382.4375,
+        "height": 44,
+        "left": 875,
+        "right": 1097,
+        "top": 338.4375,
+        "width": 222,
+        "x": 875,
+        "y": 338.4375
+      },
+      "rect": {
+        "bottom": 382.4375,
+        "height": 44,
+        "left": 875,
+        "right": 1097,
+        "top": 338.4375,
+        "width": 222,
+        "x": 875,
+        "y": 338.4375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgb(180, 43, 37)",
+      "label": "清空地址",
+      "labelRect": {
+        "bottom": 461.28125,
+        "height": 22,
+        "left": 1264,
+        "right": 1320,
+        "top": 439.28125,
+        "width": 56,
+        "x": 1264,
+        "y": 439.28125
+      },
+      "rect": {
+        "bottom": 472.28125,
+        "height": 44,
+        "left": 1249,
+        "right": 1335,
+        "top": 428.28125,
+        "width": 86,
+        "x": 1249,
+        "y": 428.28125
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "LINE",
+      "labelRect": {
+        "bottom": 783.375,
+        "height": 44,
+        "left": 345,
+        "right": 630.328125,
+        "top": 739.375,
+        "width": 285.328125,
+        "x": 345,
+        "y": 739.375
+      },
+      "rect": {
+        "bottom": 783.375,
+        "height": 44,
+        "left": 345,
+        "right": 630.328125,
+        "top": 739.375,
+        "width": 285.328125,
+        "x": 345,
+        "y": 739.375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "@aiko-tan",
+      "labelRect": {
+        "bottom": 783.375,
+        "height": 44,
+        "left": 646.328125,
+        "right": 931.65625,
+        "top": 739.375,
+        "width": 285.328125,
+        "x": 646.328125,
+        "y": 739.375
+      },
+      "rect": {
+        "bottom": 783.375,
+        "height": 44,
+        "left": 646.328125,
+        "right": 931.65625,
+        "top": 739.375,
+        "width": 285.328125,
+        "x": 646.328125,
+        "y": 739.375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "Aiko Tan",
+      "labelRect": {
+        "bottom": 783.375,
+        "height": 44,
+        "left": 947.65625,
+        "right": 1233,
+        "top": 739.375,
+        "width": 285.34375,
+        "x": 947.65625,
+        "y": 739.375
+      },
+      "rect": {
+        "bottom": 783.375,
+        "height": 44,
+        "left": 947.65625,
+        "right": 1233,
+        "top": 739.375,
+        "width": 285.34375,
+        "x": 947.65625,
+        "y": 739.375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgb(180, 43, 37)",
+      "label": "移除账号",
+      "labelRect": {
+        "bottom": 772.375,
+        "height": 22,
+        "left": 1264,
+        "right": 1320,
+        "top": 750.375,
+        "width": 56,
+        "x": 1264,
+        "y": 750.375
+      },
+      "rect": {
+        "bottom": 783.375,
+        "height": 44,
+        "left": 1249,
+        "right": 1335,
+        "top": 739.375,
+        "width": 86,
+        "x": 1249,
+        "y": 739.375
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "添加社交账号",
+      "labelRect": {
+        "bottom": 836.375,
+        "height": 22,
+        "left": 360,
+        "right": 444,
+        "top": 814.375,
+        "width": 84,
+        "x": 360,
+        "y": 814.375
+      },
+      "rect": {
+        "bottom": 847.375,
+        "height": 44,
+        "left": 345,
+        "right": 459,
+        "top": 803.375,
+        "width": 114,
+        "x": 345,
+        "y": 803.375
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "",
+      "labelRect": {
+        "bottom": 472.28125,
+        "height": 44,
+        "left": 345,
+        "right": 611,
+        "top": 428.28125,
+        "width": 266,
+        "x": 345,
+        "y": 428.28125
+      },
+      "rect": {
+        "bottom": 472.28125,
+        "height": 44,
+        "left": 345,
+        "right": 611,
+        "top": 428.28125,
+        "width": 266,
+        "x": 345,
+        "y": 428.28125
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgb(255, 255, 255)",
+      "label": "验证邮箱",
+      "labelRect": {
+        "bottom": 461.28125,
+        "height": 22,
+        "left": 638,
+        "right": 694,
+        "top": 439.28125,
+        "width": 56,
+        "x": 638,
+        "y": 439.28125
+      },
+      "rect": {
+        "bottom": 472.28125,
+        "height": 44,
+        "left": 623,
+        "right": 709,
+        "top": 428.28125,
+        "width": 86,
+        "x": 623,
+        "y": 428.28125
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "重新发送",
+      "labelRect": {
+        "bottom": 461.28125,
+        "height": 22,
+        "left": 734,
+        "right": 790,
+        "top": 439.28125,
+        "width": 56,
+        "x": 734,
+        "y": 439.28125
+      },
+      "rect": {
+        "bottom": 472.28125,
+        "height": 44,
+        "left": 719,
+        "right": 805,
+        "top": 428.28125,
+        "width": 86,
+        "x": 719,
+        "y": 428.28125
+      },
+      "tag": "BUTTON"
+    }
+  ],
+  "height": 900,
+  "nestedForms": 0,
+  "overflow": false,
+  "scrollY": 442,
+  "width": 1440
+}

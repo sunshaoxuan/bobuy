@@ -1,0 +1,636 @@
+{
+  "bb_category": {
+    "columns": [
+      "id",
+      "name",
+      "description",
+      "attribute_template",
+      "merchant_id",
+      "tag_key"
+    ],
+    "fingerprint": "16:c3ecfe797571dda3b9ff638380e53bd5"
+  },
+  "bb_chat_message": {
+    "columns": [
+      "id",
+      "order_id",
+      "trip_id",
+      "sender_id",
+      "recipient_id",
+      "content",
+      "type",
+      "metadata",
+      "created_at"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_checkout_identity": {
+    "columns": [
+      "id"
+    ],
+    "fingerprint": "10:44d21ed27da5db2190918f4ad954f38c"
+  },
+  "bb_costco_onboarding_commit": {
+    "columns": [
+      "idempotency_key",
+      "merchant_id",
+      "candidate_hash",
+      "product_id",
+      "product_version",
+      "created_at"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_costco_onboarding_evidence": {
+    "columns": [
+      "merchant_id",
+      "sha256",
+      "supplier_id",
+      "input_hash",
+      "kind",
+      "content_type",
+      "content",
+      "receipt",
+      "created_at"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_costco_onboarding_job": {
+    "columns": [
+      "id",
+      "merchant_id",
+      "supplier_id",
+      "market",
+      "idempotency_key",
+      "input_hash",
+      "revision",
+      "state",
+      "payload",
+      "attempt_history",
+      "attempts",
+      "lease_token",
+      "lease_until",
+      "next_run_at",
+      "created_at",
+      "updated_at"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_currency": {
+    "columns": [
+      "code",
+      "symbol",
+      "fraction_digits",
+      "name",
+      "sale_enabled"
+    ],
+    "fingerprint": "4:8b86ac69e7fa0e5b09defa48f9a44aa4"
+  },
+  "bb_customer_order_amendment": {
+    "columns": [
+      "id",
+      "customer_id",
+      "request_id",
+      "order_id",
+      "payload_hash",
+      "original_order",
+      "result_view",
+      "created_at"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_customer_payment_ledger": {
+    "columns": [
+      "id",
+      "trip_id",
+      "business_id",
+      "customer_id",
+      "amount",
+      "payment_method",
+      "note",
+      "created_at",
+      "operator"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_email_challenge": {
+    "columns": [
+      "user_id",
+      "code_hash",
+      "expires_at",
+      "sent_at",
+      "attempts"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_experience_mapping": {
+    "columns": [
+      "id",
+      "fuzzy_term",
+      "mapped_name",
+      "updated_at"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_financial_audit_log": {
+    "columns": [
+      "id",
+      "trip_id",
+      "action_type",
+      "operator_name",
+      "original_value",
+      "modified_value",
+      "previous_hash",
+      "current_hash",
+      "created_at"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_mail_settings": {
+    "columns": [
+      "id",
+      "version",
+      "enabled",
+      "host",
+      "port",
+      "tls_mode",
+      "username",
+      "from_address",
+      "reply_to",
+      "encrypted_password",
+      "key_id",
+      "updated_by",
+      "updated_at"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_mail_settings_event": {
+    "columns": [
+      "id",
+      "actor_id",
+      "occurred_at",
+      "event_type",
+      "settings_version"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_media_blob": {
+    "columns": [
+      "sha256",
+      "byte_length",
+      "content_type",
+      "busy_until",
+      "gc_candidate_at",
+      "version"
+    ],
+    "fingerprint": "1356:f2f3c1ae29da0da0f4b485018f750cb4"
+  },
+  "bb_media_catalog_guard": {
+    "columns": [
+      "id"
+    ],
+    "fingerprint": "1:d2ce28b9a7fd7e4407e2b0fd499b7fe4"
+  },
+  "bb_media_reference": {
+    "columns": [
+      "image_id",
+      "blob_sha256"
+    ],
+    "fingerprint": "1359:8174081b1027a14ceaf46db60be315f5"
+  },
+  "bb_media_transfer": {
+    "columns": [
+      "image_id",
+      "raw_sha256",
+      "object_key",
+      "byte_length",
+      "content_type",
+      "state",
+      "attempts",
+      "lease_token",
+      "lease_until",
+      "verified_at",
+      "updated_at",
+      "version"
+    ],
+    "fingerprint": "1359:2ca19bbb737de2cd7434b442633ee799"
+  },
+  "bb_merchant_customer": {
+    "columns": [
+      "id",
+      "merchant_id",
+      "customer_id",
+      "approved_at",
+      "approved_by"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_merchant_sku": {
+    "columns": [
+      "id",
+      "product_id",
+      "merchant_id",
+      "sku_code",
+      "last_price",
+      "stock_status"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_order_header": {
+    "columns": [
+      "id",
+      "business_id",
+      "customer_id",
+      "trip_id",
+      "desired_delivery_window",
+      "created_at",
+      "status",
+      "status_updated_at",
+      "payment_method",
+      "payment_status",
+      "total_amount",
+      "receipt_confirmed_at",
+      "receipt_confirmed_by",
+      "billing_confirmed_at",
+      "billing_confirmed_by",
+      "delivery_status",
+      "lines",
+      "currency",
+      "product_identities",
+      "delivery_snapshot",
+      "checkout_payload_hash",
+      "order_revision"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_procurement_receipt": {
+    "columns": [
+      "id",
+      "trip_id",
+      "file_name",
+      "original_object_key",
+      "original_image_url",
+      "thumbnail_object_key",
+      "thumbnail_url",
+      "processing_status",
+      "uploaded_at",
+      "updated_at",
+      "source_image_base64",
+      "reconciliation_result",
+      "raw_recognition_result",
+      "manual_reconciliation_result"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_product": {
+    "columns": [
+      "id",
+      "name",
+      "description",
+      "brand",
+      "base_price",
+      "weight",
+      "volume",
+      "media_gallery",
+      "storage_condition",
+      "order_method",
+      "category_id",
+      "merchant_skus",
+      "item_number",
+      "price_tiers",
+      "is_recommended",
+      "is_temporary",
+      "visibility_status",
+      "updated_at",
+      "attributes",
+      "merchant_id",
+      "sale",
+      "currency",
+      "record_version",
+      "catalog_data",
+      "deleted_at",
+      "deleted_by"
+    ],
+    "fingerprint": "405:bea10d8e4bb015ce61df388fc1c921ad"
+  },
+  "bb_product_catalog_recovery": {
+    "columns": [
+      "id",
+      "merchant_id",
+      "product_id",
+      "version_after",
+      "created_at",
+      "restored_from_id",
+      "original"
+    ],
+    "fingerprint": "280:0379e74b7643920afc6192cb14585622"
+  },
+  "bb_product_click": {
+    "columns": [
+      "product_id",
+      "clicks"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_product_lifecycle_event": {
+    "columns": [
+      "id",
+      "product_id",
+      "action",
+      "actor_id",
+      "occurred_at"
+    ],
+    "fingerprint": "20:92af702cbb72942f6b1eb9fdb2aa5c08"
+  },
+  "bb_product_marker_definition": {
+    "columns": [
+      "id",
+      "merchant_id",
+      "code",
+      "badge",
+      "name",
+      "description",
+      "color",
+      "sort_order",
+      "enabled",
+      "version"
+    ],
+    "fingerprint": "4:ac2fad917fb50397af88cb5b0b621f6a"
+  },
+  "bb_product_marker_set": {
+    "columns": [
+      "product_id",
+      "merchant_id",
+      "marker_ids",
+      "version"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_product_price_adjustment": {
+    "columns": [
+      "id",
+      "version",
+      "merchant_id",
+      "product_id",
+      "channel",
+      "currency",
+      "amount",
+      "unit",
+      "starts_at",
+      "ends_at",
+      "status",
+      "source_note",
+      "created_by",
+      "created_at",
+      "updated_by",
+      "updated_at",
+      "approved_by",
+      "approved_at",
+      "cancelled_by",
+      "cancelled_at"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_product_rating": {
+    "columns": [
+      "product_id",
+      "merchant_id",
+      "stars",
+      "public_visible",
+      "version",
+      "reviewed_at"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_product_review": {
+    "columns": [
+      "id",
+      "product_id",
+      "user_id",
+      "stars",
+      "comment",
+      "version",
+      "created_at",
+      "updated_at"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_recommendation_article_revision": {
+    "columns": [
+      "id",
+      "merchant_id",
+      "post_id",
+      "facts_hash",
+      "facts",
+      "recorded_at"
+    ],
+    "fingerprint": "72:063920c6b097db4704ecd8e94a575180"
+  },
+  "bb_recommendation_image": {
+    "columns": [
+      "id",
+      "merchant_id",
+      "image_hash",
+      "content_type",
+      "content",
+      "access_scope",
+      "raw_sha256",
+      "byte_length"
+    ],
+    "fingerprint": "1359:b152d96ca2e9180b8af4aa467c63233c"
+  },
+  "bb_recommendation_item": {
+    "columns": [
+      "id",
+      "post_id",
+      "product_id",
+      "name",
+      "item_number",
+      "reference_price",
+      "image_hash",
+      "image_url",
+      "created_at",
+      "original_price",
+      "discount_amount",
+      "price_unit",
+      "offer_start",
+      "offer_end",
+      "coupon_start",
+      "coupon_end",
+      "offer_notes",
+      "category_ids",
+      "supplier_id",
+      "show_supplier",
+      "specification",
+      "description",
+      "translations",
+      "translated_source",
+      "gallery",
+      "offer_identity",
+      "reference_context",
+      "publication_state",
+      "publication_snapshot",
+      "published_at",
+      "published_by",
+      "publication_request_id",
+      "publication_request_hash",
+      "linked_product_version",
+      "addition_payload_hash"
+    ],
+    "fingerprint": "389:cc064e629fbc8a16a7f94e8eef119545"
+  },
+  "bb_recommendation_post": {
+    "columns": [
+      "id",
+      "merchant_id",
+      "title",
+      "body",
+      "published",
+      "version",
+      "created_at",
+      "updated_at",
+      "published_at",
+      "publisher_id",
+      "publisher_name",
+      "article_source_locale",
+      "article_translations",
+      "service_offer",
+      "service_source_key",
+      "issue_date",
+      "issue_date_source_ref",
+      "issue_date_source_hash",
+      "issue_date_reviewed_by",
+      "issue_date_reviewed_at"
+    ],
+    "fingerprint": "11:a5abb4a38ca2af325bc6db4ff70a4d8c"
+  },
+  "bb_reference_quote_revision": {
+    "columns": [
+      "id",
+      "merchant_id",
+      "post_id",
+      "item_id",
+      "product_id",
+      "facts_hash",
+      "facts",
+      "recorded_at"
+    ],
+    "fingerprint": "450:41dd6660fd1ec95ffbdec8cc04da2971"
+  },
+  "bb_refresh_token_session": {
+    "columns": [
+      "id",
+      "user_id",
+      "token_hash",
+      "family_id",
+      "rotation_source_id",
+      "client_fingerprint",
+      "created_at",
+      "last_used_at",
+      "expires_at",
+      "revoked_at",
+      "revocation_reason"
+    ],
+    "fingerprint": "200:c98bc4bb7546a8e598c492db045b8710"
+  },
+  "bb_supplier": {
+    "columns": [
+      "id",
+      "name",
+      "description",
+      "contact_info",
+      "onboarding_rules",
+      "merchant_id"
+    ],
+    "fingerprint": "1:84b6d300a15757a29b8eb41de2912baa"
+  },
+  "bb_trip": {
+    "columns": [
+      "id",
+      "agent_id",
+      "delivery_area",
+      "delivery_date",
+      "status",
+      "status_updated_at"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_trip_expense": {
+    "columns": [
+      "id",
+      "trip_id",
+      "cost",
+      "category",
+      "receipt_object_key",
+      "receipt_thumbnail_url",
+      "ocr_status",
+      "created_at"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_trip_logistics_tracking": {
+    "columns": [
+      "id",
+      "trip_id",
+      "tracking_number",
+      "channel",
+      "provider",
+      "status",
+      "last_message",
+      "settlement_reminder_triggered",
+      "last_checked_at",
+      "created_at",
+      "updated_at"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_trip_profit_share_config": {
+    "columns": [
+      "trip_id",
+      "purchaser_ratio_percent",
+      "promoter_ratio_percent",
+      "updated_at"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "bb_user": {
+    "columns": [
+      "id",
+      "name",
+      "username",
+      "password_hash",
+      "enabled",
+      "rating",
+      "phone",
+      "email",
+      "note",
+      "default_address",
+      "social_accounts",
+      "email_verified_at",
+      "roles",
+      "platform_admin"
+    ],
+    "fingerprint": "1:17f24b28b67a13fd64c978dc45864c16"
+  },
+  "partner_wallets": {
+    "columns": [
+      "id",
+      "partner_id",
+      "balance",
+      "currency",
+      "updated_at"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "wallet_transactions": {
+    "columns": [
+      "id",
+      "partner_id",
+      "amount",
+      "type",
+      "trip_id",
+      "created_at"
+    ],
+    "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+  }
+}

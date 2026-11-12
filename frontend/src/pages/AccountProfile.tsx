@@ -67,15 +67,18 @@ export function AccountProfile({userId, verification}: {userId:number; verificat
     {error&&<Alert type="error" message={error}/>}
     {saved&&<Alert type="success" message={t('profile.saved')}/>}
     {!profile?error?<Button onClick={()=>void refresh().catch(()=>{})}>{t('maintenance.retry')}</Button>:<Spin/>:<>
+      <div className="profile-layout">
       <Form className="profile-edit-form" form={form} layout="vertical" requiredMark={false} onFinish={submit} disabled={busy} scrollToFirstError={{block:'center',scrollMode:'always'}}>
-        <section className="profile-block" aria-labelledby="profile-basic-title">
+        <section className="profile-block profile-basic" aria-labelledby="profile-basic-title">
         <header className="profile-block-heading"><UserOutlined/><h3 id="profile-basic-title">{t('profile.basics')}</h3></header>
+        <div className="profile-basic-fields">
         <Form.Item name="name" label={t('profile.name')} rules={[{required:true,whitespace:true,max:100,message:t('profile.required')}]}><Input autoComplete="name" maxLength={100}/></Form.Item>
-        <Form.Item name="email" label={t('store.email')} rules={[{required:true,type:'email',max:254,message:t('store.email_required')}]}><Input type="email" autoComplete="email" maxLength={254}/></Form.Item>
-        <p className="profile-hint">{t('profile.email_hint')}</p>
         <Form.Item name="phone" label={t('profile.phone')}><Input autoComplete="tel" maxLength={50}/></Form.Item>
+        <Form.Item name="email" label={t('store.email')} rules={[{required:true,type:'email',max:254,message:t('store.email_required')}]}><Input type="email" autoComplete="email" maxLength={254}/></Form.Item>
+        </div>
+        <p className="profile-hint">{t('profile.email_hint')}</p>
         </section>
-        <section className="profile-block" aria-labelledby="profile-address-title">
+        <section className="profile-block profile-address" aria-labelledby="profile-address-title">
         <header className="profile-block-heading"><EnvironmentOutlined/><h3 id="profile-address-title">{t('profile.address')}</h3></header><p className="profile-hint">{t('profile.optional')}</p>
           <div className="profile-address-fields">
           {(['contactName','phone','countryRegion','city','addressLine','postalCode'] as const).map(field=><Form.Item key={field} name={['defaultAddress',field]} label={t('profile.'+field)}><Input maxLength={field==='addressLine'?1000:field==='postalCode'?30:field==='phone'?50:100}/></Form.Item>)}
@@ -96,6 +99,7 @@ export function AccountProfile({userId, verification}: {userId:number; verificat
         <div className="profile-save"><Button type="primary" htmlType="submit" loading={busy}>{t('profile.save')}</Button></div>
       </Form>
       <div className="profile-verification">{verification(refresh,profile)}</div>
+      </div>
     </>}
   </section>;
 }

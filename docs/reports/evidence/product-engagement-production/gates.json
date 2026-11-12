@@ -1,0 +1,26 @@
+{
+  "source": "ebea743436e6e30056c54b9f851a339bf3568dac",
+  "result": "PASS",
+  "frontendTests": 773,
+  "backend": {
+    "tests": 662,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 24
+  },
+  "configuredJacoco": "PASS",
+  "coverage": {
+    "LINE": 0.9453125,
+    "BRANCH": 0.7777777777777778
+  },
+  "hostJava": "22, compiled release17; actual Java17 image rehearsal required before activation",
+  "legacyGuardFixture": "byte-pinned 48433bd manifest, 47 tests; unchanged guard source",
+  "logs": {
+    "backend-final-coverage.log": "dfa221be22b3dc6d0dea5a53bd94ce7f99afd9ab4f5ae174589f04f874ad22b1",
+    "core-package.log": "d99b10bc57d55d2115f61d2453276fbe36120df63ca73abd60d6bc012005bd10",
+    "frontend-tests.log": "f7534125f45a1571bdd21a86e312b02e5e187450e4b310a15b5dccb5d4aa1f41",
+    "frontend-build.log": "eba30cd80f930216b560f4a7af4c2000f0a22b7556fc11c415a7f65150471e51",
+    "release-guards-canonical-fixture.log": "8cc249ffe0d7223ae0a01123f4f8b8761226ceaa74b31a31ce172d39a9e085af",
+    "production-isolation.log": "05acbef6c24172963203326a3fe2a9f4b4f924d064c34c75edb3a1c72194fdd8"
+  }
+}

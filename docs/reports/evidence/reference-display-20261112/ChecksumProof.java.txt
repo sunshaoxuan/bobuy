@@ -1,0 +1,3 @@
+import org.flywaydb.core.internal.resolver.ChecksumCalculator;
+import org.flywaydb.core.internal.resource.StringResource;
+class ChecksumProof {public static void main(String[] args){int lf=ChecksumCalculator.calculate(new StringResource("SELECT 1;\nSELECT 2;\n")),crlf=ChecksumCalculator.calculate(new StringResource("SELECT 1;\r\nSELECT 2;\r\n")),changed=ChecksumCalculator.calculate(new StringResource("SELECT 1;\nSELECT 3;\n"));if(lf!=crlf||lf==changed)throw new AssertionError();System.out.println("PASS actual Flyway 11.14.1: LF="+lf+", CRLF="+crlf+", SQL mutation="+changed);}}

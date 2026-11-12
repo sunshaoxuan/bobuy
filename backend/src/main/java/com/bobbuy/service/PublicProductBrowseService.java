@@ -20,14 +20,16 @@ public class PublicProductBrowseService {
  private final ObjectMapper json=new ObjectMapper().findAndRegisterModules()
    .configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS,true)
    .configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY,true);
- public PublicProductBrowseService(PublicProductCatalogService c,ProductMarkerService m){catalog=c;markers=m;}
+ private final ProductPopularityService popularity;private final PublicBrowsePriceService prices;
+ public PublicProductBrowseService(PublicProductCatalogService c,ProductMarkerService m){this(c,m,null,null);}
+ @org.springframework.beans.factory.annotation.Autowired public PublicProductBrowseService(PublicProductCatalogService c,ProductMarkerService m,ProductPopularityService popularity,PublicBrowsePriceService prices){catalog=c;markers=m;this.popularity=popularity;this.prices=prices;}
  public record Facet(String id,Map<String,String> name,long count){}
  public record CardReference(java.math.BigDecimal amount,String currency,String unit,Long postId,Long itemId,String state,java.math.BigDecimal originalPrice,java.math.BigDecimal discountAmount){}
  public record Card(String productId,Long merchantId,Map<String,String> name,String brand,String itemNumber,
    Map<String,String> specification,String model,String packaging,RecommendationItem.Picture image,
    List<RecommendationItem.Label> categories,List<ProductMarkerService.Definition> markers,boolean reviewedMaster,java.math.BigDecimal rating,CardReference reference){}
- private static CardReference reference(PublicProductCatalogService.Entry entry){
-  return entry.referenceOffers().stream().filter(offer->offer.facts().referencePrice!=null).findFirst().map(offer->{var facts=offer.facts();return new CardReference(facts.referencePrice,"JPY",facts.priceUnit,offer.postId(),facts.id,ReferenceOfferWindow.resolve(facts.offerStart,facts.offerEnd,facts.referenceContext).state(java.time.Instant.now()),facts.originalPrice,facts.discountAmount);}).orElse(null);
+ private static CardReference reference(PublicProductCatalogService.Entry entry,java.time.Instant now){
+  return ReferencePriceDisplay.main(entry).map(offer->{var facts=offer.facts();var display=ReferencePriceDisplay.of(facts,now);return display.amount()==null?null:new CardReference(display.amount(),"JPY",facts.priceUnit,offer.postId(),facts.id,display.state(),display.originalPrice(),display.discountAmount());}).orElse(null);
  }
  public record Browse(List<Card> items,int page,int size,long scopeTotal,long matchedTotal,boolean hasNext,
    String revision,List<Facet> categories,long unclassified,String query,String category,String locale,String dataset,String datasetRevision,long markedScopeTotal){}
@@ -57,18 +59,27 @@ public class PublicProductBrowseService {
  }
  @Transactional(readOnly=true,isolation=Isolation.REPEATABLE_READ)
  public Browse browse(int page,Long merchant,String query,String category,String locale,boolean marked,String expected){
+  return browse(page,merchant,query,category,locale,marked,expected,"default");
+ }
+ @Transactional(readOnly=true,isolation=Isolation.REPEATABLE_READ)
+ public Browse browse(int page,Long merchant,String query,String category,String locale,boolean marked,String expected,String order){
+  ProductBrowseOrder.validate(order);
   validate(page,merchant,query,category,locale,expected);String q=text(query).strip().toLowerCase(Locale.ROOT),cat=text(category);
-  var data=dataset(merchant);String dataset=marked?"marked":"all";
-  String datasetVersion=revision(Arrays.asList("public-product-data-v1",merchant,java.time.LocalDate.now(java.time.ZoneId.of("Asia/Tokyo")),data));
-  String version=revision(Arrays.asList("public-product-browse-v1",datasetVersion,q,cat,locale,dataset));
+  var now=java.time.Instant.now();var data=dataset(merchant);String dataset=marked?"marked":"all";
+  String datasetVersion=revision(Arrays.asList("public-product-data-v1",merchant,now.atZone(java.time.ZoneId.of("Asia/Tokyo")).toLocalDate(),data));
+  var currentPrices=order.startsWith("price")&&prices!=null?prices.prices(data.entries().stream().map(e->e.productId()).toList()):Map.<String,PublicBrowsePriceService.Price>of();
+  String version=revision(Arrays.asList("public-product-browse-v1",datasetVersion,q,cat,locale,dataset,order,currentPrices,order.startsWith("heat")&&popularity!=null?popularity.counts():Map.of()));
   if(expected!=null&&!expected.equals(version))throw new Changed();
   var scope=data.entries().stream().filter(e->!marked||!data.markers().getOrDefault(e.productId(),List.of()).isEmpty()).filter(e->matches(e,q)).toList();
   var labels=new LinkedHashMap<String,RecommendationItem.Label>();var counts=new LinkedHashMap<String,Long>();long unclassified=0;
   for(var entry:scope){if(entry.categories().isEmpty())unclassified++;var seen=new HashSet<String>();for(var c:entry.categories())if(seen.add(c.id())){labels.put(c.id(),c);counts.merge(c.id(),1L,Long::sum);}}
   var facets=counts.entrySet().stream().map(e->new Facet(e.getKey(),labels.get(e.getKey()).name(),e.getValue())).toList();
   var filtered=scope.stream().filter(e->cat.isEmpty()||cat.equals("__unclassified")&&e.categories().isEmpty()||e.categories().stream().anyMatch(c->c.id().equals(cat))).toList();
+  var heat=popularity==null?Map.<String,Long>of():popularity.counts();
+  filtered=ProductBrowseOrder.sorted(filtered,order,e->reference(e,now)==null?null:reference(e,now).amount(),e->e.rating(),e->heat.getOrDefault(e.productId(),0L));
+  if(order.startsWith("price"))filtered=ProductBrowseOrder.prices(filtered,order,e->{var actual=currentPrices.get(e.productId());var ref=reference(e,now);return actual!=null?actual:ref==null?null:new PublicBrowsePriceService.Price(ref.amount(),ref.currency());});
   int start=(int)Math.min((long)page*24,filtered.size()),end=Math.min(start+24,filtered.size());
-  var cards=filtered.subList(start,end).stream().map(e->new Card(e.productId(),e.merchantId(),e.name(),e.brand(),e.itemNumber(),e.specification(),e.model(),e.packaging(),e.gallery().isEmpty()?null:e.gallery().get(0),e.categories(),data.markers().getOrDefault(e.productId(),List.of()),e.reviewedMaster(),e.rating(),reference(e))).toList();
+  var cards=filtered.subList(start,end).stream().map(e->new Card(e.productId(),e.merchantId(),e.name(),e.brand(),e.itemNumber(),e.specification(),e.model(),e.packaging(),e.gallery().isEmpty()?null:e.gallery().get(0),e.categories(),data.markers().getOrDefault(e.productId(),List.of()),e.reviewedMaster(),e.rating(),reference(e,now))).toList();
   long markedScopeTotal=data.entries().stream().filter(e->!data.markers().getOrDefault(e.productId(),List.of()).isEmpty()).count();
   return new Browse(cards,page,24,scope.size(),filtered.size(),end<filtered.size(),version,facets,unclassified,q,cat,locale,dataset,datasetVersion,markedScopeTotal);
  }

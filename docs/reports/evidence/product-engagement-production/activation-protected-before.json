@@ -1,0 +1,41 @@
+{
+  "config_hashes": {
+    "/opt/rhospital-dr/postgres-compose.yml": "f275c2eef161265928c45e7a8b56377af7b39e901fc999ec4db568e6d04c1362"
+  },
+  "containers": {
+    "/rhospital-etcd": {
+      "configuration_sha256": "98159769de9f9fc198c0a6df31a881a28652ad5cc6f8585b94752edada091d9b",
+      "restart_count": 0,
+      "started_at": "2026-10-27T10:17:53.415567326Z",
+      "status": "running"
+    },
+    "/rhospital-ha-bbs-replica": {
+      "configuration_sha256": "012531641d9a8b9398eea6bdc3a05fd706143e100e292c35be3cd5eca818afcd",
+      "restart_count": 0,
+      "started_at": "2026-10-27T10:17:45.065943327Z",
+      "status": "running"
+    },
+    "/rhospital-ha-game-replica": {
+      "configuration_sha256": "1210c8d6db5a72cd5e5a9d0a7cb809164c02ac43ef70b16dab0b7a1fb829b0ae",
+      "restart_count": 0,
+      "started_at": "2026-10-27T10:17:45.038579966Z",
+      "status": "running"
+    },
+    "/rhospital-postgres-dr": {
+      "configuration_sha256": "eb532bc8f3987e66eee9d003e275646e74b077708f9bed6f042bd3f87edbd0ce",
+      "restart_count": 0,
+      "started_at": "2026-10-02T19:42:23.634321225Z",
+      "status": "exited"
+    }
+  },
+  "images": [
+    "hospital-backend:20261028 8f2e0b5d6641",
+    "hospital-backend:20261101 89719fcb709c"
+  ],
+  "units": {
+    "bbs-source-tunnel": "MainPID=3070795\nActiveState=active\nActiveEnterTimestamp=Fri 2026-11-06 18:35:45 JST",
+    "rhospital-etcd": "MainPID=2916\nActiveState=active\nActiveEnterTimestamp=Tue 2026-10-27 19:17:52 JST",
+    "rhospital-ha-firewall": "MainPID=0\nActiveState=active\nActiveEnterTimestamp=Tue 2026-10-27 19:17:42 JST",
+    "rhospital-ha-pg-tunnel": "MainPID=3071208\nActiveState=active\nActiveEnterTimestamp=Fri 2026-11-06 18:36:06 JST"
+  }
+}

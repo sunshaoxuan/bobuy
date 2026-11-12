@@ -1,0 +1,17 @@
+{
+  "source": "52ef9976c069a9a98e253a8f5229af230142fc7f",
+  "changedFiles": [
+    "frontend/public/release-maintenance.html",
+    "frontend/src/locales/en-US.ts",
+    "frontend/src/locales/zh-CN.ts",
+    "frontend/src/locales/zh-TW.ts"
+  ],
+  "files": {
+    "frontend/public/release-maintenance.html": "1d43b536569277a57aaceca328c9288e35292ddf015fbc03889f71a8fac093a8",
+    "frontend/src/locales/en-US.ts": "28a2b47c2975f0b280923d68a81bc8d52b753880a4566adf81b3a50a8a8dda6a",
+    "frontend/src/locales/zh-CN.ts": "919cada7b4dba41dc7ce46db53f0b0f974fc9777a97bb1d20035635c1fdffb0d",
+    "frontend/src/locales/zh-TW.ts": "456ad1a90e6fce0d8e8cd96a05186dc0ff831013f4c1b7bde112ee508cdc0074",
+    "frontend/package-lock.json": "65076ca75b4b9e93f390aae56660356aea71c0317f639037faf24ab44924642e",
+    "frontend/nginx.conf": "c3a97167ab58eddd51c62453001d5fe2a5aabd807521d418feb0e21ff985a959"
+  }
+}

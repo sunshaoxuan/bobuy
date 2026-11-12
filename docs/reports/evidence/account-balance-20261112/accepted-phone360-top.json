@@ -1,0 +1,231 @@
+{
+  "boxes": {
+    "address": {
+      "bottom": 1870.5625,
+      "height": 754.09375,
+      "width": 313,
+      "x": 16,
+      "y": 1116.46875
+    },
+    "basic": {
+      "bottom": 744.53125,
+      "height": 429.1875,
+      "width": 313,
+      "x": 16,
+      "y": 315.34375
+    },
+    "save": {
+      "bottom": 2547.65625,
+      "height": 48,
+      "width": 313,
+      "x": 16,
+      "y": 2499.65625
+    },
+    "social": {
+      "bottom": 2483.65625,
+      "height": 597.09375,
+      "width": 313,
+      "x": 16,
+      "y": 1886.5625
+    },
+    "verification": {
+      "bottom": 1100.46875,
+      "height": 339.9375,
+      "width": 313,
+      "x": 16,
+      "y": 760.53125
+    }
+  },
+  "chrome": [
+    {
+      "className": "store-header",
+      "color": "rgb(255, 255, 255)"
+    },
+    {
+      "className": "browse-mobile-shortcuts",
+      "color": "rgb(255, 255, 255)"
+    }
+  ],
+  "controls": [
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "退出登录",
+      "labelRect": {
+        "bottom": 109,
+        "height": 22,
+        "left": 258,
+        "right": 314,
+        "top": 87,
+        "width": 56,
+        "x": 258,
+        "y": 87
+      },
+      "rect": {
+        "bottom": 120,
+        "height": 44,
+        "left": 221,
+        "right": 329,
+        "top": 76,
+        "width": 108,
+        "x": 221,
+        "y": 76
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "color": "rgb(189, 41, 36)",
+      "label": "我的资料",
+      "labelRect": {
+        "bottom": 224.25,
+        "height": 19.5,
+        "left": 39.5,
+        "right": 91.5,
+        "top": 204.75,
+        "width": 52,
+        "x": 39.5,
+        "y": 204.75
+      },
+      "rect": {
+        "bottom": 244,
+        "height": 81,
+        "left": 16,
+        "right": 115,
+        "top": 163,
+        "width": 99,
+        "x": 16,
+        "y": 163
+      },
+      "tag": "A"
+    },
+    {
+      "color": "rgb(35, 35, 35)",
+      "label": "我的订单",
+      "labelRect": {
+        "bottom": 224.25,
+        "height": 19.5,
+        "left": 146.5,
+        "right": 198.5,
+        "top": 204.75,
+        "width": 52,
+        "x": 146.5,
+        "y": 204.75
+      },
+      "rect": {
+        "bottom": 244,
+        "height": 81,
+        "left": 123,
+        "right": 222,
+        "top": 163,
+        "width": 99,
+        "x": 123,
+        "y": 163
+      },
+      "tag": "A"
+    },
+    {
+      "color": "rgb(35, 35, 35)",
+      "label": "商家维护",
+      "labelRect": {
+        "bottom": 224.25,
+        "height": 19.5,
+        "left": 253.5,
+        "right": 305.5,
+        "top": 204.75,
+        "width": 52,
+        "x": 253.5,
+        "y": 204.75
+      },
+      "rect": {
+        "bottom": 244,
+        "height": 81,
+        "left": 230,
+        "right": 329,
+        "top": 163,
+        "width": 99,
+        "x": 230,
+        "y": 163
+      },
+      "tag": "A"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "Aiko Tan",
+      "labelRect": {
+        "bottom": 479.34375,
+        "height": 44,
+        "left": 33,
+        "right": 312,
+        "top": 435.34375,
+        "width": 279,
+        "x": 33,
+        "y": 435.34375
+      },
+      "rect": {
+        "bottom": 479.34375,
+        "height": 44,
+        "left": 33,
+        "right": 312,
+        "top": 435.34375,
+        "width": 279,
+        "x": 33,
+        "y": 435.34375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "<redacted>",
+      "labelRect": {
+        "bottom": 573.34375,
+        "height": 44,
+        "left": 33,
+        "right": 312,
+        "top": 529.34375,
+        "width": 279,
+        "x": 33,
+        "y": 529.34375
+      },
+      "rect": {
+        "bottom": 573.34375,
+        "height": 44,
+        "left": 33,
+        "right": 312,
+        "top": 529.34375,
+        "width": 279,
+        "x": 33,
+        "y": 529.34375
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "<redacted>",
+      "labelRect": {
+        "bottom": 667.34375,
+        "height": 44,
+        "left": 33,
+        "right": 312,
+        "top": 623.34375,
+        "width": 279,
+        "x": 33,
+        "y": 623.34375
+      },
+      "rect": {
+        "bottom": 667.34375,
+        "height": 44,
+        "left": 33,
+        "right": 312,
+        "top": 623.34375,
+        "width": 279,
+        "x": 33,
+        "y": 623.34375
+      },
+      "tag": "INPUT"
+    }
+  ],
+  "height": 800,
+  "nestedForms": 0,
+  "overflow": false,
+  "scrollY": 0,
+  "width": 360
+}

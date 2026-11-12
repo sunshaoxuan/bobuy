@@ -1,0 +1,1 @@
+{"result": "PASS", "removed": ["/opt/bobuy/releases/20261112.reference-display", "/opt/bobuy/releases/20261112.reference-display.2", "/opt/bobuy/releases/20261112.reference-display.3"], "preserved": ["20261112.reference-display.4", "20261112.reference-sort", "all actual rollback images and backups", "all other releases and protected services"]}

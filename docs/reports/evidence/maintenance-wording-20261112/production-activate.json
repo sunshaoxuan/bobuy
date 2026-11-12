@@ -1,0 +1,8 @@
+{
+  "phase": "FRONTEND_LIVE",
+  "at": "2026-11-11T23:29:07Z",
+  "source": "52ef9976c069a9a98e253a8f5229af230142fc7f",
+  "frontendOnly": true,
+  "databaseWrites": false,
+  "protectedUnchanged": true
+}
