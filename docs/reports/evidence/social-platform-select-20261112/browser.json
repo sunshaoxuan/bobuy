@@ -120,6 +120,12 @@
       "consoleErrors": 0,
       "base": "88bdadc",
       "screenshot": "accepted-compiled-integrated.png"
+    },
+    "final": {
+      "source": "383247c457ab16d034289cf1f281bb905b963724",
+      "entry": "/assets/index-Dq52I0ly.js",
+      "css": "/assets/index-C6hUQnUV.css",
+      "consoleErrors": 0
     }
   }
 }

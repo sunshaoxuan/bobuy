@@ -1,11 +1,13 @@
 """Measure visible glyph pixels of real selector backgrounds and popup options."""
 from pathlib import Path
 from PIL import Image
-import json,math,statistics
+import json,math,statistics,sys
 ROOT=Path(__file__).parent
+production='--production' in sys.argv
+INPUT=ROOT/'private' if production else ROOT
 results=[];failures=[]
-for file in sorted(ROOT.glob('accepted-*.json')):
- if not (file.name.startswith('accepted-final') or file.name=='accepted-compiled-final.json'):continue
+for file in sorted(INPUT.glob('production-corrected-*.json' if production else 'accepted-*.json')):
+ if not production and not (file.name.startswith('accepted-final') or file.name=='accepted-compiled-final.json'):continue
  data=json.loads(file.read_text(encoding='utf-8'));im=Image.open(file.with_suffix('.png')).convert('RGB')
  assert im.size==(data['width'],data['height']) and not data['overflow']
  popup=data['popup']
@@ -28,6 +30,7 @@ for file in sorted(ROOT.glob('accepted-*.json')):
   results.append(row)
   if dy>tolerance+.001 or min(margins)<3:failures.append(row)
 out={'controls':len(results),'result':'FAIL' if failures else 'PASS','measurements':results,'failures':failures,'scope':'geometry and real glyph pixels only; visual review separate'}
-(ROOT/'control-pixels.json').write_text(json.dumps(out,indent=2,ensure_ascii=False),encoding='utf-8')
+assert results,'No measured controls'
+(ROOT/('production-control-pixels.json' if production else 'control-pixels.json')).write_text(json.dumps(out,indent=2,ensure_ascii=False),encoding='utf-8')
 print(json.dumps({'controls':len(results),'failures':failures},ensure_ascii=True))
 assert not failures

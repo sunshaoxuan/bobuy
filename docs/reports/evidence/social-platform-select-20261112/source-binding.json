@@ -1,5 +1,5 @@
 {
-  "source": "16036b0264b1076063994acef905ca2e2bdffab1",
+  "source": "ec24fa9af47b38999b98fc848e8ccf77787ddad2",
   "changedFiles": [
     "frontend/src/pages/AccountProfile.tsx",
     "frontend/src/account.css",
@@ -11,7 +11,7 @@
   ],
   "files": {
     "frontend/src/pages/AccountProfile.tsx": "b42866f2b7314613fa73f83d640d61cc4591d10d7f7acbbefc459ff978762173",
-    "frontend/src/account.css": "51ee25fb73be49e0bf614f2d538910ccc1b1f37b179905240a75ddd3b42e13a3",
+    "frontend/src/account.css": "404b96c0460ab20b5d0779c20622a0f9b60e1c8b7ed524d55a5fff86a4aa4ebe",
     "frontend/src/socialPlatforms.ts": "6a59fa4c7c0aa109cfdde10e83077109c32f447f5dd4f9936d83f681944de278",
     "frontend/src/locales/zh-CN.ts": "486f3aec64190217f3d9bdb35d285dfd9f4840bb1c92261d97770cb00943be07",
     "frontend/src/locales/zh-TW.ts": "bd97193f2b70fa46493e5571ac61bc308c123a7c912ba3854766a9638e226656",

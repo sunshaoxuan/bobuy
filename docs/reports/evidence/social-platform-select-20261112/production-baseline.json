@@ -1,8 +1,8 @@
 {
   "frontend": {
-    "image": "sha256:220bf3896658f608196613e914b6a9d49bd6b4c4f021d97494ad8fd432966083",
-    "tag": "bobuy/frontend:20261112.mail-settings.2",
-    "revision": "87042bfbad767951fda84d38d0b293ef086863db",
+    "image": "sha256:8f4159e5441f03c1385b2988fe242ecef5a921ef63c7a38a5220eb60ff250307",
+    "tag": "bobuy/frontend:20261112.mail-settings.3",
+    "revision": "f4fae3d05d61c2b697cba4f6ac62f07b55d58790",
     "health": "running"
   },
   "core": {

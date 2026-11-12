@@ -1,0 +1,111 @@
+{
+  "source": "961d2a39b9fe6abbc29796805069d0efe5d09666",
+  "environment": "production, existing account, read only",
+  "entry": "/assets/index-B9PrLgo_.js",
+  "css": "/assets/index-C6hUQnUV.css",
+  "writes": [],
+  "truncated": true,
+  "hasMore": false,
+  "network": {
+    "responses": [
+      {
+        "path": "/assets/Orders-UpqzmMkH.js",
+        "status": 200
+      },
+      {
+        "path": "/assets/styleChecker-B_XQZqqa.js",
+        "status": 200
+      },
+      {
+        "path": "/assets/ProductMetadata-CbY40b5z.js",
+        "status": 200
+      },
+      {
+        "path": "/assets/OrderProductIdentity-DKwGs8pZ.js",
+        "status": 200
+      },
+      {
+        "path": "/assets/index-qEdo4sEm.js",
+        "status": 200
+      },
+      {
+        "path": "/assets/EditOutlined-Cpn27j1E.js",
+        "status": 200
+      },
+      {
+        "path": "/assets/useBreakpoint-BkTKMv-b.js",
+        "status": 200
+      },
+      {
+        "path": "/assets/index-sQXM2C5b.js",
+        "status": 200
+      },
+      {
+        "path": "/assets/Skeleton-B_DLNVVV.js",
+        "status": 200
+      },
+      {
+        "path": "/favicon.ico",
+        "status": 200
+      },
+      {
+        "path": "/assets/Pagination-CbsHBhcR.js",
+        "status": 200
+      },
+      {
+        "path": "/assets/index-CsCmpZ8H.js",
+        "status": 200
+      },
+      {
+        "path": "/assets/Table-BilVqJWQ.js",
+        "status": 200
+      },
+      {
+        "path": "/assets/index-B9giOJ6b.js",
+        "status": 200
+      },
+      {
+        "path": "/assets/Collapse-DTRObWzQ.js",
+        "status": 200
+      },
+      {
+        "path": "/api/trips",
+        "status": 200
+      },
+      {
+        "path": "/cdn-cgi/rum",
+        "status": 204
+      },
+      {
+        "path": "/cdn-cgi/rum",
+        "status": 204
+      },
+      {
+        "path": "/api/auth/profile",
+        "status": 200
+      },
+      {
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "path": "/favicon.ico",
+        "status": 200
+      }
+    ],
+    "writes": [],
+    "truncated": false,
+    "hasMore": false
+  },
+  "console": {
+    "applicationErrors": 0,
+    "extensionAutofillErrors": 2,
+    "classification": "Two insertBefore errors from browser password manager autofill overlay; no bobuy application errors"
+  },
+  "viewportRestored": {
+    "width": 2022,
+    "height": 1017
+  },
+  "accountPlatformRestored": "微信 / WeChat",
+  "noSaveOrVerifyActions": true
+}

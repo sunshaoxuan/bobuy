@@ -1,0 +1,188 @@
+{
+  "controls": 9,
+  "result": "PASS",
+  "measurements": [
+    {
+      "file": "production-corrected-desktop.json",
+      "role": "SELECT",
+      "label": "微信 / WeChat",
+      "ink": [
+        350,
+        827,
+        415,
+        846
+      ],
+      "dy": 0.875,
+      "tolerance": 1.9,
+      "margins": [
+        11.5,
+        10.625,
+        206.828125,
+        12.375
+      ],
+      "height": 44
+    },
+    {
+      "file": "production-corrected-desktop.json",
+      "role": "OPTION",
+      "label": "WhatsApp",
+      "ink": [
+        365,
+        777,
+        429,
+        790
+      ],
+      "dy": 0.5,
+      "tolerance": 1.3,
+      "margins": [
+        23,
+        15,
+        188.328125,
+        14
+      ],
+      "height": 44
+    },
+    {
+      "file": "production-corrected-phone390-china.json",
+      "role": "SELECT",
+      "label": "微信 / WeChat",
+      "ink": [
+        45,
+        416,
+        73,
+        430
+      ],
+      "dy": 0.344,
+      "tolerance": 1.4,
+      "margins": [
+        11,
+        14.34375,
+        268,
+        13.65625
+      ],
+      "height": 44
+    },
+    {
+      "file": "production-corrected-phone390-china.json",
+      "role": "OPTION",
+      "label": "微信 / WeChat",
+      "ink": [
+        61,
+        505,
+        153,
+        519
+      ],
+      "dy": 0.844,
+      "tolerance": 1.4,
+      "margins": [
+        23,
+        13.15625,
+        184,
+        14.84375
+      ],
+      "height": 44
+    },
+    {
+      "file": "production-corrected-phone390.json",
+      "role": "SELECT",
+      "label": "微信 / WeChat",
+      "ink": [
+        45,
+        417,
+        109,
+        430
+      ],
+      "dy": 0.844,
+      "tolerance": 1.3,
+      "margins": [
+        11,
+        15.34375,
+        232,
+        13.65625
+      ],
+      "height": 44
+    },
+    {
+      "file": "production-corrected-phone390.json",
+      "role": "OPTION",
+      "label": "WhatsApp",
+      "ink": [
+        61,
+        507,
+        125,
+        520
+      ],
+      "dy": 0.656,
+      "tolerance": 1.3,
+      "margins": [
+        23,
+        15.15625,
+        212,
+        13.84375
+      ],
+      "height": 44
+    },
+    {
+      "file": "production-corrected-short.json",
+      "role": "SELECT",
+      "label": "微信 / WeChat",
+      "ink": [
+        45,
+        283,
+        135,
+        297
+      ],
+      "dy": 0.344,
+      "tolerance": 1.4,
+      "margins": [
+        11,
+        14.34375,
+        176,
+        13.65625
+      ],
+      "height": 44
+    },
+    {
+      "file": "production-corrected-short.json",
+      "role": "OPTION",
+      "label": "微信 / WeChat",
+      "ink": [
+        61,
+        372,
+        153,
+        386
+      ],
+      "dy": 0.844,
+      "tolerance": 1.4,
+      "margins": [
+        23,
+        13.15625,
+        139,
+        14.84375
+      ],
+      "height": 44
+    },
+    {
+      "file": "production-corrected-short.json",
+      "role": "OPTION",
+      "label": "QQ",
+      "ink": [
+        61,
+        424,
+        83,
+        435
+      ],
+      "dy": 0.344,
+      "tolerance": 1.1,
+      "margins": [
+        23,
+        15.15625,
+        209,
+        15.84375
+      ],
+      "height": 44
+    }
+  ],
+  "failures": [],
+  "scope": "geometry and real glyph pixels only; visual review separate"
+}

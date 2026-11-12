@@ -1,0 +1,118 @@
+{
+  "source": "ec24fa9af47b38999b98fc848e8ccf77787ddad2",
+  "environment": "production, existing account, read only",
+  "entry": "/assets/index-DG8_x6Js.js",
+  "css": "/assets/index-UTa257F5.css",
+  "responses": [
+    {
+      "path": "/favicon.ico",
+      "status": 200
+    },
+    {
+      "path": "/favicon.svg",
+      "status": 200
+    },
+    {
+      "path": "/assets/styleChecker-FtK88lRP.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/OrderProductIdentity-DDtmzAu6.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/ProductMetadata-C-_9x_7n.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/useBreakpoint-DxuFc_IW.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-CCrokNax.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/Collapse-Bpu9FJzc.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/Orders-DCtiBhMf.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/Pagination-Cde9mD7C.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-CQZA4daa.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/Skeleton-_bDJ_ulX.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/EditOutlined-BXQ9At2h.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-DYro-7P7.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-BHld9vhS.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/Table-DL2uz3Pz.js",
+      "status": 200
+    },
+    {
+      "path": "/api/trips",
+      "status": 200
+    },
+    {
+      "path": "/cdn-cgi/rum",
+      "status": 204
+    },
+    {
+      "path": "/cdn-cgi/rum",
+      "status": 204
+    },
+    {
+      "path": "/favicon.ico",
+      "status": 200
+    },
+    {
+      "path": "/favicon.svg",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/profile",
+      "status": 200
+    },
+    {
+      "path": "/cdn-cgi/rum",
+      "status": 204
+    },
+    {
+      "path": "/cdn-cgi/rum",
+      "status": 204
+    }
+  ],
+  "writes": [],
+  "applicationConsoleErrors": 0,
+  "extensionConsoleErrors": 1,
+  "truncated": false,
+  "hasMore": false,
+  "viewportRestored": {
+    "height": 1064,
+    "width": 2022
+  },
+  "noSaveOrVerifyActions": true
+}
