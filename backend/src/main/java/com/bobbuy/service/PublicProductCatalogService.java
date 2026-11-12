@@ -12,7 +12,9 @@ public class PublicProductCatalogService {
  private final RecommendationTaxonomyService taxonomy;private final ReferenceQuoteService quotes;private final CategoryRepository categories;
  public PublicProductCatalogService(ProductRepository p,RecommendationPostRepository r,RecommendationItemRepository i,RecommendationTaxonomyService t,ReferenceQuoteService q,CategoryRepository c){this(p,r,i,t,q,c,null);} @org.springframework.beans.factory.annotation.Autowired public PublicProductCatalogService(ProductRepository p,RecommendationPostRepository r,RecommendationItemRepository i,RecommendationTaxonomyService t,ReferenceQuoteService q,CategoryRepository c,ProductRatingService rating){ratings=rating;products=p;posts=r;items=i;taxonomy=t;quotes=q;categories=c;}
  public record Offer(Long postId,RecommendationItem facts){}
- public record Entry(String productId,Long merchantId,Map<String,String> name,Map<String,String> description,String brand,String itemNumber,Map<String,String> specification,String model,String packaging,List<RecommendationItem.Picture> gallery,List<RecommendationItem.Label> categories,List<Offer> referenceOffers,boolean reviewedMaster,java.math.BigDecimal rating){public Entry(String productId,Long merchantId,Map<String,String> name,Map<String,String> description,String brand,String itemNumber,Map<String,String> specification,String model,String packaging,List<RecommendationItem.Picture> gallery,List<RecommendationItem.Label> categories,List<Offer> referenceOffers,boolean reviewedMaster){this(productId,merchantId,name,description,brand,itemNumber,specification,model,packaging,gallery,categories,referenceOffers,reviewedMaster,null);}}
+ public record Entry(String productId,Long merchantId,Map<String,String> name,Map<String,String> description,String brand,String itemNumber,Map<String,String> specification,String model,String packaging,List<RecommendationItem.Picture> gallery,List<RecommendationItem.Label> categories,List<Offer> referenceOffers,boolean reviewedMaster,java.math.BigDecimal rating,Map<String,String> introduction){
+  public Entry(String productId,Long merchantId,Map<String,String> name,Map<String,String> description,String brand,String itemNumber,Map<String,String> specification,String model,String packaging,List<RecommendationItem.Picture> gallery,List<RecommendationItem.Label> categories,List<Offer> referenceOffers,boolean reviewedMaster){this(productId,merchantId,name,description,brand,itemNumber,specification,model,packaging,gallery,categories,referenceOffers,reviewedMaster,null,Map.of());}
+ }
  public record Page(List<Entry> items,int page,int size,long total,boolean hasNext){}
  private record Snapshot(List<Product> eligible,Map<Long,Long> owners,Map<String,List<RecommendationItem>> linked){}
  private Snapshot snapshot(Long merchantId){
@@ -54,7 +56,7 @@ public class PublicProductCatalogService {
    // A reference-only master grants no new disclosure: reuse exactly its existing public DTO.
    // In particular, an empty legacy gallery/brand must not fall back to private master fields.
    if(p.getVisibilityStatus()!=ProductVisibility.PUBLIC){
-    return new Entry(p.getId(),p.getMerchantId(),Map.copyOf(legacyText(source,"name")),Map.copyOf(legacyText(source,"description")),source.brand,source.itemNumber,Map.copyOf(legacyText(source,"specification")),source.model,source.packaging,List.copyOf(source.gallery),List.copyOf(source.categories),offers,source.catalogDriven,publicRatings.get(p.getId()));
+    return new Entry(p.getId(),p.getMerchantId(),Map.copyOf(legacyText(source,"name")),Map.copyOf(legacyText(source,"description")),source.brand,source.itemNumber,Map.copyOf(legacyText(source,"specification")),source.model,source.packaging,List.copyOf(source.gallery),List.copyOf(source.categories),offers,source.catalogDriven,publicRatings.get(p.getId()),introduction(p,offers));
    }
    var ids=data==null?(p.getCategoryId()==null?List.<String>of():List.of(p.getCategoryId())):data.categoryIds()==null?List.<String>of():data.categoryIds();
    var labels=categories.findAllById(ids).stream().map(c->new RecommendationItem.Label(c.getId(),c.getName())).toList();
@@ -63,8 +65,15 @@ public class PublicProductCatalogService {
    Map<String,String> names=p.getName(),descriptions=p.getDescription(),spec=data==null?Map.of():data.specification();String brand=p.getBrand(),model=data==null?null:data.model(),pack=data==null?null:data.packaging();
    if(data==null&&source!=null){names=legacyText(source,"name");descriptions=legacyText(source,"description");spec=legacyText(source,"specification");if(brand==null||brand.isBlank())brand=source.brand;model=source.model;pack=source.packaging;}
    else if(data!=null&&!ProductCatalogService.translationsCurrent(p)){names=sourceOnly(names);descriptions=sourceOnly(descriptions);spec=sourceOnly(spec);}
-   return new Entry(p.getId(),p.getMerchantId(),Map.copyOf(names),Map.copyOf(descriptions),brand,p.getItemNumber(),Map.copyOf(spec),model,pack,List.copyOf(gallery),labels,offers,data!=null,publicRatings.get(p.getId()));
+   return new Entry(p.getId(),p.getMerchantId(),Map.copyOf(names),Map.copyOf(descriptions),brand,p.getItemNumber(),Map.copyOf(spec),model,pack,List.copyOf(gallery),labels,offers,data!=null,publicRatings.get(p.getId()),introduction(p,offers));
   }).toList();
+ }
+ /** Current editorial copy is separate from immutable historical offer facts. */
+ private static Map<String,String> introduction(Product product,List<Offer> offers){
+  var data=product.getCatalogData();
+  if(data==null||data.reviewedBy()==null||data.reviewedAt()==null||!ProductCatalogService.translationsCurrent(product))return Map.of();
+  if(product.getVisibilityStatus()!=ProductVisibility.PUBLIC&&(product.getItemNumber()==null||product.getItemNumber().isBlank()||offers.isEmpty()||offers.stream().anyMatch(o->!product.getItemNumber().equals(o.facts().itemNumber))))return Map.of();
+  return Map.copyOf(product.getDescription());
  }
  private static Map<String,String> sourceOnly(Map<String,String> input){return input.get("ja-JP")==null?Map.of():Map.of("ja-JP",input.get("ja-JP"));}
  private static Map<String,String> legacyText(RecommendationItem i,String field){var result=new HashMap<String,String>();String original=field.equals("name")?i.name:field.equals("description")?i.description:i.specification;if(original!=null&&!original.isBlank())result.put("ja-JP",original);if("REVIEWED".equals(i.getTranslationStatus()))for(var e:i.translations.entrySet()){String value=field.equals("name")?e.getValue().name():field.equals("description")?e.getValue().description():e.getValue().specification();if(value!=null&&!value.isBlank())result.put(e.getKey(),value);}return result;}

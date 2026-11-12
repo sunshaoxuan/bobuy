@@ -22,6 +22,10 @@ it('does not make unknown historical specification/introduction look like known 
  const result=productDetailContent(entry(fact(1,{specification:null,description:null}),fact(2,{specification:null,description:null})),'en-US');expect(result.specification).toBe('');expect(result.description).toBe('');expect(result.rows.map(r=>r.specification)).toEqual(['','']);
 });
 it('retains ordinary master detail content when there are no historical references',()=>{const value=entry(fact(1),fact(2));value.referenceOffers=[];const result=productDetailContent(value,'en-US');expect(result.description).toBe('Current master is not historical evidence');expect(result.specification).toBe('Changed current specification');});
+it.each(['ja-JP','zh-CN','zh-TW','en-US'] as const)('shows current introduction independently while retaining historical facts for %s',locale=>{
+ const value=entry(fact(1,{description:null}),fact(2,{description:'Older description',specification:'120 tablets'}));value.introduction={[locale]:'Current introduction '+locale};const before=JSON.stringify(value);
+ const result=productDetailContent(value,locale);expect(result.description).toBe('Current introduction '+locale);expect(result.specification).toBe('');expect(result.rows[1].facts.description).toBe('Older description');expect(result.rows[1].facts.specification).toBe('120 tablets');expect(JSON.stringify(value)).toBe(before);
+});
 it.each(['ja-JP','zh-CN','zh-TW','en-US'] as const)('compares the actual supplied translation for %s without synthesizing a missing version',locale=>{
  const translated={name:'Translated '+locale,specification:'Actual '+locale,description:'Introduction '+locale},translations=locale==='ja-JP'?{}:{[locale]:translated};const a=fact(1,{translationStatus:'REVIEWED',translations}),value=entry(a,fact(2,{translationStatus:'REVIEWED',translations}));value.name={[locale]:locale==='ja-JP'?'Product':translated.name};const result=productDetailContent(value,locale);expect(result.specification).toBe(locale==='ja-JP'?'240 tablets':translated.specification);expect(result.rows.every(r=>!r.specification)).toBe(true);
 });
