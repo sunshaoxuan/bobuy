@@ -11,11 +11,17 @@ param(
   [string]$CodexBridgeApiKey = $env:BOBBUY_AI_LLM_CODEX_BRIDGE_API_KEY,
   [string]$AiSecretMasterPassword = $(if ($env:BOBBUY_AI_SECRET_MASTER_PASSWORD) { $env:BOBBUY_AI_SECRET_MASTER_PASSWORD } else { [Environment]::GetEnvironmentVariable("BOBBUY_AI_SECRET_MASTER_PASSWORD", "User") }),
   [switch]$NoTemporaryLocalSecrets,
-  [switch]$PrecheckOnly
+  [switch]$PrecheckOnly,
+  [switch]$AllowFullSnapshot,
+  [string]$MaintenanceReason
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
+
+if (-not $PrecheckOnly -and (-not $AllowFullSnapshot -or [string]::IsNullOrWhiteSpace($MaintenanceReason))) {
+  throw 'Full release window requires -AllowFullSnapshot and -MaintenanceReason. For additive reference data use publish-production.py --mode reference-data with a reviewed plan.'
+}
 
 function Write-Section {
   param([string]$Title)

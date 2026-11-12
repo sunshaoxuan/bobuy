@@ -1,0 +1,14 @@
+test_invalid_projection_and_content_mutation_fail_closed (test_publish_production.AdditiveContentMigrationTests.test_invalid_projection_and_content_mutation_fail_closed) ... ok
+test_orders_frozen_before_v17_and_price_history_frozen_after_v17 (test_publish_production.AdditiveContentMigrationTests.test_orders_frozen_before_v17_and_price_history_frozen_after_v17) ... ok
+test_projection_freezes_all_old_columns_without_new_defaults (test_publish_production.AdditiveContentMigrationTests.test_projection_freezes_all_old_columns_without_new_defaults) ... ok
+test_accepts_matching_actual_snapshot (test_publish_production.RestoredDatabaseValidationTest.test_accepts_matching_actual_snapshot) ... ok
+test_fingerprint_reparses_checks_and_ignores_physical_column_positions (test_publish_production.RestoredDatabaseValidationTest.test_fingerprint_reparses_checks_and_ignores_physical_column_positions) ... ok
+test_rejects_changed_rows_schema_or_empty_snapshots (test_publish_production.RestoredDatabaseValidationTest.test_rejects_changed_rows_schema_or_empty_snapshots) ... ok
+test_rollback_stops_writers_before_restoring_old_schema (test_publish_production.RestoredDatabaseValidationTest.test_rollback_stops_writers_before_restoring_old_schema) ... ok
+test_write_freeze_replaces_only_the_api_upstream (test_publish_production.RestoredDatabaseValidationTest.test_write_freeze_replaces_only_the_api_upstream) ... ok
+test_missing_inventory_fails_before_stopping_writers (test_publish_production.RollbackAddedTableInventoryTest.test_missing_inventory_fails_before_stopping_writers) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.013s
+
+OK

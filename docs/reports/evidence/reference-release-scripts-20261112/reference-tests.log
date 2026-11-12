@@ -1,0 +1,14 @@
+test_real_idempotent_import_atomic_failure_and_concurrent_business_writes (test_reference_data_release.LocalPostgresReferenceTest.test_real_idempotent_import_atomic_failure_and_concurrent_business_writes) ... ok
+test_explicit_maintenance_keeps_existing_root_and_staged_image_guards (test_reference_data_release.ReferenceReleaseTest.test_explicit_maintenance_keeps_existing_root_and_staged_image_guards) ... ok
+test_failure_and_uncertain_commit_never_restore_or_retry (test_reference_data_release.ReferenceReleaseTest.test_failure_and_uncertain_commit_never_restore_or_retry) ... ok
+test_old_window_blocks_before_remote_or_local_commands (test_reference_data_release.ReferenceReleaseTest.test_old_window_blocks_before_remote_or_local_commands) ... ok
+test_public_reference_entry_never_enters_heavy_publisher (test_reference_data_release.ReferenceReleaseTest.test_public_reference_entry_never_enters_heavy_publisher) ... ok
+test_real_cli_default_and_incomplete_modes_have_no_side_effects (test_reference_data_release.ReferenceReleaseTest.test_real_cli_default_and_incomplete_modes_have_no_side_effects) ... ok
+test_rejects_modified_sql_checks_plan_and_acceptance_before_commands (test_reference_data_release.ReferenceReleaseTest.test_rejects_modified_sql_checks_plan_and_acceptance_before_commands) ... ok
+test_rejects_nonreference_and_unaccepted_inputs (test_reference_data_release.ReferenceReleaseTest.test_rejects_nonreference_and_unaccepted_inputs) ... ok
+test_success_command_chain_only_executes_transactional_psql (test_reference_data_release.ReferenceReleaseTest.test_success_command_chain_only_executes_transactional_psql) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 12.081s
+
+OK
