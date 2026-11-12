@@ -1,0 +1,68 @@
+{
+  "controls": [
+    {
+      "color": "rgba(0, 0, 0, 0.25)",
+      "label": "WhatsApp",
+      "rect": {
+        "bottom": 443.65625,
+        "height": 44,
+        "left": 33,
+        "right": 342,
+        "top": 399.65625,
+        "width": 309,
+        "x": 33,
+        "y": 399.65625
+      },
+      "tag": "SELECT",
+      "textRect": {
+        "bottom": 436.65625,
+        "height": 30,
+        "left": 45,
+        "right": 330,
+        "top": 406.65625,
+        "width": 285,
+        "x": 45,
+        "y": 406.65625
+      }
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "微信 / WeChat",
+      "rect": {
+        "bottom": 533.84375,
+        "height": 44,
+        "left": 37,
+        "right": 338,
+        "top": 489.84375,
+        "width": 301,
+        "x": 37,
+        "y": 489.84375
+      },
+      "tag": "OPTION",
+      "textRect": {
+        "bottom": 522.34375,
+        "height": 21,
+        "left": 61,
+        "right": 326,
+        "top": 501.34375,
+        "width": 265,
+        "x": 61,
+        "y": 501.34375
+      }
+    }
+  ],
+  "height": 844,
+  "overflow": false,
+  "popup": {
+    "bottom": 540.84375,
+    "height": 93.84375,
+    "left": 33,
+    "right": 342,
+    "top": 447,
+    "width": 309,
+    "x": 33,
+    "y": 447
+  },
+  "scrollY": 2103,
+  "width": 390
+}

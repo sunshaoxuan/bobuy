@@ -1,0 +1,44 @@
+### Visual Inspection & Detailed Findings
+
+#### 1. Full Desktop View (`我的账户` Overview)
+* **Layout & Grid Alignment:** The two-column desktop arrangement (`基本资料` + `邮箱验证` on the left, `收货地址 (选填)` on the right, and `社交账号 (选填)` full-width below) maintains consistent grid gutters, baseline alignment, and uniform input field heights.
+* **Navigation & Header:** Sidebar navigation pill (`我的账户`), top navigation controls (`所有节点`, language selector, user/cart icons), and primary action tabs (`我的资料`, `我的订单`, `商家维护`) render cleanly without label collision or text wrapping defects.
+* **Control States & Borders:** Inputs have consistent border weights, correct placeholder/value contrast, and secondary action links (`移除账号`, `清空地址`, `重新发送`) align accurately with their adjacent form rows.
+
+---
+
+#### 2. Mobile 390 View (Directory Scrolled to First Group)
+* **Popup Geometry & Bounds:** The dropdown card renders with its complete outer boundary, rounded corners, and subtle drop shadow intact. It floats cleanly above background elements (`添加社交账号` is layered behind as expected for an active overlay).
+* **Scroll Viewport Boundary:** Group header `中国常用` and standard entries (`微信 / WeChat`, `QQ`, `小红书 / REDnote`, `微博 / Weibo`) are crisp and fully readable. The bottom entry (`抖音 / Douyin`) intersects the scroll container boundary as expected for a scroll viewport, while native scroll thumb and boundary indicators render within container bounds.
+* **Bottom Navigation Clearance:** Sufficient clearance remains between the bottom of the dropdown popover and the fixed bottom navigation bar (`好物推荐`, `本程好物`, `购物车`, `我的账户`), ensuring no collision or touch-target occlusion.
+
+---
+
+#### 3. Mobile 360×580 View (Constrained / Short-Height Viewport)
+* **Height Capping & Overflow:** The mobile max-height cap prevents the dropdown from colliding with the bottom navigation bar even in a 580px viewport. The popover terminates well above the bottom navigation container.
+* **Optical Alignment of Selected Item:** In the `其他地区常用` section, the selected item (`WhatsApp`) on the light tint pill displays bold text with balanced vertical centering following the 1px optical upward adjustment.
+* **Frame & Shadow Integrity:** All four rounded corners of the popover menu remain visible, with no border-radius clipping or horizontal overflow.
+
+---
+
+#### 4. Mobile 390 View (No-Match Search State)
+* **Search Input:** The input retains its red focus ring, clear cursor/text rendering for `socialplatform-unknown`, and right-aligned search glyph.
+* **Empty State Box:** The `没有匹配的平台` notification renders inside a compact, fully bounded floating card with complete rounded corners and elevation shadow. The text is vertically and horizontally centered with appropriate padding and zero truncation.
+* **Layering & Alignment:** The dropdown sits squarely aligned with the trigger input above subsequent form fields (`synthetic-social-qa`, `显示名称`, `选择器测试`) without clipping or distorting underlying labels.
+
+---
+
+### Verification Summary
+
+| Review Dimension | Status | Notes |
+| :--- | :--- | :--- |
+| **Popup Bounds & Outer Frame** | **Pass** | All 4 corners, borders, and drop shadows render fully without clipping or leaking. |
+| **Mobile Bottom Nav Clearance** | **Pass** | Height cap successfully prevents bottom overlay/overlap on 360×580 and 390 screens. |
+| **Scroll Boundary Clipping** | **Pass** | Rows intersecting viewport bounds reflect standard container clipping; fixed labels/controls remain intact. |
+| **Optical Alignment & Centering** | **Pass** | Selected bold item (`WhatsApp`) is vertically centered inside highlight background. |
+| **Label & Control Alignment** | **Pass** | Label-to-input baselines and margins remain consistent across desktop and mobile. |
+
+---
+
+### Final Verdict
+**PASS (Visual Review Approved)**. No remaining visual clipping, overlap, bounding, or alignment defects detected across desktop and mobile viewports.

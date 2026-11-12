@@ -1,0 +1,329 @@
+{
+  "controls": 14,
+  "result": "FAIL",
+  "measurements": [
+    {
+      "file": "accepted-desktop-china.json",
+      "role": "SELECT",
+      "label": "LINE",
+      "ink": [
+        350,
+        516,
+        610,
+        535
+      ],
+      "dy": 0.125,
+      "tolerance": 1.9,
+      "margins": [
+        11.5,
+        11.625,
+        11.828125,
+        11.375
+      ],
+      "height": 44
+    },
+    {
+      "file": "accepted-desktop-china.json",
+      "role": "SELECT",
+      "label": "WhatsApp",
+      "ink": [
+        350,
+        668,
+        610,
+        681
+      ],
+      "dy": 1.125,
+      "tolerance": 1.3,
+      "margins": [
+        11.5,
+        15.625,
+        11.828125,
+        13.375
+      ],
+      "height": 44
+    },
+    {
+      "file": "accepted-desktop-china.json",
+      "role": "OPTION",
+      "label": "微信 / WeChat",
+      "ink": [
+        365,
+        609,
+        455,
+        623
+      ],
+      "dy": 0.156,
+      "tolerance": 1.4,
+      "margins": [
+        23,
+        14.15625,
+        162.328125,
+        13.84375
+      ],
+      "height": 44
+    },
+    {
+      "file": "accepted-desktop-selected.json",
+      "role": "SELECT",
+      "label": "LINE",
+      "ink": [
+        350,
+        520,
+        610,
+        530
+      ],
+      "dy": 0.375,
+      "tolerance": 1.0,
+      "margins": [
+        11.5,
+        15.625,
+        11.828125,
+        16.375
+      ],
+      "height": 44
+    },
+    {
+      "file": "accepted-desktop-selected.json",
+      "role": "SELECT",
+      "label": "WhatsApp",
+      "ink": [
+        350,
+        668,
+        610,
+        681
+      ],
+      "dy": 1.125,
+      "tolerance": 1.3,
+      "margins": [
+        11.5,
+        15.625,
+        11.828125,
+        13.375
+      ],
+      "height": 44
+    },
+    {
+      "file": "accepted-japanese360.json",
+      "role": "SELECT",
+      "label": "WhatsApp",
+      "ink": [
+        45,
+        390,
+        300,
+        409
+      ],
+      "dy": 0.438,
+      "tolerance": 1.9,
+      "margins": [
+        11,
+        11.0625,
+        11,
+        11.9375
+      ],
+      "height": 44
+    },
+    {
+      "file": "accepted-japanese360.json",
+      "role": "OPTION",
+      "label": "WhatsApp",
+      "ink": [
+        61,
+        485,
+        128,
+        498
+      ],
+      "dy": 1.656,
+      "tolerance": 1.3,
+      "margins": [
+        23,
+        16.15625,
+        179,
+        12.84375
+      ],
+      "height": 44
+    },
+    {
+      "file": "accepted-phone360-long-name.json",
+      "role": "SELECT",
+      "label": "WhatsApp",
+      "ink": [
+        45,
+        390,
+        300,
+        409
+      ],
+      "dy": 0.156,
+      "tolerance": 1.9,
+      "margins": [
+        11,
+        11.34375,
+        11,
+        11.65625
+      ],
+      "height": 44
+    },
+    {
+      "file": "accepted-phone360-long-name.json",
+      "role": "OPTION",
+      "label": "哔哩哔哩 / Bilibili",
+      "ink": [
+        61,
+        483,
+        166,
+        497
+      ],
+      "dy": 0.156,
+      "tolerance": 1.4,
+      "margins": [
+        23,
+        14.15625,
+        141,
+        13.84375
+      ],
+      "height": 44
+    },
+    {
+      "file": "accepted-phone390-options.json",
+      "role": "SELECT",
+      "label": "WhatsApp",
+      "ink": [
+        45,
+        412,
+        330,
+        431
+      ],
+      "dy": 0.156,
+      "tolerance": 1.9,
+      "margins": [
+        11,
+        11.34375,
+        11,
+        11.65625
+      ],
+      "height": 44
+    },
+    {
+      "file": "accepted-phone390-options.json",
+      "role": "OPTION",
+      "label": "哔哩哔哩 / Bilibili",
+      "ink": [
+        61,
+        497,
+        166,
+        511
+      ],
+      "dy": 0.156,
+      "tolerance": 1.4,
+      "margins": [
+        23,
+        14.15625,
+        156,
+        13.84375
+      ],
+      "height": 44
+    },
+    {
+      "file": "accepted-phone390-options.json",
+      "role": "OPTION",
+      "label": "豆瓣 / Douban",
+      "ink": [
+        61,
+        547,
+        151,
+        561
+      ],
+      "dy": 0.156,
+      "tolerance": 1.4,
+      "margins": [
+        23,
+        14.15625,
+        171,
+        13.84375
+      ],
+      "height": 44
+    },
+    {
+      "file": "accepted-phone390-options.json",
+      "role": "OPTION",
+      "label": "LINE",
+      "ink": [
+        62,
+        635,
+        89,
+        645
+      ],
+      "dy": 0.312,
+      "tolerance": 1.0,
+      "margins": [
+        24,
+        16.3125,
+        233,
+        15.6875
+      ],
+      "height": 44
+    },
+    {
+      "file": "accepted-phone390-options.json",
+      "role": "OPTION",
+      "label": "WhatsApp",
+      "ink": [
+        61,
+        685,
+        128,
+        698
+      ],
+      "dy": 1.812,
+      "tolerance": 1.3,
+      "margins": [
+        23,
+        16.3125,
+        194,
+        12.6875
+      ],
+      "height": 44
+    }
+  ],
+  "failures": [
+    {
+      "file": "accepted-japanese360.json",
+      "role": "OPTION",
+      "label": "WhatsApp",
+      "ink": [
+        61,
+        485,
+        128,
+        498
+      ],
+      "dy": 1.656,
+      "tolerance": 1.3,
+      "margins": [
+        23,
+        16.15625,
+        179,
+        12.84375
+      ],
+      "height": 44
+    },
+    {
+      "file": "accepted-phone390-options.json",
+      "role": "OPTION",
+      "label": "WhatsApp",
+      "ink": [
+        61,
+        685,
+        128,
+        698
+      ],
+      "dy": 1.812,
+      "tolerance": 1.3,
+      "margins": [
+        23,
+        16.3125,
+        194,
+        12.6875
+      ],
+      "height": 44
+    }
+  ],
+  "scope": "geometry and real glyph pixels only; visual review separate"
+}

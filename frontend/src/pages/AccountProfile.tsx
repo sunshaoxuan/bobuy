@@ -1,5 +1,6 @@
 import {useCallback, useEffect, useRef, useState} from 'react';
-import {Alert, Button, Form, Input, Spin} from 'antd';
+import {Alert, Button, Form, Input, Select, Spin} from 'antd';
+import {socialPlatformGroups,socialPlatformValue} from '../socialPlatforms';
 import {api, storefrontApi, type SelfProfile, type SelfProfilePatch} from '../api';
 import {getStoredAccessToken, getStoredAccessTokenExpiresAt, getStoredRefreshTokenExpiresAt, getStoredUser, storeAuthSession} from '../authStorage';
 import {useI18n} from '../i18n';
@@ -90,7 +91,10 @@ export function AccountProfile({userId, verification}: {userId:number; verificat
             {!fields.length&&<p className="profile-empty">{t('profile.social_empty')}</p>}
             {fields.map(field=><fieldset className="profile-social-account" key={field.key}>
               <legend>{t('profile.social')} {field.name+1}</legend>
-              {(['platform','handle','displayName'] as const).map(name=><Form.Item key={name} name={[field.name,name]} label={t('profile.'+name)} rules={name==='displayName'?[]:[{required:true,whitespace:true,message:t('profile.required')}]}><Input maxLength={name==='platform'?50:name==='handle'?200:100}/></Form.Item>)}
+              <Form.Item name={[field.name,'platform']} label={t('profile.platform')} getValueProps={value=>({value:socialPlatformValue(value)})} rules={[{validator:(_,value)=>socialPlatformValue(value)?Promise.resolve():Promise.reject(new Error(t('profile.choose_platform')))}]}>
+                <Select showSearch virtual={false} optionFilterProp="label" placeholder={t('profile.choose_platform')} notFoundContent={<span className="profile-platform-empty">{t('profile.platform_not_found')}</span>} options={socialPlatformGroups.map(group=>({label:t('profile.platform_group_'+group.key),options:group.options.map(({value,label})=>({value,label}))}))} popupClassName="profile-platform-menu" listHeight={264}/>
+              </Form.Item>
+              {(['handle','displayName'] as const).map(name=><Form.Item key={name} name={[field.name,name]} label={t('profile.'+name)} rules={name==='displayName'?[]:[{required:true,whitespace:true,message:t('profile.required')}]}><Input maxLength={name==='handle'?200:100}/></Form.Item>)}
               <Button type="text" danger onClick={()=>remove(field.name)}>{t('profile.remove')}</Button>
             </fieldset>)}
             <Button disabled={busy||fields.length>=10} onClick={()=>add({platform:'',handle:'',displayName:''})}>{t('profile.add_social')}</Button>

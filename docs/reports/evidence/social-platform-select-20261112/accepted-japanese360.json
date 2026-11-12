@@ -1,0 +1,68 @@
+{
+  "controls": [
+    {
+      "color": "rgba(0, 0, 0, 0.25)",
+      "label": "WhatsApp",
+      "rect": {
+        "bottom": 421.9375,
+        "height": 44,
+        "left": 33,
+        "right": 312,
+        "top": 377.9375,
+        "width": 279,
+        "x": 33,
+        "y": 377.9375
+      },
+      "tag": "SELECT",
+      "textRect": {
+        "bottom": 414.9375,
+        "height": 30,
+        "left": 45,
+        "right": 300,
+        "top": 384.9375,
+        "width": 255,
+        "x": 45,
+        "y": 384.9375
+      }
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "WhatsApp",
+      "rect": {
+        "bottom": 511.84375,
+        "height": 44,
+        "left": 37,
+        "right": 308,
+        "top": 467.84375,
+        "width": 271,
+        "x": 37,
+        "y": 467.84375
+      },
+      "tag": "OPTION",
+      "textRect": {
+        "bottom": 499.34375,
+        "height": 21,
+        "left": 61,
+        "right": 296,
+        "top": 478.34375,
+        "width": 235,
+        "x": 61,
+        "y": 478.34375
+      }
+    }
+  ],
+  "height": 800,
+  "overflow": false,
+  "popup": {
+    "bottom": 518.84375,
+    "height": 93.84375,
+    "left": 33,
+    "right": 312,
+    "top": 425,
+    "width": 279,
+    "x": 33,
+    "y": 425
+  },
+  "scrollY": 2191,
+  "width": 360
+}

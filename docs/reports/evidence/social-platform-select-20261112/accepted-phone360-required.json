@@ -1,0 +1,34 @@
+{
+  "controls": [
+    {
+      "color": "rgba(0, 0, 0, 0.25)",
+      "label": "请选择社交平台",
+      "rect": {
+        "bottom": 421.65625,
+        "height": 44,
+        "left": 33,
+        "right": 312,
+        "top": 377.65625,
+        "width": 279,
+        "x": 33,
+        "y": 377.65625
+      },
+      "tag": "SELECT",
+      "textRect": {
+        "bottom": 414.65625,
+        "height": 30,
+        "left": 45,
+        "right": 300,
+        "top": 384.65625,
+        "width": 255,
+        "x": 45,
+        "y": 384.65625
+      }
+    }
+  ],
+  "height": 800,
+  "overflow": false,
+  "popup": null,
+  "scrollY": 2125,
+  "width": 360
+}

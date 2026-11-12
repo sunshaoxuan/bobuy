@@ -1,0 +1,93 @@
+{
+  "controls": [
+    {
+      "color": "rgba(0, 0, 0, 0.25)",
+      "label": "LINE",
+      "rect": {
+        "bottom": 547.375,
+        "height": 44,
+        "left": 337.5,
+        "right": 622.828125,
+        "top": 503.375,
+        "width": 285.328125,
+        "x": 337.5,
+        "y": 503.375
+      },
+      "tag": "SELECT",
+      "textRect": {
+        "bottom": 540.375,
+        "height": 30,
+        "left": 349.5,
+        "right": 610.828125,
+        "top": 510.375,
+        "width": 261.328125,
+        "x": 349.5,
+        "y": 510.375
+      }
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "WhatsApp",
+      "rect": {
+        "bottom": 695.375,
+        "height": 44,
+        "left": 337.5,
+        "right": 622.828125,
+        "top": 651.375,
+        "width": 285.328125,
+        "x": 337.5,
+        "y": 651.375
+      },
+      "tag": "SELECT",
+      "textRect": {
+        "bottom": 688.375,
+        "height": 30,
+        "left": 349.5,
+        "right": 610.828125,
+        "top": 658.375,
+        "width": 261.328125,
+        "x": 349.5,
+        "y": 658.375
+      }
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "微信 / WeChat",
+      "rect": {
+        "bottom": 637.84375,
+        "height": 44,
+        "left": 341,
+        "right": 618.328125,
+        "top": 593.84375,
+        "width": 277.328125,
+        "x": 341,
+        "y": 593.84375
+      },
+      "tag": "OPTION",
+      "textRect": {
+        "bottom": 626.34375,
+        "height": 21,
+        "left": 365,
+        "right": 606.328125,
+        "top": 605.34375,
+        "width": 241.328125,
+        "x": 365,
+        "y": 605.34375
+      }
+    }
+  ],
+  "height": 900,
+  "overflow": false,
+  "popup": {
+    "bottom": 644.84375,
+    "height": 93.84375,
+    "left": 337,
+    "right": 622.328125,
+    "top": 551,
+    "width": 285.328125,
+    "x": 337,
+    "y": 551
+  },
+  "scrollY": 678,
+  "width": 1440
+}

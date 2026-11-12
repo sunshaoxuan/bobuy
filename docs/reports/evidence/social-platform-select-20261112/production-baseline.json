@@ -1,0 +1,15 @@
+{
+  "frontend": {
+    "image": "sha256:aef377285066c964f3882e5b41c290791fe6460923d71852bf18210f020a35f0",
+    "tag": "bobuy/frontend:20261112.editor-rating",
+    "revision": "012013ad330f81f8c293148564860ed31fd7178c",
+    "health": "running"
+  },
+  "core": {
+    "image": "sha256:98a2a9ec3a4511029b1b65bc602d4654e6155340d4fa3dff8199da63e9565bce",
+    "tag": "bobuy/core:20261112.reference-sort",
+    "revision": "a14f0320aeed077fbf449c95f2b236f4dd1d3393",
+    "health": "healthy"
+  },
+  "routeSha": "b099bf59589e5b297699324d265209a112ad5b3865c51d1f174c12a427e6b391"
+}

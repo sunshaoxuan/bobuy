@@ -1,5 +1,10 @@
 # Candidate change history
 
+## 20261112 social platform selection
+
+- 我的资料社交平台改为可搜索的固定选择目录，中国8项、其他地区19项；账号及显示名称保留输入。
+- 保持账户分区和既有资料语义，修正手机短屏菜单边界；验证和生产回执见 [账户排版报告](reports/ACCOUNT-LAYOUT-20261111.md)。
+
 ## 20261112 product sorting and engagement, production accepted
 
 - 本程好物与好物推荐增加完整筛选集价格、评分、人气排序，价格按展示报价及同币种分组。

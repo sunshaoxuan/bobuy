@@ -1,0 +1,143 @@
+{
+  "controls": [
+    {
+      "color": "rgba(0, 0, 0, 0.25)",
+      "label": "WhatsApp",
+      "rect": {
+        "bottom": 443.65625,
+        "height": 44,
+        "left": 33,
+        "right": 342,
+        "top": 399.65625,
+        "width": 309,
+        "x": 33,
+        "y": 399.65625
+      },
+      "tag": "SELECT",
+      "textRect": {
+        "bottom": 436.65625,
+        "height": 30,
+        "left": 45,
+        "right": 330,
+        "top": 406.65625,
+        "width": 285,
+        "x": 45,
+        "y": 406.65625
+      }
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "哔哩哔哩 / Bilibili",
+      "rect": {
+        "bottom": 525.84375,
+        "height": 44,
+        "left": 37,
+        "right": 323,
+        "top": 481.84375,
+        "width": 286,
+        "x": 37,
+        "y": 481.84375
+      },
+      "tag": "OPTION",
+      "textRect": {
+        "bottom": 514.34375,
+        "height": 21,
+        "left": 61,
+        "right": 311,
+        "top": 493.34375,
+        "width": 250,
+        "x": 61,
+        "y": 493.34375
+      }
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "豆瓣 / Douban",
+      "rect": {
+        "bottom": 575.84375,
+        "height": 44,
+        "left": 37,
+        "right": 323,
+        "top": 531.84375,
+        "width": 286,
+        "x": 37,
+        "y": 531.84375
+      },
+      "tag": "OPTION",
+      "textRect": {
+        "bottom": 564.34375,
+        "height": 21,
+        "left": 61,
+        "right": 311,
+        "top": 543.34375,
+        "width": 250,
+        "x": 61,
+        "y": 543.34375
+      }
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "LINE",
+      "rect": {
+        "bottom": 661.6875,
+        "height": 44,
+        "left": 37,
+        "right": 323,
+        "top": 617.6875,
+        "width": 286,
+        "x": 37,
+        "y": 617.6875
+      },
+      "tag": "OPTION",
+      "textRect": {
+        "bottom": 650.1875,
+        "height": 21,
+        "left": 61,
+        "right": 311,
+        "top": 629.1875,
+        "width": 250,
+        "x": 61,
+        "y": 629.1875
+      }
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "WhatsApp",
+      "rect": {
+        "bottom": 711.6875,
+        "height": 44,
+        "left": 37,
+        "right": 323,
+        "top": 667.6875,
+        "width": 286,
+        "x": 37,
+        "y": 667.6875
+      },
+      "tag": "OPTION",
+      "textRect": {
+        "bottom": 699.1875,
+        "height": 21,
+        "left": 61,
+        "right": 311,
+        "top": 678.1875,
+        "width": 250,
+        "x": 61,
+        "y": 678.1875
+      }
+    }
+  ],
+  "height": 844,
+  "overflow": false,
+  "popup": {
+    "bottom": 719,
+    "height": 272,
+    "left": 33,
+    "right": 342,
+    "top": 447,
+    "width": 309,
+    "x": 33,
+    "y": 447
+  },
+  "scrollY": 2103,
+  "width": 390
+}

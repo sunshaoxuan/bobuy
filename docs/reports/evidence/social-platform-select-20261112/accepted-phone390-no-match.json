@@ -1,0 +1,43 @@
+{
+  "controls": [
+    {
+      "color": "rgba(0, 0, 0, 0.25)",
+      "label": "WhatsApp",
+      "rect": {
+        "bottom": 443.65625,
+        "height": 44,
+        "left": 33,
+        "right": 342,
+        "top": 399.65625,
+        "width": 309,
+        "x": 33,
+        "y": 399.65625
+      },
+      "tag": "SELECT",
+      "textRect": {
+        "bottom": 436.65625,
+        "height": 30,
+        "left": 45,
+        "right": 330,
+        "top": 406.65625,
+        "width": 285,
+        "x": 45,
+        "y": 406.65625
+      }
+    }
+  ],
+  "height": 844,
+  "overflow": false,
+  "popup": {
+    "bottom": 511.09375,
+    "height": 64.09375,
+    "left": 33,
+    "right": 342,
+    "top": 447,
+    "width": 309,
+    "x": 33,
+    "y": 447
+  },
+  "scrollY": 2103,
+  "width": 390
+}

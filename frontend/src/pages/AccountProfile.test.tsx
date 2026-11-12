@@ -1,7 +1,13 @@
-import {render,screen,fireEvent,waitFor,act} from '@testing-library/react';
+import {render as renderComponent,screen,fireEvent,waitFor,act} from '@testing-library/react';
+import type {ReactElement} from 'react';
+import {StyleProvider} from '@ant-design/cssinjs';
 import {I18nProvider} from '../i18n';
 import {AccountProfile} from './AccountProfile';
 import type {SelfProfile} from '../api';
+
+// Keep the library's advanced injected selectors out of jsdom's CSS matcher.
+// Actual select layout and styles are checked separately in the real browser.
+function render(ui:ReactElement){return renderComponent(<StyleProvider container={document.createElement('div')}>{ui}</StyleProvider>);}
 
 const mocks=vi.hoisted(()=>({profile:vi.fn(),save:vi.fn(),me:vi.fn(),session:vi.fn(),id:1,token:'session-a'}));
 vi.mock('../api',()=>({api:{auth:{me:mocks.me}},storefrontApi:{profile:mocks.profile,saveProfile:mocks.save}}));
@@ -18,6 +24,36 @@ it('exposes address and social fields in named regions without opening accordion
  expect(screen.getByDisplayValue('Tokyo')).toBeVisible();
  expect(screen.getByDisplayValue('person')).toBeVisible();
  expect(document.querySelector('details')).toBeNull();
+});
+
+it.each([['微信 / WeChat','微信'],['WhatsApp','WhatsApp']])('selects %s from the platform directory and saves its value',async(label,value)=>{
+ mount();await screen.findByDisplayValue('Person 1');
+ const platform=screen.getByRole('combobox',{name:'Platform'});
+ expect(screen.getByText('LINE')).toBeVisible();
+ fireEvent.mouseDown(platform);await screen.findByRole('option',{name:label});
+ expect(screen.getByText('Popular in China')).toBeVisible();expect(screen.getByText('Popular elsewhere')).toBeVisible();
+ fireEvent.click(screen.getByRole('option',{name:label}));
+ fireEvent.submit(document.querySelector('form')!);
+ await waitFor(()=>expect(mocks.save).toHaveBeenCalledWith(expect.objectContaining({socialAccounts:[{platform:value,handle:'person',displayName:'Person'}]})));
+});
+
+it('uses search only to filter choices and never creates a typed platform',async()=>{
+ mount();await screen.findByDisplayValue('Person 1');
+ const platform=screen.getByRole('combobox',{name:'Platform'});fireEvent.mouseDown(platform);
+ fireEvent.change(platform,{target:{value:'Not a real social platform'}});await screen.findByText('No matching platform');fireEvent.keyDown(platform,{key:'Enter',code:'Enter'});
+ expect(screen.queryByRole('option',{name:'Not a real social platform'})).not.toBeInTheDocument();
+ fireEvent.submit(document.querySelector('form')!);
+ await waitFor(()=>expect(mocks.save).toHaveBeenCalledTimes(1));
+ expect(mocks.save.mock.calls[0][0].socialAccounts[0].platform).toBe('Line');
+});
+
+it('requires a catalog selection for an unrecognized existing platform without silently saving it',async()=>{
+ mocks.profile.mockResolvedValue({...account(),socialAccounts:[{platform:'Unrecognized network',handle:'person'}]});
+ mount();await screen.findByDisplayValue('Person 1');fireEvent.submit(document.querySelector('form')!);
+ await screen.findAllByText('Choose a social platform');expect(mocks.save).not.toHaveBeenCalled();
+ const platform=screen.getByRole('combobox',{name:'Platform'});fireEvent.mouseDown(platform);fireEvent.click(await screen.findByRole('option',{name:'LINE'}));
+ fireEvent.submit(document.querySelector('form')!);await waitFor(()=>expect(mocks.save).toHaveBeenCalledTimes(1));
+ expect(mocks.save.mock.calls[0][0].socialAccounts[0].platform).toBe('LINE');
 });
 
 it.each(['en-US','ja-JP','zh-CN','zh-TW'])('loads and saves self details in %s',async locale=>{

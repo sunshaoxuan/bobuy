@@ -1,0 +1,59 @@
+{
+  "controls": [
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "LINE",
+      "rect": {
+        "bottom": 547.375,
+        "height": 44,
+        "left": 337.5,
+        "right": 622.828125,
+        "top": 503.375,
+        "width": 285.328125,
+        "x": 337.5,
+        "y": 503.375
+      },
+      "tag": "SELECT",
+      "textRect": {
+        "bottom": 540.375,
+        "height": 30,
+        "left": 349.5,
+        "right": 610.828125,
+        "top": 510.375,
+        "width": 261.328125,
+        "x": 349.5,
+        "y": 510.375
+      }
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "WhatsApp",
+      "rect": {
+        "bottom": 695.375,
+        "height": 44,
+        "left": 337.5,
+        "right": 622.828125,
+        "top": 651.375,
+        "width": 285.328125,
+        "x": 337.5,
+        "y": 651.375
+      },
+      "tag": "SELECT",
+      "textRect": {
+        "bottom": 688.375,
+        "height": 30,
+        "left": 349.5,
+        "right": 610.828125,
+        "top": 658.375,
+        "width": 261.328125,
+        "x": 349.5,
+        "y": 658.375
+      }
+    }
+  ],
+  "height": 900,
+  "overflow": false,
+  "popup": null,
+  "scrollY": 678,
+  "width": 1440
+}

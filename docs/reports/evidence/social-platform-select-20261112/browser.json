@@ -1,0 +1,125 @@
+{
+  "environment": "local synthetic",
+  "origin": "http://127.0.0.1:5191",
+  "viewports": [
+    [
+      1440,
+      900
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      360,
+      800
+    ],
+    [
+      360,
+      580
+    ]
+  ],
+  "functional": {
+    "chinaSavedReloaded": "微信",
+    "internationalSavedReloaded": "WhatsApp",
+    "noMatchEnterSaveRequests": 0,
+    "requiredValidation": true,
+    "originalSocialAccountRestored": true,
+    "legacyRawValuePreservedByTests": true
+  },
+  "network": [
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/profile",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/profile",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/profile",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/profile",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    }
+  ],
+  "devHistory": {
+    "consoleErrors": 12,
+    "cause": "Vite React Refresh after locale edits; full reload recovered"
+  },
+  "compiled": {
+    "entry": "/assets/index-CuGMqHUM.js",
+    "consoleErrors": 0,
+    "responses": [
+      {
+        "path": "/account",
+        "status": 200
+      },
+      {
+        "path": "/assets/index-MFtJkuVi.css",
+        "status": 200
+      },
+      {
+        "path": "/assets/index-CuGMqHUM.js",
+        "status": 200
+      },
+      {
+        "path": "/favicon.svg",
+        "status": 200
+      },
+      {
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "path": "/api/auth/profile",
+        "status": 200
+      },
+      {
+        "path": "/api/auth/me",
+        "status": 200
+      }
+    ],
+    "integrated": {
+      "entry": "/assets/index-BTevBpZ7.js",
+      "css": "/assets/index-MFtJkuVi.css",
+      "consoleErrors": 0,
+      "base": "88bdadc",
+      "screenshot": "accepted-compiled-integrated.png"
+    }
+  }
+}

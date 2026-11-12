@@ -1,0 +1,29 @@
+### 1. Real Defects
+
+* **Mobile Dropdown Top Item Clipping (Phone 390, Image 2):**  
+  When the list is scrolled down, the top item (`快手 / Kuaishou`) is abruptly clipped in half horizontally along the top container boundary with no top padding, fade, or sticky header offset, making the top glyphs partially illegible.
+* **Lack of Visual Indication for Scrolled-off Group Headers (Phone 390, Image 2):**  
+  The parent group header (`中国常用`) has scrolled completely out of view above the clipped row, leaving orphaned options with no group context until reaching `其他地区常用`.
+
+---
+
+### 2. Missing Evidence
+
+* **No-Match / Empty Search State:**  
+  All screenshots show successful search matches (`微信`, `bili`) or unfiltered lists. There is no screenshot demonstrating behavior when an arbitrary or unsupported string (e.g., `xyz` or an unlisted platform) is typed, which is necessary to visually verify that free text cannot be submitted as a new custom entry.
+* **Bottom Collision / Flip Behavior:**  
+  While the dropdown clears the fixed bottom navigation bar in the shown scrolled position, there is no evidence of dropdown collision handling (e.g., flipping upward or clamping height) when the input is focused near the bottom of the viewport directly adjacent to the fixed bottom bar.
+* **Reverse Bilingual Search:**  
+  Image 3 confirms pinyin/Latin search (`bili` matching `哔哩哔哩 / Bilibili`), but there is no evidence for English-name search on Chinese brands (e.g., searching `wechat`) or Chinese-name search on global brands (e.g., searching `瓦茨普` or equivalent if supported).
+* **Reset / Clear Action:**  
+  No evidence showing how a user clears an already-selected platform back to an unselected/empty state.
+
+---
+
+### 3. Verdict
+
+**CONDITIONAL PASS (Minor Polish Required)**
+
+* **Layout & Alignment:** Desktop grid alignment (Row 1 & Row 2) matches adjacent `账号` and `显示名称` inputs; mobile vertical stacking preserves established styling and card bounds without breaking the accepted design.
+* **Component Constraints:** Search dropdown successfully replaces free-text inputs, enforces grouped options (`中国常用` / `其他地区常用`), displays bilingual branding, aligns popup width to trigger inputs, and respects the mobile bottom navigation bar clearance.
+* **Required Fix:** Resolve the top-edge clipping and scroll padding inside the mobile dropdown list container.
