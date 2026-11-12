@@ -1,7 +1,7 @@
 import {test} from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import {JSDOM} from 'jsdom';import {renderHome,title,description} from './prerender-home.mjs';
-test('initial home HTML supplies truthful brand, canonical, structured data, H1 and crawlable public links',()=>{
+test('initial home HTML supplies truthful brand, canonical, structured data, header and crawlable public links',()=>{
  const input=fs.readFileSync('index.html','utf8'),html=renderHome(input),d=new JSDOM(html).window.document;
- assert.equal(d.title,title);assert.equal(d.querySelector('meta[name="description"]').content,description);assert.equal(d.querySelector('link[rel="canonical"]').href,'https://bobuy.cc/');assert.equal(d.querySelectorAll('h1').length,1);assert.match(d.querySelector('h1').textContent,/宝宝败 Bobuy/);
+ assert.equal(d.title,title);assert.equal(d.querySelector('meta[name="description"]').content,description);assert.equal(d.querySelector('link[rel="canonical"]').href,'https://bobuy.cc/');assert.equal(d.querySelectorAll('main section').length,0);assert.equal(d.querySelector('header small').textContent,'bobuy.cc');assert.match(d.querySelector('header strong').textContent,/宝宝败 Bobuy/);assert.ok(!d.querySelector('main').textContent.includes('随行好物'));
  const graph=JSON.parse(d.querySelector('script[type="application/ld+json"]').textContent)['@graph'];assert.equal(graph[0].name,'宝宝败');assert.equal(graph[0].alternateName,'Bobuy');assert.ok(!graph.some(x=>x.address||x.telephone||x.legalName));
  assert.equal(d.querySelectorAll('nav').length,1);assert.equal(d.querySelectorAll('main section nav').length,0);assert.deepEqual([...d.querySelectorAll('nav a')].map(x=>x.getAttribute('href')),['/recommendations','/products','/trips']);assert.ok(!/canonical/.test(input));assert.equal(d.querySelectorAll('script[type="module"]').length,1);
 });
