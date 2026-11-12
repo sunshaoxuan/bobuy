@@ -1,0 +1,13 @@
+{
+  "removedBuildContexts": [
+    "20261112.social-platform-select/payload.tar.gz",
+    "20261112.social-platform-select/frontend",
+    "20261112.social-platform-select/Dockerfile",
+    "20261112.social-platform-select/nginx.conf",
+    "20261112.social-platform-select.2/payload.tar.gz",
+    "20261112.social-platform-select.2/frontend",
+    "20261112.social-platform-select.2/Dockerfile",
+    "20261112.social-platform-select.2/nginx.conf"
+  ],
+  "releaseReceiptsPreserved": true
+}

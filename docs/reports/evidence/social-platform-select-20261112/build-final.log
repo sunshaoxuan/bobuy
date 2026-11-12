@@ -1,0 +1,78 @@
+vite v5.4.21 building for production...
+transforming...
+✓ 3140 modules transformed.
+Circular chunk: ProcurementHUD -> procurement-dashboard -> ProcurementHUD. Consider disabling the "output.onlyExplicitManualChunks" option, as enabling it causes the static dependencies of the manual chunk "procurement-dashboard" to be bundled into the chunk "ProcurementHUD".
+Circular chunk: ProductArchive -> stock-master -> ProductArchive. Consider disabling the "output.onlyExplicitManualChunks" option, as enabling it causes the static dependencies of the manual chunk "stock-master" to be bundled into the chunk "ProductArchive".
+rendering chunks...
+computing gzip size...
+dist/index.html                                         0.48 kB │ gzip:   0.35 kB
+dist/assets/Recommendations-BR6eX9U6.css                3.75 kB │ gzip:   1.23 kB
+dist/assets/ProductMarkerBadges-YtkPTPIq.css            4.64 kB │ gzip:   1.43 kB
+dist/assets/PublicRecommendations-DhYyKoQc.css          5.55 kB │ gzip:   1.63 kB
+dist/assets/MailSettings-Dx7mJHLN.css                   5.77 kB │ gzip:   1.61 kB
+dist/assets/ImageLightbox-DKnMaoxp.css                 17.55 kB │ gzip:   3.64 kB
+dist/assets/RecommendationImageViewer-BnZdvF0r.css     21.91 kB │ gzip:   4.70 kB
+dist/assets/ProductArchive-s4Q_DEzK.css                26.17 kB │ gzip:   5.39 kB
+dist/assets/index-UTa257F5.css                         75.09 kB │ gzip:  15.25 kB
+dist/assets/index-CjAjJNJl.js                           0.11 kB │ gzip:   0.12 kB
+dist/assets/useBreakpoint-DxuFc_IW.js                   0.34 kB │ gzip:   0.25 kB
+dist/assets/ProductMetadata-C-_9x_7n.js                 0.48 kB │ gzip:   0.29 kB
+dist/assets/ArrowLeftOutlined-Cckcrqgv.js               0.52 kB │ gzip:   0.40 kB
+dist/assets/styleChecker-FtK88lRP.js                    0.64 kB │ gzip:   0.38 kB
+dist/assets/ClockCircleOutlined-CaYko5ip.js             0.67 kB │ gzip:   0.44 kB
+dist/assets/EditOutlined-BXQ9At2h.js                    0.70 kB │ gzip:   0.49 kB
+dist/assets/SaveOutlined-BNnN8oCK.js                    0.73 kB │ gzip:   0.47 kB
+dist/assets/SendOutlined-Ba-ig_Jn.js                    0.75 kB │ gzip:   0.51 kB
+dist/assets/CameraOutlined-BBF5IljW.js                  0.78 kB │ gzip:   0.50 kB
+dist/assets/OrderProductIdentity-DDtmzAu6.js            0.80 kB │ gzip:   0.45 kB
+dist/assets/SafetyCertificateOutlined-C3gDkFyx.js       0.81 kB │ gzip:   0.55 kB
+dist/assets/ReloadOutlined-BcJurxg3.js                  0.99 kB │ gzip:   0.61 kB
+dist/assets/MerchantCustomers-BYOB5X4Y.js               1.14 kB │ gzip:   0.59 kB
+dist/assets/ProductMarkerBadges-BMoPKGke.js             1.14 kB │ gzip:   0.63 kB
+dist/assets/Currencies-CYHAhnIs.js                      1.19 kB │ gzip:   0.65 kB
+dist/assets/ClientTrips-BdZQFRxF.js                     1.83 kB │ gzip:   0.87 kB
+dist/assets/LoginPage-TwB3q2Ux.js                       2.00 kB │ gzip:   0.91 kB
+dist/assets/ClientChat-Ci8FTJSg.js                      2.55 kB │ gzip:   1.24 kB
+dist/assets/Dashboard-CtAg0HNZ.js                       3.28 kB │ gzip:   1.20 kB
+dist/assets/Suppliers-LgVglCpZ.js                       3.76 kB │ gzip:   1.59 kB
+dist/assets/index-CNLRNxMZ.js                           3.84 kB │ gzip:   1.52 kB
+dist/assets/index-KJWgcCP0.js                           4.14 kB │ gzip:   1.72 kB
+dist/assets/ProductMarkerEditor-BXxa8TlW.js             4.47 kB │ gzip:   2.02 kB
+dist/assets/index-BcM33xXs.js                           4.57 kB │ gzip:   1.81 kB
+dist/assets/PickingMaster-D0X4hNaB.js                   4.84 kB │ gzip:   2.08 kB
+dist/assets/index-_qRofzwM.js                           5.36 kB │ gzip:   2.48 kB
+dist/assets/Users-sf12bNgx.js                           6.15 kB │ gzip:   2.24 kB
+dist/assets/ProductMarkers-yTIUa77Z.js                  6.22 kB │ gzip:   2.33 kB
+dist/assets/Breadcrumb-Cx0bI2AB.js                      6.59 kB │ gzip:   2.33 kB
+dist/assets/OrderDesk-C1iLQNnW.js                       6.76 kB │ gzip:   2.69 kB
+dist/assets/audit-view-BpqqnqdK.js                      7.57 kB │ gzip:   2.54 kB
+dist/assets/index-eVI1LV37.js                           7.91 kB │ gzip:   2.70 kB
+dist/assets/MailSettings-CCTSdLHH.js                    7.97 kB │ gzip:   2.67 kB
+dist/assets/index-CCrokNax.js                           8.50 kB │ gzip:   3.18 kB
+dist/assets/Collapse-Bpu9FJzc.js                       10.22 kB │ gzip:   3.86 kB
+dist/assets/Orders-DCtiBhMf.js                         10.29 kB │ gzip:   3.02 kB
+dist/assets/index-CQZA4daa.js                          10.41 kB │ gzip:   3.46 kB
+dist/assets/Skeleton-_bDJ_ulX.js                       10.44 kB │ gzip:   3.29 kB
+dist/assets/index-DOsf6arz.js                          10.60 kB │ gzip:   3.85 kB
+dist/assets/ClientOrders-COB-INCG.js                   10.61 kB │ gzip:   4.02 kB
+dist/assets/PublicProductCatalog-C-5lAGnV.js           11.83 kB │ gzip:   4.84 kB
+dist/assets/ProcurementHUD-DqApn_pZ.js                 13.35 kB │ gzip:   4.40 kB
+dist/assets/ClientBilling-CI-fJ3Bi.js                  14.29 kB │ gzip:   4.97 kB
+dist/assets/ImageLightbox-DnI6LcMO.js                  18.61 kB │ gzip:   7.33 kB
+dist/assets/RecommendationImageViewer-CzYgFqAi.js      18.76 kB │ gzip:   7.12 kB
+dist/assets/chat-flow-DBrhBoRB.js                      20.51 kB │ gzip:   6.55 kB
+dist/assets/index-DYro-7P7.js                          21.42 kB │ gzip:   7.82 kB
+dist/assets/Pagination-Cde9mD7C.js                     24.07 kB │ gzip:   7.21 kB
+dist/assets/stock-master-Bd4PkNaG.js                   24.96 kB │ gzip:   7.59 kB
+dist/assets/useNetworkStatus-B1nd0ARp.js               27.14 kB │ gzip:   8.37 kB
+dist/assets/PublicRecommendations-CTiJdmW2.js          27.92 kB │ gzip:  10.15 kB
+dist/assets/procurement-dashboard-Mp8gfpFX.js          28.50 kB │ gzip:   7.78 kB
+dist/assets/index-BHld9vhS.js                          44.24 kB │ gzip:  13.35 kB
+dist/assets/WarningOutlined-BLftYT0A.js                48.61 kB │ gzip:  17.16 kB
+dist/assets/ProductArchive-DrMxUrvj.js                 54.84 kB │ gzip:  17.30 kB
+dist/assets/AiQuickAddModal-qnKyOL90.js                86.02 kB │ gzip:  26.27 kB
+dist/assets/Recommendations-CdAQK2MN.js                95.90 kB │ gzip:  27.59 kB
+dist/assets/Trips-C6rs3-kr.js                         104.71 kB │ gzip:  34.03 kB
+dist/assets/Table-DL2uz3Pz.js                         147.08 kB │ gzip:  47.46 kB
+dist/assets/index-DG8_x6Js.js                       1,219.44 kB │ gzip: 420.32 kB
+✓ built in 14.60s

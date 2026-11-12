@@ -1,0 +1,11 @@
+{
+  "source": "961d2a39b9fe6abbc29796805069d0efe5d09666",
+  "result": "PASS",
+  "ci": "success",
+  "ciUrl": "https://github.com/sunshaoxuan/bobuy/actions/runs/43140977509",
+  "focusedTests": 30,
+  "typecheck": "PASS",
+  "i18nKeys": 1665,
+  "build": "PASS",
+  "nativeControlPixels": "PASS"
+}

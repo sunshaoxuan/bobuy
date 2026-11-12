@@ -1,0 +1,9 @@
+{
+  "source": "ec24fa9af47b38999b98fc848e8ccf77787ddad2",
+  "result": "PASS",
+  "removedOnly": [
+    "bobuy/frontend:20261112.mail-settings.3"
+  ],
+  "protectedUnchanged": true,
+  "databaseWrites": false
+}
