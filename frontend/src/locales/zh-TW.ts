@@ -1,6 +1,19 @@
 import type { Dictionary } from './types';
 
 const messages: Dictionary = {
+  "master.upload_details": "上傳詳情",
+  "master.upload_filename": "檔案名稱",
+  "master.upload_status": "圖片上傳狀態",
+  "master.upload_waiting": "待上傳",
+  "master.upload_uploading": "上傳中",
+  "master.upload_success": "已上傳",
+  "master.upload_failed": "失敗／未確認",
+  "master.upload_reused": "已重用",
+  "master.upload_saved": "已儲存至主檔",
+  "master.upload_unsaved": "已上傳圖片保留於目前草稿，請儲存主檔以完成關聯。",
+  "master.upload_retry_hint": "已確認上傳的圖片會保留，待上傳檔案尚未傳送。請先核對失敗請求，再重新選取檔案。",
+  "master.upload_asset": "已上傳素材憑據",
+  "gallery.hash_unavailable": "目前無法驗證檔案，尚未開始上傳。",
  "review.text_scroll": "評價較長時，可在輸入框內上下捲動查看",
  "review.history_scroll": "評價列表較長時，可在視窗內上下捲動查看",
 

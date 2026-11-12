@@ -2,6 +2,19 @@ import type { Dictionary } from './types';
 import experience from './experience.ja-JP.json';
 
 const messages: Dictionary = {
+  "master.upload_details": "アップロード詳細",
+  "master.upload_filename": "ファイル名",
+  "master.upload_status": "画像のアップロード状況",
+  "master.upload_waiting": "待機中",
+  "master.upload_uploading": "アップロード中",
+  "master.upload_success": "アップロード済み",
+  "master.upload_failed": "失敗／未確認",
+  "master.upload_reused": "再利用",
+  "master.upload_saved": "商品マスターに保存済み",
+  "master.upload_unsaved": "アップロードした画像は現在の下書きに保持されています。商品マスターを保存して関連付けてください。",
+  "master.upload_retry_hint": "確認済みの画像は保持され、待機中のファイルは未送信です。失敗したリクエストを確認してから、ファイルを選び直してください。",
+  "master.upload_asset": "アップロード済み素材の参照",
+  "gallery.hash_unavailable": "現在ファイルを検証できません。アップロードは開始していません。",
  "review.text_scroll": "長いコメントは入力欄内を上下にスクロールして確認できます",
  "review.history_scroll": "長い評価一覧はダイアログ内を上下にスクロールできます",
 
