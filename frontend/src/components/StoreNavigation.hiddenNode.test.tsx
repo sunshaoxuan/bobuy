@@ -29,7 +29,9 @@ it.each(cases)('omits selector and placeholder for $locale / node=$node / drawer
     expect(root.querySelector('.browse-node,select,input,[role="combobox"]')).toBeNull();
     expect(root.querySelector('.browse-brand')).toHaveAttribute('href','/'+search);
     expect(root.querySelector('.browse-brand-domain')).toHaveTextContent('bobuy.cc');
-    expect(root.querySelector('.browse-brand-heading strong')).toHaveTextContent(translate(locale,'app.brand'));
+    expect(root.querySelector('.browse-brand-label strong')).toHaveTextContent(translate(locale,'app.brand'));
+    expect(root.querySelector('.browse-brand-label .browse-brand-domain')).toHaveTextContent('bobuy.cc');
+    expect(root.querySelector('.browse-brand > .browse-brand-domain')).toBeNull();
     expect(root.querySelector('a[href="/trips'+search+'"]')).toBeInTheDocument();
   }
   for(const key of ['browse.node','browse.all_nodes','browse.node_hint'])
