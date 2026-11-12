@@ -1,0 +1,8 @@
+{
+  "result": "STALE_RUNTIME_BASELINE",
+  "expectedFrontend": "bobuy/frontend:20261112.social-platform-select",
+  "unexpectedAsset": "/assets/index-UTa257F5.css",
+  "actualSha256": "533ba2d10593c62562d1b94f4c34f066ce8e32859676d3731689790e644833a7",
+  "observation": "Browser first loaded a resource absent from the initial container manifest. A fresh read-only runtime probe confirmed frontend replacement by social-platform-select.2 at 02:39:50 UTC.",
+  "disposition": "Retain initial observation, bind to fresh runtime-after-change.json and rerun only the affected browser check. This is not product acceptance evidence."
+}

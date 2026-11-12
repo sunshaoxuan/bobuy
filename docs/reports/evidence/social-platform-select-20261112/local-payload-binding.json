@@ -1,0 +1,7 @@
+{
+  "source": "ec24fa9af47b38999b98fc848e8ccf77787ddad2",
+  "result": "PASS",
+  "frontendFiles": 82,
+  "payloadSha256": "78015acf48baf20a5089e262fbe44887a27fcf63dac1eb9920dc8fc0c597126c",
+  "dockerfileSha256": "aa7d38a8561f9087df8a3b06a434dbf53067e7ac8afb429c78c8f9258896662f"
+}

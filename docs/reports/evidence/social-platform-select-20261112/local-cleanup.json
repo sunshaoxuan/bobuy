@@ -1,0 +1,64 @@
+{
+  "result": "PASS",
+  "authorization": "User explicitly requested scoped local cleanup while preserving screenshots and acceptance records",
+  "previewPid": 61516,
+  "previewPort": 5191,
+  "temporaryFiles": [
+    {
+      "path": ".task-tmp\\social-platform-select-20261112\\flash-probe.txt",
+      "sha256": "95613561EB190DED405675D3020B6728DAE92516861F4639124860928AC54218",
+      "bytes": 7
+    },
+    {
+      "path": ".task-tmp\\social-platform-select-20261112\\inventory.py",
+      "sha256": "76F3817DB17C1EED7569A15F64B3435151AC4E43E09E05BD5ACAF0100BE4049A",
+      "bytes": 922
+    },
+    {
+      "path": ".task-tmp\\social-platform-select-20261112\\prepare-correction.py",
+      "sha256": "6EE3F474A07F9733B548371E271E9CBF646ECD7A0583BED6FC42B9A27C1BC6CC",
+      "bytes": 1146
+    },
+    {
+      "path": ".task-tmp\\social-platform-select-20261112\\prepare-release.py",
+      "sha256": "A92E3F40BA0A9A04AC42750C0DFACE906FBB3F5AC01E1F6449100EBCFFEF4893",
+      "bytes": 2718
+    },
+    {
+      "path": ".task-tmp\\social-platform-select-20261112\\probe.png",
+      "sha256": "6B1048F8A6D40BAC0B2954C18FEFA40C4EA7A96120FC2E54B7317C0E43C2BBEC",
+      "bytes": 68
+    },
+    {
+      "path": ".task-tmp\\account-balance-20261112\\Dockerfile",
+      "sha256": "AA7D38A8561F9087DF8A3B06A434DBF53067E7AC8AFB429C78C8F9258896662F",
+      "bytes": 169
+    },
+    {
+      "path": ".task-tmp\\account-balance-20261112\\payload.tar.gz",
+      "sha256": "78015ACF48BAF20A5089E262FBE44887A27FCF63DAC1EB9920DC8FC0C597126C",
+      "bytes": 5637245
+    },
+    {
+      "path": "docs\\reports\\evidence\\account-balance-20261112\\__pycache__\\stage-release.cpython-313.pyc",
+      "sha256": "B7EE2D8447A69CBB5C31B9667F51788BDA35F2DCD8EA190537583C7428B402B8",
+      "bytes": 10789
+    }
+  ],
+  "preservedFiles": 171,
+  "removed": [
+    ".task-tmp\\social-platform-select-20261112",
+    ".task-tmp\\account-balance-20261112",
+    "docs\\reports\\evidence\\account-balance-20261112\\__pycache__"
+  ],
+  "otherNodeProcessesBefore": 32,
+  "previewStopped": true,
+  "previewPortReleased": true,
+  "evidenceSha256Unchanged": true,
+  "otherNodeProcessesStillRunning": 32,
+  "processesStoppedByThisScript": [
+    61516
+  ],
+  "productionAccessed": false,
+  "atUtc": "2026-11-12T02:58:00.3886636Z"
+}

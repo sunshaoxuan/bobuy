@@ -1,0 +1,686 @@
+[
+  {
+    "sha256": "1425AE7064DFE6050EBD1FFD1911EA6AFBE6E3839CC0D19655CD368ED84CFBF8",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-desktop-bottom.json"
+  },
+  {
+    "sha256": "56BFE83FCA1B3C82AA45667934089ED25D006B0B0DB28CE68CC865ED0292F245",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-desktop-bottom.png"
+  },
+  {
+    "sha256": "4BD08D264D059181E49D38CD4565F0AD4A6ABB9A9B707C1D432BCAE0CF8902A9",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-desktop-empty.json"
+  },
+  {
+    "sha256": "31B4FCA0657FD59F7884EF5387838F257EE2A418C5CFE5323E7F0787DA672A95",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-desktop-empty.png"
+  },
+  {
+    "sha256": "1620DDE7BEA0951C4D162BA8D0A6867979AB8BBCCFBAEB1F33D91F3BE4C1E210",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-desktop-lower.json"
+  },
+  {
+    "sha256": "1EC74881E4B632833B8758F18AF5538EF694C83B089C52A414A8D996D44EE072",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-desktop-lower.png"
+  },
+  {
+    "sha256": "2FE54CB484CB979605AA0AD60CE183B1E9EE8E88D2B39322CBF25C6E233264AC",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-desktop-top.json"
+  },
+  {
+    "sha256": "13D5A35CBCB689390679F5EE44E0ED2FEA67A45CEA8B946E0BD7F99134EE35C7",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-desktop-top.png"
+  },
+  {
+    "sha256": "4A9380D7EB3C87ED98E6CE8F5FCBDCC3622A3076AF98BBD14B444DF8483CB418",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-english360-verification.json"
+  },
+  {
+    "sha256": "06E88F0AD8E69030EC28047082C1173F80F712B369E49AECBF6B89B044609FB7",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-english360-verification.png"
+  },
+  {
+    "sha256": "A39E78AFB638CFF927215F21D1E5849583688B910F31F06235FBDBB397BAE353",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-english360.json"
+  },
+  {
+    "sha256": "0273AB5D3CE1A809DC3907F44B09390F5B4271FBF77DDB0A8E7FBE80F2C7F9E3",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-english360.png"
+  },
+  {
+    "sha256": "55802B679DA8C6712DA34224A0F7ED316428D4F61A19FAF36EE0C50B924E696B",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-japanese360.json"
+  },
+  {
+    "sha256": "3FB852276876A47666F3701C61E5752D95B26BD8F9B00A0583F6D20FA1E7598B",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-japanese360.png"
+  },
+  {
+    "sha256": "0100E7DCFFE41C738C7CC39EF1CC298AFFAC815ABE5720DD9BC783633FD6DCC8",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-phone360-bottom.json"
+  },
+  {
+    "sha256": "E71F1AC63B5C0AE1AC27C371FC52A28DB9632DBDDF28E5C912E9395045867AF2",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-phone360-bottom.png"
+  },
+  {
+    "sha256": "502300CAAA118C98B0DD72CD6AFC708F1B4D49F93F5C509E2B81D4EF6C752B0D",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-phone360-top.json"
+  },
+  {
+    "sha256": "9B9A03C574D5773EC8F1DD42EC7E8893C6B962EA5849FECF3ECFAC3ED2DAD374",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-phone360-top.png"
+  },
+  {
+    "sha256": "54E093B249A2F796092EEDA0D82244627AEB356021624A913B38A8B85731DFAB",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-phone390-error.json"
+  },
+  {
+    "sha256": "1A3DFB98D8CF1D70EDB991ADD57D45CFECD793581A0BAB53A921AC4BA4A6072E",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-phone390-error.png"
+  },
+  {
+    "sha256": "1BEC57DCD584333FE3992D7A3A6487C4F793AD07EA2F6076EFB5938D02CB0341",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-phone390-top.json"
+  },
+  {
+    "sha256": "500CAD7483D31A98DDE59B9374169C5DF68181883A132D846C6ADD6AFB1029B0",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-phone390-top.png"
+  },
+  {
+    "sha256": "405525A77F5C43301BA94622378B2B894698124DBB37A8089767B46189DFC1F0",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-phone390-verification.json"
+  },
+  {
+    "sha256": "1EDF7E45991B5F6B25C0BA09A562E4F83EE71CAED4A61D9BA17558E96C97B456",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\accepted-phone390-verification.png"
+  },
+  {
+    "sha256": "B04FBB74C1F2915C1B3720089265F9244886B3841CABF972EB13A4A469B4C276",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\artifact.json"
+  },
+  {
+    "sha256": "3EB4F9E2494A4DB543DC6A91B9619FBCB09E909E4AAB94533B03038D96B023AF",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\before-final-desktop-full.png"
+  },
+  {
+    "sha256": "21B645772769863AFE26E9D9C02E87BC1C5F54FB075D3E30FA8F0C219D787CC0",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\cleanup-superseded.py"
+  },
+  {
+    "sha256": "5AC1FDA08559DA6A7B422B3C2E4A1EA70479D4E5719B1C8E1EE7F8DD354110BD",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\control-pixels.json"
+  },
+  {
+    "sha256": "80D3167B02D1E2A8690CDBFD1A31E7B2A47F0C913657849CF31C8B474AA4DC83",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\desktop-empty-full.png"
+  },
+  {
+    "sha256": "94DE08611D4E16B4B87A939CBE37AFDE1886CD4C0491FE2510953AF14C40AD5D",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\desktop-full.png"
+  },
+  {
+    "sha256": "6AF1E8941A8E35D03F6066D4D7427E4A2A462ED02EC0CEAE64C6F36C31642588",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\frontend-files.json"
+  },
+  {
+    "sha256": "010418448576908239235B91D9D808B431420AF62896E39570013105CE547C9C",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\frontend-operator.py"
+  },
+  {
+    "sha256": "42CE2EEDCCBDD3298A885756268395EF45129E54F2932FF207D9270C1F5EF7DF",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\gates.json"
+  },
+  {
+    "sha256": "9146CFDB584203BD457311C850DC6015A6A6ABED8FE296DC738456DFE6783D0C",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\gemini-final.txt"
+  },
+  {
+    "sha256": "158C8C237CE9CC2A38A54755958B9B512D268F1A1FD80162FFB4B86A341EE98D",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\gemini-mobile-final.txt"
+  },
+  {
+    "sha256": "D5A9B39D4996C6AE542BA049EB4987395412D7912CCE7A3291DE2B8AAA7B8461",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\gemini-review.txt"
+  },
+  {
+    "sha256": "F828DF1EC17138F7187ABF2343231C9BDCBB92049A3BA875D4BF2F8D868E8A7B",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\integrated-source-binding.json"
+  },
+  {
+    "sha256": "417173626B2FE017EFB06B00E22F5ACC994406EEC61744A1036A9347E28E896A",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\layout-results.json"
+  },
+  {
+    "sha256": "75CF7E1298AC2A03551817BF66D41816661772F0A32CFC0F244CBC01F502E226",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\layout-validator.py"
+  },
+  {
+    "sha256": "034C9F82A97020C9CB73F6FD42F654200F649D03E112CFAC555EC7FB55748576",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\measure-controls.py"
+  },
+  {
+    "sha256": "95613561EB190DED405675D3020B6728DAE92516861F4639124860928AC54218",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\model-flash-probe.txt"
+  },
+  {
+    "sha256": "6D64170CFD572A97F57D12E685AE67954AC7CEF4E46DCA245EED60DACD49E6A5",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\network.json"
+  },
+  {
+    "sha256": "240A3E0D37D2E86B614063F5347EB02D4F99CA6C254DE6B82871FF8D95532A7D",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\private\\.gitignore"
+  },
+  {
+    "sha256": "2AEB63D84D5B873D429F4E8FC15B70A614ECF32B90203738DCB071F024E93A35",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\private\\production-desktop-lower.jpg"
+  },
+  {
+    "sha256": "8565DD7E63A7CBF82CE7271D7626DF75E2112E95DC70F842FC50A21AF6D6ADFD",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\private\\production-desktop1440.jpg"
+  },
+  {
+    "sha256": "8565DD7E63A7CBF82CE7271D7626DF75E2112E95DC70F842FC50A21AF6D6ADFD",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\private\\production-integrated-desktop1440.jpg"
+  },
+  {
+    "sha256": "78C043B00787DEF6DACDF6772D594447805BCB4D4C4DC1A286709B839DF05249",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\private\\production-integrated-phone360-bottom.jpg"
+  },
+  {
+    "sha256": "D0FDB14312641638B6A32B35BF3BD847E9ECAA93D33252792E80AF01867F89E6",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\private\\production-integrated-phone360-top.jpg"
+  },
+  {
+    "sha256": "3C99B8052A60759BF1FA10EF2D0F3C44A5F8A1E582C862A2DE235A7DD4BAD9D9",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\private\\production-integrated-phone360-verification.jpg"
+  },
+  {
+    "sha256": "78C043B00787DEF6DACDF6772D594447805BCB4D4C4DC1A286709B839DF05249",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\private\\production-phone360-bottom.jpg"
+  },
+  {
+    "sha256": "8E537F27314EABB0C19F8AFD6B59E15DC17F03654C16876F1618B5C412F5495B",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\private\\production-phone360-top.jpg"
+  },
+  {
+    "sha256": "B29E7ABEE503C3C9D0C366A3D0599F6E8378102B06033D1C9D2A0E53462DD976",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\private\\production-phone360-verification.jpg"
+  },
+  {
+    "sha256": "29E3837EC7A97602A782C65679F8B2F0EDBCF8964DCD737CE7016B8B499A2305",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\private\\production-phone390-top.jpg"
+  },
+  {
+    "sha256": "E1B175CC54233A10F68626C436B0CD9019B54C5D47E74A93516C50DC681646A4",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\private\\production-phone390-verification.jpg"
+  },
+  {
+    "sha256": "4534E75C7DD6BCEF05F7CA63093FBD7F3A596D6FAD10925D4D455FD11A1591BC",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\production-activate.json"
+  },
+  {
+    "sha256": "93A807523AB8D9BF63F3CAD61CBCD50F31D0CB5735D495ED1CD81E0806F8F422",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\production-browser.json"
+  },
+  {
+    "sha256": "BD73665B4E51FB3A5D3DECFC97DB1265D53BE8547621F8321CD3EB935FB02F9C",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\production-integrated.json"
+  },
+  {
+    "sha256": "679C1221244A46AEB725A55DAA5E695F6E043B6F734E76DCA2115A98B05D3A74",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\production-verify.json"
+  },
+  {
+    "sha256": "480D4986D46780FE7E4676D54BD6822C8C55BBE164F20A576787D6B3C9F0998A",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\source-binding.json"
+  },
+  {
+    "sha256": "68FCC9C75BFCC6294D20793774B98576615937DCFC4A7175ACBB48B320D87FFF",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\stage-release.py"
+  },
+  {
+    "sha256": "9F222BF51D25FE24BD18D541A33613F3F2AC1032857C942B2F858068CCDEEF0F",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\superseded-cleanup.json"
+  },
+  {
+    "sha256": "6BE1BBD239FB632E8BDACCCE510BA4EDF87C2138484EF2B5A328F6E9D81BA899",
+    "path": "docs\\reports\\evidence\\account-balance-20261112\\tests.json"
+  },
+  {
+    "sha256": "EF983015CF9BBCA29C9719BE3389B65540D40804A4CD0F7ED07DEBB14CD28D37",
+    "path": "docs\\reports\\evidence\\account-profile-404-20261111\\__pycache__\\config-operator.cpython-313.pyc"
+  },
+  {
+    "sha256": "F412D67E48168A005795A63E290412F45911D716F6D725AC19CB4520EE71B47B",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-compiled-final.json"
+  },
+  {
+    "sha256": "C111D4BF9332B085F1F496BA1EA978FD23DB076DD8C46D0F4F66AB4926CFB0D5",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-compiled-final.png"
+  },
+  {
+    "sha256": "4D73CA29BDD683BFF4F4AD071AB352F2DE7EF824FB990A96F9A5C738827A8277",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-compiled-integrated.json"
+  },
+  {
+    "sha256": "DEAF75CAEF956FDE1261B6BFDBB57855C4ED3C032096B4F713AE67CA7FEFB7AA",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-compiled-integrated.png"
+  },
+  {
+    "sha256": "6F37A8F935C3A7059B8B5F7C4356BBF399536167C436204D52DB8155044F2CD7",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-desktop-china.json"
+  },
+  {
+    "sha256": "CC890802176AE32AF4CBFA7FDBAC05DA7E0A98CE1F05C769EC8DD5E1F1F9CC50",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-desktop-china.png"
+  },
+  {
+    "sha256": "1EE27E8203A9164DCA7230F29029C47D939FA4B3E6B76DB0692F90FCF6B66EFC",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-desktop-selected.json"
+  },
+  {
+    "sha256": "149410B0FFBC3833F456F3CD6C1AAB47981A81340EC0F163560E3F50D4F76207",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-desktop-selected.png"
+  },
+  {
+    "sha256": "C99D497D643A44700C6DF2620108626A958489F631F8A2FC1FB61A53BCB1D5AB",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-final-windows1440.json"
+  },
+  {
+    "sha256": "763E6689680C8C8630AECD4029A3314A78B962753A1924B9DE0699560FDA6396",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-final-windows1440.png"
+  },
+  {
+    "sha256": "00A8589AED092ACA2C4472BD489A1212C09B6B87DAB6B790155E2531270A9847",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-final1440-china.json"
+  },
+  {
+    "sha256": "45B2F8F0960C9209A7FF7C4156485C7D5442415B79E7D8FFFDDA28F5ACC7787B",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-final1440-china.png"
+  },
+  {
+    "sha256": "57DEF6817547196EF3C7AA898093BD1D513FCEA9FE752835C7872501AC9FE6A4",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-final1440-international.json"
+  },
+  {
+    "sha256": "C1743056A6E1DBE9A74F2E386A023EBA594B326C20C60F8288AB2A1E7D72A516",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-final1440-international.png"
+  },
+  {
+    "sha256": "A5D6CC794B210E704B930831AAB551F75B4CB23BA1DD8289D76BCB6ECF136210",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-final360-long.json"
+  },
+  {
+    "sha256": "5B38ABB2476C14BDD27451BC68534563C5CA62E5B0A013419B15EBB25E50DD26",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-final360-long.png"
+  },
+  {
+    "sha256": "FDEF309E85874040574463F95D34BCFDF3A2FADB94BA5863108D7379B643B5A8",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-final360-short.json"
+  },
+  {
+    "sha256": "ABECF35068AB287B2CE98216E7F3D6C20DBD187F6473AA541FA9CA548B2B472A",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-final360-short.png"
+  },
+  {
+    "sha256": "9F72DE50E98DCCEFAC60AE411DE9586145DA126651154F7D1AECB9D935C64678",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-final390-china.json"
+  },
+  {
+    "sha256": "44DB0D3EC60C52625180F3B1F9D1AC761FE6C0A886CBB49C03E8AF2EF0775601",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-final390-china.png"
+  },
+  {
+    "sha256": "898FF444F1E9B6EC7E257364C6F96D84D8E24EBC6D4D01AB018779F50FBE7811",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-final390-empty.json"
+  },
+  {
+    "sha256": "139B5EE17F8AD6458A59786DCEF1579E9B886E649918DFF149AD22EB43589AE9",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-final390-empty.png"
+  },
+  {
+    "sha256": "1EE9E92E74A84B62FD31E74E3A569EB5F9BC8F9FD99517BDD7427ADC83AD42A3",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-final390-selected.json"
+  },
+  {
+    "sha256": "5542BBFEAA18D589E61CAB573EE793CDE5425621FB57D7C44A1CDA2456854ADF",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-final390-selected.png"
+  },
+  {
+    "sha256": "7A6D592DF1F187F636A5EEBAEC1DA980EE9EBCF8949070001F6932746F3AB767",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-japanese360.json"
+  },
+  {
+    "sha256": "0856A0C9AD84CCBB300E288084CFA78C7775647F5ADDC77A1EC49AEE6032AC72",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-japanese360.png"
+  },
+  {
+    "sha256": "4221A046BAA0C30CDA56A62ECC074A9AE0471E229065F27539CDA28B69A4E5DB",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-phone360-long-name.json"
+  },
+  {
+    "sha256": "F87311C12DA2476899352702380945ABEFBB47CC30FFCACDC2170B60C91EC682",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-phone360-long-name.png"
+  },
+  {
+    "sha256": "A0F3D4DD9C2F3DA6F553C6D79169ABB9DAE71CAFF8976B5AC35DFC7B0DBA4D32",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-phone360-required.json"
+  },
+  {
+    "sha256": "E3D88220B1874D88E1F843D17071C49F3BA6B86FF1CB4F4450FCE14A15D16B89",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-phone360-required.png"
+  },
+  {
+    "sha256": "31D870AA11D7A810A7A72743B01B11020EADFB3224C444160D81C0B5141E43FB",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-phone360-short.json"
+  },
+  {
+    "sha256": "071F0E17F8D61AEE08ED37DCF68CA418F9A1E5EABF00A186968A1D5EEAAF94A0",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-phone360-short.png"
+  },
+  {
+    "sha256": "9FC60D71BE497323B92B4584EAF8DEA949A2FC59617D7184D348DF402D119E61",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-phone390-china-top.json"
+  },
+  {
+    "sha256": "60ED87FA3F5BB3E8336B0C2904B86CC547EF28A3E90B5630D0288CC783AB6199",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-phone390-china-top.png"
+  },
+  {
+    "sha256": "5A0084085989BB2D739DFE33B2142D72EE561617855737C660E24AD8FAD03A7D",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-phone390-english-search.json"
+  },
+  {
+    "sha256": "44D216CD4C9D5F9E7010D3444EC15ED3D317CF03CBC560171D6E3319AFC24B83",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-phone390-english-search.png"
+  },
+  {
+    "sha256": "8DB5B89543F3C4505BCB08737AC26455F05C39168A098E31758585BDA326132B",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-phone390-no-match.json"
+  },
+  {
+    "sha256": "FD23F9DB89CCA0E3F2DB055029ABDCFA40B9CF7DD4A2E644795BD7DC887CC19F",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-phone390-no-match.png"
+  },
+  {
+    "sha256": "E7165316C0EE4FA2F459282794A8C8E38931B6A8E1F44849BD7459C792766F5A",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-phone390-options.json"
+  },
+  {
+    "sha256": "DE004B67CF9715098294D3BAC5C6B948B9AACCAE5F3B4955676892D1B45B7765",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\accepted-phone390-options.png"
+  },
+  {
+    "sha256": "5A214C6BB1C0C3D259DF3307E5F2FFF2E4E26648D512645AC89453F1EC836939",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\artifact.json"
+  },
+  {
+    "sha256": "2281BB3F697D0D81BA600F45340CDF23BFC45FEF8189E6A50EB67F32746302E5",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\before-fix-phone360-short.json"
+  },
+  {
+    "sha256": "9A1840FEC2805AF6148FAC9280DB7B09B37CA89DDC12A8AC7D96925174F3348E",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\before-fix-phone360-short.png"
+  },
+  {
+    "sha256": "AE1D8B8EFC228973E047CE7233D89B66E839A5A1C03833547A85EE69452AACC3",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\before-fix-phone390.png"
+  },
+  {
+    "sha256": "B65CBA12AC4FA65988B4FD67A7D137F781B65C68C6F5DD8D9A05DEFCA5572BCE",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\browser.json"
+  },
+  {
+    "sha256": "DF2B0482BBF7629278F8E5FF1FA143DF3E3813A0951D079675EBD86EFFBE08F3",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\build-context-cleanup.json"
+  },
+  {
+    "sha256": "C84024F87E9FD57CF6B6BDF2ECD589FB097B5E0AC59EE51C2AE87CBA05B72FAF",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\build-final.log"
+  },
+  {
+    "sha256": "441A134DF3EFD59C440567A8A47FCD90B7EF6EE524A8F4DC27466D1B99511EC3",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\cleanup-local-arguments.json"
+  },
+  {
+    "sha256": "A6A1AC1004C8185E17020271E32C528CB1E7A9952A690260C5DBE97F7A090EF2",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\cleanup-local.ps1"
+  },
+  {
+    "sha256": "8F04E47A84F3F91FD31FA28CE766F2A320F6D55E43116085C884F05FCB02475C",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\control-pixels-before-fix.json"
+  },
+  {
+    "sha256": "E03B47E33BA13A06DE70552E1AC45BBF06BE82E11BC8DC5702CBC37EC68A9613",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\control-pixels.json"
+  },
+  {
+    "sha256": "B75BD78A1243E51B5670143E0C958E9EC3C4768D973CE7D941ACD0C7F20E0D14",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\desktop-full.png"
+  },
+  {
+    "sha256": "34163C61CD38B9AEE87B532B0C27C90E23D22F6CC28681B435AFAADF70B1545A",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\final-desktop-full.png"
+  },
+  {
+    "sha256": "7F1A78584B21A96BBC7903CC1BA5170BCCF69F5236E5A23094D9993152EC2AE0",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\frontend-files.json"
+  },
+  {
+    "sha256": "9922E59526001009D256E7BBD55B7D95BF915185D8C1CE74B851CAD2EBD625CE",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\frontend-operator.py"
+  },
+  {
+    "sha256": "CD1CCBC2C58595AAA8DE93E371C42144A74EA2BB403BA3F075E6186CFF684F18",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\gates.json"
+  },
+  {
+    "sha256": "1EA69171DB15511C0B110F8A05EBE1077C3B87C26B34A1B921527F5C60FE0451",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\gemini-final.txt"
+  },
+  {
+    "sha256": "4DDCE6D2E4B460E227AC4778C8BA9118EC506D139EEAB14CD82FCC4AD33470A6",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\gemini-review.txt"
+  },
+  {
+    "sha256": "20264608DBA37F6C0EB7401A1BDF97BACDC3C2E898129F59FFF6D70AD5E88275",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\initial-release\\artifact.json"
+  },
+  {
+    "sha256": "EEC55A6AF52700F55810937DC571D5F60A2BDCD6DD0FC33CF05B935F9C30678C",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\initial-release\\frontend-operator.py"
+  },
+  {
+    "sha256": "5E9A28785B57A92EBC64C959B818F98275C6DCEFE757582F24BEEE41E012204D",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\initial-release\\gates.json"
+  },
+  {
+    "sha256": "340EB6176B8B917DEE054B6D3E5FD2A66E9B0B5A857ACF00544F25E04B882C53",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\initial-release\\production-activate.json"
+  },
+  {
+    "sha256": "01A13F6E7FF54C778E32E123565F24CD87BC9F602B1F1BF2514B07D039B158D4",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\initial-release\\production-browser.json"
+  },
+  {
+    "sha256": "A72EB9CFAB5269E440426F3FF10858BCA1B14E30B86C686F2EFB2804A2D3C4D6",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\initial-release\\production-control-pixels.json"
+  },
+  {
+    "sha256": "56CCBF163D8ADAB71FD2BBD07C3C7B3FBD3B9E70E11B3C0F5FD89CBA60336CA1",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\initial-release\\production-verify.json"
+  },
+  {
+    "sha256": "3901671D2D4CB09E3FE0176FEB75FAFD9C58515EA62F0C334D1621AC10782464",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\initial-release\\source-binding.json"
+  },
+  {
+    "sha256": "0DBAF14C3E399DCC6D4C778D25147A07738616EA306E3EA42345BAD5E9E0CC76",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\initial-release\\stage-release.py"
+  },
+  {
+    "sha256": "4F9A2471065C3C54EE57150E557B611D4F62FC112D762826C8B4BF66C113BFD4",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\local-payload-binding.json"
+  },
+  {
+    "sha256": "E528FFC36734660E82981452CC5CC9CCF14369EF3AB8772FC5886B478FF547B3",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\measure-selects.py"
+  },
+  {
+    "sha256": "240A3E0D37D2E86B614063F5347EB02D4F99CA6C254DE6B82871FF8D95532A7D",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\.gitignore"
+  },
+  {
+    "sha256": "2609E37EE9485A3FE08263ABE0ED8E1409C2748EA72E925840DFED1C0884737B",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-corrected-desktop.json"
+  },
+  {
+    "sha256": "F5F3CEE34AC9B2A08ACA66E98F3B6BADB99ACD94DA3C17F3589F4FC2323D70DC",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-corrected-desktop.png"
+  },
+  {
+    "sha256": "BFB431A86015DC65974A870F2A8D91CF2CF53AFC654CBD618718C9D63E4086E3",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-corrected-phone390-china.json"
+  },
+  {
+    "sha256": "A1E0572BC7DE37750742087FEA107AFC404D991A527484840068D9D0B8383EE8",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-corrected-phone390-china.png"
+  },
+  {
+    "sha256": "D5AE9C31644C624E62B5F482E75353CA2AF516D35BCCB0DFCD3D8515DFB5E078",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-corrected-phone390.json"
+  },
+  {
+    "sha256": "2201562B4C9BD113882E2F38611B76BD6E630DA91DED794EB72D582D6D64A4A5",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-corrected-phone390.png"
+  },
+  {
+    "sha256": "A7C331B716089AA495EB6E371EA42D3167DB537354FF20FCE7C908419F4846E5",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-corrected-short.json"
+  },
+  {
+    "sha256": "320F9800A24ACE601868EF9D619E818E0A1A54340C79103B469F9C2530ACABFD",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-corrected-short.png"
+  },
+  {
+    "sha256": "63F7359558263E3CADF6BF6FAC66B1ED7C01A63CD8DEDEE475809C85101E37E9",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-desktop-china.json"
+  },
+  {
+    "sha256": "333369D8E91D08B5CA83F2ED4C6D24AE563FBB1F0F3ABCE2523734FE103C15BD",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-desktop-china.png"
+  },
+  {
+    "sha256": "9B4735144D836DF7D80BE8256B7F0F3300352EA69A242D38567EFF25A524B94D",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-desktop-international.json"
+  },
+  {
+    "sha256": "69DB030CC533A673D02C119F98B7F372D34CDBC38FEB8B9E98A02D289620D74A",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-desktop-international.png"
+  },
+  {
+    "sha256": "9F8CAD33C1C2DBF204864C280B754F5C4342E96D45DC1EA2FC2418DDBBBE83B2",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-desktop-overview.png"
+  },
+  {
+    "sha256": "0975F08BEF668A74746566BB1388C4A1394A0D58F205D9D4EE9CC40815A50405",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-phone360-long.json"
+  },
+  {
+    "sha256": "5AF4848F06F850EF29942B3624E1A9BE4F1026174A7D0EF11FD9777091A64EB7",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-phone360-long.png"
+  },
+  {
+    "sha256": "A7C331B716089AA495EB6E371EA42D3167DB537354FF20FCE7C908419F4846E5",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-phone360-short.json"
+  },
+  {
+    "sha256": "1B2DBE7AAE104C39281977E4C2F49729E40250346AC0F81FA11EF7AECD9F5BDC",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-phone360-short.png"
+  },
+  {
+    "sha256": "A47537E610A3B9F83CD438B9F261AA9BA70C98E78DDD3C5E2D437E8AA052F5BA",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-phone360.json"
+  },
+  {
+    "sha256": "573B46A90D5E630FF009FB9D4F5ED6F6F35C2C7BCCC2A68C74EF760BB1B92FA5",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-phone360.png"
+  },
+  {
+    "sha256": "3D192C62B180C7EDF9BC4669F049821673BC18EE6309EF19AD1EBB3D0D8ED987",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-phone390-empty.json"
+  },
+  {
+    "sha256": "A4950FF6E39C9F17EFA8F0ABB05D2E63DAC0C3446F8153219C02A7F08E865779",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-phone390-empty.png"
+  },
+  {
+    "sha256": "854B41EFDE25DB42198EBF89622A7FC8B3AD8BC53781B2EBB79E6135835E7228",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-phone390-international.json"
+  },
+  {
+    "sha256": "85B5BFF62B501687CE0D53D61773F91A4AC0177488325609E673C57B4027E045",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-phone390-international.png"
+  },
+  {
+    "sha256": "8CE7780B72AB1FEE73ACE5C2AFF7C573999041A26DA3A56B18CDA6C7ABB52908",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-phone390.json"
+  },
+  {
+    "sha256": "282B276CC8B9FA1115E1D5D88CB314938904082219F1293F56C14A7F1879446D",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\private\\production-phone390.png"
+  },
+  {
+    "sha256": "604E1C075A48F123A6BBAC00463EE6F2089C27952EFEFA50BC7070F0E81F44DB",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\production-activate.json"
+  },
+  {
+    "sha256": "83D80E6BF49813396F34DF71E101EAA9F81BB6EC1D04F6D6BC913910E74E625A",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\production-baseline.json"
+  },
+  {
+    "sha256": "40E7A8722E55AC3946136253AC673C6F31E5C4D6F44C37C3FA7C252A0FA7FA75",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\production-browser.json"
+  },
+  {
+    "sha256": "C50A0A4DDED856CFA4E53D36A4C2680A235872B29039F9EE3A3ACFB2C5CD168A",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\production-cleanup.json"
+  },
+  {
+    "sha256": "044FE37816AEFDCBFDAC746C167805BE145771C701C3F08FEFA631AB77D11502",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\production-control-pixels.json"
+  },
+  {
+    "sha256": "4126CB3BC37CC4BCB589B438B3DC1984DB3F01A006D32767995404AF565DB750",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\production-verify.json"
+  },
+  {
+    "sha256": "DAB44E4A0B044563C68E71FB5A83C3F2AB9A72183675BCC62F4C41B9027F8ACB",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\README.md"
+  },
+  {
+    "sha256": "178D65D6E56C8B79DF5B23242F9A5656DAB3D5AA184688C4CDA87B90B1FFF87F",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\retire-superseded.py"
+  },
+  {
+    "sha256": "39268DC4E21C597AA5AAAEA6502E5B51EDFB5F1D2AF5A8C958AB0D4547A8EC9B",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\source-binding.json"
+  },
+  {
+    "sha256": "B10A54EA37A62A433041CE8286E985B6C9117912DB3C44FED3F3D95C0078A151",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\stage-release.py"
+  },
+  {
+    "sha256": "BD9787BB51D2A0422314301A332C5FF8DF97A6336A481D96A543BEF71B7307F2",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\superseded-cleanup.json"
+  },
+  {
+    "sha256": "78D03175490842B6BB3D41D9FA93E0FBD2647379BD18FC071E793CE893A988F5",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\tests.json"
+  },
+  {
+    "sha256": "EFC6D415337930DA67FB4EB60F6A1FA5CF8A0EF22961A63BEF59A402A3100BDE",
+    "path": "docs\\reports\\evidence\\social-platform-select-20261112\\verify-local-payload.py"
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "result": "PASS",
+  "main": "ec24fa9af47b38999b98fc848e8ccf77787ddad2",
+  "frontend": "ec24fa9af47b38999b98fc848e8ccf77787ddad2",
+  "core": "a14f0320aeed077fbf449c95f2b236f4dd1d3393",
+  "ancestorBindings": {
+    "archive": "c680934f3a83104707eaa61bc0d82ea50efa3afa",
+    "merge": "6665da7402015c2f8868d40b15dc4fb6a907eada",
+    "editor": "012013ad330f81f8c293148564860ed31fd7178c",
+    "mail": "f4fae3d05d61c2b697cba4f6ac62f07b55d58790"
+  },
+  "backendBuildInputsMatchMain": true,
+  "mainFrontendSourceMatchesLive": true,
+  "liveAssetsMatched": 18,
+  "stableContainerSnapshot": "runtime-final.json",
+  "noReleaseLocks": true,
+  "noRemoteReleaseScripts": true,
+  "mutationsPerformed": 0
+}
