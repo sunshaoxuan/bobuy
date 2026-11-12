@@ -1,0 +1,16 @@
+{
+  "base": "c680934",
+  "environment": "local Vite 127.0.0.1:5189 with production read-only API",
+  "viewport": [
+    1440,
+    768,
+    320
+  ],
+  "files": {
+    "frontend/src/components/CompactProductCard.tsx": "1384e4e1372610dd07bcfaa453be59034e1d3cdc76fdfc08bf791ec452b6c36f",
+    "frontend/src/components/ProductPopularity.tsx": "e7cd74c866e8f2865cce2e83edf11ad3451c2fe002eb7601fbdd882d85b8ecb1",
+    "frontend/src/public-catalog.css": "e2f7a5d868ebe571568f7ed55c85a1bc1f6e9d619a56de4011447aa09de545f9",
+    "frontend/src/components/CompactProductCard.test.tsx": "d113592c0fb3b36f7fa40905df6750a639a3c3e973cc8e9a7081650732b7b6f6",
+    "frontend/src/components/ProductPopularity.test.tsx": "6957d60dae83c4dca2413ee8236464e3270069ce670f7ec41d5efce4c14c2827"
+  }
+}

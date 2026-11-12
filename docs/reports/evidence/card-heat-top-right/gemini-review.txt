@@ -1,0 +1,38 @@
+Here is a detailed review of the provided implementation across desktop, mobile, and the wrapped edge cases.
+
+---
+
+### 1. Concrete Clipping, Overlap & Alignment Defects
+
+1. **Zero Hard Clipping / Text Overflow**:
+   * Text strings (including long Chinese units like `万亿` and long numbers) do not clip against the card’s right edge or border radius. Right padding remains visually consistent with the card's inner gutter.
+2. **Vertical Clearance with Product Image (Wrapped State - Images 3 & 4)**:
+   * **Defect / Risk**: In the wrapped 2-row state, the clearance between Row 2 (`🔥 9,223,372万亿` / `🔥 暂不可用`) and the product thumbnail below is significantly reduced compared to the single-row state. While it does not physically overlap the image pixels, it encroaches into the top padding of the image container, making the top section feel compressed against the image.
+3. **Grid Row Alignment Inconsistency (Grid Layout Risk)**:
+   * **Defect**: In a multi-column grid (such as the 2-column mobile view in Image 2), if one card triggers the wrapped 2nd header row and its neighbor does not, the product images and content below will be pushed down unevenly. This creates a jagged baseline across cards in the same grid row.
+4. **Flame Icon Vertical Centering**:
+   * In Image 4 (`🔥 暂不可用`) and Image 1 (`🔥 热度 0`), the flame icon sits about 0.5px–1px lower than the optical center of the adjacent text. This is a common SVG-to-font cap-height discrepancy—using `align-items: center` with standard Chinese font baselines causes the glyph to appear slightly bottom-heavy relative to full-height CJK ideographs.
+
+---
+
+### 2. Judgment on Placement and Balance
+
+#### Standard States (Desktop & Mobile — Images 1 & 2): **Pass (Strong)**
+* **Desktop**: Placing `No.` on the top left and `🔥 热度 X` on the top right creates a well-anchored top bar. It clears clutter from the product information section below and keeps metadata grouped cleanly above the image.
+* **Mobile (Hidden Label)**: Dropping the `热度` text and retaining only `🔥 [Count]` on narrow screens is the correct design decision. It fits comfortably within the narrow mobile card width without crowding the `No.` pill badge.
+
+#### Wrapped 2-Row Fallback (Images 3 & 4): **Needs Refinement**
+While the wrapping logic functions as specified (preserving the `No.` badge and right-aligning the second row with a 6px gap), it introduces several UX and visual balance concerns:
+
+1. **Visual Balance & Eye Tracking**:
+   * Having Item A top-left and Item B bottom-right creates an unnatural "staircase" / diagonal visual void. The top right is blank, and the bottom left is blank, leaving awkward negative space right above the product image.
+2. **Extreme Number Formatting vs. Wrapping**:
+   * Rather than allowing numbers to grow to `9,223,372万亿` and forcing a line break, **numbers should be capped or abbreviated** at the formatting layer (e.g., `999万+`, `99M+`, or standard compact notation). Preventing multi-line wrapping entirely is preferable for grid consistency.
+3. **Semantic Conflict in Error State (`暂不可用`)**:
+   * Keeping the orange flame icon next to "暂不可用" (Temporarily Unavailable) creates mixed signals: an active, energetic flame paired with a disabled/failure message. In failure/empty states, the icon should either be muted (greyed out) or the popularity indicator hidden entirely.
+
+---
+
+### Recommendation Summary
+* **Keep** the top-right placement for standard states (it looks clean and balanced).
+* **Avoid wrapping altogether**: Enforce compact number formatting (e.g., max 4–5 characters like `999k+` / `9.2万`) so that the header **never needs a 2nd row**, preserving uniform card heights and image baselines across the grid.

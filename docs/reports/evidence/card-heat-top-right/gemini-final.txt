@@ -1,0 +1,27 @@
+### 1. Actual Defects Found in Attached Screenshots
+
+* **No Critical Defects**: There is **no clipping** and **no overlapping** visible in any of the attached states.
+* **Minor Alignment / Visual Quirks**:
+  1. **Optical Baseline of `?` (Screenshot 4)**: The `?` glyph sits optically slightly higher than the flame icon’s center mass due to standard font baseline metrics. Setting `display: inline-flex; align-items: center;` or a tiny vertical offset would make the pair perfectly balanced.
+  2. **Tight Clearance with `999+` (Screenshot 3)**: While not overlapping, the gap between the right edge of `No.87406` and the flame icon is down to ~8–10px. 
+     * *Advisory Risk*: As shown on Desktop Card 5 (`No.1861997`), SKUs can reach 7+ digits. A 7-digit SKU alongside `999+` on a narrow mobile card (~150px width) will risk collision or wrapping if `flex-shrink: 0` or truncation isn't strictly enforced.
+
+---
+
+### 2. Breakdown Against Review Criteria
+
+| Criteria | Desktop Grid | Mobile Default (0/1) | Mobile Cap (`999+`) | Mobile Error (`?`) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Top-Right Placement** | ✅ Clean, consistent inset from card edge | ✅ Clean, matches card right padding | ✅ Correctly right-anchored | ✅ Correctly right-anchored |
+| **Clipping** | ✅ None | ✅ None | ✅ Full `999+` glyph fits without truncation | ✅ None |
+| **Overlap** | ✅ Ample separation | ✅ Ample separation | ✅ Clear (no collision, though buffer is tight) | ✅ Ample separation |
+| **Alignment** | ✅ Centered along header row axis | ✅ Uniform row height & vertical centering | ✅ Flame & `999+` baselines align well | ⚠️ `?` sits slightly high relative to flame center |
+
+---
+
+### 3. Final Visual Judgment
+
+**PASS / APPROVED FOR PRODUCTION**
+
+* The single-row header solves the previous wrapping issue cleanly across all screen sizes.
+* The mobile badge size reduction and the `999+` cap successfully preserve single-row integrity under narrow mobile viewport constraints.
