@@ -1,0 +1,39 @@
+### 1. Visible Defects / Doubts
+
+* **Touch target size for pagination (Mobile):** The pagination buttons (`<`, `1`, `2`, `...`, `10`, `>`) appear smaller than standard mobile touch target guidelines (44×44px / 48×48px) and are spaced closely together, which may increase miss-taps.
+* **Long select option text truncation risk (Doubt):** In mobile view, `"南都留郡富士河口湖町 (JP-19430)"` and `"South Georgia & South Sandwich Islands (GS)"` fit tightly against the dropdown chevron. Verify that `text-overflow: ellipsis` is applied so even longer values (or viewports under 360px) do not collide with or slide under the right-aligned chevron.
+* **Disabled select state legibility (Doubt):** In the empty/non-Japan state (English mobile), disabled dropdown placeholder text (`"Select a prefecture"`, `"Select a city/ward"`) displays low visual contrast against the greyed-out input background.
+
+---
+
+### 2. Layout
+* **Desktop:** Clean 3-tier cascade (`国家/地区`, `省县`, `市区`) in a 3-column row, followed by summary card, full 3-column table (`代码`, `名称`, `日文读音`), and right-aligned pagination.
+* **Mobile:** Form fields stack vertically in natural reading order; summary banner sits comfortably between selects and data table.
+* **Empty state:** Centered illustration with clear messaging cleanly replaces the table when no sub-divisions exist.
+
+---
+
+### 3. Clipping
+* **No text clipping observed:** Headings, descriptions, selection pills, table cells, and footer attribution text render without horizontal cutoffs or uncontained overflows across all views.
+* **Scroll-to-top verified:** Full page viewports show pristine header and top-bar boundaries with no scroll-state clipping.
+
+---
+
+### 4. Spacing & Alignment
+* **Header block:** Action button (`重新读取` / `Reload`) is cleanly aligned top-right relative to page title.
+* **Table headers & rows:** Column headers align accurately with table cell content (`代码` aligned with ISO-style codes; `名称` aligned with municipality names).
+* **Footer:** Consistent padding above the ISO 3166-1 disclaimer on both desktop and mobile layouts.
+
+---
+
+### 5. Contrast
+* **Active text & headers:** Strong, legible contrast (`#1a1a1a` on neutral light backgrounds).
+* **Focus indicator:** Focused red outline provides distinct keyboard/interaction state visibility.
+* **Disabled inputs:** Border and fill clearly distinguish disabled status from active/focused controls, though placeholder contrast remains on the lower margin.
+
+---
+
+### 6. 360px Responsiveness
+* **Hiding secondary column:** Hiding `日文读音` on mobile successfully preserves layout stability and eliminates horizontal page/table scrolling.
+* **Compact pagination:** Fits cleanly within the ~360px width without wrapping onto multiple lines even with multi-digit page jumps (`< 1 2 ... 10 >`).
+* **Header utility icons:** Top navigation bar elements maintain adequate margin and do not wrap or overflow the viewport edge.

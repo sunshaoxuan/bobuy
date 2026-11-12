@@ -1,6 +1,7 @@
 import type { Dictionary } from './types';
 
 const messages: Dictionary = {
+  'geo.title':'國家/地區檔案','geo.hint':'依國家/地區、省縣、市/區查詢和選擇基礎檔案。','geo.country':'國家/地區','geo.prefecture':'省縣','geo.city':'市/區','geo.choose_prefecture':'選擇省縣','geo.choose_city':'選擇市/區','geo.selection':'目前選擇','geo.country_only':'此國家/地區目前僅預製國家級檔案。','geo.prefectures':'省縣檔案','geo.cities':'市/區檔案','geo.code':'代碼','geo.name':'名稱','geo.reading':'日文讀音','geo.source':'國家/地區採用 ISO 3166-1 代碼。日本預製 47 個都道府縣及全部市區町村，包含政令指定都市及其區。資料核對：2026-11-12。',
   "master.upload_details": "上傳詳情",
   "master.upload_filename": "檔案名稱",
   "master.upload_status": "圖片上傳狀態",

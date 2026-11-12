@@ -1,0 +1,139 @@
+{
+  "result": "PASS",
+  "baseCommit": "79b0f5f",
+  "deployment": "Not deployed; isolated development branch only",
+  "backend": {
+    "command": "python -B scripts/verify-backend-coverage.py",
+    "reported": {
+      "tests": 674,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 24
+    },
+    "executed": 650,
+    "coverage": {
+      "LINE": {
+        "covered": 605,
+        "missed": 35,
+        "ratio": 0.9453125,
+        "minimum": 0.9
+      },
+      "BRANCH": {
+        "covered": 203,
+        "missed": 58,
+        "ratio": 0.7777777777777778,
+        "minimum": 0.7
+      }
+    }
+  },
+  "frontend": {
+    "sharedFullRun": {
+      "files": 120,
+      "tests": 814,
+      "pass": true
+    },
+    "finalAffectedRun": {
+      "files": 2,
+      "tests": 6,
+      "pass": true
+    },
+    "reuseBoundary": "Shared full result retained for unaffected inputs. After the scoped pagination/lang/CSS changes, affected geographic and currency/route checks were rerun; final pure disabled-color change verified by i18n/TypeScript/build and actual browser/pixels, without repeating unrelated tests.",
+    "build": true,
+    "i18nKeys": 1693
+  },
+  "migration": {
+    "result": "PASS",
+    "scope": "Existing LOCAL PostgreSQL, isolated cloned disposable database; no production access",
+    "postgresVersion": "18.6",
+    "migrationSha256": "3e749e285526b5a9ae3e026e58fc08b28162cc6a1d50f9fac72306d8ef60dc6a",
+    "backupSha256": "b1fff7c52ae977745114f6bc2269ca0e435f9ccf63853281436103b169877018",
+    "countries": 249,
+    "prefectures": 47,
+    "municipalitiesAndWards": 1912,
+    "all2208RowsMatchPinnedSources": true,
+    "japanPost1892CodesCovered": true,
+    "originalTablesPreserved": 31,
+    "secondApplicationIdempotent": true,
+    "negativeConstraintCasesRejected": 7,
+    "scopedDropAndReapplyPreserveExistingRows": true,
+    "elapsedSeconds": 56.79,
+    "temporaryDatabaseRemoved": true
+  },
+  "browser": {
+    "states": 12,
+    "consoleErrors": 0,
+    "failedRequests": 0,
+    "viewports": [
+      1440,
+      360
+    ],
+    "longestEnglishCountry": {
+      "code": "GS",
+      "label": "South Georgia & South Sandwich Islands (GS)",
+      "width": 281.83203125
+    }
+  },
+  "geometry": {
+    "visibleControls": 94,
+    "actualRasterGlyphs": true,
+    "failures": 0,
+    "minInkMargin": 11,
+    "maxVerticalCenterError": 1.109375,
+    "minPaginationHotGap": 8
+  },
+  "sourceFilesSha256": {
+    "backend/src/main/java/com/bobbuy/api/GeographicAreaController.java": "cddf3afc5e8e06d8cda4fbfdd0fd40dda1b06d8503bef7bcf30878886e0141a9",
+    "backend/src/main/java/com/bobbuy/model/GeographicArea.java": "8a2fc20ee029d32c1a833aac072a03f6b2fca2477d27bdcd36fb091d424b4869",
+    "backend/src/main/java/com/bobbuy/repository/GeographicAreaRepository.java": "92a18433b2b16e64d805f1afcfbd2c9fd45c325fa0e2bb9008433fa80ffc1af1",
+    "backend/src/main/java/com/bobbuy/service/GeographicAreaService.java": "3bfdbb6dacea348f6025b6741574d43bf2bdb14ae2b037bb25a45f2106e097b6",
+    "backend/src/main/resources/db/migration/V34__geographic_master.sql": "3e749e285526b5a9ae3e026e58fc08b28162cc6a1d50f9fac72306d8ef60dc6a",
+    "backend/src/main/resources/messages.properties": "ac27990fa19eeae03010dc553edee74b8b9a42d0f2718ce034b9f503ee2ce67d",
+    "backend/src/main/resources/messages_ja_JP.properties": "dac11de7bccde23995731ce6bb02105975175c1e3042027962a6292cac35b874",
+    "backend/src/main/resources/messages_zh_CN.properties": "f271f36e1c0caf60424ac5e7657413993326bd8e3b4de8894398f18276b23bf5",
+    "backend/src/main/resources/messages_zh_TW.properties": "fb46d95006fc551a9f27e2508226feb4a020b07928001871b56591403a812ba0",
+    "backend/src/test/java/com/bobbuy/api/GeographicAreaDirectoryIntegrationTest.java": "0897e3d6a5452b2dc7f067e068d24aa31b2d07007f2c6373f15a475e7e722626",
+    "frontend/src/App.tsx": "96650966f3045ed1b3eb0ea90a8b4b9e5572718d3bcbd9bb179e8850eb8edb8c",
+    "frontend/src/api.ts": "b1c3c94cc853bd783032ba46a5efc6936947ff05013cb95481db543775c19774",
+    "frontend/src/locales/en-US.ts": "c15acda4d0b11a944725ac160214e8229974c7c2a70959b2ebebea633789d9d0",
+    "frontend/src/locales/ja-JP.ts": "e7d356075f1e2447f28fc898701c58db37799e24ee37473d32377880926dc9d9",
+    "frontend/src/locales/zh-CN.ts": "3e118a576c119497a15855d2169c2db83e7dd3ac8404513875e4b8ba43b88059",
+    "frontend/src/locales/zh-TW.ts": "d491dd11af040a4176a1754990615a9558eb95334fbb6a0a014b1400dc9bfc5e",
+    "frontend/src/pages/GeographicAreas.test.tsx": "2d915be7c4cd7bc4a7d2955d8de2f1c1e9af05cd1931e9a7062563a4045aadca",
+    "frontend/src/pages/GeographicAreas.tsx": "593c13b99ca28a711b0d291c8fa17941811c800f309753774b3d93abb9d39df5",
+    "frontend/src/pages/geographicAreas.css": "ee81224c17b117fd8de07f742426a94181807bf27ffa7d25172a87e9fece773f"
+  },
+  "loadedAssetsSha256": {
+    "/assets/GeographicAreas-B7QZD0H_.js": "f46ef0a275403890ba11a900190214658cd70d15d712215728703d400af751ac",
+    "/assets/GeographicAreas-Bo31vvAQ.css": "b54582b4f25b1498ac1b079c7a4832a1dc9aeec41881ae20fc6be0aa85f5c73c",
+    "/assets/Pagination-DSwwFDTC.js": "e5ba328dce10861e0929984465ef816c13126b3afc1b3486004cc248baae8176",
+    "/assets/Table-BESdS7M8.js": "b47a4e9419909647d66dcb5d0e7e6316aa76720ca9f8d268ef010c9cfc639899",
+    "/assets/index-B3GrOSxl.js": "02f28d4308ac8f86d05c4c10f77a824c06c360664b95f4901f7022923ad80a66",
+    "/assets/index-BfqPtA0s.js": "960ccf461a30b6f990d632aaf39df2722f229c938c7fb5dfac910858ff5777b3",
+    "/assets/index-Cb4lSh2w.js": "727f1291c228b7b750ee403b9db0a91a2e51995f73f324d34747c9394315c111",
+    "/assets/index-Cep5DThy.css": "192b1c233628607761e9ecc70c761ec82033f5e49390c677b9d143d7c6113c90",
+    "/assets/styleChecker-BDQLldwa.js": "45c9af1b438efbd2df78d205cf85ffb80b5e2dec6ce6c91ad3f543d15799c577",
+    "/assets/useBreakpoint-BwXQPS3s.js": "bcffd2598390272b2cb10ba0d4e9a62963a4f769161f96f45004f65565fd505f"
+  },
+  "backendJarSha256": "e1b5b621d7965bf316fe1490514ccd26643e27c6dc157bbf85be2e3025ab2acf",
+  "sourceGitBlobs": {
+    "backend/src/main/java/com/bobbuy/api/GeographicAreaController.java": "75a90e4936c19a73a533f2cc5bcc3c82ccd8a08b",
+    "backend/src/main/java/com/bobbuy/model/GeographicArea.java": "ae92d9f4cc0f8a65bba1cfd8dee5e17045eae839",
+    "backend/src/main/java/com/bobbuy/repository/GeographicAreaRepository.java": "651069826c7f37507d2c067965a08754fc924f2a",
+    "backend/src/main/java/com/bobbuy/service/GeographicAreaService.java": "11139cb0afc5152f3acab7e5f6ff635685975a27",
+    "backend/src/main/resources/db/migration/V34__geographic_master.sql": "8be70ced06527ff9179c79c79dbaeb6051275b1b",
+    "backend/src/main/resources/messages.properties": "ebf9842f1de886572fb09e949db20137d5d611a5",
+    "backend/src/main/resources/messages_ja_JP.properties": "7bb9ccdb2348a2d221a501f460a734703a1f719d",
+    "backend/src/main/resources/messages_zh_CN.properties": "909fa9048a014e08944919079a4ed1e4acfcf065",
+    "backend/src/main/resources/messages_zh_TW.properties": "46ac5fe2c598f53c298df71649e00c0ff9dab8fa",
+    "backend/src/test/java/com/bobbuy/api/GeographicAreaDirectoryIntegrationTest.java": "3a483210d5a6da5e657f33363aeb1a60f46f3454",
+    "frontend/src/App.tsx": "45267b15ccc2e816c3ff3b12f4e22cacac9473ce",
+    "frontend/src/api.ts": "c3a23325069207689861ae4896a248d39848f129",
+    "frontend/src/locales/en-US.ts": "36c4744903171d329d4e4877fe9c282f4b816a90",
+    "frontend/src/locales/ja-JP.ts": "8bebfa7ebd0fd80f73d0c5738b60f11abd1c5da4",
+    "frontend/src/locales/zh-CN.ts": "c3bf660c75b763030bf507ad0234b2f1596dada6",
+    "frontend/src/locales/zh-TW.ts": "aa471c616169c4d6f6dd5d6c204f0e09c989521d",
+    "frontend/src/pages/GeographicAreas.test.tsx": "acec85d804d218662a3021246f49b3c096e073c2",
+    "frontend/src/pages/GeographicAreas.tsx": "1bfc3d97cd6fa1c6d2c0ee67b9c7f21f17f73d19",
+    "frontend/src/pages/geographicAreas.css": "2d6f66d91a28212dbd3d60813a7f5fb9568b8936"
+  }
+}

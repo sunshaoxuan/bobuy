@@ -27,6 +27,7 @@ const LoginPage = lazy(() => import('./pages/LoginPage'));
 const Users = lazy(() => import('./pages/Users'));
 const MailSettings = lazy(() => import('./pages/MailSettings'));
 const Currencies = lazy(() => import('./pages/Currencies'));
+const GeographicAreas = lazy(() => import('./pages/GeographicAreas'));
 
 const adminPages = [
   ['dashboard', 'nav.dashboard', Dashboard, AppstoreOutlined], ['trips', 'nav.trips', Trips, CalendarOutlined], ['orders', 'nav.orders', Orders, ShoppingOutlined],
@@ -35,7 +36,8 @@ const adminPages = [
   ['product-markers', 'marker.title', ProductMarkers, TagsOutlined],
   ['recommendations', 'rec.title', Recommendations, ShopOutlined],
   ['suppliers', 'nav.suppliers', Suppliers, ShopOutlined], ['customers', 'nav.customers', MerchantCustomers, TeamOutlined],
-  ['basic-data/currencies', 'currency.title', Currencies, TagsOutlined]
+  ['basic-data/currencies', 'currency.title', Currencies, TagsOutlined],
+  ['basic-data/geographic-areas', 'geo.title', GeographicAreas, TagsOutlined]
 ] as const;
 
 function Admin() {
@@ -50,6 +52,8 @@ function Admin() {
   const menu = <Menu mode="inline" selectedKeys={[location.pathname]} items={[...menuItems, ...(isMerchant ? [{
     type: 'group' as const, key: 'basic-data', label: t('nav.basic_data'), children: [{
       key: '/admin/basic-data/currencies', icon: <TagsOutlined />, label: <Link to="/admin/basic-data/currencies" onClick={() => setOpen(false)}>{t('currency.title')}</Link>
+    },{
+      key: '/admin/basic-data/geographic-areas', icon: <TagsOutlined />, label: <Link to="/admin/basic-data/geographic-areas" onClick={() => setOpen(false)}>{t('geo.title')}</Link>
     }]
   }] : [])]} />;
   if (!isAuthenticated) return <LoginPage />;

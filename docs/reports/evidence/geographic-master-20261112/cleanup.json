@@ -1,0 +1,18 @@
+{
+  "removed": [
+    "frontend/node_modules",
+    "frontend/dist",
+    "backend/target",
+    ".task-runtime",
+    "tools/inspect-geography.py",
+    "tools/collect-geography.py",
+    "tools/start-geographic-local.py",
+    "tools/finalize-geographic-evidence.py",
+    "docs/reports/evidence/geographic-master-20261112/failure.png"
+  ],
+  "result": "PASS",
+  "scope": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\geographic-master-20261112",
+  "asciiJunctionRemoved": true,
+  "runtimeStopped": true,
+  "productionTouched": false
+}

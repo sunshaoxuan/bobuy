@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "scope": "Existing LOCAL PostgreSQL, isolated cloned disposable database; no production access",
+  "postgresVersion": "18.6",
+  "migrationSha256": "3e749e285526b5a9ae3e026e58fc08b28162cc6a1d50f9fac72306d8ef60dc6a",
+  "backupSha256": "b1fff7c52ae977745114f6bc2269ca0e435f9ccf63853281436103b169877018",
+  "countries": 249,
+  "prefectures": 47,
+  "municipalitiesAndWards": 1912,
+  "all2208RowsMatchPinnedSources": true,
+  "japanPost1892CodesCovered": true,
+  "originalTablesPreserved": 31,
+  "secondApplicationIdempotent": true,
+  "negativeConstraintCasesRejected": 7,
+  "scopedDropAndReapplyPreserveExistingRows": true,
+  "elapsedSeconds": 56.79,
+  "temporaryDatabaseRemoved": true
+}

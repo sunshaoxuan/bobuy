@@ -2,6 +2,7 @@ import type { Dictionary } from './types';
 import experience from './experience.zh-CN.json';
 
 const messages: Dictionary = {
+  'geo.title':'国家/地区档案','geo.hint':'按国家/地区、省县、市/区查询和选择基础档案。','geo.country':'国家/地区','geo.prefecture':'省县','geo.city':'市/区','geo.choose_prefecture':'选择省县','geo.choose_city':'选择市/区','geo.selection':'当前选择','geo.country_only':'该国家/地区目前仅预制国家级档案。','geo.prefectures':'省县档案','geo.cities':'市/区档案','geo.code':'代码','geo.name':'名称','geo.reading':'日文读音','geo.source':'国家/地区采用 ISO 3166-1 代码。日本预制 47 个都道府县及全部市区町村，包含政令指定都市及其区。资料核对：2026-11-12。',
   "master.upload_details": "上传详情",
   "master.upload_filename": "文件名",
   "master.upload_status": "图片上传状态",
