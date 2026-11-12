@@ -22,6 +22,7 @@ import java.util.Locale;
 public class MobileProductController {
     private final BobbuyStore store;
     private final LocalizedJsonbReaderService localizedJsonbReaderService;
+    @org.springframework.beans.factory.annotation.Autowired private com.bobbuy.service.ProductSaleService prices;
 
     public MobileProductController(BobbuyStore store, LocalizedJsonbReaderService localizedJsonbReaderService) {
         this.store = store;
@@ -69,6 +70,6 @@ public class MobileProductController {
         if (product == null) return null;
         String displayName = localizedJsonbReaderService.read(product.getName() != null ? product.getName() : java.util.Collections.emptyMap(), locale);
         String displayDescription = localizedJsonbReaderService.read(product.getDescription() != null ? product.getDescription() : java.util.Collections.emptyMap(), locale);
-        return new MobileProductResponse(product, displayName, displayDescription);
+        var response=new MobileProductResponse(product, displayName, displayDescription);response.setCurrentRegular(prices.currentRegular(product));return response;
     }
 }

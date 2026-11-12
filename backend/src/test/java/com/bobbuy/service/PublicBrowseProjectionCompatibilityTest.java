@@ -19,7 +19,7 @@ class PublicBrowseProjectionCompatibilityTest {
   legacyPost(post);legacyItem(source,post);legacyItem(cross,post);
   var products=repository(ProductRepository.class,Map.of("findAll",List.of(owned,privateOnly,foreign,deleted)));var posts=repository(RecommendationPostRepository.class,Map.of("findByPublishedTrue",List.of(post)));var items=repository(RecommendationItemRepository.class,Map.of("findByPostIdInOrderById",List.of(source,cross)));
   var taxonomy=new RecommendationTaxonomyService(null,null,null,null,null){@Override public List<RecommendationItem> display(List<RecommendationItem> rows,boolean publicView){assertThat(publicView).isTrue();return rows;}};
-  var quotes=new ReferenceQuoteService(null,null,null,null){@Override public void decorate(List<RecommendationItem> rows,boolean publicView){assertThat(publicView).isTrue();}};
+  var quotes=new ReferenceQuoteService(null,null,null,null,com.bobbuy.test.PriceDocumentFixtures.repository()){@Override public void decorate(List<RecommendationItem> rows,boolean publicView){}};
   var catalog=new PublicProductCatalogService(products,posts,items,taxonomy,quotes,repository(CategoryRepository.class,Map.of("findAllById",List.of())));
   var all=catalog.publicEntries(null,null);assertThat(all).hasSize(1);var row=all.get(0);assertThat(row.productId()).isEqualTo("a");assertThat(row.brand()).isNull();assertThat(row.description()).containsEntry("ja-JP","PUBLIC DESCRIPTION");assertThat(row.gallery()).isEmpty();assertThat(catalog.page(0,null).items()).isEqualTo(all);assertThat(catalog.publicEntries(2L,null)).isEmpty();assertThat(catalog.publicEntries(null,Set.of("b","d"))).isEmpty();
  }
@@ -36,7 +36,7 @@ class PublicBrowseProjectionCompatibilityTest {
   legacyItem(source,issue);var snapshot=source.publicationSnapshot;
   assertThat(snapshot.legacy()).isTrue();assertThat(snapshot.productVersion()).isNull();assertThat(snapshot.productSourceHash()).isNull();assertThat(snapshot.reviewHash()).isNull();assertThat(snapshot.catalog()).isNull();
   source.name="Changed later source";source.referencePrice=BigDecimal.ONE;source.gallery=List.of();
-  var shown=RecommendationPublication.project(source,snapshot);assertThat(shown.name).isEqualTo("Original historical name");assertThat(shown.referencePrice).isEqualByComparingTo(BigDecimal.TEN);assertThat(shown.gallery).extracting(RecommendationItem.Picture::url).containsExactly("https://example.invalid/public.jpg");
+  var shown=RecommendationPublication.project(source,snapshot);assertThat(shown.name).isEqualTo("Original historical name");assertThat(shown.referencePrice).isNull();assertThat(snapshot.referencePrice()).isEqualByComparingTo(BigDecimal.TEN);assertThat(shown.gallery).extracting(RecommendationItem.Picture::url).containsExactly("https://example.invalid/public.jpg");
   assertThat(RecommendationPublication.visible(source)).isTrue();assertThat(source.publicationRequestId).isNull();assertThat(source.publicationRequestHash).isNull();
  }
 }

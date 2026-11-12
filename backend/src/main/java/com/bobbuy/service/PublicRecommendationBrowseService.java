@@ -23,7 +23,7 @@ public class PublicRecommendationBrowseService {
  public record ItemCard(Long id,String productId,String name,String brand,String itemNumber,String specification,String model,String packaging,
    Map<String,RecommendationItem.Text> translations,String translationStatus,List<RecommendationItem.Label> categories,
    RecommendationItem.Picture image,java.math.BigDecimal referencePrice,java.math.BigDecimal originalPrice,java.math.BigDecimal discountAmount,
-   String priceUnit,String currency,LocalDate offerStart,LocalDate offerEnd,LocalDate couponStart,LocalDate couponEnd,String offerNotes,
+   String priceUnit,String currency,RecommendationItem.PriceChange priceChange,LocalDate couponStart,LocalDate couponEnd,String offerNotes,
    ReferenceOfferContext referenceContext,ReferenceQuoteService.Resolution referenceQuote,java.math.BigDecimal rating){}
  public record ServiceCard(String provider,Integer staff,java.math.BigDecimal hours,java.math.BigDecimal originalPrice,
    java.math.BigDecimal price,String currency,Boolean taxIncluded,List<RecommendationServiceOffer.Fee> fees,boolean noExtraFees,
@@ -41,9 +41,8 @@ public class PublicRecommendationBrowseService {
  static boolean expired(RecommendationService.Detail d,LocalDate day){
   var s=d.serviceOffer();if(s!=null)return s.applicationStart()!=null&&s.serviceStart()!=null&&s.applicationEnd()!=null&&s.serviceEnd()!=null&&!s.applicationStart().isAfter(s.applicationEnd())&&!s.serviceStart().isAfter(s.serviceEnd())&&day.isAfter(s.applicationEnd())&&day.isAfter(s.serviceEnd());
   return !d.items().isEmpty()&&d.items().stream().allMatch(i->{
-   var c=i.referenceContext;boolean inherit=c!=null&&c.activityApplies()&&c.windowEvidence()!=null&&!c.windowEvidence().isBlank()&&c.sourceUrl()!=null&&c.sourceUrl().startsWith("https://");
-   LocalDate start=i.offerStart!=null?i.offerStart:inherit?c.activityStart():null,end=i.offerEnd!=null?i.offerEnd:inherit?c.activityEnd():null;
-   if(start==null||end==null||start.isAfter(end)||!day.isAfter(end))return false;
+   var change=i.priceChange;if(change==null||"UNKNOWN".equals(change.state())||change.startsAt()==null||change.endsAt()==null)return false;
+   var start=change.startsAt().atZone(ZoneId.of("Asia/Tokyo")).toLocalDate();var end=change.endsAt().minusNanos(1).atZone(ZoneId.of("Asia/Tokyo")).toLocalDate();if(start.isAfter(end)||!day.isAfter(end))return false;
    return i.couponStart==null&&i.couponEnd==null||i.couponStart!=null&&i.couponEnd!=null&&!i.couponStart.isAfter(i.couponEnd)&&day.isAfter(i.couponEnd);
   });
  }
@@ -75,7 +74,7 @@ public class PublicRecommendationBrowseService {
     d.serviceOffer()!=null,d.items().size(),publicSuppliers(d),d.post().issueDate(),d.post().issueDateSource());
  }
  private static ItemCard card(RecommendationItem i,java.math.BigDecimal rating){var translations=new TreeMap<String,RecommendationItem.Text>();if("REVIEWED".equals(i.getTranslationStatus()))i.translations.forEach((k,t)->translations.put(k,new RecommendationItem.Text(t.name(),t.specification(),null,t.offerNotes())));
-  return new ItemCard(i.id,i.productId,i.name,i.brand,i.itemNumber,i.specification,i.model,i.packaging,translations,i.getTranslationStatus(),i.categories,i.gallery.isEmpty()?null:i.gallery.get(0),i.referencePrice,i.originalPrice,i.discountAmount,i.priceUnit,"JPY",i.offerStart,i.offerEnd,i.couponStart,i.couponEnd,i.offerNotes,i.referenceContext,i.referenceQuote,rating);
+  return new ItemCard(i.id,i.productId,i.name,i.brand,i.itemNumber,i.specification,i.model,i.packaging,translations,i.getTranslationStatus(),i.categories,i.gallery.isEmpty()?null:i.gallery.get(0),i.referencePrice,i.originalPrice,i.discountAmount,i.priceUnit,"JPY",i.priceChange,i.couponStart,i.couponEnd,i.offerNotes,i.referenceContext,i.referenceQuote,rating);
  }
  @Transactional(readOnly=true,isolation=Isolation.REPEATABLE_READ)
  public Directory directory(int page,Long merchant,String locale,String period,String query,String expected){

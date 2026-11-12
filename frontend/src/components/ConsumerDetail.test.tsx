@@ -1,3 +1,4 @@
+import {priceChange} from '../test/priceDocumentFixtures';
 import {render,screen,waitFor,within} from '@testing-library/react';
 import {MemoryRouter} from 'react-router-dom';
 import {beforeEach,expect,it,vi} from 'vitest';
@@ -7,7 +8,7 @@ import {CatalogSection} from '../pages/PublicProductCatalog';
 import {browsePage,productCard} from '../test/browseFixtures';
 const mocks=vi.hoisted(()=>({productBrowse:vi.fn(),productDetail:vi.fn(),productSales:vi.fn(),publicAssignments:vi.fn()}));
 vi.mock('../api',()=>({storefrontApi:mocks,productMarkerApi:mocks}));
-const source={name:'FX medicine',itemNumber:'26440',specification:'240 tablets',referencePrice:2820,originalPrice:3480,discountAmount:660,priceUnit:'240 tablets',offerStart:'2026-11-02',offerEnd:'2026-11-15',referenceContext:{channel:'COSTCO_ONLINE' as const,sourceUrl:'https://www.costco.co.jp/actual-source',startSearchComplete:true},referenceQuote:{state:'ACTIVE',amount:2820,itemIds:[1],unknownWindows:0}};
+const source={priceChange:priceChange({amount:2820,beforeAmount:3480,effectiveAmount:2820}),name:'FX medicine',itemNumber:'26440',specification:'240 tablets',referencePrice:2820,originalPrice:3480,discountAmount:660,priceUnit:'240 tablets',offerStart:'2026-11-02',offerEnd:'2026-11-15',referenceContext:{channel:'COSTCO_ONLINE' as const,sourceUrl:'https://www.costco.co.jp/actual-source',startSearchComplete:true},referenceQuote:{state:'ACTIVE',amount:2820,itemIds:[1],unknownWindows:0}};
 beforeEach(()=>{vi.clearAllMocks();localStorage.setItem('bobbuy_locale','en-US');});
 it('localizes model prose, packaging and both source price units without changing their facts',()=>{
  const facts={...source,priceUnit:'18枚入り1パック'},online={...source,priceUnit:'18枚×4パック／合計72枚'};
@@ -25,24 +26,24 @@ it('labels historical reference price as not real time and shows each source amo
 });
 it('keeps exact code identity and separates labeled product facts without dropping values',()=>{const v=render(<I18nProvider><ProductDetailCode value="00123"/><ProductDetailSpecs model="M1" packaging="One unit" specification="85 × 85 × 14 cm" specificationLanguage="ja-JP"/></I18nProvider>);expect(v.container.querySelector('.consumer-product-code strong')).toHaveTextContent('No.00123');expect(v.container.querySelectorAll('.consumer-product-specs dd')).toHaveLength(3);expect(screen.getByText('85 × 85 × 14 cm')).toHaveAttribute('lang','ja-JP');});
 it('does not repeat equal original/reference prices or infer a reduction',()=>{
- const view=render(<I18nProvider><DetailOffer facts={{...source,referencePrice:500,originalPrice:500,discountAmount:null,referenceQuote:undefined}}/></I18nProvider>);expect(view.container.textContent?.match(/500/g)).toHaveLength(1);expect(view.container.textContent).not.toContain('Discount amount');
+ const view=render(<I18nProvider><DetailOffer facts={{...source,referencePrice:500,originalPrice:500,discountAmount:null,referenceQuote:undefined,priceChange:priceChange({type:'PERMANENT',amount:500,beforeAmount:500,effectiveAmount:500,promotion:false})}}/></I18nProvider>);expect(view.container.textContent?.match(/500/g)).toHaveLength(1);expect(view.container.textContent).not.toContain('Discount amount');
 });
 it('removes source provenance and mail conditions from consumer prices',()=>{
  const view=render(<I18nProvider><DetailOffer facts={{...source,couponStart:'2026-10-20',couponEnd:'2026-10-25',offerNotes:'Mail source conditions'}}/></I18nProvider>);
  expect(view.container.querySelector('a,.consumer-reference-facts,.consumer-conditions')).toBeNull();expect(view.container.textContent).not.toContain('2026-11-02');expect(view.container.textContent).not.toContain('Mail source conditions');
 });
 it('keeps an unknown price unknown despite a known original price and discount',()=>{
- const view=render(<I18nProvider><DetailOffer facts={{...source,referencePrice:null,referenceQuote:undefined}}/></I18nProvider>);expect(view.container.textContent).not.toContain('2,820');expect(view.container.textContent).toContain('Not stated');
+ const view=render(<I18nProvider><DetailOffer facts={{...source,referencePrice:null,referenceQuote:undefined,priceChange:undefined}}/></I18nProvider>);expect(view.container.textContent).not.toContain('2,820');expect(view.container.textContent).toContain('Not stated');
 });
 it('preserves an explicitly supplied currency instead of hardcoding JPY',()=>{
- const facts={...source,currency:'USD',referencePrice:12.5,originalPrice:15,discountAmount:2.5,referenceQuote:undefined};const view=render(<I18nProvider><DetailOffer facts={facts}/></I18nProvider>);expect(view.container.textContent).toContain('USD');expect(view.container.textContent).toContain('12.50');expect(view.container.textContent).toContain('15.00');expect(view.container.textContent).toContain('2.50');expect(view.container.textContent).not.toContain('JPY');
+ const facts={...source,currency:'USD',referencePrice:12.5,originalPrice:15,discountAmount:2.5,referenceQuote:undefined,priceChange:priceChange({amount:12.5,beforeAmount:15,effectiveAmount:12.5})};const view=render(<I18nProvider><DetailOffer facts={facts}/></I18nProvider>);expect(view.container.textContent).toContain('USD');expect(view.container.textContent).toContain('12.50');expect(view.container.textContent).toContain('15.00');expect(view.container.textContent).toContain('2.50');expect(view.container.textContent).not.toContain('JPY');
 });
 it('preserves a genuinely stated zero price without inventing an absent discount',()=>{
- const view=render(<I18nProvider><DetailOffer facts={{...source,referencePrice:0,originalPrice:null,discountAmount:null,referenceQuote:undefined}}/></I18nProvider>);expect(view.container.textContent).toContain('JPY');expect(view.container.querySelector('.consumer-reference-price')).not.toBeNull();expect(view.container.textContent).not.toContain('Discount amount');
+ const view=render(<I18nProvider><DetailOffer facts={{...source,referencePrice:0,originalPrice:null,discountAmount:null,referenceQuote:undefined,priceChange:priceChange({amount:0,beforeAmount:null,effectiveAmount:0,promotion:false})}}/></I18nProvider>);expect(view.container.textContent).toContain('JPY');expect(view.container.querySelector('.consumer-reference-price')).not.toBeNull();expect(view.container.textContent).not.toContain('Discount amount');
 });
 it('renders the real catalog detail entry once with one warehouse price and small Online annotation and unavailable medical purchasing',async()=>{
  const shared='Shared medicine introduction. Reference information only.';
- const first={...source,id:1,productId:'p',description:shared,imageUrl:'/original-1.png',offerNotes:'Medicine reference only. Cannot be purchased here.'},second={...source,id:2,productId:'p',description:shared,imageUrl:'/original-2.png',referencePrice:3300,originalPrice:null,discountAmount:null,referenceQuote:{state:'ACTIVE',amount:3300,itemIds:[2],unknownWindows:0},referenceContext:{...source.referenceContext,channel:'COSTCO_WAREHOUSE' as const}};
+ const first={...source,id:1,productId:'p',description:shared,imageUrl:'/original-1.png',offerNotes:'Medicine reference only. Cannot be purchased here.'},second={...source,id:2,productId:'p',description:shared,imageUrl:'/original-2.png',referencePrice:3300,originalPrice:null,discountAmount:null,priceChange:priceChange({type:'PERMANENT',amount:3300,beforeAmount:null,effectiveAmount:3300,promotion:false}),referenceQuote:{state:'ACTIVE',amount:3300,itemIds:[2],unknownWindows:0},referenceContext:{...source.referenceContext,channel:'COSTCO_WAREHOUSE' as const}};
  const card={...productCard(),name:{'en-US':'FX medicine'},itemNumber:'26440',specification:{'en-US':'Changed current master size'}};
  mocks.productBrowse.mockResolvedValue(browsePage([card]));mocks.productSales.mockResolvedValue([]);mocks.productDetail.mockResolvedValue({item:{...card,description:{'en-US':'New current-master text must not overwrite historical introductions'},gallery:[],referenceOffers:[{postId:7,facts:first},{postId:5,facts:second}]},markers:[],revision:'detail'});
  const onAdd=vi.fn();render(<I18nProvider><MemoryRouter initialEntries={['/products?product=p']}><CatalogSection products={[]} quantities={{}} onAdd={onAdd} canBuy={()=>false}/></MemoryRouter></I18nProvider>);

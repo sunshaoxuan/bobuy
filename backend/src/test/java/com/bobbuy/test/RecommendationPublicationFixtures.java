@@ -17,13 +17,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public final class RecommendationPublicationFixtures {
     private RecommendationPublicationFixtures() {}
     private static final ObjectMapper JSON=new ObjectMapper().findAndRegisterModules();
+    private static ObjectNode historicalSnapshot(RecommendationItem item,Product product){
+        ObjectNode node=JSON.valueToTree(RecommendationPublication.candidate(item,product));
+        // Explicit pre-ERP immutable source history, not the current publication writer contract.
+        var source=item.sourcePrice;node.set("referencePrice",JSON.valueToTree(source==null?item.referencePrice:source.amount()));node.set("originalPrice",JSON.valueToTree(source==null?item.originalPrice:source.original()));node.set("discountAmount",JSON.valueToTree(source==null?item.discountAmount:source.reduction()));node.set("priceUnit",JSON.valueToTree(source==null?item.priceUnit:source.unit()));node.set("offerStart",JSON.valueToTree(source==null?null:source.start()));node.set("offerEnd",JSON.valueToTree(source==null?null:source.end()));return node;
+    }
     public static void legacyPost(RecommendationPost post) {
         post.published=true;post.publishedAt=Instant.parse("2026-01-01T00:00:00Z");
         post.publisherId=post.merchantId;post.publisherName="Synthetic historical publisher";
     }
     /** Simulates V31's migrated old source row: no current-master/version claim is invented. */
     public static void legacyItem(RecommendationItem item,RecommendationPost post) {
-        ObjectNode snapshot=JSON.valueToTree(RecommendationPublication.candidate(item,null));
+        ObjectNode snapshot=historicalSnapshot(item,null);
         snapshot.put("legacy",true);snapshot.putNull("reviewHash");
         try{item.publicationSnapshot=JSON.treeToValue(snapshot,RecommendationPublicationSnapshot.class);}
         catch(Exception e){throw new AssertionError("Cannot build migrated history fixture",e);}
@@ -32,7 +37,7 @@ public final class RecommendationPublicationFixtures {
     }
     /** A read-only unit fixture for an already reviewed master snapshot, never a publish/auth test. */
     public static void reviewedReadItem(RecommendationItem item,Product product,RecommendationPost post) {
-        item.publicationSnapshot=RecommendationPublication.candidate(item,product);
+        try{item.publicationSnapshot=JSON.treeToValue(historicalSnapshot(item,product),RecommendationPublicationSnapshot.class);}catch(Exception e){throw new AssertionError(e);}
         item.publicationState="PUBLISHED";item.publishedAt=post.publishedAt;item.publishedBy=post.publisherId;
     }
     private static JsonNode data(ObjectMapper json,ResultActions response)throws Exception {
@@ -50,7 +55,7 @@ public final class RecommendationPublicationFixtures {
             var original=items.findById(id).orElseThrow();String code=original.itemNumber;
             var context=original.referenceContext==null?new ReferenceOfferContext("SYNTHETIC","COSTCO_ONLINE","synthetic-pack","synthetic-publication-test","https://www.costco.co.jp/synthetic-source",null,null,false,null,true):original.referenceContext;
             String unit=original.priceUnit==null&&(original.referencePrice!=null||original.originalPrice!=null||original.discountAmount!=null)?"per synthetic pack":original.priceUnit;
-            var facts=new RecommendationFacts(original.name,code,original.referencePrice,original.originalPrice,original.discountAmount,unit,original.offerStart,original.offerEnd,original.couponStart,original.couponEnd,original.offerNotes,context,null,null,null,original.specification);
+            var facts=new RecommendationFacts(original.name,code,null,null,null,null,null,null,original.couponStart,original.couponEnd,original.offerNotes,context,null,null,null,original.specification);
             current=data(json,put(mvc,json,path(current)+"/items/"+id,Map.of("version",current.at("/post/version").asLong(),"facts",facts),token));
             var profile=data(json,mvc.perform(get("/api/merchant/product-catalog/"+original.productId).header("Authorization","Bearer "+token)));
             var input=(ObjectNode)profile.path("value").deepCopy();

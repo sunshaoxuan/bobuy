@@ -55,7 +55,8 @@ public class RecommendationService {
     }
     private Detail detail(RecommendationPost post) { return detail(post,false); }
     private Detail detail(RecommendationPost post,boolean publicView) {
-        var linked = taxonomy.display(items.findByPostIdOrderById(post.id),publicView);
+        var originals=items.findByPostIdOrderById(post.id);referenceQuotes.decorate(originals,false);
+        var linked = taxonomy.display(originals,publicView);
         referenceQuotes.decorate(linked,publicView);
         return new Detail(summary(post, linked.isEmpty()?null:publicView?(linked.get(0).gallery.isEmpty()?null:linked.get(0).gallery.get(0).url()):linked.get(0).imageUrl), post.body, linked,post.articleSourceLocale,articles.sourceHash(post),publicView?articles.current(post):articles.all(post),post.serviceOffer==null?null:publicView?post.serviceOffer.publicView():post.serviceOffer);
     }
@@ -101,7 +102,8 @@ public class RecommendationService {
         if(merchantId!=null&&merchantId<1)throw new IllegalArgumentException("Invalid merchant");
         var selected=posts.findByPublishedTrue().stream().filter(p->merchantId==null||merchantId.equals(p.merchantId))
             .sorted(Comparator.comparing((RecommendationPost p)->p.publishedAt,Comparator.nullsLast(Comparator.reverseOrder())).thenComparing(p->p.id,Comparator.reverseOrder())).toList();
-        var displayed=selected.isEmpty()?List.<RecommendationItem>of():taxonomy.display(items.findByPostIdInOrderById(selected.stream().map(p->p.id).toList()),true);
+        var originals=selected.isEmpty()?List.<RecommendationItem>of():items.findByPostIdInOrderById(selected.stream().map(p->p.id).toList());referenceQuotes.decorate(originals,false);
+        var displayed=taxonomy.display(originals,true);
         if(!displayed.isEmpty())referenceQuotes.decorate(displayed,true);
         var grouped=displayed.stream().collect(java.util.stream.Collectors.groupingBy(i->i.postId));
         return selected.stream().map(post->{var linked=grouped.getOrDefault(post.id,List.of());return new Detail(summary(post,linked.isEmpty()||linked.get(0).gallery.isEmpty()?null:linked.get(0).gallery.get(0).url()),post.body,linked,post.articleSourceLocale,articles.sourceHash(post),articles.current(post),post.serviceOffer==null?null:post.serviceOffer.publicView());})
@@ -189,6 +191,7 @@ public class RecommendationService {
         if(requestId==null||sourceHash==null||!sourceHash.matches("[0-9a-f]{64}")||!reviewed||productVersion<0)
             throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.incomplete");
         var item=items.findById(itemId).filter(value->id.equals(value.postId)).orElseThrow(RecommendationService::missing);
+        referenceQuotes.decorate(List.of(item),false);
         String requestHash=RecommendationPublication.requestHash(id,itemId,requestId,expectedVersion,productVersion,sourceHash,reviewed);
         var previous=items.findByPublishedByAndPublicationRequestId(owner(),requestId.toString());
         if(previous.isPresent()){
@@ -237,8 +240,9 @@ public class RecommendationService {
         var proposed = new RecommendationItem(); facts.apply(proposed);
         String code = proposed.itemNumber;
         var currentItems = items.findByPostIdOrderById(id);
+        referenceQuotes.decorate(currentItems,false);
         var duplicate = currentItems.stream()
-            .filter(i -> Objects.equals(i.itemNumber, code) &&Objects.equals(i.name,proposed.name)&&Objects.equals(i.priceUnit,proposed.priceUnit)&& Objects.equals(i.offerStart,proposed.offerStart)&&Objects.equals(i.offerEnd,proposed.offerEnd)&&Objects.equals(i.couponStart,proposed.couponStart)&&Objects.equals(i.couponEnd,proposed.couponEnd)&&Objects.equals(i.referenceContext,proposed.referenceContext)).findFirst();
+            .filter(i -> Objects.equals(i.itemNumber, code) &&Objects.equals(i.name,proposed.name)&&Objects.equals(i.sourcePrice,proposed.sourcePrice)&&Objects.equals(i.couponStart,proposed.couponStart)&&Objects.equals(i.couponEnd,proposed.couponEnd)&&Objects.equals(i.referenceContext,proposed.referenceContext)).findFirst();
         // A retry after a committed response loss is safe only when its metadata still matches.
         if (post.version != expectedVersion && duplicate.isPresent() && sameFacts(duplicate.get(), proposed))
             return new Upload(detail(post), false, true, false);
@@ -303,9 +307,7 @@ public class RecommendationService {
 
     private static boolean sameFacts(RecommendationItem a, RecommendationItem b) {
         return Objects.equals(a.name,b.name) && Objects.equals(a.itemNumber,b.itemNumber)
-            && equalPrice(a.referencePrice,b.referencePrice) && equalPrice(a.originalPrice,b.originalPrice)
-            && equalPrice(a.discountAmount,b.discountAmount) && Objects.equals(a.priceUnit,b.priceUnit)
-            && Objects.equals(a.offerStart,b.offerStart) && Objects.equals(a.offerEnd,b.offerEnd)
+            && Objects.equals(a.sourcePrice,b.sourcePrice)
             && Objects.equals(a.couponStart,b.couponStart) && Objects.equals(a.couponEnd,b.couponEnd)
             && Objects.equals(a.referenceContext,b.referenceContext)
             && Objects.equals(a.offerNotes,b.offerNotes);
@@ -314,6 +316,7 @@ public class RecommendationService {
 
     @Transactional
     public Detail editItem(Long id, Long itemId, RecommendationFacts facts, long expectedVersion) {
+        if(facts.referencePrice()!=null||facts.originalPrice()!=null||facts.discountAmount()!=null||facts.priceUnit()!=null||facts.offerStart()!=null||facts.offerEnd()!=null)throw new ApiException(ErrorCode.INVALID_REQUEST,"pricing.use_documents");
         lockOwner(); var post = owned(id); goodsOnly(post); version(post,expectedVersion);
         var item = items.findById(itemId).filter(i -> i.postId.equals(id)).orElseThrow(RecommendationService::missing);
         RecommendationPublication.pending(item);
@@ -321,7 +324,7 @@ public class RecommendationService {
         referenceQuotes.snapshot(item,owner());
         if(item.productId!=null&&products.findById(item.productId).map(p->p.getCatalogData()!=null).orElse(false)&&(!Objects.equals(item.name,proposed.name)||!Objects.equals(item.itemNumber,proposed.itemNumber)))throw new ApiException(ErrorCode.INVALID_REQUEST,"master.use_profile");
         if (items.findByPostIdOrderById(id).stream().anyMatch(i -> !i.id.equals(itemId)
-                && Objects.equals(i.itemNumber,proposed.itemNumber) && Objects.equals(i.offerStart,proposed.offerStart)&&Objects.equals(i.offerEnd,proposed.offerEnd)&&Objects.equals(i.couponStart,proposed.couponStart)&&Objects.equals(i.couponEnd,proposed.couponEnd)&&Objects.equals(i.referenceContext,proposed.referenceContext)))
+                && Objects.equals(i.itemNumber,proposed.itemNumber) && Objects.equals(i.sourcePrice,proposed.sourcePrice)&&Objects.equals(i.couponStart,proposed.couponStart)&&Objects.equals(i.couponEnd,proposed.couponEnd)&&Objects.equals(i.referenceContext,proposed.referenceContext)))
             throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.conflict");
         if(!Objects.equals(item.itemNumber,proposed.itemNumber))item.productId=null;
         facts.apply(item);catalog.ensure(item,owner());catalog.syncText(item,owner());
@@ -412,7 +415,7 @@ public class RecommendationService {
     @Transactional
     public Detail localize(Long id,List<Localization> rows,long expectedVersion){
         lockOwner();var post=owned(id);version(post,expectedVersion);
-        var linked=items.findByPostIdOrderById(id);var seen=new HashSet<Long>();
+        var linked=items.findByPostIdOrderById(id);referenceQuotes.decorate(linked,false);var seen=new HashSet<Long>();
         var locales=Set.of("zh-CN","zh-TW","en-US");
         for(var row:rows){
             if(row==null)throw new ApiException(ErrorCode.INVALID_REQUEST,"translation.invalid");
@@ -469,7 +472,7 @@ public class RecommendationService {
         selected.forEach(RecommendationPublication::pending);
         version(post,expectedVersion);
         selected.forEach(item->referenceQuotes.snapshot(item,owner()));
-        if(productId!=null){if(selected.size()!=1)throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.catalog");catalog.requireOwnership(productId,owner());selected.get(0).productId=productId;}
+        if(productId!=null){if(selected.size()!=1)throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.catalog");catalog.requireOwnership(productId,owner());referenceQuotes.relinkDraftSource(selected.get(0),owner(),productId);selected.get(0).productId=productId;}
         else selected.forEach(item->catalog.ensure(item,owner()));
         selected.forEach(item->{item.offerIdentity=referenceQuotes.identity(item);items.saveAndFlush(item);referenceQuotes.snapshot(item,owner());});
         touch(post);return detail(post);

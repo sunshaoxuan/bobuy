@@ -12,8 +12,9 @@ public class PublicProductCatalogService {
  private final RecommendationTaxonomyService taxonomy;private final ReferenceQuoteService quotes;private final CategoryRepository categories;
  public PublicProductCatalogService(ProductRepository p,RecommendationPostRepository r,RecommendationItemRepository i,RecommendationTaxonomyService t,ReferenceQuoteService q,CategoryRepository c){this(p,r,i,t,q,c,null);} @org.springframework.beans.factory.annotation.Autowired public PublicProductCatalogService(ProductRepository p,RecommendationPostRepository r,RecommendationItemRepository i,RecommendationTaxonomyService t,ReferenceQuoteService q,CategoryRepository c,ProductRatingService rating){ratings=rating;products=p;posts=r;items=i;taxonomy=t;quotes=q;categories=c;}
  public record Offer(Long postId,RecommendationItem facts){}
- public record Entry(String productId,Long merchantId,Map<String,String> name,Map<String,String> description,String brand,String itemNumber,Map<String,String> specification,String model,String packaging,List<RecommendationItem.Picture> gallery,List<RecommendationItem.Label> categories,List<Offer> referenceOffers,boolean reviewedMaster,java.math.BigDecimal rating,Map<String,String> introduction){
-  public Entry(String productId,Long merchantId,Map<String,String> name,Map<String,String> description,String brand,String itemNumber,Map<String,String> specification,String model,String packaging,List<RecommendationItem.Picture> gallery,List<RecommendationItem.Label> categories,List<Offer> referenceOffers,boolean reviewedMaster){this(productId,merchantId,name,description,brand,itemNumber,specification,model,packaging,gallery,categories,referenceOffers,reviewedMaster,null,Map.of());}
+ public record Entry(String productId,Long merchantId,Map<String,String> name,Map<String,String> description,String brand,String itemNumber,Map<String,String> specification,String model,String packaging,List<RecommendationItem.Picture> gallery,List<RecommendationItem.Label> categories,List<Offer> referenceOffers,boolean reviewedMaster,java.math.BigDecimal rating,Map<String,String> introduction,List<ReferenceQuoteService.CurrentPrice> referencePrices){
+  public Entry(String productId,Long merchantId,Map<String,String> name,Map<String,String> description,String brand,String itemNumber,Map<String,String> specification,String model,String packaging,List<RecommendationItem.Picture> gallery,List<RecommendationItem.Label> categories,List<Offer> referenceOffers,boolean reviewedMaster){this(productId,merchantId,name,description,brand,itemNumber,specification,model,packaging,gallery,categories,referenceOffers,reviewedMaster,null,Map.of(),List.of());}
+  public Entry(String productId,Long merchantId,Map<String,String> name,Map<String,String> description,String brand,String itemNumber,Map<String,String> specification,String model,String packaging,List<RecommendationItem.Picture> gallery,List<RecommendationItem.Label> categories,List<Offer> referenceOffers,boolean reviewedMaster,java.math.BigDecimal rating,Map<String,String> introduction){this(productId,merchantId,name,description,brand,itemNumber,specification,model,packaging,gallery,categories,referenceOffers,reviewedMaster,rating,introduction,List.of());}
  }
  public record Page(List<Entry> items,int page,int size,long total,boolean hasNext){}
  private record Snapshot(List<Product> eligible,Map<Long,Long> owners,Map<String,List<RecommendationItem>> linked){}
@@ -21,7 +22,7 @@ public class PublicProductCatalogService {
   var published=posts.findByPublishedTrue().stream().filter(p->merchantId==null||merchantId.equals(p.merchantId)).toList();
   Map<Long,Long> owners=new HashMap<>();published.forEach(p->owners.put(p.id,p.merchantId));
   var originals=published.isEmpty()?List.<RecommendationItem>of():items.findByPostIdInOrderById(published.stream().map(p->p.id).toList());
-  var displayed=taxonomy.display(originals,true);
+  quotes.decorate(originals,false);var displayed=taxonomy.display(originals,true);
   var linked=new HashMap<String,List<RecommendationItem>>();for(var i:displayed)if(i.productId!=null)linked.computeIfAbsent(i.productId,k->new ArrayList<>()).add(i);
   var eligible=products.findAll().stream().filter(p->!p.isDeleted()).filter(p->merchantId==null||merchantId.equals(p.getMerchantId()))
    .filter(p->p.getVisibilityStatus()==ProductVisibility.PUBLIC||p.getVisibilityStatus()==ProductVisibility.DRAFTER_ONLY&&linked.getOrDefault(p.getId(),List.of()).stream().anyMatch(i->Objects.equals(owners.get(i.postId),p.getMerchantId())))
@@ -49,6 +50,7 @@ public class PublicProductCatalogService {
   if(merchantId!=null&&merchantId<1)throw new IllegalArgumentException("Invalid merchant");
   var snapshot=snapshot(merchantId);var owners=snapshot.owners();var linked=snapshot.linked();quotes.decorate(linked.values().stream().flatMap(List::stream).toList(),true);
   var eligible=selectedProductIds==null?snapshot.eligible():snapshot.eligible().stream().filter(p->selectedProductIds.contains(p.getId())).toList();
+  var referencePrices=quotes.currentPrices(eligible);
   var visibleOwners=new HashMap<String,Long>();eligible.forEach(p->visibleOwners.put(p.getId(),p.getMerchantId()));var publicRatings=ratings==null?Map.<String,java.math.BigDecimal>of():ratings.publicRatings(visibleOwners);
   return eligible.stream().map(p->{
    var offers=linked.getOrDefault(p.getId(),List.of()).stream().filter(i->Objects.equals(owners.get(i.postId),p.getMerchantId())).sorted(Comparator.comparing((RecommendationItem i)->i.postId).reversed().thenComparing(i->i.id)).map(i->new Offer(i.postId,i)).toList();
@@ -56,7 +58,7 @@ public class PublicProductCatalogService {
    // A reference-only master grants no new disclosure: reuse exactly its existing public DTO.
    // In particular, an empty legacy gallery/brand must not fall back to private master fields.
    if(p.getVisibilityStatus()!=ProductVisibility.PUBLIC){
-    return new Entry(p.getId(),p.getMerchantId(),Map.copyOf(legacyText(source,"name")),Map.copyOf(legacyText(source,"description")),source.brand,source.itemNumber,Map.copyOf(legacyText(source,"specification")),source.model,source.packaging,List.copyOf(source.gallery),List.copyOf(source.categories),offers,source.catalogDriven,publicRatings.get(p.getId()),introduction(p,offers));
+    return new Entry(p.getId(),p.getMerchantId(),Map.copyOf(legacyText(source,"name")),Map.copyOf(legacyText(source,"description")),source.brand,source.itemNumber,Map.copyOf(legacyText(source,"specification")),source.model,source.packaging,List.copyOf(source.gallery),List.copyOf(source.categories),offers,source.catalogDriven,publicRatings.get(p.getId()),introduction(p,offers),referencePrices.getOrDefault(p.getId(),List.of()));
    }
    var ids=data==null?(p.getCategoryId()==null?List.<String>of():List.of(p.getCategoryId())):data.categoryIds()==null?List.<String>of():data.categoryIds();
    var labels=categories.findAllById(ids).stream().map(c->new RecommendationItem.Label(c.getId(),c.getName())).toList();
@@ -65,7 +67,7 @@ public class PublicProductCatalogService {
    Map<String,String> names=p.getName(),descriptions=p.getDescription(),spec=data==null?Map.of():data.specification();String brand=p.getBrand(),model=data==null?null:data.model(),pack=data==null?null:data.packaging();
    if(data==null&&source!=null){names=legacyText(source,"name");descriptions=legacyText(source,"description");spec=legacyText(source,"specification");if(brand==null||brand.isBlank())brand=source.brand;model=source.model;pack=source.packaging;}
    else if(data!=null&&!ProductCatalogService.translationsCurrent(p)){names=sourceOnly(names);descriptions=sourceOnly(descriptions);spec=sourceOnly(spec);}
-   return new Entry(p.getId(),p.getMerchantId(),Map.copyOf(names),Map.copyOf(descriptions),brand,p.getItemNumber(),Map.copyOf(spec),model,pack,List.copyOf(gallery),labels,offers,data!=null,publicRatings.get(p.getId()),introduction(p,offers));
+   return new Entry(p.getId(),p.getMerchantId(),Map.copyOf(names),Map.copyOf(descriptions),brand,p.getItemNumber(),Map.copyOf(spec),model,pack,List.copyOf(gallery),labels,offers,data!=null,publicRatings.get(p.getId()),introduction(p,offers),referencePrices.getOrDefault(p.getId(),List.of()));
   }).toList();
  }
  /** Current editorial copy is separate from immutable historical offer facts. */

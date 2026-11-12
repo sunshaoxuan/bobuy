@@ -27,6 +27,12 @@ public class RecommendationItem {
     @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.JSON)
     @Column(columnDefinition="jsonb") public ReferenceOfferContext referenceContext;
     @Transient public com.bobbuy.service.ReferenceQuoteService.Resolution referenceQuote;
+    public record PriceChange(Long documentId,String documentNumber,String type,String state,java.time.Instant startsAt,java.time.Instant endsAt,BigDecimal amount,BigDecimal beforeAmount,BigDecimal effectiveAmount,boolean promotion) {}
+    @Transient public PriceChange priceChange;
+    public record SourcePrice(BigDecimal amount,BigDecimal original,BigDecimal reduction,String unit,java.time.LocalDate start,java.time.LocalDate end) {
+        public SourcePrice {amount=amount==null?null:amount.stripTrailingZeros();original=original==null?null:original.stripTrailingZeros();reduction=reduction==null?null:reduction.stripTrailingZeros();}
+    }
+    @Transient @com.fasterxml.jackson.annotation.JsonIgnore public SourcePrice sourcePrice;
     @Transient public boolean catalogDriven;
     @Transient public String brand;
     @Transient public String model;
@@ -47,17 +53,15 @@ public class RecommendationItem {
     public String translatedSource;
     @Transient public String getTranslationSource(){
         try {return java.util.HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(
-            String.join("\n",java.util.Objects.toString(name,""),java.util.Objects.toString(priceUnit,""),java.util.Objects.toString(offerNotes,""),java.util.Objects.toString(specification,""),java.util.Objects.toString(description,"")).getBytes(java.nio.charset.StandardCharsets.UTF_8)));}
+            String.join("\n",java.util.Objects.toString(name,""),java.util.Objects.toString(sourcePrice==null?null:sourcePrice.unit(),""),java.util.Objects.toString(offerNotes,""),java.util.Objects.toString(specification,""),java.util.Objects.toString(description,"")).getBytes(java.nio.charset.StandardCharsets.UTF_8)));}
         catch(java.security.NoSuchAlgorithmException e){throw new IllegalStateException(e);}
     }
     @Transient public String getTranslationStatus(){return translations==null||translations.isEmpty()?"MISSING":getTranslationSource().equals(translatedSource)?"REVIEWED":"STALE";}
 
-    @Column(precision = 14, scale = 2) public BigDecimal referencePrice;
-    @Column(precision = 14, scale = 2) public BigDecimal originalPrice;
-    @Column(precision = 14, scale = 2) public BigDecimal discountAmount;
-    @Column(length = 100) public String priceUnit;
-    public java.time.LocalDate offerStart;
-    public java.time.LocalDate offerEnd;
+    @Transient public BigDecimal referencePrice;
+    @Transient public BigDecimal originalPrice;
+    @Transient public BigDecimal discountAmount;
+    @Transient public String priceUnit;
     public java.time.LocalDate couponStart;
     public java.time.LocalDate couponEnd;
     @Column(length = 2000) public String offerNotes;

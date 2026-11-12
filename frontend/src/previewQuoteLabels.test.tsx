@@ -9,7 +9,7 @@ it('renders Traditional Chinese quote labels while keeping missing prices and co
  const before=JSON.stringify(facts);
  const {container}=render(<I18nProvider><OfferInfo today="2026-11-09" facts={facts}/></I18nProvider>);
  const text=container.textContent??'';
- for(const label of ['優惠價／已知價格（JPY）','來源未註明','折扣金額（JPY）','優惠／兌換期間','優惠券發放期間','日本時間，包含起訖日','發券後兩週內使用'])expect(text).toContain(label);
+ for(const label of ['優惠價／已知價格（JPY）','來源未註明','折扣金額（JPY）','生效期間','優惠券發放期間','日本時間，包含起訖日','發券後兩週內使用'])expect(text).toContain(label);
  expect(text).toContain('330 JPY');expect(text).toContain('2026-11-09');expect(text).toContain('2026-11-22');
  expect(container.querySelector('.ant-tag')).toBeNull();expect(container.querySelector('button')).toBeNull();
  expect(JSON.stringify(facts)).toBe(before);

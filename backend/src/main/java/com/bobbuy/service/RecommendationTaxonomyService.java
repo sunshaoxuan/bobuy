@@ -72,8 +72,8 @@ public class RecommendationTaxonomyService {
             item.id=original.id;item.postId=original.postId;item.productId=original.productId;item.name=original.name;
             item.referenceContext=original.referenceContext;item.offerIdentity=original.offerIdentity;
             item.itemNumber=original.itemNumber;item.referencePrice=original.referencePrice;item.originalPrice=original.originalPrice;
-            item.discountAmount=original.discountAmount;item.priceUnit=original.priceUnit;item.offerStart=original.offerStart;
-            item.offerEnd=original.offerEnd;item.couponStart=original.couponStart;item.couponEnd=original.couponEnd;
+            item.discountAmount=original.discountAmount;item.priceUnit=original.priceUnit;item.sourcePrice=original.sourcePrice;
+            item.couponStart=original.couponStart;item.couponEnd=original.couponEnd;
             item.specification=original.specification;item.description=original.description;
             item.translations=original.translations;item.translatedSource=original.translatedSource;
             item.gallery=List.copyOf(original.gallery);

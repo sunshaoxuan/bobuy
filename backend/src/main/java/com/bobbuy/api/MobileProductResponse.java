@@ -6,6 +6,9 @@ import java.util.List;
 
 public class MobileProductResponse {
     private Product product;
+    private com.bobbuy.model.ProductSale currentRegular;
+    public com.bobbuy.model.ProductSale getCurrentRegular(){return currentRegular;}
+    public void setCurrentRegular(com.bobbuy.model.ProductSale value){currentRegular=value;}
     private String displayName;
     private String displayDescription;
     private int reconciledQuantity;

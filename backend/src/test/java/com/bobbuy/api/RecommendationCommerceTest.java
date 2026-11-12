@@ -42,7 +42,7 @@ class RecommendationCommerceTest {
  String product(){return detail.at("/items/0/productId").asText();}
  MockMultipartFile file(int color)throws Exception{var image=new BufferedImage(16,10,BufferedImage.TYPE_INT_RGB);image.setRGB(0,0,color);var out=new ByteArrayOutputStream();ImageIO.write(image,"png",out);return new MockMultipartFile("file","product.png","image/png",out.toByteArray());}
  ResultActions putBody(String path,Object body,String token)throws Exception{return mvc.perform(put(path).header("Authorization","Bearer "+token).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsString(body)));}
- Map<String,Object> sale(long revision){var row=new HashMap<String,Object>();row.put("itemId",item());row.put("amount",500);row.put("currency","JPY");row.put("unit","100g");row.put("revision",revision);row.put("enabled",true);row.put("replaceExisting",false);return row;}
+ Map<String,Object> sale(long revision){var row=new HashMap<String,Object>();row.put("reason","Synthetic independently reviewed regular sale setup");row.put("itemId",item());row.put("amount",500);row.put("currency","JPY");row.put("unit","100g");row.put("revision",revision);row.put("enabled",true);row.put("replaceExisting",false);return row;}
  Map<String,Object> sales(Map<String,Object> row){return Map.of("version",Long.valueOf(version()),"confirmedPreorder",true,"reviews",List.of(row));}
  @Test void reviewedJpyQuoteEnforcesPriceRevisionCurrencyUnitsAndCheckoutIdempotence()throws Exception{
   var before=products.findById(product()).orElseThrow();assertThat(before.getBasePrice()).isZero();assertThat(before.getSale()).isNull();

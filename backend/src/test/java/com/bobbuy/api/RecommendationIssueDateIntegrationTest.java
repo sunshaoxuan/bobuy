@@ -70,7 +70,7 @@ class RecommendationIssueDateIntegrationTest {
         mvc.perform(put(path(issue)).header("Authorization","Bearer "+ownerToken).contentType(MediaType.APPLICATION_JSON).content(request)).andExpect(status().isConflict()).andExpect(jsonPath("$.errorCode").value("RECOMMENDATION_CHANGED"));assertThat(revisions.findByMerchantIdAndPostIdOrderById(owner.getId(),issue.id)).hasSize(2);
     }
     @Test void dateAndAtomicFourLanguageRevisionShareVersionAndHistoryWithoutChangingItemFacts()throws Exception{
-        var originalItems=json.writeValueAsString(items.findByPostIdOrderById(issue.id));var publishedAt=issue.publishedAt;
+        var originalItems=stableItems(issue.id);var publishedAt=issue.publishedAt;
         save(issue,"2026-10-31","message:synthetic-cutover-date",hash);issue=posts.findById(issue.id).orElseThrow();String before=articles.sourceHash(issue);
         var texts=new TreeMap<String,Object>();for(String locale:List.of("ja-JP","zh-CN","zh-TW","en-US"))texts.put(locale,Map.of("title","Synthetic digest "+locale,"body","Synthetic concise text "+locale));
         var intent=Map.of("requestId",UUID.randomUUID().toString(),"version",issue.version,"sourceHash",before,"reviewed",true,"articles",texts);
@@ -80,7 +80,7 @@ class RecommendationIssueDateIntegrationTest {
         var history=revisions.findByMerchantIdAndPostIdOrderById(owner.getId(),issue.id);assertThat(history).hasSize(3);var last=history.get(2).facts;
         assertThat(last).containsKeys("issueDateReview","revisionRequest");assertThat(last.get("issueDateReview").toString()).contains("2026-10-31","synthetic-cutover-date",hash);
         save(issue,"2026-11-01","message:synthetic-corrected-date","b".repeat(64));issue=posts.findById(issue.id).orElseThrow();assertThat(articles.sourceHash(issue)).isEqualTo(canonical);assertThat(articles.current(issue)).hasSize(4);
-        assertThat(json.writeValueAsString(items.findByPostIdOrderById(issue.id))).isEqualTo(originalItems);assertThat(history.get(2).facts.get("issueDateReview").toString()).contains("2026-10-31");
+        assertThat(stableItems(issue.id)).isEqualTo(originalItems);assertThat(history.get(2).facts.get("issueDateReview").toString()).contains("2026-10-31");
     }
     @Test void publicDateSortingUsesExplicitCalendarDayBeforePagingAndUnknownLast()throws Exception{
         var sameDay=issue();var latest=issue();var unknown=issue();
@@ -90,4 +90,6 @@ class RecommendationIssueDateIntegrationTest {
         var ids=new ArrayList<Long>();result.path("items").forEach(row->ids.add(row.at("/post/id").asLong()));assertThat(ids).containsExactly(latest.id,sameDay.id,issue.id,unknown.id);
         assertThat(result.at("/items/0/issueDate").asText()).isEqualTo("2026-11-01");assertThat(result.at("/items/0/publicItemCount").asInt()).isEqualTo(1);assertThat(result.at("/items/3/issueDate").isNull()).isTrue();assertThat(result.at("/items/3/issueDateSource").asText()).isEqualTo("UNKNOWN");
     }
+    String stableItems(Long id)throws Exception{var rows=json.valueToTree(items.findByPostIdOrderById(id));for(var row:rows)((com.fasterxml.jackson.databind.node.ObjectNode)row).remove(List.of("referencePrice","originalPrice","discountAmount","priceUnit","priceChange","referenceQuote","translationSource","translationStatus"));return json.writeValueAsString(rows);}
+
 }

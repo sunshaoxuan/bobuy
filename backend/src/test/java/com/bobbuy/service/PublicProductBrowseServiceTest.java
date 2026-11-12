@@ -15,12 +15,12 @@ class PublicProductBrowseServiceTest {
   assertThat(ReferencePriceDisplay.main(absent).orElseThrow().facts()).isSameAs(warehouse);warehouse.itemNumber="another-item";assertThat(ReferencePriceDisplay.main(absent)).isEmpty();
  }
  @Test void compactReferenceRetainsZeroAmountSourceAndWindowAndRevisionsChangeWithFacts(){
-  var base=row(0,null);var facts=new RecommendationItem();facts.id=901L;facts.productId=base.productId();facts.itemNumber=base.itemNumber();facts.referencePrice=java.math.BigDecimal.ZERO;facts.originalPrice=new java.math.BigDecimal("500");facts.discountAmount=new java.math.BigDecimal("500");facts.priceUnit="pack";facts.offerStart=java.time.LocalDate.of(2000,1,1);facts.offerEnd=java.time.LocalDate.of(2000,1,2);
+  var base=row(0,null);var facts=new RecommendationItem();facts.id=901L;facts.productId=base.productId();facts.itemNumber=base.itemNumber();facts.referencePrice=java.math.BigDecimal.ZERO;facts.originalPrice=new java.math.BigDecimal("500");facts.discountAmount=new java.math.BigDecimal("500");facts.priceUnit="pack";com.bobbuy.test.PriceDocumentFixtures.start(facts,java.time.LocalDate.of(2000,1,1));com.bobbuy.test.PriceDocumentFixtures.end(facts,java.time.LocalDate.of(2000,1,2));
   catalog.rows=List.of(new PublicProductCatalogService.Entry(base.productId(),base.merchantId(),base.name(),base.description(),base.brand(),base.itemNumber(),base.specification(),base.model(),base.packaging(),base.gallery(),base.categories(),List.of(new PublicProductCatalogService.Offer(7L,facts)),false));
   var before=service.browse(0,null,"","","en-US",false,null);var reference=before.items().get(0).reference();assertThat(reference.amount()).isEqualByComparingTo("500");assertThat(reference.currency()).isEqualTo("JPY");assertThat(reference.postId()).isEqualTo(7L);assertThat(reference.itemId()).isEqualTo(901L);assertThat(reference.state()).isEqualTo("EXPIRED");
   assertThat(reference.originalPrice()).isNull();assertThat(reference.discountAmount()).isNull();
   facts.referencePrice=new java.math.BigDecimal("999999999999.99");assertThatThrownBy(()->service.browse(1,null,"","","en-US",false,before.revision())).isInstanceOf(PublicProductBrowseService.Changed.class);
-  facts.referencePrice=null;assertThat(service.browse(0,null,"","","en-US",false,null).items().get(0).reference()).isNull();
+  facts.referencePrice=null;facts.priceChange=null;assertThat(service.browse(0,null,"","","en-US",false,null).items().get(0).reference()).isNull();
  }
  private static class Catalog extends PublicProductCatalogService {
   List<Entry> rows=List.of();int reads;

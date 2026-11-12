@@ -57,7 +57,7 @@ public class RecommendationProductIntake {
   if(!Objects.equals(p.getItemNumber(),input.facts().itemNumber())||!ProductCatalogService.text(p.getName(),"ja-JP").equals(input.facts().name()))throw invalid();
   var wanted=new HashSet<String>();official.forEach(i->wanted.add(i.hash()));if(input.displayUploadedImage())wanted.add(uploaded.hash());
   boolean alreadyPresent=wanted.stream().allMatch(hash->p.getMediaGallery().stream().anyMatch(image->hash.equals(image.getSha256())));
-  boolean linked=before.items().stream().anyMatch(i->p.getId().equals(i.productId)&&Objects.equals(i.offerStart,input.facts().offerStart())&&Objects.equals(i.offerEnd,input.facts().offerEnd())&&Objects.equals(i.couponStart,input.facts().couponStart())&&Objects.equals(i.couponEnd,input.facts().couponEnd()));
+  boolean linked=before.items().stream().anyMatch(i->p.getId().equals(i.productId)&&Objects.equals(i.sourcePrice==null?null:i.sourcePrice.start(),input.facts().offerStart())&&Objects.equals(i.sourcePrice==null?null:i.sourcePrice.end(),input.facts().offerEnd())&&Objects.equals(i.couponStart,input.facts().couponStart())&&Objects.equals(i.couponEnd,input.facts().couponEnd()));
   if(!Objects.equals(p.getRecordVersion(),input.existingProductVersion())&&!(alreadyPresent&&linked))throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.conflict");
   if(!alreadyPresent){
    if(before.post().version()!=input.version())throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.conflict");

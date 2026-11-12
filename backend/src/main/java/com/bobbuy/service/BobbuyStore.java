@@ -403,6 +403,7 @@ public class BobbuyStore {
         customerPaymentLedgerRepository.deleteAll();
         experienceMappingRepository.deleteAll();
         merchantSkuRepository.deleteAll();
+        priceAdjustments.deleteAll();
         productRepository.deleteAll();
         supplierRepository.deleteAll();
         categoryRepository.deleteAll();

@@ -2,6 +2,7 @@ import type { Dictionary } from './types';
 import experience from './experience.ja-JP.json';
 
 const messages: Dictionary = {
+  'pricing.documents':'価格改定伝票','pricing.reason_required':'改定または取消の理由を入力してください。要確認の出典伝票は理由を補って保存してください。','pricing.promotion_reduction':'販促価格は同一チャネル・通貨・単位の通常価格より低い必要があります。','pricing.use_documents':'価格と割引期間は価格改定伝票で管理してください。',
   'geo.title':'国・地域マスター','geo.hint':'国・地域、都道府県、市区町村の基礎データを検索・選択できます。','geo.country':'国・地域','geo.prefecture':'都道府県','geo.city':'市区町村','geo.choose_prefecture':'都道府県を選択','geo.choose_city':'市区町村を選択','geo.selection':'選択中の地域','geo.country_only':'この国・地域は現在、国レベルのデータのみ登録されています。','geo.prefectures':'都道府県一覧','geo.cities':'市区町村一覧','geo.code':'コード','geo.name':'名称','geo.reading':'ふりがな','geo.source':'国・地域は ISO 3166-1 コードを使用。日本は47都道府県と全市区町村を収録し、政令指定都市および行政区を含みます。資料確認日：2026-11-12。',
   "master.upload_details": "アップロード詳細",
   "master.upload_filename": "ファイル名",

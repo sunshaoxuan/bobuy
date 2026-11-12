@@ -24,13 +24,14 @@ public class ProductSaleService {
  }
  public record Review(@NotNull Long itemId,@NotNull @DecimalMin(value="0",inclusive=false) BigDecimal amount,
   @NotBlank String currency,@NotBlank @Size(max=80) String unit,LocalDate validFrom,LocalDate validThrough,
-  @Min(0) long revision,boolean replaceExisting,boolean enabled) {}
+  @Min(0) long revision,boolean replaceExisting,boolean enabled,@NotBlank @Size(max=1000) String reason) {}
  public record Quote(BigDecimal amount,String currency,String unit,long revision,String priceToken,
   BigDecimal regularAmount,Long adjustmentId,Instant validFrom,Instant validUntil,String channel) {}
  public List<CurrencyDefinition> currencies(){return currencies.findAll().stream().sorted(Comparator.comparing(c->c.code)).toList();}
  private CurrencyDefinition enabled(String code){return currencies.findById(code).filter(c->c.saleEnabled).orElseThrow(()->invalid("sale.currency_disabled"));}
  public static LocalDate today(){return LocalDate.now(ZoneId.of("Asia/Tokyo"));}
  public Instant now(){return time.now();}
+ public ProductSale currentRegular(Product product){var sale=product.getSale();if(sale==null)return null;var price=PriceAdjustmentResolver.resolve(adjustments.findByProductIdOrderByCreatedAtDescIdDesc(product.getId()),product.getId(),product.getMerchantId(),"STOREFRONT",sale.currency(),sale.unit(),sale.amount(),time.now());return new ProductSale(price.regular(),sale.currency(),sale.unit(),sale.validFrom(),sale.validThrough(),sale.revision(),sale.reviewedBy(),sale.reviewedAt(),sale.enabled());}
  public void review(RecommendationItem item,Long owner,Review input){
   if(item.productId==null)throw invalid("sale.profile_required");
   var product=products.lockById(item.productId).filter(p->owner.equals(p.getMerchantId())).orElseThrow(()->invalid("sale.profile_required"));
@@ -50,7 +51,10 @@ public class ProductSaleService {
   // The visible operator confirmation explicitly selects pre-order fulfillment;
   // existing direct-buy products require their inventory workflow instead.
   if(product.getOrderMethod()!=OrderMethod.PRE_ORDER)throw invalid("sale.preorder_required");
-  if(adjustments.findByProductIdOrderByCreatedAtDescIdDesc(product.getId()).stream().anyMatch(a->a.status==ProductPriceAdjustment.Status.APPROVED&&a.endsAt.isAfter(time.now())&&(!a.currency.equals(input.currency())||!Objects.equals(a.unit,input.unit().trim()))))throw invalid("pricing.regular_conflict");
+  if(input.reason()==null||input.reason().isBlank()||input.reason().length()>1000)throw invalid("pricing.reason_required");
+  if(adjustments.findByProductIdOrderByCreatedAtDescIdDesc(product.getId()).stream().anyMatch(a->Objects.equals(a.merchantId,owner)&&a.channel.equals("STOREFRONT")&&a.status==ProductPriceAdjustment.Status.APPROVED&&(a.endsAt==null||a.endsAt.isAfter(time.now()))&&(!a.currency.equals(input.currency())||!Objects.equals(a.line(product.getId()).unit,input.unit().trim()))))throw invalid("pricing.regular_conflict");
+  var document=new ProductPriceAdjustment();document.merchantId=owner;document.channel="STOREFRONT";document.currency=currency.code;document.type=ProductPriceAdjustment.Type.PERMANENT;document.startsAt=time.now();document.status=ProductPriceAdjustment.Status.APPROVED;document.sourceNote=input.reason().trim();document.createdBy=owner;document.updatedBy=owner;document.approvedBy=owner;document.createdAt=time.now();document.updatedAt=time.now();document.approvedAt=time.now();document.documentNumber="PC-"+UUID.randomUUID();
+  var line=new ProductPriceAdjustmentLine();line.document=document;line.productId=product.getId();line.amount=input.amount();line.beforeAmount=prior==null?null:currentRegular(product).amount();line.unit=input.unit().trim();document.lines.add(line);adjustments.saveAndFlush(document);
   product.setSale(new ProductSale(input.amount(),currency.code,input.unit().trim(),input.validFrom(),input.validThrough(),revision+1,owner,Instant.now(),input.enabled()));
   products.saveAndFlush(product);
  }
@@ -80,15 +84,12 @@ public class ProductSaleService {
   regular=BigDecimal.valueOf(product.getBasePrice());code=currency.code;unit="";revision=0;
   }
   String currency=code;
-  var approved=adjustments.findByProductIdOrderByCreatedAtDescIdDesc(product.getId()).stream().filter(a->a.merchantId.equals(product.getMerchantId())&&a.channel.equals("STOREFRONT")&&a.currency.equals(currency)&&a.status==ProductPriceAdjustment.Status.APPROVED&&a.approvedAt!=null&&!now.isBefore(a.approvedAt)).toList();
-  var active=approved.stream().filter(a->!now.isBefore(a.startsAt)&&now.isBefore(a.endsAt)).toList();
-  if(active.size()>1)throw invalid("pricing.overlap");
-  var adjustment=active.isEmpty()?null:active.get(0);
-  BigDecimal amount=adjustment==null?regular:adjustment.amount;
+  var resolved=PriceAdjustmentResolver.resolve(adjustments.findByProductIdOrderByCreatedAtDescIdDesc(product.getId()),product.getId(),product.getMerchantId(),"STOREFRONT",currency,unit,regular,now);
+  regular=resolved.regular();var adjustment=resolved.document();BigDecimal amount=resolved.amount();
   String identity=product.getId()+"|STOREFRONT|"+code+"|"+unit+"|"+regular.stripTrailingZeros().toPlainString()+"|"+amount.stripTrailingZeros().toPlainString()+"|"+revision+"|"+(adjustment==null?"regular":adjustment.id+":"+adjustment.version);
   String token;
   try{token=HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(identity.getBytes(java.nio.charset.StandardCharsets.UTF_8)));}catch(java.security.NoSuchAlgorithmException error){throw new IllegalStateException(error);}
-  Instant nextChange=adjustment==null?approved.stream().map(a->a.startsAt).filter(start->start.isAfter(now)).min(Comparator.naturalOrder()).orElse(null):adjustment.endsAt;
+  Instant nextChange=resolved.nextChange();
   if(sale!=null&&sale.validThrough()!=null){Instant saleEnd=sale.validThrough().plusDays(1).atStartOfDay(ZoneId.of("Asia/Tokyo")).toInstant();if(nextChange==null||saleEnd.isBefore(nextChange))nextChange=saleEnd;}
   return Optional.of(new Quote(amount,code,unit,revision,token,regular,adjustment==null?null:adjustment.id,adjustment==null?null:adjustment.startsAt,nextChange,"STOREFRONT"));
  }

@@ -85,7 +85,7 @@ class ProductCatalogIntegrationTest {
   // Existing issues retain migrated source facts; editing today's master never rewrites history.
   assertThat(feed(0).get("name").asText()).isEqualTo("日本の商品");assertThat(feed(1).get("name").asText()).isEqualTo("日本の商品");
   assertThat(items.findById(sourceIds.get(0)).orElseThrow().publicationSnapshot.productVersion()).isNull();
-  assertThat(feed(0).get("referencePrice").asInt()).isEqualTo(500);assertThat(feed(1).get("referencePrice").asInt()).isEqualTo(600);
+  assertThat(feed(0).get("referencePrice").isNull()).isTrue();assertThat(feed(1).get("referencePrice").isNull()).isTrue();assertThat(items.findById(sourceIds.get(0)).orElseThrow().publicationSnapshot.referencePrice()).isEqualByComparingTo("500");
   assertThat(items.findById(sourceIds.get(0)).orElseThrow().name).isEqualTo("日本の商品");
   request("PUT",Map.of("rows",List.of(row),"reviewed",true),admin).andExpect(status().isBadRequest());
   // A new explicitly reviewed occurrence binds the newer master through the real authenticated API.
@@ -96,7 +96,7 @@ class ProductCatalogIntegrationTest {
   assertThat(items.findByPostIdOrderById(nextId)).isEmpty();assertThat(posts.findById(nextId).orElseThrow().version).isEqualTo(next.at("/post/version").asLong());
   next=data(mvc.perform(post("/api/merchant/recommendations/"+nextId+"/from-product").header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsString(Map.of("productId",id,"productVersion",saved.getRecordVersion(),"facts",Map.of("name",ProductCatalogService.text(saved.getName(),"ja-JP"),"itemNumber","000123","referencePrice",700,"priceUnit","per pack"),"version",next.at("/post/version").asLong(),"reviewed",true)))));
   long nextItem=next.at("/items/0/id").asLong();sourceIds.add(nextItem);next=data(publishPending(mvc,json,items,next,admin));
-  var newest=data(mvc.perform(get("/api/storefront/recommendations/"+nextId))).at("/items/0");assertThat(newest.path("name").asText()).isEqualTo("主档商品");assertThat(newest.path("referencePrice").asInt()).isEqualTo(700);
+  var newest=data(mvc.perform(get("/api/storefront/recommendations/"+nextId))).at("/items/0");assertThat(newest.path("name").asText()).isEqualTo("主档商品");assertThat(newest.path("referencePrice").isNull()).isTrue();
   assertThat(newest.path("imageUrl").asText()).isEqualTo(reviewedPicture.path("url").asText());
   var published=items.findById(nextItem).orElseThrow();assertThat(published.publicationSnapshot.legacy()).isFalse();assertThat(published.publicationSnapshot.productVersion()).isEqualTo(products.findById(id).orElseThrow().getRecordVersion());assertThat(published.publicationSnapshot.reviewHash()).matches("[0-9a-f]{64}");
   assertThat(feed(0).get("name").asText()).isEqualTo("日本の商品");assertThat(feed(1).get("name").asText()).isEqualTo("日本の商品");

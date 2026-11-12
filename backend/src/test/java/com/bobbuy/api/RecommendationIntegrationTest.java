@@ -100,7 +100,7 @@ class RecommendationIntegrationTest {
         assertThat(result.at("/detail/items/0/referenceContext/activityApplies").asBoolean()).isFalse();
         assertThat(result.at("/detail/items/0/referenceContext/startSearchComplete").asBoolean()).isTrue();
         assertThat(result.at("/detail/items/0/referenceContext/activityStart").asText()).isEqualTo("2026-11-01");
-        assertThat(result.at("/detail/items/0/offerStart").isNull()).isTrue();
+        assertThat(result.at("/detail/items/0/offerStart").isMissingNode()).isTrue();
     }
     @Test void createsReusesDeduplicatesUpdatesAndRetriesWithoutDuplicateProducts() throws Exception {
         var draft = create(admin); long before = products.count();
@@ -111,10 +111,11 @@ class RecommendationIntegrationTest {
         assertThat(retry.at("/detail/items").size()).isEqualTo(1);
         upload(current,admin,"Tea","REC-TEA","160",image(123)).andExpect(status().isBadRequest());
         long itemId=current.at("/items/0/id").asLong();
-        var changed=data(mvc.perform(put(path(current)+"/items/"+itemId).header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON)
-            .content(json.writeValueAsString(Map.of("version",current.at("/post/version").asLong(),"facts",Map.of("name","Tea","itemNumber","REC-TEA","referencePrice",160))))));
+        mvc.perform(put(path(current)+"/items/"+itemId).header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON)
+            .content(json.writeValueAsString(Map.of("version",current.at("/post/version").asLong(),"facts",Map.of("name","Tea","itemNumber","REC-TEA","referencePrice",160))))).andExpect(status().isBadRequest());
+        var changed=current;
         var history=data(mvc.perform(get(path(current)+"/items/"+itemId+"/reference-history").header("Authorization","Bearer "+admin)));
-        assertThat(history.size()).isEqualTo(2);assertThat(history.at("/0/facts/referencePrice").decimalValue()).isEqualByComparingTo("150.50");assertThat(history.at("/1/facts/referencePrice").asInt()).isEqualTo(160);
+        assertThat(history.size()).isEqualTo(1);assertThat(history.at("/0/facts/sourcePrice/amount").decimalValue()).isEqualByComparingTo("150.50");
         mvc.perform(get(path(current)+"/items/"+itemId+"/reference-history").header("Authorization","Bearer "+other)).andExpect(status().isNotFound());
         mvc.perform(get(path(current)+"/items/"+itemId+"/reference-history")).andExpect(status().isForbidden());
         var secondImage=data(upload(changed,admin,"Tea side","REC-SIDE","160",image(456)));assertThat(secondImage.at("/detail/items").size()).isEqualTo(2);
@@ -276,13 +277,12 @@ class RecommendationIntegrationTest {
         assertThat(imported.at("/items/0/priceUnit").asText()).isEqualTo("100g");
         assertThat(imported.at("/items/0/couponEnd").asText()).isEqualTo("2026-10-25");
         var facts = json.createObjectNode().put("name","Synthetic meat").put("itemNumber","00123").put("offerEnd","2026-11-01");
-        var saved = data(mvc.perform(put(path(imported)+"/items/"+imported.at("/items/0/id").asLong())
+        mvc.perform(put(path(imported)+"/items/"+imported.at("/items/0/id").asLong())
             .header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON)
-            .content(json.writeValueAsString(Map.of("facts",facts,"version",imported.at("/post/version").asLong())))));
-        assertThat(saved.at("/items/0/referencePrice").isNull()).isTrue();
-        assertThat(saved.at("/items/0/itemNumber").asText()).isEqualTo("00123");
-        assertThat(saved.at("/items/0/offerStart").isNull()).isTrue();
-        assertThat(saved.at("/items/0/offerEnd").asText()).isEqualTo("2026-11-01");
+            .content(json.writeValueAsString(Map.of("facts",facts,"version",imported.at("/post/version").asLong())))).andExpect(status().isBadRequest());
+        var saved=data(mvc.perform(put(path(imported)+"/items/"+imported.at("/items/0/id").asLong()).header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsString(Map.of("version",imported.at("/post/version").asLong(),"facts",Map.of("name","Synthetic meat","itemNumber","00123","couponStart","2026-10-20","couponEnd","2026-10-25"))))));
+        assertThat(saved.at("/items/0/priceChange/startsAt").asText()).isEqualTo("2026-10-25T15:00:00Z");
+        assertThat(saved.at("/items/0/offerStart").isMissingNode()).isTrue();
         var publicPost = data(publish(data(edit(saved,admin,"Synthetic offers","Review source conditions")),"publish"));
         var visible = data(mvc.perform(get("/api/storefront/recommendations/"+publicPost.at("/post/id").asLong())));
         assertThat(visible.at("/items/0/referencePrice").isNull()).isTrue();

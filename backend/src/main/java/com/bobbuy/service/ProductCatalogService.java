@@ -61,7 +61,7 @@ public class ProductCatalogService {
    var source=grouped.getOrDefault(p.getId(),List.of());
    return new AuditRow(new Profile(input(p),p.getCatalogData()!=null,source.stream().map(i->i.id).toList()),p.getCatalogData(),source.stream().map(i->{
     var post=sourcePosts.get(i.postId);
-    return new AuditSource(i.id,i.postId,post.version,post.published,post.title,i.name,i.itemNumber,i.specification,i.referencePrice,i.originalPrice,i.discountAmount,i.offerStart,i.offerEnd,i.referenceContext,
+    return new AuditSource(i.id,i.postId,post.version,post.published,post.title,i.name,i.itemNumber,i.specification,i.publicationSnapshot==null?null:i.publicationSnapshot.referencePrice(),i.publicationSnapshot==null?null:i.publicationSnapshot.originalPrice(),i.publicationSnapshot==null?null:i.publicationSnapshot.discountAmount(),i.publicationSnapshot==null?null:i.publicationSnapshot.offerStart(),i.publicationSnapshot==null?null:i.publicationSnapshot.offerEnd(),i.referenceContext,
      i.couponStart,i.couponEnd,i.priceUnit,i.offerNotes,new RecommendationItem.SourceFacts(i.name,i.itemNumber,i.specification,i.description,Map.copyOf(i.translations),i.translatedSource));
    }).toList());
   }).toList();

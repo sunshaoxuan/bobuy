@@ -35,7 +35,8 @@ public record RecommendationFacts(
             throw new ApiException(ErrorCode.INVALID_REQUEST, "error.recommendation.offer");
         item.name = name.trim(); item.itemNumber = clean(itemNumber); item.referencePrice = referencePrice;
         item.originalPrice = originalPrice; item.discountAmount = discountAmount; item.priceUnit = clean(priceUnit);
-        item.offerStart = offerStart; item.offerEnd = offerEnd; item.couponStart = couponStart; item.couponEnd = couponEnd;
+        item.sourcePrice=referencePrice==null&&originalPrice==null&&discountAmount==null&&clean(priceUnit)==null&&offerStart==null&&offerEnd==null?null:new RecommendationItem.SourcePrice(referencePrice,originalPrice,discountAmount,clean(priceUnit),offerStart,offerEnd);
+        item.couponStart = couponStart; item.couponEnd = couponEnd;
         item.offerNotes = clean(offerNotes);
         item.referenceContext = referenceContext;
         item.brand=clean(brand);item.model=clean(model);item.packaging=clean(packaging);

@@ -2,4 +2,20 @@
 .pricing-history-cards article {border:1px solid #e5e5e1;border-radius:14px;padding:14px;margin:12px 0;overflow-wrap:anywhere;line-height:1.7;}
 .pricing-history-cards article>div:first-child {display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
 .rec-sale-actual small {display:block;line-height:1.6;}
+.price-documents{display:grid;gap:16px;min-width:0;}
+.price-document-heading,.price-document-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.price-document-heading{justify-content:space-between;}.price-document-heading h1{margin:0;font-size:24px;line-height:1.5;}
+.price-document-form,.price-document-form fieldset{display:grid;gap:16px;min-width:0;}
+.price-document-form fieldset{border:0;padding:0;margin:0;}
+.price-document-form label{display:grid;gap:6px;min-width:0;}
+.price-document-form .ant-select{width:100%;}.price-document-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+.price-document-lines{padding-left:16px;margin:0;min-width:160px;}.price-document-lines li{margin-bottom:8px;}.price-document-lines strong,.price-documents small{display:block;}
+.price-document-reason{max-width:320px;min-width:160px;overflow-wrap:anywhere;margin:0;white-space:pre-wrap;}
+.price-document-reason p{margin:0;}.price-document-reason pre{max-width:320px;max-height:240px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;}.price-document-confirm-lines small{display:block;}
+.price-document-form pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:240px;overflow:auto;}
+.price-document-line-scroll{min-width:0;}.price-document-actions .ant-btn{min-height:36px;}
+.price-document-confirm-lines{max-height:40vh;overflow:auto;padding-left:20px;}.price-document-confirm-lines li{margin-bottom:12px;overflow-wrap:anywhere;}.price-document-confirm-lines strong{display:block;}
+.price-document-line-scroll .ant-input-number{width:100%;min-width:120px;}
+@media(max-width:600px){.price-document-grid{grid-template-columns:1fr;}.price-document-actions .ant-btn{min-height:44px;}.price-document-form .ant-input,.price-document-form .ant-input-number,.price-document-form .ant-select-selector{min-height:44px;}}
 @media(max-width:600px){.pricing-history-table {display:none;}.pricing-history-cards {display:block;}}
+@media(max-width:600px){.price-document-confirm .ant-modal-footer{display:flex;justify-content:flex-end;gap:8px;}.price-document-confirm .ant-modal-footer .ant-btn{min-height:44px;margin-inline-start:0;}.price-document-confirm .ant-modal-close{min-width:44px;min-height:44px;top:8px;right:8px;}.price-document-confirm .ant-modal-title{padding-right:36px;}}

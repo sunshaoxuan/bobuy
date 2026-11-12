@@ -34,7 +34,7 @@ public final class RecommendationPublication {
         Long productVersion=product==null?null:product.getRecordVersion();
         var content=new RecommendationPublicationSnapshot(1,false,productVersion,product==null?null:ProductCatalogService.sourceHash(product),null,
             item.name,item.itemNumber,item.specification,item.description,new TreeMap<>(item.translations),item.translatedSource,
-            item.referencePrice,item.originalPrice,item.discountAmount,item.priceUnit,item.offerStart,item.offerEnd,item.couponStart,item.couponEnd,
+            null,null,null,item.sourcePrice==null?null:item.sourcePrice.unit(),null,null,item.couponStart,item.couponEnd,
             item.offerNotes,item.referenceContext,List.copyOf(item.gallery),List.copyOf(item.categoryIds),item.supplierId,item.showSupplier,
             item.imageHash,item.imageUrl,item.offerIdentity,catalog,null,null);
         String reviewHash=hash(Arrays.asList("recommendation-item-review-v1",item.id,item.postId,item.productId,content));
@@ -52,8 +52,10 @@ public final class RecommendationPublication {
         item.publicationState=identity.publicationState;item.publishedAt=identity.publishedAt;item.publicationProductVersion=s.productVersion();item.publicationLegacy=s.legacy();
         item.name=s.name();item.itemNumber=s.itemNumber();item.specification=s.specification();item.description=s.description();
         item.translations=new TreeMap<>(s.translations());item.translatedSource=s.translatedSource();
-        item.referencePrice=s.referencePrice();item.originalPrice=s.originalPrice();item.discountAmount=s.discountAmount();item.priceUnit=s.priceUnit();
-        item.offerStart=s.offerStart();item.offerEnd=s.offerEnd();item.couponStart=s.couponStart();item.couponEnd=s.couponEnd();
+        // Historical snapshot prices/dates are evidence only. ReferenceQuoteService supplies document projections.
+        item.couponStart=s.couponStart();item.couponEnd=s.couponEnd();
+        // Original source unit binds translation evidence only; it is never an effective price/unit fallback.
+        item.sourcePrice=new RecommendationItem.SourcePrice(null,null,null,s.priceUnit(),null,null);
         item.offerNotes=s.offerNotes();item.referenceContext=s.referenceContext();item.gallery=List.copyOf(s.gallery());item.categoryIds=List.copyOf(s.categoryIds());
         item.supplierId=s.supplierId();item.showSupplier=s.showSupplier();item.imageHash=s.imageHash();item.imageUrl=s.imageUrl();item.offerIdentity=s.offerIdentity();
         if(s.catalog()!=null){
@@ -81,9 +83,6 @@ public final class RecommendationPublication {
             throw new ApiException(ErrorCode.INVALID_REQUEST,"translation.review_required");
         var context=original.referenceContext;
         if(context==null||!filled(context.supplierKey())||!filled(context.channel())||!filled(context.variantKey())||!filled(context.sourceMessageKey())||!https(context.sourceUrl()))
-            throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.incomplete");
-        ReferenceOfferWindow.resolve(original.offerStart,original.offerEnd,context);
-        if((original.referencePrice!=null||original.originalPrice!=null||original.discountAmount!=null)&&!filled(original.priceUnit))
             throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.incomplete");
         for(var picture:shown.gallery)
             if(picture==null||picture.url()==null||!picture.url().startsWith("/api/storefront/recommendation-images/")

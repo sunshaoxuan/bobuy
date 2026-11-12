@@ -29,6 +29,7 @@ public class PublicProductBrowseService {
    Map<String,String> specification,String model,String packaging,RecommendationItem.Picture image,
    List<RecommendationItem.Label> categories,List<ProductMarkerService.Definition> markers,boolean reviewedMaster,java.math.BigDecimal rating,CardReference reference){}
  private static CardReference reference(PublicProductCatalogService.Entry entry,java.time.Instant now){
+  if(!entry.referencePrices().isEmpty()){var p=entry.referencePrices().get(0);return new CardReference(p.amount(),p.currency(),p.unit(),null,null,p.state(),p.promotion()?p.regularAmount():null,p.promotion()?p.regularAmount().subtract(p.amount()):null);}
   return ReferencePriceDisplay.main(entry).map(offer->{var facts=offer.facts();var display=ReferencePriceDisplay.of(facts,now);return display.amount()==null?null:new CardReference(display.amount(),"JPY",facts.priceUnit,offer.postId(),facts.id,display.state(),display.originalPrice(),display.discountAmount());}).orElse(null);
  }
  public record Browse(List<Card> items,int page,int size,long scopeTotal,long matchedTotal,boolean hasNext,

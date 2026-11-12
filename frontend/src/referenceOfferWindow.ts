@@ -1,5 +1,4 @@
 import type {RecommendationFacts} from './api';
-export function resolvedOfferWindow(facts:RecommendationFacts){
- const c=facts.referenceContext;const inherit=!!(c?.activityApplies&&c.windowEvidence?.trim()&&c.sourceUrl?.startsWith('https://'));
- return {start:facts.offerStart||(inherit?c?.activityStart:null),end:facts.offerEnd||(inherit?c?.activityEnd:null)};
-}
+import {japanDate} from './recommendationSchedule';
+/** Display dates are projections of the ERP document. Source dates never provide a fallback. */
+export function resolvedOfferWindow(facts:RecommendationFacts){const d=facts.priceChange;return {start:d?.startsAt?japanDate(new Date(d.startsAt)):null,end:d?.endsAt?japanDate(new Date(Date.parse(d.endsAt)-1)):null};}

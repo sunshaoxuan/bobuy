@@ -106,7 +106,7 @@ class RecommendationItemPublicationIntegrationTest {
         // Review the persisted merchant DTO, exactly as the client does. The detached fixture
         // still holds TEN(scale0), while numeric(14,2) reads 10.00; neither the amount nor
         // the service's strict evidence/hash guard should be changed to hide that mismatch.
-        assertEquals(0,ready.referencePrice.compareTo(items.findById(ready.id).orElseThrow().referencePrice));
+        assertNull(items.findById(ready.id).orElseThrow().referencePrice); // Price persistence belongs to documents.
         var key=UUID.randomUUID();var reviewed=json.readTree(body(getMerchant(),ready.id,key));
         long version=reviewed.path("version").asLong(),productVersion=reviewed.path("productVersion").asLong();
         String sourceHash=reviewed.path("sourceHash").asText();

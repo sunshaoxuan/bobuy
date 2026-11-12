@@ -17,6 +17,6 @@ class ReferenceProductIdentityTest {
   when(repository.deletedCodeCount(1000L,"00123")).thenReturn(0L);when(repository.findAllByMerchantIdAndItemNumber(1000L,"00123")).thenReturn(List.of(new Product(),new Product()));assertThatThrownBy(()->service.ensure(item(2),1000L)).isInstanceOf(RuntimeException.class);verify(repository,never()).saveAndFlush(any());
  }
  @Test void newProductIdentityDoesNotContainIssueOrOfferWindow(){
-  var repository=mock(ProductRepository.class);var service=new RecommendationCatalogService(repository);var a=item(1);var b=item(2);b.offerStart=java.time.LocalDate.of(2026,11,2);b.referenceContext=context("COSTCO_ONLINE");service.ensure(a,1000L);service.ensure(b,1000L);assertThat(a.productId).isEqualTo(b.productId);
+  var repository=mock(ProductRepository.class);var service=new RecommendationCatalogService(repository);var a=item(1);var b=item(2);com.bobbuy.test.PriceDocumentFixtures.start(b,java.time.LocalDate.of(2026,11,2));b.referenceContext=context("COSTCO_ONLINE");service.ensure(a,1000L);service.ensure(b,1000L);assertThat(a.productId).isEqualTo(b.productId);
  }
 }

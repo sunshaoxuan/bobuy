@@ -274,7 +274,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         nameL10n: res.product.name,
         category: res.product.categoryId || '',
         price: res.product.basePrice,
-        actualSale:(res.product as unknown as {sale?:import('../api').ProductSale}).sale,
+        actualSale:res.currentRegular??undefined,
         stock: 0, // Placeholder
         unit: 'pc',
         description: res.displayDescription,

@@ -10,8 +10,8 @@ export default function RecommendationCatalog({detail,onChange}:{detail:Recommen
  const [choices,setChoices]=useState<Record<number,string>>({});
  const missing=detail.items.filter(item=>!item.productId);
  const available=[...products,...detail.items.filter(item=>item.productId&&!products.some(product=>product.id===item.productId)).map(item=>({id:item.productId!,name:{'ja-JP':item.name},itemNumber:item.itemNumber??undefined} as CatalogProduct))].filter((product,index,values)=>values.findIndex(value=>value.id===product.id)===index);
- async function load(){const result=await api.products();setProducts(result.map(value=>value.product));}
- useEffect(()=>{let active=true;void api.products().then(result=>{if(active)setProducts(result.map(value=>value.product));}).catch(error=>{if(active)setError(error.message);});return()=>{active=false;};},[detail.post.id]);
+ async function load(){const result=await api.products();setProducts(result.map(value=>({...value.product,sale:value.currentRegular??undefined})));}
+ useEffect(()=>{let active=true;void api.products().then(result=>{if(active)setProducts(result.map(value=>({...value.product,sale:value.currentRegular??undefined})));}).catch(error=>{if(active)setError(error.message);});return()=>{active=false;};},[detail.post.id]);
  async function link(itemIds:number[],productId?:string){setBusy(true);setError('');try {onChange(await recommendationApi.catalog(detail.post.id,{itemIds,productId,version:detail.post.version}));await load();}catch(error){setError((error as Error).message);}finally{setBusy(false);}}
  return <section className="rec-catalog-link"><h2>{t('catalog.title')}</h2><p>{t('catalog.hint')}</p>
   {error&&<Alert type="error" message={error}/>}

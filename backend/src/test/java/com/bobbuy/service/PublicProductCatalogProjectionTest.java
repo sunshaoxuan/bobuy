@@ -16,7 +16,7 @@ class PublicProductCatalogProjectionTest {
  private final RecommendationItemRepository items=mock(RecommendationItemRepository.class);
  private final CategoryRepository categories=mock(CategoryRepository.class);
  private final RecommendationTaxonomyService taxonomy=new RecommendationTaxonomyService(categories,mock(SupplierRepository.class),mock(UserRepository.class),products,posts);
- private final ReferenceQuoteService quotes=new ReferenceQuoteService(mock(ReferenceQuoteRevisionRepository.class),new ObjectMapper(),items,posts);
+ private final ReferenceQuoteService quotes=new ReferenceQuoteService(mock(ReferenceQuoteRevisionRepository.class),new ObjectMapper(),items,posts,com.bobbuy.test.PriceDocumentFixtures.repository());
  private final PublicProductCatalogService catalog=new PublicProductCatalogService(products,posts,items,taxonomy,quotes,categories);
  private Product p;private RecommendationItem original;
  private void setup(boolean canonical){

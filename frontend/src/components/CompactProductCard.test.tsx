@@ -2,6 +2,7 @@ import {fireEvent,render,screen,within} from '@testing-library/react';
 import {I18nProvider} from '../i18n';
 import CompactProductCard,{referenceForCard} from './CompactProductCard';
 import {saleFixture} from '../test/browseFixtures';
+import {priceChange} from '../test/priceDocumentFixtures';
 const reference={amount:999999999999,currency:'JPY',unit:'pack',postId:7,itemId:9,state:'EXPIRED' as const};
 it('localizes reference and sale units while retaining numeric price and source identity',()=>{
  const v=mount({reference:{...reference,amount:1598,unit:'1箱（42g×40袋）'}});
@@ -11,11 +12,11 @@ it('localizes reference and sale units while retaining numeric price and source 
  const sale=mount({quote:{...saleFixture(),saleUnit:'6個入'}});
  expect(sale.container.querySelector('.card-price-unit')).toHaveTextContent('6 pieces');
 });
-it('keeps the inclusive source window and occurrence identity when summarizing a reference',()=>{
- const facts={id:9,name:'Product',referencePrice:0,offerStart:'2026-11-10',offerEnd:'2026-11-11'};
+it('keeps document state and occurrence identity while ignoring source-only dates',()=>{
+ const facts={id:9,name:'Product',referencePrice:0,offerStart:'2026-11-10',offerEnd:'2026-11-11',priceChange:priceChange({amount:0,effectiveAmount:0,promotion:false})};
  expect(referenceForCard(facts,7,'2026-11-11')).toMatchObject({amount:0,postId:7,itemId:9,state:'ACTIVE'});
- expect(referenceForCard(facts,7,'2026-11-12')?.state).toBe('EXPIRED');
- expect(referenceForCard({...facts,offerStart:null},7,'2026-11-12')?.state).toBe('EXPIRED');
+ expect(referenceForCard({...facts,priceChange:priceChange({state:'EXPIRED',amount:0,effectiveAmount:10,promotion:false})},7,'2026-11-12')?.state).toBe('EXPIRED');
+ expect(referenceForCard({...facts,priceChange:undefined},7,'2026-11-12')).toBeUndefined();
 });
 it('keeps a discount-only fact unknown instead of presenting the discount as a price',()=>{
  expect(referenceForCard({id:9,name:'Product',referencePrice:null,discountAmount:400},7,'2026-11-11')).toBeUndefined();

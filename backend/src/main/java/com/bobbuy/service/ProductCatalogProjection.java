@@ -6,7 +6,7 @@ public final class ProductCatalogProjection {
  private ProductCatalogProjection(){}
  public static void apply(RecommendationItem item,RecommendationItem original,Product product){
   if(product==null||product.getCatalogData()==null)return;var data=product.getCatalogData();item.catalogDriven=true;
-  boolean sourceReviewed="REVIEWED".equals(original.getTranslationStatus());
+  item.sourcePrice=original.sourcePrice;boolean sourceReviewed="REVIEWED".equals(original.getTranslationStatus());
   var originalTranslations=Map.copyOf(original.translations);
   item.name=ProductCatalogService.text(product.getName(),"ja-JP");item.itemNumber=product.getItemNumber();
   item.specification=ProductCatalogService.text(data.specification(),"ja-JP");item.description=ProductCatalogService.text(product.getDescription(),"ja-JP");

@@ -179,7 +179,7 @@ class RecommendationPublicationMigrationIntegrationTest {
                 assertTrue(row.next());var item=new RecommendationItem();item.id=row.getLong(1);item.postId=row.getLong(2);item.productId=row.getString(3);
                 item.name=row.getString(4);item.itemNumber=row.getString(5);item.specification=row.getString(6);item.description=row.getString(7);
                 item.referencePrice=row.getBigDecimal(8);item.originalPrice=row.getBigDecimal(9);item.discountAmount=row.getBigDecimal(10);item.priceUnit=row.getString(11);
-                item.offerStart=row.getObject(12,java.time.LocalDate.class);item.offerEnd=row.getObject(13,java.time.LocalDate.class);
+                com.bobbuy.test.PriceDocumentFixtures.start(item,row.getObject(12,java.time.LocalDate.class));com.bobbuy.test.PriceDocumentFixtures.end(item,row.getObject(13,java.time.LocalDate.class));
                 item.couponStart=row.getObject(14,java.time.LocalDate.class);item.couponEnd=row.getObject(15,java.time.LocalDate.class);item.offerNotes=row.getString(16);
                 String context=row.getString(17);item.referenceContext=context==null?null:JSON.readValue(context,ReferenceOfferContext.class);
                 item.gallery=new ArrayList<>(Arrays.asList(JSON.readValue(row.getString(18),RecommendationItem.Picture[].class)));
@@ -199,7 +199,7 @@ class RecommendationPublicationMigrationIntegrationTest {
         assertEquals(source.name,snapshot.name());assertEquals(source.itemNumber,snapshot.itemNumber());
         assertEquals(source.specification,snapshot.specification());assertEquals(source.description,snapshot.description());
         samePrice(source.referencePrice,snapshot.referencePrice());samePrice(source.originalPrice,snapshot.originalPrice());samePrice(source.discountAmount,snapshot.discountAmount());
-        assertEquals(source.priceUnit,snapshot.priceUnit());assertEquals(source.offerStart,snapshot.offerStart());assertEquals(source.offerEnd,snapshot.offerEnd());
+        assertEquals(source.priceUnit,snapshot.priceUnit());assertEquals(com.bobbuy.test.PriceDocumentFixtures.start(source),snapshot.offerStart());assertEquals(com.bobbuy.test.PriceDocumentFixtures.end(source),snapshot.offerEnd());
         assertEquals(source.couponStart,snapshot.couponStart());assertEquals(source.couponEnd,snapshot.couponEnd());assertEquals(source.offerNotes,snapshot.offerNotes());
         assertEquals(source.referenceContext,snapshot.referenceContext());assertEquals(source.gallery,snapshot.gallery());
         assertEquals(source.imageHash,snapshot.imageHash());assertEquals(source.imageUrl,snapshot.imageUrl());
@@ -210,7 +210,7 @@ class RecommendationPublicationMigrationIntegrationTest {
         samePrice(sourceAtV31Cutover.referencePrice,shown.referencePrice);samePrice(sourceAtV31Cutover.originalPrice,shown.originalPrice);
         samePrice(sourceAtV31Cutover.discountAmount,shown.discountAmount);assertEquals(sourceAtV31Cutover.priceUnit,shown.priceUnit);
         assertEquals(sourceAtV31Cutover.referenceContext,shown.referenceContext);assertEquals(sourceAtV31Cutover.offerNotes,shown.offerNotes);
-        assertEquals(sourceAtV31Cutover.offerStart,shown.offerStart);assertEquals(sourceAtV31Cutover.offerEnd,shown.offerEnd);
+        assertEquals(com.bobbuy.test.PriceDocumentFixtures.start(sourceAtV31Cutover),com.bobbuy.test.PriceDocumentFixtures.start(shown));assertEquals(com.bobbuy.test.PriceDocumentFixtures.end(sourceAtV31Cutover),com.bobbuy.test.PriceDocumentFixtures.end(shown));
         assertEquals(sourceAtV31Cutover.couponStart,shown.couponStart);assertEquals(sourceAtV31Cutover.couponEnd,shown.couponEnd);
         assertEquals(sourceAtV31Cutover.imageHash,shown.imageHash);assertEquals(sourceAtV31Cutover.imageUrl,shown.imageUrl);
     }

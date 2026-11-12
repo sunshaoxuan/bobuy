@@ -176,6 +176,7 @@ export type CostcoOnboardingJobView = {
 };
 
 export type MobileProductResponse = {
+        currentRegular?:ProductSale|null;
         product: {
               recordVersion?: number;
               catalogData?: unknown;
@@ -1040,12 +1041,12 @@ export type AiOnboardingSuggestion = {
 export type RecommendationSummary = { id: number; title: string; published: boolean; version: number; updatedAt: string; publishedAt?: string; publisherName?: string; coverImageUrl?: string; merchantId?:number;articleTitles?:Record<string,string>;issueDate?:string|null;issueDateSource?:'REVIEWED_SOURCE'|'UNKNOWN' };
 export type ReferenceOfferContext={supplierKey?:string;channel?:'COSTCO_WAREHOUSE'|'COSTCO_ONLINE';variantKey?:string;sourceMessageKey?:string;sourceUrl?:string;activityStart?:string|null;activityEnd?:string|null;activityApplies?:boolean;windowEvidence?:string;startSearchComplete?:boolean};
 export type ReferenceResolution={state:string;amount:number|null;itemIds:number[];unknownWindows:number};
-export type RecommendationFacts = { brand?:string|null;model?:string|null;packaging?:string|null;specification?:string|null; name: string; itemNumber?: string | null; referencePrice?: number | null; originalPrice?: number | null; discountAmount?: number | null; priceUnit?: string | null; offerStart?: string | null; offerEnd?: string | null; couponStart?: string | null; couponEnd?: string | null; offerNotes?: string | null;referenceContext?:ReferenceOfferContext|null;referenceQuote?:ReferenceResolution };
+export type RecommendationFacts = { brand?:string|null;model?:string|null;packaging?:string|null;specification?:string|null; name: string; itemNumber?: string | null; referencePrice?: number | null; originalPrice?: number | null; discountAmount?: number | null; priceUnit?: string | null; offerStart?: string | null; offerEnd?: string | null; couponStart?: string | null; couponEnd?: string | null; offerNotes?: string | null;referenceContext?:ReferenceOfferContext|null;referenceQuote?:ReferenceResolution;priceChange?:PriceChangeView|null };
 export type RecommendationLabel = {id:string;name:Record<string,string>};
 export type RecommendationText={name:string;specification?:string|null;description?:string|null;offerNotes?:string|null};
 export type LocalizationRow={itemId:number;sourceHash:string;specification?:string|null;description?:string|null;translations:Record<string,RecommendationText>};
 export type ProductSale={amount:number;currency:string;unit:string;validFrom?:string|null;validThrough?:string|null;revision:number;enabled:boolean};
-export type SaleReview={itemId:number;amount:number;currency:string;unit:string;validFrom?:string|null;validThrough?:string|null;revision:number;replaceExisting:boolean;enabled:boolean};
+export type SaleReview={itemId:number;amount:number;currency:string;unit:string;validFrom?:string|null;validThrough?:string|null;revision:number;replaceExisting:boolean;enabled:boolean;reason:string};
 export type RecommendationPicture={id:string;url:string;hash:string;sourceUrl:string;assetKey:string;label:string};
 export type RecommendationPublicationInput={requestId:string;version:number;productVersion:number;sourceHash:string;reviewed:true};
 export type RecommendationItem = RecommendationFacts & {publicationState?:'PENDING'|'PUBLISHED';publicationReviewHash?:string;publicationProductVersion?:number|null;publicationLegacy?:boolean;publishedAt?:string;catalogDriven?:boolean;sourceFacts?:{name:string;itemNumber?:string|null;specification?:string|null;description?:string|null;translations:Record<string,RecommendationText>;translationSource:string};brand?:string|null;model?:string|null;packaging?:string|null;gallery?:RecommendationPicture[];specification?:string|null;description?:string|null;translations?:Record<string,RecommendationText>;translationSource?:string;translationStatus?:string; id: number; productId?: string | null; currency?: 'JPY'; imageUrl: string; categoryIds?:string[]; categories?:RecommendationLabel[]; supplierId?:string|null; supplierName?:Record<string,string>|null; showSupplier?:boolean };
@@ -1072,15 +1073,26 @@ const recommendationBase = '/api/merchant/recommendations';
 export type CatalogMedia={url:string;type:string;title:Record<string,string>;visible:boolean;sha256?:string|null;sourceUrl?:string|null;sourceDomain?:string|null;sourceType?:string|null};
 export type CatalogInput={productId:string;version:number;name:Record<string,string>;description:Record<string,string>;itemNumber?:string|null;brand?:string|null;specification:Record<string,string>;model?:string|null;packaging?:string|null;categoryIds:string[];supplierId?:string|null;gallery:CatalogMedia[];translationsReviewed:boolean};
 export type CatalogProposal={value:CatalogInput;changes:string[];warnings:string[]};
-export type PriceAdjustment={id:number;version:number;productId:string;channel:string;currency:string;amount:number;unit?:string;startsAt:string;endsAt:string;status:'DRAFT'|'APPROVED'|'CANCELLED';sourceNote:string;createdBy:number;createdAt:string;updatedAt:string;approvedAt?:string;cancelledAt?:string};
-export type PricingInput={channel:string;currency:string;amount:number;startsAt:string;endsAt:string;sourceNote:string;version:number};
+export type PriceChangeView={documentId:number;documentNumber:string;type:'PROMOTION'|'TEMPORARY'|'PERMANENT';state:string;startsAt?:string|null;endsAt?:string|null;amount:number|null;beforeAmount:number|null;effectiveAmount:number|null;promotion:boolean};
+export type PriceAdjustmentLine={id?:number;productId:string|null;amount:number|null;beforeAmount:number|null;unit:string|null;referenceItemId?:number|null};
+export type PriceAdjustment={id:number;version:number;documentNumber:string;type:'PROMOTION'|'TEMPORARY'|'PERMANENT';channel:string;currency:string;lines:PriceAdjustmentLine[];startsAt:string|null;endsAt:string|null;status:'DRAFT'|'APPROVED'|'CANCELLED';sourceNote:string;createdBy:number;createdAt:string;updatedAt:string;approvedAt?:string;cancelledAt?:string;cancellationReason?:string;evidence:Record<string,unknown>};
+export type PricingInput={channel:string;currency:string;amount:number;startsAt:string;endsAt:string|null;sourceNote:string;version:number;type:PriceAdjustment['type'];unit?:string;beforeAmount?:number};
+export type PriceDocumentInput={channel:string;currency:string;type:PriceAdjustment['type'];startsAt:string|null;endsAt:string|null;reason:string;version:number;lines:{productId:string;amount:number;beforeAmount?:number|null;unit:string}[]};
+export type PriceDocumentEntry={value:PriceAdjustment;state:string};
+export type PriceDocumentProduct={id:string;itemNumber?:string|null;name:Record<string,string>;currency:string;unit?:string|null};
+export const priceDocumentApi={
+ list:()=>storeGet<PriceDocumentEntry[]>('/api/merchant/price-adjustments'),
+ products:()=>storeGet<PriceDocumentProduct[]>('/api/merchant/price-adjustments/products'),
+ save:(value:PriceDocumentInput,id?:number)=>id?putJson<PriceDocumentEntry,object>('/api/merchant/price-adjustments/'+id,value):postJson<PriceDocumentEntry,object>('/api/merchant/price-adjustments',value),
+ act:(value:PriceAdjustment,action:'approve'|'cancel',reason:string)=>postJson<PriceDocumentEntry,object>('/api/merchant/price-adjustments/'+value.id+'/'+action,{version:value.version,confirmed:true,reason})
+};
 export type PricingSheet={productId:string;regular:ProductSale|null;visibility:string;orderMethod:string;now:string;timezone:string;effective:{amount:number;currency:string;unit:string;regularAmount:number;adjustmentId?:number}|null;history:{value:PriceAdjustment;state:string}[]};
 export const productPricingApi={
  get:(id:string)=>storeGet<PricingSheet>('/api/merchant/product-pricing/'+encodeURIComponent(id)),
  draft:(id:string,value:PricingInput,adjustmentId?:number)=>adjustmentId?putJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/adjustments/'+adjustmentId,value):postJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/adjustments',value),
  approve:(id:string,adjustment:PriceAdjustment)=>postJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/adjustments/'+adjustment.id+'/approve',{version:adjustment.version,confirmed:true}),
  cancel:(id:string,adjustment:PriceAdjustment)=>postJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/adjustments/'+adjustment.id+'/cancel',{version:adjustment.version,confirmed:true}),
- regular:(id:string,value:Omit<ProductSale,'reviewedBy'|'reviewedAt'>)=>putJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/regular',{...value,confirmed:true,replaceExisting:true})
+ regular:(id:string,value:Omit<ProductSale,'reviewedBy'|'reviewedAt'>&{reason:string})=>putJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/regular',{...value,confirmed:true,replaceExisting:true})
 };
 export type ProductReviewValue={stars:number|null;comment:string;version:number;updatedAt:string|null};
 export type ProductReviewSummary={average:number|null;count:number;sum:number;distribution:{stars:number;count:number}[]};
@@ -1160,7 +1172,7 @@ export const recommendationApi = {
     create: () => postJson<RecommendationDetail, object>(recommendationBase, {}),
     save: (id: number, title: string, body: string, version: number) => putJson<RecommendationDetail, object>(recommendationBase + '/' + id, { title, body, version }),
     publish: (id: number, version: number, publish: boolean) => postJson<RecommendationDetail, object>(recommendationBase + '/' + id + (publish ? '/publish' : '/withdraw'), { version }),
-    editItem: (id: number, itemId: number, facts: RecommendationFacts, version: number) => putJson<RecommendationDetail, object>(recommendationBase + '/' + id + '/items/' + itemId, { facts, version }),
+    editItem: (id: number, itemId: number, facts: RecommendationFacts, version: number) => {const {referencePrice:_price,originalPrice:_original,discountAmount:_discount,priceUnit:_unit,offerStart:_start,offerEnd:_end,priceChange:_change,referenceQuote:_quote,...metadata}=facts;return putJson<RecommendationDetail, object>(recommendationBase + '/' + id + '/items/' + itemId, { facts:metadata, version });},
     sourceImage: (id: number, imageUrl: string, facts: RecommendationFacts, version: number) => postJson<{detail: RecommendationDetail; productCreated: boolean; imageReused: boolean; priceUpdated: boolean}, object>(recommendationBase + '/' + id + '/source-image', {imageUrl,facts,version}),
     upload: async (id: number, file: File, name: string, itemNumber: string, referencePrice: number | null, version: number, facts?: RecommendationFacts) => {
         const body = new FormData();
@@ -1486,7 +1498,8 @@ export const api = {
 
 export type StoreTrip = { id: number; merchantId: number; merchantName: string; deliveryArea: string; deliveryDate: string };
 export type StoreProduct = { id: string; merchantId: number; name: Record<string, string>; description: Record<string, string>; brand: string; price: number; categoryId: string; images: string[]; recommendationReady?:boolean;currency?:string;saleUnit?:string;priceRevision?:number;priceToken?:string;regularPrice?:number;priceAdjustmentId?:number;priceValidFrom?:string;priceValidUntil?:string };
-export type PublicCatalogEntry = {rating?:number|null;introduction?:Record<string,string>;
+export type PublicReferencePrice={documentId:number;documentNumber:string;channel:string;currency:string;unit:string;amount:number;regularAmount:number|null;promotion:boolean;startsAt:string;endsAt:string|null;type:PriceChangeView['type'];state:string};
+export type PublicCatalogEntry = {rating?:number|null;introduction?:Record<string,string>;referencePrices?:PublicReferencePrice[];
     productId:string; merchantId:number; name:Record<string,string>; description:Record<string,string>;
     brand:string|null; itemNumber:string|null; specification:Record<string,string>; model:string|null; packaging:string|null;
     gallery:RecommendationPicture[]; categories:RecommendationLabel[];
