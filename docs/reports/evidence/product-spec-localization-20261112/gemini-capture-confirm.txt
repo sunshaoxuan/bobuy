@@ -1,0 +1,21 @@
+### Actual Findings
+
+* **Displayed Reference Amount and Unit (exact string):**
+  * `/ 本体1個＋つけかえ5個` (located directly beneath `¥ 1,758` inside the price card).
+  * In the specification row above, the full packaging detail reads: `本体1個6.3ml＋つけかえ5個各6.3ml／計6回分`.
+
+* **Header & Text Wrapping:**
+  * **Title wrapping:** The title splits the loanword *プレミアム* mid-word across lines (`トイレ用消臭芳香剤 プレ` / `ミアムシリーズ`), which is an awkward break typographically.
+  * **Specification wrapping:** In `包装・入数`, the text splits between `各` and `6.3ml` (`本体1個6.3ml＋つけかえ5個各` / `6.3ml／計6回分`).
+
+* **Clipping & Overflow:**
+  * **None detected.** All UI cards, badge counters (`No.78159`), gallery controls (`1 / 5`), carousel thumbnails, dividers, and price labels fit cleanly within the 320px viewport without horizontal bleed or truncated glyphs.
+
+* **Description & CTA Status:**
+  * **Description (`商品について`):** Fully present and legible with proper line spacing.
+  * **CTA:** Fully visible and centered at the bottom as a disabled state button (`＋ 現在は予約受付前です`).
+
+---
+
+### Concise Visual Judgment
+**Passable / Clean.** Layout integrity, spacing, contrast, and alignment hold up reliably at 320px with no structural clipping or missing sections; the only blemish is the mid-word line wrap of 「プレミアム」 in the main heading.

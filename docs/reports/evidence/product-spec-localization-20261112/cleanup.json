@@ -1,0 +1,67 @@
+{
+  "preexistingPlan63Preserved": true,
+  "source": "ea7b7fec29ee5d413cfac2e2025c0f93819e4fc6",
+  "at": "2026-11-12T06:54:36.7184451Z",
+  "sharedDependenciesPreserved": true,
+  "productionImagesRetained": true,
+  "stopped": [],
+  "result": "PASS",
+  "formalEvidenceAndCompletedWorktreePreserved": true,
+  "removed": [
+    "frontend/node_modules junction only",
+    "evidence-bridge.mjs",
+    "spec-inventory.mjs",
+    ".task-tmp/spec-pr.md",
+    "docs/reports/evidence/product-spec-localization-20261112/apply-presentation.py",
+    "docs/reports/evidence/product-spec-localization-20261112/review-translations.py",
+    "docs/reports/evidence/product-spec-localization-20261112/apply-final-copy.py",
+    "docs/reports/evidence/product-spec-localization-20261112/translation-draft-1.txt",
+    "docs/reports/evidence/product-spec-localization-20261112/translation-draft-2.txt",
+    "docs/reports/evidence/product-spec-localization-20261112/extra-translation-draft.txt",
+    "docs/reports/evidence/product-spec-localization-20261112/translation-input-1.json",
+    "docs/reports/evidence/product-spec-localization-20261112/translation-input-2.json",
+    "docs/reports/evidence/product-spec-localization-20261112/claude-probe.txt",
+    "docs/reports/evidence/product-spec-localization-20261112/gemini-pro-probe.txt",
+    "docs/reports/evidence/product-spec-localization-20261112/candidate-matrix.json",
+    "docs/reports/evidence/product-spec-localization-20261112/candidate-network.json",
+    "docs/reports/evidence/product-spec-localization-20261112/candidate-long-unit-en-mobile.png",
+    "docs\\reports\\evidence\\product-spec-localization-20261112\\candidate-cn-desktop-whole.jpg",
+    "docs\\reports\\evidence\\product-spec-localization-20261112\\candidate-cn-mobile-whole.jpg",
+    "docs\\reports\\evidence\\product-spec-localization-20261112\\candidate-en-desktop-whole.jpg",
+    "docs\\reports\\evidence\\product-spec-localization-20261112\\candidate-en-mobile-whole.jpg",
+    "docs\\reports\\evidence\\product-spec-localization-20261112\\candidate-ja-desktop-whole.jpg",
+    "docs\\reports\\evidence\\product-spec-localization-20261112\\candidate-ja-mobile-whole.jpg",
+    "docs\\reports\\evidence\\product-spec-localization-20261112\\candidate-tw-desktop-whole.jpg",
+    "docs\\reports\\evidence\\product-spec-localization-20261112\\candidate-tw-mobile-whole.jpg"
+  ],
+  "globalRulesAndInstalledSkillsChanged": false,
+  "verifiedAbsentTargets": [
+    ".task-tmp/spec-test-temp",
+    ".task-tmp/spec-release",
+    "frontend/dist",
+    "frontend/node_modules",
+    "docs/reports/evidence/product-introductions-20261112/__pycache__",
+    "docs/reports/evidence/product-spec-localization-20261112/__pycache__",
+    "evidence-bridge.mjs",
+    "spec-inventory.mjs"
+  ],
+  "taskPortsClosed": [
+    18747,
+    4190
+  ],
+  "executedCleanupScriptSha256": "210cbaa0d5772e8022bc339baca44e3fb8e87ba255cb93300773beb71f974ed0",
+  "reportingCorrection": "Directory deletion completed; directory-list reporting scope corrected afterward and absence independently verified. No destructive rerun.",
+  "closedExecSessions": [
+    {
+      "sessionId": 29489,
+      "action": "Ctrl+C",
+      "exitCode": 1
+    },
+    {
+      "sessionId": 79114,
+      "action": "Ctrl+C",
+      "exitCode": 1
+    }
+  ],
+  "initialTcpEnumeration": "No listeners returned despite a reachable task port. Independent socket verification rejected the initial assertion; exact owned exec sessions were then terminated and socket closure verified."
+}

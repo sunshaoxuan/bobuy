@@ -1,0 +1,18 @@
+[
+  {
+    "name": "frontend-tests",
+    "exitCode": 0,
+    "fullPassed": 818,
+    "finalAffectedPassed": 48,
+    "reason": "Preserved first stable full run; final copy/translated-spec-warning correction retested with the affected union",
+    "fullReportSha256": "7d7518a8013e9ed678d03bc143997646e403ccc1d95370042b2529cb70249655",
+    "focusedReportSha256": "bb2a278dfa0cc428673184bd668a21677f5cee00585495ad91dbfa023f0d49d1"
+  },
+  {
+    "name": "frontend-build",
+    "exitCode": 0,
+    "source": "ea7b7fec29ee5d413cfac2e2025c0f93819e4fc6",
+    "logSha256": "b286d6e31ebb76082eace8e59e3dccd05fbed8c33082deb7fe143826432feb12",
+    "assetManifestSha256": "796216721498105d256a1582002b4b7dfc58398a973bd1653bbe7533f778f7f8"
+  }
+]

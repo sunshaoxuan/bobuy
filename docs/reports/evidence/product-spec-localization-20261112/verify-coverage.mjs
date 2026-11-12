@@ -1,0 +1,15 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+const dir='docs/reports/evidence/product-spec-localization-20261112';
+const publicData=JSON.parse(fs.readFileSync(dir+'/private/public-before.json'));
+const fields=JSON.parse(fs.readFileSync(dir+'/field-inventory.json'));
+const masters=JSON.parse(fs.readFileSync(dir+'/private/master-literals.json'));
+const translations=JSON.parse(fs.readFileSync('frontend/src/locales/product-facts.json'));
+const inputs=JSON.parse(fs.readFileSync(dir+'/translation-input.json'));
+const literals=[...new Set([...Object.values(fields).flat(),...masters,...inputs])].sort();
+const missing=literals.filter(s=>/[ぁ-ゖァ-ヺ一-龯]/u.test(s)&&!['ja-JP','zh-CN','zh-TW','en-US'].every(l=>translations[s]?.[l]));
+if(missing.length)throw Error(JSON.stringify(missing));
+const coverage={result:'PASS',publicProducts:publicData.items.length,masterProducts:389,sourceLiterals:literals.length,translatedLiterals:Object.keys(translations).length,missing,sourcePublicSha256:crypto.createHash('sha256').update(fs.readFileSync(dir+'/private/public-before.json')).digest('hex'),sourceMasterLiteralSha256:crypto.createHash('sha256').update(fs.readFileSync(dir+'/private/master-literals.json')).digest('hex'),resourceSha256:crypto.createHash('sha256').update(fs.readFileSync('frontend/src/locales/product-facts.json')).digest('hex')};
+fs.writeFileSync(dir+'/coverage.json',JSON.stringify(coverage,null,2)+'\n');
+fs.writeFileSync('frontend/src/test/product-fact-literals.json',JSON.stringify(literals,null,2)+'\n');
+console.log(JSON.stringify(coverage));

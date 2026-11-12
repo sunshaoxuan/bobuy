@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "publicProducts": 325,
+  "masterProducts": 389,
+  "sourceLiterals": 327,
+  "translatedLiterals": 245,
+  "missing": [],
+  "sourcePublicSha256": "374115bca3256f3a7bd721afb27d996d3a6bd202a52a2adc53b673491867dc1c",
+  "sourceMasterLiteralSha256": "2d907123e8d8875a2a3378a8aac2561806627c5ea708a4230ce94f450672a15c",
+  "resourceSha256": "00cc3359430623acf3af53027d2b0900216c1879449f87a79fc005458ca4f4da"
+}

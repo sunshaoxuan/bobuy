@@ -1,0 +1,72 @@
+Based on the provided runtime screenshots evaluated against the specified scope (viewports Desktop 1440×1000 and Mobile 320×1000, packaging/unit prose, wrapping, alignment, product names, intro, and disabled CTA), here is the structured review:
+
+---
+
+### 1. Visible Defects
+
+1. **Unnatural Word-Breaking in Japanese Mobile Price Header (Image 5)**:
+   - In the reference price card, `参考価格（リアルタイムではありません）` wraps awkwardly across two lines as:
+     - Line 1: `参考価格（リアルタイムではありま`
+     - Line 2: `せん）`
+   - Breaking `ありません` into `ありま` / `せん）` violates natural Japanese typography and layout boundaries next to the `JPY` label.
+
+2. **Inconsistent Terminology in English Views (Images 1 & 2)**:
+   - Packaging spec states: `... + refills 5 pcs each 6.3ml...` (using **"refills"**).
+   - Reference price unit line states: `/ Main unit 1 pc + 5 replacements` (switching to **"replacements"**).
+   - In contrast, the Japanese (`つけかえ`) and Chinese (`替换装` / `替換裝`) versions maintain strict terminology parity across both sections.
+
+3. **Suboptimal Line Breaking on Mobile Packaging Specs (Images 2, 3, 4, 5)**:
+   - In English mobile (Image 2), the quantity and count unit are split across lines: `...refills 5` at the end of line 1, and `pcs each 6.3ml...` on line 2 (orphan unit).
+   - In Chinese/Japanese mobile (Images 3–5), the delimiter `各` is separated onto line 1 while its quantity `6.3ml` drops to line 2 (`...各` / `6.3ml...`).
+
+---
+
+### 2. Doubts & Inconsistencies
+
+1. **Absence of Subtitle in Japanese View (Image 5)**:
+   - The specification requires a *"clear product name then small Japanese name on next line"*.
+   - EN, ZH-CN, and ZH-TW all display the translated name followed by the secondary line: `（トイレ用消臭芳香剤 プレミアムシリーズ）`.
+   - The Japanese view (Image 5) omits this secondary line entirely. While suppressing a redundant 1:1 duplicate title in Japanese is logical UX, it is technically an architectural divergence from the other three locales and requires explicit confirmation against component requirements.
+2. **Punctuation Consistency**:
+   - In the packaging specification row, a full-width slash (`／`) is mixed with half-width characters (`Main unit 1 pc 6.3ml + refills 5 pcs each 6.3ml／total 6 uses`).
+
+---
+
+### 3. Missing Evidence
+
+1. **Desktop Viewports for Non-English Locales**: Only English is provided at Desktop 1440×1000. ZH-CN, ZH-TW, and JA desktop layouts are missing, leaving desktop wrapping, text alignment, and spacing unverified for those three languages.
+2. **Dynamic / Scrolling Behavior**: While 320px mobile views show no obvious horizontal clipping, static captures cannot verify touch scroll behavior, overflow-x clipping in edge containers, or whether modal content clips behind fixed top/bottom elements when expanded.
+
+---
+
+### 4. Per-Image Judgment
+
+#### **Image 1: Desktop 1440×1000 — English (`en`)**
+- **Product Name & Subtitle**: **PASS**. Primary English name is bold and legible; Japanese name in parentheses appears directly on the next line.
+- **Packaging & Quantities**: **PASS with observation**. Quantities (1 pc 6.3ml, 5 refills 6.3ml, 6 uses) preserved. Note full-width slash `／`.
+- **Reference Price & Alignment**: **FAIL on terminology parity**. Price `¥1,758`, original price `¥2,198`, discount `-¥440`, and unit label are properly right-aligned, but the unit uses `replacements` while packaging uses `refills`.
+- **Intro & CTA**: **PASS**. Full prose introduction rendered without truncation; CTA is properly disabled (`+ Not open for booking yet`).
+
+#### **Image 2: Mobile 320×1000 — English (`en`)**
+- **Layout & Wrapping**: **MARGINAL PASS**. Fits 320px viewport without clipping. Packaging wraps across 2 lines with an orphan unit break (`5` / `pcs`).
+- **Product Name & Subtitle**: **PASS**. Clear English title, clean subtitle wrap below.
+- **Price Box & Alignment**: **FAIL on terminology parity**. Clean right-alignment; same "refills" vs "replacements" discrepancy as desktop.
+- **Intro & CTA**: **PASS**. Complete introduction text, disabled CTA fits within viewport bounds.
+
+#### **Image 3: Mobile 320×1000 — Simplified Chinese (`zh-CN`)**
+- **Product Name & Subtitle**: **PASS**. `Premium系列卫生间除臭芳香剂` with Japanese subtitle underneath.
+- **Packaging & Quantities**: **PASS**. Accurate localization (`本体1个6.3ml＋替换装5个各6.3ml／共6次用量`). Quantities correctly preserved.
+- **Reference Price & Alignment**: **PASS**. `参考售价（非实时）` fits on one line with `JPY`; prices and `/ 本体1个＋替换装5个` are strictly right-aligned with matching terminology.
+- **Intro & CTA**: **PASS**. Complete prose; disabled CTA correctly localized (`+ 暂未开放预订`).
+
+#### **Image 4: Mobile 320×1000 — Traditional Chinese (`zh-TW`)**
+- **Product Name & Subtitle**: **PASS**. Proper Traditional Chinese glyphs (`廁所除臭芳香劑`) and Japanese subtitle below.
+- **Packaging & Quantities**: **PASS**. Correct characters (`本體1個6.3ml＋替換裝5個各6.3ml／共6次用量`).
+- **Reference Price & Alignment**: **PASS**. `參考售價（非即時）` single line; prices and `/ 本體1個＋替換裝5個` right-aligned.
+- **Intro & CTA**: **PASS**. Fully localized prose and disabled button (`+ 暫未開放預訂`).
+
+#### **Image 5: Mobile 320×1000 — Japanese (`ja`)**
+- **Product Name & Subtitle**: **DOUBT / CONDITIONAL PASS**. Displays `トイレ用消臭芳香剤 プレミアムシリーズ`. No subtitle underneath (sensible for native Japanese, but deviates from the multi-line pattern in other locales).
+- **Packaging & Quantities**: **PASS**. `本体1個6.3ml＋つけかえ5個各6.3ml／計6回分` matches original Japanese packaging units precisely.
+- **Reference Price & Alignment**: **FAIL**. Header `参考価格（リアルタイムではありません）` breaks mid-phrase onto two lines (`ありま` / `せん）`). Numbers and `/ 本体1個＋つけかえ5個` are properly right-aligned.
+- **Intro & CTA**: **PASS**. Natural Japanese description; disabled CTA correctly reads `+ 現在は予約受付前です`.
