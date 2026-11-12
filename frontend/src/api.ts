@@ -1482,7 +1482,7 @@ export const api = {
 
 export type StoreTrip = { id: number; merchantId: number; merchantName: string; deliveryArea: string; deliveryDate: string };
 export type StoreProduct = { id: string; merchantId: number; name: Record<string, string>; description: Record<string, string>; brand: string; price: number; categoryId: string; images: string[]; recommendationReady?:boolean;currency?:string;saleUnit?:string;priceRevision?:number;priceToken?:string;regularPrice?:number;priceAdjustmentId?:number;priceValidFrom?:string;priceValidUntil?:string };
-export type PublicCatalogEntry = {rating?:number|null;
+export type PublicCatalogEntry = {rating?:number|null;introduction?:Record<string,string>;
     productId:string; merchantId:number; name:Record<string,string>; description:Record<string,string>;
     brand:string|null; itemNumber:string|null; specification:Record<string,string>; model:string|null; packaging:string|null;
     gallery:RecommendationPicture[]; categories:RecommendationLabel[];

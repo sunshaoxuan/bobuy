@@ -4,6 +4,9 @@ import * as matchers from '@testing-library/jest-dom/matchers';
 
 expect.extend(matchers);
 
+// jsdom has no scrolling implementation; real scrolling is checked in the browser.
+if (!Element.prototype.scroll) Element.prototype.scroll = () => {};
+
 afterEach(() => {
   cleanup();
 });

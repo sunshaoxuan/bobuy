@@ -1,5 +1,9 @@
 # Product master review workflow
 
+## Current product introductions, 2026-11-12
+
+Reviewed current master descriptions are exposed separately as `introduction` on eligible public product catalogue/detail entries. They describe the current product independently of immutable published recommendation text. All four languages require the current source hash and saved reviewer/time metadata. Reference-only products also require exact nonblank ITEM alignment with every same-owner published reference. Unlinked private, deleted, cross-owner, stale or unreviewed data gains no disclosure. Product visibility, prices, stock, historical descriptions, source specifications and publication snapshots remain unchanged. Both catalogue and recommendation detail use this current introduction in their product overview. Missing current introduction retains the existing historical description behavior.
+
 The existing `/admin/stock-master` page contains the product-master panel. Saving a master supplies linked recommendation identity, Japanese source name, plain translations, specifications, categories, supplier and ordered official gallery. Recommendation source/channel, reference amounts, units, periods and conditions remain attached to the recommendation occurrence. Product sales, stock and visibility are not modified by master saves.
 
 Existing profiles remain legacy until explicitly reviewed and saved. A nullable V16 `bb_product.catalog_data` column has no content backfill. Their existing recommendation text and official galleries continue to render while review is pending. New recommendation-created profiles are canonical immediately and remain private and unpriced.

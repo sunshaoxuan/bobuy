@@ -2,7 +2,7 @@ import type {PublicCatalogEntry,RecommendationItem} from './api';
 import {localizedContent,type Locale} from './i18n';
 import {recommendationText} from './recommendationText';
 
-/** Only move exactly equal, explicitly supplied facts. Never infer a historical value from a master. */
+/** Current introductions are independent of the exact-match historical offer facts. */
 export function productDetailContent(entry:PublicCatalogEntry,locale:Locale){
  const rows=entry.referenceOffers.map(offer=>({
   ...offer,key:offer.postId+':'+offer.facts.id,text:recommendationText(offer.facts,locale),
@@ -14,7 +14,7 @@ export function productDetailContent(entry:PublicCatalogEntry,locale:Locale){
   const value=read(rows[0])??'';return value&&rows.every(row=>(read(row)??'')===value)?value:'';
  };
  const specification=common(row=>row.text.specification,localizedContent(entry.specification,locale));
- const description=common(row=>row.text.description,localizedContent(entry.description,locale));
+ const description=localizedContent(entry.introduction??{},locale)||common(row=>row.text.description,localizedContent(entry.description,locale));
  const model=common(row=>row.facts.model,entry.model??''),packaging=common(row=>row.facts.packaging,entry.packaging??'');
  const historicalName=common(row=>row.text.primaryName,'');
  const name=localizedContent(entry.name,locale);

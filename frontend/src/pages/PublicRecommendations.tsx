@@ -92,13 +92,15 @@ function RecommendationProductDetail({item,product,onClose,onAdd,canBuy,purchase
   return()=>{active=false;};
  },[referenceKey,attempt,privatePreview]);
  if(!item)return null;const text=recommendationText(item,locale),gallery=item.gallery??[];
+ const introduction=references?.key===referenceKey&&references.entry?localizedContent(references.entry.introduction??{},locale):'';
+ const description=introduction||text.description;
  return <Drawer className="rec-product-detail consumer-detail-drawer" title={<ProductDetailCode value={item.itemNumber}/>} width="min(1120px,100vw)" open={!!item} onClose={onClose}>
   <ConsumerDetail media={<RecommendationImageViewer consumer key={item.id} pictures={gallery} name={text.name}/>}>
   <ProductBrand brand={item.brand}/><h1><RecommendationName text={text}/></h1>
   <ProductDetailSpecs model={item.model} packaging={item.packaging}/>{text.missing&&<Alert type="info" message={t('article.field_source',{fields:text.sourceFields.map(key=>t(key==='description'?'master.descriptions':key==='specification'?'master.specifications':'rec.fact.'+key)).join(' · ')})}/>}
   {product&&<SellingPrice product={product}/>}
   {item.productId&&!privatePreview?(references?.key===referenceKey?(references.entry?<CatalogReferenceHistory entry={references.entry}/>:<Alert type="warning" message={t('catalog.load_error')} action={<Button onClick={()=>setAttempt(value=>value+1)}>{t('catalog.retry')}</Button>}/>):<Spin/>):<DetailOffer facts={item}/> }
-  {text.description&&<section className="rec-detail-description"><h2>{t('detail.description')}</h2>{text.description.split('\n').map((line,i)=><p key={i}>{line}</p>)}</section>}
+  {description&&<section className="rec-detail-description"><h2>{t('detail.description')}</h2>{description.split('\n').map((line,i)=><p key={i}>{line}</p>)}</section>}
   {item.showSupplier&&item.supplierName&&<p>{t('class.supplier')}: {localizedContent(item.supplierName,locale)}</p>}
   <Button type="primary" size="large" block disabled={purchasePending||!product||!canBuy(product)} onClick={()=>product&&onAdd(product)}>{t(purchasePending?'browse.sales_pending':product&&canBuy(product)?'store.add_cart':'catalog.not_available')}</Button>
   </ConsumerDetail>

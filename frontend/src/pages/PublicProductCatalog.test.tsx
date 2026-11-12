@@ -8,6 +8,11 @@ vi.mock('../api',()=>({storefrontApi:mocks,productMarkerApi:mocks}));
 const props={products:[],quantities:{},onAdd:vi.fn(),canBuy:()=>false};
 function mount(path='/products',extra={}){localStorage.setItem('bobbuy_locale','en-US');return render(<I18nProvider><MemoryRouter initialEntries={[path]}><CatalogSection {...props} {...extra}/></MemoryRouter></I18nProvider>);}
 beforeEach(()=>{vi.clearAllMocks();mocks.productBrowse.mockResolvedValue(browsePage([productCard()]));mocks.productDetail.mockResolvedValue({item:productDetail(),markers:[],revision:'detail'});mocks.productSales.mockResolvedValue([]);});
+it('renders the reviewed current introduction without replacing historical offer data',async()=>{
+ const item={...productDetail(),introduction:{'en-US':'Current source-backed product introduction'}};
+ mocks.productDetail.mockResolvedValue({item,markers:[],revision:'current-introduction'});mount('/products?product=p');
+ const dialog=within(await screen.findByRole('dialog'));expect(await dialog.findByText('Current source-backed product introduction')).toBeInTheDocument();expect(dialog.queryByText('Full description')).not.toBeInTheDocument();
+});
 it('opens catalog card metadata through the same scoped detail without enabling management or purchase actions',async()=>{
  const onEdit=vi.fn(),view=mount('/products?node=1&category=keep',{canEdit:()=>true,onEdit});await screen.findByRole('heading',{name:'Product'});
  const card=view.container.querySelector('.catalog-master-card')!;fireEvent.click(card.querySelector('.marker-product-actions span')!);fireEvent.click(card.querySelector('.marker-product-trigger')!);expect(onEdit).toHaveBeenCalledTimes(1);expect(mocks.productDetail).not.toHaveBeenCalled();

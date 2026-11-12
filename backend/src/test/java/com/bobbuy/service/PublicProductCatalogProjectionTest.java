@@ -30,5 +30,34 @@ class PublicProductCatalogProjectionTest {
  @Test void legacyDrafterFieldsExactlyReusePublishedProjectionWithoutMasterFallback(){setup(false);var published=taxonomy.display(List.of(original),true).get(0);var entry=catalog.page(0,null).items().get(0);assertThat(entry.name()).containsEntry("ja-JP",published.name);assertThat(entry.description()).containsEntry("ja-JP",published.description);assertThat(entry.specification()).containsEntry("ja-JP",published.specification);assertThat(entry.brand()).isNull();assertThat(entry.itemNumber()).isEqualTo(published.itemNumber);assertThat(entry.gallery()).isEqualTo(published.gallery).isEmpty();assertThat(entry.categories()).isEqualTo(published.categories);assertThat(entry.referenceOffers().get(0).facts().imageUrl).isNull();assertThat(p.getBrand()).isEqualTo("Master brand");verify(products,never()).save(any());}
  @Test void canonicalDrafterUsesExactlyAlreadyPublicMasterProjectionAndVisibleMedia(){setup(true);var published=taxonomy.display(List.of(original),true).get(0);var entry=catalog.page(0,null).items().get(0);assertThat(entry.name()).containsEntry("ja-JP",published.name);assertThat(entry.brand()).isEqualTo(published.brand);assertThat(entry.model()).isEqualTo(published.model);assertThat(entry.packaging()).isEqualTo(published.packaging);assertThat(entry.gallery()).isEqualTo(published.gallery).extracting(RecommendationItem.Picture::url).containsExactly("https://example.invalid/visible.jpg");assertThat(entry.reviewedMaster()).isTrue();assertThat(entry.referenceOffers().get(0).facts().sourceFacts).isNull();}
  @Test void withdrawalRemovesDrafterEntryWithoutChangingVisibilityOrSaleData(){setup(true);assertThat(catalog.page(0,null).total()).isEqualTo(1);when(posts.findByPublishedTrue()).thenReturn(List.of());assertThat(catalog.page(0,null).total()).isZero();assertThat(p.getVisibilityStatus()).isEqualTo(ProductVisibility.DRAFTER_ONLY);verify(products,never()).save(any());}
+ private void reviewIntroduction(){
+  p.setDescription(Map.of("ja-JP","現在の商品紹介","zh-CN","当前商品介绍","zh-TW","目前商品介紹","en-US","Current product introduction"));
+  var d=p.getCatalogData();p.setCatalogData(new ProductCatalogData(d.specification(),d.model(),d.packaging(),d.categoryIds(),d.supplierId(),ProductCatalogService.sourceHash(p),1001L,java.time.Instant.parse("2026-11-12T00:00:00Z")));
+ }
+ @Test void currentReviewedIntroductionDoesNotRewritePublishedSnapshot(){
+  setup(true);var snapshot=original.publicationSnapshot;var historical=catalog.page(0,null).items().get(0);reviewIntroduction();
+  var entry=catalog.page(0,null).items().get(0);
+  assertThat(entry.introduction()).hasSize(4).containsEntry("en-US","Current product introduction");
+  assertThat(entry.description()).isEqualTo(historical.description());assertThat(entry.specification()).isEqualTo(historical.specification());assertThat(entry.gallery()).isEqualTo(historical.gallery());
+  assertThat(original.publicationSnapshot).isSameAs(snapshot);assertThat(entry.referenceOffers().get(0).facts().description).isEqualTo("Master description");
+  assertThat(p.getVisibilityStatus()).isEqualTo(ProductVisibility.DRAFTER_ONLY);verify(products,never()).save(any());
+ }
+ @Test void unreviewedOrStaleIntroductionIsNeverDisclosed(){
+  setup(true);assertThat(catalog.page(0,null).items().get(0).introduction()).isEmpty();reviewIntroduction();p.setDescription(Map.of("ja-JP","Unreviewed replacement"));
+  assertThat(catalog.page(0,null).items().get(0).introduction()).isEmpty();
+ }
+ @Test void publicReviewedMasterNeedsNoHistoricalOfferToDisplayIntroduction(){
+  setup(true);p.setVisibilityStatus(ProductVisibility.PUBLIC);reviewIntroduction();when(posts.findByPublishedTrue()).thenReturn(List.of());
+  assertThat(catalog.page(0,null).items().get(0).introduction()).containsEntry("zh-TW","目前商品介紹");
+ }
+ @Test void itemMismatchOrUnknownItemCannotExposeReferenceOnlyCurrentCopy(){
+  setup(true);reviewIntroduction();p.setItemNumber("DIFFERENT");reviewIntroduction();assertThat(catalog.page(0,null).items().get(0).introduction()).isEmpty();
+  p.setItemNumber(null);reviewIntroduction();assertThat(catalog.page(0,null).items().get(0).introduction()).isEmpty();
+ }
+ @Test void privateUnlinkedDeletedOrForeignOwnedReferencesDoNotGainEligibility(){
+  setup(true);reviewIntroduction();when(items.findByPostIdInOrderById(List.of(7L))).thenReturn(List.of());assertThat(catalog.page(0,null).items()).isEmpty();
+  when(items.findByPostIdInOrderById(List.of(7L))).thenReturn(List.of(original));p.setMerchantId(2002L);assertThat(catalog.page(0,null).items()).isEmpty();
+  p.setMerchantId(1001L);p.setDeletedAt(java.time.Instant.parse("2026-11-12T00:00:00Z"));assertThat(catalog.page(0,null).items()).isEmpty();
+ }
 }
 
