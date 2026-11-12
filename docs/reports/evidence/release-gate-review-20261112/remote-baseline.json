@@ -1,0 +1,352 @@
+{
+  "observedAt": "2026-11-12T13:39:24.963926+00:00",
+  "runs": {
+    "43196527673": [
+      {
+        "name": "analyze (actions)",
+        "conclusion": "success",
+        "started_at": "2026-11-12T10:00:51Z",
+        "completed_at": "2026-11-12T10:01:50Z",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:00:52Z",
+            "completed_at": "2026-11-12T10:00:53Z"
+          },
+          {
+            "name": "Checkout repository",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:00:53Z",
+            "completed_at": "2026-11-12T10:01:02Z"
+          },
+          {
+            "name": "Set up JDK 17",
+            "conclusion": "skipped",
+            "started_at": "2026-11-12T10:01:02Z",
+            "completed_at": "2026-11-12T10:01:02Z"
+          },
+          {
+            "name": "Set up Node.js",
+            "conclusion": "skipped",
+            "started_at": "2026-11-12T10:01:02Z",
+            "completed_at": "2026-11-12T10:01:02Z"
+          },
+          {
+            "name": "Initialize CodeQL",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:01:02Z",
+            "completed_at": "2026-11-12T10:01:22Z"
+          },
+          {
+            "name": "Build backend for CodeQL",
+            "conclusion": "skipped",
+            "started_at": "2026-11-12T10:01:22Z",
+            "completed_at": "2026-11-12T10:01:22Z"
+          },
+          {
+            "name": "Build frontend for CodeQL",
+            "conclusion": "skipped",
+            "started_at": "2026-11-12T10:01:22Z",
+            "completed_at": "2026-11-12T10:01:22Z"
+          },
+          {
+            "name": "Perform CodeQL Analysis",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:01:22Z",
+            "completed_at": "2026-11-12T10:01:47Z"
+          },
+          {
+            "name": "Post Perform CodeQL Analysis",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:01:47Z",
+            "completed_at": "2026-11-12T10:01:48Z"
+          },
+          {
+            "name": "Post Initialize CodeQL",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:01:48Z",
+            "completed_at": "2026-11-12T10:01:49Z"
+          },
+          {
+            "name": "Post Checkout repository",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:01:49Z",
+            "completed_at": "2026-11-12T10:01:49Z"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:01:49Z",
+            "completed_at": "2026-11-12T10:01:49Z"
+          }
+        ]
+      },
+      {
+        "name": "analyze (javascript-typescript)",
+        "conclusion": "success",
+        "started_at": "2026-11-12T10:00:52Z",
+        "completed_at": "2026-11-12T10:03:27Z",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:00:52Z",
+            "completed_at": "2026-11-12T10:00:55Z"
+          },
+          {
+            "name": "Checkout repository",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:00:55Z",
+            "completed_at": "2026-11-12T10:01:05Z"
+          },
+          {
+            "name": "Set up JDK 17",
+            "conclusion": "skipped",
+            "started_at": "2026-11-12T10:01:05Z",
+            "completed_at": "2026-11-12T10:01:05Z"
+          },
+          {
+            "name": "Set up Node.js",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:01:05Z",
+            "completed_at": "2026-11-12T10:01:12Z"
+          },
+          {
+            "name": "Initialize CodeQL",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:01:12Z",
+            "completed_at": "2026-11-12T10:01:25Z"
+          },
+          {
+            "name": "Build backend for CodeQL",
+            "conclusion": "skipped",
+            "started_at": "2026-11-12T10:01:25Z",
+            "completed_at": "2026-11-12T10:01:25Z"
+          },
+          {
+            "name": "Build frontend for CodeQL",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:01:25Z",
+            "completed_at": "2026-11-12T10:01:46Z"
+          },
+          {
+            "name": "Perform CodeQL Analysis",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:01:46Z",
+            "completed_at": "2026-11-12T10:03:21Z"
+          },
+          {
+            "name": "Post Perform CodeQL Analysis",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:03:21Z",
+            "completed_at": "2026-11-12T10:03:21Z"
+          },
+          {
+            "name": "Post Initialize CodeQL",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:03:21Z",
+            "completed_at": "2026-11-12T10:03:23Z"
+          },
+          {
+            "name": "Post Set up Node.js",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:03:23Z",
+            "completed_at": "2026-11-12T10:03:23Z"
+          },
+          {
+            "name": "Post Checkout repository",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:03:23Z",
+            "completed_at": "2026-11-12T10:03:23Z"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:03:23Z",
+            "completed_at": "2026-11-12T10:03:23Z"
+          }
+        ]
+      },
+      {
+        "name": "analyze (java-kotlin)",
+        "conclusion": "success",
+        "started_at": "2026-11-12T10:00:52Z",
+        "completed_at": "2026-11-12T10:04:08Z",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:00:52Z",
+            "completed_at": "2026-11-12T10:00:55Z"
+          },
+          {
+            "name": "Checkout repository",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:00:55Z",
+            "completed_at": "2026-11-12T10:01:04Z"
+          },
+          {
+            "name": "Set up JDK 17",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:01:04Z",
+            "completed_at": "2026-11-12T10:01:06Z"
+          },
+          {
+            "name": "Set up Node.js",
+            "conclusion": "skipped",
+            "started_at": "2026-11-12T10:01:06Z",
+            "completed_at": "2026-11-12T10:01:06Z"
+          },
+          {
+            "name": "Initialize CodeQL",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:01:06Z",
+            "completed_at": "2026-11-12T10:01:22Z"
+          },
+          {
+            "name": "Build backend for CodeQL",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:01:22Z",
+            "completed_at": "2026-11-12T10:02:51Z"
+          },
+          {
+            "name": "Build frontend for CodeQL",
+            "conclusion": "skipped",
+            "started_at": "2026-11-12T10:02:51Z",
+            "completed_at": "2026-11-12T10:02:51Z"
+          },
+          {
+            "name": "Perform CodeQL Analysis",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:02:51Z",
+            "completed_at": "2026-11-12T10:04:02Z"
+          },
+          {
+            "name": "Post Perform CodeQL Analysis",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:04:02Z",
+            "completed_at": "2026-11-12T10:04:03Z"
+          },
+          {
+            "name": "Post Initialize CodeQL",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:04:03Z",
+            "completed_at": "2026-11-12T10:04:05Z"
+          },
+          {
+            "name": "Post Set up JDK 17",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:04:05Z",
+            "completed_at": "2026-11-12T10:04:05Z"
+          },
+          {
+            "name": "Post Checkout repository",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:04:05Z",
+            "completed_at": "2026-11-12T10:04:05Z"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "started_at": "2026-11-12T10:04:05Z",
+            "completed_at": "2026-11-12T10:04:05Z"
+          }
+        ]
+      }
+    ],
+    "43175472941": [
+      {
+        "name": "dependency-check",
+        "conclusion": "success",
+        "started_at": "2026-11-12T07:28:08Z",
+        "completed_at": "2026-11-12T07:28:51Z",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "started_at": "2026-11-12T07:28:09Z",
+            "completed_at": "2026-11-12T07:28:09Z"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "started_at": "2026-11-12T07:28:09Z",
+            "completed_at": "2026-11-12T07:28:18Z"
+          },
+          {
+            "name": "Set up JDK 17",
+            "conclusion": "success",
+            "started_at": "2026-11-12T07:28:18Z",
+            "completed_at": "2026-11-12T07:28:20Z"
+          },
+          {
+            "name": "Cache Dependency-Check data",
+            "conclusion": "success",
+            "started_at": "2026-11-12T07:28:20Z",
+            "completed_at": "2026-11-12T07:28:22Z"
+          },
+          {
+            "name": "Run OWASP dependency-check",
+            "conclusion": "success",
+            "started_at": "2026-11-12T07:28:22Z",
+            "completed_at": "2026-11-12T07:28:46Z"
+          },
+          {
+            "name": "Upload dependency-check reports",
+            "conclusion": "success",
+            "started_at": "2026-11-12T07:28:46Z",
+            "completed_at": "2026-11-12T07:28:46Z"
+          },
+          {
+            "name": "Post Cache Dependency-Check data",
+            "conclusion": "success",
+            "started_at": "2026-11-12T07:28:46Z",
+            "completed_at": "2026-11-12T07:28:49Z"
+          },
+          {
+            "name": "Post Set up JDK 17",
+            "conclusion": "success",
+            "started_at": "2026-11-12T07:28:49Z",
+            "completed_at": "2026-11-12T07:28:50Z"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "started_at": "2026-11-12T07:28:50Z",
+            "completed_at": "2026-11-12T07:28:50Z"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "started_at": "2026-11-12T07:28:50Z",
+            "completed_at": "2026-11-12T07:28:50Z"
+          }
+        ]
+      }
+    ]
+  },
+  "rulesets": [],
+  "workflows": [
+    {
+      "name": "AI release evidence",
+      "state": "active",
+      "path": ".github/workflows/ai-release-evidence.yml"
+    },
+    {
+      "name": "CodeQL",
+      "state": "active",
+      "path": ".github/workflows/codeql.yml"
+    },
+    {
+      "name": "Maven dependency-check",
+      "state": "active",
+      "path": ".github/workflows/dependency-check.yml"
+    },
+    {
+      "name": "Copilot cloud agent",
+      "state": "active",
+      "path": "dynamic/copilot-swe-agent/copilot"
+    }
+  ]
+}

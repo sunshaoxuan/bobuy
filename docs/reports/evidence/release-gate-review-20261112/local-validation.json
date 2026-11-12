@@ -1,0 +1,186 @@
+{
+  "workflowParse": "PASS",
+  "triggerCases": 17,
+  "cases": [
+    [
+      "codeql",
+      "push",
+      "main",
+      [
+        "backend/src/main/java/Example.java"
+      ],
+      true
+    ],
+    [
+      "codeql",
+      "pull_request",
+      "main",
+      [
+        "frontend/src/App.tsx"
+      ],
+      true
+    ],
+    [
+      "codeql",
+      "push",
+      "main",
+      [
+        ".github/workflows/codeql.yml"
+      ],
+      true
+    ],
+    [
+      "codeql",
+      "push",
+      "main",
+      [
+        "README.md",
+        "docs/a.png"
+      ],
+      false
+    ],
+    [
+      "codeql",
+      "push",
+      "main",
+      [
+        "docs/operator.py"
+      ],
+      true
+    ],
+    [
+      "codeql",
+      "push",
+      "main",
+      [
+        "README.md",
+        "frontend/src/App.tsx"
+      ],
+      true
+    ],
+    [
+      "codeql",
+      "push",
+      "copilot/change",
+      [
+        "frontend/src/App.tsx"
+      ],
+      false
+    ],
+    [
+      "dependency-check",
+      "push",
+      "main",
+      [
+        "pom.xml"
+      ],
+      true
+    ],
+    [
+      "dependency-check",
+      "pull_request",
+      "main",
+      [
+        "bobbuy-core/pom.xml"
+      ],
+      true
+    ],
+    [
+      "dependency-check",
+      "push",
+      "main",
+      [
+        "backend/pom.xml"
+      ],
+      true
+    ],
+    [
+      "dependency-check",
+      "push",
+      "main",
+      [
+        "scripts/run-dependency-audit.sh"
+      ],
+      true
+    ],
+    [
+      "dependency-check",
+      "push",
+      "main",
+      [
+        ".github/workflows/dependency-check.yml"
+      ],
+      true
+    ],
+    [
+      "dependency-check",
+      "push",
+      "main",
+      [
+        ".mvn/wrapper/maven-wrapper.properties"
+      ],
+      true
+    ],
+    [
+      "dependency-check",
+      "push",
+      "main",
+      [
+        "mvnw.cmd"
+      ],
+      true
+    ],
+    [
+      "dependency-check",
+      "push",
+      "main",
+      [
+        "backend/src/main/java/Example.java"
+      ],
+      false
+    ],
+    [
+      "dependency-check",
+      "push",
+      "main",
+      [
+        "backend/src/main/resources/db/migration/V35.sql"
+      ],
+      false
+    ],
+    [
+      "dependency-check",
+      "push",
+      "copilot/change",
+      [
+        "pom.xml"
+      ],
+      false
+    ]
+  ],
+  "triggerInterpretation": "Local glob fixture simulation; actual GitHub execution is recorded separately.",
+  "codeqlThreeLanguageAndNoNpm": "PASS",
+  "dependencyCacheTimeoutAndManualPreserved": "PASS",
+  "retiredExecutorAbsent": "PASS",
+  "powerShellHashBoundParser": "{\"preflight\":\"PASS\",\"engine\":\"7.6.9\",\"sha256\":\"d52a51abd4e8fe35a545909d8c9d93f3b5e18c331589a67fefdcebcdd3f09eae\",\"runRequested\":false}",
+  "probeParser": "{\"preflight\":\"PASS\",\"engine\":\"7.6.9\",\"sha256\":\"d2424cbd39323923216118abba7325f044ef186c35e8dc4b99d5abf417c3310f\",\"runRequested\":false}",
+  "precheckFixture": "== Release window inputs ==\nTARGET: ssh\nSSH_TARGET: present\nAPP_DIR: /fixture\nBRANCH: main\n\n== Precheck ==\n\n== Precheck-only mode ==\nPrecheck completed. Full release window was not executed.\nPASS: read-only precheck dispatch using mocked SSH; no remote execution",
+  "localDocumentLinks": 34,
+  "referenceTests": {
+    "run": 10,
+    "skipped": 1,
+    "result": "OK",
+    "seconds": 4.835,
+    "skip": "Explicit local PostgreSQL opt-in required; no SQL execution changed"
+  },
+  "publisherTests": {
+    "run": 9,
+    "result": "OK",
+    "seconds": 0.014
+  },
+  "dependencyRunnerTests": {
+    "run": 5,
+    "result": "OK",
+    "seconds": 10.53
+  }
+}

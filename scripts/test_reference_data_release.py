@@ -150,6 +150,15 @@ class ReferenceReleaseTest(unittest.TestCase):
             self.assertIn('Full release window requires', result.stderr)
             self.assertNotIn('Release window inputs', result.stdout)
 
+    @unittest.skipUnless(shutil.which('pwsh'), 'PowerShell 7 unavailable')
+    def test_retired_window_rejects_even_explicit_full_snapshot_before_remote_commands(self):
+        result = subprocess.run(['pwsh', '-NoProfile', '-File', str(ROOT / 'scripts/run-server-release-window.ps1'),
+                                 '-Target', 'ssh', '-AllowFullSnapshot', '-MaintenanceReason', 'reviewed risk'],
+                                capture_output=True, text=True, encoding='utf-8', errors='replace')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('Retired full release window', result.stderr)
+        self.assertNotIn('Release window inputs', result.stdout)
+
 
 @unittest.skipUnless(os.environ.get('BOBUY_REFERENCE_LOCAL_PG') == '1', 'Explicit local PostgreSQL opt-in required')
 class LocalPostgresReferenceTest(unittest.TestCase):
