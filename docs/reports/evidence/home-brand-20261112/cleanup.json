@@ -1,0 +1,35 @@
+{
+  "taskOwnedOnly": true,
+  "preserved": [
+    "source checkout",
+    "formal evidence",
+    "production rollback image"
+  ],
+  "blocked": [
+    {
+      "target": "frontend/dist",
+      "action": "recursive deletion",
+      "reason": "blocked by policy; no alternate deletion attempted"
+    }
+  ],
+  "leftovers": [
+    "frontend/dist (policy rejected deletion)",
+    "__pycache__ (directory removal denied by filesystem)"
+  ],
+  "removed": [
+    "frontend/node_modules junction only",
+    "list-models.py",
+    "update-brand.py",
+    "update-prerender.py",
+    "verify-brand.mjs",
+    "measure-brand.py",
+    "release-brand.py",
+    "finalize-acceptance.py",
+    "archive-delivery.py",
+    "payload.tar.gz",
+    "build.log",
+    "frontend-tests.log",
+    "browser-run.log",
+    "production-browser.log"
+  ]
+}
