@@ -18,3 +18,17 @@ main 中 MailSettings.tsx 使用纵向无分区表单；密钥缺失时禁用密
 
 ## 验收
 进行中，尚未判定通过。发布依据与实际环境结果待记录。
+
+## 后续授权与进展
+用户已明确授权配置受保护邮件密钥、使用 Postmaster SMTP 凭据并仅向 postmaster@bobuy.cc 自发自收测试，随后批准创建该邮箱。管理员会话原先未登录，用户完成登录和新密码提交后，实际 Mailcow 列表显示 Postmaster 已创建，配额无限。秘密不进入证据或源代码。
+
+2026-11-12 10:50:42 JST，生产 Core 原镜像不变，受保护邮件密钥以0600保存并只读挂载，仅重建Core；其余容器身份和镜像未变，Core健康。C:/workspace/Secure/bobuy-mail-keyring-20261112.dpapi为当前Windows用户DPAPI恢复副本，已解封比对；正式密钥在/etc/bobuy-secrets/mail-keyring.properties。测试收件人策略仅Postmaster。业务发信开关保持关闭。
+
+Compose前检两次在解析!reset及!override标签时停止，尚未替换生产配置。补齐原标签保留后，先逐服务比较解析配置，仅Core的JAVA_TOOL_OPTIONS和只读挂载变化，激活健康并通过无关容器不变验证。
+
+8项前端测试通过，1661键i18n和TypeScript/Vite构建通过。合入当时最新main，保留已上线账户、排序、详情与编辑器改动。Gemini Pro图片最小请求上游失败，已验证Gemini 3.8 Flash high图片输入，继续最终复核。初步桌面/390截图已查看；不能将初步截图或表单检查视为真实SMTP投递成功。
+
+## 最终视觉回归修复
+四语言1440/390/320初轮无页面溢出；原尺寸截图发现320英文开关越过卡片内框，已限制文本列最小宽度并固定开关列。手机保存按钮统一整行，避免英文两行与重载单行基线不一致。输入字形实际偏下1.5px，按固定预算上移1px；带下划线的折叠标题向上光学校正2px，折叠箭头改为同中心线CSS几何。全页截图API会临时改变宽度，导致右栏测量与截图不一致；改用Page.captureScreenshot、captureBeyondViewport和固定CSS画布裁图，重新绑定同帧几何。之前不一致量测保留为失败证据，未放宽阈值。上述CSS改变使构建与截图失效，重新构建并复验受影响矩阵；10项JS行为测试保持有效。
+
+10:52:23 JST生产TEST_SUCCESS；随后只读IMAP核对INBOX固定主题Bobuy SMTP test、Postmaster自发自收、无令牌固定正文，通过TLS证书校验。inbox.json记录1封匹配测试信。密码保存成功后不回显；业务开关仍关闭。

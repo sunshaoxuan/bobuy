@@ -82,3 +82,17 @@ it('keeps a failed test visible without claiming success',async()=>{
  const send=await screen.findByRole('button',{name:'Send test message'});await waitFor(()=>expect(send).toBeEnabled());fireEvent.click(send);
  await screen.findByText(/Test message could not be sent/);expect(screen.queryByText('SMTP server accepted the test message. Confirm delivery in the mailbox.')).not.toBeInTheDocument();
 });
+it('requires a password before activating the first configuration',async()=>{
+ mocks.get.mockResolvedValue({...saved,passwordStored:false});
+ render(<I18nProvider><MailSettings /></I18nProvider>);
+ fireEvent.click(await screen.findByRole('switch'));
+ fireEvent.click(screen.getByRole('button',{name:'Save mail settings'}));
+ await screen.findAllByText('Enter and save the SMTP password first.');expect(mocks.save).not.toHaveBeenCalled();
+});
+it('allows delivery to be switched off after a server key becomes unavailable',async()=>{
+ mocks.get.mockResolvedValue({...saved,enabled:true,keyReady:false});
+ render(<I18nProvider><MailSettings /></I18nProvider>);
+ const toggle=await screen.findByRole('switch');await waitFor(()=>expect(toggle).toBeEnabled());fireEvent.click(toggle);
+ fireEvent.click(screen.getByRole('button',{name:'Save mail settings'}));
+ await waitFor(()=>expect(mocks.save).toHaveBeenCalledWith(expect.objectContaining({enabled:false,password:''})));
+});

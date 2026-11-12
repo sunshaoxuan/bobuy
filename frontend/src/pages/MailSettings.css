@@ -20,10 +20,13 @@
 .mail-settings-page .ant-select{width:100%;height:44px}
 .mail-settings-page .ant-input{padding:10px 12px}.mail-settings-page .ant-input-affix-wrapper{padding:10px 12px}
 .mail-settings-page .ant-input-affix-wrapper>.ant-input{padding:0}
+.mail-settings-page input.ant-input{padding-block:9px 11px}.mail-settings-page .ant-input-affix-wrapper>input.ant-input{padding:0}
+.mail-settings-page .ant-select-selection-placeholder{position:relative;top:-1px}
 .mail-settings-page .ant-select-single .ant-select-selector{align-items:center;padding-inline:12px}
 .mail-settings-page .ant-form-item-extra{font-size:12px;line-height:1.7;margin-top:6px;overflow-wrap:anywhere}
 .mail-delivery-row{display:flex;align-items:center;justify-content:space-between;gap:20px;border-top:1px solid #ededee;padding-top:20px;margin-top:4px}
 .mail-delivery-row .ant-form-item{margin:0}.mail-delivery-row .ant-switch{min-width:48px;min-height:28px}
+.mail-delivery-row>div:first-child{flex:1;min-width:0}.mail-delivery-row>.ant-form-item{flex:0 0 auto}
 .mail-delivery-row .ant-switch .ant-switch-handle{top:5px}.mail-delivery-row strong{font-size:14px}
 .mail-form-actions{display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid #ededee;padding-top:20px;margin-top:20px}
 .mail-settings-page .ant-btn{height:auto;min-height:44px;padding:10px 16px;line-height:22px;border-radius:9px;white-space:normal;display:inline-flex;justify-content:center;align-items:center}
@@ -33,5 +36,8 @@
 .mail-test-button{width:100%;margin-top:12px}.mail-test-reason{font-size:13px;color:#805b1e;line-height:1.7;margin:10px 0 18px;overflow-wrap:anywhere}
 .mail-small,.mail-notes p{font-size:12px;color:#696970;line-height:1.8;margin:10px 0 0}
 .mail-notes h2{font-size:15px}.mail-notes details{margin-top:16px;font-size:12px;line-height:1.8}.mail-notes summary{cursor:pointer;min-height:44px;display:flex;align-items:center;color:#45454c;text-decoration:underline;text-underline-offset:3px}.mail-notes code{display:block;font-size:11px;overflow-wrap:anywhere;background:#f6f6f4;border-radius:6px;padding:10px;margin-top:10px}
+.mail-notes summary{position:relative;padding:0 24px 4px 0;box-sizing:border-box}.mail-notes summary::after{content:'';position:absolute;right:2px;top:50%;width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-50%) rotate(45deg)}.mail-notes details[open] summary::after{transform:translateY(-50%) rotate(225deg)}
 @media(max-width:1150px){.mail-layout{grid-template-columns:minmax(0,1fr)}.mail-side{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:680px){.mail-fields,.mail-side{grid-template-columns:minmax(0,1fr)}.mail-panel{padding:20px 16px;border-radius:12px}.mail-page-heading{align-items:flex-start;flex-direction:column}.mail-settings-page .mail-page-heading h1{font-size:24px}.mail-layout{gap:20px}.mail-side{gap:20px}.mail-form-actions>.ant-btn{flex:1;min-width:0}.mail-readiness{gap:16px}}
+@media(max-width:680px){.mail-page-heading{position:relative}.mail-page-heading .ant-tag{position:absolute;top:0;right:0;font-size:11px;max-width:55%;padding:3px 8px}.mail-eyebrow{min-height:28px}}
+@media(max-width:440px){.mail-form-actions{flex-direction:column}.mail-form-actions>.ant-btn{width:100%;flex:none}}

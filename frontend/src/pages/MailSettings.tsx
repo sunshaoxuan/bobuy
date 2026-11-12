@@ -78,11 +78,11 @@ export default function MailSettings() {
      <Form.Item name="port" hidden><Input /></Form.Item>
      {(['username','fromAddress','replyTo'] as const).map(name => <Form.Item key={name} name={name} label={t(`mail.${name}`)} rules={[{required:true,message:t('mail.required')},{type:'email',message:t('mail.email_invalid')}]}><Input autoComplete="off" maxLength={254} /></Form.Item>)}
      <Form.Item name="password" label={t('mail.password')} extra={t(needsPassword?'mail.password_changed':saved.passwordStored?'mail.keep_password':'mail.no_password')}
-      dependencies={['host','port','tlsMode','username','fromAddress','replyTo']} rules={[{validator:(_,value) => needsPassword && !value ? Promise.reject(new Error(t('mail.password_changed'))) : Promise.resolve()}]}>
+      dependencies={['host','port','tlsMode','username','fromAddress','replyTo','enabled']} rules={[{validator:(_,value) => (needsPassword || (values?.enabled && !saved.passwordStored)) && !value ? Promise.reject(new Error(t(needsPassword?'mail.password_changed':'mail.block_password'))) : Promise.resolve()}]}>
       <Input.Password autoComplete="new-password" maxLength={1024} visibilityToggle={false} disabled={!!busy || !saved.keyReady} placeholder={t(saved.passwordStored?'mail.password_keep':'mail.password_enter')} />
      </Form.Item>
     </div>
-    <div className="mail-delivery-row"><div><strong>{t('mail.enabled')}</strong><p>{t('mail.enabled_help')}</p></div><Form.Item name="enabled" valuePropName="checked"><Switch aria-label={t('mail.enabled')} disabled={!!busy || !saved.keyReady} /></Form.Item></div>
+    <div className="mail-delivery-row"><div><strong>{t('mail.enabled')}</strong><p>{t('mail.enabled_help')}</p></div><Form.Item name="enabled" valuePropName="checked"><Switch aria-label={t('mail.enabled')} disabled={!!busy || (!saved.keyReady && !values?.enabled)} /></Form.Item></div>
     <footer className="mail-form-actions"><Button aria-label={t('mail.save')} type="primary" htmlType="submit" icon={<SaveOutlined />} loading={busy==='save'} disabled={!!busy || blockedIdentity}>{t('mail.save')}</Button>
      {dirty ? <Popconfirm title={t('mail.discard')} onConfirm={() => void load()} okText={t('mail.reload')} cancelText={t('mail.cancel')}><Button aria-label={t('mail.reload')} icon={<ReloadOutlined />} disabled={!!busy}>{t('mail.reload')}</Button></Popconfirm>
       : <Button aria-label={t('mail.reload')} icon={<ReloadOutlined />} onClick={() => void load()} disabled={!!busy}>{t('mail.reload')}</Button>}
