@@ -1,0 +1,22 @@
+{
+  "result": "PASS",
+  "sha256": "dc379840a198ca1ca6fa100745cd744c45e85244273e0773b9460c84438c0752",
+  "exactRestoreFingerprint": true,
+  "candidate": {
+    "result": "PASS",
+    "image": "bobuy/core:20261112.3",
+    "jarSha256": "65f16c0322af492f945c1564d6b23c9bbf10bddf992053e1578a5513f38903fd",
+    "java": "openjdk 17.0.21 2026-10-20\nOpenJDK Runtime Environment Temurin-17.0.21+9 (build 17.0.21+9)\nOpenJDK 64-Bit Server VM Temurin-17.0.21+9 (build 17.0.21+9, mixed mode, sharing)",
+    "database": "bobuy_engagement_restore_20261112_3",
+    "noPublicPort": true
+  },
+  "previousApplicationOnV33": {
+    "result": "PASS",
+    "image": "bobuy/core:20261111.5",
+    "jarSha256": "55c6c6ba2fda5aefbeb10888b4dd73baa17ed54ea1fb60b381c70e4b92d77805",
+    "java": "openjdk 17.0.21 2026-10-20\nOpenJDK Runtime Environment Temurin-17.0.21+9 (build 17.0.21+9)\nOpenJDK 64-Bit Server VM Temurin-17.0.21+9 (build 17.0.21+9, mixed mode, sharing)",
+    "database": "bobuy_engagement_restore_20261112_3",
+    "noPublicPort": true
+  },
+  "liveDatabaseRestoreForbidden": true
+}

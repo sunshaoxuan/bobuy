@@ -1,0 +1,2308 @@
+{
+  "origin": "https://bobuy.cc",
+  "data": "real production HTTPS, explicitly labelled temporary QA products and accounts only",
+  "checks": {
+    "repeatedClicksAndCrossTabHeat": "PASS",
+    "reviewScrollViewport": {
+      "before": {
+        "scrollTop": 1173,
+        "scrollHeight": 3216,
+        "clientHeight": 72,
+        "resize": "none",
+        "scrollbarWidth": 8
+      },
+      "after": 0,
+      "result": "PASS: clipped initial line was an intentional native scrolled viewport; top view retains whole glyphs"
+    },
+    "maximumReviewAndOverLimitNegative": "PASS: 2000 characters persisted, 2001 rejected, native max length enforced, 320px dialog remains usable",
+    "hoverClickStarSaveAverageAndCrossTabRating": "PASS",
+    "samePageDuplicateCards": "PASS",
+    "reloadPersistence": "PASS",
+    "desktopTabletNarrowMobileNoHorizontalOverflow": "PASS",
+    "anonymousRequiresSignIn": "PASS",
+    "consoleAndNetwork": "PASS",
+    "loadedAssetHashes": "PASS"
+  },
+  "screenshots": [
+    "stars-before-hover.png",
+    "stars-hover-desktop.png",
+    "review-textarea-max-320.png",
+    "stars-long-text-320.png",
+    "review-textarea-max-end-320.png",
+    "recommendations-1440.png",
+    "recommendation-card-1440.png",
+    "products-1440.png",
+    "product-card-1440.png",
+    "recommendations-768.png",
+    "recommendation-card-768.png",
+    "products-768.png",
+    "product-card-768.png",
+    "recommendations-320.png",
+    "recommendation-card-320.png",
+    "products-320.png",
+    "product-card-320.png",
+    "stars-mobile-320.png"
+  ],
+  "console": [],
+  "network": [],
+  "geometry": [
+    {
+      "name": "stars-hover-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "modal": {
+        "x": 400,
+        "y": 100,
+        "width": 640,
+        "height": 723.484375
+      },
+      "data": [
+        {
+          "control": "product-sort",
+          "outer": {
+            "x": 1136,
+            "y": 206,
+            "width": 272,
+            "height": 44,
+            "right": 1408,
+            "bottom": 250
+          },
+          "inner": {
+            "left": 1149,
+            "right": 1377,
+            "top": 215,
+            "bottom": 241
+          },
+          "glyphs": [
+            {
+              "text": "Default order",
+              "x": 1,
+              "y": -4.5,
+              "width": 82.1708984375,
+              "height": 10
+            },
+            {
+              "text": "Price: low to high (same currency)",
+              "x": 1,
+              "y": -4.5,
+              "width": 206.5126953125,
+              "height": 13
+            },
+            {
+              "text": "Price: high to low (same currency)",
+              "x": 1,
+              "y": -4.5,
+              "width": 206.5126953125,
+              "height": 13
+            },
+            {
+              "text": "Rating: low to high",
+              "x": 1,
+              "y": -4.5,
+              "width": 115.5546875,
+              "height": 13
+            },
+            {
+              "text": "Rating: high to low",
+              "x": 1,
+              "y": -4.5,
+              "width": 116.3603515625,
+              "height": 13
+            },
+            {
+              "text": "Popularity: high to low",
+              "x": 1,
+              "y": -4.5,
+              "width": 138.529296875,
+              "height": 13
+            },
+            {
+              "text": "Popularity: low to high",
+              "x": 1,
+              "y": -4.5,
+              "width": 137.7236328125,
+              "height": 13
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 283,
+            "y": 786.296875,
+            "width": 192.390625,
+            "height": 24,
+            "right": 475.390625,
+            "bottom": 810.296875
+          },
+          "inner": {
+            "left": 286,
+            "right": 472.390625,
+            "top": 790.296875,
+            "bottom": 806.296875
+          },
+          "glyphs": [
+            {
+              "text": "Views",
+              "x": 387.46875,
+              "y": 794.296875,
+              "width": 29.19775390625,
+              "height": 8
+            },
+            {
+              "text": "9,223,372T",
+              "x": 420.34375,
+              "y": 794.296875,
+              "width": 52.27734375,
+              "height": 10
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 513.390625,
+            "y": 786.296875,
+            "width": 192.40625,
+            "height": 24,
+            "right": 705.796875,
+            "bottom": 810.296875
+          },
+          "inner": {
+            "left": 516.390625,
+            "right": 702.796875,
+            "top": 790.296875,
+            "bottom": 806.296875
+          },
+          "glyphs": [
+            {
+              "text": "Views",
+              "x": 663.984375,
+              "y": 794.296875,
+              "width": 29.19775390625,
+              "height": 8
+            },
+            {
+              "text": "2",
+              "x": 696.859375,
+              "y": 794.296875,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 743.796875,
+            "y": 786.296875,
+            "width": 192.390625,
+            "height": 24,
+            "right": 936.1875,
+            "bottom": 810.296875
+          },
+          "inner": {
+            "left": 746.796875,
+            "right": 933.1875,
+            "top": 790.296875,
+            "bottom": 806.296875
+          },
+          "glyphs": [
+            {
+              "text": "Views",
+              "x": 894.375,
+              "y": 794.296875,
+              "width": 29.19775390625,
+              "height": 8
+            },
+            {
+              "text": "2",
+              "x": 927.25,
+              "y": 794.296875,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 974.1875,
+            "y": 786.296875,
+            "width": 192.40625,
+            "height": 24,
+            "right": 1166.59375,
+            "bottom": 810.296875
+          },
+          "inner": {
+            "left": 977.1875,
+            "right": 1163.59375,
+            "top": 790.296875,
+            "bottom": 806.296875
+          },
+          "glyphs": [
+            {
+              "text": "Views",
+              "x": 1124.78125,
+              "y": 794.296875,
+              "width": 29.19775390625,
+              "height": 8
+            },
+            {
+              "text": "0",
+              "x": 1157.65625,
+              "y": 794.296875,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "ant-rate css-p28o4",
+          "outer": {
+            "x": 427,
+            "y": 263.703125,
+            "width": 192,
+            "height": 50,
+            "right": 619,
+            "bottom": 313.703125
+          },
+          "inner": {
+            "left": 427,
+            "right": 619,
+            "top": 263.703125,
+            "bottom": 313.703125
+          },
+          "glyphs": [],
+          "hotzones": [
+            {
+              "x": 427,
+              "y": 263.703125,
+              "width": 32,
+              "height": 50,
+              "right": 459,
+              "bottom": 313.703125,
+              "icons": [
+                {
+                  "x": 430.71156248024533,
+                  "y": 275.82789102622445,
+                  "width": 24.576755932399237,
+                  "height": 23.46954686301092
+                }
+              ]
+            },
+            {
+              "x": 467,
+              "y": 263.703125,
+              "width": 32,
+              "height": 50,
+              "right": 499,
+              "bottom": 313.703125,
+              "icons": [
+                {
+                  "x": 470.71156248024533,
+                  "y": 275.82789102622445,
+                  "width": 24.576755932399237,
+                  "height": 23.46954686301092
+                }
+              ]
+            },
+            {
+              "x": 507,
+              "y": 263.703125,
+              "width": 32,
+              "height": 50,
+              "right": 539,
+              "bottom": 313.703125,
+              "icons": [
+                {
+                  "x": 510.71156248024533,
+                  "y": 275.82789102622445,
+                  "width": 24.576755932399237,
+                  "height": 23.46954686301092
+                }
+              ]
+            },
+            {
+              "x": 545.4000244140625,
+              "y": 261.203125,
+              "width": 35.199951171875,
+              "height": 55,
+              "right": 580.5999755859375,
+              "bottom": 316.203125,
+              "icons": [
+                {
+                  "x": 549.482730952266,
+                  "y": 274.54037983885274,
+                  "width": 27.034432111594697,
+                  "height": 25.816502108869656
+                }
+              ]
+            },
+            {
+              "x": 587,
+              "y": 263.703125,
+              "width": 32,
+              "height": 50,
+              "right": 619,
+              "bottom": 313.703125,
+              "icons": [
+                {
+                  "x": 590.7115624802453,
+                  "y": 275.82789102622445,
+                  "width": 24.576755932399124,
+                  "height": 23.46954686301092
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "stars-long-text-320",
+      "viewport": {
+        "width": 320,
+        "height": 800
+      },
+      "modal": {
+        "x": 8,
+        "y": 108,
+        "width": 304,
+        "height": 676
+      },
+      "data": [
+        {
+          "control": "product-sort",
+          "outer": {
+            "x": 16,
+            "y": 293,
+            "width": 288,
+            "height": 44,
+            "right": 304,
+            "bottom": 337
+          },
+          "inner": {
+            "left": 29,
+            "right": 273,
+            "top": 302,
+            "bottom": 328
+          },
+          "glyphs": [
+            {
+              "text": "Default order",
+              "x": 1,
+              "y": -4.5,
+              "width": 82.1708984375,
+              "height": 10
+            },
+            {
+              "text": "Price: low to high (same currency)",
+              "x": 1,
+              "y": -4.5,
+              "width": 206.5126953125,
+              "height": 13
+            },
+            {
+              "text": "Price: high to low (same currency)",
+              "x": 1,
+              "y": -4.5,
+              "width": 206.5126953125,
+              "height": 13
+            },
+            {
+              "text": "Rating: low to high",
+              "x": 1,
+              "y": -4.5,
+              "width": 115.5546875,
+              "height": 13
+            },
+            {
+              "text": "Rating: high to low",
+              "x": 1,
+              "y": -4.5,
+              "width": 116.3603515625,
+              "height": 13
+            },
+            {
+              "text": "Popularity: high to low",
+              "x": 1,
+              "y": -4.5,
+              "width": 138.529296875,
+              "height": 13
+            },
+            {
+              "text": "Popularity: low to high",
+              "x": 1,
+              "y": -4.5,
+              "width": 137.7236328125,
+              "height": 13
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 25,
+            "y": 813.609375,
+            "width": 120,
+            "height": 24,
+            "right": 145,
+            "bottom": 837.609375
+          },
+          "inner": {
+            "left": 28,
+            "right": 142,
+            "top": 817.609375,
+            "bottom": 833.609375
+          },
+          "glyphs": [
+            {
+              "text": "Views",
+              "x": 57.078125,
+              "y": 821.609375,
+              "width": 29.19775390625,
+              "height": 8
+            },
+            {
+              "text": "9,223,372T",
+              "x": 89.953125,
+              "y": 821.609375,
+              "width": 52.27734375,
+              "height": 10
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 175,
+            "y": 813.609375,
+            "width": 120,
+            "height": 24,
+            "right": 295,
+            "bottom": 837.609375
+          },
+          "inner": {
+            "left": 178,
+            "right": 292,
+            "top": 817.609375,
+            "bottom": 833.609375
+          },
+          "glyphs": [
+            {
+              "text": "Views",
+              "x": 253.1875,
+              "y": 821.609375,
+              "width": 29.19775390625,
+              "height": 8
+            },
+            {
+              "text": "2",
+              "x": 286.0625,
+              "y": 821.609375,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 25,
+            "y": 1223.375,
+            "width": 120,
+            "height": 24,
+            "right": 145,
+            "bottom": 1247.375
+          },
+          "inner": {
+            "left": 28,
+            "right": 142,
+            "top": 1227.375,
+            "bottom": 1243.375
+          },
+          "glyphs": [
+            {
+              "text": "Views",
+              "x": 103.1875,
+              "y": 1231.375,
+              "width": 29.19775390625,
+              "height": 8
+            },
+            {
+              "text": "2",
+              "x": 136.0625,
+              "y": 1231.375,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 175,
+            "y": 1223.375,
+            "width": 120,
+            "height": 24,
+            "right": 295,
+            "bottom": 1247.375
+          },
+          "inner": {
+            "left": 178,
+            "right": 292,
+            "top": 1227.375,
+            "bottom": 1243.375
+          },
+          "glyphs": [
+            {
+              "text": "Views",
+              "x": 253.1875,
+              "y": 1231.375,
+              "width": 29.19775390625,
+              "height": 8
+            },
+            {
+              "text": "0",
+              "x": 286.0625,
+              "y": 1231.375,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "ant-rate css-p28o4",
+          "outer": {
+            "x": 35,
+            "y": 321.703125,
+            "width": 192,
+            "height": 50,
+            "right": 227,
+            "bottom": 371.703125
+          },
+          "inner": {
+            "left": 35,
+            "right": 227,
+            "top": 321.703125,
+            "bottom": 371.703125
+          },
+          "glyphs": [],
+          "hotzones": [
+            {
+              "x": 35,
+              "y": 321.703125,
+              "width": 32,
+              "height": 50,
+              "right": 67,
+              "bottom": 371.703125,
+              "icons": [
+                {
+                  "x": 38.71156248024532,
+                  "y": 333.82789102622445,
+                  "width": 24.57675593239921,
+                  "height": 23.46954686301092
+                }
+              ]
+            },
+            {
+              "x": 75,
+              "y": 321.703125,
+              "width": 32,
+              "height": 50,
+              "right": 107,
+              "bottom": 371.703125,
+              "icons": [
+                {
+                  "x": 78.71156248024532,
+                  "y": 333.82789102622445,
+                  "width": 24.576755932399195,
+                  "height": 23.46954686301092
+                }
+              ]
+            },
+            {
+              "x": 115,
+              "y": 321.703125,
+              "width": 32,
+              "height": 50,
+              "right": 147,
+              "bottom": 371.703125,
+              "icons": [
+                {
+                  "x": 118.71156248024532,
+                  "y": 333.82789102622445,
+                  "width": 24.576755932399195,
+                  "height": 23.46954686301092
+                }
+              ]
+            },
+            {
+              "x": 155,
+              "y": 321.703125,
+              "width": 32,
+              "height": 50,
+              "right": 187,
+              "bottom": 371.703125,
+              "icons": [
+                {
+                  "x": 158.7115624802453,
+                  "y": 333.82789102622445,
+                  "width": 24.57675593239921,
+                  "height": 23.46954686301092
+                }
+              ]
+            },
+            {
+              "x": 195,
+              "y": 321.703125,
+              "width": 32,
+              "height": 50,
+              "right": 227,
+              "bottom": 371.703125,
+              "icons": [
+                {
+                  "x": 198.7115624802453,
+                  "y": 333.82789102622445,
+                  "width": 24.57675593239921,
+                  "height": 23.46954686301092
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "recommendations-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "modal": null,
+      "data": [
+        {
+          "control": "product-sort",
+          "outer": {
+            "x": 1190,
+            "y": 206,
+            "width": 218,
+            "height": 44,
+            "right": 1408,
+            "bottom": 250
+          },
+          "inner": {
+            "left": 1203,
+            "right": 1377,
+            "top": 215,
+            "bottom": 241
+          },
+          "glyphs": [
+            {
+              "text": "默认排序",
+              "x": 0,
+              "y": -6.5,
+              "width": 56,
+              "height": 14
+            },
+            {
+              "text": "价格从低到高（同币种）",
+              "x": 0,
+              "y": -6.5,
+              "width": 145,
+              "height": 14
+            },
+            {
+              "text": "价格从高到低（同币种）",
+              "x": 0,
+              "y": -6.5,
+              "width": 145,
+              "height": 14
+            },
+            {
+              "text": "评分从低到高",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            },
+            {
+              "text": "评分从高到低",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            },
+            {
+              "text": "人气从高到低",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            },
+            {
+              "text": "人气从低到高",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 283,
+            "y": 786.296875,
+            "width": 192.390625,
+            "height": 24,
+            "right": 475.390625,
+            "bottom": 810.296875
+          },
+          "inner": {
+            "left": 286,
+            "right": 472.390625,
+            "top": 790.296875,
+            "bottom": 806.296875
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 440.453125,
+              "y": 792.296875,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "3",
+              "x": 466.453125,
+              "y": 794.296875,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 513.390625,
+            "y": 786.296875,
+            "width": 192.40625,
+            "height": 24,
+            "right": 705.796875,
+            "bottom": 810.296875
+          },
+          "inner": {
+            "left": 516.390625,
+            "right": 702.796875,
+            "top": 790.296875,
+            "bottom": 806.296875
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 608.515625,
+              "y": 792.296875,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "9,223,372万亿",
+              "x": 634.515625,
+              "y": 792.296875,
+              "width": 68.27734375,
+              "height": 12
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 743.796875,
+            "y": 786.296875,
+            "width": 192.390625,
+            "height": 24,
+            "right": 936.1875,
+            "bottom": 810.296875
+          },
+          "inner": {
+            "left": 746.796875,
+            "right": 933.1875,
+            "top": 790.296875,
+            "bottom": 806.296875
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 901.25,
+              "y": 792.296875,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "0",
+              "x": 927.25,
+              "y": 794.296875,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 974.1875,
+            "y": 786.296875,
+            "width": 192.40625,
+            "height": 24,
+            "right": 1166.59375,
+            "bottom": 810.296875
+          },
+          "inner": {
+            "left": 977.1875,
+            "right": 1163.59375,
+            "top": 790.296875,
+            "bottom": 806.296875
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 1131.65625,
+              "y": 792.296875,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "3",
+              "x": 1157.65625,
+              "y": 794.296875,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        }
+      ]
+    },
+    {
+      "name": "products-1440",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "modal": null,
+      "data": [
+        {
+          "control": "product-sort",
+          "outer": {
+            "x": 1190,
+            "y": 111.5,
+            "width": 218,
+            "height": 44,
+            "right": 1408,
+            "bottom": 155.5
+          },
+          "inner": {
+            "left": 1203,
+            "right": 1377,
+            "top": 120.5,
+            "bottom": 146.5
+          },
+          "glyphs": [
+            {
+              "text": "默认排序",
+              "x": 0,
+              "y": -6.5,
+              "width": 56,
+              "height": 14
+            },
+            {
+              "text": "价格从低到高（同币种）",
+              "x": 0,
+              "y": -6.5,
+              "width": 145,
+              "height": 14
+            },
+            {
+              "text": "价格从高到低（同币种）",
+              "x": 0,
+              "y": -6.5,
+              "width": 145,
+              "height": 14
+            },
+            {
+              "text": "评分从低到高",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            },
+            {
+              "text": "评分从高到低",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            },
+            {
+              "text": "人气从高到低",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            },
+            {
+              "text": "人气从低到高",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 283,
+            "y": 667.046875,
+            "width": 192.390625,
+            "height": 24,
+            "right": 475.390625,
+            "bottom": 691.046875
+          },
+          "inner": {
+            "left": 286,
+            "right": 472.390625,
+            "top": 671.046875,
+            "bottom": 687.046875
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 440.453125,
+              "y": 673.046875,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "3",
+              "x": 466.453125,
+              "y": 675.046875,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 513.390625,
+            "y": 667.046875,
+            "width": 192.40625,
+            "height": 24,
+            "right": 705.796875,
+            "bottom": 691.046875
+          },
+          "inner": {
+            "left": 516.390625,
+            "right": 702.796875,
+            "top": 671.046875,
+            "bottom": 687.046875
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 608.515625,
+              "y": 673.046875,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "9,223,372万亿",
+              "x": 634.515625,
+              "y": 673.046875,
+              "width": 68.27734375,
+              "height": 12
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 743.796875,
+            "y": 667.046875,
+            "width": 192.390625,
+            "height": 24,
+            "right": 936.1875,
+            "bottom": 691.046875
+          },
+          "inner": {
+            "left": 746.796875,
+            "right": 933.1875,
+            "top": 671.046875,
+            "bottom": 687.046875
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 901.25,
+              "y": 673.046875,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "0",
+              "x": 927.25,
+              "y": 675.046875,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        }
+      ]
+    },
+    {
+      "name": "recommendations-768",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "modal": null,
+      "data": [
+        {
+          "control": "product-sort",
+          "outer": {
+            "x": 526,
+            "y": 206,
+            "width": 218,
+            "height": 44,
+            "right": 744,
+            "bottom": 250
+          },
+          "inner": {
+            "left": 539,
+            "right": 713,
+            "top": 215,
+            "bottom": 241
+          },
+          "glyphs": [
+            {
+              "text": "默认排序",
+              "x": 0,
+              "y": -6.5,
+              "width": 56,
+              "height": 14
+            },
+            {
+              "text": "价格从低到高（同币种）",
+              "x": 0,
+              "y": -6.5,
+              "width": 145,
+              "height": 14
+            },
+            {
+              "text": "价格从高到低（同币种）",
+              "x": 0,
+              "y": -6.5,
+              "width": 145,
+              "height": 14
+            },
+            {
+              "text": "评分从低到高",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            },
+            {
+              "text": "评分从高到低",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            },
+            {
+              "text": "人气从高到低",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            },
+            {
+              "text": "人气从低到高",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 251,
+            "y": 810.484375,
+            "width": 222,
+            "height": 24,
+            "right": 473,
+            "bottom": 834.484375
+          },
+          "inner": {
+            "left": 254,
+            "right": 470,
+            "top": 814.484375,
+            "bottom": 830.484375
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 438.0625,
+              "y": 816.484375,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "3",
+              "x": 464.0625,
+              "y": 818.484375,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 511,
+            "y": 810.484375,
+            "width": 222,
+            "height": 24,
+            "right": 733,
+            "bottom": 834.484375
+          },
+          "inner": {
+            "left": 514,
+            "right": 730,
+            "top": 814.484375,
+            "bottom": 830.484375
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 635.71875,
+              "y": 816.484375,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "9,223,372万亿",
+              "x": 661.71875,
+              "y": 816.484375,
+              "width": 68.27734375,
+              "height": 12
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 251,
+            "y": 1304.125,
+            "width": 222,
+            "height": 24,
+            "right": 473,
+            "bottom": 1328.125
+          },
+          "inner": {
+            "left": 254,
+            "right": 470,
+            "top": 1308.125,
+            "bottom": 1324.125
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 438.0625,
+              "y": 1310.125,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "0",
+              "x": 464.0625,
+              "y": 1312.125,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 511,
+            "y": 1304.125,
+            "width": 222,
+            "height": 24,
+            "right": 733,
+            "bottom": 1328.125
+          },
+          "inner": {
+            "left": 514,
+            "right": 730,
+            "top": 1308.125,
+            "bottom": 1324.125
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 698.0625,
+              "y": 1310.125,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "3",
+              "x": 724.0625,
+              "y": 1312.125,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        }
+      ]
+    },
+    {
+      "name": "products-768",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "modal": null,
+      "data": [
+        {
+          "control": "product-sort",
+          "outer": {
+            "x": 526,
+            "y": 111.5,
+            "width": 218,
+            "height": 44,
+            "right": 744,
+            "bottom": 155.5
+          },
+          "inner": {
+            "left": 539,
+            "right": 713,
+            "top": 120.5,
+            "bottom": 146.5
+          },
+          "glyphs": [
+            {
+              "text": "默认排序",
+              "x": 0,
+              "y": -6.5,
+              "width": 56,
+              "height": 14
+            },
+            {
+              "text": "价格从低到高（同币种）",
+              "x": 0,
+              "y": -6.5,
+              "width": 145,
+              "height": 14
+            },
+            {
+              "text": "价格从高到低（同币种）",
+              "x": 0,
+              "y": -6.5,
+              "width": 145,
+              "height": 14
+            },
+            {
+              "text": "评分从低到高",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            },
+            {
+              "text": "评分从高到低",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            },
+            {
+              "text": "人气从高到低",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            },
+            {
+              "text": "人气从低到高",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 251,
+            "y": 691.234375,
+            "width": 222,
+            "height": 24,
+            "right": 473,
+            "bottom": 715.234375
+          },
+          "inner": {
+            "left": 254,
+            "right": 470,
+            "top": 695.234375,
+            "bottom": 711.234375
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 438.0625,
+              "y": 697.234375,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "3",
+              "x": 464.0625,
+              "y": 699.234375,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 511,
+            "y": 691.234375,
+            "width": 222,
+            "height": 24,
+            "right": 733,
+            "bottom": 715.234375
+          },
+          "inner": {
+            "left": 514,
+            "right": 730,
+            "top": 695.234375,
+            "bottom": 711.234375
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 635.71875,
+              "y": 697.234375,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "9,223,372万亿",
+              "x": 661.71875,
+              "y": 697.234375,
+              "width": 68.27734375,
+              "height": 12
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 251,
+            "y": 1184.875,
+            "width": 222,
+            "height": 24,
+            "right": 473,
+            "bottom": 1208.875
+          },
+          "inner": {
+            "left": 254,
+            "right": 470,
+            "top": 1188.875,
+            "bottom": 1204.875
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 438.0625,
+              "y": 1190.875,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "0",
+              "x": 464.0625,
+              "y": 1192.875,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        }
+      ]
+    },
+    {
+      "name": "recommendations-320",
+      "viewport": {
+        "width": 320,
+        "height": 800
+      },
+      "modal": null,
+      "data": [
+        {
+          "control": "product-sort",
+          "outer": {
+            "x": 16,
+            "y": 246,
+            "width": 288,
+            "height": 44,
+            "right": 304,
+            "bottom": 290
+          },
+          "inner": {
+            "left": 29,
+            "right": 273,
+            "top": 255,
+            "bottom": 281
+          },
+          "glyphs": [
+            {
+              "text": "默认排序",
+              "x": 0,
+              "y": -6.5,
+              "width": 56,
+              "height": 14
+            },
+            {
+              "text": "价格从低到高（同币种）",
+              "x": 0,
+              "y": -6.5,
+              "width": 145,
+              "height": 14
+            },
+            {
+              "text": "价格从高到低（同币种）",
+              "x": 0,
+              "y": -6.5,
+              "width": 145,
+              "height": 14
+            },
+            {
+              "text": "评分从低到高",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            },
+            {
+              "text": "评分从高到低",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            },
+            {
+              "text": "人气从高到低",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            },
+            {
+              "text": "人气从低到高",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 25,
+            "y": 766.609375,
+            "width": 120,
+            "height": 24,
+            "right": 145,
+            "bottom": 790.609375
+          },
+          "inner": {
+            "left": 28,
+            "right": 142,
+            "top": 770.609375,
+            "bottom": 786.609375
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 110.0625,
+              "y": 772.609375,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "3",
+              "x": 136.0625,
+              "y": 774.609375,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 175,
+            "y": 766.609375,
+            "width": 120,
+            "height": 24,
+            "right": 295,
+            "bottom": 790.609375
+          },
+          "inner": {
+            "left": 178,
+            "right": 292,
+            "top": 770.609375,
+            "bottom": 786.609375
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 197.71875,
+              "y": 772.609375,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "9,223,372万亿",
+              "x": 223.71875,
+              "y": 772.609375,
+              "width": 68.27734375,
+              "height": 12
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 25,
+            "y": 1176.375,
+            "width": 120,
+            "height": 24,
+            "right": 145,
+            "bottom": 1200.375
+          },
+          "inner": {
+            "left": 28,
+            "right": 142,
+            "top": 1180.375,
+            "bottom": 1196.375
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 110.0625,
+              "y": 1182.375,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "0",
+              "x": 136.0625,
+              "y": 1184.375,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 175,
+            "y": 1176.375,
+            "width": 120,
+            "height": 24,
+            "right": 295,
+            "bottom": 1200.375
+          },
+          "inner": {
+            "left": 178,
+            "right": 292,
+            "top": 1180.375,
+            "bottom": 1196.375
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 260.0625,
+              "y": 1182.375,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "3",
+              "x": 286.0625,
+              "y": 1184.375,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        }
+      ]
+    },
+    {
+      "name": "products-320",
+      "viewport": {
+        "width": 320,
+        "height": 800
+      },
+      "modal": null,
+      "data": [
+        {
+          "control": "product-sort",
+          "outer": {
+            "x": 16,
+            "y": 188.25,
+            "width": 288,
+            "height": 44,
+            "right": 304,
+            "bottom": 232.25
+          },
+          "inner": {
+            "left": 29,
+            "right": 273,
+            "top": 197.25,
+            "bottom": 223.25
+          },
+          "glyphs": [
+            {
+              "text": "默认排序",
+              "x": 0,
+              "y": -6.5,
+              "width": 56,
+              "height": 14
+            },
+            {
+              "text": "价格从低到高（同币种）",
+              "x": 0,
+              "y": -6.5,
+              "width": 145,
+              "height": 14
+            },
+            {
+              "text": "价格从高到低（同币种）",
+              "x": 0,
+              "y": -6.5,
+              "width": 145,
+              "height": 14
+            },
+            {
+              "text": "评分从低到高",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            },
+            {
+              "text": "评分从高到低",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            },
+            {
+              "text": "人气从高到低",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            },
+            {
+              "text": "人气从低到高",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 25,
+            "y": 684.109375,
+            "width": 120,
+            "height": 24,
+            "right": 145,
+            "bottom": 708.109375
+          },
+          "inner": {
+            "left": 28,
+            "right": 142,
+            "top": 688.109375,
+            "bottom": 704.109375
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 110.0625,
+              "y": 690.109375,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "3",
+              "x": 136.0625,
+              "y": 692.109375,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 175,
+            "y": 684.109375,
+            "width": 120,
+            "height": 24,
+            "right": 295,
+            "bottom": 708.109375
+          },
+          "inner": {
+            "left": 178,
+            "right": 292,
+            "top": 688.109375,
+            "bottom": 704.109375
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 197.71875,
+              "y": 690.109375,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "9,223,372万亿",
+              "x": 223.71875,
+              "y": 690.109375,
+              "width": 68.27734375,
+              "height": 12
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 25,
+            "y": 1085.875,
+            "width": 120,
+            "height": 24,
+            "right": 145,
+            "bottom": 1109.875
+          },
+          "inner": {
+            "left": 28,
+            "right": 142,
+            "top": 1089.875,
+            "bottom": 1105.875
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 110.0625,
+              "y": 1091.875,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "0",
+              "x": 136.0625,
+              "y": 1093.875,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        }
+      ]
+    },
+    {
+      "name": "stars-mobile-320",
+      "viewport": {
+        "width": 320,
+        "height": 800
+      },
+      "modal": {
+        "x": 8,
+        "y": 108,
+        "width": 304,
+        "height": 676
+      },
+      "data": [
+        {
+          "control": "product-sort",
+          "outer": {
+            "x": 16,
+            "y": -281,
+            "width": 288,
+            "height": 44,
+            "right": 304,
+            "bottom": -237
+          },
+          "inner": {
+            "left": 29,
+            "right": 273,
+            "top": -272,
+            "bottom": -246
+          },
+          "glyphs": [
+            {
+              "text": "默认排序",
+              "x": 0,
+              "y": -6.5,
+              "width": 56,
+              "height": 14
+            },
+            {
+              "text": "价格从低到高（同币种）",
+              "x": 0,
+              "y": -6.5,
+              "width": 145,
+              "height": 14
+            },
+            {
+              "text": "价格从高到低（同币种）",
+              "x": 0,
+              "y": -6.5,
+              "width": 145,
+              "height": 14
+            },
+            {
+              "text": "评分从低到高",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            },
+            {
+              "text": "评分从高到低",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            },
+            {
+              "text": "人气从高到低",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            },
+            {
+              "text": "人气从低到高",
+              "x": 0,
+              "y": -6.5,
+              "width": 84,
+              "height": 14
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 25,
+            "y": 239.609375,
+            "width": 120,
+            "height": 24,
+            "right": 145,
+            "bottom": 263.609375
+          },
+          "inner": {
+            "left": 28,
+            "right": 142,
+            "top": 243.609375,
+            "bottom": 259.609375
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 110.0625,
+              "y": 245.609375,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "3",
+              "x": 136.0625,
+              "y": 247.609375,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 175,
+            "y": 239.609375,
+            "width": 120,
+            "height": 24,
+            "right": 295,
+            "bottom": 263.609375
+          },
+          "inner": {
+            "left": 178,
+            "right": 292,
+            "top": 243.609375,
+            "bottom": 259.609375
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 197.71875,
+              "y": 245.609375,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "9,223,372万亿",
+              "x": 223.71875,
+              "y": 245.609375,
+              "width": 68.27734375,
+              "height": 12
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 25,
+            "y": 649.375,
+            "width": 120,
+            "height": 24,
+            "right": 145,
+            "bottom": 673.375
+          },
+          "inner": {
+            "left": 28,
+            "right": 142,
+            "top": 653.375,
+            "bottom": 669.375
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 110.0625,
+              "y": 655.375,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "0",
+              "x": 136.0625,
+              "y": 657.375,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "product-popularity",
+          "outer": {
+            "x": 175,
+            "y": 649.375,
+            "width": 120,
+            "height": 24,
+            "right": 295,
+            "bottom": 673.375
+          },
+          "inner": {
+            "left": 178,
+            "right": 292,
+            "top": 653.375,
+            "bottom": 669.375
+          },
+          "glyphs": [
+            {
+              "text": "热度",
+              "x": 260.0625,
+              "y": 655.375,
+              "width": 22,
+              "height": 11
+            },
+            {
+              "text": "3",
+              "x": 286.0625,
+              "y": 657.375,
+              "width": 6,
+              "height": 8
+            }
+          ],
+          "hotzones": []
+        },
+        {
+          "control": "ant-rate css-p28o4",
+          "outer": {
+            "x": 35,
+            "y": 271.703125,
+            "width": 192,
+            "height": 50,
+            "right": 227,
+            "bottom": 321.703125
+          },
+          "inner": {
+            "left": 35,
+            "right": 227,
+            "top": 271.703125,
+            "bottom": 321.703125
+          },
+          "glyphs": [],
+          "hotzones": [
+            {
+              "x": 35,
+              "y": 271.703125,
+              "width": 32,
+              "height": 50,
+              "right": 67,
+              "bottom": 321.703125,
+              "icons": [
+                {
+                  "x": 38.71156248024532,
+                  "y": 283.82789102622445,
+                  "width": 24.57675593239921,
+                  "height": 23.46954686301092
+                }
+              ]
+            },
+            {
+              "x": 75,
+              "y": 271.703125,
+              "width": 32,
+              "height": 50,
+              "right": 107,
+              "bottom": 321.703125,
+              "icons": [
+                {
+                  "x": 78.71156248024532,
+                  "y": 283.82789102622445,
+                  "width": 24.576755932399195,
+                  "height": 23.46954686301092
+                }
+              ]
+            },
+            {
+              "x": 115,
+              "y": 271.703125,
+              "width": 32,
+              "height": 50,
+              "right": 147,
+              "bottom": 321.703125,
+              "icons": [
+                {
+                  "x": 118.71156248024532,
+                  "y": 283.82789102622445,
+                  "width": 24.576755932399195,
+                  "height": 23.46954686301092
+                }
+              ]
+            },
+            {
+              "x": 155,
+              "y": 271.703125,
+              "width": 32,
+              "height": 50,
+              "right": 187,
+              "bottom": 321.703125,
+              "icons": [
+                {
+                  "x": 158.7115624802453,
+                  "y": 283.82789102622445,
+                  "width": 24.57675593239921,
+                  "height": 23.46954686301092
+                }
+              ]
+            },
+            {
+              "x": 195,
+              "y": 271.703125,
+              "width": 32,
+              "height": 50,
+              "right": 227,
+              "bottom": 321.703125,
+              "icons": [
+                {
+                  "x": 198.7115624802453,
+                  "y": 283.82789102622445,
+                  "width": 24.57675593239921,
+                  "height": 23.46954686301092
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "path": "/assets/index-rtJFeJk2.css",
+      "sha256": "83be5e4c61eaa5a5b447f46965d330ef70a2f86daef728142990527096469746",
+      "expected": "83be5e4c61eaa5a5b447f46965d330ef70a2f86daef728142990527096469746",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/index-CBs8Mwj9.js",
+      "sha256": "243b48fcaaf55baeb94fc489798683808f82719f78a58cbf4182cc8c9cc5d8a6",
+      "expected": "243b48fcaaf55baeb94fc489798683808f82719f78a58cbf4182cc8c9cc5d8a6",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/ProductMarkerBadges-YtkPTPIq.css",
+      "sha256": "0d4312f15309eb7ed571b6e37c0020d1edc79b2478331f01dd8c2dcd01dcdb2c",
+      "expected": "0d4312f15309eb7ed571b6e37c0020d1edc79b2478331f01dd8c2dcd01dcdb2c",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/RecommendationImageViewer-ILdPQ99W.css",
+      "sha256": "e7e048dad2c9ed20723701917e72bbe17f695111062cb04d734fab987a03acb4",
+      "expected": "e7e048dad2c9ed20723701917e72bbe17f695111062cb04d734fab987a03acb4",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/ImageLightbox-YuYos8NL.css",
+      "sha256": "d4ee7fcac17ea82f8e418071898f0781b227790fe8f4dd4721fd21862ebeda24",
+      "expected": "d4ee7fcac17ea82f8e418071898f0781b227790fe8f4dd4721fd21862ebeda24",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/ProductMetadata-CEcWPDZz.js",
+      "sha256": "78264e720a6f12c9104b897d9ca0173c9c003e8ba66e336a5b3caae4a7143212",
+      "expected": "78264e720a6f12c9104b897d9ca0173c9c003e8ba66e336a5b3caae4a7143212",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/PublicProductCatalog-C9KLdw04.js",
+      "sha256": "193d8c1a56e2ee568e3a3447c7ffc4b5cfd80fdca875f127fd50bc0d9a05fe63",
+      "expected": "193d8c1a56e2ee568e3a3447c7ffc4b5cfd80fdca875f127fd50bc0d9a05fe63",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/index-B6agjx9z.js",
+      "sha256": "3cba48aa231f93e87784a35bc148d2a8600859da3a4d01820a33a12ec59aca12",
+      "expected": "3cba48aa231f93e87784a35bc148d2a8600859da3a4d01820a33a12ec59aca12",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/index-B8pXaADW.js",
+      "sha256": "3ca8d5f6ee175148c602d3d23e9575900706c65e2c5fda4256af230ce2f76e87",
+      "expected": "3ca8d5f6ee175148c602d3d23e9575900706c65e2c5fda4256af230ce2f76e87",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/SaveOutlined-sHOU2gaY.js",
+      "sha256": "2b64c29cb1146a6bd9b67addc2a5fd6fa836259c149664045286bf215b254c45",
+      "expected": "2b64c29cb1146a6bd9b67addc2a5fd6fa836259c149664045286bf215b254c45",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/ProductMarkerEditor-V9QeBJd5.js",
+      "sha256": "a4b2409a2cf4e02cc31c57f5f003707749c6fac05614452da78450cb95ba28fd",
+      "expected": "a4b2409a2cf4e02cc31c57f5f003707749c6fac05614452da78450cb95ba28fd",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/ProductMarkerBadges-lhwxOPBz.js",
+      "sha256": "3136db9b19ee669703c824bbe66f85a7375bd1cf7db722b1aad7151ec4676e68",
+      "expected": "3136db9b19ee669703c824bbe66f85a7375bd1cf7db722b1aad7151ec4676e68",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/ImageLightbox-CoU1La2c.js",
+      "sha256": "7a1fa4c5b26b0a90db6ca6e5757272ba8469043950d96670f9618b2a42b0d64d",
+      "expected": "7a1fa4c5b26b0a90db6ca6e5757272ba8469043950d96670f9618b2a42b0d64d",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/RecommendationImageViewer-BIlme1za.js",
+      "sha256": "3a405161bffd83a0ff8915e057a1bae77582e3852f07efb9c3494b8224a6ec25",
+      "expected": "3a405161bffd83a0ff8915e057a1bae77582e3852f07efb9c3494b8224a6ec25",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/ReloadOutlined-Cg6_MtJi.js",
+      "sha256": "372302ec7240cdbc8c88ff63a80ec92ac475247bdac9b3177e87b0444c3de64d",
+      "expected": "372302ec7240cdbc8c88ff63a80ec92ac475247bdac9b3177e87b0444c3de64d",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/index-BsrXDgH-.js",
+      "sha256": "c2fe017f7663cbe867640e05a7752e91b18e83c963f8a52bd92c37c4b6436950",
+      "expected": "c2fe017f7663cbe867640e05a7752e91b18e83c963f8a52bd92c37c4b6436950",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/PublicRecommendations-DhYyKoQc.css",
+      "sha256": "57228e6abd81d4b8c752bf45697153f2ce08d5660413c4638cf9f3bcee8ab2d5",
+      "expected": "57228e6abd81d4b8c752bf45697153f2ce08d5660413c4638cf9f3bcee8ab2d5",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/PublicRecommendations-fY3lqUt3.js",
+      "sha256": "de49e057c0ecd5617f7ee2d9898351010682d76d58280367ceb5f4ee38503cd7",
+      "expected": "de49e057c0ecd5617f7ee2d9898351010682d76d58280367ceb5f4ee38503cd7",
+      "result": "PASS"
+    }
+  ]
+}

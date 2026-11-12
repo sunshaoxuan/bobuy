@@ -1,0 +1,7 @@
+{
+  "result": "PASS",
+  "sha256": "14b468754345f0804d0bdcee8d827c7787c913dba6e400b7d751eb047434d1ee",
+  "exactRestoreFingerprint": true,
+  "priorRuntimeRehearsal": "b203bee93e1ec2dbff8d0e00ae33152e08d977dee642aab3e028af45af913edc",
+  "liveDatabaseRestoreForbidden": true
+}
