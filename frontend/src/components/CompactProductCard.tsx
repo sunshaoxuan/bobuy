@@ -31,7 +31,10 @@ export default function CompactProductCard({name,originalName,language,brand,ite
  const actual=!pending&&quote,kind=actual?'sale':reference?.amount!=null?'reference':'unknown';
  const referenceLabel=t(reference?.state==='EXPIRED'?'card.reference_past':reference?.state==='FUTURE'?'card.reference_future':reference?.state==='UNKNOWN'?'card.reference_undated':'card.reference');
  return <article className="store-product rec-pin catalog-master-card compact-product-card" data-product-id={productId??undefined} data-occurrence-key={occurrenceKey} data-card-detail data-pressed={pressed||undefined} onClick={event=>openCardDetail(event,open)} onPointerDown={event=>{if(event.pointerType!=='mouse')setPressed(true);}} onPointerUp={()=>setPressed(false)} onPointerCancel={()=>setPressed(false)} onPointerLeave={()=>setPressed(false)} onLostPointerCapture={()=>setPressed(false)}>
-  <small className="rec-pin-code" title={`${t('rec.code')}: ${itemNumber||t('rec.not_stated')}`}><span className="compact-card-code-value">No.{itemNumber||'?'}</span></small>
+  <div className="compact-card-heading">
+   <small className="rec-pin-code" title={`${t('rec.code')}: ${itemNumber||t('rec.not_stated')}`}><span className="compact-card-code-value">No.{itemNumber||'?'}</span></small>
+   <ProductPopularity id={productId}/>
+  </div>
   <div className="product-tile">
    <button type="button" className="product-photo" data-detail-trigger="photo" aria-label={t('store.detail_label',{name})} onClick={event=>open(event.currentTarget)}>
     {image?<img src={image} alt={name} loading={eager?'eager':'lazy'} onError={event=>{event.currentTarget.style.display='none';}}/>:<span className="rec-no-product-image">{t('gallery.pending')}</span>}
@@ -44,6 +47,5 @@ export default function CompactProductCard({name,originalName,language,brand,ite
    {actual?<><CardPrice amount={actual.price} currency={actual.currency}/>{actual.saleUnit&&<small className="card-price-unit" title={actual.saleUnit}>/ {actual.saleUnit}</small>}</>:reference?.amount!=null?<><small className="card-price-label">{referenceLabel}</small><div className="compact-card-discount">{reduction!=null&&<><del title={t('detail.original_price')}>{money(original!)}</del><span className="compact-card-reduction" aria-label={t('detail.discount_amount')}>−{money(reduction)}</span></>}</div><CardPrice amount={reference.amount} currency={reference.currency} kind="reference"/>{reference.unit&&<small className="card-price-unit" title={reference.unit}>/ {reference.unit}</small>}</>:<small className="card-price-label">{t('card.price_unknown')}</small>}
   </div>
   {actions}
-  <ProductPopularity id={productId}/>
  </article>;
 }

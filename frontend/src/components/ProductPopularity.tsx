@@ -27,7 +27,7 @@ export function ProductPopularity({id}:{id?:string|null}){
   return()=>{group!.delete(listener);if(!group!.size)listeners.delete(id);window.removeEventListener('focus',refresh);window.removeEventListener('storage',sync);};
  },[id]);
  const state=id?values.get(id):undefined;
- const count=state?.clicks==null?undefined:BigInt(state.clicks),exact=count?.toLocaleString(locale),compact=count!=null&&count>9999n;
+ const count=state?.clicks==null?undefined:BigInt(state.clicks),exact=count?.toLocaleString(locale),compact=count!=null&&count>9999n, mobileCompact=count!=null&&count>999n;
  const shown=count==null?'…':compact?new Intl.NumberFormat(locale,{notation:'compact',maximumFractionDigits:1}).format(count):exact;
- return <small className="product-popularity" data-card-action aria-live="polite" title={state?.error?t('heat.error'):undefined}><span><FireFilled aria-hidden/> {t('heat.label')}</span><Tooltip title={compact?exact:undefined} trigger={['hover','focus','click']}><span tabIndex={compact?0:undefined} aria-label={exact?t('heat.label')+' '+exact:undefined}>{state?.error?t('heat.unavailable'):shown}</span></Tooltip></small>;
+ return <small className="product-popularity" data-card-action aria-live="polite" title={state?.error?t('heat.error'):undefined}><span><FireFilled aria-hidden/><span className="product-popularity-label"> {t('heat.label')}</span></span><Tooltip title={state?.error?t('heat.error'):(compact||mobileCompact)?exact:undefined} trigger={['hover','focus','click']}><span data-mobile-value={state?.error?'?':mobileCompact?'999+':shown} tabIndex={compact||mobileCompact||state?.error?0:undefined} aria-label={exact?t('heat.label')+' '+exact:undefined}>{state?.error?t('heat.unavailable'):shown}</span></Tooltip></small>;
 }
