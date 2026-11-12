@@ -30,6 +30,8 @@ GitHub经典main保护接口返回 `Branch not protected`，仓库rulesets返回
 
 全量测试用于共享基础、广泛行为变更或无法由针对性检查覆盖的风险，并记录原因。单纯新增文档或回执不使无关功能结果失效。测试全部跳过、零测试、缺失覆盖率文件和不完整扫描报告均不能声明为对应验收通过。
 
+Vitest默认零测试返回非零，调用者需核对测试选择。覆盖率继续生成text/html/lcov报告；原来写在coverage根部的四个60字段不属于1.6.1有效阈值配置，已删除。本次不新增前端覆盖率配额。
+
 `prepare-ci-release-artifacts.py`及capture脚本含V27至V31等特定历史候选的白名单，当前schema已继续演进。它们保留用于历史复核，当前自动CI无调用；不得将其旧schema/固定class要求追加到新任务。需要复核历史artifact时运行对应测试。
 
 `run-server-release-window.ps1`是2026-05-03的全服务发布窗口，已退役为只读预检。旧流程无条件要求AI、构建并启动全部基础设施、执行恢复演练；当前发布使用经审查的作用域操作与 `publish-production.py` 的显式分类。基础档案走reference-data；maintenance仅在具体风险需要时采用。历史发行operator保持原样，不作为新发布模板。

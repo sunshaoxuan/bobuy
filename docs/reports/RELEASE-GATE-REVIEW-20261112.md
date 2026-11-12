@@ -21,6 +21,7 @@
 | prepare-ci-release-artifacts与capture脚本 | 当前自动CI无调用；代码含固定V27/V28/V28.1/V30/V31转换与特定class/旧候选清单 | 保留为历史artifact复核工具，排除通用新发布门禁。不能把不支持当前schema解释为产品失败。精确产物来源与实际部署版本核对继续保留 |
 | Maven后端与服务模块测试 | backend有135个Java测试资源文件，含fixture和手工测试。backend/pom将90/70覆盖率作用于BobbuyStore；verify-backend-coverage自身执行verify并检查新生成数据 | 认证、角色、并发、迁移和业务行为检查保留；局部改动运行相关测试，共享基础或广泛变化再运行全量。覆盖率不扩大到无关文档/UI任务，不先test再verify重复全量 |
 | npm单测、构建和Playwright | src中120个test文件；实际历史811测试PASS。最近全量570.01秒、构建31.71秒；单个最慢测试文件12.62秒，不能从总耗时直接证明该测试无用 | 保留产品测试。收窄无关变更的执行范围，不删除真实行为用例。build含i18n、tsc、Vite与postbuild预渲染，发布当前前端产物需执行一次。共享栈、Playwright环境与相关截图继续复用 |
+| Vitest假通过和无效配额 | 安装的1.6.1源码确认passWithNoTests决定空选择退出码，类型声明要求coverage.thresholds；原配置把四个60直接写在coverage下 | 移除零测试可成功设置及无效60字段，保留真实覆盖率报告，不把旧无效数值升级为新配额。使用真实Vitest正例、错误断言、空选择负例单独验收 |
 | AI手动workflow | 只有workflow_dispatch，连接专用后端和真实AI环境 | 保留相关功能验收，排除无关发布。当前未运行真实AI。历史硬编码runner路径与环境前提存在，独立运行前须核对；本批不把它扩大为默认门禁 |
 | Git hooks与GitHub保护 | 本地hooks仅sample，core.hooksPath为空。GitHubmain经典保护返回Branch not protected，rulesets为空 | 未发现隐藏的仓库级required status check。平台Copilot动态工作流由GitHub调度，本次不修改其设置 |
 | STD-06清场与五步铁律 | `1f73fad` 于2026-01-15强制调用std_06_integrated_test，要求每次Start/Verify/Test清场、全栈启动、彻底关闭；当前可用技能无该项 | 撤销缺失技能前置与无条件启停。按受影响服务、现有版本和冲突证据决定操作 |
@@ -38,4 +39,8 @@ CodeQL JavaScript/TypeScript通过extractor直接分析，依据[GitHub官方分
 
 本地验收通过：三个工作流YAML解析、17个触发正反例、PowerShell最终字节摘要绑定解析、模拟SSH只读预检、34个本地文档引用、Python语法及差异空白检查。reference发布回归10项中9项通过，1项真实PG测试因未启用明确本地opt-in跳过；SQL执行器未修改。原发布器9项与依赖扫描runner5项全部通过，真实检查命令和结果见 `local-validation.json`。触发模拟属于本地配置验证，GitHub真实执行另行记录。
 
-当前没有产品功能或UI变化，无需产品全量与页面截图。本批未执行生产SQL、服务切换或AI请求。生产节点已安装的旧PowerShell脚本是否存在尚未核实，本批仓库退役不能宣称已修改远端节点。远端CI验收待提交后跟踪。
+第二批Vitest配置已使用实际1.6.1运行三个隔离fixture：正常断言退出0，错误断言退出1且报告实际断言差异，空选择退出1且明确No test files found。复用的node_modules与本候选lockfile JSON一致，未重新安装依赖。结果见 `vitest-config-validation.json`。没有新增覆盖率配额或删除产品测试。
+
+第一批提交 `d658b52` 的[PR76](https://github.com/sunshaoxuan/bobuy/pull/76)真实CodeQL三语言全部通过，依赖扫描43秒通过，JS分析job70秒、Java147秒。第二批仅配置与文档变化，复用首批发布器和扫描runner本地结果，跟踪新候选的适用CI。
+
+当前没有产品功能或UI变化，无需产品全量与页面截图。本批未执行生产SQL、服务切换或AI请求。生产节点已安装的旧PowerShell脚本是否存在尚未核实，本批仓库退役不能宣称已修改远端节点。

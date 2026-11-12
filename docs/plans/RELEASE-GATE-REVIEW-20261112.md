@@ -21,4 +21,6 @@
 起始仓库存在大量已有未提交产品与发布器改动。未发现启用的本地 Git hook，core.hooksPath 未设置。审查保留这些已有文件内容。
 
 ## 验收记录
-进行中。
+第一批提交d658b52，PR76的CodeQL三语言与依赖扫描全部通过。远端已有refs/heads/codex导致codex/子分支推送失败，确认后改为codex-release-gate-review-20261112。
+
+第二批仅清理Vitest配置：发现passWithNoTests允许零测试成功，coverage根部四个60未放在1.6.1的thresholds结构下。移除零测试成功设置和无效字段，保留覆盖率报告且不新增配额。复用同一lockfile的已安装依赖，以真实Vitest正常断言、错误断言、空选择三个隔离fixture验证。首批发布器与扫描runner代码不变，其结果保持有效。第一批运行完成后才修改第二批候选；新配置按正式PR门禁执行。

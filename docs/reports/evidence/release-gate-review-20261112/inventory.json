@@ -1,5 +1,5 @@
 {
-  "base": "2086cd8d9f1cf8d815f4686c695fa191948727d8",
+  "base": "d658b52ca16149f99333f66064dff56cc4a61da3",
   "scope": "Entry and test-resource inventory; file presence is not an individual usefulness verdict.",
   "counts": {
     "backend-test-resource": 135,
@@ -2429,7 +2429,7 @@
     {
       "path": "frontend/vitest.config.ts",
       "group": "test-build-config",
-      "sha256": "ef95279f229eb4054f6e1774f4ef9396e714737792b12375a2656ff7f293f0b2",
+      "sha256": "8169486fa0ec9dadebbffc0d86d3931591da0b035917bd2798dcf15da5a3fc73",
       "automatic": false
     }
   ]
