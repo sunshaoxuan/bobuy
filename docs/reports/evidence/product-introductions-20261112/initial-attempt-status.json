@@ -1,0 +1,7 @@
+{
+  "phase": "APPLICATION_ROLLED_BACK",
+  "source": "5a9bb64ab8cda965018bddacfe9471c1081ca34b",
+  "at": "2026-11-12T03:13:59Z",
+  "reason": "'introduction'",
+  "databaseUnchanged": true
+}

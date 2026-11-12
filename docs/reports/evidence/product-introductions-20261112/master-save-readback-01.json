@@ -1,0 +1,352 @@
+[
+  {
+    "productId": "018775a1-c531-4d89-bb61-5148b6a1df05",
+    "beforeVersion": 1,
+    "afterVersion": 2,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "03a6dcd6-3820-4798-92ec-8d7466f4990b",
+    "beforeVersion": 0,
+    "afterVersion": 1,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "0a516c2c-9f7d-46a8-a983-661959673738",
+    "beforeVersion": 3,
+    "afterVersion": 4,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "0ae75d42-95e9-4955-bde3-481332a6f511",
+    "beforeVersion": 12,
+    "afterVersion": 13,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "0e8481a6-d07b-479a-a864-35721aff0486",
+    "beforeVersion": 5,
+    "afterVersion": 6,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "10a58338-8240-4c9e-8aff-02cb87f6c0aa",
+    "beforeVersion": 0,
+    "afterVersion": 1,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "124bb802-8805-4a61-bead-687b3967a20d",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "12e3ced1-eedc-436a-8d50-94b1bf424508",
+    "beforeVersion": 3,
+    "afterVersion": 4,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "133ee647-df82-436d-8a5c-cc5ee8f51c16",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "13804fbc-23cf-41bb-ad5e-2c5ad2affb65",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "13dfefdb-ef8b-4248-ae08-4453e63820a1",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "14a6e547-b92c-4d43-bd8e-d211f00b53f9",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "17ba61b2-32ad-4fbc-a992-6c51c781d20e",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "18e7bdb3-8437-4fbd-9d6c-a55817d03e4b",
+    "beforeVersion": 1,
+    "afterVersion": 2,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "190d6ab5-51a7-4dbb-9541-aca243f2ef97",
+    "beforeVersion": 9,
+    "afterVersion": 10,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "1b90522f-68d8-4cfb-95de-24b7b92917ed",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "1cfc194a-d903-468d-b8dc-47ce8b02e24b",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "1d124bb9-fc3b-4e72-869a-c4e36d436111",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "1d3770b1-37c9-4198-bc43-ddf183dd3989",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "1f2ec151-c468-417c-8597-8308e6ef659e",
+    "beforeVersion": 3,
+    "afterVersion": 4,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "2065969a-c23e-492d-8b77-ee6a963496bc",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "2388eca8-ae4a-40bf-80ba-c3b2901f2b47",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "238b4d55-fa1f-447d-afa2-df07e45ccdfc",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "23e418a0-a3d9-471b-b0cc-76e555e210eb",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "2592ca3c-c0d3-47f0-9a77-2dbeeb88082d",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "264524d8-759e-45d6-b2ea-52bc3e5eb9c0",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "27abf1ee-9432-4297-8d06-2652d1a5323a",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "284e0c28-de67-4720-9271-8288e22c9c5a",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "2be31ec0-c0a0-4ae1-8a09-c9ed6bd6841c",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "2d78b065-6e00-474a-b95a-37363c8932da",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "30828d24-cf56-4527-a2de-61d2e09ad965",
+    "beforeVersion": 3,
+    "afterVersion": 4,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "330be8fb-a9dd-4977-b670-3eb783890ce9",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "35ec2766-b3e2-4d44-8b78-0ff7f9cf9666",
+    "beforeVersion": 9,
+    "afterVersion": 10,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "3612a312-a213-40f2-aca2-c5900afbc4fe",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "379c31c5-d512-45c8-8ad8-afdfb7a33142",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "3970b0ea-2ea7-4321-ac54-49eb66e7fdfb",
+    "beforeVersion": 3,
+    "afterVersion": 4,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "39b211b7-efcc-4324-9fcc-f26eac0ce03a",
+    "beforeVersion": 1,
+    "afterVersion": 2,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "39e8bbdd-6d09-4922-8c0d-0eba2d77802b",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "3ad752ad-6a1e-474c-a9db-be4026d1d5f1",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "3b8fa32d-3856-499b-8095-bc923ed677bb",
+    "beforeVersion": 1,
+    "afterVersion": 2,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "3fe450f8-983f-4e3a-b4aa-11dc67e9a559",
+    "beforeVersion": 1,
+    "afterVersion": 2,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "404db0ed-02fc-468c-a6a3-dbb49c81588d",
+    "beforeVersion": 9,
+    "afterVersion": 10,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "40ba6ed5-de35-43df-8e67-7b6a1101ae7e",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "46b825e2-5bd1-437e-b2ab-38e4fc09bac4",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "49067b03-bc1b-4682-b795-958ed70155a4",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "4990375f-483a-4f6b-8f92-fa32226fe32a",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "4b2e6b39-e9a5-45f0-83e4-1f13fa673250",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "4d9ebc5e-7827-4701-9886-8f86eff9beea",
+    "beforeVersion": 3,
+    "afterVersion": 4,
+    "exact": true,
+    "descriptionMatch": true
+  },
+  {
+    "productId": "4ece7c2e-4bdd-4228-ac9b-3283a0de08cc",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true,
+    "descriptionMatch": true
+  }
+]

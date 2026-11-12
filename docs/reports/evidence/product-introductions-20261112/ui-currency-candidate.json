@@ -1,0 +1,19 @@
+{
+  "source": "3a8b11a",
+  "origin": "http://127.0.0.1:4190",
+  "realPublicReadOnlyFacts": true,
+  "bounds": {
+    "bottom": 622.828125,
+    "height": 12.640625,
+    "left": 309.828125,
+    "right": 326,
+    "top": 610.1875,
+    "width": 16.171875,
+    "x": 309.828125,
+    "y": 610.1875
+  },
+  "lines": 1,
+  "overflow": false,
+  "text": "JPY",
+  "whiteSpace": "nowrap"
+}

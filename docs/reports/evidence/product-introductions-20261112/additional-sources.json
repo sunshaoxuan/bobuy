@@ -1,0 +1,92 @@
+[
+  {
+    "key": "90802",
+    "url": "https://www.costco.co.jp/p/90802",
+    "finalUrl": "https://www.costco.co.jp/c/JBL-Cinema-SB595-Mark2/p/90802",
+    "http": 200,
+    "at": "2026-11-12T02:27:33.661Z",
+    "sha256": "fc738e828ad4855e406ece8f34a2c036a1143379a6c09e9636b5ab2994bff1f4",
+    "basis": "Exact ITEM matches JBL Cinema 595 family. Introduce the common soundbar format only; Mark 2 features and generation claims excluded."
+  },
+  {
+    "key": "68511",
+    "url": "https://www.costco.co.jp/p/68511",
+    "finalUrl": "https://www.costco.co.jp/c/DENON-SOUNDBAR-DHT-C510K/p/68511",
+    "http": 200,
+    "at": "2026-11-12T02:27:33.748Z",
+    "sha256": "bdacb71a8958d8e6fd255a1aad3a2cf3f40d331e31c3e6207a98f1754a3b4a59",
+    "basis": "Exact official ITEM and title identify DHT-C510K. Use title-backed 3.1.2ch soundbar and wireless subwoofer only; conflicting DHT-S517 body specifications excluded."
+  },
+  {
+    "key": "90937",
+    "url": "https://www.costco.co.jp/p/90937",
+    "finalUrl": "https://www.costco.co.jp/Seasonal/IRIS-OHYAMA-Futon-Dryer-mini-Single-Nozzle-with-Pillow-Dryer-Cover-JSK-CW19JMAH/p/90937",
+    "http": 200,
+    "at": "2026-11-12T02:27:33.956Z",
+    "sha256": "791c8a2a1634803f29f7816268d835e36ef9ab4d339fa2beb67552a2bfb1aac3",
+    "basis": "Exact official ITEM/title confirm IRIS mini futon dryer with pillow drying bag. Turbo performance, capacity and model-specific specifications excluded."
+  },
+  {
+    "key": "1566350",
+    "url": "https://bachans.com/products/the-original-japanese-barbecue-sauce",
+    "finalUrl": "https://bachans.com/products/the-original-japanese-barbecue-sauce",
+    "http": 200,
+    "at": "2026-11-12T02:27:34.304Z",
+    "sha256": "cb431d63074a1829f7533dfdd08b57801f1e7d2188d20fa63b6e0bfa6f9a273a",
+    "basis": "Exact Original Japanese Barbecue Sauce family. Package size omitted."
+  },
+  {
+    "key": "45883",
+    "url": "https://www.otsuka.co.jp/ohn/",
+    "finalUrl": "https://www.otsuka.co.jp/ohn/",
+    "http": 200,
+    "at": "2026-11-12T02:27:34.349Z",
+    "sha256": "44b2b6284d11e8306c0e99b1868d7b45648a9758555c2e7ec43e08315824fdfd",
+    "basis": "Exact Oronine H product. No therapeutic claims or dosage."
+  },
+  {
+    "key": "80289",
+    "url": "https://www.jp.pampers.com/products/pampers-oyasumipants",
+    "finalUrl": "https://www.jp.pampers.com/products/pampers-oyasumipants",
+    "http": 200,
+    "at": "2026-11-12T02:27:35.595Z",
+    "sha256": "212b2115c94ba33bb33084ec1928d92efb8c22d6ffe437fc1196b0984f4768d5",
+    "basis": "Exact Oyasumi Pants family. Current size range differs, so no size/weight or duration promises copied."
+  },
+  {
+    "key": "1731065",
+    "url": "https://www.costcobusinessdelivery.com/p/-/maxchief-metal-high-back-padded-folding-chair-gray/2001173515",
+    "finalUrl": "https://www.costcobusinessdelivery.com/p/-/maxchief-metal-high-back-padded-folding-chair-gray/2001173515",
+    "http": 200,
+    "at": "2026-11-12T02:27:36.205Z",
+    "sha256": "a7a90d739c05e72274bc3791591c874e2670285b76a6eb15ff9e0b33912607bc",
+    "basis": "Official Costco US exact ITEM1731065. Regional dimensions, load rating and warranty omitted."
+  },
+  {
+    "key": "03a6dcd6-3820-4798-92ec-8d7466f4990b",
+    "url": "https://www.kao.co.jp/haiter/awahaiter/",
+    "finalUrl": "https://www.kao.co.jp/haiter/awahaiter/",
+    "http": 200,
+    "at": "2026-11-12T02:27:36.303Z",
+    "sha256": "c4a4ea04ceb6ec28923c8b8125396a7c48ecb3c8799b49fa5a350820c818f4ad",
+    "basis": "Unambiguous named product family; no package or variant-specific claims."
+  },
+  {
+    "key": "568c72af-6142-457f-8df9-d507d4f1f048",
+    "url": "https://www.costco.co.jp/c/Miffy-Aesthetik-Kids-Miffy-Macaron-Chair-Rose/p/1926207",
+    "finalUrl": "https://www.costco.co.jp/c/Miffy-Aesthetik-Kids-Miffy-Macaron-Chair-Rose/p/1926207",
+    "http": 200,
+    "at": "2026-11-12T02:27:36.763Z",
+    "sha256": "16cc33c83e842469c1cb183629a3f456034c25c58b8c16c655b6ffb2931d0d88",
+    "basis": "Macaron Chair family; shared design only, no colour, package, dimensions or load claims."
+  },
+  {
+    "key": "de1f7859-2587-4235-8c23-7ceacfc3f944",
+    "url": "https://www.costco.co.jp/p/27499",
+    "finalUrl": "https://www.costco.co.jp/c/Schick-Hydro5-Custom-17P/p/27499",
+    "http": 200,
+    "at": "2026-11-12T02:27:37.164Z",
+    "sha256": "d843d00b5c5576cc68786a7bcac2e4d8cefa45c2b5461b1bc32e1bb9c0707b7a",
+    "basis": "Unambiguous Hydro5 Custom family; five-blade razor format only. Pack and skin-specific versions omitted."
+  }
+]

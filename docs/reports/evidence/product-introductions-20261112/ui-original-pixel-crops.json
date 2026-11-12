@@ -1,0 +1,138 @@
+[
+  {
+    "source": "production-zh-CN-360-whole.jpg",
+    "sha256": "87aa577ae65e008e6fe2a553e4b0a09fb2e26c563ee86cd6ebd5543883f7f5aa",
+    "sourceSize": [
+      360,
+      1000
+    ],
+    "crop": "production-zh-CN-360-info.png",
+    "box": [
+      0,
+      330,
+      360,
+      999
+    ],
+    "scale": 1,
+    "method": "lossless PNG crop of native viewport screenshot; no repaint or rescaling"
+  },
+  {
+    "source": "production-en-US-360-whole.jpg",
+    "sha256": "f64ac71d89a25187ecf27bb049a066860912f7b9d6430aa0365f584c2280da50",
+    "sourceSize": [
+      360,
+      1000
+    ],
+    "crop": "production-en-US-360-info.png",
+    "box": [
+      0,
+      219,
+      360,
+      999
+    ],
+    "scale": 1,
+    "method": "lossless PNG crop of native viewport screenshot; no repaint or rescaling"
+  },
+  {
+    "source": "production-ja-JP-360-whole.jpg",
+    "sha256": "fbc5d54354d7f60b4f3f69b790d4b23ccf95c7dca626c8d61344e9d8a0de84a5",
+    "sourceSize": [
+      360,
+      1000
+    ],
+    "crop": "production-ja-JP-360-info.png",
+    "box": [
+      0,
+      325,
+      360,
+      999
+    ],
+    "scale": 1,
+    "method": "lossless PNG crop of native viewport screenshot; no repaint or rescaling"
+  },
+  {
+    "source": "production-zh-TW-360-whole.jpg",
+    "sha256": "9650d18f0031c5cb20571e33e5459792af5a6e34f536799695bb4016363347b3",
+    "sourceSize": [
+      360,
+      1000
+    ],
+    "crop": "production-zh-TW-360-info.png",
+    "box": [
+      0,
+      330,
+      360,
+      999
+    ],
+    "scale": 1,
+    "method": "lossless PNG crop of native viewport screenshot; no repaint or rescaling"
+  },
+  {
+    "source": "production-zh-TW-1440-whole.jpg",
+    "sha256": "6d33b39d80795b4cf8e835095ce5f9fd521978abcd235d9ec86c99e7e162c8c6",
+    "sourceSize": [
+      1425,
+      990
+    ],
+    "crop": "production-zh-TW-1440-info.png",
+    "box": [
+      880,
+      68,
+      1419,
+      811
+    ],
+    "scale": 1,
+    "method": "lossless PNG crop of native viewport screenshot; no repaint or rescaling"
+  },
+  {
+    "source": "production-ja-JP-1440-whole.jpg",
+    "sha256": "34038f05b588896762eb0459eeb4e412e02b18033a1e7cbd4cfe72ea6d44a41d",
+    "sourceSize": [
+      1425,
+      990
+    ],
+    "crop": "production-ja-JP-1440-info.png",
+    "box": [
+      880,
+      68,
+      1419,
+      811
+    ],
+    "scale": 1,
+    "method": "lossless PNG crop of native viewport screenshot; no repaint or rescaling"
+  },
+  {
+    "source": "production-en-US-1440-whole.jpg",
+    "sha256": "b101b0e77d8a739c97210be2862c5af0ea8f32d1dcb428f76ff0df3e6baa7ddc",
+    "sourceSize": [
+      1425,
+      990
+    ],
+    "crop": "production-en-US-1440-info.png",
+    "box": [
+      880,
+      68,
+      1419,
+      811
+    ],
+    "scale": 1,
+    "method": "lossless PNG crop of native viewport screenshot; no repaint or rescaling"
+  },
+  {
+    "source": "production-zh-CN-1440-whole.jpg",
+    "sha256": "2f0d8058ffc9afdff3821322aab206cc5f723b26a7ec40b67de50dcc75cb40d9",
+    "sourceSize": [
+      1425,
+      990
+    ],
+    "crop": "production-zh-CN-1440-info.png",
+    "box": [
+      880,
+      68,
+      1419,
+      811
+    ],
+    "scale": 1,
+    "method": "lossless PNG crop of native viewport screenshot; no repaint or rescaling"
+  }
+]

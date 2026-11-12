@@ -25,7 +25,7 @@
 .consumer-detail-info .consumer-reference{min-width:0;background:#f5f5f3;border-radius:20px;padding:16px;overflow-wrap:anywhere;}
 .consumer-reference-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px;}
 .consumer-reference .consumer-reference-heading h2{margin:0;font-size:14px;font-weight:600;}
-.consumer-reference-heading>small{margin-inline-start:auto;font-size:11px;color:#626262;}
+.consumer-reference-heading>small{margin-inline-start:auto;flex-shrink:0;white-space:nowrap;font-size:11px;color:#626262;}
 .consumer-reference-price-line{display:flex;flex-direction:column;align-items:flex-end;gap:2px;min-width:0;margin:4px 0 0;}
 .consumer-reference-price{width:100%;min-width:0;}
 .consumer-reference-price .card-money{justify-content:flex-end;margin:0;}

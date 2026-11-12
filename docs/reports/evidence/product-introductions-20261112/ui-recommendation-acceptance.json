@@ -1,0 +1,34 @@
+{
+  "source": "3a8b11a",
+  "coreSource": "5a9bb64",
+  "item": "77839",
+  "chinese": {
+    "discounts": 0,
+    "introduction": "商品介绍\n\n男士药用护肤霜，含氨甲环酸及黄芩、姜黄保湿提取物，用于早晚洁面后的护肤步骤。使用时请遵循产品标签说明。",
+    "priceCards": 1,
+    "text": "No.77839\n\n‹\n1 / 3\n›\nMen's Keshimin男士护肤霜\n（メンズケシミン シミ対策クリーム）\n参考售价（非实时）\nJPY\n¥\n1,498\n/ 20g×2\n\nCostco Online: JPY ¥1,828 / 20g×2本\n\n商品介绍\n\n男士药用护肤霜，含氨甲环酸及黄芩、姜黄保湿提取物，用于早晚洁面后的护肤步骤。使用时请遵循产品标签说明。\n\n暂未开放预订"
+  },
+  "localeStates": [
+    {
+      "discounts": 0,
+      "locale": "en-US",
+      "priceCards": 1,
+      "text": "About this product\n\nA men’s medicated skin cream with tranexamic acid and moisturizing extracts of Scutellaria root and turmeric. For skincare after morning and evening cleansing. Follow the product label directions."
+    },
+    {
+      "discounts": 0,
+      "locale": "ja-JP",
+      "priceCards": 1,
+      "text": "商品について\n\nトラネキサム酸と、保湿成分のオウゴンエキス・ウコンエキスを配合した男性向け薬用クリームです。朝晩の洗顔後のスキンケアに。使用時は製品の表示に従ってください。"
+    },
+    {
+      "discounts": 0,
+      "locale": "zh-TW",
+      "priceCards": 1,
+      "text": "商品介紹\n\n男士藥用護膚霜，含傳明酸及黃芩、薑黃保濕萃取物，適用於早晚潔面後的保養步驟。使用時請遵循產品標示說明。"
+    }
+  ],
+  "galleryNextPrevious": true,
+  "closeAndReopenByDeepLink": true,
+  "referenceJapanDay": "2026-11-12"
+}

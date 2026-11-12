@@ -1,0 +1,138 @@
+[
+  {
+    "locale": "zh-CN",
+    "width": 1440,
+    "geometry": {
+      "height": 441.203125,
+      "overflow": false,
+      "viewportHeight": 1000,
+      "viewportWidth": 1440,
+      "width": 478.40625,
+      "x": 922.59375,
+      "y": 85
+    },
+    "copyVisible": true,
+    "synthetic": true,
+    "menusHidden": true,
+    "exactPixelCapture": true
+  },
+  {
+    "locale": "ja-JP",
+    "width": 1440,
+    "geometry": {
+      "height": 394.515625,
+      "overflow": false,
+      "viewportHeight": 1000,
+      "viewportWidth": 1440,
+      "width": 478.40625,
+      "x": 922.59375,
+      "y": 85
+    },
+    "copyVisible": true,
+    "synthetic": true,
+    "menusHidden": true,
+    "exactPixelCapture": true
+  },
+  {
+    "locale": "zh-TW",
+    "width": 1440,
+    "geometry": {
+      "height": 441.203125,
+      "overflow": false,
+      "viewportHeight": 1000,
+      "viewportWidth": 1440,
+      "width": 478.40625,
+      "x": 922.59375,
+      "y": 85
+    },
+    "copyVisible": true,
+    "synthetic": true,
+    "menusHidden": true,
+    "exactPixelCapture": true
+  },
+  {
+    "locale": "en-US",
+    "width": 1440,
+    "geometry": {
+      "height": 467.09375,
+      "overflow": false,
+      "viewportHeight": 1000,
+      "viewportWidth": 1440,
+      "width": 478.40625,
+      "x": 922.59375,
+      "y": 85
+    },
+    "copyVisible": true,
+    "synthetic": true,
+    "menusHidden": true,
+    "exactPixelCapture": true
+  },
+  {
+    "locale": "zh-CN",
+    "width": 360,
+    "geometry": {
+      "height": 461.5,
+      "overflow": false,
+      "viewportHeight": 1000,
+      "viewportWidth": 360,
+      "width": 324,
+      "x": 18,
+      "y": 301
+    },
+    "copyVisible": true,
+    "synthetic": true,
+    "menusHidden": true,
+    "exactPixelCapture": true
+  },
+  {
+    "locale": "ja-JP",
+    "width": 360,
+    "geometry": {
+      "height": 414.8125,
+      "overflow": false,
+      "viewportHeight": 1000,
+      "viewportWidth": 360,
+      "width": 324,
+      "x": 18,
+      "y": 301
+    },
+    "copyVisible": true,
+    "synthetic": true,
+    "menusHidden": true,
+    "exactPixelCapture": true
+  },
+  {
+    "locale": "zh-TW",
+    "width": 360,
+    "geometry": {
+      "height": 461.5,
+      "overflow": false,
+      "viewportHeight": 1000,
+      "viewportWidth": 360,
+      "width": 324,
+      "x": 18,
+      "y": 301
+    },
+    "copyVisible": true,
+    "synthetic": true,
+    "menusHidden": true,
+    "exactPixelCapture": true
+  },
+  {
+    "locale": "en-US",
+    "width": 360,
+    "geometry": {
+      "height": 513.28125,
+      "overflow": false,
+      "viewportHeight": 1000,
+      "viewportWidth": 360,
+      "width": 324,
+      "x": 18,
+      "y": 301
+    },
+    "copyVisible": true,
+    "synthetic": true,
+    "menusHidden": true,
+    "exactPixelCapture": true
+  }
+]
