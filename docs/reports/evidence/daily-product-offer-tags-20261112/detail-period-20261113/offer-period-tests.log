@@ -1,0 +1,14 @@
+
+> bobbuy-frontend@0.1.0 test
+> vitest run src/components/ProductMarkerBadges.test.tsx
+
+
+ RUN  v1.6.1 C:/Users/X02851/OneDrive - One人事株式会社/文档/ChatGPT/bobuy.cc/.task-tmp/daily-product-offer-tags-20261112/frontend
+
+ ✓ src/components/ProductMarkerBadges.test.tsx  (6 tests) 417ms
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  01:08:38
+   Duration  5.25s (transform 297ms, setup 433ms, collect 3.41s, tests 417ms, environment 700ms, prepare 125ms)
+

@@ -1,0 +1,40 @@
+{
+  "result": "PASS",
+  "method": "Actual final screenshot ink bounds, white glyph inside red badge and dark date glyph on white background",
+  "measurements": [
+    {
+      "viewport": 1440,
+      "badgeGlyph": [
+        9,
+        8,
+        22,
+        22
+      ],
+      "periodGlyph": [
+        39,
+        11,
+        198,
+        21
+      ],
+      "glyphCenterDifference": 1.0,
+      "limit": 1.0
+    },
+    {
+      "viewport": 360,
+      "badgeGlyph": [
+        8,
+        8,
+        21,
+        22
+      ],
+      "periodGlyph": [
+        39,
+        11,
+        197,
+        21
+      ],
+      "glyphCenterDifference": 1.0,
+      "limit": 1.0
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "result": "PASS",
+  "data": "read-only current production catalog and canonical documents",
+  "errors": [],
+  "network": [],
+  "measurements": [
+    {
+      "width": 1440,
+      "text": "2026/11/04 → 2026/11/15 JST",
+      "fontSize": "12px",
+      "lineHeight": "18px",
+      "period": [
+        975.59375,
+        103,
+        159.375,
+        18
+      ],
+      "badge": [
+        937.59375,
+        97,
+        30,
+        30
+      ],
+      "textBox": [
+        975.59375,
+        103,
+        159.375,
+        18
+      ],
+      "gap": 8,
+      "centerError": 0,
+      "viewport": 1440,
+      "overflow": false
+    },
+    {
+      "width": 360,
+      "text": "2026/11/04 → 2026/11/15 JST",
+      "fontSize": "12px",
+      "lineHeight": "18px",
+      "period": [
+        56,
+        605,
+        159.375,
+        18
+      ],
+      "badge": [
+        18,
+        599,
+        30,
+        30
+      ],
+      "textBox": [
+        56,
+        605,
+        159.375,
+        18
+      ],
+      "gap": 8,
+      "centerError": 0,
+      "viewport": 360,
+      "overflow": false
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+### Review Summary: **No Blocking Defects Found**
+
+Across both the desktop drawer and 360px mobile viewport, the promotion date annotation meets all criteria:
+
+* **Readability**: Clear contrast and sharp rendering at 12px text / 18px line-height against the white background.
+* **Adjacency**: The 8px horizontal gap maintains distinct visual separation between the red 惠 badge and the start date.
+* **Vertical Alignment**: The text is accurately centered vertically with the badge across both views.
+* **Clipping**: No horizontal truncation, wrapping, or container clipping occurs on 360px mobile or desktop.
+* **Interference**: Adequate margin/spacing is preserved; there is no overlap or collision with the thumbnail gallery above or the product title below.
