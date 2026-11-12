@@ -1,0 +1,3624 @@
+{
+  "observedAt": "2026-11-12T02:42:31.915Z",
+  "frontend": {
+    "id": "5ac127b565bbd129a96a57cc813f5e20dd930e918fa65499f765aa8f9a67cdb2",
+    "image": "sha256:4568e063d0ce3caf772759ce0f31a1e09b4d2e4d8ece8f49d476d25a232f6470",
+    "tag": "bobuy/frontend:20261112.social-platform-select.2",
+    "revision": "ec24fa9af47b38999b98fc848e8ccf77787ddad2",
+    "imageCreated": "2026-11-12T11:39:45.787500037+09:00",
+    "startedAt": "2026-11-12T02:39:50.949022087Z",
+    "status": "running",
+    "health": null
+  },
+  "console": [
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED"
+  ],
+  "network": [],
+  "blockedWrites": [
+    {
+      "method": "POST",
+      "path": "/cdn-cgi/rum"
+    },
+    {
+      "method": "POST",
+      "path": "/cdn-cgi/rum"
+    },
+    {
+      "method": "POST",
+      "path": "/cdn-cgi/rum"
+    },
+    {
+      "method": "POST",
+      "path": "/cdn-cgi/rum"
+    }
+  ],
+  "assetMismatches": [],
+  "assets": {
+    "/assets/index-UTa257F5.css": "533ba2d10593c62562d1b94f4c34f066ce8e32859676d3731689790e644833a7",
+    "/assets/index-DG8_x6Js.js": "a352f41e5e0a55c41a199af24bfb04b76a2dedba1aa815d76d79d4fef2a18926",
+    "/assets/ProductMarkerBadges-YtkPTPIq.css": "0d4312f15309eb7ed571b6e37c0020d1edc79b2478331f01dd8c2dcd01dcdb2c",
+    "/assets/ImageLightbox-DKnMaoxp.css": "091fe63279bbbbe9de53be34d6873022737d18bde022b816553b44fd7188e13f",
+    "/assets/RecommendationImageViewer-BnZdvF0r.css": "53f93b3e748150e500e4a9e82b9c876a48e2f42b0fb04fa459aa85fe608dd06d",
+    "/assets/index-CCrokNax.js": "777dbf9d54089737bba9fd50a269426b9e5067e0dc5c1ddfe3f7f499e0b4ff55",
+    "/assets/ProductMetadata-C-_9x_7n.js": "466cda6cf05b6387fcc55e601aa91da199835351b4af7bca9e7bb452260906af",
+    "/assets/index-KJWgcCP0.js": "b3ecaab93e0dd1f5c2e38b3731d0d05490455de4018fe74362341baa65055a24",
+    "/assets/ProductMarkerEditor-BXxa8TlW.js": "f1925d4b966b1fa32606af94dc5b327e19ef020e6af3d01d9aec363e2727beed",
+    "/assets/RecommendationImageViewer-CzYgFqAi.js": "2922fa00d2bb6f8ad2c22d4d670df40a959bafdeb005f14df0a07dc8204fb1da",
+    "/assets/ReloadOutlined-BcJurxg3.js": "71c5294d0b9067cdc0f924f97dd75e69d2c707765bf8f33c8b41e7a3daf602ad",
+    "/assets/ImageLightbox-DnI6LcMO.js": "3063e536be25fa0c073738bd9b0aec4feecc0565ab7abbd2218516adbb881948",
+    "/assets/index-BcM33xXs.js": "3261798e801a8b544b52429e3c405cbe9bc97b06a6296cd9e4e8149347398761",
+    "/assets/PublicProductCatalog-C-5lAGnV.js": "b0b9c46cfc86c63827ae3e73757ef71867b85c25a9044e0ef8ea628186894783",
+    "/assets/ProductMarkerBadges-BMoPKGke.js": "95b3c3288173b8532a5d414f78357b3bac5767465a8b5092117020c8f2be10a8",
+    "/assets/SaveOutlined-BNnN8oCK.js": "3f23d6be6367559d693cdb6eb093a3349fad606714767f093d4fc081ae1c9e42",
+    "/assets/PublicRecommendations-DhYyKoQc.css": "57228e6abd81d4b8c752bf45697153f2ce08d5660413c4638cf9f3bcee8ab2d5",
+    "/assets/PublicRecommendations-CTiJdmW2.js": "e8b69b5d5c876163ef7ba73965f3b465e161b2bb516bc4e1ff3a6fd9803793b9"
+  },
+  "views": [
+    {
+      "route": "products",
+      "width": 1440,
+      "cards": 24,
+      "sorts": [
+        "price-asc",
+        "price-desc",
+        "rating-asc",
+        "rating-desc",
+        "heat-asc",
+        "heat-desc",
+        "default"
+      ],
+      "heat": " 热度\n0",
+      "stars": 5,
+      "noHorizontalOverflow": true
+    },
+    {
+      "route": "recommendations",
+      "width": 1440,
+      "cards": 24,
+      "sorts": [
+        "price-asc",
+        "price-desc",
+        "rating-asc",
+        "rating-desc",
+        "heat-asc",
+        "heat-desc",
+        "default"
+      ],
+      "heat": " 热度\n1",
+      "stars": 5,
+      "noHorizontalOverflow": true
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/products"
+    },
+    {
+      "method": "GET",
+      "path": "/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/index-DG8_x6Js.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/index-UTa257F5.css"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/PublicProductCatalog-C-5lAGnV.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/RecommendationImageViewer-CzYgFqAi.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/ProductMetadata-C-_9x_7n.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/ImageLightbox-DnI6LcMO.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/index-BcM33xXs.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/ImageLightbox-DKnMaoxp.css"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/RecommendationImageViewer-BnZdvF0r.css"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/ProductMarkerBadges-BMoPKGke.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/ProductMarkerBadges-YtkPTPIq.css"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/ProductMarkerEditor-BXxa8TlW.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/ReloadOutlined-BcJurxg3.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/index-CCrokNax.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/SaveOutlined-BNnN8oCK.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/index-KJWgcCP0.js"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/trips"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/trips"
+    },
+    {
+      "method": "POST",
+      "path": "/cdn-cgi/rum"
+    },
+    {
+      "method": "GET",
+      "path": "/favicon.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-browse"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/018775a1-c531-4d89-bb61-5148b6a1df05"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0451e987-1bc1-498d-8494-a7b9be9adbb7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/08ee57fc-9c54-47a6-81b7-01b70d0b2092"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0a516c2c-9f7d-46a8-a983-661959673738"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0b38036f-3e99-420c-b870-89fe35d7a723"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/124bb802-8805-4a61-bead-687b3967a20d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/12e3ced1-eedc-436a-8d50-94b1bf424508"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/133ee647-df82-436d-8a5c-cc5ee8f51c16"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/13804fbc-23cf-41bb-ad5e-2c5ad2affb65"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/13dfefdb-ef8b-4248-ae08-4453e63820a1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/17ba61b2-32ad-4fbc-a992-6c51c781d20e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/18e7bdb3-8437-4fbd-9d6c-a55817d03e4b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1b90522f-68d8-4cfb-95de-24b7b92917ed"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1cfc194a-d903-468d-b8dc-47ce8b02e24b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1d124bb9-fc3b-4e72-869a-c4e36d436111"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1d3770b1-37c9-4198-bc43-ddf183dd3989"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f2ec151-c468-417c-8597-8308e6ef659e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f630007-3a30-469e-8cee-dc7a3917d654"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2065969a-c23e-492d-8b77-ee6a963496bc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/225a37ee-fd64-437e-9345-7c910a63f89c"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2388eca8-ae4a-40bf-80ba-c3b2901f2b47"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/238b4d55-fa1f-447d-afa2-df07e45ccdfc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/23e418a0-a3d9-471b-b0cc-76e555e210eb"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/e5d42bc7-e135-46dd-ae28-2e689ad56ed6"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/badef57a-fe6f-4f1b-bfd2-e721b3459be5"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/22953f1c-a3ca-4efb-8939-3861dfd43437"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/063ad525-52a2-45dd-96b1-7a17dd252558"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/57b03030-3ed9-4bf5-8a10-f8e170cc7d84"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/331187f7-d0f5-468f-83aa-324a613a4f19"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/65a36f72-8834-4784-ac33-8f40ee42a3b4"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/124710c0-5214-40dc-9dbf-fc14f97b2ca1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/6c97f77e-0ac8-4d48-b8f9-6ceb5f1754fb"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/19344070-72b8-45ab-8b15-c5c5ca5d9600"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/15ecbeeb-8c9b-43e1-9a5b-a44c53d4e3d6"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/30aff115-f411-4a5a-a193-a77af61c469d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/4ec44235-7ee8-4d39-bc77-7a24ad2b3bb2"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/b880a89e-cfc6-42ec-b49b-d3a6e323f8fa"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/7b61f7ff-a769-4cf2-b7e1-cf33e8b08643"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/0e2cc6e9-c6ff-43ce-be80-5bcce146a5ba"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/775288fb-c134-49a2-8704-b95a2e0ceb6d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/6e6d01fd-8aac-42b3-90d3-3f76d627c24b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/2329db85-1d7a-463b-8caf-aa4d69599b10"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/9adefe75-43ec-441c-a3e0-abb0df72b967"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-browse"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/09a94fb4-2538-4ca7-b0e9-7c7533ce246d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-25f8461c-bc02-3502-9d04-737dc16a5a47"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f630007-3a30-469e-8cee-dc7a3917d654"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/3612a312-a213-40f2-aca2-c5900afbc4fe"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/971c610e-4985-44aa-b8c0-de3bf98a343d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/ee02fc80-e193-44e7-abcb-ebfaf52918a9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/fa62c990-7292-4e96-88a8-781c3d07c3e9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-dda58e4b-a7ae-382f-a26d-686af3c107c2"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-840ef5e3-82a8-3268-8fd7-8769131cb190"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-d4ec4261-0e51-3d92-9e94-3ec90cdbd1bc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/99902395-a899-466a-819b-f36c56d205b3"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-5fee00a4-a9e2-3b27-af21-1c33dfde45cd"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/b3b6d91c-f1c4-47d8-914b-60ec0a11b26d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/b984dbc4-cc94-4b9e-9500-268e48fca801"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/65bc2ffe-9745-478c-9bc5-4770cb9e8d1b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/90271d9b-e11e-4d41-a547-1d106f15e8ea"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/f6d5869e-d64e-4e12-9610-66b0402767df"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/7935b705-d1a0-4ab0-97c9-7f2705bdb9a9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a15054fa-38e5-4beb-b701-e3deaaecd285"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-276c608a-c229-35b2-bfe4-37c4e0cb70bb"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/c35e1a80-82f2-463a-bfee-ac31a6838130"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2eac6c3b-f799-45fe-95d1-f85e808d8892"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/39b211b7-efcc-4324-9fcc-f26eac0ce03a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-2fef0e5f-75d8-3fe3-83e6-f4aaa5ba74a3"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/eef9cd10-9d7b-4b5b-a750-6a8b83571943"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/03adf383-ed90-4a48-9cdd-cf91338663d3"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/b2907cf4-cd9d-49c3-b19b-d30523f4b1e9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/70cae517-5a6c-413d-8b96-9b47c27479da"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/35acd7d6-3dea-49e7-bf3b-7b6d221947e6"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/96e003b5-6cf5-47d8-a595-84a345fc825f"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/5d58b725-e5cf-46c0-bcf7-fe632f1c0169"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/e452851c-59af-4326-a7d2-0d0f267a6d2e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/1f98e5a3-fbc9-4046-b4df-5d6c4b60cac3"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/93638073-0aab-4df7-bf47-21a52972ba28"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/4487add2-8886-4f15-9475-785e29ef8fe1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/0c5091d0-8e59-429d-bbbd-5a515f07f7d1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/22e59dfd-972c-4fdc-857b-5f51f3d33f16"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/494bea84-fc2c-4074-ad45-f5cb76f50c35"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/479ee3f5-cdfe-4815-ac2b-05afcf651778"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/c040785d-2d26-4dcf-ac68-941fef22a43a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/3ae7f189-59ab-475b-92a1-e3350563d245"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/0b1b83a2-22a7-4994-bb19-f8145c224906"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-browse"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/8dd9ef0b-5497-4849-a4a8-76c658e12156"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-09a01cfc-587e-368a-9c3a-c567b1e2ab54"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/b4d5f81c-3282-43d8-9f11-c0571bcdfae1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/dcb6f383-ca45-4426-8391-1472633b8664"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-549a3d04-ddbc-3a5e-9b1e-10fe06bb0728"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/38390f37-8420-4c69-ab7e-8616ae7dd8ca"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f2ec151-c468-417c-8597-8308e6ef659e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/ed790c05-affa-4d4f-80dc-7276aae04d1f"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-9fc97f75-48fd-35a2-ade3-a698a4829ef4"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/c0b46433-d257-4ae7-828b-62a6c433568e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-ecc59985-0cdd-3432-99bd-efa7c7791428"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/4fc887bc-0936-45dc-8c7a-fd6040e63187"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-74151553-8ba4-33c6-8146-9fb4c86ecaf4"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a472e3d7-df62-4c01-9389-6c01b2510151"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-122ce621-f39a-3a9e-b563-87b6db201b91"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0b38036f-3e99-420c-b870-89fe35d7a723"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/d24f5434-60a8-42fa-b8b7-82b0f3f0f262"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/96c3886a-72a0-417a-a530-6e901743e9f0"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/e10cef00-71ad-423f-8375-ae18028c63aa"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/c275f7c5-62d3-4186-94f1-eb708779a1c2"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-2f2a6098-5f1b-31e8-9172-034dd35708d9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/133ee647-df82-436d-8a5c-cc5ee8f51c16"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-3fab591d-8b3d-3f30-84f9-806407d5e0cb"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-2b831384-e39a-3c0d-9820-c5a57b1c4dc7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/d586762a-2c62-4124-bfce-de5afa26fbdd"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/987da748-ee7a-43cc-a804-9a4b9fc1b7cb"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/0049d7c4-4c26-4755-8a71-65a2a692888a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/ab6f1f29-36d6-4ac2-8d82-5488c1ed4322"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/80c5eaab-f2e6-4d2c-bb2b-0fd24f48eea3"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/33f52f13-2140-452c-a0d7-f431c84ae729"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/775288fb-c134-49a2-8704-b95a2e0ceb6d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/be5eeeff-4370-46a5-a890-ec47f69d9128"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/e87f31ef-f701-4b44-a6e7-aa8fcd2a0fe8"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/96784ffe-3ffd-4f0f-b115-f043c0b35023"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/68bc2614-98ad-45f2-801e-bcc629b82d9a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/77c6c9ca-f1c5-468b-921f-13ebf98faa4e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/98b5818f-858f-4ead-85db-7c50e6f0bbfc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/79208090-850a-41e1-8f01-366a389d9a34"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/57b03030-3ed9-4bf5-8a10-f8e170cc7d84"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/7e19e9d5-4365-4d00-a57d-6f0ecbf8d27c"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/d4fa6b6c-15a8-4085-8d89-5a7d8c8d81c1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/bcfed019-38b0-4c7f-ad45-9952519f8e9a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/7a6068a2-1a2b-4777-b139-a388d5c3b1f8"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-browse"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/124710c0-5214-40dc-9dbf-fc14f97b2ca1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/3612a312-a213-40f2-aca2-c5900afbc4fe"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/018775a1-c531-4d89-bb61-5148b6a1df05"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0451e987-1bc1-498d-8494-a7b9be9adbb7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/08ee57fc-9c54-47a6-81b7-01b70d0b2092"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0a516c2c-9f7d-46a8-a983-661959673738"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0b38036f-3e99-420c-b870-89fe35d7a723"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/124bb802-8805-4a61-bead-687b3967a20d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/12e3ced1-eedc-436a-8d50-94b1bf424508"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/133ee647-df82-436d-8a5c-cc5ee8f51c16"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/13804fbc-23cf-41bb-ad5e-2c5ad2affb65"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/13dfefdb-ef8b-4248-ae08-4453e63820a1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/17ba61b2-32ad-4fbc-a992-6c51c781d20e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/18e7bdb3-8437-4fbd-9d6c-a55817d03e4b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1b90522f-68d8-4cfb-95de-24b7b92917ed"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1cfc194a-d903-468d-b8dc-47ce8b02e24b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1d124bb9-fc3b-4e72-869a-c4e36d436111"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1d3770b1-37c9-4198-bc43-ddf183dd3989"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f2ec151-c468-417c-8597-8308e6ef659e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f630007-3a30-469e-8cee-dc7a3917d654"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2065969a-c23e-492d-8b77-ee6a963496bc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/225a37ee-fd64-437e-9345-7c910a63f89c"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2388eca8-ae4a-40bf-80ba-c3b2901f2b47"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/238b4d55-fa1f-447d-afa2-df07e45ccdfc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/03adf383-ed90-4a48-9cdd-cf91338663d3"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/e5d42bc7-e135-46dd-ae28-2e689ad56ed6"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/badef57a-fe6f-4f1b-bfd2-e721b3459be5"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/22953f1c-a3ca-4efb-8939-3861dfd43437"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/063ad525-52a2-45dd-96b1-7a17dd252558"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/331187f7-d0f5-468f-83aa-324a613a4f19"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/65a36f72-8834-4784-ac33-8f40ee42a3b4"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/6c97f77e-0ac8-4d48-b8f9-6ceb5f1754fb"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/19344070-72b8-45ab-8b15-c5c5ca5d9600"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/15ecbeeb-8c9b-43e1-9a5b-a44c53d4e3d6"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/30aff115-f411-4a5a-a193-a77af61c469d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/4ec44235-7ee8-4d39-bc77-7a24ad2b3bb2"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/b880a89e-cfc6-42ec-b49b-d3a6e323f8fa"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/7b61f7ff-a769-4cf2-b7e1-cf33e8b08643"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/0e2cc6e9-c6ff-43ce-be80-5bcce146a5ba"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/6e6d01fd-8aac-42b3-90d3-3f76d627c24b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/2329db85-1d7a-463b-8caf-aa4d69599b10"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-browse"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/9adefe75-43ec-441c-a3e0-abb0df72b967"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/09a94fb4-2538-4ca7-b0e9-7c7533ce246d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/e5b4db2b-0bbe-499f-8335-fd28bd35b0d0"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/b3174d20-ce28-4e95-a5e7-96463a8ddd20"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/3612a312-a213-40f2-aca2-c5900afbc4fe"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/018775a1-c531-4d89-bb61-5148b6a1df05"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0451e987-1bc1-498d-8494-a7b9be9adbb7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/08ee57fc-9c54-47a6-81b7-01b70d0b2092"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0a516c2c-9f7d-46a8-a983-661959673738"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0b38036f-3e99-420c-b870-89fe35d7a723"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/124bb802-8805-4a61-bead-687b3967a20d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/12e3ced1-eedc-436a-8d50-94b1bf424508"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/133ee647-df82-436d-8a5c-cc5ee8f51c16"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/13804fbc-23cf-41bb-ad5e-2c5ad2affb65"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/13dfefdb-ef8b-4248-ae08-4453e63820a1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/17ba61b2-32ad-4fbc-a992-6c51c781d20e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/18e7bdb3-8437-4fbd-9d6c-a55817d03e4b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1b90522f-68d8-4cfb-95de-24b7b92917ed"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1cfc194a-d903-468d-b8dc-47ce8b02e24b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1d124bb9-fc3b-4e72-869a-c4e36d436111"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1d3770b1-37c9-4198-bc43-ddf183dd3989"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f2ec151-c468-417c-8597-8308e6ef659e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f630007-3a30-469e-8cee-dc7a3917d654"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2065969a-c23e-492d-8b77-ee6a963496bc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/225a37ee-fd64-437e-9345-7c910a63f89c"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2388eca8-ae4a-40bf-80ba-c3b2901f2b47"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/238b4d55-fa1f-447d-afa2-df07e45ccdfc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-browse"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/018775a1-c531-4d89-bb61-5148b6a1df05"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0451e987-1bc1-498d-8494-a7b9be9adbb7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/08ee57fc-9c54-47a6-81b7-01b70d0b2092"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0a516c2c-9f7d-46a8-a983-661959673738"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0b38036f-3e99-420c-b870-89fe35d7a723"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/124bb802-8805-4a61-bead-687b3967a20d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/12e3ced1-eedc-436a-8d50-94b1bf424508"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/133ee647-df82-436d-8a5c-cc5ee8f51c16"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/13804fbc-23cf-41bb-ad5e-2c5ad2affb65"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/13dfefdb-ef8b-4248-ae08-4453e63820a1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/17ba61b2-32ad-4fbc-a992-6c51c781d20e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/18e7bdb3-8437-4fbd-9d6c-a55817d03e4b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1b90522f-68d8-4cfb-95de-24b7b92917ed"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1cfc194a-d903-468d-b8dc-47ce8b02e24b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1d124bb9-fc3b-4e72-869a-c4e36d436111"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1d3770b1-37c9-4198-bc43-ddf183dd3989"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f2ec151-c468-417c-8597-8308e6ef659e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f630007-3a30-469e-8cee-dc7a3917d654"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2065969a-c23e-492d-8b77-ee6a963496bc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/225a37ee-fd64-437e-9345-7c910a63f89c"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2388eca8-ae4a-40bf-80ba-c3b2901f2b47"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/238b4d55-fa1f-447d-afa2-df07e45ccdfc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/23e418a0-a3d9-471b-b0cc-76e555e210eb"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-browse"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a9237488-fb7d-4945-860f-72c7952846e5"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/018775a1-c531-4d89-bb61-5148b6a1df05"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0451e987-1bc1-498d-8494-a7b9be9adbb7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/08ee57fc-9c54-47a6-81b7-01b70d0b2092"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0a516c2c-9f7d-46a8-a983-661959673738"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0b38036f-3e99-420c-b870-89fe35d7a723"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/124bb802-8805-4a61-bead-687b3967a20d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/12e3ced1-eedc-436a-8d50-94b1bf424508"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/133ee647-df82-436d-8a5c-cc5ee8f51c16"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/13804fbc-23cf-41bb-ad5e-2c5ad2affb65"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/13dfefdb-ef8b-4248-ae08-4453e63820a1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/17ba61b2-32ad-4fbc-a992-6c51c781d20e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/18e7bdb3-8437-4fbd-9d6c-a55817d03e4b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1b90522f-68d8-4cfb-95de-24b7b92917ed"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1cfc194a-d903-468d-b8dc-47ce8b02e24b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1d124bb9-fc3b-4e72-869a-c4e36d436111"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1d3770b1-37c9-4198-bc43-ddf183dd3989"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f2ec151-c468-417c-8597-8308e6ef659e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f630007-3a30-469e-8cee-dc7a3917d654"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2065969a-c23e-492d-8b77-ee6a963496bc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/225a37ee-fd64-437e-9345-7c910a63f89c"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2388eca8-ae4a-40bf-80ba-c3b2901f2b47"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/238b4d55-fa1f-447d-afa2-df07e45ccdfc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-browse"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/329cc838-3a35-4338-b52f-e50c6e823d6c"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/018775a1-c531-4d89-bb61-5148b6a1df05"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0451e987-1bc1-498d-8494-a7b9be9adbb7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/08ee57fc-9c54-47a6-81b7-01b70d0b2092"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0a516c2c-9f7d-46a8-a983-661959673738"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0b38036f-3e99-420c-b870-89fe35d7a723"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/124bb802-8805-4a61-bead-687b3967a20d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/12e3ced1-eedc-436a-8d50-94b1bf424508"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/133ee647-df82-436d-8a5c-cc5ee8f51c16"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/13804fbc-23cf-41bb-ad5e-2c5ad2affb65"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/13dfefdb-ef8b-4248-ae08-4453e63820a1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/17ba61b2-32ad-4fbc-a992-6c51c781d20e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/18e7bdb3-8437-4fbd-9d6c-a55817d03e4b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1b90522f-68d8-4cfb-95de-24b7b92917ed"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1cfc194a-d903-468d-b8dc-47ce8b02e24b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1d124bb9-fc3b-4e72-869a-c4e36d436111"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1d3770b1-37c9-4198-bc43-ddf183dd3989"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f2ec151-c468-417c-8597-8308e6ef659e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f630007-3a30-469e-8cee-dc7a3917d654"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2065969a-c23e-492d-8b77-ee6a963496bc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/225a37ee-fd64-437e-9345-7c910a63f89c"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2388eca8-ae4a-40bf-80ba-c3b2901f2b47"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/238b4d55-fa1f-447d-afa2-df07e45ccdfc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/23e418a0-a3d9-471b-b0cc-76e555e210eb"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/recommendations"
+    },
+    {
+      "method": "POST",
+      "path": "/cdn-cgi/rum"
+    },
+    {
+      "method": "GET",
+      "path": "/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/index-DG8_x6Js.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/index-UTa257F5.css"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/PublicRecommendations-CTiJdmW2.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/RecommendationImageViewer-CzYgFqAi.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/ProductMetadata-C-_9x_7n.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/ImageLightbox-DnI6LcMO.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/index-BcM33xXs.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/ImageLightbox-DKnMaoxp.css"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/RecommendationImageViewer-BnZdvF0r.css"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/PublicRecommendations-DhYyKoQc.css"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/trips"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/trips"
+    },
+    {
+      "method": "POST",
+      "path": "/cdn-cgi/rum"
+    },
+    {
+      "method": "GET",
+      "path": "/favicon.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-browse/items"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a9237488-fb7d-4945-860f-72c7952846e5"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a11d28d5-08e5-463c-96e7-69b37e452cfe"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/49067b03-bc1b-4682-b795-958ed70155a4"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/5ce8299c-fbca-4e62-8d95-ff987011c9da"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/330be8fb-a9dd-4977-b670-3eb783890ce9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/b3b6d91c-f1c4-47d8-914b-60ec0a11b26d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/8b8ecfca-5824-4594-bea1-922ede028682"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/5dcd2470-3ba5-49b2-86f7-a299d5992f3e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/726bcdbe-017f-41d9-a096-4bbf5bf3ac40"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/4990375f-483a-4f6b-8f92-fa32226fe32a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/ce120d04-cdbe-44f4-b409-153f05eef930"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/6bfb4c16-4d92-474e-b4d3-572b6c58a7f9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/faf0a00e-409f-43e1-8580-e8d7c0becb2e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/39e8bbdd-6d09-4922-8c0d-0eba2d77802b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/62acb0af-3d5e-487f-b0d9-56a2f9bed74d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/ead7b100-2e45-4921-9e7d-6fcd4d6a2f99"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/85544695-9f84-4998-9b93-60fe549c75cf"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/fbfee300-0286-4d8e-a20c-50203df901a1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/284e0c28-de67-4720-9271-8288e22c9c5a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/27abf1ee-9432-4297-8d06-2652d1a5323a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/c67ca6b4-c00e-45f2-94b4-a992f4507573"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a97bd423-b7fc-4297-8cbe-bb284073d971"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/e97cb643-f220-4df7-ba4f-67b6bac35661"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/ba1001c9-4f81-47e0-8b65-4507242effb6"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/8826c999-74e3-432f-b389-fc0677368d68"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/47a9e61e-06f7-47b5-8756-866f207d7ceb"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/0a599456-ea4d-45c0-a807-322ac1f4dc82"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/ac1a7cbd-9e02-43dc-a0d2-c3c0990382e7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/4487add2-8886-4f15-9475-785e29ef8fe1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/d4c8ebec-2581-4483-9062-94887883f518"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/dc7a9037-5e84-4d45-90b0-1340e0251275"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/de83ee91-f176-4eaa-9415-899a9d0f67d7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/0f3911c3-457b-42b3-ab22-edfe295ddf2b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/5d7e01fa-64c1-4b50-a061-532e2acf81e2"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/0008f7a7-ac6e-4cc7-8902-212a7852da83"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/ee664e95-decb-41b6-b89a-ccdffb7aa89a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/0d908725-c439-4781-b66f-500f3a7ecdb3"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/3980ceec-0d7e-481c-94e6-f101f97d15bc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/058430ba-b4de-4fac-bab2-c0a94dc8db63"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/37100a47-dfb7-4f9d-9d2d-cc36b8dbe5f7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/1ae52851-45e9-4b40-b84e-ad45d50bd1be"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/4e1fb2db-af5d-451c-9a94-621021d83937"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/148dec1f-86bf-4cad-9a25-a0dcd01f2eb4"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-browse/items"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-25f8461c-bc02-3502-9d04-737dc16a5a47"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f630007-3a30-469e-8cee-dc7a3917d654"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/3612a312-a213-40f2-aca2-c5900afbc4fe"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/ee02fc80-e193-44e7-abcb-ebfaf52918a9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/fa62c990-7292-4e96-88a8-781c3d07c3e9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/971c610e-4985-44aa-b8c0-de3bf98a343d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-dda58e4b-a7ae-382f-a26d-686af3c107c2"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-840ef5e3-82a8-3268-8fd7-8769131cb190"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-d4ec4261-0e51-3d92-9e94-3ec90cdbd1bc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-5fee00a4-a9e2-3b27-af21-1c33dfde45cd"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/99902395-a899-466a-819b-f36c56d205b3"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/b3b6d91c-f1c4-47d8-914b-60ec0a11b26d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/b984dbc4-cc94-4b9e-9500-268e48fca801"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/90271d9b-e11e-4d41-a547-1d106f15e8ea"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/65bc2ffe-9745-478c-9bc5-4770cb9e8d1b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/f6d5869e-d64e-4e12-9610-66b0402767df"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/7935b705-d1a0-4ab0-97c9-7f2705bdb9a9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/c35e1a80-82f2-463a-bfee-ac31a6838130"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a15054fa-38e5-4beb-b701-e3deaaecd285"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-276c608a-c229-35b2-bfe4-37c4e0cb70bb"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/eef9cd10-9d7b-4b5b-a750-6a8b83571943"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/6e6d01fd-8aac-42b3-90d3-3f76d627c24b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/03adf383-ed90-4a48-9cdd-cf91338663d3"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/70cae517-5a6c-413d-8b96-9b47c27479da"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/35acd7d6-3dea-49e7-bf3b-7b6d221947e6"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/b2907cf4-cd9d-49c3-b19b-d30523f4b1e9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/96e003b5-6cf5-47d8-a595-84a345fc825f"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/5d58b725-e5cf-46c0-bcf7-fe632f1c0169"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/e452851c-59af-4326-a7d2-0d0f267a6d2e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/93638073-0aab-4df7-bf47-21a52972ba28"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/1f98e5a3-fbc9-4046-b4df-5d6c4b60cac3"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/0c5091d0-8e59-429d-bbbd-5a515f07f7d1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/09a94fb4-2538-4ca7-b0e9-7c7533ce246d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/494bea84-fc2c-4074-ad45-f5cb76f50c35"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/22e59dfd-972c-4fdc-857b-5f51f3d33f16"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/479ee3f5-cdfe-4815-ac2b-05afcf651778"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-browse/items"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/8dd9ef0b-5497-4849-a4a8-76c658e12156"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-09a01cfc-587e-368a-9c3a-c567b1e2ab54"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/b4d5f81c-3282-43d8-9f11-c0571bcdfae1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-549a3d04-ddbc-3a5e-9b1e-10fe06bb0728"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/dcb6f383-ca45-4426-8391-1472633b8664"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/38390f37-8420-4c69-ab7e-8616ae7dd8ca"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f2ec151-c468-417c-8597-8308e6ef659e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/ed790c05-affa-4d4f-80dc-7276aae04d1f"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/c0b46433-d257-4ae7-828b-62a6c433568e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-9fc97f75-48fd-35a2-ade3-a698a4829ef4"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-ecc59985-0cdd-3432-99bd-efa7c7791428"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/4fc887bc-0936-45dc-8c7a-fd6040e63187"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-74151553-8ba4-33c6-8146-9fb4c86ecaf4"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a472e3d7-df62-4c01-9389-6c01b2510151"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-122ce621-f39a-3a9e-b563-87b6db201b91"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0b38036f-3e99-420c-b870-89fe35d7a723"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/d24f5434-60a8-42fa-b8b7-82b0f3f0f262"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/96c3886a-72a0-417a-a530-6e901743e9f0"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/e10cef00-71ad-423f-8375-ae18028c63aa"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/c275f7c5-62d3-4186-94f1-eb708779a1c2"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-2f2a6098-5f1b-31e8-9172-034dd35708d9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/133ee647-df82-436d-8a5c-cc5ee8f51c16"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/d586762a-2c62-4124-bfce-de5afa26fbdd"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/987da748-ee7a-43cc-a804-9a4b9fc1b7cb"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/0049d7c4-4c26-4755-8a71-65a2a692888a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/80c5eaab-f2e6-4d2c-bb2b-0fd24f48eea3"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/ab6f1f29-36d6-4ac2-8d82-5488c1ed4322"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/33f52f13-2140-452c-a0d7-f431c84ae729"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/775288fb-c134-49a2-8704-b95a2e0ceb6d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/be5eeeff-4370-46a5-a890-ec47f69d9128"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/96784ffe-3ffd-4f0f-b115-f043c0b35023"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/e87f31ef-f701-4b44-a6e7-aa8fcd2a0fe8"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/68bc2614-98ad-45f2-801e-bcc629b82d9a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/77c6c9ca-f1c5-468b-921f-13ebf98faa4e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/98b5818f-858f-4ead-85db-7c50e6f0bbfc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/79208090-850a-41e1-8f01-366a389d9a34"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/57b03030-3ed9-4bf5-8a10-f8e170cc7d84"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/7e19e9d5-4365-4d00-a57d-6f0ecbf8d27c"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/d4fa6b6c-15a8-4085-8d89-5a7d8c8d81c1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-browse/items"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/3612a312-a213-40f2-aca2-c5900afbc4fe"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a9237488-fb7d-4945-860f-72c7952846e5"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a11d28d5-08e5-463c-96e7-69b37e452cfe"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/49067b03-bc1b-4682-b795-958ed70155a4"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/5ce8299c-fbca-4e62-8d95-ff987011c9da"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/330be8fb-a9dd-4977-b670-3eb783890ce9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/b3b6d91c-f1c4-47d8-914b-60ec0a11b26d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/8b8ecfca-5824-4594-bea1-922ede028682"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/5dcd2470-3ba5-49b2-86f7-a299d5992f3e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/726bcdbe-017f-41d9-a096-4bbf5bf3ac40"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/4990375f-483a-4f6b-8f92-fa32226fe32a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/ce120d04-cdbe-44f4-b409-153f05eef930"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/6bfb4c16-4d92-474e-b4d3-572b6c58a7f9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/faf0a00e-409f-43e1-8580-e8d7c0becb2e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/39e8bbdd-6d09-4922-8c0d-0eba2d77802b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/62acb0af-3d5e-487f-b0d9-56a2f9bed74d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/ead7b100-2e45-4921-9e7d-6fcd4d6a2f99"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/85544695-9f84-4998-9b93-60fe549c75cf"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/fbfee300-0286-4d8e-a20c-50203df901a1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/284e0c28-de67-4720-9271-8288e22c9c5a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/27abf1ee-9432-4297-8d06-2652d1a5323a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/c67ca6b4-c00e-45f2-94b4-a992f4507573"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a97bd423-b7fc-4297-8cbe-bb284073d971"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/e97cb643-f220-4df7-ba4f-67b6bac35661"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/03adf383-ed90-4a48-9cdd-cf91338663d3"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/8826c999-74e3-432f-b389-fc0677368d68"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/47a9e61e-06f7-47b5-8756-866f207d7ceb"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/0a599456-ea4d-45c0-a807-322ac1f4dc82"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/ac1a7cbd-9e02-43dc-a0d2-c3c0990382e7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/4487add2-8886-4f15-9475-785e29ef8fe1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/d4c8ebec-2581-4483-9062-94887883f518"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/dc7a9037-5e84-4d45-90b0-1340e0251275"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/de83ee91-f176-4eaa-9415-899a9d0f67d7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/0f3911c3-457b-42b3-ab22-edfe295ddf2b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/5d7e01fa-64c1-4b50-a061-532e2acf81e2"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/0008f7a7-ac6e-4cc7-8902-212a7852da83"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/ee664e95-decb-41b6-b89a-ccdffb7aa89a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/0d908725-c439-4781-b66f-500f3a7ecdb3"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/3980ceec-0d7e-481c-94e6-f101f97d15bc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/058430ba-b4de-4fac-bab2-c0a94dc8db63"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/37100a47-dfb7-4f9d-9d2d-cc36b8dbe5f7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/1ae52851-45e9-4b40-b84e-ad45d50bd1be"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/4e1fb2db-af5d-451c-9a94-621021d83937"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-browse/items"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/148dec1f-86bf-4cad-9a25-a0dcd01f2eb4"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/9934f832-5fde-4131-8d91-264cd9e31d7b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/5941215e-18bc-4f25-b4ba-def8fe070e8c"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/2adb9bd4-a5ee-440a-b378-a36786b5b69b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/3612a312-a213-40f2-aca2-c5900afbc4fe"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a9237488-fb7d-4945-860f-72c7952846e5"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a11d28d5-08e5-463c-96e7-69b37e452cfe"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/49067b03-bc1b-4682-b795-958ed70155a4"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/5ce8299c-fbca-4e62-8d95-ff987011c9da"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/330be8fb-a9dd-4977-b670-3eb783890ce9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/b3b6d91c-f1c4-47d8-914b-60ec0a11b26d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/8b8ecfca-5824-4594-bea1-922ede028682"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/5dcd2470-3ba5-49b2-86f7-a299d5992f3e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/726bcdbe-017f-41d9-a096-4bbf5bf3ac40"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/4990375f-483a-4f6b-8f92-fa32226fe32a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/ce120d04-cdbe-44f4-b409-153f05eef930"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/6bfb4c16-4d92-474e-b4d3-572b6c58a7f9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/faf0a00e-409f-43e1-8580-e8d7c0becb2e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/39e8bbdd-6d09-4922-8c0d-0eba2d77802b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/62acb0af-3d5e-487f-b0d9-56a2f9bed74d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/ead7b100-2e45-4921-9e7d-6fcd4d6a2f99"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/85544695-9f84-4998-9b93-60fe549c75cf"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/fbfee300-0286-4d8e-a20c-50203df901a1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/284e0c28-de67-4720-9271-8288e22c9c5a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/27abf1ee-9432-4297-8d06-2652d1a5323a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/c67ca6b4-c00e-45f2-94b4-a992f4507573"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a97bd423-b7fc-4297-8cbe-bb284073d971"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/e97cb643-f220-4df7-ba4f-67b6bac35661"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-browse/items"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a11d28d5-08e5-463c-96e7-69b37e452cfe"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/49067b03-bc1b-4682-b795-958ed70155a4"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/5ce8299c-fbca-4e62-8d95-ff987011c9da"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/330be8fb-a9dd-4977-b670-3eb783890ce9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/b3b6d91c-f1c4-47d8-914b-60ec0a11b26d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/8b8ecfca-5824-4594-bea1-922ede028682"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/5dcd2470-3ba5-49b2-86f7-a299d5992f3e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/726bcdbe-017f-41d9-a096-4bbf5bf3ac40"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/4990375f-483a-4f6b-8f92-fa32226fe32a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/ce120d04-cdbe-44f4-b409-153f05eef930"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/6bfb4c16-4d92-474e-b4d3-572b6c58a7f9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/faf0a00e-409f-43e1-8580-e8d7c0becb2e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/39e8bbdd-6d09-4922-8c0d-0eba2d77802b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/62acb0af-3d5e-487f-b0d9-56a2f9bed74d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/ead7b100-2e45-4921-9e7d-6fcd4d6a2f99"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/85544695-9f84-4998-9b93-60fe549c75cf"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/fbfee300-0286-4d8e-a20c-50203df901a1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/284e0c28-de67-4720-9271-8288e22c9c5a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/27abf1ee-9432-4297-8d06-2652d1a5323a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/c67ca6b4-c00e-45f2-94b4-a992f4507573"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a97bd423-b7fc-4297-8cbe-bb284073d971"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/e97cb643-f220-4df7-ba4f-67b6bac35661"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/ba1001c9-4f81-47e0-8b65-4507242effb6"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/98e8de5e-2122-451b-89c8-693439d90b60"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-browse/items"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/0c0c5bc1-6f3a-4103-aa6f-ac7fb260d98e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a9237488-fb7d-4945-860f-72c7952846e5"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a11d28d5-08e5-463c-96e7-69b37e452cfe"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/49067b03-bc1b-4682-b795-958ed70155a4"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/5ce8299c-fbca-4e62-8d95-ff987011c9da"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/330be8fb-a9dd-4977-b670-3eb783890ce9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/b3b6d91c-f1c4-47d8-914b-60ec0a11b26d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/8b8ecfca-5824-4594-bea1-922ede028682"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/5dcd2470-3ba5-49b2-86f7-a299d5992f3e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/726bcdbe-017f-41d9-a096-4bbf5bf3ac40"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/4990375f-483a-4f6b-8f92-fa32226fe32a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/ce120d04-cdbe-44f4-b409-153f05eef930"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/6bfb4c16-4d92-474e-b4d3-572b6c58a7f9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/faf0a00e-409f-43e1-8580-e8d7c0becb2e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/39e8bbdd-6d09-4922-8c0d-0eba2d77802b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/62acb0af-3d5e-487f-b0d9-56a2f9bed74d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/ead7b100-2e45-4921-9e7d-6fcd4d6a2f99"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/85544695-9f84-4998-9b93-60fe549c75cf"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/fbfee300-0286-4d8e-a20c-50203df901a1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/284e0c28-de67-4720-9271-8288e22c9c5a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/27abf1ee-9432-4297-8d06-2652d1a5323a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/c67ca6b4-c00e-45f2-94b4-a992f4507573"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a97bd423-b7fc-4297-8cbe-bb284073d971"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/e97cb643-f220-4df7-ba4f-67b6bac35661"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/ba1001c9-4f81-47e0-8b65-4507242effb6"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-browse/items"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a9237488-fb7d-4945-860f-72c7952846e5"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a11d28d5-08e5-463c-96e7-69b37e452cfe"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/49067b03-bc1b-4682-b795-958ed70155a4"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/5ce8299c-fbca-4e62-8d95-ff987011c9da"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/330be8fb-a9dd-4977-b670-3eb783890ce9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/b3b6d91c-f1c4-47d8-914b-60ec0a11b26d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/8b8ecfca-5824-4594-bea1-922ede028682"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/5dcd2470-3ba5-49b2-86f7-a299d5992f3e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/726bcdbe-017f-41d9-a096-4bbf5bf3ac40"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/4990375f-483a-4f6b-8f92-fa32226fe32a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/ce120d04-cdbe-44f4-b409-153f05eef930"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/6bfb4c16-4d92-474e-b4d3-572b6c58a7f9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/faf0a00e-409f-43e1-8580-e8d7c0becb2e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/39e8bbdd-6d09-4922-8c0d-0eba2d77802b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/62acb0af-3d5e-487f-b0d9-56a2f9bed74d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/ead7b100-2e45-4921-9e7d-6fcd4d6a2f99"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/85544695-9f84-4998-9b93-60fe549c75cf"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/fbfee300-0286-4d8e-a20c-50203df901a1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/284e0c28-de67-4720-9271-8288e22c9c5a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/27abf1ee-9432-4297-8d06-2652d1a5323a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/c67ca6b4-c00e-45f2-94b4-a992f4507573"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a97bd423-b7fc-4297-8cbe-bb284073d971"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/e97cb643-f220-4df7-ba4f-67b6bac35661"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/ba1001c9-4f81-47e0-8b65-4507242effb6"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/8826c999-74e3-432f-b389-fc0677368d68"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/47a9e61e-06f7-47b5-8756-866f207d7ceb"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/0a599456-ea4d-45c0-a807-322ac1f4dc82"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/ac1a7cbd-9e02-43dc-a0d2-c3c0990382e7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/4487add2-8886-4f15-9475-785e29ef8fe1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/d4c8ebec-2581-4483-9062-94887883f518"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/dc7a9037-5e84-4d45-90b0-1340e0251275"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/de83ee91-f176-4eaa-9415-899a9d0f67d7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/0f3911c3-457b-42b3-ab22-edfe295ddf2b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/5d7e01fa-64c1-4b50-a061-532e2acf81e2"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/0008f7a7-ac6e-4cc7-8902-212a7852da83"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/ee664e95-decb-41b6-b89a-ccdffb7aa89a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/0d908725-c439-4781-b66f-500f3a7ecdb3"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/3980ceec-0d7e-481c-94e6-f101f97d15bc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/058430ba-b4de-4fac-bab2-c0a94dc8db63"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/37100a47-dfb7-4f9d-9d2d-cc36b8dbe5f7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/1ae52851-45e9-4b40-b84e-ad45d50bd1be"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/4e1fb2db-af5d-451c-9a94-621021d83937"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/148dec1f-86bf-4cad-9a25-a0dcd01f2eb4"
+    },
+    {
+      "method": "GET",
+      "path": "/products"
+    },
+    {
+      "method": "GET",
+      "path": "/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/index-DG8_x6Js.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/index-UTa257F5.css"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/PublicProductCatalog-C-5lAGnV.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/RecommendationImageViewer-CzYgFqAi.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/ProductMetadata-C-_9x_7n.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/ImageLightbox-DnI6LcMO.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/index-BcM33xXs.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/ImageLightbox-DKnMaoxp.css"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/RecommendationImageViewer-BnZdvF0r.css"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/ProductMarkerBadges-BMoPKGke.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/ProductMarkerBadges-YtkPTPIq.css"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/ProductMarkerEditor-BXxa8TlW.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/ReloadOutlined-BcJurxg3.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/index-CCrokNax.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/SaveOutlined-BNnN8oCK.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/index-KJWgcCP0.js"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/trips"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/trips"
+    },
+    {
+      "method": "POST",
+      "path": "/cdn-cgi/rum"
+    },
+    {
+      "method": "GET",
+      "path": "/favicon.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-browse"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/018775a1-c531-4d89-bb61-5148b6a1df05"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0451e987-1bc1-498d-8494-a7b9be9adbb7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/08ee57fc-9c54-47a6-81b7-01b70d0b2092"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0a516c2c-9f7d-46a8-a983-661959673738"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0b38036f-3e99-420c-b870-89fe35d7a723"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/124bb802-8805-4a61-bead-687b3967a20d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/12e3ced1-eedc-436a-8d50-94b1bf424508"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/133ee647-df82-436d-8a5c-cc5ee8f51c16"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/13804fbc-23cf-41bb-ad5e-2c5ad2affb65"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/13dfefdb-ef8b-4248-ae08-4453e63820a1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/17ba61b2-32ad-4fbc-a992-6c51c781d20e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/18e7bdb3-8437-4fbd-9d6c-a55817d03e4b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1b90522f-68d8-4cfb-95de-24b7b92917ed"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1cfc194a-d903-468d-b8dc-47ce8b02e24b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1d124bb9-fc3b-4e72-869a-c4e36d436111"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1d3770b1-37c9-4198-bc43-ddf183dd3989"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f2ec151-c468-417c-8597-8308e6ef659e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f630007-3a30-469e-8cee-dc7a3917d654"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2065969a-c23e-492d-8b77-ee6a963496bc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/225a37ee-fd64-437e-9345-7c910a63f89c"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2388eca8-ae4a-40bf-80ba-c3b2901f2b47"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/238b4d55-fa1f-447d-afa2-df07e45ccdfc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/23e418a0-a3d9-471b-b0cc-76e555e210eb"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/e5d42bc7-e135-46dd-ae28-2e689ad56ed6"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/badef57a-fe6f-4f1b-bfd2-e721b3459be5"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/22953f1c-a3ca-4efb-8939-3861dfd43437"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/063ad525-52a2-45dd-96b1-7a17dd252558"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/57b03030-3ed9-4bf5-8a10-f8e170cc7d84"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/331187f7-d0f5-468f-83aa-324a613a4f19"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/65a36f72-8834-4784-ac33-8f40ee42a3b4"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/124710c0-5214-40dc-9dbf-fc14f97b2ca1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-browse"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/6e6d01fd-8aac-42b3-90d3-3f76d627c24b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/09a94fb4-2538-4ca7-b0e9-7c7533ce246d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-25f8461c-bc02-3502-9d04-737dc16a5a47"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f630007-3a30-469e-8cee-dc7a3917d654"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/3612a312-a213-40f2-aca2-c5900afbc4fe"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/971c610e-4985-44aa-b8c0-de3bf98a343d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/ee02fc80-e193-44e7-abcb-ebfaf52918a9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/fa62c990-7292-4e96-88a8-781c3d07c3e9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-dda58e4b-a7ae-382f-a26d-686af3c107c2"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-840ef5e3-82a8-3268-8fd7-8769131cb190"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-d4ec4261-0e51-3d92-9e94-3ec90cdbd1bc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/99902395-a899-466a-819b-f36c56d205b3"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-5fee00a4-a9e2-3b27-af21-1c33dfde45cd"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/b3b6d91c-f1c4-47d8-914b-60ec0a11b26d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/b984dbc4-cc94-4b9e-9500-268e48fca801"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/65bc2ffe-9745-478c-9bc5-4770cb9e8d1b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/90271d9b-e11e-4d41-a547-1d106f15e8ea"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/f6d5869e-d64e-4e12-9610-66b0402767df"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/7935b705-d1a0-4ab0-97c9-7f2705bdb9a9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a15054fa-38e5-4beb-b701-e3deaaecd285"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-276c608a-c229-35b2-bfe4-37c4e0cb70bb"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/c35e1a80-82f2-463a-bfee-ac31a6838130"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2eac6c3b-f799-45fe-95d1-f85e808d8892"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/39b211b7-efcc-4324-9fcc-f26eac0ce03a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-2fef0e5f-75d8-3fe3-83e6-f4aaa5ba74a3"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/eef9cd10-9d7b-4b5b-a750-6a8b83571943"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/03adf383-ed90-4a48-9cdd-cf91338663d3"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/b2907cf4-cd9d-49c3-b19b-d30523f4b1e9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/70cae517-5a6c-413d-8b96-9b47c27479da"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/35acd7d6-3dea-49e7-bf3b-7b6d221947e6"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/96e003b5-6cf5-47d8-a595-84a345fc825f"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/5d58b725-e5cf-46c0-bcf7-fe632f1c0169"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-browse"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/775288fb-c134-49a2-8704-b95a2e0ceb6d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/8dd9ef0b-5497-4849-a4a8-76c658e12156"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-09a01cfc-587e-368a-9c3a-c567b1e2ab54"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/b4d5f81c-3282-43d8-9f11-c0571bcdfae1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/dcb6f383-ca45-4426-8391-1472633b8664"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-549a3d04-ddbc-3a5e-9b1e-10fe06bb0728"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/38390f37-8420-4c69-ab7e-8616ae7dd8ca"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f2ec151-c468-417c-8597-8308e6ef659e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/ed790c05-affa-4d4f-80dc-7276aae04d1f"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-9fc97f75-48fd-35a2-ade3-a698a4829ef4"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/c0b46433-d257-4ae7-828b-62a6c433568e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-ecc59985-0cdd-3432-99bd-efa7c7791428"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/4fc887bc-0936-45dc-8c7a-fd6040e63187"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-74151553-8ba4-33c6-8146-9fb4c86ecaf4"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a472e3d7-df62-4c01-9389-6c01b2510151"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-122ce621-f39a-3a9e-b563-87b6db201b91"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0b38036f-3e99-420c-b870-89fe35d7a723"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/d24f5434-60a8-42fa-b8b7-82b0f3f0f262"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/96c3886a-72a0-417a-a530-6e901743e9f0"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/e10cef00-71ad-423f-8375-ae18028c63aa"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/c275f7c5-62d3-4186-94f1-eb708779a1c2"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-2f2a6098-5f1b-31e8-9172-034dd35708d9"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/133ee647-df82-436d-8a5c-cc5ee8f51c16"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-3fab591d-8b3d-3f30-84f9-806407d5e0cb"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/bobuy-rec-v1-2b831384-e39a-3c0d-9820-c5a57b1c4dc7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/d586762a-2c62-4124-bfce-de5afa26fbdd"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/987da748-ee7a-43cc-a804-9a4b9fc1b7cb"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/0049d7c4-4c26-4755-8a71-65a2a692888a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/ab6f1f29-36d6-4ac2-8d82-5488c1ed4322"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/80c5eaab-f2e6-4d2c-bb2b-0fd24f48eea3"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/33f52f13-2140-452c-a0d7-f431c84ae729"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/be5eeeff-4370-46a5-a890-ec47f69d9128"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-browse"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/3612a312-a213-40f2-aca2-c5900afbc4fe"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/018775a1-c531-4d89-bb61-5148b6a1df05"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0451e987-1bc1-498d-8494-a7b9be9adbb7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/08ee57fc-9c54-47a6-81b7-01b70d0b2092"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0a516c2c-9f7d-46a8-a983-661959673738"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0b38036f-3e99-420c-b870-89fe35d7a723"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/124bb802-8805-4a61-bead-687b3967a20d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/12e3ced1-eedc-436a-8d50-94b1bf424508"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/133ee647-df82-436d-8a5c-cc5ee8f51c16"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/13804fbc-23cf-41bb-ad5e-2c5ad2affb65"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/13dfefdb-ef8b-4248-ae08-4453e63820a1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/17ba61b2-32ad-4fbc-a992-6c51c781d20e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/18e7bdb3-8437-4fbd-9d6c-a55817d03e4b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1b90522f-68d8-4cfb-95de-24b7b92917ed"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1cfc194a-d903-468d-b8dc-47ce8b02e24b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1d124bb9-fc3b-4e72-869a-c4e36d436111"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1d3770b1-37c9-4198-bc43-ddf183dd3989"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f2ec151-c468-417c-8597-8308e6ef659e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f630007-3a30-469e-8cee-dc7a3917d654"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2065969a-c23e-492d-8b77-ee6a963496bc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/225a37ee-fd64-437e-9345-7c910a63f89c"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2388eca8-ae4a-40bf-80ba-c3b2901f2b47"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/238b4d55-fa1f-447d-afa2-df07e45ccdfc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/03adf383-ed90-4a48-9cdd-cf91338663d3"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/e5d42bc7-e135-46dd-ae28-2e689ad56ed6"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/badef57a-fe6f-4f1b-bfd2-e721b3459be5"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/22953f1c-a3ca-4efb-8939-3861dfd43437"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/063ad525-52a2-45dd-96b1-7a17dd252558"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/331187f7-d0f5-468f-83aa-324a613a4f19"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/65a36f72-8834-4784-ac33-8f40ee42a3b4"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-browse"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/6c97f77e-0ac8-4d48-b8f9-6ceb5f1754fb"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/19344070-72b8-45ab-8b15-c5c5ca5d9600"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/15ecbeeb-8c9b-43e1-9a5b-a44c53d4e3d6"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/30aff115-f411-4a5a-a193-a77af61c469d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/4ec44235-7ee8-4d39-bc77-7a24ad2b3bb2"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/b880a89e-cfc6-42ec-b49b-d3a6e323f8fa"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/7b61f7ff-a769-4cf2-b7e1-cf33e8b08643"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/0e2cc6e9-c6ff-43ce-be80-5bcce146a5ba"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/6e6d01fd-8aac-42b3-90d3-3f76d627c24b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/2329db85-1d7a-463b-8caf-aa4d69599b10"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/9adefe75-43ec-441c-a3e0-abb0df72b967"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/09a94fb4-2538-4ca7-b0e9-7c7533ce246d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/e5b4db2b-0bbe-499f-8335-fd28bd35b0d0"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/b3174d20-ce28-4e95-a5e7-96463a8ddd20"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/3612a312-a213-40f2-aca2-c5900afbc4fe"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/018775a1-c531-4d89-bb61-5148b6a1df05"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0451e987-1bc1-498d-8494-a7b9be9adbb7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/08ee57fc-9c54-47a6-81b7-01b70d0b2092"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0a516c2c-9f7d-46a8-a983-661959673738"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0b38036f-3e99-420c-b870-89fe35d7a723"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/124bb802-8805-4a61-bead-687b3967a20d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/12e3ced1-eedc-436a-8d50-94b1bf424508"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/133ee647-df82-436d-8a5c-cc5ee8f51c16"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/13804fbc-23cf-41bb-ad5e-2c5ad2affb65"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/13dfefdb-ef8b-4248-ae08-4453e63820a1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/17ba61b2-32ad-4fbc-a992-6c51c781d20e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/18e7bdb3-8437-4fbd-9d6c-a55817d03e4b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1b90522f-68d8-4cfb-95de-24b7b92917ed"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1cfc194a-d903-468d-b8dc-47ce8b02e24b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1d124bb9-fc3b-4e72-869a-c4e36d436111"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1d3770b1-37c9-4198-bc43-ddf183dd3989"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f2ec151-c468-417c-8597-8308e6ef659e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f630007-3a30-469e-8cee-dc7a3917d654"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2065969a-c23e-492d-8b77-ee6a963496bc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/225a37ee-fd64-437e-9345-7c910a63f89c"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2388eca8-ae4a-40bf-80ba-c3b2901f2b47"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/238b4d55-fa1f-447d-afa2-df07e45ccdfc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-browse"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/018775a1-c531-4d89-bb61-5148b6a1df05"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0451e987-1bc1-498d-8494-a7b9be9adbb7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/08ee57fc-9c54-47a6-81b7-01b70d0b2092"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0a516c2c-9f7d-46a8-a983-661959673738"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0b38036f-3e99-420c-b870-89fe35d7a723"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/124bb802-8805-4a61-bead-687b3967a20d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/12e3ced1-eedc-436a-8d50-94b1bf424508"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/133ee647-df82-436d-8a5c-cc5ee8f51c16"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/13804fbc-23cf-41bb-ad5e-2c5ad2affb65"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/13dfefdb-ef8b-4248-ae08-4453e63820a1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/17ba61b2-32ad-4fbc-a992-6c51c781d20e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/18e7bdb3-8437-4fbd-9d6c-a55817d03e4b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1b90522f-68d8-4cfb-95de-24b7b92917ed"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1cfc194a-d903-468d-b8dc-47ce8b02e24b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1d124bb9-fc3b-4e72-869a-c4e36d436111"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1d3770b1-37c9-4198-bc43-ddf183dd3989"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f2ec151-c468-417c-8597-8308e6ef659e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f630007-3a30-469e-8cee-dc7a3917d654"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2065969a-c23e-492d-8b77-ee6a963496bc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/225a37ee-fd64-437e-9345-7c910a63f89c"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2388eca8-ae4a-40bf-80ba-c3b2901f2b47"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/238b4d55-fa1f-447d-afa2-df07e45ccdfc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/23e418a0-a3d9-471b-b0cc-76e555e210eb"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-browse"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/a9237488-fb7d-4945-860f-72c7952846e5"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/018775a1-c531-4d89-bb61-5148b6a1df05"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0451e987-1bc1-498d-8494-a7b9be9adbb7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/08ee57fc-9c54-47a6-81b7-01b70d0b2092"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0a516c2c-9f7d-46a8-a983-661959673738"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/0b38036f-3e99-420c-b870-89fe35d7a723"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/124bb802-8805-4a61-bead-687b3967a20d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/12e3ced1-eedc-436a-8d50-94b1bf424508"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/133ee647-df82-436d-8a5c-cc5ee8f51c16"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/13804fbc-23cf-41bb-ad5e-2c5ad2affb65"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/13dfefdb-ef8b-4248-ae08-4453e63820a1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/17ba61b2-32ad-4fbc-a992-6c51c781d20e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/18e7bdb3-8437-4fbd-9d6c-a55817d03e4b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1b90522f-68d8-4cfb-95de-24b7b92917ed"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1cfc194a-d903-468d-b8dc-47ce8b02e24b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1d124bb9-fc3b-4e72-869a-c4e36d436111"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1d3770b1-37c9-4198-bc43-ddf183dd3989"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f2ec151-c468-417c-8597-8308e6ef659e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/1f630007-3a30-469e-8cee-dc7a3917d654"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2065969a-c23e-492d-8b77-ee6a963496bc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/225a37ee-fd64-437e-9345-7c910a63f89c"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/2388eca8-ae4a-40bf-80ba-c3b2901f2b47"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-popularity/238b4d55-fa1f-447d-afa2-df07e45ccdfc"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-sales"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/1b2c3339-6a00-4a3c-85eb-429e89913201"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-browse"
+    }
+  ]
+}
