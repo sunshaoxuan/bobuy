@@ -144,14 +144,27 @@ END $restore$;
 """
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('release')
-    args = parser.parse_args()
+    parser.add_argument('--mode', required=True, choices=('reference-data', 'maintenance'),
+                        help='Explicit release classification; no implicit snapshot/write-freeze path')
+    parser.add_argument('--plan', type=Path)
+    parser.add_argument('--plan-sha256')
+    parser.add_argument('--maintenance-reason')
+    args = parser.parse_args(argv)
     if not re.fullmatch(r'[0-9]{8}\.[1-9][0-9]*', args.release):
         raise ValueError('Invalid release tag')
     root = Path('/opt/bobuy')
     stage = root / 'releases' / args.release
+    if args.mode == 'reference-data':
+        if args.maintenance_reason or not args.plan or not args.plan_sha256:
+            parser.error('reference-data requires --plan and --plan-sha256, without maintenance options')
+        from reference_data_release import execute_reference_import
+        execute_reference_import(stage, args.plan, args.plan_sha256)
+        return
+    if args.plan or args.plan_sha256 or not args.maintenance_reason or not args.maintenance_reason.strip():
+        parser.error('maintenance requires --maintenance-reason and cannot accept a reference-data plan')
     backup = stage / 'backup'
     if os.geteuid() != 0 or not (stage / 'images.tar').is_file():
         raise RuntimeError('Run as root with the staged image archive')
@@ -159,6 +172,9 @@ def main():
         raise RuntimeError('Release already attempted; inspect its receipt before retrying')
     os.umask(0o077)
     backup.mkdir()
+    (stage / 'maintenance-assessment.json').write_text(json.dumps({
+        'mode': 'maintenance', 'reason': args.maintenance_reason,
+        'fullSnapshot': True, 'globalWriteFreeze': True}, indent=2) + '\n')
     compose = ['docker', 'compose', '--env-file', '/etc/bobuy.env', '-p', 'bobuy',
                '-f', str(root / 'docker-compose.yml'), '-f', str(root / 'compose.production.yml')]
     applications = ['core-service', 'ai-service', 'im-service', 'auth-service',
