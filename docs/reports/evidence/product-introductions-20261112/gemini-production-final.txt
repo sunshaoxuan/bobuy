@@ -2,7 +2,7 @@
 
 * **Actual Visible Defects:** None observed. Text renders cleanly with no clipping, awkward character collisions, overflowing containers, or broken glyphs.
 * **Doubts:** None on the rendered UI elements within these viewports. (The cursor icon with drop shadow near the bottom right of both screenshots is confirmed external/browser-extension noise as noted).
-* **Missing Evidence:** 
+* **Missing Evidence:**
   * The scope specifies a *four-language* review, but only **two** language crops (English and Japanese) are provided; screenshots for the remaining two languages are absent.
 
 ---
@@ -10,8 +10,8 @@
 ### 2. Assessment (Japanese 360px & Comparison with English)
 
 * **Introduction Readability:** Excellent. Font size, color contrast against the white canvas, and line-height (~1.5–1.6) allow comfortable scanning. Punctuation (`、`, `。`, `（）`) in the Japanese body copy follows standard typography without orphaned punctuation at line heads.
-* **Wrapping:** Natural and clean. 
-  * In Japanese, the packaging label (`本体容器1個＋カートリッジ5個／やさしいシトラス`) breaks predictably at the delimiter. 
+* **Wrapping:** Natural and clean.
+  * In Japanese, the packaging label (`本体容器1個＋カートリッジ5個／やさしいシトラス`) breaks predictably at the delimiter.
   * In English, the main title wraps cleanly across two lines (`Bathroom mold-prevention` / `product`) without clipping.
 * **Hierarchy:** Strong visual flow. Progression descends logically:
   1. Administrative utility bar (`管理操作` / `Management actions`)
