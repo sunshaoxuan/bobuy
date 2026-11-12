@@ -1,0 +1,13 @@
+{
+  "baseFrontend": {
+    "image": "sha256:e0af35862a5888f8b428eb09f3070cd6da3a1ea6158b287c334780067a73360c",
+    "tag": "bobuy/frontend:20261112.geographic_nav.1",
+    "revision": "f91681242ab688f25e39aa8481167f8fc0c8251a"
+  },
+  "baseCore": {
+    "image": "sha256:05cd202ae182bf3995622e85f255ee2daf2261444605fff7d7771e1e40d599d3",
+    "tag": "bobuy/core:20261112.geographic_master.1",
+    "revision": "b3caeec8c0b04a3144339f8e84ab334b53f81aa1"
+  },
+  "imageId": "sha256:6e1a97b795e86b15b702d72bfa716492cfc26f0fb6edce1ccdea4222818f7a2f"
+}

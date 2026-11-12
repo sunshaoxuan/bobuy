@@ -1,0 +1,69 @@
+Based on the provided screenshots, here is the visual QA review focused on the banner removal and the new `bobuy.cc` brand lockup.
+
+---
+
+### 1. Visible Defects
+
+1. **Desktop Sidebar: Lopsided Domain Alignment**
+   * **Region:** *Screenshot 1 & 3 (Desktop left sidebar, top brand block)*
+   * **Defect:** `bobuy.cc` is aligned flush-left with the red rounded square "B" logo icon, rather than aligning under the brand text `宝宝败` or centered across the entire icon + text lockup. This leaves noticeable empty space directly underneath `宝宝败`, making the lockup visually unbalanced.
+
+2. **Mobile Header: Logo Mark Omission**
+   * **Region:** *Screenshot 2 (Mobile top navigation bar)*
+   * **Defect:** The red rounded "B" icon displayed prominently on desktop is entirely missing on mobile. The header renders only text (`宝宝败` stacked above `bobuy.cc`), causing a visual identity mismatch between desktop and mobile.
+
+3. **Mobile Filter Chips: Abrupt Edge Truncation**
+   * **Region:** *Screenshot 2 (Mobile sub-header below `已显示 24 / 370 条内容`)*
+   * **Defect:** The category pills row cuts off abruptly at the right screen boundary (`家电数码 (` is sliced) without a visual affordance (such as an edge fade/gradient) indicating horizontal scrollability.
+
+---
+
+### 2. Brand Hierarchy
+
+* **Desktop (Sidebar):**
+  * The primary weight is on the red icon and the bold Chinese brand name `宝宝败`.
+  * `bobuy.cc` is rendered in a muted grey, smaller font, correctly functioning as secondary metadata/domain indicator. However, because it is tucked directly beneath the icon rather than treated as a subtitle to the name, it visually anchors to the icon box rather than reading as the site domain.
+* **Mobile (Top Bar):**
+  * Hierarchy between `宝宝败` (primary, bold, dark) and `bobuy.cc` (secondary, smaller, subdued grey) is clear and well-proportioned in vertical scale.
+
+---
+
+### 3. Alignment
+
+* **Desktop Sidebar (Screenshot 1 & 3):**
+  * The left boundary of the red logo and the left boundary of `bobuy.cc` align along the same vertical line.
+  * The navigation pill below (`好物推荐`) sits further inset due to its internal padding, meaning the logo, domain, and menu icons do not share a common vertical guide line.
+* **Mobile Header (Screenshot 2):**
+  * `宝宝败` and `bobuy.cc` are center-aligned relative to each other.
+  * Relative to the full viewport width, the center brand text appears slightly pushed left because the right-hand element (`简中 ⌵`) has a wider footprint than the left-hand hamburger menu button (`≡`).
+
+---
+
+### 4. Clipping
+
+* **Desktop (Screenshot 1 & 3):**
+  * No text clipping or container overflow is observed around the brand lockup, search bar, or page headings.
+* **Mobile (Screenshot 2):**
+  * The mobile header brand texts (`宝宝败` and `bobuy.cc`) fit comfortably without vertical or horizontal clipping.
+  * As noted in defects, horizontal clipping occurs on the category filter chips strip directly beneath the product count.
+
+---
+
+### 5. Spacing
+
+* **Intro Banner Removal (Screenshot 1 & 2):**
+  * With the homepage intro banner removed, the content (`本程好物` breadcrumb and `好物推荐` headline) directly follows the header search area.
+  * On desktop, the vertical breathing room between the search bar row and `本程好物` is clean and does not look excessively vacant or abruptly tight.
+* **Desktop Sidebar Lockup (Screenshot 3):**
+  * The vertical gap between the logo/brand line and `bobuy.cc` is relatively compact, while the space between `bobuy.cc` and the first active navigation item is noticeably larger.
+* **Mobile Header (Screenshot 2):**
+  * The vertical clearance above `宝宝败` and below `bobuy.cc` is balanced within the top bar height, maintaining clear separation from the search bar underneath.
+
+---
+
+### 6. Mobile Header
+
+* **Composition:**
+  * Layout: Hamburger icon (left), two-line brand lockup (center), language selector (right).
+  * The vertical stacking of `宝宝败` over `bobuy.cc` fits the compact mobile bar height without causing overflow into the search bar.
+  * The absence of the red "B" emblem reduces the app-like visual recognition present on the desktop experience.
