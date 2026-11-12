@@ -1,6 +1,7 @@
 import {useEffect,useState,type ReactNode} from 'react';
 import type {CardReference,StoreProduct,RecommendationFacts} from '../api';
 import {referencePriceDisplay} from '../referencePriceDisplay';
+import {productFactText} from '../productFactText';
 import {useI18n} from '../i18n';
 import CardPrice from './CardPrice';
 import {ProductBrand} from './ProductMetadata';
@@ -41,7 +42,7 @@ export default function CompactProductCard({name,originalName,language,brand,ite
   </div>
   <ProductStars value={rating} productId={productId} eager={eagerRating}/>
   <div className="compact-card-price" data-price-kind={kind} data-price-source-post={kind==='reference'?reference?.postId:undefined} data-price-source-item={kind==='reference'?reference?.itemId:undefined}>
-   {actual?<><CardPrice amount={actual.price} currency={actual.currency}/>{actual.saleUnit&&<small className="card-price-unit" title={actual.saleUnit}>/ {actual.saleUnit}</small>}</>:reference?.amount!=null?<><small className="card-price-label">{referenceLabel}</small><div className="compact-card-discount">{reduction!=null&&<><del title={t('detail.original_price')}>{money(original!)}</del><span className="compact-card-reduction" aria-label={t('detail.discount_amount')}>−{money(reduction)}</span></>}</div><CardPrice amount={reference.amount} currency={reference.currency} kind="reference"/>{reference.unit&&<small className="card-price-unit" title={reference.unit}>/ {reference.unit}</small>}</>:<small className="card-price-label">{t('card.price_unknown')}</small>}
+   {actual?<><CardPrice amount={actual.price} currency={actual.currency}/>{actual.saleUnit&&<small className="card-price-unit" title={productFactText(actual.saleUnit,locale)}>/ {productFactText(actual.saleUnit,locale)}</small>}</>:reference?.amount!=null?<><small className="card-price-label">{referenceLabel}</small><div className="compact-card-discount">{reduction!=null&&<><del title={t('detail.original_price')}>{money(original!)}</del><span className="compact-card-reduction" aria-label={t('detail.discount_amount')}>−{money(reduction)}</span></>}</div><CardPrice amount={reference.amount} currency={reference.currency} kind="reference"/>{reference.unit&&<small className="card-price-unit" title={productFactText(reference.unit,locale)}>/ {productFactText(reference.unit,locale)}</small>}</>:<small className="card-price-label">{t('card.price_unknown')}</small>}
   </div>
   {actions}
   <ProductPopularity id={productId}/>

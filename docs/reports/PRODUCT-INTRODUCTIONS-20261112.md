@@ -1,6 +1,40 @@
 # Product introductions, 2026-11-12
 
-## Final acceptance
+## Follow-up batch: official numbered descriptions and multilingual specifications
+
+User correction: numbered products may use explanations recognized by Costco or the product brand. Packaging/specification information must follow the selected Japanese, Simplified Chinese, Traditional Chinese or English language. Resume the same product-introduction objective and the existing authorization to verify and deploy. The previous introduction acceptance remains historical; packaging/price-unit localization is newly required and pending.
+
+Method: reconcile latest main and current production before mutation, retaining the gallery-upload-feedback release and other concurrent work. Revisit the five numbered pending records using official/brand-recognized sources, separating verified identity from package/variant uncertainty. Inventory actual current packaging, specification, model prose and reference price units across all public products and original linked source facts. Reuse existing translation/review/data contracts where sufficient; resolve the concrete display/data gap with the smallest maintainable implementation. Keep exact quantities, dimensions, ITEM identity and immutable historical price/source records. Localized display must describe the same source fact, including historical pack differences. Model codes and international units remain their factual identifiers.
+
+Completion: every identified packaging/specification and price-unit value displays appropriate four-language text in cards, catalogue details and recommendation details; numbered pending introductions are saved where official identity can be verified, with specific residual evidence gaps reported. Use normal version-checked UI saves for business content. Test unsupported/stale/mismatched identity boundaries, quantity preservation, four-language mobile/desktop wrapping and current public readback. Follow the existing source-bound release guards and protected-service/recovery rules. Batch independent copy and code work, freeze once, run affected checks and mandatory CI, then deploy and verify production. New longer metadata requires fresh final screenshots and Gemini review; no customer orders or unrelated stack/configuration changes.
+
+Initial observable gap: existing specification has a four-language map, while packaging/model and historical priceUnit are single strings and rendered directly. Determine the existing approved translation model before selecting the implementation. The earlier decision to leave Japanese packaging and units unchanged is superseded by this explicit correction.
+
+Implementation decision: use the existing frontend translation-resource pattern for exact, reviewed source literals in packaging, descriptive models and units. Prefer existing reviewed four-language specification values. No database, snapshot, master identity or price changes are needed to translate the presentation vocabulary. A typed shared helper resolves exact literals only, preserves international codes/units and leaves unknown source facts intact; a frozen current-catalogue coverage check rejects missing translations before delivery. Extend this resource when a new source literal enters the content workflow. Do not guess by substring replacement or infer quantities. The earlier JSONB-overlay advisory is rejected: old core has strict JSON record readers and writers reconstruct known fields, so that design would weaken rollback and require unnecessary migration. Source-backed numbered introductions remain a separate normal-UI content save within this batch.
+
+Visual budget: retain existing layout, gutters and controls. Test desktop1440 and mobile320/360, four languages, longest packaging/unit strings and model prose. New text must remain within existing content columns without horizontal overflow; price and small unit remain right aligned. No new interactive controls. Existing control geometry is unchanged; inspect complete screenshots and original-pixel detail crops before acceptance.
+
+Follow-up content result: four exact numbered products97443,93588,92956,92495 were verified from Costco's official2026-11-08 newsletter cards and saved via the normal reviewed UI. Each advanced version1 to2 exactly once, all other submitted fields unchanged. A fresh389-row UI audit confirms380 complete four-language introductions and9 remaining. Packaging/model source literals from all389 masters and public historical reference units are covered by245 reviewed translation entries;327 distinct source literals include unchanged international codes/units. See `evidence/product-spec-localization-20261112/coverage.json`, `official-sources.json`, `four-readback.json` and `unresolved-products.json`.
+
+Final candidate correction: the first stable full frontend run passed120 files/818 tests. Gemini identified English refill terminology inconsistency and an awkward Japanese heading wrap at320px. Corrected only the affected copy, with nonbreaking English quantity groups and a concise Japanese non-real-time label; the exact reviewed specification resource also suppresses a misleading source-language warning for the one previously untranslated Short specification. Final focused union:8 files/48 tests passed, final production build passed. Backend/schema/price/history inputs remain unchanged. Reuse the completed broad run for unaffected inputs; these explicit copy/field-warning changes invalidate the affected tests/build and English/Japanese visual evidence, which receive new checks and screenshots. Exact final-source CodeQL and production verification remain pending at candidate freeze.
+
+### Current9 pending products
+
+| Product | Missing evidence |
+|---|---|
+| Organic white figs, unnumbered | Brand, ITEM/barcode, package or exact official page; fresh versus dried identity remains unknown. |
+| Kirkland almond flour1.36kg, No.206609 | Package ITEM/barcode or official mapping to28609. The current official page explicitly identifies28609; preserve206609 and keep its introduction pending. |
+| Foam hand-soap refill, unnumbered | Brand/series, ITEM/barcode, capacity and exact label/page. |
+| Odor-targeting liquid laundry detergent, unnumbered | Brand/series/variant, ITEM/barcode, capacity and label/page. |
+| W-antibacterial dishwashing liquid, unnumbered | Brand/series/fragrance, ITEM/barcode and exact package/page. |
+| Mold-removal cleaner, unnumbered | Brand/series/type, ITEM/barcode and exact label/page. |
+| Liquid laundry detergent, unnumbered | Brand/series, machine type, fragrance/formula, ITEM/barcode and label/page. |
+| Folding table, unnumbered | Brand/model/ITEM, dimensions/material and exact label/page. |
+| Air Jet, unnumbered | Brand, product category, ITEM/variant and label/page. |
+
+Content maintenance: preserve existing four-language specification maps. Extend the exact-literal translation resource and its source-bound coverage fixture when a new packaging/model/price-unit literal is introduced; review equivalents and quantity combinations before publication. Unknown facts remain source facts and are reported by the coverage check. Do not translate historical units using a newer pack's facts.
+
+## Historical acceptance before the specification follow-up
 
 Result: PASS for the resumed296-save, four-language display, production delivery and13-item missing-evidence list. Core5a9bb64 is healthy; frontend3a8b11a became live at2026-11-12T03:29:15Z and its scoped operator verified unchanged core/protected services. The later main integration adds documentation and audit archives only; application inputs equal3a8b11a.
 

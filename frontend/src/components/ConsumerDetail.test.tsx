@@ -9,6 +9,16 @@ const mocks=vi.hoisted(()=>({productBrowse:vi.fn(),productDetail:vi.fn(),product
 vi.mock('../api',()=>({storefrontApi:mocks,productMarkerApi:mocks}));
 const source={name:'FX medicine',itemNumber:'26440',specification:'240 tablets',referencePrice:2820,originalPrice:3480,discountAmount:660,priceUnit:'240 tablets',offerStart:'2026-11-02',offerEnd:'2026-11-15',referenceContext:{channel:'COSTCO_ONLINE' as const,sourceUrl:'https://www.costco.co.jp/actual-source',startSearchComplete:true},referenceQuote:{state:'ACTIVE',amount:2820,itemIds:[1],unknownWindows:0}};
 beforeEach(()=>{vi.clearAllMocks();localStorage.setItem('bobbuy_locale','en-US');});
+it('localizes model prose, packaging and both source price units without changing their facts',()=>{
+ const facts={...source,priceUnit:'18枚入り1パック'},online={...source,priceUnit:'18枚×4パック／合計72枚'};
+ const before=JSON.stringify({facts,online});
+ const view=render(<I18nProvider><ProductDetailSpecs model="おやすみパンツ M" packaging="18枚入り1パック"/><DetailOffer facts={facts} online={online}/></I18nProvider>);
+ expect(view.container.textContent).toContain('Nighttime Pants M');
+ expect(view.container.querySelector('.consumer-reference-unit')).toHaveTextContent('18 pcs in 1 pack');
+ expect(view.container.querySelector('.consumer-online-price')).toHaveTextContent('18 pcs×4 packs / Total 72 pcs');
+ expect(view.container.textContent).not.toMatch(/[ぁ-ゖァ-ヺ]/u);
+ expect(JSON.stringify({facts,online})).toBe(before);
+});
 it('labels historical reference price as not real time and shows each source amount only once',()=>{
  const view=render(<I18nProvider><DetailOffer facts={source}/></I18nProvider>);
  expect(screen.getByRole('heading',{name:'Reference price (not real time)'})).toBeInTheDocument();expect(view.container.textContent?.match(/2,820/g)).toHaveLength(1);expect(view.container.textContent?.match(/JPY/g)).toHaveLength(1);expect(view.container.textContent).toContain('660');expect(view.container.textContent).toContain('3,480');
