@@ -44,6 +44,8 @@
 .marker-swatch { display:inline-block; width:16px; height:16px; border:1px solid #777; border-radius:2px; }
 .marker-drawer .ant-drawer-close { width:44px; height:44px; margin-inline-end:8px; }
 .catalog-master-detail .product-marker-badges { margin:12px 0; }
+.product-marker-badges .product-marker-with-period { align-items:center; gap:8px; max-width:100%; }
+.product-marker-period { display:flex; flex-direction:column; gap:2px; min-width:0; font-size:12px; line-height:18px; color:#595959; overflow-wrap:anywhere; }
 @media(max-width:767px) {
  .marker-form-row { grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
  .marker-heading { align-items:flex-start; }
