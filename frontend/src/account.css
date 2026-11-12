@@ -40,7 +40,7 @@
 .profile-social-account>.ant-form-item { margin-bottom:0; }
 .profile-social-account .ant-select-single { width:100%; height:44px; }
 .profile-platform-menu .ant-select-item-option { min-height:44px; margin-block:3px; display:flex; align-items:center; }
-.profile-platform-menu .ant-select-item-option-content { white-space:normal; overflow-wrap:anywhere; line-height:1.5; }
+.profile-platform-menu .ant-select-item-option-content { white-space:normal; overflow-wrap:anywhere; line-height:1.5; position:relative; top:-1.25px; }
 .profile-platform-menu .ant-select-item-option-selected .ant-select-item-option-content { position:relative; top:-1px; }
 .profile-platform-menu .ant-select-item-group { color:#707070; font-size:12px; padding-top:12px; }
 .profile-platform-empty { display:block; padding:12px 8px; color:#707070; font-size:13px; line-height:1.7; }

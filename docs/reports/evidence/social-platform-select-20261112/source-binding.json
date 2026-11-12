@@ -1,0 +1,23 @@
+{
+  "source": "16036b0264b1076063994acef905ca2e2bdffab1",
+  "changedFiles": [
+    "frontend/src/pages/AccountProfile.tsx",
+    "frontend/src/account.css",
+    "frontend/src/socialPlatforms.ts",
+    "frontend/src/locales/zh-CN.ts",
+    "frontend/src/locales/zh-TW.ts",
+    "frontend/src/locales/en-US.ts",
+    "frontend/src/locales/ja-JP.ts"
+  ],
+  "files": {
+    "frontend/src/pages/AccountProfile.tsx": "b42866f2b7314613fa73f83d640d61cc4591d10d7f7acbbefc459ff978762173",
+    "frontend/src/account.css": "51ee25fb73be49e0bf614f2d538910ccc1b1f37b179905240a75ddd3b42e13a3",
+    "frontend/src/socialPlatforms.ts": "6a59fa4c7c0aa109cfdde10e83077109c32f447f5dd4f9936d83f681944de278",
+    "frontend/src/locales/zh-CN.ts": "486f3aec64190217f3d9bdb35d285dfd9f4840bb1c92261d97770cb00943be07",
+    "frontend/src/locales/zh-TW.ts": "bd97193f2b70fa46493e5571ac61bc308c123a7c912ba3854766a9638e226656",
+    "frontend/src/locales/en-US.ts": "d8b364e4b0024780d8111f11c2b66e6fb42d2c103173f83a55822e5d232c51e1",
+    "frontend/src/locales/ja-JP.ts": "0488929b255a6309e129de683dfbcf529498521aab5130e838787d5fe31092ba",
+    "frontend/package-lock.json": "65076ca75b4b9e93f390aae56660356aea71c0317f639037faf24ab44924642e",
+    "frontend/nginx.conf": "c3a97167ab58eddd51c62453001d5fe2a5aabd807521d418feb0e21ff985a959"
+  }
+}

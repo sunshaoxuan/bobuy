@@ -51,11 +51,11 @@ def state(name):
  return {'image':c['Image'],'tag':c['Config']['Image'],'revision':c['Config']['Labels'].get('org.opencontainers.image.revision')}
 print(json.dumps({'baseFrontend':state('bobuy-frontend'),'baseCore':state('bobuy-core-service'),'imageId':json.loads(run(['docker','image','inspect',tag]))[0]['Id']}))
 """%(REMOTE,RELEASE,args.action,source,sha(E/'frontend-operator.py'),source)
-  data=json.loads(remote(build));assert data['baseFrontend']['revision']=='012013ad330f81f8c293148564860ed31fd7178c'
+  data=json.loads(remote(build));assert data['baseFrontend']['revision']=='87042bfbad767951fda84d38d0b293ef086863db'
   tests=json.loads((E/'tests.json').read_text(encoding='utf-8'));assert tests['success'] and not tests['numFailedTests']
   ci=json.loads(run(['gh','run','list','--workflow','codeql.yml','--commit',source,'--limit','1','--json','conclusion,headSha,url']))[0]
   assert ci['headSha']==source and ci['conclusion']=='success'
-  gates={'source':source,'result':'PASS','ci':'success','ciUrl':ci['url'],'focusedTests':tests['numPassedTests'],'typecheck':'PASS','i18nKeys':1628,'build':'PASS','nativeControlPixels':json.loads((E/'control-pixels.json').read_text(encoding='utf-8'))['result']}
+  gates={'source':source,'result':'PASS','ci':'success','ciUrl':ci['url'],'focusedTests':tests['numPassedTests'],'typecheck':'PASS','i18nKeys':1665,'build':'PASS','nativeControlPixels':json.loads((E/'control-pixels.json').read_text(encoding='utf-8'))['result']}
   assert gates['nativeControlPixels']=='PASS';write('gates.json',gates)
   artifact={'source':source,'release':RELEASE,'baseFrontend':data['baseFrontend'],'baseCore':data['baseCore'],'operatorSha256':sha(E/'frontend-operator.py'),'gatesSha256':sha(E/'gates.json'),'frontend':json.loads((E/'frontend-files.json').read_text(encoding='utf-8')),'images':[{'name':'frontend','tag':'bobuy/frontend:'+RELEASE,'imageId':data['imageId']}]};write('artifact.json',artifact)
   run(SCP+[str(E/'artifact.json'),str(E/'gates.json'),'root@185.184.223.41:'+REMOTE+'/'])

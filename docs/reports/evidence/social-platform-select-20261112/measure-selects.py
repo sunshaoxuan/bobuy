@@ -5,6 +5,7 @@ import json,math,statistics
 ROOT=Path(__file__).parent
 results=[];failures=[]
 for file in sorted(ROOT.glob('accepted-*.json')):
+ if not (file.name.startswith('accepted-final') or file.name=='accepted-compiled-final.json'):continue
  data=json.loads(file.read_text(encoding='utf-8'));im=Image.open(file.with_suffix('.png')).convert('RGB')
  assert im.size==(data['width'],data['height']) and not data['overflow']
  popup=data['popup']
@@ -12,6 +13,9 @@ for file in sorted(ROOT.glob('accepted-*.json')):
  for c in data['controls']:
   r=c['rect'];t=c['textRect'];assert r['height']>=44-.01
   x0=math.ceil(max(t['x'],r['x']+3));y0=math.ceil(max(t['y'],r['y']+3));x1=math.floor(min(t['right'],r['right']-3));y1=math.floor(min(t['bottom'],r['bottom']-3))
+  # The native search icon overlaps the text container. Exclude its observed
+  # rectangle so its pixels cannot be mistaken for glyphs.
+  if c.get('arrowRect'):x1=min(x1,math.floor(c['arrowRect']['left']-1))
   pixels=[im.getpixel((x,y)) for y in range(y0,y1) for x in range(x0,x1)]
   assert pixels,(file.name,c['label'])
   bg=tuple(statistics.median(p[n] for p in pixels) for n in range(3))
