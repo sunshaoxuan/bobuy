@@ -1,0 +1,9 @@
+{
+  "fixture": "real source facts, synthetic browser clock",
+  "before": "2026-11-08T14:59:59.500Z",
+  "after": "2026-11-08T15:00:01.500Z",
+  "beforePrice": 1198,
+  "afterPrice": 1498,
+  "onlineAfter": 1828,
+  "result": "PASS"
+}

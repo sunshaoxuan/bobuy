@@ -1,0 +1,13 @@
+{
+  "source": "d2ffb059bad921de51d2b61267095e52e6357c42",
+  "changedFiles": [
+    "frontend/src/pages/AccountProfile.tsx",
+    "frontend/src/account.css"
+  ],
+  "files": {
+    "frontend/src/pages/AccountProfile.tsx": "b8694b24cddde6330044fb1c8cd25577ebc098a90cbabb2e38ce06e8aa9953ed",
+    "frontend/src/account.css": "e6ed601df9b548f40d9dfc0cdd7bc4382ef3970a7e12536ad0ef64844a684558",
+    "frontend/package-lock.json": "65076ca75b4b9e93f390aae56660356aea71c0317f639037faf24ab44924642e",
+    "frontend/nginx.conf": "c3a97167ab58eddd51c62453001d5fe2a5aabd807521d418feb0e21ff985a959"
+  }
+}

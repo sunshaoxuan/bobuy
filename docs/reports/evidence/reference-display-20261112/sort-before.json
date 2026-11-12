@@ -1,0 +1,269 @@
+[
+  {
+    "width": 390,
+    "order": "price-asc",
+    "fixture": "unmodified real public issue7, actual displayed card amounts",
+    "data": [
+      {
+        "key": "7:240",
+        "code": "No.581590",
+        "currency": "JPY",
+        "amount": 998
+      },
+      {
+        "key": "7:239",
+        "code": "No.574225",
+        "currency": "JPY",
+        "amount": 1298
+      },
+      {
+        "key": "7:241",
+        "code": "No.29769",
+        "currency": "JPY",
+        "amount": 1378
+      },
+      {
+        "key": "7:237",
+        "code": "No.61472",
+        "currency": "JPY",
+        "amount": 1498
+      },
+      {
+        "key": "7:264",
+        "code": "No.57839",
+        "currency": "JPY",
+        "amount": 1428
+      },
+      {
+        "key": "7:253",
+        "code": "No.149126",
+        "currency": "JPY",
+        "amount": 1338
+      },
+      {
+        "key": "7:235",
+        "code": "No.14110",
+        "currency": "JPY",
+        "amount": 1848
+      },
+      {
+        "key": "7:236",
+        "code": "No.77839",
+        "currency": "JPY",
+        "amount": 1828
+      },
+      {
+        "key": "7:267",
+        "code": "No.80426",
+        "currency": "JPY",
+        "amount": 1880
+      },
+      {
+        "key": "7:242",
+        "code": "No.29267",
+        "currency": "JPY",
+        "amount": 1998
+      },
+      {
+        "key": "7:245",
+        "code": "No.568363",
+        "currency": "JPY",
+        "amount": 1598
+      },
+      {
+        "key": "7:238",
+        "code": "No.76820",
+        "currency": "JPY",
+        "amount": 2998
+      },
+      {
+        "key": "7:246",
+        "code": "No.26440",
+        "currency": "JPY",
+        "amount": 2820
+      },
+      {
+        "key": "7:252",
+        "code": "No.82855",
+        "currency": "JPY",
+        "amount": 2898
+      },
+      {
+        "key": "7:259",
+        "code": "No.89097",
+        "currency": "JPY",
+        "amount": 2898
+      },
+      {
+        "key": "7:270",
+        "code": "No.75822",
+        "currency": "JPY",
+        "amount": 3798
+      },
+      {
+        "key": "7:262",
+        "code": "No.79836",
+        "currency": "JPY",
+        "amount": 3658
+      },
+      {
+        "key": "7:263",
+        "code": "No.80261",
+        "currency": "JPY",
+        "amount": 3658
+      },
+      {
+        "key": "7:261",
+        "code": "No.44233",
+        "currency": "JPY",
+        "amount": 5398
+      },
+      {
+        "key": "7:265",
+        "code": "No.180288",
+        "currency": "JPY",
+        "amount": 5378
+      },
+      {
+        "key": "7:266",
+        "code": "No.180289",
+        "currency": "JPY",
+        "amount": 5378
+      },
+      {
+        "key": "7:268",
+        "code": "No.2566406",
+        "currency": "JPY",
+        "amount": 5998
+      },
+      {
+        "key": "7:258",
+        "code": "No.79835",
+        "currency": "JPY",
+        "amount": 5980
+      },
+      {
+        "key": "7:260",
+        "code": "No.87162",
+        "currency": "JPY",
+        "amount": 7998
+      }
+    ],
+    "violations": [
+      [
+        {
+          "key": "7:237",
+          "code": "No.61472",
+          "currency": "JPY",
+          "amount": 1498
+        },
+        {
+          "key": "7:264",
+          "code": "No.57839",
+          "currency": "JPY",
+          "amount": 1428
+        }
+      ],
+      [
+        {
+          "key": "7:264",
+          "code": "No.57839",
+          "currency": "JPY",
+          "amount": 1428
+        },
+        {
+          "key": "7:253",
+          "code": "No.149126",
+          "currency": "JPY",
+          "amount": 1338
+        }
+      ],
+      [
+        {
+          "key": "7:235",
+          "code": "No.14110",
+          "currency": "JPY",
+          "amount": 1848
+        },
+        {
+          "key": "7:236",
+          "code": "No.77839",
+          "currency": "JPY",
+          "amount": 1828
+        }
+      ],
+      [
+        {
+          "key": "7:242",
+          "code": "No.29267",
+          "currency": "JPY",
+          "amount": 1998
+        },
+        {
+          "key": "7:245",
+          "code": "No.568363",
+          "currency": "JPY",
+          "amount": 1598
+        }
+      ],
+      [
+        {
+          "key": "7:238",
+          "code": "No.76820",
+          "currency": "JPY",
+          "amount": 2998
+        },
+        {
+          "key": "7:246",
+          "code": "No.26440",
+          "currency": "JPY",
+          "amount": 2820
+        }
+      ],
+      [
+        {
+          "key": "7:270",
+          "code": "No.75822",
+          "currency": "JPY",
+          "amount": 3798
+        },
+        {
+          "key": "7:262",
+          "code": "No.79836",
+          "currency": "JPY",
+          "amount": 3658
+        }
+      ],
+      [
+        {
+          "key": "7:261",
+          "code": "No.44233",
+          "currency": "JPY",
+          "amount": 5398
+        },
+        {
+          "key": "7:265",
+          "code": "No.180288",
+          "currency": "JPY",
+          "amount": 5378
+        }
+      ],
+      [
+        {
+          "key": "7:268",
+          "code": "No.2566406",
+          "currency": "JPY",
+          "amount": 5998
+        },
+        {
+          "key": "7:258",
+          "code": "No.79835",
+          "currency": "JPY",
+          "amount": 5980
+        }
+      ]
+    ],
+    "errors": [],
+    "failures": []
+  }
+]
