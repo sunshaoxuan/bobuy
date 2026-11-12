@@ -1,0 +1,1159 @@
+
+> bobbuy-frontend@0.1.0 test
+> vitest run
+
+
+ RUN  v1.6.1 C:/Users/X02851/OneDrive - One人事株式会社/文档/ChatGPT/bobuy.cc/.task-tmp/home-brand-20261112/frontend
+
+ ✓ src/components/RecommendationIssueDateEditor.test.tsx  (41 tests) 4785ms
+stderr | src/components/IssueDirectory.test.tsx > starts closed with no directory request or layout placeholder (wide=true)
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+stderr | src/pages/RecommendationHistory.test.tsx > does not expose the selected Online source as main when aggregation fails and retries safely
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/components/IssueDirectory.test.tsx  (48 tests) 3884ms
+ ✓ src/pages/RecommendationHistory.test.tsx  (29 tests) 4960ms
+ ✓ src/pages/AccountProfile.test.tsx  (25 tests) 6909ms
+ ✓ src/components/PublishedArticleRevision.test.tsx  (17 tests) 4395ms
+stderr | src/components/ProductCatalogPanel.uploadFeedback.test.tsx > first-file failure remains visible and clears the picker so the same file can be chosen again
+Warning: The `value` prop supplied to <select> must be a scalar value if `multiple` is false.
+
+Check the render method of `Select`.
+    at select
+    at Select (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.uploadFeedback.test.tsx:4:34)
+    at CatalogCategorySelect (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\CatalogCategorySelect.tsx:9:34)
+    at label
+    at div
+    at div
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\TabPane.js:14:25
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at div
+    at TabPanelList (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\index.js:22:18)
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\Tabs.js:40:18
+    at Tabs (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\tabs\index.js:35:7)
+    at fieldset
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\DrawerPanel.js:17:5)
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPanel.js:18:25)
+    at div
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at DrawerPopup (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPopup.js:30:25)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\@rc-component\portal\lib\Portal.js:35:20
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\Drawer.js:18:27)
+    at NoFormStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\form\context.js:34:5)
+    at NoCompactStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\space\Compact.js:52:5)
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\index.js:38:7)
+    at section
+    at CatalogEditor (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:53:26)
+    at ProductCatalogPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:35:49)
+    at LocaleProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\locale\index.js:24:5)
+    at MotionWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\MotionWrapper.js:14:5)
+    at ProviderChildren (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:131:5)
+    at ConfigProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:402:25)
+    at I18nProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\i18n.tsx:62:25)
+
+stderr | src/pages/PublicProductMarkerEditing.test.tsx > skips the duplicate marked catalog request when the public scope has no marked products
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+stderr | src/components/ProductCatalogPanel.uploadFeedback.test.tsx > a middle failure retains the first uploaded asset/preview, leaves later files pending and never partially saves
+Warning: The `value` prop supplied to <select> must be a scalar value if `multiple` is false.
+
+Check the render method of `Select`.
+    at select
+    at Select (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.uploadFeedback.test.tsx:4:34)
+    at CatalogCategorySelect (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\CatalogCategorySelect.tsx:9:34)
+    at label
+    at div
+    at div
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\TabPane.js:14:25
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at div
+    at TabPanelList (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\index.js:22:18)
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\Tabs.js:40:18
+    at Tabs (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\tabs\index.js:35:7)
+    at fieldset
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\DrawerPanel.js:17:5)
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPanel.js:18:25)
+    at div
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at DrawerPopup (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPopup.js:30:25)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\@rc-component\portal\lib\Portal.js:35:20
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\Drawer.js:18:27)
+    at NoFormStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\form\context.js:34:5)
+    at NoCompactStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\space\Compact.js:52:5)
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\index.js:38:7)
+    at section
+    at CatalogEditor (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:53:26)
+    at ProductCatalogPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:35:49)
+    at LocaleProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\locale\index.js:24:5)
+    at MotionWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\MotionWrapper.js:14:5)
+    at ProviderChildren (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:131:5)
+    at ConfigProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:402:25)
+    at I18nProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\i18n.tsx:62:25)
+
+stderr | src/components/ProductCatalogPanel.uploadFeedback.test.tsx > duplicate bytes under different names or a reselected successful file reuse the SHA/asset without a second upload
+Warning: The `value` prop supplied to <select> must be a scalar value if `multiple` is false.
+
+Check the render method of `Select`.
+    at select
+    at Select (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.uploadFeedback.test.tsx:4:34)
+    at CatalogCategorySelect (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\CatalogCategorySelect.tsx:9:34)
+    at label
+    at div
+    at div
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\TabPane.js:14:25
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at div
+    at TabPanelList (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\index.js:22:18)
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\Tabs.js:40:18
+    at Tabs (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\tabs\index.js:35:7)
+    at fieldset
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\DrawerPanel.js:17:5)
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPanel.js:18:25)
+    at div
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at DrawerPopup (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPopup.js:30:25)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\@rc-component\portal\lib\Portal.js:35:20
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\Drawer.js:18:27)
+    at NoFormStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\form\context.js:34:5)
+    at NoCompactStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\space\Compact.js:52:5)
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\index.js:38:7)
+    at section
+    at CatalogEditor (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:53:26)
+    at ProductCatalogPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:35:49)
+    at LocaleProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\locale\index.js:24:5)
+    at MotionWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\MotionWrapper.js:14:5)
+    at ProviderChildren (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:131:5)
+    at ConfigProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:402:25)
+    at I18nProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\i18n.tsx:62:25)
+
+stderr | src/pages/StorefrontContext.test.tsx > keeps identity, node scope and cart while opening hidden-selector navigation on /products
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+stderr | src/components/ProductCatalogPanel.uploadFeedback.test.tsx > a slow response cannot append to another product or clear its loading state
+Warning: The `value` prop supplied to <select> must be a scalar value if `multiple` is false.
+
+Check the render method of `Select`.
+    at select
+    at Select (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.uploadFeedback.test.tsx:4:34)
+    at CatalogCategorySelect (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\CatalogCategorySelect.tsx:9:34)
+    at label
+    at div
+    at div
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\TabPane.js:14:25
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at div
+    at TabPanelList (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\index.js:22:18)
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\Tabs.js:40:18
+    at Tabs (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\tabs\index.js:35:7)
+    at fieldset
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\DrawerPanel.js:17:5)
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPanel.js:18:25)
+    at div
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at DrawerPopup (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPopup.js:30:25)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\@rc-component\portal\lib\Portal.js:35:20
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\Drawer.js:18:27)
+    at NoFormStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\form\context.js:34:5)
+    at NoCompactStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\space\Compact.js:52:5)
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\index.js:38:7)
+    at section
+    at CatalogEditor (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:53:26)
+    at ProductCatalogPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:35:49)
+    at LocaleProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\locale\index.js:24:5)
+    at MotionWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\MotionWrapper.js:14:5)
+    at ProviderChildren (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:131:5)
+    at ConfigProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:402:25)
+    at I18nProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\i18n.tsx:62:25)
+
+stderr | src/components/ProductCatalogPanel.uploadFeedback.test.tsx > a slow response cannot append to another product or clear its loading state
+Warning: The `value` prop supplied to <select> must be a scalar value if `multiple` is false.
+
+Check the render method of `Select`.
+    at select
+    at Select (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.uploadFeedback.test.tsx:4:34)
+    at CatalogCategorySelect (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\CatalogCategorySelect.tsx:9:34)
+    at label
+    at div
+    at div
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\TabPane.js:14:25
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at div
+    at TabPanelList (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\index.js:22:18)
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\Tabs.js:40:18
+    at Tabs (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\tabs\index.js:35:7)
+    at fieldset
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\DrawerPanel.js:17:5)
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPanel.js:18:25)
+    at div
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at DrawerPopup (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPopup.js:30:25)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\@rc-component\portal\lib\Portal.js:35:20
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\Drawer.js:18:27)
+    at NoFormStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\form\context.js:34:5)
+    at NoCompactStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\space\Compact.js:52:5)
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\index.js:38:7)
+    at section
+    at CatalogEditor (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:53:26)
+    at ProductCatalogPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:35:49)
+    at LocaleProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\locale\index.js:24:5)
+    at MotionWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\MotionWrapper.js:14:5)
+    at ProviderChildren (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:131:5)
+    at ConfigProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:402:25)
+    at I18nProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\i18n.tsx:62:25)
+
+stderr | src/components/ProductCatalogPanel.uploadFeedback.test.tsx > save failure preserves uploaded draft assets and a retry does not re-upload files
+Warning: The `value` prop supplied to <select> must be a scalar value if `multiple` is false.
+
+Check the render method of `Select`.
+    at select
+    at Select (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.uploadFeedback.test.tsx:4:34)
+    at CatalogCategorySelect (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\CatalogCategorySelect.tsx:9:34)
+    at label
+    at div
+    at div
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\TabPane.js:14:25
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at div
+    at TabPanelList (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\index.js:22:18)
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\Tabs.js:40:18
+    at Tabs (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\tabs\index.js:35:7)
+    at fieldset
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\DrawerPanel.js:17:5)
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPanel.js:18:25)
+    at div
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at DrawerPopup (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPopup.js:30:25)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\@rc-component\portal\lib\Portal.js:35:20
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\Drawer.js:18:27)
+    at NoFormStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\form\context.js:34:5)
+    at NoCompactStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\space\Compact.js:52:5)
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\index.js:38:7)
+    at section
+    at CatalogEditor (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:53:26)
+    at ProductCatalogPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:35:49)
+    at LocaleProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\locale\index.js:24:5)
+    at MotionWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\MotionWrapper.js:14:5)
+    at ProviderChildren (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:131:5)
+    at ConfigProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:402:25)
+    at I18nProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\i18n.tsx:62:25)
+
+stderr | src/components/ProductCatalogPanel.uploadFeedback.test.tsx > an account/session switch suppresses the prior upload and drops its private draft/status
+Warning: The `value` prop supplied to <select> must be a scalar value if `multiple` is false.
+
+Check the render method of `Select`.
+    at select
+    at Select (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.uploadFeedback.test.tsx:4:34)
+    at CatalogCategorySelect (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\CatalogCategorySelect.tsx:9:34)
+    at label
+    at div
+    at div
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\TabPane.js:14:25
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at div
+    at TabPanelList (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\index.js:22:18)
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\Tabs.js:40:18
+    at Tabs (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\tabs\index.js:35:7)
+    at fieldset
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\DrawerPanel.js:17:5)
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPanel.js:18:25)
+    at div
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at DrawerPopup (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPopup.js:30:25)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\@rc-component\portal\lib\Portal.js:35:20
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\Drawer.js:18:27)
+    at NoFormStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\form\context.js:34:5)
+    at NoCompactStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\space\Compact.js:52:5)
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\index.js:38:7)
+    at section
+    at CatalogEditor (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:53:26)
+    at ProductCatalogPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:35:49)
+    at LocaleProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\locale\index.js:24:5)
+    at MotionWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\MotionWrapper.js:14:5)
+    at ProviderChildren (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:131:5)
+    at ConfigProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:402:25)
+    at I18nProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\i18n.tsx:62:25)
+
+stderr | src/components/ProductCatalogPanel.uploadFeedback.test.tsx > an account/session switch suppresses the prior upload and drops its private draft/status
+Warning: The `value` prop supplied to <select> must be a scalar value if `multiple` is false.
+
+Check the render method of `Select`.
+    at select
+    at Select (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.uploadFeedback.test.tsx:4:34)
+    at CatalogCategorySelect (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\CatalogCategorySelect.tsx:9:34)
+    at label
+    at div
+    at div
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\TabPane.js:14:25
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at div
+    at TabPanelList (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\index.js:22:18)
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\Tabs.js:40:18
+    at Tabs (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\tabs\index.js:35:7)
+    at fieldset
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\DrawerPanel.js:17:5)
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPanel.js:18:25)
+    at div
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at DrawerPopup (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPopup.js:30:25)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\@rc-component\portal\lib\Portal.js:35:20
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\Drawer.js:18:27)
+    at NoFormStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\form\context.js:34:5)
+    at NoCompactStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\space\Compact.js:52:5)
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\index.js:38:7)
+    at section
+    at CatalogEditor (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:53:26)
+    at ProductCatalogPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:35:49)
+    at LocaleProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\locale\index.js:24:5)
+    at MotionWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\MotionWrapper.js:14:5)
+    at ProviderChildren (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:131:5)
+    at ConfigProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:402:25)
+    at I18nProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\i18n.tsx:62:25)
+
+stderr | src/components/ProductCatalogPanel.uploadFeedback.test.tsx > same-principal token refresh preserves the pending upload and unsaved assets
+Warning: The `value` prop supplied to <select> must be a scalar value if `multiple` is false.
+
+Check the render method of `Select`.
+    at select
+    at Select (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.uploadFeedback.test.tsx:4:34)
+    at CatalogCategorySelect (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\CatalogCategorySelect.tsx:9:34)
+    at label
+    at div
+    at div
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\TabPane.js:14:25
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at div
+    at TabPanelList (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\index.js:22:18)
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\Tabs.js:40:18
+    at Tabs (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\tabs\index.js:35:7)
+    at fieldset
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\DrawerPanel.js:17:5)
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPanel.js:18:25)
+    at div
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at DrawerPopup (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPopup.js:30:25)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\@rc-component\portal\lib\Portal.js:35:20
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\Drawer.js:18:27)
+    at NoFormStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\form\context.js:34:5)
+    at NoCompactStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\space\Compact.js:52:5)
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\index.js:38:7)
+    at section
+    at CatalogEditor (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:53:26)
+    at ProductCatalogPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:35:49)
+    at LocaleProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\locale\index.js:24:5)
+    at MotionWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\MotionWrapper.js:14:5)
+    at ProviderChildren (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:131:5)
+    at ConfigProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:402:25)
+    at I18nProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\i18n.tsx:62:25)
+
+stderr | src/components/ProductCatalogPanel.uploadFeedback.test.tsx > logout and same-user login in one render batch still invalidate the old upload operation
+Warning: The `value` prop supplied to <select> must be a scalar value if `multiple` is false.
+
+Check the render method of `Select`.
+    at select
+    at Select (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.uploadFeedback.test.tsx:4:34)
+    at CatalogCategorySelect (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\CatalogCategorySelect.tsx:9:34)
+    at label
+    at div
+    at div
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\TabPane.js:14:25
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at div
+    at TabPanelList (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\index.js:22:18)
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\Tabs.js:40:18
+    at Tabs (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\tabs\index.js:35:7)
+    at fieldset
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\DrawerPanel.js:17:5)
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPanel.js:18:25)
+    at div
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at DrawerPopup (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPopup.js:30:25)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\@rc-component\portal\lib\Portal.js:35:20
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\Drawer.js:18:27)
+    at NoFormStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\form\context.js:34:5)
+    at NoCompactStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\space\Compact.js:52:5)
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\index.js:38:7)
+    at section
+    at CatalogEditor (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:53:26)
+    at ProductCatalogPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:35:49)
+    at LocaleProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\locale\index.js:24:5)
+    at MotionWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\MotionWrapper.js:14:5)
+    at ProviderChildren (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:131:5)
+    at ConfigProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:402:25)
+    at I18nProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\i18n.tsx:62:25)
+
+stderr | src/pages/PublicProductMarkerEditing.test.tsx > keeps conflict draft and blocks close and duplicate writes while pending
+Warning: [antd: Modal] Static function can not consume context like dynamic theme. Please use 'App' component instead.
+
+stderr | src/components/ProductCatalogPanel.uploadFeedback.test.tsx > logout and same-user login in one render batch still invalidate the old upload operation
+Warning: The `value` prop supplied to <select> must be a scalar value if `multiple` is false.
+
+Check the render method of `Select`.
+    at select
+    at Select (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.uploadFeedback.test.tsx:4:34)
+    at CatalogCategorySelect (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\CatalogCategorySelect.tsx:9:34)
+    at label
+    at div
+    at div
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\TabPane.js:14:25
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at div
+    at TabPanelList (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\index.js:22:18)
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\Tabs.js:40:18
+    at Tabs (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\tabs\index.js:35:7)
+    at fieldset
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\DrawerPanel.js:17:5)
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPanel.js:18:25)
+    at div
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at DrawerPopup (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPopup.js:30:25)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\@rc-component\portal\lib\Portal.js:35:20
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\Drawer.js:18:27)
+    at NoFormStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\form\context.js:34:5)
+    at NoCompactStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\space\Compact.js:52:5)
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\index.js:38:7)
+    at section
+    at CatalogEditor (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:53:26)
+    at ProductCatalogPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:35:49)
+    at LocaleProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\locale\index.js:24:5)
+    at MotionWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\MotionWrapper.js:14:5)
+    at ProviderChildren (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:131:5)
+    at ConfigProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:402:25)
+    at I18nProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\i18n.tsx:62:25)
+
+stderr | src/components/ProductCatalogPanel.uploadFeedback.test.tsx > a source URL with a query fails visibly before uploading and still clears the captured picker
+Warning: The `value` prop supplied to <select> must be a scalar value if `multiple` is false.
+
+Check the render method of `Select`.
+    at select
+    at Select (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.uploadFeedback.test.tsx:4:34)
+    at CatalogCategorySelect (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\CatalogCategorySelect.tsx:9:34)
+    at label
+    at div
+    at div
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\TabPane.js:14:25
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at div
+    at TabPanelList (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\index.js:22:18)
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\Tabs.js:40:18
+    at Tabs (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\tabs\index.js:35:7)
+    at fieldset
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\DrawerPanel.js:17:5)
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPanel.js:18:25)
+    at div
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at DrawerPopup (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPopup.js:30:25)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\@rc-component\portal\lib\Portal.js:35:20
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\Drawer.js:18:27)
+    at NoFormStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\form\context.js:34:5)
+    at NoCompactStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\space\Compact.js:52:5)
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\index.js:38:7)
+    at section
+    at CatalogEditor (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:53:26)
+    at ProductCatalogPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:35:49)
+    at LocaleProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\locale\index.js:24:5)
+    at MotionWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\MotionWrapper.js:14:5)
+    at ProviderChildren (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:131:5)
+    at ConfigProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:402:25)
+    at I18nProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\i18n.tsx:62:25)
+
+ ✓ src/pages/StorefrontContext.test.tsx  (19 tests) 3820ms
+stderr | src/pages/PublicProductMarkerEditing.test.tsx > keeps conflict draft and blocks close and duplicate writes while pending
+Warning: [antd: Modal] Static function can not consume context like dynamic theme. Please use 'App' component instead.
+
+stderr | src/components/ProductCatalogPanel.uploadFeedback.test.tsx > a late preview cannot start a save under a different principal
+Warning: The `value` prop supplied to <select> must be a scalar value if `multiple` is false.
+
+Check the render method of `Select`.
+    at select
+    at Select (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.uploadFeedback.test.tsx:4:34)
+    at CatalogCategorySelect (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\CatalogCategorySelect.tsx:9:34)
+    at label
+    at div
+    at div
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\TabPane.js:14:25
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at div
+    at TabPanelList (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\index.js:22:18)
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\Tabs.js:40:18
+    at Tabs (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\tabs\index.js:35:7)
+    at fieldset
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\DrawerPanel.js:17:5)
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPanel.js:18:25)
+    at div
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at DrawerPopup (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPopup.js:30:25)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\@rc-component\portal\lib\Portal.js:35:20
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\Drawer.js:18:27)
+    at NoFormStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\form\context.js:34:5)
+    at NoCompactStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\space\Compact.js:52:5)
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\index.js:38:7)
+    at section
+    at CatalogEditor (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:53:26)
+    at ProductCatalogPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:35:49)
+    at LocaleProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\locale\index.js:24:5)
+    at MotionWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\MotionWrapper.js:14:5)
+    at ProviderChildren (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:131:5)
+    at ConfigProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:402:25)
+    at I18nProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\i18n.tsx:62:25)
+
+stderr | src/components/ProductCatalogPanel.uploadFeedback.test.tsx > a late preview cannot start a save under a different principal
+Warning: The `value` prop supplied to <select> must be a scalar value if `multiple` is false.
+
+Check the render method of `Select`.
+    at select
+    at Select (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.uploadFeedback.test.tsx:4:34)
+    at CatalogCategorySelect (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\CatalogCategorySelect.tsx:9:34)
+    at label
+    at div
+    at div
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\TabPane.js:14:25
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at div
+    at TabPanelList (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\index.js:22:18)
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\Tabs.js:40:18
+    at Tabs (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\tabs\index.js:35:7)
+    at fieldset
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\DrawerPanel.js:17:5)
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPanel.js:18:25)
+    at div
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at DrawerPopup (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPopup.js:30:25)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\@rc-component\portal\lib\Portal.js:35:20
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\Drawer.js:18:27)
+    at NoFormStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\form\context.js:34:5)
+    at NoCompactStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\space\Compact.js:52:5)
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\index.js:38:7)
+    at section
+    at CatalogEditor (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:53:26)
+    at ProductCatalogPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:35:49)
+    at LocaleProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\locale\index.js:24:5)
+    at MotionWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\MotionWrapper.js:14:5)
+    at ProviderChildren (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:131:5)
+    at ConfigProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:402:25)
+    at I18nProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\i18n.tsx:62:25)
+
+ ✓ src/components/ProductCatalogPanel.uploadFeedback.test.tsx  (11 tests) 7647ms
+stderr | src/pages/ProcurementHUD.test.tsx > ProcurementHUD Component > renders profit/load/reconcile sections
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/pages/ProcurementHUD.test.tsx  (1 test) 846ms
+ ✓ src/pages/PublicProductMarkerEditing.test.tsx  (17 tests) 7230ms
+ ✓ src/components/CustomerOrderAmendment.test.tsx  (10 tests) 280ms
+ ✓ src/browsePaging.test.tsx  (16 tests) 2233ms
+stderr | src/pages/RecommendationsItemPublication.test.tsx > publishes a ready post8 item alone while 1731065 stays pending; synchronous double clicks send once
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+
+stderr | src/pages/PublicProductCatalog.test.tsx > renders the reviewed current introduction without replacing historical offer data
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+stderr | src/pages/StockMaster.test.tsx > waits for persistence and keeps the drawer and entered values when saving fails
+[Sync] Failed: Error: Synthetic rejected save
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\pages\StockMaster.test.tsx:88:29
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\@testing-library\react\dist\act-compat.js:47:24
+    at act (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\react\cjs\react.development.js:2512:16)
+    at Proxy.<anonymous> (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\@testing-library\react\dist\act-compat.js:46:25)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\pages\StockMaster.test.tsx:88:8
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at runTest (file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/@vitest/runner/dist/index.js:781:11)
+    at runSuite (file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/@vitest/runner/dist/index.js:909:15)
+    at runFiles (file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/@vitest/runner/dist/index.js:958:5)
+
+stderr | src/pages/StockMaster.test.tsx > waits for persistence and keeps the drawer and entered values when saving fails
+Warning: [antd: message] Static function can not consume context like dynamic theme. Please use 'App' component instead.
+
+ ✓ src/pages/PublicProductCatalog.test.tsx  (17 tests) 2974ms
+ ✓ src/pages/RecommendationsItemPublication.test.tsx  (10 tests) 6417ms
+stderr | src/pages/StockMaster.test.tsx > StockMaster Component > opens editing drawer and updates values
+Warning: [antd: message] Static function can not consume context like dynamic theme. Please use 'App' component instead.
+
+stderr | src/pages/StockMaster.test.tsx > StockMaster Component > deletes a row when clicking the delete button
+Warning: [antd: message] Static function can not consume context like dynamic theme. Please use 'App' component instead.
+
+stderr | src/pages/StockMaster.test.tsx > StockMaster Component > shows error message and does not remove row when delete fails
+Delete failed: Error: Server error
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\pages\StockMaster.test.tsx:233:56
+    at file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/@vitest/runner/dist/index.js:135:14
+    at file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/@vitest/runner/dist/index.js:60:26
+    at runTest (file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/@vitest/runner/dist/index.js:781:17)
+    at runSuite (file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/@vitest/runner/dist/index.js:909:15)
+    at runSuite (file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/@vitest/runner/dist/index.js:909:15)
+    at runFiles (file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/@vitest/runner/dist/index.js:958:5)
+    at startTests (file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/@vitest/runner/dist/index.js:967:3)
+    at file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/vitest/dist/chunks/runtime-runBaseTests.oAvMKtQC.js:116:7
+    at withEnv (file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/vitest/dist/chunks/runtime-runBaseTests.oAvMKtQC.js:83:5)
+Warning: [antd: message] Static function can not consume context like dynamic theme. Please use 'App' component instead.
+
+ ✓ src/pages/StockMaster.test.tsx  (13 tests) 8535ms
+stderr | src/pages/RecommendationsIssueDate.test.tsx > an unsaved date review blocks item publication, and its saved version requires item review again
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+
+ ✓ src/components/RecommendationFromProduct.test.tsx  (9 tests) 2415ms
+stderr | src/pages/StorefrontCommerce.test.tsx > synchronously blocks double submit and retries an uncertain result with the identical key and payload
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+stderr | src/pages/StorefrontCommerce.test.tsx > synchronously blocks double submit and retries an uncertain result with the identical key and payload
+Warning: Instance created by `useForm` is not connected to any Form element. Forget to pass `form` prop?
+
+ ✓ src/pages/RecommendationsIssueDate.test.tsx  (6 tests) 8359ms
+ ✓ src/components/RecommendationIssueDatePanel.test.tsx  (16 tests) 1441ms
+ ✓ src/cartIsolation.test.tsx  (14 tests) 203ms
+ ✓ src/pages/StorefrontCommerce.test.tsx  (13 tests) 7161ms
+stderr | src/components/ChatWidget.test.tsx > ChatWidget > retries failed image scans and completes candidate-confirmation publish flow
+Warning: [antd: message] Static function can not consume context like dynamic theme. Please use 'App' component instead.
+
+stderr | src/components/ChatWidget.test.tsx > ChatWidget > retries failed image scans and completes candidate-confirmation publish flow
+Warning: [antd: message] Static function can not consume context like dynamic theme. Please use 'App' component instead.
+
+stderr | src/components/ChatWidget.test.tsx > ChatWidget > retries failed image scans and completes candidate-confirmation publish flow
+Warning: [antd: message] Static function can not consume context like dynamic theme. Please use 'App' component instead.
+
+stderr | src/components/ChatWidget.test.tsx > ChatWidget > keeps the last successful snapshot when refresh fails
+Warning: [antd: message] Static function can not consume context like dynamic theme. Please use 'App' component instead.
+
+stderr | src/components/ChatWidget.test.tsx > ChatWidget > queues optimistic messages offline and keeps them in local storage
+Warning: [antd: message] Static function can not consume context like dynamic theme. Please use 'App' component instead.
+
+ ✓ src/components/ChatWidget.test.tsx  (4 tests) 2131ms
+stderr | src/components/AiQuickAddModal.test.tsx > AiQuickAddModal > ignores a scan that finishes after closing and reopening
+Warning: Instance created by `useForm` is not connected to any Form element. Forget to pass `form` prop?
+
+stderr | src/components/ProductMarkerEditor.test.tsx > loads explicit zero/multiple sets, retains disabled selection visibility and saves latest version
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+stderr | src/pages/Recommendations.navigation.test.tsx > Back to List Cancel keeps every locale and explicit discard alone permits a fresh reopen
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+
+ ✓ src/components/ProductMarkerEditor.test.tsx  (12 tests) 2171ms
+stderr | src/components/AiQuickAddModal.test.tsx > AiQuickAddModal > falls back to manual entry when scan fails
+AI Onboarding Error: Error: error.ai.ocr_failed
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\AiQuickAddModal.test.tsx:163:43
+    at file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/@vitest/runner/dist/index.js:135:14
+    at file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/@vitest/runner/dist/index.js:60:26
+    at runTest (file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/@vitest/runner/dist/index.js:781:17)
+    at runSuite (file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/@vitest/runner/dist/index.js:909:15)
+    at runSuite (file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/@vitest/runner/dist/index.js:909:15)
+    at runFiles (file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/@vitest/runner/dist/index.js:958:5)
+    at startTests (file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/@vitest/runner/dist/index.js:967:3)
+    at file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/vitest/dist/chunks/runtime-runBaseTests.oAvMKtQC.js:116:7
+    at withEnv (file:///C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/vitest/dist/chunks/runtime-runBaseTests.oAvMKtQC.js:83:5)
+Warning: [antd: message] Static function can not consume context like dynamic theme. Please use 'App' component instead.
+
+ ✓ src/components/AiQuickAddModal.test.tsx  (7 tests) 3773ms
+stderr | src/components/ConsumerDetail.test.tsx > renders the real catalog detail entry once with one warehouse price and small Online annotation and unavailable medical purchasing
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/components/ConsumerDetail.test.tsx  (9 tests) 485ms
+ ✓ src/pages/Recommendations.navigation.test.tsx  (8 tests) 8365ms
+stderr | src/components/ProductCatalogPanel.test.tsx > edits four languages and requires review before versioned preview/save
+Warning: The `value` prop supplied to <select> must be a scalar value if `multiple` is false.
+
+Check the render method of `Select`.
+    at select
+    at Select (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.test.tsx:4:34)
+    at CatalogCategorySelect (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\CatalogCategorySelect.tsx:9:34)
+    at label
+    at div
+    at div
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\TabPane.js:14:25
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at div
+    at TabPanelList (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\index.js:22:18)
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\Tabs.js:40:18
+    at Tabs (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\tabs\index.js:35:7)
+    at fieldset
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\DrawerPanel.js:17:5)
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPanel.js:18:25)
+    at div
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at DrawerPopup (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPopup.js:30:25)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\@rc-component\portal\lib\Portal.js:35:20
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\Drawer.js:18:27)
+    at NoFormStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\form\context.js:34:5)
+    at NoCompactStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\space\Compact.js:52:5)
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\index.js:38:7)
+    at section
+    at CatalogEditor (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:53:26)
+    at ProductCatalogPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:35:49)
+    at LocaleProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\locale\index.js:24:5)
+    at MotionWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\MotionWrapper.js:14:5)
+    at ProviderChildren (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:131:5)
+    at ConfigProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:402:25)
+    at I18nProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\i18n.tsx:62:25)
+
+stderr | src/components/ProductCatalogPanel.test.tsx > restores a complete checkpoint explicitly and reports legacy state without saving it as canonical
+Warning: The `value` prop supplied to <select> must be a scalar value if `multiple` is false.
+
+Check the render method of `Select`.
+    at select
+    at Select (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.test.tsx:4:34)
+    at CatalogCategorySelect (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\CatalogCategorySelect.tsx:9:34)
+    at label
+    at div
+    at div
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\TabPane.js:14:25
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at div
+    at TabPanelList (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\index.js:22:18)
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\Tabs.js:40:18
+    at Tabs (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\tabs\index.js:35:7)
+    at fieldset
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\DrawerPanel.js:17:5)
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPanel.js:18:25)
+    at div
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at DrawerPopup (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPopup.js:30:25)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\@rc-component\portal\lib\Portal.js:35:20
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\Drawer.js:18:27)
+    at NoFormStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\form\context.js:34:5)
+    at NoCompactStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\space\Compact.js:52:5)
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\index.js:38:7)
+    at section
+    at CatalogEditor (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:53:26)
+    at ProductCatalogPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:35:49)
+    at LocaleProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\locale\index.js:24:5)
+    at MotionWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\MotionWrapper.js:14:5)
+    at ProviderChildren (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:131:5)
+    at ConfigProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:402:25)
+    at I18nProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\i18n.tsx:62:25)
+
+stderr | src/components/ProductCatalogPanel.test.tsx > keeps draft values across tabs and requires explicit discard on close
+Warning: The `value` prop supplied to <select> must be a scalar value if `multiple` is false.
+
+Check the render method of `Select`.
+    at select
+    at Select (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.test.tsx:4:34)
+    at CatalogCategorySelect (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\CatalogCategorySelect.tsx:9:34)
+    at label
+    at div
+    at div
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\TabPane.js:14:25
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at div
+    at TabPanelList (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\index.js:22:18)
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\Tabs.js:40:18
+    at Tabs (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\tabs\index.js:35:7)
+    at fieldset
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\DrawerPanel.js:17:5)
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPanel.js:18:25)
+    at div
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at DrawerPopup (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPopup.js:30:25)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\@rc-component\portal\lib\Portal.js:35:20
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\Drawer.js:18:27)
+    at NoFormStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\form\context.js:34:5)
+    at NoCompactStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\space\Compact.js:52:5)
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\index.js:38:7)
+    at section
+    at CatalogEditor (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:53:26)
+    at ProductCatalogPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:35:49)
+    at LocaleProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\locale\index.js:24:5)
+    at MotionWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\MotionWrapper.js:14:5)
+    at ProviderChildren (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:131:5)
+    at ConfigProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:402:25)
+    at I18nProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\i18n.tsx:62:25)
+
+ ✓ src/pages/MailSettings.test.tsx  (10 tests) 2934ms
+stderr | src/components/ProductCatalogPanel.test.tsx > locates the Japanese required-name error in the copy tab without an API write
+Warning: The `value` prop supplied to <select> must be a scalar value if `multiple` is false.
+
+Check the render method of `Select`.
+    at select
+    at Select (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.test.tsx:4:34)
+    at CatalogCategorySelect (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\CatalogCategorySelect.tsx:9:34)
+    at label
+    at div
+    at div
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\TabPane.js:14:25
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at div
+    at TabPanelList (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\TabPanelList\index.js:22:18)
+    at div
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-tabs\lib\Tabs.js:40:18
+    at Tabs (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\tabs\index.js:35:7)
+    at fieldset
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\DrawerPanel.js:17:5)
+    at div
+    at DrawerPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPanel.js:18:25)
+    at div
+    at DomWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\DomWrapper.js:20:34)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-motion\lib\CSSMotion.js:42:32
+    at div
+    at DrawerPopup (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\DrawerPopup.js:30:25)
+    at C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\@rc-component\portal\lib\Portal.js:35:20
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\rc-drawer\lib\Drawer.js:18:27)
+    at NoFormStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\form\context.js:34:5)
+    at NoCompactStyle (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\space\Compact.js:52:5)
+    at Drawer (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\drawer\index.js:38:7)
+    at section
+    at CatalogEditor (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:53:26)
+    at ProductCatalogPanel (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\components\ProductCatalogPanel.tsx:35:49)
+    at LocaleProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\locale\index.js:24:5)
+    at MotionWrapper (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\MotionWrapper.js:14:5)
+    at ProviderChildren (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:131:5)
+    at ConfigProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\frontend\node_modules\antd\lib\config-provider\index.js:402:25)
+    at I18nProvider (C:\Users\X02851\OneDrive - One人事株式会社\文档\ChatGPT\bobuy.cc\.task-tmp\home-brand-20261112\frontend\src\i18n.tsx:62:25)
+
+ ✓ src/components/ProductCatalogPanel.test.tsx  (6 tests) 3390ms
+ ✓ src/components/RecommendationServiceEditor.test.tsx  (8 tests) 3642ms
+ ✓ src/pages/__tests__/Orders.test.tsx  (5 tests) 3073ms
+ ✓ src/api.test.ts  (5 tests) 25ms
+ ✓ src/pages/ClientBilling.test.tsx  (3 tests) 748ms
+stderr | src/pages/Recommendations.test.tsx > Recommendations > keeps a multi-page image batch and validates per-image metadata
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+
+stderr | src/pages/RecommendationsRevisionRace.test.tsx > keeps real parent revision6 against late append v5 and accepts a legal newer result
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+
+ ✓ src/components/CatalogCategorySelect.test.tsx  (5 tests) 809ms
+ ✓ src/pages/Recommendations.test.tsx  (4 tests) 4502ms
+ ✓ src/pages/RecommendationsRevisionRace.test.tsx  (4 tests) 4586ms
+ ✓ src/components/CostcoOnboardingPanel.test.tsx  (5 tests) 274ms
+stderr | src/components/ProductRating.test.tsx > accepts nine score values while averages may lie between half points
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/components/ProductRating.test.tsx  (9 tests) 884ms
+stderr | src/pages/Recommendations.articleRevision.test.tsx > same-post late lower version cannot downgrade parent detail, title or body in one batched closure
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+
+ ✓ src/pages/Recommendations.articleRevision.test.tsx  (6 tests) 1221ms
+ ✓ src/productDetailContent.test.ts  (15 tests) 9ms
+stderr | src/pages/StoreNavigation.test.tsx > keeps node context in links and exact active state without inventing valid nodes
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/pages/StoreNavigation.test.tsx  (3 tests) 883ms
+ ✓ src/pages/ClientOrders.test.tsx  (8 tests) 1403ms
+ ✓ src/components/useDetailReturnFocus.test.tsx  (7 tests) 1193ms
+stderr | src/pages/ProductMarkerCatalog.test.tsx > allows the same product once in each section and uses inline public badges without private reads
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/pages/ProductMarkerCatalog.test.tsx  (7 tests) 1350ms
+ ✓ src/serviceOffer.test.ts  (11 tests) 14ms
+ ✓ src/components/CompactProductCard.test.tsx  (11 tests) 662ms
+ ✓ src/previewInset.test.js  (10 tests) 435ms
+stderr | src/pages/Suppliers.test.tsx > Suppliers page > submits structured onboarding rules when saving
+Warning: [antd: message] Static function can not consume context like dynamic theme. Please use 'App' component instead.
+
+ ✓ src/components/CostcoNumberOnboardingModal.test.tsx  (5 tests) 195ms
+stderr | src/pages/Suppliers.test.tsx > Suppliers page > creates a new supplier with onboarding rules
+Warning: [antd: message] Static function can not consume context like dynamic theme. Please use 'App' component instead.
+
+ ✓ src/pages/Suppliers.test.tsx  (6 tests) 2822ms
+ ✓ src/publicCatalog.test.ts  (16 tests) 13ms
+stderr | src/pages/PickingMaster.test.tsx > PickingMaster > renders reviewed picking checklist items and labels
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/pages/PickingMaster.test.tsx  (3 tests) 1519ms
+ ✓ src/api.issueDate.test.ts  (9 tests) 19ms
+stderr | src/components/RecommendationProductIntake.test.tsx > product intake > clue-only default never sends a display file or invents fields
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/components/RecommendationProductIntake.test.tsx  (4 tests) 1606ms
+ ✓ src/components/openCardDetail.test.tsx  (6 tests) 279ms
+ ✓ src/components/RecommendationFacts.test.tsx  (8 tests) 289ms
+ ✓ src/pages/ProductMarkers.test.tsx  (6 tests) 5492ms
+ ✓ src/components/ProductPricingPanel.test.tsx  (3 tests) 2153ms
+stderr | src/pages/OrderDesk.test.tsx > OrderDesk Component > sends text and renders parsed items in sidebar
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/pages/OrderDesk.test.tsx  (2 tests) 1259ms
+ ✓ src/components/ImageLightbox.test.tsx  (5 tests) 248ms
+stderr | src/components/RecommendationList.test.tsx > keeps a single keyboard link per issue with full title, status, cover and publication metadata
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/components/RecommendationList.test.tsx  (7 tests) 512ms
+stderr | src/components/RecommendationClassificationPublication.test.tsx > allows only the pending item in an already public issue to be selected and classified
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/components/RecommendationClassificationPublication.test.tsx  (2 tests) 1124ms
+stderr | src/pages/CatalogAutoReveal.test.tsx > does not request an offscreen section until activation, then pages only once per entry
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/pages/CatalogAutoReveal.test.tsx  (3 tests) 1295ms
+ ✓ src/hooks/useChatWebSocket.test.tsx  (4 tests) 173ms
+ ✓ src/recommendationSchedule.test.tsx  (6 tests) 37ms
+ ✓ src/components/ProductFeed.test.tsx  (4 tests) 566ms
+stderr | src/components/StoreNavigation.hiddenNode.test.tsx > omits selector and placeholder for 'zh-CN' / node=undefined / drawer=false
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/components/StoreNavigation.hiddenNode.test.tsx  (19 tests) 1276ms
+ ✓ src/components/SafeArticleText.test.tsx  (6 tests) 547ms
+stderr | src/components/SafeArticleText.test.tsx > never links a URL truncated by the actual article teaser; expanding exposes only the complete source address
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/referencePriceDisplay.test.ts  (6 tests) 8ms
+ ✓ src/pages/GeographicAreas.test.tsx  (3 tests) 1676ms
+ ✓ src/i18n.test.ts  (11 tests) 185ms
+ ✓ src/pages/__tests__/Trips.test.tsx  (4 tests) 6541ms
+stderr | src/pages/ProductArchive.test.tsx > uses one workspace and URL status while retaining active editor state and back navigation
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/pages/ProductArchive.test.tsx  (5 tests) 810ms
+ ✓ src/recommendationFilters.test.ts  (4 tests) 15ms
+ ✓ src/components/RecommendationWritingAssistant.test.tsx  (3 tests) 1042ms
+stderr | src/pages/ClientTripScope.test.tsx > shows only authorized executed statuses for the selected node and never fetches anonymously
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/pages/ClientTripScope.test.tsx  (2 tests) 706ms
+ ✓ src/components/RecommendationImageViewer.test.tsx  (6 tests) 278ms
+ ✓ src/pages/DeletedProducts.test.tsx  (3 tests) 1208ms
+ ✓ src/components/CardPrice.test.tsx  (3 tests) 234ms
+ ✓ src/components/ArticleLanguages.test.tsx  (2 tests) 1345ms
+ ✓ src/components/ProductPopularity.test.tsx  (4 tests) 495ms
+stderr | src/pages/Users.test.tsx > User management > edits both role checkboxes and keeps blank password
+Warning: [antd: message] Static function can not consume context like dynamic theme. Please use 'App' component instead.
+
+ ✓ src/pages/Users.test.tsx  (2 tests) 1677ms
+stderr | src/pages/RecommendationCategories.test.tsx > renders backend complete-scope facets, requests selected category and restores back without loading all occurrences
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/pages/RecommendationCategories.test.tsx  (2 tests) 1355ms
+stderr | src/pages/RecommendationBrowse.test.tsx > preserves paged occurrences on repeated visibility and focus without preloading the closed directory
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/imageUpload.test.ts  (5 tests) 24ms
+ ✓ src/pages/RecommendationBrowse.test.tsx  (2 tests) 1833ms
+ ✓ src/browseApi.test.ts  (4 tests) 34ms
+ ✓ src/productFactText.test.ts  (5 tests) 59ms
+ ✓ src/recommendationArticle.test.ts  (3 tests) 8ms
+stderr | src/pages/ClientHomeV2.test.tsx > ClientHomeV2 > renders zen home sections and live narrative
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/pages/ClientHomeV2.test.tsx  (1 test) 400ms
+ ✓ src/costcoOnboardingApi.test.ts  (6 tests) 22ms
+ ✓ src/productMarkers.test.ts  (6 tests) 10ms
+ ✓ src/components/SellingPrice.test.tsx  (6 tests) 200ms
+ ✓ src/components/MaintenanceNotice.test.tsx  (6 tests) 478ms
+✔ initial home HTML supplies truthful brand, canonical, structured data, header and crawlable public links (40.9199ms)
+ ✓ scripts/home-seo.test.mjs  (0 test) 2ms
+✔ sitemap exposes only verified public entry URLs and robots advertises the real XML endpoint (19.9878ms)
+✔ an already canonicalized SPA template is rejected instead of overwriting detail/private metadata (0.5095ms)
+ ✓ src/customerAmendmentApi.test.ts  (3 tests) 25ms
+stderr | src/pages/Currencies.test.tsx > serves the shared read-only directory on direct and compatibility routes in Basic data
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/pages/Currencies.test.tsx  (3 tests) 1360ms
+ ✓ src/referenceOfferWindow.test.tsx  (4 tests) 153ms
+ ✓ src/recommendationPublicationApi.test.ts  (3 tests) 13ms
+stderr | src/pages/LoginPage.test.tsx > LoginPage > logs in and redirects agent users to dashboard
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+
+ ✓ src/pages/LoginPage.test.tsx  (1 test) 1136ms
+ ✓ src/recommendationText.test.ts  (4 tests) 10ms
+ ✓ src/productMarkerApi.test.ts  (2 tests) 17ms
+stderr | src/components/SiteMetadata.test.tsx > keeps the brand metadata and home-only structured data without locale title override
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/components/SiteMetadata.test.tsx  (2 tests) 184ms
+ ✓ src/components/ReservationAdd.test.tsx  (3 tests) 202ms
+ ✓ src/imageUploadFeedback.test.ts  (4 tests) 14ms
+ ✓ src/pages/ServiceSummary.test.tsx  (5 tests) 213ms
+ ✓ src/previewQuoteLabels.test.tsx  (2 tests) 123ms
+ ✓ src/context/UserRoleContext.test.tsx  (2 tests) 42ms
+ ✓ src/components/OrderProductIdentity.test.tsx  (3 tests) 54ms
+ ✓ src/pages/AccountVerification.test.tsx  (5 tests) 775ms
+stderr | src/components/AiQuickAddModalDurable.test.tsx > queues the original photo once through shared durable input without legacy product confirmation
+Warning: Instance created by `useForm` is not connected to any Form element. Forget to pass `form` prop?
+
+ ✓ src/components/AiQuickAddModalDurable.test.tsx  (1 test) 346ms
+ ✓ src/components/MediaGallery.test.tsx  (2 tests) 421ms
+ ✓ src/components/ProtectedRoute.test.tsx  (3 tests) 54ms
+stderr | src/components/ProtectedRoute.test.tsx > ProtectedRoute > renders content when role is allowed
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+stderr | src/pages/Dashboard.test.tsx > Dashboard Component > renders dashboard correctly
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/pages/Dashboard.test.tsx  (1 test) 279ms
+ ✓ src/components/ProductMarkerBadges.test.tsx  (3 tests) 350ms
+ ✓ src/pages/AccountForm.test.tsx  (2 tests) 595ms
+ ✓ src/components/ReferenceQuoteHistory.test.tsx  (2 tests) 438ms
+ ✓ src/components/L10nInput.test.tsx  (2 tests) 385ms
+ ✓ src/components/LanguageSwitcher.test.tsx  (1 test) 857ms
+ ✓ src/components/StoredImage.test.tsx  (2 tests) 55ms
+ ✓ src/mediaUploadApi.test.ts  (2 tests) 8ms
+ ✓ src/cart.test.ts  (3 tests) 7ms
+ ✓ src/components/ProductMetadata.test.tsx  (2 tests) 89ms
+ ✓ src/authStorage.test.ts  (2 tests) 17ms
+ ✓ src/components/AccountShortcuts.test.tsx  (5 tests) 278ms
+stderr | src/components/AccountShortcuts.test.tsx > exposes only permitted account destinations (manage=false, order=/client/orders)
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/publicCatalogApi.test.ts  (1 test) 15ms
+
+ Test Files  121 passed (121)
+      Tests  822 passed (822)
+   Start at  18:42:56
+   Duration  334.45s (transform 6.68s, setup 135.26s, collect 696.71s, tests 184.04s, environment 207.03s, prepare 38.47s)
+
