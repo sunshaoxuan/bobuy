@@ -1,0 +1,400 @@
+Review this existing frontend upload-feedback candidate for concrete correctness, async scope or data-attribution bugs. Main agent owns all edits and decisions. Do not give visual/UI-layout advice. Requirements: each file has waiting/uploading/success/failed; partial successes remain draft; same-byte successes reuse asset; picker reset permits reselection; invalid source fails before upload; no automatic master save/retry/delete; product/account/logout/unmount invalidates stale async results; same-principal token refresh preserves draft. API upload does server validation and prepared-file conversion. Return blocking issues with exact code references and smallest necessary verification.
+
+diff --git a/frontend/src/components/ProductCatalogPanel.tsx b/frontend/src/components/ProductCatalogPanel.tsx
+index 1693d8d..c9629e6 100644
+--- a/frontend/src/components/ProductCatalogPanel.tsx
++++ b/frontend/src/components/ProductCatalogPanel.tsx
+@@ -1,21 +1,37 @@
+ import {useEffect,useRef,useState,useMemo} from 'react';
+ import {Alert,Button,Checkbox,Drawer,Input,Select,Table,Tabs,Grid,Modal,Segmented,type InputRef} from 'antd';
+-import {productCatalogApi,recommendationTaxonomyApi,type CatalogInput,type CatalogProposal,type RecommendationChoice} from '../api';
++import {productCatalogApi,recommendationTaxonomyApi,type CatalogInput,type CatalogMedia,type CatalogProposal,type RecommendationChoice} from '../api';
+ import {localizedContent,useI18n} from '../i18n';
+ import {PictureOutlined,UploadOutlined,CheckCircleOutlined,ArrowLeftOutlined,ArrowRightOutlined,DeleteOutlined,StarOutlined} from '@ant-design/icons';
+ import './productCatalog.css';
+ import {ImageLightbox} from './ImageLightbox';
+ import CatalogCategorySelect from './CatalogCategorySelect';
+-import {IMAGE_UPLOAD_ACCEPT} from '../imageUpload';
++import {IMAGE_UPLOAD_ACCEPT,copyFileList,imageUploadSha256,prepareImageUpload,validCatalogImageSource} from '../imageUpload';
++import {getStoredAccessToken,getStoredUser,getTestInjectedRole,getTestInjectedUser,subscribeToAuthChanges} from '../authStorage';
+ 
+ const languages=[{key:'ja-JP',label:'日本語'},{key:'zh-CN',label:'简体中文'},{key:'zh-TW',label:'繁體中文'},{key:'en-US',label:'English'}];
+-export default function ProductCatalogPanel({entries,id,onChoose,onSaved}:{entries:{key:string;name:string}[];id?:string;onChoose:(id?:string)=>void;onSaved:(rows:CatalogInput[],canonical?:boolean)=>void}){
++type PanelProps={entries:{key:string;name:string}[];id?:string;onChoose:(id?:string)=>void;onSaved:(rows:CatalogInput[],canonical?:boolean)=>void};
++type UploadRow={key:number;name:string;status:'waiting'|'uploading'|'success'|'failed';sha256?:string;asset?:CatalogMedia;error?:string;reused?:boolean};
++function uploadIdentity(){try{const user=getStoredUser();return JSON.stringify([user?.id??null,[...(user?.roles??[])].sort(),!!getStoredAccessToken(),getTestInjectedRole(),getTestInjectedUser()]);}catch{return 'storage-unavailable';}}
++export default function ProductCatalogPanel(props:PanelProps){
++ const [,refreshAuth]=useState(0),identity=uploadIdentity();const scope=useRef({id:props.id,identity,generation:0});
++ if(scope.current.id!==props.id||scope.current.identity!==identity)scope.current={id:props.id,identity,generation:scope.current.generation+1};
++ const expected=scope.current;const currentScope=()=>scope.current===expected&&uploadIdentity()===expected.identity;
++ useEffect(()=>subscribeToAuthChanges(()=>{const next=uploadIdentity();if(next!==scope.current.identity)scope.current={...scope.current,identity:next,generation:scope.current.generation+1};refreshAuth(n=>n+1);}),[]);
++ return <CatalogEditor key={expected.generation} {...props} currentScope={currentScope} onSaved={(rows,canonical)=>{if(currentScope())props.onSaved(rows,canonical);}}/>;
++}
++function CatalogEditor({entries,id,onChoose,onSaved,currentScope}:PanelProps&{currentScope:()=>boolean}){
+  const {t,locale}=useI18n();const [draft,setDraft]=useState<CatalogInput>(),[busy,setBusy]=useState(false),[error,setError]=useState(''),[reviewed,setReviewed]=useState(false),[canonical,setCanonical]=useState(false);
+  const [options,setOptions]=useState<{categories:RecommendationChoice[];suppliers:RecommendationChoice[]}>({categories:[],suppliers:[]});
+  const [audit,setAudit]=useState('');
+  const [recoveryId,setRecoveryId]=useState<string>(),[restoreOpen,setRestoreOpen]=useState(false),[sourceItems,setSourceItems]=useState<number[]>([]);
+  const [bulk,setBulk]=useState(false),[json,setJson]=useState(''),[rows,setRows]=useState<CatalogProposal[]>([]),[validated,setValidated]=useState(false),[selected,setSelected]=useState<React.Key[]>([]);
+  const [source,setSource]=useState(''),[imageReviewed,setImageReviewed]=useState(false);const fileInput=useRef<HTMLInputElement>(null);
++ const [uploads,setUploads]=useState<UploadRow[]>([]);const uploadSequence=useRef(0),uploadedAssets=useRef(new Map<string,CatalogMedia>()),savedGallery=useRef<CatalogMedia[]>([]);
++ const mounted=useRef(true),operation=useRef(0),uploadPending=useRef(false);
++ useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;operation.current++;};},[]);
++ function beginOperation(){const ticket=++operation.current;return()=>mounted.current&&currentScope()&&operation.current===ticket;}
++ const sameAsset=(a:CatalogMedia,b:CatalogMedia)=>a.url===b.url||!!(a.sha256&&b.sha256&&a.sha256===b.sha256);
+  const [activeImage,setActiveImage]=useState(0),[imageOpen,setImageOpen]=useState(false);const imageOpener=useRef<HTMLButtonElement>(null);
+  const previewPictures=useMemo(()=>draft?.gallery.map(p=>({id:p.sha256||p.url,url:p.url,label:localizedContent(p.title??{},locale)}))??[],[draft?.gallery,locale]);
+  useEffect(()=>setImageOpen(false),[id]);
+@@ -30,17 +46,40 @@ export default function ProductCatalogPanel({entries,id,onChoose,onSaved}:{entri
+  useEffect(()=>{if(!id||!narrow)return;const entry={key:'catalog-'+id+'-'+Date.now(),armed:true};sheetHistory.current=entry;window.history.pushState({...window.history.state,bobuyCatalogSheet:entry.key},'',window.location.href);const back=()=>{if(entry.armed&&window.history.state?.bobuyCatalogSheet!==entry.key){entry.armed=false;closeRef.current();}};window.addEventListener('popstate',back);return()=>{window.removeEventListener('popstate',back);if(entry.armed&&window.history.state?.bobuyCatalogSheet===entry.key)window.history.back();sheetHistory.current=undefined;};},[id,narrow]);
+  useEffect(()=>{if(!dirty)return;const warn=(event:BeforeUnloadEvent)=>{event.preventDefault();event.returnValue='';};window.addEventListener('beforeunload',warn);return()=>window.removeEventListener('beforeunload',warn);},[dirty]);
+  function keepEditing(){setDiscardOpen(false);const entry=sheetHistory.current;if(entry&&!entry.armed){window.history.pushState({...window.history.state,bobuyCatalogSheet:entry.key},'',window.location.href);entry.armed=true;}}
+- useEffect(()=>{if(!id)return;let active=true;setBusy(true);setActiveImage(0);setEditorTab('identity');setLanguage('ja-JP');setDraft(undefined);setRecoveryId(undefined);setRestoreOpen(false);setSourceItems([]);setError('');setReviewed(false);void Promise.all([productCatalogApi.get(id),recommendationTaxonomyApi.options()]).then(([profile,choices])=>{if(active){savedValue.current=JSON.stringify(profile.value);setDraft(profile.value);setCanonical(profile.canonical);setRecoveryId(profile.recoveryId);setSourceItems(profile.sourceItemIds??[]);setOptions(choices);}}).catch(e=>{if(active)setError(e.message);}).finally(()=>{if(active)setBusy(false);});return()=>{active=false;};},[id]);
++ useEffect(()=>{if(!id)return;let active=true;const current=beginOperation();setBusy(true);setActiveImage(0);setEditorTab('identity');setLanguage('ja-JP');setDraft(undefined);setRecoveryId(undefined);setRestoreOpen(false);setSourceItems([]);setError('');setReviewed(false);void Promise.all([productCatalogApi.get(id),recommendationTaxonomyApi.options()]).then(([profile,choices])=>{if(active&&current()){savedValue.current=JSON.stringify(profile.value);savedGallery.current=profile.value.gallery;setDraft(profile.value);setCanonical(profile.canonical);setRecoveryId(profile.recoveryId);setSourceItems(profile.sourceItemIds??[]);setOptions(choices);}}).catch(e=>{if(active&&current())setError(e.message);}).finally(()=>{if(active&&current())setBusy(false);});return()=>{active=false;};},[id]);
+  function patch(value:Partial<CatalogInput>){setDraft(prior=>prior?{...prior,...value}:prior);setReviewed(false);setError('');}
+  function text(field:'name'|'description'|'specification',language:string,value:string){if(draft)patch({[field]:{...draft[field],[language]:value}});}
+  function validDraft(){if(!draft)return false;if(!draft.name['ja-JP']?.trim()){setEditorTab('copy');setLanguage('ja-JP');setError('master.japanese_required');return false;}for(const [key,value] of Object.entries(draft.name)){if(value.length>400||(key!=='ja-JP'&&value.endsWith('（'+draft.name['ja-JP']+'）'))){setEditorTab('copy');setLanguage(key);setError(value.length>400?'master.invalid':'master.pure_name');return false;}}for(let index=0;index<draft.gallery.length;index++){try{const url=new URL(draft.gallery[index].sourceUrl??'');if(url.protocol!=='https:'||url.username||url.password||url.search||url.hash||url.href.length>2048)throw Error();}catch{setEditorTab('media');setActiveImage(index);setError('master.image_source');return false;}}return true;}
+  useEffect(()=>{if(error&&editorTab==='copy')nameInput.current?.focus();},[error,editorTab,language]);
+- async function saveOne(){if(!draft||!reviewed||!validDraft())return;setBusy(true);setError('');try{await productCatalogApi.preview([draft]);const result=await productCatalogApi.save([draft]);savedValue.current=JSON.stringify(result[0].value);setDraft(result[0].value);setCanonical(true);setRecoveryId(result[0].recoveryId);setSourceItems(result[0].sourceItemIds??[]);setReviewed(false);onSaved(result.map(row=>row.value));}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
++ async function saveOne(){if(busy||!draft||!reviewed||!validDraft())return;const current=beginOperation(),submitted=draft;setBusy(true);setError('');try{await productCatalogApi.preview([submitted]);if(!current())return;const result=await productCatalogApi.save([submitted]);if(!current())return;savedValue.current=JSON.stringify(result[0].value);savedGallery.current=result[0].value.gallery;setDraft(result[0].value);setCanonical(true);setRecoveryId(result[0].recoveryId);setSourceItems(result[0].sourceItemIds??[]);setReviewed(false);onSaved(result.map(row=>row.value));}catch(e){if(current())setError((e as Error).message);}finally{if(current())setBusy(false);}}
+  async function suggestions(){setBusy(true);setError('');setReviewed(false);setValidated(false);try{const proposals=(await productCatalogApi.proposals()).filter(row=>row.changes.length>0);setRows(proposals);setJson(JSON.stringify(proposals.map(row=>row.value),null,2));setSelected(proposals.map(row=>row.value.productId));}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
+  async function preview(){setBusy(true);setError('');setReviewed(false);try{const values:CatalogInput[]=JSON.parse(json);if(!Array.isArray(values)||!values.length||values.length>500)throw Error(t('master.invalid'));const results=await productCatalogApi.preview(values);setRows(results.map(row=>({...row,warnings:rows.find(old=>old.value.productId===row.value.productId)?.warnings??[]})));setSelected(prior=>prior.filter(key=>values.some(value=>value.productId===key)));setValidated(true);}catch(e){setError((e as Error).message);setValidated(false);}finally{setBusy(false);}}
+- async function restoreOne(){if(!draft||!recoveryId||dirty)return;setBusy(true);setError('');try{const result=await productCatalogApi.restore(draft.productId,recoveryId,draft.version);savedValue.current=JSON.stringify(result.value);setDraft(result.value);setCanonical(result.canonical);setRecoveryId(result.recoveryId);setSourceItems(result.sourceItemIds??[]);setReviewed(false);setRestoreOpen(false);onSaved([result.value],result.canonical);}catch(e){setError((e as Error).message);try{const current=await productCatalogApi.get(draft.productId);savedValue.current=JSON.stringify(current.value);setDraft(current.value);setCanonical(current.canonical);setRecoveryId(current.recoveryId);setSourceItems(current.sourceItemIds??[]);setRestoreOpen(false);onSaved([current.value],current.canonical);}catch{/* Preserve the original error and checkpoint; never resubmit automatically. */}}finally{setBusy(false);}}
++ async function restoreOne(){if(!draft||!recoveryId||dirty)return;const active=beginOperation();setBusy(true);setError('');try{const result=await productCatalogApi.restore(draft.productId,recoveryId,draft.version);if(!active())return;savedValue.current=JSON.stringify(result.value);savedGallery.current=result.value.gallery;setDraft(result.value);setCanonical(result.canonical);setRecoveryId(result.recoveryId);setSourceItems(result.sourceItemIds??[]);setReviewed(false);setRestoreOpen(false);onSaved([result.value],result.canonical);}catch(e){if(!active())return;setError((e as Error).message);try{const current=await productCatalogApi.get(draft.productId);if(!active())return;savedValue.current=JSON.stringify(current.value);savedGallery.current=current.value.gallery;setDraft(current.value);setCanonical(current.canonical);setRecoveryId(current.recoveryId);setSourceItems(current.sourceItemIds??[]);setRestoreOpen(false);onSaved([current.value],current.canonical);}catch{/* Preserve the original error and checkpoint; never resubmit automatically. */}}finally{if(active())setBusy(false);}}
+  async function saveBulk(){if(!validated||!reviewed)return;setBusy(true);setError('');try{const result=await productCatalogApi.save(rows.filter(row=>selected.includes(row.value.productId)).map(row=>row.value));onSaved(result.map(row=>row.value));const remaining=rows.filter(row=>!result.some(saved=>saved.value.productId===row.value.productId));setValidated(false);setReviewed(false);setRows(remaining);setJson(remaining.length?JSON.stringify(remaining.map(row=>row.value),null,2):'');setSelected([]);}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
+- async function upload(files:File[]){if(!draft||!imageReviewed||!source)return;setBusy(true);setError('');try{const pictures=[...draft.gallery];for(const file of files){const picture=await productCatalogApi.upload(draft.productId,file,source,file.name);if(!pictures.some(p=>p.url===picture.url||(p.sha256&&p.sha256===picture.sha256)))pictures.push(picture);}patch({gallery:pictures});setImageReviewed(false);if(fileInput.current)fileInput.current.value='';}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
++ async function upload(files:File[]){
++  if(busy||uploadPending.current||!draft||!imageReviewed||!source||!files.length||!currentScope())return;
++  const current=beginOperation(),productId=draft.productId,sourceUrl=source,pictures=[...draft.gallery];
++  const batch:UploadRow[]=files.map(file=>({key:++uploadSequence.current,name:file.name,status:'waiting'}));
++  const update=(key:number,change:Partial<UploadRow>)=>{if(current())setUploads(prior=>prior.map(row=>row.key===key?{...row,...change}:row));};
++  uploadPending.current=true;setBusy(true);setError('');setUploads(prior=>[...prior,...batch]);
++  try{
++   if(!validCatalogImageSource(sourceUrl)){setError('master.image_source');setUploads(prior=>prior.map(row=>batch.some(item=>item.key===row.key)?{...row,status:'failed',error:'master.image_source'}:row));return;}
++   for(let index=0;index<files.length;index++){
++    const row=batch[index];if(!current())return;update(row.key,{status:'uploading'});
++    try{
++     const prepared=await prepareImageUpload(files[index]);if(!current())return;
++     const sha256=await imageUploadSha256(prepared);if(!current())return;update(row.key,{sha256});
++     const known=uploadedAssets.current.get(sha256)??pictures.find(p=>p.sha256===sha256);
++     if(!known&&pictures.length>=100)throw new Error('gallery.invalid');
++     const asset=known??await productCatalogApi.upload(productId,prepared,sourceUrl,files[index].name);if(!current())return;
++     uploadedAssets.current.set(sha256,asset);if(asset.sha256)uploadedAssets.current.set(asset.sha256,asset);
++     if(!pictures.some(p=>sameAsset(p,asset)))pictures.push(asset);
++     setDraft(prior=>current()&&prior?.productId===productId?{...prior,gallery:[...pictures]}:prior);setReviewed(false);
++     update(row.key,{status:'success',asset,reused:!!known});
++    }catch(e){if(current()){const message=(e as Error).message;update(row.key,{status:'failed',error:message});setError(message);}break;}
++   }
++  }finally{uploadPending.current=false;if(current()){setBusy(false);setImageReviewed(false);}}
++ }
+  function reorder(index:number,next:number){if(!draft)return;const gallery=[...draft.gallery];const [picture]=gallery.splice(index,1);gallery.splice(next,0,picture);patch({gallery});}
+  const warning=(value:string)=>{const [key,detail]=value.split(':');return t(key)+(detail?' · '+detail:'');};
+  const cover=draft?.gallery[Math.min(activeImage,(draft?.gallery.length??1)-1)];
+@@ -73,8 +112,9 @@ export default function ProductCatalogPanel({entries,id,onChoose,onSaved}:{entri
+      {key:'media',label:t('products.media_tab'),children:<div className="catalog-tab-content">{error&&editorTab==='media'&&<Alert type="error" message={warning(error)}/>}<p className="catalog-image-guidance">{t('products.original_images')}</p>
+       {cover&&<label>{t('gallery.sources')}<Input value={cover.sourceUrl??''} onChange={e=>patch({gallery:draft.gallery.map((p,i)=>i===activeImage?{...p,sourceUrl:e.target.value}:p)})}/></label>}
+       <div className="catalog-upload-group"><strong>{t('products.add_images')}</strong><label>{t('gallery.sources')}<Input value={source} onChange={e=>setSource(e.target.value)} placeholder="https://…"/></label><Checkbox checked={imageReviewed} onChange={e=>setImageReviewed(e.target.checked)}>{t('gallery.ack')}</Checkbox>
+-       <p className="catalog-image-guidance">{t('gallery.format_hint')}</p><input className="catalog-file-input" ref={fileInput} aria-label={t('gallery.files')} type="file" accept={IMAGE_UPLOAD_ACCEPT} multiple disabled={!imageReviewed||!source||busy} onChange={e=>void upload(Array.from(e.target.files??[]))}/>
++       <p className="catalog-image-guidance">{t('gallery.format_hint')}</p><input className="catalog-file-input" ref={fileInput} aria-label={t('gallery.files')} type="file" accept={IMAGE_UPLOAD_ACCEPT} multiple disabled={!imageReviewed||!source||busy} onChange={e=>{const input=e.currentTarget,files=copyFileList(input.files);void upload(files).finally(()=>{input.value='';});}}/>
+        <Button icon={<UploadOutlined/>} disabled={!imageReviewed||!source||busy} onClick={()=>fileInput.current?.click()}>{t('gallery.files')}</Button><p className="catalog-image-guidance">{t('master.upload_hint')}</p>
++       {!!uploads.length&&<div style={{overflowWrap:'anywhere'}} aria-live="polite" aria-atomic="false"><ul aria-label={t('master.upload_status')}>{uploads.map(row=>{const saved=!!row.asset&&savedGallery.current.some(p=>sameAsset(p,row.asset!));return <li key={row.key}><strong>{row.name}</strong>: {t(row.status==='success'?(saved?'master.upload_saved':row.reused?'master.upload_reused':'master.upload_success'):'master.upload_'+row.status)}{row.error&&<span> — {warning(row.error)}</span>}{row.asset&&<details><summary>{t('master.upload_asset')}</summary><code>{row.asset.url}</code><code>{row.sha256}</code></details>}</li>;})}</ul>{uploads.some(row=>row.asset&&draft.gallery.some(p=>sameAsset(p,row.asset!))&&!savedGallery.current.some(p=>sameAsset(p,row.asset!)))&&<p role="status">{t('master.upload_unsaved')}</p>}{uploads.some(row=>row.status==='failed')&&<p>{t('master.upload_retry_hint')}</p>}</div>}
+       </div></div>}
+     ]}/>
+    </fieldset>}
+diff --git a/frontend/src/imageUpload.ts b/frontend/src/imageUpload.ts
+index c7470f1..fc1432f 100644
+--- a/frontend/src/imageUpload.ts
++++ b/frontend/src/imageUpload.ts
+@@ -4,6 +4,32 @@ export const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
+ const invalid = () => new Error('gallery.invalid');
+ const conversionFailed = () => new Error('gallery.conversion_failed');
+ 
++/** Snapshot the live picker list before any asynchronous work or input reset. */
++export const copyFileList = (files: FileList | null): File[] => Array.from(files ?? []);
++
++/** Mirror the existing catalog source rule. Never strip query/fragment to guess a source. */
++export function validCatalogImageSource(source: string): boolean {
++  try {
++    const url = new URL(source);
++    return source === source.trim() && source.length <= 2048 && url.protocol === 'https:'
++      && !url.username && !url.password && !url.search && !url.hash;
++  } catch { return false; }
++}
++
++/** Hash the prepared submission bytes, matching server-side asset reuse (also after WebP/AVIF conversion). */
++export async function imageUploadSha256(file: File): Promise<string> {
++  if (!file.size || file.size > MAX_IMAGE_BYTES) throw invalid();
++  if (!globalThis.crypto?.subtle) throw new Error('gallery.hash_unavailable');
++  const bytes = typeof file.arrayBuffer === 'function' ? await file.arrayBuffer() : await new Promise<ArrayBuffer>((resolve, reject) => {
++    const reader = new FileReader();
++    reader.onerror = () => reject(invalid());
++    reader.onload = () => reader.result instanceof ArrayBuffer ? resolve(reader.result) : reject(invalid());
++    reader.readAsArrayBuffer(file);
++  });
++  const digest = await crypto.subtle.digest('SHA-256', bytes);
++  return Array.from(new Uint8Array(digest), value => value.toString(16).padStart(2, '0')).join('');
++}
++
+ export async function prepareImageUpload(file: File): Promise<File> {
+   if (!file.size || file.size > MAX_IMAGE_BYTES) throw invalid();
+   const bytes = new Uint8Array(await file.slice(0, 512).arrayBuffer());
+diff --git a/frontend/src/locales/en-US.ts b/frontend/src/locales/en-US.ts
+index 19a0de7..2fe7167 100644
+--- a/frontend/src/locales/en-US.ts
++++ b/frontend/src/locales/en-US.ts
+@@ -2,6 +2,18 @@ import type { Dictionary } from './types';
+ import experience from './experience.en-US.json';
+ 
+ const messages: Dictionary = {
++  "master.upload_status": "Image upload status",
++  "master.upload_waiting": "Pending",
++  "master.upload_uploading": "Uploading",
++  "master.upload_success": "Uploaded",
++  "master.upload_failed": "Failed — not confirmed",
++  "master.upload_reused": "Reused uploaded image",
++  "master.upload_saved": "Saved to master",
++  "master.upload_unsaved": "Uploaded images are in this draft. Save the master to associate them.",
++  "master.upload_retry_hint": "Earlier confirmed uploads are kept. Check failed requests before selecting files again.",
++  "master.upload_asset": "Uploaded asset reference",
++  "gallery.hash_unavailable": "File verification is unavailable. No upload was started.",
++
+   "profile.title": "Your details",
+   "profile.name": "Name",
+   "profile.phone": "Phone (optional)",
+diff --git a/frontend/src/locales/ja-JP.ts b/frontend/src/locales/ja-JP.ts
+index 1a2425f..a7a0337 100644
+--- a/frontend/src/locales/ja-JP.ts
++++ b/frontend/src/locales/ja-JP.ts
+@@ -2,6 +2,18 @@ import type { Dictionary } from './types';
+ import experience from './experience.ja-JP.json';
+ 
+ const messages: Dictionary = {
++  "master.upload_status": "画像のアップロード状況",
++  "master.upload_waiting": "待機中",
++  "master.upload_uploading": "アップロード中",
++  "master.upload_success": "アップロード済み",
++  "master.upload_failed": "失敗／未確認",
++  "master.upload_reused": "アップロード済み画像を再利用",
++  "master.upload_saved": "商品マスターに保存済み",
++  "master.upload_unsaved": "アップロードした画像は現在の下書きに保持されています。商品マスターを保存して関連付けてください。",
++  "master.upload_retry_hint": "確認済みの画像は保持されます。失敗したリクエストを確認してから、ファイルを選び直してください。",
++  "master.upload_asset": "アップロード済み素材の参照",
++  "gallery.hash_unavailable": "現在ファイルを検証できません。アップロードは開始していません。",
++
+   "profile.title": "本人情報",
+   "profile.name": "氏名",
+   "profile.phone": "電話番号（任意）",
+diff --git a/frontend/src/locales/zh-CN.ts b/frontend/src/locales/zh-CN.ts
+index 84cbdbf..549eed2 100644
+--- a/frontend/src/locales/zh-CN.ts
++++ b/frontend/src/locales/zh-CN.ts
+@@ -2,6 +2,18 @@ import type { Dictionary } from './types';
+ import experience from './experience.zh-CN.json';
+ 
+ const messages: Dictionary = {
++  "master.upload_status": "图片上传状态",
++  "master.upload_waiting": "待上传",
++  "master.upload_uploading": "上传中",
++  "master.upload_success": "已上传",
++  "master.upload_failed": "失败／未确认",
++  "master.upload_reused": "已复用上传图片",
++  "master.upload_saved": "已保存到主档",
++  "master.upload_unsaved": "已上传图片保留在当前草稿中，请保存主档以完成关联。",
++  "master.upload_retry_hint": "已确认上传的图片会保留。请先核对失败请求，再重新选择文件。",
++  "master.upload_asset": "已上传素材凭据",
++  "gallery.hash_unavailable": "当前无法校验文件，尚未开始上传。",
++
+   "profile.title": "本人资料",
+   "profile.name": "姓名",
+   "profile.phone": "手机号（选填）",
+diff --git a/frontend/src/locales/zh-TW.ts b/frontend/src/locales/zh-TW.ts
+index ff15f5a..af58250 100644
+--- a/frontend/src/locales/zh-TW.ts
++++ b/frontend/src/locales/zh-TW.ts
+@@ -1,6 +1,18 @@
+ import type { Dictionary } from './types';
+ 
+ const messages: Dictionary = {
++  "master.upload_status": "圖片上傳狀態",
++  "master.upload_waiting": "待上傳",
++  "master.upload_uploading": "上傳中",
++  "master.upload_success": "已上傳",
++  "master.upload_failed": "失敗／未確認",
++  "master.upload_reused": "已重用上傳圖片",
++  "master.upload_saved": "已儲存至主檔",
++  "master.upload_unsaved": "已上傳圖片保留於目前草稿，請儲存主檔以完成關聯。",
++  "master.upload_retry_hint": "已確認上傳的圖片會保留。請先核對失敗請求，再重新選取檔案。",
++  "master.upload_asset": "已上傳素材憑據",
++  "gallery.hash_unavailable": "目前無法驗證檔案，尚未開始上傳。",
++
+   "profile.title": "本人資料",
+   "profile.name": "姓名",
+   "profile.phone": "手機號碼（選填）",
+
+Auth event implementation for scope review:
+export type UserRole = 'CUSTOMER' | 'AGENT';
+
+export type AuthenticatedUser = {
+  id: number;
+  username: string;
+  name: string;
+  roles: UserRole[];
+  platformAdmin?: boolean;
+  email?: string;
+  emailVerified?: boolean;
+};
+
+export type StoredAuthSession = {
+  accessToken: string;
+  refreshToken?: string | null;
+  accessTokenExpiresAt?: string | null;
+  refreshTokenExpiresAt?: string | null;
+  user: AuthenticatedUser;
+};
+
+const ACCESS_TOKEN_KEY = 'bobbuy_access_token';
+const REFRESH_TOKEN_KEY = 'bobbuy_refresh_token';
+const ACCESS_TOKEN_EXPIRES_AT_KEY = 'bobbuy_access_token_expires_at';
+const REFRESH_TOKEN_EXPIRES_AT_KEY = 'bobbuy_refresh_token_expires_at';
+const AUTH_USER_KEY = 'bobbuy_auth_user';
+const TEST_ROLE_KEY = 'bobbuy_test_role';
+const TEST_USER_KEY = 'bobbuy_test_user';
+const AUTH_CHANGED_EVENT = 'bobbuy-auth-changed';
+const CSRF_TOKEN_COOKIE = 'bobbuy_csrf_token';
+
+export const isLocalAuthOverrideEnabled = () =>
+  typeof window !== 'undefined' &&
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
+function dispatchAuthChanged() {
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new Event(AUTH_CHANGED_EVENT));
+  }
+}
+
+function parseStoredUser(value: string | null): AuthenticatedUser | null {
+  if (!value) {
+    return null;
+  }
+  try {
+    const parsed = JSON.parse(value) as Partial<AuthenticatedUser>;
+    if (
+      typeof parsed.id === 'number' &&
+      typeof parsed.username === 'string' &&
+      typeof parsed.name === 'string' &&
+      Array.isArray(parsed.roles) && parsed.roles.length > 0 &&
+      parsed.roles.every(role => role === 'CUSTOMER' || role === 'AGENT')
+    ) {
+      return parsed as AuthenticatedUser;
+    }
+  } catch {
+    // Ignore invalid persisted payloads.
+  }
+  return null;
+}
+
+export function getStoredAccessToken(): string | null {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+  const token = window.localStorage.getItem(ACCESS_TOKEN_KEY);
+  return token && token.trim() ? token.trim() : null;
+}
+
+export function getStoredAccessTokenExpiresAt(): string | null {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+  const value = window.localStorage.getItem(ACCESS_TOKEN_EXPIRES_AT_KEY);
+  return value && value.trim() ? value.trim() : null;
+}
+
+export function getStoredRefreshTokenExpiresAt(): string | null {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+  const value = window.localStorage.getItem(REFRESH_TOKEN_EXPIRES_AT_KEY);
+  return value && value.trim() ? value.trim() : null;
+}
+
+export function getStoredUser(): AuthenticatedUser | null {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+  return parseStoredUser(window.localStorage.getItem(AUTH_USER_KEY));
+}
+
+export function storeAuthSession(session: StoredAuthSession) {
+  if (typeof window === 'undefined') {
+    return;
+  }
+  window.localStorage.setItem(ACCESS_TOKEN_KEY, session.accessToken);
+  window.localStorage.removeItem(REFRESH_TOKEN_KEY);
+  if (session.accessTokenExpiresAt && session.accessTokenExpiresAt.trim()) {
+    window.localStorage.setItem(ACCESS_TOKEN_EXPIRES_AT_KEY, session.accessTokenExpiresAt);
+  } else {
+    window.localStorage.removeItem(ACCESS_TOKEN_EXPIRES_AT_KEY);
+  }
+  if (session.refreshTokenExpiresAt && session.refreshTokenExpiresAt.trim()) {
+    window.localStorage.setItem(REFRESH_TOKEN_EXPIRES_AT_KEY, session.refreshTokenExpiresAt);
+  } else {
+    window.localStorage.removeItem(REFRESH_TOKEN_EXPIRES_AT_KEY);
+  }
+  window.localStorage.setItem(AUTH_USER_KEY, JSON.stringify(session.user));
+  dispatchAuthChanged();
+}
+
+export function clearAuthSession() {
+  if (typeof window === 'undefined') {
+    return;
+  }
+  window.localStorage.removeItem(ACCESS_TOKEN_KEY);
+  window.localStorage.removeItem(REFRESH_TOKEN_KEY);
+  window.localStorage.removeItem(ACCESS_TOKEN_EXPIRES_AT_KEY);
+  window.localStorage.removeItem(REFRESH_TOKEN_EXPIRES_AT_KEY);
+  window.localStorage.removeItem(AUTH_USER_KEY);
+  if (typeof document !== 'undefined') {
+    document.cookie = `${CSRF_TOKEN_COOKIE}=; Max-Age=0; Path=/`;
+  }
+  dispatchAuthChanged();
+}
+
+export function getStoredCsrfToken(): string | null {
+  if (typeof document === 'undefined') {
+    return null;
+  }
+  const token = document.cookie
+    .split(';')
+    .map((entry) => entry.trim())
+    .find((entry) => entry.startsWith(`${CSRF_TOKEN_COOKIE}=`))
+    ?.slice(CSRF_TOKEN_COOKIE.length + 1);
+  return token && token.trim() ? decodeURIComponent(token.trim()) : null;
+}
+
+export function getTestInjectedRole(): UserRole | null {
+  if (typeof window === 'undefined' || !isLocalAuthOverrideEnabled()) {
+    return null;
+  }
+  const injectedRole = window.localStorage.getItem(TEST_ROLE_KEY);
+  return injectedRole === 'CUSTOMER' || injectedRole === 'AGENT' ? injectedRole : null;
+}
+
+export function getTestInjectedUser(): string | null {
+  if (typeof window === 'undefined' || !isLocalAuthOverrideEnabled()) {
+    return null;
+  }
+  const injectedUser = window.localStorage.getItem(TEST_USER_KEY);
+  return injectedUser && injectedUser.trim() ? injectedUser.trim() : null;
+}
+
+export function subscribeToAuthChanges(listener: () => void) {
+  if (typeof window === 'undefined') {
+    return () => undefined;
+  }
+  window.addEventListener(AUTH_CHANGED_EVENT, listener);
+  window.addEventListener('storage', listener);
+  return () => {
+    window.removeEventListener(AUTH_CHANGED_EVENT, listener);
+    window.removeEventListener('storage', listener);
+  };
+}

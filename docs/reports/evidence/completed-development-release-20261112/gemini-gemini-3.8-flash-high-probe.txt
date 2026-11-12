@@ -1,0 +1,1 @@
+The image displays a synthetic upload status card for the file "two.png," featuring a green "Uploaded" badge in the top-right corner and a collapsed "Upload details" toggle below.

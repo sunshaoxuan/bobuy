@@ -1,0 +1,48 @@
+### 1. Concrete Defects and Uncertainties by Screenshot Region
+
+* **Defect / Uncertainty — Missing Filename in Topmost Card (Mobile 320px, Screenshot 3, top of card list):**
+  * *Region:* The first visible status card immediately beneath the tabs (`Images & sources`).
+  * *Detail:* The card displays the green `Uploaded` badge and `▶ Upload details`, but has no filename text above the badge. The card’s top rounded border is fully visible, indicating this is not merely a scroll clipping issue; the title node is either blank, unrendered, or collapsed.
+* **Defect — Tab Navigation Baseline Clipping (Mobile 320px, Screenshots 3 & 4, sticky tab bar):**
+  * *Region:* Tab bar row (`...s & descriptions | Images & sources | ...`).
+  * *Detail:* The active indicator under `Images & sources` sits flush against the top border of the scrollable content with insufficient separation/padding, making scrolled cards appear visually jammed against the tab bar.
+* **Unrelated / Non-Blocking Feature — Duplicate Form Section Label (Desktop, Screenshot 1, middle form body):**
+  * *Region:* Form area between header banner and upload dropzone.
+  * *Detail:* `Official image sources` appears twice with identical URL input fields (once under `Original images · no cropping`, and once under `Add images`). This is an existing form structure issue unrelated to the upload status card component.
+
+---
+
+### 2. Status Hierarchy & Presentation Check
+
+* **Badge Differentiation:** Desktop and mobile maintain distinct, legible tokens:
+  * `Uploaded`: Green pill.
+  * `Reused`: Green outlined pill.
+  * `Failed (unconfirmed)`: Red-tinted fill with red outline.
+  * `Pending`: Neutral gray outlined pill.
+* **Mobile Stacking:** On 320px, the row layout adapts cleanly to a column hierarchy (Filename $\rightarrow$ Status Badge $\rightarrow$ Disclosure Trigger), preventing horizontal squeeze against the viewport boundary.
+
+---
+
+### 3. Disclosure Access to Complete Filename
+
+* **Collapsed State (Desktop Screenshot 2, Mobile Screenshot 3):**
+  * Unbounded Japanese characters (`verified-image-最長ファイル名...`) are cleanly truncated with trailing ellipses in both viewports without expanding the card width or pushing badges out of view.
+* **Expanded State (Mobile Screenshot 4):**
+  * Expanding `▼ Upload details` displays the full, unabbreviated filename (`Filename: verified-image-...png`).
+  * Multi-byte strings wrap naturally across lines without overflow or clipping within the 320px card boundaries.
+
+---
+
+### 4. Spacing and Page Coherence
+
+* **Desktop:** Alignment, card padding, and vertical rhythm are consistent across status states and helper copy.
+* **Mobile (320px):** Sticky top bar (handle, close button, title) and sticky bottom modal actions (`Confirm and save masters`, `Restore previous master`, verification checkbox) remain anchored without obscuring scrollable list contents.
+* **Scroll Boundary:** List items scroll cleanly through the middle container, though the scroll container lacks sufficient `padding-top` beneath the tab strip.
+
+---
+
+### Visual Verdict
+
+* **Verdict: Conditionally Accepted (Minor Mobile Patch Required).**
+* **Blocker to resolve before sign-off:** Investigate why the first card in the 320px view (Screenshot 3) renders without a filename above the `Uploaded` badge.
+* The ellipsis truncation, disclosure expansion mechanism, and status pill hierarchy are confirmed responsive down to 320px.

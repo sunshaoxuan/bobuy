@@ -1,0 +1,21 @@
+{
+  "result": "PASS",
+  "source": "c3bb160c7a8f0541b06089e2a3eacca05008198d",
+  "environment": "Exact production build served locally with the live Core JAR and isolated synthetic database",
+  "viewports": [
+    1440,
+    768,
+    320
+  ],
+  "primaryReview": "Viewed whole screenshots and native-size status crops, collapsed and expanded long filenames, upload controls and sticky footer. Compact status rows, mobile stacked filename/status, complete disclosure text and coherent action areas accepted.",
+  "external": "gemini-3.8-flash-high image-validated, two actual image reviews retained. Mobile badge squeeze corrected. Final suspected missing filename investigated and disproved by full-card screenshot and actual filename/sticky-tab coordinates.",
+  "resolved": [
+    "Long filename is CSS ellipsis, with complete filename in accessible details; no string slicing or four-dot implementation.",
+    "gallery-mobile-full-card-proof.png shows the complete two.png title/status/details. Prior image was scrolled with this filename behind the existing sticky tab bar, rather than a missing title.",
+    "Existing horizontally scrollable tabs, duplicate official-source fields and natural scroll clipping are outside this upload-status change; actual scrolling remains accessible.",
+    "Windows subpixel glyph measurement includes thin stems and descenders. Optical status/summary offsets are 1.5px/2px, without changing declared budgets."
+  ],
+  "functional": "Real compiled browser workflow PASS; controlled 400/409 classified separately; no page exceptions",
+  "geometry": "Status text background margins and center errors satisfy declared budgets; mobile disclosure and upload/save targets are at least44px; no horizontal overflow. Raw pixel and browser bounds retained.",
+  "production": "PASS: real1440px/320px admin media UI and public sort/heat/stars;37 loaded JS/CSS hashes matched, no console/network errors; no business writes"
+}

@@ -2,6 +2,19 @@ import type { Dictionary } from './types';
 import experience from './experience.en-US.json';
 
 const messages: Dictionary = {
+  "master.upload_details": "Upload details",
+  "master.upload_filename": "Filename",
+  "master.upload_status": "Image upload status",
+  "master.upload_waiting": "Pending",
+  "master.upload_uploading": "Uploading",
+  "master.upload_success": "Uploaded",
+  "master.upload_failed": "Failed (unconfirmed)",
+  "master.upload_reused": "Reused",
+  "master.upload_saved": "Saved to master",
+  "master.upload_unsaved": "Uploaded images are in this draft. Save the master to associate them.",
+  "master.upload_retry_hint": "Earlier confirmed uploads are kept. Pending files have not been uploaded. Check the failure, then select files again.",
+  "master.upload_asset": "Uploaded asset reference",
+  "gallery.hash_unavailable": "File verification is unavailable. No upload was started.",
  "review.text_scroll": "Scroll inside the field to read a long review",
  "review.history_scroll": "Scroll inside the dialog to read a long review list",
 

@@ -1,0 +1,1025 @@
+{
+  "observedAt": "2026-11-12T04:54:29.132999+00:00",
+  "containers": {
+    "bobuy-frontend": {
+      "id": "a2a2525229deac402b1195bccd23367b0ae8ff81be1e4c85edf96a15b45c1586",
+      "image": "sha256:5740727b6801a888be885691ef112955729aecf50bfab2c8f779bc038058fd9a",
+      "tag": "bobuy/frontend:20261112.gallery-upload-feedback",
+      "revision": "c3bb160c7a8f0541b06089e2a3eacca05008198d",
+      "imageCreated": "2026-11-12T13:50:42.740856382+09:00",
+      "startedAt": "2026-11-12T04:53:04.954188216Z",
+      "status": "running",
+      "health": null
+    },
+    "bobuy-core-service": {
+      "id": "f69d14b56310913656ca241ac29e2a1c388747f8ed032cf79ba6fa09001dfe9a",
+      "image": "sha256:9293d344191f43cc18cc6a88c18814590bf1c15c22d6a456baa2792ea897ea59",
+      "tag": "bobuy/core:20261112.product-introductions.2",
+      "revision": "5a9bb64ab8cda965018bddacfe9471c1081ca34b",
+      "imageCreated": "2026-11-12T12:08:04.265572746+09:00",
+      "startedAt": "2026-11-12T03:16:09.867889136Z",
+      "status": "running",
+      "health": "healthy"
+    },
+    "bobuy-gateway-service": {
+      "id": "8658ca313926847ac17386d2494fc068487d3a2275a187e9b05e16373eb6a7ee",
+      "image": "sha256:71354226154b2ca27ff7ddaaf90923f0954db9cabac363564447322030d21dcd",
+      "tag": "bobuy/router:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "imageCreated": "2026-10-28T12:09:38.51815039Z",
+      "startedAt": "2026-11-12T03:17:14.75029289Z",
+      "status": "running",
+      "health": "healthy"
+    },
+    "bobuy-ai-service": {
+      "id": "10972ee4cd488c0b368031dcdee897a9f3cf10e1d533ddfd2637004b0e983c5a",
+      "image": "sha256:e17c56f30483def52fb4c3e58d7ef7fad8dced0f89ff23109ab380cdca32fa48",
+      "tag": "bobuy/ai:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "imageCreated": "2026-10-28T12:08:08.609360875Z",
+      "startedAt": "2026-11-12T03:17:13.745889021Z",
+      "status": "running",
+      "health": "healthy"
+    },
+    "bobuy-im-service": {
+      "id": "218a0841775c655ea8aca3e76c32a76a9bb6e243576ecb325733c4f88f36e933",
+      "image": "sha256:3c286b1672db0eca6df4803085d7f5ba9cc475c4542a4f93302ee5c74277369a",
+      "tag": "bobuy/im:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "imageCreated": "2026-10-28T12:08:34.276270256Z",
+      "startedAt": "2026-11-12T03:17:13.98319244Z",
+      "status": "running",
+      "health": "healthy"
+    },
+    "bobuy-auth-service": {
+      "id": "f92780c457a16d7757540eae17d6ae73b22ff9389369bdb4da18301faa4208ab",
+      "image": "sha256:6863ae4b03b28b8fbd8666fb15b1599cca6a8b9911bbbd1cf555d9d4b8a3eabb",
+      "tag": "bobuy/auth:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "imageCreated": "2026-10-28T12:09:12.321911073Z",
+      "startedAt": "2026-11-12T03:17:14.325298412Z",
+      "status": "running",
+      "health": "healthy"
+    },
+    "bobuy-rustfs": {
+      "id": "a33a452d37da3d06ff76b62046e7d1cfac6cf60f730fa62ff17fc95a8c24a8f7",
+      "image": "sha256:e287e99762a4a3e7b706526e01f2ff755f67db165e9be9f6b907adc6fb6d6ee1",
+      "tag": "rustfs/rustfs:1.0.4@sha256:e287e99762a4a3e7b706526e01f2ff755f67db165e9be9f6b907adc6fb6d6ee1",
+      "revision": null,
+      "imageCreated": "2026-10-25T16:28:08.936122522Z",
+      "startedAt": "2026-10-28T06:08:45.288836844Z",
+      "status": "running",
+      "health": null
+    },
+    "bobuy-postgres": {
+      "id": "3e3f73ecd6ede718eafd2c14ff7087a9e34445c161e4eb73cc0f28455b527a7d",
+      "image": "sha256:1a0c23d53c1ad77468c8653fa6eed4f4105cfbef9e6f027bc1dfeb16949a8c29",
+      "tag": "postgres:18.6-alpine3.23@sha256:1a0c23d53c1ad77468c8653fa6eed4f4105cfbef9e6f027bc1dfeb16949a8c29",
+      "revision": null,
+      "imageCreated": "2026-10-21T21:12:42.075532335Z",
+      "startedAt": "2026-10-28T05:54:10.450486189Z",
+      "status": "running",
+      "health": "healthy"
+    },
+    "bobuy-gateway": {
+      "id": "417a2727353a7449a30c4fb820a5860dc3f2ee961ae9413e19eeddfa81036b2e",
+      "image": "sha256:892bb2152464f0c5d8972593a5f5afaf8054552580b699d95f8ff4af08c2d33d",
+      "tag": "nginx:alpine",
+      "revision": null,
+      "imageCreated": "2026-10-14T18:51:35.176014659Z",
+      "startedAt": "2026-10-27T10:17:45.060469115Z",
+      "status": "running",
+      "health": null
+    },
+    "bobuy-minio": {
+      "id": "cffc1963fcd20e856f50a9b0dae34b85ade404e0d5043b77b3db6f1042aa7019",
+      "image": "sha256:bb99d7a623bd56e0642a5b2782e2e2936ef56f97bb91c674684347dd657cac46",
+      "tag": "bobuy/minio:RELEASE.2025-10-15T17-29-55Z",
+      "revision": null,
+      "imageCreated": "2026-10-21T14:23:44.835450114Z",
+      "startedAt": "2026-10-27T10:17:45.040805906Z",
+      "status": "exited",
+      "health": "unhealthy"
+    },
+    "bobuy-nacos-init": {
+      "id": "114e094b88bbc728345fa391c1d4948cee38f27cf6c08018287ec299c022dfc9",
+      "image": "sha256:25d29daeb9b14b89e2fa8cc17c70e4b188bca1466086907c2d9a4b56b59d8e21",
+      "tag": "curlimages/curl:8.7.1",
+      "revision": null,
+      "imageCreated": "2024-03-27T09:55:51.86061858Z",
+      "startedAt": "2026-10-28T05:54:34.012818661Z",
+      "status": "exited",
+      "health": null
+    },
+    "bobuy-rabbitmq": {
+      "id": "c982a0e0f4762b34284370fa9aa38d59762bd28e26928ced4a7983e96968d40a",
+      "image": "sha256:606d8c0d6b3c18d1da9afc53bc7cdb2a8d5486df91b5a9830e9e07626c9ae281",
+      "tag": "rabbitmq:3-management-alpine",
+      "revision": null,
+      "imageCreated": "2025-12-02T03:08:25.905390672Z",
+      "startedAt": "2026-10-27T10:17:45.079215412Z",
+      "status": "running",
+      "health": "healthy"
+    },
+    "bobuy-redis": {
+      "id": "a9329b8de7e5bf143b4af936a847f79ca8e10957f5f28d31a39ec5d5717d010a",
+      "image": "sha256:858f009f9709ce576febc734aa78b8f6d624b82571f9ddb6bda4377c833b3499",
+      "tag": "redis:7-alpine",
+      "revision": null,
+      "imageCreated": "2026-09-17T21:32:46.989770417Z",
+      "startedAt": "2026-10-27T10:17:45.063404096Z",
+      "status": "running",
+      "health": "healthy"
+    },
+    "bobuy-nacos": {
+      "id": "25e2f666c1cc59bb03c06016faccc211f5d4990de76b980b69c75fba0302c2eb",
+      "image": "sha256:cca69ab12348b43d95c9b2c1d8d31d5a8d56e634ed4232a510423a9346090a70",
+      "tag": "nacos/nacos-server:v2.3.2-slim",
+      "revision": "c150bce691f4996871203b5897dd357f6d8a0e24",
+      "imageCreated": "2024-04-03T07:38:52.883699538Z",
+      "startedAt": "2026-10-27T10:17:45.058357323Z",
+      "status": "running",
+      "health": "healthy"
+    }
+  },
+  "releases": [
+    {
+      "release": "20261112.gallery-upload-feedback",
+      "files": [
+        "Dockerfile",
+        "activated.json",
+        "artifact.json",
+        "build.log",
+        "compose.after.yml",
+        "compose.before.yml",
+        "frontend-operator.py",
+        "gates.json",
+        "nginx.conf",
+        "operator.lock",
+        "payload.tar.gz",
+        "protected.before.json",
+        "runtime.before.json",
+        "status.json"
+      ],
+      "receipts": {
+        "status.json": {
+          "sha256": "4fc60a1df647e193f09463df2ba5872210ded5e59300d5d4e3fbc1efd945765b",
+          "fields": {
+            "phase": "VERIFIED",
+            "source": "c3bb160c7a8f0541b06089e2a3eacca05008198d"
+          }
+        },
+        "activated.json": {
+          "sha256": "fe09fa252a8b5bc8e64a339c8791e44823f2dc5d40766b291b7905aace334f41",
+          "fields": {}
+        },
+        "gates.json": {
+          "sha256": "c995267e3609df25267d5078d2415928366149ed73af6ac5a5aaba82c794e0fa",
+          "fields": {
+            "source": "c3bb160c7a8f0541b06089e2a3eacca05008198d",
+            "result": "PASS"
+          }
+        },
+        "artifact.json": {
+          "sha256": "c42a61c1ed75e5960994d22f1df7c96565128eb3c21ecf88e5255822c28e0f7c",
+          "fields": {
+            "source": "c3bb160c7a8f0541b06089e2a3eacca05008198d",
+            "release": "20261112.gallery-upload-feedback",
+            "baseFrontend.tag": "bobuy/frontend:20261112.product-introductions-currency",
+            "baseFrontend.revision": "3a8b11ac97eab33f676b523af04af1f9922fd3f1",
+            "baseCore.tag": "bobuy/core:20261112.product-introductions.2",
+            "baseCore.revision": "5a9bb64ab8cda965018bddacfe9471c1081ca34b"
+          }
+        }
+      }
+    },
+    {
+      "release": "20261112.product-introductions-currency",
+      "files": [
+        "Dockerfile",
+        "activated.json",
+        "artifact.json",
+        "build.log",
+        "compose.after.yml",
+        "compose.before.yml",
+        "frontend-operator.py",
+        "gates.json",
+        "nginx.conf",
+        "operator.lock",
+        "payload.tar.gz",
+        "protected.before.json",
+        "runtime.before.json",
+        "status.json"
+      ],
+      "receipts": {
+        "status.json": {
+          "sha256": "7e9e8024f73472270fd0c1cf0492115c55de2964b8fdc2c548ec657b88c816ac",
+          "fields": {
+            "phase": "VERIFIED",
+            "source": "3a8b11ac97eab33f676b523af04af1f9922fd3f1"
+          }
+        },
+        "activated.json": {
+          "sha256": "d9733390d50b9185a3f5bcc63e500ac1e24b44aab7401c8c94a0c61935ea0fd5",
+          "fields": {}
+        },
+        "gates.json": {
+          "sha256": "f0c9068f291d5570ff8791c4a63294a6916b68154c003158656e523651bb823a",
+          "fields": {
+            "source": "3a8b11ac97eab33f676b523af04af1f9922fd3f1",
+            "result": "PASS"
+          }
+        },
+        "artifact.json": {
+          "sha256": "2bbd8046eadbe47873450c9c61c47243dc1292029aad014cf9ce8dc4bdbac900",
+          "fields": {
+            "source": "3a8b11ac97eab33f676b523af04af1f9922fd3f1",
+            "release": "20261112.product-introductions-currency",
+            "baseFrontend.tag": "bobuy/frontend:20261112.product-introductions.2",
+            "baseFrontend.revision": "5a9bb64ab8cda965018bddacfe9471c1081ca34b",
+            "baseCore.tag": "bobuy/core:20261112.product-introductions.2",
+            "baseCore.revision": "5a9bb64ab8cda965018bddacfe9471c1081ca34b"
+          }
+        }
+      }
+    },
+    {
+      "release": "20261112.product-introductions.2",
+      "files": [
+        "Dockerfile.core",
+        "Dockerfile.frontend",
+        "app.jar",
+        "artifact.json",
+        "artifact.staged.json",
+        "backup-check.json",
+        "baseline-app.jar",
+        "build-stage.py",
+        "compose.after.yml",
+        "compose.before.yml",
+        "content.before.json",
+        "core-build.log",
+        "database-before.dump",
+        "frontend-build.log",
+        "gates.json",
+        "migration-binding.json",
+        "nginx.before.conf",
+        "nginx.conf",
+        "payload.json",
+        "payload.tar",
+        "price-acceptance.json",
+        "protected-before.json",
+        "publisher_helpers.py",
+        "release-operator.py",
+        "runtime.before.json",
+        "status.json",
+        "verify-runtime-inputs.py"
+      ],
+      "receipts": {
+        "artifact.staged.json": {
+          "sha256": "e8d63e60ec4d900a7511b5322238704a194e79857dac26d1456f65f094ef3932",
+          "fields": {
+            "source": "5a9bb64ab8cda965018bddacfe9471c1081ca34b",
+            "release": "20261112.product-introductions.2"
+          }
+        },
+        "status.json": {
+          "sha256": "d2cb710e57a59cfed426d21ed03eb46d7f3eea74c8d6289af0a8134c2a4d7320",
+          "fields": {
+            "phase": "WRITES_OPEN",
+            "source": "5a9bb64ab8cda965018bddacfe9471c1081ca34b"
+          }
+        },
+        "migration-binding.json": {
+          "sha256": "197e1d6810f339bff532031a870a6c4cc442f30fb555225673b1f76cf22d0807",
+          "fields": {
+            "result": "PASS"
+          }
+        },
+        "gates.json": {
+          "sha256": "3cd594de3210dd763857595d54026cd0a0f99fbdad07b08b49e085bd5b1ee1ed",
+          "fields": {
+            "source": "5a9bb64ab8cda965018bddacfe9471c1081ca34b",
+            "result": "PASS"
+          }
+        },
+        "artifact.json": {
+          "sha256": "5584a608983d29b9c9feb3bff3636a85f1de014e864cbb42c027e226bae01103",
+          "fields": {
+            "source": "5a9bb64ab8cda965018bddacfe9471c1081ca34b",
+            "release": "20261112.product-introductions.2",
+            "base.core-service.tag": "bobuy/core:20261112.reference-sort",
+            "base.core-service.revision": "a14f0320aeed077fbf449c95f2b236f4dd1d3393",
+            "base.ai-service.tag": "bobuy/ai:20261028.3",
+            "base.ai-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.im-service.tag": "bobuy/im:20261028.3",
+            "base.im-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.auth-service.tag": "bobuy/auth:20261028.3",
+            "base.auth-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.gateway-service.tag": "bobuy/router:20261028.3",
+            "base.gateway-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.frontend.tag": "bobuy/frontend:20261112.social-platform-select.2",
+            "base.frontend.revision": "ec24fa9af47b38999b98fc848e8ccf77787ddad2",
+            "base.nacos.revision": "c150bce691f4996871203b5897dd357f6d8a0e24"
+          }
+        }
+      }
+    },
+    {
+      "release": "20261112.product-introductions",
+      "files": [
+        "Dockerfile.core",
+        "Dockerfile.frontend",
+        "app.jar",
+        "artifact.json",
+        "artifact.staged.json",
+        "backup-check.json",
+        "baseline-app.jar",
+        "build-stage.py",
+        "compose.after.yml",
+        "compose.before.yml",
+        "content.before.json",
+        "core-build.log",
+        "database-before.dump",
+        "frontend-build.log",
+        "gates.json",
+        "migration-binding.json",
+        "nginx.before.conf",
+        "nginx.conf",
+        "payload.json",
+        "payload.tar",
+        "protected-before.json",
+        "publisher_helpers.py",
+        "release-operator.py",
+        "runtime.before.json",
+        "status.json",
+        "verify-runtime-inputs.py"
+      ],
+      "receipts": {
+        "artifact.staged.json": {
+          "sha256": "dde1362ab18f613d3a85fbd953f432e8da2db00bfd678d106b1f02f8c38f5c94",
+          "fields": {
+            "source": "5a9bb64ab8cda965018bddacfe9471c1081ca34b",
+            "release": "20261112.product-introductions"
+          }
+        },
+        "status.json": {
+          "sha256": "160e02354d07c5f36d4df04c7635e2d201fc693a5d03f02bab9a96e0d6b74c7c",
+          "fields": {
+            "phase": "APPLICATION_ROLLED_BACK",
+            "source": "5a9bb64ab8cda965018bddacfe9471c1081ca34b"
+          }
+        },
+        "migration-binding.json": {
+          "sha256": "197e1d6810f339bff532031a870a6c4cc442f30fb555225673b1f76cf22d0807",
+          "fields": {
+            "result": "PASS"
+          }
+        },
+        "gates.json": {
+          "sha256": "3cd594de3210dd763857595d54026cd0a0f99fbdad07b08b49e085bd5b1ee1ed",
+          "fields": {
+            "source": "5a9bb64ab8cda965018bddacfe9471c1081ca34b",
+            "result": "PASS"
+          }
+        },
+        "artifact.json": {
+          "sha256": "e3fc6b1bef843255327a6cb03e0aad11b1fd2163f101368a946da588d85e7c01",
+          "fields": {
+            "source": "5a9bb64ab8cda965018bddacfe9471c1081ca34b",
+            "release": "20261112.product-introductions",
+            "base.core-service.tag": "bobuy/core:20261112.reference-sort",
+            "base.core-service.revision": "a14f0320aeed077fbf449c95f2b236f4dd1d3393",
+            "base.ai-service.tag": "bobuy/ai:20261028.3",
+            "base.ai-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.im-service.tag": "bobuy/im:20261028.3",
+            "base.im-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.auth-service.tag": "bobuy/auth:20261028.3",
+            "base.auth-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.gateway-service.tag": "bobuy/router:20261028.3",
+            "base.gateway-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.frontend.tag": "bobuy/frontend:20261112.social-platform-select.2",
+            "base.frontend.revision": "ec24fa9af47b38999b98fc848e8ccf77787ddad2",
+            "base.nacos.revision": "c150bce691f4996871203b5897dd357f6d8a0e24"
+          }
+        }
+      }
+    },
+    {
+      "release": "20261112.social-platform-select.2",
+      "files": [
+        "activated.json",
+        "artifact.json",
+        "build.log",
+        "compose.after.yml",
+        "compose.before.yml",
+        "frontend-operator.py",
+        "gates.json",
+        "operator.lock",
+        "protected.before.json",
+        "runtime.before.json",
+        "status.json"
+      ],
+      "receipts": {
+        "status.json": {
+          "sha256": "147aef6871165aac4345ceb02e067e650af0905d9c86ac5bef96a3c8b4331d12",
+          "fields": {
+            "phase": "CLEANED",
+            "source": "ec24fa9af47b38999b98fc848e8ccf77787ddad2"
+          }
+        },
+        "activated.json": {
+          "sha256": "069b5b9e5a56de855b45c3fda74b4546465f16feb450c99751cdbcd7a3205b95",
+          "fields": {}
+        },
+        "gates.json": {
+          "sha256": "cd1ccbc2c58595aaa8de93e371c42144a74ea2bb403ba3f075e6186cff684f18",
+          "fields": {
+            "source": "ec24fa9af47b38999b98fc848e8ccf77787ddad2",
+            "result": "PASS"
+          }
+        },
+        "artifact.json": {
+          "sha256": "5a214c6bb1c0c3d259df3307e5f2fff2e4e26648d512645ac89453f1ec836939",
+          "fields": {
+            "source": "ec24fa9af47b38999b98fc848e8ccf77787ddad2",
+            "release": "20261112.social-platform-select.2",
+            "baseFrontend.tag": "bobuy/frontend:20261112.social-platform-select",
+            "baseFrontend.revision": "961d2a39b9fe6abbc29796805069d0efe5d09666",
+            "baseCore.tag": "bobuy/core:20261112.reference-sort",
+            "baseCore.revision": "a14f0320aeed077fbf449c95f2b236f4dd1d3393"
+          }
+        }
+      }
+    },
+    {
+      "release": "20261112.social-platform-select",
+      "files": [
+        "activated.json",
+        "artifact.json",
+        "build.log",
+        "compose.after.yml",
+        "compose.before.yml",
+        "frontend-operator.py",
+        "gates.json",
+        "operator.lock",
+        "protected.before.json",
+        "runtime.before.json",
+        "status.json"
+      ],
+      "receipts": {
+        "status.json": {
+          "sha256": "f71471ed59b0975a803e81ea89b03f1844797e6fe862be5d94ada9672ea19422",
+          "fields": {
+            "phase": "VERIFIED",
+            "source": "961d2a39b9fe6abbc29796805069d0efe5d09666"
+          }
+        },
+        "activated.json": {
+          "sha256": "140951657f7e82424f5f459c50c9165c1ee9775ec0f40c2da4c91387601786df",
+          "fields": {}
+        },
+        "gates.json": {
+          "sha256": "5e9a28785b57a92ebc64c959b818f98275c6dcefe757582f24beee41e012204d",
+          "fields": {
+            "source": "961d2a39b9fe6abbc29796805069d0efe5d09666",
+            "result": "PASS"
+          }
+        },
+        "artifact.json": {
+          "sha256": "20264608dba37f6c0eb7401a1bdf97bacdc3c2e898129f59fff6d70ad5e88275",
+          "fields": {
+            "source": "961d2a39b9fe6abbc29796805069d0efe5d09666",
+            "release": "20261112.social-platform-select",
+            "baseFrontend.tag": "bobuy/frontend:20261112.mail-settings.3",
+            "baseFrontend.revision": "f4fae3d05d61c2b697cba4f6ac62f07b55d58790",
+            "baseCore.tag": "bobuy/core:20261112.reference-sort",
+            "baseCore.revision": "a14f0320aeed077fbf449c95f2b236f4dd1d3393"
+          }
+        }
+      }
+    },
+    {
+      "release": "20261112.mail-settings.3",
+      "files": [
+        "Dockerfile",
+        "artifact.json",
+        "build.log",
+        "compose.after.yml",
+        "compose.before.yml",
+        "frontend-release-operator.py",
+        "gates.json",
+        "nginx.conf",
+        "operator.lock",
+        "payload.tar.gz",
+        "protected-before.json",
+        "runtime.before.json",
+        "status.json"
+      ],
+      "receipts": {
+        "status.json": {
+          "sha256": "878548243a151804e385d168b7fee9dd1d4732406e091a855d8d4c3e2c8554c5",
+          "fields": {
+            "phase": "FRONTEND_HEALTHY",
+            "source": "f4fae3d05d61c2b697cba4f6ac62f07b55d58790"
+          }
+        },
+        "gates.json": {
+          "sha256": "542c0736b6ff9aa0e4b3bb9e82934d2f0a985765c91bcffdc281e8b5082081f8",
+          "fields": {
+            "source": "f4fae3d05d61c2b697cba4f6ac62f07b55d58790",
+            "result": "PASS",
+            "ci.headSha": "f4fae3d05d61c2b697cba4f6ac62f07b55d58790",
+            "ci.status": "completed"
+          }
+        },
+        "artifact.json": {
+          "sha256": "f92eabc393bc7556da0ee421ef6c60d917b3c6d2212befb25fb72ef69e7a338d",
+          "fields": {
+            "base.source": "87042bfbad767951fda84d38d0b293ef086863db",
+            "base.tag": "bobuy/frontend:20261112.mail-settings.2",
+            "image.tag": "bobuy/frontend:20261112.mail-settings.3",
+            "source": "f4fae3d05d61c2b697cba4f6ac62f07b55d58790",
+            "release": "20261112.mail-settings.3"
+          }
+        }
+      }
+    },
+    {
+      "release": "20261112.mail-settings.2",
+      "files": [
+        "Dockerfile",
+        "artifact.json",
+        "build.log",
+        "compose.after.yml",
+        "compose.before.yml",
+        "frontend-release-operator.py",
+        "gates.json",
+        "nginx.conf",
+        "operator.lock",
+        "payload.tar.gz",
+        "protected-before.json",
+        "runtime.before.json",
+        "status.json"
+      ],
+      "receipts": {
+        "status.json": {
+          "sha256": "504883f796958be23f631679dc3af1bef7fd81c21355e02147ad2cc0c8dccb06",
+          "fields": {
+            "phase": "FRONTEND_HEALTHY",
+            "source": "87042bfbad767951fda84d38d0b293ef086863db"
+          }
+        },
+        "gates.json": {
+          "sha256": "641d9eac36c6f1793f1408590bd92d7876bfe3931c0b10766ca9d16b02c439ed",
+          "fields": {
+            "source": "87042bfbad767951fda84d38d0b293ef086863db",
+            "result": "PASS",
+            "ci.headSha": "87042bfbad767951fda84d38d0b293ef086863db",
+            "ci.status": "completed"
+          }
+        },
+        "artifact.json": {
+          "sha256": "f2bd8594bd6b75deb73a1d44c3bf4f97a5c9b7b79a5609cf76240d14b1171872",
+          "fields": {
+            "base.source": "012013ad330f81f8c293148564860ed31fd7178c",
+            "base.tag": "bobuy/frontend:20261112.editor-rating",
+            "image.tag": "bobuy/frontend:20261112.mail-settings.2",
+            "source": "87042bfbad767951fda84d38d0b293ef086863db",
+            "release": "20261112.mail-settings.2"
+          }
+        }
+      }
+    },
+    {
+      "release": "20261112.mail-settings",
+      "files": [
+        "Dockerfile",
+        "build.log",
+        "frontend-release-operator.py",
+        "nginx.conf",
+        "payload.tar.gz"
+      ],
+      "receipts": {}
+    },
+    {
+      "release": "20261112.onboarding-route",
+      "files": [
+        "apply.json",
+        "before.json",
+        "binding.json",
+        "ci.json",
+        "config-operator.py",
+        "gateway-service.yaml",
+        "nacos.before.yaml",
+        "source.before.yaml"
+      ],
+      "receipts": {
+        "apply.json": {
+          "sha256": "330679f61cb861343edc3de12b881ae5020decb243b1b5b2b002f31c04d0add1",
+          "fields": {
+            "phase": "CONFIG_PUBLISHED",
+            "source": "5d32cd1963ba9373b67fc93f6a1ed50f019c15fe"
+          }
+        },
+        "ci.json": {
+          "sha256": "2f8daee484edefa25b81a71aa5b46b0a03620f12c483205ae1150e7f6d41c8b8",
+          "fields": {
+            "headSha": "5d32cd1963ba9373b67fc93f6a1ed50f019c15fe",
+            "status": "completed"
+          }
+        },
+        "binding.json": {
+          "sha256": "d61b2cf7e27a34277a2389b46753f191678a08c6ad259d94ec4179ed988fcda9",
+          "fields": {
+            "source": "5d32cd1963ba9373b67fc93f6a1ed50f019c15fe"
+          }
+        }
+      }
+    },
+    {
+      "release": "20261112.mail-setup",
+      "files": [
+        "compose.after.yml",
+        "compose.before.yml",
+        "containers.before.json",
+        "result.json"
+      ],
+      "receipts": {
+        "result.json": {
+          "sha256": "c4139235b60021892691659a7a84fd657d9f63f55ec49e509310fa9ea040cc91",
+          "fields": {
+            "result": "PASS"
+          }
+        }
+      }
+    },
+    {
+      "release": "20261112.editor-rating",
+      "files": [
+        "Dockerfile",
+        "activated.json",
+        "artifact.json",
+        "build.log",
+        "compose.after.yml",
+        "compose.before.yml",
+        "frontend-operator.py",
+        "gates.json",
+        "nginx.conf",
+        "operator.lock",
+        "payload.tar.gz",
+        "protected.before.json",
+        "runtime.before.json",
+        "status.json"
+      ],
+      "receipts": {
+        "status.json": {
+          "sha256": "2b7891935f6013861b670aa79692ae00930a35b1c3ca56923d20f1af9dccd5ef",
+          "fields": {
+            "phase": "VERIFIED",
+            "source": "012013ad330f81f8c293148564860ed31fd7178c"
+          }
+        },
+        "activated.json": {
+          "sha256": "041ca15911cdd8b1310f5b8707b39e0dec15ec0babd8dcf733dfbc2ae246a878",
+          "fields": {}
+        },
+        "gates.json": {
+          "sha256": "c8b7e1146dee90a9d66f5664f75b3cb910ff4540c24691539ae77534e3fbeb86",
+          "fields": {
+            "source": "012013ad330f81f8c293148564860ed31fd7178c",
+            "result": "PASS"
+          }
+        },
+        "artifact.json": {
+          "sha256": "456a36021ada4f3372eae2c0eb030739d3999531afac6a021d4d0444aa69b1ed",
+          "fields": {
+            "source": "012013ad330f81f8c293148564860ed31fd7178c",
+            "release": "20261112.editor-rating",
+            "baseFrontend.tag": "bobuy/frontend:20261112.reference-display.4",
+            "baseFrontend.revision": "deac521fdb5c10e4accc2d4cc368fb494ab61801",
+            "baseCore.tag": "bobuy/core:20261112.reference-sort",
+            "baseCore.revision": "a14f0320aeed077fbf449c95f2b236f4dd1d3393"
+          }
+        }
+      }
+    },
+    {
+      "release": "20261112.5",
+      "files": [
+        "Dockerfile.core",
+        "Dockerfile.frontend",
+        "artifact.json",
+        "backup-check.json",
+        "compose.after.yml",
+        "compose.before.yml",
+        "content.after.json",
+        "content.before.json",
+        "core-service-build.log",
+        "database-before.dump",
+        "database.before.json",
+        "engagement-final-acceptance-v2.json",
+        "engagement-final-acceptance.json",
+        "fixture-cleanup-columns.txt",
+        "fixture-cleanup.json",
+        "fixtures.py",
+        "frontend-build.log",
+        "gates.json",
+        "images.tar",
+        "nginx.before.conf",
+        "payload.tar",
+        "prior-migration-rehearsal.json",
+        "protected-before.json",
+        "publisher_helpers.py",
+        "recovery-images.tar",
+        "release-operator.py",
+        "runtime.before.json",
+        "status.json"
+      ],
+      "receipts": {
+        "status.json": {
+          "sha256": "0b6ebcf0b455e5bcb8a87dd9bb19d0ea301cd15d5de1834b9805c8a4407c9abc",
+          "fields": {
+            "phase": "WRITES_OPEN",
+            "source": "606deb375b125d41e451dad555bb306f70f0fae3"
+          }
+        },
+        "gates.json": {
+          "sha256": "6a531b032e1f46680f847a1ec31029ce058da91b1a35c71a9056dab18d9be7b1",
+          "fields": {
+            "source": "606deb375b125d41e451dad555bb306f70f0fae3",
+            "result": "PASS",
+            "reusedBackend.source": "ebea743436e6e30056c54b9f851a339bf3568dac",
+            "reusedFrontendFull.source": "0a1bbb64e26003868925aae0ddcb3c6ef8d52c2c"
+          }
+        },
+        "artifact.json": {
+          "sha256": "27f3eb6efcf45255e342603c03deca8be65d55929aa970d8b9d558fafb5a839d",
+          "fields": {
+            "source": "606deb375b125d41e451dad555bb306f70f0fae3",
+            "release": "20261112.5",
+            "base.core-service.tag": "bobuy/core:20261111.5",
+            "base.core-service.revision": "245eb3ae1b5738d63d6013de90e7a84fb5e46862",
+            "base.ai-service.tag": "bobuy/ai:20261028.3",
+            "base.ai-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.im-service.tag": "bobuy/im:20261028.3",
+            "base.im-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.auth-service.tag": "bobuy/auth:20261028.3",
+            "base.auth-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.gateway-service.tag": "bobuy/router:20261028.3",
+            "base.gateway-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.frontend.tag": "bobuy/frontend:20261112.maintenance-wording.2",
+            "base.frontend.revision": "52ef9976c069a9a98e253a8f5229af230142fc7f",
+            "base.nacos.revision": "c150bce691f4996871203b5897dd357f6d8a0e24"
+          }
+        }
+      }
+    },
+    {
+      "release": "20261112.reference-sort",
+      "files": [
+        "Dockerfile.core",
+        "app.jar",
+        "artifact.json",
+        "artifact.staged.json",
+        "backup-check.json",
+        "baseline-app.jar",
+        "build-sort-stage.py",
+        "build.log",
+        "cleanup-server.py",
+        "cleanup.json",
+        "collect-production.py",
+        "compose.after.yml",
+        "compose.before.yml",
+        "content.before.json",
+        "database-before.dump",
+        "finalize-sort-stage.py",
+        "gates.json",
+        "migration-binding.json",
+        "nginx.before.conf",
+        "payload.json",
+        "payload.tar",
+        "price-acceptance.json",
+        "protected-before.json",
+        "publisher_helpers.py",
+        "release-operator.py",
+        "runtime.before.json",
+        "status.json",
+        "verify-sort-inputs.py"
+      ],
+      "receipts": {
+        "artifact.staged.json": {
+          "sha256": "8afaa3ea368ca06a50c06511d490c9ae98fd5e9894e6703ad64aaa662d600a99",
+          "fields": {
+            "source": "a14f0320aeed077fbf449c95f2b236f4dd1d3393",
+            "release": "20261112.reference-sort",
+            "frontendSource": "deac521fdb5c10e4accc2d4cc368fb494ab61801"
+          }
+        },
+        "status.json": {
+          "sha256": "dc666cd5925f09f2915a1d88f29b5f75567c7fe5ddfa637037f6dd180f29a100",
+          "fields": {
+            "phase": "WRITES_OPEN",
+            "source": "a14f0320aeed077fbf449c95f2b236f4dd1d3393"
+          }
+        },
+        "migration-binding.json": {
+          "sha256": "197e1d6810f339bff532031a870a6c4cc442f30fb555225673b1f76cf22d0807",
+          "fields": {
+            "result": "PASS"
+          }
+        },
+        "gates.json": {
+          "sha256": "0eb0ab75febebde1d8708e5cc19216fd40d2ae1a67fc4ea3b0ccf195cfae1547",
+          "fields": {
+            "source": "a14f0320aeed077fbf449c95f2b236f4dd1d3393",
+            "result": "PASS",
+            "backendValidatedSource": "a14f0320aeed077fbf449c95f2b236f4dd1d3393"
+          }
+        },
+        "artifact.json": {
+          "sha256": "858a207d352b12aa19ad84f7e5a59c5fc0d6da0c79f0073df0f9e0dbad9692e8",
+          "fields": {
+            "source": "a14f0320aeed077fbf449c95f2b236f4dd1d3393",
+            "release": "20261112.reference-sort",
+            "frontendSource": "deac521fdb5c10e4accc2d4cc368fb494ab61801",
+            "base.core-service.tag": "bobuy/core:20261112.reference-display.4",
+            "base.core-service.revision": "deac521fdb5c10e4accc2d4cc368fb494ab61801",
+            "base.ai-service.tag": "bobuy/ai:20261028.3",
+            "base.ai-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.im-service.tag": "bobuy/im:20261028.3",
+            "base.im-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.auth-service.tag": "bobuy/auth:20261028.3",
+            "base.auth-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.gateway-service.tag": "bobuy/router:20261028.3",
+            "base.gateway-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.frontend.tag": "bobuy/frontend:20261112.reference-display.4",
+            "base.frontend.revision": "deac521fdb5c10e4accc2d4cc368fb494ab61801",
+            "base.nacos.revision": "c150bce691f4996871203b5897dd357f6d8a0e24"
+          }
+        }
+      }
+    },
+    {
+      "release": "20261112.account-balance",
+      "files": [
+        "Dockerfile",
+        "activated.json",
+        "artifact.json",
+        "build.log",
+        "cleanup-superseded.py",
+        "compose.after.yml",
+        "compose.before.yml",
+        "frontend-operator.py",
+        "gates.json",
+        "nginx.conf",
+        "operator.lock",
+        "payload.tar.gz",
+        "protected.before.json",
+        "runtime.before.json",
+        "status.json",
+        "superseded-cleanup.json"
+      ],
+      "receipts": {
+        "status.json": {
+          "sha256": "d65bb14636f64ba0a33056b106b344340c52490bf43e51247528734fcdf46702",
+          "fields": {
+            "phase": "VERIFIED",
+            "source": "d2ffb059bad921de51d2b61267095e52e6357c42"
+          }
+        },
+        "activated.json": {
+          "sha256": "1d4b2066f847d634ba0fe807d92d14fc7a7c75c5a399bb506db15b1f6a615571",
+          "fields": {}
+        },
+        "gates.json": {
+          "sha256": "42ce2eedccbdd3298a885756268395ef45129e54f2932ff207d9270c1f5ef7df",
+          "fields": {
+            "source": "d2ffb059bad921de51d2b61267095e52e6357c42",
+            "result": "PASS"
+          }
+        },
+        "artifact.json": {
+          "sha256": "b04fbb74c1f2915c1b3720089265f9244886b3841cabf972eb13a4a469b4c276",
+          "fields": {
+            "source": "d2ffb059bad921de51d2b61267095e52e6357c42",
+            "release": "20261112.account-balance",
+            "baseFrontend.tag": "bobuy/frontend:20261112.detail-layout.2",
+            "baseFrontend.revision": "a3b0d1796a8d44d25b65ffd673d3d7c8a2378039",
+            "baseCore.tag": "bobuy/core:20261111.5",
+            "baseCore.revision": "245eb3ae1b5738d63d6013de90e7a84fb5e46862"
+          }
+        }
+      }
+    },
+    {
+      "release": "20261112.reference-display.4",
+      "files": [
+        "Dockerfile.core",
+        "Dockerfile.frontend",
+        "app.jar",
+        "artifact.json",
+        "artifact.pre-migration-review.json",
+        "artifact.staged.json",
+        "backup-check.json",
+        "baseline-app.jar",
+        "build-stage.py",
+        "compose.after.yml",
+        "compose.before.yml",
+        "content.before.json",
+        "core-build.log",
+        "database-before.dump",
+        "finalize-stage.py",
+        "frontend-build.log",
+        "gates.json",
+        "inspect-migrations.py",
+        "migration-binding.json",
+        "nginx.before.conf",
+        "nginx.conf",
+        "payload.json",
+        "payload.tar",
+        "price-acceptance.json",
+        "protected-before.json",
+        "publisher_helpers.py",
+        "release-operator.py",
+        "runtime.before.json",
+        "status.json",
+        "verify-runtime-inputs.py"
+      ],
+      "receipts": {
+        "artifact.staged.json": {
+          "sha256": "2a2e9f3ddc13b90f5cc5676a8556bf86064028fade162f9c85350c3fb4ff7514",
+          "fields": {
+            "source": "deac521fdb5c10e4accc2d4cc368fb494ab61801",
+            "release": "20261112.reference-display.4"
+          }
+        },
+        "status.json": {
+          "sha256": "b0f2cf2c5305bc1e17c3513d4f5379c40dd7c71d0afb3195ba3900fe4f7ac230",
+          "fields": {
+            "phase": "WRITES_OPEN",
+            "source": "deac521fdb5c10e4accc2d4cc368fb494ab61801"
+          }
+        },
+        "migration-binding.json": {
+          "sha256": "428c028809c00660636010db6f47059d2c050163138fd62e6507deb3b56c849e",
+          "fields": {
+            "result": "PASS"
+          }
+        },
+        "artifact.pre-migration-review.json": {
+          "sha256": "944b07a41fe996324df0e8d94d675acf946cc78402b8b24437806ad59a57173e",
+          "fields": {
+            "source": "deac521fdb5c10e4accc2d4cc368fb494ab61801",
+            "release": "20261112.reference-display.4",
+            "base.core-service.tag": "bobuy/core:20261112.5",
+            "base.core-service.revision": "606deb375b125d41e451dad555bb306f70f0fae3",
+            "base.ai-service.tag": "bobuy/ai:20261028.3",
+            "base.ai-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.im-service.tag": "bobuy/im:20261028.3",
+            "base.im-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.auth-service.tag": "bobuy/auth:20261028.3",
+            "base.auth-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.gateway-service.tag": "bobuy/router:20261028.3",
+            "base.gateway-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.frontend.tag": "bobuy/frontend:20261112.5",
+            "base.frontend.revision": "606deb375b125d41e451dad555bb306f70f0fae3",
+            "base.nacos.revision": "c150bce691f4996871203b5897dd357f6d8a0e24"
+          }
+        },
+        "gates.json": {
+          "sha256": "9edc5244958295c9b1d059a38dc45c30086bfe4d1d32626aa1b25fa68d7131f8",
+          "fields": {
+            "source": "deac521fdb5c10e4accc2d4cc368fb494ab61801",
+            "result": "PASS",
+            "backendValidatedSource": "deac521fdb5c10e4accc2d4cc368fb494ab61801"
+          }
+        },
+        "artifact.json": {
+          "sha256": "ebf370a481348ec87cfc442084d15c038bd1761a9d976a4f9cc6695655d35dbc",
+          "fields": {
+            "source": "deac521fdb5c10e4accc2d4cc368fb494ab61801",
+            "release": "20261112.reference-display.4",
+            "base.core-service.tag": "bobuy/core:20261112.5",
+            "base.core-service.revision": "606deb375b125d41e451dad555bb306f70f0fae3",
+            "base.ai-service.tag": "bobuy/ai:20261028.3",
+            "base.ai-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.im-service.tag": "bobuy/im:20261028.3",
+            "base.im-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.auth-service.tag": "bobuy/auth:20261028.3",
+            "base.auth-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.gateway-service.tag": "bobuy/router:20261028.3",
+            "base.gateway-service.revision": "414830e8871d781d12b185536eae3681eb73219d",
+            "base.frontend.tag": "bobuy/frontend:20261112.5",
+            "base.frontend.revision": "606deb375b125d41e451dad555bb306f70f0fae3",
+            "base.nacos.revision": "c150bce691f4996871203b5897dd357f6d8a0e24"
+          }
+        }
+      }
+    }
+  ],
+  "releaseProcesses": [],
+  "schema": "[{\"version\":\"33\",\"description\":\"product clicks\",\"success\":true,\"installed_on\":\"2026-11-11T23:15:39.144486\"}, \n {\"version\":\"32\",\"description\":\"user product reviews\",\"success\":true,\"installed_on\":\"2026-11-11T09:19:00.76699\"}, \n {\"version\":\"31\",\"description\":\"recommendation item publication\",\"success\":true,\"installed_on\":\"2026-11-11T09:19:00.459019\"}]\nt",
+  "maintenanceConfigured": false,
+  "releaseLocks": [],
+  "frontendFiles": "8a29e1f0aa97720f53dd127038e68daddcd56d776bd801617e36c197153f67a9  /usr/share/nginx/html/index.html\n6834774a1f7a17865f035695f7de98af0c4ca242e0cdad8d0343e30a2d3d1bff  /usr/share/nginx/html/assets/SafetyCertificateOutlined-DKHxpx1x.js\n05f5fc7e3cfe252de2b1648755eb99bcd2479d19447d63c63fdc621a19137c60  /usr/share/nginx/html/assets/MailSettings-CWK7hkxu.js\n0d4312f15309eb7ed571b6e37c0020d1edc79b2478331f01dd8c2dcd01dcdb2c  /usr/share/nginx/html/assets/ProductMarkerBadges-YtkPTPIq.css\n065d03b37ebd4a6750641c662a0fe53d8abd1950ac9ad291992c15321d8271d9  /usr/share/nginx/html/assets/PublicProductCatalog-X9sjxx_r.js\n2aa749d467e37489e4f0a4cc0bc177a71e04d501e079b6724fe8ff62cc31a4f2  /usr/share/nginx/html/assets/audit-view-MzCrbCwK.js\n977ed609bc1506dd05a41bd69bccda34de8b839d563c6e3d9911a32794bfe059  /usr/share/nginx/html/assets/ClientOrders-DipmfPHZ.js\n2fb61943ce6ccee524da0b39d9bc66c80eb7517dd012be43b41204d7571c6b2b  /usr/share/nginx/html/assets/Collapse-BmVRVSFf.js\na5fc8fb0758186d686acf3fbaca080c3d3851f65ab05221e30061df81abe3ef8  /usr/share/nginx/html/assets/Recommendations-BR6eX9U6.css\n23702d9dcfdd579d71c72b72d535b34942508723cc409871534f86297c1b2812  /usr/share/nginx/html/assets/ClientBilling-C-xWE-3r.js\n50fe8c695ffce8e7c43316a8c63999ed22f901ffb7dc51255acea0c2e9fc53d3  /usr/share/nginx/html/assets/Recommendations-hRAL8HtP.js\n3e24cdee1af91c82ad739ae67796f82520d73c3c35296652632d4077bd4ecf05  /usr/share/nginx/html/assets/ClientChat-D0lukmzW.js\n9de7dcf3e590d1742832acad609c1eb0a336558fbbad146d35d75e5ffdd1a0f8  /usr/share/nginx/html/assets/chat-flow-gbK2SMJT.js\nb73b5c5b0b53373ecb46a3d52f63badaba96b841538317592a1d7e857de9c0c6  /usr/share/nginx/html/assets/Dashboard-CJbHhDtW.js\n179cfe85e46ed858bc94decb98f65c344517b2d35b8568a8c83ccacb9e43cca7  /usr/share/nginx/html/assets/ReloadOutlined-BedJVisS.js\n0b1578c52ba782b1fed68996f99f4a73112211ef58dfc5e809cc02718263a46a  /usr/share/nginx/html/assets/index-BF7iwD8l.js\ne69b3df9ab2125338a7e11265ad34f4a7745df5af4b01ffebc4f2153d2873294  /usr/share/nginx/html/assets/PickingMaster-3beKgGhK.js\n5739ea8159af8fe41e8b1863b00859ec96193656375a48591b53a1f991b411d4  /usr/share/nginx/html/assets/Trips-loyjntRT.js\n99e90864463c63c8a2c4f52a2182ea91d2df501ff9caf14b4b66319ab37da548  /usr/share/nginx/html/assets/MailSettings-Dx7mJHLN.css\nd5b8e5e36530ee7af355f1358dbfdbd06c0e88f69ccf6c88f97248efdbc07e9f  /usr/share/nginx/html/assets/ImageLightbox-DGre66-K.js\n1bb7b151ff6808f53c3ef21db0f34a1172a7a97e0988048eb4dca6e18530c35a  /usr/share/nginx/html/assets/Breadcrumb-CoLNDLFr.js\n7be53fce88f5b68c8631354e9c1772865e5fee0598425c56f92d0cf051e0d353  /usr/share/nginx/html/assets/ProductMarkerBadges-B58oAlPt.js\n71f11095b972cabefa1617a926a5014df090bfd2d666a2154bf8292bbe4b3a53  /usr/share/nginx/html/assets/SendOutlined-BLe_5T6L.js\n1cd35579bf655f87ec3124b00a12c6a235f179034ee39a9c3aefdab590bceff9  /usr/share/nginx/html/assets/ProductMarkers-BT8K9cSo.js\n9f1382735c104ce621f60231ecbc445b108b895bb786f4835fe04f0d26ea255b  /usr/share/nginx/html/assets/ProductMetadata-C0znvoea.js\n09aa5b38f9cbb7c242759ef13cb0944a8d5b7113a977f598a3e57bedb4f00a32  /usr/share/nginx/html/assets/index-BVc3r1lI.js\na02a01eb600614c9717771f7dd09c3a782cea83ae638e78e53fb93ee72f98139  /usr/share/nginx/html/assets/CameraOutlined-Sc55qBrO.js\n2e9f0db62a8e55870be2b28115290fb16176181cb19263a7230d74f5cac2e40a  /usr/share/nginx/html/assets/useBreakpoint-p2tLCsw_.js\ndbc7c1b8e16994fd7ecf2cc2aef8c57a6d498ffe7366f184a8d45a8a368a83ce  /usr/share/nginx/html/assets/ArrowLeftOutlined-Da3sKumA.js\neefea31458807dad8535e759a63013d77f24909b868871dd3408516aafe4c42b  /usr/share/nginx/html/assets/index-CzrdLuI_.js\n8efc66b94ae05f7b7f071ec4097bdff1e4a5f264e5a40319e5af8fa230d655eb  /usr/share/nginx/html/assets/SaveOutlined-DlzjZXl7.js\n2060f4febb953c6e1b1bbb95943cf3d67cdc1f86b8dddb427e2072d606a9a974  /usr/share/nginx/html/assets/Currencies-T4r-mOYL.js\n724d1e30f3f6ee6aac36a828b2e80fda4fce1ef38cd7116be1bea4681f24699b  /usr/share/nginx/html/assets/PublicRecommendations-vyj6HCKZ.js\n909a3d23e03efaac2f4bb9c2b840011c42b85782edb1487836caf56b81b24fb5  /usr/share/nginx/html/assets/procurement-dashboard-Bu6T5V4U.js\n7716e107ed9c7aab3caa6b7bf03abaef0fb69e0c3f1f54768d442bbcd1333920  /usr/share/nginx/html/assets/index-DUyzZh9y.js\nfabb679c901749d935deca47aacc09cf3cb1b8064a591773ac71281058773123  /usr/share/nginx/html/assets/ClockCircleOutlined-BDhr0TSN.js\n091fe63279bbbbe9de53be34d6873022737d18bde022b816553b44fd7188e13f  /usr/share/nginx/html/assets/ImageLightbox-DKnMaoxp.css\n4ca40a7fcd1ccbecda7a7e1c2378287a13ae0d13d4b24e3a4d9a15cf190ea698  /usr/share/nginx/html/assets/Skeleton-CXUJ3ISt.js\n67ed4f2f3ee9ef492c191f580275c2cac50f9c65fba2c0a7c9ff3eb11afb7a10  /usr/share/nginx/html/assets/ProductMarkerEditor-BppuH1Xj.js\n339e4f8a11beb66ee970fb06b9df3e8d9d079437068370aa80814bf1de23ef21  /usr/share/nginx/html/assets/OrderProductIdentity-BeVlFCUz.js\n2fb70bbb788078b2fda9a0b1e89d92bdd8a079371bf374633304769bd59bd54b  /usr/share/nginx/html/assets/index-DUI2zUpI.js\n0eb106f14bf369b8eb2824ffa96b7c0d8d07ddd1bff0d1dba57ec26286bbe411  /usr/share/nginx/html/assets/LoginPage-lGZKzpsv.js\nd5fbbeaacb8fda5756811653fb119933564b3d9903e95492355ac5a6c23d92f2  /usr/share/nginx/html/assets/Users-CHU_rCpc.js\nc334c47dc1e9bceeec9dfe679fcdf109ab14d2df4af0ada93e4d625b9c969134  /usr/share/nginx/html/assets/ProductArchive-BlE03ncm.js\n5e00bdeb1cd7ef772144f3fe7132839a0cd32e4bafc52efc62843e8d858be51e  /usr/share/nginx/html/assets/OrderDesk-C1tR1pL7.js\n1100c46b98e5e5b32795f8c328c6f707746609fc02f14ba491332fce5d805f5a  /usr/share/nginx/html/assets/WarningOutlined-C9muplJM.js\n6409674f14f4323f4ad4f72ebdb662a719f2d06a7af2cae5392e1c8762fbef9e  /usr/share/nginx/html/assets/index-CoyXoN9H.js\n009096e419db6106eaa2121f0d960e762435f29e77e2b5cb7e7ff9d91c751ba8  /usr/share/nginx/html/assets/ClientTrips-DcauMKZB.js\nd3a0b91f37f0f404f2c9fa94a52241778c460c44249e2b639ae2ddcff01f3a5d  /usr/share/nginx/html/assets/AiQuickAddModal-DKzs4sQ0.js\nf06b2953d1d14086c897dd56bb0a4d55eefade679e941221dcff2bd7beb10abb  /usr/share/nginx/html/assets/useNetworkStatus-CtQloXTd.js\nb23a77ec6a6b271d2301697a01f9885f325c60a1b541879845b1e7957a776fba  /usr/share/nginx/html/assets/ProductArchive-Dg9M7RyA.css\ndd12d0ab10d1cdf82694dc6db076c12f35deed6ea85ced3bd92d83de9f521608  /usr/share/nginx/html/assets/Pagination-C-Vkwye0.js\n53f93b3e748150e500e4a9e82b9c876a48e2f42b0fb04fa459aa85fe608dd06d  /usr/share/nginx/html/assets/RecommendationImageViewer-BnZdvF0r.css\n950317d4f0f1fee1894dab3db51b605b8a2c1fdef6bc7cdf031ea50db1c88e2b  /usr/share/nginx/html/assets/MerchantCustomers-DKRs-xEV.js\n7a41766a41c12291595a9927d468542a7245a799a55def42439ca0b3d6a142af  /usr/share/nginx/html/assets/index-D-cHsjvq.js\n57228e6abd81d4b8c752bf45697153f2ce08d5660413c4638cf9f3bcee8ab2d5  /usr/share/nginx/html/assets/PublicRecommendations-DhYyKoQc.css\n54244159a54be64df741d66191548e0b7dcbec4d9cb5ff2613048916976b6c66  /usr/share/nginx/html/assets/Orders-B6i3rwXT.js\nfbae228e216632f875632dfa303b7038f9102b552fd12e41a62ce486b215cdb2  /usr/share/nginx/html/assets/index-C0Z4TFXy.js\n237897e8755dc0bb50aae3a1aff936179c33bbb96518b501c5218f690276afe9  /usr/share/nginx/html/assets/Table-DtXfUTu9.js\n66d040d1470ee19732db18e294d25c36bd87ccb55416b5085ae0c5ca1fd53ac0  /usr/share/nginx/html/assets/EditOutlined-DojvX58_.js\n0f01fc8d91da270a6b9f5b72769e83f8ed57ed6c5db95527bf3d1ca4f41beda5  /usr/share/nginx/html/assets/stock-master-CFtrrVAg.js\n65e599dfcb506879ef9376f377a5e8fd14ed7ba2becf3a620bbd6a57b0ce848b  /usr/share/nginx/html/assets/styleChecker-BlihzjdK.js\n23a8bc61b5f4ad7c84d9fb8b1723bf05f9a489017f20f6c1cf58df329aa50a6c  /usr/share/nginx/html/assets/index-CSkI7c6w.js\n3727cbabb3763c0911c95acc9960352e49a598af8d90baf2d475d2489a7f73e6  /usr/share/nginx/html/assets/index-CVzYahIq.js\n10fb954bd384c2c48fc1ec38970c4d9037c68a5025535504b38ff140a0947e22  /usr/share/nginx/html/assets/Suppliers-BxgbmmDw.js\n6f8b7f157b918244a85668cda46f6b94288497136b3ce8d3531e8ff3cf2994a8  /usr/share/nginx/html/assets/index-Cy3HDF_d.js\nb796883788cb69d24fb7d89330a460c681820b1afb3eafd9e33b40944e5136ec  /usr/share/nginx/html/assets/ProcurementHUD-RmcjeHqM.js\n604fbb731c22e1aa6a0a5cf7a7b0a45fecc4fdfcc5d42224b86d7c341444459a  /usr/share/nginx/html/assets/index-Z3JnCT6A.js\n192b1c233628607761e9ecc70c761ec82033f5e49390c677b9d143d7c6113c90  /usr/share/nginx/html/assets/index-Cep5DThy.css\nd556c8ce5fa25c3c47bac3e3630ffff0ae1b0c3142723f85dbdeb67a9b8a0c42  /usr/share/nginx/html/assets/RecommendationImageViewer-Dwk8SVU0.js"
+}

@@ -1,0 +1,13 @@
+{
+  "protectedContainerCount": 52,
+  "servers": "Only owned Vite sessions86970 and34921 stopped",
+  "dependencyJunctionRemovedOnly": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\engagement-main-20261112\\frontend\\node_modules",
+  "sharedDependencyTargetPreserved": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\frontend\\node_modules",
+  "temporaryPathsRemoved": [
+    "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\engagement-main-20261112\\.task-tmp\\completed-release",
+    "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\engagement-main-20261112\\frontend\\dist"
+  ],
+  "productionRollback": "Prior frontend image retained; no production cleanup executed",
+  "result": "PASS",
+  "localQa": "Owned container/database/credentials/JAR removed by guarded local-qa.py"
+}

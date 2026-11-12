@@ -1,0 +1,15 @@
+{
+  "baseFrontend": {
+    "image": "sha256:a509376c9356e5c7ba466ab22b7253e8cca1b6aad56ba98059c2ad6673dbc3d9",
+    "tag": "bobuy/frontend:20261112.product-introductions-currency",
+    "revision": "3a8b11ac97eab33f676b523af04af1f9922fd3f1"
+  },
+  "baseCore": {
+    "image": "sha256:9293d344191f43cc18cc6a88c18814590bf1c15c22d6a456baa2792ea897ea59",
+    "tag": "bobuy/core:20261112.product-introductions.2",
+    "revision": "5a9bb64ab8cda965018bddacfe9471c1081ca34b"
+  },
+  "imageId": "sha256:5740727b6801a888be885691ef112955729aecf50bfab2c8f779bc038058fd9a",
+  "source": "c3bb160c7a8f0541b06089e2a3eacca05008198d",
+  "payloadSha256": "6d22a7995a5902d96b921cc2a153d7fc4ee5064e8fee2583933eff67249baf39"
+}

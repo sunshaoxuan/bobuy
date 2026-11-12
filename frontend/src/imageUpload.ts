@@ -4,6 +4,32 @@ export const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
 const invalid = () => new Error('gallery.invalid');
 const conversionFailed = () => new Error('gallery.conversion_failed');
 
+/** Snapshot the live picker list before any asynchronous work or input reset. */
+export const copyFileList = (files: FileList | null): File[] => Array.from(files ?? []);
+
+/** Mirror the existing catalog source rule. Never strip query/fragment to guess a source. */
+export function validCatalogImageSource(source: string): boolean {
+  try {
+    const url = new URL(source);
+    return source === source.trim() && source.length <= 2048 && url.href.length <= 2048 && url.protocol === 'https:'
+      && !url.username && !url.password && !url.search && !url.hash;
+  } catch { return false; }
+}
+
+/** Hash the prepared submission bytes, matching server-side asset reuse (also after WebP/AVIF conversion). */
+export async function imageUploadSha256(file: File): Promise<string> {
+  if (!file.size || file.size > MAX_IMAGE_BYTES) throw invalid();
+  if (!globalThis.crypto?.subtle) throw new Error('gallery.hash_unavailable');
+  const bytes = typeof file.arrayBuffer === 'function' ? await file.arrayBuffer() : await new Promise<ArrayBuffer>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = () => reject(invalid());
+    reader.onload = () => reader.result instanceof ArrayBuffer ? resolve(reader.result) : reject(invalid());
+    reader.readAsArrayBuffer(file);
+  });
+  const digest = await crypto.subtle.digest('SHA-256', bytes);
+  return Array.from(new Uint8Array(digest), value => value.toString(16).padStart(2, '0')).join('');
+}
+
 export async function prepareImageUpload(file: File): Promise<File> {
   if (!file.size || file.size > MAX_IMAGE_BYTES) throw invalid();
   const bytes = new Uint8Array(await file.slice(0, 512).arrayBuffer());

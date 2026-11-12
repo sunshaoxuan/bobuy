@@ -2,6 +2,19 @@ import type { Dictionary } from './types';
 import experience from './experience.zh-CN.json';
 
 const messages: Dictionary = {
+  "master.upload_details": "上传详情",
+  "master.upload_filename": "文件名",
+  "master.upload_status": "图片上传状态",
+  "master.upload_waiting": "待上传",
+  "master.upload_uploading": "上传中",
+  "master.upload_success": "已上传",
+  "master.upload_failed": "失败／未确认",
+  "master.upload_reused": "已复用",
+  "master.upload_saved": "已保存到主档",
+  "master.upload_unsaved": "已上传图片保留在当前草稿中，请保存主档以完成关联。",
+  "master.upload_retry_hint": "已确认上传的图片会保留，待上传文件尚未发送。请先核对失败请求，再重新选择文件。",
+  "master.upload_asset": "已上传素材凭据",
+  "gallery.hash_unavailable": "当前无法校验文件，尚未开始上传。",
  "review.text_scroll": "评价较长时，可在输入框内上下滚动查看",
  "review.history_scroll": "评价列表较长时，可在弹窗内上下滚动查看",
 

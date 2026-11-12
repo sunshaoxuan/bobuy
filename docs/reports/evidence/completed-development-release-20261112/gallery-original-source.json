@@ -1,0 +1,13 @@
+{
+  "ownerBase": "82b8daf7fe275d6dd623b36621f1cf2596dc0e98",
+  "files": {
+    "frontend/src/components/ProductCatalogPanel.tsx": "78efd05c4ebe26b2096dd74946e5080f9439e86980cf399800462200fa4a392e",
+    "frontend/src/imageUpload.ts": "9b8a43623fde5b840925c59f4449234dfc7f62479f204c6e94aede6602c289b7",
+    "frontend/src/locales/en-US.ts": "6ce3e31b87b4d51e53775f2270aa72cd38d3438da7c58b17ea4b884c1bf5e53f",
+    "frontend/src/locales/ja-JP.ts": "e36fe4117e7cab2a73d5bc3a932dfe9fdd70ad4d453d9f87942c124aa191fa62",
+    "frontend/src/locales/zh-CN.ts": "b21e71d1f8f50cd9b1b8b98a88df3d91b66a19addf3c7f0158dcb4650d56afb8",
+    "frontend/src/locales/zh-TW.ts": "a2079c9422c148d7d9b424feb7322d891a68d903da4ff8c0078027298149a75b",
+    "frontend/src/components/ProductCatalogPanel.uploadFeedback.test.tsx": "59efb54a9250a5e31e47e613da396da5296ee38b3beb8c816f6a42fa0a73e791",
+    "frontend/src/imageUploadFeedback.test.ts": "22d50ee88687df29900e5728ce64ba3c63fa682197ba653bcd0fb974fc326360"
+  }
+}

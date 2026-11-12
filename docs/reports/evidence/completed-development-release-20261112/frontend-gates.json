@@ -1,0 +1,27 @@
+[
+  {
+    "name": "frontend-tests",
+    "exitCode": 0,
+    "seconds": 570.01,
+    "command": [
+      "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\engagement-main-20261112\\.task-tmp\\completed-release\\node20\\node.exe",
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "--maxWorkers=2",
+      "--minWorkers=1",
+      "--reporter=json",
+      "--outputFile=C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\engagement-main-20261112\\docs\\reports\\evidence\\completed-development-release-20261112\\frontend-tests.json"
+    ]
+  },
+  {
+    "name": "frontend-build",
+    "exitCode": 0,
+    "seconds": 31.71,
+    "command": [
+      "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\engagement-main-20261112\\.task-tmp\\completed-release\\node20\\node.exe",
+      "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+      "run",
+      "build"
+    ]
+  }
+]

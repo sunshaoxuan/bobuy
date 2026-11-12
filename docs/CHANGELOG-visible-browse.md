@@ -1,5 +1,11 @@
 # Candidate change history
 
+## 20261112 verified gallery upload feedback, production accepted
+
+- 图片上传显示逐文件状态和可展开详情，窄屏长文件名完整可读；部分成功留在草稿，显式保存后关联主档。
+- 同字节资源复用、选取器可再次选择、商品与账号切换隔离；失败保存保留资源供显式重试。
+- 本批前端候选保留已上线的商品介绍、币种显示及评分热度功能，发布结果见[交付报告](reports/COMPLETED-DEVELOPMENT-RELEASE-20261112.md)。
+
 ## 20261112 multilingual product introductions, production accepted
 
 - 补齐并保存297项四语商品介绍，现有79项完整介绍保留；389项主档中376项完整，13项资料缺口逐项列明。

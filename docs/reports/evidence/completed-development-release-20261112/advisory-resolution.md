@@ -1,0 +1,12 @@
+# Upload candidate advisory review resolution
+
+Claude opus 5.5 high was visible in the live catalog; two minimal requests returned upstream unavailable. No provider or credential configuration was changed. The official deepseek-flash high text-only runner then returned valid advice. All decisions and changes remain with the primary agent.
+
+1. Accepted: bulk save could forward its result after component unmount. The new deferred-response negative test reproduced this while the 13 original positive cases passed under Node20 after the fixture correction below. Bulk proposals, preview, save and audit now use the editor's existing mounted/scope/operation guard. The current production ratingBusy save guard is retained.
+2. Accepted: a raw URL under2048 characters can normalize beyond the existing save-time href limit. The new unicode-source negative test reproduced this. Preflight now checks the normalized href limit before upload as well as the existing raw rule.
+3. Rejected after API inspection: upload's fourth argument is a human-readable label, not the multipart filename. The actual prepared File has its PNG name/type, and the API prepares/sends that file. Preserving the selected original name as label is intentional; no extension-based server contract changed.
+4. Pending rows are intentional after a failed batch. Existing requirements stop processing without automatic retries and retain later files as waiting. Clarified the four-language retry hint to state that pending files remain unsent and require selecting files again. No implicit continuation or retry was added.
+
+Node20/JSDOM diagnostic: the original component fixture supplied a different-realm ArrayBuffer to real Node WebCrypto. Node24 accepted it; Node20 rejected it. The fixture now returns an exact runtime ArrayBuffer using the Node buffer module, preserving the real bytes and SHA validation without mocking crypto or adding browser Node typings. The corrected RED has13 original positives passing and exactly2 new behavior failures. The earlier mixed failures remain separate evidence.
+
+Local QA initialization diagnostic: the fixture used a visibility value absent from the real enum. Its transaction rolled back to zero users/products. Only the task-owned container/database were removed, and setup repeated with the actual DRAFTER_ONLY value. The live Core JAR and migration validation were unchanged. This does not invalidate application tests or change production data.

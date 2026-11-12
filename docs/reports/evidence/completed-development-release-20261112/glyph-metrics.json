@@ -1,0 +1,728 @@
+[
+  {
+    "width": 1440,
+    "role": "status",
+    "text": "Uploaded",
+    "backgroundRect": {
+      "x": 1291.25,
+      "y": 398.90625,
+      "width": 67.75,
+      "height": 28
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      1300,
+      407,
+      1351,
+      419
+    ],
+    "usableMargins": [
+      7.75,
+      7.09375,
+      7.0,
+      6.90625
+    ],
+    "verticalCenterError": 0.09375,
+    "source": "gallery-partial-status-1440.png",
+    "budgetPass": true
+  },
+  {
+    "width": 1440,
+    "role": "disclosure",
+    "text": "Upload details",
+    "backgroundRect": {
+      "x": 386,
+      "y": 426.90625,
+      "width": 973,
+      "height": 32
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      400,
+      437,
+      474,
+      449
+    ],
+    "usableMargins": [
+      13,
+      9.09375,
+      884,
+      8.90625
+    ],
+    "verticalCenterError": 0.09375,
+    "source": "gallery-partial-status-1440.png",
+    "hitHeightPass": true
+  },
+  {
+    "width": 1440,
+    "role": "disclosure",
+    "text": "Upload details",
+    "backgroundRect": {
+      "x": 386,
+      "y": 518.90625,
+      "width": 973,
+      "height": 32
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      400,
+      529,
+      474,
+      541
+    ],
+    "usableMargins": [
+      13,
+      9.09375,
+      884,
+      8.90625
+    ],
+    "verticalCenterError": 0.09375,
+    "source": "gallery-partial-status-1440.png",
+    "hitHeightPass": true
+  },
+  {
+    "width": 1440,
+    "role": "status",
+    "text": "Uploaded",
+    "backgroundRect": {
+      "x": 1291.25,
+      "y": 582.90625,
+      "width": 67.75,
+      "height": 28
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      1300,
+      591,
+      1351,
+      603
+    ],
+    "usableMargins": [
+      7.75,
+      7.09375,
+      7.0,
+      6.90625
+    ],
+    "verticalCenterError": 0.09375,
+    "source": "gallery-partial-status-1440.png",
+    "budgetPass": true
+  },
+  {
+    "width": 1440,
+    "role": "disclosure",
+    "text": "Upload details",
+    "backgroundRect": {
+      "x": 386,
+      "y": 610.90625,
+      "width": 973,
+      "height": 32
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      400,
+      621,
+      474,
+      633
+    ],
+    "usableMargins": [
+      13,
+      9.09375,
+      884,
+      8.90625
+    ],
+    "verticalCenterError": 0.09375,
+    "source": "gallery-partial-status-1440.png",
+    "hitHeightPass": true
+  },
+  {
+    "width": 1440,
+    "role": "status",
+    "text": "Failed (unconfirmed)",
+    "backgroundRect": {
+      "x": 1234.296875,
+      "y": 674.90625,
+      "width": 124.703125,
+      "height": 28
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      1243,
+      683,
+      1351,
+      694
+    ],
+    "usableMargins": [
+      7.703125,
+      7.09375,
+      7.0,
+      7.90625
+    ],
+    "verticalCenterError": -0.40625,
+    "source": "gallery-partial-status-1440.png",
+    "budgetPass": true
+  },
+  {
+    "width": 1440,
+    "role": "disclosure",
+    "text": "Upload details",
+    "backgroundRect": {
+      "x": 386,
+      "y": 702.90625,
+      "width": 973,
+      "height": 32
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      400,
+      713,
+      474,
+      725
+    ],
+    "usableMargins": [
+      13,
+      9.09375,
+      884,
+      8.90625
+    ],
+    "verticalCenterError": 0.09375,
+    "source": "gallery-partial-status-1440.png",
+    "hitHeightPass": true
+  },
+  {
+    "width": 1440,
+    "role": "disclosure",
+    "text": "Upload details",
+    "backgroundRect": {
+      "x": 386,
+      "y": 794.90625,
+      "width": 973,
+      "height": 32
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      400,
+      805,
+      474,
+      817
+    ],
+    "usableMargins": [
+      13,
+      9.09375,
+      884,
+      8.90625
+    ],
+    "verticalCenterError": 0.09375,
+    "source": "gallery-partial-status-1440.png",
+    "hitHeightPass": true
+  },
+  {
+    "width": 1440,
+    "role": "action",
+    "text": "Confirm and save masters",
+    "backgroundRect": {
+      "x": 1049.046875,
+      "y": 938,
+      "width": 176.3125,
+      "height": 46
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      1066,
+      956,
+      1209,
+      966
+    ],
+    "usableMargins": [
+      15.953125,
+      17,
+      15.359375,
+      17
+    ],
+    "verticalCenterError": 0.0,
+    "source": "gallery-partial-status-1440.png"
+  },
+  {
+    "width": 768,
+    "role": "status",
+    "text": "Uploaded",
+    "backgroundRect": {
+      "x": 619.25,
+      "y": 436.78125,
+      "width": 67.75,
+      "height": 28
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      628,
+      445,
+      679,
+      457
+    ],
+    "usableMargins": [
+      7.75,
+      7.21875,
+      7.0,
+      6.78125
+    ],
+    "verticalCenterError": 0.21875,
+    "source": "gallery-partial-status-768.png",
+    "budgetPass": true
+  },
+  {
+    "width": 768,
+    "role": "disclosure",
+    "text": "Upload details",
+    "backgroundRect": {
+      "x": 66,
+      "y": 464.78125,
+      "width": 621,
+      "height": 32
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      80,
+      475,
+      154,
+      487
+    ],
+    "usableMargins": [
+      13,
+      9.21875,
+      532,
+      8.78125
+    ],
+    "verticalCenterError": 0.21875,
+    "source": "gallery-partial-status-768.png",
+    "hitHeightPass": true
+  },
+  {
+    "width": 768,
+    "role": "disclosure",
+    "text": "Upload details",
+    "backgroundRect": {
+      "x": 66,
+      "y": 556.78125,
+      "width": 621,
+      "height": 32
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      80,
+      567,
+      154,
+      579
+    ],
+    "usableMargins": [
+      13,
+      9.21875,
+      532,
+      8.78125
+    ],
+    "verticalCenterError": 0.21875,
+    "source": "gallery-partial-status-768.png",
+    "hitHeightPass": true
+  },
+  {
+    "width": 768,
+    "role": "status",
+    "text": "Uploaded",
+    "backgroundRect": {
+      "x": 619.25,
+      "y": 620.78125,
+      "width": 67.75,
+      "height": 28
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      628,
+      629,
+      679,
+      641
+    ],
+    "usableMargins": [
+      7.75,
+      7.21875,
+      7.0,
+      6.78125
+    ],
+    "verticalCenterError": 0.21875,
+    "source": "gallery-partial-status-768.png",
+    "budgetPass": true
+  },
+  {
+    "width": 768,
+    "role": "disclosure",
+    "text": "Upload details",
+    "backgroundRect": {
+      "x": 66,
+      "y": 648.78125,
+      "width": 621,
+      "height": 32
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      80,
+      659,
+      154,
+      671
+    ],
+    "usableMargins": [
+      13,
+      9.21875,
+      532,
+      8.78125
+    ],
+    "verticalCenterError": 0.21875,
+    "source": "gallery-partial-status-768.png",
+    "hitHeightPass": true
+  },
+  {
+    "width": 768,
+    "role": "status",
+    "text": "Failed (unconfirmed)",
+    "backgroundRect": {
+      "x": 562.296875,
+      "y": 712.78125,
+      "width": 124.703125,
+      "height": 28
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      571,
+      721,
+      679,
+      732
+    ],
+    "usableMargins": [
+      7.703125,
+      7.21875,
+      7.0,
+      7.78125
+    ],
+    "verticalCenterError": -0.28125,
+    "source": "gallery-partial-status-768.png",
+    "budgetPass": true
+  },
+  {
+    "width": 768,
+    "role": "disclosure",
+    "text": "Upload details",
+    "backgroundRect": {
+      "x": 66,
+      "y": 740.78125,
+      "width": 621,
+      "height": 32
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      80,
+      751,
+      154,
+      763
+    ],
+    "usableMargins": [
+      13,
+      9.21875,
+      532,
+      8.78125
+    ],
+    "verticalCenterError": 0.21875,
+    "source": "gallery-partial-status-768.png",
+    "hitHeightPass": true
+  },
+  {
+    "width": 768,
+    "role": "disclosure",
+    "text": "Upload details",
+    "backgroundRect": {
+      "x": 66,
+      "y": 832.78125,
+      "width": 621,
+      "height": 32
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      80,
+      843,
+      154,
+      855
+    ],
+    "usableMargins": [
+      13,
+      9.21875,
+      532,
+      8.78125
+    ],
+    "verticalCenterError": 0.21875,
+    "source": "gallery-partial-status-768.png",
+    "hitHeightPass": true
+  },
+  {
+    "width": 768,
+    "role": "action",
+    "text": "Confirm and save masters",
+    "backgroundRect": {
+      "x": 377.046875,
+      "y": 938,
+      "width": 176.3125,
+      "height": 46
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      394,
+      956,
+      537,
+      966
+    ],
+    "usableMargins": [
+      15.953125,
+      17,
+      15.359375,
+      17
+    ],
+    "verticalCenterError": 0.0,
+    "source": "gallery-partial-status-768.png"
+  },
+  {
+    "width": 320,
+    "role": "disclosure",
+    "text": "Upload details",
+    "backgroundRect": {
+      "x": 44,
+      "y": 88.84375,
+      "width": 217,
+      "height": 44
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      72,
+      111,
+      76,
+      112
+    ],
+    "usableMargins": [
+      27,
+      21.15625,
+      184,
+      19.84375
+    ],
+    "verticalCenterError": 0.65625,
+    "source": "gallery-partial-status-320.png",
+    "hitHeightPass": true
+  },
+  {
+    "width": 320,
+    "role": "disclosure",
+    "text": "Upload details",
+    "backgroundRect": {
+      "x": 44,
+      "y": 221.265625,
+      "width": 217,
+      "height": 44
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      71,
+      234,
+      132,
+      243
+    ],
+    "usableMargins": [
+      26,
+      11.734375,
+      128,
+      21.265625
+    ],
+    "verticalCenterError": -4.765625,
+    "source": "gallery-partial-status-320.png",
+    "hitHeightPass": true
+  },
+  {
+    "width": 320,
+    "role": "status",
+    "text": "Uploaded",
+    "backgroundRect": {
+      "x": 44,
+      "y": 325.6875,
+      "width": 67.75,
+      "height": 28
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      52,
+      334,
+      104,
+      346
+    ],
+    "usableMargins": [
+      7,
+      7.3125,
+      6.75,
+      6.6875
+    ],
+    "verticalCenterError": 0.3125,
+    "source": "gallery-partial-status-320.png",
+    "budgetPass": true
+  },
+  {
+    "width": 320,
+    "role": "disclosure",
+    "text": "Upload details",
+    "backgroundRect": {
+      "x": 44,
+      "y": 353.6875,
+      "width": 217,
+      "height": 44
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      58,
+      370,
+      132,
+      382
+    ],
+    "usableMargins": [
+      13,
+      15.3125,
+      128,
+      14.6875
+    ],
+    "verticalCenterError": 0.3125,
+    "source": "gallery-partial-status-320.png",
+    "hitHeightPass": true
+  },
+  {
+    "width": 320,
+    "role": "status",
+    "text": "Failed (unconfirmed)",
+    "backgroundRect": {
+      "x": 44,
+      "y": 458.109375,
+      "width": 124.703125,
+      "height": 28
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      52,
+      467,
+      160,
+      478
+    ],
+    "usableMargins": [
+      7,
+      7.890625,
+      7.703125,
+      7.109375
+    ],
+    "verticalCenterError": 0.390625,
+    "source": "gallery-partial-status-320.png",
+    "budgetPass": true
+  },
+  {
+    "width": 320,
+    "role": "disclosure",
+    "text": "Upload details",
+    "backgroundRect": {
+      "x": 44,
+      "y": 486.109375,
+      "width": 217,
+      "height": 44
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      58,
+      502,
+      132,
+      514
+    ],
+    "usableMargins": [
+      13,
+      14.890625,
+      128,
+      15.109375
+    ],
+    "verticalCenterError": -0.109375,
+    "source": "gallery-partial-status-320.png",
+    "hitHeightPass": true
+  },
+  {
+    "width": 320,
+    "role": "status",
+    "text": "Pending",
+    "backgroundRect": {
+      "x": 44,
+      "y": 590.53125,
+      "width": 59.171875,
+      "height": 28
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      52,
+      599,
+      95,
+      611
+    ],
+    "usableMargins": [
+      7,
+      7.46875,
+      7.171875,
+      6.53125
+    ],
+    "verticalCenterError": 0.46875,
+    "source": "gallery-partial-status-320.png",
+    "budgetPass": true
+  },
+  {
+    "width": 320,
+    "role": "disclosure",
+    "text": "Upload details",
+    "backgroundRect": {
+      "x": 44,
+      "y": 618.53125,
+      "width": 217,
+      "height": 44
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      58,
+      635,
+      132,
+      647
+    ],
+    "usableMargins": [
+      13,
+      15.46875,
+      128,
+      14.53125
+    ],
+    "verticalCenterError": 0.46875,
+    "source": "gallery-partial-status-320.png",
+    "hitHeightPass": true
+  },
+  {
+    "width": 320,
+    "role": "action",
+    "text": "Confirm and save masters",
+    "backgroundRect": {
+      "x": 16,
+      "y": 890,
+      "width": 288,
+      "height": 44
+    },
+    "usableFrameInset": 1,
+    "actualGlyphBounds": [
+      89,
+      907,
+      231,
+      917
+    ],
+    "usableMargins": [
+      72,
+      16,
+      72,
+      16
+    ],
+    "verticalCenterError": 0.0,
+    "source": "gallery-partial-status-320.png"
+  }
+]
