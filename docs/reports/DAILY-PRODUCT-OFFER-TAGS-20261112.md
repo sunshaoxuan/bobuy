@@ -36,4 +36,25 @@
 
 最终本批正式脚本检查 15/15 通过，55.860 秒，无失败、错误或资源警告，证据 local-acceptance.json。真实隔离测试库已删除，查询 pg_database 返回0。四个安装输入均由 staged.json 绑定 SHA256；Python AST/编译、systemd verify、git diff --check 通过。当前批次候选冻结，可安装；生产最终验收继续单独记录。
 
+## 最终验收矩阵
+
+| 项目 | 结果与证据 |
+| --- | --- |
+| 删除误建 Codex 任务 | PASS，automation_update 返回 bobuy deleted |
+| 服务器实际安装 | PASS，2026-11-12 18:54 JST，安装源码 a67f366142a1f373a36d28cacde9396fade579e1，installed.json 绑定四个安装文件摘要 |
+| 每日调度 | PASS，systemd timer enabled/active，OnCalendar 明确 Asia/Tokyo 每日01:00，下一次2026-11-13 01:00 JST；Persistent 启用，服务器错过计划后恢复时补跑 |
+| 首次真实同步 | PASS，389 扫描，159添加，0移除，216不变，14待核实，0定义新建；首次根权限回执含每个变更的前后标签及版本 |
+| 真实重复执行 | PASS，389扫描，0添加、0移除、375不变、14待核实，服务 Result=success、ExecMainStatus=0 |
+| 对外读取 | PASS，公网商品标签接口分24个一批逐个核对全部159个商品，均有唯一且已启用的discount定义及中文“优惠”名称；标记商品列表matchedTotal=159，正常公开商品总数325；后台全量389包含非公开商品，因此两者计数用途不同 |
+| 数据与应用边界 | PASS，商品总数389、Flyway仍V34，Core、Frontend、PostgreSQL镜像与安装前一致，服务健康；没有价格、库存、优惠来源、其他标签或前端源码改动，没有网站重启 |
+| 失效、未知和并发规则 | PASS，真实PG的12项行为与并发测试、执行器3项测试，详见local-acceptance.json；14个未知商品当前保持原状，不虚构起始日期 |
+| 下一次自然定时触发 | 尚未到时，未宣称已观察凌晨触发；本次实际执行来自同一个systemd service的手工启动，调度配置及下次时间已独立核实 |
+| 工作区临时清理 | 未完成，自动审批在命令执行前以 blocked by policy 拒绝删除本任务缓存和探测文件；未改工具绕过。未纳入交付提交，仍局限于当前隔离工作区；隔离测试数据库已正常删除 |
+
+最终主目标验收：服务器后台功能、安装、首次同步和幂等通过。自然定时触发留待既定时间，临时文件清理单独记录未完成，不影响服务器任务运行。没有新增Codex自动任务。
+
+公网验收脚本初次使用urllib请求返回403；curl正常请求返回200。按页面相同的24个商品批量读取后，全部159项核实通过。核对当前DTO后将验收字段由total纠正为matchedTotal；这两项只修改验收工具，未修改安装候选或重跑产品测试。
+
+维护入口：`systemctl status bobuy-offer-markers.timer` 查看日程，`systemctl status bobuy-offer-markers.service` 及 `journalctl -u bobuy-offer-markers.service` 查看每次摘要；完整局部变更回执在 `/var/lib/bobuy-offer-markers/run-*.json` 和 `latest.json`，权限0600。停止后续调度使用 `systemctl disable --now bobuy-offer-markers.timer`，不回滚数据库；标签需恢复时逐项核对回执after数组及afterVersion后做局部恢复，禁止覆盖后续编辑。
+
 参考：[systemd timer](https://www.freedesktop.org/software/systemd/man/latest/systemd.timer.html) 的时区及 Persistent 行为由目标服务器的 systemd 255 工具验收；[PostgreSQL 行锁](https://www.postgresql.org/docs/current/explicit-locking.html)用于核对事务和管理端互斥边界。

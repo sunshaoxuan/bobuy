@@ -1,0 +1,26 @@
+{
+  "result": "PASS",
+  "publicMarkerAssignmentsVerified": 159,
+  "markedBrowseTotal": 159,
+  "publicBrowseTotal": 325,
+  "runtime": {
+    "timer": "active",
+    "enabled": "enabled",
+    "service": "Result=success\nExecMainStatus=0",
+    "next": "NextElapseUSecRealtime=Fri 2026-11-13 01:00:00 JST",
+    "counts": {
+      "products": 389,
+      "markerSets": 159,
+      "schema": "34"
+    },
+    "health": {
+      "bobuy-core-service": "healthy",
+      "bobuy-postgres": "healthy",
+      "bobuy-frontend": "running"
+    }
+  },
+  "source": "a67f366142a1f373a36d28cacde9396fade579e1",
+  "firstScheduledTrigger": "2026-11-13 01:00:00 Asia/Tokyo; still future, not yet observed",
+  "uiCodeChanged": false,
+  "websiteRestarted": false
+}
