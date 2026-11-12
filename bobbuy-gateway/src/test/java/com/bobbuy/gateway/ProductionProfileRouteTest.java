@@ -50,6 +50,19 @@ class ProductionProfileRouteTest {
     assertThat(destination(properties, "GET", "/api/auth/profile")).isEqualTo("lb://auth-service");
   }
 
+  @Test void durableCostcoIntakeReachesCoreBeforeTheBroadAiRoute() throws Exception {
+    var properties = productionRoutes();
+    for (String path : List.of("/api/ai/costco-onboarding", "/api/ai/costco-onboarding/status",
+        "/api/ai/costco-onboarding/job-id", "/api/ai/costco-onboarding/photo")) {
+      for (String method : List.of("GET", "POST")) {
+        assertThat(destination(properties, method, path)).isEqualTo("lb://core-service");
+      }
+    }
+    properties.getRoutes().removeIf(route -> route.getId().equals("costco-onboarding-route"));
+    assertThat(destination(properties, "GET", "/api/ai/costco-onboarding")).isEqualTo("lb://ai-service");
+    assertThat(destination(properties, "GET", "/api/ai/costco-onboarding/status")).isEqualTo("lb://ai-service");
+  }
+
   @Test void existingServiceBoundariesStayIntact() throws Exception {
     var properties = productionRoutes();
     for (String path : List.of("/api/auth/login", "/api/auth/refresh", "/api/auth/me", "/api/auth/profile-other")) {
@@ -57,6 +70,7 @@ class ProductionProfileRouteTest {
     }
     assertThat(destination(properties, "GET", "/api/storefront/products")).isEqualTo("lb://core-service");
     assertThat(destination(properties, "POST", "/api/ai/chat")).isEqualTo("lb://ai-service");
+    assertThat(destination(properties, "GET", "/api/ai/costco-onboarding-other")).isEqualTo("lb://ai-service");
     assertThat(destination(properties, "GET", "/api/chat/messages")).isEqualTo("lb://im-service");
   }
 }
