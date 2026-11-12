@@ -1,0 +1,50 @@
+### 1. Actual Remaining Defects or Missing Evidence
+
+* **Visual / Layout Defects:** None observed in the provided screenshots.
+  * English packaging and price-unit consistently use **"refills"** (`1 unit (6.3ml) + 5 refills (6.3ml each) / 6 uses` and `/ 1 unit + 5 refills`).
+  * Non-breaking spacing / groupings keep quantities cleanly readable without awkward separation.
+  * Japanese reference price header is appropriately shortened to `参考価格（非リアルタイム）`.
+  * Title subtitle logic is correct: Japanese shows only the Japanese title, while English displays the localized title followed by `(トイレ用消臭芳香剤 プレミアムシリーズ)` underneath.
+  * Price and unit lines are consistently right-aligned inside the price card across all viewports.
+  * Full introductory descriptions and disabled CTAs are completely visible with no clipping or layout overflow.
+* **Missing Evidence (Visual Scope):** None for these target configurations (Mobile 320px EN/JA and Desktop 1440px EN/JA). Non-English/non-Japanese locales and interactive/runtime behaviors are handled independently as noted.
+
+---
+
+### 2. Per-Image Judgment
+
+#### Image 1: Mobile (320px) — English (`No.78159`)
+* **Judgment:** **PASS**
+* **Observations:**
+  * Header and modal dismiss controls align properly at the top.
+  * Title and subline `(トイレ用消臭芳香剤 プレミアムシリーズ)` are clearly formatted without crowding.
+  * Packaging text wraps cleanly across two lines (`1 unit (6.3ml) + 5 refills` / `(6.3ml each) / 6 uses`) preserving full quantity legibility.
+  * Reference price header (`Reference price (not real time)` / `JPY`) and right-aligned original/discount/final price (`¥ 1,758`) and unit (`/ 1 unit + 5 refills`) align cleanly.
+  * Full "About this product" copy and disabled CTA (`+ Not open for booking yet`) are fully displayed without truncation.
+
+#### Image 2: Mobile (320px) — Japanese (`No.78159`)
+* **Judgment:** **PASS**
+* **Observations:**
+  * Displays only the primary Japanese title `トイレ用消臭芳香剤 プレミアムシリーズ` without redundant subline.
+  * Packaging details wrap naturally across continuous factual CJK text (`本体1個6.3ml＋つけかえ5個各` / `6.3ml／計6回分`), maintaining clear readability without awkward truncation.
+  * Shortened header `参考価格（非リアルタイム）` fits comfortably opposite `JPY`.
+  * Price block is cleanly aligned to the right: `通常価格: ¥2,198 -¥440`, bold `¥ 1,758`, and unit `/ 本体1個＋つけかえ5個`.
+  * Introduction paragraph and disabled CTA (`+ 現在は予約受付前です`) are intact and legible.
+
+#### Image 3: Desktop (1440px) — English (`No.78159`)
+* **Judgment:** **PASS**
+* **Observations:**
+  * Two-column desktop modal layout is balanced with comfortable whitespace.
+  * Thumbnail gallery, carousel pager (`1 / 5`), and primary image render cleanly on the left pane.
+  * Packaging specification fits comfortably onto a single line.
+  * Price card maintains strict right-alignment for discount, price, and unit (`/ 1 unit + 5 refills`).
+  * "About this product" copy and disabled CTA fit within viewport flow without clipping.
+
+#### Image 4: Desktop (1440px) — Japanese (`No.78159`)
+* **Judgment:** **PASS**
+* **Observations:**
+  * Left media gallery is identical in balance and structure to the desktop English view.
+  * Japanese title breaks cleanly across two lines (`トイレ用消臭芳香剤 プレミアムシリ` / `ーズ`) with no extraneous secondary line.
+  * Packaging value `本体1個6.3ml＋つけかえ5個各6.3ml／計6回分` fits smoothly in single-line desktop presentation.
+  * Shortened reference price header (`参考価格（非リアルタイム）`) and right-aligned unit line (`/ 本体1個＋つけかえ5個`) adhere strictly to the layout rules.
+  * Full description and disabled CTA are clearly displayed.

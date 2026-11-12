@@ -1,0 +1,101 @@
+{
+  "result": "PASS",
+  "source": "ea7b7fec29ee5d413cfac2e2025c0f93819e4fc6",
+  "frontendManifestSha256": "fe70ed4014205955459527f9eebcf51b4e1c719436049f65e5dbcb9e0fb697e7",
+  "functional": "Both catalogue and recommendation entry paths, gallery next2/5 and previous1/5, close/reopen/deep link; original ITEM and exact pack factors preserved; No.77839 has one warehouse1498 card and Online1828 annotation with0 discounts on Japan day2026-11-12",
+  "geometry": [
+    {
+      "name": "candidate-en-mobile",
+      "overflow": [],
+      "priceCount": 1,
+      "text": "No.78159\n\n‹\n1 / 5\n›\nFebreze / ファブリーズ\nPremium-series toilet deodorizer and air freshener\n（トイレ用消臭芳香剤 プレミアムシリーズ）\nPackaging\n1 unit (6.3ml) + 5 refills (6.3ml each) / 6 uses\nReference price (not real time)\nJPY\nOriginal price: ¥2,198\n−¥440\n¥\n1,758\n/ 1 unit + 5 refills\nAbout this product\n\nA toilet deodorizing air freshener for walls and floors, with antibacterial action and an Ultra Fresh Soap scent; includes refills that are set into the holder.\n\nNot open for booking yet",
+      "unitAlign": "right",
+      "viewport": {
+        "height": 1000,
+        "width": 320
+      }
+    },
+    {
+      "name": "candidate-en-desktop",
+      "overflow": [],
+      "priceCount": 1,
+      "text": "No.78159\n\n‹\n1 / 5\n›\nFebreze / ファブリーズ\nPremium-series toilet deodorizer and air freshener\n（トイレ用消臭芳香剤 プレミアムシリーズ）\nPackaging\n1 unit (6.3ml) + 5 refills (6.3ml each) / 6 uses\nReference price (not real time)\nJPY\nOriginal price: ¥2,198\n−¥440\n¥\n1,758\n/ 1 unit + 5 refills\nAbout this product\n\nA toilet deodorizing air freshener for walls and floors, with antibacterial action and an Ultra Fresh Soap scent; includes refills that are set into the holder.\n\nNot open for booking yet",
+      "unitAlign": "right",
+      "viewport": {
+        "height": 1000,
+        "width": 1440
+      }
+    },
+    {
+      "name": "candidate-ja-mobile",
+      "overflow": [],
+      "priceCount": 1,
+      "text": "No.78159\n\n‹\n1 / 5\n›\nFebreze / ファブリーズ\nトイレ用消臭芳香剤 プレミアムシリーズ\n包装・入数\n本体1個6.3ml＋つけかえ5個各6.3ml／計6回分\n参考価格（非リアルタイム）\nJPY\n通常価格: ¥2,198\n−¥440\n¥\n1,758\n/ 本体1個＋つけかえ5個\n商品について\n\nトイレ用の消臭芳香剤。壁と床まで消臭＋抗菌し、ウルトラ・フレッシュ・シャボンの香りが広がります。詰め替え付きで、香りパックを本体にセットして使います。\n\n現在は予約受付前です",
+      "unitAlign": "right",
+      "viewport": {
+        "height": 1000,
+        "width": 320
+      }
+    },
+    {
+      "name": "candidate-ja-desktop",
+      "overflow": [],
+      "priceCount": 1,
+      "text": "No.78159\n\n‹\n1 / 5\n›\nFebreze / ファブリーズ\nトイレ用消臭芳香剤 プレミアムシリーズ\n包装・入数\n本体1個6.3ml＋つけかえ5個各6.3ml／計6回分\n参考価格（非リアルタイム）\nJPY\n通常価格: ¥2,198\n−¥440\n¥\n1,758\n/ 本体1個＋つけかえ5個\n商品について\n\nトイレ用の消臭芳香剤。壁と床まで消臭＋抗菌し、ウルトラ・フレッシュ・シャボンの香りが広がります。詰め替え付きで、香りパックを本体にセットして使います。\n\n現在は予約受付前です",
+      "unitAlign": "right",
+      "viewport": {
+        "height": 1000,
+        "width": 1440
+      }
+    },
+    {
+      "name": "candidate-cn-mobile",
+      "overflow": [],
+      "priceCount": 1,
+      "text": "No.78159\n\n‹\n1 / 5\n›\nFebreze / ファブリーズ\nPremium系列卫生间除臭芳香剂\n（トイレ用消臭芳香剤 プレミアムシリーズ）\n包装明细\n本体1个6.3ml＋替换装5个各6.3ml／共6次用量\n参考售价（非实时）\nJPY\n原价: ¥2,198\n−¥440\n¥\n1,758\n/ 本体1个＋替换装5个\n商品介绍\n\n卫生间用消臭芳香剂，可对墙面和地面进行消臭并抗菌，散发Ultra Fresh皂香；附带替换装，将香包放入本体使用。\n\n暂未开放预订",
+      "unitAlign": "right",
+      "viewport": {
+        "height": 1000,
+        "width": 320
+      }
+    },
+    {
+      "name": "candidate-cn-desktop",
+      "overflow": [],
+      "priceCount": 1,
+      "text": "No.78159\n\n‹\n1 / 5\n›\nFebreze / ファブリーズ\nPremium系列卫生间除臭芳香剂\n（トイレ用消臭芳香剤 プレミアムシリーズ）\n包装明细\n本体1个6.3ml＋替换装5个各6.3ml／共6次用量\n参考售价（非实时）\nJPY\n原价: ¥2,198\n−¥440\n¥\n1,758\n/ 本体1个＋替换装5个\n商品介绍\n\n卫生间用消臭芳香剂，可对墙面和地面进行消臭并抗菌，散发Ultra Fresh皂香；附带替换装，将香包放入本体使用。\n\n暂未开放预订",
+      "unitAlign": "right",
+      "viewport": {
+        "height": 1000,
+        "width": 1440
+      }
+    },
+    {
+      "name": "candidate-tw-mobile",
+      "overflow": [],
+      "priceCount": 1,
+      "text": "No.78159\n\n‹\n1 / 5\n›\nFebreze / ファブリーズ\nPremium系列廁所除臭芳香劑\n（トイレ用消臭芳香剤 プレミアムシリーズ）\n包裝明細\n本體1個6.3ml＋替換裝5個各6.3ml／共6次用量\n參考售價（非即時）\nJPY\n原價: ¥2,198\n−¥440\n¥\n1,758\n/ 本體1個＋替換裝5個\n商品介紹\n\n廁所用消臭芳香劑，可對牆面和地面進行消臭並抗菌，散發Ultra Fresh皂香；附替換裝，將香包放入本體使用。\n\n暫未開放預訂",
+      "unitAlign": "right",
+      "viewport": {
+        "height": 1000,
+        "width": 320
+      }
+    },
+    {
+      "name": "candidate-tw-desktop",
+      "overflow": [],
+      "priceCount": 1,
+      "text": "No.78159\n\n‹\n1 / 5\n›\nFebreze / ファブリーズ\nPremium系列廁所除臭芳香劑\n（トイレ用消臭芳香剤 プレミアムシリーズ）\n包裝明細\n本體1個6.3ml＋替換裝5個各6.3ml／共6次用量\n參考售價（非即時）\nJPY\n原價: ¥2,198\n−¥440\n¥\n1,758\n/ 本體1個＋替換裝5個\n商品介紹\n\n廁所用消臭芳香劑，可對牆面和地面進行消臭並抗菌，散發Ultra Fresh皂香；附替換裝，將香包放入本體使用。\n\n暫未開放預訂",
+      "unitAlign": "right",
+      "viewport": {
+        "height": 1000,
+        "width": 1440
+      }
+    }
+  ],
+  "consoleErrors": 0,
+  "networkRequests": 73,
+  "failedNetworkRequests": 0,
+  "visualEvidence": "visual-acceptance.json",
+  "content": "content-acceptance.json"
+}

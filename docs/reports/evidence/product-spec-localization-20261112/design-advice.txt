@@ -1,0 +1,46 @@
+**Verdict:** The JSONB overlay is viable and minimal, but only if you treat it as an overlay, not as part of the product’s source identity. No SQL/Flyway migration is needed for the additive JSON content.
+
+Use:
+`factTranslations: { model|packaging|priceUnit -> exact source literal -> locale -> reviewed text }`
+
+Server-side rules:
+
+- Type it explicitly at the service/DTO boundary; do not let controllers/UI pass arbitrary JSON structures.
+- Validate field names, the four allowed locales, map sizes and text lengths.
+- Bind by exact `String.equals`, with no trim, case folding or Unicode normalization.
+- For recommendations, look up using the **snapshot scalar**, never the current master scalar.
+- Return only the selected locale, and only for fields whose exact source literal is already public through the eligible item. Prefer resolved display strings over exposing the raw overlay map publicly.
+- Never mutate `RecommendationItem` snapshots or original price/packaging/model strings.
+- Preserve the original Japanese scalar as the business fact.
+- Keep missing translations as per-field fallback, plus coverage metrics. Do not make public eligibility/read availability depend on one-time 100% coverage.
+
+**Concrete risks**
+
+- **Source hash / exact-ITEM contamination:** If `factTranslations` is included in recommendation source hashing, publication fingerprinting or review freshness, backfilling translations can invalidate public eligibility or exact ITEM matches. Exclude the translation overlay from source identity/hash/version and add a test that adding a translation does not change publication eligibility.
+- **Unknown-property loss:** Bulk preview/save and rollback deployments can drop `factTranslations` if any writer reconstructs the JSONB from known fields. This is the largest data-loss risk. Both old and new writers must round-trip unknown properties before translation backfill begins.
+- **Historical-snapshot lifetime:** A master-record overlay is durable only if product masters backing public snapshots are never hard-deleted or pruned. Do not garbage-collect translation entries merely because the scalar is no longer current; old public snapshots may still need them. If deletion is possible, use an append-only translation dictionary or copy translations into snapshots at publication—the former needs migration.
+- **Review bypass:** Editing translations must either set fresh human review or invalidate review freshness. A bulk save must not preserve `reviewedBy/reviewedAt` unchanged while changing translation text. If product-level review is too coarse, add per-entry review metadata, but do not serve unreviewed translations.
+- **Private-fact leakage:** Admin/full JSON responses, logs and error payloads must not leak the full overlay. Public filtering must be server-side and exact-item based, not frontend filtered. Cache keys must include locale, public/owner context, product/item version, publication state and review freshness.
+- **Exact-literal fragility and JS object keys:** Whitespace/case/Unicode-composition changes create missing translations. That is safe if you fall back, but coverage silently drops. In React/JS, use `Map` or null-prototype objects rather than dynamic object assignment for source literals; validate or reject reserved keys such as `__proto__`/`constructor`.
+- **Backfill churn:** “Normal UI saves” may bump versions/review timestamps or trigger public re-review. Decide explicitly whether translation edits alter product `reviewedAt` and version. Ideally translation overlay edits should not change source facts or recommendation identity, but must still be human-reviewed.
+- **Coverage regression:** The 54/125/139 counts cover current public values only. Historical public snapshots may contain older model/packaging/priceUnit literals. Coverage must include all distinct literals used by public snapshots, not just current masters.
+- **Rollback:** There is no schema rollback. Frontend can roll back first and fall back to originals. Core rollback is safe only if the older core ignores and preserves `factTranslations`; a strict DTO or field-rebuilding writer can fail reads or erase data. Take a JSONB backup/audit before bulk backfill.
+
+**SQL migration:** Not needed. The existing JSONB column accepts the new optional property. Do not add a column or DDL merely for this. Application-level backfill, validation and coverage reporting are enough. A separate `FactTranslation` table would need a migration and is only justified if product masters are pruned or you need cross-product lifetime/query guarantees.
+
+**Simpler equally durable design:** None that preserves existing immutable history more simply than retaining the master overlay. Extending `Item.Text` is wider and affects snapshot payload/source identity. If you need per-entry review/provenance or stronger key safety, an array is marginally safer but not simpler:
+`factTranslations: [{ field, source, locales, reviewedAt, reviewedBy }]`
+A separate append-only dictionary is simpler to reason about for lifetime/coverage, but requires migration and joins. For the current JSONB constraint, the nested exact-literal overlay is the minimal durable design.
+
+**Essential tests**
+
+- Round-trip preview/save preserves `factTranslations` and other unknown JSONB properties; old-writer compatibility test included.
+- Exact-match lookup succeeds only for identical literals; whitespace/case/Unicode variants fall back.
+- Private/unpublished/unreviewed products expose no translations; public entries expose only the selected locale and exact public item field values.
+- Historical recommendation snapshot with an old scalar gets the correct translation while current master differs; original price/model/packaging strings remain byte-exact.
+- Adding/changing a translation does not change source hash, exact ITEM eligibility or recommendation snapshot identity.
+- Translation edit without human review is not publicly served; bulk save cannot preserve an old reviewed flag while changing translation text.
+- Concurrent translation/scalar saves with optimistic version conflicts do not lose overlay entries.
+- Coverage check includes all distinct historical public snapshot literals, not just current products.
+- Cache tests cover locale, owner/public view, unpublish, review expiry and version.
+- Validation tests reject unknown fields/locales, oversized values, reserved property names and unsafe HTML/script content.

@@ -1,0 +1,5 @@
+{
+  "independentUrllibProbe": "HTTP403; reason unconfirmed. No CLI retry or credential change.",
+  "acceptedEvidence": "Hash the already successful ordinary browser response bytes using Network.getResponseBody. No additional asset request. Compare against the frozen local manifest and the operator-verified82 container files.",
+  "receipt": "production-response-hashes.json"
+}

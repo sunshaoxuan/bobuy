@@ -1,0 +1,138 @@
+[
+  {
+    "parent": "production-en-mobile.png",
+    "parentSha256": "9a6eb3a9a1d2372469f1917e276b036426cc41fd2b2ffe5c1c46c43dfedf4593",
+    "pixelSize": [
+      320,
+      1000
+    ],
+    "crop": "production-en-mobile-info.png",
+    "cropBox": [
+      12,
+      350,
+      308,
+      985
+    ],
+    "cropSha256": "bd6ecab17bebff79fd22cb4cd495dbb9fc73ebde9bd45a3f585ed066acc18ed6",
+    "originalPixels": true
+  },
+  {
+    "parent": "production-en-desktop.png",
+    "parentSha256": "62776ec56c7ed7d5e887d70c425abd9d1ae69486e066a6ed21c1d1177c79b280",
+    "pixelSize": [
+      1440,
+      1000
+    ],
+    "crop": "production-en-desktop-info.png",
+    "cropBox": [
+      915,
+      80,
+      1420,
+      700
+    ],
+    "cropSha256": "1ace1ac108c3d24ceae7a08e6a2d8d3647fa59e351f260f3a6583e43854d22ec",
+    "originalPixels": true
+  },
+  {
+    "parent": "production-ja-mobile.png",
+    "parentSha256": "d3eff7fffb4f39abee19f026eff53b54bfb8a6b09fd43cf168369104cc6d5729",
+    "pixelSize": [
+      320,
+      1000
+    ],
+    "crop": "production-ja-mobile-info.png",
+    "cropBox": [
+      12,
+      350,
+      308,
+      985
+    ],
+    "cropSha256": "8665ee37e28aa733b43d6ce1f0d9691c32e0161d159f748dc89a6086f26e7e1d",
+    "originalPixels": true
+  },
+  {
+    "parent": "production-ja-desktop.png",
+    "parentSha256": "5d1976adebc0ae921516dd772d1a6c3ec227f4e5d6a710b6227f835292f74995",
+    "pixelSize": [
+      1440,
+      1000
+    ],
+    "crop": "production-ja-desktop-info.png",
+    "cropBox": [
+      915,
+      80,
+      1420,
+      700
+    ],
+    "cropSha256": "54cf9ae90fee301fdd7dd3ab2523f877746288a76994852542cf76ad10537d94",
+    "originalPixels": true
+  },
+  {
+    "parent": "production-cn-mobile.png",
+    "parentSha256": "2ce2ed477a6a83df3b2323b09a671c25ae3bc14e632e6e702009ca290604dd42",
+    "pixelSize": [
+      320,
+      1000
+    ],
+    "crop": "production-cn-mobile-info.png",
+    "cropBox": [
+      12,
+      350,
+      308,
+      985
+    ],
+    "cropSha256": "34b1bc5b64f4b00a1b433bc716d22a5f4443bf715b7008e7e453bad8c1490988",
+    "originalPixels": true
+  },
+  {
+    "parent": "production-cn-desktop.png",
+    "parentSha256": "f855e5b1491e5438b936e01beb03fa8328819aefb8b9e403bd36f0acc5ec1973",
+    "pixelSize": [
+      1440,
+      1000
+    ],
+    "crop": "production-cn-desktop-info.png",
+    "cropBox": [
+      915,
+      80,
+      1420,
+      700
+    ],
+    "cropSha256": "5a687e36ed9c090d069cffead463e6f10aa2d8f80b82ea7867d633bf63b8f06f",
+    "originalPixels": true
+  },
+  {
+    "parent": "production-tw-mobile.png",
+    "parentSha256": "e2880aa257f8453c352b9504828ada145240faee5ea78c9c7d76410a9512d1be",
+    "pixelSize": [
+      320,
+      1000
+    ],
+    "crop": "production-tw-mobile-info.png",
+    "cropBox": [
+      12,
+      350,
+      308,
+      985
+    ],
+    "cropSha256": "e33b72ce2f7d32b32f477a04f7d1481a01a12bf4d64a53a94519af111f533a99",
+    "originalPixels": true
+  },
+  {
+    "parent": "production-tw-desktop.png",
+    "parentSha256": "365b1220ee5f529841f95edcae21f0dfa854856c541982ff7ac210c91c681b45",
+    "pixelSize": [
+      1440,
+      1000
+    ],
+    "crop": "production-tw-desktop-info.png",
+    "cropBox": [
+      915,
+      80,
+      1420,
+      700
+    ],
+    "cropSha256": "b467d7a35bdeea285f5c30b5046a410d41c09b4e66213e3a56e451b982738560",
+    "originalPixels": true
+  }
+]

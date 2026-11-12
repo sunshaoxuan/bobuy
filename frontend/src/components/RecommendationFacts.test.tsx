@@ -3,7 +3,7 @@ import {I18nProvider} from '../i18n';
 import {OfferInfo,factsError,parseBatch,japanDate} from './RecommendationFacts';
 
 describe('source offer facts',()=>{
-  it.each([['en-US','Reference price (not real time)'],['zh-CN','参考售价（非实时）'],['zh-TW','參考售價（非即時）'],['ja-JP','参考価格（リアルタイムではありません）']])('separates compact price amount, non-live label, unit and actual dates in %s', (locale,label)=>{
+  it.each([['en-US','Reference price (not real time)'],['zh-CN','参考售价（非实时）'],['zh-TW','參考售價（非即時）'],['ja-JP','参考価格（非リアルタイム）']])('separates compact price amount, non-live label, unit and actual dates in %s', (locale,label)=>{
     localStorage.setItem('bobbuy_locale',locale);const view=render(<I18nProvider><OfferInfo compact today="2026-11-10" facts={{name:'Synthetic card',referencePrice:1598,originalPrice:1998,priceUnit:'42g × 40',offerStart:'2026-11-08',offerEnd:'2026-11-15'}}/></I18nProvider>);
     expect(view.container.querySelector('.card-price-label')).toHaveTextContent(label);expect(view.container.querySelector('.card-reference-value')).toHaveTextContent('1,598');expect(view.container.querySelector('.card-reference-value')).not.toHaveTextContent('42g');expect(view.container.querySelector('.card-price-unit')).toHaveTextContent('/ 42g × 40');expect(view.container.querySelector('del')).toHaveTextContent('1,998');expect(view.container.textContent).toContain('2026-11-08');expect(view.container.textContent).toContain('2026-11-15');
   });

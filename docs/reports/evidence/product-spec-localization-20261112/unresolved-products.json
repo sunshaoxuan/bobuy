@@ -1,0 +1,74 @@
+[
+  {
+    "productId": "01d4fcc0-f4c4-4619-9b15-d743c1c98107",
+    "itemNumber": null,
+    "name": "オーガニック白いちじく",
+    "missingEvidence": "缺品牌、ITEM或条码、包装标签或对应官方页面，尚不能确认是鲜果还是果干。",
+    "public": false,
+    "unchanged": true
+  },
+  {
+    "productId": "04172261-7386-40ca-a96e-5e295f8fb912",
+    "itemNumber": "206609",
+    "name": "カークランドシグネチャー アーモンドフラワー 1.36kg",
+    "missingEvidence": "现有编号206609与官方页面28609不一致，缺包装ITEM、条码照片或官方同品对应证明。",
+    "public": false,
+    "unchanged": true
+  },
+  {
+    "productId": "09753591-5d58-44a8-8ab2-cc87a1765593",
+    "itemNumber": null,
+    "name": "泡ハンドソープ つめかえ用",
+    "missingEvidence": "缺品牌系列、ITEM或条码、补充装容量及标签或对应官方页面。",
+    "public": false,
+    "unchanged": true
+  },
+  {
+    "productId": "18d489aa-5acc-4591-b899-1849b9d76d50",
+    "itemNumber": null,
+    "name": "ニオイ専用 液体洗濯洗剤",
+    "missingEvidence": "缺品牌系列及款式、ITEM或条码、容量和包装标签。",
+    "public": false,
+    "unchanged": true
+  },
+  {
+    "productId": "245dc3f3-7a6e-46b6-9bb3-27a3bf3d5d57",
+    "itemNumber": null,
+    "name": "W除菌 手洗い用食器洗剤",
+    "missingEvidence": "缺品牌系列、香型或款式、ITEM或条码及包装标签。",
+    "public": false,
+    "unchanged": true
+  },
+  {
+    "productId": "3c7fc4ae-574d-4a1c-8afa-c56753c973c3",
+    "itemNumber": null,
+    "name": "カビ取り用洗浄剤",
+    "missingEvidence": "缺品牌系列、清洁剂类型、ITEM或条码及标签或对应官方页面。",
+    "public": false,
+    "unchanged": true
+  },
+  {
+    "productId": "4f3da943-3f0a-4b0b-b1e5-c594a571fdaf",
+    "itemNumber": null,
+    "name": "液体洗濯洗剤",
+    "missingEvidence": "缺品牌系列、普通或滚筒专用款、香型配方、ITEM或条码及包装标签。",
+    "public": false,
+    "unchanged": true
+  },
+  {
+    "productId": "69c7714b-06d6-4e59-9232-7d4c39666ae6",
+    "itemNumber": null,
+    "name": "折りたたみテーブル",
+    "missingEvidence": "缺品牌型号、ITEM、尺寸材质及标签或对应官方页面。",
+    "public": false,
+    "unchanged": true
+  },
+  {
+    "productId": "c8a5d22d-3c06-4c0b-bd87-469a3513aeba",
+    "itemNumber": null,
+    "name": "エアジェット",
+    "missingEvidence": "名称过于笼统，缺品牌、商品类别、ITEM、具体款式及包装标签。",
+    "public": false,
+    "unchanged": true
+  }
+]

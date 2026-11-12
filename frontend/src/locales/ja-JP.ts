@@ -1387,7 +1387,7 @@ const messages: Dictionary = {
   "products.details_tab": "商品情報",
   "products.media_tab": "画像と出典",
   "products.add_images": "画像を追加",
-  "detail.reference": "参考価格（リアルタイムではありません）",
+  "detail.reference": "参考価格（非リアルタイム）",
   "detail.source": "出典",
   "detail.original_price": "通常価格",
   "detail.discount_amount": "値引き額",
