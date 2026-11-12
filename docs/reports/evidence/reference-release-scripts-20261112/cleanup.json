@@ -1,0 +1,10 @@
+{
+  "originalSourceArchived": true,
+  "result": "PASS",
+  "removed": [
+    ".task-tmp/reference-release-script",
+    ".task-tmp/reference-release-tests",
+    ".task-tmp/plan63"
+  ],
+  "productionTouched": false
+}

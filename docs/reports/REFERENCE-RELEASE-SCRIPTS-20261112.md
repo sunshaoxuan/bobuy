@@ -25,6 +25,10 @@
 
 ## 发布工具安装与回滚
 
+最终验收PASS。PR73的三语言CodeQL均通过并已合并；服务器通用入口和模块已安装，来源为 `479472c783b72e04041cc7c3c6d35f97c0e3171d`。实际服务器入口SHA256为 `9340134602ff9b69ddcf70ee7ecd9e33cb45f14a92a91582b7f981b799f5ef0d`，模块为 `46da9d9d18337b635f5a40b65b3712be31083920568a6b51af735e6c270be126`，均与提交中的LF原字节一致。三个服务器CLI负例均以2退出，未创建测试发布目录；安装前后全部容器身份、镜像及启动状态一致。安装没有执行数据库命令，也没有修改历史operator。对应真实证据为 `evidence/reference-release-scripts-20261112/installed.json` 和 `ci.json`。
+
+项目根工作目录中的脚本、发布技能和执行文档已同步；原根目录文件另外保存在 `C:/workspace/codex-selfimp/bobuy-geographic-master-20261112/script-install-originals/`。原根目录存在的无关改动保持原状。
+
 服务器只安装已提交的 `publish-production.py` 和 `reference_data_release.py`，依赖先安装，逐个原子替换，核对实际字节摘要。原服务器文件保存在 `/opt/bobuy/releases/20261112.reference_release_tooling.1/publish-production.before.py`，原文件摘要及源码提交、实际新文件摘要、三条无副作用CLI烟测和所有容器前后身份记录保存在 `installed.json`。有正在运行的通用发布进程或原文件摘要漂移时拒绝安装。
 
 工具安装失败则只回退这两个脚本；不操作数据库、服务或历史发布目录。人工回滚前先核对是否有后续工具变更，再原子恢复保存的旧文件并仅移除本次新增模块；旧版本默认重型行为会随回滚恢复，须同步撤销对应执行规则或保留显式入口守卫。
