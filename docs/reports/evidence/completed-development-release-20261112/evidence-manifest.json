@@ -127,6 +127,7 @@
     "runtime-initial.json": "0be7bd74a2b88e456c421c15479b63c28c7764559994f687b719981e9f773828",
     "runtime-preflight.json": "b782436b4642f001e841e509589dd9a0b0be3e9f8b229bdf57c2f3854194f972",
     "staged.json": "a61b58cb30c4a09b43e3a2c3b903d485fc61a9049b28576497007a04644eea34",
+    "verify-archive.py": "d1a27772948fbe4cfc04d8d4bb90724c184851d3d6027598edb9c88952e1f243",
     "verify-protection.py": "65d3879e2dbdcd1796f926cbd9f6d024acb40384509244e7be3d158ee513a412",
     "visual-acceptance.json": "08a8d6840dbb666fe1be91fe4c21ead51c1e0083005ccb6a3f8528f4fd77c8ec",
     "visual-findings.md": "3f9ca2985e2c717d8409f27348c6449916f9df687447eae6ddb793c556b6233f",
