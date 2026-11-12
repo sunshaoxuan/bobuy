@@ -46,7 +46,14 @@ elif mode == 'verify':
     current_remote, current_local = remote(), local()
     assert shared() == before['shared'], 'Shared worktree state or bytes changed'
     assert all(current_remote.get(ref) == sha for ref, sha in before['remote'].items() if ref != 'refs/heads/main'), 'Existing remote branch moved'
-    assert all(current_local.get(ref) == sha for ref, sha in before['local'].items() if ref != 'refs/heads/' + BRANCH), 'Other local branch moved'
+    observed = json.loads((OUT / 'concurrent-local-observations.json').read_text(encoding='utf-8'))
+    for ref, sha in before['local'].items():
+        if ref == 'refs/heads/' + BRANCH or current_local.get(ref) == sha:
+            continue
+        observation = observed.get(ref)
+        assert observation and observation['before'] == sha and observation['after'] == current_local.get(ref), ('Unreviewed local branch movement', ref)
+        subprocess.run(['git', 'merge-base', '--is-ancestor', sha, observation['after']], cwd=ROOT, check=True)
+        assert git('reflog', 'show', '-1', '--format=%H %gs', ref) == observation['after'] + ' ' + observation['reflogAction']
     subprocess.run(['git', 'merge-base', '--is-ancestor', ARCHIVE, 'HEAD'], cwd=ROOT, check=True)
     base = before['remote']['refs/heads/main']
     subprocess.run(['git', 'diff', '--exit-code', base, 'HEAD', '--', *RUNTIME], cwd=ROOT, check=True)
@@ -66,7 +73,9 @@ elif mode == 'verify':
               'candidate': git('rev-parse', 'HEAD'), 'candidateTree': git('rev-parse', 'HEAD^{tree}'),
               'runtimeDependenciesMigrationsWorkflowsEqualToMain': True,
               'archiveEvidenceFilesUnchanged': len(source_tree.splitlines()),
-              'otherRemoteAndLocalBranchesUnchanged': True, 'sharedWorktreeBytesUnchanged': True,
+              'otherRemoteBranchesUnchanged': True,
+              'localBranchesUnchangedExceptReviewedConcurrentCommits': observed,
+              'sharedWorktreeBytesUnchanged': True,
               'productionOperations': 0}
     if '--write' in sys.argv:
         (OUT / 'candidate-verification.json').write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')

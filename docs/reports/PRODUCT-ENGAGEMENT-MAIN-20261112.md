@@ -18,4 +18,6 @@ main已包含所有本批应用代码、V33、依赖、构建和工作流输入�
 
 预检PASS：[candidate-verification.json](evidence/product-engagement-production/main-merge/candidate-verification.json)绑定整合提交0b89c0b，确认原归档可达、117份证据字节、运行输入、其他分支和共享主工作树保护。完整合并快照中的reference-display/gemini-final.txt第3行带有main已存在的尾空格，该文件保留原始内容。本批相对main的git diff --check通过。
 
+随后冻结提交21f370b的保护复核发现另一会话在10:27:09 JST独立提交editor-layout分支e4c3f83，main仍为原基线。检查引用日志和分支对应工作树，确认是原基线上的独立向前提交。初始保护快照保持原样，新增[并行变化观察记录](evidence/product-engagement-production/main-merge/concurrent-local-observations.json)精确绑定该次引用变化及日志动作；保护器仅认可这次已检查的变化，其他未知移动仍会拒绝。本批未写入或回退该分支，编辑器改动不纳入本次候选。预检回执中的“全部不变”仅对应0b89c0b检查时点。
+
 本报告、预检回执和最终脚本一起冻结后，正式PR检查由现有GitHub工作流承担。关联PR可通过[本批分支的PR记录](https://github.com/sunshaoxuan/bobuy/pulls?q=head%3Acodex-product-engagement-main-20261112)查阅；PR说明保留最终head、门禁链接、合并SHA和main检查结果，作为无需改写已冻结候选的最终合并回执。PR状态、远端main身份、提交可达性及合并后检查共同决定结果。主任务指导文档与生产报告保留各阶段身份，不把先前生产发布等同于本次main合并。
