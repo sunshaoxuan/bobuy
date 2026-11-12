@@ -1,0 +1,2436 @@
+{
+  "base": "2086cd8d9f1cf8d815f4686c695fa191948727d8",
+  "scope": "Entry and test-resource inventory; file presence is not an individual usefulness verdict.",
+  "counts": {
+    "backend-test-resource": 135,
+    "service-test-resource": 7,
+    "frontend-test": 120,
+    "playwright-test": 16,
+    "script": 93,
+    "frontend-script": 16,
+    "workflow": 3,
+    "maven-build": 8,
+    "root-manual-script": 2,
+    "test-build-config": 3
+  },
+  "files": [
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/AiAgentControllerTest.java",
+      "group": "backend-test-resource",
+      "sha256": "c91908af8107c2420abcec5532a8d97c03ac701b57fe6192624f5091ffbf182f",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/AiProductOnboardingServiceTest.java",
+      "group": "backend-test-resource",
+      "sha256": "3773466ae9bd216f004b9da84ff7d0418b38a77d6d9da0e0ea10a0d62a749d44",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/AuthControllerIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "1af3988a893a1dac9b8b03404bd722dcc2c3f3329d0584ce7b9680650ff965b3",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/AuthRefreshConcurrencyIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "2f8179d2468e297d5c46fa982f43745eecaf058af3ba91a08346affbf518f472",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/AuthRefreshTokenExpiryIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "275ed4eb5985f0a38d27cd948156ec8bac0c8c8118e9972de457476f443bad38",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/ChatControllerSecurityIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "4b20bf9fdc333d4596cbb676409da8dcb395c145ffe2dbcdf44c0a85608a5025",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/CostcoOnboardingControllerTest.java",
+      "group": "backend-test-resource",
+      "sha256": "18825cb5e51a6891727625af2f7ffa1ebb84a9b33e6504cc15c2be069492e4e8",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/CurrencyDirectoryIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "cc4c37a47675e9b825ed146bbd012b435521143fceef03e95f8bbcc9068a7427",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/CustomerOrderAmendmentIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "45af2fc1d29894bc60a0d38fce766d5505864865d2be8fb8fc0c04ef8c439d3f",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/FinancialAuditIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "3386928fb7bac086a75248f34cac59c3fd03e4293cbecd9096545e717c6525fe",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/GeographicAreaDirectoryIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "2133346a7674f65ace629ce0ff5e2f15d9f90efaf0a88e8ca02e7240fa41c942",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/InternalServiceTokenIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "6512f5aa3832e0094b5f0ca3eab9bde5a1d9224a21d4a57f9fe1a009e85a48b7",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/MailSettingsIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "261517fe7c103c259cfac988d64c3f7636221bb7dd4a4d80249db276d0b38973",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/MediaMigrationExecutorTest.java",
+      "group": "backend-test-resource",
+      "sha256": "12488795b93eb38c4a569169d5cefde5dddb1dc87f476b72c786a5d1715d6064",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/MediaObjectOnlyIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "a52d15ec154dd15460d5dd9885826167f23231ce8c956db7d90012c7ccad6a2a",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/MediaTransferIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "fba3e7afffa613512817af4026c441e71ad97ecb97417a771ca767bde9ca14d7",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/MetricsControllerTest.java",
+      "group": "backend-test-resource",
+      "sha256": "e2e5a550047007f3e641d619e5ee13cd830a16c6171ac24e853bf0be7caeb830",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/MobileProductControllerTest.java",
+      "group": "backend-test-resource",
+      "sha256": "0fb90bb2d6f2d86dc8f86b6c276d418aa84aa5fd85b943929462eecce36ad82d",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/OrderControllerIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "96b5eab21570dbef783c8ceff1ea81279a865023a5f05bade846089dc24ba945",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/OrderControllerTest.java",
+      "group": "backend-test-resource",
+      "sha256": "2fd8e258bc08fc1a9528e57a40e6e7728ae9dd92951d3b3746dc9ba4340bbdf9",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/PostgresImageStorageIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "7c541c9502ad30f42432914d7d071b22bd41ea339c75537c3f4326f3e317b504",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/ProcurementControllerIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "950f0fde1a8c81655e355469e50eb9538f4f772751b627340fb1f2ea2e97e76c",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/ProductCatalogIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "5862c4e4784b8104da7ec24b2cba7003a71b1fe898200522cd324309bf551973",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/ProductIdentityCompatibilityIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "cc4bff83af0033a60c34a61a3a874de716e846160be5fd4518d9d825407ea7e9",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/ProductLifecycleIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "e60640471e8307e4a603f551bb9608ed163a2e8995f3878034c0a5bf42f362f2",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/ProductMarkerIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "2c63a00cd7b7897c2c49423553839244dfbd97cc763f305b980f957910a35995",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/ProductPricingIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "af5a75b5cbf6819055a0f97cd19c2a3d0ba445453f67c08719fe47e9442328fc",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/ProductRatingIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "2dc6600cbee75abe07bb9f424b9054a2e5226ad9fbd0e2357b41c8463cbc5774",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/ProductRatingPostgresIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "d27eea691c01357e5908d7749e8a23ccae50abf43dc660a263787e366eacaff7",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/PublicBrowseHttpContractTest.java",
+      "group": "backend-test-resource",
+      "sha256": "f76353240551fd822b3b12c4d0cce8c61bcb91557e1730fa46d00670df400424",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/PublicProductCatalogHttpTest.java",
+      "group": "backend-test-resource",
+      "sha256": "e5962b3a37af9fb48a3b61515313b519d4a2b95f286d86ef9a42fdf6013b89cc",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/RecommendationArticleRevisionIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "97c12c039d41e2a3a61d80de91663c1cf54d0a74563389600058693035639757",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/RecommendationClassificationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "38dcd9ce085718f4b42ac05bc7669a381a350b4a2086a859534f229301af1506",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/RecommendationCommerceTest.java",
+      "group": "backend-test-resource",
+      "sha256": "78d419d183252c67fe0b4f9c83be1aff33bf32c6a19220d9dc447c4505290c86",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/RecommendationDirectoryMetadataHttpTest.java",
+      "group": "backend-test-resource",
+      "sha256": "c189086644a2e37c311e2d8f4e745a0a369ad6a4a513c2321dc21528ccef2c1d",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/RecommendationIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "dc2749319e9cbfea1c610366294abf1c5e0ec5fb6705351de90ca4a222e76ed5",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/RecommendationIssueDateControllerTest.java",
+      "group": "backend-test-resource",
+      "sha256": "959910efeeaea677ffad5443ca4e1557f511da86fff5aa9f9b895fe8de80838b",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/RecommendationIssueDateIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "b1e82ee2f62ab6c28e51bde479abcfc7b9e4ae237e6e278b6f5ae31fd8abcc56",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/RecommendationItemPublicationIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "a95ce2e26b300d67836eb8150f42e53b0fc4c06f1196546256f6654bc896de63",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/RecommendationNodeTest.java",
+      "group": "backend-test-resource",
+      "sha256": "d2cf8bf0c158009b1c1a58bf2944c0826bd46030f14408b584e93c40c7e6e5eb",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/RecommendationPublicationMigrationIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "ba353faaf00564d59aa43689fbf4124a61b00144e3ec41c5818236439e58b6cb",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/RecommendationPublicationRecoveryIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "7be94c1e0e83878135994882caafb22f59ea22fbdd6aaf8e181f15c79d743cc3",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/RecommendationWritingControllerTest.java",
+      "group": "backend-test-resource",
+      "sha256": "35d7450db040ddde27b61638e3c2b8825afbda015b3550fd1908afafdd96b345",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/RequestMetricsServiceTest.java",
+      "group": "backend-test-resource",
+      "sha256": "a741403a1d50e529b01d83606a88fa734dd359ab42d7ad4f2d31f658f0981a95",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/response/GlobalExceptionHandlerTest.java",
+      "group": "backend-test-resource",
+      "sha256": "48ccfb0e9d0f583a4b80df34fde86574f4db56effc0e22d6f50a2f30488778e3",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/response/ResponseTest.java",
+      "group": "backend-test-resource",
+      "sha256": "7519437f33fea03cd8a7cc79687a906acd67200c1e5ee9c314d9fd6ac6945830",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/SecurityAuthorizationIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "eca5bcff9796ebdac9f86e29f0a795dd01379a12f13e57146e220e37b062f170",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/SecurityAuthorizationProductionModeIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "19df1fef96bf23e1d48d4ceacad6dc8fdc2a0e7dfaaebe4185747ac79fcc4b36",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/ServiceOfferIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "fde6161dd520099e7f532ccb4e4e4dc2866ff4ff1cc9e6b729e45e2be4190451",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/ServiceOfferPostgresIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "841abe0aac6a349bbeb3403bcec1b4a18604325b51d676b158f961e2fd1e7750",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/StorefrontIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "5dc315d36ab128521bdc70d4bda090baf96eacce1d26358de07265c23c639931",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/TripControllerIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "84cb0bb279655946f41009fae67c6f18d126e3299c31cc16556b010cc9f151f9",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/TripControllerTest.java",
+      "group": "backend-test-resource",
+      "sha256": "4fc030cfdfc47e31cbb068fb59f518cf58278e442c92fa35eb3a5e838d1c26cf",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/UserControllerTest.java",
+      "group": "backend-test-resource",
+      "sha256": "ef6dda940cee390111956355f9b79f26c8ff10480826c7b9042be4a5aee0ada6",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/api/UserManagementIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "7c463e227f4c467fc2446d3a30e0cb360db86f02d4b742b3042a9ba267a89b7f",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/compat/PreviousOrderHeader.java",
+      "group": "backend-test-resource",
+      "sha256": "52e6e37bd74a470dbb341f906a81ac3a4c596958f3fac8620399ccbff7eba010",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/compat/PreviousOrderLine.java",
+      "group": "backend-test-resource",
+      "sha256": "bdf8f059e969acd51bf378d9ac908f72e1ad9a8a4c385a9fa3bb12fad6b0b754",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/compat/PreviousRecommendationPost.java",
+      "group": "backend-test-resource",
+      "sha256": "8c00ee38a37e3b65d0c1d8b123238edeb647152b364e377efd3b429150688954",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/config/WebSocketAuthenticationChannelInterceptorTest.java",
+      "group": "backend-test-resource",
+      "sha256": "452cf3eada79d91a7761fa9d4b5d4c7baf28cff81ea2341f60d89e127faaf21f",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/model/MediaGalleryCompatibilityTest.java",
+      "group": "backend-test-resource",
+      "sha256": "73e5f47086e56b232189ca824bb47c4b11cd31f301aa084f45a0a626140c0242",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/model/ModelTest.java",
+      "group": "backend-test-resource",
+      "sha256": "a1f7f94602801f4c77e3d3bc10af62b4b261322aec3da0cea6da10d629801821",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/model/OrderLineStorageTest.java",
+      "group": "backend-test-resource",
+      "sha256": "adff254dac56246f82c1aac18a5ecf9fc7a9bf3780bb6cf5d604318a3e5ea46c",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/model/OrderLineValueTest.java",
+      "group": "backend-test-resource",
+      "sha256": "6b38eba819f06200478cf64e2dafe335f02e82a3f1f02adf9a9b86ae78fb856d",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/model/RecommendationServiceOfferTest.java",
+      "group": "backend-test-resource",
+      "sha256": "ae85f6a3a5d54269aac26f158e56d039d9172fb539c5b2ed61e453b0d74c7bff",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/repository/CostcoOnboardingAttemptHistoryTest.java",
+      "group": "backend-test-resource",
+      "sha256": "f49ac799abbccef6de94dc6401c21fff507a4e0ee089d46cf2789b195af7a2ca",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/repository/CostcoOnboardingPersistenceIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "e0c0eda760d8f4b15ce948ae3acebaeaa1adbdf3098072672e497c55df3355fb",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/repository/CostcoOnboardingQuotaTest.java",
+      "group": "backend-test-resource",
+      "sha256": "0bac7f6573b73c730af83788737e7272de87710a510c280efe6f1ff02ded8149",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/repository/RecommendationIssueDateMigrationIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "210d824b9b0716b217361a668fd9885f0d00ec97c20f172fbd4381ef513bb006",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/security/CustomerIdentityResolverTest.java",
+      "group": "backend-test-resource",
+      "sha256": "34a3ec0477221a74b7881dc6d9b60a827c2e3d58418ae01da280167b731021f4",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/security/InternalServiceTokenFilterTest.java",
+      "group": "backend-test-resource",
+      "sha256": "f9f4bf5193b12e1db3c7043feb4c1e380c8c9b60378af20b79154bcb20e339c6",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/AiVisionIntegrationManualTest.java",
+      "group": "backend-test-resource",
+      "sha256": "da93c7bffb53baa446ba738c13b81c3ff88e8b6d18da332e6d5a7b3b7276d49f",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/AuditLogServiceTest.java",
+      "group": "backend-test-resource",
+      "sha256": "0e3b9b1074fe7fcf3630711b9d14c86d20518cb5dd5580777046b50b5de5745e",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/BobbuyReleaseGateTest.java",
+      "group": "backend-test-resource",
+      "sha256": "54b3f3230e2ae51da41b2c00c16d6aee51afa151e4440fac21545dfd3a2ede09",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/BobbuyStoreCoverageTest.java",
+      "group": "backend-test-resource",
+      "sha256": "a2c175529381f84c9e7d522063cb817ab51533a965ff318b4fefe1fdf6ea69bb",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/BobbuyStoreSeedDisabledIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "ce2437ca04e09cc5120b3c00ee69efb66212d50b0414ded95e9fc6db10ec4783",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/BobbuyStoreSeedEnabledIntegrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "7aa0eadaf23229be012f055ab12e9f9350ac73c93c60dd3b8e73fd559b9d3b68",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/BobbuyStoreTest.java",
+      "group": "backend-test-resource",
+      "sha256": "d8d383580002aabb8bcf2c2b0dc1c32a370bad93a97fb8bb1762adb7dc323078",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/ChatServiceTest.java",
+      "group": "backend-test-resource",
+      "sha256": "fb8c55c1a29df04afee0f3d1a8cd8c2e8ea71f397869df7bb7c7f46b5117a3f1",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/CheckoutFingerprintTest.java",
+      "group": "backend-test-resource",
+      "sha256": "2df43be94ab47d9852fefd54b1d587f9ee4154a8dded7fe2cbceeefd06522eb1",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/CostcoCatalogCommitterTest.java",
+      "group": "backend-test-resource",
+      "sha256": "e3df072e38f96a6d0a4e22e8ace1a9dd57fb65e227db1802a20c6eb3ee3f8cb6",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/CostcoNumberOnboardingServiceTest.java",
+      "group": "backend-test-resource",
+      "sha256": "26f56ae83968f51e87aadf382b7fef8cdc89a709ef49fa6e3ddb05e45c296ce8",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/CostcoPinnedStageReviewerTest.java",
+      "group": "backend-test-resource",
+      "sha256": "b0fdc373eec03009fd9934d568594ba7ad4862576eb29ef17383d635529da2f4",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/CostcoPublicEvidenceFetcherTest.java",
+      "group": "backend-test-resource",
+      "sha256": "a6ba007816d5170b2a0c940fea10c2cfcdd664270032f9b663f5590b148556fa",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/CustomerOrderAmendmentPolicyTest.java",
+      "group": "backend-test-resource",
+      "sha256": "3b9b637f5d0bd966571c89212a1fbcbf6002af1c8277fa347ab15d6941534a29",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/CustomerOrderAmendmentServiceTest.java",
+      "group": "backend-test-resource",
+      "sha256": "2a5ab08355e0bb8452bd5f7b6528b84f111ef998129f1c56c1471934bfe3c675",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/ExistingAiConnectionManualTest.java",
+      "group": "backend-test-resource",
+      "sha256": "aa57f9c1becc1900228a37dd93deda75c9d7e8206486c4f264af28b78c5573e7",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/ExistingOfficialResearchManualTest.java",
+      "group": "backend-test-resource",
+      "sha256": "397f1ab58a645f1a29f2354bc14c70a1442cbaf52521357a64432ac8d7eefa74",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/IdentityMigrationRecoveryTest.java",
+      "group": "backend-test-resource",
+      "sha256": "e36f3ff16accf8a76761f0db5f010f717a3f7443d61839feef4e2ca62a171482",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/LlmGatewayPinnedTest.java",
+      "group": "backend-test-resource",
+      "sha256": "19b2922be80407fae6117711417e5ecb135ba868656d31164a76916ad44d26fa",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/LlmGatewayTest.java",
+      "group": "backend-test-resource",
+      "sha256": "fe19993a2c997b8c682392d8baa776c8f1e3aff3cfcae38be6f3d0f7e7460796",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/LocalizedJsonbReaderServiceTest.java",
+      "group": "backend-test-resource",
+      "sha256": "50d5d043e44bfae8af1937e81a5fe7d2ca729812e0ca5f4897638f612559b013",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/MailSecretCipherTest.java",
+      "group": "backend-test-resource",
+      "sha256": "83350d88d4937563f6b7dcd5f1874a58f89868917cd1569e30d6c9aa8a53b0c1",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/MediaIncrementWorkerTest.java",
+      "group": "backend-test-resource",
+      "sha256": "694f6252d7e82febc4c7de13be64aac6573b5f8cc7b151b752bf8ee00a2f4286",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/MediaMigrationFixture.java",
+      "group": "backend-test-resource",
+      "sha256": "6640e64aa6d2112290ff46eacaed2c69b62e0d0bf9409d2e103509979ab1a6f6",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/MediaPg18CombinationFixture.java",
+      "group": "backend-test-resource",
+      "sha256": "3698b6b53b676b61a2af32591168ea9ae0b4efc3af5d12c6dda3a13a541740da",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/MediaSteadyStateFixture.java",
+      "group": "backend-test-resource",
+      "sha256": "ab5c7116721a5230ac4d592a3ecd4bf2b2b6bba77f23e973c8fcb7e0761f5f0d",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/OfficialProductResearchTest.java",
+      "group": "backend-test-resource",
+      "sha256": "fbf7947f3b3cef855f4003bf33716b288ff8dcfe399ad7e1a3e611f8e47d0be0",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/OrderDeliverySnapshotTest.java",
+      "group": "backend-test-resource",
+      "sha256": "9f70617fc3fbecb4425a01c23d4e8c4440478e217d987a367e2b7dad07995c68",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/OrderProductSnapshotTest.java",
+      "group": "backend-test-resource",
+      "sha256": "73a724396e0a45b9ce99de5947524c905d15f2d3f5a38232b49d50e48110ebcf",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/ProcurementHudServiceTest.java",
+      "group": "backend-test-resource",
+      "sha256": "10f8305f86c10a98133e9fb8442a76f6821e1f57a66f23e7d8fe1f165041b955",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/ProcurementReceiptRecognitionServiceTest.java",
+      "group": "backend-test-resource",
+      "sha256": "0ed522802a8b6bb25a7573b84d36ffebf22b1e0447ec9188473bf216050c5755",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/ProductBrowseOrderTest.java",
+      "group": "backend-test-resource",
+      "sha256": "61a9bcd7eaee2fe240e6528fb35ed4e7eafa24399ede93ba25cde4cb4c0adc36",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/ProductCatalogAutomatedTest.java",
+      "group": "backend-test-resource",
+      "sha256": "98d5771ffe7b0044d4b89218d4a55ce757277097e65323dc9de5ebd9f35b1ba6",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/ProductIdentityAuditTest.java",
+      "group": "backend-test-resource",
+      "sha256": "1e896bcf33460fec5f4caa1163c13b2b9e8baf1481ceaad61938c19293d0bd13",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/ProductIdentityRecoveryTest.java",
+      "group": "backend-test-resource",
+      "sha256": "3bd65297d2305c78f3ba171d904932abcb1bda33daecac955d30c50553066669",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/ProductMarkerServiceTest.java",
+      "group": "backend-test-resource",
+      "sha256": "7bfdabed96a368b9c4911059015af52f69b43297bcaa184943a32e208a642e5c",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/ProductRatingServiceTest.java",
+      "group": "backend-test-resource",
+      "sha256": "edf3eb3b48ec28889d25d73001b640241409cab9854eca94b62f21eb37c295ea",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/PublicBrowseProjectionCompatibilityTest.java",
+      "group": "backend-test-resource",
+      "sha256": "b4cdf122ce1ef95b76de72eeeebee623cd514ff3c3ef30548221ddabb6a74758",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/PublicCatalogRealProjectionNoAgentTest.java",
+      "group": "backend-test-resource",
+      "sha256": "ef27116d2ac4a92f780dc974633845b8466d91b777be4e921fb8077a289be397",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/PublicProductBrowseServiceTest.java",
+      "group": "backend-test-resource",
+      "sha256": "8f63974ef99a5af07ed4477b0b3b6d58dba6c54634961b6b653f4fe9483436b4",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/PublicProductCatalogProjectionTest.java",
+      "group": "backend-test-resource",
+      "sha256": "821367fc0007769d27856748acbe73abab479f99bade5c0a93a91b04225c6167",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/PublicProductCatalogServiceTest.java",
+      "group": "backend-test-resource",
+      "sha256": "b973ba4a6966ac55fc71dbd3da903c33d2062688356252bd35a941d801afb77a",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/PublicRecommendationBrowseServiceTest.java",
+      "group": "backend-test-resource",
+      "sha256": "ced866bd7a327c50c013bc4c0de1e51bc233743f1bb1d18843cb948293df0eb9",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/RecommendationArticleRevisionTest.java",
+      "group": "backend-test-resource",
+      "sha256": "dd42cc5c7cdb3f4a4858a6f5e5721a36b9b2ad7218e8e2520d0ad02189ddea5c",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/RecommendationFromProductTest.java",
+      "group": "backend-test-resource",
+      "sha256": "7089baafec269854e99eb87dd1067b45ad787547fa3693e78977fa9bfc46ea2e",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/RecommendationIdentityTest.java",
+      "group": "backend-test-resource",
+      "sha256": "5af01c219c6112f9ab21eb76012c4bf2cde2645c67b6d037f72926834859a8e5",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/RecommendationImageAuthorizationReadTest.java",
+      "group": "backend-test-resource",
+      "sha256": "f4bfa55ee693b18259212cfd451630cc8cb9f1de98042bf7a1d5612c0bcab50b",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/RecommendationIssueDateServiceTest.java",
+      "group": "backend-test-resource",
+      "sha256": "4573718d47d9b329fd19f7cec6138f6a34b2c0320f46d93e0cae943cb69a598e",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/RecommendationItemPublicationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "ec5792daabbbcd4e291a2cc38caa84ad48322a7a77242e51aa7a6717bd987e0c",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/RecommendationProductIntakeTest.java",
+      "group": "backend-test-resource",
+      "sha256": "39111c77124220307da7afc32db326a08cf62ea8a010ae11c8d46ae8f08fa221",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/RecommendationPublicReadBatchTest.java",
+      "group": "backend-test-resource",
+      "sha256": "c54ff3d11587a84237e5c1798e07ebfbdc18af8d9582c9f5c78ca975b4d2bb3f",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/RecommendationSourceImageTest.java",
+      "group": "backend-test-resource",
+      "sha256": "25d1645429b0923be9f877e72fc8701d829191763785be4807b8d121f7ef3641",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/ReferenceMigrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "ac26493a3dca998c278496261a10a28dd468320860b0f0ea578fe99537800f6a",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/ReferencePriceDisplayTest.java",
+      "group": "backend-test-resource",
+      "sha256": "22b433f6e1b37204179625f4901d1603b63c00b6a85f2566d719b84f8b829d1e",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/ReferenceProductIdentityTest.java",
+      "group": "backend-test-resource",
+      "sha256": "be1f02e2a0d0595c8130a98b86e821c11a43361e23fce42a33c5b1fc49d3313b",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/ReferenceQuoteTest.java",
+      "group": "backend-test-resource",
+      "sha256": "fb5d01cc95af89419f5a960202dbbc712203900119813ebe0ff162bdf2b808a9",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/RustFsLiveProbe.java",
+      "group": "backend-test-resource",
+      "sha256": "96e47343ae75005b1541639932adb6b07841376a9fe81e81f4f275c25f3e6dc2",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/RustFsObjectStoreTest.java",
+      "group": "backend-test-resource",
+      "sha256": "537cbac2b40dd0ecc5800c88f38ce512fef6df3117caf9d8e446ef9c93b134eb",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/SelfProfileServiceTest.java",
+      "group": "backend-test-resource",
+      "sha256": "ef9f0e9502d0c2a54976d99019ebb89f257e488f300ed6e046cd9caa3aa1374f",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/ServiceOfferMigrationTest.java",
+      "group": "backend-test-resource",
+      "sha256": "93ab3a9f8503c3233c4f3d0a7e350576589e71f491579a740cb6eb3da563c461",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/SmtpDeliveryTest.java",
+      "group": "backend-test-resource",
+      "sha256": "72a0a5746a52be8d49ba65413927a7a66f8202a63a3c082d9c827308bbbf35a9",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/StorefrontTripVisibilityTest.java",
+      "group": "backend-test-resource",
+      "sha256": "0d9edbcb2eba820efbd51d671d4b160022222f76c13f062ab3c243c457a45ca3",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/service/VerificationMailTemplateTest.java",
+      "group": "backend-test-resource",
+      "sha256": "82e366ee6128d7086f4eb0ba114e10d4e6bd0e80f585c1cc3c44c69290ff45cf",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/bobbuy/test/RecommendationPublicationFixtures.java",
+      "group": "backend-test-resource",
+      "sha256": "c36a9ff4000913a112ef664bb7a5932183a1225bc3f4920a151a4d88df054b52",
+      "automatic": false
+    },
+    {
+      "path": "backend/src/test/java/com/identityqa/IdentityUiFixtureApplication.java",
+      "group": "backend-test-resource",
+      "sha256": "a848fbf7a98cfe9a6ea478b523bce3c9fa4d1e22746907fa7694840e48713f91",
+      "automatic": false
+    },
+    {
+      "path": "bobbuy-ai/src/test/java/com/bobbuy/ai/AiServiceSmokeTest.java",
+      "group": "service-test-resource",
+      "sha256": "940e45bf96ccf987d7137b1ee43a0b254a689e76c6dd0960f52de62388e8ad65",
+      "automatic": false
+    },
+    {
+      "path": "bobbuy-auth/src/test/java/com/bobbuy/auth/AuthServiceSmokeTest.java",
+      "group": "service-test-resource",
+      "sha256": "0a3c1d4a15a4f95e0515671e96c33023d0fc956595903b95670f0bf83ce91676",
+      "automatic": false
+    },
+    {
+      "path": "bobbuy-core/src/test/java/com/bobbuy/core/CoreServiceSmokeTest.java",
+      "group": "service-test-resource",
+      "sha256": "1600b96679ed5a626a9677cd369893a3f3818f2a47ee92b732c667cafbb8baef",
+      "automatic": false
+    },
+    {
+      "path": "bobbuy-gateway/src/test/java/com/bobbuy/gateway/GatewayServiceSmokeTest.java",
+      "group": "service-test-resource",
+      "sha256": "c30ab1a158bb31ae6e08d0688e044b068ff464661dc8487dc09b9242dd721c6a",
+      "automatic": false
+    },
+    {
+      "path": "bobbuy-gateway/src/test/java/com/bobbuy/gateway/InternalServiceHeaderFilterTest.java",
+      "group": "service-test-resource",
+      "sha256": "61db25c1fc0bb0d12a657ab2cdca08087c1eaa57928035317b0aa79ed09f2854",
+      "automatic": false
+    },
+    {
+      "path": "bobbuy-gateway/src/test/java/com/bobbuy/gateway/ProductionProfileRouteTest.java",
+      "group": "service-test-resource",
+      "sha256": "451df1cf0f2e6b97afef36a70c53132e2eb18d8aa26345132f1f4c767a30a8e9",
+      "automatic": false
+    },
+    {
+      "path": "bobbuy-im/src/test/java/com/bobbuy/im/ImServiceSmokeTest.java",
+      "group": "service-test-resource",
+      "sha256": "bfa3a0c06f49d702c20c09315715c12e3e6672fffc318fe8e1ee7b693a8b93d8",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/api.issueDate.test.ts",
+      "group": "frontend-test",
+      "sha256": "b484f8e75ed3e3649ec0171d8bd92b684de9b7187c65069ee38de290d8a74970",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/api.test.ts",
+      "group": "frontend-test",
+      "sha256": "c29bc1b2e6019decdd3bfad5d32fbe727008f3d8568569ad3238eaf297294954",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/authStorage.test.ts",
+      "group": "frontend-test",
+      "sha256": "8728ca2ad22ef9f8eb71b809391af7f07d9f233919372223141e19098394e06e",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/browseApi.test.ts",
+      "group": "frontend-test",
+      "sha256": "aff59bd0eba42f4b418bad92dc711b59de7e7cdbc87031b6c621dac90e3fcda9",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/browsePaging.test.tsx",
+      "group": "frontend-test",
+      "sha256": "a6316b97596ab5494e83ffdbe543e19b24f70fc2b8b342f5f779cf0f8dae3b8a",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/cart.test.ts",
+      "group": "frontend-test",
+      "sha256": "191cdd4e4fbb7aed31a1fc0fe6b6da7333b2aa8054ca319883d29d15aac69d30",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/cartIsolation.test.tsx",
+      "group": "frontend-test",
+      "sha256": "4a1eeaa07e199e90d858960ec9ce829b3d11cf3f1e793d8cdaf50b78de3398f7",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/AccountShortcuts.test.tsx",
+      "group": "frontend-test",
+      "sha256": "52e5d117290567004819c15b7f929fe03c3f50fa870e734ef78f0c87516594ee",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/AiQuickAddModal.test.tsx",
+      "group": "frontend-test",
+      "sha256": "2d15a4fd79466223ba3f1886dd038b4f60f53a8ce904680153df1ac044c53460",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/AiQuickAddModalDurable.test.tsx",
+      "group": "frontend-test",
+      "sha256": "fe20c5b8be05574cf31a7ac625f29737189a8d37166dcfdafaf31acb16805e1c",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/ArticleLanguages.test.tsx",
+      "group": "frontend-test",
+      "sha256": "f39a30811774115336917acb91e1d668abf4b9aa9734357bc44e2d8b5fe1354e",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/CardPrice.test.tsx",
+      "group": "frontend-test",
+      "sha256": "be4a84a96ba45cd038500bf8532a48c01d9af49fe4080c9ca79d6e736a2edb5b",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/CatalogCategorySelect.test.tsx",
+      "group": "frontend-test",
+      "sha256": "2d17fda16a00dfa9a94de34d3b693923d63169fbeaeb5c7d34f77b7a365d4b40",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/ChatWidget.test.tsx",
+      "group": "frontend-test",
+      "sha256": "5a949f4953f2cf07eaf0ac02f00d21a96a4bdd728294a718a793393839f0fdfc",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/CompactProductCard.test.tsx",
+      "group": "frontend-test",
+      "sha256": "4bc8b40be21e7c9e00a5890b9402388cdc070df1fc62d1723a5862f811b4bcfa",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/ConsumerDetail.test.tsx",
+      "group": "frontend-test",
+      "sha256": "ce5d5ba0975547e10e231f062c32813cf9544fd79819f1064fd4b5ccd2e5ec49",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/CostcoNumberOnboardingModal.test.tsx",
+      "group": "frontend-test",
+      "sha256": "96f817eaf794bb9e3d211735cf95eb61791c8b22b6cf99ba3b6ed1dbd40d1627",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/CostcoOnboardingPanel.test.tsx",
+      "group": "frontend-test",
+      "sha256": "d54f68aac095987298c409efaa48bf6531f68c4e1787ebfa2527195b4ade2462",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/CustomerOrderAmendment.test.tsx",
+      "group": "frontend-test",
+      "sha256": "4f7b140d8e59c250e4a610ab58836e7657cdc99b5c9128b5c64cd9c72507ac96",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/ImageLightbox.test.tsx",
+      "group": "frontend-test",
+      "sha256": "550b2767c843779a8ef9672cfd74f3e51767bdd3a30ee07ebed25adb795aa260",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/IssueDirectory.test.tsx",
+      "group": "frontend-test",
+      "sha256": "e1f97fe9f8e7d1efcdbf9a659f1f1c76fd48fd25f18279f37174d64a6cfa3cc8",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/L10nInput.test.tsx",
+      "group": "frontend-test",
+      "sha256": "ff9648c40d71180258aeff35e7081d5cc80b5e53b714318fbbbe721b6a0ae49f",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/LanguageSwitcher.test.tsx",
+      "group": "frontend-test",
+      "sha256": "4168a8f480141b9ad60f4576dd15629bf5efa57608168865795bb23108e5deb6",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/MaintenanceNotice.test.tsx",
+      "group": "frontend-test",
+      "sha256": "c4bc3ffc3fc616da6cb1190685a5750645d1eaee04ca01511343e2c9003bf5bb",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/MediaGallery.test.tsx",
+      "group": "frontend-test",
+      "sha256": "49b329923a106d25f34c28ab7737a73b78e509ddb89fb2742aa6726208b07aee",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/openCardDetail.test.tsx",
+      "group": "frontend-test",
+      "sha256": "775dd9a8f4683db377fdfd037c7bc5b137368245f66cb1cc7a2ec21e4c95ea92",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/OrderProductIdentity.test.tsx",
+      "group": "frontend-test",
+      "sha256": "cb8e8ac402d8fee1d6c696f7bde0cc5b3e9e840c0f7ad46dd955650abb38b2cc",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/ProductCatalogPanel.test.tsx",
+      "group": "frontend-test",
+      "sha256": "831089316b0ef83dda50f51dae21c6079cbc843a280cef8b45ec65ad3b709ca9",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/ProductCatalogPanel.uploadFeedback.test.tsx",
+      "group": "frontend-test",
+      "sha256": "4b6a6461abb2b2773b37a32b919f9335c2236eba4650f9551fca411a9f7200a0",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/ProductFeed.test.tsx",
+      "group": "frontend-test",
+      "sha256": "c6f6c5dfc39279941c60eda63c346af167bc06fe5eb3e4b2bc3d26c899b48c16",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/ProductMarkerBadges.test.tsx",
+      "group": "frontend-test",
+      "sha256": "7fcdba8d84bed9c0dec87528ba557eb8542a788763ffc0def7d08132919c1b09",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/ProductMarkerEditor.test.tsx",
+      "group": "frontend-test",
+      "sha256": "32cd35d1a3bcbead70631baf7c502a67a9be8104683988a8e47cef79438f403d",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/ProductMetadata.test.tsx",
+      "group": "frontend-test",
+      "sha256": "4220fbe190cd195766d753f58e8ea720e30f73a58d1956195aa2d476e487a024",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/ProductPopularity.test.tsx",
+      "group": "frontend-test",
+      "sha256": "45be0784a654a648395a725c46b84d3815af4b8a50d68a7ae5bf461ace108f78",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/ProductPricingPanel.test.tsx",
+      "group": "frontend-test",
+      "sha256": "a6bbb713103dfa1d3a352dfb0965a1abdc62f501ed3a9277138db9ab39df1abd",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/ProductRating.test.tsx",
+      "group": "frontend-test",
+      "sha256": "7d8787dd4d16e99e84d8aed46413febbc6f20d9224cea6d16c043d414a15a130",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/ProtectedRoute.test.tsx",
+      "group": "frontend-test",
+      "sha256": "72850a31ac1a968a1e64351b5f38c156d90f5a74b74805de5f0a678c2bd8c394",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/PublishedArticleRevision.test.tsx",
+      "group": "frontend-test",
+      "sha256": "5c50e57fec559ce6e63c6da3e9c7ac35362858f3c559281eeed0e81d8878aa4c",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/RecommendationClassificationPublication.test.tsx",
+      "group": "frontend-test",
+      "sha256": "e890442af11b784bc62d8158ec35062ebb64c12ce89187299120dcd29077227e",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/RecommendationFacts.test.tsx",
+      "group": "frontend-test",
+      "sha256": "be39eef9ed075860d672e130babe630e5dd1d2e72dcafaf82f7701c30ca9bba8",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/RecommendationFromProduct.test.tsx",
+      "group": "frontend-test",
+      "sha256": "8e9a38a99f0a8a27e47a5a844d52289fb490aa321e42227fd0ba820b65a97ce0",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/RecommendationImageViewer.test.tsx",
+      "group": "frontend-test",
+      "sha256": "39832222ebd5725817cbc41be2d85252658a222e9ea73df00ad7e58f1cd473b1",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/RecommendationIssueDateEditor.test.tsx",
+      "group": "frontend-test",
+      "sha256": "b39cf0f312dad733d666ee0b7487b41780775912539035c89e61a66194f576d7",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/RecommendationIssueDatePanel.test.tsx",
+      "group": "frontend-test",
+      "sha256": "1a6198f72107e74e4ab05b47d0a23635d2a3e96032852f03fe140c5a408844aa",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/RecommendationList.test.tsx",
+      "group": "frontend-test",
+      "sha256": "f9405662054ed3a5144d6b2c08ba99fcfdf105a4dc626ac3bbab9b4a1c206680",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/RecommendationProductIntake.test.tsx",
+      "group": "frontend-test",
+      "sha256": "84dd83f3ad9a47fca3fb3f17c4ae909c7f308f228b8f30ad089ca22a85ff4644",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/RecommendationServiceEditor.test.tsx",
+      "group": "frontend-test",
+      "sha256": "a8730e3fa8d4631be852e381e0e4b0cf8029b1cab8524e8bbc48719a58705856",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/RecommendationWritingAssistant.test.tsx",
+      "group": "frontend-test",
+      "sha256": "1ea088757a4acaf96d847067e4aacdfe2fa27faafcd7e13cceed64b36b488b8a",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/ReferenceQuoteHistory.test.tsx",
+      "group": "frontend-test",
+      "sha256": "df5074abb0a8b84ef37cfc8e73f407ab3d8b024c7f022c4457aa8f5fa92b059b",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/ReservationAdd.test.tsx",
+      "group": "frontend-test",
+      "sha256": "d7780ca79fd42231dd41a52c8d7ecb1b66143277f489ed92fe15f22dceffba7e",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/SafeArticleText.test.tsx",
+      "group": "frontend-test",
+      "sha256": "0c6e2471863397cee3a1604f916392b5b09fba85c4c14722b8d8c2720b2158b3",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/SellingPrice.test.tsx",
+      "group": "frontend-test",
+      "sha256": "f2981e1b5b2f720c1e0cf3927f047275a390d5d54b5c96b35f1e8b804b3a1f5b",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/SiteMetadata.test.tsx",
+      "group": "frontend-test",
+      "sha256": "d28ab95143a5379d0b8e5941a8ba2b1b4ce395471a604abd5cd602b84ff011b4",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/StoredImage.test.tsx",
+      "group": "frontend-test",
+      "sha256": "79f0fb8d9acaa1d443d18e6ec0deda0f4af98db8a76a34df38f8c096e517fdca",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/StoreNavigation.hiddenNode.test.tsx",
+      "group": "frontend-test",
+      "sha256": "c21c1bd46d532596b7b550612bdf5e31afff02b31dbed46b96e3a386034cfc29",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/components/useDetailReturnFocus.test.tsx",
+      "group": "frontend-test",
+      "sha256": "ab9634fba59503126dce2d147bdc8330a6fded7236170c835381d5480ef96182",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/context/UserRoleContext.test.tsx",
+      "group": "frontend-test",
+      "sha256": "a502475b7ce9c8c6c2b9e9febb3b89a3ef3ce5721719fb41c43aabef61d9a1b8",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/costcoOnboardingApi.test.ts",
+      "group": "frontend-test",
+      "sha256": "e1aa7895d322e245083728e316511ed4bc60e4cc21f1623edeb9bc2e573edacb",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/customerAmendmentApi.test.ts",
+      "group": "frontend-test",
+      "sha256": "83379807ccf4c075b322f116647fc26965b4b55e4a1eaa1744412dc4d0ff7ca2",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/hooks/useChatWebSocket.test.tsx",
+      "group": "frontend-test",
+      "sha256": "6a136103386c34a5f228f3d97eebf022633be5952a52d00ca7624309f26dea81",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/i18n.test.ts",
+      "group": "frontend-test",
+      "sha256": "48e75d9de7a73f2b1f8ca26af661951b93b67292a98581df7e3b53559b9d6f8a",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/imageUpload.test.ts",
+      "group": "frontend-test",
+      "sha256": "6306b2588485d97998a81e8658088a1fb2e9acd8a0bae6585a14c51ddd9fa0e1",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/imageUploadFeedback.test.ts",
+      "group": "frontend-test",
+      "sha256": "491c1fc71e96e82eab712812e024a525306625540fa1af25770f0ff24a1ec064",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/mediaUploadApi.test.ts",
+      "group": "frontend-test",
+      "sha256": "8624b43bd72af9948f1d911af0f151d6a9424fc749efdfef3bb21fcd44d47445",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/__tests__/Orders.test.tsx",
+      "group": "frontend-test",
+      "sha256": "f0fd1cc4ab30f17fa91815a866dd4247471f26d7bbac1736995feee28fa810a3",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/__tests__/Trips.test.tsx",
+      "group": "frontend-test",
+      "sha256": "905f2f0ee66609f2faaef7c6e9627034eecd049517059bda1fd516e08663db45",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/AccountForm.test.tsx",
+      "group": "frontend-test",
+      "sha256": "1a04ecff83f106a527c2ef3f749bb7f55c80e6d24650e1f747342b1cb2968041",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/AccountProfile.test.tsx",
+      "group": "frontend-test",
+      "sha256": "8bb93e8cc06152ea7a7b1ed40ccc057ca56c5416409a9fabb8d02f64ebc86360",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/AccountVerification.test.tsx",
+      "group": "frontend-test",
+      "sha256": "31f1b9bff7a9e9169ba55969a9c7e41f0cd5342b4a276b496a7575210c6a80e1",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/CatalogAutoReveal.test.tsx",
+      "group": "frontend-test",
+      "sha256": "1deeb38afc860bcbd76faeca7698951ab0bc9b2914ea6c9f72d0200326bfb643",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/ClientBilling.test.tsx",
+      "group": "frontend-test",
+      "sha256": "667c5a579268f4eff05ede36a31edb8e88c22aabd040b779c6d8e62e9f998615",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/ClientHomeV2.test.tsx",
+      "group": "frontend-test",
+      "sha256": "d3cc02b7b18f5948fbc7a279bd976a70b78996a7e3ae989cdb04d7e4bd271fc8",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/ClientOrders.test.tsx",
+      "group": "frontend-test",
+      "sha256": "6b3476b1c03f8c484d525195f22e886babbe7b7af207243c492bc1d718655de7",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/ClientTripScope.test.tsx",
+      "group": "frontend-test",
+      "sha256": "1c682fb56aff73779aa16ad49eb2f48c04227172a6d441fa4ed1d165b45111ec",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/Currencies.test.tsx",
+      "group": "frontend-test",
+      "sha256": "2ba0d7490a80b4fd4d903f536e7913c0a0c5ff01da5a1c848020a78af57edddf",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/Dashboard.test.tsx",
+      "group": "frontend-test",
+      "sha256": "a6ee1e1cd3feeffe2f017fef43634c37270b3dbfa44967176ad2d2b9e3278b0a",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/DeletedProducts.test.tsx",
+      "group": "frontend-test",
+      "sha256": "f6e02ea8c06b25dd7039af6879d41b4381f736e6bccdc76c635772423e806a6a",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/GeographicAreas.test.tsx",
+      "group": "frontend-test",
+      "sha256": "0437b7993e57a9abe307070c30de6492cc4e8d8d4ec46394ab7638a6a81e018e",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/LoginPage.test.tsx",
+      "group": "frontend-test",
+      "sha256": "89edb36bfbc18e7795a6b7f868a1ea799332ef8f4aeb829c5fd395c5e0f89cda",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/MailSettings.test.tsx",
+      "group": "frontend-test",
+      "sha256": "c3f75110322401497d85ec2c0b167278cc15b0685b24bbc1af7d59e9a2af3e84",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/OrderDesk.test.tsx",
+      "group": "frontend-test",
+      "sha256": "7ed94d73aae9289d3c23375fcee7b7bea89401bc665a1d58543b60f0e2dc48f2",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/PickingMaster.test.tsx",
+      "group": "frontend-test",
+      "sha256": "e60d937016eb597bbe425f6c013983af3b3919302710d319f34f163605d456af",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/ProcurementHUD.test.tsx",
+      "group": "frontend-test",
+      "sha256": "3d27386b15860af9f6c374bbad20bca124fe710be6feebe57c5cfc0bcf13ac9e",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/ProductArchive.test.tsx",
+      "group": "frontend-test",
+      "sha256": "b4c6e132809653eef4b4cc68d1ceb6f267461b965b15a3399181e065a8e6474c",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/ProductMarkerCatalog.test.tsx",
+      "group": "frontend-test",
+      "sha256": "2c1d10ab019e2ad3ea3da1590df314b9262c5ce9ba5f0c1c27b106ae9957b1ba",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/ProductMarkers.test.tsx",
+      "group": "frontend-test",
+      "sha256": "888c29b1f953d5350ea107aabe65d5b8c569aba8cfebfa55f6941a3e9f7b626d",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/PublicProductCatalog.test.tsx",
+      "group": "frontend-test",
+      "sha256": "7412612c858ca106b37f3460cdd97759a11786350970b6c66ae52bbbff87660b",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/PublicProductMarkerEditing.test.tsx",
+      "group": "frontend-test",
+      "sha256": "173a01a067390376fde7b3b263db326335995788af7a88c0cacc43e35081aee8",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/RecommendationBrowse.test.tsx",
+      "group": "frontend-test",
+      "sha256": "ea4cad46ac9df964a94251d4ccead4749f157116934989a98fc47db7462cf7d2",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/RecommendationCategories.test.tsx",
+      "group": "frontend-test",
+      "sha256": "37451bbc488451bd198af9f1faa1be46211afa2529e805d6b3015b460b5d37aa",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/RecommendationHistory.test.tsx",
+      "group": "frontend-test",
+      "sha256": "37b00a64b6dfda0dadbf4831ca5c1f535d024807099d0380b9ff7b3942135914",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/Recommendations.articleRevision.test.tsx",
+      "group": "frontend-test",
+      "sha256": "72044325323b1324c255f7a7df412646cf3c507757d3e6f001f9b358e476a501",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/Recommendations.navigation.test.tsx",
+      "group": "frontend-test",
+      "sha256": "4b34eae708dda88ed063ec5cc2669c8bcc74da75d09a1dbba74817cf3e5dbfcd",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/Recommendations.test.tsx",
+      "group": "frontend-test",
+      "sha256": "bc8389fee938735e0bb1629140fa3fcb8dd8a4e94f02184e426e45c388bc7cf4",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/RecommendationsIssueDate.test.tsx",
+      "group": "frontend-test",
+      "sha256": "5685e3597d841fae420c602633454c1e830aa523982d666874788902c903a104",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/RecommendationsItemPublication.test.tsx",
+      "group": "frontend-test",
+      "sha256": "a3ece5ee378e6dc9f70bfc4d9fe3b6bf5d031c9a4b61be86955cf03c0fbe19cf",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/RecommendationsRevisionRace.test.tsx",
+      "group": "frontend-test",
+      "sha256": "fcfd4abb96bcfc32ab482d4d53de344a58416d8c9f15182619e9921c6cebbde5",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/ServiceSummary.test.tsx",
+      "group": "frontend-test",
+      "sha256": "6a4bd038118e8e424376e18d89058c4503fc754b749d21b0a01320e8043696f4",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/StockMaster.test.tsx",
+      "group": "frontend-test",
+      "sha256": "591124d179910b688a238773f0b8bd1e3690948d1247136b03820065d3a22fa9",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/StorefrontCommerce.test.tsx",
+      "group": "frontend-test",
+      "sha256": "c4f4f2762d594d60f12bae89997fab9287485916e68626e45bac4ccfcdb00ae8",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/StorefrontContext.test.tsx",
+      "group": "frontend-test",
+      "sha256": "cf894fa89fc408554b7ac811ae2692c60e0c77e6801b5b172aab5fcb0d73259a",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/StoreNavigation.test.tsx",
+      "group": "frontend-test",
+      "sha256": "b8e0b62fab7880e77769cb2bf91d227cb8a06851b55f01f9439e9640f6b5a561",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/Suppliers.test.tsx",
+      "group": "frontend-test",
+      "sha256": "31ac777d8d27b988b00ac22d1cc9dd14ec219490258f819b5b59a3976fb33f30",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/pages/Users.test.tsx",
+      "group": "frontend-test",
+      "sha256": "5df1eb4787e3cd88df527c5ce1c72b5fd99b41aee2f76f3772ba8c9b4f7fe7cc",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/previewInset.test.js",
+      "group": "frontend-test",
+      "sha256": "0a4c1cc4c881a47d97bc41f3f941a236257ad1d4dce20012ac219f221b29cead",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/previewQuoteLabels.test.tsx",
+      "group": "frontend-test",
+      "sha256": "863ace94199a47ace016b8dcec53ba3d285bd6e496af2a3dabd85fa5db2f5c02",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/productDetailContent.test.ts",
+      "group": "frontend-test",
+      "sha256": "03e36d1e929b0c61341cf5e0d78730213ff630aa6239fa7c99a39ed6215282f6",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/productFactText.test.ts",
+      "group": "frontend-test",
+      "sha256": "60cc1bad8588cda1ee0e6d59c8b06b92440993da3ea817522ee6ff028165312a",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/productMarkerApi.test.ts",
+      "group": "frontend-test",
+      "sha256": "6d64248a69186e07d2cd79df6c15db9f1f581ae546c5f3ed8755121243b09ed7",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/productMarkers.test.ts",
+      "group": "frontend-test",
+      "sha256": "1cb9c079120c88603a8d81067a85bb316b2b26e3fd46db55005877d0052ba058",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/publicCatalog.test.ts",
+      "group": "frontend-test",
+      "sha256": "900991215ae23ca7164c2ecf18eb0db951bb9abcb707d4550ed8da56c4f6eef2",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/publicCatalogApi.test.ts",
+      "group": "frontend-test",
+      "sha256": "1fb0d332c40b95c67565aafb92a8a3056a3bf11704cf2f8b3fc07946b66bfedc",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/recommendationArticle.test.ts",
+      "group": "frontend-test",
+      "sha256": "9cdaa2ece6a89e86df8e2b1a590b8f56a725368cd4126f4caf4fa1bb5cd09212",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/recommendationFilters.test.ts",
+      "group": "frontend-test",
+      "sha256": "204e86cae683fcf3942bfb14a29bf88703148c057e0ea211253d0387686c0b6d",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/recommendationPublicationApi.test.ts",
+      "group": "frontend-test",
+      "sha256": "d67bc45ef26b15413814daed037fda596a033b0f4a4cdbb20ed6f08776ecfa2c",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/recommendationSchedule.test.tsx",
+      "group": "frontend-test",
+      "sha256": "9b0447e084447b6c20e135f8b33d0cf39d478dabafe3227720bd6d3d1f0c4f1b",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/recommendationText.test.ts",
+      "group": "frontend-test",
+      "sha256": "3a0cda8dcd6b40a76f351f5e5837e922081f43ddee4c5591c97c284541035f9c",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/referenceOfferWindow.test.tsx",
+      "group": "frontend-test",
+      "sha256": "edfd1a6cd678fe66100d9a23b90657d59a33e02f8fac4e0bf01a05925d978909",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/referencePriceDisplay.test.ts",
+      "group": "frontend-test",
+      "sha256": "1336d77080939c3153bac9a76f145cff962f71bc1ba66ee5af5da9d93a6b3fab",
+      "automatic": false
+    },
+    {
+      "path": "frontend/src/serviceOffer.test.ts",
+      "group": "frontend-test",
+      "sha256": "140ed7f7455fe14eda5774b1b634537991974391950d58a82e2ac79bdb3e1145",
+      "automatic": false
+    },
+    {
+      "path": "frontend/e2e/admin-visual.spec.ts",
+      "group": "playwright-test",
+      "sha256": "520e651407227fc45a12dccf67843bfbbd9365af3e1de963ebd03125f05d2776",
+      "automatic": false
+    },
+    {
+      "path": "frontend/e2e/ai_onboarding.spec.ts",
+      "group": "playwright-test",
+      "sha256": "e88f7ac2dadbba574dd148d6a834915c7e23768a100983c2d36b0741ced6370f",
+      "automatic": false
+    },
+    {
+      "path": "frontend/e2e/billing_freeze_receipt.spec.ts",
+      "group": "playwright-test",
+      "sha256": "f8acf085c0bd25774476c41a8ed969b41ee496d3213efec36cc569f94d3b478c",
+      "automatic": false
+    },
+    {
+      "path": "frontend/e2e/catalog-lightbox.spec.ts",
+      "group": "playwright-test",
+      "sha256": "d3acae76cdfbc3cbd6676e9cc580e58ad9d3b26d396a6579218f1cb1bc310454",
+      "automatic": false
+    },
+    {
+      "path": "frontend/e2e/chat_publish_flow.spec.ts",
+      "group": "playwright-test",
+      "sha256": "839cc3489636a1d9b8fd77bb00e42bb18122087a120e8497f7f45d754ca20ed1",
+      "automatic": false
+    },
+    {
+      "path": "frontend/e2e/client_role_gate.spec.ts",
+      "group": "playwright-test",
+      "sha256": "805ea3867a3ab5a0335c7b22137610f0a64bf573c228bed6b428acb050db3faf",
+      "automatic": false
+    },
+    {
+      "path": "frontend/e2e/mobile_agent_blackbox.spec.ts",
+      "group": "playwright-test",
+      "sha256": "43bd1ec68ea0fe9457313e7b6cf9ebac4512b26e5c1f2322a606331d3ac87e5e",
+      "automatic": false
+    },
+    {
+      "path": "frontend/e2e/mobile_customer_blackbox.spec.ts",
+      "group": "playwright-test",
+      "sha256": "60d7578e5519ef0e49e2d49da5e5dc49a3012ceb44d3fc8d222d77c03cac3bcc",
+      "automatic": false
+    },
+    {
+      "path": "frontend/e2e/product-archive.local.spec.ts",
+      "group": "playwright-test",
+      "sha256": "9243f204c2c3607328ac1b9c0f1f351605d19a1798530d960cd75c283ce6f0d0",
+      "automatic": false
+    },
+    {
+      "path": "frontend/e2e/recommendation-history.spec.ts",
+      "group": "playwright-test",
+      "sha256": "60d20da6fab7ee6063ccc0418b45fb0b7ca06198e2f0a913c865efaecfb74059",
+      "automatic": false
+    },
+    {
+      "path": "frontend/e2e/responsive_backoffice.spec.ts",
+      "group": "playwright-test",
+      "sha256": "924152337e75f82e86d1f6ad8acf71648ce8d45da15a14d52b5f834aa4df8fa6",
+      "automatic": false
+    },
+    {
+      "path": "frontend/e2e/responsive_backoffice_ops.spec.ts",
+      "group": "playwright-test",
+      "sha256": "4a2524840eca2a2978359259384a4a8b228238a6d557b7152559f601befed027",
+      "automatic": false
+    },
+    {
+      "path": "frontend/e2e/responsive_client.spec.ts",
+      "group": "playwright-test",
+      "sha256": "0cff4de0cd083689c09a713054078ab62e53ece18e6767bf866a4e1b2d9247fe",
+      "automatic": false
+    },
+    {
+      "path": "frontend/e2e/store-shortcuts.spec.ts",
+      "group": "playwright-test",
+      "sha256": "ba4c18b36fa6a6bb6d76425c62e6011bdd1576ca191dbd059b48444d4b00516b",
+      "automatic": false
+    },
+    {
+      "path": "frontend/e2e/storefront.local.spec.ts",
+      "group": "playwright-test",
+      "sha256": "52cdc9137fad67c15ff5c44b8be1654e21132dbe86ff2dc12861ab9a54e4d7a3",
+      "automatic": false
+    },
+    {
+      "path": "frontend/e2e/test_shopping_flow.spec.ts",
+      "group": "playwright-test",
+      "sha256": "a36c5d3229c6ba1892258e9547b114639d677a8e627e8edcbbb7b8100def76ec",
+      "automatic": false
+    },
+    {
+      "path": "scripts/bind-product-engagement.py",
+      "group": "script",
+      "sha256": "3ff25d8cdf5662530335b407a4b03be04b2b2198eaa8cf1c38f660f09c1d1e01",
+      "automatic": false
+    },
+    {
+      "path": "scripts/bootstrap-production-owner.py",
+      "group": "script",
+      "sha256": "54c3f459ec3268daf0c00f7d8defbd9b2f5be4b6ffdf929ced6665076548e0f5",
+      "automatic": false
+    },
+    {
+      "path": "scripts/build-service-images.sh",
+      "group": "script",
+      "sha256": "8693fffffb00e26a84a9e6a28139e54ed212df0032e49174d7106b76b5a243aa",
+      "automatic": false
+    },
+    {
+      "path": "scripts/capture-article-inputs.mjs",
+      "group": "script",
+      "sha256": "38296d9a27ae20771990ba3c6fd8d16dc6bd90cf63eaaff2d602233645bdcd98",
+      "automatic": false
+    },
+    {
+      "path": "scripts/capture-c2-inputs.mjs",
+      "group": "script",
+      "sha256": "08169304189f375092347e19c2d84579ce420e05583553f3e40e4f0071422063",
+      "automatic": false
+    },
+    {
+      "path": "scripts/capture-issue-date-inputs.mjs",
+      "group": "script",
+      "sha256": "211ba0f39f6fdfd9956f3ed9ddfd3ed5b9b1105f5903c8ac8c3ca0ce1efad7c1",
+      "automatic": false
+    },
+    {
+      "path": "scripts/capture-item-publication-inputs.mjs",
+      "group": "script",
+      "sha256": "fec43bf059f4a703f23d648d146db7c01f30667e5edc59c8d596bc103691b757",
+      "automatic": false
+    },
+    {
+      "path": "scripts/capture-item-ui-inputs.mjs",
+      "group": "script",
+      "sha256": "0a58940d638d99ee85959f5c1e3b64b0d367bc5aecd44666918c709a4b0c64e5",
+      "automatic": false
+    },
+    {
+      "path": "scripts/check-product-engagement-evidence.py",
+      "group": "script",
+      "sha256": "635c2b2aa0ac98da227a8ad4ae6f54a65223d9f05e1dd24b6025a8c714529356",
+      "automatic": false
+    },
+    {
+      "path": "scripts/check-production-isolation.py",
+      "group": "script",
+      "sha256": "69fa4fb6103a93241483ccee280f5900b8b295c47d979e4843d20cfc9574d0d2",
+      "automatic": false
+    },
+    {
+      "path": "scripts/cleanup-postgres-images-local.py",
+      "group": "script",
+      "sha256": "3ae5edabcf81d0082c4248dbe74ed8c69fcd3a642bf6c46b2dcfdeeb018f46e5",
+      "automatic": false
+    },
+    {
+      "path": "scripts/cleanup-regional-production.py",
+      "group": "script",
+      "sha256": "f82ec2c45167c62c6abfdfae0e86d87b9db1bb0953b519cd7da1b79f4efe0e8d",
+      "automatic": false
+    },
+    {
+      "path": "scripts/encrypt-ai-secret.ps1",
+      "group": "script",
+      "sha256": "8f3da1496970f57b8bec8cfb46aeb0547923e884316ccb2c0ab99badf931c1b8",
+      "automatic": false
+    },
+    {
+      "path": "scripts/generate-geographic-master.py",
+      "group": "script",
+      "sha256": "de3ac57ef05c58d86b787fb5d511aa8cc66a4c27da3301bb258d56c8f55b6444",
+      "automatic": false
+    },
+    {
+      "path": "scripts/init-production-env.py",
+      "group": "script",
+      "sha256": "56b6b58d63c5a19af00a89de103a1c5b3e5c93e9599c07fa67c4ea3f582767f3",
+      "automatic": false
+    },
+    {
+      "path": "scripts/inspect-regional-production.py",
+      "group": "script",
+      "sha256": "13154bd14f01149107a7347d849d16b932657775642f7b4c3f534bb23b1e63c0",
+      "automatic": false
+    },
+    {
+      "path": "scripts/integrate-gallery-candidate.py",
+      "group": "script",
+      "sha256": "9ece4837093bf4f511c3e02cada1cad0b8cc813804e59334ef387961baedfc25",
+      "automatic": false
+    },
+    {
+      "path": "scripts/inventory-completed-development.py",
+      "group": "script",
+      "sha256": "238519a4e41edd5003e52bad2dc12aa1212fc28b6d3f4303f90ef2235623e626",
+      "automatic": false
+    },
+    {
+      "path": "scripts/local-test.ps1",
+      "group": "script",
+      "sha256": "be7859974539a329c6248f455c7f4cb296e9643448c5a712646311e09e5ee58e",
+      "automatic": false
+    },
+    {
+      "path": "scripts/postgres18-backup.py",
+      "group": "script",
+      "sha256": "d19828919399d00d49ee0c33d3f514869b72fe870cd467466fdaee205f9f0843",
+      "automatic": false
+    },
+    {
+      "path": "scripts/prepare-ci-release-artifacts.py",
+      "group": "script",
+      "sha256": "bd64c1a6e89064f754711afb6a04acfc2f26ccd5e5d9c753b910ab95676ef305",
+      "automatic": false
+    },
+    {
+      "path": "scripts/protected-node-state.py",
+      "group": "script",
+      "sha256": "e43195235997c913655376c1c145279c9cf288b7baf2ab3e42a4db0ee2b63849",
+      "automatic": false
+    },
+    {
+      "path": "scripts/publish-production.py",
+      "group": "script",
+      "sha256": "19a65d863e97a52d5f5f08fbf53e59a2d88e24921596c3d68235dbeff14458c6",
+      "automatic": false
+    },
+    {
+      "path": "scripts/reference_data_release.py",
+      "group": "script",
+      "sha256": "b700bd66415e527029b50de4200232ce42b26673d8a6b998c8ef13520bb0cd0e",
+      "automatic": false
+    },
+    {
+      "path": "scripts/renew-bobuy-cert.sh",
+      "group": "script",
+      "sha256": "a050c5ac3daf0ae1f4dab49fdb2e4a20b71452a4977ee3bc49a448ceadd812e9",
+      "automatic": false
+    },
+    {
+      "path": "scripts/run-dependency-audit.sh",
+      "group": "script",
+      "sha256": "972f87a809968e1bf403990e1d34296b26b801c8913d7adbf6585589df321f50",
+      "automatic": false
+    },
+    {
+      "path": "scripts/run-frontend-release-evidence.ps1",
+      "group": "script",
+      "sha256": "211327601afe7668c87b0190c5eb0fb11270679cac3e0fc5a3195a7a7e197574",
+      "automatic": false
+    },
+    {
+      "path": "scripts/run-server-release-window.ps1",
+      "group": "script",
+      "sha256": "d52a51abd4e8fe35a545909d8c9d93f3b5e18c331589a67fefdcebcdd3f09eae",
+      "automatic": false
+    },
+    {
+      "path": "scripts/test_capture_article_inputs.mjs",
+      "group": "script",
+      "sha256": "c8f909c2ed55f1f295302fd72ae48c197b73371692e73ddbdb7743aefd79017b",
+      "automatic": false
+    },
+    {
+      "path": "scripts/test_capture_issue_date_inputs.mjs",
+      "group": "script",
+      "sha256": "8289cd738947ee7bdbcdd32b2453a755e1af0126c922d64af93c930fbdd8bcad",
+      "automatic": false
+    },
+    {
+      "path": "scripts/test_dependency_audit.py",
+      "group": "script",
+      "sha256": "090d916c04f1651d1c5abc3607b25bacb4ab3c7b124a7ed9c4753a96c6e58138",
+      "automatic": false
+    },
+    {
+      "path": "scripts/test_geographic_release_operator.py",
+      "group": "script",
+      "sha256": "7d3643bb6d388a4e9c3c99ef68be9bdd6d05077106de7f436afcb6b94244bfb9",
+      "automatic": false
+    },
+    {
+      "path": "scripts/test_postgres18_backup.py",
+      "group": "script",
+      "sha256": "b841dd64d5842de787834345a56370cfb51cb7992db59e38f5ab434230f2b4cf",
+      "automatic": false
+    },
+    {
+      "path": "scripts/test_prepare_ci_release_artifacts.py",
+      "group": "script",
+      "sha256": "67c9a76595b4e89ba10cb708a4810a936c1b752dbad0013ffb40e1246ea4b06d",
+      "automatic": false
+    },
+    {
+      "path": "scripts/test_publish_production.py",
+      "group": "script",
+      "sha256": "2ab28ee27cded3f729048d67abb76ac4d2ffb0e461d3be801e9eb2176790e4b4",
+      "automatic": false
+    },
+    {
+      "path": "scripts/test_reference_data_release.py",
+      "group": "script",
+      "sha256": "0d1e902935aca39096b527d0db55e19ab3deb712cd22b99d0fbfa5016e39cfe3",
+      "automatic": false
+    },
+    {
+      "path": "scripts/test_verify_amendment_onboarding_upgrade.py",
+      "group": "script",
+      "sha256": "5f7a390f7d32e434e22cf7dfe1c0457e2fce376022f1ff70bbba2370378008d6",
+      "automatic": false
+    },
+    {
+      "path": "scripts/test_verify_checkout_upgrade.py",
+      "group": "script",
+      "sha256": "c226e07735e7d9a6a39d8cfe63b38679e5cde1c635c55f077640bfea7c2a5484",
+      "automatic": false
+    },
+    {
+      "path": "scripts/test_verify_issue_date_upgrade.py",
+      "group": "script",
+      "sha256": "2caa1cc81e91c5958950a008bedcabf1019e2b7b35f7635aeb860309cd909fdb",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-account-release.mjs",
+      "group": "script",
+      "sha256": "78cfb9bbe0c9d07069fa74a8a7cfa21b13503a919e9b3a56b07f863022864894",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-ai-onboarding-samples.ps1",
+      "group": "script",
+      "sha256": "d5ea3d1cc1b2f6345dfdddb9e4d0a6dfa6eaf1d258c29220affe83dbeb5096c1",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-amendment-onboarding-upgrade.py",
+      "group": "script",
+      "sha256": "d2a3e303d20f424b50ac0d4d90305b6da3398819611f80aad78d7bc8c0ecb39f",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-backend-coverage.py",
+      "group": "script",
+      "sha256": "21280185de133018bcd2020080a3060e9b084163556d3482aaa044eaf625a616",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-checkout-upgrade.py",
+      "group": "script",
+      "sha256": "01850352a4ac84d297027f1866101512e6ae56f8fdf77942f2f401fa55b0aa48",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-engagement-git-archive.py",
+      "group": "script",
+      "sha256": "7a2253709aea2c7ab0718862852bf60d2b900413d00be51a3b6b08d6f256557c",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-gallery-follow-production.mjs",
+      "group": "script",
+      "sha256": "d45cf4b8ff9b41481d64356388911b86b0af24940bf799b69d949229f051293d",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-gallery-follow.mjs",
+      "group": "script",
+      "sha256": "78edf7a58ee2946f7d513a72ad52e3c103b776f882b1f42e545e8e680c3ea2f9",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-geographic-migration.py",
+      "group": "script",
+      "sha256": "2e4f7a54c66e423886fdd814c8e590287821b7f4c076fb21e7fa55b84784761f",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-geographic-pixels.py",
+      "group": "script",
+      "sha256": "4d553da3f3f63b7aa0f08f15a627ad60d5dce47b5cba888598bbf1ef6b5effea",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-geographic-ui.mjs",
+      "group": "script",
+      "sha256": "a775e7fd76cd18411ffd1677b9e10e451449344552567e213c42aece3fa9a483",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-issue-date-upgrade.py",
+      "group": "script",
+      "sha256": "9b2d9323b92edc3c0879d434b645a764e7e99ef0c95c8c97056b134ca9250033",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-live-audit-archive.py",
+      "group": "script",
+      "sha256": "60cc45f0ca8f8c4630905d62d1bd21efc0aeb44172fd8c03bb3989e8065d3993",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-mail-settings-local.mjs",
+      "group": "script",
+      "sha256": "5a33c1ddee10ed952c2ce821d6401b0f5cdd64f09b545c794b0b1f10c350ce5a",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-postgres-images-local.mjs",
+      "group": "script",
+      "sha256": "fc3ac275e7ed95dfbde45f23f6e822c320c2c06b977e4ab37bd81009b68c3c52",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-postgres-public-images-local.mjs",
+      "group": "script",
+      "sha256": "b909e85f5b33053a5114835904ee4221c366d4cf5bf50ad1f2cb2787408df5ab",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-product-catalog-local.mjs",
+      "group": "script",
+      "sha256": "ea12a3c16a32c6abf0e377681058178c5ff44f378e9c0085f554fb9f7516aaed",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-product-catalog-production.mjs",
+      "group": "script",
+      "sha256": "92b38e5e1f837deabcc977d10348b251e64b6763ae3e2fc97b74d6cbca5f65b7",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-product-engagement-geometry.mjs",
+      "group": "script",
+      "sha256": "2d95362506ba267080dfbd43307792a22302ff0ddac638b2b4827c8e1c752177",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-product-engagement-main-merge.py",
+      "group": "script",
+      "sha256": "c24fe4d445f71fe19ec385c9b876fa9157d8479ca1dec85c02cc0d92d2c413b7",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-product-engagement-pixels.py",
+      "group": "script",
+      "sha256": "f27d83a46de06a58e046abc4a42aaf29df2b3350c789db64f798138b78bde7f7",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-product-engagement-production-crops.mjs",
+      "group": "script",
+      "sha256": "93bef33c467df290db35029d4f7142a03369dae7c5f62c8f79cf74aedd83ac77",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-product-engagement-production-pixels.py",
+      "group": "script",
+      "sha256": "f880437c0e031936a9e1fe77cc224513743f63652160705656909f22ffe0d8a5",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-product-engagement-production-readonly.mjs",
+      "group": "script",
+      "sha256": "3f8e8b8643520a03d876c3cf1f362f58cd4e77dd0dc070bf1f9e5b702b32213c",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-product-engagement-production.mjs",
+      "group": "script",
+      "sha256": "533513535fbe1d1e0d3bddd34ef95bfb4a34944941f7d03163c548b2c9afbda8",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-product-engagement-runtime.py",
+      "group": "script",
+      "sha256": "0f52cdb02cad3955e6a6f0bd0af2a0eab790b243d125c39a4b6d47b54a03cd4f",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-product-engagement-ui.mjs",
+      "group": "script",
+      "sha256": "79f1185af1e70f0535c9c6d2fc563508949c83cf41e0926bf93212d69ce79835",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-product-lifecycle-customer-local.mjs",
+      "group": "script",
+      "sha256": "a29ab8778b97bc13b646882015d737a9e336cfafceea9bed04024a59f9c11219",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-product-lifecycle-local.mjs",
+      "group": "script",
+      "sha256": "127846d25e4d5ba45565f438d3f522fa5861b57c3c2aa84b0849820bb2b552a5",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-product-lifecycle-migration.py",
+      "group": "script",
+      "sha256": "826761ef77f1653247eead1986d243922d4a00002a78d5a3adbee73447128941",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-product-lifecycle-mobile-local.mjs",
+      "group": "script",
+      "sha256": "d570173fbe7a83f8a835c654582b3af3f392452d3a2188d97c3d512c38e4cfa9",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-product-pricing-local.mjs",
+      "group": "script",
+      "sha256": "1d3acf0bf58ae438bc7d9e0547a6001de8f3c7c0db6a5d23b030ef8fc66e97c6",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-product-pricing-production.mjs",
+      "group": "script",
+      "sha256": "43c11431895103d84d1722ae9d1bb2502fc18523c24b2b57acf3e623fb0c9bbe",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-production.mjs",
+      "group": "script",
+      "sha256": "1e39fe3a49661d2151c548da597ed10851344f8f0891fb71d0dc44ecc5d09374",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-recommendation-classification-followup.mjs",
+      "group": "script",
+      "sha256": "b7b5296d50ac6917b2f967beffb9419a73cc38c2e5c0c49dd52396c364f15b84",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-recommendation-classification-local.mjs",
+      "group": "script",
+      "sha256": "e9f3143e8b85a17e3cdf1a620f5080b105e1ee6145db5b8c885e5dcff1ed49c7",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-recommendation-classification-production.mjs",
+      "group": "script",
+      "sha256": "a9cfc1f60cf76b93a4a703231b7a4e4a86ed4c0f5899e060f665bb6728d8d410",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-recommendation-commerce-local.mjs",
+      "group": "script",
+      "sha256": "015bd19ca80922525e4e977ff59c55ec5cd332a768e6a5faf7e7c82c6520c222",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-recommendation-commerce-production.mjs",
+      "group": "script",
+      "sha256": "faa7ab25f0978b008b26b461aa7ab8547b6f926da85dbb65ac95468bcae1ed1f",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-recommendation-intake.mjs",
+      "group": "script",
+      "sha256": "421072585d8922ac2971d4ce5f2b83e2d76e405dbe280b26f89f1bfe9f957d4b",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-recommendation-offers-ui.mjs",
+      "group": "script",
+      "sha256": "ceaaf8a30ca55484eca2145f687e5714cbc27480b53ae1db846c4d25df87a304",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-recommendation-offers-visual.mjs",
+      "group": "script",
+      "sha256": "328bb714675b223f16aea906dc09be28d32a8d51d036d13cac345e7cbea58847",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-recommendation-private-status-local.mjs",
+      "group": "script",
+      "sha256": "b17744f5e195f4ff11d5876029cd84ecf0fb3a9d24056b73e1913dfea1dbcf1c",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-recommendation-production-readonly.mjs",
+      "group": "script",
+      "sha256": "755e214669e992bacc443afc5b22d8e7fb50dc2047e636207fd6ec70af7c7cb9",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-recommendation-production.mjs",
+      "group": "script",
+      "sha256": "2c7d83c11575635ca01aeb0d7cc3c21152096ff787c55dc3526278c01dc26b69",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-recommendation-topics-production.mjs",
+      "group": "script",
+      "sha256": "4511fe96ad4fa20da72c2f3834bbac7609b70978794bc9fd2ce82628584c18d8",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-recommendation-topics.mjs",
+      "group": "script",
+      "sha256": "77d5ce4a0c6c7f4760ed27215675f579d88ec45b8b69b458a28b8f16007db102",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-recommendation-writing.mjs",
+      "group": "script",
+      "sha256": "e5b56f3dfe8336c20524fbe2d9e4b46c8c462156e66d186e495b85684de293b4",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-storefront-navigation-final.mjs",
+      "group": "script",
+      "sha256": "88a4febff9c58ce244f5b8b347bd4114aa7108c7e12be00e538be7950e6fb46d",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-storefront-navigation-local.mjs",
+      "group": "script",
+      "sha256": "2874dd523713efcf90f826dbcc2e466ef0086281d7a1c54e3556ff5399ff94a3",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-storefront-navigation-polish.mjs",
+      "group": "script",
+      "sha256": "c122301781d430ffd72e80b70c0087709e19a92a6a769db4dcb7be4641e47e79",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-storefront-navigation-production.mjs",
+      "group": "script",
+      "sha256": "e882a6d4d2fd5c4e30bc2710bcccea0e096bf569d5df029eb28151416862e107",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-trip-migration.mjs",
+      "group": "script",
+      "sha256": "ce21f5c621f79214100a096746b413f4c334d4d26e921cfc77321501fdadfc62",
+      "automatic": false
+    },
+    {
+      "path": "scripts/verify-user-migration.py",
+      "group": "script",
+      "sha256": "657d62b3a4f666d728f93bbcb1eec0a909f6c27e589def7a030018d3c29fbdf2",
+      "automatic": false
+    },
+    {
+      "path": "frontend/scripts/check-i18n.mjs",
+      "group": "frontend-script",
+      "sha256": "e873e3e87722ec0e3ce34877c6adc21d5790bd2e2aa9746edca1ec259c2a929e",
+      "automatic": false
+    },
+    {
+      "path": "frontend/scripts/check-merchant-geometry.mjs",
+      "group": "frontend-script",
+      "sha256": "2917ed746ec022c28263eeb04349b424d5914d105748e5124b87847189277948",
+      "automatic": false
+    },
+    {
+      "path": "frontend/scripts/home-seo.test.mjs",
+      "group": "frontend-script",
+      "sha256": "f6a52f68f1492bd911fc3b6f4ff3fcc6c71ec19e9cc9883d648003d850445163",
+      "automatic": false
+    },
+    {
+      "path": "frontend/scripts/measure-merchant.mjs",
+      "group": "frontend-script",
+      "sha256": "be553486c51131ae9ea2d07f5ed8ba1578395211ca607186d465ba4b22673066",
+      "automatic": false
+    },
+    {
+      "path": "frontend/scripts/prerender-home.mjs",
+      "group": "frontend-script",
+      "sha256": "ba461516bab26c94c0c108b7ada2db186e27c0bad8b018004d86b00319c40020",
+      "automatic": false
+    },
+    {
+      "path": "frontend/scripts/storefront-visual.cjs",
+      "group": "frontend-script",
+      "sha256": "4d0d52a04616339923f91fabde9ec30e43587b6ace8f4acf06fdcde66ccb5541",
+      "automatic": false
+    },
+    {
+      "path": "frontend/scripts/verify-article-languages.mjs",
+      "group": "frontend-script",
+      "sha256": "6229a3a42a07b6706ce0721711fb8db9b8f7c4e5480f01a9047576c7023fcc6d",
+      "automatic": false
+    },
+    {
+      "path": "frontend/scripts/verify-image-upload.mjs",
+      "group": "frontend-script",
+      "sha256": "50390e81097f84710dcb63751dc511f482e40323af277a5b5f703a4320fdf569",
+      "automatic": false
+    },
+    {
+      "path": "frontend/scripts/verify-merchant-overlays.mjs",
+      "group": "frontend-script",
+      "sha256": "12763bb770f3febc376862b163ef70815ae46ff8d5c54ccc9cc66494cf0d0345",
+      "automatic": false
+    },
+    {
+      "path": "frontend/scripts/verify-plan60.mjs",
+      "group": "frontend-script",
+      "sha256": "d2aee5f5db85c7ffbf3d2677e49e6596ceafa8f7b78970a5f7d7c0be779cad22",
+      "automatic": false
+    },
+    {
+      "path": "frontend/scripts/verify-plan61.mjs",
+      "group": "frontend-script",
+      "sha256": "04cd0b61dd7a84ce236726e04fec086559099200a19dfae7d3a347330065b627",
+      "automatic": false
+    },
+    {
+      "path": "frontend/scripts/verify-plan63-production.mjs",
+      "group": "frontend-script",
+      "sha256": "6068463a0619795f2bcda42e06be4c417f62eb79fd453b1ddaa352e8ed01b99f",
+      "automatic": false
+    },
+    {
+      "path": "frontend/scripts/verify-plan63.mjs",
+      "group": "frontend-script",
+      "sha256": "09691d4e832151602f149375922863b67b2503b5225ce1fd80f6877af50cec6d",
+      "automatic": false
+    },
+    {
+      "path": "frontend/scripts/verify-reference-app.mjs",
+      "group": "frontend-script",
+      "sha256": "30146f78d2e9cd09c62085d2d0a39334c55244d2c9cd38b84b54c813f13eda7e",
+      "automatic": false
+    },
+    {
+      "path": "frontend/scripts/verify-reference-mobile.mjs",
+      "group": "frontend-script",
+      "sha256": "78af9c76d19ad20f81a813771dca08b5fd5ca26ad0c5745b17164fc67d6b20c2",
+      "automatic": false
+    },
+    {
+      "path": "frontend/scripts/verify-reference-window.mjs",
+      "group": "frontend-script",
+      "sha256": "049df531b88d99590b526ba13fa07e4fe7a05ba49f7ec5c1f4f5d7e341376b84",
+      "automatic": false
+    },
+    {
+      "path": ".github/workflows/ai-release-evidence.yml",
+      "group": "workflow",
+      "sha256": "927f273b13835eca95c9058415497707cd7a036257139c757c4a7b944e4cffd0",
+      "automatic": true
+    },
+    {
+      "path": ".github/workflows/codeql.yml",
+      "group": "workflow",
+      "sha256": "66a0411059db3fb7b201d994b5cbe4bac12062812820ef6ef288d4b1b94f93ec",
+      "automatic": true
+    },
+    {
+      "path": ".github/workflows/dependency-check.yml",
+      "group": "workflow",
+      "sha256": "50268ed895500d622d590198b4b7f06bf508b43ec47f63b66d9d22f617445ac0",
+      "automatic": true
+    },
+    {
+      "path": "backend/pom.xml",
+      "group": "maven-build",
+      "sha256": "f445c0b129314140c1bd4b73f68a0caea32daacc7a0a26f609167d82640d2069",
+      "automatic": false
+    },
+    {
+      "path": "bobbuy-ai/pom.xml",
+      "group": "maven-build",
+      "sha256": "7bd0e8f1bca199c8552251d88274d46079d9b5a117a72f6c05c4a20559b32155",
+      "automatic": false
+    },
+    {
+      "path": "bobbuy-auth/pom.xml",
+      "group": "maven-build",
+      "sha256": "6b20235111aef07d627f25346f6ac7b209ed0ba4d0e75aa5035cd4e9282956d9",
+      "automatic": false
+    },
+    {
+      "path": "bobbuy-common/pom.xml",
+      "group": "maven-build",
+      "sha256": "42ea33c9500eae712224abbd0ca615ce29119407b4f50adc7658850387c8d8ea",
+      "automatic": false
+    },
+    {
+      "path": "bobbuy-core/pom.xml",
+      "group": "maven-build",
+      "sha256": "d02da17318dba8f0e21baef9ae5e6f2acb4390653a41ad656a7bd56333c9ed29",
+      "automatic": false
+    },
+    {
+      "path": "bobbuy-gateway/pom.xml",
+      "group": "maven-build",
+      "sha256": "bcfe0e08f891d14b65f1a865ca447c3d4f361412ef955d862cc655b2f8944caf",
+      "automatic": false
+    },
+    {
+      "path": "bobbuy-im/pom.xml",
+      "group": "maven-build",
+      "sha256": "dd95a546b3328a94187bed4c14e3da37ec1710de80dcef56aca5af5394d9f94b",
+      "automatic": false
+    },
+    {
+      "path": "pom.xml",
+      "group": "maven-build",
+      "sha256": "6e48859e56f164a9e9875d769203f096c0b4ea734260058db873b6c0f94f48fd",
+      "automatic": false
+    },
+    {
+      "path": "test-ai.ps1",
+      "group": "root-manual-script",
+      "sha256": "808ab766cdc364000b6a13c874b562a5b05f157a2c884231559dda341fb1e863",
+      "automatic": false
+    },
+    {
+      "path": "test-all-images.ps1",
+      "group": "root-manual-script",
+      "sha256": "09523c540df428ce9609efd30cb5c5385b22934defc816b79c249a796617ce4c",
+      "automatic": false
+    },
+    {
+      "path": "frontend/package.json",
+      "group": "test-build-config",
+      "sha256": "2f421b340ae6b9384f66e830623a68ee16de1c68a3fab100e579708d481e7a67",
+      "automatic": false
+    },
+    {
+      "path": "frontend/playwright.config.ts",
+      "group": "test-build-config",
+      "sha256": "dd0e3d04af58896de06b9ef8222baaad7cec169d8b8ea781173328f6ad3abfaf",
+      "automatic": false
+    },
+    {
+      "path": "frontend/vitest.config.ts",
+      "group": "test-build-config",
+      "sha256": "ef95279f229eb4054f6e1774f4ef9396e714737792b12375a2656ff7f293f0b2",
+      "automatic": false
+    }
+  ]
+}

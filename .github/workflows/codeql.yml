@@ -4,11 +4,26 @@ on:
   push:
     branches:
       - main
-      - 'copilot/**'
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.png'
+      - '**/*.jpg'
+      - '**/*.jpeg'
+      - '**/*.webp'
   pull_request:
     branches:
       - main
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.png'
+      - '**/*.jpg'
+      - '**/*.jpeg'
+      - '**/*.webp'
   workflow_dispatch:
+
+concurrency:
+  group: codeql-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   actions: read
@@ -42,14 +57,6 @@ jobs:
           distribution: temurin
           cache: maven
 
-      - name: Set up Node.js
-        if: matrix.language == 'javascript-typescript'
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: npm
-          cache-dependency-path: frontend/package-lock.json
-
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v4.35.2
         with:
@@ -59,12 +66,6 @@ jobs:
       - name: Build backend for CodeQL
         if: matrix.language == 'java-kotlin'
         run: mvn -B -DskipTests package --file backend/pom.xml
-
-      - name: Build frontend for CodeQL
-        if: matrix.language == 'javascript-typescript'
-        run: |
-          npm ci --prefix frontend
-          npm run build --prefix frontend
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v4.35.2

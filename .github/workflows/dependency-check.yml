@@ -4,21 +4,26 @@ on:
   push:
     branches:
       - main
-      - 'copilot/**'
     paths:
-      - 'backend/**'
-      - 'pom.xml'
+      - '**/pom.xml'
+      - '.mvn/**'
+      - 'mvnw*'
       - '.github/workflows/dependency-check.yml'
       - 'scripts/run-dependency-audit.sh'
   pull_request:
     branches:
       - main
     paths:
-      - 'backend/**'
-      - 'pom.xml'
+      - '**/pom.xml'
+      - '.mvn/**'
+      - 'mvnw*'
       - '.github/workflows/dependency-check.yml'
       - 'scripts/run-dependency-audit.sh'
   workflow_dispatch:
+
+concurrency:
+  group: dependency-check-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   contents: read

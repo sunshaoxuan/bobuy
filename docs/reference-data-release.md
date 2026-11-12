@@ -1,6 +1,6 @@
 # 新增基础档案的实际发布入口
 
-项目入口为 `scripts/publish-production.py`。必须显式指定 `--mode`；旧的只有版本号的命令在任何读写操作之前退出。基础档案使用 `reference-data`，有具体维护风险的发布使用 `maintenance` 并提供 `--maintenance-reason`。旧的 `run-server-release-window.ps1` 只有 `-PrecheckOnly` 可直接运行，完整窗口须同时提供 `-AllowFullSnapshot` 和 `-MaintenanceReason`。
+项目入口为 `scripts/publish-production.py`。必须显式指定 `--mode`；旧的只有版本号的命令在任何读写操作之前退出。基础档案使用 `reference-data`，有具体维护风险的发布使用 `maintenance` 并提供 `--maintenance-reason`。旧的 `run-server-release-window.ps1` 已退役为只读 `-PrecheckOnly`，完整窗口即使提供快照开关和维护理由也会在远程调用前拒绝。恢复能力与当前受影响服务的发布检查依具体风险保留。
 
 ## 基础档案导入
 

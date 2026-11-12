@@ -1,8 +1,12 @@
 # Bobuy production deployment
 
+## 当前门禁范围，2026-11-12
+
+执行口径见[当前测试矩阵](reports/TEST-MATRIX-本地与CI执行矩阵.md)与[重审报告](reports/RELEASE-GATE-REVIEW-20261112.md)。README旧默认CI、历史恢复演练与旧schema捕获清单不追加为每次发布要求。同一输入有效检查可复用。已退役的 `run-server-release-window.ps1` 只提供只读预检，其旧全服务构建、AI验收及恢复演练执行体已删除；显式开关也无法激活。新发布按实际变更选择服务与兼容恢复路径。`publish-production.py --mode maintenance` 的停写与完整恢复保护仅适用于经具体风险评估选择的维护发布，禁止将其当作所有应用变更的默认路径。
+
 ## 新增基础档案的轻量发布规则，2026-11-12
 
-实际入口及可信计划要求见[基础档案发布脚本](reference-data-release.md)。Python发布入口强制选择reference-data或带具体理由的maintenance模式；旧PowerShell完整窗口强制显式快照开关和维护理由。基础档案导入路径只有事务SQL和针对性检查，任何旧的无模式命令均在副作用前退出。
+实际入口及可信计划要求见[基础档案发布脚本](reference-data-release.md)。Python发布入口强制选择reference-data或带具体理由的maintenance模式；旧PowerShell完整窗口已退役。基础档案导入路径只有事务SQL和针对性检查，任何旧的无模式命令均在副作用前退出。
 
 本节约束后续新增独立基础档案的小功能，优先于下文历史版本的通用备份和停写步骤。适用条件为仅增加参考表、预制数据及查询选择接口，保留已有业务数据且旧应用兼容。采用版本化、幂等SQL或脚本直接导入，验证来源、数量、唯一性、父子关系和重复执行；受影响测试与项目必要门禁通过后直接上线，随后完成实际版本、数据、接口及受影响页面验收。用户已授权这类小功能的常规发布。
 
