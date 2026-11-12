@@ -3,6 +3,7 @@ import hashlib
 import json
 from pathlib import Path
 import shutil
+import stat
 import subprocess
 import sys
 
@@ -33,6 +34,18 @@ def protected():
 
 OUT.mkdir(parents=True, exist_ok=True)
 baseline = OUT / 'before.json'
+def cleanup(temp):
+    assert temp.resolve() == (ROOT / '.task-tmp/git-archive-independent.git').resolve()
+    def writable_retry(function, path, error):
+        if not isinstance(error, PermissionError):
+            raise error
+        Path(path).chmod(stat.S_IWRITE | stat.S_IREAD)
+        function(path)
+    if temp.exists():
+        shutil.rmtree(temp, onexc=writable_retry)
+    if temp.parent.exists() and not any(temp.parent.iterdir()):
+        temp.parent.rmdir()
+
 if sys.argv[1] == 'snapshot':
     assert not baseline.exists()
     baseline.write_text(json.dumps({'refs': refs(), 'protected': protected()}, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
@@ -55,24 +68,29 @@ elif sys.argv[1] == 'verify':
         assert git('rev-list', '--count', 'HEAD', cwd=temp) == git('rev-list', '--count', tip)
         assert git('rev-parse', 'HEAD^{tree}', cwd=temp) == git('rev-parse', 'HEAD^{tree}')
         prefix = 'docs/reports/evidence/product-engagement-production'
-        count = 0
-        for line in git('ls-tree', '-r', 'HEAD', '--', prefix).splitlines():
-            metadata, path = line.split('\t', 1)
-            blob = metadata.split()[2]
-            assert git('hash-object', '--no-filters', path) == blob, path
-            assert git('rev-parse', 'HEAD:' + path, cwd=temp) == blob, path
-            count += 1
+        local_tree = git('ls-tree', '-r', 'HEAD', '--', prefix)
+        assert git('ls-tree', '-r', 'HEAD', '--', prefix, cwd=temp) == local_tree
+        evidence = [line.split('\t', 1) for line in local_tree.splitlines()]
+        paths = [path for _, path in evidence]
+        hashes = subprocess.check_output(
+            ['git', 'hash-object', '--no-filters', '--stdin-paths'], cwd=ROOT,
+            input=('\n'.join(paths) + '\n').encode('utf-8')).decode().splitlines()
+        assert len(hashes) == len(evidence)
+        for (metadata, path), blob in zip(evidence, hashes):
+            assert metadata.split()[2] == blob, path
+        count = len(evidence)
         result = {'result': 'PASS', 'branch': BRANCH, 'verifiedCommit': tip,
                   'tree': git('rev-parse', 'HEAD^{tree}'), 'commitCount': int(git('rev-list', '--count', 'HEAD')),
                   'rawEvidenceFiles': count, 'allExistingRemoteHeadsUnchanged': True,
                   'sharedCheckoutStatusAndFileHashesUnchanged': True,
                   'independentBareCloneFsck': 'PASS', 'productionMutation': False}
     finally:
-        assert temp.resolve() == (ROOT / '.task-tmp/git-archive-independent.git').resolve()
-        shutil.rmtree(temp)
-        if not any(temp.parent.iterdir()):
-            temp.parent.rmdir()
-    (OUT / 'verified.json').write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
+        cleanup(temp)
+    if '--no-write' not in sys.argv:
+        (OUT / 'verified.json').write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
     print(json.dumps(result))
+elif sys.argv[1] == 'cleanup':
+    cleanup(ROOT / '.task-tmp/git-archive-independent.git')
+    print('OWNED_CLONE_CLEANUP_PASS')
 else:
     raise SystemExit('Use snapshot or verify')

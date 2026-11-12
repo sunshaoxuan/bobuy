@@ -46,3 +46,11 @@
 最终意图复核：排序、逐次点击、热度展示、星级录入及均分、关联归属、持久化与同步、备份迁移及现有数据保护、真实页面/几何/视觉、过程清理均有独立有效证据，全部PASS。本批生产交付完成。
 
 版本归档：本地验收提交44da8f0已保存，工作树干净。向远端推送原任务分支及独立验收分支均被Git服务以directory file conflict拒绝，远端分支归档未完成；该结果不改变已验证的生产镜像、迁移及页面证据。
+
+## Git远端归档修复
+
+上段记录保留原失败时点。续批已确认远端存在refs/heads/codex，提交0ead362a1851e264541be1e9131e6d3c53f2cf32，Git引用路径无法同时作为分支文件和子分支目录。原两次候选均采用codex/前缀，因此存在相同路径冲突。
+
+修复采用平级归档分支[codex-product-engagement-production-20261112-archive](https://github.com/sunshaoxuan/bobuy/tree/codex-product-engagement-production-20261112-archive)，保留现有codex及其他全部分支，无删除、重命名或强制推送。首次归档提交91b7634已推送，含完整生产代码历史、迁移、测试、报告、截图和字节绑定证据。验证脚本与推送前远端引用及主工作树文件摘要保存在scripts/verify-engagement-git-archive.py和[git-archive](evidence/product-engagement-production/git-archive/)。本次范围为Git和归档文档，生产应用与数据库未修改。
+
+归档验证PASS：独立裸克隆的完整对象检查通过，655个历史提交、完整树摘要及116份原始证据文件字节均一致；推送前所有远端分支引用与共享主工作树状态及文件摘要均保持一致，见[验证回执](evidence/product-engagement-production/git-archive/verified.json)。Windows只读pack文件曾使临时克隆清理失败，修复仅限已验证的任务内临时克隆路径，复验及清理均通过。最终文档、脚本和本回执合并提交后再次推送并以相同脚本的--no-write方式独立下载验证最终提交，避免改写已提交回执。原生产功能和视觉证据保持有效，本次不重复应用构建或生产切换。
