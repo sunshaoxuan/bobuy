@@ -1,0 +1,13 @@
+{
+  "phase": "WRITES_OPEN_AFTER_FORWARD_RECOVERY",
+  "at": "2026-11-12T07:48:27Z",
+  "databaseRestoreForbidden": true,
+  "source": "b3caeec8c0b04a3144339f8e84ab334b53f81aa1",
+  "release": "20261112.geographic_master.1",
+  "existingTablesUnchanged": 45,
+  "noAdditionalOom": true,
+  "priorOomRecorded": true,
+  "databaseVersion": 34,
+  "backupSha256": "269ef551bb9d4ca4454e6ce3d60817804ae7a3b9b778b6596e3dba508e381f1b",
+  "seconds": 95.13
+}

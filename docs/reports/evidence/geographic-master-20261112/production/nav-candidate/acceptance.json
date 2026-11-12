@@ -1,0 +1,85 @@
+{
+  "result": "PASS",
+  "candidateCssInjected": true,
+  "states": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "sidebar": {
+        "x": 0,
+        "y": 0,
+        "width": 232,
+        "height": 1000,
+        "bottom": 1000
+      },
+      "identity": {
+        "x": 18,
+        "y": 923,
+        "width": 195,
+        "height": 57,
+        "bottom": 980
+      },
+      "menu": {
+        "x": 18,
+        "y": 133.5,
+        "width": 195,
+        "height": 789.5,
+        "bottom": 923
+      },
+      "selected": {
+        "x": 18,
+        "y": 869.5,
+        "width": 195,
+        "height": 46,
+        "bottom": 915.5
+      },
+      "scrollTop": 58,
+      "scrollHeight": 848,
+      "clientHeight": 790,
+      "overflow": false
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 800
+      },
+      "sidebar": {
+        "x": 0,
+        "y": 0,
+        "width": 232,
+        "height": 800,
+        "bottom": 800
+      },
+      "identity": {
+        "x": 18,
+        "y": 723,
+        "width": 195,
+        "height": 57,
+        "bottom": 780
+      },
+      "menu": {
+        "x": 18,
+        "y": 133.5,
+        "width": 195,
+        "height": 589.5,
+        "bottom": 723
+      },
+      "selected": {
+        "x": 18,
+        "y": 669.5,
+        "width": 195,
+        "height": 46,
+        "bottom": 715.5
+      },
+      "scrollTop": 258,
+      "scrollHeight": 848,
+      "clientHeight": 590,
+      "overflow": false
+    }
+  ],
+  "errors": [],
+  "failed": [],
+  "telemetry": []
+}

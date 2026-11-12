@@ -1,0 +1,42 @@
+[
+  {
+    "archivedPath": "sources/finalize-geographic-production.py",
+    "originalPath": "tools/finalize-geographic-production.py",
+    "sha256": "623bf298c5a111cf044b65f0fbdfa4f6589e981b5a8394d50723e1be1912f2ec"
+  },
+  {
+    "archivedPath": "sources/geographic-release-client.py",
+    "originalPath": "tools/geographic-release-client.py",
+    "sha256": "91cb1eae645145e43aa0a1208185af729af119df72c1bc700b47e201f0083897"
+  },
+  {
+    "archivedPath": "sources/make-geographic-operator.py",
+    "originalPath": "tools/make-geographic-operator.py",
+    "sha256": "3fa55b405b4b8bf2e8a4f8073c3eb95812e45203c0c9ad4625ecd931114b0487"
+  },
+  {
+    "archivedPath": "sources/release-geo-nav.py",
+    "originalPath": "tools/release-geo-nav.py",
+    "sha256": "2cada61ef968c880807f18e420f3b7ade7bf8531c5bbcd1d9bb1ed2ae2c8f469"
+  },
+  {
+    "archivedPath": "sources/run-geo-nav.py",
+    "originalPath": "tools/run-geo-nav.py",
+    "sha256": "ac2e39a52e2eae1f0f470b0179757f992ade82ba2a01811d83f64241c26b3f99"
+  },
+  {
+    "archivedPath": "sources/test-bounded-fingerprint.py",
+    "originalPath": "tools/test-bounded-fingerprint.py",
+    "sha256": "5b91d7a228b0307637583be5fbe09c4f5ebc53c305259c48c355051c7cf5277c"
+  },
+  {
+    "archivedPath": "sources/verify-geo-nav.mjs",
+    "originalPath": "tools/verify-geo-nav.mjs",
+    "sha256": "02096e8917df388ec9c0e26a0c9e9bf35f6978a0d40312ed6ec421022864b32a"
+  },
+  {
+    "archivedPath": "sources/verify-geographic-production-browser.py",
+    "originalPath": "tools/verify-geographic-production-browser.py",
+    "sha256": "5619957dae3abde9673e174251a39e8cff089bc35637374fc0175b2ee4863098"
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "source": "f91681242ab688f25e39aa8481167f8fc0c8251a",
+  "result": "PASS",
+  "ci": "success",
+  "ciUrl": "https://github.com/sunshaoxuan/bobuy/pull/72",
+  "frontendBuild": "PASS",
+  "sourceComparison": "Only merchant.css changed; JavaScript/tests/dependencies unchanged from accepted source",
+  "candidateCssBrowser": "PASS:1440x1000 and1440x800, native wheel, selected-link and identity bounds",
+  "databaseOperation": false
+}

@@ -1,0 +1,110 @@
+{
+  "core-service": {
+    "id": "f69d14b56310913656ca241ac29e2a1c388747f8ed032cf79ba6fa09001dfe9a",
+    "image": "sha256:9293d344191f43cc18cc6a88c18814590bf1c15c22d6a456baa2792ea897ea59",
+    "tag": "bobuy/core:20261112.product-introductions.2",
+    "revision": "5a9bb64ab8cda965018bddacfe9471c1081ca34b",
+    "project": "bobuy",
+    "startedAt": "2026-11-12T03:16:09.867889136Z",
+    "health": "healthy"
+  },
+  "ai-service": {
+    "id": "10972ee4cd488c0b368031dcdee897a9f3cf10e1d533ddfd2637004b0e983c5a",
+    "image": "sha256:e17c56f30483def52fb4c3e58d7ef7fad8dced0f89ff23109ab380cdca32fa48",
+    "tag": "bobuy/ai:20261028.3",
+    "revision": "414830e8871d781d12b185536eae3681eb73219d",
+    "project": "bobuy",
+    "startedAt": "2026-11-12T03:17:13.745889021Z",
+    "health": "healthy"
+  },
+  "im-service": {
+    "id": "218a0841775c655ea8aca3e76c32a76a9bb6e243576ecb325733c4f88f36e933",
+    "image": "sha256:3c286b1672db0eca6df4803085d7f5ba9cc475c4542a4f93302ee5c74277369a",
+    "tag": "bobuy/im:20261028.3",
+    "revision": "414830e8871d781d12b185536eae3681eb73219d",
+    "project": "bobuy",
+    "startedAt": "2026-11-12T03:17:13.98319244Z",
+    "health": "healthy"
+  },
+  "auth-service": {
+    "id": "f92780c457a16d7757540eae17d6ae73b22ff9389369bdb4da18301faa4208ab",
+    "image": "sha256:6863ae4b03b28b8fbd8666fb15b1599cca6a8b9911bbbd1cf555d9d4b8a3eabb",
+    "tag": "bobuy/auth:20261028.3",
+    "revision": "414830e8871d781d12b185536eae3681eb73219d",
+    "project": "bobuy",
+    "startedAt": "2026-11-12T03:17:14.325298412Z",
+    "health": "healthy"
+  },
+  "gateway-service": {
+    "id": "8658ca313926847ac17386d2494fc068487d3a2275a187e9b05e16373eb6a7ee",
+    "image": "sha256:71354226154b2ca27ff7ddaaf90923f0954db9cabac363564447322030d21dcd",
+    "tag": "bobuy/router:20261028.3",
+    "revision": "414830e8871d781d12b185536eae3681eb73219d",
+    "project": "bobuy",
+    "startedAt": "2026-11-12T03:17:14.75029289Z",
+    "health": "healthy"
+  },
+  "frontend": {
+    "id": "c04bfcb440786c05ba7ff930a3c1e0876af5455a49ac869964c64293bf93c4bc",
+    "image": "sha256:1f596d5e9a48962fa23c123d43eb5155cc325db3bd988cf2a8c4e8e1da82f805",
+    "tag": "bobuy/frontend:20261112.product-fact-localization",
+    "revision": "ea7b7fec29ee5d413cfac2e2025c0f93819e4fc6",
+    "project": "bobuy",
+    "startedAt": "2026-11-12T06:09:00.104342154Z",
+    "health": "running"
+  },
+  "postgres": {
+    "id": "3e3f73ecd6ede718eafd2c14ff7087a9e34445c161e4eb73cc0f28455b527a7d",
+    "image": "sha256:1a0c23d53c1ad77468c8653fa6eed4f4105cfbef9e6f027bc1dfeb16949a8c29",
+    "tag": "postgres:18.6-alpine3.23@sha256:1a0c23d53c1ad77468c8653fa6eed4f4105cfbef9e6f027bc1dfeb16949a8c29",
+    "revision": null,
+    "project": "bobuy",
+    "startedAt": "2026-10-28T05:54:10.450486189Z",
+    "health": "healthy"
+  },
+  "rustfs": {
+    "id": "a33a452d37da3d06ff76b62046e7d1cfac6cf60f730fa62ff17fc95a8c24a8f7",
+    "image": "sha256:e287e99762a4a3e7b706526e01f2ff755f67db165e9be9f6b907adc6fb6d6ee1",
+    "tag": "rustfs/rustfs:1.0.4@sha256:e287e99762a4a3e7b706526e01f2ff755f67db165e9be9f6b907adc6fb6d6ee1",
+    "revision": null,
+    "project": "bobuy",
+    "startedAt": "2026-10-28T06:08:45.288836844Z",
+    "health": "running"
+  },
+  "gateway": {
+    "id": "417a2727353a7449a30c4fb820a5860dc3f2ee961ae9413e19eeddfa81036b2e",
+    "image": "sha256:892bb2152464f0c5d8972593a5f5afaf8054552580b699d95f8ff4af08c2d33d",
+    "tag": "nginx:alpine",
+    "revision": null,
+    "project": "bobuy",
+    "startedAt": "2026-10-27T10:17:45.060469115Z",
+    "health": "running"
+  },
+  "redis": {
+    "id": "a9329b8de7e5bf143b4af936a847f79ca8e10957f5f28d31a39ec5d5717d010a",
+    "image": "sha256:858f009f9709ce576febc734aa78b8f6d624b82571f9ddb6bda4377c833b3499",
+    "tag": "redis:7-alpine",
+    "revision": null,
+    "project": "bobuy",
+    "startedAt": "2026-10-27T10:17:45.063404096Z",
+    "health": "healthy"
+  },
+  "nacos": {
+    "id": "25e2f666c1cc59bb03c06016faccc211f5d4990de76b980b69c75fba0302c2eb",
+    "image": "sha256:cca69ab12348b43d95c9b2c1d8d31d5a8d56e634ed4232a510423a9346090a70",
+    "tag": "nacos/nacos-server:v2.3.2-slim",
+    "revision": "c150bce691f4996871203b5897dd357f6d8a0e24",
+    "project": "bobuy",
+    "startedAt": "2026-10-27T10:17:45.058357323Z",
+    "health": "healthy"
+  },
+  "rabbitmq": {
+    "id": "c982a0e0f4762b34284370fa9aa38d59762bd28e26928ced4a7983e96968d40a",
+    "image": "sha256:606d8c0d6b3c18d1da9afc53bc7cdb2a8d5486df91b5a9830e9e07626c9ae281",
+    "tag": "rabbitmq:3-management-alpine",
+    "revision": null,
+    "project": "bobuy",
+    "startedAt": "2026-10-27T10:17:45.079215412Z",
+    "health": "healthy"
+  }
+}

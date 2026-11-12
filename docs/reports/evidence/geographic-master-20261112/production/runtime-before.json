@@ -1,0 +1,65 @@
+{
+  "states": {
+    "bobuy-core-service": {
+      "id": "f69d14b56310913656ca241ac29e2a1c388747f8ed032cf79ba6fa09001dfe9a",
+      "image": "sha256:9293d344191f43cc18cc6a88c18814590bf1c15c22d6a456baa2792ea897ea59",
+      "tag": "bobuy/core:20261112.product-introductions.2",
+      "revision": "5a9bb64ab8cda965018bddacfe9471c1081ca34b",
+      "health": "healthy"
+    },
+    "bobuy-frontend": {
+      "id": "c04bfcb440786c05ba7ff930a3c1e0876af5455a49ac869964c64293bf93c4bc",
+      "image": "sha256:1f596d5e9a48962fa23c123d43eb5155cc325db3bd988cf2a8c4e8e1da82f805",
+      "tag": "bobuy/frontend:20261112.product-fact-localization",
+      "revision": "ea7b7fec29ee5d413cfac2e2025c0f93819e4fc6",
+      "health": "running"
+    },
+    "bobuy-auth-service": {
+      "id": "f92780c457a16d7757540eae17d6ae73b22ff9389369bdb4da18301faa4208ab",
+      "image": "sha256:6863ae4b03b28b8fbd8666fb15b1599cca6a8b9911bbbd1cf555d9d4b8a3eabb",
+      "tag": "bobuy/auth:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "health": "healthy"
+    },
+    "bobuy-ai-service": {
+      "id": "10972ee4cd488c0b368031dcdee897a9f3cf10e1d533ddfd2637004b0e983c5a",
+      "image": "sha256:e17c56f30483def52fb4c3e58d7ef7fad8dced0f89ff23109ab380cdca32fa48",
+      "tag": "bobuy/ai:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "health": "healthy"
+    },
+    "bobuy-im-service": {
+      "id": "218a0841775c655ea8aca3e76c32a76a9bb6e243576ecb325733c4f88f36e933",
+      "image": "sha256:3c286b1672db0eca6df4803085d7f5ba9cc475c4542a4f93302ee5c74277369a",
+      "tag": "bobuy/im:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "health": "healthy"
+    },
+    "bobuy-gateway-service": {
+      "id": "8658ca313926847ac17386d2494fc068487d3a2275a187e9b05e16373eb6a7ee",
+      "image": "sha256:71354226154b2ca27ff7ddaaf90923f0954db9cabac363564447322030d21dcd",
+      "tag": "bobuy/router:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "health": "healthy"
+    },
+    "bobuy-gateway": {
+      "id": "417a2727353a7449a30c4fb820a5860dc3f2ee961ae9413e19eeddfa81036b2e",
+      "image": "sha256:892bb2152464f0c5d8972593a5f5afaf8054552580b699d95f8ff4af08c2d33d",
+      "tag": "nginx:alpine",
+      "revision": null,
+      "health": "running"
+    },
+    "bobuy-postgres": {
+      "id": "3e3f73ecd6ede718eafd2c14ff7087a9e34445c161e4eb73cc0f28455b527a7d",
+      "image": "sha256:1a0c23d53c1ad77468c8653fa6eed4f4105cfbef9e6f027bc1dfeb16949a8c29",
+      "tag": "postgres:18.6-alpine3.23@sha256:1a0c23d53c1ad77468c8653fa6eed4f4105cfbef9e6f027bc1dfeb16949a8c29",
+      "revision": null,
+      "health": "healthy"
+    }
+  },
+  "history": "1|V1__baseline_schema.sql|-61108690|t\n2|V2__refresh_token_sessions.sql|875571210|t\n3|V3__product_attributes_jsonb.sql|2137541239|t\n4|V4__customer_storefront.sql|1289168936|t\n5|V5__user_role_sets.sql|138128310|t\n6|V6__regional_delivery_trips.sql|-1381036153|t\n7|V7__product_recommendations.sql|180735127|t\n9|V9__recommendation_offer_facts.sql|-688720859|t\n10|V10__recommendation_classification.sql|1921972435|t\n11|V11__catalog_source_variants.sql|1482338030|t\n12|V12__legacy_catalog_variant_compatibility.sql|1018056134|t\n13|V13__currency_and_reviewed_sale.sql|-1626804536|t\n14|V14__recommendation_localizations.sql|-1895405431|t\n15|V15__recommendation_product_gallery.sql|2075064081|t\n16|V16__product_catalog_metadata.sql|2007865342|t\n17|V17__product_price_adjustments.sql|-1526404061|t\n18|V18__encrypted_mail_settings.sql|1800274322|t\n19|V19__postgres_image_access_scope.sql|-1435531544|t\n20|V20__product_logical_deletion.sql|-1777451984|t\n21|V21__media_transfer_outbox.sql|1158085533|t\n22|V22__object_only_media_metadata.sql|282376610|t\n23|V23__reference_offer_windows.sql|-1095905402|t\n24|V24__recommendation_article_languages.sql|1504519504|t\n25|V25__reversible_product_identity.sql|166368124|t\n26|V26__recommendation_service_offers.sql|-866209850|t\n27|V27__explicit_product_markers.sql|-1017511264|t\n28|V28__checkout_delivery_snapshot.sql|-1352681989|t\n28.1|V28_1__recommendation_issue_date.sql|-708289696|t\n28.2|V28_2__product_rating.sql|1805532871|t\n29|V29__customer_order_amendments.sql|-1231025769|t\n30|V30__costco_onboarding_jobs.sql|-344474371|t\n31|V31__recommendation_item_publication.sql|1431704188|t\n32|V32__user_product_reviews.sql|-538346819|t\n33|V33__product_clicks.sql|1437201222|t",
+  "librarySha256": {
+    "release_operator.py": "5fddec223ef6f1d38402c8a11c1f99877ffc93f9d7d4b5afeb1271752c5610ac",
+    "publisher_helpers.py": "69cdd1c6519a35c172f2a7506805ed8f90b581f47c240ba1cd79b6ac315a130a"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "removed": [
+    "frontend/node_modules",
+    "frontend/dist",
+    "bobbuy-common/target",
+    "bobbuy-core/target",
+    "backend/target",
+    ".release-runtime"
+  ],
+  "remoteRecoveryMaterialsRetained": true,
+  "result": "PASS",
+  "scope": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\geographic-master-20261112",
+  "verificationSourcesArchived": true,
+  "productionTouched": false
+}

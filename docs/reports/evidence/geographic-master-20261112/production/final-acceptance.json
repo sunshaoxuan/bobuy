@@ -1,0 +1,120 @@
+{
+  "result": "PASS",
+  "coreSource": "b3caeec8c0b04a3144339f8e84ab334b53f81aa1",
+  "frontendSource": "f91681242ab688f25e39aa8481167f8fc0c8251a",
+  "schemaVersion": 34,
+  "referenceCounts": {
+    "1": 249,
+    "3": 1912,
+    "2": 47
+  },
+  "existing45TablesUnchangedAtFrozenRecovery": true,
+  "databaseRestorePerformed": false,
+  "initialPublishFailedAndPreserved": true,
+  "recoveredForward": true,
+  "finalFrontendOnly": true,
+  "productionBrowser": {
+    "states": 12,
+    "consoleErrors": 0,
+    "failedApplicationRequests": 0,
+    "cloudflareRumReloadAborts": 4,
+    "temporaryFinalSessionLoggedOut": true
+  },
+  "geometry": {
+    "geographicControls": 94,
+    "menuControls": [
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "actualGlyphBounds": [
+          62,
+          886,
+          146,
+          900
+        ],
+        "backgroundUsableInner": [
+          19,
+          870.5,
+          212,
+          914.5
+        ],
+        "hotArea": {
+          "x": 18,
+          "y": 869.5,
+          "width": 195,
+          "height": 46,
+          "bottom": 915.5
+        },
+        "margins": [
+          43,
+          15.5,
+          66,
+          14.5
+        ],
+        "verticalCenterError": 0.5,
+        "allowedError": 1.4000000000000001,
+        "alignment": "left-aligned menu label with icon; vertical center constrained"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 800
+        },
+        "actualGlyphBounds": [
+          62,
+          686,
+          146,
+          700
+        ],
+        "backgroundUsableInner": [
+          19,
+          670.5,
+          212,
+          714.5
+        ],
+        "hotArea": {
+          "x": 18,
+          "y": 669.5,
+          "width": 195,
+          "height": 46,
+          "bottom": 715.5
+        },
+        "margins": [
+          43,
+          15.5,
+          66,
+          14.5
+        ],
+        "verticalCenterError": 0.5,
+        "allowedError": 1.4000000000000001,
+        "alignment": "left-aligned menu label with icon; vertical center constrained"
+      }
+    ]
+  },
+  "loadedPublicAssets": [
+    {
+      "path": "assets/GeographicAreas-Bo31vvAQ.css",
+      "sha256": "b54582b4f25b1498ac1b079c7a4832a1dc9aeec41881ae20fc6be0aa85f5c73c",
+      "status": 200
+    },
+    {
+      "path": "assets/GeographicAreas-p3V84qlF.js",
+      "sha256": "9ce9d86eea0ca466fc3fc805874cbd239fd8e0e8f5e1a1d6d683c3e5824217b9",
+      "status": 200
+    },
+    {
+      "path": "assets/index-C1q3FRPj.js",
+      "sha256": "d549eb1361034cfb1fb1387b61d20071f9e0dd75e32ca7488fb45078d4ccf762",
+      "status": 200
+    },
+    {
+      "path": "assets/index-IDS6ZWW9.css",
+      "sha256": "ff4d49f8be81c4ab7b667590c57118916b7e2cce1b2c2faede9f33844890aec7",
+      "status": 200
+    }
+  ],
+  "mobileEvidenceReuse": "Only desktop-sidebar CSS changed in the final patch; prior actual360px geographic behavior and pixel evidence remain valid. Final desktop1000/800 uses the actual final frontend, without injected CSS.",
+  "policyCorrection": "Simple additive reference-data changes use idempotent import and focused readback; reuse confirmed offsite backup coverage instead of defaulting to an extra full snapshot. Offsite backup coverage was not independently established in this task."
+}

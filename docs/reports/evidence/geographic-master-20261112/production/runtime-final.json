@@ -1,0 +1,122 @@
+{
+  "result": "PASS",
+  "states": {
+    "core-service": {
+      "id": "43614a6cb54f634b0571cbeaddf9379411b0d7f2dbeb7900cd9c5347f5cd8e6c",
+      "image": "sha256:05cd202ae182bf3995622e85f255ee2daf2261444605fff7d7771e1e40d599d3",
+      "tag": "bobuy/core:20261112.geographic_master.1",
+      "revision": "b3caeec8c0b04a3144339f8e84ab334b53f81aa1",
+      "project": "bobuy",
+      "startedAt": "2026-11-12T07:47:00.058715682Z",
+      "health": "healthy"
+    },
+    "ai-service": {
+      "id": "10972ee4cd488c0b368031dcdee897a9f3cf10e1d533ddfd2637004b0e983c5a",
+      "image": "sha256:e17c56f30483def52fb4c3e58d7ef7fad8dced0f89ff23109ab380cdca32fa48",
+      "tag": "bobuy/ai:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "project": "bobuy",
+      "startedAt": "2026-11-12T07:47:00.256270663Z",
+      "health": "healthy"
+    },
+    "im-service": {
+      "id": "218a0841775c655ea8aca3e76c32a76a9bb6e243576ecb325733c4f88f36e933",
+      "image": "sha256:3c286b1672db0eca6df4803085d7f5ba9cc475c4542a4f93302ee5c74277369a",
+      "tag": "bobuy/im:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "project": "bobuy",
+      "startedAt": "2026-11-12T07:47:00.539548276Z",
+      "health": "healthy"
+    },
+    "auth-service": {
+      "id": "f92780c457a16d7757540eae17d6ae73b22ff9389369bdb4da18301faa4208ab",
+      "image": "sha256:6863ae4b03b28b8fbd8666fb15b1599cca6a8b9911bbbd1cf555d9d4b8a3eabb",
+      "tag": "bobuy/auth:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "project": "bobuy",
+      "startedAt": "2026-11-12T07:47:00.936211484Z",
+      "health": "healthy"
+    },
+    "gateway-service": {
+      "id": "8658ca313926847ac17386d2494fc068487d3a2275a187e9b05e16373eb6a7ee",
+      "image": "sha256:71354226154b2ca27ff7ddaaf90923f0954db9cabac363564447322030d21dcd",
+      "tag": "bobuy/router:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "project": "bobuy",
+      "startedAt": "2026-11-12T07:47:01.533064369Z",
+      "health": "healthy"
+    },
+    "frontend": {
+      "id": "659158ad2851addabf2b2f32e5c7a97bbb23edb6a6e05a6fc893014dd5f2cf2e",
+      "image": "sha256:e0af35862a5888f8b428eb09f3070cd6da3a1ea6158b287c334780067a73360c",
+      "tag": "bobuy/frontend:20261112.geographic_nav.1",
+      "revision": "f91681242ab688f25e39aa8481167f8fc0c8251a",
+      "project": "bobuy",
+      "startedAt": "2026-11-12T08:16:34.124644057Z",
+      "health": "running"
+    },
+    "postgres": {
+      "id": "3e3f73ecd6ede718eafd2c14ff7087a9e34445c161e4eb73cc0f28455b527a7d",
+      "image": "sha256:1a0c23d53c1ad77468c8653fa6eed4f4105cfbef9e6f027bc1dfeb16949a8c29",
+      "tag": "postgres:18.6-alpine3.23@sha256:1a0c23d53c1ad77468c8653fa6eed4f4105cfbef9e6f027bc1dfeb16949a8c29",
+      "revision": null,
+      "project": "bobuy",
+      "startedAt": "2026-10-28T05:54:10.450486189Z",
+      "health": "healthy"
+    },
+    "rustfs": {
+      "id": "a33a452d37da3d06ff76b62046e7d1cfac6cf60f730fa62ff17fc95a8c24a8f7",
+      "image": "sha256:e287e99762a4a3e7b706526e01f2ff755f67db165e9be9f6b907adc6fb6d6ee1",
+      "tag": "rustfs/rustfs:1.0.4@sha256:e287e99762a4a3e7b706526e01f2ff755f67db165e9be9f6b907adc6fb6d6ee1",
+      "revision": null,
+      "project": "bobuy",
+      "startedAt": "2026-10-28T06:08:45.288836844Z",
+      "health": "running"
+    },
+    "gateway": {
+      "id": "417a2727353a7449a30c4fb820a5860dc3f2ee961ae9413e19eeddfa81036b2e",
+      "image": "sha256:892bb2152464f0c5d8972593a5f5afaf8054552580b699d95f8ff4af08c2d33d",
+      "tag": "nginx:alpine",
+      "revision": null,
+      "project": "bobuy",
+      "startedAt": "2026-10-27T10:17:45.060469115Z",
+      "health": "running"
+    },
+    "redis": {
+      "id": "a9329b8de7e5bf143b4af936a847f79ca8e10957f5f28d31a39ec5d5717d010a",
+      "image": "sha256:858f009f9709ce576febc734aa78b8f6d624b82571f9ddb6bda4377c833b3499",
+      "tag": "redis:7-alpine",
+      "revision": null,
+      "project": "bobuy",
+      "startedAt": "2026-10-27T10:17:45.063404096Z",
+      "health": "healthy"
+    },
+    "nacos": {
+      "id": "25e2f666c1cc59bb03c06016faccc211f5d4990de76b980b69c75fba0302c2eb",
+      "image": "sha256:cca69ab12348b43d95c9b2c1d8d31d5a8d56e634ed4232a510423a9346090a70",
+      "tag": "nacos/nacos-server:v2.3.2-slim",
+      "revision": "c150bce691f4996871203b5897dd357f6d8a0e24",
+      "project": "bobuy",
+      "startedAt": "2026-10-27T10:17:45.058357323Z",
+      "health": "healthy"
+    },
+    "rabbitmq": {
+      "id": "c982a0e0f4762b34284370fa9aa38d59762bd28e26928ced4a7983e96968d40a",
+      "image": "sha256:606d8c0d6b3c18d1da9afc53bc7cdb2a8d5486df91b5a9830e9e07626c9ae281",
+      "tag": "rabbitmq:3-management-alpine",
+      "revision": null,
+      "project": "bobuy",
+      "startedAt": "2026-10-27T10:17:45.079215412Z",
+      "health": "healthy"
+    }
+  },
+  "databaseVersion": 34,
+  "referenceCounts": {
+    "1": 249,
+    "3": 1912,
+    "2": 47
+  },
+  "protectedUnchanged": true,
+  "originalFailureRetained": true,
+  "databaseRestorePerformed": false
+}

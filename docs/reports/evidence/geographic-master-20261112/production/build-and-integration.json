@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "frontendIntegrationFiles": 7,
+  "frontendIntegrationTests": 43,
+  "coreModulePackaging": "PASS with tests reused from674-test accepted input",
+  "finalFrontendBuild": "PASS",
+  "source": "f91681242ab688f25e39aa8481167f8fc0c8251a",
+  "logsSha256": {
+    "frontend-integration-tests.log": "8114de559765009fd302e7859236cd5033feb418f747ea7f2c544a61a86f2712",
+    "core-package.log": "8fa759369c66d94ca550845f7a885a554d63fdfb398defa1c85b3d9e5b7cddc2",
+    "frontend-nav-build.log": "75117a4a8c01c455857c3a1e4c0eea915ca96f16c5e53a3f2c18ce2182c85e33"
+  }
+}

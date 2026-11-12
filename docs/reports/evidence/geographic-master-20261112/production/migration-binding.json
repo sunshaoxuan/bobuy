@@ -1,0 +1,221 @@
+{
+  "existingMigrations": 34,
+  "rawLineEndingDifferences": {},
+  "added": [
+    "V34__geographic_master.sql"
+  ],
+  "checks": [
+    {
+      "file": "V10__recommendation_classification.sql",
+      "version": "10",
+      "candidateChecksum": 1921972435,
+      "databaseChecksum": 1921972435
+    },
+    {
+      "file": "V11__catalog_source_variants.sql",
+      "version": "11",
+      "candidateChecksum": 1482338030,
+      "databaseChecksum": 1482338030
+    },
+    {
+      "file": "V12__legacy_catalog_variant_compatibility.sql",
+      "version": "12",
+      "candidateChecksum": 1018056134,
+      "databaseChecksum": 1018056134
+    },
+    {
+      "file": "V13__currency_and_reviewed_sale.sql",
+      "version": "13",
+      "candidateChecksum": -1626804536,
+      "databaseChecksum": -1626804536
+    },
+    {
+      "file": "V14__recommendation_localizations.sql",
+      "version": "14",
+      "candidateChecksum": -1895405431,
+      "databaseChecksum": -1895405431
+    },
+    {
+      "file": "V15__recommendation_product_gallery.sql",
+      "version": "15",
+      "candidateChecksum": 2075064081,
+      "databaseChecksum": 2075064081
+    },
+    {
+      "file": "V16__product_catalog_metadata.sql",
+      "version": "16",
+      "candidateChecksum": 2007865342,
+      "databaseChecksum": 2007865342
+    },
+    {
+      "file": "V17__product_price_adjustments.sql",
+      "version": "17",
+      "candidateChecksum": -1526404061,
+      "databaseChecksum": -1526404061
+    },
+    {
+      "file": "V18__encrypted_mail_settings.sql",
+      "version": "18",
+      "candidateChecksum": 1800274322,
+      "databaseChecksum": 1800274322
+    },
+    {
+      "file": "V19__postgres_image_access_scope.sql",
+      "version": "19",
+      "candidateChecksum": -1435531544,
+      "databaseChecksum": -1435531544
+    },
+    {
+      "file": "V1__baseline_schema.sql",
+      "version": "1",
+      "candidateChecksum": -61108690,
+      "databaseChecksum": -61108690
+    },
+    {
+      "file": "V20__product_logical_deletion.sql",
+      "version": "20",
+      "candidateChecksum": -1777451984,
+      "databaseChecksum": -1777451984
+    },
+    {
+      "file": "V21__media_transfer_outbox.sql",
+      "version": "21",
+      "candidateChecksum": 1158085533,
+      "databaseChecksum": 1158085533
+    },
+    {
+      "file": "V22__object_only_media_metadata.sql",
+      "version": "22",
+      "candidateChecksum": 282376610,
+      "databaseChecksum": 282376610
+    },
+    {
+      "file": "V23__reference_offer_windows.sql",
+      "version": "23",
+      "candidateChecksum": -1095905402,
+      "databaseChecksum": -1095905402
+    },
+    {
+      "file": "V24__recommendation_article_languages.sql",
+      "version": "24",
+      "candidateChecksum": 1504519504,
+      "databaseChecksum": 1504519504
+    },
+    {
+      "file": "V25__reversible_product_identity.sql",
+      "version": "25",
+      "candidateChecksum": 166368124,
+      "databaseChecksum": 166368124
+    },
+    {
+      "file": "V26__recommendation_service_offers.sql",
+      "version": "26",
+      "candidateChecksum": -866209850,
+      "databaseChecksum": -866209850
+    },
+    {
+      "file": "V27__explicit_product_markers.sql",
+      "version": "27",
+      "candidateChecksum": -1017511264,
+      "databaseChecksum": -1017511264
+    },
+    {
+      "file": "V28_1__recommendation_issue_date.sql",
+      "version": "28.1",
+      "candidateChecksum": -708289696,
+      "databaseChecksum": -708289696
+    },
+    {
+      "file": "V28_2__product_rating.sql",
+      "version": "28.2",
+      "candidateChecksum": 1805532871,
+      "databaseChecksum": 1805532871
+    },
+    {
+      "file": "V28__checkout_delivery_snapshot.sql",
+      "version": "28",
+      "candidateChecksum": -1352681989,
+      "databaseChecksum": -1352681989
+    },
+    {
+      "file": "V29__customer_order_amendments.sql",
+      "version": "29",
+      "candidateChecksum": -1231025769,
+      "databaseChecksum": -1231025769
+    },
+    {
+      "file": "V2__refresh_token_sessions.sql",
+      "version": "2",
+      "candidateChecksum": 875571210,
+      "databaseChecksum": 875571210
+    },
+    {
+      "file": "V30__costco_onboarding_jobs.sql",
+      "version": "30",
+      "candidateChecksum": -344474371,
+      "databaseChecksum": -344474371
+    },
+    {
+      "file": "V31__recommendation_item_publication.sql",
+      "version": "31",
+      "candidateChecksum": 1431704188,
+      "databaseChecksum": 1431704188
+    },
+    {
+      "file": "V32__user_product_reviews.sql",
+      "version": "32",
+      "candidateChecksum": -538346819,
+      "databaseChecksum": -538346819
+    },
+    {
+      "file": "V33__product_clicks.sql",
+      "version": "33",
+      "candidateChecksum": 1437201222,
+      "databaseChecksum": 1437201222
+    },
+    {
+      "file": "V34__geographic_master.sql",
+      "version": "34",
+      "candidateChecksum": 2107514489,
+      "databaseChecksum": null
+    },
+    {
+      "file": "V3__product_attributes_jsonb.sql",
+      "version": "3",
+      "candidateChecksum": 2137541239,
+      "databaseChecksum": 2137541239
+    },
+    {
+      "file": "V4__customer_storefront.sql",
+      "version": "4",
+      "candidateChecksum": 1289168936,
+      "databaseChecksum": 1289168936
+    },
+    {
+      "file": "V5__user_role_sets.sql",
+      "version": "5",
+      "candidateChecksum": 138128310,
+      "databaseChecksum": 138128310
+    },
+    {
+      "file": "V6__regional_delivery_trips.sql",
+      "version": "6",
+      "candidateChecksum": -1381036153,
+      "databaseChecksum": -1381036153
+    },
+    {
+      "file": "V7__product_recommendations.sql",
+      "version": "7",
+      "candidateChecksum": 180735127,
+      "databaseChecksum": 180735127
+    },
+    {
+      "file": "V9__recommendation_offer_facts.sql",
+      "version": "9",
+      "candidateChecksum": -688720859,
+      "databaseChecksum": -688720859
+    }
+  ],
+  "algorithm": "Flyway 11.14.1 ChecksumCalculator CRC32 over BufferedReader lines; verified with actual dependency and SQL mutation negative",
+  "result": "PASS"
+}

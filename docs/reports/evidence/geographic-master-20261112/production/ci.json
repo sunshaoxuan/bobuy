@@ -1,0 +1,56 @@
+{
+  "headRefOid": "b3caeec8c0b04a3144339f8e84ab334b53f81aa1",
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-11-12T07:25:30Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/sunshaoxuan/bobuy/actions/runs/43174852019/job/131036505205",
+      "name": "analyze (java-kotlin)",
+      "startedAt": "2026-11-12T07:23:05Z",
+      "status": "COMPLETED",
+      "workflowName": "CodeQL"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-11-12T07:23:56Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/sunshaoxuan/bobuy/actions/runs/43174851998/job/131036504533",
+      "name": "dependency-check",
+      "startedAt": "2026-11-12T07:23:05Z",
+      "status": "COMPLETED",
+      "workflowName": "Maven dependency-check"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-11-12T07:25:07Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/sunshaoxuan/bobuy/actions/runs/43174852019/job/131036505063",
+      "name": "analyze (javascript-typescript)",
+      "startedAt": "2026-11-12T07:23:05Z",
+      "status": "COMPLETED",
+      "workflowName": "CodeQL"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-11-12T07:24:12Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/sunshaoxuan/bobuy/actions/runs/43174852019/job/131036504803",
+      "name": "analyze (actions)",
+      "startedAt": "2026-11-12T07:23:05Z",
+      "status": "COMPLETED",
+      "workflowName": "CodeQL"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-11-12T07:24:05Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/sunshaoxuan/bobuy/runs/131036893040",
+      "name": "CodeQL",
+      "startedAt": "2026-11-12T07:24:01Z",
+      "status": "COMPLETED",
+      "workflowName": ""
+    }
+  ],
+  "url": "https://github.com/sunshaoxuan/bobuy/pull/71"
+}

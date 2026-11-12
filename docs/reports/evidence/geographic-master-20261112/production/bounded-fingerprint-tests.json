@@ -1,0 +1,28 @@
+{
+  "result": "PASS",
+  "realDatabase": "Existing LOCAL PostgreSQL, read-only VALUES/generated rows only",
+  "legacyCompatibleCases": [
+    {
+      "legacy": "1:db67369cf3cfcc809dd347fd0073d806",
+      "stream": "1:db67369cf3cfcc809dd347fd0073d806",
+      "equal": true
+    },
+    {
+      "legacy": "4:6ecd8eb88316e1a8c3a6dc106a030e6e",
+      "stream": "4:6ecd8eb88316e1a8c3a6dc106a030e6e",
+      "equal": true
+    },
+    {
+      "legacy": "0:d41d8cd98f00b204e9800998ecf8427e",
+      "stream": "0:d41d8cd98f00b204e9800998ecf8427e",
+      "equal": true
+    },
+    {
+      "legacy": "1000:ac7865817a8fc6368126c22d2ade9cab",
+      "stream": "1000:ac7865817a8fc6368126c22d2ade9cab",
+      "equal": true
+    }
+  ],
+  "changedDataNegativeRejected": true,
+  "maxClientChunkBytes": 1048576
+}

@@ -1,0 +1,47 @@
+### 1. Visible Defects & Doubts
+
+* **Ambiguous Active / Selected States:** There are two distinct item treatments with background containers:
+  * “客户认可” has a light-gray rounded pill container.
+  * “国家/地区档案” has a solid dark-charcoal/black rounded pill container.
+  * *Doubt:* It is visually ambiguous whether this represents two concurrent active selections, a focused/hovered item vs. an active item, or an inconsistent component style.
+* **Scroll Container Anchor Doubt:** The user note mentions the menu is scrolled to the bottom of a *long* navigation, yet the category header “商家工作台” is immediately visible under the brand logo. It is unclear whether “商家工作台” is pinned/sticky, whether the scroll wrapper starts below that header, or if the list is actually scrolled completely.
+* **Text Subpixel / Anti-aliasing Fringing:** The white text inside the dark selected pill (“国家/地区档案”) exhibits visible chromatic fringing and softening around complex Chinese glyph strokes (e.g., “档”, “案”), slightly degrading character sharpness.
+* **Divider Compression:** The separator rule directly beneath the selected dark pill appears cramped relative to the spacing seen between items higher up in the menu.
+
+---
+
+### 2. Boundaries
+
+* **Header / Footer Anchors:** The brand section at the top and the store identity section at the bottom frame the navigation cleanly, with no visual bleeding past the apparent sidebar edge.
+* **Lateral Boundaries:** Navigation pills maintain consistent lateral margins and radius terminations without visually escaping into the main content canvas or bleeding off-canvas.
+
+---
+
+### 3. Overlap
+
+* **No Direct Element Overlap:** Text labels, icons, category headers, and pill backgrounds do not physically overlap or collide.
+* **Border Proximity:** The dark pill container comes close to the divider line above the identity footer, but no physical collision or line occlusion occurs.
+
+---
+
+### 4. Clipping
+
+* **No Text or Icon Clipping:** Glyph descenders, ascenders, and icon strokes are fully preserved across all rows.
+* **No Pill Truncation:** The rounded caps of both the light-gray and dark pills are fully drawn without abrupt edge cutoffs.
+* **No Scrollbar Intrusion:** There is no visible native scrollbar cutting through or reducing the horizontal space of the menu labels.
+
+---
+
+### 5. Spacing
+
+* **Vertical Rhythm:** Item spacing between standard inactive rows is uniform and vertically balanced with their respective icons.
+* **Category Separation:** Section labels (“商家工作台”, “基础档案”) have clear vertical breathing room distinguishing them from individual action links.
+* **Bottom Gap Inconsistency:** The spacing from the lower boundary of the dark pill to the horizontal divider line is noticeably tighter than the internal item-to-item vertical rhythm.
+
+---
+
+### 6. Selected-State Readability
+
+* **Luminance Contrast:** The dark pill (“国家/地区档案”) provides stark, high-contrast separation against the light background, making the active item immediately locatable.
+* **Glyph Density & Weight:** The stark white text on a dark solid background appears visually heavier due to light spill/irradiation, which slightly clusters denser Chinese characters.
+* **Visual Hierarchy Competition:** Because “客户认可” also features a filled pill treatment, peripheral glanceability is divided between the subtle gray pill and the high-contrast dark pill.

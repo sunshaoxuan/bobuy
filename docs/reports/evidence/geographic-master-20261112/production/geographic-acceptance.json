@@ -1,0 +1,7 @@
+{
+  "result": "PASS",
+  "rows": 2208,
+  "countries": 249,
+  "prefectures": 47,
+  "otherCountryHasNoChildren": true
+}

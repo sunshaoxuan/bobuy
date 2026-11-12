@@ -1,0 +1,11 @@
+{
+  "phase": "WRITES_OPEN",
+  "source": "b3caeec8c0b04a3144339f8e84ab334b53f81aa1",
+  "release": "20261112.geographic_master.1",
+  "at": "2026-11-12T07:48:27Z",
+  "initialActivationPassed": false,
+  "recoveredForward": true,
+  "databaseRestoreForbidden": true,
+  "recoveryReceipt": "recovery-status.json",
+  "frontendFollowup": "f91681242ab688f25e39aa8481167f8fc0c8251a"
+}

@@ -1,0 +1,11 @@
+# Geographic reference production acceptance
+
+Current accepted result: final-acceptance.json. Core b3caeec, frontend f916812, schema V34. Main includes PR71 and72. Final native desktop screenshots are nav-final/desktop-1000-whole.png and sidebar-800.png; unchanged mobile geographic screenshots are browser/mobile-*.png.
+
+The initial activation failed under a PostgreSQL cgroup OOM and was contained. Preserve production-activate.json, status.initial-failure.json and diagnosis.json as FAIL evidence. The bounded forward-only recovery matched all45 frozen pre-existing tables and opened ingress without restoring a production snapshot; recovery-status.json remains its direct receipt. The reconciled status.json marks current WRITES_OPEN and explicitly retains initialActivationPassed=false. The final desktop correction replaced only the frontend, with no database operation or writer pause.
+
+bounded-fingerprint.py, forward-recovery.py and geographic-operator.py are the exact version-pinned host sources. accepted-* files preserve the original publisher/library bytes. The sources/ directory archives the task's local transport and browser helpers byte-for-byte; source-archive.json records their original tools/ paths and hashes. These are historical audit sources, not generic release commands. Reproduction requires restoring the recorded project-relative paths and reviewing the existing remote receipts; completed releases must never be blindly repeated.
+
+Authentication was read at runtime through the existing secure SSH path, passed to the browser process over stdin, and never persisted. Public geographic facts and scoped content hashes are retained; database dumps remain only in the root-owned remote release directory. Existing offsite backup coverage was not independently verified in this task. The user's lightweight reference-data import preference supersedes the generic extra-snapshot approach for this scoped class of changes.
+
+No product/order/address rows were deliberately edited. Normal existing-account UI login creates authentication session records after ingress reopens; frozen-content equality is scoped to the actual recovery window, not later authenticated browser sessions. Final test sessions were normally logged out. Four aborted Cloudflare RUM reload beacons are recorded separately from zero failed application requests.

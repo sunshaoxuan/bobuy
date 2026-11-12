@@ -1,0 +1,46 @@
+{
+  "headRefOid": "f91681242ab688f25e39aa8481167f8fc0c8251a",
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-11-12T08:13:06Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/sunshaoxuan/bobuy/actions/runs/43180773096/job/131055903976",
+      "name": "analyze (java-kotlin)",
+      "startedAt": "2026-11-12T08:10:25Z",
+      "status": "COMPLETED",
+      "workflowName": "CodeQL"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-11-12T08:11:45Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/sunshaoxuan/bobuy/actions/runs/43180773096/job/131055904097",
+      "name": "analyze (javascript-typescript)",
+      "startedAt": "2026-11-12T08:10:25Z",
+      "status": "COMPLETED",
+      "workflowName": "CodeQL"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-11-12T08:11:15Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/sunshaoxuan/bobuy/actions/runs/43180773096/job/131055903698",
+      "name": "analyze (actions)",
+      "startedAt": "2026-11-12T08:10:25Z",
+      "status": "COMPLETED",
+      "workflowName": "CodeQL"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-11-12T08:11:07Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/sunshaoxuan/bobuy/runs/131056201260",
+      "name": "CodeQL",
+      "startedAt": "2026-11-12T08:11:03Z",
+      "status": "COMPLETED",
+      "workflowName": ""
+    }
+  ],
+  "url": "https://github.com/sunshaoxuan/bobuy/pull/72"
+}

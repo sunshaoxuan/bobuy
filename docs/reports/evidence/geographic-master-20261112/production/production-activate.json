@@ -1,0 +1,9 @@
+{
+  "phase": "FORWARD_RECOVERY_REQUIRED",
+  "source": "b3caeec8c0b04a3144339f8e84ab334b53f81aa1",
+  "release": "20261112.geographic_master.1",
+  "at": "2026-11-12T07:37:18Z",
+  "reason": "Command failed: docker (exit 2); no sensitive output emitted",
+  "databaseRestoreForbidden": true,
+  "writeFreezeReestablished": true
+}

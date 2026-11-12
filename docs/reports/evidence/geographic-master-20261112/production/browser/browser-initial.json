@@ -1,0 +1,3855 @@
+{
+  "result": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: [{\"url\":\"https://bobuy.cc/cdn-cgi/rum?\",\"error\":\"net::ERR_ABORTED\"},{\"url\":\"https://bobuy.cc/cdn-cgi/rum?\",\"error\":\"net::ERR_ABORTED\"},{\"url\":\"https://bobuy.cc/cdn-cgi/rum?\",\"error\":\"net::ERR_ABORTED\"},{\"url\":\"https://bobuy.cc/cdn-cgi/rum?\",\"error\":\"net::ERR_ABORTED\"}]\n\n4 !== 0\n",
+  "consoleErrors": [],
+  "failed": [
+    {
+      "url": "https://bobuy.cc/cdn-cgi/rum?",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://bobuy.cc/cdn-cgi/rum?",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://bobuy.cc/cdn-cgi/rum?",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://bobuy.cc/cdn-cgi/rum?",
+      "error": "net::ERR_ABORTED"
+    }
+  ],
+  "requests": [
+    {
+      "url": "https://bobuy.cc/admin",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-Cep5DThy.css",
+      "status": 200
+    },
+    {
+      "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-BXKvtJ_O.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/cdn-cgi/rum?",
+      "status": 204
+    },
+    {
+      "url": "https://bobuy.cc/assets/styleChecker-ljpRQ-jt.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/LoginPage-Cru-H0Zy.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/EditOutlined-BP07QoJJ.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/favicon.svg",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-BXGK73cY.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/auth/login",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/auth/me",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/cdn-cgi/rum?",
+      "status": 204
+    },
+    {
+      "url": "https://bobuy.cc/cdn-cgi/rum?",
+      "status": 204
+    },
+    {
+      "url": "https://bobuy.cc/favicon.svg",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-3gYHPoUK.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-DvOueUG8.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/Users-BkFeN_Qp.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-zHr82_Nq.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-Dqn8WIGk.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/Pagination-BrK-wSSl.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/useBreakpoint-D-qXTfkX.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-DNhJMXC4.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-fUiZhMnh.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/Table-DGNCN5nf.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/admin/users",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/favicon.svg",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/GeographicAreas-C5HYfz5y.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/GeographicAreas-Bo31vvAQ.css",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/geographic-areas?parentCode=JP",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/cdn-cgi/rum?",
+      "status": 204
+    },
+    {
+      "url": "https://bobuy.cc/cdn-cgi/rum?",
+      "status": 204
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/geographic-areas",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/geographic-areas?parentCode=JP-13",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/geographic-areas?parentCode=JP-01",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/geographic-areas?parentCode=JP-19",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/geographic-areas?parentCode=US",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/geographic-areas?parentCode=US",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/geographic-areas",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/admin/basic-data/geographic-areas",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-BXKvtJ_O.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-Cep5DThy.css",
+      "status": 200
+    },
+    {
+      "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/GeographicAreas-C5HYfz5y.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/Table-DGNCN5nf.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/styleChecker-ljpRQ-jt.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-DvOueUG8.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-fUiZhMnh.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/useBreakpoint-D-qXTfkX.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/Pagination-BrK-wSSl.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/GeographicAreas-Bo31vvAQ.css",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/favicon.svg",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/cdn-cgi/rum?",
+      "status": 204
+    },
+    {
+      "url": "https://bobuy.cc/api/auth/me",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/geographic-areas?parentCode=JP",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/geographic-areas",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/admin/basic-data/geographic-areas",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-BXKvtJ_O.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-Cep5DThy.css",
+      "status": 200
+    },
+    {
+      "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/GeographicAreas-C5HYfz5y.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/Table-DGNCN5nf.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/styleChecker-ljpRQ-jt.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-DvOueUG8.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-fUiZhMnh.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/useBreakpoint-D-qXTfkX.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/Pagination-BrK-wSSl.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/GeographicAreas-Bo31vvAQ.css",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/favicon.svg",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/cdn-cgi/rum?",
+      "status": 204
+    },
+    {
+      "url": "https://bobuy.cc/api/auth/me",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/geographic-areas",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/geographic-areas?parentCode=JP",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/admin/basic-data/geographic-areas",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-BXKvtJ_O.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-Cep5DThy.css",
+      "status": 200
+    },
+    {
+      "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/GeographicAreas-C5HYfz5y.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/Table-DGNCN5nf.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/styleChecker-ljpRQ-jt.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-DvOueUG8.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-fUiZhMnh.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/useBreakpoint-D-qXTfkX.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/Pagination-BrK-wSSl.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/GeographicAreas-Bo31vvAQ.css",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/favicon.svg",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/cdn-cgi/rum?",
+      "status": 204
+    },
+    {
+      "url": "https://bobuy.cc/api/auth/me",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/geographic-areas?parentCode=JP",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/geographic-areas",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/geographic-areas",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/geographic-areas?parentCode=GS",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/admin/basic-data/geographic-areas",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-BXKvtJ_O.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-Cep5DThy.css",
+      "status": 200
+    },
+    {
+      "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/GeographicAreas-C5HYfz5y.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/Table-DGNCN5nf.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/styleChecker-ljpRQ-jt.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-DvOueUG8.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/index-fUiZhMnh.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/useBreakpoint-D-qXTfkX.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/Pagination-BrK-wSSl.js",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/assets/GeographicAreas-Bo31vvAQ.css",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/favicon.svg",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/cdn-cgi/rum?",
+      "status": 204
+    },
+    {
+      "url": "https://bobuy.cc/api/auth/me",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/geographic-areas?parentCode=JP",
+      "status": 200
+    },
+    {
+      "url": "https://bobuy.cc/api/storefront/geographic-areas",
+      "status": 200
+    }
+  ],
+  "geometry": [
+    {
+      "label": "desktop-japan",
+      "width": 1440,
+      "overflow": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "pagination": {
+        "hotAreas": [
+          {
+            "x": 1140,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 1192,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 1244,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 1296,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 1348,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          }
+        ],
+        "centers": [
+          1581.625,
+          1581.625,
+          1581.625,
+          1581.625,
+          1581.625
+        ],
+        "gaps": [
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "scrollY": 0,
+      "controls": [
+        {
+          "role": "button",
+          "text": "重新读取",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 1312,
+            "y": 118,
+            "width": 88,
+            "height": 44
+          },
+          "background": {
+            "x": 1312,
+            "y": 118,
+            "width": 88,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1328,
+            "y": 130,
+            "width": 56,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "重新读取",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 56
+          }
+        },
+        {
+          "role": "select",
+          "text": "日本 (JP)",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 272,
+            "y": 233.46875,
+            "width": 365.328125,
+            "height": 44
+          },
+          "background": {
+            "x": 272,
+            "y": 233.46875,
+            "width": 365.328125,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 284,
+            "y": 245.46875,
+            "width": 53.125,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "日本 (JP)",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": -2,
+            "right": 52.8974609375
+          }
+        },
+        {
+          "role": "select",
+          "text": "选择省县",
+          "textColor": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 653.328125,
+            "y": 233.46875,
+            "width": 365.328125,
+            "height": 44
+          },
+          "background": {
+            "x": 653.328125,
+            "y": 233.46875,
+            "width": 365.328125,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 665.328125,
+            "y": 245.46875,
+            "width": 56,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "选择省县",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 56
+          }
+        },
+        {
+          "role": "select",
+          "text": "选择市/区",
+          "textColor": "rgb(102, 102, 92)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "hotArea": {
+            "x": 1034.65625,
+            "y": 233.46875,
+            "width": 365.34375,
+            "height": 44
+          },
+          "background": {
+            "x": 1034.65625,
+            "y": 233.46875,
+            "width": 365.34375,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1046.65625,
+            "y": 245.46875,
+            "width": 61.46875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "选择市/区",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 61.455078125
+          }
+        },
+        {
+          "role": "button",
+          "text": "",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 1140,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 1140,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": null,
+          "canvasGlyphMetrics": null
+        },
+        {
+          "role": "button",
+          "text": "1",
+          "textColor": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(37, 37, 41)",
+          "hotArea": {
+            "x": 1192,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 1192,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1211.171875,
+            "y": 1571.625,
+            "width": 5.640625,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "1",
+            "font": "600 14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 5
+          }
+        },
+        {
+          "role": "button",
+          "text": "2",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 1244,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 1244,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1262.21875,
+            "y": 1571.625,
+            "width": 7.546875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "2",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 8
+          }
+        },
+        {
+          "role": "button",
+          "text": "3",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 1296,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 1296,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1314.21875,
+            "y": 1571.625,
+            "width": 7.546875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "3",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 7
+          }
+        },
+        {
+          "role": "button",
+          "text": "",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 1348,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 1348,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": null,
+          "canvasGlyphMetrics": null
+        }
+      ]
+    },
+    {
+      "label": "desktop-tokyo",
+      "width": 1440,
+      "overflow": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "pagination": {
+        "hotAreas": [
+          {
+            "x": 1088,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 1140,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 1192,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 1244,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 1296,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 1348,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          }
+        ],
+        "centers": [
+          1581.625,
+          1581.625,
+          1581.625,
+          1581.625,
+          1581.625,
+          1581.625
+        ],
+        "gaps": [
+          8,
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "scrollY": 0,
+      "controls": [
+        {
+          "role": "button",
+          "text": "重新读取",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 1312,
+            "y": 118,
+            "width": 88,
+            "height": 44
+          },
+          "background": {
+            "x": 1312,
+            "y": 118,
+            "width": 88,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1328,
+            "y": 130,
+            "width": 56,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "重新读取",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 56
+          }
+        },
+        {
+          "role": "select",
+          "text": "日本 (JP)",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 272,
+            "y": 233.46875,
+            "width": 365.328125,
+            "height": 44
+          },
+          "background": {
+            "x": 272,
+            "y": 233.46875,
+            "width": 365.328125,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 284,
+            "y": 245.46875,
+            "width": 53.125,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "日本 (JP)",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": -2,
+            "right": 52.8974609375
+          }
+        },
+        {
+          "role": "select",
+          "text": "東京都 (JP-13)",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 653.328125,
+            "y": 233.46875,
+            "width": 365.328125,
+            "height": 44
+          },
+          "background": {
+            "x": 653.328125,
+            "y": 233.46875,
+            "width": 365.328125,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 665.328125,
+            "y": 245.46875,
+            "width": 87.828125,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "東京都 (JP-13)",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 87.58984375
+          }
+        },
+        {
+          "role": "select",
+          "text": "千代田区 (JP-13101)",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 1034.65625,
+            "y": 233.46875,
+            "width": 365.34375,
+            "height": 44
+          },
+          "background": {
+            "x": 1034.65625,
+            "y": 233.46875,
+            "width": 365.34375,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1046.65625,
+            "y": 245.46875,
+            "width": 124.46875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "千代田区 (JP-13101)",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 124.23046875
+          }
+        },
+        {
+          "role": "button",
+          "text": "",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 1088,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 1088,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": null,
+          "canvasGlyphMetrics": null
+        },
+        {
+          "role": "button",
+          "text": "1",
+          "textColor": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(37, 37, 41)",
+          "hotArea": {
+            "x": 1140,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 1140,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1159.171875,
+            "y": 1571.625,
+            "width": 5.640625,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "1",
+            "font": "600 14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 5
+          }
+        },
+        {
+          "role": "button",
+          "text": "2",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 1192,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 1192,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1210.21875,
+            "y": 1571.625,
+            "width": 7.546875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "2",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 8
+          }
+        },
+        {
+          "role": "button",
+          "text": "3",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 1244,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 1244,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1262.21875,
+            "y": 1571.625,
+            "width": 7.546875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "3",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 7
+          }
+        },
+        {
+          "role": "button",
+          "text": "4",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 1296,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 1296,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1314.21875,
+            "y": 1571.625,
+            "width": 7.546875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "4",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 1,
+            "right": 8
+          }
+        },
+        {
+          "role": "button",
+          "text": "",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 1348,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 1348,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": null,
+          "canvasGlyphMetrics": null
+        }
+      ]
+    },
+    {
+      "label": "mobile-tokyo",
+      "width": 360,
+      "overflow": {
+        "viewport": 360,
+        "scroll": 360
+      },
+      "pagination": {
+        "hotAreas": [
+          {
+            "x": 32,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 84,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 136,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 188,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 240,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 292,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          }
+        ],
+        "centers": [
+          1785.328125,
+          1785.328125,
+          1785.328125,
+          1785.328125,
+          1785.328125,
+          1785.328125
+        ],
+        "gaps": [
+          8,
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "scrollY": 0,
+      "controls": [
+        {
+          "role": "button",
+          "text": "重新读取",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 256,
+            "y": 94,
+            "width": 88,
+            "height": 44
+          },
+          "background": {
+            "x": 256,
+            "y": 94,
+            "width": 88,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 272,
+            "y": 106,
+            "width": 56,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "重新读取",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 56
+          }
+        },
+        {
+          "role": "select",
+          "text": "日本 (JP)",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 16,
+            "y": 233.203125,
+            "width": 328,
+            "height": 44
+          },
+          "background": {
+            "x": 16,
+            "y": 233.203125,
+            "width": 328,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 28,
+            "y": 245.203125,
+            "width": 53.125,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "日本 (JP)",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": -2,
+            "right": 52.8974609375
+          }
+        },
+        {
+          "role": "select",
+          "text": "東京都 (JP-13)",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 16,
+            "y": 319.59375,
+            "width": 328,
+            "height": 44
+          },
+          "background": {
+            "x": 16,
+            "y": 319.59375,
+            "width": 328,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 28,
+            "y": 331.59375,
+            "width": 87.828125,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "東京都 (JP-13)",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 87.58984375
+          }
+        },
+        {
+          "role": "select",
+          "text": "千代田区 (JP-13101)",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 16,
+            "y": 405.984375,
+            "width": 328,
+            "height": 44
+          },
+          "background": {
+            "x": 16,
+            "y": 405.984375,
+            "width": 328,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 28,
+            "y": 417.984375,
+            "width": 124.46875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "千代田区 (JP-13101)",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 124.23046875
+          }
+        },
+        {
+          "role": "button",
+          "text": "",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 32,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 32,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": null,
+          "canvasGlyphMetrics": null
+        },
+        {
+          "role": "button",
+          "text": "1",
+          "textColor": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(37, 37, 41)",
+          "hotArea": {
+            "x": 84,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 84,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 103.171875,
+            "y": 1775.328125,
+            "width": 5.640625,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "1",
+            "font": "600 14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 5
+          }
+        },
+        {
+          "role": "button",
+          "text": "2",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 136,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 136,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 154.21875,
+            "y": 1775.328125,
+            "width": 7.546875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "2",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 8
+          }
+        },
+        {
+          "role": "button",
+          "text": "3",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 188,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 188,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 206.21875,
+            "y": 1775.328125,
+            "width": 7.546875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "3",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 7
+          }
+        },
+        {
+          "role": "button",
+          "text": "4",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 240,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 240,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 258.21875,
+            "y": 1775.328125,
+            "width": 7.546875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "4",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 1,
+            "right": 8
+          }
+        },
+        {
+          "role": "button",
+          "text": "",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 292,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 292,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": null,
+          "canvasGlyphMetrics": null
+        }
+      ]
+    },
+    {
+      "label": "mobile-ward",
+      "width": 360,
+      "overflow": {
+        "viewport": 360,
+        "scroll": 360
+      },
+      "pagination": {
+        "hotAreas": [
+          {
+            "x": 32,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 84,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 136,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 188,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 240,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 292,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          }
+        ],
+        "centers": [
+          1785.328125,
+          1785.328125,
+          1785.328125,
+          1785.328125,
+          1785.328125,
+          1785.328125
+        ],
+        "gaps": [
+          8,
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "scrollY": 0,
+      "controls": [
+        {
+          "role": "button",
+          "text": "重新读取",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 256,
+            "y": 94,
+            "width": 88,
+            "height": 44
+          },
+          "background": {
+            "x": 256,
+            "y": 94,
+            "width": 88,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 272,
+            "y": 106,
+            "width": 56,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "重新读取",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 56
+          }
+        },
+        {
+          "role": "select",
+          "text": "日本 (JP)",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 16,
+            "y": 233.203125,
+            "width": 328,
+            "height": 44
+          },
+          "background": {
+            "x": 16,
+            "y": 233.203125,
+            "width": 328,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 28,
+            "y": 245.203125,
+            "width": 53.125,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "日本 (JP)",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": -2,
+            "right": 52.8974609375
+          }
+        },
+        {
+          "role": "select",
+          "text": "北海道 (JP-01)",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 16,
+            "y": 319.59375,
+            "width": 328,
+            "height": 44
+          },
+          "background": {
+            "x": 16,
+            "y": 319.59375,
+            "width": 328,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 28,
+            "y": 331.59375,
+            "width": 87.828125,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "北海道 (JP-01)",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 87.58984375
+          }
+        },
+        {
+          "role": "select",
+          "text": "札幌市中央区 (JP-01101)",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 16,
+            "y": 405.984375,
+            "width": 328,
+            "height": 44
+          },
+          "background": {
+            "x": 16,
+            "y": 405.984375,
+            "width": 328,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 28,
+            "y": 417.984375,
+            "width": 152.46875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "札幌市中央区 (JP-01101)",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 152.23046875
+          }
+        },
+        {
+          "role": "button",
+          "text": "",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 32,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 32,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": null,
+          "canvasGlyphMetrics": null
+        },
+        {
+          "role": "button",
+          "text": "1",
+          "textColor": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(37, 37, 41)",
+          "hotArea": {
+            "x": 84,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 84,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 103.171875,
+            "y": 1775.328125,
+            "width": 5.640625,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "1",
+            "font": "600 14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 5
+          }
+        },
+        {
+          "role": "button",
+          "text": "2",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 136,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 136,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 154.21875,
+            "y": 1775.328125,
+            "width": 7.546875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "2",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 8
+          }
+        },
+        {
+          "role": "button",
+          "text": "3",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "background": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "textLayout": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "canvasGlyphMetrics": {
+            "text": "3",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 7
+          }
+        },
+        {
+          "role": "button",
+          "text": "10",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 240,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 240,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 254.453125,
+            "y": 1775.328125,
+            "width": 15.09375,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "10",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": -1,
+            "right": 15.546875
+          }
+        },
+        {
+          "role": "button",
+          "text": "",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 292,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 292,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": null,
+          "canvasGlyphMetrics": null
+        }
+      ]
+    },
+    {
+      "label": "mobile-long-municipality",
+      "width": 360,
+      "overflow": {
+        "viewport": 360,
+        "scroll": 360
+      },
+      "pagination": {
+        "hotAreas": [
+          {
+            "x": 136,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 188,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 240,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 292,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          }
+        ],
+        "centers": [
+          1785.328125,
+          1785.328125,
+          1785.328125,
+          1785.328125
+        ],
+        "gaps": [
+          8,
+          8,
+          8
+        ]
+      },
+      "scrollY": 0,
+      "controls": [
+        {
+          "role": "button",
+          "text": "重新读取",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 256,
+            "y": 94,
+            "width": 88,
+            "height": 44
+          },
+          "background": {
+            "x": 256,
+            "y": 94,
+            "width": 88,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 272,
+            "y": 106,
+            "width": 56,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "重新读取",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 56
+          }
+        },
+        {
+          "role": "select",
+          "text": "日本 (JP)",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 16,
+            "y": 233.203125,
+            "width": 328,
+            "height": 44
+          },
+          "background": {
+            "x": 16,
+            "y": 233.203125,
+            "width": 328,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 28,
+            "y": 245.203125,
+            "width": 53.125,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "日本 (JP)",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": -2,
+            "right": 52.8974609375
+          }
+        },
+        {
+          "role": "select",
+          "text": "山梨県 (JP-19)",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 16,
+            "y": 319.59375,
+            "width": 328,
+            "height": 44
+          },
+          "background": {
+            "x": 16,
+            "y": 319.59375,
+            "width": 328,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 28,
+            "y": 331.59375,
+            "width": 87.828125,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "山梨県 (JP-19)",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": -1,
+            "right": 87.58984375
+          }
+        },
+        {
+          "role": "select",
+          "text": "南都留郡富士河口湖町 (JP-19430)",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 16,
+            "y": 405.984375,
+            "width": 328,
+            "height": 44
+          },
+          "background": {
+            "x": 16,
+            "y": 405.984375,
+            "width": 328,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 28,
+            "y": 417.984375,
+            "width": 208.46875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "南都留郡富士河口湖町 (JP-19430)",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 208.23046875
+          }
+        },
+        {
+          "role": "button",
+          "text": "",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 136,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 136,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": null,
+          "canvasGlyphMetrics": null
+        },
+        {
+          "role": "button",
+          "text": "1",
+          "textColor": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(37, 37, 41)",
+          "hotArea": {
+            "x": 188,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 188,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 207.171875,
+            "y": 1775.328125,
+            "width": 5.640625,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "1",
+            "font": "600 14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 5
+          }
+        },
+        {
+          "role": "button",
+          "text": "2",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 240,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 240,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 258.21875,
+            "y": 1775.328125,
+            "width": 7.546875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "2",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 8
+          }
+        },
+        {
+          "role": "button",
+          "text": "",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 292,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 292,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": null,
+          "canvasGlyphMetrics": null
+        }
+      ]
+    },
+    {
+      "label": "mobile-country-only",
+      "width": 360,
+      "overflow": {
+        "viewport": 360,
+        "scroll": 360
+      },
+      "pagination": {
+        "hotAreas": [],
+        "centers": [],
+        "gaps": []
+      },
+      "scrollY": 0,
+      "controls": [
+        {
+          "role": "button",
+          "text": "重新读取",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 256,
+            "y": 94,
+            "width": 88,
+            "height": 44
+          },
+          "background": {
+            "x": 256,
+            "y": 94,
+            "width": 88,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 272,
+            "y": 106,
+            "width": 56,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "重新读取",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 56
+          }
+        },
+        {
+          "role": "select",
+          "text": "美国 (US)",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 16,
+            "y": 233.203125,
+            "width": 328,
+            "height": 44
+          },
+          "background": {
+            "x": 16,
+            "y": 233.203125,
+            "width": 328,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 28,
+            "y": 245.203125,
+            "width": 57.34375,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "美国 (US)",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 57.115234375
+          }
+        },
+        {
+          "role": "select",
+          "text": "选择省县",
+          "textColor": "rgb(102, 102, 92)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "hotArea": {
+            "x": 16,
+            "y": 319.59375,
+            "width": 328,
+            "height": 44
+          },
+          "background": {
+            "x": 16,
+            "y": 319.59375,
+            "width": 328,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 28,
+            "y": 331.59375,
+            "width": 56,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "选择省县",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 56
+          }
+        },
+        {
+          "role": "select",
+          "text": "选择市/区",
+          "textColor": "rgb(102, 102, 92)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "hotArea": {
+            "x": 16,
+            "y": 405.984375,
+            "width": 328,
+            "height": 44
+          },
+          "background": {
+            "x": 16,
+            "y": 405.984375,
+            "width": 328,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 28,
+            "y": 417.984375,
+            "width": 61.46875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "选择市/区",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 61.455078125
+          }
+        }
+      ]
+    },
+    {
+      "label": "ja-JP-mobile",
+      "width": 360,
+      "overflow": {
+        "viewport": 360,
+        "scroll": 360
+      },
+      "pagination": {
+        "hotAreas": [
+          {
+            "x": 84,
+            "y": 1790.515625,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 136,
+            "y": 1790.515625,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 188,
+            "y": 1790.515625,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 240,
+            "y": 1790.515625,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 292,
+            "y": 1790.515625,
+            "width": 44,
+            "height": 44
+          }
+        ],
+        "centers": [
+          1812.515625,
+          1812.515625,
+          1812.515625,
+          1812.515625,
+          1812.515625
+        ],
+        "gaps": [
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "scrollY": 0,
+      "controls": [
+        {
+          "role": "button",
+          "text": "再読み込み",
+          "textColor": "rgb(230, 97, 87)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 242,
+            "y": 94,
+            "width": 102,
+            "height": 44
+          },
+          "background": {
+            "x": 242,
+            "y": 94,
+            "width": 102,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 258,
+            "y": 106,
+            "width": 70,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "再読み込み",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 70
+          }
+        },
+        {
+          "role": "select",
+          "text": "日本 (JP)",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 16,
+            "y": 260.390625,
+            "width": 328,
+            "height": 44
+          },
+          "background": {
+            "x": 16,
+            "y": 260.390625,
+            "width": 328,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 28,
+            "y": 272.390625,
+            "width": 53.125,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "日本 (JP)",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": -2,
+            "right": 52.8974609375
+          }
+        },
+        {
+          "role": "select",
+          "text": "都道府県を選択",
+          "textColor": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 16,
+            "y": 346.78125,
+            "width": 328,
+            "height": 44
+          },
+          "background": {
+            "x": 16,
+            "y": 346.78125,
+            "width": 328,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 28,
+            "y": 358.78125,
+            "width": 98,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "都道府県を選択",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 98
+          }
+        },
+        {
+          "role": "select",
+          "text": "市区町村を選択",
+          "textColor": "rgb(102, 102, 92)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "hotArea": {
+            "x": 16,
+            "y": 433.171875,
+            "width": 328,
+            "height": 44
+          },
+          "background": {
+            "x": 16,
+            "y": 433.171875,
+            "width": 328,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 28,
+            "y": 445.171875,
+            "width": 98,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "市区町村を選択",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 98
+          }
+        },
+        {
+          "role": "button",
+          "text": "",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 84,
+            "y": 1790.515625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 84,
+            "y": 1790.515625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": null,
+          "canvasGlyphMetrics": null
+        },
+        {
+          "role": "button",
+          "text": "1",
+          "textColor": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(37, 37, 41)",
+          "hotArea": {
+            "x": 136,
+            "y": 1790.515625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 136,
+            "y": 1790.515625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 155.171875,
+            "y": 1802.515625,
+            "width": 5.640625,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "1",
+            "font": "600 14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 5
+          }
+        },
+        {
+          "role": "button",
+          "text": "2",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 188,
+            "y": 1790.515625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 188,
+            "y": 1790.515625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 206.21875,
+            "y": 1802.515625,
+            "width": 7.546875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "2",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 8
+          }
+        },
+        {
+          "role": "button",
+          "text": "3",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 240,
+            "y": 1790.515625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 240,
+            "y": 1790.515625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 258.21875,
+            "y": 1802.515625,
+            "width": 7.546875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "3",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 7
+          }
+        },
+        {
+          "role": "button",
+          "text": "",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 292,
+            "y": 1790.515625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 292,
+            "y": 1790.515625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": null,
+          "canvasGlyphMetrics": null
+        }
+      ]
+    },
+    {
+      "label": "ja-JP-desktop",
+      "width": 1440,
+      "overflow": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "pagination": {
+        "hotAreas": [
+          {
+            "x": 1140,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 1192,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 1244,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 1296,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 1348,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          }
+        ],
+        "centers": [
+          1581.625,
+          1581.625,
+          1581.625,
+          1581.625,
+          1581.625
+        ],
+        "gaps": [
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "scrollY": 0,
+      "controls": [
+        {
+          "role": "button",
+          "text": "再読み込み",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 1298,
+            "y": 118,
+            "width": 102,
+            "height": 44
+          },
+          "background": {
+            "x": 1298,
+            "y": 118,
+            "width": 102,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1314,
+            "y": 130,
+            "width": 70,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "再読み込み",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 70
+          }
+        },
+        {
+          "role": "select",
+          "text": "日本 (JP)",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 272,
+            "y": 233.46875,
+            "width": 365.328125,
+            "height": 44
+          },
+          "background": {
+            "x": 272,
+            "y": 233.46875,
+            "width": 365.328125,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 284,
+            "y": 245.46875,
+            "width": 53.125,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "日本 (JP)",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": -2,
+            "right": 52.8974609375
+          }
+        },
+        {
+          "role": "select",
+          "text": "都道府県を選択",
+          "textColor": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 653.328125,
+            "y": 233.46875,
+            "width": 365.328125,
+            "height": 44
+          },
+          "background": {
+            "x": 653.328125,
+            "y": 233.46875,
+            "width": 365.328125,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 665.328125,
+            "y": 245.46875,
+            "width": 98,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "都道府県を選択",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 98
+          }
+        },
+        {
+          "role": "select",
+          "text": "市区町村を選択",
+          "textColor": "rgb(102, 102, 92)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "hotArea": {
+            "x": 1034.65625,
+            "y": 233.46875,
+            "width": 365.34375,
+            "height": 44
+          },
+          "background": {
+            "x": 1034.65625,
+            "y": 233.46875,
+            "width": 365.34375,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1046.65625,
+            "y": 245.46875,
+            "width": 98,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "市区町村を選択",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 98
+          }
+        },
+        {
+          "role": "button",
+          "text": "",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 1140,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 1140,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": null,
+          "canvasGlyphMetrics": null
+        },
+        {
+          "role": "button",
+          "text": "1",
+          "textColor": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(37, 37, 41)",
+          "hotArea": {
+            "x": 1192,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 1192,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1211.171875,
+            "y": 1571.625,
+            "width": 5.640625,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "1",
+            "font": "600 14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 5
+          }
+        },
+        {
+          "role": "button",
+          "text": "2",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 1244,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 1244,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1262.21875,
+            "y": 1571.625,
+            "width": 7.546875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "2",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 8
+          }
+        },
+        {
+          "role": "button",
+          "text": "3",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 1296,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 1296,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1314.21875,
+            "y": 1571.625,
+            "width": 7.546875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "3",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans JP\", \"Hiragino Sans\", \"Yu Gothic UI\", \"Noto Sans SC\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 7
+          }
+        },
+        {
+          "role": "button",
+          "text": "",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 1348,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 1348,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": null,
+          "canvasGlyphMetrics": null
+        }
+      ]
+    },
+    {
+      "label": "en-US-mobile",
+      "width": 360,
+      "overflow": {
+        "viewport": 360,
+        "scroll": 360
+      },
+      "pagination": {
+        "hotAreas": [],
+        "centers": [],
+        "gaps": []
+      },
+      "scrollY": 0,
+      "controls": [
+        {
+          "role": "button",
+          "text": "Reload",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 269.75,
+            "y": 94,
+            "width": 74.25,
+            "height": 44
+          },
+          "background": {
+            "x": 269.75,
+            "y": 94,
+            "width": 74.25,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 285.75,
+            "y": 106,
+            "width": 42.25,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "Reload",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": -1,
+            "right": 42.001953125
+          }
+        },
+        {
+          "role": "select",
+          "text": "South Georgia & South Sandwich Islands (GS)",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 16,
+            "y": 260.390625,
+            "width": 328,
+            "height": 44
+          },
+          "background": {
+            "x": 16,
+            "y": 260.390625,
+            "width": 328,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 28,
+            "y": 272.390625,
+            "width": 281.84375,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "South Georgia & South Sandwich Islands (GS)",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 3,
+            "left": 0,
+            "right": 281.607421875
+          }
+        },
+        {
+          "role": "select",
+          "text": "Select a prefecture",
+          "textColor": "rgb(102, 102, 92)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "hotArea": {
+            "x": 16,
+            "y": 346.78125,
+            "width": 328,
+            "height": 44
+          },
+          "background": {
+            "x": 16,
+            "y": 346.78125,
+            "width": 328,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 28,
+            "y": 357.78125,
+            "width": 114.921875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "Select a prefecture",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 3,
+            "left": 0,
+            "right": 115.59765625
+          }
+        },
+        {
+          "role": "select",
+          "text": "Select a city/ward",
+          "textColor": "rgb(102, 102, 92)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "hotArea": {
+            "x": 16,
+            "y": 433.171875,
+            "width": 328,
+            "height": 44
+          },
+          "background": {
+            "x": 16,
+            "y": 433.171875,
+            "width": 328,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 28,
+            "y": 444.171875,
+            "width": 108.671875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "Select a city/ward",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 3,
+            "left": 0,
+            "right": 108.4130859375
+          }
+        }
+      ]
+    },
+    {
+      "label": "en-US-desktop",
+      "width": 1440,
+      "overflow": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "pagination": {
+        "hotAreas": [],
+        "centers": [],
+        "gaps": []
+      },
+      "scrollY": 0,
+      "controls": [
+        {
+          "role": "button",
+          "text": "Reload",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 1325.75,
+            "y": 118,
+            "width": 74.25,
+            "height": 44
+          },
+          "background": {
+            "x": 1325.75,
+            "y": 118,
+            "width": 74.25,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1341.75,
+            "y": 130,
+            "width": 42.25,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "Reload",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": -1,
+            "right": 42.001953125
+          }
+        },
+        {
+          "role": "select",
+          "text": "South Georgia & South Sandwich Islands (GS)",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 272,
+            "y": 233.46875,
+            "width": 365.328125,
+            "height": 44
+          },
+          "background": {
+            "x": 272,
+            "y": 233.46875,
+            "width": 365.328125,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 284,
+            "y": 245.46875,
+            "width": 281.84375,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "South Georgia & South Sandwich Islands (GS)",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 3,
+            "left": 0,
+            "right": 281.607421875
+          }
+        },
+        {
+          "role": "select",
+          "text": "Select a prefecture",
+          "textColor": "rgb(102, 102, 92)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "hotArea": {
+            "x": 653.328125,
+            "y": 233.46875,
+            "width": 365.328125,
+            "height": 44
+          },
+          "background": {
+            "x": 653.328125,
+            "y": 233.46875,
+            "width": 365.328125,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 665.328125,
+            "y": 244.46875,
+            "width": 114.921875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "Select a prefecture",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 3,
+            "left": 0,
+            "right": 115.59765625
+          }
+        },
+        {
+          "role": "select",
+          "text": "Select a city/ward",
+          "textColor": "rgb(102, 102, 92)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "hotArea": {
+            "x": 1034.65625,
+            "y": 233.46875,
+            "width": 365.34375,
+            "height": 44
+          },
+          "background": {
+            "x": 1034.65625,
+            "y": 233.46875,
+            "width": 365.34375,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1046.65625,
+            "y": 244.46875,
+            "width": 108.671875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "Select a city/ward",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 3,
+            "left": 0,
+            "right": 108.4130859375
+          }
+        }
+      ]
+    },
+    {
+      "label": "zh-TW-mobile",
+      "width": 360,
+      "overflow": {
+        "viewport": 360,
+        "scroll": 360
+      },
+      "pagination": {
+        "hotAreas": [
+          {
+            "x": 84,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 136,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 188,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 240,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 292,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          }
+        ],
+        "centers": [
+          1785.328125,
+          1785.328125,
+          1785.328125,
+          1785.328125,
+          1785.328125
+        ],
+        "gaps": [
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "scrollY": 0,
+      "controls": [
+        {
+          "role": "button",
+          "text": "重新讀取",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 256,
+            "y": 94,
+            "width": 88,
+            "height": 44
+          },
+          "background": {
+            "x": 256,
+            "y": 94,
+            "width": 88,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 272,
+            "y": 106,
+            "width": 56,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "重新讀取",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 56
+          }
+        },
+        {
+          "role": "select",
+          "text": "日本 (JP)",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 16,
+            "y": 233.203125,
+            "width": 328,
+            "height": 44
+          },
+          "background": {
+            "x": 16,
+            "y": 233.203125,
+            "width": 328,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 28,
+            "y": 245.203125,
+            "width": 53.125,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "日本 (JP)",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": -2,
+            "right": 52.8974609375
+          }
+        },
+        {
+          "role": "select",
+          "text": "選擇省縣",
+          "textColor": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 16,
+            "y": 319.59375,
+            "width": 328,
+            "height": 44
+          },
+          "background": {
+            "x": 16,
+            "y": 319.59375,
+            "width": 328,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 28,
+            "y": 331.59375,
+            "width": 56,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "選擇省縣",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 56
+          }
+        },
+        {
+          "role": "select",
+          "text": "選擇市/區",
+          "textColor": "rgb(102, 102, 92)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "hotArea": {
+            "x": 16,
+            "y": 405.984375,
+            "width": 328,
+            "height": 44
+          },
+          "background": {
+            "x": 16,
+            "y": 405.984375,
+            "width": 328,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 28,
+            "y": 417.984375,
+            "width": 61.46875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "選擇市/區",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 61.455078125
+          }
+        },
+        {
+          "role": "button",
+          "text": "",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 84,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 84,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": null,
+          "canvasGlyphMetrics": null
+        },
+        {
+          "role": "button",
+          "text": "1",
+          "textColor": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(37, 37, 41)",
+          "hotArea": {
+            "x": 136,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 136,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 155.171875,
+            "y": 1775.328125,
+            "width": 5.640625,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "1",
+            "font": "600 14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 5
+          }
+        },
+        {
+          "role": "button",
+          "text": "2",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 188,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 188,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 206.21875,
+            "y": 1775.328125,
+            "width": 7.546875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "2",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 8
+          }
+        },
+        {
+          "role": "button",
+          "text": "3",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 240,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 240,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 258.21875,
+            "y": 1775.328125,
+            "width": 7.546875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "3",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 7
+          }
+        },
+        {
+          "role": "button",
+          "text": "",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 292,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 292,
+            "y": 1763.328125,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": null,
+          "canvasGlyphMetrics": null
+        }
+      ]
+    },
+    {
+      "label": "zh-TW-desktop",
+      "width": 1440,
+      "overflow": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "pagination": {
+        "hotAreas": [
+          {
+            "x": 1140,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 1192,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 1244,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 1296,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          {
+            "x": 1348,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          }
+        ],
+        "centers": [
+          1581.625,
+          1581.625,
+          1581.625,
+          1581.625,
+          1581.625
+        ],
+        "gaps": [
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      "scrollY": 0,
+      "controls": [
+        {
+          "role": "button",
+          "text": "重新讀取",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 1312,
+            "y": 118,
+            "width": 88,
+            "height": 44
+          },
+          "background": {
+            "x": 1312,
+            "y": 118,
+            "width": 88,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1328,
+            "y": 130,
+            "width": 56,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "重新讀取",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 56
+          }
+        },
+        {
+          "role": "select",
+          "text": "日本 (JP)",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 272,
+            "y": 233.46875,
+            "width": 365.328125,
+            "height": 44
+          },
+          "background": {
+            "x": 272,
+            "y": 233.46875,
+            "width": 365.328125,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 284,
+            "y": 245.46875,
+            "width": 53.125,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "日本 (JP)",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": -2,
+            "right": 52.8974609375
+          }
+        },
+        {
+          "role": "select",
+          "text": "選擇省縣",
+          "textColor": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "hotArea": {
+            "x": 653.328125,
+            "y": 233.46875,
+            "width": 365.328125,
+            "height": 44
+          },
+          "background": {
+            "x": 653.328125,
+            "y": 233.46875,
+            "width": 365.328125,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 665.328125,
+            "y": 245.46875,
+            "width": 56,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "選擇省縣",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 56
+          }
+        },
+        {
+          "role": "select",
+          "text": "選擇市/區",
+          "textColor": "rgb(102, 102, 92)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "hotArea": {
+            "x": 1034.65625,
+            "y": 233.46875,
+            "width": 365.34375,
+            "height": 44
+          },
+          "background": {
+            "x": 1034.65625,
+            "y": 233.46875,
+            "width": 365.34375,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1046.65625,
+            "y": 245.46875,
+            "width": 61.46875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "選擇市/區",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 12,
+            "descent": 2,
+            "left": 0,
+            "right": 61.455078125
+          }
+        },
+        {
+          "role": "button",
+          "text": "",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 1140,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 1140,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": null,
+          "canvasGlyphMetrics": null
+        },
+        {
+          "role": "button",
+          "text": "1",
+          "textColor": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(37, 37, 41)",
+          "hotArea": {
+            "x": 1192,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 1192,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1211.171875,
+            "y": 1571.625,
+            "width": 5.640625,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "1",
+            "font": "600 14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 5
+          }
+        },
+        {
+          "role": "button",
+          "text": "2",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 1244,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 1244,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1262.21875,
+            "y": 1571.625,
+            "width": 7.546875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "2",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 8
+          }
+        },
+        {
+          "role": "button",
+          "text": "3",
+          "textColor": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 1296,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 1296,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": {
+            "x": 1314.21875,
+            "y": 1571.625,
+            "width": 7.546875,
+            "height": 19
+          },
+          "canvasGlyphMetrics": {
+            "text": "3",
+            "font": "14px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif",
+            "ascent": 10,
+            "descent": 0,
+            "left": 0,
+            "right": 7
+          }
+        },
+        {
+          "role": "button",
+          "text": "",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "hotArea": {
+            "x": 1348,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "background": {
+            "x": 1348,
+            "y": 1559.625,
+            "width": 44,
+            "height": 44
+          },
+          "textLayout": null,
+          "canvasGlyphMetrics": null
+        }
+      ]
+    }
+  ]
+}

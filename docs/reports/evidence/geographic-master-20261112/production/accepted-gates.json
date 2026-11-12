@@ -1,0 +1,16 @@
+{
+  "source": "b3caeec8c0b04a3144339f8e84ab334b53f81aa1",
+  "frontendTests": 814,
+  "frontendAffectedTests": 6,
+  "frontendIntegrationTests": 43,
+  "backendTests": 674,
+  "backendExecuted": 650,
+  "backendSkipped": 24,
+  "failures": 0,
+  "configuredJacoco": "PASS",
+  "codeql": "success",
+  "codeqlUrl": "https://github.com/sunshaoxuan/bobuy/pull/71",
+  "candidateBrowser": "PASS: geographic12 states,94 actual glyph controls; live acceptance pending",
+  "operatorTests": 5,
+  "releaseGuardTests": 9
+}

@@ -1,0 +1,8 @@
+{
+  "phase": "PREPARED",
+  "source": "b3caeec8c0b04a3144339f8e84ab334b53f81aa1",
+  "release": "20261112.geographic_master.1",
+  "at": "2026-11-12T07:31:24Z",
+  "configBefore": "ea0cc58804ae133f9b971c9f0616799f575f175eafb95363d43385e6096bc038",
+  "productionActivated": false
+}

@@ -1,0 +1,56 @@
+{
+  "states": {
+    "core-service": {
+      "running": false,
+      "oom": false,
+      "restarts": 0,
+      "health": "unhealthy",
+      "image": "sha256:05cd202ae182bf3995622e85f255ee2daf2261444605fff7d7771e1e40d599d3"
+    },
+    "ai-service": {
+      "running": false,
+      "oom": false,
+      "restarts": 0,
+      "health": "unhealthy",
+      "image": "sha256:e17c56f30483def52fb4c3e58d7ef7fad8dced0f89ff23109ab380cdca32fa48"
+    },
+    "im-service": {
+      "running": false,
+      "oom": false,
+      "restarts": 0,
+      "health": "unhealthy",
+      "image": "sha256:3c286b1672db0eca6df4803085d7f5ba9cc475c4542a4f93302ee5c74277369a"
+    },
+    "auth-service": {
+      "running": false,
+      "oom": false,
+      "restarts": 0,
+      "health": "unhealthy",
+      "image": "sha256:6863ae4b03b28b8fbd8666fb15b1599cca6a8b9911bbbd1cf555d9d4b8a3eabb"
+    },
+    "gateway-service": {
+      "running": false,
+      "oom": false,
+      "restarts": 0,
+      "health": "unhealthy",
+      "image": "sha256:71354226154b2ca27ff7ddaaf90923f0954db9cabac363564447322030d21dcd"
+    },
+    "frontend": {
+      "running": true,
+      "oom": false,
+      "restarts": 0,
+      "health": "running",
+      "image": "sha256:af12fb44472792a52fbbe693cefe2506c4e51149d4319959a834f343afd0c28a"
+    },
+    "postgres": {
+      "running": true,
+      "oom": true,
+      "restarts": 0,
+      "health": "healthy",
+      "image": "sha256:1a0c23d53c1ad77468c8653fa6eed4f4105cfbef9e6f027bc1dfeb16949a8c29"
+    }
+  },
+  "memory": "               total        used        free      shared  buff/cache   available\nMem:            7894        2099        2475         479        4105        5794\nSwap:           1023         953          70\n",
+  "oomEvents": "[Thu Nov 12 16:36:54 2026] [  pid  ]   uid  tgid total_vm      rss rss_anon rss_file rss_shmem pgtables_bytes swapents oom_score_adj name\n[Thu Nov 12 16:36:54 2026] oom-kill:constraint=CONSTRAINT_MEMCG,nodemask=(null),cpuset=docker-3e3f73ecd6ede718eafd2c14ff7087a9e34445c161e4eb73cc0f28455b527a7d.scope,mems_allowed=0,oom_memcg=/system.slice/docker-3e3f73ecd6ede718eafd2c14ff7087a9e34445c161e4eb73cc0f28455b527a7d.scope,task_memcg=/system.slice/docker-3e3f73ecd6ede718eafd2c14ff7087a9e34445c161e4eb73cc0f28455b527a7d.scope,task=postgres,pid=2516634,uid=70\n[Thu Nov 12 16:36:54 2026] Memory cgroup out of memory: Killed process 2516634 (postgres) total-vm:584628kB, anon-rss:230264kB, file-rss:128kB, shmem-rss:65792kB, UID:70 pgtables:776kB oom_score_adj:0\n",
+  "postgresLog": []
+}
