@@ -1,0 +1,6 @@
+{
+  "detailOpens": true,
+  "interceptedClickRequests": 1,
+  "productionWrites": 0,
+  "method": "Real detail GET with only click POST fulfilled locally"
+}
