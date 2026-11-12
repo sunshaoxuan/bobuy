@@ -1,0 +1,39 @@
+{
+  "source": "606deb375b125d41e451dad555bb306f70f0fae3",
+  "result": "PASS",
+  "frontendTests": 773,
+  "backend": {
+    "tests": 662,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 24
+  },
+  "configuredJacoco": "PASS",
+  "coverage": {
+    "LINE": 0.9453125,
+    "BRANCH": 0.7777777777777778
+  },
+  "hostJava": "22, compiled release17; actual Java17 image rehearsal required before activation",
+  "legacyGuardFixture": "byte-pinned 48433bd manifest, 47 tests; unchanged guard source",
+  "logs": {
+    "backend-final-coverage.log": "dfa221be22b3dc6d0dea5a53bd94ce7f99afd9ab4f5ae174589f04f874ad22b1",
+    "core-package.log": "d99b10bc57d55d2115f61d2453276fbe36120df63ca73abd60d6bc012005bd10",
+    "frontend-tests.log": "f7534125f45a1571bdd21a86e312b02e5e187450e4b310a15b5dccb5d4aa1f41",
+    "frontend-build.log": "eba30cd80f930216b560f4a7af4c2000f0a22b7556fc11c415a7f65150471e51",
+    "release-guards-canonical-fixture.log": "8cc249ffe0d7223ae0a01123f4f8b8761226ceaa74b31a31ce172d39a9e085af",
+    "production-isolation.log": "05acbef6c24172963203326a3fe2a9f4b4f924d064c34c75edb3a1c72194fdd8",
+    "frontend-integrated-tests.log": "3ad5533b8f33e739855c0fc78077f4d6f0502d928776a77873c8edf7c0870f2a",
+    "frontend-integrated-build.log": "6e4eb57071361222894a5d922062a5659ac828dcd979426c16b156c03480cc29",
+    "maintenance-targeted.log": "73e8229c2d5de178fef532012e3d53eea28924badc2db8352377d1b0081dff5c",
+    "frontend-wording-build.log": "a12b37f1db0c1c1cb708fd2184dc2cb27d0cbc1574039f7e30afc72d7a94c6bd"
+  },
+  "reusedBackend": {
+    "source": "ebea743436e6e30056c54b9f851a339bf3568dac",
+    "basis": "identical backend/common/core/POM Git tree and identical actual Core JAR; changed inputs are account CSS/TSX only"
+  },
+  "reusedFrontendFull": {
+    "source": "0a1bbb64e26003868925aae0ddcb3c6ef8d52c2c",
+    "tests": 773,
+    "basis": "only already-published maintenance wording changed; no TypeScript behavior or layout change; targeted maintenance tests and fresh i18n/tsc/build supplement full gate"
+  }
+}

@@ -29,8 +29,3 @@ export function productDetailContent(entry:PublicCatalogEntry,locale:Locale){
 }
 
 export type DetailReferenceFacts=RecommendationItem|({currency?:string}&import('./api').RecommendationFacts);
-/** A quote aggregate may repeat this same source amount; a different known amount/conflict is retained. */
-export function showReferenceResolution(facts:DetailReferenceFacts){
- const quote=facts.referenceQuote;
- return !!quote&&quote.state!=='UNSCOPED'&&(quote.state!=='ACTIVE'||quote.amount!==facts.referencePrice);
-}

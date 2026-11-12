@@ -1,0 +1,1921 @@
+{
+  "controls": 87,
+  "measurements": [
+    {
+      "image": "accepted-desktop-bottom.png",
+      "label": "Shibuya 1-2-3",
+      "tag": "INPUT",
+      "ink": [
+        887,
+        173,
+        973,
+        186
+      ],
+      "dy": 1.062,
+      "dx": 175.0,
+      "tolerance": 1.3,
+      "margins": [
+        11,
+        15.562,
+        361,
+        13.438
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-bottom.png",
+      "label": "150-0002",
+      "tag": "INPUT",
+      "ink": [
+        888,
+        267,
+        946,
+        277
+      ],
+      "dy": 0.438,
+      "dx": 69.0,
+      "tolerance": 1.0,
+      "margins": [
+        12,
+        15.562,
+        150,
+        16.438
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-bottom.png",
+      "label": "清空地址",
+      "tag": "BUTTON",
+      "ink": [
+        1264,
+        355,
+        1320,
+        369
+      ],
+      "dy": 0.281,
+      "dx": 0.0,
+      "tolerance": 1.4,
+      "margins": [
+        14,
+        13.719,
+        14,
+        14.281
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-bottom.png",
+      "label": "LINE",
+      "tag": "INPUT",
+      "ink": [
+        358,
+        668,
+        385,
+        678
+      ],
+      "dy": 0.375,
+      "dx": 116.164,
+      "tolerance": 1.0,
+      "margins": [
+        12,
+        15.625,
+        244.328,
+        16.375
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-bottom.png",
+      "label": "@aiko-tan",
+      "tag": "INPUT",
+      "ink": [
+        659,
+        668,
+        723,
+        679
+      ],
+      "dy": 0.125,
+      "dx": 97.992,
+      "tolerance": 1.1,
+      "margins": [
+        11.672,
+        15.625,
+        207.656,
+        15.375
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-bottom.png",
+      "label": "Aiko Tan",
+      "tag": "INPUT",
+      "ink": [
+        960,
+        668,
+        1012,
+        678
+      ],
+      "dy": 0.375,
+      "dx": 104.328,
+      "tolerance": 1.0,
+      "margins": [
+        11.344,
+        15.625,
+        220.0,
+        16.375
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-bottom.png",
+      "label": "移除账号",
+      "tag": "BUTTON",
+      "ink": [
+        1264,
+        666,
+        1320,
+        680
+      ],
+      "dy": 0.375,
+      "dx": 0.0,
+      "tolerance": 1.4,
+      "margins": [
+        14,
+        13.625,
+        14,
+        14.375
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-bottom.png",
+      "label": "添加社交账号",
+      "tag": "BUTTON",
+      "ink": [
+        360,
+        730,
+        444,
+        744
+      ],
+      "dy": 0.375,
+      "dx": 0.0,
+      "tolerance": 1.4,
+      "margins": [
+        14,
+        13.625,
+        14,
+        14.375
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-bottom.png",
+      "label": "保存资料",
+      "tag": "BUTTON",
+      "ink": [
+        1262,
+        819,
+        1318,
+        833
+      ],
+      "dy": 0.375,
+      "dx": 0.0,
+      "tolerance": 1.4,
+      "margins": [
+        41,
+        13.625,
+        41,
+        14.375
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-bottom.png",
+      "label": "验证邮箱",
+      "tag": "BUTTON",
+      "ink": [
+        638,
+        355,
+        694,
+        369
+      ],
+      "dy": 0.281,
+      "dx": 0.0,
+      "tolerance": 1.4,
+      "margins": [
+        14,
+        13.719,
+        14,
+        14.281
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-bottom.png",
+      "label": "重新发送",
+      "tag": "BUTTON",
+      "ink": [
+        734,
+        355,
+        790,
+        368
+      ],
+      "dy": 0.781,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        14,
+        13.719,
+        14,
+        15.281
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-empty.png",
+      "label": "退出登录",
+      "tag": "BUTTON",
+      "ink": [
+        1260,
+        116,
+        1337,
+        131
+      ],
+      "dy": 0.172,
+      "dx": 0.0,
+      "tolerance": 1.5,
+      "margins": [
+        14.5,
+        13.328,
+        14.5,
+        13.672
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-empty.png",
+      "label": "我的资料",
+      "tag": "A",
+      "ink": [
+        438,
+        206,
+        527,
+        224
+      ],
+      "dy": 0.344,
+      "dx": 0.672,
+      "tolerance": 1.8,
+      "margins": [
+        124.5,
+        21.656,
+        123.156,
+        22.344
+      ],
+      "height": 64,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-empty.png",
+      "label": "我的订单",
+      "tag": "A",
+      "ink": [
+        789,
+        205,
+        877,
+        225
+      ],
+      "dy": 0.344,
+      "dx": 0.508,
+      "tolerance": 2,
+      "margins": [
+        124.844,
+        20.656,
+        123.828,
+        21.344
+      ],
+      "height": 64,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-empty.png",
+      "label": "商家维护",
+      "tag": "A",
+      "ink": [
+        1139,
+        206,
+        1228,
+        224
+      ],
+      "dy": 0.344,
+      "dx": 0.344,
+      "tolerance": 1.8,
+      "margins": [
+        124.172,
+        21.656,
+        123.484,
+        22.344
+      ],
+      "height": 64,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-empty.png",
+      "label": "Aiko Tan",
+      "tag": "INPUT",
+      "ink": [
+        350,
+        525,
+        402,
+        535
+      ],
+      "dy": 0.344,
+      "dx": 72.5,
+      "tolerance": 1.0,
+      "margins": [
+        11.5,
+        15.656,
+        156.5,
+        16.344
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-empty.png",
+      "label": "<redacted>",
+      "tag": "INPUT",
+      "ink": [
+        588,
+        525,
+        705,
+        535
+      ],
+      "dy": 0.344,
+      "dx": 40.0,
+      "tolerance": 1.0,
+      "margins": [
+        11.5,
+        15.656,
+        91.5,
+        16.344
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-empty.png",
+      "label": "<redacted>",
+      "tag": "INPUT",
+      "ink": [
+        350,
+        619,
+        462,
+        632
+      ],
+      "dy": 1.156,
+      "dx": 161.5,
+      "tolerance": 1.3,
+      "margins": [
+        11.5,
+        15.656,
+        334.5,
+        13.344
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-lower.png",
+      "label": "<redacted>",
+      "tag": "INPUT",
+      "ink": [
+        357,
+        125,
+        470,
+        138
+      ],
+      "dy": 1.156,
+      "dx": 161.5,
+      "tolerance": 1.3,
+      "margins": [
+        11,
+        15.656,
+        334,
+        13.344
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-lower.png",
+      "label": "Japan",
+      "tag": "INPUT",
+      "ink": [
+        887,
+        167,
+        922,
+        180
+      ],
+      "dy": 1.062,
+      "dx": 81.5,
+      "tolerance": 1.3,
+      "margins": [
+        11,
+        15.562,
+        174,
+        13.438
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-lower.png",
+      "label": "Tokyo",
+      "tag": "INPUT",
+      "ink": [
+        1125,
+        167,
+        1161,
+        180
+      ],
+      "dy": 1.062,
+      "dx": 81.0,
+      "tolerance": 1.3,
+      "margins": [
+        11,
+        15.562,
+        173,
+        13.438
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-lower.png",
+      "label": "Shibuya 1-2-3",
+      "tag": "INPUT",
+      "ink": [
+        887,
+        261,
+        973,
+        274
+      ],
+      "dy": 1.062,
+      "dx": 175.0,
+      "tolerance": 1.3,
+      "margins": [
+        11,
+        15.562,
+        361,
+        13.438
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-lower.png",
+      "label": "150-0002",
+      "tag": "INPUT",
+      "ink": [
+        888,
+        355,
+        946,
+        365
+      ],
+      "dy": 0.438,
+      "dx": 69.0,
+      "tolerance": 1.0,
+      "margins": [
+        12,
+        15.562,
+        150,
+        16.438
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-lower.png",
+      "label": "清空地址",
+      "tag": "BUTTON",
+      "ink": [
+        1264,
+        443,
+        1320,
+        457
+      ],
+      "dy": 0.281,
+      "dx": 0.0,
+      "tolerance": 1.4,
+      "margins": [
+        14,
+        13.719,
+        14,
+        14.281
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-lower.png",
+      "label": "LINE",
+      "tag": "INPUT",
+      "ink": [
+        358,
+        756,
+        385,
+        766
+      ],
+      "dy": 0.375,
+      "dx": 116.164,
+      "tolerance": 1.0,
+      "margins": [
+        12,
+        15.625,
+        244.328,
+        16.375
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-lower.png",
+      "label": "@aiko-tan",
+      "tag": "INPUT",
+      "ink": [
+        659,
+        756,
+        723,
+        767
+      ],
+      "dy": 0.125,
+      "dx": 97.992,
+      "tolerance": 1.1,
+      "margins": [
+        11.672,
+        15.625,
+        207.656,
+        15.375
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-lower.png",
+      "label": "Aiko Tan",
+      "tag": "INPUT",
+      "ink": [
+        960,
+        756,
+        1012,
+        766
+      ],
+      "dy": 0.375,
+      "dx": 104.328,
+      "tolerance": 1.0,
+      "margins": [
+        11.344,
+        15.625,
+        220.0,
+        16.375
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-lower.png",
+      "label": "移除账号",
+      "tag": "BUTTON",
+      "ink": [
+        1264,
+        754,
+        1320,
+        768
+      ],
+      "dy": 0.375,
+      "dx": 0.0,
+      "tolerance": 1.4,
+      "margins": [
+        14,
+        13.625,
+        14,
+        14.375
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-lower.png",
+      "label": "添加社交账号",
+      "tag": "BUTTON",
+      "ink": [
+        360,
+        818,
+        444,
+        832
+      ],
+      "dy": 0.375,
+      "dx": 0.0,
+      "tolerance": 1.4,
+      "margins": [
+        14,
+        13.625,
+        14,
+        14.375
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-lower.png",
+      "label": "验证邮箱",
+      "tag": "BUTTON",
+      "ink": [
+        638,
+        443,
+        694,
+        457
+      ],
+      "dy": 0.281,
+      "dx": 0.0,
+      "tolerance": 1.4,
+      "margins": [
+        14,
+        13.719,
+        14,
+        14.281
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-lower.png",
+      "label": "重新发送",
+      "tag": "BUTTON",
+      "ink": [
+        734,
+        443,
+        790,
+        456
+      ],
+      "dy": 0.781,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        14,
+        13.719,
+        14,
+        15.281
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-top.png",
+      "label": "退出登录",
+      "tag": "BUTTON",
+      "ink": [
+        1260,
+        116,
+        1337,
+        131
+      ],
+      "dy": 0.172,
+      "dx": 0.0,
+      "tolerance": 1.5,
+      "margins": [
+        14.5,
+        13.328,
+        14.5,
+        13.672
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-top.png",
+      "label": "我的资料",
+      "tag": "A",
+      "ink": [
+        438,
+        206,
+        527,
+        224
+      ],
+      "dy": 0.344,
+      "dx": 0.672,
+      "tolerance": 1.8,
+      "margins": [
+        124.5,
+        21.656,
+        123.156,
+        22.344
+      ],
+      "height": 64,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-top.png",
+      "label": "我的订单",
+      "tag": "A",
+      "ink": [
+        789,
+        205,
+        877,
+        225
+      ],
+      "dy": 0.344,
+      "dx": 0.508,
+      "tolerance": 2,
+      "margins": [
+        124.844,
+        20.656,
+        123.828,
+        21.344
+      ],
+      "height": 64,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-top.png",
+      "label": "商家维护",
+      "tag": "A",
+      "ink": [
+        1139,
+        206,
+        1228,
+        224
+      ],
+      "dy": 0.344,
+      "dx": 0.344,
+      "tolerance": 1.8,
+      "margins": [
+        124.172,
+        21.656,
+        123.484,
+        22.344
+      ],
+      "height": 64,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-top.png",
+      "label": "Aiko Tan",
+      "tag": "INPUT",
+      "ink": [
+        350,
+        473,
+        402,
+        483
+      ],
+      "dy": 0.344,
+      "dx": 72.5,
+      "tolerance": 1.0,
+      "margins": [
+        11.5,
+        15.656,
+        156.5,
+        16.344
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-top.png",
+      "label": "<redacted>",
+      "tag": "INPUT",
+      "ink": [
+        588,
+        473,
+        705,
+        483
+      ],
+      "dy": 0.344,
+      "dx": 40.0,
+      "tolerance": 1.0,
+      "margins": [
+        11.5,
+        15.656,
+        91.5,
+        16.344
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-top.png",
+      "label": "<redacted>",
+      "tag": "INPUT",
+      "ink": [
+        350,
+        567,
+        462,
+        580
+      ],
+      "dy": 1.156,
+      "dx": 161.5,
+      "tolerance": 1.3,
+      "margins": [
+        11.5,
+        15.656,
+        334.5,
+        13.344
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-top.png",
+      "label": "Aiko Tan",
+      "tag": "INPUT",
+      "ink": [
+        880,
+        515,
+        932,
+        525
+      ],
+      "dy": 0.438,
+      "dx": 72.5,
+      "tolerance": 1.0,
+      "margins": [
+        11.5,
+        15.562,
+        156.5,
+        16.438
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-top.png",
+      "label": "<redacted>",
+      "tag": "INPUT",
+      "ink": [
+        1118,
+        515,
+        1235,
+        525
+      ],
+      "dy": 0.438,
+      "dx": 40.0,
+      "tolerance": 1.0,
+      "margins": [
+        11.5,
+        15.562,
+        91.5,
+        16.438
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-top.png",
+      "label": "Japan",
+      "tag": "INPUT",
+      "ink": [
+        880,
+        609,
+        915,
+        622
+      ],
+      "dy": 1.062,
+      "dx": 81.0,
+      "tolerance": 1.3,
+      "margins": [
+        11.5,
+        15.562,
+        173.5,
+        13.438
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-top.png",
+      "label": "Tokyo",
+      "tag": "INPUT",
+      "ink": [
+        1118,
+        609,
+        1154,
+        622
+      ],
+      "dy": 1.062,
+      "dx": 80.5,
+      "tolerance": 1.3,
+      "margins": [
+        11.5,
+        15.562,
+        172.5,
+        13.438
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-top.png",
+      "label": "Shibuya 1-2-3",
+      "tag": "INPUT",
+      "ink": [
+        880,
+        703,
+        966,
+        716
+      ],
+      "dy": 1.062,
+      "dx": 174.5,
+      "tolerance": 1.3,
+      "margins": [
+        11.5,
+        15.562,
+        360.5,
+        13.438
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-desktop-top.png",
+      "label": "150-0002",
+      "tag": "INPUT",
+      "ink": [
+        880,
+        797,
+        938,
+        807
+      ],
+      "dy": 0.438,
+      "dx": 69.5,
+      "tolerance": 1.0,
+      "margins": [
+        11.5,
+        15.562,
+        150.5,
+        16.438
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-english360-verification.png",
+      "label": "Aiko Tan",
+      "tag": "INPUT",
+      "ink": [
+        45,
+        660,
+        97,
+        670
+      ],
+      "dy": 0.656,
+      "dx": 101.5,
+      "tolerance": 1.0,
+      "margins": [
+        11,
+        15.344,
+        214,
+        16.656
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-english360-verification.png",
+      "label": "Verify email",
+      "tag": "BUTTON",
+      "ink": [
+        48,
+        395,
+        119,
+        408
+      ],
+      "dy": 1.031,
+      "dx": 0.336,
+      "tolerance": 1.3,
+      "margins": [
+        14,
+        15.531,
+        14.672,
+        13.469
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-english360-verification.png",
+      "label": "Resend code",
+      "tag": "BUTTON",
+      "ink": [
+        161,
+        395,
+        239,
+        405
+      ],
+      "dy": 0.469,
+      "dx": 0.93,
+      "tolerance": 1.0,
+      "margins": [
+        15.328,
+        15.531,
+        13.469,
+        16.469
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-english360.png",
+      "label": "Sign out",
+      "tag": "BUTTON",
+      "ink": [
+        240,
+        91,
+        314,
+        106
+      ],
+      "dy": 0.5,
+      "dx": 0.148,
+      "tolerance": 1.5,
+      "margins": [
+        13.703,
+        14,
+        14.0,
+        13
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-english360.png",
+      "label": "Your details",
+      "tag": "A",
+      "ink": [
+        31,
+        210,
+        100,
+        220
+      ],
+      "dy": 0.5,
+      "dx": 0.0,
+      "tolerance": 1.0,
+      "margins": [
+        14,
+        46,
+        14,
+        23
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "accepted-english360.png",
+      "label": "My orders",
+      "tag": "A",
+      "ink": [
+        143,
+        210,
+        203,
+        223
+      ],
+      "dy": 1.0,
+      "dx": 0.5,
+      "tolerance": 1.3,
+      "margins": [
+        19,
+        46,
+        18,
+        20
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "accepted-english360.png",
+      "label": "Merchant workspace",
+      "tag": "A",
+      "ink": [
+        248,
+        200,
+        311,
+        233
+      ],
+      "dy": 1.0,
+      "dx": 0.0,
+      "tolerance": 2,
+      "margins": [
+        17,
+        36,
+        17,
+        10
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "accepted-english360.png",
+      "label": "Aiko Tan",
+      "tag": "INPUT",
+      "ink": [
+        45,
+        452,
+        97,
+        462
+      ],
+      "dy": 0.344,
+      "dx": 101.5,
+      "tolerance": 1.0,
+      "margins": [
+        11,
+        15.656,
+        214,
+        16.344
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-english360.png",
+      "label": "<redacted>",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        546,
+        162,
+        556
+      ],
+      "dy": 0.344,
+      "dx": 68.5,
+      "tolerance": 1.0,
+      "margins": [
+        12,
+        15.656,
+        149,
+        16.344
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-english360.png",
+      "label": "<redacted>",
+      "tag": "INPUT",
+      "ink": [
+        45,
+        640,
+        158,
+        653
+      ],
+      "dy": 1.156,
+      "dx": 71.0,
+      "tolerance": 1.3,
+      "margins": [
+        11,
+        15.656,
+        153,
+        13.344
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-japanese360.png",
+      "label": "ログアウト",
+      "tag": "BUTTON",
+      "ink": [
+        222,
+        91,
+        312,
+        105
+      ],
+      "dy": 0.0,
+      "dx": 1.0,
+      "tolerance": 1.4,
+      "margins": [
+        14,
+        14,
+        16,
+        14
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-japanese360.png",
+      "label": "本人情報",
+      "tag": "A",
+      "ink": [
+        40,
+        209,
+        91,
+        222
+      ],
+      "dy": 0.0,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        23,
+        45,
+        23,
+        21
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "accepted-japanese360.png",
+      "label": "注文履歴",
+      "tag": "A",
+      "ink": [
+        146,
+        209,
+        199,
+        222
+      ],
+      "dy": 0.0,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        22,
+        45,
+        22,
+        21
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "accepted-japanese360.png",
+      "label": "出店者管理",
+      "tag": "A",
+      "ink": [
+        248,
+        209,
+        312,
+        222
+      ],
+      "dy": 0.0,
+      "dx": 0.5,
+      "tolerance": 1.3,
+      "margins": [
+        17,
+        45,
+        16,
+        21
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "accepted-japanese360.png",
+      "label": "Aiko Tan",
+      "tag": "INPUT",
+      "ink": [
+        45,
+        452,
+        97,
+        462
+      ],
+      "dy": 0.344,
+      "dx": 101.5,
+      "tolerance": 1.0,
+      "margins": [
+        11,
+        15.656,
+        214,
+        16.344
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-japanese360.png",
+      "label": "<redacted>",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        546,
+        162,
+        556
+      ],
+      "dy": 0.344,
+      "dx": 68.5,
+      "tolerance": 1.0,
+      "margins": [
+        12,
+        15.656,
+        149,
+        16.344
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-japanese360.png",
+      "label": "<redacted>",
+      "tag": "INPUT",
+      "ink": [
+        45,
+        640,
+        158,
+        653
+      ],
+      "dy": 1.156,
+      "dx": 71.0,
+      "tolerance": 1.3,
+      "margins": [
+        11,
+        15.656,
+        153,
+        13.344
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone360-bottom.png",
+      "label": "LINE",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        263,
+        73,
+        273
+      ],
+      "dy": 0.656,
+      "dx": 113.0,
+      "tolerance": 1.0,
+      "margins": [
+        12,
+        15.344,
+        238,
+        16.656
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone360-bottom.png",
+      "label": "@aiko-tan",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        353,
+        109,
+        364
+      ],
+      "dy": 0.156,
+      "dx": 95.0,
+      "tolerance": 1.1,
+      "margins": [
+        12,
+        15.344,
+        202,
+        15.656
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone360-bottom.png",
+      "label": "Aiko Tan",
+      "tag": "INPUT",
+      "ink": [
+        45,
+        443,
+        97,
+        453
+      ],
+      "dy": 0.656,
+      "dx": 101.5,
+      "tolerance": 1.0,
+      "margins": [
+        11,
+        15.344,
+        214,
+        16.656
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone360-bottom.png",
+      "label": "移除账号",
+      "tag": "BUTTON",
+      "ink": [
+        48,
+        502,
+        104,
+        516
+      ],
+      "dy": 0.344,
+      "dx": 0.0,
+      "tolerance": 1.4,
+      "margins": [
+        14,
+        14.344,
+        14,
+        13.656
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone360-bottom.png",
+      "label": "添加社交账号",
+      "tag": "BUTTON",
+      "ink": [
+        48,
+        578,
+        132,
+        592
+      ],
+      "dy": 0.344,
+      "dx": 0.0,
+      "tolerance": 1.4,
+      "margins": [
+        14,
+        14.344,
+        14,
+        13.656
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone360-bottom.png",
+      "label": "保存资料",
+      "tag": "BUTTON",
+      "ink": [
+        144,
+        659,
+        200,
+        673
+      ],
+      "dy": 0.344,
+      "dx": 0.5,
+      "tolerance": 1.4,
+      "margins": [
+        127,
+        14.344,
+        128,
+        13.656
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone360-top.png",
+      "label": "退出登录",
+      "tag": "BUTTON",
+      "ink": [
+        236,
+        91,
+        314,
+        105
+      ],
+      "dy": 0.0,
+      "dx": 0.0,
+      "tolerance": 1.4,
+      "margins": [
+        14,
+        14,
+        14,
+        14
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone360-top.png",
+      "label": "我的资料",
+      "tag": "A",
+      "ink": [
+        39,
+        209,
+        92,
+        222
+      ],
+      "dy": 0.0,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        22,
+        45,
+        22,
+        21
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone360-top.png",
+      "label": "我的订单",
+      "tag": "A",
+      "ink": [
+        146,
+        209,
+        199,
+        222
+      ],
+      "dy": 0.0,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        22,
+        45,
+        22,
+        21
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone360-top.png",
+      "label": "商家维护",
+      "tag": "A",
+      "ink": [
+        254,
+        209,
+        305,
+        222
+      ],
+      "dy": 0.0,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        23,
+        45,
+        23,
+        21
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone360-top.png",
+      "label": "Aiko Tan",
+      "tag": "INPUT",
+      "ink": [
+        45,
+        452,
+        97,
+        462
+      ],
+      "dy": 0.344,
+      "dx": 101.5,
+      "tolerance": 1.0,
+      "margins": [
+        11,
+        15.656,
+        214,
+        16.344
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone360-top.png",
+      "label": "<redacted>",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        546,
+        162,
+        556
+      ],
+      "dy": 0.344,
+      "dx": 68.5,
+      "tolerance": 1.0,
+      "margins": [
+        12,
+        15.656,
+        149,
+        16.344
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone360-top.png",
+      "label": "<redacted>",
+      "tag": "INPUT",
+      "ink": [
+        45,
+        640,
+        158,
+        653
+      ],
+      "dy": 1.156,
+      "dx": 71.0,
+      "tolerance": 1.3,
+      "margins": [
+        11,
+        15.656,
+        153,
+        13.344
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone390-error.png",
+      "label": "Aiko Tan",
+      "tag": "INPUT",
+      "ink": [
+        45,
+        666,
+        97,
+        676
+      ],
+      "dy": 0.562,
+      "dx": 116.5,
+      "tolerance": 1.0,
+      "margins": [
+        11,
+        15.438,
+        244,
+        16.562
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone390-error.png",
+      "label": "验证邮箱",
+      "tag": "BUTTON",
+      "ink": [
+        48,
+        421,
+        104,
+        435
+      ],
+      "dy": 0.469,
+      "dx": 0.0,
+      "tolerance": 1.4,
+      "margins": [
+        14,
+        13.531,
+        14,
+        14.469
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone390-error.png",
+      "label": "重新发送",
+      "tag": "BUTTON",
+      "ink": [
+        144,
+        421,
+        200,
+        434
+      ],
+      "dy": 0.969,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        14,
+        13.531,
+        14,
+        15.469
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone390-top.png",
+      "label": "退出登录",
+      "tag": "BUTTON",
+      "ink": [
+        266,
+        91,
+        344,
+        105
+      ],
+      "dy": 0.0,
+      "dx": 0.0,
+      "tolerance": 1.4,
+      "margins": [
+        14,
+        14,
+        14,
+        14
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone390-top.png",
+      "label": "我的资料",
+      "tag": "A",
+      "ink": [
+        44,
+        209,
+        97,
+        222
+      ],
+      "dy": 0.0,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        27,
+        45,
+        27,
+        21
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone390-top.png",
+      "label": "我的订单",
+      "tag": "A",
+      "ink": [
+        161,
+        209,
+        214,
+        222
+      ],
+      "dy": 0.0,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        27,
+        45,
+        27,
+        21
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone390-top.png",
+      "label": "商家维护",
+      "tag": "A",
+      "ink": [
+        279,
+        209,
+        330,
+        222
+      ],
+      "dy": 0.0,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        28,
+        45,
+        28,
+        21
+      ],
+      "height": 81,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone390-top.png",
+      "label": "Aiko Tan",
+      "tag": "INPUT",
+      "ink": [
+        45,
+        452,
+        97,
+        462
+      ],
+      "dy": 0.344,
+      "dx": 116.5,
+      "tolerance": 1.0,
+      "margins": [
+        11,
+        15.656,
+        244,
+        16.344
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone390-top.png",
+      "label": "<redacted>",
+      "tag": "INPUT",
+      "ink": [
+        46,
+        546,
+        162,
+        556
+      ],
+      "dy": 0.344,
+      "dx": 83.5,
+      "tolerance": 1.0,
+      "margins": [
+        12,
+        15.656,
+        179,
+        16.344
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone390-top.png",
+      "label": "<redacted>",
+      "tag": "INPUT",
+      "ink": [
+        45,
+        640,
+        158,
+        653
+      ],
+      "dy": 1.156,
+      "dx": 86.0,
+      "tolerance": 1.3,
+      "margins": [
+        11,
+        15.656,
+        183,
+        13.344
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone390-verification.png",
+      "label": "Aiko Tan",
+      "tag": "INPUT",
+      "ink": [
+        45,
+        660,
+        97,
+        670
+      ],
+      "dy": 0.562,
+      "dx": 116.5,
+      "tolerance": 1.0,
+      "margins": [
+        11,
+        15.438,
+        244,
+        16.562
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone390-verification.png",
+      "label": "验证邮箱",
+      "tag": "BUTTON",
+      "ink": [
+        48,
+        415,
+        104,
+        429
+      ],
+      "dy": 0.469,
+      "dx": 0.0,
+      "tolerance": 1.4,
+      "margins": [
+        14,
+        13.531,
+        14,
+        14.469
+      ],
+      "height": 44,
+      "centered": true
+    },
+    {
+      "image": "accepted-phone390-verification.png",
+      "label": "重新发送",
+      "tag": "BUTTON",
+      "ink": [
+        144,
+        415,
+        200,
+        428
+      ],
+      "dy": 0.969,
+      "dx": 0.0,
+      "tolerance": 1.3,
+      "margins": [
+        14,
+        13.531,
+        14,
+        15.469
+      ],
+      "height": 44,
+      "centered": true
+    }
+  ],
+  "failures": [],
+  "result": "PASS"
+}

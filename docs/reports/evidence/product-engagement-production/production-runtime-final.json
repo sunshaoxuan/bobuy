@@ -1,0 +1,89 @@
+{
+  "states": {
+    "core-service": {
+      "id": "3ac6ca1f280f7670a5b9d9e478249be7c6fa6f171fdfb4365afa6457beb3f4da",
+      "image": "sha256:80d715f3b79016942f35ce438a3b8a1be78526a4b2ead27af36f4ceb4f98c2c9",
+      "tag": "bobuy/core:20261112.5",
+      "revision": "606deb375b125d41e451dad555bb306f70f0fae3",
+      "health": "healthy"
+    },
+    "frontend": {
+      "id": "3d02fcbef453b951d47e1853116bbf7dde24f65c99ee6009af07b30c4090918a",
+      "image": "sha256:b938535cdca8147aee6ded4d631d1c2fe505cfcdefd87d3c31f87c95e0f1adf9",
+      "tag": "bobuy/frontend:20261112.5",
+      "revision": "606deb375b125d41e451dad555bb306f70f0fae3",
+      "health": "running"
+    },
+    "ai-service": {
+      "id": "10972ee4cd488c0b368031dcdee897a9f3cf10e1d533ddfd2637004b0e983c5a",
+      "image": "sha256:e17c56f30483def52fb4c3e58d7ef7fad8dced0f89ff23109ab380cdca32fa48",
+      "tag": "bobuy/ai:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "health": "healthy"
+    },
+    "im-service": {
+      "id": "218a0841775c655ea8aca3e76c32a76a9bb6e243576ecb325733c4f88f36e933",
+      "image": "sha256:3c286b1672db0eca6df4803085d7f5ba9cc475c4542a4f93302ee5c74277369a",
+      "tag": "bobuy/im:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "health": "healthy"
+    },
+    "auth-service": {
+      "id": "f92780c457a16d7757540eae17d6ae73b22ff9389369bdb4da18301faa4208ab",
+      "image": "sha256:6863ae4b03b28b8fbd8666fb15b1599cca6a8b9911bbbd1cf555d9d4b8a3eabb",
+      "tag": "bobuy/auth:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "health": "healthy"
+    },
+    "gateway-service": {
+      "id": "8658ca313926847ac17386d2494fc068487d3a2275a187e9b05e16373eb6a7ee",
+      "image": "sha256:71354226154b2ca27ff7ddaaf90923f0954db9cabac363564447322030d21dcd",
+      "tag": "bobuy/router:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "health": "healthy"
+    },
+    "postgres": {
+      "id": "3e3f73ecd6ede718eafd2c14ff7087a9e34445c161e4eb73cc0f28455b527a7d",
+      "image": "sha256:1a0c23d53c1ad77468c8653fa6eed4f4105cfbef9e6f027bc1dfeb16949a8c29",
+      "tag": "postgres:18.6-alpine3.23@sha256:1a0c23d53c1ad77468c8653fa6eed4f4105cfbef9e6f027bc1dfeb16949a8c29",
+      "revision": null,
+      "health": "healthy"
+    },
+    "rustfs": {
+      "id": "a33a452d37da3d06ff76b62046e7d1cfac6cf60f730fa62ff17fc95a8c24a8f7",
+      "image": "sha256:e287e99762a4a3e7b706526e01f2ff755f67db165e9be9f6b907adc6fb6d6ee1",
+      "tag": "rustfs/rustfs:1.0.4@sha256:e287e99762a4a3e7b706526e01f2ff755f67db165e9be9f6b907adc6fb6d6ee1",
+      "revision": null,
+      "health": "running"
+    },
+    "gateway": {
+      "id": "417a2727353a7449a30c4fb820a5860dc3f2ee961ae9413e19eeddfa81036b2e",
+      "image": "sha256:892bb2152464f0c5d8972593a5f5afaf8054552580b699d95f8ff4af08c2d33d",
+      "tag": "nginx:alpine",
+      "revision": null,
+      "health": "running"
+    },
+    "redis": {
+      "id": "a9329b8de7e5bf143b4af936a847f79ca8e10957f5f28d31a39ec5d5717d010a",
+      "image": "sha256:858f009f9709ce576febc734aa78b8f6d624b82571f9ddb6bda4377c833b3499",
+      "tag": "redis:7-alpine",
+      "revision": null,
+      "health": "healthy"
+    },
+    "nacos": {
+      "id": "25e2f666c1cc59bb03c06016faccc211f5d4990de76b980b69c75fba0302c2eb",
+      "image": "sha256:cca69ab12348b43d95c9b2c1d8d31d5a8d56e634ed4232a510423a9346090a70",
+      "tag": "nacos/nacos-server:v2.3.2-slim",
+      "revision": "c150bce691f4996871203b5897dd357f6d8a0e24",
+      "health": "healthy"
+    },
+    "rabbitmq": {
+      "id": "c982a0e0f4762b34284370fa9aa38d59762bd28e26928ced4a7983e96968d40a",
+      "image": "sha256:606d8c0d6b3c18d1da9afc53bc7cdb2a8d5486df91b5a9830e9e07626c9ae281",
+      "tag": "rabbitmq:3-management-alpine",
+      "revision": null,
+      "health": "healthy"
+    }
+  },
+  "jarSha256": "65f16c0322af492f945c1564d6b23c9bbf10bddf992053e1578a5513f38903fd"
+}

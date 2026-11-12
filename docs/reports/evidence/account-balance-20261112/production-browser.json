@@ -1,0 +1,335 @@
+{
+  "source": "d2ffb059bad921de51d2b61267095e52e6357c42",
+  "environment": "production",
+  "desktop": {
+    "boxes": {
+      "address": {
+        "bottom": 939.28125,
+        "height": 608.9375,
+        "width": 510,
+        "x": 850,
+        "y": 330.34375
+      },
+      "basic": {
+        "bottom": 653.4375,
+        "height": 323.09375,
+        "width": 510,
+        "x": 320,
+        "y": 330.34375
+      },
+      "save": {
+        "bottom": 1382.375,
+        "height": 48,
+        "width": 1040,
+        "x": 320,
+        "y": 1334.375
+      },
+      "social": {
+        "bottom": 1314.375,
+        "height": 355.09375,
+        "width": 1040,
+        "x": 320,
+        "y": 959.28125
+      },
+      "verification": {
+        "bottom": 939.28125,
+        "height": 265.84375,
+        "width": 510,
+        "x": 320,
+        "y": 673.4375
+      }
+    },
+    "menus": [
+      {
+        "label": "我的资料",
+        "path": "/account"
+      },
+      {
+        "label": "我的订单",
+        "path": "/admin/orders"
+      },
+      {
+        "label": "商家维护",
+        "path": "/admin"
+      }
+    ],
+    "nestedForms": 0,
+    "overflow": false,
+    "scripts": [
+      "/assets/index-Bem8gE5G.js"
+    ],
+    "styles": [
+      "/assets/index-rtJFeJk2.css"
+    ],
+    "viewport": [
+      1440,
+      900
+    ]
+  },
+  "viewports": [
+    [
+      1440,
+      900
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      360,
+      800
+    ]
+  ],
+  "phoneSingleColumn": true,
+  "phoneOpaqueBars": true,
+  "phoneSaveHeight": 44,
+  "phoneSaveToBottomNav": 43.34,
+  "navigation": {
+    "orders": "/admin/orders",
+    "merchant": "/admin/users",
+    "result": "PASS",
+    "ordersData": "empty, no orders created"
+  },
+  "siteConsoleErrors": 0,
+  "extensionConsoleErrors": 2,
+  "productionProfileWrites": 0,
+  "network": [
+    {
+      "path": "/assets/index-rtJFeJk2.css",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-Bem8gE5G.js",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/profile",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/cdn-cgi/rum",
+      "status": 204
+    },
+    {
+      "path": "/favicon.ico",
+      "status": 200
+    },
+    {
+      "path": "/favicon.ico",
+      "status": 200
+    },
+    {
+      "path": "/assets/Orders-bP3E43Hy.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/EditOutlined-DtNCBAgM.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/ProductMetadata-DjjVxfFy.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-BMmwbqiS.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/useBreakpoint-CcKTGI7B.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-C-4m3kdr.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/Pagination-Bj6cPnz9.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/Collapse-YGKu1R9W.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-BilKBN4z.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/CheckOutlined-g37DRLDn.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/OrderProductIdentity-C-3J26JO.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/styleChecker-PEPKY-lK.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-D5H7KFj8.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/Table-9VQRjH3M.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-BYcYHQD_.js",
+      "status": 200
+    },
+    {
+      "path": "/api/trips",
+      "status": 200
+    },
+    {
+      "path": "/account",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-Bem8gE5G.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-rtJFeJk2.css",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/profile",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/cdn-cgi/rum",
+      "status": 204
+    },
+    {
+      "path": "/favicon.ico",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/assets/useBreakpoint-CcKTGI7B.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-D5H7KFj8.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/CheckOutlined-g37DRLDn.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/Table-9VQRjH3M.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/styleChecker-PEPKY-lK.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-C-4m3kdr.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-BYcYHQD_.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/Pagination-Bj6cPnz9.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/EditOutlined-DtNCBAgM.js",
+      "status": 200
+    },
+    {
+      "path": "/favicon.ico",
+      "status": 200
+    },
+    {
+      "path": "/favicon.ico",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-DQKBYcoB.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/Users-diCaptmO.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-jS0VB3qj.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-CkWXT3r2.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-DP9JGqBo.js",
+      "status": 200
+    },
+    {
+      "path": "/cdn-cgi/rum",
+      "status": 204
+    },
+    {
+      "path": "/cdn-cgi/rum",
+      "status": 204
+    },
+    {
+      "path": "/api/admin/users",
+      "status": 200
+    },
+    {
+      "path": "/account",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-Bem8gE5G.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-rtJFeJk2.css",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/profile",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/cdn-cgi/rum",
+      "status": 204
+    },
+    {
+      "path": "/favicon.ico",
+      "status": 200
+    }
+  ],
+  "screenshots": "private/ excluded from git; full-page production capture timed out, viewport captures retained"
+}

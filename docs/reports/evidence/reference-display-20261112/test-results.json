@@ -1,0 +1,29 @@
+{
+  "source": "a14f0320aeed077fbf449c95f2b236f4dd1d3393",
+  "backendSource": "a14f0320aeed077fbf449c95f2b236f4dd1d3393",
+  "backendInputsUnchanged": true,
+  "backend": {
+    "tests": 666,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 24
+  },
+  "configuredJacoco": "PASS",
+  "frontendUnionTests": 111,
+  "accountCompatibilityTests": 21,
+  "maintenanceCompatibilityTests": 6,
+  "notes": "Counts are separate scopes; not one frontend full-suite count. Final 24 candidate states use unmocked real public facts. Earlier pending-feature fixtures are retained as preliminary evidence only.",
+  "logs": {
+    "backend-sort.log": "2700f092e2a938d38ca35a1007727cae7671d181a3025b41f0115cf9955c0473",
+    "merged-frontend.log": "f88596004a059b0076bfa1b716cf2f713b3e13a84f6fceaafcf7982365a7edd9",
+    "account-compatibility.log": "d9203b96e445ff244fac99fb53f58ef3b3b8104cab0e254cca06eb2738874877",
+    "maintenance-compatibility.log": "cb46c395abad6647ef52e82d300277ba4f6df7ce4e03df239a35bfa233c5da43",
+    "build-frozen.log": "2451f906fc8669813d4eee42f54922ae6c4c5ef95e9aa4599a28a9dbbac6fc0a",
+    "core-sort.log": "287e8c986bdf4a2c630a4891c9957ed3ccbfd22cd039b911b81a442d398f89be",
+    "browser-accepted.log": "7158c2d5de91574bc7e601295b762e84ed91d63ad7205ee8d72b424f1104f08b",
+    "stress.log": "233281ed967027c23cef38998140576effe17618b40dc26f0c92a08ca54c50d9",
+    "final-price-regression.log": "f76e0355df8f7979d49930d403627af21e27b7776e72479e0dc171211dbe74dc",
+    "sort-focused.log": "d59b8085a68e3e4847f2c535aa85bcdc0b6aa91876b7f3d76679695a3742c079",
+    "sort-after-final.log": "c708003c970dfc5de8ae101c8f7a386dd7f49b680e994feddde1e4705dc5abcd"
+  }
+}

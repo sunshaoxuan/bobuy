@@ -1,0 +1,38 @@
+[
+  {
+    "state": "long-active",
+    "fixture": "synthetic names units amounts dates; published identity retained",
+    "metrics": {
+      "overflow": 0,
+      "subtitle": {
+        "height": 20.796875,
+        "lineHeight": 20.8,
+        "whiteSpace": "nowrap",
+        "ellipsis": "ellipsis",
+        "overflow": 2510
+      },
+      "price": {
+        "width": 279,
+        "scrollWidth": 279
+      }
+    }
+  },
+  {
+    "state": "expired-unknown",
+    "fixture": "synthetic names units amounts dates; published identity retained",
+    "metrics": {
+      "overflow": 0,
+      "subtitle": {
+        "height": 20.796875,
+        "lineHeight": 20.8,
+        "whiteSpace": "nowrap",
+        "ellipsis": "ellipsis",
+        "overflow": 2510
+      },
+      "price": {
+        "width": 0,
+        "scrollWidth": 0
+      }
+    }
+  }
+]

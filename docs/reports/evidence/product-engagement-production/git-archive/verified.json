@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "branch": "codex-product-engagement-production-20261112-archive",
+  "verifiedCommit": "91b76349bbe2087f5f13ec9ca0c768ec54f6cc25",
+  "tree": "d5e0a60099be2c02e077190f678ec0e17ba140eb",
+  "commitCount": 655,
+  "rawEvidenceFiles": 116,
+  "allExistingRemoteHeadsUnchanged": true,
+  "sharedCheckoutStatusAndFileHashesUnchanged": true,
+  "independentBareCloneFsck": "PASS",
+  "productionMutation": false
+}

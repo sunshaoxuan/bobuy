@@ -1,0 +1,11 @@
+{
+  "phase": "WRITES_OPEN",
+  "at": "2026-11-11T23:38:15Z",
+  "source": "606deb375b125d41e451dad555bb306f70f0fae3",
+  "seconds": 250.38,
+  "schema": 33,
+  "sqlMigration": false,
+  "oldContentUnchanged": true,
+  "browser": "PENDING",
+  "databaseRestoreForbidden": true
+}

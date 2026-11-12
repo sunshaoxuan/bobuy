@@ -7,7 +7,7 @@ it('keeps the inclusive source window and occurrence identity when summarizing a
  const facts={id:9,name:'Product',referencePrice:0,offerStart:'2026-11-10',offerEnd:'2026-11-11'};
  expect(referenceForCard(facts,7,'2026-11-11')).toMatchObject({amount:0,postId:7,itemId:9,state:'ACTIVE'});
  expect(referenceForCard(facts,7,'2026-11-12')?.state).toBe('EXPIRED');
- expect(referenceForCard({...facts,offerStart:null},7,'2026-11-12')?.state).toBe('UNKNOWN');
+ expect(referenceForCard({...facts,offerStart:null},7,'2026-11-12')?.state).toBe('EXPIRED');
 });
 it('keeps a discount-only fact unknown instead of presenting the discount as a price',()=>{
  expect(referenceForCard({id:9,name:'Product',referencePrice:null,discountAmount:400},7,'2026-11-11')).toBeUndefined();

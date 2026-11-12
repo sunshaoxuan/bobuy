@@ -1,0 +1,146 @@
+{
+  "boxes": {
+    "address": {
+      "bottom": 1235.65625,
+      "height": 776.1875,
+      "width": 313,
+      "x": 16,
+      "y": 459.46875
+    },
+    "basic": {
+      "bottom": 87.53125,
+      "height": 429.1875,
+      "width": 313,
+      "x": 16,
+      "y": -341.65625
+    },
+    "save": {
+      "bottom": 1934.84375,
+      "height": 48,
+      "width": 313,
+      "x": 16,
+      "y": 1886.84375
+    },
+    "social": {
+      "bottom": 1870.84375,
+      "height": 619.1875,
+      "width": 313,
+      "x": 16,
+      "y": 1251.65625
+    },
+    "verification": {
+      "bottom": 443.46875,
+      "height": 339.9375,
+      "width": 313,
+      "x": 16,
+      "y": 103.53125
+    }
+  },
+  "controls": [
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "Aiko Tan",
+      "labelRect": {
+        "bottom": 687.65625,
+        "height": 44,
+        "left": 33,
+        "right": 312,
+        "top": 643.65625,
+        "width": 279,
+        "x": 33,
+        "y": 643.65625
+      },
+      "rect": {
+        "bottom": 687.65625,
+        "height": 44,
+        "left": 33,
+        "right": 312,
+        "top": 643.65625,
+        "width": 279,
+        "x": 33,
+        "y": 643.65625
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "",
+      "labelRect": {
+        "bottom": 362.46875,
+        "height": 44,
+        "left": 33,
+        "right": 312,
+        "top": 318.46875,
+        "width": 279,
+        "x": 33,
+        "y": 318.46875
+      },
+      "rect": {
+        "bottom": 362.46875,
+        "height": 44,
+        "left": 33,
+        "right": 312,
+        "top": 318.46875,
+        "width": 279,
+        "x": 33,
+        "y": 318.46875
+      },
+      "tag": "INPUT"
+    },
+    {
+      "color": "rgb(255, 255, 255)",
+      "label": "Verify email",
+      "labelRect": {
+        "bottom": 411.46875,
+        "height": 22,
+        "left": 48,
+        "right": 119.671875,
+        "top": 389.46875,
+        "width": 71.671875,
+        "x": 48,
+        "y": 389.46875
+      },
+      "rect": {
+        "bottom": 422.46875,
+        "height": 44,
+        "left": 33,
+        "right": 134.671875,
+        "top": 378.46875,
+        "width": 101.671875,
+        "x": 33,
+        "y": 378.46875
+      },
+      "tag": "BUTTON"
+    },
+    {
+      "color": "rgba(0, 0, 0, 0.88)",
+      "label": "Resend code",
+      "labelRect": {
+        "bottom": 411.46875,
+        "height": 22,
+        "left": 159.671875,
+        "right": 238.46875,
+        "top": 389.46875,
+        "width": 78.796875,
+        "x": 159.671875,
+        "y": 389.46875
+      },
+      "rect": {
+        "bottom": 422.46875,
+        "height": 44,
+        "left": 144.671875,
+        "right": 253.46875,
+        "top": 378.46875,
+        "width": 108.796875,
+        "x": 144.671875,
+        "y": 378.46875
+      },
+      "tag": "BUTTON"
+    }
+  ],
+  "height": 800,
+  "nestedForms": 0,
+  "overflow": false,
+  "scrollY": 657,
+  "width": 360
+}

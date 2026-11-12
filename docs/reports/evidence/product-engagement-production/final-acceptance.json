@@ -1,0 +1,31 @@
+{
+  "acceptedAt": "2026-11-12T00:22:04.208410+00:00",
+  "result": "PASS",
+  "operationRelease": "20261112.5",
+  "currentCore": "bobuy/core:20261112.reference-sort",
+  "currentFrontend": "bobuy/frontend:20261112.reference-display.4",
+  "coreSource": "a14f0320aeed077fbf449c95f2b236f4dd1d3393",
+  "frontendSource": "deac521fdb5c10e4accc2d4cc368fb494ab61801",
+  "currentInternalHealth": {
+    "status": "success",
+    "data": "ok",
+    "meta": null
+  },
+  "publicNonBrowserHealthProbe": "HTTP403; public access boundary unchanged; real browser product APIs passed",
+  "temporaryProductionFixturesRemoved": true,
+  "dataRestoredOverLiveDatabase": false,
+  "visual": "PASS",
+  "pixelChecks": 29,
+  "displayedPriceOrderChecks": 12,
+  "loadedAssetChecks": 18,
+  "duplicateCore6Activation": "CANCELLED_VERIFIED_EQUIVALENT_REPAIR_ALREADY_LIVE",
+  "evidence": {
+    "final-production-binding.json": "35aa367925d7afcc56483fb3a8ae241250af32008f12eb1118d4eb2f023b2f17",
+    "browser.json": "a80e5e5dab8a1d76a7b277cf5f1af41dc75e5a01b9310718653b054afe0edff1",
+    "real-pages.json": "5bf7d9323a9a9fc1d61d9a63d2b8197889fc37a9d5f274ecc02af7a6bfb00e31",
+    "pixels.json": "4eb14fc20c2d39666205d9cfb7457357fe03e778f4be5b9aa17f3df1b618d84e",
+    "final-data.json": "2d632b1710e4666683160a12888096cfd6a6233e0b2f7aae8583509fa4fb639e",
+    "VISUAL-REVIEW.md": "8bc8ad67c2e12b7cf137805e8c177b043f70734c839dfc0c21d2b366a62d6548",
+    "codeql-current.json": "9d2bb347e9e29d9e5c30c378d5750a84ea9cb0e228e4da4785a4389f805f18f2"
+  }
+}

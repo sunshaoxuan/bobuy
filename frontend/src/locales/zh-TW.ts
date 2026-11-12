@@ -1,6 +1,22 @@
 import type { Dictionary } from './types';
 
 const messages: Dictionary = {
+ "review.text_scroll": "評價較長時，可在輸入框內上下捲動查看",
+ "review.history_scroll": "評價列表較長時，可在視窗內上下捲動查看",
+
+ "review.change_to_save": "修改星級或評價後即可儲存",
+ "sort.label": "商品排序",
+ "sort.default": "預設排序",
+ "sort.price-asc": "價格由低到高（同幣別）",
+ "sort.price-desc": "價格由高到低（同幣別）",
+ "sort.rating-asc": "評分由低到高",
+ "sort.rating-desc": "評分由高到低",
+ "sort.heat-desc": "人氣由高到低",
+ "sort.heat-asc": "人氣由低到高",
+ "heat.label": "熱度",
+ "heat.unavailable": "暫不可用",
+ "heat.error": "熱度讀取或計數失敗，請重新整理",
+
   "rec.item.current_spec": "目前商品檔案規格",
   "rec.item.reloaded_review": "已顯示最新商品檔案，原報價及來源條件已保留。請對照目前規格重新核對，再次審核後提交。",
   "rec.item.pending": "待審核",
@@ -112,7 +128,7 @@ const messages: Dictionary = {
   "profile.save": "儲存資料",
   "profile.saved": "資料已儲存",
   "profile.required": "請填寫有效內容",
-    "maintenance.title": "好物正在更新",
+    "maintenance.title": "網站正在更新",
     "maintenance.description": "我們正在更新頁面，服務暫時無法使用。請稍後再試，你的購物車內容會保留。",
     "maintenance.retry": "重新載入",
     "browse.current": "目前推薦",
