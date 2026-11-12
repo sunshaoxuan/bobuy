@@ -1,0 +1,166 @@
+{
+  "result": "PASS",
+  "source": "2124f4d release image / real isolated PostgreSQL V35 / production frontend build",
+  "saveReload": true,
+  "scopedProduct": true,
+  "permanentNoEnd": true,
+  "desktop": [
+    1440,
+    1080
+  ],
+  "mobile": [
+    360,
+    800
+  ],
+  "errors": [
+    "403 http://127.0.0.1:15174/api/ai/costco-onboarding",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "403 http://127.0.0.1:15174/api/ai/costco-onboarding/status",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+    "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+    "403 http://127.0.0.1:15174/api/ai/costco-onboarding/status",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "403 http://127.0.0.1:15174/api/ai/costco-onboarding",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+    "Failed to load resource: net::ERR_NAME_NOT_RESOLVED"
+  ],
+  "controls": [
+    {
+      "text": "Change type",
+      "box": [
+        24,
+        103.09375,
+        312,
+        32
+      ]
+    },
+    {
+      "text": "Change type",
+      "box": [
+        36,
+        104.09375,
+        288,
+        30
+      ]
+    },
+    {
+      "text": "Price channel",
+      "box": [
+        24,
+        173.1875,
+        312,
+        32
+      ]
+    },
+    {
+      "text": "Price channel",
+      "box": [
+        36,
+        174.1875,
+        288,
+        30
+      ]
+    },
+    {
+      "text": "Currency",
+      "box": [
+        24,
+        243.28125,
+        312,
+        32
+      ]
+    },
+    {
+      "text": "Currency",
+      "box": [
+        36,
+        244.28125,
+        288,
+        30
+      ]
+    },
+    {
+      "text": "Start time (JST, inclusive)",
+      "box": [
+        24,
+        313.375,
+        312,
+        44
+      ]
+    },
+    {
+      "text": "Price change reason (required)",
+      "box": [
+        24,
+        395.46875,
+        312,
+        76
+      ]
+    },
+    {
+      "text": "Select products, multiple allowed",
+      "box": [
+        24,
+        509.5625,
+        312,
+        44
+      ]
+    },
+    {
+      "text": "Select products, multiple allowed",
+      "box": [
+        116.046875,
+        522.0625,
+        4.09375,
+        19
+      ]
+    },
+    {
+      "text": "Adjusted price: Matcha Kit",
+      "box": [
+        136.671875,
+        641.5625,
+        171.765625,
+        30
+      ]
+    },
+    {
+      "text": "Prior regular price: Matcha Kit",
+      "box": [
+        342.4375,
+        641.5625,
+        171.765625,
+        30
+      ]
+    },
+    {
+      "text": "Price unit: Matcha Kit",
+      "box": [
+        547.203125,
+        640.5625,
+        160.796875,
+        44
+      ]
+    },
+    {
+      "text": "Save draft",
+      "box": [
+        24,
+        717.5625,
+        93.796875,
+        44
+      ]
+    },
+    {
+      "text": "Close",
+      "box": [
+        125.796875,
+        717.5625,
+        65.53125,
+        44
+      ]
+    }
+  ]
+}

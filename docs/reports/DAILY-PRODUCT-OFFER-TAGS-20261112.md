@@ -10,6 +10,12 @@
 
 重跑说明：operator的UPDATES去除无共享实体依赖的gateway，保留切换期间停启旧网关；只重跑ReleaseGuardsTest的候选完整性、拒绝和恢复阶段三个用例，原真实PG指纹测试与publisher guard九项继续复用。前端本批三个组件13项通过，耗时10.59秒。
 
+发布首次尝试在14:20:57UTC进入FREEZING，立即curl未取得503，14:20:59UTC恢复原配置并记录ROLLED_BACK_BEFORE_OPEN/restored=false。应用尚未停止，未执行生产迁移。该证据只使入口等待检查失效：operator改为最多10秒等待真实503，并新增一个成功等待/超时拒绝定向用例；其余业务、UI、CodeQL和PG证据复用。重启发布前用rearm核对原运行状态、保护状态、compose/nginx摘要、V34及旧调价零行，保存首次失败回执后才恢复PREPARED。禁止无条件重跑prepare或重置状态。
+
+第二次尝试的具体失败为operator第118行新Core健康后的迁移指纹比较；14:27:37UTC已按验证过的停写备份恢复V34及原应用，入口恢复。仅调查这一失败：在同节点隔离恢复库比较未ANALYZE/ANALYZE后的V35单头与明细，检查执行计划顺序是否影响新identity分配；只读取本次停写dump，不再停止生产或重跑应用全量。预计1分钟，先取得具体差异再修复比较或迁移。
+
+隔离复现PASS：ANALYZE前后两表raw指纹均不同，但364条单头的非生成字段和364条明细按稳定来源/单据编号关联的完整业务内容相同，见fingerprint-diagnosis.json。修复限于operator指纹：仅新recommendation来源单据去除新生成ID，用唯一source_key/document_number代替明细父键；原有单据及其他表维持完整ID比较。金额、日期、原因、审核时间、product_id、reference_item_id仍逐字段比较。失效项为该指纹函数，最小重跑为原PG指纹用例和新增PG新ID等价/金额变化/错误父单拒绝用例；业务690/27、UI13、CodeQL和迁移SQL继续复用。再次切换先校验原镜像/配置/V34健康，保留第二次备份与回执，并创建全新的停写备份，禁止用之前已恢复写入后的旧备份进行下一次恢复。
+
 ## 主目标与用户要求
 每天日本时间 01:00 轮询全部商品，为生效中的优惠添加“优惠”标记，清除已过期优惠对应的标记。
 

@@ -1,0 +1,41 @@
+{
+  "result": "PASS",
+  "runtime": "Real migrated PostgreSQL task database with API-created synthetic documents",
+  "sqlSha256": "0724fc555e609713788e8e3392de02d810aa753f99528944fa6b72d6badcabdb",
+  "preview": {
+    "at": "2026-11-12T12:58:42.872245+00:00",
+    "day": "2026-11-12",
+    "added": 1,
+    "removed": 0,
+    "scanned": 2,
+    "disabled": 0,
+    "timezone": "Asia/Tokyo",
+    "uncertain": 0,
+    "unchanged": 1,
+    "definitionsCreated": 1
+  },
+  "first": {
+    "at": "2026-11-12T12:58:43.230562+00:00",
+    "day": "2026-11-12",
+    "added": 1,
+    "removed": 0,
+    "scanned": 2,
+    "disabled": 0,
+    "timezone": "Asia/Tokyo",
+    "uncertain": 0,
+    "unchanged": 1,
+    "definitionsCreated": 1
+  },
+  "repeat": {
+    "at": "2026-11-12T12:58:43.559807+00:00",
+    "day": "2026-11-12",
+    "added": 0,
+    "removed": 0,
+    "scanned": 2,
+    "disabled": 0,
+    "timezone": "Asia/Tokyo",
+    "uncertain": 0,
+    "unchanged": 2,
+    "definitionsCreated": 0
+  }
+}

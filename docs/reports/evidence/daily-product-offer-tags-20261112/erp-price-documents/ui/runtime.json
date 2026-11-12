@@ -1,0 +1,7 @@
+{
+  "environment": "existing local PostgreSQL / isolated final task database",
+  "database": "bobuy_price_documents_final_ui_20261112",
+  "container": "bobuy-price-documents-core-final-20261112",
+  "jarSha256": "08bbad7fa72cd5c408a99a9020d855d76c1cbd6275f8ee18e479a071f5fd4369",
+  "migrationSha256": "5e02d6e3385b863d51b4529f6542e04cb48cc55e7f4d487d8baaeb5b11c19304"
+}

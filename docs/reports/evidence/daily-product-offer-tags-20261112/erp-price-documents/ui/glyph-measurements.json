@@ -1,0 +1,698 @@
+{
+  "method": "Final browser screenshot pixels, text-span ROI only; DOM boxes locate the ROI and control background, never substitute glyph bounds. Fixed visible contrast threshold 8/255. Plain CSS border interior; glyph rows avoid rounded corners.",
+  "controls": [
+    {
+      "text": "新增调价单",
+      "alignment": "center",
+      "screenshot": "scoped-desktop.png",
+      "backgroundInner": [
+        1243.15625,
+        160.09375,
+        1343.15625,
+        194.09375
+      ],
+      "inkBounds": [
+        1258,
+        170,
+        1328,
+        184
+      ],
+      "margins": [
+        14.84375,
+        9.90625,
+        15.15625,
+        10.09375
+      ],
+      "centerError": [
+        0.15625,
+        0.09375
+      ],
+      "centerLimit": 1.4000000000000001,
+      "hotArea": [
+        102,
+        36
+      ],
+      "result": "PASS"
+    },
+    {
+      "text": "刷 新",
+      "alignment": "center",
+      "screenshot": "scoped-desktop.png",
+      "backgroundInner": [
+        1353.15625,
+        160.09375,
+        1415.0,
+        194.09375
+      ],
+      "inkBounds": [
+        1368,
+        170,
+        1400,
+        184
+      ],
+      "margins": [
+        14.84375,
+        9.90625,
+        15.0,
+        10.09375
+      ],
+      "centerError": [
+        0.078125,
+        0.09375
+      ],
+      "centerLimit": 1.4000000000000001,
+      "hotArea": [
+        63.84375,
+        36
+      ],
+      "result": "PASS"
+    },
+    {
+      "text": "草稿／待复核",
+      "alignment": "center",
+      "screenshot": "scoped-desktop.png",
+      "backgroundInner": [
+        1155.484375,
+        390.09375,
+        1241.484375,
+        410.09375
+      ],
+      "inkBounds": [
+        1162,
+        395,
+        1235,
+        406
+      ],
+      "margins": [
+        6.515625,
+        4.90625,
+        6.484375,
+        4.09375
+      ],
+      "centerError": [
+        0.015625,
+        0.40625
+      ],
+      "centerLimit": 1.1,
+      "hotArea": [
+        88,
+        22
+      ],
+      "result": "PASS"
+    },
+    {
+      "text": "编 辑",
+      "alignment": "center",
+      "screenshot": "scoped-desktop.png",
+      "backgroundInner": [
+        1283.484375,
+        339.09375,
+        1345.328125,
+        373.09375
+      ],
+      "inkBounds": [
+        1298,
+        349,
+        1331,
+        363
+      ],
+      "margins": [
+        14.515625,
+        9.90625,
+        14.328125,
+        10.09375
+      ],
+      "centerError": [
+        0.09375,
+        0.09375
+      ],
+      "centerLimit": 1.4000000000000001,
+      "hotArea": [
+        63.84375,
+        36
+      ],
+      "result": "PASS"
+    },
+    {
+      "text": "审核生效",
+      "alignment": "center",
+      "screenshot": "scoped-desktop.png",
+      "backgroundInner": [
+        1283.484375,
+        383.09375,
+        1369.484375,
+        417.09375
+      ],
+      "inkBounds": [
+        1299,
+        393,
+        1355,
+        407
+      ],
+      "margins": [
+        15.515625,
+        9.90625,
+        14.484375,
+        10.09375
+      ],
+      "centerError": [
+        0.515625,
+        0.09375
+      ],
+      "centerLimit": 1.4000000000000001,
+      "hotArea": [
+        88,
+        36
+      ],
+      "result": "PASS"
+    },
+    {
+      "text": "撤 销",
+      "alignment": "center",
+      "screenshot": "scoped-desktop.png",
+      "backgroundInner": [
+        1283.484375,
+        427.09375,
+        1345.328125,
+        461.09375
+      ],
+      "inkBounds": [
+        1298,
+        437,
+        1330,
+        451
+      ],
+      "margins": [
+        14.515625,
+        9.90625,
+        15.328125,
+        10.09375
+      ],
+      "centerError": [
+        0.40625,
+        0.09375
+      ],
+      "centerLimit": 1.4000000000000001,
+      "hotArea": [
+        63.84375,
+        36
+      ],
+      "result": "PASS"
+    },
+    {
+      "text": "Close",
+      "alignment": "center",
+      "screenshot": "scoped-desktop-form.png",
+      "backgroundInner": [
+        164.0,
+        16.0,
+        188.0,
+        40.0
+      ],
+      "inkBounds": [
+        170,
+        22,
+        182,
+        34
+      ],
+      "margins": [
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "centerLimit": 1.2000000000000002,
+      "hotArea": [
+        24,
+        24
+      ],
+      "result": "PASS"
+    },
+    {
+      "text": "Close",
+      "alignment": "center",
+      "screenshot": "scoped-desktop-form.png",
+      "backgroundInner": [
+        464.0,
+        16.0,
+        488.0,
+        40.0
+      ],
+      "inkBounds": [
+        469,
+        22,
+        482,
+        35
+      ],
+      "margins": [
+        5.0,
+        6.0,
+        6.0,
+        5.0
+      ],
+      "centerError": [
+        0.5,
+        0.5
+      ],
+      "centerLimit": 1.3,
+      "hotArea": [
+        24,
+        24
+      ],
+      "result": "PASS"
+    },
+    {
+      "text": "促销优惠",
+      "alignment": "left",
+      "screenshot": "scoped-desktop-form.png",
+      "backgroundInner": [
+        465.0,
+        104.09375,
+        931.0,
+        134.09375
+      ],
+      "inkBounds": [
+        476,
+        112,
+        532,
+        126
+      ],
+      "margins": [
+        11.0,
+        7.90625,
+        399.0,
+        8.09375
+      ],
+      "centerError": [
+        0,
+        0.09375
+      ],
+      "centerLimit": 1.4000000000000001,
+      "hotArea": [
+        468,
+        32
+      ],
+      "result": "PASS"
+    },
+    {
+      "text": "网站销售价",
+      "alignment": "left",
+      "screenshot": "scoped-desktop-form.png",
+      "backgroundInner": [
+        949.0,
+        104.09375,
+        1415.0,
+        134.09375
+      ],
+      "inkBounds": [
+        960,
+        112,
+        1030,
+        126
+      ],
+      "margins": [
+        11.0,
+        7.90625,
+        385.0,
+        8.09375
+      ],
+      "centerError": [
+        0,
+        0.09375
+      ],
+      "centerLimit": 1.4000000000000001,
+      "hotArea": [
+        468,
+        32
+      ],
+      "result": "PASS"
+    },
+    {
+      "text": "JPY",
+      "alignment": "left",
+      "screenshot": "scoped-desktop-form.png",
+      "backgroundInner": [
+        465.0,
+        175.1875,
+        931.0,
+        205.1875
+      ],
+      "inkBounds": [
+        476,
+        185,
+        497,
+        195
+      ],
+      "margins": [
+        11.0,
+        9.8125,
+        434.0,
+        10.1875
+      ],
+      "centerError": [
+        0,
+        0.1875
+      ],
+      "centerLimit": 1.0,
+      "hotArea": [
+        468,
+        32
+      ],
+      "result": "PASS"
+    },
+    {
+      "text": "抹茶套装",
+      "alignment": "left",
+      "screenshot": "scoped-desktop-form.png",
+      "backgroundInner": [
+        465.0,
+        432.46875,
+        1415.0,
+        462.46875
+      ],
+      "inkBounds": [
+        477,
+        437,
+        533,
+        457
+      ],
+      "margins": [
+        12.0,
+        4.53125,
+        882.0,
+        5.46875
+      ],
+      "centerError": [
+        0,
+        0.46875
+      ],
+      "centerLimit": 2,
+      "hotArea": [
+        952,
+        32
+      ],
+      "result": "PASS"
+    },
+    {
+      "text": "保存草稿",
+      "alignment": "center",
+      "screenshot": "scoped-desktop-form.png",
+      "backgroundInner": [
+        465.0,
+        616.46875,
+        551.0,
+        650.46875
+      ],
+      "inkBounds": [
+        480,
+        626,
+        536,
+        640
+      ],
+      "margins": [
+        15.0,
+        9.53125,
+        15.0,
+        10.46875
+      ],
+      "centerError": [
+        0.0,
+        0.46875
+      ],
+      "centerLimit": 1.4000000000000001,
+      "hotArea": [
+        88,
+        36
+      ],
+      "result": "PASS"
+    },
+    {
+      "text": "关 闭",
+      "alignment": "center",
+      "screenshot": "scoped-desktop-form.png",
+      "backgroundInner": [
+        561.0,
+        616.46875,
+        622.84375,
+        650.46875
+      ],
+      "inkBounds": [
+        576,
+        626,
+        607,
+        640
+      ],
+      "margins": [
+        15.0,
+        9.53125,
+        15.84375,
+        10.46875
+      ],
+      "centerError": [
+        0.421875,
+        0.46875
+      ],
+      "centerLimit": 1.4000000000000001,
+      "hotArea": [
+        63.84375,
+        36
+      ],
+      "result": "PASS"
+    },
+    {
+      "text": "Close",
+      "alignment": "center",
+      "screenshot": "scoped-mobile-form.png",
+      "backgroundInner": [
+        24.0,
+        16.0,
+        48.0,
+        40.0
+      ],
+      "inkBounds": [
+        29,
+        22,
+        42,
+        35
+      ],
+      "margins": [
+        5.0,
+        6.0,
+        6.0,
+        5.0
+      ],
+      "centerError": [
+        0.5,
+        0.5
+      ],
+      "centerLimit": 1.3,
+      "hotArea": [
+        24,
+        24
+      ],
+      "result": "PASS"
+    },
+    {
+      "text": "促销优惠",
+      "alignment": "left",
+      "screenshot": "scoped-mobile-form.png",
+      "backgroundInner": [
+        25.0,
+        104.09375,
+        335.0,
+        146.09375
+      ],
+      "inkBounds": [
+        36,
+        115,
+        92,
+        132
+      ],
+      "margins": [
+        11.0,
+        10.90625,
+        243.0,
+        14.09375
+      ],
+      "centerError": [
+        0,
+        1.59375
+      ],
+      "centerLimit": 1.7000000000000002,
+      "hotArea": [
+        312,
+        44
+      ],
+      "result": "PASS"
+    },
+    {
+      "text": "网站销售价",
+      "alignment": "left",
+      "screenshot": "scoped-mobile-form.png",
+      "backgroundInner": [
+        25.0,
+        174.1875,
+        335.0,
+        216.1875
+      ],
+      "inkBounds": [
+        36,
+        188,
+        106,
+        202
+      ],
+      "margins": [
+        11.0,
+        13.8125,
+        229.0,
+        14.1875
+      ],
+      "centerError": [
+        0,
+        0.1875
+      ],
+      "centerLimit": 1.4000000000000001,
+      "hotArea": [
+        312,
+        44
+      ],
+      "result": "PASS"
+    },
+    {
+      "text": "JPY",
+      "alignment": "left",
+      "screenshot": "scoped-mobile-form.png",
+      "backgroundInner": [
+        25.0,
+        244.28125,
+        335.0,
+        286.28125
+      ],
+      "inkBounds": [
+        36,
+        260,
+        57,
+        270
+      ],
+      "margins": [
+        11.0,
+        15.71875,
+        278.0,
+        16.28125
+      ],
+      "centerError": [
+        0,
+        0.28125
+      ],
+      "centerLimit": 1.0,
+      "hotArea": [
+        312,
+        44
+      ],
+      "result": "PASS"
+    },
+    {
+      "text": "抹茶套装",
+      "alignment": "left",
+      "screenshot": "scoped-mobile-form.png",
+      "backgroundInner": [
+        25.0,
+        592.65625,
+        335.0,
+        634.65625
+      ],
+      "inkBounds": [
+        37,
+        603,
+        93,
+        623
+      ],
+      "margins": [
+        12.0,
+        10.34375,
+        242.0,
+        11.65625
+      ],
+      "centerError": [
+        0,
+        0.65625
+      ],
+      "centerLimit": 2,
+      "hotArea": [
+        312,
+        44
+      ],
+      "result": "PASS"
+    },
+    {
+      "text": "保存草稿",
+      "alignment": "center",
+      "screenshot": "scoped-mobile-actions.png",
+      "backgroundInner": [
+        25.0,
+        756.65625,
+        111.0,
+        798.65625
+      ],
+      "inkBounds": [
+        40,
+        771,
+        96,
+        785
+      ],
+      "margins": [
+        15.0,
+        14.34375,
+        15.0,
+        13.65625
+      ],
+      "centerError": [
+        0.0,
+        0.34375
+      ],
+      "centerLimit": 1.4000000000000001,
+      "hotArea": [
+        88,
+        44
+      ],
+      "result": "PASS"
+    },
+    {
+      "text": "关 闭",
+      "alignment": "center",
+      "screenshot": "scoped-mobile-actions.png",
+      "backgroundInner": [
+        121.0,
+        756.65625,
+        182.84375,
+        798.65625
+      ],
+      "inkBounds": [
+        136,
+        771,
+        167,
+        785
+      ],
+      "margins": [
+        15.0,
+        14.34375,
+        15.84375,
+        13.65625
+      ],
+      "centerError": [
+        0.421875,
+        0.34375
+      ],
+      "centerLimit": 1.4000000000000001,
+      "hotArea": [
+        63.84375,
+        44
+      ],
+      "result": "PASS"
+    }
+  ]
+}

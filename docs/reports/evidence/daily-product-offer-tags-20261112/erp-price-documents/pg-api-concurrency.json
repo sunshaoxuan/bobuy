@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "runtime": "Final core JAR and production frontend build, existing PostgreSQL isolated task database",
+  "concurrentOverlappingApprovals": [
+    200,
+    400
+  ],
+  "approvedDocuments": 1,
+  "rejectedBatchHasNoPartialRows": true,
+  "childEditInvalidatesStaleHeader": true
+}

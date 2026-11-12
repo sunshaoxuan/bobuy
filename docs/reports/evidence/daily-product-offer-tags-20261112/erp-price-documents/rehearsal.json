@@ -1,0 +1,40 @@
+{
+  "result": "PASS",
+  "at": "2026-11-12T13:52:29Z",
+  "migrationSha256": "9ff573d09b9ea5864a288b41d8e23b060e7befbacb4d6985f1556ad23556f531",
+  "sourceRecords": 364,
+  "documents": [
+    {
+      "type": "PERMANENT",
+      "status": "DRAFT",
+      "count": 10
+    },
+    {
+      "type": "PROMOTION",
+      "status": "APPROVED",
+      "count": 124
+    },
+    {
+      "type": "PROMOTION",
+      "status": "DRAFT",
+      "count": 189
+    },
+    {
+      "type": "TEMPORARY",
+      "status": "DRAFT",
+      "count": 41
+    }
+  ],
+  "lineCount": 364,
+  "unresolvedProducts": 15,
+  "sourceSnapshotsUnchanged": true,
+  "preservedBusinessTables": {
+    "bb_product": "405:bea37c3da9dd68ecf6acd9d85b5b8a9f",
+    "bb_order_header": "0:d41d8cd98f00b204e9800998ecf8427e",
+    "bb_product_marker_set": "159:e6e516ac09a3ce25bfcbc50a1bc748fa",
+    "bb_reference_quote_revision": "450:41dd6660fd1ec95ffbdec8cc04da2971"
+  },
+  "repeatMigration": "PASS",
+  "dumpSha256": "bde2ea9d1741d8a4a0cb7a092d45307caabdc90f9f169782ce24ef99ef2d4c6d",
+  "productionDatabaseModified": false
+}

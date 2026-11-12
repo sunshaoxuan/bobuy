@@ -1,0 +1,18 @@
+{
+  "source": "2124f4df66cdce193373e94f49e0d7955eb2ac75",
+  "result": "PASS",
+  "codeql": "success",
+  "codeqlRun": "https://github.com/sunshaoxuan/bobuy/actions/runs/43234403658",
+  "backendFailures": 0,
+  "frontendFailures": 0,
+  "migration": "PASS",
+  "ui": "PASS",
+  "reusedBackendTests": 690,
+  "latestSourceFocusedTests": 27,
+  "frontendScopedTests": 13,
+  "pgJobTests": 15,
+  "latestMigrationTests": 1,
+  "releaseGuards": "3 updated candidate guards plus unchanged PG fingerprint and 9 publisher guards",
+  "evidence": "DAILY-PRODUCT-OFFER-TAGS-20261112.md; rehearsal.json; ui/resumed-result.json; ui/glyph-measurements.json; ui/scoped-acceptance.md",
+  "commonJarSha256": "472017a47ed227a07e92d9d9609d12b85574870d5fb207099c314295570a80fe"
+}

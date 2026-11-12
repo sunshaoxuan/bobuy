@@ -1,0 +1,46 @@
+{
+  "runtime": {
+    "core-service": {
+      "image": "sha256:05cd202ae182bf3995622e85f255ee2daf2261444605fff7d7771e1e40d599d3",
+      "tag": "bobuy/core:20261112.geographic_master.1",
+      "revision": "b3caeec8c0b04a3144339f8e84ab334b53f81aa1",
+      "health": "healthy"
+    },
+    "auth-service": {
+      "image": "sha256:6863ae4b03b28b8fbd8666fb15b1599cca6a8b9911bbbd1cf555d9d4b8a3eabb",
+      "tag": "bobuy/auth:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "health": "healthy"
+    },
+    "im-service": {
+      "image": "sha256:3c286b1672db0eca6df4803085d7f5ba9cc475c4542a4f93302ee5c74277369a",
+      "tag": "bobuy/im:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "health": "healthy"
+    },
+    "ai-service": {
+      "image": "sha256:e17c56f30483def52fb4c3e58d7ef7fad8dced0f89ff23109ab380cdca32fa48",
+      "tag": "bobuy/ai:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "health": "healthy"
+    },
+    "gateway-service": {
+      "image": "sha256:71354226154b2ca27ff7ddaaf90923f0954db9cabac363564447322030d21dcd",
+      "tag": "bobuy/router:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "health": "healthy"
+    },
+    "frontend": {
+      "image": "sha256:6e1a97b795e86b15b702d72bfa716492cfc26f0fb6edce1ccdea4222818f7a2f",
+      "tag": "bobuy/frontend:20261112.home-brand.1",
+      "revision": "2dbe8d37f2aafe2bd3e91fbf35ef77522c9ebfc5",
+      "health": "running"
+    }
+  },
+  "diskFree": 7619010560,
+  "databaseBytes": "94836415",
+  "version": "34",
+  "timer": "disabled",
+  "composeSha": "fe2ec781aa1264d567a23f33b73db3c301a5e287ff6cc09c7202c4093b5dc069",
+  "nginxSha": "a1834c3883668a0523a420eaf9ef5354215d3f3c6564f8862d75715bed83c7d9"
+}
