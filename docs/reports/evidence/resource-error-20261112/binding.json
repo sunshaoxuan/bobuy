@@ -1,0 +1,8 @@
+{
+  "source": "5d32cd1963ba9373b67fc93f6a1ed50f019c15fe",
+  "configSha256": "b099bf59589e5b297699324d265209a112ad5b3865c51d1f174c12a427e6b391",
+  "operatorSha256": "136001d65483dcefe539d694125946cb63d81332c3ed61b9b2880bd53f4d87aa",
+  "baseConfigCanonicalSha256": "a5a7bc6a3a796cc4b3ee261287a08a877a680934d53fe85a0a240ea385d3f9c5",
+  "sqlMigration": false,
+  "imagesChanged": false
+}

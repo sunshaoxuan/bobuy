@@ -1,0 +1,15 @@
+{
+  "scope": "exact task artifacts only",
+  "result": "PASS",
+  "removed": [
+    "inspect-server.py",
+    "prepare-evidence.py",
+    "reconcile-runtime.py",
+    "release-client.py",
+    "runtime-probe.py",
+    "runtime-probe.json",
+    "runtime-after.json",
+    "bobbuy-gateway/target",
+    "docs/reports/evidence/resource-error-20261112/desktop-requests.json"
+  ]
+}

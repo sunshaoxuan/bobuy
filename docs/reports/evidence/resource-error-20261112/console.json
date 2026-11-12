@@ -1,0 +1,20 @@
+[
+  {
+    "level": "warn",
+    "message": "@ali/tongyi-next-theme: antd 未安装，Antd 主题配置将不可用",
+    "timestamp": "2026-11-12T01:53:25.277Z",
+    "url": "chrome-extension://hbfhdcdeikaehendoojplfpjcfifnlme/content-scripts/content.js"
+  },
+  {
+    "level": "warn",
+    "message": "@ali/tongyi-next-theme: antd 未安装，Antd 主题配置将不可用",
+    "timestamp": "2026-11-12T01:53:25.277Z",
+    "url": "chrome-extension://hbfhdcdeikaehendoojplfpjcfifnlme/content-scripts/content.js"
+  },
+  {
+    "level": "warn",
+    "message": "@ali/tongyi-next-theme: @ant-design/cssinjs 未安装，Antd 主题配置将不可用",
+    "timestamp": "2026-11-12T01:53:25.277Z",
+    "url": "chrome-extension://hbfhdcdeikaehendoojplfpjcfifnlme/content-scripts/content.js"
+  }
+]

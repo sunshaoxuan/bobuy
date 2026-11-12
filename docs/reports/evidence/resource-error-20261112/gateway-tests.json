@@ -1,0 +1,9 @@
+{
+  "tests": 6,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "command": "mvn -B -pl bobbuy-gateway test",
+  "source": "5d32cd1963ba9373b67fc93f6a1ed50f019c15fe",
+  "sameGatewayInputsAfterMerge": true
+}

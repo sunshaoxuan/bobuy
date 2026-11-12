@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "source": "5d32cd1963ba9373b67fc93f6a1ed50f019c15fe",
+  "network": {
+    "polling-requests.json": {
+      "responses": 18,
+      "spanSeconds": 39.991057999955956
+    },
+    "mobile-requests.json": {
+      "responses": 9,
+      "spanSeconds": 17.671573999978136
+    }
+  },
+  "images": "dimensions verified; actual visual review recorded separately",
+  "scripts": "syntax PASS"
+}

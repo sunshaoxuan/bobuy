@@ -1,0 +1,25 @@
+{
+  "environment": "production https://bobuy.cc/admin/products",
+  "data": "existing production, read only",
+  "desktop": {
+    "width": 2022,
+    "height": 1017,
+    "manualRefresh": true,
+    "bulkDrawer": true,
+    "auditReadOnlyCharacters": 2280025
+  },
+  "mobile": {
+    "width": 390,
+    "height": 844,
+    "scrollWidth": 390,
+    "bulkDrawer": true,
+    "errorToasts": 0
+  },
+  "assets": [
+    "/assets/index-CzOZzb7X.js",
+    "/assets/index-_7elRJ8e.css"
+  ],
+  "network": "polling-requests.json and mobile-requests.json",
+  "console": "console.json",
+  "businessWrites": 0
+}
