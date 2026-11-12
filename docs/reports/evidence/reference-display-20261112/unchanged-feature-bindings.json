@@ -1,0 +1,13 @@
+{
+  "screenshotsSource": "deac521fdb5c10e4accc2d4cc368fb494ab61801",
+  "releaseSource": "a14f0320aeed077fbf449c95f2b236f4dd1d3393",
+  "identicalFeatureBlobs": {
+    "frontend/src/components/consumer-detail.css": "0cfddd833eb8ad47a4c3931e61870715793874f8",
+    "frontend/src/components/ConsumerDetail.tsx": "6f721a741f966fe1626f02621b159b8aed069209",
+    "frontend/src/components/CatalogReferenceHistory.tsx": "206b129d81060cef8f3fead5c06756b44cdaa4a5",
+    "frontend/src/pages/PublicProductCatalog.tsx": "d9e430f7b5c19e31d26993e1c3b368a0f7f17b9e",
+    "frontend/src/pages/PublicRecommendations.tsx": "cdd8d2811056bba5d0ef58c0d2352fc257950beb",
+    "frontend/src/referencePriceDisplay.ts": "6d60af91cb26f7107b85c7153432cfccb539f0b4"
+  },
+  "changedScope": "Core-only sort repair; every frontend source file and the complete production frontend container identity stay unchanged"
+}

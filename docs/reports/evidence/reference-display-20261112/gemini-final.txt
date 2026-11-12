@@ -1,0 +1,31 @@
+### Actual Defects & Missing Evidence
+
+1. **Redundant Currency Notation**: The online annotation specifies `JPY ¥1,828`, combining both ISO code `JPY` and currency symbol `¥`. 
+2. **Unit Notation Inconsistency**: Warehouse unit is labeled `/ 20g×2`, whereas the online annotation uses `/ 20g×2本` (adding the counter suffix `本`).
+3. **Missing Discount Evidence**: No active or expired discount UI is visible; while no strike/red reduction is rendered (satisfying the expired discount rule), historical or expired discount states cannot be verified from these static frames.
+4. **Desktop Modal Viewport Clipping**: In desktop view, the top boundary of the modal card touches/clips against the browser header line without top modal margin.
+
+---
+
+### Region-Specific Findings
+
+#### Header & Pill (`No.77839`)
+* **Hierarchy & Alignment**: Close icon `✕` and `No.77839` pill are grouped together at the top-left.
+* **Spacing**: In mobile, spacing is balanced; on desktop, it sits flush near the top card edge without standard modal container padding.
+
+#### Gallery & Thumbnail Region
+* **Alignment & Spacing**: The main image card has heavy rounded borders (`border-radius: ~24px`) matching the container. Pager controls (`< 1 / 3 >`) are centered beneath the image.
+* **Hierarchy**: Thumbnails sit directly below pagination with active item indication (blue border). In desktop view, the gallery column significantly exceeds the height of the right metadata column.
+
+#### Title & Native Japanese Subtitle
+* **Hierarchy**: Primary title (`Men's Keshimin男士护肤霜`) is prominent and bold.
+* **Requirements Met**: Japanese subtitle `(メンズケシミン シミ対策クリーム)` sits directly below in a single, small, muted line without line breaks or clipping.
+
+#### Price Card (`¥1,498` / Online Annotation)
+* **Hierarchy**: Warehouse price `¥1,498` dominates as the primary visual anchor; reference label sits at top left, `JPY` top right.
+* **Alignment**: Price digits and unit `/ 20g×2` are right-aligned. Online annotation sits below a divider line, left-aligned at smaller font weight.
+* **Contrast**: Muted auxiliary labels (`参考售价`, `JPY`, unit text) exhibit low contrast against the `#F5F5F5` card background (~3:1), which may fail WCAG AA standards.
+
+#### Action Button & Bottom Canvas
+* **Contrast**: The disabled button `+ 暂未开放预订` features very faint grey text against a light grey fill, hindering legibility.
+* **Spacing & Balance**: Both mobile and desktop views leave excessive empty white space below the button. The desktop modal should align action elements to the gallery baseline or compact the modal height.

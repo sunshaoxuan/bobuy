@@ -1,0 +1,27 @@
+{
+  "source": "deac521fdb5c10e4accc2d4cc368fb494ab61801",
+  "result": "PASS",
+  "backend": {
+    "tests": 665,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 24
+  },
+  "backendValidatedSource": "deac521fdb5c10e4accc2d4cc368fb494ab61801",
+  "backendInputsUnchanged": true,
+  "configuredJacoco": "PASS",
+  "frontendUnionTests": 111,
+  "accountCompatibilityTests": 21,
+  "maintenanceCompatibilityTests": 6,
+  "frontendBuild": "PASS",
+  "browser": "PASS",
+  "browserScope": "24 candidate detail states without network fixtures, real public facts; explicit synthetic clock and longest-value states separately recorded",
+  "productionBrowser": "PENDING_UNMOCKED_POST_ACTIVATION",
+  "glyphRegions": 48,
+  "visual": "Main agent accepted feature area after Gemini review, rationale in README.md",
+  "releaseGuardTests": 9,
+  "codeql": "success",
+  "codeqlUrl": "https://github.com/sunshaoxuan/bobuy/actions/runs/43121206595",
+  "schemaOperation": "None; require existing V33 and exact migration history invariance",
+  "preserveBaseline": "Require successful engagement 20261112.5 source606deb3; source diff reviewed to contain only this task's application changes"
+}
