@@ -1,0 +1,17 @@
+{
+  "source": "012013ad330f81f8c293148564860ed31fd7178c",
+  "changedFiles": [
+    "frontend/src/pages/Recommendations.tsx",
+    "frontend/src/recommendations.css",
+    "frontend/src/components/productReviews.css",
+    "frontend/src/public-catalog.css"
+  ],
+  "files": {
+    "frontend/src/pages/Recommendations.tsx": "4ec76fb803524b6562ec9673de6efec96dc745efcde229d23d79c77c3c460b03",
+    "frontend/src/recommendations.css": "ff760b16863f1bd2390c22a11e28f37d8fb9db509f2093a11a2491d8aed673f9",
+    "frontend/src/components/productReviews.css": "5479faf1864ddbcbaa51654824fc73125121c5dc93753cabd1e086c8892f49bf",
+    "frontend/src/public-catalog.css": "3be4b852d095b8a8b1a48b265fd0f5e5a8809814ecfa135334417bf2a1ed064a",
+    "frontend/package-lock.json": "65076ca75b4b9e93f390aae56660356aea71c0317f639037faf24ab44924642e",
+    "frontend/nginx.conf": "c3a97167ab58eddd51c62453001d5fe2a5aabd807521d418feb0e21ff985a959"
+  }
+}

@@ -1,0 +1,4028 @@
+{
+  "result": "FAIL",
+  "controls": 132,
+  "measurements": [
+    {
+      "file": "local-en-US-1440-expanded.json",
+      "label": "Re-read saved source",
+      "background": [
+        318,
+        432.6875,
+        164.171875,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        323,
+        438,
+        477,
+        471
+      ],
+      "centerError": [
+        0.0859375,
+        0.1875
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.3125,
+        4.171875,
+        4.6875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-1440-expanded.json",
+      "label": "Save issue date",
+      "background": [
+        318,
+        876.9375,
+        126.21875,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        334,
+        893,
+        428,
+        903
+      ],
+      "centerError": [
+        0.109375,
+        0.9375
+      ],
+      "budget": 1.0,
+      "margins": [
+        15,
+        15.0625,
+        15.21875,
+        16.9375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-1440-expanded.json",
+      "label": "Use saved values",
+      "background": [
+        452.21875,
+        876.9375,
+        136.296875,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        458,
+        882,
+        583,
+        915
+      ],
+      "centerError": [
+        0.1328125,
+        0.4375
+      ],
+      "budget": 2,
+      "margins": [
+        4.78125,
+        4.0625,
+        4.515625,
+        4.9375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-1440.json",
+      "label": "Back to List",
+      "background": [
+        1130.78125,
+        118,
+        131.859375,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        1136,
+        123,
+        1257,
+        157
+      ],
+      "centerError": [
+        0.2109375,
+        0.0
+      ],
+      "budget": 2,
+      "margins": [
+        4.21875,
+        4,
+        4.640625,
+        4
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-1440.json",
+      "label": "Save Draft",
+      "background": [
+        1270.640625,
+        118,
+        125.359375,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        1276,
+        123,
+        1391,
+        157
+      ],
+      "centerError": [
+        0.1796875,
+        0.0
+      ],
+      "budget": 2,
+      "margins": [
+        4.359375,
+        4,
+        4.0,
+        4
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-1440.json",
+      "label": "Issue date and source",
+      "background": [
+        1175.1875,
+        236,
+        195.8125,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        1181,
+        241,
+        1366,
+        275
+      ],
+      "centerError": [
+        0.40625,
+        0.0
+      ],
+      "budget": 2,
+      "margins": [
+        4.8125,
+        4,
+        4.0,
+        4
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-1440.json",
+      "label": "Japanese source",
+      "background": [
+        301,
+        296,
+        108.546875,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        306,
+        312,
+        404,
+        325
+      ],
+      "centerError": [
+        0.2734375,
+        0.5
+      ],
+      "budget": 1.3,
+      "margins": [
+        4,
+        15,
+        4.546875,
+        14
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-1440.json",
+      "label": "zh-CN",
+      "background": [
+        441.546875,
+        296,
+        47,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        447,
+        313,
+        483,
+        323
+      ],
+      "centerError": [
+        0.046875,
+        0.0
+      ],
+      "budget": 1.0,
+      "margins": [
+        4.453125,
+        16,
+        4.546875,
+        16
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-1440.json",
+      "label": "zh-TW",
+      "background": [
+        520.546875,
+        296,
+        48.5625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        526,
+        313,
+        564,
+        323
+      ],
+      "centerError": [
+        0.171875,
+        0.0
+      ],
+      "budget": 1.0,
+      "margins": [
+        4.453125,
+        16,
+        4.109375,
+        16
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-1440.json",
+      "label": "en-US",
+      "background": [
+        601.109375,
+        296,
+        45.90625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        607,
+        313,
+        642,
+        323
+      ],
+      "centerError": [
+        0.4375,
+        0.0
+      ],
+      "budget": 1.0,
+      "margins": [
+        4.890625,
+        16,
+        4.015625,
+        16
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-1440.json",
+      "label": "Article revision history",
+      "background": [
+        301,
+        820.4375,
+        168.46875,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        306,
+        826,
+        464,
+        859
+      ],
+      "centerError": [
+        0.234375,
+        0.0625
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.5625,
+        4.46875,
+        4.4375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-360-expanded.json",
+      "label": "Re-read saved source",
+      "background": [
+        50,
+        549.625,
+        164.171875,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        55,
+        555,
+        209,
+        588
+      ],
+      "centerError": [
+        0.0859375,
+        0.125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.375,
+        4.171875,
+        4.625
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-360-expanded.json",
+      "label": "Save issue date",
+      "background": [
+        50,
+        1109.140625,
+        126.21875,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        66,
+        1125,
+        160,
+        1135
+      ],
+      "centerError": [
+        0.109375,
+        1.140625
+      ],
+      "budget": 1.0,
+      "margins": [
+        15,
+        14.859375,
+        15.21875,
+        17.140625
+      ],
+      "height": 44,
+      "pass": false
+    },
+    {
+      "file": "local-en-US-360-expanded.json",
+      "label": "Use saved values",
+      "background": [
+        50,
+        1161.140625,
+        136.296875,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        55,
+        1167,
+        181,
+        1200
+      ],
+      "centerError": [
+        0.1484375,
+        0.359375
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.859375,
+        4.296875,
+        4.140625
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-360.json",
+      "label": "Back to List",
+      "background": [
+        16,
+        142.1875,
+        131.859375,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        21,
+        148,
+        142,
+        181
+      ],
+      "centerError": [
+        0.4296875,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.8125,
+        4.859375,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-360.json",
+      "label": "Save Draft",
+      "background": [
+        155.859375,
+        142.1875,
+        125.359375,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        161,
+        148,
+        276,
+        181
+      ],
+      "centerError": [
+        0.0390625,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4.140625,
+        4.8125,
+        4.21875,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-360.json",
+      "label": "Issue date and source",
+      "background": [
+        131.1875,
+        244.1875,
+        195.8125,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        137,
+        250,
+        322,
+        283
+      ],
+      "centerError": [
+        0.40625,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4.8125,
+        4.8125,
+        4.0,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-360.json",
+      "label": "Japanese source",
+      "background": [
+        33,
+        304.1875,
+        108.546875,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        38,
+        320,
+        136,
+        333
+      ],
+      "centerError": [
+        0.2734375,
+        0.3125
+      ],
+      "budget": 1.3,
+      "margins": [
+        4,
+        14.8125,
+        4.546875,
+        14.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-360.json",
+      "label": "zh-CN",
+      "background": [
+        153.546875,
+        304.1875,
+        47,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        159,
+        321,
+        195,
+        331
+      ],
+      "centerError": [
+        0.046875,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4.453125,
+        15.8125,
+        4.546875,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-360.json",
+      "label": "zh-TW",
+      "background": [
+        212.546875,
+        304.1875,
+        48.5625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        218,
+        321,
+        256,
+        331
+      ],
+      "centerError": [
+        0.171875,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4.453125,
+        15.8125,
+        4.109375,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-360.json",
+      "label": "en-US",
+      "background": [
+        273.109375,
+        304.1875,
+        45.90625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        279,
+        321,
+        314,
+        331
+      ],
+      "centerError": [
+        0.4375,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4.890625,
+        15.8125,
+        4.015625,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-360.json",
+      "label": "Article revision history",
+      "background": [
+        33,
+        828.625,
+        168.46875,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        38,
+        834,
+        196,
+        867
+      ],
+      "centerError": [
+        0.234375,
+        0.125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.375,
+        4.46875,
+        4.625
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-390-expanded.json",
+      "label": "Re-read saved source",
+      "background": [
+        50,
+        522.4375,
+        164.171875,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        55,
+        528,
+        209,
+        561
+      ],
+      "centerError": [
+        0.0859375,
+        0.0625
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.5625,
+        4.171875,
+        4.4375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-390-expanded.json",
+      "label": "Save issue date",
+      "background": [
+        50,
+        1040.265625,
+        126.21875,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        66,
+        1056,
+        160,
+        1066
+      ],
+      "centerError": [
+        0.109375,
+        1.265625
+      ],
+      "budget": 1.0,
+      "margins": [
+        15,
+        14.734375,
+        15.21875,
+        17.265625
+      ],
+      "height": 44,
+      "pass": false
+    },
+    {
+      "file": "local-en-US-390-expanded.json",
+      "label": "Use saved values",
+      "background": [
+        184.21875,
+        1040.265625,
+        136.296875,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        190,
+        1046,
+        315,
+        1079
+      ],
+      "centerError": [
+        0.1328125,
+        0.234375
+      ],
+      "budget": 2,
+      "margins": [
+        4.78125,
+        4.734375,
+        4.515625,
+        4.265625
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-390.json",
+      "label": "Back to List",
+      "background": [
+        16,
+        142.1875,
+        131.859375,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        21,
+        148,
+        142,
+        181
+      ],
+      "centerError": [
+        0.4296875,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.8125,
+        4.859375,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-390.json",
+      "label": "Save Draft",
+      "background": [
+        155.859375,
+        142.1875,
+        125.359375,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        161,
+        148,
+        276,
+        181
+      ],
+      "centerError": [
+        0.0390625,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4.140625,
+        4.8125,
+        4.21875,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-390.json",
+      "label": "Issue date and source",
+      "background": [
+        161.1875,
+        244.1875,
+        195.8125,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        167,
+        250,
+        352,
+        283
+      ],
+      "centerError": [
+        0.40625,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4.8125,
+        4.8125,
+        4.0,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-390.json",
+      "label": "Japanese source",
+      "background": [
+        33,
+        304.1875,
+        108.546875,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        38,
+        320,
+        136,
+        333
+      ],
+      "centerError": [
+        0.2734375,
+        0.3125
+      ],
+      "budget": 1.3,
+      "margins": [
+        4,
+        14.8125,
+        4.546875,
+        14.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-390.json",
+      "label": "zh-CN",
+      "background": [
+        153.546875,
+        304.1875,
+        47,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        159,
+        321,
+        195,
+        331
+      ],
+      "centerError": [
+        0.046875,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4.453125,
+        15.8125,
+        4.546875,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-390.json",
+      "label": "zh-TW",
+      "background": [
+        212.546875,
+        304.1875,
+        48.5625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        218,
+        321,
+        256,
+        331
+      ],
+      "centerError": [
+        0.171875,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4.453125,
+        15.8125,
+        4.109375,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-390.json",
+      "label": "en-US",
+      "background": [
+        273.109375,
+        304.1875,
+        45.90625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        279,
+        321,
+        314,
+        331
+      ],
+      "centerError": [
+        0.4375,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4.890625,
+        15.8125,
+        4.015625,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-en-US-390.json",
+      "label": "Article revision history",
+      "background": [
+        33,
+        828.625,
+        168.46875,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        38,
+        834,
+        196,
+        867
+      ],
+      "centerError": [
+        0.234375,
+        0.125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.375,
+        4.46875,
+        4.625
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-1440-expanded.json",
+      "label": "保存済みの出典を再読込",
+      "background": [
+        318,
+        432.6875,
+        186,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        323,
+        438,
+        499,
+        471
+      ],
+      "centerError": [
+        0.0,
+        0.1875
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.3125,
+        4,
+        4.6875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-1440-expanded.json",
+      "label": "特集日を保存",
+      "background": [
+        318,
+        876.9375,
+        116,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        334,
+        892,
+        418,
+        905
+      ],
+      "centerError": [
+        0.0,
+        0.4375
+      ],
+      "budget": 1.3,
+      "margins": [
+        15,
+        14.0625,
+        15,
+        14.9375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-1440-expanded.json",
+      "label": "保存済みの値を使用",
+      "background": [
+        442,
+        876.9375,
+        158,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        447,
+        882,
+        595,
+        915
+      ],
+      "centerError": [
+        0.0,
+        0.4375
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.0625,
+        4,
+        4.9375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-1440.json",
+      "label": "一覧へ",
+      "background": [
+        1138,
+        118,
+        104,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        1143,
+        123,
+        1237,
+        157
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-1440.json",
+      "label": "下書きを保存",
+      "background": [
+        1250,
+        118,
+        146,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        1255,
+        123,
+        1391,
+        157
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-1440.json",
+      "label": "特集の日付と出典",
+      "background": [
+        1197,
+        236,
+        174,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        1202,
+        241,
+        1366,
+        275
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-1440.json",
+      "label": "日本語原文",
+      "background": [
+        301,
+        296,
+        78,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        307,
+        311,
+        374,
+        325
+      ],
+      "centerError": [
+        0.5,
+        0.0
+      ],
+      "budget": 1.4000000000000001,
+      "margins": [
+        5,
+        14,
+        4,
+        14
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-1440.json",
+      "label": "zh-CN",
+      "background": [
+        411,
+        296,
+        47,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        416,
+        313,
+        453,
+        323
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "budget": 1.0,
+      "margins": [
+        4,
+        16,
+        4,
+        16
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-1440.json",
+      "label": "zh-TW",
+      "background": [
+        490,
+        296,
+        48.5625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        495,
+        313,
+        533,
+        323
+      ],
+      "centerError": [
+        0.28125,
+        0.0
+      ],
+      "budget": 1.0,
+      "margins": [
+        4,
+        16,
+        4.5625,
+        16
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-1440.json",
+      "label": "en-US",
+      "background": [
+        570.5625,
+        296,
+        45.90625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        576,
+        313,
+        611,
+        323
+      ],
+      "centerError": [
+        0.015625,
+        0.0
+      ],
+      "budget": 1.0,
+      "margins": [
+        4.4375,
+        16,
+        4.46875,
+        16
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-1440.json",
+      "label": "記事の改訂履歴",
+      "background": [
+        301,
+        820.4375,
+        130,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        306,
+        826,
+        426,
+        859
+      ],
+      "centerError": [
+        0.0,
+        0.0625
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.5625,
+        4,
+        4.4375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-360-expanded.json",
+      "label": "保存済みの出典を再読込",
+      "background": [
+        50,
+        522.4375,
+        186,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        55,
+        528,
+        231,
+        561
+      ],
+      "centerError": [
+        0.0,
+        0.0625
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.5625,
+        4,
+        4.4375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-360-expanded.json",
+      "label": "特集日を保存",
+      "background": [
+        50,
+        1056.359375,
+        116,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        66,
+        1071,
+        150,
+        1084
+      ],
+      "centerError": [
+        0.0,
+        0.859375
+      ],
+      "budget": 1.3,
+      "margins": [
+        15,
+        13.640625,
+        15,
+        15.359375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-360-expanded.json",
+      "label": "保存済みの値を使用",
+      "background": [
+        50,
+        1108.359375,
+        158,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        55,
+        1114,
+        203,
+        1147
+      ],
+      "centerError": [
+        0.0,
+        0.140625
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.640625,
+        4,
+        4.359375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-360.json",
+      "label": "一覧へ",
+      "background": [
+        16,
+        142.1875,
+        104,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        21,
+        148,
+        115,
+        181
+      ],
+      "centerError": [
+        0.0,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.8125,
+        4,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-360.json",
+      "label": "下書きを保存",
+      "background": [
+        128,
+        142.1875,
+        146,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        133,
+        148,
+        269,
+        181
+      ],
+      "centerError": [
+        0.0,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.8125,
+        4,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-360.json",
+      "label": "特集の日付と出典",
+      "background": [
+        153,
+        244.1875,
+        174,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        158,
+        250,
+        322,
+        283
+      ],
+      "centerError": [
+        0.0,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.8125,
+        4,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-360.json",
+      "label": "日本語原文",
+      "background": [
+        33,
+        304.1875,
+        78,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        39,
+        319,
+        106,
+        333
+      ],
+      "centerError": [
+        0.5,
+        0.1875
+      ],
+      "budget": 1.4000000000000001,
+      "margins": [
+        5,
+        13.8125,
+        4,
+        14.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-360.json",
+      "label": "zh-CN",
+      "background": [
+        123,
+        304.1875,
+        47,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        128,
+        321,
+        165,
+        331
+      ],
+      "centerError": [
+        0.0,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4,
+        15.8125,
+        4,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-360.json",
+      "label": "zh-TW",
+      "background": [
+        182,
+        304.1875,
+        48.5625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        187,
+        321,
+        225,
+        331
+      ],
+      "centerError": [
+        0.28125,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4,
+        15.8125,
+        4.5625,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-360.json",
+      "label": "en-US",
+      "background": [
+        242.5625,
+        304.1875,
+        45.90625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        248,
+        321,
+        283,
+        331
+      ],
+      "centerError": [
+        0.015625,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4.4375,
+        15.8125,
+        4.46875,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-360.json",
+      "label": "記事の改訂履歴",
+      "background": [
+        33,
+        828.625,
+        130,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        38,
+        834,
+        158,
+        867
+      ],
+      "centerError": [
+        0.0,
+        0.125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.375,
+        4,
+        4.625
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-390-expanded.json",
+      "label": "保存済みの出典を再読込",
+      "background": [
+        50,
+        495.25,
+        186,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        55,
+        501,
+        231,
+        534
+      ],
+      "centerError": [
+        0.0,
+        0.25
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.75,
+        4,
+        4.25
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-390-expanded.json",
+      "label": "特集日を保存",
+      "background": [
+        50,
+        1003.578125,
+        116,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        66,
+        1019,
+        150,
+        1032
+      ],
+      "centerError": [
+        0.0,
+        0.078125
+      ],
+      "budget": 1.3,
+      "margins": [
+        15,
+        14.421875,
+        15,
+        14.578125
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-390-expanded.json",
+      "label": "保存済みの値を使用",
+      "background": [
+        174,
+        1003.578125,
+        158,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        179,
+        1009,
+        327,
+        1042
+      ],
+      "centerError": [
+        0.0,
+        0.078125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.421875,
+        4,
+        4.578125
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-390.json",
+      "label": "一覧へ",
+      "background": [
+        16,
+        142.1875,
+        104,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        21,
+        148,
+        115,
+        181
+      ],
+      "centerError": [
+        0.0,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.8125,
+        4,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-390.json",
+      "label": "下書きを保存",
+      "background": [
+        128,
+        142.1875,
+        146,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        133,
+        148,
+        269,
+        181
+      ],
+      "centerError": [
+        0.0,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.8125,
+        4,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-390.json",
+      "label": "特集の日付と出典",
+      "background": [
+        183,
+        244.1875,
+        174,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        188,
+        250,
+        352,
+        283
+      ],
+      "centerError": [
+        0.0,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.8125,
+        4,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-390.json",
+      "label": "日本語原文",
+      "background": [
+        33,
+        304.1875,
+        78,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        39,
+        319,
+        106,
+        333
+      ],
+      "centerError": [
+        0.5,
+        0.1875
+      ],
+      "budget": 1.4000000000000001,
+      "margins": [
+        5,
+        13.8125,
+        4,
+        14.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-390.json",
+      "label": "zh-CN",
+      "background": [
+        123,
+        304.1875,
+        47,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        128,
+        321,
+        165,
+        331
+      ],
+      "centerError": [
+        0.0,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4,
+        15.8125,
+        4,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-390.json",
+      "label": "zh-TW",
+      "background": [
+        182,
+        304.1875,
+        48.5625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        187,
+        321,
+        225,
+        331
+      ],
+      "centerError": [
+        0.28125,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4,
+        15.8125,
+        4.5625,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-390.json",
+      "label": "en-US",
+      "background": [
+        242.5625,
+        304.1875,
+        45.90625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        248,
+        321,
+        283,
+        331
+      ],
+      "centerError": [
+        0.015625,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4.4375,
+        15.8125,
+        4.46875,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-ja-JP-390.json",
+      "label": "記事の改訂履歴",
+      "background": [
+        33,
+        828.625,
+        130,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        38,
+        834,
+        158,
+        867
+      ],
+      "centerError": [
+        0.0,
+        0.125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.375,
+        4,
+        4.625
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-1440-expanded.json",
+      "label": "重读已保存的来源",
+      "background": [
+        318,
+        432.6875,
+        144,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        323,
+        438,
+        457,
+        471
+      ],
+      "centerError": [
+        0.0,
+        0.1875
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.3125,
+        4,
+        4.6875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-1440-expanded.json",
+      "label": "保存期次日期",
+      "background": [
+        318,
+        876.9375,
+        116,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        334,
+        892,
+        417,
+        905
+      ],
+      "centerError": [
+        0.5,
+        0.4375
+      ],
+      "budget": 1.3,
+      "margins": [
+        15,
+        14.0625,
+        16,
+        14.9375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-1440-expanded.json",
+      "label": "使用已保存的值",
+      "background": [
+        442,
+        876.9375,
+        130,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        447,
+        882,
+        567,
+        915
+      ],
+      "centerError": [
+        0.0,
+        0.4375
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.0625,
+        4,
+        4.9375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-1440.json",
+      "label": "返回列表",
+      "background": [
+        1152,
+        118,
+        118,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        1157,
+        123,
+        1265,
+        157
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-1440.json",
+      "label": "保存草稿",
+      "background": [
+        1278,
+        118,
+        118,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        1283,
+        123,
+        1391,
+        157
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-1440.json",
+      "label": "期次日期与来源",
+      "background": [
+        1211,
+        236,
+        160,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        1216,
+        241,
+        1366,
+        275
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-1440.json",
+      "label": "日文原文",
+      "background": [
+        301,
+        296,
+        64,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        307,
+        311,
+        360,
+        325
+      ],
+      "centerError": [
+        0.5,
+        0.0
+      ],
+      "budget": 1.4000000000000001,
+      "margins": [
+        5,
+        14,
+        4,
+        14
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-1440.json",
+      "label": "zh-CN",
+      "background": [
+        397,
+        296,
+        47,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        402,
+        313,
+        439,
+        323
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "budget": 1.0,
+      "margins": [
+        4,
+        16,
+        4,
+        16
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-1440.json",
+      "label": "zh-TW",
+      "background": [
+        476,
+        296,
+        48.5625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        481,
+        313,
+        519,
+        323
+      ],
+      "centerError": [
+        0.28125,
+        0.0
+      ],
+      "budget": 1.0,
+      "margins": [
+        4,
+        16,
+        4.5625,
+        16
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-1440.json",
+      "label": "en-US",
+      "background": [
+        556.5625,
+        296,
+        45.90625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        562,
+        313,
+        597,
+        323
+      ],
+      "centerError": [
+        0.015625,
+        0.0
+      ],
+      "budget": 1.0,
+      "margins": [
+        4.4375,
+        16,
+        4.46875,
+        16
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-1440.json",
+      "label": "文章修订历史",
+      "background": [
+        301,
+        820.4375,
+        116,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        306,
+        826,
+        412,
+        859
+      ],
+      "centerError": [
+        0.0,
+        0.0625
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.5625,
+        4,
+        4.4375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-360-expanded.json",
+      "label": "重读已保存的来源",
+      "background": [
+        50,
+        495.25,
+        144,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        55,
+        501,
+        189,
+        534
+      ],
+      "centerError": [
+        0.0,
+        0.25
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.75,
+        4,
+        4.25
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-360-expanded.json",
+      "label": "保存期次日期",
+      "background": [
+        50,
+        965.09375,
+        116,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        66,
+        980,
+        149,
+        993
+      ],
+      "centerError": [
+        0.5,
+        0.59375
+      ],
+      "budget": 1.3,
+      "margins": [
+        15,
+        13.90625,
+        16,
+        15.09375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-360-expanded.json",
+      "label": "使用已保存的值",
+      "background": [
+        50,
+        1017.09375,
+        130,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        55,
+        1023,
+        175,
+        1056
+      ],
+      "centerError": [
+        0.0,
+        0.40625
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.90625,
+        4,
+        4.09375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-360.json",
+      "label": "返回列表",
+      "background": [
+        16,
+        142.1875,
+        118,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        21,
+        148,
+        129,
+        181
+      ],
+      "centerError": [
+        0.0,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.8125,
+        4,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-360.json",
+      "label": "保存草稿",
+      "background": [
+        142,
+        142.1875,
+        118,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        147,
+        148,
+        255,
+        181
+      ],
+      "centerError": [
+        0.0,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.8125,
+        4,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-360.json",
+      "label": "期次日期与来源",
+      "background": [
+        167,
+        244.1875,
+        160,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        172,
+        250,
+        322,
+        283
+      ],
+      "centerError": [
+        0.0,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.8125,
+        4,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-360.json",
+      "label": "日文原文",
+      "background": [
+        33,
+        304.1875,
+        64,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        39,
+        319,
+        92,
+        332
+      ],
+      "centerError": [
+        0.5,
+        0.6875
+      ],
+      "budget": 1.3,
+      "margins": [
+        5,
+        13.8125,
+        4,
+        15.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-360.json",
+      "label": "zh-CN",
+      "background": [
+        109,
+        304.1875,
+        47,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        114,
+        321,
+        151,
+        331
+      ],
+      "centerError": [
+        0.0,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4,
+        15.8125,
+        4,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-360.json",
+      "label": "zh-TW",
+      "background": [
+        168,
+        304.1875,
+        48.5625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        173,
+        321,
+        211,
+        331
+      ],
+      "centerError": [
+        0.28125,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4,
+        15.8125,
+        4.5625,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-360.json",
+      "label": "en-US",
+      "background": [
+        228.5625,
+        304.1875,
+        45.90625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        234,
+        321,
+        269,
+        331
+      ],
+      "centerError": [
+        0.015625,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4.4375,
+        15.8125,
+        4.46875,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-360.json",
+      "label": "文章修订历史",
+      "background": [
+        33,
+        828.625,
+        116,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        38,
+        834,
+        144,
+        867
+      ],
+      "centerError": [
+        0.0,
+        0.125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.375,
+        4,
+        4.625
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-390-expanded.json",
+      "label": "重读已保存的来源",
+      "background": [
+        50,
+        495.25,
+        144,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        55,
+        501,
+        189,
+        534
+      ],
+      "centerError": [
+        0.0,
+        0.25
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.75,
+        4,
+        4.25
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-390-expanded.json",
+      "label": "保存期次日期",
+      "background": [
+        50,
+        965.09375,
+        116,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        66,
+        980,
+        149,
+        993
+      ],
+      "centerError": [
+        0.5,
+        0.59375
+      ],
+      "budget": 1.3,
+      "margins": [
+        15,
+        13.90625,
+        16,
+        15.09375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-390-expanded.json",
+      "label": "使用已保存的值",
+      "background": [
+        174,
+        965.09375,
+        130,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        179,
+        971,
+        299,
+        1004
+      ],
+      "centerError": [
+        0.0,
+        0.40625
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.90625,
+        4,
+        4.09375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-390.json",
+      "label": "返回列表",
+      "background": [
+        16,
+        142.1875,
+        118,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        21,
+        148,
+        129,
+        181
+      ],
+      "centerError": [
+        0.0,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.8125,
+        4,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-390.json",
+      "label": "保存草稿",
+      "background": [
+        142,
+        142.1875,
+        118,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        147,
+        148,
+        255,
+        181
+      ],
+      "centerError": [
+        0.0,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.8125,
+        4,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-390.json",
+      "label": "期次日期与来源",
+      "background": [
+        197,
+        244.1875,
+        160,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        202,
+        250,
+        352,
+        283
+      ],
+      "centerError": [
+        0.0,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.8125,
+        4,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-390.json",
+      "label": "日文原文",
+      "background": [
+        33,
+        304.1875,
+        64,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        39,
+        319,
+        92,
+        332
+      ],
+      "centerError": [
+        0.5,
+        0.6875
+      ],
+      "budget": 1.3,
+      "margins": [
+        5,
+        13.8125,
+        4,
+        15.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-390.json",
+      "label": "zh-CN",
+      "background": [
+        109,
+        304.1875,
+        47,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        114,
+        321,
+        151,
+        331
+      ],
+      "centerError": [
+        0.0,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4,
+        15.8125,
+        4,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-390.json",
+      "label": "zh-TW",
+      "background": [
+        168,
+        304.1875,
+        48.5625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        173,
+        321,
+        211,
+        331
+      ],
+      "centerError": [
+        0.28125,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4,
+        15.8125,
+        4.5625,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-390.json",
+      "label": "en-US",
+      "background": [
+        228.5625,
+        304.1875,
+        45.90625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        234,
+        321,
+        269,
+        331
+      ],
+      "centerError": [
+        0.015625,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4.4375,
+        15.8125,
+        4.46875,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-CN-390.json",
+      "label": "文章修订历史",
+      "background": [
+        33,
+        828.625,
+        116,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        38,
+        834,
+        144,
+        867
+      ],
+      "centerError": [
+        0.0,
+        0.125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.375,
+        4,
+        4.625
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-1440-expanded.json",
+      "label": "重新讀取已儲存的來源",
+      "background": [
+        318,
+        432.6875,
+        172,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        323,
+        438,
+        485,
+        471
+      ],
+      "centerError": [
+        0.0,
+        0.1875
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.3125,
+        4,
+        4.6875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-1440-expanded.json",
+      "label": "儲存期次日期",
+      "background": [
+        318,
+        876.9375,
+        116,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        334,
+        892,
+        417,
+        905
+      ],
+      "centerError": [
+        0.5,
+        0.4375
+      ],
+      "budget": 1.3,
+      "margins": [
+        15,
+        14.0625,
+        16,
+        14.9375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-1440-expanded.json",
+      "label": "使用已儲存的值",
+      "background": [
+        442,
+        876.9375,
+        130,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        447,
+        882,
+        567,
+        915
+      ],
+      "centerError": [
+        0.0,
+        0.4375
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.0625,
+        4,
+        4.9375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-1440.json",
+      "label": "返回列表",
+      "background": [
+        1152,
+        118,
+        118,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        1157,
+        123,
+        1265,
+        157
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-1440.json",
+      "label": "儲存草稿",
+      "background": [
+        1278,
+        118,
+        118,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        1283,
+        123,
+        1391,
+        157
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-1440.json",
+      "label": "期次日期與來源",
+      "background": [
+        1211,
+        236,
+        160,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        1216,
+        241,
+        1366,
+        275
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-1440.json",
+      "label": "日文原文",
+      "background": [
+        301,
+        296,
+        64,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        307,
+        311,
+        360,
+        325
+      ],
+      "centerError": [
+        0.5,
+        0.0
+      ],
+      "budget": 1.4000000000000001,
+      "margins": [
+        5,
+        14,
+        4,
+        14
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-1440.json",
+      "label": "zh-CN",
+      "background": [
+        397,
+        296,
+        47,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        402,
+        313,
+        439,
+        323
+      ],
+      "centerError": [
+        0.0,
+        0.0
+      ],
+      "budget": 1.0,
+      "margins": [
+        4,
+        16,
+        4,
+        16
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-1440.json",
+      "label": "zh-TW",
+      "background": [
+        476,
+        296,
+        48.5625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        481,
+        313,
+        519,
+        323
+      ],
+      "centerError": [
+        0.28125,
+        0.0
+      ],
+      "budget": 1.0,
+      "margins": [
+        4,
+        16,
+        4.5625,
+        16
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-1440.json",
+      "label": "en-US",
+      "background": [
+        556.5625,
+        296,
+        45.90625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        562,
+        313,
+        597,
+        323
+      ],
+      "centerError": [
+        0.015625,
+        0.0
+      ],
+      "budget": 1.0,
+      "margins": [
+        4.4375,
+        16,
+        4.46875,
+        16
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-1440.json",
+      "label": "文章修訂歷史",
+      "background": [
+        301,
+        820.4375,
+        116,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        306,
+        826,
+        412,
+        859
+      ],
+      "centerError": [
+        0.0,
+        0.0625
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.5625,
+        4,
+        4.4375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-360-expanded.json",
+      "label": "重新讀取已儲存的來源",
+      "background": [
+        50,
+        495.25,
+        172,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        55,
+        501,
+        217,
+        534
+      ],
+      "centerError": [
+        0.0,
+        0.25
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.75,
+        4,
+        4.25
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-360-expanded.json",
+      "label": "儲存期次日期",
+      "background": [
+        50,
+        965.09375,
+        116,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        66,
+        980,
+        149,
+        993
+      ],
+      "centerError": [
+        0.5,
+        0.59375
+      ],
+      "budget": 1.3,
+      "margins": [
+        15,
+        13.90625,
+        16,
+        15.09375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-360-expanded.json",
+      "label": "使用已儲存的值",
+      "background": [
+        50,
+        1017.09375,
+        130,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        55,
+        1023,
+        175,
+        1056
+      ],
+      "centerError": [
+        0.0,
+        0.40625
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.90625,
+        4,
+        4.09375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-360.json",
+      "label": "返回列表",
+      "background": [
+        16,
+        142.1875,
+        118,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        21,
+        148,
+        129,
+        181
+      ],
+      "centerError": [
+        0.0,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.8125,
+        4,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-360.json",
+      "label": "儲存草稿",
+      "background": [
+        142,
+        142.1875,
+        118,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        147,
+        148,
+        255,
+        181
+      ],
+      "centerError": [
+        0.0,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.8125,
+        4,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-360.json",
+      "label": "期次日期與來源",
+      "background": [
+        167,
+        244.1875,
+        160,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        172,
+        250,
+        322,
+        283
+      ],
+      "centerError": [
+        0.0,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.8125,
+        4,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-360.json",
+      "label": "日文原文",
+      "background": [
+        33,
+        304.1875,
+        64,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        39,
+        319,
+        92,
+        332
+      ],
+      "centerError": [
+        0.5,
+        0.6875
+      ],
+      "budget": 1.3,
+      "margins": [
+        5,
+        13.8125,
+        4,
+        15.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-360.json",
+      "label": "zh-CN",
+      "background": [
+        109,
+        304.1875,
+        47,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        114,
+        321,
+        151,
+        331
+      ],
+      "centerError": [
+        0.0,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4,
+        15.8125,
+        4,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-360.json",
+      "label": "zh-TW",
+      "background": [
+        168,
+        304.1875,
+        48.5625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        173,
+        321,
+        211,
+        331
+      ],
+      "centerError": [
+        0.28125,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4,
+        15.8125,
+        4.5625,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-360.json",
+      "label": "en-US",
+      "background": [
+        228.5625,
+        304.1875,
+        45.90625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        234,
+        321,
+        269,
+        331
+      ],
+      "centerError": [
+        0.015625,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4.4375,
+        15.8125,
+        4.46875,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-360.json",
+      "label": "文章修訂歷史",
+      "background": [
+        33,
+        828.625,
+        116,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        38,
+        834,
+        144,
+        867
+      ],
+      "centerError": [
+        0.0,
+        0.125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.375,
+        4,
+        4.625
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-390-expanded.json",
+      "label": "重新讀取已儲存的來源",
+      "background": [
+        50,
+        495.25,
+        172,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        55,
+        501,
+        217,
+        534
+      ],
+      "centerError": [
+        0.0,
+        0.25
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.75,
+        4,
+        4.25
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-390-expanded.json",
+      "label": "儲存期次日期",
+      "background": [
+        50,
+        965.09375,
+        116,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        66,
+        980,
+        149,
+        993
+      ],
+      "centerError": [
+        0.5,
+        0.59375
+      ],
+      "budget": 1.3,
+      "margins": [
+        15,
+        13.90625,
+        16,
+        15.09375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-390-expanded.json",
+      "label": "使用已儲存的值",
+      "background": [
+        174,
+        965.09375,
+        130,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        179,
+        971,
+        299,
+        1004
+      ],
+      "centerError": [
+        0.0,
+        0.40625
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.90625,
+        4,
+        4.09375
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-390.json",
+      "label": "返回列表",
+      "background": [
+        16,
+        142.1875,
+        118,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        21,
+        148,
+        129,
+        181
+      ],
+      "centerError": [
+        0.0,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.8125,
+        4,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-390.json",
+      "label": "儲存草稿",
+      "background": [
+        142,
+        142.1875,
+        118,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        147,
+        148,
+        255,
+        181
+      ],
+      "centerError": [
+        0.0,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.8125,
+        4,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-390.json",
+      "label": "期次日期與來源",
+      "background": [
+        197,
+        244.1875,
+        160,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        202,
+        250,
+        352,
+        283
+      ],
+      "centerError": [
+        0.0,
+        0.3125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.8125,
+        4,
+        4.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-390.json",
+      "label": "日文原文",
+      "background": [
+        33,
+        304.1875,
+        64,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        39,
+        319,
+        92,
+        332
+      ],
+      "centerError": [
+        0.5,
+        0.6875
+      ],
+      "budget": 1.3,
+      "margins": [
+        5,
+        13.8125,
+        4,
+        15.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-390.json",
+      "label": "zh-CN",
+      "background": [
+        109,
+        304.1875,
+        47,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        114,
+        321,
+        151,
+        331
+      ],
+      "centerError": [
+        0.0,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4,
+        15.8125,
+        4,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-390.json",
+      "label": "zh-TW",
+      "background": [
+        168,
+        304.1875,
+        48.5625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        173,
+        321,
+        211,
+        331
+      ],
+      "centerError": [
+        0.28125,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4,
+        15.8125,
+        4.5625,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-390.json",
+      "label": "en-US",
+      "background": [
+        228.5625,
+        304.1875,
+        45.90625,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        234,
+        321,
+        269,
+        331
+      ],
+      "centerError": [
+        0.015625,
+        0.1875
+      ],
+      "budget": 1.0,
+      "margins": [
+        4.4375,
+        15.8125,
+        4.46875,
+        16.1875
+      ],
+      "height": 44,
+      "pass": true
+    },
+    {
+      "file": "local-zh-TW-390.json",
+      "label": "文章修訂歷史",
+      "background": [
+        33,
+        828.625,
+        116,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        38,
+        834,
+        144,
+        867
+      ],
+      "centerError": [
+        0.0,
+        0.125
+      ],
+      "budget": 2,
+      "margins": [
+        4,
+        4.375,
+        4,
+        4.625
+      ],
+      "height": 44,
+      "pass": true
+    }
+  ],
+  "failures": [
+    {
+      "file": "local-en-US-360-expanded.json",
+      "label": "Save issue date",
+      "background": [
+        50,
+        1109.140625,
+        126.21875,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        66,
+        1125,
+        160,
+        1135
+      ],
+      "centerError": [
+        0.109375,
+        1.140625
+      ],
+      "budget": 1.0,
+      "margins": [
+        15,
+        14.859375,
+        15.21875,
+        17.140625
+      ],
+      "height": 44,
+      "pass": false
+    },
+    {
+      "file": "local-en-US-390-expanded.json",
+      "label": "Save issue date",
+      "background": [
+        50,
+        1040.265625,
+        126.21875,
+        44
+      ],
+      "usableInset": 1,
+      "ink": [
+        66,
+        1056,
+        160,
+        1066
+      ],
+      "centerError": [
+        0.109375,
+        1.265625
+      ],
+      "budget": 1.0,
+      "margins": [
+        15,
+        14.734375,
+        15.21875,
+        17.265625
+      ],
+      "height": 44,
+      "pass": false
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+# Preserve byte-pinned screenshots, receipts, logs and operators on checkout.
+* -text whitespace=cr-at-eol

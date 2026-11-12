@@ -1,0 +1,339 @@
+{
+  "result": "PASS",
+  "base": "http://localhost:4187",
+  "results": [
+    {
+      "width": 360,
+      "colors": [
+        [
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          }
+        ],
+        [
+          {
+            "state": "ant-rate-star ant-rate-star-zero",
+            "first": "rgb(211, 213, 216)",
+            "second": "rgb(211, 213, 216)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-zero",
+            "first": "rgb(211, 213, 216)",
+            "second": "rgb(211, 213, 216)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-zero",
+            "first": "rgb(211, 213, 216)",
+            "second": "rgb(211, 213, 216)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-zero",
+            "first": "rgb(211, 213, 216)",
+            "second": "rgb(211, 213, 216)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-zero",
+            "first": "rgb(211, 213, 216)",
+            "second": "rgb(211, 213, 216)"
+          }
+        ],
+        [
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-half ant-rate-star-active",
+            "first": "rgb(245, 166, 35)",
+            "second": "rgb(211, 213, 216)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-zero",
+            "first": "rgb(211, 213, 216)",
+            "second": "rgb(211, 213, 216)"
+          }
+        ]
+      ],
+      "editor": [
+        {
+          "first": "rgb(211, 213, 216)",
+          "second": "rgb(245, 166, 35)"
+        },
+        {
+          "first": "rgb(211, 213, 216)",
+          "second": "rgb(245, 166, 35)"
+        },
+        {
+          "first": "rgb(211, 213, 216)",
+          "second": "rgb(245, 166, 35)"
+        },
+        {
+          "first": "rgb(245, 166, 35)",
+          "second": "rgb(211, 213, 216)"
+        },
+        {
+          "first": "rgb(211, 213, 216)",
+          "second": "rgb(211, 213, 216)"
+        }
+      ],
+      "errors": [],
+      "network": [],
+      "synthetic": true
+    },
+    {
+      "width": 390,
+      "colors": [
+        [
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          }
+        ],
+        [
+          {
+            "state": "ant-rate-star ant-rate-star-zero",
+            "first": "rgb(211, 213, 216)",
+            "second": "rgb(211, 213, 216)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-zero",
+            "first": "rgb(211, 213, 216)",
+            "second": "rgb(211, 213, 216)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-zero",
+            "first": "rgb(211, 213, 216)",
+            "second": "rgb(211, 213, 216)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-zero",
+            "first": "rgb(211, 213, 216)",
+            "second": "rgb(211, 213, 216)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-zero",
+            "first": "rgb(211, 213, 216)",
+            "second": "rgb(211, 213, 216)"
+          }
+        ],
+        [
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-half ant-rate-star-active",
+            "first": "rgb(245, 166, 35)",
+            "second": "rgb(211, 213, 216)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-zero",
+            "first": "rgb(211, 213, 216)",
+            "second": "rgb(211, 213, 216)"
+          }
+        ]
+      ],
+      "editor": [
+        {
+          "first": "rgb(211, 213, 216)",
+          "second": "rgb(245, 166, 35)"
+        },
+        {
+          "first": "rgb(211, 213, 216)",
+          "second": "rgb(245, 166, 35)"
+        },
+        {
+          "first": "rgb(211, 213, 216)",
+          "second": "rgb(245, 166, 35)"
+        },
+        {
+          "first": "rgb(245, 166, 35)",
+          "second": "rgb(211, 213, 216)"
+        },
+        {
+          "first": "rgb(211, 213, 216)",
+          "second": "rgb(211, 213, 216)"
+        }
+      ],
+      "errors": [],
+      "network": [],
+      "synthetic": true
+    },
+    {
+      "width": 1440,
+      "colors": [
+        [
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          }
+        ],
+        [
+          {
+            "state": "ant-rate-star ant-rate-star-zero",
+            "first": "rgb(211, 213, 216)",
+            "second": "rgb(211, 213, 216)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-zero",
+            "first": "rgb(211, 213, 216)",
+            "second": "rgb(211, 213, 216)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-zero",
+            "first": "rgb(211, 213, 216)",
+            "second": "rgb(211, 213, 216)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-zero",
+            "first": "rgb(211, 213, 216)",
+            "second": "rgb(211, 213, 216)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-zero",
+            "first": "rgb(211, 213, 216)",
+            "second": "rgb(211, 213, 216)"
+          }
+        ],
+        [
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-full",
+            "first": "rgba(0, 0, 0, 0.06)",
+            "second": "rgb(245, 166, 35)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-half ant-rate-star-active",
+            "first": "rgb(245, 166, 35)",
+            "second": "rgb(211, 213, 216)"
+          },
+          {
+            "state": "ant-rate-star ant-rate-star-zero",
+            "first": "rgb(211, 213, 216)",
+            "second": "rgb(211, 213, 216)"
+          }
+        ]
+      ],
+      "editor": [
+        {
+          "first": "rgb(211, 213, 216)",
+          "second": "rgb(245, 166, 35)"
+        },
+        {
+          "first": "rgb(211, 213, 216)",
+          "second": "rgb(245, 166, 35)"
+        },
+        {
+          "first": "rgb(211, 213, 216)",
+          "second": "rgb(245, 166, 35)"
+        },
+        {
+          "first": "rgb(245, 166, 35)",
+          "second": "rgb(211, 213, 216)"
+        },
+        {
+          "first": "rgb(211, 213, 216)",
+          "second": "rgb(211, 213, 216)"
+        }
+      ],
+      "errors": [],
+      "network": [],
+      "synthetic": true
+    }
+  ]
+}

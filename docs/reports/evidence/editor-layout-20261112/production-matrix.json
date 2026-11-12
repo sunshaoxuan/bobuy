@@ -1,0 +1,354 @@
+{
+  "result": "PASS",
+  "base": "https://bobuy.cc",
+  "results": [
+    {
+      "locale": "zh-CN",
+      "width": 360,
+      "geometry": 8,
+      "dateExpanded": true,
+      "languageSwitch": true,
+      "saveReload": true,
+      "leaveCancel": true,
+      "longText": true,
+      "publishedHeader": true,
+      "listHasNoToolbar": true,
+      "errors": [],
+      "network": [],
+      "ancillaryNavigationBeaconAborts": [
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        },
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        }
+      ],
+      "synthetic": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 390,
+      "geometry": 8,
+      "dateExpanded": true,
+      "languageSwitch": true,
+      "saveReload": true,
+      "leaveCancel": true,
+      "longText": true,
+      "publishedHeader": true,
+      "listHasNoToolbar": true,
+      "errors": [],
+      "network": [],
+      "ancillaryNavigationBeaconAborts": [
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        },
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        }
+      ],
+      "synthetic": true
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "geometry": 8,
+      "dateExpanded": true,
+      "languageSwitch": true,
+      "saveReload": true,
+      "leaveCancel": true,
+      "longText": true,
+      "publishedHeader": true,
+      "listHasNoToolbar": true,
+      "errors": [],
+      "network": [],
+      "ancillaryNavigationBeaconAborts": [
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        },
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        }
+      ],
+      "synthetic": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 360,
+      "geometry": 8,
+      "dateExpanded": true,
+      "languageSwitch": true,
+      "saveReload": true,
+      "leaveCancel": true,
+      "longText": true,
+      "publishedHeader": true,
+      "listHasNoToolbar": true,
+      "errors": [],
+      "network": [],
+      "ancillaryNavigationBeaconAborts": [
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        },
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        }
+      ],
+      "synthetic": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 390,
+      "geometry": 8,
+      "dateExpanded": true,
+      "languageSwitch": true,
+      "saveReload": true,
+      "leaveCancel": true,
+      "longText": true,
+      "publishedHeader": true,
+      "listHasNoToolbar": true,
+      "errors": [],
+      "network": [],
+      "ancillaryNavigationBeaconAborts": [
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        },
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        }
+      ],
+      "synthetic": true
+    },
+    {
+      "locale": "zh-TW",
+      "width": 1440,
+      "geometry": 8,
+      "dateExpanded": true,
+      "languageSwitch": true,
+      "saveReload": true,
+      "leaveCancel": true,
+      "longText": true,
+      "publishedHeader": true,
+      "listHasNoToolbar": true,
+      "errors": [],
+      "network": [],
+      "ancillaryNavigationBeaconAborts": [
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        },
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        }
+      ],
+      "synthetic": true
+    },
+    {
+      "locale": "en-US",
+      "width": 360,
+      "geometry": 8,
+      "dateExpanded": true,
+      "languageSwitch": true,
+      "saveReload": true,
+      "leaveCancel": true,
+      "longText": true,
+      "publishedHeader": true,
+      "listHasNoToolbar": true,
+      "errors": [],
+      "network": [],
+      "ancillaryNavigationBeaconAborts": [
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        },
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        }
+      ],
+      "synthetic": true
+    },
+    {
+      "locale": "en-US",
+      "width": 390,
+      "geometry": 8,
+      "dateExpanded": true,
+      "languageSwitch": true,
+      "saveReload": true,
+      "leaveCancel": true,
+      "longText": true,
+      "publishedHeader": true,
+      "listHasNoToolbar": true,
+      "errors": [],
+      "network": [],
+      "ancillaryNavigationBeaconAborts": [
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        },
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        }
+      ],
+      "synthetic": true
+    },
+    {
+      "locale": "en-US",
+      "width": 1440,
+      "geometry": 8,
+      "dateExpanded": true,
+      "languageSwitch": true,
+      "saveReload": true,
+      "leaveCancel": true,
+      "longText": true,
+      "publishedHeader": true,
+      "listHasNoToolbar": true,
+      "errors": [],
+      "network": [],
+      "ancillaryNavigationBeaconAborts": [
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        },
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        }
+      ],
+      "synthetic": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 360,
+      "geometry": 8,
+      "dateExpanded": true,
+      "languageSwitch": true,
+      "saveReload": true,
+      "leaveCancel": true,
+      "longText": true,
+      "publishedHeader": true,
+      "listHasNoToolbar": true,
+      "errors": [],
+      "network": [],
+      "ancillaryNavigationBeaconAborts": [
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        },
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        }
+      ],
+      "synthetic": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 390,
+      "geometry": 8,
+      "dateExpanded": true,
+      "languageSwitch": true,
+      "saveReload": true,
+      "leaveCancel": true,
+      "longText": true,
+      "publishedHeader": true,
+      "listHasNoToolbar": true,
+      "errors": [],
+      "network": [],
+      "ancillaryNavigationBeaconAborts": [
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        },
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        }
+      ],
+      "synthetic": true
+    },
+    {
+      "locale": "ja-JP",
+      "width": 1440,
+      "geometry": 8,
+      "dateExpanded": true,
+      "languageSwitch": true,
+      "saveReload": true,
+      "leaveCancel": true,
+      "longText": true,
+      "publishedHeader": true,
+      "listHasNoToolbar": true,
+      "errors": [],
+      "network": [],
+      "ancillaryNavigationBeaconAborts": [
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        },
+        {
+          "url": "https://bobuy.cc/cdn-cgi/rum?",
+          "failure": {
+            "errorText": "net::ERR_ABORTED"
+          }
+        }
+      ],
+      "synthetic": true
+    }
+  ]
+}

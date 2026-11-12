@@ -1,0 +1,95 @@
+{
+  "width": 390,
+  "height": 1000,
+  "overflow": false,
+  "controls": [
+    {
+      "label": "一覧へ",
+      "rect": {
+        "x": 16,
+        "y": 142.1875,
+        "width": 104,
+        "height": 44
+      },
+      "tag": "BUTTON",
+      "color": "rgba(0, 0, 0, 0.88)"
+    },
+    {
+      "label": "下書きを保存",
+      "rect": {
+        "x": 128,
+        "y": 142.1875,
+        "width": 146,
+        "height": 44
+      },
+      "tag": "BUTTON",
+      "color": "rgb(255, 255, 255)"
+    },
+    {
+      "label": "特集の日付と出典",
+      "rect": {
+        "x": 183,
+        "y": 244.1875,
+        "width": 174,
+        "height": 44
+      },
+      "tag": "BUTTON",
+      "color": "rgba(0, 0, 0, 0.88)"
+    },
+    {
+      "label": "日本語原文",
+      "rect": {
+        "x": 33,
+        "y": 304.1875,
+        "width": 78,
+        "height": 44
+      },
+      "tag": "DIV",
+      "color": "rgba(0, 0, 0, 0.88)"
+    },
+    {
+      "label": "zh-CN",
+      "rect": {
+        "x": 123,
+        "y": 304.1875,
+        "width": 47,
+        "height": 44
+      },
+      "tag": "DIV",
+      "color": "rgba(0, 0, 0, 0.88)"
+    },
+    {
+      "label": "zh-TW",
+      "rect": {
+        "x": 182,
+        "y": 304.1875,
+        "width": 48.5625,
+        "height": 44
+      },
+      "tag": "DIV",
+      "color": "rgba(0, 0, 0, 0.88)"
+    },
+    {
+      "label": "en-US",
+      "rect": {
+        "x": 242.5625,
+        "y": 304.1875,
+        "width": 45.90625,
+        "height": 44
+      },
+      "tag": "DIV",
+      "color": "rgba(0, 0, 0, 0.88)"
+    },
+    {
+      "label": "記事の改訂履歴",
+      "rect": {
+        "x": 33,
+        "y": 828.625,
+        "width": 130,
+        "height": 44
+      },
+      "tag": "BUTTON",
+      "color": "rgba(0, 0, 0, 0.88)"
+    }
+  ]
+}

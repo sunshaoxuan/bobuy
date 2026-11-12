@@ -1,0 +1,31 @@
+### Visual Defect Review
+
+#### 1. Title / Action Grouping
+* **Status:** **Pass**
+* The page titles (*好物推荐* / *Product Picks*, *本程好物*), draft status pills (*草稿* / *Draft*), and action buttons (*返回列表 / 保存草稿*, sort dropdown, search) are properly grouped, aligned, and clearly separated from content sections.
+
+#### 2. Article / Date-Settings Hierarchy
+* **Status:** **Defect Identified (Image 2)**
+* In Image 2, the expanded **"Issue date and source"** panel is placed directly inside the "Article" card *above* the article translation tabs and fields. This creates an awkward visual hierarchy, pushing the primary article editing controls (tabs, title, body) far down beneath auxiliary issue-level metadata.
+
+#### 3. Tab Visibility, Padding, Clipping & Alignment
+* **Status:** **Pass**
+* Language tabs (*日文原文 / Japanese source*, *zh-CN*, *zh-TW*, *en-US*) are fully visible with clear active states and no text clipping or wrapping.
+* Card padding, margins, badge positioning (*No.TEST...*), and right-aligned card footers (*价格待确认*, heat status) are consistent and neatly aligned across layouts.
+
+#### 4. Rated Yellow-Orange vs. Unrated Light-Gray Stars (Image 3)
+* **Status:** **Defect Identified**
+* **Fully rated (5.0 / 5):** Correctly renders 5 yellow-orange stars.
+* **Unrated (尚未评分):** Correctly renders 5 uniform light-gray stars.
+* **Partial rating (3.5 / 5):** Renders **3 yellow-orange stars and 2 light-gray stars**. The `0.5` fractional rating lacks a half-star representation and is floored to 3 stars, resulting in a mismatch between the label (`3.5 / 5`) and the visual star count.
+
+#### 5. Additional Visible Observation
+* In Image 2 under **"Add from product master"**, the dropdown select element is completely empty (no placeholder or selected item label visible next to the arrow).
+
+---
+
+### Concise Judgement
+**Conditional Pass with Minor Defects:** Layout alignment, responsive padding, tab rendering, and full/empty star styling are well implemented. Concrete defects to address are:
+1. **Fractional rating display:** Missing half-star rendering for the 3.5-star rating (displays as 3 stars).
+2. **Hierarchy/In-card flow:** Expanded date/source settings awkwardly preempt the translation tabs and editor body.
+3. **Empty dropdown:** Missing placeholder text in the "Add from product master" select box.
