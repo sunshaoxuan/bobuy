@@ -23,7 +23,7 @@
 .mail-settings-page input.ant-input{padding-block:9px 11px}.mail-settings-page .ant-input-affix-wrapper>input.ant-input{padding:0}
 .mail-settings-page .ant-select-selection-placeholder{position:relative;top:-1px}
 .mail-settings-page:is(:lang(zh-CN),:lang(zh-TW),:lang(ja-JP)) .ant-select-selection-placeholder{top:0}
-.mail-settings-page:is(:lang(zh-CN),:lang(zh-TW),:lang(ja-JP)) .ant-input-affix-wrapper>input.ant-input{position:relative;top:1px}
+.mail-settings-page:is(:lang(zh-CN),:lang(zh-TW),:lang(ja-JP)) input.ant-input-password{padding-block:11px 9px}
 .mail-settings-page .ant-select-single .ant-select-selector{align-items:center;padding-inline:12px}
 .mail-settings-page .ant-form-item-extra{font-size:12px;line-height:1.7;margin-top:6px;overflow-wrap:anywhere}
 .mail-delivery-row{display:flex;align-items:center;justify-content:space-between;gap:20px;border-top:1px solid #ededee;padding-top:20px;margin-top:4px}
