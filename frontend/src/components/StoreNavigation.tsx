@@ -17,7 +17,7 @@ export default function StoreNavigation({open,onClose,homePath='/products'}:{
   const pathname=location.pathname==='/'?homePath:location.pathname;
   const selected=(path:string)=>pathname===path||!!pathname?.startsWith(path+'/');
   const contents=()=><>
-    <Link className="browse-brand" to={scopedPath('/',location.search)} onClick={onClose}><span className="browse-brand-heading"><span className="browse-brand-mark">B</span><strong>{t('app.brand')}</strong></span><span className="browse-brand-domain">bobuy.cc</span></Link>
+    <Link className="browse-brand" to={scopedPath('/',location.search)} onClick={onClose}><span className="browse-brand-mark">B</span><span className="browse-brand-label"><strong>{t('app.brand')}</strong><span className="browse-brand-domain">bobuy.cc</span></span></Link>
     <nav className="browse-links" aria-label={t('store.navigation')}>{entries.map(([path,key,Icon])=><Link
       key={path} className={selected(path)?'active':undefined} aria-current={selected(path)?'page':undefined} to={scopedPath(path,location.search)} onClick={onClose}><Icon aria-hidden="true"/><span>{t(key)}</span></Link>)}</nav>
   </>;
