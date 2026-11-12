@@ -1,0 +1,10 @@
+{
+  "source": "2160266d9a9f864274e62003b7bd1d1c093c376f",
+  "result": "PASS",
+  "ci": "success",
+  "ciUrl": "https://github.com/sunshaoxuan/bobuy/pull/78",
+  "acceptanceSha256": "79f9a13eb3269383bf70895abf3f942824376dc055331fa95191754193f2b24b",
+  "buildLogSha256": "affee461995b1c8e7b2f6e9d139d6d0f4194e8b06d1c18a766db6d8d5a8cdf01",
+  "frontendOnly": true,
+  "databaseOperation": false
+}

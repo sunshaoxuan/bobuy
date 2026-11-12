@@ -1,0 +1,24 @@
+### 1. Concrete Visible Issues
+
+* **Chromatic / Subpixel Rendering Artifact on Badge Text (Card No.92021):**
+  * The text `No.92021` inside the top-left black pill displays noticeable cyan and red fringing (subpixel anti-aliasing artifact or outline bleed), reducing badge clarity compared to the desktop cards.
+* **Vertical Baseline Mismatch (Card No.92021):**
+  * The flame icon and the count `0` sit slightly lower than the vertical optical center of the neighboring `No.92021` pill badge.
+
+---
+
+### 2. Assessment of Requirements
+
+#### A. Desktop View
+* **No. at Top-Left:** **Pass** — Consistently rendered as a high-contrast black pill badge in the top-left header zone above each image.
+* **Flame / Count at Top-Right:** **Pass** — Displays the flame icon followed by `热度 <count>` cleanly aligned to the top-right corner.
+* **No Heat at Bottom:** **Pass** — Lower price and unit area is completely clear of heat indicators.
+* **Preservation of Logo / "惠" Badge:** **Pass** — The red square badge remains anchored cleanly to the top-left of the image frame with no clipping or overlap from the header row above it.
+* **Preservation of Image & Pricing:** **Pass** — Image aspect ratios, strikethrough reference prices, and formatted final prices remain intact.
+
+#### B. Narrow Admin Card (No.92021)
+* **No. at Top-Left:** **Pass** — Positioned correctly in the top-left slot (aside from the text rendering fringe noted above).
+* **Flame / Count at Top-Right:** **Pass** — Shows flame icon + count `0` directly at the top right, conforming to the intended phone/compact pattern (icon + number only, label hidden).
+* **No Heat at Bottom:** **Pass** — No heat metadata appears below or near the admin actions.
+* **Preservation of Logo / "惠" Badge:** **Pass** — The red image badge remains intact on the product thumbnail.
+* **Preservation of Admin Controls & Pricing:** **Pass** — The reference price, active price (`¥460 / 200g×2个`), `管理操作` header, and `设置商品标记` button remain intact and unobstructed.

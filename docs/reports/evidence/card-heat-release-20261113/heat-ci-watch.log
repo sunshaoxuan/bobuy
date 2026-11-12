@@ -1,0 +1,26 @@
+Refreshing checks status every 15 seconds. Press Ctrl+C to quit.
+
+CodeQL	skipping	7s	https://github.com/sunshaoxuan/bobuy/runs/131317454863	
+analyze (javascript-typescript)	pass	1m38s	https://github.com/sunshaoxuan/bobuy/actions/runs/43256793639/job/131317058341	
+analyze (java-kotlin)	pending	0	https://github.com/sunshaoxuan/bobuy/actions/runs/43256793639/job/131317058282	
+analyze (actions)	pass	46s	https://github.com/sunshaoxuan/bobuy/actions/runs/43256793639/job/131317057692	
+Refreshing checks status every 15 seconds. Press Ctrl+C to quit.
+
+CodeQL	skipping	7s	https://github.com/sunshaoxuan/bobuy/runs/131317454863	
+analyze (javascript-typescript)	pass	1m38s	https://github.com/sunshaoxuan/bobuy/actions/runs/43256793639/job/131317058341	
+analyze (java-kotlin)	pending	0	https://github.com/sunshaoxuan/bobuy/actions/runs/43256793639/job/131317058282	
+analyze (actions)	pass	46s	https://github.com/sunshaoxuan/bobuy/actions/runs/43256793639/job/131317057692	
+Refreshing checks status every 15 seconds. Press Ctrl+C to quit.
+
+CodeQL	skipping	7s	https://github.com/sunshaoxuan/bobuy/runs/131317454863	
+analyze (javascript-typescript)	pass	1m38s	https://github.com/sunshaoxuan/bobuy/actions/runs/43256793639/job/131317058341	
+analyze (java-kotlin)	pending	0	https://github.com/sunshaoxuan/bobuy/actions/runs/43256793639/job/131317058282	
+analyze (actions)	pass	46s	https://github.com/sunshaoxuan/bobuy/actions/runs/43256793639/job/131317057692	
+CodeQL	pass	7s	https://github.com/sunshaoxuan/bobuy/runs/131317454863	
+analyze (actions)	pass	46s	https://github.com/sunshaoxuan/bobuy/actions/runs/43256793639/job/131317057692	
+analyze (java-kotlin)	pass	2m46s	https://github.com/sunshaoxuan/bobuy/actions/runs/43256793639/job/131317058282	
+analyze (javascript-typescript)	pass	1m38s	https://github.com/sunshaoxuan/bobuy/actions/runs/43256793639/job/131317058341	
+CodeQL	pass	7s	https://github.com/sunshaoxuan/bobuy/runs/131317454863	
+analyze (actions)	pass	46s	https://github.com/sunshaoxuan/bobuy/actions/runs/43256793639/job/131317057692	
+analyze (java-kotlin)	pass	2m46s	https://github.com/sunshaoxuan/bobuy/actions/runs/43256793639/job/131317058282	
+analyze (javascript-typescript)	pass	1m38s	https://github.com/sunshaoxuan/bobuy/actions/runs/43256793639/job/131317058341	

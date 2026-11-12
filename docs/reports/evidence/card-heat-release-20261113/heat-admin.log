@@ -1,0 +1,19 @@
+[
+  {
+    "route": "/products",
+    "width": 320,
+    "[redacted]": true,
+    "cards": 1,
+    "errors": [
+      "Failed to load resource: net::ERR_CONNECTION_REFUSED"
+    ],
+    "network": [
+      {
+        "url": "http://localhost:5178/api/storefront/recommendation-images/e5b4db2b-0bbe-499f-8335-fd28bd35b0d0",
+        "error": "net::ERR_CONNECTION_REFUSED"
+      }
+    ],
+    "mockedClicks": 0
+  }
+]
+
