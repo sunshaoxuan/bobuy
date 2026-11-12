@@ -1,0 +1,10 @@
+{
+  "source": "3a8b11ac97eab33f676b523af04af1f9922fd3f1",
+  "result": "PASS",
+  "ci": "success",
+  "ciUrl": "https://github.com/sunshaoxuan/bobuy/actions/runs/43148111847",
+  "frontendTests": 89,
+  "testsReused": "JavaScript and test inputs unchanged by CSS-only correction",
+  "frontendBuild": "PASS",
+  "candidateBrowser": "PASS: Japanese360px actual compiled layout with production public facts; JPY remains one line"
+}

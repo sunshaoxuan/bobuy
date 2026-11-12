@@ -1,5 +1,25 @@
 # Product introductions, 2026-11-12
 
+## Final acceptance
+
+Result: PASS for the resumed296-save, four-language display, production delivery and13-item missing-evidence list. Core5a9bb64 is healthy; frontend3a8b11a became live at2026-11-12T03:29:15Z and its scoped operator verified unchanged core/protected services. The later main integration adds documentation and audit archives only; application inputs equal3a8b11a.
+
+| Requirement | Result | Evidence |
+|---|---|---|
+| Save remaining296 | PASS | Normal merchant preview/select/review/save UI; `master-final-audit.json`: all297 new rows advanced once, all389 other master fields preserved. |
+| Four-language coverage | PASS within verified identities | 376/389 complete masters;79 existing complete preserved;325/325 existing public catalogue entries have four-language introductions,266 newly public introductions. |
+| Preserve history and disclosure boundary | PASS | `public-acceptance.json`: same325 identities and every historical/public field unchanged. Backend tests reject unlinked, deleted, cross-owner, stale, unreviewed and mismatched-ITEM disclosure. |
+| Public detail and recommendation detail | PASS | Four locales on both entry paths; image next/previous, close and deep-link reopen; No.77839 shows one warehouse card1498 and small Online1828, with expired discounts hidden on Japan day2026-11-12. |
+| Functional checks | PASS | Backend671 reported/647 executed/24 skipped,0 failures/errors and configured JaCoCo; frontend89 tests; final production build;9 release guard tests; both exact application commits have successful three-language CodeQL. |
+| Geometry | PASS for changed region | Eight1440×1000/360×1000 CSS viewport states have no horizontal overflow. Japanese JPY remains one line at360px; existing12px flex gap retained. Current introduction uses the existing paragraph flow and gutters. |
+| Visual | PASS | Primary inspected complete final native screenshots and original-pixel crops in all four languages. Gemini final review found no visible defects in English/Japanese; Chinese variants were separately inspected by the primary agent. Body and CTA are fully visible in bottom-scroll mobile states. |
+| Console/network | PASS | Application errors0. Fresh final catalogue capture has no failed requests, no buffer truncation and successful document/API/assets/images. Browser-extension warnings are separately identified. |
+| Unresolved13 | PASS as explicitly pending | `unresolved-products.json` and the table below identify exact missing identity/official-source evidence. All13 remain unchanged and outside the public catalogue. |
+
+Final screenshots are `production-*-whole.jpg` captured through the native viewport API, with observed pixel sizes recorded independently from CSS viewport sizes. Mobile files are360×1000; desktop capture files are1425×990 for a1440×1000 CSS viewport. Lossless `*-info.png` crops preserve the original screenshot pixels and include their parent hash and crop coordinates. They supersede the direct-CDP crop experiment, whose capture disturbed scroll position. Historical Japanese packaging, units and brand names remain the existing source facts; the new introduction is localized. The complete original-pixel English/Japanese review supersedes the incomplete-crop review. Final screenshot data is real production product data; the earlier local persistence fixture is clearly synthetic.
+
+Formal data extracts and original source-page facts are retained in the ignored evidence `private/` directory. Publicly summarized saved copy, source URL/hash provenance, coverage, acceptance and release receipts are retained as formal deliverables. Application rollback remains scoped to the preserved compose/images; saved master introductions are additive and remain compatible. Database restore is excluded after writers reopen.
+
 ## Resumed content acceptance and final candidate
 
 Production introduction projection5a9bb64 activated successfully at2026-11-12T03:18:29Z. First operator attempt used the compact list DTO for a detail-only introduction assertion and rolled both applications back, without database restore or data loss. The corrected assertion was first verified on the actual local detail endpoint, then release20261112.product-introductions.2 reused identical images and passed fresh stopped-writer backup,34 migration checks, protected services and full content fingerprints in164.17 seconds. Anonymous catalogue confirms325 public entries, all325 have four-language introductions,266 new public introductions and every historical/public field preserved.

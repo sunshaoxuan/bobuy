@@ -1,0 +1,262 @@
+{
+  "result": "PASS",
+  "preserved": "formal deliverables and ignored original evidence, isolated worktree, shared dependencies, unrelated root work and remote rollback artifacts",
+  "events": [
+    {
+      "process": 94828,
+      "result": "stopped exact task process"
+    },
+    {
+      "process": 95228,
+      "result": "stopped exact task process"
+    },
+    {
+      "process": 44216,
+      "result": "stopped exact task process"
+    },
+    {
+      "process": 99724,
+      "result": "stopped exact task process"
+    },
+    {
+      "process": 86080,
+      "result": "stopped exact task process"
+    },
+    {
+      "process": 92548,
+      "result": "stopped exact task process"
+    },
+    {
+      "path": "__pycache__",
+      "result": "removed task temporary directory"
+    },
+    {
+      "path": "scripts/__pycache__",
+      "result": "removed task temporary directory"
+    },
+    {
+      "path": "backend/target",
+      "result": "removed task temporary directory"
+    },
+    {
+      "path": "bobbuy-common/target",
+      "result": "removed task temporary directory"
+    },
+    {
+      "path": "bobbuy-core/target",
+      "result": "removed task temporary directory"
+    },
+    {
+      "path": "frontend/dist",
+      "result": "removed task temporary directory"
+    },
+    {
+      "path": ".task-tmp/release-payload",
+      "result": "removed task temporary directory"
+    },
+    {
+      "path": ".task-tmp/frontend-currency",
+      "result": "removed task temporary directory"
+    },
+    {
+      "path": "docs/reports/evidence/product-introductions-20261112/sources",
+      "result": "removed task temporary directory"
+    },
+    {
+      "path": "docs/reports/evidence/product-introductions-20261112/draft-batches",
+      "result": "removed task temporary directory"
+    },
+    {
+      "path": "frontend/node_modules",
+      "result": "unlinked own junction; shared target preserved"
+    },
+    {
+      "path": "task-specific ASCII coverage/TEMP directory",
+      "result": "removed"
+    },
+    {
+      "path": "archive-additions.mjs",
+      "result": "removed task helper"
+    },
+    {
+      "path": "assemble-drafts.mjs",
+      "result": "removed task helper"
+    },
+    {
+      "path": "audit-worksheet.mjs",
+      "result": "removed task helper"
+    },
+    {
+      "path": "build-evidence.py",
+      "result": "removed task helper"
+    },
+    {
+      "path": "crop-evidence.py",
+      "result": "removed task helper"
+    },
+    {
+      "path": "editorial-facts.json",
+      "result": "removed task helper"
+    },
+    {
+      "path": "evidence-bridge.mjs",
+      "result": "removed task helper"
+    },
+    {
+      "path": "finalize-records.py",
+      "result": "removed task helper"
+    },
+    {
+      "path": "frontend-release.py",
+      "result": "removed task helper"
+    },
+    {
+      "path": "inspect-research.mjs",
+      "result": "removed task helper"
+    },
+    {
+      "path": "inventory.mjs",
+      "result": "removed task helper"
+    },
+    {
+      "path": "manual-additions.json",
+      "result": "removed task helper"
+    },
+    {
+      "path": "pending.mjs",
+      "result": "removed task helper"
+    },
+    {
+      "path": "prepare-batches.mjs",
+      "result": "removed task helper"
+    },
+    {
+      "path": "public-acceptance.py",
+      "result": "removed task helper"
+    },
+    {
+      "path": "release-client.py",
+      "result": "removed task helper"
+    },
+    {
+      "path": "research-groups.mjs",
+      "result": "removed task helper"
+    },
+    {
+      "path": "research.mjs",
+      "result": "removed task helper"
+    },
+    {
+      "path": "review-drafts.mjs",
+      "result": "removed task helper"
+    },
+    {
+      "path": "runtime-current.py",
+      "result": "removed task helper"
+    },
+    {
+      "path": "source-example.html",
+      "result": "removed task helper"
+    },
+    {
+      "path": "worksheet.mjs",
+      "result": "removed task helper"
+    },
+    {
+      "path": "candidate-direct-viewport.jpg",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "candidate-en-US-1440-native.png",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "candidate-en-US-360-native.png",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "candidate-ja-JP-1440-native.png",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "candidate-ja-JP-360-native.png",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "candidate-raw-check.jpg",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "candidate-raw-viewport.jpg",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "candidate-zh-CN-1440-native.png",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "candidate-zh-CN-360-native.png",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "candidate-zh-TW-1440-native.png",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "candidate-zh-TW-360-native.png",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "draft-prompt.txt",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "local-frontend.log",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "local-runtime.log",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "production-en-US-1440-info.jpg",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "production-en-US-360-info.jpg",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "production-en-US-360-top.jpg",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "production-ja-JP-1440-info.jpg",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "production-ja-JP-360-info.jpg",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "production-zh-CN-1440-info.jpg",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "production-zh-CN-360-info.jpg",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "production-zh-CN-360-native.jpg",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "production-zh-TW-1440-info.jpg",
+      "result": "removed superseded process evidence"
+    },
+    {
+      "path": "production-zh-TW-360-info.jpg",
+      "result": "removed superseded process evidence"
+    }
+  ]
+}

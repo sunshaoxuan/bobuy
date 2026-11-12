@@ -1,0 +1,302 @@
+[
+  {
+    "productId": "a97bd423-b7fc-4297-8cbe-bb284073d971",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true
+  },
+  {
+    "productId": "aaa1f1a2-02e9-456e-89ab-204bfffc8911",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true
+  },
+  {
+    "productId": "ab4f742f-9b15-4b8d-8ff6-9cce96ee3b14",
+    "beforeVersion": 4,
+    "afterVersion": 5,
+    "exact": true
+  },
+  {
+    "productId": "adbdebda-935c-4db2-9189-739b56e9ddb5",
+    "beforeVersion": 9,
+    "afterVersion": 10,
+    "exact": true
+  },
+  {
+    "productId": "ae43dcde-f7b4-4692-bce5-235e5be5b278",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true
+  },
+  {
+    "productId": "af1c14f7-ada7-4c21-af1c-2988541f363c",
+    "beforeVersion": 10,
+    "afterVersion": 11,
+    "exact": true
+  },
+  {
+    "productId": "af71f01b-0e7f-41bb-89f1-596973fb91f7",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true
+  },
+  {
+    "productId": "b169db52-cb2a-4054-8359-b895da1d4470",
+    "beforeVersion": 4,
+    "afterVersion": 5,
+    "exact": true
+  },
+  {
+    "productId": "b32e2192-4cad-49b7-9d3a-45680e40f226",
+    "beforeVersion": 9,
+    "afterVersion": 10,
+    "exact": true
+  },
+  {
+    "productId": "b3b6d91c-f1c4-47d8-914b-60ec0a11b26d",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true
+  },
+  {
+    "productId": "b6fbf159-41ca-4416-9773-d06fc712913d",
+    "beforeVersion": 3,
+    "afterVersion": 4,
+    "exact": true
+  },
+  {
+    "productId": "b8bc9c89-e82f-4189-9f57-91209cf92af0",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true
+  },
+  {
+    "productId": "b9ef230c-9ac8-43e3-b285-f689c28fa1e0",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true
+  },
+  {
+    "productId": "ba1001c9-4f81-47e0-8b65-4507242effb6",
+    "beforeVersion": 1,
+    "afterVersion": 2,
+    "exact": true
+  },
+  {
+    "productId": "bdb9a80f-c42f-4341-9a5b-9311d0de441e",
+    "beforeVersion": 1,
+    "afterVersion": 2,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-075d6898-01ce-3e41-a335-1d24c78f1068",
+    "beforeVersion": 70,
+    "afterVersion": 71,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-07ee246d-18a4-3d74-8918-c168267f97e3",
+    "beforeVersion": 214,
+    "afterVersion": 215,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-09a01cfc-587e-368a-9c3a-c567b1e2ab54",
+    "beforeVersion": 164,
+    "afterVersion": 165,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-0a2a64ef-dcbd-3206-a970-9cc04c7c698c",
+    "beforeVersion": 40,
+    "afterVersion": 41,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-0a62d3bf-5379-30d5-a13d-28f59ad424e4",
+    "beforeVersion": 126,
+    "afterVersion": 127,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-0b7e6681-2ec2-392e-80ed-66ad42d2c1bc",
+    "beforeVersion": 56,
+    "afterVersion": 57,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-10bde458-8729-3d1e-8101-a9985e6e4306",
+    "beforeVersion": 56,
+    "afterVersion": 57,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-122ce621-f39a-3a9e-b563-87b6db201b91",
+    "beforeVersion": 38,
+    "afterVersion": 39,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-122edeb7-b722-3cf6-aebd-a32a3e134b76",
+    "beforeVersion": 30,
+    "afterVersion": 31,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-12fe9b80-94e3-3c88-9be3-80b16696a68d",
+    "beforeVersion": 132,
+    "afterVersion": 133,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-13252bdd-6d0e-3ba3-9704-fa77b6d571df",
+    "beforeVersion": 54,
+    "afterVersion": 55,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-145701c1-4dd1-32f0-b847-eb4c49250049",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-158a8249-7c49-3350-9412-a1d1d320ae40",
+    "beforeVersion": 188,
+    "afterVersion": 189,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-1590bd81-eaef-321c-b2b4-787a078ac8b6",
+    "beforeVersion": 178,
+    "afterVersion": 179,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-18d2aeae-85b4-3bd8-8251-cef16065a4a5",
+    "beforeVersion": 68,
+    "afterVersion": 69,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-1cbe2a7b-b497-3334-861c-f40769b65d4b",
+    "beforeVersion": 104,
+    "afterVersion": 105,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-1ce75037-c172-36f1-a387-4f084aade466",
+    "beforeVersion": 120,
+    "afterVersion": 121,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-1d37e908-7c18-3058-b131-0fd7e283d1c8",
+    "beforeVersion": 38,
+    "afterVersion": 39,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-1f9d7871-d2b7-34f3-93dc-5162ce3126d6",
+    "beforeVersion": 218,
+    "afterVersion": 219,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-236c0ac5-588a-37b7-9c88-0aa52542163c",
+    "beforeVersion": 8,
+    "afterVersion": 9,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-23ec3ecc-af41-3121-a8ce-e0bf969c544a",
+    "beforeVersion": 222,
+    "afterVersion": 223,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-25f8461c-bc02-3502-9d04-737dc16a5a47",
+    "beforeVersion": 88,
+    "afterVersion": 89,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-276c608a-c229-35b2-bfe4-37c4e0cb70bb",
+    "beforeVersion": 208,
+    "afterVersion": 209,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-28d9b8db-6541-3032-96d9-337144c7e243",
+    "beforeVersion": 46,
+    "afterVersion": 47,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-2b831384-e39a-3c0d-9820-c5a57b1c4dc7",
+    "beforeVersion": 162,
+    "afterVersion": 163,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-2ef4d51c-a74d-38df-87ad-48b87dd0128b",
+    "beforeVersion": 34,
+    "afterVersion": 35,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-2f2a6098-5f1b-31e8-9172-034dd35708d9",
+    "beforeVersion": 48,
+    "afterVersion": 49,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-2fef0e5f-75d8-3fe3-83e6-f4aaa5ba74a3",
+    "beforeVersion": 66,
+    "afterVersion": 67,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-33842e20-0dd6-30ee-846f-7176163ee6c1",
+    "beforeVersion": 8,
+    "afterVersion": 9,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-35ff40dd-313d-3d5b-99e0-0f419a72723a",
+    "beforeVersion": 30,
+    "afterVersion": 31,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-36c9fa1f-9319-3ea2-af80-c7ee8c37a9c3",
+    "beforeVersion": 136,
+    "afterVersion": 137,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-38a4c544-418e-30f4-98ba-4533c0219eb5",
+    "beforeVersion": 182,
+    "afterVersion": 183,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-3aac92ea-d762-323c-9e94-5c2fe5be53d1",
+    "beforeVersion": 190,
+    "afterVersion": 191,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-3ad180cc-544f-3b21-9c29-902b54e428e3",
+    "beforeVersion": 100,
+    "afterVersion": 101,
+    "exact": true
+  },
+  {
+    "productId": "bobuy-rec-v1-3c358bb7-1d76-31be-9918-92c6a2344402",
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "exact": true
+  }
+]

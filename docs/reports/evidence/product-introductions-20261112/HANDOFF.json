@@ -1,0 +1,12 @@
+{
+  "status": "COMPLETE",
+  "remainingPreparedUnsaved": 0,
+  "newSaved": 297,
+  "existingCompletePreserved": 79,
+  "complete": 376,
+  "unresolved": 13,
+  "applicationDeployed": true,
+  "backendSource": "5a9bb64",
+  "frontendSource": "3a8b11a",
+  "productionAccepted": true
+}

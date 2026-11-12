@@ -1,0 +1,8 @@
+**Review — essential negatives**
+
+- **Disclosure:** Document the new field as live/current, nullable, and *outside* the immutable published snapshot; not historical evidence. State translation-hash semantics (exact locale/reviewed master text) and eligibility rules. Consumers must not cache it as immutable or merge it into snapshot history.
+- **Snapshot consistency:** Do not alter existing snapshot payloads, historical descriptions, ranking, or published facts. The current introduction must not backfill or overwrite history; frontend must label current vs historical and never use current text to justify a past recommendation.
+- **Source/hash consistency:** Return only current reviewed master description. Hash must match the exact returned text/locale; no stale cache, mismatched hash, fallback to snapshot/raw/unreviewed/machine translation, or cross-locale mixing. If review/hash unavailable, omit field.
+- **Eligibility:** Evaluate only already eligible, nondeleted products; add no new visibility, eligibility, ranking, or private unlinked expansion. Do not reveal private existence, counts, references, or ITEM values.
+- **Reference-only private gate:** Require *every* same-owner published reference to have an exact, nonblank ITEM match. Enforce same-owner and exactness without normalization; make result all-or-nothing. On any blank/mismatch, omit introduction without partial disclosure or explanatory leakage.
+- **API/UI consistency:** Overview may show current introduction; historical facts remain separate. Do not conflate the two, imply snapshot immutability covers the new field, or expose whether a private product failed the reference gate.

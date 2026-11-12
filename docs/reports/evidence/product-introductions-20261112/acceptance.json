@@ -1,0 +1,42 @@
+{
+  "result": "PASS",
+  "scope": "Resume296 supported UI saves, publish introduction display, verify four languages and list13 unresolved records",
+  "active": 389,
+  "complete": 376,
+  "newSavedTotal": 297,
+  "savedThisResumedTurn": 296,
+  "existingCompletePreserved": 79,
+  "unresolved": 13,
+  "publicEntries": 325,
+  "publicFourLanguageIntroductions": 325,
+  "newPublicIntroductions": 266,
+  "all389OtherMasterFieldsPreserved": true,
+  "historicalPublicFieldsPreserved": true,
+  "backendSource": "5a9bb64ab8cda965018bddacfe9471c1081ca34b",
+  "frontendSource": "3a8b11ac97eab33f676b523af04af1f9922fd3f1",
+  "frontendLiveAt": "2026-11-12T03:29:15Z",
+  "publication": {
+    "phase": "WRITES_OPEN",
+    "source": "5a9bb64ab8cda965018bddacfe9471c1081ca34b",
+    "at": "2026-11-12T03:18:29Z",
+    "seconds": 164.17,
+    "sqlMigration": false,
+    "contentUnchanged": true
+  },
+  "frontendPublication": {
+    "phase": "VERIFIED",
+    "at": "2026-11-12T03:29:18Z",
+    "source": "3a8b11ac97eab33f676b523af04af1f9922fd3f1",
+    "frontendOnly": true,
+    "protectedUnchanged": true,
+    "databaseWrites": false
+  },
+  "functional": "PASS: both public entry paths, four languages, gallery next/previous, close and deep-link reopen",
+  "geometry": "PASS: no horizontal overflow in8 states; Japanese JPY1 line, existing12px gap retained",
+  "visual": "PASS: primary inspected final native viewport screenshots and original-pixel crops; Gemini final review found no visible defects in English/Japanese; primary reviewed Chinese variants",
+  "consoleApplicationErrors": 0,
+  "networkFailures": 0,
+  "negativeBoundaries": "Unlinked private/deleted/cross-owner/stale/unreviewed/mismatched ITEM introduction cases denied by backend tests",
+  "screenshots": "ui-production-native-matrix.json plus ui-original-pixel-crops.json; supersede direct-CDP crops",
+  "sourceSummarySha256": "45ceaf8c0e835a00c3377ece69c54433bcfae1ce7954cab137a95ac2b5027ba1"
+}

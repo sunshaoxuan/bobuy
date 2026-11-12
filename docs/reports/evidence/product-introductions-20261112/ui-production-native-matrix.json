@@ -1,0 +1,736 @@
+{
+  "states": [
+    {
+      "coreSource": "5a9bb64",
+      "geometry": {
+        "bottom": 982.140625,
+        "height": 636.140625,
+        "left": 18,
+        "right": 342,
+        "top": 346,
+        "width": 324,
+        "x": 18,
+        "y": 346
+      },
+      "locale": "zh-CN",
+      "nativeViewportCapture": true,
+      "overflow": false,
+      "scroll": {
+        "max": 241,
+        "top": 241
+      },
+      "source": "3a8b11a",
+      "width": 360,
+      "capturedPixelSize": [
+        360,
+        1000
+      ],
+      "referencePanel": {
+        "bottom": 765.46875,
+        "height": 152.484375,
+        "left": 18,
+        "right": 342,
+        "top": 612.984375,
+        "width": 324,
+        "x": 18,
+        "y": 612.984375
+      },
+      "referencePanelText": "参考售价（非实时）\nJPY\n原价: ¥2,398\n−¥510\n¥\n1,888\n/ 本体容器1個＋カートリッジ5個"
+    },
+    {
+      "coreSource": "5a9bb64",
+      "geometry": {
+        "bottom": 982.40625,
+        "height": 747.40625,
+        "left": 18,
+        "right": 342,
+        "top": 235,
+        "width": 324,
+        "x": 18,
+        "y": 235
+      },
+      "locale": "en-US",
+      "nativeViewportCapture": true,
+      "overflow": false,
+      "scroll": {
+        "max": 352,
+        "top": 352
+      },
+      "source": "3a8b11a",
+      "width": 360,
+      "capturedPixelSize": [
+        360,
+        1000
+      ],
+      "referencePanel": {
+        "bottom": 688.0625,
+        "height": 152.484375,
+        "left": 18,
+        "right": 342,
+        "top": 535.578125,
+        "width": 324,
+        "x": 18,
+        "y": 535.578125
+      },
+      "referencePanelText": "Reference price (not real time)\nJPY\nOriginal price: ¥2,398\n−¥510\n¥\n1,888\n/ 本体容器1個＋カートリッジ5個"
+    },
+    {
+      "coreSource": "5a9bb64",
+      "geometry": {
+        "bottom": 982.234375,
+        "height": 641.234375,
+        "left": 18,
+        "right": 342,
+        "top": 341,
+        "width": 324,
+        "x": 18,
+        "y": 341
+      },
+      "locale": "ja-JP",
+      "nativeViewportCapture": true,
+      "overflow": false,
+      "scroll": {
+        "max": 246,
+        "top": 246
+      },
+      "source": "3a8b11a",
+      "width": 360,
+      "capturedPixelSize": [
+        360,
+        1000
+      ],
+      "referencePanel": {
+        "bottom": 739.671875,
+        "height": 152.484375,
+        "left": 18,
+        "right": 342,
+        "top": 587.1875,
+        "width": 324,
+        "x": 18,
+        "y": 587.1875
+      },
+      "referencePanelText": "参考価格（リアルタイムではありません）\nJPY\n通常価格: ¥2,398\n−¥510\n¥\n1,888\n/ 本体容器1個＋カートリッジ5個"
+    },
+    {
+      "coreSource": "5a9bb64",
+      "geometry": {
+        "bottom": 982.140625,
+        "height": 636.140625,
+        "left": 18,
+        "right": 342,
+        "top": 346,
+        "width": 324,
+        "x": 18,
+        "y": 346
+      },
+      "locale": "zh-TW",
+      "nativeViewportCapture": true,
+      "overflow": false,
+      "scroll": {
+        "max": 241,
+        "top": 241
+      },
+      "source": "3a8b11a",
+      "width": 360,
+      "capturedPixelSize": [
+        360,
+        1000
+      ],
+      "referencePanel": {
+        "bottom": 765.46875,
+        "height": 152.484375,
+        "left": 18,
+        "right": 342,
+        "top": 612.984375,
+        "width": 324,
+        "x": 18,
+        "y": 612.984375
+      },
+      "referencePanelText": "參考售價（非即時）\nJPY\n原價: ¥2,398\n−¥510\n¥\n1,888\n/ 本体容器1個＋カートリッジ5個"
+    },
+    {
+      "coreSource": "5a9bb64",
+      "geometry": {
+        "bottom": 803,
+        "height": 718,
+        "left": 922.59375,
+        "right": 1401,
+        "top": 85,
+        "width": 478.40625,
+        "x": 922.59375,
+        "y": 85
+      },
+      "locale": "zh-TW",
+      "nativeViewportCapture": true,
+      "overflow": false,
+      "scroll": {
+        "max": 0,
+        "top": 0
+      },
+      "source": "3a8b11a",
+      "width": 1440,
+      "capturedPixelSize": [
+        1425,
+        990
+      ],
+      "referencePanel": {
+        "bottom": 488.953125,
+        "height": 155.171875,
+        "left": 922.59375,
+        "right": 1401,
+        "top": 333.78125,
+        "width": 478.40625,
+        "x": 922.59375,
+        "y": 333.78125
+      },
+      "referencePanelText": "參考售價（非即時）\nJPY\n原價: ¥2,398\n−¥510\n¥\n1,888\n/ 本体容器1個＋カートリッジ5個"
+    },
+    {
+      "coreSource": "5a9bb64",
+      "geometry": {
+        "bottom": 803,
+        "height": 718,
+        "left": 922.59375,
+        "right": 1401,
+        "top": 85,
+        "width": 478.40625,
+        "x": 922.59375,
+        "y": 85
+      },
+      "locale": "ja-JP",
+      "nativeViewportCapture": true,
+      "overflow": false,
+      "scroll": {
+        "max": 0,
+        "top": 0
+      },
+      "source": "3a8b11a",
+      "width": 1440,
+      "capturedPixelSize": [
+        1425,
+        990
+      ],
+      "referencePanel": {
+        "bottom": 468.15625,
+        "height": 155.171875,
+        "left": 922.59375,
+        "right": 1401,
+        "top": 312.984375,
+        "width": 478.40625,
+        "x": 922.59375,
+        "y": 312.984375
+      },
+      "referencePanelText": "参考価格（リアルタイムではありません）\nJPY\n通常価格: ¥2,398\n−¥510\n¥\n1,888\n/ 本体容器1個＋カートリッジ5個"
+    },
+    {
+      "coreSource": "5a9bb64",
+      "geometry": {
+        "bottom": 803,
+        "height": 718,
+        "left": 922.59375,
+        "right": 1401,
+        "top": 85,
+        "width": 478.40625,
+        "x": 922.59375,
+        "y": 85
+      },
+      "locale": "en-US",
+      "nativeViewportCapture": true,
+      "overflow": false,
+      "scroll": {
+        "max": 0,
+        "top": 0
+      },
+      "source": "3a8b11a",
+      "width": 1440,
+      "capturedPixelSize": [
+        1425,
+        990
+      ],
+      "referencePanel": {
+        "bottom": 488.953125,
+        "height": 155.171875,
+        "left": 922.59375,
+        "right": 1401,
+        "top": 333.78125,
+        "width": 478.40625,
+        "x": 922.59375,
+        "y": 333.78125
+      },
+      "referencePanelText": "Reference price (not real time)\nJPY\nOriginal price: ¥2,398\n−¥510\n¥\n1,888\n/ 本体容器1個＋カートリッジ5個"
+    },
+    {
+      "coreSource": "5a9bb64",
+      "geometry": {
+        "bottom": 803,
+        "height": 718,
+        "left": 922.59375,
+        "right": 1401,
+        "top": 85,
+        "width": 478.40625,
+        "x": 922.59375,
+        "y": 85
+      },
+      "locale": "zh-CN",
+      "nativeViewportCapture": true,
+      "overflow": false,
+      "scroll": {
+        "max": 0,
+        "top": 0
+      },
+      "source": "3a8b11a",
+      "width": 1440,
+      "capturedPixelSize": [
+        1425,
+        990
+      ],
+      "referencePanel": {
+        "bottom": 488.953125,
+        "height": 155.171875,
+        "left": 922.59375,
+        "right": 1401,
+        "top": 333.78125,
+        "width": 478.40625,
+        "x": 922.59375,
+        "y": 333.78125
+      },
+      "referencePanelText": "参考售价（非实时）\nJPY\n原价: ¥2,398\n−¥510\n¥\n1,888\n/ 本体容器1個＋カートリッジ5個"
+    }
+  ],
+  "source": "3a8b11a",
+  "coreSource": "5a9bb64",
+  "network": {
+    "truncated": false,
+    "hasMore": false,
+    "responses": [
+      {
+        "url": "https://bobuy.cc/products?product=8b8ecfca-5824-4594-bea1-922ede028682",
+        "status": 200,
+        "type": "Document"
+      },
+      {
+        "url": "chrome-extension://amkbmndfnliijdhojkpoglbnaaahippg/content_main.js",
+        "status": 200,
+        "type": "Script"
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-Cep5DThy.css",
+        "status": 200,
+        "type": "Stylesheet"
+      },
+      {
+        "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+        "status": 200,
+        "type": "Script"
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-hPNq8lHS.js",
+        "status": 200,
+        "type": "Script"
+      },
+      {
+        "url": "chrome-extension://amkbmndfnliijdhojkpoglbnaaahippg/default_config.content.json",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/assets/ImageLightbox-DKnMaoxp.css",
+        "status": 200,
+        "type": "Stylesheet"
+      },
+      {
+        "url": "https://bobuy.cc/assets/RecommendationImageViewer-BnZdvF0r.css",
+        "status": 200,
+        "type": "Stylesheet"
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMarkerBadges-YtkPTPIq.css",
+        "status": 200,
+        "type": "Stylesheet"
+      },
+      {
+        "url": "https://bobuy.cc/assets/RecommendationImageViewer-DZ2lNU5s.js",
+        "status": 200,
+        "type": "Script"
+      },
+      {
+        "url": "https://bobuy.cc/assets/PublicProductCatalog-BDijVLyf.js",
+        "status": 200,
+        "type": "Script"
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMarkerEditor-BncAVtXn.js",
+        "status": 200,
+        "type": "Script"
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-DXA_vSQE.js",
+        "status": 200,
+        "type": "Script"
+      },
+      {
+        "url": "https://bobuy.cc/assets/SaveOutlined-DchhDHYs.js",
+        "status": 200,
+        "type": "Script"
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-Bg3KLAl5.js",
+        "status": 200,
+        "type": "Script"
+      },
+      {
+        "url": "https://bobuy.cc/assets/ReloadOutlined-JgwcYQA4.js",
+        "status": 200,
+        "type": "Script"
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMetadata-Bfo1Dd4q.js",
+        "status": 200,
+        "type": "Script"
+      },
+      {
+        "url": "https://bobuy.cc/assets/ProductMarkerBadges-BvTYfsBG.js",
+        "status": 200,
+        "type": "Script"
+      },
+      {
+        "url": "https://bobuy.cc/assets/index-CxBP4RjG.js",
+        "status": 200,
+        "type": "Script"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/trips",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/assets/ImageLightbox-BzlK4zHN.js",
+        "status": 200,
+        "type": "Script"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/trips?includeCurrent=true",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/auth/me",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "chrome-extension://hbfhdcdeikaehendoojplfpjcfifnlme/content-scripts/content.css",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/favicon.svg",
+        "status": 200,
+        "type": "Other"
+      },
+      {
+        "url": "https://bobuy.cc/cdn-cgi/rum?",
+        "status": 204,
+        "type": "XHR"
+      },
+      {
+        "url": "chrome-extension://hehggadaopoacecdllhhajmbjkdcmajg/images/cursor-chat.png",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/favicon.svg",
+        "status": 200,
+        "type": "Other"
+      },
+      {
+        "url": "chrome-extension://amkbmndfnliijdhojkpoglbnaaahippg/locales.json",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-browse/8b8ecfca-5824-4594-bea1-922ede028682?",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/d4c8ebec-2581-4483-9062-94887883f518",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/71ef2960-e8e5-48b2-9185-d8c4b75b603c",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/9c5adfe4-f35b-41ac-9d51-d39dcce94ecd",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-browse?page=0&query=&category=&locale=zh-CN&marked=false&sort=default",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-sales?productIds=8b8ecfca-5824-4594-bea1-922ede028682",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/018775a1-c531-4d89-bb61-5148b6a1df05",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/e5d42bc7-e135-46dd-ae28-2e689ad56ed6",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/badef57a-fe6f-4f1b-bfd2-e721b3459be5",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/22953f1c-a3ca-4efb-8939-3861dfd43437",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/063ad525-52a2-45dd-96b1-7a17dd252558",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/57b03030-3ed9-4bf5-8a10-f8e170cc7d84",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/331187f7-d0f5-468f-83aa-324a613a4f19",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/65a36f72-8834-4784-ac33-8f40ee42a3b4",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/124710c0-5214-40dc-9dbf-fc14f97b2ca1",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/6c97f77e-0ac8-4d48-b8f9-6ceb5f1754fb",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/19344070-72b8-45ab-8b15-c5c5ca5d9600",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/15ecbeeb-8c9b-43e1-9a5b-a44c53d4e3d6",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/30aff115-f411-4a5a-a193-a77af61c469d",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/4ec44235-7ee8-4d39-bc77-7a24ad2b3bb2",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/b880a89e-cfc6-42ec-b49b-d3a6e323f8fa",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/7b61f7ff-a769-4cf2-b7e1-cf33e8b08643",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/0e2cc6e9-c6ff-43ce-be80-5bcce146a5ba",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/775288fb-c134-49a2-8704-b95a2e0ceb6d",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/6e6d01fd-8aac-42b3-90d3-3f76d627c24b",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/2329db85-1d7a-463b-8caf-aa4d69599b10",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/recommendation-images/9adefe75-43ec-441c-a3e0-abb0df72b967",
+        "status": 200,
+        "type": "Image"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/08ee57fc-9c54-47a6-81b7-01b70d0b2092",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/13dfefdb-ef8b-4248-ae08-4453e63820a1",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/133ee647-df82-436d-8a5c-cc5ee8f51c16",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/13804fbc-23cf-41bb-ad5e-2c5ad2affb65",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/1b90522f-68d8-4cfb-95de-24b7b92917ed",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/12e3ced1-eedc-436a-8d50-94b1bf424508",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/0b38036f-3e99-420c-b870-89fe35d7a723",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/1cfc194a-d903-468d-b8dc-47ce8b02e24b",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/1d124bb9-fc3b-4e72-869a-c4e36d436111",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/238b4d55-fa1f-447d-afa2-df07e45ccdfc",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/0451e987-1bc1-498d-8494-a7b9be9adbb7",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/1f2ec151-c468-417c-8597-8308e6ef659e",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/1d3770b1-37c9-4198-bc43-ddf183dd3989",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/23e418a0-a3d9-471b-b0cc-76e555e210eb",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/2065969a-c23e-492d-8b77-ee6a963496bc",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/225a37ee-fd64-437e-9345-7c910a63f89c",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/124bb802-8805-4a61-bead-687b3967a20d",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/1f630007-3a30-469e-8cee-dc7a3917d654",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/2388eca8-ae4a-40bf-80ba-c3b2901f2b47",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/18e7bdb3-8437-4fbd-9d6c-a55817d03e4b",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/17ba61b2-32ad-4fbc-a992-6c51c781d20e",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-popularity/0a516c2c-9f7d-46a8-a983-661959673738",
+        "status": 200,
+        "type": "Fetch"
+      },
+      {
+        "url": "https://bobuy.cc/api/storefront/product-sales?productIds=018775a1-c531-4d89-bb61-5148b6a1df05%2C0451e987-1bc1-498d-8494-a7b9be9adbb7%2C08ee57fc-9c54-47a6-81b7-01b70d0b2092%2C0a516c2c-9f7d-46a8-a983-661959673738%2C0b38036f-3e99-420c-b870-89fe35d7a723%2C124bb802-8805-4a61-bead-687b3967a20d%2C12e3ced1-eedc-436a-8d50-94b1bf424508%2C133ee647-df82-436d-8a5c-cc5ee8f51c16%2C13804fbc-23cf-41bb-ad5e-2c5ad2affb65%2C13dfefdb-ef8b-4248-ae08-4453e63820a1%2C17ba61b2-32ad-4fbc-a992-6c51c781d20e%2C18e7bdb3-8437-4fbd-9d6c-a55817d03e4b%2C1b90522f-68d8-4cfb-95de-24b7b92917ed%2C1cfc194a-d903-468d-b8dc-47ce8b02e24b%2C1d124bb9-fc3b-4e72-869a-c4e36d436111%2C1d3770b1-37c9-4198-bc43-ddf183dd3989%2C1f2ec151-c468-417c-8597-8308e6ef659e%2C1f630007-3a30-469e-8cee-dc7a3917d654%2C2065969a-c23e-492d-8b77-ee6a963496bc%2C225a37ee-fd64-437e-9345-7c910a63f89c%2C233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d%2C2388eca8-ae4a-40bf-80ba-c3b2901f2b47%2C238b4d55-fa1f-447d-afa2-df07e45ccdfc%2C23e418a0-a3d9-471b-b0cc-76e555e210eb",
+        "status": 200,
+        "type": "Fetch"
+      }
+    ],
+    "failed": []
+  },
+  "applicationConsole": [],
+  "loadedAssets": {
+    "scripts": [
+      "https://bobuy.cc/assets/index-hPNq8lHS.js"
+    ],
+    "styles": [
+      "https://bobuy.cc/assets/index-Cep5DThy.css",
+      "https://bobuy.cc/assets/ImageLightbox-DKnMaoxp.css",
+      "https://bobuy.cc/assets/RecommendationImageViewer-BnZdvF0r.css",
+      "https://bobuy.cc/assets/ProductMarkerBadges-YtkPTPIq.css"
+    ]
+  },
+  "currencyFinal": {
+    "bounds": {
+      "bottom": 764.828125,
+      "height": 12.640625,
+      "left": 309.828125,
+      "right": 326,
+      "top": 752.1875,
+      "width": 16.171875,
+      "x": 309.828125,
+      "y": 752.1875
+    },
+    "lines": 1,
+    "text": "JPY"
+  },
+  "supersedes": "ui-production-final-matrix and all direct-CDP info crops; native viewport screenshots preserve final scroll position"
+}

@@ -1,0 +1,19 @@
+{
+  "source": "5a9bb64ab8cda965018bddacfe9471c1081ca34b",
+  "result": "PASS",
+  "backend": {
+    "tests": 671,
+    "executed": 647,
+    "skipped": 24,
+    "failures": 0,
+    "errors": 0
+  },
+  "configuredJacoco": "PASS",
+  "frontendTests": 89,
+  "frontendBuild": "PASS",
+  "browser": "PASS",
+  "browserScope": "Four locales at1440 and360, normal synthetic master save and public readback; production acceptance pending",
+  "codeql": "success",
+  "codeqlUrl": "https://github.com/sunshaoxuan/bobuy/actions/runs/43145932918",
+  "schemaOperation": false
+}

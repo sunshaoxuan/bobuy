@@ -1,5 +1,11 @@
 # Candidate change history
 
+## 20261112 multilingual product introductions, production accepted
+
+- 补齐并保存297项四语商品介绍，现有79项完整介绍保留；389项主档中376项完整，13项资料缺口逐项列明。
+- 现有325项公开商品均显示四语介绍，详情和推荐入口读取当前已审核介绍，历史优惠、规格、图片及公开范围保持一致；修复日文手机价格栏币种换行。
+- 核心5a9bb64、前端3a8b11a已上线，完整验收与来源记录见[商品介绍报告](reports/PRODUCT-INTRODUCTIONS-20261112.md)。
+
 ## 20261112 social platform selection
 
 - 我的资料社交平台改为可搜索的固定选择目录，中国8项、其他地区19项；账号及显示名称保留输入。
