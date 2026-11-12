@@ -171,49 +171,11 @@ BOBBuy 当前是一套以 **Spring Boot + React + PostgreSQL/MinIO + WebSocket(S
 
 ## 验收门禁
 
-默认门禁（每个 PR / `main` push 必跑）：
-- `cd backend && mvn test`
-- `cd frontend && npm ci && npm test`
-- `cd frontend && npm run build`
+现行执行口径见[本地与CI测试矩阵](docs/reports/TEST-MATRIX-本地与CI执行矩阵.md)，重审依据见[2026-11-12报告](docs/reports/RELEASE-GATE-REVIEW-20261112.md)。`ci.yml`已于2026-11-10删除，旧backend-test、frontend-quality、docker-build等job不再是默认PR门禁。
 
-AI / OCR 默认测试边界：
-- 默认单测只走 fake/mock/H2，不连接真实 Ollama、Codex Bridge、Codex CLI、OCR service、MinIO。
-- 真实 AI/OCR 验收仅在专用环境执行，见 `docs/reports/TEST-MATRIX-本地与CI执行矩阵.md`。
-- Sample 字段级黄金值基线：`docs/fixtures/ai-onboarding-sample-golden.json`
-- Sample 对比脚本：`pwsh /home/runner/work/bobbuy/bobbuy/scripts/verify-ai-onboarding-samples.ps1`
-- Sample 脚本 dry-run fixture：`docs/fixtures/ai-onboarding-sample-scan-mock.json`
-- Sample 门禁命令（默认 gate 模式，遇到 `FAIL` / `SCAN_FAIL` / `MISSING_FILE` 返回非零）：
-  `pwsh -NoProfile -Command "& '/home/runner/work/bobbuy/bobbuy/scripts/verify-ai-onboarding-samples.ps1' -MockScanResponsePath '/home/runner/work/bobbuy/bobbuy/docs/fixtures/ai-onboarding-sample-scan-mock.json' -SampleIds @('IMG_1484.jpg','IMG_1638.jpg') -IncludeNeedsHumanGolden"`
-- Sample report-only 命令（仅人工出报告，不得作为 release gate）：
-  `pwsh -NoProfile -Command "& '/home/runner/work/bobbuy/bobbuy/scripts/verify-ai-onboarding-samples.ps1' -MockScanResponsePath '/home/runner/work/bobbuy/bobbuy/docs/fixtures/ai-onboarding-sample-scan-mock-fail.json' -SampleIds @('IMG_1484.jpg') -ReportOnly"`
-- 专项报告：`docs/reports/REPORT-03-AI商品字段识别样例验证报告.md`
-- 发版候选证据报告：`docs/reports/REPORT-04-发版候选门禁验收报告.md`
-- 发版阻断项处置报告：`docs/reports/REPORT-05-发版阻断项处置报告.md`
-- 专用环境发版证据与放行判定：`docs/reports/REPORT-06-专用环境发版证据与放行判定.md`
-- NO-GO 解阻与放行复判：`docs/reports/REPORT-07-NO-GO阻断项解阻与放行复判.md`
-- PLAN-50 AI 放行链路执行报告：`docs/reports/REPORT-09-PLAN50-AI放行链路执行报告.md`
-- `cd backend && mvn -DskipTests package && cd /home/runner/work/bobbuy/bobbuy && docker build backend -t bobbuy-backend-test`
-- `cd /home/runner/work/bobbuy/bobbuy && docker build frontend -t bobbuy-frontend-test`
+CodeQL保留Java、JavaScript和Actions分析；Maven漏洞扫描按依赖输入变化执行。功能测试、构建、浏览器、迁移及恢复检查按本次受影响范围执行。已有相同输入的有效结果可复用；同一候选由现有门禁承担的全量检查只执行一次。纯文档和CI编排按相关静态及脚本行为检查交付。
 
-专用环境门禁（不进入默认 Hosted CI）：
-- `cd backend && mvn -Dflyway.url=jdbc:postgresql://localhost:5432/bobbuy -Dflyway.user=bobbuy -Dflyway.password=bobbuypassword -Dflyway.cleanDisabled=false flyway:clean flyway:migrate flyway:validate`
-- `cd /home/runner/work/bobbuy/bobbuy && mvn -pl bobbuy-core,bobbuy-ai,bobbuy-im,bobbuy-auth,bobbuy-gateway -am -Dsurefire.failIfNoSpecifiedTests=false -Dtest='*SmokeTest,*InternalServiceHeaderFilterTest' test`
-- `cd frontend && npm run e2e`
-- `cd frontend && npm run e2e:ai`
-- `workflow_dispatch`: `.github/workflows/ai-release-evidence.yml`（需传专用后端 URL；`frontend` 支持 `BOBBUY_API_PROXY_TARGET` / `BOBBUY_WS_PROXY_TARGET` 与 `BOBBUY_E2E_AGENT_USERNAME` / `BOBBUY_E2E_AGENT_PASSWORD`）
-
-Playwright smoke 口径：
-- `npm run e2e` 使用 Vite dev server（`frontend/playwright.config.ts`），不依赖真实 AI/OCR/MinIO/外部服务。
-- 默认覆盖 agent / customer 两类浏览器会话，覆盖登录态恢复、客户订单/账单/聊天、agent 采购/拣货/库存、角色门禁与聊天图片发布人工接管 smoke。
-- 发布前双角色移动端黑盒走查使用 `npm run e2e --prefix frontend -- e2e/mobile_customer_blackbox.spec.ts` 与 `npm run e2e --prefix frontend -- e2e/mobile_agent_blackbox.spec.ts`，覆盖 `390x844` / `360x800` 下客户和采购者的完整任务路径；mock 通过不替代真实试运行栈复验。
-- 浏览器端只保留 access token、本地用户信息与 CSRF cookie；默认 smoke 不再依赖 `bobbuy_test_role` / `bobbuy_test_user` 伪造角色头。
-- Playwright 失败时会保留 `playwright-report/`、`test-results/` 下的 HTML 报告、trace、screenshot、video；手动 CI job 会上传这些 artifact。
-- `npm run e2e:ai` 继续只跑真实 AI/OCR 专用链路；专用环境执行时默认使用真实登录，不再依赖 mock agent 会话。
-
-风险登记 / 独立安全门禁：
-- CodeQL / 安全扫描（`.github/workflows/codeql.yml`：`push` / `pull_request` / `workflow_dispatch`）
-- 依赖审计（前端 `npm audit --json`；后端 `.github/workflows/dependency-check.yml` 或本地 Maven 扫描）
-- 若本次 PR / Release 未执行，必须明确登记为风险项，不得写成“已通过”。
+AI/OCR默认测试使用fake/mock资源；真实AI仅在相关功能与专用环境执行。手动 `.github/workflows/ai-release-evidence.yml`、历史发布报告及旧schema专用捕获脚本均不构成每次发布的通用要求。生产数据与恢复约束以[当前发布规则](docs/production-deployment.md)和[参考档案契约](docs/reference-data-release.md)为准。
 
 ## 试运行最小运维基线
 
@@ -223,34 +185,4 @@ Playwright smoke 口径：
 - 告警 / 故障处置：统一见 `RUNBOOK-监控告警与故障处置.md`
 - 备份恢复：统一见 `RUNBOOK-备份恢复演练.md`；恢复验证必须先在新库 / 独立 bucket / 独立目录完成
 
-最近本地验证：
-- `docker compose config`：通过。
-- `.\mvnw.cmd -f backend\pom.xml test`：通过（`175 tests, 0 failures, 0 errors, 2 skipped`）。
-- `cd frontend && npm ci && npm test && npm run build`：通过。
-- `bash scripts/build-service-images.sh`：通过；`Dockerfile.service` 已改为直接复制宿主机构建好的 jar，不再在容器内执行 Maven，脚本会在 Windows/Git Bash/WSL 下自动使用 Maven wrapper。
-- `docker compose up -d postgres minio redis rabbitmq nacos nacos-init core-service ai-service im-service auth-service gateway-service frontend gateway ocr-service`：在临时本地 secret 下通过；Nacos cgroup v2、`nacos-init`、OCR 延迟初始化与 gateway health 均已验证。
-- `curl http://127.0.0.1/api/health`、`/api/actuator/health`、`/api/actuator/health/readiness`、`http://127.0.0.1:8000/health`：通过。
-- `cd frontend && npm run e2e`：通过（`46 passed / 2 skipped`；`2 skipped` 为 `RUN_AI_VISION_E2E` 门控用例）。
-- `pwsh -NoProfile -Command "& '/home/runner/work/bobbuy/bobbuy/scripts/verify-ai-onboarding-samples.ps1' -MockScanResponsePath '/home/runner/work/bobbuy/bobbuy/docs/fixtures/ai-onboarding-sample-scan-mock.json' -SampleIds @('IMG_1484.jpg','IMG_1638.jpg') -IncludeNeedsHumanGolden"`：通过（gate 模式返回 `0`）
-- `pwsh -NoProfile -Command "& '/home/runner/work/bobbuy/bobbuy/scripts/verify-ai-onboarding-samples.ps1' -MockScanResponsePath '/home/runner/work/bobbuy/bobbuy/docs/fixtures/ai-onboarding-sample-scan-mock-fail.json' -SampleIds @('IMG_1484.jpg')"`：按预期失败（gate 模式返回非零并继续输出报告）
-- `pwsh -NoProfile -Command "& '/home/runner/work/bobbuy/bobbuy/scripts/verify-ai-onboarding-samples.ps1' -MockScanResponsePath '/home/runner/work/bobbuy/bobbuy/docs/fixtures/ai-onboarding-sample-scan-mock-fail.json' -SampleIds @('IMG_1484.jpg') -ReportOnly"`：通过（report-only 返回 `0`，但 `gatePassed=false`）
-- `cd frontend && npm audit --json`：已降至 `0 critical / 0 high / 6 moderate`；剩余为 Vite/Vitest dev-only 风险，详见 `REPORT-05`
-- GitHub Actions 默认 `BOBBuy CI`：`main` 分支 run <https://github.com/sunshaoxuan/bobbuy/actions/runs/25217655067> 通过。
-- GitHub Actions `CodeQL` workflow：最新 `main` success run 为 <https://github.com/sunshaoxuan/bobbuy/actions/runs/25217655038>，高危告警清零。
-- GitHub Actions `Maven dependency-check` workflow：最新 `main` run <https://github.com/sunshaoxuan/bobbuy/actions/runs/25217516557> 成功，artifact `dependency-check-report`（id `6750657743`）已核验可下载且同时包含 HTML/JSON；摘要为 `0 critical / 0 high / 13 medium / 2 low`。
-- `pwsh scripts/verify-ai-onboarding-samples.ps1 ... -AuthToken <agent token>`：PLAN-50 已打到真实 `/api/ai/onboard/scan` 并通过，结果为 `3 PASS / 0 FAIL / 0 SCAN_FAIL`，`gatePassed=true`；证据见 `docs/reports/evidence/ai-onboarding-real-sample-plan50-2026-05-02.*`。
-- `cd frontend && RUN_AI_VISION_E2E=1 npm run e2e:ai`：PLAN-50 已在真实 Compose 栈通过，`2 passed`。
-- `cd /home/runner/work/bobbuy/bobbuy/backend && mvn -Dflyway.url=jdbc:postgresql://localhost:5432/bobbuy -Dflyway.user=bobbuy -Dflyway.password=bobbuypassword -Dflyway.cleanDisabled=false flyway:clean flyway:migrate flyway:validate`：通过
-- PostgreSQL 备份恢复演练：`pg_dump -> bobbuy_restore_verify_plan40` 恢复校验通过
-- `cd backend && mvn -DskipTests package`：通过。
-- `cd /home/runner/work/bobbuy/bobbuy && docker build backend -t bobbuy-backend-test`：通过。
-- `cd /home/runner/work/bobbuy/bobbuy && docker build frontend -t bobbuy-frontend-test`：通过。
-- 真实旧库 adoption / restore drill：**仓库内未提供真实旧库副本 / 历史 schema dump，当前仍为 blocker**
-
-详细矩阵见 [docs/reports/TEST-MATRIX-本地与CI执行矩阵.md](docs/reports/TEST-MATRIX-本地与CI执行矩阵.md)。
-
-当前边界执行摘要见 [docs/reports/REPORT-01-试运行服务边界执行报告.md](docs/reports/REPORT-01-试运行服务边界执行报告.md)。
-当前发版候选门禁执行摘要见 [docs/reports/REPORT-04-发版候选门禁验收报告.md](docs/reports/REPORT-04-发版候选门禁验收报告.md)。
-当前专用环境发版证据与最终放行判定见 [docs/reports/REPORT-06-专用环境发版证据与放行判定.md](docs/reports/REPORT-06-专用环境发版证据与放行判定.md)。
-当前 NO-GO 解阻复判见 [docs/reports/REPORT-07-NO-GO阻断项解阻与放行复判.md](docs/reports/REPORT-07-NO-GO阻断项解阻与放行复判.md)。
-PLAN-50 AI 放行链路执行摘要见 [docs/reports/REPORT-09-PLAN50-AI放行链路执行报告.md](docs/reports/REPORT-09-PLAN50-AI放行链路执行报告.md)。
+历史试运行的测试数、AI样本、恢复演练与安全扫描结果见对应日期的REPORT-01至REPORT-12。它们不代表当前版本验收，也不形成后续任务的重复执行要求。当前任务须记录实际执行的检查、输入与结果。

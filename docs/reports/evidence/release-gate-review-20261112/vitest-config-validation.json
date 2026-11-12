@@ -1,0 +1,33 @@
+{
+  "result": "PASS",
+  "vitest": "1.6.1",
+  "scope": "Real Vitest using final config and isolated fixture tests; product suite not rerun.",
+  "configSha256": "8169486fa0ec9dadebbffc0d86d3931591da0b035917bd2798dcf15da5a3fc73",
+  "lockfileJsonMatchesSharedDependencies": true,
+  "cases": [
+    {
+      "name": "positive",
+      "expectedExit": 0,
+      "actualExit": 0,
+      "seconds": 4.415,
+      "stdout": "\n RUN  v1.6.1 C:/workspace/codex-work/bobuy-release-gate-review-20261112/frontend\n\n ✓ .task-tmp/gate-review/positive.test.ts  (1 test) 2ms\n\n Test Files  1 passed (1)\n      Tests  1 passed (1)\n   Start at  22:37:54\n   Duration  2.95s (transform 39ms, setup 1.06s, collect 12ms, tests 2ms, environment 1.40s, prepare 250ms)\n\n",
+      "stderr": ""
+    },
+    {
+      "name": "assertion-negative",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "seconds": 5.012,
+      "stdout": "\n RUN  v1.6.1 C:/workspace/codex-work/bobuy-release-gate-review-20261112/frontend\n\n ❯ .task-tmp/gate-review/negative.test.ts  (1 test | 1 failed) 12ms\n   ❯ .task-tmp/gate-review/negative.test.ts > rejects an invalid result\n     → expected 4 to be 5 // Object.is equality\n\n Test Files  1 failed (1)\n      Tests  1 failed (1)\n   Start at  22:37:58\n   Duration  3.29s (transform 53ms, setup 1.30s, collect 22ms, tests 12ms, environment 1.49s, prepare 211ms)\n\n",
+      "stderr": "⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  .task-tmp/gate-review/negative.test.ts > rejects an invalid result\nAssertionError: expected 4 to be 5 // Object.is equality\n\n- Expected\n+ Received\n\n- 5\n+ 4\n\n ❯ .task-tmp/gate-review/negative.test.ts:1:82\n      1| import {it,expect} from 'vitest'; it('rejects an invalid result',()=>e…\n       |                                                                                  ^\n      2| \n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n"
+    },
+    {
+      "name": "empty-selection-negative",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "seconds": 1.431,
+      "stdout": "\n RUN  v1.6.1 C:/workspace/codex-work/bobuy-release-gate-review-20261112/frontend\n\n",
+      "stderr": "filter:  never-exists-gate-review.test.ts\ninclude: **/*.{test,spec}.?(c|m)[jt]s?(x)\nexclude:  node_modules/**, dist/**, e2e/**\nwatch exclude:  **/node_modules/**, **/dist/**\n\nNo test files found, exiting with code 1\n"
+    }
+  ]
+}
