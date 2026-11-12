@@ -1,0 +1,950 @@
+{
+  "states": {
+    "core-service": {
+      "id": "38a399361577f4d80119511abd45d9b89d08c13b892bd84344f040aafcc142d2",
+      "image": "sha256:98a2a9ec3a4511029b1b65bc602d4654e6155340d4fa3dff8199da63e9565bce",
+      "tag": "bobuy/core:20261112.reference-sort",
+      "revision": "a14f0320aeed077fbf449c95f2b236f4dd1d3393",
+      "startedAt": "2026-11-11T23:55:45.982357327Z",
+      "health": "healthy"
+    },
+    "frontend": {
+      "id": "a78427e9bc3148eafed85cd08388ccdbc81890a4749860f3d4c33c75c828b9a4",
+      "image": "sha256:5ae6a26f18e1b5a5986284873f16634363e21cfe0bc604f294b512840c9fa06b",
+      "tag": "bobuy/frontend:20261112.reference-display.4",
+      "revision": "deac521fdb5c10e4accc2d4cc368fb494ab61801",
+      "startedAt": "2026-11-11T23:43:52.67573582Z",
+      "health": "running"
+    },
+    "ai-service": {
+      "id": "10972ee4cd488c0b368031dcdee897a9f3cf10e1d533ddfd2637004b0e983c5a",
+      "image": "sha256:e17c56f30483def52fb4c3e58d7ef7fad8dced0f89ff23109ab380cdca32fa48",
+      "tag": "bobuy/ai:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "startedAt": "2026-11-11T23:56:47.829024755Z",
+      "health": "healthy"
+    },
+    "im-service": {
+      "id": "218a0841775c655ea8aca3e76c32a76a9bb6e243576ecb325733c4f88f36e933",
+      "image": "sha256:3c286b1672db0eca6df4803085d7f5ba9cc475c4542a4f93302ee5c74277369a",
+      "tag": "bobuy/im:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "startedAt": "2026-11-11T23:56:48.036593312Z",
+      "health": "healthy"
+    },
+    "auth-service": {
+      "id": "f92780c457a16d7757540eae17d6ae73b22ff9389369bdb4da18301faa4208ab",
+      "image": "sha256:6863ae4b03b28b8fbd8666fb15b1599cca6a8b9911bbbd1cf555d9d4b8a3eabb",
+      "tag": "bobuy/auth:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "startedAt": "2026-11-11T23:56:48.31730711Z",
+      "health": "healthy"
+    },
+    "gateway-service": {
+      "id": "8658ca313926847ac17386d2494fc068487d3a2275a187e9b05e16373eb6a7ee",
+      "image": "sha256:71354226154b2ca27ff7ddaaf90923f0954db9cabac363564447322030d21dcd",
+      "tag": "bobuy/router:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "startedAt": "2026-11-11T23:56:48.753954112Z",
+      "health": "healthy"
+    },
+    "postgres": {
+      "id": "3e3f73ecd6ede718eafd2c14ff7087a9e34445c161e4eb73cc0f28455b527a7d",
+      "image": "sha256:1a0c23d53c1ad77468c8653fa6eed4f4105cfbef9e6f027bc1dfeb16949a8c29",
+      "tag": "postgres:18.6-alpine3.23@sha256:1a0c23d53c1ad77468c8653fa6eed4f4105cfbef9e6f027bc1dfeb16949a8c29",
+      "revision": null,
+      "startedAt": "2026-10-28T05:54:10.450486189Z",
+      "health": "healthy"
+    },
+    "rustfs": {
+      "id": "a33a452d37da3d06ff76b62046e7d1cfac6cf60f730fa62ff17fc95a8c24a8f7",
+      "image": "sha256:e287e99762a4a3e7b706526e01f2ff755f67db165e9be9f6b907adc6fb6d6ee1",
+      "tag": "rustfs/rustfs:1.0.4@sha256:e287e99762a4a3e7b706526e01f2ff755f67db165e9be9f6b907adc6fb6d6ee1",
+      "revision": null,
+      "startedAt": "2026-10-28T06:08:45.288836844Z",
+      "health": "running"
+    },
+    "gateway": {
+      "id": "417a2727353a7449a30c4fb820a5860dc3f2ee961ae9413e19eeddfa81036b2e",
+      "image": "sha256:892bb2152464f0c5d8972593a5f5afaf8054552580b699d95f8ff4af08c2d33d",
+      "tag": "nginx:alpine",
+      "revision": null,
+      "startedAt": "2026-10-27T10:17:45.060469115Z",
+      "health": "running"
+    },
+    "redis": {
+      "id": "a9329b8de7e5bf143b4af936a847f79ca8e10957f5f28d31a39ec5d5717d010a",
+      "image": "sha256:858f009f9709ce576febc734aa78b8f6d624b82571f9ddb6bda4377c833b3499",
+      "tag": "redis:7-alpine",
+      "revision": null,
+      "startedAt": "2026-10-27T10:17:45.063404096Z",
+      "health": "healthy"
+    },
+    "nacos": {
+      "id": "25e2f666c1cc59bb03c06016faccc211f5d4990de76b980b69c75fba0302c2eb",
+      "image": "sha256:cca69ab12348b43d95c9b2c1d8d31d5a8d56e634ed4232a510423a9346090a70",
+      "tag": "nacos/nacos-server:v2.3.2-slim",
+      "revision": "c150bce691f4996871203b5897dd357f6d8a0e24",
+      "startedAt": "2026-10-27T10:17:45.058357323Z",
+      "health": "healthy"
+    },
+    "rabbitmq": {
+      "id": "c982a0e0f4762b34284370fa9aa38d59762bd28e26928ced4a7983e96968d40a",
+      "image": "sha256:606d8c0d6b3c18d1da9afc53bc7cdb2a8d5486df91b5a9830e9e07626c9ae281",
+      "tag": "rabbitmq:3-management-alpine",
+      "revision": null,
+      "startedAt": "2026-10-27T10:17:45.079215412Z",
+      "health": "healthy"
+    }
+  },
+  "coreSource": "a14f0320aeed077fbf449c95f2b236f4dd1d3393",
+  "frontendSource": "deac521fdb5c10e4accc2d4cc368fb494ab61801",
+  "coreJarSha256": "058658cedcc8cc0e5892e8f3c3689cfc9e4e3af5fd9b8ac546161a0fb10e64a9",
+  "java": "openjdk 17.0.21 2026-10-20\nOpenJDK Runtime Environment Temurin-17.0.21+9 (build 17.0.21+9)\nOpenJDK 64-Bit Server VM Temurin-17.0.21+9 (build 17.0.21+9, mixed mode, sharing)\n",
+  "protectedState": "PASS",
+  "result": "PASS",
+  "successor-status.json": {
+    "phase": "WRITES_OPEN",
+    "source": "a14f0320aeed077fbf449c95f2b236f4dd1d3393",
+    "at": "2026-11-11T23:58:04Z",
+    "seconds": 163.87,
+    "sqlMigration": false,
+    "contentUnchanged": true
+  },
+  "successor-backup-check.json": {
+    "sha256": "65204e21729190e4ef6b5b4c455e94aca87f593f2a12664539594755fb3a1faa",
+    "tocLines": 305,
+    "databaseRestoreForbidden": true
+  },
+  "successor-content.before.json": {
+    "bb_category": {
+      "columns": [
+        "id",
+        "name",
+        "description",
+        "attribute_template",
+        "merchant_id",
+        "tag_key"
+      ],
+      "fingerprint": "16:c3ecfe797571dda3b9ff638380e53bd5"
+    },
+    "bb_chat_message": {
+      "columns": [
+        "id",
+        "order_id",
+        "trip_id",
+        "sender_id",
+        "recipient_id",
+        "content",
+        "type",
+        "metadata",
+        "created_at"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_checkout_identity": {
+      "columns": [
+        "id"
+      ],
+      "fingerprint": "10:44d21ed27da5db2190918f4ad954f38c"
+    },
+    "bb_costco_onboarding_commit": {
+      "columns": [
+        "idempotency_key",
+        "merchant_id",
+        "candidate_hash",
+        "product_id",
+        "product_version",
+        "created_at"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_costco_onboarding_evidence": {
+      "columns": [
+        "merchant_id",
+        "sha256",
+        "supplier_id",
+        "input_hash",
+        "kind",
+        "content_type",
+        "content",
+        "receipt",
+        "created_at"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_costco_onboarding_job": {
+      "columns": [
+        "id",
+        "merchant_id",
+        "supplier_id",
+        "market",
+        "idempotency_key",
+        "input_hash",
+        "revision",
+        "state",
+        "payload",
+        "attempt_history",
+        "attempts",
+        "lease_token",
+        "lease_until",
+        "next_run_at",
+        "created_at",
+        "updated_at"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_currency": {
+      "columns": [
+        "code",
+        "symbol",
+        "fraction_digits",
+        "name",
+        "sale_enabled"
+      ],
+      "fingerprint": "4:8b86ac69e7fa0e5b09defa48f9a44aa4"
+    },
+    "bb_customer_order_amendment": {
+      "columns": [
+        "id",
+        "customer_id",
+        "request_id",
+        "order_id",
+        "payload_hash",
+        "original_order",
+        "result_view",
+        "created_at"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_customer_payment_ledger": {
+      "columns": [
+        "id",
+        "trip_id",
+        "business_id",
+        "customer_id",
+        "amount",
+        "payment_method",
+        "note",
+        "created_at",
+        "operator"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_email_challenge": {
+      "columns": [
+        "user_id",
+        "code_hash",
+        "expires_at",
+        "sent_at",
+        "attempts"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_experience_mapping": {
+      "columns": [
+        "id",
+        "fuzzy_term",
+        "mapped_name",
+        "updated_at"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_financial_audit_log": {
+      "columns": [
+        "id",
+        "trip_id",
+        "action_type",
+        "operator_name",
+        "original_value",
+        "modified_value",
+        "previous_hash",
+        "current_hash",
+        "created_at"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_mail_settings": {
+      "columns": [
+        "id",
+        "version",
+        "enabled",
+        "host",
+        "port",
+        "tls_mode",
+        "username",
+        "from_address",
+        "reply_to",
+        "encrypted_password",
+        "key_id",
+        "updated_by",
+        "updated_at"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_mail_settings_event": {
+      "columns": [
+        "id",
+        "actor_id",
+        "occurred_at",
+        "event_type",
+        "settings_version"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_media_blob": {
+      "columns": [
+        "sha256",
+        "byte_length",
+        "content_type",
+        "busy_until",
+        "gc_candidate_at",
+        "version"
+      ],
+      "fingerprint": "1356:f2f3c1ae29da0da0f4b485018f750cb4"
+    },
+    "bb_media_catalog_guard": {
+      "columns": [
+        "id"
+      ],
+      "fingerprint": "1:d2ce28b9a7fd7e4407e2b0fd499b7fe4"
+    },
+    "bb_media_reference": {
+      "columns": [
+        "image_id",
+        "blob_sha256"
+      ],
+      "fingerprint": "1359:8174081b1027a14ceaf46db60be315f5"
+    },
+    "bb_media_transfer": {
+      "columns": [
+        "image_id",
+        "raw_sha256",
+        "object_key",
+        "byte_length",
+        "content_type",
+        "state",
+        "attempts",
+        "lease_token",
+        "lease_until",
+        "verified_at",
+        "updated_at",
+        "version"
+      ],
+      "fingerprint": "1359:2ca19bbb737de2cd7434b442633ee799"
+    },
+    "bb_merchant_customer": {
+      "columns": [
+        "id",
+        "merchant_id",
+        "customer_id",
+        "approved_at",
+        "approved_by"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_merchant_sku": {
+      "columns": [
+        "id",
+        "product_id",
+        "merchant_id",
+        "sku_code",
+        "last_price",
+        "stock_status"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_order_header": {
+      "columns": [
+        "id",
+        "business_id",
+        "customer_id",
+        "trip_id",
+        "desired_delivery_window",
+        "created_at",
+        "status",
+        "status_updated_at",
+        "payment_method",
+        "payment_status",
+        "total_amount",
+        "receipt_confirmed_at",
+        "receipt_confirmed_by",
+        "billing_confirmed_at",
+        "billing_confirmed_by",
+        "delivery_status",
+        "lines",
+        "currency",
+        "product_identities",
+        "delivery_snapshot",
+        "checkout_payload_hash",
+        "order_revision"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_procurement_receipt": {
+      "columns": [
+        "id",
+        "trip_id",
+        "file_name",
+        "original_object_key",
+        "original_image_url",
+        "thumbnail_object_key",
+        "thumbnail_url",
+        "processing_status",
+        "uploaded_at",
+        "updated_at",
+        "source_image_base64",
+        "reconciliation_result",
+        "raw_recognition_result",
+        "manual_reconciliation_result"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_product": {
+      "columns": [
+        "id",
+        "name",
+        "description",
+        "brand",
+        "base_price",
+        "weight",
+        "volume",
+        "media_gallery",
+        "storage_condition",
+        "order_method",
+        "category_id",
+        "merchant_skus",
+        "item_number",
+        "price_tiers",
+        "is_recommended",
+        "is_temporary",
+        "visibility_status",
+        "updated_at",
+        "attributes",
+        "merchant_id",
+        "sale",
+        "currency",
+        "record_version",
+        "catalog_data",
+        "deleted_at",
+        "deleted_by"
+      ],
+      "fingerprint": "405:bea10d8e4bb015ce61df388fc1c921ad"
+    },
+    "bb_product_catalog_recovery": {
+      "columns": [
+        "id",
+        "merchant_id",
+        "product_id",
+        "version_after",
+        "created_at",
+        "restored_from_id",
+        "original"
+      ],
+      "fingerprint": "280:0379e74b7643920afc6192cb14585622"
+    },
+    "bb_product_click": {
+      "columns": [
+        "product_id",
+        "clicks"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_product_lifecycle_event": {
+      "columns": [
+        "id",
+        "product_id",
+        "action",
+        "actor_id",
+        "occurred_at"
+      ],
+      "fingerprint": "20:92af702cbb72942f6b1eb9fdb2aa5c08"
+    },
+    "bb_product_marker_definition": {
+      "columns": [
+        "id",
+        "merchant_id",
+        "code",
+        "badge",
+        "name",
+        "description",
+        "color",
+        "sort_order",
+        "enabled",
+        "version"
+      ],
+      "fingerprint": "4:ac2fad917fb50397af88cb5b0b621f6a"
+    },
+    "bb_product_marker_set": {
+      "columns": [
+        "product_id",
+        "merchant_id",
+        "marker_ids",
+        "version"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_product_price_adjustment": {
+      "columns": [
+        "id",
+        "version",
+        "merchant_id",
+        "product_id",
+        "channel",
+        "currency",
+        "amount",
+        "unit",
+        "starts_at",
+        "ends_at",
+        "status",
+        "source_note",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at",
+        "approved_by",
+        "approved_at",
+        "cancelled_by",
+        "cancelled_at"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_product_rating": {
+      "columns": [
+        "product_id",
+        "merchant_id",
+        "stars",
+        "public_visible",
+        "version",
+        "reviewed_at"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_product_review": {
+      "columns": [
+        "id",
+        "product_id",
+        "user_id",
+        "stars",
+        "comment",
+        "version",
+        "created_at",
+        "updated_at"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_recommendation_article_revision": {
+      "columns": [
+        "id",
+        "merchant_id",
+        "post_id",
+        "facts_hash",
+        "facts",
+        "recorded_at"
+      ],
+      "fingerprint": "72:063920c6b097db4704ecd8e94a575180"
+    },
+    "bb_recommendation_image": {
+      "columns": [
+        "id",
+        "merchant_id",
+        "image_hash",
+        "content_type",
+        "content",
+        "access_scope",
+        "raw_sha256",
+        "byte_length"
+      ],
+      "fingerprint": "1359:b152d96ca2e9180b8af4aa467c63233c"
+    },
+    "bb_recommendation_item": {
+      "columns": [
+        "id",
+        "post_id",
+        "product_id",
+        "name",
+        "item_number",
+        "reference_price",
+        "image_hash",
+        "image_url",
+        "created_at",
+        "original_price",
+        "discount_amount",
+        "price_unit",
+        "offer_start",
+        "offer_end",
+        "coupon_start",
+        "coupon_end",
+        "offer_notes",
+        "category_ids",
+        "supplier_id",
+        "show_supplier",
+        "specification",
+        "description",
+        "translations",
+        "translated_source",
+        "gallery",
+        "offer_identity",
+        "reference_context",
+        "publication_state",
+        "publication_snapshot",
+        "published_at",
+        "published_by",
+        "publication_request_id",
+        "publication_request_hash",
+        "linked_product_version",
+        "addition_payload_hash"
+      ],
+      "fingerprint": "389:cc064e629fbc8a16a7f94e8eef119545"
+    },
+    "bb_recommendation_post": {
+      "columns": [
+        "id",
+        "merchant_id",
+        "title",
+        "body",
+        "published",
+        "version",
+        "created_at",
+        "updated_at",
+        "published_at",
+        "publisher_id",
+        "publisher_name",
+        "article_source_locale",
+        "article_translations",
+        "service_offer",
+        "service_source_key",
+        "issue_date",
+        "issue_date_source_ref",
+        "issue_date_source_hash",
+        "issue_date_reviewed_by",
+        "issue_date_reviewed_at"
+      ],
+      "fingerprint": "11:a5abb4a38ca2af325bc6db4ff70a4d8c"
+    },
+    "bb_reference_quote_revision": {
+      "columns": [
+        "id",
+        "merchant_id",
+        "post_id",
+        "item_id",
+        "product_id",
+        "facts_hash",
+        "facts",
+        "recorded_at"
+      ],
+      "fingerprint": "450:41dd6660fd1ec95ffbdec8cc04da2971"
+    },
+    "bb_refresh_token_session": {
+      "columns": [
+        "id",
+        "user_id",
+        "token_hash",
+        "family_id",
+        "rotation_source_id",
+        "client_fingerprint",
+        "created_at",
+        "last_used_at",
+        "expires_at",
+        "revoked_at",
+        "revocation_reason"
+      ],
+      "fingerprint": "200:c98bc4bb7546a8e598c492db045b8710"
+    },
+    "bb_supplier": {
+      "columns": [
+        "id",
+        "name",
+        "description",
+        "contact_info",
+        "onboarding_rules",
+        "merchant_id"
+      ],
+      "fingerprint": "1:84b6d300a15757a29b8eb41de2912baa"
+    },
+    "bb_trip": {
+      "columns": [
+        "id",
+        "agent_id",
+        "delivery_area",
+        "delivery_date",
+        "status",
+        "status_updated_at"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_trip_expense": {
+      "columns": [
+        "id",
+        "trip_id",
+        "cost",
+        "category",
+        "receipt_object_key",
+        "receipt_thumbnail_url",
+        "ocr_status",
+        "created_at"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_trip_logistics_tracking": {
+      "columns": [
+        "id",
+        "trip_id",
+        "tracking_number",
+        "channel",
+        "provider",
+        "status",
+        "last_message",
+        "settlement_reminder_triggered",
+        "last_checked_at",
+        "created_at",
+        "updated_at"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_trip_profit_share_config": {
+      "columns": [
+        "trip_id",
+        "purchaser_ratio_percent",
+        "promoter_ratio_percent",
+        "updated_at"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "bb_user": {
+      "columns": [
+        "id",
+        "name",
+        "username",
+        "password_hash",
+        "enabled",
+        "rating",
+        "phone",
+        "email",
+        "note",
+        "default_address",
+        "social_accounts",
+        "email_verified_at",
+        "roles",
+        "platform_admin"
+      ],
+      "fingerprint": "1:17f24b28b67a13fd64c978dc45864c16"
+    },
+    "partner_wallets": {
+      "columns": [
+        "id",
+        "partner_id",
+        "balance",
+        "currency",
+        "updated_at"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "wallet_transactions": {
+      "columns": [
+        "id",
+        "partner_id",
+        "amount",
+        "type",
+        "trip_id",
+        "created_at"
+      ],
+      "fingerprint": "0:d41d8cd98f00b204e9800998ecf8427e"
+    }
+  },
+  "successor-gates.json": {
+    "source": "a14f0320aeed077fbf449c95f2b236f4dd1d3393",
+    "result": "PASS",
+    "backend": {
+      "tests": 666,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 24
+    },
+    "backendValidatedSource": "a14f0320aeed077fbf449c95f2b236f4dd1d3393",
+    "backendInputsUnchanged": true,
+    "configuredJacoco": "PASS",
+    "frontendUnionTests": 111,
+    "accountCompatibilityTests": 21,
+    "maintenanceCompatibilityTests": 6,
+    "frontendBuild": "PASS",
+    "browser": "PASS",
+    "browserScope": "24 candidate detail states without network fixtures, real public facts; explicit synthetic clock and longest-value states separately recorded",
+    "productionBrowser": "PASS 24 states; frontend image bytes unchanged in core-only repair",
+    "glyphRegions": 48,
+    "visual": "Main agent accepted feature area after Gemini review, rationale in README.md",
+    "releaseGuardTests": 9,
+    "codeql": "success",
+    "codeqlUrl": "https://github.com/sunshaoxuan/bobuy/actions/runs/43122734879",
+    "schemaOperation": "None; require existing V33 and exact migration history invariance",
+    "preserveBaseline": "Require reference-display.4 source deac521 for core/frontend; frontend files and complete container identity must stay unchanged",
+    "sortFocusedTests": 21
+  },
+  "actualLoadedAssetHashes": [
+    {
+      "path": "/assets/index-_7elRJ8e.css",
+      "sha256": "e4700940479e341c781c9b20a7e6aab0b7271bf990688324b92de002f2a41899",
+      "expected": "e4700940479e341c781c9b20a7e6aab0b7271bf990688324b92de002f2a41899",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/index-DxmLmPZG.js",
+      "sha256": "254d951ff502bc41791d1821c67772f224fbafdbbafe66a8bb9aed725672974c",
+      "expected": "254d951ff502bc41791d1821c67772f224fbafdbbafe66a8bb9aed725672974c",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/ProductMarkerBadges-YtkPTPIq.css",
+      "sha256": "0d4312f15309eb7ed571b6e37c0020d1edc79b2478331f01dd8c2dcd01dcdb2c",
+      "expected": "0d4312f15309eb7ed571b6e37c0020d1edc79b2478331f01dd8c2dcd01dcdb2c",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/ImageLightbox-YuYos8NL.css",
+      "sha256": "d4ee7fcac17ea82f8e418071898f0781b227790fe8f4dd4721fd21862ebeda24",
+      "expected": "d4ee7fcac17ea82f8e418071898f0781b227790fe8f4dd4721fd21862ebeda24",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/RecommendationImageViewer-ILdPQ99W.css",
+      "sha256": "e7e048dad2c9ed20723701917e72bbe17f695111062cb04d734fab987a03acb4",
+      "expected": "e7e048dad2c9ed20723701917e72bbe17f695111062cb04d734fab987a03acb4",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/ReloadOutlined-Du8eW0mL.js",
+      "sha256": "040e0f86451fcf97485df72637464925df61019bce6b283ce1c6761c11dc1e67",
+      "expected": "040e0f86451fcf97485df72637464925df61019bce6b283ce1c6761c11dc1e67",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/RecommendationImageViewer-DK13fLJK.js",
+      "sha256": "d1a0b6e1d2d4e85055116bae05b5d8ff2a4781f329a257933bd4d61a05f22ae6",
+      "expected": "d1a0b6e1d2d4e85055116bae05b5d8ff2a4781f329a257933bd4d61a05f22ae6",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/PublicProductCatalog-H4OBDYl7.js",
+      "sha256": "ca0fdd19675810e296399d589e10d0669eb0cc9f0efcea065f0cd5f2de651bf0",
+      "expected": "ca0fdd19675810e296399d589e10d0669eb0cc9f0efcea065f0cd5f2de651bf0",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/ProductMetadata-Di90IVlu.js",
+      "sha256": "f4f1b4457c5c1e5321fe099ae3470a66260f78b09794145d4e699294b21670d3",
+      "expected": "f4f1b4457c5c1e5321fe099ae3470a66260f78b09794145d4e699294b21670d3",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/index-ctkYKg7l.js",
+      "sha256": "bb7f760c49200a106974dd875e664b384c17b43cd6bf8a43bcaed9c7a48d8839",
+      "expected": "bb7f760c49200a106974dd875e664b384c17b43cd6bf8a43bcaed9c7a48d8839",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/ProductMarkerEditor-D5o7Dkui.js",
+      "sha256": "5813b7d75b9128a28c41f0c266cdb1b3a69a418a13db2d6752e5a2d316c53c65",
+      "expected": "5813b7d75b9128a28c41f0c266cdb1b3a69a418a13db2d6752e5a2d316c53c65",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/index-NgAAH5gk.js",
+      "sha256": "8bf2440b9ecd234a786f0140c20bfd4f2136ad848340511dd68d39c16b61304f",
+      "expected": "8bf2440b9ecd234a786f0140c20bfd4f2136ad848340511dd68d39c16b61304f",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/ImageLightbox-CBvT1ZZX.js",
+      "sha256": "37326a5eea00cbd8c848509626d6523f0221fd67afd8e25f299b9dfe85cc5eaa",
+      "expected": "37326a5eea00cbd8c848509626d6523f0221fd67afd8e25f299b9dfe85cc5eaa",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/ProductMarkerBadges-D4SXCSdD.js",
+      "sha256": "0c3baa8654aeac44b4f19e686fa4be7b840c2b6cde96890d31ffbd104e987bdf",
+      "expected": "0c3baa8654aeac44b4f19e686fa4be7b840c2b6cde96890d31ffbd104e987bdf",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/SaveOutlined-DMcisMKV.js",
+      "sha256": "f09a7fd34e932862edfd57b33b5d8385a1706f465a4e119a8793af773063b021",
+      "expected": "f09a7fd34e932862edfd57b33b5d8385a1706f465a4e119a8793af773063b021",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/index-DMM_Eupp.js",
+      "sha256": "456eff3fcfbef39eea5b7983b0790c9fb624bfbaa05a0fb616568b0cc03b582f",
+      "expected": "456eff3fcfbef39eea5b7983b0790c9fb624bfbaa05a0fb616568b0cc03b582f",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/PublicRecommendations-DhYyKoQc.css",
+      "sha256": "57228e6abd81d4b8c752bf45697153f2ce08d5660413c4638cf9f3bcee8ab2d5",
+      "expected": "57228e6abd81d4b8c752bf45697153f2ce08d5660413c4638cf9f3bcee8ab2d5",
+      "result": "PASS"
+    },
+    {
+      "path": "/assets/PublicRecommendations-BjB0L6Z4.js",
+      "sha256": "4cb97636fe9f5c39208c120fa4f26f0ad4068b787719c189dd761c39ba870bfc",
+      "expected": "4cb97636fe9f5c39208c120fa4f26f0ad4068b787719c189dd761c39ba870bfc",
+      "result": "PASS"
+    }
+  ],
+  "sourceGitTreeMatchesLive": true,
+  "realPriceOrderingChecks": 12,
+  "pixelChecks": 29,
+  "screenshots": {
+    "page-diagnostic.png": "a62366a2a99b487702a0e76beda85e163096e9f18248e2446539dc5c891d4afb",
+    "product-card-1440.png": "c8b0d293d0bef0414c2390e6c2ba0610646584b00c980ace9a765ee89a2a47ee",
+    "product-card-320.png": "40e9a4dd7c694b9ff976db03916b6e7aee5782553857728725382feab85a0a0d",
+    "product-card-768.png": "8b8c8c0c35e059588647c0ab89459e690ea0921975d4d2803af4527e9f1e1718",
+    "production-desktop-card-1.png": "12e45e1e7bd4533855f15643ae3f9ae55567217781514b220954e9a16b2f47ac",
+    "production-desktop-card-2.png": "65b15f610fea1dc7af3734cd2446c1d663a05feb8f2e541594cf94d7b3e96f66",
+    "production-desktop-card-3.png": "f41618562d62edfdea7ecef13180e98920ad7b473aaa9b5dbd0abac7d99040a0",
+    "production-desktop-card-4.png": "0de09155b85a7e2a360f30e12c6ba8106d1f860de9926a13a580c5462f5f719a",
+    "production-desktop-card-5.png": "2a3ee0cd041f2244b419aba97b8b86c0b3652e98ddafaae9db65f1fa778f6974",
+    "production-last-card-products-320.png": "887a0319fc618d15b2a96f87015bdd3338a1453ad4f8c2e5454332fe324662e0",
+    "production-last-card-recommendations-320.png": "d01f5a47d07c124e48d7a34ce04f434d7e876ee81645f89125952eb24d86a972",
+    "production-last-viewport-products-320.png": "d2d618a9854ee195fa346747ce47e97e0f20eeb5060a2e2e0800a542e3a75516",
+    "production-last-viewport-recommendations-320.png": "691ce4ee64cfd3d67667a35d6698786b1ddd551a6325c705701db1644418bb23",
+    "production-real-card-products-1440.png": "12e45e1e7bd4533855f15643ae3f9ae55567217781514b220954e9a16b2f47ac",
+    "production-real-card-products-320.png": "e15ede671517b4e187cca8e9be039867cf44a1026721616ccee526f2b61042c4",
+    "production-real-card-products-768.png": "9187dada629fe82091ae4f4fd281cf8b594e0fdc6de6b680dc47eb3c728208d8",
+    "production-real-card-recommendations-1440.png": "3abc794cb4d2d301f84040b7ff505cf89b43d106d657a62c780dd0f4eb3aecf9",
+    "production-real-card-recommendations-320.png": "01fa586f75d12daee99ecf9e7cb68fadcb930c4946b9bbbfeb42ee7776b5c8ff",
+    "production-real-card-recommendations-768.png": "c1bb37e65d4aad93f4e0ebb3ee51e89b3aa8156a22d72e78289ed268f3901baa",
+    "production-real-products-1440.png": "88a493f23cb44d353157e2ac913909a914342926940cf070f4ae54fa76470610",
+    "production-real-products-320.png": "8fa47675eaa5323db525761fae21ddfd8e89a70a82284de92327e915e72353ba",
+    "production-real-products-768.png": "6377bae6264e8594453ac237e647b8a0b5020acd8622f5f6e0382a59a4575196",
+    "production-real-products-heat-1440.png": "f8dd5231bbb5573e1856db91dd21d2fb5aae558636e807abd1c245d990ab6b78",
+    "production-real-products-heat-320.png": "a158a1cf331729aa0ac87b50d4a66409e52c077fd9b1bc3f8f28e0ec475d0cb7",
+    "production-real-products-heat-768.png": "d9773587a57d57d758b1c352f1c261be647b35857552416fc5863659872a17b2",
+    "production-real-products-sort-1440.png": "b82a3e01b17bd355b3561c0fecb6cd026177b11ce7b19dd4f9a50c538d129b69",
+    "production-real-products-sort-320.png": "c078f66110cc07cd9f0cf64a8b3c4b6bfaf930401670fd9a7ba11061fdbdfdd0",
+    "production-real-products-sort-768.png": "b82a3e01b17bd355b3561c0fecb6cd026177b11ce7b19dd4f9a50c538d129b69",
+    "production-real-recommendations-1440.png": "dd48dca0be6e96a7416e823f98f5d318746691dd3233e2f52195ccf42588006c",
+    "production-real-recommendations-320.png": "fd8bb2e1efd6f9a0d188a50f05309b7de21f8cbe14cfde36ee26336359676f1e",
+    "production-real-recommendations-768.png": "6f45a0b0738da98f2e23a3bfc51c2c0e551aacda971052e042bda08974020106",
+    "production-real-recommendations-heat-1440.png": "00da9c1b18414bf3ebf798e06bb13fdd19716655da525b9326faad7490cf099b",
+    "production-real-recommendations-heat-320.png": "e64a8e74cb920d36b0b63bc39226936ca1bcd8afc1b7c9b1887a203343b9b770",
+    "production-real-recommendations-heat-768.png": "7ca6a5fb3df3c3a0b54ac125cea5983f214cc523fb891f1d4375c1a89a2acf8f",
+    "production-real-recommendations-sort-1440.png": "c12a6ab7ea749a065a15ab9fd2c3281e059f959a70f3eb56bdbd1514799f50de",
+    "production-real-recommendations-sort-320.png": "4bd59b47b2b24e5453222e287af883ae36ea5388111982bf2e052f2a215b717e",
+    "production-real-recommendations-sort-768.png": "c12a6ab7ea749a065a15ab9fd2c3281e059f959a70f3eb56bdbd1514799f50de",
+    "products-1440.png": "39f7f1cb6a5338d8cde0788329a95f1549178da17b8e8d6ae99506851baad8b8",
+    "products-320.png": "5bc1d4e7cb584082213743db9e17040b5a223d485e81d3977a0f6d69d5670339",
+    "products-768.png": "b69d0f35209777d6a93da478439b904fb8cdb04691bbe3c68fe610dd801c2fd1",
+    "recommendation-card-1440.png": "34907108acad7715d8f9bdc25ad49e5afbda1b968afecf65473a3e014ef0d835",
+    "recommendation-card-320.png": "743d5d4ebdde7967a4aa4991e14bd9e4c6c37e7652df92b960539f776f946241",
+    "recommendation-card-768.png": "2684a1dd3b3660f38a2db9a34e74b87b070d4bc53844ff4212325ec03cbff519",
+    "recommendations-1440.png": "7e3247729ba577ba09126fe3f009aaf89907af21be8e1a073d55eb2cfbc1f518",
+    "recommendations-320.png": "d6c2a8f52aa2f6048720bb65771ad1b3f95bfc4d3a9a9e413ee34a9aa144d640",
+    "recommendations-768.png": "fcf82718780bda63271950d91e4963a1d3b7daa12b792ad56fdb1efe4018b867",
+    "review-textarea-max-320.png": "d5d261289c0f0936e89361f41ad1281ad74c09d1512b6d73648e9055847a6b30",
+    "review-textarea-max-end-320.png": "a6ca2e66db41c6d9faaa15b21a999a1eb1470b2189e4e4828a77d2e9e5c3df89",
+    "stars-before-hover.png": "b8b9fb81c3aff1eb33d84930d2605735d320d1fce1abdfac94d5d14b266c5cc2",
+    "stars-hover-desktop.png": "76289e86b4b2e5ad839a8074434a91a4c29ffe21dcce4cf71dbb37e1c7288864",
+    "stars-long-text-320.png": "5b2146a04ea0de35596c2b508a6eaf516ea14c15b64862ead1a1b424332926d5",
+    "stars-mobile-320.png": "9615972735c9ee5981b09bceb4b97ea8e6c90786b06865db4dac094ff66ebe1e"
+  }
+}

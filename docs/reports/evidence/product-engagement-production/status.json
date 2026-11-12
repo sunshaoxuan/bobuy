@@ -1,0 +1,7 @@
+{
+  "phase": "APPLICATION_ROLLED_BACK",
+  "at": "2026-11-11T23:19:28Z",
+  "reason": "Pre-open five-minute release budget exceeded",
+  "schemaRetained": "33",
+  "databaseRestoreForbidden": true
+}

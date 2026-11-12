@@ -1,0 +1,1501 @@
+{
+  "origin": "https://bobuy.cc",
+  "data": "real public production catalog after temporary QA fixtures removed",
+  "console": [],
+  "network": [],
+  "views": [
+    {
+      "route": "products",
+      "width": 1440,
+      "cards": 24,
+      "allSevenSortOptions": "PASS",
+      "displayedPriceOrder": [
+        {
+          "direction": "price-asc",
+          "values": [
+            {
+              "currency": "JPY",
+              "amount": 98
+            },
+            {
+              "currency": "JPY",
+              "amount": 118
+            },
+            {
+              "currency": "JPY",
+              "amount": 138
+            },
+            {
+              "currency": "JPY",
+              "amount": 158
+            },
+            {
+              "currency": "JPY",
+              "amount": 158
+            },
+            {
+              "currency": "JPY",
+              "amount": 158
+            },
+            {
+              "currency": "JPY",
+              "amount": 238
+            },
+            {
+              "currency": "JPY",
+              "amount": 278
+            },
+            {
+              "currency": "JPY",
+              "amount": 338
+            },
+            {
+              "currency": "JPY",
+              "amount": 399
+            },
+            {
+              "currency": "JPY",
+              "amount": 399
+            },
+            {
+              "currency": "JPY",
+              "amount": 460
+            },
+            {
+              "currency": "JPY",
+              "amount": 478
+            },
+            {
+              "currency": "JPY",
+              "amount": 498
+            },
+            {
+              "currency": "JPY",
+              "amount": 598
+            },
+            {
+              "currency": "JPY",
+              "amount": 598
+            },
+            {
+              "currency": "JPY",
+              "amount": 629
+            },
+            {
+              "currency": "JPY",
+              "amount": 638
+            },
+            {
+              "currency": "JPY",
+              "amount": 678
+            },
+            {
+              "currency": "JPY",
+              "amount": 678
+            },
+            {
+              "currency": "JPY",
+              "amount": 678
+            },
+            {
+              "currency": "JPY",
+              "amount": 698
+            },
+            {
+              "currency": "JPY",
+              "amount": 698
+            },
+            {
+              "currency": "JPY",
+              "amount": 728
+            }
+          ],
+          "result": "PASS"
+        },
+        {
+          "direction": "price-desc",
+          "values": [
+            {
+              "currency": "JPY",
+              "amount": 398000
+            },
+            {
+              "currency": "JPY",
+              "amount": 299800
+            },
+            {
+              "currency": "JPY",
+              "amount": 199800
+            },
+            {
+              "currency": "JPY",
+              "amount": 173800
+            },
+            {
+              "currency": "JPY",
+              "amount": 165800
+            },
+            {
+              "currency": "JPY",
+              "amount": 159800
+            },
+            {
+              "currency": "JPY",
+              "amount": 146800
+            },
+            {
+              "currency": "JPY",
+              "amount": 134800
+            },
+            {
+              "currency": "JPY",
+              "amount": 129800
+            },
+            {
+              "currency": "JPY",
+              "amount": 129800
+            },
+            {
+              "currency": "JPY",
+              "amount": 126880
+            },
+            {
+              "currency": "JPY",
+              "amount": 119800
+            },
+            {
+              "currency": "JPY",
+              "amount": 109980
+            },
+            {
+              "currency": "JPY",
+              "amount": 109800
+            },
+            {
+              "currency": "JPY",
+              "amount": 107800
+            },
+            {
+              "currency": "JPY",
+              "amount": 95800
+            },
+            {
+              "currency": "JPY",
+              "amount": 85800
+            },
+            {
+              "currency": "JPY",
+              "amount": 75800
+            },
+            {
+              "currency": "JPY",
+              "amount": 69800
+            },
+            {
+              "currency": "JPY",
+              "amount": 67800
+            },
+            {
+              "currency": "JPY",
+              "amount": 65800
+            },
+            {
+              "currency": "JPY",
+              "amount": 63880
+            },
+            {
+              "currency": "JPY",
+              "amount": 54980
+            },
+            {
+              "currency": "JPY",
+              "amount": 49800
+            }
+          ],
+          "result": "PASS"
+        }
+      ],
+      "noHorizontalOverflow": "PASS",
+      "controls": [
+        {
+          "name": "sort",
+          "box": {
+            "x": 1175,
+            "y": 111.5,
+            "width": 218,
+            "height": 44
+          },
+          "file": "production-real-products-sort-1440.png"
+        },
+        {
+          "name": "heat",
+          "box": {
+            "x": 283,
+            "y": 438.296875,
+            "width": 189.390625,
+            "height": 24
+          },
+          "file": "production-real-products-heat-1440.png"
+        }
+      ]
+    },
+    {
+      "route": "recommendations",
+      "width": 1440,
+      "cards": 24,
+      "allSevenSortOptions": "PASS",
+      "displayedPriceOrder": [
+        {
+          "direction": "price-asc",
+          "values": [
+            {
+              "currency": "JPY",
+              "amount": 98
+            },
+            {
+              "currency": "JPY",
+              "amount": 118
+            },
+            {
+              "currency": "JPY",
+              "amount": 138
+            },
+            {
+              "currency": "JPY",
+              "amount": 158
+            },
+            {
+              "currency": "JPY",
+              "amount": 158
+            },
+            {
+              "currency": "JPY",
+              "amount": 158
+            },
+            {
+              "currency": "JPY",
+              "amount": 158
+            },
+            {
+              "currency": "JPY",
+              "amount": 238
+            },
+            {
+              "currency": "JPY",
+              "amount": 278
+            },
+            {
+              "currency": "JPY",
+              "amount": 278
+            },
+            {
+              "currency": "JPY",
+              "amount": 338
+            },
+            {
+              "currency": "JPY",
+              "amount": 399
+            },
+            {
+              "currency": "JPY",
+              "amount": 399
+            },
+            {
+              "currency": "JPY",
+              "amount": 399
+            },
+            {
+              "currency": "JPY",
+              "amount": 460
+            },
+            {
+              "currency": "JPY",
+              "amount": 478
+            },
+            {
+              "currency": "JPY",
+              "amount": 498
+            },
+            {
+              "currency": "JPY",
+              "amount": 598
+            },
+            {
+              "currency": "JPY",
+              "amount": 598
+            },
+            {
+              "currency": "JPY",
+              "amount": 629
+            },
+            {
+              "currency": "JPY",
+              "amount": 638
+            },
+            {
+              "currency": "JPY",
+              "amount": 678
+            },
+            {
+              "currency": "JPY",
+              "amount": 678
+            },
+            {
+              "currency": "JPY",
+              "amount": 678
+            }
+          ],
+          "result": "PASS"
+        },
+        {
+          "direction": "price-desc",
+          "values": [
+            {
+              "currency": "JPY",
+              "amount": 398000
+            },
+            {
+              "currency": "JPY",
+              "amount": 299800
+            },
+            {
+              "currency": "JPY",
+              "amount": 199800
+            },
+            {
+              "currency": "JPY",
+              "amount": 199800
+            },
+            {
+              "currency": "JPY",
+              "amount": 173800
+            },
+            {
+              "currency": "JPY",
+              "amount": 165800
+            },
+            {
+              "currency": "JPY",
+              "amount": 159800
+            },
+            {
+              "currency": "JPY",
+              "amount": 146800
+            },
+            {
+              "currency": "JPY",
+              "amount": 146800
+            },
+            {
+              "currency": "JPY",
+              "amount": 134800
+            },
+            {
+              "currency": "JPY",
+              "amount": 129800
+            },
+            {
+              "currency": "JPY",
+              "amount": 129800
+            },
+            {
+              "currency": "JPY",
+              "amount": 126880
+            },
+            {
+              "currency": "JPY",
+              "amount": 119800
+            },
+            {
+              "currency": "JPY",
+              "amount": 109980
+            },
+            {
+              "currency": "JPY",
+              "amount": 109800
+            },
+            {
+              "currency": "JPY",
+              "amount": 107800
+            },
+            {
+              "currency": "JPY",
+              "amount": 95800
+            },
+            {
+              "currency": "JPY",
+              "amount": 85800
+            },
+            {
+              "currency": "JPY",
+              "amount": 75800
+            },
+            {
+              "currency": "JPY",
+              "amount": 69800
+            },
+            {
+              "currency": "JPY",
+              "amount": 67800
+            },
+            {
+              "currency": "JPY",
+              "amount": 65800
+            },
+            {
+              "currency": "JPY",
+              "amount": 63880
+            }
+          ],
+          "result": "PASS"
+        }
+      ],
+      "noHorizontalOverflow": "PASS",
+      "controls": [
+        {
+          "name": "sort",
+          "box": {
+            "x": 1175,
+            "y": 206,
+            "width": 218,
+            "height": 44
+          },
+          "file": "production-real-recommendations-sort-1440.png"
+        },
+        {
+          "name": "heat",
+          "box": {
+            "x": 283,
+            "y": 437.53125,
+            "width": 189.390625,
+            "height": 24
+          },
+          "file": "production-real-recommendations-heat-1440.png"
+        }
+      ]
+    },
+    {
+      "route": "products",
+      "width": 768,
+      "cards": 24,
+      "allSevenSortOptions": "PASS",
+      "displayedPriceOrder": [
+        {
+          "direction": "price-asc",
+          "values": [
+            {
+              "currency": "JPY",
+              "amount": 98
+            },
+            {
+              "currency": "JPY",
+              "amount": 118
+            },
+            {
+              "currency": "JPY",
+              "amount": 138
+            },
+            {
+              "currency": "JPY",
+              "amount": 158
+            },
+            {
+              "currency": "JPY",
+              "amount": 158
+            },
+            {
+              "currency": "JPY",
+              "amount": 158
+            },
+            {
+              "currency": "JPY",
+              "amount": 238
+            },
+            {
+              "currency": "JPY",
+              "amount": 278
+            },
+            {
+              "currency": "JPY",
+              "amount": 338
+            },
+            {
+              "currency": "JPY",
+              "amount": 399
+            },
+            {
+              "currency": "JPY",
+              "amount": 399
+            },
+            {
+              "currency": "JPY",
+              "amount": 460
+            },
+            {
+              "currency": "JPY",
+              "amount": 478
+            },
+            {
+              "currency": "JPY",
+              "amount": 498
+            },
+            {
+              "currency": "JPY",
+              "amount": 598
+            },
+            {
+              "currency": "JPY",
+              "amount": 598
+            },
+            {
+              "currency": "JPY",
+              "amount": 629
+            },
+            {
+              "currency": "JPY",
+              "amount": 638
+            },
+            {
+              "currency": "JPY",
+              "amount": 678
+            },
+            {
+              "currency": "JPY",
+              "amount": 678
+            },
+            {
+              "currency": "JPY",
+              "amount": 678
+            },
+            {
+              "currency": "JPY",
+              "amount": 698
+            },
+            {
+              "currency": "JPY",
+              "amount": 698
+            },
+            {
+              "currency": "JPY",
+              "amount": 728
+            }
+          ],
+          "result": "PASS"
+        },
+        {
+          "direction": "price-desc",
+          "values": [
+            {
+              "currency": "JPY",
+              "amount": 398000
+            },
+            {
+              "currency": "JPY",
+              "amount": 299800
+            },
+            {
+              "currency": "JPY",
+              "amount": 199800
+            },
+            {
+              "currency": "JPY",
+              "amount": 173800
+            },
+            {
+              "currency": "JPY",
+              "amount": 165800
+            },
+            {
+              "currency": "JPY",
+              "amount": 159800
+            },
+            {
+              "currency": "JPY",
+              "amount": 146800
+            },
+            {
+              "currency": "JPY",
+              "amount": 134800
+            },
+            {
+              "currency": "JPY",
+              "amount": 129800
+            },
+            {
+              "currency": "JPY",
+              "amount": 129800
+            },
+            {
+              "currency": "JPY",
+              "amount": 126880
+            },
+            {
+              "currency": "JPY",
+              "amount": 119800
+            },
+            {
+              "currency": "JPY",
+              "amount": 109980
+            },
+            {
+              "currency": "JPY",
+              "amount": 109800
+            },
+            {
+              "currency": "JPY",
+              "amount": 107800
+            },
+            {
+              "currency": "JPY",
+              "amount": 95800
+            },
+            {
+              "currency": "JPY",
+              "amount": 85800
+            },
+            {
+              "currency": "JPY",
+              "amount": 75800
+            },
+            {
+              "currency": "JPY",
+              "amount": 69800
+            },
+            {
+              "currency": "JPY",
+              "amount": 67800
+            },
+            {
+              "currency": "JPY",
+              "amount": 65800
+            },
+            {
+              "currency": "JPY",
+              "amount": 63880
+            },
+            {
+              "currency": "JPY",
+              "amount": 54980
+            },
+            {
+              "currency": "JPY",
+              "amount": 49800
+            }
+          ],
+          "result": "PASS"
+        }
+      ],
+      "noHorizontalOverflow": "PASS",
+      "controls": [
+        {
+          "name": "sort",
+          "box": {
+            "x": 511,
+            "y": 111.5,
+            "width": 218,
+            "height": 44
+          },
+          "file": "production-real-products-sort-768.png"
+        },
+        {
+          "name": "heat",
+          "box": {
+            "x": 251,
+            "y": 437.734375,
+            "width": 214.5,
+            "height": 24
+          },
+          "file": "production-real-products-heat-768.png"
+        }
+      ]
+    },
+    {
+      "route": "recommendations",
+      "width": 768,
+      "cards": 24,
+      "allSevenSortOptions": "PASS",
+      "displayedPriceOrder": [
+        {
+          "direction": "price-asc",
+          "values": [
+            {
+              "currency": "JPY",
+              "amount": 98
+            },
+            {
+              "currency": "JPY",
+              "amount": 118
+            },
+            {
+              "currency": "JPY",
+              "amount": 138
+            },
+            {
+              "currency": "JPY",
+              "amount": 158
+            },
+            {
+              "currency": "JPY",
+              "amount": 158
+            },
+            {
+              "currency": "JPY",
+              "amount": 158
+            },
+            {
+              "currency": "JPY",
+              "amount": 158
+            },
+            {
+              "currency": "JPY",
+              "amount": 238
+            },
+            {
+              "currency": "JPY",
+              "amount": 278
+            },
+            {
+              "currency": "JPY",
+              "amount": 278
+            },
+            {
+              "currency": "JPY",
+              "amount": 338
+            },
+            {
+              "currency": "JPY",
+              "amount": 399
+            },
+            {
+              "currency": "JPY",
+              "amount": 399
+            },
+            {
+              "currency": "JPY",
+              "amount": 399
+            },
+            {
+              "currency": "JPY",
+              "amount": 460
+            },
+            {
+              "currency": "JPY",
+              "amount": 478
+            },
+            {
+              "currency": "JPY",
+              "amount": 498
+            },
+            {
+              "currency": "JPY",
+              "amount": 598
+            },
+            {
+              "currency": "JPY",
+              "amount": 598
+            },
+            {
+              "currency": "JPY",
+              "amount": 629
+            },
+            {
+              "currency": "JPY",
+              "amount": 638
+            },
+            {
+              "currency": "JPY",
+              "amount": 678
+            },
+            {
+              "currency": "JPY",
+              "amount": 678
+            },
+            {
+              "currency": "JPY",
+              "amount": 678
+            }
+          ],
+          "result": "PASS"
+        },
+        {
+          "direction": "price-desc",
+          "values": [
+            {
+              "currency": "JPY",
+              "amount": 398000
+            },
+            {
+              "currency": "JPY",
+              "amount": 299800
+            },
+            {
+              "currency": "JPY",
+              "amount": 199800
+            },
+            {
+              "currency": "JPY",
+              "amount": 199800
+            },
+            {
+              "currency": "JPY",
+              "amount": 173800
+            },
+            {
+              "currency": "JPY",
+              "amount": 165800
+            },
+            {
+              "currency": "JPY",
+              "amount": 159800
+            },
+            {
+              "currency": "JPY",
+              "amount": 146800
+            },
+            {
+              "currency": "JPY",
+              "amount": 146800
+            },
+            {
+              "currency": "JPY",
+              "amount": 134800
+            },
+            {
+              "currency": "JPY",
+              "amount": 129800
+            },
+            {
+              "currency": "JPY",
+              "amount": 129800
+            },
+            {
+              "currency": "JPY",
+              "amount": 126880
+            },
+            {
+              "currency": "JPY",
+              "amount": 119800
+            },
+            {
+              "currency": "JPY",
+              "amount": 109980
+            },
+            {
+              "currency": "JPY",
+              "amount": 109800
+            },
+            {
+              "currency": "JPY",
+              "amount": 107800
+            },
+            {
+              "currency": "JPY",
+              "amount": 95800
+            },
+            {
+              "currency": "JPY",
+              "amount": 85800
+            },
+            {
+              "currency": "JPY",
+              "amount": 75800
+            },
+            {
+              "currency": "JPY",
+              "amount": 69800
+            },
+            {
+              "currency": "JPY",
+              "amount": 67800
+            },
+            {
+              "currency": "JPY",
+              "amount": 65800
+            },
+            {
+              "currency": "JPY",
+              "amount": 63880
+            }
+          ],
+          "result": "PASS"
+        }
+      ],
+      "noHorizontalOverflow": "PASS",
+      "controls": [
+        {
+          "name": "sort",
+          "box": {
+            "x": 511,
+            "y": 206,
+            "width": 218,
+            "height": 44
+          },
+          "file": "production-real-recommendations-sort-768.png"
+        },
+        {
+          "name": "heat",
+          "box": {
+            "x": 251,
+            "y": 437.984375,
+            "width": 214.5,
+            "height": 24
+          },
+          "file": "production-real-recommendations-heat-768.png"
+        }
+      ]
+    },
+    {
+      "route": "products",
+      "width": 320,
+      "cards": 24,
+      "allSevenSortOptions": "PASS",
+      "displayedPriceOrder": [
+        {
+          "direction": "price-asc",
+          "values": [
+            {
+              "currency": "JPY",
+              "amount": 98
+            },
+            {
+              "currency": "JPY",
+              "amount": 118
+            },
+            {
+              "currency": "JPY",
+              "amount": 138
+            },
+            {
+              "currency": "JPY",
+              "amount": 158
+            },
+            {
+              "currency": "JPY",
+              "amount": 158
+            },
+            {
+              "currency": "JPY",
+              "amount": 158
+            },
+            {
+              "currency": "JPY",
+              "amount": 238
+            },
+            {
+              "currency": "JPY",
+              "amount": 278
+            },
+            {
+              "currency": "JPY",
+              "amount": 338
+            },
+            {
+              "currency": "JPY",
+              "amount": 399
+            },
+            {
+              "currency": "JPY",
+              "amount": 399
+            },
+            {
+              "currency": "JPY",
+              "amount": 460
+            },
+            {
+              "currency": "JPY",
+              "amount": 478
+            },
+            {
+              "currency": "JPY",
+              "amount": 498
+            },
+            {
+              "currency": "JPY",
+              "amount": 598
+            },
+            {
+              "currency": "JPY",
+              "amount": 598
+            },
+            {
+              "currency": "JPY",
+              "amount": 629
+            },
+            {
+              "currency": "JPY",
+              "amount": 638
+            },
+            {
+              "currency": "JPY",
+              "amount": 678
+            },
+            {
+              "currency": "JPY",
+              "amount": 678
+            },
+            {
+              "currency": "JPY",
+              "amount": 678
+            },
+            {
+              "currency": "JPY",
+              "amount": 698
+            },
+            {
+              "currency": "JPY",
+              "amount": 698
+            },
+            {
+              "currency": "JPY",
+              "amount": 728
+            }
+          ],
+          "result": "PASS"
+        },
+        {
+          "direction": "price-desc",
+          "values": [
+            {
+              "currency": "JPY",
+              "amount": 398000
+            },
+            {
+              "currency": "JPY",
+              "amount": 299800
+            },
+            {
+              "currency": "JPY",
+              "amount": 199800
+            },
+            {
+              "currency": "JPY",
+              "amount": 173800
+            },
+            {
+              "currency": "JPY",
+              "amount": 165800
+            },
+            {
+              "currency": "JPY",
+              "amount": 159800
+            },
+            {
+              "currency": "JPY",
+              "amount": 146800
+            },
+            {
+              "currency": "JPY",
+              "amount": 134800
+            },
+            {
+              "currency": "JPY",
+              "amount": 129800
+            },
+            {
+              "currency": "JPY",
+              "amount": 129800
+            },
+            {
+              "currency": "JPY",
+              "amount": 126880
+            },
+            {
+              "currency": "JPY",
+              "amount": 119800
+            },
+            {
+              "currency": "JPY",
+              "amount": 109980
+            },
+            {
+              "currency": "JPY",
+              "amount": 109800
+            },
+            {
+              "currency": "JPY",
+              "amount": 107800
+            },
+            {
+              "currency": "JPY",
+              "amount": 95800
+            },
+            {
+              "currency": "JPY",
+              "amount": 85800
+            },
+            {
+              "currency": "JPY",
+              "amount": 75800
+            },
+            {
+              "currency": "JPY",
+              "amount": 69800
+            },
+            {
+              "currency": "JPY",
+              "amount": 67800
+            },
+            {
+              "currency": "JPY",
+              "amount": 65800
+            },
+            {
+              "currency": "JPY",
+              "amount": 63880
+            },
+            {
+              "currency": "JPY",
+              "amount": 54980
+            },
+            {
+              "currency": "JPY",
+              "amount": 49800
+            }
+          ],
+          "result": "PASS"
+        }
+      ],
+      "noHorizontalOverflow": "PASS",
+      "controls": [
+        {
+          "name": "sort",
+          "box": {
+            "x": 16,
+            "y": 188.25,
+            "width": 273,
+            "height": 44
+          },
+          "file": "production-real-products-sort-320.png"
+        },
+        {
+          "name": "heat",
+          "box": {
+            "x": 25,
+            "y": 437.609375,
+            "width": 112.5,
+            "height": 24
+          },
+          "file": "production-real-products-heat-320.png"
+        }
+      ],
+      "lastCardHeatReachable": {
+        "result": "PASS",
+        "heat": {
+          "x": 167.5,
+          "y": 666.15625,
+          "width": 112.5,
+          "height": 24
+        },
+        "navigation": {
+          "x": 0,
+          "y": 830.703125,
+          "width": 305,
+          "height": 69.296875
+        },
+        "gap": 140.546875
+      }
+    },
+    {
+      "route": "recommendations",
+      "width": 320,
+      "cards": 24,
+      "allSevenSortOptions": "PASS",
+      "displayedPriceOrder": [
+        {
+          "direction": "price-asc",
+          "values": [
+            {
+              "currency": "JPY",
+              "amount": 98
+            },
+            {
+              "currency": "JPY",
+              "amount": 118
+            },
+            {
+              "currency": "JPY",
+              "amount": 138
+            },
+            {
+              "currency": "JPY",
+              "amount": 158
+            },
+            {
+              "currency": "JPY",
+              "amount": 158
+            },
+            {
+              "currency": "JPY",
+              "amount": 158
+            },
+            {
+              "currency": "JPY",
+              "amount": 158
+            },
+            {
+              "currency": "JPY",
+              "amount": 238
+            },
+            {
+              "currency": "JPY",
+              "amount": 278
+            },
+            {
+              "currency": "JPY",
+              "amount": 278
+            },
+            {
+              "currency": "JPY",
+              "amount": 338
+            },
+            {
+              "currency": "JPY",
+              "amount": 399
+            },
+            {
+              "currency": "JPY",
+              "amount": 399
+            },
+            {
+              "currency": "JPY",
+              "amount": 399
+            },
+            {
+              "currency": "JPY",
+              "amount": 460
+            },
+            {
+              "currency": "JPY",
+              "amount": 478
+            },
+            {
+              "currency": "JPY",
+              "amount": 498
+            },
+            {
+              "currency": "JPY",
+              "amount": 598
+            },
+            {
+              "currency": "JPY",
+              "amount": 598
+            },
+            {
+              "currency": "JPY",
+              "amount": 629
+            },
+            {
+              "currency": "JPY",
+              "amount": 638
+            },
+            {
+              "currency": "JPY",
+              "amount": 678
+            },
+            {
+              "currency": "JPY",
+              "amount": 678
+            },
+            {
+              "currency": "JPY",
+              "amount": 678
+            }
+          ],
+          "result": "PASS"
+        },
+        {
+          "direction": "price-desc",
+          "values": [
+            {
+              "currency": "JPY",
+              "amount": 398000
+            },
+            {
+              "currency": "JPY",
+              "amount": 299800
+            },
+            {
+              "currency": "JPY",
+              "amount": 199800
+            },
+            {
+              "currency": "JPY",
+              "amount": 199800
+            },
+            {
+              "currency": "JPY",
+              "amount": 173800
+            },
+            {
+              "currency": "JPY",
+              "amount": 165800
+            },
+            {
+              "currency": "JPY",
+              "amount": 159800
+            },
+            {
+              "currency": "JPY",
+              "amount": 146800
+            },
+            {
+              "currency": "JPY",
+              "amount": 146800
+            },
+            {
+              "currency": "JPY",
+              "amount": 134800
+            },
+            {
+              "currency": "JPY",
+              "amount": 129800
+            },
+            {
+              "currency": "JPY",
+              "amount": 129800
+            },
+            {
+              "currency": "JPY",
+              "amount": 126880
+            },
+            {
+              "currency": "JPY",
+              "amount": 119800
+            },
+            {
+              "currency": "JPY",
+              "amount": 109980
+            },
+            {
+              "currency": "JPY",
+              "amount": 109800
+            },
+            {
+              "currency": "JPY",
+              "amount": 107800
+            },
+            {
+              "currency": "JPY",
+              "amount": 95800
+            },
+            {
+              "currency": "JPY",
+              "amount": 85800
+            },
+            {
+              "currency": "JPY",
+              "amount": 75800
+            },
+            {
+              "currency": "JPY",
+              "amount": 69800
+            },
+            {
+              "currency": "JPY",
+              "amount": 67800
+            },
+            {
+              "currency": "JPY",
+              "amount": 65800
+            },
+            {
+              "currency": "JPY",
+              "amount": 63880
+            }
+          ],
+          "result": "PASS"
+        }
+      ],
+      "noHorizontalOverflow": "PASS",
+      "controls": [
+        {
+          "name": "sort",
+          "box": {
+            "x": 16,
+            "y": 293,
+            "width": 273,
+            "height": 44
+          },
+          "file": "production-real-recommendations-sort-320.png"
+        },
+        {
+          "name": "heat",
+          "box": {
+            "x": 25,
+            "y": 438.109375,
+            "width": 112.5,
+            "height": 24
+          },
+          "file": "production-real-recommendations-heat-320.png"
+        }
+      ],
+      "lastCardHeatReachable": {
+        "result": "PASS",
+        "heat": {
+          "x": 167.5,
+          "y": 641.59375,
+          "width": 112.5,
+          "height": 24
+        },
+        "navigation": {
+          "x": 0,
+          "y": 830.703125,
+          "width": 305,
+          "height": 69.296875
+        },
+        "gap": 165.109375
+      }
+    }
+  ],
+  "result": "PASS",
+  "desktopStarRows": {
+    "result": "PASS",
+    "data": [
+      {
+        "product": "018775a1-c531-4d89-bb61-5148b6a1df05",
+        "ratingContainers": 1,
+        "rateComponents": 1,
+        "starSlots": 5,
+        "svgRows": [
+          597
+        ]
+      },
+      {
+        "product": "0451e987-1bc1-498d-8494-a7b9be9adbb7",
+        "ratingContainers": 1,
+        "rateComponents": 1,
+        "starSlots": 5,
+        "svgRows": [
+          620
+        ]
+      },
+      {
+        "product": "08ee57fc-9c54-47a6-81b7-01b70d0b2092",
+        "ratingContainers": 1,
+        "rateComponents": 1,
+        "starSlots": 5,
+        "svgRows": [
+          597
+        ]
+      },
+      {
+        "product": "0a516c2c-9f7d-46a8-a983-661959673738",
+        "ratingContainers": 1,
+        "rateComponents": 1,
+        "starSlots": 5,
+        "svgRows": [
+          620
+        ]
+      },
+      {
+        "product": "0b38036f-3e99-420c-b870-89fe35d7a723",
+        "ratingContainers": 1,
+        "rateComponents": 1,
+        "starSlots": 5,
+        "svgRows": [
+          597
+        ]
+      }
+    ]
+  }
+}

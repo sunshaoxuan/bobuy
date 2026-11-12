@@ -1,0 +1,4 @@
+# Preserve byte-pinned release receipts and operators on every checkout.
+* -text whitespace=cr-at-eol
+# Retain the byte-pinned transport export's original trailing separator.
+final-data.json whitespace=cr-at-eol,-blank-at-eof

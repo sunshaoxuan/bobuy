@@ -1,0 +1,4 @@
+FROM bobuy/frontend:20261112.maintenance-wording.2
+RUN rm -rf /usr/share/nginx/html/*
+COPY dist/ /usr/share/nginx/html/
+LABEL org.opencontainers.image.revision="606deb375b125d41e451dad555bb306f70f0fae3"

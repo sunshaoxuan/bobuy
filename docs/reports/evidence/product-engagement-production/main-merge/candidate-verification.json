@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "archive": "c680934f3a83104707eaa61bc0d82ea50efa3afa",
+  "baseMain": "e9b32e729f5501b8ed3af1d02ecad92b419096bc",
+  "candidate": "0b89c0b26d4287600043b903960f909c97127f17",
+  "candidateTree": "6c56a9f7387952d5ffb547b9747906cdb6ea2aa6",
+  "runtimeDependenciesMigrationsWorkflowsEqualToMain": true,
+  "archiveEvidenceFilesUnchanged": 117,
+  "otherRemoteAndLocalBranchesUnchanged": true,
+  "sharedWorktreeBytesUnchanged": true,
+  "productionOperations": 0
+}
