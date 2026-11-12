@@ -1,0 +1,11 @@
+{
+  "source": "8af5c8e3e2fcc6581fe80f29dc91190212a47b34",
+  "release": "20261113.brand-name.1",
+  "result": "PASS",
+  "functional": "PASS",
+  "geometry": "PASS",
+  "visual": "PASS",
+  "scope": "Only brand text-column correction, 19 scoped tests, one build, native CI",
+  "production": "Both viewport asset bindings and corresponding glyphs PASS",
+  "cleanup": "Previous policy-denied frontend/dist retained without a new deletion attempt"
+}

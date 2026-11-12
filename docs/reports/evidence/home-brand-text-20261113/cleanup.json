@@ -1,0 +1,19 @@
+{
+  "removed": [
+    "verify-brand-text.mjs",
+    "measure-brand-text.py",
+    "release-brand-text.py",
+    "prepare-brand-text.py",
+    "model-list-text.py",
+    "brand-text-tests.log",
+    "brand-text-build.log",
+    "brand-text-browser.log",
+    "brand-text-production.log",
+    "gemini-brand-text-review.txt",
+    "gemini-flash-probe.txt",
+    "gemini-pro-probe.txt",
+    "payload.tar.gz",
+    "dependency junction only"
+  ],
+  "retained": "frontend/dist, prior policy denial respected"
+}

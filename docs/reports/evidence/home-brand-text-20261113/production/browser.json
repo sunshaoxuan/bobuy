@@ -1,0 +1,135 @@
+{
+  "base": "https://bobuy.cc",
+  "rows": [
+    {
+      "width": 1440,
+      "geometry": {
+        "link": {
+          "x": 30,
+          "y": 30,
+          "width": 121,
+          "height": 53.296875
+        },
+        "mark": {
+          "x": 34,
+          "y": 37.640625,
+          "width": 38,
+          "height": 38
+        },
+        "label": {
+          "x": 84,
+          "y": 34,
+          "width": 63,
+          "height": 45.296875
+        },
+        "name": {
+          "x": 84,
+          "y": 34,
+          "width": 63,
+          "height": 27.296875
+        },
+        "domain": {
+          "x": 84,
+          "y": 61.296875,
+          "width": 55.890625,
+          "height": 18
+        },
+        "padding": "4px",
+        "href": "/",
+        "overflow": false
+      },
+      "errors": [],
+      "network": [],
+      "cancelled": [],
+      "assets": [
+        {
+          "path": "/assets/index-B4BfYa6w.js",
+          "sha256": "f13a81c175b0d82bca5ecf0cd56dc9d4761d7c1631a077a26e194b7606d0f2ba"
+        },
+        {
+          "path": "/assets/index-7JczN2rf.css",
+          "sha256": "efe312a9b73b77677a7e3a35b20f07bd815c08456775bf3ab08f07c83394e336"
+        },
+        {
+          "path": "/assets/ImageLightbox-DKnMaoxp.css",
+          "sha256": "091fe63279bbbbe9de53be34d6873022737d18bde022b816553b44fd7188e13f"
+        },
+        {
+          "path": "/assets/RecommendationImageViewer-BnZdvF0r.css",
+          "sha256": "53f93b3e748150e500e4a9e82b9c876a48e2f42b0fb04fa459aa85fe608dd06d"
+        },
+        {
+          "path": "/assets/PublicRecommendations-DhYyKoQc.css",
+          "sha256": "57228e6abd81d4b8c752bf45697153f2ce08d5660413c4638cf9f3bcee8ab2d5"
+        }
+      ],
+      "brandHome": true,
+      "oldLayoutRejected": true
+    },
+    {
+      "width": 360,
+      "geometry": {
+        "link": {
+          "x": 30,
+          "y": 84,
+          "width": 121,
+          "height": 53.296875
+        },
+        "mark": {
+          "x": 34,
+          "y": 91.640625,
+          "width": 38,
+          "height": 38
+        },
+        "label": {
+          "x": 84,
+          "y": 88,
+          "width": 63,
+          "height": 45.296875
+        },
+        "name": {
+          "x": 84,
+          "y": 88,
+          "width": 63,
+          "height": 27.296875
+        },
+        "domain": {
+          "x": 84,
+          "y": 115.296875,
+          "width": 55.890625,
+          "height": 18
+        },
+        "padding": "4px",
+        "href": "/",
+        "overflow": false
+      },
+      "errors": [],
+      "network": [],
+      "cancelled": [],
+      "assets": [
+        {
+          "path": "/assets/index-B4BfYa6w.js",
+          "sha256": "f13a81c175b0d82bca5ecf0cd56dc9d4761d7c1631a077a26e194b7606d0f2ba"
+        },
+        {
+          "path": "/assets/index-7JczN2rf.css",
+          "sha256": "efe312a9b73b77677a7e3a35b20f07bd815c08456775bf3ab08f07c83394e336"
+        },
+        {
+          "path": "/assets/ImageLightbox-DKnMaoxp.css",
+          "sha256": "091fe63279bbbbe9de53be34d6873022737d18bde022b816553b44fd7188e13f"
+        },
+        {
+          "path": "/assets/RecommendationImageViewer-BnZdvF0r.css",
+          "sha256": "53f93b3e748150e500e4a9e82b9c876a48e2f42b0fb04fa459aa85fe608dd06d"
+        },
+        {
+          "path": "/assets/PublicRecommendations-DhYyKoQc.css",
+          "sha256": "57228e6abd81d4b8c752bf45697153f2ce08d5660413c4638cf9f3bcee8ab2d5"
+        }
+      ],
+      "brandHome": true,
+      "oldLayoutRejected": true
+    }
+  ]
+}

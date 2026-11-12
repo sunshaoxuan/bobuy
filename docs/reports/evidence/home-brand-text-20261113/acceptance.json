@@ -1,0 +1,12 @@
+{
+  "source": "8af5c8e3e2fcc6581fe80f29dc91190212a47b34",
+  "result": "PASS",
+  "functional": "19 scoped StoreNavigation tests passed; actual desktop home link and mobile menu home/close passed",
+  "geometry": "Actual name and domain glyph left edges differ by 1px in desktop and mobile menu; text remains in name column; minimum glyph margins 5px; 12px icon-column gap; link 121x54px",
+  "visual": "Primary agent inspected actual overall and native cropped screenshots. Domain is directly under the name beside B. Gemini confirms the requirement is met. Its small-text/antialiasing notes concern unchanged font size/color and rendering; screenshots show readable unclipped text within the original budget.",
+  "negativeExample": "Rejected whole-logo-row domain placement",
+  "browser": "local/browser.json",
+  "pixels": "local/glyphs.json",
+  "build": "PASS; single required frontend build including i18n and initial homepage generation",
+  "testScope": "StoreNavigation.hiddenNode.test.tsx only; no full frontend/backend regression"
+}

@@ -1,0 +1,72 @@
+[
+  {
+    "width": 1440,
+    "link": [
+      121,
+      54
+    ],
+    "nameInk": [
+      56,
+      8,
+      116,
+      28
+    ],
+    "domainInk": [
+      55,
+      36,
+      108,
+      48
+    ],
+    "nameMargins": [
+      56,
+      8,
+      5,
+      26
+    ],
+    "domainMargins": [
+      55,
+      36,
+      13,
+      6
+    ],
+    "leftEdgeError": 1,
+    "nameToDomainGap": 8,
+    "markToTextGap": 12,
+    "result": "PASS"
+  },
+  {
+    "width": 360,
+    "link": [
+      121,
+      54
+    ],
+    "nameInk": [
+      56,
+      8,
+      116,
+      28
+    ],
+    "domainInk": [
+      55,
+      36,
+      108,
+      48
+    ],
+    "nameMargins": [
+      56,
+      8,
+      5,
+      26
+    ],
+    "domainMargins": [
+      55,
+      36,
+      13,
+      6
+    ],
+    "leftEdgeError": 1,
+    "nameToDomainGap": 8,
+    "markToTextGap": 12,
+    "result": "PASS"
+  }
+]

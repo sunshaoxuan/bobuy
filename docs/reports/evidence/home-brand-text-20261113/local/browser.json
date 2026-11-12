@@ -1,0 +1,93 @@
+{
+  "base": "http://localhost:5178",
+  "rows": [
+    {
+      "width": 1440,
+      "geometry": {
+        "link": {
+          "x": 30,
+          "y": 30,
+          "width": 121,
+          "height": 53.296875
+        },
+        "mark": {
+          "x": 34,
+          "y": 37.640625,
+          "width": 38,
+          "height": 38
+        },
+        "label": {
+          "x": 84,
+          "y": 34,
+          "width": 63,
+          "height": 45.296875
+        },
+        "name": {
+          "x": 84,
+          "y": 34,
+          "width": 63,
+          "height": 27.296875
+        },
+        "domain": {
+          "x": 84,
+          "y": 61.296875,
+          "width": 55.890625,
+          "height": 18
+        },
+        "padding": "4px",
+        "href": "/",
+        "overflow": false
+      },
+      "errors": [],
+      "network": [],
+      "cancelled": [],
+      "assets": [],
+      "brandHome": true,
+      "oldLayoutRejected": true
+    },
+    {
+      "width": 360,
+      "geometry": {
+        "link": {
+          "x": 30,
+          "y": 84,
+          "width": 121,
+          "height": 53.296875
+        },
+        "mark": {
+          "x": 34,
+          "y": 91.640625,
+          "width": 38,
+          "height": 38
+        },
+        "label": {
+          "x": 84,
+          "y": 88,
+          "width": 63,
+          "height": 45.296875
+        },
+        "name": {
+          "x": 84,
+          "y": 88,
+          "width": 63,
+          "height": 27.296875
+        },
+        "domain": {
+          "x": 84,
+          "y": 115.296875,
+          "width": 55.890625,
+          "height": 18
+        },
+        "padding": "4px",
+        "href": "/",
+        "overflow": false
+      },
+      "errors": [],
+      "network": [],
+      "cancelled": [],
+      "assets": [],
+      "brandHome": true,
+      "oldLayoutRejected": true
+    }
+  ]
+}
