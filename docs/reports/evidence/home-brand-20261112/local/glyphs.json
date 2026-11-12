@@ -1,0 +1,122 @@
+[
+  {
+    "width": 1440,
+    "pixelGlyphBox": [
+      34,
+      51,
+      86,
+      63
+    ],
+    "hotspot": [
+      121,
+      68
+    ],
+    "domainLine": [
+      32.546875,
+      46,
+      55.890625,
+      18
+    ],
+    "glyphSafetyToHotspot": [
+      34,
+      51,
+      35,
+      5
+    ],
+    "horizontalCenterError": 0.5,
+    "verticalCenterError": 2.0,
+    "nameGlyphBox": [
+      56,
+      13,
+      116,
+      33
+    ],
+    "nameSafetyToHotspot": [
+      56,
+      13,
+      5,
+      35
+    ],
+    "result": "PASS"
+  },
+  {
+    "width": 390,
+    "pixelGlyphBox": [
+      5,
+      32,
+      54,
+      42
+    ],
+    "hotspot": [
+      62,
+      48
+    ],
+    "domainLine": [
+      4,
+      28,
+      54,
+      16
+    ],
+    "glyphSafetyToHotspot": [
+      5,
+      32,
+      8,
+      6
+    ],
+    "horizontalCenterError": null,
+    "verticalCenterError": 1.0,
+    "nameGlyphBox": [
+      5,
+      8,
+      57,
+      24
+    ],
+    "nameSafetyToHotspot": [
+      5,
+      8,
+      5,
+      24
+    ],
+    "result": "PASS"
+  },
+  {
+    "width": 360,
+    "pixelGlyphBox": [
+      5,
+      32,
+      54,
+      42
+    ],
+    "hotspot": [
+      62,
+      48
+    ],
+    "domainLine": [
+      4,
+      28,
+      54,
+      16
+    ],
+    "glyphSafetyToHotspot": [
+      5,
+      32,
+      8,
+      6
+    ],
+    "horizontalCenterError": null,
+    "verticalCenterError": 1.0,
+    "nameGlyphBox": [
+      5,
+      8,
+      57,
+      24
+    ],
+    "nameSafetyToHotspot": [
+      5,
+      8,
+      5,
+      24
+    ],
+    "result": "PASS"
+  }
+]

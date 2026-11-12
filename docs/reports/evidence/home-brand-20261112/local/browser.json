@@ -1,0 +1,224 @@
+{
+  "base": "http://localhost:5178",
+  "results": [
+    {
+      "width": 1440,
+      "geometry": {
+        "hotspot": {
+          "x": 30,
+          "y": 30,
+          "width": 121,
+          "height": 68
+        },
+        "domain": {
+          "x": 62.546875,
+          "y": 76,
+          "width": 55.890625,
+          "height": 18
+        },
+        "name": {
+          "x": 84,
+          "y": 39.34375,
+          "width": 63,
+          "height": 27.296875
+        },
+        "overflow": false,
+        "font": "500 12px / 18px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif"
+      },
+      "errors": [],
+      "network": [],
+      "cancellations": [
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/8b8ecfca-5824-4594-bea1-922ede028682",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/27abf1ee-9432-4297-8d06-2652d1a5323a",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/284e0c28-de67-4720-9271-8288e22c9c5a",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/faf0a00e-409f-43e1-8580-e8d7c0becb2e",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/85544695-9f84-4998-9b93-60fe549c75cf",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/ce120d04-cdbe-44f4-b409-153f05eef930",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/62acb0af-3d5e-487f-b0d9-56a2f9bed74d",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/e97cb643-f220-4df7-ba4f-67b6bac35661",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/ba1001c9-4f81-47e0-8b65-4507242effb6",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/6bfb4c16-4d92-474e-b4d3-572b6c58a7f9",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/fbfee300-0286-4d8e-a20c-50203df901a1",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-sales?productIds=27abf1ee-9432-4297-8d06-2652d1a5323a%2C284e0c28-de67-4720-9271-8288e22c9c5a%2C330be8fb-a9dd-4977-b670-3eb783890ce9%2C39e8bbdd-6d09-4922-8c0d-0eba2d77802b%2C49067b03-bc1b-4682-b795-958ed70155a4%2C4990375f-483a-4f6b-8f92-fa32226fe32a%2C5ce8299c-fbca-4e62-8d95-ff987011c9da%2C5dcd2470-3ba5-49b2-86f7-a299d5992f3e%2C62acb0af-3d5e-487f-b0d9-56a2f9bed74d%2C6bfb4c16-4d92-474e-b4d3-572b6c58a7f9%2C726bcdbe-017f-41d9-a096-4bbf5bf3ac40%2C85544695-9f84-4998-9b93-60fe549c75cf%2C8b8ecfca-5824-4594-bea1-922ede028682%2Ca11d28d5-08e5-463c-96e7-69b37e452cfe%2Ca9237488-fb7d-4945-860f-72c7952846e5%2Ca97bd423-b7fc-4297-8cbe-bb284073d971%2Cb3b6d91c-f1c4-47d8-914b-60ec0a11b26d%2Cba1001c9-4f81-47e0-8b65-4507242effb6%2Cc67ca6b4-c00e-45f2-94b4-a992f4507573%2Cce120d04-cdbe-44f4-b409-153f05eef930%2Ce97cb643-f220-4df7-ba4f-67b6bac35661%2Cead7b100-2e45-4921-9e7d-6fcd4d6a2f99%2Cfaf0a00e-409f-43e1-8580-e8d7c0becb2e%2Cfbfee300-0286-4d8e-a20c-50203df901a1",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/ead7b100-2e45-4921-9e7d-6fcd4d6a2f99",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/726bcdbe-017f-41d9-a096-4bbf5bf3ac40",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/5dcd2470-3ba5-49b2-86f7-a299d5992f3e",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/a97bd423-b7fc-4297-8cbe-bb284073d971",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/39e8bbdd-6d09-4922-8c0d-0eba2d77802b",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/c67ca6b4-c00e-45f2-94b4-a992f4507573",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/4990375f-483a-4f6b-8f92-fa32226fe32a",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/recommendation-images/0c0c5bc1-6f3a-4103-aa6f-ac7fb260d98e",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "assets": [],
+      "introRemoved": true,
+      "searchInput": true,
+      "brandHome": true
+    },
+    {
+      "width": 390,
+      "geometry": {
+        "hotspot": {
+          "x": 66,
+          "y": 8,
+          "width": 62,
+          "height": 48
+        },
+        "domain": {
+          "x": 70,
+          "y": 36,
+          "width": 54,
+          "height": 16
+        },
+        "name": {
+          "x": 70,
+          "y": 12,
+          "width": 54,
+          "height": 24
+        },
+        "overflow": false,
+        "font": "500 11px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif"
+      },
+      "errors": [],
+      "network": [],
+      "cancellations": [
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/ba1001c9-4f81-47e0-8b65-4507242effb6",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-sales?productIds=27abf1ee-9432-4297-8d06-2652d1a5323a%2C284e0c28-de67-4720-9271-8288e22c9c5a%2C330be8fb-a9dd-4977-b670-3eb783890ce9%2C39e8bbdd-6d09-4922-8c0d-0eba2d77802b%2C49067b03-bc1b-4682-b795-958ed70155a4%2C4990375f-483a-4f6b-8f92-fa32226fe32a%2C5ce8299c-fbca-4e62-8d95-ff987011c9da%2C5dcd2470-3ba5-49b2-86f7-a299d5992f3e%2C62acb0af-3d5e-487f-b0d9-56a2f9bed74d%2C6bfb4c16-4d92-474e-b4d3-572b6c58a7f9%2C726bcdbe-017f-41d9-a096-4bbf5bf3ac40%2C85544695-9f84-4998-9b93-60fe549c75cf%2C8b8ecfca-5824-4594-bea1-922ede028682%2Ca11d28d5-08e5-463c-96e7-69b37e452cfe%2Ca9237488-fb7d-4945-860f-72c7952846e5%2Ca97bd423-b7fc-4297-8cbe-bb284073d971%2Cb3b6d91c-f1c4-47d8-914b-60ec0a11b26d%2Cba1001c9-4f81-47e0-8b65-4507242effb6%2Cc67ca6b4-c00e-45f2-94b4-a992f4507573%2Cce120d04-cdbe-44f4-b409-153f05eef930%2Ce97cb643-f220-4df7-ba4f-67b6bac35661%2Cead7b100-2e45-4921-9e7d-6fcd4d6a2f99%2Cfaf0a00e-409f-43e1-8580-e8d7c0becb2e%2Cfbfee300-0286-4d8e-a20c-50203df901a1",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/e97cb643-f220-4df7-ba4f-67b6bac35661",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/a97bd423-b7fc-4297-8cbe-bb284073d971",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/recommendation-nodes",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "assets": [],
+      "introRemoved": true,
+      "searchInput": true,
+      "brandHome": true
+    },
+    {
+      "width": 360,
+      "geometry": {
+        "hotspot": {
+          "x": 66,
+          "y": 8,
+          "width": 62,
+          "height": 48
+        },
+        "domain": {
+          "x": 70,
+          "y": 36,
+          "width": 54,
+          "height": 16
+        },
+        "name": {
+          "x": 70,
+          "y": 12,
+          "width": 54,
+          "height": 24
+        },
+        "overflow": false,
+        "font": "500 11px / 16px Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans JP\", sans-serif"
+      },
+      "errors": [],
+      "network": [],
+      "cancellations": [
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/ba1001c9-4f81-47e0-8b65-4507242effb6",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-sales?productIds=27abf1ee-9432-4297-8d06-2652d1a5323a%2C284e0c28-de67-4720-9271-8288e22c9c5a%2C330be8fb-a9dd-4977-b670-3eb783890ce9%2C39e8bbdd-6d09-4922-8c0d-0eba2d77802b%2C49067b03-bc1b-4682-b795-958ed70155a4%2C4990375f-483a-4f6b-8f92-fa32226fe32a%2C5ce8299c-fbca-4e62-8d95-ff987011c9da%2C5dcd2470-3ba5-49b2-86f7-a299d5992f3e%2C62acb0af-3d5e-487f-b0d9-56a2f9bed74d%2C6bfb4c16-4d92-474e-b4d3-572b6c58a7f9%2C726bcdbe-017f-41d9-a096-4bbf5bf3ac40%2C85544695-9f84-4998-9b93-60fe549c75cf%2C8b8ecfca-5824-4594-bea1-922ede028682%2Ca11d28d5-08e5-463c-96e7-69b37e452cfe%2Ca9237488-fb7d-4945-860f-72c7952846e5%2Ca97bd423-b7fc-4297-8cbe-bb284073d971%2Cb3b6d91c-f1c4-47d8-914b-60ec0a11b26d%2Cba1001c9-4f81-47e0-8b65-4507242effb6%2Cc67ca6b4-c00e-45f2-94b4-a992f4507573%2Cce120d04-cdbe-44f4-b409-153f05eef930%2Ce97cb643-f220-4df7-ba4f-67b6bac35661%2Cead7b100-2e45-4921-9e7d-6fcd4d6a2f99%2Cfaf0a00e-409f-43e1-8580-e8d7c0becb2e%2Cfbfee300-0286-4d8e-a20c-50203df901a1",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/recommendation-nodes",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/a97bd423-b7fc-4297-8cbe-bb284073d971",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://localhost:5178/api/storefront/product-popularity/e97cb643-f220-4df7-ba4f-67b6bac35661",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "assets": [],
+      "introRemoved": true,
+      "searchInput": true,
+      "brandHome": true
+    }
+  ]
+}
