@@ -30,5 +30,97 @@
       21.22,
       13.78
     ]
-  }
+  },
+  "fixtures320": [
+    {
+      "text": "Load more products (999999/9999999)",
+      "disabled": false,
+      "glyphBounds": [
+        58,
+        97,
+        198,
+        133
+      ],
+      "verticalCenterError": 0.109,
+      "allowance": 2,
+      "margins": [
+        45,
+        13.61,
+        108,
+        13.39
+      ]
+    },
+    {
+      "text": "\u5546\u54c1\u3092\u3082\u3063\u3068\u898b\u308b (999999/9999999)",
+      "disabled": false,
+      "glyphBounds": [
+        58,
+        210,
+        183,
+        247
+      ],
+      "verticalCenterError": -0.391,
+      "allowance": 2,
+      "margins": [
+        45,
+        12.61,
+        123,
+        13.39
+      ]
+    },
+    {
+      "text": "\u52a0\u8f7d\u66f4\u591a\u5546\u54c1 (72/370)",
+      "disabled": false,
+      "glyphBounds": [
+        94,
+        324,
+        249,
+        339
+      ],
+      "verticalCenterError": -0.391,
+      "allowance": 1.6,
+      "margins": [
+        45.7,
+        12.61,
+        21.7,
+        13.39
+      ]
+    },
+    {
+      "text": "Load more products (999999/9999999)",
+      "disabled": false,
+      "glyphBounds": [
+        56,
+        417,
+        196,
+        453
+      ],
+      "verticalCenterError": 0.109,
+      "allowance": 2,
+      "margins": [
+        43,
+        13.61,
+        110,
+        13.39
+      ]
+    },
+    {
+      "text": "Load more products (999999/9999999)",
+      "disabled": true,
+      "glyphBounds": [
+        58,
+        531,
+        198,
+        567
+      ],
+      "verticalCenterError": 0.109,
+      "allowance": 2,
+      "margins": [
+        45,
+        13.61,
+        108,
+        13.39
+      ]
+    }
+  ]
 }

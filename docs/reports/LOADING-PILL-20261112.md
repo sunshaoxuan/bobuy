@@ -31,7 +31,16 @@
 | 实际字形 | PASS：glyph-pixels.json从最终截图文本区域取暗色字形像素，桌面中心误差0.406px，手机0.219px，均小于1.4px预算；上下最小13.59px，右侧最小21.22px，左侧包含独立图标列；以扣除图标14px及8px间距后的文字可用区核对水平中心 |
 | 视觉 | PASS：主Agent查看最终整体和原尺寸裁图，胶囊完整、页面操作归属清晰、无裁切溢出；最终Gemini审查未发现可见缺陷，gemini-review.txt。外部“production approved”仅为视觉意见，不代表已发布 |
 | 最窄视口和状态 | PASS：320px正常、最长英文/日文、多行、加载、禁用和键盘焦点，无横向溢出，states-320.png、states-geometry.json |
-| 正式CI | 待精确提交运行CodeQL三项及其生产构建 |
+| 正式CI | PASS：源码提交e7a3883，PR自动运行43191814808的Java、JavaScript/TypeScript、Actions三项全部success，含生产构建；[运行证据](https://github.com/sunshaoxuan/bobuy/actions/runs/43191814808) |
 | 生产状态 | 尚未发布。本次用户请求为局部UI修改，项目现有直接上线授权明确针对新增独立基础档案；本批未操作生产服务 |
 
 最终修改范围仅frontend/src/product-feed.css和本任务记录及验收证据。保留原工作区其他改动。完整恢复只需撤销本批CSS提交；无migration、依赖或接口变化。
+
+## 交付与剩余事项
+分支codex-loading-pill-20261112，草稿PR [#74](https://github.com/sunshaoxuan/bobuy/pull/74)。远端已有codex分支占用，原codex/前缀推送在写入前因directory/file conflict失败，随后改用当前分支成功。创建PR后自动启动正式门禁，取消较早的手动重复运行43191660926，只跟踪PR自动运行。
+
+最终字形追加核对320px的5种状态，中心误差范围-0.391至0.109px，最小上下余量12.61px，满足预设预算。Gemini提出的交互疑点由现有CatalogSection aria-busy、Ant Design loading点击保护和useBrowsePages flight门禁及既有重复事件测试覆盖；无需变更行为。
+
+正式证据保留在本任务docs目录。测试fixture已删除，开发服务已停止，依赖junction已移除。构建dist目录的递归清理遭自动审批策略拦截，显式固定路径的较安全命令仍被拒绝，未改用其他工具绕过；忽略的生成文件暂留本任务frontend/dist，未提交。此项清理未完成，不影响代码功能和视觉验收。生产发布仍未执行。
+
+本次收尾仅更新文档与像素回执，源码、依赖和配置未变，复用上述构建和测试证据；PR自动门禁仍按项目规则跟踪。最终主目标复核：大圆角标签、文字清晰、加载提示与原分页行为均已满足本地交付标准；上线和受策略拦截的dist清理分别如实保留状态。
