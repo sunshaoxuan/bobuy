@@ -14,6 +14,8 @@
 
 廉价预检包括Python/Node语法、JSON、原报告引用和原浏览器/绑定结果检查。正式门禁由现有PR与main CodeQL执行Java、JavaScript/TypeScript、Actions检查。Maven dependency-check按实际路径触发；本批应用及审计依赖路径不变。AI evidence为手动任务，本批不触发。归档未改变应用或UI，不重复功能全量、浏览器或生产操作。main当前无保护规则/ruleset的既有观察在合并前再次查询，既有适用工作流仍完整执行。
 
+冻结前预检PASS：[preflight.json](evidence/product-engagement-production/live-audit-archive/preflight.json)绑定5db372b，14份来源文件对象及13份证据原始字节完整，应用与main等价，其他本地/远端引用及共享工作树状态、原有文件内容均保持基线。main保护和ruleset查询再次确认未配置。原审计分支已按724f9c0准确推送，后续整合分支独立下载和正式门禁结果在关联PR补记。
+
 ## 最终结果记录方式
 
 本文件与预检证据一起冻结后，正式检查和合并结果保存于[本批关联PR](https://github.com/sunshaoxuan/bobuy/pulls?q=head%3Acodex-engagement-live-audit-main-20261112)的说明：原归档身份、冻结head、独立下载结果、PR门禁、精确head合并SHA、main门禁及保护复核。该回执避免为记录已完成检查而反复改写候选。结束标准为远端main包含完整来源、文件树与已检查候选一致，适用门禁均通过，其他会话工作保持，生产操作次数0。
