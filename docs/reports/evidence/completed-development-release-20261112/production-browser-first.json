@@ -1,0 +1,101 @@
+{
+  "at": "2026-11-12T04:54:16.859Z",
+  "source": "c3bb160c7a8f0541b06089e2a3eacca05008198d",
+  "console": [],
+  "network": [],
+  "blockedBusinessWrites": [],
+  "assets": {
+    "/assets/index-Cep5DThy.css": "192b1c233628607761e9ecc70c761ec82033f5e49390c677b9d143d7c6113c90",
+    "/assets/index-C0Z4TFXy.js": "fbae228e216632f875632dfa303b7038f9102b552fd12e41a62ce486b215cdb2",
+    "/assets/ProductMarkerBadges-YtkPTPIq.css": "0d4312f15309eb7ed571b6e37c0020d1edc79b2478331f01dd8c2dcd01dcdb2c",
+    "/assets/RecommendationImageViewer-BnZdvF0r.css": "53f93b3e748150e500e4a9e82b9c876a48e2f42b0fb04fa459aa85fe608dd06d",
+    "/assets/index-CoyXoN9H.js": "6409674f14f4323f4ad4f72ebdb662a719f2d06a7af2cae5392e1c8762fbef9e",
+    "/assets/ProductMarkerBadges-B58oAlPt.js": "7be53fce88f5b68c8631354e9c1772865e5fee0598425c56f92d0cf051e0d353",
+    "/assets/RecommendationImageViewer-Dwk8SVU0.js": "d556c8ce5fa25c3c47bac3e3630ffff0ae1b0c3142723f85dbdeb67a9b8a0c42",
+    "/assets/ProductMarkerEditor-BppuH1Xj.js": "67ed4f2f3ee9ef492c191f580275c2cac50f9c65fba2c0a7c9ff3eb11afb7a10",
+    "/assets/PublicProductCatalog-X9sjxx_r.js": "065d03b37ebd4a6750641c662a0fe53d8abd1950ac9ad291992c15321d8271d9",
+    "/assets/ReloadOutlined-BedJVisS.js": "179cfe85e46ed858bc94decb98f65c344517b2d35b8568a8c83ccacb9e43cca7",
+    "/assets/SaveOutlined-DlzjZXl7.js": "8efc66b94ae05f7b7f071ec4097bdff1e4a5f264e5a40319e5af8fa230d655eb",
+    "/assets/ImageLightbox-DGre66-K.js": "d5b8e5e36530ee7af355f1358dbfdbd06c0e88f69ccf6c88f97248efdbc07e9f",
+    "/assets/ImageLightbox-DKnMaoxp.css": "091fe63279bbbbe9de53be34d6873022737d18bde022b816553b44fd7188e13f",
+    "/assets/index-D-cHsjvq.js": "7a41766a41c12291595a9927d468542a7245a799a55def42439ca0b3d6a142af",
+    "/assets/ProductMetadata-C0znvoea.js": "9f1382735c104ce621f60231ecbc445b108b895bb786f4835fe04f0d26ea255b",
+    "/assets/index-DUI2zUpI.js": "2fb70bbb788078b2fda9a0b1e89d92bdd8a079371bf374633304769bd59bd54b",
+    "/assets/PublicRecommendations-DhYyKoQc.css": "57228e6abd81d4b8c752bf45697153f2ce08d5660413c4638cf9f3bcee8ab2d5",
+    "/assets/PublicRecommendations-vyj6HCKZ.js": "724d1e30f3f6ee6aac36a828b2e80fda4fce1ef38cd7116be1bea4681f24699b",
+    "/assets/CameraOutlined-Sc55qBrO.js": "a02a01eb600614c9717771f7dd09c3a782cea83ae638e78e53fb93ee72f98139",
+    "/assets/stock-master-CFtrrVAg.js": "0f01fc8d91da270a6b9f5b72769e83f8ed57ed6c5db95527bf3d1ca4f41beda5",
+    "/assets/index-Cy3HDF_d.js": "6f8b7f157b918244a85668cda46f6b94288497136b3ce8d3531e8ff3cf2994a8",
+    "/assets/ArrowLeftOutlined-Da3sKumA.js": "dbc7c1b8e16994fd7ecf2cc2aef8c57a6d498ffe7366f184a8d45a8a368a83ce",
+    "/assets/index-CVzYahIq.js": "3727cbabb3763c0911c95acc9960352e49a598af8d90baf2d475d2489a7f73e6",
+    "/assets/Pagination-C-Vkwye0.js": "dd12d0ab10d1cdf82694dc6db076c12f35deed6ea85ced3bd92d83de9f521608",
+    "/assets/useBreakpoint-p2tLCsw_.js": "2e9f0db62a8e55870be2b28115290fb16176181cb19263a7230d74f5cac2e40a",
+    "/assets/EditOutlined-DojvX58_.js": "66d040d1470ee19732db18e294d25c36bd87ccb55416b5085ae0c5ca1fd53ac0",
+    "/assets/index-DUyzZh9y.js": "7716e107ed9c7aab3caa6b7bf03abaef0fb69e0c3f1f54768d442bbcd1333920",
+    "/assets/Breadcrumb-CoLNDLFr.js": "1bb7b151ff6808f53c3ef21db0f34a1172a7a97e0988048eb4dca6e18530c35a",
+    "/assets/Collapse-BmVRVSFf.js": "2fb61943ce6ccee524da0b39d9bc66c80eb7517dd012be43b41204d7571c6b2b",
+    "/assets/ProductArchive-Dg9M7RyA.css": "b23a77ec6a6b271d2301697a01f9885f325c60a1b541879845b1e7957a776fba",
+    "/assets/index-Z3JnCT6A.js": "604fbb731c22e1aa6a0a5cf7a7b0a45fecc4fdfcc5d42224b86d7c341444459a",
+    "/assets/styleChecker-BlihzjdK.js": "65e599dfcb506879ef9376f377a5e8fd14ed7ba2becf3a620bbd6a57b0ce848b",
+    "/assets/index-CSkI7c6w.js": "23a8bc61b5f4ad7c84d9fb8b1723bf05f9a489017f20f6c1cf58df329aa50a6c",
+    "/assets/Table-DtXfUTu9.js": "237897e8755dc0bb50aae3a1aff936179c33bbb96518b501c5218f690276afe9",
+    "/assets/ProductArchive-BlE03ncm.js": "c334c47dc1e9bceeec9dfe679fcdf109ab14d2df4af0ada93e4d625b9c969134",
+    "/assets/AiQuickAddModal-DKzs4sQ0.js": "d3a0b91f37f0f404f2c9fa94a52241778c460c44249e2b639ae2ddcff01f3a5d",
+    "/assets/Skeleton-CXUJ3ISt.js": "4ca40a7fcd1ccbecda7a7e1c2378287a13ae0d13d4b24e3a4d9a15cf190ea698"
+  },
+  "assetErrors": [],
+  "views": [
+    {
+      "path": "products",
+      "width": 1440,
+      "cards": 24,
+      "sorts": 7,
+      "heat": " 热度\n0",
+      "stars": 5,
+      "noOverflow": true
+    },
+    {
+      "path": "recommendations",
+      "width": 1440,
+      "cards": 24,
+      "sorts": 7,
+      "heat": " 热度\n1",
+      "stars": 5,
+      "noOverflow": true
+    },
+    {
+      "path": "products",
+      "width": 320,
+      "cards": 24,
+      "sorts": 7,
+      "heat": " 热度\n0",
+      "stars": 5,
+      "noOverflow": true
+    },
+    {
+      "path": "recommendations",
+      "width": 320,
+      "cards": 24,
+      "sorts": 7,
+      "heat": " 热度\n1",
+      "stars": 5,
+      "noOverflow": true
+    },
+    {
+      "path": "admin/products Images & sources",
+      "width": 1440,
+      "nativeInputHidden": true,
+      "visibleUploadActions": 1,
+      "noBusinessWrites": true,
+      "noOverflow": true
+    },
+    {
+      "path": "admin/products Images & sources",
+      "width": 320,
+      "nativeInputHidden": true,
+      "visibleUploadActions": 1,
+      "noBusinessWrites": true,
+      "noOverflow": true
+    }
+  ]
+}

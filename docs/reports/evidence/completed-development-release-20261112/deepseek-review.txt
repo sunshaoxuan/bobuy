@@ -1,0 +1,42 @@
+## Blocking issues
+
+1. **Bulk async paths bypass operation scope; `saveBulk` can call `onSaved` after unmount.**  
+   `ProductCatalogPanel.tsx` — `async function saveBulk()` awaits `productCatalogApi.save(...)` and then calls `onSaved(...)`, `setRows(...)`, `setJson(...)`, `setSelected(...)`, and `setBusy(false)` without `beginOperation()` / `current()`.  
+   The parent wrapper does not protect this:
+   ```tsx
+   onSaved={(rows,canonical)=>{if(currentScope())props.onSaved(rows,canonical);}}
+   ```
+   `currentScope()` does not know the panel was unmounted, so after unmount it can still return true and forward stale rows. `suggestions()`, `preview()`, and the inline audit handler have the same missing scope guard, though `saveBulk` is the concrete `onSaved` leak.  
+   **Verification:** spy on `props.onSaved`, start `saveBulk()` with a deferred save promise, unmount `ProductCatalogPanel`, resolve the promise, and assert `onSaved` was not called.
+
+2. **Invalid source precheck does not mirror the save-time source rule.**  
+   `frontend/src/imageUpload.ts` — `validCatalogImageSource` uses:
+   ```ts
+   source.length <= 2048
+   ```
+   but `ProductCatalogPanel.tsx` — `validDraft()` rejects based on:
+   ```ts
+   url.href.length > 2048
+   ```
+   A raw URL under 2048 chars can normalize to an `href` over 2048 chars, pass `validCatalogImageSource`, and be uploaded before failing at save time.  
+   **Verification:** call both functions with `'https://example.com/' + 'あ'.repeat(700)`. Current `validCatalogImageSource` returns `true`; `validDraft` rejects it because the encoded `href` exceeds 2048.
+
+3. **Prepared-file bytes and filename disagree for converted WebP/AVIF uploads.**  
+   `ProductCatalogPanel.tsx` — upload call:
+   ```ts
+   const asset=known??await productCatalogApi.upload(productId,prepared,sourceUrl,files[index].name);
+   ```
+   but `frontend/src/imageUpload.ts` — `prepareImageUpload` returns a converted PNG named with `.png`:
+   ```ts
+   return new File([blob], file.name.replace(/\.[^.]+$/, '')+'.png', {type:'image/png', ...});
+   ```
+   The API receives PNG bytes under the original `.webp`/`.avif` filename. If server validation or prepared-file conversion keys off the filename/extension, this is rejected or mis-attributed.  
+   **Verification:** spy on `productCatalogApi.upload`, upload a `.webp`, and assert the fourth argument matches `prepared.name` / `.png`, not the original `.webp`.
+
+4. **After a batch failure, later rows remain `waiting` forever.**  
+   `ProductCatalogPanel.tsx` — upload catch:
+   ```tsx
+   }catch(e){if(current()){...update(row.key,{status:'failed',error:message});setError(message);}break;}
+   ```
+   On the first failure the loop breaks; rows for later files never transition out of `waiting`, and there is no queue to resume them. After `finally`, the batch is finished but those rows still display `waiting`.  
+   **Verification:** upload two files where the first is invalid (e.g. a text file). After `busy` clears, the second row is still `waiting`. Either continue processing remaining files or mark unprocessed files `failed` with an explicit not-uploaded error.

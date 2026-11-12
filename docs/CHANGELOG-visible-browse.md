@@ -1,6 +1,6 @@
 # Candidate change history
 
-## 20261112 verified gallery upload feedback, candidate
+## 20261112 verified gallery upload feedback, production accepted
 
 - 图片上传显示逐文件状态和可展开详情，窄屏长文件名完整可读；部分成功留在草稿，显式保存后关联主档。
 - 同字节资源复用、选取器可再次选择、商品与账号切换隔离；失败保存保留资源供显式重试。

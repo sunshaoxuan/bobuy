@@ -1,0 +1,10 @@
+{
+  "source": "c3bb160c7a8f0541b06089e2a3eacca05008198d",
+  "result": "PASS",
+  "ci": "success",
+  "frontendTests": "PASS",
+  "frontendBuild": "PASS",
+  "realHttpBrowser": "PASS",
+  "schemaUnchanged": 33,
+  "rollback": "Existing prior frontend image retained; compose snapshot restored by operator on failure; no database restore"
+}

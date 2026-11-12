@@ -1,0 +1,1224 @@
+{
+  "origin": "http://127.0.0.1:5197",
+  "mode": "e2e-final",
+  "console": [],
+  "network": [
+    {
+      "phase": "controlled-middle-failure",
+      "path": "/api/merchant/product-catalog/qa-gallery-1/images",
+      "status": 400
+    },
+    {
+      "phase": "controlled-save-failure",
+      "path": "/api/merchant/product-catalog",
+      "status": 409
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/admin/products"
+    },
+    {
+      "method": "GET",
+      "path": "/@vite/client"
+    },
+    {
+      "method": "GET",
+      "path": "/src/main.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/@react-refresh"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/vite/dist/client/env.mjs"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/react_jsx-dev-runtime.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/react.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/react-dom_client.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/react-router-dom.js"
+    },
+    {
+      "method": "GET",
+      "path": "/src/App.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/styles.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/i18n.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/context/UserRoleContext.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/chunk-W26QA7Y6.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/chunk-5WRI5ZAA.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/chunk-Z5UYEIP5.js"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/SiteMetadata.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/antd.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/@ant-design_icons.js"
+    },
+    {
+      "method": "GET",
+      "path": "/src/pages/Storefront.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/storefront.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/merchant.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/LanguageSwitcher.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/LegacyProductRoute.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/antd_locale_zh_CN.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/antd_locale_zh_TW.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/antd_locale_en_US.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/antd_locale_ja_JP.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/dayjs.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/dayjs_locale_zh-cn.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/dayjs_locale_zh-tw.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/dayjs_locale_ja.js"
+    },
+    {
+      "method": "GET",
+      "path": "/src/locales/zh-CN.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/locales/en-US.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/locales/ja-JP.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/locales/zh-TW.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/api.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/authStorage.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/seo.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/chunk-FEBKQY2X.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/chunk-AGRGA3D7.js"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/HomeBrandIntro.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/ConsumerDetail.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/SellingPrice.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/ReservationAdd.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/cart.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/useCartDraft.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/pages/CheckoutAddress.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/ProtectedRoute.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/product-feed.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/StoreNavigation.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/StoreMobileNavigation.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/storeNavigation.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/browse.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/currency.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/MaintenanceNotice.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/pages/AccountProfile.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/AccountShortcuts.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/locales/experience.zh-CN.json"
+    },
+    {
+      "method": "GET",
+      "path": "/src/locales/experience.en-US.json"
+    },
+    {
+      "method": "GET",
+      "path": "/src/locales/experience.ja-JP.json"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/CardPrice.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/referencePriceDisplay.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/recommendationSchedule.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/consumer-detail.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/home-brand.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/imageUpload.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/chunk-IKTK3WFD.js"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/maintenance-notice.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/socialPlatforms.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/account.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/referenceOfferWindow.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/pages/ProductArchive.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me"
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me"
+    },
+    {
+      "method": "GET",
+      "path": "/favicon.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/src/pages/StockMaster.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/pages/DeletedProducts.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/pages/productTrash.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/L10nInput.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/MediaGallery.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/CostcoOnboardingPanel.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/ProductMetadata.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/ProductCatalogPanel.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/ProductPricingPanel.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/ProductMarkerEditor.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/pages/productRecords.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/ProductRating.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/CostcoNumberOnboardingModal.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/AiQuickAddModal.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/productCatalog.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/ImageLightbox.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/CatalogCategorySelect.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/productPricing.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/productMarkers.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/ProductMarkerBadges.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/product-markers.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/public-catalog.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/productReviews.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/AttributeDiffTable.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/imageGestures.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/recommendationImageViewer.css"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status"
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories"
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers"
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status"
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories"
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers"
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products"
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/product-catalog/qa-gallery-1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/recommendation-taxonomy"
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/product-catalog/qa-gallery-1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/recommendation-taxonomy"
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/product-catalog/qa-gallery-1/images"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/91ecc4dd-b933-4707-83b0-7de5f3baf294"
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/product-catalog/qa-gallery-1/images"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/7e3dac1c-2073-4e5a-a846-e477963de587"
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/product-catalog/qa-gallery-1/images"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status"
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/product-catalog/preview"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/merchant/product-catalog"
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/product-catalog/preview"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/merchant/product-catalog"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/91ecc4dd-b933-4707-83b0-7de5f3baf294"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/products"
+    },
+    {
+      "method": "GET",
+      "path": "/@vite/client"
+    },
+    {
+      "method": "GET",
+      "path": "/src/main.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/@react-refresh"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/frontend/node_modules/vite/dist/client/env.mjs"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/react_jsx-dev-runtime.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/react.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/react-dom_client.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/react-router-dom.js"
+    },
+    {
+      "method": "GET",
+      "path": "/src/App.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/styles.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/i18n.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/context/UserRoleContext.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/chunk-W26QA7Y6.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/chunk-5WRI5ZAA.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/chunk-Z5UYEIP5.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/antd.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/antd_locale_zh_CN.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/antd_locale_zh_TW.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/antd_locale_en_US.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/antd_locale_ja_JP.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/dayjs.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/dayjs_locale_zh-cn.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/dayjs_locale_zh-tw.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/dayjs_locale_ja.js"
+    },
+    {
+      "method": "GET",
+      "path": "/src/locales/zh-CN.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/locales/en-US.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/locales/ja-JP.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/locales/zh-TW.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/SiteMetadata.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/@ant-design_icons.js"
+    },
+    {
+      "method": "GET",
+      "path": "/src/pages/Storefront.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/storefront.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/merchant.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/LanguageSwitcher.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/LegacyProductRoute.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/api.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/authStorage.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/chunk-AGRGA3D7.js"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/chunk-FEBKQY2X.js"
+    },
+    {
+      "method": "GET",
+      "path": "/src/seo.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/locales/experience.en-US.json"
+    },
+    {
+      "method": "GET",
+      "path": "/src/locales/experience.zh-CN.json"
+    },
+    {
+      "method": "GET",
+      "path": "/src/locales/experience.ja-JP.json"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/HomeBrandIntro.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/ConsumerDetail.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/SellingPrice.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/ReservationAdd.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/cart.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/useCartDraft.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/pages/CheckoutAddress.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/ProtectedRoute.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/product-feed.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/StoreNavigation.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/StoreMobileNavigation.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/storeNavigation.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/browse.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/currency.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/MaintenanceNotice.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/pages/AccountProfile.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/AccountShortcuts.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/imageUpload.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/home-brand.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/CardPrice.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/referencePriceDisplay.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/recommendationSchedule.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/consumer-detail.css"
+    },
+    {
+      "method": "GET",
+      "path": "/@fs/C:/Users/X02851/OneDrive%20-%20One%E4%BA%BA%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE/%E6%96%87%E6%A1%A3/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/.task-tmp/completed-release/vite-cache/deps/chunk-IKTK3WFD.js"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/maintenance-notice.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/socialPlatforms.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/account.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/referenceOfferWindow.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/pages/ProductArchive.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/favicon.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me"
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me"
+    },
+    {
+      "method": "GET",
+      "path": "/src/pages/StockMaster.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/pages/DeletedProducts.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/pages/productTrash.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/L10nInput.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/MediaGallery.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/CostcoOnboardingPanel.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/ProductMetadata.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/ProductCatalogPanel.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/ProductPricingPanel.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/ProductMarkerEditor.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/pages/productRecords.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/ProductRating.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/CostcoNumberOnboardingModal.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/AiQuickAddModal.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/productMarkers.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/ProductMarkerBadges.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/product-markers.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/public-catalog.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/productReviews.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/productPricing.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/AttributeDiffTable.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/productCatalog.css"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/ImageLightbox.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/CatalogCategorySelect.tsx"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/imageGestures.ts"
+    },
+    {
+      "method": "GET",
+      "path": "/src/components/recommendationImageViewer.css"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status"
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories"
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers"
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding"
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status"
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories"
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers"
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/91ecc4dd-b933-4707-83b0-7de5f3baf294"
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/product-catalog/qa-gallery-1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/recommendation-taxonomy"
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/product-catalog/qa-gallery-1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/recommendation-taxonomy"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/7e3dac1c-2073-4e5a-a846-e477963de587"
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/product-catalog/qa-gallery-1/images"
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/recommendation-images/a5f260b1-9e75-4844-bd67-c9d1507d68ea"
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/product-catalog/preview"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/merchant/product-catalog"
+    }
+  ],
+  "checks": [
+    "Real Core login and private master editor opened",
+    "Native filechooser, actual PNG POST, duplicate-byte reuse, cleared picker and no automatic master save",
+    "Actual first success retained after controlled middle HTTP failure; remaining file stays unsent; no partial save",
+    "Save failure keeps uploaded draft; explicit retry persists gallery with original other master fields",
+    "Saved master reopened through real HTTP after a complete page reload",
+    "Real Chrome WebP-to-PNG conversion sends prepared filename and exact SHA, then persists through normal save",
+    "Second authenticated agent cannot read or upload to first agent private master"
+  ],
+  "uploadRequests": [
+    {
+      "phase": "converted-webp",
+      "filename": "converted-fixture.png",
+      "mime": "image/png",
+      "bytes": 4979,
+      "sha256": "6480e796789717ba757733c5e4f1aa95ef6dc80c0e37a9afed3bc75d3b09dcc3",
+      "status": 200,
+      "serverSha256": "6480e796789717ba757733c5e4f1aa95ef6dc80c0e37a9afed3bc75d3b09dcc3"
+    }
+  ],
+  "consoleMessages": [
+    {
+      "phase": "initial",
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "phase": "controlled-middle-failure",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+    },
+    {
+      "phase": "controlled-save-failure",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)"
+    },
+    {
+      "phase": "controlled-save-failure",
+      "type": "error",
+      "text": "Warning: [antd: message] Static function can not consume context like dynamic theme. Please use 'App' component instead."
+    },
+    {
+      "phase": "real-save",
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    }
+  ],
+  "editor": {
+    "groupCount": 1,
+    "buttons": [
+      "Select verified official image files"
+    ],
+    "inputs": [
+      {
+        "type": "text",
+        "label": null
+      },
+      {
+        "type": "checkbox",
+        "label": null
+      },
+      {
+        "type": "file",
+        "label": "Select verified official image files"
+      }
+    ],
+    "text": "Add images\nOfficial image sources\nI verified the exact item/specification and official product images, without promotional prices, mail tracking or private information.\n\nJPEG, PNG, WebP or AVIF, up to 8 MiB. WebP/AVIF are converted to PNG in this browser without resizing. Original files stay unchanged.\n\nSelect verified official image files\n\nImages are staged until the master is saved. Removing a link retains original source evidence."
+  },
+  "pickerBefore": {
+    "inputs": [
+      {
+        "type": "text",
+        "disabled": false,
+        "effectivelyDisabled": false,
+        "checked": false,
+        "value": "https://www.costco.co.jp/p/77839"
+      },
+      {
+        "type": "checkbox",
+        "disabled": false,
+        "effectivelyDisabled": false,
+        "checked": true,
+        "value": "on"
+      },
+      {
+        "type": "file",
+        "disabled": false,
+        "effectivelyDisabled": false,
+        "checked": false,
+        "value": ""
+      }
+    ],
+    "buttons": [
+      {
+        "text": "Select verified official image files",
+        "disabled": false,
+        "type": "button"
+      }
+    ]
+  },
+  "pickerHit": {
+    "box": {
+      "x": 373,
+      "y": 775.796875,
+      "width": 234.265625,
+      "height": 40
+    },
+    "effectivelyDisabled": false,
+    "hit": {
+      "tag": "SPAN",
+      "classes": ""
+    }
+  },
+  "geometry": [
+    {
+      "width": 1440,
+      "uploadButton": {
+        "x": 373,
+        "y": 833.796875,
+        "width": 234.265625,
+        "height": 40
+      },
+      "saveButton": {
+        "x": 1049.046875,
+        "y": 938,
+        "width": 176.3125,
+        "height": 46
+      }
+    },
+    {
+      "width": 768,
+      "uploadButton": {
+        "x": 53,
+        "y": 308.671875,
+        "width": 234.265625,
+        "height": 40
+      },
+      "saveButton": {
+        "x": 377.046875,
+        "y": 938,
+        "width": 176.3125,
+        "height": 46
+      }
+    },
+    {
+      "width": 320,
+      "uploadButton": {
+        "x": 31,
+        "y": 489.625,
+        "width": 234.265625,
+        "height": 44
+      },
+      "saveButton": {
+        "x": 16,
+        "y": 890,
+        "width": 288,
+        "height": 44
+      }
+    }
+  ],
+  "masterReadback": {
+    "beforeVersion": 2,
+    "afterVersion": 3,
+    "assets": [
+      {
+        "url": "/api/storefront/recommendation-images/91ecc4dd-b933-4707-83b0-7de5f3baf294",
+        "sha256": "4cd4e971c8744c68a0adc9c0f6fe22dcbc38238379d2b069ea32198f30254c2e"
+      },
+      {
+        "url": "/api/storefront/recommendation-images/7e3dac1c-2073-4e5a-a846-e477963de587",
+        "sha256": "d6fbe486739ee0f4afcf3c969bf9aa8dce4113a7bc79242d07a6a224147034cb"
+      }
+    ],
+    "otherFieldsPreserved": true
+  },
+  "preReloadUploadRequests": [
+    {
+      "phase": "real-duplicate-upload",
+      "filename": "one.png",
+      "mime": "image/png",
+      "bytes": 2113,
+      "sha256": "4cd4e971c8744c68a0adc9c0f6fe22dcbc38238379d2b069ea32198f30254c2e",
+      "status": 200,
+      "serverSha256": "4cd4e971c8744c68a0adc9c0f6fe22dcbc38238379d2b069ea32198f30254c2e"
+    },
+    {
+      "phase": "controlled-middle-failure",
+      "filename": "two.png",
+      "mime": "image/png",
+      "bytes": 2109,
+      "sha256": "d6fbe486739ee0f4afcf3c969bf9aa8dce4113a7bc79242d07a6a224147034cb",
+      "status": 200,
+      "serverSha256": "d6fbe486739ee0f4afcf3c969bf9aa8dce4113a7bc79242d07a6a224147034cb"
+    },
+    {
+      "phase": "controlled-middle-failure",
+      "filename": "failed-three.png",
+      "mime": "image/png",
+      "bytes": 2080,
+      "sha256": "9c4c4fd36e6e6a4c7e3c34d54bd0f9351136ad04f7496592a340d7475db023ce",
+      "status": 400,
+      "serverSha256": null
+    }
+  ],
+  "result": "PASS"
+}

@@ -1,0 +1,19 @@
+TAP version 13
+# Subtest: initial home HTML supplies truthful brand, canonical, structured data, H1 and crawlable public links
+ok 1 - initial home HTML supplies truthful brand, canonical, structured data, H1 and crawlable public links
+  ---
+  duration_ms: 47.9462
+  ...
+# Subtest: sitemap exposes only verified public entry URLs and robots advertises the real XML endpoint
+ok 2 - sitemap exposes only verified public entry URLs and robots advertises the real XML endpoint
+  ---
+  duration_ms: 21.4848
+  ...
+# Subtest: an already canonicalized SPA template is rejected instead of overwriting detail/private metadata
+ok 3 - an already canonicalized SPA template is rejected instead of overwriting detail/private metadata
+  ---
+  duration_ms: 1.0873
+  ...
+Debugger listening on ws://127.0.0.1:9229/a1de0c69-3bea-4287-aca2-76b47ff60389
+For help, see: https://nodejs.org/en/docs/inspector
+JSON report written to C:/Users/X02851/OneDrive - One人事株式会社/文档/ChatGPT/bobuy.cc/.task-tmp/engagement-main-20261112/docs/reports/evidence/completed-development-release-20261112/frontend-tests.json

@@ -1,0 +1,20 @@
+{
+  "source": "c3bb160c7a8f0541b06089e2a3eacca05008198d",
+  "checks": [
+    {
+      "link": "https://github.com/sunshaoxuan/bobuy/actions/runs/43157145194/job/130979602144",
+      "name": "analyze (java-kotlin)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/sunshaoxuan/bobuy/actions/runs/43157145194/job/130979602160",
+      "name": "analyze (javascript-typescript)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/sunshaoxuan/bobuy/actions/runs/43157145194/job/130979601962",
+      "name": "analyze (actions)",
+      "state": "SUCCESS"
+    }
+  ]
+}
