@@ -18,7 +18,7 @@ Merchant, product, channel, currency and unit define a price scope. Finite appro
 
 ## Operator flow
 
-1. Select type, channel, currency, products, amounts, units and reason. Enter the period and save a draft. Reload to inspect persisted values. The list and confirmation show before/after amounts; the server records the applicable regular amount when approving website selling prices.
+1. Open the saved product's existing selling-price panel. Choose type, channel, currency, amounts, units and reason for the current product. Enter the period and save a draft. Reload to inspect persisted values. The list and confirmation show before/after amounts; the server records the applicable regular amount when approving website selling prices.
 2. Review and explicitly approve the exact version. Corrections to an approved document use cancellation where permitted or a new document.
 3. Source-derived drafts retain readable, scrollable audit evidence. Incomplete product associations can be repaired only within the owner and matching source SKU; established source associations cannot be silently reassigned. Review-required imports need an actual reviewed reason before approval.
 

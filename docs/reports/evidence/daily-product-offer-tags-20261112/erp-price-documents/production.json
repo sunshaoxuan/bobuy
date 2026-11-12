@@ -1,0 +1,94 @@
+{
+  "status": {
+    "phase": "VERIFIED",
+    "at": "2026-11-12T14:46:37Z",
+    "source": "2124f4df66cdce193373e94f49e0d7955eb2ac75",
+    "databaseRestoreForbidden": true
+  },
+  "runtime": {
+    "core-service": {
+      "image": "sha256:cd1a7f4744516091123e1cb2111369689e4437b5561ebbc268868cec2a0acf75",
+      "revision": "2124f4df66cdce193373e94f49e0d7955eb2ac75",
+      "health": "healthy"
+    },
+    "ai-service": {
+      "image": "sha256:f6a013049eb6e7ff035590cfabdf3331d0cf5c8ebc2ff2da5ca731103321895b",
+      "revision": "2124f4df66cdce193373e94f49e0d7955eb2ac75",
+      "health": "healthy"
+    },
+    "im-service": {
+      "image": "sha256:296fb141a26b2022196af32b78c43475b87f1a57e5db45deb6b58172350baa94",
+      "revision": "2124f4df66cdce193373e94f49e0d7955eb2ac75",
+      "health": "healthy"
+    },
+    "auth-service": {
+      "image": "sha256:a64d1c31af51f1fe5cae643c7b46fd95f7f18c38e9cda56772061daff13d13b8",
+      "revision": "2124f4df66cdce193373e94f49e0d7955eb2ac75",
+      "health": "healthy"
+    },
+    "gateway-service": {
+      "image": "sha256:71354226154b2ca27ff7ddaaf90923f0954db9cabac363564447322030d21dcd",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "health": "healthy"
+    },
+    "frontend": {
+      "image": "sha256:c73dff8b0ab72a7d57155b1a2bec29ba582beebcf4b55151082c251422b2cb1a",
+      "revision": "2124f4df66cdce193373e94f49e0d7955eb2ac75",
+      "health": "running"
+    }
+  },
+  "backup": {
+    "restore": "PASS",
+    "sha256": "07ef1b35f0da44b42453ca9921ba78f562f748c7416d2e276e9df5d753495770",
+    "temporaryRemoved": true
+  },
+  "version": "35",
+  "documents": "PERMANENT:DRAFT:10\nPROMOTION:APPROVED:124\nPROMOTION:DRAFT:189\nTEMPORARY:DRAFT:41",
+  "lines": "364",
+  "unresolved": "15",
+  "removedItemColumns": "0",
+  "timer": "TimersCalendar={ OnCalendar=*-*-* 01:00:00 Asia/Tokyo ; next_elapse=Fri 2026-11-13 01:00:00 JST }\nNextElapseUSecRealtime=Fri 2026-11-13 01:00:00 JST\nActiveState=active\nUnitFileState=enabled",
+  "http": "200",
+  "markers-preview": {
+    "at": "2026-11-12T14:46:14.621365+00:00",
+    "day": "2026-11-12",
+    "added": 0,
+    "removed": 63,
+    "scanned": 389,
+    "disabled": 0,
+    "timezone": "Asia/Tokyo",
+    "uncertain": 0,
+    "unchanged": 326,
+    "definitionsCreated": 0,
+    "sqlSha256": "0724fc555e609713788e8e3392de02d810aa753f99528944fa6b72d6badcabdb",
+    "dryRun": true
+  },
+  "markers-first": {
+    "at": "2026-11-12T14:46:15.027096+00:00",
+    "day": "2026-11-12",
+    "added": 0,
+    "removed": 63,
+    "scanned": 389,
+    "disabled": 0,
+    "timezone": "Asia/Tokyo",
+    "uncertain": 0,
+    "unchanged": 326,
+    "definitionsCreated": 0,
+    "sqlSha256": "0724fc555e609713788e8e3392de02d810aa753f99528944fa6b72d6badcabdb",
+    "dryRun": false
+  },
+  "markers-repeat": {
+    "at": "2026-11-12T14:46:15.429592+00:00",
+    "day": "2026-11-12",
+    "added": 0,
+    "removed": 0,
+    "scanned": 389,
+    "disabled": 0,
+    "timezone": "Asia/Tokyo",
+    "uncertain": 0,
+    "unchanged": 389,
+    "definitionsCreated": 0,
+    "sqlSha256": "0724fc555e609713788e8e3392de02d810aa753f99528944fa6b72d6badcabdb",
+    "dryRun": false
+  }
+}

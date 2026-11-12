@@ -30,7 +30,7 @@ def fingerprint_query(table):
  if table=='bb_product_price_adjustment_line':
   join=' JOIN bb_product_price_adjustment d ON d.id=t.document_id'
   expression="CASE WHEN d.source_key LIKE 'recommendation:%' THEN to_jsonb(t)-ARRAY['id','document_id']||jsonb_build_object('documentSource',d.source_key,'documentNumber',d.document_number) ELSE to_jsonb(t) END"
- return "select count(*)||':'||md5(coalesce(string_agg(v,chr(10) order by v),'')) from (select ("+expression+")::text as v from \""+table+'\" t'+join+') rows'
+ return "select count(*)||':'||md5(coalesce(string_agg(v,chr(10) order by v),'')) from (select md5(("+expression+")::text) as v from \""+table+'\" t'+join+') rows'
 def validate(a,g):
  if not re.fullmatch('[0-9a-f]{40}',a.get('source','')) or a.get('release')!='20261112.price-documents.1' or [i['name'] for i in a['images']]!=list(UPDATES):raise ValueError('Exact source and all compatible applications required')
  if g.get('source')!=a['source'] or g.get('result')!='PASS' or g.get('codeql')!='success' or g.get('backendFailures')!=0 or g.get('frontendFailures')!=0 or g.get('migration')!='PASS' or g.get('ui')!='PASS':raise ValueError('Accepted input-bound gates required')
@@ -93,11 +93,12 @@ def main():
    for name,base in a['baseRuntime'].items():assert current[name]['image']==base['image'] and current[name]['revision']==base['revision'] and current[name]['health'] in ('healthy','running')
    assert m.sql('select version from flyway_schema_history where success order by installed_rank desc limit 1')=='34'
    assert m.sql('select count(*) from bb_product_price_adjustment')=='0';image_checks()
-   record='second-attempt.json' if previous['restored'] else 'first-attempt.json';assert not (STAGE/record).exists()
+   record=next((n for n in ('first-attempt.json','second-attempt.json','third-attempt.json') if not (STAGE/n).exists()),None);assert record is not None
    (STAGE/record).write_text(json.dumps(previous,indent=2));(STAGE/'runtime.before.json').write_text(json.dumps(current,indent=2))
    if previous['restored']:
     for filename in ('database-before.dump','snapshot.json','expected-transformed.json','backup-check.json'):
-     (STAGE/filename).rename(STAGE/('attempt2-'+filename))
+     prefix='attempt3-' if record=='third-attempt.json' else 'attempt2-'
+     (STAGE/filename).rename(STAGE/(prefix+filename))
    mark('PREPARED',source=a['source'],previousAttempt=record,freshStoppedWriterBackupRequired=True);return
   if args.action=='verify':
    assert read(STAGE/'status.json')['phase'] in ('WRITES_OPEN','VERIFIED');application_checks();assert protected()==baseline

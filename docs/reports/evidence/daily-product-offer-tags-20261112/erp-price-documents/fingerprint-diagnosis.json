@@ -1,0 +1,19 @@
+{
+  "raw": [
+    {
+      "bb_product_price_adjustment": "364:43742f5f16f17a6335aa1f157c7044a3",
+      "bb_product_price_adjustment_line": "364:97c0a281022365382d7bb26abd5333a7"
+    },
+    {
+      "bb_product_price_adjustment": "364:ad7128fb1d7962a0e1a0e9a38b0d51df",
+      "bb_product_price_adjustment_line": "364:8218789d73932f08bd7deb7e30929807"
+    }
+  ],
+  "sameHeadBusiness": true,
+  "sameLineBusiness": true,
+  "counts": [
+    364,
+    364
+  ],
+  "temporaryRemoved": true
+}
