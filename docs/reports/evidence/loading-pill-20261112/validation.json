@@ -1,0 +1,407 @@
+{
+  "source": "frontend/src/product-feed.css",
+  "sha256": "6f0f2f37ee7b3771274e122b4a7d6ad85b18cf6c01b55fead3d8a01acdd48dd0",
+  "tests": {
+    "files": 3,
+    "passed": 24,
+    "command": "npm test -- --run src/components/ProductFeed.test.tsx src/pages/CatalogAutoReveal.test.tsx src/pages/PublicProductCatalog.test.tsx"
+  },
+  "network": [
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/b880a89e-cfc6-42ec-b49b-d3a6e323f8fa",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/4ec44235-7ee8-4d39-bc77-7a24ad2b3bb2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/7b61f7ff-a769-4cf2-b7e1-cf33e8b08643",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/0e2cc6e9-c6ff-43ce-be80-5bcce146a5ba",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/6e6d01fd-8aac-42b3-90d3-3f76d627c24b",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/775288fb-c134-49a2-8704-b95a2e0ceb6d",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/e5b4db2b-0bbe-499f-8335-fd28bd35b0d0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/329cc838-3a35-4338-b52f-e50c6e823d6c",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/b3174d20-ce28-4e95-a5e7-96463a8ddd20",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/09a94fb4-2538-4ca7-b0e9-7c7533ce246d",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/2329db85-1d7a-463b-8caf-aa4d69599b10",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/9adefe75-43ec-441c-a3e0-abb0df72b967",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/018775a1-c531-4d89-bb61-5148b6a1df05",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/08ee57fc-9c54-47a6-81b7-01b70d0b2092",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/0451e987-1bc1-498d-8494-a7b9be9adbb7",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/0b38036f-3e99-420c-b870-89fe35d7a723",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/0a516c2c-9f7d-46a8-a983-661959673738",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/124bb802-8805-4a61-bead-687b3967a20d",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/133ee647-df82-436d-8a5c-cc5ee8f51c16",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/13804fbc-23cf-41bb-ad5e-2c5ad2affb65",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/12e3ced1-eedc-436a-8d50-94b1bf424508",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/13dfefdb-ef8b-4248-ae08-4453e63820a1",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/17ba61b2-32ad-4fbc-a992-6c51c781d20e",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/18e7bdb3-8437-4fbd-9d6c-a55817d03e4b",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/1b90522f-68d8-4cfb-95de-24b7b92917ed",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/1cfc194a-d903-468d-b8dc-47ce8b02e24b",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/1d124bb9-fc3b-4e72-869a-c4e36d436111",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/1d3770b1-37c9-4198-bc43-ddf183dd3989",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/1f2ec151-c468-417c-8597-8308e6ef659e",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/2065969a-c23e-492d-8b77-ee6a963496bc",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/1f630007-3a30-469e-8cee-dc7a3917d654",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/225a37ee-fd64-437e-9345-7c910a63f89c",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/23e418a0-a3d9-471b-b0cc-76e555e210eb",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/2388eca8-ae4a-40bf-80ba-c3b2901f2b47",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/238b4d55-fa1f-447d-afa2-df07e45ccdfc",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/12e3ced1-eedc-436a-8d50-94b1bf424508",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/133ee647-df82-436d-8a5c-cc5ee8f51c16",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/13dfefdb-ef8b-4248-ae08-4453e63820a1",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/17ba61b2-32ad-4fbc-a992-6c51c781d20e",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/13804fbc-23cf-41bb-ad5e-2c5ad2affb65",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/18e7bdb3-8437-4fbd-9d6c-a55817d03e4b",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/1b90522f-68d8-4cfb-95de-24b7b92917ed",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/1cfc194a-d903-468d-b8dc-47ce8b02e24b",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/1d3770b1-37c9-4198-bc43-ddf183dd3989",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/1d124bb9-fc3b-4e72-869a-c4e36d436111",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/1f2ec151-c468-417c-8597-8308e6ef659e",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/225a37ee-fd64-437e-9345-7c910a63f89c",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/1f630007-3a30-469e-8cee-dc7a3917d654",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/2065969a-c23e-492d-8b77-ee6a963496bc",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/233e64b1-ceff-4ff9-ab1d-a1080aa3fa3d",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/2388eca8-ae4a-40bf-80ba-c3b2901f2b47",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/238b4d55-fa1f-447d-afa2-df07e45ccdfc",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/23e418a0-a3d9-471b-b0cc-76e555e210eb",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-browse?page=1&revision=0e963bfe17ece9d480827dadcb5afb961766a998e504866783717fda0868ab7a&query=&category=&locale=zh-CN&marked=false&sort=default",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/2592ca3c-c0d3-47f0-9a77-2dbeeb88082d",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/264524d8-759e-45d6-b2ea-52bc3e5eb9c0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/1f102756-8916-4206-86d8-b698527a546d",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/625a2f5a-46b5-46e8-bf22-b52c222a0ef6",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/6bc6d41f-bb7e-44ab-b258-b9b7474453b7",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/148dec1f-86bf-4cad-9a25-a0dcd01f2eb4",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/4e1fb2db-af5d-451c-9a94-621021d83937",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/5cd66b4a-b80e-453d-b5cf-823195f84f29",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/2740b3ed-2b87-4c90-8601-8b879d2e6ee2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/27abf1ee-9432-4297-8d06-2652d1a5323a",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/2be31ec0-c0a0-4ae1-8a09-c9ed6bd6841c",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/284e0c28-de67-4720-9271-8288e22c9c5a",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/2d78b065-6e00-474a-b95a-37363c8932da",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/2eac6c3b-f799-45fe-95d1-f85e808d8892",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/38390f37-8420-4c69-ab7e-8616ae7dd8ca",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/3612a312-a213-40f2-aca2-c5900afbc4fe",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/330be8fb-a9dd-4977-b670-3eb783890ce9",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/379c31c5-d512-45c8-8ad8-afdfb7a33142",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/30828d24-cf56-4527-a2de-61d2e09ad965",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/3970b0ea-2ea7-4321-ac54-49eb66e7fdfb",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/39b211b7-efcc-4324-9fcc-f26eac0ce03a",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/40ba6ed5-de35-43df-8e67-7b6a1101ae7e",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/3fe450f8-983f-4e3a-b4aa-11dc67e9a559",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/44e3a649-ecc5-4cdd-94a9-d9d493719d50",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/3ad752ad-6a1e-474c-a9db-be4026d1d5f1",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/39e8bbdd-6d09-4922-8c0d-0eba2d77802b",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/40fff5e4-f7ef-40a2-bd48-8ec593db5bd3",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/97d846a9-1879-4df1-8e66-8de11043796a",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/a914c0f0-7b88-47da-9106-9947cdf877a1",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/46b825e2-5bd1-437e-b2ab-38e4fc09bac4",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/4990375f-483a-4f6b-8f92-fa32226fe32a",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-popularity/49067b03-bc1b-4682-b795-958ed70155a4",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/product-sales?productIds=2592ca3c-c0d3-47f0-9a77-2dbeeb88082d%2C264524d8-759e-45d6-b2ea-52bc3e5eb9c0%2C2740b3ed-2b87-4c90-8601-8b879d2e6ee2%2C27abf1ee-9432-4297-8d06-2652d1a5323a%2C284e0c28-de67-4720-9271-8288e22c9c5a%2C2be31ec0-c0a0-4ae1-8a09-c9ed6bd6841c%2C2d78b065-6e00-474a-b95a-37363c8932da%2C2eac6c3b-f799-45fe-95d1-f85e808d8892%2C30828d24-cf56-4527-a2de-61d2e09ad965%2C330be8fb-a9dd-4977-b670-3eb783890ce9%2C3612a312-a213-40f2-aca2-c5900afbc4fe%2C379c31c5-d512-45c8-8ad8-afdfb7a33142%2C38390f37-8420-4c69-ab7e-8616ae7dd8ca%2C3970b0ea-2ea7-4321-ac54-49eb66e7fdfb%2C39b211b7-efcc-4324-9fcc-f26eac0ce03a%2C39e8bbdd-6d09-4922-8c0d-0eba2d77802b%2C3ad752ad-6a1e-474c-a9db-be4026d1d5f1%2C3fe450f8-983f-4e3a-b4aa-11dc67e9a559%2C40ba6ed5-de35-43df-8e67-7b6a1101ae7e%2C40fff5e4-f7ef-40a2-bd48-8ec593db5bd3%2C44e3a649-ecc5-4cdd-94a9-d9d493719d50%2C46b825e2-5bd1-437e-b2ab-38e4fc09bac4%2C49067b03-bc1b-4682-b795-958ed70155a4%2C4990375f-483a-4f6b-8f92-fa32226fe32a",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/ac1a7cbd-9e02-43dc-a0d2-c3c0990382e7",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/03adf383-ed90-4a48-9cdd-cf91338663d3",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/46485df1-b516-4183-9ece-3e61ed937e4d",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/67d43e21-1438-4d61-be95-116d3b60a432",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/33f52f13-2140-452c-a0d7-f431c84ae729",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/9b6e8009-5a3a-47dd-b0aa-f7f2e66d22e2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/26ea7389-b923-4dd0-ba87-ca3f621f89b7",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/0d908725-c439-4781-b66f-500f3a7ecdb3",
+      "status": 200
+    }
+  ],
+  "browserAppend": {
+    "before": 24,
+    "after": 48,
+    "total": 325
+  },
+  "console": {
+    "errors": 0,
+    "warnings": [
+      "React Router future flag"
+    ]
+  },
+  "environment": "Vite 127.0.0.1:5178; public production API read-only; response deliberately paused for screenshot; state matrix synthetic"
+}
