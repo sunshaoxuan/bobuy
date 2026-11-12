@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "hashes": {
+    "sync-product-offer-markers.py": "85dfa3cd509fbb5c54635830acb60b31689ce1e73ea2116b8f935d271e35f3dd",
+    "sync-product-offer-markers.sql": "eaaaaf1591bf6be8daa0f6955f1ee8613394731336799eeca25c6c31489bcbce",
+    "bobuy-offer-markers.service": "87377a221ff918be82cc7cc34c28af4d81c722d2dcb454c4b3d3402b6c504593",
+    "bobuy-offer-markers.timer": "82e42911e73957022aaaa87d8bc8ce6f9d0a8e2694311b28707c42bace823150"
+  },
+  "calendar": "Normalized form: *-*-* 01:00:00 Asia/Tokyo\n    Next elapse: Fri 2026-11-13 01:00:00 JST\n       (in UTC): Thu 2026-11-12 16:00:00 UTC\n       From now: 6h left"
+}

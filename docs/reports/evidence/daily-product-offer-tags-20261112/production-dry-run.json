@@ -1,0 +1,14 @@
+{
+  "at": "2026-11-12T09:52:23.424499+00:00",
+  "day": "2026-11-12",
+  "added": 159,
+  "removed": 0,
+  "scanned": 389,
+  "disabled": 0,
+  "timezone": "Asia/Tokyo",
+  "uncertain": 14,
+  "unchanged": 216,
+  "definitionsCreated": 0,
+  "sqlSha256": "eaaaaf1591bf6be8daa0f6955f1ee8613394731336799eeca25c6c31489bcbce",
+  "dryRun": true
+}

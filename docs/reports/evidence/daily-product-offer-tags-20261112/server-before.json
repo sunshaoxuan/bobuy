@@ -1,0 +1,54 @@
+{
+  "runtime": {
+    "bobuy-core-service": {
+      "image": "sha256:05cd202ae182bf3995622e85f255ee2daf2261444605fff7d7771e1e40d599d3",
+      "revision": "b3caeec8c0b04a3144339f8e84ab334b53f81aa1",
+      "health": "healthy"
+    },
+    "bobuy-frontend": {
+      "image": "sha256:e0af35862a5888f8b428eb09f3070cd6da3a1ea6158b287c334780067a73360c",
+      "revision": "f91681242ab688f25e39aa8481167f8fc0c8251a",
+      "health": "running"
+    },
+    "bobuy-postgres": {
+      "image": "sha256:1a0c23d53c1ad77468c8653fa6eed4f4105cfbef9e6f027bc1dfeb16949a8c29",
+      "revision": null,
+      "health": "healthy"
+    }
+  },
+  "counts": "{\"products\" : 389, \"definitions\" : [{\"code\" : \"new\", \"enabled\" : true, \"owner\" : 1001}, {\"code\" : \"low\", \"enabled\" : true, \"owner\" : 1001}, {\"code\" : \"missing\", \"enabled\" : true, \"owner\" : 1001}, {\"code\" : \"discount\", \"enabled\" : true, \"owner\" : 1001}], \"assignments\" : 0, \"published\" : 385, \"adjustments\" : 0}",
+  "snapshotKeys": [
+    "name",
+    "legacy",
+    "catalog",
+    "gallery",
+    "version",
+    "imageUrl",
+    "offerEnd",
+    "couponEnd",
+    "imageHash",
+    "priceUnit",
+    "itemNumber",
+    "offerNotes",
+    "offerStart",
+    "reviewHash",
+    "supplierId",
+    "categoryIds",
+    "couponStart",
+    "description",
+    "showSupplier",
+    "translations",
+    "offerIdentity",
+    "originalPrice",
+    "specification",
+    "discountAmount",
+    "productVersion",
+    "referencePrice",
+    "referenceContext",
+    "translatedSource",
+    "productSourceHash",
+    "legacyDisplayProvenance",
+    "legacyDisplayProductVersion"
+  ],
+  "schema": "34"
+}

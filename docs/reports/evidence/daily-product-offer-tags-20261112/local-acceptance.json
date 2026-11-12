@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "command": "python -m unittest discover -s scripts -p test_sync_product_offer_markers*.py -v",
+  "tests": 15,
+  "failures": 0,
+  "errors": 0,
+  "seconds": 55.860,
+  "database": "existing bobuy-local-postgres-1, isolated bobuy_offer_marker_probe_20261112, removed by tearDownClass",
+  "scope": "12 real PostgreSQL cases and 3 runner cases",
+  "sqlSha256": "eaaaaf1591bf6be8daa0f6955f1ee8613394731336799eeca25c6c31489bcbce",
+  "runnerSha256": "85dfa3cd509fbb5c54635830acb60b31689ce1e73ea2116b8f935d271e35f3dd",
+  "applicationSourceChanged": false,
+  "databaseMigrationChanged": false,
+  "frontendChanged": false,
+  "notes": "Summary of the observed complete unittest result. Application build/test suites were not rerun for these independent server scripts. systemd validation and production dry-run are separately bound in staged.json and production-dry-run.json."
+}
