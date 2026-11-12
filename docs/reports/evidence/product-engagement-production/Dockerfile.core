@@ -1,0 +1,3 @@
+FROM bobuy/core:20261111.5
+COPY app.jar /app/app.jar
+LABEL org.opencontainers.image.revision="ebea743436e6e30056c54b9f851a339bf3568dac"

@@ -1,0 +1,2 @@
+FROM bobuy/core:20261112.3
+LABEL org.opencontainers.image.revision="606deb375b125d41e451dad555bb306f70f0fae3"

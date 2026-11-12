@@ -1,0 +1,388 @@
+{
+  "source": "606deb375b125d41e451dad555bb306f70f0fae3",
+  "release": "20261112.5",
+  "base": {
+    "core-service": {
+      "id": "bb58803d8fb6babca88f97e374a6d5b2a76223b70487d0d3f2cc76cbad3b4b7a",
+      "image": "sha256:1c9e1fee6377042ca7964f9d642f78661e5737e0f9ea4ed6d834345ea24cf567",
+      "tag": "bobuy/core:20261111.5",
+      "revision": "245eb3ae1b5738d63d6013de90e7a84fb5e46862",
+      "project": "bobuy",
+      "startedAt": "2026-11-11T23:18:10.167922153Z",
+      "health": "healthy"
+    },
+    "ai-service": {
+      "id": "10972ee4cd488c0b368031dcdee897a9f3cf10e1d533ddfd2637004b0e983c5a",
+      "image": "sha256:e17c56f30483def52fb4c3e58d7ef7fad8dced0f89ff23109ab380cdca32fa48",
+      "tag": "bobuy/ai:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "project": "bobuy",
+      "startedAt": "2026-11-11T23:16:41.660115593Z",
+      "health": "healthy"
+    },
+    "im-service": {
+      "id": "218a0841775c655ea8aca3e76c32a76a9bb6e243576ecb325733c4f88f36e933",
+      "image": "sha256:3c286b1672db0eca6df4803085d7f5ba9cc475c4542a4f93302ee5c74277369a",
+      "tag": "bobuy/im:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "project": "bobuy",
+      "startedAt": "2026-11-11T23:16:41.895138592Z",
+      "health": "healthy"
+    },
+    "auth-service": {
+      "id": "f92780c457a16d7757540eae17d6ae73b22ff9389369bdb4da18301faa4208ab",
+      "image": "sha256:6863ae4b03b28b8fbd8666fb15b1599cca6a8b9911bbbd1cf555d9d4b8a3eabb",
+      "tag": "bobuy/auth:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "project": "bobuy",
+      "startedAt": "2026-11-11T23:16:42.18993004Z",
+      "health": "healthy"
+    },
+    "gateway-service": {
+      "id": "8658ca313926847ac17386d2494fc068487d3a2275a187e9b05e16373eb6a7ee",
+      "image": "sha256:71354226154b2ca27ff7ddaaf90923f0954db9cabac363564447322030d21dcd",
+      "tag": "bobuy/router:20261028.3",
+      "revision": "414830e8871d781d12b185536eae3681eb73219d",
+      "project": "bobuy",
+      "startedAt": "2026-11-11T23:16:42.580736831Z",
+      "health": "healthy"
+    },
+    "frontend": {
+      "id": "db253212ba67674136aa294642986d7e7079f2a783520ace8d3142a92c255496",
+      "image": "sha256:021235b929aeea25d2bce8cd57f686487db96af13b0edfa63ecd6aebf8209d89",
+      "tag": "bobuy/frontend:20261112.maintenance-wording.2",
+      "revision": "52ef9976c069a9a98e253a8f5229af230142fc7f",
+      "project": "bobuy",
+      "startedAt": "2026-11-11T23:29:06.375260801Z",
+      "health": "running"
+    },
+    "postgres": {
+      "id": "3e3f73ecd6ede718eafd2c14ff7087a9e34445c161e4eb73cc0f28455b527a7d",
+      "image": "sha256:1a0c23d53c1ad77468c8653fa6eed4f4105cfbef9e6f027bc1dfeb16949a8c29",
+      "tag": "postgres:18.6-alpine3.23@sha256:1a0c23d53c1ad77468c8653fa6eed4f4105cfbef9e6f027bc1dfeb16949a8c29",
+      "revision": null,
+      "project": "bobuy",
+      "startedAt": "2026-10-28T05:54:10.450486189Z",
+      "health": "healthy"
+    },
+    "rustfs": {
+      "id": "a33a452d37da3d06ff76b62046e7d1cfac6cf60f730fa62ff17fc95a8c24a8f7",
+      "image": "sha256:e287e99762a4a3e7b706526e01f2ff755f67db165e9be9f6b907adc6fb6d6ee1",
+      "tag": "rustfs/rustfs:1.0.4@sha256:e287e99762a4a3e7b706526e01f2ff755f67db165e9be9f6b907adc6fb6d6ee1",
+      "revision": null,
+      "project": "bobuy",
+      "startedAt": "2026-10-28T06:08:45.288836844Z",
+      "health": "running"
+    },
+    "gateway": {
+      "id": "417a2727353a7449a30c4fb820a5860dc3f2ee961ae9413e19eeddfa81036b2e",
+      "image": "sha256:892bb2152464f0c5d8972593a5f5afaf8054552580b699d95f8ff4af08c2d33d",
+      "tag": "nginx:alpine",
+      "revision": null,
+      "project": "bobuy",
+      "startedAt": "2026-10-27T10:17:45.060469115Z",
+      "health": "running"
+    },
+    "redis": {
+      "id": "a9329b8de7e5bf143b4af936a847f79ca8e10957f5f28d31a39ec5d5717d010a",
+      "image": "sha256:858f009f9709ce576febc734aa78b8f6d624b82571f9ddb6bda4377c833b3499",
+      "tag": "redis:7-alpine",
+      "revision": null,
+      "project": "bobuy",
+      "startedAt": "2026-10-27T10:17:45.063404096Z",
+      "health": "healthy"
+    },
+    "nacos": {
+      "id": "25e2f666c1cc59bb03c06016faccc211f5d4990de76b980b69c75fba0302c2eb",
+      "image": "sha256:cca69ab12348b43d95c9b2c1d8d31d5a8d56e634ed4232a510423a9346090a70",
+      "tag": "nacos/nacos-server:v2.3.2-slim",
+      "revision": "c150bce691f4996871203b5897dd357f6d8a0e24",
+      "project": "bobuy",
+      "startedAt": "2026-10-27T10:17:45.058357323Z",
+      "health": "healthy"
+    },
+    "rabbitmq": {
+      "id": "c982a0e0f4762b34284370fa9aa38d59762bd28e26928ced4a7983e96968d40a",
+      "image": "sha256:606d8c0d6b3c18d1da9afc53bc7cdb2a8d5486df91b5a9830e9e07626c9ae281",
+      "tag": "rabbitmq:3-management-alpine",
+      "revision": null,
+      "project": "bobuy",
+      "startedAt": "2026-10-27T10:17:45.079215412Z",
+      "health": "healthy"
+    }
+  },
+  "schemaBefore": "33",
+  "schemaAfter": "33",
+  "coreJarSha256": "65f16c0322af492f945c1564d6b23c9bbf10bddf992053e1578a5513f38903fd",
+  "migrationsAdded": [],
+  "migrations": [
+    {
+      "path": "V10__recommendation_classification.sql",
+      "sha256": "a56278988dd55200553f74162d381de51920512f448e4a736976b975bc77071e"
+    },
+    {
+      "path": "V11__catalog_source_variants.sql",
+      "sha256": "460f1ac3387e98e2d2b177c85aa827e05098999fd8c856e9f190b6a129001b46"
+    },
+    {
+      "path": "V12__legacy_catalog_variant_compatibility.sql",
+      "sha256": "38f7ed30a5fc714bab31a79caa7d4ac93f3b93ee3755aef2c56df368dcb2372d"
+    },
+    {
+      "path": "V13__currency_and_reviewed_sale.sql",
+      "sha256": "2dbf4ac1138f7f34bc62edfd09cff7013ef23a21f95f32f1f00fbc7e2010680e"
+    },
+    {
+      "path": "V14__recommendation_localizations.sql",
+      "sha256": "362d8c092f018f3def99838c864c7a6a4420f703f8342ca58b7c0d85ca933812"
+    },
+    {
+      "path": "V15__recommendation_product_gallery.sql",
+      "sha256": "662e9c88b27a710fd8752067c7f7de3aa47b1db9542ca3c5ee62262432b8da68"
+    },
+    {
+      "path": "V16__product_catalog_metadata.sql",
+      "sha256": "800f42d2ec41c4971708f648c64e45c4846c1dc5619bcb4c956e94b6ca5f6d87"
+    },
+    {
+      "path": "V17__product_price_adjustments.sql",
+      "sha256": "636d56550acecd4eb382b6b6dafd216da61c82b4d02664afd9c771e49ba8a454"
+    },
+    {
+      "path": "V18__encrypted_mail_settings.sql",
+      "sha256": "91ae396ade5e1b0bb016330e7e1e03bab066f37bd9cd2c3a742484c8b1060e30"
+    },
+    {
+      "path": "V19__postgres_image_access_scope.sql",
+      "sha256": "c7ecc6d421832b8a5ffd988f83f7a3b73141c9a18f9db2a6fff283653c1e8f2a"
+    },
+    {
+      "path": "V1__baseline_schema.sql",
+      "sha256": "95772bcaa779a30e0cbeccb5fe5a34598099c8970b89d582dc129901101c6813"
+    },
+    {
+      "path": "V20__product_logical_deletion.sql",
+      "sha256": "4384eaef0be0586abe3378792c0cf072b152961cc3c9f0ef08b39f723396841e"
+    },
+    {
+      "path": "V21__media_transfer_outbox.sql",
+      "sha256": "ab5e867ce604ef7253eef69e7da8ac7bfb584f7bfcfb0f83c67967518b73cd57"
+    },
+    {
+      "path": "V22__object_only_media_metadata.sql",
+      "sha256": "6e54989d93787c91c14cdd4cee2cd528183569e1fde970e10970b121bda5e7bd"
+    },
+    {
+      "path": "V23__reference_offer_windows.sql",
+      "sha256": "259f750003f87348222ac8fc60105c69c9a65349523c92c91d0e7582da6f1987"
+    },
+    {
+      "path": "V24__recommendation_article_languages.sql",
+      "sha256": "a814d1aebe43b584a742401aed957972824438c16b39234cc74e3504bf9d5d82"
+    },
+    {
+      "path": "V25__reversible_product_identity.sql",
+      "sha256": "01d5d47086b00534cbdc38d92b9366bba5df487732616b208b0b352a565b7636"
+    },
+    {
+      "path": "V26__recommendation_service_offers.sql",
+      "sha256": "fb528e64a8f14b33439d0e4aff94a36a4eafa2e576b45ff019963aabdc9a6661"
+    },
+    {
+      "path": "V27__explicit_product_markers.sql",
+      "sha256": "32154f3a49c63035db28bb72e297077588e78c7677c0fed02f20f52bd75e912b"
+    },
+    {
+      "path": "V28_1__recommendation_issue_date.sql",
+      "sha256": "d742bea25cb8ef3d205c9e2a4992d25024a372b5ab9dc38dc915f0ebbb91224e"
+    },
+    {
+      "path": "V28_2__product_rating.sql",
+      "sha256": "e2dcca325765b6180c1092bd756fc09bbdd76272872add9aa3da03d4c61ec46d"
+    },
+    {
+      "path": "V28__checkout_delivery_snapshot.sql",
+      "sha256": "2e43b2870a4c577e950efb3cd3e81761094e347448b100b1b058d983e5d0e81a"
+    },
+    {
+      "path": "V29__customer_order_amendments.sql",
+      "sha256": "530b0d1be30dcd25f64f76b23fb8d23df2c598e83fd9d00ce102122207dcefb4"
+    },
+    {
+      "path": "V2__refresh_token_sessions.sql",
+      "sha256": "4ee67ed775e23c7fdf0df5f238a597f0afa819a1c0f380d8c4f12c57d960d60e"
+    },
+    {
+      "path": "V30__costco_onboarding_jobs.sql",
+      "sha256": "45216d0c003324c09ded3886a6e8e61b662fe3e52db10b11d82303e53b46f7a7"
+    },
+    {
+      "path": "V31__recommendation_item_publication.sql",
+      "sha256": "0572979326cea8b540663e1146f35bcfb7a63a4339aea644c449785be9be98ff"
+    },
+    {
+      "path": "V32__user_product_reviews.sql",
+      "sha256": "8b993b467fa0e721dad94e93d3804139ddbc8f8780df9febb2ab28213ceb695e"
+    },
+    {
+      "path": "V33__product_clicks.sql",
+      "sha256": "08b3009fac5647d35ef7c029bfd427d18dda5bf3c7b5e7cd20d9cb18f33c9f4d"
+    },
+    {
+      "path": "V3__product_attributes_jsonb.sql",
+      "sha256": "ac49d7e509c25c9fe764dabd6ca94fa4b4f8d591a28eb80a41cada541eee49af"
+    },
+    {
+      "path": "V4__customer_storefront.sql",
+      "sha256": "c94d170a88ec1f16a14336c4189d2923ddb5c01752c73e29ed011483399732e2"
+    },
+    {
+      "path": "V5__user_role_sets.sql",
+      "sha256": "3dae2a695b18096f83ec7644a21f90c098b1413151498ab6e8d8a61e53233262"
+    },
+    {
+      "path": "V6__regional_delivery_trips.sql",
+      "sha256": "f4df01f3ae1d4e7eb4d9f9a6e4c9c50cf5825657c625e811872ab1032fc3a700"
+    },
+    {
+      "path": "V7__product_recommendations.sql",
+      "sha256": "2e881d9233d49860225645963a35df46121947c28127571bf62ffc8f8af60e9e"
+    },
+    {
+      "path": "V9__recommendation_offer_facts.sql",
+      "sha256": "c65c3af8f116501537399bc9ceca0a3edf0daa193a65f58ca890c7e329e6e4cf"
+    }
+  ],
+  "operatorSha256": "738cc6dee7a495cfd0b789d9dcc8e9ea6acefc2c3ecf3e631ffbf967129a7887",
+  "librarySha256": "5fddec223ef6f1d38402c8a11c1f99877ffc93f9d7d4b5afeb1271752c5610ac",
+  "helperSha256": "655140da83732409f6ebf4970dddc0fac142bbcc15891c9685239927e9bb2f22",
+  "frontend": {
+    "favicon.svg": "fec10f939f4568f4901fc6e68bd36073fb5dc3c11b7edeeb1eaf79abc4ac466a",
+    "home.html": "4f98fe34871f02d1f3398b7ef7217ec9f1ebbaaa72fb8b925f0431d03a98b5cc",
+    "index.html": "c012d68b718ce463f35dfb274733222f243c427a66d472d73fa178f9a93c8245",
+    "release-maintenance.html": "1d43b536569277a57aaceca328c9288e35292ddf015fbc03889f71a8fac093a8",
+    "robots.txt": "871fb754da59b3ea07dbb080c1dd36f766d33004d80e5ab3ebfd128163eaf52c",
+    "sitemap.xml": "0986903ffb96564ae8f0dff111ef27f4d5184235c1d467b88c11f250f9d148a0",
+    "assets/AiQuickAddModal-D0HhVajY.js": "3b917294868f98cc4d19a9e746debfd435852b3fa400c6b6b214585d7e58328c",
+    "assets/ArrowLeftOutlined-DlJCK169.js": "5f3819cec8fba57a265e82ca16cb5469a3042cbff80e06749938f9e54144908f",
+    "assets/audit-view-BRw75Vk1.js": "b2771952c601cd116a1c2a639a26fcf9ba001cfd443e348bd9703633a02f8661",
+    "assets/Breadcrumb-CXYR9GPF.js": "fc51f0751b06191284cbc0b51ba4bd453585c2f67ec9bd6817b6da664ba355b0",
+    "assets/CameraOutlined-DE--ri4R.js": "73bbf95e1aaa1e5abade15ba8ce14d08494e8415f76bac069b5949aa6b23b323",
+    "assets/chat-flow-9tMkziQ0.js": "afbf465c09e62a955320636442531afdf2d81983d36d22a8653a0095eee60406",
+    "assets/CheckOutlined-MR1tf6_D.js": "58f0f16c3d8de2fa19e97bad73f98bb5f0d79caa76c6bd1fabc09417e34edd91",
+    "assets/ClientBilling-DSWTXrwb.js": "fec9bd48561466e079bc5d9dd78e694b2c86a6cceb670da5d6ddaccbf2b7d775",
+    "assets/ClientChat-CmkhUJHO.js": "cdb08ec068b0c829175545866037427b326fbbee7dbd177a13e9cb54606db34e",
+    "assets/ClientOrders-BO1IsX-1.js": "11ad38b5c8a4f7e0d629c5d01b2a888ec69211a85d0cbd4148675b5da28c87d3",
+    "assets/ClientTrips-7cYYR2Ue.js": "73aa93cafd14b998f6c90a63f15121df0c850f33b5ecdb1a7d7349e053fe17dc",
+    "assets/Collapse-CTagtAHz.js": "9a2d83de40ebf219ba47609c957b780bb384490e898432c7fb8522a53d46b8ca",
+    "assets/Currencies-riWlnTCT.js": "0adbb94e6a751599188f074f2f6d7adbae4a640e54dde27896c78a78b7326ea6",
+    "assets/Dashboard-CSGGW-Yj.js": "b7a8dcea005235c4a86ccab5a1ef6370d3ab4d40a869e7d1d9df4176cf8126d2",
+    "assets/EditOutlined-DjgkqXUC.js": "4de8c0d3286369845a13f9e510f103986b2b3757b8c10ee4d49db07ac828123a",
+    "assets/ImageLightbox-CoU1La2c.js": "7a1fa4c5b26b0a90db6ca6e5757272ba8469043950d96670f9618b2a42b0d64d",
+    "assets/ImageLightbox-YuYos8NL.css": "d4ee7fcac17ea82f8e418071898f0781b227790fe8f4dd4721fd21862ebeda24",
+    "assets/index-B0nkwRN4.js": "d08edf6ad4193876813f25fdbf65da6c67acef5cfcb5a5d3ca33b4cd4a96b52b",
+    "assets/index-B6agjx9z.js": "3cba48aa231f93e87784a35bc148d2a8600859da3a4d01820a33a12ec59aca12",
+    "assets/index-B8pXaADW.js": "3ca8d5f6ee175148c602d3d23e9575900706c65e2c5fda4256af230ce2f76e87",
+    "assets/index-BLRcrIXb.js": "196e0f81252a52b5c243b65b1380df215bd9afd14b6f32f54fe87fe58bd23cf8",
+    "assets/index-BsrXDgH-.js": "c2fe017f7663cbe867640e05a7752e91b18e83c963f8a52bd92c37c4b6436950",
+    "assets/index-CBs8Mwj9.js": "243b48fcaaf55baeb94fc489798683808f82719f78a58cbf4182cc8c9cc5d8a6",
+    "assets/index-CdCuCzT8.js": "29b5402c16361372855c6f786d22a922fd8bc3ff13267b1e29dc8133bd074ff6",
+    "assets/index-D-BNgbGo.js": "c231060dfbc6b1afaf71229501a02c93b840b816b5872e2674ab7def51b5ffed",
+    "assets/index-D5WibZwT.js": "b0be3347f4232b9151c5164f6b0bb732185df49368b16c6365460d95df581409",
+    "assets/index-DeEu-i9Q.js": "75c93347acf1fd74c5011ef4242942df3405983589671da3a04db72435a0940c",
+    "assets/index-DmD7NbX5.js": "8afe0a0c2bf6bfda77daa0c445271b0791171c078b6d2cf482a3dbf183cef2f3",
+    "assets/index-DQZM_cDa.js": "e9fac68701d7bc83c487aca1c6c33236215c634338e0907a848d66990ae998eb",
+    "assets/index-Ezu4k_xc.js": "7ae5106a1a9eefa1c3e4c8bcd6ea21837fcd165a859cee29fc05d4864df51087",
+    "assets/index-rtJFeJk2.css": "83be5e4c61eaa5a5b447f46965d330ef70a2f86daef728142990527096469746",
+    "assets/LoginPage-BMIfFN9s.js": "b027c666b4fbce1951c1a3ee77b8840e10d63ca9054ed2b4e998563c82bd8dab",
+    "assets/MailSettings-Hz2XQtbC.js": "d22ce1367b17af0c53b6decaf1190ff2cc04bcc4da656d9fc9e00df139f5ef10",
+    "assets/MerchantCustomers-DzefOTLn.js": "083f7d1fa75c5d969eaa37da462e874d6a0f9da979e5c567ac8b91b98d002599",
+    "assets/OrderDesk-CgEPLRVO.js": "e08f3a63d2f231178641978dc98042496417a5a7f4ff0ca370d9e13c23e7a11c",
+    "assets/OrderProductIdentity-DKPYGNeR.js": "0d24daaac0e568c885e09e8d0d1a19cad62eb87d54f0cfbd163cf6882577075d",
+    "assets/Orders-DikjPrYQ.js": "3e60634a5f2948c17d11014c1cbbd65b5a825965c83dc8eef55aac0f7cbedf1d",
+    "assets/Pagination-DrmJb5hH.js": "62721726b3f4dcf8cffb2be846bd9d8d410ba8419077ef2da50fbfd432509e3d",
+    "assets/PickingMaster-Bze5x66K.js": "0af7ca3a3f35995478e4ef2f034be16fb5a0af99b53432f996dee9acd15fd105",
+    "assets/procurement-dashboard-DgBHDiU6.js": "c127b5605a34e324d1902cbc70bc206611d7bd0711dde7fa556bef2a4f1c812e",
+    "assets/ProcurementHUD-D4lhQnzq.js": "2a8a79c673c6cccc25bec2899e509574809a4986623f37611b24188c788bfefb",
+    "assets/ProductArchive-s4Q_DEzK.css": "6465f1715caf52425d5ea85939c370f6f9e520bba19c3f16157f1256fa0d96b4",
+    "assets/ProductArchive-tSSyzNbO.js": "de2b60bd7ef5eeed98f6e2fc8793bceb751c09d7487975f871be4da48752fafe",
+    "assets/ProductMarkerBadges-lhwxOPBz.js": "3136db9b19ee669703c824bbe66f85a7375bd1cf7db722b1aad7151ec4676e68",
+    "assets/ProductMarkerBadges-YtkPTPIq.css": "0d4312f15309eb7ed571b6e37c0020d1edc79b2478331f01dd8c2dcd01dcdb2c",
+    "assets/ProductMarkerEditor-V9QeBJd5.js": "a4b2409a2cf4e02cc31c57f5f003707749c6fac05614452da78450cb95ba28fd",
+    "assets/ProductMarkers-BJsiuTiI.js": "d334503bcabbfda549dc661b5041d2dc50513f4973c1fad64ce46b4cdbe129ed",
+    "assets/ProductMetadata-CEcWPDZz.js": "78264e720a6f12c9104b897d9ca0173c9c003e8ba66e336a5b3caae4a7143212",
+    "assets/PublicProductCatalog-C9KLdw04.js": "193d8c1a56e2ee568e3a3447c7ffc4b5cfd80fdca875f127fd50bc0d9a05fe63",
+    "assets/PublicRecommendations-DhYyKoQc.css": "57228e6abd81d4b8c752bf45697153f2ce08d5660413c4638cf9f3bcee8ab2d5",
+    "assets/PublicRecommendations-fY3lqUt3.js": "de49e057c0ecd5617f7ee2d9898351010682d76d58280367ceb5f4ee38503cd7",
+    "assets/RecommendationImageViewer-BIlme1za.js": "3a405161bffd83a0ff8915e057a1bae77582e3852f07efb9c3494b8224a6ec25",
+    "assets/RecommendationImageViewer-ILdPQ99W.css": "e7e048dad2c9ed20723701917e72bbe17f695111062cb04d734fab987a03acb4",
+    "assets/Recommendations-BR6eX9U6.css": "a5fc8fb0758186d686acf3fbaca080c3d3851f65ab05221e30061df81abe3ef8",
+    "assets/Recommendations-D720kyjz.js": "2dc55c00d21338c8aa08b798a28d3e7b796e18975740a8cce0fe88ce90b84c7c",
+    "assets/ReloadOutlined-Cg6_MtJi.js": "372302ec7240cdbc8c88ff63a80ec92ac475247bdac9b3177e87b0444c3de64d",
+    "assets/SaveOutlined-sHOU2gaY.js": "2b64c29cb1146a6bd9b67addc2a5fd6fa836259c149664045286bf215b254c45",
+    "assets/SendOutlined-DM_vx4Bu.js": "dda6e13ae44ddab2a0a46239e65eb3f584662f827b4d5bb0fd1dbc528b6e7be0",
+    "assets/stock-master-D6koUlkP.js": "64d47b07f961ad4f47e3f61c900d6cc54d1a5baa24c28a79c7e08a3850b2bd0c",
+    "assets/styleChecker-roxY0HaC.js": "85aa77f87e2c92692d95cada22a5d34850c0a36e0c7107904a0a9e729fe3d8a5",
+    "assets/Suppliers-D0yN-cxj.js": "447d7e3d62fd888d01d1df0f6e10ed9fae508a5a4e7a5f31d832671d0ecc7628",
+    "assets/Table-DfHKfdL4.js": "520a2c11efb6d85f1e001f1e090ac39b6a560f33445709321067bd22af6bc1cf",
+    "assets/Trips-bQB6dK9q.js": "2d1980196c13feb2ab793a73f980449475a3c8497ef165e3d29f77c1af6c98ba",
+    "assets/useBreakpoint-O6FEGxWh.js": "6a4992dd478502443066646e4c83df33fe580880f759b040fb6ade5458bf7806",
+    "assets/useNetworkStatus-CAFfWyBV.js": "c20f2794bae6eeabcbbf9edd44578036b473dd52a2bed02fb918e8cef118e5a0",
+    "assets/Users-C_1ULWPZ.js": "5d3c486cfe93043c34ffc8c33657990f8321f0be6a8f0f61c869b80ac931d0a0",
+    "assets/WarningOutlined-C9rMsq6p.js": "0644c120ea90336bb2db48d09751c63ec7bd7880c61a3486df13d70f98052d85",
+    "assets/products/chicken.png": "6d27a9305a0bfa7caacce28e45d92cdb2bc27ce7d6082b733f4ac1ee55797d9b",
+    "assets/products/croissants.png": "27bbf1f4a055af022cf029cdb929c9d78a55f2b25b087965b8ebb4c245977100",
+    "assets/products/matcha-muffins.jpg": "652dfcc95454cf539e9056bdd2aea050a003467ac5e304d0ba4856c38d688793",
+    "assets/products/milk.png": "73c02467723cc54ba5668a0691383620946ad9b88a33b422b5b3ddadbd617cb3",
+    "assets/products/paper_towels.png": "f4e28f967564ab68dd7e75cda0e765e0c6d251e13b3c305ca02f33561c9aa843",
+    "assets/products/spinach.png": "9b12209d94b35e100df3e56e1e788e7fbd2114879e701961153d79fc82163b3b",
+    "assets/products/strawberries.png": "2a97ccf4f6cb040699c6438af58b76233f88b468b6436c6d2f49619ca7dbade5"
+  },
+  "images": [
+    {
+      "name": "core-service",
+      "tag": "bobuy/core:20261112.5",
+      "imageId": "sha256:80d715f3b79016942f35ce438a3b8a1be78526a4b2ead27af36f4ceb4f98c2c9",
+      "rootfsDiffIds": [
+        "sha256:5cac300e390e2fd748b258618f403b7813229929ad6de903b0c52a210a930824",
+        "sha256:5f4be2c3badedfd7149d008a4902427c98e708c70031dc19b4264160a545df19",
+        "sha256:a1b84a0afc417900d6c5e169c76df4deff6233b684b700297be190f9bfbf17c0",
+        "sha256:2612ac3f9b707727734b54fbb37e609c70807cbc51186460f3a78c4a84ad5595",
+        "sha256:347cc08f1b05909e7240db5559e8324f049d9ff60d74ec2f1b42e978024968cc",
+        "sha256:f75073f40b100816472317910ba0efbad52c084a468a37051be6c3d1a9fcf93e",
+        "sha256:02c67d730365a43416658c13d65c9b0ad71e51363f50bc71cda1e7a8213d53d6",
+        "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+        "sha256:78466f8510a089e144b1316aabbf73f39136199ba38b123570f86a77396a379f",
+        "sha256:5ba151743d5ef61c09120f7b182a5809dbe2d973f93209daf12f91f121980455",
+        "sha256:0fce00ffe4c2fc8ec162b0b8384ee18a40f509f88b433cd2d5977210a8a13209",
+        "sha256:e609d12e169595a98c5124c824286d846826e2736c462e56ea1bfccc473c367f",
+        "sha256:c90ee6845a53a398f3e43e82c761711ffae08c4e2f147be9b806b8bf8af9d6d1",
+        "sha256:16ec37e4634e413fce01a41a8a53e43484b93071ee714c182daf350d07231e3d",
+        "sha256:33b824939144a08ab32606b3b11b47720ab3b1a17ff1e40d7cde86169b3c7ba8"
+      ]
+    },
+    {
+      "name": "frontend",
+      "tag": "bobuy/frontend:20261112.5",
+      "imageId": "sha256:b938535cdca8147aee6ded4d631d1c2fe505cfcdefd87d3c31f87c95e0f1adf9",
+      "rootfsDiffIds": [
+        "sha256:74d97c428c51a828f9051a7a40a53ff1fc99e54fc30323ce36760701b0b7f711",
+        "sha256:1d5f8e4b80b9f3266d052972fd6bca72a1bcf57a849f1fca99e621a9aaa26f37",
+        "sha256:11c068032a923cdd9eded6001b3f98f2bc9c1ab4f898473642f5f2435d6e2c2f",
+        "sha256:f4b56df1052e76cd6baf6e1d8510f78af5b8754a97800750c141e52a381cc608",
+        "sha256:c01de5b74a8831bddd18ae59f36e88262c13c1d43bd3a05dec470b22ad7106cd",
+        "sha256:1cbec789df916efa6e277af74ae96e9ec0f5523f0e4bcc6692c81fd1a94297a0",
+        "sha256:a5237c8bfc4397a9b457bfbf4db5b93b1ab6aa64d287d1e8210b6a1662aa4eee",
+        "sha256:6aef7713033e574d61ccfb63c76c936acf96b3ad813bb4b8d18d416512e34d33",
+        "sha256:f8c69838de6333f149c561bdca7f5454c370ec8c7b6304f038522aa466e212ce",
+        "sha256:d5f52cb7fc1a4557531887824e6ece728e68c4c74a469945477b3399ff5b3c18",
+        "sha256:141b3608cbc47fceb3041565cb8045c6e30169a5fe3950f5acf664d6eb0eeb7c",
+        "sha256:d9bfdc272a6ad51fc9f43e7acdd5bb95229e3d1f4b030107254be67f351d86a8"
+      ]
+    }
+  ],
+  "archiveSha256": "cc014d2557ffe9f0c88a15879714af34b3d91411f9cfd44586d328b4c8a2aaab",
+  "gatesSha256": "6a531b032e1f46680f847a1ec31029ce058da91b1a35c71a9056dab18d9be7b1",
+  "fixturesSha256": "490afb05910285266310fcd77c8cd1bc7a1a1faf7193a867685fa0c230f6876c",
+  "priorRehearsalSha256": "b203bee93e1ec2dbff8d0e00ae33152e08d977dee642aab3e028af45af913edc"
+}

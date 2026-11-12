@@ -1,0 +1,14 @@
+{
+  "migration": "33:V33__product_clicks.sql:true",
+  "fixtureUsers": 0,
+  "fixtureProducts": 0,
+  "fixtureReviews": 0,
+  "fixtureClicks": 0,
+  "fixtureAuthSessions": 0,
+  "fixturePosts": 0,
+  "restoredDatabases": "",
+  "probeContainers": "",
+  "clickConstraints": "bb_product_click_clicks_check:CHECK ((clicks >= 0))\nbb_product_click_clicks_not_null:NOT NULL clicks\nbb_product_click_pkey:PRIMARY KEY (product_id)\nbb_product_click_product_id_fkey:FOREIGN KEY (product_id) REFERENCES bb_product(id)\nbb_product_click_product_id_not_null:NOT NULL product_id",
+  "result": "PASS"
+}
+

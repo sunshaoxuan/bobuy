@@ -1,0 +1,4 @@
+FROM bobuy/frontend:20261112.detail-layout.2
+RUN rm -rf /usr/share/nginx/html/*
+COPY dist/ /usr/share/nginx/html/
+LABEL org.opencontainers.image.revision="ebea743436e6e30056c54b9f851a339bf3568dac"

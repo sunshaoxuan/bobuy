@@ -1,0 +1,10 @@
+{
+  "refs/heads/codex/editor-layout-20261112": {
+    "before": "e9b32e729f5501b8ed3af1d02ecad92b419096bc",
+    "after": "e4c3f830cbc5ab4c4916ed4ff489c18dc3b93502",
+    "observedAt": "2026-11-12T10:27:09+09:00",
+    "reflogAction": "commit: style: organize article editor and distinguish rating states",
+    "worktree": ".task-tmp/editor-layout-20261112",
+    "disposition": "Preserve external forward commit; exclude its code from this batch; no write to its branch or worktree."
+  }
+}
