@@ -53,6 +53,7 @@
 .offer-period-tooltip .ant-tooltip-arrow::before {background:#fff8f2;}
 .marker-image-overlay [data-card-action="offer-period"] {cursor:help;}
 .marker-image-overlay [data-card-action="offer-period"]:focus-visible {outline:2px solid #232323;outline-offset:4px;}
+@media(max-width:767px){.offer-period-tooltip .ant-tooltip-inner {padding:8px;font-size:12px;}}
 @media(max-width:767px) {
  .marker-form-row { grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
  .marker-heading { align-items:flex-start; }
