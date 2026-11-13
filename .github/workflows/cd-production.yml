@@ -1,0 +1,167 @@
+name: CD production
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '**/*.md'
+  workflow_dispatch:
+
+concurrency:
+  group: production-deployment
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    if: github.repository == 'sunshaoxuan/bobuy' && !github.event.repository.fork
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+      - name: Package Java services
+        run: mvn -B -DskipTests package
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+      - name: Build and publish service images
+        env:
+          REGISTRY: ghcr.io/${{ github.repository_owner }}
+          REVISION: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          registry="${REGISTRY,,}"
+          for spec in core:bobbuy-core ai:bobbuy-ai im:bobbuy-im auth:bobbuy-auth router:bobbuy-gateway; do
+            image="${spec%%:*}"; module="${spec#*:}"
+            docker buildx build . --file Dockerfile.service --build-arg "MODULE=$module" \
+              --tag "$registry/$image:$REVISION" --tag "$registry/$image:latest" \
+              --cache-from "type=gha,scope=$image" --cache-to "type=gha,mode=max,scope=$image" --push
+          done
+          docker buildx build frontend --file frontend/Dockerfile \
+            --tag "$registry/frontend:$REVISION" --tag "$registry/frontend:latest" \
+            --cache-from type=gha,scope=frontend --cache-to type=gha,mode=max,scope=frontend --push
+      - name: Require anonymously readable public images
+        env:
+          REGISTRY: ghcr.io/${{ github.repository_owner }}
+          REVISION: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          registry="${REGISTRY,,}"
+          docker logout ghcr.io
+          for image in core ai im auth router frontend; do
+            docker buildx imagetools inspect "$registry/$image:$REVISION" >/dev/null || {
+              echo "Image $image is not anonymously readable. Set its GHCR package visibility to Public." >&2
+              exit 1
+            }
+          done
+
+  deploy:
+    needs: build
+    if: github.repository == 'sunshaoxuan/bobuy' && !github.event.repository.fork
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
+    environment: production
+    permissions:
+      contents: read
+      packages: read
+    env:
+      PROD_SSH_HOST: ${{ secrets.PROD_SSH_HOST }}
+      PROD_SSH_USER: ${{ secrets.PROD_SSH_USER }}
+      PROD_SSH_PORT: ${{ secrets.PROD_SSH_PORT }}
+      PROD_SSH_KEY: ${{ secrets.PROD_SSH_KEY }}
+      PROD_SSH_KNOWN_HOSTS: ${{ secrets.PROD_SSH_KNOWN_HOSTS }}
+      REVISION: ${{ github.sha }}
+      REGISTRY: ghcr.io/${{ github.repository_owner }}
+    steps:
+      - name: Validate SSH configuration
+        run: |
+          set -euo pipefail
+          for name in PROD_SSH_HOST PROD_SSH_USER PROD_SSH_PORT PROD_SSH_KEY PROD_SSH_KNOWN_HOSTS; do
+            test -n "${!name:-}" || { echo "Required production SSH secret is missing: $name" >&2; exit 1; }
+          done
+      - name: Configure verified SSH host key
+        run: |
+          set -euo pipefail
+          install -d -m 700 ~/.ssh
+          install -m 600 /dev/null ~/.ssh/id_ed25519
+          printf '%s\n' "$PROD_SSH_KEY" > ~/.ssh/id_ed25519
+          install -m 600 /dev/null ~/.ssh/known_hosts
+          printf '%s\n' "$PROD_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+      - name: Deploy, verify, and roll back on failure
+        id: deploy
+        run: |
+          set -euo pipefail
+          registry="${REGISTRY,,}"
+          ssh_opts=(-i ~/.ssh/id_ed25519 -p "$PROD_SSH_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$HOME/.ssh/known_hosts")
+          ssh "${ssh_opts[@]}" "$PROD_SSH_USER@$PROD_SSH_HOST" \
+            "REVISION='$REVISION' REGISTRY='$registry' bash -s" <<'REMOTE'
+          set -euo pipefail
+          cd /opt/bobuy
+          test -f .env || { echo 'Production /opt/bobuy/.env is missing; refusing deployment.' >&2; exit 1; }
+          previous=''
+          if test -f .deploy-revision; then previous="$(awk 'NR==1 {print $1}' .deploy-revision)"; fi
+          write_override() {
+            tag="$1"
+            cat > .compose.cd.yml <<EOF
+          services:
+            core-service: {image: ${REGISTRY}/core:${tag}}
+            ai-service: {image: ${REGISTRY}/ai:${tag}}
+            im-service: {image: ${REGISTRY}/im:${tag}}
+            auth-service: {image: ${REGISTRY}/auth:${tag}}
+            gateway-service: {image: ${REGISTRY}/router:${tag}}
+            frontend: {image: ${REGISTRY}/frontend:${tag}}
+          EOF
+          }
+          compose() { docker compose --env-file .env -f docker-compose.yml -f compose.production.yml -f .compose.cd.yml "$@"; }
+          healthy() {
+            for attempt in $(seq 1 30); do
+              if curl -fsS http://127.0.0.1/api/actuator/health/readiness >/dev/null \
+                && curl -fsS http://127.0.0.1/ >/dev/null; then return 0; fi
+              sleep 10
+            done
+            return 1
+          }
+          write_override "$REVISION"
+          compose pull
+          compose up -d
+          if healthy; then
+            printf '%s %s\n' "$REVISION" "$(date -u +%FT%TZ)" > .deploy-revision
+            exit 0
+          fi
+          echo 'New revision failed health checks; starting automatic rollback.' >&2
+          if test -z "$previous"; then
+            echo 'No previous successful revision exists; rollback is impossible.' >&2
+            exit 1
+          fi
+          write_override "$previous"
+          compose pull
+          compose up -d
+          healthy || { echo 'Rollback revision also failed health checks.' >&2; exit 1; }
+          printf '%s %s rollback-from=%s\n' "$previous" "$(date -u +%FT%TZ)" "$REVISION" > .deploy-revision
+          echo "Rolled back to previous successful revision; failing this deployment." >&2
+          exit 1
+          REMOTE
+      - name: Write deployment summary
+        if: always()
+        run: |
+          {
+            echo '## Production deployment'
+            echo "- Revision: \`$REVISION\`"
+            echo "- Finished (UTC): \`$(date -u +%FT%TZ)\`"
+            echo "- Result: \`${{ steps.deploy.outcome }}\`"
+            if test '${{ steps.deploy.outcome }}' != success; then
+              echo '- Rollback: attempted by the remote deploy operator when a previous successful revision existed'
+            else
+              echo '- Rollback: not required'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
