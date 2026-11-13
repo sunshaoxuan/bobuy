@@ -1,0 +1,252 @@
+{
+  "headRefOid": "fbc43cc516468e86152e64693e1f25e0c66e7432",
+  "state": "MERGED",
+  "mergeCommit": {
+    "oid": "1437ab91fbf9e4caf85da3d78f4563ea0960def1"
+  },
+  "url": "https://github.com/sunshaoxuan/bobuy/pull/83",
+  "statusCheckRollup": [
+    {
+      "name": "analyze (java-kotlin)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS"
+    },
+    {
+      "name": "analyze (javascript-typescript)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS"
+    },
+    {
+      "name": "analyze (actions)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS"
+    }
+  ],
+  "evidence": {
+    "provider": "GitHub connector",
+    "runId": 43379953443,
+    "jobs": [
+      {
+        "id": 131735148499,
+        "name": "analyze (java-kotlin)",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 43379953443,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Checkout repository",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Set up JDK 17",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Initialize CodeQL",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Build backend for CodeQL",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Perform CodeQL Analysis",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Post Perform CodeQL Analysis",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          },
+          {
+            "name": "Post Initialize CodeQL",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "Post Set up JDK 17",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11
+          },
+          {
+            "name": "Post Checkout repository",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13
+          }
+        ]
+      },
+      {
+        "id": 131735148679,
+        "name": "analyze (javascript-typescript)",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 43379953443,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Checkout repository",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Set up JDK 17",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 3
+          },
+          {
+            "name": "Initialize CodeQL",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Build backend for CodeQL",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 5
+          },
+          {
+            "name": "Perform CodeQL Analysis",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Post Perform CodeQL Analysis",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "Post Initialize CodeQL",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11
+          },
+          {
+            "name": "Post Checkout repository",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13
+          }
+        ]
+      },
+      {
+        "id": 131735148803,
+        "name": "analyze (actions)",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 43379953443,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Checkout repository",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Set up JDK 17",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 3
+          },
+          {
+            "name": "Initialize CodeQL",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Build backend for CodeQL",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 5
+          },
+          {
+            "name": "Perform CodeQL Analysis",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Post Perform CodeQL Analysis",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "Post Initialize CodeQL",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11
+          },
+          {
+            "name": "Post Checkout repository",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13
+          }
+        ]
+      }
+    ],
+    "merge": {
+      "sha": "1437ab91fbf9e4caf85da3d78f4563ea0960def1",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    }
+  }
+}

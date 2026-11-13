@@ -53,3 +53,23 @@ Gemini 3.8 Flash 的新状态复核没有发现裁切、遮挡或层级问题，
 预览首次启动发生在 build 完成前，因 dist 不存在退出，尚无浏览器证据产生；build 成功后启动同一候选预览，未重跑测试或构建。实际验证结束后已停止预览，删除本任务 dist，保留源候选、正式截图、摘要及检查记录；共享依赖及其 junction 保留。清理见 cleanup.json 和 cleanup-manifest.json。纯文档收尾只检查引用及 diff，不重复功能验证。
 
 最终结论：持续转圈的错误状态渲染问题已复现且本地修复验收通过。用户当前线上版本仍需部署该候选才能获得修复，未宣称线上已修复。
+
+## 第二批最终交付，覆盖第一批的本地交付状态
+
+2026-11-13 15:41:26 JST，20261113.public-trip-recovery.1 已上线。源码候选fbc43cc516468e86152e64693e1f25e0c66e7432，前端镜像sha256:6457ae985b39c7b6275db7ed3c48255f2c6331650d809c9a33c8efa277d7670d。[PR #83](https://github.com/sunshaoxuan/bobuy/pull/83)已合并，合并提交1437ab91fbf9e4caf85da3d78f4563ea0960def1。正式prepare、activate、verify均完成；只替换frontend，其余服务与受保护资源保持发布基线，未执行数据库操作。
+
+| 最终要求 | 结论 | 证据 |
+| --- | --- | --- |
+| 查明频繁失败和未恢复原因 | PASS | 实际ingress日志15:03:15的三项401、refresh200、me恢复200；公开GET原携带无效bearer且禁用401恢复；服务端permitAll仍先经过token拒绝。具体token失效子类型保持未知 |
+| 修复公开行程对失效登录态的依赖 | PASS | public GET不附加bearer；本地失效会话fixture及用户真实Edge线上请求均验证无Authorization，保护接口me仍携带Authorization |
+| 正常有限重试优先 | PASS | browser-phase2.json，前两次失败时无空状态且仍加载，第三次成功；现有自动重试策略未扩展至写请求 |
+| 重试全部失败才显示无行程 | PASS | 三次耗尽后空状态，无spinner或错误提示，内部tripsReady保持false；online事件夹具可再恢复GET200 |
+| 相关功能和产物 | PASS | 6文件67项一次通过、build一次通过；未执行全产品测试 |
+| 精确候选原生CI | PASS | 原CodeQL运行43379953443三项success，见ci-connector.json与ci.json。GitHub CLI watcher无输出已停止，GitHub connector提供真实结果；finalize只改变结果读取来源，保留source/state/status三项校验，未伪造PASS或削弱远端operator |
+| 真实生产页面、网络及身份 | PASS | production-user-browser.json：用户原Edge两条行程GET200且无bearer，me200且有bearer；production-state.json：真实生产index-Cs13ZZHd.js，0spinner、0error、手机无溢出；artifact.json及原生verify逐文件绑定同一构建 |
+| 最终截图与本批视觉 | PASS | production-desktop.jpg、production-mobile.jpg、production-mobile-detail.jpg；数据为真实公开接口返回空数组。主Agent已查看最终手机截图，复用相同构建的本地桌面和Gemini状态复核；没有CSS或控件几何修改 |
+| 回退与清理 | PASS | 保留旧镜像bobuy/frontend:20261113.unified-brand.1及远端release内compose.before.yml、payload、dist、artifact和operator；未调用旧镜像清理。cleanup-phase2.json记录本地临时构建和重复payload移除，保留源码、共享依赖、全部正式证据 |
+
+用户质疑CI必要性后立即停止新增验证，未新增测试、构建或扫描轮次；只收尾已完成的原CI与前端发布及上述必要线上版本/页面核对。本次沿用现有operator的CI条件，没有新建检查门禁，也未把GitHub作为局部修复的一般技术前提。无需因汇总或提交回执再次测试。
+
+最终意图复核：已解决真实401链路导致公开行程读取失败的根因，保留有限重试及恢复，耗尽后按用户要求显示既有无行程状态，生产验收完成。该结论覆盖本次已证实的会话失效故障，不保证所有可能的外网故障都被消除。自增强仅更新既有C:/workspace/codex-selfimp/bobuy-request-recovery-20261113/TASK_LEARNING_RECEIPT.md候选，未安装全局规则。

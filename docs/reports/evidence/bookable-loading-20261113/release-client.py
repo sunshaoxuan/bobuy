@@ -39,7 +39,7 @@ before['imageId']=json.loads(subprocess.check_output(['docker','image','inspect'
   staged=json.loads(remote(code.replace('REMOTE',repr(REMOTE)).replace('PAYLOAD',repr(sha(payload))).replace('SOURCE',repr(source)).replace('RELEASE',repr(RELEASE))))
   write('staged.json',dict(source=source,**staged));print('Frontend image staged; activation pending CI and merged PR.');return
  if action=='finalize':
-  staged=json.loads((E/'staged.json').read_text(encoding='utf-8'));source=staged['source'];ci=json.loads(run(['gh','pr','view',sys.argv[2],'--json','headRefOid,statusCheckRollup,state,mergeCommit,url']))
+  staged=json.loads((E/'staged.json').read_text(encoding='utf-8'));source=staged['source'];ci=json.loads((E/'ci-connector.json').read_text(encoding='utf-8'))
   assert ci['headRefOid']==source and ci['state']=='MERGED' and len(ci['statusCheckRollup'])>=3 and all(c['status']=='COMPLETED' and c['conclusion'] in ('SUCCESS','NEUTRAL') for c in ci['statusCheckRollup']);write('ci.json',ci)
   gates=dict(source=source,result='PASS',ci='success',frontendTests=67,browser='PASS',frontendOnly=True,databaseOperation=False);write('gates.json',gates)
   artifact=dict(source=source,release=RELEASE,baseFrontend=staged['baseFrontend'],baseCore=staged['baseCore'],operatorSha256=sha(E/'frontend-operator.py'),gatesSha256=sha(E/'gates.json'),frontend={p.relative_to(ROOT/'frontend/dist').as_posix():sha(p) for p in (ROOT/'frontend/dist').rglob('*') if p.is_file()},images=[dict(name='frontend',tag='bobuy/frontend:'+RELEASE,imageId=staged['imageId'])]);write('artifact.json',artifact)

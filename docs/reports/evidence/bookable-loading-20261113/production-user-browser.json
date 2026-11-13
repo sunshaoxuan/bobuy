@@ -1,0 +1,38 @@
+{
+  "events": [
+    {
+      "event": "Network.requestWillBeSent",
+      "url": "https://bobuy.cc/api/storefront/trips",
+      "method": "GET",
+      "hasAuthorization": false
+    },
+    {
+      "event": "Network.requestWillBeSent",
+      "url": "https://bobuy.cc/api/storefront/trips?includeCurrent=true",
+      "method": "GET",
+      "hasAuthorization": false
+    },
+    {
+      "event": "Network.requestWillBeSent",
+      "url": "https://bobuy.cc/api/auth/me",
+      "method": "GET",
+      "hasAuthorization": true
+    },
+    {
+      "event": "Network.responseReceived",
+      "url": "https://bobuy.cc/api/storefront/trips?includeCurrent=true",
+      "status": 200
+    },
+    {
+      "event": "Network.responseReceived",
+      "url": "https://bobuy.cc/api/storefront/trips",
+      "status": 200
+    },
+    {
+      "event": "Network.responseReceived",
+      "url": "https://bobuy.cc/api/auth/me",
+      "status": 200
+    }
+  ],
+  "note": "User Edge tab after release; no artificial network failure or session fixture."
+}

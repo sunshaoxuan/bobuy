@@ -1,0 +1,14 @@
+{
+  "source": "fbc43cc516468e86152e64693e1f25e0c66e7432",
+  "baseFrontend": {
+    "image": "sha256:5ac33f0901f33d622a2d559e4a8a05b78a2b5474c7399be7bce32435f36ee9f3",
+    "tag": "bobuy/frontend:20261113.unified-brand.1",
+    "revision": "34b9952c65aa6d88ed14a4382b769fe3551fc722"
+  },
+  "baseCore": {
+    "image": "sha256:9f507f7dbb910193ac50ee10dcf6ecbecd04303dc96a9ad71187ddc6c2aa832f",
+    "tag": "bobuy/core:20261113.offer-source-drawer.1",
+    "revision": "9f948b1bd98aca3019b5c7ee98e63c59e9aa1582"
+  },
+  "imageId": "sha256:6457ae985b39c7b6275db7ed3c48255f2c6331650d809c9a33c8efa277d7670d"
+}
