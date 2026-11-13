@@ -1,5 +1,13 @@
 # 生产环境持续部署
 
+本次修改范围：仅增加成功部署后的主机清理及本文说明，不提交、不执行部署。
+实施顺序为确认成功分支、增加受限清理函数、补充保留策略，再统一验证。
+验收限于工作流 `python yaml.safe_load`、提取 `REMOTE` 后执行 Git Bash `bash -n`，
+以及检查仓库白名单、目录边界和清理失败不影响发布的控制流；预计数分钟，完成后停止。
+本次本地验收：`yaml.safe_load`、提取后的 `REMOTE` 经 Git Bash `bash -n`、
+`git diff --check` 均通过；白名单、目录边界及失败隔离已静态复核。
+未在生产主机执行清理。GitHub 官方文档联网查询失败，可见性说明按本次要求补充，链接待联网核实。
+
 `.github/workflows/cd-production.yml` 在应用变更推送到 `main` 后运行，也可通过
 `workflow_dispatch` 手动运行。仅改动 `docs/**`、`**/*.md`、`infra/nginx/**`、
 `infra/nacos/config/**`、`docker-compose*.yml/yaml` 或 `compose*.yml/yaml`（含子目录）
@@ -31,6 +39,12 @@ Environment 默认无需审批即可尽快发布。若要启用手动批准，�
 → production → Deployment protection rules** 中添加 required reviewers。
 
 镜像发布到 GHCR，并同时使用提交 SHA 和 `latest` 标签；部署使用 SHA 标签。
+GHCR package 默认是私有的；CD 使用当前 job token 拉取，因此无需公开 package。
+package 可见性只能在 GitHub 网页的 **Package settings > Change visibility** 修改，
+GitHub REST API 没有修改 package 可见性的接口。
+参考：[Container registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)、
+[Package visibility](https://docs.github.com/en/packages/learn-github-packages/configuring-a-packages-access-control-and-visibility)、
+[Packages REST API](https://docs.github.com/en/rest/packages/packages)。
 支持私有 package，package 必须允许本仓库 Actions 访问。构建 job 使用 `packages: write`，
 部署 job 使用 `packages: read`。部署将当前 job 的 `GITHUB_TOKEN` 通过 SSH stdin
 交给远端 `docker login ghcr.io --password-stdin`，凭据仅供拉取镜像使用。
@@ -80,6 +94,27 @@ Compose 配置校验、登录、拉取、重建、健康检查或 nginx 校验/�
 成功发布才写 `.cd/deploy-revision`，内容为 SHA 和 UTC 时间；恢复目标始终来自运行镜像快照。
 SSH 断线或主机故障导致进程中断时，需要依据 `.cd/rollback.yml` 和实际容器状态人工恢复。
 
+## 成功部署后的清理
+
+六个应用及 HTTPS 检查成功后，在写入 `.cd/deploy-revision` 前自动清理生产主机。
+按镜像 ID 保留当前运行的六个应用镜像，以及本次切换前 `.cd/rollback.yml` 引用的
+上一套镜像，合计当前一套加上一套；共享这些 ID 的所有标签保留。
+镜像识别不完整时警告并跳过清理。清理在独立子 shell 函数中执行，调用使用 `|| true`，
+清理失败只输出警告，不影响部署成功，也不触发回滚。
+
+仅对 `$REGISTRY/{core,ai,im,auth,router,frontend}`（本仓库为
+`ghcr.io/sunshaoxuan`）、`bobuy/{core,ai,im,auth,router,frontend}` 和
+`bobuy-rollback/{core-service,ai-service,im-service,auth-service,gateway-service,frontend}`
+中未保留 ID 的标签执行 `docker rmi`，不使用 `-f`，在用镜像删除失败只警告。
+其他仓库的标签不删除，包括 postgres、redis、rabbitmq、nacos、nginx、rustfs、
+`bobuy/minio` 和 curl。
+
+`/opt/bobuy/releases` 仅清理名称符合 `^[a-zA-Z0-9_][a-zA-Z0-9_.-]{0,127}$`、
+且名称不属于任何保留镜像标签的直接子目录；保留普通文件、符号链接及不符合规则的目录，
+不跟随符号链接。最后执行 `docker image prune -f` 清理悬空镜像，此步骤适用于整个
+Docker 主机的悬空镜像；不使用 `-a`、volume prune 或 system prune。
+清理前后输出 `df -h /`，并报告成功删除的标签数和目录数。
+
 ## 配置发布边界
 
 CD 只部署应用镜像，不同步 nginx、Nacos 配置或 Compose 文件。配置变更需经
@@ -94,3 +129,5 @@ CD 只部署应用镜像，不同步 nginx、Nacos 配置或 Compose 文件。�
 Java 服务使用 Flyway 自动迁移。应用镜像回滚不保证数据库变更也能回滚。发布包含迁移时，
 应先按生产备份恢复 runbook 验证可用备份和恢复路径，并审查迁移的前后兼容性；故障后不要在
 已有新写入时直接以旧数据库快照覆盖生产，应先隔离写入并制定前向修复或兼容应用回滚方案。
+
+> Release directories under `/opt/bobuy/releases` are removed by CD only when their name equals an image tag that the same cleanup just retired. Directories without a matching image (configuration or reference-data releases, recovery material) are never removed automatically.
