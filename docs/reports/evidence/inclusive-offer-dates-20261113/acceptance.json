@@ -1,0 +1,31 @@
+{
+  "result": "PASS",
+  "release": "20261113.inclusive-offer-dates.1",
+  "source": "739f30a6bc86fcbaab872a3adac8a58eaae959e9",
+  "mergeCommit": "63367da492cf1e55e8b09a100a49e0e626ee2618",
+  "timeJST": "2026-11-13 12:35:58",
+  "checks": {
+    "inclusiveWholeJapanDates": "PASS",
+    "sameDayMonthYearLeapAndInvalidDates": "PASS; ProductPricingPanel test",
+    "saveReopenAndApproval": "PASS; synthetic writes only",
+    "permanentNoEndDate": "PASS",
+    "tests": 7,
+    "frontendBuild": "PASS",
+    "PRCodeQL": "PASS",
+    "mainCodeQL": "PASS",
+    "productionAssets": "PASS exact hashes",
+    "productionBrowser": "PASS 1440/320; console/network zero; pricing writes zero",
+    "geometry": "PASS; glyph offset 1px; mobile controls44px",
+    "visual": "PASS primary review and Gemini",
+    "databaseChange": "NONE",
+    "productionTestReasons": "0 matches; readonly targeted inventory"
+  },
+  "evidence": [
+    "production/browser.json",
+    "production/glyphs.json",
+    "local/browser.json",
+    "production-verify.json",
+    "production-reason-inventory.json",
+    "gemini-review.txt"
+  ]
+}
