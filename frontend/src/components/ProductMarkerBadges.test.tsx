@@ -12,6 +12,7 @@ it('bounds image overlays to three badges plus an overflow count and keeps detai
 it('renders no decoration for an empty assignment',()=>{const view=render(<I18nProvider><ProductMarkerBadges markers={[]}/></I18nProvider>);expect(view.container.querySelector('ul')).toBeNull();});
 const promotion=(extra:Partial<PublicReferencePrice>={}):PublicReferencePrice=>({documentId:1,documentNumber:'PC-SYNTHETIC',channel:'COSTCO_WAREHOUSE',currency:'JPY',unit:'pack',amount:800,regularAmount:1000,promotion:true,type:'PROMOTION',state:'ACTIVE',startsAt:'2026-11-01T15:00:00Z',endsAt:'2026-11-15T15:00:00Z',...extra});
 const discount={...marker('discount'),badge:'惠',code:'discount'};
+const detailEntry=(referencePrices:PublicReferencePrice[]):PublicCatalogEntry=>({productId:'p',merchantId:1,name:{},description:{},brand:null,itemNumber:null,specification:{},model:null,packaging:null,gallery:[],categories:[],referenceOffers:[],reviewedMaster:true,referencePrices});
 afterEach(()=>{vi.restoreAllMocks();});
 it('shows only current approved promotional periods beside the discount badge, deduplicating date ranges in Japan time',()=>{
  vi.spyOn(Date,'now').mockReturnValue(Date.parse('2026-11-13T00:00:00Z'));
@@ -39,7 +40,7 @@ it('uses everyday Chinese dates, inclusive whole days, cross-year dates and mean
 });
 it('loads dates only when opened, keeps the tooltip on the right, and caches a successful read',async()=>{
  vi.spyOn(Date,'now').mockReturnValue(Date.parse('2026-11-13T00:00:00Z'));
- const load=vi.spyOn(storefrontApi,'productDetail').mockResolvedValue({item:{referencePrices:[promotion()]} as PublicCatalogEntry,markers:[],revision:'r'});
+ const load=vi.spyOn(storefrontApi,'productDetail').mockResolvedValue({item:detailEntry([promotion()]),markers:[],revision:'r'});
  const view=render(<I18nProvider><ProductMarkerBadges markers={[discount]} overlay productId="p"/></I18nProvider>);
  const badge=screen.getByLabelText('discount');expect(load).not.toHaveBeenCalled();expect(badge).toHaveAttribute('data-card-action','offer-period');
  fireEvent.focus(badge);await screen.findByText('Nov 2 to Nov 15');expect(load).toHaveBeenCalledWith('p');
@@ -47,14 +48,14 @@ it('loads dates only when opened, keeps the tooltip on the right, and caches a s
  fireEvent.blur(badge);fireEvent.focus(badge);await waitFor(()=>expect(load).toHaveBeenCalledTimes(1));view.unmount();
 });
 it('offers a plain retry message after a failed read and does not invent dates',async()=>{
- const load=vi.spyOn(storefrontApi,'productDetail').mockRejectedValueOnce(Error('offline')).mockResolvedValueOnce({item:{referencePrices:[]} as PublicCatalogEntry,markers:[],revision:'r'});
+ const load=vi.spyOn(storefrontApi,'productDetail').mockRejectedValueOnce(Error('offline')).mockResolvedValueOnce({item:detailEntry([]),markers:[],revision:'r'});
  render(<I18nProvider><ProductMarkerBadges markers={[discount]} overlay productId="retry"/></I18nProvider>);
  const badge=screen.getByLabelText('discount');fireEvent.focus(badge);await screen.findByText('Offer dates are unavailable. Please try again shortly.');
  fireEvent.blur(badge);await waitFor(()=>expect(screen.queryByRole('tooltip')).not.toBeInTheDocument());fireEvent.focus(badge);await screen.findByText('Offer dates to be confirmed');expect(load).toHaveBeenCalledTimes(2);
 });
 it('rechecks the end boundary when cached dates are reopened without another read',async()=>{
  const clock=vi.spyOn(Date,'now').mockReturnValue(Date.parse('2026-11-13T01:00:00Z'));
- const load=vi.spyOn(storefrontApi,'productDetail').mockResolvedValue({item:{referencePrices:[promotion({endsAt:'2026-11-13T02:00:00Z'})]} as PublicCatalogEntry,markers:[],revision:'r'});
+ const load=vi.spyOn(storefrontApi,'productDetail').mockResolvedValue({item:detailEntry([promotion({endsAt:'2026-11-13T02:00:00Z'})]),markers:[],revision:'r'});
  render(<I18nProvider><ProductMarkerBadges markers={[discount]} overlay productId="expiring"/></I18nProvider>);
  const badge=screen.getByLabelText('discount');fireEvent.focus(badge);await screen.findByText(/11:00/);
  fireEvent.blur(badge);await waitFor(()=>expect(screen.queryByRole('tooltip')).not.toBeInTheDocument());clock.mockReturnValue(Date.parse('2026-11-13T02:00:00Z'));
