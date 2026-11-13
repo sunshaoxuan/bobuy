@@ -2,6 +2,7 @@ package com.bobbuy.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.Clock;
@@ -24,6 +25,7 @@ public class CodexBridgeRouter {
     private final Clock clock;
     private final Map<String, Circuit> circuits = new ConcurrentHashMap<>();
     private final Map<String, LongAdder> metrics = new ConcurrentHashMap<>();
+    @Autowired
     public CodexBridgeRouter(BridgeRoutingProperties properties, CodexBridgeTransport transport) { this(properties, transport, Clock.systemUTC()); }
     CodexBridgeRouter(BridgeRoutingProperties properties, CodexBridgeTransport transport, Clock clock) { this.properties=properties;this.transport=transport;this.clock=clock; }
 

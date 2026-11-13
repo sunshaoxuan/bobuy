@@ -725,7 +725,7 @@ public class LlmGateway {
         return Optional.empty();
     }
 
-    private Optional<String> resolveCodexBridgeApiKey() {
+    Optional<String> resolveCodexBridgeApiKey() {
         Optional<String> cached = resolvedCodexBridgeApiKey;
         if (cached != null) {
             return cached;
@@ -761,7 +761,7 @@ public class LlmGateway {
             );
             return decrypted == null || decrypted.isBlank() ? Optional.empty() : Optional.of(decrypted);
         } catch (Exception e) {
-            log.error("Failed to decrypt Codex Bridge API key: {}", e.getMessage());
+            log.error("Failed to decrypt Codex Bridge API key.");
             return Optional.empty();
         }
     }
