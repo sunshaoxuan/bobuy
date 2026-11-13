@@ -1,3 +1,4 @@
+import BrandLogo from './components/BrandLogo';
 import SiteMetadata from './components/SiteMetadata';
 import { lazy, Suspense, useState } from 'react';
 import { Button, Drawer, Menu, Spin, Tooltip } from 'antd';
@@ -58,14 +59,14 @@ function Admin() {
   }] : [])]} />;
   if (!isAuthenticated) return <LoginPage />;
   if (!isMerchant && !user?.platformAdmin) return <Navigate to="/" replace />;
-  const brand = <Link className="merchant-brand" to="/admin"><span className="brand-symbol">B<span /></span><strong>{t('app.brand')}</strong></Link>;
+  const brand = <Link className="merchant-brand" to="/admin"><BrandLogo/></Link>;
   const current = pages.find(([path]) => location.pathname === `/admin/${path}`);
   return <div className="merchant-shell">
     <aside className="merchant-sidebar">{brand}<div className="merchant-nav-label">{t('admin.workspace')}</div>{menu}
       <div className="merchant-identity"><span className="merchant-avatar"><ShopOutlined /></span><div><strong>{user?.name}</strong><small>{t('admin.merchant')}</small></div></div>
     </aside>
     <div className="merchant-workspace"><header className="merchant-header"><Button className="merchant-menu-toggle" icon={<MenuOutlined />} aria-label={t('app.open_menu')} onClick={() => setOpen(true)} />
-      <div className="merchant-breadcrumb"><span>{t('admin.workspace')}</span><span>/</span><b className="merchant-mobile-brand">{t('app.brand')}</b>{current?.[0].startsWith('basic-data/')&&<><span>{t('nav.basic_data')}</span><span>/</span></>}<strong>{current ? t(current[1]) : t('zen_audit.scroll_title')}</strong></div>
+      <div className="merchant-breadcrumb"><span>{t('admin.workspace')}</span><span>/</span><Link className="merchant-mobile-brand" to="/admin"><BrandLogo compact/></Link>{current?.[0].startsWith('basic-data/')&&<><span>{t('nav.basic_data')}</span><span>/</span></>}<strong>{current ? t(current[1]) : t('zen_audit.scroll_title')}</strong></div>
       <div className="merchant-header-tools"><LanguageSwitcher /><Tooltip title={t('admin.storefront')}><Link className="merchant-store-link" to="/" aria-label={t('admin.storefront')}><ShopOutlined /><span>{t('admin.storefront')}</span><ArrowUpOutlined rotate={45} /></Link></Tooltip>
       <Tooltip title={t('auth.logout')}><Button className="merchant-header-logout" icon={<LogoutOutlined />} aria-label={t('auth.logout')} onClick={() => void logout()} /></Tooltip></div></header>
     <main className="merchant-content">
@@ -76,7 +77,7 @@ function Admin() {
         <Route path="audit/:tripId" element={<ZenAuditView />} />
         <Route path="*" element={<Navigate to="/admin" replace />} /></Routes>
     </main></div>
-    <Drawer className="merchant-drawer" title={brand} placement="left" width={280} open={open} onClose={() => setOpen(false)}>{menu}
+    <Drawer className="merchant-drawer" title={brand} placement="left" width={280} open={open} onClose={() => setOpen(false)}>{menu}<div className="merchant-drawer-store-link"><Link className="merchant-store-link" to="/" onClick={()=>setOpen(false)}><ShopOutlined/><span>{t('admin.storefront')}</span></Link></div>
       <div className="merchant-identity"><span className="merchant-avatar"><ShopOutlined /></span><div><strong>{user?.name}</strong><small>{t('admin.merchant')}</small></div><Tooltip title={t('auth.logout')}><Button icon={<LogoutOutlined />} aria-label={t('auth.logout')} onClick={() => void logout()} /></Tooltip></div>
     </Drawer>
   </div>;
