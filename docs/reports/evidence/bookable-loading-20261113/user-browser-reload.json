@@ -1,0 +1,44 @@
+{
+  "note": "Actual user Edge tab was spinning before reload. Reload without fault injection succeeded; no historical network events were available before instrumentation.",
+  "events": [
+    {
+      "event": "Network.requestWillBeSent",
+      "id": "115932.481",
+      "url": "https://bobuy.cc/api/storefront/trips"
+    },
+    {
+      "event": "Network.requestWillBeSent",
+      "id": "115932.482",
+      "url": "https://bobuy.cc/api/storefront/trips?includeCurrent=true"
+    },
+    {
+      "event": "Network.requestWillBeSent",
+      "id": "115932.483",
+      "url": "https://bobuy.cc/api/auth/me"
+    },
+    {
+      "event": "Network.responseReceived",
+      "id": "115932.481",
+      "url": "https://bobuy.cc/api/storefront/trips",
+      "status": 200,
+      "protocol": "h3",
+      "ttfbMs": 35.602
+    },
+    {
+      "event": "Network.responseReceived",
+      "id": "115932.482",
+      "url": "https://bobuy.cc/api/storefront/trips?includeCurrent=true",
+      "status": 200,
+      "protocol": "h3",
+      "ttfbMs": 43.38
+    },
+    {
+      "event": "Network.responseReceived",
+      "id": "115932.483",
+      "url": "https://bobuy.cc/api/auth/me",
+      "status": 200,
+      "protocol": "h3",
+      "ttfbMs": 58.515
+    }
+  ]
+}
