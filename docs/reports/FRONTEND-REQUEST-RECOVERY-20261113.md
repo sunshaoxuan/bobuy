@@ -34,6 +34,10 @@
 
 本地真实Chrome构建产物验收PASS（local-browser.json）：首次502第3次恢复，持续503恰好3次停止；真实浏览器offline到online后仅失败元数据第4次恢复；离线的focus/visibility无请求；前台事件合并恢复一次；成功数据不因前台事件重新加载；购物车内容和请求编号保持不变。桌面1440×1000和390×844截图均已查看，错误提示移除后内容显示正常，无新增布局或CSS变化，无横向溢出。39条console错误均为测试注入502/503或离线造成的预期浏览器资源错误，无应用未捕获错误，无业务写请求。前台事件通过真实浏览器内事件夹具触发，联网恢复通过浏览器实际离线开关触发，未声称长时间休眠实测。
 
+视觉独立意见：实时目录验证gemini-3.8-flash-high可实际接收图片，指出底栏后透出下一行卡片并缺少baseline。gemini-3.1-pro-high图片请求返回upstream_error。主Agent检查同390×844线上baseline和候选：底栏均为fixed、rgba(255,255,255,.96)，相同位置774.703125至844px；页面高度和底部滚动位置一致，末尾操作可滚到导航上方。底栏透出为既有样式，列为独立待评估项，本批不改CSS，不宣称全站视觉无缺陷。首组baseline截图在标记区尚加载时采集，仅几何/样式可用；该证据缺损使同区域截图对比需等待catalog-progress结束后最小重采，不重跑产品测试、build或功能浏览器场景。
+
+首次push的codex/request-recovery-20261113被远端directory file conflict拒绝。只读核实远端已存在refs/heads/codex，故本地改名codex-request-recovery-20261113再push成功，未改或删除远端既有分支。此版本管理纠正不使产品验证失效。
+
 发布前只读核实当前frontend=20261113.heat-top-right.2，revision2160266，镜像sha256:8d02d4e4b249f23f6179b49b3bdfd223c085e853cd9dd7a5ab4d585e98a10ed0；Core=20261112.price-documents.1。2160266到本次基线main的frontend无差异，发布不会夹带其他前端需求。Nacos路由和现有发布library摘要均匹配版本锁。发布计划只替换frontend，保留旧镜像与compose.before.yml作为兼容回退，不执行数据库操作或停写。release-client依赖真实local-browser PASS、精确候选CI成功与产物逐文件摘要；实际prepare/activate/verify使用原生flock和现有保护资源校验。
 
 - 本地 HEAD 为 20db3b4，工作区存在既有改动。Storefront.tsx:105 至 113 的初次读取失败直接记录 error，178 行按钮调用 load。当前本地商城组件未接入 online、focus 或 visibilitychange 恢复处理。全项目其他功能存在网络与可见性监听，不能推导商城也具备相同行为。
