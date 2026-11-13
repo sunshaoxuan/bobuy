@@ -1,0 +1,16 @@
+from pathlib import Path
+from datetime import datetime,timedelta,timezone
+import hashlib,json,subprocess,sys
+e=Path(__file__).parent;r=e.parents[3]
+ci=json.loads(subprocess.check_output(['gh','run','view',sys.argv[1],'--json','headSha,status,conclusion,url'],cwd=r));assert ci['status']=='completed' and ci['conclusion']=='success';(e/'main-ci.json').write_text(json.dumps(ci,indent=2)+'\n',encoding='utf-8')
+for kind,count in [('local',12),('production',8)]:
+ b=json.loads((e/kind/'browser.json').read_text(encoding='utf-8'));g=json.loads((e/kind/'glyphs.json').read_text(encoding='utf-8'));assert len(b['views'])==count and len(g)==count and all(not v['errors'] and not v['network'] for v in b['views']) and all(v['result']=='PASS' for v in g)
+ if kind=='production':assert all(v['assets'] for v in b['views'])
+staged=json.loads((e/'staged.json').read_text(encoding='utf-8'));activated=json.loads((e/'production-activate.json').read_text(encoding='utf-8'));localTime=datetime.fromisoformat(activated['at'].replace('Z','+00:00')).astimezone(timezone(timedelta(hours=9))).isoformat()
+v=dict(result='PASS',source=staged['source'],mergeCommit=ci['headSha'],release='20261113.unified-brand.1',timeJST=localTime,checks={'sharedLogo':'home, mobile, admin, drawer and login use BrandLogo','alignedGlyphEdges':'PASS 0..1px; no threshold change','fourLocales':'PASS incl longest Japanese narrow header','minimumGlyphSafety':'PASS >=3px','mobileHeat':'PASS >=44px','functionalLinks':'PASS home and relocated storefront entry','frontendTests':23,'frontendBuild':'PASS','browser':'PASS local12/prod8; actual data; console/network0','PRAndMainCodeQL':'PASS','productionAssets':'PASS exact hashes','otherServicesAndDatabase':'unchanged'},evidence=['production/browser.json','production/glyphs.json','local/browser.json','local/glyphs.json','gemini-review.txt','production-verify.json'])
+(e/'acceptance.json').write_text(json.dumps(v,indent=2)+'\n',encoding='utf-8')
+payload=e/'payload.tar.gz';digest=hashlib.sha256(payload.read_bytes()).hexdigest();remote='/opt/bobuy/releases/20261113.unified-brand.1/payload.tar.gz';code='from pathlib import Path\nimport hashlib\nprint(hashlib.sha256(Path('+repr(remote)+').read_bytes()).hexdigest())'
+actual=subprocess.check_output(['ssh','-o','BatchMode=yes','-o','StrictHostKeyChecking=yes','-i','C:/workspace/Secure/sunsxaws.pem','root@185.184.223.41','python3','-'],input=code.encode()).decode().strip();assert actual==digest
+(e/'retained-payload.json').write_text(json.dumps(dict(remote=remote,sha256=digest,localDuplicate=str(payload),safeToRemoveLocalDuplicate=True),indent=2)+'\n',encoding='utf-8')
+cleanup=(r/'docs/reports/evidence/inclusive-offer-dates-20261113/cleanup-payload.ps1').read_text(encoding='utf-8').replace('20261113.inclusive-offer-dates.1','20261113.unified-brand.1');(e/'cleanup-payload.ps1').write_text(cleanup,encoding='utf-8');(e/'cleanup-arguments.json').write_text(json.dumps(dict(TaskEvidenceRoot=str(e)))+'\n',encoding='utf-8')
+print(json.dumps(dict(result='PASS',release=v['release'],timeJST=localTime,cleanupScriptSha256=hashlib.sha256((e/'cleanup-payload.ps1').read_bytes()).hexdigest(),cleanupArgumentsSha256=hashlib.sha256((e/'cleanup-arguments.json').read_bytes()).hexdigest())))

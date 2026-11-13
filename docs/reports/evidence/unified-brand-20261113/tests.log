@@ -1,0 +1,19 @@
+
+> bobbuy-frontend@0.1.0 test
+> vitest run src/components/BrandLogo.test.tsx src/components/StoreNavigation.hiddenNode.test.tsx
+
+
+ RUN  v1.6.1 C:/Users/X02851/OneDrive - One人事株式会社/文档/ChatGPT/bobuy.cc/.task-tmp/home-brand-20261112/frontend
+
+ ✓ src/components/BrandLogo.test.tsx  (4 tests) 209ms
+stderr | src/components/StoreNavigation.hiddenNode.test.tsx > omits selector and placeholder for 'zh-CN' / node=undefined / drawer=false
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/components/StoreNavigation.hiddenNode.test.tsx  (19 tests) 996ms
+
+ Test Files  2 passed (2)
+      Tests  23 passed (23)
+   Start at  14:20:43
+   Duration  18.92s (transform 388ms, setup 3.75s, collect 20.70s, tests 1.21s, environment 4.43s, prepare 570ms)
+

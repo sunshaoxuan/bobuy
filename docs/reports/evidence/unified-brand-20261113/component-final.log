@@ -1,0 +1,14 @@
+
+> bobbuy-frontend@0.1.0 test
+> vitest run src/components/BrandLogo.test.tsx
+
+
+ RUN  v1.6.1 C:/Users/X02851/OneDrive - One人事株式会社/文档/ChatGPT/bobuy.cc/.task-tmp/home-brand-20261112/frontend
+
+ ✓ src/components/BrandLogo.test.tsx  (4 tests) 143ms
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  14:31:19
+   Duration  5.30s (transform 223ms, setup 423ms, collect 3.64s, tests 143ms, environment 704ms, prepare 186ms)
+

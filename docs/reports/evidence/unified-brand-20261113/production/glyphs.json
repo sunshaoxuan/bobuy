@@ -1,0 +1,226 @@
+[
+  {
+    "name": "home-1440",
+    "glyphs": {
+      "name": [
+        1,
+        2,
+        59,
+        21
+      ],
+      "domain": [
+        2,
+        30,
+        58,
+        40
+      ]
+    },
+    "leftError": 1,
+    "rightError": 1,
+    "linkGlyphMargins": [
+      58,
+      9,
+      8,
+      8
+    ],
+    "linkHeight": 55,
+    "columnGap": 12,
+    "result": "PASS"
+  },
+  {
+    "name": "admin-1440",
+    "glyphs": {
+      "name": [
+        1,
+        2,
+        59,
+        21
+      ],
+      "domain": [
+        2,
+        30,
+        58,
+        40
+      ]
+    },
+    "leftError": 1,
+    "rightError": 1,
+    "linkGlyphMargins": [
+      64,
+      5,
+      73,
+      4
+    ],
+    "linkHeight": 47,
+    "columnGap": 12,
+    "result": "PASS"
+  },
+  {
+    "name": "login-1440",
+    "glyphs": {
+      "name": [
+        1,
+        2,
+        59,
+        21
+      ],
+      "domain": [
+        2,
+        30,
+        58,
+        40
+      ]
+    },
+    "leftError": 1,
+    "rightError": 1,
+    "linkGlyphMargins": [
+      64,
+      5,
+      14,
+      4
+    ],
+    "linkHeight": 47,
+    "columnGap": 12,
+    "result": "PASS"
+  },
+  {
+    "name": "home-320",
+    "glyphs": {
+      "name": [
+        0,
+        1,
+        54,
+        18
+      ],
+      "domain": [
+        1,
+        28,
+        54,
+        37
+      ]
+    },
+    "leftError": 1,
+    "rightError": 0,
+    "linkGlyphMargins": [
+      49,
+      8,
+      7,
+      8
+    ],
+    "linkHeight": 52.59375,
+    "columnGap": 10,
+    "result": "PASS"
+  },
+  {
+    "name": "home-menu-320",
+    "glyphs": {
+      "name": [
+        1,
+        2,
+        59,
+        21
+      ],
+      "domain": [
+        2,
+        30,
+        58,
+        40
+      ]
+    },
+    "leftError": 1,
+    "rightError": 1,
+    "linkGlyphMargins": [
+      58,
+      9,
+      8,
+      8
+    ],
+    "linkHeight": 55,
+    "columnGap": 12,
+    "result": "PASS"
+  },
+  {
+    "name": "admin-320",
+    "glyphs": {
+      "name": [
+        0,
+        1,
+        54,
+        18
+      ],
+      "domain": [
+        1,
+        28,
+        54,
+        37
+      ]
+    },
+    "leftError": 1,
+    "rightError": 0,
+    "linkGlyphMargins": [
+      45,
+      3,
+      3,
+      4
+    ],
+    "linkHeight": 44.59375,
+    "columnGap": 10,
+    "result": "PASS"
+  },
+  {
+    "name": "admin-menu-320",
+    "glyphs": {
+      "name": [
+        1,
+        2,
+        59,
+        21
+      ],
+      "domain": [
+        2,
+        30,
+        58,
+        40
+      ]
+    },
+    "leftError": 1,
+    "rightError": 1,
+    "linkGlyphMargins": [
+      64,
+      5,
+      74,
+      4
+    ],
+    "linkHeight": 47,
+    "columnGap": 12,
+    "result": "PASS"
+  },
+  {
+    "name": "login-320",
+    "glyphs": {
+      "name": [
+        1,
+        2,
+        59,
+        21
+      ],
+      "domain": [
+        2,
+        30,
+        58,
+        40
+      ]
+    },
+    "leftError": 1,
+    "rightError": 1,
+    "linkGlyphMargins": [
+      64,
+      5,
+      14,
+      4
+    ],
+    "linkHeight": 47,
+    "columnGap": 12,
+    "result": "PASS"
+  }
+]

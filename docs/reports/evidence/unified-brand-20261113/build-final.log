@@ -1,0 +1,94 @@
+
+> bobbuy-frontend@0.1.0 build
+> npm run check:i18n && tsc && vite build
+
+
+> bobbuy-frontend@0.1.0 check:i18n
+> node scripts/check-i18n.mjs
+
+PASS: 1697 resource keys, application references and missing-key negative fixture
+vite v5.4.21 building for production...
+transforming...
+✓ 3150 modules transformed.
+Circular chunk: ProcurementHUD -> procurement-dashboard -> ProcurementHUD. Consider disabling the "output.onlyExplicitManualChunks" option, as enabling it causes the static dependencies of the manual chunk "procurement-dashboard" to be bundled into the chunk "ProcurementHUD".
+Circular chunk: ProductArchive -> stock-master -> ProductArchive. Consider disabling the "output.onlyExplicitManualChunks" option, as enabling it causes the static dependencies of the manual chunk "stock-master" to be bundled into the chunk "ProductArchive".
+rendering chunks...
+computing gzip size...
+dist/index.html                                         0.48 kB │ gzip:   0.35 kB
+dist/assets/GeographicAreas-Bo31vvAQ.css                1.77 kB │ gzip:   0.63 kB
+dist/assets/Recommendations-BR6eX9U6.css                3.75 kB │ gzip:   1.23 kB
+dist/assets/PublicRecommendations-DhYyKoQc.css          5.55 kB │ gzip:   1.63 kB
+dist/assets/ProductMarkerBadges-Ch-ENXpg.css            5.61 kB │ gzip:   1.66 kB
+dist/assets/MailSettings-Dx7mJHLN.css                   5.77 kB │ gzip:   1.61 kB
+dist/assets/ImageLightbox-Bkvg0lSw.css                 18.14 kB │ gzip:   3.73 kB
+dist/assets/RecommendationImageViewer-BnZdvF0r.css     21.91 kB │ gzip:   4.70 kB
+dist/assets/ProductArchive-sZjk9zpI.css                34.71 kB │ gzip:   6.72 kB
+dist/assets/index-f0BUsp1J.css                         76.17 kB │ gzip:  15.36 kB
+dist/assets/index-C76vKoFm.js                           0.11 kB │ gzip:   0.12 kB
+dist/assets/useBreakpoint-hc3c-XQo.js                   0.34 kB │ gzip:   0.25 kB
+dist/assets/ProductMetadata-Be_GiKZd.js                 0.51 kB │ gzip:   0.30 kB
+dist/assets/ArrowLeftOutlined-CbSFrrG2.js               0.52 kB │ gzip:   0.40 kB
+dist/assets/styleChecker-Gm4bZnXQ.js                    0.64 kB │ gzip:   0.38 kB
+dist/assets/ClockCircleOutlined-DFk6nhmI.js             0.67 kB │ gzip:   0.44 kB
+dist/assets/EditOutlined-5uMs0Bb-.js                    0.70 kB │ gzip:   0.49 kB
+dist/assets/SaveOutlined-DAkEX5oW.js                    0.73 kB │ gzip:   0.47 kB
+dist/assets/SendOutlined-C5L8pGNu.js                    0.75 kB │ gzip:   0.51 kB
+dist/assets/CameraOutlined-BGz1W4H1.js                  0.78 kB │ gzip:   0.50 kB
+dist/assets/SafetyCertificateOutlined-B2Z74UHs.js       0.81 kB │ gzip:   0.55 kB
+dist/assets/OrderProductIdentity-rvCnZvdj.js            0.81 kB │ gzip:   0.45 kB
+dist/assets/ReloadOutlined-D0euwCey.js                  0.99 kB │ gzip:   0.61 kB
+dist/assets/MerchantCustomers-DRY9H3vv.js               1.14 kB │ gzip:   0.59 kB
+dist/assets/Currencies-rUlPHCl-.js                      1.19 kB │ gzip:   0.65 kB
+dist/assets/ClientTrips-BLWO2xmM.js                     1.83 kB │ gzip:   0.87 kB
+dist/assets/LoginPage-BKgTyuHv.js                       1.90 kB │ gzip:   0.89 kB
+dist/assets/ClientChat-h3gCadYL.js                      2.55 kB │ gzip:   1.25 kB
+dist/assets/Dashboard-CJmZgq1C.js                       3.28 kB │ gzip:   1.21 kB
+dist/assets/GeographicAreas-BeHbmHDJ.js                 3.39 kB │ gzip:   1.41 kB
+dist/assets/Suppliers-D8ZNARKR.js                       3.76 kB │ gzip:   1.60 kB
+dist/assets/index-bYvAGLFR.js                           3.84 kB │ gzip:   1.52 kB
+dist/assets/ProductMarkerBadges-vYFRAXCZ.js             3.98 kB │ gzip:   2.15 kB
+dist/assets/index-DWFTnKpv.js                           4.14 kB │ gzip:   1.72 kB
+dist/assets/ProductMarkerEditor-DZIsrhD_.js             4.48 kB │ gzip:   2.02 kB
+dist/assets/index-d375dq18.js                           4.57 kB │ gzip:   1.81 kB
+dist/assets/PickingMaster-C6a7Vhnb.js                   4.84 kB │ gzip:   2.08 kB
+dist/assets/index-D0akV4P0.js                           5.36 kB │ gzip:   2.48 kB
+dist/assets/Users-C8Us7R8N.js                           6.15 kB │ gzip:   2.24 kB
+dist/assets/ProductMarkers-CThe7tI0.js                  6.22 kB │ gzip:   2.33 kB
+dist/assets/Breadcrumb-DeNwkEBx.js                      6.59 kB │ gzip:   2.33 kB
+dist/assets/OrderDesk-CHmDQ6ZX.js                       6.76 kB │ gzip:   2.70 kB
+dist/assets/audit-view-CeqBHvtE.js                      7.57 kB │ gzip:   2.53 kB
+dist/assets/index-CFqGbqPt.js                           7.91 kB │ gzip:   2.70 kB
+dist/assets/MailSettings-CPxZl8k6.js                    7.97 kB │ gzip:   2.67 kB
+dist/assets/index-Cb4GiJXU.js                           8.50 kB │ gzip:   3.18 kB
+dist/assets/Collapse-BCt_lGJU.js                       10.22 kB │ gzip:   3.86 kB
+dist/assets/Orders-Dal_rLsf.js                         10.29 kB │ gzip:   3.02 kB
+dist/assets/index-Cp2AV2Iz.js                          10.41 kB │ gzip:   3.47 kB
+dist/assets/Skeleton-C8dAaZ_h.js                       10.44 kB │ gzip:   3.30 kB
+dist/assets/index-qaCUNeqc.js                          10.60 kB │ gzip:   3.85 kB
+dist/assets/ClientOrders-DCNcmsU-.js                   10.61 kB │ gzip:   4.02 kB
+dist/assets/PublicProductCatalog-DqhG3-9K.js           12.22 kB │ gzip:   4.99 kB
+dist/assets/ProcurementHUD-kOqBYmEO.js                 13.35 kB │ gzip:   4.40 kB
+dist/assets/ClientBilling-BYx4B3k6.js                  14.29 kB │ gzip:   4.97 kB
+dist/assets/ImageLightbox-D6_kAGWs.js                  18.61 kB │ gzip:   7.34 kB
+dist/assets/RecommendationImageViewer-FDVb1nqp.js      19.95 kB │ gzip:   7.51 kB
+dist/assets/chat-flow-JOzo1ETg.js                      20.51 kB │ gzip:   6.56 kB
+dist/assets/index-BIRLuWP1.js                          21.42 kB │ gzip:   7.82 kB
+dist/assets/Pagination-DRLNU-4h.js                     24.07 kB │ gzip:   7.20 kB
+dist/assets/stock-master-CwPixkCq.js                   24.97 kB │ gzip:   7.59 kB
+dist/assets/useNetworkStatus-C6DsPwSM.js               27.14 kB │ gzip:   8.37 kB
+dist/assets/PublicRecommendations-CCosYPCN.js          28.18 kB │ gzip:  10.25 kB
+dist/assets/procurement-dashboard-BhA7-IBu.js          28.50 kB │ gzip:   7.78 kB
+dist/assets/index-Bzt1p2-H.js                          44.24 kB │ gzip:  13.35 kB
+dist/assets/WarningOutlined-DvCTHNbG.js                48.61 kB │ gzip:  17.16 kB
+dist/assets/ProductArchive-CRMoBSRc.js                 64.02 kB │ gzip:  19.90 kB
+dist/assets/priceDocumentText-DxOSkPpQ.js              90.69 kB │ gzip:  29.31 kB
+dist/assets/Recommendations-oPnyB-XZ.js                95.22 kB │ gzip:  27.57 kB
+dist/assets/Trips-t3DsPcXW.js                         104.71 kB │ gzip:  34.03 kB
+dist/assets/Table-DEeULM59.js                         147.08 kB │ gzip:  47.46 kB
+dist/assets/index-BE7QJrP-.js                       1,259.27 kB │ gzip: 437.51 kB
+✓ built in 8.17s
+
+> bobbuy-frontend@0.1.0 postbuild
+> node scripts/prerender-home.mjs
+
+Generated home-only crawlable HTML; SPA detail/admin template retains no shared home canonical.

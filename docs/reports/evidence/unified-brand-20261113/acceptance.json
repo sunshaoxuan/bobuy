@@ -1,0 +1,29 @@
+{
+  "result": "PASS",
+  "source": "34b9952c65aa6d88ed14a4382b769fe3551fc722",
+  "mergeCommit": "4dc36d10e0d0f29d0e0a9d0bed3d930e2b2335c5",
+  "release": "20261113.unified-brand.1",
+  "timeJST": "2026-11-13T14:41:20+09:00",
+  "checks": {
+    "sharedLogo": "home, mobile, admin, drawer and login use BrandLogo",
+    "alignedGlyphEdges": "PASS 0..1px; no threshold change",
+    "fourLocales": "PASS incl longest Japanese narrow header",
+    "minimumGlyphSafety": "PASS >=3px",
+    "mobileHeat": "PASS >=44px",
+    "functionalLinks": "PASS home and relocated storefront entry",
+    "frontendTests": 23,
+    "frontendBuild": "PASS",
+    "browser": "PASS local12/prod8; actual data; console/network0",
+    "PRAndMainCodeQL": "PASS",
+    "productionAssets": "PASS exact hashes",
+    "otherServicesAndDatabase": "unchanged"
+  },
+  "evidence": [
+    "production/browser.json",
+    "production/glyphs.json",
+    "local/browser.json",
+    "local/glyphs.json",
+    "gemini-review.txt",
+    "production-verify.json"
+  ]
+}
