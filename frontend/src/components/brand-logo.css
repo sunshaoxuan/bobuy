@@ -1,0 +1,11 @@
+.brand-lockup{--brand-mark-size:38px;--brand-name-size:20px;--brand-domain-size:11px;--brand-gap:12px;display:inline-flex;align-items:center;gap:var(--brand-gap);padding:3px;flex:none;vertical-align:middle;font-family:Arial,"Microsoft YaHei",sans-serif;color:#232323;}
+.brand-lockup .brand-lockup-mark{display:grid;place-items:center;flex:none;width:var(--brand-mark-size);height:var(--brand-mark-size);border-radius:13px;background:#df332d;color:#fff;font-family:Arial,sans-serif;font-size:24px;font-weight:700;line-height:1;}
+.brand-lockup .brand-lockup-label{display:grid;grid-template-columns:max-content;gap:3px;min-width:0;}
+.brand-lockup .brand-lockup-label .brand-lockup-name{display:block;margin:0;font-family:inherit;font-size:var(--brand-name-size);font-weight:700;line-height:1.2;letter-spacing:0;white-space:nowrap;}
+.brand-lockup .brand-lockup-label .brand-lockup-domain{display:flex;justify-content:space-between;width:100%;box-sizing:border-box;padding-inline:1px;margin:0;color:#6b625b;font-family:Arial,sans-serif;font-size:var(--brand-domain-size);font-weight:500;line-height:14px;letter-spacing:0;white-space:nowrap;}
+.brand-lockup .brand-lockup-domain>span{display:block;letter-spacing:0;}
+.brand-lockup-compact{--brand-mark-size:32px;--brand-name-size:18px;--brand-domain-size:10px;--brand-gap:10px;}
+.brand-lockup-compact .brand-lockup-mark{border-radius:11px;font-size:22px;}
+.brand-lockup-compact .brand-lockup-label .brand-lockup-domain{padding-inline:0;}
+.brand-lockup:lang(ja) .brand-lockup-label .brand-lockup-domain{padding-right:3px;}
+.brand-lockup-compact:lang(ja) .brand-lockup-label .brand-lockup-domain{padding-inline:0 4px;}

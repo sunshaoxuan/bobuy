@@ -1,0 +1,126 @@
+[
+  {
+    "viewport": 1440,
+    "control": "start",
+    "background": [
+      21,
+      134,
+      468,
+      168
+    ],
+    "availableInner": [
+      22,
+      135,
+      467,
+      167
+    ],
+    "glyph": [
+      35,
+      146,
+      108,
+      158
+    ],
+    "margins": [
+      13,
+      11,
+      359,
+      9
+    ],
+    "verticalCenterOffset": 1.0,
+    "heatHeight": 34,
+    "role": "left aligned date input; native calendar icon separate"
+  },
+  {
+    "viewport": 1440,
+    "control": "end",
+    "background": [
+      484,
+      134,
+      931,
+      168
+    ],
+    "availableInner": [
+      485,
+      135,
+      930,
+      167
+    ],
+    "glyph": [
+      498,
+      146,
+      571,
+      158
+    ],
+    "margins": [
+      13,
+      11,
+      359,
+      9
+    ],
+    "verticalCenterOffset": 1.0,
+    "heatHeight": 34,
+    "role": "left aligned date input; native calendar icon separate"
+  },
+  {
+    "viewport": 320,
+    "control": "start",
+    "background": [
+      17,
+      152,
+      271,
+      196
+    ],
+    "availableInner": [
+      18,
+      153,
+      270,
+      195
+    ],
+    "glyph": [
+      31,
+      169,
+      104,
+      181
+    ],
+    "margins": [
+      13,
+      16,
+      166,
+      14
+    ],
+    "verticalCenterOffset": 1.0,
+    "heatHeight": 44,
+    "role": "left aligned date input; native calendar icon separate"
+  },
+  {
+    "viewport": 320,
+    "control": "end",
+    "background": [
+      17,
+      240,
+      271,
+      284
+    ],
+    "availableInner": [
+      18,
+      241,
+      270,
+      283
+    ],
+    "glyph": [
+      31,
+      257,
+      104,
+      269
+    ],
+    "margins": [
+      13,
+      16,
+      166,
+      14
+    ],
+    "verticalCenterOffset": 1.0,
+    "heatHeight": 44,
+    "role": "left aligned date input; native calendar icon separate"
+  }
+]

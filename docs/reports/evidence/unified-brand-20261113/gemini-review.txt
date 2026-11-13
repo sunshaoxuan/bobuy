@@ -1,0 +1,25 @@
+### Actual Defects & Doubts
+
+1. **Mobile Header Balance & Alignment (Image 3):**
+   - **Horizontal balance:** The logo lockup is grouped tightly to the left hamburger menu button rather than being optical center-anchored, creating an asymmetric void between the lockup and the rightmost globe icon. 
+   - **Vertical optical center:** The red "B" badge is vertically centered with the hamburger circle, but because the text stack ("宝宝败" / "bobuy.cc") has a heavier visual baseline, the domain line sits close to the bottom visual bound of the header container.
+2. **Glyph Edge Justification (Optical vs. Mathematical):**
+   - In the Japanese crop (Image 5), the trailing stroke of **「イ」** sweeps slightly outward compared to the upright curved terminal of the letter **「c」**, creating a subtle optical doubt on right-flush alignment depending on whether the stroke terminal or the main stem is measured (though still within ~1px glyph edge tolerance).
+3. **No Detected Clipping or Cropping Errors:**
+   - The descender on **"y"** and the bottom dots in **"bobuy.cc"** are intact without baseline clipping.
+   - The separation gap between the red "B" rounded icon and the text block is consistent, distinct, and uniform across all crops and the mobile header.
+
+---
+
+### Concise Verdict per Image
+
+* **Image 1 (Chinese crop - Standard/Compact):**  
+  **Pass.** Left edges of 「宝」 and "b" align flush; right edge of 「败」 and "c" align within ≤1px. Gap to red mark is clear; domain string is fully intact.
+* **Image 2 (Chinese crop - Alternate/Compact duplicate):**  
+  **Pass.** Identical lockup geometry and glyph bounding as Image 1; crisp edges, no clipping.
+* **Image 3 (Mobile Management page):**  
+  **Pass with layout note.** Brand lockup integrity is preserved exactly as specified (no shrinking or distortion of mark/text). Left/right header spacing is left-weighted, but the logo itself suffers no clipping or baseline collision.
+* **Image 4 (Chinese crop - HiDPI/Base render):**  
+  **Pass.** Consistent with Images 1 & 2; coherent red badge curvature, correct letter spacing across both lines, zero edge clipping.
+* **Image 5 (Japanese crop - 「ボボバイ」):**  
+  **Pass.** Left alignment between 「ボ」 and "b" is crisp. Right edge between 「イ」 and the outer curve of "c" meets the ≤1px edge tolerance criteria without clipping. Coherent shared brand identity preserved.

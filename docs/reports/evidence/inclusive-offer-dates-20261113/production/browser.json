@@ -1,0 +1,101 @@
+{
+  "base": "https://bobuy.cc",
+  "views": [
+    {
+      "width": 1440,
+      "environment": "production actual product; unsaved date selection; no pricing writes",
+      "text": "生效期间\n\n从开始日当天起，到结束日当天结束，日期按日本时间计算。\n\n开始日期\n结束日期",
+      "controls": [
+        {
+          "label": "开始日期",
+          "x": 485,
+          "y": 390.78125,
+          "width": 447,
+          "height": 34,
+          "right": 932
+        },
+        {
+          "label": "结束日期",
+          "x": 948,
+          "y": 390.78125,
+          "width": 447,
+          "height": 34,
+          "right": 1395
+        }
+      ],
+      "assets": [
+        {
+          "path": "/assets/index-CKrPGF6o.js",
+          "sha256": "5feafc57e66fcaed802f660cf185ef5efe31f337843789cbca35c88d18b50b54"
+        },
+        {
+          "path": "/assets/index-7JczN2rf.css",
+          "sha256": "efe312a9b73b77677a7e3a35b20f07bd815c08456775bf3ab08f07c83394e336"
+        },
+        {
+          "path": "/assets/ImageLightbox-Bkvg0lSw.css",
+          "sha256": "a7f51fd0b482add63872dfc3973bd18dc95c7e31ac8322fb1bd644dc4e48b40f"
+        },
+        {
+          "path": "/assets/ProductMarkerBadges-Ch-ENXpg.css",
+          "sha256": "5e261cb4f7218357d29c0853c05c44daefd6e5e4ea1f25539d9bab0a99385607"
+        },
+        {
+          "path": "/assets/ProductArchive-sZjk9zpI.css",
+          "sha256": "5be6b82b2d231d76064b4aed2432d68638e5c78da36b624e970b0c51cf87743d"
+        }
+      ],
+      "errors": [],
+      "network": [],
+      "pricingWrites": 0
+    },
+    {
+      "width": 320,
+      "environment": "production actual product; unsaved date selection; no pricing writes",
+      "text": "生效期间\n\n从开始日当天起，到结束日当天结束，日期按日本时间计算。\n\n开始日期\n结束日期",
+      "controls": [
+        {
+          "label": "开始日期",
+          "x": 33,
+          "y": 553.0625,
+          "width": 254,
+          "height": 44,
+          "right": 287
+        },
+        {
+          "label": "结束日期",
+          "x": 33,
+          "y": 641.15625,
+          "width": 254,
+          "height": 44,
+          "right": 287
+        }
+      ],
+      "assets": [
+        {
+          "path": "/assets/index-CKrPGF6o.js",
+          "sha256": "5feafc57e66fcaed802f660cf185ef5efe31f337843789cbca35c88d18b50b54"
+        },
+        {
+          "path": "/assets/index-7JczN2rf.css",
+          "sha256": "efe312a9b73b77677a7e3a35b20f07bd815c08456775bf3ab08f07c83394e336"
+        },
+        {
+          "path": "/assets/ImageLightbox-Bkvg0lSw.css",
+          "sha256": "a7f51fd0b482add63872dfc3973bd18dc95c7e31ac8322fb1bd644dc4e48b40f"
+        },
+        {
+          "path": "/assets/ProductMarkerBadges-Ch-ENXpg.css",
+          "sha256": "5e261cb4f7218357d29c0853c05c44daefd6e5e4ea1f25539d9bab0a99385607"
+        },
+        {
+          "path": "/assets/ProductArchive-sZjk9zpI.css",
+          "sha256": "5be6b82b2d231d76064b4aed2432d68638e5c78da36b624e970b0c51cf87743d"
+        }
+      ],
+      "errors": [],
+      "network": [],
+      "pricingWrites": 0
+    }
+  ]
+}

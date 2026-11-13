@@ -1,0 +1,6 @@
+from pathlib import Path
+e=Path(__file__).parent;r=e.parents[3]
+s=(r/'docs/reports/evidence/inclusive-offer-dates-20261113/release-client.py').read_text(encoding='utf-8').replace('20261113.inclusive-offer-dates.1','20261113.unified-brand.1').replace("E/'build-accepted.log'","E/'build-final.log'").replace("len(browser['views'])==2","len(browser['views'])>=8").replace("before['baseFrontend']['revision']==before['baseCore']['revision']=='9f948b1bd98aca3019b5c7ee98e63c59e9aa1582'","before['baseFrontend']['revision']=='739f30a6bc86fcbaab872a3adac8a58eaae959e9' and before['baseCore']['revision']=='9f948b1bd98aca3019b5c7ee98e63c59e9aa1582'").replace('frontendTests=7','frontendTests=23')
+(e/'release-client.py').write_text(s,encoding='utf-8')
+p=e/'browser.mjs';s=p.read_text(encoding='utf-8').replace("await capture(admin,'admin-menu-320','.merchant-drawer:visible .brand-lockup');", "const menuView=await capture(admin,'admin-menu-320','.merchant-drawer:visible .brand-lockup');const storeLink=admin.page.locator('.merchant-drawer-store-link a');if(!await storeLink.isVisible()||!await storeLink.innerText())throw Error('Relocated storefront action missing');await storeLink.click();await admin.page.waitForURL(base+'/');await admin.page.locator('.merchant-drawer:visible').waitFor({state:'hidden'});menuView.storefrontLinkWorks=true;")
+p.write_text(s,encoding='utf-8')

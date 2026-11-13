@@ -1,3 +1,4 @@
+import BrandLogo from '../components/BrandLogo';
 import { Alert, Button, Form, Input, Space, Typography } from 'antd';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -30,7 +31,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="merchant-login"><header className="merchant-login-header"><Link className="merchant-brand" to="/"><span className="brand-symbol">B<span /></span><strong>{t('app.brand')}</strong></Link><LanguageSwitcher /></header>
+    <div className="merchant-login"><header className="merchant-login-header"><Link className="merchant-brand" to="/"><BrandLogo/></Link><LanguageSwitcher /></header>
       <main className="merchant-login-main">
         <Space direction="vertical" size="large" style={{ width: '100%' }}>
           <div>

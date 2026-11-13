@@ -1,0 +1,726 @@
+{
+  "base": "http://127.0.0.1:5178",
+  "views": [
+    {
+      "name": "home-1440",
+      "width": 1440,
+      "locale": "zh-CN",
+      "geometry": {
+        "logo": {
+          "x": 34,
+          "y": 34,
+          "width": 116,
+          "height": 47,
+          "right": 150,
+          "bottom": 81
+        },
+        "mark": {
+          "x": 37,
+          "y": 38.5,
+          "width": 38,
+          "height": 38,
+          "right": 75,
+          "bottom": 76.5
+        },
+        "label": {
+          "x": 87,
+          "y": 37,
+          "width": 60,
+          "height": 41,
+          "right": 147,
+          "bottom": 78
+        },
+        "name": {
+          "x": 87,
+          "y": 37,
+          "width": 60,
+          "height": 24,
+          "right": 147,
+          "bottom": 61
+        },
+        "domain": {
+          "x": 87,
+          "y": 64,
+          "width": 60,
+          "height": 14,
+          "right": 147,
+          "bottom": 78
+        },
+        "link": {
+          "x": 30,
+          "y": 30,
+          "width": 124,
+          "height": 55,
+          "right": 154,
+          "bottom": 85
+        },
+        "href": "/",
+        "text": "宝宝败"
+      },
+      "errors": [],
+      "network": [],
+      "assets": []
+    },
+    {
+      "name": "admin-1440",
+      "width": 1440,
+      "locale": "zh-CN",
+      "geometry": {
+        "logo": {
+          "x": 28,
+          "y": 32,
+          "width": 116,
+          "height": 47,
+          "right": 144,
+          "bottom": 79
+        },
+        "mark": {
+          "x": 31,
+          "y": 36.5,
+          "width": 38,
+          "height": 38,
+          "right": 69,
+          "bottom": 74.5
+        },
+        "label": {
+          "x": 81,
+          "y": 35,
+          "width": 60,
+          "height": 41,
+          "right": 141,
+          "bottom": 76
+        },
+        "name": {
+          "x": 81,
+          "y": 35,
+          "width": 60,
+          "height": 24,
+          "right": 141,
+          "bottom": 59
+        },
+        "domain": {
+          "x": 81,
+          "y": 62,
+          "width": 60,
+          "height": 14,
+          "right": 141,
+          "bottom": 76
+        },
+        "link": {
+          "x": 18,
+          "y": 32,
+          "width": 195,
+          "height": 47,
+          "right": 213,
+          "bottom": 79
+        },
+        "href": "/admin",
+        "text": "宝宝败"
+      },
+      "errors": [],
+      "network": [],
+      "assets": []
+    },
+    {
+      "name": "login-1440",
+      "width": 1440,
+      "locale": "zh-CN",
+      "geometry": {
+        "logo": {
+          "x": 42,
+          "y": 24,
+          "width": 116,
+          "height": 47,
+          "right": 158,
+          "bottom": 71
+        },
+        "mark": {
+          "x": 45,
+          "y": 28.5,
+          "width": 38,
+          "height": 38,
+          "right": 83,
+          "bottom": 66.5
+        },
+        "label": {
+          "x": 95,
+          "y": 27,
+          "width": 60,
+          "height": 41,
+          "right": 155,
+          "bottom": 68
+        },
+        "name": {
+          "x": 95,
+          "y": 27,
+          "width": 60,
+          "height": 24,
+          "right": 155,
+          "bottom": 51
+        },
+        "domain": {
+          "x": 95,
+          "y": 54,
+          "width": 60,
+          "height": 14,
+          "right": 155,
+          "bottom": 68
+        },
+        "link": {
+          "x": 32,
+          "y": 24,
+          "width": 136,
+          "height": 47,
+          "right": 168,
+          "bottom": 71
+        },
+        "href": "/",
+        "text": "宝宝败"
+      },
+      "errors": [],
+      "network": [],
+      "assets": []
+    },
+    {
+      "name": "home-320",
+      "width": 320,
+      "locale": "zh-CN",
+      "geometry": {
+        "logo": {
+          "x": 70,
+          "y": 12,
+          "width": 102,
+          "height": 44.59375,
+          "right": 172,
+          "bottom": 56.59375
+        },
+        "mark": {
+          "x": 73,
+          "y": 18.296875,
+          "width": 32,
+          "height": 32,
+          "right": 105,
+          "bottom": 50.296875
+        },
+        "label": {
+          "x": 115,
+          "y": 15,
+          "width": 54,
+          "height": 38.59375,
+          "right": 169,
+          "bottom": 53.59375
+        },
+        "name": {
+          "x": 115,
+          "y": 15,
+          "width": 54,
+          "height": 21.59375,
+          "right": 169,
+          "bottom": 36.59375
+        },
+        "domain": {
+          "x": 115,
+          "y": 39.59375,
+          "width": 54,
+          "height": 14,
+          "right": 169,
+          "bottom": 53.59375
+        },
+        "link": {
+          "x": 66,
+          "y": 8,
+          "width": 110,
+          "height": 52.59375,
+          "right": 176,
+          "bottom": 60.59375
+        },
+        "href": "/",
+        "text": "宝宝败"
+      },
+      "errors": [],
+      "network": [],
+      "assets": []
+    },
+    {
+      "name": "home-menu-320",
+      "width": 320,
+      "locale": "zh-CN",
+      "geometry": {
+        "logo": {
+          "x": 34,
+          "y": 88,
+          "width": 116,
+          "height": 47,
+          "right": 150,
+          "bottom": 135
+        },
+        "mark": {
+          "x": 37,
+          "y": 92.5,
+          "width": 38,
+          "height": 38,
+          "right": 75,
+          "bottom": 130.5
+        },
+        "label": {
+          "x": 87,
+          "y": 91,
+          "width": 60,
+          "height": 41,
+          "right": 147,
+          "bottom": 132
+        },
+        "name": {
+          "x": 87,
+          "y": 91,
+          "width": 60,
+          "height": 24,
+          "right": 147,
+          "bottom": 115
+        },
+        "domain": {
+          "x": 87,
+          "y": 118,
+          "width": 60,
+          "height": 14,
+          "right": 147,
+          "bottom": 132
+        },
+        "link": {
+          "x": 30,
+          "y": 84,
+          "width": 124,
+          "height": 55,
+          "right": 154,
+          "bottom": 139
+        },
+        "href": "/",
+        "text": "宝宝败"
+      },
+      "errors": [],
+      "network": [],
+      "assets": []
+    },
+    {
+      "name": "admin-320",
+      "width": 320,
+      "locale": "zh-CN",
+      "geometry": {
+        "logo": {
+          "x": 68,
+          "y": 12.203125,
+          "width": 102,
+          "height": 44.59375,
+          "right": 170,
+          "bottom": 56.796875
+        },
+        "mark": {
+          "x": 71,
+          "y": 18.5,
+          "width": 32,
+          "height": 32,
+          "right": 103,
+          "bottom": 50.5
+        },
+        "label": {
+          "x": 113,
+          "y": 15.203125,
+          "width": 54,
+          "height": 38.59375,
+          "right": 167,
+          "bottom": 53.796875
+        },
+        "name": {
+          "x": 113,
+          "y": 15.203125,
+          "width": 54,
+          "height": 21.59375,
+          "right": 167,
+          "bottom": 36.796875
+        },
+        "domain": {
+          "x": 113,
+          "y": 39.796875,
+          "width": 54,
+          "height": 14,
+          "right": 167,
+          "bottom": 53.796875
+        },
+        "link": {
+          "x": 68,
+          "y": 12.203125,
+          "width": 102,
+          "height": 44.59375,
+          "right": 170,
+          "bottom": 56.796875
+        },
+        "href": "/admin",
+        "text": "宝宝败"
+      },
+      "errors": [],
+      "network": [],
+      "assets": []
+    },
+    {
+      "name": "admin-menu-320",
+      "width": 320,
+      "locale": "zh-CN",
+      "geometry": {
+        "logo": {
+          "x": 78,
+          "y": 16,
+          "width": 116,
+          "height": 47,
+          "right": 194,
+          "bottom": 63
+        },
+        "mark": {
+          "x": 81,
+          "y": 20.5,
+          "width": 38,
+          "height": 38,
+          "right": 119,
+          "bottom": 58.5
+        },
+        "label": {
+          "x": 131,
+          "y": 19,
+          "width": 60,
+          "height": 41,
+          "right": 191,
+          "bottom": 60
+        },
+        "name": {
+          "x": 131,
+          "y": 19,
+          "width": 60,
+          "height": 24,
+          "right": 191,
+          "bottom": 43
+        },
+        "domain": {
+          "x": 131,
+          "y": 46,
+          "width": 60,
+          "height": 14,
+          "right": 191,
+          "bottom": 60
+        },
+        "link": {
+          "x": 68,
+          "y": 16,
+          "width": 196,
+          "height": 47,
+          "right": 264,
+          "bottom": 63
+        },
+        "href": "/admin",
+        "text": "宝宝败"
+      },
+      "errors": [],
+      "network": [],
+      "assets": [],
+      "storefrontLinkWorks": true
+    },
+    {
+      "name": "login-320",
+      "width": 320,
+      "locale": "zh-CN",
+      "geometry": {
+        "logo": {
+          "x": 26,
+          "y": 16,
+          "width": 116,
+          "height": 47,
+          "right": 142,
+          "bottom": 63
+        },
+        "mark": {
+          "x": 29,
+          "y": 20.5,
+          "width": 38,
+          "height": 38,
+          "right": 67,
+          "bottom": 58.5
+        },
+        "label": {
+          "x": 79,
+          "y": 19,
+          "width": 60,
+          "height": 41,
+          "right": 139,
+          "bottom": 60
+        },
+        "name": {
+          "x": 79,
+          "y": 19,
+          "width": 60,
+          "height": 24,
+          "right": 139,
+          "bottom": 43
+        },
+        "domain": {
+          "x": 79,
+          "y": 46,
+          "width": 60,
+          "height": 14,
+          "right": 139,
+          "bottom": 60
+        },
+        "link": {
+          "x": 16,
+          "y": 16,
+          "width": 136,
+          "height": 47,
+          "right": 152,
+          "bottom": 63
+        },
+        "href": "/",
+        "text": "宝宝败"
+      },
+      "errors": [],
+      "network": [],
+      "assets": []
+    },
+    {
+      "name": "locale-zh-TW",
+      "width": 1440,
+      "locale": "zh-TW",
+      "geometry": {
+        "logo": {
+          "x": 34,
+          "y": 34,
+          "width": 116,
+          "height": 47,
+          "right": 150,
+          "bottom": 81
+        },
+        "mark": {
+          "x": 37,
+          "y": 38.5,
+          "width": 38,
+          "height": 38,
+          "right": 75,
+          "bottom": 76.5
+        },
+        "label": {
+          "x": 87,
+          "y": 37,
+          "width": 60,
+          "height": 41,
+          "right": 147,
+          "bottom": 78
+        },
+        "name": {
+          "x": 87,
+          "y": 37,
+          "width": 60,
+          "height": 24,
+          "right": 147,
+          "bottom": 61
+        },
+        "domain": {
+          "x": 87,
+          "y": 64,
+          "width": 60,
+          "height": 14,
+          "right": 147,
+          "bottom": 78
+        },
+        "link": {
+          "x": 30,
+          "y": 30,
+          "width": 124,
+          "height": 55,
+          "right": 154,
+          "bottom": 85
+        },
+        "href": "/",
+        "text": "寶寶敗"
+      },
+      "errors": [],
+      "network": [],
+      "assets": []
+    },
+    {
+      "name": "locale-ja-JP",
+      "width": 1440,
+      "locale": "ja-JP",
+      "geometry": {
+        "logo": {
+          "x": 34,
+          "y": 34,
+          "width": 136,
+          "height": 47,
+          "right": 170,
+          "bottom": 81
+        },
+        "mark": {
+          "x": 37,
+          "y": 38.5,
+          "width": 38,
+          "height": 38,
+          "right": 75,
+          "bottom": 76.5
+        },
+        "label": {
+          "x": 87,
+          "y": 37,
+          "width": 80,
+          "height": 41,
+          "right": 167,
+          "bottom": 78
+        },
+        "name": {
+          "x": 87,
+          "y": 37,
+          "width": 80,
+          "height": 24,
+          "right": 167,
+          "bottom": 61
+        },
+        "domain": {
+          "x": 87,
+          "y": 64,
+          "width": 80,
+          "height": 14,
+          "right": 167,
+          "bottom": 78
+        },
+        "link": {
+          "x": 30,
+          "y": 30,
+          "width": 144,
+          "height": 55,
+          "right": 174,
+          "bottom": 85
+        },
+        "href": "/",
+        "text": "ボボバイ"
+      },
+      "errors": [],
+      "network": [],
+      "assets": []
+    },
+    {
+      "name": "admin-ja-320",
+      "width": 320,
+      "locale": "ja-JP",
+      "geometry": {
+        "logo": {
+          "x": 68,
+          "y": 12.203125,
+          "width": 120,
+          "height": 44.59375,
+          "right": 188,
+          "bottom": 56.796875
+        },
+        "mark": {
+          "x": 71,
+          "y": 18.5,
+          "width": 32,
+          "height": 32,
+          "right": 103,
+          "bottom": 50.5
+        },
+        "label": {
+          "x": 113,
+          "y": 15.203125,
+          "width": 72,
+          "height": 38.59375,
+          "right": 185,
+          "bottom": 53.796875
+        },
+        "name": {
+          "x": 113,
+          "y": 15.203125,
+          "width": 72,
+          "height": 21.59375,
+          "right": 185,
+          "bottom": 36.796875
+        },
+        "domain": {
+          "x": 113,
+          "y": 39.796875,
+          "width": 72,
+          "height": 14,
+          "right": 185,
+          "bottom": 53.796875
+        },
+        "link": {
+          "x": 68,
+          "y": 12.203125,
+          "width": 120,
+          "height": 44.59375,
+          "right": 188,
+          "bottom": 56.796875
+        },
+        "href": "/admin",
+        "text": "ボボバイ"
+      },
+      "errors": [],
+      "network": [],
+      "assets": []
+    },
+    {
+      "name": "locale-en-US",
+      "width": 1440,
+      "locale": "en-US",
+      "geometry": {
+        "logo": {
+          "x": 34,
+          "y": 34,
+          "width": 120.453125,
+          "height": 47,
+          "right": 154.453125,
+          "bottom": 81
+        },
+        "mark": {
+          "x": 37,
+          "y": 38.5,
+          "width": 38,
+          "height": 38,
+          "right": 75,
+          "bottom": 76.5
+        },
+        "label": {
+          "x": 87,
+          "y": 37,
+          "width": 64.453125,
+          "height": 41,
+          "right": 151.453125,
+          "bottom": 78
+        },
+        "name": {
+          "x": 87,
+          "y": 37,
+          "width": 64.453125,
+          "height": 24,
+          "right": 151.453125,
+          "bottom": 61
+        },
+        "domain": {
+          "x": 87,
+          "y": 64,
+          "width": 64.453125,
+          "height": 14,
+          "right": 151.453125,
+          "bottom": 78
+        },
+        "link": {
+          "x": 30,
+          "y": 30,
+          "width": 128.453125,
+          "height": 55,
+          "right": 158.453125,
+          "bottom": 85
+        },
+        "href": "/",
+        "text": "BoBuy"
+      },
+      "errors": [],
+      "network": [],
+      "assets": []
+    }
+  ]
+}
