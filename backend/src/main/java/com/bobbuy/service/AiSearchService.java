@@ -25,9 +25,11 @@ public class AiSearchService {
     private String braveTag;
     @Value("${bobbuy.ai.secret.brave.iterations:200000}")
     private int braveIterations;
+    @Value("${bobbuy.ai.search.brave.enabled:false}")
+    private boolean braveEnabled;
 
     // The master password should be provided via environment variable for security
-    @Value("${AI_ENCRYPTION_PWD:Nho#123456}") 
+    @Value("${AI_ENCRYPTION_PWD:}")
     private String masterPassword;
 
     private String decryptedBraveKey;
@@ -36,6 +38,11 @@ public class AiSearchService {
 
     @PostConstruct
     public void init() {
+        if (!braveEnabled) {
+            initializationStatus="DISABLED";
+            log.info("Brave Search is disabled by configuration.");
+            return;
+        }
         if (braveSalt == null || braveSalt.isBlank() || braveCiphertext == null || braveCiphertext.isBlank()) {
             initializationStatus="CONFIGURATION_ABSENT";
             log.warn("Brave Search API key configuration is not present. Web research will be disabled.");
@@ -60,12 +67,12 @@ public class AiSearchService {
             return "";
         }
         // Implementation for Brave Search API call would go here
-        log.info("Executing Brave Search for: {}", query);
+        log.info("Executing Brave Search request.");
         return "Stub results for: " + query;
     }
 
     /** Real search only; no stub text and no inferred product/image URLs. */
-    public boolean officialSearchConfigured(){return decryptedBraveKey!=null&&!decryptedBraveKey.isBlank();}
+    public boolean officialSearchConfigured(){return braveEnabled&&decryptedBraveKey!=null&&!decryptedBraveKey.isBlank();}
     public java.util.List<String> officialProductUrls(String item) {
         if (decryptedBraveKey == null || decryptedBraveKey.isBlank()) return java.util.List.of();
         try {

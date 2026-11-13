@@ -18,7 +18,7 @@ class ExistingAiConnectionManualTest {
   var events=new ch.qos.logback.core.read.ListAppender<ch.qos.logback.classic.spi.ILoggingEvent>();events.start();
   ((ch.qos.logback.classic.Logger)LoggerFactory.getLogger(LlmGateway.class)).addAppender(events);
   var g=new LlmGateway(new ObjectMapper(),value("BOBBUY_AI_LLM_MAIN_URL",""),value("BOBBUY_AI_LLM_MAIN_MODEL","qwen2.5:7b"),value("BOBBUY_AI_LLM_MAIN_PROVIDER","auto"),"",30,
-   value("BOBBUY_AI_LLM_CODEX_BRIDGE_URL",""),value("BOBBUY_AI_LLM_CODEX_BRIDGE_MODEL","gpt-5.3-codex"),value("BOBBUY_AI_LLM_CODEX_BRIDGE_API_KEY",""),45,
+   value("BOBBUY_AI_LLM_CODEX_BRIDGE_URL",""),value("BOBBUY_AI_LLM_CODEX_BRIDGE_MODEL","gpt-6.1-terra"),value("BOBBUY_AI_LLM_CODEX_BRIDGE_API_KEY",""),45,
    value("BOBBUY_AI_LLM_CODEX_BRIDGE_SECRET_SALT",""),value("BOBBUY_AI_LLM_CODEX_BRIDGE_SECRET_NONCE",""),value("BOBBUY_AI_LLM_CODEX_BRIDGE_SECRET_CIPHERTEXT",""),value("BOBBUY_AI_LLM_CODEX_BRIDGE_SECRET_TAG",""),
    Integer.parseInt(value("BOBBUY_AI_LLM_CODEX_BRIDGE_SECRET_ITERATIONS","200000")),value("BOBBUY_AI_SECRET_MASTER_PASSWORD",""),3,value("BOBBUY_AI_LLM_EDGE_URL",""),value("BOBBUY_AI_LLM_EDGE_MODEL","llama3.2-vision:11b"),"");
   g.initializeMainProvider();

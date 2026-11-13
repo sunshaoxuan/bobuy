@@ -12,7 +12,7 @@ bobbuy:
         timeout-seconds: ${BOBBUY_AI_LLM_CODEX_TIMEOUT_SECONDS:120}
       codex-bridge:
         url: ${BOBBUY_AI_LLM_CODEX_BRIDGE_URL:}
-        model: ${BOBBUY_AI_LLM_CODEX_BRIDGE_MODEL:gpt-5.3-codex}
+        model: ${BOBBUY_AI_LLM_CODEX_BRIDGE_MODEL:gpt-6.1-terra}
         api-key: ${BOBBUY_AI_LLM_CODEX_BRIDGE_API_KEY:}
         timeout-seconds: ${BOBBUY_AI_LLM_CODEX_BRIDGE_TIMEOUT_SECONDS:120}
         secret:
@@ -23,6 +23,9 @@ bobbuy:
           iterations: ${BOBBUY_AI_LLM_CODEX_BRIDGE_SECRET_ITERATIONS:200000}
       ollama:
         health-timeout-seconds: ${BOBBUY_AI_LLM_OLLAMA_HEALTH_TIMEOUT_SECONDS:3}
+    search:
+      brave:
+        enabled: ${BOBBUY_AI_SEARCH_BRAVE_ENABLED:false}
       edge:
         url: ${BOBBUY_AI_LLM_EDGE_URL:}
         model: ${BOBBUY_AI_LLM_EDGE_MODEL:llama3.2-vision:11b}
