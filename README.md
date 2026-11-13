@@ -79,12 +79,12 @@ BOBBuy 当前是一套以 **Spring Boot + React + PostgreSQL/MinIO + WebSocket(S
 
 ## 快速开始
 
-1. 复制部署模板并填写必改项：
-   ```bash
-   cd /home/runner/work/bobbuy/bobbuy
-   cp .env.template .env
-   ```
-2. 至少修改：
+敏感的本地配置不再以明文提交。首次运行或需要更新密文时，先按
+[本地敏感配置管理（SOPS + age）](docs/secrets-management.md) 安装工具、配置本机
+私钥并执行解密脚本。生产服务器 `/opt/bobuy/.env` 与既有部署流程不受影响。
+
+1. 按上述敏感配置管理文档解密本机配置；首次创建配置时可复制 `.env.example`，再仅在本机填写必改项。
+2. 至少配置：
     - `BOBBUY_SECURITY_JWT_SECRET`
     - `BOBBUY_SECURITY_SERVICE_TOKEN`
     - `POSTGRES_PASSWORD`
