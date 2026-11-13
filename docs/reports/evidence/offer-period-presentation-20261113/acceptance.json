@@ -1,0 +1,13 @@
+{
+  "source": "217a48681d32ece463e26ee4e096e2ded25f66ec",
+  "result": "PASS",
+  "scope": "Right-expanding current offer hint and friendly product-detail period wording only",
+  "tests": "10 final marker tests passed; 34 direct catalog/marker editing tests reused with unchanged relevant inputs. Current/future/expired/end-boundary, cross-year, exact time, cached reopening and failure retry covered.",
+  "build": "Final necessary frontend build and native exact-source CI passed",
+  "functional": "Actual 1440/320 pages: hint opens, reads only on first opening, successful facts cached, focus and touch work without opening detail or writing counters. Direct detail URL shows identical everyday wording. Unknown/failed/long synthetic cases are separately recorded.",
+  "currentOnly": "PROMOTION + promotion + ACTIVE + startsAt <= now < endsAt. Historical and future periods excluded, no invented dates.",
+  "geometry": "Final alignment.json uses stable marked-section element handles, confirms rightTop hint does not overlap card metadata and remains inside viewport. Native screenshot glyph margins >=8px and gap to badge12px, using declared background shape and actual foreground pixels.",
+  "visual": "Primary agent inspected final overall/native screenshots and final Gemini 3.8 Flash High review confirms no remaining changed-area defect. Earlier overlap findings were fixed and those alignment conclusions invalidated.",
+  "network": "Final alignment real views have no failed requests. Earlier single local image client failure retained; same-browser single-image retry returned200. Intentional503 is confined to labeled synthetic failure case. Production must have zero errors.",
+  "preserved": "Current logo/name layout, top-right heat, prices, dates and business data"
+}

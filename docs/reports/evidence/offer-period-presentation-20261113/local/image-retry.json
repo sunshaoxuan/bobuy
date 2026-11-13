@@ -1,0 +1,8 @@
+[
+  {
+    "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/33f52f13-2140-452c-a0d7-f431c84ae729",
+    "status": 200,
+    "bytes": 3221183,
+    "method": "same browser navigation, single previously failed image URL"
+  }
+]

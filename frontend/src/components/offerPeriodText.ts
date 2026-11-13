@@ -1,4 +1,5 @@
-import type {PublicReferencePrice} from '../api';
+import type {PriceChangeView} from '../api';
+export type OfferPeriodSource=Pick<PriceChangeView,'documentId'|'type'|'promotion'|'state'|'startsAt'|'endsAt'>;
 import type {Locale} from '../i18n';
 
 export const offerPeriodCopy = {
@@ -11,10 +12,10 @@ const partsFormat=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Tokyo',year:'n
 function parts(at:number){return Object.fromEntries(partsFormat.formatToParts(at).map(p=>[p.type,p.value]));}
 function midnight(at:number){const p=parts(at);return p.hour==='00'&&p.minute==='00'&&p.second==='00'&&at%1000===0;}
 
-export function currentOfferPeriods(prices:PublicReferencePrice[],locale:Locale,now=Date.now()):string[]{
+export function currentOfferPeriods(prices:OfferPeriodSource[],locale:Locale,now=Date.now()):string[]{
   const copy=offerPeriodCopy[locale],currentYear=parts(now).year;
-  return [...new Set(prices.filter(p=>p.type==='PROMOTION'&&p.promotion&&p.state==='ACTIVE'&&Number.isFinite(Date.parse(p.startsAt))&&!!p.endsAt&&Date.parse(p.startsAt)<=now&&now<Date.parse(p.endsAt)).map(p=>{
-    const start=Date.parse(p.startsAt),end=Date.parse(p.endsAt!),allDay=midnight(start)&&midnight(end),last=allDay?end-1:end;
+  return [...new Set(prices.filter(p=>p.type==='PROMOTION'&&p.promotion&&p.state==='ACTIVE'&&Number.isFinite(Date.parse(p.startsAt??''))&&!!p.endsAt&&Date.parse(p.startsAt??'')<=now&&now<Date.parse(p.endsAt)).map(p=>{
+    const start=Date.parse(p.startsAt??''),end=Date.parse(p.endsAt!),allDay=midnight(start)&&midnight(end),last=allDay?end-1:end;
     const year=parts(start).year!==parts(last).year||parts(start).year!==currentYear;
     const date=new Intl.DateTimeFormat(locale,{timeZone:'Asia/Tokyo',...(year?{year:'numeric' as const}:{}),month:locale==='en-US'?'short':'long',day:'numeric'});
     const time=(at:number)=>new Intl.DateTimeFormat(locale,{timeZone:'Asia/Tokyo',hour:'numeric',minute:'2-digit',...(parts(at).second!=='00'?{second:'2-digit' as const}:{}),hourCycle:'h23'}).format(at);

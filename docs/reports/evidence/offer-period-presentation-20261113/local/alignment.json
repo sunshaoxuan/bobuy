@@ -1,0 +1,83 @@
+[
+  {
+    "width": 1440,
+    "synthetic": false,
+    "text": "优惠期间：\n11月4日至11月15日",
+    "geometry": {
+      "x": 333,
+      "y": 219,
+      "width": 148.828125,
+      "height": 70.78125,
+      "right": 481.828125,
+      "bottom": 289.78125
+    },
+    "badgeBox": {
+      "x": 291,
+      "y": 219.59375,
+      "width": 30,
+      "height": 30
+    },
+    "header": {
+      "x": 283,
+      "y": 177.59375,
+      "width": 192.390625,
+      "height": 28
+    },
+    "network": [],
+    "result": "PASS"
+  },
+  {
+    "width": 320,
+    "synthetic": false,
+    "text": "优惠期间：\n11月9日至11月22日",
+    "geometry": {
+      "x": 225,
+      "y": 220,
+      "width": 91,
+      "height": 79.5625,
+      "right": 316,
+      "bottom": 299.5625
+    },
+    "badgeBox": {
+      "x": 183,
+      "y": 220.09375,
+      "width": 30,
+      "height": 30
+    },
+    "header": {
+      "x": 175,
+      "y": 178.09375,
+      "width": 120,
+      "height": 28
+    },
+    "network": [],
+    "result": "PASS"
+  },
+  {
+    "width": 320,
+    "synthetic": true,
+    "text": "优惠期间：\n2024年1月2日至2027年12月30日\n2025年1月2日至2028年12月30日\n2026年1月2日至2029年12月30日",
+    "geometry": {
+      "x": 225,
+      "y": 220,
+      "width": 91,
+      "height": 279.4375,
+      "right": 316,
+      "bottom": 499.4375
+    },
+    "badgeBox": {
+      "x": 183,
+      "y": 220.09375,
+      "width": 30,
+      "height": 30
+    },
+    "header": {
+      "x": 175,
+      "y": 178.09375,
+      "width": 120,
+      "height": 28
+    },
+    "network": [],
+    "result": "PASS"
+  }
+]

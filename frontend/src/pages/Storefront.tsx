@@ -12,6 +12,8 @@ import { getStoredAccessToken, storeAuthSession } from '../authStorage';
 import { useUserRole } from '../context/UserRoleContext';
 import {cartScope,changeQuantity,emptyCart,readDraft,withCartLock,type Cart} from '../cart';
 import {useCartDraft} from '../useCartDraft';
+import {useReadRecovery} from '../hooks/useReadRecovery';
+import {isRecoverableReadError} from '../readRecovery';
 import CheckoutAddress from './CheckoutAddress';
 import ProtectedRoute from '../components/ProtectedRoute';
 
@@ -112,6 +114,9 @@ export default function Storefront() {
   const [cartConfirmationOpen,setCartConfirmationOpen] = useState(false);
   const [publicNodes,setPublicNodes] = useState<{id:number;name:string}[]>();
   const [nodeNameError,setNodeNameError]=useState(false);
+  const failedReads=useRef(new Set<string>()),readsInFlight=useRef(new Map<string,number>());
+  const [nodeAttempt,setNodeAttempt]=useState(0);
+  function readFailed(key:string,error:unknown){if(isRecoverableReadError(error))failedReads.current.add(key);else failedReads.current.delete(key);setError(t((error as Error).message));}
   const needsNodeNames=node!==undefined||navigationOpen;
   const [privateNodes,setPrivateNodes]=useState<{userId?:number;ids:number[]}>({ids:[]});
   const scope=authLoading?null:cartScope(isAuthenticated?user?.id:undefined);
@@ -144,19 +149,21 @@ export default function Storefront() {
   const visibleReceipt=receipt?.identity===sessionIdentity?receipt:undefined;
   useEffect(()=>{setBusy(false);setReceipt(undefined);setError('');setDetail(undefined);setQuantityProduct(undefined);setAddressReady(undefined);},[sessionIdentity]);
   async function load() {
-    const generation=++bookableGeneration.current;setError('');setTripsReady(false);
-    try {const nextTrips=await storefrontApi.trips();if(!contextLife.current||generation!==bookableGeneration.current)return;setTrips(nextTrips);setTripsReady(true);const preferred=nextTrips.find(value=>currentNode.current===undefined||value.merchantId===currentNode.current);setCart(prior=>prior.tripId===null&&preferred?{...prior,tripId:preferred.id}:prior);}catch(error){if(contextLife.current&&generation===bookableGeneration.current)setError(t((error as Error).message));}
+    if(readsInFlight.current.get('trips')===bookableGeneration.current)return;failedReads.current.delete('trips');
+    const generation=++bookableGeneration.current;readsInFlight.current.set('trips',generation);setError('');setTripsReady(false);
+    try {const nextTrips=await storefrontApi.trips();if(!contextLife.current||generation!==bookableGeneration.current)return;setTrips(nextTrips);setTripsReady(true);const preferred=nextTrips.find(value=>currentNode.current===undefined||value.merchantId===currentNode.current);setCart(prior=>prior.tripId===null&&preferred?{...prior,tripId:preferred.id}:prior);}catch(error){if(contextLife.current&&generation===bookableGeneration.current)readFailed('trips',error);}finally{if(readsInFlight.current.get('trips')===generation)readsInFlight.current.delete('trips');}
   }
-  async function loadActive(){const generation=++activeGeneration.current;setLoading(true);setBrowseLoaded(false);try{const values=await storefrontApi.activeTrips();if(contextLife.current&&generation===activeGeneration.current){setActiveTrips(values);setBrowseLoaded(true);}}catch(error){if(contextLife.current&&generation===activeGeneration.current)setError(t((error as Error).message));}finally{if(contextLife.current&&generation===activeGeneration.current)setLoading(false);}}
+  async function loadActive(){if(readsInFlight.current.get('active')===activeGeneration.current)return;failedReads.current.delete('active');const generation=++activeGeneration.current;readsInFlight.current.set('active',generation);setLoading(true);setBrowseLoaded(false);try{const values=await storefrontApi.activeTrips();if(contextLife.current&&generation===activeGeneration.current){setActiveTrips(values);setBrowseLoaded(true);}}catch(error){if(contextLife.current&&generation===activeGeneration.current)readFailed('active',error);}finally{if(readsInFlight.current.get('active')===generation)readsInFlight.current.delete('active');if(contextLife.current&&generation===activeGeneration.current)setLoading(false);}}
+  useReadRecovery(async()=>{setError('');const failed=new Set(failedReads.current);if(failed.has('nodes'))setNodeAttempt(value=>value+1);if(failed.has('cart')&&needsCart)setCartPriceAttempt(value=>value+1);await Promise.all([failed.has('trips')?load():undefined,failed.has('active')?loadActive():undefined]);},shoppingContext&&!busy&&failedReads.current.size>0,JSON.stringify([sessionIdentity,location.pathname,node]));
   useEffect(()=>{if(shoppingContext){void load();void loadActive();}},[shoppingContext]);
-  useEffect(()=>{if(!needsNodeNames||publicNodes!==undefined)return;let active=true;setNodeNameError(false);void recommendationApi.nodes().then(values=>{if(active)setPublicNodes(values);}).catch(error=>{if(active){setNodeNameError(true);setError(t(error.message));}});return()=>{active=false;};},[needsNodeNames]);
+  useEffect(()=>{if(!needsNodeNames||publicNodes!==undefined)return;let active=true;failedReads.current.delete('nodes');setNodeNameError(false);void recommendationApi.nodes().then(values=>{if(active)setPublicNodes(values);}).catch(error=>{if(active){setNodeNameError(true);readFailed('nodes',error);}});return()=>{active=false;};},[needsNodeNames,nodeAttempt]);
   const nameChoices=new Map([...trips,...activeTrips].map(value=>[value.merchantId,value.merchantName]));
   publicNodes?.forEach(value=>nameChoices.set(value.id,value.name||t('browse.node_number',{id:value.id})));
   const merchantName=(journey:StoreTrip)=>nameChoices.get(journey.merchantId)??journey.merchantName;
   const nodes=[...nameChoices].map(([id,name])=>({id,name}));
   const visibleNodes=[...nodes,...(privateNodes.userId===user?.id?privateNodes.ids:[]).filter(id=>!nodes.some(value=>value.id===id)).map(id=>({id,name:t('browse.node_number',{id})}))];
   const cartIds=JSON.stringify(Object.keys(cart.items).sort());
-  useEffect(()=>{if(!needsCart)return;let active=true;setCartPricesReady(false);const ids=JSON.parse(cartIds) as string[];void (async()=>{const values:StoreProduct[]=[];for(let offset=0;offset<ids.length;offset+=24)values.push(...await storefrontApi.productSales(ids.slice(offset,offset+24)));if(active){setProducts(previous=>[...previous.filter(value=>!ids.includes(value.id)),...values]);setCartPricesReady(true);}})().catch(error=>{if(active)setError(t(error.message));});return()=>{active=false;};},[needsCart,cartIds,authKey,cartPriceAttempt]);
+  useEffect(()=>{if(!needsCart)return;let active=true;failedReads.current.delete('cart');setCartPricesReady(false);const ids=JSON.parse(cartIds) as string[];void (async()=>{const values:StoreProduct[]=[];for(let offset=0;offset<ids.length;offset+=24)values.push(...await storefrontApi.productSales(ids.slice(offset,offset+24)));if(active){setProducts(previous=>[...previous.filter(value=>!ids.includes(value.id)),...values]);setCartPricesReady(true);}})().catch(error=>{if(active)readFailed('cart',error);});return()=>{active=false;};},[needsCart,cartIds,authKey,cartPriceAttempt]);
   useEffect(()=>{setDetail(prior=>prior?products.find(p=>p.id===prior.id):prior);setQuantityProduct(prior=>prior?products.find(p=>p.id===prior.id):prior);},[products]);
   useEffect(()=>{
     const now=Date.now(),boundaries=products.map(p=>Date.parse(p.priceValidUntil??'')).filter(value=>Number.isFinite(value)&&value>now);
@@ -262,7 +269,7 @@ export default function Storefront() {
   </section>;
   const rootCatalog=<><section className="journey-strip"><button className="journey-trigger" onClick={()=>setTripPicker(true)} aria-label={t('store.choose_trip')}><CalendarOutlined/><span><small>{viewTrip?viewTrip.deliveryDate+' · '+merchantName(viewTrip):t('store.trip')}</small><strong>{viewTrip?viewTrip.deliveryArea:t('store.no_trips')}</strong></span><ArrowRightOutlined/></button></section><PublicProductCatalog query={search} products={products} quantities={cart.items} onAdd={configureQuantity} canBuy={canBuyRootProduct} merchantId={node??viewTrip?.merchantId} purchasePending={!tripsReady||authLoading} onSales={receiveSales} autoPaused={navigationOpen||tripPicker||!!detail||!!quantityProduct||cartConfirmationOpen}/></>;
   const maintenance=isMaintenanceError(error);
-  const retryBrowse=()=>{setError('');void load();void loadActive();setCartPriceAttempt(value=>value+1);};
+  const retryBrowse=()=>{setError('');void load();void loadActive();setCartPriceAttempt(value=>value+1);setNodeAttempt(value=>value+1);};
   return <div className={`storefront browse-shell ${(location.pathname === '/' || location.pathname === '/products' || location.pathname.startsWith('/recommendations')) ? 'storefront-catalog' : ''}`}>
     <StoreNavigation nodes={visibleNodes} node={node} loading={loading} homePath={homeNavigationPath} open={navigationOpen} onClose={()=>setNavigationOpen(false)} onNodeChange={changeNode}/>
     <div className="browse-workspace"><header className="store-header"><div className="browse-context"><Button className="browse-menu-toggle" icon={<MenuOutlined/>} aria-label={t('app.open_menu')} aria-expanded={navigationOpen} onClick={()=>setNavigationOpen(value=>!value)}/><Link className="browse-mobile-brand" to={scopedPath('/',location.search)}><strong>{t('app.brand')}</strong><span className="browse-brand-domain">bobuy.cc</span></Link><span className="browse-context-node">{node===undefined?t('browse.all_nodes'):visibleNodes.find(value=>value.id===node)?.name??t(needsNodeNames&&publicNodes===undefined&&!nodeNameError?'browse.node_loading':'browse.unavailable_node')}</span></div>

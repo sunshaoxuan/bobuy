@@ -1,4 +1,5 @@
 import { message } from 'antd';
+import { retryRead, ReadRequestError, isTransientReadStatus } from './readRecovery';
 import { prepareImageUpload } from './imageUpload';
 import type {RecommendationIssueDateReview,RecommendationIssueDateRequest} from './components/RecommendationIssueDateEditor';
 export type {RecommendationIssueDateReview,RecommendationIssueDateRequest} from './components/RecommendationIssueDateEditor';
@@ -1497,7 +1498,7 @@ export const api = {
 };
 
 export type StoreTrip = { id: number; merchantId: number; merchantName: string; deliveryArea: string; deliveryDate: string };
-export type StoreProduct = { id: string; merchantId: number; name: Record<string, string>; description: Record<string, string>; brand: string; price: number; categoryId: string; images: string[]; recommendationReady?:boolean;currency?:string;saleUnit?:string;priceRevision?:number;priceToken?:string;regularPrice?:number;priceAdjustmentId?:number;priceValidFrom?:string;priceValidUntil?:string };
+export type StoreProduct = { id: string; merchantId: number; name: Record<string, string>; description: Record<string, string>; brand: string; price: number; categoryId: string; images: string[]; recommendationReady?:boolean;currency?:string;saleUnit?:string;priceRevision?:number;priceToken?:string;regularPrice?:number;priceAdjustmentId?:number;priceValidFrom?:string;priceValidUntil?:string;priceChange?:PriceChangeView|null };
 export type PublicReferencePrice={documentId:number;documentNumber:string;channel:string;currency:string;unit:string;amount:number;regularAmount:number|null;promotion:boolean;startsAt:string;endsAt:string|null;type:PriceChangeView['type'];state:string};
 export type PublicCatalogEntry = {rating?:number|null;introduction?:Record<string,string>;referencePrices?:PublicReferencePrice[];
     productId:string; merchantId:number; name:Record<string,string>; description:Record<string,string>;
@@ -1509,10 +1510,12 @@ export type PublicCatalogPage = {items:PublicCatalogEntry[];page:number;size:num
 export type MerchantCustomer = { customerId: number; name: string; emailVerified: boolean; merchantApproved: boolean; approvedAt?: string };
 async function storeGet<T>(path: string): Promise<T> {
     const publicRead=path.startsWith('/api/storefront/');
-    const response = await authorizedFetch(path, publicRead?{cache:'no-store'}:undefined, { retryOnUnauthorized: !publicRead });
+    const response = publicRead
+        ? await retryRead(signal => authorizedFetch(path, { cache: 'no-store', signal }, { retryOnUnauthorized: false }))
+        : await authorizedFetch(path);
     if (response.status===409) {const body=await response.clone().json().catch(()=>({}));if(body.errorCode==='BROWSE_CHANGED')throw new Error('browse.changed');}
     if(response.status===400&&/\/api\/storefront\/(product-browse|recommendation-browse|product-sales)/.test(path))throw new Error('browse.invalid');
-    if (!response.ok) throw new Error(await parseErrorMessage(response));
+    if (!response.ok) throw new ReadRequestError(await parseErrorMessage(response), publicRead && isTransientReadStatus(response.status));
     return parseSuccessPayload<T>(response);
 }
 export type ProductMarkerColor = 'red'|'orange'|'gold'|'green'|'blue'|'purple'|'gray';
@@ -1559,7 +1562,7 @@ export type BrowseQuery={sort?:string;page?:number;merchantId?:number;query?:str
 function browseQuery(query:BrowseQuery){return new URLSearchParams(Object.entries(query).filter(([,value])=>value!==undefined).map(([key,value])=>[key,String(value)]));}
 export type BrowseFacet=RecommendationLabel&{count:number};
 export type BrowsePage<T>={items:T[];page:number;size:number;scopeTotal:number;matchedTotal:number;hasNext:boolean;revision:string;datasetRevision:string;categories:BrowseFacet[];unclassified:number;markedScopeTotal?:number;japanDay?:string;productOccurrences?:number;serviceCards?:number};
-export type CardReference={originalPrice?:number|null;discountAmount?:number|null;amount:number;currency:string;unit?:string|null;postId:number;itemId:number;state:'ACTIVE'|'EXPIRED'|'FUTURE'|'UNKNOWN'};
+export type CardReference={priceChange?:PriceChangeView|null;originalPrice?:number|null;discountAmount?:number|null;amount:number;currency:string;unit?:string|null;postId:number;itemId:number;state:'ACTIVE'|'EXPIRED'|'FUTURE'|'UNKNOWN'};
 export type ProductBrowseCard=Omit<PublicCatalogEntry,'gallery'|'description'|'referenceOffers'>&{image:RecommendationPicture|null;markers:ProductMarkerDefinition[];reference?:CardReference|null};
 export type RecommendationBrowseItem=Omit<RecommendationItem,'imageUrl'|'gallery'|'description'|'sourceFacts'>&{image:RecommendationPicture|null;rating?:number|null};
 export type ServiceBrowseCard=Pick<ServiceOffer,'provider'|'staff'|'hours'|'originalPrice'|'price'|'currency'|'taxIncluded'|'fees'|'noExtraFees'|'applicationStart'|'applicationEnd'|'serviceStart'|'serviceEnd'|'basis'|'packages'>;

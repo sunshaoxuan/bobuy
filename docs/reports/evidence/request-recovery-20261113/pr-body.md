@@ -1,0 +1,5 @@
+Public storefront reads currently leave an error after a transient connection or service failure. Add at most two retries for network failures and transient HTTP responses, plus recovery of failed mounted reads when connectivity or foreground visibility returns.
+
+Recovery preserves loaded pagination, cart state and current identity. Only public storefront GETs use the transport retry policy. Checkout POSTs and existing checkout request IDs, locks and authentication behavior retain their current rules.
+
+Validation: 115 relevant tests passed, including no checkout replay after uncertain failure, identity isolation, bounded retries, event coalescing and pagination recovery. Production frontend build passed. Actual Chrome desktop and 390px checks passed with browser-only network fault injection and zero business writes. Existing mobile navigation translucency is documented against the unchanged production baseline. Release scope is frontend only, with exact assets and compatible frontend rollback.

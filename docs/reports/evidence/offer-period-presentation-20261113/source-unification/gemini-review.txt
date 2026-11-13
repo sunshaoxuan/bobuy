@@ -1,0 +1,43 @@
+### 1. Concrete Defects, Doubts & Missing Evidence
+
+* **Defect 1: Content clipping & missing scroll clearance at bottom (Desktop 1440 - Image 1)**
+  * The bottom border and padding of the "商品明细" section card are clipped directly behind the sticky bottom footer. The scroll container lacks sufficient `padding-bottom` (footer clearance), cutting off the card container boundary.
+* **Defect 2: Harsh scroll cutoff / header separation seam (Mobile 320 - Image 4)**
+  * When scrolled, content from the top section (`JPY` dropdown and card container) is abruptly sliced in half directly below the sticky title bar without a bottom border, elevation shadow, or backdrop mask to cleanly separate fixed vs. scrolled content.
+* **Doubt: Mobile Touch Targets < 44px (Mobile 320 - Images 2, 3, 4)**
+  * Buttons ("新增调价单", "刷新", "编辑", "审核生效", "撤销", and footer "关闭"/"保存草稿") visually scale to ~32px–38px in height, falling short of the recommended 44px minimum tap target standard for mobile touch accessibility.
+* **Missing Evidence:**
+  * No evidence of behavior when virtual keyboard is raised on 320px (potential obscuring by sticky footer).
+  * No evidence of inline error/validation message presentation when required fields fail validation.
+
+---
+
+### 2. Image-by-Image Judgment
+
+#### Image 1: Desktop 1440 — Editor Drawer (`新增调价单`)
+* **Hierarchy & Spacing:** Clear card-based hierarchy, consistent vertical rhythm between form groups, 3-column layout under "商品明细" fits cleanly without crowding.
+* **Boundaries & Layout:** Title bar and close button ("✕") are correctly anchored. No horizontal overflow.
+* **Verdict: Conditionally Accepted (Minor Defect).** The bottom-most card is truncated by the sticky footer bar; needs bottom scroll padding so the entire card boundary and corner radii remain visible when scrolled to the end.
+
+#### Image 2: Mobile 320 — List View (`调价单`)
+* **Hierarchy & Readability:** Excellent typographic handling under extreme 320px constraint. The large synthetic price (`JPY ¥999,999,999 / 200g×2个/一组`) wraps cleanly without breaking bounds or overflowing horizontally.
+* **Cards & Corners:** Card boundaries, badges ("草稿/待复核"), and border radii are intact.
+* **Verdict: Accepted.** (Note: Action buttons "编辑 / 审核生效 / 撤销" appear under 44px height, but functional layout and boundaries are stable).
+
+#### Image 3: Mobile 320 — Editor Drawer Top View (`新增调价单`)
+* **Hierarchy & Spacing:** Single-column layout stacks properly. Inputs, selects, and textareas respect container margins with no horizontal overflow.
+* **Controls & Grouping:** Sticky header and sticky footer buttons ("关闭", "保存草稿") are grouped predictably.
+* **Verdict: Accepted.** Baseline rendering and spacing before scrolling are solid.
+
+#### Image 4: Mobile 320 — Editor Drawer Scrolled View (`新增调价单`)
+* **Hierarchy & Spacing:** Product detail fields ("调整后价格", "调价前常规价", "计价单位") stack properly in single column with intact bottom card boundaries.
+* **Scroll Boundary Defect:** Under the sticky header, previous card elements (the `JPY` field) are sharply sliced across the canvas, indicating an unstyled/unpadded scroll junction.
+* **Verdict: Needs Fix (Blocking).** Add a dividing border or background fill/shadow under the sticky header to prevent clipped inputs from bleeding directly against the header baseline.
+
+---
+
+### 3. Actionable Blocking Fixes for UI Acceptance
+
+1. **Header Scroll Divider (Mobile):** Add a subtle bottom border or shadow to the sticky drawer header container so scrolling elements do not look severed at the boundary.
+2. **Scroll Container Padding (Desktop & Mobile):** Add bottom padding equal to or greater than the footer height (e.g., `pb-20` / `padding-bottom: 80px`) on the drawer body so the final card’s bottom border and spacing are fully visible above the sticky footer.
+3. **Mobile Touch Heights:** Increase mobile button and interactive control heights to `min-height: 44px` on narrow screens to meet touch target standards.

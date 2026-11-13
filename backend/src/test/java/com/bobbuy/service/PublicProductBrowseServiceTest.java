@@ -22,6 +22,13 @@ class PublicProductBrowseServiceTest {
   facts.referencePrice=new java.math.BigDecimal("999999999999.99");assertThatThrownBy(()->service.browse(1,null,"","","en-US",false,before.revision())).isInstanceOf(PublicProductBrowseService.Changed.class);
   facts.referencePrice=null;facts.priceChange=null;assertThat(service.browse(0,null,"","","en-US",false,null).items().get(0).reference()).isNull();
  }
+ @Test void cardCarriesOnlyItsSelectedPriceDocumentPeriod(){
+  var base=row(0,null);var start=java.time.Instant.now().minusSeconds(3600);var end=start.plusSeconds(7200);
+  var selected=new ReferenceQuoteService.CurrentPrice(42L,"PC-WAREHOUSE","COSTCO_WAREHOUSE","JPY","pack",new java.math.BigDecimal("800"),new java.math.BigDecimal("1000"),true,start,end,"PROMOTION","ACTIVE");
+  var other=new ReferenceQuoteService.CurrentPrice(43L,"PC-ONLINE","COSTCO_ONLINE","JPY","pack",new java.math.BigDecimal("700"),new java.math.BigDecimal("1200"),true,start.minusSeconds(86400),end.plusSeconds(86400),"PROMOTION","ACTIVE");
+  catalog.rows=List.of(new PublicProductCatalogService.Entry(base.productId(),base.merchantId(),base.name(),base.description(),base.brand(),base.itemNumber(),base.specification(),base.model(),base.packaging(),base.gallery(),base.categories(),List.of(),false,null,Map.of(),List.of(selected,other)));
+  var card=service.browse(0,null,"","","en-US",false,null).items().get(0);assertThat(card.reference().amount()).isEqualByComparingTo("800");var source=card.reference().priceChange();assertThat(source.documentId()).isEqualTo(42L);assertThat(source.startsAt()).isEqualTo(start);assertThat(source.endsAt()).isEqualTo(end);assertThat(source.effectiveAmount()).isEqualByComparingTo(card.reference().amount());
+ }
  private static class Catalog extends PublicProductCatalogService {
   List<Entry> rows=List.of();int reads;
   Catalog(){super(null,null,null,null,null,null);}

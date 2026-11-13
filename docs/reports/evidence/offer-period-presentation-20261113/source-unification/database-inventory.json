@@ -1,0 +1,22 @@
+{
+  "flywayLatest": "35",
+  "productPricingColumns": [
+    "base_price",
+    "sale"
+  ],
+  "recommendationOfferColumns": [
+    "coupon_start",
+    "coupon_end",
+    "offer_notes",
+    "offer_identity"
+  ],
+  "productCounts": {
+    "total": 405,
+    "saleNonNull": 0,
+    "saleEnabled": 0,
+    "positiveBase": 0
+  },
+  "saleKeys": null,
+  "legacyAttributeKeys": null,
+  "approvedWebsiteDocuments": 0
+}
