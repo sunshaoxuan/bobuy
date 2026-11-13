@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestClient;
 
 import java.nio.charset.StandardCharsets;
@@ -60,6 +61,10 @@ public class LlmGateway {
     private volatile PinnedModels pinnedModels;
     private volatile HttpClient pinnedHttpClient;
     private final ThreadLocal<Long> pinnedDeadline = new ThreadLocal<>();
+    private volatile CodexBridgeRouter bridgeRouter;
+
+    @Autowired(required = false)
+    void setBridgeRouter(CodexBridgeRouter bridgeRouter) { this.bridgeRouter = bridgeRouter; }
 
     // Edge Node (Local) - Low latency, Vision/OCR
     private final String edgeUrl;
@@ -73,7 +78,7 @@ public class LlmGateway {
                       @Value("${bobbuy.ai.llm.codex.command:codex}") String codexCommand,
                       @Value("${bobbuy.ai.llm.codex.timeout-seconds:120}") long codexTimeoutSeconds,
                       @Value("${bobbuy.ai.llm.codex-bridge.url:}") String codexBridgeUrl,
-                      @Value("${bobbuy.ai.llm.codex-bridge.model:gpt-5.3-codex}") String codexBridgeModel,
+                      @Value("${bobbuy.ai.llm.codex-bridge.model:gpt-6.1-terra}") String codexBridgeModel,
                       @Value("${bobbuy.ai.llm.codex-bridge.api-key:}") String codexBridgeApiKey,
                       @Value("${bobbuy.ai.llm.codex-bridge.timeout-seconds:120}") long codexBridgeTimeoutSeconds,
                       @Value("${bobbuy.ai.llm.codex-bridge.secret.salt:}") String codexBridgeSecretSalt,
@@ -169,12 +174,20 @@ public class LlmGateway {
         }
 
         String prompt = "请将输入文本提取为JSON数组，每个对象包含name, quantity, note字段，只输出JSON数组。输入：" + text;
-        return generate(prompt, mainModel, null).map(response -> {
+        var itemSchema=new JsonSchemaOutputValidator(objectMapper,Map.of("type","array","items",Map.of(
+                "type","object","required",List.of("name","quantity"),"properties",Map.of(
+                "name",Map.of("type","string"),"quantity",Map.of("type","number"),"note",Map.of("type","string")))));
+        Optional<String> generated;
+        if (bridgeRouter != null && bridgeRouter.enabled() && "codex-bridge".equals(resolveActiveMainProvider())) {
+            generated = bridgeRouter.route(BridgeRoutingProperties.Task.BATCH_TEXT, prompt, List.of(), itemSchema::validates)
+                    .map(CodexBridgeRouter.Result::content);
+        } else generated = generate(prompt, mainModel, null);
+        return generated.map(response -> {
             try {
                 List<Map<String, Object>> parsed = objectMapper.readValue(response, new TypeReference<>() {});
                 return parsed == null ? new ArrayList<>() : parsed;
             } catch (Exception e) {
-                log.error("Failed to parse LLM response as JSON: {}", response, e);
+                log.warn("Failed to validate structured LLM response; existing manual review fallback will be used.");
                 return new ArrayList<>();
             }
         });
@@ -196,6 +209,12 @@ public class LlmGateway {
      */
     public Optional<String> generate(String prompt, String targetModel, List<String> base64Images) {
         boolean isVision = (base64Images != null && !base64Images.isEmpty()) || (targetModel != null && targetModel.contains("llava"));
+
+        if (bridgeRouter != null && bridgeRouter.enabled() && "codex-bridge".equals(resolveActiveMainProvider())) {
+            var task = isVision ? BridgeRoutingProperties.Task.VISION_EXTRACTION : BridgeRoutingProperties.Task.TEXT_ANALYSIS;
+            var routed = bridgeRouter.route(task, prompt, base64Images, value -> value != null && !value.isBlank());
+            return routed.map(CodexBridgeRouter.Result::content);
+        }
 
         if(isVision && (edgeUrl==null || edgeUrl.isBlank()) && "codex-bridge".equals(resolveActiveMainProvider())) {
             return generateWithCodexBridge(prompt,targetModel,base64Images);
@@ -257,6 +276,7 @@ public class LlmGateway {
             return Optional.empty();
         }
     }
+
 
     private Optional<String> failoverFromMainEmptyResponse(String prompt, String targetModel, boolean isVision) {
         if (isVision) {
@@ -705,7 +725,7 @@ public class LlmGateway {
         return Optional.empty();
     }
 
-    private Optional<String> resolveCodexBridgeApiKey() {
+    Optional<String> resolveCodexBridgeApiKey() {
         Optional<String> cached = resolvedCodexBridgeApiKey;
         if (cached != null) {
             return cached;
@@ -741,7 +761,7 @@ public class LlmGateway {
             );
             return decrypted == null || decrypted.isBlank() ? Optional.empty() : Optional.of(decrypted);
         } catch (Exception e) {
-            log.error("Failed to decrypt Codex Bridge API key: {}", e.getMessage());
+            log.error("Failed to decrypt Codex Bridge API key.");
             return Optional.empty();
         }
     }

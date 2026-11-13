@@ -4,3 +4,33 @@ server:
 spring:
   application:
     name: bobbuy-backend
+
+bobbuy:
+  ai:
+    search:
+      brave:
+        enabled: ${BOBBUY_AI_SEARCH_BRAVE_ENABLED:false}
+    bridge-routing:
+      enabled: ${BOBBUY_AI_BRIDGE_ROUTING_ENABLED:false}
+      url: ${BOBBUY_AI_LLM_CODEX_BRIDGE_URL:}
+      api-key: ${BOBBUY_AI_LLM_CODEX_BRIDGE_API_KEY:}
+      failure-threshold: ${BOBBUY_AI_BRIDGE_FAILURE_THRESHOLD:2}
+      cooldown: ${BOBBUY_AI_BRIDGE_COOLDOWN:5m}
+      image-generation-enabled: false
+      image-generation-model: ${BOBBUY_AI_IMAGE_GENERATION_MODEL:}
+      routes:
+        VISION_EXTRACTION:
+          - { id: gemini-3.8-flash, timeout: 45s, retries: 1 }
+          - { id: claude-sonnet-5-5-medium, timeout: 60s, retries: 1 }
+          - { id: gpt-6.1-terra, timeout: 60s, retries: 1 }
+          - { id: deepseek-v4-flash-vision-exp, timeout: 45s, retries: 1 }
+        TEXT_ANALYSIS:
+          - { id: claude-sonnet-5-5-medium, timeout: 60s, retries: 1 }
+          - { id: gemini-3.1-pro-low, timeout: 60s, retries: 1 }
+          - { id: gpt-6.1-terra, timeout: 60s, retries: 1 }
+          - { id: deepseek-v4-pro, timeout: 60s, retries: 1 }
+          - { id: "hf.co/unsloth/Qwen3.8-27B-GGUF:UD-IQ3_S", timeout: 90s, retries: 0 }
+        BATCH_TEXT:
+          - { id: gemini-3.8-flash-low, timeout: 30s, retries: 1 }
+          - { id: deepseek-v4-flash, timeout: 30s, retries: 1 }
+          - { id: gpt-6.1-terra, timeout: 45s, retries: 1 }
