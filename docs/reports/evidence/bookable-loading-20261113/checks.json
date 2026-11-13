@@ -1,0 +1,21 @@
+{
+  "base": "63367da",
+  "scope": ["frontend/src/pages/Storefront.tsx", "frontend/src/pages/StorefrontContext.test.tsx"],
+  "tests": {
+    "command": "npm test --prefix frontend -- src/pages/StorefrontContext.test.tsx src/pages/StorefrontCommerce.test.tsx",
+    "result": "PASS",
+    "files": 2,
+    "tests": 35,
+    "durationSeconds": 21.27,
+    "warnings": ["React Router v7 future flags", "Existing useForm fixture warning in commerce test"]
+  },
+  "build": {
+    "command": "npm run build --prefix frontend",
+    "result": "PASS",
+    "checks": ["1697 i18n keys and negative fixture", "TypeScript", "Vite", "home prerender"],
+    "mainAsset": "index-DktI1_4D.js",
+    "mainAssetSha256": "033dad0010b369e94170604edaf2ea20ac418cc474f0463b1624f0b79667237d",
+    "warnings": ["Existing ProcurementHUD and ProductArchive circular chunks"]
+  },
+  "delivery": "Local source candidate only. No push, production activation, schema or business-data changes."
+}

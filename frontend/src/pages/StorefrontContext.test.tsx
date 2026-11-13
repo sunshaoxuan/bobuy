@@ -18,6 +18,24 @@ it('recovers only failed trip metadata after foreground events and preserves the
 });
 function Probe(){const location=useLocation(),navigate=useNavigate();return <><output data-testid="route">{location.pathname+location.search}</output><button onClick={()=>navigate(-1)}>Back</button><button onClick={()=>navigate(1)}>Forward</button></>;}
 function mount(path:string){return render(<I18nProvider><MemoryRouter initialEntries={[path]}><Probe/><Storefront/></MemoryRouter></I18nProvider>);}
+it('ends the bookable spinner after failure and keeps a retry action until the read succeeds',async()=>{
+ mocks.activeTrips.mockResolvedValue([]);mocks.trips.mockRejectedValueOnce(new ReadRequestError('trip read failed',true)).mockResolvedValue([]);
+ const view=mount('/trips');await screen.findByText('trip read failed');
+ expect(view.container.querySelector('.ant-spin')).toBeNull();
+ expect(screen.queryByText('No buying trips are currently open')).not.toBeInTheDocument();
+ expect(screen.queryByRole('button',{name:'close'})).not.toBeInTheDocument();
+ fireEvent.click(screen.getByRole('button',{name:'Retry'}));
+ await screen.findByRole('heading',{name:'Bookable trips'});
+ expect(view.container.querySelector('.ant-spin')).toBeNull();expect(mocks.trips).toHaveBeenCalledTimes(2);
+ expect(screen.queryByText('trip read failed')).not.toBeInTheDocument();
+});
+it('shows the bookable spinner only while its read is pending, independently of active trips',async()=>{
+ let finish!:(value:unknown)=>void;mocks.trips.mockImplementation(()=>new Promise(resolve=>{finish=resolve;}));mocks.activeTrips.mockResolvedValue([]);
+ const view=mount('/trips');expect(view.container.querySelector('.ant-spin')).not.toBeNull();
+ await act(async()=>{});expect(view.container.querySelector('.ant-spin')).not.toBeNull();
+ await act(async()=>finish([]));await screen.findByRole('heading',{name:'Bookable trips'});
+ expect(view.container.querySelector('.ant-spin')).toBeNull();
+});
 function selected(path:string){for(const selector of ['.browse-sidebar','.browse-mobile-shortcuts'])expect(document.querySelector(selector+' a[aria-current="page"]')).toHaveAttribute('href',path);}
 it.each(['/products','/recommendations','/trips'])('keeps identity, node scope and cart while opening hidden-selector navigation on %s',async path=>{
  const cart={tripId:11,requestId:crypto.randomUUID(),items:{p:2},currency:'JPY',quotes:{p:{price:10,currency:'JPY',revision:1,token:'existing'}}};

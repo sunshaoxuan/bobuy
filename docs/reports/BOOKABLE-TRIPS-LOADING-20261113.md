@@ -1,0 +1,36 @@
+# 可预订行程持续加载调查与修复
+
+## 目标、范围与方法
+用户反馈可预订行程页面持续转圈。定位真实页面的请求、组件加载及状态生命周期，修复直接原因并完成针对性验证。既有未提交改动保持原样，必要实现基于当前 main 的隔离工作树。排除其他页面功能扩展、业务数据修改和全产品回归。
+
+## 完成标准与检查预算
+1. 记录真实线上页面、网络和 Console 证据，区分现象、根因与未确认因素。
+2. 冻结实际修改文件及直接消费者后执行最小测试集合，预计 1 至 3 分钟。
+3. 若修改前端，构建一次并在真实浏览器验证可预订行程的正常、失败和重新进入状态，桌面及最窄支持视口，预计 5 至 10 分钟。复用适用证据，不重复全量。
+4. 如产生可见布局变化，实施前补充视觉预算，使用最终运行截图及 Gemini 复核。加载状态修复沿用现有控件样式。
+5. 明确本地修复和实际生产状态，必要发布按项目现有门禁与兼容回退执行。验收满足后停止扩展检查。
+
+## 初始证据
+截图为导航选中可预订行程、主体仅显示加载动画。原工作区有大量其他任务改动，本地代码与 origin/main 不一致。当前 origin/main 为 63367da。已读取 bobuy-rapid-production 及 engineering-investigation-evidence 技能。
+
+## 已确认原因与候选冻结
+生产页面加载 index-BE7QJrP-.js，直接访问以及账户到行程切换可正常显示空状态。浏览器内仅阻断 /api/storefront/trips 后，读取重试耗尽显示错误且 spinner 持续；关闭错误提示后仅保留 spinner，复现截图同类现象。移除阻断并刷新后恢复。该实验确认错误状态渲染缺陷，不能确认用户历史请求失败的具体网络原因。
+
+局部修改由主 Agent 直接实施：Storefront.tsx 将 tripsLoading 与 tripsReady 分开，finally 只结束当前 generation 的 loading；请求失败保留重试提示且不能关闭成空白页面；失败时不显示 spinner 或无行程空状态。StorefrontContext.test.tsx 增加失败、手动重试和 pending/success 状态用例。未调整 API、重试策略、布局、CSS、权限、业务数据。最小验证集合冻结为 StorefrontContext 与 StorefrontCommerce 两文件，随后 build 一次；只读真实生产接口、本地浏览器故障注入，桌面及 360px 检查、截图、Console 和网络。沿用 Alert/Button 既有尺寸，提示文案与热区保持现有样式，错误状态仅移除 close 按钮及 spinner，功能状态视觉复核不改布局预算。预计总计 5 至 10 分钟，无全产品回归。用户当前请求为故障调查，生产发布未执行。
+
+## 最终验收与交付边界
+
+| 项目 | 结果 | 证据 |
+| --- | --- | --- |
+| 失败后停止 spinner，pending 保留 spinner，手动重试恢复 | PASS | StorefrontContext 22 项及 browser.json |
+| 直接相关下单与身份边界 | PASS | StorefrontCommerce 13 项；合并一次 Vitest，35/35 |
+| i18n、TypeScript、构建及首页预渲染 | PASS | checks.json；主资源 index-DktI1_4D.js 摘要已保存 |
+| 桌面 1280×720 与手机 360×800 | PASS，限定本批状态变化 | desktop-failure.jpg、mobile-failure.jpg、desktop-recovered.jpg、mobile-success.jpg |
+| Console、网络及只读边界 | PASS | browser.json；浏览器内阻断 trips 路径同时匹配 includeCurrent 查询，重试后两个 GET 均 200，无业务写请求，Console 捕获为空 |
+| 外部视觉意见及主 Agent 判断 | 已完成 | visual-review.md；Gemini Flash 已验证图片可用，Pro 两次上游失败 |
+| 历史原始请求失败原因 | 未确认 | 用户原始网络记录缺失，不能将注入故障当作历史根因 |
+| 生产上线 | 未执行 | 本次仅调查和本地修复，未推送、未创建 PR、未操作生产容器 |
+
+预览首次启动发生在 build 完成前，因 dist 不存在退出，尚无浏览器证据产生；build 成功后启动同一候选预览，未重跑测试或构建。实际验证结束后已停止预览，删除本任务 dist，保留源候选、正式截图、摘要及检查记录；共享依赖及其 junction 保留。清理见 cleanup.json 和 cleanup-manifest.json。纯文档收尾只检查引用及 diff，不重复功能验证。
+
+最终结论：持续转圈的错误状态渲染问题已复现且本地修复验收通过。用户当前线上版本仍需部署该候选才能获得修复，未宣称线上已修复。
