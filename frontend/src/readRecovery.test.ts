@@ -4,6 +4,16 @@ const response=(status:number)=>({status,ok:status<400,body:null,json:async()=>(
 beforeEach(()=>{vi.useFakeTimers();localStorage.clear();});
 afterEach(()=>{vi.useRealTimers();vi.unstubAllGlobals();vi.restoreAllMocks();});
 
+it('keeps public reads independent of an expired session without refreshing or clearing it',async()=>{
+ localStorage.setItem('bobbuy_access_token','expired-session-fixture');
+ const fetch=vi.fn().mockImplementation(async(_url:string,init:RequestInit)=>response(new Headers(init.headers).has('Authorization')?401:200));vi.stubGlobal('fetch',fetch);
+ await expect(storefrontApi.trips()).resolves.toEqual([]);
+ await expect(storefrontApi.activeTrips()).resolves.toEqual([]);
+ expect(fetch.mock.calls.every(call=>!new Headers(call[1].headers).has('Authorization'))).toBe(true);
+ expect(localStorage.getItem('bobbuy_access_token')).toBe('expired-session-fixture');
+ expect(fetch.mock.calls.some(call=>call[0]==='/api/auth/refresh')).toBe(false);
+});
+
 it('recovers network failures with exactly two delayed retries and no intermediate UI error',async()=>{
  const fetch=vi.fn().mockRejectedValueOnce(new TypeError('fetch failed')).mockResolvedValueOnce(response(502)).mockResolvedValue(response(200));vi.stubGlobal('fetch',fetch);
  const result=storefrontApi.trips();await vi.advanceTimersByTimeAsync(499);expect(fetch).toHaveBeenCalledTimes(1);

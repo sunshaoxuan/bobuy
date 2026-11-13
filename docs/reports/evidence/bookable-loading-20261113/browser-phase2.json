@@ -1,0 +1,141 @@
+{
+  "base": "4dc36d1",
+  "transient": {
+    "requests": [
+      {
+        "url": "http://localhost:4181/api/storefront/trips",
+        "authorization": false,
+        "attempt": 1
+      },
+      {
+        "url": "http://localhost:4181/api/storefront/trips?includeCurrent=true",
+        "authorization": false,
+        "attempt": "active"
+      },
+      {
+        "url": "http://localhost:4181/api/storefront/trips",
+        "authorization": false,
+        "attempt": 2
+      },
+      {
+        "url": "http://localhost:4181/api/storefront/trips",
+        "authorization": false,
+        "attempt": 3
+      }
+    ],
+    "afterFirstFailure": {
+      "spinners": 1,
+      "empty": false,
+      "error": false
+    },
+    "afterSecondFailure": {
+      "spinners": 1,
+      "empty": false,
+      "error": false
+    },
+    "recovered": {
+      "empty": true,
+      "error": false,
+      "spinners": 0
+    }
+  },
+  "exhaustion": {
+    "requests": [
+      {
+        "url": "http://localhost:4181/api/storefront/trips",
+        "authorization": false,
+        "attempt": 1
+      },
+      {
+        "url": "http://localhost:4181/api/storefront/trips?includeCurrent=true",
+        "authorization": false,
+        "attempt": "active"
+      },
+      {
+        "url": "http://localhost:4181/api/storefront/trips",
+        "authorization": false,
+        "attempt": 2
+      },
+      {
+        "url": "http://localhost:4181/api/storefront/trips",
+        "authorization": false,
+        "attempt": 3
+      }
+    ],
+    "state": {
+      "empty": true,
+      "error": false,
+      "spinners": 0
+    }
+  },
+  "mobile": {
+    "empty": true,
+    "error": false,
+    "overflow": false,
+    "spinners": 0
+  },
+  "recovery": {
+    "event": "synthetic online event after removing browser fault injection",
+    "responses": [
+      {
+        "url": "http://localhost:4181/api/storefront/trips",
+        "status": 200
+      }
+    ]
+  },
+  "network": [
+    {
+      "event": "Network.requestWillBeSent",
+      "url": "http://localhost:4181/api/storefront/trips",
+      "method": "GET",
+      "hasAuthorization": false
+    },
+    {
+      "event": "Network.requestWillBeSent",
+      "url": "http://localhost:4181/api/storefront/trips?includeCurrent=true",
+      "method": "GET",
+      "hasAuthorization": false
+    },
+    {
+      "event": "Network.loadingFailed",
+      "error": "net::ERR_CONNECTION_FAILED"
+    },
+    {
+      "event": "Network.responseReceived",
+      "url": "http://localhost:4181/api/storefront/trips?includeCurrent=true",
+      "status": 200
+    },
+    {
+      "event": "Network.requestWillBeSent",
+      "url": "http://localhost:4181/api/storefront/trips",
+      "method": "GET",
+      "hasAuthorization": false
+    },
+    {
+      "event": "Network.loadingFailed",
+      "error": "net::ERR_CONNECTION_FAILED"
+    },
+    {
+      "event": "Network.requestWillBeSent",
+      "url": "http://localhost:4181/api/storefront/trips",
+      "method": "GET",
+      "hasAuthorization": false
+    },
+    {
+      "event": "Network.loadingFailed",
+      "error": "net::ERR_CONNECTION_FAILED"
+    },
+    {
+      "event": "Network.requestWillBeSent",
+      "url": "http://localhost:4181/api/storefront/trips",
+      "method": "GET",
+      "hasAuthorization": false
+    },
+    {
+      "event": "Network.responseReceived",
+      "url": "http://localhost:4181/api/storefront/trips",
+      "status": 200
+    }
+  ],
+  "console": []
+}

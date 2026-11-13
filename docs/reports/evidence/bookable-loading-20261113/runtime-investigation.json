@@ -1,0 +1,657 @@
+{
+  "utc": "2026-11-13T06:26:31.969833+00:00",
+  "services": [
+    {
+      "name": "bobuy-frontend",
+      "image": "bobuy/frontend:20261113.unified-brand.1",
+      "started": "2026-11-13T05:41:19.103165252Z",
+      "restarts": 0,
+      "oom": false,
+      "status": "running"
+    },
+    {
+      "name": "bobuy-core-service",
+      "image": "bobuy/core:20261113.offer-source-drawer.1",
+      "started": "2026-11-13T02:56:52.691984954Z",
+      "restarts": 0,
+      "oom": false,
+      "status": "running"
+    },
+    {
+      "name": "bobuy-gateway-service",
+      "image": "bobuy/router:20261028.3",
+      "started": "2026-11-12T14:45:32.654574498Z",
+      "restarts": 0,
+      "oom": false,
+      "status": "running"
+    },
+    {
+      "name": "bobuy-gateway",
+      "image": "nginx:alpine",
+      "started": "2026-10-27T10:17:45.060469115Z",
+      "restarts": 0,
+      "oom": false,
+      "status": "running"
+    }
+  ],
+  "access": {
+    "bobuy-gateway": {
+      "counts": {
+        "200 /api/storefront/trips?includeCurrent=true": 283,
+        "200 /api/storefront/trips": 283,
+        "200 /api/auth/me": 58,
+        "401 /api/auth/me": 5,
+        "401 /api/storefront/trips?includeCurrent=true": 5,
+        "401 /api/storefront/trips": 5,
+        "200 /api/auth/refresh": 7
+      },
+      "recent": [
+        {
+          "time": "13/Nov/2026:02:43:41 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:43:45 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:43:45 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:43:50 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:43:50 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:43:53 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:43:53 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:45:26 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:47:17 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:47:25 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:48:06 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:51:46 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:51:46 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:51:50 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:51:50 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:58:40 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:58:40 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:58:50 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:58:54 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:58:54 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:59:01 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:59:02 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:59:02 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:59:07 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:02:59:07 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:03:24:50 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:03:28:31 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:03:28:40 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:03:36:24 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:03:36:29 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:04:47:10 +0000",
+          "method": "POST",
+          "path": "/api/auth/refresh",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:15:33 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:15:43 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:15:43 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:15:43 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:23:19 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:23:19 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:23:25 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:23:28 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:23:28 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:23:33 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:28:44 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:28:44 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:28:49 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:28:51 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:28:51 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:28:53 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:28:53 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:28:57 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:28:57 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:29:01 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:29:01 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:29:05 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:32:25 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:32:25 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:32:29 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:32:32 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:32:32 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:32:36 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:32:38 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:32:38 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:32:40 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:32:40 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:32:43 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:32:43 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:32:47 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:32:47 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:32:50 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:35:10 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:35:10 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:37:19 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:37:19 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:37:45 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:37:45 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:41:35 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:41:35 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:41:39 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:41:42 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:41:42 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:41:46 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:41:48 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:05:41:48 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:06:03:15 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 401
+        },
+        {
+          "time": "13/Nov/2026:06:03:15 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 401
+        },
+        {
+          "time": "13/Nov/2026:06:03:15 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 401
+        },
+        {
+          "time": "13/Nov/2026:06:03:15 +0000",
+          "method": "POST",
+          "path": "/api/auth/refresh",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:06:03:16 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:06:05:50 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:06:05:50 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:06:06:13 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:06:06:13 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:06:07:41 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:06:07:41 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:06:11:23 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:06:11:23 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:06:12:25 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:06:12:25 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:06:21:21 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:06:21:21 +0000",
+          "method": "GET",
+          "path": "/api/storefront/trips?includeCurrent=true",
+          "status": 200
+        },
+        {
+          "time": "13/Nov/2026:06:21:21 +0000",
+          "method": "GET",
+          "path": "/api/auth/me",
+          "status": 200
+        }
+      ]
+    }
+  },
+  "exceptions": {
+    "bobuy-core-service": {},
+    "bobuy-gateway-service": {}
+  },
+  "serviceInspectionUtc": "2026-11-13T06:25:12.921451+00:00"
+}

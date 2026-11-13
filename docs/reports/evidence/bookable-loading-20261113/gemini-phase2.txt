@@ -1,0 +1,23 @@
+### 1. Concrete Visible Defects, Doubts, and Missing Evidence
+
+* **Visible Defects:**
+  * **Semantic Misrepresentation (UX defect):** A network/read failure presents identically to a valid empty query ("暂无可预订行程" / *No bookable trips*). There is no error message, offline warning, or actionable retry trigger.
+* **Doubts:**
+  * **User Recovery:** Without a retry CTA or explanation, users may assume no trips exist rather than retrying or checking connectivity.
+  * **Transient Feedback:** Unclear if a temporary banner or toast was displayed and dismissed before the capture.
+* **Missing Evidence:**
+  * Network/Console logs confirming all 3 read attempts actually executed, timed out/errored, and triggered this fallback.
+  * Telemetry/error reporting verification for the terminal failure.
+
+---
+
+### 2. Title, Empty-State Illustration, and Copy Assessment
+
+* **Clipping:**
+  * **None observed.** All typography (eyebrow "安排下一次采买", title "可预订行程", subtitle, and empty copy "暂无可预订行程") renders intact without word breaks, ellipses, or viewport cut-offs at 1280px and 360px.
+  * Illustration dimensions and bounding boxes render fully without edge cropping.
+* **Obstruction:**
+  * **None observed.** Neither the desktop persistent left navigation nor the mobile fixed bottom navigation bar overlaps or obscures the content area, illustration, or labels.
+* **Hierarchy:**
+  * **Strong visual structure:** Clear progressive weight from eyebrow (small, muted) $\rightarrow$ page title (large, bold) $\rightarrow$ descriptive context (medium, regular) $\rightarrow$ centered empty state (illustration + caption).
+  * **Balance:** Well-centered horizontally in the content canvas on both viewports, with adequate breathing room between the header block and the empty-state container.

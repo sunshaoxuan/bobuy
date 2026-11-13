@@ -1,0 +1,93 @@
+{
+  "version": "63367da plus Storefront.tsx loading fix",
+  "environment": "local production build, real public read-only API; trip failure blocked inside this browser only",
+  "viewports": [
+    "1280x720",
+    "360x800"
+  ],
+  "observations": {
+    "failureSpinnerCount": 0,
+    "failureRetryVisible": true,
+    "failureCloseVisible": false,
+    "mobileRetryHeight": 44,
+    "mobileOverflow": false,
+    "manualRetryRecovered": true
+  },
+  "network": [
+    {
+      "event": "Network.requestWillBeSent",
+      "url": "http://localhost:4181/api/storefront/trips",
+      "method": "GET"
+    },
+    {
+      "event": "Network.loadingFailed",
+      "error": ""
+    },
+    {
+      "event": "Network.requestWillBeSent",
+      "url": "http://localhost:4181/api/storefront/trips?includeCurrent=true",
+      "method": "GET"
+    },
+    {
+      "event": "Network.loadingFailed",
+      "error": ""
+    },
+    {
+      "event": "Network.requestWillBeSent",
+      "url": "http://localhost:4181/api/storefront/trips",
+      "method": "GET"
+    },
+    {
+      "event": "Network.loadingFailed",
+      "error": ""
+    },
+    {
+      "event": "Network.requestWillBeSent",
+      "url": "http://localhost:4181/api/storefront/trips?includeCurrent=true",
+      "method": "GET"
+    },
+    {
+      "event": "Network.loadingFailed",
+      "error": ""
+    },
+    {
+      "event": "Network.requestWillBeSent",
+      "url": "http://localhost:4181/api/storefront/trips",
+      "method": "GET"
+    },
+    {
+      "event": "Network.loadingFailed",
+      "error": ""
+    },
+    {
+      "event": "Network.requestWillBeSent",
+      "url": "http://localhost:4181/api/storefront/trips?includeCurrent=true",
+      "method": "GET"
+    },
+    {
+      "event": "Network.loadingFailed",
+      "error": ""
+    },
+    {
+      "event": "Network.requestWillBeSent",
+      "url": "http://localhost:4181/api/storefront/trips",
+      "method": "GET"
+    },
+    {
+      "event": "Network.requestWillBeSent",
+      "url": "http://localhost:4181/api/storefront/trips?includeCurrent=true",
+      "method": "GET"
+    },
+    {
+      "event": "Network.responseReceived",
+      "url": "http://localhost:4181/api/storefront/trips",
+      "status": 200
+    },
+    {
+      "event": "Network.responseReceived",
+      "url": "http://localhost:4181/api/storefront/trips?includeCurrent=true",
+      "status": 200
+    }
+  ],
+  "console": []
+}
