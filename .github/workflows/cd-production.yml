@@ -191,11 +191,86 @@ jobs:
             done
             return 1
           }
+          cleanup_after_deploy() (
+            # Subshell and guarded invocation isolate cleanup from deployment/rollback.
+            set +e
+            removed_tags=0 removed_dirs=0
+            trap 'printf "Cleanup removed tags=%s dirs=%s\n" "$removed_tags" "$removed_dirs"; df -h / || echo "WARNING: cleanup disk report failed" >&2' EXIT
+            df -h / || echo 'WARNING: cleanup disk report failed' >&2
+            keep_ids='|'
+            keep_tags='|'
+            for service in "${services[@]}"; do
+              image_id=$(docker inspect --format '{{.Image}}' "bobuy-$service") || {
+                echo 'WARNING: cleanup skipped: running image lookup failed' >&2; return 0;
+              }
+              [[ "$image_id" =~ ^sha256:[a-f0-9]{64}$ ]] || {
+                echo 'WARNING: cleanup skipped: invalid running image ID' >&2; return 0;
+              }
+              keep_ids+="$image_id|"
+            done
+            # rollback.yml is written above in this exact single-quoted inline format.
+            rollback_refs=$(sed -n "s/^  [a-z-]*: {image: '\([^']*\)'}$/\1/p" .cd/rollback.yml) || {
+              echo 'WARNING: cleanup skipped: rollback refs unreadable' >&2; return 0;
+            }
+            rollback_count=0
+            while IFS= read -r ref; do
+              [[ "$ref" =~ ^bobuy-rollback/(core-service|ai-service|im-service|auth-service|gateway-service|frontend):[a-zA-Z0-9_][a-zA-Z0-9_.-]{0,127}$ ]] || {
+                echo 'WARNING: cleanup skipped: invalid rollback ref' >&2; return 0;
+              }
+              image_id=$(docker image inspect --format '{{.Id}}' "$ref") || {
+                echo 'WARNING: cleanup skipped: rollback image lookup failed' >&2; return 0;
+              }
+              [[ "$image_id" =~ ^sha256:[a-f0-9]{64}$ ]] || {
+                echo 'WARNING: cleanup skipped: invalid rollback image ID' >&2; return 0;
+              }
+              keep_ids+="$image_id|"
+              rollback_count=$((rollback_count + 1))
+            done <<< "$rollback_refs"
+            [[ "$rollback_count" == 6 ]] || {
+              echo 'WARNING: cleanup skipped: incomplete rollback set' >&2; return 0;
+            }
+            inventory=$(docker image ls --no-trunc --format '{{.Repository}} {{.Tag}} {{.ID}}') || {
+              echo 'WARNING: cleanup skipped: image listing failed' >&2; return 0;
+            }
+            while read -r repo tag image_id; do
+              [[ "$tag" != '<none>' && -n "$tag" ]] || continue
+              if [[ "$keep_ids" == *"|$image_id|"* ]]; then
+                keep_tags+="$tag|"
+                continue
+              fi
+              case "$repo" in
+                "$REGISTRY"/core|"$REGISTRY"/ai|"$REGISTRY"/im|"$REGISTRY"/auth|"$REGISTRY"/router|"$REGISTRY"/frontend|\
+                bobuy/core|bobuy/ai|bobuy/im|bobuy/auth|bobuy/router|bobuy/frontend|\
+                bobuy-rollback/core-service|bobuy-rollback/ai-service|bobuy-rollback/im-service|bobuy-rollback/auth-service|bobuy-rollback/gateway-service|bobuy-rollback/frontend)
+                  if docker rmi "$repo:$tag"; then
+                    removed_tags=$((removed_tags + 1))
+                  else
+                    echo "WARNING: could not remove image tag $repo:$tag" >&2
+                  fi
+                  ;;
+              esac
+            done <<< "$inventory"
+            if [[ -d /opt/bobuy/releases && ! -L /opt/bobuy/releases ]]; then
+              for dir in /opt/bobuy/releases/* /opt/bobuy/releases/.[!.]* /opt/bobuy/releases/..?*; do
+                [[ -d "$dir" && ! -L "$dir" ]] || continue
+                name=${dir##*/}
+                [[ "$name" =~ ^[a-zA-Z0-9_][a-zA-Z0-9_.-]{0,127}$ ]] || continue
+                [[ "$keep_tags" != *"|$name|"* ]] || continue
+                if rm -rf -- "$dir"; then
+                  removed_dirs=$((removed_dirs + 1))
+                else
+                  echo "WARNING: could not remove release directory $dir" >&2
+                fi
+              done
+            fi
+            docker image prune -f || echo 'WARNING: dangling image prune failed' >&2
+          )
           # Keep every fallible activation step inside the conditional so errexit
           # cannot skip recovery. No dependency services are pulled or recreated.
           if compose config --quiet && pull_images \
             && compose up -d --no-deps --no-build --pull never "${services[@]}" \
             && containers_healthy && reload_nginx && healthy; then
+            cleanup_after_deploy || true
             printf '%s %s\n' "$REVISION" "$(date -u +%FT%TZ)" > .cd/deploy-revision
             exit 0
           fi
