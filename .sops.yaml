@@ -1,0 +1,3 @@
+creation_rules:
+  - path_regex: (\.env|application-(dev|ai-hermes)\.properties)\.enc$
+    age: age1REPLACE_ME
