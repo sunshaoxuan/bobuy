@@ -8,6 +8,7 @@ Thumbs.db
 # Runtime logs
 *.log
 backend-start*.log
+backend/startup*.log
 
 # Gemini data
 .gemini/
@@ -29,4 +30,6 @@ data/
 
 target/
 .env
+backend/src/main/resources/application-dev.properties
+backend/src/main/resources/application-ai-hermes.properties
 .task-tmp/
