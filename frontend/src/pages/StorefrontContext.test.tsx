@@ -18,16 +18,23 @@ it('recovers only failed trip metadata after foreground events and preserves the
 });
 function Probe(){const location=useLocation(),navigate=useNavigate();return <><output data-testid="route">{location.pathname+location.search}</output><button onClick={()=>navigate(-1)}>Back</button><button onClick={()=>navigate(1)}>Forward</button></>;}
 function mount(path:string){return render(<I18nProvider><MemoryRouter initialEntries={[path]}><Probe/><Storefront/></MemoryRouter></I18nProvider>);}
-it('ends the bookable spinner after failure and keeps a retry action until the read succeeds',async()=>{
- mocks.activeTrips.mockResolvedValue([]);mocks.trips.mockRejectedValueOnce(new ReadRequestError('trip read failed',true)).mockResolvedValue([]);
- const view=mount('/trips');await screen.findByText('trip read failed');
+it('shows the empty state only after retry exhaustion and recovers the failed read on reconnect',async()=>{
+ mocks.activeTrips.mockResolvedValue([]);mocks.trips.mockRejectedValueOnce(new ReadRequestError('trip read failed',true)).mockResolvedValue([{id:11,merchantId:1,merchantName:'Shop',deliveryArea:'Recovered area',deliveryDate:'2026-11-10'}]);
+ const view=mount('/trips');await screen.findByRole('heading',{name:'Bookable trips'});
  expect(view.container.querySelector('.ant-spin')).toBeNull();
- expect(screen.queryByText('No buying trips are currently open')).not.toBeInTheDocument();
- expect(screen.queryByRole('button',{name:'close'})).not.toBeInTheDocument();
- fireEvent.click(screen.getByRole('button',{name:'Retry'}));
- await screen.findByRole('heading',{name:'Bookable trips'});
+ expect(view.container.querySelector('.ant-empty')).not.toBeNull();
+ expect(screen.queryByRole('alert')).not.toBeInTheDocument();expect(screen.queryByRole('button',{name:'Retry'})).not.toBeInTheDocument();
+ expect(mocks.trips).toHaveBeenCalledTimes(1);
+ act(()=>window.dispatchEvent(new Event('online')));
+ await screen.findByRole('heading',{name:'Recovered area'});
  expect(view.container.querySelector('.ant-spin')).toBeNull();expect(mocks.trips).toHaveBeenCalledTimes(2);
  expect(screen.queryByText('trip read failed')).not.toBeInTheDocument();
+});
+it('keeps pending reads loading until retries settle and preserves real business errors',async()=>{
+ let fail!:(error:Error)=>void;mocks.activeTrips.mockResolvedValue([]);mocks.trips.mockImplementation(()=>new Promise((_resolve,reject)=>{fail=reject;}));
+ const view=mount('/trips');expect(view.container.querySelector('.ant-spin')).not.toBeNull();expect(view.container.querySelector('.ant-empty')).toBeNull();
+ await act(async()=>fail(new Error('access denied')));
+ await screen.findByText('access denied');expect(view.container.querySelector('.ant-spin')).toBeNull();expect(view.container.querySelector('.ant-empty')).toBeNull();
 });
 it('shows the bookable spinner only while its read is pending, independently of active trips',async()=>{
  let finish!:(value:unknown)=>void;mocks.trips.mockImplementation(()=>new Promise(resolve=>{finish=resolve;}));mocks.activeTrips.mockResolvedValue([]);

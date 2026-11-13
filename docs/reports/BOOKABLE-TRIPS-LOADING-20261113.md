@@ -6,6 +6,22 @@
 ## 用户后续要求，第二批
 用户提出连接失败时先显示没有行程，随后明确核心目标是解释为何频繁连接报错、重试持续失败，并解决连接根因。当前优先调查真实线上网络、网关、服务日志及重试链路，展示调整暂停实现。此前仅确认状态渲染缺陷，全部网络根因仍未确认。使用只读线上请求和日志关联获取端点、时间、状态码、耗时与异常，不做无依据重试或负载测试；必要最小修复、验证范围和发布边界待证据明确后冻结。不得把错误隐藏当作连接根因已解决。
 
+### 根因证据、优先级与第二批冻结
+用户进一步明确：先根因修复及有限重试恢复，重试全部失败后才显示无行程；禁止首个失败即显示空状态。线上 nginx 将访问日志写入容器内普通文件，Docker stdout 不含该访问记录。读取实际 access.log 后确认 2026-11-13 06:03:15 UTC（15:03:15 JST）两条 storefront/trips 与 auth/me 均 401；同秒 auth/refresh 为 200，次秒 auth/me 为 200，行程未在同一会话恢复流程重发。浏览器当前旧页面持续 spinner；真实刷新后三项请求全为 200，行程 TTFB 约 36ms/43ms。runtime-investigation.json 与 user-browser-reload.json 保存无凭据证据。不能将此前读取 Docker stdout 的零记录作为实际访问无错的证明。
+
+源码证据：storeGet 的公开 GET 默认携带 access token，明确禁用 401 refresh；TokenAuthenticationFilter 在无效 bearer 时直接 401，即使目标路径 permitAll；Storefront 只按 shoppingContext 启动元数据，auth/me 刷新不重新读取行程，且 sessionIdentity 变化会清掉全局错误。故失效会话让本应匿名可读的公开数据失败，重试策略又不覆盖 401，最终落入持续 spinner。日志确认会话失效与刷新链，具体 JWT 失效子类型未记录，不能进一步断言过期或撤销。
+
+局部修复由主 Agent 直接完成，边界冻结：api.ts 的公开 storefront GET 不附加登录 bearer，保护认证 API 与写入边界；Storefront.tsx 仅在现有有限重试已耗尽且错误可恢复时显示既有空状态，pending 继续加载，内部 tripsReady 仍 false，不允许假定预订资格；相应 readRecovery 与 StorefrontContext 用例。维护状态、业务拒绝和受保护请求沿用现有处理。原始本地候选已合并当前 origin/main 4dc36d1，保留线上已发布品牌调整，无额外产品功能。
+
+最小验证集合冻结为 readRecovery、api、browseApi、publicCatalogApi、StorefrontContext、StorefrontCommerce 六文件，一次合并执行，预计 1 分钟；build 一次，预计 1 分钟。源码/状态与品牌依赖变化使上一批构建和页面状态截图失效；新增测试验证失效 bearer 的公开读取隔离、第一次失败保持 pending、有限重试恢复、耗尽才空状态、网络恢复后重新读取与无写请求。真实浏览器桌面及 360px 使用构建产物和真实公开 API，局部故障仅在浏览器内注入，记录请求次数、Console、响应式及最终截图，预计 5 分钟。无新增控件或 CSS，空状态沿用当前设计。正式 CI 跟踪精确候选原运行，发布评估只涉及 frontend 兼容替换与保留旧镜像回退，不改数据库或后端认证策略。通过即交付，不全产品回归。
+
+### 第二批验收与发布评估
+六文件 67 项全部通过，build 的 i18n、TypeScript、Vite、prerender 全通过，见 tests-phase2.log 与 build-phase2.log。browser-phase2.json 记录：失效会话 fixture 在本地存储时，公开 GET 全部不含 Authorization；前两次 ConnectionFailed 期间 spinner=1、无空状态、无错误提示，第三次正常读取真实 API 成功；另一组恰好三次失败后 spinner=0、空状态可见且无错误，解除局部注入后以 online 事件夹具恢复一次 GET 200。网络均为 GET，无业务写请求，Console 捕获为空。手机 360×800 无横向溢出；1280×720 与手机最终截图及原尺寸局部已保存并查看。夹具存储与 Fetch 拦截已清除，临时视口已恢复。Chrome Fetch 控制要求显式 resourceType=Fetch，清除拦截采用 patterns=[]，未改变目标源码或因此重跑产品测试。
+
+Gemini 3.8 Flash 的新状态复核没有发现裁切、遮挡或层级问题，提醒静态空状态无法区分“真空”与“读取耗尽”、无重试按钮及遥测证据。展示行为是用户明确要求；后台失败分类、online/focus 恢复和原有结构化网络证据保留，未新增遥测平台或控件。主 Agent 仅判本批状态视觉通过，不宣称全站字形几何验证。
+
+当前生产 frontend=20261113.unified-brand.1、revision34b9952c65aa6d88ed14a4382b769fe3551fc722、image sha256:5ac33f0901f33d622a2d559e4a8a05b78a2b5474c7399be7bce32435f36ee9f3；Core=20261113.offer-source-drawer.1、revision9f948b1bd98aca3019b5c7ee98e63c59e9aa1582、image sha256:9f507f7dbb910193ac50ee10dcf6ecbecd04303dc96a9ad71187ddc6c2aa832f。已核实既有 release library 摘要5fddec223ef6f1d38402c8a11c1f99877ffc93f9d7d4b5afeb1271752c5610ac与路由摘要b099bf59589e5b297699324d265209a112ad5b3865c51d1f174c12a427e6b391。计划版本20261113.public-trip-recovery.1，复用已验证的 frontend-only operator，仅替换前端并保留原镜像与 compose.before.yml；不迁移、不停写、不创建全量快照。源码候选冻结后仅跟踪原 CI 和发布所需的真实版本/页面验收，不追加优化与无关检查。
+
 ## 完成标准与检查预算
 1. 记录真实线上页面、网络和 Console 证据，区分现象、根因与未确认因素。
 2. 冻结实际修改文件及直接消费者后执行最小测试集合，预计 1 至 3 分钟。

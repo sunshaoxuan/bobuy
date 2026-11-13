@@ -1511,7 +1511,7 @@ export type MerchantCustomer = { customerId: number; name: string; emailVerified
 async function storeGet<T>(path: string): Promise<T> {
     const publicRead=path.startsWith('/api/storefront/');
     const response = publicRead
-        ? await retryRead(signal => authorizedFetch(path, { cache: 'no-store', signal }, { retryOnUnauthorized: false }))
+        ? await retryRead(signal => authorizedFetch(path, { cache: 'no-store', signal }, { includeAccessToken: false, retryOnUnauthorized: false }))
         : await authorizedFetch(path);
     if (response.status===409) {const body=await response.clone().json().catch(()=>({}));if(body.errorCode==='BROWSE_CHANGED')throw new Error('browse.changed');}
     if(response.status===400&&/\/api\/storefront\/(product-browse|recommendation-browse|product-sales)/.test(path))throw new Error('browse.invalid');
