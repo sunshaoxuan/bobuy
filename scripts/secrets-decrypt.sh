@@ -10,14 +10,22 @@ files=(
   "backend/src/main/resources/application-ai-hermes.properties"
 )
 
+temporaries=()
+trap 'rm -f -- "${temporaries[@]}"' EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
+umask 077
+
 for target in "${files[@]}"; do
   source="${target}.enc"
   [[ -f "$source" ]] || { echo "Missing encrypted file: $source" >&2; exit 1; }
-  temporary="${target}.tmp"
-  trap 'rm -f -- "$temporary"' EXIT
+  temporary=$(mktemp "${target}.tmp.XXXXXXXXXX")
+  temporaries+=("$temporary")
   sops decrypt --input-type binary --output-type binary --output "$temporary" "$source"
   chmod 600 "$temporary"
-  mv -- "$temporary" "$target"
-  trap - EXIT
-  echo "Decrypted $source -> $target"
+done
+
+for i in "${!files[@]}"; do
+  mv -- "${temporaries[$i]}" "${files[$i]}"
+  echo "Decrypted ${files[$i]}.enc -> ${files[$i]}"
 done
