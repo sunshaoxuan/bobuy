@@ -1,5 +1,5 @@
 import react from '@vitejs/plugin-react';
-import { configDefaults, defineConfig } from 'vitest/config';
+import { defineConfig } from 'vitest/config';
 
 const defaultApiProxyTarget = 'http://localhost:8080';
 const apiProxyTarget = process.env.BOBBUY_API_PROXY_TARGET?.trim() || defaultApiProxyTarget;
@@ -7,11 +7,6 @@ const wsProxyTarget = process.env.BOBBUY_WS_PROXY_TARGET?.trim() || apiProxyTarg
 
 export default defineConfig({
   plugins: [react()],
-  test: {
-    // The SEO checks use Node's built-in test runner and have their own npm
-    // script; do not make Vitest collect the similarly named file.
-    exclude: [...configDefaults.exclude, 'scripts/**']
-  },
   build: {
     chunkSizeWarningLimit: 1400,
     rollupOptions: {
