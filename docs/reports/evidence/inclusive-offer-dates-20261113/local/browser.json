@@ -1,0 +1,95 @@
+{
+  "base": "http://127.0.0.1:5178",
+  "views": [
+    {
+      "width": 1440,
+      "environment": "local actual build with synthetic pricing writes",
+      "text": "生效期间\n\n从开始日当天起，到结束日当天结束，日期按日本时间计算。\n\n开始日期\n结束日期",
+      "controls": [
+        {
+          "label": "开始日期",
+          "x": 485,
+          "y": 390.78125,
+          "width": 447,
+          "height": 34,
+          "right": 932
+        },
+        {
+          "label": "结束日期",
+          "x": 948,
+          "y": 390.78125,
+          "width": 447,
+          "height": 34,
+          "right": 1395
+        }
+      ],
+      "saved": {
+        "channel": "COSTCO_WAREHOUSE",
+        "currency": "JPY",
+        "type": "PROMOTION",
+        "startsAt": "2026-11-12T15:00:00.000Z",
+        "endsAt": "2026-11-22T15:00:00.000Z",
+        "reason": "合成验收：首尾日期均覆盖当天。",
+        "version": 3,
+        "lines": [
+          {
+            "productId": "e50188de-e108-4a54-8498-6e65cf62efad",
+            "amount": 800,
+            "beforeAmount": 1000,
+            "unit": "一组"
+          }
+        ]
+      },
+      "approvalText": "审核生效\nPC-SYNTHETIC-INCLUSIVE\n\n合成验收：首尾日期均覆盖当天。\n\n开始日期：2026年11月13日 · 结束日期：2026年11月22日\n\n92495 · 虾仁奶油宽面\n调价前常规价: JPY ¥1,000\n调整后价格: JPY ¥800 / 一组\n确认已核对本单商品、价格、期间和调价原因\n取 消确 定",
+      "assets": [],
+      "errors": [],
+      "network": [],
+      "pricingWrites": 1
+    },
+    {
+      "width": 320,
+      "environment": "local actual build with synthetic pricing writes",
+      "text": "生效期间\n\n从开始日当天起，到结束日当天结束，日期按日本时间计算。\n\n开始日期\n结束日期",
+      "controls": [
+        {
+          "label": "开始日期",
+          "x": 33,
+          "y": 565.0625,
+          "width": 254,
+          "height": 44,
+          "right": 287
+        },
+        {
+          "label": "结束日期",
+          "x": 33,
+          "y": 653.15625,
+          "width": 254,
+          "height": 44,
+          "right": 287
+        }
+      ],
+      "saved": {
+        "channel": "COSTCO_WAREHOUSE",
+        "currency": "JPY",
+        "type": "PROMOTION",
+        "startsAt": "2026-11-12T15:00:00.000Z",
+        "endsAt": "2026-11-22T15:00:00.000Z",
+        "reason": "合成验收：首尾日期均覆盖当天。",
+        "version": 3,
+        "lines": [
+          {
+            "productId": "e50188de-e108-4a54-8498-6e65cf62efad",
+            "amount": 800,
+            "beforeAmount": 1000,
+            "unit": "一组"
+          }
+        ]
+      },
+      "approvalText": "审核生效\nPC-SYNTHETIC-INCLUSIVE\n\n合成验收：首尾日期均覆盖当天。\n\n开始日期：2026年11月13日 · 结束日期：2026年11月22日\n\n92495 · 虾仁奶油宽面\n调价前常规价: JPY ¥1,000\n调整后价格: JPY ¥800 / 一组\n确认已核对本单商品、价格、期间和调价原因\n取 消\n确 定",
+      "assets": [],
+      "errors": [],
+      "network": [],
+      "pricingWrites": 1
+    }
+  ]
+}
