@@ -22,6 +22,7 @@ it('synchronously blocks double submit and retries an uncertain result with the 
  let reject!:(error:Error)=>void;mocks.checkout.mockImplementationOnce(()=>new Promise((_ok,no)=>{reject=no;})).mockResolvedValue({orderId:99,total:24,currency:'JPY'});
  render(tree());await waitFor(()=>expect(submit()).toBeEnabled());const button=submit();act(()=>{fireEvent.click(button);fireEvent.click(button);});await waitFor(()=>expect(mocks.checkout).toHaveBeenCalledTimes(1));
  const first=structuredClone(mocks.checkout.mock.calls[0][0]);await act(async()=>reject(Error('Network uncertain')));await screen.findByText('Network uncertain');expect(readDraft('user:7').cart.requestId).toBe(first.requestId);
+ act(()=>{window.dispatchEvent(new Event('online'));window.dispatchEvent(new Event('focus'));document.dispatchEvent(new Event('visibilitychange'));});await act(async()=>{await new Promise(resolve=>setTimeout(resolve,300));});expect(mocks.checkout).toHaveBeenCalledTimes(1);expect(readDraft('user:7').cart.requestId).toBe(first.requestId);expect(screen.getByText('Network uncertain')).toBeInTheDocument();
  await waitFor(()=>expect(submit()).toBeEnabled());fireEvent.click(submit());await waitFor(()=>expect(mocks.checkout).toHaveBeenCalledTimes(2));expect(mocks.checkout.mock.calls[1][0]).toEqual(first);await screen.findByText(/Order #99/);expect(readDraft('user:7').cart.items).toEqual({});
 });
 it('does not clear edits added while an earlier selection is submitting',async()=>{

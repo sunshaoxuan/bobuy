@@ -17,6 +17,8 @@ import {recommendationText} from '../recommendationText';
 import SellingPrice from '../components/SellingPrice';
 import {selectedNode} from '../storeNavigation';
 import {useBrowsePages,useSectionActivation,useNextBrowsePage,useBoundedSales} from '../browsePaging';
+import {useReadRecovery} from '../hooks/useReadRecovery';
+import {isRecoverableReadError} from '../readRecovery';
 import {BrowseFilters,BrowseError} from '../components/BrowseSupport';
 import ProductMarkerBadges from '../components/ProductMarkerBadges';
 
@@ -89,8 +91,9 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   const state={markers};
   const ready=!!browse.page,detailId=(params.get('productSection')??'all')===kind?params.get('product')??undefined:undefined;
   const detailKey=JSON.stringify([identity,detailId,detailAttempt]);
-  const [detail,setDetail]=useState<{key:string;item?:PublicCatalogEntry;markers?:ProductMarkerDefinition[];error:string}>({key:'',error:''});
-  useEffect(()=>{if(!detailId||node===-1)return;let active=true;setDetail({key:detailKey,error:''});void storefrontApi.productDetail(detailId,node).then(result=>{if(active){if(result.item.productId!==detailId)throw Error('browse.invalid');setDetail({key:detailKey,item:result.item,markers:result.markers,error:''});}}).catch(error=>{if(active)setDetail({key:detailKey,error:error.message});});return()=>{active=false;};},[detailKey]);
+  const [detail,setDetail]=useState<{key:string;item?:PublicCatalogEntry;markers?:ProductMarkerDefinition[];error:string;recoverable?:boolean}>({key:'',error:''});
+  useEffect(()=>{if(!detailId||node===-1)return;let active=true;setDetail({key:detailKey,error:''});void storefrontApi.productDetail(detailId,node).then(result=>{if(active){if(result.item.productId!==detailId)throw Error('browse.invalid');setDetail({key:detailKey,item:result.item,markers:result.markers,error:''});}}).catch(error=>{if(active)setDetail({key:detailKey,error:error.message,recoverable:isRecoverableReadError(error)});});return()=>{active=false;};},[detailKey]);
+  useReadRecovery(()=>setDetailAttempt(value=>value+1),detail.key===detailKey&&!!detail.recoverable,JSON.stringify([identity,detailId]));
   const opened=detail.key===detailKey?detail.item:undefined;
   useEffect(()=>{onDetailChange?.(kind,!!detailId);return()=>onDetailChange?.(kind,false);},[kind,!!detailId,onDetailChange]);
   const revealPaused=autoPaused||!!detailId;

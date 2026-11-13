@@ -7,6 +7,8 @@ import {Alert,Button,Empty,Spin} from 'antd';
 import {Link,useLocation,useParams,useSearchParams} from 'react-router-dom';
 import {storefrontApi,recommendationApi,type RecommendationOccurrence,type RecommendationItem,type RecommendationDetail,type StoreProduct,type ServiceBrowseCard} from '../api';
 import {useBoundedSales,useBrowsePages,useSectionActivation,useNextBrowsePage} from '../browsePaging';
+import {useReadRecovery} from '../hooks/useReadRecovery';
+import {isRecoverableReadError} from '../readRecovery';
 import {BrowseError,BrowseFilters} from '../components/BrowseSupport';
 import {useI18n,localizedContent} from '../i18n';
 import {selectedNode,scopedPath} from '../storeNavigation';
@@ -74,8 +76,10 @@ export default function RecommendationBrowse(props:Props){
  function restart(){setChanged(false);setRefresh(value=>value+1);}
  // Visibility alone is not a dataset change. Explicit refresh, identity and Japanese-day changes remain authoritative.
  const selectedKey=JSON.stringify([location.pathname,topic,node,props.query??'',params.get('category'),locale,refresh,day,props.authKey]);
- const [selected,setSelected]=useState<{key:string;detail?:RecommendationDetail;error:string}>({key:'',error:''});
- useEffect(()=>{if(!topic||node===-1)return;let active=true;setSelected({key:selectedKey,error:''});void recommendationApi.get(topic,true,node).then(detail=>{if(active){if(detail.post.id!==topic||node!==undefined&&detail.post.merchantId!==node)throw Error('browse.invalid');setSelected({key:selectedKey,detail,error:''});}}).catch(error=>{if(active)setSelected({key:selectedKey,error:error.message});});return()=>{active=false;};},[selectedKey]);
+ const [selected,setSelected]=useState<{key:string;detail?:RecommendationDetail;error:string;recoverable?:boolean}>({key:'',error:''});
+ const [detailAttempt,setDetailAttempt]=useState(0);
+ useEffect(()=>{if(!topic||node===-1)return;let active=true;setSelected({key:selectedKey,error:''});void recommendationApi.get(topic,true,node).then(detail=>{if(active){if(detail.post.id!==topic||node!==undefined&&detail.post.merchantId!==node)throw Error('browse.invalid');setSelected({key:selectedKey,detail,error:''});}}).catch(error=>{if(active)setSelected({key:selectedKey,error:error.message,recoverable:isRecoverableReadError(error)});});return()=>{active=false;};},[selectedKey,detailAttempt]);
+ useReadRecovery(()=>setDetailAttempt(value=>value+1),selected.key===selectedKey&&!!selected.recoverable,selectedKey);
  const full=selected.key===selectedKey?selected.detail:undefined,itemId=params.get('item'),opened=full?.items.find(item=>String(item.id)===itemId);
  const focusScope=JSON.stringify([location.pathname,node,props.query??'',params.get('category'),locale,props.authKey]);
  const origin=detailOrigin.current?.scope===focusScope?detailOrigin.current:undefined;

@@ -1,0 +1,16 @@
+{
+  "frontend": {
+    "image": "sha256:8d02d4e4b249f23f6179b49b3bdfd223c085e853cd9dd7a5ab4d585e98a10ed0",
+    "tag": "bobuy/frontend:20261113.heat-top-right.2",
+    "revision": "2160266d9a9f864274e62003b7bd1d1c093c376f",
+    "running": true
+  },
+  "core": {
+    "image": "sha256:cd1a7f4744516091123e1cb2111369689e4437b5561ebbc268868cec2a0acf75",
+    "tag": "bobuy/core:20261112.price-documents.1",
+    "revision": "2124f4df66cdce193373e94f49e0d7955eb2ac75",
+    "running": true
+  },
+  "routeSha": "b099bf59589e5b297699324d265209a112ad5b3865c51d1f174c12a427e6b391",
+  "librarySha": "5fddec223ef6f1d38402c8a11c1f99877ffc93f9d7d4b5afeb1271752c5610ac"
+}
