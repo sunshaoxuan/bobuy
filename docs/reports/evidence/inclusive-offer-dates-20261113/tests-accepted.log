@@ -1,0 +1,14 @@
+
+> bobbuy-frontend@0.1.0 test
+> vitest run src/components/PriceAdjustmentWorkspace.test.tsx
+
+
+ RUN  v1.6.1 C:/Users/X02851/OneDrive - One人事株式会社/文档/ChatGPT/bobuy.cc/.task-tmp/home-brand-20261112/frontend
+
+ ✓ src/components/PriceAdjustmentWorkspace.test.tsx  (5 tests) 1887ms
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  12:27:07
+   Duration  10.83s (transform 266ms, setup 1.63s, collect 5.21s, tests 1.89s, environment 1.63s, prepare 223ms)
+

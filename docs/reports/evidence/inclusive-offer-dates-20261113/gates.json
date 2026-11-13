@@ -1,0 +1,9 @@
+{
+  "source": "739f30a6bc86fcbaab872a3adac8a58eaae959e9",
+  "result": "PASS",
+  "ci": "success",
+  "frontendTests": 7,
+  "browser": "PASS",
+  "frontendOnly": true,
+  "databaseOperation": false
+}
