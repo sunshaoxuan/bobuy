@@ -10,6 +10,8 @@ import type {PublicCatalogEntry} from '../api';
 import {useDetailReturnFocus} from '../components/useDetailReturnFocus';
 import {ProductBrand} from '../components/ProductMetadata';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import {useReadRecovery} from '../hooks/useReadRecovery';
+import {isRecoverableReadError} from '../readRecovery';
 import { Alert, Button, Drawer, Empty, Input, Segmented, Spin } from 'antd';
 import { ArrowLeftOutlined, ArrowRightOutlined, CalendarOutlined, DownOutlined, PlusOutlined, UpOutlined, UserOutlined } from '@ant-design/icons';
 import { Link, useParams, useSearchParams, useLocation } from 'react-router-dom';
@@ -84,13 +86,14 @@ export function RecommendationIssue({ detail, number, single, catalog, quantitie
 function RecommendationProductDetail({item,product,onClose,onAdd,canBuy,purchasePending=false}:{item?:RecommendationItem;product?:StoreProduct;purchasePending?:boolean;onClose:()=>void;onAdd:(p:StoreProduct)=>void;canBuy:(p:StoreProduct)=>boolean}){
  const {t,locale}=useI18n(),location=useLocation(),node=selectedNode(location.search),privatePreview=location.pathname.startsWith('/admin');
  const [attempt,setAttempt]=useState(0);
- const [references,setReferences]=useState<{key:string;entry?:PublicCatalogEntry;error?:boolean}>();
+ const [references,setReferences]=useState<{key:string;entry?:PublicCatalogEntry;error?:boolean;recoverable?:boolean}>();
  const referenceKey=`${item?.productId}:${item?.itemNumber}:${node}`;
  useEffect(()=>{let active=true;setReferences(undefined);
   if(!item?.productId||node===-1||privatePreview)return;
-  void storefrontApi.productDetail(item.productId,node).then(result=>{if(active){if(result.item.productId!==item.productId||result.item.itemNumber!==item.itemNumber)throw Error('browse.invalid');setReferences({key:referenceKey,entry:result.item});}}).catch(()=>{if(active)setReferences({key:referenceKey,error:true});});
+  void storefrontApi.productDetail(item.productId,node).then(result=>{if(active){if(result.item.productId!==item.productId||result.item.itemNumber!==item.itemNumber)throw Error('browse.invalid');setReferences({key:referenceKey,entry:result.item});}}).catch(error=>{if(active)setReferences({key:referenceKey,error:true,recoverable:isRecoverableReadError(error)});});
   return()=>{active=false;};
  },[referenceKey,attempt,privatePreview]);
+ useReadRecovery(()=>setAttempt(value=>value+1),!privatePreview&&references?.key===referenceKey&&!!references.recoverable,referenceKey);
  if(!item)return null;const text=recommendationText(item,locale),gallery=item.gallery??[];
  const introduction=references?.key===referenceKey&&references.entry?localizedContent(references.entry.introduction??{},locale):'';
  const description=introduction||text.description;

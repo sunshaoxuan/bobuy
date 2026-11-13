@@ -1,4 +1,5 @@
 import { message } from 'antd';
+import { retryRead, ReadRequestError, isTransientReadStatus } from './readRecovery';
 import { prepareImageUpload } from './imageUpload';
 import type {RecommendationIssueDateReview,RecommendationIssueDateRequest} from './components/RecommendationIssueDateEditor';
 export type {RecommendationIssueDateReview,RecommendationIssueDateRequest} from './components/RecommendationIssueDateEditor';
@@ -1509,10 +1510,12 @@ export type PublicCatalogPage = {items:PublicCatalogEntry[];page:number;size:num
 export type MerchantCustomer = { customerId: number; name: string; emailVerified: boolean; merchantApproved: boolean; approvedAt?: string };
 async function storeGet<T>(path: string): Promise<T> {
     const publicRead=path.startsWith('/api/storefront/');
-    const response = await authorizedFetch(path, publicRead?{cache:'no-store'}:undefined, { retryOnUnauthorized: !publicRead });
+    const response = publicRead
+        ? await retryRead(signal => authorizedFetch(path, { cache: 'no-store', signal }, { retryOnUnauthorized: false }))
+        : await authorizedFetch(path);
     if (response.status===409) {const body=await response.clone().json().catch(()=>({}));if(body.errorCode==='BROWSE_CHANGED')throw new Error('browse.changed');}
     if(response.status===400&&/\/api\/storefront\/(product-browse|recommendation-browse|product-sales)/.test(path))throw new Error('browse.invalid');
-    if (!response.ok) throw new Error(await parseErrorMessage(response));
+    if (!response.ok) throw new ReadRequestError(await parseErrorMessage(response), publicRead && isTransientReadStatus(response.status));
     return parseSuccessPayload<T>(response);
 }
 export type ProductMarkerColor = 'red'|'orange'|'gold'|'green'|'blue'|'purple'|'gray';
