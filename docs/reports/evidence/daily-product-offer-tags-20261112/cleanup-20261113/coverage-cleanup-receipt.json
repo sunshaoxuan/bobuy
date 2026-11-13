@@ -1,0 +1,17 @@
+{
+  "result": "CLEANED",
+  "files": [
+    {
+      "bytes": 9562259,
+      "sha256": "823741A4933A5BF2E496487C2E9F4F3E027626194F040FD9AB27236A5329E1C9",
+      "path": "C:\\Users\\X02851\\.codex\\visualizations\\2026\\11\\12\\01a1cf14-a3b6-7071-a101-f5f28498198e\\price-documents-focused.exec"
+    },
+    {
+      "bytes": 746477,
+      "sha256": "E328E9906B8D0002CB58563F6BBCA5ADD30A442791FFC9D2786E89F3D4598EB4",
+      "path": "C:\\Users\\X02851\\.codex\\visualizations\\2026\\11\\12\\01a1cf14-a3b6-7071-a101-f5f28498198e\\price-documents-read-focused.exec"
+    }
+  ],
+  "scope": "Only the two development coverage caches in this chat workspace; formal verification archive and receipts retained",
+  "completedAt": "2026-11-13T01:05:28.9715268Z"
+}

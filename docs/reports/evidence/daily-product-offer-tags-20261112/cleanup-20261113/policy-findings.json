@@ -1,0 +1,51 @@
+{
+  "denials": [
+    {
+      "at": "2026-11-12T09:53:33.394Z",
+      "callId": "call_9ac040563d5644e096b834fd07b8ded5",
+      "phase": "CreateProcess rejected before PowerShell launch",
+      "reason": "blocked by policy",
+      "command": "Remove-Item",
+      "errorExcerpt": "[{'type': 'input_text', 'text': 'Script failed\\nWall time 0.0 seconds\\nOutput:\\n'}, {'type': 'input_text', 'text': '{}'}, {'type': 'input_text', 'text': 'Script error:\\nexec_command failed: CreateProcess { message: \"Rejected(\\\\\"`\\\\\\\\\\\\\"C:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Program Files\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\WindowsApps\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\OpenAI.CodexPrimaryRuntime.v26-1110-778-0_26.1110.778.0_x64__3k8sg7r9htsxt\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\dependencies\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\native\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\powershell\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pwsh.exe\\\\\\\\\\\\\" -Command \\'Remove-Item -LiteralPath scripts/__pycache__ -Recurse -Force; Remove-Item -LiteralPath .task-tmp/offer-runner-tests -Recurse -Force; Remove-Item -LiteralPath docs/reports/evidence/…206 chars truncated…d docs/reports/evidence/daily-product-offer-tags-20261112 scripts/sync-product-offer-markers.py scripts/sync-product-offer-markers.sql scripts/test_sync_product_offer_markers.py scripts/test_sync_product_offer_markers_runner.py infra/systemd/bobuy-offer-markers.service infra/systemd/bobuy-offer-markers.timer; git diff --cached --stat; git commit -m \\\\\\\\\\\\\"feat: reconcile product discount badges daily on server\\\\\\\\\\\\\"\\'` rejected: blocked by policy\\\\\")\" }'}]"
+    },
+    {
+      "at": "2026-11-12T14:49:33.411Z",
+      "callId": "call_d74f326f6324466088e44a88fdab32a4",
+      "phase": "CreateProcess rejected before PowerShell launch",
+      "reason": "blocked by policy",
+      "command": "Remove-Item",
+      "errorExcerpt": "[{'type': 'input_text', 'text': 'Script failed\\nWall time 5.2 seconds\\nOutput:\\n'}, {'type': 'input_text', 'text': '{\"chunk_id\":\"cbcdfb\",\"wall_time_seconds\":4.9914411,\"exit_code\":0,\"original_token_count\":461,\"output\":\"warning: in the working copy of \\'docs/PRODUCT-PRICE-ADJUSTMENTS.md\\', LF will be replaced by CRLF the next time Git touches it\\\\nwarning: in the working copy of \\'docs/reports/DAILY-PRODUCT-OFFER-TAGS-20261112.md\\', LF will be replaced by CRLF the next time Git touches it\\\\nwarning: in the working copy of \\'docs/reports/evidence/daily-product-offer-tags-20261112/erp-price-documents/release-operator.py\\', LF will be replaced by CRLF the next time Git touches it\\\\nwarning: in the working copy of \\'docs/reports/evidence/daily-product-offer-tags-20261112/erp-price-documents/ui/production-browser.json\\', LF will be replaced by CRLF the next time Git touches it\\\\n[codex/daily-product-offer-tags-20261112 d94a9af] docs(release): record verified V35 pricing and daily offer marker production delivery\\\\n 11 files changed, 490 insertions(+), 5 deletions(-)\\\\n create mode 100644 docs/reports/evidence/daily-product-offer-tags-20261112/erp-price-documents/fingerprint-diagnosis.json"
+    },
+    {
+      "at": "2026-11-12T16:14:55.800Z",
+      "callId": "call_833e518fc0b342bbb57fb9b59c0ca22a",
+      "phase": "CreateProcess rejected before PowerShell launch",
+      "reason": "blocked by policy",
+      "command": "Remove-Item",
+      "errorExcerpt": "[{'type': 'input_text', 'text': 'Script failed\\nWall time 1.7 seconds\\nOutput:\\n'}, {'type': 'input_text', 'text': '{\"chunk_id\":\"54a961\",\"wall_time_seconds\":1.5323609,\"exit_code\":0,\"original_token_count\":0,\"output\":\"\"}'}, {'type': 'input_text', 'text': 'Script error:\\nexec_command failed: CreateProcess { message: \"Rejected(\\\\\"`\\\\\\\\\\\\\"C:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Program Files\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\WindowsApps\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\OpenAI.CodexPrimaryRuntime.v26-1110-778-0_26.1110.778.0_x64__3k8sg7r9htsxt\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\dependencies\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\native\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\powershell\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\pwsh.exe\\\\\\\\\\\\\" -Command \\\\\\\\\\\\\"Remove-Item -LiteralPath \\'.task-tmp/make-offer-period-release.py\\',\\'.task-tmp/release-offer-period.py\\',\\'.task-tmp/verify-offer-period.mjs\\',\\'.task-tmp/measure-offer-period.py\\',\\'.task-tmp/offer-period-tests.log\\',\\'.task-tmp/offer-period-build.log\\',\\'.task-tmp/offer-period-gemini.log\\',\\'.task-tmp/offer-period-payload.tar.gz\\' -Force\\\\\\\\\\\\\"` rejected: blocked by policy\\\\\")\" }'}]"
+    }
+  ],
+  "turnApprovalPolicies": {
+    "never": 11
+  },
+  "localRuleCheck": "codex execpolicy check with the user default.rules returned matchedRules=[]; no user rule matched the deletion command",
+  "confirmed": "Tool returned CreateProcess Rejected before command execution, so no Windows ACL/OneDrive deletion error was produced",
+  "notEstablished": "Generic rejection contains no per-command matching rule or model-review rationale; the exact internal heuristic cannot be proved from this output alone",
+  "plan63Mentions": [
+    {
+      "at": "2026-11-13T00:51:07.013Z",
+      "tool": "exec",
+      "excerpt": "text(await tools.web__run({open:[{ref_id:\"https://learn.chatgpt.com/docs/agent-approvals-security.md\"}],response_length:\"short\"}));\ntext(await tools.exec_command({cmd:\"Get-ChildItem 'C:/Users/X02851/AppData/Local/Packages/OpenAI.Codex_2p2nqsd0c76g0/LocalCache/Local' -Directory | Select-Object -ExpandProperty FullName; Get-ChildItem 'C:/Users/X02851/AppData/Local/Packages/OpenAI.Codex_2p2nqsd0c76g0"
+    },
+    {
+      "at": "2026-11-13T00:51:27.301Z",
+      "tool": "exec",
+      "excerpt": "text(await tools.web__run({find:[{ref_id:\"turn9view0\",pattern:\"never\"}],response_length:\"short\"}));\ntext(await tools.exec_command({cmd:\"Get-ChildItem '.task-tmp/plan63' -Force | Select-Object Name,Length; Get-ChildItem '.task-tmp/offer-runner-tests' -Force | Select-Object Name,Length; Get-ChildItem 'C:/Users/X02851/AppData/Local/Packages/OpenAI.CodexPrimaryRuntime.v26-1110-778-0_3k8sg7r9htsxt/Loca"
+    },
+    {
+      "at": "2026-11-13T00:52:54.661Z",
+      "tool": "exec",
+      "excerpt": "text(await tools.apply_patch(\"*** Begin Patch\\n*** Add File: C:/Users/X02851/OneDrive - One人事株式会社/文档/ChatGPT/bobuy.cc/.task-tmp/daily-product-offer-tags-20261112/docs/reports/evidence/daily-product-offer-tags-20261112/cleanup-20261113/inventory.py\\n+\\\"\\\"\\\"Read-only inventory and own-session denial evidence; does not delete files.\\\"\\\"\\\"\\n+from pathlib import Path\\n+import json,hashlib,subprocess,co"
+    }
+  ]
+}
