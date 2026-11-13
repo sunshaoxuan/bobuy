@@ -1,7 +1,9 @@
 # 生产环境持续部署
 
-`.github/workflows/cd-production.yml` 在非纯文档变更推送到 `main` 后运行，也可通过
-`workflow_dispatch` 手动运行。`docs/**` 和 Markdown 是唯一改动时不会自动部署；部署按
+`.github/workflows/cd-production.yml` 在应用变更推送到 `main` 后运行，也可通过
+`workflow_dispatch` 手动运行。仅改动 `docs/**`、`**/*.md`、`infra/nginx/**`、
+`infra/nacos/config/**`、`docker-compose*.yml/yaml` 或 `compose*.yml/yaml`（含子目录）
+时不会自动部署；部署按
 `production-deployment` 并发组排队，进行中的发布不会被取消。工作流只允许上游仓库运行，
 fork 不会部署。`CI_RUNNER` 仓库变量可覆盖默认的 `ubuntu-latest` runner。
 
@@ -25,29 +27,62 @@ Secret。
 Environment 默认无需审批即可尽快发布。若要启用手动批准，在仓库 **Settings → Environments
 → production → Deployment protection rules** 中添加 required reviewers。
 
-镜像发布到公开的 GHCR package，并同时使用提交 SHA 和 `latest` 标签。首次创建 package 后，
-仓库管理员应在 package 设置中确认可见性为 **Public**。
+镜像发布到 GHCR，并同时使用提交 SHA 和 `latest` 标签；部署使用 SHA 标签。
+支持私有 package，package 必须允许本仓库 Actions 访问。构建 job 使用 `packages: write`，
+部署 job 使用 `packages: read`。部署将当前 job 的 `GITHUB_TOKEN` 通过 SSH stdin
+交给远端 `docker login ghcr.io --password-stdin`，凭据仅供拉取镜像使用。
+token 不进入远端命令参数或日志。远端使用 `.cd/` 下独立临时 `DOCKER_CONFIG`，
+拉取结束立即 logout，退出时清理临时凭据目录，不改动发布用户原有 Docker 登录配置。
 
 ## 服务器行为与回滚
 
-工作流在 `/opt/bobuy` 复用现有 Compose 文件，只写入 `.compose.cd.yml` 镜像覆盖文件。
-`/opt/bobuy/.env` 必须预先存在，发布只将其作为 Compose 输入，绝不创建、覆盖、改写或删除。
-这与 #84 的密钥管理约定一致。
+`/opt/bobuy` 是现有部署目录，没有 Git checkout。SSH 用户需要 Bash 兼容的登录 shell、
+Bash、Docker Compose、curl，以及访问 Docker 和写入 `/opt/bobuy/.cd/` 的权限。
+工作流创建 `.cd/` 保存镜像覆盖和恢复状态。Compose 始终使用
+`--env-file /etc/bobuy.env -p bobuy -f docker-compose.yml -f compose.production.yml`，
+存在 `compose.rustfs.yml` 时追加该文件，最后追加 `-f .cd/compose.yml`。
+`/etc/bobuy.env` 缺失即拒绝部署；本工作流绝不创建、覆盖、改写或删除它。
+生产目录没有 `.env`，此工作流不依赖该路径。
 
-发布依次拉取 SHA 镜像、运行 `docker compose up -d`，然后检查网关 Actuator readiness 和前端
-HTTP 响应。成功后 `.deploy-revision` 记录 SHA 与 UTC 时间。失败时自动切回其中记录的上一次
-成功 SHA、再次检查健康，并保持本次 workflow 失败；首次部署没有上一 SHA 时会明确失败，
-不会猜测目标。
+发布前逐个执行 `docker inspect --format '{{.Config.Image}}'`，从
+`bobuy-core-service`、`bobuy-ai-service`、`bobuy-im-service`、`bobuy-auth-service`、
+`bobuy-gateway-service` 和 `bobuy-frontend` 捕获镜像引用，确认本地镜像存在，
+完整写入 `.cd/rollback.yml` 后才开始切换。因此首次 CD 可以恢复现有的
+`bobuy/core:20261113.offer-source-drawer.1` 等本地构建镜像，无需 `.deploy-revision`。
+每次发布更新这份切换前快照，恢复期间不要删除或重新标记这些本地镜像。
 
-手动回滚时，从 `.deploy-revision` 或 Actions 的成功发布记录确定经过验证的 SHA，将
-`.compose.cd.yml` 中六个镜像标签全部改成该 SHA，然后在 `/opt/bobuy` 执行：
+`pull` 和 `up` 均显式限定六个应用服务：`core-service ai-service im-service auth-service
+gateway-service frontend`。`up` 使用 `--no-deps --no-build --pull never`，保留
+postgres、redis、rabbitmq、nacos、rustfs 及 edge nginx 容器。等待 Java 服务健康，
+前端健康或运行后，按 `scripts/publish-production.py` 的顺序执行：
 
 ```sh
-docker compose --env-file .env -f docker-compose.yml -f compose.production.yml -f .compose.cd.yml pull
-docker compose --env-file .env -f docker-compose.yml -f compose.production.yml -f .compose.cd.yml up -d
+docker exec bobuy-gateway nginx -t && docker exec bobuy-gateway nginx -s reload
 ```
 
-健康确认后，将实际 SHA 和 UTC 时间写回 `.deploy-revision`。不要修改 `.env`。
+这使 nginx 的静态 upstream 重新解析新应用容器的地址。随后用
+`curl -fsS --resolve bobuy.cc:443:127.0.0.1` 检查 `https://bobuy.cc/` 和
+`https://bobuy.cc/health`，校验证书且必须返回 HTTP 200；不跟随重定向，301 不算成功。
+`infra/nginx/bobuy.conf` 将 `/health` 转发至 `gateway-service:8080/api/health`。
+容器和 HTTPS 检查各最多尝试 30 次，间隔 10 秒，每个 HTTPS 请求最多 15 秒。
+
+Compose 配置校验、登录、拉取、重建、健康检查或 nginx 校验/重载失败均进入回滚分支。
+回滚将 `.cd/rollback.yml` 复制为 `.cd/compose.yml`，使用本地捕获镜像和
+`up -d --no-deps --no-build --pull never --force-recreate` 重建六个应用，
+随后重复容器健康、nginx 校验/重载和 HTTPS 检查。回滚不依赖 GHCR 可用性。
+回滚成功记录 `.cd/last-rollback`；回滚失败明确报错，两者都保持 workflow 失败。
+环境文件缺失或无法完整捕获镜像时，在应用切换前退出。
+成功发布才写 `.cd/deploy-revision`，内容为 SHA 和 UTC 时间；恢复目标始终来自运行镜像快照。
+SSH 断线或主机故障导致进程中断时，需要依据 `.cd/rollback.yml` 和实际容器状态人工恢复。
+
+## 配置发布边界
+
+CD 只部署应用镜像，不同步 nginx、Nacos 配置或 Compose 文件。配置变更需经
+`scripts/publish-production.py` 现有手动发布流程处理；混合代码与配置提交触发 CD 时，
+仍只替换镜像，必须协调手动发布顺序。`workflow_dispatch` 同样不会传送配置文件。
+手动发布或恢复必须核对 `.cd/compose.yml` 与当前运行镜像，后续 Compose 操作应使用一致的
+文件集合，防止基础 `compose.production.yml` 的本地标签覆盖已启用的 GHCR 镜像。
+本次工作流修订没有执行发布，也没有修改现有手动工具的环境文件管理行为。
 
 ## 数据库迁移风险
 

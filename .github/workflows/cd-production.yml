@@ -6,6 +6,12 @@ on:
     paths-ignore:
       - 'docs/**'
       - '**/*.md'
+      - 'infra/nginx/**'
+      - 'infra/nacos/config/**'
+      - '**/docker-compose*.yml'
+      - '**/docker-compose*.yaml'
+      - '**/compose*.yml'
+      - '**/compose*.yaml'
   workflow_dispatch:
 
 concurrency:
@@ -51,20 +57,6 @@ jobs:
           docker buildx build frontend --file frontend/Dockerfile \
             --tag "$registry/frontend:$REVISION" --tag "$registry/frontend:latest" \
             --cache-from type=gha,scope=frontend --cache-to type=gha,mode=max,scope=frontend --push
-      - name: Require anonymously readable public images
-        env:
-          REGISTRY: ghcr.io/${{ github.repository_owner }}
-          REVISION: ${{ github.sha }}
-        run: |
-          set -euo pipefail
-          registry="${REGISTRY,,}"
-          docker logout ghcr.io
-          for image in core ai im auth router frontend; do
-            docker buildx imagetools inspect "$registry/$image:$REVISION" >/dev/null || {
-              echo "Image $image is not anonymously readable. Set its GHCR package visibility to Public." >&2
-              exit 1
-            }
-          done
 
   deploy:
     needs: build
@@ -99,58 +91,121 @@ jobs:
           printf '%s\n' "$PROD_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
       - name: Deploy, verify, and roll back on failure
         id: deploy
+        env:
+          GHCR_TOKEN: ${{ github.token }}
+          GHCR_USER: ${{ github.actor }}
         run: |
           set -euo pipefail
           registry="${REGISTRY,,}"
           ssh_opts=(-i ~/.ssh/id_ed25519 -p "$PROD_SSH_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$HOME/.ssh/known_hosts")
-          ssh "${ssh_opts[@]}" "$PROD_SSH_USER@$PROD_SSH_HOST" \
-            "REVISION='$REVISION' REGISTRY='$registry' bash -s" <<'REMOTE'
+          remote_script=$(cat <<'REMOTE'
           set -euo pipefail
           cd /opt/bobuy
-          test -f .env || { echo 'Production /opt/bobuy/.env is missing; refusing deployment.' >&2; exit 1; }
-          previous=''
-          if test -f .deploy-revision; then previous="$(awk 'NR==1 {print $1}' .deploy-revision)"; fi
-          write_override() {
-            tag="$1"
-            cat > .compose.cd.yml <<EOF
-          services:
-            core-service: {image: ${REGISTRY}/core:${tag}}
-            ai-service: {image: ${REGISTRY}/ai:${tag}}
-            im-service: {image: ${REGISTRY}/im:${tag}}
-            auth-service: {image: ${REGISTRY}/auth:${tag}}
-            gateway-service: {image: ${REGISTRY}/router:${tag}}
-            frontend: {image: ${REGISTRY}/frontend:${tag}}
-          EOF
+          test -f /etc/bobuy.env || { echo '/etc/bobuy.env is missing; refusing deployment.' >&2; exit 1; }
+          umask 077
+          mkdir -p .cd
+          # Pulling six new images needs headroom; refuse before touching anything when the disk is nearly full.
+          min_free_kb=$((6 * 1024 * 1024))
+          docker_root=$(docker info --format '{{.DockerRootDir}}')
+          free_kb=$(df --output=avail -k "$docker_root" | tail -n 1 | tr -d ' ')
+          if (( free_kb < min_free_kb )); then
+            echo "Only $((free_kb / 1024)) MiB free under $docker_root; need at least 6 GiB. Refusing deployment (nothing changed)." >&2
+            exit 1
+          fi
+          services=(core-service ai-service im-service auth-service gateway-service frontend)
+          images=(core ai im auth router frontend)
+          compose_files=(-f docker-compose.yml -f compose.production.yml)
+          if test -f compose.rustfs.yml; then compose_files+=(-f compose.rustfs.yml); fi
+          compose_files+=(-f .cd/compose.yml)
+          compose() { docker compose --env-file /etc/bobuy.env -p bobuy "${compose_files[@]}" "$@"; }
+
+          # Snapshot actual running refs before changing any application, even on first CD.
+          printf 'services:\n' > .cd/rollback.yml.tmp
+          for service in "${services[@]}"; do
+            ref=$(docker inspect --format '{{.Config.Image}}' "bobuy-$service")
+            [[ "$ref" =~ ^[a-zA-Z0-9][a-zA-Z0-9._/:@-]*$ ]] || { echo 'Invalid rollback image ref' >&2; exit 1; }
+            docker image inspect "$ref" >/dev/null
+            printf "  %s: {image: '%s'}\n" "$service" "$ref" >> .cd/rollback.yml.tmp
+          done
+          mv .cd/rollback.yml.tmp .cd/rollback.yml
+          printf 'services:\n' > .cd/compose.yml.tmp
+          for index in "${!services[@]}"; do
+            printf "  %s: {image: '%s/%s:%s'}\n" "${services[$index]}" "$REGISTRY" "${images[$index]}" "$REVISION" >> .cd/compose.yml.tmp
+          done
+          mv .cd/compose.yml.tmp .cd/compose.yml
+
+          # stdin contains only the job token. Never place it in argv or shell tracing.
+          export DOCKER_CONFIG
+          DOCKER_CONFIG=$(mktemp -d /opt/bobuy/.cd/docker-auth.XXXXXX)
+          cleanup_auth() {
+            docker logout ghcr.io >/dev/null 2>&1 || true
+            rm -rf -- "$DOCKER_CONFIG"
           }
-          compose() { docker compose --env-file .env -f docker-compose.yml -f compose.production.yml -f .compose.cd.yml "$@"; }
-          healthy() {
+          trap cleanup_auth EXIT
+          pull_images() {
+            local result=0
+            if docker login ghcr.io --username "$GHCR_USER" --password-stdin >/dev/null; then
+              compose pull "${services[@]}" || result=$?
+            else
+              result=1
+            fi
+            docker logout ghcr.io >/dev/null 2>&1 || result=1
+            return "$result"
+          }
+          containers_healthy() {
+            local attempt service status ready
             for attempt in $(seq 1 30); do
-              if curl -fsS http://127.0.0.1/api/actuator/health/readiness >/dev/null \
-                && curl -fsS http://127.0.0.1/ >/dev/null; then return 0; fi
+              ready=true
+              for service in "${services[@]}"; do
+                status=$(docker inspect --format '{{if .State.Health}}{{.State.Health.Status}}{{else}}{{.State.Status}}{{end}}' "bobuy-$service") || return 1
+                # The manual publisher requires health for the five Java services.
+                if [[ "$status" != healthy && !( "$service" == frontend && "$status" == running ) ]]; then ready=false; fi
+              done
+              if "$ready"; then return 0; fi
               sleep 10
             done
             return 1
           }
-          write_override "$REVISION"
-          compose pull
-          compose up -d
-          if healthy; then
-            printf '%s %s\n' "$REVISION" "$(date -u +%FT%TZ)" > .deploy-revision
+          reload_nginx() {
+            docker exec bobuy-gateway nginx -t && docker exec bobuy-gateway nginx -s reload
+          }
+          https_ok() {
+            local code
+            code=$(curl -fsS --resolve bobuy.cc:443:127.0.0.1 --connect-timeout 5 --max-time 15 \
+              --output /dev/null --write-out '%{http_code}' "https://bobuy.cc$1") || return 1
+            [[ "$code" == 200 ]]
+          }
+          healthy() {
+            local attempt
+            for attempt in $(seq 1 30); do
+              if https_ok / && https_ok /health; then return 0; fi
+              sleep 10
+            done
+            return 1
+          }
+          # Keep every fallible activation step inside the conditional so errexit
+          # cannot skip recovery. No dependency services are pulled or recreated.
+          if compose config --quiet && pull_images \
+            && compose up -d --no-deps --no-build --pull never "${services[@]}" \
+            && containers_healthy && reload_nginx && healthy; then
+            printf '%s %s\n' "$REVISION" "$(date -u +%FT%TZ)" > .cd/deploy-revision
             exit 0
           fi
-          echo 'New revision failed health checks; starting automatic rollback.' >&2
-          if test -z "$previous"; then
-            echo 'No previous successful revision exists; rollback is impossible.' >&2
-            exit 1
+          echo 'Deployment failed; restoring the six captured image refs.' >&2
+          cp .cd/rollback.yml .cd/compose.yml
+          if compose up -d --no-deps --no-build --pull never --force-recreate "${services[@]}" \
+            && containers_healthy && reload_nginx && healthy; then
+            printf 'rollback-from=%s %s images=rollback.yml\n' "$REVISION" "$(date -u +%FT%TZ)" > .cd/last-rollback
+            echo 'Captured images restored; this deployment remains failed.' >&2
+          else
+            echo 'Rollback failed; inspect .cd/rollback.yml and container state.' >&2
           fi
-          write_override "$previous"
-          compose pull
-          compose up -d
-          healthy || { echo 'Rollback revision also failed health checks.' >&2; exit 1; }
-          printf '%s %s rollback-from=%s\n' "$previous" "$(date -u +%FT%TZ)" "$REVISION" > .deploy-revision
-          echo "Rolled back to previous successful revision; failing this deployment." >&2
           exit 1
           REMOTE
+          )
+          # Quote the script as an argument, leaving SSH stdin available for login.
+          printf -v remote_command '%q ' env "REVISION=$REVISION" "REGISTRY=$registry" "GHCR_USER=$GHCR_USER" bash -c "$remote_script"
+          printf '%s\n' "$GHCR_TOKEN" | ssh "${ssh_opts[@]}" "$PROD_SSH_USER@$PROD_SSH_HOST" "$remote_command"
       - name: Write deployment summary
         if: always()
         run: |
@@ -160,7 +215,7 @@ jobs:
             echo "- Finished (UTC): \`$(date -u +%FT%TZ)\`"
             echo "- Result: \`${{ steps.deploy.outcome }}\`"
             if test '${{ steps.deploy.outcome }}' != success; then
-              echo '- Rollback: attempted by the remote deploy operator when a previous successful revision existed'
+              echo '- Rollback: activation failures restore captured image refs; consult remote logs for recovery or preflight failure'
             else
               echo '- Rollback: not required'
             fi
