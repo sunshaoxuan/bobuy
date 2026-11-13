@@ -52,3 +52,11 @@ it('offers a plain retry message after a failed read and does not invent dates',
  const badge=screen.getByLabelText('discount');fireEvent.focus(badge);await screen.findByText('Offer dates are unavailable. Please try again shortly.');
  fireEvent.blur(badge);await waitFor(()=>expect(screen.queryByRole('tooltip')).not.toBeInTheDocument());fireEvent.focus(badge);await screen.findByText('Offer dates to be confirmed');expect(load).toHaveBeenCalledTimes(2);
 });
+it('rechecks the end boundary when cached dates are reopened without another read',async()=>{
+ const clock=vi.spyOn(Date,'now').mockReturnValue(Date.parse('2026-11-13T01:00:00Z'));
+ const load=vi.spyOn(storefrontApi,'productDetail').mockResolvedValue({item:{referencePrices:[promotion({endsAt:'2026-11-13T02:00:00Z'})]} as PublicCatalogEntry,markers:[],revision:'r'});
+ render(<I18nProvider><ProductMarkerBadges markers={[discount]} overlay productId="expiring"/></I18nProvider>);
+ const badge=screen.getByLabelText('discount');fireEvent.focus(badge);await screen.findByText(/11:00/);
+ fireEvent.blur(badge);await waitFor(()=>expect(screen.queryByRole('tooltip')).not.toBeInTheDocument());clock.mockReturnValue(Date.parse('2026-11-13T02:00:00Z'));
+ fireEvent.focus(badge);await screen.findByText('Offer dates to be confirmed');expect(load).toHaveBeenCalledTimes(1);
+});
