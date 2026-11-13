@@ -1,0 +1,77 @@
+{
+  "base": {
+    "core-service": {
+      "id": "93b69d3a5e22b38a51014abb172749cb30f3f39dab9eddf9beaad940da58a650",
+      "image": "sha256:cd1a7f4744516091123e1cb2111369689e4437b5561ebbc268868cec2a0acf75",
+      "tag": "bobuy/core:20261112.price-documents.1",
+      "revision": "2124f4df66cdce193373e94f49e0d7955eb2ac75",
+      "project": "bobuy",
+      "startedAt": "2026-11-12T14:43:21.229927375Z",
+      "health": "healthy"
+    },
+    "frontend": {
+      "id": "d2f64a3e52ccb8edead6237622a9232e1a95952d0fab4271776a1e968caed680",
+      "image": "sha256:6f5df610d9786eb1e8a05f8726b44817c1c3bfb303d1eb346f628ca30ca25fcf",
+      "tag": "bobuy/frontend:20261113.read-recovery.1",
+      "revision": "f95f54ec099fcee79a26643db43c5c92b905ea85",
+      "project": "bobuy",
+      "startedAt": "2026-11-13T01:48:20.795299676Z",
+      "health": "running"
+    }
+  },
+  "images": [
+    {
+      "name": "core-service",
+      "tag": "bobuy/core:20261113.offer-source-drawer.1",
+      "imageId": "sha256:9f507f7dbb910193ac50ee10dcf6ecbecd04303dc96a9ad71187ddc6c2aa832f"
+    },
+    {
+      "name": "frontend",
+      "tag": "bobuy/frontend:20261113.offer-source-drawer.1",
+      "imageId": "sha256:1d63196c482de706b2e6c4258280b4287b8771adf330c69bd8c6953fc06be161"
+    }
+  ],
+  "migrationBinding": {
+    "result": "IDENTICAL",
+    "comparison": "Exact SQL bytes after CRLF-to-LF normalization; no other normalization",
+    "files": {
+      "db/migration/V10__recommendation_classification.sql": "02b8b29ff7887806ee594d3b25de5b0c9e9db84d32811d1e9ccd85adadca59e2",
+      "db/migration/V11__catalog_source_variants.sql": "430a6d9ab617b439bb567c2f7db4a093d8e205c9d16d9dac29f27353fb7b936d",
+      "db/migration/V12__legacy_catalog_variant_compatibility.sql": "041664e6ccf2d2625229cff43a9a6c1d414fce4e40fe57d973cd7085a0005727",
+      "db/migration/V13__currency_and_reviewed_sale.sql": "5ef2ae767bdb1f52a8c4ce63b488d7becb8e74462680265da2e35c8aa22cd231",
+      "db/migration/V14__recommendation_localizations.sql": "330fb1bff2ca33b69eb87ccc541b3304556598bf6e3da6e47f0f0499428b17c0",
+      "db/migration/V15__recommendation_product_gallery.sql": "fba8096ac3edf5a29bcc5beaafdd4c9c95858fcdb796d7afa5365f9e0be2c851",
+      "db/migration/V16__product_catalog_metadata.sql": "f0d5955e742cf7b75a286de15e9b0aa9f08ca6e9d79ec73cbe6e50d85b31949e",
+      "db/migration/V17__product_price_adjustments.sql": "786782040a48d6a222f8c77294ed272398d1a5355520bc861dee2031b4bfa8fd",
+      "db/migration/V18__encrypted_mail_settings.sql": "20b54dc9c22348e2da38e2977a12507142d6a3fe513713b60b49b09de140b5d9",
+      "db/migration/V19__postgres_image_access_scope.sql": "f9f76ef6334c09b4d9bc7ee61b78f41ecc746fe0b92706165c328cf754a109c1",
+      "db/migration/V1__baseline_schema.sql": "89fef3446be7e5318cea10779421846009090f22254fd4debf9802249ea87ded",
+      "db/migration/V20__product_logical_deletion.sql": "b5808d46a09aab230d507d4d04de86f64de3f4ec2da005ae1c633ce89fa6288c",
+      "db/migration/V21__media_transfer_outbox.sql": "ba4ea01e3405faa01b24fce4150bbdbe134422426dc6d7142ebf70c607972121",
+      "db/migration/V22__object_only_media_metadata.sql": "b15bfcecd3f080f2162a9e8f1285ba1a6e449b8ee4fee4a94bec5e1d04e855e9",
+      "db/migration/V23__reference_offer_windows.sql": "8d14a990664c110d50fd8b069f6b26df4bd593c6d6be5cfcdf5cc3932c60938d",
+      "db/migration/V24__recommendation_article_languages.sql": "5d34b932ba0fadd568bbc376d6041da169246ec1c0255a1b412a46e9266823cc",
+      "db/migration/V25__reversible_product_identity.sql": "0203502f52b80253259df9b60d2bd60b31f67fc374475bbed66b2be6dc2ae368",
+      "db/migration/V26__recommendation_service_offers.sql": "0ffd1cd243511ff43d1066b86e331e680c19aedd9bf5226f84ff9295e45f3e90",
+      "db/migration/V27__explicit_product_markers.sql": "8135ea648c892378ebe2234ee0247c43a89e1d4d040d4898305966768b9e2f83",
+      "db/migration/V28_1__recommendation_issue_date.sql": "d742bea25cb8ef3d205c9e2a4992d25024a372b5ab9dc38dc915f0ebbb91224e",
+      "db/migration/V28_2__product_rating.sql": "2a0223b7cf7efc6d01230333f2476db9da721ad3e2978e81da6a5f5b2870488e",
+      "db/migration/V28__checkout_delivery_snapshot.sql": "0319fbc4e12e87f033416bed9e4918ae584d2e0bfa6a35525eda9a597f518443",
+      "db/migration/V29__customer_order_amendments.sql": "5928444d349efd32b966e406a75346f900c255b4860f79580134fff7ecfb6c14",
+      "db/migration/V2__refresh_token_sessions.sql": "dce126be2485adeb4e2558f05eb3e5658fdce52d65face2d26906ab1852eb597",
+      "db/migration/V30__costco_onboarding_jobs.sql": "2268952a703b67477075a0bf7ad3c4b1cf71ac08111ab1ddd697a23a1757acde",
+      "db/migration/V31__recommendation_item_publication.sql": "db1a7f96ea5017fabfadd5f52809fe0357816da6433ebb31d723deac900773a7",
+      "db/migration/V32__user_product_reviews.sql": "279c50eab04581b7cccc63e6ae087b969091b327343352ef83b4254712e878ab",
+      "db/migration/V33__product_clicks.sql": "08b3009fac5647d35ef7c029bfd427d18dda5bf3c7b5e7cd20d9cb18f33c9f4d",
+      "db/migration/V34__geographic_master.sql": "3e749e285526b5a9ae3e026e58fc08b28162cc6a1d50f9fac72306d8ef60dc6a",
+      "db/migration/V35__price_adjustment_documents.sql": "9ff573d09b9ea5864a288b41d8e23b060e7befbacb4d6985f1556ad23556f531",
+      "db/migration/V3__product_attributes_jsonb.sql": "02d42dec0bc001bde96d218247870f74c664845e2a11c5dc88f4774a214df6b4",
+      "db/migration/V4__customer_storefront.sql": "f90542df6c2759e445000f04bc622712dbff6a4bf542542942e6fb6c995b6276",
+      "db/migration/V5__user_role_sets.sql": "f36fb732a0683f963ecfc0000efd808f2ab906dd938f04e2ae4b6227db155572",
+      "db/migration/V6__regional_delivery_trips.sql": "66a00ea876f19ad9b985450943c0aabdc6879b7f35094ef0f261abc4909774bf",
+      "db/migration/V7__product_recommendations.sql": "eaceeded61150fe5332cc1ed7634d65b20feaa85b294e2957101e5ef6c57ef94",
+      "db/migration/V9__recommendation_offer_facts.sql": "fff1adc3e4eacdfb810b1f0082dceaf9facb85dbcebd6533148582353d477190"
+    },
+    "baselineCoreImage": "sha256:cd1a7f4744516091123e1cb2111369689e4437b5561ebbc268868cec2a0acf75"
+  }
+}

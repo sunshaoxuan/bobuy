@@ -1,0 +1,21 @@
+### 1. Actual Defects / Doubts
+
+* **Section Header Divider Inconsistency (Doubt / Minor visual defect):**  
+  * In the **narrow320** view, a horizontal divider line is present directly below the section title `生效期间`.
+  * In the **desktop1440** view, this horizontal divider line is missing below `生效期间` (in contrast to sections like `价格设置` and `商品明细` which do have a divider line).
+* **Clipping & Overflow:**  
+  * None observed. Input values (`2026/11/13`, `2026/11/22`), calendar icons, labels, and descriptive text fit comfortably within card boundaries on both 1440px and 320px without horizontal truncation or boundary clipping.
+* **Text Wrapping:**  
+  * No unreadable wrapping. On 320px, the explanatory copy wraps cleanly into two legible lines without broken glyphs or awkward breaks.
+* **Labels & Wording:**  
+  * Plain Chinese labels `开始日期` and `结束日期` are used.  
+  * Explanatory text (`从开始日当天起，到结束日当天结束，日期按日本时间计算。`) clearly conveys inclusive dates and Japan Standard Time without misleading or internal engineering terminology.
+* **Native Inputs:**  
+  * Native date inputs retain standard, untruncated calendar icons on the right edge in both views.
+
+---
+
+### 2. Verdict
+
+**Pass (with 1 minor styling inconsistency noted above).**  
+The date section fulfills all layout, copy, and responsive presentation requirements across both desktop (1440) and narrow mobile (320) viewports. The only item to verify is whether the horizontal divider under `生效期间` should consistently appear in both views or be omitted in both.

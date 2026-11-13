@@ -1,0 +1,9 @@
+{
+  "oldCount": 36,
+  "newCount": 36,
+  "oldOnly": [],
+  "newOnly": [],
+  "changed": [
+    "db/migration/V35__price_adjustment_documents.sql"
+  ]
+}

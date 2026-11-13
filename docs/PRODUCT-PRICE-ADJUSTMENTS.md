@@ -2,6 +2,8 @@
 
 ## Selected quote and drawer presentation, 2026-11-13
 
+The adjustment drawer uses Japan-local Start date and End date. Both selected days are included in full. A selected November 13 to November 22 is stored as November 13 00:00 through November 23 00:00 in Japan time using the existing API interval contract. The list, editor and approval view show November 22 as the end date; reopening and saving does not extend the period. Permanent changes show a start date with no end date. Existing approved documents are not rewritten. Saving an edited draft applies the selected whole-day dates.
+
 Public cards carry the priceChange projection of their selected price document. The discount hint uses that exact projection; it does not fetch another set of reference periods. An available website quote takes precedence over the selected reference quote in both the card and detail. The hint shows only the current promotional interval in plain Japan-local dates. Document endsAt remains separate from the quote's next-change/validUntil boundary. Expired and future periods are excluded.
 
 The existing product drawer groups document history, price settings, effective period, reason and product lines. Mobile product-line inputs flow vertically, and draft save/close actions remain in the drawer footer. Approval, cancellation, reasons and version checks retain their existing contract.

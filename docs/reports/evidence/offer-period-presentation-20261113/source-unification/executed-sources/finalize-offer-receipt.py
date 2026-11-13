@@ -1,0 +1,17 @@
+from pathlib import Path
+import hashlib,importlib.util,json,shutil,subprocess,sys
+r=Path(__file__).parent;e=r/'docs/reports/evidence/offer-period-presentation-20261113/source-unification'
+spec=importlib.util.spec_from_file_location('client',r/'release-offer-source.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+files=['bind-production-assets.py','diagnose-offer-stage.py','diagnose-offer-touch.mjs','finalize-offer-ui.py','fix-migration-binding.py','fix-pricing-geometry.py','fix-pricing-selectors.py','implement-offer-source.py','implement-pricing-layout.py','inspect-offer-network.mjs','inspect-pricing-drawer.mjs','measure-offer-period.py','measure-pricing-glyphs.py','offer-claude-advice.txt','offer-claude-models.py','offer-claude-probe.txt','offer-deepseek-advice.txt','offer-flash-probe.txt','offer-gemini-final.txt','offer-gemini-review.txt','offer-inventory.py','offer-models.py','offer-pro-probe.txt','prepare-offer-release.py','refine-pricing-copy.py','release-offer-source.py','release-offer.py','retry-offer-image.mjs','retry-offer-image.py','run-pricing-browser.py','update-offer-tests.py','verify-offer-alignment.mjs','verify-offer-period.mjs','verify-pricing-ui.mjs','verify-selected-offer.mjs','fix-pricing-selectors.py','finalize-offer-receipt.py']
+files=list(dict.fromkeys(files));dest=e/'executed-sources';dest.mkdir(exist_ok=True)
+for n in files:shutil.copy2(r/n,dest/n)
+ci=json.loads(subprocess.check_output(['gh','run','view','43355530991','--json','status,conclusion,headSha,url'],cwd=r));(e/'main-ci.json').write_text(json.dumps(ci,indent=2)+'\n',encoding='utf-8')
+for n in ['offers.json','browser.json']:
+ v=json.loads((e/'production'/n).read_text(encoding='utf-8'));assert len(v['views'])==2 and all(not view['errors'] and not view['network'] for view in v['views'])
+archiveNames={'payload.tar.gz':'/opt/bobuy/releases/20261113.offer-period-friendly.1/payload.tar.gz','offer-source-payload.tar.gz':'/opt/bobuy/releases/20261113.offer-source-drawer.1/offer-source-payload.tar.gz'}
+checks=json.loads(m.remote('import hashlib,json\nfrom pathlib import Path\nfiles='+repr(archiveNames)+'\nprint(json.dumps({n:hashlib.sha256(Path(p).read_bytes()).hexdigest() for n,p in files.items()}))'))
+for n,digest in checks.items():assert m.sha(r/n)==digest
+(e/'retained-archives.json').write_text(json.dumps({n:dict(remote=archiveNames[n],sha256=digest) for n,digest in checks.items()},indent=2)+'\n',encoding='utf-8')
+acceptance=dict(result='PASS',source=m.SOURCE,mergeCommit='16d2372b5aef9ab4c531eeb77186c7045004b318',release=m.RELEASE,productionTimeJST='2026-11-13 11:57:57',frontendTests=31,backendTests=31,requiredCI='PR all success',mainCI=ci,checks={'selectedDocumentPeriod':'PASS','currentOnlyPlainDates':'PASS','legacyFieldInventory':'PASS; V35 already removed; no migration','documentWorkflow':'PASS isolated/synthetic, production readonly','drawerFunctional':'PASS 1440/320','drawerGeometry':'PASS','drawerVisual':'PASS primary review with Gemini findings adjudicated in plan','productionAssetsAndJAR':'PASS exact hashes','logoAndHeat':'PASS','productionConsoleAndNetwork':'PASS both surfaces, both viewports','schemaAndProtectedServices':'PASS'},evidence=['production/offers.json','production/browser.json','production-verify.json','local/footer-glyphs.json','gemini-review.txt','database-inventory.json'])
+(e/'acceptance.json').write_text(json.dumps(acceptance,indent=2)+'\n',encoding='utf-8')
+print(json.dumps(dict(result='PASS',release=m.RELEASE,mainCI=ci['status'],archivesRetained=len(checks))))

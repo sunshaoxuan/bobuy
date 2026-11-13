@@ -1,0 +1,11 @@
+{
+  "source": "9f948b1bd98aca3019b5c7ee98e63c59e9aa1582",
+  "result": "PASS",
+  "ci": "success",
+  "ciUrl": "https://github.com/sunshaoxuan/bobuy/pull/79",
+  "frontendTests": 31,
+  "backendTests": 31,
+  "browser": "PASS",
+  "scope": "drawer1440/320 synthetic save and approval/cancel guards; selected-source hints; production read-only acceptance pending",
+  "schemaOperation": false
+}

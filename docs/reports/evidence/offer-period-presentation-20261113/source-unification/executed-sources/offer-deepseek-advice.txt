@@ -1,0 +1,38 @@
+**Correctness invariants**
+
+- The displayed quote must be the single source for the badge. Propagate `selectedDocument: { id, type, promotion, start, end, state }` on every quote, including sale quotes.
+- Badge rendering must use `quote.selectedDocument`; it must not query “all current offer periods” to decide the badge’s document, promotion, interval, or state.
+- Keep `quote.nextChangeAt` separate from `selectedDocument.end`. The badge interval is the exact document interval, not the quote’s next-change boundary.
+- Sale quotes must carry the sale document’s metadata. Do not fall back to the regular document or leave sale metadata null.
+- Detail must use the same quote selector/DTO as the card, not a separate document lookup.
+- Regular-price setup returns an approved `PERMANENT` document. Do not reintroduce the V35-removed standalone discount price/date fields or use them as fallback.
+- Propagation should be read-only. It must not create/update price documents or bypass the audit trail. Sale availability should remain derived from the selected sale document’s state/interval, not from a separate offer-period scan.
+
+**Minimal tests**
+
+Use a fixed clock and assert both the quote output and the badge output.
+
+1. **Regular `PERMANENT` source identity**
+   - Fixture: approved `PERMANENT` regular document `R`, quote `nextChangeAt != R.end`, plus an unrelated active offer period in another channel; legacy V35 discount fields absent/null.
+   - Assert: quote carries exact `R.id/type/promotion/start/end/state`; badge uses those exact values; badge path does not call the offer-period finder (stub can fail if called); detail returns the same selected document; no document/audit write occurs.
+   - Catches source mismatch, hidden legacy fallback, card/detail divergence, and audit regression.
+
+2. **Competing active channels**
+   - Fixture: active documents in channels A, B, and C with different promotions/intervals; quote selector chooses B.
+   - Assert: selected document and badge are exactly B’s; no aggregation and no A/C leakage; only one badge source is used.
+   - Catches “fetch all current offer periods” behavior and competing-channel source mismatch.
+
+3. **Sale override**
+   - Fixture: active approved regular `PERMANENT` document and active approved sale document `S`; quote selects `S`.
+   - Assert: quote carries `S.id/type/promotion/start/end/state`; badge uses `S`, not the regular document; sale availability is true; detail returns the same sale-selected document; no audit write occurs.
+   - Catches sale quote metadata being lost, regular fallback, sale override failure, and sale availability regression.
+
+4. **Expired and future intervals**
+   - Fixture: active regular document; expired sale/offer interval; future sale/offer interval; optionally an active sale.
+   - Assert: expired/future sale documents are not selected or badged; sale availability is false for expired/future; start is inclusive and end exclusive at the boundary; badge still reflects only the selected current document.
+   - Catches use of all offer periods, incorrect boundary handling, and stale/future badges.
+
+5. **Exact document end vs quote next-change boundary**
+   - Fixture: selected document end `E`; quote `nextChangeAt` differs from `E` in both directions across two cases.
+   - Assert: badge interval uses `E`, not `nextChangeAt`; quote still exposes `nextChangeAt` unchanged; availability follows the document interval.
+   - Catches conflation of document end with quote refresh/next-change boundary, especially for sale quotes.

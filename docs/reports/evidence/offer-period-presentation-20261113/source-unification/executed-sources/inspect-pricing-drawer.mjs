@@ -1,0 +1,8 @@
+import {chromium} from './frontend/node_modules/@playwright/test/index.mjs';
+import fs from 'node:fs';
+let raw='';for await(const chunk of process.stdin)raw+=chunk;let secret=JSON.parse(raw);raw='';
+const browser=await chromium.launch({executablePath:'C:/Users/X02851/AppData/Local/ms-playwright/chromium-1194/chrome-win/chrome.exe',headless:true});
+const out='docs/reports/evidence/offer-period-presentation-20261113/source-unification';
+try{const page=await browser.newPage({viewport:{width:1440,height:1000}});const r=await page.request.post('https://bobuy.cc/api/auth/login',{data:secret});secret=null;if(!r.ok())throw Error('Operator login failed');const session=(await r.json()).data;
+await page.addInitScript(s=>{localStorage.setItem('bobbuy_locale','zh-CN');localStorage.setItem('bobbuy_access_token',s.accessToken);localStorage.setItem('bobbuy_auth_user',JSON.stringify(s.user));},session);
+await page.goto('https://bobuy.cc/admin/products');await page.getByRole('button',{name:'售价与调价',exact:true}).first().click();const drawer=page.locator('.ant-drawer:visible').last();await drawer.waitFor();await page.waitForLoadState('networkidle');await page.screenshot({path:out+'/drawer-before.png'});console.log('Drawer title:',await drawer.locator('.ant-drawer-title').innerText());const create=page.getByRole('button',{name:/新增调价单|新增期间价格/}).first();if(await create.count()){await create.click();await page.waitForTimeout(400);await page.screenshot({path:out+'/editor-before.png'});}console.log('Read-only drawer inspection complete; no save or approval performed.');}finally{await browser.close();}

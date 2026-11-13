@@ -1,0 +1,2 @@
+from pathlib import Path
+r=Path(__file__).resolve().parents[4];p=r/'frontend/src/components/PriceAdjustmentWorkspace.test.tsx';s=p.read_text(encoding='utf-8').replace("name:'Edit',exact:true","name:'Edit'").replace("within(drawer).getByRole('button',{name:'Close',exact:true})","within(drawer.querySelector('.price-document-footer') as HTMLElement).getByRole('button',{name:'Close'})");p.write_text(s,encoding='utf-8')

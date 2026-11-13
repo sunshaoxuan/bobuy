@@ -1,0 +1,37 @@
+{
+  "result": "PASS",
+  "source": "9f948b1bd98aca3019b5c7ee98e63c59e9aa1582",
+  "mergeCommit": "16d2372b5aef9ab4c531eeb77186c7045004b318",
+  "release": "20261113.offer-source-drawer.1",
+  "productionTimeJST": "2026-11-13 11:57:57",
+  "frontendTests": 31,
+  "backendTests": 31,
+  "requiredCI": "PR all success",
+  "mainCI": {
+    "conclusion": "success",
+    "headSha": "16d2372b5aef9ab4c531eeb77186c7045004b318",
+    "status": "completed",
+    "url": "https://github.com/sunshaoxuan/bobuy/actions/runs/43355530991"
+  },
+  "checks": {
+    "selectedDocumentPeriod": "PASS",
+    "currentOnlyPlainDates": "PASS",
+    "legacyFieldInventory": "PASS; V35 already removed; no migration",
+    "documentWorkflow": "PASS isolated/synthetic, production readonly",
+    "drawerFunctional": "PASS 1440/320",
+    "drawerGeometry": "PASS",
+    "drawerVisual": "PASS primary review with Gemini findings adjudicated in plan",
+    "productionAssetsAndJAR": "PASS exact hashes",
+    "logoAndHeat": "PASS",
+    "productionConsoleAndNetwork": "PASS both surfaces, both viewports",
+    "schemaAndProtectedServices": "PASS"
+  },
+  "evidence": [
+    "production/offers.json",
+    "production/browser.json",
+    "production-verify.json",
+    "local/footer-glyphs.json",
+    "gemini-review.txt",
+    "database-inventory.json"
+  ]
+}
