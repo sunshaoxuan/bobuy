@@ -44,6 +44,7 @@ it('loads dates only when opened, keeps the tooltip on the right, and caches a s
  const view=render(<I18nProvider><ProductMarkerBadges markers={[discount]} overlay productId="p"/></I18nProvider>);
  const badge=screen.getByLabelText('discount');expect(load).not.toHaveBeenCalled();expect(badge).toHaveAttribute('data-card-action','offer-period');
  fireEvent.focus(badge);await screen.findByText('Nov 2 to Nov 15');expect(load).toHaveBeenCalledWith('p');
+ fireEvent.click(badge);expect(screen.getByRole('tooltip')).toBeVisible();
  expect(document.querySelector('.offer-period-tooltip')).toHaveClass('ant-tooltip-placement-right');
  fireEvent.blur(badge);fireEvent.focus(badge);await waitFor(()=>expect(load).toHaveBeenCalledTimes(1));view.unmount();
 });
