@@ -45,7 +45,7 @@ it('loads dates only when opened, keeps the tooltip on the right, and caches a s
  const badge=screen.getByLabelText('discount');expect(load).not.toHaveBeenCalled();expect(badge).toHaveAttribute('data-card-action','offer-period');
  fireEvent.focus(badge);await screen.findByText('Nov 2 to Nov 15');expect(load).toHaveBeenCalledWith('p');
  fireEvent.click(badge);await waitFor(()=>expect(screen.getByRole('tooltip')).toBeVisible());
- expect(document.querySelector('.offer-period-tooltip')).toHaveClass('ant-tooltip-placement-right');
+ expect(document.querySelector('.offer-period-tooltip')).toHaveClass('ant-tooltip-placement-rightTop');
  fireEvent.blur(badge);fireEvent.focus(badge);await waitFor(()=>expect(load).toHaveBeenCalledTimes(1));view.unmount();
 });
 it('offers a plain retry message after a failed read and does not invent dates',async()=>{
