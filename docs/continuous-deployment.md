@@ -129,3 +129,5 @@ CD 只部署应用镜像，不同步 nginx、Nacos 配置或 Compose 文件。�
 Java 服务使用 Flyway 自动迁移。应用镜像回滚不保证数据库变更也能回滚。发布包含迁移时，
 应先按生产备份恢复 runbook 验证可用备份和恢复路径，并审查迁移的前后兼容性；故障后不要在
 已有新写入时直接以旧数据库快照覆盖生产，应先隔离写入并制定前向修复或兼容应用回滚方案。
+
+> Release directories under `/opt/bobuy/releases` are removed by CD only when their name equals an image tag that the same cleanup just retired. Directories without a matching image (configuration or reference-data releases, recovery material) are never removed automatically.

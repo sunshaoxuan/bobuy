@@ -199,6 +199,7 @@ jobs:
             df -h / || echo 'WARNING: cleanup disk report failed' >&2
             keep_ids='|'
             keep_tags='|'
+            removed_tag_names='|'
             for service in "${services[@]}"; do
               image_id=$(docker inspect --format '{{.Image}}' "bobuy-$service") || {
                 echo 'WARNING: cleanup skipped: running image lookup failed' >&2; return 0;
@@ -244,6 +245,7 @@ jobs:
                 bobuy-rollback/core-service|bobuy-rollback/ai-service|bobuy-rollback/im-service|bobuy-rollback/auth-service|bobuy-rollback/gateway-service|bobuy-rollback/frontend)
                   if docker rmi "$repo:$tag"; then
                     removed_tags=$((removed_tags + 1))
+                    removed_tag_names+="$tag|"
                   else
                     echo "WARNING: could not remove image tag $repo:$tag" >&2
                   fi
@@ -256,6 +258,9 @@ jobs:
                 name=${dir##*/}
                 [[ "$name" =~ ^[a-zA-Z0-9_][a-zA-Z0-9_.-]{0,127}$ ]] || continue
                 [[ "$keep_tags" != *"|$name|"* ]] || continue
+                # Only delete image-release dirs whose image tag was just retired; dirs without an
+                # image (config / reference-data releases, recovery material) are always kept.
+                [[ "$removed_tag_names" == *"|$name|"* ]] || continue
                 if rm -rf -- "$dir"; then
                   removed_dirs=$((removed_dirs + 1))
                 else
