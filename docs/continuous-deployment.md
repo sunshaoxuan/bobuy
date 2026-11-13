@@ -19,8 +19,11 @@ fork 不会部署。`CI_RUNNER` 仓库变量可覆盖默认的 `ubuntu-latest` r
 | `PROD_SSH_KEY` | 无口令、发布专用的 ed25519 私钥 |
 | `PROD_SSH_KNOWN_HOSTS` | 由管理员可信渠道取得的生产主机 `known_hosts` 条目 |
 
-任一项缺失时，工作流会在连接前失败。部署会把 `PROD_SSH_KNOWN_HOSTS` 原样写入
-`~/.ssh/known_hosts`，并强制 `StrictHostKeyChecking=yes`；不会运行 `ssh-keyscan`，也不会
+任一项缺失时，工作流会在连接前失败。部署通过 `mktemp -d` 在 `RUNNER_TEMP` 下创建
+job 专属目录，目录权限为 700，私钥和 `known_hosts` 文件权限为 600。
+SSH 显式传入 `-i`、`UserKnownHostsFile`、`IdentitiesOnly=yes` 和 `BatchMode=yes`，
+并强制 `StrictHostKeyChecking=yes`；`if: always()` 步骤清理该目录，不改动 `~/.ssh`。
+不会运行 `ssh-keyscan`，也不会
 关闭主机密钥校验。主机密钥轮换时，应先由管理员通过独立可信渠道验证新指纹，再更新此
 Secret。
 
@@ -44,9 +47,11 @@ Bash、Docker Compose、curl，以及访问 Docker 和写入 `/opt/bobuy/.cd/` �
 `/etc/bobuy.env` 缺失即拒绝部署；本工作流绝不创建、覆盖、改写或删除它。
 生产目录没有 `.env`，此工作流不依赖该路径。
 
-发布前逐个执行 `docker inspect --format '{{.Config.Image}}'`，从
+发布前逐个执行 `docker inspect --format '{{.Image}}'`，从
 `bobuy-core-service`、`bobuy-ai-service`、`bobuy-im-service`、`bobuy-auth-service`、
-`bobuy-gateway-service` 和 `bobuy-frontend` 捕获镜像引用，确认本地镜像存在，
+`bobuy-gateway-service` 和 `bobuy-frontend` 捕获镜像 ID，通过 `docker tag` 为每个 ID
+创建唯一的本地引用 `bobuy-rollback/<service>:<UTC timestamp>-<short id>`。
+校验引用并确认本地镜像存在，后续拉取发布标签不会改变这些回滚引用，
 完整写入 `.cd/rollback.yml` 后才开始切换。因此首次 CD 可以恢复现有的
 `bobuy/core:20261113.offer-source-drawer.1` 等本地构建镜像，无需 `.deploy-revision`。
 每次发布更新这份切换前快照，恢复期间不要删除或重新标记这些本地镜像。

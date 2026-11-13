@@ -84,11 +84,13 @@ jobs:
       - name: Configure verified SSH host key
         run: |
           set -euo pipefail
-          install -d -m 700 ~/.ssh
-          install -m 600 /dev/null ~/.ssh/id_ed25519
-          printf '%s\n' "$PROD_SSH_KEY" > ~/.ssh/id_ed25519
-          install -m 600 /dev/null ~/.ssh/known_hosts
-          printf '%s\n' "$PROD_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          ssh_dir=$(mktemp -d "$RUNNER_TEMP/bobuy-ssh.XXXXXX")
+          printf 'PROD_SSH_DIR=%s\n' "$ssh_dir" >> "$GITHUB_ENV"
+          chmod 700 "$ssh_dir"
+          install -m 600 /dev/null "$ssh_dir/id_ed25519"
+          printf '%s\n' "$PROD_SSH_KEY" > "$ssh_dir/id_ed25519"
+          install -m 600 /dev/null "$ssh_dir/known_hosts"
+          printf '%s\n' "$PROD_SSH_KNOWN_HOSTS" > "$ssh_dir/known_hosts"
       - name: Deploy, verify, and roll back on failure
         id: deploy
         env:
@@ -97,7 +99,7 @@ jobs:
         run: |
           set -euo pipefail
           registry="${REGISTRY,,}"
-          ssh_opts=(-i ~/.ssh/id_ed25519 -p "$PROD_SSH_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$HOME/.ssh/known_hosts")
+          ssh_opts=(-i "$PROD_SSH_DIR/id_ed25519" -p "$PROD_SSH_PORT" -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$PROD_SSH_DIR/known_hosts")
           remote_script=$(cat <<'REMOTE'
           set -euo pipefail
           cd /opt/bobuy
@@ -119,11 +121,15 @@ jobs:
           compose_files+=(-f .cd/compose.yml)
           compose() { docker compose --env-file /etc/bobuy.env -p bobuy "${compose_files[@]}" "$@"; }
 
-          # Snapshot actual running refs before changing any application, even on first CD.
+          # Pin actual running image IDs before changing any application, even on first CD.
+          rollback_timestamp=$(date -u +%Y%m%dT%H%M%S%NZ)
           printf 'services:\n' > .cd/rollback.yml.tmp
           for service in "${services[@]}"; do
-            ref=$(docker inspect --format '{{.Config.Image}}' "bobuy-$service")
+            image_id=$(docker inspect --format '{{.Image}}' "bobuy-$service")
+            short_id=${image_id#sha256:}
+            ref="bobuy-rollback/$service:$rollback_timestamp-${short_id:0:12}"
             [[ "$ref" =~ ^[a-zA-Z0-9][a-zA-Z0-9._/:@-]*$ ]] || { echo 'Invalid rollback image ref' >&2; exit 1; }
+            docker tag "$image_id" "$ref"
             docker image inspect "$ref" >/dev/null
             printf "  %s: {image: '%s'}\n" "$service" "$ref" >> .cd/rollback.yml.tmp
           done
@@ -206,6 +212,12 @@ jobs:
           # Quote the script as an argument, leaving SSH stdin available for login.
           printf -v remote_command '%q ' env "REVISION=$REVISION" "REGISTRY=$registry" "GHCR_USER=$GHCR_USER" bash -c "$remote_script"
           printf '%s\n' "$GHCR_TOKEN" | ssh "${ssh_opts[@]}" "$PROD_SSH_USER@$PROD_SSH_HOST" "$remote_command"
+      - name: Clean up production SSH files
+        if: always()
+        run: |
+          if [[ -n "${PROD_SSH_DIR:-}" ]]; then
+            rm -rf -- "$PROD_SSH_DIR"
+          fi
       - name: Write deployment summary
         if: always()
         run: |
