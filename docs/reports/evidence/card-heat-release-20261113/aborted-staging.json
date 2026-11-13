@@ -1,0 +1,8 @@
+{
+  "release": "20261113.heat-top-right.1",
+  "source": "a437c9250f200be456f931afc3a19baebf74746e",
+  "expectedBase": "8af5c8e3e2fcc6581fe80f29dc91190212a47b34",
+  "observedBase": "817675d60c1d712c979f999f895da592fd188487",
+  "phase": "REJECTED_BEFORE_IMAGE_BUILD_AND_ACTIVATION",
+  "action": "Preserved actual deployed source by merging it; rebuilt only affected artifact and followed new native CI"
+}

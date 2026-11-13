@@ -1,0 +1,127 @@
+[
+  {
+    "route": "/products",
+    "width": 1440,
+    "glyph": [
+      155,
+      20,
+      198,
+      31
+    ],
+    "availableFrame": {
+      "x": 151.4375,
+      "y": 13.59375,
+      "width": 51.953125,
+      "height": 24,
+      "right": 203.390625,
+      "bottom": 37.59375
+    },
+    "margins": [
+      3.5625,
+      6.40625,
+      5.390625,
+      6.59375
+    ],
+    "verticalCenterError": 0.09375
+  },
+  {
+    "route": "/recommendations",
+    "width": 1440,
+    "glyph": [
+      155,
+      20,
+      198,
+      31
+    ],
+    "availableFrame": {
+      "x": 151.4375,
+      "y": 13.84375,
+      "width": 51.953125,
+      "height": 24,
+      "right": 203.390625,
+      "bottom": 37.84375
+    },
+    "margins": [
+      3.5625,
+      6.15625,
+      5.390625,
+      6.84375
+    ],
+    "verticalCenterError": 0.34375
+  },
+  {
+    "route": "/recommendations/3",
+    "width": 1440,
+    "glyph": [
+      155,
+      20,
+      200,
+      31
+    ],
+    "availableFrame": {
+      "x": 151.4375,
+      "y": 13.390625,
+      "width": 51.953125,
+      "height": 24,
+      "right": 203.390625,
+      "bottom": 37.390625
+    },
+    "margins": [
+      3.5625,
+      6.609375,
+      3.390625,
+      6.390625
+    ],
+    "verticalCenterError": 0.109375
+  },
+  {
+    "route": "/products",
+    "width": 320,
+    "glyph": [
+      106,
+      17,
+      122,
+      28
+    ],
+    "availableFrame": {
+      "x": 102.0625,
+      "y": 9.09375,
+      "width": 26.9375,
+      "height": 28,
+      "right": 129,
+      "bottom": 37.09375
+    },
+    "margins": [
+      3.9375,
+      7.90625,
+      7,
+      9.09375
+    ],
+    "verticalCenterError": 0.59375
+  },
+  {
+    "route": "/products",
+    "width": 320,
+    "glyph": [
+      106,
+      18,
+      125,
+      29
+    ],
+    "availableFrame": {
+      "x": 102.0625,
+      "y": 9.84375,
+      "width": 26.9375,
+      "height": 28,
+      "right": 129,
+      "bottom": 37.84375
+    },
+    "margins": [
+      3.9375,
+      8.15625,
+      4,
+      8.84375
+    ],
+    "verticalCenterError": 0.34375
+  }
+]

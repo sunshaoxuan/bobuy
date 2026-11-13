@@ -1,0 +1,16 @@
+
+> bobbuy-frontend@0.1.0 test
+> vitest run --run src/components/CompactProductCard.test.tsx src/components/ProductPopularity.test.tsx src/components/openCardDetail.test.ts
+
+
+ RUN  v1.6.1 C:/Users/X02851/OneDrive - One人事株式会社/文档/ChatGPT/bobuy.cc/.task-tmp/home-brand-20261112/frontend
+
+ ✓ src/components/openCardDetail.test.tsx  (6 tests) 258ms
+ ✓ src/components/ProductPopularity.test.tsx  (4 tests) 344ms
+ ✓ src/components/CompactProductCard.test.tsx  (11 tests) 579ms
+
+ Test Files  3 passed (3)
+      Tests  21 passed (21)
+   Start at  01:05:28
+   Duration  9.07s (transform 429ms, setup 2.01s, collect 13.15s, tests 1.18s, environment 3.04s, prepare 604ms)
+

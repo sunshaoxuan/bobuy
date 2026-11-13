@@ -1,0 +1,14 @@
+{
+  "source": "2160266d9a9f864274e62003b7bd1d1c093c376f",
+  "result": "PASS",
+  "concurrentBaseline": "Includes live detail-offer-period source817675d. Heat tests and screenshots retain valid identical inputs. Rebuild and native exact-source CI both passed. Earlier .1 staging rejected old baseline before image construction or activation.",
+  "scope": "Merge a007e86 into current main and publish frontend only; preserve name-column logo and current pricing",
+  "tests": "21 tests across CompactProductCard, ProductPopularity and openCardDetail passed; one affected build passed",
+  "functional": "Five real page cases cover three shared-card consumers, 1440px/320px, and existing operator card No.92021. Heat click does not open detail. Local detail GET succeeds and its counter POST is intercepted, leaving real counts unchanged.",
+  "geometry": "heading-pixels.json records actual code and heat glyphs, >=3px inner margins, heat center errors 0.094 to 0.594px, code/heat glyph center difference <=1px. Card header and count frames have >=6px gap, heat stays above image, footer heat absent.",
+  "visual": "Primary agent viewed real overall and native card screenshots, including loaded admin No.92021. Gemini 3.8 Flash confirms top-right heat and preserved price/admin controls. Its rendering/baseline suggestions were checked against actual glyph measurements and native screenshots; no concrete blocking defect remained.",
+  "logoPreserved": true,
+  "network": "All final five scoped cases have no console errors or failed responses. Two prior local image connection failures are preserved separately; only those cases were retried using bound IPv4 endpoint.",
+  "reused": "Original 768px and extreme/error-state evidence remains applicable to identical ProductPopularity behavior and header CSS; the preserved current rating color and localized price-unit handling are outside those inputs.",
+  "negative": "No direct footer ProductPopularity and exactly one heat per card; old bottom placement rejected"
+}

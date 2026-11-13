@@ -1,0 +1,22 @@
+[
+  {
+    "scenario": "maximum",
+    "geom": {
+      "gap": 7.078125,
+      "centerDifference": 0,
+      "codeClipped": false,
+      "heatWidth": 46.328125
+    },
+    "tooltip": "9,223,372,036,854,775,807"
+  },
+  {
+    "scenario": "unavailable",
+    "geom": {
+      "gap": 27.46875,
+      "centerDifference": 0,
+      "codeClipped": false,
+      "heatWidth": 25.9375
+    },
+    "tooltip": "热度读取或计数失败，请刷新重试"
+  }
+]

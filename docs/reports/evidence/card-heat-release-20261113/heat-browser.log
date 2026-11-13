@@ -1,0 +1,55 @@
+[
+  {
+    "route": "/products",
+    "width": 1440,
+    "[redacted]": false,
+    "cards": 24,
+    "errors": [],
+    "network": [],
+    "mockedClicks": 1
+  },
+  {
+    "route": "/recommendations",
+    "width": 1440,
+    "[redacted]": false,
+    "cards": 24,
+    "errors": [
+      "Failed to load resource: net::ERR_CONNECTION_REFUSED"
+    ],
+    "network": [
+      {
+        "url": "http://localhost:5178/api/storefront/recommendation-images/0f3911c3-457b-42b3-ab22-edfe295ddf2b",
+        "error": "net::ERR_CONNECTION_REFUSED"
+      }
+    ],
+    "mockedClicks": 0
+  },
+  {
+    "route": "/recommendations/3",
+    "width": 1440,
+    "[redacted]": false,
+    "cards": 9,
+    "errors": [],
+    "network": [],
+    "mockedClicks": 0
+  },
+  {
+    "route": "/products",
+    "width": 320,
+    "[redacted]": false,
+    "cards": 24,
+    "errors": [],
+    "network": [],
+    "mockedClicks": 0
+  },
+  {
+    "route": "/products",
+    "width": 320,
+    "[redacted]": true,
+    "cards": 1,
+    "errors": [],
+    "network": [],
+    "mockedClicks": 0
+  }
+]
+

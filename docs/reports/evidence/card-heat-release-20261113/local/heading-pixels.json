@@ -1,0 +1,272 @@
+[
+  {
+    "route": "/products",
+    "width": 1440,
+    "admin": false,
+    "screenshot": "products-1440.png",
+    "boxes": {
+      "heat": {
+        "ink": [
+          155,
+          20,
+          198,
+          31
+        ],
+        "frame": [
+          151.4375,
+          13.59375,
+          203.390625,
+          37.59375
+        ],
+        "margins": [
+          3.5625,
+          6.40625,
+          5.390625,
+          6.59375
+        ],
+        "centerY": 25.5
+      },
+      "code": {
+        "ink": [
+          22,
+          21,
+          100,
+          31
+        ],
+        "frame": [
+          11,
+          11.59375,
+          110.796875,
+          39.59375
+        ],
+        "margins": [
+          11,
+          9.40625,
+          10.796875,
+          8.59375
+        ],
+        "centerY": 26.0
+      }
+    },
+    "heatFrameCenterError": 0.09375,
+    "codeHeatGlyphCenterDifference": 0.5,
+    "frameGap": 40.640625,
+    "result": "PASS"
+  },
+  {
+    "route": "/recommendations/3",
+    "width": 1440,
+    "admin": false,
+    "screenshot": "issue-1440.png",
+    "boxes": {
+      "heat": {
+        "ink": [
+          155,
+          20,
+          200,
+          31
+        ],
+        "frame": [
+          151.4375,
+          13.390625,
+          203.390625,
+          37.390625
+        ],
+        "margins": [
+          3.5625,
+          6.609375,
+          3.390625,
+          6.390625
+        ],
+        "centerY": 25.5
+      },
+      "code": {
+        "ink": [
+          22,
+          20,
+          84,
+          30
+        ],
+        "frame": [
+          11,
+          11.390625,
+          94.6875,
+          39.390625
+        ],
+        "margins": [
+          11,
+          8.609375,
+          10.6875,
+          9.390625
+        ],
+        "centerY": 25.0
+      }
+    },
+    "heatFrameCenterError": 0.109375,
+    "codeHeatGlyphCenterDifference": 0.5,
+    "frameGap": 56.75,
+    "result": "PASS"
+  },
+  {
+    "route": "/products",
+    "width": 320,
+    "admin": false,
+    "screenshot": "products-320.png",
+    "boxes": {
+      "heat": {
+        "ink": [
+          106,
+          17,
+          122,
+          28
+        ],
+        "frame": [
+          102.0625,
+          9.09375,
+          129,
+          37.09375
+        ],
+        "margins": [
+          3.9375,
+          7.90625,
+          7,
+          9.09375
+        ],
+        "centerY": 22.5
+      },
+      "code": {
+        "ink": [
+          17,
+          19,
+          82,
+          28
+        ],
+        "frame": [
+          9,
+          9.09375,
+          89.40625,
+          37.09375
+        ],
+        "margins": [
+          8,
+          9.90625,
+          7.40625,
+          9.09375
+        ],
+        "centerY": 23.5
+      }
+    },
+    "heatFrameCenterError": 0.59375,
+    "codeHeatGlyphCenterDifference": 1.0,
+    "frameGap": 12.65625,
+    "result": "PASS"
+  },
+  {
+    "route": "/recommendations",
+    "width": 1440,
+    "admin": false,
+    "screenshot": "recommendations-1440.png",
+    "boxes": {
+      "heat": {
+        "ink": [
+          155,
+          20,
+          198,
+          31
+        ],
+        "frame": [
+          151.4375,
+          13.84375,
+          203.390625,
+          37.84375
+        ],
+        "margins": [
+          3.5625,
+          6.15625,
+          5.390625,
+          6.84375
+        ],
+        "centerY": 25.5
+      },
+      "code": {
+        "ink": [
+          22,
+          21,
+          84,
+          31
+        ],
+        "frame": [
+          11,
+          11.84375,
+          94.6875,
+          39.84375
+        ],
+        "margins": [
+          11,
+          9.15625,
+          10.6875,
+          8.84375
+        ],
+        "centerY": 26.0
+      }
+    },
+    "heatFrameCenterError": 0.34375,
+    "codeHeatGlyphCenterDifference": 0.5,
+    "frameGap": 56.75,
+    "result": "PASS"
+  },
+  {
+    "route": "/products",
+    "width": 320,
+    "admin": true,
+    "screenshot": "admin-320.png",
+    "boxes": {
+      "heat": {
+        "ink": [
+          106,
+          18,
+          125,
+          29
+        ],
+        "frame": [
+          102.0625,
+          9.84375,
+          129,
+          37.84375
+        ],
+        "margins": [
+          3.9375,
+          8.15625,
+          4,
+          8.84375
+        ],
+        "centerY": 23.5
+      },
+      "code": {
+        "ink": [
+          17,
+          20,
+          67,
+          29
+        ],
+        "frame": [
+          9,
+          9.84375,
+          75.59375,
+          37.84375
+        ],
+        "margins": [
+          8,
+          10.15625,
+          8.59375,
+          8.84375
+        ],
+        "centerY": 24.5
+      }
+    },
+    "heatFrameCenterError": 0.34375,
+    "codeHeatGlyphCenterDifference": 1.0,
+    "frameGap": 26.46875,
+    "result": "PASS"
+  }
+]

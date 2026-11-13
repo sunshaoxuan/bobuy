@@ -1,0 +1,14 @@
+{
+  "source": "2160266d9a9f864274e62003b7bd1d1c093c376f",
+  "release": "20261113.heat-top-right.2",
+  "result": "PASS",
+  "functional": "PASS",
+  "geometry": "PASS",
+  "visual": "PASS",
+  "scopedTests": 21,
+  "productionViews": 5,
+  "logoPreserved": true,
+  "liveOfferPeriodSourcePreserved": true,
+  "productionCounterWrites": 0,
+  "frontendOnly": true
+}

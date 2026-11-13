@@ -1,0 +1,25 @@
+{
+  "removed": [
+    "verify-heat-release.mjs",
+    "run-heat-browser.py",
+    "release-heat.py",
+    "measure-heat-heading.py",
+    "prepare-heat-release.py",
+    "heat-models.py",
+    "heat-tests.log",
+    "heat-build.log",
+    "heat-browser.log",
+    "heat-admin.log",
+    "heat-network-recheck.log",
+    "heat-production.log",
+    "heat-gemini-review.txt",
+    "heat-flash-probe.txt",
+    "heat-pro-probe.txt",
+    "heat-ci-watch.log",
+    "payload.tar.gz",
+    "task-created dependency junction only"
+  ],
+  "retained": [
+    "frontend/dist: prior policy denial respected; no deletion retried"
+  ]
+}

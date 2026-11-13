@@ -16,6 +16,7 @@ it('rejects stale initial reads and preserves exact bigint digits',async()=>{
  let finish!:(r:Response)=>void;const fetch=vi.fn().mockImplementationOnce(()=>new Promise(r=>{finish=r;})).mockResolvedValueOnce(response('9223372036854775807'));vi.stubGlobal('fetch',fetch);
  render(tree('stale-product'));await act(()=>recordProductClick('stale-product'));await act(async()=>finish(response('0')));
  expect(screen.getAllByLabelText('Views 9,223,372,036,854,775,807')).toHaveLength(2);expect(screen.getAllByText('9,223,372T')).toHaveLength(2);
+ for(const value of screen.getAllByLabelText('Views 9,223,372,036,854,775,807')){expect(value).toHaveAttribute('data-mobile-value','999+');expect(value).toHaveAttribute('tabindex','0');}
 });
 it('refreshes all linked instances on cross-tab notification',async()=>{
  const fetch=vi.fn().mockResolvedValueOnce(response('4')).mockResolvedValueOnce(response('5'));vi.stubGlobal('fetch',fetch);render(tree('peer-product'));
@@ -26,4 +27,5 @@ it('keeps counters with their product when an occurrence is relinked and never r
  const fetch=vi.fn().mockResolvedValueOnce(response('8')).mockResolvedValueOnce(response('0')).mockResolvedValueOnce({ok:false});vi.stubGlobal('fetch',fetch);const view=render(tree('old-product'));
  await screen.findAllByText('8');view.rerender(tree('new-product'));await screen.findAllByText('0');await act(()=>recordProductClick('new-product'));
  expect(screen.getAllByText('Unavailable')).toHaveLength(2);expect(fetch).toHaveBeenCalledTimes(3);
+ for(const value of screen.getAllByText('Unavailable'))expect(value).toHaveAttribute('data-mobile-value','?');
 });
