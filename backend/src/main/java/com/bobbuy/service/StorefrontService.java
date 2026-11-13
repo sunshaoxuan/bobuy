@@ -71,7 +71,7 @@ public class StorefrontService {
             .filter(p->p.getVisibilityStatus()==ProductVisibility.PUBLIC)
             .flatMap(p->sales.quote(p).stream().map(q->new PublicProduct(p.getId(),p.getMerchantId(),p.getName(),ids==null?p.getDescription():Map.of(),p.getBrand(),q.amount().doubleValue(),
                 p.getCategoryId(),ids==null?p.getMediaGallery().stream().filter(MediaGalleryItem::isVisible).filter(m->m.getType()==MediaType.IMAGE).map(MediaGalleryItem::getUrl).toList():List.of(),
-                q.currency(),q.unit(),q.revision(),p.getOrderMethod()==OrderMethod.PRE_ORDER,q.priceToken(),q.regularAmount(),q.adjustmentId(),q.validFrom(),q.validUntil()))).toList();
+                q.currency(),q.unit(),q.revision(),p.getOrderMethod()==OrderMethod.PRE_ORDER,q.priceToken(),q.regularAmount(),q.adjustmentId(),q.validFrom(),q.validUntil(),q.priceChange()))).toList();
     }
 
     @Transactional
@@ -270,7 +270,7 @@ public class StorefrontService {
     public record AccountRegistration(@NotNull @Valid Registration account) {}
     public record PublicTrip(Long id, Long merchantId, String merchantName, String deliveryArea, LocalDate deliveryDate) {}
     public record PublicProduct(String id, Long merchantId, Map<String,String> name, Map<String,String> description, String brand,
-        double price, String categoryId, List<String> images,String currency,String saleUnit,long priceRevision,boolean recommendationReady,String priceToken,BigDecimal regularPrice,Long priceAdjustmentId,Instant priceValidFrom,Instant priceValidUntil) {}
+        double price, String categoryId, List<String> images,String currency,String saleUnit,long priceRevision,boolean recommendationReady,String priceToken,BigDecimal regularPrice,Long priceAdjustmentId,Instant priceValidFrom,Instant priceValidUntil,RecommendationItem.PriceChange priceChange) {}
     public record Item(@NotBlank @Size(max = 255) String productId, @Min(1) @Max(99) int quantity,@PositiveOrZero Long priceRevision,@Pattern(regexp="[A-Z]{3}") String currency,@Size(max=64) String priceToken) {
         public Item(String productId,int quantity){this(productId,quantity,null,null,null);}
     }

@@ -26,7 +26,7 @@ public class ProductSaleService {
   @NotBlank String currency,@NotBlank @Size(max=80) String unit,LocalDate validFrom,LocalDate validThrough,
   @Min(0) long revision,boolean replaceExisting,boolean enabled,@NotBlank @Size(max=1000) String reason) {}
  public record Quote(BigDecimal amount,String currency,String unit,long revision,String priceToken,
-  BigDecimal regularAmount,Long adjustmentId,Instant validFrom,Instant validUntil,String channel) {}
+  BigDecimal regularAmount,Long adjustmentId,Instant validFrom,Instant validUntil,String channel,RecommendationItem.PriceChange priceChange) {}
  public List<CurrencyDefinition> currencies(){return currencies.findAll().stream().sorted(Comparator.comparing(c->c.code)).toList();}
  private CurrencyDefinition enabled(String code){return currencies.findById(code).filter(c->c.saleEnabled).orElseThrow(()->invalid("sale.currency_disabled"));}
  public static LocalDate today(){return LocalDate.now(ZoneId.of("Asia/Tokyo"));}
@@ -91,7 +91,7 @@ public class ProductSaleService {
   try{token=HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(identity.getBytes(java.nio.charset.StandardCharsets.UTF_8)));}catch(java.security.NoSuchAlgorithmException error){throw new IllegalStateException(error);}
   Instant nextChange=resolved.nextChange();
   if(sale!=null&&sale.validThrough()!=null){Instant saleEnd=sale.validThrough().plusDays(1).atStartOfDay(ZoneId.of("Asia/Tokyo")).toInstant();if(nextChange==null||saleEnd.isBefore(nextChange))nextChange=saleEnd;}
-  return Optional.of(new Quote(amount,code,unit,revision,token,regular,adjustment==null?null:adjustment.id,adjustment==null?null:adjustment.startsAt,nextChange,"STOREFRONT"));
+  return Optional.of(new Quote(amount,code,unit,revision,token,regular,adjustment==null?null:adjustment.id,adjustment==null?null:adjustment.startsAt,nextChange,"STOREFRONT",adjustment==null?null:new RecommendationItem.PriceChange(adjustment.id,adjustment.documentNumber,adjustment.type.name(),"ACTIVE",adjustment.startsAt,adjustment.endsAt,amount,regular,amount,resolved.promotion())));
  }
  private static ApiException invalid(String key){return new ApiException(ErrorCode.INVALID_REQUEST,key);}
 }

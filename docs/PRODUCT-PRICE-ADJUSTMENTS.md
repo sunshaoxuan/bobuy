@@ -1,5 +1,13 @@
 # ERP price adjustment documents
 
+## Selected quote and drawer presentation, 2026-11-13
+
+Public cards carry the priceChange projection of their selected price document. The discount hint uses that exact projection; it does not fetch another set of reference periods. An available website quote takes precedence over the selected reference quote in both the card and detail. The hint shows only the current promotional interval in plain Japan-local dates. Document endsAt remains separate from the quote's next-change/validUntil boundary. Expired and future periods are excluded.
+
+The existing product drawer groups document history, price settings, effective period, reason and product lines. Mobile product-line inputs flow vertically, and draft save/close actions remain in the drawer footer. Approval, cancellation, reasons and version checks retain their existing contract.
+
+Production V35 inventory confirmed no independent product discount price or offer-date columns and no matching legacy attribute keys. Source coupon dates, notes and audit snapshots retain their distinct purpose. No schema migration is added for this presentation change.
+
 A saved product's existing selling-price panel maintains its associated adjustment documents. There is no independent administration page in this release. The document model supports shared headers and multiple lines. Documents own adjustment periods, prices, reasons and approval history. Recommendation snapshots preserve source evidence; they cannot activate a price or discount badge.
 
 ## Document contract

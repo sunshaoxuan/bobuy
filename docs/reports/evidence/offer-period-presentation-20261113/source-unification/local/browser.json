@@ -1,0 +1,138 @@
+{
+  "base": "http://127.0.0.1:5178",
+  "views": [
+    {
+      "width": 1440,
+      "environment": "local actual build with synthetic pricing API",
+      "inputs": [
+        {
+          "x": 485,
+          "right": 777.65625,
+          "height": 32
+        },
+        {
+          "x": 497,
+          "right": 765.65625,
+          "height": 30
+        },
+        {
+          "x": 793.65625,
+          "right": 1086.328125,
+          "height": 32
+        },
+        {
+          "x": 805.65625,
+          "right": 1074.328125,
+          "height": 30
+        },
+        {
+          "x": 1102.328125,
+          "right": 1394.984375,
+          "height": 32
+        },
+        {
+          "x": 1114.328125,
+          "right": 1382.984375,
+          "height": 30
+        },
+        {
+          "x": 485,
+          "right": 932,
+          "height": 34
+        },
+        {
+          "x": 948,
+          "right": 1395,
+          "height": 34
+        },
+        {
+          "x": 485,
+          "right": 1395,
+          "height": 76
+        },
+        {
+          "x": 486,
+          "right": 776.65625,
+          "height": 30
+        },
+        {
+          "x": 794.65625,
+          "right": 1085.328125,
+          "height": 30
+        },
+        {
+          "x": 1102.328125,
+          "right": 1394.984375,
+          "height": 32
+        }
+      ],
+      "errors": [],
+      "network": [],
+      "syntheticWrites": 1,
+      "screenshots": [
+        "drawer-1440.png",
+        "editor-1440.png",
+        "footer-1440.png"
+      ]
+    },
+    {
+      "width": 320,
+      "environment": "local actual build with synthetic pricing API",
+      "inputs": [
+        {
+          "x": 33,
+          "right": 287,
+          "height": 44
+        },
+        {
+          "x": 33,
+          "right": 287,
+          "height": 44
+        },
+        {
+          "x": 33,
+          "right": 287,
+          "height": 44
+        },
+        {
+          "x": 33,
+          "right": 287,
+          "height": 44
+        },
+        {
+          "x": 33,
+          "right": 287,
+          "height": 44
+        },
+        {
+          "x": 33,
+          "right": 287,
+          "height": 76
+        },
+        {
+          "x": 33,
+          "right": 287,
+          "height": 44
+        },
+        {
+          "x": 33,
+          "right": 287,
+          "height": 44
+        },
+        {
+          "x": 33,
+          "right": 287,
+          "height": 44
+        }
+      ],
+      "errors": [],
+      "network": [],
+      "syntheticWrites": 1,
+      "screenshots": [
+        "drawer-320.png",
+        "editor-320.png",
+        "footer-320.png"
+      ]
+    }
+  ]
+}

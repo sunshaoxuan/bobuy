@@ -25,7 +25,7 @@ class PublicBrowseProjectionCompatibilityTest {
  }
  @Test void boundedSalesOnlyQuoteRequestedPublicIdsAndSuppressUnopenedDetails(){
   var a=product("a",ProductVisibility.PUBLIC,1);var b=product("b",ProductVisibility.PUBLIC,1);var c=product("c",ProductVisibility.DRAFTER_ONLY,1);
-  var products=repository(ProductRepository.class,Map.of("findAll",List.of(a,b,c)));var quoted=new ArrayList<String>();var sales=new ProductSaleService(null,null,null,null){@Override public Optional<Quote> quote(Product p){quoted.add(p.getId());return Optional.of(new Quote(BigDecimal.TEN,"JPY","unit",1,"token",null,null,null,null,"DEFAULT"));}};
+  var products=repository(ProductRepository.class,Map.of("findAll",List.of(a,b,c)));var quoted=new ArrayList<String>();var sales=new ProductSaleService(null,null,null,null){@Override public Optional<Quote> quote(Product p){quoted.add(p.getId());return Optional.of(new Quote(BigDecimal.TEN,"JPY","unit",1,"token",null,null,null,null,"DEFAULT",null));}};
   var service=new StorefrontService(null,null,products,null,null,null,null,null,null,null,"unused",sales,null);
   var result=service.publicProducts(List.of("b","c","missing"));assertThat(quoted).containsExactly("b");assertThat(result).extracting(StorefrontService.PublicProduct::id).containsExactly("b");assertThat(result.get(0).description()).isEmpty();assertThat(result.get(0).images()).isEmpty();assertThat(result.get(0).price()).isEqualTo(10);
   assertThatThrownBy(()->service.publicProducts(List.of("a","a"))).isInstanceOf(com.bobbuy.api.response.ApiException.class);assertThatThrownBy(()->service.publicProducts(java.util.stream.IntStream.range(0,25).mapToObj(Integer::toString).toList())).isInstanceOf(com.bobbuy.api.response.ApiException.class);

@@ -11,7 +11,7 @@ function view(){return render(<I18nProvider><PriceAdjustmentWorkspace productId=
 it('requires a reason and keeps a new adjustment scoped to the current product',async()=>{
  view();await screen.findByText('PC-SYNTHETIC');await waitFor(()=>expect(screen.getByRole('button',{name:'New document'})).toBeEnabled());fireEvent.click(screen.getByRole('button',{name:'New document'}));const drawer=await screen.findByRole('dialog',{name:'New document'});
  expect(within(drawer).getByRole('button',{name:'Save draft'})).toBeDisabled();
- const select=within(drawer).getByRole('listbox',{name:'Select products, multiple allowed'}) as HTMLSelectElement;expect(select).toBeDisabled();expect(Array.from(select.selectedOptions).map(option=>option.value)).toEqual(['p1']);
+ expect(within(drawer).getByRole('heading',{name:'001 · Synthetic one'})).toBeVisible();expect(within(drawer).queryByRole('listbox',{name:'Select products, multiple allowed'})).toBeNull();
  fireEvent.change(within(drawer).getByLabelText('Price change reason (required)'),{target:{value:'Holiday campaign approved budget'}});
  fireEvent.change(within(drawer).getByLabelText('Start time (JST, inclusive)'),{target:{value:'2026-11-13T00:00'}});fireEvent.change(within(drawer).getByLabelText('End time (JST, exclusive)'),{target:{value:'2026-11-14T00:00'}});
  const amounts=within(drawer).getAllByRole('spinbutton',{name:/Adjusted price/});amounts.forEach((input,n)=>fireEvent.change(input,{target:{value:String(800+n*100)}}));fireEvent.click(within(drawer).getByRole('button',{name:'Save draft'}));

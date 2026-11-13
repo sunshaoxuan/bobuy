@@ -21,6 +21,7 @@ import {useReadRecovery} from '../hooks/useReadRecovery';
 import {isRecoverableReadError} from '../readRecovery';
 import {BrowseFilters,BrowseError} from '../components/BrowseSupport';
 import ProductMarkerBadges from '../components/ProductMarkerBadges';
+import {selectedOfferSource} from '../components/selectedOfferSource';
 
 import ProductMarkerEditor from '../components/ProductMarkerEditor';
 import {useUserRole} from '../context/UserRoleContext';
@@ -130,7 +131,7 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
       {filtered.length?<div className="catalog-master-grid">{filtered.map((entry,index)=>{
         const name=catalogText(entry.name,locale);
         const product=sales.quotes[entry.productId],pending=pricePending(entry.productId),buyable=!pending&&!!product&&canBuy(product);
-        return <CompactProductCard key={entry.productId} productId={entry.productId} name={name.value} originalName={entry.name['ja-JP']} language={name.language} brand={entry.brand} itemNumber={entry.itemNumber} image={entry.image?.url} rating={entry.rating} quote={product} reference={entry.reference} pending={pending} eager={index<2} onOpen={()=>openDetail(entry.productId)} overlay={<><ProductMarkerBadges markers={state.markers[entry.productId]??[]} overlay/><ReservationAdd allowed={buyable} quote={product} name={name.value} count={quantities[entry.productId]} onAdd={()=>{if(product&&buyable)onAdd(product);}}/></>} actions={management(entry)}/>;
+        return <CompactProductCard key={entry.productId} productId={entry.productId} name={name.value} originalName={entry.name['ja-JP']} language={name.language} brand={entry.brand} itemNumber={entry.itemNumber} image={entry.image?.url} rating={entry.rating} quote={product} reference={entry.reference} pending={pending} eager={index<2} onOpen={()=>openDetail(entry.productId)} overlay={<><ProductMarkerBadges markers={state.markers[entry.productId]??[]} promotionPrices={selectedOfferSource(product,pending,entry.reference?.priceChange)} overlay/><ReservationAdd allowed={buyable} quote={product} name={name.value} count={quantities[entry.productId]} onAdd={()=>{if(product&&buyable)onAdd(product);}}/></>} actions={management(entry)}/>;
       })}</div>:kind==='marked'?<div className="catalog-marked-empty" role="status"><p>{t(query||category?'store.no_matches':'marker.empty')}</p>{(query||category)&&<Button onClick={()=>{const next=new URLSearchParams(params);next.delete(categoryKey);next.delete('query');setParams(next);}}>{t('class.all')}</Button>}</div>:<Empty description={t(query||category?'store.no_matches':'catalog.empty')}>{category&&<Button onClick={()=>choose('')}>{t('class.all')}</Button>}</Empty>}
       {browse.page?.hasNext&&<div className="feed-loader" ref={sentinel}><Button loading={browse.busy} disabled={revealPaused||browse.changed||!!browse.error} icon={<ArrowDownOutlined aria-hidden/>} onClick={browse.next}>{t('store.load_more')} ({filtered.length}/{browse.page.matchedTotal})</Button></div>}
     </>}
@@ -138,7 +139,7 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
     <Drawer className="rec-product-detail catalog-master-detail consumer-detail-drawer" title={opened?<ProductDetailCode value={opened.itemNumber}/>:t('store.details')} width="min(1120px,100vw)" open={!!detailId} onClose={closeDetail}>
       {detailId&&!opened&&(detail.error?<BrowseError error={detail.error} retry={()=>setDetailAttempt(value=>value+1)} refresh={reload}/>:<Spin/>)}
       {opened&&detailName&&description&&<ConsumerDetail media={<RecommendationImageViewer consumer key={opened.productId} pictures={opened.gallery} name={detailName.value}/>}>
-        <ProductMarkerBadges markers={detail.markers??[]} promotionPrices={opened.referencePrices??[]}/>
+        <ProductMarkerBadges markers={detail.markers??[]} promotionPrices={selectedOfferSource(sale,pricePending(opened.productId),opened.referencePrices?.[0]??mainReference?.facts.priceChange)}/>
         {management(opened)}
         <ProductBrand brand={opened.brand}/><h1 lang={detailName.language}><span className="rec-name-local">{detailName.value||t('rec.not_stated')}</span>{locale!=='ja-JP'&&opened.name['ja-JP']&&opened.name['ja-JP']!==detailName.value&&<span className="rec-name-original" lang="ja">（{opened.name['ja-JP']}）</span>}</h1>{sourceNote(detailName)}
         <ProductDetailSpecs model={content?.model} packaging={content?.packaging} specification={!mainReference?catalogText(opened.specification,locale).value:undefined} specificationLanguage={!mainReference?catalogText(opened.specification,locale).language:undefined}/>

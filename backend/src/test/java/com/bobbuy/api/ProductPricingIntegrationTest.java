@@ -47,9 +47,16 @@ class ProductPricingIntegrationTest {
   Instant start=Instant.parse("2026-10-26T15:00:00Z"),end=start.plusSeconds(3600);var before=products.findById(id).orElseThrow().getSale();
   var row=draft(start,end);assertThat(quote(start).amount()).isEqualByComparingTo("1000");approve(row);
   assertThat(quote(start.minusNanos(1)).amount()).isEqualByComparingTo("1000");assertThat(quote(start).amount()).isEqualByComparingTo("800");assertThat(quote(end.minusNanos(1)).amount()).isEqualByComparingTo("800");assertThat(quote(end).amount()).isEqualByComparingTo("1000");
+  var source=quote(start).priceChange();assertThat(source.documentId()).isEqualTo(row.get("id").asLong());assertThat(source.type()).isEqualTo("PROMOTION");assertThat(source.promotion()).isTrue();assertThat(source.startsAt()).isEqualTo(start);assertThat(source.endsAt()).isEqualTo(end);assertThat(quote(end).priceChange()).isNull();
   assertThat(quote(start).priceToken()).isNotEqualTo(quote(end).priceToken());assertThat(quote(start.minusNanos(1)).priceToken()).isEqualTo(quote(end).priceToken());
   assertThat(products.findById(id).orElseThrow().getSale()).isEqualTo(before);assertThat(products.findById(id).orElseThrow().getBasePrice()).isEqualTo(77);
   when(time.now()).thenReturn(end);assertThat(data(mvc.perform(get(path()).header("Authorization","Bearer "+admin))).at("/history/0/state").asText()).isEqualTo("EXPIRED");
+ }
+ @Test void offerPeriodKeepsDocumentEndSeparateFromQuoteExpiry()throws Exception{
+  var product=products.findById(id).orElseThrow();var s=product.getSale();product.setSale(new ProductSale(s.amount(),s.currency(),s.unit(),null,LocalDate.of(2026,10,26),s.revision(),s.reviewedBy(),s.reviewedAt(),true));products.saveAndFlush(product);
+  var end=now.plusSeconds(3*86400);var row=draft(now.minusSeconds(1),end);approve(row);var q=quote(now);
+  assertThat(q.validUntil()).isEqualTo(Instant.parse("2026-10-26T15:00:00Z"));assertThat(q.priceChange().endsAt()).isEqualTo(end);assertThat(q.priceChange().documentId()).isEqualTo(row.get("id").asLong());
+  var view=data(mvc.perform(get("/api/storefront/products")));var shown=java.util.stream.StreamSupport.stream(view.spliterator(),false).filter(p->id.equals(p.path("id").asText())).findFirst().orElseThrow();assertThat(shown.at("/priceChange/documentId").asLong()).isEqualTo(row.get("id").asLong());assertThat(shown.at("/priceChange/endsAt").asText()).isEqualTo(end.toString());
  }
  @Test void adjacentIntervalsAllowedOverlapRejectedAndConcurrentApprovalsSerialize()throws Exception{
   var first=draft(now.plusSeconds(30),now.plusSeconds(90));var second=draft(now.plusSeconds(60),now.plusSeconds(120));

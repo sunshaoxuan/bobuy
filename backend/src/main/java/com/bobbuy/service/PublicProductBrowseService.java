@@ -24,13 +24,13 @@ public class PublicProductBrowseService {
  public PublicProductBrowseService(PublicProductCatalogService c,ProductMarkerService m){this(c,m,null,null);}
  @org.springframework.beans.factory.annotation.Autowired public PublicProductBrowseService(PublicProductCatalogService c,ProductMarkerService m,ProductPopularityService popularity,PublicBrowsePriceService prices){catalog=c;markers=m;this.popularity=popularity;this.prices=prices;}
  public record Facet(String id,Map<String,String> name,long count){}
- public record CardReference(java.math.BigDecimal amount,String currency,String unit,Long postId,Long itemId,String state,java.math.BigDecimal originalPrice,java.math.BigDecimal discountAmount){}
+ public record CardReference(java.math.BigDecimal amount,String currency,String unit,Long postId,Long itemId,String state,java.math.BigDecimal originalPrice,java.math.BigDecimal discountAmount,RecommendationItem.PriceChange priceChange){}
  public record Card(String productId,Long merchantId,Map<String,String> name,String brand,String itemNumber,
    Map<String,String> specification,String model,String packaging,RecommendationItem.Picture image,
    List<RecommendationItem.Label> categories,List<ProductMarkerService.Definition> markers,boolean reviewedMaster,java.math.BigDecimal rating,CardReference reference){}
  private static CardReference reference(PublicProductCatalogService.Entry entry,java.time.Instant now){
-  if(!entry.referencePrices().isEmpty()){var p=entry.referencePrices().get(0);return new CardReference(p.amount(),p.currency(),p.unit(),null,null,p.state(),p.promotion()?p.regularAmount():null,p.promotion()?p.regularAmount().subtract(p.amount()):null);}
-  return ReferencePriceDisplay.main(entry).map(offer->{var facts=offer.facts();var display=ReferencePriceDisplay.of(facts,now);return display.amount()==null?null:new CardReference(display.amount(),"JPY",facts.priceUnit,offer.postId(),facts.id,display.state(),display.originalPrice(),display.discountAmount());}).orElse(null);
+  if(!entry.referencePrices().isEmpty()){var p=entry.referencePrices().get(0);return new CardReference(p.amount(),p.currency(),p.unit(),null,null,p.state(),p.promotion()?p.regularAmount():null,p.promotion()?p.regularAmount().subtract(p.amount()):null,new RecommendationItem.PriceChange(p.documentId(),p.documentNumber(),p.type(),p.state(),p.startsAt(),p.endsAt(),p.amount(),p.regularAmount(),p.amount(),p.promotion()));}
+  return ReferencePriceDisplay.main(entry).map(offer->{var facts=offer.facts();var display=ReferencePriceDisplay.of(facts,now);return display.amount()==null?null:new CardReference(display.amount(),"JPY",facts.priceUnit,offer.postId(),facts.id,display.state(),display.originalPrice(),display.discountAmount(),facts.priceChange);}).orElse(null);
  }
  public record Browse(List<Card> items,int page,int size,long scopeTotal,long matchedTotal,boolean hasNext,
    String revision,List<Facet> categories,long unclassified,String query,String category,String locale,String dataset,String datasetRevision,long markedScopeTotal){}

@@ -1,0 +1,138 @@
+[
+  {
+    "viewport": 320,
+    "label": "close",
+    "background": [
+      112,
+      15,
+      204,
+      59
+    ],
+    "inner": [
+      113,
+      16,
+      203,
+      58
+    ],
+    "glyph": [
+      143,
+      30,
+      173,
+      43
+    ],
+    "margins": [
+      30,
+      14,
+      30,
+      15
+    ],
+    "centerOffset": [
+      0.0,
+      0.5
+    ],
+    "heatHeight": 44,
+    "adjacentHeatGap": 8
+  },
+  {
+    "viewport": 320,
+    "label": "save",
+    "background": [
+      212,
+      15,
+      304,
+      59
+    ],
+    "inner": [
+      213,
+      16,
+      303,
+      58
+    ],
+    "glyph": [
+      231,
+      31,
+      285,
+      43
+    ],
+    "margins": [
+      18,
+      15,
+      18,
+      15
+    ],
+    "centerOffset": [
+      0.0,
+      0.0
+    ],
+    "heatHeight": 44,
+    "adjacentHeatGap": 8
+  },
+  {
+    "viewport": 1440,
+    "label": "close",
+    "background": [
+      784,
+      17,
+      876,
+      57
+    ],
+    "inner": [
+      785,
+      18,
+      875,
+      56
+    ],
+    "glyph": [
+      815,
+      30,
+      845,
+      43
+    ],
+    "margins": [
+      30,
+      12,
+      30,
+      13
+    ],
+    "centerOffset": [
+      0.0,
+      0.5
+    ],
+    "heatHeight": 40,
+    "adjacentHeatGap": 8
+  },
+  {
+    "viewport": 1440,
+    "label": "save",
+    "background": [
+      884,
+      17,
+      976,
+      57
+    ],
+    "inner": [
+      885,
+      18,
+      975,
+      56
+    ],
+    "glyph": [
+      903,
+      31,
+      957,
+      43
+    ],
+    "margins": [
+      18,
+      13,
+      18,
+      13
+    ],
+    "centerOffset": [
+      0.0,
+      0.0
+    ],
+    "heatHeight": 40,
+    "adjacentHeatGap": 8
+  }
+]

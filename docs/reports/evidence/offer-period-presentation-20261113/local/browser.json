@@ -1,0 +1,115 @@
+{
+  "base": "http://127.0.0.1:5178",
+  "views": [
+    {
+      "width": 1440,
+      "id": "0b38036f-3e99-420c-b870-89fe35d7a723",
+      "text": "优惠期间：\n11月4日至11月15日",
+      "detailText": "优惠期间：\n11月4日至11月15日",
+      "geometry": {
+        "x": 333,
+        "y": 219,
+        "width": 148.828125,
+        "height": 70.78125,
+        "right": 481.828125,
+        "bottom": 289.78125
+      },
+      "badgeBox": {
+        "x": 291,
+        "y": 219.59375,
+        "width": 30,
+        "height": 30
+      },
+      "errors": [
+        "Failed to load resource: net::ERR_ADDRESS_IN_USE"
+      ],
+      "network": [
+        {
+          "url": "http://127.0.0.1:5178/api/storefront/recommendation-images/33f52f13-2140-452c-a0d7-f431c84ae729",
+          "failure": "net::ERR_ADDRESS_IN_USE"
+        }
+      ],
+      "initialDetailReads": 1,
+      "cached": true,
+      "badgeDidNotOpenDetail": true,
+      "assets": [],
+      "alignmentResult": "PASS: rightTop, no header overlap"
+    },
+    {
+      "width": 320,
+      "id": "124bb802-8805-4a61-bead-687b3967a20d",
+      "text": "优惠期间：\n11月9日至11月22日",
+      "detailText": "优惠期间：\n11月9日至11月22日",
+      "geometry": {
+        "x": 225,
+        "y": 220,
+        "width": 91,
+        "height": 79.5625,
+        "right": 316,
+        "bottom": 299.5625
+      },
+      "badgeBox": {
+        "x": 183,
+        "y": 220.09375,
+        "width": 30,
+        "height": 30
+      },
+      "errors": [],
+      "network": [],
+      "initialDetailReads": 1,
+      "cached": true,
+      "badgeDidNotOpenDetail": true,
+      "assets": [],
+      "alignmentResult": "PASS: rightTop, no header overlap"
+    },
+    {
+      "synthetic": "unknown",
+      "width": 320,
+      "text": "优惠期间：\n优惠时间待确认",
+      "box": {
+        "x": 225,
+        "y": 435,
+        "width": 91,
+        "height": 79.5625
+      },
+      "expectedReadFailure": false,
+      "errors": [],
+      "network": []
+    },
+    {
+      "synthetic": "failed",
+      "width": 320,
+      "text": "优惠期间：\n暂时无法查看优惠时间，请稍后再试",
+      "box": {
+        "x": 224.9498291015625,
+        "y": 435.3326416015625,
+        "width": 90.23904418945312,
+        "height": 97.92425537109375
+      },
+      "expectedReadFailure": true,
+      "errors": [
+        "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+      ],
+      "network": [
+        {
+          "url": "http://127.0.0.1:5178/api/storefront/product-browse/124bb802-8805-4a61-bead-687b3967a20d?",
+          "status": 503
+        }
+      ]
+    },
+    {
+      "synthetic": "long",
+      "width": 320,
+      "text": "优惠期间：\n2024年1月2日至2027年12月30日\n2025年1月2日至2028年12月30日\n2026年1月2日至2029年12月30日",
+      "box": {
+        "x": 225,
+        "y": 220,
+        "width": 91,
+        "height": 279.4375
+      },
+      "expectedReadFailure": false,
+      "errors": [],
+      "network": []
+    }
+  ]
+}

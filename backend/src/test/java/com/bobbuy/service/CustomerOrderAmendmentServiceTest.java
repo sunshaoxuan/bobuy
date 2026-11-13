@@ -38,7 +38,7 @@ class CustomerOrderAmendmentServiceTest {
         when(products.lockById(productId)).thenReturn(Optional.of(product));when(sales.now()).thenReturn(Instant.parse("2026-11-09T10:00:00Z"));
         when(products.findAllById(any())).thenReturn(List.of(product));
         when(sales.quoteAt(eq(product),any())).thenReturn(Optional.of(quote("quote-a")));
-        when(storefront.publicProducts()).thenReturn(List.of(new StorefrontService.PublicProduct(productId,3L,Map.of("en-US","Synthetic tea"),Map.of(),"Brand",10D,null,List.of(),"JPY","pack",1,true,"quote-a",null,null,null,null)));
+        when(storefront.publicProducts()).thenReturn(List.of(new StorefrontService.PublicProduct(productId,3L,Map.of("en-US","Synthetic tea"),Map.of(),"Brand",10D,null,List.of(),"JPY","pack",1,true,"quote-a",null,null,null,null,null)));
         when(receipts.findById(anyString())).thenAnswer(i->Optional.ofNullable(saved.get(i.getArgument(0))));
         when(receipts.saveAndFlush(any())).thenAnswer(i->{CustomerOrderAmendmentReceipt r=i.getArgument(0);saved.put(r.id,r);return r;});
         when(orders.saveAndFlush(any())).thenAnswer(i->{setVersion(order,(order.getOrderRevision()==null?0:order.getOrderRevision())+1);return i.getArgument(0);});
@@ -50,7 +50,7 @@ class CustomerOrderAmendmentServiceTest {
         var line=new OrderLine(productId,"Synthetic tea","pack",1,10);line.setId(10L);line.setHeaderId(9L);order.addLine(line);setVersion(order,0L);
     }
     static void setVersion(OrderHeader o,long v)throws Exception{var field=OrderHeader.class.getDeclaredField("orderRevision");field.setAccessible(true);field.set(o,v);}
-    ProductSaleService.Quote quote(String token){return new ProductSaleService.Quote(BigDecimal.TEN,"JPY","pack",1,token,null,null,null,null,"SYNTHETIC");}
+    ProductSaleService.Quote quote(String token){return new ProductSaleService.Quote(BigDecimal.TEN,"JPY","pack",1,token,null,null,null,null,"SYNTHETIC",null);}
     CustomerOrderAmendmentRequest input(String requestId,String revision,int quantity){return new CustomerOrderAmendmentRequest(requestId,revision,List.of(new CustomerOrderAmendmentRequest.Line(productId,quantity,"quote-a",1L,"JPY")),null);}
     @Test void ownPrincipalAndFreshRoleAreRequiredWithoutLeakingOtherOrder() {
         order.setCustomerId(99L);assertEquals(ErrorCode.RESOURCE_NOT_FOUND,assertThrows(ApiException.class,()->service.preview(authentication,9L)).getErrorCode());
