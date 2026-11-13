@@ -1,0 +1,121 @@
+{
+  "base": "https://bobuy.cc",
+  "views": [
+    {
+      "width": 1440,
+      "assets": [
+        {
+          "path": "/assets/index-Btarc0FZ.js",
+          "sha256": "6d313ae6666bb1566fac006efe1d1520c45744e999c4d4351b771d3818d9622f"
+        },
+        {
+          "path": "/assets/index-7JczN2rf.css",
+          "sha256": "efe312a9b73b77677a7e3a35b20f07bd815c08456775bf3ab08f07c83394e336"
+        },
+        {
+          "path": "/assets/ImageLightbox-Bkvg0lSw.css",
+          "sha256": "a7f51fd0b482add63872dfc3973bd18dc95c7e31ac8322fb1bd644dc4e48b40f"
+        },
+        {
+          "path": "/assets/RecommendationImageViewer-BnZdvF0r.css",
+          "sha256": "53f93b3e748150e500e4a9e82b9c876a48e2f42b0fb04fa459aa85fe608dd06d"
+        },
+        {
+          "path": "/assets/ProductMarkerBadges-Ch-ENXpg.css",
+          "sha256": "5e261cb4f7218357d29c0853c05c44daefd6e5e4ea1f25539d9bab0a99385607"
+        }
+      ],
+      "environment": "production actual data",
+      "productId": "0b38036f-3e99-420c-b870-89fe35d7a723",
+      "source": {
+        "documentId": 309,
+        "documentNumber": "PC-SOURCE-250",
+        "type": "PROMOTION",
+        "state": "ACTIVE",
+        "startsAt": "2026-11-03T15:00:00Z",
+        "endsAt": "2026-11-15T15:00:00Z",
+        "amount": 95800,
+        "beforeAmount": 119800,
+        "effectiveAmount": 95800,
+        "promotion": true
+      },
+      "text": "优惠期间：\n11月4日至11月15日",
+      "detailText": "优惠期间：\n11月4日至11月15日",
+      "geometry": {
+        "x": 333,
+        "y": 209,
+        "width": 148.828125,
+        "height": 70.78125
+      },
+      "badgeBox": {
+        "x": 291,
+        "y": 209.59375,
+        "width": 30,
+        "height": 30
+      },
+      "errors": [],
+      "network": [],
+      "hoverDetailReads": 0,
+      "logo": true,
+      "heat": true
+    },
+    {
+      "width": 320,
+      "assets": [
+        {
+          "path": "/assets/index-Btarc0FZ.js",
+          "sha256": "6d313ae6666bb1566fac006efe1d1520c45744e999c4d4351b771d3818d9622f"
+        },
+        {
+          "path": "/assets/index-7JczN2rf.css",
+          "sha256": "efe312a9b73b77677a7e3a35b20f07bd815c08456775bf3ab08f07c83394e336"
+        },
+        {
+          "path": "/assets/ImageLightbox-Bkvg0lSw.css",
+          "sha256": "a7f51fd0b482add63872dfc3973bd18dc95c7e31ac8322fb1bd644dc4e48b40f"
+        },
+        {
+          "path": "/assets/RecommendationImageViewer-BnZdvF0r.css",
+          "sha256": "53f93b3e748150e500e4a9e82b9c876a48e2f42b0fb04fa459aa85fe608dd06d"
+        },
+        {
+          "path": "/assets/ProductMarkerBadges-Ch-ENXpg.css",
+          "sha256": "5e261cb4f7218357d29c0853c05c44daefd6e5e4ea1f25539d9bab0a99385607"
+        }
+      ],
+      "environment": "production actual data",
+      "productId": "124bb802-8805-4a61-bead-687b3967a20d",
+      "source": {
+        "documentId": 35,
+        "documentNumber": "PC-SOURCE-322",
+        "type": "PROMOTION",
+        "state": "ACTIVE",
+        "startsAt": "2026-11-08T15:00:00Z",
+        "endsAt": "2026-11-22T15:00:00Z",
+        "amount": 2398,
+        "beforeAmount": 2998,
+        "effectiveAmount": 2398,
+        "promotion": true
+      },
+      "text": "优惠期间：\n11月9日至11月22日",
+      "detailText": "优惠期间：\n11月9日至11月22日",
+      "geometry": {
+        "x": 225,
+        "y": 210,
+        "width": 91,
+        "height": 79.5625
+      },
+      "badgeBox": {
+        "x": 183,
+        "y": 210.09375,
+        "width": 30,
+        "height": 30
+      },
+      "errors": [],
+      "network": [],
+      "hoverDetailReads": 0,
+      "logo": true,
+      "heat": true
+    }
+  ]
+}

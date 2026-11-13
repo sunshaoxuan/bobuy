@@ -1,0 +1,330 @@
+{
+  "Root": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112",
+  "Files": [
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\bind-production-assets.py",
+      "Bytes": 1235,
+      "UtcTicks": "639301354515223529",
+      "Sha256": "f8c54a8f0e0b2908c95758bd669052de39eef01d19d6c4937d0496242b5b4fdb",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\diagnose-offer-stage.py",
+      "Bytes": 1801,
+      "UtcTicks": "639301352573451254",
+      "Sha256": "ea11263b2d5c13687fe3f5990a77d7bbc761f9681d778356d76b9bdf589f37c7",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\diagnose-offer-touch.mjs",
+      "Bytes": 814,
+      "UtcTicks": "639301306053037385",
+      "Sha256": "f78b07463f6e8d2e1b2ebdc14d15ec693026fc64be3c4a2352359462bb6f0ccc",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\finalize-offer-receipt.py",
+      "Bytes": 3551,
+      "UtcTicks": "639301356210038392",
+      "Sha256": "0632b6a1cf4c1bdb29b4b269726fa653ac42f3a13e6589fa5be3a36dc8cf0c15",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\finalize-offer-ui.py",
+      "Bytes": 2119,
+      "UtcTicks": "639301344860974651",
+      "Sha256": "4729a563b7d337fc5dce4f1d77c418860931fbbac8ad40ea492405a91280eb3b",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\fix-migration-binding.py",
+      "Bytes": 1668,
+      "UtcTicks": "639301353021000688",
+      "Sha256": "d9afa792888a83ca1412a3bf175439e877178849bc45d015b33aa8c563e7f6b0",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\fix-pricing-geometry.py",
+      "Bytes": 1467,
+      "UtcTicks": "639301348802601272",
+      "Sha256": "c82cddaf124108adf8a7154c4de66adf8ceb03f7dfe6bd8566e12e4648392c33",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\fix-pricing-selectors.py",
+      "Bytes": 250,
+      "UtcTicks": "639301348271156987",
+      "Sha256": "c2c9a7bd04ea300a909cbb7890333d76824b2b1c0fbbdc032eb601c7c1f1579a",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\implement-offer-source.py",
+      "Bytes": 4740,
+      "UtcTicks": "639301338045931303",
+      "Sha256": "26237fbbcf6d9d75669767e89c8e1814d7cd31a97c3541c06b61c22c251238d4",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\implement-pricing-layout.py",
+      "Bytes": 5149,
+      "UtcTicks": "639301339076204768",
+      "Sha256": "548605f40f9c1eb53ef81dd3787b0657032a79feccfe1ca5cf7f375fa5b40b9e",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\inspect-offer-network.mjs",
+      "Bytes": 1308,
+      "UtcTicks": "639301351032108715",
+      "Sha256": "8e62b0c33573145df9c5165da98fc824354781eb1a39c48ae0beb03bc06b3ebb",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\inspect-pricing-drawer.mjs",
+      "Bytes": 1634,
+      "UtcTicks": "639301340292980561",
+      "Sha256": "4628814bdabe2e2631340febfff25b16c8467499715c1ef576adb95fa00c64fd",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\measure-offer-period.py",
+      "Bytes": 1809,
+      "UtcTicks": "639301325331406220",
+      "Sha256": "6854881ee537a50865746d212d02cde13363c9c0edc6172f332dacad80bd6852",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\measure-pricing-glyphs.py",
+      "Bytes": 1189,
+      "UtcTicks": "639301349959934051",
+      "Sha256": "7b532b1a6dc32fa4bfabf95786c1ecb07f0e1b13a1ea3a396516aa1a3f4aed86",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\offer-claude-advice.txt",
+      "Bytes": 0,
+      "UtcTicks": "639301336248953115",
+      "Sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\offer-claude-models.py",
+      "Bytes": 392,
+      "UtcTicks": "639301330893882764",
+      "Sha256": "abcedf204c3004ee15189b54398ef6d7a5fe85e482bd6bd632c2c63e2945fad9",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\offer-claude-probe.txt",
+      "Bytes": 0,
+      "UtcTicks": "639301331264763502",
+      "Sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\offer-deepseek-advice.txt",
+      "Bytes": 3575,
+      "UtcTicks": "639301337283756451",
+      "Sha256": "81a36a4c7c2a71f7a659150d30bfe5ddc70a2fa1964620dcf7cbca508e0199c0",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\offer-flash-probe.txt",
+      "Bytes": 111,
+      "UtcTicks": "639301312543631330",
+      "Sha256": "bfc765498f8980494330a0bab72967a0344bd7e6295c8af8be9403cc482c3ca4",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\offer-gemini-final.txt",
+      "Bytes": 1179,
+      "UtcTicks": "639301325076020528",
+      "Sha256": "4ffa0f7a2048e0fedc30ef3a71e1f4bee0f1fe71b3be72323901f07ebaf54c4d",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\offer-gemini-review.txt",
+      "Bytes": 3891,
+      "UtcTicks": "639301316562619559",
+      "Sha256": "9489c943d81c7026a8f82aa40e5049b2f8bc238598caaaa4fd9e743b2528cc22",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\offer-inventory.py",
+      "Bytes": 2307,
+      "UtcTicks": "639301333868448831",
+      "Sha256": "5cd18f8ee450114460c5c08b574d888dbd64ecaf2a7258bd0030a3dc063994d0",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\offer-models.py",
+      "Bytes": 392,
+      "UtcTicks": "639301304255331956",
+      "Sha256": "6e69ec3a8dc936f7ed43588d84ef9b5a222b7a92befb8e489dd5e3e8127f193b",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\offer-pro-probe.txt",
+      "Bytes": 0,
+      "UtcTicks": "639301312296908649",
+      "Sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\offer-source-payload.tar.gz",
+      "Bytes": 112058838,
+      "UtcTicks": "639301353523688278",
+      "Sha256": "63269d2959a8c509f99e041245f827deae1321d4182549c77f70f92a0b1124ef",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\payload.tar.gz",
+      "Bytes": 5663245,
+      "UtcTicks": "639301325707936490",
+      "Sha256": "696b20cbca0bacd47ea459dcbaff2264a9d1f682c205491e5c4d3de67fcd0ccb",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\prepare-offer-cleanup.py",
+      "Bytes": 1719,
+      "UtcTicks": "639301357044683068",
+      "Sha256": "9f2b8d5b04cc53d0e54ecd877accd747d3b418280cd54553a63fc5733e8cea2e",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\prepare-offer-release.py",
+      "Bytes": 1225,
+      "UtcTicks": "639301320278434287",
+      "Sha256": "f40a03b94f2f26c623ba39311c3ff82311dbe68d4fc9dd1d45e674aa73831ec0",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\refine-pricing-copy.py",
+      "Bytes": 2202,
+      "UtcTicks": "639301346712923964",
+      "Sha256": "3b100a9042b3cf5dbd7419a003a7cd0fb683d48b7be80f425c8c4716173f989f",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\release-offer-source.py",
+      "Bytes": 6404,
+      "UtcTicks": "639301353442864322",
+      "Sha256": "9dff3262aa16e953818447efbabb0775c095c2ce12df7a72c029c94632fbdfb3",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\release-offer.py",
+      "Bytes": 5381,
+      "UtcTicks": "639301320303974696",
+      "Sha256": "23a44c20b7118ee253a9b002693419edd3239abcf84805143f1f09aba1014589",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\retry-offer-image.mjs",
+      "Bytes": 1044,
+      "UtcTicks": "639301317840840971",
+      "Sha256": "49371029412b5397f6d8b869ce6feb8eccdc3957bac8be20ce6a8b39ae11a6ea",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\retry-offer-image.py",
+      "Bytes": 806,
+      "UtcTicks": "639301316271225953",
+      "Sha256": "6ffb32ac187192e34dd4f12254f6095f31fc0182abc3f007c023320cc01a90fe",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\run-pricing-browser.py",
+      "Bytes": 786,
+      "UtcTicks": "639301339646276745",
+      "Sha256": "3c0057b1f24c9e26e28ed6d631386838bad2bcadfc522acba7a7d5377d3b4a90",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\update-offer-tests.py",
+      "Bytes": 5363,
+      "UtcTicks": "639301340994595901",
+      "Sha256": "5c627ab3012ee227805ea00f4d6a2d548521bd34621d05e6fbde6665c81e3715",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\verify-offer-alignment.mjs",
+      "Bytes": 3397,
+      "UtcTicks": "639301323253952980",
+      "Sha256": "b73367e3eb42f4ff0605da9beb71bb88aca3ae460ebc19e60570206e6c51b8c0",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\verify-offer-period.mjs",
+      "Bytes": 7253,
+      "UtcTicks": "639301310818027485",
+      "Sha256": "bba8af0c4c889484123f439223d82c707b1281f33fdf703e2ec923a7bd508b15",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\verify-pricing-ui.mjs",
+      "Bytes": 7351,
+      "UtcTicks": "639301348816139106",
+      "Sha256": "b08d069f8b1ce2b20b66e55867fdfcc30977f57424c60979d6581bfddf8025ee",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\verify-selected-offer.mjs",
+      "Bytes": 6032,
+      "UtcTicks": "639301354534405511",
+      "Sha256": "8dafe2cba49db5c3527bb863174a117112a49b9079c1fbd55469cdf8030af900",
+      "Owner": "Created in this offer-period task; retained executed source or verified remote archive"
+    }
+  ],
+  "Protected": [
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\frontend\\src\\components\\ProductMarkerBadges.tsx",
+      "Sha256": "4eab0d82498cc6c1559576069cdc6bc50cf39f7ae470c1152e888d1d03c2a1a3"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\frontend\\src\\components\\PriceAdjustmentWorkspace.tsx",
+      "Sha256": "664064db9ab17a05f826127bc7d76ad6e37af70f75b2b84b144b3409f8a0e10f"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\backend\\src\\main\\java\\com\\bobbuy\\service\\ProductSaleService.java",
+      "Sha256": "f1167877753c54268448f37f2d4fe2598136ce97d6eab485c39c04f64725de5e"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\docs\\reports\\evidence\\offer-period-presentation-20261113\\source-unification\\acceptance.json",
+      "Sha256": "3b0e7f15c0d2601ba65ca66ff36015e023860572737da9f5dcf8d8cacbfda47c"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\docs\\reports\\evidence\\offer-period-presentation-20261113\\source-unification\\artifact.json",
+      "Sha256": "8e622fc664f7928442fee9d9b8e227dbbf326b74308d39a702321b960d3d39fb"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\docs\\reports\\evidence\\offer-period-presentation-20261113\\source-unification\\production\\offers.json",
+      "Sha256": "58d3bd33dfcd978a55a6541293747d2f1e9e3304b9ecc1584b8b861948d7ddcb"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\docs\\reports\\evidence\\offer-period-presentation-20261113\\source-unification\\production\\browser.json",
+      "Sha256": "df040bba844e6aab98d44a28d2c9e9a5ee70ae98eafd869d7f133c2e69b1230b"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\docs\\reports\\evidence\\offer-period-presentation-20261113\\source-unification\\production\\editor-1440.png",
+      "Sha256": "aa34f7af7f42cd3821ca292fe35c09d29117f803c319fad22c5f915a62458594"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\docs\\reports\\evidence\\offer-period-presentation-20261113\\source-unification\\production\\editor-lines-320.png",
+      "Sha256": "d3a29f968b79ccb70dc0893960ba33e32181e1f6ebc99b835cab868f4ad69107"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\docs\\reports\\evidence\\offer-period-presentation-20261113\\source-unification\\production\\offer-1440.png",
+      "Sha256": "8d4834072b9284993e685f8eec88ceef33e6127d3a33f6a3e0ad5c9037475e13"
+    },
+    {
+      "Path": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\docs\\reports\\evidence\\offer-period-presentation-20261113\\source-unification\\production\\offer-text-320.png",
+      "Sha256": "b775ae6b9e17e1fcba2b1df012d893923f908d19d48abeafa33b83854216dd81"
+    }
+  ],
+  "ProtectedRoots": [
+    "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\frontend",
+    "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\backend",
+    "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\docs"
+  ],
+  "ReceiptPath": "C:\\Users\\X02851\\OneDrive - One\u4eba\u4e8b\u682a\u5f0f\u4f1a\u793e\\\u6587\u6863\\ChatGPT\\bobuy.cc\\.task-tmp\\home-brand-20261112\\docs\\reports\\evidence\\offer-period-presentation-20261113\\source-unification\\cleanup-receipt.json"
+}

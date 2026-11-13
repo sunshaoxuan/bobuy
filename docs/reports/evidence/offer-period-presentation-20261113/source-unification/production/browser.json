@@ -1,0 +1,123 @@
+{
+  "base": "https://bobuy.cc",
+  "views": [
+    {
+      "width": 1440,
+      "environment": "production readonly",
+      "inputs": [
+        {
+          "x": 485,
+          "right": 777.65625,
+          "height": 32
+        },
+        {
+          "x": 793.65625,
+          "right": 1086.328125,
+          "height": 32
+        },
+        {
+          "x": 1102.328125,
+          "right": 1394.984375,
+          "height": 32
+        },
+        {
+          "x": 485,
+          "right": 932,
+          "height": 34
+        },
+        {
+          "x": 948,
+          "right": 1395,
+          "height": 34
+        },
+        {
+          "x": 485,
+          "right": 1395,
+          "height": 76
+        },
+        {
+          "x": 485,
+          "right": 777.65625,
+          "height": 32
+        },
+        {
+          "x": 793.65625,
+          "right": 1086.328125,
+          "height": 32
+        },
+        {
+          "x": 1102.328125,
+          "right": 1394.984375,
+          "height": 32
+        }
+      ],
+      "errors": [],
+      "network": [],
+      "syntheticWrites": 0,
+      "screenshots": [
+        "drawer-1440.png",
+        "editor-1440.png",
+        "footer-1440.png"
+      ]
+    },
+    {
+      "width": 320,
+      "environment": "production readonly",
+      "inputs": [
+        {
+          "x": 33,
+          "right": 287,
+          "height": 44
+        },
+        {
+          "x": 33,
+          "right": 287,
+          "height": 44
+        },
+        {
+          "x": 33,
+          "right": 287,
+          "height": 44
+        },
+        {
+          "x": 33,
+          "right": 287,
+          "height": 44
+        },
+        {
+          "x": 33,
+          "right": 287,
+          "height": 44
+        },
+        {
+          "x": 33,
+          "right": 287,
+          "height": 76
+        },
+        {
+          "x": 33,
+          "right": 287,
+          "height": 44
+        },
+        {
+          "x": 33,
+          "right": 287,
+          "height": 44
+        },
+        {
+          "x": 33,
+          "right": 287,
+          "height": 44
+        }
+      ],
+      "errors": [],
+      "network": [],
+      "syntheticWrites": 0,
+      "screenshots": [
+        "drawer-320.png",
+        "editor-320.png",
+        "footer-320.png"
+      ]
+    }
+  ]
+}

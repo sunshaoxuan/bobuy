@@ -1,0 +1,9 @@
+from pathlib import Path
+r=Path(__file__).parent
+p=r/'frontend/src/components/priceDocumentText.ts';s=p.read_text(encoding='utf-8')
+for loc,settings,empty in [('zh-CN','价格设置','还没有调价记录'),('zh-TW','價格設定','尚無調價記錄'),('ja-JP','価格設定','価格改定の記録はありません'),('en-US','Price settings','No price adjustments yet')]:s=s.replace("'"+loc+"':{title:","'"+loc+"':{settings:'"+settings+"',empty:'"+empty+"',title:")
+p.write_text(s,encoding='utf-8')
+p=r/'frontend/src/components/PriceAdjustmentWorkspace.tsx';s=p.read_text(encoding='utf-8').replace("busy?t('browse.loading'):c.unknown","busy?t('browse.loading'):c.empty").replace('<h3>{c.type}</h3><div className="price-document-grid">','<h3>{c.settings}</h3><div className="price-document-grid price-document-money-grid">').replace('<h3>{c.reason}</h3><label>{c.reason}<Input.TextArea','<h3>{c.reason}</h3><label><Input.TextArea');p.write_text(s,encoding='utf-8')
+p=r/'verify-pricing-ui.mjs';s=p.read_text(encoding='utf-8').replace("await page.route('**/api/merchant/price-adjustments',route=>{if(route.request().method()==='GET')return route.fulfill", "await page.route('**/api/merchant/price-adjustments',async route=>{if(route.request().method()==='GET'){for(let n=0;!row&&n<100;n++)await new Promise(r=>setTimeout(r,10));return route.fulfill").replace("state:row.status==='APPROVED'?'ACTIVE':'DRAFT'}]:[]}});writes.push", "state:row.status==='APPROVED'?'ACTIVE':'DRAFT'}]:[]}});}writes.push").replace("2026-11-13T00:00:00","2026-11-13T00:00").replace("2026-11-23T00:00:00","2026-11-23T00:00")
+p.write_text(s,encoding='utf-8')
+p=r/'docs/plans/OFFER-PERIOD-PRESENTATION-20261113.md';s=p.read_text(encoding='utf-8');s+='\n实际抽屉截图显示空列表写“待补充”、原因标题和标签重复，修正这两处可见问题并将价格设置三项排为同一行。仅布局/文案改变，前端31项与后端31项继续复用；最小重跑发布构建、抽屉截图。合成list先于productId返回造成空状态、旧Chromium不接受datetime含秒fill，采证fixture分别等待ID和使用分钟输入；仅重跑未完成浏览器验收。\n';p.write_text(s,encoding='utf-8')

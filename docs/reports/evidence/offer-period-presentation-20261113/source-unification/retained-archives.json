@@ -1,0 +1,10 @@
+{
+  "payload.tar.gz": {
+    "remote": "/opt/bobuy/releases/20261113.offer-period-friendly.1/payload.tar.gz",
+    "sha256": "696b20cbca0bacd47ea459dcbaff2264a9d1f682c205491e5c4d3de67fcd0ccb"
+  },
+  "offer-source-payload.tar.gz": {
+    "remote": "/opt/bobuy/releases/20261113.offer-source-drawer.1/offer-source-payload.tar.gz",
+    "sha256": "63269d2959a8c509f99e041245f827deae1321d4182549c77f70f92a0b1124ef"
+  }
+}

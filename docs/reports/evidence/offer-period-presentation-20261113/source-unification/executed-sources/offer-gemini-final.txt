@@ -1,0 +1,14 @@
+Based on the provided screenshots, the alignment and layout verification results are as follows:
+
+### Checklist Verification
+
+1. **`rightTop` Placement**: **Confirmed.** The tooltip consistently anchors to the right of the `惠` badge with its top aligned near the badge top.
+2. **`No.` Pill & Flame/Count Row**: **Confirmed.** The top metadata row (`No.xxxxxxx` and flame/count) remains completely visible and unobstructed on both desktop and mobile views.
+3. **Placement Relative to `惠`**: **Confirmed.** The hint box pops out directly to the right without obscuring the red `惠` badge.
+4. **Legibility**: **Confirmed.** Month and day text is clear and readable across both desktop (single line: `11月4日至11月15日`) and mobile (intentional two lines: `11月9日至` / `11月22日`).
+5. **Viewport Clipping**: **Confirmed.** On the narrow viewport (Image 2, right-hand card), the full border and padding of the tooltip remain within bounds; no text or borders are cut off by the edge of the viewport.
+
+---
+
+### Remaining Defects in Changed Area
+* **None observed.** All targeted constraints (visibility, alignment, legibility, and boundary containment) are satisfied.
