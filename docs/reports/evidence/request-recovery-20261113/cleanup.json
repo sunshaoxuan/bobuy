@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "removedFiles": 86,
+  "removedBytes": 13124654,
+  "protectedEvidence": 9,
+  "sharedDependencies": "Retained",
+  "remoteRollback": "Retained",
+  "at": "2026-11-13T10:51:55.2880500+09:00"
+}

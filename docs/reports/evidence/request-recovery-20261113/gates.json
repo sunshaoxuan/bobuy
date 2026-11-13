@@ -1,0 +1,10 @@
+{
+  "source": "f95f54ec099fcee79a26643db43c5c92b905ea85",
+  "result": "PASS",
+  "ci": "success",
+  "ciUrl": "https://github.com/sunshaoxuan/bobuy/actions/runs/43346967132",
+  "acceptanceSha256": "86909b4c3328e46946c158004b9b2b360892d668880028e9fc8178150031392e",
+  "buildLogSha256": "fbaa500bd9d2c0d8e35c7497dc1c22e553c58d2c20eacabf1b3a863a299e22a8",
+  "frontendOnly": true,
+  "databaseOperation": false
+}

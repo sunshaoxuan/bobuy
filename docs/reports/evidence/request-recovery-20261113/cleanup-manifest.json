@@ -1,0 +1,480 @@
+{
+  "taskRoot": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113",
+  "remoteRecovery": "/opt/bobuy/releases/20261113.read-recovery.1",
+  "files": [
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\favicon.svg",
+      "sha256": "8994c8a87a91b6094691daad37c9fb49cc2e3497fab234a201f73eac3a26209d",
+      "bytes": 247
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\home.html",
+      "sha256": "6ce4190b797ce1c2b57f07f0bc7bd20d313c68bcb7d0219b9644e07fa6d530a1",
+      "bytes": 1503
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\index.html",
+      "sha256": "b96e07212a961232cf417d5638d1188151f3c91c930e47425517ae456615a006",
+      "bytes": 496
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\release-maintenance.html",
+      "sha256": "1d43b536569277a57aaceca328c9288e35292ddf015fbc03889f71a8fac093a8",
+      "bytes": 2709
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\robots.txt",
+      "sha256": "871fb754da59b3ea07dbb080c1dd36f766d33004d80e5ab3ebfd128163eaf52c",
+      "bytes": 98
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\sitemap.xml",
+      "sha256": "0986903ffb96564ae8f0dff111ef27f4d5184235c1d467b88c11f250f9d148a0",
+      "bytes": 313
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\ArrowLeftOutlined-B6Ws2L5T.js",
+      "sha256": "a426f21102f055ead5d030ce637767dd1c562abc9e14a6269c70e8d280c74c72",
+      "bytes": 519
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\audit-view-DDtNnExE.js",
+      "sha256": "24b55519a82b7278ae0b38a3b9d381a1c968dbdb643af71e5f6c8cb986dbe30b",
+      "bytes": 7571
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\Breadcrumb-DBe2WW8p.js",
+      "sha256": "147a34f7fb54e98035ce6f8c54ac2885fc44723b4f13a07792d275de77138e4d",
+      "bytes": 6588
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\CameraOutlined-CvrX0zjS.js",
+      "sha256": "94cf3f71b7f2a11891541bd9aca66f76ea90c0b898bf4b7fce12067ad791cedd",
+      "bytes": 777
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\chat-flow-D3u2VGyV.js",
+      "sha256": "2dc6afa0c190d9a788b9277d9e259cb5406d095ab166d94681b3fdd2b5a1f80d",
+      "bytes": 20523
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\ClientBilling-D0URf3Ho.js",
+      "sha256": "9fb953dc1242e71b81a43e8e4ee19856026c553ff7dbe7d0f7aa133eb6619e53",
+      "bytes": 14295
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\ClientChat-BmkYcqTv.js",
+      "sha256": "19a8c4aeb06e28ff90d13b5ffb338fc2d2a2c6e169166d10da0deda548b87117",
+      "bytes": 2548
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\ClientOrders-ClnAoOct.js",
+      "sha256": "cf7f56f57b2c861c047d704c7e662413201e6241c8ae3e7a43e3e400191c863a",
+      "bytes": 10612
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\ClientTrips-D-VMIWQN.js",
+      "sha256": "34ffeb6e975f6d220a29a02ca89a6a80fd1f25f2730d479c78ec83ac9fd4c3d2",
+      "bytes": 1829
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\ClockCircleOutlined-BgtGVAoA.js",
+      "sha256": "fe9678cafb75f38f5947ea85151b330d38a466ff28570900aac9094715c32198",
+      "bytes": 665
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\Collapse-CjVzvKrc.js",
+      "sha256": "555e65773d8f5cbb67ac17fda413022221c7c93d84f3193d4991489d6d5bee6c",
+      "bytes": 10215
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\Currencies-Bn6H29sI.js",
+      "sha256": "fc04922491ed995901e3649f6964e909583422ce7f43b68b3683492196dfa5a8",
+      "bytes": 1191
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\Dashboard-cK5srOPr.js",
+      "sha256": "fe4cb6b6d8923d3e8630099eb634884c55dac52300eff6257330200aceb8c277",
+      "bytes": 3282
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\EditOutlined-DzxhOGp-.js",
+      "sha256": "ff1563d65a4914bdb2cdd9e70464ac43c5f123e855569a8bbef3142dc3de899d",
+      "bytes": 696
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\GeographicAreas-Bo31vvAQ.css",
+      "sha256": "b54582b4f25b1498ac1b079c7a4832a1dc9aeec41881ae20fc6be0aa85f5c73c",
+      "bytes": 1771
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\GeographicAreas-DeHIau8-.js",
+      "sha256": "0ac197be9a6ab3d8f30de6525705c5bc516d6e4066a79201bb7601c1250c90a6",
+      "bytes": 3385
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\ImageLightbox-Bkvg0lSw.css",
+      "sha256": "a7f51fd0b482add63872dfc3973bd18dc95c7e31ac8322fb1bd644dc4e48b40f",
+      "bytes": 18140
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\ImageLightbox-DGzoqDQs.js",
+      "sha256": "64aa6157727c2d10c3c378dcf8fa7292bf97d9aaa7ca7839f81d10b6aadc4ef2",
+      "bytes": 18620
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\index-7JczN2rf.css",
+      "sha256": "efe312a9b73b77677a7e3a35b20f07bd815c08456775bf3ab08f07c83394e336",
+      "bytes": 75152
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\index-B481rgah.js",
+      "sha256": "a49a7454d0418663ad6fb3dc1bee2e461795557986f29d69c668ad7f154c16d1",
+      "bytes": 7906
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\index-BCXoSc3L.js",
+      "sha256": "115f6e6657162dd6e47f33e13f117c1a079e1af3d660037bd0055404834679d6",
+      "bytes": 44245
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\index-BginRuiC.js",
+      "sha256": "8fcf929e20dd8c24c7ecb470bf086021fdebcfd3615d99b289cbe542f07a527d",
+      "bytes": 114
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\index-BHStZF7k.js",
+      "sha256": "c591d2063add0081577e09b66779122c848b4a9dc4bd9343c848aea83074a2a1",
+      "bytes": 1373045
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\index-BoHbLO8i.js",
+      "sha256": "3eb2065a7cde82ee417c0fef284b33aa20af91826b4aa8b91b8b762f334fe039",
+      "bytes": 10602
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\index-BP9p2FdV.js",
+      "sha256": "6940f4753bb82bfeb231319eeeba7e502ee3003f8686908b228f466ae67a2c90",
+      "bytes": 8495
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\index-C8ka8k6K.js",
+      "sha256": "40ec999173f9c8e9c4e725c609d04601d804ddc99747de5b0581d0b0212c540f",
+      "bytes": 4568
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\index-CbUlWh6R.js",
+      "sha256": "204238670f3593c7a8a2981dcf6e234c8bfc7f37128aa711aadf3d2b1ab72cdb",
+      "bytes": 10411
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\index-Cj14-Pwj.js",
+      "sha256": "8d9a808d440afad20aa06b82d50966bbb064304bdd810cc430c56c3ae5a0f81e",
+      "bytes": 3844
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\index-DSWgjhhY.js",
+      "sha256": "2772962da359fed1fee868fdae7cc92cfc7f192dda70930817a13f77d968e567",
+      "bytes": 4139
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\index-ZvXRvLkV.js",
+      "sha256": "42077d2bb4bf4e3a4c8bbc9305aa4b598655ccd01c76a3b05a40b12e474121ef",
+      "bytes": 21421
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\index-_ktA8cCA.js",
+      "sha256": "7da0cb3f6145e66a30d478c2ddbb905d76e1fa9559f905fccd650304769b7317",
+      "bytes": 5355
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\LoginPage-D8FChQjl.js",
+      "sha256": "6e3e2cb874bf2a38161f5e9d3e1f268e3d98a43a5760b763377dec77a84922e1",
+      "bytes": 1998
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\MailSettings-Brfj0jCQ.js",
+      "sha256": "c5e1621b475ce0ab80cff64b92e8c70f79914c46c631efeedfa7cf28f6d856e8",
+      "bytes": 7975
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\MailSettings-Dx7mJHLN.css",
+      "sha256": "99e90864463c63c8a2c4f52a2182ea91d2df501ff9caf14b4b66319ab37da548",
+      "bytes": 5768
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\MerchantCustomers-CIzCp51v.js",
+      "sha256": "d25f83dca6ac700e49e00a698d42f0c898f8c2bcc91c1de6e300bc0346758d39",
+      "bytes": 1137
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\OrderDesk-CK-WovvX.js",
+      "sha256": "bdfa5ee9233184667b6a72e3d5486e55e3394102f38e5365b0ad4b440ed84b4c",
+      "bytes": 6761
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\OrderProductIdentity-BMM7Tl28.js",
+      "sha256": "ee65e78b4436dfea1f836a85bf0385c9e25b9697f4e9f114a44a231d39f27f12",
+      "bytes": 815
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\Orders-Dl3tK42N.js",
+      "sha256": "f01e574fdfdd4267b2fbb004f96b6bcbaa651c94ccb969901b7509c570449133",
+      "bytes": 10286
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\Pagination-BJxhrsD5.js",
+      "sha256": "8d66186879a73d1178712e325a67452ce7fe46158399c29d9ae2735561fde3f9",
+      "bytes": 24133
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\PickingMaster-Czxuz1PP.js",
+      "sha256": "b07b4a0b26da73b4399c02ff9e24fdd81fd2186ff31cefa5cdf848bc45cc843b",
+      "bytes": 4847
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\priceDocumentText-BgwSCM2q.js",
+      "sha256": "839add0d94f3aaede4f786fad84564851da7be58cddfb9ef5db974684ccb9a40",
+      "bytes": 92203
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\procurement-dashboard-DjW7aOQH.js",
+      "sha256": "05890262621eef34738235e7a373b46db470e846751c6f46d33cb693acdf70c4",
+      "bytes": 28517
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\ProcurementHUD-i1dFdHQW.js",
+      "sha256": "db89539eae5b3e20e1be8b06972f2ff88d5238fef251155b122f8488444a6f11",
+      "bytes": 13349
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\ProductArchive-DuFFYgHm.js",
+      "sha256": "53063d45631a17527bb6c6366da0a9cdf17e5a82daacc608b7b304aecdc53c05",
+      "bytes": 63307
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\ProductArchive-PQQeicHG.css",
+      "sha256": "71acd760334fa0e212ea5587ca86067cb2ac074a1c1d48295fdd76e9a1ac75f7",
+      "bytes": 29741
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\ProductMarkerBadges-BUAErjB5.css",
+      "sha256": "262c59d5bb50ad3cdf5b3708eccce2380d0b04cfdb2c14ba785e2e9ce449980c",
+      "bytes": 4876
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\ProductMarkerBadges-Ce7UPa5j.js",
+      "sha256": "b7f8802bf1f3c8d91da918e3217b6b12505ce847d5978bb96561a57593a6ca98",
+      "bytes": 1872
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\ProductMarkerEditor-DLZu9aaO.js",
+      "sha256": "f82b6822ac1c480d906dab120ad9feff1d82e6483043e1bf20248ce49494208f",
+      "bytes": 4479
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\ProductMarkers-6iPeUpn1.js",
+      "sha256": "809fda33a88077aa1d9887dfa7a01759ddb80582976e9ac21cadca906481248c",
+      "bytes": 6221
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\ProductMetadata-Wqsrilku.js",
+      "sha256": "fc8fbf86d7273f4352172acfe56a7686957cc6f23007991f478549f53c8fdcd9",
+      "bytes": 507
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\PublicProductCatalog-DXgS_y-z.js",
+      "sha256": "2ea56da4621e718620d500531e56d01c2e491198e512f0bf3503b60dff67b0f6",
+      "bytes": 11997
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\PublicRecommendations-C5P7nePA.js",
+      "sha256": "a94f82f49618304ea327e522472ca763a7e31067aeda1bcd27f63d42af91b71a",
+      "bytes": 28222
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\PublicRecommendations-DhYyKoQc.css",
+      "sha256": "57228e6abd81d4b8c752bf45697153f2ce08d5660413c4638cf9f3bcee8ab2d5",
+      "bytes": 5545
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\RecommendationImageViewer-B8cCb2R4.js",
+      "sha256": "2d6a756533a65175b6238f4c818b49c9663d7e6ac9ff1dedff9704b6afec083d",
+      "bytes": 19970
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\RecommendationImageViewer-BnZdvF0r.css",
+      "sha256": "53f93b3e748150e500e4a9e82b9c876a48e2f42b0fb04fa459aa85fe608dd06d",
+      "bytes": 21911
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\Recommendations-BKS760mL.js",
+      "sha256": "54afab820d258f9caf9b587434b055c72f730aed17a733f930a53807f487fff2",
+      "bytes": 95283
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\Recommendations-BR6eX9U6.css",
+      "sha256": "a5fc8fb0758186d686acf3fbaca080c3d3851f65ab05221e30061df81abe3ef8",
+      "bytes": 3749
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\ReloadOutlined-BLpCzY9G.js",
+      "sha256": "09fa463132b3942261f7a21650a3f6de16f59b85bdf5d01ef7479aed35171320",
+      "bytes": 986
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\SafetyCertificateOutlined-DRUZWr0L.js",
+      "sha256": "9c71f02bec8e32376ed4637c2b0c85e722944e5ec65dd12a8d9a4dfc3446fb29",
+      "bytes": 808
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\SaveOutlined-D6ZOHCNW.js",
+      "sha256": "ba7cf28b8d07d2dc81968afcfb269564dd69ad188df8c260e2d914574796da93",
+      "bytes": 726
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\SendOutlined-CEQLN7Lb.js",
+      "sha256": "74a771ae5ecae5d47d20c0408f4be5dbf72dc33db19f96092d45e02ca2eec028",
+      "bytes": 748
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\Skeleton-mIUd4F10.js",
+      "sha256": "ae27b0816878e7ac576ec92d0592bd6acfc3f9ead5d374ec320e7614daaa6177",
+      "bytes": 10440
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\stock-master-BEiMacuL.js",
+      "sha256": "8990cead5533313ac2257f16f280b7d3fd46bd94309ff108d88c923cc4143b63",
+      "bytes": 24975
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\styleChecker-C27TVDSL.js",
+      "sha256": "0246743058c87849da5c892c7f7c5cf959a6f362fc38e8aead4386377262c566",
+      "bytes": 638
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\Suppliers-D2_I6FWc.js",
+      "sha256": "cf991b93f57581b976ae8101af60c85a4ba86f386ab33a9ce4c398fd774ea51e",
+      "bytes": 3761
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\Table-DNCOhUy8.js",
+      "sha256": "2e03b6c67d7225f4c2b666eedaf220129780c6e4237675d0acc945303b96d1f8",
+      "bytes": 147074
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\Trips-BLmcQQp6.js",
+      "sha256": "5cce7875e1dc0abd22d3f7e18c30c9edde3dce2f703853392c3a2b0e4411bc16",
+      "bytes": 104724
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\useBreakpoint-Cq24Mkat.js",
+      "sha256": "1947cc2219e0b419f54f1a35c5ee123b7faf7c65b5434dbb87f77550c7fe462d",
+      "bytes": 344
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\useNetworkStatus-BHfueZYy.js",
+      "sha256": "44397de8447fee91587911499f1b395a9f89e3b6e5754d71e6e7480564dac959",
+      "bytes": 27144
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\Users-a7cwmJAZ.js",
+      "sha256": "b27aaf96eab1d8484f0dc72082c9cf49c365eb07698f8409761ce97a75ff8bf8",
+      "bytes": 6147
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\WarningOutlined-BP3ZCt2U.js",
+      "sha256": "94b9abdcccdae2a1225a5dc3412b8bb36b8a60d11270270de965b173c91f7064",
+      "bytes": 48608
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\products\\chicken.png",
+      "sha256": "6d27a9305a0bfa7caacce28e45d92cdb2bc27ce7d6082b733f4ac1ee55797d9b",
+      "bytes": 779816
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\products\\croissants.png",
+      "sha256": "27bbf1f4a055af022cf029cdb929c9d78a55f2b25b087965b8ebb4c245977100",
+      "bytes": 832854
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\products\\matcha-muffins.jpg",
+      "sha256": "652dfcc95454cf539e9056bdd2aea050a003467ac5e304d0ba4856c38d688793",
+      "bytes": 824351
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\products\\milk.png",
+      "sha256": "73c02467723cc54ba5668a0691383620946ad9b88a33b422b5b3ddadbd617cb3",
+      "bytes": 526467
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\products\\paper_towels.png",
+      "sha256": "f4e28f967564ab68dd7e75cda0e765e0c6d251e13b3c305ca02f33561c9aa843",
+      "bytes": 504710
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\products\\spinach.png",
+      "sha256": "9b12209d94b35e100df3e56e1e788e7fbd2114879e701961153d79fc82163b3b",
+      "bytes": 572315
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\products\\strawberries.png",
+      "sha256": "2a97ccf4f6cb040699c6438af58b76233f88b468b6436c6d2f49619ca7dbade5",
+      "bytes": 848062
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\.task-tmp\\request-recovery\\payload.tar.gz",
+      "sha256": "8C0CA4B0B38DDDC9AB8B3940D5B2CE4F8B0C66EC4FA86578E5971C5D2EE14D8A",
+      "bytes": 5663080
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\docs\\reports\\evidence\\request-recovery-20261113\\visual-baseline.log",
+      "sha256": "841B56A6C84457CA402970B8C53FD8F33DFAA5EE0A7FA34D589F85019EB26511",
+      "bytes": 2517
+    }
+  ],
+  "directories": [
+    "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets",
+    "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist\\assets\\products",
+    "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\frontend\\dist",
+    "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\.task-tmp\\request-recovery"
+  ],
+  "protected": [
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\docs\\reports\\evidence\\request-recovery-20261113\\artifact.json",
+      "sha256": "9E9DC5151B7C1DA6966AB125DDD2E2AD038D815DD26A78B8FF88D1E9B5276167"
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\docs\\reports\\evidence\\request-recovery-20261113\\local-browser.json",
+      "sha256": "86909B4C3328E46946C158004B9B2B360892D668880028E9FC8178150031392E"
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\docs\\reports\\evidence\\request-recovery-20261113\\production-browser.json",
+      "sha256": "B08BCC6BE90D09D50B6C527FE958A509C386BE475A94CF2520D3B6AFA4A34CF2"
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\docs\\reports\\evidence\\request-recovery-20261113\\production-verify.json",
+      "sha256": "BB4BAF4F0EDF30323CEB48AC5FEB2028831C55D550B5C2770ED3CDF2C2AF2887"
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\docs\\reports\\evidence\\request-recovery-20261113\\production-recovered-desktop.png",
+      "sha256": "AC54633B860F94E8CFA80A3B1474529BAF4B220EF338CF746770DA16414AAF31"
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\docs\\reports\\evidence\\request-recovery-20261113\\production-recovered-mobile.png",
+      "sha256": "38B2FD9B7E0CB1B0A978023670E98BB66C2014709932C08677ECC518C5F40ABF"
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\docs\\reports\\evidence\\request-recovery-20261113\\tests.log",
+      "sha256": "E8E59F5E21C0FFB3D7A7D020DC2BBD00630CE263EC5A119C47E253B0595C6544"
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\docs\\reports\\evidence\\request-recovery-20261113\\paging-tests.log",
+      "sha256": "676149DEB488B3E94AC144E2C08045268F21D59A15AF2478C9F17CA3D40B1BDC"
+    },
+    {
+      "path": "C:\\Users\\X02851\\OneDrive - One人事株式会社\\文档\\ChatGPT\\bobuy.cc\\.task-tmp\\request-recovery-20261113\\docs\\reports\\evidence\\request-recovery-20261113\\build.log",
+      "sha256": "FBAA500BD9D2C0D8E35C7497DC1C22E553C58D2C20EACABF1B3A863A299E22A8"
+    }
+  ]
+}
