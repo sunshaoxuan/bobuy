@@ -46,6 +46,13 @@
 .catalog-master-detail .product-marker-badges { margin:12px 0; }
 .product-marker-badges .product-marker-with-period { align-items:center; gap:8px; max-width:100%; }
 .product-marker-period { display:flex; flex-direction:column; gap:2px; min-width:0; font-size:12px; line-height:18px; color:#595959; overflow-wrap:anywhere; }
+.offer-period-copy {display:flex;flex-direction:column;gap:4px;line-height:1.6;white-space:normal;overflow-wrap:anywhere;}
+.offer-period-copy strong {font-weight:600;}
+.offer-period-tooltip {max-width:min(280px,calc(100vw - 24px));}
+.offer-period-tooltip .ant-tooltip-inner {padding:10px 12px;color:#522b21;background:#fff8f2;border:1px solid #bf6253;border-radius:8px;}
+.offer-period-tooltip .ant-tooltip-arrow::before {background:#fff8f2;}
+.marker-image-overlay [data-card-action="offer-period"] {cursor:help;}
+.marker-image-overlay [data-card-action="offer-period"]:focus-visible {outline:2px solid #232323;outline-offset:4px;}
 @media(max-width:767px) {
  .marker-form-row { grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
  .marker-heading { align-items:flex-start; }
