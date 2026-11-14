@@ -779,6 +779,8 @@ const messages: Dictionary = {
     'stock.item.name': 'Product Name',
     'stock.item.category': 'Category',
     'stock.item.price': 'Price (USD)',
+    'stock.table.price_short': 'Price',
+    'stock.table.price_jpy': 'Price (JPY)',
     'stock.item.quantity': 'Quantity',
     'stock.item.unit': 'Unit',
     'stock.status.new': 'Pending',

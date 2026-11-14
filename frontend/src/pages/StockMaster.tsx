@@ -534,6 +534,9 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
     if (!currentItem) return;
     const rawValues = values as Partial<StockItem> & { merchantSkuEntries?: MerchantSkuEntry[] };
     const { merchantSkuEntries, ...safeValues } = rawValues;
+    // Ant InputNumber reports null when cleared. Keep persisted and rendered rows numeric.
+    if (safeValues.price == null) safeValues.price = 0;
+    if (safeValues.stock == null) safeValues.stock = 0;
     const merchantSkus = mapEntriesToMerchantSkus(merchantSkuEntries);
     const nextNameL10n: L10nValues = values.nameL10n ?? currentItem.nameL10n ?? {};
     const nextDescriptionL10n: L10nValues = values.descriptionL10n ?? currentItem.descriptionL10n ?? {};
@@ -593,70 +596,79 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
     (item) => item.name.toLowerCase().includes(searchText.toLowerCase()) || (item.sku && item.sku.toLowerCase().includes(searchText.toLowerCase()))
   );
 
+  const compactText = (value: React.ReactNode, label: string) => (
+    <Tooltip title={label} trigger={['hover', 'focus']}>
+      <span className="stock-compact-text" tabIndex={0}>{value}</span>
+    </Tooltip>
+  );
+  const actionButton = (label: string, icon: React.ReactNode, props: React.ComponentProps<typeof Button>) => (
+    <Tooltip title={label} trigger={['hover', 'focus']}>
+      <Button {...props} className={`stock-compact-action ${props.className ?? ''}`} shape="circle" icon={icon} aria-label={label} />
+    </Tooltip>
+  );
+  const showSecondaryColumns = screens.xl === true;
   const columns = [
+    {
+      title: '', key: 'thumbnail', width: 60,
+      render: (_: unknown, record: StockItem) => <img className="stock-compact-thumb" src={getStockThumbnail(record)} alt={record.name} onError={event=>{event.currentTarget.onerror=null;event.currentTarget.src=DEFAULT_STOCK_THUMBNAIL;}} />
+    },
     {
       title: t('stock.item.name'),
       dataIndex: 'name',
-      width: 220,
-      render: (text: string, record: StockItem) => (
-        <Input value={text} placeholder={t('stock.item.name_input_placeholder')} onChange={(e) => handleFieldChange(record.key, 'name', e.target.value)} />
-      )
+      render: (text: string) => compactText(text, text)
     },
     {
       title: t('stock.item.sku'),
       dataIndex: 'sku',
-      width: '8rem',
-      render: (text: string, record: StockItem) => (
-        <Input value={text} placeholder={t('stock.item.sku_placeholder')} onChange={(e) => handleFieldChange(record.key, 'sku', e.target.value)} />
-      )
+      width: 120,
+      render: (text?: string) => compactText(text || '—', text || '—')
     },
     {
       title: t('stock.item.category'),
       dataIndex: 'category',
-      width: 150,
-      render: (text: string, record: StockItem) => (
-        <Input value={text} placeholder={t('stock.item.category_input_placeholder')} onChange={(e) => handleFieldChange(record.key, 'category', e.target.value)} />
-      )
+      width: 120,
+      render: (text: string) => { const category=categories.find(item=>item.id===text); const label=category?.name?.[locale] ?? category?.name?.['en-US'] ?? text; return compactText(label, label); }
     },
     {
-      title: t('stock.item.price')+' (JPY)',
+      title: (
+        <Tooltip title={t('stock.table.price_jpy')} trigger={['hover', 'focus']}>
+          <span className="stock-compact-price-heading" tabIndex={0} aria-label={t('stock.table.price_jpy')}>
+            {t('stock.table.price_short')}
+          </span>
+        </Tooltip>
+      ),
       dataIndex: 'price',
-      width: '8rem',
-      render: (val: number, record: StockItem) => (
-        <InputNumber value={val} prefix="JPY ¥" style={{ width: '100%' }} onChange={(v) => handleFieldChange(record.key, 'price', v)} />
-      )
-    },
-    {
-      title: t('sale.actual'),
-      key:'actualSale',
-      render:(_:unknown,record:StockItem)=>record.actualSale?<span>{record.actualSale.currency} {record.actualSale.amount.toLocaleString(locale)} / {record.actualSale.unit}</span>:<span>{t('sale.pending')}</span>
+      width: 100,
+      hidden: !showSecondaryColumns,
+      render: (val: number | null | undefined) => compactText(`JPY ¥${(val ?? 0).toLocaleString(locale)}`, `JPY ¥${(val ?? 0).toLocaleString(locale)}`)
     },
     {
       title: t('stock.item.quantity'),
       dataIndex: 'stock',
-      width: '7rem',
-      render: (val: number, record: StockItem) => (
-        <InputNumber value={val} style={{ width: '100%' }} onChange={(v) => handleFieldChange(record.key, 'stock', v)} />
-      )
+      width: 72,
+      hidden: !showSecondaryColumns,
+      render: (val: number | null | undefined) => compactText((val ?? 0).toLocaleString(locale), (val ?? 0).toLocaleString(locale))
     },
     {
       title: t('stock.table.status'),
       key: 'status',
-      width: '7rem',
+      width: 88,
+      hidden: !showSecondaryColumns,
       render: (_: any, record: StockItem) =>
         record.isNew ? <Tag color="orange">{t('stock.status.new')}</Tag> : <Tag color="blue">{t('stock.status.modified')}</Tag>
     },
     {
       title: t('stock.table.action'),
       key: 'action',
-      width: '8rem',
+      width: 184,
+      fixed: 'right' as const,
       render: (_: any, record: StockItem) => (
-        <Space className="marker-product-actions" size={8} wrap>
-          <Button size="small" disabled={record.isNew} onClick={()=>setCatalogId(record.key)}>{t('master.title')}</Button>
-          <Button size="small" disabled={record.isNew} onClick={()=>setPricingId(record.key)}>{t('pricing.title')}</Button>
-          <Tooltip title={t('marker.assigned')}><Button className="marker-product-trigger" icon={<TagsOutlined aria-hidden/>} aria-label={t('marker.assigned')+' '+record.name} disabled={record.isNew} onClick={()=>openMarkers(record.key)}/></Tooltip>
-          <Button type="text" icon={<EditOutlined />} onClick={() => record.catalogDriven?setCatalogId(record.key):openDrawer(record)} />
-          <Button type="text" danger icon={<DeleteOutlined />} onClick={() => handleDelete(record.key)} />
+        <Space className="stock-compact-actions" size={4}>
+          {actionButton(t('master.title')+' '+record.name, <DatabaseOutlined aria-hidden/>, {disabled:record.isNew,onClick:()=>setCatalogId(record.key)})}
+          {actionButton(t('pricing.title')+' '+record.name, <DollarOutlined aria-hidden/>, {disabled:record.isNew,onClick:()=>setPricingId(record.key)})}
+          {actionButton(t('marker.assigned')+' '+record.name, <TagsOutlined aria-hidden/>, {disabled:record.isNew,onClick:()=>openMarkers(record.key)})}
+          {actionButton(t('stock.master.edit_detail')+' '+record.name, <EditOutlined aria-hidden/>, {onClick:()=>record.catalogDriven?setCatalogId(record.key):openDrawer(record)})}
+          {actionButton(t('stock.master.discard')+' '+record.name, <DeleteOutlined aria-hidden/>, {danger:true,onClick:()=>handleDelete(record.key)})}
         </Space>
       )
     }
@@ -683,7 +695,6 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
                   </Space>
               </div>
               <div className="stock-mobile-side">
-                <ProductReviewStars productId={item.isNew||item.visibilityStatus==='DRAFTER_ONLY'?undefined:item.key}/>
                 <div className="stock-mobile-metric stock-mobile-price">
                   {!item.actualSale&&<small className="card-price-label">{t('stock.item.price_per_unit')}</small>}
                   <CardPrice amount={item.actualSale?.amount??item.price} currency={item.actualSale?.currency}/>
@@ -691,12 +702,12 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
                 <Text className="stock-mobile-metric">
                   <DatabaseOutlined /> {item.stock}
                 </Text>
-                <Space className="marker-product-actions" size={8} wrap>
-                  <Button size="small" disabled={item.isNew} onClick={()=>setCatalogId(item.key)}>{t('master.title')}</Button>
-                  <Button size="small" disabled={item.isNew} onClick={()=>setPricingId(item.key)}>{t('pricing.title')}</Button>
-                  <Tooltip title={t('marker.assigned')}><Button className="marker-product-trigger" icon={<TagsOutlined aria-hidden/>} aria-label={t('marker.assigned')+' '+localizedTitle} disabled={item.isNew} onClick={()=>openMarkers(item.key)}/></Tooltip>
-                  <Button type="text" icon={<EditOutlined />} onClick={() => item.catalogDriven?setCatalogId(item.key):openDrawer(item)} aria-label={t('stock.master.edit_detail')} />
-                  <Button type="text" danger icon={<DeleteOutlined />} onClick={() => handleDelete(item.key)} aria-label={t('stock.master.discard')} />
+                <Space className="stock-compact-actions" size={6}>
+                  {actionButton(t('master.title')+' '+localizedTitle, <DatabaseOutlined aria-hidden/>, {disabled:item.isNew,onClick:()=>setCatalogId(item.key)})}
+                  {actionButton(t('pricing.title')+' '+localizedTitle, <DollarOutlined aria-hidden/>, {disabled:item.isNew,onClick:()=>setPricingId(item.key)})}
+                  {actionButton(t('marker.assigned')+' '+localizedTitle, <TagsOutlined aria-hidden/>, {disabled:item.isNew,onClick:()=>openMarkers(item.key)})}
+                  {actionButton(t('stock.master.edit_detail')+' '+localizedTitle, <EditOutlined aria-hidden/>, {onClick:()=>item.catalogDriven?setCatalogId(item.key):openDrawer(item)})}
+                  {actionButton(t('stock.master.discard')+' '+localizedTitle, <DeleteOutlined aria-hidden/>, {danger:true,onClick:()=>handleDelete(item.key)})}
                 </Space>
               </div>
             </div>
@@ -798,7 +809,8 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
           <Table
             dataSource={filteredData}
             columns={columns}
-            scroll={{x:1400}}
+            className="stock-compact-table"
+            tableLayout="fixed"
             pagination={false}
             locale={{
               emptyText: (
