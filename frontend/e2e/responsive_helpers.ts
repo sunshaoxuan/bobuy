@@ -1,6 +1,7 @@
 import { expect, type Page } from '@playwright/test';
 
 type MockRole = 'CUSTOMER' | 'AGENT' | 'MERCHANT';
+type AuthRole = 'CUSTOMER' | 'AGENT';
 
 const MOCK_TRIPS = [
   {
@@ -15,24 +16,27 @@ const MOCK_TRIPS = [
   }
 ];
 
-const MOCK_USERS: Record<MockRole, { id: number; username: string; name: string; role: MockRole }> = {
+const MOCK_USERS: Record<MockRole, { id: number; username: string; name: string; role: MockRole; roles: AuthRole[] }> = {
   AGENT: {
     id: 1000,
     username: 'agent',
     name: 'Agent Smith',
-    role: 'AGENT'
+    role: 'AGENT',
+    roles: ['AGENT']
   },
   CUSTOMER: {
     id: 1001,
     username: 'customer',
     name: 'Alice Wang',
-    role: 'CUSTOMER'
+    role: 'CUSTOMER',
+    roles: ['CUSTOMER']
   },
   MERCHANT: {
     id: 1002,
     username: 'merchant',
     name: 'Merchant Li',
-    role: 'MERCHANT'
+    role: 'MERCHANT',
+    roles: ['AGENT']
   }
 };
 

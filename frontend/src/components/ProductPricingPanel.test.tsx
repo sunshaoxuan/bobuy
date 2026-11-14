@@ -11,7 +11,14 @@ it('includes both selected Japan-local days and round trips through midnight, le
 it('requires a specific reason and confirmation before changing the regular price',async()=>{
  render(<I18nProvider><ProductPricingPanel id="p1" onClose={vi.fn()} onSaved={vi.fn()}/></I18nProvider>);await screen.findByText(/1,000/);fireEvent.click(screen.getByText('Set regular selling price'));
  const save=await screen.findByRole('button',{name:'Confirm regular price'});expect(save).toBeDisabled();
+ expect(screen.getByText('Enter a specific change reason.')).toBeInTheDocument();expect(screen.getByText('Confirm that you reviewed the selling terms.')).toBeInTheDocument();
  fireEvent.change(screen.getByLabelText('Regular price change reason (required)'),{target:{value:'Verified supplier cost change'}});expect(save).toBeDisabled();fireEvent.click(screen.getByRole('checkbox',{name:'I reviewed the products, prices, period and reason'}));fireEvent.click(save);
  await waitFor(()=>expect(mock.regular).toHaveBeenCalledWith('p1',expect.objectContaining({reason:'Verified supplier cost change',amount:1000})));
  expect(screen.queryByLabelText('Start date')).toBeNull();
+});
+it('can confirm a non-pre-order product, requires enabled pricing, and shows save failures',async()=>{
+ mock.get.mockResolvedValue({...sheet,orderMethod:'DIRECT_BUY',regular:null,effective:null});mock.regular.mockRejectedValueOnce(new Error('Synthetic save rejected'));
+ render(<I18nProvider><ProductPricingPanel id="p1" onClose={vi.fn()} onSaved={vi.fn()}/></I18nProvider>);await screen.findByText('Selling price pending');fireEvent.click(screen.getByText('Set regular selling price'));
+ fireEvent.change(screen.getByLabelText('Regular amount'),{target:{value:'1200'}});fireEvent.change(screen.getByLabelText('Price unit'),{target:{value:'1 pack'}});fireEvent.change(screen.getByLabelText('Regular price change reason (required)'),{target:{value:'Synthetic reviewed price'}});fireEvent.click(screen.getByRole('checkbox',{name:'I reviewed the products, prices, period and reason'}));
+ const save=screen.getByRole('button',{name:'Confirm regular price'});expect(save).toBeEnabled();fireEvent.click(save);expect(await screen.findByText('Synthetic save rejected')).toBeInTheDocument();expect(screen.getByLabelText('Regular amount')).toHaveValue('1200');
 });

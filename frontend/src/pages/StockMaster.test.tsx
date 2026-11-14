@@ -56,6 +56,7 @@ vi.mock('../api', () => ({
     ]),
     translate: () => Promise.resolve({ translatedText: '' }),
     deleteProduct: vi.fn().mockResolvedValue(undefined),
+    patchProduct: vi.fn().mockResolvedValue({}),
     onboardConfirm: vi.fn().mockResolvedValue({
       product: { id: 'prd-new', name: { 'zh-CN': 'X' }, basePrice: 1 },
       displayName: 'X',
@@ -75,7 +76,7 @@ it('waits for persistence and keeps the drawer and entered values when saving fa
  localStorage.setItem('bobbuy_locale','en-US');setMatchMedia(false);
  const success=vi.spyOn(message,'success');success.mockClear();
  let reject!: (reason:Error)=>void;
- vi.mocked(api.onboardConfirm).mockImplementationOnce(()=>new Promise((_,fail)=>{reject=fail;}));
+ vi.mocked(api.patchProduct).mockImplementationOnce(()=>new Promise((_,fail)=>{reject=fail;}));
  renderWithI18n(<StockMaster/>);
  await screen.findByText('Organic Milk');
  fireEvent.click(screen.getAllByRole('button').find(button=>button.querySelector('.anticon-edit'))!);
@@ -90,6 +91,7 @@ it('waits for persistence and keeps the drawer and entered values when saving fa
  // original control instead of re-querying a temporarily different name.
  await waitFor(()=>expect(saveButton).not.toHaveClass('ant-btn-loading'),{timeout:5000});
  expect(within(drawer).getByDisplayValue('SYNTHETIC-RETRY')).toBeInTheDocument();expect(success).not.toHaveBeenCalled();
+ expect(screen.getAllByText('SKU-20934').length).toBeGreaterThan(0);
  fireEvent.click(saveButton);
  await waitFor(()=>expect(screen.queryByRole('dialog')).not.toBeInTheDocument());expect(success).toHaveBeenCalledTimes(1);
  // Two persistence attempts plus Drawer close animation can exceed five seconds
@@ -105,6 +107,27 @@ it('uses the real uppercase IMAGE gallery in embedded browsing and retains edita
   const image=await screen.findByRole('img',{name:'官方图片商品'});expect(image).toHaveAttribute('src','/official-synthetic.png');
   fireEvent.click(screen.getByText('紧凑管理',{exact:true}));await screen.findByText('000123');
  }finally{spy.mockRestore();}
+});
+
+it('preserves gallery visibility and uppercases media types when patching an existing product',async()=>{
+ setMatchMedia(false);window.localStorage.setItem('bobbuy_locale','en-US');
+ const products=vi.spyOn(api,'products').mockResolvedValueOnce([{product:{id:'gallery-patch',name:{'en-US':'Hidden gallery product'},categoryId:'cat-1000',basePrice:0,itemNumber:'000124',mediaGallery:[{url:'/hidden.png',type:'IMAGE',visible:false}]},displayName:'Hidden gallery product',displayDescription:''}] as Awaited<ReturnType<typeof api.products>>);
+ renderWithI18n(<StockMaster/>);await screen.findByText('Hidden gallery product');
+ fireEvent.click(screen.getAllByRole('button').find(button=>button.querySelector('.anticon-edit'))!);
+ const drawer=screen.getByRole('dialog');expect(within(drawer).getByRole('checkbox')).not.toBeChecked();
+ fireEvent.click(within(drawer).getByRole('button',{name:'Save & Close'}));
+ await waitFor(()=>expect(api.patchProduct).toHaveBeenCalledWith('gallery-patch',expect.objectContaining({mediaGallery:[expect.objectContaining({url:'/hidden.png',type:'IMAGE',visible:false})]})));
+ products.mockRestore();
+});
+
+it('shows confirmed regular prices and pending status instead of base prices in compact management',async()=>{
+ setMatchMedia(false);window.localStorage.setItem('bobbuy_locale','en-US');
+ vi.spyOn(api,'products').mockResolvedValueOnce([
+  {product:{id:'confirmed',name:{'en-US':'Confirmed'},categoryId:'cat-1000',basePrice:0,itemNumber:'C'},displayName:'Confirmed',displayDescription:'',currentRegular:{amount:1200,currency:'JPY',unit:'pack',revision:1,enabled:true}},
+  {product:{id:'pending',name:{'en-US':'Pending'},categoryId:'cat-1000',basePrice:999,itemNumber:'P'},displayName:'Pending',displayDescription:'',currentRegular:null}
+ ] as Awaited<ReturnType<typeof api.products>>);
+ renderWithI18n(<StockMaster/>);await screen.findByText('Confirmed');
+ expect(screen.getByText('JPY ¥1,200')).toBeInTheDocument();expect(screen.getByText('Selling price pending')).toBeInTheDocument();expect(screen.queryByText('JPY ¥999')).not.toBeInTheDocument();
 });
 
 const MOBILE_VIEWPORT_WIDTH = 375;

@@ -196,7 +196,7 @@ export type MobileProductResponse = {
             updatedAt?: string;
             storageCondition?: string;
         orderMethod?: string;
-        mediaGallery?: { url: string; title?: Record<string, string>; type: string; sourceUrl?: string; sourceDomain?: string; sourceType?: string }[];
+        mediaGallery?: { url: string; title?: Record<string, string>; type: string; visible?: boolean; sourceUrl?: string; sourceDomain?: string; sourceType?: string }[];
         attributes?: Record<string, string>;
         priceTiers?: PriceTier[];
     };
@@ -561,10 +561,12 @@ export type ProductPatch = Partial<{
     basePrice: number;
     weight: number;
     volume: number;
-    mediaGallery: { url: string; title?: Record<string, string>; type: string }[];
+    mediaGallery: { url: string; title?: Record<string, string>; type: string; visible?: boolean }[];
     storageCondition: string;
     orderMethod: string;
     categoryId: string;
+    attributes: Record<string, string | number>;
+    itemNumber: string;
     merchantSkus: Record<string, string>;
     priceTiers: PriceTier[];
     isRecommended: boolean;

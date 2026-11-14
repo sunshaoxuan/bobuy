@@ -20,6 +20,7 @@
 .product-pricing-drawer .ant-drawer-header,.price-document-editor .ant-drawer-header{padding:20px 24px;border-color:#e6e3dd;}
 .product-pricing-drawer .ant-drawer-title,.price-document-editor .ant-drawer-title{font-size:20px;line-height:28px;color:#252b27;}
 .product-pricing-drawer .ant-collapse{background:#fff;border-color:#e6e3dd;border-radius:12px;margin:16px 0 28px;}
+.price-document-missing{margin:4px 0 0;padding-inline-start:20px;overflow-wrap:anywhere;}
 .price-document-summary{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:22px 24px;background:#fff;border:1px solid #e6e3dd;border-radius:14px;}
 .price-document-summary>span{color:#68716a;font-size:13px;}.price-document-summary>strong{font-size:26px;line-height:1.4;color:#263c31;}.price-document-summary>small{color:#68716a;}
 .price-document-heading h2{margin:0;font-size:19px;}.price-document-hint{margin:0;color:#68716a;font-size:13px;line-height:1.8;max-width:70ch;}
