@@ -109,6 +109,27 @@ it('uses the real uppercase IMAGE gallery in embedded browsing and retains edita
  }finally{spy.mockRestore();}
 });
 
+it('preserves gallery visibility and uppercases media types when patching an existing product',async()=>{
+ setMatchMedia(false);window.localStorage.setItem('bobbuy_locale','en-US');
+ const products=vi.spyOn(api,'products').mockResolvedValueOnce([{product:{id:'gallery-patch',name:{'en-US':'Hidden gallery product'},categoryId:'cat-1000',basePrice:0,itemNumber:'000124',mediaGallery:[{url:'/hidden.png',type:'IMAGE',visible:false}]},displayName:'Hidden gallery product',displayDescription:''}] as Awaited<ReturnType<typeof api.products>>);
+ renderWithI18n(<StockMaster/>);await screen.findByText('Hidden gallery product');
+ fireEvent.click(screen.getAllByRole('button').find(button=>button.querySelector('.anticon-edit'))!);
+ const drawer=screen.getByRole('dialog');expect(within(drawer).getByRole('checkbox')).not.toBeChecked();
+ fireEvent.click(within(drawer).getByRole('button',{name:'Save & Close'}));
+ await waitFor(()=>expect(api.patchProduct).toHaveBeenCalledWith('gallery-patch',expect.objectContaining({mediaGallery:[expect.objectContaining({url:'/hidden.png',type:'IMAGE',visible:false})]})));
+ products.mockRestore();
+});
+
+it('shows confirmed regular prices and pending status instead of base prices in compact management',async()=>{
+ setMatchMedia(false);window.localStorage.setItem('bobbuy_locale','en-US');
+ vi.spyOn(api,'products').mockResolvedValueOnce([
+  {product:{id:'confirmed',name:{'en-US':'Confirmed'},categoryId:'cat-1000',basePrice:0,itemNumber:'C'},displayName:'Confirmed',displayDescription:'',currentRegular:{amount:1200,currency:'JPY',unit:'pack',revision:1,enabled:true}},
+  {product:{id:'pending',name:{'en-US':'Pending'},categoryId:'cat-1000',basePrice:999,itemNumber:'P'},displayName:'Pending',displayDescription:'',currentRegular:null}
+ ] as Awaited<ReturnType<typeof api.products>>);
+ renderWithI18n(<StockMaster/>);await screen.findByText('Confirmed');
+ expect(screen.getByText('JPY ¥1,200')).toBeInTheDocument();expect(screen.getByText('Selling price pending')).toBeInTheDocument();expect(screen.queryByText('JPY ¥999')).not.toBeInTheDocument();
+});
+
 const MOBILE_VIEWPORT_WIDTH = 375;
 it.each([false,true])('opens markers for the saved product at mobile=%s',async mobile=>{
  setMatchMedia(mobile);window.localStorage.setItem('bobbuy_locale','en-US');

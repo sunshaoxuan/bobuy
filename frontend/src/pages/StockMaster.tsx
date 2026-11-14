@@ -286,7 +286,8 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
           id: `${res.product.id}-${i}`,
           url: m.url,
           type: m.type?.toLowerCase()==='video'?'video':'image',
-          title: m.title
+          title: m.title,
+          visible: m.visible
         })) || [],
         priceTiers: res.product.priceTiers || [],
         dynamicAttributes: normalizeStructuredAttributes(res.product.attributes),
@@ -485,7 +486,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         }:{
           name:item.nameL10n,description:item.descriptionL10n,brand:item.brand,
           categoryId:item.category,itemNumber:item.sku,attributes:item.dynamicAttributes,
-          mediaGallery:item.mediaGallery?.map(m=>({url:m.url,type:m.type,title:m.title})),
+          mediaGallery:item.mediaGallery?.map(m=>({url:m.url,type:m.type.toUpperCase(),title:m.title,visible:m.visible !== false})),
           storageCondition:item.storageCondition,orderMethod:item.orderMethod,
           merchantSkus:item.merchantSkus,priceTiers:item.priceTiers
         });
@@ -653,10 +654,12 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
           </span>
         </Tooltip>
       ),
-      dataIndex: 'price',
+      key: 'price',
       width: 100,
       hidden: !showSecondaryColumns,
-      render: (val: number | null | undefined) => compactText(`JPY ¥${(val ?? 0).toLocaleString(locale)}`, `JPY ¥${(val ?? 0).toLocaleString(locale)}`)
+      render: (_: unknown, record: StockItem) => record.actualSale
+        ? compactText(`${record.actualSale.currency} ¥${record.actualSale.amount.toLocaleString(locale)}`, `${record.actualSale.currency} ¥${record.actualSale.amount.toLocaleString(locale)}`)
+        : compactText(t('sale.pending'), t('sale.pending'))
     },
     {
       title: t('stock.item.quantity'),
@@ -712,8 +715,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
               </div>
               <div className="stock-mobile-side">
                 <div className="stock-mobile-metric stock-mobile-price">
-                  {!item.actualSale&&<small className="card-price-label">{t('stock.item.price_per_unit')}</small>}
-                  <CardPrice amount={item.actualSale?.amount??item.price} currency={item.actualSale?.currency}/>
+                  {item.actualSale?<CardPrice amount={item.actualSale.amount} currency={item.actualSale.currency}/>:<Text>{t('sale.pending')}</Text>}
                 </div>
                 <Text className="stock-mobile-metric">
                   <DatabaseOutlined /> {item.stock}
