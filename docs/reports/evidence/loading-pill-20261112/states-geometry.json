@@ -1,0 +1,134 @@
+{
+  "buttons": [
+    {
+      "disabled": false,
+      "opacity": "1",
+      "rect": {
+        "bottom": 148.390625,
+        "height": 66,
+        "left": 12,
+        "right": 308,
+        "top": 82.390625,
+        "width": 296,
+        "x": 12,
+        "y": 82.390625
+      },
+      "text": "Load more products (999999/9999999)",
+      "textRect": {
+        "bottom": 136.390625,
+        "height": 44,
+        "left": 57,
+        "right": 287,
+        "top": 92.390625,
+        "width": 230,
+        "x": 57,
+        "y": 92.390625
+      }
+    },
+    {
+      "disabled": false,
+      "opacity": "1",
+      "rect": {
+        "bottom": 262.390625,
+        "height": 66,
+        "left": 12,
+        "right": 308,
+        "top": 196.390625,
+        "width": 296,
+        "x": 12,
+        "y": 196.390625
+      },
+      "text": "商品をもっと見る (999999/9999999)",
+      "textRect": {
+        "bottom": 250.390625,
+        "height": 44,
+        "left": 57,
+        "right": 287,
+        "top": 206.390625,
+        "width": 230,
+        "x": 57,
+        "y": 206.390625
+      }
+    },
+    {
+      "disabled": false,
+      "opacity": "1",
+      "rect": {
+        "bottom": 354.390625,
+        "height": 44,
+        "left": 47.296875,
+        "right": 272.703125,
+        "top": 310.390625,
+        "width": 225.40625,
+        "x": 47.296875,
+        "y": 310.390625
+      },
+      "text": "加载更多商品 (72/370)",
+      "textRect": {
+        "bottom": 342.390625,
+        "height": 22,
+        "left": 92.296875,
+        "right": 251.703125,
+        "top": 320.390625,
+        "width": 159.40625,
+        "x": 92.296875,
+        "y": 320.390625
+      }
+    },
+    {
+      "disabled": false,
+      "opacity": "1",
+      "rect": {
+        "bottom": 468.390625,
+        "height": 66,
+        "left": 12,
+        "right": 308,
+        "top": 402.390625,
+        "width": 296,
+        "x": 12,
+        "y": 402.390625
+      },
+      "text": "Load more products (999999/9999999)",
+      "textRect": {
+        "bottom": 456.390625,
+        "height": 44,
+        "left": 55,
+        "right": 287,
+        "top": 412.390625,
+        "width": 232,
+        "x": 55,
+        "y": 412.390625
+      }
+    },
+    {
+      "disabled": true,
+      "opacity": "1",
+      "rect": {
+        "bottom": 582.390625,
+        "height": 66,
+        "left": 12,
+        "right": 308,
+        "top": 516.390625,
+        "width": 296,
+        "x": 12,
+        "y": 516.390625
+      },
+      "text": "Load more products (999999/9999999)",
+      "textRect": {
+        "bottom": 570.390625,
+        "height": 44,
+        "left": 57,
+        "right": 287,
+        "top": 526.390625,
+        "width": 230,
+        "x": 57,
+        "y": 526.390625
+      }
+    }
+  ],
+  "overflow": false,
+  "viewport": [
+    320,
+    740
+  ]
+}
