@@ -48,7 +48,7 @@ Ant Design `Switch` 只用于后台。公开商城布尔筛选使用 `button` + 
 
 ### 3.7 状态 / 提示消息（消息标签）
 1. 列表底部的「加载更多」、加载中，以及将来若增加的列表结束提示，属于状态 / 提示消息，不是购买、提交等主操作按钮。
-2. 必须使用 **26–28px 或 `999px`** 大圆角 pill / capsule 消息标签；禁止使用 **6px** 小圆角按钮样式。`.feed-loader button` 按本条实现，不得出现 Ant Design default button 的浅阴影、小圆角描边或其他按钮 chrome。
+2. 必须使用 **26–28px 或 `999px`** 大圆角 pill / capsule 消息标签；禁止使用 **6px** 小圆角按钮样式。`.feed-loader button` 按本条实现，不得出现 Ant Design default button 的浅阴影、小圆角描边或其他按钮 chrome。公开商城已有 `.storefront .ant-btn { border-radius: 6px; padding: 7px 14px; }`；新样式选择器必须比它特异度更高（例如 `.storefront .feed-loader .ant-btn`），避免圆角和内边距被盖回按钮形态。
 3. 标签水平居中，使用公开商城既有浅底（`#f3f3f3` / `#f5f5f5` / `#f7f7f7`）和辅助文字色（`#626262` / `#666` / `#555` / `#444`），边框应无或更轻，不得用砖红 `#d93630` 填充；沿用 `.feed-loader` 的 `padding: 24px 0` 或相近节奏。它须与购买 / 提交主按钮，以及 **8px**、选中深底白字的筛选芯片有明确视觉区分。
 4. 自动加载列表可保留 `button`（或等价可达控件）作为键盘 / 点击的手动兜底，但命中区须 ≥44px，并完整提供 `:focus-visible`、hover（仅精细指针）、active、disabled、loading 状态；所有状态均保持大圆角消息标签形态，禁用或加载时不得退回默认灰按钮。焦点环应与公开商城既有焦点协调，不得伪装成主按钮描边。
 5. 本条不强制改变分页行为：当前 `hasNext === false` 时卸载控件且不展示结束文案；将来若增加列表结束提示，也必须沿用本条视觉语言。
@@ -90,3 +90,9 @@ Ant Design `Switch` 只用于后台。公开商城布尔筛选使用 `button` + 
 - 主移动断点 767px 及 390px 下布局正常换行，无横向溢出。
 - 只运行与本次改动相关的最小测试；PR checks 通过。
 ```
+
+## 9. 计算样式与截图验收
+1. UI 验收不得只做静态源码审查。必须使用 Playwright 或等价浏览器自动化，在 **390×844** 与 **1280×800** 视口实拍改动区域，并核对目标控件的计算样式；至少记录 `border-radius`、`background-color`、`box-shadow`、`min-height` 与实际高度。
+2. 验收以浏览器计算结果为准：即使源码声明了 `border-radius: 999px`，只要计算值不符合设计要求，也必须判定为失败。
+3. 公开商城的 `.storefront .ant-btn` 会把圆角和内边距覆盖回 **6px** 按钮形态。为 `.ant-btn` 或 `.feed-loader .ant-btn` 增加样式时，选择器特异度必须高于它（例如 `.storefront .feed-loader .ant-btn`），并同时检查背景、边框和阴影未恢复为默认按钮 chrome。
+4. 新增或调整 UI 模式时，必须将已经落地并通过上述实拍与计算样式验收的做法写回本标准。
