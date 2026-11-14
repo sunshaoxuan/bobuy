@@ -49,6 +49,22 @@ class RestoredDatabaseValidationTest(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             publisher.maintenance_config('location /api { return 200; }')
 
+    def test_write_freeze_preserves_error_pages_and_other_locations(self):
+        root = Path(__file__).resolve().parents[1]
+        for name in ('bobuy.conf', 'prod.conf'):
+            with self.subTest(config=name):
+                config = (root / 'infra/nginx' / name).read_text()
+                frozen = publisher.maintenance_config(config)
+                block = publisher.re.search(r'location\s+/api\s*\{[^{}]*\}', config).group()
+                self.assertEqual(frozen, config.replace(block, block.replace(
+                    'proxy_pass http://gateway-service:8080;',
+                    'default_type application/json;\n        return 503 \'{"message":"Release maintenance in progress"}\';')))
+                self.assertIn('error_page 502 503 504 = @api_maintenance;', frozen)
+                self.assertEqual((root / 'infra/nginx' / name).read_text(), config)
+                with self.assertRaises(RuntimeError):
+                    publisher.maintenance_config(config + '\n' + block)
+
+
     def test_rollback_stops_writers_before_restoring_old_schema(self):
         task_directory = Path(__file__).resolve().parents[1] / '.task-tmp' / 'plan63'
         task_directory.mkdir(parents=True, exist_ok=True)
