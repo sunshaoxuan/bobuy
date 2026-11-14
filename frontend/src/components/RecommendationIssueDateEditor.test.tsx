@@ -48,6 +48,7 @@ it('keeps a valid reference out of the error state and advances the attachment g
  const reference=screen.getByLabelText(copy.reference);expect(reference).not.toHaveClass('ant-input-status-error');expect(screen.getByText('Enter a source reference first.')).toBeVisible();
  fireEvent.change(reference,{target:{value:available.sourceRef}});await screen.findByText('Attach a source file next.');expect(reference).not.toHaveClass('ant-input-status-error');expect(screen.queryByText('Enter a source reference first.')).not.toBeInTheDocument();
  fireEvent.change(reference,{target:{value:'message:another'}});fireEvent.change(reference,{target:{value:available.sourceRef}});await screen.findByText('Verify, check reviewed, and save.');expect(reference).not.toHaveClass('ant-input-status-error');
+ expect(screen.getByRole('textbox',{name:copy.hash})).toHaveTextContent(hash);expect(screen.getByLabelText(copy.date)).toHaveValue('');expect(screen.getByLabelText(copy.date)).not.toHaveClass('ant-input-status-error');expect(screen.getByText(copy.invalidDate)).toBeVisible();expect(screen.getByRole('checkbox',{name:copy.reviewed})).toBeDisabled();expect(screen.getByRole('button',{name:copy.save})).toBeDisabled();
  fireEvent.change(reference,{target:{value:'not a source'}});expect(reference).toHaveClass('ant-input-status-error');expect(screen.getByText(copy.invalidReference)).toBeVisible();
 });
 it('uses a pre-stored artifact for a draft ref and ignores a stale lookup after another ref',async()=>{

@@ -115,6 +115,7 @@ export default function RecommendationIssueDateEditor({post,actorKey,sessionKey,
   <div className="rec-issue-date-hash-label"><label htmlFor={id+'-hash'}>{copy.hash}</label><Tooltip title={copy.hashHelp}><Button type="text" className="rec-issue-date-help" aria-label={copy.hashHelp??copy.hash+' help'}>?</Button></Tooltip></div>
   {automatic?<div id={id+'-hash'} className="rec-issue-date-computed" role="textbox" aria-label={copy.hash} aria-readonly="true"><code>{effectiveHash}</code><small>{copy.automaticHash} · {resolved?.algorithm??view.review?.algorithm}</small></div>:<><Alert type="info" message={copy.manualHash}/><Input id={id+'-hash'} value={view.draft.sourceHash} status={touched.sourceHash&&!/^[0-9a-fA-F]{64}$/.test(effectiveHash)?'error':undefined} disabled={saving||sourcePending} autoComplete="off" spellCheck={false} onChange={e=>edit({sourceHash:e.target.value})}/></>}
   {visibleValidation&&<Alert type="warning" message={copy[visibleValidation]}/>}
+  {(view.dirty||Object.values(touched).some(Boolean))&&validation&&validation!==visibleValidation&&<Alert type="warning" message={copy[validation]}/>}
   <Checkbox checked={view.draft.reviewed} disabled={!ready||!!validation} onChange={e=>setState(previous=>({...previous,draft:{...previous.draft,reviewed:e.target.checked}}))}>{copy.reviewed}</Checkbox>
   {!view.draft.reviewed&&!validation&&<p role="status">{copy.confirmRequired??copy.reviewed}</p>}
   <Button type="primary" loading={saving} disabled={!ready||!view.draft.reviewed||!!validation} onClick={()=>void submit()}>{copy.save}</Button>
