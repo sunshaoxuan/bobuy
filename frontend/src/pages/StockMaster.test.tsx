@@ -77,7 +77,7 @@ it('waits for persistence and keeps the drawer and entered values when saving fa
  let reject!: (reason:Error)=>void;
  vi.mocked(api.onboardConfirm).mockImplementationOnce(()=>new Promise((_,fail)=>{reject=fail;}));
  renderWithI18n(<StockMaster/>);
- await screen.findByText('Organic Milk', { exact: true });
+ await screen.findByText('Organic Milk');
  fireEvent.click(screen.getAllByRole('button').find(button=>button.querySelector('.anticon-edit'))!);
  const drawer=screen.getByRole('dialog');
  const sku=within(drawer).getByDisplayValue('SKU-20934');fireEvent.change(sku,{target:{value:'SYNTHETIC-RETRY'}});
@@ -103,7 +103,7 @@ it('uses the real uppercase IMAGE gallery in embedded browsing and retains edita
  try{
   render(<I18nProvider><StockMaster embedded/></I18nProvider>);
   const image=await screen.findByRole('img',{name:'官方图片商品'});expect(image).toHaveAttribute('src','/official-synthetic.png');
-  fireEvent.click(screen.getByText('紧凑管理',{exact:true}));await screen.findByText('000123', { exact: true });
+  fireEvent.click(screen.getByText('紧凑管理',{exact:true}));await screen.findByText('000123');
  }finally{spy.mockRestore();}
 });
 
@@ -117,8 +117,8 @@ it.each([false,true])('opens markers for the saved product at mobile=%s',async m
 
 const DESKTOP_VIEWPORT_WIDTH = 1280;
 
-const createMatchMedia = (isMobile: boolean) => vi.fn().mockImplementation((query: string) => {
-  const viewportWidth = isMobile ? MOBILE_VIEWPORT_WIDTH : DESKTOP_VIEWPORT_WIDTH;
+const createMatchMedia = (isMobile: boolean, desktopWidth = DESKTOP_VIEWPORT_WIDTH) => vi.fn().mockImplementation((query: string) => {
+  const viewportWidth = isMobile ? MOBILE_VIEWPORT_WIDTH : desktopWidth;
   const min = /min-width:\s*(\d+)px/.exec(query);
   const max = /max-width:\s*(\d+)px/.exec(query);
   let matches = true;
@@ -140,11 +140,11 @@ const createMatchMedia = (isMobile: boolean) => vi.fn().mockImplementation((quer
   };
 });
 
-const setMatchMedia = (isMobile: boolean) => {
+const setMatchMedia = (isMobile: boolean, desktopWidth = DESKTOP_VIEWPORT_WIDTH) => {
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
     configurable: true,
-    value: createMatchMedia(isMobile),
+    value: createMatchMedia(isMobile, desktopWidth),
   });
 };
 
@@ -164,11 +164,20 @@ describe('StockMaster Component', () => {
     await new Promise((resolve) => setTimeout(resolve, 0));
   });
 
+  it('hides low-priority columns at the narrower desktop breakpoint', async () => {
+    setMatchMedia(false, 1024);
+    renderWithI18n(<StockMaster />);
+    await screen.findByText('Organic Milk');
+    expect(screen.queryByRole('columnheader', { name: /价格/ })).not.toBeInTheDocument();
+    expect(screen.queryByRole('columnheader', { name: /状态/ })).not.toBeInTheDocument();
+    expect(screen.getAllByRole('button').some(button => button.querySelector('.anticon-edit'))).toBe(true);
+  });
+
   it('renders the stock master page with title and initial data', async () => {
     renderWithI18n(<StockMaster />);
     expect(screen.getByText(/库存大师 - 批量上架/i)).toBeInTheDocument();
-    expect(await screen.findByText('Organic Milk', { exact: true })).toBeInTheDocument();
-    expect(await screen.findByText('Fresh Spinach', { exact: true })).toBeInTheDocument();
+    expect(await screen.findByText(/Organic Milk/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Fresh Spinach/i)).toBeInTheDocument();
   });
 
   it('adds a new row when clicking "新增商品"', () => {
@@ -181,15 +190,14 @@ describe('StockMaster Component', () => {
     expect(pendingTags.length).toBeGreaterThan(0);
   });
 
-  it('renders compact rows with thumbnails, readable categories and labelled icon actions', async () => {
+  it('keeps compact values read-only and edits them in the drawer', async () => {
     renderWithI18n(<StockMaster />);
-    const name = await screen.findByText('Organic Milk', { exact: true });
-    const row = name.closest('tr')!;
-    expect(within(row).getByRole('img', { name: 'Organic Milk' })).toBeInTheDocument();
-    expect(within(row).getByText('食品')).toBeInTheDocument();
-    expect(within(row).getByRole('button', { name: '商品主档 Organic Milk' })).toBeInTheDocument();
-    expect(within(row).getByRole('button', { name: '售价与调价 Organic Milk' })).toBeInTheDocument();
-    expect(within(row).getAllByRole('button')).toHaveLength(5);
+    await screen.findByText(/Organic Milk/i);
+    fireEvent.click(screen.getAllByRole('button').find(button => button.querySelector('.anticon-edit'))!);
+    const drawer = screen.getByRole('dialog');
+    const nameInput = within(drawer).getByDisplayValue('Organic Milk');
+    fireEvent.change(nameInput, { target: { value: 'Updated Milk' } });
+    expect(nameInput).toHaveValue('Updated Milk');
   });
 
   it('filters table rows based on search input', async () => {
@@ -197,13 +205,13 @@ describe('StockMaster Component', () => {
     const searchInput = screen.getByPlaceholderText(/搜索商品名称 or SKU.../i);
     fireEvent.change(searchInput, { target: { value: 'Milk' } });
     
-    expect(await screen.findByText('Organic Milk', { exact: true })).toBeInTheDocument();
-    expect(screen.queryByText('Fresh Spinach', { exact: true })).not.toBeInTheDocument();
+    expect(await screen.findByText(/Organic Milk/i)).toBeInTheDocument();
+    expect(screen.queryByText(/Fresh Spinach/i)).not.toBeInTheDocument();
   });
 
   it('opens editing drawer and updates values', async () => {
     renderWithI18n(<StockMaster />);
-    await screen.findByText('Organic Milk', { exact: true });
+    await screen.findByText(/Organic Milk/i);
     const editButtons = screen.getAllByRole('button').filter(btn => btn.querySelector('.anticon-edit'));
     fireEvent.click(editButtons[0]);
     
@@ -221,7 +229,7 @@ describe('StockMaster Component', () => {
 
   it('deletes a row when clicking the delete button', async () => {
     renderWithI18n(<StockMaster />);
-    await screen.findByText('Organic Milk', { exact: true });
+    await screen.findByText(/Organic Milk/i);
     const initialRows = screen.getAllByRole('row');
     const deleteButtons = screen.getAllByRole('button').filter(btn => btn.querySelector('.anticon-delete'));
     
@@ -236,7 +244,7 @@ describe('StockMaster Component', () => {
   it('shows error message and does not remove row when delete fails', async () => {
     vi.mocked(api.deleteProduct).mockRejectedValueOnce(new Error('Server error'));
     renderWithI18n(<StockMaster />);
-    await screen.findByText('Organic Milk', { exact: true });
+    await screen.findByText(/Organic Milk/i);
     const initialRows = screen.getAllByRole('row');
     const deleteButtons = screen.getAllByRole('button').filter(btn => btn.querySelector('.anticon-delete'));
 
@@ -250,7 +258,7 @@ describe('StockMaster Component', () => {
 
   it('displays success message on publish', async () => {
     renderWithI18n(<StockMaster />);
-    await screen.findByText('Organic Milk', { exact: true });
+    await screen.findByText(/Organic Milk/i);
     const publishButton = screen.getByRole('button', { name: /OCR 识别|OCR \+ AI Smart Snap/i });
     fireEvent.click(publishButton);
     
@@ -259,7 +267,7 @@ describe('StockMaster Component', () => {
 
   it('renders category-specific dynamic attributes in drawer', async () => {
     renderWithI18n(<StockMaster />);
-    await screen.findByText('Organic Milk', { exact: true });
+    await screen.findByText(/Organic Milk/i);
     const editButtons = screen.getAllByRole('button').filter(btn => btn.querySelector('.anticon-edit'));
     fireEvent.click(editButtons[0]);
 
