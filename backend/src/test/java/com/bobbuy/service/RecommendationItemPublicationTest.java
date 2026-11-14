@@ -148,10 +148,10 @@ class RecommendationItemPublicationTest {
     }
     @Test void missingReviewSourceTranslationOrVerifiedImageCannotPublish(){
         var p=post(8);var i=item(p,271,"47506");var product=productRows.get(i.productId);i.referenceContext=null;
-        assertThrows(ApiException.class,()->publish(p,i));assertFalse(p.published);i.referenceContext=new ReferenceOfferContext("COSTCO","COSTCO_ONLINE","v","message","https://www.costco.co.jp/source",null,null,false,null,true);
-        product.getName().remove("en-US");assertThrows(ApiException.class,()->publish(p,i));product.getName().put("en-US","Synthetic 47506");refreshTranslations(product);
-        i.itemNumber="A different source ITEM";assertThrows(ApiException.class,()->publish(p,i));i.itemNumber="47506";
-        product.getMediaGallery().get(0).setSha256(null);assertThrows(ApiException.class,()->publish(p,i));assertNull(i.publicationSnapshot);
+        assertEquals(List.of("REFERENCE_SUPPLIER_KEY_MISSING","REFERENCE_CHANNEL_MISSING","REFERENCE_VARIANT_KEY_MISSING","REFERENCE_SOURCE_MESSAGE_KEY_MISSING","REFERENCE_SOURCE_URL_INVALID"),failureCodes(p,i));assertFalse(p.published);i.referenceContext=new ReferenceOfferContext("COSTCO","COSTCO_ONLINE","v","message","https://www.costco.co.jp/source",null,null,false,null,true);
+        product.getName().remove("en-US");assertEquals(List.of("PRODUCT_NAME_EN_US_MISSING"),failureCodes(p,i));product.getName().put("en-US","Synthetic 47506");refreshTranslations(product);
+        i.itemNumber="A different source ITEM";assertEquals(List.of("ITEM_NUMBER_MISMATCH"),failureCodes(p,i));i.itemNumber="47506";
+        product.getMediaGallery().get(0).setSha256(null);assertEquals(List.of("GALLERY_IMAGE_INVALID"),failureCodes(p,i));assertNull(i.publicationSnapshot);
     }
     @Test void publishedItemsCannotBeMutatedOrRemovedThroughPendingEditors(){
         var p=post(8);var i=item(p,271,"47506");publish(p,i);assertThrows(ApiException.class,()->service.removeItem(p.id,i.id,p.version));assertThrows(ApiException.class,()->service.gallery(p.id,i.id,p.version,List.of()));long version=p.version;service.catalog(p.id,List.of(i.id),null,p.version);assertEquals(version,p.version);assertThrows(ApiException.class,()->service.catalog(p.id,List.of(i.id),"another-product",p.version));
