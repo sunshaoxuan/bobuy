@@ -1,0 +1,38 @@
+[
+  {
+    "width": 390,
+    "metrics": {
+      "height": 44,
+      "radius": "22px",
+      "background": "rgb(199, 64, 54)",
+      "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+      "minHeight": "44px",
+      "overflow": false
+    },
+    "pageErrors": [],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    ],
+    "maintenanceToast": false,
+    "retryRecovered": true,
+    "network": "Synthetic 503 followed by 200; all /api requests intercepted"
+  },
+  {
+    "width": 1280,
+    "metrics": {
+      "height": 44,
+      "radius": "22px",
+      "background": "rgb(199, 64, 54)",
+      "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+      "minHeight": "44px",
+      "overflow": false
+    },
+    "pageErrors": [],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    ],
+    "maintenanceToast": false,
+    "retryRecovered": true,
+    "network": "Synthetic 503 followed by 200; all /api requests intercepted"
+  }
+]
