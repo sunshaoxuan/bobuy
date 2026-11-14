@@ -175,6 +175,7 @@ const messages: Dictionary = {
     "marker.title": "Product markers",
     "marker.assigned": "Product markers",
     "marker.featured": "Marked products",
+    "marker.priority": "Marked products first",
     "marker.empty": "No marked products",
     "marker.create": "Create marker",
     "marker.edit": "Edit marker",
