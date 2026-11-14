@@ -2,6 +2,16 @@
 
 ## Authorized scope
 
+## PR 116 visual correction, 2026-11-15
+
+Goal: make every product card containing publication failures span the complete grid at all breakpoints, remove the ineffective portaled-modal ancestor selector, and localize the known unresolved-reason flag in four locales. Preserve all product behavior. No commit or deployment; preserve the existing untracked visual-publication.html and visual-publication.tsx.
+
+Frozen paths: recommendations.css, RecommendationRepairAssistant.tsx and its test, four locale files, a focused CSS contract test, and this record. Direct consumers: publication failure cards and source repair previews. Add a top-level grid-span rule and translate the server flag at display time. Minimum checks: diff whitespace/static scope review, i18n validation, focused CSS/component/publication Vitest tests (expected under one minute). If Vitest encounters esbuild spawn EPERM, report it and stop as requested; do not retry or bypass the sandbox. Browser acceptance at 390×844 and 1280×800 remains pending in that case. No full suite, installation, build, or stack startup.
+
+Acceptance budgets: failure cards span columns 1 / -1; action targets remain at least 44px high with wrapping text and no horizontal overflow at both viewports. Standard acceptance from docs/ui-ux-guidelines.md §8: functional requirements and visual quality both apply; reuse existing tokens/components, consistent heights/radii/spacing; preserve hover/focus/active states, keyboard access, labels and contrast; four-locale long text must not overflow or overlap; attach changed-region screenshots at 390px and 1280px; wrap at 767px and 390px; run only the minimum related tests and report PR checks separately. No visual PASS without actual runtime screenshots.
+
+Results: `git diff --check` passed; `node scripts/check-i18n.mjs` passed (1738 keys, references and negative fixture). Focused command `node node_modules/vitest/vitest.mjs run src/recommendations.css.test.js src/components/RecommendationRepairAssistant.test.tsx src/pages/RecommendationsItemPublication.test.tsx` stopped before tests while loading vitest.config.ts: esbuild ensureServiceIsRunning raised `spawn EPERM`. Verification stopped per user instruction, without retries. Runtime layout, screenshots, console/network checks and external visual review remain unverified; overall visual acceptance is pending. Existing 44px minimums and text wrapping are preserved. No commit; existing visual-publication fixtures remain untouched.
+
 ## PR 116 review repair, 2026-11-15
 
 Goal: resolve issue 115 review defects on this branch. No merge, production writes, hash algorithm changes, or new publication gates. Preserve artifact privacy and blank-only defaults.

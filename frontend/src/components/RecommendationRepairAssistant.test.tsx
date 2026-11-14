@@ -12,7 +12,7 @@ function show(mode:'source'|'locale'='source',postId=12){const onClose=vi.fn(),o
 beforeEach(()=>{vi.resetAllMocks();localStorage.setItem('bobbuy_locale','en-US');});
 it('issue12 batch preview writes only on confirmation and submits exactly the reviewed snapshot',async()=>{
  const preview=source();api.sourceRepairPreview.mockResolvedValue(preview);api.sourceRepairApply.mockResolvedValue(preview);const callbacks=show();
- await screen.findByText('#20');expect(api.sourceRepairApply).not.toHaveBeenCalled();expect(screen.getAllByText('not uniquely derivable')).toHaveLength(20);
+ await screen.findByText('#20');expect(api.sourceRepairApply).not.toHaveBeenCalled();expect(screen.getAllByText('Not uniquely derivable')).toHaveLength(20);
  fireEvent.click(screen.getByRole('button',{name:'Confirm and save'}));await waitFor(()=>expect(callbacks.onApplied).toHaveBeenCalledTimes(1));expect(api.sourceRepairApply).toHaveBeenCalledWith(12,preview,false);expect(callbacks.onClose).toHaveBeenCalledTimes(1);
 });
 it('canceling a batch preview does not write',async()=>{
@@ -32,4 +32,17 @@ it('AI failure leaves a blank field and cannot save generated content',async()=>
 });
 it('a rejected stale confirmation keeps the preview open and reports failure',async()=>{
  api.sourceRepairPreview.mockResolvedValue(source(1));api.sourceRepairApply.mockRejectedValue(new Error('Preview changed'));const callbacks=show();await screen.findByText('#1');fireEvent.click(screen.getByRole('button',{name:'Confirm and save'}));await screen.findByText('Preview changed');expect(callbacks.onApplied).not.toHaveBeenCalled();expect(callbacks.onClose).not.toHaveBeenCalled();
+});
+
+it.each([
+ ['en-US','Not uniquely derivable'],
+ ['zh-CN','无法唯一推导，请手动补充'],
+ ['zh-TW','無法唯一推導，請手動補充'],
+ ['ja-JP','一意に導出できません。手動で入力してください'],
+])('localizes the unresolved source flag in %s',async(locale,message)=>{
+ localStorage.setItem('bobbuy_locale',locale);
+ api.sourceRepairPreview.mockResolvedValue(source(1));show();
+ expect(await screen.findByText(message)).toBeInTheDocument();
+ expect(screen.queryByText('not uniquely derivable')).not.toBeInTheDocument();
+ expect(api.sourceRepairApply).not.toHaveBeenCalled();
 });
