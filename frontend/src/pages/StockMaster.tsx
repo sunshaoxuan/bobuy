@@ -593,72 +593,101 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
     (item) => item.name.toLowerCase().includes(searchText.toLowerCase()) || (item.sku && item.sku.toLowerCase().includes(searchText.toLowerCase()))
   );
 
+  const compactText = (value: React.ReactNode, fullValue: string) => (
+    <Tooltip title={fullValue} mouseEnterDelay={0.35}>
+      <span className="stock-compact-text" tabIndex={0} title={fullValue}>{value}</span>
+    </Tooltip>
+  );
+
+  const renderCompactActions = (record: StockItem) => {
+    const name = getLocalizedFallback(record.nameL10n, record.name);
+    const actions = [
+      { label: t('master.title'), icon: <DatabaseOutlined aria-hidden />, disabled: record.isNew, onClick: () => setCatalogId(record.key) },
+      { label: t('pricing.title'), icon: <DollarOutlined aria-hidden />, disabled: record.isNew, onClick: () => setPricingId(record.key) },
+      { label: t('marker.assigned'), icon: <TagsOutlined aria-hidden />, disabled: record.isNew, onClick: () => openMarkers(record.key) },
+      { label: t('stock.master.edit_detail'), icon: <EditOutlined aria-hidden />, onClick: () => record.catalogDriven ? setCatalogId(record.key) : openDrawer(record) },
+      { label: t('stock.master.discard'), icon: <DeleteOutlined aria-hidden />, danger: true, onClick: () => handleDelete(record.key) }
+    ];
+    return <div className="stock-compact-actions">
+      {actions.map(action => <Tooltip title={action.label} key={action.label}>
+        <Button
+          className="stock-compact-action"
+          type="text"
+          icon={action.icon}
+          danger={action.danger}
+          disabled={action.disabled}
+          aria-label={`${action.label} ${name}`}
+          onClick={action.onClick}
+        />
+      </Tooltip>)}
+    </div>;
+  };
+
   const columns = [
+    {
+      title: '',
+      key: 'thumbnail',
+      width: 56,
+      render: (_: unknown, record: StockItem) => {
+        const name = getLocalizedFallback(record.nameL10n, record.name);
+        return <img className="stock-compact-thumb" src={getStockThumbnail(record)} alt={name} onError={event=>{event.currentTarget.onerror=null;event.currentTarget.src=DEFAULT_STOCK_THUMBNAIL;}} />;
+      }
+    },
     {
       title: t('stock.item.name'),
       dataIndex: 'name',
-      width: 220,
-      render: (text: string, record: StockItem) => (
-        <Input value={text} placeholder={t('stock.item.name_input_placeholder')} onChange={(e) => handleFieldChange(record.key, 'name', e.target.value)} />
-      )
+      width: 190,
+      render: (text: string, record: StockItem) => compactText(getLocalizedFallback(record.nameL10n, text), getLocalizedFallback(record.nameL10n, text))
     },
     {
       title: t('stock.item.sku'),
       dataIndex: 'sku',
-      width: '8rem',
-      render: (text: string, record: StockItem) => (
-        <Input value={text} placeholder={t('stock.item.sku_placeholder')} onChange={(e) => handleFieldChange(record.key, 'sku', e.target.value)} />
-      )
+      width: 100,
+      render: (text?: string) => compactText(text || '—', text || '—')
     },
     {
       title: t('stock.item.category'),
       dataIndex: 'category',
-      width: 150,
-      render: (text: string, record: StockItem) => (
-        <Input value={text} placeholder={t('stock.item.category_input_placeholder')} onChange={(e) => handleFieldChange(record.key, 'category', e.target.value)} />
-      )
+      width: 110,
+      render: (text: string) => {
+        const category = categories.find(entry => entry.id === text);
+        const label = category ? getLocalizedFallback(category.name, text) : text || '—';
+        return compactText(label, label);
+      }
     },
     {
       title: t('stock.item.price')+' (JPY)',
       dataIndex: 'price',
-      width: '8rem',
-      render: (val: number, record: StockItem) => (
-        <InputNumber value={val} prefix="JPY ¥" style={{ width: '100%' }} onChange={(v) => handleFieldChange(record.key, 'price', v)} />
-      )
+      width: 100,
+      render: (val: number) => compactText(`JPY ¥${val.toLocaleString(locale)}`, `JPY ¥${val.toLocaleString(locale)}`)
     },
     {
       title: t('sale.actual'),
       key:'actualSale',
-      render:(_:unknown,record:StockItem)=>record.actualSale?<span>{record.actualSale.currency} {record.actualSale.amount.toLocaleString(locale)} / {record.actualSale.unit}</span>:<span>{t('sale.pending')}</span>
+      width: 120,
+      responsive: ['xl' as const],
+      render:(_:unknown,record:StockItem)=>compactText(record.actualSale ? `${record.actualSale.currency} ${record.actualSale.amount.toLocaleString(locale)} / ${record.actualSale.unit}` : t('sale.pending'), record.actualSale ? `${record.actualSale.currency} ${record.actualSale.amount.toLocaleString(locale)} / ${record.actualSale.unit}` : t('sale.pending'))
     },
     {
       title: t('stock.item.quantity'),
       dataIndex: 'stock',
-      width: '7rem',
-      render: (val: number, record: StockItem) => (
-        <InputNumber value={val} style={{ width: '100%' }} onChange={(v) => handleFieldChange(record.key, 'stock', v)} />
-      )
+      width: 72,
+      responsive: ['xl' as const],
+      render: (val: number) => compactText(val.toLocaleString(locale), val.toLocaleString(locale))
     },
     {
       title: t('stock.table.status'),
       key: 'status',
-      width: '7rem',
+      width: 84,
       render: (_: any, record: StockItem) =>
         record.isNew ? <Tag color="orange">{t('stock.status.new')}</Tag> : <Tag color="blue">{t('stock.status.modified')}</Tag>
     },
     {
       title: t('stock.table.action'),
       key: 'action',
-      width: '8rem',
-      render: (_: any, record: StockItem) => (
-        <Space className="marker-product-actions" size={8} wrap>
-          <Button size="small" disabled={record.isNew} onClick={()=>setCatalogId(record.key)}>{t('master.title')}</Button>
-          <Button size="small" disabled={record.isNew} onClick={()=>setPricingId(record.key)}>{t('pricing.title')}</Button>
-          <Tooltip title={t('marker.assigned')}><Button className="marker-product-trigger" icon={<TagsOutlined aria-hidden/>} aria-label={t('marker.assigned')+' '+record.name} disabled={record.isNew} onClick={()=>openMarkers(record.key)}/></Tooltip>
-          <Button type="text" icon={<EditOutlined />} onClick={() => record.catalogDriven?setCatalogId(record.key):openDrawer(record)} />
-          <Button type="text" danger icon={<DeleteOutlined />} onClick={() => handleDelete(record.key)} />
-        </Space>
-      )
+      width: 196,
+      fixed: 'right' as const,
+      render: (_: any, record: StockItem) => renderCompactActions(record)
     }
   ];
 
@@ -668,36 +697,17 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         const image = getStockThumbnail(item);
         const localizedTitle = getLocalizedFallback(item.nameL10n, item.name);
         return (
-          <Card key={item.key} className="stock-mobile-card app-shadow-low">
+          <Card key={item.key} className="stock-mobile-card stock-compact-mobile-card app-shadow-low">
             <div className="stock-mobile-card-body">
               <img src={image} alt={localizedTitle} className="stock-mobile-thumb" onError={event=>{event.currentTarget.onerror=null;event.currentTarget.src=DEFAULT_STOCK_THUMBNAIL;}} />
               <div className="stock-mobile-main">
                 <Text strong className="stock-mobile-title" title={localizedTitle}>
                   {localizedTitle}
                 </Text>
-                  <Space size={8} wrap>
-                    <Tag color={item.isNew ? 'orange' : 'blue'}>{item.isNew ? t('stock.status.new') : t('stock.status.modified')}</Tag>
-                    {item.sku ? <Text type="secondary">{t('stock.item.sku')}: {item.sku}</Text> : null}
-                    {item.dynamicAttributes?.netContent ? <Tag>{`${t('stock.item.net_content')}: ${item.dynamicAttributes.netContent}`}</Tag> : null}
-                    {item.dynamicAttributes?.packSize ? <Tag>{`${t('stock.item.pack_size')}: ${item.dynamicAttributes.packSize}`}</Tag> : null}
-                  </Space>
+                  <Text type="secondary" className="stock-mobile-meta" title={item.sku}>{item.sku || '—'} · {categories.find(category=>category.id===item.category) ? getLocalizedFallback(categories.find(category=>category.id===item.category)!.name, item.category) : item.category}</Text>
               </div>
               <div className="stock-mobile-side">
-                <ProductReviewStars productId={item.isNew||item.visibilityStatus==='DRAFTER_ONLY'?undefined:item.key}/>
-                <div className="stock-mobile-metric stock-mobile-price">
-                  {!item.actualSale&&<small className="card-price-label">{t('stock.item.price_per_unit')}</small>}
-                  <CardPrice amount={item.actualSale?.amount??item.price} currency={item.actualSale?.currency}/>
-                </div>
-                <Text className="stock-mobile-metric">
-                  <DatabaseOutlined /> {item.stock}
-                </Text>
-                <Space className="marker-product-actions" size={8} wrap>
-                  <Button size="small" disabled={item.isNew} onClick={()=>setCatalogId(item.key)}>{t('master.title')}</Button>
-                  <Button size="small" disabled={item.isNew} onClick={()=>setPricingId(item.key)}>{t('pricing.title')}</Button>
-                  <Tooltip title={t('marker.assigned')}><Button className="marker-product-trigger" icon={<TagsOutlined aria-hidden/>} aria-label={t('marker.assigned')+' '+localizedTitle} disabled={item.isNew} onClick={()=>openMarkers(item.key)}/></Tooltip>
-                  <Button type="text" icon={<EditOutlined />} onClick={() => item.catalogDriven?setCatalogId(item.key):openDrawer(item)} aria-label={t('stock.master.edit_detail')} />
-                  <Button type="text" danger icon={<DeleteOutlined />} onClick={() => handleDelete(item.key)} aria-label={t('stock.master.discard')} />
-                </Space>
+                {renderCompactActions(item)}
               </div>
             </div>
           </Card>
@@ -798,7 +808,8 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
           <Table
             dataSource={filteredData}
             columns={columns}
-            scroll={{x:1400}}
+            className="stock-compact-table"
+            scroll={{x:908}}
             pagination={false}
             locale={{
               emptyText: (
