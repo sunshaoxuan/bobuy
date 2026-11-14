@@ -206,6 +206,9 @@ html[lang=en-US] .recommendations .ant-btn>span:not(.ant-btn-icon):not(.anticon)
 .rec-article-heading .rec-issue-date-editor .ant-checkbox-wrapper { display:flex; align-items:flex-start; gap:0; margin:16px 0; line-height:1.6; }
 .rec-article-heading .rec-issue-date-editor .ant-btn { margin:0 8px 8px 0; max-width:100%; }
 .rec-article-heading .rec-issue-date-editor dd { margin:4px 0 12px; line-height:1.6; }
+.rec-article-heading .rec-issue-date-editor .rec-issue-date-computed { min-height:44px; padding:10px 12px; border:1px solid #d9d9d9; border-radius:8px; background:#f3f4f1; box-shadow:none; overflow-wrap:anywhere; }
+.rec-article-heading .rec-issue-date-editor .rec-issue-date-computed small { display:block; margin-top:6px; color:#595959; }
+.rec-article-heading .rec-issue-date-editor .rec-issue-date-help.ant-btn { width:44px; min-width:44px; height:44px; min-height:44px; margin:0; border-radius:8px; box-shadow:none; }
 .rec-editing .rec-article { padding:24px; border:1px solid #e1e4df; border-radius:16px; background:#fff; }
 .rec-editing .rec-article-heading h2 { font-size:20px; font-weight:650; }
 html[lang=en-US] .rec-editing .rec-article .ant-tabs-tab:first-child .ant-tabs-tab-btn { position:relative; top:-1px; }

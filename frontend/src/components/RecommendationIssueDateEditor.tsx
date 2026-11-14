@@ -1,10 +1,10 @@
 import {useEffect,useId,useRef,useState} from 'react';
-import {Alert,Button,Checkbox,Input,Spin} from 'antd';
+import {Alert,Button,Checkbox,Input,Spin,Tooltip} from 'antd';
 
 /** Private merchant response. Never pass evidence/reviewer fields into a public summary. */
-export type RecommendationIssueDateReview={issueDate:string|null;sourceRef:string|null;sourceHash:string|null;reviewedBy:number|null;reviewedAt:string|null;source:'REVIEWED_SOURCE'|'UNKNOWN';version:number};
-export type RecommendationIssueDateRequest={issueDate:string;sourceRef:string;sourceHash:string;version:number;reviewed:true};
-export type RecommendationIssueDateCopy=Record<'title'|'help'|'current'|'date'|'reference'|'hash'|'reviewer'|'reviewedAt'|'unknown'|'unknownHint'|'reviewedState'|'reviewed'|'save'|'reload'|'useSaved'|'loading'|'loadFailed'|'saveFailed'|'conflict'|'invalidResponse'|'saved'|'reloaded'|'invalidDate'|'invalidReference'|'invalidHash'|'unavailable',string>;
+export type RecommendationIssueDateReview={issueDate:string|null;sourceRef:string|null;sourceHash:string|null;reviewedBy:number|null;reviewedAt:string|null;source:'REVIEWED_SOURCE'|'UNKNOWN';version:number;algorithm?:string|null;sourceAvailable?:boolean;computedHash?:string|null;hashEditable?:boolean};
+export type RecommendationIssueDateRequest={issueDate:string;sourceRef:string;sourceHash?:string;version:number;reviewed:true};
+export type RecommendationIssueDateCopy=Record<'title'|'help'|'current'|'date'|'reference'|'hash'|'reviewer'|'reviewedAt'|'unknown'|'unknownHint'|'reviewedState'|'reviewed'|'save'|'reload'|'useSaved'|'loading'|'loadFailed'|'saveFailed'|'conflict'|'invalidResponse'|'saved'|'reloaded'|'invalidDate'|'invalidReference'|'invalidHash'|'unavailable',string>&Partial<Record<'hashHelp'|'automaticHash'|'manualHash',string>>;
 type Draft={issueDate:string;sourceRef:string;sourceHash:string;reviewed:boolean};
 type ErrorKind='loadFailed'|'saveFailed'|'conflict'|'invalidResponse';
 type State={scope:string;review?:RecommendationIssueDateReview;draft:Draft;dirty:boolean;needsReload:boolean;busy:'read'|'save'|null;error?:ErrorKind;notice?:'saved'|'reloaded'};
@@ -52,11 +52,12 @@ export default function RecommendationIssueDateEditor({post,actorKey,sessionKey,
  function edit(patch:Partial<Draft>){setState(previous=>previous.scope===scope?{...previous,draft:{...previous.draft,...patch,reviewed:false},dirty:true,notice:undefined}:previous);}
  async function submit(){
   if(!eligible||view.busy||view.needsReload||!view.review||!view.draft.reviewed||recommendationIssueDateDraftError(view.draft)||writing.current?.scope===scope&&writing.current.token===operation.current)return;
-  const request:RecommendationIssueDateRequest={issueDate:view.draft.issueDate,sourceRef:view.draft.sourceRef,sourceHash:view.draft.sourceHash.toLowerCase(),version:view.review.version,reviewed:true};
+  const automatic=!!view.review.sourceAvailable&&view.draft.sourceRef===view.review.sourceRef;
+  const request:RecommendationIssueDateRequest={issueDate:view.draft.issueDate,sourceRef:view.draft.sourceRef,...(!automatic&&{sourceHash:view.draft.sourceHash.toLowerCase()}),version:view.review.version,reviewed:true};
   const token=++operation.current,write={scope,token};writing.current=write;setState(previous=>({...previous,busy:'save',error:undefined,notice:undefined}));
   let accepted:RecommendationIssueDateReview|undefined;
   try{const value=await callbacks.current.save(post.id,request);if(!current(token))return;
-   if(!validReview(value)||value.source!=='REVIEWED_SOURCE'||value.issueDate!==request.issueDate||value.sourceRef!==request.sourceRef||value.sourceHash?.toLowerCase()!==request.sourceHash)throw 'invalidResponse';
+   if(!validReview(value)||value.source!=='REVIEWED_SOURCE'||value.issueDate!==request.issueDate||value.sourceRef!==request.sourceRef||(!automatic&&value.sourceHash?.toLowerCase()!==request.sourceHash))throw 'invalidResponse';
    if(value.version<request.version||value.version<knownVersion.current)throw 'conflict';
    setState({scope,review:value,draft:draftFrom(value),dirty:false,needsReload:false,busy:null,notice:'saved'});accepted=value;
   }catch(error){if(current(token))setState(previous=>({...previous,busy:null,needsReload:true,dirty:true,draft:{...previous.draft,reviewed:false},error:error==='invalidResponse'?'invalidResponse':error==='conflict'||changed(error)?'conflict':'saveFailed'}));}
@@ -64,7 +65,8 @@ export default function RecommendationIssueDateEditor({post,actorKey,sessionKey,
   if(accepted&&current(token))callbacks.current.onSaved?.(accepted);
  }
  if(!eligible)return <Alert type="info" message={copy.unavailable}/>;
- const validation=recommendationIssueDateDraftError(view.draft),saving=view.busy==='save',ready=!!view.review&&!view.needsReload&&!view.busy;
+ const automatic=!!view.review?.sourceAvailable&&view.draft.sourceRef===view.review.sourceRef;
+ const validation=recommendationIssueDateDraftError({...view.draft,sourceHash:automatic?(view.review?.computedHash??view.draft.sourceHash):view.draft.sourceHash}),saving=view.busy==='save',ready=!!view.review&&!view.needsReload&&!view.busy;
  return <section className="rec-issue-date-editor" aria-label={copy.title} aria-busy={!!view.busy}>
   <h3>{copy.title}</h3><p>{copy.help}</p>
   {view.error&&<Alert type="error" message={copy[view.error]} showIcon/>}{view.notice&&<Alert type="success" message={copy[view.notice]} showIcon/>}
@@ -80,7 +82,8 @@ export default function RecommendationIssueDateEditor({post,actorKey,sessionKey,
   </dl>
   <label htmlFor={id+'-date'}>{copy.date}</label><Input id={id+'-date'} type="date" value={view.draft.issueDate} disabled={saving} onChange={e=>edit({issueDate:e.target.value})}/>
   <label htmlFor={id+'-ref'}>{copy.reference}</label><Input id={id+'-ref'} value={view.draft.sourceRef} disabled={saving} autoComplete="off" onChange={e=>edit({sourceRef:e.target.value})}/>
-  <label htmlFor={id+'-hash'}>{copy.hash}</label><Input id={id+'-hash'} value={view.draft.sourceHash} disabled={saving} autoComplete="off" spellCheck={false} onChange={e=>edit({sourceHash:e.target.value})}/>
+  <div className="rec-issue-date-hash-label"><label htmlFor={id+'-hash'}>{copy.hash}</label><Tooltip title={copy.hashHelp}><Button type="text" className="rec-issue-date-help" aria-label={copy.hashHelp??copy.hash+' help'}>?</Button></Tooltip></div>
+  {automatic?<div id={id+'-hash'} className="rec-issue-date-computed" role="textbox" aria-label={copy.hash} aria-readonly="true"><code>{view.review?.computedHash}</code><small>{copy.automaticHash} · {view.review?.algorithm}</small></div>:<><Alert type="info" message={copy.manualHash}/><Input id={id+'-hash'} value={view.draft.sourceHash} disabled={saving} autoComplete="off" spellCheck={false} onChange={e=>edit({sourceHash:e.target.value})}/></>}
   {view.dirty&&validation&&<Alert type="warning" message={copy[validation]}/>}
   <Checkbox checked={view.draft.reviewed} disabled={!ready||!!validation} onChange={e=>setState(previous=>({...previous,draft:{...previous.draft,reviewed:e.target.checked}}))}>{copy.reviewed}</Checkbox>
   <Button type="primary" loading={saving} disabled={!ready||!view.draft.reviewed||!!validation} onClick={()=>void submit()}>{copy.save}</Button>

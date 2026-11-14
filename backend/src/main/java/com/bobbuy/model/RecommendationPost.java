@@ -29,6 +29,7 @@ public class RecommendationPost {
     public java.time.LocalDate issueDate;
     @Column(length = 2048) public String issueDateSourceRef;
     @Column(length = 64) public String issueDateSourceHash;
+    @Column(length = 64) public String issueDateSourceAlgorithm;
     public Long issueDateReviewedBy;
     public java.time.Instant issueDateReviewedAt;
 
