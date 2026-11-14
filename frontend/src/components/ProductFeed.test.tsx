@@ -25,6 +25,7 @@ describe('ProductFeed', () => {
   it('appends batches without duplicating cards and resets for changed results', () => {
     const {rerender} = render(<ProductFeed products={products} {...props} />);
     expect(screen.getAllByRole('article')).toHaveLength(6);
+    expect(screen.getByRole('button',{name:'加载更多商品'}).querySelector('.anticon')).toBeNull();
     fireEvent.click(screen.getByRole('button',{name:'加载更多商品'}));
     expect(screen.getAllByRole('article')).toHaveLength(12);
     fireEvent.click(screen.getByRole('button',{name:'加载更多商品'}));

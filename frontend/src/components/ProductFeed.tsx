@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { PlusOutlined, ArrowDownOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import type { StoreProduct } from '../api';
 import { localizedContent, useI18n } from '../i18n';
 import {formatMoney} from '../currency';
@@ -53,6 +53,6 @@ export default function ProductFeed({ products, quantities, onAdd, onDetail }: {
         </div>
       </article>)}
     </div>
-    {limit < products.length && <div className="feed-loader" ref={sentinel}><button aria-label={t('store.load_more')} onClick={() => setLimit(value => Math.min(value + BATCH_SIZE, products.length))}><ArrowDownOutlined />  {t('store.load_more')}</button></div>}
+    {limit < products.length && <div className="feed-loader" ref={sentinel}><button aria-label={t('store.load_more')} onClick={() => setLimit(value => Math.min(value + BATCH_SIZE, products.length))}>{t('store.load_more')}</button></div>}
   </section>;
 }
