@@ -6,7 +6,7 @@ import {getStoredAccessToken,getStoredUser,subscribeToAuthChanges} from '../auth
 import {useI18n} from '../i18n';
 import Editor,{type RecommendationIssueDateCopy,type RecommendationIssueDateReview as Review,type RecommendationIssueDateRequest as Request} from './RecommendationIssueDateEditor';
 
-const keys=['title','help','current','date','reference','hash','reviewer','reviewedAt','unknown','unknownHint','reviewedState','reviewed','save','reload','useSaved','loading','loadFailed','saveFailed','conflict','invalidResponse','saved','reloaded','invalidDate','invalidReference','invalidHash','unavailable'] as const;
+const keys=['title','help','current','date','reference','hash','hashHelp','automaticHash','manualHash','attach','attachHelp','sourceFailed','sourceConflict','invalidFile','confirmRequired','reviewer','reviewedAt','unknown','unknownHint','reviewedState','reviewed','save','reload','useSaved','loading','loadFailed','saveFailed','conflict','invalidResponse','saved','reloaded','invalidDate','invalidReference','invalidHash','unavailable'] as const;
 type Session={id:number|null;agent:boolean;token:string|null;generation:number};
 function readSession(generation:number):Session{const user=getStoredUser();return{id:user?.id??null,agent:user?.roles.includes('AGENT')===true,token:getStoredAccessToken(),generation};}
 const conflict=()=>Object.assign(new Error('Recommendation changed'),{status:409,errorCode:'RECOMMENDATION_CHANGED'});
@@ -38,12 +38,17 @@ export default function RecommendationIssueDatePanel({post,disabled=false,onSave
   try{const value=await recommendationApi.saveIssueDate(postId,request,session.token!);if(!current())throw conflict();if(latest.current.post.version!==expected||![expected,expected+1].includes(value.version))throw changed();acceptedWrite.current={scope,value,expectedVersion:expected};return value;}
   catch(error){if(current()&&(error as {status?:number})?.status===409)latest.current.onVersionConflict?.();throw error;}
  }
+ async function source(postId:number,sourceRef:string,file?:File){
+  if(!current()||latest.current.disabled||postId!==post.id)throw conflict();
+  const value=file?await recommendationApi.uploadIssueDateSource(postId,sourceRef,file,session.token!):await recommendationApi.getIssueDateSource(postId,sourceRef,session.token!);
+  if(!current())throw conflict();return value;
+ }
  function saved(value:Review){const write=acceptedWrite.current;if(!current()||!write||write.scope!==scope||write.value!==value||latest.current.post.version!==write.expectedVersion)return;acceptedWrite.current=undefined;latest.current.onSaved(value,write.expectedVersion);}
  if(!owner)return null;
  const copy=Object.fromEntries(keys.map(key=>[key,t('issueDate.'+key)])) as RecommendationIssueDateCopy;
  return <section className="rec-issue-date-host"><Button icon={<CalendarOutlined aria-hidden/>} aria-label={copy.title} disabled={disabled} aria-expanded={open} aria-controls={id} onClick={()=>{setOpen(value=>!value);setVisited(true);}}>{copy.title}</Button>
   {visited&&<div id={id} hidden={!open} style={{display:open?'block':'none'}}><fieldset disabled={disabled} style={{border:0,padding:0,minWidth:0}}>
-   <Editor key={scope} post={post} actorKey={String(session.id)} sessionKey={String(session.generation)+':merchant-session'} copy={copy} get={get} save={save} onSaved={saved} onDirtyChange={value=>{if(current())latest.current.onPendingChange?.(value);}}/>
+   <Editor key={scope} post={post} actorKey={String(session.id)} sessionKey={String(session.generation)+':merchant-session'} copy={copy} get={get} save={save} lookupSource={source} uploadSource={source} onSaved={saved} onDirtyChange={value=>{if(current())latest.current.onPendingChange?.(value);}}/>
   </fieldset></div>}
  </section>;
 }

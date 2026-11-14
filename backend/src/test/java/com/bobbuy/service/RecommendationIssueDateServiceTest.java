@@ -15,15 +15,22 @@ import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class RecommendationIssueDateServiceTest {
+    @Test void hashesExactRawBytesWithoutNormalization(){
+        assertThat(RecommendationIssueDateService.sourceHash("abc".getBytes(java.nio.charset.StandardCharsets.US_ASCII),RecommendationIssueDateService.RAW)).isEqualTo("ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad");
+        assertThat(RecommendationIssueDateService.sourceHash("<p>a\r\nb</p>".getBytes(java.nio.charset.StandardCharsets.UTF_8),RecommendationIssueDateService.HTML)).isEqualTo("2338fa169659ceb9b6c1e589f7d92ad2711cab340a8b0a1694c841ea2f516364");
+        assertThat(RecommendationIssueDateService.sourceHash("多字节".getBytes(java.nio.charset.StandardCharsets.UTF_8),RecommendationIssueDateService.RAW)).isEqualTo("f2f85c42cadb187d0a2e53cfd093abe22ca2a81c96df6bb240172dd151d68fb3");
+        assertThat(RecommendationIssueDateService.sourceHash("<p>a\nb</p>".getBytes(java.nio.charset.StandardCharsets.UTF_8),RecommendationIssueDateService.HTML)).isNotEqualTo("2338fa169659ceb9b6c1e589f7d92ad2711cab340a8b0a1694c841ea2f516364");
+    }
     final RecommendationPostRepository posts=mock(RecommendationPostRepository.class);
     final UserRepository users=mock(UserRepository.class);
     final RecommendationArticleService articles=mock(RecommendationArticleService.class);
     final AuditLogService audit=mock(AuditLogService.class);
-    final RecommendationIssueDateService service=new RecommendationIssueDateService(posts,users,articles,audit);
+    final RecommendationSourceArtifactRepository artifacts=mock(RecommendationSourceArtifactRepository.class);
+    RecommendationIssueDateService service;
     final RecommendationPost row=new RecommendationPost();
     final String hash="a".repeat(64);
     void authenticate(Role role){SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(new BobbuyAuthenticatedUser(7L,"synthetic","Synthetic",Set.of(role)),null,List.of(new SimpleGrantedAuthority("ROLE_"+role.name()))));}
-    @BeforeEach void setup(){
+    @BeforeEach void setup(){service=new RecommendationIssueDateService(posts,users,articles,audit,artifacts);
         authenticate(Role.AGENT);row.id=12L;row.merchantId=7L;row.version=3;row.title="Original title";row.body="Original body";
         row.published=true;row.publishedAt=Instant.parse("2026-11-01T00:00:00Z");row.publisherId=7L;row.publisherName="Original publisher";
         when(users.lockById(7L)).thenReturn(Optional.of(new User(7L,"Synthetic",Role.AGENT,0)));
@@ -40,6 +47,15 @@ class RecommendationIssueDateServiceTest {
         assertThat(row.issueDate).isEqualTo(result.issueDate());assertThat(row.issueDateSourceRef).isEqualTo("message:synthetic-mail-123");
         assertThat(row.title).isEqualTo("Original title");assertThat(row.body).isEqualTo("Original body");assertThat(row.published).isTrue();assertThat(row.publishedAt).isEqualTo(Instant.parse("2026-11-01T00:00:00Z"));assertThat(row.publisherName).isEqualTo("Original publisher");
         var order=inOrder(users,posts,articles,audit);order.verify(users).lockById(7L);order.verify(posts).findOwnedForUpdate(12L,7L);order.verify(articles).snapshot(row);order.verify(posts).saveAndFlush(row);order.verify(articles).snapshot(row);order.verify(audit).logStatusChange("RecommendationIssueDate",12L,"UNKNOWN",LocalDate.of(2026,10,31)+"#"+hash,7L);
+    }
+    @Test void storedArtifactComputesHashAndRejectsAConflictingOperatorValue(){
+        byte[] content="raw\r\n多字节".getBytes(java.nio.charset.StandardCharsets.UTF_8);String computed=RecommendationIssueDateService.sourceHash(content,RecommendationIssueDateService.RAW);
+        var artifact=new RecommendationSourceArtifact();artifact.sourceRef="message:synthetic-mail-123";artifact.content=content;artifact.algorithm=RecommendationIssueDateService.RAW;artifact.sha256=computed;
+        when(artifacts.findBySourceRef(artifact.sourceRef)).thenReturn(Optional.of(artifact));
+        var result=service.save(12L,request(LocalDate.of(2026,10,31),artifact.sourceRef,null,3,true));
+        assertThat(result.sourceHash()).isEqualTo(computed);assertThat(result.algorithm()).isEqualTo(RecommendationIssueDateService.RAW);assertThat(result.sourceAvailable()).isTrue();assertThat(result.hashEditable()).isFalse();
+        row.version=4;
+        assertThatThrownBy(()->service.save(12L,request(LocalDate.of(2026,10,31),artifact.sourceRef,"b".repeat(64),4,true))).isInstanceOf(ApiException.class);
     }
     @Test void staleVersionRefusesWithoutHistoryOrWrite(){row.version=4;assertThatThrownBy(()->service.save(12L,valid())).isInstanceOf(RecommendationIssueDateService.Changed.class);verify(posts,never()).saveAndFlush(any());verifyNoInteractions(articles,audit);}
     @Test void rejectedSourceReviewNeverTouchesPostOrHistory(){
@@ -65,5 +81,48 @@ class RecommendationIssueDateServiceTest {
         assertThat(service.get(12L).source()).isEqualTo("UNKNOWN");row.issueDate=LocalDate.of(2026,1,1);row.issueDateSourceRef="message:unreviewed";
         var unknown=service.get(12L);assertThat(unknown.issueDate()).isNull();assertThat(unknown.sourceRef()).isNull();assertThat(unknown.reviewedBy()).isNull();
         reviewed(LocalDate.of(2026,10,1));assertThat(service.get(12L).source()).isEqualTo("REVIEWED_SOURCE");
+    }
+    @Test void attachAndPreviewAnUnknownPostThenSaveWithoutManualHash(){
+        byte[] raw="Subject: Synthetic\r\n\r\nメール\r\n".getBytes(java.nio.charset.StandardCharsets.UTF_8);
+        var file=new org.springframework.mock.web.MockMultipartFile("file","source.eml","message/rfc822; charset=UTF-8",raw);
+        doAnswer(invocation->{RecommendationSourceArtifact a=invocation.getArgument(0);when(artifacts.findBySourceRef(a.sourceRef)).thenReturn(Optional.of(a));return a;}).when(artifacts).saveAndFlush(any());
+        assertThat(service.preview(12L,valid().sourceRef()).sourceAvailable()).isFalse();
+        var uploaded=service.attach(12L,valid().sourceRef(),file);
+        var capture=org.mockito.ArgumentCaptor.forClass(RecommendationSourceArtifact.class);verify(artifacts).saveAndFlush(capture.capture());
+        assertThat(capture.getValue().content).isEqualTo(raw);assertThat(capture.getValue().byteLength).isEqualTo(raw.length);
+        assertThat(uploaded.sourceHash()).isEqualTo(RecommendationIssueDateService.sourceHash(raw,RecommendationIssueDateService.RAW));
+        assertThat(uploaded.hashEditable()).isFalse();assertThat(service.get(12L).source()).isEqualTo("UNKNOWN");
+        assertThat(service.preview(12L,valid().sourceRef())).isEqualTo(uploaded);
+        assertThat(service.attach(12L,valid().sourceRef(),file)).isEqualTo(uploaded);verify(artifacts,times(1)).saveAndFlush(any());
+        assertThat(service.save(12L,request(valid().issueDate(),valid().sourceRef(),null,3,true)).sourceHash()).isEqualTo(uploaded.sourceHash());
+    }
+    @Test void fileTypesAndSizeAreValidatedAndHtmlBytesRemainExact(){
+        for(String[] values:List.of(new String[]{"source.eml",""},new String[]{"source","message/rfc822"},new String[]{"source.htm","application/octet-stream"},new String[]{"source.html","text/html; charset=utf-8"})){
+            var result=service.attach(12L,"message:"+values[0],new org.springframework.mock.web.MockMultipartFile("file",values[0],values[1],new byte[]{(byte)0xef,(byte)0xbb,(byte)0xbf,13,10}));
+            assertThat(result.algorithm()).isEqualTo(values[0].endsWith("htm")||values[0].endsWith("html")?RecommendationIssueDateService.HTML:RecommendationIssueDateService.RAW);
+        }
+        for(String[] values:List.of(new String[]{"x.pdf","application/pdf"},new String[]{"x.eml","text/html"},new String[]{"x.txt","text/plain"},new String[]{"x",""})){
+            assertThatThrownBy(()->service.attach(12L,"message:x",new org.springframework.mock.web.MockMultipartFile("file",values[0],values[1],new byte[]{1}))).isInstanceOf(ApiException.class);
+        }
+        for(byte[] bytes:List.of(new byte[0],new byte[10*1024*1024+1]))assertThatThrownBy(()->service.attach(12L,"message:x",new org.springframework.mock.web.MockMultipartFile("file","x.eml","message/rfc822",bytes))).isInstanceOf(ApiException.class);
+        assertThat(service.attach(12L,"message:limit",new org.springframework.mock.web.MockMultipartFile("file","limit.eml","message/rfc822",new byte[10*1024*1024])).sourceAvailable()).isTrue();
+    }
+    @Test void uploadNeverOverwritesExistingEvidenceAndUnknownHashAlgorithmIsLegacy(){
+        var a=new RecommendationSourceArtifact();a.sha256=hash;a.algorithm=RecommendationIssueDateService.RAW;
+        when(artifacts.findBySourceRef("message:existing")).thenReturn(Optional.of(a));
+        var file=new org.springframework.mock.web.MockMultipartFile("file","x.eml","message/rfc822",new byte[]{1});
+        assertThatThrownBy(()->service.attach(12L,"message:existing",file)).isInstanceOf(RecommendationIssueDateService.SourceConflict.class);
+        when(artifacts.existsById(anyString())).thenReturn(true);
+        assertThatThrownBy(()->service.attach(12L,"message:different-ref",file)).isInstanceOf(RecommendationIssueDateService.SourceConflict.class);
+        verify(artifacts,never()).saveAndFlush(any());reviewed(LocalDate.of(2026,1,1));assertThat(service.get(12L).algorithm()).isEqualTo(RecommendationIssueDateService.LEGACY);
+    }
+    @Test void sourceEndpointsCheckOwnerBeforeArtifactAccess(){
+        var file=new org.springframework.mock.web.MockMultipartFile("file","x.eml","message/rfc822",new byte[]{1});
+        when(posts.findByIdAndMerchantId(12L,7L)).thenReturn(Optional.empty());
+        assertThatThrownBy(()->service.preview(12L,"message:x")).isInstanceOf(ApiException.class);
+        assertThatThrownBy(()->service.attach(12L,"message:x",file)).isInstanceOf(ApiException.class);
+        authenticate(Role.CUSTOMER);assertThatThrownBy(()->service.attach(12L,"message:x",file)).isInstanceOf(ApiException.class);
+        SecurityContextHolder.clearContext();assertThatThrownBy(()->service.preview(12L,"message:x")).isInstanceOf(ApiException.class);
+        verifyNoInteractions(artifacts);
     }
 }

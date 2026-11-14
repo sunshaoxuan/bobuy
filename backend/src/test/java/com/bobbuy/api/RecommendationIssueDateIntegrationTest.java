@@ -33,6 +33,7 @@ class RecommendationIssueDateIntegrationTest {
     @Autowired RecommendationArticleRevisionRepository revisions;
     @Autowired RecommendationArticleService articles;
     @Autowired JwtTokenService tokens;
+    @Autowired RecommendationSourceArtifactRepository artifacts;
     User owner,other,customer;
     RecommendationPost issue;
     String ownerToken,otherToken,customerToken;
@@ -68,6 +69,24 @@ class RecommendationIssueDateIntegrationTest {
         mvc.perform(put(path(issue)).header("Authorization","Bearer "+ownerToken).contentType(MediaType.APPLICATION_JSON).content(body(issue,"2026-10-31","message:synthetic-source",hash,false))).andExpect(status().isBadRequest());
         data(mvc.perform(put(path(issue)).header("Authorization","Bearer "+ownerToken).contentType(MediaType.APPLICATION_JSON).content(request)));
         mvc.perform(put(path(issue)).header("Authorization","Bearer "+ownerToken).contentType(MediaType.APPLICATION_JSON).content(request)).andExpect(status().isConflict()).andExpect(jsonPath("$.errorCode").value("RECOMMENDATION_CHANGED"));assertThat(revisions.findByMerchantIdAndPostIdOrderById(owner.getId(),issue.id)).hasSize(2);
+    }
+    @Test void unknownPostCanUploadPreviewAndSaveWithoutHashWithOwnerAuthentication()throws Exception{
+        String ref="message:synthetic-"+UUID.randomUUID();byte[] raw="Subject: PRIVATE-SOURCE\r\n\r\nExact bytes メール\r\n".getBytes(java.nio.charset.StandardCharsets.UTF_8);
+        var file=new org.springframework.mock.web.MockMultipartFile("file","source.eml","message/rfc822; charset=utf-8",raw);
+        mvc.perform(multipart(path(issue)+"/source").file(file).param("sourceRef",ref)).andExpect(status().isForbidden());
+        mvc.perform(multipart(path(issue)+"/source").file(file).param("sourceRef",ref).header("Authorization","Bearer "+customerToken)).andExpect(status().isForbidden());
+        mvc.perform(multipart(path(issue)+"/source").file(file).param("sourceRef",ref).header("Authorization","Bearer "+otherToken)).andExpect(status().isNotFound());
+        assertThat(artifacts.findBySourceRef(ref)).isEmpty();
+        var upload=data(mvc.perform(multipart(path(issue)+"/source").file(file).param("sourceRef",ref).header("Authorization","Bearer "+ownerToken)));
+        assertThat(upload.path("algorithm").asText()).isEqualTo("recommendation-issue-date-source-v1");assertThat(upload.path("hashEditable").asBoolean()).isFalse();assertThat(upload.toString()).doesNotContain("PRIVATE-SOURCE","content");
+        assertThat(artifacts.findBySourceRef(ref).orElseThrow().content).isEqualTo(raw);
+        var preview=data(mvc.perform(get(path(issue)+"/source").param("sourceRef",ref).header("Authorization","Bearer "+ownerToken)));assertThat(preview).isEqualTo(upload);
+        mvc.perform(get(path(issue)+"/source").param("sourceRef",ref).header("Authorization","Bearer "+otherToken)).andExpect(status().isNotFound());
+        String request=json.writeValueAsString(Map.of("issueDate","2026-11-02","sourceRef",ref,"version",issue.version,"reviewed",true));
+        var saved=data(mvc.perform(put(path(issue)).contentType(MediaType.APPLICATION_JSON).content(request).header("Authorization","Bearer "+ownerToken)));
+        assertThat(saved.path("sourceHash")).isEqualTo(upload.path("sourceHash"));assertThat(saved.toString()).doesNotContain("PRIVATE-SOURCE","content");
+        assertThat(data(mvc.perform(get(path(issue)).header("Authorization","Bearer "+ownerToken))).path("sourceHash")).isEqualTo(upload.path("sourceHash"));
+        assertThat(data(mvc.perform(get("/api/storefront/recommendations/"+issue.id))).toString()).doesNotContain("PRIVATE-SOURCE",ref,upload.path("sourceHash").asText());
     }
     @Test void dateAndAtomicFourLanguageRevisionShareVersionAndHistoryWithoutChangingItemFacts()throws Exception{
         var originalItems=stableItems(issue.id);var publishedAt=issue.publishedAt;
