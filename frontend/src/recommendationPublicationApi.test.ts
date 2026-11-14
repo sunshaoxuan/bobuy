@@ -4,6 +4,12 @@ import {storeAuthSession} from './authStorage';
 const input={requestId:'11111111-2222-4333-8444-555555555555',version:12,productVersion:7,sourceHash:'a'.repeat(64),reviewed:true as const};
 beforeEach(()=>{localStorage.clear();storeAuthSession({accessToken:'synthetic-agent-token',user:{id:100,username:'agent',name:'Agent',roles:['AGENT']}});});
 afterEach(()=>{vi.unstubAllGlobals();});
+it('binds source apply to the reviewed candidate rows and product versions',async()=>{
+ const preview={postId:12,version:4,items:[{itemId:1,productId:'p',productVersion:2,itemVersion:4,fields:[]}]};
+ const fetch=vi.fn().mockResolvedValue({ok:true,status:200,json:async()=>({status:'success',data:preview})});vi.stubGlobal('fetch',fetch);
+ await recommendationApi.sourceRepairApply(12,preview);
+ expect(JSON.parse(fetch.mock.calls[0][1].body)).toEqual({version:4,preview,overwrite:false,confirmed:true});
+});
 it('posts only the explicit item publication contract to the merchant item endpoint',async()=>{
  const value={post:{id:9},items:[]};const fetch=vi.fn().mockResolvedValue({ok:true,status:200,json:async()=>({status:'success',data:value})});vi.stubGlobal('fetch',fetch);
  await expect(recommendationApi.publishItem(9,908,input)).resolves.toEqual(value);

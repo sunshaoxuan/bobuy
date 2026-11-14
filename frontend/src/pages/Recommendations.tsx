@@ -19,6 +19,7 @@ import ArticleLanguages from '../components/ArticleLanguages';
 import {mergeArticleEditor,readArticleSession,useArticleSession,type ArticleEditorState} from '../components/PublishedArticleRevision';
 import RecommendationServiceEditor from '../components/RecommendationServiceEditor';
 import RecommendationIssueDatePanel,{applyRecommendationIssueDate} from '../components/RecommendationIssueDatePanel';
+import RecommendationRepairAssistant from '../components/RecommendationRepairAssistant';
 import '../browse.css';
 import RecommendationClassification from '../components/RecommendationClassification';
 import { useI18n } from '../i18n';
@@ -92,6 +93,7 @@ export default function Recommendations() {
   const [publicationRetries,setPublicationRetries]=useState<Set<number>>(new Set());
   const [publicationConflicts,setPublicationConflicts]=useState<Set<number>>(new Set());
   const [publicationFailures,setPublicationFailures]=useState<Record<number,PublicationCondition[]>>({});
+  const [repairMode,setRepairMode]=useState<'source'|'locale'>();
   const [authEpoch,setAuthEpoch]=useState(0);
   const publicationAttempts=useRef(new Map<number,RecommendationPublicationInput>()),publicationInFlight=useRef(false),currentPost=useRef(id);
   currentPost.current=id;
@@ -277,14 +279,14 @@ export default function Recommendations() {
       <RecommendationGallery detail={editableDetail} onChange={setDetail}/></>}</>}
       <Button icon={<EyeOutlined />} onClick={() => setPreview(value => !value)}>{t('rec.draft_preview')}</Button>
       {preview && <RecommendationPreview key={detail.post.id} detail={{...detail,post:{...detail.post,title},body}}/>}
-      {!detail.serviceOffer&&<><Alert type="info" message={t(published?'rec.item.append_hint':'rec.item.first_hint')} />{dirty&&<Alert type="warning" message={t('rec.item.save_article')}/>}<section className="rec-linked"><div className="rec-section-heading"><h2>{t('rec.products')} <span>({detail.items.length})</span></h2></div><div className="rec-product-grid">{detail.items.slice((itemPage - 1) * 12, itemPage * 12).map(item => <article key={item.id} id={'rec-item-'+item.id} className="rec-product"><img src={item.imageUrl} alt={item.name} /><div><h3 title={item.name}>{item.name}</h3><small>{item.itemNumber}</small><OfferInfo facts={item} compact/>{item.offerNotes&&<p>{item.offerNotes}</p>}<ReferenceQuoteHistory post={id} item={item.id}/>
+      {!detail.serviceOffer&&<><Alert type="info" message={t(published?'rec.item.append_hint':'rec.item.first_hint')} />{dirty&&<Alert type="warning" message={t('rec.item.save_article')}/>}<section className="rec-linked"><div className="rec-section-heading"><h2>{t('rec.products')} <span>({detail.items.length})</span></h2><div className="rec-action-group"><Button onClick={()=>setRepairMode('source')}>{t('repair.batch_source')}</Button><Button onClick={()=>setRepairMode('locale')}>{t('repair.batch_locale')}</Button></div></div><div className="rec-product-grid">{detail.items.slice((itemPage - 1) * 12, itemPage * 12).map(item => <article key={item.id} id={'rec-item-'+item.id} className="rec-product"><img src={item.imageUrl} alt={item.name} /><div><h3 title={item.name}>{item.name}</h3><small>{item.itemNumber}</small><OfferInfo facts={item} compact/>{item.offerNotes&&<p>{item.offerNotes}</p>}<ReferenceQuoteHistory post={id} item={item.id}/>
         <ProductReviewStars productId={item.productId}/><Tag color={isItemPublic(item)?'green':'orange'}>{t(isItemPublic(item)?'rec.item.public':'rec.item.pending')}</Tag>
         {!isItemPublic(item)&&<div className="rec-item-publication">
           {!publicationReady(item)?<Alert type="warning" message={t('rec.item.not_ready')}/>:<small>{t('rec.item.catalog_version',{version:item.publicationProductVersion!})}</small>}
           <Checkbox aria-label={t('rec.item.review')+': '+item.name} disabled={publicationBlocked||publicationRetries.has(item.id)||publicationConflicts.has(item.id)} checked={publicationReviews[item.id]===publicationSignature(item)} onChange={e=>setPublicationReviews(values=>({...values,[item.id]:e.target.checked?publicationSignature(item):''}))}>{t('rec.item.review')}</Checkbox>
           <Button type="primary" icon={<SendOutlined/>} aria-label={t(publicationRetries.has(item.id)?'rec.item.retry':'rec.item.publish')+': '+item.name} disabled={publicationBlocked||publicationConflicts.has(item.id)||!publicationReady(item)||(!publicationRetries.has(item.id)&&publicationReviews[item.id]!==publicationSignature(item))} onClick={()=>void publishItem(item)}>{t(publicationRetries.has(item.id)?'rec.item.retry':'rec.item.publish')}</Button>
           {publicationConflicts.has(item.id)&&<Alert type="warning" message={t('rec.item.conflict')}/>}
-          {!!publicationFailures[item.id]?.length&&<div className="rec-publication-failures" role="alert" aria-label={t('rec.item.missing_title')}><strong>{t('rec.item.missing_title')}</strong><ul>{publicationFailures[item.id].map(failure=><li key={failure.code}><span>{failure.message}</span>{failure.target==='SOURCE_CONTEXT'?<Button onClick={()=>openItemEditor(item,true)}>{t('rec.item.fix_source')}</Button>:failure.target==='PRODUCT_MASTER'?<Link className="rec-publication-jump" to={'/admin/products?product='+encodeURIComponent(item.productId??'')+'#editor'}>{t('rec.item.fix_master')}</Link>:null}</li>)}</ul></div>}
+          {!!publicationFailures[item.id]?.length&&<div className="rec-publication-failures" role="alert" aria-label={t('rec.item.missing_title')}><strong>{t('rec.item.missing_title')}</strong><ul>{publicationFailures[item.id].map(failure=><li key={failure.code}><span>{failure.message}</span>{failure.target==='SOURCE_CONTEXT'?<><Button onClick={()=>setRepairMode('source')}>{t('repair.one_click')}</Button><Button onClick={()=>openItemEditor(item,true)}>{t('rec.item.fix_source')}</Button></>:failure.target==='PRODUCT_MASTER'?<><Button onClick={()=>setRepairMode('locale')}>{t('repair.ai_action')}</Button><Link className="rec-publication-jump" to={'/admin/products?product='+encodeURIComponent(item.productId??'')+'#editor'}>{t('rec.item.fix_master')}</Link></>:null}</li>)}</ul></div>}
         </div>}
         {editingItem === item.id && !isItemPublic(item) && <>{item.catalogDriven&&<Alert type="info" message={t('master.use_profile')}/>}<FactsForm facts={editFacts} onChange={setEditFacts} disabled={busy} identityReadOnly={item.catalogDriven}/><Button loading={busy} onClick={() => void run(async () => { const error = factsError(editFacts); if(error) throw new Error(t(error)); setDetail(await api.editItem(id,item.id,editFacts,detail.post.version)); setEditingItem(undefined); })}>{t('rec.save_item')}</Button><Button onClick={() => setEditingItem(undefined)}>{t('rec.cancel_edit')}</Button></>}
         </div>{!isItemPublic(item) && <div className="rec-product-actions"><Button aria-label={t('rec.edit_item')+': '+item.name} icon={<EditOutlined />} disabled={busy || writing} onClick={() => openItemEditor(item)} />
@@ -292,6 +294,7 @@ export default function Recommendations() {
         {!detail.items.length && <Empty description={t('rec.no_products')} />}{detail.items.length > 12 && <Pagination current={itemPage} pageSize={12} total={detail.items.length} showSizeChanger={false} onChange={setItemPage} />}
       </section></>}
     </>}
+    {repairMode&&detail&&<RecommendationRepairAssistant postId={detail.post.id} mode={repairMode} open onClose={()=>setRepairMode(undefined)} onApplied={async()=>{const next=await api.get(detail.post.id);setDetail(next);}}/>}
     {serviceOpen&&<RecommendationServiceEditor key={detail?.post.id??'new-service'} detail={detail?.serviceOffer?detail:undefined} onClose={()=>setServiceOpen(false)} onSaved={next=>{setServiceOpen(false);setDetail(next,true);if(!id)setParams({post:String(next.post.id)});}}/>}
   </div>;
 }
