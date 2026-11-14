@@ -82,3 +82,4 @@
 .storefront .compact-product-card .product-body{padding-bottom:4px}
 
 @media(max-width:767px){.compact-card-heading .product-popularity-label{display:none}.compact-card-heading .product-popularity>span:last-child{font-size:0}.compact-card-heading .product-popularity>span:last-child::after{content:attr(data-mobile-value);font-size:11px}.storefront .rec-pin.compact-product-card .rec-pin-code{font-size:12px;padding-inline:6px;flex-shrink:1}}
+.catalog-sort-controls,.marked-first-toggle{display:flex;align-items:center;gap:.55rem}.catalog-sort-controls{flex-wrap:wrap}.marked-first-toggle{white-space:nowrap;cursor:pointer}.marked-first-toggle input{width:1rem;height:1rem}

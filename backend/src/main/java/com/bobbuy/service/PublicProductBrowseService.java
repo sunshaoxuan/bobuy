@@ -60,16 +60,18 @@ public class PublicProductBrowseService {
  }
  @Transactional(readOnly=true,isolation=Isolation.REPEATABLE_READ)
  public Browse browse(int page,Long merchant,String query,String category,String locale,boolean marked,String expected){
-  return browse(page,merchant,query,category,locale,marked,expected,"default");
+  return browse(page,merchant,query,category,locale,marked,expected,"default",true);
  }
  @Transactional(readOnly=true,isolation=Isolation.REPEATABLE_READ)
- public Browse browse(int page,Long merchant,String query,String category,String locale,boolean marked,String expected,String order){
+ public Browse browse(int page,Long merchant,String query,String category,String locale,boolean marked,String expected,String order){ return browse(page,merchant,query,category,locale,marked,expected,order,true); }
+ @Transactional(readOnly=true,isolation=Isolation.REPEATABLE_READ)
+ public Browse browse(int page,Long merchant,String query,String category,String locale,boolean marked,String expected,String order,boolean markedFirst){
   ProductBrowseOrder.validate(order);
   validate(page,merchant,query,category,locale,expected);String q=text(query).strip().toLowerCase(Locale.ROOT),cat=text(category);
   var now=java.time.Instant.now();var data=dataset(merchant);String dataset=marked?"marked":"all";
   String datasetVersion=revision(Arrays.asList("public-product-data-v1",merchant,now.atZone(java.time.ZoneId.of("Asia/Tokyo")).toLocalDate(),data));
   var currentPrices=order.startsWith("price")&&prices!=null?prices.prices(data.entries().stream().map(e->e.productId()).toList()):Map.<String,PublicBrowsePriceService.Price>of();
-  String version=revision(Arrays.asList("public-product-browse-v1",datasetVersion,q,cat,locale,dataset,order,currentPrices,order.startsWith("heat")&&popularity!=null?popularity.counts():Map.of()));
+  String version=revision(Arrays.asList("public-product-browse-v1",datasetVersion,q,cat,locale,dataset,order,markedFirst,currentPrices,order.startsWith("heat")&&popularity!=null?popularity.counts():Map.of()));
   if(expected!=null&&!expected.equals(version))throw new Changed();
   var scope=data.entries().stream().filter(e->!marked||!data.markers().getOrDefault(e.productId(),List.of()).isEmpty()).filter(e->matches(e,q)).toList();
   var labels=new LinkedHashMap<String,RecommendationItem.Label>();var counts=new LinkedHashMap<String,Long>();long unclassified=0;
@@ -79,6 +81,7 @@ public class PublicProductBrowseService {
   var heat=popularity==null?Map.<String,Long>of():popularity.counts();
   filtered=ProductBrowseOrder.sorted(filtered,order,e->reference(e,now)==null?null:reference(e,now).amount(),e->e.rating(),e->heat.getOrDefault(e.productId(),0L));
   if(order.startsWith("price"))filtered=ProductBrowseOrder.prices(filtered,order,e->{var actual=currentPrices.get(e.productId());var ref=reference(e,now);return actual!=null?actual:ref==null?null:new PublicBrowsePriceService.Price(ref.amount(),ref.currency());});
+  if(markedFirst&&!marked)filtered=filtered.stream().sorted(Comparator.comparing((PublicProductCatalogService.Entry e)->data.markers().getOrDefault(e.productId(),List.of()).isEmpty())).toList();
   int start=(int)Math.min((long)page*24,filtered.size()),end=Math.min(start+24,filtered.size());
   var cards=filtered.subList(start,end).stream().map(e->new Card(e.productId(),e.merchantId(),e.name(),e.brand(),e.itemNumber(),e.specification(),e.model(),e.packaging(),e.gallery().isEmpty()?null:e.gallery().get(0),e.categories(),data.markers().getOrDefault(e.productId(),List.of()),e.reviewedMaster(),e.rating(),reference(e,now))).toList();
   long markedScopeTotal=data.entries().stream().filter(e->!data.markers().getOrDefault(e.productId(),List.of()).isEmpty()).count();

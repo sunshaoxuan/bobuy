@@ -175,6 +175,7 @@ const messages: Dictionary = {
     "marker.title": "商品标记档案",
     "marker.assigned": "商品标记",
     "marker.featured": "标记商品",
+    "marker.priority": "标记商品优先",
     "marker.empty": "暂无标记商品",
     "marker.create": "新增标记",
     "marker.edit": "编辑标记",

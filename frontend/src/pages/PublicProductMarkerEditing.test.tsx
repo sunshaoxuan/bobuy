@@ -15,7 +15,7 @@ function URLProbe(){return <span data-testid="catalog-url">{useLocation().search
 function mount(){localStorage.setItem('bobbuy_locale','en-US');return render(<I18nProvider><MemoryRouter initialEntries={['/products?node=1&category=kept&markedCategory=kept']}><PublicProductCatalog {...props}/><URLProbe/></MemoryRouter></I18nProvider>);}
 function mountUnfiltered(){localStorage.setItem('bobbuy_locale','en-US');return render(<I18nProvider><MemoryRouter initialEntries={['/products?node=1']}><PublicProductCatalog {...props}/></MemoryRouter></I18nProvider>);}
 const all=()=>screen.getByRole('region',{name:'Trip finds'});
-const marked=()=>screen.getByRole('region',{name:'Marked products'});
+const marked=all;
 it('skips the duplicate marked catalog request when the public scope has no marked products',async()=>{
  selected=[];mountUnfiltered();await within(all()).findByRole('heading',{name:'Product'});
  await waitFor(()=>expect(screen.queryByRole('region',{name:'Marked products'})).toBeNull());
@@ -34,9 +34,8 @@ it.each([
  ['owner AGENT',1,true,true,true,false,false],['other AGENT',2,true,true,false,false,false],['CUSTOMER',1,false,true,false,false,false],['anonymous',null,false,false,false,false,false],['other platform admin with AGENT',2,true,true,false,true,false],['platform admin without AGENT',1,false,true,false,true,false],['own platform admin with AGENT',1,true,true,true,true,false],['dual CUSTOMER/AGENT owner flags',1,true,true,true,false,false],['unresolved stale owner',1,true,true,false,false,true]
 ])('shows card maintenance only for %s',async(_name,id,merchant,authenticated,visible,platformAdmin,loading)=>{
  mocks.role={user:id===null?null:{id:id as number,platformAdmin:platformAdmin as boolean},isMerchant:merchant as boolean,isAuthenticated:authenticated as boolean,loading:loading as boolean};mountUnfiltered();
- await within(all()).findByRole('heading',{name:'Product'});await within(marked()).findByRole('heading',{name:'Product'});
+ await within(all()).findByRole('heading',{name:'Product'});
  expect(within(all()).queryByRole('button',{name:'Set product markers: Product'})!==null).toBe(visible);
- expect(within(marked()).queryByRole('button',{name:'Set product markers: Product'})!==null).toBe(visible);
  expect(mocks.assignment).not.toHaveBeenCalled();
  expect(mocks.list).not.toHaveBeenCalled();expect(mocks.assign).not.toHaveBeenCalled();expect(within(all()).getByLabelText('New')).toBeInTheDocument();
  expect(screen.queryByRole('complementary',{name:'Product management'})!==null).toBe(Boolean(id&&merchant&&authenticated&&!loading));
@@ -46,10 +45,10 @@ it('saves explicitly, refreshes both sections, keeps editor after clearing last 
  mountUnfiltered();await open();fireEvent.click(screen.getByRole('button',{name:'Clear selection'}));expect(mocks.assign).not.toHaveBeenCalled();
  fireEvent.click(screen.getByRole('button',{name:'Save markers'}));await screen.findByText('Markers saved');
  await waitFor(()=>expect(screen.queryByRole('region',{name:'Marked products'})).toBeNull());await within(all()).findByRole('heading',{name:'Product'});
- expect(all().querySelectorAll('.product-marker-badges')).toHaveLength(0);expect(mocks.productCatalog).toHaveBeenCalledTimes(2);expect(mocks.markedCatalog).toHaveBeenCalledTimes(1);expect(screen.getByRole('checkbox',{name:'New'})).not.toBeChecked();
+ expect(all().querySelectorAll('.product-marker-badges')).toHaveLength(0);expect(mocks.productCatalog).toHaveBeenCalledTimes(2);expect(mocks.markedCatalog).not.toHaveBeenCalled();expect(screen.getByRole('checkbox',{name:'New'})).not.toBeChecked();
  fireEvent.click(screen.getByRole('button',{name:'Close'}));await waitFor(()=>expect(screen.queryByRole('checkbox',{name:'New'})).not.toBeInTheDocument());
  await open();expect(screen.getByRole('checkbox',{name:'New'})).not.toBeChecked();fireEvent.click(screen.getByRole('checkbox',{name:'New'}));fireEvent.click(screen.getByRole('button',{name:'Save markers'}));await screen.findByText('Markers saved');
- await within(marked()).findByRole('heading',{name:'Product'});expect(mocks.assign.mock.calls.map(call=>call[1])).toEqual([{markerIds:[],version:3},{markerIds:['a'],version:4}]);
+ await within(all()).findByRole('heading',{name:'Product'});expect(mocks.assign.mock.calls.map(call=>call[1])).toEqual([{markerIds:[],version:3},{markerIds:['a'],version:4}]);
  await waitFor(()=>expect(all().querySelectorAll('.product-marker-badges')).toHaveLength(1));
 });
 it('keeps conflict draft and blocks close and duplicate writes while pending',async()=>{
@@ -63,7 +62,7 @@ it('keeps conflict draft and blocks close and duplicate writes while pending',as
 });
 it('preserves category URL filters through a successful refresh',async()=>{
  const categorized={...entry,categories:[{id:'kept',name:{'en-US':'Kept'}}]};mocks.productCatalog.mockImplementation(async()=>page([categorized]));mocks.markedCatalog.mockImplementation(async()=>page([categorized]));mount();await open();fireEvent.click(screen.getByRole('checkbox',{name:'New'}));fireEvent.click(screen.getByRole('button',{name:'Save markers'}));await screen.findByText('Markers saved');
- await waitFor(()=>expect(within(all()).getByRole('button',{name:'Kept (1)'})).toHaveAttribute('aria-pressed','true'));expect(screen.getByTestId('catalog-url')).toHaveTextContent('markedCategory=kept');expect(mocks.productCatalog).toHaveBeenLastCalledWith(0,1);
+ await waitFor(()=>expect(within(all()).getByRole('button',{name:'Kept (1)'})).toHaveAttribute('aria-pressed','true'));expect(screen.getByTestId('catalog-url')).toHaveTextContent('category=kept');expect(mocks.productCatalog).toHaveBeenLastCalledWith(0,1);
 });
 it('exposes the same owner action in detail and never makes unavailable products purchasable',async()=>{
  mountUnfiltered();await within(all()).findByRole('heading',{name:'Product'});expect(within(all()).queryByRole('button',{name:'Add to cart: Product'})).not.toBeInTheDocument();fireEvent.click(within(all()).getByRole('button',{name:'Product details: Product'}));const detail=await screen.findByRole('dialog');expect(await within(detail).findByRole('button',{name:'Not open for booking yet'})).toBeDisabled();fireEvent.click(await within(detail).findByRole('button',{name:'Set product markers: Product'}));await screen.findByRole('checkbox',{name:'New'});expect(mocks.assignment).toHaveBeenCalledWith('p');expect(props.onAdd).not.toHaveBeenCalled();
@@ -73,7 +72,7 @@ it('drops the old owner draft on identity change and ignores its late save respo
  mocks.role={user:{id:2,platformAdmin:true},isMerchant:true,isAuthenticated:true,loading:false};view.rerender(<I18nProvider><MemoryRouter><PublicProductCatalog {...props}/></MemoryRouter></I18nProvider>);
  await waitFor(()=>expect(screen.queryByRole('checkbox',{name:'New'})).not.toBeInTheDocument());await act(async()=>resolve({productId:'p',markerIds:[],version:4}));expect(screen.queryByText('Markers saved')).not.toBeInTheDocument();expect(within(all()).queryByRole('button',{name:'Set product markers: Product'})).not.toBeInTheDocument();expect(mocks.productCatalog).toHaveBeenCalledTimes(2);
 });
-it('opens the same parent editor directly from the marked card and names the product/ITEM',async()=>{
+it('opens the parent editor directly from the unified card and names the product/ITEM',async()=>{
  mountUnfiltered();await within(marked()).findByRole('heading',{name:'Product'});fireEvent.click(within(marked()).getByRole('button',{name:'Set product markers: Product'}));await screen.findByRole('checkbox',{name:'New'});const drawer=screen.getByRole('dialog');expect(drawer.querySelector('.marker-product-context')).toHaveTextContent('Product');expect(drawer.querySelector('.marker-product-context')).toHaveTextContent('ITEM');expect(mocks.assignment).toHaveBeenCalledTimes(1);expect(mocks.list).toHaveBeenCalledTimes(1);
 });
 it('removes a draft immediately while auth is unresolved and reopens a fresh editor after resolution',async()=>{

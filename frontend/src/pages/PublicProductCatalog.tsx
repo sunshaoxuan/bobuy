@@ -44,22 +44,18 @@ export default function PublicProductCatalog(props:Props) {
   const day=useJapaneseDay();
   const [editing,setEditing]=useState<CatalogIdentity>(),[dirty,setDirty]=useState(false),[refresh,setRefresh]=useState(0);
   const busy=useRef(false),confirming=useRef(false);
-  const [details,setDetails]=useState({marked:false,all:false});
-  const [markedScope,setMarkedScope]=useState<{group:string;count:number}>();
-  const onDetailChange=useCallback((kind:'marked'|'all',open:boolean)=>setDetails(previous=>previous[kind]===open?previous:{...previous,[kind]:open}),[]);
+  const [detailOpen,setDetailOpen]=useState(false);
+  const onDetailChange=useCallback((_kind:'marked'|'all',open:boolean)=>setDetailOpen(open),[]);
   const [datasetChanged,setDatasetChanged]=useState(false);
   const dataset=useRef<{group:string;tokens:Record<string,string>}>({group:"",tokens:{}});
   const authKey=JSON.stringify([user?.id,isMerchant,isAuthenticated,loading,day]);
   const group=JSON.stringify([props.merchantId??selectedNode(location.search),props.query??'',locale,refresh,authKey]);
-  const markedCount=markedScope?.group===group?markedScope.count:undefined;
-  const markedDetail=new URLSearchParams(location.search).get('productSection')==='marked';
-  const acceptMarkedScope=useCallback((count:number)=>setMarkedScope(current=>current?.group===group&&current.count===count?current:{group,count}),[group]);
   if(dataset.current.group!==group)dataset.current={group,tokens:{}};
   useEffect(()=>{setDatasetChanged(false);},[group]);
   const checkDataset=(kind:string,token:string)=>{if(Object.entries(dataset.current.tokens).some(([key,value])=>key!==kind&&value!==token)){setDatasetChanged(true);return false;}dataset.current.tokens[kind]=token;return true;};
   function refreshCatalog(){setDatasetChanged(false);setRefresh(value=>value+1);}
   // Visibility alone is not a dataset change. Explicit refresh, identity and Japanese-day changes remain authoritative.
-  const autoPaused=!!props.autoPaused||!!editing||details.marked||details.all||datasetChanged;
+  const autoPaused=!!props.autoPaused||!!editing||detailOpen||datasetChanged;
   const manager=!!isAuthenticated&&!loading&&isMerchant&&!!user;
   useEffect(()=>{setEditing(undefined);setDirty(false);busy.current=false;},[user?.id,isMerchant,isAuthenticated,loading]);
   const canEdit=(entry:CatalogIdentity)=>manager&&user?.id===entry.merchantId;
@@ -71,7 +67,7 @@ export default function PublicProductCatalog(props:Props) {
     confirming.current=true;
     Modal.confirm({title:t('marker.discard'),onOk:()=>{if(!busy.current)setEditing(undefined);},afterClose:()=>{confirming.current=false;}});
   }
-  return <>{datasetChanged&&<BrowseError error="browse.changed" changed retry={refreshCatalog} refresh={refreshCatalog}/>} {manager&&<aside className="marker-management-scope" aria-label={t('marker.context_title')}><strong>{t('marker.context_owner',{name:user.name||user.username||String(user.id)})}</strong><p>{t('marker.context_hint')}</p></aside>}{(markedCount!==0||markedDetail)&&<CatalogSection {...props} enabled={markedCount!==undefined||markedDetail} autoPaused={autoPaused} kind="marked" refresh={refresh} authKey={authKey} acceptDataset={token=>checkDataset("marked",token)} onRefresh={refreshCatalog} onEdit={openEditor} canEdit={canEdit} onDetailChange={onDetailChange}/>}<CatalogSection {...props} onMarkedScope={acceptMarkedScope} autoPaused={autoPaused} kind="all" refresh={refresh} authKey={authKey} acceptDataset={token=>checkDataset("all",token)} onRefresh={refreshCatalog} onEdit={openEditor} canEdit={canEdit} onDetailChange={onDetailChange}/>
+  return <>{datasetChanged&&<BrowseError error="browse.changed" changed retry={refreshCatalog} refresh={refreshCatalog}/>} {manager&&<aside className="marker-management-scope" aria-label={t('marker.context_title')}><strong>{t('marker.context_owner',{name:user.name||user.username||String(user.id)})}</strong><p>{t('marker.context_hint')}</p></aside>}<CatalogSection {...props} autoPaused={autoPaused} kind="all" refresh={refresh} authKey={authKey} acceptDataset={token=>checkDataset("all",token)} onRefresh={refreshCatalog} onEdit={openEditor} canEdit={canEdit} onDetailChange={onDetailChange}/>
     <Drawer className="marker-drawer" title={t('marker.assigned')} width="min(100vw,620px)" open={!!editable} onClose={closeEditor} maskClosable={false} destroyOnClose>
       {editable&&<><div className="marker-product-context"><strong lang={catalogText(editable.name,locale).language}>{localizedContent(editable.name,locale)||t('rec.not_stated')}</strong><span>{t('rec.code')}: {editable.itemNumber||t('rec.not_stated')}</span></div><ProductMarkerEditor key={String(user?.id)+':'+editable.productId} productId={editable.productId} onDirtyChange={setDirty} onBusyChange={value=>{busy.current=value;}} onSaved={refreshCatalog}/></>}
     </Drawer></>;
@@ -80,17 +76,17 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   const {t,locale}=useI18n(),location=useLocation();
   const [params,setParams]=useSearchParams();
   const node=merchantId??selectedNode(location.search),scope=kind+':'+String(node??'all');
-  const categoryKey=kind==='marked'?'markedCategory':'category',category=params.get(categoryKey)??'';
-  const [sort,setSort]=useState('default');
+  const categoryKey='category',category=params.get(categoryKey)??'';
+  const sort=params.get('sort')??'default',markedFirst=params.get('markedFirst')!=='false';
   const [attempt,setAttempt]=useState(0),[detailAttempt,setDetailAttempt]=useState(0);
-  const identity=JSON.stringify([location.pathname,scope,query,category,locale,refresh,attempt,authKey,sort]);
+  const identity=JSON.stringify([location.pathname,scope,query,category,locale,refresh,attempt,authKey,sort,markedFirst]);
   const activation=useSectionActivation(identity);
-  const browse=useBrowsePages<ProductBrowseCard>(identity,(page,revision)=>storefrontApi.productBrowse({page,revision,merchantId:node,query,category,locale,marked:kind==='marked',sort}),entry=>entry.productId,enabled&&activation.active&&node!==-1,acceptDataset,24,autoPaused||!!params.get('product'));
+  const browse=useBrowsePages<ProductBrowseCard>(identity,(page,revision)=>storefrontApi.productBrowse({page,revision,merchantId:node,query,category,locale,marked:false,markedFirst,sort}),entry=>entry.productId,enabled&&activation.active&&node!==-1,acceptDataset,24,autoPaused||!!params.get('product'));
   useEffect(()=>{if(kind==="all"&&typeof browse.page?.markedScopeTotal==="number")onMarkedScope?.(browse.page.markedScopeTotal);},[kind,browse.page?.markedScopeTotal,onMarkedScope]);
   const filtered=browse.items;
   const markers=Object.fromEntries(browse.items.map(entry=>[entry.productId,entry.markers]));
   const state={markers};
-  const ready=!!browse.page,detailId=(params.get('productSection')??'all')===kind?params.get('product')??undefined:undefined;
+  const ready=!!browse.page,detailId=kind==='all'?params.get('product')??undefined:undefined;
   const detailKey=JSON.stringify([identity,detailId,detailAttempt]);
   const [detail,setDetail]=useState<{key:string;item?:PublicCatalogEntry;markers?:ProductMarkerDefinition[];error:string;recoverable?:boolean}>({key:'',error:''});
   useEffect(()=>{if(!detailId||node===-1)return;let active=true;setDetail({key:detailKey,error:''});void storefrontApi.productDetail(detailId,node).then(result=>{if(active){if(result.item.productId!==detailId)throw Error('browse.invalid');setDetail({key:detailKey,item:result.item,markers:result.markers,error:''});}}).catch(error=>{if(active)setDetail({key:detailKey,error:error.message,recoverable:isRecoverableReadError(error)});});return()=>{active=false;};},[detailKey]);
@@ -111,6 +107,8 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
     const next=new URLSearchParams(params);next.delete('item');next.delete('product');next.delete('productSection');
     if(value)next.set(categoryKey,value);else next.delete(categoryKey);setParams(next);
   }
+  function changeSort(value:string){const next=new URLSearchParams(params);if(value==='default')next.delete('sort');else next.set('sort',value);setParams(next);}
+  function changeMarkedFirst(value:boolean){const next=new URLSearchParams(params);if(value)next.delete('markedFirst');else next.set('markedFirst','false');setParams(next);}
   function sourceNote(text:ReturnType<typeof catalogText>) {
     return text.fallback?<small className="catalog-source">{t('catalog.source_language',{language:text.language??''})}</small>:null;
   }
@@ -123,7 +121,7 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   const description=content&&originalDescription?{...originalDescription,value:descriptionValue,language:descriptionValue===originalDescription.value?originalDescription.language:undefined,fallback:descriptionValue===originalDescription.value&&originalDescription.fallback}:undefined;
   const hideMarked=kind==='marked'&&ready&&!browse.error&&browse.page?.markedScopeTotal===0;
   return <>{!hideMarked&&<section ref={activation.element} className="recommendations rec-public public-product-catalog" aria-label={t(kind==='marked'?'marker.featured':'store.catalog')} aria-busy={browse.busy}>
-    <header className="catalog-master-heading">{kind==='marked'?<h2>{t('marker.featured')}</h2>:<h1>{t('store.catalog')}</h1>}{ready&&<span role="status">{t('catalog.result_count',{shown:filtered.length,total:browse.page!.matchedTotal})}</span>}<ProductSort value={sort} onChange={setSort}/></header>
+    <header className="catalog-master-heading">{kind==='marked'?<h2>{t('marker.featured')}</h2>:<h1>{t('store.catalog')}</h1>}{ready&&<span role="status">{t('catalog.result_count',{shown:filtered.length,total:browse.page!.matchedTotal})}</span>}<div className="catalog-sort-controls"><ProductSort value={sort} onChange={changeSort}/><label className="marked-first-toggle"><input type="checkbox" checked={markedFirst} onChange={event=>changeMarkedFirst(event.target.checked)}/>{t('marker.priority')}</label></div></header>
     <BrowseError error={node===-1?'browse.invalid':browse.error} changed={browse.changed} retry={browse.retry} refresh={reload}/>
     {sales.error&&<BrowseError error={sales.error} retry={sales.retry} refresh={sales.retry}/>}
     {!ready?(browse.error||node===-1?null:<div className="catalog-progress" role="status"><Spin/><span>{t('browse.loading')}</span></div>):<>
