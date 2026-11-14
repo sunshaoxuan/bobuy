@@ -1705,4 +1705,5 @@ Object.assign(messages,{
  "review.title":"商品評價","review.none":"暫無評分","review.write":"我的評分與評價","review.login":"登入後評分和評價","review.score":"我的評分（1至5分，每檔0.5分）","review.comment":"我的評價（選填）","review.save":"儲存我的評價","review.saved":"評價已儲存","review.count":"{count}人評分","review.read_write":"查看或撰寫評價","review.more":"載入更多評價","review.retry":"重新載入"
 });
 Object.assign(messages,{"card.reference": "參考價", "card.reference_past": "往期參考價", "card.reference_future": "預告參考價", "card.reference_undated": "日期待核參考價", "card.price_unknown": "價格待確認"});
+Object.assign(messages,{"repair.source_title":"核對來源上下文建議","repair.locale_title":"核對 AI 語種建議","repair.review_hint":"請逐項預覽；明確確認前不會寫入。","repair.overwrite":"覆蓋已有值","repair.blank":"保持空白","repair.unchanged":"保留已有值","repair.confirm":"確認並儲存","repair.deriving":"正在從已審核來源推導…","repair.generating":"正在產生 AI 建議…","repair.none":"沒有可儲存的有效建議","repair.ai":"AI 建議","repair.batch_source":"批次補全來源","repair.batch_locale":"建議缺失語種","repair.one_click":"預覽來源修復","repair.ai_action":"產生 AI 建議"});
 export default messages;

@@ -1568,4 +1568,5 @@ Object.assign(messages,{
  "review.title":"商品レビュー","review.none":"評価はまだありません","review.write":"自分の評価とレビュー","review.login":"ログインして評価する","review.score":"評価（1〜5、0.5刻み）","review.comment":"レビュー（任意）","review.save":"レビューを保存","review.saved":"レビューを保存しました","review.count":"{count}件の評価","review.read_write":"レビューを読む・書く","review.more":"さらに読み込む","review.retry":"再読み込み"
 });
 Object.assign(messages,{"card.reference": "参考価格", "card.reference_past": "過去の参考価格", "card.reference_future": "予告参考価格", "card.reference_undated": "期間未確認の参考価格", "card.price_unknown": "価格未確認"});
+Object.assign(messages,{"repair.source_title":"出典コンテキスト候補を確認","repair.locale_title":"AI 言語候補を確認","repair.review_hint":"変更内容を確認してください。確認するまで保存されません。","repair.overwrite":"入力済みの値を上書き","repair.blank":"空欄のまま","repair.unchanged":"既存値を維持","repair.confirm":"確認して保存","repair.deriving":"確認済み出典から推定中…","repair.generating":"AI 候補を生成中…","repair.none":"保存できる候補がありません","repair.ai":"AI 候補","repair.batch_source":"出典を一括補完","repair.batch_locale":"不足言語を提案","repair.one_click":"出典修正を確認","repair.ai_action":"AI 候補を生成"});
 export default messages;

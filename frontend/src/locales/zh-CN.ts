@@ -1568,4 +1568,5 @@ Object.assign(messages,{
  "review.title":"商品评价","review.none":"暂无评分","review.write":"我的评分与评价","review.login":"登录后评分和评价","review.score":"我的评分（1至5分，每档0.5分）","review.comment":"我的评价（选填）","review.save":"保存我的评价","review.saved":"评价已保存","review.count":"{count}人评分","review.read_write":"查看或撰写评价","review.more":"加载更多评价","review.retry":"重新加载"
 });
 Object.assign(messages,{"card.reference": "参考价", "card.reference_past": "往期参考价", "card.reference_future": "预告参考价", "card.reference_undated": "日期待核参考价", "card.price_unknown": "价格待确认"});
+Object.assign(messages,{"repair.source_title":"核对来源上下文建议","repair.locale_title":"核对 AI 语种建议","repair.review_hint":"请逐项预览；明确确认前不会写入。","repair.overwrite":"覆盖已有值","repair.blank":"保持空白","repair.unchanged":"保留已有值","repair.confirm":"确认并保存","repair.deriving":"正在从已审核来源推导…","repair.generating":"正在生成 AI 建议…","repair.none":"没有可保存的有效建议","repair.ai":"AI 建议","repair.batch_source":"批量补全来源","repair.batch_locale":"建议缺失语种","repair.one_click":"预览来源修复","repair.ai_action":"生成 AI 建议"});
 export default messages;
