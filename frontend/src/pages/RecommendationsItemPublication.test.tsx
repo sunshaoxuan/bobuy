@@ -4,7 +4,7 @@ import {I18nProvider,translate} from '../i18n';
 import {serviceFixture} from '../serviceOffer.fixture';
 import {storeAuthSession} from '../authStorage';
 import Recommendations from './Recommendations';
-const mocks=vi.hoisted(()=>({get:vi.fn(),list:vi.fn(),publishItem:vi.fn(),publish:vi.fn(),save:vi.fn(),products:vi.fn()}));
+const mocks=vi.hoisted(()=>({get:vi.fn(),list:vi.fn(),publishItem:vi.fn(),publish:vi.fn(),save:vi.fn(),products:vi.fn(),sourceRepairPreview:vi.fn(),sourceRepairApply:vi.fn(),localeRepairPreview:vi.fn(),localeRepairApply:vi.fn()}));
 // Select injects CSS selectors unsupported by jsdom/nwsapi even with its dropdown closed.
 // Keep FactsForm and the real confirmation modal so draft retention and consent are exercised.
 vi.mock('antd',async()=>{
@@ -36,6 +36,17 @@ function show(postId=8){const router=createMemoryRouter([{path:'*',element:<><Ro
 const card=(name:string)=>within(screen.getByRole('heading',{name}).closest('article')!);
 function review(name='Ready Tea'){fireEvent.click(card(name).getByRole('checkbox',{name:/I checked this item/}));}
 const publishButton=(name='Ready Tea')=>card(name).getByRole('button',{name:'Publish this item: '+name});
+it.each([
+ {target:'SOURCE_CONTEXT',action:'Preview source fix',title:'Review source-context suggestions'},
+ {target:'PRODUCT_MASTER',action:'Generate AI suggestion',title:'Review AI locale suggestions'}
+])('opens the $target repair directly from the missing-items panel without saving',async({target,action,title})=>{
+ mocks.publishItem.mockRejectedValue(Object.assign(new Error('Missing facts'),{status:400,conditions:[{code:'MISSING',message:'Repair this missing field',target}]}));
+ mocks.sourceRepairPreview.mockResolvedValue({postId:8,version:4,items:[]});mocks.localeRepairPreview.mockResolvedValue({postId:8,version:4,suggestions:[]});
+ show();await screen.findByDisplayValue('Original issue');review();fireEvent.click(publishButton());await card('Ready Tea').findByRole('alert',{name:'Publication requirements'});
+ fireEvent.click(card('Ready Tea').getByRole('button',{name:action}));await screen.findByRole('dialog',{name:title});
+ await waitFor(()=>expect(target==='SOURCE_CONTEXT'?mocks.sourceRepairPreview:mocks.localeRepairPreview).toHaveBeenCalled());
+ expect(mocks.sourceRepairApply).not.toHaveBeenCalled();expect(mocks.localeRepairApply).not.toHaveBeenCalled();fireEvent.click(screen.getByRole('button',{name:'Cancel edit'}));
+});
 beforeEach(async()=>{localStorage.clear();localStorage.setItem('bobbuy_locale','en-US');vi.resetAllMocks();mocks.products.mockResolvedValue([]);mocks.get.mockResolvedValue(clone(draft));const {transferableAbortController}=await vi.importActual<{transferableAbortController:()=>AbortController}>('node:util');vi.stubGlobal('AbortController',class {constructor(){return transferableAbortController();}});});
 afterEach(()=>{vi.unstubAllGlobals();HTMLElement.prototype.scrollIntoView=originalScrollIntoView;});
 

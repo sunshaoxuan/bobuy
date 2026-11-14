@@ -1056,6 +1056,10 @@ export type AiOnboardingSuggestion = {
 
 export type RecommendationSummary = { id: number; title: string; published: boolean; version: number; updatedAt: string; publishedAt?: string; publisherName?: string; coverImageUrl?: string; merchantId?:number;articleTitles?:Record<string,string>;issueDate?:string|null;issueDateSource?:'REVIEWED_SOURCE'|'UNKNOWN' };
 export type ReferenceOfferContext={supplierKey?:string;channel?:'COSTCO_WAREHOUSE'|'COSTCO_ONLINE';variantKey?:string;sourceMessageKey?:string;sourceUrl?:string;activityStart?:string|null;activityEnd?:string|null;activityApplies?:boolean;windowEvidence?:string;startSearchComplete?:boolean};
+export type RepairField={field:string;currentValue?:string;suggestedValue?:string;evidence?:string;unresolvedReason?:string;overwrite:boolean};
+export type SourceRepairPreview={postId:number;version:number;items:{itemId:number;productId?:string;itemVersion:number;productVersion?:number;fields:RepairField[]}[]};
+export type LocaleRepairSuggestion={productId:string;productVersion:number;field:'name'|'specification';locale:string;sourceLocale?:string;sourceText?:string;suggestion?:string;error?:string;aiSuggested:boolean};
+export type LocaleRepairPreview={postId:number;version:number;suggestions:LocaleRepairSuggestion[]};
 export type ReferenceResolution={state:string;amount:number|null;itemIds:number[];unknownWindows:number};
 export type RecommendationFacts = { brand?:string|null;model?:string|null;packaging?:string|null;specification?:string|null; name: string; itemNumber?: string | null; referencePrice?: number | null; originalPrice?: number | null; discountAmount?: number | null; priceUnit?: string | null; offerStart?: string | null; offerEnd?: string | null; couponStart?: string | null; couponEnd?: string | null; offerNotes?: string | null;referenceContext?:ReferenceOfferContext|null;referenceQuote?:ReferenceResolution;priceChange?:PriceChangeView|null };
 export type RecommendationLabel = {id:string;name:Record<string,string>};
@@ -1163,6 +1167,10 @@ async function requestRecommendationIssueDate<T=RecommendationIssueDateReview>(i
     return value.data;
 }
 export const recommendationApi = {
+    sourceRepairPreview:(id:number,overwrite=false)=>storeGet<SourceRepairPreview>(recommendationBase+'/'+id+'/repairs/source-context?overwrite='+overwrite),
+    sourceRepairApply:(id:number,preview:SourceRepairPreview,overwrite=false)=>postJson<SourceRepairPreview,object>(recommendationBase+'/'+id+'/repairs/source-context',{version:preview.version,preview,overwrite,confirmed:true}),
+    localeRepairPreview:(id:number)=>postJson<LocaleRepairPreview,object>(recommendationBase+'/'+id+'/repairs/locale-suggestions',{}),
+    localeRepairApply:(id:number,version:number,edits:{productId:string;productVersion:number;field:string;locale:string;value:string}[])=>postJson<null,object>(recommendationBase+'/'+id+'/repairs/locale-suggestions/apply',{version,confirmed:true,edits}),
     articleRevision:async(id:number,input:ArticleRevisionInput)=>{
         const response=await authorizedFetch(recommendationBase+'/'+id+'/article-revision',{method:'PUT',body:JSON.stringify(input)},{withJsonContentType:true});
         if(!response.ok)throw Object.assign(new Error(await parseErrorMessage(response)),{status:response.status});
