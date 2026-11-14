@@ -89,10 +89,13 @@ def content_fingerprint(before=None):
 
 
 def maintenance_config(config):
-    upstream = 'location /api {\n        proxy_pass http://gateway-service:8080;\n    }'
-    if config.count(upstream) != 1:
+    blocks = list(re.finditer(r'location\s+/api\s*\{([^{}]*)\}', config))
+    upstream = r'proxy_pass\s+http://gateway-service:8080\s*;'
+    if len(blocks) != 1 or len(re.findall(upstream, blocks[0].group(1))) != 1:
         raise RuntimeError('Cannot establish the API write-freeze boundary')
-    return config.replace(upstream, 'location /api {\n        default_type application/json;\n        return 503 \'{"message":"Release maintenance in progress"}\';\n    }')
+    block = blocks[0]
+    frozen = re.sub(upstream, 'default_type application/json;\n        return 503 \'{"message":"Release maintenance in progress"}\';', block.group())
+    return config[:block.start()] + frozen + config[block.end():]
 
 
 def cleanup_added_tables_sql(snapshot):

@@ -1,0 +1,10 @@
+[
+  {
+    "model": "gemini-3.8-flash",
+    "result": "No actual clipping, unreadable text, or error toast is present in the screenshot. All text and elements within the maintenance card are fully visible and legible."
+  },
+  {
+    "model": "gemini-3.1-pro-high",
+    "result": "HTTPError"
+  }
+]

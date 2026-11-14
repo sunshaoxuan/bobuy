@@ -71,6 +71,14 @@ Ant Design `Switch` 只用于后台。公开商城布尔筛选使用 `button` + 
 | 公开列表加载 / 状态提示 | `.feed-loader` + §3.7 消息标签样式；本程好物见 `PublicProductCatalog.tsx` / `public-catalog.css` |
 | 后台开关 | Ant Design `Switch`（仅工作台） |
 | 四语词条 | `frontend/src/locales/*.ts` |
+| 系统更新 / 维护状态 | 边缘页 `infra/nginx/maintenance.html` 与应用内 `MaintenanceNotice` |
+
+### 6.1 系统 / 错误 / 维护页
+- 系统更新页属于公开商城表面，而非工作台：沿用 `#f7f8f4` 背景、`#c74036` 品牌标识、大圆角内容卡片，以及默认、hover、focus-visible、active 完整的 ≥44px 重试按钮。
+- 边缘代理必须提供内联 CSS/JS 的自包含四语页面；frontend 或 Java 容器停止时仍可显示。应用已加载后则复用 `MaintenanceNotice`，两者都提供手动重试与 20 秒自动重试、保留原 URL，并尊重 reduced motion。
+- HTML 文档使用 503、`Retry-After`、no-cache/no-store 与 noindex；API 使用 JSON 503，绝不返回维护 HTML。合法的鉴权、权限或 CSRF 401/403 不得被维护状态拦截。
+- 维护页表达全页系统状态，不是 §3.7 所述列表底部状态/提示消息；恢复后应回到原页面，并保留本地购物车。
+- 新增或调整此模式时，须把已经通过 390px、1280px 截图与计算样式（尤其 `.storefront .ant-btn` 覆盖）验收的实现写回本节。
 
 ## 7. Codex / 开发者自检清单
 - [ ] 复用 token / class / 组件，无新主色、圆角体系或未样式化控件。

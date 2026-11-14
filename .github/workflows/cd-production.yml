@@ -77,6 +77,7 @@ jobs:
       REVISION: ${{ github.sha }}
       REGISTRY: ghcr.io/${{ github.repository_owner }}
     steps:
+      - uses: actions/checkout@v4
       - name: Validate SSH configuration
         run: |
           set -euo pipefail
@@ -93,6 +94,12 @@ jobs:
           printf '%s\n' "$PROD_SSH_KEY" > "$ssh_dir/id_ed25519"
           install -m 600 /dev/null "$ssh_dir/known_hosts"
           printf '%s\n' "$PROD_SSH_KNOWN_HOSTS" > "$ssh_dir/known_hosts"
+      - name: Stage edge maintenance assets
+        run: |
+          set -euo pipefail
+          ssh_opts=(-i "$PROD_SSH_DIR/id_ed25519" -P "$PROD_SSH_PORT" -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$PROD_SSH_DIR/known_hosts")
+          ssh -i "$PROD_SSH_DIR/id_ed25519" -p "$PROD_SSH_PORT" -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$PROD_SSH_DIR/known_hosts" "$PROD_SSH_USER@$PROD_SSH_HOST" "mkdir -p /opt/bobuy/.cd/edge-$REVISION"
+          scp "${ssh_opts[@]}" infra/nginx/bobuy.conf infra/nginx/maintenance.html compose.production.yml "$PROD_SSH_USER@$PROD_SSH_HOST:/opt/bobuy/.cd/edge-$REVISION/"
       - name: Deploy, verify, and roll back on failure
         id: deploy
         env:
@@ -106,8 +113,8 @@ jobs:
           set -euo pipefail
           cd /opt/bobuy
           test -f /etc/bobuy.env || { echo '/etc/bobuy.env is missing; refusing deployment.' >&2; exit 1; }
-          umask 077
-          mkdir -p .cd
+          edge_dir=".cd/edge-$REVISION"
+          test -f "$edge_dir/bobuy.conf" && test -f "$edge_dir/maintenance.html" && test -f "$edge_dir/compose.production.yml" || { echo 'Staged edge assets are missing.' >&2; exit 1; }
           # Pulling six new images needs headroom; refuse before touching anything when the disk is nearly full.
           min_free_kb=$((6 * 1024 * 1024))
           docker_root=$(docker info --format '{{.DockerRootDir}}')
@@ -116,6 +123,10 @@ jobs:
             echo "Only $((free_kb / 1024)) MiB free under $docker_root; need at least 6 GiB. Refusing deployment (nothing changed)." >&2
             exit 1
           fi
+          umask 077
+          mkdir -p .cd/edge-backup
+          cp infra/nginx/bobuy.conf .cd/edge-backup/bobuy.conf
+          cp compose.production.yml .cd/edge-backup/compose.production.yml
           services=(core-service ai-service im-service auth-service gateway-service frontend)
           images=(core ai im auth router frontend)
           compose_files=(-f docker-compose.yml -f compose.production.yml)
@@ -176,6 +187,19 @@ jobs:
           }
           reload_nginx() {
             docker exec bobuy-gateway nginx -t && docker exec bobuy-gateway nginx -s reload
+          }
+          activate_edge() {
+            local maintenance_mount
+            # Inspect the running container: first CD may still use its writable layer.
+            maintenance_mount=$(docker inspect --format '{{range .Mounts}}{{if eq .Destination "/etc/nginx/maintenance.html"}}{{.Destination}}{{end}}{{end}}' bobuy-gateway) || return 1
+            # Write in place so an existing read-only bind mount sees the new content.
+            cp "$edge_dir/maintenance.html" infra/nginx/maintenance.html || return 1
+            cp "$edge_dir/bobuy.conf" infra/nginx/bobuy.conf || return 1
+            cp "$edge_dir/compose.production.yml" compose.production.yml || return 1
+            if [[ -z "$maintenance_mount" ]]; then
+              docker cp infra/nginx/maintenance.html bobuy-gateway:/etc/nginx/maintenance.html || return 1
+            fi
+            reload_nginx
           }
           https_ok() {
             local code
@@ -272,7 +296,7 @@ jobs:
           )
           # Keep every fallible activation step inside the conditional so errexit
           # cannot skip recovery. No dependency services are pulled or recreated.
-          if compose config --quiet && pull_images \
+          if activate_edge && compose config --quiet && pull_images \
             && compose up -d --no-deps --no-build --pull never "${services[@]}" \
             && containers_healthy && reload_nginx && healthy; then
             cleanup_after_deploy || true
@@ -280,6 +304,10 @@ jobs:
             exit 0
           fi
           echo 'Deployment failed; restoring the six captured image refs.' >&2
+          # Restore host configuration before resolving the rollback Compose model.
+          cp .cd/edge-backup/bobuy.conf infra/nginx/bobuy.conf
+          cp .cd/edge-backup/compose.production.yml compose.production.yml
+          reload_nginx || echo 'Restored nginx configuration reload failed; retrying after image rollback.' >&2
           cp .cd/rollback.yml .cd/compose.yml
           if compose up -d --no-deps --no-build --pull never --force-recreate "${services[@]}" \
             && containers_healthy && reload_nginx && healthy; then
