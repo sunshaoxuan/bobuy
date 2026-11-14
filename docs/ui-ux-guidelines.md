@@ -31,7 +31,7 @@
 ### 3.1 按钮
 商城主按钮 `#d93630`，hover `#ce3028`；后台主按钮 `#252529`，hover `#45454c`。砖红色不得用于筛选芯片。
 
-密集桌面管理表 / 工具条中的 icon-only 圆形按钮是 ≥44px 规则的有限例外：视觉直径 28–32px，命中区不得小于视觉尺寸并建议扩至 36–40px；必须有 Tooltip（hover / focus）、`aria-label` 和完整交互态。手机、触控及非密集控件仍须 ≥44px，并复用 `--zen-ink`、`--zen-muted`、`--zen-line`、`--zen-bg` 等工作台 token。
+密集桌面管理表 / 工具条中的 icon-only 圆形按钮是 ≥44px 规则的有限例外：视觉直径 28–32px，且计算宽度与高度必须相等；全局 `min-height: 44px` 不得把可见圆拉成长圆。命中区不得小于视觉尺寸并建议扩至 36–40px；需要扩大时只能使用透明伪元素或包装层，不得拉伸可见按钮。按钮必须有 Tooltip（hover / focus）、`aria-label` 和完整交互态。手机、触控及非密集控件仍须 ≥44px，并复用 `--zen-ink`、`--zen-muted`、`--zen-line`、`--zen-bg` 等工作台 token。
 
 ### 3.2 搜索
 `.browse-search` 最小高度 48px、圆角约 28px、填充 `#f0f0ed`、无边框，不得套到短筛选控件。
@@ -92,7 +92,7 @@ Ant Design `Switch` 只用于后台。公开商城布尔筛选使用 `button` + 
 ## 7.1 紧凑 / 密集表
 - 桌面行计算高度约 56–72px；每行使用 40–48px 小缩略图，无图时显示可访问的占位图。
 - 文本最多两行省略，并须可通过 hover / keyboard focus 的 Tooltip 查看全文。操作列使用不换行的圆形 icon-only 按钮簇并始终可见；窄桌面应隐藏价格、库存、状态等低优先级列，不得让 sticky 操作列遮挡可见列。
-- 本页落地为 `.stock-compact-table` 64px 行、`.stock-compact-thumb` 44px、桌面 `.stock-compact-action` 32px；≤767px 操作命中区为 44px。
+- 本页落地为 `.stock-compact-table` 64px 行、`.stock-compact-thumb` 44px、桌面 `.stock-compact-action` 32×32px；≤767px 为 44×44px。两种尺寸的可见按钮都必须是计算宽高相等的正圆，不得被工作台全局 44px `min-width` / `min-height` 拉伸。
 - 至少在 1280×800、1024×800、390×844 实拍，并按 §9 核对行、缩略图、按钮的尺寸、圆角、背景与阴影。
 
 ## 8. 标准验收条款（每个相关 issue 必须附上）
@@ -108,7 +108,7 @@ Ant Design `Switch` 只用于后台。公开商城布尔筛选使用 `button` + 
 ```
 
 ## 9. 计算样式与截图验收
-1. UI 验收不得只做静态源码审查。必须使用 Playwright 或等价浏览器自动化，在 **390×844** 与 **1280×800** 视口实拍改动区域，并核对目标控件的计算样式；至少记录 `border-radius`、`background-color`、`box-shadow`、`min-height` 与实际高度。
+1. UI 验收不得只做静态源码审查。必须使用 Playwright 或等价浏览器自动化，在 **390×844** 与 **1280×800** 视口实拍改动区域，并核对目标控件的计算样式；至少记录 `width`、`height`、`min-width`、`min-height`、`border-radius`、`border-color` / `border-width`、`background-color` 与 `box-shadow`。圆形控件还必须明确核对计算宽高比为 `width === height`。
 2. 验收以浏览器计算结果为准：即使源码声明了 `border-radius: 999px`，只要计算值不符合设计要求，也必须判定为失败。
 3. 公开商城的 `.storefront .ant-btn` 会把圆角和内边距覆盖回 **6px** 按钮形态。为 `.ant-btn` 或 `.feed-loader .ant-btn` 增加样式时，选择器特异度必须高于它（例如 `.storefront .feed-loader .ant-btn`），并同时检查背景、边框和阴影未恢复为默认按钮 chrome。
 4. 新增或调整 UI 模式时，必须将已经落地并通过上述实拍与计算样式验收的做法写回本标准。
