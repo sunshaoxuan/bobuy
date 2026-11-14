@@ -48,13 +48,13 @@ public class ProductSaleService {
    ||input.amount().stripTrailingZeros().scale()>currency.fractionDigits||input.unit()==null||input.unit().isBlank())throw invalid("sale.invalid");
   if(input.validFrom()!=null&&input.validThrough()!=null&&input.validFrom().isAfter(input.validThrough()))throw invalid("sale.invalid");
   if(input.enabled()&&input.validThrough()!=null&&input.validThrough().isBefore(today()))throw invalid("sale.expired");
-  // The visible operator confirmation explicitly selects pre-order fulfillment;
-  // existing direct-buy products require their inventory workflow instead.
-  if(product.getOrderMethod()!=OrderMethod.PRE_ORDER)throw invalid("sale.preorder_required");
   if(input.reason()==null||input.reason().isBlank()||input.reason().length()>1000)throw invalid("pricing.reason_required");
   if(adjustments.findByProductIdOrderByCreatedAtDescIdDesc(product.getId()).stream().anyMatch(a->Objects.equals(a.merchantId,owner)&&a.channel.equals("STOREFRONT")&&a.status==ProductPriceAdjustment.Status.APPROVED&&(a.endsAt==null||a.endsAt.isAfter(time.now()))&&(!a.currency.equals(input.currency())||!Objects.equals(a.line(product.getId()).unit,input.unit().trim()))))throw invalid("pricing.regular_conflict");
   var document=new ProductPriceAdjustment();document.merchantId=owner;document.channel="STOREFRONT";document.currency=currency.code;document.type=ProductPriceAdjustment.Type.PERMANENT;document.startsAt=time.now();document.status=ProductPriceAdjustment.Status.APPROVED;document.sourceNote=input.reason().trim();document.createdBy=owner;document.updatedBy=owner;document.approvedBy=owner;document.createdAt=time.now();document.updatedAt=time.now();document.approvedAt=time.now();document.documentNumber="PC-"+UUID.randomUUID();
   var line=new ProductPriceAdjustmentLine();line.document=document;line.productId=product.getId();line.amount=input.amount();line.beforeAmount=prior==null?null:currentRegular(product).amount();line.unit=input.unit().trim();document.lines.add(line);adjustments.saveAndFlush(document);
+  // Confirming a regular quote is the operator's explicit choice of the
+  // pre-order sales workflow. Do this only after every validation has passed.
+  product.setOrderMethod(OrderMethod.PRE_ORDER);
   product.setSale(new ProductSale(input.amount(),currency.code,input.unit().trim(),input.validFrom(),input.validThrough(),revision+1,owner,Instant.now(),input.enabled()));
   products.saveAndFlush(product);
  }

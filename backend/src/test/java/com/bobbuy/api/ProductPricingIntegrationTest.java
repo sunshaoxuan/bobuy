@@ -43,6 +43,18 @@ class ProductPricingIntegrationTest {
  JsonNode draft(Instant start,Instant end)throws Exception{return data(call("POST","/adjustments",input("JPY","800",start,end,0),admin)).at("/history/0/value");}
  JsonNode approve(JsonNode row)throws Exception{return data(call("POST","/adjustments/"+row.get("id").asLong()+"/approve",Map.of("version",row.get("version").asLong(),"confirmed",true),admin));}
  ProductSaleService.Quote quote(Instant at){return sales.quoteAt(products.findById(id).orElseThrow(),at).orElseThrow();}
+ @Test void regularConfirmationPersistsEnabledSaleAndSelectsPreOrderWorkflow()throws Exception{
+  var product=products.findById(id).orElseThrow();product.setSale(null);product.setOrderMethod(OrderMethod.DIRECT_BUY);products.saveAndFlush(product);
+  var saved=data(call("PUT","/regular",Map.of("amount",1250,"currency","JPY","unit","1 pack","revision",0,"replaceExisting",true,"enabled",true,"confirmed",true,"reason","Synthetic reviewed regular price"),admin));
+  assertThat(saved.at("/regular/amount").decimalValue()).isEqualByComparingTo("1250");assertThat(saved.at("/effective/amount").decimalValue()).isEqualByComparingTo("1250");assertThat(saved.path("orderMethod").asText()).isEqualTo("PRE_ORDER");
+  var reloaded=data(mvc.perform(get(path()).header("Authorization","Bearer "+admin)));assertThat(reloaded.at("/regular/enabled").asBoolean()).isTrue();assertThat(reloaded.at("/effective/amount").decimalValue()).isEqualByComparingTo("1250");
+  var persisted=products.findById(id).orElseThrow();assertThat(persisted.getSale().amount()).isEqualByComparingTo("1250");assertThat(persisted.getOrderMethod()).isEqualTo(OrderMethod.PRE_ORDER);assertThat(sales.effectiveAt(persisted,now)).isPresent();
+ }
+ @Test void invalidRegularConfirmationNeverWritesSaleOrWorkflow()throws Exception{
+  var product=products.findById(id).orElseThrow();product.setSale(null);product.setOrderMethod(null);products.saveAndFlush(product);
+  var valid=new HashMap<String,Object>();valid.put("amount",1250);valid.put("currency","JPY");valid.put("unit","1 pack");valid.put("revision",0);valid.put("replaceExisting",true);valid.put("enabled",true);valid.put("confirmed",true);valid.put("reason","Synthetic reviewed regular price");
+  for(var missing:List.of("confirmed","reason","unit")){var body=new HashMap<>(valid);if(missing.equals("confirmed"))body.put(missing,false);else body.put(missing,"");call("PUT","/regular",body,admin).andExpect(status().isBadRequest());var unchanged=products.findById(id).orElseThrow();assertThat(unchanged.getSale()).isNull();assertThat(unchanged.getOrderMethod()).isNull();assertThat(adjustments.findAll()).isEmpty();}
+ }
  @Test void jstMidnightHalfOpenBoundariesRestoreRegularAndNeverMutateIt()throws Exception{
   Instant start=Instant.parse("2026-10-26T15:00:00Z"),end=start.plusSeconds(3600);var before=products.findById(id).orElseThrow().getSale();
   var row=draft(start,end);assertThat(quote(start).amount()).isEqualByComparingTo("1000");approve(row);

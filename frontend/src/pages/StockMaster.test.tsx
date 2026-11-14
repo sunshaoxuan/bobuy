@@ -56,6 +56,7 @@ vi.mock('../api', () => ({
     ]),
     translate: () => Promise.resolve({ translatedText: '' }),
     deleteProduct: vi.fn().mockResolvedValue(undefined),
+    patchProduct: vi.fn().mockResolvedValue({}),
     onboardConfirm: vi.fn().mockResolvedValue({
       product: { id: 'prd-new', name: { 'zh-CN': 'X' }, basePrice: 1 },
       displayName: 'X',
@@ -75,7 +76,7 @@ it('waits for persistence and keeps the drawer and entered values when saving fa
  localStorage.setItem('bobbuy_locale','en-US');setMatchMedia(false);
  const success=vi.spyOn(message,'success');success.mockClear();
  let reject!: (reason:Error)=>void;
- vi.mocked(api.onboardConfirm).mockImplementationOnce(()=>new Promise((_,fail)=>{reject=fail;}));
+ vi.mocked(api.patchProduct).mockImplementationOnce(()=>new Promise((_,fail)=>{reject=fail;}));
  renderWithI18n(<StockMaster/>);
  await screen.findByText('Organic Milk');
  fireEvent.click(screen.getAllByRole('button').find(button=>button.querySelector('.anticon-edit'))!);
@@ -90,6 +91,7 @@ it('waits for persistence and keeps the drawer and entered values when saving fa
  // original control instead of re-querying a temporarily different name.
  await waitFor(()=>expect(saveButton).not.toHaveClass('ant-btn-loading'),{timeout:5000});
  expect(within(drawer).getByDisplayValue('SYNTHETIC-RETRY')).toBeInTheDocument();expect(success).not.toHaveBeenCalled();
+ expect(screen.getAllByText('SKU-20934').length).toBeGreaterThan(0);
  fireEvent.click(saveButton);
  await waitFor(()=>expect(screen.queryByRole('dialog')).not.toBeInTheDocument());expect(success).toHaveBeenCalledTimes(1);
  // Two persistence attempts plus Drawer close animation can exceed five seconds

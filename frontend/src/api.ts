@@ -565,6 +565,8 @@ export type ProductPatch = Partial<{
     storageCondition: string;
     orderMethod: string;
     categoryId: string;
+    attributes: Record<string, string | number>;
+    itemNumber: string;
     merchantSkus: Record<string, string>;
     priceTiers: PriceTier[];
     isRecommended: boolean;

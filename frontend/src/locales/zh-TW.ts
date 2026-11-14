@@ -2,6 +2,7 @@ import type { Dictionary } from './types';
 
 const messages: Dictionary = {
   'pricing.documents':'調價單','pricing.reason_required':'請填寫明確的調價或撤銷原因；來源待複核單據需補充原因後儲存。','pricing.promotion_reduction':'促銷價必須低於同渠道、幣別和單位的常規價。','pricing.use_documents':'請在調價單中維護價格和優惠期間。',
+  'stock.msg.update_failed':'儲存失敗，已恢復為修改前的值。',
   'geo.title':'國家/地區檔案','geo.hint':'依國家/地區、省縣、市/區查詢和選擇基礎檔案。','geo.country':'國家/地區','geo.prefecture':'省縣','geo.city':'市/區','geo.choose_prefecture':'選擇省縣','geo.choose_city':'選擇市/區','geo.selection':'目前選擇','geo.country_only':'此國家/地區目前僅預製國家級檔案。','geo.prefectures':'省縣檔案','geo.cities':'市/區檔案','geo.code':'代碼','geo.name':'名稱','geo.reading':'日文讀音','geo.source':'國家/地區採用 ISO 3166-1 代碼。日本預製 47 個都道府縣及全部市區町村，包含政令指定都市及其區。資料核對：2026-11-12。',
   "master.upload_details": "上傳詳情",
   "master.upload_filename": "檔案名稱",
@@ -1470,6 +1471,13 @@ const messages: Dictionary = {
   "pricing.regular_enabled": "啟用已確認常規報價（不公開商品）",
   "pricing.regular_ack": "已確認實際銷售幣別、金額、計量單位與預訂條款，非直接套用參考優惠",
   "pricing.save_regular": "確認儲存常規價",
+  "pricing.open_regular": "開啟常規價確認",
+  "pricing.missing_title": "儲存前請完成以下項目：",
+  "pricing.missing_amount": "請輸入大於零的金額。",
+  "pricing.missing_unit": "請填寫售價單位。",
+  "pricing.missing_reason": "請填寫明確的變更原因。",
+  "pricing.missing_enabled": "請啟用已確認常規報價。",
+  "pricing.missing_confirmation": "請確認已核對銷售條款。",
   "pricing.draft": "調價草稿",
   "pricing.channel": "銷售通路",
   "pricing.storefront": "客戶商城",

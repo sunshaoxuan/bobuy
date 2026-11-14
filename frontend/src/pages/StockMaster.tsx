@@ -477,14 +477,25 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         setDataSource(prev => prev.map(it => it.key === item.key ? { ...it, key: response.product?.id || item.key, isNew: false } : it));
         setSyncStatus('saved');
       } else {
-        // Existing product update via Patch
-        await api.onboardConfirm({ ...suggestion, existingProductFound: true, existingProductId: item.key });
+        // Existing products use the product patch API. Selling prices are
+        // deliberately absent and are reviewed through productPricingApi.
+        await api.patchProduct(item.key,item.catalogDriven?{
+          storageCondition:item.storageCondition,orderMethod:item.orderMethod,
+          merchantSkus:item.merchantSkus,priceTiers:item.priceTiers
+        }:{
+          name:item.nameL10n,description:item.descriptionL10n,brand:item.brand,
+          categoryId:item.category,itemNumber:item.sku,attributes:item.dynamicAttributes,
+          mediaGallery:item.mediaGallery?.map(m=>({url:m.url,type:m.type,title:m.title})),
+          storageCondition:item.storageCondition,orderMethod:item.orderMethod,
+          merchantSkus:item.merchantSkus,priceTiers:item.priceTiers
+        });
         setSyncStatus('saved');
       }
       return true;
     } catch (err) {
       console.error('[Sync] Failed:', err);
       setSyncStatus('idle');
+      message.error((err as Error).message||t('stock.msg.update_failed'));
       return false;
     }
   };
@@ -534,8 +545,10 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
     if (!currentItem) return;
     const rawValues = values as Partial<StockItem> & { merchantSkuEntries?: MerchantSkuEntry[] };
     const { merchantSkuEntries, ...safeValues } = rawValues;
-    // Ant InputNumber reports null when cleared. Keep persisted and rendered rows numeric.
-    if (safeValues.price == null) safeValues.price = 0;
+    // Existing selling prices are reviewed in ProductPricingPanel. Never send a
+    // drawer value through AI onboarding as a base/reference-price mutation.
+    if (!currentItem.isNew) safeValues.price = currentItem.price;
+    else if (safeValues.price == null) safeValues.price = 0;
     if (safeValues.stock == null) safeValues.stock = 0;
     const merchantSkus = mapEntriesToMerchantSkus(merchantSkuEntries);
     const nextNameL10n: L10nValues = values.nameL10n ?? currentItem.nameL10n ?? {};
@@ -553,7 +566,10 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
       merchantSkus
     };
     setDataSource(prior => prior.map(item => item.key === updatedItem.key ? updatedItem : item));
-    if (!await syncItemToBackend(updatedItem)) return;
+    if (!await syncItemToBackend(updatedItem)) {
+      setDataSource(prior => prior.map(item => item.key === currentItem.key ? currentItem : item));
+      return;
+    }
 
     if (options.showMessage) {
       message.success(t('stock.drawer.update_success'));
@@ -956,9 +972,14 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
                         ]}
                       />
                     </Form.Item>
-                    <Form.Item name="price" label={t('stock.item.price')}>
+                    {editingItem?.isNew?<Form.Item name="price" label={t('stock.item.price')}>
                       <InputNumber prefix="JPY ¥" style={{ width: '100%' }} />
-                    </Form.Item>
+                    </Form.Item>:<Form.Item label={t('stock.item.price')}>
+                      <Space direction="vertical" style={{width:'100%'}}>
+                        <Text>{editingItem?.actualSale?<CardPrice amount={editingItem.actualSale.amount} currency={editingItem.actualSale.currency}/>:t('sale.pending')}</Text>
+                        <Button onClick={()=>{closeDrawer();setPricingId(editingItem?.key);}}>{t('pricing.open_regular')}</Button>
+                      </Space>
+                    </Form.Item>}
                     <Form.Item name="stock" label={t('stock.item.quantity')}>
                       <InputNumber style={{ width: '100%' }} />
                     </Form.Item>
