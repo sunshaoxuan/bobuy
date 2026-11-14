@@ -1581,6 +1581,8 @@ const messages: Dictionary = {
   "issueDate.manualHash": "此引用尚無已存來源。附加來源檔案即可自動計算；無法取得檔案時可填寫已核驗的 64 位摘要。",
   "issueDate.attach": "附加來源郵件或 HTML",
   "issueDate.attachHelp": "請先填寫來源引用。支援 .eml（首選）或 .html/.htm，最大 10 MiB。伺服器儲存原始位元組並計算 SHA-256。",
+  "issueDate.attachHelpReady": "來源引用有效。下一步請附加 .eml（首選）或 .html/.htm（最大 10 MiB），以自動計算 SHA-256。",
+  "issueDate.attachHelpReviewed": "來源產物與唯讀雜湊已就緒。核對後勾選「我已審核」並儲存。",
   "issueDate.sourceFailed": "來源查詢或上傳失敗。請檢查引用和檔案類型，重新附加或重新讀取。",
   "issueDate.sourceConflict": "此引用或檔案已關聯已存證據。請使用原始來源引用及檔案；已存證據無法替換。",
   "issueDate.invalidFile": "請選擇非空且不超過 10 MiB 的 .eml 或 HTML 檔案。",

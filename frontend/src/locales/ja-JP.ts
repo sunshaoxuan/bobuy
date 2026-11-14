@@ -1444,6 +1444,8 @@ const messages: Dictionary = {
   "issueDate.manualHash": "この参照には保存済みの出典がありません。出典ファイルを添付すると自動計算されます。ファイルを取得できない場合は検証済みの64桁ハッシュを入力できます。",
   "issueDate.attach": "出典メールまたは HTML を添付",
   "issueDate.attachHelp": "先に出典参照を入力してください。.eml（推奨）または .html/.htm、最大 10 MiB。サーバーが元のバイトを保存し、SHA-256 を計算します。",
+  "issueDate.attachHelpReady": "出典参照は有効です。次に .eml（推奨）または .html/.htm（最大 10 MiB）を添付し、SHA-256 を自動計算してください。",
+  "issueDate.attachHelpReviewed": "出典ファイルと読み取り専用ハッシュの準備ができました。確認後、「確認済み」にチェックして保存してください。",
   "issueDate.sourceFailed": "出典の確認またはアップロードに失敗しました。参照とファイル形式を確認し、再添付または再読み込みしてください。",
   "issueDate.sourceConflict": "この参照またはファイルは保存済み証拠に関連付けられています。元の参照とファイルを使用してください。保存済み証拠は置換できません。",
   "issueDate.invalidFile": "空でない 10 MiB 以下の .eml または HTML ファイルを選択してください。",

@@ -1444,6 +1444,8 @@ const messages: Dictionary = {
   "issueDate.manualHash": "No stored source for this reference. Attach the source file to compute the hash, or enter a verified 64-character hash if the file is unavailable.",
   "issueDate.attach": "Attach source email or HTML",
   "issueDate.attachHelp": "Enter a source reference first. Attach .eml (preferred) or .html/.htm, up to 10 MiB. The server stores the exact bytes and computes SHA-256.",
+  "issueDate.attachHelpReady": "The source reference is valid. Attach .eml (preferred) or .html/.htm, up to 10 MiB, to compute SHA-256 automatically.",
+  "issueDate.attachHelpReviewed": "The source artifact and read-only hash are ready. Verify them, check “I reviewed,” and save.",
   "issueDate.sourceFailed": "Source lookup or upload failed. Check the reference and file type, then attach again or reload.",
   "issueDate.sourceConflict": "This reference or file already belongs to stored evidence. Reuse the original source reference and file; stored evidence cannot be replaced.",
   "issueDate.invalidFile": "Choose a non-empty .eml or HTML file no larger than 10 MiB.",
