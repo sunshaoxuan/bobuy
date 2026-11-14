@@ -865,9 +865,12 @@ export async function refreshAuthSession(): Promise<AuthSessionResponse | null> 
 }
 
 async function parseErrorMessage(response: Response): Promise<string> {
+    if ([502, 504].includes(response.status)) {
+        return translate(getStoredLocale(), 'maintenance.title');
+    }
     try {
         const payload = (await response.json()) as ApiErrorResponse;
-        if (response.status === 503 && (payload?.errorCode === 'RELEASE_MAINTENANCE' || payload?.message === 'Release maintenance in progress')) {
+        if (payload?.errorCode === 'RELEASE_MAINTENANCE' || payload?.message === 'Release maintenance in progress') {
             return translate(getStoredLocale(), 'maintenance.title');
         }
         if (payload?.message) {
@@ -875,7 +878,9 @@ async function parseErrorMessage(response: Response): Promise<string> {
             return payload.message;
         }
     } catch {
-        // Ignore parse errors and fall back to status text.
+        if (response.status === 503) {
+            return translate(getStoredLocale(), 'maintenance.title');
+        }
     }
     return response.statusText || genericErrorMessage();
 }
@@ -890,7 +895,7 @@ async function fetchJson<T>(url: string, fallbackValue: T, init?: RequestInit): 
             message.warning('[Mock API] Falling back to local sample data.');
             return fallbackValue;
         }
-        const errorMessage = error instanceof Error ? error.message : genericErrorMessage();
+        const errorMessage = translate(getStoredLocale(), 'maintenance.title');
         message.error(errorMessage);
         throw error instanceof Error ? error : new Error(errorMessage);
     }
