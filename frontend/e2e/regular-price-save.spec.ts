@@ -22,6 +22,6 @@ for(const viewport of [{width:390,height:844},{width:1280,height:800}])test(`reg
  });
  await page.goto('/admin/products');await expect(page.getByText('Matcha Kit',{exact:true}).first()).toBeVisible();await page.getByRole('button',{name:'Selling prices and adjustments',exact:true}).click();await page.getByText('Set regular selling price').click();
  await page.getByLabel('Regular amount').fill('1200');await page.getByLabel('Price unit').fill('1 pack');await page.getByLabel('Regular price change reason (required)').fill('Synthetic E2E confirmation');await page.getByRole('checkbox',{name:/reviewed the products/}).check();
- await expect(page.getByRole('button',{name:'Confirm regular price'})).toBeEnabled();await page.getByRole('button',{name:'Confirm regular price'}).click();await expect(page.getByText(/¥1,200/)).toBeVisible();
+ await expect(page.getByRole('button',{name:'Confirm regular price'})).toBeEnabled();await page.getByRole('button',{name:'Confirm regular price'}).click();await expect(page.getByText(/¥1,200/).first()).toBeVisible();
  expect(regularSaved).toBe(true);await page.reload();await expect(page.getByText('Matcha Kit',{exact:true}).first()).toBeVisible();await expect(page.getByText(/¥1,200/).first()).toBeVisible();await expect(page.getByText(/Selling price pending|尚未确认售价/)).toHaveCount(0);expect(pageErrors).toEqual([]);
 });
