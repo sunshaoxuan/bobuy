@@ -14,6 +14,12 @@ it('retains HTTP conflict status for draft recovery instead of returning a fallb
  const fetch=vi.fn().mockResolvedValue({ok:false,status:409,json:async()=>({message:'Version changed'})});vi.stubGlobal('fetch',fetch);
  await expect(recommendationApi.publishItem(8,801,input)).rejects.toMatchObject({message:'Version changed',status:409});expect(fetch).toHaveBeenCalledTimes(1);
 });
+
+it('preserves structured publication conditions on a 400 response',async()=>{
+ const conditions=[{code:'CATALOG_REVIEW_REQUIRED',message:'The product master is awaiting review.',target:'PRODUCT_MASTER'}];
+ vi.stubGlobal('fetch',vi.fn().mockResolvedValue(new Response(JSON.stringify({status:'error',errorCode:'INVALID_REQUEST',message:'Complete each listed item before publishing.',conditions}),{status:400,headers:{'Content-Type':'application/json'}})));
+ await expect(recommendationApi.publishItem(8,801,{requestId:crypto.randomUUID(),version:4,productVersion:2,sourceHash:'a'.repeat(64),reviewed:true})).rejects.toMatchObject({status:400,conditions});
+});
 it('preserves append conflict status and the existing from-product body',async()=>{
  const fetch=vi.fn().mockResolvedValue({ok:false,status:409,json:async()=>({message:'Product changed'})});vi.stubGlobal('fetch',fetch);
  const body={productId:'synthetic',productVersion:3,facts:{name:'Synthetic',itemNumber:'123'},version:12,reviewed:true};

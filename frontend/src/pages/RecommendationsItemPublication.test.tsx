@@ -59,6 +59,26 @@ it('does not enable publication with absent or malformed review/version metadata
  expect(mocks.publishItem).not.toHaveBeenCalled();
 });
 
+it('lists the issue11 supplier gap beside the item, keeps review checked and opens source editing',async()=>{
+ mocks.publishItem.mockRejectedValue(Object.assign(new Error('Complete each listed item before publishing.'),{status:400,conditions:[{code:'REFERENCE_SUPPLIER_KEY_MISSING',message:'The source supplier identifier is missing. Open the item source context and complete it.',target:'SOURCE_CONTEXT'}]}));
+ show();await screen.findByDisplayValue('Original issue');review();fireEvent.click(publishButton());
+ expect(await card('Ready Tea').findByText(/source supplier identifier is missing/)).toBeInTheDocument();
+ expect(card('Ready Tea').queryByText(/title, body and at least one linked product/i)).toBeNull();
+ expect(card('Ready Tea').getByRole('checkbox',{name:/I checked this item/})).toBeChecked();
+ expect(card('Ready Tea').getByRole('button',{name:'Edit source context'})).toBeEnabled();
+});
+
+it('lists every issue12 source and localized-master gap with product-master jump targets',async()=>{
+ const conditions=[
+  ['REFERENCE_CHANNEL_MISSING','The source channel is missing.','SOURCE_CONTEXT'],['REFERENCE_SOURCE_MESSAGE_KEY_MISSING','The source email or campaign identifier is missing.','SOURCE_CONTEXT'],['REFERENCE_SOURCE_URL_INVALID','The source URL is missing or invalid.','SOURCE_CONTEXT'],
+  ['PRODUCT_NAME_ZH_TW_MISSING','The product-master zh-TW name is missing.','PRODUCT_MASTER'],['PRODUCT_SPECIFICATION_ZH_TW_MISSING','The product-master zh-TW specification is missing.','PRODUCT_MASTER'],['PRODUCT_SPECIFICATION_EN_US_MISSING','The product-master en-US specification is missing.','PRODUCT_MASTER']
+ ].map(([code,message,target])=>({code,message,target}));
+ mocks.publishItem.mockRejectedValue(Object.assign(new Error('Complete each listed item before publishing.'),{status:400,conditions}));show();await screen.findByDisplayValue('Original issue');review();fireEvent.click(publishButton());
+ const failureList=await card('Ready Tea').findByRole('alert',{name:'Publication requirements'});for(const value of conditions)expect(failureList).toHaveTextContent(value.message);
+ expect(card('Ready Tea').getAllByRole('link',{name:'Open product master'})).toHaveLength(3);expect(card('Ready Tea').getAllByRole('link',{name:'Open product master'})[0]).toHaveAttribute('href','/admin/products?product=product-ready#editor');
+ expect(card('Ready Tea').getByRole('checkbox',{name:/I checked this item/})).toBeChecked();
+});
+
 it('retries an uncertain response with exactly the same request key and facts',async()=>{
  mocks.publishItem.mockRejectedValueOnce(new TypeError('Response lost')).mockResolvedValueOnce(published(draft));
  show();await screen.findByDisplayValue('Original issue');review();fireEvent.click(publishButton());

@@ -73,20 +73,33 @@ public final class RecommendationPublication {
     /** Missing/unstated price/window facts remain null; they are not inferred by publication. */
     public static void requireReady(RecommendationItem original,Product product,RecommendationPublicationSnapshot snapshot) {
         var shown=project(original,snapshot);var data=product==null?null:product.getCatalogData();
-        if(product==null||data==null||data.reviewedAt()==null||data.reviewedBy()==null||!ProductCatalogService.translationsCurrent(product)
-            ||!filled(shown.name)||!filled(shown.itemNumber)||!Objects.equals(original.productId,product.getId())||!Objects.equals(original.itemNumber,product.getItemNumber())||shown.gallery.isEmpty())
-            throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.incomplete");
-        for(String locale:List.of("ja-JP","zh-CN","zh-TW","en-US"))
-            if(!filled(ProductCatalogService.text(product.getName(),locale))||!filled(ProductCatalogService.text(data.specification(),locale)))
-                throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.incomplete");
+        var failures=new ArrayList<PublicationValidationException.Failure>();
+        if(product==null)add(failures,"PRODUCT_MISSING","recommendation.publication.product_missing","PRODUCT_MASTER");
+        if(data==null)add(failures,"CATALOG_DATA_MISSING","recommendation.publication.catalog_missing","PRODUCT_MASTER");
+        if(data!=null&&(data.reviewedAt()==null||data.reviewedBy()==null))add(failures,"CATALOG_REVIEW_REQUIRED","recommendation.publication.catalog_review","PRODUCT_MASTER");
+        if(product!=null&&data!=null&&!ProductCatalogService.translationsCurrent(product))add(failures,"CATALOG_TRANSLATIONS_STALE","recommendation.publication.translations_stale","PRODUCT_MASTER");
+        if(!filled(shown.name))add(failures,"PRODUCT_NAME_MISSING","recommendation.publication.name_missing","PRODUCT_MASTER");
+        if(!filled(shown.itemNumber))add(failures,"ITEM_NUMBER_MISSING","recommendation.publication.item_number_missing","PRODUCT_MASTER");
+        if(product!=null&&!Objects.equals(original.productId,product.getId()))add(failures,"PRODUCT_LINK_MISMATCH","recommendation.publication.product_link","PRODUCT_MASTER");
+        if(product!=null&&!Objects.equals(original.itemNumber,product.getItemNumber()))add(failures,"ITEM_NUMBER_MISMATCH","recommendation.publication.item_number_mismatch","PRODUCT_MASTER");
+        if(shown.gallery.isEmpty())add(failures,"GALLERY_EMPTY","recommendation.publication.gallery_empty","PRODUCT_MASTER");
+        if(product!=null&&data!=null)for(String locale:List.of("ja-JP","zh-CN","zh-TW","en-US")){
+            if(!filled(ProductCatalogService.text(product.getName(),locale)))add(failures,"PRODUCT_NAME_"+locale.replace('-','_').toUpperCase(Locale.ROOT)+"_MISSING","recommendation.publication.localized_name."+locale,"PRODUCT_MASTER");
+            if(!filled(ProductCatalogService.text(data.specification(),locale)))add(failures,"PRODUCT_SPECIFICATION_"+locale.replace('-','_').toUpperCase(Locale.ROOT)+"_MISSING","recommendation.publication.localized_specification."+locale,"PRODUCT_MASTER");
+        }
         if(filled(original.offerNotes)&&(!"REVIEWED".equals(original.getTranslationStatus())||!original.translations.keySet().containsAll(Set.of("zh-CN","zh-TW","en-US"))))
-            throw new ApiException(ErrorCode.INVALID_REQUEST,"translation.review_required");
+            add(failures,"OFFER_TRANSLATION_REVIEW_REQUIRED","recommendation.publication.offer_translation","ITEM_TRANSLATION");
         var context=original.referenceContext;
-        if(context==null||!filled(context.supplierKey())||!filled(context.channel())||!filled(context.variantKey())||!filled(context.sourceMessageKey())||!https(context.sourceUrl()))
-            throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.incomplete");
+        if(context==null||!filled(context.supplierKey()))add(failures,"REFERENCE_SUPPLIER_KEY_MISSING","recommendation.publication.supplier_key","SOURCE_CONTEXT");
+        if(context==null||!filled(context.channel()))add(failures,"REFERENCE_CHANNEL_MISSING","recommendation.publication.channel","SOURCE_CONTEXT");
+        if(context==null||!filled(context.variantKey()))add(failures,"REFERENCE_VARIANT_KEY_MISSING","recommendation.publication.variant_key","SOURCE_CONTEXT");
+        if(context==null||!filled(context.sourceMessageKey()))add(failures,"REFERENCE_SOURCE_MESSAGE_KEY_MISSING","recommendation.publication.source_message_key","SOURCE_CONTEXT");
+        if(context==null||!https(context.sourceUrl()))add(failures,"REFERENCE_SOURCE_URL_INVALID","recommendation.publication.source_url","SOURCE_CONTEXT");
         for(var picture:shown.gallery)
             if(picture==null||picture.url()==null||!picture.url().startsWith("/api/storefront/recommendation-images/")
                 ||picture.hash()==null||!picture.hash().matches("[0-9a-f]{64}")||!https(picture.sourceUrl())||picture.verifiedAt()==null)
-                throw new ApiException(ErrorCode.INVALID_REQUEST,"gallery.invalid");
+                {add(failures,"GALLERY_IMAGE_INVALID","recommendation.publication.gallery_invalid","PRODUCT_MASTER");break;}
+        if(!failures.isEmpty())throw new PublicationValidationException(failures);
     }
+    private static void add(List<PublicationValidationException.Failure> failures,String code,String key,String target){failures.add(new PublicationValidationException.Failure(code,key,target));}
 }
