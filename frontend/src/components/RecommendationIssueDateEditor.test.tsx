@@ -25,6 +25,36 @@ it('displays actual stored date/evidence/server reviewer read-only and never aut
 it('renders an available artifact hash as read-only and omits it from the save request',async()=>{
  get.mockResolvedValue(reviewed({sourceAvailable:true,computedHash:hash,algorithm:'recommendation-issue-date-source-v1',hashEditable:false}));save.mockResolvedValue(reviewed({sourceAvailable:true,computedHash:hash,algorithm:'recommendation-issue-date-source-v1',hashEditable:false}));render(tree({post:{id:8,version:4}}));await ready();expect(screen.getByRole('textbox',{name:copy.hash})).toHaveAttribute('aria-readonly','true');confirm();submit();await screen.findByText(copy.saved);expect(save.mock.calls[0][1]).not.toHaveProperty('sourceHash');
 });
+it('restores an automatic source after clearing the draft hash and submits the displayed value',async()=>{
+ get.mockResolvedValue(reviewed({sourceAvailable:true,computedHash:hash,algorithm:'recommendation-issue-date-source-v1',hashEditable:false}));render(tree({post:{id:8,version:4}}));await ready();
+ fireEvent.change(screen.getByLabelText(copy.reference),{target:{value:'message:other'}});fireEvent.change(screen.getByLabelText(copy.hash),{target:{value:''}});
+ fireEvent.change(screen.getByLabelText(copy.reference),{target:{value:'message:source-1'}});expect(screen.getByRole('textbox',{name:copy.hash})).toHaveTextContent(hash);confirm();submit();await screen.findByText(copy.saved);expect(save).toHaveBeenCalledTimes(1);expect(save.mock.calls[0][1]).not.toHaveProperty('sourceHash');
+});
+it('looks up the draft reference for UNKNOWN posts and attaches a file before first review',async()=>{
+ const source={sourceRef:'message:source-1',sourceHash:hash,algorithm:'recommendation-issue-date-source-v1',sourceAvailable:true,hashEditable:false};
+ const lookupSource=vi.fn().mockResolvedValue({...source,sourceAvailable:false,hashEditable:true,sourceHash:null,algorithm:null}),uploadSource=vi.fn().mockResolvedValue(source);
+ const rendered=render(tree({lookupSource,uploadSource,copy:{...copy,attach:'Attach source',attachHelp:'EML or HTML, up to 10 MiB'}}));await ready();
+ fireEvent.change(screen.getByLabelText(copy.date),{target:{value:'2026-11-02'}});fireEvent.change(screen.getByLabelText(copy.reference),{target:{value:source.sourceRef}});
+ await waitFor(()=>expect(screen.getByRole('button',{name:'Attach source'})).toBeEnabled());expect(lookupSource).toHaveBeenCalledWith(8,source.sourceRef);
+ const file=new File(['Subject: Test\r\n\r\nメール'],'source.eml',{type:'message/rfc822'});
+ fireEvent.change(rendered.container.querySelector('input[type=file]')!,{target:{files:[file]}});
+ await waitFor(()=>expect(screen.getByRole('textbox',{name:copy.hash})).toHaveAttribute('aria-readonly','true'));expect(uploadSource).toHaveBeenCalledWith(8,source.sourceRef,file);
+ expect(screen.getByRole('checkbox',{name:copy.reviewed})).not.toBeChecked();confirm();submit();await screen.findByText(copy.saved);expect(save.mock.calls[0][1]).not.toHaveProperty('sourceHash');
+});
+it('uses a pre-stored artifact for a draft ref and ignores a stale lookup after another ref',async()=>{
+ const old=deferred<any>();const source={sourceRef:'message:new',sourceHash:otherHash,algorithm:'recommendation-issue-date-source-html-utf8-v1',sourceAvailable:true,hashEditable:false};
+ const lookupSource=vi.fn().mockReturnValueOnce(old.promise).mockResolvedValue(source);render(tree({lookupSource}));await ready();
+ fireEvent.change(screen.getByLabelText(copy.reference),{target:{value:'message:old'}});fireEvent.change(screen.getByLabelText(copy.reference),{target:{value:'message:new'}});
+ await waitFor(()=>expect(screen.getByRole('textbox',{name:copy.hash})).toHaveTextContent(otherHash));await act(async()=>old.resolve({...source,sourceRef:'message:old',sourceHash:hash}));expect(screen.getByRole('textbox',{name:copy.hash})).toHaveTextContent(otherHash);
+});
+it('resets confirmation during a replacement file upload and ignores it after source ref changes',async()=>{
+ const pending=deferred<any>(),source={sourceRef:'message:source-1',sourceHash:hash,algorithm:'recommendation-issue-date-source-v1',sourceAvailable:true,hashEditable:false};
+ const lookupSource=vi.fn().mockImplementation((_id,ref)=>Promise.resolve(ref===source.sourceRef?source:{sourceRef:ref,sourceHash:null,algorithm:null,sourceAvailable:false,hashEditable:true}));
+ const rendered=render(tree({lookupSource,uploadSource:vi.fn().mockReturnValue(pending.promise),copy:{...copy,attach:'Attach source'}}));await ready();fireEvent.change(screen.getByLabelText(copy.date),{target:{value:'2026-11-02'}});fireEvent.change(screen.getByLabelText(copy.reference),{target:{value:source.sourceRef}});
+ await waitFor(()=>expect(screen.getByRole('checkbox',{name:copy.reviewed})).toBeEnabled());confirm();fireEvent.change(rendered.container.querySelector('input[type=file]')!,{target:{files:[new File(['bytes'],'source.eml',{type:'message/rfc822'})]}});
+ await waitFor(()=>expect(screen.getByRole('checkbox',{name:copy.reviewed})).not.toBeChecked());expect(screen.getByRole('button',{name:copy.save})).toBeDisabled();fireEvent.change(screen.getByLabelText(copy.reference),{target:{value:'message:new'}});
+ await act(async()=>pending.resolve(source));await waitFor(()=>expect(screen.getByLabelText(copy.hash)).toHaveValue(''));expect(screen.getByRole('checkbox',{name:copy.reviewed})).not.toBeChecked();
+});
 it('sends exactly the five allowed fields and accepts the matching server-owned save result',async()=>{
  render(tree());await ready();fill({sourceHash:hash.toUpperCase()});confirm();submit();await screen.findByText(copy.saved);expect(save).toHaveBeenCalledTimes(1);expect(save).toHaveBeenCalledWith(8,{issueDate:'2026-11-02',sourceRef:'message:source-1',sourceHash:hash,version:3,reviewed:true});expect(Object.keys(save.mock.calls[0][1]).sort()).toEqual(['issueDate','reviewed','sourceHash','sourceRef','version']);expect(onSaved).toHaveBeenCalledTimes(1);expect(onSaved).toHaveBeenCalledWith(reviewed());expect(screen.getByRole('checkbox',{name:copy.reviewed})).not.toBeChecked();expect(onDirtyChange).toHaveBeenLastCalledWith(false);
 });

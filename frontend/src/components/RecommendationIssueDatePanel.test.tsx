@@ -5,13 +5,13 @@ import {clearAuthSession,storeAuthSession} from '../authStorage';
 import type {RecommendationDetail} from '../api';
 import type {RecommendationIssueDateReview as Review} from './RecommendationIssueDateEditor';
 import en from '../locales/en-US';import ja from '../locales/ja-JP';import cn from '../locales/zh-CN';import tw from '../locales/zh-TW';
-const mocks=vi.hoisted(()=>({getIssueDate:vi.fn(),saveIssueDate:vi.fn()}));vi.mock('../api',()=>({recommendationApi:mocks}));
+const mocks=vi.hoisted(()=>({getIssueDate:vi.fn(),saveIssueDate:vi.fn(),getIssueDateSource:vi.fn(),uploadIssueDateSource:vi.fn()}));vi.mock('../api',()=>({recommendationApi:mocks}));
 const unknown=(version=3):Review=>({issueDate:null,sourceRef:null,sourceHash:null,reviewedBy:null,reviewedAt:null,source:'UNKNOWN',version});
 const reviewed=(version=4):Review=>({issueDate:'2026-10-31',sourceRef:'message:private-source',sourceHash:'a'.repeat(64),reviewedBy:42,reviewedAt:'2026-11-09T14:00:00Z',source:'REVIEWED_SOURCE',version});
 const post={id:8,merchantId:42,title:'Synthetic issue',published:true,version:3,updatedAt:'2026-11-01T00:00:00',publishedAt:'2026-11-01T00:00:00Z'};
 const auth=(id=42,token='synthetic-token-a',roles:('AGENT'|'CUSTOMER')[]=['AGENT'])=>storeAuthSession({accessToken:token,user:{id,username:'synthetic-'+id,name:'Synthetic',roles}});
 const tree=(props:Partial<Parameters<typeof Panel>[0]>={})=><I18nProvider><Panel post={post} onSaved={vi.fn()} {...props}/></I18nProvider>;
-beforeEach(()=>{localStorage.clear();localStorage.setItem('bobbuy_locale','en-US');auth();mocks.getIssueDate.mockReset().mockResolvedValue(unknown());mocks.saveIssueDate.mockReset().mockResolvedValue(reviewed());});
+beforeEach(()=>{localStorage.clear();localStorage.setItem('bobbuy_locale','en-US');auth();mocks.getIssueDate.mockReset().mockResolvedValue(unknown());mocks.saveIssueDate.mockReset().mockResolvedValue(reviewed());mocks.getIssueDateSource.mockReset().mockImplementation((_id,sourceRef)=>Promise.resolve({sourceRef,sourceHash:null,algorithm:null,sourceAvailable:false,hashEditable:true}));});
 it.each(['anonymous','customer','foreign merchant','missing owner'] as const)('hides the date entry and makes no private request for %s',kind=>{
  if(kind==='anonymous')clearAuthSession();if(kind==='customer')auth(42,'synthetic-token-a',['CUSTOMER']);if(kind==='foreign merchant')auth(99);render(tree(kind==='missing owner'?{post:{...post,merchantId:undefined}}:{}));expect(screen.queryByRole('button',{name:en['issueDate.title']})).not.toBeInTheDocument();expect(mocks.getIssueDate).not.toHaveBeenCalled();
 });
@@ -49,7 +49,7 @@ it('reviews a November8 source on a November9 publication through the owner form
  mocks.saveIssueDate.mockResolvedValue(accepted);const saved=vi.fn(),before={...detail(),post:currentPost};
  render(tree({post:currentPost,onSaved:saved}));fireEvent.click(screen.getByRole('button',{name:en['issueDate.title']}));await screen.findByLabelText(en['issueDate.date']);
  fireEvent.change(screen.getByLabelText(en['issueDate.date']),{target:{value:'2026-11-08'}});fireEvent.change(screen.getByLabelText(en['issueDate.reference']),{target:{value:sourceRef}});fireEvent.change(screen.getByLabelText(en['issueDate.hash']),{target:{value:sourceHash}});
- expect(screen.getByRole('button',{name:en['issueDate.save']})).toBeDisabled();fireEvent.click(screen.getByRole('checkbox',{name:en['issueDate.reviewed']}));fireEvent.click(screen.getByRole('button',{name:en['issueDate.save']}));await screen.findByText(en['issueDate.saved']);
+ await waitFor(()=>expect(screen.getByRole('checkbox',{name:en['issueDate.reviewed']})).toBeEnabled());expect(screen.getByRole('button',{name:en['issueDate.save']})).toBeDisabled();fireEvent.click(screen.getByRole('checkbox',{name:en['issueDate.reviewed']}));fireEvent.click(screen.getByRole('button',{name:en['issueDate.save']}));await screen.findByText(en['issueDate.saved']);
  expect(mocks.saveIssueDate).toHaveBeenCalledTimes(1);expect(mocks.saveIssueDate).toHaveBeenCalledWith(8,{issueDate:'2026-11-08',sourceRef,sourceHash,version:3,reviewed:true},'synthetic-token-a');
  expect(Object.keys(mocks.saveIssueDate.mock.calls[0][1]).sort()).toEqual(['issueDate','reviewed','sourceHash','sourceRef','version']);expect(saved).toHaveBeenCalledWith(accepted,3);
  const next=applyRecommendationIssueDate(before,8,3,accepted)!;expect(next.post.issueDate).toBe('2026-11-08');expect(next.post.publishedAt).toBe('2026-11-09T12:53:30Z');expect(next.items).toBe(before.items);expect(next.items).toHaveLength(111);expect(next.body).toBe(before.body);expect(next.articleSourceHash).toBe(before.articleSourceHash);expect(next.post).not.toHaveProperty('reviewedBy');expect(next.post).not.toHaveProperty('sourceHash');

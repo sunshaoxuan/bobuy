@@ -3,6 +3,7 @@ package com.bobbuy.service;
 import com.bobbuy.api.RecommendationIssueDateRequest;
 import com.bobbuy.api.response.*;
 import com.bobbuy.model.RecommendationPost;
+import com.bobbuy.model.RecommendationSourceArtifact;
 import com.bobbuy.repository.RecommendationPostRepository;
 import com.bobbuy.repository.RecommendationSourceArtifactRepository;
 import com.bobbuy.repository.UserRepository;
@@ -30,6 +31,44 @@ public class RecommendationIssueDateService {
         public Review(LocalDate issueDate,String sourceRef,String sourceHash,Long reviewedBy,Instant reviewedAt,String source,long version){this(issueDate,sourceRef,sourceHash,reviewedBy,reviewedAt,source,version,null,false,null,true);}
     }
     public static final class Changed extends RuntimeException {}
+    public static final class SourceConflict extends RuntimeException {}
+    public record Source(String sourceRef,String sourceHash,String algorithm,boolean sourceAvailable,boolean hashEditable) {}
+    private Source source(String ref){
+        return artifacts.findBySourceRef(ref).map(a->{
+            String hash=sourceHash(a.content,a.algorithm);
+            if(!hash.equals(a.sha256))throw new IllegalStateException("Stored source artifact hash mismatch");
+            return new Source(ref,hash,a.algorithm,true,false);
+        }).orElseGet(()->new Source(ref,null,null,false,true));
+    }
+    @Transactional(readOnly=true) public Source preview(Long id,String sourceRef){
+        posts.findByIdAndMerchantId(id,owner()).orElseThrow(RecommendationIssueDateService::missing);
+        return source(sourceReference(sourceRef));
+    }
+    @Transactional public Source attach(Long id,String sourceRef,org.springframework.web.multipart.MultipartFile file){
+        Long merchant=owner();users.lockById(merchant).orElseThrow(RecommendationIssueDateService::missing);
+        posts.findByIdAndMerchantId(id,merchant).orElseThrow(RecommendationIssueDateService::missing);
+        String ref=sourceReference(sourceRef);
+        if(file==null||file.isEmpty()||file.getSize()>10*1024*1024)throw invalid();
+        String name=Objects.toString(file.getOriginalFilename(),"").toLowerCase(Locale.ROOT);
+        String type=Objects.toString(file.getContentType(),"").split(";",2)[0].trim().toLowerCase(Locale.ROOT);
+        String extension=name.endsWith(".eml")?RAW:name.endsWith(".html")||name.endsWith(".htm")?HTML:null;
+        String media=type.equals("message/rfc822")?RAW:type.equals("text/html")?HTML:null;
+        if(media==null&&!type.isEmpty()&&!type.equals("application/octet-stream")||extension!=null&&media!=null&&!extension.equals(media))throw invalid();
+        String algorithm=media!=null?media:extension;if(algorithm==null)throw invalid();
+        byte[] bytes;try(var input=file.getInputStream()){bytes=input.readNBytes(10*1024*1024+1);}catch(java.io.IOException e){throw invalid();}
+        if(bytes.length==0||bytes.length>10*1024*1024)throw invalid();
+        String hash=sourceHash(bytes,algorithm);
+        var existing=artifacts.findBySourceRef(ref);
+        if(existing.isPresent()){
+            var a=existing.get();if(!hash.equals(a.sha256)||!algorithm.equals(a.algorithm))throw new SourceConflict();
+            return source(ref);
+        }
+        if(artifacts.existsById(hash))throw new SourceConflict();
+        var artifact=new RecommendationSourceArtifact();artifact.sha256=hash;artifact.sourceRef=ref;artifact.content=bytes;
+        artifact.contentType=RAW.equals(algorithm)?"message/rfc822":"text/html";artifact.byteLength=bytes.length;artifact.algorithm=algorithm;artifact.acquiredAt=Instant.now();
+        try{artifacts.saveAndFlush(artifact);}catch(org.springframework.dao.DataIntegrityViolationException e){throw new SourceConflict();}
+        return new Source(ref,hash,algorithm,true,false);
+    }
     private static ApiException invalid(){return new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.invalid");}
     private static ApiException missing(){return new ApiException(ErrorCode.RESOURCE_NOT_FOUND,"error.recommendation.not_found");}
     private static Long owner(){Long id=MerchantScope.current();if(id==null)throw new ApiException(ErrorCode.FORBIDDEN,"error.auth.forbidden");return id;}
@@ -40,7 +79,7 @@ public class RecommendationIssueDateService {
     private Review view(RecommendationPost p){
         var artifact=p.issueDateSourceRef==null?java.util.Optional.<com.bobbuy.model.RecommendationSourceArtifact>empty():artifacts.findBySourceRef(p.issueDateSourceRef);
         boolean available=artifact.isPresent();String computed=artifact.map(a->sourceHash(a.content,a.algorithm)).orElse(null);
-        return p.hasReviewedIssueDate()?new Review(p.issueDate,p.issueDateSourceRef,p.issueDateSourceHash,p.issueDateReviewedBy,p.issueDateReviewedAt,"REVIEWED_SOURCE",p.version,p.issueDateSourceAlgorithm,available,computed,!available):new Review(null,null,null,null,null,"UNKNOWN",p.version,null,false,null,true);
+        return p.hasReviewedIssueDate()?new Review(p.issueDate,p.issueDateSourceRef,p.issueDateSourceHash,p.issueDateReviewedBy,p.issueDateReviewedAt,"REVIEWED_SOURCE",p.version,Objects.toString(p.issueDateSourceAlgorithm,LEGACY),available,computed,!available):new Review(null,null,null,null,null,"UNKNOWN",p.version,null,false,null,true);
     }
     @Transactional(readOnly=true) public Review get(Long id){return view(posts.findByIdAndMerchantId(id,owner()).orElseThrow(RecommendationIssueDateService::missing));}
     private static String sourceReference(String value){

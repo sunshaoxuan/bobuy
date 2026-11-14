@@ -12,6 +12,5 @@ ALTER TABLE bb_recommendation_post ADD COLUMN issue_date_source_algorithm varcha
 UPDATE bb_recommendation_post
 SET issue_date_source_algorithm = 'legacy-operator-supplied'
 WHERE issue_date_source_hash IS NOT NULL;
-ALTER TABLE bb_recommendation_post ADD CONSTRAINT ck_recommendation_issue_date_algorithm
-CHECK ((issue_date_source_hash IS NULL AND issue_date_source_algorithm IS NULL)
-    OR (issue_date_source_hash IS NOT NULL AND issue_date_source_algorithm IS NOT NULL));
+-- Old applications omit the additive algorithm column on UPDATE. Null is read
+-- as legacy-operator-supplied; allow those writes throughout cutover/rollback.

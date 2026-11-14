@@ -11,6 +11,14 @@ it('GET uses the exact captured token with no-store and the real private endpoin
  await expect(recommendationApi.getIssueDate(8,'synthetic-token-a')).resolves.toEqual(review);
  expect(fetchMock).toHaveBeenCalledTimes(1);const[path,init]=fetchMock.mock.calls[0];expect(path).toBe('/api/merchant/recommendations/8/issue-date');expect(init).toMatchObject({method:'GET',cache:'no-store',credentials:'same-origin',headers:{Authorization:'Bearer synthetic-token-a'}});expect(init.body).toBeUndefined();
 });
+it('encodes draft references and sends raw source files with a captured token and browser multipart boundary',async()=>{
+ const ref='https://example.invalid/source?a=1&b=2',file=new File(['raw\r\nメール'],'source.eml',{type:'message/rfc822'});
+ await recommendationApi.getIssueDateSource(11,ref,'synthetic-token-a');expect(fetchMock.mock.calls[0][0]).toBe('/api/merchant/recommendations/11/issue-date/source?'+new URLSearchParams({sourceRef:ref}));
+ await recommendationApi.uploadIssueDateSource(12,ref,file,'synthetic-token-a');const [path,init]=fetchMock.mock.calls[1];expect(path).toBe('/api/merchant/recommendations/12/issue-date/source');expect(init.method).toBe('POST');expect(init.headers.Authorization).toBe('Bearer synthetic-token-a');expect(init.headers).not.toHaveProperty('Content-Type');expect(init.body.get('file')).toBe(file);expect(init.body.get('sourceRef')).toBe(ref);
+});
+it('discards an upload receipt when its captured session is replaced',async()=>{
+ let finish!:(r:Response)=>void;fetchMock.mockReturnValue(new Promise<Response>(resolve=>{finish=resolve;}));const request=recommendationApi.uploadIssueDateSource(12,'message:source',new File(['x'],'source.eml'),'synthetic-token-a');session('synthetic-token-b');finish(response());await expect(request).rejects.toMatchObject({status:409,errorCode:'SESSION_CHANGED'});expect(fetchMock).toHaveBeenCalledTimes(1);
+});
 it('PUT constructs exactly the five allowed fields and never sends client identity or review stamps',async()=>{
  const input={issueDate:'2026-10-31',sourceRef:'message:source',sourceHash:'a'.repeat(64),version:3,reviewed:true as const,reviewedBy:999,userId:999,merchantId:999,roles:['AGENT']};
  await recommendationApi.saveIssueDate(8,input,'synthetic-token-a');const init=fetchMock.mock.calls[0][1];expect(init.method).toBe('PUT');expect(JSON.parse(init.body)).toEqual({issueDate:input.issueDate,sourceRef:input.sourceRef,sourceHash:input.sourceHash,version:3,reviewed:true});expect(init.headers.Authorization).toBe('Bearer synthetic-token-a');

@@ -1,7 +1,7 @@
 import { message } from 'antd';
 import { retryRead, ReadRequestError, isTransientReadStatus } from './readRecovery';
 import { prepareImageUpload } from './imageUpload';
-import type {RecommendationIssueDateReview,RecommendationIssueDateRequest} from './components/RecommendationIssueDateEditor';
+import type {RecommendationIssueDateReview,RecommendationIssueDateRequest,RecommendationIssueDateSource} from './components/RecommendationIssueDateEditor';
 export type {RecommendationIssueDateReview,RecommendationIssueDateRequest} from './components/RecommendationIssueDateEditor';
 import {
     clearAuthSession,
@@ -1139,16 +1139,18 @@ async function recommendationMutation<T>(url:string,body:object):Promise<T> {
     return parseSuccessPayload<T>(response);
 }
 function issueDateFailure(status:number,errorCode?:string){return Object.assign(new Error(genericErrorMessage()),{status,errorCode});}
-async function requestRecommendationIssueDate(id:number,accessToken:string,method:'GET'|'PUT',input?:Readonly<RecommendationIssueDateRequest>):Promise<RecommendationIssueDateReview>{
+async function requestRecommendationIssueDate<T=RecommendationIssueDateReview>(id:number,accessToken:string,method:'GET'|'PUT'|'POST',input?:Readonly<RecommendationIssueDateRequest>,source?:{sourceRef:string;file?:File}):Promise<T>{
     const current=()=>typeof accessToken==='string'&&!!accessToken&&getStoredAccessToken()===accessToken;
     if(!Number.isSafeInteger(id)||id<1||!current())throw issueDateFailure(409,'SESSION_CHANGED');
     if(method==='PUT'&&(!input||input.reviewed!==true))throw issueDateFailure(400,'INVALID_REQUEST');
-    const body=method==='PUT'?JSON.stringify({issueDate:input!.issueDate,sourceRef:input!.sourceRef,sourceHash:input!.sourceHash,version:input!.version,reviewed:true}):undefined;
+    let body:BodyInit|undefined=method==='PUT'?JSON.stringify({issueDate:input!.issueDate,sourceRef:input!.sourceRef,sourceHash:input!.sourceHash,version:input!.version,reviewed:true}):undefined;
+    if(source?.file){const form=new FormData();form.set('sourceRef',source.sourceRef);form.set('file',source.file);body=form;}
+    const suffix=source?'/source'+(method==='GET'?'?'+new URLSearchParams({sourceRef:source.sourceRef}):''):'';
     // Deliberately bind this operation to its captured token. Never retry a date write through another session.
-    const response=await fetch(recommendationBase+'/'+id+'/issue-date',{method,credentials:'same-origin',cache:'no-store',headers:{'Accept-Language':getStoredLocale(),Authorization:'Bearer '+accessToken,...(method==='PUT'?{'Content-Type':'application/json'}:{})},body});
+    const response=await fetch(recommendationBase+'/'+id+'/issue-date'+suffix,{method,credentials:'same-origin',cache:'no-store',headers:{'Accept-Language':getStoredLocale(),Authorization:'Bearer '+accessToken,...(method==='PUT'?{'Content-Type':'application/json'}:{})},body});
     if(!current())throw issueDateFailure(409,'SESSION_CHANGED');
     if(!response.ok){let errorCode:string|undefined;try{const value=await response.json() as {errorCode?:unknown};if(typeof value.errorCode==='string'&&/^[A-Z_]{1,100}$/.test(value.errorCode))errorCode=value.errorCode;}catch{/* Keep the original HTTP status. */}throw issueDateFailure(response.status,errorCode);}
-    const value=await response.json() as ApiResponse<RecommendationIssueDateReview>;
+    const value=await response.json() as ApiResponse<T>;
     if(!current())throw issueDateFailure(409,'SESSION_CHANGED');
     if(value?.status!=='success'||!value.data)throw issueDateFailure(200,'INVALID_RESPONSE');
     return value.data;
@@ -1161,6 +1163,8 @@ export const recommendationApi = {
     },
     getIssueDate:(id:number,accessToken:string)=>requestRecommendationIssueDate(id,accessToken,'GET'),
     saveIssueDate:(id:number,input:Readonly<RecommendationIssueDateRequest>,accessToken:string)=>requestRecommendationIssueDate(id,accessToken,'PUT',input),
+    getIssueDateSource:(id:number,sourceRef:string,accessToken:string)=>requestRecommendationIssueDate<RecommendationIssueDateSource>(id,accessToken,'GET',undefined,{sourceRef}),
+    uploadIssueDateSource:(id:number,sourceRef:string,file:File,accessToken:string)=>requestRecommendationIssueDate<RecommendationIssueDateSource>(id,accessToken,'POST',undefined,{sourceRef,file}),
     createService:(offer:ServiceOffer)=>postJson<RecommendationDetail,ServiceOffer>(recommendationBase+'/service-offers',offer),
     saveService:(id:number,offer:ServiceOffer,version:number)=>putJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/service-offer',{offer,version}),
     articleLanguage:(id:number,input:{locale:string;title:string;body:string;sourceHash:string;version:number;reviewed:boolean})=>putJson<RecommendationDetail,object>(recommendationBase+'/'+id+'/article-localizations',input),

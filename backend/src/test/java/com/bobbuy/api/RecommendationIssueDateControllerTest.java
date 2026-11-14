@@ -44,4 +44,15 @@ class RecommendationIssueDateControllerTest {
         when(service.save(eq(12L),any())).thenThrow(new RecommendationIssueDateService.Changed());mvc.perform(put(path).contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isConflict()).andExpect(jsonPath("$.errorCode").value("RECOMMENDATION_CHANGED"));
         when(service.get(12L)).thenReturn(new RecommendationIssueDateService.Review(null,null,null,null,null,"UNKNOWN",3));mvc.perform(get(path)).andExpect(status().isOk()).andExpect(jsonPath("$.data.issueDate").value(org.hamcrest.Matchers.nullValue())).andExpect(jsonPath("$.data.source").value("UNKNOWN"));
     }
+    @Test void sourceUploadAndPreviewExposeOnlyMetadataAndAcceptMultipart()throws Exception{
+        var value=new RecommendationIssueDateService.Source("message:source","a".repeat(64),RecommendationIssueDateService.RAW,true,false);
+        when(service.attach(eq(12L),eq("message:source"),any())).thenReturn(value);when(service.preview(12L,"message:source")).thenReturn(value);
+        mvc.perform(multipart(path+"/source").file(new org.springframework.mock.web.MockMultipartFile("file","x.eml","message/rfc822","private bytes".getBytes())).param("sourceRef","message:source"))
+            .andExpect(status().isOk()).andExpect(jsonPath("$.data.sourceHash").value("a".repeat(64))).andExpect(jsonPath("$.data.hashEditable").value(false)).andExpect(jsonPath("$.data.content").doesNotExist());
+        mvc.perform(get(path+"/source").param("sourceRef","message:source")).andExpect(status().isOk()).andExpect(jsonPath("$.data.sourceAvailable").value(true)).andExpect(jsonPath("$.data.content").doesNotExist());
+        when(service.attach(eq(12L),eq("message:source"),isNull())).thenThrow(new com.bobbuy.api.response.ApiException(com.bobbuy.api.response.ErrorCode.INVALID_REQUEST,"error.recommendation.invalid"));
+        mvc.perform(multipart(path+"/source").param("sourceRef","message:source")).andExpect(status().isBadRequest());
+        when(service.attach(eq(12L),anyString(),any())).thenThrow(new RecommendationIssueDateService.SourceConflict());
+        mvc.perform(multipart(path+"/source").file(new org.springframework.mock.web.MockMultipartFile("file","x.eml","message/rfc822",new byte[]{1})).param("sourceRef","message:source")).andExpect(status().isConflict()).andExpect(jsonPath("$.errorCode").value("SOURCE_ARTIFACT_CONFLICT"));
+    }
 }

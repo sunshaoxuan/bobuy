@@ -82,4 +82,47 @@ class RecommendationIssueDateServiceTest {
         var unknown=service.get(12L);assertThat(unknown.issueDate()).isNull();assertThat(unknown.sourceRef()).isNull();assertThat(unknown.reviewedBy()).isNull();
         reviewed(LocalDate.of(2026,10,1));assertThat(service.get(12L).source()).isEqualTo("REVIEWED_SOURCE");
     }
+    @Test void attachAndPreviewAnUnknownPostThenSaveWithoutManualHash(){
+        byte[] raw="Subject: Synthetic\r\n\r\nメール\r\n".getBytes(java.nio.charset.StandardCharsets.UTF_8);
+        var file=new org.springframework.mock.web.MockMultipartFile("file","source.eml","message/rfc822; charset=UTF-8",raw);
+        doAnswer(invocation->{RecommendationSourceArtifact a=invocation.getArgument(0);when(artifacts.findBySourceRef(a.sourceRef)).thenReturn(Optional.of(a));return a;}).when(artifacts).saveAndFlush(any());
+        assertThat(service.preview(12L,valid().sourceRef()).sourceAvailable()).isFalse();
+        var uploaded=service.attach(12L,valid().sourceRef(),file);
+        var capture=org.mockito.ArgumentCaptor.forClass(RecommendationSourceArtifact.class);verify(artifacts).saveAndFlush(capture.capture());
+        assertThat(capture.getValue().content).isEqualTo(raw);assertThat(capture.getValue().byteLength).isEqualTo(raw.length);
+        assertThat(uploaded.sourceHash()).isEqualTo(RecommendationIssueDateService.sourceHash(raw,RecommendationIssueDateService.RAW));
+        assertThat(uploaded.hashEditable()).isFalse();assertThat(service.get(12L).source()).isEqualTo("UNKNOWN");
+        assertThat(service.preview(12L,valid().sourceRef())).isEqualTo(uploaded);
+        assertThat(service.attach(12L,valid().sourceRef(),file)).isEqualTo(uploaded);verify(artifacts,times(1)).saveAndFlush(any());
+        assertThat(service.save(12L,request(valid().issueDate(),valid().sourceRef(),null,3,true)).sourceHash()).isEqualTo(uploaded.sourceHash());
+    }
+    @Test void fileTypesAndSizeAreValidatedAndHtmlBytesRemainExact(){
+        for(String[] values:List.of(new String[]{"source.eml",""},new String[]{"source","message/rfc822"},new String[]{"source.htm","application/octet-stream"},new String[]{"source.html","text/html; charset=utf-8"})){
+            var result=service.attach(12L,"message:"+values[0],new org.springframework.mock.web.MockMultipartFile("file",values[0],values[1],new byte[]{(byte)0xef,(byte)0xbb,(byte)0xbf,13,10}));
+            assertThat(result.algorithm()).isEqualTo(values[0].endsWith("htm")||values[0].endsWith("html")?RecommendationIssueDateService.HTML:RecommendationIssueDateService.RAW);
+        }
+        for(String[] values:List.of(new String[]{"x.pdf","application/pdf"},new String[]{"x.eml","text/html"},new String[]{"x.txt","text/plain"},new String[]{"x",""})){
+            assertThatThrownBy(()->service.attach(12L,"message:x",new org.springframework.mock.web.MockMultipartFile("file",values[0],values[1],new byte[]{1}))).isInstanceOf(ApiException.class);
+        }
+        for(byte[] bytes:List.of(new byte[0],new byte[10*1024*1024+1]))assertThatThrownBy(()->service.attach(12L,"message:x",new org.springframework.mock.web.MockMultipartFile("file","x.eml","message/rfc822",bytes))).isInstanceOf(ApiException.class);
+        assertThat(service.attach(12L,"message:limit",new org.springframework.mock.web.MockMultipartFile("file","limit.eml","message/rfc822",new byte[10*1024*1024])).sourceAvailable()).isTrue();
+    }
+    @Test void uploadNeverOverwritesExistingEvidenceAndUnknownHashAlgorithmIsLegacy(){
+        var a=new RecommendationSourceArtifact();a.sha256=hash;a.algorithm=RecommendationIssueDateService.RAW;
+        when(artifacts.findBySourceRef("message:existing")).thenReturn(Optional.of(a));
+        var file=new org.springframework.mock.web.MockMultipartFile("file","x.eml","message/rfc822",new byte[]{1});
+        assertThatThrownBy(()->service.attach(12L,"message:existing",file)).isInstanceOf(RecommendationIssueDateService.SourceConflict.class);
+        when(artifacts.existsById(anyString())).thenReturn(true);
+        assertThatThrownBy(()->service.attach(12L,"message:different-ref",file)).isInstanceOf(RecommendationIssueDateService.SourceConflict.class);
+        verify(artifacts,never()).saveAndFlush(any());reviewed(LocalDate.of(2026,1,1));assertThat(service.get(12L).algorithm()).isEqualTo(RecommendationIssueDateService.LEGACY);
+    }
+    @Test void sourceEndpointsCheckOwnerBeforeArtifactAccess(){
+        var file=new org.springframework.mock.web.MockMultipartFile("file","x.eml","message/rfc822",new byte[]{1});
+        when(posts.findByIdAndMerchantId(12L,7L)).thenReturn(Optional.empty());
+        assertThatThrownBy(()->service.preview(12L,"message:x")).isInstanceOf(ApiException.class);
+        assertThatThrownBy(()->service.attach(12L,"message:x",file)).isInstanceOf(ApiException.class);
+        authenticate(Role.CUSTOMER);assertThatThrownBy(()->service.attach(12L,"message:x",file)).isInstanceOf(ApiException.class);
+        SecurityContextHolder.clearContext();assertThatThrownBy(()->service.preview(12L,"message:x")).isInstanceOf(ApiException.class);
+        verifyNoInteractions(artifacts);
+    }
 }
