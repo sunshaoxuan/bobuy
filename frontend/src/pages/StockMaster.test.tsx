@@ -173,6 +173,16 @@ describe('StockMaster Component', () => {
     expect(screen.getAllByRole('button').some(button => button.querySelector('.anticon-edit'))).toBe(true);
   });
 
+  it('uses a short price heading and exposes the JPY unit description', async () => {
+    renderWithI18n(<StockMaster />);
+    await screen.findByText(/Organic Milk/i);
+
+    const priceHeading = screen.getByRole('columnheader', { name: '价格（日元 JPY）' });
+    expect(priceHeading).toHaveTextContent(/^价格$/);
+    expect(screen.queryByText('价格 (USD) (JPY)')).not.toBeInTheDocument();
+  });
+
+
   it('renders the stock master page with title and initial data', async () => {
     renderWithI18n(<StockMaster />);
     expect(screen.getByText(/库存大师 - 批量上架/i)).toBeInTheDocument();

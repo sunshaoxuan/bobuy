@@ -780,6 +780,8 @@ const messages: Dictionary = {
     'stock.item.name': "商品名",
     'stock.item.category': "カテゴリ",
     'stock.item.price': "価格 (USD)",
+    'stock.table.price_short': '価格',
+    'stock.table.price_jpy': '価格（日本円 JPY）',
     'stock.item.quantity': "在庫数",
     'stock.item.unit': "単位",
     'stock.status.new': "公開待ち",

@@ -630,7 +630,13 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
       render: (text: string) => { const category=categories.find(item=>item.id===text); const label=category?.name?.[locale] ?? category?.name?.['en-US'] ?? text; return compactText(label, label); }
     },
     {
-      title: t('stock.item.price')+' (JPY)',
+      title: (
+        <Tooltip title={t('stock.table.price_jpy')} trigger={['hover', 'focus']}>
+          <span className="stock-compact-price-heading" tabIndex={0} aria-label={t('stock.table.price_jpy')}>
+            {t('stock.table.price_short')}
+          </span>
+        </Tooltip>
+      ),
       dataIndex: 'price',
       width: 100,
       hidden: !showSecondaryColumns,

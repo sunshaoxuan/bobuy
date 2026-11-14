@@ -779,6 +779,8 @@ const messages: Dictionary = {
     'stock.item.name': '商品名称',
     'stock.item.category': '类目',
     'stock.item.price': '价格 (USD)',
+    'stock.table.price_short': '价格',
+    'stock.table.price_jpy': '价格（日元 JPY）',
     'stock.item.quantity': '库存数量',
     'stock.item.unit': '单位',
     'stock.status.new': '待发布',
