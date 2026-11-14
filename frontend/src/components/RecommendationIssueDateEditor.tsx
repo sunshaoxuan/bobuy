@@ -5,7 +5,7 @@ import {Alert,Button,Checkbox,Input,Spin,Tooltip,Upload} from 'antd';
 export type RecommendationIssueDateReview={issueDate:string|null;sourceRef:string|null;sourceHash:string|null;reviewedBy:number|null;reviewedAt:string|null;source:'REVIEWED_SOURCE'|'UNKNOWN';version:number;algorithm?:string|null;sourceAvailable?:boolean;computedHash?:string|null;hashEditable?:boolean};
 export type RecommendationIssueDateRequest={issueDate:string;sourceRef:string;sourceHash?:string;version:number;reviewed:true};
 export type RecommendationIssueDateSource={sourceRef:string;sourceHash:string|null;algorithm:string|null;sourceAvailable:boolean;hashEditable:boolean};
-export type RecommendationIssueDateCopy=Record<'title'|'help'|'current'|'date'|'reference'|'hash'|'reviewer'|'reviewedAt'|'unknown'|'unknownHint'|'reviewedState'|'reviewed'|'save'|'reload'|'useSaved'|'loading'|'loadFailed'|'saveFailed'|'conflict'|'invalidResponse'|'saved'|'reloaded'|'invalidDate'|'invalidReference'|'invalidHash'|'unavailable',string>&Partial<Record<'hashHelp'|'automaticHash'|'manualHash'|'attach'|'attachHelp'|'sourceFailed'|'sourceConflict'|'invalidFile'|'confirmRequired',string>>;
+export type RecommendationIssueDateCopy=Record<'title'|'help'|'current'|'date'|'reference'|'hash'|'reviewer'|'reviewedAt'|'unknown'|'unknownHint'|'reviewedState'|'reviewed'|'save'|'reload'|'useSaved'|'loading'|'loadFailed'|'saveFailed'|'conflict'|'invalidResponse'|'saved'|'reloaded'|'invalidDate'|'invalidReference'|'invalidHash'|'unavailable',string>&Partial<Record<'hashHelp'|'automaticHash'|'manualHash'|'attach'|'attachHelp'|'attachHelpReady'|'attachHelpReviewed'|'sourceFailed'|'sourceConflict'|'invalidFile'|'confirmRequired',string>>;
 type Draft={issueDate:string;sourceRef:string;sourceHash:string;reviewed:boolean};
 type ErrorKind='loadFailed'|'saveFailed'|'conflict'|'invalidResponse';
 type State={scope:string;review?:RecommendationIssueDateReview;draft:Draft;dirty:boolean;needsReload:boolean;busy:'read'|'save'|null;error?:ErrorKind;notice?:'saved'|'reloaded'};
@@ -38,6 +38,7 @@ export default function RecommendationIssueDateEditor({post,actorKey,sessionKey,
  latestScope.current=scope;knownVersion.current=post.version;
  const callbacks=useRef({get,save,lookupSource,uploadSource,onSaved,onDirtyChange});callbacks.current={get,save,lookupSource,uploadSource,onSaved,onDirtyChange};
  const [state,setState]=useState<State>(()=>empty(scope));const view=state.scope===scope?state:empty(scope);
+ const [touched,setTouched]=useState<Partial<Record<'issueDate'|'sourceRef'|'sourceHash',boolean>>>({});
  const sourceOperation=useRef(0);
  const [sourceState,setSourceState]=useState<{scope:string;ref:string;busy:boolean;value?:RecommendationIssueDateSource;error?:'sourceFailed'|'sourceConflict'|'invalidFile'}>();
  const sourceView=sourceState?.scope===scope&&sourceState.ref===view.draft.sourceRef?sourceState:undefined;
@@ -54,7 +55,7 @@ export default function RecommendationIssueDateEditor({post,actorKey,sessionKey,
    setState(previous=>{const keep=previous.scope===scope&&preserve&&previous.dirty;return{scope,review:value,draft:keep?{...previous.draft,reviewed:false}:draftFrom(value),dirty:keep,needsReload:false,busy:null,notice:preserve?'reloaded':undefined};});
   }catch(error){if(current(token))setState(previous=>({...previous,busy:null,needsReload:true,error:error==='invalidResponse'?'invalidResponse':error==='conflict'||changed(error)?'conflict':'loadFailed'}));}
  }
- useEffect(()=>{mounted.current=true;setState(empty(scope));if(eligible)void read(false);return()=>{mounted.current=false;operation.current++;sourceOperation.current++;};},[scope,eligible]);
+ useEffect(()=>{mounted.current=true;setState(empty(scope));setTouched({});if(eligible)void read(false);return()=>{mounted.current=false;operation.current++;sourceOperation.current++;};},[scope,eligible]);
  useEffect(()=>{
   if(!eligible||!view.review||!validReference(view.draft.sourceRef)||!callbacks.current.lookupSource)return;
   void resolveSource();
@@ -75,7 +76,7 @@ export default function RecommendationIssueDateEditor({post,actorKey,sessionKey,
  useEffect(()=>{setState(previous=>previous.scope===scope&&previous.review&&post.version>previous.review.version?{...previous,needsReload:true,dirty:true,draft:{...previous.draft,reviewed:false},error:'conflict',notice:undefined}:previous);},[scope,post.version]);
  useEffect(()=>{callbacks.current.onDirtyChange?.(view.dirty);},[scope,view.dirty]);
  useEffect(()=>()=>{callbacks.current.onDirtyChange?.(false);},[]);
- function edit(patch:Partial<Draft>){if(patch.sourceRef!==undefined){sourceOperation.current++;setSourceState(undefined);}setState(previous=>previous.scope===scope?{...previous,draft:{...previous.draft,...patch,reviewed:false},dirty:true,notice:undefined}:previous);}
+ function edit(patch:Partial<Draft>){if(patch.sourceRef!==undefined){sourceOperation.current++;setSourceState(undefined);}setTouched(previous=>({...previous,...Object.fromEntries(Object.keys(patch).map(key=>[key,true]))}));setState(previous=>previous.scope===scope?{...previous,draft:{...previous.draft,...patch,reviewed:false},dirty:true,notice:undefined}:previous);}
  async function submit(){
   if(!eligible||view.busy||sourcePending||sourceView?.error||view.needsReload||!view.review||!view.draft.reviewed||validation||writing.current?.scope===scope&&writing.current.token===operation.current)return;
   const request:RecommendationIssueDateRequest={issueDate:view.draft.issueDate,sourceRef:view.draft.sourceRef,...(!automatic&&{sourceHash:view.draft.sourceHash.toLowerCase()}),version:view.review.version,reviewed:true};
@@ -91,6 +92,9 @@ export default function RecommendationIssueDateEditor({post,actorKey,sessionKey,
  }
  if(!eligible)return <Alert type="info" message={copy.unavailable}/>;
  const saving=view.busy==='save',ready=!!view.review&&!view.needsReload&&!view.busy&&!sourcePending&&!sourceView?.error;
+ const referenceValid=validReference(view.draft.sourceRef);
+ const visibleValidation=touched.issueDate&&!validDate(view.draft.issueDate)?'invalidDate':touched.sourceRef&&!referenceValid?'invalidReference':touched.sourceHash&&!/^[0-9a-fA-F]{64}$/.test(effectiveHash)?'invalidHash':undefined;
+ const attachHelp=referenceValid?(automatic?(copy.attachHelpReviewed??copy.confirmRequired??copy.attachHelp):(copy.attachHelpReady??copy.attachHelp)):copy.attachHelp;
  return <section className="rec-issue-date-editor" aria-label={copy.title} aria-busy={!!view.busy}>
   <h3>{copy.title}</h3><p>{copy.help}</p>
   {view.error&&<Alert type="error" message={copy[view.error]} showIcon/>}{view.notice&&<Alert type="success" message={copy[view.notice]} showIcon/>}
@@ -104,13 +108,13 @@ export default function RecommendationIssueDateEditor({post,actorKey,sessionKey,
     <dt>{copy.reviewer}</dt><dd>{view.review.reviewedBy}</dd><dt>{copy.reviewedAt}</dt><dd><time dateTime={view.review.reviewedAt!}>{view.review.reviewedAt}</time></dd>
    </>}
   </dl>
-  <label htmlFor={id+'-date'}>{copy.date}</label><Input id={id+'-date'} type="date" value={view.draft.issueDate} disabled={saving} onChange={e=>edit({issueDate:e.target.value})}/>
-  <label htmlFor={id+'-ref'}>{copy.reference}</label><Input id={id+'-ref'} value={view.draft.sourceRef} disabled={saving} autoComplete="off" onChange={e=>edit({sourceRef:e.target.value})}/>
-  {uploadSource&&<div className="rec-issue-date-attach"><Upload accept=".eml,.html,.htm,message/rfc822,text/html" showUploadList={false} disabled={saving||sourcePending||!validReference(view.draft.sourceRef)} beforeUpload={file=>{void resolveSource(file);return false;}}><Button loading={sourcePending} disabled={saving||sourcePending||!validReference(view.draft.sourceRef)}>{copy.attach}</Button></Upload><p>{copy.attachHelp}</p></div>}
+  <label htmlFor={id+'-date'}>{copy.date}</label><Input id={id+'-date'} type="date" value={view.draft.issueDate} status={touched.issueDate&&!validDate(view.draft.issueDate)?'error':undefined} disabled={saving} onChange={e=>edit({issueDate:e.target.value})}/>
+  <label htmlFor={id+'-ref'}>{copy.reference}</label><Input id={id+'-ref'} value={view.draft.sourceRef} status={touched.sourceRef&&!referenceValid?'error':undefined} disabled={saving} autoComplete="off" onChange={e=>edit({sourceRef:e.target.value})}/>
+  {uploadSource&&<div className="rec-issue-date-attach"><Upload accept=".eml,.html,.htm,message/rfc822,text/html" showUploadList={false} disabled={saving||sourcePending||!referenceValid} beforeUpload={file=>{void resolveSource(file);return false;}}><Button loading={sourcePending} disabled={saving||sourcePending||!referenceValid}>{copy.attach}</Button></Upload><p>{attachHelp}</p></div>}
   {sourceView?.error&&<Alert type="error" message={copy[sourceView.error]} showIcon/>}
   <div className="rec-issue-date-hash-label"><label htmlFor={id+'-hash'}>{copy.hash}</label><Tooltip title={copy.hashHelp}><Button type="text" className="rec-issue-date-help" aria-label={copy.hashHelp??copy.hash+' help'}>?</Button></Tooltip></div>
-  {automatic?<div id={id+'-hash'} className="rec-issue-date-computed" role="textbox" aria-label={copy.hash} aria-readonly="true"><code>{effectiveHash}</code><small>{copy.automaticHash} · {resolved?.algorithm??view.review?.algorithm}</small></div>:<><Alert type="info" message={copy.manualHash}/><Input id={id+'-hash'} value={view.draft.sourceHash} disabled={saving||sourcePending} autoComplete="off" spellCheck={false} onChange={e=>edit({sourceHash:e.target.value})}/></>}
-  {view.dirty&&validation&&<Alert type="warning" message={copy[validation]}/>}
+  {automatic?<div id={id+'-hash'} className="rec-issue-date-computed" role="textbox" aria-label={copy.hash} aria-readonly="true"><code>{effectiveHash}</code><small>{copy.automaticHash} · {resolved?.algorithm??view.review?.algorithm}</small></div>:<><Alert type="info" message={copy.manualHash}/><Input id={id+'-hash'} value={view.draft.sourceHash} status={touched.sourceHash&&!/^[0-9a-fA-F]{64}$/.test(effectiveHash)?'error':undefined} disabled={saving||sourcePending} autoComplete="off" spellCheck={false} onChange={e=>edit({sourceHash:e.target.value})}/></>}
+  {visibleValidation&&<Alert type="warning" message={copy[visibleValidation]}/>}
   <Checkbox checked={view.draft.reviewed} disabled={!ready||!!validation} onChange={e=>setState(previous=>({...previous,draft:{...previous.draft,reviewed:e.target.checked}}))}>{copy.reviewed}</Checkbox>
   {!view.draft.reviewed&&!validation&&<p role="status">{copy.confirmRequired??copy.reviewed}</p>}
   <Button type="primary" loading={saving} disabled={!ready||!view.draft.reviewed||!!validation} onClick={()=>void submit()}>{copy.save}</Button>

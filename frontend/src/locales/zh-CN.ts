@@ -1444,6 +1444,8 @@ const messages: Dictionary = {
   "issueDate.manualHash": "此引用暂无已存来源。附加来源文件即可自动计算；无法取得文件时可填写已核验的 64 位摘要。",
   "issueDate.attach": "附加来源邮件或 HTML",
   "issueDate.attachHelp": "请先填写来源引用。支持 .eml（首选）或 .html/.htm，最大 10 MiB。服务器保存原始字节并计算 SHA-256。",
+  "issueDate.attachHelpReady": "来源引用有效。下一步请附加 .eml（首选）或 .html/.htm（最大 10 MiB），以自动计算 SHA-256。",
+  "issueDate.attachHelpReviewed": "来源产物与只读哈希已就绪。核对后勾选“我已审核”并保存。",
   "issueDate.sourceFailed": "来源查询或上传失败。请检查引用和文件类型，重新附加或重新读取。",
   "issueDate.sourceConflict": "此引用或文件已关联已存证据。请使用原始来源引用及文件；已存证据无法替换。",
   "issueDate.invalidFile": "请选择非空且不超过 10 MiB 的 .eml 或 HTML 文件。",

@@ -41,6 +41,15 @@ it('looks up the draft reference for UNKNOWN posts and attaches a file before fi
  await waitFor(()=>expect(screen.getByRole('textbox',{name:copy.hash})).toHaveAttribute('aria-readonly','true'));expect(uploadSource).toHaveBeenCalledWith(8,source.sourceRef,file);
  expect(screen.getByRole('checkbox',{name:copy.reviewed})).not.toBeChecked();confirm();submit();await screen.findByText(copy.saved);expect(save.mock.calls[0][1]).not.toHaveProperty('sourceHash');
 });
+it('keeps a valid reference out of the error state and advances the attachment guidance',async()=>{
+ const available={sourceRef:'https://example.com/costco-2026-11-11',sourceHash:hash,algorithm:'recommendation-issue-date-source-v1',sourceAvailable:true,hashEditable:false};
+ let targetLookups=0;const lookupSource=vi.fn().mockImplementation((_id,sourceRef)=>Promise.resolve(sourceRef===available.sourceRef&&++targetLookups===2?available:{sourceRef,sourceHash:null,algorithm:null,sourceAvailable:false,hashEditable:true}));
+ render(tree({lookupSource,uploadSource:vi.fn(),copy:{...copy,attach:'Attach source',attachHelp:'Enter a source reference first.',attachHelpReady:'Attach a source file next.',attachHelpReviewed:'Verify, check reviewed, and save.'}}));await ready();
+ const reference=screen.getByLabelText(copy.reference);expect(reference).not.toHaveClass('ant-input-status-error');expect(screen.getByText('Enter a source reference first.')).toBeVisible();
+ fireEvent.change(reference,{target:{value:available.sourceRef}});await screen.findByText('Attach a source file next.');expect(reference).not.toHaveClass('ant-input-status-error');expect(screen.queryByText('Enter a source reference first.')).not.toBeInTheDocument();
+ fireEvent.change(reference,{target:{value:'message:another'}});fireEvent.change(reference,{target:{value:available.sourceRef}});await screen.findByText('Verify, check reviewed, and save.');expect(reference).not.toHaveClass('ant-input-status-error');
+ fireEvent.change(reference,{target:{value:'not a source'}});expect(reference).toHaveClass('ant-input-status-error');expect(screen.getByText(copy.invalidReference)).toBeVisible();
+});
 it('uses a pre-stored artifact for a draft ref and ignores a stale lookup after another ref',async()=>{
  const old=deferred<any>();const source={sourceRef:'message:new',sourceHash:otherHash,algorithm:'recommendation-issue-date-source-html-utf8-v1',sourceAvailable:true,hashEditable:false};
  const lookupSource=vi.fn().mockReturnValueOnce(old.promise).mockResolvedValue(source);render(tree({lookupSource}));await ready();

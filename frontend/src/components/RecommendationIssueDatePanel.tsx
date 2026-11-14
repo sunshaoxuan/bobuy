@@ -6,7 +6,7 @@ import {getStoredAccessToken,getStoredUser,subscribeToAuthChanges} from '../auth
 import {useI18n} from '../i18n';
 import Editor,{type RecommendationIssueDateCopy,type RecommendationIssueDateReview as Review,type RecommendationIssueDateRequest as Request} from './RecommendationIssueDateEditor';
 
-const keys=['title','help','current','date','reference','hash','hashHelp','automaticHash','manualHash','attach','attachHelp','sourceFailed','sourceConflict','invalidFile','confirmRequired','reviewer','reviewedAt','unknown','unknownHint','reviewedState','reviewed','save','reload','useSaved','loading','loadFailed','saveFailed','conflict','invalidResponse','saved','reloaded','invalidDate','invalidReference','invalidHash','unavailable'] as const;
+const keys=['title','help','current','date','reference','hash','hashHelp','automaticHash','manualHash','attach','attachHelp','attachHelpReady','attachHelpReviewed','sourceFailed','sourceConflict','invalidFile','confirmRequired','reviewer','reviewedAt','unknown','unknownHint','reviewedState','reviewed','save','reload','useSaved','loading','loadFailed','saveFailed','conflict','invalidResponse','saved','reloaded','invalidDate','invalidReference','invalidHash','unavailable'] as const;
 type Session={id:number|null;agent:boolean;token:string|null;generation:number};
 function readSession(generation:number):Session{const user=getStoredUser();return{id:user?.id??null,agent:user?.roles.includes('AGENT')===true,token:getStoredAccessToken(),generation};}
 const conflict=()=>Object.assign(new Error('Recommendation changed'),{status:409,errorCode:'RECOMMENDATION_CHANGED'});
