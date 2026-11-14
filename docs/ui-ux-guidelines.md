@@ -1,0 +1,83 @@
+# Bobuy UI/UX 开发标准
+
+面向所有会改到用户界面的任务。功能和美观都是验收项，缺一不可。本标准以 **2026-11-14 已上线站点（`main`，含 #94）的真实实现** 为准，token 与数值均从当前前端代码提取。历史规划若与现行代码冲突，以本标准与现行 CSS 为准。
+
+相关文档：`docs/guides/GUIDE-08-i18n规范.md`、`docs/design/STOREFRONT-PINTEREST.md`。
+
+## 1. 原则
+1. **先复用，再新做。** 优先使用页面已有控件、class 与 token。
+2. **禁止原生未样式化控件。** checkbox、radio、select、button 必须有完整视觉状态。
+3. **与邻居齐高对齐。** 同组控件的高度、圆角和间距必须一致。
+4. 公开商城 `.storefront` 与工作台 `.app-shell` / `.merchant-shell` 是两套表面，不得混用；商城不可使用后台 Ant Design `Switch`。
+5. 当前没有暗色模式，不得擅自增加。
+6. 新动效须尊重 `prefers-reduced-motion`。
+
+## 2. 已落地 token
+### 2.1 工作台全局
+`--zen-bg: #faf9f6`；`--zen-ink: #2d2926`；`--zen-muted: rgba(45, 41, 38, 0.58)`；`--zen-line: 0.5px solid rgba(0, 0, 0, 0.08)`；空间为 `0.5rem / 1rem / 1.5rem`；`--blur-glass: 10px`；玻璃不透明度为 `0.9 / 0.82 / 0.72`；投影为 `none`。字体为 `Inter`, `Segoe UI`, system-ui, sans-serif。
+
+### 2.2 公开商城
+强调色 `#d93630`，hover `#ce3028`；背景 `#fff`；主文字 `#232323 / #191919 / #242424 / #282828`；辅助文字 `#626262 / #666 / #777 / #555`；浅底 `#f3f3f3 / #f5f5f5 / #f0f0ed / #f7f7f7`；选中深底 `#242424 / #252525 / #171717`；边框 `#d9d9d9 / #ededed / #eee / #00000010`。默认字号 **15px**，行高 **1.65**。
+
+### 2.3 圆角家族
+已有 **6px**、**8px**、**16–20px**、**24px**、**26–28px / 999px**。同组使用同档。本程好物排序和分类胶囊均为 **8px**。
+
+### 2.4 断点与验收视口
+主移动断点 **`max-width: 767px`**；另有 `375px`、`650px`、`1023px`、`1099px`、`1199px`。至少在 **390×844** 与 **1280×800**（或 1280×900）截图自检。
+
+## 3. 控件规范
+所有可点击控件最小高度 / 触控目标 **≥ 44px**。
+
+### 3.1 按钮
+商城主按钮 `#d93630`，hover `#ce3028`；后台主按钮 `#252529`，hover `#45454c`。砖红色不得用于筛选芯片。
+
+### 3.2 搜索
+`.browse-search` 最小高度 48px、圆角约 28px、填充 `#f0f0ed`、无边框，不得套到短筛选控件。
+
+### 3.3 选择器
+`.product-sort` 高度 44px，最小宽 200px，边框 `1px solid #d9d9d9`，圆角 **8px**，白底，文字 `#282828`，字号 14px，内边距 `8px 30px 8px 12px`；焦点 `outline: 2px solid #795908; outline-offset: 2px`；≤375px 拉满。
+
+### 3.4 分类胶囊 / 筛选芯片
+容器 gap 8–9px；未选中 `#f3f3f3` / `#f5f6f5`、文字 `#303846`；选中 `#242424` / `#252525`、白字；内边距 `10px 16px` / `10px 18px`；最小高 44px；字号 14px、字重 500。本程好物页用 **8px** 圆角。
+
+### 3.5 开关与布尔筛选
+Ant Design `Switch` 只用于后台。公开商城布尔筛选使用 `button` + `aria-pressed`（或视觉隐藏 input + 已设计 label），不得使用浏览器默认 checkbox。
+
+### 3.6 控件组 / 过滤栏（必须遵守）
+使用 `display:flex; align-items:center; flex-wrap:wrap` 与已有 gap；同组齐高；窄屏换行且不撑出视口；未选中浅灰、选中深底白字；排序旁焦点优先用 `2px solid #795908`；hover 仅用于精细指针；禁用态仍保持 44px 命中区。
+
+## 4. 状态、无障碍与动效
+控件须有默认、hover、`:focus-visible`、active、disabled（如适用）；不得无替代地移除 outline。须有可见标签或 `aria-label`；布尔芯片用 `aria-pressed`；保证键盘可达、对比度足够、焦点不被裁切。
+
+## 5. 文案与 i18n
+用户可见文案走 `zh-CN`、`zh-TW`、`en-US`、`ja-JP` 四语资源。按最长译名设计：「标记商品优先」「標記商品優先」「Marked products first」「マーカー付き商品を優先」。不得溢出、重叠或随意截断。
+
+## 6. 可复用实现（先找这些）
+| 需求 | 复用 |
+|---|---|
+| 商品排序 | `ProductSort.tsx` 与 `.product-sort` |
+| 分类筛选条 | `BrowseSupport` 的 `.rec-category-filters` |
+| 本程好物 | `PublicProductCatalog.tsx`、`public-catalog.css` |
+| 后台开关 | Ant Design `Switch`（仅工作台） |
+| 四语词条 | `frontend/src/locales/*.ts` |
+
+## 7. Codex / 开发者自检清单
+- [ ] 复用 token / class / 组件，无新主色、圆角体系或未样式化控件。
+- [ ] 同组齐高、间距一致、圆角同档。
+- [ ] 默认 / hover / focus-visible / active（及 disabled）完整。
+- [ ] 触控目标 ≥44px，标签、键盘操作和对比度完整。
+- [ ] 四语文案在 390px 不溢出。
+- [ ] 在 390px 和 1280px 截图；栈不可用时如实说明。
+- [ ] 窄屏无横向滚动、重叠；reduced motion 未破坏；未扩大范围。
+
+## 8. 标准验收条款（每个相关 issue 必须附上）
+```text
+功能与美观同时验收，须符合 docs/ui-ux-guidelines.md：
+- 功能按本 issue 需求逐条通过，不改变未授权行为。
+- 视觉与所在页面现有 UI 一致：复用已有 token 与组件，禁止原生未样式化控件，新控件与相邻控件齐高、同圆角档、间距统一。
+- 具备默认 / hover / focus-visible / 选中或激活态；触控目标 ≥ 44px；键盘可操作；有可见标签或 aria-label；对比度足够。
+- 四语文案（含较长的 en-US / ja-JP）在窄屏不溢出、不重叠。
+- PR 附 390px 与 1280px 的改动区域截图（含关键状态）。Playwright 可用则用现有脚本或一次性检查生成。
+- 主移动断点 767px 及 390px 下布局正常换行，无横向溢出。
+- 只运行与本次改动相关的最小测试；PR checks 通过。
+```
