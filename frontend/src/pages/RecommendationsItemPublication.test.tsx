@@ -5,6 +5,16 @@ import {serviceFixture} from '../serviceOffer.fixture';
 import {storeAuthSession} from '../authStorage';
 import Recommendations from './Recommendations';
 const mocks=vi.hoisted(()=>({get:vi.fn(),list:vi.fn(),publishItem:vi.fn(),publish:vi.fn(),save:vi.fn(),products:vi.fn()}));
+// Select injects CSS selectors unsupported by jsdom/nwsapi even with its dropdown closed.
+// Keep FactsForm and the real confirmation modal so draft retention and consent are exercised.
+vi.mock('antd',async()=>{
+ const actual=await vi.importActual<typeof import('antd')>('antd');
+ return {...actual,Select:({id,options=[],value,onChange,disabled,'aria-label':label}:any)=>(
+  <select id={id} aria-label={label} disabled={disabled} value={value??''} onChange={event=>onChange?.(event.target.value)}>
+   <option value=""/>{options.map((option:any)=><option key={option.value} value={option.value}>{option.label}</option>)}
+  </select>
+ )};
+});
 vi.mock('../api',()=>({api:{products:mocks.products},recommendationApi:mocks,storefrontApi:{products:mocks.products}}));
 vi.mock('../components/RecommendationList',()=>({default:()=>null}));
 vi.mock('../components/RecommendationClassification',()=>({default:({detail}:any)=><div data-testid="classification-items">{detail.items.map((item:any)=>item.id).join(',')}</div>}));
@@ -19,6 +29,7 @@ const ready={id:801,name:'Ready Tea',itemNumber:'READY',productId:'product-ready
 const missing={id:802,name:'Missing 1731065',itemNumber:'1731065',referencePrice:200,imageUrl:'/synthetic-gap.png',publicationState:'PENDING'};
 const draft={post:{id:8,title:'Original issue',version:4,published:false,updatedAt:'2026-11-09'},body:'Saved article body',items:[ready,missing]};
 const clone=<T,>(value:T):T=>structuredClone(value);
+const originalScrollIntoView=HTMLElement.prototype.scrollIntoView;
 function published(value:any,itemId=801){return {...clone(value),post:{...value.post,published:true,version:value.post.version+1},items:value.items.map((item:any)=>item.id===itemId?{...item,publicationState:'PUBLISHED'}:{...item})};}
 function RouteControl(){const navigate=useNavigate();return <button onClick={()=>navigate('/admin/recommendations?post=2')}>Other issue</button>;}
 function show(postId=8){const router=createMemoryRouter([{path:'*',element:<><RouteControl/><Recommendations/></>}],{initialEntries:['/admin/recommendations?post='+postId]});return render(<I18nProvider><RouterProvider router={router}/></I18nProvider>);}
@@ -26,7 +37,7 @@ const card=(name:string)=>within(screen.getByRole('heading',{name}).closest('art
 function review(name='Ready Tea'){fireEvent.click(card(name).getByRole('checkbox',{name:/I checked this item/}));}
 const publishButton=(name='Ready Tea')=>card(name).getByRole('button',{name:'Publish this item: '+name});
 beforeEach(async()=>{localStorage.clear();localStorage.setItem('bobbuy_locale','en-US');vi.resetAllMocks();mocks.products.mockResolvedValue([]);mocks.get.mockResolvedValue(clone(draft));const {transferableAbortController}=await vi.importActual<{transferableAbortController:()=>AbortController}>('node:util');vi.stubGlobal('AbortController',class {constructor(){return transferableAbortController();}});});
-afterEach(()=>{vi.unstubAllGlobals();});
+afterEach(()=>{vi.unstubAllGlobals();HTMLElement.prototype.scrollIntoView=originalScrollIntoView;});
 
 it('publishes a ready post8 item alone while 1731065 stays pending; synchronous double clicks send once',async()=>{
  let finish!:(value:any)=>void;mocks.publishItem.mockImplementation(()=>new Promise(resolve=>finish=resolve));
@@ -59,12 +70,73 @@ it('does not enable publication with absent or malformed review/version metadata
  expect(mocks.publishItem).not.toHaveBeenCalled();
 });
 
+it('lists the issue11 supplier gap beside the item, keeps review checked and opens source editing',async()=>{
+ mocks.publishItem.mockRejectedValue(Object.assign(new Error('Complete each listed item before publishing.'),{status:400,conditions:[{code:'REFERENCE_SUPPLIER_KEY_MISSING',message:'The source supplier identifier is missing. Open the item source context and complete it.',target:'SOURCE_CONTEXT'}]}));
+ show();await screen.findByDisplayValue('Original issue');review();fireEvent.click(publishButton());
+ expect(await card('Ready Tea').findByText(/source supplier identifier is missing/)).toBeInTheDocument();
+ expect(card('Ready Tea').queryByText(/title, body and at least one linked product/i)).toBeNull();
+ expect(card('Ready Tea').getByRole('checkbox',{name:/I checked this item/})).toBeChecked();
+ expect(card('Ready Tea').getByRole('button',{name:'Edit source context'})).toBeEnabled();
+});
+
+it('lists every issue12 source and localized-master gap with product-master jump targets',async()=>{
+ const conditions=[
+  ['REFERENCE_CHANNEL_MISSING','The source channel is missing.','SOURCE_CONTEXT'],['REFERENCE_SOURCE_MESSAGE_KEY_MISSING','The source email or campaign identifier is missing.','SOURCE_CONTEXT'],['REFERENCE_SOURCE_URL_INVALID','The source URL is missing or invalid.','SOURCE_CONTEXT'],
+  ['PRODUCT_NAME_ZH_TW_MISSING','The product-master zh-TW name is missing.','PRODUCT_MASTER'],['PRODUCT_SPECIFICATION_ZH_TW_MISSING','The product-master zh-TW specification is missing.','PRODUCT_MASTER'],['PRODUCT_SPECIFICATION_EN_US_MISSING','The product-master en-US specification is missing.','PRODUCT_MASTER']
+ ].map(([code,message,target])=>({code,message,target}));
+ mocks.publishItem.mockRejectedValue(Object.assign(new Error('Complete each listed item before publishing.'),{status:400,conditions}));show();await screen.findByDisplayValue('Original issue');review();fireEvent.click(publishButton());
+ const failureList=await card('Ready Tea').findByRole('alert',{name:'Publication requirements'});for(const value of conditions)expect(failureList).toHaveTextContent(value.message);
+ expect(card('Ready Tea').getAllByRole('link',{name:'Open product master'})).toHaveLength(3);expect(card('Ready Tea').getAllByRole('link',{name:'Open product master'})[0]).toHaveAttribute('href','/admin/products?product=product-ready#editor');
+ expect(card('Ready Tea').getByRole('checkbox',{name:/I checked this item/})).toBeChecked();
+});
+
 it('retries an uncertain response with exactly the same request key and facts',async()=>{
  mocks.publishItem.mockRejectedValueOnce(new TypeError('Response lost')).mockResolvedValueOnce(published(draft));
  show();await screen.findByDisplayValue('Original issue');review();fireEvent.click(publishButton());
  const retry=await screen.findByRole('button',{name:'Retry this publication: Ready Tea'});fireEvent.click(retry);
  await waitFor(()=>expect(mocks.publishItem).toHaveBeenCalledTimes(2));expect(mocks.publishItem.mock.calls[1]).toEqual(mocks.publishItem.mock.calls[0]);
  await waitFor(()=>expect(card('Ready Tea').getByText('Published')).toBeInTheDocument());
+});
+
+it('preserves source corrections across repair buttons and requires consent before switching items',async()=>{
+ const conditions=['REFERENCE_SUPPLIER_KEY_MISSING','REFERENCE_VARIANT_KEY_MISSING'].map(code=>({code,message:code,target:'SOURCE_CONTEXT'}));
+ mocks.get.mockResolvedValue({...clone(draft),items:[ready,{...ready,...missing,productId:'product-other'}]});
+ mocks.publishItem.mockRejectedValue(Object.assign(new Error('Missing source facts'),{status:400,conditions}));
+ show();await screen.findByDisplayValue('Original issue');review();fireEvent.click(publishButton());
+ await card('Ready Tea').findByRole('alert',{name:'Publication requirements'});
+ review('Missing 1731065');fireEvent.click(publishButton('Missing 1731065'));
+ await card('Missing 1731065').findByRole('alert',{name:'Publication requirements'});
+ HTMLElement.prototype.scrollIntoView=vi.fn();
+ fireEvent.click(card('Ready Tea').getAllByRole('button',{name:'Edit source context'})[0]);
+ const supplier=()=>card('Ready Tea').getByLabelText(translate('en-US','ref.supplierKey'));
+ fireEvent.change(supplier(),{target:{value:'Unsaved supplier correction'}});
+ fireEvent.click(card('Ready Tea').getAllByRole('button',{name:'Edit source context'})[1]);
+ expect(supplier()).toHaveValue('Unsaved supplier correction');
+ fireEvent.click(card('Ready Tea').getByRole('button',{name:'Edit item facts: Ready Tea'}));
+ expect(supplier()).toHaveValue('Unsaved supplier correction');
+ fireEvent.click(card('Missing 1731065').getAllByRole('button',{name:'Edit source context'})[0]);
+ let dialog=await screen.findByRole('dialog');
+ fireEvent.click(within(dialog).getByRole('button',{name:translate('en-US','article.leave_stay')}));
+ await waitFor(()=>expect(screen.queryByRole('dialog')).toBeNull());
+ expect(supplier()).toHaveValue('Unsaved supplier correction');
+ fireEvent.click(card('Missing 1731065').getByRole('button',{name:'Edit item facts: Missing 1731065'}));
+ dialog=await screen.findByRole('dialog');
+ fireEvent.click(within(dialog).getByRole('button',{name:'Discard changes'}));
+ await waitFor(()=>expect(card('Missing 1731065').getByLabelText(translate('en-US','ref.supplierKey'))).toBeInTheDocument());
+ expect(card('Ready Tea').queryByLabelText(translate('en-US','ref.supplierKey'))).toBeNull();
+ await waitFor(()=>expect(screen.queryByRole('dialog')).toBeNull());
+ fireEvent.click(card('Ready Tea').getByRole('button',{name:'Edit item facts: Ready Tea'}));
+ expect(supplier()).toHaveValue('');
+ expect(screen.queryByRole('dialog')).toBeNull();
+});
+
+it('lists catalog pending review with a product-master jump and keeps the item review checked',async()=>{
+ mocks.publishItem.mockRejectedValue(Object.assign(new Error('Complete each listed item before publishing.'),{status:400,conditions:[{code:'CATALOG_REVIEW_REQUIRED',message:'The product master is awaiting review. Open the product master, verify it and save the review.',target:'PRODUCT_MASTER'}]}));
+ show();await screen.findByDisplayValue('Original issue');review();fireEvent.click(publishButton());
+ const failures=await card('Ready Tea').findByRole('alert',{name:'Publication requirements'});
+ expect(failures).toHaveTextContent('The product master is awaiting review.');
+ expect(within(failures).getByRole('link',{name:'Open product master'})).toHaveAttribute('href','/admin/products?product=product-ready#editor');
+ expect(card('Ready Tea').getByRole('checkbox',{name:/I checked this item/})).toBeChecked();
 });
 
 it('keeps an article draft through conflict/reload and requires a fresh review and new attempt',async()=>{

@@ -188,8 +188,12 @@ public class RecommendationService {
     @Transactional
     public Detail publishItem(Long id,Long itemId,UUID requestId,long expectedVersion,long productVersion,String sourceHash,boolean reviewed) {
         lockOwner();var post=owned(id);goodsOnly(post);
-        if(requestId==null||sourceHash==null||!sourceHash.matches("[0-9a-f]{64}")||!reviewed||productVersion<0)
-            throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.incomplete");
+        var requestFailures=new ArrayList<PublicationValidationException.Failure>();
+        if(requestId==null)publicationFailure(requestFailures,"REQUEST_ID_MISSING","recommendation.publication.request_id","REVIEW");
+        if(sourceHash==null||!sourceHash.matches("[0-9a-f]{64}"))publicationFailure(requestFailures,"SOURCE_HASH_INVALID","recommendation.publication.source_hash","REVIEW");
+        if(!reviewed)publicationFailure(requestFailures,"REVIEW_CONFIRMATION_REQUIRED","recommendation.publication.review_confirmation","REVIEW");
+        if(productVersion<0)publicationFailure(requestFailures,"PRODUCT_VERSION_INVALID","recommendation.publication.product_version","REVIEW");
+        if(!requestFailures.isEmpty())throw new PublicationValidationException(requestFailures);
         var item=items.findById(itemId).filter(value->id.equals(value.postId)).orElseThrow(RecommendationService::missing);
         referenceQuotes.decorate(List.of(item),false);
         String requestHash=RecommendationPublication.requestHash(id,itemId,requestId,expectedVersion,productVersion,sourceHash,reviewed);
@@ -201,19 +205,26 @@ public class RecommendationService {
         }
         if(RecommendationPublication.visible(item)||post.version!=expectedVersion)throw publicationConflict(itemId);
         RecommendationPublication.pending(item);
-        if(post.title.isBlank()||post.body.isBlank())throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.incomplete");
+        var articleFailures=new ArrayList<PublicationValidationException.Failure>();
+        if(post.title.isBlank())publicationFailure(articleFailures,"ISSUE_TITLE_MISSING","recommendation.publication.issue_title","ARTICLE");
+        if(post.body.isBlank())publicationFailure(articleFailures,"ISSUE_BODY_MISSING","recommendation.publication.issue_body","ARTICLE");
+        if(!articleFailures.isEmpty())throw new PublicationValidationException(articleFailures);
         var product=item.productId==null?null:products.lockById(item.productId)
-            .filter(value->owner().equals(value.getMerchantId())&&!value.isDeleted()).orElseThrow(RecommendationService::missing);
-        if(product==null||!Objects.equals(product.getRecordVersion(),productVersion))throw publicationConflict(itemId);
+            .filter(value->owner().equals(value.getMerchantId())&&!value.isDeleted()).orElse(null);
+        if(product==null)throw new PublicationValidationException(List.of(new PublicationValidationException.Failure("LINKED_PRODUCT_UNAVAILABLE","recommendation.publication.linked_product","PRODUCT_MASTER")));
+        if(!Objects.equals(product.getRecordVersion(),productVersion))throw publicationConflict(itemId);
         var snapshot=RecommendationPublication.candidate(item,product);
         if(!sourceHash.equals(snapshot.reviewHash()))throw publicationConflict(itemId);
         RecommendationPublication.requireReady(item,product,snapshot);
         var shown=RecommendationPublication.project(item,snapshot);taxonomy.validate(shown.categoryIds,shown.supplierId,shown.showSupplier);
         String prefix="/api/storefront/recommendation-images/";
+        var imageFailures=new ArrayList<PublicationValidationException.Failure>();
         for(var picture:shown.gallery){
-            var image=images.findById(picture.url().substring(prefix.length())).filter(value->owner().equals(value.merchantId)&&"PUBLIC".equals(value.accessScope)).orElseThrow(RecommendationService::missing);
-            if(!picture.hash().equals(image.imageHash))throw new ApiException(ErrorCode.INVALID_REQUEST,"gallery.invalid");
+            var image=images.findById(picture.url().substring(prefix.length())).filter(value->owner().equals(value.merchantId)&&"PUBLIC".equals(value.accessScope)).orElse(null);
+            if(image==null)publicationFailure(imageFailures,"GALLERY_ASSET_UNAVAILABLE","recommendation.publication.gallery_asset","PRODUCT_MASTER");
+            else if(!picture.hash().equals(image.imageHash))publicationFailure(imageFailures,"GALLERY_HASH_MISMATCH","recommendation.publication.gallery_hash","PRODUCT_MASTER");
         }
+        if(!imageFailures.isEmpty())throw new PublicationValidationException(imageFailures);
         referenceQuotes.snapshot(item,owner());
         item.publicationSnapshot=snapshot;item.publicationState="PUBLISHED";item.publishedAt=java.time.Instant.now().truncatedTo(java.time.temporal.ChronoUnit.MICROS);
         item.publishedBy=owner();item.publicationRequestId=requestId.toString();item.publicationRequestHash=requestHash;
@@ -224,6 +235,7 @@ public class RecommendationService {
         }
         touch(post);audit.logStatusChange("RecommendationItem",item.id,"PENDING","PUBLISHED",owner());return detail(post);
     }
+    private static void publicationFailure(List<PublicationValidationException.Failure> failures,String code,String key,String target){failures.add(new PublicationValidationException.Failure(code,key,target));}
     private static org.springframework.orm.ObjectOptimisticLockingFailureException publicationConflict(Long itemId){return new org.springframework.orm.ObjectOptimisticLockingFailureException(RecommendationItem.class,itemId);}
     @Transactional
     public Detail removeItem(Long id, Long itemId, long expectedVersion) {

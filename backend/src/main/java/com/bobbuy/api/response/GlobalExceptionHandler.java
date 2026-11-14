@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.context.i18n.LocaleContextHolder;
 
 import java.util.stream.Collectors;
+import com.bobbuy.service.PublicationValidationException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -33,6 +34,15 @@ public class GlobalExceptionHandler {
             : ex.getMessageKey());
     return ResponseEntity.status(resolveStatus(ex.getErrorCode()))
         .body(new ApiError(ex.getErrorCode().name(), message));
+  }
+
+  @ExceptionHandler(PublicationValidationException.class)
+  public ResponseEntity<ApiError> handlePublicationValidation(PublicationValidationException ex) {
+    var locale=LocaleContextHolder.getLocale();
+    var conditions=ex.failures().stream().map(failure->new PublicationCondition(failure.code(),
+        messageSource.getMessage(failure.messageKey(),null,failure.code(),locale),failure.target())).toList();
+    String message=messageSource.getMessage("recommendation.publication.validation",null,"Complete the listed publication requirements",locale);
+    return ResponseEntity.badRequest().body(new ApiError(ErrorCode.INVALID_REQUEST.name(),message,conditions));
   }
 
   @ExceptionHandler(MethodArgumentNotValidException.class)

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, Button, Checkbox, Empty, Input, Modal, Pagination, Spin, Tag, Tooltip } from 'antd';
 import { ArrowLeftOutlined, CheckOutlined, CopyOutlined, DeleteOutlined, EditOutlined, EyeOutlined, PlusOutlined, ReloadOutlined, SaveOutlined, SendOutlined, UploadOutlined } from '@ant-design/icons';
 import { Link, useBlocker, useSearchParams } from 'react-router-dom';
-import { recommendationApi as api, type RecommendationDetail, type RecommendationSummary, type RecommendationFacts, type RecommendationItem, type RecommendationPublicationInput } from '../api';
+import { recommendationApi as api, type RecommendationDetail, type RecommendationSummary, type RecommendationFacts, type RecommendationItem, type RecommendationPublicationInput, type PublicationCondition } from '../api';
 import {getStoredAccessToken,getStoredUser,subscribeToAuthChanges} from '../authStorage';
 import { FactsForm, OfferInfo, factsError, parseBatch, factFields } from '../components/RecommendationFacts';
 import {RecommendationPreview} from './PublicRecommendations';
@@ -73,9 +73,25 @@ export default function Recommendations() {
   const [intakePending,setIntakePending]=useState(false),[suggestedProduct,setSuggestedProduct]=useState<string>();
   const [editingItem, setEditingItem] = useState<number>();
   const [editFacts, setEditFacts] = useState<RecommendationFacts>({name:''});
+  const editFactsBaseline = useRef('');
+  function openItemEditor(item:RecommendationItem, source=false) {
+    const open=()=>{
+      if(!scopeCurrent())return;
+      if(editingItem!==item.id){
+        const facts={...Object.fromEntries(factFields.map(key=>[key,({...item,...item.sourceFacts})[key]??null])),referenceContext:item.referenceContext} as RecommendationFacts;
+        editFactsBaseline.current=JSON.stringify(facts);
+        setEditFacts(facts);setEditingItem(item.id);
+      }
+      if(source)requestAnimationFrame(()=>document.getElementById('rec-item-'+item.id)?.querySelector('details')?.scrollIntoView({block:'center'}));
+    };
+    if(editingItem!==undefined&&editingItem!==item.id&&JSON.stringify(editFacts)!==editFactsBaseline.current){
+      Modal.confirm({title:t('products.unsaved'),content:t('products.unsaved_hint'),okText:t('products.discard'),cancelText:t('article.leave_stay'),onOk:open});
+    }else open();
+  }
   const [publicationReviews,setPublicationReviews]=useState<Record<number,string>>({});
   const [publicationRetries,setPublicationRetries]=useState<Set<number>>(new Set());
   const [publicationConflicts,setPublicationConflicts]=useState<Set<number>>(new Set());
+  const [publicationFailures,setPublicationFailures]=useState<Record<number,PublicationCondition[]>>({});
   const [authEpoch,setAuthEpoch]=useState(0);
   const publicationAttempts=useRef(new Map<number,RecommendationPublicationInput>()),publicationInFlight=useRef(false),currentPost=useRef(id);
   currentPost.current=id;
@@ -190,24 +206,24 @@ export default function Recommendations() {
       setPublicationConflicts(values=>new Set([...values,item.id]));setError(t('rec.item.conflict'));return;
     }
     const input=prior??{requestId:crypto.randomUUID(),version:detail.post.version,productVersion:item.publicationProductVersion!,sourceHash:item.publicationReviewHash!,reviewed:true as const};
-    publicationAttempts.current.set(item.id,input);publicationInFlight.current=true;setBusy(true);setError('');setNotice('');
+    publicationAttempts.current.set(item.id,input);publicationInFlight.current=true;setBusy(true);setError('');setNotice('');setPublicationFailures(values=>{const next={...values};delete next[item.id];return next;});
     try{
       const next=await api.publishItem(postId,item.id,input);
       if(next.post.id!==postId||next.post.published!==true||!Number.isSafeInteger(next.post.version)||next.post.version<input.version||!next.items.some(value=>value.id===item.id&&value.publicationState==='PUBLISHED'))throw new Error(t('rec.item.unconfirmed'));
       if(isCurrent()){
         if(!setDetail(next)){setError(t('rec.item.conflict'));return;}setNotice(t('rec.item.published_notice'));publicationAttempts.current.delete(item.id);
-        setPublicationRetries(values=>{const next=new Set(values);next.delete(item.id);return next;});setPublicationReviews({});
+        setPublicationRetries(values=>{const next=new Set(values);next.delete(item.id);return next;});setPublicationFailures(values=>{const next={...values};delete next[item.id];return next;});
       }
     }catch(e){if(isCurrent()){
       const status=(e as {status?:number}).status;
       if(status===409){setPublicationConflicts(values=>new Set([...values,item.id]));setError(t('rec.item.conflict'));}
-      else{setError((e as Error).message);if(status===undefined||status>=500)setPublicationRetries(values=>new Set([...values,item.id]));else{publicationAttempts.current.delete(item.id);setPublicationReviews({});}}
+      else{const conditions=(e as {conditions?:PublicationCondition[]}).conditions??[];setError((e as Error).message);setPublicationFailures(values=>({...values,[item.id]:conditions}));if(status===undefined||status>=500)setPublicationRetries(values=>new Set([...values,item.id]));else publicationAttempts.current.delete(item.id);}
     }}finally{if(isCurrent()){publicationInFlight.current=false;setBusy(false);}}
   }
   async function reloadLatest(){
     const postId=id,epoch=selectionEpoch.current,owner=publicationIdentity();
     await run(async()=>{
-      if(postId){const value=await api.get(postId);if(epoch!==selectionEpoch.current||owner!==publicationIdentity()||currentPost.current!==postId)return;if(!setDetail(value))return;publicationAttempts.current.clear();setPublicationReviews({});setPublicationRetries(new Set());setPublicationConflicts(new Set());}
+      if(postId){const value=await api.get(postId);if(epoch!==selectionEpoch.current||owner!==publicationIdentity()||currentPost.current!==postId)return;if(!setDetail(value))return;publicationAttempts.current.clear();setPublicationReviews({});setPublicationRetries(new Set());setPublicationConflicts(new Set());setPublicationFailures({});}
       else setList(await api.list(page));
     });
   }
@@ -261,16 +277,17 @@ export default function Recommendations() {
       <RecommendationGallery detail={editableDetail} onChange={setDetail}/></>}</>}
       <Button icon={<EyeOutlined />} onClick={() => setPreview(value => !value)}>{t('rec.draft_preview')}</Button>
       {preview && <RecommendationPreview key={detail.post.id} detail={{...detail,post:{...detail.post,title},body}}/>}
-      {!detail.serviceOffer&&<><Alert type="info" message={t(published?'rec.item.append_hint':'rec.item.first_hint')} />{dirty&&<Alert type="warning" message={t('rec.item.save_article')}/>}<section className="rec-linked"><div className="rec-section-heading"><h2>{t('rec.products')} <span>({detail.items.length})</span></h2></div><div className="rec-product-grid">{detail.items.slice((itemPage - 1) * 12, itemPage * 12).map(item => <article key={item.id} className="rec-product"><img src={item.imageUrl} alt={item.name} /><div><h3 title={item.name}>{item.name}</h3><small>{item.itemNumber}</small><OfferInfo facts={item} compact/>{item.offerNotes&&<p>{item.offerNotes}</p>}<ReferenceQuoteHistory post={id} item={item.id}/>
+      {!detail.serviceOffer&&<><Alert type="info" message={t(published?'rec.item.append_hint':'rec.item.first_hint')} />{dirty&&<Alert type="warning" message={t('rec.item.save_article')}/>}<section className="rec-linked"><div className="rec-section-heading"><h2>{t('rec.products')} <span>({detail.items.length})</span></h2></div><div className="rec-product-grid">{detail.items.slice((itemPage - 1) * 12, itemPage * 12).map(item => <article key={item.id} id={'rec-item-'+item.id} className="rec-product"><img src={item.imageUrl} alt={item.name} /><div><h3 title={item.name}>{item.name}</h3><small>{item.itemNumber}</small><OfferInfo facts={item} compact/>{item.offerNotes&&<p>{item.offerNotes}</p>}<ReferenceQuoteHistory post={id} item={item.id}/>
         <ProductReviewStars productId={item.productId}/><Tag color={isItemPublic(item)?'green':'orange'}>{t(isItemPublic(item)?'rec.item.public':'rec.item.pending')}</Tag>
         {!isItemPublic(item)&&<div className="rec-item-publication">
           {!publicationReady(item)?<Alert type="warning" message={t('rec.item.not_ready')}/>:<small>{t('rec.item.catalog_version',{version:item.publicationProductVersion!})}</small>}
           <Checkbox aria-label={t('rec.item.review')+': '+item.name} disabled={publicationBlocked||publicationRetries.has(item.id)||publicationConflicts.has(item.id)} checked={publicationReviews[item.id]===publicationSignature(item)} onChange={e=>setPublicationReviews(values=>({...values,[item.id]:e.target.checked?publicationSignature(item):''}))}>{t('rec.item.review')}</Checkbox>
           <Button type="primary" icon={<SendOutlined/>} aria-label={t(publicationRetries.has(item.id)?'rec.item.retry':'rec.item.publish')+': '+item.name} disabled={publicationBlocked||publicationConflicts.has(item.id)||!publicationReady(item)||(!publicationRetries.has(item.id)&&publicationReviews[item.id]!==publicationSignature(item))} onClick={()=>void publishItem(item)}>{t(publicationRetries.has(item.id)?'rec.item.retry':'rec.item.publish')}</Button>
           {publicationConflicts.has(item.id)&&<Alert type="warning" message={t('rec.item.conflict')}/>}
+          {!!publicationFailures[item.id]?.length&&<div className="rec-publication-failures" role="alert" aria-label={t('rec.item.missing_title')}><strong>{t('rec.item.missing_title')}</strong><ul>{publicationFailures[item.id].map(failure=><li key={failure.code}><span>{failure.message}</span>{failure.target==='SOURCE_CONTEXT'?<Button onClick={()=>openItemEditor(item,true)}>{t('rec.item.fix_source')}</Button>:failure.target==='PRODUCT_MASTER'?<Link className="rec-publication-jump" to={'/admin/products?product='+encodeURIComponent(item.productId??'')+'#editor'}>{t('rec.item.fix_master')}</Link>:null}</li>)}</ul></div>}
         </div>}
         {editingItem === item.id && !isItemPublic(item) && <>{item.catalogDriven&&<Alert type="info" message={t('master.use_profile')}/>}<FactsForm facts={editFacts} onChange={setEditFacts} disabled={busy} identityReadOnly={item.catalogDriven}/><Button loading={busy} onClick={() => void run(async () => { const error = factsError(editFacts); if(error) throw new Error(t(error)); setDetail(await api.editItem(id,item.id,editFacts,detail.post.version)); setEditingItem(undefined); })}>{t('rec.save_item')}</Button><Button onClick={() => setEditingItem(undefined)}>{t('rec.cancel_edit')}</Button></>}
-        </div>{!isItemPublic(item) && <div className="rec-product-actions"><Button aria-label={t('rec.edit_item')+': '+item.name} icon={<EditOutlined />} disabled={busy || writing} onClick={() => {setEditingItem(item.id);setEditFacts({...Object.fromEntries(factFields.map(key => [key,({...item,...item.sourceFacts})[key] ?? null])),referenceContext:item.referenceContext} as RecommendationFacts);}} />
+        </div>{!isItemPublic(item) && <div className="rec-product-actions"><Button aria-label={t('rec.edit_item')+': '+item.name} icon={<EditOutlined />} disabled={busy || writing} onClick={() => openItemEditor(item)} />
         <Tooltip title={t('rec.unlink')}><Button aria-label={t('rec.unlink')} icon={<DeleteOutlined />} disabled={busy || writing} onClick={() => void run(async () => { const next = await api.remove(id, item.id, detail.post.version); setDetail(next); setSelected(ids => ids.filter(key => next.items.some(value => identity(value) === key))); setItemPage(1); })} /></Tooltip></div>}</article>)}</div>
         {!detail.items.length && <Empty description={t('rec.no_products')} />}{detail.items.length > 12 && <Pagination current={itemPage} pageSize={12} total={detail.items.length} showSizeChanger={false} onChange={setItemPage} />}
       </section></>}

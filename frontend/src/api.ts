@@ -741,6 +741,7 @@ type ApiErrorResponse = {
     status: 'error';
     errorCode?: string;
     message?: string;
+    conditions?: PublicationCondition[];
 };
 
 export type AuthSessionResponse = {
@@ -1064,6 +1065,7 @@ export type ProductSale={amount:number;currency:string;unit:string;validFrom?:st
 export type SaleReview={itemId:number;amount:number;currency:string;unit:string;validFrom?:string|null;validThrough?:string|null;revision:number;replaceExisting:boolean;enabled:boolean;reason:string};
 export type RecommendationPicture={id:string;url:string;hash:string;sourceUrl:string;assetKey:string;label:string};
 export type RecommendationPublicationInput={requestId:string;version:number;productVersion:number;sourceHash:string;reviewed:true};
+export type PublicationCondition={code:string;message:string;target:'SOURCE_CONTEXT'|'PRODUCT_MASTER'|'ITEM_TRANSLATION'|'ARTICLE'|'REVIEW'};
 export type RecommendationItem = RecommendationFacts & {publicationState?:'PENDING'|'PUBLISHED';publicationReviewHash?:string;publicationProductVersion?:number|null;publicationLegacy?:boolean;publishedAt?:string;catalogDriven?:boolean;sourceFacts?:{name:string;itemNumber?:string|null;specification?:string|null;description?:string|null;translations:Record<string,RecommendationText>;translationSource:string};brand?:string|null;model?:string|null;packaging?:string|null;gallery?:RecommendationPicture[];specification?:string|null;description?:string|null;translations?:Record<string,RecommendationText>;translationSource?:string;translationStatus?:string; id: number; productId?: string | null; currency?: 'JPY'; imageUrl: string; categoryIds?:string[]; categories?:RecommendationLabel[]; supplierId?:string|null; supplierName?:Record<string,string>|null; showSupplier?:boolean };
 export type RecommendationChoice = RecommendationLabel & {editable:boolean};
 export type RecommendationAssignment = {itemIds:number[];categoryIds:string[];categoryMode:'add'|'remove'|'replace';updateCategories:boolean;supplierId:string|null;updateSupplier:boolean;showSupplier:boolean;version:number};
@@ -1135,7 +1137,12 @@ export const masterDataApi={
 };
 async function recommendationMutation<T>(url:string,body:object):Promise<T> {
     const response=await authorizedFetch(url,{method:'POST',body:JSON.stringify(body)},{withJsonContentType:true});
-    if(!response.ok){if(response.status===401)clearAuthSession();throw Object.assign(new Error(await parseErrorMessage(response)),{status:response.status});}
+    if(!response.ok){
+        if(response.status===401)clearAuthSession();
+        let payload:ApiErrorResponse|undefined;try{payload=await response.clone().json() as ApiErrorResponse;}catch{/* Preserve status and generic message. */}
+        const conditions=Array.isArray(payload?.conditions)?payload.conditions.filter(value=>value&&typeof value.code==='string'&&typeof value.message==='string'&&typeof value.target==='string'):[];
+        throw Object.assign(new Error(payload?.message||await parseErrorMessage(response)),{status:response.status,conditions});
+    }
     return parseSuccessPayload<T>(response);
 }
 function issueDateFailure(status:number,errorCode?:string){return Object.assign(new Error(genericErrorMessage()),{status,errorCode});}
