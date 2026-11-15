@@ -20,6 +20,21 @@ it('recovers only failed trip metadata after foreground events and preserves the
 });
 function Probe(){const location=useLocation(),navigate=useNavigate();return <><output data-testid="route">{location.pathname+location.search}</output><button onClick={()=>navigate(-1)}>Back</button><button onClick={()=>navigate(1)}>Forward</button></>;}
 function mount(path:string){return render(<I18nProvider><MemoryRouter initialEntries={[path]}><Probe/><Storefront/></MemoryRouter></I18nProvider>);}
+it('keeps the home-linked brand in a separate header container while the remembered menu opens and closes',async()=>{
+ localStorage.setItem('bobbuy_store_navigation_desktop','expanded');
+ const view=mount('/products?node=1');
+ const brandHeader=view.container.querySelector('.store-brand-header')!;
+ const brand=brandHeader.querySelector<HTMLAnchorElement>('.browse-header-brand')!;
+ expect(brand).toHaveAttribute('href','/?node=1');
+ expect(brand.querySelector('.brand-lockup')).toBeVisible();
+ await waitFor(()=>expect(document.querySelector('.browse-drawer .browse-links')).toBeInTheDocument());
+ expect(document.querySelector('.browse-drawer .brand-lockup')).toBeNull();
+ expect(brandHeader.contains(document.querySelector('.browse-drawer'))).toBe(false);
+ fireEvent.click(screen.getByRole('button',{name:'Collapse navigation menu'}));
+ await waitFor(()=>expect(document.querySelector('.browse-drawer .browse-links')).not.toBeInTheDocument());
+ expect(brand.querySelector('.brand-lockup')).toBeVisible();
+ expect(localStorage.getItem('bobbuy_store_navigation_desktop')).toBe('collapsed');
+});
 it('shows the empty state only after retry exhaustion and recovers the failed read on reconnect',async()=>{
  mocks.activeTrips.mockResolvedValue([]);mocks.trips.mockRejectedValueOnce(new ReadRequestError('trip read failed',true)).mockResolvedValue([{id:11,merchantId:1,merchantName:'Shop',deliveryArea:'Recovered area',deliveryDate:'2026-11-10'}]);
  const view=mount('/trips');await screen.findByRole('heading',{name:'Bookable trips'});
