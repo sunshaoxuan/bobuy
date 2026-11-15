@@ -101,7 +101,15 @@ class AuthAbuseServiceTest {
             when(jdbc.update(anyString(),org.mockito.ArgumentMatchers.any(Object[].class))).thenAnswer(update());
             when(jdbc.queryForObject(anyString(),eq(Long.class),org.mockito.ArgumentMatchers.any(Object[].class))).thenAnswer(query());
         }
-        AuthAbuseService service(int limit,long window){return new AuthAbuseService(jdbc,true,limit,window,2,30);}
+        AuthAbuseService service(int limit,long window){
+            return new AuthAbuseService(jdbc,true,limit,window,2,30) {
+                @Override public synchronized Attempt begin(Purpose purpose,String clientIp,String target) {
+                    // PostgreSQL keeps the first bucket row locked until the @Transactional method exits.
+                    // Keep both stubbed bucket updates in the same critical section to model that ordering.
+                    return super.begin(purpose,clientIp,target);
+                }
+            };
+        }
         void advance(Duration duration){synchronized(this){now+=duration.toSeconds();}}
 
         private Answer<Integer> update(){return invocation->{Object[] raw=invocation.getRawArguments();String sql=(String)raw[0];Object[] a=(Object[])raw[1];synchronized(this){

@@ -24,3 +24,13 @@ with Mockito 5 varargs matching and making the rate-limited response assertion
 independent of the machine's default locale. The minimum verification is the focused
 `AuthAbuseServiceTest` plus `git diff --check`; production switches remain disabled,
 and no secrets, routes, Nginx configuration, or production behavior are changed.
+
+## CI concurrency follow-up for commit `1d6935c`
+
+The authorized follow-up is limited to making the in-memory quota fixture model the
+transaction-scoped row lock that PostgreSQL holds between the IP and target bucket
+updates. Without that lock, different test threads can win the two independent stub
+updates and produce fewer than five accepted requests even though production executes
+both updates in one transaction. The minimum verification is the complete focused
+`AuthAbuseServiceTest` plus `git diff --check`. Production switches remain disabled;
+this follow-up changes no production code, secrets, routes, or Nginx configuration.
