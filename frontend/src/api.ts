@@ -825,6 +825,24 @@ async function authorizedFetch(url: string, init?: RequestInit, options?: Reques
     return response;
 }
 
+/** Multipart import requests use the same authenticated/refresh path without forcing JSON headers. */
+export async function authenticatedFormPost<T>(url:string, body:FormData):Promise<T>{
+    const response=await authorizedFetch(url,{method:'POST',body});
+    if(!response.ok)throw new Error(await parseErrorMessage(response));
+    return parseSuccessPayload<T>(response);
+}
+export async function authenticatedPost<T>(url:string):Promise<T>{
+    const response=await authorizedFetch(url,{method:'POST'});
+    if(!response.ok)throw new Error(await parseErrorMessage(response));
+    return parseSuccessPayload<T>(response);
+}
+export async function authenticatedDownload(url:string, filename:string):Promise<void>{
+    const response=await authorizedFetch(url);
+    if(!response.ok)throw new Error(await parseErrorMessage(response));
+    const href=URL.createObjectURL(await response.blob());
+    const link=document.createElement('a');link.href=href;link.download=filename;link.click();URL.revokeObjectURL(href);
+}
+
 async function parseSuccessPayload<T>(response: Response, fallbackValue?: T): Promise<T> {
     const payload = (await response.json()) as ApiResponse<T> | T;
     if (typeof payload === 'object' && payload !== null && 'status' in payload && 'data' in payload) {

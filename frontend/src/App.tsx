@@ -30,12 +30,14 @@ const Users = lazy(() => import('./pages/Users'));
 const MailSettings = lazy(() => import('./pages/MailSettings'));
 const Currencies = lazy(() => import('./pages/Currencies'));
 const GeographicAreas = lazy(() => import('./pages/GeographicAreas'));
+const CategoryPathImport = lazy(() => import('./pages/CategoryPathImport'));
 
 const adminPages = [
   ['dashboard', 'nav.dashboard', Dashboard, AppstoreOutlined], ['trips', 'nav.trips', Trips, CalendarOutlined], ['orders', 'nav.orders', Orders, ShoppingOutlined],
   ['order-desk', 'nav.order_desk', OrderDesk, ScanOutlined], ['procurement', 'nav.procurement', ProcurementHUD, InboxOutlined],
   ['picking', 'nav.picking', PickingMaster, CheckSquareOutlined], ['products', 'products.title', ProductArchive, TagsOutlined],
   ['product-markers', 'marker.title', ProductMarkers, TagsOutlined],
+  ['category-path-import', 'categoryImport.title', CategoryPathImport, TagsOutlined],
   ['recommendations', 'rec.title', Recommendations, ShopOutlined],
   ['suppliers', 'nav.suppliers', Suppliers, ShopOutlined], ['customers', 'nav.customers', MerchantCustomers, TeamOutlined],
   ['basic-data/currencies', 'currency.title', Currencies, TagsOutlined],
