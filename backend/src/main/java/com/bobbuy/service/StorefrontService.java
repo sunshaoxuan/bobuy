@@ -137,7 +137,9 @@ public class StorefrontService {
         VerificationMailTemplate.apply(message,code,org.springframework.context.i18n.LocaleContextHolder.getLocale());
         // Legacy BOBUY_MAIL_* fallback is retired. Account delivery is opt-in and
         // can only use an enabled setting whose password is encrypted by #84.
-        if(accountMail.isDeliveryEnabled()) mailSettings.sendIfConfigured(message);
+        if(accountMail.isDeliveryEnabled() && !mailSettings.sendIfConfigured(message)) {
+            throw new IllegalStateException("Verification email delivery is enabled but SMTP settings are missing");
+        }
     }
 
     @Transactional
