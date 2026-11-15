@@ -63,6 +63,25 @@ class BootstrapProductionAgeKeyWorkflowTest(unittest.TestCase):
         self.assertIn("install -o root -g root -m 0700 -d", self.workflow)
         self.assertIn("StrictHostKeyChecking=yes", self.workflow)
 
+    def test_directory_owner_is_root_and_fail_closed_before_key_handling(self):
+        guard = (
+            "[[ $(stat -c '%U' \"$key_dir\") == root ]] || { "
+            "echo 'Production age directory owner is invalid; refusing to continue.' "
+            ">&2; exit 1; }"
+        )
+        self.assertIn(guard, self.workflow)
+        steps = (
+            '[[ -d "$key_dir" && ! -L "$key_dir" ]]',
+            'install -o root -g root -m 0700 -d "$key_dir"',
+            guard,
+            'if [[ -e "$key_file" || -L "$key_file" ]]; then',
+            'key_tmp=$(mktemp "$key_dir/.keys.txt.XXXXXXXXXX")',
+            'public_key=$(age-keygen -y "$key_file")',
+        )
+        positions = [self.workflow.index(step) for step in steps]
+        self.assertEqual(positions, sorted(positions))
+        self.assertNotRegex(self.workflow, r'(?m)^\s*(?:chown|chmod)\b[^\n]*\$key_dir')
+
     def test_runbook_documents_public_key_and_offline_backup(self):
         for phrase in ("Run workflow", "age1...", "Parker", "离线媒介", "0400", "带外访问"):
             self.assertIn(phrase, self.runbook)

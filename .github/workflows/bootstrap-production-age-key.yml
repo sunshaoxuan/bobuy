@@ -87,6 +87,7 @@ jobs:
           else
             install -o root -g root -m 0700 -d "$key_dir"
           fi
+          [[ $(stat -c '%U' "$key_dir") == root ]] || { echo 'Production age directory owner is invalid; refusing to continue.' >&2; exit 1; }
           [[ $(stat -c '%a' "$key_dir") == 700 ]] || { echo 'Production age directory permissions are invalid; refusing to continue.' >&2; exit 1; }
 
           if [[ -e "$key_file" || -L "$key_file" ]]; then
