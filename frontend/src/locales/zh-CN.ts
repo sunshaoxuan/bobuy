@@ -1574,3 +1574,5 @@ export default messages;
 Object.assign(messages,{"repair.accept_all":"一键接受全部可合并项","repair.edit":"编辑","repair.reject":"拒绝","repair.product":"商品","repair.product_number":"商品 {number}","repair.url_manual":"来源中没有找到商品链接，请粘贴可核验的链接。","repair.ai_failed":"AI 建议暂不可用，请手工填写。","repair.field.supplierKey":"供应商","repair.field.channel":"销售渠道","repair.field.sourceMessageKey":"来源邮件","repair.field.sourceUrl":"商品链接","repair.evidence.master":"商品资料","repair.evidence.source":"来源邮件","repair.channel.online":"线上","repair.channel.warehouse":"线下","repair.locale.zh-CN":"简体中文","repair.locale.zh-TW":"繁体中文","repair.locale.ja-JP":"日文","repair.locale.en-US":"英文","repair.locale_field.name":"名称","repair.locale_field.specification":"规格"});
 
 Object.assign(messages,{"repair.supplier_unknown":"供应商名称暂不可用","repair.reviewed_campaign":"已审核活动"});
+
+Object.assign(messages,{"repair.group": "相同建议 · {count} 件商品", "repair.accept_group": "接受本组建议", "repair.manual": "手工填写"});

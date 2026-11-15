@@ -2,6 +2,26 @@
 
 ## Authorized scope
 
+## Issue 117 / PR 118 repair batch, 2026-11-15
+
+Goal: complete the user-facing merge review on issue-117-repair-modal-user-facing without committing, publishing, production writes, artifact disclosure, hash changes or gate changes. Preserve explicit save confirmation, blank-only defaults, merchant isolation and post/product version checks.
+
+Frozen scope: repair service and focused tests; repair modal and tests; four locale resources; recommendation card checkbox and modal CSS; revert the unrelated catalog review-bar change; UI/UX section 14 and this record. Direct consumers are source preview/confirmation and recommendation publication controls. Original suggestions must survive rejection, groups share eligible suggestions, pasted HTTPS URLs bind to the draft, retained values remain readable, and empty fields never claim AI provenance. AI extraction uses existing routing with source-grounded validation only.
+
+Minimum checks: backend repair service/controller tests (about 1 minute), frontend repair/publication/CSS tests (about 1 minute), TypeScript and i18n checks (about 15 seconds), diff accuracy/scope review. Runtime targets: 390x844 and 1280x800, close target 44x44, card checkbox wrapper height/min-height >=44, 6px action gaps, glyph margins >=3px and center error <=min(2px,10% glyph height). Follow section 8 acceptance recorded below. If Vitest fails with esbuild spawn EPERM, stop runtime checks and report the unverified browser/visual requirements; do not retry or start a separate stack. No full suite. Reuse unchanged checks; document any affected rerun here.
+
+### Issue 117 results
+
+- Implemented: value-based post ID comparison; rejected fields remain unchanged; operator HTTPS URL edits accepted with host/no-userinfo validation; post/product identity and version checks, merchant scope and overwrite guard retained. Save validation does not regenerate AI suggestions. Backend campaign display uses a semantic code and retained supplier/channel/URL displays use the retained value.
+- Implemented: original suggestions separate from editable drafts; shared-suggestion groups with counts and group/global restore; per-item URL editing/rejection; manual URL labels and no AI tags on empty fields. AI extraction uses existing LlmGateway routing, accepts only source-present URLs and source-quoted channel evidence, and leaves unverifiable answers blank. No artifact content is returned in previews.
+- Implemented: actual `.rec-product .ant-checkbox-wrapper` minimum height, preserved 767px close-button 44x44 rule, reverted the unrelated catalog review-bar addition, synchronized new four-language strings, retained and clarified UI/UX section 14.
+- PASS: `mvn.cmd -o -Dtest=RecommendationRepairServiceTest,RecommendationRepairControllerTest test`, 22 tests, 0 failures/errors, 1:02 total. Covers ID 128, rejected fields, pasted/invalid URLs, overwrite guard, source-grounded AI and no regeneration on apply, plus existing version/confidentiality/confirmation tests.
+- PASS: `node node_modules/typescript/bin/tsc --noEmit`; `node scripts/check-i18n.mjs`, 1764 keys and missing-key negative fixture. Initial i18n attempt lacked TypeScript; this dependency failure was resolved by one offline, lifecycle-disabled install. No source check was redundantly repeated.
+- BLOCKED before execution: `node node_modules/vitest/vitest.mjs run src/components/RecommendationRepairAssistant.test.tsx src/pages/RecommendationsItemPublication.test.tsx src/recommendations.css.test.js` failed loading vitest.config.ts with esbuild `spawn EPERM`. No retry or workaround. Component assertions and CSS contracts are added and compile, but their runtime results remain unverified.
+- UNVERIFIED: browser interactions, 390/1280 screenshots, computed hit-area/glyph geometry, console/network checks and Gemini screenshot review. Overall UI acceptance remains pending. AI source extraction is unit-tested with synthetic responses; live production routing was not invoked.
+- External design advice: discovered the live model catalog and obtained a response from `claude-opus-5-5-high`. Incorporated value-based identity, transactional version/ownership checks, field allowlist and rejection semantics; no new token/signature/hash mechanism or provider configuration change.
+- Final scope: no commit, production write, publication gate change or hash algorithm change. Only the bounded repair paths are changed. The task editing script is removed; installed dependencies and native test outputs are retained for the pending focused validation without reinstalling/recompiling.
+
 ## PR 116 visual correction, 2026-11-15
 
 Goal: make every product card containing publication failures span the complete grid at all breakpoints, remove the ineffective portaled-modal ancestor selector, and localize the known unresolved-reason flag in four locales. Preserve all product behavior. No commit or deployment; preserve the existing untracked visual-publication.html and visual-publication.tsx.

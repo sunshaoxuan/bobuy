@@ -1711,3 +1711,5 @@ export default messages;
 Object.assign(messages,{"repair.accept_all":"一鍵接受全部可合併項目","repair.edit":"編輯","repair.reject":"拒絕","repair.product":"商品","repair.product_number":"商品 {number}","repair.url_manual":"來源中沒有找到商品連結，請貼上可核驗的連結。","repair.ai_failed":"AI 建議暫不可用，請手動填寫。","repair.field.supplierKey":"供應商","repair.field.channel":"銷售通路","repair.field.sourceMessageKey":"來源郵件","repair.field.sourceUrl":"商品連結","repair.evidence.master":"商品資料","repair.evidence.source":"來源郵件","repair.channel.online":"線上","repair.channel.warehouse":"線下","repair.locale.zh-CN":"簡體中文","repair.locale.zh-TW":"繁體中文","repair.locale.ja-JP":"日文","repair.locale.en-US":"英文","repair.locale_field.name":"名稱","repair.locale_field.specification":"規格"});
 
 Object.assign(messages,{"repair.supplier_unknown":"供應商名稱暫不可用","repair.reviewed_campaign":"已審核活動"});
+
+Object.assign(messages,{"repair.group": "相同建議 · {count} 件商品", "repair.accept_group": "接受本組建議", "repair.manual": "手動填寫"});

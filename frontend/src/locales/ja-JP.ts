@@ -1574,3 +1574,5 @@ export default messages;
 Object.assign(messages,{"repair.accept_all":"統合可能な項目をすべて承認","repair.edit":"編集","repair.reject":"拒否","repair.product":"商品","repair.product_number":"商品 {number}","repair.url_manual":"出典に商品リンクがありません。確認可能なリンクを貼り付けてください。","repair.ai_failed":"AI 候補を取得できません。手動で入力してください。","repair.field.supplierKey":"仕入先","repair.field.channel":"販売チャネル","repair.field.sourceMessageKey":"出典メール","repair.field.sourceUrl":"商品リンク","repair.evidence.master":"商品情報","repair.evidence.source":"出典メール","repair.channel.online":"オンライン","repair.channel.warehouse":"店舗","repair.locale.zh-CN":"簡体字中国語の","repair.locale.zh-TW":"繁体字中国語の","repair.locale.ja-JP":"日本語の","repair.locale.en-US":"英語の","repair.locale_field.name":"名称","repair.locale_field.specification":"仕様"});
 
 Object.assign(messages,{"repair.supplier_unknown":"仕入先名を取得できません","repair.reviewed_campaign":"確認済みキャンペーン"});
+
+Object.assign(messages,{"repair.group": "同じ提案 · {count} 商品", "repair.accept_group": "このグループを採用", "repair.manual": "手入力"});
