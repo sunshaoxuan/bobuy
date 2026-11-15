@@ -17,13 +17,11 @@ it.each(supportedLocales)('shows only enabled, non-duplicate customer entries in
     expect(screen.queryByRole('link',{name:translate(locale,key)})).not.toBeInTheDocument();
 });
 
-it.each(supportedLocales)('keeps one scoped mobile account shortcut in %s',locale=>{
+it.each(supportedLocales)('keeps account out of the two mobile bottom shortcuts in %s',locale=>{
   localStorage.setItem('bobbuy_locale',locale);
   render(<I18nProvider><MemoryRouter initialEntries={['/account?node=7']}><StoreMobileNavigation quantity={2}/></MemoryRouter></I18nProvider>);
-  const account=screen.getByRole('link',{name:translate(locale,'store.account')});
-  expect(account).toHaveAttribute('href','/account?node=7');
-  expect(account).toHaveAttribute('aria-current','page');
-  expect(screen.getAllByRole('link')).toHaveLength(3);
+  expect(screen.queryByRole('link',{name:translate(locale,'store.account')})).not.toBeInTheDocument();
+  expect(screen.getAllByRole('link')).toHaveLength(2);
 });
 
 it.each([['zh-CN','活动邮报'],['zh-TW','活動郵報'],['en-US','Campaign Newsletter'],['ja-JP','キャンペーン便り']] as const)('names the campaign newsletter in %s', (locale,label)=>{
