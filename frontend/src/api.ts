@@ -1056,9 +1056,9 @@ export type AiOnboardingSuggestion = {
 
 export type RecommendationSummary = { id: number; title: string; published: boolean; version: number; updatedAt: string; publishedAt?: string; publisherName?: string; coverImageUrl?: string; merchantId?:number;articleTitles?:Record<string,string>;issueDate?:string|null;issueDateSource?:'REVIEWED_SOURCE'|'UNKNOWN' };
 export type ReferenceOfferContext={supplierKey?:string;channel?:'COSTCO_WAREHOUSE'|'COSTCO_ONLINE';variantKey?:string;sourceMessageKey?:string;sourceUrl?:string;activityStart?:string|null;activityEnd?:string|null;activityApplies?:boolean;windowEvidence?:string;startSearchComplete?:boolean};
-export type RepairField={field:string;currentValue?:string;suggestedValue?:string;evidence?:string;unresolvedReason?:string;overwrite:boolean};
-export type SourceRepairPreview={postId:number;version:number;items:{itemId:number;productId?:string;itemVersion:number;productVersion?:number;fields:RepairField[]}[]};
-export type LocaleRepairSuggestion={productId:string;productVersion:number;field:'name'|'specification';locale:string;sourceLocale?:string;sourceText?:string;suggestion?:string;error?:string;aiSuggested:boolean};
+export type RepairField={field:string;currentValue?:string;suggestedValue?:string;displayValue?:string;evidence?:string;unresolvedReason?:string;overwrite:boolean};
+export type SourceRepairPreview={postId:number;version:number;items:{itemId:number;itemName?:string;productId?:string;itemVersion:number;productVersion?:number;fields:RepairField[]}[]};
+export type LocaleRepairSuggestion={productId:string;productName?:string;productVersion:number;field:'name'|'specification';locale:string;sourceLocale?:string;sourceText?:string;suggestion?:string;error?:string;aiSuggested:boolean};
 export type LocaleRepairPreview={postId:number;version:number;suggestions:LocaleRepairSuggestion[]};
 export type ReferenceResolution={state:string;amount:number|null;itemIds:number[];unknownWindows:number};
 export type RecommendationFacts = { brand?:string|null;model?:string|null;packaging?:string|null;specification?:string|null; name: string; itemNumber?: string | null; referencePrice?: number | null; originalPrice?: number | null; discountAmount?: number | null; priceUnit?: string | null; offerStart?: string | null; offerEnd?: string | null; couponStart?: string | null; couponEnd?: string | null; offerNotes?: string | null;referenceContext?:ReferenceOfferContext|null;referenceQuote?:ReferenceResolution;priceChange?:PriceChangeView|null };

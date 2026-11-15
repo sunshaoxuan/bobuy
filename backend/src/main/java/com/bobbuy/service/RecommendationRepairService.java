@@ -17,12 +17,12 @@ public class RecommendationRepairService {
  private static final Pattern HTTPS=Pattern.compile("https://[^\\s<>\\\"']+");
  private final RecommendationPostRepository posts; private final RecommendationItemRepository items;
  private final RecommendationSourceArtifactRepository artifacts; private final ProductRepository products;
- private final UserRepository users; private final LlmGateway llm;
- public RecommendationRepairService(RecommendationPostRepository posts,RecommendationItemRepository items,RecommendationSourceArtifactRepository artifacts,ProductRepository products,UserRepository users,LlmGateway llm){this.posts=posts;this.items=items;this.artifacts=artifacts;this.products=products;this.users=users;this.llm=llm;}
- public record FieldSuggestion(String field,String currentValue,String suggestedValue,String evidence,String unresolvedReason,boolean overwrite){}
- public record ItemSuggestion(Long itemId,String productId,long itemVersion,Long productVersion,List<FieldSuggestion> fields){}
+ private final UserRepository users; private final SupplierRepository suppliers; private final LlmGateway llm;
+ public RecommendationRepairService(RecommendationPostRepository posts,RecommendationItemRepository items,RecommendationSourceArtifactRepository artifacts,ProductRepository products,UserRepository users,SupplierRepository suppliers,LlmGateway llm){this.posts=posts;this.items=items;this.artifacts=artifacts;this.products=products;this.users=users;this.suppliers=suppliers;this.llm=llm;}
+ public record FieldSuggestion(String field,String currentValue,String suggestedValue,String displayValue,String evidence,String unresolvedReason,boolean overwrite){}
+ public record ItemSuggestion(Long itemId,String itemName,String productId,long itemVersion,Long productVersion,List<FieldSuggestion> fields){}
  public record SourcePreview(Long postId,long version,List<ItemSuggestion> items){}
- public record LocaleSuggestion(String productId,long productVersion,String field,String locale,String sourceLocale,String sourceText,String suggestion,String error,boolean aiSuggested){}
+ public record LocaleSuggestion(String productId,String productName,long productVersion,String field,String locale,String sourceLocale,String sourceText,String suggestion,String error,boolean aiSuggested){}
  public record LocalePreview(Long postId,long version,List<LocaleSuggestion> suggestions){}
  public record LocaleEdit(String productId,long productVersion,String field,String locale,String value){}
  private Long owner(){var id=MerchantScope.current();if(id==null)throw new ApiException(ErrorCode.FORBIDDEN,"error.auth.forbidden");return id;}
@@ -48,8 +48,9 @@ public class RecommendationRepairService {
    if(blank(supplier))supplier=defaultSupplier;
    var candidate=new LinkedHashMap<String,String>();candidate.put("supplierKey",supplier);candidate.put("channel",source.get("channel"));candidate.put("sourceMessageKey",source.get("sourceMessageKey"));candidate.put("sourceUrl",source.get("sourceUrl"));
    var fields=new ArrayList<FieldSuggestion>();for(var e:candidate.entrySet()){String old=switch(e.getKey()){case "supplierKey"->current==null?null:current.supplierKey();case "channel"->current==null?null:current.channel();case "sourceMessageKey"->current==null?null:current.sourceMessageKey();default->current==null?null:current.sourceUrl();};String suggestion=e.getValue();boolean blocked=!blank(old)&&!overwrite;
-    fields.add(new FieldSuggestion(e.getKey(),old,blocked?null:suggestion,suggestion==null?null:(e.getKey().equals("supplierKey")?"product master":"reviewed issue-date source"),suggestion==null?"not uniquely derivable":null,!blank(old)&&overwrite));}
-   rows.add(new ItemSuggestion(item.id,item.productId,post.version,product==null?null:Objects.requireNonNullElse(product.getRecordVersion(),0L),fields));
+    String display=suggestion;if("supplierKey".equals(e.getKey())&&!blank(suggestion))display=suppliers.findById(suggestion).filter(x->owner().equals(x.getMerchantId())).map(x->ProductCatalogService.text(x.getName(),"zh-CN")).filter(x->!x.isBlank()).orElse(null);else if("sourceMessageKey".equals(e.getKey())&&!blank(suggestion))display="Reviewed campaign";
+    fields.add(new FieldSuggestion(e.getKey(),old,blocked?null:suggestion,display,suggestion==null?null:(e.getKey().equals("supplierKey")?"product master":"reviewed issue-date source"),suggestion==null?"not uniquely derivable":null,!blank(old)&&overwrite));}
+   rows.add(new ItemSuggestion(item.id,item.name,item.productId,post.version,product==null?null:Objects.requireNonNullElse(product.getRecordVersion(),0L),fields));
   }return new SourcePreview(postId,post.version,rows);
  }
  private String postSupplier(Long postId,Map<String,String> source){
@@ -66,15 +67,16 @@ public class RecommendationRepairService {
   users.lockById(owner()).orElseThrow();var post=owned(postId);if(post.version!=version)throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.conflict");
   items.findByPostIdOrderById(postId).stream().map(i->i.productId).filter(Objects::nonNull).distinct().sorted().forEach(products::lockById);
   var preview=previewSource(postId,overwrite);
-  if(!preview.equals(confirmedPreview))throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.conflict");
-  for(var row:preview.items()){var item=items.findById(row.itemId()).filter(i->i.postId.equals(postId)).orElseThrow();var c=item.referenceContext==null?new ReferenceOfferContext(null,null,null,null,null,null,null,false,null,false):item.referenceContext;Map<String,String> v=new HashMap<>();for(var f:row.fields())if(f.suggestedValue()!=null)v.put(f.field(),f.suggestedValue());
+  if(confirmedPreview==null||confirmedPreview.postId()!=postId||confirmedPreview.version()!=preview.version()||confirmedPreview.items().size()!=preview.items().size())throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.conflict");
+  for(int n=0;n<preview.items().size();n++){var expected=preview.items().get(n);var confirmed=confirmedPreview.items().get(n);if(!Objects.equals(expected.itemId(),confirmed.itemId())||expected.itemVersion()!=confirmed.itemVersion()||!Objects.equals(expected.productVersion(),confirmed.productVersion())||expected.fields().size()!=confirmed.fields().size())throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.conflict");for(int f=0;f<expected.fields().size();f++){var a=expected.fields().get(f);var b=confirmed.fields().get(f);if(!a.field().equals(b.field())||b.suggestedValue()!=null&&!Objects.equals(a.suggestedValue(),b.suggestedValue()))throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.conflict");}}
+  for(var row:confirmedPreview.items()){var item=items.findById(row.itemId()).filter(i->i.postId.equals(postId)).orElseThrow();var c=item.referenceContext==null?new ReferenceOfferContext(null,null,null,null,null,null,null,false,null,false):item.referenceContext;Map<String,String> v=new HashMap<>();for(var f:row.fields())if(f.suggestedValue()!=null)v.put(f.field(),f.suggestedValue());
    item.referenceContext=new ReferenceOfferContext(v.getOrDefault("supplierKey",c.supplierKey()),v.getOrDefault("channel",c.channel()),c.variantKey(),v.getOrDefault("sourceMessageKey",c.sourceMessageKey()),v.getOrDefault("sourceUrl",c.sourceUrl()),c.activityStart(),c.activityEnd(),c.activityApplies(),c.windowEvidence(),c.startSearchComplete());items.save(item);
   }post.updatedAt=java.time.LocalDateTime.now();posts.saveAndFlush(post);return previewSource(postId,overwrite);
  }
  @Transactional(readOnly=true) public LocalePreview suggestLocales(Long postId){
   var post=owned(postId);var result=new ArrayList<LocaleSuggestion>();var seen=new HashSet<String>();for(var item:items.findByPostIdOrderById(postId)){if(item.productId==null||!seen.add(item.productId))continue;var p=products.findById(item.productId).filter(x->owner().equals(x.getMerchantId())).orElse(null);if(p==null||p.getCatalogData()==null)continue;
    for(String field:List.of("name","specification")){Map<String,String> values=field.equals("name")?p.getName():p.getCatalogData().specification();String sourceLocale=!ProductCatalogService.text(values,"ja-JP").isBlank()?"ja-JP":!ProductCatalogService.text(values,"zh-CN").isBlank()?"zh-CN":null;String source=sourceLocale==null?null:ProductCatalogService.text(values,sourceLocale);
-    for(String locale:LOCALES)if(ProductCatalogService.text(values,locale).isBlank()){String suggestion=null,error=null;if(source==null)error="source text missing";else if(locale.equals(sourceLocale))error="source locale missing";else{try{suggestion=llm.translate(source,locale).filter(x->!x.isBlank()).orElse(null);if(suggestion==null)error="AI translation unavailable";}catch(RuntimeException ex){error="AI translation failed";}}result.add(new LocaleSuggestion(p.getId(),Objects.requireNonNullElse(p.getRecordVersion(),0L),field,locale,sourceLocale,source,suggestion,error,suggestion!=null));}
+    for(String locale:LOCALES)if(ProductCatalogService.text(values,locale).isBlank()){String suggestion=null,error=null;if(source==null)error="source text missing";else if(locale.equals(sourceLocale))error="source locale missing";else{try{suggestion=llm.translate(source,locale).filter(x->!x.isBlank()).orElse(null);if(suggestion==null)error="AI translation unavailable";}catch(RuntimeException ex){error="AI translation failed";}}result.add(new LocaleSuggestion(p.getId(),ProductCatalogService.text(p.getName(),"ja-JP"),Objects.requireNonNullElse(p.getRecordVersion(),0L),field,locale,sourceLocale,source,suggestion,error,suggestion!=null));}
    }}return new LocalePreview(postId,post.version,result);
  }
  @Transactional public void applyLocales(Long postId,long version,List<LocaleEdit> edits){

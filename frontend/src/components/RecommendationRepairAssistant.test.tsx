@@ -1,48 +1,14 @@
 import {fireEvent,render,screen,waitFor} from '@testing-library/react';
 import {beforeEach,expect,it,vi} from 'vitest';
-import {I18nProvider} from '../i18n';
-import RecommendationRepairAssistant from './RecommendationRepairAssistant';
-const api=vi.hoisted(()=>({sourceRepairPreview:vi.fn(),sourceRepairApply:vi.fn(),localeRepairPreview:vi.fn(),localeRepairApply:vi.fn()}));
-vi.mock('../api',()=>({recommendationApi:api}));
-const source=(count=20)=>({postId:12,version:4,items:Array.from({length:count},(_,i)=>({itemId:i+1,productId:'p'+i,productVersion:2,itemVersion:4,fields:[
- {field:'supplierKey',currentValue:null,suggestedValue:'costco-jp',evidence:'product master'},
- {field:'channel',currentValue:'COSTCO_WAREHOUSE',suggestedValue:null},
- {field:'sourceUrl',currentValue:null,suggestedValue:null,unresolvedReason:'not uniquely derivable'}]}))});
-function show(mode:'source'|'locale'='source',postId=12){const onClose=vi.fn(),onApplied=vi.fn();render(<I18nProvider><RecommendationRepairAssistant postId={postId} mode={mode} open onClose={onClose} onApplied={onApplied}/></I18nProvider>);return {onClose,onApplied};}
+import {I18nProvider} from '../i18n';import RecommendationRepairAssistant from './RecommendationRepairAssistant';
+const api=vi.hoisted(()=>({sourceRepairPreview:vi.fn(),sourceRepairApply:vi.fn(),localeRepairPreview:vi.fn(),localeRepairApply:vi.fn()}));vi.mock('../api',()=>({recommendationApi:api}));
+const source=(count=20)=>({postId:12,version:4,items:Array.from({length:count},(_,i)=>({itemId:i+1,itemName:`Tea ${i+1}`,productId:`private-${i}`,productVersion:2,itemVersion:4,fields:[{field:'supplierKey',suggestedValue:'costco-jp',displayValue:'Costco Japan',evidence:'product master',overwrite:false},{field:'channel',suggestedValue:'COSTCO_WAREHOUSE',displayValue:'COSTCO_WAREHOUSE',evidence:'reviewed issue-date source',overwrite:false},{field:'sourceMessageKey',suggestedValue:'private-source',displayValue:'Reviewed campaign',evidence:'reviewed issue-date source',overwrite:false},{field:'sourceUrl',unresolvedReason:'not uniquely derivable',overwrite:false}]}))});
+function show(mode:'source'|'locale'='source',postId=12){const onClose=vi.fn(),onApplied=vi.fn();const view=render(<I18nProvider><RecommendationRepairAssistant postId={postId} mode={mode} open onClose={onClose} onApplied={onApplied}/></I18nProvider>);return {...view,onClose,onApplied};}
 beforeEach(()=>{vi.resetAllMocks();localStorage.setItem('bobbuy_locale','en-US');});
-it('issue12 batch preview writes only on confirmation and submits exactly the reviewed snapshot',async()=>{
- const preview=source();api.sourceRepairPreview.mockResolvedValue(preview);api.sourceRepairApply.mockResolvedValue(preview);const callbacks=show();
- await screen.findByText('#20');expect(api.sourceRepairApply).not.toHaveBeenCalled();expect(screen.getAllByText('Not uniquely derivable')).toHaveLength(20);
- fireEvent.click(screen.getByRole('button',{name:'Confirm and save'}));await waitFor(()=>expect(callbacks.onApplied).toHaveBeenCalledTimes(1));expect(api.sourceRepairApply).toHaveBeenCalledWith(12,preview,false);expect(callbacks.onClose).toHaveBeenCalledTimes(1);
-});
-it('canceling a batch preview does not write',async()=>{
- api.sourceRepairPreview.mockResolvedValue(source());const {onClose,onApplied}=show();await screen.findByText('#20');fireEvent.click(screen.getByRole('button',{name:'Cancel edit'}));expect(onClose).toHaveBeenCalled();expect(onApplied).not.toHaveBeenCalled();expect(api.sourceRepairApply).not.toHaveBeenCalled();
-});
-it('issue11 supplier-only fill retains existing context and blank-only default',async()=>{
- const preview={...source(1),postId:11};api.sourceRepairPreview.mockResolvedValue(preview);api.sourceRepairApply.mockResolvedValue(preview);show('source',11);await screen.findByText('costco-jp');expect(screen.getByText('COSTCO_WAREHOUSE')).toBeInTheDocument();expect(screen.getByRole('checkbox',{name:'Overwrite existing values'})).not.toBeChecked();
- fireEvent.click(screen.getByRole('button',{name:'Confirm and save'}));await waitFor(()=>expect(api.sourceRepairApply).toHaveBeenCalledWith(11,preview,false));
-});
-it('AI suggestions remain labeled and editable and only confirmed edits are saved',async()=>{
- api.localeRepairPreview.mockResolvedValue({postId:12,version:4,suggestions:[{productId:'p',productVersion:2,field:'name',locale:'en-US',suggestion:'AI tea',aiSuggested:true}]});api.localeRepairApply.mockResolvedValue(null);show('locale');
- const input=await screen.findByRole('textbox',{name:'p name en-US'});expect(screen.getByText('AI suggestion')).toBeInTheDocument();expect(api.localeRepairApply).not.toHaveBeenCalled();fireEvent.change(input,{target:{value:'Reviewed tea'}});expect(screen.getByText('AI suggestion')).toBeInTheDocument();fireEvent.click(screen.getByRole('button',{name:'Confirm and save'}));
- await waitFor(()=>expect(api.localeRepairApply).toHaveBeenCalledWith(12,4,[{productId:'p',productVersion:2,field:'name',locale:'en-US',value:'Reviewed tea'}]));
-});
-it('AI failure leaves a blank field and cannot save generated content',async()=>{
- api.localeRepairPreview.mockResolvedValue({postId:12,version:4,suggestions:[{productId:'p',productVersion:2,field:'name',locale:'en-US',suggestion:null,error:'AI translation unavailable',aiSuggested:false}]});show('locale');await screen.findByText('AI translation unavailable');expect(screen.queryByRole('textbox')).toBeNull();fireEvent.click(screen.getByRole('button',{name:'Confirm and save'}));await screen.findByText('No valid suggestions to save');expect(api.localeRepairApply).not.toHaveBeenCalled();
-});
-it('a rejected stale confirmation keeps the preview open and reports failure',async()=>{
- api.sourceRepairPreview.mockResolvedValue(source(1));api.sourceRepairApply.mockRejectedValue(new Error('Preview changed'));const callbacks=show();await screen.findByText('#1');fireEvent.click(screen.getByRole('button',{name:'Confirm and save'}));await screen.findByText('Preview changed');expect(callbacks.onApplied).not.toHaveBeenCalled();expect(callbacks.onClose).not.toHaveBeenCalled();
-});
-
-it.each([
- ['en-US','Not uniquely derivable'],
- ['zh-CN','无法唯一推导，请手动补充'],
- ['zh-TW','無法唯一推導，請手動補充'],
- ['ja-JP','一意に導出できません。手動で入力してください'],
-])('localizes the unresolved source flag in %s',async(locale,message)=>{
- localStorage.setItem('bobbuy_locale',locale);
- api.sourceRepairPreview.mockResolvedValue(source(1));show();
- expect(await screen.findByText(message)).toBeInTheDocument();
- expect(screen.queryByText('not uniquely derivable')).not.toBeInTheDocument();
- expect(api.sourceRepairApply).not.toHaveBeenCalled();
-});
+it('issue12 shows readable merge items and writes only after confirmation',async()=>{const preview=source();api.sourceRepairPreview.mockResolvedValue(preview);api.sourceRepairApply.mockResolvedValue(preview);const view=show();expect(await screen.findByText('Tea 20')).toBeInTheDocument();expect(screen.getAllByDisplayValue('Costco Japan')).toHaveLength(20);expect(screen.getAllByDisplayValue('Warehouse')).toHaveLength(20);expect(screen.getByRole('button',{name:/Accept all mergeable items/})).toBeInTheDocument();expect(api.sourceRepairApply).not.toHaveBeenCalled();fireEvent.click(screen.getByRole('button',{name:'Confirm and save'}));await waitFor(()=>expect(view.onApplied).toHaveBeenCalled());expect(api.sourceRepairApply).toHaveBeenCalledWith(12,preview,false);});
+it('cancel does not write and a rejected item is omitted',async()=>{api.sourceRepairPreview.mockResolvedValue(source(1));api.sourceRepairApply.mockResolvedValue(null);const view=show();await screen.findByText('Tea 1');fireEvent.click(screen.getAllByRole('button',{name:'Reject'})[0]);fireEvent.click(screen.getByRole('button',{name:'Confirm and save'}));await waitFor(()=>expect(api.sourceRepairApply).toHaveBeenCalled());expect(api.sourceRepairApply.mock.calls[0][1].items[0].fields[0].suggestedValue).toBeUndefined();view.unmount();api.sourceRepairApply.mockClear();const next=show();await screen.findByText('Tea 1');fireEvent.click(screen.getByRole('button',{name:'Cancel edit'}));expect(next.onClose).toHaveBeenCalled();expect(api.sourceRepairApply).not.toHaveBeenCalled();});
+it('issue11 shows supplier name and business source with blank-only default',async()=>{api.sourceRepairPreview.mockResolvedValue({...source(1),postId:11});show('source',11);expect(await screen.findByDisplayValue('Costco Japan')).toBeInTheDocument();expect(screen.getAllByText('Product information').length).toBeGreaterThan(0);expect(screen.getByRole('checkbox',{name:'Overwrite existing values'})).not.toBeChecked();});
+it('AI suggestion is editable and confirmed explicitly',async()=>{api.localeRepairPreview.mockResolvedValue({postId:12,version:4,suggestions:[{productId:'private',productName:'Tea',productVersion:2,field:'name',locale:'en-US',suggestion:'AI tea',aiSuggested:true}]});api.localeRepairApply.mockResolvedValue(null);show('locale');const input=await screen.findByRole('textbox',{name:'English name'});expect(screen.getByText('AI suggestion')).toBeInTheDocument();fireEvent.change(input,{target:{value:'Reviewed tea'}});fireEvent.click(screen.getByRole('button',{name:'Confirm and save'}));await waitFor(()=>expect(api.localeRepairApply).toHaveBeenCalledWith(12,4,[{productId:'private',productVersion:2,field:'name',locale:'en-US',value:'Reviewed tea'}]));});
+it('AI failure remains manually editable in business language',async()=>{api.localeRepairPreview.mockResolvedValue({postId:12,version:4,suggestions:[{productId:'p',productName:'Tea',productVersion:2,field:'specification',locale:'zh-TW',error:'internal failure',aiSuggested:false}]});show('locale');expect(await screen.findByText('AI suggestion is unavailable. Enter the content manually.')).toBeInTheDocument();expect(screen.getByRole('textbox',{name:'Traditional Chinese specification'})).toBeInTheDocument();});
+it('conflict keeps reviewed content open',async()=>{api.sourceRepairPreview.mockResolvedValue(source(1));api.sourceRepairApply.mockRejectedValue(new Error('Preview changed'));const view=show();await screen.findByText('Tea 1');fireEvent.click(screen.getByRole('button',{name:'Confirm and save'}));await screen.findByText('Preview changed');expect(view.onClose).not.toHaveBeenCalled();expect(screen.getByDisplayValue('Costco Japan')).toBeInTheDocument();});
+it('DOM and aria contain no internal keys or debug labels',async()=>{api.sourceRepairPreview.mockResolvedValue(source(1));show();await screen.findByText('Tea 1');const html=document.body.innerHTML;for(const token of ['supplierKey','sourceMessageKey','sourceUrl','COSTCO_WAREHOUSE','not uniquely derivable','reviewed issue-date source','product master'])expect(html).not.toContain(token);});

@@ -1570,3 +1570,7 @@ Object.assign(messages,{
 Object.assign(messages,{"card.reference": "参考价", "card.reference_past": "往期参考价", "card.reference_future": "预告参考价", "card.reference_undated": "日期待核参考价", "card.price_unknown": "价格待确认"});
 Object.assign(messages,{"repair.not_derivable":"无法唯一推导，请手动补充","repair.source_title":"核对来源上下文建议","repair.locale_title":"核对 AI 语种建议","repair.review_hint":"请逐项预览；明确确认前不会写入。","repair.overwrite":"覆盖已有值","repair.blank":"保持空白","repair.unchanged":"保留已有值","repair.confirm":"确认并保存","repair.deriving":"正在从已审核来源推导…","repair.generating":"正在生成 AI 建议…","repair.none":"没有可保存的有效建议","repair.ai":"AI 建议","repair.batch_source":"批量补全来源","repair.batch_locale":"建议缺失语种","repair.one_click":"预览来源修复","repair.ai_action":"生成 AI 建议"});
 export default messages;
+
+Object.assign(messages,{"repair.accept_all":"一键接受全部可合并项","repair.edit":"编辑","repair.reject":"拒绝","repair.product":"商品","repair.product_number":"商品 {number}","repair.url_manual":"来源中没有找到商品链接，请粘贴可核验的链接。","repair.ai_failed":"AI 建议暂不可用，请手工填写。","repair.field.supplierKey":"供应商","repair.field.channel":"销售渠道","repair.field.sourceMessageKey":"来源邮件","repair.field.sourceUrl":"商品链接","repair.evidence.master":"商品资料","repair.evidence.source":"来源邮件","repair.channel.online":"线上","repair.channel.warehouse":"线下","repair.locale.zh-CN":"简体中文","repair.locale.zh-TW":"繁体中文","repair.locale.ja-JP":"日文","repair.locale.en-US":"英文","repair.locale_field.name":"名称","repair.locale_field.specification":"规格"});
+
+Object.assign(messages,{"repair.supplier_unknown":"供应商名称暂不可用","repair.reviewed_campaign":"已审核活动"});
