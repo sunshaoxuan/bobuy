@@ -49,6 +49,8 @@ Ant Design `Switch` 只用于后台。公开商城布尔筛选使用 `button` + 
 ### 3.6 控件组 / 过滤栏（必须遵守）
 使用 `display:flex; align-items:center; flex-wrap:wrap` 与已有 gap；同组齐高；窄屏换行且不撑出视口；未选中浅灰、选中深底白字；排序旁焦点优先用 `2px solid #795908`；hover 仅用于精细指针；禁用态仍保持 44px 命中区。
 
+好物推荐页 `.catalog-sort-controls` 用 `margin-left:auto` 将排序与标记优先控件作为整组右对齐，组内 `justify-content:flex-end`，并清除内部 `.product-sort` 的自动左外边距；保留排序在前、标记优先在后的 DOM 顺序与窄屏自然换行。
+
 ### 3.7 状态 / 提示消息（消息标签）
 1. 列表底部的「加载更多」、加载中，以及将来若增加的列表结束提示，属于状态 / 提示消息，不是购买、提交等主操作按钮。
 2. 必须使用 **26–28px 或 `999px`** 大圆角 pill / capsule 消息标签；禁止使用 **6px** 小圆角按钮样式。`.feed-loader button` 按本条实现，不得出现 Ant Design default button 的浅阴影、小圆角描边或其他按钮 chrome。公开商城已有 `.storefront .ant-btn { border-radius: 6px; padding: 7px 14px; }`；新样式选择器必须比它特异度更高（例如 `.storefront .feed-loader .ant-btn`），避免圆角和内边距被盖回按钮形态。

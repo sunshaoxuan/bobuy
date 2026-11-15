@@ -1,0 +1,1225 @@
+{
+  "production": {
+    "url": "https://bobuy.cc/products",
+    "assets": [
+      "https://bobuy.cc/assets/index-faS7fmCv.js",
+      "https://bobuy.cc/assets/index-CVC2hMes.css",
+      "https://bobuy.cc/assets/ImageLightbox-CLDRDfo1.css",
+      "https://bobuy.cc/assets/RecommendationImageViewer-CACQJNQu.css",
+      "https://bobuy.cc/assets/ProductMarkerBadges-Ch-ENXpg.css",
+      "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092"
+    ],
+    "https://bobuy.cc/assets/index-faS7fmCv.js": {
+      "status": 200,
+      "sha256": "bc7e165bcf944ec65b75985bd85bc5b700432b611a5a12904dc3e79d48049f8c"
+    },
+    "https://bobuy.cc/assets/index-CVC2hMes.css": {
+      "status": 200,
+      "sha256": "e0a4e755c7a2752b22cc7abe2047005dd0e2923346d59aea592b7af2b5ee6b99"
+    },
+    "https://bobuy.cc/assets/ImageLightbox-CLDRDfo1.css": {
+      "status": 200,
+      "sha256": "c815597ad21fdfe24d6fbb54e0c7ab27aca5dcd9e9511bf64d38e36cc2fe0e2c"
+    },
+    "https://bobuy.cc/assets/RecommendationImageViewer-CACQJNQu.css": {
+      "status": 200,
+      "sha256": "e877e9109253cdd78e0f923b1e9ff02f813b85f5ae964d972afb030c033d97a7"
+    },
+    "https://bobuy.cc/assets/ProductMarkerBadges-Ch-ENXpg.css": {
+      "status": 200,
+      "sha256": "5e261cb4f7218357d29c0853c05c44daefd6e5e4ea1f25539d9bab0a99385607"
+    },
+    "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092": {
+      "status": 200,
+      "sha256": "637381256384554e1cc3309a62fb238a51b83e7f10b2a56d8ba15dbc73ca762e"
+    }
+  },
+  "candidate": [
+    {
+      "width": 1280,
+      "locale": "zh-CN",
+      "metrics": {
+        "group": {
+          "x": 903.203125,
+          "y": 112,
+          "right": 1248,
+          "width": 344.796875,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "648.516px"
+        },
+        "heading": {
+          "x": 32,
+          "y": 96,
+          "right": 1248,
+          "width": 1216,
+          "height": 72,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "0px"
+        },
+        "controls": [
+          {
+            "x": 903.203125,
+            "y": 112,
+            "right": 1121.203125,
+            "width": 218,
+            "height": 44,
+            "minWidth": "200px",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(217, 217, 217)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          },
+          {
+            "x": 1130,
+            "y": 112,
+            "right": 1248,
+            "width": 118,
+            "height": 44,
+            "minWidth": "auto",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          }
+        ],
+        "overflow": false
+      },
+      "focus": {
+        "outline": "rgb(217, 54, 48) solid 3px",
+        "focusVisible": true
+      },
+      "url": "http://localhost:5173/products?sort=rating-desc"
+    },
+    {
+      "width": 1280,
+      "locale": "zh-TW",
+      "metrics": {
+        "group": {
+          "x": 903.203125,
+          "y": 112,
+          "right": 1248,
+          "width": 344.796875,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "648.516px"
+        },
+        "heading": {
+          "x": 32,
+          "y": 96,
+          "right": 1248,
+          "width": 1216,
+          "height": 72,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "0px"
+        },
+        "controls": [
+          {
+            "x": 903.203125,
+            "y": 112,
+            "right": 1121.203125,
+            "width": 218,
+            "height": 44,
+            "minWidth": "200px",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(217, 217, 217)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          },
+          {
+            "x": 1130,
+            "y": 112,
+            "right": 1248,
+            "width": 118,
+            "height": 44,
+            "minWidth": "auto",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          }
+        ],
+        "overflow": false
+      },
+      "focus": {
+        "outline": "rgb(217, 54, 48) solid 3px",
+        "focusVisible": true
+      },
+      "url": "http://localhost:5173/products?sort=rating-desc"
+    },
+    {
+      "width": 1280,
+      "locale": "en-US",
+      "metrics": {
+        "group": {
+          "x": 798.484375,
+          "y": 110,
+          "right": 1248,
+          "width": 449.515625,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "455.328px"
+        },
+        "heading": {
+          "x": 32,
+          "y": 96,
+          "right": 1248,
+          "width": 1216,
+          "height": 70,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "0px"
+        },
+        "controls": [
+          {
+            "x": 798.484375,
+            "y": 110,
+            "right": 1074.484375,
+            "width": 276,
+            "height": 44,
+            "minWidth": "200px",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(217, 217, 217)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          },
+          {
+            "x": 1083.28125,
+            "y": 110,
+            "right": 1248,
+            "width": 164.71875,
+            "height": 44,
+            "minWidth": "auto",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          }
+        ],
+        "overflow": false
+      },
+      "focus": {
+        "outline": "rgb(217, 54, 48) solid 3px",
+        "focusVisible": true
+      },
+      "url": "http://localhost:5173/products?sort=rating-desc"
+    },
+    {
+      "width": 1280,
+      "locale": "ja-JP",
+      "metrics": {
+        "group": {
+          "x": 819.203125,
+          "y": 112,
+          "right": 1248,
+          "width": 428.796875,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "522.625px"
+        },
+        "heading": {
+          "x": 32,
+          "y": 96,
+          "right": 1248,
+          "width": 1216,
+          "height": 72,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "0px"
+        },
+        "controls": [
+          {
+            "x": 819.203125,
+            "y": 112,
+            "right": 1051.203125,
+            "width": 232,
+            "height": 44,
+            "minWidth": "200px",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(217, 217, 217)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          },
+          {
+            "x": 1060,
+            "y": 112,
+            "right": 1248,
+            "width": 188,
+            "height": 44,
+            "minWidth": "auto",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          }
+        ],
+        "overflow": false
+      },
+      "focus": {
+        "outline": "rgb(217, 54, 48) solid 3px",
+        "focusVisible": true
+      },
+      "url": "http://localhost:5173/products?sort=rating-desc"
+    },
+    {
+      "width": 390,
+      "locale": "zh-CN",
+      "metrics": {
+        "group": {
+          "x": 29.203125,
+          "y": 188.25,
+          "right": 374,
+          "width": 344.796875,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "13.2031px"
+        },
+        "heading": {
+          "x": 16,
+          "y": 128,
+          "right": 374,
+          "width": 358,
+          "height": 116.25,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "0px"
+        },
+        "controls": [
+          {
+            "x": 29.203125,
+            "y": 188.25,
+            "right": 247.203125,
+            "width": 218,
+            "height": 44,
+            "minWidth": "200px",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(217, 217, 217)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          },
+          {
+            "x": 256,
+            "y": 188.25,
+            "right": 374,
+            "width": 118,
+            "height": 44,
+            "minWidth": "auto",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          }
+        ],
+        "overflow": false
+      },
+      "focus": {
+        "outline": "rgb(217, 54, 48) solid 3px",
+        "focusVisible": true
+      },
+      "url": "http://localhost:5173/products?sort=rating-desc"
+    },
+    {
+      "width": 390,
+      "locale": "zh-TW",
+      "metrics": {
+        "group": {
+          "x": 29.203125,
+          "y": 188.25,
+          "right": 374,
+          "width": 344.796875,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "13.2031px"
+        },
+        "heading": {
+          "x": 16,
+          "y": 128,
+          "right": 374,
+          "width": 358,
+          "height": 116.25,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "0px"
+        },
+        "controls": [
+          {
+            "x": 29.203125,
+            "y": 188.25,
+            "right": 247.203125,
+            "width": 218,
+            "height": 44,
+            "minWidth": "200px",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(217, 217, 217)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          },
+          {
+            "x": 256,
+            "y": 188.25,
+            "right": 374,
+            "width": 118,
+            "height": 44,
+            "minWidth": "auto",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          }
+        ],
+        "overflow": false
+      },
+      "focus": {
+        "outline": "rgb(217, 54, 48) solid 3px",
+        "focusVisible": true
+      },
+      "url": "http://localhost:5173/products?sort=rating-desc"
+    },
+    {
+      "width": 390,
+      "locale": "en-US",
+      "metrics": {
+        "group": {
+          "x": 16,
+          "y": 188.25,
+          "right": 374,
+          "width": 358,
+          "height": 96.796875,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "0px"
+        },
+        "heading": {
+          "x": 16,
+          "y": 128,
+          "right": 374,
+          "width": 358,
+          "height": 169.046875,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "0px"
+        },
+        "controls": [
+          {
+            "x": 98,
+            "y": 188.25,
+            "right": 374,
+            "width": 276,
+            "height": 44,
+            "minWidth": "200px",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(217, 217, 217)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          },
+          {
+            "x": 209.28125,
+            "y": 241.046875,
+            "right": 374,
+            "width": 164.71875,
+            "height": 44,
+            "minWidth": "auto",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          }
+        ],
+        "overflow": false
+      },
+      "focus": {
+        "outline": "rgb(217, 54, 48) solid 3px",
+        "focusVisible": true
+      },
+      "url": "http://localhost:5173/products?sort=rating-desc"
+    },
+    {
+      "width": 390,
+      "locale": "ja-JP",
+      "metrics": {
+        "group": {
+          "x": 16,
+          "y": 188.25,
+          "right": 374,
+          "width": 358,
+          "height": 96.796875,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "0px"
+        },
+        "heading": {
+          "x": 16,
+          "y": 128,
+          "right": 374,
+          "width": 358,
+          "height": 169.046875,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "0px"
+        },
+        "controls": [
+          {
+            "x": 142,
+            "y": 188.25,
+            "right": 374,
+            "width": 232,
+            "height": 44,
+            "minWidth": "200px",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(217, 217, 217)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          },
+          {
+            "x": 186,
+            "y": 241.046875,
+            "right": 374,
+            "width": 188,
+            "height": 44,
+            "minWidth": "auto",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          }
+        ],
+        "overflow": false
+      },
+      "focus": {
+        "outline": "rgb(217, 54, 48) solid 3px",
+        "focusVisible": true
+      },
+      "url": "http://localhost:5173/products?sort=rating-desc"
+    },
+    {
+      "width": 767,
+      "locale": "zh-CN",
+      "metrics": {
+        "group": {
+          "x": 406.203125,
+          "y": 141,
+          "right": 751,
+          "width": 344.796875,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "179.266px"
+        },
+        "heading": {
+          "x": 16,
+          "y": 128,
+          "right": 751,
+          "width": 735,
+          "height": 69,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "0px"
+        },
+        "controls": [
+          {
+            "x": 406.203125,
+            "y": 141,
+            "right": 624.203125,
+            "width": 218,
+            "height": 44,
+            "minWidth": "200px",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(217, 217, 217)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          },
+          {
+            "x": 633,
+            "y": 141,
+            "right": 751,
+            "width": 118,
+            "height": 44,
+            "minWidth": "auto",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          }
+        ],
+        "overflow": false
+      },
+      "focus": {
+        "outline": "rgb(217, 54, 48) solid 3px",
+        "focusVisible": true
+      },
+      "url": "http://localhost:5173/products?sort=rating-desc"
+    },
+    {
+      "width": 767,
+      "locale": "zh-TW",
+      "metrics": {
+        "group": {
+          "x": 406.203125,
+          "y": 141,
+          "right": 751,
+          "width": 344.796875,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "179.266px"
+        },
+        "heading": {
+          "x": 16,
+          "y": 128,
+          "right": 751,
+          "width": 735,
+          "height": 69,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "0px"
+        },
+        "controls": [
+          {
+            "x": 406.203125,
+            "y": 141,
+            "right": 624.203125,
+            "width": 218,
+            "height": 44,
+            "minWidth": "200px",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(217, 217, 217)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          },
+          {
+            "x": 633,
+            "y": 141,
+            "right": 751,
+            "width": 118,
+            "height": 44,
+            "minWidth": "auto",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          }
+        ],
+        "overflow": false
+      },
+      "focus": {
+        "outline": "rgb(217, 54, 48) solid 3px",
+        "focusVisible": true
+      },
+      "url": "http://localhost:5173/products?sort=rating-desc"
+    },
+    {
+      "width": 767,
+      "locale": "en-US",
+      "metrics": {
+        "group": {
+          "x": 301.484375,
+          "y": 188.25,
+          "right": 751,
+          "width": 449.515625,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "285.484px"
+        },
+        "heading": {
+          "x": 16,
+          "y": 128,
+          "right": 751,
+          "width": 735,
+          "height": 116.25,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "0px"
+        },
+        "controls": [
+          {
+            "x": 301.484375,
+            "y": 188.25,
+            "right": 577.484375,
+            "width": 276,
+            "height": 44,
+            "minWidth": "200px",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(217, 217, 217)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          },
+          {
+            "x": 586.28125,
+            "y": 188.25,
+            "right": 751,
+            "width": 164.71875,
+            "height": 44,
+            "minWidth": "auto",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          }
+        ],
+        "overflow": false
+      },
+      "focus": {
+        "outline": "rgb(217, 54, 48) solid 3px",
+        "focusVisible": true
+      },
+      "url": "http://localhost:5173/products?sort=rating-desc"
+    },
+    {
+      "width": 767,
+      "locale": "ja-JP",
+      "metrics": {
+        "group": {
+          "x": 322.203125,
+          "y": 141,
+          "right": 751,
+          "width": 428.796875,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "59.2656px"
+        },
+        "heading": {
+          "x": 16,
+          "y": 128,
+          "right": 751,
+          "width": 735,
+          "height": 69,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "0px"
+        },
+        "controls": [
+          {
+            "x": 322.203125,
+            "y": 141,
+            "right": 554.203125,
+            "width": 232,
+            "height": 44,
+            "minWidth": "200px",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(217, 217, 217)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          },
+          {
+            "x": 563,
+            "y": 141,
+            "right": 751,
+            "width": 188,
+            "height": 44,
+            "minWidth": "auto",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          }
+        ],
+        "overflow": false
+      },
+      "focus": {
+        "outline": "rgb(217, 54, 48) solid 3px",
+        "focusVisible": true
+      },
+      "url": "http://localhost:5173/products?sort=rating-desc"
+    },
+    {
+      "width": 375,
+      "locale": "zh-CN",
+      "metrics": {
+        "group": {
+          "x": 16,
+          "y": 188.25,
+          "right": 359,
+          "width": 343,
+          "height": 96.796875,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "0px"
+        },
+        "heading": {
+          "x": 16,
+          "y": 128,
+          "right": 359,
+          "width": 343,
+          "height": 169.046875,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "0px"
+        },
+        "controls": [
+          {
+            "x": 16,
+            "y": 188.25,
+            "right": 359,
+            "width": 343,
+            "height": 44,
+            "minWidth": "0px",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(217, 217, 217)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          },
+          {
+            "x": 241,
+            "y": 241.046875,
+            "right": 359,
+            "width": 118,
+            "height": 44,
+            "minWidth": "auto",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          }
+        ],
+        "overflow": false
+      },
+      "focus": {
+        "outline": "rgb(217, 54, 48) solid 3px",
+        "focusVisible": true
+      },
+      "url": "http://localhost:5173/products?sort=rating-desc"
+    },
+    {
+      "width": 375,
+      "locale": "zh-TW",
+      "metrics": {
+        "group": {
+          "x": 16,
+          "y": 188.25,
+          "right": 359,
+          "width": 343,
+          "height": 96.796875,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "0px"
+        },
+        "heading": {
+          "x": 16,
+          "y": 128,
+          "right": 359,
+          "width": 343,
+          "height": 169.046875,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "0px"
+        },
+        "controls": [
+          {
+            "x": 16,
+            "y": 188.25,
+            "right": 359,
+            "width": 343,
+            "height": 44,
+            "minWidth": "0px",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(217, 217, 217)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          },
+          {
+            "x": 241,
+            "y": 241.046875,
+            "right": 359,
+            "width": 118,
+            "height": 44,
+            "minWidth": "auto",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          }
+        ],
+        "overflow": false
+      },
+      "focus": {
+        "outline": "rgb(217, 54, 48) solid 3px",
+        "focusVisible": true
+      },
+      "url": "http://localhost:5173/products?sort=rating-desc"
+    },
+    {
+      "width": 375,
+      "locale": "en-US",
+      "metrics": {
+        "group": {
+          "x": 16,
+          "y": 188.25,
+          "right": 359,
+          "width": 343,
+          "height": 96.796875,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "0px"
+        },
+        "heading": {
+          "x": 16,
+          "y": 128,
+          "right": 359,
+          "width": 343,
+          "height": 169.046875,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "0px"
+        },
+        "controls": [
+          {
+            "x": 16,
+            "y": 188.25,
+            "right": 359,
+            "width": 343,
+            "height": 44,
+            "minWidth": "0px",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(217, 217, 217)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          },
+          {
+            "x": 194.28125,
+            "y": 241.046875,
+            "right": 359,
+            "width": 164.71875,
+            "height": 44,
+            "minWidth": "auto",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          }
+        ],
+        "overflow": false
+      },
+      "focus": {
+        "outline": "rgb(217, 54, 48) solid 3px",
+        "focusVisible": true
+      },
+      "url": "http://localhost:5173/products?sort=rating-desc"
+    },
+    {
+      "width": 375,
+      "locale": "ja-JP",
+      "metrics": {
+        "group": {
+          "x": 16,
+          "y": 188.25,
+          "right": 359,
+          "width": 343,
+          "height": 96.796875,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "0px"
+        },
+        "heading": {
+          "x": 16,
+          "y": 128,
+          "right": 359,
+          "width": 343,
+          "height": 169.046875,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "borderRadius": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "borderWidth": "0px",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "boxShadow": "none",
+          "marginLeft": "0px"
+        },
+        "controls": [
+          {
+            "x": 16,
+            "y": 188.25,
+            "right": 359,
+            "width": 343,
+            "height": 44,
+            "minWidth": "0px",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(217, 217, 217)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          },
+          {
+            "x": 171,
+            "y": 241.046875,
+            "right": 359,
+            "width": 188,
+            "height": 44,
+            "minWidth": "auto",
+            "minHeight": "44px",
+            "borderRadius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "1px",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "boxShadow": "none",
+            "marginLeft": "0px"
+          }
+        ],
+        "overflow": false
+      },
+      "focus": {
+        "outline": "rgb(217, 54, 48) solid 3px",
+        "focusVisible": true
+      },
+      "url": "http://localhost:5173/products?sort=rating-desc"
+    }
+  ],
+  "errors": [],
+  "network": []
+}
