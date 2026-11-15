@@ -70,6 +70,38 @@ it('shows the trip card only when a real in-progress trip exists',async()=>{
  try {mocks.trips.mockResolvedValue([]);mocks.activeTrips.mockResolvedValue([{id:12,merchantId:1,merchantName:'Shop',deliveryArea:'Real trip',deliveryDate:'2026-11-12'}]);const view=mount('/');await screen.findByRole('heading',{name:'Catalog fixture'});await waitFor(()=>expect(view.container.querySelector('.journey-strip')).not.toBeNull());const card=view.container.querySelector('.journey-strip');expect(card).toHaveTextContent('Real trip');expect(card).not.toHaveTextContent('No trips available');}
  finally {features.dealsBulletin=true;}
 });
+it('keeps an in-progress-only trigger disabled and catalog auto-loading unpaused after clicks',async()=>{
+ mocks.trips.mockResolvedValue([]);
+ mocks.activeTrips.mockResolvedValue([{id:12,merchantId:1,merchantName:'Shop',deliveryArea:'Underway',deliveryDate:'2026-11-12'}]);
+ const view=mount('/');
+ const trigger=await screen.findByRole('button',{name:'Choose a buying trip'});
+ await waitFor(()=>expect(screen.getByTestId('eligibility')).toHaveTextContent('false'));
+ expect(view.container.querySelector('.journey-strip')).toHaveTextContent('Underway');
+ expect(trigger).toBeDisabled();
+ fireEvent.click(trigger);fireEvent.click(trigger);
+ expect(document.querySelector('.journey-picker')).toBeNull();
+ expect(screen.queryByRole('dialog')).toBeNull();
+ expect(mocks.catalogProps.mock.calls.slice(-1)[0][0].autoPaused).toBe(false);
+});
+it('ignores clicks while choices are pending, then pauses only for an explicitly opened bookable picker',async()=>{
+ let finish!:(value:unknown)=>void;
+ mocks.trips.mockImplementation(()=>new Promise(resolve=>{finish=resolve;}));
+ const journey={id:12,merchantId:1,merchantName:'Shop',deliveryArea:'Real trip',deliveryDate:'2026-11-12'};
+ mocks.activeTrips.mockResolvedValue([journey]);
+ mount('/');
+ const trigger=await screen.findByRole('button',{name:'Choose a buying trip'});
+ expect(trigger).toBeDisabled();fireEvent.click(trigger);
+ expect(mocks.catalogProps.mock.calls.slice(-1)[0][0].autoPaused).toBe(false);
+ await act(async()=>finish([journey]));
+ expect(trigger).toBeEnabled();
+ expect(screen.queryByRole('dialog')).toBeNull();
+ expect(mocks.catalogProps.mock.calls.slice(-1)[0][0].autoPaused).toBe(false);
+ fireEvent.click(trigger);
+ await screen.findByRole('dialog');
+ expect(mocks.catalogProps.mock.calls.slice(-1)[0][0].autoPaused).toBe(true);
+ fireEvent.click(document.querySelector('.journey-picker .ant-drawer-close')!);
+ await waitFor(()=>expect(mocks.catalogProps.mock.calls.slice(-1)[0][0].autoPaused).toBe(false));
+});
 function selected(path:string){
  const mobile=document.querySelector('.browse-mobile-shortcuts a[aria-current="page"]');
  if(path.startsWith('/products'))expect(mobile).toHaveAttribute('href',path);
