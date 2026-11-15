@@ -1,6 +1,8 @@
 package com.bobbuy.service;
 
 import com.bobbuy.model.MailSettings;
+import jakarta.mail.MessagingException;
+import org.springframework.mail.MailSendException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
@@ -38,16 +40,34 @@ public class SmtpDelivery {
   return sender;
  }
  private FailureCategory classify(Throwable failure) {
-  boolean connectionFailure=false;
-  for(Throwable current=failure;current!=null;current=current.getCause()) {
+  boolean connectionFailure=false,tlsFailure=false,authenticationFailure=false,rejectedFailure=false;
+  var pending=new java.util.ArrayDeque<Throwable>();
+  var visited=java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<Throwable,Boolean>());
+  var rejectionCode=java.util.regex.Pattern.compile("\\b(550|551|552|553|554)\\b");
+  pending.add(failure);
+  while(!pending.isEmpty()) {
+   Throwable current=pending.removeFirst();
+   if(!visited.add(current)) continue;
+   if(current.getCause()!=null) pending.add(current.getCause());
+   if(current instanceof MailSendException sendFailure) {
+    for(Exception nested:sendFailure.getFailedMessages().values()) {
+     if(nested!=null) pending.add(nested);
+    }
+   }
+   if(current instanceof MessagingException messagingFailure && messagingFailure.getNextException()!=null) {
+    pending.add(messagingFailure.getNextException());
+   }
    String name=current.getClass().getName().toLowerCase(java.util.Locale.ROOT);
    String message=String.valueOf(current.getMessage()).toLowerCase(java.util.Locale.ROOT);
    if(name.contains("timeout") || message.contains("timed out") || message.contains("timeout")) return FailureCategory.TIMEOUT;
-   if(name.contains("ssl") || name.contains("certificate") || message.contains("certificate") || message.contains("handshake")) return FailureCategory.TLS;
-   if(name.contains("authentication") || message.contains("authentication failed") || message.contains("535")) return FailureCategory.AUTHENTICATION;
-   if(message.contains("rejected") || message.matches(".*\\b(550|551|552|553|554)\\b.*")) return FailureCategory.REJECTED;
+   if(name.contains("ssl") || name.contains("certificate") || message.contains("certificate") || message.contains("handshake")) tlsFailure=true;
+   if(name.contains("authentication") || message.contains("authentication failed") || message.contains("535")) authenticationFailure=true;
+   if(message.contains("rejected") || rejectionCode.matcher(message).find()) rejectedFailure=true;
    if(name.contains("connect") || message.contains("connection")) connectionFailure=true;
   }
+  if(tlsFailure) return FailureCategory.TLS;
+  if(authenticationFailure) return FailureCategory.AUTHENTICATION;
+  if(rejectedFailure) return FailureCategory.REJECTED;
   return connectionFailure ? FailureCategory.CONNECTION : FailureCategory.UNKNOWN;
  }
 }

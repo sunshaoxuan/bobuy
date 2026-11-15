@@ -22,7 +22,28 @@ class SmtpDeliveryTest {
   assertWrappedFailure(new jakarta.mail.MessagingException("550 recipient rejected"),SmtpDelivery.FailureCategory.REJECTED);
  }
  private void assertWrappedFailure(Exception cause,SmtpDelivery.FailureCategory category) {
-  var failure=new MailSendException("Mail server connection failed",cause);
+  assertFailure(new MailSendException("Mail server connection failed",cause),category);
+ }
+ @Test void failedMessagesWithMultilineRejectionAndNoCauseIsRejected() {
+  var failure=new MailSendException(java.util.Map.of(new SimpleMailMessage(),
+   new jakarta.mail.MessagingException("SMTP response:\n550 Mailbox unavailable\n")));
+  assertThat(failure.getCause()).isNull();
+  assertThat(failure.getMessage()).contains("\n", "550 Mailbox unavailable");
+  assertFailure(failure,SmtpDelivery.FailureCategory.REJECTED);
+ }
+ @Test void nestedNextExceptionIsInspectedEvenWhenCauseIsAbsent() {
+  var nested=new jakarta.mail.MessagingException("Delivery failed") {
+   @Override public synchronized Throwable getCause() { return null; }
+  };
+  nested.setNextException(new java.net.SocketTimeoutException());
+  assertFailure(new MailSendException(java.util.Map.of(new SimpleMailMessage(),nested)),SmtpDelivery.FailureCategory.TIMEOUT);
+ }
+ @Test void specificFailuresTakePrecedenceAcrossTheFullGraph() {
+  assertFailure(new MailSendException("550 Mailbox unavailable",new javax.net.ssl.SSLException("TLS failure")),SmtpDelivery.FailureCategory.TLS);
+  assertFailure(new MailSendException("550 Mailbox unavailable",new jakarta.mail.AuthenticationFailedException()),SmtpDelivery.FailureCategory.AUTHENTICATION);
+  assertFailure(new MailSendException("TLS handshake failed",new java.net.SocketTimeoutException()),SmtpDelivery.FailureCategory.TIMEOUT);
+ }
+ private void assertFailure(MailSendException failure,SmtpDelivery.FailureCategory category) {
   var delivery=new SmtpDelivery() {
    @Override JavaMailSenderImpl createSender(MailSettings settings,String password) {
     return new JavaMailSenderImpl() {
