@@ -5,6 +5,8 @@ import com.bobbuy.api.response.ApiResponse;
 import com.bobbuy.api.response.ErrorCode;
 import com.bobbuy.security.AuthCookieService;
 import com.bobbuy.service.AuthService;
+import com.bobbuy.service.AuthAbuseService;
+import com.bobbuy.security.TrustedClientIpResolver;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -21,10 +23,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     private final AuthService authService;
     private final AuthCookieService authCookieService;
+    private final AuthAbuseService abuse;
+    private final TrustedClientIpResolver clientIps;
 
-    public AuthController(AuthService authService, AuthCookieService authCookieService) {
+    public AuthController(AuthService authService, AuthCookieService authCookieService, AuthAbuseService abuse, TrustedClientIpResolver clientIps) {
         this.authService = authService;
         this.authCookieService = authCookieService;
+        this.abuse=abuse; this.clientIps=clientIps;
     }
 
     @PostMapping("/login")
@@ -33,7 +38,11 @@ public class AuthController {
         HttpServletRequest httpServletRequest,
         HttpServletResponse httpServletResponse
     ) {
-        AuthService.SessionResult sessionResult = authService.login(request.username(), request.password(), clientFingerprint(httpServletRequest));
+        var attempt=abuse.begin(AuthAbuseService.Purpose.LOGIN,clientIps.resolve(httpServletRequest),request.username());
+        AuthService.SessionResult sessionResult;
+        try { sessionResult=authService.login(request.username(), request.password(), clientFingerprint(httpServletRequest)); }
+        catch(RuntimeException failure){abuse.failed(attempt);throw failure;}
+        abuse.succeeded(attempt);
         authCookieService.writeRefreshAndCsrfCookies(httpServletResponse, sessionResult.refreshToken(), sessionResult.refreshTokenExpiresAt());
         return ApiResponse.success(sessionResult);
     }

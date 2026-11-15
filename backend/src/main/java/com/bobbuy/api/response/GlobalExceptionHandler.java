@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -34,6 +35,13 @@ public class GlobalExceptionHandler {
             : ex.getMessageKey());
     return ResponseEntity.status(resolveStatus(ex.getErrorCode()))
         .body(new ApiError(ex.getErrorCode().name(), message));
+  }
+
+  @ExceptionHandler(com.bobbuy.service.AuthAbuseException.class)
+  public ResponseEntity<ApiError> handleAuthAbuse(com.bobbuy.service.AuthAbuseException ex) {
+    String message=messageSource.getMessage("error.auth.rate_limited",null,LocaleContextHolder.getLocale());
+    return ResponseEntity.status(429).header(HttpHeaders.RETRY_AFTER,Long.toString(ex.retryAfterSeconds()))
+        .body(new ApiError(ErrorCode.RATE_LIMITED.name(),message));
   }
 
   @ExceptionHandler(PublicationValidationException.class)
@@ -98,6 +106,7 @@ public class GlobalExceptionHandler {
       case RESOURCE_NOT_FOUND -> 404;
       case UNAUTHORIZED -> 401;
       case FORBIDDEN -> 403;
+      case RATE_LIMITED -> 429;
       case INVALID_REQUEST, INVALID_STATUS -> 400;
       default -> 500;
     };

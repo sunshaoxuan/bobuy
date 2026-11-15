@@ -4,6 +4,8 @@ import com.bobbuy.api.response.ApiResponse;
 import com.bobbuy.security.AuthCookieService;
 import com.bobbuy.service.AuthService;
 import com.bobbuy.service.StorefrontService;
+import com.bobbuy.service.AuthAbuseService;
+import com.bobbuy.security.TrustedClientIpResolver;
 import jakarta.servlet.http.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
@@ -16,8 +18,9 @@ public class StorefrontController {
     private final StorefrontService storefront;
     private final AuthService auth;
     private final AuthCookieService cookies;
-    public StorefrontController(StorefrontService storefront, AuthService auth, AuthCookieService cookies) {
-        this.storefront = storefront; this.auth = auth; this.cookies = cookies;
+    private final AuthAbuseService abuse; private final TrustedClientIpResolver clientIps;
+    public StorefrontController(StorefrontService storefront, AuthService auth, AuthCookieService cookies, AuthAbuseService abuse, TrustedClientIpResolver clientIps) {
+        this.storefront = storefront; this.auth = auth; this.cookies = cookies; this.abuse=abuse;this.clientIps=clientIps;
     }
     @GetMapping("/api/storefront/trips")
     public ApiResponse<List<StorefrontService.PublicTrip>> trips(@RequestParam(defaultValue = "false") boolean includeCurrent) {
@@ -30,24 +33,26 @@ public class StorefrontController {
     @PostMapping("/api/auth/register")
     public ApiResponse<AuthService.SessionResult> register(@Valid @RequestBody StorefrontService.Registration request,
             HttpServletRequest httpRequest, HttpServletResponse response) {
-        storefront.register(request);
+        var attempt=abuse.begin(AuthAbuseService.Purpose.REGISTER,clientIps.resolve(httpRequest),request.email());
+        try{storefront.register(request);}catch(RuntimeException failure){abuse.failed(attempt);throw failure;}abuse.succeeded(attempt);
         var session = auth.login(request.username(), request.password(), httpRequest.getHeader("User-Agent"));
         cookies.writeRefreshAndCsrfCookies(response, session.refreshToken(), session.refreshTokenExpiresAt());
         return ApiResponse.success(session);
     }
     @PostMapping("/api/auth/email/resend")
-    public ApiResponse<Boolean> resend(Authentication authentication) { storefront.resend(authentication); return ApiResponse.success(true); }
+    public ApiResponse<Boolean> resend(Authentication authentication,HttpServletRequest request) { var a=abuse.begin(AuthAbuseService.Purpose.VERIFICATION_RESEND,clientIps.resolve(request),authentication.getName());try{storefront.resend(authentication);}catch(RuntimeException failure){abuse.failed(a);throw failure;}abuse.succeeded(a);return ApiResponse.success(true); }
     @PostMapping("/api/auth/register-account")
     public ApiResponse<AuthService.SessionResult> registerAccount(@Valid @RequestBody StorefrontService.AccountRegistration request,
             HttpServletRequest httpRequest, HttpServletResponse response) {
-        storefront.registerAccount(request);
+        var attempt=abuse.begin(AuthAbuseService.Purpose.REGISTER,clientIps.resolve(httpRequest),request.account().email());
+        try{storefront.registerAccount(request);}catch(RuntimeException failure){abuse.failed(attempt);throw failure;}abuse.succeeded(attempt);
         var session = auth.login(request.account().username(), request.account().password(), httpRequest.getHeader("User-Agent"));
         cookies.writeRefreshAndCsrfCookies(response, session.refreshToken(), session.refreshTokenExpiresAt());
         return ApiResponse.success(session);
     }
     @PostMapping("/api/auth/email/verify")
-    public ApiResponse<Boolean> verify(Authentication authentication, @Valid @RequestBody Verification request) {
-        storefront.verify(authentication, request.code()); return ApiResponse.success(true);
+    public ApiResponse<Boolean> verify(Authentication authentication, @Valid @RequestBody Verification request,HttpServletRequest httpRequest) {
+        var a=abuse.begin(AuthAbuseService.Purpose.VERIFICATION_VERIFY,clientIps.resolve(httpRequest),authentication.getName());try{storefront.verify(authentication, request.code());}catch(RuntimeException failure){abuse.failed(a);throw failure;}abuse.succeeded(a);return ApiResponse.success(true);
     }
     @PostMapping("/api/checkout")
     public ApiResponse<StorefrontService.CheckoutResult> checkout(Authentication authentication, @Valid @RequestBody StorefrontService.Checkout request) {

@@ -6,5 +6,6 @@ public enum ErrorCode {
   INVALID_STATUS,
   UNAUTHORIZED,
   FORBIDDEN,
+  RATE_LIMITED,
   INTERNAL_ERROR
 }
