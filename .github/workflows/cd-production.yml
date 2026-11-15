@@ -147,14 +147,34 @@ jobs:
           if test -f compose.rustfs.yml; then compose_files+=(-f compose.rustfs.yml); fi
           compose_files+=(-f .cd/compose.yml)
           runtime_env=".cd/runtime-env-$REVISION"
-          rm -f -- "$runtime_env"
-          trap 'rm -f -- "$runtime_env"' EXIT
+          last_env=".cd/runtime-env-last"
+          rollback_env=".cd/runtime-env-rollback-$REVISION"
+          rm -f -- "$runtime_env" "$rollback_env"
+          trap 'rm -f -- "$runtime_env" "$rollback_env"' EXIT
+          rollback_env_files=(--env-file /etc/bobuy.env)
+          if [[ -e "$last_env" || -L "$last_env" ]]; then
+            [[ -f "$last_env" && ! -L "$last_env" ]] || { echo 'Invalid last-known-good environment file.' >&2; exit 1; }
+            cp -- "$last_env" "$rollback_env"
+            chmod 600 "$rollback_env"
+            rollback_env_files+=(--env-file "$rollback_env")
+          fi
           env_files=(--env-file /etc/bobuy.env)
           if [[ "$PROD_ENCRYPTED_ENV_ENABLED" == true ]]; then
             bash "$edge_dir/prepare-production-env.sh" true "$edge_dir/production.env.enc" /etc/bobuy/age/keys.txt "$runtime_env"
             env_files+=(--env-file "$runtime_env")
           fi
           compose() { docker compose "${env_files[@]}" -p bobuy "${compose_files[@]}" "$@"; }
+          rollback_compose() { docker compose "${rollback_env_files[@]}" -p bobuy "${compose_files[@]}" "$@"; }
+          persist_environment() {
+            if [[ "$PROD_ENCRYPTED_ENV_ENABLED" == true ]]; then
+              [[ -f "$runtime_env" && ! -L "$runtime_env" ]] || return 1
+              chmod 600 "$runtime_env" || return 1
+              # Same-directory rename atomically promotes the validated candidate.
+              mv -fT -- "$runtime_env" "$last_env" || return 1
+            else
+              rm -f -- "$last_env" || return 1
+            fi
+          }
 
           # Pin actual running image IDs before changing any application, even on first CD.
           rollback_timestamp=$(date -u +%Y%m%dT%H%M%S%NZ)
@@ -181,7 +201,7 @@ jobs:
           cleanup_auth() {
             docker logout ghcr.io >/dev/null 2>&1 || true
             rm -rf -- "$DOCKER_CONFIG"
-            rm -f -- "$runtime_env"
+            rm -f -- "$runtime_env" "$rollback_env"
           }
           trap cleanup_auth EXIT
           pull_images() {
@@ -321,9 +341,10 @@ jobs:
           # cannot skip recovery. No dependency services are pulled or recreated.
           if activate_edge && compose config --quiet && pull_images \
             && compose up -d --no-deps --no-build --pull never "${services[@]}" \
-            && containers_healthy && reload_nginx && healthy; then
+            && containers_healthy && reload_nginx && healthy \
+            && persist_environment \
+            && printf '%s %s\n' "$REVISION" "$(date -u +%FT%TZ)" > .cd/deploy-revision; then
             cleanup_after_deploy || true
-            printf '%s %s\n' "$REVISION" "$(date -u +%FT%TZ)" > .cd/deploy-revision
             exit 0
           fi
           echo 'Deployment failed; restoring the six captured image refs.' >&2
@@ -332,7 +353,7 @@ jobs:
           cp .cd/edge-backup/compose.production.yml compose.production.yml
           reload_nginx || echo 'Restored nginx configuration reload failed; retrying after image rollback.' >&2
           cp .cd/rollback.yml .cd/compose.yml
-          if compose up -d --no-deps --no-build --pull never --force-recreate "${services[@]}" \
+          if rollback_compose up -d --no-deps --no-build --pull never --force-recreate "${services[@]}" \
             && containers_healthy && reload_nginx && healthy; then
             printf 'rollback-from=%s %s images=rollback.yml\n' "$REVISION" "$(date -u +%FT%TZ)" > .cd/last-rollback
             echo 'Captured images restored; this deployment remains failed.' >&2

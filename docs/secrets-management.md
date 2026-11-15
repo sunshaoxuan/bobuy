@@ -50,7 +50,7 @@
 
 ```bash
 ./scripts/secrets-decrypt.sh
-docker compose config
+docker compose config --quiet
 docker compose up -d --build
 ```
 
@@ -58,7 +58,7 @@ Windows PowerShell 对应命令为：
 
 ```powershell
 .\scripts\secrets-decrypt.ps1
-docker compose config
+docker compose config --quiet
 docker compose up -d --build
 ```
 
@@ -110,12 +110,25 @@ SOPS/age，也不改变原有 `docker compose --env-file /etc/bobuy.env` 的行�
 
 CD 仅在该变量为 `true` 时把 `PROD_ENV_SOPS_CIPHERTEXT` 的密文复制到生产主机。生产主机上的
 `scripts/prepare-production-env.sh` 使用 `/etc/bobuy/age/keys.txt` 解密为权限 `0600` 的短期
-Compose env 覆盖文件，部署和回滚共用该文件，退出时删除；脚本不输出内容。密文缺失、私钥
+Compose env 候选覆盖文件，部署使用 `/etc/bobuy.env` 加该候选文件，退出时清理候选文件；
+脚本不输出内容。密文缺失、私钥
 缺失、SOPS 不可用、解密失败或 dotenv 格式非法都会在替换容器前失败。覆盖文件不得包含
 `BOBBUY_ACCOUNT_MAIL_DELIVERY_ENABLED`、`BOBBUY_ACCOUNT_PASSWORD_RESET_ENABLED` 或
 `BOBBUY_ACCOUNT_REQUIRE_VERIFIED_EMAIL_FOR_CHECKOUT`，因此此配置批次不能开启正式邮件、重置或
 验证门禁。`BOBBUY_ACCOUNT_MAIL_SMTP_PASSWORD` 目前只是保留的配置名称，不映射到任何容器；
 本批不会读取或注入该密码，也不会启用外部邮件投递。
+
+部署前，CD 将上次成功部署的 `.cd/runtime-env-last` 复制到修订号专属的
+`.cd/runtime-env-rollback-$REVISION`，确认源为普通文件且不是符号链接，并将副本权限设为
+`0600`。回滚始终使用 `/etc/bobuy.env`，存在上述副本时再叠加该副本，恢复上次成功部署的
+有效环境；首次加密部署尚无持久副本时，回滚仅使用 `/etc/bobuy.env`。回滚不读取本次候选
+覆盖文件。退出清理会删除候选文件和回滚临时副本，失败保留原 `.cd/runtime-env-last`。
+
+容器及 HTTP 健康检查成功后，启用覆盖文件的部署才通过同目录原子重命名将候选文件保存为
+`.cd/runtime-env-last`；该文件为权限 `0600` 的普通文件，属于**仅保存在生产主机上的解密
+明文材料**，不得复制离开生产主机或提交 Git，也不得输出到日志。成功的未启用覆盖文件部署
+会删除该持久副本，避免以后回滚重新应用过期配置。此流程保持 `umask 077`，不修改基础
+`/etc/bobuy.env`；运维需保持基础文件稳定，以便恢复相同的有效环境。
 
 回退到旧路径时只需执行：
 
@@ -123,4 +136,5 @@ Compose env 覆盖文件，部署和回滚共用该文件，退出时删除；�
 gh variable set PROD_ENCRYPTED_ENV_ENABLED --body false
 ```
 
-下一次 CD 会完全忽略加密覆盖文件，继续只用 `/etc/bobuy.env`；不要为回退修改现有环境文件。
+下一次 CD 的候选部署只用 `/etc/bobuy.env`，成功后删除持久覆盖副本；若该次部署失败，
+回滚仍使用上次成功部署的覆盖副本。不要为回退修改现有环境文件。
