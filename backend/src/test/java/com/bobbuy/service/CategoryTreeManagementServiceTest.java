@@ -6,6 +6,7 @@ import org.junit.jupiter.api.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -16,6 +17,7 @@ class CategoryTreeManagementServiceTest {
     private final ProductRepository products = mock(ProductRepository.class);
     private final CategoryLegacyMappingRepository mappings = mock(CategoryLegacyMappingRepository.class);
     private final CategoryRepository legacy = mock(CategoryRepository.class);
+    private final JdbcTemplate jdbc = mock(JdbcTemplate.class);
     private final Map<String, CategoryTreeNode> tree = new LinkedHashMap<>();
     private final Map<String, ProductPrimaryCategoryPath> assigned = new HashMap<>();
     private CategoryTreeManagementService service;
@@ -33,7 +35,7 @@ class CategoryTreeManagementServiceTest {
         when(paths.findById(anyString())).thenAnswer(c -> Optional.ofNullable(assigned.get(c.getArgument(0))));
         when(paths.save(any())).thenAnswer(c -> {ProductPrimaryCategoryPath p = c.getArgument(0); assigned.put(p.getProductId(), p); return p;});
         when(paths.countByCategoryNodeId(anyString())).thenAnswer(c -> assigned.values().stream().filter(p -> p.getCategoryNodeId().equals(c.getArgument(0))).count());
-        service = new CategoryTreeManagementService(nodes, paths, products, mappings, new ProductCategoryPathResolver(paths, mappings, legacy));
+        service = new CategoryTreeManagementService(nodes, paths, products, mappings, new ProductCategoryPathResolver(paths, mappings, legacy), jdbc);
     }
     @AfterEach void cleanup() { SecurityContextHolder.clearContext(); }
     private CategoryTreeManagementService.Node add(String parent, String name) {
@@ -150,7 +152,9 @@ class CategoryTreeManagementServiceTest {
         assertThatThrownBy(() -> service.assign("p", new CategoryTreeManagementService.ProductPath("p", root.id()))).isInstanceOf(RuntimeException.class);
         service.assign("p", new CategoryTreeManagementService.ProductPath("p", leaf.id()));
         assertThat(service.product("p").categoryNodeId()).isEqualTo(leaf.id());
+        verify(jdbc).update("update bb_product set category_path_source=null where id=?", "p");
         service.assign("p", new CategoryTreeManagementService.ProductPath("p", null));
+        verify(jdbc, times(2)).update("update bb_product set category_path_source=null where id=?", "p");
         assertThat(assigned).hasSize(1);
         assertThat(assigned.get("p").getCategoryNodeId()).isEqualTo("system-uncategorized");
         assertThat(service.product("p").categoryNodeId()).isNull();

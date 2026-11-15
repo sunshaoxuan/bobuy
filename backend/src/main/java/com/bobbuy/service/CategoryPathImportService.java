@@ -70,7 +70,10 @@ public class CategoryPathImportService {
         for(int i=1;i<input.size();i++) {
             String sku=input.get(i)[0].trim(), crumb=input.get(i)[1];
             boolean malformed=input.get(i).length>4;
-            String flag=flagColumn<0 || malformed?null:input.get(i)[flagColumn];
+            // The strict parser keeps reliably parsed optional cells even when a trailing
+            // column makes the record malformed. Retain a pending flag so another row for
+            // the same identity cannot bypass it.
+            String flag=flagColumn<0 || input.get(i).length<=flagColumn?null:input.get(i)[flagColumn];
             String sourceTier=sourceColumn<0 || malformed?null:input.get(i)[sourceColumn];
             String reason=null, productId=null, outcome="MATCHED";
             if(malformed) {
@@ -148,7 +151,8 @@ public class CategoryPathImportService {
                     Map<String,String> display=reviewedNames.names(japanesePath);
                     int order=nodes.findAllByParentId(parent).stream().filter(n->n.getSystemKey()==null).mapToInt(CategoryTreeNode::getSortOrder).max().orElse(-1)+1;
                     node=new CategoryTreeNode(nodeId,expectedParent,display,new ArrayList<>(full),order,null);
-                    node.setExplicitOrder(nodes.findAllByParentId(parent).stream().anyMatch(CategoryTreeNode::isExplicitOrder));
+                    node.setExplicitOrder(nodes.findAllByParentId(parent).stream()
+                            .filter(n -> n.getSystemKey() == null).anyMatch(CategoryTreeNode::isExplicitOrder));
                     node=nodes.save(node);
                 } else {
                     full=new ArrayList<>(node.getFullPath());

@@ -7,6 +7,7 @@ import com.bobbuy.model.Product;
 import com.bobbuy.model.ProductPrimaryCategoryPath;
 import com.bobbuy.repository.*;
 import com.bobbuy.security.MerchantScope;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,10 +28,12 @@ public class CategoryTreeManagementService {
     private final ProductRepository products;
     private final CategoryLegacyMappingRepository mappings;
     private final ProductCategoryPathResolver resolver;
+    private final JdbcTemplate jdbc;
 
     public CategoryTreeManagementService(CategoryTreeNodeRepository nodes, ProductPrimaryCategoryPathRepository paths,
-            ProductRepository products, CategoryLegacyMappingRepository mappings, ProductCategoryPathResolver resolver) {
-        this.nodes = nodes; this.paths = paths; this.products = products; this.mappings = mappings; this.resolver = resolver;
+            ProductRepository products, CategoryLegacyMappingRepository mappings, ProductCategoryPathResolver resolver,
+            JdbcTemplate jdbc) {
+        this.nodes = nodes; this.paths = paths; this.products = products; this.mappings = mappings; this.resolver = resolver; this.jdbc = jdbc;
     }
 
     private static ApiException invalid() { return new ApiException(ErrorCode.INVALID_REQUEST, "error.category.invalid"); }
@@ -204,6 +207,9 @@ public class CategoryTreeManagementService {
         }
         // An explicit assignment prevents legacy fallback from undoing a user's clear.
         paths.save(new ProductPrimaryCategoryPath(productId, id));
+        // Imported provenance describes the imported assignment, not a later manual one.
+        // Import audit rows retain the historical source independently.
+        jdbc.update("update bb_product set category_path_source=null where id=?", productId);
         return new ProductPath(productId, ProductCategoryPathResolver.UNCATEGORIZED_NODE_ID.equals(id) ? null : id);
     }
 

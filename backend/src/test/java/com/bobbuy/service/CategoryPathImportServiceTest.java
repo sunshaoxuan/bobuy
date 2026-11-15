@@ -116,6 +116,28 @@ class CategoryPathImportServiceTest {
         service.confirm(7,p.importId());service.confirm(7,malformed.importId());verifyNoInteractions(paths);
     }
 
+    @Test void malformedPendingRowStillBlocksAValidAliasForTheSameProduct() {
+        var p=flagged("Note","SKU-1,食品＞水,待核,EXTRA\nALIAS-1,食品＞水,推定\n");
+        assertThat(p.matched()).isZero();
+        assertThat(p.unmatched()).isEqualTo(2);
+        assertThat(p.rows().get(0).flag()).isEqualTo("待核");
+        assertThat(p.rows().get(1).reason()).contains("Conflicting");
+        service.confirm(7,p.importId());
+        verifyNoInteractions(paths);
+        verify(nodes,never()).save(any());
+    }
+
+    @Test void systemRootDoesNotMakeNewImportedRootsExplicitlyOrdered() {
+        var system=new CategoryTreeNode("system-uncategorized",null,Map.of("ja-JP","未分類"),List.of("system-uncategorized"),Integer.MAX_VALUE,"UNCATEGORIZED");
+        system.setExplicitOrder(true);
+        when(nodes.findAllByParentId(null)).thenReturn(List.of(system));
+        var p=preview("SKU-1,食品＞水\n");
+        service.confirm(7,p.importId());
+        var captured=org.mockito.ArgumentCaptor.forClass(CategoryTreeNode.class);
+        verify(nodes,times(2)).save(captured.capture());
+        assertThat(captured.getAllValues().get(0).isExplicitOrder()).isFalse();
+    }
+
     @Test void reviewedNamesAreConsumedOnlyAtConfirmationWithoutChangingPathIdentity() {
         var mapping=mock(CategoryReviewedNames.class);
         List<List<String>> requestedPaths=new ArrayList<>();
