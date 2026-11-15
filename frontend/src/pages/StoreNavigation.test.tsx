@@ -18,11 +18,11 @@ afterEach(()=>{vi.unstubAllGlobals();});
 it('keeps node context in links and exact active state without inventing valid nodes',()=>{
  expect(selectedNode('?node=1000')).toBe(1000);expect(selectedNode('?node=oops')).toBe(-1);expect(selectedNode('')).toBeUndefined();
  expect(scopedPath('/trips','?node=1000&category=a')).toBe('/trips?node=1000');
- render(<I18nProvider><MemoryRouter initialEntries={['/recommendations/1?node=1000']}><StoreNavigation nodes={[{id:1000,name:'Node A'}]} node={1000} open={false} onClose={vi.fn()} onNodeChange={vi.fn()} loading={false}/></MemoryRouter></I18nProvider>);
- expect(screen.getByRole('link',{name:'Product Picks'})).toHaveAttribute('aria-current','page');
- expect(screen.getByRole('link',{name:'Bookable trips'})).toHaveAttribute('href','/trips?node=1000');
- expect(screen.getByRole('link',{name:'Trip finds'})).not.toHaveAttribute('aria-current');
- expect([...document.querySelectorAll('.browse-links a')].slice(0,2).map(a=>a.textContent)).toEqual(['Product Picks','Trip finds']);
+ render(<I18nProvider><MemoryRouter initialEntries={['/recommendations/1?node=1000']}><StoreNavigation nodes={[{id:1000,name:'Node A'}]} node={1000} open={true} onClose={vi.fn()} onNodeChange={vi.fn()} loading={false}/></MemoryRouter></I18nProvider>);
+ expect(screen.getByRole('link',{name:'Product Picks'})).toHaveAttribute('href','/products?node=1000');
+ expect(screen.getByRole('link',{name:'Product Picks'})).not.toHaveAttribute('aria-current');
+ expect(screen.queryByRole('link',{name:'Bookable trips'})).not.toBeInTheDocument();
+ expect([...document.querySelectorAll('.browse-links a')].map(a=>a.textContent)).toEqual(['Product Picks','My orders','My bills']);
 });
 it('previews the same customer filters/cards without public draft reads or writes',()=>{
  const {container}=render(<I18nProvider><MemoryRouter><RecommendationPreview detail={detail(1,'Draft preview')}/></MemoryRouter></I18nProvider>);

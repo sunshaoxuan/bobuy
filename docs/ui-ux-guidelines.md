@@ -11,6 +11,7 @@
 4. 公开商城 `.storefront` 与工作台 `.app-shell` / `.merchant-shell` 是两套表面，不得混用；商城不可使用后台 Ant Design `Switch`。
 5. 当前没有暗色模式，不得擅自增加。
 6. 新动效须尊重 `prefers-reduced-motion`。
+7. **导航只呈现可用且唯一的入口。** 未完成功能必须通过默认关闭的功能开关隐藏，不得在导航中展示空壳或「暂未开放」占位；同一功能不得提供重复入口。以图片为主的目录页必须使用可收缩且不推动内容布局的导航，把宽度让给商品；收缩控件与记忆状态仍须符合本文件的可访问性与双视口验收要求。
 
 ## 2. 已落地 token
 ### 2.1 工作台全局
@@ -20,7 +21,7 @@
 强调色 `#d93630`，hover `#ce3028`；背景 `#fff`；主文字 `#232323 / #191919 / #242424 / #282828`；辅助文字 `#626262 / #666 / #777 / #555`；浅底 `#f3f3f3 / #f5f5f5 / #f0f0ed / #f7f7f7`；选中深底 `#242424 / #252525 / #171717`；边框 `#d9d9d9 / #ededed / #eee / #00000010`。默认字号 **15px**，行高 **1.65**。
 
 ### 2.3 圆角家族
-已有 **6px**、**8px**、**16–20px**、**24px**、**26–28px / 999px**。同组使用同档。本程好物排序和分类胶囊均为 **8px**；公开列表的状态 / 提示消息使用 **26–28px / 999px** 大圆角档，见 §3.7，不得套用 **6px** 按钮档。
+已有 **6px**、**8px**、**16–20px**、**24px**、**26–28px / 999px**。同组使用同档。好物推荐排序和分类胶囊均为 **8px**；公开列表的状态 / 提示消息使用 **26–28px / 999px** 大圆角档，见 §3.7，不得套用 **6px** 按钮档。
 
 ### 2.4 断点与验收视口
 主移动断点 **`max-width: 767px`**；另有 `375px`、`650px`、`1023px`、`1099px`、`1199px`。至少在 **390×844** 与 **1280×800**（或 1280×900）截图自检。
@@ -40,7 +41,7 @@
 `.product-sort` 高度 44px，最小宽 200px，边框 `1px solid #d9d9d9`，圆角 **8px**，白底，文字 `#282828`，字号 14px，内边距 `8px 30px 8px 12px`；焦点 `outline: 2px solid #795908; outline-offset: 2px`；≤375px 拉满。
 
 ### 3.4 分类胶囊 / 筛选芯片
-容器 gap 8–9px；未选中 `#f3f3f3` / `#f5f6f5`、文字 `#303846`；选中 `#242424` / `#252525`、白字；内边距 `10px 16px` / `10px 18px`；最小高 44px；字号 14px、字重 500。本程好物页用 **8px** 圆角。
+容器 gap 8–9px；未选中 `#f3f3f3` / `#f5f6f5`、文字 `#303846`；选中 `#242424` / `#252525`、白字；内边距 `10px 16px` / `10px 18px`；最小高 44px；字号 14px、字重 500。好物推荐页用 **8px** 圆角。
 
 ### 3.5 开关与布尔筛选
 Ant Design `Switch` 只用于后台。公开商城布尔筛选使用 `button` + `aria-pressed`（或视觉隐藏 input + 已设计 label），不得使用浏览器默认 checkbox。
@@ -60,6 +61,9 @@ Ant Design `Switch` 只用于后台。公开商城布尔筛选使用 `button` + 
 控件须有默认、hover、`:focus-visible`、active、disabled（如适用）；不得无替代地移除 outline。须有可见标签或 `aria-label`；布尔芯片用 `aria-pressed`；保证键盘可达、对比度足够、焦点不被裁切。
 
 ## 5. 文案与 i18n
+
+商城商品目录使用「好物推荐 / 好物推薦 / Product Picks / おすすめ商品」；期次入口使用「活动邮报 / 活動郵報 / Campaign Newsletter / キャンペーン便り」，默认关闭的既有功能开关控制其入口。手机 ≤767px 的唯一账户导航入口位于底部快捷栏，桌面使用右上角账户图标，抽屉不重复提供账户入口。
+
 用户可见文案走 `zh-CN`、`zh-TW`、`en-US`、`ja-JP` 四语资源。按最长译名设计：「标记商品优先」「標記商品優先」「Marked products first」「マーカー付き商品を優先」。不得溢出、重叠或随意截断。
 
 ## 6. 可复用实现（先找这些）
@@ -67,8 +71,8 @@ Ant Design `Switch` 只用于后台。公开商城布尔筛选使用 `button` + 
 |---|---|
 | 商品排序 | `ProductSort.tsx` 与 `.product-sort` |
 | 分类筛选条 | `BrowseSupport` 的 `.rec-category-filters` |
-| 本程好物 | `PublicProductCatalog.tsx`、`public-catalog.css` |
-| 公开列表加载 / 状态提示 | `.feed-loader` + §3.7 消息标签样式；本程好物见 `PublicProductCatalog.tsx` / `public-catalog.css` |
+| 好物推荐 | `PublicProductCatalog.tsx`、`public-catalog.css` |
+| 公开列表加载 / 状态提示 | `.feed-loader` + §3.7 消息标签样式；好物推荐见 `PublicProductCatalog.tsx` / `public-catalog.css` |
 | 后台开关 | Ant Design `Switch`（仅工作台） |
 | 四语词条 | `frontend/src/locales/*.ts` |
 | 系统更新 / 维护状态 | 边缘页 `infra/nginx/maintenance.html` 与应用内 `MaintenanceNotice` |

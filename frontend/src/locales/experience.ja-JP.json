@@ -54,7 +54,7 @@
   "store.delivery_date": "配送日",
   "store.trip": "買付予定",
   "store.no_trips": "予約できる買付予定はありません",
-  "store.catalog": "今回の商品",
+  "store.catalog": "おすすめ商品",
   "store.product_count": "{count} 商品",
   "store.search": "商品を検索",
   "store.no_matches": "該当する商品はありません",

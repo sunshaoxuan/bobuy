@@ -54,7 +54,7 @@
   "store.delivery_date": "送货日期",
   "store.trip": "采购行程",
   "store.no_trips": "暂无可预订行程",
-  "store.catalog": "本程好物",
+  "store.catalog": "好物推荐",
   "store.product_count": "{count} 款",
   "store.search": "搜索商品",
   "store.no_matches": "没有匹配商品",
