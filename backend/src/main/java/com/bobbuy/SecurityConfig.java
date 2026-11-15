@@ -110,6 +110,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/auth/email/**").authenticated()
                 .requestMatchers("/api/merchant/**").hasRole("AGENT")
                 .requestMatchers("/api/category-path-import/**").hasAnyRole("AGENT", "PLATFORM_ADMIN")
+                .requestMatchers("/api/category-tree/**").hasAnyRole("AGENT", "PLATFORM_ADMIN")
                 .requestMatchers(HttpMethod.POST, "/api/orders/*/quick-order").hasRole("AGENT")
                 .requestMatchers(HttpMethod.POST, "/api/auth/refresh").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/auth/logout").permitAll()

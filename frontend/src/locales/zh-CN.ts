@@ -1572,7 +1572,7 @@ Object.assign(messages,{"card.reference": "参考价", "card.reference_past": "�
 Object.assign(messages,{"repair.not_derivable":"无法唯一推导，请手动补充","repair.source_title":"核对来源上下文建议","repair.locale_title":"核对 AI 语种建议","repair.review_hint":"请逐项预览；明确确认前不会写入。","repair.overwrite":"覆盖已有值","repair.blank":"保持空白","repair.unchanged":"保留已有值","repair.confirm":"确认并保存","repair.deriving":"正在从已审核来源推导…","repair.generating":"正在生成 AI 建议…","repair.none":"没有可保存的有效建议","repair.ai":"AI 建议","repair.batch_source":"批量补全来源","repair.batch_locale":"建议缺失语种","repair.one_click":"预览来源修复","repair.ai_action":"生成 AI 建议"});
 export default messages;
 
-Object.assign(messages,{"categoryImport.title":"分类路径批量导入","categoryImport.help":"上传 CSV 或 XLSX；Costco 日文面包屑须逐字一致并以 ＞ 分隔。写入前逐行预览，不猜测、不静默丢弃。","categoryImport.choose":"选择运营文件","categoryImport.preview":"预览导入","categoryImport.row":"行号","categoryImport.sku":"SKU","categoryImport.path":"Costco 面包屑","categoryImport.result":"结果","categoryImport.reason":"原因","categoryImport.matched":"已匹配","categoryImport.newNodes":"将新建节点","categoryImport.unmatched":"未匹配／未知 SKU","categoryImport.export":"导出未匹配清单","categoryImport.confirmCheck":"我已核对预览和商品总数，并明确确认这些分类路径变更。","categoryImport.confirm":"确认导入","categoryImport.done":"导入已确认并留存审计。","categoryImport.failed":"导入失败，没有任何行被静默丢弃。","categoryImport.count":"导入前商品数：{before}；导入后：{after}"});
+Object.assign(messages,{"categoryImport.title":"分类路径批量导入","categoryImport.help":"上传 CSV 或 XLSX，接受半角 > 和全角 ＞ 分隔符。路径来源按运营原文记录，预览后再确认写入。","categoryImport.choose":"选择运营文件","categoryImport.preview":"预览导入","categoryImport.row":"行号","categoryImport.sku":"SKU","categoryImport.path":"Costco 面包屑","categoryImport.result":"结果","categoryImport.reason":"原因","categoryImport.matched":"已匹配","categoryImport.newNodes":"将新建节点","categoryImport.unmatched":"未匹配／未知 SKU","categoryImport.export":"导出未匹配清单","categoryImport.confirmCheck":"我已核对预览和商品总数，并明确确认这些分类路径变更。","categoryImport.confirm":"确认导入","categoryImport.done":"导入已确认并留存审计。","categoryImport.failed":"导入失败，没有任何行被静默丢弃。","categoryImport.count":"导入前商品数：{before}；导入后：{after}"});
 
 Object.assign(messages,{"repair.accept_all":"一键接受全部可合并项","repair.edit":"编辑","repair.reject":"拒绝","repair.product":"商品","repair.product_number":"商品 {number}","repair.url_manual":"来源中没有找到商品链接，请粘贴可核验的链接。","repair.ai_failed":"AI 建议暂不可用，请手工填写。","repair.field.supplierKey":"供应商","repair.field.channel":"销售渠道","repair.field.sourceMessageKey":"来源邮件","repair.field.sourceUrl":"商品链接","repair.evidence.master":"商品资料","repair.evidence.source":"来源邮件","repair.channel.online":"线上","repair.channel.warehouse":"线下","repair.locale.zh-CN":"简体中文","repair.locale.zh-TW":"繁体中文","repair.locale.ja-JP":"日文","repair.locale.en-US":"英文","repair.locale_field.name":"名称","repair.locale_field.specification":"规格"});
 
@@ -1581,3 +1581,34 @@ Object.assign(messages,{"repair.supplier_unknown":"供应商名称暂不可用",
 Object.assign(messages,{"repair.group": "相同建议 · {count} 件商品", "repair.accept_group": "接受本组建议", "repair.manual": "手工填写"});
 
 Object.assign(messages,{'password_reset.forgot':'忘记密码？','password_reset.request_title':'重置密码','password_reset.request_help':'请输入账号邮箱。如有符合条件的账号，我们会发送重置说明。','password_reset.email':'邮箱地址','password_reset.email_error':'请输入有效的邮箱地址','password_reset.send':'发送重置说明','password_reset.request_done_title':'请查看邮箱','password_reset.request_done':'如果该邮箱对应符合条件的账号，重置说明将很快送达。','password_reset.back_login':'返回登录','password_reset.reset_title':'设置新密码','password_reset.reset_help':'请使用 8–72 个字符，并符合安全密码长度限制。','password_reset.new_password':'新密码','password_reset.confirm_password':'确认新密码','password_reset.password_error':'请输入 8–72 个字符且不超过安全密码长度限制','password_reset.confirm_error':'请再次输入相同的密码','password_reset.reset_action':'保存新密码','password_reset.invalid_title':'此链接已不可用','password_reset.invalid':'链接可能无效、已过期或已使用。请申请新链接后继续。','password_reset.new_link':'申请新链接','password_reset.complete_title':'密码已更新','password_reset.complete':'密码已成功修改。请使用新密码重新登录。','password_reset.sign_in':'重新登录','password_reset.rate':'尝试次数过多，请稍后再试。','password_reset.network':'暂时无法连接，请检查网络后重试。','password_reset.retry':'重试'});
+Object.assign(messages,{"categoryTree.title":"分类树管理","categoryTree.help":"使用明确按钮管理层级。改名或移动后商品会继续跟随；含子分类或商品的分类不能删除。","categoryTree.addRoot":"新增顶级分类","categoryTree.addChild":"新增子分类","categoryTree.add":"新增分类","categoryTree.rename":"分类改名","categoryTree.moveUp":"上移","categoryTree.moveDown":"下移","categoryTree.delete":"删除分类","categoryTree.deleteConfirm":"删除这个空分类？","categoryTree.save":"保存","categoryTree.failed":"保存失败，请检查名称、同级重名及目标位置后重试。","categoryTree.picker":"商品分类完整路径","categoryTree.uncategorized":"未归类","categoryTree.name.ja-JP":"日文名称","categoryTree.name.zh-CN":"简体中文名称","categoryTree.name.zh-TW":"繁体中文名称","categoryTree.name.en-US":"英文名称","categoryTree.parent":"上级分类","categoryTree.root":"顶级","master.categories":"商品分类"});
+
+Object.assign(messages, {
+  "categoryTree.move": "移动分类",
+  "categoryTree.clear": "清空为未归类",
+  "categoryTree.retry": "重试",
+  "categoryTree.loading": "正在加载分类",
+  "categoryTree.empty": "暂无分类，请先新增顶级分类。",
+  "categoryTree.cancel": "取消",
+  "categoryTree.nameRequired": "请填写日文名称。",
+  "categoryTree.translationHelp": "日文名称为权威原名。可选译名须经审核；留空时显示日文原名。",
+  "categoryTree.loadFailed": "无法加载分类，请重试刷新分类树。",
+  "categoryTree.deleteBlocked": "含子分类、商品或旧分类对照时无法删除。请先移动或重新归类。",
+  "categoryImport.template": "下载 CSV 模板",
+  "categoryImport.flag": "备注 / 标记",
+  "categoryImport.templateHelp": "支持中文表头：SKU、costco分类路径、路径来源；可追加备注 / 标记 / Note / Flag。下载文件仅含合成示例，请替换为运营清单。三档来源均按提供路径导入。"
+});
+
+Object.assign(messages,{
+  "categoryImport.source": "路径来源",
+  "categoryImport.source.official": "官网面包屑（原文）",
+  "categoryImport.source.inferredBreadcrumb": "推定（官网无可用面包屑）",
+  "categoryImport.source.inferredPage": "推定（官网无页面）",
+  "categoryImport.deferred": "已推迟",
+  "categoryImport.deferredReason": "保持当前分类和可见状态，本次不写入。",
+  "categoryImport.deferLabel": "推迟或排除的商品编号",
+  "categoryImport.deferHelp": "默认推迟 C 组 9 件。用逗号、空格或换行分隔商品编号；此名单替换默认值，清空表示全部参与预览。推迟商品保留当前分类和可见状态。修改后须重新预览。",
+  "categoryImport.noMatched": "没有可导入的匹配行，请调整文件或推迟名单后重新预览。",
+  "categoryImport.checkRequired": "请勾选核对确认后再导入。",
+  "categoryImport.ready": "已核对，可确认导入。"
+});

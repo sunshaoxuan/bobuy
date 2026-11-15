@@ -1711,7 +1711,7 @@ Object.assign(messages,{"card.reference": "參考價", "card.reference_past": "�
 Object.assign(messages,{"repair.not_derivable":"無法唯一推導，請手動補充","repair.source_title":"核對來源上下文建議","repair.locale_title":"核對 AI 語種建議","repair.review_hint":"請逐項預覽；明確確認前不會寫入。","repair.overwrite":"覆蓋已有值","repair.blank":"保持空白","repair.unchanged":"保留已有值","repair.confirm":"確認並儲存","repair.deriving":"正在從已審核來源推導…","repair.generating":"正在產生 AI 建議…","repair.none":"沒有可儲存的有效建議","repair.ai":"AI 建議","repair.batch_source":"批次補全來源","repair.batch_locale":"建議缺失語種","repair.one_click":"預覽來源修復","repair.ai_action":"產生 AI 建議"});
 export default messages;
 
-Object.assign(messages,{"categoryImport.title":"分類路徑批次匯入","categoryImport.help":"上傳 CSV 或 XLSX；Costco 日文麵包屑須逐字一致並以 ＞ 分隔。寫入前逐列預覽，不猜測、不靜默捨棄。","categoryImport.choose":"選擇營運檔案","categoryImport.preview":"預覽匯入","categoryImport.row":"列號","categoryImport.sku":"SKU","categoryImport.path":"Costco 麵包屑","categoryImport.result":"結果","categoryImport.reason":"原因","categoryImport.matched":"已配對","categoryImport.newNodes":"將新增節點","categoryImport.unmatched":"未配對／未知 SKU","categoryImport.export":"匯出未配對清單","categoryImport.confirmCheck":"我已核對預覽和商品總數，並明確確認這些分類路徑變更。","categoryImport.confirm":"確認匯入","categoryImport.done":"匯入已確認並留下稽核紀錄。","categoryImport.failed":"匯入失敗，沒有任何列被靜默捨棄。","categoryImport.count":"匯入前商品數：{before}；匯入後：{after}"});
+Object.assign(messages,{"categoryImport.title":"分類路徑批次匯入","categoryImport.help":"上傳 CSV 或 XLSX，接受半形 > 和全形 ＞ 分隔符。路徑來源按營運原文記錄，預覽後再確認寫入。","categoryImport.choose":"選擇營運檔案","categoryImport.preview":"預覽匯入","categoryImport.row":"列號","categoryImport.sku":"SKU","categoryImport.path":"Costco 麵包屑","categoryImport.result":"結果","categoryImport.reason":"原因","categoryImport.matched":"已配對","categoryImport.newNodes":"將新增節點","categoryImport.unmatched":"未配對／未知 SKU","categoryImport.export":"匯出未配對清單","categoryImport.confirmCheck":"我已核對預覽和商品總數，並明確確認這些分類路徑變更。","categoryImport.confirm":"確認匯入","categoryImport.done":"匯入已確認並留下稽核紀錄。","categoryImport.failed":"匯入失敗，沒有任何列被靜默捨棄。","categoryImport.count":"匯入前商品數：{before}；匯入後：{after}"});
 
 Object.assign(messages,{"repair.accept_all":"一鍵接受全部可合併項目","repair.edit":"編輯","repair.reject":"拒絕","repair.product":"商品","repair.product_number":"商品 {number}","repair.url_manual":"來源中沒有找到商品連結，請貼上可核驗的連結。","repair.ai_failed":"AI 建議暫不可用，請手動填寫。","repair.field.supplierKey":"供應商","repair.field.channel":"銷售通路","repair.field.sourceMessageKey":"來源郵件","repair.field.sourceUrl":"商品連結","repair.evidence.master":"商品資料","repair.evidence.source":"來源郵件","repair.channel.online":"線上","repair.channel.warehouse":"線下","repair.locale.zh-CN":"簡體中文","repair.locale.zh-TW":"繁體中文","repair.locale.ja-JP":"日文","repair.locale.en-US":"英文","repair.locale_field.name":"名稱","repair.locale_field.specification":"規格"});
 
@@ -1720,3 +1720,34 @@ Object.assign(messages,{"repair.supplier_unknown":"供應商名稱暫不可用",
 Object.assign(messages,{"repair.group": "相同建議 · {count} 件商品", "repair.accept_group": "接受本組建議", "repair.manual": "手動填寫"});
 
 Object.assign(messages,{'password_reset.forgot':'忘記密碼？','password_reset.request_title':'重設密碼','password_reset.request_help':'請輸入帳號電郵。如有符合條件的帳號，我們會傳送重設說明。','password_reset.email':'電郵地址','password_reset.email_error':'請輸入有效的電郵地址','password_reset.send':'傳送重設說明','password_reset.request_done_title':'請查看電郵','password_reset.request_done':'如果該電郵對應符合條件的帳號，重設說明將很快送達。','password_reset.back_login':'返回登入','password_reset.reset_title':'設定新密碼','password_reset.reset_help':'請使用 8–72 個字元，並符合安全密碼長度限制。','password_reset.new_password':'新密碼','password_reset.confirm_password':'確認新密碼','password_reset.password_error':'請輸入 8–72 個字元且不超過安全密碼長度限制','password_reset.confirm_error':'請再次輸入相同的密碼','password_reset.reset_action':'儲存新密碼','password_reset.invalid_title':'此連結已不可用','password_reset.invalid':'連結可能無效、已過期或已使用。請申請新連結後繼續。','password_reset.new_link':'申請新連結','password_reset.complete_title':'密碼已更新','password_reset.complete':'密碼已成功修改。請使用新密碼重新登入。','password_reset.sign_in':'重新登入','password_reset.rate':'嘗試次數過多，請稍後再試。','password_reset.network':'暫時無法連線，請檢查網絡後重試。','password_reset.retry':'重試'});
+Object.assign(messages,{"categoryTree.title":"分類樹管理","categoryTree.help":"使用明確按鈕管理層級。改名或移動後商品會繼續跟隨；含子分類或商品的分類不能刪除。","categoryTree.addRoot":"新增頂層分類","categoryTree.addChild":"新增子分類","categoryTree.add":"新增分類","categoryTree.rename":"分類改名","categoryTree.moveUp":"上移","categoryTree.moveDown":"下移","categoryTree.delete":"刪除分類","categoryTree.deleteConfirm":"刪除這個空分類？","categoryTree.save":"儲存","categoryTree.failed":"儲存失敗，請檢查名稱、同層重名及目標位置後重試。","categoryTree.picker":"商品分類完整路徑","categoryTree.uncategorized":"未分類","categoryTree.name.ja-JP":"日文名稱","categoryTree.name.zh-CN":"簡體中文名稱","categoryTree.name.zh-TW":"繁體中文名稱","categoryTree.name.en-US":"英文名稱","categoryTree.parent":"上層分類","categoryTree.root":"頂層","master.categories":"商品分類"});
+
+Object.assign(messages, {
+  "categoryTree.move": "移動分類",
+  "categoryTree.clear": "清空為未分類",
+  "categoryTree.retry": "重試",
+  "categoryTree.loading": "正在載入分類",
+  "categoryTree.empty": "暫無分類，請先新增頂層分類。",
+  "categoryTree.cancel": "取消",
+  "categoryTree.nameRequired": "請填寫日文名稱。",
+  "categoryTree.translationHelp": "日文名稱為權威原名。選填譯名須經審核；留空時顯示日文原名。",
+  "categoryTree.loadFailed": "無法載入分類，請重試重新整理分類樹。",
+  "categoryTree.deleteBlocked": "含子分類、商品或舊分類對照時無法刪除。請先移動或重新分類。",
+  "categoryImport.template": "下載 CSV 範本",
+  "categoryImport.flag": "備註 / 標記",
+  "categoryImport.templateHelp": "支援中文表頭：SKU、costco分类路径、路径来源；可附加備註 / 標記欄（表頭使用 备注 / 标记 / Note / Flag）。下載檔僅含合成範例，請替換為營運清單。三種來源均按提供路徑匯入。"
+});
+
+Object.assign(messages,{
+  "categoryImport.source": "路徑來源",
+  "categoryImport.source.official": "官網麵包屑（原文）",
+  "categoryImport.source.inferredBreadcrumb": "推定（官網無可用麵包屑）",
+  "categoryImport.source.inferredPage": "推定（官網無頁面）",
+  "categoryImport.deferred": "已延後",
+  "categoryImport.deferredReason": "保留目前分類與可見狀態，本次不寫入。",
+  "categoryImport.deferLabel": "延後或排除的商品編號",
+  "categoryImport.deferHelp": "預設延後 C 組 9 件。商品編號以逗號、空格或換行分隔；此清單取代預設值，清空表示全部參與預覽。延後商品保留目前分類與可見狀態。修改後須重新預覽。",
+  "categoryImport.noMatched": "沒有可匯入的匹配列，請調整檔案或延後清單後重新預覽。",
+  "categoryImport.checkRequired": "請勾選核對確認後再匯入。",
+  "categoryImport.ready": "已核對，可確認匯入。"
+});

@@ -31,6 +31,7 @@ const MailSettings = lazy(() => import('./pages/MailSettings'));
 const Currencies = lazy(() => import('./pages/Currencies'));
 const GeographicAreas = lazy(() => import('./pages/GeographicAreas'));
 const CategoryPathImport = lazy(() => import('./pages/CategoryPathImport'));
+const CategoryTreeManagement = lazy(() => import('./pages/CategoryTreeManagement'));
 
 const adminPages = [
   ['dashboard', 'nav.dashboard', Dashboard, AppstoreOutlined], ['trips', 'nav.trips', Trips, CalendarOutlined], ['orders', 'nav.orders', Orders, ShoppingOutlined],
@@ -38,6 +39,7 @@ const adminPages = [
   ['picking', 'nav.picking', PickingMaster, CheckSquareOutlined], ['products', 'products.title', ProductArchive, TagsOutlined],
   ['product-markers', 'marker.title', ProductMarkers, TagsOutlined],
   ['category-path-import', 'categoryImport.title', CategoryPathImport, TagsOutlined],
+  ['category-tree', 'categoryTree.title', CategoryTreeManagement, TagsOutlined],
   ['recommendations', 'rec.title', Recommendations, ShopOutlined],
   ['suppliers', 'nav.suppliers', Suppliers, ShopOutlined], ['customers', 'nav.customers', MerchantCustomers, TeamOutlined],
   ['basic-data/currencies', 'currency.title', Currencies, TagsOutlined],
@@ -49,7 +51,7 @@ function Admin({passwordResetToken}:{passwordResetToken:string}) {
   const { t } = useI18n();
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const pages = [...(isMerchant ? adminPages : []), ...(user?.platformAdmin&&!isMerchant?adminPages.filter(([path])=>path==='products'||path==='category-path-import'):[]), ...(user?.platformAdmin ? [['users', 'accounts.title', Users, TeamOutlined] as const, ['settings', 'mail.title', MailSettings, TagsOutlined] as const] : [])];
+  const pages = [...(isMerchant ? adminPages : []), ...(user?.platformAdmin&&!isMerchant?adminPages.filter(([path])=>path==='products'||path==='category-path-import'||path==='category-tree'):[]), ...(user?.platformAdmin ? [['users', 'accounts.title', Users, TeamOutlined] as const, ['settings', 'mail.title', MailSettings, TagsOutlined] as const] : [])];
   const menuItems = pages.filter(([path]) => !path.startsWith('basic-data/')).map(([path, label, , Icon]) => ({
     key: `/admin/${path}`, icon: <Icon />, label: <Link to={`/admin/${path}`} onClick={() => setOpen(false)}>{t(label)}</Link>
   }));

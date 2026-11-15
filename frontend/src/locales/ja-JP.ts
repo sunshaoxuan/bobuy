@@ -1572,7 +1572,7 @@ Object.assign(messages,{"card.reference": "参考価格", "card.reference_past":
 Object.assign(messages,{"repair.not_derivable":"一意に導出できません。手動で入力してください","repair.source_title":"出典コンテキスト候補を確認","repair.locale_title":"AI 言語候補を確認","repair.review_hint":"変更内容を確認してください。確認するまで保存されません。","repair.overwrite":"入力済みの値を上書き","repair.blank":"空欄のまま","repair.unchanged":"既存値を維持","repair.confirm":"確認して保存","repair.deriving":"確認済み出典から推定中…","repair.generating":"AI 候補を生成中…","repair.none":"保存できる候補がありません","repair.ai":"AI 候補","repair.batch_source":"出典を一括補完","repair.batch_locale":"不足言語を提案","repair.one_click":"出典修正を確認","repair.ai_action":"AI 候補を生成"});
 export default messages;
 
-Object.assign(messages,{"categoryImport.title":"カテゴリーパス一括インポート","categoryImport.help":"CSV または XLSX をアップロードします。Costco の日本語パンくず名は完全一致、区切りは ＞ です。書き込み前に全行を確認し、推測や黙った除外は行いません。","categoryImport.choose":"運用ファイルを選択","categoryImport.preview":"インポートをプレビュー","categoryImport.row":"行","categoryImport.sku":"SKU","categoryImport.path":"Costco パンくず","categoryImport.result":"結果","categoryImport.reason":"理由","categoryImport.matched":"一致","categoryImport.newNodes":"新規ノード","categoryImport.unmatched":"不一致／不明な SKU","categoryImport.export":"不一致リストを出力","categoryImport.confirmCheck":"プレビューと商品総数を確認し、このカテゴリーパス変更を明示的に承認します。","categoryImport.confirm":"インポートを確定","categoryImport.done":"インポートを確定し、監査記録を保存しました。","categoryImport.failed":"インポートに失敗しました。黙って除外された行はありません。","categoryImport.count":"インポート前の商品数：{before}、後：{after}"});
+Object.assign(messages,{"categoryImport.title":"カテゴリーパス一括インポート","categoryImport.help":"CSV または XLSX をアップロードします。区切りには半角 > と全角 ＞ を使用できます。分類経路の出典を原文で記録し、プレビュー後に確定します。","categoryImport.choose":"運用ファイルを選択","categoryImport.preview":"インポートをプレビュー","categoryImport.row":"行","categoryImport.sku":"SKU","categoryImport.path":"Costco パンくず","categoryImport.result":"結果","categoryImport.reason":"理由","categoryImport.matched":"一致","categoryImport.newNodes":"新規ノード","categoryImport.unmatched":"不一致／不明な SKU","categoryImport.export":"不一致リストを出力","categoryImport.confirmCheck":"プレビューと商品総数を確認し、このカテゴリーパス変更を明示的に承認します。","categoryImport.confirm":"インポートを確定","categoryImport.done":"インポートを確定し、監査記録を保存しました。","categoryImport.failed":"インポートに失敗しました。黙って除外された行はありません。","categoryImport.count":"インポート前の商品数：{before}、後：{after}"});
 
 Object.assign(messages,{"repair.accept_all":"統合可能な項目をすべて承認","repair.edit":"編集","repair.reject":"拒否","repair.product":"商品","repair.product_number":"商品 {number}","repair.url_manual":"出典に商品リンクがありません。確認可能なリンクを貼り付けてください。","repair.ai_failed":"AI 候補を取得できません。手動で入力してください。","repair.field.supplierKey":"仕入先","repair.field.channel":"販売チャネル","repair.field.sourceMessageKey":"出典メール","repair.field.sourceUrl":"商品リンク","repair.evidence.master":"商品情報","repair.evidence.source":"出典メール","repair.channel.online":"オンライン","repair.channel.warehouse":"店舗","repair.locale.zh-CN":"簡体字中国語の","repair.locale.zh-TW":"繁体字中国語の","repair.locale.ja-JP":"日本語の","repair.locale.en-US":"英語の","repair.locale_field.name":"名称","repair.locale_field.specification":"仕様"});
 
@@ -1581,3 +1581,34 @@ Object.assign(messages,{"repair.supplier_unknown":"仕入先名を取得でき�
 Object.assign(messages,{"repair.group": "同じ提案 · {count} 商品", "repair.accept_group": "このグループを採用", "repair.manual": "手入力"});
 
 Object.assign(messages,{'password_reset.forgot':'パスワードを忘れた場合','password_reset.request_title':'パスワードの再設定','password_reset.request_help':'アカウントのメールアドレスを入力してください。対象のアカウントがある場合、再設定方法を送信します。','password_reset.email':'メールアドレス','password_reset.email_error':'有効なメールアドレスを入力してください。','password_reset.send':'再設定方法を送信','password_reset.request_done_title':'メールをご確認ください','password_reset.request_done':'対象のアカウントがある場合、再設定方法がまもなく届きます。','password_reset.back_login':'ログインに戻る','password_reset.reset_title':'新しいパスワードの設定','password_reset.reset_help':'安全なパスワード上限内で、8～72文字を使用してください。','password_reset.new_password':'新しいパスワード','password_reset.confirm_password':'新しいパスワード（確認）','password_reset.password_error':'安全な上限内で8～72文字を入力してください。','password_reset.confirm_error':'同じパスワードをもう一度入力してください。','password_reset.reset_action':'新しいパスワードを保存','password_reset.invalid_title':'このリンクは利用できません','password_reset.invalid':'リンクが無効、期限切れ、または使用済みの可能性があります。新しいリンクを申請してください。','password_reset.new_link':'新しいリンクを申請','password_reset.complete_title':'パスワードを更新しました','password_reset.complete':'パスワードを変更しました。新しいパスワードで再度ログインしてください。','password_reset.sign_in':'ログインする','password_reset.rate':'試行回数が多すぎます。しばらく待ってから再試行してください。','password_reset.network':'接続できませんでした。通信環境を確認して再試行してください。','password_reset.retry':'再試行'});
+Object.assign(messages,{"categoryTree.title":"カテゴリツリー管理","categoryTree.help":"明確なボタンで階層を管理します。名前変更や移動後も商品は紐付き、子カテゴリまたは商品があるカテゴリは削除できません。","categoryTree.addRoot":"最上位カテゴリを追加","categoryTree.addChild":"子カテゴリを追加","categoryTree.add":"カテゴリを追加","categoryTree.rename":"カテゴリ名を変更","categoryTree.moveUp":"上へ移動","categoryTree.moveDown":"下へ移動","categoryTree.delete":"カテゴリを削除","categoryTree.deleteConfirm":"この空のカテゴリを削除しますか？","categoryTree.save":"保存","categoryTree.failed":"保存できません。名前、同じ階層の重複名と移動先を確認してください。","categoryTree.picker":"商品カテゴリの完全なパス","categoryTree.uncategorized":"未分類","categoryTree.name.ja-JP":"日本語名","categoryTree.name.zh-CN":"簡体字中国語名","categoryTree.name.zh-TW":"繁体字中国語名","categoryTree.name.en-US":"英語名","categoryTree.parent":"親カテゴリ","categoryTree.root":"最上位","master.categories":"商品カテゴリ"});
+
+Object.assign(messages, {
+  "categoryTree.move": "カテゴリを移動",
+  "categoryTree.clear": "未分類に戻す",
+  "categoryTree.retry": "再試行",
+  "categoryTree.loading": "カテゴリを読み込み中",
+  "categoryTree.empty": "カテゴリがありません。最上位カテゴリを追加してください。",
+  "categoryTree.cancel": "キャンセル",
+  "categoryTree.nameRequired": "日本語名を入力してください。",
+  "categoryTree.translationHelp": "日本語名を原名とします。翻訳は確認済みのもののみ入力し、空欄では日本語名を表示します。",
+  "categoryTree.loadFailed": "カテゴリを読み込めません。再試行してください。",
+  "categoryTree.deleteBlocked": "子カテゴリ、商品または旧カテゴリとの対応があるため削除できません。先に移動または再分類してください。",
+  "categoryImport.template": "CSV テンプレートをダウンロード",
+  "categoryImport.flag": "備考 / フラグ",
+  "categoryImport.templateHelp": "中国語の列名に対応：SKU、costco分类路径、路径来源。備考列は 备注 / 标记 / Note / Flag を使用できます。テンプレートは架空の例です。運用データに置き換えてください。3 種類の出典とも指定経路を取り込みます。"
+});
+
+Object.assign(messages,{
+  "categoryImport.source": "経路の出典",
+  "categoryImport.source.official": "公式パンくず（原文）",
+  "categoryImport.source.inferredBreadcrumb": "推定（公式パンくずなし）",
+  "categoryImport.source.inferredPage": "推定（公式ページなし）",
+  "categoryImport.deferred": "保留",
+  "categoryImport.deferredReason": "現在の分類と公開状態を維持し、今回は変更しません。",
+  "categoryImport.deferLabel": "保留・除外する商品番号",
+  "categoryImport.deferHelp": "初期値では C グループの 9 商品を保留します。商品番号をカンマ・空白・改行で区切ってください。この一覧で初期値を置き換え、空欄なら全商品をプレビュー対象にします。保留商品は現在の分類と公開状態を維持します。編集後は再プレビューが必要です。",
+  "categoryImport.noMatched": "取り込み可能な行がありません。ファイルまたは保留一覧を修正し、再プレビューしてください。",
+  "categoryImport.checkRequired": "プレビューを確認し、確認欄にチェックしてください。",
+  "categoryImport.ready": "確認済みです。取り込みを確定できます。"
+});

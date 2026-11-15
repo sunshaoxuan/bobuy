@@ -27,6 +27,8 @@ public class CategoryTreeNode {
     private List<String> fullPath = new ArrayList<>();
     @Column(name = "sort_order", nullable = false)
     private int sortOrder;
+    @Column(name = "explicit_order", nullable = false)
+    private boolean explicitOrder;
     @Column(name = "system_key", length = 64)
     private String systemKey;
 
@@ -52,6 +54,8 @@ public class CategoryTreeNode {
     public void setFullPath(List<String> value) { fullPath = value; }
     public int getSortOrder() { return sortOrder; }
     public void setSortOrder(int value) { sortOrder = value; }
+    public boolean isExplicitOrder() { return explicitOrder; }
+    public void setExplicitOrder(boolean value) { explicitOrder = value; }
     public String getSystemKey() { return systemKey; }
     public void setSystemKey(String value) { systemKey = value; }
 }
