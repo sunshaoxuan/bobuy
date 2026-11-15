@@ -35,11 +35,11 @@ it('keeps the home-linked brand in a separate header container while the remembe
  expect(brand.querySelector('.brand-lockup')).toBeVisible();
  expect(localStorage.getItem('bobbuy_store_navigation_desktop')).toBe('collapsed');
 });
-it('shows the empty state only after retry exhaustion and recovers the failed read on reconnect',async()=>{
+it('hides the whole trip page after retry exhaustion and recovers the failed read on reconnect',async()=>{
  mocks.activeTrips.mockResolvedValue([]);mocks.trips.mockRejectedValueOnce(new ReadRequestError('trip read failed',true)).mockResolvedValue([{id:11,merchantId:1,merchantName:'Shop',deliveryArea:'Recovered area',deliveryDate:'2026-11-10'}]);
- const view=mount('/trips');await screen.findByRole('heading',{name:'Bookable trips'});
+ const view=mount('/trips');await waitFor(()=>expect(mocks.trips).toHaveBeenCalledTimes(1));
  expect(view.container.querySelector('.ant-spin')).toBeNull();
- expect(view.container.querySelector('.ant-empty')).not.toBeNull();
+ expect(view.container.querySelector('.browse-trip-page')).toBeNull();expect(view.container.querySelector('.ant-empty')).toBeNull();
  expect(screen.queryByRole('alert')).not.toBeInTheDocument();expect(screen.queryByRole('button',{name:'Retry'})).not.toBeInTheDocument();
  expect(mocks.trips).toHaveBeenCalledTimes(1);
  act(()=>window.dispatchEvent(new Event('online')));
@@ -57,8 +57,50 @@ it('shows the bookable spinner only while its read is pending, independently of 
  let finish!:(value:unknown)=>void;mocks.trips.mockImplementation(()=>new Promise(resolve=>{finish=resolve;}));mocks.activeTrips.mockResolvedValue([]);
  const view=mount('/trips');expect(view.container.querySelector('.ant-spin')).not.toBeNull();
  await act(async()=>{});expect(view.container.querySelector('.ant-spin')).not.toBeNull();
- await act(async()=>finish([]));await screen.findByRole('heading',{name:'Bookable trips'});
- expect(view.container.querySelector('.ant-spin')).toBeNull();
+ await act(async()=>finish([]));await waitFor(()=>expect(view.container.querySelector('.ant-spin')).toBeNull());
+ expect(view.container.querySelector('.browse-trip-page')).toBeNull();expect(view.container.querySelector('.ant-empty')).toBeNull();
+});
+it.each(['zh-CN','zh-TW','en-US','ja-JP'])('removes the trip card, its container, and its spacing when %s has no real trip',async locale=>{
+ const features=storefrontFeatures as {trips:boolean;dealsBulletin:boolean};features.dealsBulletin=false;
+ try {localStorage.setItem('bobbuy_locale',locale);mocks.trips.mockResolvedValue([]);mocks.activeTrips.mockResolvedValue([]);const view=mount('/');await screen.findByRole('heading',{name:'Catalog fixture'});expect(view.container.querySelector('.journey-strip')).toBeNull();expect(view.container.querySelector('.journey-trigger')).toBeNull();expect(view.container.querySelector('.journey-picker')).toBeNull();expect(view.container.querySelector('.ant-empty')).toBeNull();}
+ finally {features.dealsBulletin=true;}
+});
+it('shows the trip card only when a real in-progress trip exists',async()=>{
+ const features=storefrontFeatures as {trips:boolean;dealsBulletin:boolean};features.dealsBulletin=false;
+ try {mocks.trips.mockResolvedValue([]);mocks.activeTrips.mockResolvedValue([{id:12,merchantId:1,merchantName:'Shop',deliveryArea:'Real trip',deliveryDate:'2026-11-12'}]);const view=mount('/');await screen.findByRole('heading',{name:'Catalog fixture'});await waitFor(()=>expect(view.container.querySelector('.journey-strip')).not.toBeNull());const card=view.container.querySelector('.journey-strip');expect(card).toHaveTextContent('Real trip');expect(card).not.toHaveTextContent('No trips available');}
+ finally {features.dealsBulletin=true;}
+});
+it('keeps an in-progress-only trigger disabled and catalog auto-loading unpaused after clicks',async()=>{
+ mocks.trips.mockResolvedValue([]);
+ mocks.activeTrips.mockResolvedValue([{id:12,merchantId:1,merchantName:'Shop',deliveryArea:'Underway',deliveryDate:'2026-11-12'}]);
+ const view=mount('/');
+ const trigger=await screen.findByRole('button',{name:'Choose a buying trip'});
+ await waitFor(()=>expect(screen.getByTestId('eligibility')).toHaveTextContent('false'));
+ expect(view.container.querySelector('.journey-strip')).toHaveTextContent('Underway');
+ expect(trigger).toBeDisabled();
+ fireEvent.click(trigger);fireEvent.click(trigger);
+ expect(document.querySelector('.journey-picker')).toBeNull();
+ expect(screen.queryByRole('dialog')).toBeNull();
+ expect(mocks.catalogProps.mock.calls.slice(-1)[0][0].autoPaused).toBe(false);
+});
+it('ignores clicks while choices are pending, then pauses only for an explicitly opened bookable picker',async()=>{
+ let finish!:(value:unknown)=>void;
+ mocks.trips.mockImplementation(()=>new Promise(resolve=>{finish=resolve;}));
+ const journey={id:12,merchantId:1,merchantName:'Shop',deliveryArea:'Real trip',deliveryDate:'2026-11-12'};
+ mocks.activeTrips.mockResolvedValue([journey]);
+ mount('/');
+ const trigger=await screen.findByRole('button',{name:'Choose a buying trip'});
+ expect(trigger).toBeDisabled();fireEvent.click(trigger);
+ expect(mocks.catalogProps.mock.calls.slice(-1)[0][0].autoPaused).toBe(false);
+ await act(async()=>finish([journey]));
+ expect(trigger).toBeEnabled();
+ expect(screen.queryByRole('dialog')).toBeNull();
+ expect(mocks.catalogProps.mock.calls.slice(-1)[0][0].autoPaused).toBe(false);
+ fireEvent.click(trigger);
+ await screen.findByRole('dialog');
+ expect(mocks.catalogProps.mock.calls.slice(-1)[0][0].autoPaused).toBe(true);
+ fireEvent.click(document.querySelector('.journey-picker .ant-drawer-close')!);
+ await waitFor(()=>expect(mocks.catalogProps.mock.calls.slice(-1)[0][0].autoPaused).toBe(false));
 });
 function selected(path:string){
  const mobile=document.querySelector('.browse-mobile-shortcuts a[aria-current="page"]');
