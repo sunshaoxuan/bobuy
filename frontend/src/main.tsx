@@ -5,14 +5,12 @@ import App from './App';
 import './styles.css';
 import { I18nProvider } from './i18n';
 import { UserRoleProvider } from './context/UserRoleContext';
-import {takePasswordResetToken} from './pages/PasswordRecovery';
+import {capturePasswordResetToken} from './passwordResetBootstrap';
 
 // The data router can block POP/PUSH/REPLACE before an editor is unmounted.
 // Capture and scrub the fragment before React starts. StrictMode may replay every
 // component render and initializer, so token ownership must stay outside its tree.
-const passwordResetToken = /\/(?:admin\/)?reset-password$/.test(window.location.pathname)
-  ? takePasswordResetToken()
-  : '';
+const passwordResetToken = capturePasswordResetToken();
 const router = createBrowserRouter([{ path: '*', element: <App passwordResetToken={passwordResetToken} /> }]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

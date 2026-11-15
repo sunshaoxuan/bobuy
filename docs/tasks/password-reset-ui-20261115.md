@@ -35,3 +35,8 @@
 - PASS：`npm run typecheck`；`node node_modules/vitest/vitest.mjs run src/pages/PasswordRecovery.test.tsx src/pages/LoginPage.test.tsx`（7 tests）；`npm run check:i18n`（1790 keys）；`git diff --check`。
 - PASS：生产静态配置仍为 `compose.production.yml` 的 `BOBBUY_ACCOUNT_PASSWORD_RESET_ENABLED: 'false'`；未设置 `VITE_ACCOUNT_PASSWORD_RESET_ENABLED`，本批没有 Nginx diff。
 - 双视口实拍当前环境受阻：Playwright 1217 本地无浏览器，`npx playwright install chromium` 对官方 CDN 的五次下载均返回 HTTP 403。因此没有伪造截图或计算样式，也不把 §9 标为 PASS；须在可下载／预装 Chromium 的 CI 或审阅环境运行同一批 390×844、1280×800 的请求成功、重置表单、过期／已用／无效链接合并状态与完成态验收。
+
+## b3edda7 review follow-up（2026-11-15）
+
+- 授权修复仅限 bootstrap 捕获路径与 React Router 语义不一致：接受尾斜杠和大小写变体，并在 React 加载前清除 fragment；生产开关继续关闭，不修改 Nginx。
+- 最小验证为 `passwordResetBootstrap.test.ts`（路由变体、token 捕获与地址栏清理）、frontend typecheck、production compose 静态断言和 diff 检查；本批不改变页面样式，沿用上方实拍阻塞记录。
