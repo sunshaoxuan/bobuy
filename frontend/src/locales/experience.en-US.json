@@ -138,5 +138,19 @@
   "orders.empty": "No orders yet",
   "orders.table.items": "Items",
   "stock.master.publishing": "Publishing...",
-  "stock.master.publish_failed": "Publication failed"
+  "stock.master.publish_failed": "Publication failed",
+  "checkout_verification.title": "Verify your email to submit this order",
+  "checkout_verification.reason": "Your cart is saved. Enter the email code below before submitting your order.",
+  "checkout_verification.sent_to": "Verification email: {email}",
+  "checkout_verification.send": "Send verification code",
+  "checkout_verification.sent": "A new code was sent. Check your inbox and spam folder.",
+  "checkout_verification.verified": "Email verified. You can continue with this cart.",
+  "checkout_verification.change_email": "Change email",
+  "checkout_verification.cooldown": "For your security, another code can be sent in {count} seconds.",
+  "checkout_verification.failed": "We could not send or verify the code.",
+  "checkout_verification.limited": "Too many attempts. Wait before trying again.",
+  "checkout_verification.expired": "This code has expired. Send a new code and try again.",
+  "checkout_verification.invalid": "That code is not valid. Check it or send a new code.",
+  "checkout_verification.offline": "You appear to be offline. Reconnect and try again.",
+  "checkout_verification.recovery": "Your cart and code entry are kept. You can retry or change your email."
 }

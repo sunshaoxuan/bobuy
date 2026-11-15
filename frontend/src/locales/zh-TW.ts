@@ -1,6 +1,8 @@
 import type { Dictionary } from './types';
 
 const messages: Dictionary = {
+  'checkout_verification.title':'驗證信箱後提交訂單','checkout_verification.reason':'購物車已儲存。請在提交訂單前輸入郵件中的驗證碼。','checkout_verification.sent_to':'驗證郵件將寄至：{email}','checkout_verification.send':'傳送驗證碼','checkout_verification.sent':'新驗證碼已傳送，請檢查收件匣和垃圾郵件。','checkout_verification.verified':'信箱驗證成功，可以繼續提交目前的購物車。','checkout_verification.change_email':'修改信箱','checkout_verification.cooldown':'為保護帳戶安全，{count} 秒後可再次傳送。','checkout_verification.failed':'暫時無法傳送或驗證驗證碼。','checkout_verification.limited':'操作次數過多，請稍後再試。','checkout_verification.expired':'驗證碼已過期，請傳送新驗證碼後重試。','checkout_verification.invalid':'驗證碼不正確，請檢查或重新傳送。','checkout_verification.offline':'網路似乎已中斷，請恢復連線後重試。','checkout_verification.recovery':'購物車和已輸入內容均已保留，可重試或修改信箱。',
+
   'pricing.documents':'調價單','pricing.reason_required':'請填寫明確的調價或撤銷原因；來源待複核單據需補充原因後儲存。','pricing.promotion_reduction':'促銷價必須低於同渠道、幣別和單位的常規價。','pricing.use_documents':'請在調價單中維護價格和優惠期間。',
   'stock.msg.update_failed':'儲存失敗，已恢復為修改前的值。',
   'geo.title':'國家/地區檔案','geo.hint':'依國家/地區、省縣、市/區查詢和選擇基礎檔案。','geo.country':'國家/地區','geo.prefecture':'省縣','geo.city':'市/區','geo.choose_prefecture':'選擇省縣','geo.choose_city':'選擇市/區','geo.selection':'目前選擇','geo.country_only':'此國家/地區目前僅預製國家級檔案。','geo.prefectures':'省縣檔案','geo.cities':'市/區檔案','geo.code':'代碼','geo.name':'名稱','geo.reading':'日文讀音','geo.source':'國家/地區採用 ISO 3166-1 代碼。日本預製 47 個都道府縣及全部市區町村，包含政令指定都市及其區。資料核對：2026-11-12。',

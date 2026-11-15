@@ -138,5 +138,19 @@
   "orders.empty": "注文はまだありません",
   "orders.table.items": "商品",
   "stock.master.publishing": "公開中...",
-  "stock.master.publish_failed": "公開に失敗しました"
+  "stock.master.publish_failed": "公開に失敗しました",
+  "checkout_verification.title": "メール認証後に注文を送信",
+  "checkout_verification.reason": "カートは保存されています。注文を送信する前に、メールに届いた認証コードを入力してください。",
+  "checkout_verification.sent_to": "認証メールの送信先：{email}",
+  "checkout_verification.send": "認証コードを送信",
+  "checkout_verification.sent": "新しいコードを送信しました。受信トレイと迷惑メールをご確認ください。",
+  "checkout_verification.verified": "メール認証が完了しました。このカートで注文を続けられます。",
+  "checkout_verification.change_email": "メールアドレスを変更",
+  "checkout_verification.cooldown": "アカウント保護のため、あと{count}秒で再送信できます。",
+  "checkout_verification.failed": "コードを送信または確認できませんでした。",
+  "checkout_verification.limited": "操作回数が多すぎます。しばらく待ってから再試行してください。",
+  "checkout_verification.expired": "コードの有効期限が切れています。新しいコードを送信して再試行してください。",
+  "checkout_verification.invalid": "コードが正しくありません。確認するか、新しいコードを送信してください。",
+  "checkout_verification.offline": "オフラインのようです。接続を回復して再試行してください。",
+  "checkout_verification.recovery": "カートと入力内容は保持されています。再試行するか、メールアドレスを変更できます。"
 }
