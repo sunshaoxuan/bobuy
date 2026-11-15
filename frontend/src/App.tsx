@@ -11,6 +11,7 @@ import './merchant.css';
 import { useI18n } from './i18n';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import LegacyProductRoute from './components/LegacyProductRoute';
+import {ForgotPassword,ResetPassword} from './pages/PasswordRecovery';
 
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Trips = lazy(() => import('./pages/Trips'));
@@ -41,7 +42,7 @@ const adminPages = [
   ['basic-data/geographic-areas', 'geo.title', GeographicAreas, TagsOutlined]
 ] as const;
 
-function Admin() {
+function Admin({passwordResetToken}:{passwordResetToken:string}) {
   const { isAuthenticated, isMerchant, logout, user } = useUserRole();
   const { t } = useI18n();
   const location = useLocation();
@@ -57,7 +58,11 @@ function Admin() {
       key: '/admin/basic-data/geographic-areas', icon: <TagsOutlined />, label: <Link to="/admin/basic-data/geographic-areas" onClick={() => setOpen(false)}>{t('geo.title')}</Link>
     }]
   }] : [])]} />;
-  if (!isAuthenticated) return <LoginPage />;
+  if (!isAuthenticated) {
+    if (location.pathname === '/admin/forgot-password') return <ForgotPassword surface="admin" />;
+    if (location.pathname === '/admin/reset-password') return <ResetPassword surface="admin" token={passwordResetToken} />;
+    return <LoginPage />;
+  }
   if (!isMerchant && !user?.platformAdmin) return <Navigate to="/" replace />;
   const brand = <Link className="merchant-brand" to="/admin"><BrandLogo/></Link>;
   const current = pages.find(([path]) => location.pathname === `/admin/${path}`);
@@ -83,8 +88,8 @@ function Admin() {
   </div>;
 }
 
-export default function App() {
+export default function App({passwordResetToken=''}:{passwordResetToken?:string}) {
   return <><SiteMetadata /><Suspense fallback={<div className="store-loading"><Spin /></div>}>
-    <Routes><Route path="/admin/*" element={<Admin />} /><Route path="/*" element={<Storefront />} /></Routes>
+    <Routes><Route path="/admin/*" element={<Admin passwordResetToken={passwordResetToken} />} /><Route path="/*" element={<Storefront passwordResetToken={passwordResetToken} />} /></Routes>
   </Suspense></>;
 }
