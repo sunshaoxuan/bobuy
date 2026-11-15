@@ -29,6 +29,9 @@ import {formatMoney} from '../currency';
 import MaintenanceNotice,{isMaintenanceError} from '../components/MaintenanceNotice';
 import {AccountProfile} from './AccountProfile';
 import AccountShortcuts from '../components/AccountShortcuts';
+import {storefrontFeatures} from '../storefrontFeatures';
+import {navigationDevice,readNavigationExpanded,rememberNavigationExpanded} from '../storeNavigationPreference';
+import {hiddenTripDestination} from '../storefrontRoute';
 
 const ClientOrders = lazy(() => import('./ClientOrders'));
 const PublicRecommendations = lazy(() => import('./PublicRecommendations'));
@@ -111,7 +114,10 @@ export default function Storefront() {
   const currentNode=useRef(node);currentNode.current=node;
   const contextLife=useRef(true),bookableGeneration=useRef(0),activeGeneration=useRef(0);
   useEffect(()=>{contextLife.current=true;return()=>{contextLife.current=false;bookableGeneration.current++;activeGeneration.current++;};},[]);
-  const [navigationOpen,setNavigationOpen] = useState(false);
+  const [navigationDeviceType,setNavigationDeviceType] = useState(()=>navigationDevice(window.innerWidth));
+  const [navigationOpen,setNavigationOpen] = useState(()=>readNavigationExpanded(navigationDevice(window.innerWidth)));
+  useEffect(()=>{const changed=()=>{const next=navigationDevice(window.innerWidth);setNavigationDeviceType(previous=>{if(previous!==next)setNavigationOpen(readNavigationExpanded(next));return next;});};window.addEventListener('resize',changed);return()=>window.removeEventListener('resize',changed);},[]);
+  useEffect(()=>rememberNavigationExpanded(navigationDeviceType,navigationOpen),[navigationDeviceType,navigationOpen]);
   const [cartConfirmationOpen,setCartConfirmationOpen] = useState(false);
   const [publicNodes,setPublicNodes] = useState<{id:number;name:string}[]>();
   const [nodeNameError,setNodeNameError]=useState(false);
@@ -177,13 +183,13 @@ export default function Storefront() {
     if(!authLoading&&isAuthenticated&&isCustomer&&(navigationOpen||location.pathname.startsWith('/client/')))void api.customerTrips().then(values=>{if(active)setPrivateNodes({userId:user?.id,ids:[...new Set(values.map(value=>value.agentId))]});}).catch(()=>{ /* Public browsing stays available; private pages show their own errors. */ });
     return()=>{active=false;};
   },[user?.id,isCustomer,isAuthenticated,authLoading,navigationOpen,location.pathname]);
-  useEffect(() => {setNavigationOpen(false);setDetail(undefined);setQuantityProduct(undefined);setTripPicker(false);},[location.pathname,node]);
+  useEffect(() => {setDetail(undefined);setQuantityProduct(undefined);setTripPicker(false);},[location.pathname,node]);
   useEffect(()=>{if(draft.ready&&tripsReady&&cart.tripId===null&&!draft.conflict&&!draft.guestPending){const preferred=trips.find(value=>node===undefined||value.merchantId===node);if(preferred)setCart(prior=>({...prior,tripId:preferred.id,requestId:crypto.randomUUID()}));}},[draft.ready,tripsReady,cart.tripId,scope,draft.conflict,draft.guestPending]);
   const trip = trips.find(t => t.id === cart.tripId);
   const scopedTrips = trips.filter(value=>node===undefined||value.merchantId===node);
   const scopedActiveTrips = activeTrips.filter(value=>node===undefined||value.merchantId===node);
   const showHomeRecommendations=browseLoaded&&!scopedActiveTrips.length;
-  const homeNavigationPath=loading?null:showHomeRecommendations?'/recommendations':'/products';
+  const homeNavigationPath=loading?null:showHomeRecommendations&&storefrontFeatures.dealsBulletin?'/recommendations':'/products';
   const viewTrip = scopedActiveTrips.find(value=>value.id===cart.tripId)??scopedActiveTrips[0];
   const cartEntries = Object.entries(cart.items);
   const quantity = cartEntries.reduce((sum, [, value]) => sum + value, 0);
@@ -274,13 +280,13 @@ export default function Storefront() {
   const retryBrowse=()=>{setError('');void load();void loadActive();setCartPriceAttempt(value=>value+1);setNodeAttempt(value=>value+1);};
   return <div className={`storefront browse-shell ${(location.pathname === '/' || location.pathname === '/products' || location.pathname.startsWith('/recommendations')) ? 'storefront-catalog' : ''}`}>
     <StoreNavigation nodes={visibleNodes} node={node} loading={loading} homePath={homeNavigationPath} open={navigationOpen} onClose={()=>setNavigationOpen(false)} onNodeChange={changeNode}/>
-    <div className="browse-workspace"><header className="store-header"><div className="browse-context"><Button className="browse-menu-toggle" icon={<MenuOutlined/>} aria-label={t('app.open_menu')} aria-expanded={navigationOpen} onClick={()=>setNavigationOpen(value=>!value)}/><Link className="browse-mobile-brand" to={scopedPath('/',location.search)}><BrandLogo compact/></Link><span className="browse-context-node">{node===undefined?t('browse.all_nodes'):visibleNodes.find(value=>value.id===node)?.name??t(needsNodeNames&&publicNodes===undefined&&!nodeNameError?'browse.node_loading':'browse.unavailable_node')}</span></div>
+    <div className="browse-workspace"><header className="store-header"><div className="browse-context"><Button className="browse-menu-toggle" icon={<MenuOutlined/>} aria-label={t(navigationOpen?'app.close_menu':'app.open_menu')} aria-expanded={navigationOpen} onClick={()=>setNavigationOpen(value=>!value)}/><Link className="browse-mobile-brand" to={scopedPath('/',location.search)}><BrandLogo compact/></Link><span className="browse-context-node">{node===undefined?t('browse.all_nodes'):visibleNodes.find(value=>value.id===node)?.name??t(needsNodeNames&&publicNodes===undefined&&!nodeNameError?'browse.node_loading':'browse.unavailable_node')}</span></div>
     {searchable&&<Input className="browse-search" prefix={<SearchOutlined/>} aria-label={t('store.search')} placeholder={t('store.search')} allowClear value={search} onChange={event=>setSearch(event.target.value)}/>}
     <div className="store-header-actions"><LanguageSwitcher /><Link to={scopedPath('/account',location.search)} aria-label={t('store.account')}><UserOutlined /></Link><Badge count={quantity} size="small"><Link to={scopedPath('/cart',location.search)} aria-label={t('store.cart_label',{count:quantity})}><ShoppingCartOutlined /></Link></Badge></div></header>
     <main className="store-main">{maintenance?<MaintenanceNotice retry={retryBrowse}/>:error&&!quietTripFailure && <Alert type="error" message={error} action={<Button onClick={retryBrowse}>{t('store.retry')}</Button>} closable onClose={() => setError('')} />}
       {!needsCart&&cartNotices}
       {!maintenance&&(location.pathname==='/'&&loading ? <div className="store-loading"><Spin /></div> : <Suspense fallback={<Spin />}><Routes>
-        <Route index element={<>{showHomeRecommendations?<PublicRecommendations query={search} products={products} quantities={cart.items} onDetail={setDetail} onAdd={addRecommendation} canBuy={canBuyRecommendation} onSales={receiveSales} purchasePending={!tripsReady||authLoading} authKey={authKey} autoPaused={navigationOpen||tripPicker||!!detail||!!quantityProduct||cartConfirmationOpen}/>:rootCatalog}</>} /><Route path="products" element={<PublicProductCatalog query={search} products={products} quantities={cart.items} onAdd={addRecommendation} canBuy={canBuyRecommendation} onSales={receiveSales} purchasePending={!tripsReady||authLoading} autoPaused={navigationOpen||tripPicker||!!detail||!!quantityProduct||cartConfirmationOpen}/>}/><Route path="trips" element={tripsReady||quietTripFailure?bookable:tripsLoading?<Spin/>:null}/><Route path="client/trips" element={<ClientTrips node={node}/>}/><Route path="cart" element={basket} />
+        <Route index element={<>{showHomeRecommendations&&storefrontFeatures.dealsBulletin?<PublicRecommendations query={search} products={products} quantities={cart.items} onDetail={setDetail} onAdd={addRecommendation} canBuy={canBuyRecommendation} onSales={receiveSales} purchasePending={!tripsReady||authLoading} authKey={authKey} autoPaused={navigationOpen||tripPicker||!!detail||!!quantityProduct||cartConfirmationOpen}/>:rootCatalog}</>} /><Route path="products" element={<PublicProductCatalog query={search} products={products} quantities={cart.items} onAdd={addRecommendation} canBuy={canBuyRecommendation} onSales={receiveSales} purchasePending={!tripsReady||authLoading} autoPaused={navigationOpen||tripPicker||!!detail||!!quantityProduct||cartConfirmationOpen}/>}/><Route path="trips" element={storefrontFeatures.trips?(tripsReady||quietTripFailure?bookable:tripsLoading?<Spin/>:null):<Navigate to={hiddenTripDestination(location.search)} replace/>}/><Route path="client/trips" element={storefrontFeatures.trips?<ClientTrips node={node}/>:<Navigate to={hiddenTripDestination(location.search)} replace/>}/><Route path="cart" element={basket} />
         <Route path="checkout" element={<div className="checkout-layout">{visibleReceipt&&quantity===0 ? <section className="order-success"><CheckCircleOutlined /><h1>{t('store.submitted')}</h1><p>{t('store.order_number',{id:visibleReceipt.orderId})} · {money(visibleReceipt.total,visibleReceipt.currency)}</p><Tag color="gold">{t('store.pending')}</Tag><div className="action-row"><Link to="/client/orders"><Button type="primary">{t('store.view_order')}</Button></Link><Link to="/"><Button>{t('store.continue')}</Button></Link></div></section> : <>{basket}{quantity > 0 && <section className="checkout-account">{!isAuthenticated ? <AccountForm checkout afterLogin={() => {}} /> : !user?.roles.includes('CUSTOMER') ? <Alert type="warning" message={t('store.customer_only')} action={<Button onClick={() => void logout()}>{t('store.switch_account')}</Button>} /> : <><h2>{t('store.confirm')}</h2><p>{user.name} · {user.email}</p>{!user.emailVerified && <Alert type="info" message={t('store.unverified_hint')} />}<CheckoutAddress key={sessionIdentity} userId={user.id} identity={sessionIdentity} onReady={(identity,ready)=>{if(currentIdentity.current===identity)setAddressReady(ready?identity:undefined);}}/><Button type="primary" size="large" block loading={busy} disabled={invalidCart||addressReady!==sessionIdentity} onClick={() => void checkout()}>{t('store.submit')} · {totalText}</Button><Link to="/account">{t('store.verify')}</Link></>}</section>}</>}</div>} />
         <Route path="login" element={isAuthenticated ? <Navigate to="/account" replace /> : <AccountForm afterLogin={() => navigate('/account')} />} />
         <Route path="account" element={isAuthenticated ? <section className="account-page">

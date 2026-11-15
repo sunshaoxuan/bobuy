@@ -11,7 +11,7 @@ it('keeps the brand metadata and home-only structured data without locale title 
  expect(document.querySelector('link[rel="canonical"]')).toHaveAttribute('href','https://bobuy.cc/');
  fireEvent.click(screen.getByRole('button',{name:'Private'}));await waitFor(()=>expect(document.querySelector('meta[name="robots"]')).toHaveAttribute('content','noindex,nofollow'));
  expect(document.querySelector('link[rel="canonical"]')).toBeNull();expect(document.querySelector('#bobuy-home-structured-data')).toBeNull();
- fireEvent.click(screen.getByRole('button',{name:'Public issue'}));await waitFor(()=>expect(document.querySelector('link[rel="canonical"]')).toHaveAttribute('href','https://bobuy.cc/recommendations/7'));
+ fireEvent.click(screen.getByRole('button',{name:'Public issue'}));await waitFor(()=>expect(document.querySelector('link[rel="canonical"]')).toBeNull());expect(document.querySelector('meta[name="robots"]')).toHaveAttribute('content','noindex,nofollow');
  expect(document.querySelector('#bobuy-home-structured-data')).toBeNull();view.unmount();expect(document.querySelector('[data-bobuy-seo]')).toBeNull();
 });
-it('does not index account, test, unknown or malformed recommendation routes',()=>{for(const path of ['/account','/login','/admin','/client/orders','/test','/recommendations/nope','/recommendations/0'])expect(publicCanonical(path)).toBeUndefined();});
+it('does not index account, test, unknown or malformed recommendation routes',()=>{for(const path of ['/account','/login','/admin','/client/orders','/test','/recommendations/nope','/recommendations/0','/recommendations','/recommendations/7','/trips'])expect(publicCanonical(path)).toBeUndefined();});

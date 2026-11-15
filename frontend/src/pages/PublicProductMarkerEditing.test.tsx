@@ -14,7 +14,7 @@ let selected:string[],version:number;
 function URLProbe(){return <span data-testid="catalog-url">{useLocation().search}</span>;}
 function mount(){localStorage.setItem('bobbuy_locale','en-US');return render(<I18nProvider><MemoryRouter initialEntries={['/products?node=1&category=kept&markedCategory=kept']}><PublicProductCatalog {...props}/><URLProbe/></MemoryRouter></I18nProvider>);}
 function mountUnfiltered(){localStorage.setItem('bobbuy_locale','en-US');return render(<I18nProvider><MemoryRouter initialEntries={['/products?node=1']}><PublicProductCatalog {...props}/></MemoryRouter></I18nProvider>);}
-const all=()=>screen.getByRole('region',{name:'Trip finds'});
+const all=()=>screen.getByRole('region',{name:'Product Picks'});
 const marked=all;
 it('skips the duplicate marked catalog request when the public scope has no marked products',async()=>{
  selected=[];mountUnfiltered();await within(all()).findByRole('heading',{name:'Product'});

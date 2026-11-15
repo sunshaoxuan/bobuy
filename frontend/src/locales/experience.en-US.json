@@ -54,7 +54,7 @@
   "store.delivery_date": "Delivery Date",
   "store.trip": "Buying trips",
   "store.no_trips": "No trips available",
-  "store.catalog": "Trip finds",
+  "store.catalog": "Product Picks",
   "store.product_count": "{count} products",
   "store.search": "Search products",
   "store.no_matches": "No matching products",
