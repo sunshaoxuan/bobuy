@@ -1,5 +1,52 @@
 # 后台分类树管理（issue #129 child 3）
 
+## Parker 晚间定稿执行指导（2026-11-15）
+
+本节替代下文早期导入与译名假设。依据 [定稿评论](https://github.com/sunshaoxuan/bobuy/issues/133#issuecomment-6892119516)，继续 PR #150 当前已 rebase 的分支。主目标：运营 CSV 表头及两种分隔符、三档来源持久化、默认推迟 C 组九件、经审核名称映射契约。保持树管理、选择器、权限及商品数默认排序和人工顺序。禁止生产导入、提交、推送、新 PR、首页改动、#134 浏览、#155 旧分类删除及并行注册/SMTP 工作。
+
+方法与冻结路径：局部调整导入 service/parser/controller、Product 来源字段及新增幂等迁移；导入页、四语词条、分类名称解析的直接消费者；新增空的待审核名称资源和加载器；相应测试与分类文档。先核对现有契约，再集中实现、快速定向验证、冻结与验收。实际 463 条路径及其翻译依赖 Parker 提供 CSV，本批不生成真实分类，不抓取官网。
+
+逐项验收：两种分隔符及旧表头均可用，来源与原路径留审计；九件及自定义延期名单不写分类或商品字段，仍保持原公开状态；映射仅消费完整审核记录，日文原名保留、缺译名不冒充正式译名。UI 提供四语延期输入及说明，修改输入撤销预览。确认仅写已匹配行。
+
+最小验证冻结：CategoryPathImportServiceTest、名称映射契约测试和新增 migration 的重复执行测试，预计 2 至 5 分钟；CategoryPathImport.test.tsx 与受影响名称解析测试、typecheck、i18n，预计 1 至 3 分钟；本地 Vite 真实页面配合合成 API，双视口 390×844 / 1280×800、四语、console/network、预览及确认与输入失效检查，预计 5 至 10 分钟。复用依赖及现有工具，不启 Docker、不跑全产品测试。通过即交付，失败记录失效输入及最小重跑范围。
+
+UI 预算沿用本文件既有预算与 §8 标准验收条款：新输入复用 Ant Design，热区至少 44px，组间至少 6px，字形内框余量至少 3px；多行说明左对齐自然换行。功能、几何、视觉独立记录。最新证据将记录于本节，旧证据仅在对应输入未变时适用。
+
+本批廉价前检：diff whitespace 与 1866 四语 key PASS。定向前端 12 项与 typecheck PASS。后端首次 27 项中 25 PASS，两项新测试因 Mockito 嵌套设桩及可变参数引用断言失败；只修测试，运行 `-Dtest=CategoryPathImportServiceTest#formerPendingSkusHaveNoSpecialTreatmentAndUnknownSourcesCannotWrite+reviewedNamesAreConsumedOnlyAtConfirmationWithoutChangingPathIdentity test -q`，复用其他 25 项与前端 PASS。外部 Claude 返回无可用账户，DeepSeek 文本建议已复核，采用原文保护、延期替换语义、别名隔离及完整路径审核契约；没有交付项目写权限。
+
+浏览器首轮定位命中 Ant Design 隐藏的测量行，尚未获得截图与完整交互结果；仅改验收脚本为可见数据行，继续原双视口/四语清单，不改变产品代码或重跑单测。
+
+双视口/四语浏览器功能及 console/network PASS 后，截图发现新增来源列使手机日文结果列逐字换行，视觉暂不通过。仅为表格各列设置固定宽度及横向滚动总宽；该输入只使表格截图/几何失效，补拍四语与桌面表格，不重跑已通过的交互、后端和单测。两项失败后端测试修正后 PASS，合计 27 项有效 PASS。
+
+列宽修正后 typecheck PASS；表格源列处在横向滚动中段，先前左右两端截图未覆盖完整来源/状态列，因此仅补该滚动位置的局部图（browser.mjs --columns-only），复用已通过功能和输入框几何。
+
+Gemini 3.1 Pro 图片请求 upstream_error；gemini-3.8-flash-high 最小图片请求成功并完成复核。其指出默认 SKU 换行断开及勾选热区疑点：默认值增加逗号后的空格，确认标签显式 min-height 44px。仅重跑导入页 default-nine 方法及双视口/四语相关截图与热区；其他单测、后端、typecheck 与 i18n 复用。其模板按钮不足 44px 的截图估计被实际 44px 几何否定；表格文字裁切疑点由横向滚动来源/结果/原因局部图确认完整可读。
+
+最终范围复核发现新商品来源字段需要与已有导入备注同样限制为 JSON 只读，防止普通商品更新伪造来源。仅补只读注解与序列化/反序列化负例，执行 CategoryReviewedNamesTest#productSourceIsReadableButCannotBeForgedByProductUpdateJson；已有导入和 UI 行为证据继续适用。
+
+最终确认态旧截图仍含修正前列宽，因此用 --confirmed-only 进入相同合成确认态并替换双视口截图，仅更新失效视觉材料。
+
+### 晚间定稿最终验收
+
+基线 `4c5daa9c`，改动保留工作树，未 commit/push/新建 PR/生产导入。首页、商城浏览、旧分类删除、并行注册/SMTP 均无改动。
+
+| 必需项 | 结果与证据 |
+| --- | --- |
+| CSV/XLSX 表头别名、半角/全角/混合分隔符、三来源、原文、备注、模板、预览/确认/审计/导出 | PASS，CategoryPathImportServiceTest 23 项有效结果；首次 21 PASS，两项测试夹具修正后单独 PASS |
+| 默认九件、自定义/空名单、同身份别名阻断、延期零写入、原公开状态保留、原待核 SKU 正常匹配 | PASS，同一导入服务测试；确认只处理 MATCHED，来源与备注独立保存，其他业务字段无写入 |
+| 待审名称文件、完整路径映射、三语与审核凭据验证、日文保留、未审核不消费、商品来源 JSON 防伪 | PASS，CategoryReviewedNamesTest 5 项有效结果（首次四项及新增 JSON 单项） |
+| V43 幂等加法迁移、旧分类/价格/公开状态保留 | PASS，H2 PostgreSQL mode 实际执行两次；没有生产 PostgreSQL 验证 |
+| 四语延期 UI、输入撤销预览、明确确认、展示名契约 | PASS，两个 Vitest 文件共 12 项；默认文本空格修正后仅重跑对应一项 PASS，其余 11 项复用 |
+| 静态检查 | PASS，TypeScript noEmit、1866 个四语 key、git diff --check；无 sandbox/esbuild 阻断 |
+| 浏览器功能 | PASS，真实本地 Vite /admin/category-path-import，Chromium，1280×800 与 390×844、四语合成 API；默认名单、来源/延期、修改失效、显式确认，console/pageerror/requestfailed 均为空 |
+| 几何 | PASS，最终输入 918×66 / 324×66px；勾选标签与按钮至少 44px，输入字形内框余量最小 12px（左）、16.06px（手机右）、16.5px（上）、14.5px（手机下）；多行输入左上对齐，无居中预算；页面宽度等于视口宽度，表格内部滚动 |
+| 视觉 | PASS，主 Agent 查看最终桌面/手机整体、四语延期输入、来源/结果/原因原尺寸局部及确认图。修正手机日文结果逐字换行和默认编号断行；其余整体沿用已有工作台样式 |
+| 运营数据准备 | 本批契约完成；463 条真实映射等待 Parker 的 CSV 与运营审核，未编造、未抓取、未导入生产 |
+
+证据：[issue133-evening](reports/evidence/issue133-evening/)。`browser-results.json` 保存功能证据，`visual-results.json` 保存最终输入/勾选区域几何；`*-preview.png`、`*-confirmed.png` 为最终整体图，`*-defer-detail.png` 为原尺寸输入局部，`*-sources-detail.png` / `*-outcomes-detail.png` 为表格滚动位置局部。后两类在仅增加默认值空格与勾选热区之前拍摄，表格输入不变，继续有效。测试与外部意见摘要见 [验收记录](reports/evidence/issue133-evening/acceptance.md)。
+
+交付后续仅为运营 CSV 到达后的名称生成与审核、Parker 后台 dry-run/确认；本批已停止追加检查。清理本次四个临时编辑脚本，保留正式证据和已有依赖/编译缓存，停止本次 5183 Vite 进程。
+
 ## Parker 增量执行指导（2026-11-15）
 
 依据 issue #133 comment 6891216111，本批仅补同级商品数默认排序、人工顺序保留，以及可选导入标记的解析、预览、确认、审计、退回和模板。沿用现有树管理、选择器、权限与中文表头。禁止修改商城浏览、抓取分类、操作其他分支、生产、提交、推送或创建 PR。

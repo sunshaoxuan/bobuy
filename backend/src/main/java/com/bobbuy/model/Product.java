@@ -42,6 +42,12 @@ public class Product {
     @com.fasterxml.jackson.annotation.JsonProperty(access = com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY)
     private String categoryImportFlag;
 
+    @Column(name = "category_path_source")
+    @com.fasterxml.jackson.annotation.JsonProperty(access = com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY)
+    private String categoryPathSource;
+    public String getCategoryPathSource() { return categoryPathSource; }
+    public void setCategoryPathSource(String value) { categoryPathSource = value; }
+
     public String getCategoryImportFlag() { return categoryImportFlag; }
     public void setCategoryImportFlag(String value) { categoryImportFlag = value; }
 

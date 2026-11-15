@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "status": "pending_ops_review",
+  "sourceFile": "category-tree-migration-2026-11-15.csv",
+  "sourceSha256": null,
+  "pendingReview": [
+    "Operations CSV has not been supplied. Generate all Japanese node paths from that file, then review zh-CN, zh-TW and en-US names before marking any entry reviewed."
+  ],
+  "entries": []
+}

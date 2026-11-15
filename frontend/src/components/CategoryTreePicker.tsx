@@ -7,6 +7,11 @@ export type CategoryOption = {key: string; value: string; title: string; label: 
 export function categoryName(node: CategoryTreeNode, locale: Locale) {
   return node.name[locale]?.trim() || node.name['ja-JP']?.trim() || '';
 }
+// Contract for the future storefront tree consumer (#134). Pending translations
+// must not publish Japanese names as Chinese. Admin keeps its original-name reference.
+export function storefrontCategoryName(node: CategoryTreeNode, locale: Locale) {
+  return node.name[locale === 'ja-JP' ? 'ja-JP' : 'zh-CN'] ?? '';
+}
 export function categoryTreeData(nodes: CategoryTreeNode[], locale: Locale, leavesOnly = false): CategoryOption[] {
   const byParent = new Map<string | null, CategoryTreeNode[]>();
   for (const node of nodes) {

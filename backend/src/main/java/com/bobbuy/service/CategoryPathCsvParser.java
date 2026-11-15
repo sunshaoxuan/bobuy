@@ -48,9 +48,9 @@ final class CategoryPathCsvParser {
     private static void add(List<String[]> rows,List<String> cells,String raw,boolean invalid) {
         if(invalid) {
             // The full raw logical record is retained in the unmatched breadcrumb column.
-            rows.add(new String[]{cells.get(0),raw,"","Malformed CSV quoting; correct the original record"});
+            rows.add(new String[]{cells.get(0),raw,"","","Malformed CSV quoting; correct the original record"});
         } else if (!rows.isEmpty() && cells.size() != rows.get(0).length) {
-            rows.add(new String[]{cells.get(0),raw,cells.size()>2?cells.get(2):"","Column count must match the header"});
+            rows.add(new String[]{cells.get(0),raw,cells.size()>2?cells.get(2):"","","Column count must match the header"});
         } else rows.add(cells.toArray(String[]::new));
     }
 }

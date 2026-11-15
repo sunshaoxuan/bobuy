@@ -1572,7 +1572,7 @@ Object.assign(messages,{"card.reference": "参考価格", "card.reference_past":
 Object.assign(messages,{"repair.not_derivable":"一意に導出できません。手動で入力してください","repair.source_title":"出典コンテキスト候補を確認","repair.locale_title":"AI 言語候補を確認","repair.review_hint":"変更内容を確認してください。確認するまで保存されません。","repair.overwrite":"入力済みの値を上書き","repair.blank":"空欄のまま","repair.unchanged":"既存値を維持","repair.confirm":"確認して保存","repair.deriving":"確認済み出典から推定中…","repair.generating":"AI 候補を生成中…","repair.none":"保存できる候補がありません","repair.ai":"AI 候補","repair.batch_source":"出典を一括補完","repair.batch_locale":"不足言語を提案","repair.one_click":"出典修正を確認","repair.ai_action":"AI 候補を生成"});
 export default messages;
 
-Object.assign(messages,{"categoryImport.title":"カテゴリーパス一括インポート","categoryImport.help":"CSV または XLSX をアップロードします。Costco の日本語パンくず名は完全一致、区切りは ＞ です。書き込み前に全行を確認し、推測や黙った除外は行いません。","categoryImport.choose":"運用ファイルを選択","categoryImport.preview":"インポートをプレビュー","categoryImport.row":"行","categoryImport.sku":"SKU","categoryImport.path":"Costco パンくず","categoryImport.result":"結果","categoryImport.reason":"理由","categoryImport.matched":"一致","categoryImport.newNodes":"新規ノード","categoryImport.unmatched":"不一致／不明な SKU","categoryImport.export":"不一致リストを出力","categoryImport.confirmCheck":"プレビューと商品総数を確認し、このカテゴリーパス変更を明示的に承認します。","categoryImport.confirm":"インポートを確定","categoryImport.done":"インポートを確定し、監査記録を保存しました。","categoryImport.failed":"インポートに失敗しました。黙って除外された行はありません。","categoryImport.count":"インポート前の商品数：{before}、後：{after}"});
+Object.assign(messages,{"categoryImport.title":"カテゴリーパス一括インポート","categoryImport.help":"CSV または XLSX をアップロードします。区切りには半角 > と全角 ＞ を使用できます。分類経路の出典を原文で記録し、プレビュー後に確定します。","categoryImport.choose":"運用ファイルを選択","categoryImport.preview":"インポートをプレビュー","categoryImport.row":"行","categoryImport.sku":"SKU","categoryImport.path":"Costco パンくず","categoryImport.result":"結果","categoryImport.reason":"理由","categoryImport.matched":"一致","categoryImport.newNodes":"新規ノード","categoryImport.unmatched":"不一致／不明な SKU","categoryImport.export":"不一致リストを出力","categoryImport.confirmCheck":"プレビューと商品総数を確認し、このカテゴリーパス変更を明示的に承認します。","categoryImport.confirm":"インポートを確定","categoryImport.done":"インポートを確定し、監査記録を保存しました。","categoryImport.failed":"インポートに失敗しました。黙って除外された行はありません。","categoryImport.count":"インポート前の商品数：{before}、後：{after}"});
 
 Object.assign(messages,{"repair.accept_all":"統合可能な項目をすべて承認","repair.edit":"編集","repair.reject":"拒否","repair.product":"商品","repair.product_number":"商品 {number}","repair.url_manual":"出典に商品リンクがありません。確認可能なリンクを貼り付けてください。","repair.ai_failed":"AI 候補を取得できません。手動で入力してください。","repair.field.supplierKey":"仕入先","repair.field.channel":"販売チャネル","repair.field.sourceMessageKey":"出典メール","repair.field.sourceUrl":"商品リンク","repair.evidence.master":"商品情報","repair.evidence.source":"出典メール","repair.channel.online":"オンライン","repair.channel.warehouse":"店舗","repair.locale.zh-CN":"簡体字中国語の","repair.locale.zh-TW":"繁体字中国語の","repair.locale.ja-JP":"日本語の","repair.locale.en-US":"英語の","repair.locale_field.name":"名称","repair.locale_field.specification":"仕様"});
 
@@ -1596,5 +1596,19 @@ Object.assign(messages, {
   "categoryTree.deleteBlocked": "子カテゴリ、商品または旧カテゴリとの対応があるため削除できません。先に移動または再分類してください。",
   "categoryImport.template": "CSV テンプレートをダウンロード",
   "categoryImport.flag": "備考 / フラグ",
-  "categoryImport.templateHelp": "中国語の列名に対応しています。架空の例を実際の商品番号と日本語パスに置き換え、全角 ＞ で区切ってください。任意列：备注 / 标记 / Note / Flag。推定や最接近路径などのフラグは原文で保存し、待核の行は分類せず差し戻します。"
+  "categoryImport.templateHelp": "中国語の列名に対応：SKU、costco分类路径、路径来源。備考列は 备注 / 标记 / Note / Flag を使用できます。テンプレートは架空の例です。運用データに置き換えてください。3 種類の出典とも指定経路を取り込みます。"
+});
+
+Object.assign(messages,{
+  "categoryImport.source": "経路の出典",
+  "categoryImport.source.official": "公式パンくず（原文）",
+  "categoryImport.source.inferredBreadcrumb": "推定（公式パンくずなし）",
+  "categoryImport.source.inferredPage": "推定（公式ページなし）",
+  "categoryImport.deferred": "保留",
+  "categoryImport.deferredReason": "現在の分類と公開状態を維持し、今回は変更しません。",
+  "categoryImport.deferLabel": "保留・除外する商品番号",
+  "categoryImport.deferHelp": "初期値では C グループの 9 商品を保留します。商品番号をカンマ・空白・改行で区切ってください。この一覧で初期値を置き換え、空欄なら全商品をプレビュー対象にします。保留商品は現在の分類と公開状態を維持します。編集後は再プレビューが必要です。",
+  "categoryImport.noMatched": "取り込み可能な行がありません。ファイルまたは保留一覧を修正し、再プレビューしてください。",
+  "categoryImport.checkRequired": "プレビューを確認し、確認欄にチェックしてください。",
+  "categoryImport.ready": "確認済みです。取り込みを確定できます。"
 });
