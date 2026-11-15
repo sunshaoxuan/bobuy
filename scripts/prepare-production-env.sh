@@ -31,13 +31,45 @@ if ! SOPS_AGE_KEY_FILE="$key_file" sops decrypt --input-type dotenv --output-typ
   fail
 fi
 
-# Accept only dotenv assignments/comments and reject flags that could activate mail,
-# reset, verification, or abuse-sensitive production behavior in this config-only PR.
+# Accept a conservative single-line literal subset of Compose dotenv syntax.
+# Interpolation is intentionally unsupported: use single quotes for literal dollars.
+# Never expose parser diagnostics or input, including on malformed quoted values.
 if ! awk '
+  BEGIN { single = sprintf("%c", 39) }
   /^[[:space:]]*($|#)/ { next }
-  /^[A-Za-z_][A-Za-z0-9_]*=.*/ { next }
-  { exit 1 }
-' "$temporary"; then
+  {
+    if ($0 !~ /^[A-Za-z_][A-Za-z0-9_]*=/ || $0 ~ /[[:cntrl:]]/) exit 1
+    value = substr($0, index($0, "=") + 1)
+    sub(/^[ ]+/, "", value)
+    quote = substr(value, 1, 1)
+    if (quote == single || quote == "\"") {
+      closed = 0
+      for (i = 2; i <= length(value); i++) {
+        c = substr(value, i, 1)
+        if (c == "\\") {
+          escaped = substr(value, i + 1, 1)
+          if (quote == "\"") {
+            if (escaped == "" || index("\\\"nrt", escaped) == 0) exit 1
+            i++
+            continue
+          }
+          if (escaped == single || escaped == "\\") { i++; continue }
+        }
+        if (quote == "\"" && c == "$") exit 1
+        if (c == quote) {
+          tail = substr(value, i + 1)
+          if (tail !~ /^[ ]*(#.*)?$/) exit 1
+          closed = 1
+          break
+        }
+      }
+      if (!closed) exit 1
+    } else {
+      sub(/[ ]+#.*$/, "", value)
+      if (index(value, single) || value ~ /["\\$]/) exit 1
+    }
+  }
+' "$temporary" >/dev/null 2>&1; then
   fail
 fi
 if awk -F= '
@@ -46,7 +78,7 @@ if awk -F= '
   $1 == "BOBBUY_ACCOUNT_PASSWORD_RESET_ENABLED" ||
   $1 == "BOBBUY_ACCOUNT_REQUIRE_VERIFIED_EMAIL_FOR_CHECKOUT" { forbidden = 1 }
   END { exit forbidden ? 0 : 1 }
-' "$temporary"; then
+' "$temporary" >/dev/null 2>&1; then
   fail
 fi
 

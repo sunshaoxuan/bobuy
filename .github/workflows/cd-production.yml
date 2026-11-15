@@ -165,6 +165,14 @@ jobs:
           fi
           compose() { docker compose "${env_files[@]}" -p bobuy "${compose_files[@]}" "$@"; }
           rollback_compose() { docker compose "${rollback_env_files[@]}" -p bobuy "${compose_files[@]}" "$@"; }
+          validate_compose() {
+            local diagnostics
+            if diagnostics=$(compose config --quiet 2>&1); then
+              return 0
+            fi
+            echo 'Compose configuration validation failed.' >&2
+            return 1
+          }
           persist_environment() {
             if [[ "$PROD_ENCRYPTED_ENV_ENABLED" == true ]]; then
               [[ -f "$runtime_env" && ! -L "$runtime_env" ]] || return 1
@@ -175,6 +183,22 @@ jobs:
               rm -f -- "$last_env" || return 1
             fi
           }
+
+          restore_environment() (
+            # Keep the rollback copy available for the subsequent image rollback.
+            local restore_tmp
+            if [[ -e "$rollback_env" || -L "$rollback_env" ]]; then
+              [[ -f "$rollback_env" && ! -L "$rollback_env" ]] || return 1
+              restore_tmp=$(mktemp "${last_env}.restore.XXXXXXXXXX") || return 1
+              trap 'rm -f -- "$restore_tmp"' EXIT
+              cp -- "$rollback_env" "$restore_tmp" || return 1
+              chmod 600 "$restore_tmp" || return 1
+              [[ -f "$restore_tmp" && ! -L "$restore_tmp" ]] || return 1
+              mv -fT -- "$restore_tmp" "$last_env" || return 1
+            else
+              rm -f -- "$last_env" || return 1
+            fi
+          )
 
           # Pin actual running image IDs before changing any application, even on first CD.
           rollback_timestamp=$(date -u +%Y%m%dT%H%M%S%NZ)
@@ -339,13 +363,18 @@ jobs:
           )
           # Keep every fallible activation step inside the conditional so errexit
           # cannot skip recovery. No dependency services are pulled or recreated.
-          if activate_edge && compose config --quiet && pull_images \
+          environment_persisted=false
+          if activate_edge && validate_compose && pull_images \
             && compose up -d --no-deps --no-build --pull never "${services[@]}" \
             && containers_healthy && reload_nginx && healthy \
             && persist_environment \
+            && environment_persisted=true \
             && printf '%s %s\n' "$REVISION" "$(date -u +%FT%TZ)" > .cd/deploy-revision; then
             cleanup_after_deploy || true
             exit 0
+          fi
+          if [[ "$environment_persisted" == true ]]; then
+            restore_environment >/dev/null 2>&1 || echo 'WARNING: last-known-good environment restoration failed.' >&2
           fi
           echo 'Deployment failed; restoring the six captured image refs.' >&2
           # Restore host configuration before resolving the rollback Compose model.
