@@ -38,6 +38,7 @@ public class SmtpDelivery {
   return sender;
  }
  private FailureCategory classify(Throwable failure) {
+  boolean connectionFailure=false;
   for(Throwable current=failure;current!=null;current=current.getCause()) {
    String name=current.getClass().getName().toLowerCase(java.util.Locale.ROOT);
    String message=String.valueOf(current.getMessage()).toLowerCase(java.util.Locale.ROOT);
@@ -45,8 +46,8 @@ public class SmtpDelivery {
    if(name.contains("ssl") || name.contains("certificate") || message.contains("certificate") || message.contains("handshake")) return FailureCategory.TLS;
    if(name.contains("authentication") || message.contains("authentication failed") || message.contains("535")) return FailureCategory.AUTHENTICATION;
    if(message.contains("rejected") || message.matches(".*\\b(550|551|552|553|554)\\b.*")) return FailureCategory.REJECTED;
-   if(name.contains("connect") || message.contains("connection")) return FailureCategory.CONNECTION;
+   if(name.contains("connect") || message.contains("connection")) connectionFailure=true;
   }
-  return FailureCategory.UNKNOWN;
+  return connectionFailure ? FailureCategory.CONNECTION : FailureCategory.UNKNOWN;
  }
 }
