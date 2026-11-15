@@ -32,6 +32,8 @@ import AccountShortcuts from '../components/AccountShortcuts';
 import {storefrontFeatures} from '../storefrontFeatures';
 import {navigationDevice,readNavigationExpanded,rememberNavigationExpanded} from '../storeNavigationPreference';
 import {hiddenTripDestination} from '../storefrontRoute';
+import {ForgotPassword,ResetPassword} from './PasswordRecovery';
+import {passwordResetEnabled} from '../passwordReset';
 
 const ClientOrders = lazy(() => import('./ClientOrders'));
 const PublicRecommendations = lazy(() => import('./PublicRecommendations'));
@@ -69,7 +71,7 @@ export function AccountForm({ afterLogin, checkout = false }: { afterLogin: () =
       <Form.Item label={t('store.password')} name="password" rules={[{ required: true, message: t('store.password_required') },
         ...(mode === 'register' ? [{ min: 8, max: 72, message: t('store.password_rule') }] : [])]}>
         <Input.Password autoComplete={mode === 'register' ? 'new-password' : 'current-password'} size="large" /></Form.Item>
-      <Button type="primary" htmlType="submit" block size="large" loading={busy}>{mode === 'register' ? t('store.register_continue') : t('store.login_continue')}</Button>
+      <Button type="primary" htmlType="submit" block size="large" loading={busy}>{mode === 'register' ? t('store.register_continue') : t('store.login_continue')}</Button>{mode==='login'&&passwordResetEnabled&&<Link className="recovery-secondary" to="/forgot-password">{t('password_reset.forgot')}</Link>}
     </Form>
   </section>;
 }
@@ -290,7 +292,7 @@ export default function Storefront() {
       {!maintenance&&(location.pathname==='/'&&loading ? <div className="store-loading"><Spin /></div> : <Suspense fallback={<Spin />}><Routes>
         <Route index element={<>{showHomeRecommendations&&storefrontFeatures.dealsBulletin?<PublicRecommendations query={search} products={products} quantities={cart.items} onDetail={setDetail} onAdd={addRecommendation} canBuy={canBuyRecommendation} onSales={receiveSales} purchasePending={!tripsReady||authLoading} authKey={authKey} autoPaused={navigationOpen||tripPicker||!!detail||!!quantityProduct||cartConfirmationOpen}/>:rootCatalog}</>} /><Route path="products" element={<PublicProductCatalog query={search} products={products} quantities={cart.items} onAdd={addRecommendation} canBuy={canBuyRecommendation} onSales={receiveSales} purchasePending={!tripsReady||authLoading} autoPaused={navigationOpen||tripPicker||!!detail||!!quantityProduct||cartConfirmationOpen}/>}/><Route path="trips" element={storefrontFeatures.trips?(tripsReady||quietTripFailure?bookable:tripsLoading?<Spin/>:null):<Navigate to={hiddenTripDestination(location.search)} replace/>}/><Route path="client/trips" element={storefrontFeatures.trips?<ClientTrips node={node}/>:<Navigate to={hiddenTripDestination(location.search)} replace/>}/><Route path="cart" element={basket} />
         <Route path="checkout" element={<div className="checkout-layout">{visibleReceipt&&quantity===0 ? <section className="order-success"><CheckCircleOutlined /><h1>{t('store.submitted')}</h1><p>{t('store.order_number',{id:visibleReceipt.orderId})} · {money(visibleReceipt.total,visibleReceipt.currency)}</p><Tag color="gold">{t('store.pending')}</Tag><div className="action-row"><Link to="/client/orders"><Button type="primary">{t('store.view_order')}</Button></Link><Link to="/"><Button>{t('store.continue')}</Button></Link></div></section> : <>{basket}{quantity > 0 && <section className="checkout-account">{!isAuthenticated ? <AccountForm checkout afterLogin={() => {}} /> : !user?.roles.includes('CUSTOMER') ? <Alert type="warning" message={t('store.customer_only')} action={<Button onClick={() => void logout()}>{t('store.switch_account')}</Button>} /> : <><h2>{t('store.confirm')}</h2><p>{user.name} · {user.email}</p>{!user.emailVerified && <Alert type="info" message={t('store.unverified_hint')} />}<CheckoutAddress key={sessionIdentity} userId={user.id} identity={sessionIdentity} onReady={(identity,ready)=>{if(currentIdentity.current===identity)setAddressReady(ready?identity:undefined);}}/><Button type="primary" size="large" block loading={busy} disabled={invalidCart||addressReady!==sessionIdentity} onClick={() => void checkout()}>{t('store.submit')} · {totalText}</Button><Link to="/account">{t('store.verify')}</Link></>}</section>}</>}</div>} />
-        <Route path="login" element={isAuthenticated ? <Navigate to="/account" replace /> : <AccountForm afterLogin={() => navigate('/account')} />} />
+        <Route path="forgot-password" element={<ForgotPassword/>}/><Route path="reset-password" element={<ResetPassword/>}/><Route path="login" element={isAuthenticated ? <Navigate to="/account" replace /> : <AccountForm afterLogin={() => navigate('/account')} />} />
         <Route path="account" element={isAuthenticated ? <section className="account-page">
           <header className="account-heading"><div><h1>{t('store.account')}</h1><p>{user?.name}</p></div>
             <div className="account-utilities">{isCustomer&&<Link to="/client/billing">{t('store.billing')}</Link>}<Button type="text" icon={<LogoutOutlined />} onClick={() => void logout()}>{t('store.logout')}</Button></div>

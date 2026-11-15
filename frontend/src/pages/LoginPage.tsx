@@ -7,6 +7,7 @@ import { isLocalAuthOverrideEnabled } from '../authStorage';
 import { useUserRole } from '../context/UserRoleContext';
 import { Link } from 'react-router-dom';
 import LanguageSwitcher from '../components/LanguageSwitcher';
+import {passwordResetEnabled} from '../passwordReset';
 
 const { Paragraph, Text } = Typography;
 
@@ -69,7 +70,7 @@ export default function LoginPage() {
             </Form.Item>
             <Button type="primary" htmlType="submit" block loading={submitting}>
               {t('auth.login_action')}
-            </Button>
+            </Button>{passwordResetEnabled&&<Link className="recovery-secondary" to="/admin/forgot-password">{t('password_reset.forgot')}</Link>}
           </Form>
         </Space>
       </main>
