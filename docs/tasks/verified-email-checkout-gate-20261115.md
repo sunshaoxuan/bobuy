@@ -15,5 +15,6 @@
 | 幂等检查先于新订单 gate | 同一 `requestId` 成功后清除验证状态，重试仍返回原订单；新 `requestId` 被拒绝 |
 | 依赖受锁定用户的新鲜验证状态 | 已验证用户修改邮箱后立即以新 `requestId` 下单，被直接 API 拒绝且无新增写入 |
 | 部署安全边界 | 静态核对产品默认值为 `true`，`application-prod.properties` 与 `compose.production.yml` 的生产覆盖均为 `false`，其余邮件/重置/防滥用开关仍为 `false` |
+| 既有无关下单 fixture 适配产品默认 gate | 将 `CustomerOrderAmendmentIntegrationTest` 与 `RecommendationCommerceTest` 中需要成功下单的合成 CUSTOMER 明确标为邮箱已验证；合并运行这两个直接受影响测试类 |
 
 不运行前端、全项目、全栈或生产发布验证；本 issue 无 UI，§8/§9 不适用。
