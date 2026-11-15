@@ -5,10 +5,40 @@ import org.junit.jupiter.api.*;import org.springframework.security.authenticatio
 import static org.assertj.core.api.Assertions.*;import static org.mockito.Mockito.*;
 
 class RecommendationRepairServiceTest {
- final RecommendationPostRepository posts=mock(RecommendationPostRepository.class);final RecommendationItemRepository items=mock(RecommendationItemRepository.class);final RecommendationSourceArtifactRepository artifacts=mock(RecommendationSourceArtifactRepository.class);final ProductRepository products=mock(ProductRepository.class);final UserRepository users=mock(UserRepository.class);final LlmGateway llm=mock(LlmGateway.class);
+ final RecommendationPostRepository posts=mock(RecommendationPostRepository.class);final RecommendationItemRepository items=mock(RecommendationItemRepository.class);final RecommendationSourceArtifactRepository artifacts=mock(RecommendationSourceArtifactRepository.class);final ProductRepository products=mock(ProductRepository.class);final UserRepository users=mock(UserRepository.class);final SupplierRepository suppliers=mock(SupplierRepository.class);final LlmGateway llm=mock(LlmGateway.class);
  RecommendationRepairService service;RecommendationPost post;
- @BeforeEach void setup(){SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(new BobbuyAuthenticatedUser(7L,"synthetic","Synthetic",Set.of(Role.AGENT)),null,List.of(new SimpleGrantedAuthority("ROLE_AGENT"))));service=new RecommendationRepairService(posts,items,artifacts,products,users,llm);post=new RecommendationPost();post.id=12L;post.merchantId=7L;post.version=4;post.issueDate=LocalDate.of(2026,11,1);post.issueDateSourceRef="message:synthetic-source";post.issueDateSourceHash="a".repeat(64);post.issueDateReviewedBy=7L;post.issueDateReviewedAt=Instant.now();when(posts.findByIdAndMerchantId(12L,7L)).thenReturn(Optional.of(post));when(users.lockById(7L)).thenReturn(Optional.of(mock(User.class)));}
+ @BeforeEach void setup(){SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(new BobbuyAuthenticatedUser(7L,"synthetic","Synthetic",Set.of(Role.AGENT)),null,List.of(new SimpleGrantedAuthority("ROLE_AGENT"))));service=new RecommendationRepairService(posts,items,artifacts,products,users,suppliers,llm);post=new RecommendationPost();post.id=12L;post.merchantId=7L;post.version=4;post.issueDate=LocalDate.of(2026,11,1);post.issueDateSourceRef="message:synthetic-source";post.issueDateSourceHash="a".repeat(64);post.issueDateReviewedBy=7L;post.issueDateReviewedAt=Instant.now();when(posts.findByIdAndMerchantId(12L,7L)).thenReturn(Optional.of(post));when(users.lockById(7L)).thenReturn(Optional.of(mock(User.class)));}
  @AfterEach void clear(){SecurityContextHolder.clearContext();}
+ private RecommendationRepairService.SourcePreview withField(RecommendationRepairService.SourcePreview preview,String field,String value){
+  return new RecommendationRepairService.SourcePreview(preview.postId(),preview.version(),preview.items().stream().map(row->new RecommendationRepairService.ItemSuggestion(row.itemId(),row.itemName(),row.productId(),row.itemVersion(),row.productVersion(),row.fields().stream().map(f->f.field().equals(field)?new RecommendationRepairService.FieldSuggestion(f.field(),f.currentValue(),value,f.displayValue(),f.evidence(),f.unresolvedReason(),f.overwrite()):f).toList())).toList());
+ }
+ @Test void post128AcceptsRejectedFieldsAndPastedUrl(){
+  post.id=128L;when(posts.findByIdAndMerchantId(128L,7L)).thenReturn(Optional.of(post));
+  var item=new RecommendationItem();item.id=389L;item.postId=128L;when(items.findByPostIdOrderById(128L)).thenReturn(List.of(item));when(items.findById(389L)).thenReturn(Optional.of(item));
+  var preview=withField(withField(service.previewSource(Long.valueOf("128"),false),"sourceMessageKey",null),"sourceUrl","https://example.com/operator");
+  service.applySource(Long.valueOf("128"),4,false,preview);
+  assertThat(item.referenceContext.sourceUrl()).isEqualTo("https://example.com/operator");assertThat(item.referenceContext.sourceMessageKey()).isNull();verify(items).save(item);
+ }
+ @Test void invalidPastedUrlsCannotWrite(){
+  product(Map.of(),Map.of(),null);var preview=service.previewSource(12L,false);
+  for(String value:List.of("http://example.com","https:///missing","https://user@example.com/path","https://example.com/a b"))assertThatThrownBy(()->service.applySource(12L,4,false,withField(preview,"sourceUrl",value))).isInstanceOf(com.bobbuy.api.response.ApiException.class);
+  verify(items,never()).save(any());
+ }
+ @Test void pastedUrlCannotOverwriteRetainedValueWithoutOptIn(){
+  product(Map.of(),Map.of(),null);var item=items.findById(1L).orElseThrow();item.referenceContext=new ReferenceOfferContext(null,null,null,null,"https://example.com/current",null,null,false,null,false);
+  var preview=service.previewSource(12L,false);assertThat(preview.items().get(0).fields().get(3).displayValue()).isEqualTo("https://example.com/current");
+  assertThatThrownBy(()->service.applySource(12L,4,false,withField(preview,"sourceUrl","https://example.com/new"))).isInstanceOf(com.bobbuy.api.response.ApiException.class);verify(items,never()).save(any());
+  service.applySource(12L,4,true,withField(service.previewSource(12L,true),"sourceUrl","https://example.com/new"));assertThat(item.referenceContext.sourceUrl()).isEqualTo("https://example.com/new");
+ }
+ @Test void aiSourceSuggestionsMustBeGroundedAndApplyDoesNotRegenerateAi(){
+  product(Map.of(),Map.of(),null);var artifact=new RecommendationSourceArtifact();artifact.content="Costco online offer https://example.com/product Warehouse notice https://example.com/notice".getBytes(StandardCharsets.UTF_8);when(artifacts.findBySourceRef(anyString())).thenReturn(Optional.of(artifact));
+  when(llm.generate(anyString(),isNull(),anyList())).thenReturn(Optional.of("{\"channel\":\"COSTCO_ONLINE\",\"channelQuote\":\"Costco online offer\",\"url\":\"https://example.com/product\"}"));
+  var preview=service.previewSource(12L,false);assertThat(preview.items().get(0).fields().get(1).evidence()).isEqualTo("ai");assertThat(preview.items().get(0).fields().get(3).evidence()).isEqualTo("ai");service.applySource(12L,4,false,preview);verify(llm,times(1)).generate(anyString(),isNull(),anyList());
+ }
+ @Test void fabricatedAiUrlsAndUnquotedChannelRemainBlank(){
+  product(Map.of(),Map.of(),null);var artifact=new RecommendationSourceArtifact();artifact.content="Reviewed offers without links".getBytes(StandardCharsets.UTF_8);when(artifacts.findBySourceRef(anyString())).thenReturn(Optional.of(artifact));when(llm.generate(anyString(),isNull(),anyList())).thenReturn(Optional.of("{\"channel\":\"COSTCO_ONLINE\",\"channelQuote\":\"Costco online\",\"url\":\"https://example.com/invented\"}"));
+  var fields=service.previewSource(12L,false).items().get(0).fields();assertThat(fields.get(1).suggestedValue()).isNull();assertThat(fields.get(3).suggestedValue()).isNull();
+ }
  @Test void twentyItemPreviewUsesOnlyActualUniqueUrlAndLeavesAmbiguousChannelBlank(){var artifact=new RecommendationSourceArtifact();artifact.sourceRef=post.issueDateSourceRef;artifact.content="offer https://www.costco.co.jp/reviewed-page".getBytes(StandardCharsets.UTF_8);when(artifacts.findBySourceRef(artifact.sourceRef)).thenReturn(Optional.of(artifact));var rows=new ArrayList<RecommendationItem>();for(long id=1;id<=20;id++){var i=new RecommendationItem();i.id=id;i.postId=12L;i.referenceContext=new ReferenceOfferContext(null,null,null,null,null,null,null,false,null,false);rows.add(i);}when(items.findByPostIdOrderById(12L)).thenReturn(rows);
   var preview=service.previewSource(12L,false);assertThat(preview.items()).hasSize(20);assertThat(preview.items()).allSatisfy(row->{assertThat(row.fields()).anySatisfy(f->{if(f.field().equals("sourceUrl"))assertThat(f.suggestedValue()).isEqualTo("https://www.costco.co.jp/reviewed-page");});assertThat(row.fields()).anySatisfy(f->{if(f.field().equals("channel")){assertThat(f.suggestedValue()).isNull();assertThat(f.unresolvedReason()).isNotBlank();}});});verify(items,never()).save(any());verify(posts,never()).saveAndFlush(any());
  }

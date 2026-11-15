@@ -4,6 +4,16 @@ import postcss from 'postcss';
 
 const css = readFileSync(`${process.cwd()}/src/recommendations.css`, 'utf8');
 
+it('targets the recommendation card checkbox wrapper and mobile modal close', () => {
+  const root=postcss.parse(css);
+  const values={};
+  root.walkRules('.rec-product .ant-checkbox-wrapper',rule=>rule.walkDecls(d=>{values[d.prop]=d.value;}));
+  expect(values).toMatchObject({'display':'flex','min-height':'44px','height':'auto'});
+  const close={};
+  root.walkRules('.rec-repair-modal .ant-modal-close',rule=>rule.walkDecls(d=>{close[d.prop]=d.value;}));
+  expect(close).toMatchObject({'width':'44px','height':'44px','min-width':'44px','min-height':'44px'});
+});
+
 it('spans failure cards across the grid independently of breakpoints and modal portals', () => {
   const root = postcss.parse(css);
   const spans = [];

@@ -1707,3 +1707,9 @@ Object.assign(messages,{
 Object.assign(messages,{"card.reference": "參考價", "card.reference_past": "往期參考價", "card.reference_future": "預告參考價", "card.reference_undated": "日期待核參考價", "card.price_unknown": "價格待確認"});
 Object.assign(messages,{"repair.not_derivable":"無法唯一推導，請手動補充","repair.source_title":"核對來源上下文建議","repair.locale_title":"核對 AI 語種建議","repair.review_hint":"請逐項預覽；明確確認前不會寫入。","repair.overwrite":"覆蓋已有值","repair.blank":"保持空白","repair.unchanged":"保留已有值","repair.confirm":"確認並儲存","repair.deriving":"正在從已審核來源推導…","repair.generating":"正在產生 AI 建議…","repair.none":"沒有可儲存的有效建議","repair.ai":"AI 建議","repair.batch_source":"批次補全來源","repair.batch_locale":"建議缺失語種","repair.one_click":"預覽來源修復","repair.ai_action":"產生 AI 建議"});
 export default messages;
+
+Object.assign(messages,{"repair.accept_all":"一鍵接受全部可合併項目","repair.edit":"編輯","repair.reject":"拒絕","repair.product":"商品","repair.product_number":"商品 {number}","repair.url_manual":"來源中沒有找到商品連結，請貼上可核驗的連結。","repair.ai_failed":"AI 建議暫不可用，請手動填寫。","repair.field.supplierKey":"供應商","repair.field.channel":"銷售通路","repair.field.sourceMessageKey":"來源郵件","repair.field.sourceUrl":"商品連結","repair.evidence.master":"商品資料","repair.evidence.source":"來源郵件","repair.channel.online":"線上","repair.channel.warehouse":"線下","repair.locale.zh-CN":"簡體中文","repair.locale.zh-TW":"繁體中文","repair.locale.ja-JP":"日文","repair.locale.en-US":"英文","repair.locale_field.name":"名稱","repair.locale_field.specification":"規格"});
+
+Object.assign(messages,{"repair.supplier_unknown":"供應商名稱暫不可用","repair.reviewed_campaign":"已審核活動"});
+
+Object.assign(messages,{"repair.group": "相同建議 · {count} 件商品", "repair.accept_group": "接受本組建議", "repair.manual": "手動填寫"});
