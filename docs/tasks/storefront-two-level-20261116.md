@@ -85,3 +85,7 @@
 
 证据入口：[截图与记录](../reports/evidence/shopping-categories-20261116/README.md)。
 复用依据：本文件记录每次相关输入与失效范围；最后仅增加拒绝原始分类ID的边界，对合法shop-数据的已验截图保持有效。未重做全项目回归、未启动Docker栈。Vite唯一进程端口5173，依赖/编译产物复用。任务临时JDK、Maven、日志保留在 `/workspace/scratch`，不提交；误从根目录运行Vitest产生的 `.vite/vitest/results.json` 清理，不触碰共享数据。
+
+PR #158 / 76669fb1 已推送。原自动门禁43734425965：Lint/Type-check通过，前端4项旧断言失败（StorefrontContext三项仍把 /recommendations 根当期次页，CategoryTreeManagement一项固定旧删除文案）。按最新授权更新根路径/旧详情URL区分并补 ?item= 兼容断言；仅本地运行这两个文件的相关测试。生产代码未改变，之前浏览器及视觉证据保持有效。CodeQL及后端继续原运行，未重复预跑。
+
+CI 修正的最小检查：7 项 PASS、26 项未选中；原运行 43734425965 的后台编译及单测 PASS，43734426145 的三项 CodeQL PASS。生产代码及浏览器输入未变化，复用原截图验收。

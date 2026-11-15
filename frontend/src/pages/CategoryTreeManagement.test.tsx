@@ -17,7 +17,7 @@ it('renders Japanese paths without internal keys and explains blocked deletion',
   expect(screen.getByRole('article',{name:'食品 › 飲料'})).toBeInTheDocument();
   expect(document.body.textContent).not.toMatch(/rec-cat-|private-leaf|system_key/);
   expect(within(screen.getByRole('article',{name:'食品'})).getByRole('button',{name:'Delete category'})).toBeDisabled();
-  expect(screen.getAllByText(/Deletion is blocked/)).toHaveLength(2);
+  expect(screen.getAllByText(/shopping mappings cannot be deleted/)).toHaveLength(2);
 });
 it('adds a root with Japanese name and optional blank translations', async () => {
   await show(); fireEvent.click(screen.getByRole('button',{name:'Add top-level category'}));
