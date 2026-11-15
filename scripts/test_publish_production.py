@@ -1,6 +1,8 @@
 import json
+import io
 import unittest
-from unittest.mock import patch
+from contextlib import ExitStack, redirect_stderr, redirect_stdout
+from unittest.mock import Mock, patch
 from tempfile import TemporaryDirectory
 
 from importlib.util import module_from_spec, spec_from_file_location
@@ -10,6 +12,74 @@ from pathlib import Path
 spec = spec_from_file_location('publisher', Path(__file__).with_name('publish-production.py'))
 publisher = module_from_spec(spec)
 spec.loader.exec_module(publisher)
+
+
+class PersistedOverlayRefusalTest(unittest.TestCase):
+    def test_present_overlay_refuses_all_entries_without_reads_or_mutations(self):
+        entries = (
+            lambda: publisher.main(['20261115.1', '--mode', 'maintenance',
+                                    '--maintenance-reason', 'test maintenance']),
+            lambda: publisher.main(['20261115.1', '--mode', 'reference-data',
+                                    '--plan', 'placeholder.json', '--plan-sha256', 'placeholder']),
+            lambda: publisher.restore_database(['compose'], Path('unused.dump'),
+                                                {'flyway_schema_history': 'x', 'bb_product': 'x'}),
+        )
+        for exists, symlink in ((True, False), (True, True), (False, True)):
+            for entry_index, entry in enumerate(entries):
+                with self.subTest(exists=exists, symlink=symlink, entry=entry_index), ExitStack() as stack:
+                    exists_check = stack.enter_context(patch.object(Path, 'exists', return_value=exists))
+                    link_check = stack.enter_context(patch.object(Path, 'is_symlink', autospec=True, return_value=symlink))
+                    content = stack.enter_context(patch.object(Path, 'read_text', return_value='FAKE_OVERLAY_CONTENT'))
+                    blocked = []
+                    for target, name in ((Path, 'open'), (Path, 'read_bytes'),
+                                         (Path, 'mkdir'), (Path, 'write_text'), (Path, 'write_bytes'),
+                                         (publisher.os, 'umask'), (publisher.shutil, 'copyfile'),
+                                         (publisher, 'run'), (publisher.subprocess, 'run'),
+                                         (publisher.subprocess, 'check_output')):
+                        blocked.append(stack.enter_context(patch.object(target, name,
+                            side_effect=AssertionError('Unexpected I/O before refusal'))))
+                    reference = Mock()
+                    stack.enter_context(patch.dict('sys.modules', {'reference_data_release': reference}))
+                    stdout, stderr = io.StringIO(), io.StringIO()
+                    with redirect_stdout(stdout), redirect_stderr(stderr), self.assertRaises(RuntimeError) as raised:
+                        entry()
+                    message = str(raised.exception)
+                    self.assertIn('manual publisher does not use the encrypted overlay', message)
+                    self.assertIn('.cd/runtime-env-last', message)
+                    self.assertIn('PROD_ENCRYPTED_ENV_ENABLED to false', message)
+                    self.assertIn('successful CD', message)
+                    self.assertNotIn('FAKE_OVERLAY_CONTENT', message + stdout.getvalue() + stderr.getvalue())
+                    self.assertEqual(stdout.getvalue() + stderr.getvalue(), '')
+                    link_check.assert_called_once_with(Path('/opt/bobuy/.cd/runtime-env-last'))
+                    if symlink:
+                        exists_check.assert_not_called()
+                    content.assert_not_called()
+                    for operation in blocked:
+                        operation.assert_not_called()
+                    reference.execute_reference_import.assert_not_called()
+
+    def test_absent_overlay_is_noop(self):
+        with patch.object(Path, 'is_symlink', return_value=False), \
+                patch.object(Path, 'exists', return_value=False), \
+                patch.object(Path, 'open') as opened:
+            self.assertIsNone(publisher.refuse_persisted_overlay())
+            opened.assert_not_called()
+
+    def test_absent_overlay_preserves_mode_dispatch(self):
+        with patch.object(Path, 'is_symlink', return_value=False), \
+                patch.object(Path, 'exists', return_value=False), \
+                patch.object(publisher.os, 'geteuid', create=True, return_value=1), \
+                patch.object(publisher, 'run') as run:
+            reference = Mock()
+            with patch.dict('sys.modules', {'reference_data_release': reference}):
+                publisher.main(['20261115.1', '--mode', 'reference-data',
+                                '--plan', 'placeholder.json', '--plan-sha256', 'placeholder'])
+            reference.execute_reference_import.assert_called_once_with(
+                Path('/opt/bobuy/releases/20261115.1'), Path('placeholder.json'), 'placeholder')
+            with self.assertRaisesRegex(RuntimeError, 'Run as root with the staged image archive'):
+                publisher.main(['20261115.1', '--mode', 'maintenance',
+                                '--maintenance-reason', 'test maintenance'])
+            run.assert_not_called()
 
 
 class RestoredDatabaseValidationTest(unittest.TestCase):

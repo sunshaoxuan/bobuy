@@ -76,6 +76,7 @@ jobs:
       PROD_SSH_KNOWN_HOSTS: ${{ secrets.PROD_SSH_KNOWN_HOSTS }}
       REVISION: ${{ github.sha }}
       REGISTRY: ghcr.io/${{ github.repository_owner }}
+      PROD_ENCRYPTED_ENV_ENABLED: ${{ vars.PROD_ENCRYPTED_ENV_ENABLED || 'false' }}
     steps:
       - uses: actions/checkout@v4
       - name: Validate SSH configuration
@@ -99,7 +100,20 @@ jobs:
           set -euo pipefail
           ssh_opts=(-i "$PROD_SSH_DIR/id_ed25519" -P "$PROD_SSH_PORT" -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$PROD_SSH_DIR/known_hosts")
           ssh -i "$PROD_SSH_DIR/id_ed25519" -p "$PROD_SSH_PORT" -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$PROD_SSH_DIR/known_hosts" "$PROD_SSH_USER@$PROD_SSH_HOST" "mkdir -p /opt/bobuy/.cd/edge-$REVISION"
-          scp "${ssh_opts[@]}" infra/nginx/bobuy.conf infra/nginx/maintenance.html compose.production.yml "$PROD_SSH_USER@$PROD_SSH_HOST:/opt/bobuy/.cd/edge-$REVISION/"
+          scp "${ssh_opts[@]}" infra/nginx/bobuy.conf infra/nginx/maintenance.html compose.production.yml scripts/prepare-production-env.sh "$PROD_SSH_USER@$PROD_SSH_HOST:/opt/bobuy/.cd/edge-$REVISION/"
+      - name: Stage opt-in encrypted environment
+        if: env.PROD_ENCRYPTED_ENV_ENABLED == 'true'
+        env:
+          PROD_ENV_SOPS_CIPHERTEXT: ${{ secrets.PROD_ENV_SOPS_CIPHERTEXT }}
+        run: |
+          set -euo pipefail
+          test -n "$PROD_ENV_SOPS_CIPHERTEXT" || { echo 'Encrypted production environment is not configured.' >&2; exit 1; }
+          encrypted=$(mktemp "$RUNNER_TEMP/bobuy-production-env.XXXXXX")
+          trap 'rm -f -- "$encrypted"' EXIT
+          chmod 600 "$encrypted"
+          printf '%s' "$PROD_ENV_SOPS_CIPHERTEXT" > "$encrypted"
+          scp -i "$PROD_SSH_DIR/id_ed25519" -P "$PROD_SSH_PORT" -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$PROD_SSH_DIR/known_hosts" \
+            "$encrypted" "$PROD_SSH_USER@$PROD_SSH_HOST:/opt/bobuy/.cd/edge-$REVISION/production.env.enc"
       - name: Deploy, verify, and roll back on failure
         id: deploy
         env:
@@ -114,7 +128,7 @@ jobs:
           cd /opt/bobuy
           test -f /etc/bobuy.env || { echo '/etc/bobuy.env is missing; refusing deployment.' >&2; exit 1; }
           edge_dir=".cd/edge-$REVISION"
-          test -f "$edge_dir/bobuy.conf" && test -f "$edge_dir/maintenance.html" && test -f "$edge_dir/compose.production.yml" || { echo 'Staged edge assets are missing.' >&2; exit 1; }
+          test -f "$edge_dir/bobuy.conf" && test -f "$edge_dir/maintenance.html" && test -f "$edge_dir/compose.production.yml" && test -f "$edge_dir/prepare-production-env.sh" || { echo 'Staged edge assets are missing.' >&2; exit 1; }
           # Pulling six new images needs headroom; refuse before touching anything when the disk is nearly full.
           min_free_kb=$((6 * 1024 * 1024))
           docker_root=$(docker info --format '{{.DockerRootDir}}')
@@ -132,7 +146,59 @@ jobs:
           compose_files=(-f docker-compose.yml -f compose.production.yml)
           if test -f compose.rustfs.yml; then compose_files+=(-f compose.rustfs.yml); fi
           compose_files+=(-f .cd/compose.yml)
-          compose() { docker compose --env-file /etc/bobuy.env -p bobuy "${compose_files[@]}" "$@"; }
+          runtime_env=".cd/runtime-env-$REVISION"
+          last_env=".cd/runtime-env-last"
+          rollback_env=".cd/runtime-env-rollback-$REVISION"
+          rm -f -- "$runtime_env" "$rollback_env"
+          trap 'rm -f -- "$runtime_env" "$rollback_env"' EXIT
+          rollback_env_files=(--env-file /etc/bobuy.env)
+          if [[ -e "$last_env" || -L "$last_env" ]]; then
+            [[ -f "$last_env" && ! -L "$last_env" ]] || { echo 'Invalid last-known-good environment file.' >&2; exit 1; }
+            cp -- "$last_env" "$rollback_env"
+            chmod 600 "$rollback_env"
+            rollback_env_files+=(--env-file "$rollback_env")
+          fi
+          env_files=(--env-file /etc/bobuy.env)
+          if [[ "$PROD_ENCRYPTED_ENV_ENABLED" == true ]]; then
+            bash "$edge_dir/prepare-production-env.sh" true "$edge_dir/production.env.enc" /etc/bobuy/age/keys.txt "$runtime_env"
+            env_files+=(--env-file "$runtime_env")
+          fi
+          compose() { docker compose "${env_files[@]}" -p bobuy "${compose_files[@]}" "$@"; }
+          rollback_compose() { docker compose "${rollback_env_files[@]}" -p bobuy "${compose_files[@]}" "$@"; }
+          validate_compose() {
+            local diagnostics
+            if diagnostics=$(compose config --quiet 2>&1); then
+              return 0
+            fi
+            echo 'Compose configuration validation failed.' >&2
+            return 1
+          }
+          persist_environment() {
+            if [[ "$PROD_ENCRYPTED_ENV_ENABLED" == true ]]; then
+              [[ -f "$runtime_env" && ! -L "$runtime_env" ]] || return 1
+              chmod 600 "$runtime_env" || return 1
+              # Same-directory rename atomically promotes the validated candidate.
+              mv -fT -- "$runtime_env" "$last_env" || return 1
+            else
+              rm -f -- "$last_env" || return 1
+            fi
+          }
+
+          restore_environment() (
+            # Keep the rollback copy available for the subsequent image rollback.
+            local restore_tmp
+            if [[ -e "$rollback_env" || -L "$rollback_env" ]]; then
+              [[ -f "$rollback_env" && ! -L "$rollback_env" ]] || return 1
+              restore_tmp=$(mktemp "${last_env}.restore.XXXXXXXXXX") || return 1
+              trap 'rm -f -- "$restore_tmp"' EXIT
+              cp -- "$rollback_env" "$restore_tmp" || return 1
+              chmod 600 "$restore_tmp" || return 1
+              [[ -f "$restore_tmp" && ! -L "$restore_tmp" ]] || return 1
+              mv -fT -- "$restore_tmp" "$last_env" || return 1
+            else
+              rm -f -- "$last_env" || return 1
+            fi
+          )
 
           # Pin actual running image IDs before changing any application, even on first CD.
           rollback_timestamp=$(date -u +%Y%m%dT%H%M%S%NZ)
@@ -159,6 +225,7 @@ jobs:
           cleanup_auth() {
             docker logout ghcr.io >/dev/null 2>&1 || true
             rm -rf -- "$DOCKER_CONFIG"
+            rm -f -- "$runtime_env" "$rollback_env"
           }
           trap cleanup_auth EXIT
           pull_images() {
@@ -296,12 +363,18 @@ jobs:
           )
           # Keep every fallible activation step inside the conditional so errexit
           # cannot skip recovery. No dependency services are pulled or recreated.
-          if activate_edge && compose config --quiet && pull_images \
+          environment_persisted=false
+          if activate_edge && validate_compose && pull_images \
             && compose up -d --no-deps --no-build --pull never "${services[@]}" \
-            && containers_healthy && reload_nginx && healthy; then
+            && containers_healthy && reload_nginx && healthy \
+            && persist_environment \
+            && environment_persisted=true \
+            && printf '%s %s\n' "$REVISION" "$(date -u +%FT%TZ)" > .cd/deploy-revision; then
             cleanup_after_deploy || true
-            printf '%s %s\n' "$REVISION" "$(date -u +%FT%TZ)" > .cd/deploy-revision
             exit 0
+          fi
+          if [[ "$environment_persisted" == true ]]; then
+            restore_environment >/dev/null 2>&1 || echo 'WARNING: last-known-good environment restoration failed.' >&2
           fi
           echo 'Deployment failed; restoring the six captured image refs.' >&2
           # Restore host configuration before resolving the rollback Compose model.
@@ -309,7 +382,7 @@ jobs:
           cp .cd/edge-backup/compose.production.yml compose.production.yml
           reload_nginx || echo 'Restored nginx configuration reload failed; retrying after image rollback.' >&2
           cp .cd/rollback.yml .cd/compose.yml
-          if compose up -d --no-deps --no-build --pull never --force-recreate "${services[@]}" \
+          if rollback_compose up -d --no-deps --no-build --pull never --force-recreate "${services[@]}" \
             && containers_healthy && reload_nginx && healthy; then
             printf 'rollback-from=%s %s images=rollback.yml\n' "$REVISION" "$(date -u +%FT%TZ)" > .cd/last-rollback
             echo 'Captured images restored; this deployment remains failed.' >&2
@@ -320,7 +393,7 @@ jobs:
           REMOTE
           )
           # Quote the script as an argument, leaving SSH stdin available for login.
-          printf -v remote_command '%q ' env "REVISION=$REVISION" "REGISTRY=$registry" "GHCR_USER=$GHCR_USER" bash -c "$remote_script"
+          printf -v remote_command '%q ' env "REVISION=$REVISION" "REGISTRY=$registry" "GHCR_USER=$GHCR_USER" "PROD_ENCRYPTED_ENV_ENABLED=$PROD_ENCRYPTED_ENV_ENABLED" bash -c "$remote_script"
           printf '%s\n' "$GHCR_TOKEN" | ssh "${ssh_opts[@]}" "$PROD_SSH_USER@$PROD_SSH_HOST" "$remote_command"
       - name: Clean up production SSH files
         if: always()
