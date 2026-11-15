@@ -3,7 +3,7 @@ import {MailOutlined} from '@ant-design/icons';
 import {useEffect, useRef, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {api, storefrontApi} from '../api';
-import {getStoredAccessToken,getStoredAccessTokenExpiresAt,getStoredRefreshTokenExpiresAt,storeAuthSession} from '../authStorage';
+import {getStoredAccessToken,getStoredAccessTokenExpiresAt,getStoredRefreshTokenExpiresAt,getStoredUser,storeAuthSession} from '../authStorage';
 import {maskEmail} from '../checkoutVerification';
 import {useI18n} from '../i18n';
 
@@ -25,12 +25,12 @@ export default function CheckoutEmailVerification({email,onVerified}:{email?:str
   useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;};},[]);
   useEffect(()=>{if(!cooldown)return;const timer=window.setTimeout(()=>setCooldown(value=>Math.max(0,value-1)),1000);return()=>window.clearTimeout(timer);},[cooldown]);
   async function send(){if(busy||cooldown)return;setBusy('send');setFailure('');setNotice('');try{await storefrontApi.resend();if(mounted.current){setCooldown(60);setNotice('checkout_verification.sent');}}catch(error){if(mounted.current)setFailure(failureKey(error));}finally{if(mounted.current)setBusy(null);}}
-  async function verify({code}:{code:string}){if(busy)return;const initiatingToken=getStoredAccessToken();setBusy('verify');setFailure('');setNotice('');try{
+  async function verify({code}:{code:string}){if(busy)return;const initiatingUserId=getStoredUser()?.id;setBusy('verify');setFailure('');setNotice('');try{
     await storefrontApi.verify(code);
-    if(!mounted.current||!initiatingToken||getStoredAccessToken()!==initiatingToken)return;
+    if(!mounted.current||initiatingUserId===undefined||getStoredUser()?.id!==initiatingUserId)return;
     const current=await api.auth.me();
     const token=getStoredAccessToken();
-    if(!mounted.current||token!==initiatingToken)return;
+    if(!mounted.current||!token||getStoredUser()?.id!==initiatingUserId||current.id!==initiatingUserId)return;
     if(!current.emailVerified)throw new Error('verification incomplete');
     storeAuthSession({accessToken:token,accessTokenExpiresAt:getStoredAccessTokenExpiresAt(),refreshTokenExpiresAt:getStoredRefreshTokenExpiresAt(),user:current});
     if(mounted.current){setNotice('checkout_verification.verified');onVerified();}
