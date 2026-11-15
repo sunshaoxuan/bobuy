@@ -71,7 +71,7 @@ class CustomerOrderAmendmentIntegrationTest {
         store.seed();tx=new TransactionTemplate(transactions);
         String unique=UUID.randomUUID().toString();long id=1_000_000_000L+(UUID.randomUUID().getLeastSignificantBits()&0xffffff);
         fixtureUsername="c3-"+unique;fixtureEmail="c3-"+unique+"@example.invalid";
-        user=new User(id,"Synthetic C3",Role.CUSTOMER,0);user.setUsername(fixtureUsername);user.setEnabled(true);user.setEmail(fixtureEmail);
+        user=new User(id,"Synthetic C3",Role.CUSTOMER,0);user.setUsername(fixtureUsername);user.setEnabled(true);user.setEmail(fixtureEmail);user.setEmailVerifiedAt(Instant.now());
         var address=new User.UserAddress();address.setContactName("Original");address.setCountryRegion("JP");address.setCity("Tokyo");address.setAddressLine("Synthetic street");user.setDefaultAddress(address);users.saveAndFlush(user);
         var trip=trips.findById(2000L).orElseThrow();trip.setStatus(TripStatus.PUBLISHED);trip.setDeliveryDate(LocalDate.now().plusDays(2));trips.saveAndFlush(trip);
         fixtureMerchantId=trip.getAgentId();

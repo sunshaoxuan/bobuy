@@ -161,6 +161,9 @@ public class StorefrontService {
             }
             return result(existing, user);
         }
+        if (accountMail.isRequireVerifiedEmailForCheckout() && user.getEmailVerifiedAt() == null) {
+            throw invalid("checkout.email_verification_required");
+        }
         // Retry of an existing order must precede this NEW-order profile requirement.
         var delivery = OrderDeliverySnapshot.capture(user.getDefaultAddress());
         Trip trip = Optional.of(orderWriters.trip(request.tripId())).filter(this::bookable)

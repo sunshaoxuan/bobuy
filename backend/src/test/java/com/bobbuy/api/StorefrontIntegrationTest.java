@@ -55,11 +55,12 @@ class StorefrontIntegrationTest {
     @BeforeEach void setup() {
         refreshSessions.deleteAllInBatch(); challenges.deleteAll(); relations.deleteAll(); mailSettings.deleteAll(); store.seed();
         accountMail.setDeliveryEnabled(true);
+        accountMail.setRequireVerifiedEmailForCheckout(false);
         MailSettings settings=new MailSettings(); settings.enabled=true; settings.keyId=mailCipher.activeId();
         settings.encryptedPassword=mailCipher.encrypt("synthetic-secret",mailContext(settings)); settings.updatedAt=Instant.now();
         mailSettings.saveAndFlush(settings); reset(smtp);
     }
-    @AfterEach void cleanup() { accountMail.setDeliveryEnabled(true); refreshSessions.deleteAllInBatch(); challenges.deleteAll(); relations.deleteAll(); mailSettings.deleteAll(); }
+    @AfterEach void cleanup() { accountMail.setDeliveryEnabled(true); accountMail.setRequireVerifiedEmailForCheckout(false); refreshSessions.deleteAllInBatch(); challenges.deleteAll(); relations.deleteAll(); mailSettings.deleteAll(); }
 
     String mailContext(MailSettings s) { return "bobuy-mail:v1:1:"+s.host+":"+s.port+":"+s.tlsMode+":"+s.username+":"+s.fromAddress+":"+s.replyTo; }
 
@@ -114,6 +115,34 @@ class StorefrontIntegrationTest {
         assertThat(orders.findById(id).orElseThrow().getLines().get(0).getQuantity()).isEqualTo(2);
         checkout(token(registration),checkoutBody(request,2000,"prd-1000",3)).andExpect(status().isBadRequest());
         checkout(token(registration),checkoutBody(UUID.randomUUID(),2000,"prd-1000",100)).andExpect(status().isBadRequest());
+    }
+
+    @Test void verifiedEmailGateRejectsDirectNewOrdersButPreservesSuccessfulRetriesAndReappliesAfterEmailChange() throws Exception {
+        accountMail.setRequireVerifiedEmailForCheckout(true);
+        JsonNode registration=register("verified_gate");completeDelivery(registration);String bearer=token(registration);
+        long userId=registration.at("/user/id").asLong(),orderCount=orders.count(),relationCount=relations.count();
+        UUID request=UUID.randomUUID();String body=checkoutBody(request,2000,"prd-1000",1);
+
+        checkout(bearer,body).andExpect(status().isBadRequest())
+            .andExpect(jsonPath("$.message").value("checkout.email_verification_required"));
+        assertThat(orders.count()).isEqualTo(orderCount);assertThat(relations.count()).isEqualTo(relationCount);
+
+        var verified=users.findById(userId).orElseThrow();verified.setEmailVerifiedAt(Instant.now());users.saveAndFlush(verified);
+        var first=checkout(bearer,body).andExpect(status().isOk()).andReturn();
+        long orderId=json.readTree(first.getResponse().getContentAsString()).at("/data/orderId").asLong();
+        var unverified=users.findById(userId).orElseThrow();unverified.setEmailVerifiedAt(null);users.saveAndFlush(unverified);
+        checkout(bearer,body).andExpect(status().isOk()).andExpect(jsonPath("$.data.orderId").value(orderId));
+        checkout(bearer,checkoutBody(UUID.randomUUID(),2000,"prd-1000",1)).andExpect(status().isBadRequest())
+            .andExpect(jsonPath("$.message").value("checkout.email_verification_required"));
+        assertThat(orders.count()).isEqualTo(orderCount+1);assertThat(relations.count()).isEqualTo(relationCount+1);
+
+        unverified=users.findById(userId).orElseThrow();unverified.setEmailVerifiedAt(Instant.now());users.saveAndFlush(unverified);
+        mvc.perform(patch("/api/auth/profile").header("Authorization","Bearer "+bearer).contentType(MediaType.APPLICATION_JSON)
+            .content("{\"email\":\"verified_gate_changed@example.com\"}" )).andExpect(status().isOk())
+            .andExpect(jsonPath("$.data.emailVerified").value(false));
+        checkout(bearer,checkoutBody(UUID.randomUUID(),2000,"prd-1000",1)).andExpect(status().isBadRequest())
+            .andExpect(jsonPath("$.message").value("checkout.email_verification_required"));
+        assertThat(orders.count()).isEqualTo(orderCount+1);assertThat(relations.count()).isEqualTo(relationCount+1);
     }
 
     @Test void merchantApprovalIsPairScopedAndRequiresOwnOrder() throws Exception {
