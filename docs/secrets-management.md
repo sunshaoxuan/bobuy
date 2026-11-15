@@ -79,11 +79,30 @@ docker compose up -d --build
 SOPS/age，也不改变原有 `docker compose --env-file /etc/bobuy.env` 的行为。不要移动、
 覆盖或删除现有 `/etc/bobuy.env`，也不要改动其中的值。
 
+### 在生产主机上引导 age 密钥
+
+有生产环境权限的维护者在 GitHub 的 **Actions** 页面选择
+**bootstrap production age key**，点击 **Run workflow** 并从 `main` 分支手动运行。该工作流
+没有 push 或 pull request 触发器。它复用 CD 的生产 SSH 凭据和严格的 known_hosts 校验，
+只在生产主机本地安装固定版本的工具和创建密钥；它不会在 runner 上生成或取回私钥。
+
+运行成功后，展开 **Bootstrap key on production host** 步骤，在
+`BEGIN PRODUCTION AGE PUBLIC KEY` 与 `END PRODUCTION AGE PUBLIC KEY` 标记之间读取唯一的
+`age1...` 公钥。重复运行不会覆盖、轮换或删除现有密钥；不安全的路径类型、权限或所有者会使
+任务直接失败，而不会自动“修复”或替换密钥。
+
+**Parker 的离线备份步骤：** 此工作流和任何 CI 都不会、也绝不可把私钥带出生产服务器。
+Parker 只能通过自己拥有的生产控制台或带外访问，在服务器侧将
+`/etc/bobuy/age/keys.txt` 复制到离线媒介，并保持文件权限为 `0400`；不要要求机器人或其他人
+代为 SSH，也不要通过 Actions、artifact、GitHub output、网络传输或 runner 中转该文件。
+随后在受控控制台中使用 `age-keygen -y /etc/bobuy/age/keys.txt` 校验派生公钥与工作流日志
+中的公钥完全一致，再将媒介妥善离线保管。校验只记录或比较公钥，绝不显示私钥内容。
+
 以下迁移由生产运维人员显式执行；示例只包含变量名，不包含任何凭据值：
 
-1. 在隔离的运维机上生成专用于生产覆盖文件的 age 密钥。私钥的在线副本放在生产主机
-   `/etc/bobuy/age/keys.txt`，目录权限 `0700`、文件权限 `0400`，并在既有受控离线备份中
-   保存恢复副本。私钥不进入 Git、GitHub Secret、日志或命令行参数。
+1. 先运行上述手动工作流，在生产主机本地生成专用于生产覆盖文件的 age 密钥，并按 Parker
+   的步骤完成离线备份。在线私钥保持在 `/etc/bobuy/age/keys.txt`，目录权限 `0700`、文件
+   权限 `0400`。私钥不进入 Git、GitHub Secret、日志或命令行参数。
 2. 创建临时 `production.env`。SMTP 配置骨架为
    `BOBBUY_ACCOUNT_MAIL_SMTP_HOST`、`BOBBUY_ACCOUNT_MAIL_SMTP_PORT`、
    `BOBBUY_ACCOUNT_MAIL_SMTP_TLS_MODE`、`BOBBUY_ACCOUNT_MAIL_SMTP_USERNAME`、
