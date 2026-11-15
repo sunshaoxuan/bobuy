@@ -17,7 +17,7 @@ class StorefrontTripVisibilityTest {
     private final UserRepository users = mock(UserRepository.class);
     private final ProductRepository products = mock(ProductRepository.class);
     private final ProductSaleService sales = mock(ProductSaleService.class);
-    private final StorefrontService service = new StorefrontService(users,trips,products,null,null,null,null,null,null,null,"test@example.invalid",sales,null);
+    private final StorefrontService service = new StorefrontService(users,trips,products,null,null,null,null,null,null,null,new AccountMailProperties(),sales,null);
 
     private Trip trip(long id, TripStatus status, int days) {
         return new Trip(id,1L,"Synthetic destination",LocalDate.now().plusDays(days),status,LocalDateTime.now());

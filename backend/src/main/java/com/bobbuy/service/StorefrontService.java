@@ -9,9 +9,7 @@ import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.time.*;
 import java.util.*;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,8 +27,7 @@ public class StorefrontService {
     private final CheckoutIdentityRepository identities;
     private final AuthService auth;
     private final PasswordEncoder passwords;
-    private final JavaMailSender mail;
-    private final String from;
+    private final AccountMailProperties accountMail;
     private final ProductSaleService sales;
     private final MailSettingsService mailSettings;
     private final SecureRandom random = new SecureRandom();
@@ -40,10 +37,10 @@ public class StorefrontService {
     public StorefrontService(UserRepository users, TripRepository trips, ProductRepository products,
             OrderHeaderRepository orders, EmailChallengeRepository challenges, MerchantCustomerRepository relations,
             CheckoutIdentityRepository identities, AuthService auth, PasswordEncoder passwords,
-            JavaMailSender mail, @Value("${bobuy.mail.from:accounts@bobuy.cc}") String from,ProductSaleService sales,MailSettingsService mailSettings) {
+            AccountMailProperties accountMail,ProductSaleService sales,MailSettingsService mailSettings) {
         this.users = users; this.trips = trips; this.products = products; this.orders = orders;
         this.challenges = challenges; this.relations = relations; this.identities = identities;
-        this.auth = auth; this.passwords = passwords; this.mail = mail; this.from = from; this.sales=sales; this.mailSettings=mailSettings;
+        this.auth = auth; this.passwords = passwords; this.accountMail = accountMail; this.sales=sales; this.mailSettings=mailSettings;
     }
 
     public List<PublicTrip> publicTrips() {
@@ -136,9 +133,11 @@ public class StorefrontService {
         challenge.sentAt = Instant.now(); challenge.expiresAt = challenge.sentAt.plusSeconds(600);
         challenges.save(challenge);
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(from); message.setTo(user.getEmail());
+        message.setFrom(accountMail.getFromAddress()); message.setTo(user.getEmail());
         VerificationMailTemplate.apply(message,code,org.springframework.context.i18n.LocaleContextHolder.getLocale());
-        if(!mailSettings.sendIfConfigured(message)) mail.send(message);
+        // Legacy BOBUY_MAIL_* fallback is retired. Account delivery is opt-in and
+        // can only use an enabled setting whose password is encrypted by #84.
+        if(accountMail.isDeliveryEnabled()) mailSettings.sendIfConfigured(message);
     }
 
     @Transactional
