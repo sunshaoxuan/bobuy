@@ -16,3 +16,11 @@ Run the focused backend tests covering `AuthAbuseService`, proxy resolution,
 authentication response enumeration, and the two corrected controller contracts.
 Also inspect the three production feature flags, validate the changed migration,
 and run `git diff --check`. Do not run the full backend suite.
+
+## Follow-up for commit `219cc9e`
+
+The authorized follow-up is limited to making the in-memory JDBC fixture compatible
+with Mockito 5 varargs matching and making the rate-limited response assertion
+independent of the machine's default locale. The minimum verification is the focused
+`AuthAbuseServiceTest` plus `git diff --check`; production switches remain disabled,
+and no secrets, routes, Nginx configuration, or production behavior are changed.
