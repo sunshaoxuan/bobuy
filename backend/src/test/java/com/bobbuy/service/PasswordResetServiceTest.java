@@ -22,6 +22,23 @@ class PasswordResetServiceTest {
  AccountMailProperties properties=new AccountMailProperties(); PasswordResetService service; User user;
  @BeforeEach void setup(){properties.setPasswordResetEnabled(true);properties.setDeliveryEnabled(true);properties.setPublicBaseUrl(URI.create("https://bobuy.example"));properties.setPasswordResetLinkTtl(Duration.ofMinutes(30));service=new PasswordResetService(tokens,users,new BCryptPasswordEncoder(4),refresh,mail,properties,events);user=new User();user.setId(7L);user.setName("Customer");user.setEmail("customer@example.test");user.setEnabled(true);}
  @Test void forgotIsIndistinguishableAndFailsClosed(){when(mail.protectedDeliveryReady()).thenReturn(false);assertTrue(service.forgot(user.getEmail()).accepted());assertTrue(service.forgot("missing@example.test").accepted());verifyNoInteractions(users,tokens);}
+ @Test void configuredTtlMatchesStoredExpiryAndMail() {
+  properties.setPasswordResetLinkTtl(Duration.ofMinutes(5));
+  when(mail.protectedDeliveryReady()).thenReturn(true);
+  when(users.findByEmailIgnoreCase(user.getEmail())).thenReturn(Optional.of(user));
+  when(users.lockById(user.getId())).thenReturn(Optional.of(user));
+  var previous=org.springframework.context.i18n.LocaleContextHolder.getLocaleContext();
+  try {
+   org.springframework.context.i18n.LocaleContextHolder.setLocale(java.util.Locale.ENGLISH);
+   service.forgot(user.getEmail());
+  } finally { org.springframework.context.i18n.LocaleContextHolder.setLocaleContext(previous); }
+  var stored=ArgumentCaptor.forClass(PasswordResetToken.class);
+  verify(tokens).saveAndFlush(stored.capture());
+  var requested=ArgumentCaptor.forClass(PasswordResetService.PasswordResetMailRequested.class);
+  verify(events).publishEvent(requested.capture());
+  assertEquals(Duration.ofMinutes(5),Duration.between(stored.getValue().getCreatedAt(),stored.getValue().getExpiresAt()));
+  assertTrue(requested.getValue().message().getText().contains("within 5 minutes:"));
+ }
  @Test void forgotStoresOnlyHashAndQueuesLocalizedMail(){when(mail.protectedDeliveryReady()).thenReturn(true);when(users.findByEmailIgnoreCase(user.getEmail())).thenReturn(Optional.of(user));when(users.lockById(user.getId())).thenReturn(Optional.of(user));service.forgot(user.getEmail());var stored=ArgumentCaptor.forClass(PasswordResetToken.class);verify(tokens).saveAndFlush(stored.capture());var requested=ArgumentCaptor.forClass(PasswordResetService.PasswordResetMailRequested.class);verify(events).publishEvent(requested.capture());SimpleMailMessage sent=requested.getValue().message();String body=sent.getText();assertNotNull(body);assertTrue(body.contains("#token="));assertFalse(body.contains("?token="));String raw=body.substring(body.indexOf("#token=")+7,body.indexOf('\n'));assertFalse(stored.getValue().getTokenHash().contains(raw));assertEquals(64,stored.getValue().getTokenHash().length());assertEquals(64,stored.getValue().getEmailHash().length());verifyNoInteractions(refresh);}
  @Test void resetConsumesChangesPasswordAndRevokesAllSessions(){var token=new PasswordResetToken();token.setUserId(user.getId());token.setEmailHash(serviceHash(user.getEmail()));token.setExpiresAt(Instant.now().plusSeconds(60));when(tokens.findUserIdByTokenHash(anyString())).thenReturn(Optional.of(user.getId()));when(tokens.findByTokenHashForUpdate(anyString())).thenReturn(Optional.of(token));when(users.lockById(user.getId())).thenReturn(Optional.of(user));assertTrue(service.reset("opaque-token","new-password").reset());assertTrue(new BCryptPasswordEncoder().matches("new-password",user.getPasswordHash()));verify(tokens).deleteAllByUserIdAndConsumedAtIsNull(user.getId());verify(refresh).revokeAllForUser(eq(user.getId()),eq(token.getConsumedAt()));assertThrows(ApiException.class,()->service.reset("opaque-token","new-password"));}
  @Test void rejectsTamperedExpiredAndOversizeUtf8(){when(tokens.findByTokenHash(anyString())).thenReturn(Optional.empty());assertThrows(ApiException.class,()->service.reset("tampered","valid-password"));assertThrows(ApiException.class,()->service.reset("token","界".repeat(25)));}

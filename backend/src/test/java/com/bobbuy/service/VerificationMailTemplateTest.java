@@ -10,6 +10,6 @@ class VerificationMailTemplateTest {
    assertThat(m.getText()).contains(expected[i],"123456","https://example.test/account");assertThat(m.getFrom()).isEqualTo("postmaster@bobuy.cc");}
  }
  @Test void resetTemplateHasFourLocalizedVariants() {
-  for(String tag:new String[]{"ja-JP","zh-CN","zh-TW","en-US"}) {var m=new SimpleMailMessage();PasswordResetMailTemplate.apply(m,"https://example.test/reset#token=opaque",Locale.forLanguageTag(tag));assertThat(m.getSubject()).isNotBlank();assertThat(m.getText()).contains("https://example.test/reset#token=opaque");}
+  for(String tag:new String[]{"ja-JP","zh-CN","zh-TW","en-US"}) {var m=new SimpleMailMessage();PasswordResetMailTemplate.apply(m,"https://example.test/reset#token=opaque",Locale.forLanguageTag(tag),java.time.Duration.ofMinutes(30));assertThat(m.getSubject()).isNotBlank();assertThat(m.getText()).contains("https://example.test/reset#token=opaque");}
  }
 }

@@ -51,7 +51,8 @@ public class PasswordResetService {
         PasswordResetToken token=new PasswordResetToken();
         token.setUserId(user.getId()); token.setTokenHash(hash(raw));
         token.setEmailHash(hash(normalizeEmail(user.getEmail()).toLowerCase(Locale.ROOT)));
-        token.setCreatedAt(Instant.now()); token.setExpiresAt(token.getCreatedAt().plus(properties.getPasswordResetLinkTtl()));
+        var ttl=properties.getPasswordResetLinkTtl();
+        token.setCreatedAt(Instant.now()); token.setExpiresAt(token.getCreatedAt().plus(ttl));
         tokens.deleteAllByUserIdAndConsumedAtIsNull(user.getId());
         tokens.saveAndFlush(token);
         SimpleMailMessage message=new SimpleMailMessage();
@@ -59,7 +60,7 @@ public class PasswordResetService {
         String base=properties.getPublicBaseUrl().resolve("/reset-password").toString();
         // A fragment is not sent in HTTP requests, so the token cannot enter access logs or Referer headers.
         String link=base+"#token="+URLEncoder.encode(raw,StandardCharsets.UTF_8);
-        PasswordResetMailTemplate.apply(message,link,org.springframework.context.i18n.LocaleContextHolder.getLocale());
+        PasswordResetMailTemplate.apply(message,link,org.springframework.context.i18n.LocaleContextHolder.getLocale(),ttl);
         events.publishEvent(new PasswordResetMailRequested(token.getTokenHash(), message));
     }
 

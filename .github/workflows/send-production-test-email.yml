@@ -38,7 +38,18 @@ jobs:
         run: |
           set -euo pipefail
           result=$(ssh -i "$PROD_SSH_DIR/id_ed25519" -p "$PROD_SSH_PORT" -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$PROD_SSH_DIR/known_hosts" "$PROD_SSH_USER@$PROD_SSH_HOST" \
-            "docker exec bobuy-auth-service curl --silent --show-error --max-time 15 --request POST --write-out ' HTTP_STATUS=%{http_code}' http://127.0.0.1:8080/internal/account-mail/test" 2>/dev/null) || { echo 'Production SMTP test failed: connection_or_timeout' >&2; exit 1; }
+            'docker exec -i bobuy-auth-service sh' 2>/dev/null <<'PROBE'
+          set +x
+          set -eu
+          test -n "${BOBBUY_SECURITY_SERVICE_TOKEN:-}" || exit 1
+          case "${SERVER_PORT:-}" in ''|*[!0-9]*) exit 1 ;; esac
+          test "$SERVER_PORT" -ge 1 && test "$SERVER_PORT" -le 65535 || exit 1
+          curl --silent --show-error --max-time 15 --request POST \
+            --header "X-BOBBUY-SERVICE-TOKEN: ${BOBBUY_SECURITY_SERVICE_TOKEN}" \
+            --write-out ' HTTP_STATUS=%{http_code}' \
+            "http://127.0.0.1:${SERVER_PORT}/internal/account-mail/test"
+          PROBE
+          ) || { echo 'Production SMTP test failed: connection_or_timeout' >&2; exit 1; }
           category=$(printf '%s' "$result" | sed -n 's/.*"category":"\([a-z_]*\)".*/\1/p')
           status=$(printf '%s' "$result" | sed -n 's/.*HTTP_STATUS=\([0-9]*\)$/\1/p')
           if test "$status" = 200; then echo 'Production SMTP test succeeded.'; exit 0; fi
