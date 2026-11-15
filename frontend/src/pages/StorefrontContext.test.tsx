@@ -6,6 +6,7 @@ import {installCartLocks} from '../test/cartLock';
 import Storefront from './Storefront';
 import type {StoreProduct} from '../api';
 import {ReadRequestError} from '../readRecovery';
+import {storefrontFeatures} from '../storefrontFeatures';
 const mocks=vi.hoisted(()=>({trips:vi.fn(),activeTrips:vi.fn(),products:vi.fn(),productSales:vi.fn(),nodes:vi.fn(),privateTrips:vi.fn(),catalogProps:vi.fn(),role:{user:{id:7,name:'Fixture',roles:['CUSTOMER']},isCustomer:true,isAuthenticated:true,loading:false,logout:vi.fn()}}));
 vi.mock('../api',()=>({api:{customerTrips:mocks.privateTrips},storefrontApi:mocks,recommendationApi:mocks}));
 vi.mock('../storefrontFeatures',()=>({storefrontFeatures:{trips:true,dealsBulletin:true}}));vi.mock('../context/UserRoleContext',()=>({useUserRole:()=>mocks.role}));
@@ -44,7 +45,11 @@ it('shows the bookable spinner only while its read is pending, independently of 
  await act(async()=>finish([]));await screen.findByRole('heading',{name:'Bookable trips'});
  expect(view.container.querySelector('.ant-spin')).toBeNull();
 });
-function selected(path:string){for(const selector of ['.browse-sidebar','.browse-mobile-shortcuts'])expect(document.querySelector(selector+' a[aria-current="page"]')).toHaveAttribute('href',path);}
+function selected(path:string){
+ const mobile=document.querySelector('.browse-mobile-shortcuts a[aria-current="page"]');
+ if(path.startsWith('/products'))expect(mobile).toHaveAttribute('href',path);
+ else expect(mobile).toBeNull();
+}
 it.each(['/products','/recommendations','/trips'])('keeps identity, node scope and cart while opening hidden-selector navigation on %s',async path=>{
  const cart={tripId:11,requestId:crypto.randomUUID(),items:{p:2},currency:'JPY',quotes:{p:{price:10,currency:'JPY',revision:1,token:'existing'}}};
  commitDraft('user:7','',cart);const before=readDraft('user:7');const identity=structuredClone(mocks.role.user);
@@ -66,7 +71,25 @@ it('fetches node and private-trip metadata only when navigation is opened',async
 it('resolves an explicitly selected recommendation-only node without opening navigation',async()=>{mocks.trips.mockResolvedValue([]);mocks.activeTrips.mockResolvedValue([]);mocks.nodes.mockResolvedValue([{id:7,name:'Current B'}]);const view=mount('/recommendations?node=7');await waitFor(()=>expect(view.container.querySelector('.browse-context-node')).toHaveTextContent('Current B'));expect(mocks.nodes).toHaveBeenCalledTimes(1);});
 it('does not let late trip metadata overwrite the authoritative current public name',async()=>{let finish!:(value:unknown)=>void;mocks.trips.mockImplementation(()=>new Promise(resolve=>{finish=resolve;}));mocks.activeTrips.mockResolvedValue([]);mocks.nodes.mockResolvedValue([{id:7,name:'Current B'}]);const view=mount('/trips?node=7');await waitFor(()=>expect(view.container.querySelector('.browse-context-node')).toHaveTextContent('Current B'));await act(async()=>finish([{id:11,merchantId:7,merchantName:'Old A',deliveryArea:'Area',deliveryDate:'2026-11-10'}]));expect(view.container.querySelector('.browse-context-node')).toHaveTextContent('Current B');expect(view.container.querySelector('.browse-trip-card')).toHaveTextContent('Current B');expect(view.container.querySelector('.browse-trip-card')).not.toHaveTextContent('Old A');});
 it('preserves stored cart quotes and requires explicit price review after the bounded quote response',async()=>{commitDraft('user:7','',{tripId:11,requestId:crypto.randomUUID(),items:{p:2},currency:'JPY',quotes:{p:{price:10,currency:'JPY',revision:1,token:'old'}}});mocks.productSales.mockResolvedValue([{id:'p',merchantId:1,name:{'en-US':'Product'},description:{},brand:'',price:12,currency:'JPY',categoryId:'',images:[],priceRevision:2,priceToken:'new'}]);mount('/cart');const review=await screen.findByRole('button',{name:'Review and update cart prices'});await waitFor(()=>expect(review).toBeEnabled());expect(mocks.productSales).toHaveBeenCalledWith(['p']);expect(readDraft('user:7').cart.quotes!.p.price).toBe(10);fireEvent.click(review);await waitFor(()=>expect(readDraft('user:7').cart.quotes!.p.price).toBe(12));expect(mocks.products).not.toHaveBeenCalled();});
-it('restores explicit links and menu state with browser back/forward',async()=>{mocks.activeTrips.mockResolvedValue([]);mount('/?node=1');await screen.findByRole('heading',{name:'Recommendations fixture'});fireEvent.click(document.querySelector('.browse-sidebar a[href="/products?node=1"]')!);await screen.findByRole('heading',{name:'Catalog fixture'});selected('/products?node=1');fireEvent.click(screen.getByRole('button',{name:'Back'}));await screen.findByRole('heading',{name:'Recommendations fixture'});selected('/recommendations?node=1');fireEvent.click(screen.getByRole('button',{name:'Forward'}));await screen.findByRole('heading',{name:'Catalog fixture'});selected('/products?node=1');});
+it('restores explicit links and menu state with browser back/forward',async()=>{mocks.activeTrips.mockResolvedValue([]);mount('/?node=1');await screen.findByRole('heading',{name:'Recommendations fixture'});fireEvent.click(document.querySelector('.browse-mobile-shortcuts a[href="/products?node=1"]')!);await screen.findByRole('heading',{name:'Catalog fixture'});selected('/products?node=1');fireEvent.click(screen.getByRole('button',{name:'Back'}));await screen.findByRole('heading',{name:'Recommendations fixture'});selected('/recommendations?node=1');fireEvent.click(screen.getByRole('button',{name:'Forward'}));await screen.findByRole('heading',{name:'Catalog fixture'});selected('/products?node=1');});
+
+it.each(['/', '/products'])('allows eligible catalog purchases without an active trip on %s',async path=>{
+ const features=storefrontFeatures as {trips:boolean;dealsBulletin:boolean};
+ features.dealsBulletin=false;
+ try {
+  mocks.activeTrips.mockResolvedValue([]);mount(path);
+  await screen.findByRole('heading',{name:'Catalog fixture'});
+  const quote:StoreProduct={id:'p',merchantId:1,name:{'en-US':'Product'},description:{},brand:'',price:120,currency:'JPY',categoryId:'',images:[],recommendationReady:true};
+  const latest=()=>mocks.catalogProps.mock.calls.slice(-1)[0][0];
+  await waitFor(()=>expect(latest().canBuy(quote)).toBe(true));
+  expect(latest().canBuy({...quote,merchantId:99})).toBe(false);
+  expect(latest().canBuy({...quote,price:NaN})).toBe(false);
+  expect(latest().canBuy({...quote,recommendationReady:false})).toBe(false);
+  await waitFor(()=>expect(readDraft('user:7').cart.tripId).toBe(11));
+  act(()=>latest().onAdd(quote));
+  await waitFor(()=>expect(readDraft('user:7').cart.items.p).toBe(1));
+ } finally {features.dealsBulletin=true;}
+});
 it('retains root quantity selection for a quoted public product without imposing recommendation-only eligibility',async()=>{mount('/');await screen.findByRole('heading',{name:'Catalog fixture'});const quote:StoreProduct={id:'p',merchantId:1,name:{'en-US':'Root product'},description:{},brand:'',price:120,currency:'JPY',categoryId:'',images:[],recommendationReady:false};await waitFor(()=>expect(mocks.catalogProps.mock.calls.slice(-1)[0][0].canBuy(quote)).toBe(true));act(()=>mocks.catalogProps.mock.calls.slice(-1)[0][0].onAdd(quote));await screen.findByRole('dialog');expect(readDraft('user:7').cart.items).toEqual({});});
 it('keeps an in-progress root browsable but exposes no reservation action or empty picker when no bookable trip exists',async()=>{mocks.trips.mockResolvedValue([]);mocks.activeTrips.mockResolvedValue([{id:11,merchantId:1,merchantName:'Shop',deliveryArea:'Underway',deliveryDate:'2026-10-01'}]);mount('/');await screen.findByRole('heading',{name:'Catalog fixture'});await waitFor(()=>expect(screen.getByTestId('eligibility')).toHaveTextContent('false'));const quote:StoreProduct={id:'p',merchantId:1,name:{'en-US':'Root product'},description:{},brand:'',price:120,categoryId:'',images:[]};expect(mocks.catalogProps.mock.calls.slice(-1)[0][0].canBuy(quote)).toBe(false);act(()=>mocks.catalogProps.mock.calls.slice(-1)[0][0].onAdd(quote));expect(screen.queryByRole('group',{name:'Choose a buying trip'})).toBeNull();expect(screen.queryByRole('dialog')).toBeNull();expect(readDraft('user:7').cart.items).toEqual({});});
 it('waits for bookable eligibility and rejects another merchant or invalid quote without changing root browsing',async()=>{let finish!:(value:unknown)=>void;mocks.trips.mockImplementation(()=>new Promise(done=>{finish=done;}));mocks.activeTrips.mockResolvedValue([{id:11,merchantId:1,merchantName:'Shop',deliveryArea:'Underway',deliveryDate:'2026-10-01'}]);mount('/?node=1');await screen.findByRole('heading',{name:'Catalog fixture'});const quote:StoreProduct={id:'p',merchantId:1,name:{'en-US':'Root product'},description:{},brand:'',price:120,categoryId:'',images:[]};const latest=()=>mocks.catalogProps.mock.calls.slice(-1)[0][0];expect(latest().canBuy(quote)).toBe(false);act(()=>latest().onAdd(quote));expect(screen.queryByRole('dialog')).toBeNull();await act(async()=>finish([{id:12,merchantId:2,merchantName:'Other',deliveryArea:'Area',deliveryDate:'2026-11-10'}]));expect(latest().canBuy(quote)).toBe(false);act(()=>latest().onAdd(quote));expect(screen.queryByRole('dialog')).toBeNull();expect(latest().canBuy({...quote,merchantId:2})).toBe(false);});

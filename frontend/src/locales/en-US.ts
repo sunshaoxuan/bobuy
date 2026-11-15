@@ -426,7 +426,7 @@ const messages: Dictionary = {
     "rec.updated_date": "Updated",
     "rec.edit_article": "Edit article",
   "master.category_unavailable": "Deleted or unavailable category",
-    "rec.title": "Deals Bulletin",
+    "rec.title": "Campaign Newsletter",
     "rec.publisher": "Published by",
     "rec.published_date": "Published on",
     "rec.new": "New Article",

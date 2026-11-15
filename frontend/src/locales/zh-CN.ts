@@ -426,7 +426,7 @@ const messages: Dictionary = {
     "rec.updated_date": "更新于",
     "rec.edit_article": "编辑文章",
   "master.category_unavailable": "分类已删除或不可用",
-    "rec.title": "优惠邮报",
+    "rec.title": "活动邮报",
     "rec.publisher": "发布人",
     "rec.published_date": "发布日期",
     "rec.new": "新建推荐",

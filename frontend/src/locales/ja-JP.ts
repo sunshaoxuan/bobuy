@@ -426,7 +426,7 @@ const messages: Dictionary = {
     "rec.updated_date": "更新日時",
     "rec.edit_article": "記事を編集",
   "master.category_unavailable": "削除済みまたは利用できないカテゴリ",
-    "rec.title": "お買い得便り",
+    "rec.title": "キャンペーン便り",
     "rec.publisher": "公開者",
     "rec.published_date": "公開日時",
     "rec.new": "記事を作成",

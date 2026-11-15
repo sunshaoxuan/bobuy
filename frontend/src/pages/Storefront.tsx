@@ -195,7 +195,9 @@ export default function Storefront() {
   const quantity = cartEntries.reduce((sum, [, value]) => sum + value, 0);
   const canBookProduct=(product:StoreProduct)=>draft.ready&&!draft.conflict&&!draft.guestPending&&!authLoading&&tripsReady&&liveReservationQuote(product)&&trips.some(journey=>journey.merchantId===product.merchantId);
   const canBuyRecommendation=(product:StoreProduct)=>canBookProduct(product)&&product.recommendationReady===true;
-  const canBuyRootProduct=(product:StoreProduct)=>canBookProduct(product)&&product.merchantId===(node??viewTrip?.merchantId);
+  const canBuyRootProduct=(product:StoreProduct)=>viewTrip
+    ?canBookProduct(product)&&product.merchantId===(node??viewTrip.merchantId)
+    :canBuyRecommendation(product)&&(node===undefined||product.merchantId===node);
   const total = cartEntries.reduce((sum,[id,qty])=>sum+(cart.quotes?.[id]?.price??products.find(p=>p.id===id)?.price??0)*qty,0);
   const totalKnown=cartEntries.every(([id])=>Number.isFinite(cart.quotes?.[id]?.price)||products.some(value=>value.id===id));
   const totalText=totalKnown?money(total,cart.currency):t(cartPricesReady?'rec.not_stated':'browse.sales_pending');
@@ -274,7 +276,7 @@ export default function Storefront() {
   const bookable=<section className="browse-trip-page"><header className="browse-page-heading"><span>{t('browse.plan')}</span><h1>{t('browse.bookable')}</h1><p>{t('browse.bookable_hint')}</p></header>
     {tripsReady&&scopedTrips.length?<div className="browse-trip-grid">{scopedTrips.filter(journey=>(journey.deliveryArea+' '+merchantName(journey)+' '+journey.deliveryDate).toLocaleLowerCase().includes(search.toLocaleLowerCase())).map(journey=><article className="browse-trip-card" key={journey.id}><CalendarOutlined/><time dateTime={journey.deliveryDate}>{journey.deliveryDate}</time><h2>{journey.deliveryArea}</h2><p>{merchantName(journey)}</p><Button onClick={()=>choose(journey,()=>navigate('/products?'+new URLSearchParams({node:String(journey.merchantId)})))}>{t('store.browse')}<ArrowRightOutlined/></Button></article>)}</div>:<Empty description={t('store.no_trips')}/>}
   </section>;
-  const rootCatalog=<><section className="journey-strip"><button className="journey-trigger" onClick={()=>setTripPicker(true)} aria-label={t('store.choose_trip')}><CalendarOutlined/><span><small>{viewTrip?viewTrip.deliveryDate+' · '+merchantName(viewTrip):t('store.trip')}</small><strong>{viewTrip?viewTrip.deliveryArea:t('store.no_trips')}</strong></span><ArrowRightOutlined/></button></section><PublicProductCatalog query={search} products={products} quantities={cart.items} onAdd={configureQuantity} canBuy={canBuyRootProduct} merchantId={node??viewTrip?.merchantId} purchasePending={!tripsReady||authLoading} onSales={receiveSales} autoPaused={navigationOpen||tripPicker||!!detail||!!quantityProduct||cartConfirmationOpen}/></>;
+  const rootCatalog=<><section className="journey-strip"><button className="journey-trigger" onClick={()=>setTripPicker(true)} aria-label={t('store.choose_trip')}><CalendarOutlined/><span><small>{viewTrip?viewTrip.deliveryDate+' · '+merchantName(viewTrip):t('store.trip')}</small><strong>{viewTrip?viewTrip.deliveryArea:t('store.no_trips')}</strong></span><ArrowRightOutlined/></button></section><PublicProductCatalog query={search} products={products} quantities={cart.items} onAdd={viewTrip?configureQuantity:addRecommendation} canBuy={canBuyRootProduct} merchantId={node??viewTrip?.merchantId} purchasePending={!tripsReady||authLoading} onSales={receiveSales} autoPaused={navigationOpen||tripPicker||!!detail||!!quantityProduct||cartConfirmationOpen}/></>;
   const maintenance=isMaintenanceError(error);
   const quietTripFailure=location.pathname==='/trips'&&!tripsLoading&&!tripsReady&&failedReads.current.has('trips');
   const retryBrowse=()=>{setError('');void load();void loadActive();setCartPriceAttempt(value=>value+1);setNodeAttempt(value=>value+1);};
