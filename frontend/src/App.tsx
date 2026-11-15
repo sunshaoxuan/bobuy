@@ -42,7 +42,7 @@ const adminPages = [
   ['basic-data/geographic-areas', 'geo.title', GeographicAreas, TagsOutlined]
 ] as const;
 
-function Admin() {
+function Admin({passwordResetToken}:{passwordResetToken:string}) {
   const { isAuthenticated, isMerchant, logout, user } = useUserRole();
   const { t } = useI18n();
   const location = useLocation();
@@ -60,7 +60,7 @@ function Admin() {
   }] : [])]} />;
   if (!isAuthenticated) {
     if (location.pathname === '/admin/forgot-password') return <ForgotPassword surface="admin" />;
-    if (location.pathname === '/admin/reset-password') return <ResetPassword surface="admin" />;
+    if (location.pathname === '/admin/reset-password') return <ResetPassword surface="admin" token={passwordResetToken} />;
     return <LoginPage />;
   }
   if (!isMerchant && !user?.platformAdmin) return <Navigate to="/" replace />;
@@ -88,8 +88,8 @@ function Admin() {
   </div>;
 }
 
-export default function App() {
+export default function App({passwordResetToken=''}:{passwordResetToken?:string}) {
   return <><SiteMetadata /><Suspense fallback={<div className="store-loading"><Spin /></div>}>
-    <Routes><Route path="/admin/*" element={<Admin />} /><Route path="/*" element={<Storefront />} /></Routes>
+    <Routes><Route path="/admin/*" element={<Admin passwordResetToken={passwordResetToken} />} /><Route path="/*" element={<Storefront passwordResetToken={passwordResetToken} />} /></Routes>
   </Suspense></>;
 }

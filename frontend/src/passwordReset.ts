@@ -1,4 +1,4 @@
-export const passwordResetEnabled = /^(1|true|yes|on)$/i.test(import.meta.env.VITE_ACCOUNT_PASSWORD_RESET_ENABLED ?? '');
+export const passwordResetEnabled = () => /^(1|true|yes|on)$/i.test(import.meta.env.VITE_ACCOUNT_PASSWORD_RESET_ENABLED ?? '');
 
 type ResetFailure = 'invalid' | 'rate' | 'network';
 export class PasswordResetError extends Error {
