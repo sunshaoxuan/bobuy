@@ -5,6 +5,7 @@
 - 仅在默认关闭的 `VITE_CHECKOUT_EMAIL_VERIFICATION_ENABLED` 开关后，为未验证 CUSTOMER 的结账区增加脱敏邮箱、发送/重发、验证码、冷却、错误恢复与修改邮箱入口；验证成功刷新权威身份并保留原购物车。
 - 开关关闭时保留既有「未验证也可下单」提示及原有下单行为；生产不设置该前端开关，并完整保留四个既有生产 `false` 覆盖。
 - 不实施 Issue C 或 H，不改 Nginx、后端路由、发信配置、密码重置或 abuse 配置，不写入密钥、密码、连接串或验证码明文。
+- 本批审查修复仅将验证后的身份刷新绑定到发起时的 access-token 会话，并修复 React 18 StrictMode 重放 effect 后的 mounted 标志；不改功能开关或任何生产覆盖。
 
 ## 修改与最小验证集合
 
@@ -14,6 +15,8 @@
 | 发送、重发冷却、验证及失败恢复 | `CheckoutEmailVerification.test.tsx`：四语、重复操作、离线、额度、过期、错误码映射与输入保留 |
 | 响应式视觉和控件状态 | Playwright 在 390×844、1280×800 截取成功、失败、冷却状态，记录 §9 计算样式 |
 | 生产覆盖不变 | 针对 `compose.production.yml` 与 `application-prod.properties` 的精确文本检查 |
+| 身份刷新的会话绑定 | `CheckoutEmailVerification.test.tsx`：`/auth/me` 飞行中切换 access token 或组件卸载时，不持久化旧身份、不通知验证成功 |
+| StrictMode effect 重放 | `CheckoutEmailVerification.test.tsx`：在 `StrictMode` 包裹下发送验证码后正常结束 busy，并显示成功与冷却反馈 |
 
 ## 共用 UI 条款（docs/ui-ux-guidelines.md §8 原文）
 

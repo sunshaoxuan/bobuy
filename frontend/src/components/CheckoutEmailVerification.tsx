@@ -22,14 +22,16 @@ export default function CheckoutEmailVerification({email,onVerified}:{email?:str
   const [busy,setBusy]=useState<'send'|'verify'|null>(null),[cooldown,setCooldown]=useState(0);
   const [notice,setNotice]=useState(''),[failure,setFailure]=useState('');
   const mounted=useRef(true);
-  useEffect(()=>()=>{mounted.current=false;},[]);
+  useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;};},[]);
   useEffect(()=>{if(!cooldown)return;const timer=window.setTimeout(()=>setCooldown(value=>Math.max(0,value-1)),1000);return()=>window.clearTimeout(timer);},[cooldown]);
   async function send(){if(busy||cooldown)return;setBusy('send');setFailure('');setNotice('');try{await storefrontApi.resend();if(mounted.current){setCooldown(60);setNotice('checkout_verification.sent');}}catch(error){if(mounted.current)setFailure(failureKey(error));}finally{if(mounted.current)setBusy(null);}}
-  async function verify({code}:{code:string}){if(busy)return;setBusy('verify');setFailure('');setNotice('');try{
+  async function verify({code}:{code:string}){if(busy)return;const initiatingToken=getStoredAccessToken();setBusy('verify');setFailure('');setNotice('');try{
     await storefrontApi.verify(code);
+    if(!mounted.current||!initiatingToken||getStoredAccessToken()!==initiatingToken)return;
     const current=await api.auth.me();
     const token=getStoredAccessToken();
-    if(!token||!current.emailVerified)throw new Error('verification incomplete');
+    if(!mounted.current||token!==initiatingToken)return;
+    if(!current.emailVerified)throw new Error('verification incomplete');
     storeAuthSession({accessToken:token,accessTokenExpiresAt:getStoredAccessTokenExpiresAt(),refreshTokenExpiresAt:getStoredRefreshTokenExpiresAt(),user:current});
     if(mounted.current){setNotice('checkout_verification.verified');onVerified();}
   }catch(error){if(mounted.current)setFailure(failureKey(error));}finally{if(mounted.current)setBusy(null);}}
