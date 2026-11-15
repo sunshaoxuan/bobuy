@@ -2,6 +2,7 @@ package com.bobbuy.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.bobbuy.api.BobbuyApplication;
 import com.bobbuy.api.response.ApiException;
 import com.bobbuy.model.PasswordResetToken;
 import com.bobbuy.model.RefreshTokenSession;
@@ -20,7 +21,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 
-@SpringBootTest(properties = "bobbuy.account-mail.password-reset-enabled=true")
+@SpringBootTest(
+        classes = BobbuyApplication.class,
+        properties = "bobbuy.account-mail.password-reset-enabled=true")
 class PasswordResetRefreshConcurrencyIntegrationTest {
     @Autowired UserRepository users;
     @Autowired PasswordResetTokenRepository resetTokens;
