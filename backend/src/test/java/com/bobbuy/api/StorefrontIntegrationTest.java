@@ -4,6 +4,7 @@ import com.bobbuy.model.*;
 import com.bobbuy.repository.*;
 import com.bobbuy.service.*;
 import com.fasterxml.jackson.databind.*;
+import java.nio.file.*;
 import java.time.*;
 import java.util.*;
 import org.junit.jupiter.api.*;
@@ -14,7 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.test.context.*;
 import org.springframework.test.web.servlet.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -24,6 +25,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 class StorefrontIntegrationTest {
+    static final Path KEYRING;
+    static { try {
+        KEYRING=Files.createTempFile("bobuy-storefront-mail-", ".keys"); KEYRING.toFile().deleteOnExit();
+        byte[] key=new byte[32]; new java.security.SecureRandom().nextBytes(key);
+        Files.writeString(KEYRING,"storefront-v1="+Base64.getEncoder().encodeToString(key));
+    } catch(Exception e) { throw new ExceptionInInitializerError(e); } }
+    @DynamicPropertySource static void mailProperties(DynamicPropertyRegistry registry) {
+        registry.add("bobuy.account-mail.delivery-enabled",()->"true");
+        registry.add("bobuy.mail.keyring-file",KEYRING::toString);
+        registry.add("bobuy.mail.active-key-id",()->"storefront-v1");
+    }
     @Autowired MockMvc mvc;
     @Autowired ObjectMapper json;
     @Autowired BobbuyStore store;
@@ -35,12 +47,21 @@ class StorefrontIntegrationTest {
     @Autowired RefreshTokenSessionRepository refreshSessions;
     @Autowired MerchantCustomerRepository relations;
     @Autowired ProductSaleService sales;
-    @MockBean JavaMailSender mail;
+    @Autowired MailSettingsRepository mailSettings;
+    @Autowired MailSecretCipher mailCipher;
+    @Autowired AccountMailProperties accountMail;
+    @MockBean SmtpDelivery smtp;
 
     @BeforeEach void setup() {
-        refreshSessions.deleteAllInBatch(); challenges.deleteAll(); relations.deleteAll(); store.seed();
+        refreshSessions.deleteAllInBatch(); challenges.deleteAll(); relations.deleteAll(); mailSettings.deleteAll(); store.seed();
+        accountMail.setDeliveryEnabled(true);
+        MailSettings settings=new MailSettings(); settings.enabled=true; settings.keyId=mailCipher.activeId();
+        settings.encryptedPassword=mailCipher.encrypt("synthetic-secret",mailContext(settings)); settings.updatedAt=Instant.now();
+        mailSettings.saveAndFlush(settings); reset(smtp);
     }
-    @AfterEach void cleanup() { refreshSessions.deleteAllInBatch(); challenges.deleteAll(); relations.deleteAll(); }
+    @AfterEach void cleanup() { accountMail.setDeliveryEnabled(true); refreshSessions.deleteAllInBatch(); challenges.deleteAll(); relations.deleteAll(); mailSettings.deleteAll(); }
+
+    String mailContext(MailSettings s) { return "bobuy-mail:v1:1:"+s.host+":"+s.port+":"+s.tlsMode+":"+s.username+":"+s.fromAddress+":"+s.replyTo; }
 
     JsonNode register(String name) throws Exception {
         return json.readTree(mvc.perform(post("/api/auth/register").contentType(MediaType.APPLICATION_JSON)
@@ -208,16 +229,30 @@ class StorefrontIntegrationTest {
         mvc.perform(post("/api/auth/register").contentType(MediaType.APPLICATION_JSON)
             .content("{\"username\":\"bad!\",\"password\":\"short\",\"email\":\"bad\"}"))
             .andExpect(status().isBadRequest());
-        doThrow(new org.springframework.mail.MailSendException("test SMTP unavailable")).when(mail).send(any(SimpleMailMessage.class));
+        accountMail.setDeliveryEnabled(false);
+        register("mail_disabled");
+        verifyNoInteractions(smtp);
+        accountMail.setDeliveryEnabled(true);
+        doThrow(new org.springframework.mail.MailSendException("test SMTP unavailable")).when(smtp).send(any(MailSettings.class),eq("synthetic-secret"),any(SimpleMailMessage.class));
         mvc.perform(post("/api/auth/register").contentType(MediaType.APPLICATION_JSON)
             .content("{\"username\":\"mail_failure\",\"password\":\"valid-password\",\"email\":\"mail_failure@example.com\"}"))
-            .andExpect(status().isInternalServerError());
+            .andExpect(status().isBadRequest());
         assertThat(users.findByUsernameIgnoreCase("mail_failure")).isEmpty();
+    }
+
+    @Test void enabledDeliveryWithoutSavedSettingsRollsBackAccountAndChallenge() throws Exception {
+        mailSettings.deleteAll(); long challengeCount=challenges.count();
+        mvc.perform(post("/api/auth/register").contentType(MediaType.APPLICATION_JSON)
+            .content("{\"username\":\"mail_missing\",\"password\":\"valid-password\",\"email\":\"mail_missing@example.com\"}"))
+            .andExpect(status().isInternalServerError());
+        assertThat(users.findByUsernameIgnoreCase("mail_missing")).isEmpty();
+        assertThat(challenges.count()).isEqualTo(challengeCount);
+        verifyNoInteractions(smtp);
     }
 
     @Test void emailCodeExpiresIsOneTimeAndLocksAfterFiveFailures() throws Exception {
         JsonNode registration = register("verify_customer"); long id = registration.at("/user/id").asLong();
-        ArgumentCaptor<SimpleMailMessage> sent = ArgumentCaptor.forClass(SimpleMailMessage.class); verify(mail).send(sent.capture());
+        ArgumentCaptor<SimpleMailMessage> sent = ArgumentCaptor.forClass(SimpleMailMessage.class); verify(smtp).send(any(MailSettings.class),eq("synthetic-secret"),sent.capture());
         String code = sent.getValue().getText().replaceAll(".*?([0-9]{6}).*", "$1");
         assertThat(code).matches("[0-9]{6}"); assertThat(challenges.findById(id).orElseThrow().codeHash).doesNotContain(code);
         mvc.perform(post("/api/auth/email/resend").header("Authorization","Bearer "+token(registration))).andExpect(status().isBadRequest());
@@ -285,7 +320,7 @@ class StorefrontIntegrationTest {
 
     @Test void emailChangeNormalizesRejectsDuplicatesAndInvalidatesOldCodeWithoutResettingCooldown() throws Exception {
         JsonNode first = register("profile_email"), second = register("profile_taken");
-        ArgumentCaptor<SimpleMailMessage> sent = ArgumentCaptor.forClass(SimpleMailMessage.class); verify(mail, atLeastOnce()).send(sent.capture());
+        ArgumentCaptor<SimpleMailMessage> sent = ArgumentCaptor.forClass(SimpleMailMessage.class); verify(smtp, atLeastOnce()).send(any(MailSettings.class),eq("synthetic-secret"),sent.capture());
         String oldCode = sent.getAllValues().get(0).getText().replaceAll(".*?([0-9]{6}).*", "$1");
         long id = first.at("/user/id").asLong(); Instant sentAt = challenges.findById(id).orElseThrow().sentAt;
         profilePatch(token(first), "{\"email\":\" PROFILE_TAKEN@EXAMPLE.COM \"}").andExpect(status().isBadRequest());
@@ -297,17 +332,17 @@ class StorefrontIntegrationTest {
         assertThat(challenges.findById(id).orElseThrow().sentAt).isEqualTo(sentAt);
         verifyCode(token(first), oldCode).andExpect(status().isBadRequest());
         mvc.perform(post("/api/auth/email/resend").header("Authorization", "Bearer " + token(first))).andExpect(status().isBadRequest());
-        verify(mail, times(2)).send(any(SimpleMailMessage.class)); // Saving does not send.
+        verify(smtp, times(2)).send(any(MailSettings.class),eq("synthetic-secret"),any(SimpleMailMessage.class)); // Saving does not send.
         var expired = challenges.findById(id).orElseThrow(); expired.sentAt = Instant.now().minusSeconds(61).truncatedTo(java.time.temporal.ChronoUnit.MILLIS); challenges.save(expired);
         doThrow(new com.bobbuy.api.response.ApiException(com.bobbuy.api.response.ErrorCode.INVALID_REQUEST, "SMTP test unavailable"))
-            .when(mail).send(any(SimpleMailMessage.class));
+            .when(smtp).send(any(MailSettings.class),eq("synthetic-secret"),any(SimpleMailMessage.class));
         mvc.perform(post("/api/auth/email/resend").header("Authorization", "Bearer " + token(first))).andExpect(status().isBadRequest());
         var failed = challenges.findById(id).orElseThrow();
         assertThat(failed.attempts).isEqualTo(5); assertThat(failed.expiresAt).isEqualTo(Instant.EPOCH);
         assertThat(failed.sentAt).isEqualTo(expired.sentAt);
-        doNothing().when(mail).send(any(SimpleMailMessage.class));
+        doNothing().when(smtp).send(any(MailSettings.class),eq("synthetic-secret"),any(SimpleMailMessage.class));
         mvc.perform(post("/api/auth/email/resend").header("Authorization", "Bearer " + token(first))).andExpect(status().isOk());
-        verify(mail, atLeastOnce()).send(sent.capture());
+        verify(smtp, atLeastOnce()).send(any(MailSettings.class),eq("synthetic-secret"),sent.capture());
         assertThat(sent.getValue().getTo()).containsExactly("new_target@example.com");
         String code = sent.getValue().getText().replaceAll(".*?([0-9]{6}).*", "$1");
         verifyCode(token(first), code).andExpect(status().isOk());
@@ -320,7 +355,7 @@ class StorefrontIntegrationTest {
     @Test void concurrentOldVerificationAndEmailChangeCannotVerifyTheNewAddress() throws Exception {
         JsonNode registration = register("profile_race");
         long id = registration.at("/user/id").asLong(); Instant sentAt = challenges.findById(id).orElseThrow().sentAt;
-        ArgumentCaptor<SimpleMailMessage> sent = ArgumentCaptor.forClass(SimpleMailMessage.class); verify(mail).send(sent.capture());
+        ArgumentCaptor<SimpleMailMessage> sent = ArgumentCaptor.forClass(SimpleMailMessage.class); verify(smtp).send(any(MailSettings.class),eq("synthetic-secret"),sent.capture());
         String code = sent.getValue().getText().replaceAll(".*?([0-9]{6}).*", "$1");
         var executor = java.util.concurrent.Executors.newFixedThreadPool(2);
         var start = new java.util.concurrent.CountDownLatch(1);
@@ -336,14 +371,14 @@ class StorefrontIntegrationTest {
             var consumed = challenges.findById(id).orElseThrow();
             assertThat(consumed.sentAt).isEqualTo(sentAt); assertThat(consumed.attempts).isEqualTo(5);
             mvc.perform(post("/api/auth/email/resend").header("Authorization", "Bearer " + token(registration))).andExpect(status().isBadRequest());
-            verify(mail, times(1)).send(any(SimpleMailMessage.class));
+            verify(smtp, times(1)).send(any(MailSettings.class),eq("synthetic-secret"),any(SimpleMailMessage.class));
         } finally { executor.shutdownNow(); }
     }
 
     @Test void verifiedThenChangedEmailRetainsCooldownAndFailedSendCannotReplaceConsumedCode() throws Exception {
         JsonNode registration = register("verified_cooldown"); String bearer = token(registration);
         long id = registration.at("/user/id").asLong();
-        ArgumentCaptor<SimpleMailMessage> sent = ArgumentCaptor.forClass(SimpleMailMessage.class); verify(mail).send(sent.capture());
+        ArgumentCaptor<SimpleMailMessage> sent = ArgumentCaptor.forClass(SimpleMailMessage.class); verify(smtp).send(any(MailSettings.class),eq("synthetic-secret"),sent.capture());
         String oldCode = sent.getValue().getText().replaceAll(".*?([0-9]{6}).*", "$1");
         Instant sentAt = challenges.findById(id).orElseThrow().sentAt;
         verifyCode(bearer, oldCode).andExpect(status().isOk());
@@ -356,21 +391,21 @@ class StorefrontIntegrationTest {
         verifyCode(bearer, oldCode).andExpect(status().isBadRequest());
         mvc.perform(post("/api/auth/email/resend").header("Authorization", "Bearer " + bearer)).andExpect(status().isBadRequest());
         assertThat(challenges.findById(id).orElseThrow().sentAt).isEqualTo(sentAt);
-        verify(mail, times(1)).send(any(SimpleMailMessage.class));
+        verify(smtp, times(1)).send(any(MailSettings.class),eq("synthetic-secret"),any(SimpleMailMessage.class));
 
         // Move only the isolated test's clock fixture past the throttle, without sleeping.
         consumed = challenges.findById(id).orElseThrow();
         consumed.sentAt = Instant.now().minusSeconds(61).truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
         challenges.save(consumed);
         doThrow(new org.springframework.mail.MailSendException("synthetic SMTP failure after verification"))
-            .when(mail).send(any(SimpleMailMessage.class));
-        mvc.perform(post("/api/auth/email/resend").header("Authorization", "Bearer " + bearer)).andExpect(status().isInternalServerError());
+            .when(smtp).send(any(MailSettings.class),eq("synthetic-secret"),any(SimpleMailMessage.class));
+        mvc.perform(post("/api/auth/email/resend").header("Authorization", "Bearer " + bearer)).andExpect(status().isBadRequest());
         var failed = challenges.findById(id).orElseThrow();
         assertThat(failed.sentAt).isEqualTo(consumed.sentAt); assertThat(failed.codeHash).isEqualTo(consumed.codeHash);
         assertThat(failed.attempts).isEqualTo(5); assertThat(failed.expiresAt).isEqualTo(Instant.EPOCH);
-        doNothing().when(mail).send(any(SimpleMailMessage.class));
+        doNothing().when(smtp).send(any(MailSettings.class),eq("synthetic-secret"),any(SimpleMailMessage.class));
         mvc.perform(post("/api/auth/email/resend").header("Authorization", "Bearer " + bearer)).andExpect(status().isOk());
-        verify(mail, times(3)).send(sent.capture()); assertThat(sent.getValue().getTo()).containsExactly("verified_after_cooldown@example.com");
+        verify(smtp, times(3)).send(any(MailSettings.class),eq("synthetic-secret"),sent.capture()); assertThat(sent.getValue().getTo()).containsExactly("verified_after_cooldown@example.com");
         assertThat(challenges.findById(id).orElseThrow().attempts).isZero();
         String newCode = sent.getValue().getText().replaceAll(".*?([0-9]{6}).*", "$1");
         verifyCode(bearer, newCode).andExpect(status().isOk());

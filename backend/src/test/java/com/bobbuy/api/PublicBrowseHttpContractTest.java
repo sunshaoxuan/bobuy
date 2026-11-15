@@ -27,7 +27,7 @@ class PublicBrowseHttpContractTest {
   mvc.perform(get("/api/storefront/recommendation-browse/items").param("period","invalid")).andExpect(status().isBadRequest());
  }
  @Test void boundedSaleEndpointRejectsMissingOrDuplicateIdsBeforeDataAccess()throws Exception{
-  var sales=new StorefrontService(null,null,null,null,null,null,null,null,null,null,"unused",null,null);
+  var sales=new StorefrontService(null,null,null,null,null,null,null,null,null,new com.bobbuy.service.AccountMailProperties(),null,null);
   var mvc=MockMvcBuilders.standaloneSetup(new StorefrontController(sales,null,null)).setControllerAdvice(new com.bobbuy.api.response.GlobalExceptionHandler(new org.springframework.context.support.StaticMessageSource())).build();
   mvc.perform(get("/api/storefront/product-sales")).andExpect(status().isBadRequest());
   mvc.perform(get("/api/storefront/product-sales").param("productIds","a,a")).andExpect(status().isBadRequest());
