@@ -1151,6 +1151,15 @@ export const productCatalogApi={
  save:(rows:CatalogInput[])=>putJson<{value:CatalogInput;canonical:boolean;sourceItemIds:number[];recoveryId?:string}[],object>('/api/merchant/product-catalog',{rows,reviewed:true}),
  upload:async(id:string,file:File,sourceUrl:string,label:string)=>{const prepared=await prepareImageUpload(file);const form=new FormData();form.set('file',prepared);form.set('sourceUrl',sourceUrl);form.set('label',label);form.set('verified','true');const response=await authorizedFetch('/api/merchant/product-catalog/'+encodeURIComponent(id)+'/images',{method:'POST',body:form});if(!response.ok)throw new Error(await parseErrorMessage(response));return parseSuccessPayload<CatalogMedia>(response);}
 };
+export type CategoryTreeNode={id:string;parentId:string|null;name:Record<string,string>;fullPath:string[];sortOrder:number;productCount:number};
+export const categoryTreeApi={
+ list:()=>storeGet<CategoryTreeNode[]>('/api/category-tree'),
+ create:(value:{parentId:string|null;name:Record<string,string>;sortOrder?:number})=>postJson<CategoryTreeNode,object>('/api/category-tree',value),
+ update:(id:string,value:{parentId:string|null;name?:Record<string,string>;sortOrder?:number})=>putJson<CategoryTreeNode,object>('/api/category-tree/'+encodeURIComponent(id),value),
+ remove:async(id:string)=>{const response=await authorizedFetch('/api/category-tree/'+encodeURIComponent(id),{method:'DELETE'});if(!response.ok)throw new Error(await parseErrorMessage(response));},
+ product:(id:string)=>storeGet<{productId:string;categoryNodeId:string|null}>('/api/category-tree/products/'+encodeURIComponent(id)),
+ assign:(id:string,categoryNodeId:string|null)=>putJson<{productId:string;categoryNodeId:string|null},object>('/api/category-tree/products/'+encodeURIComponent(id),{productId:id,categoryNodeId})
+};
 export type CurrencyDefinition={code:string;symbol:string;fractionDigits:number;name:string;saleEnabled:boolean};
 export type GeographicArea={code:string;parentCode:string|null;level:1|2|3;name:string;reading:string|null};
 export const masterDataApi={
