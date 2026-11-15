@@ -2,6 +2,7 @@ package com.bobbuy.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.bobbuy.api.response.ApiException;
 import com.bobbuy.model.PasswordResetToken;
 import com.bobbuy.model.RefreshTokenSession;
 import com.bobbuy.model.User;
@@ -25,6 +26,7 @@ class PasswordResetRefreshConcurrencyIntegrationTest {
     @Autowired PasswordResetTokenRepository resetTokens;
     @Autowired RefreshTokenSessionRepository sessions;
     @Autowired PasswordResetService resets;
+    @Autowired RefreshTokenService refreshTokens;
     @Autowired BobbuyStore store;
     @Autowired PlatformTransactionManager transactions;
 
@@ -59,6 +61,67 @@ class PasswordResetRefreshConcurrencyIntegrationTest {
             RefreshTokenSession revoked=sessions.findById(sessionId).orElseThrow();
             assertNotNull(revoked.getRevokedAt());
             assertEquals("PASSWORD_RESET",revoked.getRevocationReason());
+        } finally {
+            release.countDown(); executor.shutdownNow();
+        }
+    }
+
+    @Test
+    void refreshReloadsSessionAfterWaitingForUserLock() throws Exception {
+        store.seed();
+        User user=users.findByUsernameIgnoreCase("agent").orElseThrow();
+        String raw="refresh-revoked-while-waiting";
+        RefreshTokenSession session=new RefreshTokenSession();
+        Instant now=Instant.now(); session.setUserId(user.getId()); session.setTokenHash(hash(raw));
+        session.setFamilyId("stale-refresh-family"); session.setCreatedAt(now); session.setLastUsedAt(now);
+        session.setExpiresAt(now.plusSeconds(300)); Long sessionId=sessions.saveAndFlush(session).getId();
+
+        CountDownLatch changed=new CountDownLatch(1), release=new CountDownLatch(1);
+        ExecutorService executor=Executors.newFixedThreadPool(2);
+        try {
+            Future<?> revocation=executor.submit(() -> new TransactionTemplate(transactions).executeWithoutResult(status -> {
+                users.lockById(user.getId()).orElseThrow();
+                RefreshTokenSession locked=sessions.findById(sessionId).orElseThrow();
+                locked.setRevokedAt(Instant.now()); locked.setRevocationReason("LOGOUT"); sessions.saveAndFlush(locked);
+                changed.countDown(); await(release);
+            }));
+            assertTrue(changed.await(5,TimeUnit.SECONDS));
+            Future<?> refresh=executor.submit(() -> refreshTokens.refresh(raw,"concurrent-client"));
+            Thread.sleep(100);
+            assertFalse(refresh.isDone(),"refresh must wait on the shared user lock");
+            release.countDown(); revocation.get(5,TimeUnit.SECONDS);
+            ExecutionException failure=assertThrows(ExecutionException.class,() -> refresh.get(5,TimeUnit.SECONDS));
+            assertInstanceOf(ApiException.class,failure.getCause());
+        } finally {
+            release.countDown(); executor.shutdownNow();
+        }
+    }
+
+    @Test
+    void resetReloadsTokenAfterWaitingForUserLock() throws Exception {
+        store.seed();
+        User user=users.findByUsernameIgnoreCase("agent").orElseThrow();
+        String raw="reset-consumed-while-waiting";
+        PasswordResetToken reset=new PasswordResetToken();
+        reset.setUserId(user.getId()); reset.setTokenHash(hash(raw)); reset.setEmailHash(hash(user.getEmail().trim().toLowerCase()));
+        reset.setCreatedAt(Instant.now()); reset.setExpiresAt(Instant.now().plusSeconds(60)); Long tokenId=resetTokens.saveAndFlush(reset).getId();
+
+        CountDownLatch changed=new CountDownLatch(1), release=new CountDownLatch(1);
+        ExecutorService executor=Executors.newFixedThreadPool(2);
+        try {
+            Future<?> consumption=executor.submit(() -> new TransactionTemplate(transactions).executeWithoutResult(status -> {
+                users.lockById(user.getId()).orElseThrow();
+                PasswordResetToken locked=resetTokens.findById(tokenId).orElseThrow();
+                locked.setConsumedAt(Instant.now()); resetTokens.saveAndFlush(locked);
+                changed.countDown(); await(release);
+            }));
+            assertTrue(changed.await(5,TimeUnit.SECONDS));
+            Future<?> passwordReset=executor.submit(() -> resets.reset(raw,"replacement-password"));
+            Thread.sleep(100);
+            assertFalse(passwordReset.isDone(),"reset must wait on the shared user lock");
+            release.countDown(); consumption.get(5,TimeUnit.SECONDS);
+            ExecutionException failure=assertThrows(ExecutionException.class,() -> passwordReset.get(5,TimeUnit.SECONDS));
+            assertInstanceOf(ApiException.class,failure.getCause());
         } finally {
             release.countDown(); executor.shutdownNow();
         }

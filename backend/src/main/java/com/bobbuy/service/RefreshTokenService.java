@@ -77,13 +77,14 @@ public class RefreshTokenService {
     @Transactional(noRollbackFor = ApiException.class)
     public IssuedRefreshToken refresh(String rawToken, String clientFingerprint) {
         String normalizedToken = normalizeToken(rawToken);
-        RefreshTokenSession observed = refreshTokenSessionRepository.findByTokenHash(hashToken(normalizedToken))
+        String tokenHash = hashToken(normalizedToken);
+        Long userId = refreshTokenSessionRepository.findUserIdByTokenHash(tokenHash)
             .orElseThrow(this::invalidRefreshToken);
-        User user = userRepository.lockById(observed.getUserId())
+        User user = userRepository.lockById(userId)
             .filter(User::isEnabled)
             .orElseThrow(this::invalidRefreshToken);
         // Lock the session row so one old refresh token can only rotate once.
-        RefreshTokenSession session = refreshTokenSessionRepository.findByTokenHashForUpdate(hashToken(normalizedToken))
+        RefreshTokenSession session = refreshTokenSessionRepository.findByTokenHashForUpdate(tokenHash)
             .orElseThrow(this::invalidRefreshToken);
         Instant now = Instant.now();
 

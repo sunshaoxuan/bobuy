@@ -68,8 +68,8 @@ public class PasswordResetService {
         if (!properties.isPasswordResetEnabled()) throw invalidToken();
         validatePassword(newPassword);
         String tokenHash=hash(normalizeToken(rawToken));
-        PasswordResetToken observed=tokens.findByTokenHash(tokenHash).orElseThrow(this::invalidToken);
-        User user=users.lockById(observed.getUserId()).filter(User::isEnabled).orElseThrow(this::invalidToken);
+        Long userId=tokens.findUserIdByTokenHash(tokenHash).orElseThrow(this::invalidToken);
+        User user=users.lockById(userId).filter(User::isEnabled).orElseThrow(this::invalidToken);
         PasswordResetToken token=tokens.findByTokenHashForUpdate(tokenHash).orElseThrow(this::invalidToken);
         Instant now=Instant.now();
         if (token.getConsumedAt()!=null || !token.getExpiresAt().isAfter(now)) throw invalidToken();
