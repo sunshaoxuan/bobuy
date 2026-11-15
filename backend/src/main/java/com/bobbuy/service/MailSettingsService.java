@@ -19,14 +19,15 @@ public class MailSettingsService {
  private final MailSecretCipher cipher;
  private final SmtpDelivery delivery;
  private final AuthService auth;
+ private final EnvironmentAccountMailDelivery environmentDelivery;
  private final Set<String> allowedHosts;
  private final Set<String> testRecipients;
  private Instant nextTest=Instant.EPOCH;
  public MailSettingsService(MailSettingsRepository settings,MailSettingsEventRepository events,
-   MailSecretCipher cipher,SmtpDelivery delivery,AuthService auth,
+   MailSecretCipher cipher,SmtpDelivery delivery,AuthService auth,EnvironmentAccountMailDelivery environmentDelivery,
    @Value("${bobuy.mail.allowed-hosts:mail.briconbric.com}") String hosts,
    @Value("${bobuy.mail.test-recipients:}") String recipients) {
-  this.settings=settings; this.events=events; this.cipher=cipher; this.delivery=delivery; this.auth=auth;
+  this.settings=settings; this.events=events; this.cipher=cipher; this.delivery=delivery; this.auth=auth; this.environmentDelivery=environmentDelivery;
   allowedHosts=split(hosts); testRecipients=split(recipients);
  }
  private Set<String> split(String text) {
@@ -90,6 +91,7 @@ public class MailSettingsService {
   catch(Exception ignored) { events.save(new MailSettingsEvent(actor,s.version,"TEST_FAILED")); throw invalid("SMTP test failed; check the saved settings and mail server"); }
  }
  public boolean sendIfConfigured(SimpleMailMessage message) {
+  if(environmentDelivery.ready()) { environmentDelivery.send(message); return true; }
   var saved=settings.findById(1);
   if(saved.isEmpty()) return false;
   if(!saved.get().enabled) throw invalid("Configured email delivery is disabled");
@@ -97,8 +99,15 @@ public class MailSettingsService {
   catch(Exception ignored) { throw invalid("Verification email could not be delivered; please try again later"); }
  }
  public boolean protectedDeliveryReady() {
+  if(environmentDelivery.ready()) return true;
   var saved=settings.findById(1);
   return cipher.ready() && saved.isPresent() && saved.get().enabled && saved.get().encryptedPassword!=null;
+ }
+ public void sendControlledTest() {
+  SimpleMailMessage message=new SimpleMailMessage();
+  message.setTo("postmaster@bobuy.cc"); message.setSubject("Bobuy production SMTP test");
+  message.setText("Bobuy production mail delivery test. No account data or token is included.");
+  environmentDelivery.send(message);
  }
  private void send(MailSettings s,SimpleMailMessage message) {
   // Revalidate persisted destination policy, including after an allowlist change.

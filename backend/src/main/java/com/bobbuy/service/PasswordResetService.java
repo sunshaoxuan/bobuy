@@ -55,11 +55,11 @@ public class PasswordResetService {
         tokens.deleteAllByUserIdAndConsumedAtIsNull(user.getId());
         tokens.saveAndFlush(token);
         SimpleMailMessage message=new SimpleMailMessage();
-        message.setTo(user.getEmail()); message.setSubject("Bobuy password reset / 密码重置 / 密碼重設 / パスワード再設定");
+        message.setTo(user.getEmail());
         String base=properties.getPublicBaseUrl().resolve("/reset-password").toString();
         // A fragment is not sent in HTTP requests, so the token cannot enter access logs or Referer headers.
         String link=base+"#token="+URLEncoder.encode(raw,StandardCharsets.UTF_8);
-        message.setText("Reset your Bobuy password: "+link+"\n重置 Bobuy 密码："+link+"\n重設 Bobuy 密碼："+link+"\nBobuy パスワードを再設定："+link);
+        PasswordResetMailTemplate.apply(message,link,org.springframework.context.i18n.LocaleContextHolder.getLocale());
         events.publishEvent(new PasswordResetMailRequested(token.getTokenHash(), message));
     }
 

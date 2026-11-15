@@ -36,7 +36,8 @@ class AccountMailPropertiesTest {
         var cipher = mock(MailSecretCipher.class);
         when(cipher.ready()).thenReturn(false);
 
-        assertThatThrownBy(() -> new AccountMailStartupValidator(properties, cipher).afterPropertiesSet())
+        var environmentDelivery = mock(EnvironmentAccountMailDelivery.class);
+        assertThatThrownBy(() -> new AccountMailStartupValidator(properties, cipher, environmentDelivery).afterPropertiesSet())
             .isInstanceOf(IllegalStateException.class)
             .hasMessage("Account mail delivery requires protected encrypted storage");
     }

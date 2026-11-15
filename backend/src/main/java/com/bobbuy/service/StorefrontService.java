@@ -134,7 +134,8 @@ public class StorefrontService {
         challenges.save(challenge);
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(accountMail.getFromAddress()); message.setTo(user.getEmail());
-        VerificationMailTemplate.apply(message,code,org.springframework.context.i18n.LocaleContextHolder.getLocale());
+        VerificationMailTemplate.apply(message,code,org.springframework.context.i18n.LocaleContextHolder.getLocale(),
+            accountMail.getPublicBaseUrl().resolve("/account").toString());
         // Legacy BOBUY_MAIL_* fallback is retired. Account delivery is opt-in and
         // can only use an enabled setting whose password is encrypted by #84.
         if(accountMail.isDeliveryEnabled() && !mailSettings.sendIfConfigured(message)) {

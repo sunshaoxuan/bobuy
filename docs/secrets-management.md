@@ -134,8 +134,16 @@ Compose env 候选覆盖文件，部署使用 `/etc/bobuy.env` 加该候选文�
 缺失、SOPS 不可用、解密失败或 dotenv 格式非法都会在替换容器前失败。覆盖文件不得包含
 `BOBBUY_ACCOUNT_MAIL_DELIVERY_ENABLED`、`BOBBUY_ACCOUNT_PASSWORD_RESET_ENABLED` 或
 `BOBBUY_ACCOUNT_REQUIRE_VERIFIED_EMAIL_FOR_CHECKOUT`，因此此配置批次不能开启正式邮件、重置或
-验证门禁。`BOBBUY_ACCOUNT_MAIL_SMTP_PASSWORD` 目前只是保留的配置名称，不映射到任何容器；
-本批不会读取或注入该密码，也不会启用外部邮件投递。
+验证门禁。启用加密覆盖后，上述 SMTP 键由 Compose 仅映射到实际执行账户发信的
+`auth-service` 容器；密码没有默认值，应用只在发送时把它交给受保护的 SMTP 组件，不通过
+API、Actuator 或日志回显。主机、端口与 TLS 模式仍可组合配置（例如 587/`STARTTLS` 或
+465/`TLS`），不会回落到旧的 `BOBUY_MAIL_*`。正式验证、重置与下单验证开关仍保持关闭。
+
+合并并部署到官方仓库 `main` 后，可在 GitHub Actions 手动运行 **Send production test email**。
+该仅 `workflow_dispatch` 的工作流复用 CD production 的 SSH 凭据和 `known_hosts` 严格校验，
+在生产主机的 `auth-service` 容器内调用 loopback-only 入口，只从
+`postmaster@bobuy.cc` 向同一固定地址发送一封纯文本邮件。它不依赖三个业务开关，也不接受收件人
+参数。日志仅显示成功或连接、TLS/证书、认证、拒绝、超时等错误类别；SMTP 凭据始终留在生产容器。
 
 覆盖文件使用单行字面量赋值，支持完整闭合的引号及行尾注释；不支持变量插值，字面量美元符号
 使用单引号包裹。准备校验与 CD Compose 配置校验失败时仅输出通用错误，捕获的诊断不输出。

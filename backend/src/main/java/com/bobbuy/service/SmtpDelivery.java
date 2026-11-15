@@ -7,11 +7,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SmtpDelivery {
+ public enum FailureCategory { CONNECTION, TLS, AUTHENTICATION, REJECTED, TIMEOUT, UNKNOWN }
+ public static final class DeliveryException extends IllegalStateException {
+  private final FailureCategory category;
+  public DeliveryException(FailureCategory category) { super("SMTP delivery failed: "+category); this.category=category; }
+  public FailureCategory category() { return category; }
+ }
  public void send(MailSettings settings,String password,SimpleMailMessage message) {
   JavaMailSenderImpl sender=createSender(settings,password);
   message.setFrom(settings.fromAddress); message.setReplyTo(settings.replyTo);
   try { sender.send(message); }
-  catch(Exception ignored) { throw new IllegalStateException("SMTP delivery failed"); }
+  catch(Exception failure) { throw new DeliveryException(classify(failure)); }
   finally { sender.setPassword(null); }
  }
  JavaMailSenderImpl createSender(MailSettings settings,String password) {
@@ -30,5 +36,17 @@ public class SmtpDelivery {
   p.setProperty("mail.smtp.timeout","5000"); p.setProperty("mail.smtp.writetimeout","5000");
   p.setProperty("mail.debug","false"); p.setProperty("mail.debug.auth","false");
   return sender;
+ }
+ private FailureCategory classify(Throwable failure) {
+  for(Throwable current=failure;current!=null;current=current.getCause()) {
+   String name=current.getClass().getName().toLowerCase(java.util.Locale.ROOT);
+   String message=String.valueOf(current.getMessage()).toLowerCase(java.util.Locale.ROOT);
+   if(name.contains("timeout") || message.contains("timed out") || message.contains("timeout")) return FailureCategory.TIMEOUT;
+   if(name.contains("ssl") || name.contains("certificate") || message.contains("certificate") || message.contains("handshake")) return FailureCategory.TLS;
+   if(name.contains("authentication") || message.contains("authentication failed") || message.contains("535")) return FailureCategory.AUTHENTICATION;
+   if(message.contains("rejected") || message.matches(".*\\b(550|551|552|553|554)\\b.*")) return FailureCategory.REJECTED;
+   if(name.contains("connect") || message.contains("connection")) return FailureCategory.CONNECTION;
+  }
+  return FailureCategory.UNKNOWN;
  }
 }
