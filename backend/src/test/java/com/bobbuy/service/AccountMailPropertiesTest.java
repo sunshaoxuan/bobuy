@@ -26,7 +26,8 @@ class AccountMailPropertiesTest {
         assertThatThrownBy(properties::afterPropertiesSet)
             .isInstanceOf(IllegalStateException.class)
             .hasMessage("Account mail configuration is invalid")
-            .hasMessageNotContaining("password", "token");
+            .hasMessageNotContaining("password")
+            .hasMessageNotContaining("token");
     }
 
     @Test void enabledDeliveryFailsClosedWithoutProtectedEncryption() {
