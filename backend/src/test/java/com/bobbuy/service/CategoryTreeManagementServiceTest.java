@@ -62,6 +62,45 @@ class CategoryTreeManagementServiceTest {
         verifyNoInteractions(products);
     }
 
+    @Test void automaticOrderCountsSubtreeAssignmentsAndReactsWithoutPersistingRanks() {
+        var a=add(null,"少"); var b=add(null,"多");
+        var x=add(b.id(),"少子"); var y=add(b.id(),"多子");
+        assigned.put("p1",new ProductPrimaryCategoryPath("p1",x.id()));
+        assigned.put("p2",new ProductPrimaryCategoryPath("p2",y.id()));
+        assigned.put("p3",new ProductPrimaryCategoryPath("p3",y.id()));
+        assertThat(service.list().stream().filter(n->n.parentId()==null)).extracting(CategoryTreeManagementService.Node::id).containsExactly(b.id(),a.id());
+        assertThat(service.list().stream().filter(n->b.id().equals(n.parentId()))).extracting(CategoryTreeManagementService.Node::id).containsExactly(y.id(),x.id());
+        assertThat(service.list().get(0).productCount()).isEqualTo(3);
+        service.update(b.id(),new CategoryTreeManagementService.Edit(null,Map.of("ja-JP","改名"),null));
+        assertThat(tree.get(b.id()).isExplicitOrder()).isFalse();
+        assigned.replaceAll((id,path)->new ProductPrimaryCategoryPath(id,a.id()));
+        assertThat(service.list().get(0).id()).isEqualTo(a.id());
+        assigned.clear();
+        assertThat(service.list().get(0).id()).isEqualTo(a.id()); // Stable creation rank breaks ties.
+        verifyNoInteractions(products);
+    }
+
+    @Test void explicitSiblingOrderSurvivesCountChangesRenameCreateAndMove() {
+        var a=add(null,"一"); var b=add(null,"二");
+        assigned.put("p",new ProductPrimaryCategoryPath("p",b.id()));
+        service.update(a.id(),new CategoryTreeManagementService.Edit(null,null,0));
+        assertThat(tree.get(a.id()).isExplicitOrder()).isTrue();
+        assertThat(tree.get(b.id()).isExplicitOrder()).isTrue();
+        service.update(a.id(),new CategoryTreeManagementService.Edit(null,Map.of("ja-JP","改名"),null));
+        var c=add(null,"三");
+        assigned.put("p2",new ProductPrimaryCategoryPath("p2",c.id()));
+        assigned.put("p3",new ProductPrimaryCategoryPath("p3",c.id()));
+        assertThat(service.list()).extracting(CategoryTreeManagementService.Node::id).containsExactly(a.id(),b.id(),c.id());
+        var child=add(a.id(),"子");
+        service.update(child.id(),new CategoryTreeManagementService.Edit(null,null,null));
+        assertThat(tree.get(child.id()).isExplicitOrder()).isTrue();
+        assertThat(service.list()).extracting(CategoryTreeManagementService.Node::id).containsExactly(a.id(),b.id(),c.id(),child.id());
+        service.update(c.id(),new CategoryTreeManagementService.Edit(b.id(),null,null));
+        assertThat(tree.get(c.id()).isExplicitOrder()).isFalse();
+        assertThat(assigned.get("p2").getCategoryNodeId()).isEqualTo(c.id());
+        verifyNoInteractions(products);
+    }
+
     @Test void renameAndMoveKeepProductIdentityAndDescendantPathsWithoutProductWrites() {
         var root = add(null, "食品"); var branch = add(root.id(), "飲料"); var leaf = add(branch.id(), "水"); var destination = add(null, "日用品");
         assigned.put("product", new ProductPrimaryCategoryPath("product", leaf.id()));

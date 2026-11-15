@@ -1595,5 +1595,6 @@ Object.assign(messages, {
   "categoryTree.loadFailed": "カテゴリを読み込めません。再試行してください。",
   "categoryTree.deleteBlocked": "子カテゴリ、商品または旧カテゴリとの対応があるため削除できません。先に移動または再分類してください。",
   "categoryImport.template": "CSV テンプレートをダウンロード",
-  "categoryImport.templateHelp": "中国語の列名に対応しています。架空の例を実際の商品番号と正確な日本語パスに置き換え、階層を全角 ＞ で区切ってください。"
+  "categoryImport.flag": "備考 / フラグ",
+  "categoryImport.templateHelp": "中国語の列名に対応しています。架空の例を実際の商品番号と日本語パスに置き換え、全角 ＞ で区切ってください。任意列：备注 / 标记 / Note / Flag。推定や最接近路径などのフラグは原文で保存し、待核の行は分類せず差し戻します。"
 });

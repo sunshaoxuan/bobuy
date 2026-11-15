@@ -43,6 +43,22 @@ it('reorders with a single atomic request and disables boundaries', async () => 
   await waitFor(()=>expect(api.update).toHaveBeenCalledTimes(1));
   expect(api.update).toHaveBeenCalledWith('rec-cat-private',{parentId:null,sortOrder:1});
 });
+it('renders server product-count ranks at each level and preserves explicit ranks after refresh', async () => {
+  const fixture=[
+    {...nodes[0],id:'low',name:{'ja-JP':'少'},fullPath:['low'],sortOrder:1,productCount:1},
+    {...nodes[0],id:'high',name:{'ja-JP':'多'},fullPath:['high'],sortOrder:0,productCount:5},
+    {...nodes[1],id:'child-low',parentId:'high',name:{'ja-JP':'少子'},fullPath:['high','child-low'],sortOrder:1,productCount:1},
+    {...nodes[1],id:'child-high',parentId:'high',name:{'ja-JP':'多子'},fullPath:['high','child-high'],sortOrder:0,productCount:4}
+  ];
+  api.list.mockResolvedValueOnce(fixture).mockResolvedValue(fixture.map(n=>({...n,sortOrder:n.id==='low'?0:n.id==='high'?1:n.sortOrder})));
+  render(<I18nProvider><CategoryTreeManagement/></I18nProvider>);
+  await screen.findByRole('article',{name:'多'});
+  expect(screen.getAllByRole('article').map(n=>n.getAttribute('aria-label'))).toEqual(['多','多 › 多子','多 › 少子','少']);
+  fireEvent.click(within(screen.getByRole('article',{name:'少'})).getByRole('button',{name:'Move up'}));
+  await waitFor(()=>expect(api.update).toHaveBeenCalledWith('low',{parentId:null,sortOrder:0}));
+  await waitFor(()=>expect(screen.getAllByRole('article')[0]).toHaveAttribute('aria-label','少'));
+  expect(within(screen.getByRole('article',{name:'少'})).getByRole('button',{name:'Move up'})).toBeDisabled();
+});
 it('offers a separate move action and excludes self and descendants', async () => {
   await show(); fireEvent.click(within(screen.getByRole('article',{name:'食品'})).getByRole('button',{name:'Move category'}));
   const dialog=screen.getByRole('dialog'); expect(within(dialog).queryByRole('textbox',{name:'Japanese name'})).not.toBeInTheDocument();

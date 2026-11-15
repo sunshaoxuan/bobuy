@@ -51,7 +51,24 @@ public class CategoryTreeManagementService {
     }
 
     private List<CategoryTreeNode> siblings(String parent) {
-        return new ArrayList<>(nodes.findAllByParentId(parent).stream().filter(n -> n.getSystemKey() == null).sorted(ORDER).toList());
+        var siblings = new ArrayList<>(nodes.findAllByParentId(parent).stream().filter(n -> n.getSystemKey() == null).toList());
+        sort(siblings, productCounts(nodes.findAll()));
+        return siblings;
+    }
+
+    /** Count assigned products throughout each subtree, including unpublished products. */
+    private Map<String, Long> productCounts(List<CategoryTreeNode> tree) {
+        Map<String, Long> counts = new HashMap<>();
+        for (var node : tree) {
+            long count = paths.countByCategoryNodeId(node.getId());
+            for (String ancestor : node.getFullPath()) counts.merge(ancestor, count, Long::sum);
+        }
+        return counts;
+    }
+
+    private void sort(List<CategoryTreeNode> siblings, Map<String, Long> counts) {
+        siblings.sort(siblings.stream().anyMatch(CategoryTreeNode::isExplicitOrder) ? ORDER
+                : Comparator.<CategoryTreeNode>comparingLong(n -> counts.getOrDefault(n.getId(), 0L)).reversed().thenComparing(ORDER));
     }
 
     private void uniqueName(String parent, String name, String except) {
@@ -64,20 +81,36 @@ public class CategoryTreeManagementService {
     }
 
     private Node view(CategoryTreeNode n) {
-        return new Node(n.getId(), n.getParentId(), Map.copyOf(n.getName()), List.copyOf(n.getFullPath()),
-                n.getSortOrder(), paths.countByCategoryNodeId(n.getId()), blocked(n));
+        return list().stream().filter(row -> row.id().equals(n.getId())).findFirst().orElseThrow();
     }
 
     @Transactional(readOnly = true)
     public List<Node> list() {
-        return nodes.findAll().stream().filter(n -> n.getSystemKey() == null).sorted(ORDER).map(this::view).toList();
+        var tree = nodes.findAll();
+        var counts = productCounts(tree);
+        Map<String, List<CategoryTreeNode>> groups = new LinkedHashMap<>();
+        tree.stream().filter(n -> n.getSystemKey() == null)
+                .forEach(n -> groups.computeIfAbsent(n.getParentId(), key -> new ArrayList<>()).add(n));
+        List<Node> result = new ArrayList<>();
+        for (var group : groups.values()) {
+            sort(group, counts);
+            for (int i = 0; i < group.size(); i++) {
+                var n = group.get(i);
+                result.add(new Node(n.getId(), n.getParentId(), Map.copyOf(n.getName()), List.copyOf(n.getFullPath()),
+                        i, counts.getOrDefault(n.getId(), 0L), blocked(n)));
+            }
+        }
+        return result;
     }
 
     private void place(CategoryTreeNode node, String parent, int position) {
         var ordered = siblings(parent);
         ordered.removeIf(n -> n.getId().equals(node.getId()));
         ordered.add(Math.min(position, ordered.size()), node);
-        for (int i = 0; i < ordered.size(); i++) ordered.get(i).setSortOrder(i);
+        for (int i = 0; i < ordered.size(); i++) {
+            ordered.get(i).setSortOrder(i);
+            ordered.get(i).setExplicitOrder(true);
+        }
         nodes.saveAll(ordered);
     }
 
@@ -91,8 +124,12 @@ public class CategoryTreeManagementService {
         var full = new ArrayList<String>();
         if (parent != null) full.addAll(parent.getFullPath());
         String id = UUID.randomUUID().toString(); full.add(id);
-        var node = nodes.save(new CategoryTreeNode(id, edit.parentId(), name, full, 0, null));
-        place(node, edit.parentId(), edit.sortOrder() == null ? Integer.MAX_VALUE : edit.sortOrder());
+        var existing = siblings(edit.parentId());
+        int rank = existing.stream().mapToInt(CategoryTreeNode::getSortOrder).max().orElse(-1) + 1;
+        var node = new CategoryTreeNode(id, edit.parentId(), name, full, rank, null);
+        node.setExplicitOrder(existing.stream().anyMatch(CategoryTreeNode::isExplicitOrder));
+        nodes.save(node);
+        if (edit.sortOrder() != null) place(node, edit.parentId(), edit.sortOrder());
         return view(node);
     }
 
@@ -114,6 +151,9 @@ public class CategoryTreeManagementService {
         String oldParent = node.getParentId();
         boolean moved = !Objects.equals(oldParent, edit.parentId());
         if (moved) {
+            var destination = siblings(edit.parentId());
+            node.setExplicitOrder(destination.stream().anyMatch(CategoryTreeNode::isExplicitOrder));
+            node.setSortOrder(destination.stream().mapToInt(CategoryTreeNode::getSortOrder).max().orElse(-1) + 1);
             var oldPath = List.copyOf(node.getFullPath());
             var prefix = new ArrayList<String>();
             if (parent != null) prefix.addAll(parent.getFullPath());
@@ -128,12 +168,7 @@ public class CategoryTreeManagementService {
             node.setParentId(edit.parentId()); node.setFullPath(prefix);
         }
         node.setName(name); nodes.save(node);
-        place(node, edit.parentId(), edit.sortOrder() != null ? edit.sortOrder() : moved ? Integer.MAX_VALUE : node.getSortOrder());
-        if (moved) {
-            var remaining = siblings(oldParent);
-            for (int i = 0; i < remaining.size(); i++) remaining.get(i).setSortOrder(i);
-            nodes.saveAll(remaining);
-        }
+        if (edit.sortOrder() != null) place(node, edit.parentId(), edit.sortOrder());
         return view(node);
     }
 

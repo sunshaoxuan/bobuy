@@ -38,6 +38,13 @@ public class Product {
     @Id
     private String id;
 
+    @Column(name = "category_import_flag", columnDefinition = "text")
+    @com.fasterxml.jackson.annotation.JsonProperty(access = com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY)
+    private String categoryImportFlag;
+
+    public String getCategoryImportFlag() { return categoryImportFlag; }
+    public void setCategoryImportFlag(String value) { categoryImportFlag = value; }
+
     private Long merchantId;
     public Long getMerchantId() { return merchantId; }
     public void setMerchantId(Long value) { merchantId = value; }

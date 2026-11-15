@@ -1595,5 +1595,6 @@ Object.assign(messages, {
   "categoryTree.loadFailed": "无法加载分类，请重试刷新分类树。",
   "categoryTree.deleteBlocked": "含子分类、商品或旧分类对照时无法删除。请先移动或重新归类。",
   "categoryImport.template": "下载 CSV 模板",
-  "categoryImport.templateHelp": "支持中文表头。请将合成示例替换为实际商品编号及精确日文路径，层级使用全角 ＞ 分隔。"
+  "categoryImport.flag": "备注 / 标记",
+  "categoryImport.templateHelp": "支持中文表头。请将合成示例替换为实际商品编号及日文路径，层级使用全角 ＞ 分隔。可选列：备注 / 标记 / Note / Flag；推定、最接近路径等标记原文保存；待核行退回，不分配分类。"
 });

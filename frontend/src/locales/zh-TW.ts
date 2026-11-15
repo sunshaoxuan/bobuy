@@ -1734,5 +1734,6 @@ Object.assign(messages, {
   "categoryTree.loadFailed": "無法載入分類，請重試重新整理分類樹。",
   "categoryTree.deleteBlocked": "含子分類、商品或舊分類對照時無法刪除。請先移動或重新分類。",
   "categoryImport.template": "下載 CSV 範本",
-  "categoryImport.templateHelp": "支援中文欄名。請將合成範例替換為實際商品編號及精確日文路徑，層級使用全形 ＞ 分隔。"
+  "categoryImport.flag": "備註 / 標記",
+  "categoryImport.templateHelp": "支援中文欄名。請將合成範例替換為實際商品編號及日文路徑，層級使用全形 ＞ 分隔。選填欄：备注 / 标记 / Note / Flag；推定、最接近路径等標記原文保存；待核列退回，不分配分類。"
 });

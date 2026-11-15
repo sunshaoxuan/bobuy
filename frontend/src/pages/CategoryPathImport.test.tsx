@@ -17,6 +17,30 @@ it('offers the Chinese-header template before choosing a file',async()=>{
  expect(api.preview).not.toHaveBeenCalled();expect(api.confirm).not.toHaveBeenCalled();
 });
 
+it('shows all three raw flags in preview and confirmation and exports pending rows',async()=>{
+ const flagged={...result('flags'),matched:2,unmatched:1,rows:[
+  {rowNumber:2,sku:'INFERRED',breadcrumb:'食品＞水',flag:'推定',outcome:'MATCHED'},
+  {rowNumber:3,sku:'WAREHOUSE',breadcrumb:'食品＞水',flag:'最接近路径 / closest path',outcome:'MATCHED'},
+  {rowNumber:4,sku:'PENDING',breadcrumb:'食品＞水',flag:'待核',outcome:'UNMATCHED',reason:'Identity unverified (待核)'}
+ ]};
+ api.preview.mockResolvedValue(flagged);api.confirm.mockResolvedValue({...flagged,status:'CONFIRMED',productCountAfter:1});
+ const {container}=render(<I18nProvider><CategoryPathImport/></I18nProvider>);
+ select(container,'flags.csv');await waitFor(()=>expect(screen.getByRole('button',{name:/preview/i})).toBeEnabled());
+ fireEvent.click(screen.getByRole('button',{name:/preview/i}));
+ expect(await screen.findByRole('columnheader',{name:'Note / flag'})).toBeInTheDocument();
+ for(const flag of ['推定','最接近路径 / closest path','待核']) expect(screen.getByRole('cell',{name:flag})).toBeInTheDocument();
+ const pending=screen.getByText('PENDING').closest('tr')!;
+ expect(pending.textContent).toContain('Unmatched / unknown SKU');expect(pending.textContent).not.toContain('Matched');
+ expect(screen.getByRole('button',{name:'Confirm import'})).toBeDisabled();
+ fireEvent.click(screen.getByRole('button',{name:'Export unmatched list'}));
+ await waitFor(()=>expect(api.download).toHaveBeenCalledWith('/api/category-path-import/flags/unmatched.csv','unmatched.csv'));
+ fireEvent.click(screen.getByRole('checkbox'));fireEvent.click(screen.getByRole('button',{name:'Confirm import'}));
+ expect(await screen.findByText('Import confirmed and audited.')).toBeInTheDocument();
+ for(const flag of ['推定','最接近路径 / closest path','待核']) expect(screen.getByRole('cell',{name:flag})).toBeInTheDocument();
+ expect(screen.queryByRole('button',{name:'Confirm import'})).not.toBeInTheDocument();
+ expect(screen.getByText('Product count before: 1; after: 1')).toBeInTheDocument();
+});
+
 it.each(['resolve','reject'] as const)('ignores stale preview %s after selecting another file',async outcome=>{
  const old=deferred(),current=deferred();api.preview.mockReturnValueOnce(old.promise).mockReturnValueOnce(current.promise);
  const {container}=render(<I18nProvider><CategoryPathImport/></I18nProvider>);

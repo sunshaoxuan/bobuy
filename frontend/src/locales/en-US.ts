@@ -1595,5 +1595,6 @@ Object.assign(messages, {
   "categoryTree.loadFailed": "Could not load categories. Retry to refresh the tree.",
   "categoryTree.deleteBlocked": "Deletion is blocked while this category has children, products or a legacy category mapping. Reassign them first.",
   "categoryImport.template": "Download CSV template",
-  "categoryImport.templateHelp": "Chinese headers are supported. Replace the synthetic example with your SKU and exact Japanese path; separate levels with ＞."
+  "categoryImport.flag": "Note / flag",
+  "categoryImport.templateHelp": "Chinese headers are supported. Replace the synthetic examples with your SKU and Japanese path; separate levels with ＞. Optional 备注 / 标记 / Note / Flag: 推定 and closest-path notes are saved as supplied; 待核 returns the row without assigning a category."
 });
