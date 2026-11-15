@@ -34,7 +34,7 @@ public class AuthAbuseService {
         this.maxDelay=Duration.ofSeconds(Math.max(1,maxDelaySeconds));
     }
 
-    @Transactional
+    @Transactional(noRollbackFor = AuthAbuseException.class)
     public Attempt begin(Purpose purpose, String clientIp, String target) {
         Attempt attempt=new Attempt(purpose,key("ip",clientIp),key("target",normalize(target)));
         if (!enabled) return attempt;
@@ -47,13 +47,13 @@ public class AuthAbuseService {
     @Transactional
     public void failed(Attempt attempt) {
         if(!enabled)return;
-        fail(attempt.ipKey()); fail(attempt.targetKey()); audit(attempt,"REJECTED");
+        fail(attempt.ipKey(),attempt.purpose()); fail(attempt.targetKey(),attempt.purpose()); audit(attempt,"REJECTED");
     }
 
     @Transactional
     public void succeeded(Attempt attempt) {
         if(!enabled)return;
-        db.update("UPDATE auth_abuse_bucket SET failure_count=0, blocked_until=NULL, updated_at=current_timestamp WHERE bucket_key IN (?,?)",attempt.ipKey(),attempt.targetKey());
+        db.update("UPDATE auth_abuse_bucket SET failure_count=0, blocked_until=NULL, updated_at=current_timestamp WHERE purpose=? AND bucket_key IN (?,?)",attempt.purpose().name(),attempt.ipKey(),attempt.targetKey());
         audit(attempt,"ACCEPTED");
     }
 
@@ -61,19 +61,18 @@ public class AuthAbuseService {
         db.update("""
             INSERT INTO auth_abuse_bucket(bucket_key,purpose,window_started_at,request_count,failure_count,updated_at)
             VALUES (?, ?, current_timestamp, 1, 0, current_timestamp)
-            ON CONFLICT(bucket_key) DO UPDATE SET
-              purpose=excluded.purpose,
+            ON CONFLICT(purpose,bucket_key) DO UPDATE SET
               window_started_at=CASE WHEN auth_abuse_bucket.window_started_at < current_timestamp-(? * interval '1 second') THEN current_timestamp ELSE auth_abuse_bucket.window_started_at END,
               request_count=CASE WHEN auth_abuse_bucket.window_started_at < current_timestamp-(? * interval '1 second') THEN 1 ELSE auth_abuse_bucket.request_count+1 END,
               failure_count=CASE WHEN auth_abuse_bucket.window_started_at < current_timestamp-(? * interval '1 second') THEN 0 ELSE auth_abuse_bucket.failure_count END,
               blocked_until=CASE WHEN auth_abuse_bucket.window_started_at < current_timestamp-(? * interval '1 second') THEN NULL ELSE auth_abuse_bucket.blocked_until END,
               updated_at=current_timestamp
             """,key,purpose.name(),window.toSeconds(),window.toSeconds(),window.toSeconds(),window.toSeconds());
-        return db.queryForObject("SELECT CASE WHEN blocked_until>current_timestamp THEN ceil(extract(epoch from blocked_until-current_timestamp))::bigint WHEN request_count>? THEN ceil(extract(epoch from window_started_at+(? * interval '1 second')-current_timestamp))::bigint ELSE 0 END FROM auth_abuse_bucket WHERE bucket_key=?",Long.class,limit,window.toSeconds(),key);
+        return db.queryForObject("SELECT CASE WHEN blocked_until>current_timestamp THEN ceil(extract(epoch from blocked_until-current_timestamp))::bigint WHEN request_count>? THEN ceil(extract(epoch from window_started_at+(? * interval '1 second')-current_timestamp))::bigint ELSE 0 END FROM auth_abuse_bucket WHERE purpose=? AND bucket_key=?",Long.class,limit,window.toSeconds(),purpose.name(),key);
     }
 
-    private void fail(String key){
-        db.update("UPDATE auth_abuse_bucket SET failure_count=failure_count+1, blocked_until=current_timestamp+(LEAST(?, ? * power(2, LEAST(failure_count, 20))) * interval '1 second'), updated_at=current_timestamp WHERE bucket_key=?",maxDelay.toSeconds(),baseDelay.toSeconds(),key);
+    private void fail(String key,Purpose purpose){
+        db.update("UPDATE auth_abuse_bucket SET failure_count=failure_count+1, blocked_until=current_timestamp+(LEAST(?, ? * power(2, LEAST(failure_count, 20))) * interval '1 second'), updated_at=current_timestamp WHERE purpose=? AND bucket_key=?",maxDelay.toSeconds(),baseDelay.toSeconds(),purpose.name(),key);
     }
     private void audit(Attempt a,String outcome){db.update("INSERT INTO auth_abuse_audit(purpose,outcome,ip_key,target_key) VALUES (?,?,?,?)",a.purpose().name(),outcome,a.ipKey(),a.targetKey());}
     private static String normalize(String value){return value==null?"":value.trim().toLowerCase(Locale.ROOT);}

@@ -1,11 +1,12 @@
 CREATE TABLE auth_abuse_bucket (
-    bucket_key varchar(64) PRIMARY KEY,
+    bucket_key varchar(64) NOT NULL,
     purpose varchar(32) NOT NULL,
     window_started_at timestamptz NOT NULL,
     request_count integer NOT NULL,
     failure_count integer NOT NULL DEFAULT 0,
     blocked_until timestamptz,
-    updated_at timestamptz NOT NULL DEFAULT current_timestamp
+    updated_at timestamptz NOT NULL DEFAULT current_timestamp,
+    PRIMARY KEY (purpose, bucket_key)
 );
 
 CREATE TABLE auth_abuse_audit (
