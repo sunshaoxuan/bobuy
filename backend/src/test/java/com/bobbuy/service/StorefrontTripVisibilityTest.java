@@ -40,7 +40,7 @@ class StorefrontTripVisibilityTest {
 
     @Test void ordinaryPublicQueryRemainsBookableOnlyAndDisplayOptInDoesNotBroadenFields() throws Exception {
         when(trips.findAll()).thenReturn(List.of(trip(1,TripStatus.IN_PROGRESS,-2)));
-        var mvc=MockMvcBuilders.standaloneSetup(new StorefrontController(service,null,null)).build();
+        var mvc=MockMvcBuilders.standaloneSetup(new StorefrontController(service,null,null,null,null)).build();
         mvc.perform(get("/api/storefront/trips")).andExpect(status().isOk()).andExpect(jsonPath("$.data").isEmpty());
         mvc.perform(get("/api/storefront/trips").param("includeCurrent","true"))
             .andExpect(status().isOk()).andExpect(jsonPath("$.data[0].id").value(1))

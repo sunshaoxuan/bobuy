@@ -19,6 +19,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenService jwtTokenService;
     private final RefreshTokenService refreshTokenService;
+    private final String dummyPasswordHash;
 
     public AuthService(UserRepository userRepository,
                        PasswordEncoder passwordEncoder,
@@ -28,17 +29,17 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
         this.jwtTokenService = jwtTokenService;
         this.refreshTokenService = refreshTokenService;
+        this.dummyPasswordHash=passwordEncoder.encode("timing-only-password-value");
     }
 
     public SessionResult login(String username, String password, String clientFingerprint) {
-        User user = userRepository.findByUsernameIgnoreCase(username == null ? "" : username.trim())
-            .orElseThrow(() -> new ApiException(ErrorCode.UNAUTHORIZED, "error.auth.invalid_credentials"));
-        if (!user.isEnabled()) {
-            throw new ApiException(ErrorCode.UNAUTHORIZED, "error.auth.user_disabled");
-        }
-        if (user.getPasswordHash() == null || !passwordEncoder.matches(password, user.getPasswordHash())) {
+        Optional<User> candidate=userRepository.findByUsernameIgnoreCase(username == null ? "" : username.trim());
+        String stored=candidate.map(User::getPasswordHash).filter(java.util.Objects::nonNull).orElse(dummyPasswordHash);
+        boolean passwordMatches=passwordEncoder.matches(password==null?"":password,stored);
+        if(candidate.isEmpty()||!candidate.get().isEnabled()||!passwordMatches){
             throw new ApiException(ErrorCode.UNAUTHORIZED, "error.auth.invalid_credentials");
         }
+        User user=candidate.get();
         return createSessionResult(user, refreshTokenService.issue(user, clientFingerprint));
     }
 

@@ -1,0 +1,36 @@
+# Authentication abuse review fixes (2026-11-15)
+
+## Authorized scope
+
+This follow-up is limited to the three findings on PR commit `cb60b2e`: repair the
+two stale `StorefrontController` test constructions; retain throttling audit rows
+when the expected rejection exception leaves `begin`; and isolate quota/delay
+buckets by purpose. It adds focused acceptance tests for quota boundaries, window
+recovery, concurrent consumption, trusted proxy headers, and non-enumerating
+responses. It does not add routes, change Nginx, add secrets, or enable production
+authentication-abuse controls, mail delivery, or verified-only ordering.
+
+## Minimum verification
+
+Run the focused backend tests covering `AuthAbuseService`, proxy resolution,
+authentication response enumeration, and the two corrected controller contracts.
+Also inspect the three production feature flags, validate the changed migration,
+and run `git diff --check`. Do not run the full backend suite.
+
+## Follow-up for commit `219cc9e`
+
+The authorized follow-up is limited to making the in-memory JDBC fixture compatible
+with Mockito 5 varargs matching and making the rate-limited response assertion
+independent of the machine's default locale. The minimum verification is the focused
+`AuthAbuseServiceTest` plus `git diff --check`; production switches remain disabled,
+and no secrets, routes, Nginx configuration, or production behavior are changed.
+
+## CI concurrency follow-up for commit `1d6935c`
+
+The authorized follow-up is limited to making the in-memory quota fixture model the
+transaction-scoped row lock that PostgreSQL holds between the IP and target bucket
+updates. Without that lock, different test threads can win the two independent stub
+updates and produce fewer than five accepted requests even though production executes
+both updates in one transaction. The minimum verification is the complete focused
+`AuthAbuseServiceTest` plus `git diff --check`. Production switches remain disabled;
+this follow-up changes no production code, secrets, routes, or Nginx configuration.
