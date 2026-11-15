@@ -11,6 +11,7 @@ import java.util.*;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -23,13 +24,14 @@ public class PasswordResetService {
     private final RefreshTokenService refreshTokens;
     private final MailSettingsService mail;
     private final AccountMailProperties properties;
+    private final ApplicationEventPublisher events;
     private final SecureRandom random = new SecureRandom();
 
     public PasswordResetService(PasswordResetTokenRepository tokens, UserRepository users,
             PasswordEncoder passwords, RefreshTokenService refreshTokens,
-            MailSettingsService mail, AccountMailProperties properties) {
+            MailSettingsService mail, AccountMailProperties properties, ApplicationEventPublisher events) {
         this.tokens=tokens; this.users=users; this.passwords=passwords;
-        this.refreshTokens=refreshTokens; this.mail=mail; this.properties=properties;
+        this.refreshTokens=refreshTokens; this.mail=mail; this.properties=properties; this.events=events;
     }
 
     /** Always returns the same result; delivery eligibility is deliberately not observable. */
@@ -37,14 +39,18 @@ public class PasswordResetService {
     public ForgotResult forgot(String email) {
         if (!properties.isPasswordResetEnabled() || !properties.isDeliveryEnabled() || !mail.protectedDeliveryReady())
             return new ForgotResult(true);
-        users.findByEmailIgnoreCase(normalizeEmail(email)).filter(User::isEnabled).ifPresent(this::issueAndSend);
+        users.findByEmailIgnoreCase(normalizeEmail(email)).filter(User::isEnabled).ifPresent(found -> {
+            User locked=users.lockById(found.getId()).filter(User::isEnabled).orElse(null);
+            if (locked!=null) issue(locked);
+        });
         return new ForgotResult(true);
     }
 
-    private void issueAndSend(User user) {
+    private void issue(User user) {
         String raw=generateToken();
         PasswordResetToken token=new PasswordResetToken();
         token.setUserId(user.getId()); token.setTokenHash(hash(raw));
+        token.setEmailHash(hash(normalizeEmail(user.getEmail()).toLowerCase(Locale.ROOT)));
         token.setCreatedAt(Instant.now()); token.setExpiresAt(token.getCreatedAt().plus(properties.getPasswordResetLinkTtl()));
         tokens.deleteAllByUserIdAndConsumedAtIsNull(user.getId());
         tokens.saveAndFlush(token);
@@ -54,20 +60,24 @@ public class PasswordResetService {
         // A fragment is not sent in HTTP requests, so the token cannot enter access logs or Referer headers.
         String link=base+"#token="+URLEncoder.encode(raw,StandardCharsets.UTF_8);
         message.setText("Reset your Bobuy password: "+link+"\n重置 Bobuy 密码："+link+"\n重設 Bobuy 密碼："+link+"\nBobuy パスワードを再設定："+link);
-        try { if (!mail.sendIfConfigured(message)) tokens.delete(token); }
-        catch (RuntimeException unavailable) { tokens.delete(token); }
+        events.publishEvent(new PasswordResetMailRequested(token.getTokenHash(), message));
     }
 
     @Transactional
     public ResetResult reset(String rawToken, String newPassword) {
         if (!properties.isPasswordResetEnabled()) throw invalidToken();
         validatePassword(newPassword);
-        PasswordResetToken token=tokens.findByTokenHashForUpdate(hash(normalizeToken(rawToken))).orElseThrow(this::invalidToken);
+        String tokenHash=hash(normalizeToken(rawToken));
+        PasswordResetToken observed=tokens.findByTokenHash(tokenHash).orElseThrow(this::invalidToken);
+        User user=users.lockById(observed.getUserId()).filter(User::isEnabled).orElseThrow(this::invalidToken);
+        PasswordResetToken token=tokens.findByTokenHashForUpdate(tokenHash).orElseThrow(this::invalidToken);
         Instant now=Instant.now();
         if (token.getConsumedAt()!=null || !token.getExpiresAt().isAfter(now)) throw invalidToken();
-        User user=users.lockById(token.getUserId()).filter(User::isEnabled).orElseThrow(this::invalidToken);
+        if (!Objects.equals(token.getUserId(),user.getId()) ||
+                !MessageDigest.isEqual(token.getEmailHash().getBytes(StandardCharsets.US_ASCII),
+                    hash(normalizeEmail(user.getEmail()).toLowerCase(Locale.ROOT)).getBytes(StandardCharsets.US_ASCII))) throw invalidToken();
         token.setConsumedAt(now); user.setPasswordHash(passwords.encode(newPassword));
-        tokens.save(token); users.save(user); refreshTokens.revokeAllForUser(user.getId(),now);
+        tokens.deleteAllByUserIdAndConsumedAtIsNull(user.getId()); users.save(user); refreshTokens.revokeAllForUser(user.getId(),now);
         return new ResetResult(true);
     }
 
@@ -82,4 +92,5 @@ public class PasswordResetService {
     private ApiException invalidToken(){return new ApiException(ErrorCode.INVALID_REQUEST,"error.auth.invalid_password_reset_token");}
     public record ForgotResult(boolean accepted) {}
     public record ResetResult(boolean reset) {}
+    public record PasswordResetMailRequested(String tokenHash, SimpleMailMessage message) {}
 }

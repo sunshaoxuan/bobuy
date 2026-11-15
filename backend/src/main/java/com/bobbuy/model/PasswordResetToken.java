@@ -10,6 +10,7 @@ public class PasswordResetToken {
     private Long id;
     @Column(nullable = false) private Long userId;
     @Column(nullable = false, unique = true, length = 64) private String tokenHash;
+    @Column(nullable = false, length = 64) private String emailHash;
     @Column(nullable = false) private Instant createdAt;
     @Column(nullable = false) private Instant expiresAt;
     private Instant consumedAt;
@@ -19,6 +20,8 @@ public class PasswordResetToken {
     public void setUserId(Long value) { userId = value; }
     public String getTokenHash() { return tokenHash; }
     public void setTokenHash(String value) { tokenHash = value; }
+    public String getEmailHash() { return emailHash; }
+    public void setEmailHash(String value) { emailHash = value; }
     public Instant getCreatedAt() { return createdAt; }
     public void setCreatedAt(Instant value) { createdAt = value; }
     public Instant getExpiresAt() { return expiresAt; }

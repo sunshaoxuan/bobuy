@@ -56,6 +56,10 @@ public class RefreshTokenService {
 
     @Transactional
     public IssuedRefreshToken issue(User user, String clientFingerprint) {
+        // The user row is the common serialization point for session issuance,
+        // rotation, and password reset.
+        user = userRepository.lockById(user.getId()).filter(User::isEnabled)
+            .orElseThrow(this::invalidRefreshToken);
         Instant now = Instant.now();
         String rawToken = generateOpaqueToken();
         RefreshTokenSession session = new RefreshTokenSession();
@@ -73,6 +77,11 @@ public class RefreshTokenService {
     @Transactional(noRollbackFor = ApiException.class)
     public IssuedRefreshToken refresh(String rawToken, String clientFingerprint) {
         String normalizedToken = normalizeToken(rawToken);
+        RefreshTokenSession observed = refreshTokenSessionRepository.findByTokenHash(hashToken(normalizedToken))
+            .orElseThrow(this::invalidRefreshToken);
+        User user = userRepository.lockById(observed.getUserId())
+            .filter(User::isEnabled)
+            .orElseThrow(this::invalidRefreshToken);
         // Lock the session row so one old refresh token can only rotate once.
         RefreshTokenSession session = refreshTokenSessionRepository.findByTokenHashForUpdate(hashToken(normalizedToken))
             .orElseThrow(this::invalidRefreshToken);
@@ -87,12 +96,7 @@ public class RefreshTokenService {
             // which avoids invalidating the single winning token in concurrent races.
             throw invalidRefreshToken();
         }
-        User user = userRepository.findById(session.getUserId())
-            .filter(User::isEnabled)
-            .orElseGet(() -> {
-                revokeFamily(session.getFamilyId(), now, REVOCATION_USER_DISABLED);
-                throw invalidRefreshToken();
-            });
+        if (!Objects.equals(session.getUserId(), user.getId())) throw invalidRefreshToken();
 
         session.setLastUsedAt(now);
         session.setClientFingerprint(sanitizeClientFingerprint(clientFingerprint));
