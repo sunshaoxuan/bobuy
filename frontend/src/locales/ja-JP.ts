@@ -1581,4 +1581,19 @@ Object.assign(messages,{"repair.supplier_unknown":"仕入先名を取得でき�
 Object.assign(messages,{"repair.group": "同じ提案 · {count} 商品", "repair.accept_group": "このグループを採用", "repair.manual": "手入力"});
 
 Object.assign(messages,{'password_reset.forgot':'パスワードを忘れた場合','password_reset.request_title':'パスワードの再設定','password_reset.request_help':'アカウントのメールアドレスを入力してください。対象のアカウントがある場合、再設定方法を送信します。','password_reset.email':'メールアドレス','password_reset.email_error':'有効なメールアドレスを入力してください。','password_reset.send':'再設定方法を送信','password_reset.request_done_title':'メールをご確認ください','password_reset.request_done':'対象のアカウントがある場合、再設定方法がまもなく届きます。','password_reset.back_login':'ログインに戻る','password_reset.reset_title':'新しいパスワードの設定','password_reset.reset_help':'安全なパスワード上限内で、8～72文字を使用してください。','password_reset.new_password':'新しいパスワード','password_reset.confirm_password':'新しいパスワード（確認）','password_reset.password_error':'安全な上限内で8～72文字を入力してください。','password_reset.confirm_error':'同じパスワードをもう一度入力してください。','password_reset.reset_action':'新しいパスワードを保存','password_reset.invalid_title':'このリンクは利用できません','password_reset.invalid':'リンクが無効、期限切れ、または使用済みの可能性があります。新しいリンクを申請してください。','password_reset.new_link':'新しいリンクを申請','password_reset.complete_title':'パスワードを更新しました','password_reset.complete':'パスワードを変更しました。新しいパスワードで再度ログインしてください。','password_reset.sign_in':'ログインする','password_reset.rate':'試行回数が多すぎます。しばらく待ってから再試行してください。','password_reset.network':'接続できませんでした。通信環境を確認して再試行してください。','password_reset.retry':'再試行'});
-Object.assign(messages,{"categoryTree.title":"カテゴリツリー管理","categoryTree.help":"明確なボタンで階層を管理します。名前変更や移動後も商品は紐付き、子カテゴリまたは商品があるカテゴリは削除できません。","categoryTree.addRoot":"最上位カテゴリを追加","categoryTree.addChild":"子カテゴリを追加","categoryTree.add":"カテゴリを追加","categoryTree.rename":"カテゴリ名を変更","categoryTree.moveUp":"上へ移動","categoryTree.moveDown":"下へ移動","categoryTree.delete":"カテゴリを削除","categoryTree.deleteConfirm":"この空のカテゴリを削除しますか？","categoryTree.save":"保存","categoryTree.failed":"カテゴリを変更できません。先に商品と子カテゴリを移動してください。","categoryTree.picker":"商品カテゴリの完全なパス","categoryTree.uncategorized":"未分類","categoryTree.name.ja-JP":"日本語名","categoryTree.name.zh-CN":"簡体字中国語名","categoryTree.name.zh-TW":"繁体字中国語名","categoryTree.name.en-US":"英語名","categoryTree.parent":"親カテゴリ","categoryTree.root":"最上位","master.categories":"商品カテゴリ"});
+Object.assign(messages,{"categoryTree.title":"カテゴリツリー管理","categoryTree.help":"明確なボタンで階層を管理します。名前変更や移動後も商品は紐付き、子カテゴリまたは商品があるカテゴリは削除できません。","categoryTree.addRoot":"最上位カテゴリを追加","categoryTree.addChild":"子カテゴリを追加","categoryTree.add":"カテゴリを追加","categoryTree.rename":"カテゴリ名を変更","categoryTree.moveUp":"上へ移動","categoryTree.moveDown":"下へ移動","categoryTree.delete":"カテゴリを削除","categoryTree.deleteConfirm":"この空のカテゴリを削除しますか？","categoryTree.save":"保存","categoryTree.failed":"保存できません。名前、同じ階層の重複名と移動先を確認してください。","categoryTree.picker":"商品カテゴリの完全なパス","categoryTree.uncategorized":"未分類","categoryTree.name.ja-JP":"日本語名","categoryTree.name.zh-CN":"簡体字中国語名","categoryTree.name.zh-TW":"繁体字中国語名","categoryTree.name.en-US":"英語名","categoryTree.parent":"親カテゴリ","categoryTree.root":"最上位","master.categories":"商品カテゴリ"});
+
+Object.assign(messages, {
+  "categoryTree.move": "カテゴリを移動",
+  "categoryTree.clear": "未分類に戻す",
+  "categoryTree.retry": "再試行",
+  "categoryTree.loading": "カテゴリを読み込み中",
+  "categoryTree.empty": "カテゴリがありません。最上位カテゴリを追加してください。",
+  "categoryTree.cancel": "キャンセル",
+  "categoryTree.nameRequired": "日本語名を入力してください。",
+  "categoryTree.translationHelp": "日本語名を原名とします。翻訳は確認済みのもののみ入力し、空欄では日本語名を表示します。",
+  "categoryTree.loadFailed": "カテゴリを読み込めません。再試行してください。",
+  "categoryTree.deleteBlocked": "子カテゴリ、商品または旧カテゴリとの対応があるため削除できません。先に移動または再分類してください。",
+  "categoryImport.template": "CSV テンプレートをダウンロード",
+  "categoryImport.templateHelp": "中国語の列名に対応しています。架空の例を実際の商品番号と正確な日本語パスに置き換え、階層を全角 ＞ で区切ってください。"
+});

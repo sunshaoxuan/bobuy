@@ -40,8 +40,10 @@ public class CategoryPathImportService {
         byte[] bytes;
         try { bytes=file.getBytes(); } catch(IOException e) { throw new IllegalArgumentException("Cannot read file", e); }
         List<String[]> input=parse(filename, bytes);
-        if(input.isEmpty() || input.get(0).length>2 || !"SKU".equals(input.get(0)[0]) || !"Costco breadcrumb".equals(input.get(0)[1]))
-            throw new IllegalArgumentException("Required headers are SKU and Costco breadcrumb");
+        if(input.isEmpty() || input.get(0).length != 2
+                || !Set.of("SKU", "商品编号").contains(input.get(0)[0])
+                || !Set.of("Costco breadcrumb", "官网面包屑路径", "分类路径").contains(input.get(0)[1]))
+            throw new IllegalArgumentException("Required headers: SKU / 商品编号, Costco breadcrumb / 官网面包屑路径 / 分类路径");
         String id=UUID.randomUUID().toString();
         Set<String> planned=new HashSet<>();
         int matched=0, unmatched=0;
@@ -81,6 +83,7 @@ public class CategoryPathImportService {
 
     @Transactional
     public Preview confirm(long actorId, String id) {
+        nodes.lockTree().orElseThrow(() -> new IllegalStateException("Category tree is unavailable"));
         Preview p=get(actorId,id);
         if("CONFIRMED".equals(p.status())) return p;
         if(!"PREVIEWED".equals(p.status())) throw new IllegalStateException("Import cannot be confirmed");
@@ -89,12 +92,13 @@ public class CategoryPathImportService {
             for(String name:segments(row.breadcrumb())) {
                 final String expectedParent=parent;
                 CategoryTreeNode node=nodes.findAllByParentId(parent).stream()
-                    .filter(n->name.equals(n.getName().get("ja-JP"))).findFirst().orElse(null);
+                    .filter(n->n.getSystemKey()==null && name.equals(n.getName().get("ja-JP"))).findFirst().orElse(null);
                 if(node==null) {
-                    String nodeId=UUID.nameUUIDFromBytes((String.join("＞",full)+"＞"+name).getBytes(StandardCharsets.UTF_8)).toString();
+                    String nodeId=UUID.randomUUID().toString();
                     full.add(nodeId);
-                    Map<String,String> display=Map.of("ja-JP",name,"zh-CN",name,"zh-TW",name,"en-US",name);
-                    node=nodes.save(new CategoryTreeNode(nodeId,expectedParent,display,new ArrayList<>(full),0,null));
+                    Map<String,String> display=Map.of("ja-JP",name);
+                    int order=nodes.findAllByParentId(parent).stream().filter(n->n.getSystemKey()==null).mapToInt(CategoryTreeNode::getSortOrder).max().orElse(-1)+1;
+                    node=nodes.save(new CategoryTreeNode(nodeId,expectedParent,display,new ArrayList<>(full),order,null));
                 } else full=new ArrayList<>(node.getFullPath());
                 parent=node.getId();
             }
@@ -121,7 +125,23 @@ public class CategoryPathImportService {
         if(!name.toLowerCase(Locale.ROOT).endsWith(".csv")) throw new IllegalArgumentException("Only CSV or XLSX is supported");
         return CategoryPathCsvParser.parse(new String(bytes,StandardCharsets.UTF_8));
     }
-    private static List<String[]> xlsx(byte[] bytes){List<String[]> out=new ArrayList<>();try(Workbook w=WorkbookFactory.create(new ByteArrayInputStream(bytes))){DataFormatter f=new DataFormatter();for(org.apache.poi.ss.usermodel.Row r:w.getSheetAt(0)){out.add(new String[]{f.formatCellValue(r.getCell(0)),f.formatCellValue(r.getCell(1))});}}catch(Exception e){throw new IllegalArgumentException("Invalid XLSX",e);}return out;}
+    private static List<String[]> xlsx(byte[] bytes) {
+        List<String[]> out = new ArrayList<>();
+        try (Workbook workbook = WorkbookFactory.create(new ByteArrayInputStream(bytes))) {
+            DataFormatter formatter = new DataFormatter();
+            Sheet sheet = workbook.getSheetAt(0);
+            for (int index = 0; index <= sheet.getLastRowNum(); index++) {
+                var row = sheet.getRow(index);
+                String sku = row == null ? "" : formatter.formatCellValue(row.getCell(0));
+                String path = row == null ? "" : formatter.formatCellValue(row.getCell(1));
+                boolean extra = false;
+                if (row != null) for (int column = 2; column < row.getLastCellNum(); column++)
+                    if (!formatter.formatCellValue(row.getCell(column)).isEmpty()) extra = true;
+                out.add(extra ? new String[]{sku, path, "Exactly two columns are required"} : new String[]{sku, path});
+            }
+        } catch (Exception e) { throw new IllegalArgumentException("Invalid XLSX", e); }
+        return out;
+    }
     private static String sha256(byte[] b){try{return java.util.HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(b));}catch(Exception e){throw new IllegalStateException(e);}}
     private static String csv(String s){String v=Objects.toString(s,"");return '"'+v.replace("\"","\"\"")+'"';}
 }

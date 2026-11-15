@@ -2,12 +2,20 @@ import {act,fireEvent,render,screen,waitFor} from '@testing-library/react';
 import {I18nProvider} from '../i18n';
 import CategoryPathImport from './CategoryPathImport';
 
-const api=vi.hoisted(()=>({preview:vi.fn(),confirm:vi.fn()}));
-vi.mock('../api',()=>({authenticatedFormPost:api.preview,authenticatedPost:api.confirm,authenticatedDownload:vi.fn()}));
+const api=vi.hoisted(()=>({preview:vi.fn(),confirm:vi.fn(),download:vi.fn()}));
+vi.mock('../api',()=>({authenticatedFormPost:api.preview,authenticatedPost:api.confirm,authenticatedDownload:api.download}));
 const result=(id:string)=>({importId:id,status:'PREVIEWED',productCountBefore:1,matched:1,newNodes:2,unmatched:0,rows:[{rowNumber:2,sku:id,breadcrumb:'食品・飲料＞野菜・果物',outcome:'MATCHED'}]});
 function deferred(){let resolve!:(value:ReturnType<typeof result>)=>void;let reject!:(error:Error)=>void;const promise=new Promise<ReturnType<typeof result>>((yes,no)=>{resolve=yes;reject=no;});return {promise,resolve,reject};}
 function select(container:HTMLElement,name:string){fireEvent.change(container.querySelector('input[type=file]')!,{target:{files:[new File(['SKU,Costco breadcrumb'],name,{type:'text/csv'})]}});}
 beforeEach(()=>{vi.clearAllMocks();localStorage.setItem('bobbuy_locale','en-US');});
+
+it('offers the Chinese-header template before choosing a file',async()=>{
+ render(<I18nProvider><CategoryPathImport/></I18nProvider>);
+ fireEvent.click(screen.getByRole('button',{name:'Download CSV template'}));
+ await waitFor(()=>expect(api.download).toHaveBeenCalledWith('/api/category-path-import/template.csv','category-path-template.csv'));
+ expect(screen.getByText(/Chinese headers are supported/)).toBeInTheDocument();
+ expect(api.preview).not.toHaveBeenCalled();expect(api.confirm).not.toHaveBeenCalled();
+});
 
 it.each(['resolve','reject'] as const)('ignores stale preview %s after selecting another file',async outcome=>{
  const old=deferred(),current=deferred();api.preview.mockReturnValueOnce(old.promise).mockReturnValueOnce(current.promise);

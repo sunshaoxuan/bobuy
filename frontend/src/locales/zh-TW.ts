@@ -1720,4 +1720,19 @@ Object.assign(messages,{"repair.supplier_unknown":"供應商名稱暫不可用",
 Object.assign(messages,{"repair.group": "相同建議 · {count} 件商品", "repair.accept_group": "接受本組建議", "repair.manual": "手動填寫"});
 
 Object.assign(messages,{'password_reset.forgot':'忘記密碼？','password_reset.request_title':'重設密碼','password_reset.request_help':'請輸入帳號電郵。如有符合條件的帳號，我們會傳送重設說明。','password_reset.email':'電郵地址','password_reset.email_error':'請輸入有效的電郵地址','password_reset.send':'傳送重設說明','password_reset.request_done_title':'請查看電郵','password_reset.request_done':'如果該電郵對應符合條件的帳號，重設說明將很快送達。','password_reset.back_login':'返回登入','password_reset.reset_title':'設定新密碼','password_reset.reset_help':'請使用 8–72 個字元，並符合安全密碼長度限制。','password_reset.new_password':'新密碼','password_reset.confirm_password':'確認新密碼','password_reset.password_error':'請輸入 8–72 個字元且不超過安全密碼長度限制','password_reset.confirm_error':'請再次輸入相同的密碼','password_reset.reset_action':'儲存新密碼','password_reset.invalid_title':'此連結已不可用','password_reset.invalid':'連結可能無效、已過期或已使用。請申請新連結後繼續。','password_reset.new_link':'申請新連結','password_reset.complete_title':'密碼已更新','password_reset.complete':'密碼已成功修改。請使用新密碼重新登入。','password_reset.sign_in':'重新登入','password_reset.rate':'嘗試次數過多，請稍後再試。','password_reset.network':'暫時無法連線，請檢查網絡後重試。','password_reset.retry':'重試'});
-Object.assign(messages,{"categoryTree.title":"分類樹管理","categoryTree.help":"使用明確按鈕管理層級。改名或移動後商品會繼續跟隨；含子分類或商品的分類不能刪除。","categoryTree.addRoot":"新增頂層分類","categoryTree.addChild":"新增子分類","categoryTree.add":"新增分類","categoryTree.rename":"分類改名","categoryTree.moveUp":"上移","categoryTree.moveDown":"下移","categoryTree.delete":"刪除分類","categoryTree.deleteConfirm":"刪除這個空分類？","categoryTree.save":"儲存","categoryTree.failed":"無法修改分類。請先移走其中的商品和子分類。","categoryTree.picker":"商品分類完整路徑","categoryTree.uncategorized":"未分類","categoryTree.name.ja-JP":"日文名稱","categoryTree.name.zh-CN":"簡體中文名稱","categoryTree.name.zh-TW":"繁體中文名稱","categoryTree.name.en-US":"英文名稱","categoryTree.parent":"上層分類","categoryTree.root":"頂層","master.categories":"商品分類"});
+Object.assign(messages,{"categoryTree.title":"分類樹管理","categoryTree.help":"使用明確按鈕管理層級。改名或移動後商品會繼續跟隨；含子分類或商品的分類不能刪除。","categoryTree.addRoot":"新增頂層分類","categoryTree.addChild":"新增子分類","categoryTree.add":"新增分類","categoryTree.rename":"分類改名","categoryTree.moveUp":"上移","categoryTree.moveDown":"下移","categoryTree.delete":"刪除分類","categoryTree.deleteConfirm":"刪除這個空分類？","categoryTree.save":"儲存","categoryTree.failed":"儲存失敗，請檢查名稱、同層重名及目標位置後重試。","categoryTree.picker":"商品分類完整路徑","categoryTree.uncategorized":"未分類","categoryTree.name.ja-JP":"日文名稱","categoryTree.name.zh-CN":"簡體中文名稱","categoryTree.name.zh-TW":"繁體中文名稱","categoryTree.name.en-US":"英文名稱","categoryTree.parent":"上層分類","categoryTree.root":"頂層","master.categories":"商品分類"});
+
+Object.assign(messages, {
+  "categoryTree.move": "移動分類",
+  "categoryTree.clear": "清空為未分類",
+  "categoryTree.retry": "重試",
+  "categoryTree.loading": "正在載入分類",
+  "categoryTree.empty": "暫無分類，請先新增頂層分類。",
+  "categoryTree.cancel": "取消",
+  "categoryTree.nameRequired": "請填寫日文名稱。",
+  "categoryTree.translationHelp": "日文名稱為權威原名。選填譯名須經審核；留空時顯示日文原名。",
+  "categoryTree.loadFailed": "無法載入分類，請重試重新整理分類樹。",
+  "categoryTree.deleteBlocked": "含子分類、商品或舊分類對照時無法刪除。請先移動或重新分類。",
+  "categoryImport.template": "下載 CSV 範本",
+  "categoryImport.templateHelp": "支援中文欄名。請將合成範例替換為實際商品編號及精確日文路徑，層級使用全形 ＞ 分隔。"
+});

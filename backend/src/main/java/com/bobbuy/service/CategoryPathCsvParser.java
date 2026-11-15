@@ -49,6 +49,8 @@ final class CategoryPathCsvParser {
         if(invalid) {
             // The full raw logical record is retained in the unmatched breadcrumb column.
             rows.add(new String[]{cells.get(0),raw,"Malformed CSV quoting; correct the original record"});
-        } else rows.add(new String[]{cells.get(0),cells.size()>1?cells.get(1):""});
+        } else if(cells.size()!=2) {
+            rows.add(new String[]{cells.get(0),raw,"Exactly two columns are required"});
+        } else rows.add(new String[]{cells.get(0),cells.get(1)});
     }
 }

@@ -1,1 +1,28 @@
-.category-tree-management{max-width:960px;margin:0 auto}.category-tree-management>header{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:24px}.category-tree-management header p{color:var(--zen-muted)}.category-tree-management .ant-tree{background:transparent}.category-tree-row{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;border-bottom:var(--zen-line)}.category-tree-actions{display:flex;gap:4px}.category-tree-actions .ant-btn{width:36px;height:36px;min-width:36px;min-height:36px;border-radius:50%}.category-tree-actions .ant-btn:focus-visible,.category-tree-management>header .ant-btn:focus-visible{outline:2px solid #795908;outline-offset:2px}.ant-modal-body>label{display:block;margin:12px 0}.ant-modal-body>label .ant-input{margin-top:6px;min-height:44px}@media(max-width:767px){.category-tree-management>header{flex-direction:column}.category-tree-management>header .ant-btn{width:100%;min-height:44px}.category-tree-row{align-items:flex-start;flex-direction:column;padding:8px 0}.category-tree-actions{width:100%;justify-content:flex-end}.category-tree-actions .ant-btn{width:44px;height:44px;min-width:44px;min-height:44px}}
+.category-tree-management { max-width: 1040px; margin: 0 auto; min-width: 0; }
+.category-tree-management > header { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+.category-tree-management header p, .category-tree-label p, .category-tree-blocked { color: var(--zen-muted); overflow-wrap: anywhere; }
+.category-tree-branch { list-style: none; padding: 0; margin: 0; }
+.category-tree-branch .category-tree-branch { padding-left: 16px; border-left: var(--zen-line); }
+.category-tree-row { padding: 16px 0; border-bottom: var(--zen-line); min-width: 0; }
+.category-tree-label strong { font-size: 16px; overflow-wrap: anywhere; }
+.category-tree-label p, .category-tree-blocked { margin: 8px 0; font-size: 13px; }
+.category-tree-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.category-tree-management .ant-btn, .category-tree-dialog .ant-btn { min-height: 44px; height: auto; white-space: normal; padding: 8px 14px; }
+.category-tree-management .ant-btn:focus-visible, .category-tree-dialog .ant-btn:focus-visible { outline: 2px solid #795908; outline-offset: 2px; }
+.category-tree-dialog label { display: block; margin: 12px 0; }
+.category-tree-dialog .ant-input, .category-tree-dialog .ant-select { margin-top: 6px; min-height: 44px; width: 100%; }
+.category-tree-dialog p { overflow-wrap: anywhere; }
+.category-tree-dialog .ant-modal-close { width: 44px; height: 44px; }
+.category-tree-management .ant-btn-primary, .category-tree-dialog .ant-btn-primary { background: #252529; color: #fff; }
+.category-tree-management .ant-btn-primary:not(:disabled):hover, .category-tree-dialog .ant-btn-primary:not(:disabled):hover { background: #45454c; color: #fff; }
+.category-tree-management .ant-btn-primary:disabled, .category-tree-dialog .ant-btn-primary:disabled { background: #eee; color: #777; }
+.category-tree-dialog .ant-input:focus { border-color: #795908; box-shadow: none; outline: 2px solid #795908; outline-offset: 2px; }
+.category-tree-management .ant-btn:disabled { color: #666; background: #eee; }
+.category-tree-actions .ant-btn > span { transform: translateY(-.5px); }
+@media (max-width: 767px) {
+  .category-tree-management > header { flex-direction: column; }
+  .category-tree-management > header .ant-btn { width: 100%; }
+  .category-tree-branch .category-tree-branch { padding-left: 6px; }
+  .category-tree-actions .ant-btn { flex: 1 1 100px; }
+  .category-tree-dialog .ant-modal-close { width: 44px; height: 44px; }
+}

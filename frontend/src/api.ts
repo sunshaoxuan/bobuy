@@ -1151,7 +1151,7 @@ export const productCatalogApi={
  save:(rows:CatalogInput[])=>putJson<{value:CatalogInput;canonical:boolean;sourceItemIds:number[];recoveryId?:string}[],object>('/api/merchant/product-catalog',{rows,reviewed:true}),
  upload:async(id:string,file:File,sourceUrl:string,label:string)=>{const prepared=await prepareImageUpload(file);const form=new FormData();form.set('file',prepared);form.set('sourceUrl',sourceUrl);form.set('label',label);form.set('verified','true');const response=await authorizedFetch('/api/merchant/product-catalog/'+encodeURIComponent(id)+'/images',{method:'POST',body:form});if(!response.ok)throw new Error(await parseErrorMessage(response));return parseSuccessPayload<CatalogMedia>(response);}
 };
-export type CategoryTreeNode={id:string;parentId:string|null;name:Record<string,string>;fullPath:string[];sortOrder:number;productCount:number};
+export type CategoryTreeNode={id:string;parentId:string|null;name:Record<string,string>;fullPath:string[];sortOrder:number;productCount:number;deleteBlocked?:boolean};
 export const categoryTreeApi={
  list:()=>storeGet<CategoryTreeNode[]>('/api/category-tree'),
  create:(value:{parentId:string|null;name:Record<string,string>;sortOrder?:number})=>postJson<CategoryTreeNode,object>('/api/category-tree',value),

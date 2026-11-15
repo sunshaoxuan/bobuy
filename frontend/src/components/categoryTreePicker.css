@@ -1,0 +1,11 @@
+.category-tree-picker-field { min-width: 0; width: 100%; }
+.category-tree-picker-field .category-tree-picker { width: 100%; min-height: 44px; }
+.category-tree-current-path { overflow-wrap: anywhere; margin: 8px 0; color: var(--zen-muted); }
+.category-tree-picker-field .ant-btn { min-height: 44px; white-space: normal; height: auto; }
+.category-tree-picker-popup .ant-select-tree-node-content-wrapper { white-space: normal; overflow-wrap: anywhere; min-height: 44px; padding: 10px 8px; }
+.category-tree-picker-popup .ant-select-tree-switcher { min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+.category-tree-picker-popup .ant-select-tree-indent-unit { width: 12px; }
+.category-tree-picker-field .ant-btn:focus-visible { outline: 2px solid #795908; outline-offset: 2px; }
+.catalog-identity-grid > label:has(.category-tree-picker-field) { grid-column: 1 / -1; }
+.category-tree-picker-field .ant-select-focused .ant-select-selector { border-color: #795908 !important; box-shadow: 0 0 0 2px rgba(121, 89, 8, .18) !important; }
+.category-tree-picker-popup .ant-select-tree-node-selected { background: #f0f0ed !important; }

@@ -27,6 +27,7 @@ class CategoryPathImportServiceTest {
         jdbc.execute("create table bb_category_path_import(id varchar primary key,actor_id bigint,file_name varchar,file_sha256 varchar,status varchar,product_count_before bigint,product_count_after bigint,matched_count int,new_node_count int,unmatched_count int,created_at timestamp default current_timestamp,confirmed_at timestamp)");
         jdbc.execute("create table bb_category_path_import_row(import_id varchar,row_number int,sku varchar,breadcrumb varchar,product_id varchar,outcome varchar,reason varchar)");
         service=new CategoryPathImportService(jdbc,products,nodes,paths);
+        when(nodes.lockTree()).thenReturn(Optional.of(new CategoryTreeNode("system-uncategorized",null,Map.of("ja-JP","未分類"),List.of("system-uncategorized"),Integer.MAX_VALUE,"UNCATEGORIZED")));
         Product product=mock(Product.class);when(product.getId()).thenReturn("product-1");
         when(products.findAllByItemNumber("SKU-1")).thenReturn(List.of(product));
         when(products.findAllByItemNumber("ALIAS-1")).thenReturn(List.of(product));
@@ -37,6 +38,34 @@ class CategoryPathImportServiceTest {
     }
     private CategoryPathImportService.Preview preview(String records) {
         return service.preview(7,true,new MockMultipartFile("file","input.csv","text/csv",("SKU,Costco breadcrumb\r\n"+records).getBytes(StandardCharsets.UTF_8)));
+    }
+
+    @Test void acceptsAllEnglishAndChineseHeaderCombinationsInCsvAndXlsx() throws Exception {
+        for (String sku : List.of("SKU", "商品编号")) for (String path : List.of("Costco breadcrumb", "官网面包屑路径", "分类路径")) {
+            var csv = service.preview(7,true,new MockMultipartFile("file","input.csv","text/csv",("\uFEFF"+sku+","+path+"\nSKU-1,食品＞水\n").getBytes(StandardCharsets.UTF_8)));
+            assertThat(csv.matched()).isEqualTo(1);
+            try (var book = new XSSFWorkbook(); var bytes = new ByteArrayOutputStream()) {
+                var sheet=book.createSheet(); var header=sheet.createRow(0); header.createCell(0).setCellValue(sku); header.createCell(1).setCellValue(path);
+                var row=sheet.createRow(1); row.createCell(0).setCellValue("SKU-1"); row.createCell(1).setCellValue("食品＞水"); book.write(bytes);
+                assertThat(service.preview(7,true,new MockMultipartFile("file","input.xlsx","application/octet-stream",bytes.toByteArray())).matched()).isEqualTo(1);
+            }
+        }
+    }
+
+    @Test void rejectsHeadersOffFirstRowAndReportsExtraColumnsWithoutDroppingThem() {
+        assertThatThrownBy(() -> service.preview(7,true,new MockMultipartFile("file","input.csv","text/csv","\n商品编号,分类路径\nSKU-1,食品＞水".getBytes(StandardCharsets.UTF_8)))).isInstanceOf(IllegalArgumentException.class);
+        var p=preview("SKU-1,食品＞水,extra\n");
+        assertThat(p.unmatched()).isEqualTo(1); assertThat(p.rows().get(0).breadcrumb()).contains("extra");
+    }
+
+    @Test void downloadedTemplateUsesChineseHeadersAndOnePreservedSyntheticExample() {
+        var response = new com.bobbuy.api.CategoryPathImportController(service).template();
+        var rows=CategoryPathImportService.parse("template.csv",response.getBody());
+        assertThat(rows).hasSize(2); assertThat(rows.get(0)).containsExactly("商品编号","官网面包屑路径");
+        assertThat(rows.get(1)).containsExactly("FIXTURE-0001","食品・飲料＞野菜・果物");
+        assertThat(response.getHeaders().getFirst("Content-Disposition")).contains("attachment");
+        var p=service.preview(7,true,new MockMultipartFile("file","template.csv","text/csv",response.getBody()));
+        assertThat(p.unmatched()).isEqualTo(1); assertThat(p.rows().get(0).sku()).isEqualTo("FIXTURE-0001");
     }
 
     @Test void rejectsEveryConflictingAssignmentByProductIdBeforePlanningOrWriting() {
