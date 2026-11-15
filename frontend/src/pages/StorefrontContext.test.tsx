@@ -60,6 +60,11 @@ it('shows the bookable spinner only while its read is pending, independently of 
  await act(async()=>finish([]));await waitFor(()=>expect(view.container.querySelector('.ant-spin')).toBeNull());
  expect(view.container.querySelector('.browse-trip-page')).toBeNull();expect(view.container.querySelector('.ant-empty')).toBeNull();
 });
+it.each(['','?node=7&query=milk&source=email','?query=milk%20tea&source=email&source=share'])('preserves the full home query string when redirecting to recommendations: %s',async search=>{
+ mount('/'+search);
+ await screen.findByRole('heading',{name:'Recommendations fixture'});
+ expect(screen.getByTestId('route').textContent).toBe('/recommendations'+search);
+});
 it.each(['zh-CN','zh-TW','en-US','ja-JP'] as const)('lands / on the hidden newsletter route and keeps the sole account entry in the header in %s',async locale=>{
  const features=storefrontFeatures as {trips:boolean;dealsBulletin:boolean};features.dealsBulletin=false;
  try {localStorage.setItem('bobbuy_locale',locale);mocks.trips.mockImplementation(()=>new Promise(()=>{}));mocks.activeTrips.mockImplementation(()=>new Promise(()=>{}));const view=mount('/?node=7');await screen.findByRole('heading',{name:'Recommendations fixture'});expect(screen.getByTestId('route')).toHaveTextContent('/recommendations?node=7');const account=screen.getByRole('link',{name:translate(locale,'store.account')});expect(account).toHaveAttribute('href','/account?node=7');expect(view.container.querySelector('.store-header-actions')?.contains(account)).toBe(true);expect(view.container.querySelector('.browse-mobile-shortcuts')?.contains(account)).toBe(false);}
