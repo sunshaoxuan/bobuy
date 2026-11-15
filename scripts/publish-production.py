@@ -14,6 +14,17 @@ def run(*args, **kwargs):
     return subprocess.run(args, check=True, **kwargs)
 
 
+def refuse_persisted_overlay():
+    overlay = Path('/opt/bobuy/.cd/runtime-env-last')
+    if overlay.is_symlink() or overlay.exists():
+        raise RuntimeError(
+            'The manual publisher does not use the encrypted overlay and refuses '
+            'production changes and recovery while .cd/runtime-env-last is present. '
+            'Use CD, or set PROD_ENCRYPTED_ENV_ENABLED to false and complete a '
+            'successful CD (which deletes the persisted overlay) before using '
+            'the manual publisher.')
+
+
 def validate_restored_database(expected, actual):
     if not expected or expected != actual:
         raise RuntimeError('Restored database differs from the stopped-writer snapshot')
@@ -111,6 +122,7 @@ def cleanup_added_tables_sql(snapshot):
 
 
 def restore_database(compose, dump, snapshot):
+    refuse_persisted_overlay()
     added_table_cleanup = cleanup_added_tables_sql(snapshot)
     # All application writers stop before replacing the migrated database.
     run(*compose, 'stop', 'core-service', 'ai-service', 'im-service', 'auth-service', 'gateway-service')
@@ -159,6 +171,7 @@ def main(argv=None):
     if not re.fullmatch(r'[0-9]{8}\.[1-9][0-9]*', args.release):
         raise ValueError('Invalid release tag')
     root = Path('/opt/bobuy')
+    refuse_persisted_overlay()
     stage = root / 'releases' / args.release
     if args.mode == 'reference-data':
         if args.maintenance_reason or not args.plan or not args.plan_sha256:

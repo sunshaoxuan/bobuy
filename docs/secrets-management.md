@@ -144,3 +144,9 @@ gh variable set PROD_ENCRYPTED_ENV_ENABLED --body false
 
 下一次 CD 的候选部署只用 `/etc/bobuy.env`，成功后删除持久覆盖副本；若该次部署失败，
 回滚仍使用上次成功部署的覆盖副本。不要为回退修改现有环境文件。
+
+手动发布器 `scripts/publish-production.py` 仅使用 `/etc/bobuy.env`。
+只要 `/opt/bobuy/.cd/runtime-env-last` 存在或为符号链接（包括失效链接），
+其 maintenance、reference-data 模式及数据库恢复入口均在变更前拒绝执行，且不读取覆盖文件内容。
+此时请使用 CD，或将 `PROD_ENCRYPTED_ENV_ENABLED` 设为 `false` 并完成一次成功的 CD，
+由 CD 删除持久覆盖文件后再使用手动发布器。
