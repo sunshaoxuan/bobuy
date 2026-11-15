@@ -4,7 +4,7 @@ import{I18nProvider}from'../i18n';
 import{cartStorageKey,commitDraft,emptyCart,readDraft}from'../cart';
 import{installCartLocks}from'../test/cartLock';
 import Storefront from'./Storefront';
-const mocks=vi.hoisted(()=>({checkout:vi.fn(),profile:vi.fn(),saveProfile:vi.fn(),productSales:vi.fn(),trips:vi.fn(),activeTrips:vi.fn(),role:{user:{id:7,name:'A',email:'a@example.com',roles:['CUSTOMER']},isCustomer:true,isAuthenticated:true,loading:false,logout:vi.fn()}}));
+const mocks=vi.hoisted(()=>({checkout:vi.fn(),profile:vi.fn(),saveProfile:vi.fn(),productSales:vi.fn(),trips:vi.fn(),activeTrips:vi.fn(),role:{user:{id:7,name:'A',email:'a@example.com',emailVerified:false,roles:['CUSTOMER']},isCustomer:true,isAuthenticated:true,loading:false,logout:vi.fn()}}));
 vi.mock('../api',()=>({api:{customerTrips:vi.fn()},recommendationApi:{nodes:vi.fn().mockResolvedValue([])},storefrontApi:mocks}));
 vi.mock('../context/UserRoleContext',()=>({useUserRole:()=>mocks.role}));
 // Same narrow Select adapter as StorefrontContext: JSDOM cannot parse AntD's selector.
@@ -15,7 +15,7 @@ const product={id:'p',merchantId:1,name:{'en-US':'Product'},description:{},brand
 function seed(id=7,qty=2){const prior=readDraft('user:'+id);commitDraft('user:'+id,prior.revision,{...emptyCart(),tripId:11,items:{p:qty},quotes:{p:{price:12,currency:'JPY',revision:1,token:'q1'}}});}
 function tree(){return<I18nProvider><MemoryRouter initialEntries={['/checkout']}><Storefront/></MemoryRouter></I18nProvider>;}
 const submit=()=>screen.getByRole('button',{name:/^Submit order/});
-beforeEach(()=>{vi.resetAllMocks();localStorage.clear();installCartLocks();localStorage.setItem('bobbuy_locale','en-US');mocks.role.user={id:7,name:'A',email:'a@example.com',roles:['CUSTOMER']};mocks.role.loading=false;mocks.role.isAuthenticated=true;
+beforeEach(()=>{vi.resetAllMocks();localStorage.clear();installCartLocks();localStorage.setItem('bobbuy_locale','en-US');mocks.role.user={id:7,name:'A',email:'a@example.com',emailVerified:false,roles:['CUSTOMER']};mocks.role.loading=false;mocks.role.isAuthenticated=true;
  mocks.trips.mockResolvedValue([{id:11,merchantId:1,merchantName:'Shop',deliveryArea:'Area',deliveryDate:'2026-11-10'}]);mocks.activeTrips.mockResolvedValue([]);mocks.productSales.mockResolvedValue([product]);mocks.profile.mockImplementation(async()=>({id:mocks.role.user.id,defaultAddress:address}));mocks.saveProfile.mockImplementation(async(body)=>({id:mocks.role.user.id,defaultAddress:body.defaultAddress}));seed();
 });
 it('synchronously blocks double submit and retries an uncertain result with the identical key and payload',async()=>{
@@ -32,7 +32,7 @@ it('does not clear edits added while an earlier selection is submitting',async()
 });
 it('ignores A late success after switch to B and leaves both drafts private and intact',async()=>{
  let finish!:(value:unknown)=>void;mocks.checkout.mockImplementation(()=>new Promise(ok=>{finish=ok;}));seed(8,5);const view=render(tree());await waitFor(()=>expect(submit()).toBeEnabled());fireEvent.click(submit());await waitFor(()=>expect(mocks.checkout).toHaveBeenCalledTimes(1));
- mocks.role.user={id:8,name:'B',email:'b@example.com',roles:['CUSTOMER']};view.rerender(tree());await waitFor(()=>expect(screen.getByLabelText('Quantity for Product')).toHaveTextContent('5'));
+ mocks.role.user={id:8,name:'B',email:'b@example.com',emailVerified:false,roles:['CUSTOMER']};view.rerender(tree());await waitFor(()=>expect(screen.getByLabelText('Quantity for Product')).toHaveTextContent('5'));
  await act(async()=>finish({orderId:99,total:24,currency:'JPY'}));expect(screen.queryByText(/Order #99/)).not.toBeInTheDocument();expect(readDraft('user:7').cart.items.p).toBe(2);expect(readDraft('user:8').cart.items.p).toBe(5);
 });
 it('rejects a cross-tab draft change before sending and offers explicit recovery',async()=>{
@@ -61,4 +61,8 @@ it('does not accept a response after token rotation even before the auth rerende
 });
 it.each([['en-US','Keep account cart'],['zh-CN','保留账号购物车'],['zh-TW','保留帳號購物車'],['ja-JP','アカウントのカートを残す']])('offers the explicit guest/account choice in %s without an automatic merge',async(locale,keep)=>{
  localStorage.setItem('bobbuy_locale',locale);commitDraft('guest','',{...readDraft('user:7').cart,items:{p:3}});render(tree());const choice=await screen.findByRole('button',{name:keep});expect(readDraft('user:7').cart.items.p).toBe(2);fireEvent.click(choice);await waitFor(()=>expect(screen.queryByRole('button',{name:keep})).not.toBeInTheDocument());expect(readDraft('user:7').cart.items.p).toBe(2);expect(readDraft('guest').cart.items.p).toBe(3);expect(mocks.checkout).not.toHaveBeenCalled();
+});
+it('feature flag replaces the legacy hint and blocks an unverified checkout without changing the cart',async()=>{
+ vi.stubEnv('VITE_CHECKOUT_EMAIL_VERIFICATION_ENABLED','true');
+ try{render(tree());await screen.findByText('Verify your email to submit this order');expect(screen.queryByText('You can submit an order for approval before verifying your email.')).not.toBeInTheDocument();expect(submit()).toBeDisabled();fireEvent.click(submit());expect(mocks.checkout).not.toHaveBeenCalled();expect(readDraft('user:7').cart.items.p).toBe(2);}finally{vi.unstubAllEnvs();}
 });

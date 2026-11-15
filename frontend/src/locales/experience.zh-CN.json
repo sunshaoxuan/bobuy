@@ -138,5 +138,19 @@
   "orders.empty": "暂无订单",
   "orders.table.items": "商品",
   "stock.master.publishing": "发布中...",
-  "stock.master.publish_failed": "发布失败"
+  "stock.master.publish_failed": "发布失败",
+  "checkout_verification.title": "验证邮箱后提交订单",
+  "checkout_verification.reason": "购物车已保存。请在提交订单前输入邮件中的验证码。",
+  "checkout_verification.sent_to": "验证邮件将发送至：{email}",
+  "checkout_verification.send": "发送验证码",
+  "checkout_verification.sent": "新验证码已发送，请检查收件箱和垃圾邮件。",
+  "checkout_verification.verified": "邮箱验证成功，可以继续提交当前购物车。",
+  "checkout_verification.change_email": "修改邮箱",
+  "checkout_verification.cooldown": "为保护账户安全，{count} 秒后可再次发送。",
+  "checkout_verification.failed": "暂时无法发送或验证验证码。",
+  "checkout_verification.limited": "操作次数过多，请稍后再试。",
+  "checkout_verification.expired": "验证码已过期，请发送新验证码后重试。",
+  "checkout_verification.invalid": "验证码不正确，请检查或重新发送。",
+  "checkout_verification.offline": "网络似乎已断开，请恢复连接后重试。",
+  "checkout_verification.recovery": "购物车和已输入内容均已保留，可重试或修改邮箱。"
 }
