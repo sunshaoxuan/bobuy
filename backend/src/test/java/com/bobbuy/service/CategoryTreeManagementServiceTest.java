@@ -37,6 +37,16 @@ class CategoryTreeManagementServiceTest {
         when(paths.countByCategoryNodeId(anyString())).thenAnswer(c -> assigned.values().stream().filter(p -> p.getCategoryNodeId().equals(c.getArgument(0))).count());
         service = new CategoryTreeManagementService(nodes, paths, products, mappings, new ProductCategoryPathResolver(paths, mappings, legacy), jdbc);
     }
+    @Test void shoppingMappingProtectsEmptySourceAndRejectsOverlappingMoves() {
+        var first=add(null,"First");var second=add(null,"Second");
+        var shopping=mock(ShoppingCategoryService.class);service.setShopping(shopping);
+        when(shopping.referencesSource(first.id())).thenReturn(true);
+        assertThat(service.list()).filteredOn(n->n.id().equals(first.id())).allMatch(CategoryTreeManagementService.Node::deleteBlocked);
+        assertThatThrownBy(()->service.delete(first.id())).isInstanceOf(com.bobbuy.api.response.ApiException.class);
+        verify(nodes,never()).delete(any());
+        doThrow(new IllegalArgumentException("overlap")).when(shopping).validateSources(any());
+        assertThatThrownBy(()->service.update(first.id(),new CategoryTreeManagementService.Edit(second.id(),null,null))).isInstanceOf(com.bobbuy.api.response.ApiException.class);
+    }
     @AfterEach void cleanup() { SecurityContextHolder.clearContext(); }
     private CategoryTreeManagementService.Node add(String parent, String name) {
         return service.create(new CategoryTreeManagementService.Edit(parent, Map.of("ja-JP", name), null));

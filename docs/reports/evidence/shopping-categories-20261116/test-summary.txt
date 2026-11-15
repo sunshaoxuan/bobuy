@@ -1,0 +1,32 @@
+Targeted verification, 2026-11-16 JST
+No production data writes, no provider/auth changes, no Docker stack.
+
+-------------------------------------------------------------------------------
+Test set: com.bobbuy.service.ShoppingCategoryMapTest
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.803 s -- in com.bobbuy.service.ShoppingCategoryMapTest
+
+-------------------------------------------------------------------------------
+Test set: com.bobbuy.service.PublicProductBrowseServiceTest
+-------------------------------------------------------------------------------
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.995 s -- in com.bobbuy.service.PublicProductBrowseServiceTest
+
+-------------------------------------------------------------------------------
+Test set: com.bobbuy.service.PublicProductCatalogProjectionTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.028 s -- in com.bobbuy.service.PublicProductCatalogProjectionTest
+
+-------------------------------------------------------------------------------
+Test set: com.bobbuy.service.CategoryTreeManagementServiceTest
+-------------------------------------------------------------------------------
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.906 s -- in com.bobbuy.service.CategoryTreeManagementServiceTest
+
+-------------------------------------------------------------------------------
+Test set: com.bobbuy.api.PublicBrowseHttpContractTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.231 s -- in com.bobbuy.api.PublicBrowseHttpContractTest
+
+Frontend: 37 directly affected catalog/reveal/marker tests PASS; 2 new navigation boundary tests PASS. Final focused rerun: 4 PASS / 32 deliberately skipped (new 2 + changed-fixture 2).
+Typecheck PASS. i18n PASS (1869 keys); later only existing error text changed, current PR gate will validate.
+Python read-only audit: 5 PASS.
+Browser and glyph evidence: see sibling JSON files.

@@ -1,6 +1,9 @@
 import type { Dictionary } from './types';
 
 const messages: Dictionary = {
+  'shopping.directory': '全部分類',
+  'shopping.view_all': '查看全部',
+  'shopping.parent': '返回上層分類',
   'checkout_verification.title':'驗證信箱後提交訂單','checkout_verification.reason':'購物車已儲存。請在提交訂單前輸入郵件中的驗證碼。','checkout_verification.sent_to':'驗證郵件將寄至：{email}','checkout_verification.send':'傳送驗證碼','checkout_verification.sent':'新驗證碼已傳送，請檢查收件匣和垃圾郵件。','checkout_verification.verified':'信箱驗證成功，可以繼續提交目前的購物車。','checkout_verification.change_email':'修改信箱','checkout_verification.cooldown':'為保護帳戶安全，{count} 秒後可再次傳送。','checkout_verification.failed':'暫時無法傳送或驗證驗證碼。','checkout_verification.limited':'操作次數過多，請稍後再試。','checkout_verification.expired':'驗證碼已過期，請傳送新驗證碼後重試。','checkout_verification.invalid':'驗證碼不正確，請檢查或重新傳送。','checkout_verification.offline':'網路似乎已中斷，請恢復連線後重試。','checkout_verification.recovery':'購物車和已輸入內容均已保留，可重試或修改信箱。',
 
   'pricing.documents':'調價單','pricing.reason_required':'請填寫明確的調價或撤銷原因；來源待複核單據需補充原因後儲存。','pricing.promotion_reduction':'促銷價必須低於同渠道、幣別和單位的常規價。','pricing.use_documents':'請在調價單中維護價格和優惠期間。',
@@ -1732,7 +1735,7 @@ Object.assign(messages, {
   "categoryTree.nameRequired": "請填寫日文名稱。",
   "categoryTree.translationHelp": "日文名稱為權威原名。選填譯名須經審核；留空時顯示日文原名。",
   "categoryTree.loadFailed": "無法載入分類，請重試重新整理分類樹。",
-  "categoryTree.deleteBlocked": "含子分類、商品或舊分類對照時無法刪除。請先移動或重新分類。",
+  "categoryTree.deleteBlocked": "含子分類、商品、舊分類對照或購物分類對應時無法刪除。請先移動商品或調整對應。",
   "categoryImport.template": "下載 CSV 範本",
   "categoryImport.flag": "備註 / 標記",
   "categoryImport.templateHelp": "支援中文表頭：SKU、costco分类路径、路径来源；可附加備註 / 標記欄（表頭使用 备注 / 标记 / Note / Flag）。下載檔僅含合成範例，請替換為營運清單。三種來源均按提供路徑匯入。"

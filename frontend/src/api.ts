@@ -1620,8 +1620,8 @@ export type SelfProfilePatch = {name?:string;email?:string;phone?:string|null;de
 
 export type BrowseQuery={sort?:string;page?:number;merchantId?:number;query?:string;category?:string;locale?:string;marked?:boolean;markedFirst?:boolean;revision?:string;issueId?:number;period?:'current'|'history'|'all'};
 function browseQuery(query:BrowseQuery){return new URLSearchParams(Object.entries(query).filter(([,value])=>value!==undefined).map(([key,value])=>[key,String(value)]));}
-export type BrowseFacet=RecommendationLabel&{count:number};
-export type BrowsePage<T>={items:T[];page:number;size:number;scopeTotal:number;matchedTotal:number;hasNext:boolean;revision:string;datasetRevision:string;categories:BrowseFacet[];unclassified:number;markedScopeTotal?:number;japanDay?:string;productOccurrences?:number;serviceCards?:number};
+export type BrowseFacet=RecommendationLabel&{count:number;parentId?:string|null;icon?:string|null};
+export type BrowsePage<T>={items:T[];page:number;size:number;scopeTotal:number;matchedTotal:number;hasNext:boolean;revision:string;datasetRevision:string;categories:BrowseFacet[];unclassified:number;shelves?:{category:string;items:T[];total:number}[];selectedCategory?:string;markedScopeTotal?:number;japanDay?:string;productOccurrences?:number;serviceCards?:number};
 export type CardReference={priceChange?:PriceChangeView|null;originalPrice?:number|null;discountAmount?:number|null;amount:number;currency:string;unit?:string|null;postId:number;itemId:number;state:'ACTIVE'|'EXPIRED'|'FUTURE'|'UNKNOWN'};
 export type ProductBrowseCard=Omit<PublicCatalogEntry,'gallery'|'description'|'referenceOffers'>&{image:RecommendationPicture|null;markers:ProductMarkerDefinition[];reference?:CardReference|null};
 export type RecommendationBrowseItem=Omit<RecommendationItem,'imageUrl'|'gallery'|'description'|'sourceFacts'>&{image:RecommendationPicture|null;rating?:number|null};

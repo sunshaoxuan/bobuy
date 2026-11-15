@@ -2,6 +2,9 @@ import type { Dictionary } from './types';
 import experience from './experience.ja-JP.json';
 
 const messages: Dictionary = {
+  'shopping.directory': 'すべてのカテゴリ',
+  'shopping.view_all': 'すべて見る',
+  'shopping.parent': '上位カテゴリに戻る',
   'pricing.documents':'価格改定伝票','pricing.reason_required':'改定または取消の理由を入力してください。要確認の出典伝票は理由を補って保存してください。','pricing.promotion_reduction':'販促価格は同一チャネル・通貨・単位の通常価格より低い必要があります。','pricing.use_documents':'価格と割引期間は価格改定伝票で管理してください。',
   'stock.msg.update_failed':'保存できませんでした。変更前の値に戻しました。',
   'geo.title':'国・地域マスター','geo.hint':'国・地域、都道府県、市区町村の基礎データを検索・選択できます。','geo.country':'国・地域','geo.prefecture':'都道府県','geo.city':'市区町村','geo.choose_prefecture':'都道府県を選択','geo.choose_city':'市区町村を選択','geo.selection':'選択中の地域','geo.country_only':'この国・地域は現在、国レベルのデータのみ登録されています。','geo.prefectures':'都道府県一覧','geo.cities':'市区町村一覧','geo.code':'コード','geo.name':'名称','geo.reading':'ふりがな','geo.source':'国・地域は ISO 3166-1 コードを使用。日本は47都道府県と全市区町村を収録し、政令指定都市および行政区を含みます。資料確認日：2026-11-12。',
@@ -1593,7 +1596,7 @@ Object.assign(messages, {
   "categoryTree.nameRequired": "日本語名を入力してください。",
   "categoryTree.translationHelp": "日本語名を原名とします。翻訳は確認済みのもののみ入力し、空欄では日本語名を表示します。",
   "categoryTree.loadFailed": "カテゴリを読み込めません。再試行してください。",
-  "categoryTree.deleteBlocked": "子カテゴリ、商品または旧カテゴリとの対応があるため削除できません。先に移動または再分類してください。",
+  "categoryTree.deleteBlocked": "子カテゴリ、商品、旧カテゴリ対応、ショッピングカテゴリ対応がある場合は削除できません。先に商品を移動するか対応を修正してください。",
   "categoryImport.template": "CSV テンプレートをダウンロード",
   "categoryImport.flag": "備考 / フラグ",
   "categoryImport.templateHelp": "中国語の列名に対応：SKU、costco分类路径、路径来源。備考列は 备注 / 标记 / Note / Flag を使用できます。テンプレートは架空の例です。運用データに置き換えてください。3 種類の出典とも指定経路を取り込みます。"

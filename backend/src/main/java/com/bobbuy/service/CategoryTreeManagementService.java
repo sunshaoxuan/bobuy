@@ -29,6 +29,9 @@ public class CategoryTreeManagementService {
     private final CategoryLegacyMappingRepository mappings;
     private final ProductCategoryPathResolver resolver;
     private final JdbcTemplate jdbc;
+    private ShoppingCategoryService shopping;
+    @org.springframework.beans.factory.annotation.Autowired
+    public void setShopping(ShoppingCategoryService shopping) { this.shopping = shopping; }
 
     public CategoryTreeManagementService(CategoryTreeNodeRepository nodes, ProductPrimaryCategoryPathRepository paths,
             ProductRepository products, CategoryLegacyMappingRepository mappings, ProductCategoryPathResolver resolver,
@@ -79,7 +82,7 @@ public class CategoryTreeManagementService {
     }
 
     private boolean blocked(CategoryTreeNode node) {
-        return node.getSystemKey() != null || nodes.existsByParentId(node.getId())
+        return node.getSystemKey() != null || shopping != null && shopping.referencesSource(node.getId()) || nodes.existsByParentId(node.getId())
                 || paths.countByCategoryNodeId(node.getId()) > 0 || mappings.existsByCategoryNodeId(node.getId());
     }
 
@@ -171,6 +174,10 @@ public class CategoryTreeManagementService {
             node.setParentId(edit.parentId()); node.setFullPath(prefix);
         }
         node.setName(name); nodes.save(node);
+        if (moved && shopping != null) {
+            try { shopping.validateSources(nodes.findAll()); }
+            catch (IllegalArgumentException invalidMapping) { throw new ApiException(ErrorCode.INVALID_REQUEST, "error.category.shopping_mapping"); }
+        }
         if (edit.sortOrder() != null) place(node, edit.parentId(), edit.sortOrder());
         return view(node);
     }

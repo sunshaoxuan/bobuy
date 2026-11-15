@@ -1,0 +1,23 @@
+{
+  "environment": "Vite 5173, system Chromium headless; API responses explicitly isolated fixtures",
+  "sources": {
+    "frontend/src/pages/PublicProductCatalog.tsx": "bdc34bcdb8190da12845b12f4f904a6d8051c3e1eca61c872e0b53f65088be3a",
+    "frontend/src/components/ShoppingNavigation.tsx": "444985538955a77c667b3d0ce098c8a163fbcbd0061c9a4541ef1da894d55f8f",
+    "frontend/src/useShoppingScroll.ts": "9fa87c4fc45b372723a1628c4b949eb1a663079206aab8c0b2eb727083dbfd3c",
+    "frontend/src/public-catalog.css": "3d796204752864900e68f0055c651c1bc336fc058761f0b8388ec4aae07433f5",
+    "backend/src/main/java/com/bobbuy/service/ShoppingCategoryMap.java": "de2b910a2847c2b5467deed02f7072c6cfa4f655d27b63b01cb249378c4faf2c",
+    "backend/src/main/java/com/bobbuy/service/ShoppingCategoryService.java": "89784ccfdefeb257578b71b366bc79e3e04232b9274674eaf9c6852a17fde2f8",
+    "backend/src/main/java/com/bobbuy/service/PublicProductBrowseService.java": "3d5892bd75b24d2c22e57be40b431677f47aec6bcad9152a1d7fda1f2973b36a"
+  },
+  "servedReadback": {
+    "src/pages/PublicProductCatalog.tsx": "3d7ea7909490c52df155ac4f3b8e723bd56266f8e1c1f2191730d5e0ee88f4db",
+    "src/components/ShoppingNavigation.tsx": "79a391b7abbc9ee486ec9489ca0ae1015fe1edf5c1ec203a4e4ef36555841fab",
+    "src/useShoppingScroll.ts": "cab4743c90504a19bd5e060ab38250350aa734427e460fe6a15b9442055103c4",
+    "src/public-catalog.css": "e800d29da6d5e53e9fe0f8226c0dceeab5bd89e023d3d8635b5c42ffc864e3db"
+  },
+  "finalBoundaryChange": {
+    "reason": "reject non-shop IDs; accepted shop fixture unchanged",
+    "source": "2378cb6ce234bcb229c9d625f62162e3ed9f5eabb9537bc90a5f43fa6c1ce6a2",
+    "served": "bd6fac321082e7b74ffebb4953224a26e4cb020a92750ddf6e2c11139994b108"
+  }
+}

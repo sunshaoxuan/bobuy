@@ -2,6 +2,9 @@ import type { Dictionary } from './types';
 import experience from './experience.zh-CN.json';
 
 const messages: Dictionary = {
+  'shopping.directory': '全部分类',
+  'shopping.view_all': '查看全部',
+  'shopping.parent': '返回上级分类',
   'pricing.documents':'调价单','pricing.reason_required':'请填写明确的调价或撤销原因；来源待复核单据需补充原因后保存。','pricing.promotion_reduction':'促销价必须低于同渠道、币种和单位的常规价。','pricing.use_documents':'请在调价单中维护价格和优惠期间。',
   'stock.msg.update_failed':'保存失败，已恢复为修改前的值。',
   'geo.title':'国家/地区档案','geo.hint':'按国家/地区、省县、市/区查询和选择基础档案。','geo.country':'国家/地区','geo.prefecture':'省县','geo.city':'市/区','geo.choose_prefecture':'选择省县','geo.choose_city':'选择市/区','geo.selection':'当前选择','geo.country_only':'该国家/地区目前仅预制国家级档案。','geo.prefectures':'省县档案','geo.cities':'市/区档案','geo.code':'代码','geo.name':'名称','geo.reading':'日文读音','geo.source':'国家/地区采用 ISO 3166-1 代码。日本预制 47 个都道府县及全部市区町村，包含政令指定都市及其区。资料核对：2026-11-12。',
@@ -1593,7 +1596,7 @@ Object.assign(messages, {
   "categoryTree.nameRequired": "请填写日文名称。",
   "categoryTree.translationHelp": "日文名称为权威原名。可选译名须经审核；留空时显示日文原名。",
   "categoryTree.loadFailed": "无法加载分类，请重试刷新分类树。",
-  "categoryTree.deleteBlocked": "含子分类、商品或旧分类对照时无法删除。请先移动或重新归类。",
+  "categoryTree.deleteBlocked": "含子分类、商品、旧分类对照或购物分类映射时无法删除。请先移动商品或调整映射。",
   "categoryImport.template": "下载 CSV 模板",
   "categoryImport.flag": "备注 / 标记",
   "categoryImport.templateHelp": "支持中文表头：SKU、costco分类路径、路径来源；可追加备注 / 标记 / Note / Flag。下载文件仅含合成示例，请替换为运营清单。三档来源均按提供路径导入。"

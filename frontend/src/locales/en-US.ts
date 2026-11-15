@@ -2,6 +2,9 @@ import type { Dictionary } from './types';
 import experience from './experience.en-US.json';
 
 const messages: Dictionary = {
+  'shopping.directory': 'All categories',
+  'shopping.view_all': 'View all',
+  'shopping.parent': 'Parent category',
   'pricing.documents':'Price adjustment documents','pricing.reason_required':'Provide a specific change or cancellation reason. Review source drafts and save an explicit reason before approval.','pricing.promotion_reduction':'A promotion must reduce the regular price in the same channel, currency and unit.','pricing.use_documents':'Maintain prices and offer periods in price adjustment documents.',
   'stock.msg.update_failed':'Could not save changes. Your previous values were restored.',
   'geo.title':'Countries and regions','geo.hint':'Browse and select country, prefecture and municipality reference data.','geo.country':'Country/region','geo.prefecture':'Prefecture','geo.city':'City/ward','geo.choose_prefecture':'Select a prefecture','geo.choose_city':'Select a city/ward','geo.selection':'Selected area','geo.country_only':'Only country-level reference data is currently provided for this country/region.','geo.prefectures':'Prefectures','geo.cities':'Cities and wards','geo.code':'Code','geo.name':'Name','geo.reading':'Japanese reading','geo.source':'Countries/regions use ISO 3166-1 codes. Japan includes all 47 prefectures and all municipalities, including designated cities and their wards. Sources checked: 2026-11-12.',
@@ -1593,7 +1596,7 @@ Object.assign(messages, {
   "categoryTree.nameRequired": "Japanese name is required.",
   "categoryTree.translationHelp": "Japanese is authoritative. Optional translations must be reviewed; blank fields keep the Japanese name.",
   "categoryTree.loadFailed": "Could not load categories. Retry to refresh the tree.",
-  "categoryTree.deleteBlocked": "Deletion is blocked while this category has children, products or a legacy category mapping. Reassign them first.",
+  "categoryTree.deleteBlocked": "Categories with children, products, legacy links or shopping mappings cannot be deleted. Move the products or update the mappings first.",
   "categoryImport.template": "Download CSV template",
   "categoryImport.flag": "Note / flag",
   "categoryImport.templateHelp": "Chinese headers are supported: SKU, costco分类路径, 路径来源; optional notes use 备注 / 标记 / Note / Flag. The template contains synthetic examples only. Replace them with operations data. All three source tiers use the supplied path."
