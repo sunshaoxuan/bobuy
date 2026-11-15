@@ -13,9 +13,14 @@ import jakarta.persistence.LockModeType;
 public interface RefreshTokenSessionRepository extends JpaRepository<RefreshTokenSession, Long> {
     Optional<RefreshTokenSession> findByTokenHash(String tokenHash);
 
+    @Query("select session.userId from RefreshTokenSession session where session.tokenHash = :tokenHash")
+    Optional<Long> findUserIdByTokenHash(@Param("tokenHash") String tokenHash);
+
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select session from RefreshTokenSession session where session.tokenHash = :tokenHash")
     Optional<RefreshTokenSession> findByTokenHashForUpdate(@Param("tokenHash") String tokenHash);
 
     List<RefreshTokenSession> findAllByFamilyIdAndRevokedAtIsNull(String familyId);
+
+    List<RefreshTokenSession> findAllByUserIdAndRevokedAtIsNull(Long userId);
 }

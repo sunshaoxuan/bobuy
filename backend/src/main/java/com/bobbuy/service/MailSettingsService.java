@@ -96,6 +96,10 @@ public class MailSettingsService {
   try { send(saved.get(),message); return true; }
   catch(Exception ignored) { throw invalid("Verification email could not be delivered; please try again later"); }
  }
+ public boolean protectedDeliveryReady() {
+  var saved=settings.findById(1);
+  return cipher.ready() && saved.isPresent() && saved.get().enabled && saved.get().encryptedPassword!=null;
+ }
  private void send(MailSettings s,SimpleMailMessage message) {
   // Revalidate persisted destination policy, including after an allowlist change.
   if(!allowedHosts.contains(s.host) || !(s.port==587 && "STARTTLS".equals(s.tlsMode) || s.port==465 && "TLS".equals(s.tlsMode)))

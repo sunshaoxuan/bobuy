@@ -34,6 +34,7 @@ public class RefreshTokenService {
     private static final String REVOCATION_REUSE_DETECTED = "REUSE_DETECTED";
     private static final String REVOCATION_EXPIRED = "EXPIRED";
     private static final String REVOCATION_USER_DISABLED = "USER_DISABLED";
+    private static final String REVOCATION_PASSWORD_RESET = "PASSWORD_RESET";
 
     private final RefreshTokenSessionRepository refreshTokenSessionRepository;
     private final UserRepository userRepository;
@@ -55,6 +56,10 @@ public class RefreshTokenService {
 
     @Transactional
     public IssuedRefreshToken issue(User user, String clientFingerprint) {
+        // The user row is the common serialization point for session issuance,
+        // rotation, and password reset.
+        user = userRepository.lockById(user.getId()).filter(User::isEnabled)
+            .orElseThrow(this::invalidRefreshToken);
         Instant now = Instant.now();
         String rawToken = generateOpaqueToken();
         RefreshTokenSession session = new RefreshTokenSession();
@@ -72,8 +77,14 @@ public class RefreshTokenService {
     @Transactional(noRollbackFor = ApiException.class)
     public IssuedRefreshToken refresh(String rawToken, String clientFingerprint) {
         String normalizedToken = normalizeToken(rawToken);
+        String tokenHash = hashToken(normalizedToken);
+        Long userId = refreshTokenSessionRepository.findUserIdByTokenHash(tokenHash)
+            .orElseThrow(this::invalidRefreshToken);
+        User user = userRepository.lockById(userId)
+            .filter(User::isEnabled)
+            .orElseThrow(this::invalidRefreshToken);
         // Lock the session row so one old refresh token can only rotate once.
-        RefreshTokenSession session = refreshTokenSessionRepository.findByTokenHashForUpdate(hashToken(normalizedToken))
+        RefreshTokenSession session = refreshTokenSessionRepository.findByTokenHashForUpdate(tokenHash)
             .orElseThrow(this::invalidRefreshToken);
         Instant now = Instant.now();
 
@@ -86,12 +97,7 @@ public class RefreshTokenService {
             // which avoids invalidating the single winning token in concurrent races.
             throw invalidRefreshToken();
         }
-        User user = userRepository.findById(session.getUserId())
-            .filter(User::isEnabled)
-            .orElseGet(() -> {
-                revokeFamily(session.getFamilyId(), now, REVOCATION_USER_DISABLED);
-                throw invalidRefreshToken();
-            });
+        if (!Objects.equals(session.getUserId(), user.getId())) throw invalidRefreshToken();
 
         session.setLastUsedAt(now);
         session.setClientFingerprint(sanitizeClientFingerprint(clientFingerprint));
@@ -130,6 +136,13 @@ public class RefreshTokenService {
 
     public Duration getRefreshTokenTtl() {
         return refreshTokenTtl;
+    }
+
+    /** Must be called inside the password-reset transaction. */
+    public void revokeAllForUser(Long userId, Instant now) {
+        refreshTokenSessionRepository.findAllByUserIdAndRevokedAtIsNull(userId).stream()
+            .filter(Objects::nonNull)
+            .forEach(session -> revokeSession(session, now, REVOCATION_PASSWORD_RESET));
     }
 
     private void revokeFamily(String familyId, Instant now, String reason) {

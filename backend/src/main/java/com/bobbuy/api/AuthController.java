@@ -6,11 +6,13 @@ import com.bobbuy.api.response.ErrorCode;
 import com.bobbuy.security.AuthCookieService;
 import com.bobbuy.service.AuthService;
 import com.bobbuy.service.AuthAbuseService;
+import com.bobbuy.service.PasswordResetService;
 import com.bobbuy.security.TrustedClientIpResolver;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Email;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,11 +27,26 @@ public class AuthController {
     private final AuthCookieService authCookieService;
     private final AuthAbuseService abuse;
     private final TrustedClientIpResolver clientIps;
+    private final PasswordResetService passwordResetService;
 
-    public AuthController(AuthService authService, AuthCookieService authCookieService, AuthAbuseService abuse, TrustedClientIpResolver clientIps) {
+    public AuthController(AuthService authService, AuthCookieService authCookieService, AuthAbuseService abuse, TrustedClientIpResolver clientIps, PasswordResetService passwordResetService) {
         this.authService = authService;
         this.authCookieService = authCookieService;
         this.abuse=abuse; this.clientIps=clientIps;
+        this.passwordResetService=passwordResetService;
+    }
+
+    @PostMapping("/forgot-password")
+    public ApiResponse<PasswordResetService.ForgotResult> forgotPassword(@Valid @org.springframework.web.bind.annotation.RequestBody ForgotPasswordRequest request, HttpServletRequest servletRequest) {
+        var attempt=abuse.begin(AuthAbuseService.Purpose.FORGOT_PASSWORD,clientIps.resolve(servletRequest),request.email());
+        var result=passwordResetService.forgot(request.email());
+        abuse.succeeded(attempt);
+        return ApiResponse.success(result);
+    }
+
+    @PostMapping("/reset-password")
+    public ApiResponse<PasswordResetService.ResetResult> resetPassword(@Valid @org.springframework.web.bind.annotation.RequestBody ResetPasswordRequest request) {
+        return ApiResponse.success(passwordResetService.reset(request.token(),request.newPassword()));
     }
 
     @PostMapping("/login")
@@ -95,5 +112,7 @@ public class AuthController {
 
     public record LoginRequest(@NotBlank String username, @NotBlank String password) {
     }
+    public record ForgotPasswordRequest(@NotBlank @Email String email) {}
+    public record ResetPasswordRequest(@NotBlank String token, @NotBlank String newPassword) {}
 
 }
