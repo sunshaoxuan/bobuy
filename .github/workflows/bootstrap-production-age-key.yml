@@ -1,0 +1,119 @@
+name: bootstrap production age key
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: production-age-key-bootstrap
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  bootstrap:
+    if: github.repository == 'sunshaoxuan/bobuy' && !github.event.repository.fork && github.ref == 'refs/heads/main'
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
+    environment: production
+    env:
+      PROD_SSH_HOST: ${{ secrets.PROD_SSH_HOST }}
+      PROD_SSH_USER: ${{ secrets.PROD_SSH_USER }}
+      PROD_SSH_PORT: ${{ secrets.PROD_SSH_PORT }}
+      PROD_SSH_KEY: ${{ secrets.PROD_SSH_KEY }}
+      PROD_SSH_KNOWN_HOSTS: ${{ secrets.PROD_SSH_KNOWN_HOSTS }}
+    steps:
+      - name: Validate SSH configuration
+        run: |
+          set -euo pipefail
+          for name in PROD_SSH_HOST PROD_SSH_USER PROD_SSH_PORT PROD_SSH_KEY PROD_SSH_KNOWN_HOSTS; do
+            test -n "${!name:-}" || { echo "Required production SSH secret is missing: $name" >&2; exit 1; }
+          done
+      - name: Configure verified SSH host key
+        run: |
+          set -euo pipefail
+          ssh_dir=$(mktemp -d "$RUNNER_TEMP/bobuy-ssh.XXXXXX")
+          printf 'PROD_SSH_DIR=%s\n' "$ssh_dir" >> "$GITHUB_ENV"
+          chmod 700 "$ssh_dir"
+          install -m 600 /dev/null "$ssh_dir/id_ed25519"
+          printf '%s\n' "$PROD_SSH_KEY" > "$ssh_dir/id_ed25519"
+          install -m 600 /dev/null "$ssh_dir/known_hosts"
+          printf '%s\n' "$PROD_SSH_KNOWN_HOSTS" > "$ssh_dir/known_hosts"
+      - name: Bootstrap key on production host
+        run: |
+          set -euo pipefail
+          ssh -i "$PROD_SSH_DIR/id_ed25519" -p "$PROD_SSH_PORT" \
+            -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes \
+            -o UserKnownHostsFile="$PROD_SSH_DIR/known_hosts" \
+            "$PROD_SSH_USER@$PROD_SSH_HOST" 'sudo -n bash -s' <<'REMOTE'
+          set -euo pipefail
+          export PATH=/usr/local/bin:/usr/bin:/bin
+          umask 077
+
+          install_tools() {
+            local arch age_version sops_version tmp
+            arch=$(uname -m)
+            [[ "$arch" == x86_64 ]] || { echo 'Unsupported production architecture; refusing tool installation.' >&2; exit 1; }
+            age_version=1.2.1
+            sops_version=3.9.4
+            tmp=$(mktemp -d /tmp/bobuy-age-bootstrap.XXXXXXXXXX)
+            chmod 700 "$tmp"
+            trap 'rm -rf -- "$tmp"' RETURN
+
+            if ! command -v age-keygen >/dev/null 2>&1 || ! age-keygen --version >/dev/null 2>&1; then
+              curl --fail --silent --show-error --location \
+                "https://github.com/FiloSottile/age/releases/download/v${age_version}/age-v${age_version}-linux-amd64.tar.gz" \
+                --output "$tmp/age.tar.gz"
+              (cd "$tmp" && printf '%s  age.tar.gz\n' '7df45a6cc87d4da11cc03a539a7470c15b1041ab2b396af088fe9990f7c79d50' | sha256sum --check --strict -)
+              tar -xzf "$tmp/age.tar.gz" -C "$tmp"
+              install -o root -g root -m 0755 "$tmp/age/age" "$tmp/age/age-keygen" /usr/local/bin/
+            fi
+
+            if ! command -v sops >/dev/null 2>&1 || ! sops --version >/dev/null 2>&1; then
+              curl --fail --silent --show-error --location \
+                "https://github.com/getsops/sops/releases/download/v${sops_version}/sops-v${sops_version}.linux.amd64" \
+                --output "$tmp/sops"
+              (cd "$tmp" && printf '%s  sops\n' '5488e32bc471de7982ad895dd054bbab3ab91c417a118426134551e9626e4e85' | sha256sum --check --strict -)
+              install -o root -g root -m 0755 "$tmp/sops" /usr/local/bin/sops
+            fi
+            age-keygen --version >/dev/null 2>&1
+            sops --version >/dev/null 2>&1
+          }
+
+          install_tools
+          key_dir=/etc/bobuy/age
+          key_file=$key_dir/keys.txt
+          if [[ -e "$key_dir" || -L "$key_dir" ]]; then
+            [[ -d "$key_dir" && ! -L "$key_dir" ]] || { echo 'Production age directory is not a valid directory; refusing to continue.' >&2; exit 1; }
+          else
+            install -o root -g root -m 0700 -d "$key_dir"
+          fi
+          [[ $(stat -c '%U' "$key_dir") == root ]] || { echo 'Production age directory owner is invalid; refusing to continue.' >&2; exit 1; }
+          [[ $(stat -c '%a' "$key_dir") == 700 ]] || { echo 'Production age directory permissions are invalid; refusing to continue.' >&2; exit 1; }
+
+          if [[ -e "$key_file" || -L "$key_file" ]]; then
+            [[ -f "$key_file" && ! -L "$key_file" ]] || { echo 'Production age key path is not a regular file; refusing to continue.' >&2; exit 1; }
+            [[ $(stat -c '%a' "$key_file") == 400 ]] || { echo 'Production age key permissions are invalid; refusing to continue.' >&2; exit 1; }
+            owner=$(stat -c '%U' "$key_file")
+            [[ "$owner" == root || "$owner" == "${SUDO_USER:-}" ]] || { echo 'Production age key owner is invalid; refusing to continue.' >&2; exit 1; }
+          else
+            key_tmp=$(mktemp "$key_dir/.keys.txt.XXXXXXXXXX")
+            trap 'rm -f -- "$key_tmp"' EXIT
+            chmod 0400 "$key_tmp"
+            chown root:root "$key_tmp"
+            age-keygen > "$key_tmp" 2>/dev/null
+            age-keygen -y "$key_tmp" >/dev/null 2>&1
+            mv -nT -- "$key_tmp" "$key_file"
+            [[ ! -e "$key_tmp" ]] || { echo 'Production age key appeared during creation; refusing to overwrite.' >&2; exit 1; }
+            trap - EXIT
+          fi
+
+          public_key=$(age-keygen -y "$key_file") || { echo 'Production age key is invalid; refusing to continue.' >&2; exit 1; }
+          [[ "$public_key" == age1* ]] || { echo 'Derived production age public key is invalid.' >&2; exit 1; }
+          printf '%s\n' '--- BEGIN PRODUCTION AGE PUBLIC KEY ---' "$public_key" '--- END PRODUCTION AGE PUBLIC KEY ---'
+          REMOTE
+      - name: Clean up production SSH files
+        if: always()
+        run: |
+          if [[ -n "${PROD_SSH_DIR:-}" ]]; then
+            rm -rf -- "$PROD_SSH_DIR"
+          fi
