@@ -49,7 +49,7 @@ function Admin({passwordResetToken}:{passwordResetToken:string}) {
   const { t } = useI18n();
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const pages = [...(isMerchant ? adminPages : []), ...(user?.platformAdmin&&!isMerchant?[['products', 'products.title', ProductArchive, TagsOutlined] as const]:[]), ...(user?.platformAdmin ? [['users', 'accounts.title', Users, TeamOutlined] as const, ['settings', 'mail.title', MailSettings, TagsOutlined] as const] : [])];
+  const pages = [...(isMerchant ? adminPages : []), ...(user?.platformAdmin&&!isMerchant?adminPages.filter(([path])=>path==='products'||path==='category-path-import'):[]), ...(user?.platformAdmin ? [['users', 'accounts.title', Users, TeamOutlined] as const, ['settings', 'mail.title', MailSettings, TagsOutlined] as const] : [])];
   const menuItems = pages.filter(([path]) => !path.startsWith('basic-data/')).map(([path, label, , Icon]) => ({
     key: `/admin/${path}`, icon: <Icon />, label: <Link to={`/admin/${path}`} onClick={() => setOpen(false)}>{t(label)}</Link>
   }));
