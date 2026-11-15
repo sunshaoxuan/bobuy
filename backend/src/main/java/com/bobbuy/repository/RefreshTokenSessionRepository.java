@@ -18,4 +18,6 @@ public interface RefreshTokenSessionRepository extends JpaRepository<RefreshToke
     Optional<RefreshTokenSession> findByTokenHashForUpdate(@Param("tokenHash") String tokenHash);
 
     List<RefreshTokenSession> findAllByFamilyIdAndRevokedAtIsNull(String familyId);
+
+    List<RefreshTokenSession> findAllByUserIdAndRevokedAtIsNull(Long userId);
 }

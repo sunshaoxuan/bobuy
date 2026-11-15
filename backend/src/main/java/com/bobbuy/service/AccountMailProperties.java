@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "bobbuy.account-mail")
 public class AccountMailProperties implements InitializingBean {
     private boolean deliveryEnabled;
+    private boolean passwordResetEnabled;
     private String smtpHost = "mail.briconbric.com";
     private int smtpPort = 587;
     private String smtpTlsMode = "STARTTLS";
@@ -49,6 +50,8 @@ public class AccountMailProperties implements InitializingBean {
 
     public boolean isDeliveryEnabled() { return deliveryEnabled; }
     public void setDeliveryEnabled(boolean value) { deliveryEnabled = value; }
+    public boolean isPasswordResetEnabled() { return passwordResetEnabled; }
+    public void setPasswordResetEnabled(boolean value) { passwordResetEnabled = value; }
     public String getSmtpHost() { return smtpHost; }
     public void setSmtpHost(String value) { smtpHost = value; }
     public int getSmtpPort() { return smtpPort; }

@@ -34,6 +34,7 @@ public class RefreshTokenService {
     private static final String REVOCATION_REUSE_DETECTED = "REUSE_DETECTED";
     private static final String REVOCATION_EXPIRED = "EXPIRED";
     private static final String REVOCATION_USER_DISABLED = "USER_DISABLED";
+    private static final String REVOCATION_PASSWORD_RESET = "PASSWORD_RESET";
 
     private final RefreshTokenSessionRepository refreshTokenSessionRepository;
     private final UserRepository userRepository;
@@ -130,6 +131,13 @@ public class RefreshTokenService {
 
     public Duration getRefreshTokenTtl() {
         return refreshTokenTtl;
+    }
+
+    /** Must be called inside the password-reset transaction. */
+    public void revokeAllForUser(Long userId, Instant now) {
+        refreshTokenSessionRepository.findAllByUserIdAndRevokedAtIsNull(userId).stream()
+            .filter(Objects::nonNull)
+            .forEach(session -> revokeSession(session, now, REVOCATION_PASSWORD_RESET));
     }
 
     private void revokeFamily(String familyId, Instant now, String reason) {
