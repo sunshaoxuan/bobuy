@@ -1,3 +1,4 @@
+import {catalogBatch} from '../catalogBatch';
 import ProductSort from '../components/ProductSort';
 import CompactProductCard from '../components/CompactProductCard';
 import {useCallback,useEffect,useMemo,useRef,useState} from 'react';
@@ -79,9 +80,11 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   const categoryKey='category',category=params.get(categoryKey)??'';
   const sort=params.get('sort')??'default',markedFirst=params.get('markedFirst')!=='false';
   const [attempt,setAttempt]=useState(0),[detailAttempt,setDetailAttempt]=useState(0);
-  const identity=JSON.stringify([location.pathname,scope,query,category,locale,refresh,attempt,authKey,sort,markedFirst]);
+  // Keep offsets stable for the mounted session, including window resizes.
+  const [batchSize]=useState<24|48>(()=>typeof window.matchMedia==='function'&&window.matchMedia('(min-width: 1920px)').matches?48:24);
+  const identity=JSON.stringify([batchSize,location.pathname,scope,query,category,locale,refresh,attempt,authKey,sort,markedFirst]);
   const activation=useSectionActivation(identity);
-  const browse=useBrowsePages<ProductBrowseCard>(identity,(page,revision)=>storefrontApi.productBrowse({page,revision,merchantId:node,query,category,locale,marked:false,markedFirst,sort}),entry=>entry.productId,enabled&&activation.active&&node!==-1,acceptDataset,24,autoPaused||!!params.get('product'));
+  const browse=useBrowsePages<ProductBrowseCard>(identity,(page,revision)=>catalogBatch((serverPage,serverRevision)=>storefrontApi.productBrowse({page:serverPage,revision:serverRevision,merchantId:node,query,category,locale,marked:false,markedFirst,sort}),page,revision,batchSize),entry=>entry.productId,enabled&&activation.active&&node!==-1,acceptDataset,batchSize,autoPaused||!!params.get('product'));
   useEffect(()=>{if(kind==="all"&&typeof browse.page?.markedScopeTotal==="number")onMarkedScope?.(browse.page.markedScopeTotal);},[kind,browse.page?.markedScopeTotal,onMarkedScope]);
   const filtered=browse.items;
   const markers=Object.fromEntries(browse.items.map(entry=>[entry.productId,entry.markers]));

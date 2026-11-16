@@ -1,0 +1,24 @@
+import {fireEvent,render,screen,waitFor} from '@testing-library/react';
+import {MemoryRouter} from 'react-router-dom';
+import {I18nProvider} from '../i18n';
+import PublicProductCatalog from './PublicProductCatalog';
+import {browsePage,productCard} from '../test/browseFixtures';
+const mocks=vi.hoisted(()=>({productBrowse:vi.fn(),productSales:vi.fn()}));
+vi.mock('../api',()=>({storefrontApi:mocks,productMarkerApi:{}}));
+vi.mock('../components/CompactProductCard',()=>({default:({productId}:{productId:string})=><article className="catalog-master-card" data-product-id={productId}/> }));
+vi.mock('../context/UserRoleContext',()=>({useUserRole:()=>({user:null,isMerchant:false,isAuthenticated:false,loading:false})}));
+afterEach(()=>vi.restoreAllMocks());
+it('uses paired server offsets on wide screens and restarts sorted results at zero',async()=>{
+ vi.spyOn(window,'matchMedia').mockImplementation(query=>({matches:query==='(min-width: 1920px)',media:query,onchange:null,addListener:()=>{},removeListener:()=>{},addEventListener:()=>{},removeEventListener:()=>{},dispatchEvent:()=>false}));
+ localStorage.setItem('bobbuy_locale','en-US');mocks.productSales.mockResolvedValue([]);
+ mocks.productBrowse.mockImplementation(async q=>browsePage(Array.from({length:24},(_,i)=>productCard(`${q.sort}-${q.page*24+i}`)),{page:q.page,scopeTotal:352,matchedTotal:352,hasNext:true}));
+ render(<I18nProvider><MemoryRouter initialEntries={['/products']}><PublicProductCatalog products={[]} quantities={{}} onAdd={()=>{}} canBuy={()=>false}/></MemoryRouter></I18nProvider>);
+ await waitFor(()=>expect(document.querySelectorAll('.catalog-master-card')).toHaveLength(48));
+ fireEvent.click(screen.getByRole('button',{name:/Load more/}));
+ await waitFor(()=>expect(document.querySelectorAll('.catalog-master-card')).toHaveLength(96));
+ expect(mocks.productBrowse.mock.calls.map(call=>call[0].page)).toEqual([0,1,2,3]);
+ fireEvent.change(screen.getByRole('combobox',{name:'Sort products'}),{target:{value:'rating-desc'}});
+ await waitFor(()=>expect(document.querySelectorAll('.catalog-master-card')).toHaveLength(48));
+ expect(mocks.productBrowse.mock.calls.slice(-2).map(call=>[call[0].page,call[0].sort])).toEqual([[0,'rating-desc'],[1,'rating-desc']]);
+ expect(new Set([...document.querySelectorAll('.catalog-master-card')].map(e=>e.getAttribute('data-product-id'))).size).toBe(48);
+});
