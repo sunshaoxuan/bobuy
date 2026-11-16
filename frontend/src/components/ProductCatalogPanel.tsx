@@ -1,3 +1,4 @@
+import CatalogFileTransfer from './CatalogFileTransfer';
 import ProductReviewEditor from './ProductRating';
 import {useEffect,useRef,useState,useMemo} from 'react';
 import {Alert,Button,Checkbox,Drawer,Input,Select,Table,Tabs,Grid,Modal,Segmented,Tag,type InputRef} from 'antd';
@@ -129,6 +130,7 @@ function CatalogEditor({entries,id,onChoose,onSaved,currentScope}:PanelProps&{cu
   <Modal title={t('products.unsaved')} open={discardOpen} onOk={()=>{setDiscardOpen(false);onChoose(undefined);}} onCancel={keepEditing} okText={t('products.discard')} cancelText={t('products.keep_editing')} zIndex={1200}>{t('products.unsaved_hint')}</Modal>
   <Drawer rootClassName="catalog-editor catalog-bulk-editor" title={t('master.bulk')} open={bulk} width={1050} onClose={()=>setBulk(false)} destroyOnClose>
    <p>{t('master.bulk_hint')}</p><Button onClick={()=>void readAudit()} disabled={busy}>{t('master.audit')}</Button>{audit&&<Input.TextArea readOnly aria-label={t('master.audit')} rows={8} value={audit}/>}{error&&<Alert type="error" message={warning(error)}/>}<Button loading={busy} onClick={()=>void suggestions()}>{t('master.suggestions')}</Button>
+   <CatalogFileTransfer ids={entries.map(row=>row.key)} disabled={busy} onLoad={text=>{setJson(text);setRows([]);setSelected([]);setValidated(false);setReviewed(false);}}/>
    <Input.TextArea disabled={busy} aria-label={t('master.json')} rows={9} value={json} onChange={e=>{setJson(e.target.value);setValidated(false);setReviewed(false);}}/>
    <Button loading={busy} disabled={!json.trim()} onClick={()=>void preview()}>{t('rec.batch_preview')}</Button>
    {!!rows.length&&<Table rowKey={row=>row.value.productId} dataSource={rows} scroll={{x:700}} pagination={{pageSize:10}} rowSelection={{selectedRowKeys:selected,onChange:setSelected}} columns={[

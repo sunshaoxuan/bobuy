@@ -2,6 +2,23 @@ import type { Dictionary } from './types';
 import experience from './experience.en-US.json';
 
 const messages: Dictionary = {
+  "catalogTransfer.export": "Export listed products",
+  "catalogTransfer.load": "Load JSON file",
+  "catalogTransfer.help": "Use existing product IDs and versions. Export includes the products listed on this page (up to 500), subject to your access. Loading a file only fills the preview editor; review and confirm before saving. New or unresolved identities are not created automatically.",
+  "catalogTransfer.invalid": "Use 1–500 rows with unique existing product IDs in a JSON file of at most 2 MB.",
+  "categoryTransfer.done": "Category structure saved.",
+  "categoryTransfer.title": "Import / export category structure",
+  "categoryTransfer.help": "CSV supports stable IDs, parent IDs, localized names, display order and on-site images. Adds or updates only. Preview and resolve errors before confirming the entire batch. Products are not changed.",
+  "categoryTransfer.export": "Export current categories",
+  "categoryTransfer.order": "Display order",
+  "categoryTransfer.create": "Create",
+  "categoryTransfer.update": "Update",
+  "categoryTransfer.confirm": "I reviewed the categories, order and image references and confirm this entire batch.",
+  "categoryImport.resolveErrors": "Resolve every invalid row and preview again before confirming. No partial import will be applied.",
+  "categoryTree.imageUpload": "Upload / replace category image",
+  "categoryTree.imageHelp": "Recommended: square 256×256 PNG/JPEG, up to 8MiB. Navigation uses 32×32.",
+  "categoryTree.imageFailed": "Category image upload failed. Check the file and retry.",
+
   'shopping.directory': 'All categories',
   'shopping.view_all': 'View all',
   'shopping.parent': 'Parent category',

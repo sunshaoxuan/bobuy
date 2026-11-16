@@ -2,7 +2,7 @@ import {fireEvent, render, screen, waitFor, within} from '@testing-library/react
 import {I18nProvider} from '../i18n';
 import CategoryTreeManagement from './CategoryTreeManagement';
 vi.mock('antd',async()=>({...await vi.importActual<typeof import('antd')>('antd'),TreeSelect:(await import('../test/CategoryTreeSelectMock')).CategoryTreeSelectMock}));
-const api = vi.hoisted(() => ({list: vi.fn(), create: vi.fn(), update: vi.fn(), remove: vi.fn()}));
+const api = vi.hoisted(() => ({list: vi.fn(), create: vi.fn(), update: vi.fn(), remove: vi.fn(), uploadImage:vi.fn()}));
 vi.mock('../api', () => ({categoryTreeApi: api}));
 const nodes = [
   {id: 'rec-cat-private', parentId: null, name: {'ja-JP': '食品'}, fullPath: ['rec-cat-private'], sortOrder: 0, productCount: 0, deleteBlocked: true},
@@ -74,4 +74,14 @@ it('requires confirmation before deleting an empty node', async () => {
   expect(api.remove).not.toHaveBeenCalled();
   fireEvent.click(within(screen.getByRole('dialog')).getByRole('button',{name:'Delete category'}));
   await waitFor(()=>expect(api.remove).toHaveBeenCalledWith('empty-private'));
+});
+
+it('uploads a root image, keeps child text-only, and displays the returned stored image',async()=>{
+ await show();const root=screen.getByRole('article',{name:'食品'});
+ expect(within(screen.getByRole('article',{name:'食品 › 飲料'})).queryByText('Upload / replace category image')).not.toBeInTheDocument();
+ api.uploadImage.mockResolvedValue('/api/storefront/recommendation-images/test-image');
+ const file=new File(['fixture'],'category.png',{type:'image/png'});
+ fireEvent.change(root.querySelector('input[type=file]')!,{target:{files:[file]}});
+ await waitFor(()=>expect(api.uploadImage).toHaveBeenCalledWith('rec-cat-private',expect.any(File)));
+ await waitFor(()=>expect(root.querySelector('img')).toHaveAttribute('src','/api/storefront/recommendation-images/test-image'));
 });

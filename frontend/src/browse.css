@@ -102,7 +102,7 @@
 .shopping-tree>div{display:flex;flex-direction:column;gap:6px}
 .browse-links .shopping-tree a{min-height:44px;display:flex;align-items:center;gap:10px;padding:8px;border-radius:8px;color:#242424;overflow-wrap:anywhere}
 .browse-links .shopping-tree .shopping-tree-child{padding-left:50px;font-weight:400}
-.shopping-category-image{display:block;flex:0 0 32px;width:32px;height:32px;border-radius:8px;background:#f0f0ed}
+.shopping-category-image{object-fit:cover;display:block;flex:0 0 32px;width:32px;height:32px;border-radius:8px;background:#f0f0ed}
 .browse-links .shopping-tree a[aria-current=page]{background:#242424;color:white}
 .shopping-tree a:focus-visible,.shopping-sidebar-close:focus-visible{outline:2px solid #795908;outline-offset:2px}
 .shopping-toolbar{flex-wrap:wrap;justify-content:flex-start;gap:8px}

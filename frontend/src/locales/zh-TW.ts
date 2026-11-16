@@ -1,6 +1,23 @@
 import type { Dictionary } from './types';
 
 const messages: Dictionary = {
+  "catalogTransfer.export": "匯出目前列表商品",
+  "catalogTransfer.load": "讀取 JSON 檔案",
+  "catalogTransfer.help": "使用現有商品 ID 與版本。匯出限本頁有權限讀取的商品（最多 500 件）。讀取檔案僅填入預覽編輯區，需核對並確認後儲存；新增或待確認身分不會自動建檔。",
+  "catalogTransfer.invalid": "請使用不超過 2 MB、包含 1–500 行且商品 ID 唯一的 JSON 檔案。",
+  "categoryTransfer.done": "分類結構已儲存。",
+  "categoryTransfer.title": "分類結構匯入 / 匯出",
+  "categoryTransfer.help": "CSV 支援穩定 ID、父 ID、四語名稱、顯示順序及站內圖片。僅新增或更新，不刪除。預覽並修正錯誤後確認整批提交；不修改商品。",
+  "categoryTransfer.export": "匯出目前分類",
+  "categoryTransfer.order": "顯示順序",
+  "categoryTransfer.create": "新增",
+  "categoryTransfer.update": "更新",
+  "categoryTransfer.confirm": "我已核對分類、順序及圖片引用，確認整批變更。",
+  "categoryImport.resolveErrors": "請修正全部錯誤列並重新預覽後再確認；本次不會部分匯入。",
+  "categoryTree.imageUpload": "上傳／替換分類圖",
+  "categoryTree.imageHelp": "建議256×256正方形PNG/JPEG，最大8MiB；導覽顯示32×32。",
+  "categoryTree.imageFailed": "分類圖上傳失敗，請檢查檔案後重試。",
+
   'shopping.directory': '全部分類',
   'shopping.view_all': '查看全部',
   'shopping.parent': '返回上層分類',

@@ -24,7 +24,7 @@ export default function StoreNavigation({open,onClose,homePath='/products',categ
   <Link className={pathname==='/products'&&!category?'active':undefined} aria-current={pathname==='/products'&&!category?'page':undefined} to={scopedPath('/products',location.search)} onClick={choose}><CompassOutlined aria-hidden="true"/><span>{t('store.catalog')}</span></Link>
   <div className="shopping-tree">{roots.map(root=><div key={root.id}>
    <Link to={target(root.id)} className="shopping-tree-root" aria-current={category===root.id?'page':undefined} onClick={choose}>
-    <span className="shopping-category-image" aria-hidden="true"/><span>{localizedContent(root.name,locale)}</span>
+    {root.imageUrl?.startsWith('/api/storefront/recommendation-images/')?<img className="shopping-category-image" src={root.imageUrl} alt=""/>:<span className="shopping-category-image" aria-hidden="true"/>}<span>{localizedContent(root.name,locale)}</span>
    </Link>
    {visible.filter(c=>c.parentId===root.id).map(c=><Link key={c.id} to={target(c.id)} className="shopping-tree-child" aria-current={category===c.id?'page':undefined} onClick={choose}>{localizedContent(c.name,locale)}</Link>)}
   </div>)}</div>

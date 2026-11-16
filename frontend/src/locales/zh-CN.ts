@@ -2,6 +2,23 @@ import type { Dictionary } from './types';
 import experience from './experience.zh-CN.json';
 
 const messages: Dictionary = {
+  "catalogTransfer.export": "导出当前列表商品",
+  "catalogTransfer.load": "读取 JSON 文件",
+  "catalogTransfer.help": "使用现有商品 ID 和版本。导出限本页列表中有权限读取的商品（最多 500 件）。读取文件仅填入预览编辑区，需核对并确认后保存；新增或待确认身份不会自动建档。",
+  "catalogTransfer.invalid": "请使用不超过 2 MB、包含 1–500 行且商品 ID 唯一的 JSON 文件。",
+  "categoryTransfer.done": "分类结构已保存。",
+  "categoryTransfer.title": "分类结构导入 / 导出",
+  "categoryTransfer.help": "CSV 支持稳定 ID、父 ID、四语名称、显示顺序和站内图片引用。只新增或更新，不删除。先预览修正错误，再确认整批提交；不修改商品。",
+  "categoryTransfer.export": "导出当前分类",
+  "categoryTransfer.order": "显示顺序",
+  "categoryTransfer.create": "新增",
+  "categoryTransfer.update": "更新",
+  "categoryTransfer.confirm": "我已核对分类、顺序及图片引用，确认整批变更。",
+  "categoryImport.resolveErrors": "请修正全部错误行并重新预览后再确认；本次不会部分导入。",
+  "categoryTree.imageUpload": "上传／替换分类图",
+  "categoryTree.imageHelp": "建议256×256正方形PNG/JPEG，最大8MiB；导航显示32×32。",
+  "categoryTree.imageFailed": "分类图上传失败，请检查文件后重试。",
+
   'shopping.directory': '全部分类',
   'shopping.view_all': '查看全部',
   'shopping.parent': '返回上级分类',

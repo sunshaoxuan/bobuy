@@ -25,7 +25,7 @@ public class CategoryPathImportService {
                           Instant createdAt, Instant confirmedAt, List<Row> rows) {
         public long getDeferred() { return rows.stream().filter(r -> "DEFERRED".equals(r.outcome())).count(); }
     }
-    public static final String DEFAULT_DEFERRED_SKUS = "29267,1012891,55719,535557,553363,14116,14110,76838,517611";
+    public static final String DEFAULT_DEFERRED_SKUS = "";
     public static final Set<String> SOURCE_TIERS = Set.of("官网面包屑（原文）", "推定（官网无可用面包屑）", "推定（官网无页面）");
 
     private final CategoryReviewedNames reviewedNames;
@@ -138,6 +138,7 @@ public class CategoryPathImportService {
         Preview p=get(actorId,id);
         if("CONFIRMED".equals(p.status())) return p;
         if(!"PREVIEWED".equals(p.status())) throw new IllegalStateException("Import cannot be confirmed");
+        if(p.unmatched()>0){if(p.matched()>0)throw new IllegalStateException("Resolve all invalid rows and preview again before confirming");return p;}
         for(Row row:p.rows()) if("MATCHED".equals(row.outcome())) {
             String parent=null; List<String> full=new ArrayList<>(); List<String> japanesePath=new ArrayList<>();
             for(String name:segments(row.breadcrumb(),row.sourceTier())) {
@@ -148,7 +149,7 @@ public class CategoryPathImportService {
                 if(node==null) {
                     String nodeId=UUID.randomUUID().toString();
                     full.add(nodeId);
-                    Map<String,String> display=reviewedNames.names(japanesePath);
+                    Map<String,String> display=Map.of("ja-JP",name);
                     int order=nodes.findAllByParentId(parent).stream().filter(n->n.getSystemKey()==null).mapToInt(CategoryTreeNode::getSortOrder).max().orElse(-1)+1;
                     node=new CategoryTreeNode(nodeId,expectedParent,display,new ArrayList<>(full),order,null);
                     node.setExplicitOrder(nodes.findAllByParentId(parent).stream()
@@ -156,11 +157,7 @@ public class CategoryPathImportService {
                     node=nodes.save(node);
                 } else {
                     full=new ArrayList<>(node.getFullPath());
-                    var approved=reviewedNames.names(japanesePath);
-                    if(approved.size()>1) {
-                        var display=new HashMap<>(node.getName()); display.putAll(approved);
-                        node.setName(display); nodes.save(node);
-                    }
+
                 }
                 parent=node.getId();
             }

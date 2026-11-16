@@ -78,25 +78,14 @@ class CategoryPathImportServiceTest {
         assertThat(invalid.unmatched()).isEqualTo(1); service.confirm(7,invalid.importId()); verifyNoInteractions(paths);
     }
 
-    @Test void defaultNineAreFrozenAsDeferredWithNoNewAssignmentsAndCurrentProductsRetained() {
-        StringBuilder rows=new StringBuilder();
-        for(String sku:CategoryPathImportService.DEFAULT_DEFERRED_SKUS.split(",")) {
-            Product product=mock(Product.class);when(product.getId()).thenReturn("p-"+sku);
-            when(products.findAllByItemNumber(sku)).thenReturn(List.of(product));
-            jdbc.update("insert into bb_product values (?, 'old-note', 'old-source', 321, 8, true)","p-"+sku);
-            rows.append(sku).append(",新親>新子,推定（官网无页面）,new-note\n");
-        }
-        var before=jdbc.queryForList("select * from bb_product order by id");
-        var preview=ops(rows.toString(),null);
-        assertThat(preview.getDeferred()).isEqualTo(9);assertThat(preview.matched()).isZero();assertThat(preview.newNodes()).isZero();
-        assertThat(preview.rows()).allSatisfy(r->assertThat(r.outcome()).isEqualTo("DEFERRED"));
-        service.confirm(7,preview.importId()); verifyNoInteractions(paths);verify(nodes,never()).save(any());
-        assertThat(jdbc.queryForList("select id,price,stock,published from bb_product order by id")).hasSize(before.size());
-        assertThat(jdbc.queryForList("select category_import_flag,category_path_source,price,stock,published from bb_product where id<>'product-1'"))
-            .allSatisfy(row->assertThat(row).containsEntry("PRICE",new java.math.BigDecimal("321")).containsEntry("STOCK",8).containsEntry("PUBLISHED",true));
-        assertThat(service.get(7,preview.importId()).getDeferred()).isEqualTo(9);
-        assertThat(new String(service.unmatchedCsv(7,preview.importId()),StandardCharsets.UTF_8)).contains("29267","推定（官网无页面）","Deferred");
-        var released=ops(rows.toString(),"");assertThat(released.matched()).isEqualTo(9);
+    @Test void defaultDeferListIsEmptyAndNeverSpecialCasesAnItem() {
+        var p=preview("SKU-1,Example>Child\n");
+        assertThat(p.getDeferred()).isZero();assertThat(p.matched()).isEqualTo(1);
+    }
+    @Test void mixedInvalidBatchCannotPartiallyCreateNodesOrAssignProducts() {
+        var p=preview("SKU-1,Example>Child\nUNKNOWN,Other>Child\n");
+        assertThatThrownBy(()->service.confirm(7,p.importId())).hasMessageContaining("Resolve all invalid");
+        verifyNoInteractions(paths);verify(nodes,never()).save(any());
     }
 
     @Test void customDeferListReplacesDefaultsAndBlocksAliasesEvenIfExcludedSkuIsAbsent() {
@@ -138,7 +127,7 @@ class CategoryPathImportServiceTest {
         assertThat(captured.getAllValues().get(0).isExplicitOrder()).isFalse();
     }
 
-    @Test void reviewedNamesAreConsumedOnlyAtConfirmationWithoutChangingPathIdentity() {
+    @Test void importsOnlyProvidedNamesWithoutApplyingBundledBusinessTranslations() {
         var mapping=mock(CategoryReviewedNames.class);
         List<List<String>> requestedPaths=new ArrayList<>();
         when(mapping.names(anyList())).thenAnswer(call->{
@@ -150,9 +139,9 @@ class CategoryPathImportServiceTest {
         var p=ops("SKU-1,例親>例子,官网面包屑（原文）,\n",null);
         verify(nodes,never()).save(any());
         service.confirm(7,p.importId());
-        assertThat(requestedPaths).containsExactly(List.of("例親"),List.of("例親","例子"));
+        assertThat(requestedPaths).isEmpty();
         var root=nodes.findAllByParentId(null).get(0);
-        assertThat(root.getName()).containsEntry("ja-JP","例親").containsEntry("zh-CN","审核示例");
+        assertThat(root.getName()).containsExactlyEntriesOf(Map.of("ja-JP","例親"));
         assertThat(nodes.findAllByParentId(root.getId()).get(0).getName()).containsEntry("ja-JP","例子");
     }
 

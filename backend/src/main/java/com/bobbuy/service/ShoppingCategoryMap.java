@@ -4,7 +4,7 @@ import java.util.*;
 
 /** Reviewed shopping taxonomy, independent of the mutable source tree. No name-based matching. */
 public final class ShoppingCategoryMap {
- public record Category(String id,String parentId,Map<String,String> name,String icon) {}
+ public record Category(String id,String parentId,Map<String,String> name,String icon,String imageUrl) { public Category(String id,String parentId,Map<String,String> name,String icon){this(id,parentId,name,icon,null);} }
  public record Rule(String nodeId,String categoryId,boolean subtree) {}
  public record Override(String productId,String categoryId) {}
  public record Config(List<Category> categories,List<Rule> rules,List<Override> overrides) {}

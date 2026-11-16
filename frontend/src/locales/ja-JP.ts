@@ -2,6 +2,23 @@ import type { Dictionary } from './types';
 import experience from './experience.ja-JP.json';
 
 const messages: Dictionary = {
+  "catalogTransfer.export": "一覧の商品をエクスポート",
+  "catalogTransfer.load": "JSON ファイルを読み込む",
+  "catalogTransfer.help": "既存の商品 ID とバージョンを使用します。エクスポート対象はこのページの閲覧可能な商品（最大500件）です。読み込み後にプレビューを確認して保存してください。新規・未確認の商品は自動作成しません。",
+  "catalogTransfer.invalid": "2 MB 以下、1～500行、商品 ID が重複しない JSON ファイルを使用してください。",
+  "categoryTransfer.done": "分類構造を保存しました。",
+  "categoryTransfer.title": "分類構造のインポート / エクスポート",
+  "categoryTransfer.help": "CSV は固定 ID、親 ID、四言語名、表示順、サイト内画像に対応します。追加・更新のみです。プレビューでエラーを修正してから全行を確定してください。商品は変更しません。",
+  "categoryTransfer.export": "現在の分類をエクスポート",
+  "categoryTransfer.order": "表示順",
+  "categoryTransfer.create": "追加",
+  "categoryTransfer.update": "更新",
+  "categoryTransfer.confirm": "分類・順序・画像参照を確認し、この一括変更を確定します。",
+  "categoryImport.resolveErrors": "すべてのエラー行を修正して再プレビューしてください。一部のみの取り込みは行いません。",
+  "categoryTree.imageUpload": "カテゴリ画像をアップロード／差替え",
+  "categoryTree.imageHelp": "推奨：256×256の正方形PNG/JPEG、最大8MiB。ナビ表示は32×32。",
+  "categoryTree.imageFailed": "画像をアップロードできません。ファイルを確認して再試行してください。",
+
   'shopping.directory': 'すべてのカテゴリ',
   'shopping.view_all': 'すべて見る',
   'shopping.parent': '上位カテゴリに戻る',

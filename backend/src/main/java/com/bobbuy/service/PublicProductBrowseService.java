@@ -25,7 +25,7 @@ public class PublicProductBrowseService {
  private final ProductPopularityService popularity;private final PublicBrowsePriceService prices;
  public PublicProductBrowseService(PublicProductCatalogService c,ProductMarkerService m){this(c,m,null,null);}
  @org.springframework.beans.factory.annotation.Autowired public PublicProductBrowseService(PublicProductCatalogService c,ProductMarkerService m,ProductPopularityService popularity,PublicBrowsePriceService prices){catalog=c;markers=m;this.popularity=popularity;this.prices=prices;}
- public record Facet(String id,Map<String,String> name,long count,String parentId,String icon){public Facet(String id,Map<String,String> name,long count){this(id,name,count,null,null);}}
+ public record Facet(String id,Map<String,String> name,long count,String parentId,String icon,String imageUrl){public Facet(String id,Map<String,String> name,long count){this(id,name,count,null,null,null);}public Facet(String id,Map<String,String> name,long count,String parentId,String icon){this(id,name,count,parentId,icon,null);}}
  public record Shelf(String category,List<Card> items,long total){}
  public record CardReference(java.math.BigDecimal amount,String currency,String unit,Long postId,Long itemId,String state,java.math.BigDecimal originalPrice,java.math.BigDecimal discountAmount,RecommendationItem.PriceChange priceChange){}
  public record Card(String productId,Long merchantId,Map<String,String> name,String brand,String itemNumber,
@@ -84,9 +84,9 @@ public class PublicProductBrowseService {
   var parents=new HashMap<String,String>();display.forEach(c->{if(c.parentId()!=null)parents.put(c.id(),c.parentId());});
   for(var entry:scope){
    if(shoppingData==null){if(entry.categories().isEmpty())unclassified++;var seen=new HashSet<String>();for(var c:entry.categories())if(seen.add(c.id())){labels.put(c.id(),c);counts.merge(c.id(),1L,Long::sum);}}
-   else {String leaf=assignments.get(entry.productId());if(leaf==null)unclassified++;else{counts.merge(leaf,1L,Long::sum);counts.merge(parents.get(leaf),1L,Long::sum);}}
+   else {String leaf=assignments.get(entry.productId());if(leaf==null)unclassified++;else{counts.merge(leaf,1L,Long::sum);if(parents.get(leaf)!=null)counts.merge(parents.get(leaf),1L,Long::sum);}}
   }
-  var facets=shoppingData==null?counts.entrySet().stream().map(e->new Facet(e.getKey(),labels.get(e.getKey()).name(),e.getValue())).toList():display.stream().filter(c->counts.getOrDefault(c.id(),0L)>0).map(c->new Facet(c.id(),c.name(),counts.get(c.id()),c.parentId(),c.icon())).toList();
+  var facets=shoppingData==null?counts.entrySet().stream().map(e->new Facet(e.getKey(),labels.get(e.getKey()).name(),e.getValue())).toList():display.stream().filter(c->counts.getOrDefault(c.id(),0L)>0).map(c->new Facet(c.id(),c.name(),counts.get(c.id()),c.parentId(),c.icon(),c.imageUrl())).toList();
   // Obsolete raw-category links return to the overview; never interpret a source ID as a shopping ID.
   final String selected=shoppingData!=null&&!cat.equals("__unclassified")&&display.stream().noneMatch(c->c.id().equals(cat))?"":cat;
   var filtered=scope.stream().filter(e->{if(selected.isEmpty())return true;if(shoppingData==null)return selected.equals("__unclassified")&&e.categories().isEmpty()||e.categories().stream().anyMatch(c->c.id().equals(selected));String leaf=assignments.get(e.productId());return selected.equals("__unclassified")?leaf==null:selected.equals(leaf)||selected.equals(parents.get(leaf));}).toList();

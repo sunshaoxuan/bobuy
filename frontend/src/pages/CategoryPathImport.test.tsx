@@ -35,13 +35,11 @@ it('shows all three raw flags in preview and confirmation and exports pending ro
  fireEvent.click(screen.getByRole('button',{name:'Export unmatched list'}));
  await waitFor(()=>expect(api.download).toHaveBeenCalledWith('/api/category-path-import/flags/unmatched.csv','unmatched.csv'));
  fireEvent.click(screen.getByRole('checkbox'));fireEvent.click(screen.getByRole('button',{name:'Confirm import'}));
- expect(await screen.findByText('Import confirmed and audited.')).toBeInTheDocument();
- for(const flag of ['推定','最接近路径 / closest path','待核']) expect(screen.getByRole('cell',{name:flag})).toBeInTheDocument();
- expect(screen.queryByRole('button',{name:'Confirm import'})).not.toBeInTheDocument();
- expect(screen.getByText('Product count before: 1; after: 1')).toBeInTheDocument();
+ expect(api.confirm).not.toHaveBeenCalled();
+ expect(screen.getByText(/Resolve every invalid row/)).toBeInTheDocument();
 });
 
-it('submits the default nine and invalidates preview after editing the defer list',async()=>{
+it('submits no business-specific defaults and invalidates preview after editing the defer list',async()=>{
  api.preview.mockResolvedValue({...result('ops'),deferred:1,rows:[
   {rowNumber:2,sku:'29267',breadcrumb:'例親>例子',sourceTier:'推定（官网无页面）',outcome:'DEFERRED'}]});
  const {container}=render(<I18nProvider><CategoryPathImport/></I18nProvider>);
@@ -50,13 +48,13 @@ it('submits the default nine and invalidates preview after editing the defer lis
  expect(await screen.findByText('29267')).toBeInTheDocument();
  expect(screen.getByText('Inferred (no official page)')).toBeInTheDocument();
  expect(screen.getByRole('cell',{name:'Deferred'})).toBeInTheDocument();
- expect(api.preview.mock.calls[0][1].get('deferredSkus')).toBe('29267, 1012891, 55719, 535557, 553363, 14116, 14110, 76838, 517611');
+ expect(api.preview.mock.calls[0][1].get('deferredSkus')).toBe('');
  fireEvent.click(screen.getByRole('checkbox'));
- fireEvent.change(screen.getByRole('textbox',{name:'Defer or exclude product numbers'}),{target:{value:''}});
+ fireEvent.change(screen.getByRole('textbox',{name:'Defer or exclude product numbers'}),{target:{value:'EXCLUDED'}});
  expect(screen.queryByRole('checkbox')).not.toBeInTheDocument();
  fireEvent.click(screen.getByRole('button',{name:/preview/i}));
  await waitFor(()=>expect(api.preview).toHaveBeenCalledTimes(2));
- expect(api.preview.mock.calls[1][1].get('deferredSkus')).toBe('');
+ expect(api.preview.mock.calls[1][1].get('deferredSkus')).toBe('EXCLUDED');
 });
 
 it.each(['resolve','reject'] as const)('ignores stale preview %s after selecting another file',async outcome=>{

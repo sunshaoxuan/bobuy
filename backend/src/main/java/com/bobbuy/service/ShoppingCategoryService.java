@@ -2,26 +2,31 @@ package com.bobbuy.service;
 
 import com.bobbuy.repository.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
 @Service
 public class ShoppingCategoryService {
  private final CategoryTreeNodeRepository nodes;
  private final ProductPrimaryCategoryPathRepository paths;
- private final ShoppingCategoryMap mapping;
- public ShoppingCategoryService(CategoryTreeNodeRepository nodes,ProductPrimaryCategoryPathRepository paths,ObjectMapper json)throws java.io.IOException{
+ public ShoppingCategoryService(CategoryTreeNodeRepository nodes,ProductPrimaryCategoryPathRepository paths,ObjectMapper json){
   this.nodes=nodes;this.paths=paths;
-  try(var input=new ClassPathResource("shopping-categories.json").getInputStream()){mapping=new ShoppingCategoryMap(json.readValue(input,ShoppingCategoryMap.Config.class));}
  }
- public boolean referencesSource(String id){return mapping.referencesSource(id);}
- public void validateSources(List<com.bobbuy.model.CategoryTreeNode> tree){var sources=new HashMap<String,List<String>>();tree.forEach(n->sources.put(n.getId(),n.getFullPath()));mapping.resolve(sources,Map.of());}
+ /** Assigned source nodes remain protected; structural and legacy references are also checked by management. */
+ public boolean referencesSource(String id){return paths.countByCategoryNodeId(id)>0;}
+ public void validateSources(List<com.bobbuy.model.CategoryTreeNode> tree){new ShoppingTreeProjection(tree);}
  public record Snapshot(List<ShoppingCategoryMap.Category> categories,Map<String,String> assignments){}
+ @Transactional(readOnly=true)
  public Snapshot snapshot(Collection<String> ids){
-  var sources=new HashMap<String,List<String>>();nodes.findAll().forEach(n->sources.put(n.getId(),n.getFullPath()));
-  var selected=new HashSet<>(ids);var products=new LinkedHashMap<String,String>();ids.forEach(id->products.put(id,""));
-  paths.findAllById(ids).forEach(p->{if(selected.contains(p.getProductId()))products.put(p.getProductId(),p.getCategoryNodeId());});
-  return new Snapshot(mapping.categories(),mapping.resolve(sources,products));
+  var projection=new ShoppingTreeProjection(nodes.findAll());
+  var selected=new HashSet<>(ids);var assignments=new LinkedHashMap<String,String>();
+  paths.findAllById(ids).forEach(p->{
+   if(selected.contains(p.getProductId())){
+    String target=projection.target(p.getCategoryNodeId());
+    if(target!=null)assignments.put(p.getProductId(),target);
+   }
+  });
+  return new Snapshot(projection.categories(),Collections.unmodifiableMap(assignments));
  }
 }
