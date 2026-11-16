@@ -8,7 +8,7 @@ import {useCallback,useEffect,useMemo,useRef,useState} from 'react';
 import {Alert,Button,Drawer,Empty,Modal,Spin,Tooltip} from 'antd';
 import {PlusOutlined,ReloadOutlined} from '@ant-design/icons';
 import {Link,useLocation,useSearchParams} from 'react-router-dom';
-import {storefrontApi,productMarkerApi,type ProductMarkerDefinition,type PublicCatalogEntry,type ProductBrowseCard,type StoreProduct} from '../api';
+import {storefrontApi,productMarkerApi,type BrowseFacet,type ProductMarkerDefinition,type PublicCatalogEntry,type ProductBrowseCard,type StoreProduct} from '../api';
 import {localizedContent,useI18n,type Locale} from '../i18n';
 import {ProductBrand} from '../components/ProductMetadata';
 import {RecommendationImageViewer} from '../components/RecommendationImageViewer';
@@ -35,7 +35,7 @@ import '../recommendations.css';
 import '../public-catalog.css';
 
 type CatalogIdentity=Pick<PublicCatalogEntry,"productId"|"merchantId"|"name"|"itemNumber">;
-type Props={query?:string;products:StoreProduct[];quantities:Record<string,number>;onAdd:(product:StoreProduct)=>void;canBuy:(product:StoreProduct)=>boolean;autoPaused?:boolean;purchasePending?:boolean;onSales?:(values:StoreProduct[])=>void;merchantId?:number};
+type Props={onNavigation?:(categories:BrowseFacet[])=>void;query?:string;products:StoreProduct[];quantities:Record<string,number>;onAdd:(product:StoreProduct)=>void;canBuy:(product:StoreProduct)=>boolean;autoPaused?:boolean;purchasePending?:boolean;onSales?:(values:StoreProduct[])=>void;merchantId?:number};
 export function catalogText(values:Record<string,string>,locale:Locale) {
   const value=localizedContent(values,locale);
   const language=values[locale]?locale:Object.keys(values).find(key=>values[key]===value);
@@ -76,7 +76,7 @@ export default function PublicProductCatalog(props:Props) {
       {editable&&<><div className="marker-product-context"><strong lang={catalogText(editable.name,locale).language}>{localizedContent(editable.name,locale)||t('rec.not_stated')}</strong><span>{t('rec.code')}: {editable.itemNumber||t('rec.not_stated')}</span></div><ProductMarkerEditor key={String(user?.id)+':'+editable.productId} productId={editable.productId} onDirtyChange={setDirty} onBusyChange={value=>{busy.current=value;}} onSaved={refreshCatalog}/></>}
     </Drawer></>;
 }
-export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refresh=0,onEdit,canEdit,autoPaused=false,onDetailChange,authKey='',acceptDataset,onRefresh,purchasePending=false,onSales,merchantId,enabled=true,onMarkedScope}:Props & {enabled?:boolean;onMarkedScope?:(count:number)=>void;kind?:'all'|'marked';refresh?:number;authKey?:string;acceptDataset?:(token:string)=>boolean;onRefresh?:()=>void;onEdit?:(entry:CatalogIdentity)=>void;canEdit?:(entry:CatalogIdentity)=>boolean;onDetailChange?:(kind:'all'|'marked',open:boolean)=>void}) {
+export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refresh=0,onEdit,canEdit,autoPaused=false,onDetailChange,authKey='',acceptDataset,onRefresh,purchasePending=false,onSales,merchantId,enabled=true,onMarkedScope,onNavigation}:Props & {enabled?:boolean;onMarkedScope?:(count:number)=>void;kind?:'all'|'marked';refresh?:number;authKey?:string;acceptDataset?:(token:string)=>boolean;onRefresh?:()=>void;onEdit?:(entry:CatalogIdentity)=>void;canEdit?:(entry:CatalogIdentity)=>boolean;onDetailChange?:(kind:'all'|'marked',open:boolean)=>void}) {
   const {t,locale}=useI18n(),location=useLocation();
   const [params,setParams]=useSearchParams();
   const node=merchantId??selectedNode(location.search),scope=kind+':'+String(node??'all');
@@ -93,6 +93,8 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   const navigation=useRef<{scope:string;categories:NonNullable<typeof browse.page>['categories']}>({scope:'',categories:[]});
   if(navigation.current.scope!==scope)navigation.current={scope,categories:[]};
   if(browse.page)navigation.current.categories=browse.page.categories;
+  const navigationCategories=navigation.current.categories;
+  useEffect(()=>{onNavigation?.(navigationCategories);},[navigationCategories,onNavigation]);
   const shelves=browse.page?.shelves??[];
   const shelfMode=!query&&sort==='default'&&(!!shelves.length||!browse.page&&(!category||navigation.current.categories.some(c=>c.id===category&&!c.parentId)));
   useShoppingScroll(!!browse.page,browse.busy,!shelfMode&&!!browse.page?.hasNext,browse.next);
