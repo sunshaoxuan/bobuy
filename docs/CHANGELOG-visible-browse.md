@@ -1,9 +1,9 @@
 # Candidate change history
 
-## 20261116 wide product directory, candidate
+## 20261116 wide product directory, production accepted
 
 - >=1920px目录使用可用全宽，保留卡片最小宽度与间距；挂载时宽屏聚合两个24件服务端页，每次展示48件。352件完整浏览从15批降为8批，API总请求数不变。
-- 常规桌面、手机及其他页面宽度规则保留。验收和未完成Gemini复核见[任务记录](tasks/catalog-wide-layout-20261116.md)；尚未发布。
+- 常规桌面、手机及其他页面宽度规则保留。已于2026-11-16以007c310c上线，真实四视口与352件完整遍历通过；Gemini不可用按用户授权由主Agent视觉兜底，见[任务记录](tasks/catalog-wide-layout-20261116.md)。
 
 ## 20261112 verified gallery upload feedback, production accepted
 

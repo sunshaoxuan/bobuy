@@ -7,7 +7,7 @@ scope, independently of trips, current sale quotes and recommendation issues. Th
 API owner enforces strict PUBLIC and nondeleted eligibility. An invalid node scope
 remains empty and never expands to all merchants.
 
-## Current wide-screen contract (2026-11-16 candidate)
+## Current wide-screen contract (2026-11-16 production accepted)
 
 The current directory uses server-side `/api/storefront/product-browse` filtering,
 sorting and revision-bound 24-item pages. At an initial viewport width of at least
