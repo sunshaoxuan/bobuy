@@ -143,3 +143,8 @@
  .public-product-catalog>.catalog-master-heading{order:-1;padding-top:0}
  .public-product-catalog>.catalog-master-heading h1{display:none}
 }
+
+/* Give the image-led directory the available wide-screen space. */
+@media(min-width:1920px){
+ .storefront.browse-shell .store-main:has(.public-product-catalog){max-width:none;width:100%;box-sizing:border-box;}
+}

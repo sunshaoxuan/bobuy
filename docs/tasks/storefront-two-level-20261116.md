@@ -89,3 +89,14 @@
 PR #158 / 76669fb1 已推送。原自动门禁43734425965：Lint/Type-check通过，前端4项旧断言失败（StorefrontContext三项仍把 /recommendations 根当期次页，CategoryTreeManagement一项固定旧删除文案）。按最新授权更新根路径/旧详情URL区分并补 ?item= 兼容断言；仅本地运行这两个文件的相关测试。生产代码未改变，之前浏览器及视觉证据保持有效。CodeQL及后端继续原运行，未重复预跑。
 
 CI 修正的最小检查：7 项 PASS、26 项未选中；原运行 43734425965 的后台编译及单测 PASS，43734426145 的三项 CodeQL PASS。生产代码及浏览器输入未变化，复用原截图验收。
+
+## 2026-11-17（日本时间）续办：线上定稿数据优先
+用户纠正：三份映射表与提示词对应数据已在生产库；26个一级类及Uber原顺序为最终输入，不再采用16类候选词汇定稿。481已映射、686新品待导入、1035暂存、2025枚举均为用户报告的不同集合，未经当前数据库核对，不相加、不重复导入。沿用PR158；不读取凭据文件、不改认证/权限/配置。
+本轮先核对远端：main a756e634（含007c310c宽屏修正），PR158仍OPEN/DRAFT，head17cf6886。本批独立改动为合入已上线宽屏批次与样式，保留本PR两级导航；最小检查为catalogBatch及PublicProductCatalogWide，受合并影响的分页契约。四个要求视口均小于1920，宽屏批次修正不使已有合成数据截图失效；真实数据截图仍未完成。真实数据接入设计以实际表结构为准，禁止把空rules/overrides宣称完成品。
+当前GET实查（未认证）：curl /api/storefront/product-browse与/api/storefront/product-catalog=200，总公开352；前者16个旧rec-cat分类、unclassified99、markedScopeTotal57。分类顺序字段、父子关系及ITEM发布状态未公开。/api/category-tree、/api/mobile/categories、/api/merchant/product-catalog=401。Python urllib先返回403，curl随后成功公开接口，不能把前者当作整个网站不可读。当前结果不否定生产库存在定稿数据。
+已查源码bb_category_tree_node具有id,parent_id,name,full_path,sort_order,explicit_order,system_key；bb_product_primary_category_path具有product_id/category_node_id。CategoryTree GET投影有sortOrder但不返回explicitOrder。当前远端未见三份Uber定稿表的模型或迁移，故不可猜测对应关系。
+最小只读交接数据：定稿分类id/parentId/name/sortOrder/explicitOrder（或实际序号与顺序来源），后台fullPath及前台二级映射，商品productId/ITEM/SKU/主节点/展示分类/发布或暂存状态/实际visible，三份表实际名称字段及导出时间。无需个人信息、密码、Cookie或令牌。已请求本地现有登录会话导出。
+
+续查：/api/storefront/products=200且[]（活动销售投影，不是主档总数）；/api/mobile/products及/api/merchant/recommendation-taxonomy=401。CategoryTreeManagementService.sort在同组没有explicitOrder时按商品计数降序，故GET列表顺序不能自动认作Uber顺序；需实际explicit_order或定稿序号。
+合并冲突已按保留双方功能解决：目录保留两级导航及历史位置，合入>=1920宽屏48件批次；CSS保留两套独立媒体规则，UI规范保留已上线宽屏与未上线购物分类两节。最小合并检查catalogBatch(8)+PublicProductCatalogWide(1)=9 PASS；jsdom scrollTo未实现提示复用既有说明，不代表真实浏览器故障。无数据写入，无商品导入。
+真实读取缺口仍为26类定稿身份/顺序、二级映射、ITEM主档和发布状态；已请求本地登录会话非敏感导出，未索取任何凭据。此前16类候选JSON仅是历史草稿，明确被26类定稿要求取代；真实结构到达后替换为现有数据库数据的适配，不以猜测创建平行正式分类。

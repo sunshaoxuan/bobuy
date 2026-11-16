@@ -1,0 +1,28 @@
+[
+  {
+    "width": 320,
+    "locale": "zh-TW",
+    "hit": {
+      "width": 98,
+      "height": 44,
+      "reachable": true,
+      "focused": true
+    },
+    "detailPaused": true,
+    "errors": [],
+    "bad": []
+  },
+  {
+    "width": 2580,
+    "locale": "zh-CN",
+    "hit": {
+      "width": 98,
+      "height": 44,
+      "reachable": true,
+      "focused": true
+    },
+    "detailPaused": true,
+    "errors": [],
+    "bad": []
+  }
+]
