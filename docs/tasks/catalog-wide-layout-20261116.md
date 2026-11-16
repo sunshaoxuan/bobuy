@@ -23,7 +23,7 @@
 ## 结果
 候选本地验收通过；Gemini独立复核欠缺，保持草稿PR，不合并、不发布。
 
-- 基线：9912d4e7f4cf98fe15d35dd6aeb29c06eaff494c。Linux / Node 22 / 系统Chromium 156；候选由一次 `npm ci`、一次 `npm run build --prefix frontend` 生成，预览localhost:4173。线上只读页面入口为 index-Ufw6W_J4.js，未把源代码基线当成已核实的线上commit。
+- 基线：9912d4e7f4cf98fe15d35dd6aeb29c06eaff494c。Linux / Node 24.22.1 / 系统Chromium 156；候选由一次 `npm ci`、一次 `npm run build --prefix frontend` 生成，预览localhost:4173。线上只读页面入口为 index-Ufw6W_J4.js，未把源代码基线当成已核实的线上commit。
 - 34项针对性测试通过：catalogBatch 8，browsePaging 19，ProductMarkerCatalog 3，CatalogAutoReveal 3，PublicProductCatalogWide 1。构建、TypeScript、1866四语资源键检查通过；已有两条循环chunk警告不属本改动，未扩展修复。
 - 浏览器使用真实线上352件目录、真实图片/报价/分类，当前商家1001通过仅localhost可用的既有测试角色注入。所有生产读取仅GET；详情交互的热度写请求在浏览器拦截返回合成结果，未发往生产。
 - 2580×1440 / zh-CN：11列，卡宽214.17–214.19px，主容器2580px、内容左右32px；首批48，手动后96，缩至1280再加载后144，偏移稳定。
