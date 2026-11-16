@@ -21,7 +21,7 @@
 - 只运行与本次改动相关的最小测试；PR checks 通过。
 
 ## 结果
-候选本地验收通过；Gemini独立复核欠缺，保持草稿PR，不合并、不发布。
+候选本地验收通过。此前因Gemini缺失保持草稿的结论已由下文续办授权及主Agent视觉兜底验收取代；具体合并、部署和线上验收状态以续办记录及PR回执为准。
 
 - 基线：9912d4e7f4cf98fe15d35dd6aeb29c06eaff494c。Linux / Node 24.22.1 / 系统Chromium 156；候选由一次 `npm ci`、一次 `npm run build --prefix frontend` 生成，预览localhost:4173。线上只读页面入口为 index-Ufw6W_J4.js，未把源代码基线当成已核实的线上commit。
 - 34项针对性测试通过：catalogBatch 8，browsePaging 19，ProductMarkerCatalog 3，CatalogAutoReveal 3，PublicProductCatalogWide 1。构建、TypeScript、1866四语资源键检查通过；已有两条循环chunk警告不属本改动，未扩展修复。
@@ -47,3 +47,32 @@
 
 ## PR / CI 交接
 草稿PR：https://github.com/sunshaoxuan/bobuy/pull/159 。首次PR checks 43812682704在新增宽屏测试的afterEach回调返回类型失败（TS2322，返回VitestUtils而非void）；此前构建在此测试添加前完成。修复仅为回调增加花括号，既有测试运行行为与产品输入不变，不重跑本地页面或构建，由新候选自动CI执行TypeScript及现有集合。CodeQL原运行43812682496随新候选更新。最终CI链接和结论记录在PR正文，避免仅为回执提交重复触发验证。
+
+
+## 2026-11-16 续办：视觉兜底与发布准备
+
+### 授权及最小集合
+用户明确授权云端继续PR #159，检查Gemini不可用原因后以GPT自身视觉能力和本地工具兜底，验收通过后合并上线。复用原34项局部测试、构建、四视口运行证据及候选5bcc85ee的PR checks 43812897526 / CodeQL 43812895585成功结果。本轮仅补视觉裁定、发布/恢复核实、文档；产品源码、依赖、配置和测试数据未变，不重跑原本地检查。文档更新触发的既有自动门禁只跟踪该次原运行。
+
+### Gemini可用性与适用规则
+重新检索当前工具及工作区：没有可直接进行Gemini图片评审的连接器；没有gemini CLI，环境也没有GEMINI/GOOGLE或Bridge调用凭据。历史证据引用其他机器上的Windows/Sub2API模型目录与脚本，不能当作云端当前可调用入口；无法取得实时目录或执行最小图片请求，未伪造调用。Figma Weave的付费模型生成工具并非本项目已有Gemini评审通路，未为本任务另开外部服务或索取新凭据。
+
+已读AGENTS.md、项目rapid-production技能、UI标准及其引用；仓库当前规范没有要求Gemini作为不可替代的合并硬门禁。先前任务文档“缺Gemini即不合并”是本Agent过严的停止条件，不是AGENTS规则。本轮兜底的直接授权来源是用户续办指令；不虚构在云端读到了未安装的M6/M7原文。保留Gemini未执行事实，以主Agent独立承担最终视觉判断。
+
+### 分项裁定
+- **视觉 PASS（主Agent GPT兜底）**：实际查看既有最终整体2580/1280及手机图、控件与原尺寸卡片/操作焦点局部。宽屏11列、边距一致，管理提示/标题/分类/网格共用横向边界；卡片文字和图片阅读尺度合理，操作区完整，无新增挤压、重叠或空白宽边。桌面与手机沿用既有布局。固定顶栏/底栏在full-page导出上覆盖某一滚动位置的内容，不能把该图当作每个局部同时可见；原焦点局部和命中测试已证实操作可滚动到达。局部图顶端被固定页眉覆盖的截图局限已保留，未伪称全卡无遮挡。
+- **几何 PASS（独立依据）**：复用browser.json及focused-interactions.json；2580宽屏卡宽约214px、11列、左右32px；1280为5列；390/320为2列。排序/标记优先高44px，管理按钮98×44px且命中可达；四视口无横向溢出。不用几何PASS替代视觉判断，也不声称对全站做了字形像素验收。
+- **功能 PASS（独立依据）**：复用34项局部测试、四视口真实352件目录的排序/分类/优先标记、48→96→缩放后144连续分页、详情暂停与控制台/网络空错误记录；352唯一身份顺序/尾批/失败与版本变化拒绝由聚合及既有hook测试覆盖。48件是展示批次，不减少底层24件API请求总量。
+- 结论：当前页面范围内无未解决阻断缺陷，允许按用户授权进入合并发布。无需再次更改产品或重做截图。
+
+### 当前发布基线、操作与恢复边界
+PR #159仍为open/draft，head=5bcc85eefa19f42a4746e248c4ca31a049fa312c，base/main=9912d4e7f4cf98fe15d35dd6aeb29c06eaff494c，mergeable clean。最近成功生产CD为43701342844（该base），build/deploy均成功。当前线上入口资源/健康及本地发布工作流SHA256见production-baseline.json。
+
+使用仓库唯一既有GitHub Actions `.github/workflows/cd-production.yml`：合并main自动触发，不另起本地Docker栈或并行手工发布。当前标准流水线无单服务输入，会打包并切换六个既有应用服务（core/ai/im/auth/router/frontend）；本PR仅前端代码及文档改变，五个Java服务源码和迁移未变，不扩大业务功能、测试或数据范围，不改发布流水线。基础设施postgres/redis/rabbitmq/nacos/rustfs和edge nginx容器保留。实际自动CD范围如实记录，不称为只替换frontend。
+
+恢复：该版本操作在切换前捕获六个实际运行image ID并生成唯一bobuy-rollback引用及`.cd/rollback.yml`；保留当前与前一套镜像，备份edge/compose和必要运行环境。任一激活/健康失败按已捕获本地镜像恢复应用及配置；不恢复旧数据库，不停写、不迁移、不创建订单。本任务不改变业务数据，禁止套用历史全库快照/维护窗口。GHCR使用精确合并SHA，成功后远端`.cd/deploy-revision`记录SHA及时间；后验仅检查该版本、/products实际资源、四视口受影响布局/交互和/health。
+
+云端无直接SSH密钥；既有CD通过production环境Secrets执行。读取Secret名称的元数据API返回403，仅说明当前token不可列出Secrets，不代表部署job缺失凭据；最近同一工作流已成功发布。保持环境与权限设置不变，通过正常CD实际结果判定，不绕过Secret访问控制。
+
+### 状态
+视觉、几何、功能已接受；本轮文档补齐后推送、跟踪自动PR门禁，转ready并以精确head合并，跟踪唯一自动CD。发布后记录实际合并SHA、镜像digest、健康、浏览器线上资源及截图；失败按具体执行阶段记录，不能把合并或构建成功当成已上线。最终运行回执补在原PR，避免仅补回执触发重复产品验证。
