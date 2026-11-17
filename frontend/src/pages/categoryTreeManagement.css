@@ -34,3 +34,4 @@
 .category-structure-transfer{margin:24px 0;padding:16px;border:1px solid #e6e6e3;border-radius:16px;min-width:0}.category-structure-transfer .ant-alert{margin:12px 0}.category-structure-transfer .ant-checkbox-wrapper{margin:12px 12px 12px 0}.category-structure-transfer .ant-btn{min-height:44px}
 
 .category-structure-transfer .category-tree-actions{align-items:flex-start}
+.category-structure-transfer .category-tree-actions .ant-btn>span:not(.anticon){transform:translateY(-1.5px)}

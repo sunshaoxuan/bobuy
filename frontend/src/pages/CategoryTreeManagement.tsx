@@ -1,3 +1,4 @@
+import CategoryImage from '../components/CategoryImage';
 import CategoryStructureTransfer from '../components/CategoryStructureTransfer';
 import {useEffect, useState} from 'react';
 import {Alert, Button, Empty, Input, Modal, Spin, TreeSelect, Upload} from 'antd';
@@ -61,7 +62,7 @@ export default function CategoryTreeManagement() {
       const blocked = node.deleteBlocked || node.productCount > 0 || nodes.some(n => n.parentId === node.id);
       return <li key={node.id}><article className="category-tree-row" aria-label={fullName(node)}>
         {node.parentId===null&&<div className="category-tree-image-editor">
-          {node.imageUrl?<img src={node.imageUrl} alt=""/>:<span className="category-tree-image-placeholder" aria-hidden="true"/>}
+          <CategoryImage src={node.imageUrl} className="category-tree-image-placeholder"/>
           <Upload accept="image/png,image/jpeg" showUploadList={false} disabled={busy} beforeUpload={file=>{void uploadImage(node,file);return false;}}><Button disabled={busy}>{t('categoryTree.imageUpload')}</Button></Upload>
           <p>{t('categoryTree.imageHelp')}</p>
         </div>}
@@ -82,7 +83,7 @@ export default function CategoryTreeManagement() {
   return <section className="category-tree-management">
     <header><div><h1>{t('categoryTree.title')}</h1><p>{t('categoryTree.help')}</p></div>
       <Button type="primary" disabled={busy || loading || !!error && nodes.length === 0} onClick={() => open({mode: 'add', parent: null, names: {'ja-JP': ''}})}>{t('categoryTree.addRoot')}</Button></header>
-    <CategoryStructureTransfer onSaved={refresh}/>
+    <CategoryStructureTransfer onSaved={refresh} nodes={nodes}/>
     {error && <Alert type="error" showIcon message={t(error)} action={<Button disabled={busy} onClick={() => {setError(''); void refresh().catch(() => setError('categoryTree.loadFailed'));}}>{t('categoryTree.retry')}</Button>}/>}
     {loading ? <Spin aria-label={t('categoryTree.loading')}/> : nodes.length ? branch(null) : !error && <Empty description={t('categoryTree.empty')}/>}
     <Modal className="category-tree-dialog" open={!!editor} title={t(editor?.mode === 'move' ? 'categoryTree.move' : editor?.mode === 'rename' ? 'categoryTree.rename' : 'categoryTree.add')}

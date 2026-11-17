@@ -25,17 +25,22 @@ class CategoryPathImportServiceTest {
 
     @BeforeEach void setup() {
         jdbc=new JdbcTemplate(new DriverManagerDataSource("jdbc:h2:mem:"+UUID.randomUUID()+";DB_CLOSE_DELAY=-1"));
-        jdbc.execute("create table bb_category_path_import(id varchar primary key,actor_id bigint,file_name varchar,file_sha256 varchar,status varchar,product_count_before bigint,product_count_after bigint,matched_count int,new_node_count int,unmatched_count int,created_at timestamp default current_timestamp,confirmed_at timestamp)");
+        jdbc.execute("create table bb_category_path_import(id varchar primary key,actor_id bigint,file_name varchar,file_sha256 varchar,status varchar,product_count_before bigint,product_count_after bigint,matched_count int,new_node_count int,unmatched_count int,created_at timestamp default current_timestamp,confirmed_at timestamp,preview_state clob)");
         jdbc.execute("create table bb_category_path_import_row(import_id varchar,row_number int,sku varchar,breadcrumb varchar,product_id varchar,outcome varchar,reason varchar,flag clob,source_tier clob)");
         jdbc.execute("create table bb_product(id varchar primary key,category_import_flag clob,category_path_source clob,price decimal,stock int,published boolean)");
         jdbc.update("insert into bb_product values ('product-1',null,null,123,5,true)");
         service=new CategoryPathImportService(jdbc,products,nodes,paths,new CategoryReviewedNames());
         when(nodes.lockTree()).thenReturn(Optional.of(new CategoryTreeNode("system-uncategorized",null,Map.of("ja-JP","未分類"),List.of("system-uncategorized"),Integer.MAX_VALUE,"UNCATEGORIZED")));
         Product product=mock(Product.class);when(product.getId()).thenReturn("product-1");
+        when(product.getMerchantId()).thenReturn(7L);when(product.getItemNumber()).thenReturn("SKU-1");when(product.getRecordVersion()).thenReturn(0L);
+        when(products.findById("product-1")).thenReturn(Optional.of(product));when(products.lockById("product-1")).thenReturn(Optional.of(product));
+        when(products.findAllByMerchantIdAndItemNumber(eq(7L),anyString())).thenAnswer(c->products.findAllByItemNumber(c.getArgument(1)));
+        when(products.findAllByMerchantId(7L)).thenReturn(List.of(product));
         when(products.findAllByItemNumber("SKU-1")).thenReturn(List.of(product));
         when(products.findAllByItemNumber("ALIAS-1")).thenReturn(List.of(product));
         when(products.count()).thenReturn(1L);
         List<CategoryTreeNode> saved=new ArrayList<>();
+        when(nodes.findAll()).thenAnswer(c->new ArrayList<>(saved));
         when(nodes.findAllByParentId(any())).thenAnswer(call->saved.stream().filter(n->Objects.equals(n.getParentId(),call.getArgument(0))).toList());
         when(nodes.save(any())).thenAnswer(call->{CategoryTreeNode n=call.getArgument(0);saved.add(n);return n;});
     }
@@ -69,13 +74,13 @@ class CategoryPathImportServiceTest {
         assertThat(jdbc.queryForObject("select category_path_source from bb_product",String.class)).isNull();
     }
 
-    @Test void formerPendingSkusHaveNoSpecialTreatmentAndUnknownSourcesCannotWrite() {
+    @Test void formerPendingSkusHaveNoSpecialTreatmentAndOversizedSourcesCannotWrite() {
         var product=products.findAllByItemNumber("SKU-1");
-        for(String sku:List.of("45883","1731065")) when(products.findAllByItemNumber(sku)).thenReturn(product);
-        var valid=ops("45883,例親>例子,官网面包屑（原文）,"+"\n1731065,例親＞例子,官网面包屑（原文）,\n",null);
+        for(String sku:List.of("SAMPLE-A","SAMPLE-B")) when(products.findAllByItemNumber(sku)).thenReturn(product);
+        var valid=ops("SAMPLE-A,例親>例子,官网面包屑（原文）,"+"\nSAMPLE-B,例親＞例子,官网面包屑（原文）,\n",null);
         assertThat(valid.matched()).isEqualTo(2);
-        var invalid=ops("SKU-1,例親>例子,guess,\n",null);
-        assertThat(invalid.unmatched()).isEqualTo(1); service.confirm(7,invalid.importId()); verifyNoInteractions(paths);
+        var invalid=ops("SKU-1,例親>例子,"+"x".repeat(201)+",\n",null);
+        assertThat(invalid.unmatched()).isEqualTo(1); service.confirm(7,invalid.importId()); verify(paths,never()).save(any());
     }
 
     @Test void defaultDeferListIsEmptyAndNeverSpecialCasesAnItem() {
@@ -85,12 +90,12 @@ class CategoryPathImportServiceTest {
     @Test void mixedInvalidBatchCannotPartiallyCreateNodesOrAssignProducts() {
         var p=preview("SKU-1,Example>Child\nUNKNOWN,Other>Child\n");
         assertThatThrownBy(()->service.confirm(7,p.importId())).hasMessageContaining("Resolve all invalid");
-        verifyNoInteractions(paths);verify(nodes,never()).save(any());
+        verify(paths,never()).save(any());verify(nodes,never()).save(any());
     }
 
     @Test void customDeferListReplacesDefaultsAndBlocksAliasesEvenIfExcludedSkuIsAbsent() {
         var p=ops("ALIAS-1,新親>新子,官网面包屑（原文）,\n"," SKU-1, SKU-1\n UNKNOWN ");
-        assertThat(p.getDeferred()).isEqualTo(1);service.confirm(7,p.importId());verifyNoInteractions(paths);
+        assertThat(p.getDeferred()).isEqualTo(1);service.confirm(7,p.importId());verify(paths,never()).save(any());
         var mixed=ops("SKU-1,新親>新子,官网面包屑（原文）,\nUNKNOWN,新親>新子,推定（官网无页面）,\n","UNKNOWN");
         assertThat(mixed.matched()).isEqualTo(1);assertThat(mixed.getDeferred()).isEqualTo(1);
         service.confirm(7,mixed.importId());verify(paths).save(argThat(path->path.getProductId().equals("product-1")));
@@ -102,7 +107,7 @@ class CategoryPathImportServiceTest {
         var malformed=ops("SKU-1,親>子,官网面包屑（原文）,note,EXTRA\nSKU-1,親>子,官网面包屑（原文）,\"unclosed",null);
         assertThat(malformed.unmatched()).isEqualTo(2);
         assertThat(malformed.rows().get(0).breadcrumb()).contains("EXTRA");
-        service.confirm(7,p.importId());service.confirm(7,malformed.importId());verifyNoInteractions(paths);
+        service.confirm(7,p.importId());service.confirm(7,malformed.importId());verify(paths,never()).save(any());
     }
 
     @Test void malformedPendingRowStillBlocksAValidAliasForTheSameProduct() {
@@ -112,7 +117,7 @@ class CategoryPathImportServiceTest {
         assertThat(p.rows().get(0).flag()).isEqualTo("待核");
         assertThat(p.rows().get(1).reason()).contains("Conflicting");
         service.confirm(7,p.importId());
-        verifyNoInteractions(paths);
+        verify(paths,never()).save(any());
         verify(nodes,never()).save(any());
     }
 
@@ -198,14 +203,14 @@ class CategoryPathImportServiceTest {
             assertThat(new String(service.unmatchedCsv(7,p.importId()),StandardCharsets.UTF_8)).contains("Flag,Reason"," 待核 ","SKU-1","ALIAS-1");
             service.confirm(7,p.importId());
         }
-        verifyNoInteractions(paths); verify(nodes,never()).save(any());
+        verify(paths,never()).save(any()); verify(nodes,never()).save(any());
         assertThat(jdbc.queryForObject("select category_import_flag from bb_product",String.class)).isEqualTo("existing");
     }
 
     @Test void conflictingFlagsAreAllReturnedWhileIdenticalDuplicatesRemainIdempotent() {
         var conflict=flagged("Flag","SKU-1,食品＞水,推定\nALIAS-1,食品＞水,closest path\n");
         assertThat(conflict.unmatched()).isEqualTo(2); assertThat(conflict.newNodes()).isZero();
-        service.confirm(7,conflict.importId()); verifyNoInteractions(paths);
+        service.confirm(7,conflict.importId()); verify(paths,never()).save(any());
         var duplicate=flagged("Flag","SKU-1,食品＞水,推定\nALIAS-1,食品＞水,推定\n");
         assertThat(duplicate.matched()).isEqualTo(2); service.confirm(7,duplicate.importId());
         assertThat(jdbc.queryForObject("select category_import_flag from bb_product",String.class)).isEqualTo("推定");
@@ -232,7 +237,7 @@ class CategoryPathImportServiceTest {
         var p=flagged("Note","SKU-1,食品＞水,推定,not lost\nSKU-1,食品＞水,\"unterminated\n");
         assertThat(p.unmatched()).isEqualTo(2);
         assertThat(new String(service.unmatchedCsv(7,p.importId()),StandardCharsets.UTF_8)).contains("not lost","unterminated","推定");
-        service.confirm(7,p.importId()); verifyNoInteractions(paths);
+        service.confirm(7,p.importId()); verify(paths,never()).save(any());
     }
 
     @Test void acceptsAllEnglishAndChineseHeaderCombinationsInCsvAndXlsx() throws Exception {
@@ -253,15 +258,40 @@ class CategoryPathImportServiceTest {
         assertThat(p.unmatched()).isEqualTo(1); assertThat(p.rows().get(0).breadcrumb()).contains("extra");
     }
 
-    @Test void downloadedTemplateUsesChineseHeadersAndOnePreservedSyntheticExample() {
-        var response = new com.bobbuy.api.CategoryPathImportController(service).template();
-        var rows=CategoryPathImportService.parse("template.csv",response.getBody());
-        assertThat(rows).hasSize(4); assertThat(rows.get(0)).containsExactly("SKU","costco分类路径","路径来源","备注");
-        assertThat(rows.get(1)).containsExactly("FIXTURE-0001","例示親＞例示子","官网面包屑（原文）","合成示例");
-        assertThat(rows.get(2)[2]).isEqualTo("推定（官网无可用面包屑）"); assertThat(rows.get(3)[2]).isEqualTo("推定（官网无页面）");
-        assertThat(response.getHeaders().getFirst("Content-Disposition")).contains("attachment");
-        var p=service.preview(7,true,new MockMultipartFile("file","template.csv","text/csv",response.getBody()));
-        assertThat(p.unmatched()).isEqualTo(3); assertThat(p.rows().get(0).sku()).isEqualTo("FIXTURE-0001");
+    @Test void downloadedTemplateUsesStableIdentitiesWithoutBusinessExamples() {
+        String template=new String(service.exportMappings(7,false,true),StandardCharsets.UTF_8);
+        assertThat(template).isEqualTo("productId,itemNumber,version,categoryNodeId,categoryPath,sortOrder,operation\r\n");
+    }
+
+    @Test void mappingExportRoundTripsAndRepeatedConfirmationDoesNotWriteAgain() {
+        var node=new CategoryTreeNode("leaf",null,Map.of("ja-JP","Example, \"quoted\""),List.of("leaf"),4,null);
+        when(nodes.findAll()).thenReturn(List.of(node));when(nodes.findById("leaf")).thenReturn(Optional.of(node));
+        when(paths.findById("product-1")).thenReturn(Optional.of(new com.bobbuy.model.ProductPrimaryCategoryPath("product-1","leaf")));
+        byte[] exported=new String(service.exportMappings(7,false,false),StandardCharsets.UTF_8).replace("productId,", "\"productId\",").getBytes(StandardCharsets.UTF_8);
+        var p=service.preview(7,false,new MockMultipartFile("file","mapping.csv","text/csv",exported));
+        assertThat(p.matched()).isEqualTo(1);verify(paths,never()).save(any());
+        service.confirm(7,false,p.importId());service.confirm(7,false,p.importId());verify(paths,times(1)).save(any());
+        verify(products,never()).save(any());
+    }
+
+    @Test void changedProductVersionOrScopeRejectsWholeBatchBeforeWriting() {
+        var p=preview("SKU-1,Example>Child\n");
+        var product=products.findById("product-1").orElseThrow();
+        when(product.getRecordVersion()).thenReturn(1L);
+        assertThatThrownBy(()->service.confirm(7,true,p.importId())).hasMessageContaining("product row 2");
+        when(product.getRecordVersion()).thenReturn(0L);when(product.getMerchantId()).thenReturn(8L);
+        assertThatThrownBy(()->service.confirm(7,false,p.importId())).hasMessageContaining("access changed");
+        verify(paths,never()).save(any());verify(nodes,never()).save(any());
+    }
+
+    @Test void changedTreeOrderOrAmbiguousIdentityRejectsBeforeAnyWrites() {
+        var node=new CategoryTreeNode("root",null,Map.of("ja-JP","Root"),List.of("root"),0,null);
+        when(nodes.findAll()).thenReturn(List.of(node));var p=preview("SKU-1,Example>Child\n");
+        node.setSortOrder(3);
+        assertThatThrownBy(()->service.confirm(7,true,p.importId())).hasMessageContaining("category structure/order");
+        node.setSortOrder(0);when(products.findAllByItemNumber("SKU-1")).thenReturn(List.of());
+        assertThatThrownBy(()->service.confirm(7,true,p.importId())).hasMessageContaining("identity row 2");
+        verify(paths,never()).save(any());verify(nodes,never()).save(any());
     }
 
     @Test void rejectsEveryConflictingAssignmentByProductIdBeforePlanningOrWriting() {
@@ -269,7 +299,7 @@ class CategoryPathImportServiceTest {
         assertThat(p.matched()).isZero();assertThat(p.unmatched()).isEqualTo(3);assertThat(p.newNodes()).isZero();
         assertThat(p.rows()).allSatisfy(r->{assertThat(r.outcome()).isEqualTo("UNMATCHED");assertThat(r.reason()).contains("Conflicting");});
         assertThat(new String(service.unmatchedCsv(7,p.importId()),StandardCharsets.UTF_8)).contains("家電＞キッチン家電","食品・飲料＞野菜・果物");
-        service.confirm(7,p.importId());verifyNoInteractions(paths);verify(nodes,never()).save(any());
+        service.confirm(7,p.importId());verify(paths,never()).save(any());verify(nodes,never()).save(any());
     }
 
     @Test void acceptsEquivalentDuplicatesAndTrimsOnlySegmentEdgesWhenWritingJapaneseNames() {
@@ -292,7 +322,7 @@ class CategoryPathImportServiceTest {
         assertThat(p.rows().get(1).breadcrumb()).isEqualTo(malformed);
         String exported=new String(service.unmatchedCsv(7,p.importId()),StandardCharsets.UTF_8);
         assertThat(exported).contains("食品・飲料＞\r\n野菜・果物","remaining input","Malformed CSV");
-        service.confirm(7,p.importId());verifyNoInteractions(paths);verify(nodes,never()).save(any());
+        service.confirm(7,p.importId());verify(paths,never()).save(any());verify(nodes,never()).save(any());
     }
 
     @Test void parsesEscapedQuotesCommasAndLogicalRecordsWithoutChangingNames() {

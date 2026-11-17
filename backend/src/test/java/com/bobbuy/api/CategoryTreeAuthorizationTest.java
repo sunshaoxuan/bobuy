@@ -44,7 +44,7 @@ class CategoryTreeAuthorizationTest {
         doAnswer(c -> {
             var request=(jakarta.servlet.http.HttpServletRequest)c.getArgument(0);
             String authority=request.getHeader("Test-Authority");
-            if(authority!=null)SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("7",null,List.of(new SimpleGrantedAuthority("ROLE_"+authority))));
+            if(authority!=null)SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(new BobbuyAuthenticatedUser(7L,"test","Test",java.util.Set.of()),null,List.of(new SimpleGrantedAuthority("ROLE_"+authority))));
             ((FilterChain)c.getArgument(2)).doFilter(request,c.getArgument(1));return null;
         }).when(role).doFilter(any(ServletRequest.class),any(ServletResponse.class),any(FilterChain.class));
     }
@@ -60,7 +60,7 @@ class CategoryTreeAuthorizationTest {
             mvc.perform(get("/api/category-tree/export.csv").header("Test-Authority",authority)).andExpect(status().is(expected));
             for(String route:List.of("/api/category-tree/import/preview","/api/category-tree/import/confirm","/api/category-tree/node/image"))
                 mvc.perform(multipart(route).file("file",new byte[]{1}).param("revision","test").param("fileHash","test").param("confirmed","true").header("Test-Authority",authority)).andExpect(status().is(expected));
-            mvc.perform(get("/api/category-path-import/template.csv").header("Test-Authority",authority)).andExpect(status().is(expected));
+            for(String route:List.of("/api/category-path-import/template.csv","/api/category-path-import/export.csv")) mvc.perform(get(route).header("Test-Authority",authority)).andExpect(status().is(expected));
         }
         mvc.perform(get("/api/category-tree")).andExpect(status().isUnauthorized());
     }

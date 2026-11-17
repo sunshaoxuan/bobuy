@@ -3,3 +3,4 @@
 
 .category-import-defer{width:100%;min-width:0}.category-import-defer label{display:block;margin-bottom:8px}.category-import-defer textarea{min-height:64px;padding:10px 12px}.category-import-defer p{color:var(--zen-muted);margin:8px 0 0;overflow-wrap:anywhere}.category-import-defer textarea:focus-visible{outline:2px solid #795908;outline-offset:2px}
 .category-import-actions .ant-checkbox-wrapper{min-height:44px;display:flex;align-items:center}
+.category-import .ant-btn>span:not(.anticon){transform:translateY(-1px)}

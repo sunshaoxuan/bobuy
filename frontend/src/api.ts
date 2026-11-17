@@ -895,7 +895,7 @@ async function parseErrorMessage(response: Response): Promise<string> {
             return translate(getStoredLocale(), 'maintenance.title');
         }
         if (payload?.message) {
-            if(payload.message.startsWith('onboarding.'))return translate(getStoredLocale(),payload.message);
+            if(payload.message.startsWith('onboarding.')||payload.message.startsWith('master.'))return translate(getStoredLocale(),payload.message);
             return payload.message;
         }
     } catch {

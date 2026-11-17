@@ -5,6 +5,8 @@ const messages: Dictionary = {
   "catalogTransfer.export": "Export listed products",
   "catalogTransfer.load": "Load JSON file",
   "catalogTransfer.help": "Use existing product IDs and versions. Export includes the products listed on this page (up to 500), subject to your access. Loading a file only fills the preview editor; review and confirm before saving. New or unresolved identities are not created automatically.",
+  "catalogTransfer.template": "Download JSON template",
+  "catalogTransfer.select": "Select at least one previewed product to save.",
   "catalogTransfer.invalid": "Use 1–500 rows with unique existing product IDs in a JSON file of at most 2 MB.",
   "categoryTransfer.done": "Category structure saved.",
   "categoryTransfer.title": "Import / export category structure",
@@ -1592,7 +1594,7 @@ Object.assign(messages,{"card.reference": "Reference price", "card.reference_pas
 Object.assign(messages,{"repair.not_derivable":"Not uniquely derivable","repair.source_title":"Review source-context suggestions","repair.locale_title":"Review AI locale suggestions","repair.review_hint":"Preview every change. Nothing is written until you confirm.","repair.overwrite":"Overwrite existing values","repair.blank":"Leave blank","repair.unchanged":"Keep existing value","repair.confirm":"Confirm and save","repair.deriving":"Deriving from reviewed source…","repair.generating":"Generating AI suggestions…","repair.none":"No valid suggestions to save","repair.ai":"AI suggestion","repair.batch_source":"Fill source context","repair.batch_locale":"Suggest missing locales","repair.one_click":"Preview source fix","repair.ai_action":"Generate AI suggestion"});
 export default messages;
 
-Object.assign(messages,{"categoryImport.title":"Category path import","categoryImport.help":"Upload CSV or XLSX with either > or ＞ separators. Path sources are retained as supplied by operations. Preview before confirming changes.","categoryImport.choose":"Choose operations file","categoryImport.preview":"Preview import","categoryImport.row":"Row","categoryImport.sku":"SKU","categoryImport.path":"Costco breadcrumb","categoryImport.result":"Result","categoryImport.reason":"Reason","categoryImport.matched":"Matched","categoryImport.newNodes":"New nodes","categoryImport.unmatched":"Unmatched / unknown SKU","categoryImport.export":"Export unmatched list","categoryImport.confirmCheck":"I reviewed the preview and product count and explicitly confirm these category-path changes.","categoryImport.confirm":"Confirm import","categoryImport.done":"Import confirmed and audited.","categoryImport.failed":"Import failed. Nothing was silently discarded.","categoryImport.count":"Product count before: {before}; after: {after}"});
+Object.assign(messages,{"categoryImport.title":"Category path import","categoryImport.help":"Upload CSV or XLSX with either > or ＞ separators. Path sources are retained as supplied by operations. Preview before confirming changes.","categoryImport.choose":"Choose operations file","categoryImport.preview":"Preview import","categoryImport.row":"Row","categoryImport.sku":"SKU","categoryImport.path":"Category path","categoryImport.result":"Result","categoryImport.reason":"Reason","categoryImport.matched":"Matched","categoryImport.newNodes":"New nodes","categoryImport.unmatched":"Unmatched / unknown SKU","categoryImport.export":"Export unmatched list","categoryImport.confirmCheck":"I reviewed the preview and product count and explicitly confirm these category-path changes.","categoryImport.confirm":"Confirm import","categoryImport.done":"Import confirmed and audited.","categoryImport.failed":"Import failed. Nothing was silently discarded.","categoryImport.count":"Product count before: {before}; after: {after}"});
 
 Object.assign(messages,{"repair.accept_all":"Accept all mergeable items","repair.edit":"edit","repair.reject":"Reject","repair.product":"Product","repair.product_number":"Product {number}","repair.url_manual":"No product link was found in the source. Paste a verifiable link.","repair.ai_failed":"AI suggestion is unavailable. Enter the content manually.","repair.field.supplierKey":"Supplier","repair.field.channel":"Sales channel","repair.field.sourceMessageKey":"Source message","repair.field.sourceUrl":"Product link","repair.evidence.master":"Product information","repair.evidence.source":"Reviewed source","repair.channel.online":"Online","repair.channel.warehouse":"Warehouse","repair.locale.zh-CN":"Simplified Chinese ","repair.locale.zh-TW":"Traditional Chinese ","repair.locale.ja-JP":"Japanese ","repair.locale.en-US":"English ","repair.locale_field.name":"name","repair.locale_field.specification":"specification"});
 
@@ -1616,7 +1618,8 @@ Object.assign(messages, {
   "categoryTree.deleteBlocked": "Categories with children, products, legacy links or shopping mappings cannot be deleted. Move the products or update the mappings first.",
   "categoryImport.template": "Download CSV template",
   "categoryImport.flag": "Note / flag",
-  "categoryImport.templateHelp": "Chinese headers are supported: SKU, costco分类路径, 路径来源; optional notes use 备注 / 标记 / Note / Flag. The template contains synthetic examples only. Replace them with operations data. All three source tiers use the supplied path."
+  "categoryImport.exportMappings": "Export current mappings",
+  "categoryImport.templateHelp": "Export current mappings to retain stable product identities and versions. Change the category identity to assign an existing category; KEEP retains the assignment. Path and order are reference columns; edit order in category management. Imports never create products. Legacy SKU/path files remain supported."
 });
 
 Object.assign(messages,{
@@ -1627,7 +1630,7 @@ Object.assign(messages,{
   "categoryImport.deferred": "Deferred",
   "categoryImport.deferredReason": "Current category and visibility retained; no changes in this import.",
   "categoryImport.deferLabel": "Defer or exclude product numbers",
-  "categoryImport.deferHelp": "The nine Group C products are deferred by default. Separate product numbers with commas, spaces or new lines. This list replaces the default; clearing it includes all products in the preview. Deferred products keep their category and visibility. Preview again after editing.",
+  "categoryImport.deferHelp": "No products are deferred by default. Separate product numbers with commas, spaces or new lines. Deferred products keep their category and visibility. Preview again after editing.",
   "categoryImport.noMatched": "No matched rows to import. Update the file or deferred list and preview again.",
   "categoryImport.checkRequired": "Check the confirmation box after reviewing the preview.",
   "categoryImport.ready": "Review complete; ready to confirm."

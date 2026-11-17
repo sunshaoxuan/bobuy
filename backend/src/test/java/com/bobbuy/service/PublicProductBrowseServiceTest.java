@@ -16,6 +16,13 @@ class PublicProductBrowseServiceTest {
   assertThat(service.browse(0,null,"Description 50","","en-US",false,null).categories()).isEmpty();
   assignments.put("p050","shop-food-one");assertThatThrownBy(()->service.browse(1,null,"","","en-US",false,overview.revision())).isInstanceOf(PublicProductBrowseService.Changed.class);
  }
+ @Test void retainedRootAssignmentsRemainVisibleWhenRootGainsChildren(){
+  setup();var mapping=org.mockito.Mockito.mock(ShoppingCategoryService.class);
+  var assignments=new HashMap<String,String>();assignments.put("p000","shop-food");assignments.put("p001","shop-food-one");
+  org.mockito.Mockito.when(mapping.snapshot(org.mockito.ArgumentMatchers.any())).thenReturn(new ShoppingCategoryService.Snapshot(ShoppingCategoryMapTest.categories(),assignments));service.setShopping(mapping);
+  var root=service.browse(0,null,"","shop-food","en-US",false,null);
+  assertThat(root.matchedTotal()).isEqualTo(2);assertThat(root.shelves()).isEmpty();assertThat(root.items()).extracting(PublicProductBrowseService.Card::productId).containsExactlyInAnyOrder("p000","p001");
+ }
  @Test void warehousePriorityIsDeterministicAndRejectsOtherItemIdentity(){
   var base=row(0,null);var online=new RecommendationItem();online.id=1L;online.productId=base.productId();online.itemNumber=base.itemNumber();online.referenceContext=new com.bobbuy.model.ReferenceOfferContext(null,"COSTCO_ONLINE",null,null,null,null,null,false,null,false);
   var warehouse=new RecommendationItem();warehouse.id=2L;warehouse.productId=base.productId();warehouse.itemNumber=base.itemNumber();warehouse.referenceContext=new com.bobbuy.model.ReferenceOfferContext(null,"COSTCO_WAREHOUSE",null,null,null,null,null,false,null,false);

@@ -98,7 +98,8 @@ public class PublicProductBrowseService {
   java.util.function.Function<PublicProductCatalogService.Entry,Card> card=e->new Card(e.productId(),e.merchantId(),e.name(),e.brand(),e.itemNumber(),e.specification(),e.model(),e.packaging(),e.gallery().isEmpty()?null:e.gallery().get(0),shoppingData==null?e.categories():display.stream().filter(c->c.id().equals(assignments.get(e.productId()))).map(c->new RecommendationItem.Label(c.id(),c.name())).toList(),data.markers().getOrDefault(e.productId(),List.of()),e.reviewedMaster(),e.rating(),reference(e,now));
   var cards=filtered.subList(start,end).stream().map(card).toList();
   var shelves=new ArrayList<Shelf>();
-  if(shoppingData!=null&&!selected.equals("__unclassified")&&!parents.containsKey(selected)){
+  if(shoppingData!=null&&!selected.equals("__unclassified")&&!parents.containsKey(selected)
+      &&(selected.isEmpty()||filtered.stream().noneMatch(e->selected.equals(assignments.get(e.productId()))))){
    for(var facet:facets)if(Objects.equals(facet.parentId(),selected.isEmpty()?null:selected)){var shelfRows=filtered.stream().filter(e->{var leaf=assignments.get(e.productId());return facet.id().equals(leaf)||facet.id().equals(parents.get(leaf));}).toList();if(!shelfRows.isEmpty())shelves.add(new Shelf(facet.id(),shelfRows.stream().limit(8).map(card).toList(),shelfRows.size()));}
    if(selected.isEmpty()&&unclassified>0){var rows=filtered.stream().filter(e->!assignments.containsKey(e.productId())).toList();shelves.add(new Shelf("__unclassified",rows.stream().limit(8).map(card).toList(),rows.size()));}
   }

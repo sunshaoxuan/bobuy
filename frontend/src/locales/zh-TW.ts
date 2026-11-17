@@ -4,6 +4,8 @@ const messages: Dictionary = {
   "catalogTransfer.export": "匯出目前列表商品",
   "catalogTransfer.load": "讀取 JSON 檔案",
   "catalogTransfer.help": "使用現有商品 ID 與版本。匯出限本頁有權限讀取的商品（最多 500 件）。讀取檔案僅填入預覽編輯區，需核對並確認後儲存；新增或待確認身分不會自動建檔。",
+  "catalogTransfer.template": "下載 JSON 範本",
+  "catalogTransfer.select": "請選擇至少一件已預覽商品後儲存。",
   "catalogTransfer.invalid": "請使用不超過 2 MB、包含 1–500 行且商品 ID 唯一的 JSON 檔案。",
   "categoryTransfer.done": "分類結構已儲存。",
   "categoryTransfer.title": "分類結構匯入 / 匯出",
@@ -1731,7 +1733,7 @@ Object.assign(messages,{"card.reference": "參考價", "card.reference_past": "�
 Object.assign(messages,{"repair.not_derivable":"無法唯一推導，請手動補充","repair.source_title":"核對來源上下文建議","repair.locale_title":"核對 AI 語種建議","repair.review_hint":"請逐項預覽；明確確認前不會寫入。","repair.overwrite":"覆蓋已有值","repair.blank":"保持空白","repair.unchanged":"保留已有值","repair.confirm":"確認並儲存","repair.deriving":"正在從已審核來源推導…","repair.generating":"正在產生 AI 建議…","repair.none":"沒有可儲存的有效建議","repair.ai":"AI 建議","repair.batch_source":"批次補全來源","repair.batch_locale":"建議缺失語種","repair.one_click":"預覽來源修復","repair.ai_action":"產生 AI 建議"});
 export default messages;
 
-Object.assign(messages,{"categoryImport.title":"分類路徑批次匯入","categoryImport.help":"上傳 CSV 或 XLSX，接受半形 > 和全形 ＞ 分隔符。路徑來源按營運原文記錄，預覽後再確認寫入。","categoryImport.choose":"選擇營運檔案","categoryImport.preview":"預覽匯入","categoryImport.row":"列號","categoryImport.sku":"SKU","categoryImport.path":"Costco 麵包屑","categoryImport.result":"結果","categoryImport.reason":"原因","categoryImport.matched":"已配對","categoryImport.newNodes":"將新增節點","categoryImport.unmatched":"未配對／未知 SKU","categoryImport.export":"匯出未配對清單","categoryImport.confirmCheck":"我已核對預覽和商品總數，並明確確認這些分類路徑變更。","categoryImport.confirm":"確認匯入","categoryImport.done":"匯入已確認並留下稽核紀錄。","categoryImport.failed":"匯入失敗，沒有任何列被靜默捨棄。","categoryImport.count":"匯入前商品數：{before}；匯入後：{after}"});
+Object.assign(messages,{"categoryImport.title":"分類路徑批次匯入","categoryImport.help":"上傳 CSV 或 XLSX，接受半形 > 和全形 ＞ 分隔符。路徑來源按營運原文記錄，預覽後再確認寫入。","categoryImport.choose":"選擇營運檔案","categoryImport.preview":"預覽匯入","categoryImport.row":"列號","categoryImport.sku":"SKU","categoryImport.path":"分類路徑","categoryImport.result":"結果","categoryImport.reason":"原因","categoryImport.matched":"已配對","categoryImport.newNodes":"將新增節點","categoryImport.unmatched":"未配對／未知 SKU","categoryImport.export":"匯出未配對清單","categoryImport.confirmCheck":"我已核對預覽和商品總數，並明確確認這些分類路徑變更。","categoryImport.confirm":"確認匯入","categoryImport.done":"匯入已確認並留下稽核紀錄。","categoryImport.failed":"匯入失敗，沒有任何列被靜默捨棄。","categoryImport.count":"匯入前商品數：{before}；匯入後：{after}"});
 
 Object.assign(messages,{"repair.accept_all":"一鍵接受全部可合併項目","repair.edit":"編輯","repair.reject":"拒絕","repair.product":"商品","repair.product_number":"商品 {number}","repair.url_manual":"來源中沒有找到商品連結，請貼上可核驗的連結。","repair.ai_failed":"AI 建議暫不可用，請手動填寫。","repair.field.supplierKey":"供應商","repair.field.channel":"銷售通路","repair.field.sourceMessageKey":"來源郵件","repair.field.sourceUrl":"商品連結","repair.evidence.master":"商品資料","repair.evidence.source":"來源郵件","repair.channel.online":"線上","repair.channel.warehouse":"線下","repair.locale.zh-CN":"簡體中文","repair.locale.zh-TW":"繁體中文","repair.locale.ja-JP":"日文","repair.locale.en-US":"英文","repair.locale_field.name":"名稱","repair.locale_field.specification":"規格"});
 
@@ -1755,7 +1757,8 @@ Object.assign(messages, {
   "categoryTree.deleteBlocked": "含子分類、商品、舊分類對照或購物分類對應時無法刪除。請先移動商品或調整對應。",
   "categoryImport.template": "下載 CSV 範本",
   "categoryImport.flag": "備註 / 標記",
-  "categoryImport.templateHelp": "支援中文表頭：SKU、costco分类路径、路径来源；可附加備註 / 標記欄（表頭使用 备注 / 标记 / Note / Flag）。下載檔僅含合成範例，請替換為營運清單。三種來源均按提供路徑匯入。"
+  "categoryImport.exportMappings": "匯出目前商品歸類",
+  "categoryImport.templateHelp": "請先匯出目前歸類，保留商品穩定身分和版本。修改分類身分可歸入已有分類；KEEP 保留原歸屬。路徑和順序欄僅供參考，排序請在分類管理中編輯。匯入不會建立商品，仍相容舊版 SKU/路徑檔案。"
 });
 
 Object.assign(messages,{
@@ -1766,7 +1769,7 @@ Object.assign(messages,{
   "categoryImport.deferred": "已延後",
   "categoryImport.deferredReason": "保留目前分類與可見狀態，本次不寫入。",
   "categoryImport.deferLabel": "延後或排除的商品編號",
-  "categoryImport.deferHelp": "預設延後 C 組 9 件。商品編號以逗號、空格或換行分隔；此清單取代預設值，清空表示全部參與預覽。延後商品保留目前分類與可見狀態。修改後須重新預覽。",
+  "categoryImport.deferHelp": "預設為空。用逗號、空格或換行分隔需要延後的商品編號。延後商品保留目前分類與可見狀態，修改後須重新預覽。",
   "categoryImport.noMatched": "沒有可匯入的匹配列，請調整檔案或延後清單後重新預覽。",
   "categoryImport.checkRequired": "請勾選核對確認後再匯入。",
   "categoryImport.ready": "已核對，可確認匯入。"

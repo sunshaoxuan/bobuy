@@ -9,11 +9,11 @@ function deferred(){let resolve!:(value:ReturnType<typeof result>)=>void;let rej
 function select(container:HTMLElement,name:string){fireEvent.change(container.querySelector('input[type=file]')!,{target:{files:[new File(['SKU,Costco breadcrumb'],name,{type:'text/csv'})]}});}
 beforeEach(()=>{vi.clearAllMocks();localStorage.setItem('bobbuy_locale','en-US');});
 
-it('offers the Chinese-header template before choosing a file',async()=>{
+it('offers the stable-identity template before choosing a file',async()=>{
  render(<I18nProvider><CategoryPathImport/></I18nProvider>);
  fireEvent.click(screen.getByRole('button',{name:'Download CSV template'}));
  await waitFor(()=>expect(api.download).toHaveBeenCalledWith('/api/category-path-import/template.csv','category-path-template.csv'));
- expect(screen.getByText(/Chinese headers are supported/)).toBeInTheDocument();
+ expect(screen.getByText(/Export current mappings to retain/)).toBeInTheDocument();
  expect(api.preview).not.toHaveBeenCalled();expect(api.confirm).not.toHaveBeenCalled();
 });
 
@@ -86,4 +86,11 @@ it('invalidates a pending preview when the selected file is removed',async()=>{
  await act(async()=>pending.resolve(result('removed')));
  expect(screen.queryByText('removed')).not.toBeInTheDocument();expect(screen.queryByRole('checkbox')).not.toBeInTheDocument();
  expect(screen.getByRole('button',{name:/preview/i})).toBeDisabled();
+});
+
+it('exports authorized current mappings without previewing or submitting',async()=>{
+ render(<I18nProvider><CategoryPathImport/></I18nProvider>);
+ fireEvent.click(screen.getByRole('button',{name:'Export current mappings'}));
+ await waitFor(()=>expect(api.download).toHaveBeenCalledWith('/api/category-path-import/export.csv','product-category-mappings.csv'));
+ expect(api.preview).not.toHaveBeenCalled();expect(api.confirm).not.toHaveBeenCalled();
 });

@@ -135,8 +135,14 @@ public class ProductCatalogService {
  }
  private List<Profile> saveValidated(List<Input> values,CostcoOnboardingJob automaticJob,CostcoOnboardingDecision.Candidate automaticCandidate){
   boolean automated=automaticJob!=null;users.lockById(owner()).orElseThrow();preview(values);
+  var locked=new LinkedHashMap<String,Product>();
+  for(var value:values.stream().sorted(Comparator.comparing(Input::productId)).toList()){
+   var p=owned(value.productId(),true);
+   if(!Objects.equals(p.getRecordVersion(),value.version()))throw invalid("master.conflict");
+   validate(value,p);locked.put(value.productId(),p);
+  }
   var result=new ArrayList<Profile>();for(var value:values.stream().sorted(Comparator.comparing(Input::productId)).toList()){
-   var p=owned(value.productId(),true);if(!Objects.equals(p.getRecordVersion(),value.version()))throw invalid("master.conflict");
+   var p=locked.get(value.productId());
    if(automated){
     if(!sourceHash(p).equals(automaticCandidate.target().sourceHash())||p.getCatalogData()==null||!automaticJob.supplierId().equals(p.getCatalogData().supplierId())||!automaticJob.market().equals(p.getAttributes().get("sourceMarket")))throw invalid("master.conflict");
     var specification=new LinkedHashMap<>(p.getCatalogData().specification());if(automaticCandidate.specification()!=null)specification.put("ja-JP",automaticCandidate.specification());
