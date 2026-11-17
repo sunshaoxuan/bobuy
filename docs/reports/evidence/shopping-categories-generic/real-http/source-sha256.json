@@ -1,0 +1,6 @@
+{
+  "backend/src/main/java/com/bobbuy/api/CategoryImportExceptionHandler.java": "ef5cb72c557326b9f3c624f23a697439e5e755aacfb0d272459aba1c2a32befb",
+  "backend/src/main/java/com/bobbuy/service/CategoryImportConflict.java": "53381c1dcd68dc599e0bcf5142fe9a67d1f358a37a2714d4c7f65fc420abb9e1",
+  "backend/src/main/java/com/bobbuy/service/CategoryPathImportService.java": "91a223abd43fd230084060792831f3899ee41b714c0b516df3a8bb40b8e9bee7",
+  "backend/src/main/java/com/bobbuy/service/CategoryStructureTransferService.java": "69c0d88aa346c56190cf4fc7ad72478b6f4553890a5ad7bbc5b2a7b4d15c0a7f"
+}

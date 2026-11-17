@@ -81,7 +81,7 @@ public class CategoryStructureTransferService {
   var planned=planned(current,p.rows());
   // Exact repeats are no-ops; a changed tree needs a fresh preview before any write.
   if(revision(current).equals(revision(planned)))return p;
-  if(!p.revision().equals(revision))throw new IllegalStateException("Category tree changed; preview again");
+  if(!p.revision().equals(revision))throw new CategoryImportConflict("Category tree changed; preview again");
   nodes.saveAll(planned.stream().filter(n->n.getSystemKey()==null).toList());return preview(bytes,planned);
  }
 }

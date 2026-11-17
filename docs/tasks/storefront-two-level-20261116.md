@@ -194,3 +194,15 @@ Vite原进程在环境恢复后不再存在，本批启动唯一5173进程；先
 
 回执候选18bc34e4原生前端CI：978断言PASS，但costcoOnboardingApi.test.ts退出后AntD静态message仍提交React渲染，window已销毁产生未捕获异常。api.ts错误翻译是本批直接消费者；仅在该API测试mock提示组件并断言翻译后的message.error，不改业务或全局清理规则。最小本地重跑此6项API测试，再跟踪自动CI；既有UI截图与代码行为证据复用。
 API提示隔离修复6项定向测试PASS；18bc34e4后端、全部CodeQL、dependency-check均PASS。后续仅测试/文档修复不使运行时代码、四视口和60控件证据失效。最终自动CI链接同步原PR，失败运行保留，不将其记PASS。
+
+### 真实前后端联调补验（2026-11-18 JST）
+仅补 dde0f031 的真实 HTTP + PostgreSQL 持久化缺口，已有模拟浏览器与 H2/CI PASS 保留但不替代。任务库 `pr158_e2e`、任务容器 `pr158-e2e-postgres`，仅127.0.0.1端口15432，后端18081，前端15173；使用全新合成账号/商品/分类和项目迁移，不接生产。先结构导入正例，再结构/映射/资料闭环、双会话冲突/权限/原子性、四视口导航与图上传。业务API不拦截；AI、邮件、定时外部同步非目标依赖关闭。只构建实际后端所需产物，不重跑全CI；发现直接缺陷先记录最小修复和重验。停止条件：全矩阵PASS、脱敏证据归档、清理本任务库与进程；或明确不可消除外部阻塞。遵循本文件已有UI标准验收条款及字形/热区预算。
+
+### 最新发布授权与准备状态（2026-11-18 JST）
+用户新增授权由本云端在联调及原生门禁通过后发布机制、覆盖首页、通过通用导入维护四CSV分类及现有归属、为一级分类生成原创站内图。此前禁止生产操作已被本授权覆盖；仍不允许跳过验收、猜测归属、曝光隐藏商品或捏造价格库存。74160待确认、1035不建档、旧分类引用保护保持。当前真实后端PID18513/18081，隔离PostgreSQL18.6已成功应用46项项目迁移至V45；真实浏览器闭环尚未PASS。当前云端未找到SSH配置/部署环境变量，尚不能核实生产基线和其他任务写入状态，未执行生产写入。已有私有传输落盘仅part1-3.partial各20001字节、part4 14273字节，总74276，与64704字节包所需86272 Base64字节不符，不能当作原字节校验通过。继续独立联调与准备，不使用残缺CSV导入。
+
+真实HTTP发现：分类结构并发修改后确认正确拒写但异常被全局转换为500，隐藏可操作冲突。新增分类接口限定异常处理及显式冲突异常，返回409和原冲突说明，格式错误400；不改变锁/事务/状态校验。失效范围为分类导入HTTP错误响应，最小重跑为真实结构/映射冲突、非法文件与UI反馈及针对性控制器测试。
+
+Real HTTP integration continuation: 1280 and 1440 viewport flows passed; mobile run stopped at a test locator requiring the desktop Sign out control to be visible. Use attached authentication control for the mobile setup and rerun only 390/360. Extra HTTP checks passed: profile batch rollback, duplicate/unknown identities, protected fields, mapping invalid rows and product-version conflict. No production write has been executed by this task.
+
+真实 HTTP 补验记录：见 evidence/shopping-categories-generic/real-http/README.md。PostgreSQL 18.6 与项目迁移已实际运行；四视口业务流程通过，图片真实上传/替换/非法文件保留原图通过，跨商户令牌 404 通过。HTTP 边界新增两项测试通过。手机抽屉初次截图处于动画中，仅补稳定截图，不重做已通过导入。结构冲突 UI 重预览脚本误在旧勾选状态仍存在时勾选，响应随后清除确认导致按钮禁用；脚本改为等待新预览响应与确认重置，仅补该链。业务清除确认符合输入变化规则，不为测试放宽。

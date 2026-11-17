@@ -149,18 +149,18 @@ public class CategoryPathImportService {
         nodes.lockTree().orElseThrow(() -> new IllegalStateException("Category tree is unavailable"));
         Preview p=get(actorId,id);
         if("CONFIRMED".equals(p.status())) return p;
-        if(!"PREVIEWED".equals(p.status())) throw new IllegalStateException("Import cannot be confirmed");
-        if(p.unmatched()>0){if(p.matched()>0)throw new IllegalStateException("Resolve all invalid rows and preview again before confirming");return p;}
+        if(!"PREVIEWED".equals(p.status())) throw new CategoryImportConflict("Import cannot be confirmed");
+        if(p.unmatched()>0){if(p.matched()>0)throw new CategoryImportConflict("Resolve all invalid rows and preview again before confirming");return p;}
         Map<String,String> expected=readState(id);
         // Lock and validate the complete batch before creating nodes or changing any assignment.
         for(String productId:p.rows().stream().filter(r->"MATCHED".equals(r.outcome())).map(Row::productId).distinct().sorted().toList()) {
-            Product product=products.lockById(productId).orElseThrow(()->new IllegalStateException("Product removed; preview again"));
-            if(!platformAdmin&&!Objects.equals(product.getMerchantId(),actorId))throw new IllegalStateException("Product access changed; preview again");
+            Product product=products.lockById(productId).orElseThrow(()->new CategoryImportConflict("Product removed; preview again"));
+            if(!platformAdmin&&!Objects.equals(product.getMerchantId(),actorId))throw new CategoryImportConflict("Product access changed; preview again");
         }
         Map<String,String> actual=state(actorId,platformAdmin,p.rows(),Map.of());
         List<String> conflicts=new ArrayList<>();
         for(var entry:expected.entrySet())if(!entry.getKey().startsWith("target:")&&!Objects.equals(entry.getValue(),actual.get(entry.getKey())))conflicts.add(entry.getKey());
-        if(!conflicts.isEmpty())throw new IllegalStateException("Preview changed ("+String.join(", ",conflicts)+"); preview again before confirming");
+        if(!conflicts.isEmpty())throw new CategoryImportConflict("Preview changed ("+String.join(", ",conflicts)+"); preview again before confirming");
         for(Row row:p.rows()) if("MATCHED".equals(row.outcome())) {
             String target=expected.get("target:"+row.productId());
             if(target!=null){paths.save(new ProductPrimaryCategoryPath(row.productId(),target));continue;}
@@ -219,7 +219,7 @@ public class CategoryPathImportService {
         targets.forEach((id,target)->result.put("target:"+id,target));return result;
     }
     private void saveState(String id,Map<String,String> state){jdbc.update("update bb_category_path_import set preview_state=? where id=?",encoded(state),id);}
-    private Map<String,String> readState(String id){String raw=jdbc.queryForObject("select preview_state from bb_category_path_import where id=?",String.class,id);if(raw==null)throw new IllegalStateException("Preview predates conflict protection; preview again");try{return json.readValue(raw,new com.fasterxml.jackson.core.type.TypeReference<Map<String,String>>(){});}catch(IOException e){throw new IllegalStateException("Invalid preview; preview again",e);}}
+    private Map<String,String> readState(String id){String raw=jdbc.queryForObject("select preview_state from bb_category_path_import where id=?",String.class,id);if(raw==null)throw new CategoryImportConflict("Preview predates conflict protection; preview again");try{return json.readValue(raw,new com.fasterxml.jackson.core.type.TypeReference<Map<String,String>>(){});}catch(IOException e){throw new IllegalStateException("Invalid preview; preview again",e);}}
     @Transactional(readOnly=true) public byte[] exportMappings(long actorId,boolean admin,boolean template){
         try(var out=new StringWriter();var csv=new CSVPrinter(out,CSVFormat.RFC4180)){
             csv.printRecord(MAPPING_HEADER);

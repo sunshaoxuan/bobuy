@@ -1,0 +1,124 @@
+{
+  "passed": [
+    "customer denied category administration",
+    "structure export/preview/cancel no tree writes",
+    "second-session tree reorder rejects stale preview without overwrite",
+    "structure repreview and roundtrip",
+    "other merchant cannot reuse preview token",
+    "mapping tree conflict atomic rejection",
+    "mapping real persistence and repeat-confirm no rewrite",
+    "mapping export scoped to merchant"
+  ],
+  "events": [
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-tree",
+      "status": 403
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-tree/export.csv",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-tree/import/preview",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/category-tree/e2e-root",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-tree/import/confirm",
+      "status": 409
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-tree/export.csv",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-tree/import/preview",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-tree/import/confirm",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-path-import/preview",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-path-import/ff292f40-9582-4463-b419-47763b68eecb/confirm",
+      "status": 500
+    },
+    {
+      "method": "PUT",
+      "path": "/api/category-tree/e2e-root",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-path-import/ff292f40-9582-4463-b419-47763b68eecb/confirm",
+      "status": 409
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-path-import/preview",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-path-import/9befa612-873e-401a-a43b-b2ca9253ae85/confirm",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-path-import/9befa612-873e-401a-a43b-b2ca9253ae85/confirm",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-path-import/export.csv",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-path-import/export.csv",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/product-catalog/e2e-p1",
+      "status": 500
+    }
+  ]
+}
