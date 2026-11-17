@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "events": [
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-tree/export.csv?template=true",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-path-import/template.csv",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-tree/export.csv",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-tree/import/preview",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-tree/import/confirm",
+      "status": 400
+    }
+  ]
+}

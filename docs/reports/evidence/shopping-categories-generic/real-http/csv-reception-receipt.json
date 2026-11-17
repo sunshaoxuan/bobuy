@@ -1,0 +1,31 @@
+{
+  "archiveBytes": 64704,
+  "archiveSha256": "7263ed5747b90c3f8c2901c9aae0a725156297cb88c58d52395fbe73e6081d06",
+  "files": {
+    "category-tree-migration-2026-11-16.csv": {
+      "rows": 1167,
+      "sha256": "5eec1de6a689400b80f3e2be24e1eab5d521a765052373d68bd58e0adbd77594",
+      "verified": true
+    },
+    "uber-mapping-existing-2026-11-16.csv": {
+      "rows": 481,
+      "sha256": "4852d90dc8a62ce150c8c9d382e7b0b4fbc5db6a68cca056336f8017b3d5d95a",
+      "verified": true
+    },
+    "uber-mapping-new-2026-11-16.csv": {
+      "rows": 686,
+      "sha256": "2f482c217ced268a1a99c7a7201b798a23a03c3fd7e7fdf9029cb24261d86591",
+      "verified": true
+    },
+    "uber-mapping-staging-2026-11-16.csv": {
+      "rows": 1035,
+      "sha256": "746f9fbcdcf44e461eee6b4e2917dc96f92c9ee8e095954dafa6cb78a490c54f",
+      "verified": true
+    }
+  },
+  "nonEmptyRoots": 26,
+  "unionPathSlots": 145,
+  "directRootSlots": 3,
+  "productionMatch": "source-side validation only; current production identity recheck still required",
+  "productionWrites": false
+}

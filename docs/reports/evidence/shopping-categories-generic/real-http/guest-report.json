@@ -1,0 +1,26 @@
+[
+  {
+    "width": 1280,
+    "height": 800,
+    "errors": [],
+    "passed": true
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "errors": [],
+    "passed": true
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "errors": [],
+    "passed": true
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "errors": [],
+    "passed": true
+  }
+]

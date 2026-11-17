@@ -1,0 +1,344 @@
+{
+  "syntheticArtwork": true,
+  "productionBound": false,
+  "results": [
+    {
+      "file": "01.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        46,
+        38,
+        208,
+        222
+      ],
+      "transparentPixels": 42541,
+      "result": "PASS"
+    },
+    {
+      "file": "02.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        29,
+        57,
+        224,
+        222
+      ],
+      "transparentPixels": 43560,
+      "result": "PASS"
+    },
+    {
+      "file": "03.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        39,
+        41,
+        216,
+        225
+      ],
+      "transparentPixels": 44379,
+      "result": "PASS"
+    },
+    {
+      "file": "04.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        37,
+        56,
+        216,
+        205
+      ],
+      "transparentPixels": 47646,
+      "result": "PASS"
+    },
+    {
+      "file": "05.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        35,
+        37,
+        219,
+        226
+      ],
+      "transparentPixels": 46210,
+      "result": "PASS"
+    },
+    {
+      "file": "06.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        36,
+        45,
+        207,
+        216
+      ],
+      "transparentPixels": 46588,
+      "result": "PASS"
+    },
+    {
+      "file": "07.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        27,
+        68,
+        223,
+        224
+      ],
+      "transparentPixels": 42928,
+      "result": "PASS"
+    },
+    {
+      "file": "08.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        35,
+        50,
+        214,
+        217
+      ],
+      "transparentPixels": 41969,
+      "result": "PASS"
+    },
+    {
+      "file": "09.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        32,
+        57,
+        220,
+        215
+      ],
+      "transparentPixels": 47696,
+      "result": "PASS"
+    },
+    {
+      "file": "10.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        54,
+        54,
+        201,
+        202
+      ],
+      "transparentPixels": 41751,
+      "result": "PASS"
+    },
+    {
+      "file": "11.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        32,
+        45,
+        222,
+        221
+      ],
+      "transparentPixels": 40269,
+      "result": "PASS"
+    },
+    {
+      "file": "12.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        42,
+        46,
+        208,
+        216
+      ],
+      "transparentPixels": 44341,
+      "result": "PASS"
+    },
+    {
+      "file": "13.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        39,
+        49,
+        218,
+        215
+      ],
+      "transparentPixels": 42278,
+      "result": "PASS"
+    },
+    {
+      "file": "14.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        36,
+        35,
+        217,
+        224
+      ],
+      "transparentPixels": 41885,
+      "result": "PASS"
+    },
+    {
+      "file": "15.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        36,
+        52,
+        213,
+        213
+      ],
+      "transparentPixels": 44602,
+      "result": "PASS"
+    },
+    {
+      "file": "16.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        45,
+        42,
+        208,
+        217
+      ],
+      "transparentPixels": 47250,
+      "result": "PASS"
+    },
+    {
+      "file": "17.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        57,
+        32,
+        197,
+        223
+      ],
+      "transparentPixels": 47453,
+      "result": "PASS"
+    },
+    {
+      "file": "18.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        30,
+        51,
+        224,
+        215
+      ],
+      "transparentPixels": 48005,
+      "result": "PASS"
+    },
+    {
+      "file": "19.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        62,
+        55,
+        200,
+        209
+      ],
+      "transparentPixels": 50714,
+      "result": "PASS"
+    },
+    {
+      "file": "20.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        39,
+        46,
+        214,
+        215
+      ],
+      "transparentPixels": 43867,
+      "result": "PASS"
+    },
+    {
+      "file": "21.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        36,
+        39,
+        210,
+        219
+      ],
+      "transparentPixels": 46616,
+      "result": "PASS"
+    },
+    {
+      "file": "22.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        41,
+        60,
+        211,
+        211
+      ],
+      "transparentPixels": 49871,
+      "result": "PASS"
+    },
+    {
+      "file": "23.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        37,
+        53,
+        216,
+        219
+      ],
+      "transparentPixels": 45131,
+      "result": "PASS"
+    },
+    {
+      "file": "24.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        50,
+        43,
+        210,
+        221
+      ],
+      "transparentPixels": 43681,
+      "result": "PASS"
+    },
+    {
+      "file": "25.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        40,
+        52,
+        214,
+        209
+      ],
+      "transparentPixels": 46729,
+      "result": "PASS"
+    },
+    {
+      "file": "26.png",
+      "width": 256,
+      "height": 256,
+      "bounds": [
+        32,
+        46,
+        216,
+        215
+      ],
+      "transparentPixels": 46178,
+      "result": "PASS"
+    }
+  ]
+}
