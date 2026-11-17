@@ -223,3 +223,7 @@ Real HTTP integration continuation: 1280 and 1440 viewport flows passed; mobile 
 原创配图准备完成：image_gen逐类生成26张，无外链/复制Uber素材；统一256×256透明PNG，导航32×32，合计1039281字节。主Agent已查看最终总览逐张核对语义、边界和缩小识别；26份唯一图像/分类、尺寸/alpha/留白检查PASS。Gemini工具不可用，保留主Agent直接审查证据。正式图包 /workspace/artifacts/pr158-category-icons.zip，正式索引real-http/artwork-manifest.json；目前仅准备完成，生产上传绑定26项仍未执行，不标生产PASS。
 
 本批收敛回执：本批新增源码仍仅8e102b46的HTTP错误边界修复；之后仅文档、脱敏证据与原创图总览/摘要，不重复本地全量。任务隔离库pr158_e2e容器和PID18513/18729已清理，临时测试凭据和含自动生成测试口令的日志删除；共享工具、其他Vite、正式证据、私有CSV归档和配图图包保留。当前线上仍旧16类；真实生产分类上传绑定与首页发布验收尚未执行。生产访问缺口待既有云端操作器/管理连接接入，不要求用户聊天传秘密。
+
+## 2026-11-17 原生 CI 按钮过渡态修复
+文档候选 7ddeae48 的 PR checks 44140625003：后端成功，前端 RecommendationIssueDateEditor.test.tsx:76 失败。GitHub annotation 显示冲突提示已出现、按钮已禁用，但 Ant Design 仍呈现 loading Save issue date 的过渡态名称。修复仅此断言改为等待稳定按钮名称后检查禁用；不改变组件、冲突处理或确认约束。最小检查为该测试文件，随后跟踪本次推送唯一原生 CI；既有真实 HTTP/隔离 PostgreSQL 和四视口证据继续适用，无需重启服务。停止条件：定向文件与原生门禁通过。生产操作仍未开始。
+修正后定向 Vitest：47/47 PASS；git diff --check PASS。第一次编辑脚本的唯一性断言失败，故第一次运行仍为原测试（也 PASS）；随后仅修正指定测试并运行上述修正后检查，未修改业务源码。
