@@ -227,3 +227,6 @@ Real HTTP integration continuation: 1280 and 1440 viewport flows passed; mobile 
 ## 2026-11-17 原生 CI 按钮过渡态修复
 文档候选 7ddeae48 的 PR checks 44140625003：后端成功，前端 RecommendationIssueDateEditor.test.tsx:76 失败。GitHub annotation 显示冲突提示已出现、按钮已禁用，但 Ant Design 仍呈现 loading Save issue date 的过渡态名称。修复仅此断言改为等待稳定按钮名称后检查禁用；不改变组件、冲突处理或确认约束。最小检查为该测试文件，随后跟踪本次推送唯一原生 CI；既有真实 HTTP/隔离 PostgreSQL 和四视口证据继续适用，无需重启服务。停止条件：定向文件与原生门禁通过。生产操作仍未开始。
 修正后定向 Vitest：47/47 PASS；git diff --check PASS。第一次编辑脚本的唯一性断言失败，故第一次运行仍为原测试（也 PASS）；随后仅修正指定测试并运行上述修正后检查，未修改业务源码。
+
+56ab94aa 原生检查 44142008005 新失败仅 PublishedArticleRevision.test.tsx:28：annotation 明确 loading Save all four versions 已禁用而精确名称尚未稳定；日期测试已不再失败。最小修复此 409 断言等待稳定名称，运行该文件后跟踪新候选原生 CI。组件、导入、生产数据均不变，不重跑隔离浏览器。
+文章修订定向测试 17/17 PASS。前次候选 CodeQL 与依赖审计成功。后续只跟踪新候选自动门禁，不重复本地全量。
