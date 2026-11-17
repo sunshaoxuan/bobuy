@@ -191,3 +191,6 @@ Vite原进程在环境恢复后不再存在，本批启动唯一5173进程；先
 - 本轮无生产写入、无在途生产写任务；结构迁移只提交代码，没有执行生产迁移。无合并或部署。原生CI必须通过后交付，PR继续草稿。
 
 最终代码候选 `5c0649d260147b721d1d3f1873e17087ac6a29d2` 原生门禁全部PASS：[PR checks](https://github.com/sunshaoxuan/bobuy/actions/runs/44052070294)（后端多模块编译/测试与前端检查）、[CodeQL](https://github.com/sunshaoxuan/bobuy/actions/runs/44052070260)、[dependency-check](https://github.com/sunshaoxuan/bobuy/actions/runs/44052070403)。最终控件像素60/60 PASS；原尺寸截图主Agent已查看，Gemini不可用按直接截图/样式/像素检查降级。该回执仅文档变化，复用上述未变化源码、依赖、配置与合成环境证据，不本地重跑全量；平台自动触发则跟踪原运行。无剩余代码验收阻塞；生产数据验收不属于本任务。
+
+回执候选18bc34e4原生前端CI：978断言PASS，但costcoOnboardingApi.test.ts退出后AntD静态message仍提交React渲染，window已销毁产生未捕获异常。api.ts错误翻译是本批直接消费者；仅在该API测试mock提示组件并断言翻译后的message.error，不改业务或全局清理规则。最小本地重跑此6项API测试，再跟踪自动CI；既有UI截图与代码行为证据复用。
+API提示隔离修复6项定向测试PASS；18bc34e4后端、全部CodeQL、dependency-check均PASS。后续仅测试/文档修复不使运行时代码、四视口和60控件证据失效。最终自动CI链接同步原PR，失败运行保留，不将其记PASS。

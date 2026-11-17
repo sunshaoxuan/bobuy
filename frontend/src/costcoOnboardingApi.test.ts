@@ -1,7 +1,10 @@
 import{afterEach,beforeEach,describe,expect,it,vi}from'vitest';
 import{api}from'./api';
+import {message} from 'antd';
+// API contract tests assert notifications without leaving a React portal after teardown.
+vi.mock('antd',()=>({message:{error:vi.fn(),warning:vi.fn()}}));
 import{translate,type Locale}from'./i18n';
-beforeEach(()=>{localStorage.clear();});afterEach(()=>{vi.unstubAllGlobals();vi.restoreAllMocks();localStorage.clear();});
+beforeEach(()=>{localStorage.clear();vi.clearAllMocks();});afterEach(()=>{vi.unstubAllGlobals();vi.restoreAllMocks();localStorage.clear();});
 describe('owned Costco queue API',()=>{
  it('sends one stable intent and whitelisted number fields to the durable endpoint',async()=>{
   const fetch=vi.fn().mockResolvedValue({ok:true,status:200,json:async()=>({status:'success',data:{id:'synthetic',state:'QUEUED',revision:0}})});vi.stubGlobal('fetch',fetch);
@@ -20,5 +23,6 @@ describe('owned Costco queue API',()=>{
   localStorage.setItem('bobbuy_locale',locale);vi.spyOn(console,'error').mockImplementation(()=>{});
   vi.stubGlobal('fetch',vi.fn().mockResolvedValue({ok:false,status:429,statusText:'Too Many Requests',json:async()=>({errorCode:'RATE_LIMITED',message:'onboarding.pending_quota'})}));
   await expect(api.costcoOnboarding.number({requestId:'00000000-0000-0000-0000-000000000001',supplierId:'supplier-jp',market:'JP',itemNumber:'14110'})).rejects.toThrow(translate(locale,'onboarding.pending_quota'));
+  expect(message.error).toHaveBeenCalledWith(translate(locale,'onboarding.pending_quota'));
  });
 });
