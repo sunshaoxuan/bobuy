@@ -21,6 +21,8 @@ import java.util.Locale;
 @RequestMapping("/api/mobile/products")
 public class MobileProductController {
     private final BobbuyStore store;
+    @org.springframework.beans.factory.annotation.Autowired private com.bobbuy.service.ProductCategoryPathResolver categoryPaths;
+    @org.springframework.beans.factory.annotation.Autowired private com.bobbuy.repository.CategoryTreeNodeRepository categoryNodes;
     private final LocalizedJsonbReaderService localizedJsonbReaderService;
     @org.springframework.beans.factory.annotation.Autowired private com.bobbuy.service.ProductSaleService prices;
 
@@ -70,6 +72,12 @@ public class MobileProductController {
         if (product == null) return null;
         String displayName = localizedJsonbReaderService.read(product.getName() != null ? product.getName() : java.util.Collections.emptyMap(), locale);
         String displayDescription = localizedJsonbReaderService.read(product.getDescription() != null ? product.getDescription() : java.util.Collections.emptyMap(), locale);
-        var response=new MobileProductResponse(product, displayName, displayDescription);response.setCurrentRegular(prices.currentRegular(product));return response;
+        var response=new MobileProductResponse(product, displayName, displayDescription);response.setCurrentRegular(prices.currentRegular(product));
+        var resolved=categoryPaths.resolve(product);
+        categoryNodes.findById(resolved.categoryId()).ifPresent(node->{
+            var names=new java.util.ArrayList<String>();
+            for(var id:node.getFullPath())categoryNodes.findById(id).ifPresent(n->{var name=n.getName().get(locale.toLanguageTag());if(name==null||name.isBlank())name=n.getName().get("ja-JP");if(name!=null&&!name.isBlank())names.add(name);});
+            response.setCategoryPath(String.join(" › ",names));
+        });return response;
     }
 }

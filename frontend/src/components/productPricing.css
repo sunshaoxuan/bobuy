@@ -35,3 +35,11 @@
 @media(max-width:600px){.price-document-grid{grid-template-columns:1fr;}.price-document-actions .ant-btn{min-height:44px;}.price-document-form .ant-input,.price-document-form .ant-input-number,.price-document-form .ant-select-selector{min-height:44px;}}
 @media(max-width:600px){.pricing-history-table {display:none;}.pricing-history-cards {display:block;}}
 @media(max-width:600px){.price-document-confirm .ant-modal-footer{display:flex;justify-content:flex-end;gap:8px;}.price-document-confirm .ant-modal-footer .ant-btn{min-height:44px;margin-inline-start:0;}.price-document-confirm .ant-modal-close{min-width:44px;min-height:44px;top:8px;right:8px;}.price-document-confirm .ant-modal-title{padding-right:36px;}}
+
+/* Reviewed pricing actions use the existing workbench control family. */
+.product-pricing-drawer .ant-alert{margin:12px 0;overflow-wrap:anywhere;}
+.product-pricing-drawer .ant-alert-with-description,.product-pricing-drawer .ant-alert{flex-wrap:wrap;gap:8px;}
+.product-pricing-drawer .ant-btn,.price-document-confirm .ant-btn{min-height:44px;height:auto;white-space:normal;}
+.price-document-confirm .ant-checkbox-wrapper{min-height:44px;align-items:center;}
+.price-document-confirm .ant-input{min-height:44px;}
+.price-document-confirm li{overflow-wrap:anywhere;}

@@ -50,8 +50,13 @@ public class ProductSaleService {
   if(input.enabled()&&input.validThrough()!=null&&input.validThrough().isBefore(today()))throw invalid("sale.expired");
   if(input.reason()==null||input.reason().isBlank()||input.reason().length()>1000)throw invalid("pricing.reason_required");
   if(adjustments.findByProductIdOrderByCreatedAtDescIdDesc(product.getId()).stream().anyMatch(a->Objects.equals(a.merchantId,owner)&&a.channel.equals("STOREFRONT")&&a.status==ProductPriceAdjustment.Status.APPROVED&&(a.endsAt==null||a.endsAt.isAfter(time.now()))&&(!a.currency.equals(input.currency())||!Objects.equals(a.line(product.getId()).unit,input.unit().trim()))))throw invalid("pricing.regular_conflict");
-  var document=new ProductPriceAdjustment();document.merchantId=owner;document.channel="STOREFRONT";document.currency=currency.code;document.type=ProductPriceAdjustment.Type.PERMANENT;document.startsAt=time.now();document.status=ProductPriceAdjustment.Status.APPROVED;document.sourceNote=input.reason().trim();document.createdBy=owner;document.updatedBy=owner;document.approvedBy=owner;document.createdAt=time.now();document.updatedAt=time.now();document.approvedAt=time.now();document.documentNumber="PC-"+UUID.randomUUID();
+  var current=prior==null?null:currentRegular(product);
+  boolean samePrice=current!=null&&current.amount().compareTo(input.amount())==0&&current.currency().equals(input.currency())&&current.unit().equals(input.unit().trim());
+  if(samePrice&&Objects.equals(prior.validFrom(),input.validFrom())&&Objects.equals(prior.validThrough(),input.validThrough())&&prior.enabled()==input.enabled()&&product.getOrderMethod()==OrderMethod.PRE_ORDER)return;
+  if(!samePrice){
+  var document=new ProductPriceAdjustment();document.merchantId=owner;document.channel="STOREFRONT";document.currency=currency.code;document.type=ProductPriceAdjustment.Type.PERMANENT;document.startsAt=time.now();document.status=ProductPriceAdjustment.Status.APPROVED;document.sourceNote=input.reason().trim();document.createdBy=owner;document.updatedBy=owner;document.approvedBy=owner;document.createdAt=time.now();document.updatedAt=time.now();document.approvedAt=time.now();document.documentNumber="PC-"+UUID.randomUUID();document.evidence.put("regularConfirmation",true);
   var line=new ProductPriceAdjustmentLine();line.document=document;line.productId=product.getId();line.amount=input.amount();line.beforeAmount=prior==null?null:currentRegular(product).amount();line.unit=input.unit().trim();document.lines.add(line);adjustments.saveAndFlush(document);
+  }
   // Confirming a regular quote is the operator's explicit choice of the
   // pre-order sales workflow. Do this only after every validation has passed.
   product.setOrderMethod(OrderMethod.PRE_ORDER);

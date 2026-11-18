@@ -56,6 +56,7 @@ interface StockItem {
   name: string;
   nameL10n?: L10nValues;
   category: string;
+  categoryPath?: string;
   price: number;
   actualSale?:import('../api').ProductSale;
   stock: number;
@@ -272,6 +273,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         catalogDriven:!!(res.product as unknown as {catalogData?:unknown}).catalogData,
         name: res.displayName,
         nameL10n: res.product.name,
+        categoryPath: res.categoryPath,
         category: res.product.categoryId || '',
         price: res.product.basePrice,
         actualSale:res.currentRegular??undefined,
@@ -390,6 +392,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         visibilityStatus:product.visibilityStatus,
         name: response.displayName,
         nameL10n: product.name,
+        categoryPath: response.categoryPath,
         category: product.categoryId || '',
         price: product.basePrice,
         stock: 0,
@@ -644,7 +647,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
       title: t('stock.item.category'),
       dataIndex: 'category',
       width: 120,
-      render: (text: string) => { const category=categories.find(item=>item.id===text); const label=category?.name?.[locale] ?? category?.name?.['en-US'] ?? text; return compactText(label, label); }
+      render: (text: string, record: StockItem) => { const category=categories.find(item=>item.id===text); const label=record.categoryPath || category?.name?.[locale] || category?.name?.['en-US'] || text; return compactText(label, label); }
     },
     {
       title: (
@@ -747,7 +750,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
     <div className={embedded?'product-records-workspace':undefined} style={{ padding: isMobile ? `0 0 ${MOBILE_BOTTOM_PADDING} 0` : `0 0 ${DESKTOP_BOTTOM_PADDING} 0` }}>
       {!embedded&&<Breadcrumb style={{ marginBottom: '1rem' }} items={[{ title: t('nav.dashboard') }, { title: t('products.title') }]} />}
       <Drawer className="marker-drawer" title={t('marker.assigned')} width="min(100vw,620px)" open={!!markerId} onClose={closeMarkers} maskClosable={false} destroyOnClose>{markerId&&<ProductMarkerEditor productId={markerId} onDirtyChange={setMarkerDirty} onBusyChange={setMarkerBusy}/>}</Drawer>
-      <ProductCatalogPanel id={catalogId} onChoose={setCatalogId} entries={dataSource.filter(row=>!row.isNew)} onSaved={(values,canonical=true)=>setDataSource(prior=>prior.map(row=>{const value=values.find(v=>v.productId===row.key);return value?{...row,catalogDriven:canonical,name:getLocalizedFallback(value.name,row.name),nameL10n:value.name,specificationL10n:value.specification,description:getLocalizedFallback(value.description,''),descriptionL10n:value.description,brand:value.brand??undefined,sku:value.itemNumber??undefined,category:value.categoryIds[0]??'',mediaGallery:value.gallery.map(p=>({id:p.sha256||p.url,url:p.url,type:p.type==='VIDEO'?'video' as const:'image' as const,title:p.title,visible:p.visible}))}:row;}))}/>
+      <ProductCatalogPanel id={catalogId} onChoose={setCatalogId} entries={dataSource.filter(row=>!row.isNew)} onSaved={(values,canonical=true)=>{values.forEach(v=>{void api.product(v.productId).then(result=>setDataSource(rows=>rows.map(row=>row.key===v.productId?{...row,categoryPath:result.categoryPath}:row))).catch(error=>message.error(t(error.message)));});setDataSource(prior=>prior.map(row=>{const value=values.find(v=>v.productId===row.key);return value?{...row,catalogDriven:canonical,name:getLocalizedFallback(value.name,row.name),nameL10n:value.name,specificationL10n:value.specification,description:getLocalizedFallback(value.description,''),descriptionL10n:value.description,brand:value.brand??undefined,sku:value.itemNumber??undefined,category:value.categoryIds[0]??'',mediaGallery:value.gallery.map(p=>({id:p.sha256||p.url,url:p.url,type:p.type==='VIDEO'?'video' as const:'image' as const,title:p.title,visible:p.visible}))}:row;}));}}/>
 
       <div className={`stock-toolbar ${isMobile ? 'stock-toolbar-mobile' : ''} ${toolbarCompact ? 'stock-toolbar-compact' : ''}`}>
         <div style={{ minWidth: 0 }}>
@@ -815,7 +818,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
           </button>
           <div className="record-caption"><div className="record-meta"><span>{item.sku||t('rec.not_stated')}</span><span>{t(item.isNew?'stock.status.new':'stock.status.modified')}</span></div>
             <button className="record-title" onClick={()=>setCatalogId(item.key)}><h3>{name}</h3></button>
-            <ProductBrand brand={item.brand}/><p>{category?getLocalizedFallback(category.name):t('master.title')}</p>{getLocalizedFallback(item.specificationL10n,'')&&<p className="record-specification">{getLocalizedFallback(item.specificationL10n,'')}</p>}
+            <ProductBrand brand={item.brand}/><p>{item.categoryPath||(category?getLocalizedFallback(category.name):t('master.title'))}</p>{getLocalizedFallback(item.specificationL10n,'')&&<p className="record-specification">{getLocalizedFallback(item.specificationL10n,'')}</p>}
             <ProductReviewStars productId={item.isNew||item.visibilityStatus==='DRAFTER_ONLY'?undefined:item.key}/><div className="record-sale-state">{item.actualSale?<CardPrice amount={item.actualSale.amount} currency={item.actualSale.currency}/>:t('sale.pending')}</div>
             <div className="record-card-actions marker-product-actions"><Tooltip title={t('marker.assigned')}><Button className="marker-product-trigger" icon={<TagsOutlined aria-hidden/>} aria-label={t('marker.assigned')+' '+name} disabled={item.isNew} onClick={()=>openMarkers(item.key)}/></Tooltip><Button onClick={()=>setCatalogId(item.key)}>{t('master.title')}</Button><Button type="text" onClick={()=>setPricingId(item.key)}>{t('pricing.title')}</Button><Button type="text" danger icon={<DeleteOutlined/>} aria-label={t('trash.remove')+' '+name} onClick={()=>handleDelete(item.key)}/></div>
           </div>

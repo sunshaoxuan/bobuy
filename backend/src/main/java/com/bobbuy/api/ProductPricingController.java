@@ -13,4 +13,5 @@ public class ProductPricingController {
  @PostMapping("/adjustments/{id}/approve") public ApiResponse<?> approve(@PathVariable String productId,@PathVariable Long id,@Valid @RequestBody ProductPricingService.Action input){return ApiResponse.success(service.approve(productId,id,input));}
  @PostMapping("/adjustments/{id}/cancel") public ApiResponse<?> cancel(@PathVariable String productId,@PathVariable Long id,@Valid @RequestBody ProductPricingService.Action input){return ApiResponse.success(service.cancel(productId,id,input));}
  @PutMapping("/regular") public ApiResponse<?> regular(@PathVariable String productId,@Valid @RequestBody ProductPricingService.Regular input){return ApiResponse.success(service.regular(productId,input));}
+ @PostMapping("/unit-correction") public ApiResponse<?> unit(@PathVariable String productId,@Valid @RequestBody ProductPricingService.UnitCorrection input){return ApiResponse.success(service.correctUnit(productId,input));}
 }
