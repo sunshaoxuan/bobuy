@@ -68,7 +68,7 @@ JAVA_HOME=/workspace/scratch/jdk MAVEN_OPTS='-Djavax.net.ssl.trustStore=/etc/ssl
   -pl bobbuy-core -am -DskipTests package
 ```
 
-真实隔离UI使用本仓库Spring Boot、H2内存合成数据及Vite，无API mock；1280×800和390×844。最终四语新增按钮/确认热区≥44px、面板在视口内、页面无横向溢出；最终网络无4xx/5xx、JS errors为空。最终长英文及日文截图经主Agent视觉复核。外部模型不可用，未宣称外部审查通过。脚本、失败原始记录、实际模块哈希及截图在 [evidence](evidence/price-corrections-20261118/)；旧失败截图不作为最终通过证据。`reloadPersistence`只指浏览器刷新后的服务器读回，不是数据库重启恢复。
+真实隔离UI使用本仓库Spring Boot、H2内存合成数据及Vite，无API mock；1280×800和390×844。最终四语新增按钮/确认热区≥44px、面板在视口内、页面无横向溢出；最终网络无4xx/5xx、JS errors为空。最终长英文及日文截图经主Agent视觉复核。本机随后发现Checkbox被通用label grid分行，已仅修为flex并保留禁用颜色，追加360/390四语及桌面整图/局部；最终图为unit-checkbox-*、cancel-preview-final-*，取代旧unit-final和有夹具提示的取消图。visual-final.json证明此补图没有实际作废写入。外部模型不可用，未宣称外部审查通过。脚本、失败原始记录、实际模块哈希及截图在 [evidence](evidence/price-corrections-20261118/)；旧失败截图不作为最终通过证据。`reloadPersistence`只指浏览器刷新后的服务器读回，不是数据库重启恢复。
 
 ### 生产影响、兼容与回退边界
 

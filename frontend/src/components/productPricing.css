@@ -49,3 +49,7 @@
 .product-pricing-drawer .price-publication-notice .ant-alert-content{grid-column:2;min-width:0;}
 .product-pricing-drawer .price-publication-notice .ant-alert-action{grid-column:2;margin:0;justify-self:start;}
 .product-pricing-drawer .ant-drawer-close,.price-document-confirm .ant-modal-close{width:44px;height:44px;min-width:44px;min-height:44px;}
+
+/* Checkbox labels remain one flex row; the form's grid label rule is for fields. */
+.price-document-form label.ant-checkbox-wrapper{display:flex;align-items:center;min-height:44px;}
+.price-document-form label.ant-checkbox-wrapper-disabled{color:var(--ant-color-text-disabled,rgba(0,0,0,.25));}

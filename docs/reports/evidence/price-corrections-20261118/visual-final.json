@@ -1,0 +1,1400 @@
+{
+  "result": "PASS",
+  "scope": "checkbox row and clean cancellation preview only; four locales 360/390, English 1280",
+  "writes": 0,
+  "fixture": "same in-memory service reset to previously verified two-active-document initial state; no cancellation submitted",
+  "commonJarSha256": "eb2c5e88373e53e4dab89137991979e25bd7f2354f65cd9639a2377338232ba6",
+  "loadedFrontendModules": {
+    "/src/components/productPricing.css": "af98c7c02673a2c115ddaa1b9ede7e13a4bc728cde9a710f13e01a0fbf2f7591"
+  },
+  "geometry": [
+    {
+      "name": "unit-checkbox-en-US-390",
+      "viewport": 390,
+      "overflow": false,
+      "panel": {
+        "x": 8,
+        "y": 108,
+        "width": 374,
+        "height": 696.375,
+        "right": 382,
+        "bottom": 804.375
+      },
+      "checkbox": {
+        "display": "flex",
+        "label": {
+          "x": 32,
+          "y": 586.1875,
+          "width": 326,
+          "height": 44.1875,
+          "right": 358,
+          "bottom": 630.375
+        },
+        "box": {
+          "x": 32,
+          "y": 600.28125,
+          "width": 16,
+          "height": 16,
+          "right": 48,
+          "bottom": 616.28125
+        },
+        "text": {
+          "x": 54,
+          "y": 586.1875,
+          "width": 298,
+          "height": 44.1875,
+          "right": 352,
+          "bottom": 630.375
+        }
+      },
+      "buttons": [
+        {
+          "text": "",
+          "disabled": false,
+          "x": 330,
+          "y": 116,
+          "width": 44,
+          "height": 44,
+          "right": 374,
+          "bottom": 160
+        },
+        {
+          "text": "Cancel",
+          "disabled": false,
+          "x": 214.171875,
+          "y": 716.375,
+          "width": 75.59375,
+          "height": 44,
+          "right": 289.765625,
+          "bottom": 760.375
+        },
+        {
+          "text": "OK",
+          "disabled": true,
+          "x": 305.765625,
+          "y": 716.375,
+          "width": 52.234375,
+          "height": 44,
+          "right": 358,
+          "bottom": 760.375
+        }
+      ]
+    },
+    {
+      "name": "unit-checkbox-en-US-360",
+      "viewport": 360,
+      "overflow": false,
+      "panel": {
+        "x": 8,
+        "y": 108,
+        "width": 344,
+        "height": 718.375,
+        "right": 352,
+        "bottom": 826.375
+      },
+      "checkbox": {
+        "display": "flex",
+        "label": {
+          "x": 32,
+          "y": 608.1875,
+          "width": 296,
+          "height": 44.1875,
+          "right": 328,
+          "bottom": 652.375
+        },
+        "box": {
+          "x": 32,
+          "y": 622.28125,
+          "width": 16,
+          "height": 16,
+          "right": 48,
+          "bottom": 638.28125
+        },
+        "text": {
+          "x": 54,
+          "y": 608.1875,
+          "width": 268,
+          "height": 44.1875,
+          "right": 322,
+          "bottom": 652.375
+        }
+      },
+      "buttons": [
+        {
+          "text": "",
+          "disabled": false,
+          "x": 300,
+          "y": 116,
+          "width": 44,
+          "height": 44,
+          "right": 344,
+          "bottom": 160
+        },
+        {
+          "text": "Cancel",
+          "disabled": false,
+          "x": 184.171875,
+          "y": 738.375,
+          "width": 75.59375,
+          "height": 44,
+          "right": 259.765625,
+          "bottom": 782.375
+        },
+        {
+          "text": "OK",
+          "disabled": true,
+          "x": 275.765625,
+          "y": 738.375,
+          "width": 52.234375,
+          "height": 44,
+          "right": 328,
+          "bottom": 782.375
+        }
+      ]
+    },
+    {
+      "name": "unit-checkbox-en-US-1280",
+      "viewport": 1280,
+      "overflow": false,
+      "panel": {
+        "x": 380,
+        "y": 100,
+        "width": 520,
+        "height": 652.375,
+        "right": 900,
+        "bottom": 752.375
+      },
+      "checkbox": {
+        "display": "flex",
+        "label": {
+          "x": 404,
+          "y": 534.1875,
+          "width": 472,
+          "height": 44.1875,
+          "right": 876,
+          "bottom": 578.375
+        },
+        "box": {
+          "x": 404,
+          "y": 548.28125,
+          "width": 16,
+          "height": 16,
+          "right": 420,
+          "bottom": 564.28125
+        },
+        "text": {
+          "x": 426,
+          "y": 534.1875,
+          "width": 444,
+          "height": 44.1875,
+          "right": 870,
+          "bottom": 578.375
+        }
+      },
+      "buttons": [
+        {
+          "text": "",
+          "disabled": false,
+          "x": 844,
+          "y": 112,
+          "width": 44,
+          "height": 44,
+          "right": 888,
+          "bottom": 156
+        },
+        {
+          "text": "Cancel",
+          "disabled": false,
+          "x": 740.171875,
+          "y": 664.375,
+          "width": 75.59375,
+          "height": 44,
+          "right": 815.765625,
+          "bottom": 708.375
+        },
+        {
+          "text": "OK",
+          "disabled": true,
+          "x": 823.765625,
+          "y": 664.375,
+          "width": 52.234375,
+          "height": 44,
+          "right": 876,
+          "bottom": 708.375
+        }
+      ]
+    },
+    {
+      "name": "cancel-preview-final-1280",
+      "viewport": 1280,
+      "overflow": false,
+      "panel": {
+        "x": 380,
+        "y": 100,
+        "width": 520,
+        "height": 671.59375,
+        "right": 900,
+        "bottom": 771.59375
+      },
+      "checkbox": {
+        "display": "inline-flex",
+        "label": {
+          "x": 404,
+          "y": 627.59375,
+          "width": 342.515625,
+          "height": 44,
+          "right": 746.515625,
+          "bottom": 671.59375
+        },
+        "box": {
+          "x": 404,
+          "y": 641.59375,
+          "width": 16,
+          "height": 16,
+          "right": 420,
+          "bottom": 657.59375
+        },
+        "text": {
+          "x": 420,
+          "y": 638.59375,
+          "width": 326.515625,
+          "height": 22,
+          "right": 746.515625,
+          "bottom": 660.59375
+        }
+      },
+      "buttons": [
+        {
+          "text": "",
+          "disabled": false,
+          "x": 844,
+          "y": 112,
+          "width": 44,
+          "height": 44,
+          "right": 888,
+          "bottom": 156
+        },
+        {
+          "text": "Cancel",
+          "disabled": false,
+          "x": 740.171875,
+          "y": 683.59375,
+          "width": 75.59375,
+          "height": 44,
+          "right": 815.765625,
+          "bottom": 727.59375
+        },
+        {
+          "text": "OK",
+          "disabled": true,
+          "x": 823.765625,
+          "y": 683.59375,
+          "width": 52.234375,
+          "height": 44,
+          "right": 876,
+          "bottom": 727.59375
+        }
+      ]
+    },
+    {
+      "name": "cancel-preview-final-390",
+      "viewport": 390,
+      "overflow": false,
+      "panel": {
+        "x": 8,
+        "y": 108,
+        "width": 374,
+        "height": 737.59375,
+        "right": 382,
+        "bottom": 845.59375
+      },
+      "checkbox": {
+        "display": "inline-flex",
+        "label": {
+          "x": 32,
+          "y": 701.59375,
+          "width": 326,
+          "height": 44,
+          "right": 358,
+          "bottom": 745.59375
+        },
+        "box": {
+          "x": 32,
+          "y": 715.59375,
+          "width": 16,
+          "height": 16,
+          "right": 48,
+          "bottom": 731.59375
+        },
+        "text": {
+          "x": 48,
+          "y": 701.59375,
+          "width": 310,
+          "height": 44,
+          "right": 358,
+          "bottom": 745.59375
+        }
+      },
+      "buttons": [
+        {
+          "text": "",
+          "disabled": false,
+          "x": 330,
+          "y": 116,
+          "width": 44,
+          "height": 44,
+          "right": 374,
+          "bottom": 160
+        },
+        {
+          "text": "Cancel",
+          "disabled": false,
+          "x": 214.171875,
+          "y": 757.59375,
+          "width": 75.59375,
+          "height": 44,
+          "right": 289.765625,
+          "bottom": 801.59375
+        },
+        {
+          "text": "OK",
+          "disabled": true,
+          "x": 305.765625,
+          "y": 757.59375,
+          "width": 52.234375,
+          "height": 44,
+          "right": 358,
+          "bottom": 801.59375
+        }
+      ]
+    },
+    {
+      "name": "cancel-preview-final-360",
+      "viewport": 360,
+      "overflow": false,
+      "panel": {
+        "x": 8,
+        "y": 108,
+        "width": 344,
+        "height": 759.59375,
+        "right": 352,
+        "bottom": 867.59375
+      },
+      "checkbox": {
+        "display": "inline-flex",
+        "label": {
+          "x": 32,
+          "y": 723.59375,
+          "width": 296,
+          "height": 44,
+          "right": 328,
+          "bottom": 767.59375
+        },
+        "box": {
+          "x": 32,
+          "y": 737.59375,
+          "width": 16,
+          "height": 16,
+          "right": 48,
+          "bottom": 753.59375
+        },
+        "text": {
+          "x": 48,
+          "y": 723.59375,
+          "width": 280,
+          "height": 44,
+          "right": 328,
+          "bottom": 767.59375
+        }
+      },
+      "buttons": [
+        {
+          "text": "",
+          "disabled": false,
+          "x": 300,
+          "y": 116,
+          "width": 44,
+          "height": 44,
+          "right": 344,
+          "bottom": 160
+        },
+        {
+          "text": "Cancel",
+          "disabled": false,
+          "x": 184.171875,
+          "y": 779.59375,
+          "width": 75.59375,
+          "height": 44,
+          "right": 259.765625,
+          "bottom": 823.59375
+        },
+        {
+          "text": "OK",
+          "disabled": true,
+          "x": 275.765625,
+          "y": 779.59375,
+          "width": 52.234375,
+          "height": 44,
+          "right": 328,
+          "bottom": 823.59375
+        }
+      ]
+    },
+    {
+      "name": "unit-checkbox-zh-CN-390",
+      "viewport": 390,
+      "overflow": false,
+      "panel": {
+        "x": 8,
+        "y": 108,
+        "width": 374,
+        "height": 630.1875,
+        "right": 382,
+        "bottom": 738.1875
+      },
+      "checkbox": {
+        "display": "flex",
+        "label": {
+          "x": 32,
+          "y": 520.1875,
+          "width": 326,
+          "height": 44,
+          "right": 358,
+          "bottom": 564.1875
+        },
+        "box": {
+          "x": 32,
+          "y": 534.1875,
+          "width": 16,
+          "height": 16,
+          "right": 48,
+          "bottom": 550.1875
+        },
+        "text": {
+          "x": 54,
+          "y": 531.140625,
+          "width": 224.015625,
+          "height": 22.09375,
+          "right": 278.015625,
+          "bottom": 553.234375
+        }
+      },
+      "buttons": [
+        {
+          "text": "",
+          "disabled": false,
+          "x": 330,
+          "y": 116,
+          "width": 44,
+          "height": 44,
+          "right": 374,
+          "bottom": 160
+        },
+        {
+          "text": "取 消",
+          "disabled": false,
+          "x": 215.71875,
+          "y": 650.1875,
+          "width": 63.140625,
+          "height": 44,
+          "right": 278.859375,
+          "bottom": 694.1875
+        },
+        {
+          "text": "确 定",
+          "disabled": true,
+          "x": 294.859375,
+          "y": 650.1875,
+          "width": 63.140625,
+          "height": 44,
+          "right": 358,
+          "bottom": 694.1875
+        }
+      ]
+    },
+    {
+      "name": "unit-checkbox-zh-CN-360",
+      "viewport": 360,
+      "overflow": false,
+      "panel": {
+        "x": 8,
+        "y": 108,
+        "width": 344,
+        "height": 652.1875,
+        "right": 352,
+        "bottom": 760.1875
+      },
+      "checkbox": {
+        "display": "flex",
+        "label": {
+          "x": 32,
+          "y": 542.1875,
+          "width": 296,
+          "height": 44,
+          "right": 328,
+          "bottom": 586.1875
+        },
+        "box": {
+          "x": 32,
+          "y": 556.1875,
+          "width": 16,
+          "height": 16,
+          "right": 48,
+          "bottom": 572.1875
+        },
+        "text": {
+          "x": 54,
+          "y": 553.140625,
+          "width": 224.015625,
+          "height": 22.09375,
+          "right": 278.015625,
+          "bottom": 575.234375
+        }
+      },
+      "buttons": [
+        {
+          "text": "",
+          "disabled": false,
+          "x": 300,
+          "y": 116,
+          "width": 44,
+          "height": 44,
+          "right": 344,
+          "bottom": 160
+        },
+        {
+          "text": "取 消",
+          "disabled": false,
+          "x": 185.71875,
+          "y": 672.1875,
+          "width": 63.140625,
+          "height": 44,
+          "right": 248.859375,
+          "bottom": 716.1875
+        },
+        {
+          "text": "确 定",
+          "disabled": true,
+          "x": 264.859375,
+          "y": 672.1875,
+          "width": 63.140625,
+          "height": 44,
+          "right": 328,
+          "bottom": 716.1875
+        }
+      ]
+    },
+    {
+      "name": "unit-checkbox-zh-TW-390",
+      "viewport": 390,
+      "overflow": false,
+      "panel": {
+        "x": 8,
+        "y": 108,
+        "width": 374,
+        "height": 630.1875,
+        "right": 382,
+        "bottom": 738.1875
+      },
+      "checkbox": {
+        "display": "flex",
+        "label": {
+          "x": 32,
+          "y": 520.1875,
+          "width": 326,
+          "height": 44,
+          "right": 358,
+          "bottom": 564.1875
+        },
+        "box": {
+          "x": 32,
+          "y": 534.1875,
+          "width": 16,
+          "height": 16,
+          "right": 48,
+          "bottom": 550.1875
+        },
+        "text": {
+          "x": 54,
+          "y": 531.140625,
+          "width": 224.015625,
+          "height": 22.09375,
+          "right": 278.015625,
+          "bottom": 553.234375
+        }
+      },
+      "buttons": [
+        {
+          "text": "",
+          "disabled": false,
+          "x": 330,
+          "y": 116,
+          "width": 44,
+          "height": 44,
+          "right": 374,
+          "bottom": 160
+        },
+        {
+          "text": "取 消",
+          "disabled": false,
+          "x": 215.71875,
+          "y": 650.1875,
+          "width": 63.140625,
+          "height": 44,
+          "right": 278.859375,
+          "bottom": 694.1875
+        },
+        {
+          "text": "確 定",
+          "disabled": true,
+          "x": 294.859375,
+          "y": 650.1875,
+          "width": 63.140625,
+          "height": 44,
+          "right": 358,
+          "bottom": 694.1875
+        }
+      ]
+    },
+    {
+      "name": "unit-checkbox-zh-TW-360",
+      "viewport": 360,
+      "overflow": false,
+      "panel": {
+        "x": 8,
+        "y": 108,
+        "width": 344,
+        "height": 652.1875,
+        "right": 352,
+        "bottom": 760.1875
+      },
+      "checkbox": {
+        "display": "flex",
+        "label": {
+          "x": 32,
+          "y": 542.1875,
+          "width": 296,
+          "height": 44,
+          "right": 328,
+          "bottom": 586.1875
+        },
+        "box": {
+          "x": 32,
+          "y": 556.1875,
+          "width": 16,
+          "height": 16,
+          "right": 48,
+          "bottom": 572.1875
+        },
+        "text": {
+          "x": 54,
+          "y": 553.140625,
+          "width": 224.015625,
+          "height": 22.09375,
+          "right": 278.015625,
+          "bottom": 575.234375
+        }
+      },
+      "buttons": [
+        {
+          "text": "",
+          "disabled": false,
+          "x": 300,
+          "y": 116,
+          "width": 44,
+          "height": 44,
+          "right": 344,
+          "bottom": 160
+        },
+        {
+          "text": "取 消",
+          "disabled": false,
+          "x": 185.71875,
+          "y": 672.1875,
+          "width": 63.140625,
+          "height": 44,
+          "right": 248.859375,
+          "bottom": 716.1875
+        },
+        {
+          "text": "確 定",
+          "disabled": true,
+          "x": 264.859375,
+          "y": 672.1875,
+          "width": 63.140625,
+          "height": 44,
+          "right": 328,
+          "bottom": 716.1875
+        }
+      ]
+    },
+    {
+      "name": "unit-checkbox-ja-JP-390",
+      "viewport": 390,
+      "overflow": false,
+      "panel": {
+        "x": 8,
+        "y": 108,
+        "width": 374,
+        "height": 674.375,
+        "right": 382,
+        "bottom": 782.375
+      },
+      "checkbox": {
+        "display": "flex",
+        "label": {
+          "x": 32,
+          "y": 564.1875,
+          "width": 326,
+          "height": 44.1875,
+          "right": 358,
+          "bottom": 608.375
+        },
+        "box": {
+          "x": 32,
+          "y": 578.28125,
+          "width": 16,
+          "height": 16,
+          "right": 48,
+          "bottom": 594.28125
+        },
+        "text": {
+          "x": 54,
+          "y": 564.1875,
+          "width": 298,
+          "height": 44.1875,
+          "right": 352,
+          "bottom": 608.375
+        }
+      },
+      "buttons": [
+        {
+          "text": "",
+          "disabled": false,
+          "x": 330,
+          "y": 116,
+          "width": 44,
+          "height": 44,
+          "right": 374,
+          "bottom": 160
+        },
+        {
+          "text": "キャンセル",
+          "disabled": false,
+          "x": 188.5625,
+          "y": 694.375,
+          "width": 102,
+          "height": 44,
+          "right": 290.5625,
+          "bottom": 738.375
+        },
+        {
+          "text": "OK",
+          "disabled": true,
+          "x": 306.5625,
+          "y": 694.375,
+          "width": 51.4375,
+          "height": 44,
+          "right": 358,
+          "bottom": 738.375
+        }
+      ]
+    },
+    {
+      "name": "unit-checkbox-ja-JP-360",
+      "viewport": 360,
+      "overflow": false,
+      "panel": {
+        "x": 8,
+        "y": 108,
+        "width": 344,
+        "height": 674.375,
+        "right": 352,
+        "bottom": 782.375
+      },
+      "checkbox": {
+        "display": "flex",
+        "label": {
+          "x": 32,
+          "y": 564.1875,
+          "width": 296,
+          "height": 44.1875,
+          "right": 328,
+          "bottom": 608.375
+        },
+        "box": {
+          "x": 32,
+          "y": 578.28125,
+          "width": 16,
+          "height": 16,
+          "right": 48,
+          "bottom": 594.28125
+        },
+        "text": {
+          "x": 54,
+          "y": 564.1875,
+          "width": 268,
+          "height": 44.1875,
+          "right": 322,
+          "bottom": 608.375
+        }
+      },
+      "buttons": [
+        {
+          "text": "",
+          "disabled": false,
+          "x": 300,
+          "y": 116,
+          "width": 44,
+          "height": 44,
+          "right": 344,
+          "bottom": 160
+        },
+        {
+          "text": "キャンセル",
+          "disabled": false,
+          "x": 158.5625,
+          "y": 694.375,
+          "width": 102,
+          "height": 44,
+          "right": 260.5625,
+          "bottom": 738.375
+        },
+        {
+          "text": "OK",
+          "disabled": true,
+          "x": 276.5625,
+          "y": 694.375,
+          "width": 51.4375,
+          "height": 44,
+          "right": 328,
+          "bottom": 738.375
+        }
+      ]
+    }
+  ],
+  "screens": [
+    "unit-checkbox-en-US-390.png",
+    "unit-checkbox-en-US-390-checkbox.png",
+    "unit-checkbox-en-US-360.png",
+    "unit-checkbox-en-US-360-checkbox.png",
+    "unit-checkbox-en-US-1280.png",
+    "unit-checkbox-en-US-1280-checkbox.png",
+    "cancel-preview-final-1280.png",
+    "cancel-preview-final-1280-checkbox.png",
+    "cancel-preview-final-390.png",
+    "cancel-preview-final-390-checkbox.png",
+    "cancel-preview-final-360.png",
+    "cancel-preview-final-360-checkbox.png",
+    "unit-checkbox-zh-CN-390.png",
+    "unit-checkbox-zh-CN-390-checkbox.png",
+    "unit-checkbox-zh-CN-360.png",
+    "unit-checkbox-zh-CN-360-checkbox.png",
+    "unit-checkbox-zh-TW-390.png",
+    "unit-checkbox-zh-TW-390-checkbox.png",
+    "unit-checkbox-zh-TW-360.png",
+    "unit-checkbox-zh-TW-360-checkbox.png",
+    "unit-checkbox-ja-JP-390.png",
+    "unit-checkbox-ja-JP-390-checkbox.png",
+    "unit-checkbox-ja-JP-360.png",
+    "unit-checkbox-ja-JP-360-checkbox.png"
+  ],
+  "errors": [],
+  "network": [
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/product-pricing/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments/2/cancellation-preview",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/product-pricing/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/product-pricing/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/product-pricing/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/currencies",
+      "status": 200
+    }
+  ]
+}
