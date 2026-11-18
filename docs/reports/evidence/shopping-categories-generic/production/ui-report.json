@@ -1,0 +1,942 @@
+[
+  {
+    "width": 1280,
+    "height": 800,
+    "count": 8,
+    "url": "https://bobuy.cc/products",
+    "scopeTotal": 352,
+    "matchedTotal": 352,
+    "categoryCount": 0,
+    "errors": [],
+    "network": [
+      {
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-browse",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/124710c0-5214-40dc-9dbf-fc14f97b2ca1",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-sales",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/19344070-72b8-45ab-8b15-c5c5ca5d9600",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/331187f7-d0f5-468f-83aa-324a613a4f19",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/4ec44235-7ee8-4d39-bc77-7a24ad2b3bb2",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-nodes",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/6c97f77e-0ac8-4d48-b8f9-6ceb5f1754fb",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/15ecbeeb-8c9b-43e1-9a5b-a44c53d4e3d6",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-browse",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/331187f7-d0f5-468f-83aa-324a613a4f19",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/124710c0-5214-40dc-9dbf-fc14f97b2ca1",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/19344070-72b8-45ab-8b15-c5c5ca5d9600",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/4ec44235-7ee8-4d39-bc77-7a24ad2b3bb2",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/b880a89e-cfc6-42ec-b49b-d3a6e323f8fa",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-sales",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/15ecbeeb-8c9b-43e1-9a5b-a44c53d4e3d6",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/6c97f77e-0ac8-4d48-b8f9-6ceb5f1754fb",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/0e2cc6e9-c6ff-43ce-be80-5bcce146a5ba",
+        "status": 200
+      }
+    ],
+    "assets": [
+      {
+        "path": "/assets/index-buFr3YYM.css",
+        "sha256": "1c05817bcaeb0778ca55da101e155f9e86f3b40558a965f59f521152349d68f3"
+      },
+      {
+        "path": "/assets/index-BfbV2K-M.js",
+        "sha256": "6cffc89964fe78b89d6105f3aa3bd221c4df82dfa2ef76e42099bf00e895829b"
+      },
+      {
+        "path": "/assets/ImageLightbox-B7StMHHc.js",
+        "sha256": "c439cf2846e9f1f342f04ace9b43e2573aabd9f4df75d84c750c136ff29094e8"
+      },
+      {
+        "path": "/assets/ImageLightbox-D2UWmiA2.css",
+        "sha256": "198c2d5823a73c0ead3af8afc10cf5e011e95b0a6cff814f7cf6373a0701eee9"
+      },
+      {
+        "path": "/assets/RecommendationImageViewer-DGQevAoY.js",
+        "sha256": "88892607e91fbd32712feccdb23914aa562f22849304045cd444dccf23f2dd7f"
+      },
+      {
+        "path": "/assets/index-D8CEjy3M.js",
+        "sha256": "b6ef3b244caab0deaefe6c5f176ebbb3f9756e44d3fd0c95d38c128d6a4354d5"
+      },
+      {
+        "path": "/assets/index-DQHna91p.js",
+        "sha256": "e1cc7e331c4bc44b9ac7ed8ffc6056caee8b9c525201d9c9c2a0616b8b3a166c"
+      },
+      {
+        "path": "/assets/ProductMarkerBadges-Ch-ENXpg.css",
+        "sha256": "5e261cb4f7218357d29c0853c05c44daefd6e5e4ea1f25539d9bab0a99385607"
+      },
+      {
+        "path": "/assets/RecommendationImageViewer-CACQJNQu.css",
+        "sha256": "e877e9109253cdd78e0f923b1e9ff02f813b85f5ae964d972afb030c033d97a7"
+      },
+      {
+        "path": "/assets/ProductMetadata-BWVOY6ci.js",
+        "sha256": "b6c2be37e6df09fb93f0c8d931e8112a96f200bbf3452c18a64d57056e37ebd8"
+      },
+      {
+        "path": "/assets/SaveOutlined-B88po4i5.js",
+        "sha256": "459995480e0d6900a1c1ee460e1ff6ccee3a7e0256c6d3175b98f590cc89640f"
+      },
+      {
+        "path": "/assets/ProductMarkerBadges-BRXNHIYb.js",
+        "sha256": "81ee64f03ca7d1be93a263140dc43b890d9ec4d6921a6a7365fc0316502331ad"
+      },
+      {
+        "path": "/assets/PublicProductCatalog-C7vvmXzb.js",
+        "sha256": "1654596cbadda03b23f75c8502e99c8911b653e778c76d7fd4871df6b4093dd6"
+      },
+      {
+        "path": "/assets/ReloadOutlined-CxuTf48k.js",
+        "sha256": "fae7ff5ce1999007a813fc991ef0a57769406e8ba160dd62c8a6dffbb4b03d0d"
+      },
+      {
+        "path": "/assets/index-9DLFFMcH.js",
+        "sha256": "6c3a9c141d2f16dc14e606e89198ca936d780d9f47a0c9c62dc6f6ade5e7affb"
+      },
+      {
+        "path": "/assets/ProductMarkerEditor-D88Y6acE.js",
+        "sha256": "7ac8d22b596f38935fd1fa14c8c5f7d7e36a29f37c30e17f14251b2a3f3c53f4"
+      },
+      {
+        "path": "/assets/index-BfbV2K-M.js",
+        "sha256": "6cffc89964fe78b89d6105f3aa3bd221c4df82dfa2ef76e42099bf00e895829b"
+      },
+      {
+        "path": "/assets/index-buFr3YYM.css",
+        "sha256": "1c05817bcaeb0778ca55da101e155f9e86f3b40558a965f59f521152349d68f3"
+      },
+      {
+        "path": "/assets/PublicProductCatalog-C7vvmXzb.js",
+        "sha256": "1654596cbadda03b23f75c8502e99c8911b653e778c76d7fd4871df6b4093dd6"
+      },
+      {
+        "path": "/assets/RecommendationImageViewer-DGQevAoY.js",
+        "sha256": "88892607e91fbd32712feccdb23914aa562f22849304045cd444dccf23f2dd7f"
+      },
+      {
+        "path": "/assets/ProductMetadata-BWVOY6ci.js",
+        "sha256": "b6c2be37e6df09fb93f0c8d931e8112a96f200bbf3452c18a64d57056e37ebd8"
+      },
+      {
+        "path": "/assets/ImageLightbox-B7StMHHc.js",
+        "sha256": "c439cf2846e9f1f342f04ace9b43e2573aabd9f4df75d84c750c136ff29094e8"
+      },
+      {
+        "path": "/assets/index-D8CEjy3M.js",
+        "sha256": "b6ef3b244caab0deaefe6c5f176ebbb3f9756e44d3fd0c95d38c128d6a4354d5"
+      },
+      {
+        "path": "/assets/ImageLightbox-D2UWmiA2.css",
+        "sha256": "198c2d5823a73c0ead3af8afc10cf5e011e95b0a6cff814f7cf6373a0701eee9"
+      },
+      {
+        "path": "/assets/RecommendationImageViewer-CACQJNQu.css",
+        "sha256": "e877e9109253cdd78e0f923b1e9ff02f813b85f5ae964d972afb030c033d97a7"
+      },
+      {
+        "path": "/assets/ProductMarkerBadges-BRXNHIYb.js",
+        "sha256": "81ee64f03ca7d1be93a263140dc43b890d9ec4d6921a6a7365fc0316502331ad"
+      },
+      {
+        "path": "/assets/ProductMarkerBadges-Ch-ENXpg.css",
+        "sha256": "5e261cb4f7218357d29c0853c05c44daefd6e5e4ea1f25539d9bab0a99385607"
+      },
+      {
+        "path": "/assets/ProductMarkerEditor-D88Y6acE.js",
+        "sha256": "7ac8d22b596f38935fd1fa14c8c5f7d7e36a29f37c30e17f14251b2a3f3c53f4"
+      },
+      {
+        "path": "/assets/ReloadOutlined-CxuTf48k.js",
+        "sha256": "fae7ff5ce1999007a813fc991ef0a57769406e8ba160dd62c8a6dffbb4b03d0d"
+      },
+      {
+        "path": "/assets/index-DQHna91p.js",
+        "sha256": "e1cc7e331c4bc44b9ac7ed8ffc6056caee8b9c525201d9c9c2a0616b8b3a166c"
+      },
+      {
+        "path": "/assets/SaveOutlined-B88po4i5.js",
+        "sha256": "459995480e0d6900a1c1ee460e1ff6ccee3a7e0256c6d3175b98f590cc89640f"
+      },
+      {
+        "path": "/assets/index-9DLFFMcH.js",
+        "sha256": "6c3a9c141d2f16dc14e606e89198ca936d780d9f47a0c9c62dc6f6ade5e7affb"
+      }
+    ],
+    "version": "c000d0f90540cf08bb6314106e7b2a19056dc7e6",
+    "observedAt": "2026-11-18T02:37:34.553Z",
+    "dataNature": "production read-only",
+    "passed": true,
+    "scope": "Navigation/list HTTP smoke only; category population NOT PASS"
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "count": 8,
+    "url": "https://bobuy.cc/products",
+    "scopeTotal": 352,
+    "matchedTotal": 352,
+    "categoryCount": 0,
+    "errors": [],
+    "network": [
+      {
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-browse",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-sales",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/124710c0-5214-40dc-9dbf-fc14f97b2ca1",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/b880a89e-cfc6-42ec-b49b-d3a6e323f8fa",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/19344070-72b8-45ab-8b15-c5c5ca5d9600",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/4ec44235-7ee8-4d39-bc77-7a24ad2b3bb2",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/331187f7-d0f5-468f-83aa-324a613a4f19",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-nodes",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/6c97f77e-0ac8-4d48-b8f9-6ceb5f1754fb",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/15ecbeeb-8c9b-43e1-9a5b-a44c53d4e3d6",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-browse",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/124710c0-5214-40dc-9dbf-fc14f97b2ca1",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/19344070-72b8-45ab-8b15-c5c5ca5d9600",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/4ec44235-7ee8-4d39-bc77-7a24ad2b3bb2",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/b880a89e-cfc6-42ec-b49b-d3a6e323f8fa",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/0e2cc6e9-c6ff-43ce-be80-5bcce146a5ba",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-sales",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/331187f7-d0f5-468f-83aa-324a613a4f19",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/6c97f77e-0ac8-4d48-b8f9-6ceb5f1754fb",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/15ecbeeb-8c9b-43e1-9a5b-a44c53d4e3d6",
+        "status": 200
+      }
+    ],
+    "assets": [
+      {
+        "path": "/assets/index-buFr3YYM.css",
+        "sha256": "1c05817bcaeb0778ca55da101e155f9e86f3b40558a965f59f521152349d68f3"
+      },
+      {
+        "path": "/assets/index-BfbV2K-M.js",
+        "sha256": "6cffc89964fe78b89d6105f3aa3bd221c4df82dfa2ef76e42099bf00e895829b"
+      },
+      {
+        "path": "/assets/ProductMarkerBadges-Ch-ENXpg.css",
+        "sha256": "5e261cb4f7218357d29c0853c05c44daefd6e5e4ea1f25539d9bab0a99385607"
+      },
+      {
+        "path": "/assets/RecommendationImageViewer-DGQevAoY.js",
+        "sha256": "88892607e91fbd32712feccdb23914aa562f22849304045cd444dccf23f2dd7f"
+      },
+      {
+        "path": "/assets/PublicProductCatalog-C7vvmXzb.js",
+        "sha256": "1654596cbadda03b23f75c8502e99c8911b653e778c76d7fd4871df6b4093dd6"
+      },
+      {
+        "path": "/assets/ImageLightbox-D2UWmiA2.css",
+        "sha256": "198c2d5823a73c0ead3af8afc10cf5e011e95b0a6cff814f7cf6373a0701eee9"
+      },
+      {
+        "path": "/assets/ProductMetadata-BWVOY6ci.js",
+        "sha256": "b6c2be37e6df09fb93f0c8d931e8112a96f200bbf3452c18a64d57056e37ebd8"
+      },
+      {
+        "path": "/assets/ImageLightbox-B7StMHHc.js",
+        "sha256": "c439cf2846e9f1f342f04ace9b43e2573aabd9f4df75d84c750c136ff29094e8"
+      },
+      {
+        "path": "/assets/RecommendationImageViewer-CACQJNQu.css",
+        "sha256": "e877e9109253cdd78e0f923b1e9ff02f813b85f5ae964d972afb030c033d97a7"
+      },
+      {
+        "path": "/assets/index-9DLFFMcH.js",
+        "sha256": "6c3a9c141d2f16dc14e606e89198ca936d780d9f47a0c9c62dc6f6ade5e7affb"
+      },
+      {
+        "path": "/assets/ProductMarkerEditor-D88Y6acE.js",
+        "sha256": "7ac8d22b596f38935fd1fa14c8c5f7d7e36a29f37c30e17f14251b2a3f3c53f4"
+      },
+      {
+        "path": "/assets/index-DQHna91p.js",
+        "sha256": "e1cc7e331c4bc44b9ac7ed8ffc6056caee8b9c525201d9c9c2a0616b8b3a166c"
+      },
+      {
+        "path": "/assets/index-D8CEjy3M.js",
+        "sha256": "b6ef3b244caab0deaefe6c5f176ebbb3f9756e44d3fd0c95d38c128d6a4354d5"
+      },
+      {
+        "path": "/assets/ProductMarkerBadges-BRXNHIYb.js",
+        "sha256": "81ee64f03ca7d1be93a263140dc43b890d9ec4d6921a6a7365fc0316502331ad"
+      },
+      {
+        "path": "/assets/SaveOutlined-B88po4i5.js",
+        "sha256": "459995480e0d6900a1c1ee460e1ff6ccee3a7e0256c6d3175b98f590cc89640f"
+      },
+      {
+        "path": "/assets/ReloadOutlined-CxuTf48k.js",
+        "sha256": "fae7ff5ce1999007a813fc991ef0a57769406e8ba160dd62c8a6dffbb4b03d0d"
+      },
+      {
+        "path": "/assets/index-BfbV2K-M.js",
+        "sha256": "6cffc89964fe78b89d6105f3aa3bd221c4df82dfa2ef76e42099bf00e895829b"
+      },
+      {
+        "path": "/assets/index-buFr3YYM.css",
+        "sha256": "1c05817bcaeb0778ca55da101e155f9e86f3b40558a965f59f521152349d68f3"
+      },
+      {
+        "path": "/assets/PublicProductCatalog-C7vvmXzb.js",
+        "sha256": "1654596cbadda03b23f75c8502e99c8911b653e778c76d7fd4871df6b4093dd6"
+      },
+      {
+        "path": "/assets/RecommendationImageViewer-DGQevAoY.js",
+        "sha256": "88892607e91fbd32712feccdb23914aa562f22849304045cd444dccf23f2dd7f"
+      },
+      {
+        "path": "/assets/ProductMetadata-BWVOY6ci.js",
+        "sha256": "b6c2be37e6df09fb93f0c8d931e8112a96f200bbf3452c18a64d57056e37ebd8"
+      },
+      {
+        "path": "/assets/ImageLightbox-B7StMHHc.js",
+        "sha256": "c439cf2846e9f1f342f04ace9b43e2573aabd9f4df75d84c750c136ff29094e8"
+      },
+      {
+        "path": "/assets/index-D8CEjy3M.js",
+        "sha256": "b6ef3b244caab0deaefe6c5f176ebbb3f9756e44d3fd0c95d38c128d6a4354d5"
+      },
+      {
+        "path": "/assets/ImageLightbox-D2UWmiA2.css",
+        "sha256": "198c2d5823a73c0ead3af8afc10cf5e011e95b0a6cff814f7cf6373a0701eee9"
+      },
+      {
+        "path": "/assets/RecommendationImageViewer-CACQJNQu.css",
+        "sha256": "e877e9109253cdd78e0f923b1e9ff02f813b85f5ae964d972afb030c033d97a7"
+      },
+      {
+        "path": "/assets/ProductMarkerBadges-BRXNHIYb.js",
+        "sha256": "81ee64f03ca7d1be93a263140dc43b890d9ec4d6921a6a7365fc0316502331ad"
+      },
+      {
+        "path": "/assets/ProductMarkerBadges-Ch-ENXpg.css",
+        "sha256": "5e261cb4f7218357d29c0853c05c44daefd6e5e4ea1f25539d9bab0a99385607"
+      },
+      {
+        "path": "/assets/ProductMarkerEditor-D88Y6acE.js",
+        "sha256": "7ac8d22b596f38935fd1fa14c8c5f7d7e36a29f37c30e17f14251b2a3f3c53f4"
+      },
+      {
+        "path": "/assets/ReloadOutlined-CxuTf48k.js",
+        "sha256": "fae7ff5ce1999007a813fc991ef0a57769406e8ba160dd62c8a6dffbb4b03d0d"
+      },
+      {
+        "path": "/assets/index-DQHna91p.js",
+        "sha256": "e1cc7e331c4bc44b9ac7ed8ffc6056caee8b9c525201d9c9c2a0616b8b3a166c"
+      },
+      {
+        "path": "/assets/SaveOutlined-B88po4i5.js",
+        "sha256": "459995480e0d6900a1c1ee460e1ff6ccee3a7e0256c6d3175b98f590cc89640f"
+      },
+      {
+        "path": "/assets/index-9DLFFMcH.js",
+        "sha256": "6c3a9c141d2f16dc14e606e89198ca936d780d9f47a0c9c62dc6f6ade5e7affb"
+      }
+    ],
+    "version": "c000d0f90540cf08bb6314106e7b2a19056dc7e6",
+    "observedAt": "2026-11-18T02:38:00.559Z",
+    "dataNature": "production read-only",
+    "passed": true,
+    "scope": "Navigation/list HTTP smoke only; category population NOT PASS"
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "count": 8,
+    "url": "https://bobuy.cc/products",
+    "scopeTotal": 352,
+    "matchedTotal": 352,
+    "categoryCount": 0,
+    "errors": [],
+    "network": [
+      {
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-browse",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-sales",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/331187f7-d0f5-468f-83aa-324a613a4f19",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/124710c0-5214-40dc-9dbf-fc14f97b2ca1",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/4ec44235-7ee8-4d39-bc77-7a24ad2b3bb2",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/b880a89e-cfc6-42ec-b49b-d3a6e323f8fa",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-nodes",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/19344070-72b8-45ab-8b15-c5c5ca5d9600",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/6c97f77e-0ac8-4d48-b8f9-6ceb5f1754fb",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/15ecbeeb-8c9b-43e1-9a5b-a44c53d4e3d6",
+        "status": 200
+      }
+    ],
+    "assets": [
+      {
+        "path": "/assets/index-buFr3YYM.css",
+        "sha256": "1c05817bcaeb0778ca55da101e155f9e86f3b40558a965f59f521152349d68f3"
+      },
+      {
+        "path": "/assets/index-BfbV2K-M.js",
+        "sha256": "6cffc89964fe78b89d6105f3aa3bd221c4df82dfa2ef76e42099bf00e895829b"
+      },
+      {
+        "path": "/assets/RecommendationImageViewer-CACQJNQu.css",
+        "sha256": "e877e9109253cdd78e0f923b1e9ff02f813b85f5ae964d972afb030c033d97a7"
+      },
+      {
+        "path": "/assets/ImageLightbox-D2UWmiA2.css",
+        "sha256": "198c2d5823a73c0ead3af8afc10cf5e011e95b0a6cff814f7cf6373a0701eee9"
+      },
+      {
+        "path": "/assets/ProductMetadata-BWVOY6ci.js",
+        "sha256": "b6c2be37e6df09fb93f0c8d931e8112a96f200bbf3452c18a64d57056e37ebd8"
+      },
+      {
+        "path": "/assets/ProductMarkerBadges-Ch-ENXpg.css",
+        "sha256": "5e261cb4f7218357d29c0853c05c44daefd6e5e4ea1f25539d9bab0a99385607"
+      },
+      {
+        "path": "/assets/RecommendationImageViewer-DGQevAoY.js",
+        "sha256": "88892607e91fbd32712feccdb23914aa562f22849304045cd444dccf23f2dd7f"
+      },
+      {
+        "path": "/assets/index-D8CEjy3M.js",
+        "sha256": "b6ef3b244caab0deaefe6c5f176ebbb3f9756e44d3fd0c95d38c128d6a4354d5"
+      },
+      {
+        "path": "/assets/PublicProductCatalog-C7vvmXzb.js",
+        "sha256": "1654596cbadda03b23f75c8502e99c8911b653e778c76d7fd4871df6b4093dd6"
+      },
+      {
+        "path": "/assets/SaveOutlined-B88po4i5.js",
+        "sha256": "459995480e0d6900a1c1ee460e1ff6ccee3a7e0256c6d3175b98f590cc89640f"
+      },
+      {
+        "path": "/assets/index-DQHna91p.js",
+        "sha256": "e1cc7e331c4bc44b9ac7ed8ffc6056caee8b9c525201d9c9c2a0616b8b3a166c"
+      },
+      {
+        "path": "/assets/index-9DLFFMcH.js",
+        "sha256": "6c3a9c141d2f16dc14e606e89198ca936d780d9f47a0c9c62dc6f6ade5e7affb"
+      },
+      {
+        "path": "/assets/ImageLightbox-B7StMHHc.js",
+        "sha256": "c439cf2846e9f1f342f04ace9b43e2573aabd9f4df75d84c750c136ff29094e8"
+      },
+      {
+        "path": "/assets/ReloadOutlined-CxuTf48k.js",
+        "sha256": "fae7ff5ce1999007a813fc991ef0a57769406e8ba160dd62c8a6dffbb4b03d0d"
+      },
+      {
+        "path": "/assets/ProductMarkerEditor-D88Y6acE.js",
+        "sha256": "7ac8d22b596f38935fd1fa14c8c5f7d7e36a29f37c30e17f14251b2a3f3c53f4"
+      },
+      {
+        "path": "/assets/ProductMarkerBadges-BRXNHIYb.js",
+        "sha256": "81ee64f03ca7d1be93a263140dc43b890d9ec4d6921a6a7365fc0316502331ad"
+      }
+    ],
+    "version": "c000d0f90540cf08bb6314106e7b2a19056dc7e6",
+    "observedAt": "2026-11-18T02:38:25.561Z",
+    "dataNature": "production read-only",
+    "passed": true,
+    "scope": "Navigation/list HTTP smoke only; category population NOT PASS"
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "count": 8,
+    "url": "https://bobuy.cc/products",
+    "scopeTotal": 352,
+    "matchedTotal": 352,
+    "categoryCount": 0,
+    "errors": [],
+    "network": [
+      {
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-browse",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-popularity/:id",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/product-sales",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/15ecbeeb-8c9b-43e1-9a5b-a44c53d4e3d6",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/331187f7-d0f5-468f-83aa-324a613a4f19",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/0e2cc6e9-c6ff-43ce-be80-5bcce146a5ba",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/19344070-72b8-45ab-8b15-c5c5ca5d9600",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/6c97f77e-0ac8-4d48-b8f9-6ceb5f1754fb",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-nodes",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/124710c0-5214-40dc-9dbf-fc14f97b2ca1",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/4ec44235-7ee8-4d39-bc77-7a24ad2b3bb2",
+        "status": 200
+      },
+      {
+        "path": "/api/storefront/recommendation-images/b880a89e-cfc6-42ec-b49b-d3a6e323f8fa",
+        "status": 200
+      }
+    ],
+    "assets": [
+      {
+        "path": "/assets/index-buFr3YYM.css",
+        "sha256": "1c05817bcaeb0778ca55da101e155f9e86f3b40558a965f59f521152349d68f3"
+      },
+      {
+        "path": "/assets/index-BfbV2K-M.js",
+        "sha256": "6cffc89964fe78b89d6105f3aa3bd221c4df82dfa2ef76e42099bf00e895829b"
+      },
+      {
+        "path": "/assets/RecommendationImageViewer-CACQJNQu.css",
+        "sha256": "e877e9109253cdd78e0f923b1e9ff02f813b85f5ae964d972afb030c033d97a7"
+      },
+      {
+        "path": "/assets/ProductMarkerBadges-Ch-ENXpg.css",
+        "sha256": "5e261cb4f7218357d29c0853c05c44daefd6e5e4ea1f25539d9bab0a99385607"
+      },
+      {
+        "path": "/assets/ImageLightbox-D2UWmiA2.css",
+        "sha256": "198c2d5823a73c0ead3af8afc10cf5e011e95b0a6cff814f7cf6373a0701eee9"
+      },
+      {
+        "path": "/assets/PublicProductCatalog-C7vvmXzb.js",
+        "sha256": "1654596cbadda03b23f75c8502e99c8911b653e778c76d7fd4871df6b4093dd6"
+      },
+      {
+        "path": "/assets/RecommendationImageViewer-DGQevAoY.js",
+        "sha256": "88892607e91fbd32712feccdb23914aa562f22849304045cd444dccf23f2dd7f"
+      },
+      {
+        "path": "/assets/ProductMetadata-BWVOY6ci.js",
+        "sha256": "b6c2be37e6df09fb93f0c8d931e8112a96f200bbf3452c18a64d57056e37ebd8"
+      },
+      {
+        "path": "/assets/index-D8CEjy3M.js",
+        "sha256": "b6ef3b244caab0deaefe6c5f176ebbb3f9756e44d3fd0c95d38c128d6a4354d5"
+      },
+      {
+        "path": "/assets/ProductMarkerEditor-D88Y6acE.js",
+        "sha256": "7ac8d22b596f38935fd1fa14c8c5f7d7e36a29f37c30e17f14251b2a3f3c53f4"
+      },
+      {
+        "path": "/assets/ProductMarkerBadges-BRXNHIYb.js",
+        "sha256": "81ee64f03ca7d1be93a263140dc43b890d9ec4d6921a6a7365fc0316502331ad"
+      },
+      {
+        "path": "/assets/index-DQHna91p.js",
+        "sha256": "e1cc7e331c4bc44b9ac7ed8ffc6056caee8b9c525201d9c9c2a0616b8b3a166c"
+      },
+      {
+        "path": "/assets/ReloadOutlined-CxuTf48k.js",
+        "sha256": "fae7ff5ce1999007a813fc991ef0a57769406e8ba160dd62c8a6dffbb4b03d0d"
+      },
+      {
+        "path": "/assets/index-9DLFFMcH.js",
+        "sha256": "6c3a9c141d2f16dc14e606e89198ca936d780d9f47a0c9c62dc6f6ade5e7affb"
+      },
+      {
+        "path": "/assets/ImageLightbox-B7StMHHc.js",
+        "sha256": "c439cf2846e9f1f342f04ace9b43e2573aabd9f4df75d84c750c136ff29094e8"
+      },
+      {
+        "path": "/assets/SaveOutlined-B88po4i5.js",
+        "sha256": "459995480e0d6900a1c1ee460e1ff6ccee3a7e0256c6d3175b98f590cc89640f"
+      }
+    ],
+    "version": "c000d0f90540cf08bb6314106e7b2a19056dc7e6",
+    "observedAt": "2026-11-18T02:38:29.974Z",
+    "dataNature": "production read-only",
+    "passed": true,
+    "scope": "Navigation/list HTTP smoke only; category population NOT PASS"
+  }
+]
