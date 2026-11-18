@@ -148,3 +148,82 @@
 @media(min-width:1920px){
  .storefront.browse-shell .store-main:has(.public-product-catalog){max-width:none;width:100%;box-sizing:border-box;}
 }
+
+.category-shortcuts {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  max-width: 100%;
+  margin-bottom: 16px;
+}
+.category-shortcuts-track {
+  display: flex;
+  flex: 1;
+  gap: 8px;
+  min-width: 0;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.category-shortcuts-track > li { flex: 0 0 88px; min-width: 0; }
+.category-shortcuts-track a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  min-height: 88px;
+  padding: 6px 2px;
+  border-radius: 12px;
+  color: inherit;
+  text-align: center;
+  font-size: 13px;
+  line-height: 18px;
+}
+.category-shortcuts-track a span[title] {
+  display: -webkit-box;
+  max-width: 100%;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.category-shortcuts-image {
+  display: block;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: #f0f0ed;
+  object-fit: contain;
+}
+.category-shortcuts > button {
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #deded9;
+  border-radius: 50%;
+  background: #fff;
+  color: inherit;
+  cursor: pointer;
+}
+.category-shortcuts-track a:hover,
+.category-shortcuts > button:hover { background: #f0f0ed; }
+.category-shortcuts a:focus-visible,
+.category-shortcuts button:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+@media (max-width: 767px) {
+  .public-product-catalog.catalog-home > .catalog-master-heading { display: flex; }
+  .public-product-catalog.catalog-home > .catalog-master-heading h1 { display: block; }
+  .category-shortcuts > button { display: none; }
+}
+.category-shortcuts > button[aria-disabled="true"] {
+  color: #686863;
+  background: #f6f6f4;
+  cursor: default;
+}

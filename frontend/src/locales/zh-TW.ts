@@ -21,6 +21,8 @@ const messages: Dictionary = {
   "categoryTree.imageFailed": "分類圖上傳失敗，請檢查檔案後重試。",
 
   'shopping.directory': '全部分類',
+  'shopping.previous_categories': '向左瀏覽分類',
+  'shopping.next_categories': '向右瀏覽分類',
   'shopping.view_all': '查看全部',
   'shopping.parent': '返回上層分類',
   'checkout_verification.title':'驗證信箱後提交訂單','checkout_verification.reason':'購物車已儲存。請在提交訂單前輸入郵件中的驗證碼。','checkout_verification.sent_to':'驗證郵件將寄至：{email}','checkout_verification.send':'傳送驗證碼','checkout_verification.sent':'新驗證碼已傳送，請檢查收件匣和垃圾郵件。','checkout_verification.verified':'信箱驗證成功，可以繼續提交目前的購物車。','checkout_verification.change_email':'修改信箱','checkout_verification.cooldown':'為保護帳戶安全，{count} 秒後可再次傳送。','checkout_verification.failed':'暫時無法傳送或驗證驗證碼。','checkout_verification.limited':'操作次數過多，請稍後再試。','checkout_verification.expired':'驗證碼已過期，請傳送新驗證碼後重試。','checkout_verification.invalid':'驗證碼不正確，請檢查或重新傳送。','checkout_verification.offline':'網路似乎已中斷，請恢復連線後重試。','checkout_verification.recovery':'購物車和已輸入內容均已保留，可重試或修改信箱。',

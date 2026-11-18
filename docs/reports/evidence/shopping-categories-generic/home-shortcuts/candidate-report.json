@@ -1,0 +1,236 @@
+[
+  {
+    "width": 1280,
+    "height": 800,
+    "rootCount": 21,
+    "geometry": [
+      {
+        "width": "44px",
+        "height": "44px",
+        "minWidth": "auto",
+        "minHeight": "auto",
+        "borderRadius": "50%",
+        "borderColor": "rgb(222, 222, 217)",
+        "borderWidth": "1px",
+        "backgroundColor": "rgb(246, 246, 244)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "88px",
+        "height": "88px",
+        "minWidth": "0px",
+        "minHeight": "88px",
+        "borderRadius": "12px",
+        "borderColor": "rgb(25, 25, 25)",
+        "borderWidth": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "48px",
+        "height": "48px",
+        "minWidth": "auto",
+        "minHeight": "auto",
+        "borderRadius": "8px",
+        "borderColor": "rgb(25, 25, 25)",
+        "borderWidth": "0px",
+        "backgroundColor": "rgb(240, 240, 237)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "88px",
+        "height": "102px",
+        "minWidth": "0px",
+        "minHeight": "88px",
+        "borderRadius": "12px",
+        "borderColor": "rgb(25, 25, 25)",
+        "borderWidth": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "boxShadow": "none"
+      }
+    ],
+    "requests": [
+      [
+        "/api/storefront/trips",
+        200
+      ],
+      [
+        "/api/storefront/product-browse",
+        200
+      ],
+      [
+        "/api/storefront/product-popularity/:id",
+        200
+      ],
+      [
+        "/api/storefront/product-sales",
+        200
+      ],
+      [
+        "/api/storefront/recommendation-images/:id",
+        200
+      ],
+      [
+        "/api/storefront/recommendation-nodes",
+        200
+      ]
+    ],
+    "passed": true
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "rootCount": 21,
+    "geometry": [
+      {
+        "width": "44px",
+        "height": "44px",
+        "minWidth": "0px",
+        "minHeight": "0px",
+        "borderRadius": "50%",
+        "borderColor": "rgb(222, 222, 217)",
+        "borderWidth": "1px",
+        "backgroundColor": "rgb(246, 246, 244)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "88px",
+        "height": "88px",
+        "minWidth": "0px",
+        "minHeight": "88px",
+        "borderRadius": "12px",
+        "borderColor": "rgb(25, 25, 25)",
+        "borderWidth": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "48px",
+        "height": "48px",
+        "minWidth": "auto",
+        "minHeight": "auto",
+        "borderRadius": "8px",
+        "borderColor": "rgb(25, 25, 25)",
+        "borderWidth": "0px",
+        "backgroundColor": "rgb(240, 240, 237)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "88px",
+        "height": "102px",
+        "minWidth": "0px",
+        "minHeight": "88px",
+        "borderRadius": "12px",
+        "borderColor": "rgb(25, 25, 25)",
+        "borderWidth": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "boxShadow": "none"
+      }
+    ],
+    "requests": [
+      [
+        "/api/storefront/trips",
+        200
+      ],
+      [
+        "/api/storefront/product-browse",
+        200
+      ],
+      [
+        "/api/storefront/recommendation-images/:id",
+        200
+      ],
+      [
+        "/api/storefront/product-popularity/:id",
+        200
+      ],
+      [
+        "/api/storefront/product-sales",
+        200
+      ],
+      [
+        "/api/storefront/recommendation-nodes",
+        200
+      ]
+    ],
+    "passed": true
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "rootCount": 21,
+    "geometry": [
+      {
+        "width": "44px",
+        "height": "44px",
+        "minWidth": "0px",
+        "minHeight": "0px",
+        "borderRadius": "50%",
+        "borderColor": "rgb(222, 222, 217)",
+        "borderWidth": "1px",
+        "backgroundColor": "rgb(246, 246, 244)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "88px",
+        "height": "88px",
+        "minWidth": "0px",
+        "minHeight": "88px",
+        "borderRadius": "12px",
+        "borderColor": "rgb(25, 25, 25)",
+        "borderWidth": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "48px",
+        "height": "48px",
+        "minWidth": "auto",
+        "minHeight": "auto",
+        "borderRadius": "8px",
+        "borderColor": "rgb(25, 25, 25)",
+        "borderWidth": "0px",
+        "backgroundColor": "rgb(240, 240, 237)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "88px",
+        "height": "102px",
+        "minWidth": "0px",
+        "minHeight": "88px",
+        "borderRadius": "12px",
+        "borderColor": "rgb(25, 25, 25)",
+        "borderWidth": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "boxShadow": "none"
+      }
+    ],
+    "requests": [
+      [
+        "/api/storefront/trips",
+        200
+      ],
+      [
+        "/api/storefront/product-browse",
+        200
+      ],
+      [
+        "/api/storefront/recommendation-images/:id",
+        200
+      ],
+      [
+        "/api/storefront/product-popularity/:id",
+        200
+      ],
+      [
+        "/api/storefront/product-sales",
+        200
+      ],
+      [
+        "/api/storefront/recommendation-nodes",
+        200
+      ]
+    ],
+    "passed": true
+  }
+]

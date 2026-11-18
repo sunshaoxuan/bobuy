@@ -22,6 +22,8 @@ const messages: Dictionary = {
   "categoryTree.imageFailed": "画像をアップロードできません。ファイルを確認して再試行してください。",
 
   'shopping.directory': 'すべてのカテゴリ',
+  'shopping.previous_categories': '前のカテゴリ',
+  'shopping.next_categories': '次のカテゴリ',
   'shopping.view_all': 'すべて見る',
   'shopping.parent': '上位カテゴリに戻る',
   'pricing.documents':'価格改定伝票','pricing.reason_required':'改定または取消の理由を入力してください。要確認の出典伝票は理由を補って保存してください。','pricing.promotion_reduction':'販促価格は同一チャネル・通貨・単位の通常価格より低い必要があります。','pricing.use_documents':'価格と割引期間は価格改定伝票で管理してください。',

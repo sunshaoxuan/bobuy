@@ -22,6 +22,8 @@ const messages: Dictionary = {
   "categoryTree.imageFailed": "Category image upload failed. Check the file and retry.",
 
   'shopping.directory': 'All categories',
+  'shopping.previous_categories': 'Previous categories',
+  'shopping.next_categories': 'Next categories',
   'shopping.view_all': 'View all',
   'shopping.parent': 'Parent category',
   'pricing.documents':'Price adjustment documents','pricing.reason_required':'Provide a specific change or cancellation reason. Review source drafts and save an explicit reason before approval.','pricing.promotion_reduction':'A promotion must reduce the regular price in the same channel, currency and unit.','pricing.use_documents':'Maintain prices and offer periods in price adjustment documents.',
