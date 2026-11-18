@@ -26,3 +26,12 @@
   .category-tree-actions .ant-btn { flex: 1 1 100px; }
   .category-tree-dialog .ant-modal-close { width: 44px; height: 44px; }
 }
+
+.category-tree-image-editor{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.category-tree-image-editor img,.category-tree-image-placeholder{width:48px;height:48px;object-fit:contain;border-radius:8px;background:#f0f0ed}
+.category-tree-image-editor p{flex-basis:100%;margin:0;color:var(--zen-muted);overflow-wrap:anywhere}
+
+.category-structure-transfer{margin:24px 0;padding:16px;border:1px solid #e6e6e3;border-radius:16px;min-width:0}.category-structure-transfer .ant-alert{margin:12px 0}.category-structure-transfer .ant-checkbox-wrapper{margin:12px 12px 12px 0}.category-structure-transfer .ant-btn{min-height:44px}
+
+.category-structure-transfer .category-tree-actions{align-items:flex-start}
+.category-structure-transfer .category-tree-actions .ant-btn>span:not(.anticon){transform:translateY(-1.5px)}

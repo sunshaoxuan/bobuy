@@ -1,0 +1,30 @@
+{
+  "base": "77983bdc362f877bc8d33053cb014d777fa40b43",
+  "syntheticOnly": true,
+  "sources": {
+    "backend/src/main/java/com/bobbuy/api/CategoryPathImportController.java": "a73a2de6a3f09d495b33f16ab3e03e340155f9f93a9333d1304778ae0dad0c79",
+    "backend/src/main/java/com/bobbuy/repository/ProductRepository.java": "06dbd132478e55cca36abadb33cd684330d547e730a448894ada9081d6cf13cd",
+    "backend/src/main/java/com/bobbuy/service/CategoryPathImportService.java": "7a99d15def629ddf1b4db5bb8a33c18eb5f39f82fa533311ac7149b801d02ec6",
+    "backend/src/main/java/com/bobbuy/service/ProductCatalogService.java": "407aaca8d6d9af68598a85d0005d7e16a70fd2a952708725009fc8acb7b9a63c",
+    "backend/src/main/java/com/bobbuy/service/PublicProductBrowseService.java": "977a02bc1193c06ba03a496fb09b42bb1db8b4c5cca0d66380392196b4ecbc93",
+    "bobbuy-common/pom.xml": "3e58a4891c6472f74667cfc1253c63013fca58391605e270265d296d014a9fa4",
+    "frontend/src/api.ts": "d6f0fe2b62f117362c543511db15550e7dbc0b6f63b2ad2b4b678726d26065e7",
+    "frontend/src/components/CatalogFileTransfer.tsx": "cbbdba5ce8548b7700c558bfee1fa5164d729900581f17fbf76cc55c4c91f632",
+    "frontend/src/components/CategoryStructureTransfer.tsx": "57a993ba2d48611d5383f1e0a86e557dbc51316c646a776a38e6c4e9534174ac",
+    "frontend/src/components/ProductCatalogPanel.test.tsx": "398e7ab078cf4c07fdd2bd6780cf0cba242d9effe3d65b783841fd59c1fcd5f6",
+    "frontend/src/components/ProductCatalogPanel.tsx": "30b512ebd7a1dd4560df306106210b985f13d4a17365b122db1f90945cbf22ba",
+    "frontend/src/components/StoreNavigation.tsx": "94ef346226264242f6c4d1f1ec99f22cabe0e5fb2fce402c3f4312c26a108eb2",
+    "frontend/src/components/productCatalog.css": "7941c3c5fe5265313261fd81bb84da6d020b25b735241ce489f49cf65a767917",
+    "frontend/src/locales/en-US.ts": "72d7b14c6ad858e17b1c88bcae93eda8ae8b0fc7cef7bbc937e3280cf56bfb23",
+    "frontend/src/locales/ja-JP.ts": "a9dd6e90a93d5b6643ec0665a76eb1c450ab29473863eb26eae04359d887033b",
+    "frontend/src/locales/zh-CN.ts": "01647d6669f2ff0f8209f1ebd83dfc0faef93f049e3643a485fe7a1904962931",
+    "frontend/src/locales/zh-TW.ts": "bb6063f44eb3b12e4a02b39f95412b08ffa2fb70bddeeedfd1366d392dd6de86",
+    "frontend/src/pages/CategoryPathImport.test.tsx": "89fe05d1d9e4607ff7ef569c61152a90a2089374f95014d1b4fb6e627878aa8d",
+    "frontend/src/pages/CategoryPathImport.tsx": "04491f7cc3ee76b456c7f8ccd2fa50ef0b4045939a58dab7659eb977f735a1b4",
+    "frontend/src/pages/CategoryTreeManagement.tsx": "339d9c14523af831b25732ec00c9b26350ac9aadc9eb0609760d801d2ffc8170",
+    "frontend/src/pages/categoryPathImport.css": "7011969d5ae5ab48631a4bfd56d5c62b1ff63dc01a7e08ca391459c67b76fa68",
+    "frontend/src/pages/categoryTreeManagement.css": "b156a08871c597316ae682ce0ea9e635eccab66873e9dd41153cf8662ff43437",
+    "frontend/src/components/CategoryImage.tsx": "0d471c446fff5cd03b5b4d9e0b2c393bc03ffa011f716d3eb3b7f78cb1122baf",
+    "backend/src/main/resources/db/migration/V45__category_import_preview_state.sql": "17adb0799c481965252dc207b11dd15adb63b8644264b94ab49677b08ed32392"
+  }
+}

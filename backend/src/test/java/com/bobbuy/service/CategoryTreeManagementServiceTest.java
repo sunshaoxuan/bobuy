@@ -37,6 +37,16 @@ class CategoryTreeManagementServiceTest {
         when(paths.countByCategoryNodeId(anyString())).thenAnswer(c -> assigned.values().stream().filter(p -> p.getCategoryNodeId().equals(c.getArgument(0))).count());
         service = new CategoryTreeManagementService(nodes, paths, products, mappings, new ProductCategoryPathResolver(paths, mappings, legacy), jdbc);
     }
+    @Test void shoppingMappingProtectsEmptySourceAndRejectsOverlappingMoves() {
+        var first=add(null,"First");var second=add(null,"Second");
+        var shopping=mock(ShoppingCategoryService.class);service.setShopping(shopping);
+        when(shopping.referencesSource(first.id())).thenReturn(true);
+        assertThat(service.list()).filteredOn(n->n.id().equals(first.id())).allMatch(CategoryTreeManagementService.Node::deleteBlocked);
+        assertThatThrownBy(()->service.delete(first.id())).isInstanceOf(com.bobbuy.api.response.ApiException.class);
+        verify(nodes,never()).delete(any());
+        doThrow(new IllegalArgumentException("overlap")).when(shopping).validateSources(any());
+        assertThatThrownBy(()->service.update(first.id(),new CategoryTreeManagementService.Edit(second.id(),null,null))).isInstanceOf(com.bobbuy.api.response.ApiException.class);
+    }
     @AfterEach void cleanup() { SecurityContextHolder.clearContext(); }
     private CategoryTreeManagementService.Node add(String parent, String name) {
         return service.create(new CategoryTreeManagementService.Edit(parent, Map.of("ja-JP", name), null));
@@ -64,15 +74,15 @@ class CategoryTreeManagementServiceTest {
         verifyNoInteractions(products);
     }
 
-    @Test void automaticOrderCountsSubtreeAssignmentsAndReactsWithoutPersistingRanks() {
+    @Test void configuredOrderSurvivesProductCountChanges() {
         var a=add(null,"少"); var b=add(null,"多");
         var x=add(b.id(),"少子"); var y=add(b.id(),"多子");
         assigned.put("p1",new ProductPrimaryCategoryPath("p1",x.id()));
         assigned.put("p2",new ProductPrimaryCategoryPath("p2",y.id()));
         assigned.put("p3",new ProductPrimaryCategoryPath("p3",y.id()));
-        assertThat(service.list().stream().filter(n->n.parentId()==null)).extracting(CategoryTreeManagementService.Node::id).containsExactly(b.id(),a.id());
-        assertThat(service.list().stream().filter(n->b.id().equals(n.parentId()))).extracting(CategoryTreeManagementService.Node::id).containsExactly(y.id(),x.id());
-        assertThat(service.list().get(0).productCount()).isEqualTo(3);
+        assertThat(service.list().stream().filter(n->n.parentId()==null)).extracting(CategoryTreeManagementService.Node::id).containsExactly(a.id(),b.id());
+        assertThat(service.list().stream().filter(n->b.id().equals(n.parentId()))).extracting(CategoryTreeManagementService.Node::id).containsExactly(x.id(),y.id());
+        assertThat(service.list().stream().filter(n->n.id().equals(b.id())).findFirst().orElseThrow().productCount()).isEqualTo(3);
         service.update(b.id(),new CategoryTreeManagementService.Edit(null,Map.of("ja-JP","改名"),null));
         assertThat(tree.get(b.id()).isExplicitOrder()).isFalse();
         assigned.replaceAll((id,path)->new ProductPrimaryCategoryPath(id,a.id()));

@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "events": [
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-path-import/export.csv",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-path-import/preview",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-path-import/863f1204-c687-4395-bb1e-1e0500283580/confirm",
+      "status": 404
+    }
+  ]
+}

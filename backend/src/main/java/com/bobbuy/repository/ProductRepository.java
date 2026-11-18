@@ -21,6 +21,7 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     @org.springframework.data.jpa.repository.Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE)
     @org.springframework.data.jpa.repository.Query("select p from Product p where p.id=:id")
     Optional<Product> lockById(@org.springframework.data.repository.query.Param("id") String id);
+    java.util.List<Product> findAllByMerchantId(Long merchantId);
     boolean existsByIdAndMerchantId(String id, Long merchantId);
     java.util.List<Product> findAllByMerchantIdAndItemNumber(Long merchantId, String itemNumber);
     @org.springframework.data.jpa.repository.Query(value="select count(*) from bb_product where merchant_id=:owner and item_number=:code and deleted_at is not null",nativeQuery=true)

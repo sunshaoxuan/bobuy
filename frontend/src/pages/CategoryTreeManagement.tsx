@@ -1,5 +1,7 @@
+import CategoryImage from '../components/CategoryImage';
+import CategoryStructureTransfer from '../components/CategoryStructureTransfer';
 import {useEffect, useState} from 'react';
-import {Alert, Button, Empty, Input, Modal, Spin, TreeSelect} from 'antd';
+import {Alert, Button, Empty, Input, Modal, Spin, TreeSelect, Upload} from 'antd';
 import {categoryTreeApi, type CategoryTreeNode} from '../api';
 import {useI18n} from '../i18n';
 import {categoryName, categoryTreeData} from '../components/CategoryTreePicker';
@@ -39,6 +41,11 @@ export default function CategoryTreeManagement() {
     try {await categoryTreeApi.update(node.id, {parentId: node.parentId, sortOrder: position}); await refresh();}
     catch {setError('categoryTree.failed');} finally {setBusy(false);}
   }
+  async function uploadImage(node:CategoryTreeNode,file:File) {
+    if(busy)return;setBusy(true);setError('');
+    try {const imageUrl=await categoryTreeApi.uploadImage(node.id,file);setNodes(current=>current.map(n=>n.id===node.id?{...n,imageUrl}:n));}
+    catch {setError('categoryTree.imageFailed');} finally {setBusy(false);}
+  }
   async function remove() {
     if (!deleting || busy) return;
     setBusy(true); setError('');
@@ -54,6 +61,11 @@ export default function CategoryTreeManagement() {
       const name = categoryName(node, locale);
       const blocked = node.deleteBlocked || node.productCount > 0 || nodes.some(n => n.parentId === node.id);
       return <li key={node.id}><article className="category-tree-row" aria-label={fullName(node)}>
+        {node.parentId===null&&<div className="category-tree-image-editor">
+          <CategoryImage src={node.imageUrl} className="category-tree-image-placeholder"/>
+          <Upload accept="image/png,image/jpeg" showUploadList={false} disabled={busy} beforeUpload={file=>{void uploadImage(node,file);return false;}}><Button disabled={busy}>{t('categoryTree.imageUpload')}</Button></Upload>
+          <p>{t('categoryTree.imageHelp')}</p>
+        </div>}
         <div className="category-tree-label"><strong>{name}</strong><p>{fullName(node)}</p></div>
         <div className="category-tree-actions" role="group" aria-label={name}>
           <Button disabled={busy} onClick={() => open({mode: 'add', parent: node.id, names: {'ja-JP': ''}})}>{t('categoryTree.addChild')}</Button>
@@ -71,6 +83,7 @@ export default function CategoryTreeManagement() {
   return <section className="category-tree-management">
     <header><div><h1>{t('categoryTree.title')}</h1><p>{t('categoryTree.help')}</p></div>
       <Button type="primary" disabled={busy || loading || !!error && nodes.length === 0} onClick={() => open({mode: 'add', parent: null, names: {'ja-JP': ''}})}>{t('categoryTree.addRoot')}</Button></header>
+    <CategoryStructureTransfer onSaved={refresh} nodes={nodes}/>
     {error && <Alert type="error" showIcon message={t(error)} action={<Button disabled={busy} onClick={() => {setError(''); void refresh().catch(() => setError('categoryTree.loadFailed'));}}>{t('categoryTree.retry')}</Button>}/>}
     {loading ? <Spin aria-label={t('categoryTree.loading')}/> : nodes.length ? branch(null) : !error && <Empty description={t('categoryTree.empty')}/>}
     <Modal className="category-tree-dialog" open={!!editor} title={t(editor?.mode === 'move' ? 'categoryTree.move' : editor?.mode === 'rename' ? 'categoryTree.rename' : 'categoryTree.add')}

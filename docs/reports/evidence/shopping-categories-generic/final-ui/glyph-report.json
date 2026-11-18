@@ -1,0 +1,1385 @@
+{
+  "method": "Raster foreground pixels near computed text color, native browser control screenshots. Rounded outer corners, edge-connected page background on manually inspected dark controls, and known 3px decorative underline excluded. Main-agent screenshots remain authoritative; this is not a DOM text-box approximation.",
+  "results": [
+    {
+      "file": "glyphs/1280-mapping-0.png",
+      "text": "Download CSV template",
+      "control": [
+        185,
+        45
+      ],
+      "inkBounds": [
+        17,
+        16,
+        168,
+        30
+      ],
+      "insets": [
+        17,
+        16,
+        17,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-mapping-1.png",
+      "text": "Export current mappings",
+      "control": [
+        186,
+        45
+      ],
+      "inkBounds": [
+        18,
+        16,
+        168,
+        30
+      ],
+      "insets": [
+        18,
+        16,
+        18,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-mapping-2.png",
+      "text": "Choose operations file",
+      "control": [
+        172,
+        45
+      ],
+      "inkBounds": [
+        17,
+        16,
+        154,
+        30
+      ],
+      "insets": [
+        17,
+        16,
+        18,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-mapping-4.png",
+      "text": "Preview import",
+      "control": [
+        125,
+        45
+      ],
+      "inkBounds": [
+        17,
+        16,
+        109,
+        30
+      ],
+      "insets": [
+        17,
+        16,
+        16,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-mapping-5.png",
+      "text": "Export unmatched list",
+      "control": [
+        168,
+        45
+      ],
+      "inkBounds": [
+        18,
+        15,
+        151,
+        29
+      ],
+      "insets": [
+        18,
+        15,
+        17,
+        16
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-catalog-1.png",
+      "text": "Read original masters and linked issues (read only)",
+      "control": [
+        318,
+        45
+      ],
+      "inkBounds": [
+        17,
+        17,
+        301,
+        30
+      ],
+      "insets": [
+        17,
+        17,
+        17,
+        15
+      ],
+      "centerDeviation": 1.0,
+      "limit": 1.3,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-catalog-2.png",
+      "text": "Generate suggestions from linked recommendations",
+      "control": [
+        330,
+        45
+      ],
+      "inkBounds": [
+        17,
+        17,
+        313,
+        30
+      ],
+      "insets": [
+        17,
+        17,
+        17,
+        15
+      ],
+      "centerDeviation": 1.0,
+      "limit": 1.3,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-catalog-3.png",
+      "text": "Download JSON template",
+      "control": [
+        175,
+        45
+      ],
+      "inkBounds": [
+        17,
+        16,
+        157,
+        29
+      ],
+      "insets": [
+        17,
+        16,
+        18,
+        16
+      ],
+      "centerDeviation": 0.0,
+      "limit": 1.3,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-catalog-4.png",
+      "text": "Export listed products",
+      "control": [
+        156,
+        45
+      ],
+      "inkBounds": [
+        18,
+        16,
+        139,
+        29
+      ],
+      "insets": [
+        18,
+        16,
+        17,
+        16
+      ],
+      "centerDeviation": 0.0,
+      "limit": 1.3,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-catalog-5.png",
+      "text": "Load JSON file",
+      "control": [
+        113,
+        45
+      ],
+      "inkBounds": [
+        18,
+        16,
+        95,
+        28
+      ],
+      "insets": [
+        18,
+        16,
+        18,
+        17
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.2000000000000002,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-catalog-6.png",
+      "text": "Validate and preview",
+      "control": [
+        180,
+        45
+      ],
+      "inkBounds": [
+        32,
+        17,
+        148,
+        27
+      ],
+      "insets": [
+        32,
+        17,
+        32,
+        18
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.0,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-structure-0.png",
+      "text": "Download CSV template",
+      "control": [
+        183,
+        45
+      ],
+      "inkBounds": [
+        16,
+        16,
+        167,
+        30
+      ],
+      "insets": [
+        16,
+        16,
+        16,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-structure-1.png",
+      "text": "Export current categories",
+      "control": [
+        187,
+        45
+      ],
+      "inkBounds": [
+        17,
+        16,
+        171,
+        30
+      ],
+      "insets": [
+        17,
+        16,
+        16,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-structure-2.png",
+      "text": "Choose operations file",
+      "control": [
+        171,
+        45
+      ],
+      "inkBounds": [
+        17,
+        16,
+        154,
+        30
+      ],
+      "insets": [
+        17,
+        16,
+        17,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-structure-4.png",
+      "text": "Preview import",
+      "control": [
+        123,
+        45
+      ],
+      "inkBounds": [
+        17,
+        16,
+        107,
+        30
+      ],
+      "insets": [
+        17,
+        16,
+        16,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1440-mapping-0.png",
+      "text": "Download CSV template",
+      "control": [
+        185,
+        45
+      ],
+      "inkBounds": [
+        17,
+        15,
+        168,
+        29
+      ],
+      "insets": [
+        17,
+        15,
+        17,
+        16
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1440-mapping-1.png",
+      "text": "Export current mappings",
+      "control": [
+        186,
+        45
+      ],
+      "inkBounds": [
+        18,
+        15,
+        168,
+        29
+      ],
+      "insets": [
+        18,
+        15,
+        18,
+        16
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1440-mapping-2.png",
+      "text": "Choose operations file",
+      "control": [
+        172,
+        45
+      ],
+      "inkBounds": [
+        17,
+        15,
+        154,
+        29
+      ],
+      "insets": [
+        17,
+        15,
+        18,
+        16
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1440-mapping-4.png",
+      "text": "Preview import",
+      "control": [
+        125,
+        45
+      ],
+      "inkBounds": [
+        17,
+        15,
+        109,
+        29
+      ],
+      "insets": [
+        17,
+        15,
+        16,
+        16
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1440-mapping-5.png",
+      "text": "Export unmatched list",
+      "control": [
+        168,
+        45
+      ],
+      "inkBounds": [
+        18,
+        16,
+        151,
+        30
+      ],
+      "insets": [
+        18,
+        16,
+        17,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1440-catalog-1.png",
+      "text": "Read original masters and linked issues (read only)",
+      "control": [
+        318,
+        45
+      ],
+      "inkBounds": [
+        17,
+        17,
+        301,
+        30
+      ],
+      "insets": [
+        17,
+        17,
+        17,
+        15
+      ],
+      "centerDeviation": 1.0,
+      "limit": 1.3,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1440-catalog-2.png",
+      "text": "Generate suggestions from linked recommendations",
+      "control": [
+        330,
+        45
+      ],
+      "inkBounds": [
+        17,
+        17,
+        313,
+        30
+      ],
+      "insets": [
+        17,
+        17,
+        17,
+        15
+      ],
+      "centerDeviation": 1.0,
+      "limit": 1.3,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1440-catalog-3.png",
+      "text": "Download JSON template",
+      "control": [
+        175,
+        45
+      ],
+      "inkBounds": [
+        17,
+        16,
+        157,
+        29
+      ],
+      "insets": [
+        17,
+        16,
+        18,
+        16
+      ],
+      "centerDeviation": 0.0,
+      "limit": 1.3,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1440-catalog-4.png",
+      "text": "Export listed products",
+      "control": [
+        156,
+        45
+      ],
+      "inkBounds": [
+        18,
+        16,
+        139,
+        29
+      ],
+      "insets": [
+        18,
+        16,
+        17,
+        16
+      ],
+      "centerDeviation": 0.0,
+      "limit": 1.3,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1440-catalog-5.png",
+      "text": "Load JSON file",
+      "control": [
+        113,
+        45
+      ],
+      "inkBounds": [
+        18,
+        16,
+        95,
+        28
+      ],
+      "insets": [
+        18,
+        16,
+        18,
+        17
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.2000000000000002,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1440-catalog-6.png",
+      "text": "Validate and preview",
+      "control": [
+        180,
+        45
+      ],
+      "inkBounds": [
+        32,
+        17,
+        148,
+        27
+      ],
+      "insets": [
+        32,
+        17,
+        32,
+        18
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.0,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1440-structure-0.png",
+      "text": "Download CSV template",
+      "control": [
+        183,
+        45
+      ],
+      "inkBounds": [
+        16,
+        16,
+        167,
+        30
+      ],
+      "insets": [
+        16,
+        16,
+        16,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1440-structure-1.png",
+      "text": "Export current categories",
+      "control": [
+        187,
+        45
+      ],
+      "inkBounds": [
+        17,
+        16,
+        171,
+        30
+      ],
+      "insets": [
+        17,
+        16,
+        16,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1440-structure-2.png",
+      "text": "Choose operations file",
+      "control": [
+        171,
+        45
+      ],
+      "inkBounds": [
+        17,
+        16,
+        154,
+        30
+      ],
+      "insets": [
+        17,
+        16,
+        17,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1440-structure-4.png",
+      "text": "Preview import",
+      "control": [
+        123,
+        45
+      ],
+      "inkBounds": [
+        17,
+        16,
+        107,
+        30
+      ],
+      "insets": [
+        17,
+        16,
+        16,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-mapping-0.png",
+      "text": "Download CSV template",
+      "control": [
+        185,
+        45
+      ],
+      "inkBounds": [
+        17,
+        15,
+        168,
+        29
+      ],
+      "insets": [
+        17,
+        15,
+        17,
+        16
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-mapping-1.png",
+      "text": "Export current mappings",
+      "control": [
+        185,
+        45
+      ],
+      "inkBounds": [
+        17,
+        15,
+        168,
+        29
+      ],
+      "insets": [
+        17,
+        15,
+        17,
+        16
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-mapping-2.png",
+      "text": "Choose operations file",
+      "control": [
+        172,
+        45
+      ],
+      "inkBounds": [
+        17,
+        15,
+        154,
+        29
+      ],
+      "insets": [
+        17,
+        15,
+        18,
+        16
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-mapping-4.png",
+      "text": "Preview import",
+      "control": [
+        125,
+        45
+      ],
+      "inkBounds": [
+        17,
+        15,
+        109,
+        29
+      ],
+      "insets": [
+        17,
+        15,
+        16,
+        16
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-mapping-5.png",
+      "text": "Export unmatched list",
+      "control": [
+        358,
+        45
+      ],
+      "inkBounds": [
+        113,
+        15,
+        246,
+        29
+      ],
+      "insets": [
+        113,
+        15,
+        112,
+        16
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-catalog-1.png",
+      "text": "Read original masters and linked issues (read only)",
+      "control": [
+        318,
+        45
+      ],
+      "inkBounds": [
+        17,
+        17,
+        301,
+        30
+      ],
+      "insets": [
+        17,
+        17,
+        17,
+        15
+      ],
+      "centerDeviation": 1.0,
+      "limit": 1.3,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-catalog-2.png",
+      "text": "Generate suggestions from linked recommendations",
+      "control": [
+        330,
+        45
+      ],
+      "inkBounds": [
+        17,
+        17,
+        313,
+        30
+      ],
+      "insets": [
+        17,
+        17,
+        17,
+        15
+      ],
+      "centerDeviation": 1.0,
+      "limit": 1.3,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-catalog-3.png",
+      "text": "Download JSON template",
+      "control": [
+        175,
+        45
+      ],
+      "inkBounds": [
+        17,
+        16,
+        157,
+        29
+      ],
+      "insets": [
+        17,
+        16,
+        18,
+        16
+      ],
+      "centerDeviation": 0.0,
+      "limit": 1.3,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-catalog-4.png",
+      "text": "Export listed products",
+      "control": [
+        156,
+        45
+      ],
+      "inkBounds": [
+        18,
+        16,
+        139,
+        29
+      ],
+      "insets": [
+        18,
+        16,
+        17,
+        16
+      ],
+      "centerDeviation": 0.0,
+      "limit": 1.3,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-catalog-5.png",
+      "text": "Load JSON file",
+      "control": [
+        112,
+        45
+      ],
+      "inkBounds": [
+        17,
+        16,
+        94,
+        28
+      ],
+      "insets": [
+        17,
+        16,
+        18,
+        17
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.2000000000000002,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-catalog-6.png",
+      "text": "Validate and preview",
+      "control": [
+        180,
+        45
+      ],
+      "inkBounds": [
+        32,
+        17,
+        148,
+        27
+      ],
+      "insets": [
+        32,
+        17,
+        32,
+        18
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.0,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-structure-0.png",
+      "text": "Download CSV template",
+      "control": [
+        158,
+        63
+      ],
+      "inkBounds": [
+        33,
+        14,
+        126,
+        47
+      ],
+      "insets": [
+        33,
+        14,
+        32,
+        16
+      ],
+      "centerDeviation": 1.0,
+      "limit": 2,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-structure-1.png",
+      "text": "Export current categories",
+      "control": [
+        158,
+        63
+      ],
+      "inkBounds": [
+        36,
+        15,
+        122,
+        50
+      ],
+      "insets": [
+        36,
+        15,
+        36,
+        13
+      ],
+      "centerDeviation": 1.0,
+      "limit": 2,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-structure-2.png",
+      "text": "Choose operations file",
+      "control": [
+        170,
+        45
+      ],
+      "inkBounds": [
+        16,
+        16,
+        153,
+        30
+      ],
+      "insets": [
+        16,
+        16,
+        17,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-structure-4.png",
+      "text": "Preview import",
+      "control": [
+        147,
+        45
+      ],
+      "inkBounds": [
+        29,
+        16,
+        119,
+        30
+      ],
+      "insets": [
+        29,
+        16,
+        28,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-mapping-0.png",
+      "text": "Download CSV template",
+      "control": [
+        185,
+        45
+      ],
+      "inkBounds": [
+        17,
+        15,
+        168,
+        29
+      ],
+      "insets": [
+        17,
+        15,
+        17,
+        16
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-mapping-1.png",
+      "text": "Export current mappings",
+      "control": [
+        185,
+        45
+      ],
+      "inkBounds": [
+        17,
+        15,
+        168,
+        29
+      ],
+      "insets": [
+        17,
+        15,
+        17,
+        16
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-mapping-2.png",
+      "text": "Choose operations file",
+      "control": [
+        172,
+        45
+      ],
+      "inkBounds": [
+        17,
+        15,
+        154,
+        29
+      ],
+      "insets": [
+        17,
+        15,
+        18,
+        16
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-mapping-4.png",
+      "text": "Preview import",
+      "control": [
+        125,
+        45
+      ],
+      "inkBounds": [
+        17,
+        15,
+        108,
+        29
+      ],
+      "insets": [
+        17,
+        15,
+        17,
+        16
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-mapping-5.png",
+      "text": "Export unmatched list",
+      "control": [
+        328,
+        45
+      ],
+      "inkBounds": [
+        98,
+        15,
+        231,
+        29
+      ],
+      "insets": [
+        98,
+        15,
+        97,
+        16
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-catalog-1.png",
+      "text": "Read original masters and linked issues (read only)",
+      "control": [
+        318,
+        45
+      ],
+      "inkBounds": [
+        17,
+        17,
+        301,
+        30
+      ],
+      "insets": [
+        17,
+        17,
+        17,
+        15
+      ],
+      "centerDeviation": 1.0,
+      "limit": 1.3,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-catalog-2.png",
+      "text": "Generate suggestions from linked recommendations",
+      "control": [
+        328,
+        49
+      ],
+      "inkBounds": [
+        69,
+        10,
+        258,
+        38
+      ],
+      "insets": [
+        69,
+        10,
+        70,
+        11
+      ],
+      "centerDeviation": 0.5,
+      "limit": 2,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-catalog-3.png",
+      "text": "Download JSON template",
+      "control": [
+        175,
+        45
+      ],
+      "inkBounds": [
+        17,
+        16,
+        157,
+        29
+      ],
+      "insets": [
+        17,
+        16,
+        18,
+        16
+      ],
+      "centerDeviation": 0.0,
+      "limit": 1.3,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-catalog-4.png",
+      "text": "Export listed products",
+      "control": [
+        156,
+        45
+      ],
+      "inkBounds": [
+        17,
+        16,
+        139,
+        29
+      ],
+      "insets": [
+        17,
+        16,
+        17,
+        16
+      ],
+      "centerDeviation": 0.0,
+      "limit": 1.3,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-catalog-5.png",
+      "text": "Load JSON file",
+      "control": [
+        112,
+        45
+      ],
+      "inkBounds": [
+        18,
+        16,
+        95,
+        28
+      ],
+      "insets": [
+        18,
+        16,
+        17,
+        17
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.2000000000000002,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-catalog-6.png",
+      "text": "Validate and preview",
+      "control": [
+        180,
+        45
+      ],
+      "inkBounds": [
+        32,
+        17,
+        148,
+        27
+      ],
+      "insets": [
+        32,
+        17,
+        32,
+        18
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.0,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-structure-0.png",
+      "text": "Download CSV template",
+      "control": [
+        143,
+        63
+      ],
+      "inkBounds": [
+        25,
+        14,
+        119,
+        50
+      ],
+      "insets": [
+        25,
+        14,
+        24,
+        13
+      ],
+      "centerDeviation": 0.5,
+      "limit": 2,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-structure-1.png",
+      "text": "Export current categories",
+      "control": [
+        143,
+        63
+      ],
+      "inkBounds": [
+        29,
+        15,
+        115,
+        50
+      ],
+      "insets": [
+        29,
+        15,
+        28,
+        13
+      ],
+      "centerDeviation": 1.0,
+      "limit": 2,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-structure-2.png",
+      "text": "Choose operations file",
+      "control": [
+        170,
+        45
+      ],
+      "inkBounds": [
+        16,
+        16,
+        153,
+        30
+      ],
+      "insets": [
+        16,
+        16,
+        17,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-structure-4.png",
+      "text": "Preview import",
+      "control": [
+        117,
+        63
+      ],
+      "inkBounds": [
+        35,
+        15,
+        83,
+        50
+      ],
+      "insets": [
+        35,
+        15,
+        34,
+        13
+      ],
+      "centerDeviation": 1.0,
+      "limit": 2,
+      "status": "PASS"
+    }
+  ]
+}

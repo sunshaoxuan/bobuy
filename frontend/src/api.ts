@@ -895,7 +895,7 @@ async function parseErrorMessage(response: Response): Promise<string> {
             return translate(getStoredLocale(), 'maintenance.title');
         }
         if (payload?.message) {
-            if(payload.message.startsWith('onboarding.'))return translate(getStoredLocale(),payload.message);
+            if(payload.message.startsWith('onboarding.')||payload.message.startsWith('master.'))return translate(getStoredLocale(),payload.message);
             return payload.message;
         }
     } catch {
@@ -1151,8 +1151,9 @@ export const productCatalogApi={
  save:(rows:CatalogInput[])=>putJson<{value:CatalogInput;canonical:boolean;sourceItemIds:number[];recoveryId?:string}[],object>('/api/merchant/product-catalog',{rows,reviewed:true}),
  upload:async(id:string,file:File,sourceUrl:string,label:string)=>{const prepared=await prepareImageUpload(file);const form=new FormData();form.set('file',prepared);form.set('sourceUrl',sourceUrl);form.set('label',label);form.set('verified','true');const response=await authorizedFetch('/api/merchant/product-catalog/'+encodeURIComponent(id)+'/images',{method:'POST',body:form});if(!response.ok)throw new Error(await parseErrorMessage(response));return parseSuccessPayload<CatalogMedia>(response);}
 };
-export type CategoryTreeNode={id:string;parentId:string|null;name:Record<string,string>;fullPath:string[];sortOrder:number;productCount:number;deleteBlocked?:boolean};
+export type CategoryTreeNode={imageUrl?:string|null;id:string;parentId:string|null;name:Record<string,string>;fullPath:string[];sortOrder:number;productCount:number;deleteBlocked?:boolean};
 export const categoryTreeApi={
+ uploadImage:async(id:string,file:File)=>{const form=new FormData();form.set('file',await prepareImageUpload(file));const response=await authorizedFetch('/api/category-tree/'+encodeURIComponent(id)+'/image',{method:'POST',body:form});if(!response.ok)throw new Error(await parseErrorMessage(response));return parseSuccessPayload<string>(response);},
  list:()=>storeGet<CategoryTreeNode[]>('/api/category-tree'),
  create:(value:{parentId:string|null;name:Record<string,string>;sortOrder?:number})=>postJson<CategoryTreeNode,object>('/api/category-tree',value),
  update:(id:string,value:{parentId:string|null;name?:Record<string,string>;sortOrder?:number})=>putJson<CategoryTreeNode,object>('/api/category-tree/'+encodeURIComponent(id),value),
@@ -1620,8 +1621,8 @@ export type SelfProfilePatch = {name?:string;email?:string;phone?:string|null;de
 
 export type BrowseQuery={sort?:string;page?:number;merchantId?:number;query?:string;category?:string;locale?:string;marked?:boolean;markedFirst?:boolean;revision?:string;issueId?:number;period?:'current'|'history'|'all'};
 function browseQuery(query:BrowseQuery){return new URLSearchParams(Object.entries(query).filter(([,value])=>value!==undefined).map(([key,value])=>[key,String(value)]));}
-export type BrowseFacet=RecommendationLabel&{count:number};
-export type BrowsePage<T>={items:T[];page:number;size:number;scopeTotal:number;matchedTotal:number;hasNext:boolean;revision:string;datasetRevision:string;categories:BrowseFacet[];unclassified:number;markedScopeTotal?:number;japanDay?:string;productOccurrences?:number;serviceCards?:number};
+export type BrowseFacet=RecommendationLabel&{count:number;parentId?:string|null;icon?:string|null;imageUrl?:string|null};
+export type BrowsePage<T>={items:T[];page:number;size:number;scopeTotal:number;matchedTotal:number;hasNext:boolean;revision:string;datasetRevision:string;categories:BrowseFacet[];unclassified:number;shelves?:{category:string;items:T[];total:number}[];selectedCategory?:string;markedScopeTotal?:number;japanDay?:string;productOccurrences?:number;serviceCards?:number};
 export type CardReference={priceChange?:PriceChangeView|null;originalPrice?:number|null;discountAmount?:number|null;amount:number;currency:string;unit?:string|null;postId:number;itemId:number;state:'ACTIVE'|'EXPIRED'|'FUTURE'|'UNKNOWN'};
 export type ProductBrowseCard=Omit<PublicCatalogEntry,'gallery'|'description'|'referenceOffers'>&{image:RecommendationPicture|null;markers:ProductMarkerDefinition[];reference?:CardReference|null};
 export type RecommendationBrowseItem=Omit<RecommendationItem,'imageUrl'|'gallery'|'description'|'sourceFacts'>&{image:RecommendationPicture|null;rating?:number|null};

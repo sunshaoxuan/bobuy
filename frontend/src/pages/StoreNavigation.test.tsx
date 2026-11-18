@@ -22,7 +22,7 @@ it('keeps node context in links and exact active state without inventing valid n
  expect(screen.getByRole('link',{name:'Product Picks'})).toHaveAttribute('href','/products?node=1000');
  expect(screen.getByRole('link',{name:'Product Picks'})).not.toHaveAttribute('aria-current');
  expect(screen.queryByRole('link',{name:'Bookable trips'})).not.toBeInTheDocument();
- expect([...document.querySelectorAll('.browse-links a')].map(a=>a.textContent)).toEqual(['Product Picks','My orders','My bills']);
+ expect([...document.querySelectorAll('.browse-links a')].map(a=>a.textContent)).toEqual(['Product Picks']);
 });
 it('previews the same customer filters/cards without public draft reads or writes',()=>{
  const {container}=render(<I18nProvider><MemoryRouter><RecommendationPreview detail={detail(1,'Draft preview')}/></MemoryRouter></I18nProvider>);

@@ -1,3 +1,6 @@
+import {useShoppingScroll} from '../useShoppingScroll';
+import ShoppingNavigation from '../components/ShoppingNavigation';
+
 import {catalogBatch} from '../catalogBatch';
 import ProductSort from '../components/ProductSort';
 import CompactProductCard from '../components/CompactProductCard';
@@ -5,7 +8,7 @@ import {useCallback,useEffect,useMemo,useRef,useState} from 'react';
 import {Alert,Button,Drawer,Empty,Modal,Spin,Tooltip} from 'antd';
 import {PlusOutlined,ReloadOutlined} from '@ant-design/icons';
 import {Link,useLocation,useSearchParams} from 'react-router-dom';
-import {storefrontApi,productMarkerApi,type ProductMarkerDefinition,type PublicCatalogEntry,type ProductBrowseCard,type StoreProduct} from '../api';
+import {storefrontApi,productMarkerApi,type BrowseFacet,type ProductMarkerDefinition,type PublicCatalogEntry,type ProductBrowseCard,type StoreProduct} from '../api';
 import {localizedContent,useI18n,type Locale} from '../i18n';
 import {ProductBrand} from '../components/ProductMetadata';
 import {RecommendationImageViewer} from '../components/RecommendationImageViewer';
@@ -32,7 +35,7 @@ import '../recommendations.css';
 import '../public-catalog.css';
 
 type CatalogIdentity=Pick<PublicCatalogEntry,"productId"|"merchantId"|"name"|"itemNumber">;
-type Props={query?:string;products:StoreProduct[];quantities:Record<string,number>;onAdd:(product:StoreProduct)=>void;canBuy:(product:StoreProduct)=>boolean;autoPaused?:boolean;purchasePending?:boolean;onSales?:(values:StoreProduct[])=>void;merchantId?:number};
+type Props={onNavigation?:(categories:BrowseFacet[])=>void;query?:string;products:StoreProduct[];quantities:Record<string,number>;onAdd:(product:StoreProduct)=>void;canBuy:(product:StoreProduct)=>boolean;autoPaused?:boolean;purchasePending?:boolean;onSales?:(values:StoreProduct[])=>void;merchantId?:number};
 export function catalogText(values:Record<string,string>,locale:Locale) {
   const value=localizedContent(values,locale);
   const language=values[locale]?locale:Object.keys(values).find(key=>values[key]===value);
@@ -73,7 +76,7 @@ export default function PublicProductCatalog(props:Props) {
       {editable&&<><div className="marker-product-context"><strong lang={catalogText(editable.name,locale).language}>{localizedContent(editable.name,locale)||t('rec.not_stated')}</strong><span>{t('rec.code')}: {editable.itemNumber||t('rec.not_stated')}</span></div><ProductMarkerEditor key={String(user?.id)+':'+editable.productId} productId={editable.productId} onDirtyChange={setDirty} onBusyChange={value=>{busy.current=value;}} onSaved={refreshCatalog}/></>}
     </Drawer></>;
 }
-export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refresh=0,onEdit,canEdit,autoPaused=false,onDetailChange,authKey='',acceptDataset,onRefresh,purchasePending=false,onSales,merchantId,enabled=true,onMarkedScope}:Props & {enabled?:boolean;onMarkedScope?:(count:number)=>void;kind?:'all'|'marked';refresh?:number;authKey?:string;acceptDataset?:(token:string)=>boolean;onRefresh?:()=>void;onEdit?:(entry:CatalogIdentity)=>void;canEdit?:(entry:CatalogIdentity)=>boolean;onDetailChange?:(kind:'all'|'marked',open:boolean)=>void}) {
+export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refresh=0,onEdit,canEdit,autoPaused=false,onDetailChange,authKey='',acceptDataset,onRefresh,purchasePending=false,onSales,merchantId,enabled=true,onMarkedScope,onNavigation}:Props & {enabled?:boolean;onMarkedScope?:(count:number)=>void;kind?:'all'|'marked';refresh?:number;authKey?:string;acceptDataset?:(token:string)=>boolean;onRefresh?:()=>void;onEdit?:(entry:CatalogIdentity)=>void;canEdit?:(entry:CatalogIdentity)=>boolean;onDetailChange?:(kind:'all'|'marked',open:boolean)=>void}) {
   const {t,locale}=useI18n(),location=useLocation();
   const [params,setParams]=useSearchParams();
   const node=merchantId??selectedNode(location.search),scope=kind+':'+String(node??'all');
@@ -87,7 +90,17 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   const browse=useBrowsePages<ProductBrowseCard>(identity,(page,revision)=>catalogBatch((serverPage,serverRevision)=>storefrontApi.productBrowse({page:serverPage,revision:serverRevision,merchantId:node,query,category,locale,marked:false,markedFirst,sort}),page,revision,batchSize),entry=>entry.productId,enabled&&activation.active&&node!==-1,acceptDataset,batchSize,autoPaused||!!params.get('product'));
   useEffect(()=>{if(kind==="all"&&typeof browse.page?.markedScopeTotal==="number")onMarkedScope?.(browse.page.markedScopeTotal);},[kind,browse.page?.markedScopeTotal,onMarkedScope]);
   const filtered=browse.items;
-  const markers=Object.fromEntries(browse.items.map(entry=>[entry.productId,entry.markers]));
+  const navigation=useRef<{scope:string;categories:NonNullable<typeof browse.page>['categories']}>({scope:'',categories:[]});
+  if(navigation.current.scope!==scope)navigation.current={scope,categories:[]};
+  if(browse.page)navigation.current.categories=browse.page.categories;
+  const navigationCategories=navigation.current.categories;
+  useEffect(()=>{onNavigation?.(navigationCategories);},[navigationCategories,onNavigation]);
+  const shelves=browse.page?.shelves??[];
+  const shelfMode=!query&&sort==='default'&&(!!shelves.length||!browse.page&&(!category||navigation.current.categories.some(c=>c.id===category&&!c.parentId)));
+  useShoppingScroll(!!browse.page,browse.busy,!shelfMode&&!!browse.page?.hasNext,browse.next);
+  const visibleCards=shelfMode?shelves.flatMap(s=>s.items):filtered;
+  useEffect(()=>{const canonical=browse.page?.selectedCategory;if(canonical!==undefined&&canonical!==category){const next=new URLSearchParams(params);if(canonical)next.set('category',canonical);else next.delete('category');setParams(next,{replace:true});}},[browse.page?.selectedCategory,category]);
+  const markers=Object.fromEntries(visibleCards.map(entry=>[entry.productId,entry.markers]));
   const state={markers};
   const ready=!!browse.page,detailId=kind==='all'?params.get('product')??undefined:undefined;
   const detailKey=JSON.stringify([identity,detailId,detailAttempt]);
@@ -96,9 +109,9 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   useReadRecovery(()=>setDetailAttempt(value=>value+1),detail.key===detailKey&&!!detail.recoverable,JSON.stringify([identity,detailId]));
   const opened=detail.key===detailKey?detail.item:undefined;
   useEffect(()=>{onDetailChange?.(kind,!!detailId);return()=>onDetailChange?.(kind,false);},[kind,!!detailId,onDetailChange]);
-  const revealPaused=autoPaused||!!detailId;
+  const revealPaused=autoPaused||!!detailId||shelfMode;
   const sentinel=useNextBrowsePage(identity,!!browse.page?.hasNext&&!browse.busy&&!browse.error,revealPaused,browse.next);
-  const ids=[...new Set([...browse.items.map(entry=>entry.productId),...(opened?[opened.productId]:[])])];
+  const ids=[...new Set([...visibleCards.map(entry=>entry.productId),...(opened?[opened.productId]:[])])];
   const sales=useBoundedSales(ids,identity,onSales);
   const sale=opened?sales.quotes[opened.productId]:undefined;
   const pricePending=(id:string)=>!sales.done.has(id)||purchasePending;
@@ -122,19 +135,24 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   const mainReference=opened?selectReferenceOffers(opened).main:undefined;
   const descriptionValue=content?.description||(mainReference?recommendationText(mainReference.facts,locale).description:'')||'';
   const description=content&&originalDescription?{...originalDescription,value:descriptionValue,language:descriptionValue===originalDescription.value?originalDescription.language:undefined,fallback:descriptionValue===originalDescription.value&&originalDescription.fallback}:undefined;
-  const hideMarked=kind==='marked'&&ready&&!browse.error&&browse.page?.markedScopeTotal===0;
-  return <>{!hideMarked&&<section ref={activation.element} className="recommendations rec-public public-product-catalog" aria-label={t(kind==='marked'?'marker.featured':'store.catalog')} aria-busy={browse.busy}>
-    <header className="catalog-master-heading">{kind==='marked'?<h2>{t('marker.featured')}</h2>:<h1>{t('store.catalog')}</h1>}{ready&&<span role="status">{t('catalog.result_count',{shown:filtered.length,total:browse.page!.matchedTotal})}</span>}<div className="catalog-sort-controls"><ProductSort value={sort} onChange={changeSort}/><button type="button" className="marked-first-toggle" aria-pressed={markedFirst} onClick={()=>changeMarkedFirst(!markedFirst)}>{t('marker.priority')}</button></div></header>
-    <BrowseError error={node===-1?'browse.invalid':browse.error} changed={browse.changed} retry={browse.retry} refresh={reload}/>
-    {sales.error&&<BrowseError error={sales.error} retry={sales.retry} refresh={sales.retry}/>}
-    {!ready?(browse.error||node===-1?null:<div className="catalog-progress" role="status"><Spin/><span>{t('browse.loading')}</span></div>):<>
-      <BrowseFilters page={browse.page} category={category} onChoose={choose}/>
-      {filtered.length?<div className="catalog-master-grid">{filtered.map((entry,index)=>{
+  function renderCard(entry:ProductBrowseCard,index:number){
         const name=catalogText(entry.name,locale);
         const product=sales.quotes[entry.productId],pending=pricePending(entry.productId),buyable=!pending&&!!product&&canBuy(product);
         return <CompactProductCard key={entry.productId} productId={entry.productId} name={name.value} originalName={entry.name['ja-JP']} language={name.language} brand={entry.brand} itemNumber={entry.itemNumber} image={entry.image?.url} rating={entry.rating} quote={product} reference={entry.reference} pending={pending} eager={index<2} onOpen={()=>openDetail(entry.productId)} overlay={<><ProductMarkerBadges markers={state.markers[entry.productId]??[]} promotionPrices={selectedOfferSource(product,pending,entry.reference?.priceChange)} overlay/><ReservationAdd allowed={buyable} quote={product} name={name.value} count={quantities[entry.productId]} onAdd={()=>{if(product&&buyable)onAdd(product);}}/></>} actions={management(entry)}/>;
-      })}</div>:kind==='marked'?<div className="catalog-marked-empty" role="status"><p>{t(query||category?'store.no_matches':'marker.empty')}</p>{(query||category)&&<Button onClick={()=>{const next=new URLSearchParams(params);next.delete(categoryKey);next.delete('query');setParams(next);}}>{t('class.all')}</Button>}</div>:<Empty description={t(query||category?'store.no_matches':'catalog.empty')}>{category&&<Button onClick={()=>choose('')}>{t('class.all')}</Button>}</Empty>}
-      {browse.page?.hasNext&&<div className="feed-loader" ref={sentinel}><Button loading={browse.busy} disabled={revealPaused||browse.changed||!!browse.error} onClick={browse.next}>{t('store.load_more')} ({filtered.length}/{browse.page.matchedTotal})</Button></div>}
+
+  }
+  const hideMarked=kind==='marked'&&ready&&!browse.error&&browse.page?.markedScopeTotal===0;
+  return <>{!hideMarked&&<section ref={activation.element} className={`recommendations rec-public public-product-catalog ${shelfMode?"shopping-overview":"shopping-results"}`} aria-label={t(kind==='marked'?'marker.featured':'store.catalog')} aria-busy={browse.busy}>
+    <header className="catalog-master-heading">{kind==='marked'?<h2>{t('marker.featured')}</h2>:<h1>{t('store.catalog')}</h1>}{ready&&<span role="status">{t('catalog.result_count',{shown:new Set(visibleCards.map(c=>c.productId)).size,total:browse.page!.matchedTotal})}</span>}<div className="catalog-sort-controls"><ProductSort value={sort} onChange={changeSort}/><button type="button" className="marked-first-toggle" aria-pressed={markedFirst} onClick={()=>changeMarkedFirst(!markedFirst)}>{t('marker.priority')}</button></div></header>
+    <BrowseError error={node===-1?'browse.invalid':browse.error} changed={browse.changed} retry={browse.retry} refresh={reload}/>
+    {sales.error&&<BrowseError error={sales.error} retry={sales.retry} refresh={sales.retry}/>}
+    <ShoppingNavigation categories={navigation.current.categories} category={category} onChoose={choose}/>
+    {!ready?(browse.error||node===-1?null:<div className="catalog-progress" role="status"><Spin/><span>{t('browse.loading')}</span></div>):<>
+      {shelfMode?<div className="shopping-shelves">{shelves.map(shelf=><section className="shopping-shelf" key={shelf.category}>
+       <header><h2>{shelf.category==='__unclassified'?t('class.unclassified'):localizedContent(browse.page!.categories.find(c=>c.id===shelf.category)?.name??{},locale)}</h2><button type="button" onClick={()=>choose(shelf.category)}>{t('shopping.view_all')} <span aria-hidden>→</span></button></header>
+       <div className="catalog-master-grid shopping-shelf-track">{shelf.items.map(renderCard)}</div>
+      </section>)}</div>:filtered.length?<div className="catalog-master-grid">{filtered.map(renderCard)}</div>:kind==='marked'?<div className="catalog-marked-empty" role="status"><p>{t(query||category?'store.no_matches':'marker.empty')}</p>{(query||category)&&<Button onClick={()=>{const next=new URLSearchParams(params);next.delete(categoryKey);next.delete('query');setParams(next);}}>{t('class.all')}</Button>}</div>:<Empty description={t(query||category?'store.no_matches':'catalog.empty')}>{category&&<Button onClick={()=>choose('')}>{t('class.all')}</Button>}</Empty>}
+      {!shelfMode&&browse.page?.hasNext&&<div className="feed-loader" ref={sentinel}><Button loading={browse.busy} disabled={revealPaused||browse.changed||!!browse.error} onClick={browse.next}>{t('store.load_more')} ({filtered.length}/{browse.page.matchedTotal})</Button></div>}
     </>}
     </section>}
     <Drawer className="rec-product-detail catalog-master-detail consumer-detail-drawer" title={opened?<ProductDetailCode value={opened.itemNumber}/>:t('store.details')} width="min(1120px,100vw)" open={!!detailId} onClose={closeDetail}>

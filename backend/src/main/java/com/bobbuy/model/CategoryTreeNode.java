@@ -32,6 +32,11 @@ public class CategoryTreeNode {
     @Column(name = "system_key", length = 64)
     private String systemKey;
 
+    @Column(name = "image_url", length = 512)
+    private String imageUrl;
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String value) { imageUrl = value; }
+
     public CategoryTreeNode() {}
 
     public CategoryTreeNode(String id, String parentId, Map<String, String> name,

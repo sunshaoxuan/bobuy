@@ -101,6 +101,16 @@ class ProductCatalogIntegrationTest {
   var published=items.findById(nextItem).orElseThrow();assertThat(published.publicationSnapshot.legacy()).isFalse();assertThat(published.publicationSnapshot.productVersion()).isEqualTo(products.findById(id).orElseThrow().getRecordVersion());assertThat(published.publicationSnapshot.reviewHash()).matches("[0-9a-f]{64}");
   assertThat(feed(0).get("name").asText()).isEqualTo("日本の商品");assertThat(feed(1).get("name").asText()).isEqualTo("日本の商品");
  }
+ @Test void staleSecondRowRejectsEntireBatchAndExportedCurrentValuesCanBePreviewedAgain()throws Exception{
+  var first=proposal();var second=new Product();String secondId="zz-synthetic-"+UUID.randomUUID();second.setId(secondId);second.setMerchantId(1000L);second.setName(Map.of("ja-JP","Second"));second.setBasePrice(0);second.setVisibilityStatus(ProductVisibility.DRAFTER_ONLY);products.saveAndFlush(second);
+  try{
+   var current=data(mvc.perform(get("/api/merchant/product-catalog/"+secondId).header("Authorization","Bearer "+admin))).get("value");
+   var stale=(ObjectNode)current.deepCopy();stale.put("version",current.get("version").asLong()+1);
+   request("PUT",Map.of("rows",List.of(first,stale),"reviewed",true),admin).andExpect(status().isBadRequest());
+   assertThat(products.findById(id).orElseThrow().getCatalogData()).isNull();assertThat(products.findById(secondId).orElseThrow().getCatalogData()).isNull();
+   request("POST",Map.of("rows",List.of(current)),admin).andExpect(status().isOk());
+  }finally{products.deleteById(secondId);}
+ }
  @Test void rejectsCrossTenantDuplicateAndCompositeNamesWithoutPartialSave()throws Exception{
   var row=proposal();request("PUT",Map.of("rows",List.of(row),"reviewed",true),other).andExpect(status().isNotFound());
   request("PUT",Map.of("rows",List.of(row,row),"reviewed",true),admin).andExpect(status().isBadRequest());

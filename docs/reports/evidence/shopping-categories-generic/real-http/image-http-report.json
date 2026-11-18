@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "events": [
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-tree/e2e-root/image",
+      "status": 400
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-tree/e2e-root/image",
+      "status": 403
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-tree/e2e-child/image",
+      "status": 400
+    }
+  ]
+}

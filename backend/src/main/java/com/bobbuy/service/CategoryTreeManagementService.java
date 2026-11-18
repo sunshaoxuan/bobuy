@@ -16,7 +16,7 @@ import java.util.*;
 @Service
 public class CategoryTreeManagementService {
     public record Node(String id, String parentId, Map<String, String> name, List<String> fullPath,
-                       int sortOrder, long productCount, boolean deleteBlocked) {}
+                       int sortOrder, long productCount, boolean deleteBlocked, String imageUrl) {}
     /** Full parent is required; null explicitly means the root. */
     public record Edit(String parentId, Map<String, String> name, Integer sortOrder) {}
     public record ProductPath(String productId, String categoryNodeId) {}
@@ -29,6 +29,9 @@ public class CategoryTreeManagementService {
     private final CategoryLegacyMappingRepository mappings;
     private final ProductCategoryPathResolver resolver;
     private final JdbcTemplate jdbc;
+    private ShoppingCategoryService shopping;
+    @org.springframework.beans.factory.annotation.Autowired
+    public void setShopping(ShoppingCategoryService shopping) { this.shopping = shopping; }
 
     public CategoryTreeManagementService(CategoryTreeNodeRepository nodes, ProductPrimaryCategoryPathRepository paths,
             ProductRepository products, CategoryLegacyMappingRepository mappings, ProductCategoryPathResolver resolver,
@@ -70,8 +73,7 @@ public class CategoryTreeManagementService {
     }
 
     private void sort(List<CategoryTreeNode> siblings, Map<String, Long> counts) {
-        siblings.sort(siblings.stream().anyMatch(CategoryTreeNode::isExplicitOrder) ? ORDER
-                : Comparator.<CategoryTreeNode>comparingLong(n -> counts.getOrDefault(n.getId(), 0L)).reversed().thenComparing(ORDER));
+        siblings.sort(ORDER);
     }
 
     private void uniqueName(String parent, String name, String except) {
@@ -79,7 +81,7 @@ public class CategoryTreeManagementService {
     }
 
     private boolean blocked(CategoryTreeNode node) {
-        return node.getSystemKey() != null || nodes.existsByParentId(node.getId())
+        return node.getSystemKey() != null || shopping != null && shopping.referencesSource(node.getId()) || nodes.existsByParentId(node.getId())
                 || paths.countByCategoryNodeId(node.getId()) > 0 || mappings.existsByCategoryNodeId(node.getId());
     }
 
@@ -100,7 +102,7 @@ public class CategoryTreeManagementService {
             for (int i = 0; i < group.size(); i++) {
                 var n = group.get(i);
                 result.add(new Node(n.getId(), n.getParentId(), Map.copyOf(n.getName()), List.copyOf(n.getFullPath()),
-                        i, counts.getOrDefault(n.getId(), 0L), blocked(n)));
+                        i, counts.getOrDefault(n.getId(), 0L), blocked(n), n.getImageUrl()));
             }
         }
         return result;
@@ -171,6 +173,10 @@ public class CategoryTreeManagementService {
             node.setParentId(edit.parentId()); node.setFullPath(prefix);
         }
         node.setName(name); nodes.save(node);
+        if (moved && shopping != null) {
+            try { shopping.validateSources(nodes.findAll()); }
+            catch (IllegalArgumentException invalidMapping) { throw new ApiException(ErrorCode.INVALID_REQUEST, "error.category.shopping_mapping"); }
+        }
         if (edit.sortOrder() != null) place(node, edit.parentId(), edit.sortOrder());
         return view(node);
     }

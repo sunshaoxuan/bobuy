@@ -1,0 +1,350 @@
+[
+  {
+    "width": 1280,
+    "height": 800,
+    "errors": [],
+    "requests": [
+      [
+        "GET",
+        "/api/auth/me"
+      ],
+      [
+        "GET",
+        "/api/auth/me"
+      ],
+      [
+        "GET",
+        "/api/ai/costco-onboarding"
+      ],
+      [
+        "GET",
+        "/api/ai/costco-onboarding/status"
+      ],
+      [
+        "GET",
+        "/api/mobile/categories"
+      ],
+      [
+        "GET",
+        "/api/mobile/suppliers"
+      ],
+      [
+        "GET",
+        "/api/mobile/products"
+      ],
+      [
+        "GET",
+        "/api/ai/costco-onboarding"
+      ],
+      [
+        "GET",
+        "/api/ai/costco-onboarding/status"
+      ],
+      [
+        "GET",
+        "/api/mobile/categories"
+      ],
+      [
+        "GET",
+        "/api/mobile/suppliers"
+      ],
+      [
+        "GET",
+        "/api/mobile/products"
+      ],
+      [
+        "GET",
+        "/api/merchant/product-catalog/synthetic-product"
+      ],
+      [
+        "POST",
+        "/api/merchant/product-catalog/preview"
+      ],
+      [
+        "PUT",
+        "/api/merchant/product-catalog"
+      ],
+      [
+        "POST",
+        "/api/merchant/product-catalog/preview"
+      ],
+      [
+        "PUT",
+        "/api/merchant/product-catalog"
+      ],
+      [
+        "GET",
+        "/api/merchant/product-catalog/synthetic-product"
+      ],
+      [
+        "POST",
+        "/api/merchant/product-catalog/preview"
+      ]
+    ],
+    "syntheticSaveAttempts": 2,
+    "syntheticSuccessfulSaves": 1,
+    "exportReimport": true,
+    "cancelNoWrite": true
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "errors": [],
+    "requests": [
+      [
+        "GET",
+        "/api/auth/me"
+      ],
+      [
+        "GET",
+        "/api/auth/me"
+      ],
+      [
+        "GET",
+        "/api/ai/costco-onboarding"
+      ],
+      [
+        "GET",
+        "/api/ai/costco-onboarding/status"
+      ],
+      [
+        "GET",
+        "/api/mobile/categories"
+      ],
+      [
+        "GET",
+        "/api/mobile/suppliers"
+      ],
+      [
+        "GET",
+        "/api/mobile/products"
+      ],
+      [
+        "GET",
+        "/api/ai/costco-onboarding"
+      ],
+      [
+        "GET",
+        "/api/ai/costco-onboarding/status"
+      ],
+      [
+        "GET",
+        "/api/mobile/categories"
+      ],
+      [
+        "GET",
+        "/api/mobile/suppliers"
+      ],
+      [
+        "GET",
+        "/api/mobile/products"
+      ],
+      [
+        "GET",
+        "/api/merchant/product-catalog/synthetic-product"
+      ],
+      [
+        "POST",
+        "/api/merchant/product-catalog/preview"
+      ],
+      [
+        "PUT",
+        "/api/merchant/product-catalog"
+      ],
+      [
+        "POST",
+        "/api/merchant/product-catalog/preview"
+      ],
+      [
+        "PUT",
+        "/api/merchant/product-catalog"
+      ],
+      [
+        "GET",
+        "/api/merchant/product-catalog/synthetic-product"
+      ],
+      [
+        "POST",
+        "/api/merchant/product-catalog/preview"
+      ]
+    ],
+    "syntheticSaveAttempts": 2,
+    "syntheticSuccessfulSaves": 1,
+    "exportReimport": true,
+    "cancelNoWrite": true
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "errors": [],
+    "requests": [
+      [
+        "GET",
+        "/api/auth/me"
+      ],
+      [
+        "GET",
+        "/api/auth/me"
+      ],
+      [
+        "GET",
+        "/api/ai/costco-onboarding"
+      ],
+      [
+        "GET",
+        "/api/ai/costco-onboarding/status"
+      ],
+      [
+        "GET",
+        "/api/mobile/categories"
+      ],
+      [
+        "GET",
+        "/api/mobile/suppliers"
+      ],
+      [
+        "GET",
+        "/api/mobile/products"
+      ],
+      [
+        "GET",
+        "/api/ai/costco-onboarding"
+      ],
+      [
+        "GET",
+        "/api/ai/costco-onboarding/status"
+      ],
+      [
+        "GET",
+        "/api/mobile/categories"
+      ],
+      [
+        "GET",
+        "/api/mobile/suppliers"
+      ],
+      [
+        "GET",
+        "/api/mobile/products"
+      ],
+      [
+        "GET",
+        "/api/merchant/product-catalog/synthetic-product"
+      ],
+      [
+        "POST",
+        "/api/merchant/product-catalog/preview"
+      ],
+      [
+        "PUT",
+        "/api/merchant/product-catalog"
+      ],
+      [
+        "POST",
+        "/api/merchant/product-catalog/preview"
+      ],
+      [
+        "PUT",
+        "/api/merchant/product-catalog"
+      ],
+      [
+        "GET",
+        "/api/merchant/product-catalog/synthetic-product"
+      ],
+      [
+        "POST",
+        "/api/merchant/product-catalog/preview"
+      ]
+    ],
+    "syntheticSaveAttempts": 2,
+    "syntheticSuccessfulSaves": 1,
+    "exportReimport": true,
+    "cancelNoWrite": true
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "errors": [],
+    "requests": [
+      [
+        "GET",
+        "/api/auth/me"
+      ],
+      [
+        "GET",
+        "/api/auth/me"
+      ],
+      [
+        "GET",
+        "/api/ai/costco-onboarding"
+      ],
+      [
+        "GET",
+        "/api/ai/costco-onboarding/status"
+      ],
+      [
+        "GET",
+        "/api/mobile/categories"
+      ],
+      [
+        "GET",
+        "/api/mobile/suppliers"
+      ],
+      [
+        "GET",
+        "/api/mobile/products"
+      ],
+      [
+        "GET",
+        "/api/ai/costco-onboarding"
+      ],
+      [
+        "GET",
+        "/api/ai/costco-onboarding/status"
+      ],
+      [
+        "GET",
+        "/api/mobile/categories"
+      ],
+      [
+        "GET",
+        "/api/mobile/suppliers"
+      ],
+      [
+        "GET",
+        "/api/mobile/products"
+      ],
+      [
+        "GET",
+        "/api/merchant/product-catalog/synthetic-product"
+      ],
+      [
+        "POST",
+        "/api/merchant/product-catalog/preview"
+      ],
+      [
+        "PUT",
+        "/api/merchant/product-catalog"
+      ],
+      [
+        "POST",
+        "/api/merchant/product-catalog/preview"
+      ],
+      [
+        "PUT",
+        "/api/merchant/product-catalog"
+      ],
+      [
+        "GET",
+        "/api/merchant/product-catalog/synthetic-product"
+      ],
+      [
+        "POST",
+        "/api/merchant/product-catalog/preview"
+      ]
+    ],
+    "syntheticSaveAttempts": 2,
+    "syntheticSuccessfulSaves": 1,
+    "exportReimport": true,
+    "cancelNoWrite": true
+  }
+]

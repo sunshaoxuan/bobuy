@@ -1,0 +1,92 @@
+[
+  {
+    "text": "← 全部",
+    "color": "rgb(36, 36, 36)",
+    "background": "rgb(243, 243, 243)",
+    "radius": 8,
+    "width": 80.40625,
+    "height": 44.75,
+    "file": "glyphs/1280-zh-CN-0.png"
+  },
+  {
+    "text": "☰ 全部分类",
+    "color": "rgb(36, 36, 36)",
+    "background": "rgb(243, 243, 243)",
+    "radius": 8,
+    "width": 108.84375,
+    "height": 44.75,
+    "file": "glyphs/1280-zh-CN-1.png"
+  },
+  {
+    "text": "全部",
+    "color": "rgb(255, 255, 255)",
+    "background": "rgb(36, 36, 36)",
+    "radius": 8,
+    "width": 62.015625,
+    "height": 44.75,
+    "file": "glyphs/1280-zh-CN-2.png"
+  },
+  {
+    "text": "蔬菜水果",
+    "color": "rgb(36, 36, 36)",
+    "background": "rgb(243, 243, 243)",
+    "radius": 8,
+    "width": 92.015625,
+    "height": 44.75,
+    "file": "glyphs/1280-zh-CN-3.png"
+  },
+  {
+    "text": "肉禽海鲜",
+    "color": "rgb(36, 36, 36)",
+    "background": "rgb(243, 243, 243)",
+    "radius": 8,
+    "width": 92.015625,
+    "height": 44.75,
+    "file": "glyphs/1280-zh-CN-4.png"
+  },
+  {
+    "text": "← All",
+    "color": "rgb(36, 36, 36)",
+    "background": "rgb(243, 243, 243)",
+    "radius": 8,
+    "width": 67.015625,
+    "height": 44.75,
+    "file": "glyphs/1280-en-US-0.png"
+  },
+  {
+    "text": "☰ All categories",
+    "color": "rgb(36, 36, 36)",
+    "background": "rgb(243, 243, 243)",
+    "radius": 8,
+    "width": 138.84375,
+    "height": 44.75,
+    "file": "glyphs/1280-en-US-1.png"
+  },
+  {
+    "text": "All",
+    "color": "rgb(255, 255, 255)",
+    "background": "rgb(36, 36, 36)",
+    "radius": 8,
+    "width": 48.671875,
+    "height": 44.75,
+    "file": "glyphs/1280-en-US-2.png"
+  },
+  {
+    "text": "Fruit & vegetables",
+    "color": "rgb(36, 36, 36)",
+    "background": "rgb(243, 243, 243)",
+    "radius": 8,
+    "width": 152.90625,
+    "height": 44.75,
+    "file": "glyphs/1280-en-US-3.png"
+  },
+  {
+    "text": "Meat & seafood",
+    "color": "rgb(36, 36, 36)",
+    "background": "rgb(243, 243, 243)",
+    "radius": 8,
+    "width": 137.078125,
+    "height": 44.75,
+    "file": "glyphs/1280-en-US-4.png"
+  }
+]

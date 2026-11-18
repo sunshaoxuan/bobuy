@@ -1,0 +1,1134 @@
+[
+  {
+    "width": 1280,
+    "height": 800,
+    "errors": [],
+    "network": [
+      {
+        "method": "POST",
+        "path": "/api/auth/login",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/e2e-p2",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/recommendation-nodes",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/recommendation-nodes",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/recommendation-nodes",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/e2e-p2",
+        "status": 200
+      }
+    ],
+    "passed": true
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "errors": [],
+    "network": [
+      {
+        "method": "POST",
+        "path": "/api/auth/login",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/category-tree",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/category-tree",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/category-tree/export.csv",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "path": "/api/category-tree/import/preview",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "path": "/api/category-tree/import/confirm",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/category-tree",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/category-path-import/export.csv",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "path": "/api/category-path-import/preview",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "path": "/api/category-path-import/2a539e9d-1fe2-4643-80ee-92246ee17dc9/confirm",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/ai/costco-onboarding/status",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/mobile/suppliers",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/ai/costco-onboarding/status",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/mobile/categories",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/ai/costco-onboarding",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/mobile/products",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/ai/costco-onboarding",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/mobile/suppliers",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/mobile/products",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/mobile/categories",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-reviews/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-reviews/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-reviews/e2e-p2",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-reviews/e2e-p2",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/merchant/product-catalog/e2e-p2",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/merchant/product-catalog/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "path": "/api/merchant/product-catalog/preview",
+        "status": 200
+      },
+      {
+        "method": "PUT",
+        "path": "/api/merchant/product-catalog",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/merchant/product-catalog/e2e-p2",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/merchant/product-catalog/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "path": "/api/merchant/product-catalog/preview",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/e2e-p2",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/recommendation-nodes",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/recommendation-nodes",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/recommendation-nodes",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/e2e-p2",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "status": 200
+      }
+    ],
+    "passed": true
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "errors": [],
+    "network": [
+      {
+        "method": "POST",
+        "path": "/api/auth/login",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/users",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/users",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/category-tree",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/category-tree",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/category-tree/export.csv",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "path": "/api/category-tree/import/preview",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "path": "/api/category-tree/import/confirm",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/category-tree",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/category-path-import/export.csv",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "path": "/api/category-path-import/preview",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "path": "/api/category-path-import/7f4a2851-f1bd-40b3-b3ae-aa2675c06fc5/confirm",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/ai/costco-onboarding/status",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/ai/costco-onboarding",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/mobile/categories",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/ai/costco-onboarding/status",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/mobile/suppliers",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/mobile/products",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/ai/costco-onboarding",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/mobile/categories",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/mobile/suppliers",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/mobile/products",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-reviews/e2e-p2",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-reviews/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-reviews/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-reviews/e2e-p2",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/merchant/product-catalog/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/merchant/product-catalog/e2e-p2",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "path": "/api/merchant/product-catalog/preview",
+        "status": 200
+      },
+      {
+        "method": "PUT",
+        "path": "/api/merchant/product-catalog",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/merchant/product-catalog/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/merchant/product-catalog/e2e-p2",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "path": "/api/merchant/product-catalog/preview",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/e2e-p2",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/recommendation-nodes",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/e2e-p2",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "status": 200
+      }
+    ],
+    "passed": true
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "errors": [],
+    "network": [
+      {
+        "method": "POST",
+        "path": "/api/auth/login",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/users",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/users",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/category-tree",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/category-tree",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/category-tree/export.csv",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "path": "/api/category-tree/import/preview",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "path": "/api/category-tree/import/confirm",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/category-tree",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/category-path-import/export.csv",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "path": "/api/category-path-import/preview",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "path": "/api/category-path-import/54048c5a-63c4-4446-aa7c-e9c4439f7100/confirm",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/ai/costco-onboarding",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/ai/costco-onboarding/status",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/mobile/suppliers",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/ai/costco-onboarding",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/mobile/categories",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/mobile/products",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/mobile/suppliers",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/ai/costco-onboarding/status",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/mobile/categories",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/mobile/products",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-reviews/e2e-p2",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-reviews/e2e-p2",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-reviews/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-reviews/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/merchant/product-catalog/e2e-p2",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/merchant/product-catalog/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "path": "/api/merchant/product-catalog/preview",
+        "status": 200
+      },
+      {
+        "method": "PUT",
+        "path": "/api/merchant/product-catalog",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/merchant/product-catalog/e2e-p2",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/merchant/product-catalog/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "path": "/api/merchant/product-catalog/preview",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/e2e-p2",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/recommendation-nodes",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/me",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/e2e-p1",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/e2e-p2",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "status": 200
+      }
+    ],
+    "passed": true
+  }
+]

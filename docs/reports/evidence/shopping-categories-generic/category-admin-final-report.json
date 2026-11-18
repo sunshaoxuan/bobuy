@@ -1,0 +1,422 @@
+[
+  {
+    "width": 1280,
+    "height": 800,
+    "errors": [],
+    "requests": [
+      [
+        "GET",
+        "/api/auth/me"
+      ],
+      [
+        "GET",
+        "/api/auth/me"
+      ],
+      [
+        "GET",
+        "/api/category-tree"
+      ],
+      [
+        "GET",
+        "/api/category-tree"
+      ],
+      [
+        "POST",
+        "/api/category-tree/import/preview"
+      ],
+      [
+        "POST",
+        "/api/category-tree/import/preview"
+      ],
+      [
+        "POST",
+        "/api/category-tree/import/confirm"
+      ],
+      [
+        "POST",
+        "/api/category-tree/import/preview"
+      ],
+      [
+        "POST",
+        "/api/category-tree/import/confirm"
+      ],
+      [
+        "GET",
+        "/api/category-tree"
+      ]
+    ],
+    "syntheticConfirmRequests": 2,
+    "styles": [
+      {
+        "width": "182.531px",
+        "height": "44px",
+        "minWidth": "44px",
+        "minHeight": "44px",
+        "borderRadius": "999px",
+        "borderColor": "rgb(217, 217, 217)",
+        "borderWidth": "1px",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "186.406px",
+        "height": "44px",
+        "minWidth": "44px",
+        "minHeight": "44px",
+        "borderRadius": "999px",
+        "borderColor": "rgb(217, 217, 217)",
+        "borderWidth": "1px",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "169.312px",
+        "height": "44px",
+        "minWidth": "44px",
+        "minHeight": "44px",
+        "borderRadius": "999px",
+        "borderColor": "rgb(217, 217, 217)",
+        "borderWidth": "1px",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "44px",
+        "height": "44px",
+        "minWidth": "44px",
+        "minHeight": "44px",
+        "borderRadius": "999px",
+        "borderColor": "rgba(0, 0, 0, 0.88)",
+        "borderWidth": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "122.594px",
+        "height": "44px",
+        "minWidth": "44px",
+        "minHeight": "44px",
+        "borderRadius": "999px",
+        "borderColor": "rgb(217, 217, 217)",
+        "borderWidth": "1px",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "boxShadow": "none"
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "errors": [],
+    "requests": [
+      [
+        "GET",
+        "/api/auth/me"
+      ],
+      [
+        "GET",
+        "/api/auth/me"
+      ],
+      [
+        "GET",
+        "/api/category-tree"
+      ],
+      [
+        "GET",
+        "/api/category-tree"
+      ],
+      [
+        "POST",
+        "/api/category-tree/import/preview"
+      ],
+      [
+        "POST",
+        "/api/category-tree/import/preview"
+      ],
+      [
+        "POST",
+        "/api/category-tree/import/confirm"
+      ],
+      [
+        "POST",
+        "/api/category-tree/import/preview"
+      ],
+      [
+        "POST",
+        "/api/category-tree/import/confirm"
+      ],
+      [
+        "GET",
+        "/api/category-tree"
+      ]
+    ],
+    "syntheticConfirmRequests": 2,
+    "styles": [
+      {
+        "width": "182.531px",
+        "height": "44px",
+        "minWidth": "44px",
+        "minHeight": "44px",
+        "borderRadius": "999px",
+        "borderColor": "rgb(217, 217, 217)",
+        "borderWidth": "1px",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "186.406px",
+        "height": "44px",
+        "minWidth": "44px",
+        "minHeight": "44px",
+        "borderRadius": "999px",
+        "borderColor": "rgb(217, 217, 217)",
+        "borderWidth": "1px",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "169.312px",
+        "height": "44px",
+        "minWidth": "44px",
+        "minHeight": "44px",
+        "borderRadius": "999px",
+        "borderColor": "rgb(217, 217, 217)",
+        "borderWidth": "1px",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "44px",
+        "height": "44px",
+        "minWidth": "44px",
+        "minHeight": "44px",
+        "borderRadius": "999px",
+        "borderColor": "rgba(0, 0, 0, 0.88)",
+        "borderWidth": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "122.594px",
+        "height": "44px",
+        "minWidth": "44px",
+        "minHeight": "44px",
+        "borderRadius": "999px",
+        "borderColor": "rgb(217, 215, 215)",
+        "borderWidth": "1px",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "boxShadow": "none"
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "errors": [],
+    "requests": [
+      [
+        "GET",
+        "/api/auth/me"
+      ],
+      [
+        "GET",
+        "/api/auth/me"
+      ],
+      [
+        "GET",
+        "/api/category-tree"
+      ],
+      [
+        "GET",
+        "/api/category-tree"
+      ],
+      [
+        "POST",
+        "/api/category-tree/import/preview"
+      ],
+      [
+        "POST",
+        "/api/category-tree/import/preview"
+      ],
+      [
+        "POST",
+        "/api/category-tree/import/confirm"
+      ],
+      [
+        "POST",
+        "/api/category-tree/import/preview"
+      ],
+      [
+        "POST",
+        "/api/category-tree/import/confirm"
+      ],
+      [
+        "GET",
+        "/api/category-tree"
+      ]
+    ],
+    "syntheticConfirmRequests": 2,
+    "styles": [
+      {
+        "width": "158px",
+        "height": "62px",
+        "minWidth": "44px",
+        "minHeight": "44px",
+        "borderRadius": "999px",
+        "borderColor": "rgb(217, 217, 217)",
+        "borderWidth": "1px",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "158px",
+        "height": "62px",
+        "minWidth": "44px",
+        "minHeight": "44px",
+        "borderRadius": "999px",
+        "borderColor": "rgb(217, 217, 217)",
+        "borderWidth": "1px",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "169.312px",
+        "height": "44px",
+        "minWidth": "44px",
+        "minHeight": "44px",
+        "borderRadius": "999px",
+        "borderColor": "rgb(217, 217, 217)",
+        "borderWidth": "1px",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "44px",
+        "height": "44px",
+        "minWidth": "44px",
+        "minHeight": "44px",
+        "borderRadius": "999px",
+        "borderColor": "rgba(0, 0, 0, 0.88)",
+        "borderWidth": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "146.688px",
+        "height": "44px",
+        "minWidth": "44px",
+        "minHeight": "44px",
+        "borderRadius": "999px",
+        "borderColor": "rgb(218, 205, 204)",
+        "borderWidth": "1px",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "boxShadow": "none"
+      }
+    ]
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "errors": [],
+    "requests": [
+      [
+        "GET",
+        "/api/auth/me"
+      ],
+      [
+        "GET",
+        "/api/auth/me"
+      ],
+      [
+        "GET",
+        "/api/category-tree"
+      ],
+      [
+        "GET",
+        "/api/category-tree"
+      ],
+      [
+        "POST",
+        "/api/category-tree/import/preview"
+      ],
+      [
+        "POST",
+        "/api/category-tree/import/preview"
+      ],
+      [
+        "POST",
+        "/api/category-tree/import/confirm"
+      ],
+      [
+        "POST",
+        "/api/category-tree/import/preview"
+      ],
+      [
+        "POST",
+        "/api/category-tree/import/confirm"
+      ],
+      [
+        "GET",
+        "/api/category-tree"
+      ]
+    ],
+    "syntheticConfirmRequests": 2,
+    "styles": [
+      {
+        "width": "143px",
+        "height": "62px",
+        "minWidth": "44px",
+        "minHeight": "44px",
+        "borderRadius": "999px",
+        "borderColor": "rgb(217, 217, 217)",
+        "borderWidth": "1px",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "143px",
+        "height": "62px",
+        "minWidth": "44px",
+        "minHeight": "44px",
+        "borderRadius": "999px",
+        "borderColor": "rgb(217, 217, 217)",
+        "borderWidth": "1px",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "169.312px",
+        "height": "44px",
+        "minWidth": "44px",
+        "minHeight": "44px",
+        "borderRadius": "999px",
+        "borderColor": "rgb(217, 217, 217)",
+        "borderWidth": "1px",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "44px",
+        "height": "44px",
+        "minWidth": "44px",
+        "minHeight": "44px",
+        "borderRadius": "999px",
+        "borderColor": "rgba(0, 0, 0, 0.88)",
+        "borderWidth": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "116.688px",
+        "height": "62px",
+        "minWidth": "44px",
+        "minHeight": "44px",
+        "borderRadius": "999px",
+        "borderColor": "rgb(217, 216, 216)",
+        "borderWidth": "1px",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "boxShadow": "none"
+      }
+    ]
+  }
+]

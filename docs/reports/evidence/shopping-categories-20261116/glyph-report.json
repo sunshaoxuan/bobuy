@@ -1,0 +1,672 @@
+{
+  "method": "Raster foreground pixels near computed text color, native browser control screenshots. Rounded outer corners, edge-connected page background on manually inspected dark controls, and known 3px decorative underline excluded. Main-agent screenshots remain authoritative; this is not a DOM text-box approximation.",
+  "results": [
+    {
+      "file": "glyphs/360-zh-CN-0.png",
+      "text": "← 全部",
+      "control": [
+        73,
+        45
+      ],
+      "inkBounds": [
+        13,
+        16,
+        59,
+        30
+      ],
+      "insets": [
+        13,
+        16,
+        14,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-zh-CN-1.png",
+      "text": "☰ 全部分类",
+      "control": [
+        101,
+        45
+      ],
+      "inkBounds": [
+        14,
+        15,
+        88,
+        30
+      ],
+      "insets": [
+        14,
+        15,
+        13,
+        15
+      ],
+      "centerDeviation": 0.0,
+      "limit": 1.5,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-zh-CN-2.png",
+      "text": "全部",
+      "control": [
+        63,
+        46
+      ],
+      "inkBounds": [
+        17,
+        16,
+        45,
+        30
+      ],
+      "insets": [
+        17,
+        16,
+        18,
+        16
+      ],
+      "centerDeviation": 0.0,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-zh-CN-3.png",
+      "text": "蔬菜水果",
+      "control": [
+        93,
+        46
+      ],
+      "inkBounds": [
+        17,
+        16,
+        75,
+        31
+      ],
+      "insets": [
+        17,
+        16,
+        18,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.5,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-zh-CN-4.png",
+      "text": "肉禽海鲜",
+      "control": [
+        93,
+        46
+      ],
+      "inkBounds": [
+        18,
+        16,
+        75,
+        31
+      ],
+      "insets": [
+        18,
+        16,
+        18,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.5,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-en-US-0.png",
+      "text": "← All",
+      "control": [
+        60,
+        45
+      ],
+      "inkBounds": [
+        16,
+        16,
+        46,
+        27
+      ],
+      "insets": [
+        16,
+        16,
+        14,
+        18
+      ],
+      "centerDeviation": 1.0,
+      "limit": 1.1,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-en-US-1.png",
+      "text": "☰ All categories",
+      "control": [
+        131,
+        45
+      ],
+      "inkBounds": [
+        14,
+        16,
+        118,
+        30
+      ],
+      "insets": [
+        14,
+        16,
+        13,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-en-US-2.png",
+      "text": "All",
+      "control": [
+        49,
+        46
+      ],
+      "inkBounds": [
+        16,
+        17,
+        28,
+        28
+      ],
+      "insets": [
+        16,
+        17,
+        21,
+        18
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.1,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/360-en-US-3.png",
+      "text": "Fruit & vegetables",
+      "control": [
+        154,
+        46
+      ],
+      "inkBounds": [
+        18,
+        17,
+        137,
+        31
+      ],
+      "insets": [
+        18,
+        17,
+        17,
+        15
+      ],
+      "centerDeviation": 1.0,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-zh-CN-0.png",
+      "text": "← 全部",
+      "control": [
+        73,
+        45
+      ],
+      "inkBounds": [
+        13,
+        16,
+        59,
+        30
+      ],
+      "insets": [
+        13,
+        16,
+        14,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-zh-CN-1.png",
+      "text": "☰ 全部分类",
+      "control": [
+        101,
+        45
+      ],
+      "inkBounds": [
+        14,
+        15,
+        88,
+        30
+      ],
+      "insets": [
+        14,
+        15,
+        13,
+        15
+      ],
+      "centerDeviation": 0.0,
+      "limit": 1.5,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-zh-CN-2.png",
+      "text": "全部",
+      "control": [
+        63,
+        46
+      ],
+      "inkBounds": [
+        17,
+        16,
+        45,
+        30
+      ],
+      "insets": [
+        17,
+        16,
+        18,
+        16
+      ],
+      "centerDeviation": 0.0,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-zh-CN-3.png",
+      "text": "蔬菜水果",
+      "control": [
+        93,
+        46
+      ],
+      "inkBounds": [
+        17,
+        16,
+        75,
+        31
+      ],
+      "insets": [
+        17,
+        16,
+        18,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.5,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-zh-CN-4.png",
+      "text": "肉禽海鲜",
+      "control": [
+        93,
+        46
+      ],
+      "inkBounds": [
+        18,
+        16,
+        75,
+        31
+      ],
+      "insets": [
+        18,
+        16,
+        18,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.5,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-en-US-0.png",
+      "text": "← All",
+      "control": [
+        60,
+        45
+      ],
+      "inkBounds": [
+        16,
+        16,
+        46,
+        27
+      ],
+      "insets": [
+        16,
+        16,
+        14,
+        18
+      ],
+      "centerDeviation": 1.0,
+      "limit": 1.1,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-en-US-1.png",
+      "text": "☰ All categories",
+      "control": [
+        131,
+        45
+      ],
+      "inkBounds": [
+        14,
+        16,
+        118,
+        30
+      ],
+      "insets": [
+        14,
+        16,
+        13,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-en-US-2.png",
+      "text": "All",
+      "control": [
+        49,
+        46
+      ],
+      "inkBounds": [
+        16,
+        17,
+        28,
+        28
+      ],
+      "insets": [
+        16,
+        17,
+        21,
+        18
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.1,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-en-US-3.png",
+      "text": "Fruit & vegetables",
+      "control": [
+        154,
+        46
+      ],
+      "inkBounds": [
+        18,
+        17,
+        137,
+        31
+      ],
+      "insets": [
+        18,
+        17,
+        17,
+        15
+      ],
+      "centerDeviation": 1.0,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/390-en-US-4.png",
+      "text": "Meat & seafood",
+      "control": [
+        138,
+        46
+      ],
+      "inkBounds": [
+        18,
+        17,
+        120,
+        28
+      ],
+      "insets": [
+        18,
+        17,
+        18,
+        18
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.1,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-zh-CN-0.png",
+      "text": "← 全部",
+      "control": [
+        81,
+        46
+      ],
+      "inkBounds": [
+        17,
+        17,
+        63,
+        31
+      ],
+      "insets": [
+        17,
+        17,
+        18,
+        15
+      ],
+      "centerDeviation": 1.0,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-zh-CN-1.png",
+      "text": "☰ 全部分类",
+      "control": [
+        109,
+        46
+      ],
+      "inkBounds": [
+        18,
+        16,
+        92,
+        31
+      ],
+      "insets": [
+        18,
+        16,
+        17,
+        15
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.5,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-zh-CN-2.png",
+      "text": "全部",
+      "control": [
+        63,
+        45
+      ],
+      "inkBounds": [
+        17,
+        15,
+        45,
+        29
+      ],
+      "insets": [
+        17,
+        15,
+        18,
+        16
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-zh-CN-3.png",
+      "text": "蔬菜水果",
+      "control": [
+        93,
+        45
+      ],
+      "inkBounds": [
+        17,
+        15,
+        75,
+        30
+      ],
+      "insets": [
+        17,
+        15,
+        18,
+        15
+      ],
+      "centerDeviation": 0.0,
+      "limit": 1.5,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-zh-CN-4.png",
+      "text": "肉禽海鲜",
+      "control": [
+        93,
+        45
+      ],
+      "inkBounds": [
+        18,
+        15,
+        75,
+        30
+      ],
+      "insets": [
+        18,
+        15,
+        18,
+        15
+      ],
+      "centerDeviation": 0.0,
+      "limit": 1.5,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-en-US-0.png",
+      "text": "← All",
+      "control": [
+        68,
+        46
+      ],
+      "inkBounds": [
+        20,
+        17,
+        50,
+        28
+      ],
+      "insets": [
+        20,
+        17,
+        18,
+        18
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.1,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-en-US-1.png",
+      "text": "☰ All categories",
+      "control": [
+        139,
+        46
+      ],
+      "inkBounds": [
+        18,
+        17,
+        122,
+        31
+      ],
+      "insets": [
+        18,
+        17,
+        17,
+        15
+      ],
+      "centerDeviation": 1.0,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-en-US-2.png",
+      "text": "All",
+      "control": [
+        49,
+        46
+      ],
+      "inkBounds": [
+        16,
+        17,
+        31,
+        28
+      ],
+      "insets": [
+        16,
+        17,
+        18,
+        18
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.1,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-en-US-3.png",
+      "text": "Fruit & vegetables",
+      "control": [
+        154,
+        46
+      ],
+      "inkBounds": [
+        18,
+        17,
+        137,
+        31
+      ],
+      "insets": [
+        18,
+        17,
+        17,
+        15
+      ],
+      "centerDeviation": 1.0,
+      "limit": 1.4000000000000001,
+      "status": "PASS"
+    },
+    {
+      "file": "glyphs/1280-en-US-4.png",
+      "text": "Meat & seafood",
+      "control": [
+        138,
+        46
+      ],
+      "inkBounds": [
+        18,
+        17,
+        120,
+        28
+      ],
+      "insets": [
+        18,
+        17,
+        18,
+        18
+      ],
+      "centerDeviation": 0.5,
+      "limit": 1.1,
+      "status": "PASS"
+    }
+  ]
+}

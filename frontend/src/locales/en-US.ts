@@ -2,6 +2,28 @@ import type { Dictionary } from './types';
 import experience from './experience.en-US.json';
 
 const messages: Dictionary = {
+  "catalogTransfer.export": "Export listed products",
+  "catalogTransfer.load": "Load JSON file",
+  "catalogTransfer.help": "Use existing product IDs and versions. Export includes the products listed on this page (up to 500), subject to your access. Loading a file only fills the preview editor; review and confirm before saving. New or unresolved identities are not created automatically.",
+  "catalogTransfer.template": "Download JSON template",
+  "catalogTransfer.select": "Select at least one previewed product to save.",
+  "catalogTransfer.invalid": "Use 1–500 rows with unique existing product IDs in a JSON file of at most 2 MB.",
+  "categoryTransfer.done": "Category structure saved.",
+  "categoryTransfer.title": "Import / export category structure",
+  "categoryTransfer.help": "CSV supports stable IDs, parent IDs, localized names, display order and on-site images. Adds or updates only. Preview and resolve errors before confirming the entire batch. Products are not changed.",
+  "categoryTransfer.export": "Export current categories",
+  "categoryTransfer.order": "Display order",
+  "categoryTransfer.create": "Create",
+  "categoryTransfer.update": "Update",
+  "categoryTransfer.confirm": "I reviewed the categories, order and image references and confirm this entire batch.",
+  "categoryImport.resolveErrors": "Resolve every invalid row and preview again before confirming. No partial import will be applied.",
+  "categoryTree.imageUpload": "Upload / replace category image",
+  "categoryTree.imageHelp": "Recommended: square 256×256 PNG/JPEG, up to 8MiB. Navigation uses 32×32.",
+  "categoryTree.imageFailed": "Category image upload failed. Check the file and retry.",
+
+  'shopping.directory': 'All categories',
+  'shopping.view_all': 'View all',
+  'shopping.parent': 'Parent category',
   'pricing.documents':'Price adjustment documents','pricing.reason_required':'Provide a specific change or cancellation reason. Review source drafts and save an explicit reason before approval.','pricing.promotion_reduction':'A promotion must reduce the regular price in the same channel, currency and unit.','pricing.use_documents':'Maintain prices and offer periods in price adjustment documents.',
   'stock.msg.update_failed':'Could not save changes. Your previous values were restored.',
   'geo.title':'Countries and regions','geo.hint':'Browse and select country, prefecture and municipality reference data.','geo.country':'Country/region','geo.prefecture':'Prefecture','geo.city':'City/ward','geo.choose_prefecture':'Select a prefecture','geo.choose_city':'Select a city/ward','geo.selection':'Selected area','geo.country_only':'Only country-level reference data is currently provided for this country/region.','geo.prefectures':'Prefectures','geo.cities':'Cities and wards','geo.code':'Code','geo.name':'Name','geo.reading':'Japanese reading','geo.source':'Countries/regions use ISO 3166-1 codes. Japan includes all 47 prefectures and all municipalities, including designated cities and their wards. Sources checked: 2026-11-12.',
@@ -1572,7 +1594,7 @@ Object.assign(messages,{"card.reference": "Reference price", "card.reference_pas
 Object.assign(messages,{"repair.not_derivable":"Not uniquely derivable","repair.source_title":"Review source-context suggestions","repair.locale_title":"Review AI locale suggestions","repair.review_hint":"Preview every change. Nothing is written until you confirm.","repair.overwrite":"Overwrite existing values","repair.blank":"Leave blank","repair.unchanged":"Keep existing value","repair.confirm":"Confirm and save","repair.deriving":"Deriving from reviewed source…","repair.generating":"Generating AI suggestions…","repair.none":"No valid suggestions to save","repair.ai":"AI suggestion","repair.batch_source":"Fill source context","repair.batch_locale":"Suggest missing locales","repair.one_click":"Preview source fix","repair.ai_action":"Generate AI suggestion"});
 export default messages;
 
-Object.assign(messages,{"categoryImport.title":"Category path import","categoryImport.help":"Upload CSV or XLSX with either > or ＞ separators. Path sources are retained as supplied by operations. Preview before confirming changes.","categoryImport.choose":"Choose operations file","categoryImport.preview":"Preview import","categoryImport.row":"Row","categoryImport.sku":"SKU","categoryImport.path":"Costco breadcrumb","categoryImport.result":"Result","categoryImport.reason":"Reason","categoryImport.matched":"Matched","categoryImport.newNodes":"New nodes","categoryImport.unmatched":"Unmatched / unknown SKU","categoryImport.export":"Export unmatched list","categoryImport.confirmCheck":"I reviewed the preview and product count and explicitly confirm these category-path changes.","categoryImport.confirm":"Confirm import","categoryImport.done":"Import confirmed and audited.","categoryImport.failed":"Import failed. Nothing was silently discarded.","categoryImport.count":"Product count before: {before}; after: {after}"});
+Object.assign(messages,{"categoryImport.title":"Category path import","categoryImport.help":"Upload CSV or XLSX with either > or ＞ separators. Path sources are retained as supplied by operations. Preview before confirming changes.","categoryImport.choose":"Choose operations file","categoryImport.preview":"Preview import","categoryImport.row":"Row","categoryImport.sku":"SKU","categoryImport.path":"Category path","categoryImport.result":"Result","categoryImport.reason":"Reason","categoryImport.matched":"Matched","categoryImport.newNodes":"New nodes","categoryImport.unmatched":"Unmatched / unknown SKU","categoryImport.export":"Export unmatched list","categoryImport.confirmCheck":"I reviewed the preview and product count and explicitly confirm these category-path changes.","categoryImport.confirm":"Confirm import","categoryImport.done":"Import confirmed and audited.","categoryImport.failed":"Import failed. Nothing was silently discarded.","categoryImport.count":"Product count before: {before}; after: {after}"});
 
 Object.assign(messages,{"repair.accept_all":"Accept all mergeable items","repair.edit":"edit","repair.reject":"Reject","repair.product":"Product","repair.product_number":"Product {number}","repair.url_manual":"No product link was found in the source. Paste a verifiable link.","repair.ai_failed":"AI suggestion is unavailable. Enter the content manually.","repair.field.supplierKey":"Supplier","repair.field.channel":"Sales channel","repair.field.sourceMessageKey":"Source message","repair.field.sourceUrl":"Product link","repair.evidence.master":"Product information","repair.evidence.source":"Reviewed source","repair.channel.online":"Online","repair.channel.warehouse":"Warehouse","repair.locale.zh-CN":"Simplified Chinese ","repair.locale.zh-TW":"Traditional Chinese ","repair.locale.ja-JP":"Japanese ","repair.locale.en-US":"English ","repair.locale_field.name":"name","repair.locale_field.specification":"specification"});
 
@@ -1593,10 +1615,11 @@ Object.assign(messages, {
   "categoryTree.nameRequired": "Japanese name is required.",
   "categoryTree.translationHelp": "Japanese is authoritative. Optional translations must be reviewed; blank fields keep the Japanese name.",
   "categoryTree.loadFailed": "Could not load categories. Retry to refresh the tree.",
-  "categoryTree.deleteBlocked": "Deletion is blocked while this category has children, products or a legacy category mapping. Reassign them first.",
+  "categoryTree.deleteBlocked": "Categories with children, products, legacy links or shopping mappings cannot be deleted. Move the products or update the mappings first.",
   "categoryImport.template": "Download CSV template",
   "categoryImport.flag": "Note / flag",
-  "categoryImport.templateHelp": "Chinese headers are supported: SKU, costco分类路径, 路径来源; optional notes use 备注 / 标记 / Note / Flag. The template contains synthetic examples only. Replace them with operations data. All three source tiers use the supplied path."
+  "categoryImport.exportMappings": "Export current mappings",
+  "categoryImport.templateHelp": "Export current mappings to retain stable product identities and versions. Change the category identity to assign an existing category; KEEP retains the assignment. Path and order are reference columns; edit order in category management. Imports never create products. Legacy SKU/path files remain supported."
 });
 
 Object.assign(messages,{
@@ -1607,7 +1630,7 @@ Object.assign(messages,{
   "categoryImport.deferred": "Deferred",
   "categoryImport.deferredReason": "Current category and visibility retained; no changes in this import.",
   "categoryImport.deferLabel": "Defer or exclude product numbers",
-  "categoryImport.deferHelp": "The nine Group C products are deferred by default. Separate product numbers with commas, spaces or new lines. This list replaces the default; clearing it includes all products in the preview. Deferred products keep their category and visibility. Preview again after editing.",
+  "categoryImport.deferHelp": "No products are deferred by default. Separate product numbers with commas, spaces or new lines. Deferred products keep their category and visibility. Preview again after editing.",
   "categoryImport.noMatched": "No matched rows to import. Update the file or deferred list and preview again.",
   "categoryImport.checkRequired": "Check the confirmation box after reviewing the preview.",
   "categoryImport.ready": "Review complete; ready to confirm."

@@ -5,6 +5,24 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 class PublicProductBrowseServiceTest {
+ @Test void shoppingShelvesAndLeafGridShareOrderedRowsAndHideEmptyCategories(){
+  setup();var mapping=org.mockito.Mockito.mock(ShoppingCategoryService.class);
+  var categories=ShoppingCategoryMapTest.categories();var assignments=new HashMap<String,String>();for(int i=0;i<50;i++)assignments.put("p%03d".formatted(i),i%2==0?"shop-food-one":"shop-food-two");
+  org.mockito.Mockito.when(mapping.snapshot(org.mockito.ArgumentMatchers.any())).thenReturn(new ShoppingCategoryService.Snapshot(categories,assignments));service.setShopping(mapping);
+  var overview=service.browse(0,null,"","","en-US",false,null);assertThat(overview.scopeTotal()).isEqualTo(51);assertThat(overview.unclassified()).isEqualTo(1);assertThat(overview.categories()).extracting(PublicProductBrowseService.Facet::count).containsExactly(50L,25L,25L);
+  var root=service.browse(0,null,"","shop-food","en-US",false,null);assertThat(root.matchedTotal()).isEqualTo(50);assertThat(root.shelves()).hasSize(2);
+  var leaf=service.browse(0,null,"","shop-food-one","en-US",false,null);assertThat(leaf.matchedTotal()).isEqualTo(25);assertThat(leaf.shelves()).isEmpty();assertThat(root.shelves().get(0).items()).isEqualTo(leaf.items().subList(0,8));
+  assertThat(service.browse(0,null,"","rec-cat-obsolete","en-US",false,null).selectedCategory()).isEmpty();
+  assertThat(service.browse(0,null,"Description 50","","en-US",false,null).categories()).isEmpty();
+  assignments.put("p050","shop-food-one");assertThatThrownBy(()->service.browse(1,null,"","","en-US",false,overview.revision())).isInstanceOf(PublicProductBrowseService.Changed.class);
+ }
+ @Test void retainedRootAssignmentsRemainVisibleWhenRootGainsChildren(){
+  setup();var mapping=org.mockito.Mockito.mock(ShoppingCategoryService.class);
+  var assignments=new HashMap<String,String>();assignments.put("p000","shop-food");assignments.put("p001","shop-food-one");
+  org.mockito.Mockito.when(mapping.snapshot(org.mockito.ArgumentMatchers.any())).thenReturn(new ShoppingCategoryService.Snapshot(ShoppingCategoryMapTest.categories(),assignments));service.setShopping(mapping);
+  var root=service.browse(0,null,"","shop-food","en-US",false,null);
+  assertThat(root.matchedTotal()).isEqualTo(2);assertThat(root.shelves()).isEmpty();assertThat(root.items()).extracting(PublicProductBrowseService.Card::productId).containsExactlyInAnyOrder("p000","p001");
+ }
  @Test void warehousePriorityIsDeterministicAndRejectsOtherItemIdentity(){
   var base=row(0,null);var online=new RecommendationItem();online.id=1L;online.productId=base.productId();online.itemNumber=base.itemNumber();online.referenceContext=new com.bobbuy.model.ReferenceOfferContext(null,"COSTCO_ONLINE",null,null,null,null,null,false,null,false);
   var warehouse=new RecommendationItem();warehouse.id=2L;warehouse.productId=base.productId();warehouse.itemNumber=base.itemNumber();warehouse.referenceContext=new com.bobbuy.model.ReferenceOfferContext(null,"COSTCO_WAREHOUSE",null,null,null,null,null,false,null,false);

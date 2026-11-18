@@ -1,0 +1,26 @@
+[
+  {
+    "width": 1280,
+    "height": 800,
+    "errors": [],
+    "scope": "synthetic configured order, root image, direct-root entry and navigation"
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "errors": [],
+    "scope": "synthetic configured order, root image, direct-root entry and navigation"
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "errors": [],
+    "scope": "synthetic configured order, root image, direct-root entry and navigation"
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "errors": [],
+    "scope": "synthetic configured order, root image, direct-root entry and navigation"
+  }
+]
