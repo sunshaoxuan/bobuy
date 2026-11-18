@@ -43,3 +43,9 @@
 .price-document-confirm .ant-checkbox-wrapper{min-height:44px;align-items:center;}
 .price-document-confirm .ant-input{min-height:44px;}
 .price-document-confirm li{overflow-wrap:anywhere;}
+
+.product-pricing-drawer .price-publication-notice{display:grid;grid-template-columns:20px minmax(0,1fr);gap:8px;align-items:start;}
+.product-pricing-drawer .price-publication-notice .ant-alert-icon{grid-column:1;margin:4px 0 0;}
+.product-pricing-drawer .price-publication-notice .ant-alert-content{grid-column:2;min-width:0;}
+.product-pricing-drawer .price-publication-notice .ant-alert-action{grid-column:2;margin:0;justify-self:start;}
+.product-pricing-drawer .ant-drawer-close,.price-document-confirm .ant-modal-close{width:44px;height:44px;min-width:44px;min-height:44px;}

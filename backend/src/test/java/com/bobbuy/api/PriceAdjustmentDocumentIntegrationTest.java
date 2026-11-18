@@ -106,4 +106,10 @@ class PriceAdjustmentDocumentIntegrationTest {
   try{mvc.perform(get("/api/mobile/products/"+ids.get(0)).header("Authorization","Bearer "+owner).header("Accept-Language","en-US")).andExpect(status().isOk()).andExpect(jsonPath("$.data.categoryPath").value("Drinks › Juice"));mvc.perform(get("/api/mobile/products/"+ids.get(0)).header("Authorization","Bearer "+owner).header("Accept-Language","ja-JP")).andExpect(status().isOk()).andExpect(jsonPath("$.data.categoryPath").value("飲料 › ジュース"));}finally{categoryPaths.deleteById(ids.get(0));categoryNodes.deleteById(leaf);categoryNodes.deleteById(root);}
  }
 
+ @Test void metadataOnlyConfirmationRetainsIndependentBaseForLaterCancellation()throws Exception{
+  var row=approve(draft(input("PERMANENT",List.of(line(0,850))))).get("value");when(time.now()).thenReturn(now.plusSeconds(2));
+  data(mvc.perform(put("/api/merchant/product-pricing/"+ids.get(0)+"/regular").header("Authorization","Bearer "+owner).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsBytes(Map.of("amount",850,"currency","JPY","unit","1 pack","revision",0,"replaceExisting",true,"enabled",false,"confirmed",true,"reason","Synthetic sale disabled without changing amount")))));
+  assertThat(documents.count()).isEqualTo(1);assertThat(products.findById(ids.get(0)).orElseThrow().getSale().amount()).isEqualByComparingTo("1000");var preview=data(request("GET","/"+row.get("id").asLong()+"/cancellation-preview",Map.of(),owner));assertThat(preview.at("/impacts/0/regularAfter").decimalValue()).isEqualByComparingTo("1000");
+ }
+
 }

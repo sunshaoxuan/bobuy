@@ -34,8 +34,9 @@ public class MobileProductController {
     @GetMapping
     public ResponseEntity<ApiResponse<java.util.List<MobileProductResponse>>> list(Locale locale) {
         try {
-            java.util.List<MobileProductResponse> products = store.listProducts().stream()
-                    .map(product -> toResponse(product, locale))
+            var source=store.listProducts();var paths=categoryLabels(source,locale);
+            java.util.List<MobileProductResponse> products = source.stream()
+                    .map(product -> toResponse(product, locale, paths.get(product.getId())))
                     .toList();
             return ResponseEntity.ok(ApiResponse.success(products));
         } catch (Exception e) {
@@ -68,16 +69,24 @@ public class MobileProductController {
         throw new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.product.not_found");
     }
 
-    private MobileProductResponse toResponse(Product product, Locale locale) {
+    private java.util.Map<String,String> categoryLabels(java.util.List<Product> products,Locale locale) {
+        var resolved=categoryPaths.resolveAll(products);
+        var leaves=new java.util.HashMap<String,com.bobbuy.model.CategoryTreeNode>();
+        categoryNodes.findAllById(resolved.values().stream().map(com.bobbuy.service.ProductCategoryPathResolver.ResolvedCategory::categoryId).distinct().toList()).forEach(n->leaves.put(n.getId(),n));
+        var nodes=new java.util.HashMap<>(leaves);
+        var ancestors=leaves.values().stream().flatMap(n->n.getFullPath().stream()).filter(id->!nodes.containsKey(id)).distinct().toList();
+        if(!ancestors.isEmpty())categoryNodes.findAllById(ancestors).forEach(n->nodes.put(n.getId(),n));
+        var result=new java.util.HashMap<String,String>();
+        resolved.forEach((productId,path)->{var leaf=leaves.get(path.categoryId());if(leaf!=null){var names=new java.util.ArrayList<String>();for(var id:leaf.getFullPath()){var node=nodes.get(id);if(node!=null){var name=node.getName().get(locale.toLanguageTag());if(name==null||name.isBlank())name=node.getName().get("ja-JP");if(name!=null&&!name.isBlank())names.add(name);}}result.put(productId,String.join(" › ",names));}});
+        return result;
+    }
+    private MobileProductResponse toResponse(Product product,Locale locale) {
+        return product==null?null:toResponse(product,locale,categoryLabels(java.util.List.of(product),locale).get(product.getId()));
+    }
+    private MobileProductResponse toResponse(Product product, Locale locale,String categoryPath) {
         if (product == null) return null;
         String displayName = localizedJsonbReaderService.read(product.getName() != null ? product.getName() : java.util.Collections.emptyMap(), locale);
         String displayDescription = localizedJsonbReaderService.read(product.getDescription() != null ? product.getDescription() : java.util.Collections.emptyMap(), locale);
-        var response=new MobileProductResponse(product, displayName, displayDescription);response.setCurrentRegular(prices.currentRegular(product));
-        var resolved=categoryPaths.resolve(product);
-        categoryNodes.findById(resolved.categoryId()).ifPresent(node->{
-            var names=new java.util.ArrayList<String>();
-            for(var id:node.getFullPath())categoryNodes.findById(id).ifPresent(n->{var name=n.getName().get(locale.toLanguageTag());if(name==null||name.isBlank())name=n.getName().get("ja-JP");if(name!=null&&!name.isBlank())names.add(name);});
-            response.setCategoryPath(String.join(" › ",names));
-        });return response;
+        var response=new MobileProductResponse(product, displayName, displayDescription);response.setCurrentRegular(prices.currentRegular(product));response.setCategoryPath(categoryPath);return response;
     }
 }

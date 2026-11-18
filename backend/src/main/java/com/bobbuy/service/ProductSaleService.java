@@ -60,7 +60,7 @@ public class ProductSaleService {
   // Confirming a regular quote is the operator's explicit choice of the
   // pre-order sales workflow. Do this only after every validation has passed.
   product.setOrderMethod(OrderMethod.PRE_ORDER);
-  product.setSale(new ProductSale(input.amount(),currency.code,input.unit().trim(),input.validFrom(),input.validThrough(),revision+1,owner,Instant.now(),input.enabled()));
+  product.setSale(new ProductSale(samePrice?prior.amount():input.amount(),currency.code,input.unit().trim(),input.validFrom(),input.validThrough(),revision+1,owner,Instant.now(),input.enabled()));
   products.saveAndFlush(product);
  }
  public Optional<Quote> quote(Product product){

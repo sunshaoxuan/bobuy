@@ -1,0 +1,557 @@
+{
+  "runtime": "real Spring Boot/H2 memory + Vite; synthetic fixture only",
+  "baseCommit": "dcbfbbb",
+  "checks": {
+    "privatePriceNotDisclosed": "PASS",
+    "cancelDuplicateAndReadBack": "PASS"
+  },
+  "screens": [
+    "private-price-1280.png",
+    "private-price-390.png",
+    "cancel-preview-1280.png",
+    "cancel-preview-390.png"
+  ],
+  "geometry": [
+    {
+      "name": "private-price-1280",
+      "overflow": false,
+      "viewport": 1280,
+      "controls": [
+        {
+          "text": "Close",
+          "width": 24,
+          "height": 24,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "Publish product and selling price",
+          "width": 233.578125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "Correct price unit only",
+          "width": 168.171875,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "New document",
+          "width": 125.390625,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "borderWidth": "1px",
+          "background": "rgb(217, 54, 48)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "text": "Refresh",
+          "width": 81.03125,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "Cancel document",
+          "width": 140.953125,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "Cancel document",
+          "width": 140.953125,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "name": "private-price-390",
+      "overflow": false,
+      "viewport": 390,
+      "controls": [
+        {
+          "text": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "Publish product and selling price",
+          "width": 233.578125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "Correct price unit only",
+          "width": 168.171875,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "New document",
+          "width": 125.390625,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "borderWidth": "1px",
+          "background": "rgb(217, 54, 48)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "text": "Refresh",
+          "width": 81.03125,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "Cancel document",
+          "width": 140.953125,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "Cancel document",
+          "width": 140.953125,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "name": "cancel-preview-1280",
+      "overflow": false,
+      "viewport": 1280,
+      "controls": [
+        {
+          "text": "Close",
+          "width": 31.9688720703125,
+          "height": 31.968856811523438,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "I reviewed the products, prices, period and reason",
+          "width": 342.1823425292969,
+          "height": 43.95721435546875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "",
+          "width": 15.98443603515625,
+          "height": 15.98443603515625,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "Cancel",
+          "width": 75.5201416015625,
+          "height": 43.95721435546875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "OK",
+          "width": 52.18353271484375,
+          "height": 43.95721435546875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        }
+      ]
+    },
+    {
+      "name": "cancel-preview-390",
+      "overflow": false,
+      "viewport": 390,
+      "controls": [
+        {
+          "text": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "I reviewed the products, prices, period and reason",
+          "width": 326,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "",
+          "width": 16,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "Cancel",
+          "width": 75.59375,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "OK",
+          "width": 52.234375,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "network": [
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 500
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 500
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/product-pricing/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments/2/cancellation-preview",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/price-adjustments/2/cancel-reviewed",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/product-pricing/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 500
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 500
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 500
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 500
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 500
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 500
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 500
+    }
+  ],
+  "result": "FAIL",
+  "failure": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.price-document-confirm').first() to be visible\u001b[22m\n\u001b[2m    64 × locator resolved to hidden <div role=\"dialog\" aria-modal=\"true\" aria-labelledby=\":r5a:\" class=\"ant-modal css-dev-only-do-not-override-p28o4 price-document-confirm\">…</div>\u001b[22m\n"
+}
