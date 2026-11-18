@@ -22,6 +22,8 @@ const messages: Dictionary = {
   "categoryTree.imageFailed": "分类图上传失败，请检查文件后重试。",
 
   'shopping.directory': '全部分类',
+  'shopping.previous_categories': '向左浏览分类',
+  'shopping.next_categories': '向右浏览分类',
   'shopping.view_all': '查看全部',
   'shopping.parent': '返回上级分类',
   'pricing.documents':'调价单','pricing.reason_required':'请填写明确的调价或撤销原因；来源待复核单据需补充原因后保存。','pricing.promotion_reduction':'促销价必须低于同渠道、币种和单位的常规价。','pricing.use_documents':'请在调价单中维护价格和优惠期间。',

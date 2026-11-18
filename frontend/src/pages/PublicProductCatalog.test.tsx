@@ -56,3 +56,34 @@ it('keeps the detail pending and disabled while required purchase context is unr
   await waitFor(()=>expect(mocks.productSales).toHaveBeenCalled());
   expect(within(screen.getByRole('dialog')).getByRole('button',{name:/Checking current sale price/})).toBeDisabled();
 });
+
+it('links to all eligible roots in server order, including roots outside the product preview', async () => {
+  mocks.productBrowse.mockResolvedValue(browsePage([productCard()], {categories: [
+    {id: 'shop-z', name: {'en-US': 'Z first'}, count: 7, imageUrl: '/api/storefront/recommendation-images/staged-image'},
+    {id: 'shop-child', parentId: 'shop-z', name: {'en-US': 'Child'}, count: 7},
+    {id: 'legacy', name: {'en-US': 'Legacy'}, count: 12},
+    {id: 'shop-empty', name: {'en-US': 'Empty'}, count: 0},
+    {id: 'shop-a', name: {'en-US': 'A later'}, count: 30},
+  ]}));
+  mount('/products?node=7');
+  const shortcuts = within(await screen.findByRole('navigation', {name: 'All categories'}));
+  expect(screen.queryByRole('button', {name: 'Product Picks'})).not.toBeInTheDocument();
+  const links = shortcuts.getAllByRole('link');
+  expect(links.map(link => link.textContent)).toEqual(['Z first', 'A later']);
+  expect(links[1]).toHaveAttribute('href', '/products?node=7&category=shop-a');
+  expect(links[0].querySelector('img')).toHaveAttribute('src', '/api/storefront/recommendation-images/staged-image');
+  expect(links[1].querySelector('span.category-shortcuts-image')).toBeInTheDocument();
+  fireEvent.click(links[1]);
+  await waitFor(() => expect(mocks.productBrowse.mock.lastCall?.[0]).toMatchObject({merchantId: 7, category: 'shop-a'}));
+  expect(screen.queryByRole('navigation', {name: 'All categories'})).not.toBeInTheDocument();
+  expect(screen.getByRole('button', {name: 'Product Picks'})).toBeInTheDocument();
+});
+
+it('keeps shortcuts out of search results even when the server returns roots', async () => {
+  mocks.productBrowse.mockResolvedValue(browsePage([productCard()], {categories: [
+    {id: 'shop-z', name: {'en-US': 'Z first'}, count: 7},
+  ]}));
+  mount('/products', {query: 'Search term'});
+  await screen.findByRole('heading', {name: 'Product'});
+  expect(screen.queryByRole('navigation', {name: 'All categories'})).not.toBeInTheDocument();
+});
