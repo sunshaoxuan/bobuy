@@ -8,7 +8,7 @@ const browser=await chromium.launch({executablePath:'/usr/bin/chromium',args:['-
 const ctx=await browser.newContext(),errors=[],network=[],geometry=[],modules={};
 const r=await ctx.request.post(base+'/api/auth/login',{data:{username:'agent',password:'agent-pass'}});assert.equal(r.status(),200);const s=(await r.json()).data;
 await ctx.addInitScript(s=>{localStorage.setItem('bobbuy_locale','zh-CN');localStorage.setItem('bobbuy_access_token',s.accessToken);localStorage.setItem('bobbuy_access_token_expires_at',s.accessTokenExpiresAt);localStorage.setItem('bobbuy_auth_user',JSON.stringify(s.user));localStorage.setItem('bobbuy_disable_chat_websocket','true');},s);
-const headers={Authorization:'Bearer '+s.accessToken};
+const headers={Authorization:'Bearer '+s.accessToken,'Accept-Language':'en-US'};
 const products=(await(await ctx.request.get(base+'/api/mobile/products',{headers})).json()).data;const p=products.find(p=>p.product.id==='price-ui-1495250');assert(p.categoryPath.includes('Juice')||p.categoryPath.includes('ジュース'));
 const anon=await browser.newContext();assert.deepEqual((await(await anon.request.get(base+'/api/storefront/product-sales?productIds=price-ui-1495250')).json()).data,[]);await anon.close();
 const page=await ctx.newPage();const pending=[];page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{const path=new URL(r.url()).pathname;if(path.startsWith('/api/'))network.push({path,status:r.status()});if(/\/src\/(components\/(ProductPricingPanel|PriceAdjustmentWorkspace|priceDocumentText|productPricing)|pages\/StockMaster|api\.ts)/.test(path))pending.push(r.body().then(b=>{modules[path]=createHash('sha256').update(b).digest('hex');}));});
