@@ -25,7 +25,7 @@
     "backend/target/classes/com/bobbuy/service/ProductCatalogService.class": "e842409e1a898866b7147cee506d78ca90a1425eb652dbf44863fa14bae1c47c",
     "backend/target/classes/com/bobbuy/api/MobileProductController.class": "334502b0a40cfa08c8758bd0d129610d6d7c188a53d552466ba36e3938735593"
   },
-  "screenshots": "visual.json and form-final.json",
+  "screenshots": "visual.json, form-final.json and visual-360.json",
   "productionReads": 0,
   "productionWrites": 0,
   "merged": false,
@@ -35,5 +35,19 @@
     "AI worker configuration unchanged; existing GET status/job polling retained, no AI processing/translation mutation.",
     "Manual creation requires Japanese name; ITEM and current tree leaf are optional.",
     "HTTPS media URLs must have no credentials, query or fragment; existing identical manually supplied video can survive catalog edits, no new video admission through catalog edit."
-  ]
+  ],
+  "narrowViewportReview": {
+    "applicationCommit": "26453d633cbedbf1917f7c3baf61b2142ab73c12",
+    "viewport": "360x800",
+    "locales": [
+      "zh-CN",
+      "ja-JP"
+    ],
+    "pngCount": 12,
+    "productWrites": 0,
+    "saveButtonHeight": 44,
+    "saveButtonGap": 8,
+    "result": "PASS",
+    "scope": "Picture-only; save behavior reused. Individual tree-option hitboxes not separately measured."
+  }
 }
