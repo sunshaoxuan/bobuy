@@ -13,5 +13,9 @@ export function preloadCategoryIconUrls(urls:string[]){
   if(!url||!/^\/api\/storefront\/recommendation-images\/[a-zA-Z0-9-]+$/.test(url))continue;
   if([...document.querySelectorAll<HTMLLinkElement>('link[data-category-icon]')].some(link=>link.getAttribute('href')===url))continue;
   const link=document.createElement('link');link.rel='preload';link.as='image';link.href=url;link.setAttribute('fetchpriority','high');link.dataset.categoryIcon='';document.head.appendChild(link);
+  // Warm the tiny bitmap while the independent product request is in flight.
+  // Neither loading nor decoding is awaited by the catalog render path.
+  const image=new Image();image.fetchPriority='high';image.src=url;
+  if(typeof image.decode==='function')void image.decode().catch(()=>{});
  }
 }

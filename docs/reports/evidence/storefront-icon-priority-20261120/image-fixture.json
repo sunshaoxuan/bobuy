@@ -1,0 +1,163 @@
+[
+  {
+    "id": "icon-priority-fixture-01",
+    "sha256": "eb1166dbc5d74566c2b884bf1a05e57cdbe227a5747e76263dd65cb327ee3b09",
+    "bytes": 865,
+    "dimensions": "192x192",
+    "synthetic": true
+  },
+  {
+    "id": "icon-priority-fixture-02",
+    "sha256": "76752f239c09323cb50fb2a63e6a0d66a442a9035b70a05547a8b80d5d493b6d",
+    "bytes": 1025,
+    "dimensions": "192x192",
+    "synthetic": true
+  },
+  {
+    "id": "icon-priority-fixture-03",
+    "sha256": "935c6501abe58cab1be038257deb79b4c99f2721334fdd5b4b28f582bfc5e06f",
+    "bytes": 1027,
+    "dimensions": "192x192",
+    "synthetic": true
+  },
+  {
+    "id": "icon-priority-fixture-04",
+    "sha256": "d67be35266a30dec4a4cabb9282e94760c6c58e2a02a7c80d6de94144f569d4f",
+    "bytes": 949,
+    "dimensions": "192x192",
+    "synthetic": true
+  },
+  {
+    "id": "icon-priority-fixture-05",
+    "sha256": "029fe7b3e207e224516013a3d4a734e6cf705ab823f7473721ddab68bc851661",
+    "bytes": 1019,
+    "dimensions": "192x192",
+    "synthetic": true
+  },
+  {
+    "id": "icon-priority-fixture-06",
+    "sha256": "e6c2f0dca82367c161f16d72d1928fb02576e39e45dee252b05c92d54678bd13",
+    "bytes": 1037,
+    "dimensions": "192x192",
+    "synthetic": true
+  },
+  {
+    "id": "icon-priority-fixture-07",
+    "sha256": "9a81badd3b40943a56477a308715215449fe2a2f64b334bab078daf03171edff",
+    "bytes": 960,
+    "dimensions": "192x192",
+    "synthetic": true
+  },
+  {
+    "id": "icon-priority-fixture-08",
+    "sha256": "23553289cef10634916da2643ee710daa6f3b8f774f53ee9a47facddf8f07475",
+    "bytes": 1044,
+    "dimensions": "192x192",
+    "synthetic": true
+  },
+  {
+    "id": "icon-priority-fixture-09",
+    "sha256": "88583dccf65d79aa83cfe36cd48110ca56181e91ea48a2b3970d1fc746497b76",
+    "bytes": 1037,
+    "dimensions": "192x192",
+    "synthetic": true
+  },
+  {
+    "id": "icon-priority-fixture-10",
+    "sha256": "20e1452133d49b046a8a3041198a606648947e2d1ea803125a25be0d7298fab2",
+    "bytes": 1045,
+    "dimensions": "192x192",
+    "synthetic": true
+  },
+  {
+    "id": "icon-priority-fixture-11",
+    "sha256": "22a518f2de704da4dd7881f7b6c6e97846fb7fceec2116724768907ca00c32a5",
+    "bytes": 868,
+    "dimensions": "192x192",
+    "synthetic": true
+  },
+  {
+    "id": "icon-priority-fixture-12",
+    "sha256": "aae85c662cea8a39200dcbb9510e35f11f4cc84ff8803564fdd2e388c799c8cc",
+    "bytes": 1070,
+    "dimensions": "192x192",
+    "synthetic": true
+  },
+  {
+    "id": "icon-priority-fixture-13",
+    "sha256": "4fe19e4ea9d1d77bc1327ca78eed6ceb40de677d7869b1b6503bec4a2d0698ba",
+    "bytes": 1076,
+    "dimensions": "192x192",
+    "synthetic": true
+  },
+  {
+    "id": "icon-priority-fixture-14",
+    "sha256": "e61f4adbc198a3290470f9713d3df223e3d5c42cb184f8f31d00659abaf0ea51",
+    "bytes": 1004,
+    "dimensions": "192x192",
+    "synthetic": true
+  },
+  {
+    "id": "icon-priority-fixture-15",
+    "sha256": "f3685167823a643835a97a4f8e3c5796e629bf6524082340c6f87bbcf28651ad",
+    "bytes": 1082,
+    "dimensions": "192x192",
+    "synthetic": true
+  },
+  {
+    "id": "icon-priority-fixture-16",
+    "sha256": "88bd290c33a6a67be954f32a3a5bb019d10ddf98e6c7d827ee9db860fcc539f4",
+    "bytes": 1084,
+    "dimensions": "192x192",
+    "synthetic": true
+  },
+  {
+    "id": "icon-priority-fixture-17",
+    "sha256": "5f59f0ef6e0920ad55c7558eb785644ab16ea3c35fc8ca8a464fc6561e1dd506",
+    "bytes": 1032,
+    "dimensions": "192x192",
+    "synthetic": true
+  },
+  {
+    "id": "icon-priority-fixture-18",
+    "sha256": "1034f65912cc581066963dd0cff519602d139658b49d966d5be9107923a40319",
+    "bytes": 1088,
+    "dimensions": "192x192",
+    "synthetic": true
+  },
+  {
+    "id": "icon-priority-fixture-19",
+    "sha256": "309a2d5edbd84e44ffe1135518934e2af1feedbc3d185cf6d6fe466cabfeb8a4",
+    "bytes": 1078,
+    "dimensions": "192x192",
+    "synthetic": true
+  },
+  {
+    "id": "icon-priority-fixture-20",
+    "sha256": "152958955d763ec9f720518be084704593a42d8b6d6e90d04a6c20cbe6f8606e",
+    "bytes": 1170,
+    "dimensions": "192x192",
+    "synthetic": true
+  },
+  {
+    "id": "icon-priority-fixture-21",
+    "sha256": "bffdab8e73ce5f0e2267b91f688fc0ebcae2961381e8f4ecf79dd3ca287b87d6",
+    "bytes": 1072,
+    "dimensions": "192x192",
+    "synthetic": true
+  },
+  {
+    "id": "icon-priority-fixture-22",
+    "sha256": "17bff6911b43c3596dc6215341e0a51882fcf1a5bc412b6fd8602720a70f3561",
+    "bytes": 1049,
+    "dimensions": "192x192",
+    "synthetic": true
+  },
+  {
+    "id": "icon-priority-fixture-23",
+    "sha256": "9e73e22f258f4f3c5522c7fb52c1809b80d5ede5034a9e040fd07b9f47e0d4f4",
+    "bytes": 1211,
+    "dimensions": "192x192",
+    "synthetic": true
+  }
+]

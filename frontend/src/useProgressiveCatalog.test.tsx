@@ -1,12 +1,12 @@
 import {act,renderHook,waitFor} from '@testing-library/react';
 import {useProgressiveCatalog} from './useProgressiveCatalog';
 import {browsePage,productCard} from './test/browseFixtures';
-const api=vi.hoisted(()=>({productOverview:vi.fn(),productShelf:vi.fn()}));
+const api=vi.hoisted(()=>({productOverview:vi.fn(),productShelf:vi.fn(),categoryIcons:vi.fn()}));
 vi.mock('./api',()=>({storefrontApi:api}));
 const metadata=()=>browsePage([],{scopeTotal:4,matchedTotal:4,shelves:['a','b','c','d'].map(category=>({category,items:category==='a'?[productCard('a')]:[],total:1}))});
 const shelf=(category:string)=>({...metadata(),shelves:[{category,total:1,items:[productCard(category)]}]});
 function deferred<T>(){let resolve!:(v:T)=>void;const promise=new Promise<T>(r=>{resolve=r;});return {promise,resolve};}
-beforeEach(()=>{vi.clearAllMocks();api.productOverview.mockResolvedValue(metadata());api.productShelf.mockImplementation(q=>Promise.resolve(shelf(q.category)));});
+beforeEach(()=>{vi.clearAllMocks();api.categoryIcons.mockResolvedValue([]);api.productOverview.mockResolvedValue(metadata());api.productShelf.mockImplementation(q=>Promise.resolve(shelf(q.category)));});
 it('shows navigation before cards, bounds concurrency and never waits for a later slow shelf',async()=>{
  const first=deferred<ReturnType<typeof shelf>>(),second=deferred<ReturnType<typeof shelf>>();
  api.productShelf.mockImplementation(q=>q.category==='b'?first.promise:q.category==='c'?second.promise:Promise.resolve(shelf(q.category)));
@@ -35,4 +35,13 @@ it('drops old merchant responses and respects paused detail reads',async()=>{
  rerender({id:2,paused:true});await waitFor(()=>expect(result.current.page).toBeDefined());expect(api.productShelf).not.toHaveBeenCalled();
  await act(async()=>old.resolve({...metadata(),revision:'old'}));expect(result.current.page?.revision).not.toBe('old');
  rerender({id:2,paused:false});await waitFor(()=>expect(result.current.shelves.a.loaded).toBe(true));act(()=>result.current.activate('b'));await waitFor(()=>expect(result.current.shelves.b.loaded).toBe(true));expect(api.productShelf.mock.calls[0][0].merchantId).toBe(2);
+});
+
+it('requests product data first and displays the first shelf while optional icon hints are pending',async()=>{
+ const hints=deferred<string[]>();api.categoryIcons.mockReturnValue(hints.promise);
+ const {result}=renderHook(()=>useProgressiveCatalog('icon-pending',{},true,false));
+ await waitFor(()=>expect(result.current.shelves.a.loaded).toBe(true));
+ expect(api.productOverview.mock.invocationCallOrder[0]).toBeLessThan(api.categoryIcons.mock.invocationCallOrder[0]);
+ expect(result.current.error).toBe('');expect(result.current.shelves.a.items).toHaveLength(1);
+ await act(async()=>hints.resolve([]));expect(result.current.shelves.a.loaded).toBe(true);
 });

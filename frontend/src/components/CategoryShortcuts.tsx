@@ -59,7 +59,7 @@ export default function CategoryShortcuts({categories, toCategory, initialScroll
         const name = localizedContent(category.name, locale);
         return <li key={category.id}>
           <Link to={toCategory(category.id)} onClick={() => saveScroll(track.current!.scrollLeft)}>
-            <CategoryImage src={category.imageUrl} priority={index<visibleCategoryIconCount(window.innerWidth)} className="category-shortcuts-image"/>
+            <CategoryImage src={category.imageUrl} priority={index<Math.min(2,visibleCategoryIconCount(window.innerWidth))} className="category-shortcuts-image"/>
             <span title={name}>{name}</span>
           </Link>
         </li>;
