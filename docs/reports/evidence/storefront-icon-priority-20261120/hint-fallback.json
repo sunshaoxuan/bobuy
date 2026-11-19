@@ -1,0 +1,90 @@
+{
+  "result": "PASS",
+  "scenario": "Optional endpoint absent (old backend): overview supplies real icon and first eight cards",
+  "errors": [],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "network": [
+    {
+      "path": "/api/storefront/recommendation-nodes",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/trips",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/trips",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/category-icons",
+      "status": 404
+    },
+    {
+      "path": "/api/storefront/product-browse/overview",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/recommendation-images/product-priority-fixture-01",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-popularity/progressive-item-1-12",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-popularity/progressive-item-1-14",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-popularity/progressive-item-1-10",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-popularity/progressive-item-1-13",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-popularity/progressive-item-1-1",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-popularity/progressive-item-1-11",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-popularity/progressive-item-1-16",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-popularity/progressive-item-1-15",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-sales",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-browse/shelf",
+      "status": 200
+    }
+  ]
+}

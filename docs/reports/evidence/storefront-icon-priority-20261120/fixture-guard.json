@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "scenario": "Full fixture supplied to a different database in the same isolated container",
+  "exitCode": 3,
+  "stderr": "ERROR:  Synthetic database required\nCONTEXT:  PL/pgSQL function inline_code_block line 1 at RAISE",
+  "stdout": "BEGIN",
+  "protection": "psql ON_ERROR_STOP, BEGIN before guard, one transaction for all fixture changes"
+}

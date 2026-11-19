@@ -1,0 +1,68 @@
+{
+  "status": "FUNCTIONAL_PASS_PERFORMANCE_CONDITIONAL",
+  "sourceManifest": "artifact-manifest.json",
+  "coldSamples": 36,
+  "candidateIconPaintBeforeCardPaint": "18/18",
+  "medians": [
+    {
+      "width": 1920,
+      "variant": "baseline",
+      "medians": {
+        "framework": 531.4,
+        "categoryBar": 693.4,
+        "firstIcon": 902.4,
+        "firstCard": 868.1,
+        "firstProductImage": 986.1,
+        "firstIconPaint": 848,
+        "firstCardPaint": 1024
+      }
+    },
+    {
+      "width": 1920,
+      "variant": "candidate",
+      "medians": {
+        "framework": 589.2,
+        "categoryBar": 740.8,
+        "firstIcon": 775.1,
+        "firstCard": 870.1,
+        "firstProductImage": 987.3,
+        "firstIconPaint": 804,
+        "firstCardPaint": 1008
+      }
+    },
+    {
+      "width": 390,
+      "variant": "baseline",
+      "medians": {
+        "framework": 530.9,
+        "categoryBar": 661.9,
+        "firstIcon": 813.5,
+        "firstCard": 807.8,
+        "firstProductImage": 908.8,
+        "firstIconPaint": 748,
+        "firstCardPaint": 904
+      }
+    },
+    {
+      "width": 390,
+      "variant": "candidate",
+      "medians": {
+        "framework": 546.5,
+        "categoryBar": 697.9,
+        "firstIcon": 744.4,
+        "firstCard": 819.7,
+        "firstProductImage": 928.8,
+        "firstIconPaint": 736,
+        "firstCardPaint": 920
+      }
+    }
+  ],
+  "firstCardNoRegression": "NOT_STRICTLY_MET: final DOM median +2ms desktop/+11.9ms mobile; actual card paint -16ms desktop/+16ms mobile. Do not claim full acceptance or production improvement.",
+  "uiScenarios": "10/10 PASS; missing optional endpoint also checked separately",
+  "targetedTests": {
+    "frontend": 30,
+    "backend": 1
+  },
+  "productionWrites": false,
+  "deployed": false
+}

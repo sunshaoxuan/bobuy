@@ -188,7 +188,7 @@ const messages: Dictionary = {
     "browse.result_count": "已显示 {shown} / {total} 条内容",
     "browse.changed": "目录已更新，请刷新以加载一致版本。",
     "browse.invalid": "浏览响应或查询无效。",
-    "browse.loading": "正在加载本批内容…",
+    "browse.loading": "正在加载",
     "browse.sales_pending": "正在核实当前售价与购买资格…",
     "browse.refresh": "刷新目录",
     "browse.service_price": "服务费用",

@@ -1,0 +1,163 @@
+[
+  {
+    "id": "product-priority-fixture-01",
+    "bytes": 4226,
+    "sha256": "6d53a81ff53542f0ee7a1d80697da01a9e3d687fa39f6b466cba9c340640637d",
+    "dimensions": "640x720",
+    "synthetic": true
+  },
+  {
+    "id": "product-priority-fixture-02",
+    "bytes": 4336,
+    "sha256": "efe5caa1f856123f30436e16a881058b80941a4bc9989876d1e17999d41105d7",
+    "dimensions": "640x720",
+    "synthetic": true
+  },
+  {
+    "id": "product-priority-fixture-03",
+    "bytes": 4338,
+    "sha256": "9a5babdad64bb1b401f433e2a631cefc64361700322668475ba5502e9931afec",
+    "dimensions": "640x720",
+    "synthetic": true
+  },
+  {
+    "id": "product-priority-fixture-04",
+    "bytes": 4283,
+    "sha256": "0362632c1264031d2791775fcdb83495cdc60f3e6f889361f6053aed17909db7",
+    "dimensions": "640x720",
+    "synthetic": true
+  },
+  {
+    "id": "product-priority-fixture-05",
+    "bytes": 4334,
+    "sha256": "f2cdc3926f3a60b9c209495e340ae9669175b958fe9527aaba85f12dc9405f45",
+    "dimensions": "640x720",
+    "synthetic": true
+  },
+  {
+    "id": "product-priority-fixture-06",
+    "bytes": 4347,
+    "sha256": "e3e8d3310e51e5722d1d2dae721aa459cb65d32adcc45e1114517714a7b63725",
+    "dimensions": "640x720",
+    "synthetic": true
+  },
+  {
+    "id": "product-priority-fixture-07",
+    "bytes": 4285,
+    "sha256": "2a987dfcb3c0d3b65dd4623ffe869ae2eeb7492ebe0636dd292908999d978eb1",
+    "dimensions": "640x720",
+    "synthetic": true
+  },
+  {
+    "id": "product-priority-fixture-08",
+    "bytes": 4352,
+    "sha256": "ce0669a6804d6cff3eb3af34285dd26c0256a7e946c6baa1e9d135f749c1541a",
+    "dimensions": "640x720",
+    "synthetic": true
+  },
+  {
+    "id": "product-priority-fixture-09",
+    "bytes": 4350,
+    "sha256": "5abad13f15c5fa8f312d7b7fdd7ca32a948de4b7dd6997504a81dbd89125a581",
+    "dimensions": "640x720",
+    "synthetic": true
+  },
+  {
+    "id": "product-priority-fixture-10",
+    "bytes": 4371,
+    "sha256": "48ace0db25f7ac62c19bfc9f4ad9f5b1bdaea65f7085ca376f26ee55da9f5f68",
+    "dimensions": "640x720",
+    "synthetic": true
+  },
+  {
+    "id": "product-priority-fixture-11",
+    "bytes": 4228,
+    "sha256": "7886d362f835e21352c17b6fb4110062fb9a83278728aeb72095d2413ae5cdc6",
+    "dimensions": "640x720",
+    "synthetic": true
+  },
+  {
+    "id": "product-priority-fixture-12",
+    "bytes": 4383,
+    "sha256": "33f2e0121351dfaa1b2a7ff675093204f4e5bdf73ff22cefb79197bd61a551a1",
+    "dimensions": "640x720",
+    "synthetic": true
+  },
+  {
+    "id": "product-priority-fixture-13",
+    "bytes": 4390,
+    "sha256": "aea07a9bdb4fc6c3b6170dabd2a28d156aa2df6786473203939e09f80c471212",
+    "dimensions": "640x720",
+    "synthetic": true
+  },
+  {
+    "id": "product-priority-fixture-14",
+    "bytes": 4338,
+    "sha256": "8ad55756f4aa9910cac3373048e8817ca9c85d37a438ffd9d9781d45dced6bc4",
+    "dimensions": "640x720",
+    "synthetic": true
+  },
+  {
+    "id": "product-priority-fixture-15",
+    "bytes": 4379,
+    "sha256": "0200b46e17fc370da417d9092f5c18d87490d3698c90f0d78d462104d9cb3447",
+    "dimensions": "640x720",
+    "synthetic": true
+  },
+  {
+    "id": "product-priority-fixture-16",
+    "bytes": 4397,
+    "sha256": "8215c4bce0df0970a61fbe7bfe5a6f05c6336f9b7d6a97dc58b1151b7df95fd3",
+    "dimensions": "640x720",
+    "synthetic": true
+  },
+  {
+    "id": "product-priority-fixture-17",
+    "bytes": 4334,
+    "sha256": "b7dacf614b28da730e517f5c2fac07391b90479fc3b2a9acc60e1617fb7b855e",
+    "dimensions": "640x720",
+    "synthetic": true
+  },
+  {
+    "id": "product-priority-fixture-18",
+    "bytes": 4401,
+    "sha256": "83fc324e2deac0acbeed2712440ffd21757acc23d5834b2cd6e4bf5cf1b9e426",
+    "dimensions": "640x720",
+    "synthetic": true
+  },
+  {
+    "id": "product-priority-fixture-19",
+    "bytes": 4391,
+    "sha256": "5789b275b634e7827845db7b3799368382af20913ccf45257758239ded0310fd",
+    "dimensions": "640x720",
+    "synthetic": true
+  },
+  {
+    "id": "product-priority-fixture-20",
+    "bytes": 4479,
+    "sha256": "d0ca07abcaa05b126ca33523003534b93a2d8d737a7a204fb1b31a9340bbd551",
+    "dimensions": "640x720",
+    "synthetic": true
+  },
+  {
+    "id": "product-priority-fixture-21",
+    "bytes": 4380,
+    "sha256": "0f72ccafb9240b3f80a03a0b876031e0b2e674b8ac2ecdad93e57bebba700303",
+    "dimensions": "640x720",
+    "synthetic": true
+  },
+  {
+    "id": "product-priority-fixture-22",
+    "bytes": 4341,
+    "sha256": "aad8c1451993d39da38c7c82873126f59a5b011db45988a5235445bd5363c33f",
+    "dimensions": "640x720",
+    "synthetic": true
+  },
+  {
+    "id": "product-priority-fixture-23",
+    "bytes": 4496,
+    "sha256": "bf4df7aba6d3313986d1208d31995d444883515e1c9337e9bf6fda37b0f95ea5",
+    "dimensions": "640x720",
+    "synthetic": true
+  }
+]

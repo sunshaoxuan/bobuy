@@ -1,3 +1,4 @@
+import {preloadCategoryIcons,preloadCategoryIconUrls} from './categoryIconPriority';
 import {useEffect,useRef,useState} from 'react';
 import {storefrontApi,type BrowsePage,type ProductBrowseCard,type BrowseQuery} from './api';
 import {useReadRecovery} from './hooks/useReadRecovery';
@@ -53,23 +54,28 @@ export function useProgressiveCatalog(identity:string,query:BrowseQuery,enabled:
    }
    if(total!==result.matchedTotal)throw Error('browse.invalid');
    if(input.current.acceptDataset&&!input.current.acceptDataset(result.datasetRevision))throw Error('browse.changed');
+   preloadCategoryIcons(result.categories);
    const first=result.shelves[0];
    if(first)flights.current.add(first.category);
    publish({...current.current,page:result,busy:false,error:'',shelves:first?{[first.category]:{items:[],busy:true,loaded:false,error:''}}:{}});
-   // Commit navigation first, then the already-received first shelf on the next paint.
-   // This is scheduling only, not a fade or an artificial network delay.
+   // Paint navigation first, then submit the already-received shelf in the following task.
+   // Yield past this paint without waiting a second frame or any image/network promise.
    const frame=typeof requestAnimationFrame==='function'?requestAnimationFrame:(fn:FrameRequestCallback)=>setTimeout(()=>fn(0),0);
-   frame(()=>frame(()=>{
+   frame(()=>setTimeout(()=>{
     if(!active(token))return;
     if(first){flights.current.delete(first.category);publish({...current.current,shelves:{...current.current.shelves,[first.category]:{items:first.items,busy:false,loaded:true,error:''}}});}
     pump();
-   }));
+   },0));
   }catch(error){if(active(token))publish({...current.current,busy:false,error:(error as Error).message,changed:(error as Error).message==='browse.changed',recoverable:isRecoverableReadError(error)});}
   finally{if(active(token))navFlight.current=false;}
  }
  useEffect(()=>{
   generation.current++;wanted.current=new Set();flights.current=new Set();navFlight.current=false;
-  publish(empty(identity));if(enabled)void navigation();
+  publish(empty(identity));if(enabled){
+   void navigation();
+   const token=generation.current;
+   void (async()=>{try{const urls=await storefrontApi.categoryIcons();if(active(token)&&Array.isArray(urls)&&urls.every(url=>typeof url==='string'))preloadCategoryIconUrls(urls);}catch{/* Optional art hints never block product data or create a page error. */}})();
+  }
   return()=>{generation.current++;};
  },[identity,enabled]);
  useEffect(()=>{if(!paused)pump();},[paused]);

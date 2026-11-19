@@ -1,3 +1,4 @@
+import {visibleCategoryIconCount} from '../categoryIconPriority';
 import {LeftOutlined, RightOutlined} from '@ant-design/icons';
 import {useLayoutEffect, useRef, useState} from 'react';
 import {Link} from 'react-router-dom';
@@ -54,11 +55,11 @@ export default function CategoryShortcuts({categories, toCategory, initialScroll
   return <nav ref={nav} className="category-shortcuts" aria-label={t('shopping.directory')}>
     {edges.overflow && <button type="button" aria-disabled={!edges.previous} aria-label={t('shopping.previous_categories')} onClick={() => move(-1)}><LeftOutlined aria-hidden="true"/></button>}
     <ul ref={track} className="category-shortcuts-track">
-      {categories.map(category => {
+      {categories.map((category,index) => {
         const name = localizedContent(category.name, locale);
         return <li key={category.id}>
           <Link to={toCategory(category.id)} onClick={() => saveScroll(track.current!.scrollLeft)}>
-            <CategoryImage src={category.imageUrl} className="category-shortcuts-image"/>
+            <CategoryImage src={category.imageUrl} priority={index<Math.min(2,visibleCategoryIconCount(window.innerWidth))} className="category-shortcuts-image"/>
             <span title={name}>{name}</span>
           </Link>
         </li>;
