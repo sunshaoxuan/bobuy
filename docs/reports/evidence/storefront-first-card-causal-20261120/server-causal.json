@@ -1,0 +1,1395 @@
+{
+  "condition": "same loopback Spring and 465 active/14 synthetic deleted products; 12 rotated rounds; no throttling; 67KiB PNG icons",
+  "summary": {
+    "overview": {
+      "ttfbMs": 69.02908050005863,
+      "totalMs": 69.5375159998548,
+      "serverMs": 67.0
+    },
+    "hints": {
+      "ttfbMs": 75.54913750004744,
+      "totalMs": 75.76955299987276,
+      "serverMs": 73.5
+    },
+    "one": {
+      "ttfbMs": 80.95628749993011,
+      "totalMs": 81.40377599988824,
+      "serverMs": 79.5
+    },
+    "two": {
+      "ttfbMs": 91.03584500007855,
+      "totalMs": 91.32593599997563,
+      "serverMs": 86.0
+    }
+  },
+  "rows": [
+    {
+      "round": 1,
+      "arm": "overview",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-0-overview-overview",
+          "ttfbMs": 159.98671999977887,
+          "totalMs": 160.28953899967746,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 158
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "arm": "hints",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-0-hints-overview",
+          "ttfbMs": 162.13175199982288,
+          "totalMs": 162.53549299972292,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 159
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-0-hints-hints",
+          "ttfbMs": 37.93084600010843,
+          "totalMs": 38.55618700026753,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 34
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "arm": "one",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-0-one-overview",
+          "ttfbMs": 105.12488099993789,
+          "totalMs": 106.36546999967322,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 104
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-0-one-hints",
+          "ttfbMs": 32.65793599985045,
+          "totalMs": 32.94533100006447,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 30
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-0-one-icon1",
+          "ttfbMs": 42.82636800007822,
+          "totalMs": 42.92871400002696,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 42
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "arm": "two",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-0-two-overview",
+          "ttfbMs": 145.1527009999154,
+          "totalMs": 145.2737109998452,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 141
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-0-two-hints",
+          "ttfbMs": 23.6689660000593,
+          "totalMs": 23.737110000183748,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 18
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-0-two-icon1",
+          "ttfbMs": 65.41168400008246,
+          "totalMs": 67.4112760002572,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 42
+        },
+        {
+          "key": "icon2",
+          "trace": "causal-s-0-two-icon2",
+          "ttfbMs": 41.08265900003971,
+          "totalMs": 41.17298800019853,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 37
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "arm": "hints",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-1-hints-overview",
+          "ttfbMs": 117.7787649999118,
+          "totalMs": 118.25718299996879,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 116
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-1-hints-hints",
+          "ttfbMs": 14.049291999981506,
+          "totalMs": 14.118696999958047,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 10
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "arm": "one",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-1-one-overview",
+          "ttfbMs": 192.74259699977847,
+          "totalMs": 193.9754099998936,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 192
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-1-one-hints",
+          "ttfbMs": 8.373719000246638,
+          "totalMs": 8.45493799988617,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 6
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-1-one-icon1",
+          "ttfbMs": 19.84415100014303,
+          "totalMs": 19.9357660003443,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 18
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "arm": "two",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-1-two-overview",
+          "ttfbMs": 208.8526089996776,
+          "totalMs": 210.10728000010204,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 207
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-1-two-hints",
+          "ttfbMs": 13.468007000028592,
+          "totalMs": 13.546630999826448,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 11
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-1-two-icon1",
+          "ttfbMs": 19.62320600023304,
+          "totalMs": 19.70701000027475,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 18
+        },
+        {
+          "key": "icon2",
+          "trace": "causal-s-1-two-icon2",
+          "ttfbMs": 28.13726099975611,
+          "totalMs": 28.207629999997152,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 24
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "arm": "overview",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-1-overview-overview",
+          "ttfbMs": 116.07487500032221,
+          "totalMs": 116.3928850000957,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 115
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "arm": "one",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-2-one-overview",
+          "ttfbMs": 85.47150300000794,
+          "totalMs": 87.06640799982779,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 83
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-2-one-hints",
+          "ttfbMs": 9.196187000270584,
+          "totalMs": 9.294339000007312,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 8
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-2-one-icon1",
+          "ttfbMs": 20.075064999673486,
+          "totalMs": 20.13716100009333,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 18
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "arm": "two",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-2-two-overview",
+          "ttfbMs": 173.46353899984024,
+          "totalMs": 173.9030379999349,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 148
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-2-two-hints",
+          "ttfbMs": 38.55503500017221,
+          "totalMs": 38.810182999895915,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 18
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-2-two-icon1",
+          "ttfbMs": 47.087699000258,
+          "totalMs": 47.15003899991643,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 32
+        },
+        {
+          "key": "icon2",
+          "trace": "causal-s-2-two-icon2",
+          "ttfbMs": 47.56818199984991,
+          "totalMs": 47.62100600009944,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 23
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "arm": "overview",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-2-overview-overview",
+          "ttfbMs": 129.06445799990252,
+          "totalMs": 129.94918999993388,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 128
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "arm": "hints",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-2-hints-overview",
+          "ttfbMs": 70.26230400015265,
+          "totalMs": 70.53412000004755,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 69
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-2-hints-hints",
+          "ttfbMs": 9.41477100013799,
+          "totalMs": 9.46292300022833,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 6
+        }
+      ]
+    },
+    {
+      "round": 4,
+      "arm": "two",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-3-two-overview",
+          "ttfbMs": 214.53356799975154,
+          "totalMs": 216.08403299978818,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 211
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-3-two-hints",
+          "ttfbMs": 10.993494000103965,
+          "totalMs": 11.260482000125194,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 7
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-3-two-icon1",
+          "ttfbMs": 26.792407000357343,
+          "totalMs": 26.895582000179274,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 25
+        },
+        {
+          "key": "icon2",
+          "trace": "causal-s-3-two-icon2",
+          "ttfbMs": 15.916869999728078,
+          "totalMs": 18.186222999702295,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 15
+        }
+      ]
+    },
+    {
+      "round": 4,
+      "arm": "overview",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-3-overview-overview",
+          "ttfbMs": 90.62599299977592,
+          "totalMs": 90.71456899982877,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 88
+        }
+      ]
+    },
+    {
+      "round": 4,
+      "arm": "hints",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-3-hints-overview",
+          "ttfbMs": 85.32023700036007,
+          "totalMs": 85.40852000032828,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 83
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-3-hints-hints",
+          "ttfbMs": 7.658776999960537,
+          "totalMs": 7.765804999962711,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 6
+        }
+      ]
+    },
+    {
+      "round": 4,
+      "arm": "one",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-3-one-overview",
+          "ttfbMs": 79.07879300000786,
+          "totalMs": 79.82326899991676,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 78
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-3-one-hints",
+          "ttfbMs": 8.249098000305821,
+          "totalMs": 8.329838999998174,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 7
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-3-one-icon1",
+          "ttfbMs": 11.285719000170502,
+          "totalMs": 11.372957999810751,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 10
+        }
+      ]
+    },
+    {
+      "round": 5,
+      "arm": "overview",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-4-overview-overview",
+          "ttfbMs": 59.71021899995321,
+          "totalMs": 59.7854819998247,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 57
+        }
+      ]
+    },
+    {
+      "round": 5,
+      "arm": "hints",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-4-hints-overview",
+          "ttfbMs": 63.761737999811885,
+          "totalMs": 63.999951999903715,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 62
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-4-hints-hints",
+          "ttfbMs": 5.407275999914418,
+          "totalMs": 5.466635000175302,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 4
+        }
+      ]
+    },
+    {
+      "round": 5,
+      "arm": "one",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-4-one-overview",
+          "ttfbMs": 59.290038000199274,
+          "totalMs": 59.81103600015558,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 57
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-4-one-hints",
+          "ttfbMs": 9.891216000141867,
+          "totalMs": 9.990371000185405,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 8
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-4-one-icon1",
+          "ttfbMs": 17.64568499993402,
+          "totalMs": 17.71645200005878,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 13
+        }
+      ]
+    },
+    {
+      "round": 5,
+      "arm": "two",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-4-two-overview",
+          "ttfbMs": 72.74422000000413,
+          "totalMs": 72.84277999997357,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 70
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-4-two-hints",
+          "ttfbMs": 10.455012999955215,
+          "totalMs": 10.895245000028808,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 9
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-4-two-icon1",
+          "ttfbMs": 16.2900840000475,
+          "totalMs": 16.343115999916336,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 14
+        },
+        {
+          "key": "icon2",
+          "trace": "causal-s-4-two-icon2",
+          "ttfbMs": 27.09120300005452,
+          "totalMs": 27.150128000357654,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 25
+        }
+      ]
+    },
+    {
+      "round": 6,
+      "arm": "hints",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-5-hints-overview",
+          "ttfbMs": 61.09308399982183,
+          "totalMs": 63.752230999853055,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 59
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-5-hints-hints",
+          "ttfbMs": 8.081603999926301,
+          "totalMs": 15.30688499997268,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 6
+        }
+      ]
+    },
+    {
+      "round": 6,
+      "arm": "one",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-5-one-overview",
+          "ttfbMs": 82.83378199985236,
+          "totalMs": 82.98428299985972,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 81
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-5-one-hints",
+          "ttfbMs": 5.776649999916117,
+          "totalMs": 5.840885999987222,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 4
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-5-one-icon1",
+          "ttfbMs": 16.269820000161417,
+          "totalMs": 16.347572000086075,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 13
+        }
+      ]
+    },
+    {
+      "round": 6,
+      "arm": "two",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-5-two-overview",
+          "ttfbMs": 88.83124200019665,
+          "totalMs": 89.08680800004731,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 80
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-5-two-hints",
+          "ttfbMs": 18.786412999816093,
+          "totalMs": 18.857726999613078,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 11
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-5-two-icon1",
+          "ttfbMs": 31.18797299975995,
+          "totalMs": 31.358493999960046,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 22
+        },
+        {
+          "key": "icon2",
+          "trace": "causal-s-5-two-icon2",
+          "ttfbMs": 29.57910399982211,
+          "totalMs": 29.720256000018708,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 23
+        }
+      ]
+    },
+    {
+      "round": 6,
+      "arm": "overview",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-5-overview-overview",
+          "ttfbMs": 62.12728600030459,
+          "totalMs": 62.22974799993608,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 60
+        }
+      ]
+    },
+    {
+      "round": 7,
+      "arm": "one",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-6-one-overview",
+          "ttfbMs": 73.51916300012817,
+          "totalMs": 73.59711300023264,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 71
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-6-one-hints",
+          "ttfbMs": 11.62161100000958,
+          "totalMs": 12.00096599995959,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 11
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-6-one-icon1",
+          "ttfbMs": 21.22002199985218,
+          "totalMs": 21.321419999821956,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 20
+        }
+      ]
+    },
+    {
+      "round": 7,
+      "arm": "two",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-6-two-overview",
+          "ttfbMs": 93.24044799996045,
+          "totalMs": 93.56506399990394,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 92
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-6-two-hints",
+          "ttfbMs": 11.989691000053426,
+          "totalMs": 12.043081999763672,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 7
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-6-two-icon1",
+          "ttfbMs": 20.63229399982447,
+          "totalMs": 20.689580999714963,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 19
+        },
+        {
+          "key": "icon2",
+          "trace": "causal-s-6-two-icon2",
+          "ttfbMs": 19.52549799989356,
+          "totalMs": 19.586063000133436,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 16
+        }
+      ]
+    },
+    {
+      "round": 7,
+      "arm": "overview",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-6-overview-overview",
+          "ttfbMs": 65.2494169999045,
+          "totalMs": 65.59047499968074,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 63
+        }
+      ]
+    },
+    {
+      "round": 7,
+      "arm": "hints",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-6-hints-overview",
+          "ttfbMs": 80.03812800006926,
+          "totalMs": 80.27958299999227,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 78
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-6-hints-hints",
+          "ttfbMs": 10.184715000377764,
+          "totalMs": 10.528059000080248,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 8
+        }
+      ]
+    },
+    {
+      "round": 8,
+      "arm": "two",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-7-two-overview",
+          "ttfbMs": 82.3952869995992,
+          "totalMs": 82.74139099967215,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 79
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-7-two-hints",
+          "ttfbMs": 13.671624000380689,
+          "totalMs": 13.71829300023819,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 11
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-7-two-icon1",
+          "ttfbMs": 21.049152999694343,
+          "totalMs": 21.14441599997008,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 15
+        },
+        {
+          "key": "icon2",
+          "trace": "causal-s-7-two-icon2",
+          "ttfbMs": 18.875873000069987,
+          "totalMs": 18.93689100006668,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 15
+        }
+      ]
+    },
+    {
+      "round": 8,
+      "arm": "overview",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-7-overview-overview",
+          "ttfbMs": 72.80874400021276,
+          "totalMs": 73.51980900011768,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 73
+        }
+      ]
+    },
+    {
+      "round": 8,
+      "arm": "hints",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-7-hints-overview",
+          "ttfbMs": 65.21537899971008,
+          "totalMs": 65.45982799980266,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 63
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-7-hints-hints",
+          "ttfbMs": 7.550849000381277,
+          "totalMs": 7.613858000240725,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 5
+        }
+      ]
+    },
+    {
+      "round": 8,
+      "arm": "one",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-7-one-overview",
+          "ttfbMs": 70.99409800002832,
+          "totalMs": 71.32813299995178,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 68
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-7-one-hints",
+          "ttfbMs": 16.512070999851858,
+          "totalMs": 16.575091000049724,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 9
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-7-one-icon1",
+          "ttfbMs": 13.408196999989741,
+          "totalMs": 14.328296000257978,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 14
+        }
+      ]
+    },
+    {
+      "round": 9,
+      "arm": "overview",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-8-overview-overview",
+          "ttfbMs": 56.89592599992466,
+          "totalMs": 57.06711599987102,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 55
+        }
+      ]
+    },
+    {
+      "round": 9,
+      "arm": "hints",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-8-hints-overview",
+          "ttfbMs": 93.53985699999612,
+          "totalMs": 97.1874920001028,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 92
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-8-hints-hints",
+          "ttfbMs": 12.628224999843951,
+          "totalMs": 12.710734999927809,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 10
+        }
+      ]
+    },
+    {
+      "round": 9,
+      "arm": "one",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-8-one-overview",
+          "ttfbMs": 99.36639200032005,
+          "totalMs": 99.51583000020037,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 96
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-8-one-hints",
+          "ttfbMs": 31.38870000020688,
+          "totalMs": 31.443941999896197,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 26
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-8-one-icon1",
+          "ttfbMs": 19.029038000098808,
+          "totalMs": 19.093074000011256,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 13
+        }
+      ]
+    },
+    {
+      "round": 9,
+      "arm": "two",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-8-two-overview",
+          "ttfbMs": 103.86853700038046,
+          "totalMs": 104.18644400033372,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 97
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-8-two-hints",
+          "ttfbMs": 16.747111000313453,
+          "totalMs": 16.79636800008666,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 8
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-8-two-icon1",
+          "ttfbMs": 20.995629000026383,
+          "totalMs": 21.06515900004524,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 19
+        },
+        {
+          "key": "icon2",
+          "trace": "causal-s-8-two-icon2",
+          "ttfbMs": 21.62430599992149,
+          "totalMs": 21.74526999988302,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 14
+        }
+      ]
+    },
+    {
+      "round": 10,
+      "arm": "hints",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-9-hints-overview",
+          "ttfbMs": 89.74750999959724,
+          "totalMs": 90.64929799978927,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 87
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-9-hints-hints",
+          "ttfbMs": 8.47117100011019,
+          "totalMs": 8.544452000023739,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 6
+        }
+      ]
+    },
+    {
+      "round": 10,
+      "arm": "one",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-9-one-overview",
+          "ttfbMs": 69.089146999886,
+          "totalMs": 69.29400199987867,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 66
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-9-one-hints",
+          "ttfbMs": 9.13626400006251,
+          "totalMs": 9.292803999869648,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 6
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-9-one-icon1",
+          "ttfbMs": 15.01924499962115,
+          "totalMs": 15.1051779998852,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 12
+        }
+      ]
+    },
+    {
+      "round": 10,
+      "arm": "two",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-9-two-overview",
+          "ttfbMs": 52.896839000368345,
+          "totalMs": 53.56106599992927,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 51
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-9-two-hints",
+          "ttfbMs": 8.487389000038092,
+          "totalMs": 8.542911999938951,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 5
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-9-two-icon1",
+          "ttfbMs": 16.742659000101412,
+          "totalMs": 16.798040000139736,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 12
+        },
+        {
+          "key": "icon2",
+          "trace": "causal-s-9-two-icon2",
+          "ttfbMs": 18.477129000075365,
+          "totalMs": 18.56277900014902,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 17
+        }
+      ]
+    },
+    {
+      "round": 10,
+      "arm": "overview",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-9-overview-overview",
+          "ttfbMs": 57.71582299985312,
+          "totalMs": 57.93180799992115,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 56
+        }
+      ]
+    },
+    {
+      "round": 11,
+      "arm": "one",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-10-one-overview",
+          "ttfbMs": 71.36984799990387,
+          "totalMs": 71.45445700007258,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 70
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-10-one-hints",
+          "ttfbMs": 9.006236999994144,
+          "totalMs": 9.067916000276455,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 5
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-10-one-icon1",
+          "ttfbMs": 14.309868000054848,
+          "totalMs": 14.363813000272785,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 11
+        }
+      ]
+    },
+    {
+      "round": 11,
+      "arm": "two",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-10-two-overview",
+          "ttfbMs": 63.195729999733885,
+          "totalMs": 63.4771909999472,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 62
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-10-two-hints",
+          "ttfbMs": 7.136273000014626,
+          "totalMs": 7.606141999985994,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 5
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-10-two-icon1",
+          "ttfbMs": 12.94785599975512,
+          "totalMs": 13.006091000079323,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 12
+        },
+        {
+          "key": "icon2",
+          "trace": "causal-s-10-two-icon2",
+          "ttfbMs": 11.307470999781799,
+          "totalMs": 11.366281999926287,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 9
+        }
+      ]
+    },
+    {
+      "round": 11,
+      "arm": "overview",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-10-overview-overview",
+          "ttfbMs": 61.65491199999451,
+          "totalMs": 62.30148400027247,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 60
+        }
+      ]
+    },
+    {
+      "round": 11,
+      "arm": "hints",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-10-hints-overview",
+          "ttfbMs": 71.06014700002561,
+          "totalMs": 71.25952299975324,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 64
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-10-hints-hints",
+          "ttfbMs": 16.153525999925478,
+          "totalMs": 16.233047999776318,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 10
+        }
+      ]
+    },
+    {
+      "round": 12,
+      "arm": "two",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-11-two-overview",
+          "ttfbMs": 65.39769900018655,
+          "totalMs": 65.61660699981076,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 63
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-11-two-hints",
+          "ttfbMs": 14.586156999939703,
+          "totalMs": 14.63953499978743,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 11
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-11-two-icon1",
+          "ttfbMs": 14.151181000215729,
+          "totalMs": 14.26404799985903,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 11
+        },
+        {
+          "key": "icon2",
+          "trace": "causal-s-11-two-icon2",
+          "ttfbMs": 19.796184999904654,
+          "totalMs": 19.862836999891442,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 20
+        }
+      ]
+    },
+    {
+      "round": 12,
+      "arm": "overview",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-11-overview-overview",
+          "ttfbMs": 73.2705549999082,
+          "totalMs": 73.48455700002887,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 71
+        }
+      ]
+    },
+    {
+      "round": 12,
+      "arm": "hints",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-11-hints-overview",
+          "ttfbMs": 64.26999499990416,
+          "totalMs": 64.34862100013561,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 63
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-11-hints-hints",
+          "ttfbMs": 4.6455100000457605,
+          "totalMs": 4.704374000084499,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 4
+        }
+      ]
+    },
+    {
+      "round": 12,
+      "arm": "one",
+      "requests": [
+        {
+          "key": "overview",
+          "trace": "causal-s-11-one-overview",
+          "ttfbMs": 96.64918599992234,
+          "totalMs": 99.35140000015963,
+          "bytes": 22006,
+          "status": 200,
+          "serverMs": 95
+        },
+        {
+          "key": "hints",
+          "trace": "causal-s-11-one-hints",
+          "ttfbMs": 7.932982000056654,
+          "totalMs": 8.071790000030887,
+          "bytes": 1539,
+          "status": 200,
+          "serverMs": 7
+        },
+        {
+          "key": "icon1",
+          "trace": "causal-s-11-one-icon1",
+          "ttfbMs": 13.103631999911158,
+          "totalMs": 13.337164999938977,
+          "bytes": 68608,
+          "status": 200,
+          "serverMs": 11
+        }
+      ]
+    }
+  ]
+}

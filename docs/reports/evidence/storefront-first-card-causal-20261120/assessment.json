@@ -1,0 +1,124 @@
+{
+  "decision": "NO_APPLICATION_CHANGE: no consistent first-card improvement from off/sql-only/two/one arms; production root cause not established",
+  "serverAndNetwork": [
+    {
+      "width": 1920,
+      "arm": "off",
+      "overviewQueueMedian": 1.1000000000931323,
+      "responseToCardMedian": 193.8499999998603,
+      "icon1ServerMedian": 10.5,
+      "icon1BodyMedian": 1.1499999999068677,
+      "overviewBytes": [
+        22306
+      ],
+      "firstIconTransferBytes": [
+        68908
+      ]
+    },
+    {
+      "width": 1920,
+      "arm": "sql-only",
+      "overviewQueueMedian": 1.0,
+      "responseToCardMedian": 215.64999999967404,
+      "icon1ServerMedian": 12.0,
+      "icon1BodyMedian": 0.8000000000465661,
+      "overviewBytes": [
+        22306
+      ],
+      "firstIconTransferBytes": [
+        68908
+      ]
+    },
+    {
+      "width": 1920,
+      "arm": "two",
+      "overviewQueueMedian": 0.9000000001396984,
+      "responseToCardMedian": 190.0,
+      "icon1ServerMedian": 14.5,
+      "icon1BodyMedian": 1.0999999998603016,
+      "overviewBytes": [
+        22306
+      ],
+      "firstIconTransferBytes": [
+        68908
+      ]
+    },
+    {
+      "width": 1920,
+      "arm": "one",
+      "overviewQueueMedian": 1.4000000001396984,
+      "responseToCardMedian": 187.5,
+      "icon1ServerMedian": 8.5,
+      "icon1BodyMedian": 0.5499999998137355,
+      "overviewBytes": [
+        22306
+      ],
+      "firstIconTransferBytes": [
+        68908
+      ]
+    },
+    {
+      "width": 390,
+      "arm": "off",
+      "overviewQueueMedian": 1.5,
+      "responseToCardMedian": 165.14999999990687,
+      "icon1ServerMedian": 17.0,
+      "icon1BodyMedian": 0.9499999999534339,
+      "overviewBytes": [
+        22306
+      ],
+      "firstIconTransferBytes": [
+        68908
+      ]
+    },
+    {
+      "width": 390,
+      "arm": "sql-only",
+      "overviewQueueMedian": 1.1499999999068677,
+      "responseToCardMedian": 165.54999999981374,
+      "icon1ServerMedian": 14.0,
+      "icon1BodyMedian": 1.1000000000931323,
+      "overviewBytes": [
+        22306
+      ],
+      "firstIconTransferBytes": [
+        68908
+      ]
+    },
+    {
+      "width": 390,
+      "arm": "two",
+      "overviewQueueMedian": 1.4499999999534339,
+      "responseToCardMedian": 156.80000000004657,
+      "icon1ServerMedian": 16.0,
+      "icon1BodyMedian": 1.1999999999534339,
+      "overviewBytes": [
+        22306
+      ],
+      "firstIconTransferBytes": [
+        68908
+      ]
+    },
+    {
+      "width": 390,
+      "arm": "one",
+      "overviewQueueMedian": 1.1999999999534339,
+      "responseToCardMedian": 164.25,
+      "icon1ServerMedian": 14.0,
+      "icon1BodyMedian": 0.7000000001862645,
+      "overviewBytes": [
+        22306
+      ],
+      "firstIconTransferBytes": [
+        68908
+      ]
+    }
+  ],
+  "limitations": [
+    "Loopback HTTP/1.1 without TLS/WAN/HTTP2",
+    "465 active/14 synthetic deleted products, zero recommendation rows, active gallery JSON total58110bytes",
+    "67KiB valid PNG with ancillary padding isolates transfer size, not real production decode complexity",
+    "Synthetic overview about20KiB, production41921B and much slower server/TTFB",
+    "Shared cloud browser startup/CPU variation; exactly fixed samples, no extra rounds"
+  ]
+}

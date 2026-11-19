@@ -1,0 +1,16 @@
+[
+  {
+    "id": "icon-priority-fixture-01",
+    "oldBytes": 865,
+    "bytes": 68608,
+    "sha256": "9cb6398a2c08781583c9ddae6fef5e12f90120ee3bd1f55ce5f635e37ed11c5a",
+    "purpose": "valid PNG with ancillary padding: exact network payload, unchanged pixel decode complexity"
+  },
+  {
+    "id": "icon-priority-fixture-02",
+    "oldBytes": 1025,
+    "bytes": 68608,
+    "sha256": "65294bdae1dea178dedfd19a1761286e9011010345a0d1bf278d6c4af268047d",
+    "purpose": "valid PNG with ancillary padding: exact network payload, unchanged pixel decode complexity"
+  }
+]

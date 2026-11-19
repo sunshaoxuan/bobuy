@@ -1,0 +1,11 @@
+{
+  "baseCommit": "874a23cb4dc922298e2ef4ea2c4938c96f6f17cb",
+  "applicationSourceChanged": false,
+  "asset": "/assets/index-DcCnHyzm.js",
+  "sha256": "9dfa1673ee127ec1c0e24aa1b2ac60f207344dca053672e06cf36c91c0039c39",
+  "matchesExistingPR165Artifact": true,
+  "frontend": "loopback5175 existing production build",
+  "backend": "loopback18080 existing ManualCreateRuntime; no code/rebuild/restart",
+  "database": "existing PG18.6 bobuy-manual-create-test / manual_create_synthetic",
+  "newInput": "two 67KiB synthetic PNGs and14 synthetic soft-deleted records; retained for reproducibility; no production access"
+}
