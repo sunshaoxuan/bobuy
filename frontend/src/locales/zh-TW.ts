@@ -1,6 +1,10 @@
 import type { Dictionary } from './types';
 
 const messages: Dictionary = {
+  "product.create.help": "手動建立為商家私有商品。請填寫日文名稱，分類可留空為未歸類；儲存後可繼續編輯、確認通常價及發佈。此次儲存不會呼叫 AI 或變更庫存。",
+  "product.create.duplicate": "該商品編號已有檔案（包括已刪除檔案）。請尋找或恢復原商品，不會覆蓋原資料。",
+  "product.create.deleted_retry": "該建立請求對應的商品已刪除。請先查看已刪除商品。",
+
   "catalogTransfer.export": "匯出目前列表商品",
   "catalogTransfer.load": "讀取 JSON 檔案",
   "catalogTransfer.help": "使用現有商品 ID 與版本。匯出限本頁有權限讀取的商品（最多 500 件）。讀取檔案僅填入預覽編輯區，需核對並確認後儲存；新增或待確認身分不會自動建檔。",

@@ -2,6 +2,10 @@ import type { Dictionary } from './types';
 import experience from './experience.en-US.json';
 
 const messages: Dictionary = {
+  "product.create.help": "Create a private merchant product manually. Enter a Japanese name; category may remain unassigned. After saving, edit details, confirm the regular price and publish through the existing workflow. Saving does not call AI or change inventory.",
+  "product.create.duplicate": "This item number already exists, including deleted products. Find or restore the original product; existing details will not be overwritten.",
+  "product.create.deleted_retry": "The product for this creation request was deleted. Check deleted products first.",
+
   "catalogTransfer.export": "Export listed products",
   "catalogTransfer.load": "Load JSON file",
   "catalogTransfer.help": "Use existing product IDs and versions. Export includes the products listed on this page (up to 500), subject to your access. Loading a file only fills the preview editor; review and confirm before saving. New or unresolved identities are not created automatically.",

@@ -31,6 +31,13 @@ public class MobileProductController {
         this.localizedJsonbReaderService = localizedJsonbReaderService;
     }
 
+    @org.springframework.beans.factory.annotation.Autowired private com.bobbuy.service.ManualProductCreationService manualCreation;
+
+    @org.springframework.web.bind.annotation.PostMapping
+    public ResponseEntity<ApiResponse<MobileProductResponse>> create(@RequestBody com.bobbuy.service.ManualProductCreationService.Input input, Locale locale) {
+        return ResponseEntity.ok(ApiResponse.success(toResponse(manualCreation.create(input),locale)));
+    }
+
     @GetMapping
     public ResponseEntity<ApiResponse<java.util.List<MobileProductResponse>>> list(Locale locale) {
         try {

@@ -2,6 +2,10 @@ import type { Dictionary } from './types';
 import experience from './experience.ja-JP.json';
 
 const messages: Dictionary = {
+  "product.create.help": "店舗内限定の商品を手動で作成します。日本語の商品名を入力してください。分類は未分類のまま保存できます。保存後に編集・通常価格の確認・公開ができます。AI処理や在庫変更は行いません。",
+  "product.create.duplicate": "同じ商品番号の登録があります（削除済みを含む）。元の商品を検索または復元してください。既存の情報は上書きしません。",
+  "product.create.deleted_retry": "この作成リクエストの商品は削除されています。削除済み商品を確認してください。",
+
   "catalogTransfer.export": "一覧の商品をエクスポート",
   "catalogTransfer.load": "JSON ファイルを読み込む",
   "catalogTransfer.help": "既存の商品 ID とバージョンを使用します。エクスポート対象はこのページの閲覧可能な商品（最大500件）です。読み込み後にプレビューを確認して保存してください。新規・未確認の商品は自動作成しません。",

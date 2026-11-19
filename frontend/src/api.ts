@@ -195,8 +195,9 @@ export type MobileProductResponse = {
             isTemporary?: boolean;
             visibilityStatus?: string;
             updatedAt?: string;
-            storageCondition?: string;
-        orderMethod?: string;
+            storageCondition?: 'AMBIENT'|'CHILLED';
+        orderMethod?: 'PRE_ORDER'|'DIRECT_BUY';
+        merchantSkus?:Record<string,string>;
         mediaGallery?: { url: string; title?: Record<string, string>; type: string; visible?: boolean; sourceUrl?: string; sourceDomain?: string; sourceType?: string }[];
         attributes?: Record<string, string>;
         priceTiers?: PriceTier[];
@@ -1360,6 +1361,8 @@ export const api = {
         }),
     product: (id:string) => storeGet<MobileProductResponse>('/api/mobile/products/'+encodeURIComponent(id)),
     products: () => fetchJson<MobileProductResponse[]>('/api/mobile/products', fallback.products),
+    createProduct: (input: ProductPatch & {requestId:string;specification?:Record<string,string>;categoryNodeId?:string|null}) =>
+        postJson<MobileProductResponse,object>('/api/mobile/products',input),
     patchProduct: (id: string, patch: ProductPatch) =>
         patchJson<MobileProductResponse, ProductPatch>(`/api/mobile/products/${id}`, patch),
     procurementHud: (tripId: number) =>
