@@ -43,7 +43,7 @@ import ProductCatalogPanel from '../components/ProductCatalogPanel';
 import CategoryTreePicker from '../components/CategoryTreePicker';
 import ProductPricingPanel from '../components/ProductPricingPanel';
 import ProductMarkerEditor from '../components/ProductMarkerEditor';
-import { api, categoryTreeApi, type CategoryTreeNode, type CategoryAttributeTemplateField, type MobileCategory, type MobileSupplier, type AiOnboardingSuggestion } from '../api';
+import { api, categoryTreeApi, type CategoryTreeNode, type MobileProductResponse, type CategoryAttributeTemplateField, type MobileCategory, type MobileSupplier, type AiOnboardingSuggestion } from '../api';
 import './productRecords.css';
 import {ProductReviewStars} from '../components/ProductRating';
 import CardPrice from '../components/CardPrice';
@@ -77,6 +77,40 @@ interface StockItem {
   priceTiers?: { tierName: string; price: number; currency: string; agentOnly: boolean }[];
   isNew?: boolean;
   suggestion?: AiOnboardingSuggestion;
+}
+
+export function stockItemFromResponse(res:MobileProductResponse):StockItem {
+  return {
+        key: res.product.id,
+        visibilityStatus:res.product.visibilityStatus,
+        catalogDriven:!!(res.product as unknown as {catalogData?:unknown}).catalogData,
+        name: res.displayName,
+        nameL10n: res.product.name,
+        categoryPath: res.categoryPath,
+        category: res.product.categoryId || '',
+        price: res.product.basePrice,
+        actualSale:res.currentRegular??undefined,
+        stock: 0, // Placeholder
+        unit: 'pc',
+        description: res.displayDescription,
+        descriptionL10n: res.product.description,
+        brand: res.product.brand,
+        specificationL10n:(res.product as unknown as {catalogData?:{specification?:L10nValues}}).catalogData?.specification,
+        sku: res.product.itemNumber,
+        mediaGallery: res.product.mediaGallery?.map((m, i) => ({
+          id: `${res.product.id}-${i}`,
+          url: m.url,
+          type: m.type?.toLowerCase()==='video'?'video':'image',
+          title: m.title,
+          visible: m.visible
+        })) || [],
+        priceTiers: res.product.priceTiers || [],
+        dynamicAttributes: normalizeStructuredAttributes(res.product.attributes),
+        merchantSkus:res.product.merchantSkus,
+        storageCondition:res.product.storageCondition,
+        orderMethod:res.product.orderMethod,
+        isNew: false
+        };
 }
 
 type MerchantSkuEntry = {
@@ -272,34 +306,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
     let cancelled = false;
     api.products().then((result) => {
       if (cancelled) return;
-      const mapped: StockItem[] = result.map(res => ({
-        key: res.product.id,
-        visibilityStatus:res.product.visibilityStatus,
-        catalogDriven:!!(res.product as unknown as {catalogData?:unknown}).catalogData,
-        name: res.displayName,
-        nameL10n: res.product.name,
-        categoryPath: res.categoryPath,
-        category: res.product.categoryId || '',
-        price: res.product.basePrice,
-        actualSale:res.currentRegular??undefined,
-        stock: 0, // Placeholder
-        unit: 'pc',
-        description: res.displayDescription,
-        descriptionL10n: res.product.description,
-        brand: res.product.brand,
-        specificationL10n:(res.product as unknown as {catalogData?:{specification?:L10nValues}}).catalogData?.specification,
-        sku: res.product.itemNumber,
-        mediaGallery: res.product.mediaGallery?.map((m, i) => ({
-          id: `${res.product.id}-${i}`,
-          url: m.url,
-          type: m.type?.toLowerCase()==='video'?'video':'image',
-          title: m.title,
-          visible: m.visible
-        })) || [],
-        priceTiers: res.product.priceTiers || [],
-        dynamicAttributes: normalizeStructuredAttributes(res.product.attributes),
-        isNew: false
-      }));
+      const mapped = result.map(stockItemFromResponse);
       setDataSource(mapped);
     });
     return () => { cancelled = true; };
@@ -481,9 +488,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
           mediaGallery:item.mediaGallery?.map(m=>({url:m.url,type:m.type,title:m.title,visible:m.visible!==false}))});
         if(!item.createRequestId)handleReconcileFeedback(response);
         if(!response.product?.id)throw new Error(t('stock.msg.update_failed'));
-        const saved={...item,key:response.product.id,isNew:false,catalogDriven:true,
-          name:response.displayName,nameL10n:response.product.name,descriptionL10n:response.product.description,
-          categoryPath:response.categoryPath,visibilityStatus:'DRAFTER_ONLY'};
+        const saved=stockItemFromResponse(response);
         setDataSource(prev=>prev.map(it=>it.key===item.key?saved:it));
         setEditingItem(previous=>previous?.key===item.key?saved:previous);
         setSyncStatus('saved');

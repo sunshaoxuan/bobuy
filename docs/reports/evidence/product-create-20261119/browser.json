@@ -1,0 +1,193 @@
+{
+  "runtime": "Spring Boot + PostgreSQL 18.6 V1..V46 + Vite + Chromium; synthetic only",
+  "checks": {
+    "resumedOriginalCreation": true,
+    "createdId": "1a10e496-77c8-3359-a69d-60674a0cc82f",
+    "itemNumber": "SYNTHETIC-MANUAL-046634d8",
+    "persistedAfterRefresh": "PASS",
+    "editExistingCatalog": "PASS",
+    "noAI": "PASS: no AI mutation or translation; existing read-only worker/job polling retained"
+  },
+  "errors": [],
+  "network": [
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-tree",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    }
+  ],
+  "geometrySupersededBy": [
+    "form-final.json",
+    "visual.json"
+  ]
+}

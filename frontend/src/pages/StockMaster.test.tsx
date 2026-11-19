@@ -69,7 +69,7 @@ vi.mock('../api', () => ({
   }
 }));
 
-import StockMaster from './StockMaster';
+import StockMaster, {stockItemFromResponse} from './StockMaster';
 
 // Top-level cases must have the same isolation as the grouped cases. A timed
 // out async body must never later call cleanup() on the next case's mounted UI.
@@ -329,7 +329,7 @@ it('shows the resolved primary category path instead of the legacy category labe
 
 it.each([false,true])('manual creation saves translations without AI and keeps failed input for retry, mobile=%s',async mobile=>{
  setMatchMedia(mobile);localStorage.setItem('bobbuy_locale','en-US');
- const create=vi.mocked(api.createProduct);create.mockReset();create.mockResolvedValue({product:{id:'manual-saved',name:{'ja-JP':'手入力'},description:{}},displayName:'手入力',displayDescription:'',categoryPath:''} as Awaited<ReturnType<typeof api.createProduct>>);create.mockRejectedValueOnce(new Error('Synthetic save failure'));
+ const create=vi.mocked(api.createProduct);create.mockReset();create.mockResolvedValue({product:{id:'manual-saved',name:{'ja-JP':'手入力'},description:{},basePrice:0},displayName:'手入力',displayDescription:'',categoryPath:''} as Awaited<ReturnType<typeof api.createProduct>>);create.mockRejectedValueOnce(new Error('Synthetic save failure'));
  const ai=vi.mocked(api.onboardConfirm);ai.mockClear();const translate=vi.spyOn(api,'translate');
  renderWithI18n(<StockMaster/>);await screen.findByText('Organic Milk');
  fireEvent.click(screen.getByTestId('stock-master-add-row'));
@@ -347,3 +347,10 @@ it.each([false,true])('manual creation saves translations without AI and keeps f
  expect(create.mock.calls[1][0]).toMatchObject({name:{'zh-CN':'中文新商品','ja-JP':'手入力'},categoryNodeId:null});
  expect(ai).not.toHaveBeenCalled();expect(translate).not.toHaveBeenCalled();
 },15000);
+
+it('maps retry and AI responses entirely from persisted fields and actual visibility',()=>{
+ const response={product:{id:'server-id',name:{'ja-JP':'保存名'},description:{'en-US':'Saved'},basePrice:0,brand:'Saved brand',itemNumber:'SAVED-ITEM',categoryId:undefined,attributes:{packSize:'saved'},merchantSkus:{supplier:'SAVED-CODE'},storageCondition:'CHILLED',orderMethod:'PRE_ORDER',visibilityStatus:'PUBLIC',mediaGallery:[],priceTiers:[]},displayName:'保存名',displayDescription:'Saved',categoryPath:'Saved path'} as Awaited<ReturnType<typeof api.createProduct>>;
+ expect(stockItemFromResponse(response)).toMatchObject({key:'server-id',brand:'Saved brand',sku:'SAVED-ITEM',categoryPath:'Saved path',category:'',catalogDriven:false,visibilityStatus:'PUBLIC',dynamicAttributes:{packSize:'saved'},merchantSkus:{supplier:'SAVED-CODE'},storageCondition:'CHILLED',orderMethod:'PRE_ORDER',isNew:false});
+ response.product.catalogData={specification:{'ja-JP':'保存仕様'}};response.product.visibilityStatus='DRAFTER_ONLY';
+ expect(stockItemFromResponse(response)).toMatchObject({specificationL10n:{'ja-JP':'保存仕様'},catalogDriven:true,visibilityStatus:'DRAFTER_ONLY'});
+});

@@ -40,3 +40,7 @@
 .manual-product-create .ant-drawer-close { min-width:44px; min-height:44px; }
 .manual-product-create .ant-btn-primary { background:var(--zen-ink,#252529); border-color:var(--zen-ink,#252529); }
 .manual-product-create .ant-btn-primary:not(:disabled):hover { background:#45454c; border-color:#45454c; }
+.manual-product-create .ant-drawer-header { flex-wrap:wrap; gap:12px; }
+.manual-product-create .ant-drawer-header-title { flex:1 1 100%; }
+.manual-product-create .ant-drawer-extra { margin-inline-start:auto; }
+.manual-product-create .ant-tabs-nav-more { min-height:44px; }

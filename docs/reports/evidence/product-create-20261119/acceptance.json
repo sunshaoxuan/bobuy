@@ -1,0 +1,39 @@
+{
+  "base": "8540e5a8b9a7349240a9d174b787388e84fcdb20",
+  "pr": 163,
+  "applicationChecks": {
+    "ManualProductCreationTest": 5,
+    "MobileProductControllerTest": 2,
+    "ProductCatalogIntegrationTest": 6,
+    "StockMaster.test.tsx": 21,
+    "typecheck": "PASS"
+  },
+  "evidenceReuse": "Unique PASS assembled from scoped runs; repeated only after documented failing inputs changed. No unrelated price/category regression or cleanup.",
+  "postgresql": "18.6",
+  "schema": "V1..V46, no new migration",
+  "frontendModules": "visual.json.loadedFrontendModules",
+  "sourceSha256": {
+    "backend/src/main/java/com/bobbuy/service/ManualProductCreationService.java": "76380bffe5c2223515d23abbf2d76ee5551e86b567f9ec1e49979a54d73a1206",
+    "backend/src/main/java/com/bobbuy/api/MobileProductController.java": "fab0282e5497380b2c40d0b83e47648a0c7395e93b46351decebb5bdade8341b",
+    "backend/src/main/java/com/bobbuy/service/ProductCatalogService.java": "d073958aebc1a14c4cfb48207f61dfe3f3d8f2472823e03a3c23dcfb76d38d09",
+    "frontend/src/pages/StockMaster.tsx": "46a75b500e5dbf7d3ed745dd4579f71a992a9e9ff642202d0f140e53e46a26c9",
+    "frontend/src/pages/productRecords.css": "6b7c322a89b1a4ac6c11a5f90b61b954885d5ed4dae9a53963527d51fd419824",
+    "frontend/src/api.ts": "dbefff98ee4866dd32a8d3b87153c0156fe7ac374509db0b649686e59121c5da"
+  },
+  "loadedBackendClassSha256": {
+    "backend/target/classes/com/bobbuy/service/ManualProductCreationService.class": "3a6a59182bbe13dd7d0dcc3d59b1c6094bc63c48b272109dee286c014de61f55",
+    "backend/target/classes/com/bobbuy/service/ProductCatalogService.class": "e842409e1a898866b7147cee506d78ca90a1425eb652dbf44863fa14bae1c47c",
+    "backend/target/classes/com/bobbuy/api/MobileProductController.class": "334502b0a40cfa08c8758bd0d129610d6d7c188a53d552466ba36e3938735593"
+  },
+  "screenshots": "visual.json and form-final.json",
+  "productionReads": 0,
+  "productionWrites": 0,
+  "merged": false,
+  "deployed": false,
+  "limitations": [
+    "Only synthetic acceptance; production confirmation belongs to local coordinator.",
+    "AI worker configuration unchanged; existing GET status/job polling retained, no AI processing/translation mutation.",
+    "Manual creation requires Japanese name; ITEM and current tree leaf are optional.",
+    "HTTPS media URLs must have no credentials, query or fragment; existing identical manually supplied video can survive catalog edits, no new video admission through catalog edit."
+  ]
+}

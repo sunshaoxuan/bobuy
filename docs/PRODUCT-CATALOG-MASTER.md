@@ -22,3 +22,15 @@ Image selection stages validated local files in the existing shared image store.
 Only reviewed current master translations are projected into recommendation translations. Source changes without translation review fall back to Japanese; issue-specific translated offer conditions remain bound to the issue source hash. Existing recommendation source facts remain available privately for offer editing and evidence. Master-owned metadata editors link to the master page instead of creating a second editable copy.
 
 This document describes the candidate. Deployment and full browser acceptance status are recorded separately in `docs/reports/PRODUCT-MASTER-NEXT-BATCH.md`; do not infer production availability from this contract.
+
+
+## 手动新增一件商品（2026-11-19 / PR #163 候选）
+
+1. 在 `/admin/products` 点击「新增商品」。填写日文名称；可同时填写简体中文/英文名称、描述、规格、品牌与商品编号。日本语名称为必填，其他语言不自动复制或生成。
+2. 分类使用现有树选择器选叶节点，不输入分类文字；可明确留为未归类。提交以树节点ID原子写主路径，不写旧分类FK或旧类别数组。
+3. 点击「保存并关闭」（手机也须明确点击）。保存失败保留输入，可原请求重试；保存成功使用服务器回包显示，不把后来改动但未落库的草稿当作已保存。刷新后可按商品编号查找，通过「详情/商品主档」继续编辑。
+4. 商品初始为商家私有且无已确认售价。之后打开「售价与调价」，由店主确认金额/币种/单位及原因；确认通常价不自动公开。核对资料和价格后，使用既有「公开商品与售价」独立确认入口。
+
+手动创建不调用AI识别/翻译、不触发采购对账、不改变库存；原页面已有AI状态/任务GET轮询及worker配置保持原样。不同创建请求使用已有商品编号时拒绝（含软删），请找到或恢复原商品，不自动覆盖或合并身份。JSON补齐仍要求已有商品ID，不用于创建。媒体沿用当前主档HTTPS来源边界：无用户信息、query或fragment；已保存手动视频可原样保留随其他字段保存，主档编辑不能借此新增/换视频URL。
+
+本候选无schema迁移、无真实商品回填。验证与限制见 [验收材料](reports/evidence/product-create-20261119/README.md)，生产合并/发布/验收由本机协调。

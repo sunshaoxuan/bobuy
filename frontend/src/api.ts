@@ -195,8 +195,9 @@ export type MobileProductResponse = {
             isTemporary?: boolean;
             visibilityStatus?: string;
             updatedAt?: string;
-            storageCondition?: string;
-        orderMethod?: string;
+            storageCondition?: 'AMBIENT'|'CHILLED';
+        orderMethod?: 'PRE_ORDER'|'DIRECT_BUY';
+        merchantSkus?:Record<string,string>;
         mediaGallery?: { url: string; title?: Record<string, string>; type: string; visible?: boolean; sourceUrl?: string; sourceDomain?: string; sourceType?: string }[];
         attributes?: Record<string, string>;
         priceTiers?: PriceTier[];

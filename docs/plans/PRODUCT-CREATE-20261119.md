@@ -34,3 +34,11 @@
 - checkpoint49d2564原生前端门禁Type-check失败；日志下载端点拒绝访问。仅为定位该已失败检查运行本地typecheck，不重跑lint/build/其他通过项。
 - Type-check定位为Drawer重复rootClassName及mock缺displayDescription；合并原stock-drawer class并补mock字段，保留既有表单样式。媒体保存后编辑直接依赖：手动HTTPS媒体记录USER_PROVIDED_URL来源（无query/fragment），主档只允许原件完全未变的手动视频随其他字段保存，禁止借此新增/换URL视频；新增1项媒体衔接正反例。只重跑该用例和既有catalog集成6项。
 - 媒体新增测试编译遇到HTTP MediaType与商品MediaType同名，改为全限定枚举；业务测试尚未启动，只继续该7项定向集合。浏览器首轮创建/刷新/主档编辑已成功，最终无AI断言误计原组件GET状态/任务列表，修正为禁止AI写/翻译，保留原轮询配置；以--resume复用原件，不重复业务创建。
+- 本机49d2564审查三项：rootClassName已在a7e078f修复；新增stockItemFromResponse复用列表/创建回包映射，所有字段仅来自服务端，AI fallback按真实catalog/visibility展示，同请求丢响应重试不混入未落库草稿字段。补映射正例与原2个失败重试用例，重跑此3项；实际价格UI/分类清理证据不重跑。mock类型补齐basePrice后继续已失败typecheck。
+- 真实PG集成已PASS（integration.json）：非法分类整体回滚、匿名拒绝、同请求并发仅一条、重复ITEM拒绝、未归类、通常价确认仍私有、既有显式发布后公开取价。四语截图读取Vite模块摘要遇到重定向无body，过滤非2xx模块响应；以--visual-only继续，只读截图，不重复这些写入。回包映射3项PASS；MobileProductResponse补齐服务端已有merchantSkus及枚举类型，仅继续失败typecheck。媒体新增1与既有catalog6 PASS。
+- 四语390/1280已无JS错误/网络错误/横向溢出。主Agent原图发现日文标题被按钮挤成三行，改仅新建header分行；实测overflow菜单38px，补44px。分类搜索input为44px选择器内部42px内容区，几何按真实外层选择器命中区计算，排除该内部input重复计数。只重拍受影响新建四语区域与新商品既有编辑入口，不重复API写入。
+
+## 候选冻结与交接
+- 本机三个直接审查项已完成：Drawer class合并；AI/手动保存按服务器实际catalog/visibility；丢响应重试整行仅取回包字段。
+- 去重后后端13、前端21 PASS，typecheck PASS；真实PG18.6创建/刷新/编辑、回滚/并发/私价隔离/显式公开PASS。四语390/1280及填写/分类/已存编辑入口PNG和几何在evidence/product-create-20261119，主Agent视觉完成。新建控件≥44px，无JS/网络错误/横溢；价格和旧分类清理未重复验证/执行。
+- 同一PR #163，基线8540e5a8；只等待冻结后的自动PR checks/CodeQL，不手工dispatch、不本地全量预跑。运行日志和共享依赖保留，旧initial图及任务临时header诊断脚本已移除。无schema迁移、无生产写入、无真实89863、未合并未部署。操作顺序写回docs/PRODUCT-CATALOG-MASTER.md。
