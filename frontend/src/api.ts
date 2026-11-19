@@ -1360,6 +1360,8 @@ export const api = {
         }),
     product: (id:string) => storeGet<MobileProductResponse>('/api/mobile/products/'+encodeURIComponent(id)),
     products: () => fetchJson<MobileProductResponse[]>('/api/mobile/products', fallback.products),
+    createProduct: (input: ProductPatch & {requestId:string;specification?:Record<string,string>;categoryNodeId?:string|null}) =>
+        postJson<MobileProductResponse,object>('/api/mobile/products',input),
     patchProduct: (id: string, patch: ProductPatch) =>
         patchJson<MobileProductResponse, ProductPatch>(`/api/mobile/products/${id}`, patch),
     procurementHud: (tripId: number) =>

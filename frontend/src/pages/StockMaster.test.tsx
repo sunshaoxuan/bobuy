@@ -3,11 +3,13 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { I18nProvider } from '../i18n';
 import React from 'react';
 import { api } from '../api';
+vi.mock('antd',async()=>{const actual=await vi.importActual<typeof import('antd')>('antd');const {CategoryTreeSelectMock}=await import('../test/CategoryTreeSelectMock');return {...actual,TreeSelect:CategoryTreeSelectMock};});
 import {message} from 'antd';
 vi.mock('../components/ProductCatalogPanel',()=>({default:()=>null}));
 vi.mock('../components/ProductMarkerEditor',()=>({default:({productId}:{productId:string})=><output data-testid="marker-product-id">{productId}</output>}));
 
 vi.mock('../api', () => ({
+  categoryTreeApi:{list:()=>Promise.resolve([])},
   api: {
     stockCategories: () => Promise.resolve([
       {
@@ -57,6 +59,7 @@ vi.mock('../api', () => ({
     translate: () => Promise.resolve({ translatedText: '' }),
     deleteProduct: vi.fn().mockResolvedValue(undefined),
     patchProduct: vi.fn().mockResolvedValue({}),
+    createProduct:vi.fn().mockResolvedValue({product:{id:"manual-saved",name:{"ja-JP":"手入力"},description:{}},displayName:"手入力",categoryPath:""}),
     onboardConfirm: vi.fn().mockResolvedValue({
       product: { id: 'prd-new', name: { 'zh-CN': 'X' }, basePrice: 1 },
       displayName: 'X',
@@ -322,3 +325,25 @@ it('shows the resolved primary category path instead of the legacy category labe
  vi.spyOn(api,'products').mockResolvedValueOnce([{product:{id:'category-primary',name:{'en-US':'Synthetic juice'},categoryId:'cat-1000',basePrice:0,itemNumber:'PATH'},displayName:'Synthetic juice',displayDescription:'',categoryPath:'Drinks › Juice'}] as Awaited<ReturnType<typeof api.products>>);
  render(<I18nProvider><StockMaster embedded/></I18nProvider>);expect(await screen.findByText('Drinks › Juice')).toBeInTheDocument();
 });
+
+
+it.each([false,true])('manual creation saves translations without AI and keeps failed input for retry, mobile=%s',async mobile=>{
+ setMatchMedia(mobile);localStorage.setItem('bobbuy_locale','en-US');
+ const create=vi.mocked(api.createProduct);create.mockReset();create.mockResolvedValue({product:{id:'manual-saved',name:{'ja-JP':'手入力'},description:{}},displayName:'手入力',categoryPath:''} as Awaited<ReturnType<typeof api.createProduct>>);create.mockRejectedValueOnce(new Error('Synthetic save failure'));
+ const ai=vi.mocked(api.onboardConfirm);ai.mockClear();const translate=vi.spyOn(api,'translate');
+ renderWithI18n(<StockMaster/>);await screen.findByText('Organic Milk');
+ fireEvent.click(screen.getByTestId('stock-master-add-row'));
+ const drawer=screen.getByRole('dialog');const save=within(drawer).getByRole('button',{name:'Save & Close'});
+ fireEvent.click(save);await screen.findByText(/Japanese source name is required/i);expect(create).not.toHaveBeenCalled();
+ const firstItem=drawer.querySelector('.ant-form-item')!;
+ fireEvent.change(within(firstItem as HTMLElement).getByRole('textbox'),{target:{value:'中文新商品'}});
+ fireEvent.click(within(firstItem as HTMLElement).getByRole('button',{name:'ja-JP'}));
+ fireEvent.change(within(firstItem as HTMLElement).getByRole('textbox'),{target:{value:'手入力'}});
+ fireEvent.click(save);await waitFor(()=>expect(create).toHaveBeenCalledTimes(1));
+ await waitFor(()=>expect(save).not.toHaveClass('ant-btn-loading'));
+ expect(screen.getByRole('dialog')).toBeInTheDocument();expect(within(drawer).getByDisplayValue('手入力')).toBeInTheDocument();
+ fireEvent.click(save);await waitFor(()=>expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+ expect(create).toHaveBeenCalledTimes(2);expect(create.mock.calls[0][0].requestId).toEqual(create.mock.calls[1][0].requestId);
+ expect(create.mock.calls[1][0]).toMatchObject({name:{'zh-CN':'中文新商品','ja-JP':'手入力'},categoryNodeId:null});
+ expect(ai).not.toHaveBeenCalled();expect(translate).not.toHaveBeenCalled();
+},15000);
