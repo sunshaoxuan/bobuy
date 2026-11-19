@@ -189,7 +189,7 @@ const messages: Dictionary = {
     "browse.result_count": "已顯示 {shown} / {total} 則內容",
     "browse.changed": "目錄已更新，請重新整理以載入一致版本。",
     "browse.invalid": "瀏覽回應或查詢無效。",
-    "browse.loading": "正在載入本批內容…",
+    "browse.loading": "正在載入",
     "browse.sales_pending": "正在確認目前售價與購買資格…",
     "browse.refresh": "重新整理目錄",
     "browse.service_price": "服務費用",

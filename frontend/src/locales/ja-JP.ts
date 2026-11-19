@@ -188,7 +188,7 @@ const messages: Dictionary = {
     "browse.result_count": "{total} 件中 {shown} 件を表示",
     "browse.changed": "一覧が更新されました。再読み込みして同じ版の内容を表示してください。",
     "browse.invalid": "一覧の応答または検索条件が無効です。",
-    "browse.loading": "この件数のデータを読み込み中…",
+    "browse.loading": "読み込み中",
     "browse.sales_pending": "現在の販売価格と購入条件を確認中…",
     "browse.refresh": "一覧を再読み込み",
     "browse.service_price": "サービス料金",

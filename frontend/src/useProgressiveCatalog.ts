@@ -1,3 +1,4 @@
+import {preloadCategoryIcons,preloadCategoryIconUrls} from './categoryIconPriority';
 import {useEffect,useRef,useState} from 'react';
 import {storefrontApi,type BrowsePage,type ProductBrowseCard,type BrowseQuery} from './api';
 import {useReadRecovery} from './hooks/useReadRecovery';
@@ -53,6 +54,7 @@ export function useProgressiveCatalog(identity:string,query:BrowseQuery,enabled:
    }
    if(total!==result.matchedTotal)throw Error('browse.invalid');
    if(input.current.acceptDataset&&!input.current.acceptDataset(result.datasetRevision))throw Error('browse.changed');
+   preloadCategoryIcons(result.categories);
    const first=result.shelves[0];
    if(first)flights.current.add(first.category);
    publish({...current.current,page:result,busy:false,error:'',shelves:first?{[first.category]:{items:[],busy:true,loaded:false,error:''}}:{}});
@@ -69,7 +71,11 @@ export function useProgressiveCatalog(identity:string,query:BrowseQuery,enabled:
  }
  useEffect(()=>{
   generation.current++;wanted.current=new Set();flights.current=new Set();navFlight.current=false;
-  publish(empty(identity));if(enabled)void navigation();
+  publish(empty(identity));if(enabled){
+   const token=generation.current;
+   void (async()=>{try{const urls=await storefrontApi.categoryIcons();if(active(token)&&Array.isArray(urls)&&urls.every(url=>typeof url==='string'))preloadCategoryIconUrls(urls);}catch{/* Optional art hints never block product data or create a page error. */}})();
+   void navigation();
+  }
   return()=>{generation.current++;};
  },[identity,enabled]);
  useEffect(()=>{if(!paused)pump();},[paused]);

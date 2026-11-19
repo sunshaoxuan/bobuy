@@ -1606,6 +1606,7 @@ export const productMarkerApi = {
 export const storefrontApi = {
     profile: () => storeGet<SelfProfile>('/api/auth/profile'),
     saveProfile: (payload: SelfProfilePatch) => patchJson<SelfProfile, SelfProfilePatch>('/api/auth/profile', payload),
+    categoryIcons:()=>storeGet<string[]>('/api/storefront/category-icons'),
     productOverview:(query:BrowseQuery)=>storeGet<BrowsePage<ProductBrowseCard>>('/api/storefront/product-browse/overview?'+browseQuery(query)),
     productShelf:(query:BrowseQuery)=>storeGet<BrowsePage<ProductBrowseCard>>('/api/storefront/product-browse/shelf?'+browseQuery(query)),
     productBrowse:(query:BrowseQuery)=>storeGet<BrowsePage<ProductBrowseCard>>('/api/storefront/product-browse?'+browseQuery(query)),

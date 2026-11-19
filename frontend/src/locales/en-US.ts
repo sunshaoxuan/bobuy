@@ -188,7 +188,7 @@ const messages: Dictionary = {
     "browse.result_count": "{shown} of {total} entries",
     "browse.changed": "The catalog changed. Refresh to load a consistent version.",
     "browse.invalid": "Invalid browse response or query.",
-    "browse.loading": "Loading this batch…",
+    "browse.loading": "Loading",
     "browse.sales_pending": "Checking current sale price and buying eligibility…",
     "browse.refresh": "Refresh catalog",
     "browse.service_price": "Service fee",
