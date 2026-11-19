@@ -316,3 +316,9 @@ describe('StockMaster Component', () => {
   });
 
 });
+
+it('shows the resolved primary category path instead of the legacy category label',async()=>{
+ setMatchMedia(false);localStorage.setItem('bobbuy_locale','en-US');
+ vi.spyOn(api,'products').mockResolvedValueOnce([{product:{id:'category-primary',name:{'en-US':'Synthetic juice'},categoryId:'cat-1000',basePrice:0,itemNumber:'PATH'},displayName:'Synthetic juice',displayDescription:'',categoryPath:'Drinks › Juice'}] as Awaited<ReturnType<typeof api.products>>);
+ render(<I18nProvider><StockMaster embedded/></I18nProvider>);expect(await screen.findByText('Drinks › Juice')).toBeInTheDocument();
+});

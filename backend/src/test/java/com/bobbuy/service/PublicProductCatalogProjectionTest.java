@@ -59,5 +59,18 @@ class PublicProductCatalogProjectionTest {
   when(items.findByPostIdInOrderById(List.of(7L))).thenReturn(List.of(original));p.setMerchantId(2002L);assertThat(catalog.page(0,null).items()).isEmpty();
   p.setMerchantId(1001L);p.setDeletedAt(java.time.Instant.parse("2026-11-12T00:00:00Z"));assertThat(catalog.page(0,null).items()).isEmpty();
  }
+ @Test void currentPublicMasterUsesNewPathWhileReferenceHistoryRetainsItsPublishedCategories(){
+  setup(true);p.setVisibilityStatus(ProductVisibility.PUBLIC);
+  var paths=mock(ProductCategoryPathResolver.class);var nodes=mock(CategoryTreeNodeRepository.class);
+  var leaf=new CategoryTreeNode("synthetic-leaf",null,Map.of("ja-JP","新分類"),List.of("synthetic-leaf"),0,null);
+  when(paths.resolveAll(any())).thenReturn(Map.of(p.getId(),new ProductCategoryPathResolver.ResolvedCategory(ProductCategoryPathResolver.Source.PRIMARY_PATH,leaf.getId())));
+  when(nodes.findAllById(any())).thenReturn(List.of(leaf));
+  var current=new PublicProductCatalogService(products,posts,items,taxonomy,quotes,categories,null,paths,nodes);
+  assertThat(current.page(0,null).items().get(0).categories()).containsExactly(new RecommendationItem.Label(leaf.getId(),leaf.getName()));
+  verify(paths).resolveAll(List.of(p));verify(nodes).findAllById(List.of(leaf.getId()));
+  p.setVisibilityStatus(ProductVisibility.DRAFTER_ONLY);
+  assertThat(current.page(0,null).items().get(0).categories()).isEmpty();
+  assertThat(p.getCatalogData().categoryIds()).isEmpty();
+ }
 }
 

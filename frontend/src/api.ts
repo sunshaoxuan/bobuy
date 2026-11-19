@@ -177,6 +177,7 @@ export type CostcoOnboardingJobView = {
 };
 
 export type MobileProductResponse = {
+        categoryPath?:string;
         currentRegular?:ProductSale|null;
         product: {
               recordVersion?: number;
@@ -1119,7 +1120,10 @@ export type PricingInput={channel:string;currency:string;amount:number;startsAt:
 export type PriceDocumentInput={channel:string;currency:string;type:PriceAdjustment['type'];startsAt:string|null;endsAt:string|null;reason:string;version:number;lines:{productId:string;amount:number;beforeAmount?:number|null;unit:string}[]};
 export type PriceDocumentEntry={value:PriceAdjustment;state:string};
 export type PriceDocumentProduct={id:string;itemNumber?:string|null;name:Record<string,string>;currency:string;unit?:string|null};
+export type CancellationPreview={version:number;token:string;impacts:{productId:string;regularAfter:number|null;amountAfter:number|null;currency:string;unit:string}[]};
 export const priceDocumentApi={
+ previewCancellation:(id:number)=>storeGet<CancellationPreview>('/api/merchant/price-adjustments/'+id+'/cancellation-preview'),
+ cancelReviewed:(id:number,preview:CancellationPreview,reason:string)=>postJson<PriceDocumentEntry,object>('/api/merchant/price-adjustments/'+id+'/cancel-reviewed',{version:preview.version,token:preview.token,confirmed:true,reason}),
  list:()=>storeGet<PriceDocumentEntry[]>('/api/merchant/price-adjustments'),
  products:()=>storeGet<PriceDocumentProduct[]>('/api/merchant/price-adjustments/products'),
  save:(value:PriceDocumentInput,id?:number)=>id?putJson<PriceDocumentEntry,object>('/api/merchant/price-adjustments/'+id,value):postJson<PriceDocumentEntry,object>('/api/merchant/price-adjustments',value),
@@ -1127,6 +1131,7 @@ export const priceDocumentApi={
 };
 export type PricingSheet={productId:string;regular:ProductSale|null;visibility:string;orderMethod:string;now:string;timezone:string;effective:{amount:number;currency:string;unit:string;regularAmount:number;adjustmentId?:number}|null;history:{value:PriceAdjustment;state:string}[]};
 export const productPricingApi={
+ correctUnit:(id:string,value:{revision:number;amount:number;currency:string;unit:string;documents:Record<number,number>;reason:string})=>postJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/unit-correction',{...value,confirmed:true}),
  get:(id:string)=>storeGet<PricingSheet>('/api/merchant/product-pricing/'+encodeURIComponent(id)),
  draft:(id:string,value:PricingInput,adjustmentId?:number)=>adjustmentId?putJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/adjustments/'+adjustmentId,value):postJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/adjustments',value),
  approve:(id:string,adjustment:PriceAdjustment)=>postJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/adjustments/'+adjustment.id+'/approve',{version:adjustment.version,confirmed:true}),
@@ -1353,6 +1358,7 @@ export const api = {
             ...suggestion,
             mediaGallery: suggestion.mediaGallery?.map(media => ({...media, type: media.type?.toUpperCase()}))
         }),
+    product: (id:string) => storeGet<MobileProductResponse>('/api/mobile/products/'+encodeURIComponent(id)),
     products: () => fetchJson<MobileProductResponse[]>('/api/mobile/products', fallback.products),
     patchProduct: (id: string, patch: ProductPatch) =>
         patchJson<MobileProductResponse, ProductPatch>(`/api/mobile/products/${id}`, patch),

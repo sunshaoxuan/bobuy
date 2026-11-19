@@ -87,4 +87,62 @@ public class ProductPricingService {
  @Transactional public Sheet approve(String productId,Long id,Action action){owned(productId,false);if(ownedDocument(id,action.version()).line(productId)==null)throw invalid("pricing.invalid");act(id,action,true);return sheet(owned(productId,false));}
  @Transactional public Sheet cancel(String productId,Long id,Action action){owned(productId,false);if(ownedDocument(id,action.version()).line(productId)==null)throw invalid("pricing.invalid");act(id,action,false);return sheet(owned(productId,false));}
  @Transactional public Sheet regular(String id,Regular input){lockOwner();var p=owned(id,true);if(!input.confirmed())throw invalid("pricing.confirm_required");sales.reviewProduct(p,owner(),new ProductSaleService.Review(null,input.amount(),input.currency(),input.unit(),input.validFrom(),input.validThrough(),input.revision(),input.replaceExisting(),input.enabled(),input.reason()));return sheet(p);}
+ public record UnitCorrection(@Min(0) long revision,@NotNull BigDecimal amount,@NotBlank String currency,@NotBlank @Size(max=80) String unit,@NotNull Map<Long,Long> documents,boolean confirmed,@NotBlank @Size(max=1000) String reason){}
+ private List<ProductPriceAdjustment> unitDocuments(Product p,Instant now){return adjustments.findByProductIdOrderByCreatedAtDescIdDesc(p.getId()).stream().filter(d->owner().equals(d.merchantId)&&d.channel.equals("STOREFRONT")&&d.status==ProductPriceAdjustment.Status.APPROVED&&(d.endsAt==null||now.isBefore(d.endsAt))).sorted(Comparator.comparing(d->d.id)).toList();}
+ @Transactional public Sheet correctUnit(String id,UnitCorrection input){
+  lockOwner();var p=owned(id,true);var prior=p.getSale();var now=time.now();
+  if(!input.confirmed())throw invalid("pricing.confirm_required");
+  if(prior==null||prior.revision()!=input.revision())throw invalid("sale.conflict");
+  if(!prior.currency().equals(input.currency())||sales.currentRegular(p).amount().compareTo(input.amount())!=0||prior.unit().equals(input.unit().trim()))throw invalid("pricing.unit_only");
+  var rows=unitDocuments(p,now);var versions=new TreeMap<Long,Long>();rows.forEach(d->versions.put(d.id,d.version));
+  if(!versions.equals(input.documents()))throw invalid("pricing.conflict");
+  // This narrow correction must never silently change other products or currencies.
+  if(rows.stream().anyMatch(d->d.lines.size()!=1||!d.currency.equals(prior.currency())||!d.line(id).unit.equals(prior.unit())))throw invalid("pricing.unit_scope");
+  for(var original:rows){
+   var replacement=new ProductPriceAdjustment();replacement.merchantId=owner();replacement.channel=original.channel;replacement.currency=original.currency;replacement.type=original.type;replacement.startsAt=original.startsAt;replacement.endsAt=original.endsAt;replacement.status=ProductPriceAdjustment.Status.APPROVED;replacement.documentNumber="PC-"+UUID.randomUUID();replacement.sourceNote=input.reason().trim();replacement.createdBy=owner();replacement.updatedBy=owner();replacement.approvedBy=owner();replacement.createdAt=now;replacement.updatedAt=now;replacement.approvedAt=now;
+   replacement.evidence.putAll(original.evidence);replacement.evidence.remove("supersededBy");replacement.evidence.put("unitCorrectionOf",original.id);replacement.evidence.put("originalUnit",prior.unit());
+   var line=new ProductPriceAdjustmentLine();line.document=replacement;line.productId=id;line.amount=original.line(id).amount;line.beforeAmount=original.line(id).beforeAmount;line.unit=input.unit().trim();line.referenceItemId=original.line(id).referenceItemId;replacement.lines.add(line);adjustments.saveAndFlush(replacement);
+   original.status=ProductPriceAdjustment.Status.CANCELLED;original.cancelledBy=owner();original.cancelledAt=now;original.cancellationReason=input.reason().trim();original.updatedBy=owner();original.updatedAt=now;original.evidence.put("supersededBy",replacement.id);adjustments.saveAndFlush(original);
+  }
+  // With no documents, retain an explicit audit record instead of silently changing the sale JSON.
+  if(rows.isEmpty()){
+   var d=new ProductPriceAdjustment();d.merchantId=owner();d.currency=prior.currency();d.type=ProductPriceAdjustment.Type.PERMANENT;d.startsAt=now;d.status=ProductPriceAdjustment.Status.APPROVED;d.documentNumber="PC-"+UUID.randomUUID();d.sourceNote=input.reason().trim();d.createdBy=owner();d.updatedBy=owner();d.approvedBy=owner();d.createdAt=now;d.updatedAt=now;d.approvedAt=now;d.evidence.put("originalUnit",prior.unit());
+   var l=new ProductPriceAdjustmentLine();l.document=d;l.productId=id;l.amount=prior.amount();l.beforeAmount=prior.amount();l.unit=input.unit().trim();d.lines.add(l);adjustments.saveAndFlush(d);
+  }
+  p.setSale(new ProductSale(prior.amount(),prior.currency(),input.unit().trim(),prior.validFrom(),prior.validThrough(),prior.revision()+1,owner(),now,prior.enabled()));products.saveAndFlush(p);return sheet(p);
+ }
+ public record CancellationImpact(String productId,BigDecimal regularAfter,BigDecimal amountAfter,String currency,String unit){}
+ public record CancellationPreview(long version,String token,List<CancellationImpact> impacts){}
+ public record ReviewedCancellation(@Min(0) long version,@NotBlank String token,boolean confirmed,@NotBlank @Size(max=1000) String reason){}
+ private BigDecimal cancellationBase(Product p,ProductPriceAdjustment d,List<ProductPriceAdjustment> remaining,Instant now){
+  var sale=p.getSale();if(sale==null||!d.channel.equals("STOREFRONT")||!d.currency.equals(sale.currency())||!Objects.equals(d.line(p.getId()).unit,sale.unit()))return null;
+  if(d.type!=ProductPriceAdjustment.Type.PERMANENT||!PriceAdjustmentResolver.approvedAt(d,now))return sale.amount();
+  var previous=remaining.stream().filter(a->a.type==ProductPriceAdjustment.Type.PERMANENT&&a.channel.equals(d.channel)&&a.currency.equals(d.currency)&&Objects.equals(a.line(p.getId()).unit,sale.unit())&&PriceAdjustmentResolver.approvedAt(a,now)).max(Comparator.comparing((ProductPriceAdjustment a)->a.startsAt).thenComparing(a->a.id)).orElse(null);
+  if(previous!=null)return previous.line(p.getId()).amount;
+  // Regular confirmation also writes ProductSale; its value is not independent rollback evidence.
+  if(sale.amount().compareTo(d.line(p.getId()).amount)==0)throw invalid("pricing.cancel_no_prior");
+  return sale.amount();
+ }
+ private CancellationPreview cancellationPreview(ProductPriceAdjustment d,boolean lock){
+  var now=time.now();if(d.status==ProductPriceAdjustment.Status.CANCELLED||d.endsAt!=null&&!now.isBefore(d.endsAt))throw invalid("pricing.immutable");
+  var impacts=new ArrayList<CancellationImpact>();var fingerprint=new StringBuilder(d.id+":"+d.version);
+  for(var line:d.lines.stream().sorted(Comparator.comparing(l->l.productId,Comparator.nullsFirst(Comparator.naturalOrder()))).toList()){
+   if(line.productId==null)continue;var p=owned(line.productId,lock);var rows=adjustments.findByProductIdOrderByCreatedAtDescIdDesc(p.getId());var remaining=rows.stream().filter(a->!a.id.equals(d.id)).toList();var base=cancellationBase(p,d,remaining,now);
+   var resolved=PriceAdjustmentResolver.resolve(remaining,p.getId(),owner(),d.channel,d.currency,line.unit,base,now);
+   impacts.add(new CancellationImpact(p.getId(),resolved.regular(),resolved.amount(),d.currency,line.unit));
+   fingerprint.append('|').append(p.getId()).append(':').append(p.getRecordVersion()).append(':').append(state(d,now));
+   for(var row:rows)fingerprint.append('|').append(row.id).append(':').append(row.version).append(':').append(state(row,now));
+  }
+  fingerprint.append(impacts);
+  try{return new CancellationPreview(d.version,HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(fingerprint.toString().getBytes(java.nio.charset.StandardCharsets.UTF_8))),List.copyOf(impacts));}catch(java.security.NoSuchAlgorithmException e){throw new IllegalStateException(e);}
+ }
+ @Transactional(readOnly=true) public CancellationPreview previewCancellation(Long id){return cancellationPreview(adjustments.findById(id).filter(d->owner().equals(d.merchantId)).orElseThrow(()->invalid("pricing.invalid")),false);}
+ @Transactional public Entry cancelReviewed(Long id,ReviewedCancellation input){
+  lockOwner();var d=ownedDocument(id,input.version());if(!input.confirmed())throw invalid("pricing.confirm_required");var preview=cancellationPreview(d,true);if(!preview.token().equals(input.token()))throw invalid("pricing.conflict");var now=time.now();
+  if(d.status==ProductPriceAdjustment.Status.APPROVED&&d.type==ProductPriceAdjustment.Type.PERMANENT&&PriceAdjustmentResolver.approvedAt(d,now)&&d.channel.equals("STOREFRONT"))for(var impact:preview.impacts()){
+   var p=owned(impact.productId(),true);var sale=p.getSale();if(sale!=null&&sale.currency().equals(impact.currency())&&sale.unit().equals(impact.unit())&&impact.regularAfter()!=null){p.setSale(new ProductSale(impact.regularAfter(),sale.currency(),sale.unit(),sale.validFrom(),sale.validThrough(),sale.revision()+1,owner(),now,sale.enabled()));products.saveAndFlush(p);}
+  }
+  d.status=ProductPriceAdjustment.Status.CANCELLED;d.cancelledBy=owner();d.cancelledAt=now;d.cancellationReason=input.reason().trim();d.updatedBy=owner();d.updatedAt=now;d.evidence.put("cancellationPreview",input.token());adjustments.saveAndFlush(d);return new Entry(d,state(d,now));
+ }
+
 }

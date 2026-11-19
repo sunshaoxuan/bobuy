@@ -96,6 +96,7 @@ public class AiProductOnboardingService {
     private final ProductRepository productRepository;
     private final com.bobbuy.repository.SupplierRepository supplierRepository;
     private final ObjectMapper objectMapper;
+    private final RetiredCategoryService retired;
 
     public AiProductOnboardingService(LlmGateway llmGateway,
                                       AiSearchService aiSearchService,
@@ -103,7 +104,10 @@ public class AiProductOnboardingService {
                                       CategoryRepository categoryRepository,
                                       ProductRepository productRepository,
                                       com.bobbuy.repository.SupplierRepository supplierRepository,
-                                      ObjectMapper objectMapper) {
+                                      ObjectMapper objectMapper) {this(llmGateway,aiSearchService,webSearchService,categoryRepository,productRepository,supplierRepository,objectMapper,null);}
+    @org.springframework.beans.factory.annotation.Autowired
+    public AiProductOnboardingService(LlmGateway llmGateway,AiSearchService aiSearchService,WebSearchService webSearchService,CategoryRepository categoryRepository,ProductRepository productRepository,com.bobbuy.repository.SupplierRepository supplierRepository,ObjectMapper objectMapper,RetiredCategoryService retired) {
+        this.retired=retired;
         this.llmGateway = llmGateway;
         this.aiSearchService = aiSearchService;
         this.webSearchService = webSearchService;
@@ -1212,6 +1216,7 @@ public class AiProductOnboardingService {
 
     private String normalizeCategoryId(String rawCategory, String name, String description, String rawOcrText) {
         String normalized = firstNonBlank(rawCategory, "").trim();
+        if(retired!=null&&retired.retiredHint(normalized,com.bobbuy.security.MerchantScope.current()))return "";
         if (normalized.isBlank()) {
             String semanticText = joinNonBlank(name, description, rawOcrText).toLowerCase(Locale.ROOT);
             if (isFoodCategory(semanticText)

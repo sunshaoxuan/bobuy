@@ -83,6 +83,7 @@ import java.util.stream.Collectors;
 @Service
 public class ProcurementHudService {
   @org.springframework.beans.factory.annotation.Autowired private OrderWriteCoordinator orderWriters;
+  @org.springframework.beans.factory.annotation.Autowired private ProductCategoryPathResolver categoryPaths;
   private static final String UNCATEGORIZED = "UNCATEGORIZED";
   private static final String OCR_STATUS_NOT_UPLOADED = "NOT_UPLOADED";
   private static final String OCR_STATUS_PENDING = "PENDING";
@@ -163,6 +164,10 @@ public class ProcurementHudService {
 
     Map<String, Integer> categoryExpected = new LinkedHashMap<>();
     Map<String, Integer> categoryPurchased = new LinkedHashMap<>();
+    var productIds=orders.stream().flatMap(o->safeLines(o).stream()).map(OrderLine::getSkuId).filter(Objects::nonNull).distinct().toList();
+    var currentProducts=productRepository.findAllById(productIds);
+    var productMap=currentProducts.stream().collect(Collectors.toMap(Product::getId,p->p));
+    var paths=categoryPaths.resolveAll(currentProducts);
 
     for (OrderHeader order : orders) {
       for (OrderLine line : safeLines(order)) {
@@ -172,14 +177,13 @@ public class ProcurementHudService {
         expectedRevenueBase += required * line.getUnitPrice();
         actualCostBase += purchased * line.getUnitPrice();
 
-        Optional<Product> product = resolveProduct(line.getSkuId());
+        Optional<Product> product = Optional.ofNullable(productMap.get(line.getSkuId()));
         totalWeight += purchased * sanitizePhysicalMetric(product.map(Product::getWeight).orElse(null));
         totalVolume += purchased * sanitizePhysicalMetric(product.map(Product::getVolume).orElse(null));
 
-        String categoryId = product
-            .map(Product::getCategoryId)
-            .filter(value -> value != null && !value.isBlank())
-            .orElse(UNCATEGORIZED);
+        var path=paths.get(line.getSkuId());
+        String categoryId=path==null||ProductCategoryPathResolver.UNCATEGORIZED_NODE_ID.equals(path.categoryId())
+            ?UNCATEGORIZED:path.categoryId();
         categoryExpected.merge(categoryId, required, Integer::sum);
         categoryPurchased.merge(categoryId, purchased, Integer::sum);
       }

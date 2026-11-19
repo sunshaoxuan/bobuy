@@ -11,7 +11,10 @@ import org.springframework.stereotype.Service;
 public class RecommendationCatalogService {
     private static final String PROFILE_ID_PREFIX="bobuy-rec-v1-";
     private final ProductRepository products;
-    public RecommendationCatalogService(ProductRepository products){this.products=products;}
+    private final RetiredCategoryService retired;
+    public RecommendationCatalogService(ProductRepository products){this(products,null);}
+    @org.springframework.beans.factory.annotation.Autowired
+    public RecommendationCatalogService(ProductRepository products,RetiredCategoryService retired){this.products=products;this.retired=retired;}
     public static boolean profile(Product product){return (product.getId()!=null&&product.getId().startsWith(PROFILE_ID_PREFIX))||(product.getAttributes()!=null&&"true".equals(product.getAttributes().get("recommendationProfile")));}
     public void requireOwnership(String id,Long owner){if(!products.existsByIdAndMerchantId(id,owner))throw new ApiException(ErrorCode.RESOURCE_NOT_FOUND,"error.product.not_found");}
     public void syncText(RecommendationItem item,Long owner){
@@ -50,8 +53,9 @@ public class RecommendationCatalogService {
         product.setAttributes(new HashMap<>(Map.of("recommendationProfile","true","recommendationSourceIssue",item.postId.toString(),"pricingStatus","REQUIRES_REVIEW")));
         if(context!=null&&context.supplierKey()!=null)product.getAttributes().put("referenceSupplierKey",context.supplierKey());
         product.setMediaGallery(item.gallery.stream().map(ProductCatalogService::media).collect(java.util.stream.Collectors.toCollection(ArrayList::new)));
-        product.setCategoryId(item.categoryIds.isEmpty()?null:item.categoryIds.get(0));
-        product.setCatalogData(new ProductCatalogData(specifications,item.model,item.packaging,List.copyOf(item.categoryIds),item.supplierId,null,owner,java.time.Instant.now()));
+        var categoryIds=retired==null?item.categoryIds:retired.currentIds(item.categoryIds,owner);
+        product.setCategoryId(categoryIds.isEmpty()?null:categoryIds.get(0));
+        product.setCatalogData(new ProductCatalogData(specifications,item.model,item.packaging,List.copyOf(categoryIds),item.supplierId,null,owner,java.time.Instant.now()));
         if(reviewed){var d=product.getCatalogData();product.setCatalogData(new ProductCatalogData(d.specification(),d.model(),d.packaging(),d.categoryIds(),d.supplierId(),ProductCatalogService.sourceHash(product),d.reviewedBy(),d.reviewedAt()));}
         products.saveAndFlush(product);item.productId=id;return true;
     }
