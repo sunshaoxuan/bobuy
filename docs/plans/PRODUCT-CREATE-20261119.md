@@ -31,3 +31,6 @@
 - 首轮StockMaster：17 PASS、3失败。分类TreeSelect触发jsdom24已知:has解析限制，沿用仓库CategoryTreeSelectMock；mock restore清空vi.fn默认实现改为稳定Promise；两新用例英文控件/提示查询按真实文案纠正。仅重跑这3项。真实浏览器仍使用原TreeSelect。
 - 后端既有MobileProductController 2 PASS；新建4项首轮失败因H2不跑Flyway缺system-uncategorized锁行，且默认测试header-auth会注入CUSTOMER使匿名返回403。补与V40一致的系统行、此测试关闭header-auth，重跑仅新建4项。前端新增行修正后PASS；2个新测试遇到桌面按钮/悬浮按钮同名，改用现有唯一data-testid定位，继续只跑2项。
 - 新建后端3 PASS，剩余并发断言使用MockMvc默认Latin-1解码产生乱码，改UTF-8后只重跑该方法。前端2个新用例业务断言PASS但必填校验暴露原handleDrawerSave未接收validateFields拒绝；修复该入口的拒绝处理，重跑2项必填/失败测试。真实表单初图检查后沿用后台按钮token，关闭热区补44px。
+- checkpoint49d2564原生前端门禁Type-check失败；日志下载端点拒绝访问。仅为定位该已失败检查运行本地typecheck，不重跑lint/build/其他通过项。
+- Type-check定位为Drawer重复rootClassName及mock缺displayDescription；合并原stock-drawer class并补mock字段，保留既有表单样式。媒体保存后编辑直接依赖：手动HTTPS媒体记录USER_PROVIDED_URL来源（无query/fragment），主档只允许原件完全未变的手动视频随其他字段保存，禁止借此新增/换URL视频；新增1项媒体衔接正反例。只重跑该用例和既有catalog集成6项。
+- 媒体新增测试编译遇到HTTP MediaType与商品MediaType同名，改为全限定枚举；业务测试尚未启动，只继续该7项定向集合。浏览器首轮创建/刷新/主档编辑已成功，最终无AI断言误计原组件GET状态/任务列表，修正为禁止AI写/翻译，保留原轮询配置；以--resume复用原件，不重复业务创建。

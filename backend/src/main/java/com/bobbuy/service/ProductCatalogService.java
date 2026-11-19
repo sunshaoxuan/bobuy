@@ -111,7 +111,10 @@ public class ProductCatalogService {
   if((value.itemNumber()!=null&&value.itemNumber().length()>100)||(value.brand()!=null&&value.brand().length()>200)||(value.model()!=null&&value.model().length()>300)||(value.packaging()!=null&&value.packaging().length()>1000))throw invalid("master.invalid");
   taxonomy.validate(value.categoryIds(),value.supplierId(),false);var urls=new HashSet<String>();
   for(var picture:value.gallery()){
-   if(picture==null||picture.getType()!=MediaType.IMAGE||!urls.add(picture.getUrl()))throw invalid("gallery.invalid");
+   // Preserve an unchanged video already supplied by this owner during manual creation.
+   // This is not an upload/admission path for a new video or a changed URL.
+   boolean retainedManualVideo=picture!=null&&picture.getType()==MediaType.VIDEO&&"USER_PROVIDED_URL".equals(picture.getSourceType())&&product.getMediaGallery().contains(picture);
+   if(picture==null||picture.getType()!=MediaType.IMAGE&&!retainedManualVideo||!urls.add(picture.getUrl()))throw invalid("gallery.invalid");
    boolean userProvided="USER_PROVIDED".equals(picture.getSourceType())&&picture.getSha256()!=null&&Objects.equals(picture.getSourceUrl(),"urn:bobuy:user-upload:"+picture.getSha256());
    if(!userProvided)try{var uri=java.net.URI.create(picture.getSourceUrl());if(!"https".equals(uri.getScheme())||uri.getHost()==null||uri.getUserInfo()!=null||uri.getRawQuery()!=null||uri.getRawFragment()!=null||picture.getSourceUrl().length()>2048)throw new IllegalArgumentException();}catch(Exception e){throw invalid("master.image_source");}
    boolean existing=product.getMediaGallery().stream().anyMatch(p->Objects.equals(p.getUrl(),picture.getUrl()));

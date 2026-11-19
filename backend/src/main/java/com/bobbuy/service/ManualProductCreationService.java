@@ -68,7 +68,7 @@ public class ManualProductCreationService {
         if(gallery.size()>100)throw invalid("gallery.invalid");
         for(var media:gallery){
             if(media==null||media.getType()==null||media.getUrl()==null||media.getUrl().length()>2048)throw invalid("gallery.invalid");
-            try{var uri=java.net.URI.create(media.getUrl());if(!"https".equals(uri.getScheme())||uri.getHost()==null||uri.getUserInfo()!=null)throw new IllegalArgumentException();}catch(Exception e){throw invalid("gallery.invalid");}
+            try{var uri=java.net.URI.create(media.getUrl());if(!"https".equals(uri.getScheme())||uri.getHost()==null||uri.getUserInfo()!=null||uri.getRawQuery()!=null||uri.getRawFragment()!=null)throw new IllegalArgumentException();media.setSourceUrl(media.getUrl());media.setSourceDomain(uri.getHost());media.setSourceType("USER_PROVIDED_URL");}catch(Exception e){throw invalid("gallery.invalid");}
             media.setTitle(localized(media.getTitle(),400));
         }
         product.setMediaGallery(gallery);

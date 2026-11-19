@@ -43,6 +43,18 @@ class ManualProductCreationTest {
   mvc.perform(get("/api/mobile/products/"+id).header("Authorization","Bearer "+other)).andExpect(status().isNotFound());
   mvc.perform(patch("/api/mobile/products/"+id).header("Authorization","Bearer "+auth).contentType(MediaType.APPLICATION_JSON).content("{\"storageCondition\":\"CHILLED\"}")).andExpect(status().isOk());assertThat(products.findById(id).orElseThrow().getStorageCondition()).isEqualTo(StorageCondition.CHILLED);
  }
+ @Test void enteredMediaSurvivesLaterCatalogEditWithoutAdmittingNewVideo() throws Exception{
+  var x=input();var gallery=x.putArray("mediaGallery");
+  gallery.addObject().put("url","https://example.invalid/synthetic.png").put("type","IMAGE").put("visible",false).putObject("title").put("ja-JP","合成画像");
+  gallery.addObject().put("url","https://example.invalid/synthetic.mp4").put("type","VIDEO").putObject("title").put("ja-JP","合成動画");
+  String id=create(x,auth).at("/product/id").asText();
+  var profile=json.readTree(mvc.perform(get("/api/merchant/product-catalog/"+id).header("Authorization","Bearer "+auth)).andExpect(status().isOk()).andReturn().getResponse().getContentAsByteArray()).path("data").path("value");
+  ((ObjectNode)profile).put("brand","Edited brand");var batch=json.createObjectNode().put("reviewed",true);batch.putArray("rows").add(profile);
+  mvc.perform(put("/api/merchant/product-catalog").header("Authorization","Bearer "+auth).contentType(MediaType.APPLICATION_JSON).content(batch.toString())).andExpect(status().isOk());
+  var saved=products.findById(id).orElseThrow();assertThat(saved.getBrand()).isEqualTo("Edited brand");assertThat(saved.getMediaGallery()).hasSize(2);assertThat(saved.getMediaGallery().get(0).isVisible()).isFalse();assertThat(saved.getMediaGallery().get(1).getType()).isEqualTo(com.bobbuy.model.MediaType.VIDEO);
+  ((ObjectNode)profile).put("version",saved.getRecordVersion());((ObjectNode)profile.path("gallery").get(1)).put("url","https://example.invalid/different.mp4");
+  mvc.perform(put("/api/merchant/product-catalog").header("Authorization","Bearer "+auth).contentType(MediaType.APPLICATION_JSON).content(batch.toString())).andExpect(status().isBadRequest());
+ }
  @Test void minimalUnclassifiedDraftAndMandatoryNamePermissions() throws Exception{
   var x=input();x.remove(List.of("categoryNodeId","itemNumber","description","specification","attributes"));
   mvc.perform(post("/api/mobile/products").contentType(MediaType.APPLICATION_JSON).content(x.toString())).andExpect(status().isUnauthorized());

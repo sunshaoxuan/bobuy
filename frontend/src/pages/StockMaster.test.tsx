@@ -329,7 +329,7 @@ it('shows the resolved primary category path instead of the legacy category labe
 
 it.each([false,true])('manual creation saves translations without AI and keeps failed input for retry, mobile=%s',async mobile=>{
  setMatchMedia(mobile);localStorage.setItem('bobbuy_locale','en-US');
- const create=vi.mocked(api.createProduct);create.mockReset();create.mockResolvedValue({product:{id:'manual-saved',name:{'ja-JP':'手入力'},description:{}},displayName:'手入力',categoryPath:''} as Awaited<ReturnType<typeof api.createProduct>>);create.mockRejectedValueOnce(new Error('Synthetic save failure'));
+ const create=vi.mocked(api.createProduct);create.mockReset();create.mockResolvedValue({product:{id:'manual-saved',name:{'ja-JP':'手入力'},description:{}},displayName:'手入力',displayDescription:'',categoryPath:''} as Awaited<ReturnType<typeof api.createProduct>>);create.mockRejectedValueOnce(new Error('Synthetic save failure'));
  const ai=vi.mocked(api.onboardConfirm);ai.mockClear();const translate=vi.spyOn(api,'translate');
  renderWithI18n(<StockMaster/>);await screen.findByText('Organic Milk');
  fireEvent.click(screen.getByTestId('stock-master-add-row'));

@@ -855,8 +855,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
       )}
 
       <Drawer
-        rootClassName="stock-drawer"
-        rootClassName={editingItem?.isNew?"manual-product-create":undefined}
+        rootClassName={'stock-drawer'+(editingItem?.isNew?' manual-product-create':'')}
         title={
           <Space direction="vertical" size={0}>
             <span>{t(editingItem?.createRequestId&&editingItem.isNew?'stock.master.add_row':'stock.drawer.title')}</span>
