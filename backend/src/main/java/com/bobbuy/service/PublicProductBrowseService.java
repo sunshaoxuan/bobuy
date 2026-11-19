@@ -69,6 +69,20 @@ public class PublicProductBrowseService {
  public Browse browse(int page,Long merchant,String query,String category,String locale,boolean marked,String expected,String order){ return browse(page,merchant,query,category,locale,marked,expected,order,true); }
  @Transactional(readOnly=true,isolation=Isolation.REPEATABLE_READ)
  public Browse browse(int page,Long merchant,String query,String category,String locale,boolean marked,String expected,String order,boolean markedFirst){
+  return project(page,merchant,query,category,locale,marked,expected,order,markedFirst,null);
+ }
+ /** Navigation with its first bounded shelf, and subsequent bounded shelves use the exact same public projection and revision as browse.
+  * No cache or private-master fallback: publication changes invalidate subsequent shelf reads. */
+ @Transactional(readOnly=true,isolation=Isolation.REPEATABLE_READ)
+ public Browse overview(Long merchant,String locale,boolean markedFirst){
+  return project(0,merchant,"","",locale,false,null,"default",markedFirst,"");
+ }
+ @Transactional(readOnly=true,isolation=Isolation.REPEATABLE_READ)
+ public Browse shelf(Long merchant,String locale,boolean markedFirst,String category,String expected){
+  if(category==null||category.isBlank()||category.length()>255||expected==null)throw new IllegalArgumentException("Shelf requires category and revision");
+  return project(0,merchant,"","",locale,false,expected,"default",markedFirst,category);
+ }
+ private Browse project(int page,Long merchant,String query,String category,String locale,boolean marked,String expected,String order,boolean markedFirst,String shelfOnly){
   ProductBrowseOrder.validate(order);
   validate(page,merchant,query,category,locale,expected);String q=text(query).strip().toLowerCase(Locale.ROOT),cat=text(category);
   var now=java.time.Instant.now();var data=dataset(merchant);String dataset=marked?"marked":"all";
@@ -96,12 +110,16 @@ public class PublicProductBrowseService {
   if(markedFirst&&!marked)filtered=filtered.stream().sorted(Comparator.comparing((PublicProductCatalogService.Entry e)->data.markers().getOrDefault(e.productId(),List.of()).isEmpty())).toList();
   int start=(int)Math.min((long)page*24,filtered.size()),end=Math.min(start+24,filtered.size());
   java.util.function.Function<PublicProductCatalogService.Entry,Card> card=e->new Card(e.productId(),e.merchantId(),e.name(),e.brand(),e.itemNumber(),e.specification(),e.model(),e.packaging(),e.gallery().isEmpty()?null:e.gallery().get(0),shoppingData==null?e.categories():display.stream().filter(c->c.id().equals(assignments.get(e.productId()))).map(c->new RecommendationItem.Label(c.id(),c.name())).toList(),data.markers().getOrDefault(e.productId(),List.of()),e.reviewedMaster(),e.rating(),reference(e,now));
-  var cards=filtered.subList(start,end).stream().map(card).toList();
+  var cards=shelfOnly==null?filtered.subList(start,end).stream().map(card).toList():List.<Card>of();
   var shelves=new ArrayList<Shelf>();
   if(shoppingData!=null&&!selected.equals("__unclassified")&&!parents.containsKey(selected)
       &&(selected.isEmpty()||filtered.stream().noneMatch(e->selected.equals(assignments.get(e.productId()))))){
-   for(var facet:facets)if(Objects.equals(facet.parentId(),selected.isEmpty()?null:selected)){var shelfRows=filtered.stream().filter(e->{var leaf=assignments.get(e.productId());return facet.id().equals(leaf)||facet.id().equals(parents.get(leaf));}).toList();if(!shelfRows.isEmpty())shelves.add(new Shelf(facet.id(),shelfRows.stream().limit(8).map(card).toList(),shelfRows.size()));}
-   if(selected.isEmpty()&&unclassified>0){var rows=filtered.stream().filter(e->!assignments.containsKey(e.productId())).toList();shelves.add(new Shelf("__unclassified",rows.stream().limit(8).map(card).toList(),rows.size()));}
+   for(var facet:facets)if(Objects.equals(facet.parentId(),selected.isEmpty()?null:selected)){var shelfRows=filtered.stream().filter(e->{var leaf=assignments.get(e.productId());return facet.id().equals(leaf)||facet.id().equals(parents.get(leaf));}).toList();if(!shelfRows.isEmpty())shelves.add(new Shelf(facet.id(),shelfOnly==null||facet.id().equals(shelfOnly)||shelfOnly.isEmpty()&&shelves.isEmpty()?shelfRows.stream().limit(8).map(card).toList():List.of(),shelfRows.size()));}
+   if(selected.isEmpty()&&unclassified>0){var rows=filtered.stream().filter(e->!assignments.containsKey(e.productId())).toList();shelves.add(new Shelf("__unclassified",shelfOnly==null||"__unclassified".equals(shelfOnly)||shelfOnly.isEmpty()&&shelves.isEmpty()?rows.stream().limit(8).map(card).toList():List.of(),rows.size()));}
+  }
+  if(shelfOnly!=null&&!shelfOnly.isEmpty()){
+   shelves.removeIf(s->!s.category().equals(shelfOnly));
+   if(shelves.isEmpty())throw new IllegalArgumentException("Unknown overview shelf");
   }
   long markedScopeTotal=data.entries().stream().filter(e->!data.markers().getOrDefault(e.productId(),List.of()).isEmpty()).count();
   return new Browse(cards,page,24,scope.size(),filtered.size(),end<filtered.size(),version,facets,unclassified,q,cat,locale,dataset,datasetVersion,markedScopeTotal,List.copyOf(shelves),selected);

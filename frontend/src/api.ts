@@ -1606,6 +1606,8 @@ export const productMarkerApi = {
 export const storefrontApi = {
     profile: () => storeGet<SelfProfile>('/api/auth/profile'),
     saveProfile: (payload: SelfProfilePatch) => patchJson<SelfProfile, SelfProfilePatch>('/api/auth/profile', payload),
+    productOverview:(query:BrowseQuery)=>storeGet<BrowsePage<ProductBrowseCard>>('/api/storefront/product-browse/overview?'+browseQuery(query)),
+    productShelf:(query:BrowseQuery)=>storeGet<BrowsePage<ProductBrowseCard>>('/api/storefront/product-browse/shelf?'+browseQuery(query)),
     productBrowse:(query:BrowseQuery)=>storeGet<BrowsePage<ProductBrowseCard>>('/api/storefront/product-browse?'+browseQuery(query)),
     productDetail:(id:string,merchantId?:number)=>storeGet<{item:PublicCatalogEntry;markers:ProductMarkerDefinition[];revision:string}>('/api/storefront/product-browse/'+encodeURIComponent(id)+'?'+browseQuery({merchantId})),
     productSales:(ids:string[])=>{if(!ids.length||ids.length>24||new Set(ids).size!==ids.length)return Promise.reject(new Error('browse.invalid'));return storeGet<StoreProduct[]>('/api/storefront/product-sales?'+new URLSearchParams({productIds:ids.join(',')}));},

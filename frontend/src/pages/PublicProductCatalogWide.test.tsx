@@ -12,7 +12,7 @@ it('uses paired server offsets on wide screens and restarts sorted results at ze
  vi.spyOn(window,'matchMedia').mockImplementation(query=>({matches:query==='(min-width: 1920px)',media:query,onchange:null,addListener:()=>{},removeListener:()=>{},addEventListener:()=>{},removeEventListener:()=>{},dispatchEvent:()=>false}));
  localStorage.setItem('bobbuy_locale','en-US');mocks.productSales.mockResolvedValue([]);
  mocks.productBrowse.mockImplementation(async q=>browsePage(Array.from({length:24},(_,i)=>productCard(`${q.sort}-${q.page*24+i}`)),{page:q.page,scopeTotal:352,matchedTotal:352,hasNext:true}));
- render(<I18nProvider><MemoryRouter initialEntries={['/products']}><PublicProductCatalog products={[]} quantities={{}} onAdd={()=>{}} canBuy={()=>false}/></MemoryRouter></I18nProvider>);
+ render(<I18nProvider><MemoryRouter initialEntries={['/products?sort=price-asc']}><PublicProductCatalog products={[]} quantities={{}} onAdd={()=>{}} canBuy={()=>false}/></MemoryRouter></I18nProvider>);
  await waitFor(()=>expect(document.querySelectorAll('.catalog-master-card')).toHaveLength(48));
  fireEvent.click(screen.getByRole('button',{name:/Load more/}));
  await waitFor(()=>expect(document.querySelectorAll('.catalog-master-card')).toHaveLength(96));
