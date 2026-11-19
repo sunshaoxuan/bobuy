@@ -4,9 +4,29 @@ Connection lives in psql's normal environment/service config, not command output
 """
 import argparse, hashlib, json, os, re, subprocess, sys, uuid
 from pathlib import Path
+from decimal import Decimal
+
+def loads(text):
+    def invalid_constant(_):
+        raise ValueError('Non-finite JSON numbers are not supported')
+    return json.loads(text, parse_float=Decimal, parse_constant=invalid_constant)
 
 def canonical(value):
-    return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+    """Canonical keys with exact JSON numbers at every depth; never coerce through float."""
+    if value is None:return 'null'
+    if value is True:return 'true'
+    if value is False:return 'false'
+    if isinstance(value,str):return json.dumps(value,ensure_ascii=False)
+    if isinstance(value,int):return str(value)
+    if isinstance(value,Decimal):
+        if not value.is_finite():raise ValueError('Non-finite JSON numbers are not supported')
+        return str(value)
+    if isinstance(value,float):raise ValueError('Binary floating-point values are forbidden in capture/recovery JSON')
+    if isinstance(value,list):return '['+','.join(canonical(v) for v in value)+']'
+    if isinstance(value,dict):
+        if any(not isinstance(k,str) for k in value):raise ValueError('JSON object keys must be strings')
+        return '{'+','.join(canonical(k)+':'+canonical(value[k]) for k in sorted(value))+'}'
+    raise ValueError('Unsupported JSON value type')
 
 def digest(value):
     return hashlib.sha256(canonical(value).encode()).hexdigest()
@@ -60,7 +80,7 @@ def run_sql(command, sql):
         raise RuntimeError(refusal.group(0) if refusal else 'Database command failed; transaction not committed (exit %d)'%result.returncode)
     lines=[line for line in result.stdout.splitlines() if line.startswith('{')]
     if len(lines)!=1: raise RuntimeError('Expected exactly one database receipt')
-    return json.loads(lines[0])
+    return loads(lines[0])
 
 def validate_state(scope, state):
     if sorted(c['id'] for c in state['categories'])!=scope['categoryIds']:
@@ -78,18 +98,18 @@ def validate_state(scope, state):
 def capture(command,scope):
     state=run_sql(command,'BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY;\n'+state_query(scope)+';\nCOMMIT;')
     validate_state(scope,state)
-    plan={'format':1,'operationId':str(uuid.uuid4()),'scope':scope,'before':state}
+    plan={'format':2,'operationId':str(uuid.uuid4()),'scope':scope,'before':state}
     plan['sha256']=digest(plan)
     return plan
 
 def validate_plan(plan):
-    if plan.get('format')!=1 or plan.get('sha256')!=digest({k:v for k,v in plan.items() if k!='sha256'}): raise ValueError('Manifest checksum mismatch')
+    if plan.get('format')!=2 or plan.get('sha256')!=digest({k:v for k,v in plan.items() if k!='sha256'}): raise ValueError('Manifest checksum mismatch')
     if not re.fullmatch(r'[a-zA-Z0-9-]{1,64}',plan.get('operationId','')): raise ValueError('Invalid operation ID')
     scope=validate_scope(plan['scope']);validate_state(scope,plan['before'])
     return scope
 
 def changed_state(plan):
-    result=json.loads(canonical(plan['before']));ids=set(plan['scope']['categoryIds'])
+    result=loads(canonical(plan['before']));ids=set(plan['scope']['categoryIds'])
     result['categories']=[];result['mappings']=[]
     for p in result['products']:
         if p.get('category_id') in ids:p['category_id']=None
@@ -170,19 +190,19 @@ COMMIT;
 
 def private_write(path,value):
     fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
-    with os.fdopen(fd,'w') as f:f.write(json.dumps(value,ensure_ascii=False,indent=2)+'\n')
+    with os.fdopen(fd,'w') as f:f.write(canonical(value)+'\n')
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('action',choices=['capture','status','apply','restore']);p.add_argument('--psql-command-json',default='["psql","-X","-qAt","-v","ON_ERROR_STOP=1"]')
     p.add_argument('--scope');p.add_argument('--plan',required=True);p.add_argument('--confirm-sha256');p.add_argument('--compatible-revision');p.add_argument('--receipt')
-    args=p.parse_args();cmd=json.loads(args.psql_command_json)
+    args=p.parse_args();cmd=loads(args.psql_command_json)
     if not isinstance(cmd,list) or not cmd or any(not isinstance(s,str) for s in cmd):raise ValueError('psql command must be an argv JSON array')
     if args.action=='capture':
-        plan=capture(cmd,validate_scope(json.loads(Path(args.scope).read_text())));private_write(args.plan,plan)
+        plan=capture(cmd,validate_scope(loads(Path(args.scope).read_text())));private_write(args.plan,plan)
         result={'result':'CAPTURED','sha256':plan['sha256'],'categories':len(plan['before']['categories']),'activeProducts':sum(x.get('deleted_at') is None for x in plan['before']['products']),'deletedProducts':sum(x.get('deleted_at') is not None for x in plan['before']['products'])}
     else:
-        plan=json.loads(Path(args.plan).read_text());validate_plan(plan)
+        plan=loads(Path(args.plan).read_text());validate_plan(plan)
         if args.action=='status':
             ids=[p['id'] for p in plan['before']['products']]
             result=run_sql(cmd,"BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY; WITH observed AS ("+state_query(plan['scope'],ids)+"), operation AS (SELECT * FROM bb_category_retirement_operation WHERE id="+literal(plan['operationId'])+"#>>'{}') SELECT jsonb_build_object('operationId',"+literal(plan['operationId'])+",'status',coalesce((SELECT status FROM operation),'NOT_STARTED'),'manifestMatches',coalesce((SELECT manifest_sha256="+literal(plan['sha256'])+"#>>'{}' FROM operation),false),'matchesBefore',(SELECT jsonb_build_object FROM observed)="+literal(plan['before'])+",'matchesAfter',(SELECT jsonb_build_object FROM observed)="+literal(changed_state(plan))+"); COMMIT;")

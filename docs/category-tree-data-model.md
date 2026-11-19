@@ -94,6 +94,8 @@ apply在一个事务内短暂锁定分类/商品/旧映射/档案表的写入，
 
 只读status区分NOT_STARTED/APPLIED/RESTORED及是否匹配before/after。发生进程超时、网络中断或回执文件保存失败时先查status，不因客户端错误推断事务未提交。工具会隐藏数据库错误中的SQL、行内容和连接细节；只输出安全的拒绝原因。
 
+清单格式现为 `format: 2`：所有 PostgreSQL JSON 数字在任意嵌套深度按 Decimal 精确保留，生成 SQL、保存清单和恢复比较均不经过 binary float。`55ba625` 及以前产生的 `format: 1` 清单不再接受，须用当前工具重新 capture；禁止只改版本号或重新计算旧清单摘要。`--compatible-revision` 仅作 40 位 SHA 格式校验和审计记录，实际运行版本仍须由本机外层核实绑定，工具本身不验证部署。
+
 ### 比较恢复与止损
 
 ```sh
@@ -121,6 +123,6 @@ docker run -d --name bobuy-category-retirement-test --network none \
 CATEGORY_RETIREMENT_TEST_PG_VERSION=18.6 python3 scripts/test_category_retirement.py
 ```
 
-SQL演练已在PostgreSQL16通过，并按本机精确生产版本在18.6再执行一次通过：V1..V46真实schema、只读capture/状态、0600清单、范围/所有者/摘要负例、并发apply幂等、半途错误整体回滚、FK/JSON/tag_key重建保护、软删恢复正常、后续写入保护、档案篡改拒绝、恢复/重复恢复完整读回。应用定向45项通过，含历史标签、不可泄露跨商家标签、旧checkpoint恢复、导入防重生、AI不猜类目、采购总量/订单快照及公开/私人投影边界。前三项价格/UI证据按未变输入复用；第四项没有新增UI组件/样式，不额外启动无关浏览器回归。命令、hash和范围见[同批回执](reports/evidence/price-corrections-20261118/category-retirement.json)。
+SQL演练已在PostgreSQL16通过，并按本机精确生产版本在18.6再执行一次通过：V1..V46真实schema、只读capture/状态、0600清单、范围/所有者/摘要负例、并发apply幂等、半途错误整体回滚、FK/JSON/tag_key重建保护、软删恢复正常、后续写入保护、档案篡改拒绝、恢复/重复恢复完整读回。精度修复后在18.6用 `1795002605.495870245` 和数组内 `123.123456789012345678901` 再验清理/恢复精确读回，深层JSON/Unicode文件往返及旧格式拒绝共2项测试12.686s通过。应用定向45项通过，含历史标签、不可泄露跨商家标签、旧checkpoint恢复、导入防重生、AI不猜类目、采购总量/订单快照及公开/私人投影边界。前三项价格/UI证据按未变输入复用；第四项没有新增UI组件/样式，不额外启动无关浏览器回归。命令、hash和范围见[同批回执](reports/evidence/price-corrections-20261118/category-retirement.json)。
 
 本机生产删除前的必需证据是实际capture清单/摘要、兼容部署revision/digest、对应范围恢复条件及执行回执。云端交付不等于真实清理已发生；生产执行与验收由本机完成。

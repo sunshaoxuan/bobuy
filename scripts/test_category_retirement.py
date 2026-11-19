@@ -28,6 +28,8 @@ INSERT INTO bb_product(id,name,merchant_id,item_number,category_id,catalog_data,
 ('syn-deleted','{"ja-JP":"Synthetic deleted"}',777001,'S-D','syn-old-b','{"categoryIds":["syn-old-b"],"specification":{}}',8,'2026-11-01Z'),
 ('syn-unassigned','{"ja-JP":"Synthetic pending"}',777001,'S-U','syn-old-a','{"categoryIds":["syn-old-a"],"specification":{}}',9,null),
 ('syn-outside','{"ja-JP":"Outside"}',777002,'S-X','syn-foreign',null,2,null);
+UPDATE bb_product SET sale='{"amount":2998,"currency":"JPY","unit":"box","enabled":true,"revision":2,"reviewedBy":777001,"reviewedAt":1795002605.495870245}',
+ price_tiers='[{"tierName":"Synthetic precision","price":123.123456789012345678901,"currency":"JPY","agentOnly":false}]' WHERE id='syn-active';
 INSERT INTO bb_product_primary_category_path VALUES('syn-active','syn-leaf');
 INSERT INTO bb_recommendation_post(id,merchant_id,title,body,published,published_at,publisher_id,publisher_name) VALUES(777001,777001,'Synthetic','Synthetic',true,now(),777001,'Synthetic owner');
 INSERT INTO bb_recommendation_item(id,post_id,product_id,name,category_ids,image_hash,image_url,publication_state,published_at,published_by,publication_snapshot)
@@ -44,6 +46,10 @@ INSERT INTO bb_order_header(id,business_id,status,payment_status,delivery_status
         cli=subprocess.run(['python3',str(ROOT/'scripts/category_retirement.py'),'status','--plan',str(manifest),'--psql-command-json',json.dumps(CMD)],text=True,capture_output=True,check=True)
         self.assertEqual(json.loads(cli.stdout)['status'],'NOT_STARTED')
         self.assertTrue(json.loads(cli.stdout)['matchesBefore'])
+      active=next(p for p in plan['before']['products'] if p['id']=='syn-active')
+      self.assertEqual(active['sale']['reviewedAt'],Decimal('1795002605.495870245'))
+      self.assertEqual(active['price_tiers'][0]['price'],Decimal('123.123456789012345678901'))
+      self.assertEqual(r.loads(r.canonical(plan)),plan)
       self.assertEqual(len(plan['before']['products']),3)
       self.assertEqual(plan['before']['protected']['orders']['rows'],1)
       self.assertEqual(plan['before']['protected']['items']['rows'],1)
@@ -51,7 +57,7 @@ INSERT INTO bb_order_header(id,business_id,status,payment_status,delivery_status
       self.assertEqual(len(plan['before']['mappings']),1)
       with self.assertRaises(ValueError):r.capture(CMD,{'merchantId':777001,'categoryIds':['syn-foreign']})
       with self.assertRaises(ValueError):r.capture(CMD,{'merchantId':777001,'categoryIds':['missing']})
-      invalid=json.loads(json.dumps(plan));invalid['before']['products'][0]['name']={}
+      invalid=r.loads(r.canonical(plan));invalid['before']['products'][0]['name']={}
       with self.assertRaises(ValueError):r.validate_plan(invalid)
       # New references after capture invalidate the whole transaction.
       sql("INSERT INTO bb_product(id,merchant_id,category_id) VALUES('syn-drift',777001,'syn-old-a')")
@@ -66,6 +72,8 @@ INSERT INTO bb_order_header(id,business_id,status,payment_status,delivery_status
       from concurrent.futures import ThreadPoolExecutor
       with ThreadPoolExecutor(max_workers=2) as executor:
         self.assertEqual([x['result'] for x in executor.map(lambda _:r.transact(CMD,plan,'apply',rev),range(2))],['PASS','PASS'])
+      self.assertEqual(sql("SELECT sale->>'reviewedAt' FROM bb_product WHERE id='syn-active'"),'1795002605.495870245')
+      self.assertEqual(sql("SELECT price_tiers#>>'{0,price}' FROM bb_product WHERE id='syn-active'"),'123.123456789012345678901')
       current=r.run_sql(CMD,r.state_query(scope,[p['id'] for p in plan['before']['products']])+';');self.assertEqual(current,expected)
       self.assertEqual(sql("SELECT category_id FROM bb_product WHERE id='syn-outside'"),'syn-foreign')
       self.assertEqual(sql("SELECT count(*) FROM bb_product_primary_category_path WHERE product_id='syn-unassigned'"),'0')
@@ -85,7 +93,20 @@ INSERT INTO bb_order_header(id,business_id,status,payment_status,delivery_status
       sql("UPDATE bb_retired_category SET name=original->'name' WHERE id='syn-old-a'")
       self.assertEqual(r.transact(CMD,plan,'restore',rev)['result'],'PASS')
       self.assertEqual(r.transact(CMD,plan,'restore',rev)['result'],'PASS')
+      self.assertEqual(sql("SELECT sale->>'reviewedAt' FROM bb_product WHERE id='syn-active'"),'1795002605.495870245')
+      self.assertEqual(sql("SELECT price_tiers#>>'{0,price}' FROM bb_product WHERE id='syn-active'"),'123.123456789012345678901')
       current=r.run_sql(CMD,r.state_query(scope)+';');self.assertEqual(current,plan['before'])
       with self.assertRaisesRegex(RuntimeError,'already restored'):r.transact(CMD,plan,'apply',rev)
     finally:subprocess.run(['docker','exec',CONTAINER,'dropdb','-U','postgres',DB],check=True,capture_output=True)
+class ExactJsonTest(unittest.TestCase):
+ def test_deep_json_precision_unicode_and_checksum_survive_file_roundtrip(self):
+    source='{"层级":[{"nested":{"nanoseconds":1795002605.495870245,"small":0.000000000000000000001,"large":123456789012345678901234567890,"escaped":"引号\\\"与换行\\n"}}],"bool":true,"null":null}'
+    value=r.loads(source);self.assertIsInstance(value['层级'][0]['nested']['nanoseconds'],Decimal)
+    with tempfile.TemporaryDirectory() as tmp:
+      path=Path(tmp)/'exact.json';r.private_write(path,value);loaded=r.loads(path.read_text())
+      self.assertEqual(loaded,value);self.assertEqual(r.digest(loaded),r.digest(value))
+    for invalid in [float('nan'),1.5,Decimal('Infinity')]:
+      with self.assertRaises(ValueError):r.canonical({'nested':[invalid]})
+    with self.assertRaises(ValueError):r.loads('{"bad":NaN}')
+    with self.assertRaises(ValueError):r.validate_plan({'format':1})
 if __name__=='__main__':unittest.main()
