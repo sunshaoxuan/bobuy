@@ -7,7 +7,7 @@ type ShelfState={items:ProductBrowseCard[];busy:boolean;loaded:boolean;error:str
 type State={identity:string;page?:BrowsePage<ProductBrowseCard>;shelves:Record<string,ShelfState>;busy:boolean;error:string;changed:boolean;recoverable?:boolean};
 const empty=(identity:string):State=>({identity,shelves:{},busy:false,error:'',changed:false});
 
-/** Overview metadata first; at most two visible shelves in flight, never an all-shelf fan-out.
+/** Overview navigation and its first shelf share one response; at most two visible shelves in flight, never an all-shelf fan-out.
  * Each response is pinned to the metadata revision. Failed shelves retry independently. */
 export function useProgressiveCatalog(identity:string,query:BrowseQuery,enabled:boolean,paused:boolean,acceptDataset?:(revision:string)=>boolean){
  const [state,setState]=useState<State>(()=>empty(identity));
@@ -48,12 +48,22 @@ export function useProgressiveCatalog(identity:string,query:BrowseQuery,enabled:
    if(!active(token))return;
    if(!result.revision||!result.datasetRevision||!Array.isArray(result.categories)||!Array.isArray(result.shelves)||result.items.length||!Number.isSafeInteger(result.matchedTotal)||result.matchedTotal<0)throw Error('browse.invalid');
    const ids=new Set<string>();let total=0;
-   for(const s of result.shelves){if(!s.category||ids.has(s.category)||!Number.isSafeInteger(s.total)||s.total<=0||s.items.length)throw Error('browse.invalid');ids.add(s.category);total+=s.total;}
+   for(const [index,s] of result.shelves.entries()){
+    if(!s.category||ids.has(s.category)||!Number.isSafeInteger(s.total)||s.total<=0||!Array.isArray(s.items)||s.items.length!==(index===0?Math.min(8,s.total):0)||new Set(s.items.map(i=>i.productId)).size!==s.items.length||s.items.some(i=>!i.productId))throw Error('browse.invalid');ids.add(s.category);total+=s.total;
+   }
    if(total!==result.matchedTotal)throw Error('browse.invalid');
    if(input.current.acceptDataset&&!input.current.acceptDataset(result.datasetRevision))throw Error('browse.changed');
-   publish({...current.current,page:result,busy:false,error:''});
-   if(result.shelves[0])wanted.current.add(result.shelves[0].category);
-   pump();
+   const first=result.shelves[0];
+   if(first)flights.current.add(first.category);
+   publish({...current.current,page:result,busy:false,error:'',shelves:first?{[first.category]:{items:[],busy:true,loaded:false,error:''}}:{}});
+   // Commit navigation first, then the already-received first shelf on the next paint.
+   // This is scheduling only, not a fade or an artificial network delay.
+   const frame=typeof requestAnimationFrame==='function'?requestAnimationFrame:(fn:FrameRequestCallback)=>setTimeout(()=>fn(0),0);
+   frame(()=>frame(()=>{
+    if(!active(token))return;
+    if(first){flights.current.delete(first.category);publish({...current.current,shelves:{...current.current.shelves,[first.category]:{items:first.items,busy:false,loaded:true,error:''}}});}
+    pump();
+   }));
   }catch(error){if(active(token))publish({...current.current,busy:false,error:(error as Error).message,changed:(error as Error).message==='browse.changed',recoverable:isRecoverableReadError(error)});}
   finally{if(active(token))navFlight.current=false;}
  }

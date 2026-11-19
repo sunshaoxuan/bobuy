@@ -1,0 +1,20 @@
+[
+  {
+    "endpoint": "overview",
+    "status": 200,
+    "ms": 244,
+    "bytes": 13732,
+    "shelves": 25,
+    "cards": 0,
+    "first": "shop-000-progressive-01"
+  },
+  {
+    "endpoint": "legacy",
+    "status": 200,
+    "ms": 106,
+    "bytes": 180353,
+    "shelves": 25,
+    "cards": 211,
+    "first": "shop-000-progressive-01"
+  }
+]

@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 class PublicProductBrowseServiceTest {
- @Test void progressiveMetadataHasNoCardsAndSingleShelfMatchesLegacyPreview(){
+ @Test void progressiveNavigationIncludesOnlyFirstShelfAndScopedReadsMatchLegacy(){
   setup();var mapping=org.mockito.Mockito.mock(ShoppingCategoryService.class);
   var assignments=new HashMap<String,String>();for(int i=0;i<50;i++)assignments.put("p%03d".formatted(i),"shop-food-one");
   org.mockito.Mockito.when(mapping.snapshot(org.mockito.ArgumentMatchers.any())).thenReturn(new ShoppingCategoryService.Snapshot(ShoppingCategoryMapTest.categories(),assignments));service.setShopping(mapping);
   var legacy=service.browse(0,null,"","","en-US",false,null);
   var nav=service.overview(null,"en-US",true);
-  assertThat(nav.items()).isEmpty();assertThat(nav.shelves()).allMatch(shelf->shelf.items().isEmpty());
+  assertThat(nav.items()).isEmpty();assertThat(nav.shelves().get(0)).isEqualTo(legacy.shelves().get(0));assertThat(nav.shelves().stream().skip(1)).allMatch(shelf->shelf.items().isEmpty());
   assertThat(nav.categories()).isEqualTo(legacy.categories());assertThat(nav.revision()).isEqualTo(legacy.revision());
   assertThat(nav.shelves()).extracting(PublicProductBrowseService.Shelf::total).containsExactly(50L,1L);
   for(var expected:legacy.shelves()){

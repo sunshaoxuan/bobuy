@@ -71,7 +71,7 @@ public class PublicProductBrowseService {
  public Browse browse(int page,Long merchant,String query,String category,String locale,boolean marked,String expected,String order,boolean markedFirst){
   return project(page,merchant,query,category,locale,marked,expected,order,markedFirst,null);
  }
- /** Metadata and one bounded shelf use the exact same public projection and revision as browse.
+ /** Navigation with its first bounded shelf, and subsequent bounded shelves use the exact same public projection and revision as browse.
   * No cache or private-master fallback: publication changes invalidate subsequent shelf reads. */
  @Transactional(readOnly=true,isolation=Isolation.REPEATABLE_READ)
  public Browse overview(Long merchant,String locale,boolean markedFirst){
@@ -114,8 +114,8 @@ public class PublicProductBrowseService {
   var shelves=new ArrayList<Shelf>();
   if(shoppingData!=null&&!selected.equals("__unclassified")&&!parents.containsKey(selected)
       &&(selected.isEmpty()||filtered.stream().noneMatch(e->selected.equals(assignments.get(e.productId()))))){
-   for(var facet:facets)if(Objects.equals(facet.parentId(),selected.isEmpty()?null:selected)){var shelfRows=filtered.stream().filter(e->{var leaf=assignments.get(e.productId());return facet.id().equals(leaf)||facet.id().equals(parents.get(leaf));}).toList();if(!shelfRows.isEmpty())shelves.add(new Shelf(facet.id(),shelfOnly==null||facet.id().equals(shelfOnly)?shelfRows.stream().limit(8).map(card).toList():List.of(),shelfRows.size()));}
-   if(selected.isEmpty()&&unclassified>0){var rows=filtered.stream().filter(e->!assignments.containsKey(e.productId())).toList();shelves.add(new Shelf("__unclassified",shelfOnly==null||"__unclassified".equals(shelfOnly)?rows.stream().limit(8).map(card).toList():List.of(),rows.size()));}
+   for(var facet:facets)if(Objects.equals(facet.parentId(),selected.isEmpty()?null:selected)){var shelfRows=filtered.stream().filter(e->{var leaf=assignments.get(e.productId());return facet.id().equals(leaf)||facet.id().equals(parents.get(leaf));}).toList();if(!shelfRows.isEmpty())shelves.add(new Shelf(facet.id(),shelfOnly==null||facet.id().equals(shelfOnly)||shelfOnly.isEmpty()&&shelves.isEmpty()?shelfRows.stream().limit(8).map(card).toList():List.of(),shelfRows.size()));}
+   if(selected.isEmpty()&&unclassified>0){var rows=filtered.stream().filter(e->!assignments.containsKey(e.productId())).toList();shelves.add(new Shelf("__unclassified",shelfOnly==null||"__unclassified".equals(shelfOnly)||shelfOnly.isEmpty()&&shelves.isEmpty()?rows.stream().limit(8).map(card).toList():List.of(),rows.size()));}
   }
   if(shelfOnly!=null&&!shelfOnly.isEmpty()){
    shelves.removeIf(s->!s.category().equals(shelfOnly));

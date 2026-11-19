@@ -101,7 +101,7 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   const navigationCategories=navigation.current.categories;
   useEffect(()=>{onNavigation?.(navigationCategories);},[navigationCategories,onNavigation]);
   const shelves=(browse.page?.shelves??[]).map(s=>progressive?{...s,items:incremental.shelves[s.category]?.items??[]}:s);
-  const shelfMode=!query&&sort==='default'&&(!!shelves.length||!browse.page&&(!category||navigation.current.categories.some(c=>c.id===category&&!c.parentId)));
+  const shelfMode=!query.trim()&&sort==='default'&&(!!shelves.length||!browse.page&&(!category||navigation.current.categories.some(c=>c.id===category&&!c.parentId)));
   useShoppingScroll(!!browse.page,browse.busy,!shelfMode&&!!browse.page?.hasNext,browse.next);
   const visibleCards=shelfMode?shelves.flatMap(s=>s.items):filtered;
   useEffect(()=>{const canonical=browse.page?.selectedCategory;if(canonical!==undefined&&canonical!==category){const next=new URLSearchParams(params);if(canonical)next.set('category',canonical);else next.delete('category');setParams(next,{replace:true});}},[browse.page?.selectedCategory,category]);

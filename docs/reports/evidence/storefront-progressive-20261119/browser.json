@@ -1,0 +1,3534 @@
+{
+  "views": [
+    {
+      "width": 390,
+      "locale": "zh-CN",
+      "initial": {
+        "timeline": {
+          "heading": 1418.3999999985099,
+          "navigation": 1725.6000000014901,
+          "firstCard": 1887.7999999970198
+        },
+        "cards": 8,
+        "eager": 2,
+        "overflow": false,
+        "controls": [
+          {
+            "label": "合成分类 1",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 2",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 3",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 4",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 5",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 6",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 7",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 8",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 9",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 10",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 11",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 12",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 13",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 14",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 15",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 16",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 17",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 18",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 19",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 20",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 21",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 22",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 23",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成用品",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 94.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          }
+        ]
+      },
+      "maxActive": 2,
+      "errors": [],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+      ],
+      "requests": [
+        {
+          "path": "/api/storefront/trips",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/trips",
+          "query": "?includeCurrent=true",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/trips",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/trips",
+          "query": "?includeCurrent=true",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-browse/overview",
+          "query": "?merchantId=1000&locale=zh-CN&markedFirst=true",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/recommendation-images/progressive-icon-01",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/recommendation-images/progressive-icon-02",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-1",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-10",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-11",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-12",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-13",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-14",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-15",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-16",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "query": "?merchantId=1000&locale=zh-CN&markedFirst=true&category=shop-000-progressive-02&revision=2ea7a306e09514f7089dfc4c7f633263cb4813ddb6ad9ff08c647da5e0ad030d",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "query": "?productIds=progressive-item-1-1%2Cprogressive-item-1-10%2Cprogressive-item-1-11%2Cprogressive-item-1-12%2Cprogressive-item-1-13%2Cprogressive-item-1-14%2Cprogressive-item-1-15%2Cprogressive-item-1-16",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "query": "?merchantId=1000&locale=zh-CN&markedFirst=true&category=shop-000-progressive-03&revision=2ea7a306e09514f7089dfc4c7f633263cb4813ddb6ad9ff08c647da5e0ad030d",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "query": "?merchantId=1000&locale=zh-CN&markedFirst=true&category=shop-000-progressive-04&revision=2ea7a306e09514f7089dfc4c7f633263cb4813ddb6ad9ff08c647da5e0ad030d",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "query": "?merchantId=1000&locale=zh-CN&markedFirst=true&category=shop-000-progressive-05&revision=2ea7a306e09514f7089dfc4c7f633263cb4813ddb6ad9ff08c647da5e0ad030d",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-1",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-10",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-11",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-12",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-13",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-14",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-15",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-16",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "query": "?productIds=progressive-item-4-1%2Cprogressive-item-4-10%2Cprogressive-item-4-11%2Cprogressive-item-4-12%2Cprogressive-item-4-13%2Cprogressive-item-4-14%2Cprogressive-item-4-15%2Cprogressive-item-4-16",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-5-1",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-5-10",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-5-11",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-5-12",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-5-13",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-5-14",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-5-15",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-5-16",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "query": "?productIds=progressive-item-5-1%2Cprogressive-item-5-10%2Cprogressive-item-5-11%2Cprogressive-item-5-12%2Cprogressive-item-5-13%2Cprogressive-item-5-14%2Cprogressive-item-5-15%2Cprogressive-item-5-16",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "query": "?merchantId=1000&locale=zh-CN&markedFirst=true&category=shop-000-progressive-03&revision=2ea7a306e09514f7089dfc4c7f633263cb4813ddb6ad9ff08c647da5e0ad030d",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-1",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-10",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-11",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-12",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-13",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-14",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-15",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-16",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "query": "?productIds=progressive-item-3-1%2Cprogressive-item-3-10%2Cprogressive-item-3-11%2Cprogressive-item-3-12%2Cprogressive-item-3-13%2Cprogressive-item-3-14%2Cprogressive-item-3-15%2Cprogressive-item-3-16",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-1",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-10",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-11",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-12",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-13",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-14",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-15",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-16",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "query": "?productIds=progressive-item-2-1%2Cprogressive-item-2-10%2Cprogressive-item-2-11%2Cprogressive-item-2-12%2Cprogressive-item-2-13%2Cprogressive-item-2-14%2Cprogressive-item-2-15%2Cprogressive-item-2-16",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-browse",
+          "query": "?page=0&merchantId=1000&query=&category=shop-000-progressive-01&locale=zh-CN&marked=false&markedFirst=true&sort=default",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-1",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-10",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-11",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-12",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-13",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-14",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-15",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-16",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "query": "?productIds=progressive-item-1-1%2Cprogressive-item-1-10%2Cprogressive-item-1-11%2Cprogressive-item-1-12%2Cprogressive-item-1-13%2Cprogressive-item-1-14%2Cprogressive-item-1-15%2Cprogressive-item-1-16",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-browse/overview",
+          "query": "?merchantId=1000&locale=zh-CN&markedFirst=true",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-1",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-10",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-11",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-12",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-13",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-14",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-15",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-16",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "query": "?merchantId=1000&locale=zh-CN&markedFirst=true&category=shop-000-progressive-02&revision=2ea7a306e09514f7089dfc4c7f633263cb4813ddb6ad9ff08c647da5e0ad030d",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "query": "?productIds=progressive-item-1-1%2Cprogressive-item-1-10%2Cprogressive-item-1-11%2Cprogressive-item-1-12%2Cprogressive-item-1-13%2Cprogressive-item-1-14%2Cprogressive-item-1-15%2Cprogressive-item-1-16",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/trips",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/trips",
+          "query": "?includeCurrent=true",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/trips",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/trips",
+          "query": "?includeCurrent=true",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-browse",
+          "query": "?page=0&merchantId=1000&query=SYNTHETIC-PROGRESSIVE-1-20&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-20",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "query": "?productIds=progressive-item-1-20",
+          "method": "GET"
+        }
+      ],
+      "responses": [
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/overview",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/progressive-icon-01",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/progressive-icon-02",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "status": 400
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-5-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-5-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-5-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-5-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-5-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-5-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-5-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-5-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/overview",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-20",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "locale": "ja-JP",
+      "initial": {
+        "timeline": {
+          "heading": 1093.2000000029802,
+          "navigation": 1332.7999999970198,
+          "firstCard": 1453.6000000014901
+        },
+        "cards": 8,
+        "eager": 2,
+        "overflow": false,
+        "controls": [
+          {
+            "label": "合成カテゴリー 1",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成カテゴリー 2",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成カテゴリー 3",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成カテゴリー 4",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成カテゴリー 5",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成カテゴリー 6",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成カテゴリー 7",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成カテゴリー 8",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成カテゴリー 9",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成カテゴリー 10",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成カテゴリー 11",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成カテゴリー 12",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成カテゴリー 13",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成カテゴリー 14",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成カテゴリー 15",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成カテゴリー 16",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成カテゴリー 17",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成カテゴリー 18",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成カテゴリー 19",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成カテゴリー 20",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成カテゴリー 21",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成カテゴリー 22",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成カテゴリー 23",
+            "width": 88,
+            "height": 102,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成用品",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "すべて見る →",
+            "width": 107.75,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          }
+        ]
+      },
+      "maxActive": 2,
+      "errors": [],
+      "consoleErrors": [],
+      "requests": [
+        {
+          "path": "/api/storefront/trips",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/trips",
+          "query": "?includeCurrent=true",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/trips",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/trips",
+          "query": "?includeCurrent=true",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-browse/overview",
+          "query": "?merchantId=1000&locale=ja-JP&markedFirst=true",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/recommendation-images/progressive-icon-01",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/recommendation-images/progressive-icon-02",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-1",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-10",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-11",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-12",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-13",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-14",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-15",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-16",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "query": "?merchantId=1000&locale=ja-JP&markedFirst=true&category=shop-000-progressive-02&revision=499ece67a2192cd62fb5bfdc8b0f32f884d1eb6c7c895468a60f42ff173dede9",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "query": "?productIds=progressive-item-1-1%2Cprogressive-item-1-10%2Cprogressive-item-1-11%2Cprogressive-item-1-12%2Cprogressive-item-1-13%2Cprogressive-item-1-14%2Cprogressive-item-1-15%2Cprogressive-item-1-16",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "query": "?merchantId=1000&locale=ja-JP&markedFirst=true&category=shop-000-progressive-03&revision=499ece67a2192cd62fb5bfdc8b0f32f884d1eb6c7c895468a60f42ff173dede9",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "query": "?merchantId=1000&locale=ja-JP&markedFirst=true&category=shop-000-progressive-04&revision=499ece67a2192cd62fb5bfdc8b0f32f884d1eb6c7c895468a60f42ff173dede9",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-1",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-10",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-11",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-12",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-13",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-14",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-15",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-16",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "query": "?productIds=progressive-item-3-1%2Cprogressive-item-3-10%2Cprogressive-item-3-11%2Cprogressive-item-3-12%2Cprogressive-item-3-13%2Cprogressive-item-3-14%2Cprogressive-item-3-15%2Cprogressive-item-3-16",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-1",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-10",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-11",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-12",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-13",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-14",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-15",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-16",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "query": "?productIds=progressive-item-4-1%2Cprogressive-item-4-10%2Cprogressive-item-4-11%2Cprogressive-item-4-12%2Cprogressive-item-4-13%2Cprogressive-item-4-14%2Cprogressive-item-4-15%2Cprogressive-item-4-16",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-1",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-10",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-11",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-12",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-13",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-14",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-15",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-16",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "query": "?productIds=progressive-item-2-1%2Cprogressive-item-2-10%2Cprogressive-item-2-11%2Cprogressive-item-2-12%2Cprogressive-item-2-13%2Cprogressive-item-2-14%2Cprogressive-item-2-15%2Cprogressive-item-2-16",
+          "method": "GET"
+        }
+      ],
+      "responses": [
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/overview",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/progressive-icon-01",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/progressive-icon-02",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "width": 1920,
+      "locale": "zh-CN",
+      "initial": {
+        "timeline": {
+          "heading": 1276.0999999940395,
+          "navigation": 1644.2999999970198,
+          "firstCard": 1883.0999999940395
+        },
+        "cards": 8,
+        "eager": 2,
+        "overflow": false,
+        "controls": [
+          {
+            "label": "向左浏览分类",
+            "width": 44,
+            "height": 44,
+            "minWidth": "auto",
+            "minHeight": "auto",
+            "radius": "50%",
+            "borderWidth": "1px",
+            "borderColor": "rgb(222, 222, 217)",
+            "background": "rgb(246, 246, 244)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 1",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 2",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 3",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 4",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 5",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 6",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 7",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 8",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 9",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 10",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 11",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 12",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 13",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 14",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 15",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 16",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 17",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 18",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 19",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 20",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 21",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 22",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成分类 23",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "合成用品",
+            "width": 88,
+            "height": 88,
+            "minWidth": "0px",
+            "minHeight": "88px",
+            "radius": "12px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(25, 25, 25)",
+            "background": "rgba(0, 0, 0, 0)",
+            "shadow": "none"
+          },
+          {
+            "label": "向右浏览分类",
+            "width": 44,
+            "height": 44,
+            "minWidth": "auto",
+            "minHeight": "auto",
+            "radius": "50%",
+            "borderWidth": "1px",
+            "borderColor": "rgb(222, 222, 217)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          },
+          {
+            "label": "查看全部 →",
+            "width": 110.40625,
+            "height": 44.75,
+            "minWidth": "44px",
+            "minHeight": "44px",
+            "radius": "8px",
+            "borderWidth": "0px",
+            "borderColor": "rgb(36, 36, 36)",
+            "background": "rgb(255, 255, 255)",
+            "shadow": "none"
+          }
+        ]
+      },
+      "maxActive": 2,
+      "errors": [],
+      "consoleErrors": [],
+      "requests": [
+        {
+          "path": "/api/storefront/trips",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/trips",
+          "query": "?includeCurrent=true",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/trips",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/trips",
+          "query": "?includeCurrent=true",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-browse/overview",
+          "query": "?merchantId=1000&locale=zh-CN&markedFirst=true",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/recommendation-images/progressive-icon-01",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/recommendation-images/progressive-icon-02",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-1",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-10",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-11",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-12",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-13",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-14",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-15",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-16",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "query": "?merchantId=1000&locale=zh-CN&markedFirst=true&category=shop-000-progressive-02&revision=2ea7a306e09514f7089dfc4c7f633263cb4813ddb6ad9ff08c647da5e0ad030d",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "query": "?productIds=progressive-item-1-1%2Cprogressive-item-1-10%2Cprogressive-item-1-11%2Cprogressive-item-1-12%2Cprogressive-item-1-13%2Cprogressive-item-1-14%2Cprogressive-item-1-15%2Cprogressive-item-1-16",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "query": "?merchantId=1000&locale=zh-CN&markedFirst=true&category=shop-000-progressive-03&revision=2ea7a306e09514f7089dfc4c7f633263cb4813ddb6ad9ff08c647da5e0ad030d",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "query": "?merchantId=1000&locale=zh-CN&markedFirst=true&category=shop-000-progressive-04&revision=2ea7a306e09514f7089dfc4c7f633263cb4813ddb6ad9ff08c647da5e0ad030d",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-1",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-10",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-11",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-12",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-13",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-14",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-15",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-16",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "query": "?productIds=progressive-item-3-1%2Cprogressive-item-3-10%2Cprogressive-item-3-11%2Cprogressive-item-3-12%2Cprogressive-item-3-13%2Cprogressive-item-3-14%2Cprogressive-item-3-15%2Cprogressive-item-3-16",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-1",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-10",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-11",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-12",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-13",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-14",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-15",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-16",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "query": "?productIds=progressive-item-4-1%2Cprogressive-item-4-10%2Cprogressive-item-4-11%2Cprogressive-item-4-12%2Cprogressive-item-4-13%2Cprogressive-item-4-14%2Cprogressive-item-4-15%2Cprogressive-item-4-16",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-1",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-10",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-11",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-12",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-13",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-14",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-15",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-16",
+          "query": "",
+          "method": "GET"
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "query": "?productIds=progressive-item-2-1%2Cprogressive-item-2-10%2Cprogressive-item-2-11%2Cprogressive-item-2-12%2Cprogressive-item-2-13%2Cprogressive-item-2-14%2Cprogressive-item-2-15%2Cprogressive-item-2-16",
+          "method": "GET"
+        }
+      ],
+      "responses": [
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/overview",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/progressive-icon-01",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/progressive-icon-02",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-4-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "categoryClickAndBrowserBack": "PASS",
+    "directLeafSearch": "PASS"
+  },
+  "modules": {
+    "/src/pages/PublicProductCatalog.tsx": "52604e96055ea82d1f0e5f66c242741d266db4797f7f55975dd3a46176fdc693",
+    "/src/useProgressiveCatalog.ts": "d3ca0d5d6cdd0d8871366d0e08f8f3eec4a59fb4a5e3d16f5c03cf34c4f2c69c",
+    "/src/public-catalog.css": "44a77af1801047f35bdaaa9b6315520daa791e7d5bcca443f99474eb7c4df58a"
+  },
+  "result": "PASS"
+}

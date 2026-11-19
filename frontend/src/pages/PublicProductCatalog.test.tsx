@@ -65,7 +65,7 @@ it('links to all eligible roots in server order, including roots outside the pro
     {id: 'shop-empty', name: {'en-US': 'Empty'}, count: 0},
     {id: 'shop-a', name: {'en-US': 'A later'}, count: 30},
   ]}));
-  mocks.productOverview.mockImplementation(async () => ({...await mocks.productBrowse({}),items:[],scopeTotal:37,matchedTotal:37,shelves:[{category:'shop-z',items:[],total:7},{category:'shop-a',items:[],total:30}]}));
+  mocks.productOverview.mockImplementation(async () => ({...await mocks.productBrowse({}),items:[],scopeTotal:37,matchedTotal:37,shelves:[{category:'shop-z',items:Array.from({length:7},(_,i)=>productCard('z'+i)),total:7},{category:'shop-a',items:[],total:30}]}));
   mocks.productShelf.mockImplementation(()=>new Promise(()=>{}));
   mount('/products?node=7');
   const shortcuts = within(await screen.findByRole('navigation', {name: 'All categories'}));
@@ -88,4 +88,10 @@ it('keeps shortcuts out of search results even when the server returns roots', a
   mount('/products', {query: 'Search term'});
   await screen.findByRole('heading', {name: 'Product'});
   expect(screen.queryByRole('navigation', {name: 'All categories'})).not.toBeInTheDocument();
+});
+
+it('renders overview cards for whitespace queries without requesting a grid or a second page',async()=>{
+ mocks.productOverview.mockResolvedValue(browsePage([],{scopeTotal:1,matchedTotal:1,categories:[{id:'shop-first',name:{'en-US':'First'},count:1}],shelves:[{category:'shop-first',total:1,items:[productCard()]}]}));
+ mount('/products',{query:'   '});await screen.findByRole('heading',{name:'Product'});
+ expect(mocks.productBrowse).not.toHaveBeenCalled();expect(mocks.productShelf).not.toHaveBeenCalled();expect(screen.getByRole('navigation',{name:'All categories'})).toBeInTheDocument();
 });

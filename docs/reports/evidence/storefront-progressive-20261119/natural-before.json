@@ -1,0 +1,110 @@
+{
+  "application": "before",
+  "transport": "loopback real HTTP, no injected delay; alternating order, all six samples retained",
+  "rounds": [
+    {
+      "round": 1,
+      "legacy": {
+        "ms": 218.42,
+        "bytes": 181642
+      },
+      "products": 463,
+      "overview": {
+        "ms": 90.79,
+        "bytes": 13801
+      },
+      "firstShelf": {
+        "ms": 155.23,
+        "bytes": 18711
+      },
+      "firstContentMs": 246.02
+    },
+    {
+      "round": 2,
+      "overview": {
+        "ms": 146.79,
+        "bytes": 13801
+      },
+      "firstShelf": {
+        "ms": 88.02,
+        "bytes": 18711
+      },
+      "firstContentMs": 234.81,
+      "legacy": {
+        "ms": 119.85,
+        "bytes": 181642
+      },
+      "products": 463
+    },
+    {
+      "round": 3,
+      "legacy": {
+        "ms": 98.18,
+        "bytes": 181642
+      },
+      "products": 463,
+      "overview": {
+        "ms": 122.79,
+        "bytes": 13801
+      },
+      "firstShelf": {
+        "ms": 160.44,
+        "bytes": 18711
+      },
+      "firstContentMs": 283.23
+    },
+    {
+      "round": 4,
+      "overview": {
+        "ms": 107.7,
+        "bytes": 13801
+      },
+      "firstShelf": {
+        "ms": 87.1,
+        "bytes": 18711
+      },
+      "firstContentMs": 194.8,
+      "legacy": {
+        "ms": 86.16,
+        "bytes": 181642
+      },
+      "products": 463
+    },
+    {
+      "round": 5,
+      "legacy": {
+        "ms": 122.41,
+        "bytes": 181642
+      },
+      "products": 463,
+      "overview": {
+        "ms": 105.63,
+        "bytes": 13801
+      },
+      "firstShelf": {
+        "ms": 105.44,
+        "bytes": 18711
+      },
+      "firstContentMs": 211.07
+    },
+    {
+      "round": 6,
+      "overview": {
+        "ms": 125.04,
+        "bytes": 13801
+      },
+      "firstShelf": {
+        "ms": 106.01,
+        "bytes": 18711
+      },
+      "firstContentMs": 231.05,
+      "legacy": {
+        "ms": 138.34,
+        "bytes": 181642
+      },
+      "products": 463
+    }
+  ],
+  "legacyMedianMs": 121.13,
+  "firstContentMedianMs": 232.93
+}
