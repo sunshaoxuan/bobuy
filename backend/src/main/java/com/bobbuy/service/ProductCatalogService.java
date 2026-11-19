@@ -48,7 +48,7 @@ public class ProductCatalogService {
   var prior=recoveries.findById(checkpointId).filter(r->owner().equals(r.merchantId)&&id.equals(r.productId)).orElseThrow(()->invalid("master.conflict"));
   if(!Objects.equals(p.getRecordVersion(),version)||prior.versionAfter!=version||!sources(id).stream().map(i->i.id).toList().equals(prior.original.sourceItemIds()))throw invalid("master.conflict");
   for(var image:prior.original.gallery()){String prefix="/api/storefront/recommendation-images/";if(image.getUrl()!=null&&image.getUrl().startsWith(prefix)&&images.findById(image.getUrl().substring(prefix.length())).filter(value->owner().equals(value.merchantId)).isEmpty())throw invalid("master.image_source");}
-  var redo=checkpoint(p,prior.id);prior.apply(p);products.saveAndFlush(p);retainCheckpoint(redo,p);return profile(p);
+  var redo=checkpoint(p,prior.id);prior.apply(p);taxonomy.removeRetiredAssignments(p);products.saveAndFlush(p);retainCheckpoint(redo,p);return profile(p);
  }
  /** Actual current values, not proposed corrections. Canonical=false requires separate rollback handling. */
  @Transactional(readOnly=true) public List<AuditRow> audit(){
@@ -89,7 +89,7 @@ public class ProductCatalogService {
    if((originalMedia.getSourceUrl()==null||originalMedia.getSourceUrl().isBlank())&&match.isPresent())gallery.add(media(match.get()));else gallery.add(originalMedia);
   }
   if(source.stream().anyMatch(i->!Objects.equals(i.specification,preferred.specification)||!i.categoryIds.equals(preferred.categoryIds)))warnings.add("master.source_conflict");
-  var categories=current.categoryIds().isEmpty()?preferred.categoryIds:current.categoryIds();
+  var categories=taxonomy.currentIds(current.categoryIds().isEmpty()?preferred.categoryIds:current.categoryIds(),product.getMerchantId());
   String supplier=current.supplierId()==null?preferred.supplierId:current.supplierId();
   var candidate=new Input(current.productId(),current.version(),names,descriptions,current.itemNumber()==null?preferred.itemNumber:current.itemNumber(),current.brand(),specifications,current.model(),current.packaging(),categories,supplier,gallery,reviewed||current.translationsReviewed());
   if(!names.equals(current.name()))changes.add("master.names");if(!descriptions.equals(current.description()))changes.add("master.descriptions");

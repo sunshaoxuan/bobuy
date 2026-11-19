@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class PublicProductCatalogService {
  private final ProductRatingService ratings;private final ProductRepository products;private final RecommendationPostRepository posts;private final RecommendationItemRepository items;
  private final RecommendationTaxonomyService taxonomy;private final ReferenceQuoteService quotes;private final CategoryRepository categories;
- public PublicProductCatalogService(ProductRepository p,RecommendationPostRepository r,RecommendationItemRepository i,RecommendationTaxonomyService t,ReferenceQuoteService q,CategoryRepository c){this(p,r,i,t,q,c,null);} @org.springframework.beans.factory.annotation.Autowired public PublicProductCatalogService(ProductRepository p,RecommendationPostRepository r,RecommendationItemRepository i,RecommendationTaxonomyService t,ReferenceQuoteService q,CategoryRepository c,ProductRatingService rating){ratings=rating;products=p;posts=r;items=i;taxonomy=t;quotes=q;categories=c;}
+ public PublicProductCatalogService(ProductRepository p,RecommendationPostRepository r,RecommendationItemRepository i,RecommendationTaxonomyService t,ReferenceQuoteService q,CategoryRepository c){this(p,r,i,t,q,c,null);} public PublicProductCatalogService(ProductRepository p,RecommendationPostRepository r,RecommendationItemRepository i,RecommendationTaxonomyService t,ReferenceQuoteService q,CategoryRepository c,ProductRatingService rating){this(p,r,i,t,q,c,rating,null,null);}
+ private final ProductCategoryPathResolver categoryPaths;private final CategoryTreeNodeRepository categoryNodes;
+ @org.springframework.beans.factory.annotation.Autowired public PublicProductCatalogService(ProductRepository p,RecommendationPostRepository r,RecommendationItemRepository i,RecommendationTaxonomyService t,ReferenceQuoteService q,CategoryRepository c,ProductRatingService rating,ProductCategoryPathResolver paths,CategoryTreeNodeRepository nodes){ratings=rating;products=p;posts=r;items=i;taxonomy=t;quotes=q;categories=c;categoryPaths=paths;categoryNodes=nodes;}
  public record Offer(Long postId,RecommendationItem facts){}
  public record Entry(String productId,Long merchantId,Map<String,String> name,Map<String,String> description,String brand,String itemNumber,Map<String,String> specification,String model,String packaging,List<RecommendationItem.Picture> gallery,List<RecommendationItem.Label> categories,List<Offer> referenceOffers,boolean reviewedMaster,java.math.BigDecimal rating,Map<String,String> introduction,List<ReferenceQuoteService.CurrentPrice> referencePrices){
   public Entry(String productId,Long merchantId,Map<String,String> name,Map<String,String> description,String brand,String itemNumber,Map<String,String> specification,String model,String packaging,List<RecommendationItem.Picture> gallery,List<RecommendationItem.Label> categories,List<Offer> referenceOffers,boolean reviewedMaster){this(productId,merchantId,name,description,brand,itemNumber,specification,model,packaging,gallery,categories,referenceOffers,reviewedMaster,null,Map.of(),List.of());}
@@ -52,6 +54,11 @@ public class PublicProductCatalogService {
   var eligible=selectedProductIds==null?snapshot.eligible():snapshot.eligible().stream().filter(p->selectedProductIds.contains(p.getId())).toList();
   var referencePrices=quotes.currentPrices(eligible);
   var visibleOwners=new HashMap<String,Long>();eligible.forEach(p->visibleOwners.put(p.getId(),p.getMerchantId()));var publicRatings=ratings==null?Map.<String,java.math.BigDecimal>of():ratings.publicRatings(visibleOwners);
+  // Current public masters use the same primary-path resolution as browse/admin. Reference-only
+  // entries below keep their immutable published category facts, including retired labels.
+  var resolved=categoryPaths==null?Map.<String,ProductCategoryPathResolver.ResolvedCategory>of():categoryPaths.resolveAll(eligible.stream().filter(p->p.getVisibilityStatus()==ProductVisibility.PUBLIC).toList());
+  var nodeLabels=new HashMap<String,RecommendationItem.Label>();
+  if(categoryNodes!=null)categoryNodes.findAllById(resolved.values().stream().map(ProductCategoryPathResolver.ResolvedCategory::categoryId).distinct().toList()).forEach(n->nodeLabels.put(n.getId(),new RecommendationItem.Label(n.getId(),n.getName())));
   return eligible.stream().map(p->{
    var offers=linked.getOrDefault(p.getId(),List.of()).stream().filter(i->Objects.equals(owners.get(i.postId),p.getMerchantId())).sorted(Comparator.comparing((RecommendationItem i)->i.postId).reversed().thenComparing(i->i.id)).map(i->new Offer(i.postId,i)).toList();
    var data=p.getCatalogData();var source=offers.isEmpty()?null:offers.get(0).facts();
@@ -61,7 +68,9 @@ public class PublicProductCatalogService {
     return new Entry(p.getId(),p.getMerchantId(),Map.copyOf(legacyText(source,"name")),Map.copyOf(legacyText(source,"description")),source.brand,source.itemNumber,Map.copyOf(legacyText(source,"specification")),source.model,source.packaging,List.copyOf(source.gallery),List.copyOf(source.categories),offers,source.catalogDriven,publicRatings.get(p.getId()),introduction(p,offers),referencePrices.getOrDefault(p.getId(),List.of()));
    }
    var ids=data==null?(p.getCategoryId()==null?List.<String>of():List.of(p.getCategoryId())):data.categoryIds()==null?List.<String>of():data.categoryIds();
-   var labels=categories.findAllById(ids).stream().map(c->new RecommendationItem.Label(c.getId(),c.getName())).toList();
+   var path=resolved.get(p.getId());
+   var label=path==null?null:nodeLabels.get(path.categoryId());
+   var labels=label!=null?List.of(label):categories.findAllById(ids).stream().map(c->new RecommendationItem.Label(c.getId(),c.getName())).toList();
    List<RecommendationItem.Picture> gallery=source==null||source.gallery==null||source.gallery.isEmpty()?p.getMediaGallery().stream().filter(m->m.isVisible()&&m.getType()==MediaType.IMAGE&&m.getUrl()!=null).map(m->new RecommendationItem.Picture(UUID.nameUUIDFromBytes(m.getUrl().getBytes(java.nio.charset.StandardCharsets.UTF_8)).toString(),m.getUrl(),null,m.getSourceUrl(),m.getUrl(),null,null)).toList():source.gallery;
    // Reviewed masters own metadata. Legacy public sources remain unchanged, never guessed/split.
    Map<String,String> names=p.getName(),descriptions=p.getDescription(),spec=data==null?Map.of():data.specification();String brand=p.getBrand(),model=data==null?null:data.model(),pack=data==null?null:data.packaging();

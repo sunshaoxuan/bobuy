@@ -1,0 +1,21 @@
+{
+  "merchantId": 1001,
+  "categoryIds": [
+    "rec-cat-1964d686-358d-483c-a667-a559ac97e99c",
+    "rec-cat-1c529036-074f-4ee7-b90b-e3520078cd65",
+    "rec-cat-2063ab89-007b-4bd9-99c9-7e93df26555c",
+    "rec-cat-2f5df3db-d087-41bd-a5cd-4877255f26da",
+    "rec-cat-50910d92-e2d1-4513-bbe9-67b48aa0d2ab",
+    "rec-cat-5eafbfd0-4f29-47e9-b7d2-4658a4e31ab8",
+    "rec-cat-63f84168-6c55-4d74-aabb-50a2ab6c5ad5",
+    "rec-cat-77f5c9a1-df87-4305-b6d4-125e09da732a",
+    "rec-cat-9b0483b3-e181-40c9-9f78-9d4a6eccd087",
+    "rec-cat-ac7d5703-9bed-4a87-bc30-46d4231964f2",
+    "rec-cat-b5e71be9-140a-4bb6-8146-838f666f2591",
+    "rec-cat-c6361385-e640-43b1-bcd6-c8e137a38944",
+    "rec-cat-cca98698-2a0b-4b19-962c-cb7099383ed6",
+    "rec-cat-cfa0eccb-a517-4acc-9e36-790aa24f0a2f",
+    "rec-cat-f0d226fe-50ec-45aa-80d9-e2c6739e413b",
+    "rec-cat-fea0c6af-d6d5-4272-b2e8-00e12369e891"
+  ]
+}
