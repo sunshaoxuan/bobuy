@@ -227,3 +227,6 @@
   background: #f6f6f4;
   cursor: default;
 }
+
+/* Reserve one shelf while its bounded read is pending; no opacity/reveal animation. */
+.shopping-shelf .shelf-progress { min-height: 360px; }

@@ -1,3 +1,4 @@
+import {useProgressiveCatalog} from '../useProgressiveCatalog';
 import {useShoppingScroll} from '../useShoppingScroll';
 import CategoryShortcuts from '../components/CategoryShortcuts';
 import ShoppingNavigation from '../components/ShoppingNavigation';
@@ -87,8 +88,11 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   // Keep offsets stable for the mounted session, including window resizes.
   const [batchSize]=useState<24|48>(()=>typeof window.matchMedia==='function'&&window.matchMedia('(min-width: 1920px)').matches?48:24);
   const identity=JSON.stringify([batchSize,location.pathname,scope,query,category,locale,refresh,attempt,authKey,sort,markedFirst]);
+  const progressive=location.pathname==='/products'&&kind==='all'&&!category&&!query.trim()&&sort==='default';
   const activation=useSectionActivation(identity);
-  const browse=useBrowsePages<ProductBrowseCard>(identity,(page,revision)=>catalogBatch((serverPage,serverRevision)=>storefrontApi.productBrowse({page:serverPage,revision:serverRevision,merchantId:node,query,category,locale,marked:false,markedFirst,sort}),page,revision,batchSize),entry=>entry.productId,enabled&&activation.active&&node!==-1,acceptDataset,batchSize,autoPaused||!!params.get('product'));
+  const paged=useBrowsePages<ProductBrowseCard>(identity,(page,revision)=>catalogBatch((serverPage,serverRevision)=>storefrontApi.productBrowse({page:serverPage,revision:serverRevision,merchantId:node,query,category,locale,marked:false,markedFirst,sort}),page,revision,batchSize),entry=>entry.productId,enabled&&!progressive&&activation.active&&node!==-1,acceptDataset,batchSize,autoPaused||!!params.get('product'));
+  const incremental=useProgressiveCatalog(identity,{merchantId:node,locale,markedFirst},enabled&&progressive&&activation.active&&node!==-1,autoPaused||!!params.get('product'),acceptDataset);
+  const browse=progressive?{...incremental,items:[],next:()=>{},retry:()=>incremental.retry()}:paged;
   useEffect(()=>{if(kind==="all"&&typeof browse.page?.markedScopeTotal==="number")onMarkedScope?.(browse.page.markedScopeTotal);},[kind,browse.page?.markedScopeTotal,onMarkedScope]);
   const filtered=browse.items;
   const navigation=useRef<{scope:string;categories:NonNullable<typeof browse.page>['categories']}>({scope:'',categories:[]});
@@ -96,7 +100,7 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   if(browse.page)navigation.current.categories=browse.page.categories;
   const navigationCategories=navigation.current.categories;
   useEffect(()=>{onNavigation?.(navigationCategories);},[navigationCategories,onNavigation]);
-  const shelves=browse.page?.shelves??[];
+  const shelves=(browse.page?.shelves??[]).map(s=>progressive?{...s,items:incremental.shelves[s.category]?.items??[]}:s);
   const shelfMode=!query&&sort==='default'&&(!!shelves.length||!browse.page&&(!category||navigation.current.categories.some(c=>c.id===category&&!c.parentId)));
   useShoppingScroll(!!browse.page,browse.busy,!shelfMode&&!!browse.page?.hasNext,browse.next);
   const visibleCards=shelfMode?shelves.flatMap(s=>s.items):filtered;
@@ -144,10 +148,10 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   const mainReference=opened?selectReferenceOffers(opened).main:undefined;
   const descriptionValue=content?.description||(mainReference?recommendationText(mainReference.facts,locale).description:'')||'';
   const description=content&&originalDescription?{...originalDescription,value:descriptionValue,language:descriptionValue===originalDescription.value?originalDescription.language:undefined,fallback:descriptionValue===originalDescription.value&&originalDescription.fallback}:undefined;
-  function renderCard(entry:ProductBrowseCard,index:number){
+  function renderCard(entry:ProductBrowseCard,index:number,eager=index<2){
         const name=catalogText(entry.name,locale);
         const product=sales.quotes[entry.productId],pending=pricePending(entry.productId),buyable=!pending&&!!product&&canBuy(product);
-        return <CompactProductCard key={entry.productId} productId={entry.productId} name={name.value} originalName={entry.name['ja-JP']} language={name.language} brand={entry.brand} itemNumber={entry.itemNumber} image={entry.image?.url} rating={entry.rating} quote={product} reference={entry.reference} pending={pending} eager={index<2} onOpen={()=>openDetail(entry.productId)} overlay={<><ProductMarkerBadges markers={state.markers[entry.productId]??[]} promotionPrices={selectedOfferSource(product,pending,entry.reference?.priceChange)} overlay/><ReservationAdd allowed={buyable} quote={product} name={name.value} count={quantities[entry.productId]} onAdd={()=>{if(product&&buyable)onAdd(product);}}/></>} actions={management(entry)}/>;
+        return <CompactProductCard key={entry.productId} productId={entry.productId} name={name.value} originalName={entry.name['ja-JP']} language={name.language} brand={entry.brand} itemNumber={entry.itemNumber} image={entry.image?.url} rating={entry.rating} quote={product} reference={entry.reference} pending={pending} eager={eager} onOpen={()=>openDetail(entry.productId)} overlay={<><ProductMarkerBadges markers={state.markers[entry.productId]??[]} promotionPrices={selectedOfferSource(product,pending,entry.reference?.priceChange)} overlay/><ReservationAdd allowed={buyable} quote={product} name={name.value} count={quantities[entry.productId]} onAdd={()=>{if(product&&buyable)onAdd(product);}}/></>} actions={management(entry)}/>;
 
   }
   const hideMarked=kind==='marked'&&ready&&!browse.error&&browse.page?.markedScopeTotal===0;
@@ -164,10 +168,10 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
       saveScroll={offset => {shortcutScroll.current = {key: location.key, offset};}}
     />}
     {!ready?(browse.error||node===-1?null:<div className="catalog-progress" role="status"><Spin/><span>{t('browse.loading')}</span></div>):<>
-      {shelfMode?<div className="shopping-shelves">{shelves.map(shelf=><section className="shopping-shelf" key={shelf.category}>
+      {shelfMode?<div className="shopping-shelves">{shelves.map((shelf,shelfIndex)=><ProgressiveShelf key={shelf.category} identity={identity} category={shelf.category} progressive={progressive} activate={incremental.activate}>
        <header><h2>{shelf.category==='__unclassified'?t('class.unclassified'):localizedContent(browse.page!.categories.find(c=>c.id===shelf.category)?.name??{},locale)}</h2><button type="button" onClick={()=>choose(shelf.category)}>{t('shopping.view_all')} <span aria-hidden>→</span></button></header>
-       <div className="catalog-master-grid shopping-shelf-track">{shelf.items.map(renderCard)}</div>
-      </section>)}</div>:filtered.length?<div className="catalog-master-grid">{filtered.map(renderCard)}</div>:kind==='marked'?<div className="catalog-marked-empty" role="status"><p>{t(query||category?'store.no_matches':'marker.empty')}</p>{(query||category)&&<Button onClick={()=>{const next=new URLSearchParams(params);next.delete(categoryKey);next.delete('query');setParams(next);}}>{t('class.all')}</Button>}</div>:<Empty description={t(query||category?'store.no_matches':'catalog.empty')}>{category&&<Button onClick={()=>choose('')}>{t('class.all')}</Button>}</Empty>}
+       {progressive&&incremental.shelves[shelf.category]?.error?<BrowseError error={incremental.shelves[shelf.category].error} changed={incremental.changed} retry={()=>incremental.retry(shelf.category)} refresh={reload}/>:progressive&&!incremental.shelves[shelf.category]?.loaded?<div className="catalog-progress shelf-progress" role="status" aria-label={t('browse.loading')}><Spin/><span>{t('browse.loading')}</span></div>:<div className="catalog-master-grid shopping-shelf-track">{shelf.items.map((entry,index)=>renderCard(entry,index,shelfIndex===0&&index<2))}</div>}
+      </ProgressiveShelf>)}</div>:filtered.length?<div className="catalog-master-grid">{filtered.map((entry,index)=>renderCard(entry,index))}</div>:kind==='marked'?<div className="catalog-marked-empty" role="status"><p>{t(query||category?'store.no_matches':'marker.empty')}</p>{(query||category)&&<Button onClick={()=>{const next=new URLSearchParams(params);next.delete(categoryKey);next.delete('query');setParams(next);}}>{t('class.all')}</Button>}</div>:<Empty description={t(query||category?'store.no_matches':'catalog.empty')}>{category&&<Button onClick={()=>choose('')}>{t('class.all')}</Button>}</Empty>}
       {!shelfMode&&browse.page?.hasNext&&<div className="feed-loader" ref={sentinel}><Button loading={browse.busy} disabled={revealPaused||browse.changed||!!browse.error} onClick={browse.next}>{t('store.load_more')} ({filtered.length}/{browse.page.matchedTotal})</Button></div>}
     </>}
     </section>}
@@ -185,4 +189,11 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
       </ConsumerDetail>}
     </Drawer>
   </>;
+}
+
+function ProgressiveShelf({identity,category,progressive,activate,children}:{identity:string;category:string;progressive:boolean;activate:(category:string)=>void;children:React.ReactNode}){
+ const activation=useSectionActivation(identity+':'+category);
+ const callback=useRef(activate);callback.current=activate;
+ useEffect(()=>{if(progressive&&activation.active)callback.current(category);},[identity,category,progressive,activation.active]);
+ return <section ref={activation.element} className="shopping-shelf" data-shelf-category={category}>{children}</section>;
 }
