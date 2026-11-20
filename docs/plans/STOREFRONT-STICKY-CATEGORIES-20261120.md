@@ -185,3 +185,5 @@ UI仅商品区域：真实二级纵向网格section内sticky标题+自身已有�
 - 最终候选实测收口：360/390/1280全部及主类A→吸顶→末项→B推替→回滑均PASS，标题坐标229/229/209px；25+15完整、无重复，首批8件/慢图/慢后区、侧栏及父类入口、刷新、空/缺图/长名均PASS。最终入口index-DoiMe8lM.js，20/18px标题与0内margin、长名手机67px/桌面44px；控制台/网络无非预期错误。32前端与20后端定向用例按输入复用，最终CSS只复核视觉。87张最终整图/局部及脚本/JSON、部署兼容边界见[候选证据](../reports/evidence/storefront-secondary-sections-20261120/README.md)。旧字号edges PNG已删除，功能JSON保留并标明输入；未生成或接收生产素材、无DB写入，真实线稿由本机独立验收。候选冻结后仅跟踪同次原生CI，不合并发布。
 
 - PR #175首轮原生PR checks 44747677673，frontend Type-check发现新增测试Array.at超出仓库lib目标（TS2550）。仅将该测试末件断言改为索引24，不改应用/产物；已PASS全部浏览器与业务测试输入不失效，不本地重跑或重建。推同PR修正后跟踪新head原生门禁。
+
+- 原生PR checks 44747909694前端1021/1023：本批新分区用例a24未到，原因第二次fireEvent可早于AntD innerLoading清除（按钮源码loading时忽略click）；仅让新测试等ant-btn-loading移除后再点，并有界等末卡。不改产品/产物、浏览器PASS复用。另一个ProductCatalogPanel.uploadFeedback旧测试在失败保存后立即按精确名称查按钮；日志实际为`loading Confirm and save masters`，组件/测试及其运行时依赖不在本批修改链（api.ts仅新增TS查询可选类型）。记录独立时序证据，不改无关测试；跟踪同PR新head原生检查。CodeQL三项已PASS，后端继续原运行直到新head自动调度。

@@ -118,7 +118,7 @@ it('renders real secondary sections under plain root titles and retains their ow
  expect(screen.getByRole('heading',{name:'Root',level:2}).querySelector('img')).toBeNull();
  const heading=screen.getByRole('heading',{name:'Leaf A',level:3});expect(heading.querySelector('img')).toHaveAttribute('src',image);
  expect(heading.closest('.shopping-secondary-section')?.querySelectorAll('.catalog-master-card')).toHaveLength(8);
- fireEvent.click(screen.getByRole('button',{name:/Load more/}));await screen.findByRole('heading',{name:'a23'});fireEvent.click(screen.getByRole('button',{name:/Load more/}));await screen.findByRole('heading',{name:'a24'});
+ fireEvent.click(screen.getByRole('button',{name:/Load more/}));await screen.findByRole('heading',{name:'a23'}, {timeout:5000});await waitFor(()=>expect(screen.getByRole('button',{name:/Load more/})).not.toHaveClass('ant-btn-loading'));fireEvent.click(screen.getByRole('button',{name:/Load more/}));await screen.findByRole('heading',{name:'a24'}, {timeout:5000});
  expect(heading.closest('.shopping-secondary-section')?.querySelectorAll('.catalog-master-card')).toHaveLength(25);
  expect(screen.getByRole('heading',{name:'Leaf B',level:3}).closest('.shopping-secondary-section')).not.toBe(heading.closest('.shopping-secondary-section'));
  expect(mocks.productBrowse).not.toHaveBeenCalled();expect(mocks.productOverview.mock.calls[0][0]).toMatchObject({sections:true});
