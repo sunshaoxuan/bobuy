@@ -42,6 +42,10 @@ jobs:
           set +x
           set -eu
           test -n "${BOBBUY_SECURITY_SERVICE_TOKEN:-}" || exit 1
+          if test -z "${BOBBUY_ACCOUNT_MAIL_SMTP_PASSWORD:-}"; then
+            printf '%s\n' configuration_missing
+            exit 0
+          fi
           case "${SERVER_PORT:-}" in ''|*[!0-9]*) exit 1 ;; esac
           test "$SERVER_PORT" -ge 1 && test "$SERVER_PORT" -le 65535 || exit 1
           curl --silent --show-error --max-time 15 --request POST \
@@ -50,6 +54,10 @@ jobs:
             "http://127.0.0.1:${SERVER_PORT}/internal/account-mail/test"
           PROBE
           ) || { echo 'Production SMTP test failed: connection_or_timeout' >&2; exit 1; }
+          if test "$result" = configuration_missing; then
+            echo 'Production SMTP test failed: configuration_missing' >&2
+            exit 1
+          fi
           category=$(printf '%s' "$result" | sed -n 's/.*"category":"\([a-z_]*\)".*/\1/p')
           status=$(printf '%s' "$result" | sed -n 's/.*HTTP_STATUS=\([0-9]*\)$/\1/p')
           if test "$status" = 200; then echo 'Production SMTP test succeeded.'; exit 0; fi

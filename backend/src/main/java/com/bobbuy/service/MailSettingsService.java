@@ -104,10 +104,7 @@ public class MailSettingsService {
   return cipher.ready() && saved.isPresent() && saved.get().enabled && saved.get().encryptedPassword!=null;
  }
  public void sendControlledTest() {
-  SimpleMailMessage message=new SimpleMailMessage();
-  message.setTo("postmaster@bobuy.cc"); message.setSubject("Bobuy production SMTP test");
-  message.setText("Bobuy production mail delivery test. No account data or token is included.");
-  environmentDelivery.send(message);
+  environmentDelivery.sendControlledTest();
  }
  private void send(MailSettings s,SimpleMailMessage message) {
   // Revalidate persisted destination policy, including after an allowlist change.

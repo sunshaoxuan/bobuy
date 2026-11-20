@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 /** SMTP delivery whose credential can only enter through the protected runtime environment. */
 @Component
 public class EnvironmentAccountMailDelivery {
+    private static final String TEST_MAILBOX = "postmaster@bobuy.cc";
     private final AccountMailProperties properties;
     private final SmtpDelivery smtp;
     private final String password;
@@ -23,14 +24,26 @@ public class EnvironmentAccountMailDelivery {
     public boolean ready() { return password != null && !password.isBlank(); }
 
     public void send(SimpleMailMessage message) {
+        send(message, properties.getFromAddress());
+    }
+
+    public void sendControlledTest() {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(TEST_MAILBOX);
+        message.setSubject("Bobuy production SMTP test");
+        message.setText("Bobuy production mail delivery test. No account data or token is included.");
+        send(message, TEST_MAILBOX);
+    }
+
+    private void send(SimpleMailMessage message, String fromAddress) {
         if (!ready()) throw new SmtpDelivery.DeliveryException(SmtpDelivery.FailureCategory.AUTHENTICATION);
         MailSettings settings = new MailSettings();
         settings.host = properties.getSmtpHost();
         settings.port = properties.getSmtpPort();
         settings.tlsMode = properties.getSmtpTlsMode().toUpperCase(Locale.ROOT);
         settings.username = properties.getSmtpUsername();
-        settings.fromAddress = properties.getFromAddress();
-        settings.replyTo = properties.getFromAddress();
+        settings.fromAddress = fromAddress;
+        settings.replyTo = fromAddress;
         smtp.send(settings, password, message);
     }
 }

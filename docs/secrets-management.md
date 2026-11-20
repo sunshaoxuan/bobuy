@@ -143,7 +143,8 @@ API、Actuator 或日志回显。主机、端口与 TLS 模式仍可组合配置
 该仅 `workflow_dispatch` 的工作流复用 CD production 的 SSH 凭据和 `known_hosts` 严格校验，
 在生产主机的 `auth-service` 容器内调用 loopback-only 入口，只从
 `postmaster@bobuy.cc` 向同一固定地址发送一封纯文本邮件。它不依赖三个业务开关，也不接受收件人
-参数。日志仅显示成功或连接、TLS/证书、认证、拒绝、超时等错误类别；SMTP 凭据始终留在生产容器。
+参数。缺少 SMTP 密码时，工作流在发信前报 `configuration_missing`。日志仅显示成功或错误类别，
+包括配置缺失、连接、TLS/证书、认证、拒绝和超时。SMTP 凭据始终留在生产容器。
 
 覆盖文件使用单行字面量赋值，支持完整闭合的引号及行尾注释；不支持变量插值，字面量美元符号
 使用单引号包裹。准备校验与 CD Compose 配置校验失败时仅输出通用错误，捕获的诊断不输出。
