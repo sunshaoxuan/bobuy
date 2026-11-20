@@ -1,0 +1,130 @@
+{
+  "y": 4888,
+  "viewport": 360,
+  "overflow": false,
+  "header": {
+    "top": 0,
+    "bottom": 120,
+    "left": 0,
+    "right": 360,
+    "width": 360,
+    "height": 120
+  },
+  "dock": {
+    "top": 120,
+    "bottom": 229,
+    "left": 16,
+    "right": 344,
+    "width": 328,
+    "height": 109
+  },
+  "sections": [
+    {
+      "id": "shop-progressive-leaf-1",
+      "box": {
+        "top": -4429.203125,
+        "bottom": 257.484375,
+        "left": 16,
+        "right": 344,
+        "width": 328,
+        "height": 4686.6875
+      },
+      "heading": {
+        "top": 187.734375,
+        "bottom": 245.484375,
+        "left": 16,
+        "right": 344,
+        "width": 328,
+        "height": 57.75
+      },
+      "label": {
+        "top": 202.609375,
+        "bottom": 229.609375,
+        "left": 16,
+        "right": 241.59375,
+        "width": 225.59375,
+        "height": 27
+      },
+      "image": {
+        "top": 204.109375,
+        "bottom": 228.109375,
+        "left": 16,
+        "right": 40,
+        "width": 24,
+        "height": 24
+      },
+      "last": {
+        "top": -79.203125,
+        "bottom": 257.484375,
+        "left": 16,
+        "right": 174,
+        "width": 158,
+        "height": 336.6875
+      },
+      "count": 25,
+      "style": {
+        "position": "sticky",
+        "marginBottom": "12px",
+        "top": "229px",
+        "zIndex": "10",
+        "background": "rgb(255, 255, 255)",
+        "border": "1px solid rgb(229, 227, 220)",
+        "font": "18px"
+      }
+    },
+    {
+      "id": "shop-progressive-leaf-2",
+      "box": {
+        "top": 289.484375,
+        "bottom": 3192.734375,
+        "left": 16,
+        "right": 344,
+        "width": 328,
+        "height": 2903.25
+      },
+      "heading": {
+        "top": 289.484375,
+        "bottom": 347.234375,
+        "left": 16,
+        "right": 344,
+        "width": 328,
+        "height": 57.75
+      },
+      "label": {
+        "top": 304.359375,
+        "bottom": 331.359375,
+        "left": 16,
+        "right": 241.59375,
+        "width": 225.59375,
+        "height": 27
+      },
+      "image": {
+        "top": 305.859375,
+        "bottom": 329.859375,
+        "left": 16,
+        "right": 40,
+        "width": 24,
+        "height": 24
+      },
+      "last": {
+        "top": 2856.046875,
+        "bottom": 3192.734375,
+        "left": 16,
+        "right": 174,
+        "width": 158,
+        "height": 336.6875
+      },
+      "count": 15,
+      "style": {
+        "position": "sticky",
+        "marginBottom": "12px",
+        "top": "229px",
+        "zIndex": "10",
+        "background": "rgb(255, 255, 255)",
+        "border": "1px solid rgb(229, 227, 220)",
+        "font": "18px"
+      }
+    }
+  ],
+  "asset": "/assets/index-DoiMe8lM.js"
+}
