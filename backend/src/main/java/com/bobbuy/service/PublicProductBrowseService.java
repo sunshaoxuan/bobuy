@@ -82,7 +82,16 @@ public class PublicProductBrowseService {
   if(category==null||category.isBlank()||category.length()>255||expected==null)throw new IllegalArgumentException("Shelf requires category and revision");
   return project(0,merchant,"","",locale,false,expected,"default",markedFirst,category);
  }
+ /** Complete, disjoint second-level sections; continuation is pinned to the same public scope. */
+ @Transactional(readOnly=true,isolation=Isolation.REPEATABLE_READ)
+ public Browse sections(int page,Long merchant,String locale,boolean markedFirst,String scope,String section,String expected){
+  if(section==null||section.length()>255||!section.isEmpty()&&expected==null||section.isEmpty()&&page!=0)throw new IllegalArgumentException("Invalid section continuation");
+  return project(page,merchant,"",scope,locale,false,expected,"default",markedFirst,section,true);
+ }
  private Browse project(int page,Long merchant,String query,String category,String locale,boolean marked,String expected,String order,boolean markedFirst,String shelfOnly){
+  return project(page,merchant,query,category,locale,marked,expected,order,markedFirst,shelfOnly,false);
+ }
+ private Browse project(int page,Long merchant,String query,String category,String locale,boolean marked,String expected,String order,boolean markedFirst,String shelfOnly,boolean sections){
   ProductBrowseOrder.validate(order);
   validate(page,merchant,query,category,locale,expected);String q=text(query).strip().toLowerCase(Locale.ROOT),cat=text(category);
   var now=java.time.Instant.now();var data=dataset(merchant);String dataset=marked?"marked":"all";
@@ -100,7 +109,7 @@ public class PublicProductBrowseService {
    if(shoppingData==null){if(entry.categories().isEmpty())unclassified++;var seen=new HashSet<String>();for(var c:entry.categories())if(seen.add(c.id())){labels.put(c.id(),c);counts.merge(c.id(),1L,Long::sum);}}
    else {String leaf=assignments.get(entry.productId());if(leaf==null)unclassified++;else{counts.merge(leaf,1L,Long::sum);if(parents.get(leaf)!=null)counts.merge(parents.get(leaf),1L,Long::sum);}}
   }
-  var facets=shoppingData==null?counts.entrySet().stream().map(e->new Facet(e.getKey(),labels.get(e.getKey()).name(),e.getValue())).toList():display.stream().filter(c->counts.getOrDefault(c.id(),0L)>0).map(c->new Facet(c.id(),c.name(),counts.get(c.id()),c.parentId(),c.icon(),c.imageUrl())).toList();
+  var facets=shoppingData==null?counts.entrySet().stream().map(e->new Facet(e.getKey(),labels.get(e.getKey()).name(),e.getValue())).toList():display.stream().filter(c->counts.getOrDefault(c.id(),0L)>0||c.id().equals(cat)||c.id().equals(parents.get(cat))).map(c->new Facet(c.id(),c.name(),counts.getOrDefault(c.id(),0L),c.parentId(),c.icon(),c.imageUrl())).toList();
   // Obsolete raw-category links return to the overview; never interpret a source ID as a shopping ID.
   final String selected=shoppingData!=null&&!cat.equals("__unclassified")&&display.stream().noneMatch(c->c.id().equals(cat))?"":cat;
   var filtered=scope.stream().filter(e->{if(selected.isEmpty())return true;if(shoppingData==null)return selected.equals("__unclassified")&&e.categories().isEmpty()||e.categories().stream().anyMatch(c->c.id().equals(selected));String leaf=assignments.get(e.productId());return selected.equals("__unclassified")?leaf==null:selected.equals(leaf)||selected.equals(parents.get(leaf));}).toList();
@@ -112,10 +121,25 @@ public class PublicProductBrowseService {
   java.util.function.Function<PublicProductCatalogService.Entry,Card> card=e->new Card(e.productId(),e.merchantId(),e.name(),e.brand(),e.itemNumber(),e.specification(),e.model(),e.packaging(),e.gallery().isEmpty()?null:e.gallery().get(0),shoppingData==null?e.categories():display.stream().filter(c->c.id().equals(assignments.get(e.productId()))).map(c->new RecommendationItem.Label(c.id(),c.name())).toList(),data.markers().getOrDefault(e.productId(),List.of()),e.reviewedMaster(),e.rating(),reference(e,now));
   var cards=shelfOnly==null?filtered.subList(start,end).stream().map(card).toList():List.<Card>of();
   var shelves=new ArrayList<Shelf>();
-  if(shoppingData!=null&&!selected.equals("__unclassified")&&!parents.containsKey(selected)
+  if(!sections&&shoppingData!=null&&!selected.equals("__unclassified")&&!parents.containsKey(selected)
       &&(selected.isEmpty()||filtered.stream().noneMatch(e->selected.equals(assignments.get(e.productId()))))){
    for(var facet:facets)if(Objects.equals(facet.parentId(),selected.isEmpty()?null:selected)){var shelfRows=filtered.stream().filter(e->{var leaf=assignments.get(e.productId());return facet.id().equals(leaf)||facet.id().equals(parents.get(leaf));}).toList();if(!shelfRows.isEmpty())shelves.add(new Shelf(facet.id(),shelfOnly==null||facet.id().equals(shelfOnly)||shelfOnly.isEmpty()&&shelves.isEmpty()?shelfRows.stream().limit(8).map(card).toList():List.of(),shelfRows.size()));}
    if(selected.isEmpty()&&unclassified>0){var rows=filtered.stream().filter(e->!assignments.containsKey(e.productId())).toList();shelves.add(new Shelf("__unclassified",shelfOnly==null||"__unclassified".equals(shelfOnly)||shelfOnly.isEmpty()&&shelves.isEmpty()?rows.stream().limit(8).map(card).toList():List.of(),rows.size()));}
+  }
+  if(sections){
+   // Partition by authoritative assignment, never by the first page's cards. Include retained root-only assignments.
+   var bySection=new LinkedHashMap<String,List<PublicProductCatalogService.Entry>>();
+   for(var root:display)if(root.parentId()==null){
+    bySection.put(root.id(),new ArrayList<>());
+    for(var child:display)if(root.id().equals(child.parentId()))bySection.put(child.id(),new ArrayList<>());
+   }
+   bySection.put("__unclassified",new ArrayList<>());
+   for(var entry:filtered)bySection.computeIfAbsent(assignments.getOrDefault(entry.productId(),"__unclassified"),key->new ArrayList<>()).add(entry);
+   for(var entry:bySection.entrySet())if(!entry.getValue().isEmpty()){
+    var rows=entry.getValue();boolean include=entry.getKey().equals(shelfOnly)||shelfOnly.isEmpty()&&shelves.isEmpty();
+    int offset=(int)Math.min((long)page*24,rows.size());
+    shelves.add(new Shelf(entry.getKey(),include?rows.subList(offset,Math.min(offset+(shelfOnly.isEmpty()?8:24),rows.size())).stream().map(card).toList():List.of(),rows.size()));
+   }
   }
   if(shelfOnly!=null&&!shelfOnly.isEmpty()){
    shelves.removeIf(s->!s.category().equals(shelfOnly));
