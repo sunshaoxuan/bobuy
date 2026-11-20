@@ -2,7 +2,8 @@
   "baseline": "fe3c7ce0e40759e1d0bd857ff70174cafcd158d4",
   "baselineArtifact": "index-fXUHmNta.js (PR168 retained build on 5178)",
   "source": {
-    "frontend/src/public-catalog.css": "4eb9f0c46f745492dd5d5841801be41e48af9bb633a1319d424e1603f4d11089"
+    "frontend/src/public-catalog.css": "4eb9f0c46f745492dd5d5841801be41e48af9bb633a1319d424e1603f4d11089",
+    "frontend/src/components/CatalogDock.tsx": "ddd66eede2db05498d2e4c53345a84a807b5939208672eca0c54fe510ee05077"
   },
   "candidateArtifacts": {
     "index-SR5yC0kD.js": "4065aa964aa622840e725aa215ec632c4919935af476b2542a4bf9ce5f96f034",
@@ -19,5 +20,22 @@
     "index-D11LY1pR.js": "87ffd37b23a39583f02b78adf5770c86739d1e706c469b88fd71b32a308215f7",
     "index-CaeSLMfV.js": "e4f186746dc8a7e13a05f6abf1aa018f29f050a80f1042dec6e522fd02c9ebb9",
     "index-DgxOkm7w.js": "b297350ca27db76a7097c0285fd91e0a332028c53db3ed09c018a327acd51728"
+  },
+  "finalEntry": "index-B9_YXCcY.js",
+  "fixedArtifacts": {
+    "index-B9_YXCcY.js": "cca55753d48c715a4d35726f9a09d2ab45d387ace4d9fe0d7b08fcd6dcb55913",
+    "index-buFr3YYM.css": "1c05817bcaeb0778ca55da101e155f9e86f3b40558a965f59f521152349d68f3",
+    "index-CBvec01V.js": "714cefc959d90ef44c3ae2d04139d8c20bb3c129ba2e0225d5be7370a7aad041",
+    "index-D_9-waRB.js": "a25dfca4fe665f12fc86206650f9702d7a728299ab30f7194a003be7723ba353",
+    "index-D1snPaNS.js": "0179e8a11f607bac3934632f87851b53baa75a79d37068838042b3094b1b69ae",
+    "index-UpGYwJxZ.js": "fc406d7dc6af70ecdf534c9d6c8a68e121ac3fdf03da231f2a16071ef6b8b05a",
+    "index-DPVYx4U-.js": "be52fd8cf69b9efa7b01d3cdce82d5c39545072af35849cc91bc90a2d1390d1e",
+    "index-Bw5E8aBS.js": "9fd527ec14480ceeff89d53bfd0d6e3cfda22b3b860050b5289d03f4177082dc",
+    "index-B6CO5C0n.js": "0068c32c20dcc7b9f433a8f5a2b4096c38f7a6941a3f1e73baba3f10d89cecbe",
+    "index-BsIpodzs.js": "2c76f9b18d13cd77820996cf5b9d98bdc93b60dba4f2143906c2524bea618862",
+    "index-BHncsZdn.js": "d950f4fc326bdeb88e012c208303e21d2efb87427bf09852a61d9163d4f72567",
+    "index-DcHIjJa_.js": "d0638202382e7ea2174433dde8c2e09ab559136b2d1152723429acaf4012e068",
+    "index-JsVf3AtE.js": "1baa6d7268efdb52f98a931bad2cfe146aa6953eb3f4594d4e6d972bbba14269",
+    "index-CNN6lbIj.js": "0778560a410ca67b21c9b4e5f645cec262b025c17aac16bbdfc3357eec5b8102"
   }
 }

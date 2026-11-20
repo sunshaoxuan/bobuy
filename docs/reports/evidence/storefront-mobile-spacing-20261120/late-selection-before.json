@@ -1,0 +1,19 @@
+{
+  "viewport": 360,
+  "root": 19,
+  "method": "direct category URL followed by real CDP upward touch swipe",
+  "before": {
+    "compact": "false",
+    "y": 0,
+    "left": 236,
+    "rightGap": 4,
+    "scrollLeft": 1592
+  },
+  "after": {
+    "compact": "true",
+    "y": 185,
+    "left": -30,
+    "rightGap": 282,
+    "scrollLeft": 1592
+  }
+}

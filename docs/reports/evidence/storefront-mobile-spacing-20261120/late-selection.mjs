@@ -1,0 +1,30 @@
+import {chromium} from '../../../../frontend/node_modules/playwright-core/index.mjs';
+import {writeFileSync} from 'node:fs';
+import assert from 'node:assert/strict';
+const out=new URL('.',import.meta.url),browser=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox']}),results=[];
+async function read(p){return p.evaluate(()=>{const t=document.querySelector('.category-shortcuts-track'),a=t.querySelector('[aria-current]'),r=t.getBoundingClientRect(),q=a.getBoundingClientRect();return {compact:document.querySelector('.catalog-dock').dataset.compact,y:scrollY,left:q.left-r.left,rightGap:r.right-q.right,scrollLeft:t.scrollLeft,surface:document.querySelector('.catalog-dock-surface').getBoundingClientRect().height};});}
+const visible=g=>g.left>=-0.5&&g.rightGap>=-0.5;
+async function stable(p,compact){await p.waitForFunction(v=>document.querySelector('.catalog-dock').dataset.compact===String(v),compact);await p.locator('.catalog-dock').evaluate(async e=>{await Promise.all(e.getAnimations({subtree:true}).map(a=>a.finished.catch(()=>{})));});}
+async function swipe(cdp,x,y,dx,dy){await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x,y}]});for(let i=1;i<=5;i++){await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x+dx*i/5,y:y+dy*i/5}]});await new Promise(r=>setTimeout(r,30));}await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});}
+async function settled(p){await p.waitForFunction(()=>{const t=document.querySelector('.category-shortcuts-track'),now=performance.now(),last=window.__lateScrollStable;if(!last||last.x!==t.scrollLeft||last.y!==scrollY){window.__lateScrollStable={x:t.scrollLeft,y:scrollY,at:now};return false;}return now-last.at>150;});}
+async function shot(p,name){await p.screenshot({path:new URL(name+'.png',out).pathname});await p.locator('.catalog-dock-surface').screenshot({path:new URL(name+'-navigation.png',out).pathname});}
+try{
+ for(const [width,height] of [[360,800],[390,844],[1280,800]]){
+  const ctx=await browser.newContext({viewport:{width,height},isMobile:width<400,hasTouch:width<400}),p=await ctx.newPage(),errors=[],network=[],rows=[];await ctx.addInitScript(()=>{localStorage.setItem('bobbuy_locale','zh-CN');localStorage.setItem('bobbuy_disable_chat_websocket','true');});p.on('pageerror',e=>errors.push(e.message));p.on('console',m=>{if(m.type()==='error')errors.push(m.text());});p.on('response',r=>{const u=new URL(r.url());if(u.pathname.startsWith('/api/'))network.push({path:u.pathname,status:r.status()});});const cdp=await ctx.newCDPSession(p);
+  async function open(root){await p.goto('http://127.0.0.1:5180/products?node=1000&category=shop-000-progressive-'+String(root).padStart(2,'0'));await p.waitForFunction(()=>document.querySelectorAll('.catalog-master-card').length===20&&document.querySelector('.public-product-catalog').getAttribute('aria-busy')==='false');await p.evaluate(()=>document.fonts.ready);await p.waitForTimeout(250);}
+  for(const root of (width===390?[18,19,21]:width===360?[18,19]:[19])){
+   await open(root);const expanded=await read(p);assert(visible(expanded));if(root===19&&width<400)await shot(p,'late-expanded-'+width);
+   if(width<400){await swipe(cdp,180,650,0,-200);await settled(p);}else await p.evaluate(()=>scrollTo(0,420));await stable(p,true);const compact=await read(p);assert(visible(compact));assert.equal(compact.surface,width<400?109:133);if(width===1280)assert.equal(compact.scrollLeft,expanded.scrollLeft);if(root===19||root===21)await shot(p,'late-compact-'+width+'-'+root);
+   if(width<400){await swipe(cdp,180,300,0,320);await settled(p);}else await p.evaluate(()=>scrollTo(0,0));await stable(p,false);const returned=await read(p);assert(visible(returned));assert(Math.abs(returned.scrollLeft-expanded.scrollLeft)<1);if(root===19&&width<400)await shot(p,'late-returned-'+width);rows.push({root,expanded,compact,returned});
+  }
+  let exploration,history;
+  if(width<400){
+   await open(19);const t=p.locator('.category-shortcuts-track'),r=await t.boundingBox();await swipe(cdp,r.x+30,r.y+20,220,0);await settled(p);const manual=await read(p);assert(!visible(manual));await swipe(cdp,180,650,0,-200);await settled(p);await stable(p,true);const compact=await read(p);assert(Math.abs(compact.scrollLeft-manual.scrollLeft)<1);
+   // Explore again while already compact; vertical scrolling must not re-center.
+   const rc=await t.boundingBox();await swipe(cdp,rc.x+30,rc.y+20,220,0);await settled(p);const explored=await read(p);assert(!visible(explored));await p.evaluate(()=>scrollBy(0,30));await p.waitForTimeout(120);const vertical=await read(p);assert(Math.abs(vertical.scrollLeft-explored.scrollLeft)<1);exploration={manual,compact,explored,vertical};
+   const href=await t.evaluate(e=>{const r=e.getBoundingClientRect();return [...e.querySelectorAll('a:not([aria-current])')].find(a=>{const b=a.getBoundingClientRect();return b.left>=r.left+1&&b.right<=r.right-1;})?.getAttribute('href');});assert(href);const before=await read(p);await p.locator('.category-shortcuts a[href="'+href+'"]').tap();await p.waitForURL(u=>u.searchParams.get('category')!=='shop-000-progressive-19');await p.waitForFunction(()=>document.querySelector('.public-product-catalog').getAttribute('aria-busy')==='false');await p.goBack();await p.waitForURL(/category=shop-000-progressive-19/);await p.waitForFunction(y=>Math.abs(scrollY-y)<2,before.y);await stable(p,true);const restored=await read(p);assert(Math.abs(restored.scrollLeft-before.scrollLeft)<2);history={before,restored};
+  }
+  assert.deepEqual(errors,[]);assert(!network.some(n=>n.status>=400));results.push({width,height,result:'PASS',rows,exploration,history,errors,network});writeFileSync(new URL('late-selection.json',out),JSON.stringify({result:'RUNNING',results},null,2)+'\n');await ctx.close();console.log('PASS late selection',width);
+ }
+ writeFileSync(new URL('late-selection.json',out),JSON.stringify({result:'PASS',results},null,2)+'\n');
+}finally{await browser.close();}
