@@ -20,6 +20,22 @@ it('recovers only failed trip metadata after foreground events and preserves the
 });
 function Probe(){const location=useLocation(),navigate=useNavigate();return <><output data-testid="route">{location.pathname+location.search}</output><button onClick={()=>navigate(-1)}>Back</button><button onClick={()=>navigate(1)}>Forward</button></>;}
 function mount(path:string){return render(<I18nProvider><MemoryRouter initialEntries={[path]}><Probe/><Storefront/></MemoryRouter></I18nProvider>);}
+it.each(['/account','/login/?node=1'])('hides the menu and node context on %s without changing the catalog preference',async path=>{
+ localStorage.setItem('bobbuy_store_navigation_desktop','expanded');
+ mocks.role.isAuthenticated=false;
+ try {
+  const view=mount(path);
+  await screen.findByRole('heading',{name:translate('en-US','store.create_account')});
+  expect(view.container.querySelector('.browse-context')).toBeNull();
+  expect(view.container.querySelector('.shopping-sidebar')).toBeNull();
+  expect(localStorage.getItem('bobbuy_store_navigation_desktop')).toBe('expanded');
+  expect(mocks.nodes).not.toHaveBeenCalled();
+  fireEvent.click(view.container.querySelector('.browse-header-brand')!);
+  await screen.findByRole('heading',{name:'Catalog fixture'});
+  expect(view.container.querySelector('.shopping-sidebar')).toBeInTheDocument();
+  expect(view.container.querySelector('.browse-menu-toggle')).toHaveAttribute('aria-expanded','true');
+ } finally {mocks.role.isAuthenticated=true;}
+});
 it('keeps the home-linked brand in a separate header container while the remembered menu opens and closes',async()=>{
  localStorage.setItem('bobbuy_store_navigation_desktop','expanded');
  const view=mount('/products?node=1');

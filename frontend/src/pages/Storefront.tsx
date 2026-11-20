@@ -8,7 +8,7 @@ import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import { Alert, Badge, Button, Drawer, Empty, Form, Input, InputNumber, Modal, Segmented, Spin, Tag } from 'antd';
 import { ArrowLeftOutlined, ArrowRightOutlined, CalendarOutlined, CheckCircleOutlined, CloseOutlined, DeleteOutlined,
   LogoutOutlined, MailOutlined, MenuOutlined, MinusOutlined, PlusOutlined, SearchOutlined, ShoppingCartOutlined, ShopOutlined, UserOutlined } from '@ant-design/icons';
-import { Link, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Link, matchPath, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { api, recommendationApi, storefrontApi, type StoreProduct, type StoreTrip } from '../api';
 import { getStoredAccessToken, storeAuthSession } from '../authStorage';
 import { useUserRole } from '../context/UserRoleContext';
@@ -114,6 +114,7 @@ export default function Storefront({passwordResetToken=''}:{passwordResetToken?:
   const { user, isAuthenticated, isCustomer, logout, loading:authLoading } = useUserRole();
   const navigate = useNavigate();
   const location = useLocation();
+  const showBrowseContext = !matchPath('/account', location.pathname) && !matchPath('/login', location.pathname);
   const searchable=location.pathname==='/'||location.pathname==='/products'||location.pathname==='/trips'||location.pathname.startsWith('/recommendations');
   const node = selectedNode(location.search);
   const currentNode=useRef(node);currentNode.current=node;
@@ -121,16 +122,17 @@ export default function Storefront({passwordResetToken=''}:{passwordResetToken?:
   useEffect(()=>{contextLife.current=true;return()=>{contextLife.current=false;bookableGeneration.current++;activeGeneration.current++;};},[]);
   const [navigationDeviceType,setNavigationDeviceType] = useState(()=>navigationDevice(window.innerWidth));
   const [shoppingCategories,setShoppingCategories]=useState<BrowseFacet[]>([]);
-  const [navigationOpen,setNavigationOpen] = useState(()=>readNavigationExpanded(navigationDevice(window.innerWidth)));
+  const [navigationExpanded,setNavigationOpen] = useState(()=>readNavigationExpanded(navigationDevice(window.innerWidth)));
+  const navigationOpen = showBrowseContext && navigationExpanded;
   useEffect(()=>{const changed=()=>{const next=navigationDevice(window.innerWidth);setNavigationDeviceType(previous=>{if(previous!==next)setNavigationOpen(readNavigationExpanded(next));return next;});};window.addEventListener('resize',changed);return()=>window.removeEventListener('resize',changed);},[]);
-  useEffect(()=>rememberNavigationExpanded(navigationDeviceType,navigationOpen),[navigationDeviceType,navigationOpen]);
+  useEffect(()=>rememberNavigationExpanded(navigationDeviceType,navigationExpanded),[navigationDeviceType,navigationExpanded]);
   const [cartConfirmationOpen,setCartConfirmationOpen] = useState(false);
   const [publicNodes,setPublicNodes] = useState<{id:number;name:string}[]>();
   const [nodeNameError,setNodeNameError]=useState(false);
   const failedReads=useRef(new Set<string>()),readsInFlight=useRef(new Map<string,number>());
   const [nodeAttempt,setNodeAttempt]=useState(0);
   function readFailed(key:string,error:unknown){if(isRecoverableReadError(error))failedReads.current.add(key);else failedReads.current.delete(key);setError(t((error as Error).message));}
-  const needsNodeNames=node!==undefined||navigationOpen;
+  const needsNodeNames=showBrowseContext&&(node!==undefined||navigationOpen);
   const [privateNodes,setPrivateNodes]=useState<{userId?:number;ids:number[]}>({ids:[]});
   const scope=authLoading?null:cartScope(isAuthenticated?user?.id:undefined);
   const draft=useCartDraft(scope),cart=draft.cart;
@@ -284,7 +286,8 @@ export default function Storefront({passwordResetToken=''}:{passwordResetToken?:
   const retryBrowse=()=>{setError('');void load();void loadActive();setCartPriceAttempt(value=>value+1);setNodeAttempt(value=>value+1);};
   return <div className={`storefront browse-shell ${(location.pathname === '/' || location.pathname === '/products' || location.pathname.startsWith('/recommendations')) ? 'storefront-catalog' : ''}`}>
     <StoreNavigation categories={shoppingCategories} mobile={navigationDeviceType==='mobile'} nodes={visibleNodes} node={node} loading={loading} homePath={homeNavigationPath} open={navigationOpen} onClose={()=>setNavigationOpen(false)} onNodeChange={changeNode}/>
-    <div className="browse-workspace"><header className="store-header"><div className="store-brand-header"><Link className="browse-header-brand" to={scopedPath('/',location.search)}><BrandLogo compact/></Link></div><div className="browse-context"><Button className="browse-menu-toggle" icon={<MenuOutlined/>} aria-label={t(navigationOpen?'app.close_menu':'app.open_menu')} aria-expanded={navigationOpen} onClick={()=>setNavigationOpen(value=>!value)}/><span className="browse-context-node">{node===undefined?t('browse.all_nodes'):visibleNodes.find(value=>value.id===node)?.name??t(needsNodeNames&&publicNodes===undefined&&!nodeNameError?'browse.node_loading':'browse.unavailable_node')}</span></div>
+    <div className="browse-workspace"><header className="store-header"><div className="store-brand-header"><Link className="browse-header-brand" to={scopedPath('/',location.search)}><BrandLogo compact/></Link></div>
+    {showBrowseContext&&<div className="browse-context"><Button className="browse-menu-toggle" icon={<MenuOutlined/>} aria-label={t(navigationOpen?'app.close_menu':'app.open_menu')} aria-expanded={navigationOpen} onClick={()=>setNavigationOpen(value=>!value)}/><span className="browse-context-node">{node===undefined?t('browse.all_nodes'):visibleNodes.find(value=>value.id===node)?.name??t(needsNodeNames&&publicNodes===undefined&&!nodeNameError?'browse.node_loading':'browse.unavailable_node')}</span></div>}
     {searchable&&<Input className="browse-search" prefix={<SearchOutlined/>} aria-label={t('store.search')} placeholder={t('store.search')} allowClear value={search} onChange={event=>setSearch(event.target.value)}/>}
     <div className="store-header-actions"><LanguageSwitcher /><Link to={scopedPath('/account',location.search)} aria-label={t('store.account')}><UserOutlined /></Link><Badge count={quantity} size="small"><Link to={scopedPath('/cart',location.search)} aria-label={t('store.cart_label',{count:quantity})}><ShoppingCartOutlined /></Link></Badge></div></header>
     <main className="store-main">{maintenance?<MaintenanceNotice retry={retryBrowse}/>:error&&!quietTripFailure && <Alert type="error" message={error} action={<Button onClick={retryBrowse}>{t('store.retry')}</Button>} closable onClose={() => setError('')} />}
