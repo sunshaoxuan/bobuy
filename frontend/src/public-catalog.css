@@ -243,9 +243,9 @@
 .catalog-dock .category-shortcuts-track a { height:100px; min-height:100px; padding:4px 2px; gap:4px; box-sizing:border-box; border-radius:8px; text-decoration:none; transition:height 180ms ease-out,min-height 180ms ease-out; }
 .catalog-dock .category-shortcuts-image { flex-shrink:0; transition:width 180ms ease-out,height 180ms ease-out; }
 .category-shortcuts-all { display:grid; place-items:center; font-size:24px; color:#242424; }
-.category-shortcuts-track a[aria-current] { background:#242424; color:#fff; font-weight:600; }
-.category-shortcuts-track a[aria-current] span[title] { text-decoration:underline; text-underline-offset:3px; }
-.category-shortcuts-track a[aria-current]:hover { background:#171717; }
+.catalog-dock .category-shortcuts-track a[aria-current] { background:#eeeee9; color:#242424; box-shadow:inset 0 0 0 1px #d1d1c9; font-weight:600; }
+.catalog-dock .category-shortcuts-track a[aria-current] span[title] { text-decoration:underline; text-underline-offset:3px; }
+.catalog-dock .category-shortcuts-track a[aria-current]:hover { background:#e5e5df; }
 .catalog-dock[data-compact="true"] .catalog-dock-surface { border-bottom-color:#ededed; }
 .public-product-catalog .catalog-dock[data-compact="true"] .catalog-master-heading { height:40px; }
 .public-product-catalog .catalog-dock[data-compact="true"] .catalog-master-heading h1 { font-size:20px; }
