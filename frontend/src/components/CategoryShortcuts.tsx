@@ -63,13 +63,15 @@ export default function CategoryShortcuts({categories, toCategory, initialScroll
   return <nav ref={nav} className="category-shortcuts" aria-label={t('shopping.directory')}>
     {edges.overflow && <button type="button" aria-disabled={!edges.previous} aria-label={t('shopping.previous_categories')} onClick={() => move(-1)}><LeftOutlined aria-hidden="true"/></button>}
     <ul ref={track} className="category-shortcuts-track">
-      {overviewHref&&<li><Link to={overviewHref} aria-current={!selectedId?'page':undefined} onClick={()=>saveScroll(track.current!.scrollLeft)}><span className="category-shortcuts-image category-shortcuts-all" aria-hidden="true"><AppstoreOutlined/></span><span title={t('class.all')}>{t('class.all')}</span></Link></li>}
+      {overviewHref&&<li><Link to={overviewHref} aria-current={!selectedId?'page':undefined} onClick={()=>saveScroll(track.current!.scrollLeft)}><span className="category-shortcuts-content"><span className="category-shortcuts-image category-shortcuts-all" aria-hidden="true"><AppstoreOutlined/></span><span title={t('class.all')}>{t('class.all')}</span></span></Link></li>}
       {categories.map((category,index) => {
         const name = localizedContent(category.name, locale);
         return <li key={category.id}>
           <Link to={toCategory(category.id)} aria-current={selectedId===category.id?'true':undefined} onClick={() => saveScroll(track.current!.scrollLeft)}>
-            <CategoryImage src={category.imageUrl} priority={index<Math.min(2,visibleCategoryIconCount(window.innerWidth))} className="category-shortcuts-image"/>
-            <span title={name}>{name}</span>
+            <span className="category-shortcuts-content">
+              <CategoryImage src={category.imageUrl} priority={index<Math.min(2,visibleCategoryIconCount(window.innerWidth))} className="category-shortcuts-image"/>
+              <span title={name}>{name}</span>
+            </span>
           </Link>
         </li>;
       })}
