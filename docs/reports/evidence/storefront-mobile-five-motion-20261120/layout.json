@@ -1,0 +1,3637 @@
+{
+  "result": "PASS",
+  "results": [
+    {
+      "width": 360,
+      "height": 800,
+      "before": {
+        "expanded": {
+          "y": 0,
+          "track": {
+            "top": 176,
+            "bottom": 284,
+            "left": 16,
+            "right": 344,
+            "width": 328,
+            "height": 108
+          },
+          "dock": {
+            "top": 128,
+            "bottom": 284,
+            "left": 16,
+            "right": 344,
+            "width": 328,
+            "height": 156
+          },
+          "surface": {
+            "top": 128,
+            "bottom": 285,
+            "left": 16,
+            "right": 344,
+            "width": 328,
+            "height": 157
+          },
+          "entry": {
+            "top": 180,
+            "bottom": 280,
+            "left": 20,
+            "right": 108,
+            "width": 88,
+            "height": 100
+          },
+          "image": {
+            "top": 184,
+            "bottom": 232,
+            "left": 40,
+            "right": 88,
+            "width": 48,
+            "height": 48
+          },
+          "gap": 8,
+          "padding": [
+            4,
+            4
+          ],
+          "complete": 3,
+          "font": "13px",
+          "lineHeight": "18px",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "radius": "8px",
+          "minWidth": "0px",
+          "minHeight": "100px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "decoration": "underline",
+          "firstCardTop": 469.546875,
+          "overflow": false
+        },
+        "compact": {
+          "y": 420,
+          "track": {
+            "top": 152,
+            "bottom": 228,
+            "left": 16,
+            "right": 344,
+            "width": 328,
+            "height": 76
+          },
+          "dock": {
+            "top": 120,
+            "bottom": 276,
+            "left": 16,
+            "right": 344,
+            "width": 328,
+            "height": 156
+          },
+          "surface": {
+            "top": 120,
+            "bottom": 229,
+            "left": 16,
+            "right": 344,
+            "width": 328,
+            "height": 109
+          },
+          "entry": {
+            "top": 154,
+            "bottom": 226,
+            "left": 20,
+            "right": 96,
+            "width": 76,
+            "height": 72
+          },
+          "image": {
+            "top": 156,
+            "bottom": 184,
+            "left": 44,
+            "right": 72,
+            "width": 28,
+            "height": 28
+          },
+          "gap": 6,
+          "padding": [
+            4,
+            4
+          ],
+          "complete": 3,
+          "font": "13px",
+          "lineHeight": "18px",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "radius": "8px",
+          "minWidth": "0px",
+          "minHeight": "72px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "decoration": "underline",
+          "firstCardTop": 469.546875,
+          "overflow": false
+        },
+        "collapse": [
+          {
+            "ms": 14.5,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 69.89999999850988,
+            "width": 76,
+            "gap": 6,
+            "image": 42.25
+          },
+          {
+            "ms": 86,
+            "width": 76,
+            "gap": 6,
+            "image": 39.671875
+          },
+          {
+            "ms": 100.09999999403954,
+            "width": 76,
+            "gap": 6,
+            "image": 37.296875
+          },
+          {
+            "ms": 114.39999999850988,
+            "width": 76,
+            "gap": 6,
+            "image": 35.109375
+          },
+          {
+            "ms": 136.29999999701977,
+            "width": 76,
+            "gap": 6,
+            "image": 33.140625
+          },
+          {
+            "ms": 147.59999999403954,
+            "width": 76,
+            "gap": 6,
+            "image": 31.4375
+          },
+          {
+            "ms": 166.5,
+            "width": 76,
+            "gap": 6,
+            "image": 29.984375
+          },
+          {
+            "ms": 184.19999999552965,
+            "width": 76,
+            "gap": 6,
+            "image": 28.890625
+          },
+          {
+            "ms": 203,
+            "width": 76,
+            "gap": 6,
+            "image": 28.1875
+          },
+          {
+            "ms": 214.69999999552965,
+            "width": 76,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 224.69999999552965,
+            "width": 76,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 240.89999999850988,
+            "width": 76,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 358.09999999403954,
+            "width": 76,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 378.79999999701977,
+            "width": 76,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 399.09999999403954,
+            "width": 76,
+            "gap": 6,
+            "image": 28
+          }
+        ],
+        "expand": [
+          {
+            "ms": 12.599999994039536,
+            "width": 76,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 29.299999997019768,
+            "width": 88,
+            "gap": 8,
+            "image": 28
+          },
+          {
+            "ms": 45.19999999552965,
+            "width": 88,
+            "gap": 8,
+            "image": 31
+          },
+          {
+            "ms": 65.89999999850988,
+            "width": 88,
+            "gap": 8,
+            "image": 33.765625
+          },
+          {
+            "ms": 74.79999999701977,
+            "width": 88,
+            "gap": 8,
+            "image": 36.328125
+          },
+          {
+            "ms": 92.89999999850988,
+            "width": 88,
+            "gap": 8,
+            "image": 38.703125
+          },
+          {
+            "ms": 109.39999999850988,
+            "width": 88,
+            "gap": 8,
+            "image": 40.875
+          },
+          {
+            "ms": 125.29999999701977,
+            "width": 88,
+            "gap": 8,
+            "image": 42.84375
+          },
+          {
+            "ms": 143.59999999403954,
+            "width": 88,
+            "gap": 8,
+            "image": 44.5625
+          },
+          {
+            "ms": 159.5,
+            "width": 88,
+            "gap": 8,
+            "image": 46
+          },
+          {
+            "ms": 175,
+            "width": 88,
+            "gap": 8,
+            "image": 47.109375
+          },
+          {
+            "ms": 191.29999999701977,
+            "width": 88,
+            "gap": 8,
+            "image": 47.796875
+          },
+          {
+            "ms": 209.89999999850988,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 218.5,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 235,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 253.39999999850988,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 270.29999999701977,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 285.5,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 302.19999999552965,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 318.79999999701977,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 335.19999999552965,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 352.69999999552965,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 370.3999999985099,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 386.09999999403954,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 403,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          }
+        ],
+        "labels": [],
+        "errors": [],
+        "network": [
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-nodes",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/category-icons",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse/overview",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-01",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse/shelf",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-02",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse/shelf",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-03",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          }
+        ],
+        "asset": "/assets/index-B9_YXCcY.js"
+      },
+      "after": {
+        "expanded": {
+          "y": 0,
+          "track": {
+            "top": 176,
+            "bottom": 284,
+            "left": 16,
+            "right": 344,
+            "width": 328,
+            "height": 108
+          },
+          "dock": {
+            "top": 128,
+            "bottom": 284,
+            "left": 16,
+            "right": 344,
+            "width": 328,
+            "height": 156
+          },
+          "surface": {
+            "top": 128,
+            "bottom": 285,
+            "left": 16,
+            "right": 344,
+            "width": 328,
+            "height": 157
+          },
+          "entry": {
+            "top": 180,
+            "bottom": 280,
+            "left": 20,
+            "right": 108,
+            "width": 88,
+            "height": 100
+          },
+          "image": {
+            "top": 184,
+            "bottom": 232,
+            "left": 40,
+            "right": 88,
+            "width": 48,
+            "height": 48
+          },
+          "gap": 8,
+          "padding": [
+            4,
+            4
+          ],
+          "complete": 3,
+          "font": "13px",
+          "lineHeight": "18px",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "radius": "8px",
+          "minWidth": "0px",
+          "minHeight": "100px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "decoration": "underline",
+          "firstCardTop": 469.546875,
+          "overflow": false
+        },
+        "compact": {
+          "y": 420,
+          "track": {
+            "top": 152,
+            "bottom": 228,
+            "left": 16,
+            "right": 344,
+            "width": 328,
+            "height": 76
+          },
+          "dock": {
+            "top": 120,
+            "bottom": 276,
+            "left": 16,
+            "right": 344,
+            "width": 328,
+            "height": 156
+          },
+          "surface": {
+            "top": 120,
+            "bottom": 229,
+            "left": 16,
+            "right": 344,
+            "width": 328,
+            "height": 109
+          },
+          "entry": {
+            "top": 154,
+            "bottom": 226,
+            "left": 20,
+            "right": 79.1875,
+            "width": 59.1875,
+            "height": 72
+          },
+          "image": {
+            "top": 156,
+            "bottom": 184,
+            "left": 35.59375,
+            "right": 63.59375,
+            "width": 28,
+            "height": 28
+          },
+          "gap": 6,
+          "padding": [
+            4,
+            4
+          ],
+          "complete": 5,
+          "font": "13px",
+          "lineHeight": "18px",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "radius": "8px",
+          "minWidth": "0px",
+          "minHeight": "72px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "decoration": "underline",
+          "firstCardTop": 469.546875,
+          "overflow": false
+        },
+        "collapse": [
+          {
+            "ms": 12,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 54.099999994039536,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 64.19999999552965,
+            "width": 83.734375,
+            "gap": 7.70452,
+            "image": 45.03125
+          },
+          {
+            "ms": 74.29999999701977,
+            "width": 79.75,
+            "gap": 7.42779,
+            "image": 42.265625
+          },
+          {
+            "ms": 92.69999999552965,
+            "width": 72.609375,
+            "gap": 6.93124,
+            "image": 37.296875
+          },
+          {
+            "ms": 124.39999999850988,
+            "width": 69.453125,
+            "gap": 6.71247,
+            "image": 35.109375
+          },
+          {
+            "ms": 140.79999999701977,
+            "width": 66.625,
+            "gap": 6.51667,
+            "image": 33.15625
+          },
+          {
+            "ms": 155,
+            "width": 64.15625,
+            "gap": 6.34509,
+            "image": 31.4375
+          },
+          {
+            "ms": 170.29999999701977,
+            "width": 62.0625,
+            "gap": 6.19985,
+            "image": 29.984375
+          },
+          {
+            "ms": 183.29999999701977,
+            "width": 60.484375,
+            "gap": 6.08955,
+            "image": 28.890625
+          },
+          {
+            "ms": 197.09999999403954,
+            "width": 59.46875,
+            "gap": 6.01963,
+            "image": 28.1875
+          },
+          {
+            "ms": 328.8999999985099,
+            "width": 59.1875,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 359.3999999985099,
+            "width": 59.1875,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 436.8999999985099,
+            "width": 59.1875,
+            "gap": 6,
+            "image": 28
+          }
+        ],
+        "expand": [
+          {
+            "ms": 25.5,
+            "width": 59.1875,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 47.79999999701977,
+            "width": 59.1875,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 61.600000001490116,
+            "width": 63.5,
+            "gap": 6.29891,
+            "image": 30.984375
+          },
+          {
+            "ms": 78,
+            "width": 71.140625,
+            "gap": 6.82996,
+            "image": 36.296875
+          },
+          {
+            "ms": 98.79999999701977,
+            "width": 74.578125,
+            "gap": 7.06876,
+            "image": 38.6875
+          },
+          {
+            "ms": 114.5,
+            "width": 77.734375,
+            "gap": 7.28753,
+            "image": 40.875
+          },
+          {
+            "ms": 130.5,
+            "width": 80.5625,
+            "gap": 7.48444,
+            "image": 42.84375
+          },
+          {
+            "ms": 145.89999999850988,
+            "width": 83.03125,
+            "gap": 7.65586,
+            "image": 44.546875
+          },
+          {
+            "ms": 162.69999999552965,
+            "width": 85.109375,
+            "gap": 7.80015,
+            "image": 46
+          },
+          {
+            "ms": 178.19999999552965,
+            "width": 86.703125,
+            "gap": 7.91045,
+            "image": 47.09375
+          },
+          {
+            "ms": 199,
+            "width": 87.71875,
+            "gap": 7.98065,
+            "image": 47.796875
+          },
+          {
+            "ms": 213.5,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 221.39999999850988,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 237.39999999850988,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 255,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 271.3999999985099,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 287.29999999701977,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 305.69999999552965,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 320.6000000014901,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 337.1000000014901,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 354,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 373.79999999701977,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 388.1000000014901,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 403.8999999985099,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          }
+        ],
+        "labels": [
+          {
+            "text": "面包谷物与抹酱",
+            "width": 55.1875,
+            "height": 36,
+            "client": 36,
+            "scroll": 36,
+            "within": true,
+            "lines": [
+              {
+                "top": 185,
+                "left": 39.890625,
+                "right": 91.90625,
+                "text": "面包谷物",
+                "advance": 52.015625,
+                "spare": 3.171875
+              },
+              {
+                "top": 203,
+                "left": 46.390625,
+                "right": 85.40625,
+                "text": "与抹酱",
+                "advance": 39.015625,
+                "spare": 16.171875
+              }
+            ]
+          },
+          {
+            "text": "个人护理与美容",
+            "width": 55.1875,
+            "height": 36,
+            "client": 36,
+            "scroll": 36,
+            "within": true,
+            "lines": [
+              {
+                "top": 185,
+                "left": 39.890625,
+                "right": 91.90625,
+                "text": "个人护理",
+                "advance": 52.015625,
+                "spare": 3.171875
+              },
+              {
+                "top": 203,
+                "left": 46.390625,
+                "right": 85.40625,
+                "text": "与美容",
+                "advance": 39.015625,
+                "spare": 16.171875
+              }
+            ]
+          }
+        ],
+        "errors": [],
+        "network": [
+          {
+            "path": "/api/storefront/recommendation-nodes",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/category-icons",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse/overview",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-01",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse/shelf",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-02",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse/shelf",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-03",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-nodes",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-17",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-18",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-2",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-3",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-20",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-07",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-6",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-19",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-5",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-4",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-9",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-8",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-7",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+            "status": 200
+          }
+        ],
+        "asset": "/assets/index-CSi40-JO.js"
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "before": {
+        "expanded": {
+          "y": 0,
+          "track": {
+            "top": 176,
+            "bottom": 284,
+            "left": 16,
+            "right": 374,
+            "width": 358,
+            "height": 108
+          },
+          "dock": {
+            "top": 128,
+            "bottom": 284,
+            "left": 16,
+            "right": 374,
+            "width": 358,
+            "height": 156
+          },
+          "surface": {
+            "top": 128,
+            "bottom": 285,
+            "left": 16,
+            "right": 374,
+            "width": 358,
+            "height": 157
+          },
+          "entry": {
+            "top": 180,
+            "bottom": 280,
+            "left": 20,
+            "right": 108,
+            "width": 88,
+            "height": 100
+          },
+          "image": {
+            "top": 184,
+            "bottom": 232,
+            "left": 40,
+            "right": 88,
+            "width": 48,
+            "height": 48
+          },
+          "gap": 8,
+          "padding": [
+            4,
+            4
+          ],
+          "complete": 3,
+          "font": "13px",
+          "lineHeight": "18px",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "radius": "8px",
+          "minWidth": "0px",
+          "minHeight": "100px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "decoration": "underline",
+          "firstCardTop": 416.75,
+          "overflow": false
+        },
+        "compact": {
+          "y": 420,
+          "track": {
+            "top": 152,
+            "bottom": 228,
+            "left": 16,
+            "right": 374,
+            "width": 358,
+            "height": 76
+          },
+          "dock": {
+            "top": 120,
+            "bottom": 276,
+            "left": 16,
+            "right": 374,
+            "width": 358,
+            "height": 156
+          },
+          "surface": {
+            "top": 120,
+            "bottom": 229,
+            "left": 16,
+            "right": 374,
+            "width": 358,
+            "height": 109
+          },
+          "entry": {
+            "top": 154,
+            "bottom": 226,
+            "left": 20,
+            "right": 96,
+            "width": 76,
+            "height": 72
+          },
+          "image": {
+            "top": 156,
+            "bottom": 184,
+            "left": 44,
+            "right": 72,
+            "width": 28,
+            "height": 28
+          },
+          "gap": 6,
+          "padding": [
+            4,
+            4
+          ],
+          "complete": 4,
+          "font": "13px",
+          "lineHeight": "18px",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "radius": "8px",
+          "minWidth": "0px",
+          "minHeight": "72px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "decoration": "underline",
+          "firstCardTop": 416.75,
+          "overflow": false
+        },
+        "collapse": [
+          {
+            "ms": 12.899999998509884,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 62.100000001490116,
+            "width": 76,
+            "gap": 6,
+            "image": 42.25
+          },
+          {
+            "ms": 72.10000000149012,
+            "width": 76,
+            "gap": 6,
+            "image": 39.671875
+          },
+          {
+            "ms": 84.60000000149012,
+            "width": 76,
+            "gap": 6,
+            "image": 39.671875
+          },
+          {
+            "ms": 98.20000000298023,
+            "width": 76,
+            "gap": 6,
+            "image": 37.296875
+          },
+          {
+            "ms": 113.29999999701977,
+            "width": 76,
+            "gap": 6,
+            "image": 35.109375
+          },
+          {
+            "ms": 129.5,
+            "width": 76,
+            "gap": 6,
+            "image": 33.140625
+          },
+          {
+            "ms": 233.60000000149012,
+            "width": 76,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 266.20000000298023,
+            "width": 76,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 272.20000000298023,
+            "width": 76,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 320.70000000298023,
+            "width": 76,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 324.3999999985099,
+            "width": 76,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 342.20000000298023,
+            "width": 76,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 357.20000000298023,
+            "width": 76,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 373.8999999985099,
+            "width": 76,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 390.5,
+            "width": 76,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 408.1000000014901,
+            "width": 76,
+            "gap": 6,
+            "image": 28
+          }
+        ],
+        "expand": [
+          {
+            "ms": 17.299999997019768,
+            "width": 76,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 28.099999994039536,
+            "width": 88,
+            "gap": 8,
+            "image": 28
+          },
+          {
+            "ms": 49,
+            "width": 88,
+            "gap": 8,
+            "image": 30.984375
+          },
+          {
+            "ms": 61.5,
+            "width": 88,
+            "gap": 8,
+            "image": 33.734375
+          },
+          {
+            "ms": 79.29999999701977,
+            "width": 88,
+            "gap": 8,
+            "image": 36.3125
+          },
+          {
+            "ms": 96.79999999701977,
+            "width": 88,
+            "gap": 8,
+            "image": 38.6875
+          },
+          {
+            "ms": 118.09999999403954,
+            "width": 88,
+            "gap": 8,
+            "image": 40.875
+          },
+          {
+            "ms": 138.09999999403954,
+            "width": 88,
+            "gap": 8,
+            "image": 42.84375
+          },
+          {
+            "ms": 149.39999999850988,
+            "width": 88,
+            "gap": 8,
+            "image": 44.5625
+          },
+          {
+            "ms": 163.79999999701977,
+            "width": 88,
+            "gap": 8,
+            "image": 46
+          },
+          {
+            "ms": 183,
+            "width": 88,
+            "gap": 8,
+            "image": 47.109375
+          },
+          {
+            "ms": 198.59999999403954,
+            "width": 88,
+            "gap": 8,
+            "image": 47.796875
+          },
+          {
+            "ms": 215.39999999850988,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 224.79999999701977,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 241.19999999552965,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 257.29999999701977,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 274.3999999985099,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 290.69999999552965,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 308.5,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 324.79999999701977,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 341,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 358.09999999403954,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 376.59999999403954,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 391.3999999985099,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 408.09999999403954,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          }
+        ],
+        "labels": [],
+        "errors": [],
+        "network": [
+          {
+            "path": "/api/storefront/recommendation-nodes",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/category-icons",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse/overview",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-01",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse/shelf",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-02",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse/shelf",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-03",
+            "status": 200
+          }
+        ],
+        "asset": "/assets/index-B9_YXCcY.js"
+      },
+      "after": {
+        "expanded": {
+          "y": 0,
+          "track": {
+            "top": 176,
+            "bottom": 284,
+            "left": 16,
+            "right": 374,
+            "width": 358,
+            "height": 108
+          },
+          "dock": {
+            "top": 128,
+            "bottom": 284,
+            "left": 16,
+            "right": 374,
+            "width": 358,
+            "height": 156
+          },
+          "surface": {
+            "top": 128,
+            "bottom": 285,
+            "left": 16,
+            "right": 374,
+            "width": 358,
+            "height": 157
+          },
+          "entry": {
+            "top": 180,
+            "bottom": 280,
+            "left": 20,
+            "right": 108,
+            "width": 88,
+            "height": 100
+          },
+          "image": {
+            "top": 184,
+            "bottom": 232,
+            "left": 40,
+            "right": 88,
+            "width": 48,
+            "height": 48
+          },
+          "gap": 8,
+          "padding": [
+            4,
+            4
+          ],
+          "complete": 3,
+          "font": "13px",
+          "lineHeight": "18px",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "radius": "8px",
+          "minWidth": "0px",
+          "minHeight": "100px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "decoration": "underline",
+          "firstCardTop": 416.75,
+          "overflow": false
+        },
+        "compact": {
+          "y": 420,
+          "track": {
+            "top": 152,
+            "bottom": 228,
+            "left": 16,
+            "right": 374,
+            "width": 358,
+            "height": 76
+          },
+          "dock": {
+            "top": 120,
+            "bottom": 276,
+            "left": 16,
+            "right": 374,
+            "width": 358,
+            "height": 156
+          },
+          "surface": {
+            "top": 120,
+            "bottom": 229,
+            "left": 16,
+            "right": 374,
+            "width": 358,
+            "height": 109
+          },
+          "entry": {
+            "top": 154,
+            "bottom": 226,
+            "left": 20,
+            "right": 80,
+            "width": 60,
+            "height": 72
+          },
+          "image": {
+            "top": 156,
+            "bottom": 184,
+            "left": 36,
+            "right": 64,
+            "width": 28,
+            "height": 28
+          },
+          "gap": 6,
+          "padding": [
+            4,
+            4
+          ],
+          "complete": 5,
+          "font": "13px",
+          "lineHeight": "18px",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "radius": "8px",
+          "minWidth": "0px",
+          "minHeight": "72px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "decoration": "underline",
+          "firstCardTop": 416.75,
+          "overflow": false
+        },
+        "collapse": [
+          {
+            "ms": 17.100000001490116,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 54.5,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 62.900000005960464,
+            "width": 83.8125,
+            "gap": 7.70109,
+            "image": 45
+          },
+          {
+            "ms": 77.20000000298023,
+            "width": 79.953125,
+            "gap": 7.42619,
+            "image": 42.25
+          },
+          {
+            "ms": 87.40000000596046,
+            "width": 76.328125,
+            "gap": 7.16706,
+            "image": 39.65625
+          },
+          {
+            "ms": 104.70000000298023,
+            "width": 72.984375,
+            "gap": 6.9285,
+            "image": 37.28125
+          },
+          {
+            "ms": 115.70000000298023,
+            "width": 69.953125,
+            "gap": 6.71122,
+            "image": 35.109375
+          },
+          {
+            "ms": 133.30000000447035,
+            "width": 67.1875,
+            "gap": 6.51445,
+            "image": 33.140625
+          },
+          {
+            "ms": 147.80000000447035,
+            "width": 64.78125,
+            "gap": 6.34223,
+            "image": 31.421875
+          },
+          {
+            "ms": 247.20000000298023,
+            "width": 62.78125,
+            "gap": 6.19908,
+            "image": 29.984375
+          },
+          {
+            "ms": 273.40000000596046,
+            "width": 60,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 316.40000000596046,
+            "width": 60,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 325.90000000596046,
+            "width": 60,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 330.80000000447035,
+            "width": 60,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 340.30000000447035,
+            "width": 60,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 357.1000000014901,
+            "width": 60,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 373,
+            "width": 60,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 390.20000000298023,
+            "width": 60,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 407.30000000447035,
+            "width": 60,
+            "gap": 6,
+            "image": 28
+          }
+        ],
+        "expand": [
+          {
+            "ms": 14.899999998509884,
+            "width": 60,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 30.399999998509884,
+            "width": 60,
+            "gap": 6,
+            "image": 28
+          },
+          {
+            "ms": 59.5,
+            "width": 64.171875,
+            "gap": 6.29891,
+            "image": 30.984375
+          },
+          {
+            "ms": 77.89999999850988,
+            "width": 68.03125,
+            "gap": 6.57381,
+            "image": 33.734375
+          },
+          {
+            "ms": 94.79999999701977,
+            "width": 71.625,
+            "gap": 6.83145,
+            "image": 36.3125
+          },
+          {
+            "ms": 106.09999999403954,
+            "width": 74.953125,
+            "gap": 7.06876,
+            "image": 38.6875
+          },
+          {
+            "ms": 119.09999999403954,
+            "width": 78.015625,
+            "gap": 7.28753,
+            "image": 40.875
+          },
+          {
+            "ms": 134.19999999552965,
+            "width": 80.765625,
+            "gap": 7.48333,
+            "image": 42.828125
+          },
+          {
+            "ms": 151.29999999701977,
+            "width": 83.171875,
+            "gap": 7.65586,
+            "image": 44.546875
+          },
+          {
+            "ms": 165.39999999850988,
+            "width": 85.1875,
+            "gap": 7.80015,
+            "image": 46
+          },
+          {
+            "ms": 188.09999999403954,
+            "width": 86.734375,
+            "gap": 7.91045,
+            "image": 47.09375
+          },
+          {
+            "ms": 200.69999999552965,
+            "width": 87.71875,
+            "gap": 7.98065,
+            "image": 47.796875
+          },
+          {
+            "ms": 214.39999999850988,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 225.5,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 242.09999999403954,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 260.8999999985099,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 278.5,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 297,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 310.19999999552965,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 326.19999999552965,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 344.5,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 360.09999999403954,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 375.69999999552965,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 395.29999999701977,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 408.79999999701977,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          }
+        ],
+        "labels": [
+          {
+            "text": "面包谷物与抹酱",
+            "width": 56,
+            "height": 36,
+            "client": 36,
+            "scroll": 36,
+            "within": true,
+            "lines": [
+              {
+                "top": 185,
+                "left": 75.984375,
+                "right": 128,
+                "text": "面包谷物",
+                "advance": 52.015625,
+                "spare": 3.984375
+              },
+              {
+                "top": 203,
+                "left": 82.484375,
+                "right": 121.5,
+                "text": "与抹酱",
+                "advance": 39.015625,
+                "spare": 16.984375
+              }
+            ]
+          },
+          {
+            "text": "个人护理与美容",
+            "width": 56,
+            "height": 36,
+            "client": 36,
+            "scroll": 36,
+            "within": true,
+            "lines": [
+              {
+                "top": 185,
+                "left": 75.984375,
+                "right": 128,
+                "text": "个人护理",
+                "advance": 52.015625,
+                "spare": 3.984375
+              },
+              {
+                "top": 203,
+                "left": 82.484375,
+                "right": 121.5,
+                "text": "与美容",
+                "advance": 39.015625,
+                "spare": 16.984375
+              }
+            ]
+          }
+        ],
+        "errors": [],
+        "network": [
+          {
+            "path": "/api/storefront/recommendation-nodes",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/category-icons",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse/overview",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-01",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse/shelf",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-02",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse/shelf",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-03",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-nodes",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-19",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-18",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-2",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-17",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-20",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-07",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-3",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-6",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-5",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-4",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-8",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-7",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-9",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+            "status": 200
+          }
+        ],
+        "asset": "/assets/index-CSi40-JO.js"
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "before": {
+        "expanded": {
+          "y": 0,
+          "track": {
+            "top": 144,
+            "bottom": 252,
+            "left": 84,
+            "right": 1196,
+            "width": 1112,
+            "height": 108
+          },
+          "dock": {
+            "top": 96,
+            "bottom": 252,
+            "left": 32,
+            "right": 1248,
+            "width": 1216,
+            "height": 156
+          },
+          "surface": {
+            "top": 96,
+            "bottom": 253,
+            "left": 32,
+            "right": 1248,
+            "width": 1216,
+            "height": 157
+          },
+          "entry": {
+            "top": 148,
+            "bottom": 248,
+            "left": 88,
+            "right": 176,
+            "width": 88,
+            "height": 100
+          },
+          "image": {
+            "top": 152,
+            "bottom": 200,
+            "left": 108,
+            "right": 156,
+            "width": 48,
+            "height": 48
+          },
+          "gap": 8,
+          "padding": [
+            4,
+            4
+          ],
+          "complete": 11,
+          "font": "13px",
+          "lineHeight": "18px",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "radius": "8px",
+          "minWidth": "0px",
+          "minHeight": "100px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "decoration": "underline",
+          "firstCardTop": 384.75,
+          "overflow": false
+        },
+        "compact": {
+          "y": 420,
+          "track": {
+            "top": 116,
+            "bottom": 208,
+            "left": 84,
+            "right": 1196,
+            "width": 1112,
+            "height": 92
+          },
+          "dock": {
+            "top": 76,
+            "bottom": 232,
+            "left": 32,
+            "right": 1248,
+            "width": 1216,
+            "height": 156
+          },
+          "surface": {
+            "top": 76,
+            "bottom": 209,
+            "left": 32,
+            "right": 1248,
+            "width": 1216,
+            "height": 133
+          },
+          "entry": {
+            "top": 120,
+            "bottom": 204,
+            "left": 88,
+            "right": 176,
+            "width": 88,
+            "height": 84
+          },
+          "image": {
+            "top": 124,
+            "bottom": 160,
+            "left": 114,
+            "right": 150,
+            "width": 36,
+            "height": 36
+          },
+          "gap": 8,
+          "padding": [
+            4,
+            4
+          ],
+          "complete": 11,
+          "font": "13px",
+          "lineHeight": "18px",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "radius": "8px",
+          "minWidth": "0px",
+          "minHeight": "84px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "decoration": "underline",
+          "firstCardTop": 384.75,
+          "overflow": false
+        },
+        "collapse": [
+          {
+            "ms": 13.800000004470348,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 70.70000000298023,
+            "width": 88,
+            "gap": 8,
+            "image": 44.546875
+          },
+          {
+            "ms": 85.10000000149012,
+            "width": 88,
+            "gap": 8,
+            "image": 42.984375
+          },
+          {
+            "ms": 99.30000000447035,
+            "width": 88,
+            "gap": 8,
+            "image": 41.578125
+          },
+          {
+            "ms": 118.39999999850988,
+            "width": 88,
+            "gap": 8,
+            "image": 40.265625
+          },
+          {
+            "ms": 134.80000000447035,
+            "width": 88,
+            "gap": 8,
+            "image": 39.078125
+          },
+          {
+            "ms": 237.80000000447035,
+            "width": 88,
+            "gap": 8,
+            "image": 36
+          },
+          {
+            "ms": 274,
+            "width": 88,
+            "gap": 8,
+            "image": 36
+          },
+          {
+            "ms": 325.5,
+            "width": 88,
+            "gap": 8,
+            "image": 36
+          },
+          {
+            "ms": 338,
+            "width": 88,
+            "gap": 8,
+            "image": 36
+          },
+          {
+            "ms": 408,
+            "width": 88,
+            "gap": 8,
+            "image": 36
+          }
+        ],
+        "expand": [
+          {
+            "ms": 17.200000002980232,
+            "width": 88,
+            "gap": 8,
+            "image": 36
+          },
+          {
+            "ms": 31.899999998509884,
+            "width": 88,
+            "gap": 8,
+            "image": 36
+          },
+          {
+            "ms": 45.5,
+            "width": 88,
+            "gap": 8,
+            "image": 37.78125
+          },
+          {
+            "ms": 64.60000000149012,
+            "width": 88,
+            "gap": 8,
+            "image": 39.4375
+          },
+          {
+            "ms": 76.89999999850988,
+            "width": 88,
+            "gap": 8,
+            "image": 40.984375
+          },
+          {
+            "ms": 94.30000000447035,
+            "width": 88,
+            "gap": 8,
+            "image": 42.40625
+          },
+          {
+            "ms": 120,
+            "width": 88,
+            "gap": 8,
+            "image": 43.71875
+          },
+          {
+            "ms": 133,
+            "width": 88,
+            "gap": 8,
+            "image": 44.90625
+          },
+          {
+            "ms": 157,
+            "width": 88,
+            "gap": 8,
+            "image": 46.796875
+          },
+          {
+            "ms": 189.39999999850988,
+            "width": 88,
+            "gap": 8,
+            "image": 47.875
+          },
+          {
+            "ms": 213.80000000447035,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 244.80000000447035,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 246.60000000149012,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 255.20000000298023,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 275.80000000447035,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 289.70000000298023,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 306.1000000014901,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 323.30000000447035,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 339,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 355.3999999985099,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 372.70000000298023,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 389,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 405.80000000447035,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          }
+        ],
+        "labels": [],
+        "errors": [],
+        "network": [
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-nodes",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/category-icons",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse/overview",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-01",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse/shelf",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-02",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse/shelf",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-03",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          }
+        ],
+        "asset": "/assets/index-B9_YXCcY.js"
+      },
+      "after": {
+        "expanded": {
+          "y": 0,
+          "track": {
+            "top": 144,
+            "bottom": 252,
+            "left": 84,
+            "right": 1196,
+            "width": 1112,
+            "height": 108
+          },
+          "dock": {
+            "top": 96,
+            "bottom": 252,
+            "left": 32,
+            "right": 1248,
+            "width": 1216,
+            "height": 156
+          },
+          "surface": {
+            "top": 96,
+            "bottom": 253,
+            "left": 32,
+            "right": 1248,
+            "width": 1216,
+            "height": 157
+          },
+          "entry": {
+            "top": 148,
+            "bottom": 248,
+            "left": 88,
+            "right": 176,
+            "width": 88,
+            "height": 100
+          },
+          "image": {
+            "top": 152,
+            "bottom": 200,
+            "left": 108,
+            "right": 156,
+            "width": 48,
+            "height": 48
+          },
+          "gap": 8,
+          "padding": [
+            4,
+            4
+          ],
+          "complete": 11,
+          "font": "13px",
+          "lineHeight": "18px",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "radius": "8px",
+          "minWidth": "0px",
+          "minHeight": "100px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "decoration": "underline",
+          "firstCardTop": 384.75,
+          "overflow": false
+        },
+        "compact": {
+          "y": 420,
+          "track": {
+            "top": 116,
+            "bottom": 208,
+            "left": 84,
+            "right": 1196,
+            "width": 1112,
+            "height": 92
+          },
+          "dock": {
+            "top": 76,
+            "bottom": 232,
+            "left": 32,
+            "right": 1248,
+            "width": 1216,
+            "height": 156
+          },
+          "surface": {
+            "top": 76,
+            "bottom": 209,
+            "left": 32,
+            "right": 1248,
+            "width": 1216,
+            "height": 133
+          },
+          "entry": {
+            "top": 120,
+            "bottom": 204,
+            "left": 88,
+            "right": 176,
+            "width": 88,
+            "height": 84
+          },
+          "image": {
+            "top": 124,
+            "bottom": 160,
+            "left": 114,
+            "right": 150,
+            "width": 36,
+            "height": 36
+          },
+          "gap": 8,
+          "padding": [
+            4,
+            4
+          ],
+          "complete": 11,
+          "font": "13px",
+          "lineHeight": "18px",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "radius": "8px",
+          "minWidth": "0px",
+          "minHeight": "84px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "decoration": "underline",
+          "firstCardTop": 384.75,
+          "overflow": false
+        },
+        "collapse": [
+          {
+            "ms": 19.100000001490116,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 137.60000000149012,
+            "width": 88,
+            "gap": 8,
+            "image": 39.078125
+          },
+          {
+            "ms": 175.60000000149012,
+            "width": 88,
+            "gap": 8,
+            "image": 37.1875
+          },
+          {
+            "ms": 198,
+            "width": 88,
+            "gap": 8,
+            "image": 36.109375
+          },
+          {
+            "ms": 213,
+            "width": 88,
+            "gap": 8,
+            "image": 36.109375
+          },
+          {
+            "ms": 418.6000000014901,
+            "width": 88,
+            "gap": 8,
+            "image": 36
+          }
+        ],
+        "expand": [
+          {
+            "ms": 11.200000002980232,
+            "width": 88,
+            "gap": 8,
+            "image": 36
+          },
+          {
+            "ms": 47,
+            "width": 88,
+            "gap": 8,
+            "image": 37.78125
+          },
+          {
+            "ms": 65.90000000596046,
+            "width": 88,
+            "gap": 8,
+            "image": 39.4375
+          },
+          {
+            "ms": 81.30000000447035,
+            "width": 88,
+            "gap": 8,
+            "image": 40.984375
+          },
+          {
+            "ms": 103.40000000596046,
+            "width": 88,
+            "gap": 8,
+            "image": 43.71875
+          },
+          {
+            "ms": 122.40000000596046,
+            "width": 88,
+            "gap": 8,
+            "image": 44.90625
+          },
+          {
+            "ms": 145.30000000447035,
+            "width": 88,
+            "gap": 8,
+            "image": 45.9375
+          },
+          {
+            "ms": 174.40000000596046,
+            "width": 88,
+            "gap": 8,
+            "image": 47.453125
+          },
+          {
+            "ms": 191,
+            "width": 88,
+            "gap": 8,
+            "image": 47.875
+          },
+          {
+            "ms": 209.5,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 234.20000000298023,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 238.30000000447035,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 242.80000000447035,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 257.1000000014901,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 273.1000000014901,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 289.40000000596046,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 307.40000000596046,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 322.70000000298023,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 338.40000000596046,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 355,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 372.90000000596046,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 389.70000000298023,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          },
+          {
+            "ms": 405.1000000014901,
+            "width": 88,
+            "gap": 8,
+            "image": 48
+          }
+        ],
+        "labels": [],
+        "errors": [],
+        "network": [
+          {
+            "path": "/api/storefront/recommendation-nodes",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/category-icons",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse/overview",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-01",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-1-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse/shelf",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-2-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-02",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse/shelf",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-3-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-03",
+            "status": 200
+          }
+        ],
+        "asset": "/assets/index-CSi40-JO.js"
+      }
+    }
+  ]
+}
