@@ -114,3 +114,12 @@ CatalogDock将一次性修正改为有限动画帧跟踪：仍只保护切换前
 - 新版焦点测量固定250ms仍落在109.40625px末帧；改为等待两次rAF并等待实际getAnimations结束，避免固定等待估计。只继续未成立的候选视觉验收，旧版PASS保留，应用输入不变。
 
 - 本批最终浏览器PASS：360/390全部、单行、两行、焦点前后32组整图/原尺寸局部（含桌面和直接交互）；单行背景72→54px、底部墨迹余量22→4px，两行72px完整，图标盒上/行盒下4px、可见图案顶含素材内空白为8px。文字对比13.99:1，触区/五项/6px/109px/28px/13px保留。手机展开与1280桌面几何一致；双向动画、反转、晚序、横划接管/返回和reduced-motion通过，无页面/控制台/API错误。最终入口index-BqwjGagB.js；仅新增CategoryShortcuts语义透明包装和scoped CSS，未改Dock逻辑。详见[验收](../reports/evidence/storefront-mobile-soft-selection-20261120/README.md)。冻结源码证据后跟踪原生CI，不合并上线。
+
+## 分类触摸拖拉反馈修正（独立批次2026-11-20）
+基线origin/main 1b49f61965f2072d9cdee9ee1ef9663fea798df3，分支fix/storefront-category-touch-feedback-20261120。用户指出选中“饮料”横拖邻居“米面干货”也出现按下样灰底。先用现有5182真实隔离App及CDP触摸在360/390展开/compact记录:hover/:active、tap-highlight计算值与原图，确定实际来源再最小CSS修正。倾向将分类栏全部背景hover限制到(hover:hover) and (pointer:fine)；原生tap高亮只有复现才局部取消。不改CatalogDock手势、路由/分类/数据，保留轻点aria-current、focus-visible、桌面hover。
+
+预算调查实现15分钟、直接浏览器20分钟、原生CI30分钟。复用现有Spring/PG及合成目录；受影响前端构建一次。指定两手机/两状态触摸按下、拖动中/放手后、路由/点击计数、一次轻点；桌面鼠标与键盘焦点；保存整图/原尺寸局部、网络/控制台、真实资产。旧五入口/圆角/文字/动画/后排保护按未变输入复用，不重跑无关测试或后端。M3/M6沿用既定主Agent视觉降级。原生CI跟踪新PR同一次运行，云端不合并上线。标准验收沿用本任务前节完整§8条款，功能与美观同时验收。
+
+- 本机生产Chrome360展开复现：饮料选中，从米面干货7段横拖，scrollLeft111、URL/选中不变；放手220ms后:hover=true/:active=false/bg rgb(240,240,237)，hover+fine能力false，tap-highlight透明。云端两手机两状态普通CDP触摸暂未触发残留hover，但tap同样透明。根因由生产证据及对应未受媒体限制的CSS确定；只包裹全部分类背景hover到hover+fine（含compact透明外框覆盖/内层、选中及箭头），不改tap或导航。增加触屏能力下强制:hover的确定性CSS边界验证，明确区别于真实触摸复现；自然触摸仍验拖动不导航/一次轻点。
+
+- 本批最终PASS：旧新自然触摸各4场景（360/390展开/compact），拖动click0/nav0/URL不变、实际横移；轻点click1/nav1/唯一正确选中。12项能力检查中，触屏强制:hover复现旧灰底而候选普通项透明、基础选中色不变；1280/390真实鼠标保持hover，键盘2px焦点可见。自然触摸本身未稳定复现残留hover，如实区别于本机生产实证与强制伪类测试。无控制台/页面/API错误，49组整图局部已保存；最终入口index-CUKHSFty.js。只改CSS媒体条件，复用布局/动画/数据功能PASS，不改tap或导航；冻结后跟踪原生CI，云端不合并上线。详见[验收](../reports/evidence/storefront-category-touch-20261120/README.md)。

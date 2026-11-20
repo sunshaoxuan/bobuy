@@ -213,8 +213,10 @@
   color: inherit;
   cursor: pointer;
 }
-.category-shortcuts-track a:hover,
-.category-shortcuts > button:hover { background: #f0f0ed; }
+@media (hover:hover) and (pointer:fine){
+ .category-shortcuts-track a:hover,
+ .category-shortcuts > button:hover { background: #f0f0ed; }
+}
 .category-shortcuts a:focus-visible,
 .category-shortcuts button:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
 @media (max-width: 767px) {
@@ -245,7 +247,9 @@
 .category-shortcuts-all { display:grid; place-items:center; font-size:24px; color:#242424; }
 .catalog-dock .category-shortcuts-track a[aria-current] { background:#eeeee9; color:#242424; box-shadow:inset 0 0 0 1px #d1d1c9; font-weight:600; }
 .catalog-dock .category-shortcuts-track a[aria-current] span[title] { text-decoration:underline; text-underline-offset:3px; }
-.catalog-dock .category-shortcuts-track a[aria-current]:hover { background:#e5e5df; }
+@media (hover:hover) and (pointer:fine){
+ .catalog-dock .category-shortcuts-track a[aria-current]:hover { background:#e5e5df; }
+}
 .catalog-dock[data-compact="true"] .catalog-dock-surface { border-bottom-color:#ededed; }
 .public-product-catalog .catalog-dock[data-compact="true"] .catalog-master-heading { height:40px; }
 .public-product-catalog .catalog-dock[data-compact="true"] .catalog-master-heading h1 { font-size:20px; }
@@ -282,10 +286,13 @@
 /* Keep the link hit area; only mobile compact selection follows its content. */
 .category-shortcuts-content { display:contents; }
 @media(max-width:767px){
- .catalog-dock[data-compact="true"] .category-shortcuts-track a,
- .catalog-dock[data-compact="true"] .category-shortcuts-track a:hover { padding:0 2px; background:transparent; box-shadow:none; border-radius:16px; }
+ .catalog-dock[data-compact="true"] .category-shortcuts-track a { padding:0 2px; background:transparent; box-shadow:none; border-radius:16px; }
  .catalog-dock[data-compact="true"] .category-shortcuts-content { display:flex; flex:none; flex-direction:column; align-items:center; width:100%; min-width:0; box-sizing:border-box; padding:4px 0; border-radius:16px; }
- .catalog-dock[data-compact="true"] .category-shortcuts-track a:hover .category-shortcuts-content { background:#f7f6f3; }
  .catalog-dock[data-compact="true"] .category-shortcuts-track a[aria-current] .category-shortcuts-content { background:#f4f3f0; box-shadow:inset 0 0 0 1px #e5e3dc; }
+}
+
+@media(max-width:767px) and (hover:hover) and (pointer:fine){
+ .catalog-dock[data-compact="true"] .category-shortcuts-track a:hover { background:transparent; }
+ .catalog-dock[data-compact="true"] .category-shortcuts-track a:hover .category-shortcuts-content { background:#f7f6f3; }
  .catalog-dock[data-compact="true"] .category-shortcuts-track a[aria-current]:hover .category-shortcuts-content { background:#eeede8; }
 }

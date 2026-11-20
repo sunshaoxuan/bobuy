@@ -230,3 +230,5 @@ Ant Design `Switch` 只用于后台。公开商城布尔筛选使用 `button` + 
 - 手机五入口修正（基线583c3e55，取代上述76px compact宽度）：入口basis为min(60px,(轨道内容宽-24px)/5)，gap6px，保留左右4px内边距。360/390起点均完整5项，实际宽59.1875/60px；72px热区高、109px表面、28px图、13px两行文字不变。仅移动断点的gap和basis使用与标题/图标一致的180ms ease-out双向过渡，减少动画设置无过渡。只在过渡期间继续最小移动保护原本完整可见的活动项，快速反转取消旧追踪；主动横向手势/滚轮/键盘取消，纵向手势继续保护，隐藏项和历史位置不主动拉回。长名两行/字形余量、帧采样及对照见[五入口连续过渡验收](reports/evidence/storefront-mobile-five-motion-20261120/README.md)。展开与桌面不改，候选由本机协调发布。
 
 - 手机compact选中背景修正（基线700b6006）：链接仍为59.1875/60×72px触区，语义透明内容内层承载浅暖灰#f4f3f0、16px圆角与1px轻内线#e5e3dc。单行视觉高54px、两行72px，图标盒上/文字行盒下各4px，深字与下划线保留；单行底部墨迹余量22→4px。普通hover内层#f7f6f3、选中hover#eeede8，外触区透明、2px焦点环保留。五项/gap6/109px表面/28px图/13px两行字不改；展开和桌面内层display:contents保持原几何。可见图案顶余量取决于素材内部空白，不裁图凑留白。见[内容内层前后验收](reports/evidence/storefront-mobile-soft-selection-20261120/README.md)。候选由本机协调发布。
+
+- 分类快捷栏触摸反馈（基线1b49f619）：所有背景hover（含普通链接、箭头、选中以及手机compact内层）仅在`(hover:hover) and (pointer:fine)`生效；不能仅按视口宽度推断鼠标能力。触屏残留:hover不改变未选中背景或基础选中色，轻点后的aria-current和focus-visible原样保留。已有tap highlight透明，不重复设置，不用额外手势拦截掩盖CSS问题。生产自然复现与云端触摸/强制hover边界、真实鼠标证据见[触摸反馈验收](reports/evidence/storefront-category-touch-20261120/README.md)。
