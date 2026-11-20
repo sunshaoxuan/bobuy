@@ -6,7 +6,7 @@ vi.mock('../authStorage',()=>({getStoredUser:()=>fixture.user,subscribeToAuthCha
 vi.mock('../api',()=>({api:{costcoOnboarding:{status:()=>Promise.resolve({workerEnabled:fixture.workerEnabled}),list:(...args:unknown[])=>fixture.list(...args),number:(...args:unknown[])=>fixture.number(...args),photo:(...args:unknown[])=>fixture.photo(...args)}}}));
 vi.mock('../i18n',()=>({useI18n:()=>({locale:'en-US',t:(key:string)=>key})}));
 vi.mock('antd',()=>({Alert:({message}:{message:string})=><p role="alert">{message}</p>,Button:({children,...p}:React.ButtonHTMLAttributes<HTMLButtonElement>)=><button {...p}>{children}</button>,Space:({children}:{children:React.ReactNode})=><div>{children}</div>,Tag:({children}:{children:React.ReactNode})=><span>{children}</span>,Typography:{Text:({children}:{children:React.ReactNode})=><span>{children}</span>},Select:({options,onChange,...p}:{options:{value:string;label:string}[];onChange:(v:string)=>void})=><select {...p} onChange={e=>onChange(e.target.value)}><option value=""/>{options.map(o=><option key={o.value} value={o.value}>{o.label}</option>)}</select>}));
-vi.mock('./AiQuickAddModal',()=>({default:()=>null}));
+vi.mock('./ProductPhotoIntakeModal',()=>({default:()=>null}));
 import CostcoOnboardingPanel from './CostcoOnboardingPanel';
 const props={suppliers:[{id:'supplier-jp',name:{'en-US':'Synthetic supplier'}}],photoOpen:false,onPhotoClose:vi.fn(),onOpenProduct:vi.fn()};
 afterEach(cleanup);beforeEach(()=>{fixture.user={id:1,roles:['AGENT']};fixture.workerEnabled=true;fixture.list.mockReset().mockResolvedValue([]);fixture.number.mockReset().mockResolvedValue({id:'job',state:'QUEUED',revision:0});});
@@ -24,6 +24,10 @@ describe('owned durable task panel',()=>{
   render(<CostcoOnboardingPanel {...props}/>);await waitFor(()=>expect(fixture.list).toHaveBeenCalledTimes(1));
   fixture.user={id:2,roles:['AGENT']};fixture.listener?.();resolve([{id:'other-account-job',state:'COMPLETED',revision:7,itemNumber:'private-item',productId:'private-product'}]);
   await waitFor(()=>expect(fixture.list).toHaveBeenCalledTimes(2));expect(screen.queryByText('private-item')).toBeNull();
+ });
+ it('keeps pending task reads valid when auth refresh announces the same principal',async()=>{
+  let resolve!:(v:unknown[])=>void;fixture.list.mockReturnValue(new Promise(r=>{resolve=r;}));render(<CostcoOnboardingPanel {...props}/>);
+  fixture.listener?.();resolve([{id:'same-user-job',state:'NEEDS_INPUT',revision:7,itemNumber:'same-user-item'}]);await screen.findByText('same-user-item');
  });
  it('retains saved candidate details and blocks new work when the worker is disabled',async()=>{
   fixture.workerEnabled=false;fixture.list.mockResolvedValue([{id:'draft',state:'NEEDS_INPUT',revision:9,failureCode:'onboarding.new_master_needs_price_policy',candidate:{itemNumber:'14110',name:'Synthetic product',brand:'Synthetic brand',packaging:'80 × 2',translatedNames:{'en-US':'Synthetic product'},referencePrices:[]}}]);

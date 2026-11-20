@@ -39,3 +39,7 @@
 .catalog-bulk-editor .ant-btn,.catalog-bulk-editor .ant-drawer-close{min-width:44px;min-height:44px;height:auto;white-space:normal}.catalog-bulk-editor .ant-drawer-close{width:44px;height:44px}.catalog-bulk-editor .ant-checkbox-wrapper{min-height:44px;align-items:center}.catalog-bulk-editor .ant-drawer-body>p{overflow-wrap:anywhere}
 
 .catalog-bulk-editor .ant-drawer-body>.ant-btn>span:not(.anticon){transform:translateY(.5px)}
+
+.photo-history {margin-block:16px;overflow-wrap:anywhere}
+.photo-history summary {min-height:44px;padding:12px 16px;border-radius:8px;background:var(--zen-bg,#faf9f6);cursor:pointer}
+.photo-history summary:focus-visible {outline:2px solid #795908;outline-offset:2px}

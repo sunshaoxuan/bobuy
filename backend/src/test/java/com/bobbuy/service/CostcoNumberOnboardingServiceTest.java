@@ -109,8 +109,9 @@ class CostcoNumberOnboardingServiceTest {
             var f = new Fixture(); var s = f.service(); var q = s.enqueue(input(1, 2, "JP", photo ? null : "0014110", photo ? "b".repeat(64) : null));
             if(photo)f.decide=(stage,job)->{var d=decision(stage,Verdict.ACCEPT,job);if(stage!=Stage.ADMISSION)return d;var c=d.candidate();return new CostcoOnboardingDecision(d.stage(),d.verdict(),d.provider(),d.model(),d.endpoint(),d.inputHash(),d.evidenceHashes(),d.policyVersion(),d.promptVersion(),d.reason(),d.identifiedItemNumber(),new Candidate(c.itemNumber(),null,c.name(),c.model(),c.specification(),c.packaging(),c.officialImageSha256(),c.translatedNames(),c.unknownFields()));};
             var done = s.execute(q.id(), 1, 0);
-            assertEquals(COMPLETED, done.state()); assertEquals("0014110", done.itemNumber());
+            assertEquals(photo?NEEDS_INPUT:COMPLETED, done.state()); assertEquals("0014110", done.itemNumber());
             assertEquals(List.of(Stage.INTAKE, Stage.IDENTITY, Stage.FACTS, Stage.IMAGE_SOURCE, Stage.ADMISSION), done.decisions().stream().map(CostcoOnboardingDecision::stage).toList());
+            if(photo){assertEquals("photo.confirm_required",done.failureCode());assertEquals(0,f.saves.get());assertNull(done.productId());continue;}
             assertEquals("80 × 2", f.captured.packaging()); assertEquals(1, f.saves.get());
             if(photo)assertNull(f.captured.brand());
             assertEquals(done, s.execute(q.id(), 1, 0)); assertEquals(1, f.saves.get());

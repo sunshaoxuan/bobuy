@@ -1141,7 +1141,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
             onClick={handleAddRow}
           />
         </div>}
-      <CostcoOnboardingPanel suppliers={suppliers} photoOpen={isQuickAddVisible} onPhotoClose={()=>setIsQuickAddVisible(false)} onOpenProduct={setCatalogId}/>
+      <CostcoOnboardingPanel suppliers={suppliers} photoOpen={isQuickAddVisible} onPhotoClose={()=>setIsQuickAddVisible(false)} onOpenProduct={setCatalogId} onConfirmed={()=>{void api.products().then(rows=>setDataSource(rows.map(stockItemFromResponse)));}}/>
     </div>
   );
 }

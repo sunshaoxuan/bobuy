@@ -1,3 +1,4 @@
+vi.mock('./ProductPhotoHistory',()=>({default:()=>null}));
 import {act,fireEvent,render,screen,waitFor,within} from '@testing-library/react';
 import {afterEach,beforeEach,expect,it,vi} from 'vitest';
 import ProductCatalogPanel from './ProductCatalogPanel';

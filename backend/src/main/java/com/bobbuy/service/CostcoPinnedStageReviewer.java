@@ -97,7 +97,16 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
                 sourceSha256 must identify actually retrieved evidence. Do not write IDs, ownership, permissions, stock,
                 publication/review flags or merchant selling prices. Do not invent a product ID or URL.
                 INPUT DATA:
-                """ + mapper.writeValueAsString(context);
+                """ + (job.privatePhotoSha256()!=null ? """
+                PHOTO INPUT: At INTAKE return a candidate even when some facts are unknown, extracting only visible facts.
+                Supply four-language name suggestions where identity is readable; unknown values remain null/empty.
+                candidate may additionally contain photoFacts: amount,currency,unit,conditions,priceKind,productVisible.
+                photoFacts describe ONLY the original private photograph, never online evidence. priceKind is
+                WAREHOUSE, REGULAR, DISCOUNT, COUPON or UNKNOWN. Multiple labels/unclear price or unit: leave amount null.
+                productVisible means the physical product is visible, not merely a price label. Never infer availability.
+                officialImageSha256 and target must be null at photo INTAKE; referencePrices must be empty there.
+                Preserve photo facts in later candidates. Missing official image must not erase visible photo facts.
+                """ : "") + mapper.writeValueAsString(context);
             LlmGateway.PinnedCompletion result = complete(gateway, prompt, images);
             JsonNode json = mapper.readTree(result.content());
             fields(json, Set.of("verdict", "reason", "identifiedItemNumber", "candidate"));
@@ -109,7 +118,7 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
             Candidate candidate = null;
             if (json.hasNonNull("candidate")) {
                 JsonNode c = json.get("candidate");
-                fields(c, Set.of("itemNumber", "brand", "name", "model", "specification", "packaging", "officialImageSha256", "translatedNames", "unknownFields", "referencePrices","target"));
+                fields(c, Set.of("itemNumber", "brand", "name", "model", "specification", "packaging", "officialImageSha256", "translatedNames", "unknownFields", "referencePrices","target","photoFacts"));
                 for (String name : List.of("itemNumber", "brand", "name", "model", "specification", "packaging", "officialImageSha256")) nullableText(c.get(name), 2000);
                 if (!c.path("translatedNames").isObject() || !c.path("unknownFields").isArray() || !c.path("referencePrices").isArray()) throw new IllegalArgumentException("onboarding.candidate_schema");
                 c.path("translatedNames").fields().forEachRemaining(e -> { if (!Set.of("zh-CN", "zh-TW", "ja-JP", "en-US").contains(e.getKey()) || !e.getValue().isTextual() || e.getValue().asText().length() > 2000) throw new IllegalArgumentException("onboarding.translation_schema"); });

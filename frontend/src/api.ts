@@ -172,8 +172,18 @@ export type MobileSupplier = {
 };
 export type CostcoOnboardingJobView = {
  id:string;state:'QUEUED'|'AI_INTAKE'|'EVIDENCE_FETCH'|'AI_REVIEW'|'COMMITTING'|'COMPLETED'|'NEEDS_INPUT'|'RETRY_WAIT'|'FAILED'|'CANCELLED';
- revision:number;itemNumber?:string;productId?:string;productVersion?:number;failureCode?:string;stage?:string;
- candidate?:{itemNumber:string;brand?:string;name:string;model?:string;specification?:string;packaging?:string;translatedNames:Record<string,string>;referencePrices?:{kind:string;amount:number|string;currency:string;channel?:string;taxStatus?:string;quantityBasis?:string;validFrom?:string;validUntil?:string;timeZone?:string;conditions?:string;sourceUrl:string;sourceSha256:string}[]};
+ supplierId?:string;market?:string;photo?:boolean;revision:number;itemNumber?:string;productId?:string;productVersion?:number;failureCode?:string;stage?:string;
+ candidate?:{unknownFields?:string[];itemNumber:string;brand?:string;name:string;model?:string;specification?:string;packaging?:string;translatedNames:Record<string,string>;referencePrices?:{kind:string;amount:number|string;currency:string;channel?:string;taxStatus?:string;quantityBasis?:string;validFrom?:string;validUntil?:string;timeZone?:string;conditions?:string;sourceUrl:string;sourceSha256:string}[]};
+};
+
+export type PhotoObservation={id:string;productId:string;supplierId:string;market:string;amount:number|string|null;currency:string|null;unit:string|null;conditions:string|null;inStock:boolean;priceChanged:boolean;observedAt:string;confirmedAt:string};
+export type PhotoReview={jobId:string;revision:number;supplierId:string;market:string;itemNumber:string|null;status:string;candidate:CostcoOnboardingJobView['candidate'];photoFacts?:{amount:number|string|null;currency:string|null;unit:string|null;conditions:string|null;priceKind:string;productVisible:boolean};matches:{id:string;version:number;name:Record<string,string>;specification:Record<string,string>;packaging:string|null;eligible:boolean}[];history:PhotoObservation[];saved:PhotoObservation|null;sources?:{canonicalUrl:string;sha256:string;mediaType:string}[];officialImageAvailable?:boolean};
+export const photoIntakeApi={
+ image:async(id:string)=>{const r=await authorizedFetch('/api/product-photo-intake/'+encodeURIComponent(id)+'/official-image');if(!r.ok)throw Error(await parseErrorMessage(r));return r.blob();},
+ review:(id:string,itemNumber?:string)=>storeGet<PhotoReview>('/api/product-photo-intake/'+encodeURIComponent(id)+(itemNumber?'?'+new URLSearchParams({itemNumber}):'')),
+ confirm:(id:string,input:object)=>postJson<PhotoObservation,object>('/api/product-photo-intake/'+encodeURIComponent(id)+'/confirm',input),
+ history:(id:string)=>storeGet<PhotoObservation[]>('/api/product-photo-intake/products/'+encodeURIComponent(id)),
+ photo:async(id:string)=>{const r=await authorizedFetch('/api/product-photo-intake/'+encodeURIComponent(id)+'/photo');if(!r.ok)throw Error(await parseErrorMessage(r));return r.blob();}
 };
 
 export type MobileProductResponse = {

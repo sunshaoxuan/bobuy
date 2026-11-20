@@ -42,7 +42,10 @@ public class ManualProductCreationService {
         return Map.copyOf(input);
     }
     @Transactional
-    public Product create(Input input){
+    public Product create(Input input){ return createInternal(input,null,null); }
+    @Transactional
+    public Product createPhoto(Input input,String supplier,String market){ return createInternal(input,supplier,market); }
+    private Product createInternal(Input input,String supplier,String market){
         Long owner=MerchantScope.current();
         if(owner==null)throw new ApiException(ErrorCode.FORBIDDEN,"error.auth.forbidden");
         if(input==null||input.requestId()==null)throw invalid("master.invalid");
@@ -55,13 +58,14 @@ public class ManualProductCreationService {
         var name=localized(input.name(),400);
         if(!name.containsKey("ja-JP"))throw invalid("master.japanese_required");
         String item=text(input.itemNumber(),100);
-        if(item!=null&&(!products.findAllByMerchantIdAndItemNumber(owner,item).isEmpty()||products.deletedCodeCount(owner,item)>0))throw invalid("product.create.duplicate");
+        if(item!=null&&(products.findAllByMerchantIdAndItemNumber(owner,item).stream().anyMatch(p->supplier==null||p.getCatalogData()==null||p.getCatalogData().supplierId()==null||p.getAttributes().get("sourceMarket")==null||(supplier.equals(p.getCatalogData().supplierId())&&market.equals(p.getAttributes().get("sourceMarket"))))||products.deletedCodeCount(owner,item)>0))throw invalid("product.create.duplicate");
         var product=new Product();product.setId(id);product.setMerchantId(owner);
         product.setName(name);product.setDescription(localized(input.description(),8000));
         product.setBrand(text(input.brand(),200));product.setItemNumber(item);
         product.setCategoryId(null);product.setVisibilityStatus(ProductVisibility.DRAFTER_ONLY);
         product.setAttributes(fields(input.attributes()));product.setMerchantSkus(fields(input.merchantSkus()));
-        product.setCatalogData(new ProductCatalogData(localized(input.specification(),1000),null,null,List.of(),null,null,null,null));
+        if(market!=null){var attributes=new LinkedHashMap<>(product.getAttributes());attributes.put("sourceMarket",market);product.setAttributes(attributes);}
+        product.setCatalogData(new ProductCatalogData(localized(input.specification(),1000),null,null,List.of(),supplier,null,null,null));
         product.setStorageCondition(input.storageCondition()==null?StorageCondition.AMBIENT:input.storageCondition());
         product.setOrderMethod(input.orderMethod()==null?OrderMethod.PRE_ORDER:input.orderMethod());
         var gallery=input.mediaGallery()==null?List.<MediaGalleryItem>of():input.mediaGallery();
