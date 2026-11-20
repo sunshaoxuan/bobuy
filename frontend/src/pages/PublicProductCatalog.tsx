@@ -1,6 +1,7 @@
 import {useProgressiveCatalog} from '../useProgressiveCatalog';
 import {useShoppingScroll} from '../useShoppingScroll';
 import CategoryShortcuts from '../components/CategoryShortcuts';
+import CatalogDock from '../components/CatalogDock';
 import ShoppingNavigation from '../components/ShoppingNavigation';
 
 import {catalogBatch} from '../catalogBatch';
@@ -101,7 +102,7 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   const navigationCategories=navigation.current.categories;
   useEffect(()=>{onNavigation?.(navigationCategories);},[navigationCategories,onNavigation]);
   const shelves=(browse.page?.shelves??[]).map(s=>progressive?{...s,items:incremental.shelves[s.category]?.items??[]}:s);
-  const shelfMode=!query.trim()&&sort==='default'&&(!!shelves.length||!browse.page&&(!category||navigation.current.categories.some(c=>c.id===category&&!c.parentId)));
+  const shelfMode=!(location.pathname==='/products'&&kind==='all'&&!!category)&&!query.trim()&&sort==='default'&&(!!shelves.length||!browse.page&&(!category||navigation.current.categories.some(c=>c.id===category&&!c.parentId)));
   useShoppingScroll(!!browse.page,browse.busy,!shelfMode&&!!browse.page?.hasNext,browse.next);
   const visibleCards=shelfMode?shelves.flatMap(s=>s.items):filtered;
   useEffect(()=>{const canonical=browse.page?.selectedCategory;if(canonical!==undefined&&canonical!==category){const next=new URLSearchParams(params);if(canonical)next.set('category',canonical);else next.delete('category');setParams(next,{replace:true});}},[browse.page?.selectedCategory,category]);
@@ -123,11 +124,12 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   function reload(){if(onRefresh)onRefresh();else setAttempt(value=>value+1);}
   function openDetail(productId:string){onDetailChange?.(kind,true);const next=new URLSearchParams(params);next.set('product',productId);next.set('productSection',kind);setParams(next);}
   function closeDetail(){onDetailChange?.(kind,false);const next=new URLSearchParams(params);next.delete('product');next.delete('productSection');setParams(next);}
-  const shortcutScroll = useRef<{key: string; offset: number}>();
+  const shortcutScroll = useRef(new Map<string,number>());
   const overview = location.pathname === '/products' && kind === 'all' && !category && !query.trim();
-  const shortcutRoots = overview
-    ? browse.page?.categories.filter(c => c.id.startsWith('shop-') && !c.parentId && c.count > 0)
-    : undefined;
+  const dockMode = location.pathname === '/products' && kind === 'all' && !query.trim();
+  const shortcutRoots = dockMode ? navigationCategories.filter(c=>c.id.startsWith('shop-')&&!c.parentId&&c.count>0) : [];
+  const currentCategory=navigationCategories.find(c=>c.id===category);
+  const selectedRoot=currentCategory?.parentId??category;
   function categoryParams(value:string) {
     const next=new URLSearchParams(params);next.delete('item');next.delete('product');next.delete('productSection');
     if(value)next.set(categoryKey,value);else next.delete(categoryKey);
@@ -154,19 +156,18 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
         return <CompactProductCard key={entry.productId} productId={entry.productId} name={name.value} originalName={entry.name['ja-JP']} language={name.language} brand={entry.brand} itemNumber={entry.itemNumber} image={entry.image?.url} rating={entry.rating} quote={product} reference={entry.reference} pending={pending} eager={eager} onOpen={()=>openDetail(entry.productId)} overlay={<><ProductMarkerBadges markers={state.markers[entry.productId]??[]} promotionPrices={selectedOfferSource(product,pending,entry.reference?.priceChange)} overlay/><ReservationAdd allowed={buyable} quote={product} name={name.value} count={quantities[entry.productId]} onAdd={()=>{if(product&&buyable)onAdd(product);}}/></>} actions={management(entry)}/>;
 
   }
+  const sortControls=<div className="catalog-sort-controls"><ProductSort value={sort} onChange={changeSort}/><button type="button" className="marked-first-toggle" aria-pressed={markedFirst} onClick={()=>changeMarkedFirst(!markedFirst)}>{t('marker.priority')}</button></div>;
+  const heading=<header className="catalog-master-heading">{kind==='marked'?<h2>{t('marker.featured')}</h2>:<h1>{t('store.catalog')}</h1>}{ready&&<span role="status">{t('catalog.result_count',{shown:new Set(visibleCards.map(c=>c.productId)).size,total:browse.page!.matchedTotal})}</span>}{!dockMode&&sortControls}</header>;
   const hideMarked=kind==='marked'&&ready&&!browse.error&&browse.page?.markedScopeTotal===0;
   return <>{!hideMarked&&<section ref={activation.element} className={`recommendations rec-public public-product-catalog ${shelfMode?"shopping-overview":"shopping-results"}${overview ? " catalog-home" : ""}`} aria-label={t(kind==='marked'?'marker.featured':'store.catalog')} aria-busy={browse.busy}>
-    <header className="catalog-master-heading">{kind==='marked'?<h2>{t('marker.featured')}</h2>:<h1>{t('store.catalog')}</h1>}{ready&&<span role="status">{t('catalog.result_count',{shown:new Set(visibleCards.map(c=>c.productId)).size,total:browse.page!.matchedTotal})}</span>}<div className="catalog-sort-controls"><ProductSort value={sort} onChange={changeSort}/><button type="button" className="marked-first-toggle" aria-pressed={markedFirst} onClick={()=>changeMarkedFirst(!markedFirst)}>{t('marker.priority')}</button></div></header>
+    {dockMode?<CatalogDock heading={heading} hasNavigation={!!shortcutRoots.length}>
+      {!!shortcutRoots.length&&<CategoryShortcuts key={location.key} categories={shortcutRoots} selectedId={selectedRoot} overviewHref={'/products?'+categoryParams('').toString()}
+        toCategory={id=>'/products?'+categoryParams(id).toString()} initialScroll={shortcutScroll.current.get(location.key)} saveScroll={offset=>{shortcutScroll.current.set(location.key,offset);}}/>}
+    </CatalogDock>:heading}
     <BrowseError error={node===-1?'browse.invalid':browse.error} changed={browse.changed} retry={browse.retry} refresh={reload}/>
     {sales.error&&<BrowseError error={sales.error} retry={sales.retry} refresh={sales.retry}/>}
-    {(category || query.trim()) && <ShoppingNavigation categories={navigation.current.categories} category={category} onChoose={choose}/>}
-    {!!shortcutRoots?.length && <CategoryShortcuts
-      key={location.key}
-      categories={shortcutRoots}
-      toCategory={id => '/products?' + categoryParams(id).toString()}
-      initialScroll={shortcutScroll.current?.key === location.key ? shortcutScroll.current.offset : 0}
-      saveScroll={offset => {shortcutScroll.current = {key: location.key, offset};}}
-    />}
+    {(category || query.trim()) && <ShoppingNavigation categories={navigationCategories} category={category} onChoose={choose}/>}
+    {dockMode&&sortControls}
     {!ready?(browse.error||node===-1?null:<div className="catalog-progress" role="status"><Spin/><span>{t('browse.loading')}</span></div>):<>
       {shelfMode?<div className="shopping-shelves">{shelves.map((shelf,shelfIndex)=><ProgressiveShelf key={shelf.category} identity={identity} category={shelf.category} progressive={progressive} activate={incremental.activate}>
        <header><h2>{shelf.category==='__unclassified'?t('class.unclassified'):localizedContent(browse.page!.categories.find(c=>c.id===shelf.category)?.name??{},locale)}</h2><button type="button" onClick={()=>choose(shelf.category)}>{t('shopping.view_all')} <span aria-hidden>→</span></button></header>

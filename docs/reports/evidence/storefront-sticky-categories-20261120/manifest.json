@@ -1,0 +1,8 @@
+{
+  "frontend/src/components/CatalogDock.tsx": "de4e9f78ac046da403de0f7dad6c2956a47cc1595c718872894b103e41984cba",
+  "frontend/src/components/CategoryShortcuts.tsx": "747eb9442c53868d67f16cefd372b553d0bef69d190009c49a53dac922cf5dee",
+  "frontend/src/pages/PublicProductCatalog.tsx": "86961716437651aba5b8fdf2c816275500e67195564795b32b59137e087ad99e",
+  "frontend/src/public-catalog.css": "9e0fece328a6672868b5a89a51889ae31e830e554fffa7564f6fc69d919a13a9",
+  "browserArtifact:index-CsMIAdqX.js": "48df93f681a67accd2c01eddf512fb08c6cc38aa2f6fa7956dc960140f0becef",
+  "browserArtifact:index-BwTi2D8X.js": "9e1b063ea0760307850ec95e7a0657160571f16f428c7d9da0c23b4b05386cc6"
+}

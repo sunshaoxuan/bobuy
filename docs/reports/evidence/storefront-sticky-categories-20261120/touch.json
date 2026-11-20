@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "width": 390,
+  "verticalTouch": {
+    "start": 420,
+    "end": 615
+  },
+  "transparentGap": {
+    "space": 23,
+    "blockedByDock": false,
+    "productUnderGap": true
+  }
+}
