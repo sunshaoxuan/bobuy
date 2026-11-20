@@ -30,6 +30,19 @@ class CategoryImageServiceTest {
   root.setImageUrl("https://external.invalid/image.png");later.setImageUrl(null);reset(images);assertThat(service.publicHints()).containsExactly("","");verifyNoInteractions(images);
  }
  @Test void forbidsCustomersBeforeStorage()throws Exception{login("ROLE_CUSTOMER");assertThatThrownBy(()->service.upload("root",image(1))).isInstanceOf(com.bobbuy.api.response.ApiException.class);verifyNoInteractions(nodes,images,binaries);}
- @Test void rejectsChildAndMalformedBytes()throws Exception{root.setParentId("parent");assertThatThrownBy(()->service.upload("root",image(1))).isInstanceOf(com.bobbuy.api.response.ApiException.class);root.setParentId(null);assertThatThrownBy(()->service.upload("root",new MockMultipartFile("file","image.png","image/png","<svg/>".getBytes()))).isInstanceOf(com.bobbuy.api.response.ApiException.class);verifyNoInteractions(images,binaries);verify(nodes,never()).save(any());}
+ @Test void supportsDirectChildWithoutChangingRootAndRejectsDeepOrSystemNodes()throws Exception{
+  var child=new CategoryTreeNode("child","root",Map.of(),List.of("root","child"),0,null);
+  when(nodes.findById("child")).thenReturn(Optional.of(child));String url=service.upload("child",image(1));
+  assertThat(child.getImageUrl()).isEqualTo(url);assertThat(root.getImageUrl()).isNull();verify(nodes).save(child);
+  var deep=new CategoryTreeNode("deep","child",Map.of(),List.of("root","child","deep"),0,null);
+  var system=new CategoryTreeNode("system",null,Map.of(),List.of("system"),0,"UNCATEGORIZED");
+  when(nodes.findById("deep")).thenReturn(Optional.of(deep));when(nodes.findById("system")).thenReturn(Optional.of(system));
+  clearInvocations(images,binaries,nodes);
+  assertThatThrownBy(()->service.upload("deep",image(1))).isInstanceOf(com.bobbuy.api.response.ApiException.class);
+  assertThatThrownBy(()->service.upload("system",image(1))).isInstanceOf(com.bobbuy.api.response.ApiException.class);
+  verifyNoInteractions(images,binaries);verify(nodes,never()).save(any());
+ }
+ @Test void rejectsMalformedBytesWithoutStorage()throws Exception{assertThatThrownBy(()->service.upload("root",new MockMultipartFile("file","image.png","image/png","<svg/>".getBytes()))).isInstanceOf(com.bobbuy.api.response.ApiException.class);verifyNoInteractions(images,binaries);verify(nodes,never()).save(any());}
+
  @Test void supportsAdminReplacementAndReusesSameActorImage()throws Exception{login("ROLE_PLATFORM_ADMIN");String first=service.upload("root",image(1));assertThat(first).startsWith("/api/storefront/recommendation-images/");assertThat(root.getImageUrl()).isEqualTo(first);var saved=org.mockito.ArgumentCaptor.forClass(RecommendationImage.class);verify(binaries).persist(saved.capture());assertThat(saved.getValue().merchantId).isEqualTo(7L);assertThat(saved.getValue().accessScope).isEqualTo("PUBLIC");when(images.findByMerchantIdAndImageHash(7L,saved.getValue().imageHash)).thenReturn(Optional.of(saved.getValue()));when(binaries.reuse(eq(saved.getValue()),any())).thenReturn(saved.getValue());assertThat(service.upload("root",image(1))).isEqualTo(first);assertThat(service.upload("root",image(2))).isNotEqualTo(first);verify(nodes,times(3)).save(root);}
 }

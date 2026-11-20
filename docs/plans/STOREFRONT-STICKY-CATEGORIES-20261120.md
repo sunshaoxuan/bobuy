@@ -123,3 +123,30 @@ CatalogDock将一次性修正改为有限动画帧跟踪：仍只保护切换前
 - 本机生产Chrome360展开复现：饮料选中，从米面干货7段横拖，scrollLeft111、URL/选中不变；放手220ms后:hover=true/:active=false/bg rgb(240,240,237)，hover+fine能力false，tap-highlight透明。云端两手机两状态普通CDP触摸暂未触发残留hover，但tap同样透明。根因由生产证据及对应未受媒体限制的CSS确定；只包裹全部分类背景hover到hover+fine（含compact透明外框覆盖/内层、选中及箭头），不改tap或导航。增加触屏能力下强制:hover的确定性CSS边界验证，明确区别于真实触摸复现；自然触摸仍验拖动不导航/一次轻点。
 
 - 本批最终PASS：旧新自然触摸各4场景（360/390展开/compact），拖动click0/nav0/URL不变、实际横移；轻点click1/nav1/唯一正确选中。12项能力检查中，触屏强制:hover复现旧灰底而候选普通项透明、基础选中色不变；1280/390真实鼠标保持hover，键盘2px焦点可见。自然触摸本身未稳定复现残留hover，如实区别于本机生产实证与强制伪类测试。无控制台/页面/API错误，49组整图局部已保存；最终入口index-CUKHSFty.js。只改CSS媒体条件，复用布局/动画/数据功能PASS，不改tap或导航；冻结后跟踪原生CI，云端不合并上线。详见[验收](../reports/evidence/storefront-category-touch-20261120/README.md)。
+
+## 侧栏选中层级与子类图标（独立批次2026-11-20）
+基线origin/main 79d3e4f1f362110bebc5869f9b29c8ab1bd1faf1，分支fix/storefront-sidebar-selection-20261120。仅StoreNavigation/browse.css及侧栏直接图标/定向测试：分类精确选中浅暖灰#f4f3f0/深字/细边，子类选中时父根用淡所属态但不重复aria-current；Drawer/aside每次打开、深链及晚到数据完成后只定位自身滚动让当前根完整可见，不因普通重渲染拉回用户滚动。子类静态单色线图、比32px主图小一档、缩进一格、≥44px触区、名称不裁。顶部分类栏、商品过滤/数据不改。
+
+预算实现30分钟、定向单测10分钟、真实浏览器30分钟、原生CI30分钟。复用既有Spring/PG及23根×子类合成目录，无DB写入、不生成/抓取彩图。仅构建前端一次。360×800/390×844/1280桌面：后排根/叶深链、顶栏选择后开侧栏、选择后重开、数据晚到、手动滚动保持、主区域scrollY不跳、语义/颜色/长名/图标缩进/触区/键盘/控制台网络，整图和原尺寸局部。定向单测聚焦根所属/唯一current、延迟定位、重开与手动滚动、图标稳定映射/回退。复用既有顶栏/动画/商品功能PASS。原生CI跟踪同次运行，交付PR待本机独立验收，不自行合并或发布；M3/M6沿用主Agent视觉降级，标准条款沿用本任务已附§8。
+
+调查：现有ShoppingTreeProjection图标字段固定null，接口保留id、parentId、四语name和主图；侧栏无局部定位，精确叶选择不标父根。已依赖@ant-design/icons可静态导入Outlined图案。公开overview云端GET HTTP403，已请求只读类别ID/parentId/name清单以准确绑定当前子类；无需凭据，继续独立实现，未知新增类线图回退。
+
+- 用户纠正：真实子类素材/数据由本机负责；撤销云端类别图案映射，不生成或上传。云端SidebarCategoryIcon复用CategoryImage公开站内路径规则与失败状态，统一AppstoreOutlined回退；仅现有CategoryImageService上传允许非系统一/二级节点、ShoppingTreeProjection透传二级imageUrl，接口/权限/校验复用。后台管理页上传按钮不扩展，本机可用现有API绑定；补两服务定向单测，不做迁移/真实写入。此前分类清单请求已不需要。
+
+- 同候选新增授权：手机展开态选中背景也贴合内容，保留100px触区/48px图标，沿用浅灰内容内层、两行完整、焦点/触屏hover隔离及动画。尚未冻结，合批加入public-catalog.css局部移动样式与360/390前后图/测量；与侧栏共用一次前端构建，不重复compact既有布局验收。
+
+- 新侧栏单测首轮因Drawer整模块mock遗漏I18nProvider依赖的ConfigProvider而5失败，图标用例已PASS。改为保留真实antd其余导出的局部Drawer mock，只重跑该侧栏测试，产品输入未变。
+
+- 合批前端首构建后静态级联检查发现展开态透明外框选择器特异度低于旧选中底；加已有data-navigation限定令覆盖明确，不改变其他布局。仅重建受影响前端，侧栏与后端单测PASS复用，浏览器验收使用修正产物。
+
+- 首次侧栏浏览器根选中定位/主区不跳已成立，局部截图选择器误以browse-drawer包裹ant-drawer-content而超时，实际二者同节点。修正截图定位并将合成长名加长以确保真实两行，仅继续未完成的侧栏脚本；展开态单/两行图及测量已PASS复用，不重建应用。
+
+- 晚到夹具仅阻断首个browse响应，认证初始化引起的并行第二次读仍送达24根类，故“空目录等待”断言失败。改为同一门闩延迟该窗口全部browse响应；未完成视口无最终结果文件，重做该定向脚本以保留完整阶段证据，应用不变/不重建；已独立PASS的展开态、单测不重复。
+
+- 晚到数据门闩生效后，空shopping-tree高0，被测试的visible等待误判为抽屉未打开。改等始终可见的browse-links，并在晚到前保存阶段结果防止后续缺失；仅继续侧栏未完成验收，不变应用。顶部展开/compact转换及触屏hover/reduced-motion独立PASS复用。
+
+- 360/390侧栏全部PASS并保存。1280选择叶类后鼠标仍停在链接上，基础色断言读到合法hover色#eeede8；仅脚本移开鼠标再读基础态，以VIEWPORT_ONLY=1280续验桌面，保留两手机结果/截图，不改应用或重建。
+
+- 最终定向验收PASS：前端侧栏5+图标1，后端图片5+投影3；360/390/1280真实根/叶、重开、顶部选类、晚到、手动滚动、唯一current与主区不跳、20px子图/16px缩进/48或58px触区均通过。手机展开前后单行背景78/两行96px、100px触区/48px图保留；compact五项/109px/28px、双向动画/触屏hover/reduced-motion直接检查通过。无控制台/API错误。52图与重放入口/素材API契约见[最终证据](../reports/evidence/storefront-sidebar-20261120/README.md)，最终入口index-Cix8fjtG.js。素材只用既有合成图响应夹具，未生成/上传/改DB；后台运行实例不重启，二级API与投影由针对性后端测试验证。冻结候选后跟踪原生CI，停PR待验收。
+
+- 首候选4b010099原生CI 44738384542在typecheck报TS2322：新增测试afterEach表达式返回VitestUtils而要求void。仅将清理回调改为块体不返回，产品源码/产物及全部浏览器证据有效，不重跑；同PR推修正并跟踪新原生CI。

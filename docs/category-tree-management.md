@@ -169,3 +169,6 @@ V42 以 `explicit_order` 区分排序来源。升级前的整数顺序没有来�
 Gemini 来源独立记录：gemini-3.1-pro-high 两次最小图片请求均为 upstream_error；gemini-3.8-flash 最小图片请求成功后完成截图复核。其发现的红色焦点、禁用低对比和截图底部裁切已处理：局部焦点/选中样式、增强禁用文字、滚动至完整控件并关闭截图动画。其关于缺少缩进的推断与实际桌面 16px/移动 6px 树边线及完整路径不符；六按钮组为需求约定，手机换行且热区合格，保留。主 Agent 已查看最终整体及局部图独立验收。
 
 仅有本分支本地未提交改动；没有 commit、push、PR 或部署。保留依赖目录供后续开发，清理本次一次性编辑脚本及浏览器预览入口，正式截图和测试摘要保留在上述 evidence 目录。
+
+## 二级分类独立图片接入（2026-11-20候选）
+既有`POST /api/category-tree/{id}/image`（multipart `file`）扩到非系统的一/二级源节点，代理/平台管理员权限及PNG/JPEG校验不变；二级公开BrowseFacet开始透传imageUrl。无数据库迁移或数据填充，真实图片由本机运营准备/绑定。现有后台页面仍只显示一级上传按钮，子类通过同一API实施；来源ID与shop展示ID、大小/路径限制、回退及只读验收方式见[绑定契约](reports/evidence/storefront-sidebar-20261120/README.md)。

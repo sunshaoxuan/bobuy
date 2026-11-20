@@ -24,7 +24,7 @@ final class ShoppingTreeProjection {
   var order=Comparator.comparingInt(CategoryTreeNode::getSortOrder).thenComparing(CategoryTreeNode::getId);
   nodes.values().stream().filter(n->n.getParentId()==null&&n.getSystemKey()==null).sorted(order).forEach(root->{
    result.add(new ShoppingCategoryMap.Category(identity(root.getId()),null,Map.copyOf(root.getName()),null,root.getImageUrl()));
-   nodes.values().stream().filter(n->root.getId().equals(n.getParentId())&&n.getSystemKey()==null).sorted(order).forEach(child->result.add(new ShoppingCategoryMap.Category(identity(child.getId()),identity(root.getId()),Map.copyOf(child.getName()),null,null)));
+   nodes.values().stream().filter(n->root.getId().equals(n.getParentId())&&n.getSystemKey()==null).sorted(order).forEach(child->result.add(new ShoppingCategoryMap.Category(identity(child.getId()),identity(root.getId()),Map.copyOf(child.getName()),null,child.getImageUrl())));
   });
   return List.copyOf(result);
  }

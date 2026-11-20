@@ -232,3 +232,9 @@ Ant Design `Switch` 只用于后台。公开商城布尔筛选使用 `button` + 
 - 手机compact选中背景修正（基线700b6006）：链接仍为59.1875/60×72px触区，语义透明内容内层承载浅暖灰#f4f3f0、16px圆角与1px轻内线#e5e3dc。单行视觉高54px、两行72px，图标盒上/文字行盒下各4px，深字与下划线保留；单行底部墨迹余量22→4px。普通hover内层#f7f6f3、选中hover#eeede8，外触区透明、2px焦点环保留。五项/gap6/109px表面/28px图/13px两行字不改；展开和桌面内层display:contents保持原几何。可见图案顶余量取决于素材内部空白，不裁图凑留白。见[内容内层前后验收](reports/evidence/storefront-mobile-soft-selection-20261120/README.md)。候选由本机协调发布。
 
 - 分类快捷栏触摸反馈（基线1b49f619）：所有背景hover（含普通链接、箭头、选中以及手机compact内层）仅在`(hover:hover) and (pointer:fine)`生效；不能仅按视口宽度推断鼠标能力。触屏残留:hover不改变未选中背景或基础选中色，轻点后的aria-current和focus-visible原样保留。已有tap highlight透明，不重复设置，不用额外手势拦截掩盖CSS问题。生产自然复现与云端触摸/强制hover边界、真实鼠标证据见[触摸反馈验收](reports/evidence/storefront-category-touch-20261120/README.md)。
+
+### 17.4 侧栏层级与子类素材（2026-11-20候选）
+- 仅shopping-tree当前链接为#f4f3f0浅暖灰、#242424深字、细内线及下划线，唯一aria-current=page；叶选中时父根#faf9f6与侧线表达所属，不重复current语义，不改变其他浏览入口。
+- Drawer/aside每次打开、深链及选中根晚到时，只滚动自身使根完整可见，不移动主文档或焦点；完成一次后不因重渲染拉回，用户主动探索取消待定位。
+- 根图32px/字15px，子图20px/字14px、图标右移16px、触区≥44px；长名自然换行。子图复用安全公开imageUrl，空/失败/外链显示统一装饰性单色线框，aria-hidden；真实独立线图由运营提供，不据名称生成图案或写数据。二级公开投影和既有上传API接入见[侧栏验收与绑定契约](reports/evidence/storefront-sidebar-20261120/README.md)。此条替代侧栏“二级纯文字”的旧展示描述，顶部主类彩图不改。
+- 用户追加手机展开态：同样用贴合内容的浅灰圆润内层，单行78px/两行96px视觉高，保留100px点击区与48px图；图标盒上/行盒下各4px。compact仍54/72px背景、109px表面与五入口，桌面不变，精细鼠标hover限制/焦点/动画继续有效。前后图与逐帧证据同上。
