@@ -45,3 +45,20 @@ it('requests product data first and displays the first shelf while optional icon
  expect(result.current.error).toBe('');expect(result.current.shelves.a.items).toHaveLength(1);
  await act(async()=>hints.resolve([]));expect(result.current.shelves.a.loaded).toBe(true);
 });
+
+it('continues a real 25-item section to its last item and retries without duplicating its first 24',async()=>{
+ const rows=Array.from({length:25},(_,i)=>productCard('p'+i));
+ const nav=browsePage([],{scopeTotal:25,matchedTotal:25,shelves:[{category:'a',total:25,items:rows.slice(0,8)}]});
+ api.productOverview.mockResolvedValue(nav);api.productShelf.mockResolvedValueOnce({...nav,shelves:[{category:'a',total:25,items:rows.slice(0,24)}]}).mockRejectedValueOnce(Error('offline')).mockResolvedValue({...nav,page:1,shelves:[{category:'a',total:25,items:rows.slice(24)}]});
+ const {result}=renderHook(()=>useProgressiveCatalog('pages',{sections:true},true,false));await waitFor(()=>expect(result.current.shelves.a.items).toHaveLength(8));act(()=>result.current.next('a'));await waitFor(()=>expect(result.current.shelves.a.items).toHaveLength(24));
+ act(()=>{result.current.next('a');result.current.next('a');});await waitFor(()=>expect(result.current.shelves.a.error).toBe('offline'));expect(result.current.shelves.a.items).toHaveLength(24);
+ act(()=>result.current.retry('a'));await waitFor(()=>expect(result.current.shelves.a.items).toHaveLength(25));expect(result.current.shelves.a.items.at(-1)?.productId).toBe('p24');
+ act(()=>result.current.next('a'));expect(api.productShelf.mock.calls.map(c=>c[0].page)).toEqual([0,1,1]);
+});
+it('reuses root browse previews and replaces page zero only with a matching ordered prefix',async()=>{
+ const rows=Array.from({length:25},(_,i)=>productCard('p'+i));
+ const seed=browsePage(rows.slice(0,24),{scopeTotal:25,matchedTotal:25,shelves:[{category:'a',total:25,items:rows.slice(0,8)}]});
+ api.productShelf.mockResolvedValue({...seed,items:[],shelves:[{category:'a',total:25,items:rows.slice(0,24)}]});
+ const {result}=renderHook(()=>useProgressiveCatalog('root',{sections:true,category:'root'},true,false,undefined,seed));await waitFor(()=>expect(result.current.shelves.a.items).toHaveLength(8));expect(api.productOverview).not.toHaveBeenCalled();
+ act(()=>result.current.next('a'));await waitFor(()=>expect(result.current.shelves.a.items).toHaveLength(24));expect(api.productShelf.mock.calls[0][0]).toMatchObject({scopeCategory:'root',category:'a',page:0});
+});

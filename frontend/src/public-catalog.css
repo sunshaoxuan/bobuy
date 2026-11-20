@@ -297,3 +297,14 @@
  .catalog-dock .category-shortcuts-track a:hover .category-shortcuts-content { background:#f7f6f3; }
  .catalog-dock .category-shortcuts-track a[aria-current]:hover .category-shortcuts-content { background:#eeede8; }
 }
+
+/* Each secondary title sticks only within its complete product section. The top
+   is measured from the existing header + visible dock surface, including transitions. */
+.shopping-section-group,.shopping-selected-section{min-width:0}
+.shopping-root-heading{margin:0 0 16px;font-size:22px;line-height:1.5;overflow-wrap:anywhere}
+.shopping-secondary-section>.shopping-section-heading,.shopping-selected-section>.shopping-section-heading{position:sticky;top:var(--category-section-top,0px);z-index:10;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;box-sizing:border-box;margin:0 0 12px;padding:6px 0;background:#fff;border-bottom:1px solid #e5e3dc}
+.shopping-section-heading :is(h2,h3){display:flex;align-items:center;gap:8px;min-width:0;margin:0;font-size:20px;line-height:1.5;overflow-wrap:anywhere}
+.shopping-section-image{display:block;flex:0 0 24px;width:24px;height:24px;object-fit:contain;border-radius:4px}
+.shopping-section-heading :is(h2,h3){flex:1}
+.section-continuation{min-height:100px}
+@media(max-width:767px){.shopping-root-heading{font-size:20px}.shopping-section-heading :is(h2,h3){font-size:18px}}

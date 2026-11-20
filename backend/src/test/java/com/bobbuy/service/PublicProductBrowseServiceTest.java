@@ -5,6 +5,35 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 class PublicProductBrowseServiceTest {
+ @Test void completeSecondarySectionsPreserveLastPagesRootAssignmentsAndScopeRevision(){
+  setup();var mapping=org.mockito.Mockito.mock(ShoppingCategoryService.class);
+  var assignments=new HashMap<String,String>();for(int i=0;i<49;i++)assignments.put("p%03d".formatted(i),i<25?"shop-food-one":"shop-food-two");assignments.put("p049","shop-food");
+  org.mockito.Mockito.when(mapping.snapshot(org.mockito.ArgumentMatchers.any())).thenReturn(new ShoppingCategoryService.Snapshot(ShoppingCategoryMapTest.categories(),assignments));service.setShopping(mapping);
+  var nav=service.sections(0,null,"en-US",true,"","",null);
+  assertThat(nav.shelves()).extracting(PublicProductBrowseService.Shelf::category).containsExactly("shop-food","shop-food-one","shop-food-two","__unclassified");
+  assertThat(nav.shelves()).extracting(PublicProductBrowseService.Shelf::total).containsExactly(1L,25L,24L,1L);
+  assertThat(nav.shelves().get(0).items()).hasSize(1);assertThat(nav.shelves().stream().skip(1)).allMatch(shelf->shelf.items().isEmpty());
+  var seen=new HashSet<String>();
+  for(var meta:nav.shelves())for(int page=0;page*24<meta.total();page++){
+   var result=service.sections(page,null,"en-US",true,"",meta.category(),nav.revision());
+   assertThat(result.revision()).isEqualTo(nav.revision());assertThat(result.shelves()).hasSize(1);
+   for(var card:result.shelves().get(0).items())assertThat(seen.add(card.productId())).isTrue();
+  }
+  assertThat(seen).hasSize(51).contains("p024","p048","p049","p050");
+  var scoped=service.sections(0,null,"en-US",true,"shop-food-one","",null);assertThat(scoped.shelves().get(0).items()).hasSize(8);
+  var root=service.browse(0,null,"","shop-food","en-US",false,null);
+  var leafLast=service.sections(1,null,"en-US",true,"shop-food","shop-food-one",root.revision());
+  assertThat(leafLast.shelves().get(0).items()).extracting(PublicProductBrowseService.Card::productId).containsExactly("p024");
+  assertThatThrownBy(()->service.sections(0,null,"en-US",true,"shop-food","__unclassified",root.revision())).isInstanceOf(IllegalArgumentException.class);
+  assertThatThrownBy(()->service.sections(1,null,"en-US",true,"shop-food","shop-food-one",nav.revision())).isInstanceOf(PublicProductBrowseService.Changed.class);
+  assignments.remove("p000");assertThatThrownBy(()->service.sections(1,null,"en-US",true,"","shop-food-one",nav.revision())).isInstanceOf(PublicProductBrowseService.Changed.class);
+ }
+ @Test void selectedEmptyLeafKeepsItsTitleAndOwnImageFacet(){
+  setup();var mapping=org.mockito.Mockito.mock(ShoppingCategoryService.class);
+  org.mockito.Mockito.when(mapping.snapshot(org.mockito.ArgumentMatchers.any())).thenReturn(new ShoppingCategoryService.Snapshot(ShoppingCategoryMapTest.categories(),Map.of()));service.setShopping(mapping);
+  var leaf=service.browse(0,null,"","shop-food-one","en-US",false,null);
+  assertThat(leaf.items()).isEmpty();assertThat(leaf.matchedTotal()).isZero();assertThat(leaf.categories()).extracting(PublicProductBrowseService.Facet::id).containsExactly("shop-food","shop-food-one");
+ }
  @Test void progressiveNavigationIncludesOnlyFirstShelfAndScopedReadsMatchLegacy(){
   setup();var mapping=org.mockito.Mockito.mock(ShoppingCategoryService.class);
   var assignments=new HashMap<String,String>();for(int i=0;i<50;i++)assignments.put("p%03d".formatted(i),"shop-food-one");

@@ -104,7 +104,26 @@ it('keeps root shortcuts on direct leaf URLs and shows the selected category ful
  await screen.findByRole('heading',{name:'third'});
  expect(screen.getByRole('link',{name:'Root'})).toHaveAttribute('aria-current','true');
  expect(screen.getByRole('link',{name:'Other'})).not.toHaveAttribute('aria-current');
- expect(screen.getByText('Leaf',{selector:'strong'})).toHaveAttribute('aria-current','page');
+ expect(screen.getByRole('heading',{name:'Leaf',level:2})).toHaveAttribute('aria-current','page');
  expect(view.container.querySelectorAll('.catalog-master-card')).toHaveLength(3);expect(view.container.querySelector('.shopping-shelf')).toBeNull();
  expect(mocks.productBrowse.mock.calls[0][0]).toMatchObject({category:'shop-leaf',merchantId:7});
+});
+
+it('renders real secondary sections under plain root titles and retains their own image and independent boundary',async()=>{
+ const image='/api/storefront/recommendation-images/leaf';
+ const categories=[{id:'shop-root',name:{'en-US':'Root'},count:26,imageUrl:'/api/storefront/recommendation-images/root'},{id:'shop-a',parentId:'shop-root',name:{'en-US':'Leaf A'},count:25,imageUrl:image},{id:'shop-b',parentId:'shop-root',name:{'en-US':'Leaf B'},count:1}];
+ mocks.productOverview.mockResolvedValue(browsePage([],{scopeTotal:26,matchedTotal:26,categories,shelves:[{category:'shop-a',total:25,items:Array.from({length:8},(_,i)=>productCard('a'+i))},{category:'shop-b',total:1,items:[]}]}));
+ mocks.productShelf.mockImplementation(async q=>browsePage([],{page:q.page,scopeTotal:26,matchedTotal:26,categories,shelves:[{category:q.category,total:q.category==='shop-a'?25:1,items:q.category==='shop-a'?(q.page===0?Array.from({length:24},(_,i)=>productCard('a'+i)):[productCard('a24')]):[productCard('b')]}]}));
+ mount('/products');await screen.findByRole('heading',{name:'a7'}, {timeout:5000});
+ expect(screen.getByRole('heading',{name:'Root',level:2}).querySelector('img')).toBeNull();
+ const heading=screen.getByRole('heading',{name:'Leaf A',level:3});expect(heading.querySelector('img')).toHaveAttribute('src',image);
+ expect(heading.closest('.shopping-secondary-section')?.querySelectorAll('.catalog-master-card')).toHaveLength(8);
+ fireEvent.click(screen.getByRole('button',{name:/Load more/}));await screen.findByRole('heading',{name:'a23'});fireEvent.click(screen.getByRole('button',{name:/Load more/}));await screen.findByRole('heading',{name:'a24'});
+ expect(heading.closest('.shopping-secondary-section')?.querySelectorAll('.catalog-master-card')).toHaveLength(25);
+ expect(screen.getByRole('heading',{name:'Leaf B',level:3}).closest('.shopping-secondary-section')).not.toBe(heading.closest('.shopping-secondary-section'));
+ expect(mocks.productBrowse).not.toHaveBeenCalled();expect(mocks.productOverview.mock.calls[0][0]).toMatchObject({sections:true});
+});
+it('keeps one readable leaf title for an empty direct URL and no duplicate breadcrumb title',async()=>{
+ mocks.productBrowse.mockResolvedValue(browsePage([],{categories:[{id:'shop-root',name:{'en-US':'Root'},count:0},{id:'shop-leaf',parentId:'shop-root',name:{'en-US':'Empty leaf'},count:0}],matchedTotal:0,scopeTotal:0}));
+ mount('/products?category=shop-leaf');const heading=await screen.findByRole('heading',{name:'Empty leaf',level:2});expect(heading).toHaveAttribute('aria-current','page');expect(screen.getAllByText('Empty leaf')).toHaveLength(1);expect(heading.querySelector('img')).toBeNull();expect(screen.getByRole('button',{name:'Parent category'}).querySelector('img')).toBeNull();
 });
