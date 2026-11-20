@@ -1,0 +1,2653 @@
+{
+  "result": "PASS",
+  "results": [
+    {
+      "width": 360,
+      "height": 800,
+      "compact": false,
+      "states": {
+        "initial": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 0,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgb(238, 238, 233)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "down": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 0,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgb(238, 238, 233)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "small": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 0,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgb(238, 238, 233)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "drag": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 30,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgb(238, 238, 233)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "dragged": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 75,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgb(238, 238, 233)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "released": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 75,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgb(238, 238, 233)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "tapped": {
+          "url": "/products?node=1000&category=shop-000-progressive-02",
+          "clicks": 1,
+          "navs": 1,
+          "scroll": 0,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 1",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 2",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgb(238, 238, 233)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        }
+      },
+      "errors": [],
+      "network": [
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/product-priority-fixture-01",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-18",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-17",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-19",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-2",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-3",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-4",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-20",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-5",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-7",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-6",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-8",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-9",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-20",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-19",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-22",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-23",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-21",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/product-priority-fixture-02",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-19",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-17",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-18",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-2",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-3",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-20",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-6",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-5",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-7",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-4",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-9",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-8",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "compact": true,
+      "states": {
+        "initial": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 0,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgb(244, 243, 240)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "down": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 0,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgb(244, 243, 240)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "small": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 0,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgb(244, 243, 240)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "drag": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 30,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgb(244, 243, 240)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "dragged": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 75,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgb(244, 243, 240)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "released": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 75,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgb(244, 243, 240)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "tapped": {
+          "url": "/products?node=1000&category=shop-000-progressive-02",
+          "clicks": 1,
+          "navs": 1,
+          "scroll": 0,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 1",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 2",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgb(238, 238, 233)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        }
+      },
+      "errors": [],
+      "network": [
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/product-priority-fixture-01",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-17",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-18",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-2",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-19",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-3",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-20",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-5",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-7",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-6",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-4",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-9",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-8",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-20",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-19",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-21",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-22",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-23",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/product-priority-fixture-02",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-19",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-18",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-17",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-20",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-2",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-5",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-3",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-6",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-4",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-7",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-8",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-9",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "compact": false,
+      "states": {
+        "initial": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 0,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgb(238, 238, 233)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "down": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 0,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgb(238, 238, 233)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "small": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 0,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgb(238, 238, 233)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "drag": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 30,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgb(238, 238, 233)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "dragged": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 75,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgb(238, 238, 233)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "released": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 75,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgb(238, 238, 233)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "tapped": {
+          "url": "/products?node=1000&category=shop-000-progressive-02",
+          "clicks": 1,
+          "navs": 1,
+          "scroll": 0,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 1",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 2",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgb(238, 238, 233)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        }
+      },
+      "errors": [],
+      "network": [
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/product-priority-fixture-01",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-18",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-2",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-17",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-19",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-20",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-6",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-3",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-8",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-4",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-7",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-5",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-9",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-19",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-20",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-22",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-21",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-23",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-17",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-19",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-18",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-2",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-4",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-20",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-3",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-8",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-5",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-6",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-7",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-9",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/product-priority-fixture-02",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "compact": true,
+      "states": {
+        "initial": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 0,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgb(244, 243, 240)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "down": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 0,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgb(244, 243, 240)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "small": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 0,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgb(244, 243, 240)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "drag": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 30,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgb(244, 243, 240)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "dragged": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 75,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgb(244, 243, 240)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "released": {
+          "url": "/products?node=1000&category=shop-000-progressive-01",
+          "clicks": 0,
+          "navs": 0,
+          "scroll": 75,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "饮料",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgb(244, 243, 240)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "米面干货",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        },
+        "tapped": {
+          "url": "/products?node=1000&category=shop-000-progressive-02",
+          "clicks": 1,
+          "navs": 1,
+          "scroll": 0,
+          "media": {
+            "hover": false,
+            "fine": false
+          },
+          "entries": [
+            {
+              "text": "全部",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 1",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 2",
+              "current": "true",
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgb(238, 238, 233)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            },
+            {
+              "text": "合成分类 3",
+              "current": null,
+              "hover": false,
+              "active": false,
+              "focus": false,
+              "bg": "rgba(0, 0, 0, 0)",
+              "inner": "rgba(0, 0, 0, 0)",
+              "tap": "rgba(0, 0, 0, 0)"
+            }
+          ]
+        }
+      },
+      "errors": [],
+      "network": [
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/product-priority-fixture-01",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-19",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-17",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-2",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-18",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-20",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-3",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-8",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-6",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-5",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-7",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-4",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-9",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-19",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-22",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-21",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-20",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-23",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/product-priority-fixture-02",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-18",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-19",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-3",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-17",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-2",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-20",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-4",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-8",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-6",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-5",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-7",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-9",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        }
+      ]
+    }
+  ]
+}
