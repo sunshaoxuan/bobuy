@@ -222,3 +222,5 @@ Ant Design `Switch` 只用于后台。公开商城布尔筛选使用 `button` + 
 - 用户在5ce6183a上线后否决大黑选中背景；浅灰修正候选只改本页选中样式，选中hover为#e5e5df，普通hover继续#f0f0ed并无选中描边/下划线。保留2px可见焦点和原几何；内侧描边不增加盒尺寸。受影响视觉证据见[浅灰选中验收](reports/evidence/storefront-category-light-20261120/README.md)。修正发布由本机协调。
 
 - 手机收拢候选（基线40d3e019）：仅max-width:767px且compact时，标题行32px、图28×28px、分类入口88×72px、轨道上下2px/链接内边距2px/图文gap2px；标签保留13px/18px、两行36px。吸顶表面109px，相比此前133px多露24px商品；标题到图间距15.5→7.5px。展开和桌面沿用原值，固定156px占位不改，47px透明余量不拦截商品触摸。实拍和尺寸证据见[手机收拢验收](reports/evidence/storefront-mobile-compact-20261120/README.md)，本机协调发布。
+
+- 手机compact横向修正（基线fe3c7ce0）：入口宽由88px收至76px、轨道gap由8px收至6px，中心距82px；高度72px/表面109px/图28px/标签13px与18px行高不变，展开与桌面仍88px+8px。360/390轨道起点完整入口由3增至4；“面包谷物与抹酱”两行的长行宽65.015625px，相对72px标签内宽余量6.984375px。原灰底、内描边和下划线保持。见[横向间距实测](reports/evidence/storefront-mobile-spacing-20261120/README.md)，候选由本机发布。
