@@ -265,7 +265,16 @@
 @media(max-width:767px){
  .public-product-catalog .catalog-dock[data-compact="true"] .catalog-master-heading { height:32px; padding:2px 0; }
  .catalog-dock[data-compact="true"] .category-shortcuts-track { padding-top:2px; padding-bottom:2px; gap:6px; }
- .catalog-dock[data-compact="true"] .category-shortcuts-track > li { flex-basis:76px; }
+ .catalog-dock[data-compact="true"] .category-shortcuts-track > li { flex-basis:min(60px, calc((100% - 24px)/5)); }
  .catalog-dock[data-compact="true"] .category-shortcuts-track a { height:72px; min-height:72px; padding:2px; gap:2px; }
  .catalog-dock[data-compact="true"] .category-shortcuts-image { width:28px; height:28px; }
+}
+
+@media(max-width:767px){
+ .catalog-dock .category-shortcuts-track { transition:gap 180ms ease-out; }
+ .catalog-dock .category-shortcuts-track > li { transition:flex-basis 180ms ease-out; }
+}
+@media(max-width:767px) and (prefers-reduced-motion:reduce){
+ .catalog-dock .category-shortcuts-track,
+ .catalog-dock .category-shortcuts-track > li { transition:none; }
 }

@@ -1,4 +1,4 @@
-import {act,render,waitFor} from '@testing-library/react';
+import {act,fireEvent,render,waitFor} from '@testing-library/react';
 import CatalogDock from './CatalogDock';
 import {vi,it,expect} from 'vitest';
 it('tracks the real header height and scroll anchor without changing the reserved navigation slot',async()=>{
@@ -12,8 +12,8 @@ it('tracks the real header height and scroll anchor without changing the reserve
  view.unmount();spy.mockRestore();
 });
 
-function selectionFixture(mobile:boolean,initialScroll:number){
- let anchorTop=140;
+function selectionFixture(mobile:boolean,initialScroll:number,animated=false){
+ let anchorTop=140,progress=animated?0:1,moving=false;
  const rect=(left:number,width:number,top=0,height=0)=>({x:left,y:top,left,right:left+width,top,bottom:top+height,width,height,toJSON(){}});
  const media=vi.spyOn(window,'matchMedia').mockReturnValue({matches:mobile} as MediaQueryList);
  const geometry=vi.spyOn(HTMLElement.prototype,'getBoundingClientRect').mockImplementation(function(this:HTMLElement){
@@ -23,14 +23,16 @@ function selectionFixture(mobile:boolean,initialScroll:number){
   if(this.hasAttribute('aria-current')){
    const compact=this.closest('.catalog-dock')?.getAttribute('data-compact')==='true';
    const track=this.closest('.category-shortcuts-track')!;
-   return rect((mobile&&compact?1562:1828)-track.scrollLeft,mobile&&compact?76:88);
+   const phase=mobile?(animated?progress:compact?1:0):0;
+   return rect(1828-266*phase-track.scrollLeft,88-12*phase);
   }
   return rect(0,0);
  });
  const view=render(<div className="storefront"><header className="store-header"/><CatalogDock heading={<h1>Product Picks</h1>} hasNavigation><ul className="category-shortcuts-track"><li><a aria-current="true">Late category</a></li></ul></CatalogDock></div>);
  const track=view.container.querySelector<HTMLElement>('.category-shortcuts-track')!;
  track.scrollLeft=initialScroll;
- return {track,async transition(compact:boolean){anchorTop=compact?60:140;act(()=>window.dispatchEvent(new Event('scroll')));await waitFor(()=>expect(view.container.querySelector('.catalog-dock')).toHaveAttribute('data-compact',String(compact)));},close(){view.unmount();geometry.mockRestore();media.mockRestore();}};
+ track.getAnimations=()=>moving?[{playState:'running'} as Animation]:[];
+ return {track,motion(value:number,running:boolean){progress=value;moving=running;},async transition(compact:boolean){anchorTop=compact?60:140;act(()=>window.dispatchEvent(new Event('scroll')));await waitFor(()=>expect(view.container.querySelector('.catalog-dock')).toHaveAttribute('data-compact',String(compact)));},close(){view.unmount();geometry.mockRestore();media.mockRestore();}};
 }
 it.each([
  ['visible mobile selection',true,1592,1558],
@@ -44,4 +46,23 @@ it.each([
 it('leaves subsequent horizontal exploration alone on scroll and expansion',async()=>{
  const fixture=selectionFixture(true,1592);
  try{await fixture.transition(true);expect(fixture.track.scrollLeft).toBe(1558);fixture.track.scrollLeft=0;act(()=>window.dispatchEvent(new Event('scroll')));await new Promise(resolve=>requestAnimationFrame(resolve));expect(fixture.track.scrollLeft).toBe(0);await fixture.transition(false);expect(fixture.track.scrollLeft).toBe(0);}finally{fixture.close();}
+});
+
+const twoFrames=()=>new Promise<void>(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>resolve())));
+it('protects intermediate animation geometry and stops when the layout transition ends',async()=>{
+ const f=selectionFixture(true,1592,true);
+ try{f.motion(0,true);await f.transition(true);f.motion(.9,true);await waitFor(()=>expect(f.track.scrollLeft).toBeCloseTo(1584.6));f.motion(1,false);await waitFor(()=>expect(f.track.scrollLeft).toBe(1558));await twoFrames();f.track.scrollLeft=0;await twoFrames();expect(f.track.scrollLeft).toBe(0);}finally{f.close();}
+});
+it('cancels animation protection when the user starts exploring the track',async()=>{
+ const f=selectionFixture(true,1592,true);
+ try{f.motion(0,true);await f.transition(true);f.motion(.9,true);await waitFor(()=>expect(f.track.scrollLeft).toBeCloseTo(1584.6));fireEvent(f.track,new MouseEvent('pointerdown',{bubbles:true,clientX:100,clientY:20}));fireEvent(f.track,new MouseEvent('pointermove',{bubbles:true,clientX:130,clientY:20}));f.track.scrollLeft=0;f.motion(1,true);await twoFrames();expect(f.track.scrollLeft).toBe(0);fireEvent.pointerUp(window);}finally{f.close();}
+});
+it('replaces animation protection when collapse is quickly reversed',async()=>{
+ const f=selectionFixture(true,1592,true);
+ try{f.motion(0,true);await f.transition(true);f.motion(.9,true);await waitFor(()=>expect(f.track.scrollLeft).toBeCloseTo(1584.6));f.motion(.5,true);await f.transition(false);f.motion(0,false);await waitFor(()=>expect(f.track.scrollLeft).toBe(1592));await twoFrames();f.track.scrollLeft=0;await twoFrames();expect(f.track.scrollLeft).toBe(0);}finally{f.close();}
+});
+
+it('continues protecting selection when a gesture on the track is vertical',async()=>{
+ const f=selectionFixture(true,1592,true);
+ try{f.motion(0,true);await f.transition(true);fireEvent(f.track,new MouseEvent('pointerdown',{bubbles:true,clientX:100,clientY:100}));fireEvent(f.track,new MouseEvent('pointermove',{bubbles:true,clientX:100,clientY:50}));f.motion(1,false);await waitFor(()=>expect(f.track.scrollLeft).toBe(1558));fireEvent.pointerUp(window);}finally{f.close();}
 });
