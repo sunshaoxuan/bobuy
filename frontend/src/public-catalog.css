@@ -264,7 +264,8 @@
 /* Compact mobile navigation: preserve the flow slot and two readable label lines. */
 @media(max-width:767px){
  .public-product-catalog .catalog-dock[data-compact="true"] .catalog-master-heading { height:32px; padding:2px 0; }
- .catalog-dock[data-compact="true"] .category-shortcuts-track { padding-top:2px; padding-bottom:2px; }
+ .catalog-dock[data-compact="true"] .category-shortcuts-track { padding-top:2px; padding-bottom:2px; gap:6px; }
+ .catalog-dock[data-compact="true"] .category-shortcuts-track > li { flex-basis:76px; }
  .catalog-dock[data-compact="true"] .category-shortcuts-track a { height:72px; min-height:72px; padding:2px; gap:2px; }
  .catalog-dock[data-compact="true"] .category-shortcuts-image { width:28px; height:28px; }
 }
