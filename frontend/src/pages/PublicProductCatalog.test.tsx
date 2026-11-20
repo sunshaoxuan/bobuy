@@ -71,13 +71,14 @@ it('links to all eligible roots in server order, including roots outside the pro
   const shortcuts = within(await screen.findByRole('navigation', {name: 'All categories'}));
   expect(screen.queryByRole('button', {name: 'Product Picks'})).not.toBeInTheDocument();
   const links = shortcuts.getAllByRole('link');
-  expect(links.map(link => link.textContent)).toEqual(['Z first', 'A later']);
-  expect(links[1]).toHaveAttribute('href', '/products?node=7&category=shop-a');
-  expect(links[0].querySelector('img')).toHaveAttribute('src', '/api/storefront/recommendation-images/staged-image');
-  expect(links[1].querySelector('span.category-shortcuts-image')).toBeInTheDocument();
-  fireEvent.click(links[1]);
+  expect(links.map(link => link.textContent)).toEqual(['All', 'Z first', 'A later']);
+  expect(links[2]).toHaveAttribute('href', '/products?node=7&category=shop-a');
+  expect(links[1].querySelector('img')).toHaveAttribute('src', '/api/storefront/recommendation-images/staged-image');
+  expect(links[2].querySelector('span.category-shortcuts-image')).toBeInTheDocument();
+  fireEvent.click(links[2]);
   await waitFor(() => expect(mocks.productBrowse.mock.lastCall?.[0]).toMatchObject({merchantId: 7, category: 'shop-a'}));
-  expect(screen.queryByRole('navigation', {name: 'All categories'})).not.toBeInTheDocument();
+  expect(screen.getByRole('navigation', {name: 'All categories'})).toBeInTheDocument();
+  expect(screen.getByRole('link',{name:'A later'})).toHaveAttribute('aria-current','true');
   expect(screen.getByRole('button', {name: 'Product Picks'})).toBeInTheDocument();
 });
 
@@ -94,4 +95,16 @@ it('renders overview cards for whitespace queries without requesting a grid or a
  mocks.productOverview.mockResolvedValue(browsePage([],{scopeTotal:1,matchedTotal:1,categories:[{id:'shop-first',name:{'en-US':'First'},count:1}],shelves:[{category:'shop-first',total:1,items:[productCard()]}]}));
  mount('/products',{query:'   '});await screen.findByRole('heading',{name:'Product'});
  expect(mocks.productBrowse).not.toHaveBeenCalled();expect(mocks.productShelf).not.toHaveBeenCalled();expect(screen.getByRole('navigation',{name:'All categories'})).toBeInTheDocument();
+});
+
+it('keeps root shortcuts on direct leaf URLs and shows the selected category full vertical results, not its shelf preview',async()=>{
+ const categories=[{id:'shop-root',name:{'en-US':'Root'},count:3},{id:'shop-leaf',parentId:'shop-root',name:{'en-US':'Leaf'},count:3},{id:'shop-other',name:{'en-US':'Other'},count:7}];
+ mocks.productBrowse.mockResolvedValue(browsePage([productCard('first'),productCard('second'),productCard('third')],{categories,matchedTotal:3,shelves:[{category:'shop-leaf',items:[productCard('first')],total:3}]}));
+ const view=mount('/products?node=7&category=shop-leaf');
+ await screen.findByRole('heading',{name:'third'});
+ expect(screen.getByRole('link',{name:'Root'})).toHaveAttribute('aria-current','true');
+ expect(screen.getByRole('link',{name:'Other'})).not.toHaveAttribute('aria-current');
+ expect(screen.getByText('Leaf',{selector:'strong'})).toHaveAttribute('aria-current','page');
+ expect(view.container.querySelectorAll('.catalog-master-card')).toHaveLength(3);expect(view.container.querySelector('.shopping-shelf')).toBeNull();
+ expect(mocks.productBrowse.mock.calls[0][0]).toMatchObject({category:'shop-leaf',merchantId:7});
 });

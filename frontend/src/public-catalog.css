@@ -230,3 +230,33 @@
 
 /* Reserve one shelf while its bounded read is pending; no opacity/reveal animation. */
 .shopping-shelf .shelf-progress { min-height: 360px; }
+
+/* /products only: the expanded slot stays fixed while its sticky surface contracts. */
+.catalog-dock-anchor { height:0; flex:none; }
+.catalog-dock { position:sticky; z-index:15; height:48px; flex:none; margin-bottom:16px; pointer-events:none; }
+.catalog-dock[data-navigation="true"] { height:156px; }
+.catalog-dock-surface { background:#fff; pointer-events:auto; border-bottom:1px solid transparent; }
+.public-product-catalog .catalog-dock .catalog-master-heading { display:flex; height:48px; box-sizing:border-box; padding:4px 0; align-items:center; flex-wrap:nowrap; gap:12px; transition:height 180ms ease-out; }
+.public-product-catalog .catalog-dock .catalog-master-heading h1 { display:block; font-size:24px; line-height:1.25; white-space:nowrap; transition:font-size 180ms ease-out; }
+.catalog-dock .catalog-master-heading>span { min-width:0; font-size:12px; }
+.catalog-dock .category-shortcuts { margin-bottom:0; }
+.catalog-dock .category-shortcuts-track a { height:100px; min-height:100px; padding:4px 2px; gap:4px; box-sizing:border-box; border-radius:8px; text-decoration:none; transition:height 180ms ease-out,min-height 180ms ease-out; }
+.catalog-dock .category-shortcuts-image { flex-shrink:0; transition:width 180ms ease-out,height 180ms ease-out; }
+.category-shortcuts-all { display:grid; place-items:center; font-size:24px; color:#242424; }
+.category-shortcuts-track a[aria-current] { background:#242424; color:#fff; font-weight:600; }
+.category-shortcuts-track a[aria-current] span[title] { text-decoration:underline; text-underline-offset:3px; }
+.category-shortcuts-track a[aria-current]:hover { background:#171717; }
+.catalog-dock[data-compact="true"] .catalog-dock-surface { border-bottom-color:#ededed; }
+.public-product-catalog .catalog-dock[data-compact="true"] .catalog-master-heading { height:40px; }
+.public-product-catalog .catalog-dock[data-compact="true"] .catalog-master-heading h1 { font-size:20px; }
+.catalog-dock[data-compact="true"] .category-shortcuts-track a { height:84px; min-height:84px; }
+.catalog-dock[data-compact="true"] .category-shortcuts-image { width:36px; height:36px; }
+.public-product-catalog>.catalog-sort-controls { margin-bottom:16px; }
+@media(prefers-reduced-motion:reduce){
+ .public-product-catalog .catalog-dock .catalog-master-heading,
+ .public-product-catalog .catalog-dock .catalog-master-heading h1,
+ .catalog-dock .category-shortcuts-track a,
+ .catalog-dock .category-shortcuts-image { transition:none; }
+}
+/* The stacked catalog navigation must not mix scrolled text into the app header. */
+.storefront.browse-shell:has(.catalog-dock) .store-header { background:#fff; }
