@@ -1,6 +1,6 @@
 # 好物推荐固定分类导航：隔离验收
 
-基线 `874a23cb4dc922298e2ef4ea2c4938c96f6f17cb`；候选源码及浏览器产物 SHA-256 见 [manifest.json](manifest.json)。最终加载生产构建 `index-CsMIAdqX.js`，5176 静态服务器代理既有 Spring 18080 / PostgreSQL 18.6 合成环境。没有 API mock、生产访问、业务数据写入或后端重建。23 个合成根类、463 件公开商品沿用已有夹具。
+基线 `874a23cb4dc922298e2ef4ea2c4938c96f6f17cb`；候选源码及浏览器产物 SHA-256 见 [manifest.json](manifest.json)。首轮加载生产构建 `index-CsMIAdqX.js`（控件修复后的最终产物为 `index-BwTi2D8X.js`），5176 静态服务器代理既有 Spring 18080 / PostgreSQL 18.6 合成环境。没有 API mock、生产访问、业务数据写入或后端重建。23 个合成根类、463 件公开商品沿用已有夹具。
 
 ## 结果
 
@@ -29,3 +29,13 @@ node docs/reports/evidence/storefront-sticky-categories-20261120/touch.mjs
 脚本是本次已执行的证据入口，不要求交付时重跑。功能首轮使用相同JS逻辑的前一CSS产物，最终截图与触摸补项使用manifest产物。单测既有jsdom scrollTo警告不等于真实浏览器错误。未重新执行性能对照，也不宣称生产验收或部署。合成类名不代表所有真实长名称；两行截断/完整title沿用原组件。1280仅补展开态，其余三指定视口覆盖主要状态。
 
 临时根目录 `.vite/vitest/results.json` 和本任务早期 probe 图片/脚本已清理；共享依赖、隔离后端、最终构建与正式证据保留供协调者审阅。
+
+## 同PR控件修复：最终候选
+
+首次CI [44667398188](https://github.com/sunshaoxuan/bobuy/actions/runs/44667398188) 的两个ProductMarkerCatalog失败直接来自总览未挂载sortControls。恢复所有dock状态的排序/标记优先，并仅在新dock页面覆盖既有总览隐藏样式。两项在分类栏下正常文档流显示，不增加固定栏高度。
+
+- `npx vitest run src/pages/ProductMarkerCatalog.test.tsx src/pages/PublicProductCatalog.test.tsx`：24 PASS。Dock源码未变，原1 PASS复用。
+- `npx vitest run src/components/RecommendationFromProduct.test.tsx -t 'keeps offer text on version conflict'`：1 PASS/8未运行。首次CI该失败的可访问按钮名实际为 `loading Register this issue with selected product`，而断言匹配无loading的完整名字；该组件不依赖本批文件。记录独立加载退出时序失败，不修改其源码或测试，跟踪新原生CI。
+- `node docs/reports/evidence/storefront-sticky-categories-20261120/controls.mjs`：四视口PASS，更新7个总览展开/收拢整图和局部；记录新控件计算样式、真实点击markedFirst=false及rating-desc请求/URL、无收拢位移/遮挡/横向溢出。原尺寸360展开图主Agent复核通过。选类/叶类/返回/触摸/reduced-motion输入不变，复用前述PASS及其截图。
+- 最终产物 `index-BwTi2D8X.js`，manifest保留前产物以说明复用边界。`controls.json`是受影响总览的最终几何/网络依据，替代前JSON中的对应总览坐标；其余证据保持有效。
+- 最终控件补验无页面异常、本地API失败。390排序后露出的旧夹具两张外部图片出现 `ERR_TUNNEL_CONNECTION_FAILED`（cdn.bobbuy.example与images.costco-static.com），URL及控制台记录在controls.json；如实记为隔离环境外部图片限制，不宣称该步骤控制台零错误，不改数据/图片。另两个早期补验分别因脚本接口路径笔误及缺少失败URL采集而中断；修正证据脚本后已完成，不影响应用代码判定。

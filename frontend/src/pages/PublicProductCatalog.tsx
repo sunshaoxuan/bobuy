@@ -167,7 +167,7 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
     <BrowseError error={node===-1?'browse.invalid':browse.error} changed={browse.changed} retry={browse.retry} refresh={reload}/>
     {sales.error&&<BrowseError error={sales.error} retry={sales.retry} refresh={sales.retry}/>}
     {(category || query.trim()) && <ShoppingNavigation categories={navigationCategories} category={category} onChoose={choose}/>}
-    {dockMode&&!shelfMode&&sortControls}
+    {dockMode&&sortControls}
     {!ready?(browse.error||node===-1?null:<div className="catalog-progress" role="status"><Spin/><span>{t('browse.loading')}</span></div>):<>
       {shelfMode?<div className="shopping-shelves">{shelves.map((shelf,shelfIndex)=><ProgressiveShelf key={shelf.category} identity={identity} category={shelf.category} progressive={progressive} activate={incremental.activate}>
        <header><h2>{shelf.category==='__unclassified'?t('class.unclassified'):localizedContent(browse.page!.categories.find(c=>c.id===shelf.category)?.name??{},locale)}</h2><button type="button" onClick={()=>choose(shelf.category)}>{t('shopping.view_all')} <span aria-hidden>→</span></button></header>

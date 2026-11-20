@@ -251,7 +251,7 @@
 .public-product-catalog .catalog-dock[data-compact="true"] .catalog-master-heading h1 { font-size:20px; }
 .catalog-dock[data-compact="true"] .category-shortcuts-track a { height:84px; min-height:84px; }
 .catalog-dock[data-compact="true"] .category-shortcuts-image { width:36px; height:36px; }
-.public-product-catalog>.catalog-sort-controls { margin-bottom:16px; }
+.public-product-catalog:has(.catalog-dock)>.catalog-sort-controls { display:flex; margin-bottom:16px; }
 @media(prefers-reduced-motion:reduce){
  .public-product-catalog .catalog-dock .catalog-master-heading,
  .public-product-catalog .catalog-dock .catalog-master-heading h1,

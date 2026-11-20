@@ -32,3 +32,14 @@
 - 主Agent原图复核发现App既有半透明顶栏在收拢截图透出底下排序字，容易混读；仅:has(.catalog-dock)的/products顶栏改白底，不改其他页面。该CSS输入使截图需更新：只重建前端和重拍既有状态/检查顶栏背景与几何，不重复已PASS的导航/手势/返回功能及单测。
 
 - 最终补项touch PASS：手机纵滑420→615px，透明23px区域命中商品。证据目录README、manifest与13组最终整图/局部已保存；正式源码与最终产物绑定。单测22 PASS，功能/视觉/触摸均PASS；冻结后仅跟踪原生CI，不再扩大测试。更新UI标准17.3记录已验收模式。发布仍由本机协调，本任务不合并或部署。
+
+## 首次CI修复（同PR）
+- 原生CI44667398188前端失败：两个ProductMarkerCatalog用例因新dock只在非shelf模式挂载sortControls而失去总览控件，直接相关。恢复/products所有dock状态的控件，并覆盖既有shopping-overview隐藏规则，使排序和标记优先可实际使用；仍位于固定导航下方正常文档流，不扩充固定栏高度。
+- RecommendationFromProduct冲突用例失败时DOM实际按钮名为“loading Register this issue with selected product”，断言读取到了Ant Design加载退出前的短暂状态；组件及测试未引用本批改动文件。仅执行一次该失败用例定位，不修改无关代码。
+- 失效输入为CatalogSection控件条件和总览样式：重验ProductMarkerCatalog3+PublicProductCatalog21，重建前端后仅补总览7个展开/收拢画面、控件真实操作与收拢坐标；复用选类/叶类/返回/触摸/reduced-motion已成立PASS。修复预算15分钟+原生新运行。
+
+- 定向目录24 PASS；无关推荐冲突用例单独1 PASS/8未运行，不改该组件/测试。控件浏览器脚本首次将overview请求路径误写为/product-overview（真实为/product-browse/overview），390点击URL/状态已成立但请求断言失败，结果JSON尚未保存；修正脚本路径后只重跑本次控件补验以生成完整记录，不改应用。
+
+- 控件实际切换排序后，既有合成夹具中的外部图片产生ERR_TUNNEL_CONNECTION_FAILED，前两次未带requestfailed URL记录而中断汇总。补失败URL采集并保留控制台原样；仅允许确认是非本地图片的环境隧道失败，页面异常/本地API失败仍阻断。此为补齐新暴露网络证据，不改图片/数据/功能。之后每视口即时保存，避免重跑已有完整记录。
+
+- 修复后controls四视口PASS，7组总览最终图已更新，360主Agent原图复核通过。控制台仅390排序出现两张既有外部夹具图片隧道失败，具体URL已记录；无页面异常或本地API失败。最终产物index-BwTi2D8X.js，24定向PASS+复用Dock1 PASS，无关失败用例单独PASS。冻结修复提交，继续同PR新原生运行。
