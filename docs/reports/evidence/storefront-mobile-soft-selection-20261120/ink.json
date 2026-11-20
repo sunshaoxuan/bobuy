@@ -1,0 +1,270 @@
+{
+  "method": "DPR1 original PNG; icon pixels all channels <175; text/underline pixels all channels <175 and channel spread<15; excludes line box whitespace and background/border. Insets may be fractional at CSS edges.",
+  "contrast": 13.989180537021355,
+  "rows": [
+    {
+      "version": "before",
+      "width": 360,
+      "state": "all",
+      "visualHeight": 72,
+      "iconInkTopInset": 6,
+      "textAndUnderlineBottomInset": 22,
+      "bounds": {
+        "image": {
+          "left": 40,
+          "top": 160,
+          "rightExclusive": 60,
+          "bottomExclusive": 180
+        },
+        "label": {
+          "left": 37,
+          "top": 189,
+          "rightExclusive": 62,
+          "bottomExclusive": 204
+        }
+      }
+    },
+    {
+      "version": "before",
+      "width": 360,
+      "state": "single",
+      "visualHeight": 72,
+      "iconInkTopInset": 6,
+      "textAndUnderlineBottomInset": 22,
+      "bounds": {
+        "image": {
+          "left": 171,
+          "top": 160,
+          "rightExclusive": 189,
+          "bottomExclusive": 181
+        },
+        "label": {
+          "left": 167,
+          "top": 189,
+          "rightExclusive": 192,
+          "bottomExclusive": 204
+        }
+      }
+    },
+    {
+      "version": "before",
+      "width": 360,
+      "state": "two",
+      "visualHeight": 72,
+      "iconInkTopInset": 6,
+      "textAndUnderlineBottomInset": 4,
+      "bounds": {
+        "image": {
+          "left": 171,
+          "top": 160,
+          "rightExclusive": 189,
+          "bottomExclusive": 181
+        },
+        "label": {
+          "left": 154,
+          "top": 189,
+          "rightExclusive": 206,
+          "bottomExclusive": 222
+        }
+      }
+    },
+    {
+      "version": "before",
+      "width": 390,
+      "state": "all",
+      "visualHeight": 72,
+      "iconInkTopInset": 6,
+      "textAndUnderlineBottomInset": 22,
+      "bounds": {
+        "image": {
+          "left": 40,
+          "top": 160,
+          "rightExclusive": 60,
+          "bottomExclusive": 180
+        },
+        "label": {
+          "left": 37,
+          "top": 189,
+          "rightExclusive": 63,
+          "bottomExclusive": 204
+        }
+      }
+    },
+    {
+      "version": "before",
+      "width": 390,
+      "state": "single",
+      "visualHeight": 72,
+      "iconInkTopInset": 6,
+      "textAndUnderlineBottomInset": 22,
+      "bounds": {
+        "image": {
+          "left": 173,
+          "top": 160,
+          "rightExclusive": 191,
+          "bottomExclusive": 181
+        },
+        "label": {
+          "left": 169,
+          "top": 189,
+          "rightExclusive": 195,
+          "bottomExclusive": 204
+        }
+      }
+    },
+    {
+      "version": "before",
+      "width": 390,
+      "state": "two",
+      "visualHeight": 72,
+      "iconInkTopInset": 6,
+      "textAndUnderlineBottomInset": 4,
+      "bounds": {
+        "image": {
+          "left": 173,
+          "top": 160,
+          "rightExclusive": 191,
+          "bottomExclusive": 181
+        },
+        "label": {
+          "left": 156,
+          "top": 189,
+          "rightExclusive": 208,
+          "bottomExclusive": 222
+        }
+      }
+    },
+    {
+      "version": "after",
+      "width": 360,
+      "state": "all",
+      "visualHeight": 54,
+      "iconInkTopInset": 8,
+      "textAndUnderlineBottomInset": 4,
+      "bounds": {
+        "image": {
+          "left": 40,
+          "top": 162,
+          "rightExclusive": 60,
+          "bottomExclusive": 182
+        },
+        "label": {
+          "left": 37,
+          "top": 189,
+          "rightExclusive": 62,
+          "bottomExclusive": 204
+        }
+      }
+    },
+    {
+      "version": "after",
+      "width": 360,
+      "state": "single",
+      "visualHeight": 54,
+      "iconInkTopInset": 8,
+      "textAndUnderlineBottomInset": 4,
+      "bounds": {
+        "image": {
+          "left": 171,
+          "top": 162,
+          "rightExclusive": 189,
+          "bottomExclusive": 183
+        },
+        "label": {
+          "left": 167,
+          "top": 189,
+          "rightExclusive": 192,
+          "bottomExclusive": 204
+        }
+      }
+    },
+    {
+      "version": "after",
+      "width": 360,
+      "state": "two",
+      "visualHeight": 72,
+      "iconInkTopInset": 8,
+      "textAndUnderlineBottomInset": 4,
+      "bounds": {
+        "image": {
+          "left": 171,
+          "top": 162,
+          "rightExclusive": 189,
+          "bottomExclusive": 183
+        },
+        "label": {
+          "left": 154,
+          "top": 189,
+          "rightExclusive": 206,
+          "bottomExclusive": 222
+        }
+      }
+    },
+    {
+      "version": "after",
+      "width": 390,
+      "state": "all",
+      "visualHeight": 54,
+      "iconInkTopInset": 8,
+      "textAndUnderlineBottomInset": 4,
+      "bounds": {
+        "image": {
+          "left": 40,
+          "top": 162,
+          "rightExclusive": 60,
+          "bottomExclusive": 182
+        },
+        "label": {
+          "left": 37,
+          "top": 189,
+          "rightExclusive": 63,
+          "bottomExclusive": 204
+        }
+      }
+    },
+    {
+      "version": "after",
+      "width": 390,
+      "state": "single",
+      "visualHeight": 54,
+      "iconInkTopInset": 8,
+      "textAndUnderlineBottomInset": 4,
+      "bounds": {
+        "image": {
+          "left": 173,
+          "top": 162,
+          "rightExclusive": 191,
+          "bottomExclusive": 183
+        },
+        "label": {
+          "left": 169,
+          "top": 189,
+          "rightExclusive": 195,
+          "bottomExclusive": 204
+        }
+      }
+    },
+    {
+      "version": "after",
+      "width": 390,
+      "state": "two",
+      "visualHeight": 72,
+      "iconInkTopInset": 8,
+      "textAndUnderlineBottomInset": 4,
+      "bounds": {
+        "image": {
+          "left": 173,
+          "top": 162,
+          "rightExclusive": 191,
+          "bottomExclusive": 183
+        },
+        "label": {
+          "left": 156,
+          "top": 189,
+          "rightExclusive": 208,
+          "bottomExclusive": 222
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "result": "PASS",
+  "rows": [
+    {
+      "name": "selected",
+      "outer": "rgba(0, 0, 0, 0)",
+      "inner": "rgb(238, 237, 232)",
+      "shadow": "rgb(229, 227, 220) 0px 0px 0px 1px inset",
+      "underline": "underline",
+      "height": 72
+    },
+    {
+      "name": "ordinary",
+      "outer": "rgba(0, 0, 0, 0)",
+      "inner": "rgb(247, 246, 243)",
+      "shadow": "none",
+      "underline": "none",
+      "height": 72
+    }
+  ]
+}
