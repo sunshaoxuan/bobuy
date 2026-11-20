@@ -220,3 +220,5 @@ Ant Design `Switch` 只用于后台。公开商城布尔筛选使用 `button` + 
 - 桌面箭头44×44px、分类链接宽88px，手机保留原生横向滑动；可见焦点、浏览器返回时纵横位置恢复。源码与三指定视口、1280补图及四语360px计算证据见[固定导航验收](reports/evidence/storefront-sticky-categories-20261120/README.md)。固定导航已随5ce6183a发布；浅灰修正为新候选。
 
 - 用户在5ce6183a上线后否决大黑选中背景；浅灰修正候选只改本页选中样式，选中hover为#e5e5df，普通hover继续#f0f0ed并无选中描边/下划线。保留2px可见焦点和原几何；内侧描边不增加盒尺寸。受影响视觉证据见[浅灰选中验收](reports/evidence/storefront-category-light-20261120/README.md)。修正发布由本机协调。
+
+- 手机收拢候选（基线40d3e019）：仅max-width:767px且compact时，标题行32px、图28×28px、分类入口88×72px、轨道上下2px/链接内边距2px/图文gap2px；标签保留13px/18px、两行36px。吸顶表面109px，相比此前133px多露24px商品；标题到图间距15.5→7.5px。展开和桌面沿用原值，固定156px占位不改，47px透明余量不拦截商品触摸。实拍和尺寸证据见[手机收拢验收](reports/evidence/storefront-mobile-compact-20261120/README.md)，本机协调发布。
