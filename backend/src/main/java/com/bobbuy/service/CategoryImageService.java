@@ -34,7 +34,7 @@ public class CategoryImageService {
   var auth=SecurityContextHolder.getContext().getAuthentication();
   if(auth==null||!(auth.getPrincipal() instanceof BobbuyAuthenticatedUser user)||user.id()==null||auth.getAuthorities().stream().noneMatch(a->a.getAuthority().equals("ROLE_AGENT")||a.getAuthority().equals("ROLE_PLATFORM_ADMIN")))throw new ApiException(ErrorCode.FORBIDDEN,"error.forbidden");
   nodes.lockTree().orElseThrow(()->new ApiException(ErrorCode.INVALID_REQUEST,"error.category.invalid"));
-  var node=nodes.findById(id).filter(n->n.getSystemKey()==null&&n.getParentId()==null).orElseThrow(()->new ApiException(ErrorCode.INVALID_REQUEST,"error.category.invalid"));
+  var node=nodes.findById(id).filter(n->n.getSystemKey()==null&&n.getFullPath()!=null&&n.getFullPath().size()>=1&&n.getFullPath().size()<=2).orElseThrow(()->new ApiException(ErrorCode.INVALID_REQUEST,"error.category.invalid"));
   var checked=RecommendationImageValidator.validate(file);
   String hash=MediaBinaryService.sha(("category-public:"+checked.hash()).getBytes(StandardCharsets.UTF_8));
   var image=images.findByMerchantIdAndImageHash(user.id(),hash).map(existing->binaries.reuse(existing,checked.content())).orElseGet(()->{

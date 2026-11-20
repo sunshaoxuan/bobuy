@@ -8,10 +8,12 @@ class ShoppingTreeProjectionTest {
  CategoryTreeNode node(String id,String parent,int rank,String...path){return new CategoryTreeNode(id,parent,Map.of("ja-JP",id),List.of(path),rank,null);}
  @Test void configuredOrderDeepPathsRootAttachmentAndImages(){
   var a=node("a",null,20,"a");var b=node("b",null,0,"b");var child=node("c","a",0,"a","c");var deep=node("d","c",0,"a","c","d");
+  child.setImageUrl("/api/storefront/recommendation-images/child-test");
   b.setImageUrl("/api/storefront/recommendation-images/test");
   var projection=new ShoppingTreeProjection(List.of(deep,a,child,b));
   assertThat(projection.categories()).extracting(ShoppingCategoryMap.Category::id).containsExactly("shop-b","shop-a","shop-c");
   assertThat(projection.categories().get(0).imageUrl()).isEqualTo(b.getImageUrl());
+  assertThat(projection.categories().get(2).imageUrl()).isEqualTo(child.getImageUrl());
   assertThat(projection.target("b")).isEqualTo("shop-b");assertThat(projection.target("d")).isEqualTo("shop-c");assertThat(projection.target("missing")).isNull();
  }
  @Test void rejectsOrphansCyclesAndInconsistentPaths(){
