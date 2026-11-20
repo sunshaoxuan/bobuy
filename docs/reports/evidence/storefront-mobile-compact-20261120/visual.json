@@ -1,0 +1,1978 @@
+{
+  "result": "PASS",
+  "results": [
+    {
+      "width": 390,
+      "height": 844,
+      "before": {
+        "expanded": {
+          "scrollY": 0,
+          "header": {
+            "top": 0,
+            "bottom": 120,
+            "width": 390,
+            "height": 120
+          },
+          "dock": {
+            "top": 128,
+            "bottom": 284,
+            "width": 358,
+            "height": 156
+          },
+          "surface": {
+            "top": 128,
+            "bottom": 285,
+            "width": 358,
+            "height": 157
+          },
+          "heading": {
+            "top": 128,
+            "bottom": 176,
+            "width": 358,
+            "height": 48
+          },
+          "title": {
+            "top": 137,
+            "bottom": 167,
+            "width": 94.09375,
+            "height": 30
+          },
+          "link": {
+            "top": 180,
+            "bottom": 280,
+            "width": 88,
+            "height": 100
+          },
+          "image": {
+            "top": 184,
+            "bottom": 232,
+            "width": 48,
+            "height": 48
+          },
+          "label": {
+            "top": 236,
+            "bottom": 254,
+            "width": 62.625,
+            "height": 18
+          },
+          "labelScrollHeight": 18,
+          "labelClientHeight": 18,
+          "titleIconGap": 17,
+          "productVisibleHeight": 489.703125,
+          "bottomNavigationTop": 774.703125,
+          "firstCardDocumentTop": 416.75,
+          "overflow": false,
+          "style": {
+            "fontSize": "13px",
+            "lineHeight": "18px",
+            "color": "rgb(36, 36, 36)",
+            "background": "rgb(238, 238, 233)",
+            "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+            "radius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "0px",
+            "minWidth": "0px",
+            "minHeight": "100px",
+            "decoration": "underline"
+          }
+        },
+        "compact": {
+          "scrollY": 420,
+          "header": {
+            "top": 0,
+            "bottom": 120,
+            "width": 390,
+            "height": 120
+          },
+          "dock": {
+            "top": 120,
+            "bottom": 276,
+            "width": 358,
+            "height": 156
+          },
+          "surface": {
+            "top": 120,
+            "bottom": 253,
+            "width": 358,
+            "height": 133
+          },
+          "heading": {
+            "top": 120,
+            "bottom": 160,
+            "width": 358,
+            "height": 40
+          },
+          "title": {
+            "top": 127.5,
+            "bottom": 152.5,
+            "width": 78.40625,
+            "height": 25
+          },
+          "link": {
+            "top": 164,
+            "bottom": 248,
+            "width": 88,
+            "height": 84
+          },
+          "image": {
+            "top": 168,
+            "bottom": 204,
+            "width": 36,
+            "height": 36
+          },
+          "label": {
+            "top": 208,
+            "bottom": 226,
+            "width": 62.625,
+            "height": 18
+          },
+          "labelScrollHeight": 18,
+          "labelClientHeight": 18,
+          "titleIconGap": 15.5,
+          "productVisibleHeight": 521.703125,
+          "bottomNavigationTop": 774.703125,
+          "firstCardDocumentTop": 416.75,
+          "overflow": false,
+          "style": {
+            "fontSize": "13px",
+            "lineHeight": "18px",
+            "color": "rgb(36, 36, 36)",
+            "background": "rgb(238, 238, 233)",
+            "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+            "radius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "0px",
+            "minWidth": "0px",
+            "minHeight": "84px",
+            "decoration": "underline"
+          }
+        },
+        "errors": [],
+        "network": [
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-nodes",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-17",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-18",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-07",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-19",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-20",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-2",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-3",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-4",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-8",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-7",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-5",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-6",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-9",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          }
+        ],
+        "entryAsset": "/assets/index-C4eyFPO_.js"
+      },
+      "after": {
+        "expanded": {
+          "scrollY": 0,
+          "header": {
+            "top": 0,
+            "bottom": 120,
+            "width": 390,
+            "height": 120
+          },
+          "dock": {
+            "top": 128,
+            "bottom": 284,
+            "width": 358,
+            "height": 156
+          },
+          "surface": {
+            "top": 128,
+            "bottom": 285,
+            "width": 358,
+            "height": 157
+          },
+          "heading": {
+            "top": 128,
+            "bottom": 176,
+            "width": 358,
+            "height": 48
+          },
+          "title": {
+            "top": 137,
+            "bottom": 167,
+            "width": 94.09375,
+            "height": 30
+          },
+          "link": {
+            "top": 180,
+            "bottom": 280,
+            "width": 88,
+            "height": 100
+          },
+          "image": {
+            "top": 184,
+            "bottom": 232,
+            "width": 48,
+            "height": 48
+          },
+          "label": {
+            "top": 236,
+            "bottom": 254,
+            "width": 62.625,
+            "height": 18
+          },
+          "labelScrollHeight": 18,
+          "labelClientHeight": 18,
+          "titleIconGap": 17,
+          "productVisibleHeight": 489.703125,
+          "bottomNavigationTop": 774.703125,
+          "firstCardDocumentTop": 416.75,
+          "overflow": false,
+          "style": {
+            "fontSize": "13px",
+            "lineHeight": "18px",
+            "color": "rgb(36, 36, 36)",
+            "background": "rgb(238, 238, 233)",
+            "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+            "radius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "0px",
+            "minWidth": "0px",
+            "minHeight": "100px",
+            "decoration": "underline"
+          }
+        },
+        "compact": {
+          "scrollY": 420,
+          "header": {
+            "top": 0,
+            "bottom": 120,
+            "width": 390,
+            "height": 120
+          },
+          "dock": {
+            "top": 120,
+            "bottom": 276,
+            "width": 358,
+            "height": 156
+          },
+          "surface": {
+            "top": 120,
+            "bottom": 229,
+            "width": 358,
+            "height": 109
+          },
+          "heading": {
+            "top": 120,
+            "bottom": 152,
+            "width": 358,
+            "height": 32
+          },
+          "title": {
+            "top": 123.5,
+            "bottom": 148.5,
+            "width": 78.40625,
+            "height": 25
+          },
+          "link": {
+            "top": 154,
+            "bottom": 226,
+            "width": 88,
+            "height": 72
+          },
+          "image": {
+            "top": 156,
+            "bottom": 184,
+            "width": 28,
+            "height": 28
+          },
+          "label": {
+            "top": 186,
+            "bottom": 204,
+            "width": 62.625,
+            "height": 18
+          },
+          "labelScrollHeight": 18,
+          "labelClientHeight": 18,
+          "titleIconGap": 7.5,
+          "productVisibleHeight": 545.703125,
+          "bottomNavigationTop": 774.703125,
+          "firstCardDocumentTop": 416.75,
+          "overflow": false,
+          "style": {
+            "fontSize": "13px",
+            "lineHeight": "18px",
+            "color": "rgb(36, 36, 36)",
+            "background": "rgb(238, 238, 233)",
+            "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+            "radius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "0px",
+            "minWidth": "0px",
+            "minHeight": "72px",
+            "decoration": "underline"
+          }
+        },
+        "longLabel": {
+          "scrollY": 420,
+          "header": {
+            "top": 0,
+            "bottom": 120,
+            "width": 390,
+            "height": 120
+          },
+          "dock": {
+            "top": 120,
+            "bottom": 276,
+            "width": 358,
+            "height": 156
+          },
+          "surface": {
+            "top": 120,
+            "bottom": 229,
+            "width": 358,
+            "height": 109
+          },
+          "heading": {
+            "top": 120,
+            "bottom": 152,
+            "width": 358,
+            "height": 32
+          },
+          "title": {
+            "top": 123.5,
+            "bottom": 148.5,
+            "width": 78.40625,
+            "height": 25
+          },
+          "link": {
+            "top": 154,
+            "bottom": 226,
+            "width": 88,
+            "height": 72
+          },
+          "image": {
+            "top": 156,
+            "bottom": 184,
+            "width": 28,
+            "height": 28
+          },
+          "label": {
+            "top": 186,
+            "bottom": 222,
+            "width": 84,
+            "height": 36
+          },
+          "labelScrollHeight": 36,
+          "labelClientHeight": 36,
+          "titleIconGap": 7.5,
+          "productVisibleHeight": 545.703125,
+          "bottomNavigationTop": 774.703125,
+          "firstCardDocumentTop": 416.75,
+          "overflow": false,
+          "style": {
+            "fontSize": "13px",
+            "lineHeight": "18px",
+            "color": "rgb(36, 36, 36)",
+            "background": "rgb(238, 238, 233)",
+            "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+            "radius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "0px",
+            "minWidth": "0px",
+            "minHeight": "72px",
+            "decoration": "underline"
+          }
+        },
+        "touch": {
+          "x": 30,
+          "y": 237,
+          "space": 47,
+          "blocked": false,
+          "product": "progressive-item-7-1",
+          "received": {
+            "product": "progressive-item-7-1",
+            "pointerType": "touch"
+          },
+          "endY": 485
+        },
+        "breakpoint": {
+          "scrollY": 485,
+          "header": {
+            "top": 0,
+            "bottom": 76,
+            "width": 768,
+            "height": 76
+          },
+          "dock": {
+            "top": 76,
+            "bottom": 232,
+            "width": 720,
+            "height": 156
+          },
+          "surface": {
+            "top": 76,
+            "bottom": 209,
+            "width": 720,
+            "height": 133
+          },
+          "heading": {
+            "top": 76,
+            "bottom": 116,
+            "width": 720,
+            "height": 40
+          },
+          "title": {
+            "top": 83.5,
+            "bottom": 108.5,
+            "width": 78.40625,
+            "height": 25
+          },
+          "link": {
+            "top": 120,
+            "bottom": 204,
+            "width": 88,
+            "height": 84
+          },
+          "image": {
+            "top": 124,
+            "bottom": 160,
+            "width": 36,
+            "height": 36
+          },
+          "label": {
+            "top": 164,
+            "bottom": 200,
+            "width": 84,
+            "height": 36
+          },
+          "labelScrollHeight": 36,
+          "labelClientHeight": 36,
+          "titleIconGap": 15.5,
+          "productVisibleHeight": 635,
+          "bottomNavigationTop": 844,
+          "firstCardDocumentTop": 384.75,
+          "overflow": false,
+          "style": {
+            "fontSize": "13px",
+            "lineHeight": "18px",
+            "color": "rgb(36, 36, 36)",
+            "background": "rgb(238, 238, 233)",
+            "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+            "radius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "0px",
+            "minWidth": "0px",
+            "minHeight": "84px",
+            "decoration": "underline"
+          }
+        },
+        "errors": [],
+        "network": [
+          {
+            "path": "/api/storefront/recommendation-nodes",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-17",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-18",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-19",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-07",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-20",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-2",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-3",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-4",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-5",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-6",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-8",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-7",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-9",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+            "status": 200
+          }
+        ],
+        "entryAsset": "/assets/index-fXUHmNta.js"
+      }
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "before": {
+        "expanded": {
+          "scrollY": 0,
+          "header": {
+            "top": 0,
+            "bottom": 120,
+            "width": 360,
+            "height": 120
+          },
+          "dock": {
+            "top": 128,
+            "bottom": 284,
+            "width": 328,
+            "height": 156
+          },
+          "surface": {
+            "top": 128,
+            "bottom": 285,
+            "width": 328,
+            "height": 157
+          },
+          "heading": {
+            "top": 128,
+            "bottom": 176,
+            "width": 328,
+            "height": 48
+          },
+          "title": {
+            "top": 137,
+            "bottom": 167,
+            "width": 94.09375,
+            "height": 30
+          },
+          "link": {
+            "top": 180,
+            "bottom": 280,
+            "width": 88,
+            "height": 100
+          },
+          "image": {
+            "top": 184,
+            "bottom": 232,
+            "width": 48,
+            "height": 48
+          },
+          "label": {
+            "top": 236,
+            "bottom": 254,
+            "width": 62.625,
+            "height": 18
+          },
+          "labelScrollHeight": 18,
+          "labelClientHeight": 18,
+          "titleIconGap": 17,
+          "productVisibleHeight": 445.703125,
+          "bottomNavigationTop": 730.703125,
+          "firstCardDocumentTop": 469.546875,
+          "overflow": false,
+          "style": {
+            "fontSize": "13px",
+            "lineHeight": "18px",
+            "color": "rgb(36, 36, 36)",
+            "background": "rgb(238, 238, 233)",
+            "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+            "radius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "0px",
+            "minWidth": "0px",
+            "minHeight": "100px",
+            "decoration": "underline"
+          }
+        },
+        "compact": {
+          "scrollY": 420,
+          "header": {
+            "top": 0,
+            "bottom": 120,
+            "width": 360,
+            "height": 120
+          },
+          "dock": {
+            "top": 120,
+            "bottom": 276,
+            "width": 328,
+            "height": 156
+          },
+          "surface": {
+            "top": 120,
+            "bottom": 253,
+            "width": 328,
+            "height": 133
+          },
+          "heading": {
+            "top": 120,
+            "bottom": 160,
+            "width": 328,
+            "height": 40
+          },
+          "title": {
+            "top": 127.5,
+            "bottom": 152.5,
+            "width": 78.40625,
+            "height": 25
+          },
+          "link": {
+            "top": 164,
+            "bottom": 248,
+            "width": 88,
+            "height": 84
+          },
+          "image": {
+            "top": 168,
+            "bottom": 204,
+            "width": 36,
+            "height": 36
+          },
+          "label": {
+            "top": 208,
+            "bottom": 226,
+            "width": 62.625,
+            "height": 18
+          },
+          "labelScrollHeight": 18,
+          "labelClientHeight": 18,
+          "titleIconGap": 15.5,
+          "productVisibleHeight": 477.703125,
+          "bottomNavigationTop": 730.703125,
+          "firstCardDocumentTop": 469.546875,
+          "overflow": false,
+          "style": {
+            "fontSize": "13px",
+            "lineHeight": "18px",
+            "color": "rgb(36, 36, 36)",
+            "background": "rgb(238, 238, 233)",
+            "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+            "radius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "0px",
+            "minWidth": "0px",
+            "minHeight": "84px",
+            "decoration": "underline"
+          }
+        },
+        "errors": [],
+        "network": [
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-nodes",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-07",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-17",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-18",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-19",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-2",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-3",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-4",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-6",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-20",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-5",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-7",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-8",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-9",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          }
+        ],
+        "entryAsset": "/assets/index-C4eyFPO_.js"
+      },
+      "after": {
+        "expanded": {
+          "scrollY": 0,
+          "header": {
+            "top": 0,
+            "bottom": 120,
+            "width": 360,
+            "height": 120
+          },
+          "dock": {
+            "top": 128,
+            "bottom": 284,
+            "width": 328,
+            "height": 156
+          },
+          "surface": {
+            "top": 128,
+            "bottom": 285,
+            "width": 328,
+            "height": 157
+          },
+          "heading": {
+            "top": 128,
+            "bottom": 176,
+            "width": 328,
+            "height": 48
+          },
+          "title": {
+            "top": 137,
+            "bottom": 167,
+            "width": 94.09375,
+            "height": 30
+          },
+          "link": {
+            "top": 180,
+            "bottom": 280,
+            "width": 88,
+            "height": 100
+          },
+          "image": {
+            "top": 184,
+            "bottom": 232,
+            "width": 48,
+            "height": 48
+          },
+          "label": {
+            "top": 236,
+            "bottom": 254,
+            "width": 62.625,
+            "height": 18
+          },
+          "labelScrollHeight": 18,
+          "labelClientHeight": 18,
+          "titleIconGap": 17,
+          "productVisibleHeight": 445.703125,
+          "bottomNavigationTop": 730.703125,
+          "firstCardDocumentTop": 469.546875,
+          "overflow": false,
+          "style": {
+            "fontSize": "13px",
+            "lineHeight": "18px",
+            "color": "rgb(36, 36, 36)",
+            "background": "rgb(238, 238, 233)",
+            "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+            "radius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "0px",
+            "minWidth": "0px",
+            "minHeight": "100px",
+            "decoration": "underline"
+          }
+        },
+        "compact": {
+          "scrollY": 420,
+          "header": {
+            "top": 0,
+            "bottom": 120,
+            "width": 360,
+            "height": 120
+          },
+          "dock": {
+            "top": 120,
+            "bottom": 276,
+            "width": 328,
+            "height": 156
+          },
+          "surface": {
+            "top": 120,
+            "bottom": 229,
+            "width": 328,
+            "height": 109
+          },
+          "heading": {
+            "top": 120,
+            "bottom": 152,
+            "width": 328,
+            "height": 32
+          },
+          "title": {
+            "top": 123.5,
+            "bottom": 148.5,
+            "width": 78.40625,
+            "height": 25
+          },
+          "link": {
+            "top": 154,
+            "bottom": 226,
+            "width": 88,
+            "height": 72
+          },
+          "image": {
+            "top": 156,
+            "bottom": 184,
+            "width": 28,
+            "height": 28
+          },
+          "label": {
+            "top": 186,
+            "bottom": 204,
+            "width": 62.625,
+            "height": 18
+          },
+          "labelScrollHeight": 18,
+          "labelClientHeight": 18,
+          "titleIconGap": 7.5,
+          "productVisibleHeight": 501.703125,
+          "bottomNavigationTop": 730.703125,
+          "firstCardDocumentTop": 469.546875,
+          "overflow": false,
+          "style": {
+            "fontSize": "13px",
+            "lineHeight": "18px",
+            "color": "rgb(36, 36, 36)",
+            "background": "rgb(238, 238, 233)",
+            "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+            "radius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "0px",
+            "minWidth": "0px",
+            "minHeight": "72px",
+            "decoration": "underline"
+          }
+        },
+        "longLabel": {
+          "scrollY": 420,
+          "header": {
+            "top": 0,
+            "bottom": 120,
+            "width": 360,
+            "height": 120
+          },
+          "dock": {
+            "top": 120,
+            "bottom": 276,
+            "width": 328,
+            "height": 156
+          },
+          "surface": {
+            "top": 120,
+            "bottom": 229,
+            "width": 328,
+            "height": 109
+          },
+          "heading": {
+            "top": 120,
+            "bottom": 152,
+            "width": 328,
+            "height": 32
+          },
+          "title": {
+            "top": 123.5,
+            "bottom": 148.5,
+            "width": 78.40625,
+            "height": 25
+          },
+          "link": {
+            "top": 154,
+            "bottom": 226,
+            "width": 88,
+            "height": 72
+          },
+          "image": {
+            "top": 156,
+            "bottom": 184,
+            "width": 28,
+            "height": 28
+          },
+          "label": {
+            "top": 186,
+            "bottom": 222,
+            "width": 84,
+            "height": 36
+          },
+          "labelScrollHeight": 36,
+          "labelClientHeight": 36,
+          "titleIconGap": 7.5,
+          "productVisibleHeight": 501.703125,
+          "bottomNavigationTop": 730.703125,
+          "firstCardDocumentTop": 469.546875,
+          "overflow": false,
+          "style": {
+            "fontSize": "13px",
+            "lineHeight": "18px",
+            "color": "rgb(36, 36, 36)",
+            "background": "rgb(238, 238, 233)",
+            "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+            "radius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "0px",
+            "minWidth": "0px",
+            "minHeight": "72px",
+            "decoration": "underline"
+          }
+        },
+        "touch": {
+          "x": 30,
+          "y": 237,
+          "space": 47,
+          "blocked": false,
+          "product": "progressive-item-7-1",
+          "received": {
+            "product": "progressive-item-7-1",
+            "pointerType": "touch"
+          },
+          "endY": 562
+        },
+        "errors": [],
+        "network": [
+          {
+            "path": "/api/storefront/recommendation-nodes",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-07",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-18",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-2",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-17",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-19",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-5",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-20",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-4",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-6",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-3",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-7",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-8",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-9",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          }
+        ],
+        "entryAsset": "/assets/index-fXUHmNta.js"
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "before": {
+        "expanded": {
+          "scrollY": 0,
+          "header": {
+            "top": 0,
+            "bottom": 76,
+            "width": 1280,
+            "height": 76
+          },
+          "dock": {
+            "top": 96,
+            "bottom": 252,
+            "width": 1216,
+            "height": 156
+          },
+          "surface": {
+            "top": 96,
+            "bottom": 253,
+            "width": 1216,
+            "height": 157
+          },
+          "heading": {
+            "top": 96,
+            "bottom": 144,
+            "width": 1216,
+            "height": 48
+          },
+          "title": {
+            "top": 105,
+            "bottom": 135,
+            "width": 94.09375,
+            "height": 30
+          },
+          "link": {
+            "top": 148,
+            "bottom": 248,
+            "width": 88,
+            "height": 100
+          },
+          "image": {
+            "top": 152,
+            "bottom": 200,
+            "width": 48,
+            "height": 48
+          },
+          "label": {
+            "top": 204,
+            "bottom": 222,
+            "width": 62.625,
+            "height": 18
+          },
+          "labelScrollHeight": 18,
+          "labelClientHeight": 18,
+          "titleIconGap": 17,
+          "productVisibleHeight": 547,
+          "bottomNavigationTop": 800,
+          "firstCardDocumentTop": 384.75,
+          "overflow": false,
+          "style": {
+            "fontSize": "13px",
+            "lineHeight": "18px",
+            "color": "rgb(36, 36, 36)",
+            "background": "rgb(238, 238, 233)",
+            "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+            "radius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "0px",
+            "minWidth": "0px",
+            "minHeight": "100px",
+            "decoration": "underline"
+          }
+        },
+        "compact": {
+          "scrollY": 420,
+          "header": {
+            "top": 0,
+            "bottom": 76,
+            "width": 1280,
+            "height": 76
+          },
+          "dock": {
+            "top": 76,
+            "bottom": 232,
+            "width": 1216,
+            "height": 156
+          },
+          "surface": {
+            "top": 76,
+            "bottom": 209,
+            "width": 1216,
+            "height": 133
+          },
+          "heading": {
+            "top": 76,
+            "bottom": 116,
+            "width": 1216,
+            "height": 40
+          },
+          "title": {
+            "top": 83.5,
+            "bottom": 108.5,
+            "width": 78.40625,
+            "height": 25
+          },
+          "link": {
+            "top": 120,
+            "bottom": 204,
+            "width": 88,
+            "height": 84
+          },
+          "image": {
+            "top": 124,
+            "bottom": 160,
+            "width": 36,
+            "height": 36
+          },
+          "label": {
+            "top": 164,
+            "bottom": 182,
+            "width": 62.625,
+            "height": 18
+          },
+          "labelScrollHeight": 18,
+          "labelClientHeight": 18,
+          "titleIconGap": 15.5,
+          "productVisibleHeight": 591,
+          "bottomNavigationTop": 800,
+          "firstCardDocumentTop": 384.75,
+          "overflow": false,
+          "style": {
+            "fontSize": "13px",
+            "lineHeight": "18px",
+            "color": "rgb(36, 36, 36)",
+            "background": "rgb(238, 238, 233)",
+            "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+            "radius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "0px",
+            "minWidth": "0px",
+            "minHeight": "84px",
+            "decoration": "underline"
+          }
+        },
+        "errors": [],
+        "network": [
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-nodes",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-07",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-17",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-2",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-19",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-18",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-20",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-4",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-8",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-7",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-3",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-5",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-6",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-9",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          }
+        ],
+        "entryAsset": "/assets/index-C4eyFPO_.js"
+      },
+      "after": {
+        "expanded": {
+          "scrollY": 0,
+          "header": {
+            "top": 0,
+            "bottom": 76,
+            "width": 1280,
+            "height": 76
+          },
+          "dock": {
+            "top": 96,
+            "bottom": 252,
+            "width": 1216,
+            "height": 156
+          },
+          "surface": {
+            "top": 96,
+            "bottom": 253,
+            "width": 1216,
+            "height": 157
+          },
+          "heading": {
+            "top": 96,
+            "bottom": 144,
+            "width": 1216,
+            "height": 48
+          },
+          "title": {
+            "top": 105,
+            "bottom": 135,
+            "width": 94.09375,
+            "height": 30
+          },
+          "link": {
+            "top": 148,
+            "bottom": 248,
+            "width": 88,
+            "height": 100
+          },
+          "image": {
+            "top": 152,
+            "bottom": 200,
+            "width": 48,
+            "height": 48
+          },
+          "label": {
+            "top": 204,
+            "bottom": 222,
+            "width": 62.625,
+            "height": 18
+          },
+          "labelScrollHeight": 18,
+          "labelClientHeight": 18,
+          "titleIconGap": 17,
+          "productVisibleHeight": 547,
+          "bottomNavigationTop": 800,
+          "firstCardDocumentTop": 384.75,
+          "overflow": false,
+          "style": {
+            "fontSize": "13px",
+            "lineHeight": "18px",
+            "color": "rgb(36, 36, 36)",
+            "background": "rgb(238, 238, 233)",
+            "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+            "radius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "0px",
+            "minWidth": "0px",
+            "minHeight": "100px",
+            "decoration": "underline"
+          }
+        },
+        "compact": {
+          "scrollY": 420,
+          "header": {
+            "top": 0,
+            "bottom": 76,
+            "width": 1280,
+            "height": 76
+          },
+          "dock": {
+            "top": 76,
+            "bottom": 232,
+            "width": 1216,
+            "height": 156
+          },
+          "surface": {
+            "top": 76,
+            "bottom": 209,
+            "width": 1216,
+            "height": 133
+          },
+          "heading": {
+            "top": 76,
+            "bottom": 116,
+            "width": 1216,
+            "height": 40
+          },
+          "title": {
+            "top": 83.5,
+            "bottom": 108.5,
+            "width": 78.40625,
+            "height": 25
+          },
+          "link": {
+            "top": 120,
+            "bottom": 204,
+            "width": 88,
+            "height": 84
+          },
+          "image": {
+            "top": 124,
+            "bottom": 160,
+            "width": 36,
+            "height": 36
+          },
+          "label": {
+            "top": 164,
+            "bottom": 182,
+            "width": 62.625,
+            "height": 18
+          },
+          "labelScrollHeight": 18,
+          "labelClientHeight": 18,
+          "titleIconGap": 15.5,
+          "productVisibleHeight": 591,
+          "bottomNavigationTop": 800,
+          "firstCardDocumentTop": 384.75,
+          "overflow": false,
+          "style": {
+            "fontSize": "13px",
+            "lineHeight": "18px",
+            "color": "rgb(36, 36, 36)",
+            "background": "rgb(238, 238, 233)",
+            "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+            "radius": "8px",
+            "borderColor": "rgb(36, 36, 36)",
+            "borderWidth": "0px",
+            "minWidth": "0px",
+            "minHeight": "84px",
+            "decoration": "underline"
+          }
+        },
+        "errors": [],
+        "network": [
+          {
+            "path": "/api/storefront/recommendation-nodes",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/trips",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-browse",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-1",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-13",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-14",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-15",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-16",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-17",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-18",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-20",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-19",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/product-priority-fixture-07",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-3",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-2",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-7",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-5",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-4",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-6",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-8",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-popularity/progressive-item-7-9",
+            "status": 200
+          },
+          {
+            "path": "/api/storefront/product-sales",
+            "status": 200
+          }
+        ],
+        "entryAsset": "/assets/index-fXUHmNta.js"
+      }
+    }
+  ]
+}

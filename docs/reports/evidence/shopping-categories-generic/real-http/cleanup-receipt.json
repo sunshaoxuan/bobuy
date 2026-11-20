@@ -1,0 +1,18 @@
+{
+  "task": "pr158-real-e2e",
+  "stoppedPids": [
+    18513,
+    18729
+  ],
+  "removedContainer": "pr158-e2e-postgres",
+  "removedPrivateTemporaryFiles": [
+    "accounts.json",
+    "db.env",
+    "application-pr158.properties",
+    "backend.log",
+    "HashPassword.java"
+  ],
+  "preserved": "formal screenshots/reports, original CSV private archive, original artwork and 256px bundle, existing shared Vite and tools",
+  "productionWrites": false,
+  "productionJobsStarted": false
+}

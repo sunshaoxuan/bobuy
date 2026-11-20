@@ -1,0 +1,23 @@
+{
+  "frontend": {
+    "StoreNavigation.selection.test.tsx": 5,
+    "SidebarCategoryIcon.test.tsx": 1,
+    "result": "PASS"
+  },
+  "backend": [
+    {
+      "name": "com.bobbuy.service.CategoryImageServiceTest",
+      "tests": "5",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.bobbuy.service.ShoppingTreeProjectionTest",
+      "tests": "3",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    }
+  ]
+}

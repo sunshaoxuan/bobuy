@@ -2,6 +2,34 @@ import type { Dictionary } from './types';
 import experience from './experience.ja-JP.json';
 
 const messages: Dictionary = {
+  "product.create.help": "店舗内限定の商品を手動で作成します。日本語の商品名を入力してください。分類は未分類のまま保存できます。保存後に編集・通常価格の確認・公開ができます。AI処理や在庫変更は行いません。",
+  "product.create.duplicate": "同じ商品番号の登録があります（削除済みを含む）。元の商品を検索または復元してください。既存の情報は上書きしません。",
+  "product.create.deleted_retry": "この作成リクエストの商品は削除されています。削除済み商品を確認してください。",
+
+  "catalogTransfer.export": "一覧の商品をエクスポート",
+  "catalogTransfer.load": "JSON ファイルを読み込む",
+  "catalogTransfer.help": "既存の商品 ID とバージョンを使用します。エクスポート対象はこのページの閲覧可能な商品（最大500件）です。読み込み後にプレビューを確認して保存してください。新規・未確認の商品は自動作成しません。",
+  "catalogTransfer.template": "JSONテンプレートをダウンロード",
+  "catalogTransfer.select": "保存するプレビュー済み商品を1件以上選択してください。",
+  "catalogTransfer.invalid": "2 MB 以下、1～500行、商品 ID が重複しない JSON ファイルを使用してください。",
+  "categoryTransfer.done": "分類構造を保存しました。",
+  "categoryTransfer.title": "分類構造のインポート / エクスポート",
+  "categoryTransfer.help": "CSV は固定 ID、親 ID、四言語名、表示順、サイト内画像に対応します。追加・更新のみです。プレビューでエラーを修正してから全行を確定してください。商品は変更しません。",
+  "categoryTransfer.export": "現在の分類をエクスポート",
+  "categoryTransfer.order": "表示順",
+  "categoryTransfer.create": "追加",
+  "categoryTransfer.update": "更新",
+  "categoryTransfer.confirm": "分類・順序・画像参照を確認し、この一括変更を確定します。",
+  "categoryImport.resolveErrors": "すべてのエラー行を修正して再プレビューしてください。一部のみの取り込みは行いません。",
+  "categoryTree.imageUpload": "カテゴリ画像をアップロード／差替え",
+  "categoryTree.imageHelp": "推奨：256×256の正方形PNG/JPEG、最大8MiB。ナビ表示は32×32。",
+  "categoryTree.imageFailed": "画像をアップロードできません。ファイルを確認して再試行してください。",
+
+  'shopping.directory': 'すべてのカテゴリ',
+  'shopping.previous_categories': '前のカテゴリ',
+  'shopping.next_categories': '次のカテゴリ',
+  'shopping.view_all': 'すべて見る',
+  'shopping.parent': '上位カテゴリに戻る',
   'pricing.documents':'価格改定伝票','pricing.reason_required':'改定または取消の理由を入力してください。要確認の出典伝票は理由を補って保存してください。','pricing.promotion_reduction':'販促価格は同一チャネル・通貨・単位の通常価格より低い必要があります。','pricing.use_documents':'価格と割引期間は価格改定伝票で管理してください。',
   'stock.msg.update_failed':'保存できませんでした。変更前の値に戻しました。',
   'geo.title':'国・地域マスター','geo.hint':'国・地域、都道府県、市区町村の基礎データを検索・選択できます。','geo.country':'国・地域','geo.prefecture':'都道府県','geo.city':'市区町村','geo.choose_prefecture':'都道府県を選択','geo.choose_city':'市区町村を選択','geo.selection':'選択中の地域','geo.country_only':'この国・地域は現在、国レベルのデータのみ登録されています。','geo.prefectures':'都道府県一覧','geo.cities':'市区町村一覧','geo.code':'コード','geo.name':'名称','geo.reading':'ふりがな','geo.source':'国・地域は ISO 3166-1 コードを使用。日本は47都道府県と全市区町村を収録し、政令指定都市および行政区を含みます。資料確認日：2026-11-12。',
@@ -160,7 +188,7 @@ const messages: Dictionary = {
     "browse.result_count": "{total} 件中 {shown} 件を表示",
     "browse.changed": "一覧が更新されました。再読み込みして同じ版の内容を表示してください。",
     "browse.invalid": "一覧の応答または検索条件が無効です。",
-    "browse.loading": "この件数のデータを読み込み中…",
+    "browse.loading": "読み込み中",
     "browse.sales_pending": "現在の販売価格と購入条件を確認中…",
     "browse.refresh": "一覧を再読み込み",
     "browse.service_price": "サービス料金",
@@ -1572,7 +1600,7 @@ Object.assign(messages,{"card.reference": "参考価格", "card.reference_past":
 Object.assign(messages,{"repair.not_derivable":"一意に導出できません。手動で入力してください","repair.source_title":"出典コンテキスト候補を確認","repair.locale_title":"AI 言語候補を確認","repair.review_hint":"変更内容を確認してください。確認するまで保存されません。","repair.overwrite":"入力済みの値を上書き","repair.blank":"空欄のまま","repair.unchanged":"既存値を維持","repair.confirm":"確認して保存","repair.deriving":"確認済み出典から推定中…","repair.generating":"AI 候補を生成中…","repair.none":"保存できる候補がありません","repair.ai":"AI 候補","repair.batch_source":"出典を一括補完","repair.batch_locale":"不足言語を提案","repair.one_click":"出典修正を確認","repair.ai_action":"AI 候補を生成"});
 export default messages;
 
-Object.assign(messages,{"categoryImport.title":"カテゴリーパス一括インポート","categoryImport.help":"CSV または XLSX をアップロードします。区切りには半角 > と全角 ＞ を使用できます。分類経路の出典を原文で記録し、プレビュー後に確定します。","categoryImport.choose":"運用ファイルを選択","categoryImport.preview":"インポートをプレビュー","categoryImport.row":"行","categoryImport.sku":"SKU","categoryImport.path":"Costco パンくず","categoryImport.result":"結果","categoryImport.reason":"理由","categoryImport.matched":"一致","categoryImport.newNodes":"新規ノード","categoryImport.unmatched":"不一致／不明な SKU","categoryImport.export":"不一致リストを出力","categoryImport.confirmCheck":"プレビューと商品総数を確認し、このカテゴリーパス変更を明示的に承認します。","categoryImport.confirm":"インポートを確定","categoryImport.done":"インポートを確定し、監査記録を保存しました。","categoryImport.failed":"インポートに失敗しました。黙って除外された行はありません。","categoryImport.count":"インポート前の商品数：{before}、後：{after}"});
+Object.assign(messages,{"categoryImport.title":"カテゴリーパス一括インポート","categoryImport.help":"CSV または XLSX をアップロードします。区切りには半角 > と全角 ＞ を使用できます。分類経路の出典を原文で記録し、プレビュー後に確定します。","categoryImport.choose":"運用ファイルを選択","categoryImport.preview":"インポートをプレビュー","categoryImport.row":"行","categoryImport.sku":"SKU","categoryImport.path":"カテゴリーパス","categoryImport.result":"結果","categoryImport.reason":"理由","categoryImport.matched":"一致","categoryImport.newNodes":"新規ノード","categoryImport.unmatched":"不一致／不明な SKU","categoryImport.export":"不一致リストを出力","categoryImport.confirmCheck":"プレビューと商品総数を確認し、このカテゴリーパス変更を明示的に承認します。","categoryImport.confirm":"インポートを確定","categoryImport.done":"インポートを確定し、監査記録を保存しました。","categoryImport.failed":"インポートに失敗しました。黙って除外された行はありません。","categoryImport.count":"インポート前の商品数：{before}、後：{after}"});
 
 Object.assign(messages,{"repair.accept_all":"統合可能な項目をすべて承認","repair.edit":"編集","repair.reject":"拒否","repair.product":"商品","repair.product_number":"商品 {number}","repair.url_manual":"出典に商品リンクがありません。確認可能なリンクを貼り付けてください。","repair.ai_failed":"AI 候補を取得できません。手動で入力してください。","repair.field.supplierKey":"仕入先","repair.field.channel":"販売チャネル","repair.field.sourceMessageKey":"出典メール","repair.field.sourceUrl":"商品リンク","repair.evidence.master":"商品情報","repair.evidence.source":"出典メール","repair.channel.online":"オンライン","repair.channel.warehouse":"店舗","repair.locale.zh-CN":"簡体字中国語の","repair.locale.zh-TW":"繁体字中国語の","repair.locale.ja-JP":"日本語の","repair.locale.en-US":"英語の","repair.locale_field.name":"名称","repair.locale_field.specification":"仕様"});
 
@@ -1593,10 +1621,11 @@ Object.assign(messages, {
   "categoryTree.nameRequired": "日本語名を入力してください。",
   "categoryTree.translationHelp": "日本語名を原名とします。翻訳は確認済みのもののみ入力し、空欄では日本語名を表示します。",
   "categoryTree.loadFailed": "カテゴリを読み込めません。再試行してください。",
-  "categoryTree.deleteBlocked": "子カテゴリ、商品または旧カテゴリとの対応があるため削除できません。先に移動または再分類してください。",
+  "categoryTree.deleteBlocked": "子カテゴリ、商品、旧カテゴリ対応、ショッピングカテゴリ対応がある場合は削除できません。先に商品を移動するか対応を修正してください。",
   "categoryImport.template": "CSV テンプレートをダウンロード",
   "categoryImport.flag": "備考 / フラグ",
-  "categoryImport.templateHelp": "中国語の列名に対応：SKU、costco分类路径、路径来源。備考列は 备注 / 标记 / Note / Flag を使用できます。テンプレートは架空の例です。運用データに置き換えてください。3 種類の出典とも指定経路を取り込みます。"
+  "categoryImport.exportMappings": "現在の商品分類を出力",
+  "categoryImport.templateHelp": "現在の分類を出力し、商品の識別子と版を保持してください。分類識別子を変更すると既存分類へ割り当てます。KEEP は現状を保持します。経路と順序は参考列です。順序は分類管理で編集してください。商品は新規作成されません。従来の SKU・経路ファイルにも対応します。"
 });
 
 Object.assign(messages,{
@@ -1607,7 +1636,7 @@ Object.assign(messages,{
   "categoryImport.deferred": "保留",
   "categoryImport.deferredReason": "現在の分類と公開状態を維持し、今回は変更しません。",
   "categoryImport.deferLabel": "保留・除外する商品番号",
-  "categoryImport.deferHelp": "初期値では C グループの 9 商品を保留します。商品番号をカンマ・空白・改行で区切ってください。この一覧で初期値を置き換え、空欄なら全商品をプレビュー対象にします。保留商品は現在の分類と公開状態を維持します。編集後は再プレビューが必要です。",
+  "categoryImport.deferHelp": "初期値は空欄です。保留する商品番号をカンマ・空白・改行で区切って入力してください。保留商品は分類と公開状態を維持します。編集後は再プレビューが必要です。",
   "categoryImport.noMatched": "取り込み可能な行がありません。ファイルまたは保留一覧を修正し、再プレビューしてください。",
   "categoryImport.checkRequired": "プレビューを確認し、確認欄にチェックしてください。",
   "categoryImport.ready": "確認済みです。取り込みを確定できます。"

@@ -34,3 +34,8 @@
 @media(max-width:767px){.catalog-upload-group>.ant-btn{min-height:44px}.catalog-upload-feedback summary{min-height:44px;padding:12px 0}}
 .catalog-upload-row .ant-tag{padding-block:1.5px 4.5px}.catalog-upload-feedback summary{padding-block:4px 8px}
 @media(max-width:767px){.catalog-upload-row{flex-wrap:wrap}.catalog-upload-filename{flex-basis:100%}.catalog-upload-row .ant-tag{max-width:100%}.catalog-upload-feedback summary{padding-block:10px 14px}}
+
+/* Batch import controls retain accessible targets inside the portalled drawer. */
+.catalog-bulk-editor .ant-btn,.catalog-bulk-editor .ant-drawer-close{min-width:44px;min-height:44px;height:auto;white-space:normal}.catalog-bulk-editor .ant-drawer-close{width:44px;height:44px}.catalog-bulk-editor .ant-checkbox-wrapper{min-height:44px;align-items:center}.catalog-bulk-editor .ant-drawer-body>p{overflow-wrap:anywhere}
+
+.catalog-bulk-editor .ant-drawer-body>.ant-btn>span:not(.anticon){transform:translateY(.5px)}

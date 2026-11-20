@@ -1,0 +1,70 @@
+{
+  "network": [
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-tree",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-tree",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-tree/import/preview",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-tree/import/confirm",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-tree",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-tree",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-tree",
+      "status": 200
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,185 @@
+{
+  "result": "PASS",
+  "results": [
+    {
+      "width": 360,
+      "height": 800,
+      "name": "single",
+      "g": {
+        "link": {
+          "x": 116,
+          "y": 180,
+          "width": 88,
+          "height": 100,
+          "bottom": 280,
+          "right": 204
+        },
+        "background": {
+          "x": 116,
+          "y": 180,
+          "width": 88,
+          "height": 100,
+          "bottom": 280,
+          "right": 204
+        },
+        "image": {
+          "x": 136,
+          "y": 184,
+          "width": 48,
+          "height": 48,
+          "bottom": 232,
+          "right": 184
+        },
+        "label": {
+          "x": 146.984375,
+          "y": 236,
+          "width": 26.015625,
+          "height": 18,
+          "bottom": 254,
+          "right": 173
+        },
+        "backgroundColor": "rgb(238, 238, 233)",
+        "font": "13px",
+        "lineHeight": "18px",
+        "overflow": false,
+        "asset": "/assets/index-CUKHSFty.js"
+      },
+      "errors": []
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "name": "two",
+      "g": {
+        "link": {
+          "x": 116,
+          "y": 180,
+          "width": 88,
+          "height": 100,
+          "bottom": 280,
+          "right": 204
+        },
+        "background": {
+          "x": 116,
+          "y": 180,
+          "width": 88,
+          "height": 100,
+          "bottom": 280,
+          "right": 204
+        },
+        "image": {
+          "x": 136,
+          "y": 184,
+          "width": 48,
+          "height": 48,
+          "bottom": 232,
+          "right": 184
+        },
+        "label": {
+          "x": 118,
+          "y": 236,
+          "width": 84,
+          "height": 36,
+          "bottom": 272,
+          "right": 202
+        },
+        "backgroundColor": "rgb(238, 238, 233)",
+        "font": "13px",
+        "lineHeight": "18px",
+        "overflow": false,
+        "asset": "/assets/index-CUKHSFty.js"
+      },
+      "errors": []
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "name": "single",
+      "g": {
+        "link": {
+          "x": 116,
+          "y": 180,
+          "width": 88,
+          "height": 100,
+          "bottom": 280,
+          "right": 204
+        },
+        "background": {
+          "x": 116,
+          "y": 180,
+          "width": 88,
+          "height": 100,
+          "bottom": 280,
+          "right": 204
+        },
+        "image": {
+          "x": 136,
+          "y": 184,
+          "width": 48,
+          "height": 48,
+          "bottom": 232,
+          "right": 184
+        },
+        "label": {
+          "x": 146.984375,
+          "y": 236,
+          "width": 26.015625,
+          "height": 18,
+          "bottom": 254,
+          "right": 173
+        },
+        "backgroundColor": "rgb(238, 238, 233)",
+        "font": "13px",
+        "lineHeight": "18px",
+        "overflow": false,
+        "asset": "/assets/index-CUKHSFty.js"
+      },
+      "errors": []
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "name": "two",
+      "g": {
+        "link": {
+          "x": 116,
+          "y": 180,
+          "width": 88,
+          "height": 100,
+          "bottom": 280,
+          "right": 204
+        },
+        "background": {
+          "x": 116,
+          "y": 180,
+          "width": 88,
+          "height": 100,
+          "bottom": 280,
+          "right": 204
+        },
+        "image": {
+          "x": 136,
+          "y": 184,
+          "width": 48,
+          "height": 48,
+          "bottom": 232,
+          "right": 184
+        },
+        "label": {
+          "x": 118,
+          "y": 236,
+          "width": 84,
+          "height": 36,
+          "bottom": 272,
+          "right": 202
+        },
+        "backgroundColor": "rgb(238, 238, 233)",
+        "font": "13px",
+        "lineHeight": "18px",
+        "overflow": false,
+        "asset": "/assets/index-CUKHSFty.js"
+      },
+      "errors": []
+    }
+  ]
+}

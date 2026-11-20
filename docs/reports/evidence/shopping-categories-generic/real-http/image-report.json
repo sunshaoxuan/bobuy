@@ -1,0 +1,143 @@
+{
+  "passed": true,
+  "first": "/api/storefront/recommendation-images/e5bda56b-3ae1-4d47-bbf4-c58ce5a0d7ea",
+  "second": "/api/storefront/recommendation-images/272297e0-cc26-4a9f-b26d-9cbcc73a63a1",
+  "events": [
+    {
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/admin/users",
+      "status": 200
+    },
+    {
+      "path": "/api/admin/users",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200
+    },
+    {
+      "path": "/api/category-tree/e2e-root/image",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/recommendation-images/e5bda56b-3ae1-4d47-bbf4-c58ce5a0d7ea",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/recommendation-images/e5bda56b-3ae1-4d47-bbf4-c58ce5a0d7ea",
+      "status": 200
+    },
+    {
+      "path": "/api/category-tree/e2e-root/image",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/recommendation-images/272297e0-cc26-4a9f-b26d-9cbcc73a63a1",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/recommendation-images/272297e0-cc26-4a9f-b26d-9cbcc73a63a1",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/trips",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/trips",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/trips",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/trips",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-browse",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-popularity/e2e-p2",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-popularity/e2e-p1",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-sales",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/recommendation-images/272297e0-cc26-4a9f-b26d-9cbcc73a63a1",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/recommendation-nodes",
+      "status": 200
+    }
+  ]
+}

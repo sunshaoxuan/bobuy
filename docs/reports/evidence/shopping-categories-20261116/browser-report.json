@@ -1,0 +1,4442 @@
+[
+  {
+    "width": 1280,
+    "height": 800,
+    "errors": [],
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": "?includeCurrent=true"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": "?includeCurrent=true"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-2-0%2Cfixture-2-1%2Cfixture-2-2%2Cfixture-2-3%2Cfixture-2-4%2Cfixture-2-5%2Cfixture-2-6%2Cfixture-2-7%2Cfixture-4-0%2Cfixture-4-1%2Cfixture-4-2%2Cfixture-4-3%2Cfixture-4-4%2Cfixture-4-5%2Cfixture-4-6%2Cfixture-4-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-6-0%2Cfixture-6-1%2Cfixture-6-2%2Cfixture-6-3%2Cfixture-6-4%2Cfixture-6-5%2Cfixture-6-6%2Cfixture-6-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-1-0%2Cfixture-1-1%2Cfixture-1-2%2Cfixture-1-3%2Cfixture-1-4%2Cfixture-1-5%2Cfixture-1-6%2Cfixture-1-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh-produce&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-8",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-9",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-0-8%2Cfixture-0-9"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": "?includeCurrent=true"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": "?includeCurrent=true"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh-produce&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-8",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-9",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-0-8%2Cfixture-0-9"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-1-0%2Cfixture-1-1%2Cfixture-1-2%2Cfixture-1-3%2Cfixture-1-4%2Cfixture-1-5%2Cfixture-1-6%2Cfixture-1-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh-produce&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-8",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-9",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-0-8%2Cfixture-0-9"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-1-0%2Cfixture-1-1%2Cfixture-1-2%2Cfixture-1-3%2Cfixture-1-4%2Cfixture-1-5%2Cfixture-1-6%2Cfixture-1-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh-produce&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-8",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-9",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-0-8%2Cfixture-0-9"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-chilled&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-2-0%2Cfixture-2-1%2Cfixture-2-2%2Cfixture-2-3%2Cfixture-2-4%2Cfixture-2-5%2Cfixture-2-6%2Cfixture-2-7%2Cfixture-3-0%2Cfixture-3-1%2Cfixture-3-2%2Cfixture-3-3%2Cfixture-3-4%2Cfixture-3-5%2Cfixture-3-6%2Cfixture-3-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=%E6%B2%A1%E6%9C%89%E4%BB%BB%E4%BD%95%E5%8C%B9%E9%85%8D%E7%BB%93%E6%9E%9C&category=shop-chilled&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-chilled&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-2-0%2Cfixture-2-1%2Cfixture-2-2%2Cfixture-2-3%2Cfixture-2-4%2Cfixture-2-5%2Cfixture-2-6%2Cfixture-2-7%2Cfixture-3-0%2Cfixture-3-1%2Cfixture-3-2%2Cfixture-3-3%2Cfixture-3-4%2Cfixture-3-5%2Cfixture-3-6%2Cfixture-3-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-bakery&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-4-0%2Cfixture-4-1%2Cfixture-4-2%2Cfixture-4-3%2Cfixture-4-4%2Cfixture-4-5%2Cfixture-4-6%2Cfixture-4-7%2Cfixture-5-0%2Cfixture-5-1%2Cfixture-5-2%2Cfixture-5-3%2Cfixture-5-4%2Cfixture-5-5%2Cfixture-5-6%2Cfixture-5-7"
+      }
+    ],
+    "geometry": {
+      "viewport": 1280,
+      "scrollWidth": 1280,
+      "controls": [
+        {
+          "text": "← 全部",
+          "width": 80.40625,
+          "height": 44.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(243, 243, 243)",
+          "boxShadow": "none"
+        },
+        {
+          "text": "☰ 全部分类",
+          "width": 108.84375,
+          "height": 44.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(243, 243, 243)",
+          "boxShadow": "none"
+        },
+        {
+          "text": "◉全部",
+          "width": 100,
+          "height": 86.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(255, 255, 255)",
+          "boxShadow": "none"
+        },
+        {
+          "text": "🥬生鲜食材",
+          "width": 100,
+          "height": 86.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(255, 255, 255)",
+          "boxShadow": "none"
+        },
+        {
+          "text": "🥛乳蛋冷藏",
+          "width": 100,
+          "height": 86.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(255, 255, 255)",
+          "boxShadow": "none"
+        },
+        {
+          "text": "🥐面包甜点",
+          "width": 100,
+          "height": 86.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(243, 243, 243)",
+          "boxShadow": "rgb(36, 36, 36) 0px -3px 0px 0px inset"
+        },
+        {
+          "text": "🍫零食糖巧",
+          "width": 100,
+          "height": 86.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(255, 255, 255)",
+          "boxShadow": "none"
+        },
+        {
+          "text": "全部",
+          "width": 62.015625,
+          "height": 44.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(255, 255, 255)",
+          "borderWidth": "0px",
+          "background": "rgb(36, 36, 36)",
+          "boxShadow": "none"
+        },
+        {
+          "text": "面包",
+          "width": 62.015625,
+          "height": 44.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(243, 243, 243)",
+          "boxShadow": "none"
+        },
+        {
+          "text": "蛋糕甜点",
+          "width": 92.015625,
+          "height": 44.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(243, 243, 243)",
+          "boxShadow": "none"
+        }
+      ]
+    },
+    "status": "PASS",
+    "data": "synthetic; no production mapping claim"
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "errors": [],
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": "?includeCurrent=true"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": "?includeCurrent=true"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-2-0%2Cfixture-2-1%2Cfixture-2-2%2Cfixture-2-3%2Cfixture-2-4%2Cfixture-2-5%2Cfixture-2-6%2Cfixture-2-7%2Cfixture-4-0%2Cfixture-4-1%2Cfixture-4-2%2Cfixture-4-3%2Cfixture-4-4%2Cfixture-4-5%2Cfixture-4-6%2Cfixture-4-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-6-0%2Cfixture-6-1%2Cfixture-6-2%2Cfixture-6-3%2Cfixture-6-4%2Cfixture-6-5%2Cfixture-6-6%2Cfixture-6-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-1-0%2Cfixture-1-1%2Cfixture-1-2%2Cfixture-1-3%2Cfixture-1-4%2Cfixture-1-5%2Cfixture-1-6%2Cfixture-1-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh-produce&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-8",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-9",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-0-8%2Cfixture-0-9"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": "?includeCurrent=true"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": "?includeCurrent=true"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh-produce&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-8",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-9",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-0-8%2Cfixture-0-9"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-1-0%2Cfixture-1-1%2Cfixture-1-2%2Cfixture-1-3%2Cfixture-1-4%2Cfixture-1-5%2Cfixture-1-6%2Cfixture-1-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh-produce&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-8",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-9",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-0-8%2Cfixture-0-9"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-1-0%2Cfixture-1-1%2Cfixture-1-2%2Cfixture-1-3%2Cfixture-1-4%2Cfixture-1-5%2Cfixture-1-6%2Cfixture-1-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh-produce&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-8",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-9",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-0-8%2Cfixture-0-9"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-chilled&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-2-0%2Cfixture-2-1%2Cfixture-2-2%2Cfixture-2-3%2Cfixture-2-4%2Cfixture-2-5%2Cfixture-2-6%2Cfixture-2-7%2Cfixture-3-0%2Cfixture-3-1%2Cfixture-3-2%2Cfixture-3-3%2Cfixture-3-4%2Cfixture-3-5%2Cfixture-3-6%2Cfixture-3-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=%E6%B2%A1%E6%9C%89%E4%BB%BB%E4%BD%95%E5%8C%B9%E9%85%8D%E7%BB%93%E6%9E%9C&category=shop-chilled&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-chilled&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-2-0%2Cfixture-2-1%2Cfixture-2-2%2Cfixture-2-3%2Cfixture-2-4%2Cfixture-2-5%2Cfixture-2-6%2Cfixture-2-7%2Cfixture-3-0%2Cfixture-3-1%2Cfixture-3-2%2Cfixture-3-3%2Cfixture-3-4%2Cfixture-3-5%2Cfixture-3-6%2Cfixture-3-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-bakery&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-4-0%2Cfixture-4-1%2Cfixture-4-2%2Cfixture-4-3%2Cfixture-4-4%2Cfixture-4-5%2Cfixture-4-6%2Cfixture-4-7%2Cfixture-5-0%2Cfixture-5-1%2Cfixture-5-2%2Cfixture-5-3%2Cfixture-5-4%2Cfixture-5-5%2Cfixture-5-6%2Cfixture-5-7"
+      }
+    ],
+    "geometry": {
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "controls": [
+        {
+          "text": "← 全部",
+          "width": 80.40625,
+          "height": 44.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(243, 243, 243)",
+          "boxShadow": "none"
+        },
+        {
+          "text": "☰ 全部分类",
+          "width": 108.84375,
+          "height": 44.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(243, 243, 243)",
+          "boxShadow": "none"
+        },
+        {
+          "text": "◉全部",
+          "width": 100,
+          "height": 86.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(255, 255, 255)",
+          "boxShadow": "none"
+        },
+        {
+          "text": "🥬生鲜食材",
+          "width": 100,
+          "height": 86.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(255, 255, 255)",
+          "boxShadow": "none"
+        },
+        {
+          "text": "🥛乳蛋冷藏",
+          "width": 100,
+          "height": 86.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(255, 255, 255)",
+          "boxShadow": "none"
+        },
+        {
+          "text": "🥐面包甜点",
+          "width": 100,
+          "height": 86.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(243, 243, 243)",
+          "boxShadow": "rgb(36, 36, 36) 0px -3px 0px 0px inset"
+        },
+        {
+          "text": "🍫零食糖巧",
+          "width": 100,
+          "height": 86.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(255, 255, 255)",
+          "boxShadow": "none"
+        },
+        {
+          "text": "全部",
+          "width": 62.015625,
+          "height": 44.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(255, 255, 255)",
+          "borderWidth": "0px",
+          "background": "rgb(36, 36, 36)",
+          "boxShadow": "none"
+        },
+        {
+          "text": "面包",
+          "width": 62.015625,
+          "height": 44.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(243, 243, 243)",
+          "boxShadow": "none"
+        },
+        {
+          "text": "蛋糕甜点",
+          "width": 92.015625,
+          "height": 44.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(243, 243, 243)",
+          "boxShadow": "none"
+        }
+      ]
+    },
+    "status": "PASS",
+    "data": "synthetic; no production mapping claim"
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "errors": [],
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": "?includeCurrent=true"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": "?includeCurrent=true"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-2-0%2Cfixture-2-1%2Cfixture-2-2%2Cfixture-2-3%2Cfixture-2-4%2Cfixture-2-5%2Cfixture-2-6%2Cfixture-2-7%2Cfixture-4-0%2Cfixture-4-1%2Cfixture-4-2%2Cfixture-4-3%2Cfixture-4-4%2Cfixture-4-5%2Cfixture-4-6%2Cfixture-4-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-6-0%2Cfixture-6-1%2Cfixture-6-2%2Cfixture-6-3%2Cfixture-6-4%2Cfixture-6-5%2Cfixture-6-6%2Cfixture-6-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-1-0%2Cfixture-1-1%2Cfixture-1-2%2Cfixture-1-3%2Cfixture-1-4%2Cfixture-1-5%2Cfixture-1-6%2Cfixture-1-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh-produce&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-8",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-9",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-0-8%2Cfixture-0-9"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": "?includeCurrent=true"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": "?includeCurrent=true"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh-produce&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-8",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-9",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-0-8%2Cfixture-0-9"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-1-0%2Cfixture-1-1%2Cfixture-1-2%2Cfixture-1-3%2Cfixture-1-4%2Cfixture-1-5%2Cfixture-1-6%2Cfixture-1-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh-produce&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-8",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-9",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-0-8%2Cfixture-0-9"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-1-0%2Cfixture-1-1%2Cfixture-1-2%2Cfixture-1-3%2Cfixture-1-4%2Cfixture-1-5%2Cfixture-1-6%2Cfixture-1-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh-produce&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-8",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-9",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-0-8%2Cfixture-0-9"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-chilled&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-2-0%2Cfixture-2-1%2Cfixture-2-2%2Cfixture-2-3%2Cfixture-2-4%2Cfixture-2-5%2Cfixture-2-6%2Cfixture-2-7%2Cfixture-3-0%2Cfixture-3-1%2Cfixture-3-2%2Cfixture-3-3%2Cfixture-3-4%2Cfixture-3-5%2Cfixture-3-6%2Cfixture-3-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=%E6%B2%A1%E6%9C%89%E4%BB%BB%E4%BD%95%E5%8C%B9%E9%85%8D%E7%BB%93%E6%9E%9C&category=shop-chilled&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-chilled&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-2-0%2Cfixture-2-1%2Cfixture-2-2%2Cfixture-2-3%2Cfixture-2-4%2Cfixture-2-5%2Cfixture-2-6%2Cfixture-2-7%2Cfixture-3-0%2Cfixture-3-1%2Cfixture-3-2%2Cfixture-3-3%2Cfixture-3-4%2Cfixture-3-5%2Cfixture-3-6%2Cfixture-3-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-bakery&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-4-0%2Cfixture-4-1%2Cfixture-4-2%2Cfixture-4-3%2Cfixture-4-4%2Cfixture-4-5%2Cfixture-4-6%2Cfixture-4-7%2Cfixture-5-0%2Cfixture-5-1%2Cfixture-5-2%2Cfixture-5-3%2Cfixture-5-4%2Cfixture-5-5%2Cfixture-5-6%2Cfixture-5-7"
+      }
+    ],
+    "geometry": {
+      "viewport": 390,
+      "scrollWidth": 390,
+      "controls": [
+        {
+          "text": "← 全部",
+          "width": 72.40625,
+          "height": 44.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(243, 243, 243)",
+          "boxShadow": "none"
+        },
+        {
+          "text": "☰ 全部分类",
+          "width": 100.84375,
+          "height": 44.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(243, 243, 243)",
+          "boxShadow": "none"
+        },
+        {
+          "text": "全部",
+          "width": 62.015625,
+          "height": 44.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(255, 255, 255)",
+          "boxShadow": "rgb(36, 36, 36) 0px -3px 0px 0px inset"
+        },
+        {
+          "text": "面包",
+          "width": 62.015625,
+          "height": 44.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(255, 255, 255)",
+          "boxShadow": "rgb(237, 237, 237) 0px -1px 0px 0px inset"
+        },
+        {
+          "text": "蛋糕甜点",
+          "width": 92.015625,
+          "height": 44.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(255, 255, 255)",
+          "boxShadow": "rgb(237, 237, 237) 0px -1px 0px 0px inset"
+        }
+      ]
+    },
+    "status": "PASS",
+    "data": "synthetic; no production mapping claim"
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "errors": [],
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": "?includeCurrent=true"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": "?includeCurrent=true"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-6-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-2-0%2Cfixture-2-1%2Cfixture-2-2%2Cfixture-2-3%2Cfixture-2-4%2Cfixture-2-5%2Cfixture-2-6%2Cfixture-2-7%2Cfixture-4-0%2Cfixture-4-1%2Cfixture-4-2%2Cfixture-4-3%2Cfixture-4-4%2Cfixture-4-5%2Cfixture-4-6%2Cfixture-4-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-6-0%2Cfixture-6-1%2Cfixture-6-2%2Cfixture-6-3%2Cfixture-6-4%2Cfixture-6-5%2Cfixture-6-6%2Cfixture-6-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-1-0%2Cfixture-1-1%2Cfixture-1-2%2Cfixture-1-3%2Cfixture-1-4%2Cfixture-1-5%2Cfixture-1-6%2Cfixture-1-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh-produce&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-8",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-9",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-0-8%2Cfixture-0-9"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": "?includeCurrent=true"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/trips",
+        "query": "?includeCurrent=true"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh-produce&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-8",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-9",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-0-8%2Cfixture-0-9"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-1-0%2Cfixture-1-1%2Cfixture-1-2%2Cfixture-1-3%2Cfixture-1-4%2Cfixture-1-5%2Cfixture-1-6%2Cfixture-1-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh-produce&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-8",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-9",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-0-8%2Cfixture-0-9"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-1-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-1-0%2Cfixture-1-1%2Cfixture-1-2%2Cfixture-1-3%2Cfixture-1-4%2Cfixture-1-5%2Cfixture-1-6%2Cfixture-1-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh-produce&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-8",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-0-9",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-0-0%2Cfixture-0-1%2Cfixture-0-2%2Cfixture-0-3%2Cfixture-0-4%2Cfixture-0-5%2Cfixture-0-6%2Cfixture-0-7%2Cfixture-0-8%2Cfixture-0-9"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-chilled&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-2-0%2Cfixture-2-1%2Cfixture-2-2%2Cfixture-2-3%2Cfixture-2-4%2Cfixture-2-5%2Cfixture-2-6%2Cfixture-2-7%2Cfixture-3-0%2Cfixture-3-1%2Cfixture-3-2%2Cfixture-3-3%2Cfixture-3-4%2Cfixture-3-5%2Cfixture-3-6%2Cfixture-3-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=%E6%B2%A1%E6%9C%89%E4%BB%BB%E4%BD%95%E5%8C%B9%E9%85%8D%E7%BB%93%E6%9E%9C&category=shop-chilled&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-chilled&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-2-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-3-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-2-0%2Cfixture-2-1%2Cfixture-2-2%2Cfixture-2-3%2Cfixture-2-4%2Cfixture-2-5%2Cfixture-2-6%2Cfixture-2-7%2Cfixture-3-0%2Cfixture-3-1%2Cfixture-3-2%2Cfixture-3-3%2Cfixture-3-4%2Cfixture-3-5%2Cfixture-3-6%2Cfixture-3-7"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-fresh&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-browse",
+        "query": "?page=0&query=&category=shop-bakery&locale=zh-CN&marked=false&markedFirst=true&sort=default"
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-4-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-0",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-1",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-2",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-3",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-4",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-5",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-6",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-popularity/fixture-5-7",
+        "query": ""
+      },
+      {
+        "method": "GET",
+        "path": "/api/storefront/product-sales",
+        "query": "?productIds=fixture-4-0%2Cfixture-4-1%2Cfixture-4-2%2Cfixture-4-3%2Cfixture-4-4%2Cfixture-4-5%2Cfixture-4-6%2Cfixture-4-7%2Cfixture-5-0%2Cfixture-5-1%2Cfixture-5-2%2Cfixture-5-3%2Cfixture-5-4%2Cfixture-5-5%2Cfixture-5-6%2Cfixture-5-7"
+      }
+    ],
+    "geometry": {
+      "viewport": 360,
+      "scrollWidth": 360,
+      "controls": [
+        {
+          "text": "← 全部",
+          "width": 72.40625,
+          "height": 44.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(243, 243, 243)",
+          "boxShadow": "none"
+        },
+        {
+          "text": "☰ 全部分类",
+          "width": 100.84375,
+          "height": 44.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(243, 243, 243)",
+          "boxShadow": "none"
+        },
+        {
+          "text": "全部",
+          "width": 62.015625,
+          "height": 44.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(255, 255, 255)",
+          "boxShadow": "rgb(36, 36, 36) 0px -3px 0px 0px inset"
+        },
+        {
+          "text": "面包",
+          "width": 62.015625,
+          "height": 44.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(255, 255, 255)",
+          "boxShadow": "rgb(237, 237, 237) 0px -1px 0px 0px inset"
+        },
+        {
+          "text": "蛋糕甜点",
+          "width": 92.015625,
+          "height": 44.75,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "borderRadius": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "borderWidth": "0px",
+          "background": "rgb(255, 255, 255)",
+          "boxShadow": "rgb(237, 237, 237) 0px -1px 0px 0px inset"
+        }
+      ]
+    },
+    "status": "PASS",
+    "data": "synthetic; no production mapping claim"
+  }
+]

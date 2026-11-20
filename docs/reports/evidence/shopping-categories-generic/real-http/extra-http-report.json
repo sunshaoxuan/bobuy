@@ -1,0 +1,92 @@
+{
+  "passed": [
+    "profile stale second row rolls back entire batch",
+    "profile duplicate and unknown rejected without creation",
+    "profile protected price and publication unchanged",
+    "mapping duplicate rejected atomically",
+    "mapping unknown rejected atomically",
+    "mapping detects concurrent product version"
+  ],
+  "events": [
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/product-catalog/e2e-p1",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/product-catalog/e2e-p2",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/merchant/product-catalog",
+      "status": 400
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/product-catalog/preview",
+      "status": 400
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/product-catalog/preview",
+      "status": 404
+    },
+    {
+      "method": "PUT",
+      "path": "/api/merchant/product-catalog",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-path-import/export.csv",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-path-import/preview",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-path-import/bf35ed77-1cae-4b2c-8df5-ac18f443cf9d/confirm",
+      "status": 409
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-path-import/preview",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-path-import/215a5ba8-209c-4f8c-bea9-12e9de8a9164/confirm",
+      "status": 409
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-path-import/preview",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/product-catalog/e2e-p1",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/merchant/product-catalog",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/category-path-import/87a9538d-00a5-4381-82ed-4451b0938f3b/confirm",
+      "status": 409
+    }
+  ]
+}

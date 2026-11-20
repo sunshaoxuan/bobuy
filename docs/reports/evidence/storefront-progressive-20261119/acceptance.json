@@ -1,0 +1,25 @@
+{
+  "base": "f6286354c7d100305ea283ba4a88b6996601c068",
+  "pr": 164,
+  "publicProjectionTests": 9,
+  "browseTests": 14,
+  "frontendUniqueTests": 45,
+  "runtime": "Existing isolated PostgreSQL18.6 / Spring Boot / Vite / Chromium; 463 eligible products",
+  "privateWithoutPublication": "not searchable, PASS",
+  "otherMerchant": "empty scoped navigation, PASS",
+  "sourceSha256": {
+    "backend/src/main/java/com/bobbuy/service/PublicProductBrowseService.java": "ffca6aac83fe4470de0c40a35cb286240bf422d01ec70952954578d0c5d01e91",
+    "backend/src/main/java/com/bobbuy/api/PublicProductBrowseController.java": "6145e6d83cb8aa558357a03d7babfc36f7fe9b11787463e92f09dc4565f3586b",
+    "frontend/src/useProgressiveCatalog.ts": "1d3fba976daa7f9ac3e3623fbef7a8c17fd1f0822b1a0c03c0b08981c6d36b16",
+    "frontend/src/pages/PublicProductCatalog.tsx": "aa3c60df23472c90ec0a4b0209896f727235ed145efe0e6ae01bb56b3c5a9e43",
+    "frontend/src/public-catalog.css": "351f9c8ed6e1f58bb3c7ce8a84eef231b9add3bca993f3dd96684c3f085b0922"
+  },
+  "loadedBackendClassSha256": {
+    "backend/target/classes/com/bobbuy/service/PublicProductBrowseService.class": "68d3feabc8e6fb21269aab7cb49f25f38d9a458b72a00eb0b711ba55c46deafe",
+    "backend/target/classes/com/bobbuy/api/PublicProductBrowseController.class": "2e2d5d9e29a6b79cbcffaa93d0dc448fa114f72448c64c19c5cf840c6c334de4"
+  },
+  "productionReads": 0,
+  "productionWrites": 0,
+  "merged": false,
+  "deployed": false
+}

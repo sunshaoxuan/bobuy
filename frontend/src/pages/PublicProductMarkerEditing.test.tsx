@@ -4,7 +4,10 @@ import {I18nProvider} from '../i18n';
 import PublicProductCatalog from './PublicProductCatalog';
 import type {PublicCatalogEntry} from '../api';
 const mocks=vi.hoisted(()=>({role:{user:{id:1,platformAdmin:false} as {id:number;platformAdmin:boolean}|null,isMerchant:true,isAuthenticated:true,loading:false},productCatalog:vi.fn(),markedCatalog:vi.fn(),publicAssignments:vi.fn(),list:vi.fn(),assignment:vi.fn(),assign:vi.fn(),productDetail:vi.fn(),productSales:vi.fn()}));
-vi.mock('../api',()=>({storefrontApi:{...mocks,productBrowse:async(q:{page:number;marked:boolean;merchantId?:number})=>{const result=await(q.marked?mocks.markedCatalog:mocks.productCatalog)(q.page,q.merchantId);return {...result,items:result.items.map((row:any)=>({...row,image:row.gallery[0]??null,markers:selected.length?[marker]:[]})),scopeTotal:result.total,matchedTotal:result.total,categories:result.items[0]?.categories.map((value:any)=>({...value,count:result.total}))??[],unclassified:0,markedScopeTotal:selected.length?1:0,revision:'r',datasetRevision:'d'};}},productMarkerApi:mocks}));
+vi.mock('../api',()=>({storefrontApi:{...mocks,productOverview:async(q:{merchantId?:number})=>{
+ const result=await mocks.productCatalog(0,q.merchantId);const cards=result.items.map((row:any)=>({...row,image:row.gallery[0]??null,markers:selected.length?[marker]:[]}));
+ return {...result,items:[],scopeTotal:result.total,matchedTotal:result.total,categories:[],unclassified:result.total,markedScopeTotal:selected.length?1:0,revision:'r',datasetRevision:'d',shelves:cards.length?[{category:'__unclassified',total:cards.length,items:cards}]:[]};
+ },productBrowse:async(q:{page:number;marked:boolean;merchantId?:number})=>{const result=await(q.marked?mocks.markedCatalog:mocks.productCatalog)(q.page,q.merchantId);return {...result,items:result.items.map((row:any)=>({...row,image:row.gallery[0]??null,markers:selected.length?[marker]:[]})),scopeTotal:result.total,matchedTotal:result.total,categories:result.items[0]?.categories.map((value:any)=>({...value,count:result.total}))??[],unclassified:0,markedScopeTotal:selected.length?1:0,revision:'r',datasetRevision:'d'};}},productMarkerApi:mocks}));
 vi.mock('../context/UserRoleContext',()=>({useUserRole:()=>mocks.role}));
 const marker={id:'a',code:'new',badge:'N',name:{'en-US':'New'},description:{},color:'green',sortOrder:0,enabled:true,version:0};
 const entry:PublicCatalogEntry={productId:'p',merchantId:1,name:{'en-US':'Product'},description:{},specification:{},brand:'',model:'',packaging:'',itemNumber:'ITEM',gallery:[],categories:[],referenceOffers:[],reviewedMaster:true};
@@ -12,7 +15,7 @@ const page=(items:typeof entry[])=>({items,page:0,size:24,total:items.length,has
 const props={products:[],quantities:{},onAdd:vi.fn(),canBuy:()=>false};
 let selected:string[],version:number;
 function URLProbe(){return <span data-testid="catalog-url">{useLocation().search}</span>;}
-function mount(){localStorage.setItem('bobbuy_locale','en-US');return render(<I18nProvider><MemoryRouter initialEntries={['/products?node=1&category=kept&markedCategory=kept']}><PublicProductCatalog {...props}/><URLProbe/></MemoryRouter></I18nProvider>);}
+function mount(){localStorage.setItem('bobbuy_locale','en-US');return render(<I18nProvider><MemoryRouter initialEntries={['/products?node=1&category=shop-kept&markedCategory=kept']}><PublicProductCatalog {...props}/><URLProbe/></MemoryRouter></I18nProvider>);}
 function mountUnfiltered(){localStorage.setItem('bobbuy_locale','en-US');return render(<I18nProvider><MemoryRouter initialEntries={['/products?node=1']}><PublicProductCatalog {...props}/></MemoryRouter></I18nProvider>);}
 const all=()=>screen.getByRole('region',{name:'Product Picks'});
 const marked=all;
@@ -61,8 +64,8 @@ it('keeps conflict draft and blocks close and duplicate writes while pending',as
  await waitFor(()=>expect(screen.queryByRole('checkbox',{name:'New'})).not.toBeInTheDocument());await open();expect(screen.getByRole('checkbox',{name:'New'})).toBeChecked();expect(mocks.assign).toHaveBeenCalledTimes(1);
 });
 it('preserves category URL filters through a successful refresh',async()=>{
- const categorized={...entry,categories:[{id:'kept',name:{'en-US':'Kept'}}]};mocks.productCatalog.mockImplementation(async()=>page([categorized]));mocks.markedCatalog.mockImplementation(async()=>page([categorized]));mount();await open();fireEvent.click(screen.getByRole('checkbox',{name:'New'}));fireEvent.click(screen.getByRole('button',{name:'Save markers'}));await screen.findByText('Markers saved');
- await waitFor(()=>expect(within(all()).getByRole('button',{name:'Kept (1)'})).toHaveAttribute('aria-pressed','true'));expect(screen.getByTestId('catalog-url')).toHaveTextContent('category=kept');expect(mocks.productCatalog).toHaveBeenLastCalledWith(0,1);
+ const categorized={...entry,categories:[{id:'shop-kept',name:{'en-US':'Kept'}}]};mocks.productCatalog.mockImplementation(async()=>page([categorized]));mocks.markedCatalog.mockImplementation(async()=>page([categorized]));mount();await open();fireEvent.click(screen.getByRole('checkbox',{name:'New'}));fireEvent.click(screen.getByRole('button',{name:'Save markers'}));await screen.findByText('Markers saved');
+ await waitFor(()=>expect(within(all()).getByText('Kept',{selector:'strong'})).toHaveAttribute('aria-current','page'));expect(screen.getByTestId('catalog-url')).toHaveTextContent('category=shop-kept');expect(mocks.productCatalog).toHaveBeenLastCalledWith(0,1);
 });
 it('exposes the same owner action in detail and never makes unavailable products purchasable',async()=>{
  mountUnfiltered();await within(all()).findByRole('heading',{name:'Product'});expect(within(all()).queryByRole('button',{name:'Add to cart: Product'})).not.toBeInTheDocument();fireEvent.click(within(all()).getByRole('button',{name:'Product details: Product'}));const detail=await screen.findByRole('dialog');expect(await within(detail).findByRole('button',{name:'Not open for booking yet'})).toBeDisabled();fireEvent.click(await within(detail).findByRole('button',{name:'Set product markers: Product'}));await screen.findByRole('checkbox',{name:'New'});expect(mocks.assignment).toHaveBeenCalledWith('p');expect(props.onAdd).not.toHaveBeenCalled();

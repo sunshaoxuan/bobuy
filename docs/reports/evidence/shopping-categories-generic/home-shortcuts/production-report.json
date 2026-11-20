@@ -1,0 +1,302 @@
+[
+  {
+    "width": 1280,
+    "height": 800,
+    "rootCount": 23,
+    "scopeTotal": 352,
+    "version": "5291c4ba9026a334c038fdbaeef54dc9ac40a8c7",
+    "observedAt": "2026-11-18T11:18:29.355Z",
+    "assets": [
+      "/assets/ImageLightbox-CyaXs9K9.css",
+      "/assets/ImageLightbox-Dv89o2EW.js",
+      "/assets/LeftOutlined-VpTHi58f.js",
+      "/assets/ProductMarkerBadges-Ch-ENXpg.css",
+      "/assets/ProductMarkerBadges-DzRenRzL.js",
+      "/assets/ProductMarkerEditor-BpV-IPjZ.js",
+      "/assets/ProductMetadata-sxylIkq7.js",
+      "/assets/PublicProductCatalog-Bw_kw7bg.js",
+      "/assets/RecommendationImageViewer-BBKgrKIb.js",
+      "/assets/RecommendationImageViewer-CACQJNQu.css",
+      "/assets/ReloadOutlined-ChBhIr7q.js",
+      "/assets/SaveOutlined-BnnCRvst.js",
+      "/assets/index-B6xwCIy_.js",
+      "/assets/index-Bz1_xjpz.js",
+      "/assets/index-CzXS-dOv.js",
+      "/assets/index-JXHhwFL1.js",
+      "/assets/index-buFr3YYM.css"
+    ],
+    "geometry": [
+      {
+        "width": "44px",
+        "height": "44px",
+        "minWidth": "auto",
+        "minHeight": "auto",
+        "borderRadius": "50%",
+        "borderColor": "rgb(222, 222, 217)",
+        "borderWidth": "1px",
+        "backgroundColor": "rgb(246, 246, 244)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "88px",
+        "height": "88px",
+        "minWidth": "0px",
+        "minHeight": "88px",
+        "borderRadius": "12px",
+        "borderColor": "rgb(25, 25, 25)",
+        "borderWidth": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "48px",
+        "height": "48px",
+        "minWidth": "auto",
+        "minHeight": "auto",
+        "borderRadius": "8px",
+        "borderColor": "rgb(25, 25, 25)",
+        "borderWidth": "0px",
+        "backgroundColor": "rgb(240, 240, 237)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "88px",
+        "height": "88px",
+        "minWidth": "0px",
+        "minHeight": "88px",
+        "borderRadius": "12px",
+        "borderColor": "rgb(25, 25, 25)",
+        "borderWidth": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "boxShadow": "none"
+      }
+    ],
+    "requests": [
+      [
+        "/api/storefront/trips",
+        200
+      ],
+      [
+        "/api/storefront/product-browse",
+        200
+      ],
+      [
+        "/api/storefront/product-popularity/:id",
+        200
+      ],
+      [
+        "/api/storefront/recommendation-images/:id",
+        200
+      ],
+      [
+        "/api/storefront/product-sales",
+        200
+      ],
+      [
+        "/api/storefront/recommendation-nodes",
+        200
+      ]
+    ],
+    "passed": true
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "rootCount": 23,
+    "scopeTotal": 352,
+    "version": "5291c4ba9026a334c038fdbaeef54dc9ac40a8c7",
+    "observedAt": "2026-11-18T11:18:48.413Z",
+    "assets": [
+      "/assets/ImageLightbox-CyaXs9K9.css",
+      "/assets/ImageLightbox-Dv89o2EW.js",
+      "/assets/LeftOutlined-VpTHi58f.js",
+      "/assets/ProductMarkerBadges-Ch-ENXpg.css",
+      "/assets/ProductMarkerBadges-DzRenRzL.js",
+      "/assets/ProductMarkerEditor-BpV-IPjZ.js",
+      "/assets/ProductMetadata-sxylIkq7.js",
+      "/assets/PublicProductCatalog-Bw_kw7bg.js",
+      "/assets/RecommendationImageViewer-BBKgrKIb.js",
+      "/assets/RecommendationImageViewer-CACQJNQu.css",
+      "/assets/ReloadOutlined-ChBhIr7q.js",
+      "/assets/SaveOutlined-BnnCRvst.js",
+      "/assets/index-B6xwCIy_.js",
+      "/assets/index-Bz1_xjpz.js",
+      "/assets/index-CzXS-dOv.js",
+      "/assets/index-JXHhwFL1.js",
+      "/assets/index-buFr3YYM.css"
+    ],
+    "geometry": [
+      {
+        "width": "44px",
+        "height": "44px",
+        "minWidth": "0px",
+        "minHeight": "0px",
+        "borderRadius": "50%",
+        "borderColor": "rgb(222, 222, 217)",
+        "borderWidth": "1px",
+        "backgroundColor": "rgb(246, 246, 244)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "88px",
+        "height": "88px",
+        "minWidth": "0px",
+        "minHeight": "88px",
+        "borderRadius": "12px",
+        "borderColor": "rgb(25, 25, 25)",
+        "borderWidth": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "48px",
+        "height": "48px",
+        "minWidth": "auto",
+        "minHeight": "auto",
+        "borderRadius": "8px",
+        "borderColor": "rgb(25, 25, 25)",
+        "borderWidth": "0px",
+        "backgroundColor": "rgb(240, 240, 237)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "88px",
+        "height": "88px",
+        "minWidth": "0px",
+        "minHeight": "88px",
+        "borderRadius": "12px",
+        "borderColor": "rgb(25, 25, 25)",
+        "borderWidth": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "boxShadow": "none"
+      }
+    ],
+    "requests": [
+      [
+        "/api/storefront/trips",
+        200
+      ],
+      [
+        "/api/storefront/product-browse",
+        200
+      ],
+      [
+        "/api/storefront/product-popularity/:id",
+        200
+      ],
+      [
+        "/api/storefront/recommendation-images/:id",
+        200
+      ],
+      [
+        "/api/storefront/product-sales",
+        200
+      ],
+      [
+        "/api/storefront/recommendation-nodes",
+        200
+      ]
+    ],
+    "passed": true
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "rootCount": 23,
+    "scopeTotal": 352,
+    "version": "5291c4ba9026a334c038fdbaeef54dc9ac40a8c7",
+    "observedAt": "2026-11-18T11:19:05.691Z",
+    "assets": [
+      "/assets/ImageLightbox-CyaXs9K9.css",
+      "/assets/ImageLightbox-Dv89o2EW.js",
+      "/assets/LeftOutlined-VpTHi58f.js",
+      "/assets/ProductMarkerBadges-Ch-ENXpg.css",
+      "/assets/ProductMarkerBadges-DzRenRzL.js",
+      "/assets/ProductMarkerEditor-BpV-IPjZ.js",
+      "/assets/ProductMetadata-sxylIkq7.js",
+      "/assets/PublicProductCatalog-Bw_kw7bg.js",
+      "/assets/RecommendationImageViewer-BBKgrKIb.js",
+      "/assets/RecommendationImageViewer-CACQJNQu.css",
+      "/assets/ReloadOutlined-ChBhIr7q.js",
+      "/assets/SaveOutlined-BnnCRvst.js",
+      "/assets/index-B6xwCIy_.js",
+      "/assets/index-Bz1_xjpz.js",
+      "/assets/index-CzXS-dOv.js",
+      "/assets/index-JXHhwFL1.js",
+      "/assets/index-buFr3YYM.css"
+    ],
+    "geometry": [
+      {
+        "width": "44px",
+        "height": "44px",
+        "minWidth": "0px",
+        "minHeight": "0px",
+        "borderRadius": "50%",
+        "borderColor": "rgb(222, 222, 217)",
+        "borderWidth": "1px",
+        "backgroundColor": "rgb(246, 246, 244)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "88px",
+        "height": "88px",
+        "minWidth": "0px",
+        "minHeight": "88px",
+        "borderRadius": "12px",
+        "borderColor": "rgb(25, 25, 25)",
+        "borderWidth": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "48px",
+        "height": "48px",
+        "minWidth": "auto",
+        "minHeight": "auto",
+        "borderRadius": "8px",
+        "borderColor": "rgb(25, 25, 25)",
+        "borderWidth": "0px",
+        "backgroundColor": "rgb(240, 240, 237)",
+        "boxShadow": "none"
+      },
+      {
+        "width": "88px",
+        "height": "88px",
+        "minWidth": "0px",
+        "minHeight": "88px",
+        "borderRadius": "12px",
+        "borderColor": "rgb(25, 25, 25)",
+        "borderWidth": "0px",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "boxShadow": "none"
+      }
+    ],
+    "requests": [
+      [
+        "/api/storefront/trips",
+        200
+      ],
+      [
+        "/api/storefront/product-browse",
+        200
+      ],
+      [
+        "/api/storefront/product-popularity/:id",
+        200
+      ],
+      [
+        "/api/storefront/recommendation-images/:id",
+        200
+      ],
+      [
+        "/api/storefront/product-sales",
+        200
+      ],
+      [
+        "/api/storefront/recommendation-nodes",
+        200
+      ]
+    ],
+    "passed": true
+  }
+]

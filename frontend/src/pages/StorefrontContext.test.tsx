@@ -20,6 +20,22 @@ it('recovers only failed trip metadata after foreground events and preserves the
 });
 function Probe(){const location=useLocation(),navigate=useNavigate();return <><output data-testid="route">{location.pathname+location.search}</output><button onClick={()=>navigate(-1)}>Back</button><button onClick={()=>navigate(1)}>Forward</button></>;}
 function mount(path:string){return render(<I18nProvider><MemoryRouter initialEntries={[path]}><Probe/><Storefront/></MemoryRouter></I18nProvider>);}
+it.each(['/account','/login/?node=1'])('hides the menu and node context on %s without changing the catalog preference',async path=>{
+ localStorage.setItem('bobbuy_store_navigation_desktop','expanded');
+ mocks.role.isAuthenticated=false;
+ try {
+  const view=mount(path);
+  await screen.findByRole('heading',{name:translate('en-US','store.create_account')});
+  expect(view.container.querySelector('.browse-context')).toBeNull();
+  expect(view.container.querySelector('.shopping-sidebar')).toBeNull();
+  expect(localStorage.getItem('bobbuy_store_navigation_desktop')).toBe('expanded');
+  expect(mocks.nodes).not.toHaveBeenCalled();
+  fireEvent.click(view.container.querySelector('.browse-header-brand')!);
+  await screen.findByRole('heading',{name:'Catalog fixture'});
+  expect(view.container.querySelector('.shopping-sidebar')).toBeInTheDocument();
+  expect(view.container.querySelector('.browse-menu-toggle')).toHaveAttribute('aria-expanded','true');
+ } finally {mocks.role.isAuthenticated=true;}
+});
 it('keeps the home-linked brand in a separate header container while the remembered menu opens and closes',async()=>{
  localStorage.setItem('bobbuy_store_navigation_desktop','expanded');
  const view=mount('/products?node=1');
@@ -27,11 +43,11 @@ it('keeps the home-linked brand in a separate header container while the remembe
  const brand=brandHeader.querySelector<HTMLAnchorElement>('.browse-header-brand')!;
  expect(brand).toHaveAttribute('href','/?node=1');
  expect(brand.querySelector('.brand-lockup')).toBeVisible();
- await waitFor(()=>expect(document.querySelector('.browse-drawer .browse-links')).toBeInTheDocument());
- expect(document.querySelector('.browse-drawer .brand-lockup')).toBeNull();
- expect(brandHeader.contains(document.querySelector('.browse-drawer'))).toBe(false);
- fireEvent.click(screen.getByRole('button',{name:'Collapse navigation menu'}));
- await waitFor(()=>expect(document.querySelector('.browse-drawer .browse-links')).not.toBeInTheDocument());
+ await waitFor(()=>expect(document.querySelector('.shopping-sidebar .browse-links')).toBeInTheDocument());
+ expect(document.querySelector('.shopping-sidebar .brand-lockup')).toBeNull();
+ expect(brandHeader.contains(document.querySelector('.shopping-sidebar'))).toBe(false);
+ fireEvent.click(screen.getAllByRole('button',{name:'Collapse navigation menu'})[0]);
+ await waitFor(()=>expect(document.querySelector('.shopping-sidebar .browse-links')).not.toBeInTheDocument());
  expect(brand.querySelector('.brand-lockup')).toBeVisible();
  expect(localStorage.getItem('bobbuy_store_navigation_desktop')).toBe('collapsed');
 });
@@ -72,7 +88,7 @@ it.each(['zh-CN','zh-TW','en-US','ja-JP'] as const)('lands / on product picks an
 });
 it('keeps direct newsletter URLs available while the newsletter navigation flag is off',async()=>{
  const features=storefrontFeatures as {trips:boolean;dealsBulletin:boolean};features.dealsBulletin=false;
- try {mount('/recommendations');await screen.findByRole('heading',{name:'Recommendations fixture'});expect(screen.getByTestId('route')).toHaveTextContent('/recommendations');expect(screen.queryByRole('link',{name:'Campaign Newsletter'})).not.toBeInTheDocument();}
+ try {mount('/recommendations/99');await screen.findByRole('heading',{name:'Recommendations fixture'});expect(screen.getByTestId('route')).toHaveTextContent('/recommendations/99');expect(screen.queryByRole('link',{name:'Campaign Newsletter'})).not.toBeInTheDocument();}
  finally {features.dealsBulletin=true;}
 });
 function selected(path:string){
@@ -85,16 +101,16 @@ it.each(['/products','/recommendations','/trips'])('keeps identity, node scope a
  commitDraft('user:7','',cart);const before=readDraft('user:7');const identity=structuredClone(mocks.role.user);
  mount(path+'?node=1');await waitFor(()=>expect(mocks.nodes).toHaveBeenCalled());
  fireEvent.click(screen.getByRole('button',{name:'Open navigation menu'}));
- await waitFor(()=>expect(document.querySelector('.browse-drawer .ant-drawer-body')).toBeInTheDocument());
+ await waitFor(()=>expect(document.querySelector('.shopping-sidebar')).toBeInTheDocument());
  expect(screen.queryByRole('combobox',{hidden:true})).not.toBeInTheDocument();
  expect(document.querySelector('.browse-node')).toBeNull();
  expect(screen.getByTestId('route').textContent).toBe(path+'?node=1');
  expect(readDraft('user:7')).toEqual(before);expect(mocks.role.user).toEqual(identity);
- fireEvent.click(document.querySelector('.ant-drawer-close')!);
+ fireEvent.click(document.querySelector('.shopping-sidebar-close')!);
  expect(readDraft('user:7')).toEqual(before);expect(screen.getByTestId('route').textContent).toBe(path+'?node=1');
  expect(screen.queryByText('Change merchant')).not.toBeInTheDocument();
 });
-it.each(['/products','/recommendations','/recommendations/99?item=900'])('renders direct route %s without waiting for metadata or full products',async path=>{mocks.trips.mockImplementation(()=>new Promise(()=>{}));mocks.activeTrips.mockImplementation(()=>new Promise(()=>{}));mount(path);await screen.findByRole('heading',{name:path.startsWith('/products')?'Catalog fixture':'Recommendations fixture'});expect(mocks.products).not.toHaveBeenCalled();expect(mocks.nodes).not.toHaveBeenCalled();expect(mocks.privateTrips).not.toHaveBeenCalled();expect(screen.getByTestId('eligibility')).toHaveTextContent('true');expect(screen.getByTestId('route').textContent).toBe(path);});
+it.each(['/products','/recommendations','/recommendations?item=900','/recommendations/99?item=900'])('renders direct route %s without waiting for metadata or full products',async path=>{mocks.trips.mockImplementation(()=>new Promise(()=>{}));mocks.activeTrips.mockImplementation(()=>new Promise(()=>{}));mount(path);await screen.findByRole('heading',{name:path==='/products'?'Catalog fixture':'Recommendations fixture'});expect(mocks.products).not.toHaveBeenCalled();expect(mocks.nodes).not.toHaveBeenCalled();expect(mocks.privateTrips).not.toHaveBeenCalled();expect(screen.getByTestId('eligibility')).toHaveTextContent('true');expect(screen.getByTestId('route').textContent).toBe(path);});
 it('fetches node and private-trip metadata only when navigation is opened',async()=>{mount('/products');await screen.findByRole('heading',{name:'Catalog fixture'});expect(mocks.nodes).not.toHaveBeenCalled();expect(mocks.privateTrips).not.toHaveBeenCalled();fireEvent.click(screen.getByRole('button',{name:'Open navigation menu'}));await waitFor(()=>expect(mocks.nodes).toHaveBeenCalledTimes(1));await waitFor(()=>expect(mocks.privateTrips).toHaveBeenCalledTimes(1));});
 it('resolves an explicitly selected recommendation-only node without opening navigation',async()=>{mocks.trips.mockResolvedValue([]);mocks.activeTrips.mockResolvedValue([]);mocks.nodes.mockResolvedValue([{id:7,name:'Current B'}]);const view=mount('/recommendations?node=7');await waitFor(()=>expect(view.container.querySelector('.browse-context-node')).toHaveTextContent('Current B'));expect(mocks.nodes).toHaveBeenCalledTimes(1);});
 it('does not let late trip metadata overwrite the authoritative current public name',async()=>{let finish!:(value:unknown)=>void;mocks.trips.mockImplementation(()=>new Promise(resolve=>{finish=resolve;}));mocks.activeTrips.mockResolvedValue([]);mocks.nodes.mockResolvedValue([{id:7,name:'Current B'}]);const view=mount('/trips?node=7');await waitFor(()=>expect(view.container.querySelector('.browse-context-node')).toHaveTextContent('Current B'));await act(async()=>finish([{id:11,merchantId:7,merchantName:'Old A',deliveryArea:'Area',deliveryDate:'2026-11-10'}]));expect(view.container.querySelector('.browse-context-node')).toHaveTextContent('Current B');expect(view.container.querySelector('.browse-trip-card')).toHaveTextContent('Current B');expect(view.container.querySelector('.browse-trip-card')).not.toHaveTextContent('Old A');});

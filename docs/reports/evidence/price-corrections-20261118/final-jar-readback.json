@@ -1,0 +1,185 @@
+{
+  "result": "PASS",
+  "runtime": "actual packaged common JAR, H2 synthetic fixture rebuilt with --after-cancel; read-only application checks",
+  "commonJarSha256": "eb2c5e88373e53e4dab89137991979e25bd7f2354f65cd9639a2377338232ba6",
+  "coreJarSha256": "8cd619689f0044fd30dd7353ea47c6c34dd099687f38a4f779090c65f0636375",
+  "checks": [
+    "category batch list projection",
+    "private confirmed sale remains undisclosed",
+    "valid confirmed regular enables explicit publication entry"
+  ],
+  "geometry": [
+    {
+      "width": 1280,
+      "left": 160,
+      "right": 1280,
+      "overflow": false,
+      "controls": [
+        {
+          "text": "",
+          "height": 44
+        },
+        {
+          "text": "公开商品与售价",
+          "height": 44
+        },
+        {
+          "text": "仅纠正计价单位",
+          "height": 44
+        },
+        {
+          "text": "新增调价单",
+          "height": 44
+        },
+        {
+          "text": "刷 新",
+          "height": 44
+        },
+        {
+          "text": "撤 销",
+          "height": 44
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "left": 0,
+      "right": 390,
+      "overflow": false,
+      "controls": [
+        {
+          "text": "",
+          "height": 44
+        },
+        {
+          "text": "公开商品与售价",
+          "height": 44
+        },
+        {
+          "text": "仅纠正计价单位",
+          "height": 44
+        },
+        {
+          "text": "新增调价单",
+          "height": 44
+        },
+        {
+          "text": "刷 新",
+          "height": 44
+        },
+        {
+          "text": "撤 销",
+          "height": 44
+        }
+      ]
+    }
+  ],
+  "network": [
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/product-pricing/price-ui-1495250",
+      "status": 200
+    }
+  ],
+  "errors": [],
+  "loadedFrontendModules": {
+    "/src/api.ts": "a8ff1f1b951225c98f4786a37a2aa0387595cdb1820125c98731cda0e49e6b99",
+    "/src/pages/StockMaster.tsx": "5bba60a9db1dbfc8de3c5b1d8adf078033f429bc29c08e200b61838cab623f41",
+    "/src/components/ProductPricingPanel.tsx": "0c9021cb4665bb0ace2fcd6ee19ad618346bf7fb185b3f53f474f40c5749ebc9",
+    "/src/components/PriceAdjustmentWorkspace.tsx": "23a53698f676fc316075b6b6fb9ba00099f7c38218d79e30b3648763bf67fc76",
+    "/src/components/productPricing.css": "3f5e4abf00852042d4567efc6cc10629daef33d6238d5f5cc7b4dee1ac1b91d4",
+    "/src/components/priceDocumentText.ts": "e2d90892084eb8c21a43f8fa25ca361def505f1dd8406ec46f4d10bf7ac67721"
+  },
+  "coreEmbeddedCommonMatchesLoadedJar": true
+}

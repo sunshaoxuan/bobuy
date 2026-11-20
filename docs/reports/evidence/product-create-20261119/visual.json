@@ -1,0 +1,3857 @@
+{
+  "result": "PASS",
+  "errors": [],
+  "network": [
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/1a10e496-77c8-3359-a69d-60674a0cc82f",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/1a10e496-77c8-3359-a69d-60674a0cc82f",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/1a10e496-77c8-3359-a69d-60674a0cc82f",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/1a10e496-77c8-3359-a69d-60674a0cc82f",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-tree",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/1a10e496-77c8-3359-a69d-60674a0cc82f",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/1a10e496-77c8-3359-a69d-60674a0cc82f",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-tree",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/1a10e496-77c8-3359-a69d-60674a0cc82f",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/1a10e496-77c8-3359-a69d-60674a0cc82f",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-tree",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/1a10e496-77c8-3359-a69d-60674a0cc82f",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/1a10e496-77c8-3359-a69d-60674a0cc82f",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-tree",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-tree/products/1a10e496-77c8-3359-a69d-60674a0cc82f",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/recommendation-taxonomy",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-tree",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/product-catalog/1a10e496-77c8-3359-a69d-60674a0cc82f",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-tree/products/1a10e496-77c8-3359-a69d-60674a0cc82f",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/recommendation-taxonomy",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/product-catalog/1a10e496-77c8-3359-a69d-60674a0cc82f",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-tree",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/1a10e496-77c8-3359-a69d-60674a0cc82f",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/1a10e496-77c8-3359-a69d-60674a0cc82f",
+      "status": 200
+    }
+  ],
+  "geometry": [
+    {
+      "name": "new-en-US-1280",
+      "width": 1280,
+      "overflow": false,
+      "controls": [
+        {
+          "label": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "Cancel",
+          "width": 75.59375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "Save & Close",
+          "width": 116.828125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "rc-tabs-3-more",
+          "width": 46,
+          "height": 46,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.671875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 47.90625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.6875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "sku",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "brand",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Uncategorized",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Clear to Uncategorized",
+          "width": 175.1875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.671875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 47.90625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.6875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_netContent",
+          "width": 168,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_pricePerUnit",
+          "width": 168,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_packSize",
+          "width": 168,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_storageHint",
+          "width": 168,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Ambient",
+          "width": 83.359375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px 0px 0px 8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Chilled",
+          "width": 73.8125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px 8px 8px 0px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px 1px 1px 0px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Pre-order",
+          "width": 91.140625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px 0px 0px 8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Direct Buy",
+          "width": 95.578125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px 8px 8px 0px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px 1px 1px 0px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.671875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 47.90625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.6875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Add Media",
+          "width": 120.9375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "name": "new-en-US-390",
+      "width": 390,
+      "overflow": false,
+      "controls": [
+        {
+          "label": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "Cancel",
+          "width": 75.59375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "Save & Close",
+          "width": 116.828125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "rc-tabs-3-more",
+          "width": 46,
+          "height": 46,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.671875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 47.90625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.6875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "sku",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "brand",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Uncategorized",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Clear to Uncategorized",
+          "width": 175.1875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.671875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 47.90625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.6875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_netContent",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_pricePerUnit",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_packSize",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_storageHint",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Ambient",
+          "width": 83.359375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px 0px 0px 8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Chilled",
+          "width": 73.8125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px 8px 8px 0px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px 1px 1px 0px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Pre-order",
+          "width": 91.140625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px 0px 0px 8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Direct Buy",
+          "width": 95.578125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px 8px 8px 0px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px 1px 1px 0px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.671875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 47.90625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.6875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Add Media",
+          "width": 120.9375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "name": "new-ja-JP-1280",
+      "width": 1280,
+      "overflow": false,
+      "controls": [
+        {
+          "label": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "キャンセル",
+          "width": 102,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "保存して閉じる",
+          "width": 129.59375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "rc-tabs-3-more",
+          "width": 46,
+          "height": 46,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.0625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 48.640625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.453125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "sku",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "brand",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "未分類",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "未分類に戻す",
+          "width": 116,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.0625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 48.640625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.453125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_netContent",
+          "width": 168,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_pricePerUnit",
+          "width": 168,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_packSize",
+          "width": 168,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_storageHint",
+          "width": 168,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "常温",
+          "width": 60,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px 0px 0px 8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "冷蔵",
+          "width": 59,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px 8px 8px 0px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px 1px 1px 0px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "予約注文",
+          "width": 88,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px 0px 0px 8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "直接購入",
+          "width": 87,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px 8px 8px 0px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px 1px 1px 0px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.0625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 48.640625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.453125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "メディアを追加",
+          "width": 151.03125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "name": "new-ja-JP-390",
+      "width": 390,
+      "overflow": false,
+      "controls": [
+        {
+          "label": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "キャンセル",
+          "width": 102,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "保存して閉じる",
+          "width": 129.59375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "rc-tabs-3-more",
+          "width": 46,
+          "height": 46,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.0625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 48.640625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.453125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "sku",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "brand",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "未分類",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "未分類に戻す",
+          "width": 116,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.0625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 48.640625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.453125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_netContent",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_pricePerUnit",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_packSize",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_storageHint",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "常温",
+          "width": 60,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px 0px 0px 8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "冷蔵",
+          "width": 59,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px 8px 8px 0px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px 1px 1px 0px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "予約注文",
+          "width": 88,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px 0px 0px 8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "直接購入",
+          "width": 87,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px 8px 8px 0px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px 1px 1px 0px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.0625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 48.640625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.453125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "メディアを追加",
+          "width": 151.03125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "name": "new-zh-CN-1280",
+      "width": 1280,
+      "overflow": false,
+      "controls": [
+        {
+          "label": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "取 消",
+          "width": 63.140625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "保存并关闭",
+          "width": 102,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "rc-tabs-3-more",
+          "width": 46,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.0625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 48.640625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.453125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "sku",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "brand",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "未归类",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "清空为未归类",
+          "width": 116,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.0625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 48.640625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.453125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_netContent",
+          "width": 168,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_pricePerUnit",
+          "width": 168,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_packSize",
+          "width": 168,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_storageHint",
+          "width": 168,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "常温",
+          "width": 60,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px 0px 0px 8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "冷藏",
+          "width": 59,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px 8px 8px 0px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px 1px 1px 0px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "预购",
+          "width": 60,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px 0px 0px 8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "直送",
+          "width": 59,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px 8px 8px 0px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px 1px 1px 0px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.0625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 48.640625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.453125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "添加媒体",
+          "width": 110,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "name": "new-zh-CN-390",
+      "width": 390,
+      "overflow": false,
+      "controls": [
+        {
+          "label": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "取 消",
+          "width": 63.140625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "保存并关闭",
+          "width": 102,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "rc-tabs-3-more",
+          "width": 46,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.0625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 48.640625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.453125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "sku",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "brand",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "未归类",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "清空为未归类",
+          "width": 116,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.0625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 48.640625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.453125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_netContent",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_pricePerUnit",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_packSize",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_storageHint",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "常温",
+          "width": 60,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px 0px 0px 8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "冷藏",
+          "width": 59,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px 8px 8px 0px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px 1px 1px 0px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "预购",
+          "width": 60,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px 0px 0px 8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "直送",
+          "width": 59,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px 8px 8px 0px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px 1px 1px 0px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.0625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 48.640625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.453125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "添加媒体",
+          "width": 110,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "name": "new-zh-TW-1280",
+      "width": 1280,
+      "overflow": false,
+      "controls": [
+        {
+          "label": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "取 消",
+          "width": 63.140625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "保存並關閉",
+          "width": 102,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "rc-tabs-3-more",
+          "width": 46,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.0625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 48.640625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.453125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "sku",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "brand",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "未分類",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "清空為未分類",
+          "width": 116,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.0625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 48.640625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.453125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_netContent",
+          "width": 168,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_pricePerUnit",
+          "width": 168,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_packSize",
+          "width": 168,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_storageHint",
+          "width": 168,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "常溫",
+          "width": 60,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px 0px 0px 8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "冷藏",
+          "width": 59,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px 8px 8px 0px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px 1px 1px 0px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "預購",
+          "width": 60,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px 0px 0px 8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "直送",
+          "width": 59,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px 8px 8px 0px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px 1px 1px 0px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.0625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 48.640625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.453125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "添加媒體",
+          "width": 110,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "name": "new-zh-TW-390",
+      "width": 390,
+      "overflow": false,
+      "controls": [
+        {
+          "label": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "取 消",
+          "width": 63.140625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "保存並關閉",
+          "width": 102,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "rc-tabs-3-more",
+          "width": 46,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.0625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 48.640625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.453125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "sku",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "brand",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "未分類",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "清空為未分類",
+          "width": 116,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.0625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 48.640625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.453125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_netContent",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_pricePerUnit",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_packSize",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_storageHint",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "常溫",
+          "width": 60,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px 0px 0px 8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "冷藏",
+          "width": 59,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px 8px 8px 0px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px 1px 1px 0px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "預購",
+          "width": 60,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px 0px 0px 8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "直送",
+          "width": 59,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px 8px 8px 0px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px 1px 1px 0px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.0625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(45, 41, 38)",
+          "borderWidth": "1px",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 48.640625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.453125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "添加媒體",
+          "width": 110,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "name": "saved-editor-1280",
+      "width": 1280,
+      "overflow": false,
+      "controls": [
+        {
+          "label": "Close",
+          "width": 40,
+          "height": 40,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "radius": "50%",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgb(242, 242, 237)",
+          "shadow": "none"
+        },
+        {
+          "label": "View product image fullscreen",
+          "width": 150,
+          "height": 150,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "radius": "14px",
+          "borderColor": "rgb(238, 238, 231)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "Current cover",
+          "width": 122.921875,
+          "height": 40,
+          "minWidth": "40px",
+          "minHeight": "40px",
+          "radius": "999px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "label": "Move image earlier",
+          "width": 40,
+          "height": 40,
+          "minWidth": "40px",
+          "minHeight": "40px",
+          "radius": "999px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "label": "Move image later",
+          "width": 40,
+          "height": 40,
+          "minWidth": "40px",
+          "minHeight": "40px",
+          "radius": "999px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "label": "Remove",
+          "width": 40,
+          "height": 40,
+          "minWidth": "40px",
+          "minHeight": "40px",
+          "radius": "999px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "label": "Add images",
+          "width": 112.5,
+          "height": 40,
+          "minWidth": "40px",
+          "minHeight": "40px",
+          "radius": "999px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "rc-tabs-3-more",
+          "width": 46,
+          "height": 38,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "",
+          "width": 495,
+          "height": 42,
+          "minWidth": "0px",
+          "minHeight": "42px",
+          "radius": "10px",
+          "borderColor": "rgb(226, 226, 218)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "",
+          "width": 495,
+          "height": 42,
+          "minWidth": "0px",
+          "minHeight": "42px",
+          "radius": "10px",
+          "borderColor": "rgb(226, 226, 218)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "",
+          "width": 495,
+          "height": 42,
+          "minWidth": "0px",
+          "minHeight": "42px",
+          "radius": "10px",
+          "borderColor": "rgb(226, 226, 218)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "",
+          "width": 495,
+          "height": 42,
+          "minWidth": "0px",
+          "minHeight": "42px",
+          "radius": "10px",
+          "borderColor": "rgb(226, 226, 218)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Synthetic supplies › Synthetic manual entry",
+          "width": 1014,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "42px",
+          "radius": "10px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Clear to Uncategorized",
+          "width": 161.234375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "999px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "",
+          "width": 495,
+          "height": 42,
+          "minWidth": "0px",
+          "minHeight": "42px",
+          "radius": "10px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Confirm and save masters",
+          "width": 179.40625,
+          "height": 46,
+          "minWidth": "160px",
+          "minHeight": "46px",
+          "radius": "999px",
+          "borderColor": "rgb(232, 232, 225)",
+          "borderWidth": "1px",
+          "background": "rgb(232, 232, 225)",
+          "shadow": "none"
+        }
+      ]
+    },
+    {
+      "name": "saved-editor-390",
+      "width": 390,
+      "overflow": false,
+      "controls": [
+        {
+          "label": "Close",
+          "width": 36,
+          "height": 36,
+          "minWidth": "auto",
+          "minHeight": "36px",
+          "radius": "50%",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgb(242, 242, 237)",
+          "shadow": "none"
+        },
+        {
+          "label": "View product image fullscreen",
+          "width": 88,
+          "height": 88,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "radius": "14px",
+          "borderColor": "rgb(238, 238, 231)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "Current cover",
+          "width": 98.09375,
+          "height": 44,
+          "minWidth": "36px",
+          "minHeight": "44px",
+          "radius": "999px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "label": "Move image earlier",
+          "width": 36,
+          "height": 44,
+          "minWidth": "36px",
+          "minHeight": "44px",
+          "radius": "999px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "label": "Move image later",
+          "width": 36,
+          "height": 44,
+          "minWidth": "36px",
+          "minHeight": "44px",
+          "radius": "999px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "label": "Remove",
+          "width": 36,
+          "height": 44,
+          "minWidth": "36px",
+          "minHeight": "44px",
+          "radius": "999px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "label": "Add images",
+          "width": 89.421875,
+          "height": 44,
+          "minWidth": "36px",
+          "minHeight": "44px",
+          "radius": "999px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "rc-tabs-3-more",
+          "width": 46,
+          "height": 50.84375,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "",
+          "width": 158,
+          "height": 42,
+          "minWidth": "0px",
+          "minHeight": "42px",
+          "radius": "10px",
+          "borderColor": "rgb(226, 226, 218)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "",
+          "width": 158,
+          "height": 42,
+          "minWidth": "0px",
+          "minHeight": "42px",
+          "radius": "10px",
+          "borderColor": "rgb(226, 226, 218)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "",
+          "width": 158,
+          "height": 42,
+          "minWidth": "0px",
+          "minHeight": "42px",
+          "radius": "10px",
+          "borderColor": "rgb(226, 226, 218)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "",
+          "width": 158,
+          "height": 42,
+          "minWidth": "0px",
+          "minHeight": "42px",
+          "radius": "10px",
+          "borderColor": "rgb(226, 226, 218)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Synthetic supplies › Synthetic manual entry",
+          "width": 328,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "42px",
+          "radius": "10px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Clear to Uncategorized",
+          "width": 161.234375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "999px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "",
+          "width": 158,
+          "height": 42,
+          "minWidth": "0px",
+          "minHeight": "42px",
+          "radius": "10px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Confirm and save masters",
+          "width": 358,
+          "height": 44,
+          "minWidth": "160px",
+          "minHeight": "44px",
+          "radius": "999px",
+          "borderColor": "rgb(232, 232, 225)",
+          "borderWidth": "1px",
+          "background": "rgb(232, 232, 225)",
+          "shadow": "none"
+        }
+      ]
+    }
+  ],
+  "screens": [
+    "new-en-US-1280.png",
+    "new-en-US-390.png",
+    "new-ja-JP-1280.png",
+    "new-ja-JP-390.png",
+    "new-zh-CN-1280.png",
+    "new-zh-CN-390.png",
+    "new-zh-TW-1280.png",
+    "new-zh-TW-390.png",
+    "saved-editor-1280.png",
+    "saved-editor-390.png"
+  ],
+  "loadedFrontendModules": {
+    "/src/pages/StockMaster.tsx": "66e006c333c6c8150aa5df109f152a6b62571b8c8e1a0555f47ff22b0801c298",
+    "/src/pages/productRecords.css": "0015c7eeeb2f9b4ee431eee3a4bd490298cebb8fbce79fddf108fdb7b163b540"
+  }
+}

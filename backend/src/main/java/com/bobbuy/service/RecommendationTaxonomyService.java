@@ -16,7 +16,11 @@ public class RecommendationTaxonomyService {
     private final UserRepository users;
     private final ProductRepository products;
     private final RecommendationPostRepository posts;
-    public RecommendationTaxonomyService(CategoryRepository categories,SupplierRepository suppliers,UserRepository users,ProductRepository products,RecommendationPostRepository posts) {
+    private final RetiredCategoryService retired;
+    public RecommendationTaxonomyService(CategoryRepository categories,SupplierRepository suppliers,UserRepository users,ProductRepository products,RecommendationPostRepository posts) {this(categories,suppliers,users,products,posts,null);}
+    @org.springframework.beans.factory.annotation.Autowired
+    public RecommendationTaxonomyService(CategoryRepository categories,SupplierRepository suppliers,UserRepository users,ProductRepository products,RecommendationPostRepository posts,RetiredCategoryService retired) {
+        this.retired=retired;
         this.categories=categories;this.suppliers=suppliers;this.users=users;this.products=products;this.posts=posts;
     }
     public record Choice(String id,Map<String,String> name,boolean editable) {}
@@ -38,6 +42,7 @@ public class RecommendationTaxonomyService {
         Long owner=owner();users.lockById(owner).orElseThrow(()->new ApiException(ErrorCode.FORBIDDEN,"error.auth.forbidden"));
         String key=Normalizer.normalize(label.trim(),Normalizer.Form.NFKC).toLowerCase(Locale.ROOT);
         if(key.isBlank()||key.length()>100)throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.classification");
+        if(retired!=null&&retired.retiredHint(label,owner))throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.classification");
         var existing=categories.findAll().stream().filter(c->owner.equals(c.getMerchantId())&&key.equals(c.getTagKey())).findFirst();
         if(existing.isPresent()&&!existing.get().getId().equals(id)) {
             if(id==null)return new Choice(existing.get().getId(),existing.get().getName(),true);
@@ -50,6 +55,8 @@ public class RecommendationTaxonomyService {
         var names=new LinkedHashMap<>(value.getName());names.put(locale,label.trim());value.setName(names);
         categories.saveAndFlush(value);return new Choice(value.getId(),value.getName(),true);
     }
+    public List<String> currentIds(List<String> ids,Long owner){return retired==null?ids:retired.currentIds(ids,owner);}
+    public void removeRetiredAssignments(Product product){if(retired!=null)retired.removeAssignments(product);}
     public void validate(List<String> ids,String supplierId,boolean showSupplier) {
         Long owner=owner();
         var allowed=categories.findAllById(ids).stream().filter(c->c.getMerchantId()==null||owner.equals(c.getMerchantId())).count();
@@ -92,10 +99,11 @@ public class RecommendationTaxonomyService {
         Set<String> ids=new HashSet<>(), supplierIds=new HashSet<>();
         for(var item:projected){ids.addAll(item.categoryIds);if(item.supplierId!=null&&(!publicView||item.showSupplier))supplierIds.add(item.supplierId);}
         Map<String,Category> categoryMap=new HashMap<>();categories.findAllById(ids).forEach(c->categoryMap.put(c.getId(),c));
+        var historical=retired==null?Map.<String,RetiredCategory>of():retired.historical(ids);
         Map<String,Supplier> supplierMap=new HashMap<>();suppliers.findAllById(supplierIds).forEach(s->supplierMap.put(s.getId(),s));
         return projected.stream().map(item->{
             if(publicView){item.imageHash=null;item.imageUrl=item.gallery.isEmpty()?null:item.gallery.get(0).url();}
-            item.categories=item.categoryIds.stream().filter(categoryMap::containsKey).map(id->new RecommendationItem.Label(id,categoryMap.get(id).getName())).toList();
+            item.categories=item.categoryIds.stream().filter(id->categoryMap.containsKey(id)||historical.containsKey(id)&&Objects.equals(owners.get(item.postId),historical.get(id).merchantId)).map(id->new RecommendationItem.Label(id,categoryMap.containsKey(id)?categoryMap.get(id).getName():historical.get(id).name)).toList();
             if(!publicView||item.showSupplier) {
                 if(supplierMap.containsKey(item.supplierId))item.supplierName=supplierMap.get(item.supplierId).getName();
             }else item.supplierId=null;

@@ -1,0 +1,21 @@
+{
+  "observedAt": "2026-11-16T11:46:59.055498+00:00",
+  "releaseBaseline": "9912d4e7f4cf98fe15d35dd6aeb29c06eaff494c",
+  "successfulDeployRun": 43701342844,
+  "productsHttp": 200,
+  "health": {
+    "status": "ok",
+    "service": "gateway-service"
+  },
+  "assets": [
+    {
+      "path": "/assets/index-Ufw6W_J4.js",
+      "sha256": "a61bb3be2adc111c2b2aaf05620e3f5ff1d873b114d9887ff55a9a25addb32e9"
+    },
+    {
+      "path": "/assets/index-DsmEmSak.css",
+      "sha256": "b67ac8a2302669baa2cff5d4f886525c55a6273607c2569e87002eaf4983c63a"
+    }
+  ],
+  "operatorSha256": "2d045f5affe09b657872a6500d816a98022d449a7b2bea112e7bd0507b9d4e8e"
+}

@@ -1,0 +1,47 @@
+{
+  "passed": [
+    "product version concurrent edit rejects stale save"
+  ],
+  "events": [
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/product-catalog/e2e-p1",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/merchant/product-catalog/preview",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/merchant/product-catalog",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/merchant/product-catalog",
+      "status": 400
+    }
+  ]
+}

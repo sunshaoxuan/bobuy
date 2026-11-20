@@ -40,9 +40,10 @@ import MediaGallery, { type MediaItem } from '../components/MediaGallery';
 import CostcoOnboardingPanel from '../components/CostcoOnboardingPanel';
 import {ProductBrand} from '../components/ProductMetadata';
 import ProductCatalogPanel from '../components/ProductCatalogPanel';
+import CategoryTreePicker from '../components/CategoryTreePicker';
 import ProductPricingPanel from '../components/ProductPricingPanel';
 import ProductMarkerEditor from '../components/ProductMarkerEditor';
-import { api, type CategoryAttributeTemplateField, type MobileCategory, type MobileSupplier, type AiOnboardingSuggestion } from '../api';
+import { api, categoryTreeApi, type CategoryTreeNode, type MobileProductResponse, type CategoryAttributeTemplateField, type MobileCategory, type MobileSupplier, type AiOnboardingSuggestion } from '../api';
 import './productRecords.css';
 import {ProductReviewStars} from '../components/ProductRating';
 import CardPrice from '../components/CardPrice';
@@ -50,12 +51,15 @@ import CardPrice from '../components/CardPrice';
 const { Title, Text } = Typography;
 
 interface StockItem {
+  createRequestId?:string;
+  categoryNodeId?:string|null;
   visibilityStatus?: string;
   catalogDriven?:boolean;
   key: string;
   name: string;
   nameL10n?: L10nValues;
   category: string;
+  categoryPath?: string;
   price: number;
   actualSale?:import('../api').ProductSale;
   stock: number;
@@ -73,6 +77,40 @@ interface StockItem {
   priceTiers?: { tierName: string; price: number; currency: string; agentOnly: boolean }[];
   isNew?: boolean;
   suggestion?: AiOnboardingSuggestion;
+}
+
+export function stockItemFromResponse(res:MobileProductResponse):StockItem {
+  return {
+        key: res.product.id,
+        visibilityStatus:res.product.visibilityStatus,
+        catalogDriven:!!(res.product as unknown as {catalogData?:unknown}).catalogData,
+        name: res.displayName,
+        nameL10n: res.product.name,
+        categoryPath: res.categoryPath,
+        category: res.product.categoryId || '',
+        price: res.product.basePrice,
+        actualSale:res.currentRegular??undefined,
+        stock: 0, // Placeholder
+        unit: 'pc',
+        description: res.displayDescription,
+        descriptionL10n: res.product.description,
+        brand: res.product.brand,
+        specificationL10n:(res.product as unknown as {catalogData?:{specification?:L10nValues}}).catalogData?.specification,
+        sku: res.product.itemNumber,
+        mediaGallery: res.product.mediaGallery?.map((m, i) => ({
+          id: `${res.product.id}-${i}`,
+          url: m.url,
+          type: m.type?.toLowerCase()==='video'?'video':'image',
+          title: m.title,
+          visible: m.visible
+        })) || [],
+        priceTiers: res.product.priceTiers || [],
+        dynamicAttributes: normalizeStructuredAttributes(res.product.attributes),
+        merchantSkus:res.product.merchantSkus,
+        storageCondition:res.product.storageCondition,
+        orderMethod:res.product.orderMethod,
+        isNew: false
+        };
 }
 
 type MerchantSkuEntry = {
@@ -196,6 +234,8 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
   const [categories, setCategories] = useState<MobileCategory[]>([]);
   const [suppliers, setSuppliers] = useState<MobileSupplier[]>([]);
   const [searchText, setSearchText] = useState('');
+  const [createTree,setCreateTree]=useState<CategoryTreeNode[]>([]);
+  const savingKeys=useRef(new Set<string>());
   const [recordView,setRecordView]=useState<'gallery'|'manage'>(embedded?'gallery':'manage');
   const [toolbarCompact, setToolbarCompact] = useState(false);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
@@ -266,33 +306,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
     let cancelled = false;
     api.products().then((result) => {
       if (cancelled) return;
-      const mapped: StockItem[] = result.map(res => ({
-        key: res.product.id,
-        visibilityStatus:res.product.visibilityStatus,
-        catalogDriven:!!(res.product as unknown as {catalogData?:unknown}).catalogData,
-        name: res.displayName,
-        nameL10n: res.product.name,
-        category: res.product.categoryId || '',
-        price: res.product.basePrice,
-        actualSale:res.currentRegular??undefined,
-        stock: 0, // Placeholder
-        unit: 'pc',
-        description: res.displayDescription,
-        descriptionL10n: res.product.description,
-        brand: res.product.brand,
-        specificationL10n:(res.product as unknown as {catalogData?:{specification?:L10nValues}}).catalogData?.specification,
-        sku: res.product.itemNumber,
-        mediaGallery: res.product.mediaGallery?.map((m, i) => ({
-          id: `${res.product.id}-${i}`,
-          url: m.url,
-          type: m.type?.toLowerCase()==='video'?'video':'image',
-          title: m.title,
-          visible: m.visible
-        })) || [],
-        priceTiers: res.product.priceTiers || [],
-        dynamicAttributes: normalizeStructuredAttributes(res.product.attributes),
-        isNew: false
-      }));
+      const mapped = result.map(stockItemFromResponse);
       setDataSource(mapped);
     });
     return () => { cancelled = true; };
@@ -334,7 +348,9 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
   const handleAddRow = () => {
     setRecordView('manage');
     const newData: StockItem = {
-      key: Date.now().toString(),
+      key: crypto.randomUUID(),
+      createRequestId: crypto.randomUUID(),
+      categoryNodeId:null,
       name: '',
       category: '',
       price: 0,
@@ -343,9 +359,8 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
       isNew: true
     };
     setDataSource([...dataSource, newData]);
-    if (isMobile) {
-      openDrawer(newData);
-    }
+    openDrawer(newData);
+    void categoryTreeApi.list().then(setCreateTree).catch(error=>message.error(error.message));
   };
 
   const handleDelete = async (key: string) => {
@@ -368,6 +383,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
       newData[index] = updatedItem;
       setDataSource(newData);
       
+      if(updatedItem.isNew)return;
       // Auto-save on table change
       clearAutosaveTimer();
       autosaveTimerRef.current = setTimeout(() => {
@@ -390,6 +406,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         visibilityStatus:product.visibilityStatus,
         name: response.displayName,
         nameL10n: product.name,
+        categoryPath: response.categoryPath,
         category: product.categoryId || '',
         price: product.basePrice,
         stock: 0,
@@ -452,30 +469,28 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
   };
 
   const syncItemToBackend = async (item: StockItem) => {
+    if(savingKeys.current.has(item.key))return false;
+    savingKeys.current.add(item.key);
     setSyncStatus('saving');
-    // Preparation: Map current UI state to a suggestion/patch object
-    const suggestion: AiOnboardingSuggestion = {
-      name: item.name,
-      price: item.price,
-      itemNumber: item.sku,
-      categoryId: item.category,
-      brand: item.brand,
-      description: item.description,
-      attributes: normalizeStructuredAttributes(item.dynamicAttributes),
-      // @ts-ignore
-      mediaGallery: item.mediaGallery?.map(m => ({ url: m.url, type: m.type, title: m.title, visible: m.visible !== false })),
-      detectedPriceTiers: item.priceTiers,
-      storageCondition: item.storageCondition,
-      orderMethod: item.orderMethod,
-      originalPhotoBase64: item.suggestion?.originalPhotoBase64
-    };
-
     try {
       if (item.isNew) { 
-        const response = await api.onboardConfirm(suggestion) as any;
-        handleReconcileFeedback(response);
-        // Update item key and status in background
-        setDataSource(prev => prev.map(it => it.key === item.key ? { ...it, key: response.product?.id || item.key, isNew: false } : it));
+        const response = item.createRequestId ? await api.createProduct({
+          requestId:item.createRequestId!,name:item.nameL10n,description:item.descriptionL10n,
+          specification:item.specificationL10n,brand:item.brand,itemNumber:item.sku,
+          categoryNodeId:item.categoryNodeId??null,attributes:normalizeStructuredAttributes(item.dynamicAttributes),
+          merchantSkus:item.merchantSkus,storageCondition:item.storageCondition,orderMethod:item.orderMethod,
+          priceTiers:item.priceTiers,
+          mediaGallery:item.mediaGallery?.map(m=>({url:m.url,type:m.type.toUpperCase(),title:m.title,visible:m.visible!==false}))
+        }) : await api.onboardConfirm({...item.suggestion!,name:item.name,description:item.description,
+          itemNumber:item.sku,categoryId:item.category,brand:item.brand,price:item.price,
+          attributes:normalizeStructuredAttributes(item.dynamicAttributes),detectedPriceTiers:item.priceTiers,
+          storageCondition:item.storageCondition,orderMethod:item.orderMethod,
+          mediaGallery:item.mediaGallery?.map(m=>({url:m.url,type:m.type,title:m.title,visible:m.visible!==false}))});
+        if(!item.createRequestId)handleReconcileFeedback(response);
+        if(!response.product?.id)throw new Error(t('stock.msg.update_failed'));
+        const saved=stockItemFromResponse(response);
+        setDataSource(prev=>prev.map(it=>it.key===item.key?saved:it));
+        setEditingItem(previous=>previous?.key===item.key?saved:previous);
         setSyncStatus('saved');
       } else {
         // Existing products use the product patch API. Selling prices are
@@ -498,6 +513,8 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
       setSyncStatus('idle');
       message.error((err as Error).message||t('stock.msg.update_failed'));
       return false;
+    } finally {
+      savingKeys.current.delete(item.key);
     }
   };
 
@@ -583,12 +600,12 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
 
   const handleDrawerSave = () => {
     form.validateFields().then((values) => {
-      saveEditingItem(values, { closeAfterSave: true, showMessage: true });
-    });
+      return saveEditingItem(values, { closeAfterSave: true, showMessage: true });
+    }).catch(() => { /* Form renders validation errors and retains all input. */ });
   };
 
   const handleDrawerValuesChange = (_changedValues: Record<string, unknown>, _allValues: Record<string, unknown>) => {
-    if (!isMobile || !editingItem) {
+    if (!isMobile || !editingItem || editingItem.isNew) {
       return;
     }
     setSyncStatus('saving');
@@ -644,7 +661,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
       title: t('stock.item.category'),
       dataIndex: 'category',
       width: 120,
-      render: (text: string) => { const category=categories.find(item=>item.id===text); const label=category?.name?.[locale] ?? category?.name?.['en-US'] ?? text; return compactText(label, label); }
+      render: (text: string, record: StockItem) => { const category=categories.find(item=>item.id===text); const label=record.categoryPath || category?.name?.[locale] || category?.name?.['en-US'] || text; return compactText(label, label); }
     },
     {
       title: (
@@ -747,7 +764,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
     <div className={embedded?'product-records-workspace':undefined} style={{ padding: isMobile ? `0 0 ${MOBILE_BOTTOM_PADDING} 0` : `0 0 ${DESKTOP_BOTTOM_PADDING} 0` }}>
       {!embedded&&<Breadcrumb style={{ marginBottom: '1rem' }} items={[{ title: t('nav.dashboard') }, { title: t('products.title') }]} />}
       <Drawer className="marker-drawer" title={t('marker.assigned')} width="min(100vw,620px)" open={!!markerId} onClose={closeMarkers} maskClosable={false} destroyOnClose>{markerId&&<ProductMarkerEditor productId={markerId} onDirtyChange={setMarkerDirty} onBusyChange={setMarkerBusy}/>}</Drawer>
-      <ProductCatalogPanel id={catalogId} onChoose={setCatalogId} entries={dataSource.filter(row=>!row.isNew)} onSaved={(values,canonical=true)=>setDataSource(prior=>prior.map(row=>{const value=values.find(v=>v.productId===row.key);return value?{...row,catalogDriven:canonical,name:getLocalizedFallback(value.name,row.name),nameL10n:value.name,specificationL10n:value.specification,description:getLocalizedFallback(value.description,''),descriptionL10n:value.description,brand:value.brand??undefined,sku:value.itemNumber??undefined,category:value.categoryIds[0]??'',mediaGallery:value.gallery.map(p=>({id:p.sha256||p.url,url:p.url,type:p.type==='VIDEO'?'video' as const:'image' as const,title:p.title,visible:p.visible}))}:row;}))}/>
+      <ProductCatalogPanel id={catalogId} onChoose={setCatalogId} entries={dataSource.filter(row=>!row.isNew)} onSaved={(values,canonical=true)=>{values.forEach(v=>{void api.product(v.productId).then(result=>setDataSource(rows=>rows.map(row=>row.key===v.productId?{...row,categoryPath:result.categoryPath}:row))).catch(error=>message.error(t(error.message)));});setDataSource(prior=>prior.map(row=>{const value=values.find(v=>v.productId===row.key);return value?{...row,catalogDriven:canonical,name:getLocalizedFallback(value.name,row.name),nameL10n:value.name,specificationL10n:value.specification,description:getLocalizedFallback(value.description,''),descriptionL10n:value.description,brand:value.brand??undefined,sku:value.itemNumber??undefined,category:value.categoryIds[0]??'',mediaGallery:value.gallery.map(p=>({id:p.sha256||p.url,url:p.url,type:p.type==='VIDEO'?'video' as const:'image' as const,title:p.title,visible:p.visible}))}:row;}));}}/>
 
       <div className={`stock-toolbar ${isMobile ? 'stock-toolbar-mobile' : ''} ${toolbarCompact ? 'stock-toolbar-compact' : ''}`}>
         <div style={{ minWidth: 0 }}>
@@ -815,7 +832,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
           </button>
           <div className="record-caption"><div className="record-meta"><span>{item.sku||t('rec.not_stated')}</span><span>{t(item.isNew?'stock.status.new':'stock.status.modified')}</span></div>
             <button className="record-title" onClick={()=>setCatalogId(item.key)}><h3>{name}</h3></button>
-            <ProductBrand brand={item.brand}/><p>{category?getLocalizedFallback(category.name):t('master.title')}</p>{getLocalizedFallback(item.specificationL10n,'')&&<p className="record-specification">{getLocalizedFallback(item.specificationL10n,'')}</p>}
+            <ProductBrand brand={item.brand}/><p>{item.categoryPath||(category?getLocalizedFallback(category.name):t('master.title'))}</p>{getLocalizedFallback(item.specificationL10n,'')&&<p className="record-specification">{getLocalizedFallback(item.specificationL10n,'')}</p>}
             <ProductReviewStars productId={item.isNew||item.visibilityStatus==='DRAFTER_ONLY'?undefined:item.key}/><div className="record-sale-state">{item.actualSale?<CardPrice amount={item.actualSale.amount} currency={item.actualSale.currency}/>:t('sale.pending')}</div>
             <div className="record-card-actions marker-product-actions"><Tooltip title={t('marker.assigned')}><Button className="marker-product-trigger" icon={<TagsOutlined aria-hidden/>} aria-label={t('marker.assigned')+' '+name} disabled={item.isNew} onClick={()=>openMarkers(item.key)}/></Tooltip><Button onClick={()=>setCatalogId(item.key)}>{t('master.title')}</Button><Button type="text" onClick={()=>setPricingId(item.key)}>{t('pricing.title')}</Button><Button type="text" danger icon={<DeleteOutlined/>} aria-label={t('trash.remove')+' '+name} onClick={()=>handleDelete(item.key)}/></div>
           </div>
@@ -843,10 +860,10 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
       )}
 
       <Drawer
-        rootClassName="stock-drawer"
+        rootClassName={'stock-drawer'+(editingItem?.isNew?' manual-product-create':'')}
         title={
           <Space direction="vertical" size={0}>
-            <span>{t('stock.drawer.title')}</span>
+            <span>{t(editingItem?.createRequestId&&editingItem.isNew?'stock.master.add_row':'stock.drawer.title')}</span>
             {isMobile && (
               <Text type="secondary" style={{ fontSize: 12 }}>
                 {syncStatus === 'saving'
@@ -865,7 +882,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         open={isDrawerVisible}
         destroyOnClose={true}
         extra={
-          isMobile ? null : (
+          isMobile && !editingItem?.isNew ? null : (
             <Space>
                <Button onClick={closeDrawer}>{t('common.cancel')}</Button>
               <Button onClick={handleDrawerSave} type="primary" loading={syncStatus === 'saving'}>
@@ -876,11 +893,12 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         }
       >
         <Form form={form} layout="vertical" onValuesChange={handleDrawerValuesChange}>
-          {isMobile && (
+          {isMobile && !editingItem?.isNew && (
             <Text type="secondary" style={{ display: 'block', marginBottom: 12 }}>
               {t('stock.drawer.autosave_hint')}
             </Text>
           )}
+          {editingItem?.isNew&&<p role="status">{t('product.create.help')}</p>}
           <Tabs
             activeKey={activeTabKey}
             onChange={setActiveTabKey}
@@ -890,10 +908,10 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
                 label: t('stock.tabs.basic'),
                 children: (
                   <>
-                    <Form.Item name="nameL10n" label={`${t('stock.item.name')} (L10n)`} rules={[{ required: true }]}>
+                    <Form.Item name="nameL10n" label={`${t('stock.item.name')} (L10n)`} rules={[{validator:(_,value)=>!editingItem?.isNew||value?.['ja-JP']?.trim()?Promise.resolve():Promise.reject(new Error(t('master.japanese_required')))}]}>
                       <L10nInput
                          locales={['zh-CN', 'ja-JP', 'en-US']}
-                        requestTranslation={requestTranslationSuggestion}
+                        requestTranslation={editingItem?.isNew?undefined:requestTranslationSuggestion}
                         placeholder={t('stock.l10n.name_placeholder')}
                         loadingSuggestionText={t('stock.l10n.ai_loading')}
                         suggestionPrefixText={t('stock.l10n.ai_prefix')}
@@ -906,9 +924,14 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
                     <Form.Item name="brand" label={t('stock.item.brand')}>
                        <Input placeholder={t('stock.item.brand_placeholder')} />
                     </Form.Item>
-                    <Form.Item name="category" label={t('stock.item.category')}>
-                      <Input />
-                    </Form.Item>
+                    {editingItem?.isNew?<>
+                      <Form.Item name="categoryNodeId" label={t('stock.item.category')}>
+                        <CategoryTreePicker nodes={createTree} value={null} onChange={()=>{}}/>
+                      </Form.Item>
+                      <Form.Item name="specificationL10n" label={t('master.specifications')}>
+                        <L10nInput locales={['zh-CN','ja-JP','en-US']}/>
+                      </Form.Item>
+                    </>:<Form.Item name="category" label={t('stock.item.category')}><Input/></Form.Item>}
                     {activeCategoryAttributes.length > 0 && (
                       <Text strong style={{ display: 'block', marginBottom: 8 }}>
                         {t('stock.dynamic.section')}
@@ -974,21 +997,19 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
                         ]}
                       />
                     </Form.Item>
-                    {editingItem?.isNew?<Form.Item name="price" label={t('stock.item.price')}>
-                      <InputNumber prefix="JPY ¥" style={{ width: '100%' }} />
-                    </Form.Item>:<Form.Item label={t('stock.item.price')}>
+                    {!editingItem?.isNew&&<Form.Item label={t('stock.item.price')}>
                       <Space direction="vertical" style={{width:'100%'}}>
                         <Text>{editingItem?.actualSale?<CardPrice amount={editingItem.actualSale.amount} currency={editingItem.actualSale.currency}/>:t('sale.pending')}</Text>
                         <Button onClick={()=>{closeDrawer();setPricingId(editingItem?.key);}}>{t('pricing.open_regular')}</Button>
                       </Space>
                     </Form.Item>}
-                    <Form.Item name="stock" label={t('stock.item.quantity')}>
+                    {!editingItem?.isNew&&<Form.Item name="stock" label={t('stock.item.quantity')}>
                       <InputNumber style={{ width: '100%' }} />
-                    </Form.Item>
+                    </Form.Item>}
                     <Form.Item name="descriptionL10n" label={`${t('stock.item.description')} (L10n)`}>
                       <L10nInput
                          locales={['zh-CN', 'ja-JP', 'en-US']}
-                        requestTranslation={requestTranslationSuggestion}
+                        requestTranslation={editingItem?.isNew?undefined:requestTranslationSuggestion}
                         placeholder={t('stock.l10n.description_placeholder')}
                         loadingSuggestionText={t('stock.l10n.ai_loading')}
                         suggestionPrefixText={t('stock.l10n.ai_prefix')}
@@ -998,7 +1019,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
                     <Form.Item name="mediaGallery" label={t('stock.media.label')}>
                       <MediaGallery
                          locales={['zh-CN', 'ja-JP', 'en-US']}
-                        requestTranslation={requestTranslationSuggestion}
+                        requestTranslation={editingItem?.isNew?undefined:requestTranslationSuggestion}
                         emptyDescriptionText={t('stock.media.empty')}
                         mediaTitlePrefixText={t('stock.media.item_prefix')}
                         addMediaText={t('stock.media.add')}

@@ -1,0 +1,1076 @@
+{
+  "result": "PASS",
+  "writes": 0,
+  "errors": [],
+  "network": [
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/1a10e496-77c8-3359-a69d-60674a0cc82f",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/1a10e496-77c8-3359-a69d-60674a0cc82f",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/category-tree",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    }
+  ],
+  "geometry": [
+    {
+      "name": "filled-1280",
+      "width": 1280,
+      "overflow": false,
+      "controls": [
+        {
+          "label": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "Cancel",
+          "width": 75.59375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "Save & Close",
+          "width": 116.828125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(45, 41, 38)",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "rc-tabs-3-more",
+          "width": 46,
+          "height": 46,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "border": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.671875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 47.90625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.6875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(45, 41, 38)",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(230, 97, 87)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "sku",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "brand",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Synthetic supplies › Synthetic manual entry",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Product category path",
+          "width": 328,
+          "height": 42,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "border": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "Clear to Uncategorized",
+          "width": 175.1875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.671875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 47.90625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.6875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(45, 41, 38)",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_netContent",
+          "width": 168,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_pricePerUnit",
+          "width": 168,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_packSize",
+          "width": 168,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 54, 48)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 0px 0px 2px"
+        },
+        {
+          "label": "dynamicAttributes_storageHint",
+          "width": 168,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.671875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 47.90625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.6875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(45, 41, 38)",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 352,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Add Media",
+          "width": 120.9375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "name": "filled-390",
+      "width": 390,
+      "overflow": false,
+      "controls": [
+        {
+          "label": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "Cancel",
+          "width": 75.59375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "Save & Close",
+          "width": 116.828125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(45, 41, 38)",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "rc-tabs-3-more",
+          "width": 46,
+          "height": 46,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "border": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.671875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 47.90625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.6875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(45, 41, 38)",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "sku",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "brand",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Synthetic supplies › Synthetic manual entry",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Product category path",
+          "width": 318,
+          "height": 42,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "border": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "Clear to Uncategorized",
+          "width": 175.1875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.671875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 47.90625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.6875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(45, 41, 38)",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_netContent",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_pricePerUnit",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_packSize",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 54, 48)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 0px 0px 2px"
+        },
+        {
+          "label": "dynamicAttributes_storageHint",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.671875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 47.90625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.6875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(45, 41, 38)",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Add Media",
+          "width": 120.9375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "name": "category-390",
+      "width": 390,
+      "overflow": false,
+      "controls": [
+        {
+          "label": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "Cancel",
+          "width": 75.59375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "Save & Close",
+          "width": 116.828125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(45, 41, 38)",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "rc-tabs-3-more",
+          "width": 46,
+          "height": 46,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "border": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.671875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 47.90625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.6875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(45, 41, 38)",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "sku",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "brand",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Synthetic supplies › Synthetic manual entry",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Product category path",
+          "width": 318,
+          "height": 42,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "border": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "Clear to Uncategorized",
+          "width": 175.1875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.671875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 47.90625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.6875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(45, 41, 38)",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_netContent",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_pricePerUnit",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "dynamicAttributes_packSize",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 54, 48)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 0px 0px 2px"
+        },
+        {
+          "label": "dynamicAttributes_storageHint",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "zh-CN",
+          "width": 55.671875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "ja-JP",
+          "width": 47.90625,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "en-US",
+          "width": 55.6875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "border": "1px",
+          "borderColor": "rgb(45, 41, 38)",
+          "background": "rgb(45, 41, 38)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "",
+          "width": 342,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "Add Media",
+          "width": 120.9375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "border": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    }
+  ],
+  "screens": [
+    "filled-1280.png",
+    "filled-390.png",
+    "category-390.png"
+  ]
+}

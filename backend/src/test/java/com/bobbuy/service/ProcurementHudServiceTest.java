@@ -103,6 +103,32 @@ class ProcurementHudServiceTest {
     assertThat(store.getOrder(createdTrip2.getId()).orElseThrow().getLines().get(0).getPurchasedQuantity()).isEqualTo(0);
   }
 
+  @Autowired private com.bobbuy.repository.ProductRepository hudProducts;
+  @Autowired private com.bobbuy.repository.CategoryTreeNodeRepository hudNodes;
+  @Autowired private com.bobbuy.repository.ProductPrimaryCategoryPathRepository hudPaths;
+
+  @Test
+  void getHudStatsPreservesOrderTotalsAfterLegacyCategoryRemoval() throws Exception {
+    String node="synthetic-hud-leaf";
+    hudNodes.saveAndFlush(new com.bobbuy.model.CategoryTreeNode(node,null,java.util.Map.of("ja-JP","合成分類"),java.util.List.of(node),0,null));
+    hudPaths.saveAndFlush(new com.bobbuy.model.ProductPrimaryCategoryPath("prd-1000",node));
+    try {
+      Trip trip=store.createTrip(new Trip(null,1000L,"Synthetic",LocalDate.now(),TripStatus.PUBLISHED,null));
+      OrderHeader order=new OrderHeader("SYNTHETIC-CATEGORY-HUD",1001L,trip.getId());
+      OrderLine a=new OrderLine("prd-1000","Synthetic A",null,4,10);a.setPurchasedQuantity(2);order.addLine(a);
+      OrderLine b=new OrderLine("prd-1638","Synthetic B",null,2,20);b.setPurchasedQuantity(1);order.addLine(b);
+      var saved=store.upsertOrder(order);var json=new com.fasterxml.jackson.databind.ObjectMapper().findAndRegisterModules();
+      String beforeLines=json.writeValueAsString(store.getOrder(saved.getId()).orElseThrow().getLines());
+      var before=procurementHudService.getHudStats(trip.getId());
+      for(String id:java.util.List.of("prd-1000","prd-1638")){var p=hudProducts.findById(id).orElseThrow();p.setCategoryId(null);hudProducts.saveAndFlush(p);}
+      var after=procurementHudService.getHudStats(trip.getId());
+      assertThat(after.getCategoryCompletionPercent()).containsEntry(node,50D).containsEntry("UNCATEGORIZED",50D).hasSize(2);
+      assertThat(after.getCurrentPurchasedAmount()).isEqualTo(before.getCurrentPurchasedAmount());
+      assertThat(after.getTotalEstimatedProfit()).isEqualTo(before.getTotalEstimatedProfit());
+      assertThat(json.writeValueAsString(store.getOrder(saved.getId()).orElseThrow().getLines())).isEqualTo(beforeLines);
+    } finally {hudPaths.deleteById("prd-1000");hudNodes.deleteById(node);}
+  }
+
   @Test
   void getHudStatsUsesProductPhysicalMetricsInsteadOfStaticUnitWeight() {
     ProductPatch patch = new ProductPatch();

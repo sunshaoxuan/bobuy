@@ -1,0 +1,10 @@
+import {chromium} from '../../../../frontend/node_modules/playwright-core/index.mjs';
+import {writeFileSync} from 'node:fs';import assert from 'node:assert/strict';
+const browser=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox']});
+try{
+ const ctx=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true}),page=await ctx.newPage();await ctx.addInitScript(()=>{localStorage.setItem('bobbuy_locale','zh-CN');localStorage.setItem('bobbuy_disable_chat_websocket','true');});await page.goto('http://127.0.0.1:5176/products?node=1000&category=shop-000-progressive-07');await page.waitForFunction(()=>document.querySelectorAll('.catalog-master-card').length===20);await page.evaluate(()=>scrollTo(0,420));await page.waitForTimeout(220);
+ const gap=await page.evaluate(()=>{const surface=document.querySelector('.catalog-dock-surface').getBoundingClientRect(),dock=document.querySelector('.catalog-dock').getBoundingClientRect(),hit=document.elementFromPoint(70,surface.bottom+8);return {space:dock.bottom-surface.bottom,blockedByDock:!!hit.closest('.catalog-dock'),productUnderGap:!!hit.closest('.catalog-master-card')};});assert(!gap.blockedByDock);assert(gap.productUnderGap);
+ const start=await page.evaluate(()=>scrollY),cdp=await ctx.newCDPSession(page);await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:180,y:680}]});for(let i=1;i<=6;i++){await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:180,y:680-i*35}]});await page.waitForTimeout(20);}await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await page.waitForTimeout(350);
+ const end=await page.evaluate(()=>scrollY);assert(end>start+50);assert(await page.locator('.catalog-master-card').evaluateAll(es=>es.every(e=>e.dataset.productId.startsWith('progressive-item-7-'))));
+ writeFileSync(new URL('touch.json',import.meta.url),JSON.stringify({result:'PASS',width:390,verticalTouch:{start,end},transparentGap:gap},null,2)+'\n');console.log('PASS vertical touch and pointer passthrough');await ctx.close();
+}finally{await browser.close();}

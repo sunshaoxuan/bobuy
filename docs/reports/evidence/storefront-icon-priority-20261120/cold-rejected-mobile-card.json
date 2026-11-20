@@ -1,0 +1,2900 @@
+{
+  "baselineCommit": "63fe871c8614fcdef1fc42754e18bbb06265916d",
+  "condition": "Fresh isolated browser context per sample, same real backend/PNG URLs, alternating order, no artificial network delays; both variants serve captured real Vite modules symmetrically.",
+  "hashes": {
+    "useProgressiveCatalog.ts": {
+      "baseline": "468dc8687baac9f54743c5975015074e8a8be21fbf1de1cb6784093623f90adc",
+      "candidate": "e18ee026ddc2d27e2db9110c2273c0a259a3a0cad23e43ed0078ca2c347c46cb"
+    },
+    "components/CategoryShortcuts.tsx": {
+      "baseline": "7d330a2a177cf3700ec43bd1f5740202c387159997820a18993ed9124fa683cc",
+      "candidate": "b6f30b64d73899afe25b4f35317280333b76e4cd9c0e10c421d25583f5b3c888"
+    },
+    "components/CategoryImage.tsx": {
+      "baseline": "adbd880bc007f97de22355f6601fb395d6bccb576772dab1a9661966ae1dadae",
+      "candidate": "4bff8753869fc93ac44eab6850b776cd59f6c72e30451fb01b590508c18cf05d"
+    },
+    "locales/zh-CN.ts": {
+      "baseline": "eb15705abe590a13bae76054b34775b067450abc3ece174c5a72e128eb58b7fd",
+      "candidate": "9d1a380832c8c3cc1d066f694de830a641b022e6d0395cce3fee5b897b91a8f6"
+    },
+    "locales/zh-TW.ts": {
+      "baseline": "65897af2fa391f28f7f1c568d87eb0e5fb42eb7603fc5fa6cfe484df186f1d8f",
+      "candidate": "211ede53f3b88460e60da21d8e7d6bd38c3cd7e560bab1251acba07e0fe15140"
+    },
+    "locales/en-US.ts": {
+      "baseline": "50f58e6161c4486bdb8cf42666a570e0f91ca23aabc1fdd94e49513c8525da44",
+      "candidate": "bcc6e90e843192cc0c4ce86791d34b765380fde4fa4b2b911a44f048b007adb4"
+    },
+    "locales/ja-JP.ts": {
+      "baseline": "c47627dbce476af01b0a6c6228b06bc2c2e7a7d8b149f0ecac507b30855270b0",
+      "candidate": "b3267ed84a1a7b8570067a5ca78c0c5b9fbed27306f28a438ee36fb36c023faa"
+    }
+  },
+  "results": [
+    {
+      "variant": "baseline",
+      "width": 1920,
+      "round": 1,
+      "timings": {
+        "framework": 1434.0999999999767,
+        "categoryBar": 1660,
+        "firstCard": 1940.6999999999534,
+        "firstIcon": 1955,
+        "firstProductImage": 2193.5999999999767
+      },
+      "overflow": false,
+      "icon": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+      "iconsRequested": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "start": 1660.5999999999767,
+          "end": 1708.6999999999534,
+          "size": 1165
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "start": 1661,
+          "end": 1750.1999999999534,
+          "size": 1325
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "start": 1661,
+          "end": 1749.6999999999534,
+          "size": 1327
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "start": 1661.1999999999534,
+          "end": 1749.1999999999534,
+          "size": 1249
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "start": 1661.5999999999767,
+          "end": 1756.0999999999767,
+          "size": 1319
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "start": 1662.0999999999767,
+          "end": 1757.6999999999534,
+          "size": 1337
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "start": 1664,
+          "end": 1790.2999999999302,
+          "size": 1260
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "start": 1664.1999999999534,
+          "end": 1813.1999999999534,
+          "size": 1344
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "start": 1664.5999999999767,
+          "end": 1813.9000000000233,
+          "size": 1337
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "start": 1664.7999999999302,
+          "end": 1814.7999999999302,
+          "size": 1345
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "start": 1665.0999999999767,
+          "end": 1814.4000000000233,
+          "size": 1168
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "start": 1665.1999999999534,
+          "end": 1819.6999999999534,
+          "size": 1370
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "start": 1665.2999999999302,
+          "end": 1830.9000000000233,
+          "size": 1376
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "start": 1665.9000000000233,
+          "end": 1870.9000000000233,
+          "size": 1304
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "start": 1666.5999999999767,
+          "end": 1870.0999999999767,
+          "size": 1382
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "start": 1666.7999999999302,
+          "end": 1870,
+          "size": 1384
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "start": 1667.9000000000233,
+          "end": 1820.0999999999767,
+          "size": 1332
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "start": 1668.0999999999767,
+          "end": 1858.9000000000233,
+          "size": 1388
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-19",
+          "start": 1668.2999999999302,
+          "end": 1852.6999999999534,
+          "size": 1378
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-20",
+          "start": 1668.5999999999767,
+          "end": 1858.5,
+          "size": 1470
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-21",
+          "start": 1669,
+          "end": 1908.9000000000233,
+          "size": 1372
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-22",
+          "start": 1669.0999999999767,
+          "end": 1898.1999999999534,
+          "size": 1349
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-23",
+          "start": 1669.2999999999302,
+          "end": 1908.4000000000233,
+          "size": 1511
+        }
+      ],
+      "resource": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "priority": "Low",
+          "time": 920.188611,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "priority": "Low",
+          "time": 920.189235,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "priority": "Low",
+          "time": 920.189417,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "priority": "Low",
+          "time": 920.189529,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "priority": "Low",
+          "time": 920.189664,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "priority": "Low",
+          "time": 920.190498,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "priority": "Low",
+          "time": 920.192186,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "priority": "Low",
+          "time": 920.192506,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "priority": "Low",
+          "time": 920.192869,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "priority": "Low",
+          "time": 920.193215,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "priority": "Low",
+          "time": 920.193413,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "priority": "Low",
+          "time": 920.193525,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "priority": "Low",
+          "time": 920.193675,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "priority": "Low",
+          "time": 920.19417,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "priority": "Low",
+          "time": 920.194865,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "priority": "Low",
+          "time": 920.195102,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "priority": "Low",
+          "time": 920.195321,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "priority": "Low",
+          "time": 920.196443,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-19",
+          "priority": "Low",
+          "time": 920.196601,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-20",
+          "priority": "Low",
+          "time": 920.196935,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-21",
+          "priority": "Low",
+          "time": 920.197085,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-22",
+          "priority": "Low",
+          "time": 920.197411,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-23",
+          "priority": "Low",
+          "time": 920.197599,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-01",
+          "priority": "Low",
+          "time": 920.469225,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-02",
+          "priority": "Low",
+          "time": 920.908312,
+          "initiator": "other"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "variant": "candidate",
+      "width": 1920,
+      "round": 1,
+      "timings": {
+        "framework": 1340.5999999999767,
+        "categoryBar": 1578.5,
+        "firstIcon": 1688.9000000000233,
+        "firstCard": 1843.0999999999767,
+        "firstProductImage": 2035.9000000000233
+      },
+      "overflow": false,
+      "icon": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+      "iconsRequested": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "start": 1412.5999999999767,
+          "end": 1437.4000000000233,
+          "size": 1165
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "start": 1413.4000000000233,
+          "end": 1438,
+          "size": 1325
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "start": 1596.5999999999767,
+          "end": 1663.7000000000698,
+          "size": 1327
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "start": 1596.8000000000466,
+          "end": 1665.4000000000233,
+          "size": 1249
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "start": 1597.2000000000698,
+          "end": 1646,
+          "size": 1319
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "start": 1598,
+          "end": 1663.4000000000233,
+          "size": 1337
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "start": 1598.0999999999767,
+          "end": 1670.0999999999767,
+          "size": 1260
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "start": 1598.2000000000698,
+          "end": 1663,
+          "size": 1344
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "start": 1598.5999999999767,
+          "end": 1699.8000000000466,
+          "size": 1337
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "start": 1598.8000000000466,
+          "end": 1715.2000000000698,
+          "size": 1345
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "start": 1600.4000000000233,
+          "end": 1699.4000000000233,
+          "size": 1168
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "start": 1601.0999999999767,
+          "end": 1700.0999999999767,
+          "size": 1370
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "start": 1601.4000000000233,
+          "end": 1698.3000000000466,
+          "size": 1376
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "start": 1601.4000000000233,
+          "end": 1698.7000000000698,
+          "size": 1304
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "start": 1601.5,
+          "end": 1731.3000000000466,
+          "size": 1382
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "start": 1601.5999999999767,
+          "end": 1733.4000000000233,
+          "size": 1384
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "start": 1602,
+          "end": 1738.3000000000466,
+          "size": 1332
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "start": 1602.0999999999767,
+          "end": 1737.4000000000233,
+          "size": 1388
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-19",
+          "start": 1602.4000000000233,
+          "end": 1733.5,
+          "size": 1378
+        }
+      ],
+      "resource": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "priority": "High",
+          "time": 922.658573,
+          "initiator": "script"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "priority": "High",
+          "time": 922.659323,
+          "initiator": "script"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "priority": "Low",
+          "time": 922.842659,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "priority": "Low",
+          "time": 922.842835,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "priority": "Low",
+          "time": 922.843327,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "priority": "Low",
+          "time": 922.843513,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "priority": "Low",
+          "time": 922.844233,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "priority": "Low",
+          "time": 922.844279,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "priority": "Low",
+          "time": 922.844613,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "priority": "Low",
+          "time": 922.844688,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "priority": "Low",
+          "time": 922.845156,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "priority": "Low",
+          "time": 922.846615,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "priority": "Low",
+          "time": 922.847301,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "priority": "Low",
+          "time": 922.847489,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "priority": "Low",
+          "time": 922.847532,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "priority": "Low",
+          "time": 922.847604,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "priority": "Low",
+          "time": 922.847755,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "priority": "Low",
+          "time": 922.848102,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-19",
+          "priority": "Low",
+          "time": 922.848518,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-01",
+          "priority": "Low",
+          "time": 923.089277,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-02",
+          "priority": "Low",
+          "time": 923.51352,
+          "initiator": "other"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "variant": "candidate",
+      "width": 1920,
+      "round": 2,
+      "timings": {
+        "framework": 1299.1999999999534,
+        "categoryBar": 1495.4000000000233,
+        "firstIcon": 1554.1999999999534,
+        "firstCard": 1694.5999999999767,
+        "firstProductImage": 1965.5
+      },
+      "overflow": false,
+      "icon": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+      "iconsRequested": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "start": 1361.1999999999534,
+          "end": 1382,
+          "size": 1165
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "start": 1361.8000000000466,
+          "end": 1381.6999999999534,
+          "size": 1325
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "start": 1507.1999999999534,
+          "end": 1562.5,
+          "size": 1327
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "start": 1507.4000000000233,
+          "end": 1562.9000000000233,
+          "size": 1249
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "start": 1507.4000000000233,
+          "end": 1563.4000000000233,
+          "size": 1319
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "start": 1507.4000000000233,
+          "end": 1563.5999999999767,
+          "size": 1260
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "start": 1507.4000000000233,
+          "end": 1568.4000000000233,
+          "size": 1337
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "start": 1507.5999999999767,
+          "end": 1567.9000000000233,
+          "size": 1344
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "start": 1507.5999999999767,
+          "end": 1591.0999999999767,
+          "size": 1337
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "start": 1507.5999999999767,
+          "end": 1591.5,
+          "size": 1345
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "start": 1507.8000000000466,
+          "end": 1604.1999999999534,
+          "size": 1168
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "start": 1508,
+          "end": 1592.0999999999767,
+          "size": 1376
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "start": 1508,
+          "end": 1603.1999999999534,
+          "size": 1370
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "start": 1508,
+          "end": 1605.3000000000466,
+          "size": 1304
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "start": 1508.0999999999767,
+          "end": 1634.5,
+          "size": 1332
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "start": 1508.0999999999767,
+          "end": 1634.6999999999534,
+          "size": 1384
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "start": 1508.0999999999767,
+          "end": 1634.6999999999534,
+          "size": 1382
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "start": 1508.0999999999767,
+          "end": 1635.6999999999534,
+          "size": 1388
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-19",
+          "start": 1508.1999999999534,
+          "end": 1643.1999999999534,
+          "size": 1378
+        }
+      ],
+      "resource": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "priority": "High",
+          "time": 925.148416,
+          "initiator": "script"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "priority": "High",
+          "time": 925.149247,
+          "initiator": "script"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "priority": "Low",
+          "time": 925.294659,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "priority": "Low",
+          "time": 925.294808,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "priority": "Low",
+          "time": 925.294851,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "priority": "Low",
+          "time": 925.29489,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "priority": "Low",
+          "time": 925.294971,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "priority": "Low",
+          "time": 925.295012,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "priority": "Low",
+          "time": 925.295045,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "priority": "Low",
+          "time": 925.295079,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "priority": "Low",
+          "time": 925.295117,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "priority": "Low",
+          "time": 925.295351,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "priority": "Low",
+          "time": 925.295458,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "priority": "Low",
+          "time": 925.295494,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "priority": "Low",
+          "time": 925.295533,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "priority": "Low",
+          "time": 925.295578,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "priority": "Low",
+          "time": 925.295613,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "priority": "Low",
+          "time": 925.295647,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-19",
+          "priority": "Low",
+          "time": 925.295683,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-01",
+          "priority": "Low",
+          "time": 925.482208,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-02",
+          "priority": "Low",
+          "time": 925.91994,
+          "initiator": "other"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "variant": "baseline",
+      "width": 1920,
+      "round": 2,
+      "timings": {
+        "framework": 1500.2999999999302,
+        "categoryBar": 1863.1999999999534,
+        "firstCard": 2278.5,
+        "firstIcon": 2292.5999999999767,
+        "firstProductImage": 2737.399999999907
+      },
+      "overflow": false,
+      "icon": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+      "iconsRequested": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "start": 1863.3999999999069,
+          "end": 1942.0999999999767,
+          "size": 1165
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "start": 1864,
+          "end": 1952.0999999999767,
+          "size": 1325
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "start": 1864.1999999999534,
+          "end": 1943.6999999999534,
+          "size": 1327
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "start": 1864.2999999999302,
+          "end": 1932.2999999999302,
+          "size": 1249
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "start": 1864.6999999999534,
+          "end": 1944.2999999999302,
+          "size": 1319
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "start": 1865.0999999999767,
+          "end": 1935.1999999999534,
+          "size": 1337
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "start": 1865.2999999999302,
+          "end": 1968.6999999999534,
+          "size": 1260
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "start": 1865.3999999999069,
+          "end": 1977.5999999999767,
+          "size": 1344
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "start": 1865.5,
+          "end": 1981.1999999999534,
+          "size": 1337
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "start": 1865.6999999999534,
+          "end": 2018.3999999999069,
+          "size": 1345
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "start": 1865.7999999999302,
+          "end": 2028.1999999999534,
+          "size": 1168
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "start": 1866,
+          "end": 1992.3999999999069,
+          "size": 1370
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "start": 1866.1999999999534,
+          "end": 1992.5999999999767,
+          "size": 1376
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "start": 1866.3999999999069,
+          "end": 2008.2999999999302,
+          "size": 1304
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "start": 1866.5,
+          "end": 2009,
+          "size": 1382
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "start": 1866.6999999999534,
+          "end": 2027.5,
+          "size": 1384
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "start": 1866.7999999999302,
+          "end": 2033.7999999999302,
+          "size": 1332
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "start": 1866.8999999999069,
+          "end": 2034.2999999999302,
+          "size": 1388
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-19",
+          "start": 1867,
+          "end": 2034.8999999999069,
+          "size": 1378
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-20",
+          "start": 1867.1999999999534,
+          "end": 2049.399999999907,
+          "size": 1470
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-21",
+          "start": 1867.2999999999302,
+          "end": 2057.399999999907,
+          "size": 1372
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-23",
+          "start": 1867.5,
+          "end": 2059.399999999907,
+          "size": 1511
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-22",
+          "start": 1867.5,
+          "end": 2060.79999999993,
+          "size": 1349
+        }
+      ],
+      "resource": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "priority": "Low",
+          "time": 927.990638,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "priority": "Low",
+          "time": 927.991229,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "priority": "Low",
+          "time": 927.991436,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "priority": "Low",
+          "time": 927.991562,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "priority": "Low",
+          "time": 927.991776,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "priority": "Low",
+          "time": 927.992163,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "priority": "Low",
+          "time": 927.992466,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "priority": "Low",
+          "time": 927.992626,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "priority": "Low",
+          "time": 927.99281,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "priority": "Low",
+          "time": 927.992936,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "priority": "Low",
+          "time": 927.993034,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "priority": "Low",
+          "time": 927.993092,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "priority": "Low",
+          "time": 927.993483,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "priority": "Low",
+          "time": 927.993662,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "priority": "Low",
+          "time": 927.993762,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "priority": "Low",
+          "time": 927.99397,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "priority": "Low",
+          "time": 927.994075,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "priority": "Low",
+          "time": 927.994179,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-19",
+          "priority": "Low",
+          "time": 927.994283,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-20",
+          "priority": "Low",
+          "time": 927.994407,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-21",
+          "priority": "Low",
+          "time": 927.994643,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-22",
+          "priority": "Low",
+          "time": 927.994729,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-23",
+          "priority": "Low",
+          "time": 927.994805,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-01",
+          "priority": "Low",
+          "time": 928.406017,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-02",
+          "priority": "Low",
+          "time": 928.918301,
+          "initiator": "other"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "variant": "baseline",
+      "width": 1920,
+      "round": 3,
+      "timings": {
+        "framework": 1298.7000000000698,
+        "categoryBar": 1468,
+        "firstCard": 1696.7000000000698,
+        "firstIcon": 1769,
+        "firstProductImage": 1864.3000000000466
+      },
+      "overflow": false,
+      "icon": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+      "iconsRequested": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "start": 1469.6000000000931,
+          "end": 1516.3000000000466,
+          "size": 1165
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "start": 1469.8000000000466,
+          "end": 1518.1000000000931,
+          "size": 1325
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "start": 1469.9000000000233,
+          "end": 1519.4000000000233,
+          "size": 1249
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "start": 1469.9000000000233,
+          "end": 1525.7000000000698,
+          "size": 1327
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "start": 1470.2000000000698,
+          "end": 1529.2000000000698,
+          "size": 1319
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "start": 1470.3000000000466,
+          "end": 1524.7000000000698,
+          "size": 1337
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "start": 1470.4000000000233,
+          "end": 1555.4000000000233,
+          "size": 1260
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "start": 1470.4000000000233,
+          "end": 1559.8000000000466,
+          "size": 1344
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "start": 1470.5,
+          "end": 1558.8000000000466,
+          "size": 1337
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "start": 1470.6000000000931,
+          "end": 1560.5,
+          "size": 1345
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "start": 1470.6000000000931,
+          "end": 1561.4000000000233,
+          "size": 1168
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "start": 1470.7000000000698,
+          "end": 1561,
+          "size": 1370
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "start": 1470.8000000000466,
+          "end": 1577.6000000000931,
+          "size": 1376
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "start": 1470.9000000000233,
+          "end": 1582.1000000000931,
+          "size": 1304
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "start": 1471,
+          "end": 1594.9000000000233,
+          "size": 1382
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "start": 1471.1000000000931,
+          "end": 1580.8000000000466,
+          "size": 1384
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "start": 1471.2000000000698,
+          "end": 1576.3000000000466,
+          "size": 1332
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "start": 1471.2000000000698,
+          "end": 1581.2000000000698,
+          "size": 1388
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-19",
+          "start": 1471.3000000000466,
+          "end": 1581.5,
+          "size": 1378
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-21",
+          "start": 1471.5,
+          "end": 1609.9000000000233,
+          "size": 1372
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-20",
+          "start": 1471.5,
+          "end": 1613,
+          "size": 1470
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-22",
+          "start": 1471.6000000000931,
+          "end": 1612.5,
+          "size": 1349
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-23",
+          "start": 1471.8000000000466,
+          "end": 1612.8000000000466,
+          "size": 1511
+        }
+      ],
+      "resource": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "priority": "Low",
+          "time": 930.863672,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "priority": "Low",
+          "time": 930.863899,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "priority": "Low",
+          "time": 930.864064,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "priority": "Low",
+          "time": 930.86415,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "priority": "Low",
+          "time": 930.864227,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "priority": "Low",
+          "time": 930.864451,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "priority": "Low",
+          "time": 930.864517,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "priority": "Low",
+          "time": 930.864588,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "priority": "Low",
+          "time": 930.864688,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "priority": "Low",
+          "time": 930.864772,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "priority": "Low",
+          "time": 930.864843,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "priority": "Low",
+          "time": 930.864943,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "priority": "Low",
+          "time": 930.865023,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "priority": "Low",
+          "time": 930.865106,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "priority": "Low",
+          "time": 930.865185,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "priority": "Low",
+          "time": 930.865273,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "priority": "Low",
+          "time": 930.865372,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "priority": "Low",
+          "time": 930.865435,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-19",
+          "priority": "Low",
+          "time": 930.865557,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-20",
+          "priority": "Low",
+          "time": 930.865627,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-21",
+          "priority": "Low",
+          "time": 930.865724,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-22",
+          "priority": "Low",
+          "time": 930.865794,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-23",
+          "priority": "Low",
+          "time": 930.865862,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-01",
+          "priority": "Low",
+          "time": 931.09096,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-02",
+          "priority": "Low",
+          "time": 931.511143,
+          "initiator": "other"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "variant": "candidate",
+      "width": 1920,
+      "round": 3,
+      "timings": {
+        "framework": 1450.5,
+        "categoryBar": 1640.2999999999302,
+        "firstIcon": 1786.1999999999534,
+        "firstCard": 1932.5999999999767,
+        "firstProductImage": 2158.4000000000233
+      },
+      "overflow": false,
+      "icon": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+      "iconsRequested": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "start": 1510.5999999999767,
+          "end": 1542.5999999999767,
+          "size": 1165
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "start": 1511.6999999999534,
+          "end": 1552.9000000000233,
+          "size": 1325
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "start": 1653.1999999999534,
+          "end": 1697.5,
+          "size": 1327
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "start": 1653.1999999999534,
+          "end": 1706.6999999999534,
+          "size": 1249
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "start": 1653.4000000000233,
+          "end": 1699,
+          "size": 1319
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "start": 1653.5,
+          "end": 1706.7999999999302,
+          "size": 1337
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "start": 1653.5,
+          "end": 1711.7999999999302,
+          "size": 1260
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "start": 1653.9000000000233,
+          "end": 1710.4000000000233,
+          "size": 1344
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "start": 1654,
+          "end": 1726.6999999999534,
+          "size": 1337
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "start": 1657,
+          "end": 1732.2999999999302,
+          "size": 1345
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "start": 1657.2999999999302,
+          "end": 1731.9000000000233,
+          "size": 1168
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "start": 1657.5999999999767,
+          "end": 1741.9000000000233,
+          "size": 1370
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "start": 1657.6999999999534,
+          "end": 1742.5,
+          "size": 1376
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "start": 1657.7999999999302,
+          "end": 1741.7999999999302,
+          "size": 1304
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "start": 1657.7999999999302,
+          "end": 1761.4000000000233,
+          "size": 1382
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "start": 1657.9000000000233,
+          "end": 1772,
+          "size": 1332
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "start": 1657.9000000000233,
+          "end": 1772.2999999999302,
+          "size": 1384
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "start": 1657.9000000000233,
+          "end": 1780.5,
+          "size": 1388
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-19",
+          "start": 1658.7999999999302,
+          "end": 1764.1999999999534,
+          "size": 1378
+        }
+      ],
+      "resource": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "priority": "High",
+          "time": 933.311674,
+          "initiator": "script"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "priority": "High",
+          "time": 933.313057,
+          "initiator": "script"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "priority": "Low",
+          "time": 933.45446,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "priority": "Low",
+          "time": 933.454613,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "priority": "Low",
+          "time": 933.454659,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "priority": "Low",
+          "time": 933.454801,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "priority": "Low",
+          "time": 933.454844,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "priority": "Low",
+          "time": 933.455251,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "priority": "Low",
+          "time": 933.455357,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "priority": "Low",
+          "time": 933.45556,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "priority": "Low",
+          "time": 933.458709,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "priority": "Low",
+          "time": 933.458815,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "priority": "Low",
+          "time": 933.459073,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "priority": "Low",
+          "time": 933.45912,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "priority": "Low",
+          "time": 933.459164,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "priority": "Low",
+          "time": 933.459204,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "priority": "Low",
+          "time": 933.459242,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "priority": "Low",
+          "time": 933.459305,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-19",
+          "priority": "Low",
+          "time": 933.460191,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-01",
+          "priority": "Low",
+          "time": 933.734344,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-02",
+          "priority": "Low",
+          "time": 934.209838,
+          "initiator": "other"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "variant": "baseline",
+      "width": 390,
+      "round": 1,
+      "timings": {
+        "framework": 1346.5999999999767,
+        "categoryBar": 1530.5999999999767,
+        "firstCard": 1692.1999999999534,
+        "firstIcon": 1841.9000000000233,
+        "firstProductImage": 1849.0999999999767
+      },
+      "overflow": false,
+      "icon": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+      "iconsRequested": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "start": 1530.8000000000466,
+          "end": 1601.3000000000466,
+          "size": 1165
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "start": 1531.3000000000466,
+          "end": 1573.9000000000233,
+          "size": 1325
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "start": 1531.4000000000233,
+          "end": 1600.6999999999534,
+          "size": 1327
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "start": 1531.5999999999767,
+          "end": 1602,
+          "size": 1249
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "start": 1531.8000000000466,
+          "end": 1601.8000000000466,
+          "size": 1319
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "start": 1531.9000000000233,
+          "end": 1602.1999999999534,
+          "size": 1337
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "start": 1532,
+          "end": 1614.5,
+          "size": 1260
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "start": 1532.0999999999767,
+          "end": 1636.0999999999767,
+          "size": 1344
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "start": 1532.4000000000233,
+          "end": 1645.5,
+          "size": 1337
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "start": 1532.5,
+          "end": 1646.5999999999767,
+          "size": 1345
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "start": 1532.6999999999534,
+          "end": 1625.8000000000466,
+          "size": 1168
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "start": 1532.8000000000466,
+          "end": 1645.8000000000466,
+          "size": 1376
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "start": 1532.8000000000466,
+          "end": 1647.0999999999767,
+          "size": 1370
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "start": 1533,
+          "end": 1651.5,
+          "size": 1304
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "start": 1533.0999999999767,
+          "end": 1672.4000000000233,
+          "size": 1382
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "start": 1533.1999999999534,
+          "end": 1672.8000000000466,
+          "size": 1384
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "start": 1533.3000000000466,
+          "end": 1677.8000000000466,
+          "size": 1332
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "start": 1533.4000000000233,
+          "end": 1677,
+          "size": 1388
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-19",
+          "start": 1533.5,
+          "end": 1680.5999999999767,
+          "size": 1378
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-20",
+          "start": 1533.6999999999534,
+          "end": 1681.8000000000466,
+          "size": 1470
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-21",
+          "start": 1533.6999999999534,
+          "end": 1708.5999999999767,
+          "size": 1372
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-23",
+          "start": 1533.8000000000466,
+          "end": 1692.6999999999534,
+          "size": 1511
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-22",
+          "start": 1533.8000000000466,
+          "end": 1693.1999999999534,
+          "size": 1349
+        }
+      ],
+      "resource": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "priority": "Low",
+          "time": 936.082726,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "priority": "Low",
+          "time": 936.083209,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "priority": "Low",
+          "time": 936.083364,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "priority": "Low",
+          "time": 936.083555,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "priority": "Low",
+          "time": 936.083654,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "priority": "Low",
+          "time": 936.083848,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "priority": "Low",
+          "time": 936.083947,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "priority": "Low",
+          "time": 936.084063,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "priority": "Low",
+          "time": 936.084357,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "priority": "Low",
+          "time": 936.084454,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "priority": "Low",
+          "time": 936.08454,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "priority": "Low",
+          "time": 936.084754,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "priority": "Low",
+          "time": 936.084836,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "priority": "Low",
+          "time": 936.084947,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "priority": "Low",
+          "time": 936.085047,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "priority": "Low",
+          "time": 936.085137,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "priority": "Low",
+          "time": 936.085222,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "priority": "Low",
+          "time": 936.085286,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-19",
+          "priority": "Low",
+          "time": 936.085361,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-20",
+          "priority": "Low",
+          "time": 936.085587,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-21",
+          "priority": "Low",
+          "time": 936.08566,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-22",
+          "priority": "Low",
+          "time": 936.085743,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-23",
+          "priority": "Low",
+          "time": 936.085821,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-01",
+          "priority": "Low",
+          "time": 936.244341,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-02",
+          "priority": "Low",
+          "time": 936.693491,
+          "initiator": "other"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "variant": "candidate",
+      "width": 390,
+      "round": 1,
+      "timings": {
+        "framework": 1421.8000000000466,
+        "categoryBar": 1655.4000000000233,
+        "firstIcon": 1704.1999999999534,
+        "firstCard": 1827.0999999999767,
+        "firstProductImage": 1950.9000000000233
+      },
+      "overflow": false,
+      "icon": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+      "iconsRequested": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "start": 1488.5,
+          "end": 1512.4000000000233,
+          "size": 1165
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "start": 1489.4000000000233,
+          "end": 1510.8000000000466,
+          "size": 1325
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "start": 1662.5,
+          "end": 1703.4000000000233,
+          "size": 1327
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "start": 1662.5999999999767,
+          "end": 1699.1999999999534,
+          "size": 1249
+        }
+      ],
+      "resource": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "priority": "High",
+          "time": 938.415352,
+          "initiator": "script"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "priority": "High",
+          "time": 938.416364,
+          "initiator": "script"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "priority": "Low",
+          "time": 938.589227,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "priority": "Low",
+          "time": 938.589623,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-01",
+          "priority": "Low",
+          "time": 938.754232,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-02",
+          "priority": "Low",
+          "time": 939.157299,
+          "initiator": "other"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "variant": "candidate",
+      "width": 390,
+      "round": 2,
+      "timings": {
+        "framework": 1231.5,
+        "categoryBar": 1430.1999999999534,
+        "firstIcon": 1474.2999999999302,
+        "firstCard": 1566.4000000000233,
+        "firstProductImage": 1693.7999999999302
+      },
+      "overflow": false,
+      "icon": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+      "iconsRequested": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "start": 1288,
+          "end": 1308.9000000000233,
+          "size": 1165
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "start": 1289.5,
+          "end": 1309.4000000000233,
+          "size": 1325
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "start": 1437.9000000000233,
+          "end": 1467.2999999999302,
+          "size": 1327
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "start": 1438,
+          "end": 1467.6999999999534,
+          "size": 1249
+        }
+      ],
+      "resource": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "priority": "High",
+          "time": 940.667143,
+          "initiator": "script"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "priority": "High",
+          "time": 940.668295,
+          "initiator": "script"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "priority": "Low",
+          "time": 940.817083,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "priority": "Low",
+          "time": 940.817337,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-01",
+          "priority": "Low",
+          "time": 940.946511,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-02",
+          "priority": "Low",
+          "time": 941.321318,
+          "initiator": "other"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "variant": "baseline",
+      "width": 390,
+      "round": 2,
+      "timings": {
+        "framework": 1265.8000000000466,
+        "categoryBar": 1446.4000000000233,
+        "firstCard": 1670.9000000000233,
+        "firstIcon": 1684.0999999999767,
+        "firstProductImage": 1840.2000000000698
+      },
+      "overflow": false,
+      "icon": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+      "iconsRequested": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "start": 1446.7000000000698,
+          "end": 1499.7000000000698,
+          "size": 1165
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "start": 1446.9000000000233,
+          "end": 1500,
+          "size": 1325
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "start": 1447,
+          "end": 1504.5,
+          "size": 1327
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "start": 1447.0999999999767,
+          "end": 1500.3000000000466,
+          "size": 1249
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "start": 1447.2000000000698,
+          "end": 1500.2000000000698,
+          "size": 1337
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "start": 1447.2000000000698,
+          "end": 1509.0999999999767,
+          "size": 1319
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "start": 1447.3000000000466,
+          "end": 1531,
+          "size": 1260
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "start": 1447.4000000000233,
+          "end": 1541.2000000000698,
+          "size": 1344
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "start": 1447.5,
+          "end": 1549.7000000000698,
+          "size": 1337
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "start": 1447.5999999999767,
+          "end": 1542,
+          "size": 1345
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "start": 1447.7000000000698,
+          "end": 1541.5999999999767,
+          "size": 1168
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "start": 1447.9000000000233,
+          "end": 1549.3000000000466,
+          "size": 1370
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "start": 1448,
+          "end": 1550.8000000000466,
+          "size": 1376
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "start": 1448.3000000000466,
+          "end": 1574.5,
+          "size": 1304
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "start": 1448.4000000000233,
+          "end": 1569.0999999999767,
+          "size": 1382
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "start": 1448.4000000000233,
+          "end": 1583,
+          "size": 1384
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "start": 1448.7000000000698,
+          "end": 1582.4000000000233,
+          "size": 1332
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "start": 1448.8000000000466,
+          "end": 1579.5999999999767,
+          "size": 1388
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-19",
+          "start": 1448.8000000000466,
+          "end": 1586.4000000000233,
+          "size": 1378
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-20",
+          "start": 1448.9000000000233,
+          "end": 1591,
+          "size": 1470
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-21",
+          "start": 1449.2000000000698,
+          "end": 1598.4000000000233,
+          "size": 1372
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-22",
+          "start": 1449.3000000000466,
+          "end": 1603.9000000000233,
+          "size": 1349
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-23",
+          "start": 1449.3000000000466,
+          "end": 1606.8000000000466,
+          "size": 1511
+        }
+      ],
+      "resource": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "priority": "Low",
+          "time": 943.008706,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "priority": "Low",
+          "time": 943.008988,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "priority": "Low",
+          "time": 943.009115,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "priority": "Low",
+          "time": 943.009196,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "priority": "Low",
+          "time": 943.009252,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "priority": "Low",
+          "time": 943.009366,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "priority": "Low",
+          "time": 943.009427,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "priority": "Low",
+          "time": 943.009486,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "priority": "Low",
+          "time": 943.009592,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "priority": "Low",
+          "time": 943.009678,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "priority": "Low",
+          "time": 943.009748,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "priority": "Low",
+          "time": 943.009892,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "priority": "Low",
+          "time": 943.010109,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "priority": "Low",
+          "time": 943.010325,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "priority": "Low",
+          "time": 943.010433,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "priority": "Low",
+          "time": 943.010511,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "priority": "Low",
+          "time": 943.010727,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "priority": "Low",
+          "time": 943.010825,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-19",
+          "priority": "Low",
+          "time": 943.010899,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-20",
+          "priority": "Low",
+          "time": 943.011036,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-21",
+          "priority": "Low",
+          "time": 943.011239,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-22",
+          "priority": "Low",
+          "time": 943.011345,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-23",
+          "priority": "Low",
+          "time": 943.011409,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-01",
+          "priority": "Low",
+          "time": 943.233152,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-02",
+          "priority": "Low",
+          "time": 943.70117,
+          "initiator": "other"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "variant": "baseline",
+      "width": 390,
+      "round": 3,
+      "timings": {
+        "framework": 1314.3999999999069,
+        "categoryBar": 1477.3999999999069,
+        "firstCard": 1730.7999999999302,
+        "firstIcon": 1732.8999999999069,
+        "firstProductImage": 1896.5
+      },
+      "overflow": false,
+      "icon": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+      "iconsRequested": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "start": 1478,
+          "end": 1528.2999999999302,
+          "size": 1165
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "start": 1478.2999999999302,
+          "end": 1530.7999999999302,
+          "size": 1325
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "start": 1478.6999999999534,
+          "end": 1524.0999999999767,
+          "size": 1327
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "start": 1478.8999999999069,
+          "end": 1543.2999999999302,
+          "size": 1249
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "start": 1479.1999999999534,
+          "end": 1534.5,
+          "size": 1319
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "start": 1479.3999999999069,
+          "end": 1537.3999999999069,
+          "size": 1337
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "start": 1479.5,
+          "end": 1551.1999999999534,
+          "size": 1260
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "start": 1479.5999999999767,
+          "end": 1551.6999999999534,
+          "size": 1344
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "start": 1479.6999999999534,
+          "end": 1556.1999999999534,
+          "size": 1337
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "start": 1479.7999999999302,
+          "end": 1552.5999999999767,
+          "size": 1345
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "start": 1480.1999999999534,
+          "end": 1556.5999999999767,
+          "size": 1168
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "start": 1480.5,
+          "end": 1565.5,
+          "size": 1370
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "start": 1480.5999999999767,
+          "end": 1584.7999999999302,
+          "size": 1376
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "start": 1480.6999999999534,
+          "end": 1572.7999999999302,
+          "size": 1304
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "start": 1480.7999999999302,
+          "end": 1579.5999999999767,
+          "size": 1382
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "start": 1480.8999999999069,
+          "end": 1579.0999999999767,
+          "size": 1384
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "start": 1481,
+          "end": 1579.5,
+          "size": 1332
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "start": 1481.0999999999767,
+          "end": 1584.8999999999069,
+          "size": 1388
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-19",
+          "start": 1481.3999999999069,
+          "end": 1585.8999999999069,
+          "size": 1378
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-20",
+          "start": 1481.5,
+          "end": 1599.5999999999767,
+          "size": 1470
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-21",
+          "start": 1481.5999999999767,
+          "end": 1601.1999999999534,
+          "size": 1372
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-22",
+          "start": 1481.6999999999534,
+          "end": 1602.2999999999302,
+          "size": 1349
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-23",
+          "start": 1487.3999999999069,
+          "end": 1607.5999999999767,
+          "size": 1511
+        }
+      ],
+      "resource": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "priority": "Low",
+          "time": 945.434742,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "priority": "Low",
+          "time": 945.435038,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "priority": "Low",
+          "time": 945.435483,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "priority": "Low",
+          "time": 945.435609,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "priority": "Low",
+          "time": 945.435676,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "priority": "Low",
+          "time": 945.436074,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "priority": "Low",
+          "time": 945.436277,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "priority": "Low",
+          "time": 945.436377,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "priority": "Low",
+          "time": 945.436527,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "priority": "Low",
+          "time": 945.436623,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "priority": "Low",
+          "time": 945.436969,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "priority": "Low",
+          "time": 945.437186,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "priority": "Low",
+          "time": 945.437348,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "priority": "Low",
+          "time": 945.437477,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "priority": "Low",
+          "time": 945.437588,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "priority": "Low",
+          "time": 945.437664,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "priority": "Low",
+          "time": 945.437757,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "priority": "Low",
+          "time": 945.437866,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-19",
+          "priority": "Low",
+          "time": 945.438132,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-20",
+          "priority": "Low",
+          "time": 945.438288,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-21",
+          "priority": "Low",
+          "time": 945.438356,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-22",
+          "priority": "Low",
+          "time": 945.438502,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-23",
+          "priority": "Low",
+          "time": 945.44416,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-01",
+          "priority": "Low",
+          "time": 945.687804,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-02",
+          "priority": "Low",
+          "time": 946.137773,
+          "initiator": "other"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "variant": "candidate",
+      "width": 390,
+      "round": 3,
+      "timings": {
+        "framework": 1421.1999999999534,
+        "categoryBar": 1717.1999999999534,
+        "firstIcon": 1773.2999999999302,
+        "firstCard": 1887.6999999999534,
+        "firstProductImage": 2119
+      },
+      "overflow": false,
+      "icon": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+      "iconsRequested": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "start": 1478.1999999999534,
+          "end": 1494.5,
+          "size": 1165
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "start": 1479.1999999999534,
+          "end": 1494,
+          "size": 1325
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "start": 1726.1999999999534,
+          "end": 1756.5,
+          "size": 1327
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "start": 1727.1999999999534,
+          "end": 1755.1999999999534,
+          "size": 1249
+        }
+      ],
+      "resource": [
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "priority": "High",
+          "time": 947.872401,
+          "initiator": "script"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "priority": "High",
+          "time": 947.873192,
+          "initiator": "script"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "priority": "Low",
+          "time": 948.120327,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "priority": "Low",
+          "time": 948.120603,
+          "initiator": "other"
+        },
+        {
+          "url": "/api/storefront/recommendation-images/product-priority-fixture-01",
+          "priority": "Low",
+          "time": 948.282236,
+          "initiator": "other"
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "summary": [
+    {
+      "width": 1920,
+      "baselineCardMedian": 1940.6999999999534,
+      "candidateCardMedian": 1843.0999999999767,
+      "candidateIconBeforeCard": true
+    },
+    {
+      "width": 390,
+      "baselineCardMedian": 1692.1999999999534,
+      "candidateCardMedian": 1827.0999999999767,
+      "candidateIconBeforeCard": true
+    }
+  ]
+}

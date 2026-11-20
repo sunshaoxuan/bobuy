@@ -67,4 +67,14 @@ class ProductCategoryPathResolverTest {
                 .isEqualTo(new ProductCategoryPathResolver.ResolvedCategory(ProductCategoryPathResolver.Source.UNCATEGORIZED, "system-uncategorized"));
         assertThat(product.getCategoryId()).isEqualTo("missing-category");
     }
+    @Test void batchUsesOneReadPerRepositoryFor481Products() {
+        var products=new java.util.ArrayList<Product>();var assigned=new java.util.ArrayList<ProductPrimaryCategoryPath>();
+        for(int i=0;i<481;i++){var p=product("rec-cat-old");p.setId("batch-"+i);products.add(p);if(i<480)assigned.add(new ProductPrimaryCategoryPath(p.getId(),i==0?"system-uncategorized":"node-new"));}
+        when(paths.findAllById(org.mockito.ArgumentMatchers.any())).thenReturn(assigned);
+        when(mappings.findAllById(java.util.List.of("rec-cat-old"))).thenReturn(java.util.List.of(new CategoryLegacyMapping("rec-cat-old","mapped")));
+        when(legacy.findAllById(java.util.List.of("rec-cat-old"))).thenReturn(java.util.List.of());
+        var result=resolver.resolveAll(products);assertThat(result).hasSize(481);assertThat(result.get("batch-0").categoryId()).isEqualTo("system-uncategorized");assertThat(result.get("batch-480").categoryId()).isEqualTo("mapped");
+        org.mockito.Mockito.verify(paths).findAllById(org.mockito.ArgumentMatchers.any());org.mockito.Mockito.verify(mappings).findAllById(java.util.List.of("rec-cat-old"));org.mockito.Mockito.verify(legacy).findAllById(java.util.List.of("rec-cat-old"));org.mockito.Mockito.verifyNoMoreInteractions(paths,mappings,legacy);
+    }
+
 }

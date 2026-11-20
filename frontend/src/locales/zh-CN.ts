@@ -2,6 +2,34 @@ import type { Dictionary } from './types';
 import experience from './experience.zh-CN.json';
 
 const messages: Dictionary = {
+  "product.create.help": "手动创建为商家私有商品。请填写日文名称，分类可留空为未归类；保存后可继续编辑、确认通常价及发布。此次保存不会调用 AI 或变更库存。",
+  "product.create.duplicate": "该商品编号已有档案（包括已删除档案）。请查找或恢复原商品，不会覆盖原资料。",
+  "product.create.deleted_retry": "该创建请求对应的商品已删除。请先查看已删除商品。",
+
+  "catalogTransfer.export": "导出当前列表商品",
+  "catalogTransfer.load": "读取 JSON 文件",
+  "catalogTransfer.help": "使用现有商品 ID 和版本。导出限本页列表中有权限读取的商品（最多 500 件）。读取文件仅填入预览编辑区，需核对并确认后保存；新增或待确认身份不会自动建档。",
+  "catalogTransfer.template": "下载 JSON 模板",
+  "catalogTransfer.select": "请选择至少一件已预览商品后保存。",
+  "catalogTransfer.invalid": "请使用不超过 2 MB、包含 1–500 行且商品 ID 唯一的 JSON 文件。",
+  "categoryTransfer.done": "分类结构已保存。",
+  "categoryTransfer.title": "分类结构导入 / 导出",
+  "categoryTransfer.help": "CSV 支持稳定 ID、父 ID、四语名称、显示顺序和站内图片引用。只新增或更新，不删除。先预览修正错误，再确认整批提交；不修改商品。",
+  "categoryTransfer.export": "导出当前分类",
+  "categoryTransfer.order": "显示顺序",
+  "categoryTransfer.create": "新增",
+  "categoryTransfer.update": "更新",
+  "categoryTransfer.confirm": "我已核对分类、顺序及图片引用，确认整批变更。",
+  "categoryImport.resolveErrors": "请修正全部错误行并重新预览后再确认；本次不会部分导入。",
+  "categoryTree.imageUpload": "上传／替换分类图",
+  "categoryTree.imageHelp": "建议256×256正方形PNG/JPEG，最大8MiB；导航显示32×32。",
+  "categoryTree.imageFailed": "分类图上传失败，请检查文件后重试。",
+
+  'shopping.directory': '全部分类',
+  'shopping.previous_categories': '向左浏览分类',
+  'shopping.next_categories': '向右浏览分类',
+  'shopping.view_all': '查看全部',
+  'shopping.parent': '返回上级分类',
   'pricing.documents':'调价单','pricing.reason_required':'请填写明确的调价或撤销原因；来源待复核单据需补充原因后保存。','pricing.promotion_reduction':'促销价必须低于同渠道、币种和单位的常规价。','pricing.use_documents':'请在调价单中维护价格和优惠期间。',
   'stock.msg.update_failed':'保存失败，已恢复为修改前的值。',
   'geo.title':'国家/地区档案','geo.hint':'按国家/地区、省县、市/区查询和选择基础档案。','geo.country':'国家/地区','geo.prefecture':'省县','geo.city':'市/区','geo.choose_prefecture':'选择省县','geo.choose_city':'选择市/区','geo.selection':'当前选择','geo.country_only':'该国家/地区目前仅预制国家级档案。','geo.prefectures':'省县档案','geo.cities':'市/区档案','geo.code':'代码','geo.name':'名称','geo.reading':'日文读音','geo.source':'国家/地区采用 ISO 3166-1 代码。日本预制 47 个都道府县及全部市区町村，包含政令指定都市及其区。资料核对：2026-11-12。',
@@ -160,7 +188,7 @@ const messages: Dictionary = {
     "browse.result_count": "已显示 {shown} / {total} 条内容",
     "browse.changed": "目录已更新，请刷新以加载一致版本。",
     "browse.invalid": "浏览响应或查询无效。",
-    "browse.loading": "正在加载本批内容…",
+    "browse.loading": "正在加载",
     "browse.sales_pending": "正在核实当前售价与购买资格…",
     "browse.refresh": "刷新目录",
     "browse.service_price": "服务费用",
@@ -1572,7 +1600,7 @@ Object.assign(messages,{"card.reference": "参考价", "card.reference_past": "�
 Object.assign(messages,{"repair.not_derivable":"无法唯一推导，请手动补充","repair.source_title":"核对来源上下文建议","repair.locale_title":"核对 AI 语种建议","repair.review_hint":"请逐项预览；明确确认前不会写入。","repair.overwrite":"覆盖已有值","repair.blank":"保持空白","repair.unchanged":"保留已有值","repair.confirm":"确认并保存","repair.deriving":"正在从已审核来源推导…","repair.generating":"正在生成 AI 建议…","repair.none":"没有可保存的有效建议","repair.ai":"AI 建议","repair.batch_source":"批量补全来源","repair.batch_locale":"建议缺失语种","repair.one_click":"预览来源修复","repair.ai_action":"生成 AI 建议"});
 export default messages;
 
-Object.assign(messages,{"categoryImport.title":"分类路径批量导入","categoryImport.help":"上传 CSV 或 XLSX，接受半角 > 和全角 ＞ 分隔符。路径来源按运营原文记录，预览后再确认写入。","categoryImport.choose":"选择运营文件","categoryImport.preview":"预览导入","categoryImport.row":"行号","categoryImport.sku":"SKU","categoryImport.path":"Costco 面包屑","categoryImport.result":"结果","categoryImport.reason":"原因","categoryImport.matched":"已匹配","categoryImport.newNodes":"将新建节点","categoryImport.unmatched":"未匹配／未知 SKU","categoryImport.export":"导出未匹配清单","categoryImport.confirmCheck":"我已核对预览和商品总数，并明确确认这些分类路径变更。","categoryImport.confirm":"确认导入","categoryImport.done":"导入已确认并留存审计。","categoryImport.failed":"导入失败，没有任何行被静默丢弃。","categoryImport.count":"导入前商品数：{before}；导入后：{after}"});
+Object.assign(messages,{"categoryImport.title":"分类路径批量导入","categoryImport.help":"上传 CSV 或 XLSX，接受半角 > 和全角 ＞ 分隔符。路径来源按运营原文记录，预览后再确认写入。","categoryImport.choose":"选择运营文件","categoryImport.preview":"预览导入","categoryImport.row":"行号","categoryImport.sku":"SKU","categoryImport.path":"分类路径","categoryImport.result":"结果","categoryImport.reason":"原因","categoryImport.matched":"已匹配","categoryImport.newNodes":"将新建节点","categoryImport.unmatched":"未匹配／未知 SKU","categoryImport.export":"导出未匹配清单","categoryImport.confirmCheck":"我已核对预览和商品总数，并明确确认这些分类路径变更。","categoryImport.confirm":"确认导入","categoryImport.done":"导入已确认并留存审计。","categoryImport.failed":"导入失败，没有任何行被静默丢弃。","categoryImport.count":"导入前商品数：{before}；导入后：{after}"});
 
 Object.assign(messages,{"repair.accept_all":"一键接受全部可合并项","repair.edit":"编辑","repair.reject":"拒绝","repair.product":"商品","repair.product_number":"商品 {number}","repair.url_manual":"来源中没有找到商品链接，请粘贴可核验的链接。","repair.ai_failed":"AI 建议暂不可用，请手工填写。","repair.field.supplierKey":"供应商","repair.field.channel":"销售渠道","repair.field.sourceMessageKey":"来源邮件","repair.field.sourceUrl":"商品链接","repair.evidence.master":"商品资料","repair.evidence.source":"来源邮件","repair.channel.online":"线上","repair.channel.warehouse":"线下","repair.locale.zh-CN":"简体中文","repair.locale.zh-TW":"繁体中文","repair.locale.ja-JP":"日文","repair.locale.en-US":"英文","repair.locale_field.name":"名称","repair.locale_field.specification":"规格"});
 
@@ -1593,10 +1621,11 @@ Object.assign(messages, {
   "categoryTree.nameRequired": "请填写日文名称。",
   "categoryTree.translationHelp": "日文名称为权威原名。可选译名须经审核；留空时显示日文原名。",
   "categoryTree.loadFailed": "无法加载分类，请重试刷新分类树。",
-  "categoryTree.deleteBlocked": "含子分类、商品或旧分类对照时无法删除。请先移动或重新归类。",
+  "categoryTree.deleteBlocked": "含子分类、商品、旧分类对照或购物分类映射时无法删除。请先移动商品或调整映射。",
   "categoryImport.template": "下载 CSV 模板",
   "categoryImport.flag": "备注 / 标记",
-  "categoryImport.templateHelp": "支持中文表头：SKU、costco分类路径、路径来源；可追加备注 / 标记 / Note / Flag。下载文件仅含合成示例，请替换为运营清单。三档来源均按提供路径导入。"
+  "categoryImport.exportMappings": "导出当前商品归类",
+  "categoryImport.templateHelp": "请先导出当前归类，保留商品稳定身份和版本。修改分类身份可归入已有分类；KEEP 保留原归属。路径和顺序列仅供参考，排序请在分类管理中编辑。导入不会创建商品，仍兼容旧版 SKU/路径文件。"
 });
 
 Object.assign(messages,{
@@ -1607,7 +1636,7 @@ Object.assign(messages,{
   "categoryImport.deferred": "已推迟",
   "categoryImport.deferredReason": "保持当前分类和可见状态，本次不写入。",
   "categoryImport.deferLabel": "推迟或排除的商品编号",
-  "categoryImport.deferHelp": "默认推迟 C 组 9 件。用逗号、空格或换行分隔商品编号；此名单替换默认值，清空表示全部参与预览。推迟商品保留当前分类和可见状态。修改后须重新预览。",
+  "categoryImport.deferHelp": "默认为空。用逗号、空格或换行分隔需要推迟的商品编号。推迟商品保留当前分类和可见状态，修改后须重新预览。",
   "categoryImport.noMatched": "没有可导入的匹配行，请调整文件或推迟名单后重新预览。",
   "categoryImport.checkRequired": "请勾选核对确认后再导入。",
   "categoryImport.ready": "已核对，可确认导入。"

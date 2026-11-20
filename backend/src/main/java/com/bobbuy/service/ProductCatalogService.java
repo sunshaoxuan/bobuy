@@ -48,7 +48,7 @@ public class ProductCatalogService {
   var prior=recoveries.findById(checkpointId).filter(r->owner().equals(r.merchantId)&&id.equals(r.productId)).orElseThrow(()->invalid("master.conflict"));
   if(!Objects.equals(p.getRecordVersion(),version)||prior.versionAfter!=version||!sources(id).stream().map(i->i.id).toList().equals(prior.original.sourceItemIds()))throw invalid("master.conflict");
   for(var image:prior.original.gallery()){String prefix="/api/storefront/recommendation-images/";if(image.getUrl()!=null&&image.getUrl().startsWith(prefix)&&images.findById(image.getUrl().substring(prefix.length())).filter(value->owner().equals(value.merchantId)).isEmpty())throw invalid("master.image_source");}
-  var redo=checkpoint(p,prior.id);prior.apply(p);products.saveAndFlush(p);retainCheckpoint(redo,p);return profile(p);
+  var redo=checkpoint(p,prior.id);prior.apply(p);taxonomy.removeRetiredAssignments(p);products.saveAndFlush(p);retainCheckpoint(redo,p);return profile(p);
  }
  /** Actual current values, not proposed corrections. Canonical=false requires separate rollback handling. */
  @Transactional(readOnly=true) public List<AuditRow> audit(){
@@ -89,7 +89,7 @@ public class ProductCatalogService {
    if((originalMedia.getSourceUrl()==null||originalMedia.getSourceUrl().isBlank())&&match.isPresent())gallery.add(media(match.get()));else gallery.add(originalMedia);
   }
   if(source.stream().anyMatch(i->!Objects.equals(i.specification,preferred.specification)||!i.categoryIds.equals(preferred.categoryIds)))warnings.add("master.source_conflict");
-  var categories=current.categoryIds().isEmpty()?preferred.categoryIds:current.categoryIds();
+  var categories=taxonomy.currentIds(current.categoryIds().isEmpty()?preferred.categoryIds:current.categoryIds(),product.getMerchantId());
   String supplier=current.supplierId()==null?preferred.supplierId:current.supplierId();
   var candidate=new Input(current.productId(),current.version(),names,descriptions,current.itemNumber()==null?preferred.itemNumber:current.itemNumber(),current.brand(),specifications,current.model(),current.packaging(),categories,supplier,gallery,reviewed||current.translationsReviewed());
   if(!names.equals(current.name()))changes.add("master.names");if(!descriptions.equals(current.description()))changes.add("master.descriptions");
@@ -111,7 +111,10 @@ public class ProductCatalogService {
   if((value.itemNumber()!=null&&value.itemNumber().length()>100)||(value.brand()!=null&&value.brand().length()>200)||(value.model()!=null&&value.model().length()>300)||(value.packaging()!=null&&value.packaging().length()>1000))throw invalid("master.invalid");
   taxonomy.validate(value.categoryIds(),value.supplierId(),false);var urls=new HashSet<String>();
   for(var picture:value.gallery()){
-   if(picture==null||picture.getType()!=MediaType.IMAGE||!urls.add(picture.getUrl()))throw invalid("gallery.invalid");
+   // Preserve an unchanged video already supplied by this owner during manual creation.
+   // This is not an upload/admission path for a new video or a changed URL.
+   boolean retainedManualVideo=picture!=null&&picture.getType()==MediaType.VIDEO&&"USER_PROVIDED_URL".equals(picture.getSourceType())&&product.getMediaGallery().contains(picture);
+   if(picture==null||picture.getType()!=MediaType.IMAGE&&!retainedManualVideo||!urls.add(picture.getUrl()))throw invalid("gallery.invalid");
    boolean userProvided="USER_PROVIDED".equals(picture.getSourceType())&&picture.getSha256()!=null&&Objects.equals(picture.getSourceUrl(),"urn:bobuy:user-upload:"+picture.getSha256());
    if(!userProvided)try{var uri=java.net.URI.create(picture.getSourceUrl());if(!"https".equals(uri.getScheme())||uri.getHost()==null||uri.getUserInfo()!=null||uri.getRawQuery()!=null||uri.getRawFragment()!=null||picture.getSourceUrl().length()>2048)throw new IllegalArgumentException();}catch(Exception e){throw invalid("master.image_source");}
    boolean existing=product.getMediaGallery().stream().anyMatch(p->Objects.equals(p.getUrl(),picture.getUrl()));
@@ -135,8 +138,14 @@ public class ProductCatalogService {
  }
  private List<Profile> saveValidated(List<Input> values,CostcoOnboardingJob automaticJob,CostcoOnboardingDecision.Candidate automaticCandidate){
   boolean automated=automaticJob!=null;users.lockById(owner()).orElseThrow();preview(values);
+  var locked=new LinkedHashMap<String,Product>();
+  for(var value:values.stream().sorted(Comparator.comparing(Input::productId)).toList()){
+   var p=owned(value.productId(),true);
+   if(!Objects.equals(p.getRecordVersion(),value.version()))throw invalid("master.conflict");
+   validate(value,p);locked.put(value.productId(),p);
+  }
   var result=new ArrayList<Profile>();for(var value:values.stream().sorted(Comparator.comparing(Input::productId)).toList()){
-   var p=owned(value.productId(),true);if(!Objects.equals(p.getRecordVersion(),value.version()))throw invalid("master.conflict");
+   var p=locked.get(value.productId());
    if(automated){
     if(!sourceHash(p).equals(automaticCandidate.target().sourceHash())||p.getCatalogData()==null||!automaticJob.supplierId().equals(p.getCatalogData().supplierId())||!automaticJob.market().equals(p.getAttributes().get("sourceMarket")))throw invalid("master.conflict");
     var specification=new LinkedHashMap<>(p.getCatalogData().specification());if(automaticCandidate.specification()!=null)specification.put("ja-JP",automaticCandidate.specification());

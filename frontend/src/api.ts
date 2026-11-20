@@ -177,6 +177,7 @@ export type CostcoOnboardingJobView = {
 };
 
 export type MobileProductResponse = {
+        categoryPath?:string;
         currentRegular?:ProductSale|null;
         product: {
               recordVersion?: number;
@@ -194,8 +195,9 @@ export type MobileProductResponse = {
             isTemporary?: boolean;
             visibilityStatus?: string;
             updatedAt?: string;
-            storageCondition?: string;
-        orderMethod?: string;
+            storageCondition?: 'AMBIENT'|'CHILLED';
+        orderMethod?: 'PRE_ORDER'|'DIRECT_BUY';
+        merchantSkus?:Record<string,string>;
         mediaGallery?: { url: string; title?: Record<string, string>; type: string; visible?: boolean; sourceUrl?: string; sourceDomain?: string; sourceType?: string }[];
         attributes?: Record<string, string>;
         priceTiers?: PriceTier[];
@@ -895,7 +897,7 @@ async function parseErrorMessage(response: Response): Promise<string> {
             return translate(getStoredLocale(), 'maintenance.title');
         }
         if (payload?.message) {
-            if(payload.message.startsWith('onboarding.'))return translate(getStoredLocale(),payload.message);
+            if(payload.message.startsWith('onboarding.')||payload.message.startsWith('master.'))return translate(getStoredLocale(),payload.message);
             return payload.message;
         }
     } catch {
@@ -1119,7 +1121,10 @@ export type PricingInput={channel:string;currency:string;amount:number;startsAt:
 export type PriceDocumentInput={channel:string;currency:string;type:PriceAdjustment['type'];startsAt:string|null;endsAt:string|null;reason:string;version:number;lines:{productId:string;amount:number;beforeAmount?:number|null;unit:string}[]};
 export type PriceDocumentEntry={value:PriceAdjustment;state:string};
 export type PriceDocumentProduct={id:string;itemNumber?:string|null;name:Record<string,string>;currency:string;unit?:string|null};
+export type CancellationPreview={version:number;token:string;impacts:{productId:string;regularAfter:number|null;amountAfter:number|null;currency:string;unit:string}[]};
 export const priceDocumentApi={
+ previewCancellation:(id:number)=>storeGet<CancellationPreview>('/api/merchant/price-adjustments/'+id+'/cancellation-preview'),
+ cancelReviewed:(id:number,preview:CancellationPreview,reason:string)=>postJson<PriceDocumentEntry,object>('/api/merchant/price-adjustments/'+id+'/cancel-reviewed',{version:preview.version,token:preview.token,confirmed:true,reason}),
  list:()=>storeGet<PriceDocumentEntry[]>('/api/merchant/price-adjustments'),
  products:()=>storeGet<PriceDocumentProduct[]>('/api/merchant/price-adjustments/products'),
  save:(value:PriceDocumentInput,id?:number)=>id?putJson<PriceDocumentEntry,object>('/api/merchant/price-adjustments/'+id,value):postJson<PriceDocumentEntry,object>('/api/merchant/price-adjustments',value),
@@ -1127,6 +1132,7 @@ export const priceDocumentApi={
 };
 export type PricingSheet={productId:string;regular:ProductSale|null;visibility:string;orderMethod:string;now:string;timezone:string;effective:{amount:number;currency:string;unit:string;regularAmount:number;adjustmentId?:number}|null;history:{value:PriceAdjustment;state:string}[]};
 export const productPricingApi={
+ correctUnit:(id:string,value:{revision:number;amount:number;currency:string;unit:string;documents:Record<number,number>;reason:string})=>postJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/unit-correction',{...value,confirmed:true}),
  get:(id:string)=>storeGet<PricingSheet>('/api/merchant/product-pricing/'+encodeURIComponent(id)),
  draft:(id:string,value:PricingInput,adjustmentId?:number)=>adjustmentId?putJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/adjustments/'+adjustmentId,value):postJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/adjustments',value),
  approve:(id:string,adjustment:PriceAdjustment)=>postJson<PricingSheet,object>('/api/merchant/product-pricing/'+encodeURIComponent(id)+'/adjustments/'+adjustment.id+'/approve',{version:adjustment.version,confirmed:true}),
@@ -1151,8 +1157,9 @@ export const productCatalogApi={
  save:(rows:CatalogInput[])=>putJson<{value:CatalogInput;canonical:boolean;sourceItemIds:number[];recoveryId?:string}[],object>('/api/merchant/product-catalog',{rows,reviewed:true}),
  upload:async(id:string,file:File,sourceUrl:string,label:string)=>{const prepared=await prepareImageUpload(file);const form=new FormData();form.set('file',prepared);form.set('sourceUrl',sourceUrl);form.set('label',label);form.set('verified','true');const response=await authorizedFetch('/api/merchant/product-catalog/'+encodeURIComponent(id)+'/images',{method:'POST',body:form});if(!response.ok)throw new Error(await parseErrorMessage(response));return parseSuccessPayload<CatalogMedia>(response);}
 };
-export type CategoryTreeNode={id:string;parentId:string|null;name:Record<string,string>;fullPath:string[];sortOrder:number;productCount:number;deleteBlocked?:boolean};
+export type CategoryTreeNode={imageUrl?:string|null;id:string;parentId:string|null;name:Record<string,string>;fullPath:string[];sortOrder:number;productCount:number;deleteBlocked?:boolean};
 export const categoryTreeApi={
+ uploadImage:async(id:string,file:File)=>{const form=new FormData();form.set('file',await prepareImageUpload(file));const response=await authorizedFetch('/api/category-tree/'+encodeURIComponent(id)+'/image',{method:'POST',body:form});if(!response.ok)throw new Error(await parseErrorMessage(response));return parseSuccessPayload<string>(response);},
  list:()=>storeGet<CategoryTreeNode[]>('/api/category-tree'),
  create:(value:{parentId:string|null;name:Record<string,string>;sortOrder?:number})=>postJson<CategoryTreeNode,object>('/api/category-tree',value),
  update:(id:string,value:{parentId:string|null;name?:Record<string,string>;sortOrder?:number})=>putJson<CategoryTreeNode,object>('/api/category-tree/'+encodeURIComponent(id),value),
@@ -1352,7 +1359,10 @@ export const api = {
             ...suggestion,
             mediaGallery: suggestion.mediaGallery?.map(media => ({...media, type: media.type?.toUpperCase()}))
         }),
+    product: (id:string) => storeGet<MobileProductResponse>('/api/mobile/products/'+encodeURIComponent(id)),
     products: () => fetchJson<MobileProductResponse[]>('/api/mobile/products', fallback.products),
+    createProduct: (input: ProductPatch & {requestId:string;specification?:Record<string,string>;categoryNodeId?:string|null}) =>
+        postJson<MobileProductResponse,object>('/api/mobile/products',input),
     patchProduct: (id: string, patch: ProductPatch) =>
         patchJson<MobileProductResponse, ProductPatch>(`/api/mobile/products/${id}`, patch),
     procurementHud: (tripId: number) =>
@@ -1596,6 +1606,9 @@ export const productMarkerApi = {
 export const storefrontApi = {
     profile: () => storeGet<SelfProfile>('/api/auth/profile'),
     saveProfile: (payload: SelfProfilePatch) => patchJson<SelfProfile, SelfProfilePatch>('/api/auth/profile', payload),
+    categoryIcons:()=>storeGet<string[]>('/api/storefront/category-icons'),
+    productOverview:(query:BrowseQuery)=>storeGet<BrowsePage<ProductBrowseCard>>('/api/storefront/product-browse/overview?'+browseQuery(query)),
+    productShelf:(query:BrowseQuery)=>storeGet<BrowsePage<ProductBrowseCard>>('/api/storefront/product-browse/shelf?'+browseQuery(query)),
     productBrowse:(query:BrowseQuery)=>storeGet<BrowsePage<ProductBrowseCard>>('/api/storefront/product-browse?'+browseQuery(query)),
     productDetail:(id:string,merchantId?:number)=>storeGet<{item:PublicCatalogEntry;markers:ProductMarkerDefinition[];revision:string}>('/api/storefront/product-browse/'+encodeURIComponent(id)+'?'+browseQuery({merchantId})),
     productSales:(ids:string[])=>{if(!ids.length||ids.length>24||new Set(ids).size!==ids.length)return Promise.reject(new Error('browse.invalid'));return storeGet<StoreProduct[]>('/api/storefront/product-sales?'+new URLSearchParams({productIds:ids.join(',')}));},
@@ -1620,8 +1633,8 @@ export type SelfProfilePatch = {name?:string;email?:string;phone?:string|null;de
 
 export type BrowseQuery={sort?:string;page?:number;merchantId?:number;query?:string;category?:string;locale?:string;marked?:boolean;markedFirst?:boolean;revision?:string;issueId?:number;period?:'current'|'history'|'all'};
 function browseQuery(query:BrowseQuery){return new URLSearchParams(Object.entries(query).filter(([,value])=>value!==undefined).map(([key,value])=>[key,String(value)]));}
-export type BrowseFacet=RecommendationLabel&{count:number};
-export type BrowsePage<T>={items:T[];page:number;size:number;scopeTotal:number;matchedTotal:number;hasNext:boolean;revision:string;datasetRevision:string;categories:BrowseFacet[];unclassified:number;markedScopeTotal?:number;japanDay?:string;productOccurrences?:number;serviceCards?:number};
+export type BrowseFacet=RecommendationLabel&{count:number;parentId?:string|null;icon?:string|null;imageUrl?:string|null};
+export type BrowsePage<T>={items:T[];page:number;size:number;scopeTotal:number;matchedTotal:number;hasNext:boolean;revision:string;datasetRevision:string;categories:BrowseFacet[];unclassified:number;shelves?:{category:string;items:T[];total:number}[];selectedCategory?:string;markedScopeTotal?:number;japanDay?:string;productOccurrences?:number;serviceCards?:number};
 export type CardReference={priceChange?:PriceChangeView|null;originalPrice?:number|null;discountAmount?:number|null;amount:number;currency:string;unit?:string|null;postId:number;itemId:number;state:'ACTIVE'|'EXPIRED'|'FUTURE'|'UNKNOWN'};
 export type ProductBrowseCard=Omit<PublicCatalogEntry,'gallery'|'description'|'referenceOffers'>&{image:RecommendationPicture|null;markers:ProductMarkerDefinition[];reference?:CardReference|null};
 export type RecommendationBrowseItem=Omit<RecommendationItem,'imageUrl'|'gallery'|'description'|'sourceFacts'>&{image:RecommendationPicture|null;rating?:number|null};

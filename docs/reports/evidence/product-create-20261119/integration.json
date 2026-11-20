@@ -1,0 +1,18 @@
+{
+  "runtime": "PostgreSQL 18.6 with V46, real HTTP; only synthetic products",
+  "checks": {
+    "realPgRollbackRetryConcurrent": {
+      "result": "PASS",
+      "id": "9bee1ab8-9071-3203-b57d-faf0919270ee"
+    },
+    "existingPriceAndPublication": {
+      "result": "PASS",
+      "id": "1a10e496-77c8-3359-a69d-60674a0cc82f",
+      "price": {
+        "amount": 2998,
+        "currency": "JPY",
+        "unit": "box"
+      }
+    }
+  }
+}

@@ -1,0 +1,2427 @@
+{
+  "runtime": "real Spring Boot/H2 memory + Vite; synthetic fixture only",
+  "baseCommit": "dcbfbbb",
+  "checks": {
+    "privatePriceNotDisclosed": "PASS",
+    "cancelDuplicateAndReadBack": "PASS",
+    "unitCorrectionRetainsHistory": "PASS",
+    "repeatConfirmationNoDuplicate": "PASS (successful PUT reconciled by revision/history readback)",
+    "explicitPublication": "PASS",
+    "reloadPersistence": "PASS",
+    "publicChineseSearchCategoryDetail": "PASS",
+    "fourLanguagePublicationGuardAndUnitGeometry": "PASS"
+  },
+  "screens": [
+    "private-price-1280.png",
+    "private-price-390.png",
+    "cancel-preview-1280.png",
+    "cancel-preview-390.png",
+    "private-price-1280.png",
+    "private-price-390.png",
+    "unit-correction-1280.png",
+    "unit-correction-390.png",
+    "publish-confirmation-1280.png",
+    "publish-confirmation-390.png",
+    "public-search-1280.png",
+    "public-category-1280.png",
+    "public-search-390.png",
+    "public-category-390.png",
+    "publish-blocked-en-US-390.png",
+    "publish-blocked-en-US-390.png",
+    "unit-final-en-US-390.png",
+    "unit-final-en-US-1280.png",
+    "publish-blocked-zh-CN-390.png",
+    "unit-final-zh-CN-390.png",
+    "publish-blocked-zh-TW-390.png",
+    "unit-final-zh-TW-390.png",
+    "publish-blocked-ja-JP-390.png",
+    "unit-final-ja-JP-390.png",
+    "public-detail-390.png",
+    "publish-blocked-en-US-390.png",
+    "unit-final-en-US-390.png",
+    "unit-final-en-US-1280.png",
+    "publish-blocked-zh-CN-390.png",
+    "unit-final-zh-CN-390.png",
+    "publish-blocked-zh-TW-390.png",
+    "unit-final-zh-TW-390.png",
+    "publish-blocked-ja-JP-390.png",
+    "unit-final-ja-JP-390.png",
+    "public-detail-390.png"
+  ],
+  "geometry": [
+    {
+      "name": "private-price-1280",
+      "overflow": false,
+      "viewport": 1280,
+      "controls": [
+        {
+          "text": "Close",
+          "width": 24,
+          "height": 24,
+          "minWidth": "auto",
+          "minHeight": "auto",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "Publish product and selling price",
+          "width": 233.578125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "Correct price unit only",
+          "width": 168.171875,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "New document",
+          "width": 125.390625,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "borderWidth": "1px",
+          "background": "rgb(217, 54, 48)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "text": "Refresh",
+          "width": 81.03125,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "Cancel document",
+          "width": 140.953125,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "Cancel document",
+          "width": 140.953125,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "name": "private-price-390",
+      "overflow": false,
+      "viewport": 390,
+      "controls": [
+        {
+          "text": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "Publish product and selling price",
+          "width": 233.578125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "Correct price unit only",
+          "width": 168.171875,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "New document",
+          "width": 125.390625,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "borderWidth": "1px",
+          "background": "rgb(217, 54, 48)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "text": "Refresh",
+          "width": 81.03125,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "Cancel document",
+          "width": 140.953125,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "Cancel document",
+          "width": 140.953125,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "name": "cancel-preview-1280",
+      "overflow": false,
+      "viewport": 1280,
+      "controls": [
+        {
+          "text": "Close",
+          "width": 31.9688720703125,
+          "height": 31.968856811523438,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "I reviewed the products, prices, period and reason",
+          "width": 342.1823425292969,
+          "height": 43.95721435546875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "",
+          "width": 15.98443603515625,
+          "height": 15.98443603515625,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "Cancel",
+          "width": 75.5201416015625,
+          "height": 43.95721435546875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "OK",
+          "width": 52.18353271484375,
+          "height": 43.95721435546875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        }
+      ]
+    },
+    {
+      "name": "cancel-preview-390",
+      "overflow": false,
+      "viewport": 390,
+      "controls": [
+        {
+          "text": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "I reviewed the products, prices, period and reason",
+          "width": 326,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "",
+          "width": 16,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "Cancel",
+          "width": 75.59375,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "OK",
+          "width": 52.234375,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        }
+      ]
+    },
+    {
+      "name": "private-price-1280",
+      "overflow": false,
+      "viewport": 1280,
+      "controls": [
+        {
+          "text": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "Publish product and selling price",
+          "width": 233.578125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "Correct price unit only",
+          "width": 168.171875,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "New document",
+          "width": 125.390625,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "borderWidth": "1px",
+          "background": "rgb(217, 54, 48)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "text": "Refresh",
+          "width": 81.03125,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "Cancel document",
+          "width": 140.953125,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "name": "private-price-390",
+      "overflow": false,
+      "viewport": 390,
+      "controls": [
+        {
+          "text": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "Publish product and selling price",
+          "width": 233.578125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "Correct price unit only",
+          "width": 168.171875,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "New document",
+          "width": 125.390625,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "borderWidth": "1px",
+          "background": "rgb(217, 54, 48)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "text": "Refresh",
+          "width": 81.03125,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "Cancel document",
+          "width": 140.953125,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "name": "unit-correction-1280",
+      "overflow": false,
+      "viewport": 1280,
+      "controls": [
+        {
+          "text": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "",
+          "width": 472,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "text": "I reviewed the unchanged amounts and currency and the documents below",
+          "width": 472,
+          "height": 72.1875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgb(83, 95, 85)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "",
+          "width": 472,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "Cancel",
+          "width": 75.59375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "OK",
+          "width": 52.234375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "borderWidth": "1px",
+          "background": "rgb(217, 54, 48)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "name": "unit-correction-390",
+      "overflow": false,
+      "viewport": 390,
+      "controls": [
+        {
+          "text": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "",
+          "width": 326,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "text": "I reviewed the unchanged amounts and currency and the documents below",
+          "width": 326,
+          "height": 94.28125,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgb(83, 95, 85)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "",
+          "width": 326,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "Cancel",
+          "width": 75.59375,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "OK",
+          "width": 52.234375,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "borderWidth": "1px",
+          "background": "rgb(217, 54, 48)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "name": "publish-confirmation-1280",
+      "overflow": false,
+      "viewport": 1280,
+      "controls": [
+        {
+          "text": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "I reviewed the product details and authorize publishing the product and selling price",
+          "width": 472,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "",
+          "width": 16,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "Cancel",
+          "width": 75.59375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "OK",
+          "width": 52.234375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        }
+      ]
+    },
+    {
+      "name": "publish-confirmation-390",
+      "overflow": false,
+      "viewport": 390,
+      "controls": [
+        {
+          "text": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "I reviewed the product details and authorize publishing the product and selling price",
+          "width": 326,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "",
+          "width": 16,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "text": "Cancel",
+          "width": 75.59375,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "text": "OK",
+          "width": 52.234375,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "network": [
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/product-pricing/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/mobile/products/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/product-pricing/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/product-pricing/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    }
+  ],
+  "public": {
+    "quote": {
+      "price": 2998,
+      "unit": "箱"
+    },
+    "matched": 1,
+    "category": "shop-price-ui-juice"
+  },
+  "result": "PASS",
+  "finalGeometry": [
+    {
+      "name": "publish-blocked-en-US-390",
+      "overflow": false,
+      "viewport": 390,
+      "bounds": {
+        "left": 0,
+        "right": 390
+      },
+      "controls": [
+        {
+          "label": "Close",
+          "tag": "BUTTON",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderWidth": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "Publish product and selling price",
+          "tag": "BUTTON",
+          "width": 233.578125,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "label": "New document",
+          "tag": "BUTTON",
+          "width": 125.390625,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "background": "rgb(217, 54, 48)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "Refresh",
+          "tag": "BUTTON",
+          "width": 81.03125,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "name": "unit-final-en-US-390",
+      "overflow": false,
+      "viewport": 390,
+      "bounds": {
+        "left": 8,
+        "right": 382
+      },
+      "controls": [
+        {
+          "label": "Close",
+          "tag": "BUTTON",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderWidth": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "",
+          "tag": "INPUT",
+          "width": 326,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "I reviewed the unchanged amounts and currency and the documents below",
+          "tag": "LABEL",
+          "width": 326,
+          "height": 94.28125,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(83, 95, 85)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "",
+          "tag": "INPUT",
+          "width": 326,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderWidth": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "Cancel",
+          "tag": "BUTTON",
+          "width": 75.59375,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "OK",
+          "tag": "BUTTON",
+          "width": 52.234375,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        }
+      ]
+    },
+    {
+      "name": "unit-final-en-US-1280",
+      "overflow": false,
+      "viewport": 1280,
+      "bounds": {
+        "left": 380,
+        "right": 900
+      },
+      "controls": [
+        {
+          "label": "Close",
+          "tag": "BUTTON",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderWidth": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "",
+          "tag": "INPUT",
+          "width": 472,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "I reviewed the unchanged amounts and currency and the documents below",
+          "tag": "LABEL",
+          "width": 472,
+          "height": 72.1875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(83, 95, 85)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "",
+          "tag": "INPUT",
+          "width": 472,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderWidth": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "Cancel",
+          "tag": "BUTTON",
+          "width": 75.59375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "OK",
+          "tag": "BUTTON",
+          "width": 52.234375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        }
+      ]
+    },
+    {
+      "name": "publish-blocked-zh-CN-390",
+      "overflow": false,
+      "viewport": 390,
+      "bounds": {
+        "left": 0,
+        "right": 390
+      },
+      "controls": [
+        {
+          "label": "Close",
+          "tag": "BUTTON",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderWidth": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "公开商品与售价",
+          "tag": "BUTTON",
+          "width": 130,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "label": "新增调价单",
+          "tag": "BUTTON",
+          "width": 102,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "background": "rgb(217, 54, 48)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "刷 新",
+          "tag": "BUTTON",
+          "width": 63.140625,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "name": "unit-final-zh-CN-390",
+      "overflow": false,
+      "viewport": 390,
+      "bounds": {
+        "left": 8,
+        "right": 382
+      },
+      "controls": [
+        {
+          "label": "Close",
+          "tag": "BUTTON",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderWidth": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "",
+          "tag": "INPUT",
+          "width": 326,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "已核对金额币种不变及下列传票范围",
+          "tag": "LABEL",
+          "width": 326,
+          "height": 72.1875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(83, 95, 85)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "",
+          "tag": "INPUT",
+          "width": 326,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderWidth": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "取 消",
+          "tag": "BUTTON",
+          "width": 63.140625,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "确 定",
+          "tag": "BUTTON",
+          "width": 63.140625,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        }
+      ]
+    },
+    {
+      "name": "publish-blocked-zh-TW-390",
+      "overflow": false,
+      "viewport": 390,
+      "bounds": {
+        "left": 0,
+        "right": 390
+      },
+      "controls": [
+        {
+          "label": "Close",
+          "tag": "BUTTON",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderWidth": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "公開商品與售價",
+          "tag": "BUTTON",
+          "width": 130,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "label": "新增調價單",
+          "tag": "BUTTON",
+          "width": 102,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "background": "rgb(217, 54, 48)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "重新整理",
+          "tag": "BUTTON",
+          "width": 88,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "name": "unit-final-zh-TW-390",
+      "overflow": false,
+      "viewport": 390,
+      "bounds": {
+        "left": 8,
+        "right": 382
+      },
+      "controls": [
+        {
+          "label": "Close",
+          "tag": "BUTTON",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderWidth": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "",
+          "tag": "INPUT",
+          "width": 326,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "已核對金額幣別不變及下列傳票範圍",
+          "tag": "LABEL",
+          "width": 326,
+          "height": 72.1875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(83, 95, 85)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "",
+          "tag": "INPUT",
+          "width": 326,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderWidth": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "取 消",
+          "tag": "BUTTON",
+          "width": 63.140625,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "確 定",
+          "tag": "BUTTON",
+          "width": 63.140625,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        }
+      ]
+    },
+    {
+      "name": "publish-blocked-ja-JP-390",
+      "overflow": false,
+      "viewport": 390,
+      "bounds": {
+        "left": 0,
+        "right": 390
+      },
+      "controls": [
+        {
+          "label": "Close",
+          "tag": "BUTTON",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderWidth": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "商品と販売価格を公開",
+          "tag": "BUTTON",
+          "width": 172,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "label": "伝票を作成",
+          "tag": "BUTTON",
+          "width": 102,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "background": "rgb(217, 54, 48)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "更 新",
+          "tag": "BUTTON",
+          "width": 63.140625,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "name": "unit-final-ja-JP-390",
+      "overflow": false,
+      "viewport": 390,
+      "bounds": {
+        "left": 8,
+        "right": 382
+      },
+      "controls": [
+        {
+          "label": "Close",
+          "tag": "BUTTON",
+          "width": 44,
+          "height": 44,
+          "minWidth": "44px",
+          "minHeight": "44px",
+          "radius": "6px",
+          "borderWidth": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "",
+          "tag": "INPUT",
+          "width": 326,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "金額・通貨が変わらないことと下記の伝票範囲を確認しました",
+          "tag": "LABEL",
+          "width": 326,
+          "height": 94.28125,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(83, 95, 85)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "",
+          "tag": "INPUT",
+          "width": 326,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderWidth": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "キャンセル",
+          "tag": "BUTTON",
+          "width": 102,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "OK",
+          "tag": "BUTTON",
+          "width": 51.4375,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderWidth": "1px",
+          "borderColor": "rgb(217, 217, 217)",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        }
+      ]
+    }
+  ],
+  "finalNetwork": [
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-reviews/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-reviews/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/product-pricing/prd-1000",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/product-pricing/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-reviews/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-reviews/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/product-pricing/prd-1000",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/product-pricing/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-reviews/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-reviews/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/product-pricing/prd-1000",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/product-pricing/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-reviews/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-reviews/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/product-pricing/prd-1000",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/product-pricing/price-ui-1495250",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments/products",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/price-adjustments",
+      "status": 200
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    }
+  ],
+  "finalErrors": [],
+  "loadedFrontendModules": {
+    "/src/api.ts": "a8ff1f1b951225c98f4786a37a2aa0387595cdb1820125c98731cda0e49e6b99",
+    "/src/pages/StockMaster.tsx": "5bba60a9db1dbfc8de3c5b1d8adf078033f429bc29c08e200b61838cab623f41",
+    "/src/components/ProductPricingPanel.tsx": "0c9021cb4665bb0ace2fcd6ee19ad618346bf7fb185b3f53f474f40c5749ebc9",
+    "/src/components/PriceAdjustmentWorkspace.tsx": "23a53698f676fc316075b6b6fb9ba00099f7c38218d79e30b3648763bf67fc76",
+    "/src/components/priceDocumentText.ts": "e2d90892084eb8c21a43f8fa25ca361def505f1dd8406ec46f4d10bf7ac67721",
+    "/src/components/productPricing.css": "3f5e4abf00852042d4567efc6cc10629daef33d6238d5f5cc7b4dee1ac1b91d4"
+  }
+}

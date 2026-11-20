@@ -1,0 +1,1606 @@
+{
+  "result": "PASS",
+  "results": [
+    {
+      "width": 1920,
+      "height": 900,
+      "result": "PASS",
+      "states": {
+        "allExpanded": {
+          "width": 88,
+          "height": 100,
+          "minWidth": "0px",
+          "minHeight": "100px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "outline": "rgb(36, 36, 36) none 3px",
+          "focus": false,
+          "decoration": "underline",
+          "imageWidth": 48,
+          "imageHeight": 48
+        },
+        "allCompact": {
+          "width": 88,
+          "height": 84,
+          "minWidth": "0px",
+          "minHeight": "84px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "outline": "rgb(36, 36, 36) none 3px",
+          "focus": false,
+          "decoration": "underline",
+          "imageWidth": 36,
+          "imageHeight": 36
+        },
+        "allHover": {
+          "width": 88,
+          "height": 84,
+          "minWidth": "0px",
+          "minHeight": "84px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "background": "rgb(229, 229, 223)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "outline": "rgb(36, 36, 36) none 3px",
+          "focus": false,
+          "decoration": "underline",
+          "imageWidth": 36,
+          "imageHeight": 36
+        },
+        "rootExpanded": {
+          "width": 88,
+          "height": 100,
+          "minWidth": "0px",
+          "minHeight": "100px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "outline": "rgb(36, 36, 36) none 3px",
+          "focus": false,
+          "decoration": "underline",
+          "imageWidth": 48,
+          "imageHeight": 48
+        },
+        "rootCompact": {
+          "width": 88,
+          "height": 84,
+          "minWidth": "0px",
+          "minHeight": "84px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "outline": "rgb(36, 36, 36) none 3px",
+          "focus": false,
+          "decoration": "underline",
+          "imageWidth": 36,
+          "imageHeight": 36
+        },
+        "cardDocumentTop": {
+          "before": 384.75,
+          "after": 384.75
+        },
+        "normalHover": {
+          "width": 88,
+          "height": 84,
+          "minWidth": "0px",
+          "minHeight": "84px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "background": "rgb(240, 240, 237)",
+          "color": "rgb(25, 25, 25)",
+          "shadow": "none",
+          "outline": "rgb(25, 25, 25) none 3px",
+          "focus": false,
+          "decoration": "none",
+          "imageWidth": 36,
+          "imageHeight": 36
+        },
+        "selectedHover": {
+          "width": 88,
+          "height": 84,
+          "minWidth": "0px",
+          "minHeight": "84px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "background": "rgb(229, 229, 223)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "outline": "rgb(36, 36, 36) none 3px",
+          "focus": false,
+          "decoration": "underline",
+          "imageWidth": 36,
+          "imageHeight": 36
+        },
+        "focus": {
+          "width": 88,
+          "height": 84,
+          "minWidth": "0px",
+          "minHeight": "84px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "outline": "rgb(36, 36, 36) solid 2px",
+          "focus": true,
+          "decoration": "underline",
+          "imageWidth": 36,
+          "imageHeight": 36
+        }
+      },
+      "errors": [],
+      "network": [
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/category-icons",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/overview",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/product-priority-fixture-01",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/product-priority-fixture-02",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/product-priority-fixture-03",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-18",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-17",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-2",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-17",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-18",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-19",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-3",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-20",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-4",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-5",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-6",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-7",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-8",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-9",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/product-priority-fixture-07",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "result": "PASS",
+      "states": {
+        "allExpanded": {
+          "width": 88,
+          "height": 100,
+          "minWidth": "0px",
+          "minHeight": "100px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "outline": "rgb(36, 36, 36) none 3px",
+          "focus": false,
+          "decoration": "underline",
+          "imageWidth": 48,
+          "imageHeight": 48
+        },
+        "allCompact": {
+          "width": 88,
+          "height": 84,
+          "minWidth": "0px",
+          "minHeight": "84px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "outline": "rgb(36, 36, 36) none 3px",
+          "focus": false,
+          "decoration": "underline",
+          "imageWidth": 36,
+          "imageHeight": 36
+        },
+        "allHover": {
+          "width": 88,
+          "height": 84,
+          "minWidth": "0px",
+          "minHeight": "84px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "background": "rgb(229, 229, 223)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "outline": "rgb(36, 36, 36) none 3px",
+          "focus": false,
+          "decoration": "underline",
+          "imageWidth": 36,
+          "imageHeight": 36
+        },
+        "rootExpanded": {
+          "width": 88,
+          "height": 100,
+          "minWidth": "0px",
+          "minHeight": "100px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "outline": "rgb(36, 36, 36) none 3px",
+          "focus": false,
+          "decoration": "underline",
+          "imageWidth": 48,
+          "imageHeight": 48
+        },
+        "rootCompact": {
+          "width": 88,
+          "height": 84,
+          "minWidth": "0px",
+          "minHeight": "84px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "outline": "rgb(36, 36, 36) none 3px",
+          "focus": false,
+          "decoration": "underline",
+          "imageWidth": 36,
+          "imageHeight": 36
+        },
+        "cardDocumentTop": {
+          "before": 416.75,
+          "after": 416.75
+        },
+        "normalHover": {
+          "width": 88,
+          "height": 84,
+          "minWidth": "0px",
+          "minHeight": "84px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "background": "rgb(240, 240, 237)",
+          "color": "rgb(25, 25, 25)",
+          "shadow": "none",
+          "outline": "rgb(25, 25, 25) none 3px",
+          "focus": false,
+          "decoration": "none",
+          "imageWidth": 36,
+          "imageHeight": 36
+        },
+        "selectedHover": {
+          "width": 88,
+          "height": 84,
+          "minWidth": "0px",
+          "minHeight": "84px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "background": "rgb(229, 229, 223)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "outline": "rgb(36, 36, 36) none 3px",
+          "focus": false,
+          "decoration": "underline",
+          "imageWidth": 36,
+          "imageHeight": 36
+        },
+        "focus": {
+          "width": 88,
+          "height": 84,
+          "minWidth": "0px",
+          "minHeight": "84px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "outline": "rgb(36, 36, 36) solid 2px",
+          "focus": true,
+          "decoration": "underline",
+          "imageWidth": 36,
+          "imageHeight": 36
+        }
+      },
+      "errors": [],
+      "network": [
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/category-icons",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/overview",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/product-priority-fixture-01",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/product-priority-fixture-02",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/product-priority-fixture-03",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/product-priority-fixture-07",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-17",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-19",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-20",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-18",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-2",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-3",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-4",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-5",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-7",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-6",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-8",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-9",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "result": "PASS",
+      "states": {
+        "allExpanded": {
+          "width": 88,
+          "height": 100,
+          "minWidth": "0px",
+          "minHeight": "100px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "outline": "rgb(36, 36, 36) none 3px",
+          "focus": false,
+          "decoration": "underline",
+          "imageWidth": 48,
+          "imageHeight": 48
+        },
+        "allCompact": {
+          "width": 88,
+          "height": 84,
+          "minWidth": "0px",
+          "minHeight": "84px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "outline": "rgb(36, 36, 36) none 3px",
+          "focus": false,
+          "decoration": "underline",
+          "imageWidth": 36,
+          "imageHeight": 36
+        },
+        "allHover": {
+          "width": 88,
+          "height": 84,
+          "minWidth": "0px",
+          "minHeight": "84px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "background": "rgb(229, 229, 223)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "outline": "rgb(36, 36, 36) none 3px",
+          "focus": false,
+          "decoration": "underline",
+          "imageWidth": 36,
+          "imageHeight": 36
+        },
+        "rootExpanded": {
+          "width": 88,
+          "height": 100,
+          "minWidth": "0px",
+          "minHeight": "100px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "outline": "rgb(36, 36, 36) none 3px",
+          "focus": false,
+          "decoration": "underline",
+          "imageWidth": 48,
+          "imageHeight": 48
+        },
+        "rootCompact": {
+          "width": 88,
+          "height": 84,
+          "minWidth": "0px",
+          "minHeight": "84px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "outline": "rgb(36, 36, 36) none 3px",
+          "focus": false,
+          "decoration": "underline",
+          "imageWidth": 36,
+          "imageHeight": 36
+        },
+        "cardDocumentTop": {
+          "before": 469.546875,
+          "after": 469.546875
+        },
+        "normalHover": {
+          "width": 88,
+          "height": 84,
+          "minWidth": "0px",
+          "minHeight": "84px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(25, 25, 25)",
+          "background": "rgb(240, 240, 237)",
+          "color": "rgb(25, 25, 25)",
+          "shadow": "none",
+          "outline": "rgb(25, 25, 25) none 3px",
+          "focus": false,
+          "decoration": "none",
+          "imageWidth": 36,
+          "imageHeight": 36
+        },
+        "selectedHover": {
+          "width": 88,
+          "height": 84,
+          "minWidth": "0px",
+          "minHeight": "84px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "background": "rgb(229, 229, 223)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "outline": "rgb(36, 36, 36) none 3px",
+          "focus": false,
+          "decoration": "underline",
+          "imageWidth": 36,
+          "imageHeight": 36
+        },
+        "focus": {
+          "width": 88,
+          "height": 84,
+          "minWidth": "0px",
+          "minHeight": "84px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "outline": "rgb(36, 36, 36) solid 2px",
+          "focus": true,
+          "decoration": "underline",
+          "imageWidth": 36,
+          "imageHeight": 36
+        }
+      },
+      "errors": [],
+      "network": [
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/category-icons",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/overview",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/product-priority-fixture-01",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/product-priority-fixture-02",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-3-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/product-priority-fixture-03",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-17",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-18",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/product-priority-fixture-07",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-2",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-20",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-19",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-3",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-4",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-5",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-7",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-9",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-6",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-7-8",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "result": "PASS",
+      "states": {
+        "allExpanded": {
+          "width": 88,
+          "height": 100,
+          "minWidth": "0px",
+          "minHeight": "100px",
+          "radius": "8px",
+          "borderWidth": "0px",
+          "borderColor": "rgb(36, 36, 36)",
+          "background": "rgb(238, 238, 233)",
+          "color": "rgb(36, 36, 36)",
+          "shadow": "rgb(209, 209, 201) 0px 0px 0px 1px inset",
+          "outline": "rgb(36, 36, 36) none 3px",
+          "focus": false,
+          "decoration": "underline",
+          "imageWidth": 48,
+          "imageHeight": 48
+        }
+      },
+      "errors": [],
+      "network": [
+        {
+          "path": "/api/storefront/recommendation-nodes",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/trips",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/category-icons",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-02",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-01",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/overview",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-05",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-08",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-04",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-03",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-07",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-06",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-09",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/icon-priority-fixture-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/product-priority-fixture-01",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-1-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-browse/shelf",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-1",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-10",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-12",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-14",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-13",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-11",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-15",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-popularity/progressive-item-2-16",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/recommendation-images/product-priority-fixture-02",
+          "status": 200
+        },
+        {
+          "path": "/api/storefront/product-sales",
+          "status": 200
+        }
+      ]
+    }
+  ]
+}

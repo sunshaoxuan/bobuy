@@ -1,0 +1,85 @@
+{
+  "scope": "fourth item only; original price/UI evidence reused where inputs unchanged",
+  "applicationUniquePass": 45,
+  "applicationResults": {
+    "RetiredCategoryServiceTest": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "RecommendationItemPublicationTest": {
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "ProductIdentityRecoveryTest": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "ReferenceProductIdentityTest": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "ProductCatalogIntegrationTest": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "PublicProductCatalogProjectionTest": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "ProcurementHudServiceTest": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "validUniqueTests": 3
+    }
+  },
+  "postgresql16": "PASS: exact scope, drift, atomic failure, concurrent replay, guards, history, guarded restore",
+  "postgresql18": {
+    "version": "18.6",
+    "image": "postgres:18.6-alpine3.23",
+    "imageDigest": "sha256:f1031bf693d8d60b0a0380c51a3510607c7a93c7c1d18bf7af94a3a8dbeb40b8",
+    "result": "PASS",
+    "command": "CATEGORY_RETIREMENT_TEST_PG_VERSION=18.6 python3 scripts/test_category_retirement.py",
+    "durationSeconds": 12.686,
+    "database": "category_retirement_synthetic (created and dropped by test)",
+    "additionalChecks": [
+      "0600 manifest",
+      "read-only CLI status",
+      "Exact Decimal reviewedAt 1795002605.495870245 after apply and restore",
+      "Exact nested array price 123.123456789012345678901 after apply and restore",
+      "Deep JSON/Unicode private-file roundtrip and checksum",
+      "Reject binary float, non-finite numbers and format 1 manifests"
+    ],
+    "tests": 2
+  },
+  "sha256": {
+    "scripts/category_retirement.py": "63b1e52c535e0b4a44997ae48ffebe4e851fc6404e38b44311e786ddb11f7878",
+    "scripts/test_category_retirement.py": "19970d55fb1234ee71c169616403edfb117a980be6856105c3c951140c5daa62",
+    "scripts/category-retirement/20261119-scope.json": "9f92003c6ef341a1ae0eb45ac9568de6d7feac1616fefeb5b2e7ed9793a74349",
+    "backend/src/main/resources/db/migration/V46__legacy_category_retirement_archive.sql": "f890d01e3120320b9497b0dac9f8bdf60940d9a59512e7893d5b9d2279464f96"
+  },
+  "productionReadsByCloud": 0,
+  "productionWritesByCloud": 0,
+  "deployed": false,
+  "remaining": [
+    "local coordinator validates deployed compatible revision/digest",
+    "local coordinator captures and reviews actual ID-bound plan",
+    "local coordinator applies/restores only under scope comparison and verifies production"
+  ],
+  "manifestFormat": 2,
+  "previousManifests": "format 1 rejected; recapture with current tool, never rehash rounded evidence",
+  "compatibleRevision": "40-hex format validation and audit declaration only; local operator verifies actual running deployment"
+}

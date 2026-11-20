@@ -13,4 +13,6 @@ public class PriceAdjustmentDocumentController {
  @PutMapping("/{id}") public ApiResponse<?> edit(@PathVariable Long id,@Valid @RequestBody ProductPricingService.DocumentInput i){return ApiResponse.success(service.saveDocument(id,i));}
  @PostMapping("/{id}/approve") public ApiResponse<?> approve(@PathVariable Long id,@Valid @RequestBody ProductPricingService.Action a){return ApiResponse.success(service.act(id,a,true));}
  @PostMapping("/{id}/cancel") public ApiResponse<?> cancel(@PathVariable Long id,@Valid @RequestBody ProductPricingService.Action a){return ApiResponse.success(service.act(id,a,false));}
+ @GetMapping("/{id}/cancellation-preview") public ApiResponse<?> preview(@PathVariable Long id){return ApiResponse.success(service.previewCancellation(id));}
+ @PostMapping("/{id}/cancel-reviewed") public ApiResponse<?> cancelReviewed(@PathVariable Long id,@Valid @RequestBody ProductPricingService.ReviewedCancellation input){return ApiResponse.success(service.cancelReviewed(id,input));}
 }

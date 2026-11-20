@@ -1,0 +1,35 @@
+{
+  "baseline": "5ce6183a5e6d34ea16b0e94f0aed6b17caa7e860",
+  "source": {
+    "frontend/src/public-catalog.css": "0ec39d60e5671c857fdf32837cd62305eb1231759d89933e54bffcf087bd9d2d"
+  },
+  "artifacts": {
+    "index-CqirLqy2.js": "7d8276792de3c011fa5c07390e14a0085716465fe4423f5561618ceab8ef231b",
+    "index-DZxsPHin.js": "ad21a0430d3ee36a13a32381f170a50def59846ac88c7b99a420dc49c236233e",
+    "index-CspVpu5u.js": "189ac1ce777d5dbde02c5f35a161854c3f8cb48425f7b6aa9cf146bf44f81579",
+    "index-C7ere4sZ.js": "1cfcddc9fe3e0510cd2d1f63e8f1bbea1b6863a521df7f576b5c1992d5012ca4",
+    "index-77XDX5eF.js": "4c620aee0dc50f386958ff093546827c952c1b1543894631c2ee43a7e4fc4715",
+    "index-C4eyFPO_.js": "a63faff64465c4e9e0d04eab027001357b81615efc039b11973dd232a555e052",
+    "index-BCo7l2rj.js": "1a355762116fe9e7000e57701be2e7b2418dabcd4e8ab1eddabb9cdae0903770",
+    "index-D90OW88Z.js": "4498451d53eac05462bb0e5467feb28de5af216b9de8549d527d175cebf488ee",
+    "index-BBRnFfdQ.js": "a8eb628f5fb4faca287e9188a1c4f72bde017b763c290cf354afe92b82bdd480",
+    "index-C0OCuaKk.js": "672ebac2ebc0eb12695d27e3cdbd93690f84ecf908e38cbd47ed67ab75ed6da6",
+    "index-buFr3YYM.css": "1c05817bcaeb0778ca55da101e155f9e86f3b40558a965f59f521152349d68f3",
+    "index-CsMpmngt.js": "fd3d011aad90d9c0d1688488514b816866d40d9836a21882414ef7b215bf0a6c",
+    "index-DqAmB5Ra.js": "3c4f12a23013c20e5580bc41036ffeb24769de1a1591d7cd6c12dce6e7602fee",
+    "index-BuoAgQyM.js": "287a694288256576e909a38888f68faf0ef23146ce14186fc346b310063a56f3",
+    "index-lenxoa-X.js": "1fb9a8a2ba0b9204559397c6484638898d6ba090cb7e5c148e8d33862bd3e6bf",
+    "index-CAKottaM.js": "394ec9998a1ec84643dce739b33631a4f00b41ea54b682d7689d5729941406b3",
+    "index-47JbW-ui.js": "f5fcf03ace9e5f8df087d280e3d630070f286a4997f2cbcb7a6d0d3b71058b15",
+    "index-C2dS-DNF.js": "2225ad88e2f0739cde9a9c796fdf0e7b1ec9f41dfa4ff536ba17f39bed80651b",
+    "index-BROC4gz5.js": "9f4d5defcf4d7881e318061cfcc57086b3b31cceddc0aa21d0a10324ac532fc9",
+    "index-CyItKQ0e.js": "5c3a02e653d55567f403f50ab31ec3f8070dd6bde31e93863d6a7fb6f2270c41",
+    "index-Bw7HVI9A.js": "34d8a0ac0a2a0632bcde67480f6601d4986e04b2bb9c13a31bb97b5d2c3bbc92",
+    "index-C1enEdxF.js": "8f08b3e64c998355934af618e9a65721b97244467245db5764ecf10751571a7c",
+    "index-DIL9qh0F.js": "4ba8b6a4ec3d02796d64015280b2d0f0b694c905fa2ac183c1018180047b0854",
+    "index-BFyjQpsA.js": "9e167107793e53b702b0a693cf17ea3702725ee48610be4617e699ea92b37b27",
+    "index-CiekP9cn.js": "788919d1759557f60c6bec2bd0de7e50bda28d9246abe7d9b603206dbef6bedc",
+    "index-BIUhtcCO.js": "7af20a321816023fc5449293033d30a14aa33caba217783f81697d9b7c10004e",
+    "index-D5wsCUia.js": "d979654dd17728daa6cafa2d7ab2c34e3473641490fa73157dfd8fcee43bfb9c"
+  }
+}

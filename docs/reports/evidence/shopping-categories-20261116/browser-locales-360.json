@@ -1,0 +1,101 @@
+[
+  {
+    "width": 360,
+    "height": 800,
+    "locale": "en-US",
+    "status": "PASS",
+    "controls": [
+      {
+        "text": "← All",
+        "width": 59.015625,
+        "height": 44.75
+      },
+      {
+        "text": "☰ All categories",
+        "width": 130.84375,
+        "height": 44.75
+      },
+      {
+        "text": "All",
+        "width": 48.671875,
+        "height": 44.75
+      },
+      {
+        "text": "Fruit & vegetables",
+        "width": 152.90625,
+        "height": 44.75
+      },
+      {
+        "text": "Meat & seafood",
+        "width": 137.078125,
+        "height": 44.75
+      }
+    ]
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "locale": "ja-JP",
+    "status": "PASS",
+    "controls": [
+      {
+        "text": "← すべて",
+        "width": 85.75,
+        "height": 44.75
+      },
+      {
+        "text": "☰ すべてのカテゴリ",
+        "width": 159.1875,
+        "height": 44.75
+      },
+      {
+        "text": "すべて",
+        "width": 75.359375,
+        "height": 44.75
+      },
+      {
+        "text": "野菜・果物",
+        "width": 107.015625,
+        "height": 44.75
+      },
+      {
+        "text": "精肉・魚介",
+        "width": 107.015625,
+        "height": 44.75
+      }
+    ]
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "locale": "zh-TW",
+    "status": "PASS",
+    "controls": [
+      {
+        "text": "← 全部",
+        "width": 72.40625,
+        "height": 44.75
+      },
+      {
+        "text": "☰ 全部分類",
+        "width": 100.84375,
+        "height": 44.75
+      },
+      {
+        "text": "全部",
+        "width": 62.015625,
+        "height": 44.75
+      },
+      {
+        "text": "蔬菜水果",
+        "width": 92.015625,
+        "height": 44.75
+      },
+      {
+        "text": "肉禽海鮮",
+        "width": 92.015625,
+        "height": 44.75
+      }
+    ]
+  }
+]

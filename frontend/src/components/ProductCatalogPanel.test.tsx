@@ -66,3 +66,13 @@ it('locates the Japanese required-name error in the copy tab without an API writ
  fireEvent.click(screen.getByRole('tab',{name:'Product details'}));const checks=screen.getAllByRole('checkbox');fireEvent.click(checks[checks.length-1]);fireEvent.click(screen.getByRole('button',{name:/confirm and save/i}));
  await screen.findByText('Japanese source name is required');expect(screen.getByRole('tab',{name:'Languages & descriptions'})).toHaveAttribute('aria-selected','true');expect(screen.getByRole('textbox',{name:'Name (translation only; no Japanese suffix) ja-JP'})).toHaveFocus();expect(mock.preview).not.toHaveBeenCalled();expect(mock.save).not.toHaveBeenCalled();
 });
+
+it('reports every rejected import row and keeps confirmation disabled',async()=>{
+ mock.preview.mockRejectedValue(new Error('master.conflict'));
+ render(<I18nProvider><ProductCatalogPanel entries={[]} onChoose={vi.fn()} onSaved={vi.fn()}/></I18nProvider>);
+ fireEvent.click(screen.getByRole('button',{name:/review and complete/i}));
+ fireEvent.change(await screen.findByRole('textbox',{name:/json/i}),{target:{value:JSON.stringify([value,{...value,productId:'p2'}])}});
+ fireEvent.click(screen.getByRole('button',{name:/preview/i}));
+ await waitFor(()=>expect(screen.getByRole('alert')).toHaveTextContent(/1:.*2:/));
+ expect(screen.getByRole('button',{name:/confirm and save/i})).toBeDisabled();expect(mock.save).not.toHaveBeenCalled();
+});

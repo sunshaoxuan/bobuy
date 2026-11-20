@@ -1,0 +1,417 @@
+{
+  "result": "PASS",
+  "results": [
+    {
+      "version": "before",
+      "kind": "touch",
+      "width": 360,
+      "height": 800,
+      "compact": false,
+      "media": {
+        "hover": false,
+        "fine": false
+      },
+      "method": "CSS.forcePseudoState hover on real coarse-pointer browser (deterministic style boundary, not natural gesture reproduction)",
+      "states": {
+        "ordinary": {
+          "hover": true,
+          "active": false,
+          "current": null,
+          "bg": "rgb(240, 240, 237)",
+          "inner": "rgba(0, 0, 0, 0)",
+          "tap": "rgba(0, 0, 0, 0)"
+        },
+        "selected": {
+          "hover": true,
+          "active": false,
+          "current": "true",
+          "bg": "rgb(229, 229, 223)",
+          "inner": "rgba(0, 0, 0, 0)",
+          "tap": "rgba(0, 0, 0, 0)"
+        }
+      },
+      "errors": []
+    },
+    {
+      "version": "after",
+      "kind": "touch",
+      "width": 360,
+      "height": 800,
+      "compact": false,
+      "media": {
+        "hover": false,
+        "fine": false
+      },
+      "method": "CSS.forcePseudoState hover on real coarse-pointer browser (deterministic style boundary, not natural gesture reproduction)",
+      "states": {
+        "ordinary": {
+          "hover": true,
+          "active": false,
+          "current": null,
+          "bg": "rgba(0, 0, 0, 0)",
+          "inner": "rgba(0, 0, 0, 0)",
+          "tap": "rgba(0, 0, 0, 0)"
+        },
+        "selected": {
+          "hover": true,
+          "active": false,
+          "current": "true",
+          "bg": "rgb(238, 238, 233)",
+          "inner": "rgba(0, 0, 0, 0)",
+          "tap": "rgba(0, 0, 0, 0)"
+        },
+        "focus": {
+          "visible": true,
+          "outline": "solid",
+          "width": "2px"
+        }
+      },
+      "errors": []
+    },
+    {
+      "version": "before",
+      "kind": "touch",
+      "width": 360,
+      "height": 800,
+      "compact": true,
+      "media": {
+        "hover": false,
+        "fine": false
+      },
+      "method": "CSS.forcePseudoState hover on real coarse-pointer browser (deterministic style boundary, not natural gesture reproduction)",
+      "states": {
+        "ordinary": {
+          "hover": true,
+          "active": false,
+          "current": null,
+          "bg": "rgba(0, 0, 0, 0)",
+          "inner": "rgb(247, 246, 243)",
+          "tap": "rgba(0, 0, 0, 0)"
+        },
+        "selected": {
+          "hover": true,
+          "active": false,
+          "current": "true",
+          "bg": "rgba(0, 0, 0, 0)",
+          "inner": "rgb(238, 237, 232)",
+          "tap": "rgba(0, 0, 0, 0)"
+        }
+      },
+      "errors": []
+    },
+    {
+      "version": "after",
+      "kind": "touch",
+      "width": 360,
+      "height": 800,
+      "compact": true,
+      "media": {
+        "hover": false,
+        "fine": false
+      },
+      "method": "CSS.forcePseudoState hover on real coarse-pointer browser (deterministic style boundary, not natural gesture reproduction)",
+      "states": {
+        "ordinary": {
+          "hover": true,
+          "active": false,
+          "current": null,
+          "bg": "rgba(0, 0, 0, 0)",
+          "inner": "rgba(0, 0, 0, 0)",
+          "tap": "rgba(0, 0, 0, 0)"
+        },
+        "selected": {
+          "hover": true,
+          "active": false,
+          "current": "true",
+          "bg": "rgba(0, 0, 0, 0)",
+          "inner": "rgb(244, 243, 240)",
+          "tap": "rgba(0, 0, 0, 0)"
+        },
+        "focus": {
+          "visible": true,
+          "outline": "solid",
+          "width": "2px"
+        }
+      },
+      "errors": []
+    },
+    {
+      "version": "before",
+      "kind": "touch",
+      "width": 390,
+      "height": 844,
+      "compact": false,
+      "media": {
+        "hover": false,
+        "fine": false
+      },
+      "method": "CSS.forcePseudoState hover on real coarse-pointer browser (deterministic style boundary, not natural gesture reproduction)",
+      "states": {
+        "ordinary": {
+          "hover": true,
+          "active": false,
+          "current": null,
+          "bg": "rgb(240, 240, 237)",
+          "inner": "rgba(0, 0, 0, 0)",
+          "tap": "rgba(0, 0, 0, 0)"
+        },
+        "selected": {
+          "hover": true,
+          "active": false,
+          "current": "true",
+          "bg": "rgb(229, 229, 223)",
+          "inner": "rgba(0, 0, 0, 0)",
+          "tap": "rgba(0, 0, 0, 0)"
+        }
+      },
+      "errors": []
+    },
+    {
+      "version": "after",
+      "kind": "touch",
+      "width": 390,
+      "height": 844,
+      "compact": false,
+      "media": {
+        "hover": false,
+        "fine": false
+      },
+      "method": "CSS.forcePseudoState hover on real coarse-pointer browser (deterministic style boundary, not natural gesture reproduction)",
+      "states": {
+        "ordinary": {
+          "hover": true,
+          "active": false,
+          "current": null,
+          "bg": "rgba(0, 0, 0, 0)",
+          "inner": "rgba(0, 0, 0, 0)",
+          "tap": "rgba(0, 0, 0, 0)"
+        },
+        "selected": {
+          "hover": true,
+          "active": false,
+          "current": "true",
+          "bg": "rgb(238, 238, 233)",
+          "inner": "rgba(0, 0, 0, 0)",
+          "tap": "rgba(0, 0, 0, 0)"
+        },
+        "focus": {
+          "visible": true,
+          "outline": "solid",
+          "width": "2px"
+        }
+      },
+      "errors": []
+    },
+    {
+      "version": "before",
+      "kind": "touch",
+      "width": 390,
+      "height": 844,
+      "compact": true,
+      "media": {
+        "hover": false,
+        "fine": false
+      },
+      "method": "CSS.forcePseudoState hover on real coarse-pointer browser (deterministic style boundary, not natural gesture reproduction)",
+      "states": {
+        "ordinary": {
+          "hover": true,
+          "active": false,
+          "current": null,
+          "bg": "rgba(0, 0, 0, 0)",
+          "inner": "rgb(247, 246, 243)",
+          "tap": "rgba(0, 0, 0, 0)"
+        },
+        "selected": {
+          "hover": true,
+          "active": false,
+          "current": "true",
+          "bg": "rgba(0, 0, 0, 0)",
+          "inner": "rgb(238, 237, 232)",
+          "tap": "rgba(0, 0, 0, 0)"
+        }
+      },
+      "errors": []
+    },
+    {
+      "version": "after",
+      "kind": "touch",
+      "width": 390,
+      "height": 844,
+      "compact": true,
+      "media": {
+        "hover": false,
+        "fine": false
+      },
+      "method": "CSS.forcePseudoState hover on real coarse-pointer browser (deterministic style boundary, not natural gesture reproduction)",
+      "states": {
+        "ordinary": {
+          "hover": true,
+          "active": false,
+          "current": null,
+          "bg": "rgba(0, 0, 0, 0)",
+          "inner": "rgba(0, 0, 0, 0)",
+          "tap": "rgba(0, 0, 0, 0)"
+        },
+        "selected": {
+          "hover": true,
+          "active": false,
+          "current": "true",
+          "bg": "rgba(0, 0, 0, 0)",
+          "inner": "rgb(244, 243, 240)",
+          "tap": "rgba(0, 0, 0, 0)"
+        },
+        "focus": {
+          "visible": true,
+          "outline": "solid",
+          "width": "2px"
+        }
+      },
+      "errors": []
+    },
+    {
+      "version": "after",
+      "kind": "mouse",
+      "width": 1280,
+      "height": 800,
+      "compact": false,
+      "media": {
+        "hover": true,
+        "fine": true
+      },
+      "method": "actual mouse hover",
+      "states": {
+        "ordinary": {
+          "hover": true,
+          "active": false,
+          "current": null,
+          "bg": "rgb(240, 240, 237)",
+          "inner": "rgba(0, 0, 0, 0)",
+          "tap": "rgba(0, 0, 0, 0)"
+        },
+        "selected": {
+          "hover": true,
+          "active": false,
+          "current": "true",
+          "bg": "rgb(229, 229, 223)",
+          "inner": "rgba(0, 0, 0, 0)",
+          "tap": "rgba(0, 0, 0, 0)"
+        },
+        "focus": {
+          "visible": true,
+          "outline": "solid",
+          "width": "2px"
+        }
+      },
+      "errors": []
+    },
+    {
+      "version": "after",
+      "kind": "mouse",
+      "width": 1280,
+      "height": 800,
+      "compact": true,
+      "media": {
+        "hover": true,
+        "fine": true
+      },
+      "method": "actual mouse hover",
+      "states": {
+        "ordinary": {
+          "hover": true,
+          "active": false,
+          "current": null,
+          "bg": "rgb(240, 240, 237)",
+          "inner": "rgba(0, 0, 0, 0)",
+          "tap": "rgba(0, 0, 0, 0)"
+        },
+        "selected": {
+          "hover": true,
+          "active": false,
+          "current": "true",
+          "bg": "rgb(229, 229, 223)",
+          "inner": "rgba(0, 0, 0, 0)",
+          "tap": "rgba(0, 0, 0, 0)"
+        },
+        "focus": {
+          "visible": true,
+          "outline": "solid",
+          "width": "2px"
+        }
+      },
+      "errors": []
+    },
+    {
+      "version": "after",
+      "kind": "mouse",
+      "width": 390,
+      "height": 844,
+      "compact": false,
+      "media": {
+        "hover": true,
+        "fine": true
+      },
+      "method": "actual mouse hover",
+      "states": {
+        "ordinary": {
+          "hover": true,
+          "active": false,
+          "current": null,
+          "bg": "rgb(240, 240, 237)",
+          "inner": "rgba(0, 0, 0, 0)",
+          "tap": "rgba(0, 0, 0, 0)"
+        },
+        "selected": {
+          "hover": true,
+          "active": false,
+          "current": "true",
+          "bg": "rgb(229, 229, 223)",
+          "inner": "rgba(0, 0, 0, 0)",
+          "tap": "rgba(0, 0, 0, 0)"
+        },
+        "focus": {
+          "visible": true,
+          "outline": "solid",
+          "width": "2px"
+        }
+      },
+      "errors": []
+    },
+    {
+      "version": "after",
+      "kind": "mouse",
+      "width": 390,
+      "height": 844,
+      "compact": true,
+      "media": {
+        "hover": true,
+        "fine": true
+      },
+      "method": "actual mouse hover",
+      "states": {
+        "ordinary": {
+          "hover": true,
+          "active": false,
+          "current": null,
+          "bg": "rgba(0, 0, 0, 0)",
+          "inner": "rgb(247, 246, 243)",
+          "tap": "rgba(0, 0, 0, 0)"
+        },
+        "selected": {
+          "hover": true,
+          "active": false,
+          "current": "true",
+          "bg": "rgba(0, 0, 0, 0)",
+          "inner": "rgb(238, 237, 232)",
+          "tap": "rgba(0, 0, 0, 0)"
+        },
+        "focus": {
+          "visible": true,
+          "outline": "solid",
+          "width": "2px"
+        }
+      },
+      "errors": []
+    }
+  ]
+}

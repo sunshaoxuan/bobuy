@@ -1,0 +1,86 @@
+{
+  "application": "after",
+  "transport": "loopback real HTTP, no injected delay; alternating order, all six samples retained",
+  "rounds": [
+    {
+      "round": 1,
+      "legacy": {
+        "ms": 253.11,
+        "bytes": 181752
+      },
+      "products": 463,
+      "overview": {
+        "ms": 130.42,
+        "bytes": 20270
+      },
+      "firstContentMs": 130.42
+    },
+    {
+      "round": 2,
+      "overview": {
+        "ms": 98.48,
+        "bytes": 20270
+      },
+      "firstContentMs": 98.48,
+      "legacy": {
+        "ms": 124.64,
+        "bytes": 181752
+      },
+      "products": 463
+    },
+    {
+      "round": 3,
+      "legacy": {
+        "ms": 104.24,
+        "bytes": 181752
+      },
+      "products": 463,
+      "overview": {
+        "ms": 94.03,
+        "bytes": 20270
+      },
+      "firstContentMs": 94.03
+    },
+    {
+      "round": 4,
+      "overview": {
+        "ms": 87.27,
+        "bytes": 20270
+      },
+      "firstContentMs": 87.27,
+      "legacy": {
+        "ms": 101.75,
+        "bytes": 181752
+      },
+      "products": 463
+    },
+    {
+      "round": 5,
+      "legacy": {
+        "ms": 114.57,
+        "bytes": 181752
+      },
+      "products": 463,
+      "overview": {
+        "ms": 80.49,
+        "bytes": 20270
+      },
+      "firstContentMs": 80.49
+    },
+    {
+      "round": 6,
+      "overview": {
+        "ms": 93.07,
+        "bytes": 20270
+      },
+      "firstContentMs": 93.07,
+      "legacy": {
+        "ms": 99.45,
+        "bytes": 181752
+      },
+      "products": 463
+    }
+  ],
+  "legacyMedianMs": 109.405,
+  "firstContentMedianMs": 93.55
+}

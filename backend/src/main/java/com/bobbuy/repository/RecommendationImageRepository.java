@@ -10,6 +10,9 @@ public interface RecommendationImageRepository extends JpaRepository<Recommendat
     @org.springframework.data.jpa.repository.Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE)
     @org.springframework.data.jpa.repository.Query("select i from RecommendationImage i where i.id=:id")
     Optional<RecommendationImage> lock(@org.springframework.data.repository.query.Param("id") String id);
+    /** Preload hints must not fetch image binary content. */
+    @org.springframework.data.jpa.repository.Query("select i.id from RecommendationImage i where i.id in :ids and i.accessScope='PUBLIC'")
+    List<String> publicIds(@org.springframework.data.repository.query.Param("ids") java.util.Collection<String> ids);
     List<RecommendationImage> findByIdGreaterThanOrderByIdAsc(String after,Pageable page);
     Optional<RecommendationImage> findByMerchantIdAndImageHash(Long merchantId, String imageHash);
 }

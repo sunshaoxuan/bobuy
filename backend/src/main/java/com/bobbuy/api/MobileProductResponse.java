@@ -6,6 +6,9 @@ import java.util.List;
 
 public class MobileProductResponse {
     private Product product;
+    private String categoryPath;
+    public String getCategoryPath(){return categoryPath;}
+    public void setCategoryPath(String value){categoryPath=value;}
     private com.bobbuy.model.ProductSale currentRegular;
     public com.bobbuy.model.ProductSale getCurrentRegular(){return currentRegular;}
     public void setCurrentRegular(com.bobbuy.model.ProductSale value){currentRegular=value;}
