@@ -52,7 +52,7 @@ it('continues a real 25-item section to its last item and retries without duplic
  api.productOverview.mockResolvedValue(nav);api.productShelf.mockResolvedValueOnce({...nav,shelves:[{category:'a',total:25,items:rows.slice(0,24)}]}).mockRejectedValueOnce(Error('offline')).mockResolvedValue({...nav,page:1,shelves:[{category:'a',total:25,items:rows.slice(24)}]});
  const {result}=renderHook(()=>useProgressiveCatalog('pages',{sections:true},true,false));await waitFor(()=>expect(result.current.shelves.a.items).toHaveLength(8));act(()=>result.current.next('a'));await waitFor(()=>expect(result.current.shelves.a.items).toHaveLength(24));
  act(()=>{result.current.next('a');result.current.next('a');});await waitFor(()=>expect(result.current.shelves.a.error).toBe('offline'));expect(result.current.shelves.a.items).toHaveLength(24);
- act(()=>result.current.retry('a'));await waitFor(()=>expect(result.current.shelves.a.items).toHaveLength(25));expect(result.current.shelves.a.items.at(-1)?.productId).toBe('p24');
+ act(()=>result.current.retry('a'));await waitFor(()=>expect(result.current.shelves.a.items).toHaveLength(25));expect(result.current.shelves.a.items[24]?.productId).toBe('p24');
  act(()=>result.current.next('a'));expect(api.productShelf.mock.calls.map(c=>c[0].page)).toEqual([0,1,1]);
 });
 it('reuses root browse previews and replaces page zero only with a matching ordered prefix',async()=>{

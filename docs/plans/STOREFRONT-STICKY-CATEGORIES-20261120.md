@@ -183,3 +183,5 @@ UI仅商品区域：真实二级纵向网格section内sticky标题+自身已有�
 - 核心及edges三视口全PASS后计算样式复核发现recommendations.css同优先级后载覆盖新标题：h3实际15px、h2附加16px下边距。仅为本商品区域标题增加public-product-catalog限定，确保设计20/18px与0内margin稳定。不动其他页面；分页/慢图/入口/回退逻辑PASS复用，只重建受影响前端并复核标题/边界几何与最终截图。
 
 - 最终候选实测收口：360/390/1280全部及主类A→吸顶→末项→B推替→回滑均PASS，标题坐标229/229/209px；25+15完整、无重复，首批8件/慢图/慢后区、侧栏及父类入口、刷新、空/缺图/长名均PASS。最终入口index-DoiMe8lM.js，20/18px标题与0内margin、长名手机67px/桌面44px；控制台/网络无非预期错误。32前端与20后端定向用例按输入复用，最终CSS只复核视觉。87张最终整图/局部及脚本/JSON、部署兼容边界见[候选证据](../reports/evidence/storefront-secondary-sections-20261120/README.md)。旧字号edges PNG已删除，功能JSON保留并标明输入；未生成或接收生产素材、无DB写入，真实线稿由本机独立验收。候选冻结后仅跟踪同次原生CI，不合并发布。
+
+- PR #175首轮原生PR checks 44747677673，frontend Type-check发现新增测试Array.at超出仓库lib目标（TS2550）。仅将该测试末件断言改为索引24，不改应用/产物；已PASS全部浏览器与业务测试输入不失效，不本地重跑或重建。推同PR修正后跟踪新head原生门禁。
