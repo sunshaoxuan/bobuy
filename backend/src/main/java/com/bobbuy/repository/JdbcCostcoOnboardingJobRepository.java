@@ -31,10 +31,13 @@ public class JdbcCostcoOnboardingJobRepository implements CostcoOnboardingJobRep
         users.lockById(q.merchantId()).filter(u->u.isEnabled()&&u.getRoles().contains(com.bobbuy.model.Role.AGENT)).orElseThrow(()->new com.bobbuy.service.CostcoNumberOnboardingService.NeedsInput("onboarding.scope_changed"));
         var prior=jdbc.query("select cast(payload as text) from bb_costco_onboarding_job where idempotency_key=? and merchant_id=?",(rs,n)->parse(rs.getString(1)),q.idempotencyKey(),q.merchantId());
         if(!prior.isEmpty())return prior.get(0); // Explicit retries consume neither quota nor another row.
-        Long pending=jdbc.queryForObject("select count(*) from bb_costco_onboarding_job where merchant_id=? and state in ('QUEUED','AI_INTAKE','EVIDENCE_FETCH','AI_REVIEW','COMMITTING','RETRY_WAIT')",Long.class,q.merchantId());
-        if(pending!=null&&pending>=maxPending)throw new com.bobbuy.service.CostcoOnboardingQuotaException("onboarding.pending_quota",30);
-        Long daily=jdbc.queryForObject("select count(*) from bb_costco_onboarding_job where merchant_id=? and created_at>=current_timestamp-interval '24 hours'",Long.class,q.merchantId());
-        if(daily!=null&&daily>=maxPerDay)throw new com.bobbuy.service.CostcoOnboardingQuotaException("onboarding.daily_quota",3600);
+        // Legacy photo retries and new photos share the uncapped photo queue, independent of number intake.
+        if(q.privatePhotoSha256()==null) {
+            Long pending=jdbc.queryForObject("select count(*) from bb_costco_onboarding_job where merchant_id=? and payload->>'privatePhotoSha256' is null and state in ('QUEUED','AI_INTAKE','EVIDENCE_FETCH','AI_REVIEW','COMMITTING','RETRY_WAIT')",Long.class,q.merchantId());
+            if(pending!=null&&pending>=maxPending)throw new com.bobbuy.service.CostcoOnboardingQuotaException("onboarding.pending_quota",30);
+            Long daily=jdbc.queryForObject("select count(*) from bb_costco_onboarding_job where merchant_id=? and payload->>'privatePhotoSha256' is null and created_at>=current_timestamp-interval '24 hours'",Long.class,q.merchantId());
+            if(daily!=null&&daily>=maxPerDay)throw new com.bobbuy.service.CostcoOnboardingQuotaException("onboarding.daily_quota",3600);
+        }
         jdbc.update("insert into bb_costco_onboarding_job(id,merchant_id,supplier_id,market,idempotency_key,input_hash,revision,state,payload) values(?,?,?,?,?,?,?,?,cast(? as jsonb)) on conflict(idempotency_key) do nothing",
                 q.id(), q.merchantId(), q.supplierId(), q.market(), q.idempotencyKey(), q.inputHash(), q.revision(), q.state().name(), json(q));
         return parse(jdbc.queryForObject("select cast(payload as text) from bb_costco_onboarding_job where idempotency_key=? and merchant_id=?", String.class, q.idempotencyKey(), q.merchantId()));
@@ -73,6 +76,7 @@ public class JdbcCostcoOnboardingJobRepository implements CostcoOnboardingJobRep
                 payload=cast(? as jsonb),state='QUEUED',revision=?,attempts=0,
                     lease_token=null,lease_until=null,next_run_at=?,updated_at=?
                 where id=? and merchant_id=? and revision=?
+                  and payload->>'privatePhotoSha256' is not null
                   and state in ('NEEDS_INPUT','FAILED','CANCELLED')
                 """,json(queued),queued.revision(),Timestamp.from(now),Timestamp.from(now),
                 old.id(),old.merchantId(),old.revision());
