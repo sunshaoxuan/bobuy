@@ -69,6 +69,10 @@
 - [390×844 简体全视口](../reports/evidence/product-photo-intake-20261120/issue-189/390-viewport-zh-CN.png) · [1280×800 简体全视口](../reports/evidence/product-photo-intake-20261120/issue-189/1280-viewport-zh-CN.png) · [390px 简体失败项细节](../reports/evidence/product-photo-intake-20261120/issue-189/390-failed-detail-zh-CN.png) · [稳定态计算样式与九处 PNG 字形像素内框](../reports/evidence/product-photo-intake-20261120/issue-189/browser-supplement.json)。
 - 稳定态数据取代原 `browser.json` 中简体、繁体和日语动画中的尺寸。九处像素测量覆盖三语的拍照、上传、重试按钮。其余控件保留 DOM 几何记录。补拍切换语言的导航取消了初始 `/api/auth/me` 请求，后续 200，照片 API 无失败。表单同步修订只改变重试回调，复用同样布局、样式及文案的实拍证据。
 
+### #192 合并冲突协调
+
+以 `17c905f2` 为基线，保留 #193 商品档案顶部计数、照片队列及确认入口，保留 #196 档案分页与 #190 资料建议。顶部和弹窗共用同一持久照片状态来源。只复验合并影响的查询、顶部入口、确认联动和连续提交，复用已有配额、迁移重跑与字形记录。#191 尚未合并并预留 V49。V50 保持原编号。
+
 ## 5. 验收
 
 | ID | 观察结果 |
