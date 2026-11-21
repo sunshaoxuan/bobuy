@@ -4,10 +4,14 @@ import {photoIntakeApi,type CostcoOnboardingJobView} from '../api';
 import {useI18n} from '../i18n';
 import './productPhotoIntake.css';
 
-export function photoState(job:CostcoOnboardingJobView) {
+export function photoCanRetry(job:CostcoOnboardingJobView) {
+ return job.failureCode!=='photo.confirm_required'&&['FAILED','NEEDS_INPUT','CANCELLED','RETRY_WAIT'].includes(job.state);
+}
+
+export function photoState(job:CostcoOnboardingJobView&{reviewReady?:boolean}) {
  if(job.state==='COMPLETED')return 'photo.state.completed';
- if(job.failureCode==='photo.confirm_required')return 'photo.state.confirm';
- if(['FAILED','NEEDS_INPUT','CANCELLED','RETRY_WAIT'].includes(job.state))return 'photo.state.failed';
+ if(job.reviewReady||job.failureCode==='photo.confirm_required')return 'photo.state.confirm';
+ if(photoCanRetry(job))return 'photo.state.failed';
  if(job.state==='QUEUED')return 'photo.state.queued';
  return 'photo.state.running';
 }
@@ -66,11 +70,11 @@ export default function ProductPhotoQueue({jobs,onReview,onChanged}:QueueProps){
      <Thumbnail id={job.id}/>
      <div className="photo-queue-info">
       <Tag>{t(state)}</Tag>{job.itemNumber&&<span>{job.itemNumber}</span>}
-      {state==='photo.state.failed'&&<p>{t(photoFailure(job))}</p>}
+      {photoCanRetry(job)&&<p>{t(photoFailure(job))}</p>}
       {failed.includes(job.id)&&<Alert type="error" message={t('photo.retry_failed')}/>}
       <Space wrap>
        <Button onClick={()=>onReview(job)}>{t('photo.reopen')}</Button>
-       {state==='photo.state.failed'&&<Button loading={retrying.includes(job.id)} onClick={()=>void retry(job.id)}>{t('photo.retry_recognition')}</Button>}
+       {photoCanRetry(job)&&<Button loading={retrying.includes(job.id)} onClick={()=>void retry(job.id)}>{t('photo.retry_recognition')}</Button>}
       </Space>
      </div>
     </li>;

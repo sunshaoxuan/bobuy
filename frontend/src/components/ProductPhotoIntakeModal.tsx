@@ -5,7 +5,7 @@ import {prepareProductPhotoUpload} from '../productPhotoUpload';
 import {getStoredUser} from '../authStorage';
 import {useI18n} from '../i18n';
 import CategoryTreePicker from './CategoryTreePicker';
-import ProductPhotoQueue,{photoFailure,photoState} from './ProductPhotoQueue';
+import ProductPhotoQueue,{photoCanRetry,photoFailure,photoState} from './ProductPhotoQueue';
 import './productPhotoIntake.css';
 
 type Props={open:boolean;queue?:CostcoOnboardingJobView[];onReview?:(job:CostcoOnboardingJobView)=>void;onQueueChanged?:()=>void;job?:CostcoOnboardingJobView;onClose:()=>void;onQueued:(job:CostcoOnboardingJobView)=>void;onSaved:(id:string)=>void;onConfirmed?:()=>void};
@@ -105,6 +105,7 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
   const input=frozen.current??{revision:review.revision,itemNumber:review.itemNumber,productId:isNew?null:selected,productVersion:chosen?.version??null,previousId:review.history.find(o=>o.productId===selected)?.id??null,identityConfirmed:identity,priceConfirmed,amount:amount||null,currency:currency||null,unit:unit||null,conditions,inStock,observedAt:new Date(observedAt+'Z').toISOString(),model,packaging,useOfficialImage,product:isNew?{requestId:job.id,name:names,specification:{'ja-JP':spec},brand,description:{'ja-JP':description},categoryNodeId:category,storageCondition}:null};frozen.current=input;
   const receipt=await photoIntakeApi.confirm(job.id,input);if(g!==reviewEpoch.current)return;setSaved(receipt);onConfirmed?.();
  }catch(e){if(g===reviewEpoch.current)setError(t((e as Error).message));}finally{if(g===reviewEpoch.current)setBusy(false);}};
+ const selectedQueueRow=queue?.find(row=>row.id===job?.id&&row.revision===job.revision);
  const latest=review?.history.find(o=>o.productId===selected&&o.amount!=null&&o.currency===currency&&o.unit===unit);
  return <Modal open={open} title={t('photo.title')} onCancel={onClose} footer={null} width={760} rootClassName="product-photo-intake" destroyOnClose>
   <p>{t('photo.help')}</p>
@@ -122,8 +123,8 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
   </div>)}
   {queue&&onReview&&onQueueChanged&&<ProductPhotoQueue jobs={queue} onReview={onReview} onChanged={next=>{applyRetry(next);return onQueueChanged();}}/>}
   {preview&&<img className="photo-evidence" src={preview} alt={t('photo.evidence')}/>}
-  {job&&<p role="status">{t(saved?'photo.state.completed':photoState(job))} {photoState(job)==='photo.state.failed'&&!saved&&t(photoFailure(job))}</p>}
-  {job&&photoState(job)==='photo.state.failed'&&!saved&&<Button loading={busy} onClick={()=>void retryRecognition()}>{t('photo.retry_recognition')}</Button>}
+  {job&&<p role="status">{t(saved?'photo.state.completed':photoState(selectedQueueRow??job))} {photoCanRetry(job)&&!saved&&t(photoFailure(job))}</p>}
+  {job&&photoCanRetry(job)&&!saved&&<Button loading={busy} onClick={()=>void retryRecognition()}>{t('photo.retry_recognition')}</Button>}
   {review&&!saved&&<section>
    <Typography.Title level={4}>{t('photo.review')}</Typography.Title><p>{t('photo.suggestions')}</p>
    {!!review.sources?.length&&<details><summary>{t('photo.sources')}</summary>{review.sources.map(source=><p key={source.sha256}><a href={source.canonicalUrl} target="_blank" rel="noopener noreferrer">{source.canonicalUrl}</a></p>)}</details>}

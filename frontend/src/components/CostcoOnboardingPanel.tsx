@@ -1,49 +1,50 @@
 import React,{useEffect,useRef,useState} from 'react';
+import {createPortal} from 'react-dom';
 import { Alert,Button,Select,Space,Tag,Typography } from 'antd';
-import {api,photoIntakeApi,type MobileSupplier,type CostcoOnboardingJobView} from '../api';
+import {api,photoIntakeApi,type MobileSupplier,type CostcoOnboardingJobView,type PhotoQueueRow} from '../api';
 import {getStoredUser,subscribeToAuthChanges} from '../authStorage';
 import {useI18n} from '../i18n';
 import CostcoNumberOnboardingModal from './CostcoNumberOnboardingModal';
 import ProductPhotoQueue from './ProductPhotoQueue';
 import ProductPhotoIntakeModal from './ProductPhotoIntakeModal';
+import ProductPhotoQueueSummary from './ProductPhotoQueueSummary';
 
-type Props={suppliers:MobileSupplier[];photoOpen:boolean;onPhotoClose:()=>void;onOpenProduct:(id:string)=>void;onConfirmed?:()=>void};
+type Props={suppliers:MobileSupplier[];photoOpen:boolean;photoQueueTarget?:HTMLElement|null;onPhotoClose:()=>void;onOpenProduct:(id:string)=>void;onConfirmed?:()=>void};
 const identity=()=>{const user=getStoredUser();return user?.roles.includes('AGENT')?String(user.id):'';};
 /** Both inputs queue the same durable pipeline. Polling reads owned task state, never invents progress. */
-export default function CostcoOnboardingPanel({suppliers,photoOpen,onPhotoClose,onOpenProduct,onConfirmed}:Props){
+export default function CostcoOnboardingPanel({suppliers,photoOpen,photoQueueTarget,onPhotoClose,onOpenProduct,onConfirmed}:Props){
  const{t,locale}=useI18n();const[subject,setSubject]=useState(identity);const[supplier,setSupplier]=useState('');
  const[numberOpen,setNumberOpen]=useState(false);const[jobs,setJobs]=useState<CostcoOnboardingJobView[]>([]);const[error,setError]=useState(false);
  const[workerEnabled,setWorkerEnabled]=useState(false);const[statusLoaded,setStatusLoaded]=useState(false);
- const[photos,setPhotos]=useState<CostcoOnboardingJobView[]>([]);
- const[photoError,setPhotoError]=useState(false);
  const[reopened,setReopened]=useState<CostcoOnboardingJobView>();
+ const[photoRows,setPhotoRows]=useState<PhotoQueueRow[]>();
+ const[photoReadFailed,setPhotoReadFailed]=useState(false);
+ const photoRead=useRef(0);
  const subjectRef=useRef(subject);
  const epoch=useRef(0);
- useEffect(()=>subscribeToAuthChanges(()=>{const next=identity();if(next===subjectRef.current)return;subjectRef.current=next;epoch.current++;setSubject(next);setSupplier('');setJobs([]);setPhotos([]);setReopened(undefined);setNumberOpen(false);setWorkerEnabled(false);setStatusLoaded(false);onPhotoClose();}),[onPhotoClose]);
+ useEffect(()=>subscribeToAuthChanges(()=>{const next=identity();if(next===subjectRef.current)return;subjectRef.current=next;epoch.current++;setSubject(next);setSupplier('');setJobs([]);setPhotoRows(undefined);setPhotoReadFailed(false);setReopened(undefined);setNumberOpen(false);setWorkerEnabled(false);setStatusLoaded(false);onPhotoClose();}),[onPhotoClose]);
  const refresh=async()=>{const generation=epoch.current;if(!subject)return;try{const result=await api.costcoOnboarding.list();if(generation===epoch.current){setJobs(result);setError(false);}}catch{if(generation===epoch.current)setError(true);}};
  useEffect(()=>{epoch.current++;if(!subject)return;let closed=false;const generation=epoch.current;
   const read=async()=>{try{const[result,status]=await Promise.all([api.costcoOnboarding.list(),api.costcoOnboarding.status()]);if(!closed&&generation===epoch.current){setJobs(result);setWorkerEnabled(status.workerEnabled);setStatusLoaded(true);setError(false);}}catch{if(!closed&&generation===epoch.current)setError(true);}};
   void read();const timer=setInterval(()=>{void read();},5000);return()=>{closed=true;epoch.current++;clearInterval(timer);};
  },[subject]);
- const photoRead=useRef(0);
  const refreshPhotos=async()=>{
-  const generation=epoch.current,read=++photoRead.current;
-  try{const rows=await photoIntakeApi.queue();if(generation===epoch.current&&read===photoRead.current){setPhotos(rows);setPhotoError(false);}}
-  catch{if(generation===epoch.current&&read===photoRead.current)setPhotoError(true);}
+  const generation=epoch.current,sequence=++photoRead.current;
+  try{const rows=await photoIntakeApi.queue();if(generation===epoch.current&&sequence===photoRead.current){setPhotoRows(rows);setPhotoReadFailed(false);}}
+  catch{if(generation===epoch.current&&sequence===photoRead.current)setPhotoReadFailed(true);}
  };
  useEffect(()=>{
   if(!subject)return;
-  let stopped=false;
-  let timer:ReturnType<typeof setTimeout>;
+  let stopped=false;let timer:ReturnType<typeof setTimeout>;
   const read=async()=>{await refreshPhotos();if(!stopped)timer=setTimeout(()=>void read(),5000);};
-  void read();
-  return()=>{stopped=true;clearTimeout(timer);};
+  void read();return()=>{stopped=true;photoRead.current++;clearTimeout(timer);};
  },[subject]);
  const queued=(job:CostcoOnboardingJobView)=>{if(job.photo){void refreshPhotos();return;}setJobs(previous=>[job,...previous.filter(x=>x.id!==job.id)]);};
  if(!subject)return null;
  const selected=suppliers.some(s=>s.id===supplier);
  const labels={title:t('onboarding.number_title'),itemNumber:t('onboarding.item'),submit:t('onboarding.start'),close:t('onboarding.close'),invalid:t('onboarding.one_item_required'),failed:t('onboarding.retry_attempt'),queued:t('onboarding.queued'),pending:t('onboarding.accepting'),newTask:t('onboarding.new_task')};
  return <section aria-label={t('onboarding.title')}>
+  {photoQueueTarget&&createPortal(<ProductPhotoQueueSummary key={subject} rows={photoRows} failed={photoReadFailed} onRefresh={()=>void refreshPhotos()} onOpen={setReopened}/>,photoQueueTarget)}
   <Space wrap><Typography.Text strong>{t('onboarding.title')}</Typography.Text>
    <Select aria-label={t('onboarding.supplier')} placeholder={t('onboarding.supplier')} value={supplier||undefined} style={{minWidth:180,maxWidth:'100%'}}
     onChange={value=>{setSupplier(value);}} options={suppliers.map(s=>({value:s.id,label:s.name[locale]||s.name['ja-JP']||s.id}))}/>
@@ -65,11 +66,11 @@ export default function CostcoOnboardingPanel({suppliers,photoOpen,onPhotoClose,
     {quote.sourceUrl.startsWith('https://')&&<a href={quote.sourceUrl} target="_blank" rel="noopener noreferrer">{t('onboarding.source')}</a>}</p>)}</details>}
    {job.state==='COMPLETED'&&job.productId&&<Button onClick={()=>onOpenProduct(job.productId!)}>{t('onboarding.open_product')}</Button>}
   </div>)}
-  {photoError&&<Alert type="warning" message={t('onboarding.read_failed')}/>}
-  {!photoOpen&&!reopened&&<ProductPhotoQueue jobs={photos} onReview={setReopened} onChanged={refreshPhotos}/>}
+  {!photoQueueTarget&&photoReadFailed&&<Alert type="warning" message={t('onboarding.read_failed')}/>}
+  {!photoQueueTarget&&!photoOpen&&!reopened&&<ProductPhotoQueue jobs={photoRows??[]} onReview={setReopened} onChanged={refreshPhotos}/>}
   <CostcoNumberOnboardingModal open={numberOpen&&selected&&workerEnabled} subject={subject} supplierId={supplier} market="JP" labels={labels}
    enqueue={api.costcoOnboarding.number} onQueued={queued} onClose={()=>setNumberOpen(false)}/>
-  {(photoOpen||reopened)&&<ProductPhotoIntakeModal key={subject} open job={reopened} queue={photos} onReview={setReopened} onQueueChanged={refreshPhotos} onClose={()=>{setReopened(undefined);onPhotoClose();}} onQueued={queued} onSaved={onOpenProduct} onConfirmed={()=>{void refreshPhotos();onConfirmed?.();}}/>}
+  {(photoOpen||reopened)&&<ProductPhotoIntakeModal key={subject} open job={reopened} queue={photoRows??[]} onReview={setReopened} onQueueChanged={refreshPhotos} onClose={()=>{setReopened(undefined);onPhotoClose();}} onQueued={queued} onSaved={onOpenProduct} onConfirmed={()=>{void refreshPhotos();onConfirmed?.();}}/>}
 
  </section>;
 }

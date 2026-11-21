@@ -1,0 +1,3 @@
+b4fc2440c5bc5b57b1e7de5e4b9deffcc31ffe2e7a35350f9baeea6c2bea4e02  baseline/stock-master-DMD-Ad_g.js
+47408a6c19bcaab3f9a9bb6ce74421796571bfe956e88a14a1cbf189e425519c  candidate/stock-master-BemSsu9b.js
+29665358e3c46b4c30e539f5634312d372547f9242f2da12c28533d73f32fc72  candidate/MerchantProductArchiveController.class

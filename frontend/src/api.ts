@@ -178,9 +178,10 @@ export type CostcoOnboardingJobView = {
 
 export type PhotoObservation={id:string;productId:string;supplierId:string;market:string;amount:number|string|null;currency:string|null;unit:string|null;conditions:string|null;inStock:boolean;priceChanged:boolean;observedAt:string;confirmedAt:string};
 export type PhotoStorageCondition='AMBIENT'|'FRESH'|'CHILLED'|'FROZEN';
+export type PhotoQueueRow=CostcoOnboardingJobView&{createdAt:string;reviewReady?:boolean};
 export type PhotoReview={jobId:string;revision:number;supplierId:string;market:string;itemNumber:string|null;status:string;candidate:CostcoOnboardingJobView['candidate'];archiveDetails?:{descriptionJa:string|null;categoryNodeId:string|null;storageCondition:PhotoStorageCondition|null};photoFacts?:{amount:number|string|null;currency:string|null;unit:string|null;conditions:string|null;priceKind:string;productVisible:boolean};matches:{id:string;version:number;name:Record<string,string>;specification:Record<string,string>;packaging:string|null;eligible:boolean}[];history:PhotoObservation[];saved:PhotoObservation|null;sources?:{canonicalUrl:string;sha256:string;mediaType:string}[];officialImageAvailable?:boolean};
 export const photoIntakeApi={
- queue:()=>storeGet<CostcoOnboardingJobView[]>('/api/product-photo-intake'),
+ queue:()=>storeGet<PhotoQueueRow[]>('/api/product-photo-intake'),
  retry:(id:string)=>postJson<CostcoOnboardingJobView,object>('/api/product-photo-intake/'+encodeURIComponent(id)+'/retry',{}),
  image:async(id:string)=>{const r=await authorizedFetch('/api/product-photo-intake/'+encodeURIComponent(id)+'/official-image');if(!r.ok)throw Error(await parseErrorMessage(r));return r.blob();},
  review:(id:string,itemNumber?:string)=>storeGet<PhotoReview>('/api/product-photo-intake/'+encodeURIComponent(id)+(itemNumber?'?'+new URLSearchParams({itemNumber}):'')),
@@ -1271,7 +1272,31 @@ export const recommendationApi = {
     }
 };
 
+export type MerchantArchiveRow = {
+    id: string;
+    name: string;
+    itemNumber?: string | null;
+    brand?: string | null;
+    specification?: string | null;
+    categoryId?: string | null;
+    categoryPath?: string | null;
+    image?: string | null;
+    mediaCount: number;
+    netContent?: string;
+    packSize?: string;
+    catalogDriven: boolean;
+    privateDraft: boolean;
+    currentRegular?: Pick<ProductSale,'amount'|'currency'|'unit'> | null;
+    rating?: number | null;
+};
+export type MerchantArchivePage = {rows: MerchantArchiveRow[]; total: number};
+export const merchantArchivePageSize = 24;
+
 export const api = {
+    merchantArchive: (page: number, query: string, signal?: AbortSignal) =>
+        storeGet<MerchantArchivePage>('/api/merchant/product-archive?' + new URLSearchParams({page:String(page), query}), signal),
+    merchantArchiveExport: () =>
+        storeGet<{ids:string[];limitExceeded:boolean}>('/api/merchant/product-archive/export-selection'),
     costcoOnboarding:{
         status:()=>fetchJson<{workerEnabled:boolean}>('/api/ai/costco-onboarding/status',{workerEnabled:false}),
         number:(input:{requestId:string;supplierId:string;market:string;itemNumber:string})=>postJson<CostcoOnboardingJobView,typeof input>('/api/ai/costco-onboarding',input),
@@ -1591,11 +1616,11 @@ export type PublicCatalogEntry = {rating?:number|null;introduction?:Record<strin
 };
 export type PublicCatalogPage = {items:PublicCatalogEntry[];page:number;size:number;total:number;hasNext:boolean};
 export type MerchantCustomer = { customerId: number; name: string; emailVerified: boolean; merchantApproved: boolean; approvedAt?: string };
-async function storeGet<T>(path: string): Promise<T> {
+async function storeGet<T>(path: string, signal?: AbortSignal): Promise<T> {
     const publicRead=path.startsWith('/api/storefront/');
     const response = publicRead
         ? await retryRead(signal => authorizedFetch(path, { cache: 'no-store', signal }, { includeAccessToken: false, retryOnUnauthorized: false }))
-        : await authorizedFetch(path);
+        : await authorizedFetch(path, signal ? {signal} : undefined);
     if (response.status===409) {const body=await response.clone().json().catch(()=>({}));if(body.errorCode==='BROWSE_CHANGED')throw new Error('browse.changed');}
     if(response.status===400&&/\/api\/storefront\/(product-browse|recommendation-browse|product-sales)/.test(path))throw new Error('browse.invalid');
     if (!response.ok) throw new ReadRequestError(await parseErrorMessage(response), publicRead && isTransientReadStatus(response.status));

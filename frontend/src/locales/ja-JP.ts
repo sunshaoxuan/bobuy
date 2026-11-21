@@ -2,6 +2,10 @@ import type { Dictionary } from './types';
 import experience from './experience.ja-JP.json';
 
 const messages: Dictionary = {
+"products.archive_failed":"商品台帳を読み込めませんでした。",
+"products.archive_loading":"商品を読み込み中",
+"products.archive_navigation":"商品のページ",
+"products.archive_export_limit":"商品が500件を超えるため、上限内でエクスポートできません。",
 "photo.sources":"取得済みの出典（元の写真と照合してください）",
 "photo.unknown_fields":"根拠が不足する項目があります。不明な値は空欄にし、必須項目を手動で補ってください。",
 "photo.official_image":"出典を確認済みの商品画像",
@@ -73,6 +77,8 @@ const messages: Dictionary = {
   "photo.price_updated": "現場の参考価格を更新しました",
   "photo.price_unchanged": "価格に変更はありません",
   "photo.reopen": "写真の処理結果を開く",
+  "photo.queue_empty": "写真タスクはありません",
+  "photo.queue_review": "結果を確認",
   "photo.deleted": "同じ商品番号の削除済み商品があります。確認するか既存の復元機能を利用してください。",
   "photo.identity_required": "商品番号を読み取れません。修正するか撮り直してください。",
   "photo.conflict": "情報が変更されたか再送内容が異なります。再読み込みして確認してください。",
@@ -89,9 +95,9 @@ const messages: Dictionary = {
   "product.create.duplicate": "同じ商品番号の登録があります（削除済みを含む）。元の商品を検索または復元してください。既存の情報は上書きしません。",
   "product.create.deleted_retry": "この作成リクエストの商品は削除されています。削除済み商品を確認してください。",
 
-  "catalogTransfer.export": "一覧の商品をエクスポート",
+  "catalogTransfer.export": "台帳全体をエクスポート",
   "catalogTransfer.load": "JSON ファイルを読み込む",
-  "catalogTransfer.help": "既存の商品 ID とバージョンを使用します。エクスポート対象はこのページの閲覧可能な商品（最大500件）です。読み込み後にプレビューを確認して保存してください。新規・未確認の商品は自動作成しません。",
+  "catalogTransfer.help": "有効な商品台帳全体をエクスポートします（上限500件）。インポートはプレビューに反映されます。確認してから保存してください。",
   "catalogTransfer.template": "JSONテンプレートをダウンロード",
   "catalogTransfer.select": "保存するプレビュー済み商品を1件以上選択してください。",
   "catalogTransfer.invalid": "2 MB 以下、1～500行、商品 ID が重複しない JSON ファイルを使用してください。",

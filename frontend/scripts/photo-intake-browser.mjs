@@ -15,7 +15,7 @@ async function geometry(name){evidence.geometry.push({name,...await page.evaluat
 async function openJob(id){await page.locator(`[data-photo-job="${id}"]`).getByRole('button',{name:'Open photo task'}).click();await page.locator('.product-photo-intake .photo-evidence').waitFor();}
 if(['queue','queue-supplement'].includes(process.env.PHOTO_BROWSER_EXTRA)){
  const captureOnly=process.env.PHOTO_BROWSER_EXTRA==='queue-supplement';
- const folder=new URL('issue-189/',out);
+ const folder=new URL(process.env.PHOTO_QUEUE_MERGE==='true'?'issue-189/merge-193/':'issue-189/',out);
  await fs.mkdir(folder,{recursive:true});
  const modal=page.locator('.product-photo-intake .ant-modal-content');
  const library=modal.locator('input[type=file][multiple]');
@@ -107,8 +107,19 @@ print(json.dumps(dict(width=x,height=y,left=left,top=top,right=right,bottom=bott
    evidence.results.push('Unscaled full-viewport and mobile detail captures. Waited for modal transforms before measuring DOM boxes. Pillow measured dark glyph pixels in the three actions for each CJK locale (RGB max <145, outer 3px ignored).');
    return;
   }
-  const entry=page.getByTestId('ai-quick-snap-button').filter({visible:true});
-  await entry.click();
+  const summary=page.locator('.photo-queue-summary');
+  await summary.getByText(/Awaiting confirmation [1-9]/).waitFor();
+  await summary.getByRole('button',{name:'Photo queue',exact:true}).click();
+  const queuedCount=Number((await summary.locator('.photo-queue-summary-counts').getByText(/^Queued /).innerText()).split(' ').at(-1));
+  if(process.env.PHOTO_QUEUE_MERGE==='true'){
+   for(const [width,height] of [[390,844],[1280,800]]){
+    await page.setViewportSize({width,height});
+    assert(await summary.evaluate(node=>node.scrollWidth<=node.clientWidth));
+    await summary.screenshot({path:new URL(width+'-top-queue.png',folder).pathname});
+   }
+  }
+  await summary.locator(`[data-photo-job="${job}"]`).getByRole('button',{name:'Review and confirm'}).click();
+  await modal.getByText('Confirm and save observation',{exact:true}).waitFor();
   await upload.waitFor();
   await modal.locator(".ant-select:not(.ant-select-loading)").first().waitFor();
   if(!await upload.isEnabled()){
@@ -137,6 +148,8 @@ print(json.dumps(dict(width=x,height=y,left=left,top=top,right=right,bottom=bott
   assert(await upload.isEnabled());
   await camera.setInputFiles(await file('rear-camera.png','#164bc4'));
   await done;
+  for(const id of submitted) await summary.locator(`[data-photo-job="${id}"]`).waitFor({state:'attached'});
+  await summary.locator('.photo-queue-summary-counts').getByText('Queued '+(queuedCount+3),{exact:true}).waitFor({state:'attached'});
   for(const state of ['Queued','Recognizing','Awaiting confirmation','Saved','Failed · retry available']){
    await modal.getByText(state,{exact:true}).first().waitFor();
   }
@@ -167,6 +180,18 @@ print(json.dumps(dict(width=x,height=y,left=left,top=top,right=right,bottom=bott
   await modal.locator(`[data-photo-job="${job}"]`).getByRole('button',{name:'Open photo task'}).click();
   await modal.getByText(/Confirm and save observation/).waitFor();
   assert(await upload.isEnabled());
+  if(process.env.PHOTO_QUEUE_MERGE==='true'){
+   await modal.getByRole('checkbox',{name:/I verified the supplier, market/}).check();
+   await modal.getByRole('checkbox',{name:/I confirmed the amount, currency/}).check();
+   const archiveRefresh=page.waitForResponse(r=>new URL(r.url()).pathname==='/api/merchant/product-archive'&&r.ok());
+   await modal.getByRole('button',{name:'Confirm and save observation',exact:true}).click();
+   const archive=(await (await archiveRefresh).json()).data;
+   assert(archive.rows.length<=24);
+   await modal.getByText('Saved. Reopen to verify.',{exact:true}).waitFor();
+   await modal.getByRole('button',{name:'Close',exact:true}).last().click();
+   await summary.getByRole('button',{name:'Photo queue',exact:true}).click();
+   await summary.locator(`[data-photo-job="${job}"]`).getByText('Saved',{exact:true}).waitFor();
+  }
   for(const locale of ['zh-CN','zh-TW','ja-JP']){
    await page.evaluate(l=>localStorage.setItem('bobbuy_locale',l),locale);
    await page.reload();
@@ -181,7 +206,7 @@ print(json.dumps(dict(width=x,height=y,left=left,top=top,right=right,bottom=bott
   assert.equal(evidence.console.filter(e=>e.type==='pageerror'||e.type==='error').length,0);
   assert.equal(evidence.network.filter(e=>e.path.includes('/product-photo-intake')&&e.status>=400).length,0);
   assert.equal(evidence.network.filter(e=>e.method==='POST'&&e.path==='/api/ai/costco-onboarding/photo').length,3);
-  evidence.results.push('Real Spring API and isolated PostgreSQL: multi-select and continuous capture input, three independent queued responses, reload, all five states, private thumbnails, retry without another multipart request, independent confirmation entry, four locales, 390/767/1280 layouts.');
+  evidence.results.push('Real Spring API and isolated PostgreSQL: multi-select and continuous capture input, three independent queued responses, reload, all five states, private thumbnails, retry without another multipart request, top summary confirmation entry, shared queued count, four locales, 390/767/1280 layouts.');
  };
  try{await run();}
  finally{

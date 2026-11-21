@@ -32,3 +32,13 @@
 .photo-queue-info p {margin:0 0 8px}
 .photo-queue .ant-btn {min-height:44px;height:auto;border-radius:8px;white-space:normal;padding:10px 16px;line-height:22px}
 .photo-queue :focus-visible {outline:2px solid #795908;outline-offset:2px}
+
+.photo-queue-summary {margin-block:8px 16px}
+.photo-queue-summary-bar,.photo-queue-summary-counts,.photo-queue-summary-meta {display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.photo-queue-summary .ant-btn {min-height:44px}
+.photo-queue-summary .ant-tag {margin-inline-end:0}
+.photo-queue-summary-list {list-style:none;margin:8px 0 0;padding:0}
+.photo-queue-summary-list li {display:grid;grid-template-columns:minmax(0,1fr) max-content;align-items:center;gap:8px;padding:6px 0}
+.photo-queue-summary-list li .ant-btn {justify-self:end}
+.stock-mobile-product-actions {display:flex;flex-wrap:wrap;gap:8px}
+.stock-mobile-product-actions > .ant-btn {flex:1 1 auto;width:auto;max-width:100%;height:auto;min-height:44px;white-space:normal}

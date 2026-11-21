@@ -59,6 +59,19 @@ class ProductPhotoIntakeIntegrationTest {
  ObjectNode input(){var x=json.createObjectNode();x.put("revision",7);x.put("itemNumber",item);x.put("productId",product.getId());x.put("productVersion",product.getRecordVersion());x.put("identityConfirmed",true);x.put("priceConfirmed",true);x.put("amount",999);x.put("currency","JPY");x.put("unit","80 × 2");x.put("inStock",true);x.put("observedAt",Instant.now().minusSeconds(60).toString());return x;}
  JsonNode confirm(String id,ObjectNode x,String token)throws Exception{return json.readTree(mvc.perform(post("/api/product-photo-intake/"+id+"/confirm").header("Authorization","Bearer "+token).contentType(MediaType.APPLICATION_JSON).content(x.toString())).andExpect(status().isOk()).andReturn().getResponse().getContentAsByteArray()).path("data");}
  JsonNode review(String id)throws Exception{return json.readTree(mvc.perform(get("/api/product-photo-intake/"+id).header("Authorization","Bearer "+auth)).andExpect(status().isOk()).andReturn().getResponse().getContentAsByteArray()).path("data");}
+ @Test void photoQueueFindsExistingPhotosAndReflectsConfirmationForTheirOwner()throws Exception{
+  String another=makeJob(String.valueOf(Long.parseLong(item)+1));
+  mvc.perform(get("/api/product-photo-intake").header("Authorization","Bearer "+auth))
+   .andExpect(status().isOk()).andExpect(jsonPath("$.data[*].id",org.hamcrest.Matchers.hasItems(job,another)))
+   .andExpect(jsonPath("$.data[?(@.id == '"+job+"')].reviewReady",org.hamcrest.Matchers.contains(true)));
+  mvc.perform(get("/api/product-photo-intake").header("Authorization","Bearer "+foreign))
+   .andExpect(status().isOk()).andExpect(jsonPath("$.data").isEmpty());
+  mvc.perform(get("/api/product-photo-intake").header("Authorization","Bearer "+customer))
+   .andExpect(status().isForbidden());
+  confirm(job,input(),auth);
+  mvc.perform(get("/api/product-photo-intake").header("Authorization","Bearer "+auth))
+   .andExpect(status().isOk()).andExpect(jsonPath("$.data[?(@.id == '"+job+"')].state",org.hamcrest.Matchers.contains("COMPLETED")));
+ }
  @Test @EnabledIfEnvironmentVariable(named="BOBBUY_PHOTO_LIVE_TEST", matches="true")
  void livePhotoMatchesAndUpdatesObservation() throws Exception {
   categories.saveAndFlush(new CategoryTreeNode("photo-live-frozen-seafood",null,
