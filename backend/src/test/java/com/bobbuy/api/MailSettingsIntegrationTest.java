@@ -94,6 +94,26 @@ class MailSettingsIntegrationTest {
   mvc.perform(post("/api/admin/settings/mail/test").header("Authorization","Bearer "+admin).contentType(MediaType.APPLICATION_JSON).content("{\"recipient\":\"self@example.test\"}")).andExpect(status().isBadRequest());
   assertThat(events.findAll()).anyMatch(e->e.eventType.equals("TEST_SUCCESS"));
  }
+ @Test void workflowProbeUsesApprovedSelfToSelfAndSharedCooldownWhileSettingsDisabled() throws Exception {
+  var workflowMail = new MailSettingsService(settings, events, cipher, smtp, mock(AuthService.class),
+      "mail.briconbric.com", "postmaster@bobuy.cc");
+  assertThat(workflowMail.testFromWorkflow()).isEqualTo(MailSettingsService.TestOutcome.SETTINGS);
+  var oldSender = edit();
+  oldSender.put("fromAddress", "different@example.test");
+  save(oldSender, admin).andExpect(status().isOk());
+  assertThat(workflowMail.testFromWorkflow()).isEqualTo(MailSettingsService.TestOutcome.SETTINGS);
+  verifyNoInteractions(smtp);
+
+  var corrected = edit();
+  corrected.put("version", settings.findById(1).orElseThrow().version);
+  save(corrected, admin).andExpect(status().isOk());
+  assertThat(settings.findById(1).orElseThrow().enabled).isFalse();
+  assertThat(workflowMail.testFromWorkflow()).isEqualTo(MailSettingsService.TestOutcome.SUCCESS);
+  assertThat(workflowMail.testFromWorkflow()).isEqualTo(MailSettingsService.TestOutcome.THROTTLED);
+  verify(smtp).send(argThat(saved -> saved.fromAddress.equals("postmaster@bobuy.cc")), eq("synthetic-secret"),
+      argThat(message -> Arrays.equals(message.getTo(), new String[]{"postmaster@bobuy.cc"})));
+  assertThat(events.findAll()).anyMatch(event -> event.actorId == 0L && event.eventType.equals("TEST_SUCCESS"));
+ }
  @Test void registrationDeliveryUsesSameSavedIdentityAndFailsClosedWhenDisabledOrTampered() throws Exception {
   assertThat(service.sendIfConfigured(new SimpleMailMessage())).isFalse();
   var request=edit();save(request,admin).andExpect(status().isOk());
