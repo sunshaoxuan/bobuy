@@ -77,26 +77,53 @@ public class MailSettingsService {
   events.save(new MailSettingsEvent(s.updatedBy,s.version,supplied?"SAVE_PASSWORD":"SAVE"));
   return view(s);
  }
+ private static final String PROBE_MAILBOX = "postmaster@bobuy.cc";
+ public enum TestOutcome { SUCCESS, SETTINGS, THROTTLED, PREPARE, CONNECT, AUTH, REJECTED, SUBMIT_UNKNOWN }
+
  public synchronized void test(String recipient,Authentication authentication) {
   if(recipient==null || !testRecipients.contains(recipient.toLowerCase(Locale.ROOT))) throw invalid("Test recipient is not approved");
   if(Instant.now().isBefore(nextTest)) throw invalid("Wait 60 seconds before another test");
   MailSettings s=settings.findById(1).orElseThrow(()->invalid("Save SMTP settings first"));
   if(s.encryptedPassword==null) throw invalid("SMTP password is required");
+  long actor=auth.currentUser(authentication).id();
+  if (runTest(s, recipient, actor) != TestOutcome.SUCCESS) {
+   throw invalid("SMTP test failed; check the saved settings and mail server");
+  }
+ }
+
+ public synchronized TestOutcome testFromWorkflow() {
+  if (Instant.now().isBefore(nextTest)) return TestOutcome.THROTTLED;
+  var saved = settings.findById(1);
+  if (saved.isEmpty() || saved.get().encryptedPassword == null || !testRecipients.contains(PROBE_MAILBOX)
+      || !PROBE_MAILBOX.equalsIgnoreCase(saved.get().fromAddress)) {
+   return TestOutcome.SETTINGS;
+  }
+  return runTest(saved.get(), PROBE_MAILBOX, 0L);
+ }
+
+ private TestOutcome runTest(MailSettings s, String recipient, long actor) {
   nextTest=Instant.now().plusSeconds(60);
   SimpleMailMessage message=new SimpleMailMessage();
   message.setTo(recipient); message.setSubject("Bobuy SMTP test");
   message.setText("Bobuy mail settings test. No account or verification token is included.");
-  long actor=auth.currentUser(authentication).id();
+  TestOutcome outcome;
   try {
    send(s,message);
+   outcome=TestOutcome.SUCCESS;
   } catch (SmtpDelivery.Failure failure) {
-   recordTest(actor,s.version,"TEST_FAILED_" + failure.stage);
-   throw invalid("SMTP test failed; check the saved settings and mail server");
+   outcome=switch (failure.stage) {
+    case PREPARE -> TestOutcome.PREPARE;
+    case CONNECT -> TestOutcome.CONNECT;
+    case AUTH -> TestOutcome.AUTH;
+    case REJECTED -> TestOutcome.REJECTED;
+    case SUBMIT_UNKNOWN -> TestOutcome.SUBMIT_UNKNOWN;
+    case CLOSE_AFTER_ACCEPT -> TestOutcome.SUCCESS;
+   };
   } catch (RuntimeException failure) {
-   recordTest(actor,s.version,"TEST_FAILED_SETTINGS");
-   throw invalid("SMTP test failed; check the saved settings and mail server");
+   outcome=TestOutcome.SETTINGS;
   }
-  recordTest(actor,s.version,"TEST_SUCCESS");
+  recordTest(actor,s.version,outcome == TestOutcome.SUCCESS ? "TEST_SUCCESS" : "TEST_FAILED_" + outcome);
+  return outcome;
  }
  private void recordTest(long actor, long version, String outcome) {
   try {

@@ -37,6 +37,7 @@ vi.mock('../api', () => ({
       {
         product: {
           id: 'prd-1000',
+          cartEnabled: false,
           name: { 'zh-CN': 'Organic Milk', 'ja-JP': 'Organic Milk', 'en-US': 'Organic Milk' },
           categoryId: 'cat-1000',
           basePrice: 12.99,
@@ -50,6 +51,7 @@ vi.mock('../api', () => ({
       {
         product: {
           id: 'prd-1001',
+          cartEnabled: true,
           name: { 'zh-CN': 'Fresh Spinach', 'ja-JP': 'Fresh Spinach', 'en-US': 'Fresh Spinach' },
           categoryId: 'cat-1000',
           basePrice: 4.49,
@@ -63,6 +65,8 @@ vi.mock('../api', () => ({
     translate: () => Promise.resolve({ translatedText: '' }),
     deleteProduct: vi.fn().mockResolvedValue(undefined),
     patchProduct: vi.fn().mockResolvedValue({}),
+    previewCartAvailability: vi.fn(),
+    enableCartAvailability: vi.fn(),
     createProduct:vi.fn().mockResolvedValue({product:{id:"manual-saved",name:{"ja-JP":"手入力"},description:{}},displayName:"手入力",categoryPath:""}),
     onboardConfirm: vi.fn().mockResolvedValue({
       product: { id: 'prd-new', name: { 'zh-CN': 'X' }, basePrice: 1 },
@@ -74,6 +78,59 @@ vi.mock('../api', () => ({
 }));
 
 import StockMaster, {stockItemFromResponse} from './StockMaster';
+
+it('saves the product cart switch independently and reflects the persisted response', async () => {
+  setMatchMedia(false);
+  localStorage.setItem('bobbuy_locale', 'en-US');
+  const save = vi.mocked(api.patchProduct);
+  save.mockClear();
+  save.mockResolvedValueOnce({product: {id: 'prd-1000', cartEnabled: true, name: {}, basePrice: 0},
+    displayName: 'Organic Milk', displayDescription: ''});
+  renderWithI18n(<StockMaster embedded />);
+  const toggle = await screen.findByRole('switch', {name: 'Allow adding to cart Organic Milk'});
+  expect(toggle).not.toBeChecked();
+  fireEvent.click(toggle);
+  await waitFor(() => expect(toggle).toBeChecked());
+  expect(save).toHaveBeenCalledTimes(1);
+  expect(save).toHaveBeenCalledWith('prd-1000', {cartEnabled: true});
+});
+
+it('previews bulk changes without writing, cancels, confirms and shows the empty state', async () => {
+  setMatchMedia(true);
+  localStorage.setItem('bobbuy_locale', 'en-US');
+  const preview = vi.mocked(api.previewCartAvailability);
+  const enable = vi.mocked(api.enableCartAvailability);
+  enable.mockClear();
+  preview.mockResolvedValue({count: 1, items: [{id: 'prd-1000', name: {'en-US': 'Organic Milk'}, itemNumber: 'SKU-20934'}],
+    revision: 'reviewed-revision'});
+  enable.mockResolvedValueOnce({enabledIds: ['prd-1000']});
+  renderWithI18n(<StockMaster embedded />);
+  const toggle = await screen.findByRole('switch', {name: 'Allow adding to cart Organic Milk'});
+  const bulk = screen.getByRole('button', {name: 'Enable cart for all products'});
+  fireEvent.click(bulk);
+  let dialog = await screen.findByRole('dialog');
+  await waitFor(() => expect(within(dialog).getByText('Products to enable: 1')).toBeVisible());
+  expect(within(dialog).getByText('SKU-20934')).toBeVisible();
+  expect(enable).not.toHaveBeenCalled();
+  fireEvent.click(within(dialog).getByRole('button', {name: 'Cancel'}));
+  await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+  expect(enable).not.toHaveBeenCalled();
+  expect(toggle).not.toBeChecked();
+
+  fireEvent.click(bulk);
+  dialog = await screen.findByRole('dialog');
+  fireEvent.click(within(dialog).getByRole('button', {name: 'Confirm enablement'}));
+  await waitFor(() => expect(toggle).toBeChecked());
+  expect(enable).toHaveBeenCalledTimes(1);
+  expect(enable).toHaveBeenCalledWith('reviewed-revision');
+  await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+
+  preview.mockResolvedValueOnce({count: 0, items: [], revision: 'empty'});
+  fireEvent.click(screen.getByRole('button', {name: 'All products are enabled'}));
+  dialog = await screen.findByRole('dialog');
+  expect(within(dialog).getByRole('status')).toHaveTextContent('All products are enabled');
+  expect(within(dialog).getByRole('button', {name: 'Confirm enablement'})).toBeDisabled();
+});
 
 const detailsById=new Map<string,Awaited<ReturnType<typeof api.product>>>();
 beforeEach(()=>{
@@ -87,6 +144,7 @@ beforeEach(()=>{
   const rows=details.filter(row=>[row.displayName,row.product.itemNumber].some(text=>text?.toLowerCase().includes(query.toLowerCase())));
   return {total:rows.length,rows:rows.slice(page*24,(page+1)*24).map(({product,displayName,categoryPath,currentRegular})=>({
    id:product.id,name:displayName,itemNumber:product.itemNumber,categoryId:product.categoryId,categoryPath,currentRegular,
+   cartEnabled:product.cartEnabled,
    catalogDriven:!!product.catalogData,privateDraft:product.visibilityStatus==='DRAFTER_ONLY',
    mediaCount:product.mediaGallery?.length??0,image:product.mediaGallery?.find(media=>media.type?.toLowerCase()==='image')?.url
   }))};
@@ -406,4 +464,34 @@ it('retries the failed archive page',async()=>{
  await screen.findByText('Product archive could not be loaded.');
  fireEvent.click(screen.getByRole('button',{name:'Retry'}));
  await screen.findByText('Organic Milk');
+});
+
+it('previews disabled products from other pages even when all visible products are enabled', async () => {
+  setMatchMedia(false);
+  localStorage.setItem('bobbuy_locale', 'en-US');
+  let disabled = true;
+  vi.mocked(api.merchantArchive).mockImplementation(async page => ({
+    total: 25,
+    allCartEnabled: !disabled,
+    rows: [{id: page ? 'other-page' : 'first-page', name: page ? 'Other page' : 'First page',
+      mediaCount: 0, catalogDriven: false, privateDraft: false, cartEnabled: page === 0 || !disabled}]
+  }));
+  vi.mocked(api.previewCartAvailability).mockResolvedValueOnce({
+    count: 1, items: [{id: 'other-page', name: {'en-US': 'Other page'}, itemNumber: null}], revision: 'all-pages'
+  });
+  const enable = vi.mocked(api.enableCartAvailability);
+  enable.mockImplementationOnce(async () => {
+    disabled = false;
+    return {enabledIds: ['other-page']};
+  });
+  renderWithI18n(<StockMaster embedded />);
+  expect(await screen.findByRole('switch', {name: 'Allow adding to cart First page'})).toBeChecked();
+  fireEvent.click(screen.getByRole('button', {name: 'Enable cart for all products'}));
+  const dialog = await screen.findByRole('dialog');
+  expect(within(dialog).getByText('Other page')).toBeInTheDocument();
+  fireEvent.click(within(dialog).getByRole('button', {name: 'Confirm enablement'}));
+  await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+  expect(enable).toHaveBeenCalledWith('all-pages');
+  fireEvent.click(screen.getByRole('button', {name: 'Next'}));
+  expect(await screen.findByRole('switch', {name: 'Allow adding to cart Other page'})).toBeChecked();
 });

@@ -195,6 +195,7 @@ export type MobileProductResponse = {
         currentRegular?:ProductSale|null;
         product: {
               recordVersion?: number;
+              cartEnabled?: boolean;
               catalogData?: unknown;
             id: string;
             name: Record<string, string>;
@@ -571,6 +572,7 @@ export type WalletTransaction = {
 };
 
 export type ProductPatch = Partial<{
+    cartEnabled: boolean;
     name: Record<string, string | null>;
     description: Record<string, string | null>;
     brand: string;
@@ -957,7 +959,9 @@ async function fetchJson<T>(url: string, fallbackValue: T, init?: RequestInit): 
     return parseSuccessPayload(response, fallbackValue);
 }
 
-async function postJson<TResponse, TBody>(url: string, body: TBody, options?: RequestOptions): Promise<TResponse> {
+type JsonWriteOptions = RequestOptions & { notifyOnError?: boolean };
+
+async function postJson<TResponse, TBody>(url: string, body: TBody, options?: JsonWriteOptions): Promise<TResponse> {
     const response = await authorizedFetch(url, {
         method: 'POST',
         body: JSON.stringify(body)
@@ -966,9 +970,11 @@ async function postJson<TResponse, TBody>(url: string, body: TBody, options?: Re
         if (response.status === 401) {
             clearAuthSession();
         }
-        console.error(`[API ERROR] POST failure at ${url} (Status: ${response.status})`);
         const errorMessage = await parseErrorMessage(response);
-        message.error(errorMessage);
+        if (options?.notifyOnError !== false) {
+            console.error(`[API ERROR] POST failure at ${url} (Status: ${response.status})`);
+            message.error(errorMessage);
+        }
         throw new Error(errorMessage);
     }
     return parseSuccessPayload(response);
@@ -984,7 +990,7 @@ async function customerAmendmentRequest(orderId:number,input?:CustomerAmendmentI
     return parseSuccessPayload<CustomerAmendmentView>(response);
 }
 
-async function patchJson<TResponse, TBody>(url: string, body: TBody, options?: RequestOptions): Promise<TResponse> {
+async function patchJson<TResponse, TBody>(url: string, body: TBody, options?: JsonWriteOptions): Promise<TResponse> {
     const response = await authorizedFetch(url, {
         method: 'PATCH',
         body: JSON.stringify(body)
@@ -994,7 +1000,7 @@ async function patchJson<TResponse, TBody>(url: string, body: TBody, options?: R
             clearAuthSession();
         }
         const errorMessage = await parseErrorMessage(response);
-        message.error(errorMessage);
+        if (options?.notifyOnError !== false) message.error(errorMessage);
         throw new Error(errorMessage);
     }
     return parseSuccessPayload(response);
@@ -1272,8 +1278,15 @@ export const recommendationApi = {
     }
 };
 
+export type CartAvailabilityPreview = {
+    count: number;
+    items: {id: string; name: Record<string, string>; itemNumber: string | null}[];
+    revision: string;
+};
+
 export type MerchantArchiveRow = {
     id: string;
+    cartEnabled?: boolean;
     name: string;
     itemNumber?: string | null;
     brand?: string | null;
@@ -1289,7 +1302,7 @@ export type MerchantArchiveRow = {
     currentRegular?: Pick<ProductSale,'amount'|'currency'|'unit'> | null;
     rating?: number | null;
 };
-export type MerchantArchivePage = {rows: MerchantArchiveRow[]; total: number};
+export type MerchantArchivePage = {rows: MerchantArchiveRow[]; total: number; allCartEnabled?: boolean};
 export const merchantArchivePageSize = 24;
 
 export const api = {
@@ -1402,7 +1415,13 @@ export const api = {
     createProduct: (input: ProductPatch & {requestId:string;specification?:Record<string,string>;categoryNodeId?:string|null}) =>
         postJson<MobileProductResponse,object>('/api/mobile/products',input),
     patchProduct: (id: string, patch: ProductPatch) =>
-        patchJson<MobileProductResponse, ProductPatch>(`/api/mobile/products/${id}`, patch),
+        patchJson<MobileProductResponse, ProductPatch>(`/api/mobile/products/${encodeURIComponent(id)}`, patch,
+            {notifyOnError: patch.cartEnabled === undefined}),
+    previewCartAvailability: () =>
+        storeGet<CartAvailabilityPreview>('/api/merchant/product-cart-availability/preview'),
+    enableCartAvailability: (revision: string) =>
+        postJson<{enabledIds: string[]}, {revision: string}>(
+            '/api/merchant/product-cart-availability/enable', {revision}, {notifyOnError: false}),
     procurementHud: (tripId: number) =>
         fetchJson<ProcurementHudStats>(`/api/procurement/${tripId}/hud`, {
             tripId,
@@ -1606,9 +1625,9 @@ export const api = {
 };
 
 export type StoreTrip = { id: number; merchantId: number; merchantName: string; deliveryArea: string; deliveryDate: string };
-export type StoreProduct = { id: string; merchantId: number; name: Record<string, string>; description: Record<string, string>; brand: string; price: number; categoryId: string; images: string[]; recommendationReady?:boolean;currency?:string;saleUnit?:string;priceRevision?:number;priceToken?:string;regularPrice?:number;priceAdjustmentId?:number;priceValidFrom?:string;priceValidUntil?:string;priceChange?:PriceChangeView|null };
+export type StoreProduct = { id: string; merchantId: number; name: Record<string, string>; description: Record<string, string>; brand: string; price: number; categoryId: string; images: string[]; cartEnabled?:boolean;recommendationReady?:boolean;currency?:string;saleUnit?:string;priceRevision?:number;priceToken?:string;regularPrice?:number;priceAdjustmentId?:number;priceValidFrom?:string;priceValidUntil?:string;priceChange?:PriceChangeView|null };
 export type PublicReferencePrice={documentId:number;documentNumber:string;channel:string;currency:string;unit:string;amount:number;regularAmount:number|null;promotion:boolean;startsAt:string;endsAt:string|null;type:PriceChangeView['type'];state:string};
-export type PublicCatalogEntry = {rating?:number|null;introduction?:Record<string,string>;referencePrices?:PublicReferencePrice[];
+export type PublicCatalogEntry = {cartEnabled?:boolean;rating?:number|null;introduction?:Record<string,string>;referencePrices?:PublicReferencePrice[];
     productId:string; merchantId:number; name:Record<string,string>; description:Record<string,string>;
     brand:string|null; itemNumber:string|null; specification:Record<string,string>; model:string|null; packaging:string|null;
     gallery:RecommendationPicture[]; categories:RecommendationLabel[];

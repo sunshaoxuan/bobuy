@@ -43,6 +43,8 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 
     java.util.List<Product> findAllByMerchantIdAndIdIn(Long merchantId, java.util.Collection<String> ids);
     java.util.List<Product> findAllByMerchantId(Long merchantId);
+    java.util.List<Product> findAllByMerchantIdAndCartEnabledFalseOrderById(Long merchantId);
+    boolean existsByMerchantIdAndCartEnabledFalse(Long merchantId);
     boolean existsByIdAndMerchantId(String id, Long merchantId);
     java.util.List<Product> findAllByMerchantIdAndItemNumber(Long merchantId, String itemNumber);
     @org.springframework.data.jpa.repository.Query(value="select count(*) from bb_product where merchant_id=:owner and item_number=:code and deleted_at is not null",nativeQuery=true)

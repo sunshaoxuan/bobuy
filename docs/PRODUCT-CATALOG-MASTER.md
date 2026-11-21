@@ -34,3 +34,10 @@ This document describes the candidate. Deployment and full browser acceptance st
 手动创建不调用AI识别/翻译、不触发采购对账、不改变库存；原页面已有AI状态/任务GET轮询及worker配置保持原样。不同创建请求使用已有商品编号时拒绝（含软删），请找到或恢复原商品，不自动覆盖或合并身份。JSON补齐仍要求已有商品ID，不用于创建。媒体沿用当前主档HTTPS来源边界：无用户信息、query或fragment；已保存手动视频可原样保留随其他字段保存，主档编辑不能借此新增/换视频URL。
 
 本候选无schema迁移、无真实商品回填。验证与限制见 [验收材料](reports/evidence/product-create-20261119/README.md)，生产合并/发布/验收由本机协调。
+## Cart availability
+
+V49 adds a non-null Boolean with a default of true. Existing active and soft-deleted products receive that default, as do newly created products. The migration changes only the new column.
+
+The owning merchant can change a single product in Product records or preview and confirm a bulk enablement for active products. Confirmation checks the reviewed set and product revisions. Every committed change audits the product, previous and new values, operator and timestamp.
+
+The management API accepts and returns `cartEnabled`. Public catalog, browse and confirmed-sale responses may return true only for public, non-deleted products with the flag enabled. Existing price and visibility rules still apply.

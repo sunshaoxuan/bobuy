@@ -38,7 +38,7 @@ class CustomerOrderAmendmentServiceTest {
         when(products.lockById(productId)).thenReturn(Optional.of(product));when(sales.now()).thenReturn(Instant.parse("2026-11-09T10:00:00Z"));
         when(products.findAllById(any())).thenReturn(List.of(product));
         when(sales.quoteAt(eq(product),any())).thenReturn(Optional.of(quote("quote-a")));
-        when(storefront.publicProducts()).thenReturn(List.of(new StorefrontService.PublicProduct(productId,3L,Map.of("en-US","Synthetic tea"),Map.of(),"Brand",10D,null,List.of(),"JPY","pack",1,true,"quote-a",null,null,null,null,null)));
+        when(storefront.publicProducts()).thenReturn(List.of(new StorefrontService.PublicProduct(productId,3L,Map.of("en-US","Synthetic tea"),Map.of(),"Brand",10D,null,List.of(),"JPY","pack",1,true,"quote-a",null,null,null,null,null,true)));
         when(receipts.findById(anyString())).thenAnswer(i->Optional.ofNullable(saved.get(i.getArgument(0))));
         when(receipts.saveAndFlush(any())).thenAnswer(i->{CustomerOrderAmendmentReceipt r=i.getArgument(0);saved.put(r.id,r);return r;});
         when(orders.saveAndFlush(any())).thenAnswer(i->{setVersion(order,(order.getOrderRevision()==null?0:order.getOrderRevision())+1);return i.getArgument(0);});
