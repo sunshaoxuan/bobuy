@@ -260,4 +260,4 @@ Ant Design `Switch` 只用于后台。公开商城布尔筛选使用 `button` + 
 - 同一 Ant Design 弹窗内选择供应商、拍照或选图、查看私有证据与候选；长内容在有界内部容器滚动，主按钮沿用工作台深色，错误保留可重试输入。
 - 现场采购价、单位、促销条件与「现场有货」需要明确确认。候选展示 AI 建议、来源图片及价签原图。确认成功先显示收据，再由「打开商品」进入档案。
 - 主要操作控件至少 44px，8px 圆角，四语自然换行；复选框补上下 4px 内距、操作文字上移 1px 作光学对齐。应用范围为 `.product-photo-intake`。
-- [隔离页面、计算样式与字形证据](reports/evidence/product-photo-intake-20261120/README.md)和[真实图片验收记录](plans/PRODUCT-PHOTO-INTAKE-20261120.md)。实体相机和生产复验待执行。
+- [隔离页面、计算样式与字形证据](reports/evidence/product-photo-intake-20261120/README.md)和[真实图片验收记录](plans/PRODUCT-PHOTO-INTAKE-20261120.md)。Android API 36 原生摄像和回传已在模拟设备验证，实体设备及生产复验待执行。

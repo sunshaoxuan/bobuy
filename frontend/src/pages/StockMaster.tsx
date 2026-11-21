@@ -788,7 +788,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
                   {t('stock.master.add_row')}
                 </Button>
                 <Button data-testid="ai-quick-snap-button" type="primary" icon={<CameraOutlined />} onClick={() => setIsQuickAddVisible(true)} block>
-                  {t('stock.master.quick_snap')}
+                  {t('photo.title')}
                 </Button>
               </Space>
             </Space>
@@ -811,7 +811,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
                   {t('stock.master.add_row')}
                 </Button>
                 <Button data-testid="ai-quick-snap-button" type="primary" icon={<CameraOutlined />} onClick={() => setIsQuickAddVisible(true)}>
-                  {t('stock.master.quick_snap')}
+                  {t('photo.title')}
                 </Button>
               </Space>
           </Space>

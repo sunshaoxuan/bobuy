@@ -154,3 +154,9 @@ npm run check:i18n
 - `IMG_1484.jpg` 实测官方来源为 `/c/Frozen-Mixed-Seafood-1kg/p/53432`。审核读取 1 kg 与 −18 °C 保存规格，核对原现场照片和 1200×1200 官网图，进入 `photo.confirm_required`。官网图私有 GET 返回 200 和 image/jpeg，已有商品价格和有货确认回读通过。官网网店报价未写入现场价格。
 - `IMG_1638.jpg` 的官网入口返回通用页面，身份审核拒绝该来源；应用保留实拍已读字段，仍成功创建并回读私有新品。未验证来源未用于补全。
 - `CostcoPinnedStageReviewerTest` 14 项及 `ProductPhotoIntakeIntegrationTest#livePhotoMatchesAndUpdatesObservation` 真实检查通过。Android 隔离应用启动实际从空 PostgreSQL 应用了 49 条迁移，最高到 V48。
+
+### 本地移动拍照和入口验收
+
+- Android 36 Pixel 8 模拟设备通过隔离 HTTPS 正常登录并打开商品档案。「设备拍照」触发 Chrome 的拍照权限和 Android 原生相机，拍摄虚拟场景并确认后，BoBuy 同一弹窗显示返回的照片。实体验收与模拟设备证据分别记录。
+- 商品档案入口复用四语弹窗标题「拍照识别商品」。最新前端在 Chromium 390×844、1280×800 和本地真实接口通过。入口为 138×44 CSS px，两视口均能就地打开弹窗，供应商及 worker 状态响应 200，未观察到页面 JS 错误或横向溢出。StockMaster 页面定向单测通过。
+- [Android 原生相机](../reports/evidence/product-photo-intake-20261120/android-api36-native-camera.png)、[Android 返回后的预览](../reports/evidence/product-photo-intake-20261120/android-api36-returned-preview.png)、[手机入口](../reports/evidence/product-photo-intake-20261120/photo-entry-390.png)和[桌面弹窗](../reports/evidence/product-photo-intake-20261120/photo-dialog-1280.png)。
