@@ -77,6 +77,18 @@ class CostcoNumberOnboardingServiceTest {
     private static CostcoNumberOnboardingService.Input input(long merchant, long supplier, String market, String number, String photo) {
         return new CostcoNumberOnboardingService.Input(merchant, Long.toString(supplier), market, REQUEST, number, photo);
     }
+    @Test void transientVisionFailureKeepsDurablePhotoAndStableDiagnostic() {
+        var fixture=new Fixture();
+        fixture.decide=(stage,job)->{throw new LlmGateway.PinnedFailure("ai.pinned_rate_limited");};
+        var service=fixture.service();
+        var job=service.enqueue(input(1,2,"JP",null,IMAGE));
+        var deferred=service.execute(job.id(),1,0);
+        assertEquals(RETRY_WAIT,deferred.state());
+        assertEquals("ai.pinned_rate_limited",deferred.failureCode());
+        assertEquals(job.id(),deferred.id());
+        assertEquals(IMAGE,deferred.privatePhotoSha256());
+        assertEquals(0,fixture.saves.get());
+    }
     @Test void normalizesProtocolOnlyAndRetainsLeadingZeroes() {
         assertEquals("0014110", CostcoNumberOnboardingService.normalizeItemNumber(" ００１４１１０ "));
         for (var invalid : List.of("14110,77839", "1e5", "14110 77839", "ITEM 14110", "", "-14110", "1234567890123"))

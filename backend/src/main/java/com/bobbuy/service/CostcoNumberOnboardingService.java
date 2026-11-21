@@ -130,6 +130,13 @@ public final class CostcoNumberOnboardingService {
         } catch (NeedsInput missing) {
             if (job.state() == COMMITTING) throw missing;
             return move(job, NEEDS_INPUT, job.itemNumber(), job.evidence(), job.decisions(), null, null, missing.getMessage());
+        } catch (LlmGateway.PinnedFailure failure) {
+            if(job.state()==COMMITTING)throw failure;
+            String code="onboarding.stage_failed";
+            if(job.privatePhotoSha256()!=null&&java.util.Set.of("ai.pinned_rate_limited","ai.pinned_timeout",
+                    "ai.pinned_transport_or_protocol","ai.pinned_http_failure","ai.pinned_interrupted").contains(failure.getMessage()))
+                code=failure.getMessage();
+            return move(job,RETRY_WAIT,job.itemNumber(),job.evidence(),job.decisions(),null,null,code);
         } catch (RuntimeException error) {
             // An uncertain save remains COMMITTING. Never blindly create another product or mark completion.
             if (job.state() == COMMITTING) throw error;
