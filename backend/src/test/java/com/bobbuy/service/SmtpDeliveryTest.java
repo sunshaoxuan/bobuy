@@ -1,6 +1,13 @@
 package com.bobbuy.service;
 import com.bobbuy.model.MailSettings;
+import jakarta.mail.Address;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Transport;
 import org.junit.jupiter.api.Test;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.*;
 class SmtpDeliveryTest {
  @Test void alwaysVerifiesServerIdentityRequiresEncryptionAndBoundsNetworkWaits() {
@@ -14,5 +21,39 @@ class SmtpDeliveryTest {
   assertThat(p).doesNotContainKey("mail.smtp.ssl.trust");
   settings.port=465;settings.tlsMode="TLS";var secure=delivery.createSender(settings,"synthetic").getJavaMailProperties();
   assertThat(secure).containsEntry("mail.smtp.ssl.enable","true").containsEntry("mail.smtp.ssl.checkserveridentity","true");
+ }
+
+ @Test void acceptedSubmissionSurvivesFailureDuringCloseWithoutRetry() throws Exception {
+  Transport transport=mock(Transport.class);
+  SmtpDelivery delivery=deliveryWith(transport);
+  doThrow(new MessagingException("synthetic quit failure")).when(transport).close();
+  assertThatCode(()->delivery.send(new MailSettings(),"synthetic",message())).doesNotThrowAnyException();
+  verify(transport).sendMessage(any(),any(Address[].class));
+  verify(transport).close();
+ }
+
+ @Test void lostSubmissionReplyRemainsUnknownWithoutRetry() throws Exception {
+  Transport transport=mock(Transport.class);
+  SmtpDelivery delivery=deliveryWith(transport);
+  doThrow(new MessagingException("synthetic lost reply")).when(transport).sendMessage(any(),any(Address[].class));
+  assertThatThrownBy(()->delivery.send(new MailSettings(),"synthetic",message()))
+      .isInstanceOfSatisfying(SmtpDelivery.Failure.class,failure->assertThat(failure.stage).isEqualTo(SmtpDelivery.Stage.SUBMIT_UNKNOWN))
+      .hasMessageNotContaining("synthetic");
+  verify(transport).sendMessage(any(),any(Address[].class));
+  verify(transport).close();
+ }
+
+ private SmtpDelivery deliveryWith(Transport transport) {
+  return new SmtpDelivery() {
+   @Override Transport openTransport(JavaMailSenderImpl sender) { return transport; }
+  };
+ }
+
+ private SimpleMailMessage message() {
+  var message=new SimpleMailMessage();
+  message.setTo("recipient@example.test");
+  message.setSubject("Synthetic test");
+  message.setText("Synthetic content");
+  return message;
  }
 }

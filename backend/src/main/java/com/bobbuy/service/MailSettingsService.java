@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MailSettingsService {
+ private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(MailSettingsService.class);
  private final MailSettingsRepository settings;
  private final MailSettingsEventRepository events;
  private final MailSecretCipher cipher;
@@ -86,15 +87,34 @@ public class MailSettingsService {
   message.setTo(recipient); message.setSubject("Bobuy SMTP test");
   message.setText("Bobuy mail settings test. No account or verification token is included.");
   long actor=auth.currentUser(authentication).id();
-  try { send(s,message); events.save(new MailSettingsEvent(actor,s.version,"TEST_SUCCESS")); }
-  catch(Exception ignored) { events.save(new MailSettingsEvent(actor,s.version,"TEST_FAILED")); throw invalid("SMTP test failed; check the saved settings and mail server"); }
+  try {
+   send(s,message);
+  } catch (SmtpDelivery.Failure failure) {
+   recordTest(actor,s.version,"TEST_FAILED_" + failure.stage);
+   throw invalid("SMTP test failed; check the saved settings and mail server");
+  } catch (RuntimeException failure) {
+   recordTest(actor,s.version,"TEST_FAILED_SETTINGS");
+   throw invalid("SMTP test failed; check the saved settings and mail server");
+  }
+  recordTest(actor,s.version,"TEST_SUCCESS");
+ }
+ private void recordTest(long actor, long version, String outcome) {
+  try {
+   events.saveAndFlush(new MailSettingsEvent(actor,version,outcome));
+  } catch (RuntimeException failure) {
+   // SMTP acceptance is independent of persisting the administrative receipt.
+   log.error("SMTP test audit write failed for settings version {} with outcome {}", version, outcome);
+  }
  }
  public boolean sendIfConfigured(SimpleMailMessage message) {
   var saved=settings.findById(1);
   if(saved.isEmpty()) return false;
   if(!saved.get().enabled) throw invalid("Configured email delivery is disabled");
   try { send(saved.get(),message); return true; }
-  catch(Exception ignored) { throw invalid("Verification email could not be delivered; please try again later"); }
+  catch(RuntimeException failure) {
+   log.warn("Account mail event {}", failure instanceof SmtpDelivery.Failure smtp ? smtp.stage : "SETTINGS");
+   throw invalid("Verification email could not be delivered; please try again later");
+  }
  }
  public boolean protectedDeliveryReady() {
   var saved=settings.findById(1);

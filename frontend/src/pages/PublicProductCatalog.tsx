@@ -1,3 +1,4 @@
+import CategoryImage from '../components/CategoryImage';
 import {useProgressiveCatalog} from '../useProgressiveCatalog';
 import {useShoppingScroll} from '../useShoppingScroll';
 import CategoryShortcuts from '../components/CategoryShortcuts';
@@ -92,7 +93,9 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   const progressive=location.pathname==='/products'&&kind==='all'&&!category&&!query.trim()&&sort==='default';
   const activation=useSectionActivation(identity);
   const paged=useBrowsePages<ProductBrowseCard>(identity,(page,revision)=>catalogBatch((serverPage,serverRevision)=>storefrontApi.productBrowse({page:serverPage,revision:serverRevision,merchantId:node,query,category,locale,marked:false,markedFirst,sort}),page,revision,batchSize),entry=>entry.productId,enabled&&!progressive&&activation.active&&node!==-1,acceptDataset,batchSize,autoPaused||!!params.get('product'));
-  const incremental=useProgressiveCatalog(identity,{merchantId:node,locale,markedFirst},enabled&&progressive&&activation.active&&node!==-1,autoPaused||!!params.get('product'),acceptDataset);
+  const rootSections=location.pathname==='/products'&&kind==='all'&&!!category&&!query.trim()&&sort==='default'&&!!paged.page?.shelves?.length&&paged.page.categories.some(c=>c.id===category&&!c.parentId);
+  const continuous=progressive||rootSections;
+  const incremental=useProgressiveCatalog(identity,{merchantId:node,locale,markedFirst,category,sections:true},enabled&&continuous&&activation.active&&node!==-1,autoPaused||!!params.get('product'),acceptDataset,rootSections?paged.page:undefined);
   const browse=progressive?{...incremental,items:[],next:()=>{},retry:()=>incremental.retry()}:paged;
   useEffect(()=>{if(kind==="all"&&typeof browse.page?.markedScopeTotal==="number")onMarkedScope?.(browse.page.markedScopeTotal);},[kind,browse.page?.markedScopeTotal,onMarkedScope]);
   const filtered=browse.items;
@@ -101,8 +104,8 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   if(browse.page)navigation.current.categories=browse.page.categories;
   const navigationCategories=navigation.current.categories;
   useEffect(()=>{onNavigation?.(navigationCategories);},[navigationCategories,onNavigation]);
-  const shelves=(browse.page?.shelves??[]).map(s=>progressive?{...s,items:incremental.shelves[s.category]?.items??[]}:s);
-  const shelfMode=!(location.pathname==='/products'&&kind==='all'&&!!category)&&!query.trim()&&sort==='default'&&(!!shelves.length||!browse.page&&(!category||navigation.current.categories.some(c=>c.id===category&&!c.parentId)));
+  const shelves=(browse.page?.shelves??[]).map(s=>continuous?{...s,items:incremental.shelves[s.category]?.items??[]}:s);
+  const shelfMode=continuous||!(location.pathname==='/products'&&kind==='all'&&!!category)&&!query.trim()&&sort==='default'&&(!!shelves.length||!browse.page&&(!category||navigation.current.categories.some(c=>c.id===category&&!c.parentId)));
   useShoppingScroll(!!browse.page,browse.busy,!shelfMode&&!!browse.page?.hasNext,browse.next);
   const visibleCards=shelfMode?shelves.flatMap(s=>s.items):filtered;
   useEffect(()=>{const canonical=browse.page?.selectedCategory;if(canonical!==undefined&&canonical!==category){const next=new URLSearchParams(params);if(canonical)next.set('category',canonical);else next.delete('category');setParams(next,{replace:true});}},[browse.page?.selectedCategory,category]);
@@ -130,6 +133,15 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   const shortcutRoots = dockMode ? navigationCategories.filter(c=>c.id.startsWith('shop-')&&!c.parentId&&c.count>0) : [];
   const currentCategory=navigationCategories.find(c=>c.id===category);
   const selectedRoot=currentCategory?.parentId??category;
+  const selectedLeaf=location.pathname==='/products'&&!!currentCategory?.parentId;
+  useEffect(()=>{
+    const section=activation.element.current;if(!section||!ready)return;
+    const header=section.closest('.storefront')?.querySelector<HTMLElement>('.store-header');
+    const surface=section.querySelector<HTMLElement>('.catalog-dock-surface');
+    const measure=()=>section.style.setProperty('--category-section-top',`${(header?.getBoundingClientRect().height??0)+(surface?.getBoundingClientRect().height??0)}px`);
+    const observer=new ResizeObserver(measure);if(header)observer.observe(header);if(surface)observer.observe(surface);measure();
+    return()=>observer.disconnect();
+  },[ready,dockMode,identity]);
   function categoryParams(value:string) {
     const next=new URLSearchParams(params);next.delete('item');next.delete('product');next.delete('productSection');
     if(value)next.set(categoryKey,value);else next.delete(categoryKey);
@@ -166,14 +178,31 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
     </CatalogDock>:heading}
     <BrowseError error={node===-1?'browse.invalid':browse.error} changed={browse.changed} retry={browse.retry} refresh={reload}/>
     {sales.error&&<BrowseError error={sales.error} retry={sales.retry} refresh={sales.retry}/>}
-    {(category || query.trim()) && <ShoppingNavigation categories={navigationCategories} category={category} onChoose={choose}/>}
+    {(category || query.trim()) && <ShoppingNavigation categories={navigationCategories} category={category} onChoose={choose} hideCurrent={selectedLeaf}/>}
     {dockMode&&sortControls}
     {!ready?(browse.error||node===-1?null:<div className="catalog-progress" role="status"><Spin/><span>{t('browse.loading')}</span></div>):<>
-      {shelfMode?<div className="shopping-shelves">{shelves.map((shelf,shelfIndex)=><ProgressiveShelf key={shelf.category} identity={identity} category={shelf.category} progressive={progressive} activate={incremental.activate}>
-       <header><h2>{shelf.category==='__unclassified'?t('class.unclassified'):localizedContent(browse.page!.categories.find(c=>c.id===shelf.category)?.name??{},locale)}</h2><button type="button" onClick={()=>choose(shelf.category)}>{t('shopping.view_all')} <span aria-hidden>→</span></button></header>
-       {progressive&&incremental.shelves[shelf.category]?.error?<BrowseError error={incremental.shelves[shelf.category].error} changed={incremental.changed} retry={()=>incremental.retry(shelf.category)} refresh={reload}/>:progressive&&!incremental.shelves[shelf.category]?.loaded?<div className="catalog-progress shelf-progress" role="status" aria-label={t('browse.loading')}><Spin/><span>{t('browse.loading')}</span></div>:<div className="catalog-master-grid shopping-shelf-track">{shelf.items.map((entry,index)=>renderCard(entry,index,shelfIndex===0&&index<2))}</div>}
-      </ProgressiveShelf>)}</div>:filtered.length?<div className="catalog-master-grid">{filtered.map((entry,index)=>renderCard(entry,index))}</div>:kind==='marked'?<div className="catalog-marked-empty" role="status"><p>{t(query||category?'store.no_matches':'marker.empty')}</p>{(query||category)&&<Button onClick={()=>{const next=new URLSearchParams(params);next.delete(categoryKey);next.delete('query');setParams(next);}}>{t('class.all')}</Button>}</div>:<Empty description={t(query||category?'store.no_matches':'catalog.empty')}>{category&&<Button onClick={()=>choose('')}>{t('class.all')}</Button>}</Empty>}
-      {!shelfMode&&browse.page?.hasNext&&<div className="feed-loader" ref={sentinel}><Button loading={browse.busy} disabled={revealPaused||browse.changed||!!browse.error} onClick={browse.next}>{t('store.load_more')} ({filtered.length}/{browse.page.matchedTotal})</Button></div>}
+      {shelfMode?<div className="shopping-shelves">{shelves.map((shelf,shelfIndex)=>{
+       const facet=navigationCategories.find(c=>c.id===shelf.category),root=facet?.parentId?navigationCategories.find(c=>c.id===facet.parentId):undefined;
+       const previous=navigationCategories.find(c=>c.id===shelves[shelfIndex-1]?.category);
+       const showRoot=continuous&&!category&&root&&root.id!==(previous?.parentId??previous?.id);
+       const current=incremental.shelves[shelf.category];
+       return <div key={shelf.category} className="shopping-section-group">
+        {showRoot&&<h2 className="shopping-root-heading">{localizedContent(root.name,locale)}</h2>}
+        <ProgressiveShelf identity={identity} category={shelf.category} progressive={continuous} activate={incremental.activate} secondary={continuous&&!!facet?.parentId}>
+         <header className={continuous&&facet?.parentId?'shopping-section-heading':undefined}>
+          {continuous&&facet?.parentId?<h3><CategoryImage src={facet.imageUrl} className="shopping-section-image" priority={false}/>{localizedContent(facet.name,locale)}</h3>:<h2>{shelf.category==='__unclassified'?t('class.unclassified'):localizedContent(facet?.name??{},locale)}</h2>}
+          <button type="button" onClick={()=>choose(shelf.category)}>{t('shopping.view_all')} <span aria-hidden>→</span></button>
+         </header>
+         {continuous&&current?.error&&<BrowseError error={current.error} changed={incremental.changed} retry={()=>incremental.retry(shelf.category)} refresh={reload}/>}
+         {continuous&&!current?.loaded?<div className="catalog-progress shelf-progress" role="status" aria-label={t('browse.loading')}><Spin/><span>{t('browse.loading')}</span></div>:<div className={'catalog-master-grid'+(continuous?'':' shopping-shelf-track')}>{shelf.items.map((entry,index)=>renderCard(entry,index,shelfIndex===0&&index<2))}</div>}
+         {continuous&&current?.loaded&&shelf.items.length<shelf.total&&<SectionContinuation identity={identity+':'+shelf.category+':'+shelf.items.length} paused={autoPaused||!!detailId||incremental.changed||!!current.error} busy={current.busy} next={()=>incremental.next(shelf.category)} shown={shelf.items.length} total={shelf.total}/>}
+        </ProgressiveShelf>
+       </div>;
+      })}</div>:<section className={selectedLeaf?'shopping-selected-section':undefined}>
+       {selectedLeaf&&<header className="shopping-section-heading"><h2 aria-current="page"><CategoryImage src={currentCategory.imageUrl} className="shopping-section-image" priority={false}/>{localizedContent(currentCategory.name,locale)}</h2></header>}
+       {filtered.length?<div className="catalog-master-grid">{filtered.map((entry,index)=>renderCard(entry,index))}</div>:kind==='marked'?<div className="catalog-marked-empty" role="status"><p>{t(query||category?'store.no_matches':'marker.empty')}</p>{(query||category)&&<Button onClick={()=>{const next=new URLSearchParams(params);next.delete(categoryKey);next.delete('query');setParams(next);}}>{t('class.all')}</Button>}</div>:<Empty description={t(query||category?'store.no_matches':'catalog.empty')}>{category&&<Button onClick={()=>choose('')}>{t('class.all')}</Button>}</Empty>}
+       {browse.page?.hasNext&&<div className="feed-loader" ref={sentinel}><Button loading={browse.busy} disabled={revealPaused||browse.changed||!!browse.error} onClick={browse.next}>{t('store.load_more')} ({filtered.length}/{browse.page.matchedTotal})</Button></div>}
+      </section>}
     </>}
     </section>}
     <Drawer className="rec-product-detail catalog-master-detail consumer-detail-drawer" title={opened?<ProductDetailCode value={opened.itemNumber}/>:t('store.details')} width="min(1120px,100vw)" open={!!detailId} onClose={closeDetail}>
@@ -192,9 +221,15 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   </>;
 }
 
-function ProgressiveShelf({identity,category,progressive,activate,children}:{identity:string;category:string;progressive:boolean;activate:(category:string)=>void;children:React.ReactNode}){
+function ProgressiveShelf({identity,category,progressive,activate,children,secondary=false}:{identity:string;category:string;progressive:boolean;activate:(category:string)=>void;children:React.ReactNode;secondary?:boolean}){
  const activation=useSectionActivation(identity+':'+category);
  const callback=useRef(activate);callback.current=activate;
  useEffect(()=>{if(progressive&&activation.active)callback.current(category);},[identity,category,progressive,activation.active]);
- return <section ref={activation.element} className="shopping-shelf" data-shelf-category={category}>{children}</section>;
+ return <section ref={activation.element} className={"shopping-shelf"+(secondary?" shopping-secondary-section":"")} data-shelf-category={category}>{children}</section>;
+}
+
+function SectionContinuation({identity,paused,busy,next,shown,total}:{identity:string;paused:boolean;busy:boolean;next:()=>void;shown:number;total:number}){
+ const {t}=useI18n();
+ const sentinel=useNextBrowsePage(identity,!busy,paused,next);
+ return <div className="feed-loader section-continuation" ref={sentinel}><Button loading={busy} disabled={paused} onClick={next}>{t('store.load_more')} ({shown}/{total})</Button></div>;
 }

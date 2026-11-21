@@ -1,5 +1,9 @@
 name: bobuy
 
+secrets:
+  bobuy-mail-keyring:
+    file: /etc/bobuy-secrets/mail-keyring.properties
+
 x-java: &java
   JAVA_TOOL_OPTIONS: -Xms96m -Xmx320m -XX:MaxMetaspaceSize=192m -XX:ActiveProcessorCount=2
   BOBBUY_ACCOUNT_MAIL_DELIVERY_ENABLED: 'false'
@@ -77,7 +81,21 @@ services:
     environment:
       <<: [*java, *media]
       BOBBUY_MEDIA_WORKER_ENABLED: ${BOBBUY_MEDIA_WORKER_ENABLED:-false}
+      BOBBUY_ACCOUNT_REGISTRATION_ENABLED: ${BOBBUY_ACCOUNT_REGISTRATION_ENABLED:-false}
+      BOBBUY_ACCOUNT_REGISTRATION_TEST_ENABLED: ${BOBBUY_ACCOUNT_REGISTRATION_TEST_ENABLED:-false}
+      BOBBUY_ACCOUNT_PUBLIC_BASE_URL: ${BOBBUY_ACCOUNT_PUBLIC_BASE_URL:-https://bobuy.cc}
+      BOBBUY_ACCOUNT_MAIL_DELIVERY_ENABLED: ${BOBBUY_ACCOUNT_MAIL_DELIVERY_ENABLED:-false}
+      BOBBUY_ACCOUNT_REQUIRE_VERIFIED_EMAIL_FOR_CHECKOUT: ${BOBBUY_ACCOUNT_REQUIRE_VERIFIED_EMAIL_FOR_CHECKOUT:-false}
+      BOBBUY_AUTH_ABUSE_ENABLED: ${BOBBUY_AUTH_ABUSE_ENABLED:-false}
+      BOBBUY_AUTH_ABUSE_TRUSTED_PROXIES: ${BOBBUY_AUTH_ABUSE_TRUSTED_PROXIES:-}
+      BOBBUY_REGISTRATION_CLEANUP_ACCOUNTS: ${BOBBUY_REGISTRATION_CLEANUP_ACCOUNTS:-}
+      BOBUY_MAIL_KEYRING_FILE: /run/bobuy-mail/keyring.properties
+      BOBUY_MAIL_ACTIVE_KEY_ID: mail_20261112
+      BOBUY_MAIL_TEST_RECIPIENTS: postmaster@bobuy.cc
     volumes: *media-files
+    secrets:
+      - source: bobuy-mail-keyring
+        target: /run/bobuy-mail/keyring.properties
     deploy:
       resources:
         limits:

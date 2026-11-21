@@ -38,8 +38,8 @@ class ProductPhotoIntakeIntegrationTest {
  @BeforeEach void setup() throws Exception {
   try(var c=Objects.requireNonNull(jdbc.getDataSource()).getConnection()){
    if(!Boolean.TRUE.equals(jdbc.queryForObject("select to_regclass('bb_costco_onboarding_job') is not null",Boolean.class)))ScriptUtils.executeSqlScript(c,new ClassPathResource("db/migration/V30__costco_onboarding_jobs.sql"));
-   ScriptUtils.executeSqlScript(c,new ClassPathResource("db/migration/V47__product_photo_observations.sql"));
-   ScriptUtils.executeSqlScript(c,new ClassPathResource("db/migration/V47__product_photo_observations.sql"));
+   ScriptUtils.executeSqlScript(c,new ClassPathResource("db/migration/V48__product_photo_observations.sql"));
+   ScriptUtils.executeSqlScript(c,new ClassPathResource("db/migration/V48__product_photo_observations.sql"));
   }
   if(users.findById(1000L).isEmpty())store.seed();
   auth=tokens.createAccessToken(users.findById(1000L).orElseThrow());

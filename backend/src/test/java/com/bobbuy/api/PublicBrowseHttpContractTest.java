@@ -20,6 +20,13 @@ class PublicBrowseHttpContractTest {
   mvc.perform(get("/api/storefront/product-browse").param("revision","0".repeat(64))).andExpect(status().isConflict()).andExpect(jsonPath("$.errorCode").value("BROWSE_CHANGED"));
   mvc.perform(get("/api/storefront/product-browse").param("merchantId","abc")).andExpect(status().isBadRequest());
  }
+ @Test void secondarySectionParametersUseTheExistingPublicReadEnvelope()throws Exception{
+  var mvc=MockMvcBuilders.standaloneSetup(new PublicProductBrowseController(new PublicProductBrowseService(new Catalog(),new Markers()))).build();
+  var response=mvc.perform(get("/api/storefront/product-browse/overview").param("sections","true")).andExpect(status().isOk()).andExpect(jsonPath("$.data.items").isEmpty()).andExpect(jsonPath("$.data.shelves[0].category").value("__unclassified")).andExpect(jsonPath("$.data.shelves[0].items[0].productId").value("p")).andReturn().getResponse().getContentAsString();
+  var revision=new com.fasterxml.jackson.databind.ObjectMapper().readTree(response).path("data").path("revision").asText();
+  mvc.perform(get("/api/storefront/product-browse/shelf").param("sections","true").param("category","__unclassified").param("revision",revision)).andExpect(status().isOk()).andExpect(jsonPath("$.data.shelves[0].total").value(1));
+  mvc.perform(get("/api/storefront/product-browse/shelf").param("sections","true").param("category","private").param("revision",revision)).andExpect(status().isBadRequest());
+ }
  @Test void recommendationEmptyDirectoryAndOccurrenceCountsRemainExplicit()throws Exception{
   var mvc=MockMvcBuilders.standaloneSetup(new PublicRecommendationBrowseController(new PublicRecommendationBrowseService(new Recommendations()))).build();
   mvc.perform(get("/api/storefront/recommendation-browse/issues")).andExpect(status().isOk()).andExpect(jsonPath("$.data.total").value(0)).andExpect(jsonPath("$.data.hasNext").value(false));

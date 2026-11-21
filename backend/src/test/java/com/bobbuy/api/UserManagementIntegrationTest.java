@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringBootTest
+@SpringBootTest(properties = "BOBBUY_REGISTRATION_CLEANUP_ACCOUNTS=cleanup_test=cleanup_test@example.test,cleanup_business=cleanup_business@example.test,cleanup_managed=cleanup_managed@example.com")
 @AutoConfigureMockMvc
 class UserManagementIntegrationTest {
     @Autowired MockMvc mvc;
@@ -28,6 +28,9 @@ class UserManagementIntegrationTest {
     @Autowired EmailChallengeRepository challenges;
     @Autowired MerchantCustomerRepository relations;
     @Autowired JwtTokenService tokens;
+    @Autowired org.springframework.jdbc.core.JdbcTemplate jdbc;
+    @Autowired OrderHeaderRepository orders;
+    @Autowired com.bobbuy.service.StorefrontService storefront;
     @MockBean JavaMailSender mail;
     String admin;
 
@@ -102,6 +105,83 @@ class UserManagementIntegrationTest {
         var own = edit("agent", List.of("AGENT")); own.put("enabled", false);
         update(1000L, own).andExpect(status().isBadRequest());
         assertThat(users.findById(1000L).orElseThrow().isEnabled()).isTrue();
+    }
+
+    @Test void cleanupRequiresExactCurrentRegistrationAndRejectsBusinessDependencies() throws Exception {
+        String username = "cleanup_test";
+        String email = username + "@example.test";
+        var registration = org.springframework.test.util.AopTestUtils.getUltimateTargetObject(storefront);
+        org.springframework.test.util.ReflectionTestUtils.setField(registration, "registrationEnabled", false);
+        org.springframework.test.util.ReflectionTestUtils.setField(registration, "testRegistrationEnabled", true);
+        JsonNode session;
+        try {
+            mvc.perform(post("/api/auth/register-account").contentType(MediaType.APPLICATION_JSON)
+                .content(json.writeValueAsString(Map.of("account", Map.of(
+                    "username", "unlisted", "password", "valid-password", "email", "unlisted@example.test")))))
+                .andExpect(status().isServiceUnavailable());
+            assertThat(users.findByUsernameIgnoreCase("unlisted")).isEmpty();
+            org.springframework.test.util.ReflectionTestUtils.setField(registration, "requireProtectedDelivery", true);
+            var allowedBody = json.writeValueAsString(Map.of("username", username, "email", email, "password", "valid-password"));
+            mvc.perform(post("/api/auth/register").contentType(MediaType.APPLICATION_JSON).content(allowedBody))
+                .andExpect(status().isServiceUnavailable());
+            org.springframework.test.util.ReflectionTestUtils.setField(registration, "registrationAbuseEnabled", true);
+            mvc.perform(post("/api/auth/register").contentType(MediaType.APPLICATION_JSON).content(allowedBody))
+                .andExpect(status().isServiceUnavailable());
+            assertThat(users.findByUsernameIgnoreCase(username)).isEmpty();
+            org.springframework.test.util.ReflectionTestUtils.setField(registration, "requireProtectedDelivery", false);
+            session = registerCleanupFixture(username, email);
+        } finally {
+            org.springframework.test.util.ReflectionTestUtils.setField(registration, "registrationEnabled", true);
+            org.springframework.test.util.ReflectionTestUtils.setField(registration, "testRegistrationEnabled", false);
+            org.springframework.test.util.ReflectionTestUtils.setField(registration, "requireProtectedDelivery", false);
+            org.springframework.test.util.ReflectionTestUtils.setField(registration, "registrationAbuseEnabled", false);
+        }
+        long customerId = session.at("/data/user/id").asLong();
+        String customerToken = session.at("/data/accessToken").asText();
+        cleanupTest(customerId, username, email, customerToken).andExpect(status().isForbidden());
+        cleanupTest(1000L, "agent", "admin@example.test", admin).andExpect(status().isForbidden());
+        cleanupTest(customerId, username, "other@example.test", admin).andExpect(status().isBadRequest());
+        assertThat(challenges.existsById(customerId)).isTrue();
+        assertThat(countForUser("bb_refresh_token_session", customerId)).isPositive();
+
+        long managedId = id(create(edit("cleanup_managed", List.of("CUSTOMER")), admin).andExpect(status().isOk()));
+        cleanupTest(managedId, "cleanup_managed", "cleanup_managed@example.com", admin).andExpect(status().isBadRequest());
+
+        String buyer = "cleanup_business";
+        String buyerEmail = buyer + "@example.test";
+        long buyerId = registerCleanupFixture(buyer, buyerEmail).at("/data/user/id").asLong();
+        var order = new OrderHeader("cleanup-protected-fixture", buyerId, 2000L);
+        order.setId(99001L);
+        orders.saveAndFlush(order);
+        cleanupTest(buyerId, buyer, buyerEmail, admin).andExpect(status().isBadRequest());
+        assertThat(orders.existsById(order.getId())).isTrue();
+        assertThat(challenges.existsById(buyerId)).isTrue();
+
+        cleanupTest(customerId, username, email, admin).andExpect(status().isOk());
+        cleanupTest(customerId, username, email, admin).andExpect(status().isNotFound());
+        assertThat(challenges.existsById(customerId)).isFalse();
+        assertThat(countForUser("bb_refresh_token_session", customerId)).isZero();
+        assertThat(countForUser("bb_registration_test_account", customerId)).isZero();
+        assertThat(users.existsById(customerId)).isFalse();
+        mvc.perform(get("/api/auth/me").header("Authorization", "Bearer " + customerToken))
+            .andExpect(status().isUnauthorized());
+    }
+
+    private JsonNode registerCleanupFixture(String username, String email) throws Exception {
+        var result = mvc.perform(post("/api/auth/register").contentType(MediaType.APPLICATION_JSON)
+                .content(json.writeValueAsString(Map.of("username", username, "email", email, "password", "valid-password"))))
+            .andExpect(status().isOk()).andReturn();
+        return json.readTree(result.getResponse().getContentAsString());
+    }
+
+    private ResultActions cleanupTest(long id, String username, String email, String token) throws Exception {
+        return mvc.perform(delete("/api/admin/users/" + id + "/registration-test")
+            .header("Authorization", "Bearer " + token).contentType(MediaType.APPLICATION_JSON)
+            .content(json.writeValueAsString(Map.of("username", username, "email", email))));
+    }
+
+    private long countForUser(String table, long id) {
+        return jdbc.queryForObject("SELECT COUNT(*) FROM " + table + " WHERE user_id = ?", Long.class, id);
     }
 
     @Test void allSelfRegistrationForcesCustomerAndIgnoresForgedMerchantFields() throws Exception {

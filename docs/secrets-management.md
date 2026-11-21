@@ -164,6 +164,11 @@ gh variable set PROD_ENCRYPTED_ENV_ENABLED --body false
 下一次 CD 的候选部署只用 `/etc/bobuy.env`，成功后删除持久覆盖副本；若该次部署失败，
 回滚仍使用上次成功部署的覆盖副本。不要为回退修改现有环境文件。
 
+生产管理员邮件设置使用现有 `/etc/bobuy-secrets/mail-keyring.properties`（root 所有，权限
+`0600`）。生产 Compose 将此文件作为只读密钥挂载到 `core-service`，使用原有邮件密钥 ID，
+并仅批准 Postmaster 自发自收测试。此挂载供数据库中既有加密 SMTP 凭据解密，客户邮件仍由
+各自业务开关管控。
+
 手动发布器 `scripts/publish-production.py` 仅使用 `/etc/bobuy.env`。
 只要 `/opt/bobuy/.cd/runtime-env-last` 存在或为符号链接（包括失效链接），
 其 maintenance、reference-data 模式及数据库恢复入口均在变更前拒绝执行，且不读取覆盖文件内容。
