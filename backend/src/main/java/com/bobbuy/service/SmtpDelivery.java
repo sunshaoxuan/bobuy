@@ -7,6 +7,7 @@ import jakarta.mail.SendFailedException;
 import jakarta.mail.Transport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -15,6 +16,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class SmtpDelivery {
  private static final Logger log = LoggerFactory.getLogger(SmtpDelivery.class);
+
+ private final int readTimeoutMs;
+
+ public SmtpDelivery(@Value("${bobuy.mail.smtp-read-timeout-ms:15000}") int readTimeoutMs) {
+  if (readTimeoutMs < 5000 || readTimeoutMs > 30000) {
+   throw new IllegalArgumentException("SMTP read timeout must be between 5000 and 30000 ms");
+  }
+  this.readTimeoutMs = readTimeoutMs;
+ }
 
  enum Stage { PREPARE, CONNECT, AUTH, REJECTED, SUBMIT_UNKNOWN, CLOSE_AFTER_ACCEPT }
 
@@ -98,7 +108,8 @@ public class SmtpDelivery {
   p.setProperty("mail.smtp.starttls.required",String.valueOf(settings.tlsMode.equals("STARTTLS")));
   p.setProperty("mail.smtp.ssl.enable",String.valueOf(settings.tlsMode.equals("TLS")));
   p.setProperty("mail.smtp.connectiontimeout","5000");
-  p.setProperty("mail.smtp.timeout","5000"); p.setProperty("mail.smtp.writetimeout","5000");
+  p.setProperty("mail.smtp.timeout",Integer.toString(readTimeoutMs));
+  p.setProperty("mail.smtp.writetimeout","5000");
   p.setProperty("mail.debug","false"); p.setProperty("mail.debug.auth","false");
   return sender;
  }
