@@ -90,7 +90,7 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
  const pick=(files:FileList|null)=>{
   if(!files)return;
   const selectedFiles=Array.from(files);
-  setOriginal(selectedFiles.at(-1));
+  setOriginal(selectedFiles[selectedFiles.length-1]);
   if(!supplier)return;
   for(const file of selectedFiles)void submit({file,supplierId:supplier,requestId:crypto.randomUUID()});
  };
