@@ -1,3 +1,5 @@
+import ViewportProductGrid,{useCatalogGridMetrics} from '../components/ViewportProductGrid';
+import {useVisibleCatalog} from '../useVisibleCatalog';
 import CategoryImage from '../components/CategoryImage';
 import {useProgressiveCatalog} from '../useProgressiveCatalog';
 import {useShoppingScroll} from '../useShoppingScroll';
@@ -87,16 +89,19 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   const categoryKey='category',category=params.get(categoryKey)??'';
   const sort=params.get('sort')??'default',markedFirst=params.get('markedFirst')!=='false';
   const [attempt,setAttempt]=useState(0),[detailAttempt,setDetailAttempt]=useState(0);
-  // Keep offsets stable for the mounted session, including window resizes.
+  const viewportMode=location.pathname==='/products'&&kind==='all';
+  const grid=useCatalogGridMetrics();
+  // Other consumers retain their established pagination contract.
   const [batchSize]=useState<24|48>(()=>typeof window.matchMedia==='function'&&window.matchMedia('(min-width: 1920px)').matches?48:24);
   const identity=JSON.stringify([batchSize,location.pathname,scope,query,category,locale,refresh,attempt,authKey,sort,markedFirst]);
   const progressive=location.pathname==='/products'&&kind==='all'&&!category&&!query.trim()&&sort==='default';
   const activation=useSectionActivation(identity);
-  const paged=useBrowsePages<ProductBrowseCard>(identity,(page,revision)=>catalogBatch((serverPage,serverRevision)=>storefrontApi.productBrowse({page:serverPage,revision:serverRevision,merchantId:node,query,category,locale,marked:false,markedFirst,sort}),page,revision,batchSize),entry=>entry.productId,enabled&&!progressive&&activation.active&&node!==-1,acceptDataset,batchSize,autoPaused||!!params.get('product'));
+  const paged=useBrowsePages<ProductBrowseCard>(identity,(page,revision)=>catalogBatch((serverPage,serverRevision)=>storefrontApi.productBrowse({page:serverPage,revision:serverRevision,merchantId:node,query,category,locale,marked:false,markedFirst,sort}),page,revision,batchSize),entry=>entry.productId,enabled&&!viewportMode&&!progressive&&activation.active&&node!==-1,acceptDataset,batchSize,autoPaused||!!params.get('product'));
+  const windowed=useVisibleCatalog(identity,{merchantId:node,query,category,locale,marked:false,markedFirst,sort},enabled&&viewportMode&&activation.active&&node!==-1&&grid.metrics.columns>0,autoPaused||!!params.get('product'),grid.metrics.columns*3,acceptDataset);
   const rootSections=location.pathname==='/products'&&kind==='all'&&!!category&&!query.trim()&&sort==='default'&&!!paged.page?.shelves?.length&&paged.page.categories.some(c=>c.id===category&&!c.parentId);
-  const continuous=progressive||rootSections;
-  const incremental=useProgressiveCatalog(identity,{merchantId:node,locale,markedFirst,category,sections:true},enabled&&continuous&&activation.active&&node!==-1,autoPaused||!!params.get('product'),acceptDataset,rootSections?paged.page:undefined);
-  const browse=progressive?{...incremental,items:[],next:()=>{},retry:()=>incremental.retry()}:paged;
+  const continuous=viewportMode?windowed.continuous:progressive||rootSections;
+  const incremental=useProgressiveCatalog(identity,{merchantId:node,locale,markedFirst,category,sections:true},enabled&&!viewportMode&&continuous&&activation.active&&node!==-1,autoPaused||!!params.get('product'),acceptDataset,rootSections?paged.page:undefined);
+  const browse=viewportMode?windowed:progressive?{...incremental,items:[],next:()=>{},retry:()=>incremental.retry()}:paged;
   useEffect(()=>{if(kind==="all"&&typeof browse.page?.markedScopeTotal==="number")onMarkedScope?.(browse.page.markedScopeTotal);},[kind,browse.page?.markedScopeTotal,onMarkedScope]);
   const filtered=browse.items;
   const navigation=useRef<{scope:string;categories:NonNullable<typeof browse.page>['categories']}>({scope:'',categories:[]});
@@ -104,10 +109,10 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   if(browse.page)navigation.current.categories=browse.page.categories;
   const navigationCategories=navigation.current.categories;
   useEffect(()=>{onNavigation?.(navigationCategories);},[navigationCategories,onNavigation]);
-  const shelves=(browse.page?.shelves??[]).map(s=>continuous?{...s,items:incremental.shelves[s.category]?.items??[]}:s);
-  const shelfMode=continuous||!(location.pathname==='/products'&&kind==='all'&&!!category)&&!query.trim()&&sort==='default'&&(!!shelves.length||!browse.page&&(!category||navigation.current.categories.some(c=>c.id===category&&!c.parentId)));
-  useShoppingScroll(!!browse.page,browse.busy,!shelfMode&&!!browse.page?.hasNext,browse.next);
-  const visibleCards=shelfMode?shelves.flatMap(s=>s.items):filtered;
+  const shelves=(browse.page?.shelves??[]).map(s=>viewportMode?{...s,items:[...(windowed.rows[s.category]?.items.values()??[])]}:continuous?{...s,items:incremental.shelves[s.category]?.items??[]}:s);
+  const shelfMode=viewportMode?continuous:continuous||!(location.pathname==='/products'&&kind==='all'&&!!category)&&!query.trim()&&sort==='default'&&(!!shelves.length||!browse.page&&(!category||navigation.current.categories.some(c=>c.id===category&&!c.parentId)));
+  useShoppingScroll(!!browse.page,browse.busy,!viewportMode&&!shelfMode&&!!browse.page?.hasNext,browse.next);
+  const visibleCards=viewportMode?windowed.visible:shelfMode?shelves.flatMap(s=>s.items):filtered;
   useEffect(()=>{const canonical=browse.page?.selectedCategory;if(canonical!==undefined&&canonical!==category){const next=new URLSearchParams(params);if(canonical)next.set('category',canonical);else next.delete('category');setParams(next,{replace:true});}},[browse.page?.selectedCategory,category]);
   const markers=Object.fromEntries(visibleCards.map(entry=>[entry.productId,entry.markers]));
   const state={markers};
@@ -118,7 +123,7 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   useReadRecovery(()=>setDetailAttempt(value=>value+1),detail.key===detailKey&&!!detail.recoverable,JSON.stringify([identity,detailId]));
   const opened=detail.key===detailKey?detail.item:undefined;
   useEffect(()=>{onDetailChange?.(kind,!!detailId);return()=>onDetailChange?.(kind,false);},[kind,!!detailId,onDetailChange]);
-  const revealPaused=autoPaused||!!detailId||shelfMode;
+  const revealPaused=autoPaused||!!detailId||shelfMode||viewportMode;
   const sentinel=useNextBrowsePage(identity,!!browse.page?.hasNext&&!browse.busy&&!browse.error,revealPaused,browse.next);
   const ids=[...new Set([...visibleCards.map(entry=>entry.productId),...(opened?[opened.productId]:[])])];
   const sales=useBoundedSales(ids,identity,onSales);
@@ -165,13 +170,14 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
   function renderCard(entry:ProductBrowseCard,index:number,eager=index<2){
         const name=catalogText(entry.name,locale);
         const product=sales.quotes[entry.productId],pending=pricePending(entry.productId),buyable=!pending&&!!product&&canBuy(product);
-        return <CompactProductCard key={entry.productId} productId={entry.productId} name={name.value} originalName={entry.name['ja-JP']} language={name.language} brand={entry.brand} itemNumber={entry.itemNumber} image={entry.image?.url} rating={entry.rating} quote={product} reference={entry.reference} pending={pending} eager={eager} onOpen={()=>openDetail(entry.productId)} overlay={<><ProductMarkerBadges markers={state.markers[entry.productId]??[]} promotionPrices={selectedOfferSource(product,pending,entry.reference?.priceChange)} overlay/><ReservationAdd allowed={buyable} quote={product} name={name.value} count={quantities[entry.productId]} onAdd={()=>{if(product&&buyable)onAdd(product);}}/></>} actions={management(entry)}/>;
+        return <CompactProductCard key={entry.productId} productId={entry.productId} name={name.value} originalName={entry.name['ja-JP']} language={name.language} brand={entry.brand} itemNumber={entry.itemNumber} image={entry.image?.url} rating={entry.rating} quote={product} reference={entry.reference} pending={pending} eager={eager} onOpen={()=>openDetail(entry.productId)} overlay={<><ProductMarkerBadges markers={state.markers[entry.productId]??entry.markers} promotionPrices={selectedOfferSource(product,pending,entry.reference?.priceChange)} overlay/><ReservationAdd allowed={buyable} quote={product} name={name.value} count={quantities[entry.productId]} onAdd={()=>{if(product&&buyable)onAdd(product);}}/></>} actions={management(entry)}/>;
 
   }
   const sortControls=<div className="catalog-sort-controls"><ProductSort value={sort} onChange={changeSort}/><button type="button" className="marked-first-toggle" aria-pressed={markedFirst} onClick={()=>changeMarkedFirst(!markedFirst)}>{t('marker.priority')}</button></div>;
   const heading=<header className="catalog-master-heading">{kind==='marked'?<h2>{t('marker.featured')}</h2>:<h1>{t('store.catalog')}</h1>}{ready&&<span role="status">{t('catalog.result_count',{shown:new Set(visibleCards.map(c=>c.productId)).size,total:browse.page!.matchedTotal})}</span>}{!dockMode&&sortControls}</header>;
   const hideMarked=kind==='marked'&&ready&&!browse.error&&browse.page?.markedScopeTotal===0;
   return <>{!hideMarked&&<section ref={activation.element} className={`recommendations rec-public public-product-catalog ${shelfMode?"shopping-overview":"shopping-results"}${overview ? " catalog-home" : ""}`} aria-label={t(kind==='marked'?'marker.featured':'store.catalog')} aria-busy={browse.busy}>
+    {viewportMode&&<div className="catalog-master-grid catalog-grid-probe" ref={grid.probe} aria-hidden="true"/>}
     {dockMode?<CatalogDock heading={heading} hasNavigation={!!shortcutRoots.length}>
       {!!shortcutRoots.length&&<CategoryShortcuts key={location.key} categories={shortcutRoots} selectedId={selectedRoot} overviewHref={'/products?'+categoryParams('').toString()}
         toCategory={id=>'/products?'+categoryParams(id).toString()} initialScroll={shortcutScroll.current.get(location.key)} saveScroll={offset=>{shortcutScroll.current.set(location.key,offset);}}/>}
@@ -185,29 +191,29 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
        const facet=navigationCategories.find(c=>c.id===shelf.category),root=facet?.parentId?navigationCategories.find(c=>c.id===facet.parentId):undefined;
        const previous=navigationCategories.find(c=>c.id===shelves[shelfIndex-1]?.category);
        const showRoot=continuous&&!category&&root&&root.id!==(previous?.parentId??previous?.id);
-       const current=incremental.shelves[shelf.category];
+       const current=viewportMode?windowed.rows[shelf.category]:incremental.shelves[shelf.category];
        return <div key={shelf.category} className="shopping-section-group">
         {showRoot&&<h2 className="shopping-root-heading">{localizedContent(root.name,locale)}</h2>}
-        <ProgressiveShelf identity={identity} category={shelf.category} progressive={continuous} activate={incremental.activate} secondary={continuous&&!!facet?.parentId}>
+        <ProgressiveShelf identity={identity} category={shelf.category} progressive={continuous&&!viewportMode} activate={incremental.activate} secondary={continuous&&!!facet?.parentId}>
          <header className={continuous&&facet?.parentId?'shopping-section-heading':undefined}>
           {continuous&&facet?.parentId?<h3><CategoryImage src={facet.imageUrl} className="shopping-section-image" priority={false}/>{localizedContent(facet.name,locale)}</h3>:<h2>{shelf.category==='__unclassified'?t('class.unclassified'):localizedContent(facet?.name??{},locale)}</h2>}
           <button type="button" onClick={()=>choose(shelf.category)}>{t('shopping.view_all')} <span aria-hidden>→</span></button>
          </header>
-         {continuous&&current?.error&&<BrowseError error={current.error} changed={incremental.changed} retry={()=>incremental.retry(shelf.category)} refresh={reload}/>}
-         {continuous&&!current?.loaded?<div className="catalog-progress shelf-progress" role="status" aria-label={t('browse.loading')}><Spin/><span>{t('browse.loading')}</span></div>:<div className={'catalog-master-grid'+(continuous?'':' shopping-shelf-track')}>{shelf.items.map((entry,index)=>renderCard(entry,index,shelfIndex===0&&index<2))}</div>}
-         {continuous&&current?.loaded&&shelf.items.length<shelf.total&&<SectionContinuation identity={identity+':'+shelf.category+':'+shelf.items.length} paused={autoPaused||!!detailId||incremental.changed||!!current.error} busy={current.busy} next={()=>incremental.next(shelf.category)} shown={shelf.items.length} total={shelf.total}/>}
+         {continuous&&current?.error&&<BrowseError error={current.error} changed={viewportMode?windowed.changed:incremental.changed} retry={()=>viewportMode?windowed.retry(shelf.category):incremental.retry(shelf.category)} refresh={reload}/>}
+         {viewportMode?<ViewportProductGrid identity={identity} section={shelf.category} revision={browse.page!.revision} rows={windowed.rows[shelf.category]} metrics={grid.metrics} ensure={windowed.ensure} renderCard={renderCard} paused={autoPaused||!!detailId}/>:continuous&&!(current as {loaded?:boolean})?.loaded?<div className="catalog-progress shelf-progress" role="status" aria-label={t('browse.loading')}><Spin/><span>{t('browse.loading')}</span></div>:<div className={'catalog-master-grid'+(continuous?'':' shopping-shelf-track')}>{shelf.items.map((entry,index)=>renderCard(entry,index,shelfIndex===0&&index<2))}</div>}
+         {!viewportMode&&continuous&&(current as {loaded?:boolean})?.loaded&&shelf.items.length<shelf.total&&<SectionContinuation identity={identity+':'+shelf.category+':'+shelf.items.length} paused={autoPaused||!!detailId||incremental.changed||!!current.error} busy={current.busy} next={()=>incremental.next(shelf.category)} shown={shelf.items.length} total={shelf.total}/>}
         </ProgressiveShelf>
        </div>;
       })}</div>:<section className={selectedLeaf?'shopping-selected-section':undefined}>
        {selectedLeaf&&<header className="shopping-section-heading"><h2 aria-current="page"><CategoryImage src={currentCategory.imageUrl} className="shopping-section-image" priority={false}/>{localizedContent(currentCategory.name,locale)}</h2></header>}
-       {filtered.length?<div className="catalog-master-grid">{filtered.map((entry,index)=>renderCard(entry,index))}</div>:kind==='marked'?<div className="catalog-marked-empty" role="status"><p>{t(query||category?'store.no_matches':'marker.empty')}</p>{(query||category)&&<Button onClick={()=>{const next=new URLSearchParams(params);next.delete(categoryKey);next.delete('query');setParams(next);}}>{t('class.all')}</Button>}</div>:<Empty description={t(query||category?'store.no_matches':'catalog.empty')}>{category&&<Button onClick={()=>choose('')}>{t('class.all')}</Button>}</Empty>}
-       {browse.page?.hasNext&&<div className="feed-loader" ref={sentinel}><Button loading={browse.busy} disabled={revealPaused||browse.changed||!!browse.error} onClick={browse.next}>{t('store.load_more')} ({filtered.length}/{browse.page.matchedTotal})</Button></div>}
+       {viewportMode&&browse.page!.matchedTotal>0?<><BrowseError error={windowed.rows['']?.error??''} changed={windowed.changed} retry={()=>windowed.retry('')} refresh={reload}/><ViewportProductGrid identity={identity} section="" revision={browse.page!.revision} rows={windowed.rows['']} metrics={grid.metrics} ensure={windowed.ensure} renderCard={renderCard} paused={autoPaused||!!detailId}/></>:filtered.length?<div className="catalog-master-grid">{filtered.map((entry,index)=>renderCard(entry,index))}</div>:kind==='marked'?<div className="catalog-marked-empty" role="status"><p>{t(query||category?'store.no_matches':'marker.empty')}</p>{(query||category)&&<Button onClick={()=>{const next=new URLSearchParams(params);next.delete(categoryKey);next.delete('query');setParams(next);}}>{t('class.all')}</Button>}</div>:<Empty description={t(query||category?'store.no_matches':'catalog.empty')}>{category&&<Button onClick={()=>choose('')}>{t('class.all')}</Button>}</Empty>}
+       {!viewportMode&&browse.page?.hasNext&&<div className="feed-loader" ref={sentinel}><Button loading={browse.busy} disabled={revealPaused||browse.changed||!!browse.error} onClick={browse.next}>{t('store.load_more')} ({filtered.length}/{browse.page.matchedTotal})</Button></div>}
       </section>}
     </>}
     </section>}
     <Drawer className="rec-product-detail catalog-master-detail consumer-detail-drawer" title={opened?<ProductDetailCode value={opened.itemNumber}/>:t('store.details')} width="min(1120px,100vw)" open={!!detailId} onClose={closeDetail}>
       {detailId&&!opened&&(detail.error?<BrowseError error={detail.error} retry={()=>setDetailAttempt(value=>value+1)} refresh={reload}/>:<Spin/>)}
-      {opened&&detailName&&description&&<ConsumerDetail media={<RecommendationImageViewer consumer key={opened.productId} pictures={opened.gallery} name={detailName.value}/>}>
+      {opened&&detailName&&description&&<ConsumerDetail media={<RecommendationImageViewer progressive consumer key={opened.productId} pictures={opened.gallery} name={detailName.value}/>}>
         <ProductMarkerBadges markers={detail.markers??[]} promotionPrices={selectedOfferSource(sale,pricePending(opened.productId),opened.referencePrices?.[0]??mainReference?.facts.priceChange)}/>
         {management(opened)}
         <ProductBrand brand={opened.brand}/><h1 lang={detailName.language}><span className="rec-name-local">{detailName.value||t('rec.not_stated')}</span>{locale!=='ja-JP'&&opened.name['ja-JP']&&opened.name['ja-JP']!==detailName.value&&<span className="rec-name-original" lang="ja">（{opened.name['ja-JP']}）</span>}</h1>{sourceNote(detailName)}

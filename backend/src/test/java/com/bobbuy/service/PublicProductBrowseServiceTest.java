@@ -97,12 +97,12 @@ class PublicProductBrowseServiceTest {
  private static class Catalog extends PublicProductCatalogService {
   List<Entry> rows=List.of();int reads;
   Catalog(){super(null,null,null,null,null,null);}
-  @Override public List<Entry> publicEntries(Long merchant,Set<String> ids){reads++;return rows;}
+  @Override public List<Entry> publicEntries(Long merchant,Set<String> ids){reads++;return ids==null?rows:rows.stream().filter(e->ids.contains(e.productId())).toList();}
  }
  private static class Markers extends ProductMarkerService {
   List<PublicAssignment> rows=List.of();int reads;
   Markers(){super(null,null,null,null,null);}
-  @Override public List<PublicAssignment> browseAssignments(Map<String,Long> owners){reads++;return rows;}
+  @Override public List<PublicAssignment> browseAssignments(Map<String,Long> owners){reads++;return rows.stream().filter(e->owners.containsKey(e.productId())).toList();}
  }
  private final Catalog catalog=new Catalog();
  private final Markers markers=new Markers();
@@ -117,4 +117,27 @@ class PublicProductBrowseServiceTest {
  @Test void invalidContinuationRejectedBeforeAnyDataRead(){assertThatThrownBy(()->service.browse(1,null,"","","ja-JP",false,null)).isInstanceOf(IllegalArgumentException.class);assertThatThrownBy(()->service.browse(0,0L,"","","ja-JP",false,null)).isInstanceOf(IllegalArgumentException.class);assertThatThrownBy(()->service.browse(0,null,"","","xx",false,null)).isInstanceOf(IllegalArgumentException.class);assertThat(catalog.reads+markers.reads).isZero();}
  @Test void emptyAndExactMultipleDoNotRequireTerminalExtraPage(){catalog.rows=List.of();markers.rows=List.of();var empty=service.browse(0,null,"","","ja-JP",false,null);assertThat(empty.hasNext()).isFalse();assertThat(empty.matchedTotal()).isZero();catalog.rows=java.util.stream.IntStream.range(0,24).mapToObj(i->row(i,null)).toList();var exact=service.browse(0,null,"","","ja-JP",false,null);assertThat(exact.items()).hasSize(24);assertThat(exact.hasNext()).isFalse();}
  @Test void markedScopeCountPrecedesSearchCategoryAndPagingWithoutExtraCatalogRead(){setup();markers.rows=List.of(new ProductMarkerService.PublicAssignment("p050",List.of(new ProductMarkerService.Definition("m","new","N",Map.of(),Map.of(),"red",0,true,0))));var emptySearch=service.browse(0,null,"no matching term","odd","ja-JP",true,null);assertThat(emptySearch.items()).isEmpty();assertThat(emptySearch.scopeTotal()).isZero();assertThat(emptySearch.markedScopeTotal()).isEqualTo(1);assertThat(catalog.reads).isEqualTo(1);markers.rows=List.of();assertThat(service.browse(0,null,"","","ja-JP",true,null).markedScopeTotal()).isZero();}
+ @Test void viewportRangesPreserveOrderRevisionAndLegacyPagesWithoutPrefixRefetch(){
+  setup();var first=service.range(null,"","","en-US",false,null,"default",false,null,false,0,6);
+  assertThat(first.items()).hasSize(6);assertThat(first.size()).isEqualTo(6);assertThat(first.offset()).isZero();
+  var later=service.range(null,"","","en-US",false,first.revision(),"default",false,null,false,30,8);
+  assertThat(later.items()).extracting(PublicProductBrowseService.Card::productId).containsExactly("p030","p031","p032","p033","p034","p035","p036","p037");
+  var last=service.range(null,"","","en-US",false,first.revision(),"default",false,null,false,48,6);assertThat(last.items()).hasSize(3);assertThat(last.hasNext()).isFalse();
+  assertThat(service.browse(0,null,"","","en-US",false,null).size()).isEqualTo(24);
+  assertThatThrownBy(()->service.range(null,"","","en-US",false,null,"default",false,null,false,1,6)).isInstanceOf(IllegalArgumentException.class);
+  assertThatThrownBy(()->service.range(null,"","","en-US",false,null,"default",false,null,false,0,49)).isInstanceOf(IllegalArgumentException.class);
+  assertThatThrownBy(()->service.range(null,"","","en-US",false,null,"default",false,null,false,-1,6)).isInstanceOf(IllegalArgumentException.class);
+  assertThatThrownBy(()->service.range(null,"","","en-US",false,"0".repeat(64),"default",false,null,false,6,6)).isInstanceOf(PublicProductBrowseService.Changed.class);
+ }
+ @Test void viewportSectionMetadataIsBoundedAndLeafRangesKeepTheirLastProduct(){
+  setup();var mapping=org.mockito.Mockito.mock(ShoppingCategoryService.class);var assignments=new HashMap<String,String>();
+  for(int i=0;i<50;i++)assignments.put("p%03d".formatted(i),i<25?"shop-food-one":"shop-food-two");
+  org.mockito.Mockito.when(mapping.snapshot(org.mockito.ArgumentMatchers.any())).thenReturn(new ShoppingCategoryService.Snapshot(ShoppingCategoryMapTest.categories(),assignments));service.setShopping(mapping);
+  var root=service.range(null,"","shop-food","en-US",false,null,"default",true,"",true,0,6);
+  assertThat(root.items()).isEmpty();assertThat(root.shelves()).extracting(PublicProductBrowseService.Shelf::total).containsExactly(25L,25L);assertThat(root.shelves().get(0).items()).hasSize(6);assertThat(root.shelves().get(1).items()).isEmpty();
+  var last=service.range(null,"","shop-food","en-US",false,root.revision(),"default",true,"shop-food-one",true,24,6);
+  assertThat(last.shelves().get(0).items()).extracting(PublicProductBrowseService.Card::productId).containsExactly("p024");
+  var leaf=service.range(null,"","shop-food-one","en-US",false,null,"default",true,"",true,0,6);assertThat(leaf.items()).hasSize(6);assertThat(leaf.shelves()).isEmpty();
+  assertThatThrownBy(()->service.range(null,"","shop-food","en-US",false,root.revision(),"default",true,"__unclassified",true,0,6)).isInstanceOf(IllegalArgumentException.class);
+ }
 }

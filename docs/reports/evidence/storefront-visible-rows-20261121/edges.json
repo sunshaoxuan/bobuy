@@ -1,0 +1,60 @@
+[
+  {
+    "name": "slow-images",
+    "pass": true,
+    "requests": [
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=true&offset=0&limit=6"
+    ],
+    "mounted": 6,
+    "text": "No.SYNTHETIC-PROGRESSIVE-1-1\n0\nSYNTHETIC\n合成商品 1 / 1\n（合成商品 1 / 1）\n价格待确认",
+    "errors": []
+  },
+  {
+    "name": "failed-range-retry",
+    "pass": false,
+    "error": "TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.ant-alert') to be visible\u001b[22m\n",
+    "requests": [
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=true&offset=0&limit=6",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=12&limit=8&revision=a99c068161ba6da35f319c36136c99a557da998bffe2d691c4d1226c5affe477",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=12&limit=8&revision=a99c068161ba6da35f319c36136c99a557da998bffe2d691c4d1226c5affe477"
+    ],
+    "errors": []
+  },
+  {
+    "name": "changed-revision",
+    "pass": true,
+    "requests": [
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=true&offset=0&limit=6",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=12&limit=8&revision=a99c068161ba6da35f319c36136c99a557da998bffe2d691c4d1226c5affe477",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=true&offset=0&limit=6"
+    ],
+    "changed": true,
+    "alert": "目录已更新，请刷新以加载一致版本。\n刷新目录",
+    "errors": []
+  },
+  {
+    "name": "slow-later-section",
+    "pass": true,
+    "requests": [
+      "/api/storefront/product-browse/overview?merchantId=1000&query=&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default&sections=true&offset=0&limit=6",
+      "/api/storefront/product-browse/shelf?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=16&limit=4&revision=9b0fbc0e8a4e3eff19c15d2ff6b00944a810c67ac67a27ca8cca62df0b2145d0&sections=true&scopeCategory=",
+      "/api/storefront/product-browse/shelf?merchantId=1000&query=&category=shop-progressive-leaf-1b&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=0&limit=2&revision=9b0fbc0e8a4e3eff19c15d2ff6b00944a810c67ac67a27ca8cca62df0b2145d0&sections=true&scopeCategory=",
+      "/api/storefront/product-browse/shelf?merchantId=1000&query=&category=shop-progressive-leaf-2&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=0&limit=6&revision=9b0fbc0e8a4e3eff19c15d2ff6b00944a810c67ac67a27ca8cca62df0b2145d0&sections=true&scopeCategory="
+    ],
+    "first": 6,
+    "loading": 6,
+    "errors": []
+  },
+  {
+    "name": "desktop-long-search-jump",
+    "pass": false,
+    "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(mounted>0&&mounted<=36)\n",
+    "requests": [
+      "/api/storefront/product-browse?merchantId=1000&query=SYNTHETIC&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=false&offset=0&limit=18",
+      "/api/storefront/product-browse?merchantId=1000&query=SYNTHETIC&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=18&limit=6&revision=1ec9d527f00badcc1e70695b6614ca4496639a69e2b3483102fc3436f68cd911",
+      "/api/storefront/product-browse?merchantId=1000&query=SYNTHETIC&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=312&limit=36&revision=1ec9d527f00badcc1e70695b6614ca4496639a69e2b3483102fc3436f68cd911",
+      "/api/storefront/product-browse?merchantId=1000&query=SYNTHETIC&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=348&limit=6&revision=1ec9d527f00badcc1e70695b6614ca4496639a69e2b3483102fc3436f68cd911"
+    ],
+    "errors": []
+  }
+]

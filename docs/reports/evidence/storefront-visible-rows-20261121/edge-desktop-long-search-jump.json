@@ -1,0 +1,48 @@
+[
+  {
+    "name": "desktop-long-search-jump",
+    "pass": true,
+    "requests": [
+      "/api/storefront/product-browse?merchantId=1000&query=SYNTHETIC&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=false&offset=0&limit=18",
+      "/api/storefront/product-browse?merchantId=1000&query=SYNTHETIC&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=18&limit=6&revision=1ec9d527f00badcc1e70695b6614ca4496639a69e2b3483102fc3436f68cd911",
+      "/api/storefront/product-browse?merchantId=1000&query=SYNTHETIC&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=312&limit=36&revision=1ec9d527f00badcc1e70695b6614ca4496639a69e2b3483102fc3436f68cd911",
+      "/api/storefront/product-browse?merchantId=1000&query=SYNTHETIC&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=348&limit=6&revision=1ec9d527f00badcc1e70695b6614ca4496639a69e2b3483102fc3436f68cd911"
+    ],
+    "initial": 24,
+    "mounted": 42,
+    "geometry": {
+      "rows": 7,
+      "visibleRows": 3,
+      "below": 2,
+      "above": 2
+    },
+    "ranges": [
+      {
+        "merchantId": "1000",
+        "query": "SYNTHETIC",
+        "category": "",
+        "locale": "zh-CN",
+        "marked": "false",
+        "markedFirst": "true",
+        "sort": "default",
+        "offset": "312",
+        "limit": "36",
+        "revision": "1ec9d527f00badcc1e70695b6614ca4496639a69e2b3483102fc3436f68cd911"
+      },
+      {
+        "merchantId": "1000",
+        "query": "SYNTHETIC",
+        "category": "",
+        "locale": "zh-CN",
+        "marked": "false",
+        "markedFirst": "true",
+        "sort": "default",
+        "offset": "348",
+        "limit": "6",
+        "revision": "1ec9d527f00badcc1e70695b6614ca4496639a69e2b3483102fc3436f68cd911"
+      }
+    ],
+    "unique": true,
+    "errors": []
+  }
+]
