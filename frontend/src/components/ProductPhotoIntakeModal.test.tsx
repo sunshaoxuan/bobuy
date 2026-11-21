@@ -98,7 +98,7 @@ it('shares the unconverted capture and keeps the explicit download path when sha
 it('downloads the stored evidence with a storage-version notice',async()=>{
  render(<ProductPhotoIntakeModal {...props} job={job}/>);
  expect(await screen.findByText('photo.stored_version')).toBeInTheDocument();
- expect(screen.getByText('photo.download_photo')).toHaveAttribute('download','product-photo.img');
+ expect(await screen.findByText('photo.download_photo')).toHaveAttribute('download','product-photo.img');
 });
 
 it('reports missing credentials without preventing photo retention',async()=>{
