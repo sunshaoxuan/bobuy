@@ -13,7 +13,8 @@ const name={'zh-CN':'北海道牛乳 · 200 毫升 × 12 瓶','zh-TW':'北海道
 const history={id:'observation',productId:'p1',amount:1180,currency:'JPY',unit:'12 瓶',observedAt:'2026-11-20T08:00:00Z'};
 const review={jobId:'demo-0',revision:7,supplierId:'s1',market:'JP',itemNumber:'123456',status:'MATCH',matches:[{id:'p1',version:2,name,specification:{},eligible:true}],history:[history],saved:null,photoFacts:{amount:1280,currency:'JPY',unit:'12 瓶',conditions:'',priceKind:'WAREHOUSE',productVisible:true}};
 const network=[],cancelled=[],errors=[],geometry=[],checks=[],locales=[];
-const design=process.env.PHOTO_DESIGN==='1';
+const pricesOnly=process.env.PHOTO_PRICE_CHECK==='1';
+const design=pricesOnly||process.env.PHOTO_DESIGN==='1';
 const settings=design?[[360,800],[390,844],[1280,800]]:[[390,844],[1280,800]];
 for(const [width,height] of settings){
  const context=await browser.newContext({viewport:{width,height},acceptDownloads:true,hasTouch:width<768});
@@ -46,10 +47,13 @@ for(const [width,height] of settings){
   } else if(path.endsWith('/photo')||path==='/api/demo-photo.png'){
    return route.fulfill({contentType:'image/png',body:png});
   } else if(path.endsWith('/confirm')) data={...history,id:'new-observation',amount:1280,inStock:true,priceChanged:true};
-  else if(path.startsWith(photo+'/')) data=path.endsWith('demo-0')?review:path.endsWith('demo-new')?{
+  else if(path.startsWith(photo+'/')) data=path.endsWith('demo-0')?(pricesOnly?{
+   ...review,history:[{...history,amount:998765432,unit:'12 large retail units / 3 individually sealed packs'}],
+   photoFacts:{...review.photoFacts,amount:123456789,unit:'12 individually sealed packs / 2.75 kg'}
+  }:review):path.endsWith('demo-new')?{
    ...review,jobId:'demo-new',itemNumber:'891021',status:'NEW',matches:[],history:[],
    candidate:{translatedNames:{'ja-JP':'テスト菓子','zh-CN':'测试米饼'},unknownFields:['packaging']},archiveDetails:null
-  }:{...review,itemNumber:null,photoFacts:null,status:'IDENTITY_REQUIRED'};
+  }:{...review,itemNumber:null,photoFacts:null,status:'IDENTITY_REQUIRED',history:pricesOnly?[]:review.history};
   else if(path==='/api/mobile/suppliers') data=[{id:'s1',name:{'zh-CN':'Costco 日本','en-US':'Costco Japan','ja-JP':'コストコ日本'}}];
   else if(path==='/api/merchant/currencies') data=[{code:'JPY',minorUnit:0}];
   else if(path==='/api/merchant/product-archive') data={total:1,rows:[{id:'p1',name:name['zh-CN'],itemNumber:'123456',image:'/api/demo-photo.png',mediaCount:1,catalogDriven:true,privateDraft:true}]};
@@ -80,7 +84,54 @@ for(const [width,height] of settings){
   await page.screenshot({path:out+'/'+tag+'-'+width+'-'+id+'.png',animations:'disabled'});
   geometry.push({width,id,...await area.evaluate(el=>({viewport:innerWidth,documentWidth:document.documentElement.scrollWidth,areaWidth:el.getBoundingClientRect().width,controls:[...el.querySelectorAll('button,a[download],input:not([type=file])')].filter(e=>e.getClientRects().length).map(e=>{const s=getComputedStyle(e),r=e.getBoundingClientRect();return {label:e.textContent?.trim()||e.getAttribute('aria-label')||e.getAttribute('placeholder'),width:r.width,height:r.height,y:r.y,minWidth:s.minWidth,minHeight:s.minHeight,radius:s.borderRadius,borderColor:s.borderColor,borderWidth:s.borderWidth,background:s.backgroundColor,shadow:s.boxShadow};})}))});
  };
- await page.goto('http://127.0.0.1:'+(process.env.PHOTO_PORT||5173)+'/admin/products');
+ await page.goto('http://127.0.0.1:'+(process.env.PHOTO_PORT||5173)+'/admin/products',pricesOnly?{waitUntil:'networkidle'}:undefined);
+ if(pricesOnly){
+  for(const locale of ['zh-CN','zh-TW','ja-JP','en-US']){
+   await page.evaluate(value=>localStorage.setItem('bobbuy_locale',value),locale);
+   await page.reload({waitUntil:'networkidle'});
+   await page.locator('.photo-queue-summary-bar > button').click();
+   for(const [kind,id] of [['unknown','demo-3'],['long','demo-0']]){
+    await page.locator('.photo-queue-summary-list [data-photo-job="'+id+'"] button').click();
+    const card=page.locator('.photo-review-overview');
+    await card.waitFor();
+    const proof=card.locator('.photo-proof-toggle');
+    await proof.waitFor();
+    await card.screenshot({path:out+'/price-'+width+'-'+locale+'-'+kind+'.png',animations:'disabled'});
+    const result=await card.evaluate(section=>{
+     const bounds=section.getBoundingClientRect();
+     const photo=section.querySelector('.photo-review-proof').getBoundingClientRect();
+     const priceCells=[...section.querySelectorAll('.photo-review-prices > div')].map(cell=>{
+      const value=cell.querySelector('strong');
+      const fragments=[...cell.querySelectorAll('small,strong,span')].flatMap(element=>{
+       const range=document.createRange();
+       range.selectNodeContents(element);
+       return [...range.getClientRects()];
+      });
+      const range=document.createRange();
+      range.selectNodeContents(value);
+      return {text:value.textContent,unit:cell.querySelector('span')?.textContent||null,
+       lines:new Set([...range.getClientRects()].map(rect=>Math.round(rect.top))).size,
+       fits:fragments.every(rect=>rect.left>=cell.getBoundingClientRect().left-1&&rect.right<=cell.getBoundingClientRect().right+1)};
+     });
+     return {photoWidth:photo.width,photoFits:photo.right<=bounds.right,priceCells};
+    });
+    checks.push({width,locale,kind,...result});
+    assert(result.photoFits&&result.photoWidth>=70,JSON.stringify(result));
+    assert.equal(result.priceCells.length,2);
+    assert(result.priceCells.every(cell=>cell.fits),JSON.stringify(result));
+    if(kind==='unknown'&&locale!=='en-US')
+     assert(result.priceCells.every(cell=>cell.lines===1),JSON.stringify({width,locale,...result}));
+    if(kind==='long'){
+     assert(result.priceCells[0].text.includes('123456789 JPY'));
+     assert(result.priceCells[1].text.includes('998765432 JPY'));
+     assert(result.priceCells.every(cell=>cell.unit?.length>30));
+    }
+    await page.locator('.product-photo-intake .ant-modal-close').click();
+   }
+  }
+  await context.close();
+  continue;
+ }
  const camera=page.getByTestId('ai-quick-snap-button');
  await camera.waitFor().catch(async error=>{console.error(await page.locator('body').innerText(),errors);throw error;});
  await page.getByRole('button',{name:'照片队列',exact:true}).waitFor().catch(async error=>{console.error(await page.locator('body').innerText(),errors);throw error;});

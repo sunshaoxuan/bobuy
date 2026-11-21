@@ -75,6 +75,7 @@
 .photo-review-prices {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
 .photo-review-prices>div {display:flex;flex-direction:column;min-width:0}
 .photo-review-prices strong {font-size:18px}
+.photo-review-prices .photo-price-unknown {font-size:14px;color:#5f5b52;word-break:keep-all;overflow-wrap:normal}
 .photo-review-prices small,.photo-review-prices span {color:#5f5b52}
 .photo-proof-toggle {background:#fffdf9;border:1px solid #dedbd4;border-radius:8px;min-height:44px;color:#252522;font:inherit;cursor:pointer;overflow-wrap:anywhere}
 .photo-review-proof .photo-proof-toggle {display:flex;flex-direction:column;align-items:center;gap:4px;width:100%;padding:5px}
