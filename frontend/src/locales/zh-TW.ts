@@ -1,6 +1,10 @@
 import type { Dictionary } from './types';
 
 const messages: Dictionary = {
+"products.archive_failed":"商品檔案載入失敗，請重試。",
+"products.archive_loading":"正在載入商品",
+"products.archive_navigation":"商品分頁",
+"products.archive_export_limit":"商品檔案超過 500 件，無法依現有上限匯出。",
 "photo.sources":"已檢索來源（請與原圖共同核對）",
 "photo.unknown_fields":"部分欄位仍缺少依據，已留空或列為 AI 建議，請人工補齊必要項。",
 "photo.official_image":"來源校驗通過的商品圖",
@@ -80,9 +84,9 @@ const messages: Dictionary = {
   "product.create.duplicate": "該商品編號已有檔案（包括已刪除檔案）。請尋找或恢復原商品，不會覆蓋原資料。",
   "product.create.deleted_retry": "該建立請求對應的商品已刪除。請先查看已刪除商品。",
 
-  "catalogTransfer.export": "匯出目前列表商品",
+  "catalogTransfer.export": "匯出完整檔案",
   "catalogTransfer.load": "讀取 JSON 檔案",
-  "catalogTransfer.help": "使用現有商品 ID 與版本。匯出限本頁有權限讀取的商品（最多 500 件）。讀取檔案僅填入預覽編輯區，需核對並確認後儲存；新增或待確認身分不會自動建檔。",
+  "catalogTransfer.help": "匯出涵蓋該商家的所有使用中商品，上限 500 件。匯入只會填入預覽，核對後再儲存。",
   "catalogTransfer.template": "下載 JSON 範本",
   "catalogTransfer.select": "請選擇至少一件已預覽商品後儲存。",
   "catalogTransfer.invalid": "請使用不超過 2 MB、包含 1–500 行且商品 ID 唯一的 JSON 檔案。",

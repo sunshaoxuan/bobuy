@@ -51,6 +51,13 @@ public class ProductRatingService {
  }
  @Transactional(readOnly=true) public Summary summary(String id){visible(id,false);return aggregates(List.of(id)).get(id);}
  @Transactional(readOnly=true) public ReviewPage list(String id,int page){visible(id,false);if(page<0||page>10000)throw invalid("rating.invalid");var rows=reviews.findByProductIdOrderByUpdatedAtDescIdDesc(id,PageRequest.of(page,20));return new ReviewPage(rows.stream().map(r->new Entry(r.id,r.stars,r.comment,r.updatedAt)).toList(),rows.hasNext());}
+ /** Archive rows already authorized and loaded by the caller. Private drafts have no rating badge. */
+ public Map<String,BigDecimal> archiveRatings(Collection<Product> owned) {
+  var ids=owned.stream().filter(p->p.getVisibilityStatus()==ProductVisibility.PUBLIC).map(Product::getId).toList();
+  var result=new HashMap<String,BigDecimal>();
+  aggregates(ids).forEach((id,summary)->{if(summary.average()!=null)result.put(id,summary.average());});
+  return result;
+ }
  @Transactional(readOnly=true) public Map<String,BigDecimal> publicRatings(Map<String,Long> visibleOwners){
   var owned=new ArrayList<Product>();for(var p:products.findAllById(visibleOwners.keySet()))if(Objects.equals(p.getMerchantId(),visibleOwners.get(p.getId())))owned.add(p);
   var ids=new ArrayList<>(reviewableIds(owned));

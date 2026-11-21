@@ -2,6 +2,10 @@ import type { Dictionary } from './types';
 import experience from './experience.en-US.json';
 
 const messages: Dictionary = {
+"products.archive_failed":"Product archive could not be loaded.",
+"products.archive_loading":"Loading products",
+"products.archive_navigation":"Product pages",
+"products.archive_export_limit":"The archive exceeds the 500-product export limit.",
 "photo.sources":"Retrieved sources (verify alongside the photo)",
 "photo.unknown_fields":"Some fields lack evidence. Leave unknown values empty and complete required fields manually.",
 "photo.official_image":"Source-verified catalog image",
@@ -81,9 +85,9 @@ const messages: Dictionary = {
   "product.create.duplicate": "This item number already exists, including deleted products. Find or restore the original product; existing details will not be overwritten.",
   "product.create.deleted_retry": "The product for this creation request was deleted. Check deleted products first.",
 
-  "catalogTransfer.export": "Export listed products",
+  "catalogTransfer.export": "Export whole archive",
   "catalogTransfer.load": "Load JSON file",
-  "catalogTransfer.help": "Use existing product IDs and versions. Export includes the products listed on this page (up to 500), subject to your access. Loading a file only fills the preview editor; review and confirm before saving. New or unresolved identities are not created automatically.",
+  "catalogTransfer.help": "Export uses the complete active merchant archive (up to 500 products). Import fills the preview. Review the changes before saving.",
   "catalogTransfer.template": "Download JSON template",
   "catalogTransfer.select": "Select at least one previewed product to save.",
   "catalogTransfer.invalid": "Use 1–500 rows with unique existing product IDs in a JSON file of at most 2 MB.",

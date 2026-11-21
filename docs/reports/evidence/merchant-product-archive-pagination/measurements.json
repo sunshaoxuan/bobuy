@@ -1,0 +1,124 @@
+[
+  {
+    "mode": "baseline",
+    "width": 390,
+    "rowCount": 520,
+    "bodyBytes": 3175138,
+    "domFirstBatch": 520,
+    "firstCardMs": 4436,
+    "requestsAtFirstCard": 527,
+    "apiRequestsOneSecondAfterCard": 529,
+    "ttfbMs": 340,
+    "totalMs": 389,
+    "css": null
+  },
+  {
+    "mode": "candidate",
+    "width": 390,
+    "rowCount": 24,
+    "bodyBytes": 5486,
+    "domFirstBatch": 24,
+    "firstCardMs": 578,
+    "requestsAtFirstCard": 7,
+    "apiRequestsOneSecondAfterCard": 7,
+    "ttfbMs": 70,
+    "totalMs": 100,
+    "css": {
+      "documentWidth": 390,
+      "controls": [
+        {
+          "height": 44,
+          "width": 86.46875,
+          "minHeight": "44px",
+          "minWidth": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "height": 44,
+          "width": 60.796875,
+          "minHeight": "44px",
+          "minWidth": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        }
+      ]
+    },
+    "interactions": {
+      "next": true,
+      "previous": true,
+      "managementSharedPage": true,
+      "globalSearch": true,
+      "detailDeepLink": true,
+      "photoConfirmationRefreshedPage": true,
+      "legacyListRequests": 0
+    }
+  },
+  {
+    "mode": "baseline",
+    "width": 1280,
+    "rowCount": 520,
+    "bodyBytes": 3175138,
+    "domFirstBatch": 520,
+    "firstCardMs": 3490,
+    "requestsAtFirstCard": 527,
+    "apiRequestsOneSecondAfterCard": 527,
+    "ttfbMs": 288,
+    "totalMs": 299,
+    "css": null
+  },
+  {
+    "mode": "candidate",
+    "width": 1280,
+    "rowCount": 24,
+    "bodyBytes": 5486,
+    "domFirstBatch": 24,
+    "firstCardMs": 477,
+    "requestsAtFirstCard": 7,
+    "apiRequestsOneSecondAfterCard": 7,
+    "ttfbMs": 20,
+    "totalMs": 33,
+    "css": {
+      "documentWidth": 1280,
+      "controls": [
+        {
+          "height": 44,
+          "width": 86.46875,
+          "minHeight": "44px",
+          "minWidth": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "height": 44,
+          "width": 60.796875,
+          "minHeight": "44px",
+          "minWidth": "44px",
+          "borderRadius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        }
+      ]
+    },
+    "interactions": {
+      "next": true,
+      "previous": true,
+      "managementSharedPage": true,
+      "globalSearch": true,
+      "detailDeepLink": true,
+      "photoConfirmationRefreshedPage": true,
+      "legacyListRequests": 0
+    }
+  }
+]
