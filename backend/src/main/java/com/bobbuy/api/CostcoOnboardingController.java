@@ -26,9 +26,9 @@ public class CostcoOnboardingController {
         @JsonAnySetter public void unknown(String field,Object value){throw new IllegalArgumentException("onboarding.unknown_field");}
     }
     public record View(String id,CostcoOnboardingJob.State state,long revision,String itemNumber,
-            String productId,Long productVersion,String failureCode,String stage,com.bobbuy.service.CostcoOnboardingDecision.Candidate candidate) {}
+            String productId,Long productVersion,String failureCode,String supplierId,String market,boolean photo,String stage,com.bobbuy.service.CostcoOnboardingDecision.Candidate candidate) {}
     public static View view(CostcoOnboardingJob job) {
-        return new View(job.id(),job.state(),job.revision(),job.itemNumber(),job.productId(),job.productVersion(),job.failureCode(),
+        return new View(job.id(),job.state(),job.revision(),job.itemNumber(),job.productId(),job.productVersion(),job.failureCode(),job.supplierId(),job.market(),job.privatePhotoSha256()!=null,
                 job.decisions().isEmpty()?null:job.decisions().get(job.decisions().size()-1).stage().name(),job.decisions().stream().filter(d->d.candidate()!=null).reduce((a,b)->b).map(com.bobbuy.service.CostcoOnboardingDecision::candidate).orElse(null));
     }
     private long owner(Authentication auth) {

@@ -1,0 +1,93 @@
+{
+  "method": "Original 1x button raster; high-contrast connected components, excluding outer focus/border components. English action labels only. Multilingual labels visually checked in original screenshots; full glyph budget remains partial.",
+  "results": [
+    {
+      "file": "glyph-button-0.png",
+      "size": [
+        115,
+        44
+      ],
+      "inkBounds": [
+        17,
+        16,
+        97,
+        30
+      ],
+      "innerMargins": [
+        16,
+        15,
+        17,
+        13
+      ],
+      "centerDeviation": 1.0,
+      "budget": 1.4000000000000001,
+      "pass": true
+    },
+    {
+      "file": "glyph-button-1.png",
+      "size": [
+        172,
+        44
+      ],
+      "inkBounds": [
+        18,
+        16,
+        153,
+        30
+      ],
+      "innerMargins": [
+        17,
+        15,
+        18,
+        13
+      ],
+      "centerDeviation": 1.0,
+      "budget": 1.4000000000000001,
+      "pass": true
+    },
+    {
+      "file": "glyph-button-2.png",
+      "size": [
+        700,
+        44
+      ],
+      "inkBounds": [
+        302,
+        16,
+        398,
+        30
+      ],
+      "innerMargins": [
+        301,
+        15,
+        301,
+        13
+      ],
+      "centerDeviation": 1.0,
+      "budget": 1.4000000000000001,
+      "pass": true
+    },
+    {
+      "file": "glyph-button-3.png",
+      "size": [
+        700,
+        44
+      ],
+      "inkBounds": [
+        333,
+        16,
+        367,
+        27
+      ],
+      "innerMargins": [
+        332,
+        15,
+        332,
+        16
+      ],
+      "centerDeviation": 0.5,
+      "budget": 1.1,
+      "pass": true
+    }
+  ]
+}

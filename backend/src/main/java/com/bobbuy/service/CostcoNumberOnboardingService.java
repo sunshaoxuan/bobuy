@@ -108,6 +108,10 @@ public final class CostcoNumberOnboardingService {
                 if (decision.verdict() != Verdict.ACCEPT) return stop(job, decision);
                 if (stage == Stage.ADMISSION) candidate = decision.candidate();
             }
+            // Photos are private suggestions until an operator explicitly confirms them.
+            // Reuse an existing state so older readers can still reopen the durable payload.
+            if (job.privatePhotoSha256() != null)
+                return move(job, NEEDS_INPUT, item, evidence, job.decisions(), null, null, "photo.confirm_required");
             if (!completeCandidate(candidate, job)) return move(job, NEEDS_INPUT, item, evidence, job.decisions(), null, null, "onboarding.candidate_incomplete");
             String candidateHash = candidateHash(candidate);
             job = move(job, COMMITTING, item, evidence, job.decisions(), null, null, null);

@@ -1,3 +1,4 @@
+import ProductPhotoHistory from './ProductPhotoHistory';
 import CatalogFileTransfer from './CatalogFileTransfer';
 import ProductReviewEditor from './ProductRating';
 import {useEffect,useRef,useState,useMemo} from 'react';
@@ -111,7 +112,8 @@ function CatalogEditor({entries,id,onChoose,onSaved,currentScope}:PanelProps&{cu
       <div className="catalog-image-actions"><Button icon={<StarOutlined/>} disabled={!cover||activeImage===0} onClick={()=>{reorder(activeImage,0);setActiveImage(0);}}>{t(activeImage?'gallery.set_main':'gallery.main')}</Button><Button icon={<ArrowLeftOutlined/>} aria-label={t('master.move_up')} disabled={!cover||activeImage===0} onClick={()=>{reorder(activeImage,activeImage-1);setActiveImage(activeImage-1);}}/><Button icon={<ArrowRightOutlined/>} aria-label={t('master.move_down')} disabled={!cover||activeImage>=draft.gallery.length-1} onClick={()=>{reorder(activeImage,activeImage+1);setActiveImage(activeImage+1);}}/><Button danger icon={<DeleteOutlined/>} aria-label={t('store.remove')} disabled={!cover} onClick={()=>{patch({gallery:draft.gallery.filter((_,i)=>i!==activeImage)});setActiveImage(0);}}/><Button icon={<UploadOutlined/>} onClick={()=>setEditorTab('media')}>{t('products.add_images')}</Button></div>
      </div>
     </div>
-    <Tabs className="catalog-main-tabs" activeKey={editorTab} onChange={key=>{setEditorTab(key);}} items={[
+    {id&&<ProductPhotoHistory key={id} id={id}/>}
+   <Tabs className="catalog-main-tabs" activeKey={editorTab} onChange={key=>{setEditorTab(key);}} items={[
      {key:'identity',label:t('products.details_tab'),children:<div className="catalog-tab-content">{error&&editorTab==='identity'&&<Alert type="error" message={warning(error)}/>}<div className="catalog-identity-grid">
       <label>{t('rec.code')}<Input maxLength={100} value={draft.itemNumber??''} onChange={e=>patch({itemNumber:e.target.value||null})}/></label>
       <label>{t('stock.item.brand')}<Input maxLength={200} value={draft.brand??''} onChange={e=>patch({brand:e.target.value||null})}/></label>

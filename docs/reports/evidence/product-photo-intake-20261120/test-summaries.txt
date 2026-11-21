@@ -1,0 +1,84 @@
+## photo-browser.log
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 31.79 s -- in com.bobbuy.api.ProductPhotoIntakeIntegrationTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+
+## photo-ai-final.log
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 26.99 s -- in com.bobbuy.api.ProductPhotoIntakeIntegrationTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+
+## photo-glyph-final.log
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 29.27 s -- in com.bobbuy.api.ProductPhotoIntakeIntegrationTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+
+## photo-modal-final.log
+ ✓ src/components/ProductPhotoIntakeModal.test.tsx  (7 tests) 522ms
+ Test Files  1 passed (1)
+      Tests  7 passed (7)
+
+## photo-integration.log
+[ERROR] Tests run: 7, Failures: 0, Errors: 1, Skipped: 1, Time elapsed: 17.07 s <<< FAILURE! -- in com.bobbuy.api.ProductPhotoIntakeIntegrationTest
+[ERROR] Tests run: 7, Failures: 0, Errors: 1, Skipped: 1
+
+## photo-frontend-tests.log
+ ✓ src/components/CostcoOnboardingPanel.test.tsx  (5 tests) 213ms
+ ✓ src/components/ProductCatalogPanel.test.tsx  (8 tests) 3374ms
+ ✓ src/components/ProductCatalogPanel.uploadFeedback.test.tsx  (11 tests) 4425ms
+ ✓ src/components/ProductPhotoHistory.test.tsx  (1 test) 43ms
+ Test Files  1 failed | 4 passed (5)
+      Tests  1 failed | 28 passed (29)
+
+## photo-ui-final.log
+ ✓ src/components/CostcoOnboardingPanel.test.tsx  (5 tests) 410ms
+ ✓ src/components/ProductPhotoIntakeModal.test.tsx  (4 tests) 429ms
+ Test Files  2 passed (2)
+      Tests  9 passed (9)
+
+## photo-panel-final.log
+ ✓ src/components/CostcoOnboardingPanel.test.tsx  (6 tests) 317ms
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+
+## photo-i18n.log
+PASS: 1957 resource keys, application references and missing-key negative fixture
+
+## photo-media-final.log
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 18.11 s -- in com.bobbuy.api.ProductPhotoIntakeIntegrationTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+
+## photo-frontend-retry.log
+ ✓ src/components/ProductPhotoIntakeModal.test.tsx  (4 tests) 326ms
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+
+## photo-backend-tests.log
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 15.58 s -- in com.bobbuy.api.ManualProductCreationTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.779 s -- in com.bobbuy.api.CostcoOnboardingControllerTest
+[INFO] Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.064 s -- in com.bobbuy.service.CostcoNumberOnboardingServiceTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.814 s -- in com.bobbuy.service.CostcoCatalogCommitterTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.123 s -- in com.bobbuy.service.CostcoPinnedStageReviewerTest
+[INFO] Tests run: 47, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+
+## photo-negative-final.log
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 17.59 s -- in com.bobbuy.api.ProductPhotoIntakeIntegrationTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+
+## photo-browser-extra.log
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 31.47 s -- in com.bobbuy.api.ProductPhotoIntakeIntegrationTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+
+## photo-locales-final.log
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 27.68 s -- in com.bobbuy.api.ProductPhotoIntakeIntegrationTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+
+## photo-media-browser.log
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 24.05 s -- in com.bobbuy.api.ProductPhotoIntakeIntegrationTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS

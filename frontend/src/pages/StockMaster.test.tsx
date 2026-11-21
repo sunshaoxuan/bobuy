@@ -292,13 +292,10 @@ describe('StockMaster Component', () => {
     });
   });
 
-  it('displays success message on publish', async () => {
+  it('labels the photo intake entry directly', async () => {
     renderWithI18n(<StockMaster />);
     await screen.findByText(/Organic Milk/i);
-    const publishButton = screen.getByRole('button', { name: /OCR 识别|OCR \+ AI Smart Snap/i });
-    fireEvent.click(publishButton);
-    
-    expect(publishButton).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /拍照识别商品/ })).toBeInTheDocument();
   });
 
   it('renders category-specific dynamic attributes in drawer', async () => {
