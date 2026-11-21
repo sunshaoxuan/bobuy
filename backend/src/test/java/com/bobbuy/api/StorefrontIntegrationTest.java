@@ -254,6 +254,44 @@ class StorefrontIntegrationTest {
         var retained=orders.findById(98765L).orElseThrow();assertThat(retained.getDeliverySnapshot()).isNull();assertThat(retained.getCheckoutPayloadHash()).isNull();
     }
 
+    @Test void delayedDataAcknowledgementCommitsTheAccountAndItsDeliveredCode() throws Exception {
+        try (var server = new LoopbackVerificationSmtp(6000, "250 Message queued")) {
+            useLoopbackSmtp(server, 15000);
+            var result = registerAccountWithWireSmtp("slow_data").andExpect(status().isOk()).andReturn();
+            JsonNode session = json.readTree(result.getResponse().getContentAsString()).get("data");
+            long id = session.at("/user/id").asLong();
+            assertThat(users.existsById(id)).isTrue();
+            assertThat(challenges.existsById(id)).isTrue();
+            verifyCode(token(session), server.receivedCode()).andExpect(status().isOk());
+            assertThat(users.findById(id).orElseThrow().getEmailVerifiedAt()).isNotNull();
+            verify(smtp, times(1)).send(any(), anyString(), any());
+        }
+    }
+
+    @Test void rejectedDataStillRollsBackTheRegistration() throws Exception {
+        try (var server = new LoopbackVerificationSmtp(0, "550 DATA rejected")) {
+            useLoopbackSmtp(server, 15000);
+            long challengeCount = challenges.count();
+            registerAccountWithWireSmtp("rejected_data").andExpect(status().isBadRequest());
+            assertThat(users.findByUsernameIgnoreCase("rejected_data")).isEmpty();
+            assertThat(challenges.count()).isEqualTo(challengeCount);
+            verify(smtp, times(1)).send(any(), anyString(), any());
+        }
+    }
+
+    private void useLoopbackSmtp(LoopbackVerificationSmtp server, int timeoutMs) {
+        doAnswer(call -> {
+            server.send(call.getArgument(2), timeoutMs);
+            return null;
+        }).when(smtp).send(any(), anyString(), any());
+    }
+
+    private ResultActions registerAccountWithWireSmtp(String username) throws Exception {
+        var account = Map.of("username", username, "email", username + "@example.test", "password", "valid-password");
+        return mvc.perform(post("/api/auth/register-account").header("Accept-Language", "en-US")
+            .contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsString(Map.of("account", account))));
+    }
+
     @Test void registrationValidationAndMailFailureLeaveNoPartialAccount() throws Exception {
         mvc.perform(post("/api/auth/register").contentType(MediaType.APPLICATION_JSON)
             .content("{\"username\":\"bad!\",\"password\":\"short\",\"email\":\"bad\"}"))

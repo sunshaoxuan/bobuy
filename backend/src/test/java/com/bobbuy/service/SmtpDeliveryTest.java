@@ -11,16 +11,24 @@ import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.*;
 class SmtpDeliveryTest {
  @Test void alwaysVerifiesServerIdentityRequiresEncryptionAndBoundsNetworkWaits() {
-  var settings=new MailSettings();var delivery=new SmtpDelivery();
+  var settings=new MailSettings();var delivery=new SmtpDelivery(15000);
   var sender=delivery.createSender(settings,"synthetic");var p=sender.getJavaMailProperties();
   assertThat(sender.getHost()).isEqualTo("mail.briconbric.com");assertThat(sender.getPort()).isEqualTo(587);
   assertThat(p).containsEntry("mail.smtp.ssl.checkserveridentity","true").containsEntry("mail.smtp.starttls.required","true")
    .containsEntry("mail.smtp.starttls.enable","true").containsEntry("mail.smtp.ssl.enable","false")
    .containsEntry("mail.debug","false").containsEntry("mail.debug.auth","false")
-   .containsEntry("mail.smtp.connectiontimeout","5000").containsEntry("mail.smtp.timeout","5000").containsEntry("mail.smtp.writetimeout","5000");
+   .containsEntry("mail.smtp.connectiontimeout","5000").containsEntry("mail.smtp.timeout","15000").containsEntry("mail.smtp.writetimeout","5000");
   assertThat(p).doesNotContainKey("mail.smtp.ssl.trust");
   settings.port=465;settings.tlsMode="TLS";var secure=delivery.createSender(settings,"synthetic").getJavaMailProperties();
   assertThat(secure).containsEntry("mail.smtp.ssl.enable","true").containsEntry("mail.smtp.ssl.checkserveridentity","true");
+ }
+
+ @Test void readTimeoutIsConfigurableWithinBounds() {
+  var settings=new MailSettings();
+  assertThat(new SmtpDelivery(12000).createSender(settings,"synthetic").getJavaMailProperties())
+      .containsEntry("mail.smtp.timeout","12000");
+  assertThatIllegalArgumentException().isThrownBy(()->new SmtpDelivery(4999));
+  assertThatIllegalArgumentException().isThrownBy(()->new SmtpDelivery(30001));
  }
 
  @Test void acceptedSubmissionSurvivesFailureDuringCloseWithoutRetry() throws Exception {
@@ -44,7 +52,7 @@ class SmtpDeliveryTest {
  }
 
  private SmtpDelivery deliveryWith(Transport transport) {
-  return new SmtpDelivery() {
+  return new SmtpDelivery(15000) {
    @Override Transport openTransport(JavaMailSenderImpl sender) { return transport; }
   };
  }
