@@ -1,0 +1,271 @@
+[
+  {
+    "width": 390,
+    "scenario": "slow-first-promote",
+    "events": [
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-1",
+        "at": 1795230600302
+      },
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-4",
+        "at": 1795230600871
+      },
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-3",
+        "at": 1795230601772
+      },
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-2",
+        "at": 1795230601831
+      }
+    ],
+    "errors": [],
+    "geometry": [
+      {
+        "width": 76,
+        "height": 76
+      },
+      {
+        "width": 76,
+        "height": 76
+      },
+      {
+        "width": 76,
+        "height": 76
+      },
+      {
+        "width": 76,
+        "height": 76
+      }
+    ],
+    "textVisibleWithFirstPending": true,
+    "pass": true
+  },
+  {
+    "width": 390,
+    "scenario": "failed-first",
+    "events": [
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-1",
+        "at": 1795230654373
+      },
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-2",
+        "at": 1795230654441
+      },
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-1",
+        "at": 1795230654616
+      },
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-3",
+        "at": 1795230654817
+      },
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-1",
+        "at": 1795230654849
+      },
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-4",
+        "at": 1795230654877
+      }
+    ],
+    "errors": [],
+    "geometry": [
+      {
+        "width": 76,
+        "height": 76
+      },
+      {
+        "width": 76,
+        "height": 76
+      },
+      {
+        "width": 76,
+        "height": 76
+      },
+      {
+        "width": 76,
+        "height": 76
+      }
+    ],
+    "textVisibleWithFirstPending": true,
+    "pass": true
+  },
+  {
+    "width": 390,
+    "scenario": "close-switch",
+    "events": [
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-1",
+        "at": 1795230655588
+      }
+    ],
+    "errors": [],
+    "geometry": [
+      {
+        "width": 75.99998474121094,
+        "height": 76
+      }
+    ],
+    "textVisibleWithFirstPending": true,
+    "pass": true
+  },
+  {
+    "width": 1440,
+    "scenario": "slow-first-promote",
+    "events": [
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-1",
+        "at": 1795230658001
+      },
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-4",
+        "at": 1795230658666
+      },
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-3",
+        "at": 1795230659568
+      },
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-2",
+        "at": 1795230659653
+      }
+    ],
+    "errors": [],
+    "geometry": [
+      {
+        "width": 76,
+        "height": 76
+      },
+      {
+        "width": 76,
+        "height": 76
+      },
+      {
+        "width": 76,
+        "height": 76
+      },
+      {
+        "width": 76,
+        "height": 76
+      }
+    ],
+    "textVisibleWithFirstPending": true,
+    "pass": true
+  },
+  {
+    "width": 1440,
+    "scenario": "failed-first",
+    "events": [
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-1",
+        "at": 1795230660351
+      },
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-2",
+        "at": 1795230660393
+      },
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-3",
+        "at": 1795230660428
+      },
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-1",
+        "at": 1795230660581
+      },
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-1",
+        "at": 1795230660873
+      },
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-4",
+        "at": 1795230660880
+      }
+    ],
+    "errors": [],
+    "geometry": [
+      {
+        "width": 76,
+        "height": 76
+      },
+      {
+        "width": 76,
+        "height": 76
+      },
+      {
+        "width": 76,
+        "height": 76
+      },
+      {
+        "width": 76,
+        "height": 76
+      }
+    ],
+    "textVisibleWithFirstPending": true,
+    "pass": true
+  },
+  {
+    "width": 1440,
+    "scenario": "close-switch",
+    "events": [
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-1",
+        "at": 1795230661681
+      }
+    ],
+    "errors": [],
+    "geometry": [
+      {
+        "width": 76,
+        "height": 76
+      }
+    ],
+    "textVisibleWithFirstPending": true,
+    "pass": true
+  },
+  {
+    "width": 360,
+    "scenario": "slow-first-promote",
+    "events": [
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-1",
+        "at": 1795230750613
+      },
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-4",
+        "at": 1795230751285
+      },
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-3",
+        "at": 1795230752216
+      },
+      {
+        "url": "/api/storefront/recommendation-images/detail-perf-fixture-2",
+        "at": 1795230752283
+      }
+    ],
+    "errors": [],
+    "geometry": [
+      {
+        "width": 76,
+        "height": 76
+      },
+      {
+        "width": 76,
+        "height": 76
+      },
+      {
+        "width": 76,
+        "height": 76
+      },
+      {
+        "width": 76,
+        "height": 76
+      }
+    ],
+    "textVisibleWithFirstPending": true,
+    "pass": true
+  }
+]
