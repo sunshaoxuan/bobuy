@@ -24,8 +24,12 @@ public class AuditLogController {
   @GetMapping
   public ApiResponse<List<AuditLog>> list() {
     List<AuditLog> logs = auditLogService.listLogs().stream().filter(log ->
-        "TRIP".equals(log.getEntityType()) ? store.getTrip(log.getEntityId()).isPresent() :
-        "ORDER".equals(log.getEntityType()) && store.getOrder(log.getEntityId()).isPresent()).toList();
+        switch (log.getEntityType()) {
+          case "TRIP" -> store.getTrip(log.getEntityId()).isPresent();
+          case "ORDER" -> store.getOrder(log.getEntityId()).isPresent();
+          case "PRODUCT" -> store.getProduct(log.getProductId()).isPresent();
+          default -> false;
+        }).toList();
     return ApiResponse.success(logs, new ApiMeta(logs.size()));
   }
 }

@@ -551,6 +551,7 @@ public class BobbuyStore {
         var previous=getProduct(id).orElseThrow();
         product.setMerchantId(previous.getMerchantId());
         product.setSale(previous.getSale());
+        product.setCartEnabled(previous.isCartEnabled());
         product.setRecordVersion(previous.getRecordVersion());
         product.setCurrency(previous.getCurrency());
         product.setCatalogData(previous.getCatalogData());
@@ -573,6 +574,10 @@ public class BobbuyStore {
         Product existing = existingOptional.orElseThrow();
         if (patch == null) {
             return Optional.of(existing);
+        }
+        if (patch.getCartEnabled() != null) {
+            ProductCartAvailability.change(existing, patch.getCartEnabled(),
+                ProductCartAvailability.requireMerchant(), auditLogService);
         }
         if(existing.getCatalogData()!=null&&(patch.getName()!=null||patch.getDescription()!=null||patch.getBrand()!=null||patch.getMediaGallery()!=null||patch.getCategoryId()!=null||patch.getItemNumber()!=null))throw new com.bobbuy.api.response.ApiException(com.bobbuy.api.response.ErrorCode.INVALID_REQUEST,"master.use_profile");
         if (patch.getName() != null) {

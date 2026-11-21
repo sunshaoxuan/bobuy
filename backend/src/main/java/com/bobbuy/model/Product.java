@@ -119,6 +119,22 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private ProductVisibility visibilityStatus = ProductVisibility.PUBLIC;
 
+    @Column(name = "cart_enabled", nullable = false)
+    @com.fasterxml.jackson.annotation.JsonProperty(access = com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY)
+    private boolean cartEnabled = true;
+
+    public boolean isCartEnabled() {
+        return cartEnabled;
+    }
+
+    public void setCartEnabled(boolean cartEnabled) {
+        this.cartEnabled = cartEnabled;
+    }
+
+    public boolean publiclyCartEnabled() {
+        return cartEnabled && !isDeleted() && visibilityStatus == ProductVisibility.PUBLIC;
+    }
+
     private LocalDateTime updatedAt;
 
     public Product() {

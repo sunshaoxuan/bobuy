@@ -49,8 +49,9 @@ public class MerchantProductArchiveController {
     @com.fasterxml.jackson.annotation.JsonInclude(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL)
     public record Row(String id, String name, String itemNumber, String brand, String specification,
                       String categoryId, String categoryPath, String image, int mediaCount, String netContent, String packSize,
-                      boolean catalogDriven, boolean privateDraft, Price currentRegular, BigDecimal rating) {}
-    public record Page(List<Row> rows, long total) {}
+                      boolean catalogDriven, boolean privateDraft, Price currentRegular, BigDecimal rating,
+                      boolean cartEnabled) {}
+    public record Page(List<Row> rows, long total, boolean allCartEnabled) {}
     public record ExportSelection(List<String> ids, boolean limitExceeded) {}
 
     @GetMapping
@@ -62,7 +63,8 @@ public class MerchantProductArchiveController {
         String search = query.strip();
         var ids = products.archiveIds(owner, search, PAGE_SIZE, (long) page * PAGE_SIZE);
         long total = products.archiveCount(owner, search);
-        if (ids.isEmpty()) return ApiResponse.success(new Page(List.of(), total));
+        boolean allCartEnabled = !products.existsByMerchantIdAndCartEnabledFalse(owner);
+        if (ids.isEmpty()) return ApiResponse.success(new Page(List.of(), total, allCartEnabled));
         var byId = new HashMap<String, Product>();
         products.findAllByMerchantIdAndIdIn(owner, ids).forEach(product -> byId.put(product.getId(), product));
         var ordered = ids.stream().map(byId::get).filter(Objects::nonNull).toList();
@@ -71,7 +73,7 @@ public class MerchantProductArchiveController {
         var averages = ratings.archiveRatings(ordered);
         return ApiResponse.success(new Page(ordered.stream()
                 .map(product -> summarize(product, paths.get(product.getId()), prices.get(product.getId()), averages.get(product.getId()), locale))
-                .toList(), total));
+                .toList(), total, allCartEnabled));
     }
 
     @GetMapping("/export-selection")
@@ -93,7 +95,7 @@ public class MerchantProductArchiveController {
         return new Row(product.getId(), Objects.requireNonNullElse(name, ""), product.getItemNumber(), product.getBrand(), specification,
                 product.getCategoryId(), path, cover, media.size(), attributes.get("netContent"), attributes.get("packSize"), catalog != null,
                 "DRAFTER_ONLY".equals(String.valueOf(product.getVisibilityStatus())),
-                sale == null ? null : new Price(sale.amount(), sale.currency(), sale.unit()), rating);
+                sale == null ? null : new Price(sale.amount(), sale.currency(), sale.unit()), rating, product.isCartEnabled());
     }
 
     private static long owner() {
