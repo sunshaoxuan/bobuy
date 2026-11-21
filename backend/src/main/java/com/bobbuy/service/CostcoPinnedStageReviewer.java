@@ -74,6 +74,11 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
             }
             if ((stage==Stage.INTAKE || photoAdmission) && job.privatePhotoSha256()!=null)
                 addImage(job.merchantId(), job.privatePhotoSha256(), images, imageHashes);
+            if(stage==Stage.INTAKE&&job.packagingPhotoSha256()!=null
+                    &&!job.packagingPhotoSha256().equals(job.privatePhotoSha256())){
+                context.put("supplementalIntakePhotoOrder",List.of("current in-store photo","earlier packaging photo"));
+                addImage(job.merchantId(),job.packagingPhotoSha256(),images,imageHashes);
+            }
             for (var evidence : job.evidence()) {
                 var facts = new LinkedHashMap<String, Object>(); facts.put("receipt", evidence);
                 if (isTextualEvidence(evidence.mediaType())) {
@@ -129,6 +134,13 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
                 candidate may additionally contain photoFacts: amount,currency,unit,conditions,priceKind,productVisible.
                 photoFacts describe ONLY the original private photograph, never online evidence. priceKind is
                 WAREHOUSE, REGULAR, DISCOUNT, COUPON or UNKNOWN. Multiple labels/unclear price or unit: leave amount null.
+                At INTAKE set photoFacts.priceTagVisible to true only for a visible in-store price tag, false for
+                packaging or a product-only image with no in-store tag, and null if genuinely uncertain.
+                A barcode, price printed on packaging, or product image on white is not a shop price tag.
+                If supplementalIntakePhotoOrder is present, use only the first image for the shop tag and
+                the second only for product identity. A mismatch between the tag and packaging requires AMBIGUOUS.
+                Without a visible shop tag leave identifiedItemNumber and the candidate itemNumber null. Preserve
+                readable brand, name and packaging to help identify the product and return NEEDS_EVIDENCE.
                 productVisible means the physical product is visible, not merely a price label. Never infer availability.
                 At photo INTAKE only, photoFacts may additionally contain transcription: tags, productFeatures, uncertainties.
                 Keep one tag per visible label. Preserve rawText verbatim including line breaks, script, symbols, and
@@ -195,7 +207,14 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
                 }
                 if(c.hasNonNull("photoFacts")){
                     JsonNode facts=c.get("photoFacts");
-                    fields(facts,Set.of("amount","currency","unit","conditions","priceKind","productVisible","transcription"));
+                    fields(facts,Set.of("amount","currency","unit","conditions","priceKind","productVisible","transcription","priceTagVisible"));
+                    if(facts.hasNonNull("priceTagVisible")&&!facts.get("priceTagVisible").isBoolean())
+                        throw new IllegalArgumentException("onboarding.photo_transcription");
+                    if(job.privatePhotoSha256()!=null&&stage==Stage.INTAKE&&Boolean.FALSE.equals(
+                            facts.path("priceTagVisible").isBoolean()?facts.path("priceTagVisible").booleanValue():null)){
+                        ((ObjectNode)c).putNull("itemNumber");
+                        item=null;
+                    }
                     if(facts.hasNonNull("transcription")){
                         if(job.privatePhotoSha256()==null||stage!=Stage.INTAKE)
                             throw new IllegalArgumentException("onboarding.photo_transcription");

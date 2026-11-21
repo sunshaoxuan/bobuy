@@ -66,9 +66,19 @@ public record CostcoOnboardingDecision(Stage stage, Verdict verdict, String prov
     }
     /** Suggestions from original private pixels, never an approved selling price or stock count. */
     public record PhotoFacts(BigDecimal amount,String currency,String unit,String conditions,String priceKind,boolean productVisible,
-            @JsonInclude(JsonInclude.Include.NON_NULL) PhotoTranscription transcription) {
+            @JsonInclude(JsonInclude.Include.NON_NULL) PhotoTranscription transcription,
+            @JsonInclude(JsonInclude.Include.NON_NULL) Boolean priceTagVisible) {
         public PhotoFacts(BigDecimal amount,String currency,String unit,String conditions,String priceKind,boolean productVisible) {
-            this(amount,currency,unit,conditions,priceKind,productVisible,null);
+            this(amount,currency,unit,conditions,priceKind,productVisible,null,null);
+        }
+        public PhotoFacts(BigDecimal amount,String currency,String unit,String conditions,String priceKind,boolean productVisible,
+                PhotoTranscription transcription) {
+            this(amount,currency,unit,conditions,priceKind,productVisible,transcription,null);
+        }
+        public PhotoFacts {
+            if(Boolean.FALSE.equals(priceTagVisible)){
+                amount=null;currency=null;unit=null;conditions=null;priceKind="UNKNOWN";
+            }
         }
     }
 

@@ -72,6 +72,24 @@ class CostcoPinnedStageReviewerTest {
                 {"amount":999,"currency":"JPY","unit":"1 kg","conditions":"","priceKind":"WAREHOUSE","productVisible":true}
                 """,PhotoFacts.class).transcription());
     }
+    @Test void supplementedIntakeUsesUncroppedFieldPixelsFirstAndPackagingAsContext() throws Exception {
+        var gateway=new FakeGateway();
+        var store=new Store();
+        var fixtures=java.nio.file.Path.of("../docs/reports/evidence/product-photo-intake-20261120");
+        byte[] field=java.nio.file.Files.readAllBytes(fixtures.resolve("synthetic-edge-tag.png"));
+        byte[] pack=java.nio.file.Files.readAllBytes(fixtures.resolve("synthetic-packaging.png"));
+        String fieldHash=CostcoPinnedStageReviewer.digest(field),packHash=CostcoPinnedStageReviewer.digest(pack);
+        store.contents.put(fieldHash,field);store.contents.put(packHash,pack);
+        var original=job(List.of(),List.of(),fieldHash);
+        var supplemented=new CostcoOnboardingJob(original.id(),original.idempotencyKey(),original.merchantId(),
+                original.supplierId(),original.market(),original.inputHash(),null,fieldHash,original.revision(),
+                original.state(),List.of(),List.of(),null,null,null,original.updatedAt(),packHash);
+        var result=new CostcoPinnedStageReviewer(gateway,mapper,store).review(Stage.INTAKE,supplemented);
+        assertEquals(java.util.Set.of(fieldHash,packHash),result.trace().imageViewHashes().keySet());
+        assertTrue(gateway.prompt.contains("current in-store photo"));
+        assertEquals(720,javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(gateway.images.get(0).bytes())).getHeight());
+        assertEquals(320,javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(gateway.images.get(1).bytes())).getHeight());
+    }
     @Test void photoArchiveDetailsUseKnownLeafCategoriesAndSupportedStorage()throws Exception{
         var gateway=new FakeGateway();var store=new Store();byte[] bytes=png();
         String hash=CostcoPinnedStageReviewer.digest(bytes);store.contents.put(hash,bytes);

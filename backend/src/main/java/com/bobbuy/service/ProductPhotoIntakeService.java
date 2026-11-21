@@ -94,7 +94,7 @@ public class ProductPhotoIntakeService {
         if(current.revision()!=revision
                 || !Set.of(CostcoOnboardingJob.State.FAILED,CostcoOnboardingJob.State.NEEDS_INPUT,
                            CostcoOnboardingJob.State.CANCELLED,CostcoOnboardingJob.State.RETRY_WAIT).contains(current.state())
-                || "photo.confirm_required".equals(current.failureCode()) || saved(id,owner)!=null) return current;
+                || "photo.confirm_required".equals(current.failureCode()) || "photo.tag_missing".equals(current.failureCode()) || saved(id,owner)!=null) return current;
         if(!workerEnabled)throw new ApiException(ErrorCode.INVALID_STATUS,"onboarding.worker_disabled");
         try {
             evidence.readVerified(owner,current.privatePhotoSha256());
@@ -102,6 +102,25 @@ public class ProductPhotoIntakeService {
             throw new ApiException(ErrorCode.INVALID_STATUS,"photo.evidence_failed");
         }
         return jobs.retryPhoto(current);
+    }
+
+    @Transactional
+    public CostcoOnboardingJob supplement(String id,long revision,byte[] photo) {
+        long owner=owner();
+        users.lockById(owner).filter(u->u.isEnabled()&&u.getRoles().contains(Role.AGENT))
+                .orElseThrow(()->new ApiException(ErrorCode.FORBIDDEN,"error.auth.forbidden"));
+        var current=job(id,owner);
+        if(current.revision()!=revision||current.state()!=CostcoOnboardingJob.State.NEEDS_INPUT
+                ||!"photo.tag_missing".equals(current.failureCode())||saved(id,owner)!=null)throw conflict();
+        if(!workerEnabled)throw new ApiException(ErrorCode.INVALID_STATUS,"onboarding.worker_disabled");
+        String hash=CostcoEvidencePersistence.hash(photo);
+        if(hash.equals(current.privatePhotoSha256()))throw invalid("photo.supplement_same");
+        if(Boolean.TRUE.equals(jdbc.queryForObject("""
+            select exists(select 1 from bb_costco_onboarding_job
+                where merchant_id=? and supplier_id=? and market=? and id<>? and payload->>'privatePhotoSha256'=?)
+            """,Boolean.class,owner,current.supplierId(),current.market(),id,hash)))throw conflict();
+        evidence.putPrivatePhoto(owner,photo);
+        return jobs.supplementPhoto(current,hash);
     }
 
     @Transactional public Observation confirm(String id,Confirm input){
@@ -115,6 +134,7 @@ public class ProductPhotoIntakeService {
                 select exists(select 1 from bb_product_photo_observation where merchant_id=?
                     and supplier_id=? and market=? and photo_sha256=?)
                 """, Boolean.class, owner,j.supplierId(),j.market(),j.privatePhotoSha256()))) throw conflict();
+        if("photo.tag_missing".equals(j.failureCode()))throw invalid("photo.tag_missing");
         if(input==null||!input.identityConfirmed()||j.revision()!=input.revision()||!Set.of(CostcoOnboardingJob.State.NEEDS_INPUT,CostcoOnboardingJob.State.FAILED).contains(j.state()))throw conflict();
         String item=CostcoNumberOnboardingService.normalizeItemNumber(input.itemNumber());
         if(products.deletedCodeCount(owner,item)>0)throw invalid("photo.deleted");

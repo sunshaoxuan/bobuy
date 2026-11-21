@@ -23,6 +23,7 @@ export function photoFailure(code?:string) {
  if(code?.startsWith('ai.'))return 'photo.ai_unavailable';
  if(code==='onboarding.retry_exhausted')return 'photo.recognition_timeout';
  if(code==='error.auth.forbidden'||code==='onboarding.scope_changed')return 'photo.scope_failed';
+ if(code==='photo.tag_missing')return 'photo.tag_missing';
  if(code==='onboarding.description_evidence')return 'photo.description_evidence_missing';
  if(code==='onboarding.evidence_missing')return 'photo.sources_missing';
  return 'photo.recognition_failed';
@@ -77,12 +78,12 @@ export default function ProductPhotoQueue({jobs,onReview,onChanged}:QueueProps){
     return <li key={job.id} data-photo-job={job.id}>
      <Thumbnail id={job.id}/>
      <div className="photo-queue-info">
-      <Tag>{t(state)}</Tag>{job.itemNumber&&<span>{job.itemNumber}</span>}
+      <Tag>{t(state)}</Tag><small>{t('photo.evidence')}</small>{job.itemNumber&&<span>{job.itemNumber}</span>}
       {photoCanRetry(job)&&<p>{t(photoFailure(job.failureCode))}</p>}
       {failed[job.id]&&<Alert type="error" message={t(failed[job.id])}/>}
       <Space wrap>
        <Button onClick={()=>onReview(job)}>{t('photo.reopen')}</Button>
-       {photoCanRetry(job)&&<Button loading={retrying.includes(job.id)} onClick={()=>void retry(job)}>{t('photo.retry_recognition')}</Button>}
+       {photoCanRetry(job)&&job.failureCode!=='photo.tag_missing'&&<Button loading={retrying.includes(job.id)} onClick={()=>void retry(job)}>{t('photo.retry_recognition')}</Button>}
       </Space>
      </div>
     </li>;
