@@ -72,7 +72,13 @@ class ProductPhotoIntakeIntegrationTest {
   mvc.perform(get("/api/product-photo-intake").header("Authorization","Bearer "+auth))
    .andExpect(status().isOk()).andExpect(jsonPath("$.data[?(@.id == '"+job+"')].state",org.hamcrest.Matchers.contains("COMPLETED")));
  }
- @Test void concurrentLegacyRetriesReuseTheOwnedJobAndEvidence() throws Exception {
+ @Test void concurrentLegacyRetriesReuseTheOwnedJobAndEvidenceAtNumberCapacity() throws Exception {
+  jdbc.update("""
+    insert into bb_costco_onboarding_job
+      (id,merchant_id,supplier_id,market,idempotency_key,input_hash,state,payload,next_run_at)
+    select 'number-fixture-'||n,1000,?,'JP',md5('fixture-key-'||n),md5('fixture-input-'||n),
+      'QUEUED','{}'::jsonb,current_timestamp+interval '1 hour' from generate_series(1,32) n
+    """,supplier);
   jdbc.update("""
     update bb_costco_onboarding_job
        set payload=payload || '{"failureCode":"ai.pinned_endpoint","itemNumber":null,"decisions":[]}'::jsonb

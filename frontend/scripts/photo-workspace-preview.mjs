@@ -52,6 +52,7 @@ for(const [width,height] of settings){
   }:{...review,itemNumber:null,photoFacts:null,status:'IDENTITY_REQUIRED'};
   else if(path==='/api/mobile/suppliers') data=[{id:'s1',name:{'zh-CN':'Costco 日本','en-US':'Costco Japan','ja-JP':'コストコ日本'}}];
   else if(path==='/api/merchant/currencies') data=[{code:'JPY',minorUnit:0}];
+  else if(path==='/api/merchant/product-archive') data={total:1,rows:[{id:'p1',name:name['zh-CN'],itemNumber:'123456',image:'/api/demo-photo.png',mediaCount:1,catalogDriven:true,privateDraft:true}]};
   else if(path==='/api/mobile/products') data=[{displayName:name['zh-CN'],displayDescription:'',product:{id:'p1',visibilityStatus:'DRAFTER_ONLY',name,itemNumber:'123456',currency:'JPY',basePrice:1280,mediaGallery:[{type:'IMAGE',url:'/api/demo-photo.png'}]}}];
   if(path.includes('onboarding')||path.includes('photo-intake')) network.push({width,method,path,status:200});
   await route.fulfill({json:{status:'success',data}});
@@ -76,7 +77,21 @@ for(const [width,height] of settings){
  await camera.waitFor().catch(async error=>{console.error(await page.locator('body').innerText(),errors);throw error;});
  await page.getByRole('button',{name:'照片队列',exact:true}).waitFor().catch(async error=>{console.error(await page.locator('body').innerText(),errors);throw error;});
  await page.locator('.photo-queue-summary-counts').waitFor();
- if(design)await shot('archive','.product-archive');
+ const checkPrimary=async(button)=>{
+  await button.waitFor();
+  assert.equal(await button.evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(37, 37, 41)');
+  if(width===1280){
+   await button.hover();
+   await page.waitForFunction(el=>getComputedStyle(el).backgroundColor==='rgb(69, 69, 76)',await button.elementHandle());
+   await page.mouse.move(0,0);
+   await page.waitForFunction(el=>getComputedStyle(el).backgroundColor==='rgb(37, 37, 41)',await button.elementHandle());
+  }
+ };
+ if(design){
+  await checkPrimary(camera);
+  await checkPrimary(page.locator('.photo-queue-summary .ant-btn-primary').first());
+  await shot('archive','.product-archive');
+ }
  await camera.click();
  await page.locator('input[capture]').setInputFiles({name:'synthetic-first.png',mimeType:'image/png',buffer:png});
  await page.getByRole('link',{name:'下载照片'}).waitFor();

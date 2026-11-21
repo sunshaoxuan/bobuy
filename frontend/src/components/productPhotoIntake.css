@@ -39,8 +39,8 @@
 .photo-queue-summary-list li {grid-template-columns:48px minmax(0,1fr) minmax(0,auto);padding:9px 0;border-top:1px solid #ebe4da}
 .photo-queue-summary-list li[data-photo-state="confirm"] .ant-tag {color:#78342d;background:#f8e9e3;border-color:#efd6cf}
 .photo-queue-summary .ant-btn {height:auto;white-space:normal;min-width:0;text-align:center;border-radius:8px}
-.photo-queue-summary .ant-btn-primary {background:#a3473f;border-color:#a3473f}
-.photo-queue-summary .ant-btn-primary:hover {background:#85362f;border-color:#85362f}
+.photo-queue-summary .ant-btn-primary {background:#252529;border-color:#252529}
+.photo-queue-summary .ant-btn-primary:hover {background:#45454c;border-color:#45454c}
 .photo-queue-summary .ant-btn:focus-visible,.photo-proof-toggle:focus-visible {outline:2px solid #795908;outline-offset:2px}
 .photo-queue-summary-meta {display:flex;gap:3px 5px;align-items:baseline;overflow-wrap:anywhere;min-width:0}
 .photo-queue-summary-meta time {display:block;width:100%;color:#5f5b52;font-size:12px}

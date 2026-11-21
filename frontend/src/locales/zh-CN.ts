@@ -2,6 +2,10 @@ import type { Dictionary } from './types';
 import experience from './experience.zh-CN.json';
 
 const messages: Dictionary = {
+"products.archive_failed":"商品档案加载失败，请重试。",
+"products.archive_loading":"正在加载商品",
+"products.archive_navigation":"商品分页",
+"products.archive_export_limit":"商品档案超过 500 件，无法按现有上限导出。",
 "photo.sources":"已检索来源（请与原图共同核对）",
 "photo.unknown_fields":"部分字段仍缺少依据，已留空或列为 AI 建议，请人工补齐必要项。",
 "photo.official_image":"来源校验通过的商品图",
@@ -97,9 +101,9 @@ const messages: Dictionary = {
   "product.create.duplicate": "该商品编号已有档案（包括已删除档案）。请查找或恢复原商品，不会覆盖原资料。",
   "product.create.deleted_retry": "该创建请求对应的商品已删除。请先查看已删除商品。",
 
-  "catalogTransfer.export": "导出当前列表商品",
+  "catalogTransfer.export": "导出完整档案",
   "catalogTransfer.load": "读取 JSON 文件",
-  "catalogTransfer.help": "使用现有商品 ID 和版本。导出限本页列表中有权限读取的商品（最多 500 件）。读取文件仅填入预览编辑区，需核对并确认后保存；新增或待确认身份不会自动建档。",
+  "catalogTransfer.help": "导出涵盖该商家的全部在用商品，上限 500 件。导入只填写预览，核对后再保存。",
   "catalogTransfer.template": "下载 JSON 模板",
   "catalogTransfer.select": "请选择至少一件已预览商品后保存。",
   "catalogTransfer.invalid": "请使用不超过 2 MB、包含 1–500 行且商品 ID 唯一的 JSON 文件。",
