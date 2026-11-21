@@ -36,4 +36,19 @@ public class AuditLogService {
   public List<AuditLog> listLogs() {
     return new ArrayList<>(logs);
   }
+
+  public void logProductCartChange(String productId, boolean before, boolean after, Long userId) {
+    AuditLog entry = new AuditLog(auditId.getAndIncrement(), "PRODUCT", null, "CART_ENABLED_CHANGE",
+        Boolean.toString(before), Boolean.toString(after), userId, LocalDateTime.now());
+    entry.setProductId(productId);
+    org.springframework.transaction.support.TransactionSynchronizationManager.registerSynchronization(
+        new org.springframework.transaction.support.TransactionSynchronization() {
+          @Override
+          public void afterCommit() {
+            logs.add(entry);
+            log.info("AuditLog product={} action={} from={} to={} byUser={} at={}",
+                productId, entry.getAction(), before, after, userId, entry.getCreatedAt());
+          }
+        });
+  }
 }

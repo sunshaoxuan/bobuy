@@ -6,6 +6,7 @@ public class AuditLog {
   private Long id;
   private String entityType;
   private Long entityId;
+  private String productId;
   private String action;
   private String beforeValue;
   private String afterValue;
@@ -45,6 +46,15 @@ public class AuditLog {
 
   public Long getEntityId() {
     return entityId;
+  }
+
+  @com.fasterxml.jackson.annotation.JsonInclude(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL)
+  public String getProductId() {
+    return productId;
+  }
+
+  public void setProductId(String productId) {
+    this.productId = productId;
   }
 
   public void setEntityId(Long entityId) {

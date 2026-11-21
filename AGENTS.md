@@ -9,6 +9,13 @@ Do not change unrelated dirty files or start another Docker test stack for conte
 For Bobuy code development, integration and production delivery, read
 `.agents/skills/bobuy-rapid-production/SKILL.md`; it is a workflow, not new authority.
 
+## 生产 PR 持续交付
+
+1. Bobuy 中面向生产的 PR，由负责实现或接手的会话跟到生产验收和交接。必需检查通过、冲突解决、审阅阻塞解除且生产安全条件满足后，直接把 PR 合并到 `main` 并跟踪该合并提交的生产 CD。明确仅评审、暂缓上线或特殊发布窗口的任务，按其约定执行。
+2. 原会话保持跟踪既有 CI、合并队列和 CD。云端会话可能在检查或发布结束前停止时，由当前 Codex 会话设置或接续针对该 PR 的轮询。轮询读取真实状态，继续处理已授权的冲突、失败和恢复，并沿用同一任务记录。一个 PR 保持一个交付责任人和一个轮询；结束后关闭该轮询。
+3. CD 成功后核对生产提交、健康和本次受影响的页面或接口，记录生产版本、时间、验收结果及链接。向用户和相关前端测试会话交接，说明已经上线的行为和前端可以复测的范围。
+4. 如有失败、迁移顺序冲突、明示暂缓、权限或数据安全阻塞，马上记录实际状态和责任人，修复后继续同一条交付流程。保留 GitHub 原生检查、生产安全条件和发布串行约束。
+
 ## 需求与测试范围的强限制
 
 1. **只能修改哪里测试哪里。** 实现前在任务文档列明用户授权范围、本批修改点，以及每项修改对应的最小验证集合。验证限于本次修改和有具体依赖关系的直接受影响行为。
