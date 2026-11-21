@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.*;
 public class ProductPhotoIntakeController {
     private final ProductPhotoIntakeService service;private final JdbcCostcoOnboardingJobRepository jobs;private final CostcoEvidencePersistence evidence;
     public ProductPhotoIntakeController(ProductPhotoIntakeService service,JdbcCostcoOnboardingJobRepository jobs,CostcoEvidencePersistence evidence){this.service=service;this.jobs=jobs;this.evidence=evidence;}
+    @GetMapping public ApiResponse<?> queue(){
+        Long owner=MerchantScope.current();
+        if(owner==null)throw new ApiException(ErrorCode.FORBIDDEN,"error.auth.forbidden");
+        return ApiResponse.success(jobs.photos(owner));
+    }
     @GetMapping("/{id}") public ApiResponse<?> review(@PathVariable String id,@RequestParam(required=false) String itemNumber){return ApiResponse.success(service.review(id,itemNumber));}
     @PostMapping("/{id}/confirm") public ApiResponse<?> confirm(@PathVariable String id,@RequestBody ProductPhotoIntakeService.Confirm input){return ApiResponse.success(service.confirm(id,input));}
     @GetMapping("/products/{id}") public ApiResponse<?> history(@PathVariable String id){return ApiResponse.success(service.productHistory(id));}

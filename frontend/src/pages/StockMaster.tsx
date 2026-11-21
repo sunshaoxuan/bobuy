@@ -240,6 +240,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
   const [toolbarCompact, setToolbarCompact] = useState(false);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [isQuickAddVisible, setIsQuickAddVisible] = useState(false);
+  const [photoQueueTarget, setPhotoQueueTarget] = useState<HTMLDivElement|null>(null);
   const [editingItem, setEditingItem] = useState<StockItem | null>(null);
   const [syncStatus, setSyncStatus] = useState<'idle' | 'saving' | 'saved'>('idle');
   const [activeTabKey, setActiveTabKey] = useState<string>('basic');
@@ -782,16 +783,14 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
             />
-            <Space style={{ width: '100%' }}>
-              <Space style={{ width: '100%' }}>
+            <div className="stock-mobile-product-actions">
                 <Button type="default" icon={<PlusOutlined />} onClick={handleAddRow} block data-testid="stock-master-add-row">
                   {t('stock.master.add_row')}
                 </Button>
                 <Button data-testid="ai-quick-snap-button" type="primary" icon={<CameraOutlined />} onClick={() => setIsQuickAddVisible(true)} block>
                   {t('photo.title')}
                 </Button>
-              </Space>
-            </Space>
+            </div>
           </Space>
         ) : (
           <Space direction={embedded?'horizontal':'vertical'} align={embedded?'center':'end'} size={12} wrap={embedded}>
@@ -818,6 +817,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         )}
       </div>
 
+      <div ref={setPhotoQueueTarget}/>
       {embedded&&<div className="record-view-bar"><Segmented aria-label={t('products.view')} value={recordView} onChange={value=>setRecordView(value as 'gallery'|'manage')} options={[{label:t('products.gallery'),value:'gallery'},{label:t('products.manage'),value:'manage'}]}/><span>{t('products.original_images')}</span></div>}
 
       <ProductPricingPanel id={pricingId} onClose={()=>setPricingId(undefined)} onSaved={sheet=>setDataSource(prior=>prior.map(row=>row.key===sheet.productId?{...row,actualSale:sheet.regular??undefined}:row))}/>
@@ -1141,7 +1141,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
             onClick={handleAddRow}
           />
         </div>}
-      <CostcoOnboardingPanel suppliers={suppliers} photoOpen={isQuickAddVisible} onPhotoClose={()=>setIsQuickAddVisible(false)} onOpenProduct={setCatalogId} onConfirmed={()=>{void api.products().then(rows=>setDataSource(rows.map(stockItemFromResponse)));}}/>
+      <CostcoOnboardingPanel suppliers={suppliers} photoOpen={isQuickAddVisible} photoQueueTarget={photoQueueTarget} onPhotoClose={()=>setIsQuickAddVisible(false)} onOpenProduct={setCatalogId} onConfirmed={()=>{void api.products().then(rows=>setDataSource(rows.map(stockItemFromResponse)));}}/>
     </div>
   );
 }
