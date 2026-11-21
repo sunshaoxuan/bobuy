@@ -63,9 +63,19 @@ class ProductionProfileRouteTest {
     assertThat(destination(properties, "GET", "/api/ai/costco-onboarding/status")).isEqualTo("lb://ai-service");
   }
 
+  @Test void signupAndVerificationUseTheCoreMailConfiguration() throws Exception {
+    var properties = productionRoutes();
+    for (String path : List.of("/api/auth/register", "/api/auth/register-account",
+        "/api/auth/email/resend", "/api/auth/email/verify")) {
+      assertThat(destination(properties, "POST", path)).isEqualTo("lb://core-service");
+    }
+    assertThat(destination(properties, "DELETE", "/api/admin/users/42/registration-test"))
+        .isEqualTo("lb://core-service");
+  }
+
   @Test void existingServiceBoundariesStayIntact() throws Exception {
     var properties = productionRoutes();
-    for (String path : List.of("/api/auth/login", "/api/auth/refresh", "/api/auth/me", "/api/auth/profile-other")) {
+    for (String path : List.of("/api/auth/login", "/api/auth/refresh", "/api/auth/me", "/api/auth/profile-other", "/api/auth/forgot-password", "/api/auth/reset-password")) {
       assertThat(destination(properties, "POST", path)).isEqualTo("lb://auth-service");
     }
     assertThat(destination(properties, "GET", "/api/storefront/products")).isEqualTo("lb://core-service");

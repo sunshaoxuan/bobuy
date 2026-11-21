@@ -11,6 +11,10 @@ spring:
           uri: lb://core-service
           predicates:
             - Path=/api/auth/profile
+        - id: customer-registration-route
+          uri: lb://core-service
+          predicates:
+            - Path=/api/auth/register,/api/auth/register-account,/api/auth/email/resend,/api/auth/email/verify
         - id: auth-route
           uri: lb://auth-service
           predicates:

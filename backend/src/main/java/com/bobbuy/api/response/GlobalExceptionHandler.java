@@ -107,6 +107,7 @@ public class GlobalExceptionHandler {
       case UNAUTHORIZED -> 401;
       case FORBIDDEN -> 403;
       case RATE_LIMITED -> 429;
+      case SERVICE_UNAVAILABLE -> 503;
       case INVALID_REQUEST, INVALID_STATUS -> 400;
       default -> 500;
     };

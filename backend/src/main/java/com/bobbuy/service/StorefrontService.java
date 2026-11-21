@@ -32,6 +32,15 @@ public class StorefrontService {
     private final MailSettingsService mailSettings;
     private final SecureRandom random = new SecureRandom();
     @org.springframework.beans.factory.annotation.Autowired private SelfProfileService profiles;
+    @org.springframework.beans.factory.annotation.Autowired private RegistrationCleanup cleanup;
+    @org.springframework.beans.factory.annotation.Value("${bobbuy.registration.enabled:true}")
+    private boolean registrationEnabled = true;
+    @org.springframework.beans.factory.annotation.Value("${bobbuy.registration.test-enabled:false}")
+    private boolean testRegistrationEnabled;
+    @org.springframework.beans.factory.annotation.Value("${bobbuy.registration.require-protected-delivery:false}")
+    private boolean requireProtectedDelivery;
+    @org.springframework.beans.factory.annotation.Value("${bobbuy.auth-abuse.enabled:false}")
+    private boolean registrationAbuseEnabled;
     @jakarta.persistence.PersistenceContext private jakarta.persistence.EntityManager entities;
 
     public StorefrontService(UserRepository users, TripRepository trips, ProductRepository products,
@@ -73,7 +82,14 @@ public class StorefrontService {
 
     @Transactional
     public User register(Registration request) {
-        return registerWithRoles(request, Set.of(Role.CUSTOMER));
+        String username = request.username().trim().toLowerCase(Locale.ROOT);
+        String email = request.email().trim().toLowerCase(Locale.ROOT);
+        boolean allowed = registrationEnabled || (testRegistrationEnabled && cleanup.isConfigured(username, email));
+        if (!allowed || (requireProtectedDelivery && !registrationAbuseEnabled)) {
+            throw registrationUnavailable();
+        }
+        requireVerificationDelivery();
+        return registerCustomer(request, username, email);
     }
 
     @Transactional
@@ -83,24 +99,23 @@ public class StorefrontService {
         return register(request.account());
     }
 
-    private User registerWithRoles(Registration request, Set<Role> roles) {
+    private User registerCustomer(Registration request, String username, String email) {
         if (request.password().getBytes(java.nio.charset.StandardCharsets.UTF_8).length > 72) throw invalid("密码 UTF-8 长度最多 72 字节");
-        String username = request.username().trim().toLowerCase(Locale.ROOT);
-        String email = request.email().trim().toLowerCase(Locale.ROOT);
         if (users.findByUsernameIgnoreCase(username).isPresent() || users.existsByEmailIgnoreCase(email)) {
             throw invalid("用户名或邮箱已被使用");
         }
         User user = new User(nextId(), username, Role.CUSTOMER, 0);
-        user.setRoles(roles);
         user.setUsername(username); user.setEmail(email);
         user.setPasswordHash(passwords.encode(request.password()));
         users.saveAndFlush(user);
+        cleanup.markNewRegistration(user);
         sendChallenge(user);
         return user;
     }
 
     @Transactional
     public void resend(Authentication authentication) {
+        requireVerificationDelivery();
         User user = profiles.lockCurrent(authentication);
         if (user.getEmailVerifiedAt() != null) return;
         EmailChallenge prior = challenges.findById(user.getId()).orElse(null);
@@ -126,15 +141,25 @@ public class StorefrontService {
         SelfProfileService.invalidateChallenge(challenges, user.getId());
     }
 
+    private void requireVerificationDelivery() {
+        if (requireProtectedDelivery && (!accountMail.isDeliveryEnabled() || !mailSettings.protectedDeliveryReady())) {
+            throw registrationUnavailable();
+        }
+    }
+
+    private ApiException registrationUnavailable() {
+        return new ApiException(ErrorCode.SERVICE_UNAVAILABLE, "error.registration.unavailable");
+    }
+
     private void sendChallenge(User user) {
         String code = String.format(Locale.ROOT, "%06d", random.nextInt(1000000));
         EmailChallenge challenge = new EmailChallenge();
         challenge.userId = user.getId(); challenge.codeHash = passwords.encode(code);
         challenge.sentAt = Instant.now(); challenge.expiresAt = challenge.sentAt.plusSeconds(600);
-        challenges.save(challenge);
+        challenges.saveAndFlush(challenge);
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(accountMail.getFromAddress()); message.setTo(user.getEmail());
-        VerificationMailTemplate.apply(message,code,org.springframework.context.i18n.LocaleContextHolder.getLocale());
+        VerificationMailTemplate.apply(message,code,org.springframework.context.i18n.LocaleContextHolder.getLocale(), accountMail.getPublicBaseUrl());
         // Legacy BOBUY_MAIL_* fallback is retired. Account delivery is opt-in and
         // can only use an enabled setting whose password is encrypted by #84.
         if(accountMail.isDeliveryEnabled() && !mailSettings.sendIfConfigured(message)) {
