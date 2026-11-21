@@ -12,7 +12,7 @@ const list=['NEEDS_INPUT','QUEUED','AI_INTAKE','FAILED','COMPLETED'].map((state,
 const name={'zh-CN':'北海道牛乳 · 200 毫升 × 12 瓶','zh-TW':'北海道牛乳 · 200 毫升 × 12 瓶','ja-JP':'北海道牛乳 200 mL × 12 本','en-US':'Hokkaido whole milk · 200 mL × 12 bottles'};
 const history={id:'observation',productId:'p1',amount:1180,currency:'JPY',unit:'12 瓶',observedAt:'2026-11-20T08:00:00Z'};
 const review={jobId:'demo-0',revision:7,supplierId:'s1',market:'JP',itemNumber:'123456',status:'MATCH',matches:[{id:'p1',version:2,name,specification:{},eligible:true}],history:[history],saved:null,photoFacts:{amount:1280,currency:'JPY',unit:'12 瓶',conditions:'',priceKind:'WAREHOUSE',productVisible:true}};
-const network=[],errors=[],geometry=[],checks=[],locales=[];
+const network=[],cancelled=[],errors=[],geometry=[],checks=[],locales=[];
 const design=process.env.PHOTO_DESIGN==='1';
 const settings=design?[[360,800],[390,844],[1280,800]]:[[390,844],[1280,800]];
 for(const [width,height] of settings){
@@ -61,7 +61,15 @@ for(const [width,height] of settings){
  page.setDefaultTimeout(10000);
  page.on('pageerror',error=>errors.push(error.message));
  page.on('console',message=>{if(message.type()==='error')errors.push(message.text());});
- page.on('requestfailed',request=>{if(!request.failure()?.errorText.includes('ABORT'))errors.push(request.url()+' '+request.failure()?.errorText);});
+ page.on('requestfailed',request=>{
+  const url=new URL(request.url());
+  const error=request.failure()?.errorText;
+  if(url.pathname==='/api/merchant/product-archive'&&(error==='net::ERR_ABORTED'||error==='Load request cancelled')){
+   cancelled.push({width,path:url.pathname+url.search,error});
+  }else{
+   errors.push(request.url()+' '+error);
+  }
+ });
  let tag='recovery-'+engine;
  if(design)tag='workspace';
  const shot=async (id,selector)=>{
@@ -98,6 +106,7 @@ for(const [width,height] of settings){
  const firstUpload=awaitPhotoUpload();
  await page.locator('input[capture]').setInputFiles({name:'synthetic-first.png',mimeType:'image/png',buffer:png});
  assert.equal((await firstUpload).status(),200);
+ await page.locator('canvas.photo-evidence:not([hidden])').waitFor();
  await page.getByRole('link',{name:'下载照片'}).waitFor();
  if(width!==1280){
   await page.getByRole('button',{name:'保存照片',exact:true}).click();
@@ -180,5 +189,5 @@ for(const [width,height] of settings){
  await context.close();
 }
 await browser.close();
-await fs.writeFile(out+'/'+(design?'workspace':engine)+'-browser.json',JSON.stringify({engine,design,fixtures:'synthetic PNG and intercepted API, including share cancellation mock',checks,geometry,locales,network,errors},null,2));
+await fs.writeFile(out+'/'+(design?'workspace':engine)+'-browser.json',JSON.stringify({engine,design,fixtures:'synthetic PNG and intercepted API, including share cancellation mock',checks,geometry,locales,network,cancelled,errors},null,2));
 assert.deepEqual(errors,[]);

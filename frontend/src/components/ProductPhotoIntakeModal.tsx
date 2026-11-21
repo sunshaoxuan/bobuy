@@ -160,7 +160,8 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
      {!isNew&&<div><small>{t('photo.previous')}</small><strong>{matchingObservation?matchingObservation.amount+' '+matchingObservation.currency:t('photo.unknown')}</strong>{matchingObservation&&<span>{matchingObservation.unit}</span>}</div>}
     </div>
     {canConfirm&&<Checkbox checked={inStock} onChange={e=>{setInStock(e.target.checked);edit();}}>{t('photo.in_stock')}</Checkbox>}
-    {isNew&&<p>{t(review.candidate?.unknownFields?.length?'photo.unknown_fields':'photo.suggestions')}</p>}
+    <p>{t('photo.suggestions')}</p>
+    {isNew&&!!review.candidate?.unknownFields?.length&&<p>{t('photo.unknown_fields')}</p>}
    </div>
    {preview&&<div className="photo-review-proof">
     <button type="button" className="photo-proof-toggle" aria-expanded={proofOpen} onClick={()=>setProofOpen(value=>!value)}>

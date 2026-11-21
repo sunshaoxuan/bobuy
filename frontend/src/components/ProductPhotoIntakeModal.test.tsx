@@ -32,7 +32,7 @@ it('queues each selected file immediately and accepts a new capture while upload
  expect(props.onQueued).toHaveBeenCalledWith(expect.objectContaining({state:'QUEUED'}));
 });
 it('does not auto-confirm availability and retains input after save failure for exact retry',async()=>{
- render(<ProductPhotoIntakeModal {...props} job={job}/>);await screen.findByDisplayValue('999');expect(screen.getByLabelText('photo.in_stock')).not.toBeChecked();
+ render(<ProductPhotoIntakeModal {...props} job={job}/>);await screen.findByDisplayValue('999');expect(screen.getByText('photo.suggestions')).toBeVisible();expect(screen.getByLabelText('photo.in_stock')).not.toBeChecked();
  fireEvent.click(screen.getByLabelText('photo.identity_confirm'));fireEvent.click(screen.getByLabelText('photo.price_confirm'));fireEvent.click(screen.getByLabelText('photo.in_stock'));
  mocks.confirm.mockRejectedValueOnce(Error('photo.conflict')).mockResolvedValueOnce({id:'o1',productId:'p1',amount:999,currency:'JPY',unit:'80 × 2',inStock:true,priceChanged:false,observedAt:new Date().toISOString()});
  fireEvent.click(screen.getByText('photo.save'));await screen.findByText('photo.conflict');expect(screen.getByDisplayValue('999')).toBeTruthy();expect(screen.getByLabelText('photo.in_stock')).toBeChecked();
