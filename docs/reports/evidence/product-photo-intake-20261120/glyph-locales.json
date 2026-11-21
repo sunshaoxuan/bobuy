@@ -1,0 +1,797 @@
+{
+  "method": "Original 1x rasters. Neutral dark/gray text <210 RGB; exclude 3px vertical edge, checkbox glyph and button border. Checkbox margins refer to hit area. Raster may include 1 extra row at fractional element boundary. Text has not been rescaled.",
+  "results": [
+    {
+      "file": "glyph-en-US-action-0.png",
+      "size": [
+        115,
+        44
+      ],
+      "inkBounds": [
+        17,
+        15,
+        97,
+        29
+      ],
+      "innerMargins": [
+        16,
+        14,
+        17,
+        14
+      ],
+      "centerDeviation": 0.0,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-en-US-action-1.png",
+      "size": [
+        172,
+        44
+      ],
+      "inkBounds": [
+        18,
+        15,
+        154,
+        29
+      ],
+      "innerMargins": [
+        17,
+        14,
+        17,
+        14
+      ],
+      "centerDeviation": 0.0,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-en-US-action-2.png",
+      "size": [
+        322,
+        45
+      ],
+      "inkBounds": [
+        62,
+        16,
+        260,
+        30
+      ],
+      "innerMargins": [
+        61,
+        15,
+        61,
+        14
+      ],
+      "centerDeviation": 0.5,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-en-US-action-3.png",
+      "size": [
+        322,
+        45
+      ],
+      "inkBounds": [
+        58,
+        16,
+        265,
+        30
+      ],
+      "innerMargins": [
+        57,
+        15,
+        56,
+        14
+      ],
+      "centerDeviation": 0.5,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-en-US-action-4.png",
+      "size": [
+        322,
+        45
+      ],
+      "inkBounds": [
+        69,
+        16,
+        253,
+        27
+      ],
+      "innerMargins": [
+        68,
+        15,
+        68,
+        17
+      ],
+      "centerDeviation": 1.0,
+      "budget": 1.1,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-en-US-action-5.png",
+      "size": [
+        322,
+        45
+      ],
+      "inkBounds": [
+        143,
+        16,
+        178,
+        27
+      ],
+      "innerMargins": [
+        142,
+        15,
+        143,
+        17
+      ],
+      "centerDeviation": 1.0,
+      "budget": 1.1,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-en-US-check-0.png",
+      "size": [
+        322,
+        53
+      ],
+      "inkBounds": [
+        24,
+        9,
+        291,
+        45
+      ],
+      "innerMargins": [
+        23,
+        8,
+        30,
+        7
+      ],
+      "centerDeviation": 0.5,
+      "budget": 2,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-en-US-check-1.png",
+      "size": [
+        322,
+        53
+      ],
+      "inkBounds": [
+        24,
+        9,
+        308,
+        45
+      ],
+      "innerMargins": [
+        23,
+        8,
+        13,
+        7
+      ],
+      "centerDeviation": 0.5,
+      "budget": 2,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-en-US-check-2.png",
+      "size": [
+        322,
+        45
+      ],
+      "inkBounds": [
+        25,
+        16,
+        269,
+        30
+      ],
+      "innerMargins": [
+        24,
+        15,
+        52,
+        14
+      ],
+      "centerDeviation": 0.5,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-ja-JP-action-0.png",
+      "size": [
+        118,
+        44
+      ],
+      "inkBounds": [
+        18,
+        15,
+        101,
+        29
+      ],
+      "innerMargins": [
+        17,
+        14,
+        16,
+        14
+      ],
+      "centerDeviation": 0.0,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-ja-JP-action-1.png",
+      "size": [
+        188,
+        44
+      ],
+      "inkBounds": [
+        18,
+        15,
+        170,
+        29
+      ],
+      "innerMargins": [
+        17,
+        14,
+        17,
+        14
+      ],
+      "centerDeviation": 0.0,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-ja-JP-action-2.png",
+      "size": [
+        322,
+        45
+      ],
+      "inkBounds": [
+        86,
+        16,
+        238,
+        30
+      ],
+      "innerMargins": [
+        85,
+        15,
+        83,
+        14
+      ],
+      "centerDeviation": 0.5,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-ja-JP-action-3.png",
+      "size": [
+        322,
+        45
+      ],
+      "inkBounds": [
+        77,
+        16,
+        244,
+        30
+      ],
+      "innerMargins": [
+        76,
+        15,
+        77,
+        14
+      ],
+      "centerDeviation": 0.5,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-ja-JP-action-4.png",
+      "size": [
+        322,
+        45
+      ],
+      "inkBounds": [
+        85,
+        16,
+        237,
+        30
+      ],
+      "innerMargins": [
+        84,
+        15,
+        84,
+        14
+      ],
+      "centerDeviation": 0.5,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-ja-JP-action-5.png",
+      "size": [
+        322,
+        45
+      ],
+      "inkBounds": [
+        141,
+        17,
+        180,
+        30
+      ],
+      "innerMargins": [
+        140,
+        16,
+        141,
+        14
+      ],
+      "centerDeviation": 1.0,
+      "budget": 1.3,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-ja-JP-check-0.png",
+      "size": [
+        322,
+        53
+      ],
+      "inkBounds": [
+        24,
+        9,
+        304,
+        45
+      ],
+      "innerMargins": [
+        23,
+        8,
+        17,
+        7
+      ],
+      "centerDeviation": 0.5,
+      "budget": 2,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-ja-JP-check-1.png",
+      "size": [
+        322,
+        53
+      ],
+      "inkBounds": [
+        24,
+        9,
+        303,
+        45
+      ],
+      "innerMargins": [
+        23,
+        8,
+        18,
+        7
+      ],
+      "centerDeviation": 0.5,
+      "budget": 2,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-ja-JP-check-2.png",
+      "size": [
+        322,
+        45
+      ],
+      "inkBounds": [
+        24,
+        16,
+        261,
+        30
+      ],
+      "innerMargins": [
+        23,
+        15,
+        60,
+        14
+      ],
+      "centerDeviation": 0.5,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-zh-CN-action-0.png",
+      "size": [
+        90,
+        44
+      ],
+      "inkBounds": [
+        17,
+        15,
+        72,
+        29
+      ],
+      "innerMargins": [
+        16,
+        14,
+        17,
+        14
+      ],
+      "centerDeviation": 0.0,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-zh-CN-action-1.png",
+      "size": [
+        104,
+        44
+      ],
+      "inkBounds": [
+        17,
+        15,
+        87,
+        29
+      ],
+      "innerMargins": [
+        16,
+        14,
+        16,
+        14
+      ],
+      "centerDeviation": 0.0,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-zh-CN-action-2.png",
+      "size": [
+        322,
+        45
+      ],
+      "inkBounds": [
+        112,
+        16,
+        209,
+        30
+      ],
+      "innerMargins": [
+        111,
+        15,
+        112,
+        14
+      ],
+      "centerDeviation": 0.5,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-zh-CN-action-3.png",
+      "size": [
+        322,
+        45
+      ],
+      "inkBounds": [
+        98,
+        16,
+        224,
+        30
+      ],
+      "innerMargins": [
+        97,
+        15,
+        97,
+        14
+      ],
+      "centerDeviation": 0.5,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-zh-CN-action-4.png",
+      "size": [
+        322,
+        45
+      ],
+      "inkBounds": [
+        106,
+        16,
+        216,
+        30
+      ],
+      "innerMargins": [
+        105,
+        15,
+        105,
+        14
+      ],
+      "centerDeviation": 0.5,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-zh-CN-action-5.png",
+      "size": [
+        322,
+        45
+      ],
+      "inkBounds": [
+        146,
+        16,
+        176,
+        30
+      ],
+      "innerMargins": [
+        145,
+        15,
+        145,
+        14
+      ],
+      "centerDeviation": 0.5,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-zh-CN-check-0.png",
+      "size": [
+        322,
+        53
+      ],
+      "inkBounds": [
+        24,
+        9,
+        304,
+        45
+      ],
+      "innerMargins": [
+        23,
+        8,
+        17,
+        7
+      ],
+      "centerDeviation": 0.5,
+      "budget": 2,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-zh-CN-check-1.png",
+      "size": [
+        322,
+        53
+      ],
+      "inkBounds": [
+        24,
+        9,
+        304,
+        45
+      ],
+      "innerMargins": [
+        23,
+        8,
+        17,
+        7
+      ],
+      "centerDeviation": 0.5,
+      "budget": 2,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-zh-CN-check-2.png",
+      "size": [
+        322,
+        45
+      ],
+      "inkBounds": [
+        24,
+        16,
+        121,
+        30
+      ],
+      "innerMargins": [
+        23,
+        15,
+        200,
+        14
+      ],
+      "centerDeviation": 0.5,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-zh-TW-action-0.png",
+      "size": [
+        90,
+        44
+      ],
+      "inkBounds": [
+        17,
+        15,
+        72,
+        29
+      ],
+      "innerMargins": [
+        16,
+        14,
+        17,
+        14
+      ],
+      "centerDeviation": 0.0,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-zh-TW-action-1.png",
+      "size": [
+        104,
+        44
+      ],
+      "inkBounds": [
+        17,
+        15,
+        87,
+        29
+      ],
+      "innerMargins": [
+        16,
+        14,
+        16,
+        14
+      ],
+      "centerDeviation": 0.0,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-zh-TW-action-2.png",
+      "size": [
+        322,
+        45
+      ],
+      "inkBounds": [
+        112,
+        16,
+        209,
+        30
+      ],
+      "innerMargins": [
+        111,
+        15,
+        112,
+        14
+      ],
+      "centerDeviation": 0.5,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-zh-TW-action-3.png",
+      "size": [
+        322,
+        45
+      ],
+      "inkBounds": [
+        98,
+        16,
+        224,
+        30
+      ],
+      "innerMargins": [
+        97,
+        15,
+        97,
+        14
+      ],
+      "centerDeviation": 0.5,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-zh-TW-action-4.png",
+      "size": [
+        322,
+        45
+      ],
+      "inkBounds": [
+        106,
+        16,
+        216,
+        30
+      ],
+      "innerMargins": [
+        105,
+        15,
+        105,
+        14
+      ],
+      "centerDeviation": 0.5,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-zh-TW-action-5.png",
+      "size": [
+        322,
+        45
+      ],
+      "inkBounds": [
+        146,
+        17,
+        176,
+        30
+      ],
+      "innerMargins": [
+        145,
+        16,
+        145,
+        14
+      ],
+      "centerDeviation": 1.0,
+      "budget": 1.3,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-zh-TW-check-0.png",
+      "size": [
+        322,
+        53
+      ],
+      "inkBounds": [
+        24,
+        9,
+        304,
+        45
+      ],
+      "innerMargins": [
+        23,
+        8,
+        17,
+        7
+      ],
+      "centerDeviation": 0.5,
+      "budget": 2,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-zh-TW-check-1.png",
+      "size": [
+        322,
+        53
+      ],
+      "inkBounds": [
+        24,
+        9,
+        304,
+        45
+      ],
+      "innerMargins": [
+        23,
+        8,
+        17,
+        7
+      ],
+      "centerDeviation": 0.5,
+      "budget": 2,
+      "passBudget": true
+    },
+    {
+      "file": "glyph-zh-TW-check-2.png",
+      "size": [
+        322,
+        45
+      ],
+      "inkBounds": [
+        24,
+        16,
+        121,
+        30
+      ],
+      "innerMargins": [
+        23,
+        15,
+        200,
+        14
+      ],
+      "centerDeviation": 0.5,
+      "budget": 1.4000000000000001,
+      "passBudget": true
+    }
+  ]
+}

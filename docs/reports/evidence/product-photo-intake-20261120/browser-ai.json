@@ -1,0 +1,495 @@
+{
+  "scriptSha256": "a361dcd9b4f26ac820afc4b61f5f8202595b4a1165e1d5404fb3b5a02cef5c20",
+  "console": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "error",
+      "text": "[API ERROR] FETCH failure at /api/auth/me: TypeError: Failed to fetch\n    at authorizedFetch (http://127.0.0.1:5173/src/api.ts?t=1795183719315:205:26)\n    at fetchJson (http://127.0.0.1:5173/src/api.ts?t=1795183719315:306:22)\n    at Object.me (http://127.0.0.1:5173/src/api.ts?t=1795183719315:613:15)\n    at http://127.0.0.1:5173/src/context/UserRoleContext.tsx?t=1795183719315:83:14\n    at commitHookEffectListMount (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:16883:34)\n    at invokePassiveEffectMountInDEV (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:18292:19)\n    at invokeEffectsInDev (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:19669:19)\n    at commitDoubleInvokeEffectsInDEV (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:19654:15)\n    at flushPassiveEffectsImpl (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:19471:13)\n    at flushPassiveEffects (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:19415:22)"
+    },
+    {
+      "type": "error",
+      "text": "[API ERROR] FETCH failure at /api/auth/me: TypeError: Failed to fetch\n    at authorizedFetch (http://127.0.0.1:5173/src/api.ts?t=1795183719315:205:26)\n    at fetchJson (http://127.0.0.1:5173/src/api.ts?t=1795183719315:306:22)\n    at Object.me (http://127.0.0.1:5173/src/api.ts?t=1795183719315:613:15)\n    at http://127.0.0.1:5173/src/context/UserRoleContext.tsx?t=1795183719315:83:14\n    at commitHookEffectListMount (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:16883:34)\n    at commitPassiveMountOnFiber (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:18124:19)\n    at commitPassiveMountEffects_complete (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:18097:17)\n    at commitPassiveMountEffects_begin (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:18087:15)\n    at commitPassiveMountEffects (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:18077:11)\n    at flushPassiveEffectsImpl (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:19458:11)"
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    }
+  ],
+  "network": [
+    {
+      "path": "http://127.0.0.1:5173/src/components/ProductRating.tsx",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "path": "http://127.0.0.1:5173/src/pages/productTrash.css",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "path": "http://127.0.0.1:5173/api/auth/me",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "path": "http://127.0.0.1:5173/src/components/ProductPricingPanel.tsx",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "path": "http://127.0.0.1:5173/src/pages/productRecords.css",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "path": "http://127.0.0.1:5173/src/components/ProductMetadata.tsx",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "path": "http://127.0.0.1:5173/src/components/MediaGallery.tsx",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "path": "http://127.0.0.1:5173/api/auth/me",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "path": "http://127.0.0.1:5173/src/components/ProductCatalogPanel.tsx",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "path": "http://127.0.0.1:5173/src/components/CategoryTreePicker.tsx",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "path": "http://127.0.0.1:5173/src/components/CostcoOnboardingPanel.tsx",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "path": "http://127.0.0.1:5173/src/components/ProductMarkerEditor.tsx",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/a719b420-f68d-43b0-9adb-0ca972a52a2c",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/a719b420-f68d-43b0-9adb-0ca972a52a2c",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "https://images.costco-static.com/ImageDelivery/imageService",
+      "error": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "path": "https://cdn.bobbuy.example/products/matcha-kit.png",
+      "error": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/photo",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/c14b6f9e-9e6f-4392-b43b-dc48f76937b3",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/c14b6f9e-9e6f-4392-b43b-dc48f76937b3",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/c14b6f9e-9e6f-4392-b43b-dc48f76937b3",
+      "status": 200,
+      "method": "GET"
+    }
+  ],
+  "geometry": [
+    {
+      "name": "390-selection-final",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "documentWidth": 1280,
+      "modalWidth": 760,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "label": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "Tokyo Supplier",
+          "width": 700,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "Select supplier",
+          "width": 676,
+          "height": 30,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Take a photo",
+          "width": 114.171875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Choose a photo or file",
+          "width": 170.984375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Identify and find",
+          "width": 700,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(37, 37, 41)",
+          "borderWidth": "1px",
+          "background": "rgb(37, 37, 41)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Close",
+          "width": 700,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "name": "1280-selection-final",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "documentWidth": 1280,
+      "modalWidth": 760,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "label": "Close",
+          "width": 44,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "Tokyo Supplier",
+          "width": 700,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "Select supplier",
+          "width": 676,
+          "height": 30,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Take a photo",
+          "width": 114.171875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Choose a photo or file",
+          "width": 170.984375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Identify and find",
+          "width": 700,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(37, 37, 41)",
+          "borderWidth": "1px",
+          "background": "rgb(37, 37, 41)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Close",
+          "width": 700,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        }
+      ]
+    }
+  ],
+  "results": [
+    "Real photo queued and original preserved; gateway unconfigured, live AI acceptance incomplete"
+  ],
+  "fixture": "Synthetic persisted photo suggestions; real UI/API/Postgres; not live AI recognition"
+}

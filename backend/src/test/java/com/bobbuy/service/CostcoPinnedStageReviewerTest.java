@@ -1,6 +1,9 @@
 package com.bobbuy.service;
 
 import com.bobbuy.model.CostcoOnboardingJob;
+import com.bobbuy.model.CategoryTreeNode;
+import com.bobbuy.model.StorageCondition;
+import com.bobbuy.repository.CategoryTreeNodeRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import java.net.URI;
@@ -40,6 +43,27 @@ class CostcoPinnedStageReviewerTest {
         var image=new CostcoOfficialEvidence("image",PAGE,URI.create("https://images.costco.co.jp/item.png"),hash,Instant.parse("2026-11-09T01:00:00Z"),"image/png",4,4,List.of());
         var decision=reviewer.review(Stage.IMAGE_SOURCE,job(List.of(document(store),image),List.of(),null));assertEquals(1,gateway.images.size());assertTrue(decision.trace().imageViewHashes().containsKey(hash));
     }
+    @Test void photoArchiveDetailsUseKnownLeafCategoriesAndSupportedStorage()throws Exception{
+        var gateway=new FakeGateway();var store=new Store();byte[] bytes=png();
+        String hash=CostcoPinnedStageReviewer.digest(bytes);store.contents.put(hash,bytes);
+        var categories=org.mockito.Mockito.mock(CategoryTreeNodeRepository.class);
+        var root=new CategoryTreeNode("food",null,Map.of("ja-JP","食品"),List.of("food"),0,null);
+        var leaf=new CategoryTreeNode("frozen","food",Map.of("ja-JP","冷凍食品"),List.of("food","frozen"),0,null);
+        org.mockito.Mockito.when(categories.findAll()).thenReturn(List.of(root,leaf));
+        var reviewer=new CostcoPinnedStageReviewer(gateway,mapper,store,null,categories);
+        var candidate=new Candidate("00123",null,"試験食品",null,null,null,null,Map.of(),List.of());
+        var reply=mapper.valueToTree(Map.of("verdict","ACCEPT","reason","Fixture","identifiedItemNumber","00123","candidate",candidate));
+        var details=((com.fasterxml.jackson.databind.node.ObjectNode)reply.path("candidate")).putObject("archiveDetails");
+        details.put("descriptionJa","冷凍食品").put("categoryNodeId","frozen").put("storageCondition","FROZEN");
+        gateway.answer=reply.toString();
+        var result=reviewer.review(Stage.INTAKE,job(List.of(),List.of(),hash));
+        assertEquals(new ArchiveDetails("冷凍食品","frozen",StorageCondition.FROZEN),result.candidate().archiveDetails());
+        assertTrue(gateway.prompt.contains("食品 / 冷凍食品"));
+        details.put("categoryNodeId","food").put("storageCondition","ULTRA_COLD");
+        gateway.answer=reply.toString();
+        assertEquals(new ArchiveDetails("冷凍食品",null,null),
+                reviewer.review(Stage.INTAKE,job(List.of(),List.of(),hash)).candidate().archiveDetails());
+    }
     @Test void wrongBytesAndPrivilegeFieldsNeverReachAcceptedDecision(){
         var badStore=new Store();var badDoc=document(badStore);badStore.contents.put(badDoc.sha256(),new byte[]{9});var gateway=new FakeGateway();
         assertThrows(IllegalStateException.class,()->new CostcoPinnedStageReviewer(gateway,mapper,badStore).review(Stage.FACTS,job(List.of(badDoc),List.of(),null)));assertEquals(0,gateway.calls);
@@ -65,6 +89,67 @@ class CostcoPinnedStageReviewerTest {
         var gateway=new FakeGateway();gateway.answer="{\"sources\":[],\"discoveryComplete\":true}";var store=new Store();
         var plan=new CostcoPinnedEvidencePlanner(gateway,mapper,store).plan(new CostcoOfficialEvidenceFetcher.Query(7,"supplier-string","JP","00123",null,INPUT));
         assertFalse(plan.discoveryComplete());assertEquals(1,plan.sources().size());assertEquals("https://www.costco.co.jp/search?text=00123",plan.sources().get(0).fetchUrl().toString());
+    }
+    @Test void photoDiscoveryStartsAtExactItemAndCanReviewTextWithoutAnImage(){
+        var gateway=new FakeGateway();
+        gateway.answer="{\"sources\":[],\"discoveryComplete\":false}";
+        var store=new Store();
+        var planner=new CostcoPinnedEvidencePlanner(gateway,mapper,store);
+        var photo=new CostcoOfficialEvidenceFetcher.Query(7,"supplier-string","JP","00123","c".repeat(64),INPUT);
+        assertEquals(PAGE,planner.plan(photo).sources().get(0).fetchUrl());
+        assertTrue(planner.plan(photo,List.of(document(store))).discoveryComplete());
+        var number=new CostcoOfficialEvidenceFetcher.Query(7,"supplier-string","JP","00123",null,INPUT);
+        assertThrows(CostcoNumberOnboardingService.NeedsInput.class,()->planner.plan(number,List.of(document(store))));
+    }
+
+    @Test void rejectedOfficialPhotoReviewDoesNotReplaceTheIntakeCandidate() throws Exception {
+        var gateway=new FakeGateway();
+        var store=new Store();
+        var wrong=new Candidate("98765",null,"Wrong variant",null,null,null,null,Map.of(),List.of());
+        gateway.answer=mapper.writeValueAsString(Map.of("verdict","NEEDS_EVIDENCE","reason","Generic storefront page",
+                "identifiedItemNumber","00123","candidate",wrong));
+        var reviewer=new CostcoPinnedStageReviewer(gateway,mapper,store);
+        assertNull(reviewer.review(Stage.IDENTITY,job(List.of(document(store)),List.of(),"c".repeat(64))).candidate());
+        gateway.answer=gateway.answer.replace("NEEDS_EVIDENCE","ACCEPT");
+        assertThrows(CostcoNumberOnboardingService.NeedsInput.class,
+                ()->reviewer.review(Stage.FACTS,job(List.of(document(store)),List.of(),"c".repeat(64))));
+    }
+    @Test void exactOfficialProductSectionKeepsSpecificationAndRejectsWrongSku() {
+        var receipt=document(new Store());
+        String html="""
+                <script type="application/ld+json">{"@type":"product","sku":"00123","name":"Exact product"}</script>
+                <table><tr><td class="attrib">保存方法（温度）</td>
+                <td class="attrib-val">-18 ℃</td></tr></table>
+                """;
+        var section=CostcoPinnedStageReviewer.costcoProductSection(html,receipt,"00123",mapper);
+        assertEquals(Map.of("保存方法（温度）","-18 ℃"),section.get("specifications"));
+        assertTrue(CostcoPinnedStageReviewer.costcoProductSection(html.replace("00123","00456"),receipt,"00123",mapper).isEmpty());
+        assertTrue(CostcoPinnedStageReviewer.costcoProductSection("<title>Costco</title>",receipt,"00123",mapper).isEmpty());
+    }
+    @Test void photoAdmissionReceivesPrivatePhotoAndPreviouslyReviewedOfficialPixels() throws Exception {
+        var gateway=new FakeGateway();
+        var store=new Store();
+        var doc=document(store);
+        byte[] bytes=png();
+        String hash=CostcoPinnedStageReviewer.digest(bytes);
+        store.contents.put(hash,bytes);
+        var raw=new java.io.ByteArrayOutputStream();
+        javax.imageio.ImageIO.write(new java.awt.image.BufferedImage(2,3,java.awt.image.BufferedImage.TYPE_INT_RGB),"png",raw);
+        byte[] photo=raw.toByteArray();
+        String photoHash=CostcoPinnedStageReviewer.digest(photo);
+        store.contents.put(photoHash,photo);
+        var media=new CostcoOfficialEvidence("image",PAGE,URI.create("https://www.costco.co.jp/item.png"),
+                hash,doc.fetchedAt(),"image/png",4,4,List.of(),doc.sha256());
+        var imageReview=new CostcoOnboardingDecision(Stage.IMAGE_SOURCE,Verdict.ACCEPT,"fixture-route","fixture-model",
+                CostcoEvidenceAcquisitionPlanner.REQUIRED_NODE,INPUT,List.of(hash),"policy","fixture","Pixel review",
+                "00123",null,new EngineTrace(INPUT,INPUT,1,null,null,Map.of(hash,hash)));
+        var reviewer=new CostcoPinnedStageReviewer(gateway,mapper,store);
+        var unrelated=new CostcoOfficialEvidence("image2",PAGE,URI.create("https://www.costco.co.jp/other.png"),
+                "d".repeat(64),doc.fetchedAt(),"image/png",4,4,List.of(),doc.sha256());
+        reviewer.review(Stage.ADMISSION,job(List.of(doc,media,unrelated),List.of(imageReview),photoHash));
+        assertEquals(2,gateway.images.size());
+        assertArrayEquals(photo,gateway.images.get(0).bytes());
+        assertArrayEquals(bytes,gateway.images.get(1).bytes());
     }
     @Test void admissionTargetMustBindActualOwnedMasterVersionAndSourceHash()throws Exception{
         var gateway=new FakeGateway();var store=new Store();var doc=document(store);byte[] imageBytes=png();String imageHash=CostcoPinnedStageReviewer.digest(imageBytes);store.contents.put(imageHash,imageBytes);

@@ -1,5 +1,7 @@
 package com.bobbuy.service;
 
+import com.bobbuy.model.StorageCondition;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
@@ -33,13 +35,19 @@ public record CostcoOnboardingDecision(Stage stage, Verdict verdict, String prov
     /** Unknown facts remain unknown. Price/stock/publication are intentionally absent. */
     public record Candidate(String itemNumber, String brand, String name, String model,
             String specification, String packaging, String officialImageSha256,
-            Map<String, String> translatedNames, List<String> unknownFields, List<ReferencePrice> referencePrices,Target target) {
+            Map<String, String> translatedNames, List<String> unknownFields, List<ReferencePrice> referencePrices,Target target,PhotoFacts photoFacts,
+            @JsonInclude(JsonInclude.Include.NON_NULL) ArchiveDetails archiveDetails) {
+        public Candidate(String itemNumber,String brand,String name,String model,String specification,String packaging,String officialImageSha256,Map<String,String> translatedNames,List<String> unknownFields,List<ReferencePrice> referencePrices,Target target,PhotoFacts photoFacts){this(itemNumber,brand,name,model,specification,packaging,officialImageSha256,translatedNames,unknownFields,referencePrices,target,photoFacts,null);}
+        public Candidate(String itemNumber,String brand,String name,String model,String specification,String packaging,String officialImageSha256,Map<String,String> translatedNames,List<String> unknownFields,List<ReferencePrice> referencePrices,Target target){this(itemNumber,brand,name,model,specification,packaging,officialImageSha256,translatedNames,unknownFields,referencePrices,target,null);}
         public Candidate {
             translatedNames = Map.copyOf(translatedNames); unknownFields = List.copyOf(unknownFields);referencePrices=referencePrices==null?List.of():List.copyOf(referencePrices);
         }
         public Candidate(String itemNumber,String brand,String name,String model,String specification,String packaging,String officialImageSha256,Map<String,String> translatedNames,List<String> unknownFields){this(itemNumber,brand,name,model,specification,packaging,officialImageSha256,translatedNames,unknownFields,List.of(),null);}
         public Candidate(String itemNumber,String brand,String name,String model,String specification,String packaging,String officialImageSha256,Map<String,String> translatedNames,List<String> unknownFields,List<ReferencePrice> referencePrices){this(itemNumber,brand,name,model,specification,packaging,officialImageSha256,translatedNames,unknownFields,referencePrices,null);}
     }
+    public record ArchiveDetails(String descriptionJa,String categoryNodeId,StorageCondition storageCondition) {}
+    /** Suggestions from original private pixels, never an approved selling price or stock count. */
+    public record PhotoFacts(java.math.BigDecimal amount,String currency,String unit,String conditions,String priceKind,boolean productVisible) {}
     public record Target(String productId,long version,String sourceHash) {
         public Target {
             if(productId==null||productId.isBlank()||productId.length()>255||version<0||sourceHash==null||!sourceHash.matches("[0-9a-f]{64}"))throw new IllegalArgumentException("onboarding.target_contract");

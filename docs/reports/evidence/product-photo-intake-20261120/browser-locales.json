@@ -1,0 +1,2392 @@
+{
+  "scriptSha256": "adb7c6bcc1afd4af0befb9bc17813b11b1aea9b5cf3052e2b28791b95970953d",
+  "console": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "error",
+      "text": "[API ERROR] FETCH failure at /api/auth/me: TypeError: Failed to fetch\n    at authorizedFetch (http://127.0.0.1:5173/src/api.ts?t=1795183904589:210:26)\n    at fetchJson (http://127.0.0.1:5173/src/api.ts?t=1795183904589:311:22)\n    at Object.me (http://127.0.0.1:5173/src/api.ts?t=1795183904589:618:15)\n    at http://127.0.0.1:5173/src/context/UserRoleContext.tsx?t=1795183904589:83:14\n    at commitHookEffectListMount (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:16883:34)\n    at commitPassiveMountOnFiber (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:18124:19)\n    at commitPassiveMountEffects_complete (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:18097:17)\n    at commitPassiveMountEffects_begin (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:18087:15)\n    at commitPassiveMountEffects (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:18077:11)\n    at flushPassiveEffectsImpl (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:19458:11)"
+    },
+    {
+      "type": "error",
+      "text": "[API ERROR] FETCH failure at /api/auth/me: TypeError: Failed to fetch\n    at authorizedFetch (http://127.0.0.1:5173/src/api.ts?t=1795183904589:210:26)\n    at fetchJson (http://127.0.0.1:5173/src/api.ts?t=1795183904589:311:22)\n    at Object.me (http://127.0.0.1:5173/src/api.ts?t=1795183904589:618:15)\n    at http://127.0.0.1:5173/src/context/UserRoleContext.tsx?t=1795183904589:83:14\n    at commitHookEffectListMount (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:16883:34)\n    at invokePassiveEffectMountInDEV (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:18292:19)\n    at invokeEffectsInDev (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:19669:19)\n    at commitDoubleInvokeEffectsInDEV (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:19654:15)\n    at flushPassiveEffectsImpl (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:19471:13)\n    at flushPassiveEffects (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JSFS7AGR.js?v=21ecee25:19415:22)"
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    }
+  ],
+  "network": [
+    {
+      "path": "http://127.0.0.1:5173/src/pages/StockMaster.tsx",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "path": "http://127.0.0.1:5173/src/pages/DeletedProducts.tsx",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "path": "http://127.0.0.1:5173/api/auth/me",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "path": "http://127.0.0.1:5173/api/auth/me",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/c9294d0d-c22b-4c47-bd61-c4bf5194eb69",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/c9294d0d-c22b-4c47-bd61-c4bf5194eb69",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "https://cdn.bobbuy.example/products/matcha-kit.png",
+      "error": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "path": "https://images.costco-static.com/ImageDelivery/imageService",
+      "error": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/140ae4b4-de41-46c1-8b81-6b13efc09134",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/140ae4b4-de41-46c1-8b81-6b13efc09134",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/140ae4b4-de41-46c1-8b81-6b13efc09134/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/140ae4b4-de41-46c1-8b81-6b13efc09134/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/140ae4b4-de41-46c1-8b81-6b13efc09134",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/c9294d0d-c22b-4c47-bd61-c4bf5194eb69",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/c9294d0d-c22b-4c47-bd61-c4bf5194eb69",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "https://images.costco-static.com/ImageDelivery/imageService",
+      "error": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "path": "https://cdn.bobbuy.example/products/matcha-kit.png",
+      "error": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/140ae4b4-de41-46c1-8b81-6b13efc09134",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/140ae4b4-de41-46c1-8b81-6b13efc09134",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/140ae4b4-de41-46c1-8b81-6b13efc09134/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/140ae4b4-de41-46c1-8b81-6b13efc09134",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/140ae4b4-de41-46c1-8b81-6b13efc09134/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/c9294d0d-c22b-4c47-bd61-c4bf5194eb69",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/c9294d0d-c22b-4c47-bd61-c4bf5194eb69",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "https://images.costco-static.com/ImageDelivery/imageService",
+      "error": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "path": "https://cdn.bobbuy.example/products/matcha-kit.png",
+      "error": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/140ae4b4-de41-46c1-8b81-6b13efc09134",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/140ae4b4-de41-46c1-8b81-6b13efc09134",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/140ae4b4-de41-46c1-8b81-6b13efc09134/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/140ae4b4-de41-46c1-8b81-6b13efc09134",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/140ae4b4-de41-46c1-8b81-6b13efc09134/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/c9294d0d-c22b-4c47-bd61-c4bf5194eb69",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/c9294d0d-c22b-4c47-bd61-c4bf5194eb69",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "https://cdn.bobbuy.example/products/matcha-kit.png",
+      "error": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/140ae4b4-de41-46c1-8b81-6b13efc09134",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/140ae4b4-de41-46c1-8b81-6b13efc09134/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/140ae4b4-de41-46c1-8b81-6b13efc09134",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/140ae4b4-de41-46c1-8b81-6b13efc09134",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/140ae4b4-de41-46c1-8b81-6b13efc09134/photo",
+      "status": 200,
+      "method": "GET"
+    }
+  ],
+  "geometry": [
+    {
+      "name": "390-review-en-US",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "documentWidth": 390,
+      "modalWidth": 366,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "label": "Close",
+          "x": 322,
+          "y": 48,
+          "width": 44,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "Tokyo Supplier",
+          "x": 32,
+          "y": 226,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "Select supplier",
+          "x": 44,
+          "y": 227,
+          "width": 298,
+          "height": 30,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.25)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Take a photo",
+          "x": 32,
+          "y": 346,
+          "width": 114.171875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Choose a photo or file",
+          "x": 154.171875,
+          "y": 346,
+          "width": 170.984375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Retry recognition with this photo",
+          "x": 32,
+          "y": 663.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "Item number",
+          "x": 32,
+          "y": 975.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Find using corrected item number",
+          "x": 32,
+          "y": 1035.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "合成現場商品 · 80 × 2 · 80 × 2",
+          "x": 32,
+          "y": 1125.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "Select and verify the product variant",
+          "x": 44,
+          "y": 1126.5,
+          "width": 298,
+          "height": 30,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "LABEL",
+          "label": "I verified the supplier, market, item number, specification and packaging unit",
+          "x": 32,
+          "y": 1193.5,
+          "width": 322,
+          "height": 52,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "I verified the supplier, market, item number, specification and packaging unit",
+          "x": 32,
+          "y": 1211.5,
+          "width": 16,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "Amount (empty keeps price unchanged)",
+          "x": 32,
+          "y": 1451.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "JPY",
+          "x": 32,
+          "y": 1549.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "Currency",
+          "x": 44,
+          "y": 1550.5,
+          "width": 298,
+          "height": 30,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "Price unit",
+          "x": 32,
+          "y": 1647.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "Promotion conditions (empty if none)",
+          "x": 32,
+          "y": 1745.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "LABEL",
+          "label": "I confirmed the amount, currency, unit and conditions describe the on-site purchase price",
+          "x": 32,
+          "y": 1813.5,
+          "width": 322,
+          "height": 52,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "I confirmed the amount, currency, unit and conditions describe the on-site purchase price",
+          "x": 32,
+          "y": 1831.5,
+          "width": 16,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "Observed at (UTC)",
+          "x": 32,
+          "y": 1919.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "LABEL",
+          "label": "I confirm the product is available on site",
+          "x": 32,
+          "y": 1987.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "I confirm the product is available on site",
+          "x": 32,
+          "y": 2001.5,
+          "width": 16,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Confirm and save observation",
+          "x": 32,
+          "y": 2113.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Close",
+          "x": 32,
+          "y": 2173.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "name": "390-review-zh-CN",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "documentWidth": 390,
+      "modalWidth": 366,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "label": "Close",
+          "x": 322,
+          "y": 48,
+          "width": 44,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "东京供货商",
+          "x": 32,
+          "y": 204,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "选择供应商",
+          "x": 44,
+          "y": 205,
+          "width": 298,
+          "height": 30,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.25)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "设备拍照",
+          "x": 32,
+          "y": 324,
+          "width": 90,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "相册或文件",
+          "x": 130,
+          "y": 324,
+          "width": 104,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "用原图重新识别",
+          "x": 32,
+          "y": 641.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "商品编号",
+          "x": 32,
+          "y": 903.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "按更正货号重新查找",
+          "x": 32,
+          "y": 963.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "合成現場商品 · 80 × 2 · 80 × 2",
+          "x": 32,
+          "y": 1053.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "请选择并核对商品规格",
+          "x": 44,
+          "y": 1054.5,
+          "width": 298,
+          "height": 30,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "LABEL",
+          "label": "我已核对供应商、市场、货号、规格及包装单位一致",
+          "x": 32,
+          "y": 1121.5,
+          "width": 322,
+          "height": 52,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "我已核对供应商、市场、货号、规格及包装单位一致",
+          "x": 32,
+          "y": 1139.5,
+          "width": 16,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "金额（留空则不更新价格）",
+          "x": 32,
+          "y": 1355.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "JPY",
+          "x": 32,
+          "y": 1453.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "币种",
+          "x": 44,
+          "y": 1454.5,
+          "width": 298,
+          "height": 30,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "价格单位",
+          "x": 32,
+          "y": 1551.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "促销条件／限定（无则留空）",
+          "x": 32,
+          "y": 1649.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "LABEL",
+          "label": "我已确认金额、币种、单位及促销条件对应现场成交价",
+          "x": 32,
+          "y": 1717.5,
+          "width": 322,
+          "height": 52,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "我已确认金额、币种、单位及促销条件对应现场成交价",
+          "x": 32,
+          "y": 1735.5,
+          "width": 16,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "观察时间 (UTC)",
+          "x": 32,
+          "y": 1823.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "LABEL",
+          "label": "我确认现场有货",
+          "x": 32,
+          "y": 1891.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "我确认现场有货",
+          "x": 32,
+          "y": 1905.5,
+          "width": 16,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "确认保存现场观察",
+          "x": 32,
+          "y": 1995.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "关 闭",
+          "x": 32,
+          "y": 2055.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "name": "390-review-zh-TW",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "documentWidth": 390,
+      "modalWidth": 366,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "label": "Close",
+          "x": 322,
+          "y": 48,
+          "width": 44,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "東京サプライヤー",
+          "x": 32,
+          "y": 204,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "選擇供應商",
+          "x": 44,
+          "y": 205,
+          "width": 298,
+          "height": 30,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.25)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "裝置拍照",
+          "x": 32,
+          "y": 324,
+          "width": 90,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "相簿或檔案",
+          "x": 130,
+          "y": 324,
+          "width": 104,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "用原圖重新識別",
+          "x": 32,
+          "y": 641.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "商品編號",
+          "x": 32,
+          "y": 903.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "按更正貨號重新查找",
+          "x": 32,
+          "y": 963.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "合成現場商品 · 80 × 2 · 80 × 2",
+          "x": 32,
+          "y": 1053.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "請選擇並核對商品規格",
+          "x": 44,
+          "y": 1054.5,
+          "width": 298,
+          "height": 30,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "LABEL",
+          "label": "我已核對供應商、市場、貨號、規格及包裝單位一致",
+          "x": 32,
+          "y": 1121.5,
+          "width": 322,
+          "height": 52,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "我已核對供應商、市場、貨號、規格及包裝單位一致",
+          "x": 32,
+          "y": 1139.5,
+          "width": 16,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "金額（留空則不更新價格）",
+          "x": 32,
+          "y": 1355.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "JPY",
+          "x": 32,
+          "y": 1453.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "幣別",
+          "x": 44,
+          "y": 1454.5,
+          "width": 298,
+          "height": 30,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "價格單位",
+          "x": 32,
+          "y": 1551.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "促銷條件／限定（無則留空）",
+          "x": 32,
+          "y": 1649.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "LABEL",
+          "label": "我已確認金額、幣別、單位及促銷條件對應現場成交價",
+          "x": 32,
+          "y": 1717.5,
+          "width": 322,
+          "height": 52,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "我已確認金額、幣別、單位及促銷條件對應現場成交價",
+          "x": 32,
+          "y": 1735.5,
+          "width": 16,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "觀察時間 (UTC)",
+          "x": 32,
+          "y": 1823.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "LABEL",
+          "label": "我確認現場有貨",
+          "x": 32,
+          "y": 1891.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "我確認現場有貨",
+          "x": 32,
+          "y": 1905.5,
+          "width": 16,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "確認儲存現場觀察",
+          "x": 32,
+          "y": 1995.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "關 閉",
+          "x": 32,
+          "y": 2055.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "name": "390-review-ja-JP",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "documentWidth": 390,
+      "modalWidth": 366,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "label": "Close",
+          "x": 322,
+          "y": 48,
+          "width": 44,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "東京サプライヤー",
+          "x": 32,
+          "y": 226,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "仕入先を選択",
+          "x": 44,
+          "y": 227,
+          "width": 298,
+          "height": 30,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.25)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "カメラで撮影",
+          "x": 32,
+          "y": 346,
+          "width": 118,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 214, 214)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "アルバムまたはファイル",
+          "x": 158,
+          "y": 346,
+          "width": 187.859375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "この写真で識別を再試行",
+          "x": 32,
+          "y": 663.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "商品番号",
+          "x": 32,
+          "y": 947.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "修正した商品番号で再検索",
+          "x": 32,
+          "y": 1007.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "合成現場商品 · 80 × 2 · 80 × 2",
+          "x": 32,
+          "y": 1097.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "商品を選び規格を確認してください",
+          "x": 44,
+          "y": 1098.5,
+          "width": 298,
+          "height": 30,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "LABEL",
+          "label": "仕入先・市場・商品番号・規格・包装単位が一致することを確認しました",
+          "x": 32,
+          "y": 1165.5,
+          "width": 322,
+          "height": 52,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "仕入先・市場・商品番号・規格・包装単位が一致することを確認しました",
+          "x": 32,
+          "y": 1183.5,
+          "width": 16,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "金額（空欄の場合は価格を更新しません）",
+          "x": 32,
+          "y": 1423.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "JPY",
+          "x": 32,
+          "y": 1521.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "通貨",
+          "x": 44,
+          "y": 1522.5,
+          "width": 298,
+          "height": 30,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "価格の単位",
+          "x": 32,
+          "y": 1619.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "販促条件・制限（なければ空欄）",
+          "x": 32,
+          "y": 1717.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "LABEL",
+          "label": "金額・通貨・単位・条件が現場の購入価格に対応することを確認しました",
+          "x": 32,
+          "y": 1785.5,
+          "width": 322,
+          "height": 52,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "金額・通貨・単位・条件が現場の購入価格に対応することを確認しました",
+          "x": 32,
+          "y": 1803.5,
+          "width": 16,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "現場確認日時 (UTC)",
+          "x": 32,
+          "y": 1891.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "LABEL",
+          "label": "現場で商品があることを確認しました",
+          "x": 32,
+          "y": 1959.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "現場で商品があることを確認しました",
+          "x": 32,
+          "y": 1973.5,
+          "width": 16,
+          "height": 16,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "現場情報を確認して保存",
+          "x": 32,
+          "y": 2085.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "閉じる",
+          "x": 32,
+          "y": 2145.5,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "locale": "en-US",
+      "title": "Identify a product from a photo",
+      "overflow": false
+    },
+    {
+      "locale": "zh-CN",
+      "title": "拍照识别商品",
+      "overflow": false
+    },
+    {
+      "locale": "zh-TW",
+      "title": "拍照識別商品",
+      "overflow": false
+    },
+    {
+      "locale": "ja-JP",
+      "title": "写真から商品を識別",
+      "overflow": false
+    }
+  ],
+  "fixture": "Synthetic persisted photo suggestions; real UI/API/Postgres; not live AI recognition"
+}

@@ -13,4 +13,13 @@ describe('catalog file transfer',()=>{
  fireEvent.change(container.querySelector('input[type=file]')!,{target:{files:[file('[{"productId":"one","version":2}]')]}});
  await waitFor(()=>expect(onLoad).toHaveBeenCalledWith('[{"productId":"one","version":2}]'));expect(get).not.toHaveBeenCalled();
  });
+ it('asks for the whole archive at export time and rejects overflow without reading the current page',async()=>{
+  const select=vi.fn().mockResolvedValue({ids:[],limitExceeded:true});
+  render(<CatalogFileTransfer ids={['visible-product']} getExportIds={select} disabled={false} onLoad={vi.fn()}/>);
+  expect(select).not.toHaveBeenCalled();
+  fireEvent.click(screen.getByRole('button',{name:'catalogTransfer.export'}));
+  await screen.findByText('products.archive_export_limit');
+  expect(select).toHaveBeenCalledOnce();
+  expect(get).not.toHaveBeenCalled();
+ });
 });

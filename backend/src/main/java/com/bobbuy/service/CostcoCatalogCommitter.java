@@ -32,6 +32,7 @@ public class CostcoCatalogCommitter implements CostcoNumberOnboardingService.Cat
         if(suppliers.findById(job.supplierId()).filter(s->Long.valueOf(job.merchantId()).equals(s.getMerchantId())).isEmpty())throw new CostcoNumberOnboardingService.NeedsInput("onboarding.supplier_not_found");
     }
     @Override @Transactional public CostcoNumberOnboardingService.CommitReceipt commitOnce(CostcoOnboardingJob job,Candidate candidate,String hash) {
+        if(job.privatePhotoSha256()!=null)throw new CostcoNumberOnboardingService.NeedsInput("photo.confirm_required");
         admission(job,candidate,hash);users.lockById(job.merchantId()).orElseThrow();
         var prior=reconcile(job,hash);if(prior.isPresent())return prior.get();
         var actor=users.findById(job.merchantId()).filter(u->u.isEnabled()&&u.getRoles()!=null&&u.getRoles().contains(Role.AGENT)).orElseThrow(()->new CostcoNumberOnboardingService.NeedsInput("error.auth.forbidden"));
