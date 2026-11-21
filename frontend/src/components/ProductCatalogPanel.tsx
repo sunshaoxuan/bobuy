@@ -13,7 +13,7 @@ import {IMAGE_UPLOAD_ACCEPT,copyFileList,imageUploadSha256,prepareImageUpload,va
 import {getStoredAccessToken,getStoredUser,getTestInjectedRole,getTestInjectedUser,subscribeToAuthChanges} from '../authStorage';
 
 const languages=[{key:'ja-JP',label:'日本語'},{key:'zh-CN',label:'简体中文'},{key:'zh-TW',label:'繁體中文'},{key:'en-US',label:'English'}];
-type PanelProps={entries:{key:string;name:string}[];id?:string;onChoose:(id?:string)=>void;onSaved:(rows:CatalogInput[],canonical?:boolean)=>void};
+type PanelProps={entries:{key:string;name:string}[];searchEntries?:(query:string,signal:AbortSignal)=>Promise<{key:string;name:string}[]>;getExportIds?:()=>Promise<{ids:string[];limitExceeded:boolean}>;id?:string;onChoose:(id?:string)=>void;onSaved:(rows:CatalogInput[],canonical?:boolean)=>void};
 type UploadRow={key:number;name:string;status:'waiting'|'uploading'|'success'|'failed';sha256?:string;asset?:CatalogMedia;error?:string;reused?:boolean};
 function uploadIdentity(){try{const user=getStoredUser();return JSON.stringify([user?.id??null,[...(user?.roles??[])].sort(),!!getStoredAccessToken(),getTestInjectedRole(),getTestInjectedUser()]);}catch{return 'storage-unavailable';}}
 export default function ProductCatalogPanel(props:PanelProps){
@@ -23,8 +23,19 @@ export default function ProductCatalogPanel(props:PanelProps){
  useEffect(()=>subscribeToAuthChanges(()=>{const next=uploadIdentity();if(next!==scope.current.identity)scope.current={...scope.current,identity:next,generation:scope.current.generation+1};refreshAuth(n=>n+1);}),[]);
  return <CatalogEditor key={expected.generation} {...props} currentScope={currentScope} onSaved={(rows,canonical)=>{if(currentScope())props.onSaved(rows,canonical);}}/>;
 }
-function CatalogEditor({entries,id,onChoose,onSaved,currentScope}:PanelProps&{currentScope:()=>boolean}){
+function CatalogEditor({entries,id,onChoose,onSaved,searchEntries,getExportIds,currentScope}:PanelProps&{currentScope:()=>boolean}){
  const {t,locale}=useI18n();const [draft,setDraft]=useState<CatalogInput>(),[busy,setBusy]=useState(false),[error,setError]=useState(''),[reviewed,setReviewed]=useState(false),[canonical,setCanonical]=useState(false);
+ const [lookup,setLookup]=useState(''),[matches,setMatches]=useState<{key:string;name:string}[]>(),[lookupFailed,setLookupFailed]=useState(false);
+ useEffect(()=>{
+  setMatches(undefined);setLookupFailed(false);
+  if(!searchEntries||!lookup.trim())return;
+  const controller=new AbortController();
+  const timer=setTimeout(()=>{
+   void searchEntries(lookup,controller.signal).then(rows=>{if(!controller.signal.aborted)setMatches(rows);})
+    .catch(()=>{if(!controller.signal.aborted)setLookupFailed(true);});
+  },180);
+  return()=>{clearTimeout(timer);controller.abort();};
+ },[lookup,searchEntries,locale]);
  const [options,setOptions]=useState<{categories:RecommendationChoice[];suppliers:RecommendationChoice[]}>({categories:[],suppliers:[]});
  const [treeNodes,setTreeNodes]=useState<CategoryTreeNode[]>([]),[categoryNodeId,setCategoryNodeId]=useState<string|null>(null);const savedCategoryNodeId=useRef<string|null>(null);
  const [audit,setAudit]=useState('');
@@ -101,7 +112,7 @@ function CatalogEditor({entries,id,onChoose,onSaved,currentScope}:PanelProps&{cu
  const warning=(value:string)=>{const index=value.indexOf(':');const key=index<0?value:value.slice(0,index);const translated=t(key);return translated===key?value:translated+(index<0?'':' · '+value.slice(index+1));};
  const cover=draft?.gallery[Math.min(activeImage,(draft?.gallery.length??1)-1)];
  return <section className="product-catalog-panel"><details className="catalog-utility-disclosure" open={!narrow}><summary><div className="catalog-utility-heading"><span className="catalog-utility-icon"><PictureOutlined/></span><div><h2>{t('master.title')}</h2><p>{t('master.hint')}</p></div></div></summary>
-  <div className="product-catalog-actions"><Select aria-label={t('master.choose')} showSearch optionFilterProp="label" value={id} placeholder={t('master.choose')} onChange={onChoose} options={entries.map(row=>({value:row.key,label:row.name}))}/><Button onClick={()=>{setBulk(true);setError('');setReviewed(false);}}>{t('master.bulk')}</Button></div></details>
+  <div className="product-catalog-actions"><Select aria-label={t('master.choose')} showSearch optionFilterProp="label" filterOption={searchEntries?false:undefined} onSearch={searchEntries?setLookup:undefined} notFoundContent={lookupFailed?t('products.archive_failed'):undefined} value={id} placeholder={t('master.choose')} onChange={onChoose} options={(searchEntries&&lookup.trim()?(matches??[]):entries).map(row=>({value:row.key,label:row.name}))}/><Button onClick={()=>{setBulk(true);setError('');setReviewed(false);}}>{t('master.bulk')}</Button></div></details>
   <Drawer rootClassName={'catalog-editor'+(narrow?' catalog-editor-sheet':'')} title={t('master.title')} placement={narrow?'bottom':'right'} height={narrow?sheetHeight:undefined} width={narrow?undefined:1120} open={!!id} onClose={closeEditor} destroyOnClose footer={draft?<div className="catalog-review-bar"><Checkbox disabled={busy} checked={reviewed} onChange={e=>setReviewed(e.target.checked)}>{t('master.review')}</Checkbox><Button type="primary" loading={busy} disabled={!reviewed||busy} onClick={()=>void saveOne()}>{t('master.save')}</Button>{recoveryId&&<Button disabled={busy||dirty} onClick={()=>setRestoreOpen(true)}>{t('master.restore')}</Button>}</div>:null}>
    {error&&!draft&&<Alert type="error" message={warning(error)}/>}<div className="catalog-state-strip"><CheckCircleOutlined/>{t(canonical?'master.active':'master.not_adopted')}</div>
    {draft&&<fieldset className="product-catalog-form" disabled={busy}>
@@ -143,7 +154,7 @@ function CatalogEditor({entries,id,onChoose,onSaved,currentScope}:PanelProps&{cu
   <Modal title={t('products.unsaved')} open={discardOpen} onOk={()=>{setDiscardOpen(false);onChoose(undefined);}} onCancel={keepEditing} okText={t('products.discard')} cancelText={t('products.keep_editing')} zIndex={1200}>{t('products.unsaved_hint')}</Modal>
   <Drawer rootClassName="catalog-editor catalog-bulk-editor" title={t('master.bulk')} open={bulk} width={1050} onClose={()=>setBulk(false)} destroyOnClose>
    <p>{t('master.bulk_hint')}</p><Button onClick={()=>void readAudit()} disabled={busy}>{t('master.audit')}</Button>{audit&&<Input.TextArea readOnly aria-label={t('master.audit')} rows={8} value={audit}/>}{error&&<Alert type="error" message={warning(error)}/>}<Button loading={busy} onClick={()=>void suggestions()}>{t('master.suggestions')}</Button>
-   <CatalogFileTransfer ids={entries.map(row=>row.key)} disabled={busy} onLoad={text=>{setJson(text);setRows([]);setSelected([]);setValidated(false);setReviewed(false);}}/>
+   <CatalogFileTransfer ids={entries.map(row=>row.key)} getExportIds={getExportIds} disabled={busy} onLoad={text=>{setJson(text);setRows([]);setSelected([]);setValidated(false);setReviewed(false);}}/>
    <Input.TextArea disabled={busy} aria-label={t('master.json')} rows={9} value={json} onChange={e=>{setJson(e.target.value);setValidated(false);setReviewed(false);}}/>
    <Button loading={busy} disabled={!json.trim()} onClick={()=>void preview()}>{t('rec.batch_preview')}</Button>
    {!!rows.length&&<Table rowKey={row=>row.value.productId} dataSource={rows} scroll={{x:700}} pagination={{pageSize:10}} rowSelection={{selectedRowKeys:selected,onChange:setSelected}} columns={[

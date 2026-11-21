@@ -6,7 +6,7 @@ vi.mock('../api',()=>({api:{suppliers:mocks.suppliers,costcoOnboarding:{status:m
 vi.mock('../productPhotoUpload',()=>({prepareProductPhotoUpload:(f:File)=>f.name==='bad.txt'?Promise.reject(Error('photo.file_invalid')):Promise.resolve(f)}));
 vi.mock('../i18n',()=>({useI18n:()=>({locale:'en-US',t:(k:string)=>k})}));
 vi.mock('./CategoryTreePicker',()=>({default:({value,onChange}:{value:string|null;onChange:(id:string|null)=>void})=><select aria-label="test-category" value={value??''} onChange={e=>onChange(e.target.value||null)}><option value="">Uncategorized</option><option value="category-1">First category</option></select>}));
-vi.mock('antd',()=>({Alert:({message,description,action}:any)=><div role="alert">{message}{description}{action}</div>,Button:({children,loading,type,...p}:any)=><button {...p}>{children}</button>,Checkbox:({children,onChange,...p}:any)=><label><input type="checkbox" {...p} onChange={onChange}/>{children}</label>,Input:Object.assign((p:any)=><input {...p}/>,{TextArea:(p:any)=><textarea {...p}/>}),Modal:({children,title}:any)=><div role="dialog">{title}{children}</div>,Select:({options,onChange,loading,...p}:any)=><select {...p} onChange={e=>onChange(e.target.value)}><option value=""/>{options.map((o:any)=><option key={o.value} {...o}>{o.label}</option>)}</select>,Space:({children}:any)=><div>{children}</div>,Typography:{Title:({children}:any)=><h2>{children}</h2>}}));
+vi.mock('antd',()=>({Alert:({message,description,action}:any)=><div role="alert">{message}{description}{action}</div>,Button:({children,loading,type,...p}:any)=><button {...p}>{children}</button>,Checkbox:({children,onChange,...p}:any)=><label><input type="checkbox" {...p} onChange={onChange}/>{children}</label>,Input:Object.assign((p:any)=><input {...p}/>,{TextArea:(p:any)=><textarea {...p}/>}),Modal:({children,title}:any)=><div role="dialog">{title}{children}</div>,Select:({options,onChange,loading,allowClear,...p}:any)=><select {...p} onChange={e=>onChange(e.target.value)}><option value=""/>{options.map((o:any)=><option key={o.value} {...o}>{o.label}</option>)}</select>,Space:({children}:any)=><div>{children}</div>,Typography:{Title:({children}:any)=><h2>{children}</h2>}}));
 import ProductPhotoIntakeModal from './ProductPhotoIntakeModal';
 const job={id:'job1',state:'NEEDS_INPUT' as const,revision:7,photo:true,supplierId:'s1'};
 const review=()=>({jobId:'job1',revision:7,supplierId:'s1',market:'JP',itemNumber:'123',status:'MATCH',matches:[{id:'p1',version:2,name:{'en-US':'Synthetic item'},specification:{'ja-JP':'80 × 2'},packaging:'80 × 2',eligible:true}],history:[],saved:null,photoFacts:{amount:999,currency:'JPY',unit:'80 × 2',conditions:'',priceKind:'WAREHOUSE',productVisible:true}});
@@ -42,15 +42,19 @@ it('keeps confirmed review inputs when a replacement file is invalid',async()=>{
 
 it('preserves the draft for a retry and clears it for a different photo',async()=>{
  const candidate={...review(),status:'NEW',matches:[],candidate:{translatedNames:{'ja-JP':'候補'}}};
- mocks.review.mockResolvedValue(candidate);
+ mocks.review.mockResolvedValue({...candidate,archiveDetails:{descriptionJa:'AI suggested description',categoryNodeId:'category-1',storageCondition:'FROZEN'}});
  mocks.photo.mockResolvedValue(job);
  render(<ProductPhotoIntakeModal {...props} job={job}/>);
- fireEvent.change(await screen.findByLabelText('photo.description'),{target:{value:'First product only'}});
- fireEvent.change(screen.getByLabelText('test-category'),{target:{value:'category-1'}});
+ const description=await screen.findByLabelText('photo.description');
+ expect(description).toHaveValue('AI suggested description');
+ expect(screen.getByLabelText('test-category')).toHaveValue('category-1');
+ expect(screen.getByRole('combobox',{name:'stock.item.storage_condition'})).toHaveValue('FROZEN');
+ fireEvent.change(description,{target:{value:'First product only'}});
+ fireEvent.change(screen.getByLabelText('test-category'),{target:{value:''}});
  fireEvent.click(screen.getByText('photo.retry_recognition'));
  fireEvent.click(await screen.findByRole('button',{name:'photo.recognize'}));
  expect(await screen.findByLabelText('photo.description')).toHaveValue('First product only');
- expect(screen.getByLabelText('test-category')).toHaveValue('category-1');
+ expect(screen.getByLabelText('test-category')).toHaveValue('');
 
  const replacement={...job,id:'job2'};
  mocks.photo.mockResolvedValue(replacement);
@@ -60,6 +64,7 @@ it('preserves the draft for a retry and clears it for a different photo',async()
  fireEvent.click(await screen.findByRole('button',{name:'photo.recognize'}));
  expect(await screen.findByLabelText('photo.description')).toHaveValue('');
  expect(screen.getByLabelText('test-category')).toHaveValue('');
+ expect(screen.getByRole('combobox',{name:'stock.item.storage_condition'})).toHaveValue('');
 });
 
 it('explains missing AI configuration without exposing an internal protocol code',async()=>{

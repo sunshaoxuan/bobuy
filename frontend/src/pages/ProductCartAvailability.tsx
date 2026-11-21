@@ -32,8 +32,9 @@ export function ProductCartSwitch({id, name, enabled, onChange}: {
   </span>;
 }
 
-export function ProductCartBulkAction({allEnabled, onChange}: {
+export function ProductCartBulkAction({allEnabled, onPreview, onChange}: {
   allEnabled: boolean;
+  onPreview: (count: number) => void;
   onChange: (ids: string[], enabled: boolean) => void;
 }) {
   const {t, locale} = useI18n();
@@ -46,7 +47,9 @@ export function ProductCartBulkAction({allEnabled, onChange}: {
   async function loadPreview() {
     setOpening(true);
     try {
-      setPreview(await api.previewCartAvailability());
+      const result = await api.previewCartAvailability();
+      setPreview(result);
+      onPreview(result.count);
       setNeedsPreview(false);
     } catch {
       notifications.error(t('cart.availability_preview_error'));

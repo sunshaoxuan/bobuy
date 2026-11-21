@@ -45,6 +45,24 @@ public class JdbcCostcoOnboardingJobRepository implements CostcoOnboardingJobRep
     @Transactional(readOnly = true) public List<CostcoOnboardingJob> recent(long merchantId) {
         return jdbc.query("select cast(payload as text) from bb_costco_onboarding_job where merchant_id=? order by updated_at desc limit 40", (rs,n) -> parse(rs.getString(1)), merchantId);
     }
+    public record PhotoQueueRow(String id,String state,long revision,String itemNumber,String productId,
+                                String failureCode,String supplierId,String market,Instant createdAt,boolean reviewReady) {}
+
+    @Transactional(readOnly = true) public List<PhotoQueueRow> photos(long merchantId) {
+        return jdbc.query("""
+                select j.id,case when o.id is not null then 'COMPLETED' else j.state end,j.revision,
+                    j.payload->>'itemNumber',o.product_id,j.payload->>'failureCode',j.supplier_id,j.market,j.created_at,
+                    j.state in ('NEEDS_INPUT','FAILED') and j.payload->>'itemNumber' is not null and exists (
+                        select 1 from jsonb_array_elements(j.payload->'decisions') d
+                        where d->>'stage'='INTAKE' and jsonb_typeof(d->'candidate'->'photoFacts')='object'
+                    )
+                from bb_costco_onboarding_job j
+                left join bb_product_photo_observation o on o.job_id=j.id and o.merchant_id=j.merchant_id
+                where j.merchant_id=? and j.payload->>'privatePhotoSha256' is not null
+                order by j.created_at desc,j.id desc
+                """, (rs,n)->new PhotoQueueRow(rs.getString(1),rs.getString(2),rs.getLong(3),rs.getString(4),
+                rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getTimestamp(9).toInstant(),rs.getBoolean(10)),merchantId);
+    }
     @Override @Transactional public boolean compareAndSet(CostcoOnboardingJob old, CostcoOnboardingJob next) {
         var lease = active.get();
         if (lease == null || !lease.job().id().equals(old.id()) || old.merchantId() != next.merchantId()

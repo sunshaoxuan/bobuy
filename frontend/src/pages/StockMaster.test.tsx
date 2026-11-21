@@ -10,6 +10,7 @@ vi.mock('../components/ProductMarkerEditor',()=>({default:({productId}:{productI
 
 vi.mock('../api', () => ({
   categoryTreeApi:{list:()=>Promise.resolve([])},
+  merchantArchivePageSize:24,
   api: {
     stockCategories: () => Promise.resolve([
       {
@@ -29,6 +30,9 @@ vi.mock('../api', () => ({
       }
     ]),
     suppliers: () => Promise.resolve([]),
+    merchantArchive: vi.fn(),
+    merchantArchiveExport:vi.fn(),
+    product:vi.fn(),
     products: () => Promise.resolve([
       {
         product: {
@@ -128,6 +132,24 @@ it('previews bulk changes without writing, cancels, confirms and shows the empty
   expect(within(dialog).getByRole('button', {name: 'Confirm enablement'})).toBeDisabled();
 });
 
+const detailsById=new Map<string,Awaited<ReturnType<typeof api.product>>>();
+beforeEach(()=>{
+ detailsById.clear();
+ vi.mocked(api.merchantArchive).mockReset();
+ vi.mocked(api.product).mockReset();
+ vi.mocked(api.product).mockImplementation(async id=>detailsById.get(id)!);
+ vi.mocked(api.merchantArchive).mockImplementation(async(page,query)=>{
+  const details=await api.products();
+  details.forEach(row=>detailsById.set(row.product.id,row));
+  const rows=details.filter(row=>[row.displayName,row.product.itemNumber].some(text=>text?.toLowerCase().includes(query.toLowerCase())));
+  return {total:rows.length,rows:rows.slice(page*24,(page+1)*24).map(({product,displayName,categoryPath,currentRegular})=>({
+   id:product.id,name:displayName,itemNumber:product.itemNumber,categoryId:product.categoryId,categoryPath,currentRegular,
+   cartEnabled:product.cartEnabled,
+   catalogDriven:!!product.catalogData,privateDraft:product.visibilityStatus==='DRAFTER_ONLY',
+   mediaCount:product.mediaGallery?.length??0,image:product.mediaGallery?.find(media=>media.type?.toLowerCase()==='image')?.url
+  }))};
+ });
+});
 // Top-level cases must have the same isolation as the grouped cases. A timed
 // out async body must never later call cleanup() on the next case's mounted UI.
 afterEach(()=>{message.destroy();vi.restoreAllMocks();window.localStorage.clear();});
@@ -140,7 +162,7 @@ it('waits for persistence and keeps the drawer and entered values when saving fa
  renderWithI18n(<StockMaster/>);
  await screen.findByText('Organic Milk');
  fireEvent.click(screen.getAllByRole('button').find(button=>button.querySelector('.anticon-edit'))!);
- const drawer=screen.getByRole('dialog');
+ const drawer=await screen.findByRole('dialog');
  const sku=within(drawer).getByDisplayValue('SKU-20934');fireEvent.change(sku,{target:{value:'SYNTHETIC-RETRY'}});
  const saveButton=within(drawer).getByRole('button',{name:'Save & Close'});
  fireEvent.click(saveButton);
@@ -174,7 +196,7 @@ it('preserves gallery visibility and uppercases media types when patching an exi
  const products=vi.spyOn(api,'products').mockResolvedValueOnce([{product:{id:'gallery-patch',name:{'en-US':'Hidden gallery product'},categoryId:'cat-1000',basePrice:0,itemNumber:'000124',mediaGallery:[{url:'/hidden.png',type:'IMAGE',visible:false}]},displayName:'Hidden gallery product',displayDescription:''}] as Awaited<ReturnType<typeof api.products>>);
  renderWithI18n(<StockMaster/>);await screen.findByText('Hidden gallery product');
  fireEvent.click(screen.getAllByRole('button').find(button=>button.querySelector('.anticon-edit'))!);
- const drawer=screen.getByRole('dialog');expect(within(drawer).getByRole('checkbox')).not.toBeChecked();
+ const drawer=await screen.findByRole('dialog');expect(within(drawer).getByRole('checkbox')).not.toBeChecked();
  fireEvent.click(within(drawer).getByRole('button',{name:'Save & Close'}));
  await waitFor(()=>expect(api.patchProduct).toHaveBeenCalledWith('gallery-patch',expect.objectContaining({mediaGallery:[expect.objectContaining({url:'/hidden.png',type:'IMAGE',visible:false})]})));
  products.mockRestore();
@@ -273,13 +295,13 @@ describe('StockMaster Component', () => {
     expect(await screen.findByText(/Fresh Spinach/i)).toBeInTheDocument();
   });
 
-  it('adds a new row when clicking "新增商品"', () => {
+  it('adds a new row when clicking "新增商品"', async () => {
     renderWithI18n(<StockMaster />);
     const addButton = screen.getByText(/新增商品/i);
     fireEvent.click(addButton);
     
     // Check for "待发布" status tag which indicates a new row
-    const pendingTags = screen.getAllByText(/待发布/i);
+    const pendingTags = await screen.findAllByText(/待发布/i);
     expect(pendingTags.length).toBeGreaterThan(0);
   });
 
@@ -287,7 +309,7 @@ describe('StockMaster Component', () => {
     renderWithI18n(<StockMaster />);
     await screen.findByText(/Organic Milk/i);
     fireEvent.click(screen.getAllByRole('button').find(button => button.querySelector('.anticon-edit'))!);
-    const drawer = screen.getByRole('dialog');
+    const drawer = await screen.findByRole('dialog');
     const nameInput = within(drawer).getByDisplayValue('Organic Milk');
     fireEvent.change(nameInput, { target: { value: 'Updated Milk' } });
     expect(nameInput).toHaveValue('Updated Milk');
@@ -308,9 +330,9 @@ describe('StockMaster Component', () => {
     const editButtons = screen.getAllByRole('button').filter(btn => btn.querySelector('.anticon-edit'));
     fireEvent.click(editButtons[0]);
     
-    expect(screen.getByText(/编辑商品详情/i)).toBeInTheDocument();
+    expect(await screen.findByText(/编辑商品详情/i)).toBeInTheDocument();
     // Use drawer-scoped SKU input to avoid matching table inline editors
-    const drawer = screen.getByRole('dialog');
+    const drawer = await screen.findByRole('dialog');
     const skuInput = within(drawer).getByPlaceholderText(/输入唯一 SKU 编号/i);
     fireEvent.change(skuInput, { target: { value: 'NEW-SKU-999' } });
     
@@ -361,7 +383,7 @@ describe('StockMaster Component', () => {
     const editButtons = screen.getAllByRole('button').filter(btn => btn.querySelector('.anticon-edit'));
     fireEvent.click(editButtons[0]);
 
-    const drawer = screen.getByRole('dialog');
+    const drawer = await screen.findByRole('dialog');
     const categoryInput = within(drawer).getByRole('textbox', { name: /类目|Category/i });
     fireEvent.change(categoryInput, { target: { value: '服装' } });
 
@@ -407,4 +429,69 @@ it('maps retry and AI responses entirely from persisted fields and actual visibi
  expect(stockItemFromResponse(response)).toMatchObject({key:'server-id',brand:'Saved brand',sku:'SAVED-ITEM',categoryPath:'Saved path',category:'',catalogDriven:false,visibilityStatus:'PUBLIC',dynamicAttributes:{packSize:'saved'},merchantSkus:{supplier:'SAVED-CODE'},storageCondition:'CHILLED',orderMethod:'PRE_ORDER',isNew:false});
  response.product.catalogData={specification:{'ja-JP':'保存仕様'}};response.product.visibilityStatus='DRAFTER_ONLY';
  expect(stockItemFromResponse(response)).toMatchObject({specificationL10n:{'ja-JP':'保存仕様'},catalogDriven:true,visibilityStatus:'DRAFTER_ONLY'});
+});
+
+
+it('requests pages and searches the entire archive while ignoring an older slow response',async()=>{
+ setMatchMedia(false);localStorage.setItem('bobbuy_locale','en-US');
+ const result=(id:string,name:string,total=520)=>({total,rows:[{id,name,mediaCount:0,catalogDriven:true,privateDraft:true}]});
+ const list=vi.mocked(api.merchantArchive);
+ let late!:(response:Awaited<ReturnType<typeof api.merchantArchive>>)=>void;
+ list.mockImplementation((page,query)=>{
+  if(query==='slow')return new Promise(resolve=>{late=resolve;});
+  if(query==='target')return Promise.resolve(result('520','Later record',1));
+  if(page===1)return Promise.resolve(result('25','Page two'));
+  return Promise.resolve(result('1','Page one'));
+ });
+ renderWithI18n(<StockMaster embedded/>);
+ await screen.findByText('Page one');
+ fireEvent.click(screen.getByRole('button',{name:'Next'}));
+ await screen.findByText('Page two');
+ const search=screen.getByPlaceholderText(/search.*SKU/i);
+ fireEvent.change(search,{target:{value:'slow'}});
+ await waitFor(()=>expect(late).toBeTypeOf('function'));
+ fireEvent.change(search,{target:{value:'target'}});
+ await screen.findByText('Later record');
+ await act(async()=>late(result('2','Obsolete')));
+ expect(screen.queryByText('Obsolete')).not.toBeInTheDocument();
+ expect(list).toHaveBeenCalledWith(0,'target',expect.any(AbortSignal));
+});
+
+it('retries the failed archive page',async()=>{
+ setMatchMedia(false);localStorage.setItem('bobbuy_locale','en-US');
+ vi.mocked(api.merchantArchive).mockRejectedValueOnce(new Error('offline'));
+ renderWithI18n(<StockMaster embedded/>);
+ await screen.findByText('Product archive could not be loaded.');
+ fireEvent.click(screen.getByRole('button',{name:'Retry'}));
+ await screen.findByText('Organic Milk');
+});
+
+it('previews disabled products from other pages even when all visible products are enabled', async () => {
+  setMatchMedia(false);
+  localStorage.setItem('bobbuy_locale', 'en-US');
+  let disabled = true;
+  vi.mocked(api.merchantArchive).mockImplementation(async page => ({
+    total: 25,
+    allCartEnabled: !disabled,
+    rows: [{id: page ? 'other-page' : 'first-page', name: page ? 'Other page' : 'First page',
+      mediaCount: 0, catalogDriven: false, privateDraft: false, cartEnabled: page === 0 || !disabled}]
+  }));
+  vi.mocked(api.previewCartAvailability).mockResolvedValueOnce({
+    count: 1, items: [{id: 'other-page', name: {'en-US': 'Other page'}, itemNumber: null}], revision: 'all-pages'
+  });
+  const enable = vi.mocked(api.enableCartAvailability);
+  enable.mockImplementationOnce(async () => {
+    disabled = false;
+    return {enabledIds: ['other-page']};
+  });
+  renderWithI18n(<StockMaster embedded />);
+  expect(await screen.findByRole('switch', {name: 'Allow adding to cart First page'})).toBeChecked();
+  fireEvent.click(screen.getByRole('button', {name: 'Enable cart for all products'}));
+  const dialog = await screen.findByRole('dialog');
+  expect(within(dialog).getByText('Other page')).toBeInTheDocument();
+  fireEvent.click(within(dialog).getByRole('button', {name: 'Confirm enablement'}));
+  await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+  expect(enable).toHaveBeenCalledWith('all-pages');
+  fireEvent.click(screen.getByRole('button', {name: 'Next'}));
+  expect(await screen.findByRole('switch', {name: 'Allow adding to cart Other page'})).toBeChecked();
 });

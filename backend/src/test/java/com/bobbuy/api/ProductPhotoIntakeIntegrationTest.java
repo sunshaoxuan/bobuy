@@ -59,8 +59,23 @@ class ProductPhotoIntakeIntegrationTest {
  ObjectNode input(){var x=json.createObjectNode();x.put("revision",7);x.put("itemNumber",item);x.put("productId",product.getId());x.put("productVersion",product.getRecordVersion());x.put("identityConfirmed",true);x.put("priceConfirmed",true);x.put("amount",999);x.put("currency","JPY");x.put("unit","80 × 2");x.put("inStock",true);x.put("observedAt",Instant.now().minusSeconds(60).toString());return x;}
  JsonNode confirm(String id,ObjectNode x,String token)throws Exception{return json.readTree(mvc.perform(post("/api/product-photo-intake/"+id+"/confirm").header("Authorization","Bearer "+token).contentType(MediaType.APPLICATION_JSON).content(x.toString())).andExpect(status().isOk()).andReturn().getResponse().getContentAsByteArray()).path("data");}
  JsonNode review(String id)throws Exception{return json.readTree(mvc.perform(get("/api/product-photo-intake/"+id).header("Authorization","Bearer "+auth)).andExpect(status().isOk()).andReturn().getResponse().getContentAsByteArray()).path("data");}
+ @Test void photoQueueFindsExistingPhotosAndReflectsConfirmationForTheirOwner()throws Exception{
+  String another=makeJob(String.valueOf(Long.parseLong(item)+1));
+  mvc.perform(get("/api/product-photo-intake").header("Authorization","Bearer "+auth))
+   .andExpect(status().isOk()).andExpect(jsonPath("$.data[*].id",org.hamcrest.Matchers.hasItems(job,another)))
+   .andExpect(jsonPath("$.data[?(@.id == '"+job+"')].reviewReady",org.hamcrest.Matchers.contains(true)));
+  mvc.perform(get("/api/product-photo-intake").header("Authorization","Bearer "+foreign))
+   .andExpect(status().isOk()).andExpect(jsonPath("$.data").isEmpty());
+  mvc.perform(get("/api/product-photo-intake").header("Authorization","Bearer "+customer))
+   .andExpect(status().isForbidden());
+  confirm(job,input(),auth);
+  mvc.perform(get("/api/product-photo-intake").header("Authorization","Bearer "+auth))
+   .andExpect(status().isOk()).andExpect(jsonPath("$.data[?(@.id == '"+job+"')].state",org.hamcrest.Matchers.contains("COMPLETED")));
+ }
  @Test @EnabledIfEnvironmentVariable(named="BOBBUY_PHOTO_LIVE_TEST", matches="true")
  void livePhotoMatchesAndUpdatesObservation() throws Exception {
+  categories.saveAndFlush(new CategoryTreeNode("photo-live-frozen-seafood",null,
+    Map.of("ja-JP","冷凍魚介類"),List.of("photo-live-frozen-seafood"),0,null));
   product.setItemNumber("53432");
   product.setName(Map.of("ja-JP","生食用シーフードミックス"));
   product.setCatalogData(new ProductCatalogData(Map.of("ja-JP","1 kg"),null,"1 kg",List.of(),supplier,null,null,null));
@@ -75,6 +90,10 @@ class ProductPhotoIntakeIntegrationTest {
   assertThat(matched.path("sources").findValuesAsText("fetchedUrl"))
     .anyMatch(url->url.contains("/Frozen-Mixed-Seafood-1kg/p/53432"));
   assertThat(matched.path("candidate").path("specification").asText()).contains("18");
+  assertThat(matched.path("archiveDetails").path("descriptionJa").asText()).isNotBlank();
+  assertThat(matched.path("archiveDetails").path("storageCondition").asText()).isEqualTo("FROZEN");
+  assertThat(matched.path("archiveDetails").path("categoryNodeId").asText()).isEqualTo("photo-live-frozen-seafood");
+  System.out.println("LIVE PHOTO archive description, category and frozen storage suggestions reached review");
   System.out.println("LIVE PHOTO official Costco exact-item document verified; frozen storage recovered");
   assertThat(matched.path("officialImageAvailable").asBoolean()).isTrue();
   mvc.perform(get("/api/product-photo-intake/"+matched.path("jobId").asText()+"/official-image")
@@ -108,7 +127,11 @@ class ProductPhotoIntakeIntegrationTest {
   assertThat(specification.replace(" ","")).containsAnyOf("1000g","1kg");
   draft.putObject("specification").put("ja-JP",specification);
   draft.set("brand",candidate.path("brand"));
-  draft.putNull("categoryNodeId");
+  var fields=fresh.path("archiveDetails");
+  String description=fields.path("descriptionJa").asText("");
+  if(!description.isBlank())draft.putObject("description").put("ja-JP",description);
+  draft.put("categoryNodeId",fields.path("categoryNodeId").asText(null));
+  draft.put("storageCondition",fields.path("storageCondition").asText(null));
   var created=confirm(fresh.path("jobId").asText(),creation,auth);
   assertThat(created.path("amount").decimalValue()).isEqualByComparingTo("798");
   var reopened=products.findById(created.path("productId").asText()).orElseThrow();
@@ -116,6 +139,8 @@ class ProductPhotoIntakeIntegrationTest {
   assertThat(reopened.getSale()).isNull();
   assertThat(reopened.getName().get("ja-JP")).contains("抹茶");
   assertThat(reopened.getCatalogData().specification()).containsEntry("ja-JP",specification);
+  if(!description.isBlank())assertThat(reopened.getDescription()).containsEntry("ja-JP",description);
+  if(fields.hasNonNull("storageCondition"))assertThat(reopened.getStorageCondition().name()).isEqualTo(fields.path("storageCondition").asText());
   assertThat(products.findAllByMerchantIdAndItemNumber(1000L,"93963")).hasSize(1);
   assertThat(review(fresh.path("jobId").asText()).path("saved")).isEqualTo(created);
   System.out.println("LIVE PHOTO new item 93963 created privately and reopened");

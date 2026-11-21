@@ -1,6 +1,9 @@
 package com.bobbuy.service;
 
 import com.bobbuy.model.CostcoOnboardingJob;
+import com.bobbuy.model.CategoryTreeNode;
+import com.bobbuy.model.StorageCondition;
+import com.bobbuy.repository.CategoryTreeNodeRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import java.net.URI;
@@ -39,6 +42,27 @@ class CostcoPinnedStageReviewerTest {
         assertEquals(1,gateway.images.size());assertTrue(intake.trace().imageViewHashes().containsKey(hash));
         var image=new CostcoOfficialEvidence("image",PAGE,URI.create("https://images.costco.co.jp/item.png"),hash,Instant.parse("2026-11-09T01:00:00Z"),"image/png",4,4,List.of());
         var decision=reviewer.review(Stage.IMAGE_SOURCE,job(List.of(document(store),image),List.of(),null));assertEquals(1,gateway.images.size());assertTrue(decision.trace().imageViewHashes().containsKey(hash));
+    }
+    @Test void photoArchiveDetailsUseKnownLeafCategoriesAndSupportedStorage()throws Exception{
+        var gateway=new FakeGateway();var store=new Store();byte[] bytes=png();
+        String hash=CostcoPinnedStageReviewer.digest(bytes);store.contents.put(hash,bytes);
+        var categories=org.mockito.Mockito.mock(CategoryTreeNodeRepository.class);
+        var root=new CategoryTreeNode("food",null,Map.of("ja-JP","食品"),List.of("food"),0,null);
+        var leaf=new CategoryTreeNode("frozen","food",Map.of("ja-JP","冷凍食品"),List.of("food","frozen"),0,null);
+        org.mockito.Mockito.when(categories.findAll()).thenReturn(List.of(root,leaf));
+        var reviewer=new CostcoPinnedStageReviewer(gateway,mapper,store,null,categories);
+        var candidate=new Candidate("00123",null,"試験食品",null,null,null,null,Map.of(),List.of());
+        var reply=mapper.valueToTree(Map.of("verdict","ACCEPT","reason","Fixture","identifiedItemNumber","00123","candidate",candidate));
+        var details=((com.fasterxml.jackson.databind.node.ObjectNode)reply.path("candidate")).putObject("archiveDetails");
+        details.put("descriptionJa","冷凍食品").put("categoryNodeId","frozen").put("storageCondition","FROZEN");
+        gateway.answer=reply.toString();
+        var result=reviewer.review(Stage.INTAKE,job(List.of(),List.of(),hash));
+        assertEquals(new ArchiveDetails("冷凍食品","frozen",StorageCondition.FROZEN),result.candidate().archiveDetails());
+        assertTrue(gateway.prompt.contains("食品 / 冷凍食品"));
+        details.put("categoryNodeId","food").put("storageCondition","ULTRA_COLD");
+        gateway.answer=reply.toString();
+        assertEquals(new ArchiveDetails("冷凍食品",null,null),
+                reviewer.review(Stage.INTAKE,job(List.of(),List.of(),hash)).candidate().archiveDetails());
     }
     @Test void wrongBytesAndPrivilegeFieldsNeverReachAcceptedDecision(){
         var badStore=new Store();var badDoc=document(badStore);badStore.contents.put(badDoc.sha256(),new byte[]{9});var gateway=new FakeGateway();

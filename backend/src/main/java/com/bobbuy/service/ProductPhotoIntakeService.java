@@ -20,7 +20,7 @@ public class ProductPhotoIntakeService {
         boolean inStock,boolean priceChanged,Instant observedAt,Instant confirmedAt) {}
     public record Review(String jobId,long revision,String supplierId,String market,String itemNumber,String status,
         CostcoOnboardingDecision.Candidate candidate,CostcoOnboardingDecision.PhotoFacts photoFacts,List<Match> matches,
-        List<Observation> history,Observation saved,List<CostcoOfficialEvidence> sources,boolean officialImageAvailable) {}
+        List<Observation> history,Observation saved,List<CostcoOfficialEvidence> sources,boolean officialImageAvailable,CostcoOnboardingDecision.ArchiveDetails archiveDetails) {}
     public record Confirm(long revision,String itemNumber,String productId,Long productVersion,String previousId,
         boolean identityConfirmed,boolean priceConfirmed,BigDecimal amount,String currency,String unit,String conditions,
         boolean inStock,Instant observedAt,ManualProductCreationService.Input product,String model,String packaging,boolean useOfficialImage) {}
@@ -50,10 +50,23 @@ public class ProductPhotoIntakeService {
         long owner=owner();var j=job(id,owner);String item=corrected==null?j.itemNumber():CostcoNumberOnboardingService.normalizeItemNumber(corrected);
         var matches=item==null?List.<Product>of():candidates(j,item);
         String status=item==null?"IDENTITY_REQUIRED":products.deletedCodeCount(owner,item)>0?"DELETED":matches.isEmpty()?"NEW":matches.size()==1&&eligible(matches.get(0),j)?"MATCH":"SELECT";
-        var candidate=j.decisions().stream().filter(d->d.candidate()!=null).reduce((a,b)->b).map(CostcoOnboardingDecision::candidate).orElse(null);
+        var candidate=j.decisions().stream().map(CostcoOnboardingDecision::candidate).filter(Objects::nonNull)
+                .filter(c->item==null||item.equals(c.itemNumber())).reduce((a,b)->b).orElse(null);
         // Photo prices always come from the intake pixels, never a later online-source suggestion.
         var facts=j.decisions().stream().filter(d->d.stage()==CostcoOnboardingDecision.Stage.INTAKE&&d.candidate()!=null).map(d->d.candidate().photoFacts()).filter(Objects::nonNull).findFirst().orElse(null);
-        return new Review(id,j.revision(),j.supplierId(),j.market(),item,status,candidate,facts,matches.stream().map(p->new Match(p.getId(),p.getRecordVersion(),p.getName(),p.getCatalogData()==null?Map.of():p.getCatalogData().specification(),p.getCatalogData()==null?null:p.getCatalogData().packaging(),eligible(p,j))).toList(),matches.stream().flatMap(p->history(owner,p.getId(),j.supplierId(),j.market()).stream()).toList(),saved(id,owner),j.evidence(),officialSource(j,item).isPresent());
+        return new Review(id,j.revision(),j.supplierId(),j.market(),item,status,candidate,facts,matches.stream().map(p->new Match(p.getId(),p.getRecordVersion(),p.getName(),p.getCatalogData()==null?Map.of():p.getCatalogData().specification(),p.getCatalogData()==null?null:p.getCatalogData().packaging(),eligible(p,j))).toList(),matches.stream().flatMap(p->history(owner,p.getId(),j.supplierId(),j.market()).stream()).toList(),saved(id,owner),j.evidence(),officialSource(j,item).isPresent(),archiveDetails(j,item));
+    }
+    private CostcoOnboardingDecision.ArchiveDetails archiveDetails(CostcoOnboardingJob job,String item){
+        if(item==null||!item.equals(job.itemNumber()))return null;
+        return job.decisions().stream().filter(d->d.stage()==CostcoOnboardingDecision.Stage.INTAKE
+                        ||d.stage()==CostcoOnboardingDecision.Stage.FACTS&&d.verdict()==CostcoOnboardingDecision.Verdict.ACCEPT)
+                .map(CostcoOnboardingDecision::candidate).filter(c->c!=null&&item.equals(c.itemNumber()))
+                .map(CostcoOnboardingDecision.Candidate::archiveDetails).filter(Objects::nonNull)
+                .reduce((photo,official)->new CostcoOnboardingDecision.ArchiveDetails(
+                        official.descriptionJa()!=null?official.descriptionJa():photo.descriptionJa(),
+                        official.categoryNodeId()!=null?official.categoryNodeId():photo.categoryNodeId(),
+                        official.storageCondition()!=null?official.storageCondition():photo.storageCondition()))
+                .orElse(null);
     }
     private Optional<CostcoOfficialEvidence> officialSource(CostcoOnboardingJob j,String item){
         if(item==null||!item.equals(j.itemNumber()))return Optional.empty();
