@@ -1,0 +1,24 @@
+[
+  {
+    "width": 390,
+    "chooserCount": 4,
+    "uploads": 2,
+    "defaultSource": "https://example.org/official/synthetic-next",
+    "coverSource": "https://example.org/official/synthetic-first",
+    "archiveInterruptions": [
+      "/127.0.0.1:5198/api/merchant/product-archive?page=0&query= due to access control checks."
+    ],
+    "errors": []
+  },
+  {
+    "width": 1280,
+    "chooserCount": 4,
+    "uploads": 2,
+    "defaultSource": "https://example.org/official/synthetic-next",
+    "coverSource": "https://example.org/official/synthetic-first",
+    "archiveInterruptions": [
+      "/127.0.0.1:5198/api/merchant/product-archive?page=0&query= due to access control checks."
+    ],
+    "errors": []
+  }
+]

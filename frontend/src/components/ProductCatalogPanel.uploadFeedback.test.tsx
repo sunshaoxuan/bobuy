@@ -16,7 +16,7 @@ function file(name:string,tail=1){const bytes=new Uint8Array([137,80,78,71,13,10
 function picture(name:string,sha:string){return {url:'/api/storefront/recommendation-images/'+name,type:'IMAGE',title:{'ja-JP':name},visible:true,sha256:sha,sourceUrl:'https://manufacturer.example/product'};}
 const input=()=>screen.getByLabelText('Select verified official image files') as HTMLInputElement;
 async function openMedia(){await screen.findByDisplayValue('SKU-P1');fireEvent.click(screen.getByRole('tab',{name:'Images & sources'}));}
-function select(files:File[]){const group=document.querySelector('.catalog-upload-group')!;const source=within(group as HTMLElement).getByRole('textbox');fireEvent.change(source,{target:{value:'https://manufacturer.example/product'}});const review=within(group as HTMLElement).getByRole('checkbox') as HTMLInputElement;if(!review.checked)fireEvent.click(review);const element=input();Object.defineProperty(element,'value',{value:'C:\\fakepath\\'+files[0].name,writable:true,configurable:true});fireEvent.change(element,{target:{files}});return element;}
+function select(files:File[]){const group=document.querySelector('.catalog-upload-group')!;const source=within(group as HTMLElement).getByLabelText('Default official image source');fireEvent.change(source,{target:{value:'https://manufacturer.example/product'}});const review=within(group as HTMLElement).getByRole('checkbox') as HTMLInputElement;if(!review.checked)fireEvent.click(review);const element=input();Object.defineProperty(element,'value',{value:'C:\\fakepath\\'+files[0].name,writable:true,configurable:true});fireEvent.change(element,{target:{files}});fireEvent.click(screen.getByRole('button',{name:'Upload selected images'}));return element;}
 beforeEach(()=>{vi.clearAllMocks();localStorage.clear();localStorage.setItem('bobbuy_locale','en-US');vi.stubGlobal('crypto',{subtle:webcrypto.subtle,randomUUID:()=> '00000000-0000-0000-0000-000000000001'});mock.get.mockImplementation(async(id:string)=>({value:{...value,productId:id,itemNumber:id==='p1'?'SKU-P1':'SKU-P2'},canonical:true,sourceItemIds:[]}));mock.options.mockResolvedValue({categories:[],suppliers:[]});tree.list.mockResolvedValue([]);tree.product.mockResolvedValue({productId:'p1',categoryNodeId:null});tree.assign.mockResolvedValue({productId:'p1',categoryNodeId:null});mock.preview.mockImplementation(async rows=>rows.map((v:any)=>({value:v,changes:[],warnings:[]})));mock.save.mockRejectedValue(new Error('master.conflict'));});
 afterEach(()=>{vi.unstubAllGlobals();});
 it('suppresses a bulk save callback after the editor has unmounted',async()=>{
@@ -32,10 +32,26 @@ it('suppresses a bulk save callback after the editor has unmounted',async()=>{
  await act(async()=>{finish([{value:{...value,version:8},canonical:true}]);await new Promise(resolve=>setTimeout(resolve,0));});
  expect(onSaved).not.toHaveBeenCalled();
 });
+it('opens the picker once per add action even before source review, including after cancel',async()=>{
+ render(<I18nProvider><ProductCatalogPanel id="p1" entries={[]} onChoose={vi.fn()} onSaved={vi.fn()}/></I18nProvider>);
+ await openMedia();
+ const picker=input();
+ const open=vi.spyOn(picker,'click').mockImplementation(()=>{});
+ const add=screen.getByRole('button',{name:'Add images'});
+ fireEvent.click(add);
+ expect(open).toHaveBeenCalledOnce();
+ fireEvent.change(picker,{target:{files:[]}});
+ fireEvent.click(add);
+ expect(open).toHaveBeenCalledTimes(2);
+ fireEvent.change(picker,{target:{files:[file('unreviewed.png').file]}});
+ expect(screen.getByText('unreviewed.png')).toBeInTheDocument();
+ expect(screen.getByRole('button',{name:'Upload selected images'})).toBeDisabled();
+ expect(mock.upload).not.toHaveBeenCalled();
+});
 it('first-file failure remains visible and clears the picker so the same file can be chosen again',async()=>{
  const a=file('first.png');mock.upload.mockRejectedValueOnce(new Error('gallery.invalid')).mockResolvedValueOnce(picture('asset-first',a.sha));
  render(<I18nProvider><ProductCatalogPanel id="p1" entries={[]} onChoose={vi.fn()} onSaved={vi.fn()}/></I18nProvider>);await openMedia();const picker=select([a.file]);
- expect(screen.getAllByRole('button',{name:/Select verified official image files/})).toHaveLength(1);
+ expect(screen.getAllByRole('button',{name:/Add images/})).toHaveLength(1);
  await waitFor(()=>expect(mock.upload,screen.queryByRole('list',{name:'Image upload status'})?.textContent??'No upload status').toHaveBeenCalledTimes(1));await waitFor(()=>expect(picker.value).toBe(''));
  expect(screen.getByRole('list',{name:'Image upload status'})).toHaveTextContent('first.png');expect(screen.getByRole('list',{name:'Image upload status'})).toHaveTextContent('Failed');
  select([a.file]);await waitFor(()=>expect(mock.upload).toHaveBeenCalledTimes(2));await waitFor(()=>expect(document.querySelector('img[src="/api/storefront/recommendation-images/asset-first"]')).not.toBeNull());expect(mock.save).not.toHaveBeenCalled();
@@ -81,11 +97,11 @@ it('logout and same-user login in one render batch still invalidate the old uplo
  await act(async()=>{clearAuthSession();storeAuthSession({accessToken:'synthetic-after',user});resolve(picture('logged-out-operation',a.sha));});
  await waitFor(()=>expect(mock.get).toHaveBeenCalledTimes(2));expect(document.querySelector('img[src="/api/storefront/recommendation-images/logged-out-operation"]')).toBeNull();expect(screen.queryByRole('list',{name:'Image upload status'})).toBeNull();expect(mock.save).not.toHaveBeenCalled();
 });
-it('a source URL with a query fails visibly before uploading and still clears the captured picker',async()=>{
+it('a source URL with a query blocks uploading and still clears the captured picker',async()=>{
  render(<I18nProvider><ProductCatalogPanel id="p1" entries={[]} onChoose={vi.fn()} onSaved={vi.fn()}/></I18nProvider>);await openMedia();
- const group=document.querySelector('.catalog-upload-group')!;fireEvent.change(within(group as HTMLElement).getByRole('textbox'),{target:{value:'https://manufacturer.example/product?source=search'}});fireEvent.click(within(group as HTMLElement).getByRole('checkbox'));
+ const group=document.querySelector('.catalog-upload-group')!;fireEvent.change(within(group as HTMLElement).getByLabelText('Default official image source'),{target:{value:'https://manufacturer.example/product?source=search'}});fireEvent.click(within(group as HTMLElement).getByRole('checkbox'));
  const picker=input();Object.defineProperty(picker,'value',{value:'C:\\fakepath\\query.png',writable:true,configurable:true});fireEvent.change(picker,{target:{files:[file('query.png').file]}});
- await waitFor(()=>expect(picker.value).toBe(''));expect(mock.upload).not.toHaveBeenCalled();expect(screen.getByRole('list',{name:'Image upload status'})).toHaveTextContent('Failed');expect(mock.save).not.toHaveBeenCalled();
+ await waitFor(()=>expect(picker.value).toBe(''));expect(mock.upload).not.toHaveBeenCalled();expect(screen.getByRole('button',{name:'Upload selected images'})).toBeDisabled();expect(mock.save).not.toHaveBeenCalled();
 });
 it('a late preview cannot start a save under a different principal',async()=>{
  let resolve!:(v:any[])=>void;mock.preview.mockImplementation(()=>new Promise(r=>{resolve=r;}));

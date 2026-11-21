@@ -69,6 +69,12 @@ public class Product {
     private ProductCatalogData catalogData;
     public ProductCatalogData getCatalogData(){return catalogData;}
     public void setCatalogData(ProductCatalogData value){catalogData=value;}
+    @Column(length=2048)
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    private String defaultImageSourceUrl;
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    public String getDefaultImageSourceUrl(){return defaultImageSourceUrl;}
+    public void setDefaultImageSourceUrl(String value){defaultImageSourceUrl=value;}
     private double basePrice;
     @jakarta.persistence.Version
     @com.fasterxml.jackson.annotation.JsonProperty(access=com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY)

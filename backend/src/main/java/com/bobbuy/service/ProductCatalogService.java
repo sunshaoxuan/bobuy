@@ -21,7 +21,12 @@ public class ProductCatalogService {
  public ProductCatalogService(ProductRepository products,RecommendationItemRepository items,RecommendationImageRepository images,
   RecommendationPostRepository posts,UserRepository users,RecommendationTaxonomyService taxonomy,MediaBinaryService binaries,ProductCatalogRecoveryRepository recoveries){this.products=products;this.items=items;this.images=images;this.posts=posts;this.users=users;this.taxonomy=taxonomy;this.binaries=binaries;this.recoveries=recoveries;}
  public record Input(String productId,long version,Map<String,String> name,Map<String,String> description,String itemNumber,String brand,
-  Map<String,String> specification,String model,String packaging,List<String> categoryIds,String supplierId,List<MediaGalleryItem> gallery,boolean translationsReviewed) {}
+  Map<String,String> specification,String model,String packaging,List<String> categoryIds,String supplierId,List<MediaGalleryItem> gallery,boolean translationsReviewed,String defaultImageSourceUrl) {
+  public Input(String productId,long version,Map<String,String> name,Map<String,String> description,String itemNumber,String brand,
+   Map<String,String> specification,String model,String packaging,List<String> categoryIds,String supplierId,List<MediaGalleryItem> gallery,boolean translationsReviewed){
+   this(productId,version,name,description,itemNumber,brand,specification,model,packaging,categoryIds,supplierId,gallery,translationsReviewed,null);
+  }
+ }
  public record Profile(Input value,boolean canonical,List<Long> sourceItemIds,String recoveryId) {public Profile(Input value,boolean canonical,List<Long> sourceItemIds){this(value,canonical,sourceItemIds,null);}}
  public record Proposal(Input value,List<String> changes,List<String> warnings) {}
  public record AuditSource(Long itemId,Long postId,long postVersion,boolean published,String title,String name,String itemNumber,String specification,
@@ -38,10 +43,10 @@ public class ProductCatalogService {
  public static String sourceHash(Product product){var data=product.getCatalogData();return hash(List.of(text(product.getName(),"ja-JP"),text(product.getDescription(),"ja-JP"),data==null?"":text(data.specification(),"ja-JP"),data==null?"":Objects.toString(data.model(),""),data==null?"":Objects.toString(data.packaging(),"")));}
  private static String hash(Object value){try{return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(new com.fasterxml.jackson.databind.ObjectMapper().writeValueAsBytes(value)));}catch(Exception error){throw new IllegalStateException(error);}}
  public static boolean translationsCurrent(Product product){return product.getCatalogData()!=null&&sourceHash(product).equals(product.getCatalogData().translatedSource());}
- private Input input(Product product){var data=product.getCatalogData();return new Input(product.getId(),Objects.requireNonNullElse(product.getRecordVersion(),0L),Map.copyOf(product.getName()),Map.copyOf(product.getDescription()),product.getItemNumber(),product.getBrand(),data==null?Map.of():data.specification(),data==null?null:data.model(),data==null?null:data.packaging(),data==null?(product.getCategoryId()==null?List.of():List.of(product.getCategoryId())):data.categoryIds(),data==null?null:data.supplierId(),List.copyOf(product.getMediaGallery()),translationsCurrent(product));}
+ private Input input(Product product){var data=product.getCatalogData();return new Input(product.getId(),Objects.requireNonNullElse(product.getRecordVersion(),0L),Map.copyOf(product.getName()),Map.copyOf(product.getDescription()),product.getItemNumber(),product.getBrand(),data==null?Map.of():data.specification(),data==null?null:data.model(),data==null?null:data.packaging(),data==null?(product.getCategoryId()==null?List.of():List.of(product.getCategoryId())):data.categoryIds(),data==null?null:data.supplierId(),List.copyOf(product.getMediaGallery()),translationsCurrent(product),product.getDefaultImageSourceUrl());}
  private Profile profile(Product p){var latest=recoveries.findTopByProductIdAndMerchantIdOrderByVersionAfterDesc(p.getId(),owner()).filter(r->Objects.equals(p.getRecordVersion(),r.versionAfter));return new Profile(input(p),p.getCatalogData()!=null,sources(p.getId()).stream().map(i->i.id).toList(),latest.map(r->r.id).orElse(null));}
  @Transactional(readOnly=true) public Profile get(String id){return profile(owned(id,false));}
- private ProductCatalogRecovery checkpoint(Product p,String restoredFrom){var r=new ProductCatalogRecovery();r.id=UUID.randomUUID().toString();r.merchantId=owner();r.productId=p.getId();r.createdAt=Instant.now();r.restoredFromId=restoredFrom;r.original=ProductCatalogRecovery.capture(p,sources(p.getId()).stream().map(i->i.id).toList());return r;}
+ private ProductCatalogRecovery checkpoint(Product p,String restoredFrom){var r=new ProductCatalogRecovery();r.id=UUID.randomUUID().toString();r.merchantId=owner();r.productId=p.getId();r.createdAt=Instant.now();r.restoredFromId=restoredFrom;r.defaultImageSourceUrl=Objects.toString(p.getDefaultImageSourceUrl(),"");r.original=ProductCatalogRecovery.capture(p,sources(p.getId()).stream().map(i->i.id).toList());return r;}
  private void retainCheckpoint(ProductCatalogRecovery r,Product p){r.versionAfter=p.getRecordVersion();recoveries.saveAndFlush(r);}
  @Transactional public Profile restore(String id,String checkpointId,long version,boolean reviewed){
   if(!reviewed)throw invalid("master.review_required");if(checkpointId==null||checkpointId.isBlank()||checkpointId.length()>36)throw invalid("master.conflict");users.lockById(owner()).orElseThrow();var p=owned(id,true);
@@ -91,7 +96,7 @@ public class ProductCatalogService {
   if(source.stream().anyMatch(i->!Objects.equals(i.specification,preferred.specification)||!i.categoryIds.equals(preferred.categoryIds)))warnings.add("master.source_conflict");
   var categories=taxonomy.currentIds(current.categoryIds().isEmpty()?preferred.categoryIds:current.categoryIds(),product.getMerchantId());
   String supplier=current.supplierId()==null?preferred.supplierId:current.supplierId();
-  var candidate=new Input(current.productId(),current.version(),names,descriptions,current.itemNumber()==null?preferred.itemNumber:current.itemNumber(),current.brand(),specifications,current.model(),current.packaging(),categories,supplier,gallery,reviewed||current.translationsReviewed());
+  var candidate=new Input(current.productId(),current.version(),names,descriptions,current.itemNumber()==null?preferred.itemNumber:current.itemNumber(),current.brand(),specifications,current.model(),current.packaging(),categories,supplier,gallery,reviewed||current.translationsReviewed(),current.defaultImageSourceUrl());
   if(!names.equals(current.name()))changes.add("master.names");if(!descriptions.equals(current.description()))changes.add("master.descriptions");
   if(!specifications.equals(current.specification()))changes.add("master.specifications");if(!categories.equals(current.categoryIds()))changes.add("master.categories");if(!Objects.equals(supplier,current.supplierId()))changes.add("master.supplier");
   var mapper=new com.fasterxml.jackson.databind.ObjectMapper();
@@ -103,8 +108,13 @@ public class ProductCatalogService {
   if(values==null||values.size()>4||!Set.of("ja-JP","zh-CN","zh-TW","en-US").containsAll(values.keySet()))throw invalid("master.invalid");
   var result=new HashMap<String,String>();for(var entry:values.entrySet()){if(entry.getValue()==null||entry.getValue().length()>limit)throw invalid("master.invalid");if(!entry.getValue().isBlank())result.put(entry.getKey(),entry.getValue().trim());}return result;
  }
+ private static boolean validImageSource(String source){
+  if(source==null||source.length()>2048||!source.equals(source.strip()))return false;
+  try{var uri=java.net.URI.create(source);return "https".equals(uri.getScheme())&&uri.getHost()!=null&&uri.getRawUserInfo()==null&&uri.getRawQuery()==null&&uri.getRawFragment()==null;}catch(IllegalArgumentException e){return false;}
+ }
  private void validate(Input value,Product product){
   if(value==null||value.categoryIds()==null||value.categoryIds().size()>32||new HashSet<>(value.categoryIds()).size()!=value.categoryIds().size()||value.gallery()==null||value.gallery().size()>100)throw invalid("master.invalid");
+  if(value.defaultImageSourceUrl()!=null&&!value.defaultImageSourceUrl().isEmpty()&&!validImageSource(value.defaultImageSourceUrl()))throw invalid("master.image_source");
   var names=clean(value.name(),400);clean(value.description(),8000);clean(value.specification(),1000);
   String ja=text(names,"ja-JP");if(ja.isBlank())throw invalid("master.japanese_required");
   if(names.entrySet().stream().anyMatch(e->!e.getKey().equals("ja-JP")&&e.getValue().endsWith("（"+ja+"）")))throw invalid("master.pure_name");
@@ -154,6 +164,8 @@ public class ProductCatalogService {
    }
    var recovery=checkpoint(p,null);
    p.setName(clean(value.name(),400));p.setDescription(clean(value.description(),8000));p.setItemNumber(value.itemNumber());p.setBrand(value.brand());p.setCategoryId(value.categoryIds().isEmpty()?null:value.categoryIds().get(0));p.setMediaGallery(new ArrayList<>(value.gallery()));
+   if(!automated&&value.defaultImageSourceUrl()!=null)
+    p.setDefaultImageSourceUrl(value.defaultImageSourceUrl().isEmpty()?null:value.defaultImageSourceUrl());
    p.setCatalogData(new ProductCatalogData(clean(value.specification(),1000),value.model(),value.packaging(),List.copyOf(value.categoryIds()),value.supplierId(),null,automated?null:owner(),automated?null:Instant.now()));
    if(!automated&&value.translationsReviewed()){var d=p.getCatalogData();p.setCatalogData(new ProductCatalogData(d.specification(),d.model(),d.packaging(),d.categoryIds(),d.supplierId(),sourceHash(p),d.reviewedBy(),d.reviewedAt()));}
    products.saveAndFlush(p);retainCheckpoint(recovery,p);result.add(profile(p));

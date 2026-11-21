@@ -72,6 +72,40 @@ class ProductCatalogIntegrationTest {
   String prefix="/api/storefront/recommendation-images/",url=result.path("url").asText();assertThat(url).startsWith(prefix);String imageId=url.substring(prefix.length());assertThat(before).doesNotContain(imageId);uploadedImageIds.add(imageId);
   assertThat(result.path("sha256").asText()).matches("[0-9a-f]{64}");return result;
  }
+ @Test void savesDefaultSourceWithoutImagesThenPublishesTheFirstApprovedImageWithoutRewritingSources()throws Exception{
+  var product=products.findById(id).orElseThrow();
+  product.setMediaGallery(new ArrayList<>());product.setName(Map.of("ja-JP","合成商品"));
+  product.setVisibilityStatus(ProductVisibility.PUBLIC);products.saveAndFlush(product);
+  String path="/api/merchant/product-catalog/"+id;
+  String originalSource="https://www.costco.co.jp/product/000123";
+  var draft=(ObjectNode)data(mvc.perform(get(path).header("Authorization","Bearer "+admin))).get("value");
+  draft.put("defaultImageSourceUrl",originalSource+"?tracking=1");
+  request("PUT",Map.of("rows",List.of(draft),"reviewed",true),admin).andExpect(status().isBadRequest());
+  draft.put("defaultImageSourceUrl",originalSource);
+  request("PUT",Map.of("rows",List.of(draft),"reviewed",true),other).andExpect(status().isNotFound());
+  data(request("PUT",Map.of("rows",List.of(draft),"reviewed",true),admin));
+  var reopened=(ObjectNode)data(mvc.perform(get(path).header("Authorization","Bearer "+admin))).get("value");
+  assertThat(reopened.path("defaultImageSourceUrl").asText()).isEqualTo(originalSource);
+  assertThat(reopened.path("gallery")).isEmpty();
+  request("PUT",Map.of("rows",List.of(draft),"reviewed",true),admin).andExpect(status().isBadRequest());
+  var uploaded=verifiedPicture();
+  reopened.putArray("gallery").add(uploaded);
+  data(request("PUT",Map.of("rows",List.of(reopened),"reviewed",true),admin));
+  var withCover=(ObjectNode)data(mvc.perform(get(path).header("Authorization","Bearer "+admin))).get("value");
+  assertThat(withCover.at("/gallery/0/url").asText()).isEqualTo(uploaded.path("url").asText());
+  assertThat(withCover.at("/gallery/0/sourceUrl").asText()).isEqualTo(originalSource);
+  withCover.put("defaultImageSourceUrl","https://example.org/subsequent");
+  data(request("PUT",Map.of("rows",List.of(withCover),"reviewed",true),admin));
+  var saved=products.findById(id).orElseThrow();
+  assertThat(saved.getVisibilityStatus()).isEqualTo(ProductVisibility.PUBLIC);
+  assertThat(saved.getMediaGallery().get(0).getSourceUrl()).isEqualTo(originalSource);
+  var changed=data(mvc.perform(get(path).header("Authorization","Bearer "+admin)));
+  var restored=data(mvc.perform(post(path+"/restore").header("Authorization","Bearer "+admin)
+    .contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsString(Map.of(
+      "checkpointId",changed.path("recoveryId").asText(),"version",changed.at("/value/version").asLong(),"reviewed",true)))));
+  assertThat(restored.at("/value/defaultImageSourceUrl").asText()).isEqualTo(originalSource);
+  assertThat(restored.at("/value/gallery/0/sourceUrl").asText()).isEqualTo(originalSource);
+ }
  @Test void explicitReviewedSaveProjectsMasterWithoutChangingSourceOffersOrSale()throws Exception{
   assertThat(feed(0).get("name").asText()).isEqualTo("日本の商品");
   var row=proposal();assertThat(row.at("/name/zh-CN").asText()).isEqualTo("中文商品");assertThat(row.at("/name/zh-TW").asText()).isEqualTo("中文商品繁體");assertThat(row.at("/specification/ja-JP").asText()).isEqualTo("2個入");
