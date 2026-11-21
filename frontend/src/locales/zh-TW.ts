@@ -918,6 +918,8 @@ const messages: Dictionary = {
   "stock.item.storage_hint": "儲存提示",
   "stock.storage.ambient": "常溫",
   "stock.storage.chilled": "冷藏",
+  "stock.storage.fresh": "生鮮",
+  "stock.storage.frozen": "冷凍",
   "stock.order.pre_order": "預購",
   "stock.order.direct_buy": "直送",
   "stock.merchant_codes.merchant": "商家/供應商",

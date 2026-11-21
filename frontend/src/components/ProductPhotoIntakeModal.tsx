@@ -1,6 +1,6 @@
 import {useEffect,useRef,useState} from 'react';
 import {Alert,Button,Checkbox,Input,Modal,Select,Space,Typography} from 'antd';
-import {api,categoryTreeApi,masterDataApi,photoIntakeApi,type CategoryTreeNode,type CostcoOnboardingJobView,type MobileSupplier,type PhotoReview} from '../api';
+import {api,categoryTreeApi,masterDataApi,photoIntakeApi,type CategoryTreeNode,type CostcoOnboardingJobView,type MobileSupplier,type PhotoReview,type PhotoStorageCondition} from '../api';
 import {prepareProductPhotoUpload} from '../productPhotoUpload';
 import {useI18n} from '../i18n';
 import CategoryTreePicker from './CategoryTreePicker';
@@ -8,6 +8,7 @@ import './productPhotoIntake.css';
 
 type Props={open:boolean;job?:CostcoOnboardingJobView;onClose:()=>void;onQueued:(job:CostcoOnboardingJobView)=>void;onSaved:(id:string)=>void;onConfirmed?:()=>void};
 const terminal=(j:CostcoOnboardingJobView)=>['NEEDS_INPUT','FAILED','COMPLETED','CANCELLED'].includes(j.state);
+const storageOptions=['AMBIENT','FRESH','CHILLED','FROZEN'] as const;
 export default function ProductPhotoIntakeModal({open,job:initial,onClose,onQueued,onSaved,onConfirmed}:Props){
  const{t,locale}=useI18n();const generation=useRef(0),pickGeneration=useRef(0),upload=useRef<HTMLInputElement>(null),camera=useRef<HTMLInputElement>(null);
  const[suppliers,setSuppliers]=useState<MobileSupplier[]>([]),[supplier,setSupplier]=useState(''),[supplierError,setSupplierError]=useState(false),[suppliersLoaded,setSuppliersLoaded]=useState(false);
@@ -20,8 +21,15 @@ export default function ProductPhotoIntakeModal({open,job:initial,onClose,onQueu
  const[observedAt,setObservedAt]=useState(()=>new Date().toISOString().slice(0,16)),[saved,setSaved]=useState<PhotoReview['saved']>(null);
  const[officialPreview,setOfficialPreview]=useState(''),[useOfficialImage,setUseOfficialImage]=useState(false);
  const frozen=useRef<object>();
+ const[storageCondition,setStorageCondition]=useState<PhotoStorageCondition|null>(null);
+ const archiveDraft=useRef<{item:string|null;edited:Set<'description'|'category'|'storage'>}>({item:null,edited:new Set()});
  const applyReview=(r:PhotoReview)=>{setReview(r);setItem(r.itemNumber||'');setSupplier(r.supplierId);setSelected(r.status==='MATCH'?r.matches[0].id:'');setSaved(r.saved);setIdentity(false);setPriceConfirmed(false);setUseOfficialImage(false);frozen.current=undefined;
   const c=r.candidate;setNames(c?.translatedNames||{});setSpec(c?.specification||'');setBrand(c?.brand||'');setModel(c?.model||'');setPackaging(c?.packaging||'');
+  if(archiveDraft.current.item!==r.itemNumber)archiveDraft.current={item:r.itemNumber,edited:new Set()};
+  const {edited}=archiveDraft.current;
+  if(!edited.has('description'))setDescription(r.archiveDetails?.descriptionJa??'');
+  if(!edited.has('category'))setCategory(r.archiveDetails?.categoryNodeId??null);
+  if(!edited.has('storage'))setStorageCondition(r.archiveDetails?.storageCondition??null);
   const p=r.photoFacts;setAmount(p?.priceKind==='WAREHOUSE'&&p.amount!=null?String(p.amount):'');setCurrency(p?.currency||'');setUnit(p?.unit||'');setConditions(p?.conditions||'');setInStock(false);
  };
  const loadSuppliers=async()=>{const g=generation.current;setSupplierError(false);try{const rows=await api.suppliers();if(g!==generation.current)return;setSuppliers(rows);setSuppliersLoaded(true);if(rows.length===1)setSupplier(rows[0].id);}catch{if(g===generation.current){setSupplierError(true);setSuppliersLoaded(true);}}};
@@ -39,14 +47,14 @@ export default function ProductPhotoIntakeModal({open,job:initial,onClose,onQueu
   void read();return()=>{disposed=true;clearTimeout(timer);};
  },[open,job?.id,pollAttempt]);
  const reset=()=>{generation.current++;setBusy(false);setJob(undefined);setReview(undefined);setSaved(null);setError('');setIdentity(false);setPriceConfirmed(false);setInStock(false);setRequestId(crypto.randomUUID());frozen.current=undefined;};
- const pick=async(f?:File)=>{if(!f)return;const g=generation.current,pick=++pickGeneration.current;try{const prepared=await prepareProductPhotoUpload(f);if(g!==generation.current||pick!==pickGeneration.current)return;reset();setDescription('');setCategory(null);setFile(prepared);setPreview(URL.createObjectURL(prepared));}catch(e){if(g===generation.current&&pick===pickGeneration.current)setError(t((e as Error).message));}};
+ const pick=async(f?:File)=>{if(!f)return;const g=generation.current,pick=++pickGeneration.current;try{const prepared=await prepareProductPhotoUpload(f);if(g!==generation.current||pick!==pickGeneration.current)return;reset();archiveDraft.current={item:null,edited:new Set()};setDescription('');setCategory(null);setStorageCondition(null);setFile(prepared);setPreview(URL.createObjectURL(prepared));}catch(e){if(g===generation.current&&pick===pickGeneration.current)setError(t((e as Error).message));}};
  const start=async()=>{if(!file)return;const g=generation.current;setBusy(true);setError('');try{const next=await api.costcoOnboarding.photo({requestId,supplierId:supplier,market:'JP'},file);if(g!==generation.current)return;setJob(next);onQueued(next);}catch(e){if(g===generation.current)setError(t((e as Error).message));}finally{if(g===generation.current)setBusy(false);}};
  const reload=async()=>{if(!job)return;if(!terminal(job)){setError('');setPollAttempt(n=>n+1);return;}const g=generation.current;setBusy(true);try{const r=await photoIntakeApi.review(job.id,item);if(g===generation.current){applyReview(r);setError('');}}catch(e){if(g===generation.current)setError(t((e as Error).message));}finally{if(g===generation.current)setBusy(false);}};
  const edit=()=>{frozen.current=undefined;};
  const chosen=review?.matches.find(m=>m.id===selected),isNew=review?.status==='NEW';
  const missing=!identity?t('photo.identity_confirm'):!isNew&&!chosen?.eligible?t('photo.choose_match'):isNew&&!names['ja-JP']?.trim()?t('master.japanese_required'):amount&&(!priceConfirmed||!currency||!unit.trim())?t('photo.price_confirm'):!amount&&!inStock?t('photo.observation_required'):'';
  const save=async()=>{if(!job||!review||missing)return;const g=generation.current;setBusy(true);setError('');try{
-  const input=frozen.current??{revision:review.revision,itemNumber:review.itemNumber,productId:isNew?null:selected,productVersion:chosen?.version??null,previousId:review.history.find(o=>o.productId===selected)?.id??null,identityConfirmed:identity,priceConfirmed,amount:amount||null,currency:currency||null,unit:unit||null,conditions,inStock,observedAt:new Date(observedAt+'Z').toISOString(),model,packaging,useOfficialImage,product:isNew?{requestId:job.id,name:names,specification:{'ja-JP':spec},brand,description:{'ja-JP':description},categoryNodeId:category}:null};frozen.current=input;
+  const input=frozen.current??{revision:review.revision,itemNumber:review.itemNumber,productId:isNew?null:selected,productVersion:chosen?.version??null,previousId:review.history.find(o=>o.productId===selected)?.id??null,identityConfirmed:identity,priceConfirmed,amount:amount||null,currency:currency||null,unit:unit||null,conditions,inStock,observedAt:new Date(observedAt+'Z').toISOString(),model,packaging,useOfficialImage,product:isNew?{requestId:job.id,name:names,specification:{'ja-JP':spec},brand,description:{'ja-JP':description},categoryNodeId:category,storageCondition}:null};frozen.current=input;
   const receipt=await photoIntakeApi.confirm(job.id,input);if(g!==generation.current)return;setSaved(receipt);onConfirmed?.();
  }catch(e){if(g===generation.current)setError(t((e as Error).message));}finally{if(g===generation.current)setBusy(false);}};
  const latest=review?.history.find(o=>o.productId===selected&&o.amount!=null&&o.currency===currency&&o.unit===unit);
@@ -72,7 +80,10 @@ export default function ProductPhotoIntakeModal({open,job:initial,onClose,onQueu
    {review.status==='DELETED'||review.status==='IDENTITY_REQUIRED'?<Alert type="warning" message={t(review.status==='DELETED'?'photo.deleted':'photo.identity_required')}/>:<>
     {!isNew&&<><label>{t('photo.choose_match')}<Select aria-label={t('photo.choose_match')} value={selected||undefined} options={review.matches.map(m=>({value:m.id,label:(m.name[locale]||m.name['ja-JP'])+' · '+Object.values(m.specification||{}).join(' / ')+' · '+(m.packaging||''),disabled:!m.eligible}))} onChange={id=>{setSelected(id);setIdentity(false);edit();}}/></label>{review.matches.some(m=>!m.eligible)&&<Alert type="warning" message={t('photo.legacy')}/>}</>}
     {isNew&&<><Typography.Title level={5}>{t('photo.new')}</Typography.Title>{['ja-JP','zh-CN','zh-TW','en-US'].map(l=><label key={l}>{t('onboarding.name')} ({l})<Input value={names[l]||''} onChange={e=>{setNames({...names,[l]:e.target.value});edit();}}/></label>)}
-     <label>{t('onboarding.brand')}<Input value={brand} onChange={e=>{setBrand(e.target.value);edit();}}/></label><label>{t('onboarding.model')}<Input value={model} onChange={e=>{setModel(e.target.value);edit();}}/></label><label>{t('onboarding.specification')}<Input value={spec} onChange={e=>{setSpec(e.target.value);edit();}}/></label><label>{t('onboarding.packaging')}<Input value={packaging} onChange={e=>{setPackaging(e.target.value);edit();}}/></label><label>{t('photo.description')}<Input.TextArea value={description} onChange={e=>{setDescription(e.target.value);edit();}}/></label><CategoryTreePicker nodes={tree} value={category} onChange={c=>{setCategory(c);edit();}}/></>}
+     <label>{t('onboarding.brand')}<Input value={brand} onChange={e=>{setBrand(e.target.value);edit();}}/></label><label>{t('onboarding.model')}<Input value={model} onChange={e=>{setModel(e.target.value);edit();}}/></label><label>{t('onboarding.specification')}<Input value={spec} onChange={e=>{setSpec(e.target.value);edit();}}/></label><label>{t('onboarding.packaging')}<Input value={packaging} onChange={e=>{setPackaging(e.target.value);edit();}}/></label>
+     <label>{t('photo.description')}<Input.TextArea value={description} onChange={e=>{archiveDraft.current.edited.add('description');setDescription(e.target.value);edit();}}/></label>
+     <CategoryTreePicker nodes={tree} value={category} onChange={c=>{archiveDraft.current.edited.add('category');setCategory(c);edit();}}/>
+     <label>{t('stock.item.storage_condition')}<Select aria-label={t('stock.item.storage_condition')} value={storageCondition??undefined} allowClear placeholder={t('photo.unknown')} options={storageOptions.map(value=>({value,label:t('stock.storage.'+value.toLowerCase())}))} onChange={(value:PhotoStorageCondition|undefined)=>{archiveDraft.current.edited.add('storage');setStorageCondition(value??null);edit();}}/></label></>}
     <Checkbox checked={identity} disabled={item!==review.itemNumber} onChange={e=>{setIdentity(e.target.checked);edit();}}>{t('photo.identity_confirm')}</Checkbox>
     <Typography.Title level={5}>{t('photo.price')}</Typography.Title>
     <p>{t('photo.previous')}: {latest?`${latest.amount} ${latest.currency} / ${latest.unit}`:t('photo.unknown')}{latest&&amount&&<span> · {t('photo.difference')}: {Number(amount)-Number(latest.amount)}</span>}</p>
