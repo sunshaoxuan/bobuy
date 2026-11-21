@@ -82,6 +82,28 @@ public class ProductPhotoIntakeService {
         return RecommendationImageValidator.validate(evidence.readVerified(owner,source.sha256()));
     }
     @Transactional(readOnly=true) public List<Observation> productHistory(String product){long owner=owner();if(!products.existsByIdAndMerchantId(product,owner))throw new ApiException(ErrorCode.RESOURCE_NOT_FOUND,"product.not_found");return jdbc.query("select cast(receipt as text) from bb_product_photo_observation where merchant_id=? and product_id=? order by confirmed_at desc,id desc limit 50",(r,n)->parse(r.getString(1)),owner,product);}
+    @org.springframework.beans.factory.annotation.Value("${bobbuy.ai.costco.worker.enabled:false}")
+    private boolean workerEnabled;
+
+    @Transactional
+    public CostcoOnboardingJob retry(String id,long revision) {
+        long owner=owner();
+        users.lockById(owner).filter(u->u.isEnabled()&&u.getRoles().contains(Role.AGENT))
+                .orElseThrow(()->new ApiException(ErrorCode.FORBIDDEN,"error.auth.forbidden"));
+        var current=job(id,owner);
+        if(current.revision()!=revision
+                || !Set.of(CostcoOnboardingJob.State.FAILED,CostcoOnboardingJob.State.NEEDS_INPUT,
+                           CostcoOnboardingJob.State.CANCELLED).contains(current.state())
+                || "photo.confirm_required".equals(current.failureCode()) || saved(id,owner)!=null) return current;
+        if(!workerEnabled)throw new ApiException(ErrorCode.INVALID_STATUS,"onboarding.worker_disabled");
+        try {
+            evidence.readVerified(owner,current.privatePhotoSha256());
+        } catch (IllegalArgumentException unavailable) {
+            throw new ApiException(ErrorCode.INVALID_STATUS,"photo.evidence_failed");
+        }
+        return jobs.retryPhoto(current);
+    }
+
     @Transactional public Observation confirm(String id,Confirm input){
         long owner=owner();users.lockById(owner).filter(u->u.isEnabled()&&u.getRoles().contains(Role.AGENT)).orElseThrow(()->new ApiException(ErrorCode.FORBIDDEN,"error.auth.forbidden"));
         // Serialize with worker transitions as well as concurrent confirmations.
