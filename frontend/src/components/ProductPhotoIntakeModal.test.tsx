@@ -5,7 +5,7 @@ const mocks=vi.hoisted(()=>({suppliers:vi.fn(),status:vi.fn(),photo:vi.fn(),get:
 vi.mock('../api',()=>({api:{suppliers:mocks.suppliers,costcoOnboarding:{status:mocks.status,photo:mocks.photo,get:mocks.get}},photoIntakeApi:{image:()=>Promise.resolve(new Blob()),review:mocks.review,confirm:mocks.confirm,photo:()=>Promise.resolve(new Blob())},categoryTreeApi:{list:()=>Promise.resolve([])},masterDataApi:{currencies:()=>Promise.resolve([{code:'JPY'}])}}));
 vi.mock('../productPhotoUpload',()=>({prepareProductPhotoUpload:(f:File)=>f.name==='bad.txt'?Promise.reject(Error('photo.file_invalid')):Promise.resolve(f)}));
 vi.mock('../i18n',()=>({useI18n:()=>({locale:'en-US',t:(k:string)=>k})}));
-vi.mock('./CategoryTreePicker',()=>({default:()=>null}));
+vi.mock('./CategoryTreePicker',()=>({default:({value,onChange}:{value:string|null;onChange:(id:string|null)=>void})=><select aria-label="test-category" value={value??''} onChange={e=>onChange(e.target.value||null)}><option value="">Uncategorized</option><option value="category-1">First category</option></select>}));
 vi.mock('antd',()=>({Alert:({message,description,action}:any)=><div role="alert">{message}{description}{action}</div>,Button:({children,loading,type,...p}:any)=><button {...p}>{children}</button>,Checkbox:({children,onChange,...p}:any)=><label><input type="checkbox" {...p} onChange={onChange}/>{children}</label>,Input:Object.assign((p:any)=><input {...p}/>,{TextArea:(p:any)=><textarea {...p}/>}),Modal:({children,title}:any)=><div role="dialog">{title}{children}</div>,Select:({options,onChange,loading,...p}:any)=><select {...p} onChange={e=>onChange(e.target.value)}><option value=""/>{options.map((o:any)=><option key={o.value} {...o}>{o.label}</option>)}</select>,Space:({children}:any)=><div>{children}</div>,Typography:{Title:({children}:any)=><h2>{children}</h2>}}));
 import ProductPhotoIntakeModal from './ProductPhotoIntakeModal';
 const job={id:'job1',state:'NEEDS_INPUT' as const,revision:7,photo:true,supplierId:'s1'};
@@ -38,6 +38,28 @@ it('keeps confirmed review inputs when a replacement file is invalid',async()=>{
  render(<ProductPhotoIntakeModal {...props} job={job}/>);await screen.findByDisplayValue('999');fireEvent.click(screen.getByLabelText('photo.identity_confirm'));
  fireEvent.change(document.querySelectorAll('input[type=file]')[1],{target:{files:[new File(['bad'],'bad.txt',{type:'text/plain'})]}});
  await screen.findByText('photo.file_invalid');expect(screen.getByDisplayValue('999')).toBeTruthy();expect(screen.getByLabelText('photo.identity_confirm')).toBeChecked();
+});
+
+it('preserves the draft for a retry and clears it for a different photo',async()=>{
+ const candidate={...review(),status:'NEW',matches:[],candidate:{translatedNames:{'ja-JP':'候補'}}};
+ mocks.review.mockResolvedValue(candidate);
+ mocks.photo.mockResolvedValue(job);
+ render(<ProductPhotoIntakeModal {...props} job={job}/>);
+ fireEvent.change(await screen.findByLabelText('photo.description'),{target:{value:'First product only'}});
+ fireEvent.change(screen.getByLabelText('test-category'),{target:{value:'category-1'}});
+ fireEvent.click(screen.getByText('photo.retry_recognition'));
+ fireEvent.click(await screen.findByRole('button',{name:'photo.recognize'}));
+ expect(await screen.findByLabelText('photo.description')).toHaveValue('First product only');
+ expect(screen.getByLabelText('test-category')).toHaveValue('category-1');
+
+ const replacement={...job,id:'job2'};
+ mocks.photo.mockResolvedValue(replacement);
+ mocks.get.mockResolvedValue(replacement);
+ mocks.review.mockResolvedValue({...candidate,jobId:replacement.id});
+ fireEvent.change(document.querySelectorAll('input[type=file]')[1],{target:{files:[new File(['replacement'],'next.jpg',{type:'image/jpeg'})]}});
+ fireEvent.click(await screen.findByRole('button',{name:'photo.recognize'}));
+ expect(await screen.findByLabelText('photo.description')).toHaveValue('');
+ expect(screen.getByLabelText('test-category')).toHaveValue('');
 });
 
 it('explains missing AI configuration without exposing an internal protocol code',async()=>{

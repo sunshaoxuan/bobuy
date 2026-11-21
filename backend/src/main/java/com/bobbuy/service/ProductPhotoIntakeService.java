@@ -53,18 +53,19 @@ public class ProductPhotoIntakeService {
         var candidate=j.decisions().stream().filter(d->d.candidate()!=null).reduce((a,b)->b).map(CostcoOnboardingDecision::candidate).orElse(null);
         // Photo prices always come from the intake pixels, never a later online-source suggestion.
         var facts=j.decisions().stream().filter(d->d.stage()==CostcoOnboardingDecision.Stage.INTAKE&&d.candidate()!=null).map(d->d.candidate().photoFacts()).filter(Objects::nonNull).findFirst().orElse(null);
-        return new Review(id,j.revision(),j.supplierId(),j.market(),item,status,candidate,facts,matches.stream().map(p->new Match(p.getId(),p.getRecordVersion(),p.getName(),p.getCatalogData()==null?Map.of():p.getCatalogData().specification(),p.getCatalogData()==null?null:p.getCatalogData().packaging(),eligible(p,j))).toList(),matches.stream().flatMap(p->history(owner,p.getId(),j.supplierId(),j.market()).stream()).toList(),saved(id,owner),j.evidence(),officialSource(j).isPresent());
+        return new Review(id,j.revision(),j.supplierId(),j.market(),item,status,candidate,facts,matches.stream().map(p->new Match(p.getId(),p.getRecordVersion(),p.getName(),p.getCatalogData()==null?Map.of():p.getCatalogData().specification(),p.getCatalogData()==null?null:p.getCatalogData().packaging(),eligible(p,j))).toList(),matches.stream().flatMap(p->history(owner,p.getId(),j.supplierId(),j.market()).stream()).toList(),saved(id,owner),j.evidence(),officialSource(j,item).isPresent());
     }
-    private Optional<CostcoOfficialEvidence> officialSource(CostcoOnboardingJob j){
+    private Optional<CostcoOfficialEvidence> officialSource(CostcoOnboardingJob j,String item){
+        if(item==null||!item.equals(j.itemNumber()))return Optional.empty();
         var candidate=j.decisions().stream().filter(d->d.candidate()!=null).reduce((a,b)->b).map(CostcoOnboardingDecision::candidate).orElse(null);
-        if(candidate==null||candidate.officialImageSha256()==null||candidate.officialImageSha256().equals(j.privatePhotoSha256()))return Optional.empty();
+        if(candidate==null||!item.equals(candidate.itemNumber())||candidate.officialImageSha256()==null||candidate.officialImageSha256().equals(j.privatePhotoSha256()))return Optional.empty();
         String hash=candidate.officialImageSha256();
         boolean viewed=j.decisions().stream().anyMatch(d->d.stage()==CostcoOnboardingDecision.Stage.IMAGE_SOURCE&&d.verdict()==CostcoOnboardingDecision.Verdict.ACCEPT&&d.trace()!=null&&d.trace().imageViewHashes().containsKey(hash));
         if(!viewed)return Optional.empty();
         return j.evidence().stream().filter(e->hash.equals(e.sha256())&&e.mediaType().startsWith("image/")&&e.canonicalUrl().getRawQuery()==null&&e.canonicalUrl().getRawFragment()==null&&e.canonicalUrl().getUserInfo()==null).findFirst();
     }
     @Transactional(readOnly=true) public RecommendationImageValidator.Image officialImage(String id){
-        long owner=owner();var j=job(id,owner);var source=officialSource(j).orElseThrow(()->invalid("photo.official_unavailable"));
+        long owner=owner();var j=job(id,owner);var source=officialSource(j,j.itemNumber()).orElseThrow(()->invalid("photo.official_unavailable"));
         return RecommendationImageValidator.validate(evidence.readVerified(owner,source.sha256()));
     }
     @Transactional(readOnly=true) public List<Observation> productHistory(String product){long owner=owner();if(!products.existsByIdAndMerchantId(product,owner))throw new ApiException(ErrorCode.RESOURCE_NOT_FOUND,"product.not_found");return jdbc.query("select cast(receipt as text) from bb_product_photo_observation where merchant_id=? and product_id=? order by confirmed_at desc,id desc limit 50",(r,n)->parse(r.getString(1)),owner,product);}
@@ -87,6 +88,7 @@ public class ProductPhotoIntakeService {
             if(matches.stream().noneMatch(m->m.getId().equals(input.productId())))throw conflict();
         }else{
             if(!matches.isEmpty()||input.product()==null)throw conflict();
+            var source=input.useOfficialImage()?officialSource(j,item).orElseThrow(()->invalid("photo.official_unavailable")):null;
             var n=input.product();
             // Bind create identity to this durable job; never trust an AI/client ID or selling-price field.
             if(n.priceTiers()!=null&&!n.priceTiers().isEmpty()||n.mediaGallery()!=null&&!n.mediaGallery().isEmpty())throw invalid("photo.private_evidence");
@@ -94,8 +96,7 @@ public class ProductPhotoIntakeService {
             if(!Long.valueOf(owner).equals(p.getMerchantId())||!item.equals(p.getItemNumber())||!eligible(p,j))throw conflict();
             if(input.model()!=null&&input.model().length()>200||input.packaging()!=null&&input.packaging().length()>1000)throw invalid("master.invalid");
             var data=p.getCatalogData();p.setCatalogData(new ProductCatalogData(data.specification(),input.model(),input.packaging(),data.categoryIds(),data.supplierId(),null,null,null));products.saveAndFlush(p);
-            if(input.useOfficialImage()){
-                var source=officialSource(j).orElseThrow(()->invalid("photo.official_unavailable"));
+            if(source!=null){
                 var media=catalog.upload(p.getId(),RecommendationImageValidator.validate(evidence.readVerified(owner,source.sha256())),source.canonicalUrl().toString(),p.getName().get("ja-JP"),true);
                 var current=catalog.get(p.getId()).value();
                 catalog.save(List.of(new ProductCatalogService.Input(p.getId(),current.version(),current.name(),current.description(),current.itemNumber(),current.brand(),current.specification(),current.model(),current.packaging(),current.categoryIds(),current.supplierId(),List.of(media),false)),true);
