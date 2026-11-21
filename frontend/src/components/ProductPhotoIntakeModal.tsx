@@ -21,13 +21,6 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
  const[proofOpen,setProofOpen]=useState(false);
  const[original,setOriginal]=useState<File>(),[stored,setStored]=useState<File>();
  const[uploads,setUploads]=useState<Upload[]>([]),[preview,setPreview]=useState(''),[job,setJob]=useState(initial),[review,setReview]=useState<PhotoReview>();
- const[capturePreview,setCapturePreview]=useState('');
- useEffect(()=>{
-  if(!original){setCapturePreview('');return;}
-  const url=URL.createObjectURL(original);
-  setCapturePreview(url);
-  return()=>URL.revokeObjectURL(url);
- },[original]);
  const[pollAttempt,setPollAttempt]=useState(0);
  const[busy,setBusy]=useState(false),[error,setError]=useState(''),[item,setItem]=useState(''),[selected,setSelected]=useState('');
  const[names,setNames]=useState<Record<string,string>>({}),[spec,setSpec]=useState(''),[brand,setBrand]=useState(''),[model,setModel]=useState(''),[packaging,setPackaging]=useState(''),[description,setDescription]=useState(''),[category,setCategory]=useState<string|null>(null);
@@ -131,7 +124,7 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
  const identifiedName=chosen?.name[locale]||chosen?.name['ja-JP']||review?.candidate?.translatedNames?.[locale]||review?.candidate?.name;
  const reviewSupplier=suppliers.find(row=>row.id===review?.supplierId);
  const canConfirm=review&&!saved&&!['DELETED','IDENTITY_REQUIRED'].includes(review.status);
- const originalSave=original&&<ProductPhotoSave key={capturePreview} file={original} stored={false}/>;
+ const originalSave=original&&<ProductPhotoSave file={original} stored={false} showPreview/>;
  const photoSave=stored&&<ProductPhotoSave key={job?.id} file={stored} stored/>;
  const capture=!review&&!saved;
  return <Modal open={open} title={t(review?'photo.review':'photo.intake_action')} onCancel={onClose}
@@ -145,7 +138,6 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
   <Space wrap><Button disabled={!supplier} onClick={()=>camera.current?.click()}>{t('photo.camera')}</Button><Button disabled={!supplier} onClick={()=>upload.current?.click()}>{t('photo.upload')}</Button></Space>
   {!supplier&&<p role="status">{t('photo.select_supplier')}</p>}
   </div><div className="photo-capture-preview">
-   {capturePreview&&<img className="photo-evidence" src={capturePreview} alt={t('photo.evidence')}/>}
    {originalSave}
    {preview&&<img className="photo-evidence" src={preview} alt={t('photo.evidence')}/>}
    {photoSave}

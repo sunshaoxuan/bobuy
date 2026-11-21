@@ -1,9 +1,10 @@
-import {useEffect,useState} from 'react';
+import {useEffect,useRef,useState} from 'react';
 import {Button,Space} from 'antd';
 import {useI18n} from '../i18n';
 
-export default function ProductPhotoSave({file,stored}: {file:File;stored:boolean}) {
+export default function ProductPhotoSave({file,stored,showPreview=false}: {file:File;stored:boolean;showPreview?:boolean}) {
  const {t}=useI18n();
+ const preview=useRef<HTMLImageElement>(null);
  const [downloadUrl,setDownloadUrl]=useState('');
  const [message,setMessage]=useState('');
  const [sharing,setSharing]=useState(false);
@@ -16,10 +17,16 @@ export default function ProductPhotoSave({file,stored}: {file:File;stored:boolea
  }
 
  useEffect(()=>{
+  setMessage('');
   const url=URL.createObjectURL(file);
+  const image=preview.current;
+  if(image)image.src=url;
   setDownloadUrl(url);
-  return ()=>URL.revokeObjectURL(url);
- },[file]);
+  return ()=>{
+   image?.removeAttribute('src');
+   URL.revokeObjectURL(url);
+  };
+ },[file,showPreview]);
 
  const share=async()=>{
   setMessage('');setSharing(true);
@@ -34,6 +41,7 @@ export default function ProductPhotoSave({file,stored}: {file:File;stored:boolea
  };
 
  return <div>
+  {showPreview&&<img ref={preview} className="photo-evidence" alt={t('photo.evidence')}/>}
   <Space wrap>
    {canShare&&<Button loading={sharing} onClick={()=>void share()}>{t('photo.save_photo')}</Button>}
    {downloadUrl&&<Button href={downloadUrl} download={file.name}>{t('photo.download_photo')}</Button>}
