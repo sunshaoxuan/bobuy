@@ -163,6 +163,12 @@ npm run check:i18n
 
 ### 生产配置
 
-- 照片上传和档案确认均由 Core 承接。Core 的照片 worker 使用固定 HTTPS AI 桥。标准 Compose 将已有桥地址、型号和密文参数映射到 Core 和 AI。队列开关 `BOBBUY_AI_COSTCO_WORKER_ENABLED` 仅映射到 Core，默认关闭。
+- 照片上传和档案确认均由 Core 承接。Core 的照片 worker 使用固定 HTTPS AI 桥。标准 Compose 默认关闭队列。生产 CD 同步的 Compose 覆盖文件为 Core 传入同一套现有桥地址、型号和凭证，并默认启用照片队列。显式设置 `BOBBUY_AI_COSTCO_WORKER_ENABLED=false` 可关闭；AI 服务不启动第二个 worker。
 - 启用时，部署环境提供已验证的精确 HTTPS 地址、可读图的型号及现有凭证，并在 Core 启动后核对队列状态和受控照片回执。关闭队列用于应用回滚前隔离照片任务；生产凭证及其供应端配置无需变更。
 - 生产 Compose 使用合成参数实测默认关闭和显式启用两种展开。Core 与 AI 接收到相同既有桥参数，只有 Core 接到队列开关。此验证不读取生产密文。
+
+### 手机浏览器和照片格式
+
+- 档案页的拍照与相册上传面向 iPhone Safari、Chrome、Edge 及 Android 使用同一流程。拍照入口请求后置相机，设备控制实际选项。相册可以提交现有照片。
+- 通过文件头识别单张 HEIC/HEIF，按需加载 libheif-js 1.23.5 在浏览器解码。JPEG 长边限制为 4096，单张输入及输出各受 8 MiB 限制。JPEG 和 PNG 直接沿用现有处理。解码器源代码与许可证见 [libheif-js](https://github.com/catdad-experiments/libheif-js)。
+- 浏览器引擎兼容性、原生相机回传与生产上线分别验收。Windows WebKit 的 iPhone 视口不作为 iPhone 实机证据。

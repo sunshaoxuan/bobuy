@@ -1,7 +1,7 @@
 import {useEffect,useRef,useState} from 'react';
 import {Alert,Button,Checkbox,Input,Modal,Select,Space,Typography} from 'antd';
 import {api,categoryTreeApi,masterDataApi,photoIntakeApi,type CategoryTreeNode,type CostcoOnboardingJobView,type MobileSupplier,type PhotoReview} from '../api';
-import {prepareImageUpload} from '../imageUpload';
+import {prepareProductPhotoUpload} from '../productPhotoUpload';
 import {useI18n} from '../i18n';
 import CategoryTreePicker from './CategoryTreePicker';
 import './productPhotoIntake.css';
@@ -39,7 +39,7 @@ export default function ProductPhotoIntakeModal({open,job:initial,onClose,onQueu
   void read();return()=>{disposed=true;clearTimeout(timer);};
  },[open,job?.id,pollAttempt]);
  const reset=()=>{generation.current++;setBusy(false);setJob(undefined);setReview(undefined);setSaved(null);setError('');setIdentity(false);setPriceConfirmed(false);setInStock(false);setRequestId(crypto.randomUUID());frozen.current=undefined;};
- const pick=async(f?:File)=>{if(!f)return;const g=generation.current,pick=++pickGeneration.current;try{const prepared=await prepareImageUpload(f);if(g!==generation.current||pick!==pickGeneration.current)return;if(prepared.size>8*1024*1024)throw Error(t('photo.file_invalid'));reset();setFile(prepared);setPreview(URL.createObjectURL(prepared));}catch(e){if(g===generation.current&&pick===pickGeneration.current)setError(t((e as Error).message));}};
+ const pick=async(f?:File)=>{if(!f)return;const g=generation.current,pick=++pickGeneration.current;try{const prepared=await prepareProductPhotoUpload(f);if(g!==generation.current||pick!==pickGeneration.current)return;reset();setFile(prepared);setPreview(URL.createObjectURL(prepared));}catch(e){if(g===generation.current&&pick===pickGeneration.current)setError(t((e as Error).message));}};
  const start=async()=>{if(!file)return;const g=generation.current;setBusy(true);setError('');try{const next=await api.costcoOnboarding.photo({requestId,supplierId:supplier,market:'JP'},file);if(g!==generation.current)return;setJob(next);onQueued(next);}catch(e){if(g===generation.current)setError(t((e as Error).message));}finally{if(g===generation.current)setBusy(false);}};
  const reload=async()=>{if(!job)return;if(!terminal(job)){setError('');setPollAttempt(n=>n+1);return;}const g=generation.current;setBusy(true);try{const r=await photoIntakeApi.review(job.id,item);if(g===generation.current){applyReview(r);setError('');}}catch(e){if(g===generation.current)setError(t((e as Error).message));}finally{if(g===generation.current)setBusy(false);}};
  const edit=()=>{frozen.current=undefined;};
