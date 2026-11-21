@@ -5,7 +5,8 @@ import {prepareProductPhotoUpload} from '../productPhotoUpload';
 import {getStoredUser} from '../authStorage';
 import {useI18n} from '../i18n';
 import CategoryTreePicker from './CategoryTreePicker';
-import ProductPhotoQueue,{photoCanRetry,photoFailure,photoState} from './ProductPhotoQueue';
+import ProductPhotoSave from './ProductPhotoSave';
+import ProductPhotoQueue,{photoCanRetry,photoFailure,photoRetryFailure,photoState} from './ProductPhotoQueue';
 import './productPhotoIntake.css';
 
 type Props={open:boolean;queue?:CostcoOnboardingJobView[];onReview?:(job:CostcoOnboardingJobView)=>void;onQueueChanged?:()=>void;job?:CostcoOnboardingJobView;onClose:()=>void;onQueued:(job:CostcoOnboardingJobView)=>void;onSaved:(id:string)=>void;onConfirmed?:()=>void};
@@ -16,6 +17,8 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
  const{t,locale}=useI18n();const generation=useRef(0),reviewEpoch=useRef(0),upload=useRef<HTMLInputElement>(null),camera=useRef<HTMLInputElement>(null);
  const[suppliers,setSuppliers]=useState<MobileSupplier[]>([]),[supplier,setSupplier]=useState(''),[supplierError,setSupplierError]=useState(false),[suppliersLoaded,setSuppliersLoaded]=useState(false);
  const[tree,setTree]=useState<CategoryTreeNode[]>([]),[currencies,setCurrencies]=useState<{code:string}[]>([]);
+ const[configurationIssue,setConfigurationIssue]=useState<string|null>(null);
+ const[original,setOriginal]=useState<File>(),[stored,setStored]=useState<File>();
  const[uploads,setUploads]=useState<Upload[]>([]),[preview,setPreview]=useState(''),[job,setJob]=useState(initial),[review,setReview]=useState<PhotoReview>();
  const[pollAttempt,setPollAttempt]=useState(0);
  const[busy,setBusy]=useState(false),[error,setError]=useState(''),[item,setItem]=useState(''),[selected,setSelected]=useState('');
@@ -36,7 +39,8 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
   const p=r.photoFacts;setAmount(p?.priceKind==='WAREHOUSE'&&p.amount!=null?String(p.amount):'');setCurrency(p?.currency||'');setUnit(p?.unit||'');setConditions(p?.conditions||'');setInStock(false);
  };
  const loadSuppliers=async()=>{const g=generation.current;setSupplierError(false);try{const rows=await api.suppliers();if(g!==generation.current)return;setSuppliers(rows);setSuppliersLoaded(true);if(rows.length===1)setSupplier(rows[0].id);}catch{if(g===generation.current){setSupplierError(true);setSuppliersLoaded(true);}}};
- useEffect(()=>{if(!open)return;const g=++generation.current;void loadSuppliers();
+ const loadStatus=async()=>{const g=generation.current;try{const s=await api.costcoOnboarding.status();if(g===generation.current){setConfigurationIssue(s.photoConfigurationIssue??null);}}catch{if(g===generation.current)setError(t('onboarding.read_failed'));}};
+ useEffect(()=>{if(!open)return;const g=++generation.current;void loadSuppliers();void loadStatus();
   void categoryTreeApi.list().then(r=>{if(g===generation.current)setTree(r);}).catch(()=>{if(g===generation.current)setError(t('photo.reference_failed'));});
   void masterDataApi.currencies().then(r=>{if(g===generation.current)setCurrencies(r);}).catch(()=>{if(g===generation.current)setError(t('photo.reference_failed'));});
   return()=>{generation.current++;};
@@ -46,12 +50,16 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
  selectedIdRef.current=selectedId;
  useEffect(()=>{
   let active=true;const epoch=++reviewEpoch.current;
-  setPollAttempt(0);setJob(initial);setPreview('');setReview(undefined);setSaved(null);setBusy(false);
+  setPollAttempt(0);setJob(initial);setPreview('');setStored(undefined);setReview(undefined);setSaved(null);setBusy(false);
   archiveDraft.current={item:null,edited:new Set()};
   setDescription('');setCategory(null);setStorageCondition(null);setError('');
   if(initial?.supplierId)setSupplier(current=>current||initial.supplierId||'');
   if(selectedId)void photoIntakeApi.photo(selectedId).then(blob=>{
-   if(active)setPreview(URL.createObjectURL(blob));
+   if(active){
+    setPreview(URL.createObjectURL(blob));
+    const extension=blob.type==='image/jpeg'?'jpg':blob.type.split('/')[1]||'img';
+    setStored(new File([blob],'product-photo.'+extension,{type:blob.type}));
+   }
   }).catch(()=>{if(active)setError(t('photo.evidence_failed'));});
   return()=>{active=false;if(reviewEpoch.current===epoch)reviewEpoch.current++;};
  },[selectedId]);
@@ -80,8 +88,11 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
   }
  };
  const pick=(files:FileList|null)=>{
-  if(!files||!supplier)return;
-  for(const file of Array.from(files))void submit({file,supplierId:supplier,requestId:crypto.randomUUID()});
+  if(!files)return;
+  const selectedFiles=Array.from(files);
+  setOriginal(selectedFiles.at(-1));
+  if(!supplier)return;
+  for(const file of selectedFiles)void submit({file,supplierId:supplier,requestId:crypto.randomUUID()});
  };
  const applyRetry=(next:CostcoOnboardingJobView)=>{
   if(selectedIdRef.current!==next.id)return;
@@ -91,10 +102,10 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
   if(!job)return;
   const g=reviewEpoch.current;setBusy(true);
   try{
-   const next=await photoIntakeApi.retry(job.id);
+   const next=await photoIntakeApi.retry(job.id,job.revision);
    if(g!==reviewEpoch.current)return;
    applyRetry(next);onQueued(next);
-  }catch{if(g===reviewEpoch.current)setError(t('photo.retry_failed'));}
+  }catch(e){if(g===reviewEpoch.current)setError(t(photoRetryFailure(e)));}
   finally{if(g===reviewEpoch.current)setBusy(false);}
  };
  const reload=async()=>{if(!job)return;if(!terminal(job)){setError('');setPollAttempt(n=>n+1);return;}const g=reviewEpoch.current;setBusy(true);try{const r=await photoIntakeApi.review(job.id,item);if(g===reviewEpoch.current){applyReview(r);setError('');}}catch(e){if(g===reviewEpoch.current)setError(t((e as Error).message));}finally{if(g===reviewEpoch.current)setBusy(false);}};
@@ -116,6 +127,7 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
   {!supplier&&<p role="status">{t('photo.select_supplier')}</p>}
   <input ref={camera} type="file" accept="image/*" capture="environment" hidden onChange={e=>{pick(e.target.files);e.target.value='';}}/>
   <input ref={upload} type="file" accept="image/*" multiple hidden onChange={e=>{pick(e.target.files);e.target.value='';}}/>
+  {original&&<ProductPhotoSave key={original.name} file={original} stored={false}/>}
   {uploads.map(entry=><div key={entry.requestId} role="status">
    {entry.file.name} · {t(entry.error||'photo.uploading')}
    {entry.error&&<Space wrap>{entry.error!=='photo.file_type'&&<Button onClick={()=>void submit(entry)}>{t('photo.retry_upload')}</Button>}
@@ -123,7 +135,9 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
   </div>)}
   {queue&&onReview&&onQueueChanged&&<ProductPhotoQueue jobs={queue} onReview={onReview} onChanged={next=>{applyRetry(next);return onQueueChanged();}}/>}
   {preview&&<img className="photo-evidence" src={preview} alt={t('photo.evidence')}/>}
-  {job&&<p role="status">{t(saved?'photo.state.completed':photoState(selectedQueueRow??job))} {photoCanRetry(job)&&!saved&&t(photoFailure(job))}</p>}
+  {stored&&<ProductPhotoSave key={job?.id} file={stored} stored/>}
+  {!job&&configurationIssue&&<Alert type="warning" message={t(photoFailure(configurationIssue))}/>}
+  {job&&<p role="status">{t(saved?'photo.state.completed':photoState(selectedQueueRow??job))} {photoCanRetry(job)&&!saved&&t(photoFailure(job.failureCode))}</p>}
   {job&&photoCanRetry(job)&&!saved&&<Button loading={busy} onClick={()=>void retryRecognition()}>{t('photo.retry_recognition')}</Button>}
   {review&&!saved&&<section>
    <Typography.Title level={4}>{t('photo.review')}</Typography.Title><p>{t('photo.suggestions')}</p>

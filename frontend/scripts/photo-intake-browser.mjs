@@ -172,7 +172,7 @@ print(json.dumps(dict(width=x,height=y,left=left,top=top,right=right,bottom=bott
   await page.reload();
   await page.getByTestId('ai-quick-snap-button').filter({visible:true}).click();
   for(const id of submitted) await modal.locator(`[data-photo-job="${id}"]`).waitFor();
-  const retryResponse=page.waitForResponse(r=>r.url().endsWith('/'+failed+'/retry'));
+  const retryResponse=page.waitForResponse(r=>new URL(r.url()).pathname.endsWith('/'+failed+'/retry'));
   const failedRow=modal.locator(`[data-photo-job="${failed}"]`);
   await failedRow.getByRole('button',{name:'Retry recognition with this photo'}).click();
   assert.equal((await retryResponse).status(),200);

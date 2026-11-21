@@ -20,8 +20,9 @@ public class CostcoOnboardingController {
     private final CostcoNumberOnboardingService service; private final JdbcCostcoOnboardingJobRepository jobs;
     private final SupplierRepository suppliers; private final CostcoEvidencePersistence evidence;
     private final boolean workerEnabled;
+    private final com.bobbuy.service.LlmGateway gateway;
     public CostcoOnboardingController(CostcoNumberOnboardingService service, JdbcCostcoOnboardingJobRepository jobs,
-            SupplierRepository suppliers, CostcoEvidencePersistence evidence,@org.springframework.beans.factory.annotation.Value("${bobbuy.ai.costco.worker.enabled:false}") boolean workerEnabled) { this.service=service;this.jobs=jobs;this.suppliers=suppliers;this.evidence=evidence;this.workerEnabled=workerEnabled; }
+            SupplierRepository suppliers, CostcoEvidencePersistence evidence,@org.springframework.beans.factory.annotation.Value("${bobbuy.ai.costco.worker.enabled:false}") boolean workerEnabled, com.bobbuy.service.LlmGateway gateway) { this.gateway=gateway;this.service=service;this.jobs=jobs;this.suppliers=suppliers;this.evidence=evidence;this.workerEnabled=workerEnabled; }
     public record NumberInput(String requestId,String supplierId,String market,String itemNumber) {
         @JsonAnySetter public void unknown(String field,Object value){throw new IllegalArgumentException("onboarding.unknown_field");}
     }
@@ -68,8 +69,9 @@ public class CostcoOnboardingController {
     @ExceptionHandler(CostcoNumberOnboardingService.NeedsInput.class)
     public org.springframework.http.ResponseEntity<ApiError> scopeChanged(CostcoNumberOnboardingService.NeedsInput failure){return org.springframework.http.ResponseEntity.status(403).body(new ApiError("FORBIDDEN",failure.getMessage()));}
     @GetMapping public ApiResponse<?> recent(Authentication auth,@RequestParam(defaultValue="false") boolean numbersOnly) { return ApiResponse.success(jobs.recent(owner(auth),numbersOnly).stream().map(CostcoOnboardingController::view).toList()); }
-    public record Status(boolean workerEnabled) {}
-    @GetMapping("/status") public ApiResponse<Status> status(Authentication auth){owner(auth);return ApiResponse.success(new Status(workerEnabled));}
+    public record Status(boolean workerEnabled,String photoConfigurationIssue) {}
+    @GetMapping("/status") public ApiResponse<Status> status(Authentication auth){owner(auth);var configuration=gateway.pinnedConfiguration(com.bobbuy.service.CostcoEvidenceAcquisitionPlanner.REQUIRED_NODE);
+        return ApiResponse.success(new Status(workerEnabled,configuration.ready()?null:configuration.code()));}
     @GetMapping("/{id}") public ApiResponse<View> get(Authentication auth,@PathVariable String id) {
         long owner=owner(auth);var job=jobs.findOwned(id,owner).orElseThrow(()->new ApiException(ErrorCode.RESOURCE_NOT_FOUND,"onboarding.not_found"));
         return ApiResponse.success(view(job));

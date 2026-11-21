@@ -64,7 +64,7 @@ it('keeps edits on retry and clears #190 suggestions when opening a different qu
  fireEvent.change(description,{target:{value:'First product only'}});
  fireEvent.change(screen.getByLabelText('test-category'),{target:{value:''}});
  fireEvent.click(screen.getByText('photo.retry_recognition'));
- await waitFor(()=>expect(mocks.retry).toHaveBeenCalledWith(job.id));
+ await waitFor(()=>expect(mocks.retry).toHaveBeenCalledWith(job.id,job.revision));
  expect(await screen.findByLabelText('photo.description')).toHaveValue('First product only');
  expect(screen.getByLabelText('test-category')).toHaveValue('');
  expect(mocks.photo).not.toHaveBeenCalled();
@@ -90,15 +90,51 @@ it('loads a fresh review revision after retrying the open task from the queue',a
  fireEvent.click(queue.getByRole('button',{name:'photo.retry_recognition'}));
  expect(await screen.findByDisplayValue('888')).toBeTruthy();
  expect(screen.queryByDisplayValue('999')).toBeNull();
- expect(mocks.retry).toHaveBeenCalledWith(job.id);
+ expect(mocks.retry).toHaveBeenCalledWith(job.id,job.revision);
  expect(mocks.photo).not.toHaveBeenCalled();
 });
 
 it('explains missing AI configuration without exposing an internal protocol code',async()=>{
- mocks.get.mockResolvedValue({...job,failureCode:'ai.pinned_endpoint'});render(<ProductPhotoIntakeModal {...props} job={job}/>);await screen.findByText(/photo.ai_unavailable/);expect(screen.queryByText(/ai.pinned_endpoint/)).toBeNull();expect(screen.getByText('photo.retry_recognition')).toBeTruthy();
+ mocks.get.mockResolvedValue({...job,failureCode:'ai.pinned_endpoint'});render(<ProductPhotoIntakeModal {...props} job={job}/>);await screen.findByText(/photo.ai_endpoint/);expect(screen.queryByText(/ai.pinned_endpoint/)).toBeNull();expect(screen.getByText('photo.retry_recognition')).toBeTruthy();
 });
 
 it('shows retrieved sources and keeps the verified official image opt-in unchecked',async()=>{
  mocks.review.mockResolvedValue({...review(),status:'NEW',matches:[],officialImageAvailable:true,sources:[{sha256:'fixture',canonicalUrl:'https://example.test/product.png',mediaType:'image/png'}],candidate:{translatedNames:{'ja-JP':'合成商品'},unknownFields:['nutrition']}});
  render(<ProductPhotoIntakeModal {...props} job={job}/>);await screen.findByAltText('photo.official_image');expect(screen.getByLabelText('photo.use_official_image')).not.toBeChecked();expect(screen.getByRole('link')).toHaveAttribute('href','https://example.test/product.png');expect(screen.getByText('photo.unknown_fields')).toBeTruthy();
+});
+
+
+it('shares the unconverted capture and keeps the explicit download path when sharing is cancelled', async()=>{
+ const share=vi.fn().mockRejectedValue(new DOMException('cancelled','AbortError'));
+ Object.defineProperties(navigator,{share:{value:share,configurable:true},canShare:{value:()=>true,configurable:true}});
+ try {
+  render(<ProductPhotoIntakeModal {...props}/>);
+  await waitFor(()=>expect(screen.getByText('photo.camera')).toBeEnabled());
+  mocks.photo.mockResolvedValue(job);
+  const capture=new File(['test'],'capture.jpg',{type:'image/jpeg'});
+  fireEvent.change(document.querySelector('input[capture]')!,{target:{files:[capture]}});
+  fireEvent.click(await screen.findByText('photo.save_photo'));
+  await waitFor(()=>expect(share).toHaveBeenCalledWith({files:[capture]}));
+  expect(screen.getByText('photo.download_photo')).toHaveAttribute('download','capture.jpg');
+  expect(screen.queryByText('photo.share_failed')).not.toBeInTheDocument();
+  expect(mocks.photo).toHaveBeenCalledTimes(1);
+ } finally {
+  Reflect.deleteProperty(navigator,'share');Reflect.deleteProperty(navigator,'canShare');
+ }
+});
+
+it('downloads the stored evidence with a storage-version notice',async()=>{
+ render(<ProductPhotoIntakeModal {...props} job={job}/>);
+ expect(await screen.findByText('photo.stored_version')).toBeInTheDocument();
+ expect(await screen.findByText('photo.download_photo')).toHaveAttribute('download','product-photo.img');
+});
+
+it('reports missing credentials without preventing photo retention',async()=>{
+ mocks.status.mockResolvedValue({workerEnabled:true,photoConfigurationIssue:'ai.pinned_credentials_missing'});
+ render(<ProductPhotoIntakeModal {...props}/>);
+ await screen.findByText('photo.ai_credentials');
+ await waitFor(()=>expect(screen.getByText('photo.camera')).toBeEnabled());
+ mocks.photo.mockResolvedValue(job);
+ fireEvent.change(document.querySelector('input[capture]')!,{target:{files:[new File(['test'],'test.jpg',{type:'image/jpeg'})]}});
+ await waitFor(()=>expect(mocks.photo).toHaveBeenCalledTimes(1));
 });

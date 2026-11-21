@@ -30,10 +30,23 @@ class CostcoOnboardingControllerTest {
     private final SupplierRepository suppliers=mock(SupplierRepository.class);
     private final CostcoEvidencePersistence evidence=mock(CostcoEvidencePersistence.class);
     private final CostcoNumberOnboardingService service=new CostcoNumberOnboardingService(memory,q->{throw new AssertionError("No fetch in request");},(stage,j)->{throw new AssertionError("No AI in request");},(j,c,h)->{throw new AssertionError("No catalog in request");},Clock.systemUTC());
-    private final CostcoOnboardingController controller=new CostcoOnboardingController(service,jobs,suppliers,evidence,true);
+    private final CostcoOnboardingController controller=new CostcoOnboardingController(service,jobs,suppliers,evidence,true,mock(com.bobbuy.service.LlmGateway.class));
     private Authentication auth(long id,String role){return new UsernamePasswordAuthenticationToken(new BobbuyAuthenticatedUser(id,"synthetic","Synthetic",Set.of(Role.valueOf(role))),null,List.of(new SimpleGrantedAuthority("ROLE_"+role)));}
     private void supplier(long owner){var supplier=new Supplier();supplier.setId("supplier-jp");supplier.setMerchantId(owner);when(suppliers.findById("supplier-jp")).thenReturn(Optional.of(supplier));}
     private CostcoOnboardingController.NumberInput request(){return new CostcoOnboardingController.NumberInput(REQUEST,"supplier-jp","JP","００１４１１０");}
+    @Test void statusExposesOnlyThePhotoConfigurationIssue() {
+        var gateway=mock(com.bobbuy.service.LlmGateway.class);
+        var endpoint=com.bobbuy.service.CostcoEvidenceAcquisitionPlanner.REQUIRED_NODE;
+        var configured=new CostcoOnboardingController(service,jobs,suppliers,evidence,true,gateway);
+        when(gateway.pinnedConfiguration(endpoint)).thenReturn(
+                new com.bobbuy.service.LlmGateway.PinnedConfiguration(false,"ai.pinned_endpoint",null,null,endpoint),
+                new com.bobbuy.service.LlmGateway.PinnedConfiguration(false,"ai.pinned_credentials_missing",null,null,endpoint),
+                new com.bobbuy.service.LlmGateway.PinnedConfiguration(true,"READY_UNPROBED",null,"fixture-model",endpoint));
+        assertEquals("ai.pinned_endpoint",configured.status(auth(9,"AGENT")).getData().photoConfigurationIssue());
+        assertEquals("ai.pinned_credentials_missing",configured.status(auth(9,"AGENT")).getData().photoConfigurationIssue());
+        assertNull(configured.status(auth(9,"AGENT")).getData().photoConfigurationIssue());
+    }
+
     @Test void agentQueuesUsingOnlyServerPrincipalAndDoesNotRunPipeline(){supplier(9);controller.number(auth(9,"AGENT"),request());assertEquals(1,memory.values.size());var job=memory.values.values().iterator().next();assertEquals(9,job.merchantId());assertEquals("supplier-jp",job.supplierId());assertEquals("0014110",job.itemNumber());assertEquals(CostcoOnboardingJob.State.QUEUED,job.state());}
     @Test void customerOrStringPrincipalCannotBorrowAgentScope(){assertThrows(ApiException.class,()->controller.number(auth(9,"CUSTOMER"),request()));var fake=new UsernamePasswordAuthenticationToken("agent-9",null,List.of(new SimpleGrantedAuthority("ROLE_AGENT")));assertThrows(ApiException.class,()->controller.number(fake,request()));verifyNoInteractions(suppliers,evidence);assertTrue(memory.values.isEmpty());}
     @Test void otherMerchantsSupplierIsNotAccepted(){supplier(10);assertThrows(ApiException.class,()->controller.number(auth(9,"AGENT"),request()));assertTrue(memory.values.isEmpty());verifyNoInteractions(evidence);}
@@ -41,6 +54,6 @@ class CostcoOnboardingControllerTest {
     @Test void requestRejectsIdentityApprovalAndPriceFieldsEvenWhenUnknownPropertiesIgnored(){var mapper=new ObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);var raw="{\"requestId\":\""+REQUEST+"\",\"supplierId\":\"supplier-jp\",\"market\":\"JP\",\"itemNumber\":\"14110\"";for(var field:List.of("merchantId","ownerId","reviewed","price","roles","state"))assertThrows(Exception.class,()->mapper.readValue(raw+",\""+field+"\":1}",CostcoOnboardingController.NumberInput.class));}
     @Test void readsAreAlwaysScopedToPrincipalAndViewDoesNotContainPrivatePhoto(){supplier(9);controller.number(auth(9,"AGENT"),request());var job=memory.values.values().iterator().next();when(jobs.findOwned(job.id(),9)).thenReturn(Optional.of(job));when(jobs.findOwned(job.id(),10)).thenReturn(Optional.empty());assertNotNull(controller.get(auth(9,"AGENT"),job.id()));assertThrows(ApiException.class,()->controller.get(auth(10,"AGENT"),job.id()));assertFalse(Arrays.stream(CostcoOnboardingController.View.class.getRecordComponents()).anyMatch(c->c.getName().contains("Photo")||c.getName().contains("merchant")));}
     @Test void photoQueuesOwnedOriginalHashThroughSameJobPath() throws Exception {supplier(9);var file=mock(MultipartFile.class);byte[] original={1,2,3};when(file.getSize()).thenReturn(3L);when(file.getBytes()).thenReturn(original);when(evidence.putPrivatePhoto(9,original)).thenReturn("a".repeat(64));controller.photo(auth(9,"AGENT"),REQUEST,"supplier-jp","JP",file);var job=memory.values.values().iterator().next();assertEquals("a".repeat(64),job.privatePhotoSha256());assertNull(job.itemNumber());verify(evidence).putPrivatePhoto(9,original);}
-    @Test void disabledWorkerDoesNotAcceptForeverQueuedTasks(){var disabled=new CostcoOnboardingController(service,jobs,suppliers,evidence,false);assertThrows(ApiException.class,()->disabled.number(auth(9,"AGENT"),request()));verifyNoInteractions(suppliers,evidence);assertTrue(memory.values.isEmpty());}
+    @Test void disabledWorkerDoesNotAcceptForeverQueuedTasks(){var disabled=new CostcoOnboardingController(service,jobs,suppliers,evidence,false,mock(com.bobbuy.service.LlmGateway.class));assertThrows(ApiException.class,()->disabled.number(auth(9,"AGENT"),request()));verifyNoInteractions(suppliers,evidence);assertTrue(memory.values.isEmpty());}
     @Test void quotaIsTyped429WithARecoverableRetryHint(){var response=controller.quota(new CostcoOnboardingQuotaException("onboarding.pending_quota",30));assertEquals(429,response.getStatusCode().value());assertEquals("30",response.getHeaders().getFirst("Retry-After"));}
 }

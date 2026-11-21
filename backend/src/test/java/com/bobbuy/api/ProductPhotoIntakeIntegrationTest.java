@@ -72,6 +72,35 @@ class ProductPhotoIntakeIntegrationTest {
   mvc.perform(get("/api/product-photo-intake").header("Authorization","Bearer "+auth))
    .andExpect(status().isOk()).andExpect(jsonPath("$.data[?(@.id == '"+job+"')].state",org.hamcrest.Matchers.contains("COMPLETED")));
  }
+ @Test void concurrentLegacyRetriesReuseTheOwnedJobAndEvidenceAtNumberCapacity() throws Exception {
+  jdbc.update("""
+    insert into bb_costco_onboarding_job
+      (id,merchant_id,supplier_id,market,idempotency_key,input_hash,state,payload,next_run_at)
+    select 'number-fixture-'||n,1000,?,'JP',md5('fixture-key-'||n),md5('fixture-input-'||n),
+      'QUEUED','{}'::jsonb,current_timestamp+interval '1 hour' from generate_series(1,32) n
+    """,supplier);
+  jdbc.update("""
+    update bb_costco_onboarding_job
+       set payload=payload || '{"failureCode":"ai.pinned_endpoint","itemNumber":null,"decisions":[]}'::jsonb
+     where id=?
+    """,job);
+  String path="/api/product-photo-intake/"+job+"/retry";
+  byte[] before=mvc.perform(get("/api/product-photo-intake/"+job+"/photo").header("Authorization","Bearer "+auth))
+    .andExpect(status().isOk()).andReturn().getResponse().getContentAsByteArray();
+  mvc.perform(post(path).param("revision","7").header("Authorization","Bearer "+foreign)).andExpect(status().isNotFound());
+  var pool=java.util.concurrent.Executors.newFixedThreadPool(2);
+  try {
+   var submissions=pool.invokeAll(java.util.Collections.nCopies(2,(java.util.concurrent.Callable<String>)()->
+      mvc.perform(post(path).param("revision","7").header("Authorization","Bearer "+auth))
+       .andExpect(status().isOk()).andExpect(jsonPath("$.data.id").value(job)).andReturn().getResponse().getContentAsString()));
+   for(var response:submissions)assertThat(json.readTree(response.get()).path("data").path("revision").asLong()).isGreaterThanOrEqualTo(8);
+  } finally { pool.shutdownNow(); }
+  assertThat(jdbc.queryForObject("select count(*) from bb_costco_onboarding_job where merchant_id=1000 and payload->>'privatePhotoSha256'=?",Long.class,CostcoEvidencePersistence.hash(before))).isEqualTo(1L);
+  assertThat(jdbc.queryForObject("select count(*) from bb_product_photo_observation where job_id=?",Long.class,job)).isZero();
+  assertThat(mvc.perform(get("/api/product-photo-intake/"+job+"/photo").header("Authorization","Bearer "+auth))
+    .andExpect(status().isOk()).andReturn().getResponse().getContentAsByteArray()).isEqualTo(before);
+ }
+
  @Test @EnabledIfEnvironmentVariable(named="BOBBUY_PHOTO_LIVE_TEST", matches="true")
  void livePhotoMatchesAndUpdatesObservation() throws Exception {
   categories.saveAndFlush(new CategoryTreeNode("photo-live-frozen-seafood",null,
@@ -252,7 +281,7 @@ class ProductPhotoIntakeIntegrationTest {
      old.inputHash(),item,old.privatePhotoSha256(),1,CostcoOnboardingJob.State.FAILED,List.of(),List.of(),
      null,null,"onboarding.retry_exhausted",Instant.now());
    jdbc.update("update bb_costco_onboarding_job set state='FAILED',revision=1,attempts=3,payload=cast(? as jsonb) where id=?",json.writeValueAsString(failed),id);
-   mvc.perform(post("/api/product-photo-intake/"+id+"/retry").header("Authorization","Bearer "+auth))
+   mvc.perform(post("/api/product-photo-intake/"+id+"/retry").param("revision","1").header("Authorization","Bearer "+auth))
      .andExpect(status().isOk()).andExpect(jsonPath("$.data.id").value(id)).andExpect(jsonPath("$.data.state").value("QUEUED"));
    mvc.perform(get("/api/product-photo-intake/"+id+"/photo").header("Authorization","Bearer "+auth))
      .andExpect(status().isOk()).andExpect(content().bytes(bytes));

@@ -16,7 +16,7 @@ import static com.bobbuy.model.CostcoOnboardingJob.State.*;
 @Repository
 public class JdbcCostcoOnboardingJobRepository implements CostcoOnboardingJobRepository {
     /** RHS uses the old row values in this same UPDATE; history is separate from payload, never recursive. */
-    private static final String ARCHIVE_ATTEMPT="attempt_history=case when state<>'COMMITTING' and attempts>0 and not exists (select 1 from jsonb_array_elements(attempt_history) as archived(value) where (archived.value->>'attempt')::integer=attempts and (payload->>'privatePhotoSha256' is null or (archived.value->'payload'->>'revision')::bigint=revision)) then attempt_history || jsonb_build_array(jsonb_build_object('attempt',attempts,'payload',payload,'lastUpdatedAt',updated_at)) else attempt_history end,";
+    private static final String ARCHIVE_ATTEMPT="attempt_history=case when state<>'COMMITTING' and attempts>0 and not exists (select 1 from jsonb_array_elements(attempt_history) as archived(value) where (archived.value->>'attempt')::integer=attempts and (payload->>'privatePhotoSha256' is null or archived.value->'payload'->>'revision'=cast(revision as text))) then attempt_history || jsonb_build_array(jsonb_build_object('attempt',attempts,'payload',payload,'lastUpdatedAt',updated_at)) else attempt_history end,";
     private final JdbcTemplate jdbc; private final ObjectMapper mapper;private final UserRepository users;private final int maxPending;private final int maxPerDay;
     private final ThreadLocal<Lease> active = new ThreadLocal<>();
     public JdbcCostcoOnboardingJobRepository(JdbcTemplate jdbc,ObjectMapper mapper,UserRepository users,
@@ -91,17 +91,19 @@ public class JdbcCostcoOnboardingJobRepository implements CostcoOnboardingJobRep
 
     @Transactional
     public CostcoOnboardingJob retryPhoto(CostcoOnboardingJob old) {
-        var now = Instant.now();
-        var queued = new CostcoOnboardingJob(old.id(),old.idempotencyKey(),old.merchantId(),old.supplierId(),
+        Instant now=Instant.now();
+        var queued=new CostcoOnboardingJob(old.id(),old.idempotencyKey(),old.merchantId(),old.supplierId(),
                 old.market(),old.inputHash(),null,old.privatePhotoSha256(),old.revision()+1,QUEUED,
                 List.of(),List.of(),null,null,null,now);
-        int updated = jdbc.update("update bb_costco_onboarding_job set "+ARCHIVE_ATTEMPT+"""
-                payload=cast(? as jsonb),state='QUEUED',revision=?,
-                    attempts=0,lease_token=null,lease_until=null,next_run_at=?,updated_at=?
+        int updated=jdbc.update("update bb_costco_onboarding_job set "+ARCHIVE_ATTEMPT+"""
+                payload=cast(? as jsonb),state='QUEUED',revision=?,attempts=0,
+                    lease_token=null,lease_until=null,next_run_at=?,updated_at=?
                 where id=? and merchant_id=? and revision=?
-                """, json(queued),queued.revision(),Timestamp.from(now),Timestamp.from(now),
+                  and payload->>'privatePhotoSha256' is not null
+                  and state in ('NEEDS_INPUT','FAILED','CANCELLED','RETRY_WAIT')
+                """,json(queued),queued.revision(),Timestamp.from(now),Timestamp.from(now),
                 old.id(),old.merchantId(),old.revision());
-        return updated==1 ? queued : findOwned(old.id(),old.merchantId()).orElseThrow();
+        return updated==1?queued:findOwned(old.id(),old.merchantId()).orElseThrow();
     }
 
     @Override @Transactional public boolean compareAndSet(CostcoOnboardingJob old, CostcoOnboardingJob next) {
