@@ -1,0 +1,18 @@
+import {chromium} from '../../../../frontend/node_modules/playwright-core/index.mjs';
+import fs from 'node:fs';import assert from 'node:assert/strict';
+const out=new URL('.',import.meta.url).pathname,browser=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox']}),results=[];
+for(const width of [1440]){
+ const c=await browser.newContext({viewport:{width,height:width===390?844:900},isMobile:width===390,hasTouch:width===390}),p=await c.newPage(),requests=[],errors=[];
+ await p.addInitScript(()=>{localStorage.bobbuy_locale='zh-CN';localStorage.bobbuy_disable_chat_websocket='true';localStorage.bobbuy_store_navigation_mobile='collapsed';localStorage.bobbuy_store_navigation_desktop='collapsed';});p.on('pageerror',e=>errors.push(e.message));
+ let mode='initial',held;
+ await p.route('**/api/storefront/product-browse?*',async r=>{requests.push(new URL(r.request().url()).search);const offset=Number(new URL(r.request().url()).searchParams.get('offset'));if(mode==='initial'||mode==='range'&&offset>0){held=r;return;}return r.continue();});
+ const snap=async(name,selector)=>{await p.screenshot({path:out+`${name}-${width}.png`});const e=p.locator(selector).first();const g=await e.evaluate(el=>{const s=getComputedStyle(el),r=el.getBoundingClientRect();return {text:el.textContent,rect:r.toJSON(),color:s.color,background:s.backgroundColor,radius:s.borderRadius,opacity:s.opacity,display:s.display,minHeight:s.minHeight,feedLoaders:document.querySelectorAll('.feed-loader').length,overflow:document.documentElement.scrollWidth>innerWidth};});if(g.rect.top>=0&&g.rect.top< (width===390?844:900))await p.screenshot({path:out+`${name}-${width}-detail.png`,clip:{x:Math.max(0,g.rect.x),y:g.rect.y,width:Math.min(width-Math.max(0,g.rect.x),g.rect.width),height:Math.min((width===390?844:900)-g.rect.y,g.rect.height)}});return g;};
+ try{
+ await p.goto('http://127.0.0.1:5190/products?node=1000&query=SYNTHETIC',{waitUntil:'domcontentloaded'});await p.locator('.catalog-progress').waitFor();const initial=await snap('initial','.catalog-progress');mode='allow';await held.continue();await p.locator('.compact-product-card').first().waitFor();await p.waitForTimeout(250);const normal=await snap('normal','.public-product-catalog');assert.equal(normal.feedLoaders,0);
+ mode='range';await p.evaluate(()=>scrollTo(0,3500));await p.locator('.catalog-row-placeholder').first().waitFor();await p.waitForTimeout(200);const loading=await snap('range','.catalog-row-placeholder');assert(held);
+ mode='allow';await held.fulfill({status:400,json:{errorCode:'BAD_REQUEST',message:'synthetic range interruption'}});await p.locator('.ant-alert').first().waitFor();await p.locator('.ant-alert').first().scrollIntoViewIfNeeded();const failed=await snap('retry','.ant-alert');const retry=await snap('retry-button','.ant-alert button');await p.locator('.ant-alert button').click();await p.evaluate(()=>scrollTo(0,3500));await p.waitForFunction(()=>!document.querySelector('.catalog-row-placeholder')&&document.querySelector('.compact-product-card'));const restored=await snap('restored','.public-product-catalog');
+ assert.equal(restored.feedLoaders,0);assert.equal(restored.overflow,false);assert.deepEqual(errors,[]);results.push({width,pass:true,initial,normal,loading,failed,retry,restored,requests,errors});console.log('PASS products',width);
+ }catch(e){results.push({width,pass:false,error:String(e),requests,errors});console.log('FAIL',width,String(e));await p.screenshot({path:out+`failed-${width}.png`});if(held)await held.abort().catch(()=>{});}
+ await c.close();fs.writeFileSync(out+'products-desktop.json',JSON.stringify(results,null,2));
+}
+await browser.close();

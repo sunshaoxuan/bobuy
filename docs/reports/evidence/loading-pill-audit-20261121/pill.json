@@ -1,0 +1,176 @@
+[
+  {
+    "width": 390,
+    "pass": true,
+    "normal": {
+      "text": "加载更多商品 (24/48)",
+      "rect": {
+        "x": 104.65625,
+        "y": 643.09375,
+        "width": 180.6875,
+        "height": 44,
+        "top": 643.09375,
+        "right": 285.34375,
+        "bottom": 687.09375,
+        "left": 104.65625
+      },
+      "background": "rgb(243, 243, 243)",
+      "color": "rgb(98, 98, 98)",
+      "opacity": "1",
+      "radius": "999px",
+      "gap": "8px",
+      "disabled": false,
+      "icon": null,
+      "overflow": false
+    },
+    "loading": {
+      "text": "加载更多商品 (24/48)",
+      "rect": {
+        "x": 89.15625,
+        "y": 643.09375,
+        "width": 211.6875,
+        "height": 44,
+        "top": 643.09375,
+        "right": 300.84375,
+        "bottom": 687.09375,
+        "left": 89.15625
+      },
+      "background": "rgb(243, 243, 243)",
+      "color": "rgb(98, 98, 98)",
+      "opacity": "0.65",
+      "radius": "999px",
+      "gap": "8px",
+      "disabled": false,
+      "icon": {
+        "rect": {
+          "x": 108.15512084960938,
+          "y": 657.5925903320312,
+          "width": 15.00225830078125,
+          "height": 15.0023193359375,
+          "top": 657.5925903320312,
+          "right": 123.15737915039062,
+          "bottom": 672.5949096679688,
+          "left": 108.15512084960938
+        },
+        "border": "0px none rgb(98, 98, 98)",
+        "svg": true
+      },
+      "overflow": false
+    },
+    "disabled": {
+      "text": "加载更多商品 (24/48)",
+      "rect": {
+        "x": 104.65625,
+        "y": 643.09375,
+        "width": 180.6875,
+        "height": 44,
+        "top": 643.09375,
+        "right": 285.34375,
+        "bottom": 687.09375,
+        "left": 104.65625
+      },
+      "background": "rgb(243, 243, 243)",
+      "color": "rgb(102, 102, 102)",
+      "opacity": "0.65",
+      "radius": "999px",
+      "gap": "8px",
+      "disabled": true,
+      "icon": null,
+      "overflow": false
+    },
+    "requests": [
+      0,
+      1,
+      1
+    ],
+    "errors": [],
+    "after": 48
+  },
+  {
+    "width": 1440,
+    "pass": true,
+    "normal": {
+      "text": "加载更多商品 (24/48)",
+      "rect": {
+        "x": 629.65625,
+        "y": 726.84375,
+        "width": 180.6875,
+        "height": 44,
+        "top": 726.84375,
+        "right": 810.34375,
+        "bottom": 770.84375,
+        "left": 629.65625
+      },
+      "background": "rgb(243, 243, 243)",
+      "color": "rgb(98, 98, 98)",
+      "opacity": "1",
+      "radius": "999px",
+      "gap": "8px",
+      "disabled": false,
+      "icon": null,
+      "overflow": false
+    },
+    "loading": {
+      "text": "加载更多商品 (24/48)",
+      "rect": {
+        "x": 614.15625,
+        "y": 726.84375,
+        "width": 211.6875,
+        "height": 44,
+        "top": 726.84375,
+        "right": 825.84375,
+        "bottom": 770.84375,
+        "left": 614.15625
+      },
+      "background": "rgb(243, 243, 243)",
+      "color": "rgb(98, 98, 98)",
+      "opacity": "0.65",
+      "radius": "999px",
+      "gap": "8px",
+      "disabled": false,
+      "icon": {
+        "rect": {
+          "x": 630.0643310546875,
+          "y": 738.2518310546875,
+          "width": 21.183837890625,
+          "height": 21.183837890625,
+          "top": 738.2518310546875,
+          "right": 651.2481689453125,
+          "bottom": 759.4356689453125,
+          "left": 630.0643310546875
+        },
+        "border": "0px none rgb(98, 98, 98)",
+        "svg": true
+      },
+      "overflow": false
+    },
+    "disabled": {
+      "text": "加载更多商品 (24/48)",
+      "rect": {
+        "x": 629.65625,
+        "y": 726.84375,
+        "width": 180.6875,
+        "height": 44,
+        "top": 726.84375,
+        "right": 810.34375,
+        "bottom": 770.84375,
+        "left": 629.65625
+      },
+      "background": "rgb(243, 243, 243)",
+      "color": "rgb(102, 102, 102)",
+      "opacity": "0.65",
+      "radius": "999px",
+      "gap": "8px",
+      "disabled": true,
+      "icon": null,
+      "overflow": false
+    },
+    "requests": [
+      0,
+      1,
+      1
+    ],
+    "errors": [],
+    "after": 48
+  }
+]

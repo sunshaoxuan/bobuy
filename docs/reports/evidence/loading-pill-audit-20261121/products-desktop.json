@@ -1,0 +1,139 @@
+[
+  {
+    "width": 1440,
+    "pass": true,
+    "initial": {
+      "text": "正在加载",
+      "rect": {
+        "x": 32,
+        "y": 224.75,
+        "width": 1376,
+        "height": 160,
+        "top": 224.75,
+        "right": 1408,
+        "bottom": 384.75,
+        "left": 32
+      },
+      "color": "rgb(25, 25, 25)",
+      "background": "rgba(0, 0, 0, 0)",
+      "radius": "0px",
+      "opacity": "1",
+      "display": "flex",
+      "minHeight": "160px",
+      "feedLoaders": 0,
+      "overflow": false
+    },
+    "normal": {
+      "text": "好物推荐24 / 461 件商品默认排序价格从低到高（同币种）价格从高到低（同币种）评分从低到高评分从高到低人气从高到低人气从低到高标记商品优先好物推荐No.SYNTHETIC-MANUAL-046634d8 热度0商品图片待核Synthetic edited brand合成手入力商品（合成手入力商品）¥2,998/ boxNo.SYNTHETIC-PROGRESSIVE-1-1 热度0SYNTHETIC合成商品 1 / 1（合成商品 1 / 1）价格待确认No.SYNTHETIC-PROGRESSIVE-1-10 热度0SYNTHETIC合成商品 1 / 10（合成商品 1 / 10）价格待确认No.SYNTHETIC-PROGRESSIVE-1-11 热度0SYNTHETIC合成商品 1 / 11（合成商品 1 / 11）价格待确认No.SYNTHETIC-PROGRESSIVE-1-12 热度0SYNTHETIC合成商品 1 / 12（合成商品 1 / 12）价格待确认No.SYNTHETIC-PROGRESSIVE-1-13 热度0SYNTHETIC合成商品 1 / 13（合成商品 1 / 13）价格待确认No.SYNTHETIC-PROGRESSIVE-1-14 热度0SYNTHETIC合成商品 1 / 14（合成商品 1 / 14）价格待确认No.SYNTHETIC-PROGRESSIVE-1-15 热度0SYNTHETIC合成商品 1 / 15（合成商品 1 / 15）价格待确认No.SYNTHETIC-PROGRESSIVE-1-16 热度0SYNTHETIC合成商品 1 / 16（合成商品 1 / 16）价格待确认No.SYNTHETIC-PROGRESSIVE-1-17 热度0SYNTHETIC合成商品 1 / 17（合成商品 1 / 17）价格待确认No.SYNTHETIC-PROGRESSIVE-1-18 热度0SYNTHETIC合成商品 1 / 18（合成商品 1 / 18）价格待确认No.SYNTHETIC-PROGRESSIVE-1-19 热度0SYNTHETIC合成商品 1 / 19（合成商品 1 / 19）价格待确认No.SYNTHETIC-PROGRESSIVE-1-2 热度0SYNTHETIC合成商品 1 / 2（合成商品 1 / 2）价格待确认No.SYNTHETIC-PROGRESSIVE-1-20 热度0SYNTHETIC合成商品 1 / 20（合成商品 1 / 20）价格待确认No.SYNTHETIC-PROGRESSIVE-1-3 热度0SYNTHETIC合成商品 1 / 3（合成商品 1 / 3）价格待确认No.SYNTHETIC-PROGRESSIVE-1-4 热度0SYNTHETIC合成商品 1 / 4（合成商品 1 / 4）价格待确认No.SYNTHETIC-PROGRESSIVE-1-5 热度0SYNTHETIC合成商品 1 / 5（合成商品 1 / 5）价格待确认No.SYNTHETIC-PROGRESSIVE-1-6 热度0SYNTHETIC合成商品 1 / 6（合成商品 1 / 6）价格待确认No.SYNTHETIC-PROGRESSIVE-1-7 热度0SYNTHETIC合成商品 1 / 7（合成商品 1 / 7）价格待确认No.SYNTHETIC-PROGRESSIVE-1-8 热度0SYNTHETIC合成商品 1 / 8（合成商品 1 / 8）价格待确认No.SYNTHETIC-PROGRESSIVE-1-9 热度0SYNTHETIC合成商品 1 / 9（合成商品 1 / 9）价格待确认No.SYNTHETIC-PROGRESSIVE-10-1 热度0SYNTHETIC合成商品 10 / 1（合成商品 10 / 1）价格待确认No.SYNTHETIC-PROGRESSIVE-10-10 热度0SYNTHETIC合成商品 10 / 10（合成商品 10 / 10）价格待确认No.SYNTHETIC-PROGRESSIVE-10-11 热度0SYNTHETIC合成商品 10 / 11（合成商品 10 / 11）价格待确认",
+      "rect": {
+        "x": 32,
+        "y": 88,
+        "width": 1376,
+        "height": 34723.546875,
+        "top": 88,
+        "right": 1408,
+        "bottom": 34811.546875,
+        "left": 32
+      },
+      "color": "rgb(25, 25, 25)",
+      "background": "rgba(0, 0, 0, 0)",
+      "radius": "0px",
+      "opacity": "1",
+      "display": "block",
+      "minHeight": "0px",
+      "feedLoaders": 0,
+      "overflow": false
+    },
+    "loading": {
+      "text": "正在加载",
+      "rect": {
+        "x": 32,
+        "y": -1096.453125,
+        "width": 216,
+        "height": 426,
+        "top": -1096.453125,
+        "right": 248,
+        "bottom": -670.453125,
+        "left": 32
+      },
+      "color": "rgb(98, 98, 98)",
+      "background": "rgb(247, 247, 244)",
+      "radius": "20px",
+      "opacity": "1",
+      "display": "block",
+      "minHeight": "auto",
+      "feedLoaders": 0,
+      "overflow": false
+    },
+    "failed": {
+      "text": "浏览响应或查询无效。重 试",
+      "rect": {
+        "x": 32,
+        "y": 224.75,
+        "width": 1376,
+        "height": 62,
+        "top": 224.75,
+        "right": 1408,
+        "bottom": 286.75,
+        "left": 32
+      },
+      "color": "rgba(0, 0, 0, 0.88)",
+      "background": "rgb(255, 242, 240)",
+      "radius": "10px",
+      "opacity": "1",
+      "display": "flex",
+      "minHeight": "0px",
+      "feedLoaders": 0,
+      "overflow": false
+    },
+    "retry": {
+      "text": "重 试",
+      "rect": {
+        "x": 1331.859375,
+        "y": 233.75,
+        "width": 63.140625,
+        "height": 44,
+        "top": 233.75,
+        "right": 1395,
+        "bottom": 277.75,
+        "left": 1331.859375
+      },
+      "color": "rgba(0, 0, 0, 0.88)",
+      "background": "rgb(255, 255, 255)",
+      "radius": "6px",
+      "opacity": "1",
+      "display": "inline-flex",
+      "minHeight": "44px",
+      "feedLoaders": 0,
+      "overflow": false
+    },
+    "restored": {
+      "text": "好物推荐42 / 461 件商品默认排序价格从低到高（同币种）价格从高到低（同币种）评分从低到高评分从高到低人气从高到低人气从低到高标记商品优先好物推荐No.SYNTHETIC-PROGRESSIVE-10-18 热度0SYNTHETIC合成商品 10 / 18（合成商品 10 / 18）价格待确认No.SYNTHETIC-PROGRESSIVE-10-19 热度0SYNTHETIC合成商品 10 / 19（合成商品 10 / 19）价格待确认No.SYNTHETIC-PROGRESSIVE-10-2 热度0SYNTHETIC合成商品 10 / 2（合成商品 10 / 2）价格待确认No.SYNTHETIC-PROGRESSIVE-10-20 热度0SYNTHETIC合成商品 10 / 20（合成商品 10 / 20）价格待确认No.SYNTHETIC-PROGRESSIVE-10-3 热度0SYNTHETIC合成商品 10 / 3（合成商品 10 / 3）价格待确认No.SYNTHETIC-PROGRESSIVE-10-4 热度0SYNTHETIC合成商品 10 / 4（合成商品 10 / 4）价格待确认No.SYNTHETIC-PROGRESSIVE-10-5 热度0SYNTHETIC合成商品 10 / 5（合成商品 10 / 5）价格待确认No.SYNTHETIC-PROGRESSIVE-10-6 热度0SYNTHETIC合成商品 10 / 6（合成商品 10 / 6）价格待确认No.SYNTHETIC-PROGRESSIVE-10-7 热度0SYNTHETIC合成商品 10 / 7（合成商品 10 / 7）价格待确认No.SYNTHETIC-PROGRESSIVE-10-8 热度0SYNTHETIC合成商品 10 / 8（合成商品 10 / 8）价格待确认No.SYNTHETIC-PROGRESSIVE-10-9 热度0SYNTHETIC合成商品 10 / 9（合成商品 10 / 9）价格待确认No.SYNTHETIC-PROGRESSIVE-11-1 热度0SYNTHETIC合成商品 11 / 1（合成商品 11 / 1）价格待确认No.SYNTHETIC-PROGRESSIVE-11-10 热度0SYNTHETIC合成商品 11 / 10（合成商品 11 / 10）价格待确认No.SYNTHETIC-PROGRESSIVE-11-11 热度0SYNTHETIC合成商品 11 / 11（合成商品 11 / 11）价格待确认No.SYNTHETIC-PROGRESSIVE-11-12 热度0SYNTHETIC合成商品 11 / 12（合成商品 11 / 12）价格待确认No.SYNTHETIC-PROGRESSIVE-11-13 热度0SYNTHETIC合成商品 11 / 13（合成商品 11 / 13）价格待确认No.SYNTHETIC-PROGRESSIVE-11-14 热度0SYNTHETIC合成商品 11 / 14（合成商品 11 / 14）价格待确认No.SYNTHETIC-PROGRESSIVE-11-15 热度0SYNTHETIC合成商品 11 / 15（合成商品 11 / 15）价格待确认No.SYNTHETIC-PROGRESSIVE-11-16 热度0SYNTHETIC合成商品 11 / 16（合成商品 11 / 16）价格待确认No.SYNTHETIC-PROGRESSIVE-11-17 热度0SYNTHETIC合成商品 11 / 17（合成商品 11 / 17）价格待确认No.SYNTHETIC-PROGRESSIVE-11-18 热度0SYNTHETIC合成商品 11 / 18（合成商品 11 / 18）价格待确认No.SYNTHETIC-PROGRESSIVE-11-19 热度0SYNTHETIC合成商品 11 / 19（合成商品 11 / 19）价格待确认No.SYNTHETIC-PROGRESSIVE-11-2 热度0SYNTHETIC合成商品 11 / 2（合成商品 11 / 2）价格待确认No.SYNTHETIC-PROGRESSIVE-11-20 热度0SYNTHETIC合成商品 11 / 20（合成商品 11 / 20）价格待确认No.SYNTHETIC-PROGRESSIVE-11-3 热度0SYNTHETIC合成商品 11 / 3（合成商品 11 / 3）价格待确认No.SYNTHETIC-PROGRESSIVE-11-4 热度0SYNTHETIC合成商品 11 / 4（合成商品 11 / 4）价格待确认No.SYNTHETIC-PROGRESSIVE-11-5 热度0SYNTHETIC合成商品 11 / 5（合成商品 11 / 5）价格待确认No.SYNTHETIC-PROGRESSIVE-11-6 热度0SYNTHETIC合成商品 11 / 6（合成商品 11 / 6）价格待确认No.SYNTHETIC-PROGRESSIVE-11-7 热度0SYNTHETIC合成商品 11 / 7（合成商品 11 / 7）价格待确认No.SYNTHETIC-PROGRESSIVE-11-8 热度0SYNTHETIC合成商品 11 / 8（合成商品 11 / 8）价格待确认No.SYNTHETIC-PROGRESSIVE-11-9 热度0SYNTHETIC合成商品 11 / 9（合成商品 11 / 9）价格待确认No.SYNTHETIC-PROGRESSIVE-12-1 热度0SYNTHETIC合成商品 12 / 1（合成商品 12 / 1）价格待确认No.SYNTHETIC-PROGRESSIVE-12-10 热度0SYNTHETIC合成商品 12 / 10（合成商品 12 / 10）价格待确认No.SYNTHETIC-PROGRESSIVE-12-11 热度0SYNTHETIC合成商品 12 / 11（合成商品 12 / 11）价格待确认No.SYNTHETIC-PROGRESSIVE-12-12 热度0SYNTHETIC合成商品 12 / 12（合成商品 12 / 12）价格待确认No.SYNTHETIC-PROGRESSIVE-12-13 热度0SYNTHETIC合成商品 12 / 13（合成商品 12 / 13）价格待确认No.SYNTHETIC-PROGRESSIVE-12-14 热度0SYNTHETIC合成商品 12 / 14（合成商品 12 / 14）价格待确认No.SYNTHETIC-PROGRESSIVE-12-15 热度0SYNTHETIC合成商品 12 / 15（合成商品 12 / 15）价格待确认No.SYNTHETIC-PROGRESSIVE-12-16 热度0SYNTHETIC合成商品 12 / 16（合成商品 12 / 16）价格待确认No.SYNTHETIC-PROGRESSIVE-12-17 热度0SYNTHETIC合成商品 12 / 17（合成商品 12 / 17）价格待确认No.SYNTHETIC-PROGRESSIVE-12-18 热度0SYNTHETIC合成商品 12 / 18（合成商品 12 / 18）价格待确认No.SYNTHETIC-PROGRESSIVE-12-19 热度0SYNTHETIC合成商品 12 / 19（合成商品 12 / 19）价格待确认",
+      "rect": {
+        "x": 32,
+        "y": -3355,
+        "width": 1376,
+        "height": 34522.296875,
+        "top": -3355,
+        "right": 1408,
+        "bottom": 31167.296875,
+        "left": 32
+      },
+      "color": "rgb(25, 25, 25)",
+      "background": "rgba(0, 0, 0, 0)",
+      "radius": "0px",
+      "opacity": "1",
+      "display": "block",
+      "minHeight": "0px",
+      "feedLoaders": 0,
+      "overflow": false
+    },
+    "requests": [
+      "?merchantId=1000&query=SYNTHETIC&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=false&offset=0&limit=18",
+      "?merchantId=1000&query=SYNTHETIC&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=18&limit=6&revision=d5ba14bcc6633f66381baa400732f0c30f6d243b9cb53b46efb0eb149319d5c8",
+      "?merchantId=1000&query=SYNTHETIC&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=30&limit=42&revision=d5ba14bcc6633f66381baa400732f0c30f6d243b9cb53b46efb0eb149319d5c8",
+      "?merchantId=1000&query=SYNTHETIC&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=30&limit=42&revision=d5ba14bcc6633f66381baa400732f0c30f6d243b9cb53b46efb0eb149319d5c8"
+    ],
+    "errors": []
+  }
+]
