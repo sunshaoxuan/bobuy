@@ -7,18 +7,17 @@ const mocks=vi.hoisted(()=>({productBrowse:vi.fn(),productSales:vi.fn()}));
 vi.mock('../api',()=>({storefrontApi:mocks,productMarkerApi:{}}));
 vi.mock('../components/CompactProductCard',()=>({default:({productId}:{productId:string})=><article className="catalog-master-card" data-product-id={productId}/> }));
 vi.mock('../context/UserRoleContext',()=>({useUserRole:()=>({user:null,isMerchant:false,isAuthenticated:false,loading:false})}));
-afterEach(()=>{vi.restoreAllMocks();});
-it('uses paired server offsets on wide screens and restarts sorted results at zero',async()=>{
- vi.spyOn(window,'matchMedia').mockImplementation(query=>({matches:query==='(min-width: 1920px)',media:query,onchange:null,addListener:()=>{},removeListener:()=>{},addEventListener:()=>{},removeEventListener:()=>{},dispatchEvent:()=>false}));
+afterEach(()=>{vi.restoreAllMocks();vi.unstubAllGlobals();});
+it('uses measured columns without paired pages, retains cached positions on resize and resets sorting at zero',async()=>{
+ vi.stubGlobal('innerWidth',1920);vi.stubGlobal('innerHeight',900);
+ const original=HTMLElement.prototype.getBoundingClientRect;vi.spyOn(HTMLElement.prototype,'getBoundingClientRect').mockImplementation(function(this:HTMLElement){if(this.classList.contains('catalog-grid-probe')||this.classList.contains('catalog-window'))return {x:32,y:420,top:420,left:32,right:innerWidth-32,bottom:10420,width:innerWidth-64,height:this.classList.contains('catalog-window')?10000:0,toJSON:()=>({})};return original.call(this);});
  localStorage.setItem('bobbuy_locale','en-US');mocks.productSales.mockResolvedValue([]);
- mocks.productBrowse.mockImplementation(async q=>browsePage(Array.from({length:24},(_,i)=>productCard(`${q.sort}-${q.page*24+i}`)),{page:q.page,scopeTotal:352,matchedTotal:352,hasNext:true}));
+ mocks.productBrowse.mockImplementation(async q=>browsePage(Array.from({length:q.limit},(_,i)=>productCard(`${q.sort}-${q.offset+i}`)),{offset:q.offset,size:q.limit,scopeTotal:352,matchedTotal:352,hasNext:true}));
  render(<I18nProvider><MemoryRouter initialEntries={['/products?sort=price-asc']}><PublicProductCatalog products={[]} quantities={{}} onAdd={()=>{}} canBuy={()=>false}/></MemoryRouter></I18nProvider>);
- await waitFor(()=>expect(document.querySelectorAll('.catalog-master-card')).toHaveLength(48));
- fireEvent.click(screen.getByRole('button',{name:/Load more/}));
- await waitFor(()=>expect(document.querySelectorAll('.catalog-master-card')).toHaveLength(96));
- expect(mocks.productBrowse.mock.calls.map(call=>call[0].page)).toEqual([0,1,2,3]);
+ await waitFor(()=>expect(document.querySelectorAll('.catalog-master-card')).toHaveLength(32));expect(mocks.productBrowse.mock.calls.map(c=>[c[0].offset,c[0].limit])).toEqual([[0,24],[24,8]]);
+ vi.stubGlobal('innerWidth',390);vi.stubGlobal('innerHeight',844);fireEvent(window,new Event('resize'));
+ await waitFor(()=>expect(document.querySelectorAll('.catalog-master-card')).toHaveLength(8));expect(mocks.productBrowse).toHaveBeenCalledTimes(2);
  fireEvent.change(screen.getByRole('combobox',{name:'Sort products'}),{target:{value:'rating-desc'}});
- await waitFor(()=>expect(document.querySelectorAll('.catalog-master-card')).toHaveLength(48));
- expect(mocks.productBrowse.mock.calls.slice(-2).map(call=>[call[0].page,call[0].sort])).toEqual([[0,'rating-desc'],[1,'rating-desc']]);
- expect(new Set([...document.querySelectorAll('.catalog-master-card')].map(e=>e.getAttribute('data-product-id'))).size).toBe(48);
+ await waitFor(()=>expect(mocks.productBrowse.mock.calls.some(c=>c[0].sort==='rating-desc'&&c[0].offset===0&&c[0].limit===6)).toBe(true));
+ await waitFor(()=>expect(document.querySelectorAll('.catalog-master-card')).toHaveLength(8));expect(new Set([...document.querySelectorAll('.catalog-master-card')].map(e=>e.getAttribute('data-product-id'))).size).toBe(8);
 });

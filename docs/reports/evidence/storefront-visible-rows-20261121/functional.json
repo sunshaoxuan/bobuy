@@ -1,0 +1,61 @@
+[
+  {
+    "width": 390,
+    "pass": false,
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n24 !== 23\n",
+    "requests": [
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=true&offset=0&limit=6",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=12&limit=8&revision=3fdf7fc7c6cd5781756bf8d949fdfa7043d324ac22841916042d106820f5d758",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-000-progressive-02&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=true&offset=0&limit=6",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=true&offset=0&limit=6",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=12&limit=8&revision=3fdf7fc7c6cd5781756bf8d949fdfa7043d324ac22841916042d106820f5d758",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-000-progressive-01&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=true&offset=0&limit=6",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-000-progressive-01&locale=zh-CN&marked=false&markedFirst=true&sort=rating-desc&page=0&sections=false&offset=0&limit=6",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-000-progressive-01&locale=zh-CN&marked=false&markedFirst=true&sort=rating-desc&offset=6&limit=2&revision=c7a79dbe33c696ae2e54d5013baf842c36dbb0b5474b9f4b3a5706dcf821a3bb",
+      "/api/storefront/product-browse?merchantId=1000&query=SYNTHETIC&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=false&offset=0&limit=6",
+      "/api/storefront/product-browse?merchantId=1000&query=SYNTHETIC&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=6&limit=2&revision=ad0c9f36a1e1e2dacae2e79d9db139b1f83872d2b68227b9bd7b0505ba128d1b",
+      "/api/storefront/product-browse/overview?merchantId=1000&query=&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default&sections=true&offset=0&limit=6"
+    ],
+    "errors": []
+  },
+  {
+    "width": 1440,
+    "pass": false,
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n24 !== 23\n",
+    "requests": [
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=true&offset=0&limit=18",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=18&limit=2&revision=3fdf7fc7c6cd5781756bf8d949fdfa7043d324ac22841916042d106820f5d758",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-000-progressive-02&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=true&offset=0&limit=18",
+      "/api/storefront/product-browse/shelf?merchantId=1000&query=&category=shop-progressive-leaf-2&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=18&limit=2&revision=1664362850ba381a07ed65e203d05fb1907b1f6a2c735e3934e13dab2b26003d&sections=true&scopeCategory=shop-000-progressive-02",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=true&offset=0&limit=18",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=18&limit=2&revision=3fdf7fc7c6cd5781756bf8d949fdfa7043d324ac22841916042d106820f5d758",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-000-progressive-01&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=true&offset=0&limit=18",
+      "/api/storefront/product-browse/shelf?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=18&limit=2&revision=b3e429320e349acf17859ce9798a50539dcbe7388c4bc6c455c9456f64bb3987&sections=true&scopeCategory=shop-000-progressive-01",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-000-progressive-01&locale=zh-CN&marked=false&markedFirst=true&sort=rating-desc&page=0&sections=false&offset=0&limit=18",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-000-progressive-01&locale=zh-CN&marked=false&markedFirst=true&sort=rating-desc&offset=18&limit=2&revision=c7a79dbe33c696ae2e54d5013baf842c36dbb0b5474b9f4b3a5706dcf821a3bb",
+      "/api/storefront/product-browse?merchantId=1000&query=SYNTHETIC&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=false&offset=0&limit=18",
+      "/api/storefront/product-browse?merchantId=1000&query=SYNTHETIC&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=18&limit=6&revision=ad0c9f36a1e1e2dacae2e79d9db139b1f83872d2b68227b9bd7b0505ba128d1b",
+      "/api/storefront/product-browse/overview?merchantId=1000&query=&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default&sections=true&offset=0&limit=18",
+      "/api/storefront/product-browse/shelf?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=18&limit=2&revision=3cd218924a73db10cadf1cc41ace48203db5293d933871aa165d6eccff99d472&sections=true&scopeCategory="
+    ],
+    "errors": []
+  },
+  {
+    "width": 360,
+    "pass": false,
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n24 !== 23\n",
+    "requests": [
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=true&offset=0&limit=6",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=12&limit=8&revision=3fdf7fc7c6cd5781756bf8d949fdfa7043d324ac22841916042d106820f5d758",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-000-progressive-02&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=true&offset=0&limit=6",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=true&offset=0&limit=6",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=12&limit=8&revision=3fdf7fc7c6cd5781756bf8d949fdfa7043d324ac22841916042d106820f5d758",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-000-progressive-01&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=true&offset=0&limit=6",
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-000-progressive-01&locale=zh-CN&marked=false&markedFirst=true&sort=rating-desc&page=0&sections=false&offset=0&limit=6",
+      "/api/storefront/product-browse?merchantId=1000&query=SYNTHETIC&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=false&offset=0&limit=6",
+      "/api/storefront/product-browse?merchantId=1000&query=SYNTHETIC&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=6&limit=2&revision=ad0c9f36a1e1e2dacae2e79d9db139b1f83872d2b68227b9bd7b0505ba128d1b",
+      "/api/storefront/product-browse/overview?merchantId=1000&query=&category=&locale=zh-CN&marked=false&markedFirst=true&sort=default&sections=true&offset=0&limit=6"
+    ],
+    "errors": []
+  }
+]
