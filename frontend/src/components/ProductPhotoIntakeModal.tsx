@@ -176,6 +176,18 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
   {job&&photoCanRetry(job)&&!saved&&<Button loading={busy} onClick={()=>void retryRecognition()}>{t('photo.retry_recognition')}</Button>}
   {review&&!saved&&<section>
    <Typography.Title level={4}>{t('photo.review_details')}</Typography.Title>
+   {review.photoFacts?.transcription&&<details>
+    <summary>{t('photo.transcription')}</summary>
+    {review.photoFacts.transcription.tags.map((tag,index)=><p key={index} style={{whiteSpace:'pre-wrap'}}>{tag.rawText}</p>)}
+    {!!review.photoFacts.transcription.productFeatures.length&&<>
+     <p>{t('photo.transcription_features')}</p>
+     <ul>{review.photoFacts.transcription.productFeatures.map((value,index)=><li key={index}>{value}</li>)}</ul>
+    </>}
+    {!!review.photoFacts.transcription.uncertainties.length&&<>
+     <p>{t('photo.transcription_uncertainties')}</p>
+     <ul>{review.photoFacts.transcription.uncertainties.map((value,index)=><li key={index}>{value}</li>)}</ul>
+    </>}
+   </details>}
    {!!review.sources?.length&&<details><summary>{t('photo.sources')}</summary>{review.sources.map(source=><p key={source.sha256}><a href={source.canonicalUrl} target="_blank" rel="noopener noreferrer">{source.canonicalUrl}</a></p>)}</details>}
    {!isNew&&!!review.candidate?.unknownFields?.length&&<p>{t('photo.unknown_fields')}</p>}
    {isNew&&officialPreview&&<><img className="photo-evidence" src={officialPreview} alt={t('photo.official_image')}/><Checkbox checked={useOfficialImage} onChange={e=>{setUseOfficialImage(e.target.checked);edit();}}>{t('photo.use_official_image')}</Checkbox></>}

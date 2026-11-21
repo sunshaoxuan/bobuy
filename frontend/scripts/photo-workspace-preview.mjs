@@ -11,7 +11,7 @@ const png=await fs.readFile(new URL('../../docs/reports/evidence/product-photo-i
 const list=['NEEDS_INPUT','QUEUED','AI_INTAKE','FAILED','COMPLETED'].map((state,i)=>({id:'demo-'+i,state,revision:7,supplierId:'s1',market:'JP',photo:true,itemNumber:i===0?'123456':null,createdAt:new Date(Date.UTC(2026,10,21,8,i)).toISOString(),reviewReady:i===0,failureCode:i===0?'photo.confirm_required':i===3?'ai.pinned_endpoint':null}));
 const name={'zh-CN':'北海道牛乳 · 200 毫升 × 12 瓶','zh-TW':'北海道牛乳 · 200 毫升 × 12 瓶','ja-JP':'北海道牛乳 200 mL × 12 本','en-US':'Hokkaido whole milk · 200 mL × 12 bottles'};
 const history={id:'observation',productId:'p1',amount:1180,currency:'JPY',unit:'12 瓶',observedAt:'2026-11-20T08:00:00Z'};
-const review={jobId:'demo-0',revision:7,supplierId:'s1',market:'JP',itemNumber:'123456',status:'MATCH',matches:[{id:'p1',version:2,name,specification:{},eligible:true}],history:[history],saved:null,photoFacts:{amount:1280,currency:'JPY',unit:'12 瓶',conditions:'',priceKind:'WAREHOUSE',productVisible:true}};
+const review={jobId:'demo-0',revision:7,supplierId:'s1',market:'JP',itemNumber:'123456',status:'MATCH',matches:[{id:'p1',version:2,name,specification:{},eligible:true}],history:[history],saved:null,photoFacts:{amount:1280,currency:'JPY',unit:'12 瓶',conditions:'',priceKind:'WAREHOUSE',productVisible:true,transcription:{tags:[{rawText:'税込 ¥1280\n割引 ¥200'}],productFeatures:['测试包装：蓝色标签'],uncertainties:['价签右侧未拍全']}}};
 const network=[],cancelled=[],errors=[],geometry=[],checks=[],locales=[];
 const design=process.env.PHOTO_DESIGN==='1';
 const settings=design?[[360,800],[390,844],[1280,800]]:[[390,844],[1280,800]];
@@ -146,6 +146,12 @@ for(const [width,height] of settings){
   assert.ok(await page.locator('.photo-review-overview').evaluate(section=>
    Boolean(section.compareDocumentPosition(section.parentElement.querySelector('.photo-queue'))&Node.DOCUMENT_POSITION_FOLLOWING)));
   await shot('review','.product-photo-intake .ant-modal-content');
+  const transcription=page.getByText('价签原文（AI 转录）',{exact:true});
+  await transcription.click();
+  const evidence=transcription.locator('..');
+  assert.equal(await evidence.getByText(/税込 ¥1280/).textContent(),'税込 ¥1280\n割引 ¥200');
+  await evidence.getByText('价签右侧未拍全').waitFor();
+  await transcription.click();
   await page.locator('.photo-proof-toggle').click();
   await page.locator('.photo-evidence-expanded').getAttribute('alt').then(alt=>assert.equal(alt,'私有现场照片'));
   await page.locator('.photo-proof-toggle').click();
