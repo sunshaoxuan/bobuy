@@ -31,7 +31,34 @@ public class ProductSaleService {
  private CurrencyDefinition enabled(String code){return currencies.findById(code).filter(c->c.saleEnabled).orElseThrow(()->invalid("sale.currency_disabled"));}
  public static LocalDate today(){return LocalDate.now(ZoneId.of("Asia/Tokyo"));}
  public Instant now(){return time.now();}
- public ProductSale currentRegular(Product product){var sale=product.getSale();if(sale==null)return null;var price=PriceAdjustmentResolver.resolve(adjustments.findByProductIdOrderByCreatedAtDescIdDesc(product.getId()),product.getId(),product.getMerchantId(),"STOREFRONT",sale.currency(),sale.unit(),sale.amount(),time.now());return new ProductSale(price.regular(),sale.currency(),sale.unit(),sale.validFrom(),sale.validThrough(),sale.revision(),sale.reviewedBy(),sale.reviewedAt(),sale.enabled());}
+ public ProductSale currentRegular(Product product) {
+  if(product.getSale()==null)return null;
+  return currentRegular(product,adjustments.findByProductIdOrderByCreatedAtDescIdDesc(product.getId()),time.now());
+ }
+
+ /** One adjustment query for all displayed products that have a configured sale. */
+ public Map<String,ProductSale> currentRegulars(List<Product> products) {
+  var ids=products.stream().filter(p->p.getSale()!=null).map(Product::getId).toList();
+  if(ids.isEmpty())return Map.of();
+  var documents=new HashMap<String,List<ProductPriceAdjustment>>();
+  var requested=new HashSet<>(ids);
+  for(var document:adjustments.forProducts(ids)) {
+   for(var line:document.lines) {
+    if(requested.contains(line.productId))documents.computeIfAbsent(line.productId,key->new ArrayList<>()).add(document);
+   }
+  }
+  var now=time.now();
+  var prices=new HashMap<String,ProductSale>();
+  for(var product:products)if(product.getSale()!=null)
+   prices.put(product.getId(),currentRegular(product,documents.getOrDefault(product.getId(),List.of()),now));
+  return prices;
+ }
+
+ private ProductSale currentRegular(Product product,List<ProductPriceAdjustment> documents,Instant now) {
+  var sale=product.getSale();
+  var price=PriceAdjustmentResolver.resolve(documents,product.getId(),product.getMerchantId(),"STOREFRONT",sale.currency(),sale.unit(),sale.amount(),now);
+  return new ProductSale(price.regular(),sale.currency(),sale.unit(),sale.validFrom(),sale.validThrough(),sale.revision(),sale.reviewedBy(),sale.reviewedAt(),sale.enabled());
+ }
  public void review(RecommendationItem item,Long owner,Review input){
   if(item.productId==null)throw invalid("sale.profile_required");
   var product=products.lockById(item.productId).filter(p->owner.equals(p.getMerchantId())).orElseThrow(()->invalid("sale.profile_required"));
