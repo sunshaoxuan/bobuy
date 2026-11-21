@@ -919,6 +919,8 @@ const messages: Dictionary = {
     'stock.item.storage_hint': "保存の目安",
     'stock.storage.ambient': "常温",
     'stock.storage.chilled': "冷蔵",
+    'stock.storage.fresh': "生鮮",
+    'stock.storage.frozen': "冷凍",
     'stock.order.pre_order': "予約注文",
     'stock.order.direct_buy': "直接購入",
     'stock.merchant_codes.merchant': "加盟店/サプライヤー",

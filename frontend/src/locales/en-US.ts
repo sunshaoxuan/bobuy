@@ -918,6 +918,8 @@ const messages: Dictionary = {
     'stock.item.storage_hint': 'Storage Hint',
     'stock.storage.ambient': 'Ambient',
     'stock.storage.chilled': 'Chilled',
+    'stock.storage.fresh': 'Fresh',
+    'stock.storage.frozen': 'Frozen',
     'stock.order.pre_order': 'Pre-order',
     'stock.order.direct_buy': 'Direct Buy',
     'stock.merchant_codes.merchant': 'Merchant/Supplier',

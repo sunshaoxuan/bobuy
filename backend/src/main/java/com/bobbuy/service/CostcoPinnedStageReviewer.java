@@ -1,9 +1,13 @@
 package com.bobbuy.service;
 
 import com.bobbuy.model.CostcoOnboardingJob;
+import com.bobbuy.model.CategoryTreeNode;
+import com.bobbuy.model.StorageCondition;
+import com.bobbuy.repository.CategoryTreeNodeRepository;
 import com.bobbuy.repository.ProductRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.stereotype.Component;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -25,16 +29,21 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
     private final ObjectMapper mapper;
     private final CostcoEvidenceStore evidenceStore;
     private final ProductRepository products;
+    private final CategoryTreeNodeRepository categories;
     CostcoPinnedStageReviewer(LlmGateway gateway, ObjectMapper mapper, CostcoEvidenceStore evidenceStore) { this(gateway,mapper,evidenceStore,null); }
+    CostcoPinnedStageReviewer(LlmGateway gateway,ObjectMapper mapper,CostcoEvidenceStore evidenceStore,ProductRepository products){this(gateway,mapper,evidenceStore,products,null);}
     @org.springframework.beans.factory.annotation.Autowired
-    public CostcoPinnedStageReviewer(LlmGateway gateway, ObjectMapper mapper, CostcoEvidenceStore evidenceStore,ProductRepository products) {
-        this.gateway = gateway; this.mapper = mapper; this.evidenceStore = evidenceStore;this.products=products;
+    public CostcoPinnedStageReviewer(LlmGateway gateway, ObjectMapper mapper, CostcoEvidenceStore evidenceStore,ProductRepository products,CategoryTreeNodeRepository categories) {
+        this.gateway = gateway; this.mapper = mapper; this.evidenceStore = evidenceStore;this.products=products;this.categories=categories;
     }
     @Override public CostcoOnboardingDecision review(Stage stage, CostcoOnboardingJob job) {
         try {
             var context = new LinkedHashMap<String, Object>();
             context.put("stage", stage); context.put("market", job.market()); context.put("itemNumber", job.itemNumber());
             context.put("inputHash", job.inputHash()); context.put("priorDecisions", job.decisions());
+            boolean photoDetails=job.privatePhotoSha256()!=null&&(stage==Stage.INTAKE||stage==Stage.FACTS);
+            var categoryOptions=photoDetails?archiveCategoryOptions():Map.<String,String>of();
+            if(photoDetails)context.put("selectableCategoryPaths",categoryOptions);
             var seenTargets=new LinkedHashMap<String,CostcoOnboardingDecision.Target>();
             var masters=new ArrayList<Map<String,Object>>();
             if(products!=null&&job.itemNumber()!=null&&(stage==Stage.IDENTITY||stage==Stage.ADMISSION)){
@@ -137,6 +146,12 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
                 stock, publication, or reuse permission. The first ADMISSION image is the original private
                 photo; use it to check the observed tag. Only the separate reviewed official image may be
                 selected as the officialImageSha256. Report uncertainty instead of inventing details.
+                """ : "") + (photoDetails ? """
+                candidate may additionally contain archiveDetails with keys descriptionJa, categoryNodeId, storageCondition.
+                Write a short Japanese description containing only attributes visible in the photo at INTAKE or explicitly
+                supported by the matching source at FACTS. Do not repeat unsupported health, ingredient or allergen claims.
+                Select categoryNodeId exactly from the keys of selectableCategoryPaths if the product belongs there.
+                Specify AMBIENT, FRESH, CHILLED or FROZEN only with explicit evidence; each unknown value must be null.
                 """ : "") + mapper.writeValueAsString(context);
             LlmGateway.PinnedCompletion result = complete(gateway, prompt, images);
             JsonNode json = mapper.readTree(result.content());
@@ -149,13 +164,19 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
             Candidate candidate = null;
             if (json.hasNonNull("candidate")) {
                 JsonNode c = json.get("candidate");
-                fields(c, Set.of("itemNumber", "brand", "name", "model", "specification", "packaging", "officialImageSha256", "translatedNames", "unknownFields", "referencePrices","target","photoFacts"));
+                var keys=new java.util.HashSet<>(Set.of("itemNumber","brand","name","model","specification","packaging","officialImageSha256","translatedNames","unknownFields","referencePrices","target","photoFacts"));
+                if(job.privatePhotoSha256()!=null)keys.add("archiveDetails");
+                fields(c, keys);
                 for (String name : List.of("itemNumber", "brand", "name", "model", "specification", "packaging", "officialImageSha256")) nullableText(c.get(name), 2000);
                 if (!c.path("translatedNames").isObject() || !c.path("unknownFields").isArray() || !c.path("referencePrices").isArray()) throw new IllegalArgumentException("onboarding.candidate_schema");
                 c.path("translatedNames").fields().forEachRemaining(e -> { if (!Set.of("zh-CN", "zh-TW", "ja-JP", "en-US").contains(e.getKey()) || !e.getValue().isTextual() || e.getValue().asText().length() > 2000) throw new IllegalArgumentException("onboarding.translation_schema"); });
                 for (var unknown : c.path("unknownFields")) if (!unknown.isTextual() || unknown.asText().length() > 200) throw new IllegalArgumentException("onboarding.unknown_schema");
                 for (var price : c.path("referencePrices")) fields(price, Set.of("kind", "amount", "currency", "channel", "taxStatus", "quantityBasis", "validFrom", "validUntil", "timeZone", "conditions", "sourceUrl", "sourceSha256"));
                 if(c.hasNonNull("target"))fields(c.get("target"),Set.of("productId","version","sourceHash"));
+                if(c.has("archiveDetails")){
+                    var fields=photoDetails?validatedArchiveDetails(c.get("archiveDetails"),categoryOptions):null;
+                    ((ObjectNode)c).set("archiveDetails",mapper.valueToTree(fields));
+                }
                 candidate = mapper.treeToValue(c, Candidate.class);
                 if(candidate.target()!=null&&!candidate.target().equals(seenTargets.get(candidate.target().productId())))throw new CostcoNumberOnboardingService.NeedsInput("onboarding.target_conflict");
             }
@@ -179,6 +200,27 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
         } catch (CostcoNumberOnboardingService.NeedsInput error) { throw error; }
         catch (LlmGateway.PinnedFailure error) { throw error; }
         catch (Exception error) { throw new IllegalStateException("onboarding.decision_schema"); }
+    }
+    private Map<String,String> archiveCategoryOptions(){
+        if(categories==null)return Map.of();
+        var nodes=categories.findAll();
+        var parentIds=nodes.stream().map(CategoryTreeNode::getParentId).collect(java.util.stream.Collectors.toSet());
+        var byId=nodes.stream().collect(java.util.stream.Collectors.toMap(CategoryTreeNode::getId,n->n.getName().getOrDefault("ja-JP",n.getId())));
+        var options=new LinkedHashMap<String,String>();
+        nodes.stream().filter(n->n.getSystemKey()==null&&!parentIds.contains(n.getId()))
+                .sorted(java.util.Comparator.comparing(CategoryTreeNode::getId)).limit(200)
+                .forEach(n->options.put(n.getId(),n.getFullPath().stream().map(id->byId.getOrDefault(id,id)).collect(java.util.stream.Collectors.joining(" / "))));
+        return options;
+    }
+    private static ArchiveDetails validatedArchiveDetails(JsonNode details,Map<String,String> categoryOptions){
+        if(!details.isObject())return null;
+        String description=details.path("descriptionJa").isTextual()?details.path("descriptionJa").textValue().strip():null;
+        if(description!=null&&(description.isBlank()||description.length()>2000))description=null;
+        String category=details.path("categoryNodeId").asText("");
+        if(!categoryOptions.containsKey(category))category=null;
+        String storage=details.path("storageCondition").asText("");
+        var condition=java.util.Arrays.stream(StorageCondition.values()).filter(v->v.name().equals(storage)).findFirst().orElse(null);
+        return description==null&&category==null&&condition==null?null:new ArchiveDetails(description,category,condition);
     }
     static LlmGateway.PinnedCompletion complete(LlmGateway gateway, String prompt, List<LlmGateway.PinnedImage> images) {
         try { return gateway.generatePinned(CostcoEvidenceAcquisitionPlanner.REQUIRED_NODE, prompt, images); }
