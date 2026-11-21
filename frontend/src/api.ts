@@ -1317,7 +1317,7 @@ export const api = {
             const body=new FormData();body.set('requestId',input.requestId);body.set('supplierId',input.supplierId);body.set('market',input.market);body.set('file',file);
             const response=await authorizedFetch('/api/ai/costco-onboarding/photo',{method:'POST',body});if(!response.ok)throw new Error(await parseErrorMessage(response));return parseSuccessPayload<CostcoOnboardingJobView>(response);
         },
-        list:()=>fetchJson<CostcoOnboardingJobView[]>('/api/ai/costco-onboarding',[]),
+        list:()=>fetchJson<CostcoOnboardingJobView[]>('/api/ai/costco-onboarding?numbersOnly=true',[]),
         get:(id:string)=>fetchJson<CostcoOnboardingJobView>('/api/ai/costco-onboarding/'+encodeURIComponent(id),null as unknown as CostcoOnboardingJobView)
     },
     auth: {

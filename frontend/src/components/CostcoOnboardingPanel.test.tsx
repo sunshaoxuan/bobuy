@@ -6,10 +6,10 @@ vi.mock('../authStorage',()=>({getStoredUser:()=>fixture.user,subscribeToAuthCha
 vi.mock('../api',()=>({api:{costcoOnboarding:{status:()=>Promise.resolve({workerEnabled:fixture.workerEnabled}),list:(...args:unknown[])=>fixture.list(...args),number:(...args:unknown[])=>fixture.number(...args),photo:(...args:unknown[])=>fixture.photo(...args)}},photoIntakeApi:{queue:fixture.queue}}));
 vi.mock('../i18n',()=>({useI18n:()=>({locale:'en-US',t:(key:string)=>key})}));
 vi.mock('antd',()=>({Alert:({message}:{message:string})=><p role="alert">{message}</p>,Button:({children,...p}:React.ButtonHTMLAttributes<HTMLButtonElement>)=><button {...p}>{children}</button>,Space:({children}:{children:React.ReactNode})=><div>{children}</div>,Tag:({children}:{children:React.ReactNode})=><span>{children}</span>,Typography:{Text:({children}:{children:React.ReactNode})=><span>{children}</span>},Select:({options,onChange,...p}:{options:{value:string;label:string}[];onChange:(v:string)=>void})=><select {...p} onChange={e=>onChange(e.target.value)}><option value=""/>{options.map(o=><option key={o.value} value={o.value}>{o.label}</option>)}</select>}));
-vi.mock('./ProductPhotoIntakeModal',()=>({default:({job}:{job?:{id:string}})=>job?<output>{job.id}</output>:null}));
+vi.mock('./ProductPhotoIntakeModal',()=>({default:({job,queue}:{job?:{id:string};queue:unknown[]})=>job?<output>{job.id}<span data-testid="modal-queue-count">{queue.length}</span></output>:null}));
 import CostcoOnboardingPanel from './CostcoOnboardingPanel';
 const props={suppliers:[{id:'supplier-jp',name:{'en-US':'Synthetic supplier'}}],photoOpen:false,onPhotoClose:vi.fn(),onOpenProduct:vi.fn()};
-afterEach(cleanup);beforeEach(()=>{fixture.user={id:1,roles:['AGENT']};fixture.workerEnabled=true;fixture.list.mockReset().mockResolvedValue([]);fixture.number.mockReset().mockResolvedValue({id:'job',state:'QUEUED',revision:0});});
+afterEach(cleanup);beforeEach(()=>{fixture.user={id:1,roles:['AGENT']};fixture.workerEnabled=true;fixture.queue.mockReset().mockResolvedValue([]);fixture.list.mockReset().mockResolvedValue([]);fixture.number.mockReset().mockResolvedValue({id:'job',state:'QUEUED',revision:0});});
 describe('owned durable task panel',()=>{
  it('shows separate photo queue counts and opens an older photo for confirmation',async()=>{
   const target=document.createElement('div');
@@ -28,6 +28,7 @@ describe('owned durable task panel',()=>{
    fireEvent.click(screen.getByRole('button',{name:'photo.queue'}));
    fireEvent.click(screen.getByRole('button',{name:'photo.queue_review'}));
    expect(screen.getByText('older-photo')).toBeVisible();
+   expect(screen.getByTestId('modal-queue-count')).toHaveTextContent('3');
   }finally{view.unmount();target.remove();}
  });
  it('queues the selected supplier and shows real state without merchant fields or fake completion',async()=>{

@@ -93,7 +93,7 @@ public class ProductPhotoIntakeService {
         var current=job(id,owner);
         if(current.revision()!=revision
                 || !Set.of(CostcoOnboardingJob.State.FAILED,CostcoOnboardingJob.State.NEEDS_INPUT,
-                           CostcoOnboardingJob.State.CANCELLED).contains(current.state())
+                           CostcoOnboardingJob.State.CANCELLED,CostcoOnboardingJob.State.RETRY_WAIT).contains(current.state())
                 || "photo.confirm_required".equals(current.failureCode()) || saved(id,owner)!=null) return current;
         if(!workerEnabled)throw new ApiException(ErrorCode.INVALID_STATUS,"onboarding.worker_disabled");
         try {
@@ -111,6 +111,10 @@ public class ProductPhotoIntakeService {
         var j=job(id,owner);String hash=CostcoEvidencePersistence.hash(json(input).getBytes(java.nio.charset.StandardCharsets.UTF_8));
         var hashes=jdbc.queryForList("select request_hash from bb_product_photo_observation where job_id=? and merchant_id=?",String.class,id,owner);
         if(!hashes.isEmpty()){if(!hashes.get(0).equals(hash))throw conflict();return saved(id,owner);}
+        if (Boolean.TRUE.equals(jdbc.queryForObject("""
+                select exists(select 1 from bb_product_photo_observation where merchant_id=?
+                    and supplier_id=? and market=? and photo_sha256=?)
+                """, Boolean.class, owner,j.supplierId(),j.market(),j.privatePhotoSha256()))) throw conflict();
         if(input==null||!input.identityConfirmed()||j.revision()!=input.revision()||!Set.of(CostcoOnboardingJob.State.NEEDS_INPUT,CostcoOnboardingJob.State.FAILED).contains(j.state()))throw conflict();
         String item=CostcoNumberOnboardingService.normalizeItemNumber(input.itemNumber());
         if(products.deletedCodeCount(owner,item)>0)throw invalid("photo.deleted");

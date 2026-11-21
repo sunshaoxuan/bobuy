@@ -74,7 +74,7 @@ public final class CostcoNumberOnboardingService {
                 input.itemNumber(), input.privatePhotoSha256(), 0, QUEUED, List.of(), List.of(), null, null, null, clock.instant());
         guard.check(proposed);
         var stored = jobs.createOrGet(proposed);
-        if (!key.equals(stored.idempotencyKey()) || !inputHash.equals(stored.inputHash()) || stored.merchantId() != input.merchantId()
+        if ((input.privatePhotoSha256() == null && !key.equals(stored.idempotencyKey())) || !inputHash.equals(stored.inputHash()) || stored.merchantId() != input.merchantId()
                 || !stored.supplierId().equals(input.supplierId()) || !stored.market().equals(input.market()))
             throw new IllegalStateException("onboarding.idempotency_conflict");
         return stored;
