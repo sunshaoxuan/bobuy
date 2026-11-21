@@ -2,9 +2,13 @@ package com.bobbuy.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import javax.imageio.ImageIO;
+import java.io.ByteArrayInputStream;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,8 +42,45 @@ class LlmGatewayPinnedTest {
     @Test void actualImageStaysOnPinnedChatRouteAndRequiresDiscoveredVision(){
         var gateway=new Fake();gateway.generatePinned(NODE,"Inspect pixels",List.of(new LlmGateway.PinnedImage("image/png",new byte[]{1,2,3})));
         assertTrue(gateway.payload.contains("data:image/png;base64,AQID"));assertFalse(gateway.payload.contains("must-not-use-edge"));
-        var unknown=new Fake();unknown.models="{\"data\":[{\"id\":\"fixture-model\"}]}";
-        assertEquals("ai.pinned_vision_unattested",assertThrows(LlmGateway.PinnedFailure.class,()->unknown.generatePinned(NODE,"Inspect",List.of(new LlmGateway.PinnedImage("image/png",new byte[]{1})))).getMessage());assertEquals(1,unknown.targets.size());
+        var denied=new Fake();denied.models="{\"data\":[{\"id\":\"fixture-model\",\"supports_vision\":false}]}";
+        assertEquals("ai.pinned_vision_unattested",assertThrows(LlmGateway.PinnedFailure.class,()->denied.generatePinned(NODE,"Inspect",List.of(new LlmGateway.PinnedImage("image/png",new byte[]{1})))).getMessage());assertEquals(1,denied.targets.size());
+    }
+    @Test void missingVisionMetadataRequiresVerifiedSyntheticPixelsBeforeSendingPrivatePhoto(){
+        var image = new LlmGateway.PinnedImage("image/png", new byte[]{1,2,3});
+        var blind = new Fake();
+        blind.models = "{\"data\":[{\"id\":\"fixture-model\"}]}";
+        assertEquals("ai.pinned_vision_unattested", assertThrows(LlmGateway.PinnedFailure.class,
+                () -> blind.generatePinned(NODE,"Private intake",List.of(image))).getMessage());
+        assertEquals(2, blind.targets.size());
+        assertFalse(blind.payload.contains("Private intake"));
+        assertFalse(blind.payload.contains("AQID"));
+
+        var mapper = new ObjectMapper();
+        var seeing = new Fake() {
+            @Override protected String exchangePinnedJson(URI target,String key,String body) {
+                String response = super.exchangePinnedJson(target,key,body);
+                if (body == null || !body.contains("eight colored squares")) return response;
+                try {
+                    var content = mapper.readTree(body).path("messages").path(1).path("content");
+                    String base64 = content.path(1).path("image_url").path("url").asText().split(",",2)[1];
+                    var pixels = ImageIO.read(new ByteArrayInputStream(Base64.getDecoder().decode(base64)));
+                    var names = Map.of(0xff0000,"red",0x00ff00,"green",0x0000ff,"blue",
+                            0xffff00,"yellow",0x00ffff,"cyan",0xff00ff,"magenta");
+                    var colors = new ArrayList<String>();
+                    for (int index = 0; index < 8; index++) colors.add(names.get(pixels.getRGB(80 * index + 40,40) & 0xffffff));
+                    return mapper.writeValueAsString(Map.of("model","fixture-model","choices",List.of(Map.of(
+                            "finish_reason","stop","message",Map.of("content",mapper.writeValueAsString(Map.of("colors",colors)))))));
+                } catch (Exception error) {
+                    throw new AssertionError(error);
+                }
+            }
+        };
+        seeing.models = blind.models;
+        seeing.generatePinned(NODE,"Private intake",List.of(image));
+        assertEquals(3, seeing.targets.size());
+        assertTrue(seeing.payload.contains("Private intake"));
+        seeing.generatePinned(NODE,"Private intake",List.of(image));
+        assertEquals(4, seeing.targets.size());
     }
     @Test void unsupportedOrAmbiguousModelNeverCallsCompletion(){
         var absent=new Fake();absent.models="{\"data\":[{\"id\":\"different\"}]}";

@@ -19,13 +19,16 @@ import org.springframework.jdbc.datasource.init.ScriptUtils;
 import java.util.*;
 import java.util.concurrent.*;
 import java.time.Instant;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import org.springframework.mock.web.MockMultipartFile;
 import static org.assertj.core.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /** Dedicated synthetic cloud DB only. Real Postgres row locks, JSON, HTTP authorization and rollback. */
 @EnabledIfEnvironmentVariable(named="BOBBUY_PHOTO_ISOLATED_TEST",matches="true")
-@SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.DEFINED_PORT,properties={"server.port=18080","spring.datasource.url=jdbc:postgresql://127.0.0.1:55432/photo","spring.datasource.username=photo","spring.datasource.password=photo-local-only","spring.datasource.driver-class-name=org.postgresql.Driver","spring.jpa.hibernate.ddl-auto=create-drop","spring.flyway.enabled=false","bobbuy.security.header-auth.enabled=false","bobbuy.ai.costco.worker.enabled=true","bobbuy.ai.costco.worker.delay-millis=1000","bobbuy.seed.force-reset-on-invoke=false"})
+@SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.DEFINED_PORT,properties={"server.port=18080","spring.datasource.url=jdbc:postgresql://127.0.0.1:${BOBBUY_PHOTO_TEST_DB_PORT:55432}/photo","spring.datasource.username=photo","spring.datasource.password=photo-local-only","spring.datasource.driver-class-name=org.postgresql.Driver","spring.jpa.hibernate.ddl-auto=create-drop","spring.flyway.enabled=false","bobbuy.security.header-auth.enabled=false","bobbuy.ai.costco.worker.enabled=true","bobbuy.ai.costco.worker.delay-millis=1000","bobbuy.seed.force-reset-on-invoke=false"})
 @AutoConfigureMockMvc
 class ProductPhotoIntakeIntegrationTest {
  @Autowired MockMvc mvc;@Autowired ObjectMapper json;@Autowired JdbcTemplate jdbc;@Autowired BobbuyStore store;
@@ -54,8 +57,103 @@ class ProductPhotoIntakeIntegrationTest {
   jdbc.update("insert into bb_costco_onboarding_job(id,merchant_id,supplier_id,market,idempotency_key,input_hash,revision,state,payload) values(?,?,?,?,?,?,7,'NEEDS_INPUT',cast(? as jsonb))",id,1000,supplier,"JP",j.idempotencyKey(),j.inputHash(),json.writeValueAsString(j));return id;
  }
  ObjectNode input(){var x=json.createObjectNode();x.put("revision",7);x.put("itemNumber",item);x.put("productId",product.getId());x.put("productVersion",product.getRecordVersion());x.put("identityConfirmed",true);x.put("priceConfirmed",true);x.put("amount",999);x.put("currency","JPY");x.put("unit","80 × 2");x.put("inStock",true);x.put("observedAt",Instant.now().minusSeconds(60).toString());return x;}
- JsonNode confirm(String id,ObjectNode x,String token)throws Exception{return json.readTree(mvc.perform(post("/api/product-photo-intake/"+id+"/confirm").header("Authorization","Bearer "+token).contentType(MediaType.APPLICATION_JSON).content(x.toString())).andExpect(status().isOk()).andReturn().getResponse().getContentAsString()).path("data");}
- JsonNode review(String id)throws Exception{return json.readTree(mvc.perform(get("/api/product-photo-intake/"+id).header("Authorization","Bearer "+auth)).andExpect(status().isOk()).andReturn().getResponse().getContentAsString()).path("data");}
+ JsonNode confirm(String id,ObjectNode x,String token)throws Exception{return json.readTree(mvc.perform(post("/api/product-photo-intake/"+id+"/confirm").header("Authorization","Bearer "+token).contentType(MediaType.APPLICATION_JSON).content(x.toString())).andExpect(status().isOk()).andReturn().getResponse().getContentAsByteArray()).path("data");}
+ JsonNode review(String id)throws Exception{return json.readTree(mvc.perform(get("/api/product-photo-intake/"+id).header("Authorization","Bearer "+auth)).andExpect(status().isOk()).andReturn().getResponse().getContentAsByteArray()).path("data");}
+ @Test @EnabledIfEnvironmentVariable(named="BOBBUY_PHOTO_LIVE_TEST", matches="true")
+ void livePhotoMatchesAndUpdatesObservation() throws Exception {
+  product.setItemNumber("53432");
+  product.setName(Map.of("ja-JP","生食用シーフードミックス"));
+  product.setCatalogData(new ProductCatalogData(Map.of("ja-JP","1 kg"),null,"1 kg",List.of(),supplier,null,null,null));
+  product=products.saveAndFlush(product);
+
+  var matched=recognizeLivePhoto("IMG_1484.jpg");
+  assertThat(matched.path("status").asText()).isEqualTo("MATCH");
+  assertThat(matched.path("itemNumber").asText()).isEqualTo("53432");
+  assertThat(matched.path("photoFacts").path("amount").decimalValue()).isEqualByComparingTo("2698");
+  assertThat(matched.path("photoFacts").path("currency").asText()).isEqualTo("JPY");
+  assertThat(matched.path("photoFacts").path("productVisible").asBoolean()).isTrue();
+  var existingInput=liveObservation(matched);
+  existingInput.put("productId",product.getId());
+  existingInput.put("productVersion",product.getRecordVersion());
+  var saved=confirm(matched.path("jobId").asText(),existingInput,auth);
+  assertThat(saved.path("amount").decimalValue()).isEqualByComparingTo("2698");
+  assertThat(saved.path("inStock").asBoolean()).isTrue();
+  assertThat(review(matched.path("jobId").asText()).path("saved")).isEqualTo(saved);
+  assertThat(products.findById(product.getId()).orElseThrow().getBasePrice()).isEqualTo(1234);
+  System.out.println("LIVE PHOTO existing item 53432 confirmed and reopened");
+ }
+
+ @Test @EnabledIfEnvironmentVariable(named="BOBBUY_PHOTO_LIVE_TEST", matches="true")
+ void livePhotoCreatesPrivateMaster() throws Exception {
+  String existingRecognition=System.getenv("BOBBUY_PHOTO_TEST_REUSE_NEW_JOB");
+  var fresh=existingRecognition==null?recognizeLivePhoto("IMG_1638.jpg"):review(existingRecognition);
+  assertThat(fresh.path("status").asText()).isEqualTo("NEW");
+  assertThat(fresh.path("itemNumber").asText()).isEqualTo("93963");
+  var candidate=fresh.path("candidate");
+  assertThat(candidate.path("translatedNames").path("ja-JP").asText()).contains("抹茶");
+  assertThat(fresh.path("photoFacts").path("amount").decimalValue()).isEqualByComparingTo("798");
+  var creation=liveObservation(fresh);
+  var draft=creation.putObject("product");
+  draft.set("name",candidate.path("translatedNames"));
+  String specification=candidate.path("specification").asText();
+  assertThat(specification.replace(" ","")).containsAnyOf("1000g","1kg");
+  draft.putObject("specification").put("ja-JP",specification);
+  draft.set("brand",candidate.path("brand"));
+  draft.putNull("categoryNodeId");
+  var created=confirm(fresh.path("jobId").asText(),creation,auth);
+  assertThat(created.path("amount").decimalValue()).isEqualByComparingTo("798");
+  var reopened=products.findById(created.path("productId").asText()).orElseThrow();
+  assertThat(reopened.getVisibilityStatus()).isEqualTo(ProductVisibility.DRAFTER_ONLY);
+  assertThat(reopened.getSale()).isNull();
+  assertThat(reopened.getName().get("ja-JP")).contains("抹茶");
+  assertThat(reopened.getCatalogData().specification()).containsEntry("ja-JP",specification);
+  assertThat(products.findAllByMerchantIdAndItemNumber(1000L,"93963")).hasSize(1);
+  assertThat(review(fresh.path("jobId").asText()).path("saved")).isEqualTo(created);
+  System.out.println("LIVE PHOTO new item 93963 created privately and reopened");
+ }
+
+ private JsonNode recognizeLivePhoto(String filename) throws Exception {
+  var source=Path.of("../sample",filename);
+  var photo=new MockMultipartFile("file",filename,"image/jpeg",Files.readAllBytes(source));
+  var response=mvc.perform(multipart("/api/ai/costco-onboarding/photo").file(photo)
+          .param("requestId",UUID.randomUUID().toString()).param("supplierId",supplier).param("market","JP")
+          .header("Authorization","Bearer "+auth)).andExpect(status().isOk()).andReturn().getResponse();
+  String id=json.readTree(response.getContentAsByteArray()).path("data").path("id").asText();
+  assertThat(id).isNotBlank();
+  Instant deadline=Instant.now().plusSeconds(390);
+  String lastState="";
+  while(Instant.now().isBefore(deadline)){
+   var current=mvc.perform(get("/api/ai/costco-onboarding/"+id).header("Authorization","Bearer "+auth))
+           .andExpect(status().isOk()).andReturn().getResponse();
+   var result=json.readTree(current.getContentAsByteArray()).path("data");
+   String state=result.path("state").asText();
+   String stage=result.path("stage").asText();
+   if(!state.equals(lastState))System.out.printf("LIVE PHOTO %s state=%s stage=%s failure=%s%n",filename,state,stage,result.path("failureCode").asText(""));
+   lastState=state;
+   if(Set.of("NEEDS_INPUT","FAILED","RETRY_WAIT","COMPLETED").contains(state)){
+    var reviewed=review(id);
+    assertThat(reviewed.path("photoFacts").isObject()).as("real photo intake returned pixel facts (%s)",result.path("failureCode").asText("")).isTrue();
+    return reviewed;
+   }
+   Thread.sleep(2000);
+  }
+  throw new AssertionError("Live photo did not reach confirmation: "+lastState);
+ }
+
+ private ObjectNode liveObservation(JsonNode review) {
+  var request=json.createObjectNode();
+  request.put("revision",review.path("revision").asLong());
+  request.put("itemNumber",review.path("itemNumber").asText());
+  request.put("identityConfirmed",true);
+  request.put("priceConfirmed",true);
+  request.put("inStock",true);
+  request.put("observedAt",Instant.now().minusSeconds(60).toString());
+  var facts=review.path("photoFacts");
+  request.set("amount",facts.path("amount"));
+  request.set("currency",facts.path("currency"));
+  request.set("unit",facts.path("unit"));
+  return request;
+ }
  @Test @EnabledIfEnvironmentVariable(named="BOBBUY_PHOTO_BROWSER",matches="true")
  void browserAcceptanceAgainstRealLocalApi()throws Exception{
   var process=new ProcessBuilder("node","../frontend/scripts/photo-intake-browser.mjs").inheritIO();

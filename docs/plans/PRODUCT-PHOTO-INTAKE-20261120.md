@@ -136,3 +136,12 @@ npm run check:i18n
 - 隔离 PG 与 Vite 为本任务专用；依赖缓存保留复用。正式证据已入仓库，临时 Maven/浏览器日志在 `/workspace/scratch/photo-*.log`；不要公开含测试认证头的失败原始日志。
 - 四语真实截图及legacy方法通过。原尺寸字形测量发现两行确认文字底余量仅2px，部分CJK/英语按钮光学中心偏差1.5–2px略超预算；增加checkbox上下4px内距，按钮/checkbox文字上移1px，保持热区。仅重跑四语显示/字形范围，功能证据继续复用。
 - 最终四语范围通过：实际HTML lang/标题正确，无横向溢出；36个四语按钮/确认文字原尺寸字形内距和中心预算全部通过，结果见 `glyph-locales.json`，主模型重新查看日语长标签原图。主要控件≥44px，布局gap8px及checkbox外距8px，保留键盘可见焦点。该像素检查只覆盖列出的36控件，不冒称全部系统控件。
+
+### 本地真实图片验收 2026-11-21
+
+- 现有桥的 HTTPS 端点可用，配置的旧型号未出现在当次目录。精确型号 `gpt-6.1-terra` 可读取实拍图，但目录未附视觉能力字段。候选保留固定 HTTPS、同型号及禁用跳转约束，对缺失能力字段执行随机合成色块验证，通过后才发私有照片；显式禁用视觉时停止。隔离环境采用现有凭证，经实际 HTTPS 请求验收，未修改网关或生产配置。
+- 网关和审核定向测试 19 项通过。`mvn -B -f backend/pom.xml -Dtest=LlmGatewayPinnedTest,CostcoPinnedStageReviewerTest test`。保留已通过云端单测、浏览器和原生 CI 证据。
+- 现场图 `IMG_1484.jpg` 由应用上传、worker 识别、匹配已有档案并保存回读。货号 53432，现场采购参考价 JPY 2698，单位 1 kg，有货。隔离档案原有售卖相关数据保持原值。
+- 现场图 `IMG_1638.jpg` 由应用上传并识别货号 93963、抹茶玛芬、Kirkland Signature、1000 g、6 个装、JPY 798。由持久候选确认私有新商品，回读名称、规格和现场采购参考价；仅一条商品，状态 DRAFTER_ONLY，无售卖价。隔离 PG 的 55439 避开其他项目的 55432，测试分别使用 `livePhotoMatchesAndUpdatesObservation` 和 `livePhotoCreatesPrivateMaster`。重验时只复用已持久化的真实新品识别结果，避免重发照片。
+- 隔离实拍过程发现两处测试输入问题：日文响应按 JSON 原始字节解析；未分类使用实际界面传递的 null。修正相关输入后完成确认。此前启动失败来自新 PostgreSQL 尚未接受连接。
+- 两张照片的官方来源补充均返回 `onboarding.discovery_missing`，由照片取得的字段仍可提交确认。实体设备后摄和生产复验待执行。桌面和移动的既有运行截图由主模型直接复核，复用相同 UI 输入。
