@@ -52,12 +52,18 @@ export function useVisibleCatalog(identity:string,query:BrowseQuery,enabled:bool
    if(!first||first.length!==Math.min(limit,continuous?sections[0].total:result.matchedTotal)||new Set(first.map(i=>i.productId)).size!==first.length||first.some(i=>!i.productId))throw Error('browse.invalid');
    if(input.current.acceptDataset&&!input.current.acceptDataset(result.datasetRevision))throw Error('browse.changed');
    const rows:Record<string,WindowRows>=Object.fromEntries((continuous?sections.map(s=>[s.category,s.total] as const):[['',result.matchedTotal] as const]).map(([id,total])=>[id,{items:new Map(),total,busy:false,error:''}]));
-   preloadCategoryIcons(result.categories);publish({...current.current,page:result,rows,continuous,busy:false});
    const key=continuous?sections[0].category:'';
-   requestAnimationFrame(()=>setTimeout(()=>{if(!active(token))return;initialPending.current=false;publish({...current.current,rows:{...current.current.rows,[key]:{...current.current.rows[key],items:new Map(first.map((item,index)=>[index,item]))}}});pump();},0));
+   const seeded={...rows,[key]:{...rows[key],items:new Map(first.map((item,index)=>[index,item]))}};
+   if(continuous){
+    preloadCategoryIcons(result.categories);publish({...current.current,page:result,rows,continuous,busy:false});
+    requestAnimationFrame(()=>setTimeout(()=>{if(!active(token))return;initialPending.current=false;publish({...current.current,rows:seeded});pump();},0));
+   }else{
+    // A selected leaf/search has no staged section navigation: publish its cards together.
+    initialPending.current=false;publish({...current.current,page:result,rows:seeded,continuous,busy:false});pump();
+   }
   }catch(error){if(active(token)){initialPending.current=false;publish({...current.current,busy:false,error:(error as Error).message,changed:(error as Error).message==='browse.changed',recoverable:isRecoverableReadError(error)});}}
  }
- useEffect(()=>{generation.current++;flights.current=new Set();wanted.current=new Map();initialPending.current=false;publish(empty(identity));if(enabled){void navigation();const token=generation.current;void(async()=>{try{const urls=await storefrontApi.categoryIcons();if(active(token)&&Array.isArray(urls)&&urls.every(url=>typeof url==='string'))preloadCategoryIconUrls(urls);}catch{/* Hints never block products. */}})();}return()=>{generation.current++;};},[identity,enabled]);
+ useEffect(()=>{generation.current++;flights.current=new Set();wanted.current=new Map();initialPending.current=false;publish(empty(identity));if(enabled){void navigation();const token=generation.current;const q=input.current.query;if(!q.category&&!q.query?.trim()&&(q.sort??'default')==='default')void(async()=>{try{const urls=await storefrontApi.categoryIcons();if(active(token)&&Array.isArray(urls)&&urls.every(url=>typeof url==='string'))preloadCategoryIconUrls(urls);}catch{/* Hints never block products. */}})();}return()=>{generation.current++;};},[identity,enabled]);
  useEffect(()=>{if(!paused)pump();},[paused]);
  const ensure=useCallback((key:string,start:number,end:number)=>{if(input.current.identity!==identity)return;const prior=wanted.current.get(key);if(prior?.start===start&&prior.end===end)return;wanted.current.set(key,{start,end});publish({...current.current});pump();},[identity]);
  function retry(key?:string){if(key===undefined&&!current.current.page){void navigation();return;}for(const [id,row] of Object.entries(current.current.rows))if(key===undefined||id===key)current.current.rows[id]={...row,error:'',recoverable:false};publish({...current.current});pump();}

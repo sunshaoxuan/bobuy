@@ -1,0 +1,958 @@
+[
+  {
+    "width": 390,
+    "pass": true,
+    "overview": {
+      "y": 0,
+      "overflow": false,
+      "mounted": [
+        "progressive-item-1-1",
+        "progressive-item-1-10",
+        "progressive-item-1-11",
+        "progressive-item-1-12",
+        "progressive-item-1-13",
+        "progressive-item-1-14"
+      ],
+      "rows": [
+        {
+          "row": "0",
+          "top": 486.5,
+          "height": 351.6875
+        },
+        {
+          "row": "1",
+          "top": 858.1875,
+          "height": 351.6875
+        },
+        {
+          "row": "2",
+          "top": 1229.875,
+          "height": 351.6875
+        }
+      ],
+      "headings": [
+        {
+          "text": "合成日用商品 1查看全部 →",
+          "top": 416.75,
+          "bottom": 474.5
+        },
+        {
+          "text": "合成两行长名称面包谷物与抹酱查看全部 →",
+          "top": 4434.5625,
+          "bottom": 4501.5625
+        }
+      ],
+      "top": 277
+    },
+    "pinned": {
+      "y": 667,
+      "overflow": false,
+      "mounted": [
+        "progressive-item-1-1",
+        "progressive-item-1-10",
+        "progressive-item-1-11",
+        "progressive-item-1-12",
+        "progressive-item-1-13",
+        "progressive-item-1-14",
+        "progressive-item-1-15",
+        "progressive-item-1-16",
+        "progressive-item-1-17",
+        "progressive-item-1-18"
+      ],
+      "rows": [
+        {
+          "row": "0",
+          "top": -180.5,
+          "height": 351.6875
+        },
+        {
+          "row": "1",
+          "top": 191.1875,
+          "height": 351.6875
+        },
+        {
+          "row": "2",
+          "top": 562.875,
+          "height": 351.6875
+        },
+        {
+          "row": "3",
+          "top": 934.5625,
+          "height": 351.6875
+        },
+        {
+          "row": "4",
+          "top": 1306.25,
+          "height": 351.6875
+        }
+      ],
+      "headings": [
+        {
+          "text": "合成日用商品 1查看全部 →",
+          "top": 229,
+          "bottom": 286.75
+        },
+        {
+          "text": "合成两行长名称面包谷物与抹酱查看全部 →",
+          "top": 3704.9375,
+          "bottom": 3771.9375
+        }
+      ],
+      "top": 229
+    },
+    "push": {
+      "y": 4092,
+      "overflow": false,
+      "mounted": [
+        "progressive-item-1-6",
+        "progressive-item-1-7",
+        "progressive-item-1-8",
+        "progressive-item-1-9",
+        "progressive-item-2-10",
+        "progressive-item-2-11",
+        "progressive-item-2-12",
+        "progressive-item-2-13",
+        "progressive-item-2-14",
+        "progressive-item-2-15",
+        "progressive-item-2-16",
+        "progressive-item-2-17"
+      ],
+      "rows": [
+        {
+          "row": "8",
+          "top": -538.0625,
+          "height": 351.6875
+        },
+        {
+          "row": "9",
+          "top": -166.375,
+          "height": 351.6875
+        },
+        {
+          "row": "0",
+          "top": 296.3125,
+          "height": 351.6875
+        },
+        {
+          "row": "1",
+          "top": 668,
+          "height": 351.6875
+        },
+        {
+          "row": "2",
+          "top": 1039.6875,
+          "height": 351.6875
+        },
+        {
+          "row": "3",
+          "top": 1411.375,
+          "height": 351.6875
+        }
+      ],
+      "headings": [
+        {
+          "text": "合成日用商品 1查看全部 →",
+          "top": 115.5625,
+          "bottom": 173.3125
+        },
+        {
+          "text": "合成两行长名称面包谷物与抹酱查看全部 →",
+          "top": 229,
+          "bottom": 296
+        }
+      ],
+      "top": 229
+    },
+    "replaced": {
+      "y": 4160,
+      "overflow": false,
+      "mounted": [
+        "progressive-item-1-6",
+        "progressive-item-1-7",
+        "progressive-item-1-8",
+        "progressive-item-1-9",
+        "progressive-item-2-10",
+        "progressive-item-2-11",
+        "progressive-item-2-12",
+        "progressive-item-2-13",
+        "progressive-item-2-14",
+        "progressive-item-2-15",
+        "progressive-item-2-16",
+        "progressive-item-2-17"
+      ],
+      "rows": [
+        {
+          "row": "8",
+          "top": -606.0625,
+          "height": 351.6875
+        },
+        {
+          "row": "9",
+          "top": -234.375,
+          "height": 351.6875
+        },
+        {
+          "row": "0",
+          "top": 228.3125,
+          "height": 351.6875
+        },
+        {
+          "row": "1",
+          "top": 600,
+          "height": 351.6875
+        },
+        {
+          "row": "2",
+          "top": 971.6875,
+          "height": 351.6875
+        },
+        {
+          "row": "3",
+          "top": 1343.375,
+          "height": 351.6875
+        }
+      ],
+      "headings": [
+        {
+          "text": "合成日用商品 1查看全部 →",
+          "top": 47.5625,
+          "bottom": 105.3125
+        },
+        {
+          "text": "合成两行长名称面包谷物与抹酱查看全部 →",
+          "top": 229,
+          "bottom": 296
+        }
+      ],
+      "top": 229
+    },
+    "reverse": {
+      "y": 667,
+      "overflow": false,
+      "mounted": [
+        "progressive-item-1-1",
+        "progressive-item-1-10",
+        "progressive-item-1-11",
+        "progressive-item-1-12",
+        "progressive-item-1-13",
+        "progressive-item-1-14",
+        "progressive-item-1-15",
+        "progressive-item-1-16",
+        "progressive-item-1-17",
+        "progressive-item-1-18"
+      ],
+      "rows": [
+        {
+          "row": "0",
+          "top": -180.5,
+          "height": 351.6875
+        },
+        {
+          "row": "1",
+          "top": 191.1875,
+          "height": 351.6875
+        },
+        {
+          "row": "2",
+          "top": 562.875,
+          "height": 351.6875
+        },
+        {
+          "row": "3",
+          "top": 934.5625,
+          "height": 351.6875
+        },
+        {
+          "row": "4",
+          "top": 1306.25,
+          "height": 351.6875
+        }
+      ],
+      "headings": [
+        {
+          "text": "合成日用商品 1查看全部 →",
+          "top": 229,
+          "bottom": 286.75
+        },
+        {
+          "text": "合成两行长名称面包谷物与抹酱查看全部 →",
+          "top": 3642.3125,
+          "bottom": 3709.3125
+        }
+      ],
+      "top": 229
+    },
+    "requests": [
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-000-progressive-01&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=true&offset=0&limit=6",
+      "/api/storefront/product-browse/shelf?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=6&limit=4&revision=2b4ee4f842bf74ccda5f736e2f476afdacb43563dc419676eb67ff7c79fa5f9e&sections=true&scopeCategory=shop-000-progressive-01",
+      "/api/storefront/product-browse/shelf?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=16&limit=4&revision=2b4ee4f842bf74ccda5f736e2f476afdacb43563dc419676eb67ff7c79fa5f9e&sections=true&scopeCategory=shop-000-progressive-01",
+      "/api/storefront/product-browse/shelf?merchantId=1000&query=&category=shop-progressive-leaf-1b&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=0&limit=8&revision=2b4ee4f842bf74ccda5f736e2f476afdacb43563dc419676eb67ff7c79fa5f9e&sections=true&scopeCategory=shop-000-progressive-01"
+    ],
+    "errors": []
+  },
+  {
+    "width": 1440,
+    "pass": true,
+    "overview": {
+      "y": 0,
+      "overflow": false,
+      "mounted": [
+        "progressive-item-1-1",
+        "progressive-item-1-10",
+        "progressive-item-1-11",
+        "progressive-item-1-12",
+        "progressive-item-1-13",
+        "progressive-item-1-14",
+        "progressive-item-1-15",
+        "progressive-item-1-16",
+        "progressive-item-1-17",
+        "progressive-item-1-18",
+        "progressive-item-1-19",
+        "progressive-item-1-2",
+        "progressive-item-1-20",
+        "progressive-item-1-3",
+        "progressive-item-1-4",
+        "progressive-item-1-5",
+        "progressive-item-1-6",
+        "progressive-item-1-7",
+        "progressive-item-1-8",
+        "progressive-item-1-9"
+      ],
+      "rows": [
+        {
+          "row": "0",
+          "top": 454.5,
+          "height": 397.25
+        },
+        {
+          "row": "1",
+          "top": 875.75,
+          "height": 397.25
+        },
+        {
+          "row": "2",
+          "top": 1297,
+          "height": 397.25
+        },
+        {
+          "row": "3",
+          "top": 1718.25,
+          "height": 397.25
+        }
+      ],
+      "headings": [
+        {
+          "text": "合成日用商品 1查看全部 →",
+          "top": 384.75,
+          "bottom": 442.5
+        },
+        {
+          "text": "合成两行长名称面包谷物与抹酱查看全部 →",
+          "top": 2147.5,
+          "bottom": 2205.25
+        }
+      ],
+      "top": 233
+    },
+    "pinned": {
+      "y": 635,
+      "overflow": false,
+      "mounted": [
+        "progressive-item-1-1",
+        "progressive-item-1-10",
+        "progressive-item-1-11",
+        "progressive-item-1-12",
+        "progressive-item-1-13",
+        "progressive-item-1-14",
+        "progressive-item-1-15",
+        "progressive-item-1-16",
+        "progressive-item-1-17",
+        "progressive-item-1-18",
+        "progressive-item-1-19",
+        "progressive-item-1-2",
+        "progressive-item-1-20",
+        "progressive-item-1-3",
+        "progressive-item-1-4",
+        "progressive-item-1-5",
+        "progressive-item-1-6",
+        "progressive-item-1-7",
+        "progressive-item-1-8",
+        "progressive-item-1-9",
+        "progressive-item-2-10",
+        "progressive-item-2-11",
+        "progressive-item-2-12",
+        "progressive-item-2-13",
+        "progressive-item-2-14",
+        "progressive-item-2-15",
+        "progressive-item-2-16",
+        "progressive-item-2-17",
+        "progressive-item-2-18",
+        "progressive-item-2-19",
+        "progressive-item-2-20",
+        "progressive-item-2-7"
+      ],
+      "rows": [
+        {
+          "row": "0",
+          "top": -180.5,
+          "height": 397.25
+        },
+        {
+          "row": "1",
+          "top": 240.75,
+          "height": 397.25
+        },
+        {
+          "row": "2",
+          "top": 662,
+          "height": 397.25
+        },
+        {
+          "row": "3",
+          "top": 1083.25,
+          "height": 397.25
+        },
+        {
+          "row": "0",
+          "top": 1582.25,
+          "height": 397.25
+        },
+        {
+          "row": "1",
+          "top": 2003.5,
+          "height": 397.25
+        }
+      ],
+      "headings": [
+        {
+          "text": "合成日用商品 1查看全部 →",
+          "top": 209,
+          "bottom": 266.75
+        },
+        {
+          "text": "合成两行长名称面包谷物与抹酱查看全部 →",
+          "top": 1512.5,
+          "bottom": 1570.25
+        }
+      ],
+      "top": 209
+    },
+    "push": {
+      "y": 1919,
+      "overflow": false,
+      "mounted": [
+        "progressive-item-1-20",
+        "progressive-item-1-3",
+        "progressive-item-1-4",
+        "progressive-item-1-5",
+        "progressive-item-1-6",
+        "progressive-item-1-7",
+        "progressive-item-1-8",
+        "progressive-item-1-9",
+        "progressive-item-2-10",
+        "progressive-item-2-11",
+        "progressive-item-2-12",
+        "progressive-item-2-13",
+        "progressive-item-2-14",
+        "progressive-item-2-15",
+        "progressive-item-2-16",
+        "progressive-item-2-17",
+        "progressive-item-2-18",
+        "progressive-item-2-19",
+        "progressive-item-2-20",
+        "progressive-item-2-7",
+        "progressive-item-2-8",
+        "progressive-item-2-9"
+      ],
+      "rows": [
+        {
+          "row": "2",
+          "top": -622,
+          "height": 397.25
+        },
+        {
+          "row": "3",
+          "top": -200.75,
+          "height": 397.25
+        },
+        {
+          "row": "0",
+          "top": 298.25,
+          "height": 397.25
+        },
+        {
+          "row": "1",
+          "top": 719.5,
+          "height": 397.25
+        },
+        {
+          "row": "2",
+          "top": 1140.75,
+          "height": 397.25
+        }
+      ],
+      "headings": [
+        {
+          "text": "合成日用商品 1查看全部 →",
+          "top": 126.75,
+          "bottom": 184.5
+        },
+        {
+          "text": "合成两行长名称面包谷物与抹酱查看全部 →",
+          "top": 228.5,
+          "bottom": 286.25
+        }
+      ],
+      "top": 209
+    },
+    "replaced": {
+      "y": 2019,
+      "overflow": false,
+      "mounted": [
+        "progressive-item-1-20",
+        "progressive-item-1-3",
+        "progressive-item-1-4",
+        "progressive-item-1-5",
+        "progressive-item-1-6",
+        "progressive-item-1-7",
+        "progressive-item-1-8",
+        "progressive-item-1-9",
+        "progressive-item-2-10",
+        "progressive-item-2-11",
+        "progressive-item-2-12",
+        "progressive-item-2-13",
+        "progressive-item-2-14",
+        "progressive-item-2-15",
+        "progressive-item-2-16",
+        "progressive-item-2-17",
+        "progressive-item-2-18",
+        "progressive-item-2-19",
+        "progressive-item-2-20",
+        "progressive-item-2-7",
+        "progressive-item-2-8",
+        "progressive-item-2-9"
+      ],
+      "rows": [
+        {
+          "row": "2",
+          "top": -722,
+          "height": 397.25
+        },
+        {
+          "row": "3",
+          "top": -300.75,
+          "height": 397.25
+        },
+        {
+          "row": "0",
+          "top": 198.25,
+          "height": 397.25
+        },
+        {
+          "row": "1",
+          "top": 619.5,
+          "height": 397.25
+        },
+        {
+          "row": "2",
+          "top": 1040.75,
+          "height": 397.25
+        }
+      ],
+      "headings": [
+        {
+          "text": "合成日用商品 1查看全部 →",
+          "top": 26.75,
+          "bottom": 84.5
+        },
+        {
+          "text": "合成两行长名称面包谷物与抹酱查看全部 →",
+          "top": 209,
+          "bottom": 266.75
+        }
+      ],
+      "top": 209
+    },
+    "reverse": {
+      "y": 635,
+      "overflow": false,
+      "mounted": [
+        "progressive-item-1-1",
+        "progressive-item-1-10",
+        "progressive-item-1-11",
+        "progressive-item-1-12",
+        "progressive-item-1-13",
+        "progressive-item-1-14",
+        "progressive-item-1-15",
+        "progressive-item-1-16",
+        "progressive-item-1-17",
+        "progressive-item-1-18",
+        "progressive-item-1-19",
+        "progressive-item-1-2",
+        "progressive-item-1-20",
+        "progressive-item-1-3",
+        "progressive-item-1-4",
+        "progressive-item-1-5",
+        "progressive-item-1-6",
+        "progressive-item-1-7",
+        "progressive-item-1-8",
+        "progressive-item-1-9",
+        "progressive-item-2-10",
+        "progressive-item-2-11",
+        "progressive-item-2-12",
+        "progressive-item-2-13",
+        "progressive-item-2-14",
+        "progressive-item-2-15",
+        "progressive-item-2-16",
+        "progressive-item-2-17",
+        "progressive-item-2-18",
+        "progressive-item-2-19",
+        "progressive-item-2-20",
+        "progressive-item-2-7"
+      ],
+      "rows": [
+        {
+          "row": "0",
+          "top": -180.5,
+          "height": 397.25
+        },
+        {
+          "row": "1",
+          "top": 240.75,
+          "height": 397.25
+        },
+        {
+          "row": "2",
+          "top": 662,
+          "height": 397.25
+        },
+        {
+          "row": "3",
+          "top": 1083.25,
+          "height": 397.25
+        },
+        {
+          "row": "0",
+          "top": 1582.25,
+          "height": 397.25
+        },
+        {
+          "row": "1",
+          "top": 2003.5,
+          "height": 397.25
+        }
+      ],
+      "headings": [
+        {
+          "text": "合成日用商品 1查看全部 →",
+          "top": 209,
+          "bottom": 266.75
+        },
+        {
+          "text": "合成两行长名称面包谷物与抹酱查看全部 →",
+          "top": 1512.5,
+          "bottom": 1570.25
+        }
+      ],
+      "top": 209
+    },
+    "requests": [
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-000-progressive-01&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=true&offset=0&limit=18",
+      "/api/storefront/product-browse/shelf?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=18&limit=2&revision=2b4ee4f842bf74ccda5f736e2f476afdacb43563dc419676eb67ff7c79fa5f9e&sections=true&scopeCategory=shop-000-progressive-01",
+      "/api/storefront/product-browse/shelf?merchantId=1000&query=&category=shop-progressive-leaf-1b&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=0&limit=12&revision=2b4ee4f842bf74ccda5f736e2f476afdacb43563dc419676eb67ff7c79fa5f9e&sections=true&scopeCategory=shop-000-progressive-01",
+      "/api/storefront/product-browse/shelf?merchantId=1000&query=&category=shop-progressive-leaf-1b&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=12&limit=2&revision=2b4ee4f842bf74ccda5f736e2f476afdacb43563dc419676eb67ff7c79fa5f9e&sections=true&scopeCategory=shop-000-progressive-01"
+    ],
+    "errors": []
+  },
+  {
+    "width": 360,
+    "pass": true,
+    "overview": {
+      "y": 0,
+      "overflow": false,
+      "mounted": [
+        "progressive-item-1-1",
+        "progressive-item-1-10",
+        "progressive-item-1-11",
+        "progressive-item-1-12",
+        "progressive-item-1-13",
+        "progressive-item-1-14"
+      ],
+      "rows": [
+        {
+          "row": "0",
+          "top": 539.296875,
+          "height": 336.6875
+        },
+        {
+          "row": "1",
+          "top": 895.984375,
+          "height": 336.6875
+        },
+        {
+          "row": "2",
+          "top": 1252.671875,
+          "height": 336.6875
+        }
+      ],
+      "headings": [
+        {
+          "text": "合成日用商品 1查看全部 →",
+          "top": 469.546875,
+          "bottom": 527.296875
+        },
+        {
+          "text": "合成两行长名称面包谷物与抹酱查看全部 →",
+          "top": 4337.359375,
+          "bottom": 4404.359375
+        }
+      ],
+      "top": 277
+    },
+    "pinned": {
+      "y": 720,
+      "overflow": false,
+      "mounted": [
+        "progressive-item-1-1",
+        "progressive-item-1-10",
+        "progressive-item-1-11",
+        "progressive-item-1-12",
+        "progressive-item-1-13",
+        "progressive-item-1-14",
+        "progressive-item-1-15",
+        "progressive-item-1-16",
+        "progressive-item-1-17",
+        "progressive-item-1-18"
+      ],
+      "rows": [
+        {
+          "row": "0",
+          "top": -180.703125,
+          "height": 336.6875
+        },
+        {
+          "row": "1",
+          "top": 175.984375,
+          "height": 336.6875
+        },
+        {
+          "row": "2",
+          "top": 532.671875,
+          "height": 336.6875
+        },
+        {
+          "row": "3",
+          "top": 889.359375,
+          "height": 336.6875
+        },
+        {
+          "row": "4",
+          "top": 1246.046875,
+          "height": 336.6875
+        }
+      ],
+      "headings": [
+        {
+          "text": "合成日用商品 1查看全部 →",
+          "top": 229,
+          "bottom": 286.75
+        },
+        {
+          "text": "合成两行长名称面包谷物与抹酱查看全部 →",
+          "top": 3554.734375,
+          "bottom": 3621.734375
+        }
+      ],
+      "top": 229
+    },
+    "push": {
+      "y": 3963,
+      "overflow": false,
+      "mounted": [
+        "progressive-item-1-6",
+        "progressive-item-1-7",
+        "progressive-item-1-8",
+        "progressive-item-1-9",
+        "progressive-item-2-10",
+        "progressive-item-2-11",
+        "progressive-item-2-12",
+        "progressive-item-2-13",
+        "progressive-item-2-14",
+        "progressive-item-2-15",
+        "progressive-item-2-16",
+        "progressive-item-2-17"
+      ],
+      "rows": [
+        {
+          "row": "8",
+          "top": -476.265625,
+          "height": 336.6875
+        },
+        {
+          "row": "9",
+          "top": -119.578125,
+          "height": 336.6875
+        },
+        {
+          "row": "0",
+          "top": 328.109375,
+          "height": 336.6875
+        },
+        {
+          "row": "1",
+          "top": 684.796875,
+          "height": 336.6875
+        },
+        {
+          "row": "2",
+          "top": 1041.484375,
+          "height": 336.6875
+        },
+        {
+          "row": "3",
+          "top": 1398.171875,
+          "height": 336.6875
+        }
+      ],
+      "headings": [
+        {
+          "text": "合成日用商品 1查看全部 →",
+          "top": 147.359375,
+          "bottom": 205.109375
+        },
+        {
+          "text": "合成两行长名称面包谷物与抹酱查看全部 →",
+          "top": 249.109375,
+          "bottom": 316.109375
+        }
+      ],
+      "top": 229
+    },
+    "replaced": {
+      "y": 4063,
+      "overflow": false,
+      "mounted": [
+        "progressive-item-1-6",
+        "progressive-item-1-7",
+        "progressive-item-1-8",
+        "progressive-item-1-9",
+        "progressive-item-2-10",
+        "progressive-item-2-11",
+        "progressive-item-2-12",
+        "progressive-item-2-13",
+        "progressive-item-2-14",
+        "progressive-item-2-15",
+        "progressive-item-2-16",
+        "progressive-item-2-17"
+      ],
+      "rows": [
+        {
+          "row": "8",
+          "top": -576.265625,
+          "height": 336.6875
+        },
+        {
+          "row": "9",
+          "top": -219.578125,
+          "height": 336.6875
+        },
+        {
+          "row": "0",
+          "top": 228.109375,
+          "height": 336.6875
+        },
+        {
+          "row": "1",
+          "top": 584.796875,
+          "height": 336.6875
+        },
+        {
+          "row": "2",
+          "top": 941.484375,
+          "height": 336.6875
+        },
+        {
+          "row": "3",
+          "top": 1298.171875,
+          "height": 336.6875
+        }
+      ],
+      "headings": [
+        {
+          "text": "合成日用商品 1查看全部 →",
+          "top": 47.359375,
+          "bottom": 105.109375
+        },
+        {
+          "text": "合成两行长名称面包谷物与抹酱查看全部 →",
+          "top": 229,
+          "bottom": 296
+        }
+      ],
+      "top": 229
+    },
+    "reverse": {
+      "y": 720,
+      "overflow": false,
+      "mounted": [
+        "progressive-item-1-1",
+        "progressive-item-1-10",
+        "progressive-item-1-11",
+        "progressive-item-1-12",
+        "progressive-item-1-13",
+        "progressive-item-1-14",
+        "progressive-item-1-15",
+        "progressive-item-1-16",
+        "progressive-item-1-17",
+        "progressive-item-1-18"
+      ],
+      "rows": [
+        {
+          "row": "0",
+          "top": -180.703125,
+          "height": 336.6875
+        },
+        {
+          "row": "1",
+          "top": 175.984375,
+          "height": 336.6875
+        },
+        {
+          "row": "2",
+          "top": 532.671875,
+          "height": 336.6875
+        },
+        {
+          "row": "3",
+          "top": 889.359375,
+          "height": 336.6875
+        },
+        {
+          "row": "4",
+          "top": 1246.046875,
+          "height": 336.6875
+        }
+      ],
+      "headings": [
+        {
+          "text": "合成日用商品 1查看全部 →",
+          "top": 229,
+          "bottom": 286.75
+        },
+        {
+          "text": "合成两行长名称面包谷物与抹酱查看全部 →",
+          "top": 3492.109375,
+          "bottom": 3559.109375
+        }
+      ],
+      "top": 229
+    },
+    "requests": [
+      "/api/storefront/product-browse?merchantId=1000&query=&category=shop-000-progressive-01&locale=zh-CN&marked=false&markedFirst=true&sort=default&page=0&sections=true&offset=0&limit=6",
+      "/api/storefront/product-browse/shelf?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=6&limit=4&revision=2b4ee4f842bf74ccda5f736e2f476afdacb43563dc419676eb67ff7c79fa5f9e&sections=true&scopeCategory=shop-000-progressive-01",
+      "/api/storefront/product-browse/shelf?merchantId=1000&query=&category=shop-progressive-leaf-1&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=16&limit=4&revision=2b4ee4f842bf74ccda5f736e2f476afdacb43563dc419676eb67ff7c79fa5f9e&sections=true&scopeCategory=shop-000-progressive-01",
+      "/api/storefront/product-browse/shelf?merchantId=1000&query=&category=shop-progressive-leaf-1b&locale=zh-CN&marked=false&markedFirst=true&sort=default&offset=0&limit=8&revision=2b4ee4f842bf74ccda5f736e2f476afdacb43563dc419676eb67ff7c79fa5f9e&sections=true&scopeCategory=shop-000-progressive-01"
+    ],
+    "errors": []
+  }
+]

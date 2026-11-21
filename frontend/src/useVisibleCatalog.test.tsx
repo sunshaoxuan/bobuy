@@ -27,7 +27,7 @@ it('discards a late response after a merchant change and resumes paused viewport
  await act(async()=>resolve(response({offset:6,limit:6},true)));expect(result.current.rows.a.items.has(6)).toBe(false);rerender({id:'b',paused:false});await waitFor(()=>expect(result.current.rows.a.items.has(25)).toBe(true));
 });
 it('keeps explicit leaves and search/sort in a single ordered range',async()=>{
- const {result}=renderHook(()=>useVisibleCatalog('leaf',{category:'a',sort:'rating-desc',query:'text'},true,false,6));await waitFor(()=>expect(result.current.rows['']?.items.size).toBe(6));expect(result.current.continuous).toBe(false);expect(api.productOverview).not.toHaveBeenCalled();expect(api.productBrowse.mock.calls[0][0]).toMatchObject({category:'a',sort:'rating-desc',query:'text',offset:0,limit:6});
+ const {result}=renderHook(()=>useVisibleCatalog('leaf',{category:'a',sort:'rating-desc',query:'text'},true,false,6));await waitFor(()=>expect(result.current.rows['']?.items.size).toBe(6));expect(result.current.continuous).toBe(false);expect(api.categoryIcons).not.toHaveBeenCalled();expect(api.productOverview).not.toHaveBeenCalled();expect(api.productBrowse.mock.calls[0][0]).toMatchObject({category:'a',sort:'rating-desc',query:'text',offset:0,limit:6});
 });
 it('rejects a duplicate product at a different offset',async()=>{
  const {result}=renderHook(()=>useVisibleCatalog('a',{},true,false,6));await waitFor(()=>expect(result.current.rows.a?.items.size).toBe(6));
