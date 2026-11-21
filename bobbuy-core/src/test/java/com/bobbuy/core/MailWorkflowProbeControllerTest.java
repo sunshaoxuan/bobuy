@@ -23,6 +23,7 @@ class MailWorkflowProbeControllerTest {
         mvc.perform(post(path).header("X-BOBBUY-SERVICE-TOKEN", "synthetic-token")
             .header("X-BOBBUY-INTERNAL-SERVICE", "mail-workflow-probe")
             .header("X-Forwarded-For", "127.0.0.1")
+            .header("Forwarded", "for=127.0.0.1")
             .with(request -> { request.setRemoteAddr("192.0.2.10"); return request; }))
             .andExpect(status().isNotFound());
         mvc.perform(post(path).header("X-BOBBUY-SERVICE-TOKEN", "synthetic-token"))
