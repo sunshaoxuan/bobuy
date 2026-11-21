@@ -15,6 +15,25 @@ import {getStoredAccessToken,getStoredUser,getTestInjectedRole,getTestInjectedUs
 const languages=[{key:'ja-JP',label:'日本語'},{key:'zh-CN',label:'简体中文'},{key:'zh-TW',label:'繁體中文'},{key:'en-US',label:'English'}];
 type PanelProps={entries:{key:string;name:string}[];searchEntries?:(query:string,signal:AbortSignal)=>Promise<{key:string;name:string}[]>;getExportIds?:()=>Promise<{ids:string[];limitExceeded:boolean}>;id?:string;onChoose:(id?:string)=>void;onSaved:(rows:CatalogInput[],canonical?:boolean)=>void};
 type UploadRow={key:number;name:string;status:'waiting'|'uploading'|'success'|'failed';sha256?:string;asset?:CatalogMedia;error?:string;reused?:boolean};
+function CatalogPickedPreview({file}:{file:File}){
+ const canvas=useRef<HTMLCanvasElement>(null);
+ useEffect(()=>{
+  const element=canvas.current;
+  if(!element||typeof createImageBitmap!=='function')return;
+  let active=true;
+  void createImageBitmap(file).then(image=>{
+   try{
+    if(!active)return;
+    const scale=Math.min(1,120/Math.max(image.width,image.height));
+    element.width=Math.max(1,Math.round(image.width*scale));element.height=Math.max(1,Math.round(image.height*scale));
+    const context=element.getContext('2d');
+    if(context){context.drawImage(image,0,0,element.width,element.height);element.hidden=false;}
+   }finally{image.close();}
+  }).catch(()=>{ /* The upload validator will report unsupported files. */ });
+  return()=>{active=false;element.hidden=true;};
+ },[file]);
+ return <canvas ref={canvas} hidden aria-hidden="true"/>;
+}
 function uploadIdentity(){try{const user=getStoredUser();return JSON.stringify([user?.id??null,[...(user?.roles??[])].sort(),!!getStoredAccessToken(),getTestInjectedRole(),getTestInjectedUser()]);}catch{return 'storage-unavailable';}}
 export default function ProductCatalogPanel(props:PanelProps){
  const [,refreshAuth]=useState(0),identity=uploadIdentity();const scope=useRef({id:props.id,identity,generation:0});
@@ -41,7 +60,8 @@ function CatalogEditor({entries,id,onChoose,onSaved,searchEntries,getExportIds,c
  const [audit,setAudit]=useState('');
  const [recoveryId,setRecoveryId]=useState<string>(),[restoreOpen,setRestoreOpen]=useState(false),[sourceItems,setSourceItems]=useState<number[]>([]);
  const [bulk,setBulk]=useState(false),[json,setJson]=useState(''),[rows,setRows]=useState<CatalogProposal[]>([]),[validated,setValidated]=useState(false),[selected,setSelected]=useState<React.Key[]>([]);
- const [source,setSource]=useState(''),[imageReviewed,setImageReviewed]=useState(false);const fileInput=useRef<HTMLInputElement>(null);
+ const [source,setSource]=useState<string|undefined>(),[pendingFiles,setPendingFiles]=useState<File[]>([]),[imageReviewed,setImageReviewed]=useState(false);const fileInput=useRef<HTMLInputElement>(null);
+ const uploadSource=source??draft?.defaultImageSourceUrl??'';
  const [uploads,setUploads]=useState<UploadRow[]>([]);const uploadSequence=useRef(0),uploadedAssets=useRef(new Map<string,CatalogMedia>()),savedGallery=useRef<CatalogMedia[]>([]);
  const mounted=useRef(true),operation=useRef(0),uploadPending=useRef(false);
  useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;operation.current++;};},[]);
@@ -65,7 +85,7 @@ function CatalogEditor({entries,id,onChoose,onSaved,searchEntries,getExportIds,c
  useEffect(()=>{if(!id)return;let active=true;const current=beginOperation();setBusy(true);setActiveImage(0);setEditorTab('identity');setLanguage('ja-JP');setDraft(undefined);setRecoveryId(undefined);setRestoreOpen(false);setSourceItems([]);setError('');setReviewed(false);void Promise.all([productCatalogApi.get(id),recommendationTaxonomyApi.options(),categoryTreeApi.list(),categoryTreeApi.product(id)]).then(([profile,choices,tree,path])=>{if(active&&current()){savedValue.current=JSON.stringify(profile.value);savedGallery.current=profile.value.gallery;savedCategoryNodeId.current=path.categoryNodeId;setCategoryNodeId(path.categoryNodeId);setTreeNodes(tree);setDraft(profile.value);setCanonical(profile.canonical);setRecoveryId(profile.recoveryId);setSourceItems(profile.sourceItemIds??[]);setOptions(choices);}}).catch(e=>{if(active&&current())setError(e.message);}).finally(()=>{if(active&&current())setBusy(false);});return()=>{active=false;};},[id]);
  function patch(value:Partial<CatalogInput>){setDraft(prior=>prior?{...prior,...value}:prior);setReviewed(false);setError('');}
  function text(field:'name'|'description'|'specification',language:string,value:string){if(draft)patch({[field]:{...draft[field],[language]:value}});}
- function validDraft(){if(!draft)return false;if(!draft.name['ja-JP']?.trim()){setEditorTab('copy');setLanguage('ja-JP');setError('master.japanese_required');return false;}for(const [key,value] of Object.entries(draft.name)){if(value.length>400||(key!=='ja-JP'&&value.endsWith('（'+draft.name['ja-JP']+'）'))){setEditorTab('copy');setLanguage(key);setError(value.length>400?'master.invalid':'master.pure_name');return false;}}for(let index=0;index<draft.gallery.length;index++){try{const url=new URL(draft.gallery[index].sourceUrl??'');if(url.protocol!=='https:'||url.username||url.password||url.search||url.hash||url.href.length>2048)throw Error();}catch{setEditorTab('media');setActiveImage(index);setError('master.image_source');return false;}}return true;}
+ function validDraft(){if(!draft)return false;if(!draft.name['ja-JP']?.trim()){setEditorTab('copy');setLanguage('ja-JP');setError('master.japanese_required');return false;}for(const [key,value] of Object.entries(draft.name)){if(value.length>400||(key!=='ja-JP'&&value.endsWith('（'+draft.name['ja-JP']+'）'))){setEditorTab('copy');setLanguage(key);setError(value.length>400?'master.invalid':'master.pure_name');return false;}}if(draft.defaultImageSourceUrl&&!validCatalogImageSource(draft.defaultImageSourceUrl)){setEditorTab('media');setError('master.image_source');return false;}for(let index=0;index<draft.gallery.length;index++){try{const url=new URL(draft.gallery[index].sourceUrl??'');if(url.protocol!=='https:'||url.username||url.password||url.search||url.hash||url.href.length>2048)throw Error();}catch{setEditorTab('media');setActiveImage(index);setError('master.image_source');return false;}}return true;}
  useEffect(()=>{if(error&&editorTab==='copy')nameInput.current?.focus();},[error,editorTab,language]);
  async function saveOne(){if(busy||ratingBusy||!draft||!reviewed||!validDraft())return;const current=beginOperation(),submitted=draft;setBusy(true);setError('');try{if(categoryNodeId!==savedCategoryNodeId.current&&JSON.stringify(submitted)===savedValue.current){await categoryTreeApi.assign(submitted.productId,categoryNodeId);if(!current())return;savedCategoryNodeId.current=categoryNodeId;setReviewed(false);onSaved([submitted],canonical);return;}await productCatalogApi.preview([submitted]);if(!current())return;const result=await productCatalogApi.save([submitted]);if(!current())return;savedValue.current=JSON.stringify(result[0].value);savedGallery.current=result[0].value.gallery;setDraft(result[0].value);setCanonical(true);setRecoveryId(result[0].recoveryId);setSourceItems(result[0].sourceItemIds??[]);if(categoryNodeId!==savedCategoryNodeId.current)await categoryTreeApi.assign(submitted.productId,categoryNodeId);if(!current())return;savedCategoryNodeId.current=categoryNodeId;savedValue.current=JSON.stringify(result[0].value);savedGallery.current=result[0].value.gallery;setDraft(result[0].value);setCanonical(true);setRecoveryId(result[0].recoveryId);setSourceItems(result[0].sourceItemIds??[]);setReviewed(false);onSaved(result.map(row=>row.value));}catch(e){if(current())setError((e as Error).message);}finally{if(current())setBusy(false);}}
  async function suggestions(){if(busy)return;const current=beginOperation();setBusy(true);setError('');setReviewed(false);setValidated(false);try{const proposals=(await productCatalogApi.proposals()).filter(row=>row.changes.length>0);if(!current())return;setRows(proposals);setJson(JSON.stringify(proposals.map(row=>row.value),null,2));setSelected(proposals.map(row=>row.value.productId));}catch(e){if(current())setError((e as Error).message);}finally{if(current())setBusy(false);}}
@@ -85,8 +105,8 @@ function CatalogEditor({entries,id,onChoose,onSaved,searchEntries,getExportIds,c
  async function saveBulk(){if(busy||!validated||!reviewed)return;const current=beginOperation();setBusy(true);setError('');try{const result=await productCatalogApi.save(rows.filter(row=>selected.includes(row.value.productId)).map(row=>row.value));if(!current())return;onSaved(result.map(row=>row.value));const remaining=rows.filter(row=>!result.some(saved=>saved.value.productId===row.value.productId));setValidated(false);setReviewed(false);setRows(remaining);setJson(remaining.length?JSON.stringify(remaining.map(row=>row.value),null,2):'');setSelected([]);}catch(e){if(current())setError((e as Error).message);}finally{if(current())setBusy(false);}}
  async function readAudit(){if(busy)return;const current=beginOperation();setBusy(true);setError('');try{const rows=await productCatalogApi.audit();if(current())setAudit(JSON.stringify(rows,null,2));}catch(e){if(current())setError((e as Error).message);}finally{if(current())setBusy(false);}}
  async function upload(files:File[]){
-  if(busy||uploadPending.current||!draft||!imageReviewed||!source||!files.length||!currentScope())return;
-  const current=beginOperation(),productId=draft.productId,sourceUrl=source,pictures=[...draft.gallery];
+  if(busy||uploadPending.current||!draft||!imageReviewed||!uploadSource||!files.length||!currentScope())return;
+  const current=beginOperation(),productId=draft.productId,sourceUrl=uploadSource,pictures=[...draft.gallery];
   const batch:UploadRow[]=files.map(file=>({key:++uploadSequence.current,name:file.name,status:'waiting'}));
   const update=(key:number,change:Partial<UploadRow>)=>{if(current())setUploads(prior=>prior.map(row=>row.key===key?{...row,...change}:row));};
   uploadPending.current=true;setBusy(true);setError('');setUploads(prior=>[...prior,...batch]);
@@ -104,10 +124,12 @@ function CatalogEditor({entries,id,onChoose,onSaved,searchEntries,getExportIds,c
      if(!pictures.some(p=>sameAsset(p,asset)))pictures.push(asset);
      setDraft(prior=>current()&&prior?.productId===productId?{...prior,gallery:[...pictures]}:prior);setReviewed(false);
      update(row.key,{status:'success',asset,reused:!!known});
-    }catch(e){if(current()){const message=(e as Error).message;update(row.key,{status:'failed',error:message});setError(message);}break;}
+    }catch(e){if(current()){const message=(e as Error).message;update(row.key,{status:'failed',error:message});setError(message);}return;}
    }
+   if(current())setPendingFiles([]);
   }finally{uploadPending.current=false;if(current()){setBusy(false);setImageReviewed(false);}}
  }
+ function openFilePicker(){fileInput.current?.click();setEditorTab('media');}
  function reorder(index:number,next:number){if(!draft)return;const gallery=[...draft.gallery];const [picture]=gallery.splice(index,1);gallery.splice(next,0,picture);patch({gallery});}
  const warning=(value:string)=>{const index=value.indexOf(':');const key=index<0?value:value.slice(0,index);const translated=t(key);return translated===key?value:translated+(index<0?'':' · '+value.slice(index+1));};
  const cover=draft?.gallery[Math.min(activeImage,(draft?.gallery.length??1)-1)];
@@ -120,10 +142,15 @@ function CatalogEditor({entries,id,onChoose,onSaved,searchEntries,getExportIds,c
     <div className="catalog-compact-gallery">
      <button ref={imageOpener} type="button" className="catalog-compact-cover" aria-label={t('gallery.fullscreen')} disabled={!cover||busy} onClick={()=>setImageOpen(true)}>{cover?<img src={cover.url} alt={cover.title?.[locale]||draft.name['ja-JP']}/>:<div className="record-no-image"><PictureOutlined/>{t('gallery.pending')}</div>}</button>
      <div className="catalog-compact-tools"><div className="catalog-filmstrip">{draft.gallery.map((picture,index)=><button key={picture.url} type="button" aria-label={t('products.preview_image',{number:String(index+1)})} aria-pressed={index===Math.min(activeImage,draft.gallery.length-1)} onClick={()=>setActiveImage(index)}><img src={picture.url} alt=""/>{index===0&&<span className="catalog-cover-dot"/>}</button>)}</div>
-      <div className="catalog-image-actions"><Button icon={<StarOutlined/>} disabled={!cover||activeImage===0} onClick={()=>{reorder(activeImage,0);setActiveImage(0);}}>{t(activeImage?'gallery.set_main':'gallery.main')}</Button><Button icon={<ArrowLeftOutlined/>} aria-label={t('master.move_up')} disabled={!cover||activeImage===0} onClick={()=>{reorder(activeImage,activeImage-1);setActiveImage(activeImage-1);}}/><Button icon={<ArrowRightOutlined/>} aria-label={t('master.move_down')} disabled={!cover||activeImage>=draft.gallery.length-1} onClick={()=>{reorder(activeImage,activeImage+1);setActiveImage(activeImage+1);}}/><Button danger icon={<DeleteOutlined/>} aria-label={t('store.remove')} disabled={!cover} onClick={()=>{patch({gallery:draft.gallery.filter((_,i)=>i!==activeImage)});setActiveImage(0);}}/><Button icon={<UploadOutlined/>} onClick={()=>setEditorTab('media')}>{t('products.add_images')}</Button></div>
+      <div className="catalog-image-actions"><Button icon={<StarOutlined/>} disabled={!cover||activeImage===0} onClick={()=>{reorder(activeImage,0);setActiveImage(0);}}>{t(activeImage?'gallery.set_main':'gallery.main')}</Button><Button icon={<ArrowLeftOutlined/>} aria-label={t('master.move_up')} disabled={!cover||activeImage===0} onClick={()=>{reorder(activeImage,activeImage-1);setActiveImage(activeImage-1);}}/><Button icon={<ArrowRightOutlined/>} aria-label={t('master.move_down')} disabled={!cover||activeImage>=draft.gallery.length-1} onClick={()=>{reorder(activeImage,activeImage+1);setActiveImage(activeImage+1);}}/><Button danger icon={<DeleteOutlined/>} aria-label={t('store.remove')} disabled={!cover} onClick={()=>{patch({gallery:draft.gallery.filter((_,i)=>i!==activeImage)});setActiveImage(0);}}/><Button icon={<UploadOutlined aria-hidden="true"/>} disabled={busy} onClick={openFilePicker}>{t('products.add_images')}</Button></div>
      </div>
     </div>
     {id&&<ProductPhotoHistory key={id} id={id}/>}
+   <input hidden className="catalog-file-input" ref={fileInput} aria-label={t('gallery.files')} type="file" accept={IMAGE_UPLOAD_ACCEPT} multiple disabled={busy} onChange={e=>{
+    const files=copyFileList(e.currentTarget.files);e.currentTarget.value='';
+    if(!files.length)return;
+    setPendingFiles(files);setError('');
+   }}/>
    <Tabs className="catalog-main-tabs" activeKey={editorTab} onChange={key=>{setEditorTab(key);}} items={[
      {key:'identity',label:t('products.details_tab'),children:<div className="catalog-tab-content">{error&&editorTab==='identity'&&<Alert type="error" message={warning(error)}/>}<div className="catalog-identity-grid">
       <label>{t('rec.code')}<Input maxLength={100} value={draft.itemNumber??''} onChange={e=>patch({itemNumber:e.target.value||null})}/></label>
@@ -141,9 +168,15 @@ function CatalogEditor({entries,id,onChoose,onSaved,searchEntries,getExportIds,c
      </div><Checkbox checked={draft.translationsReviewed} onChange={e=>patch({translationsReviewed:e.target.checked})}>{t('master.translations_reviewed')}</Checkbox></div>},
      {key:'media',label:t('products.media_tab'),children:<div className="catalog-tab-content">{error&&editorTab==='media'&&<Alert type="error" message={warning(error)}/>}<p className="catalog-image-guidance">{t('products.original_images')}</p>
       {cover&&<label>{t('gallery.sources')}<Input value={cover.sourceUrl??''} onChange={e=>patch({gallery:draft.gallery.map((p,i)=>i===activeImage?{...p,sourceUrl:e.target.value}:p)})}/></label>}
-      <div className="catalog-upload-group"><strong>{t('products.add_images')}</strong><label>{t('gallery.sources')}<Input value={source} onChange={e=>setSource(e.target.value)} placeholder="https://…"/></label><Checkbox checked={imageReviewed} onChange={e=>setImageReviewed(e.target.checked)}>{t('gallery.ack')}</Checkbox>
-       <p className="catalog-image-guidance">{t('gallery.format_hint')}</p><input hidden className="catalog-file-input" ref={fileInput} aria-label={t('gallery.files')} type="file" accept={IMAGE_UPLOAD_ACCEPT} multiple disabled={!imageReviewed||!source||busy} onChange={e=>{const input=e.currentTarget,files=copyFileList(input.files);void upload(files).finally(()=>{input.value='';});}}/>
-       <Button icon={<UploadOutlined aria-hidden="true"/>} disabled={!imageReviewed||!source||busy} onClick={()=>fileInput.current?.click()}>{t('gallery.files')}</Button><p className="catalog-image-guidance">{t('master.upload_hint')}</p>
+      <div className="catalog-upload-group">
+       <label>{t('gallery.default_source')}<Input value={draft.defaultImageSourceUrl??''} onChange={e=>{patch({defaultImageSourceUrl:e.target.value});setImageReviewed(false);}} placeholder="https://…"/></label>
+       {(cover||pendingFiles.length>0||source!==undefined)&&<label>{t('gallery.upload_source')}<Input value={uploadSource} onChange={e=>{setSource(e.target.value);setImageReviewed(false);}} placeholder="https://…"/></label>}
+       <Checkbox checked={imageReviewed} onChange={e=>setImageReviewed(e.target.checked)}>{t('gallery.ack')}</Checkbox>
+       <p className="catalog-image-guidance">{t('gallery.format_hint')}</p>
+       {!!pendingFiles.length&&<><ul className="catalog-picked-files">{pendingFiles.map((file,index)=>
+        <li key={index}><CatalogPickedPreview file={file}/><span>{file.name}</span></li>)}</ul>
+        <Button disabled={busy||!imageReviewed||!validCatalogImageSource(uploadSource)} onClick={()=>void upload(pendingFiles)}>{t('gallery.upload_selected')}</Button></>}
+       <p className="catalog-image-guidance">{t('master.upload_hint')}</p>
        {!!uploads.length&&<div className="catalog-upload-feedback" aria-live="polite" aria-atomic="false"><strong className="catalog-upload-heading">{t('master.upload_status')} ({uploads.length})</strong><ul aria-label={t('master.upload_status')}>{uploads.map(row=>{const saved=!!row.asset&&savedGallery.current.some(p=>sameAsset(p,row.asset!));return <li key={row.key}><div className="catalog-upload-row"><strong className="catalog-upload-filename" title={row.name}>{row.name}</strong><Tag color={row.status==='success'?'success':row.status==='failed'?'error':row.status==='uploading'?'processing':undefined}>{t(row.status==='success'?(saved?'master.upload_saved':row.reused?'master.upload_reused':'master.upload_success'):'master.upload_'+row.status)}</Tag></div><details><summary>{t('master.upload_details')}</summary><div className="catalog-upload-record"><span>{t('master.upload_filename')}: {row.name}</span>{row.error&&<span>{warning(row.error)}</span>}{row.asset&&<><span>{t('master.upload_asset')}</span><code>{row.asset.url}</code><code>{row.sha256}</code></>}</div></details></li>;})}</ul>{uploads.some(row=>row.asset&&draft.gallery.some(p=>sameAsset(p,row.asset!))&&!savedGallery.current.some(p=>sameAsset(p,row.asset!)))&&<p role="status">{t('master.upload_unsaved')}</p>}{uploads.some(row=>row.status==='failed')&&<p>{t('master.upload_retry_hint')}</p>}</div>}
       </div></div>}
     ]}/>

@@ -46,8 +46,8 @@ try{
  if(!proof.checks.includes('sameMasterSameImageNewWindowSavedAndReopened')){
  if(!latest?.items?.[0]?.gallery?.length){
   await page.goto('http://127.0.0.1:18080/admin/products');await page.locator('.record-title').filter({hasText:'SYNTHETIC V23 PRODUCT'}).click();const drawer=page.locator('.catalog-editor .ant-drawer-content');await drawer.getByRole('tab',{name:'Images & sources',exact:true}).click();
-  await drawer.getByLabel('Official image sources',{exact:true}).last().fill('https://www.costco.co.jp/synthetic-only-test-image.png');await drawer.getByRole('checkbox',{name:/I verified the exact item\/specification/}).check();
-  await drawer.locator('input[type=file]').setInputFiles(path.resolve(process.cwd(),'../../storage-ui-fixture/synthetic-rustfs-a.png'));await expect(drawer.locator('.catalog-compact-cover img')).toBeVisible();
+  await drawer.getByLabel('Default official image source',{exact:true}).fill('https://www.costco.co.jp/synthetic-only-test-image.png');await drawer.getByRole('checkbox',{name:/I verified the exact item\/specification/}).check();
+  await drawer.locator('input[type=file]').setInputFiles(path.resolve(process.cwd(),'../../storage-ui-fixture/synthetic-rustfs-a.png'));await drawer.getByRole('button',{name:'Upload selected images',exact:true}).click();await expect(drawer.locator('.catalog-compact-cover img')).toBeVisible();
   await drawer.getByRole('checkbox',{name:/I reviewed the data, exact model/}).check();await Promise.all([page.waitForResponse(r=>r.request().method()==='PUT'&&r.url().endsWith('/api/merchant/product-catalog')&&r.ok()),drawer.getByRole('button',{name:'Confirm and save masters',exact:true}).click()]);
   await page.goto(url);await reopen();await mark('syntheticMasterGalleryMaintainedViaNormalUI');
  }
