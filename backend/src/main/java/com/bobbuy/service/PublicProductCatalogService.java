@@ -20,13 +20,17 @@ public class PublicProductCatalogService {
  }
  public record Page(List<Entry> items,int page,int size,long total,boolean hasNext){}
  private record Snapshot(List<Product> eligible,Map<Long,Long> owners,Map<String,List<RecommendationItem>> linked){}
- private Snapshot snapshot(Long merchantId){
-  var published=posts.findByPublishedTrue().stream().filter(p->merchantId==null||merchantId.equals(p.merchantId)).toList();
+ private Snapshot snapshot(Long merchantId){return snapshot(merchantId,null);}
+ private Snapshot snapshot(Long merchantId,Set<String> selectedProductIds){
+  // A detail read retains the exact publication predicate, but hydrates only this
+  // product and its linked issues. Never expand a private master into public facts.
+  var candidates=selectedProductIds==null?null:items.findByProductIdInOrderById(selectedProductIds);
+  var published=(candidates==null?posts.findByPublishedTrue():posts.findAllById(candidates.stream().map(i->i.postId).distinct().toList()).stream().filter(p->p.published).toList()).stream().filter(p->merchantId==null||merchantId.equals(p.merchantId)).toList();
   Map<Long,Long> owners=new HashMap<>();published.forEach(p->owners.put(p.id,p.merchantId));
-  var originals=published.isEmpty()?List.<RecommendationItem>of():items.findByPostIdInOrderById(published.stream().map(p->p.id).toList());
+  var originals=published.isEmpty()?List.<RecommendationItem>of():candidates==null?items.findByPostIdInOrderById(published.stream().map(p->p.id).toList()):candidates.stream().filter(i->owners.containsKey(i.postId)).toList();
   quotes.decorate(originals,false);var displayed=taxonomy.display(originals,true);
   var linked=new HashMap<String,List<RecommendationItem>>();for(var i:displayed)if(i.productId!=null)linked.computeIfAbsent(i.productId,k->new ArrayList<>()).add(i);
-  var eligible=products.findAll().stream().filter(p->!p.isDeleted()).filter(p->merchantId==null||merchantId.equals(p.getMerchantId()))
+  var eligible=(selectedProductIds==null?products.findAll():products.findAllById(selectedProductIds)).stream().filter(p->!p.isDeleted()).filter(p->merchantId==null||merchantId.equals(p.getMerchantId()))
    .filter(p->p.getVisibilityStatus()==ProductVisibility.PUBLIC||p.getVisibilityStatus()==ProductVisibility.DRAFTER_ONLY&&linked.getOrDefault(p.getId(),List.of()).stream().anyMatch(i->Objects.equals(owners.get(i.postId),p.getMerchantId())))
    .sorted(Comparator.comparing(Product::getId)).toList();
   return new Snapshot(eligible,owners,linked);
@@ -50,7 +54,7 @@ public class PublicProductCatalogService {
  @Transactional(readOnly=true)
  public List<Entry> publicEntries(Long merchantId,Set<String> selectedProductIds){
   if(merchantId!=null&&merchantId<1)throw new IllegalArgumentException("Invalid merchant");
-  var snapshot=snapshot(merchantId);var owners=snapshot.owners();var linked=snapshot.linked();quotes.decorate(linked.values().stream().flatMap(List::stream).toList(),true);
+  var snapshot=snapshot(merchantId,selectedProductIds);var owners=snapshot.owners();var linked=snapshot.linked();quotes.decorate(linked.values().stream().flatMap(List::stream).toList(),true);
   var eligible=selectedProductIds==null?snapshot.eligible():snapshot.eligible().stream().filter(p->selectedProductIds.contains(p.getId())).toList();
   var referencePrices=quotes.currentPrices(eligible);
   var visibleOwners=new HashMap<String,Long>();eligible.forEach(p->visibleOwners.put(p.getId(),p.getMerchantId()));var publicRatings=ratings==null?Map.<String,java.math.BigDecimal>of():ratings.publicRatings(visibleOwners);

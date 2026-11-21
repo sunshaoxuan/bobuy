@@ -308,3 +308,9 @@
 .public-product-catalog .shopping-section-heading :is(h2,h3){flex:1}
 .section-continuation{min-height:100px}
 @media(max-width:767px){.public-product-catalog .shopping-root-heading{font-size:20px}.public-product-catalog .shopping-section-heading :is(h2,h3){font-size:18px}}
+
+/* Viewport windows preserve real section extent without offscreen card/image mounting. */
+.catalog-grid-probe{height:0;visibility:hidden;overflow:hidden;pointer-events:none;}
+.catalog-window{position:relative;min-width:0;overflow-anchor:none;}
+.catalog-window-row{position:absolute;left:0;right:0;}
+.catalog-row-placeholder{box-sizing:border-box;min-width:0;border-radius:20px;background:#f7f7f4;color:#626262;padding:16px;font-size:14px;}
