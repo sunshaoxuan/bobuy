@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
-  Table,
+  Table, Alert, Spin,
   Input,
   InputNumber,
   Button,
@@ -43,9 +43,9 @@ import ProductCatalogPanel from '../components/ProductCatalogPanel';
 import CategoryTreePicker from '../components/CategoryTreePicker';
 import ProductPricingPanel from '../components/ProductPricingPanel';
 import ProductMarkerEditor from '../components/ProductMarkerEditor';
-import { api, categoryTreeApi, type CategoryTreeNode, type MobileProductResponse, type CategoryAttributeTemplateField, type MobileCategory, type MobileSupplier, type AiOnboardingSuggestion } from '../api';
+import { api, categoryTreeApi, merchantArchivePageSize, type MerchantArchiveRow, type CategoryTreeNode, type MobileProductResponse, type CategoryAttributeTemplateField, type MobileCategory, type MobileSupplier, type AiOnboardingSuggestion } from '../api';
 import './productRecords.css';
-import {ProductReviewStars} from '../components/ProductRating';
+import {ProductStars} from '../components/ProductRating';
 import CardPrice from '../components/CardPrice';
 
 const { Title, Text } = Typography;
@@ -61,7 +61,10 @@ interface StockItem {
   category: string;
   categoryPath?: string;
   price: number;
-  actualSale?:import('../api').ProductSale;
+  actualSale?:MerchantArchiveRow["currentRegular"];
+  mediaCount?:number;
+  rating?:number|null;
+  specification?:string;
   stock: number;
   unit: string;
   description?: string;
@@ -77,6 +80,18 @@ interface StockItem {
   priceTiers?: { tierName: string; price: number; currency: string; agentOnly: boolean }[];
   isNew?: boolean;
   suggestion?: AiOnboardingSuggestion;
+}
+
+function stockItemFromArchive(row: MerchantArchiveRow): StockItem {
+  return {
+    key: row.id, name: row.name, sku: row.itemNumber ?? undefined, brand: row.brand ?? undefined,
+    category: row.categoryId ?? '', categoryPath: row.categoryPath ?? undefined,
+    catalogDriven: row.catalogDriven, visibilityStatus: row.privateDraft ? 'DRAFTER_ONLY' : 'PUBLIC',
+    stock: 0, price: 0, unit: 'pc', actualSale: row.currentRegular, rating: row.rating,
+    mediaCount: row.mediaCount, specification: row.specification ?? undefined,
+    dynamicAttributes: normalizeStructuredAttributes({netContent:row.netContent,packSize:row.packSize}),
+    mediaGallery: row.image ? [{id:row.id,url:row.image,type:'image'}] : []
+  };
 }
 
 export function stockItemFromResponse(res:MobileProductResponse):StockItem {
@@ -234,6 +249,18 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
   const [categories, setCategories] = useState<MobileCategory[]>([]);
   const [suppliers, setSuppliers] = useState<MobileSupplier[]>([]);
   const [searchText, setSearchText] = useState('');
+  const [page, setPage] = useState(0);
+  const [total,setTotal] = useState(0);
+  const [listBusy,setListBusy] = useState(true);
+  const [listFailed,setListFailed] = useState(false);
+  const [revision,setRevision] = useState(0);
+  const listRequest=useRef(0), detailRequest=useRef(0);
+  const refreshArchive=useCallback(()=>{listRequest.current++;setRevision(value=>value+1);},[]);
+  const searchChanged=(value:string)=>{
+    listRequest.current++;
+    setSearchText(value);
+    setPage(0);
+  };
   const [createTree,setCreateTree]=useState<CategoryTreeNode[]>([]);
   const savingKeys=useRef(new Set<string>());
   const [recordView,setRecordView]=useState<'gallery'|'manage'>(embedded?'gallery':'manage');
@@ -304,15 +331,33 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
   const [pricingId,setPricingId]=useState<string>();
 
   useEffect(() => {
-    let cancelled = false;
-    api.products().then((result) => {
-      if (cancelled) return;
-      const mapped = result.map(stockItemFromResponse);
-      setDataSource(mapped);
-    });
-    return () => { cancelled = true; };
-  }, [refreshKey]);
+    const ticket=++listRequest.current, controller=new AbortController();
+    setListBusy(true);
+    setListFailed(false);
+    const load=async()=>{
+      try {
+        const result=await api.merchantArchive(page,searchText,controller.signal);
+        if(ticket!==listRequest.current)return;
+        const lastPage=Math.max(0,Math.ceil(result.total/merchantArchivePageSize)-1);
+        if(page>lastPage){setPage(lastPage);return;}
+        setTotal(result.total);
+        setDataSource(prior=>[...result.rows.map(stockItemFromArchive),...prior.filter(row=>row.isNew)]);
+      } catch {
+        if(ticket===listRequest.current)setListFailed(true);
+      } finally {
+        if(ticket===listRequest.current)setListBusy(false);
+      }
+    };
+    const timer=searchText ? setTimeout(()=>void load(),180) : undefined;
+    if(timer===undefined)void load();
+    return ()=>{listRequest.current++;controller.abort();clearTimeout(timer);};
+  },[page,searchText,locale,revision,refreshKey]);
 
+  useEffect(()=>()=>{detailRequest.current++;},[]);
+  const pickArchiveProduct=useCallback(async(query:string,signal:AbortSignal)=>{
+    const result=await api.merchantArchive(0,query,signal);
+    return result.rows.map(row=>({key:row.id,name:row.name}));
+  },[]);
 
   const getLocalizedFallback = (values?: L10nValues, fallback?: string) => {
     if (!values) {
@@ -359,7 +404,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
       unit: 'pc',
       isNew: true
     };
-    setDataSource([...dataSource, newData]);
+    setDataSource(prior=>[...prior,newData]);
     openDrawer(newData);
     void categoryTreeApi.list().then(setCreateTree).catch(error=>message.error(error.message));
   };
@@ -367,7 +412,8 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
   const handleDelete = async (key: string) => {
     try {
       await api.deleteProduct(key);
-      setDataSource(dataSource.filter((item) => item.key !== key));
+      setDataSource(prior=>prior.filter(item=>item.key!==key));
+      refreshArchive();
       onDeleted?.();
       message.success(t('stock.msg.deleted'));
     } catch (err) {
@@ -508,6 +554,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         });
         setSyncStatus('saved');
       }
+      refreshArchive();
       return true;
     } catch (err) {
       console.error('[Sync] Failed:', err);
@@ -534,6 +581,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
   };
 
   const openDrawer = (record: StockItem, defaultTab?: string) => {
+    detailRequest.current++;
     setEditingItem(record);
     form.setFieldsValue({
       ...record,
@@ -548,6 +596,17 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
     setSyncStatus('idle');
   };
 
+  const openExistingDrawer=async(record:StockItem)=>{
+    if(record.isNew){openDrawer(record);return;}
+    const ticket=++detailRequest.current;
+    try {
+      const details=await api.product(record.key);
+      if(ticket===detailRequest.current)openDrawer(stockItemFromResponse(details));
+    } catch(error) {
+      if(ticket===detailRequest.current)message.error(t((error as Error).message));
+    }
+  };
+
   const closeDrawer = () => {
     clearAutosaveTimer();
     setIsDrawerVisible(false);
@@ -560,7 +619,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
     if (!editingItem) {
       return;
     }
-    const currentItem = dataSource.find((item) => editingItem.key === item.key);
+    const currentItem = editingItem;
     if (!currentItem) return;
     const rawValues = values as Partial<StockItem> & { merchantSkuEntries?: MerchantSkuEntry[] };
     const { merchantSkuEntries, ...safeValues } = rawValues;
@@ -590,6 +649,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
       return;
     }
 
+    setEditingItem(current=>current?.key===updatedItem.key&&!updatedItem.isNew?updatedItem:current);
     if (options.showMessage) {
       message.success(t('stock.drawer.update_success'));
     }
@@ -627,9 +687,11 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
     };
   }, []);
 
-  const filteredData = dataSource.filter(
-    (item) => item.name.toLowerCase().includes(searchText.toLowerCase()) || (item.sku && item.sku.toLowerCase().includes(searchText.toLowerCase()))
-  );
+  const filteredData=dataSource;
+  const changePage=(next:number)=>{
+    listRequest.current++;
+    setPage(next);
+  };
 
   const compactText = (value: React.ReactNode, label: string) => (
     <Tooltip title={label} trigger={['hover', 'focus']}>
@@ -645,7 +707,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
   const columns = [
     {
       title: '', key: 'thumbnail', width: 60,
-      render: (_: unknown, record: StockItem) => <img className="stock-compact-thumb" src={getStockThumbnail(record)} alt={record.name} onError={event=>{event.currentTarget.onerror=null;event.currentTarget.src=DEFAULT_STOCK_THUMBNAIL;}} />
+      render: (_: unknown, record: StockItem) => <img className="stock-compact-thumb" src={getStockThumbnail(record)} alt={record.name} loading="lazy" onError={event=>{event.currentTarget.onerror=null;event.currentTarget.src=DEFAULT_STOCK_THUMBNAIL;}} />
     },
     {
       title: t('stock.item.name'),
@@ -704,7 +766,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
           {actionButton(t('master.title')+' '+record.name, <DatabaseOutlined aria-hidden/>, {disabled:record.isNew,onClick:()=>setCatalogId(record.key)})}
           {actionButton(t('pricing.title')+' '+record.name, <DollarOutlined aria-hidden/>, {disabled:record.isNew,onClick:()=>setPricingId(record.key)})}
           {actionButton(t('marker.assigned')+' '+record.name, <TagsOutlined aria-hidden/>, {disabled:record.isNew,onClick:()=>openMarkers(record.key)})}
-          {actionButton(t('stock.master.edit_detail')+' '+record.name, <EditOutlined aria-hidden/>, {onClick:()=>record.catalogDriven?setCatalogId(record.key):openDrawer(record)})}
+          {actionButton(t('stock.master.edit_detail')+' '+record.name, <EditOutlined aria-hidden/>, {onClick:()=>record.catalogDriven?setCatalogId(record.key):void openExistingDrawer(record)})}
           {actionButton(t('stock.master.discard')+' '+record.name, <DeleteOutlined aria-hidden/>, {danger:true,onClick:()=>handleDelete(record.key)})}
         </Space>
       )
@@ -719,7 +781,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         return (
           <Card key={item.key} className="stock-mobile-card app-shadow-low">
             <div className="stock-mobile-card-body">
-              <img src={image} alt={localizedTitle} className="stock-mobile-thumb" onError={event=>{event.currentTarget.onerror=null;event.currentTarget.src=DEFAULT_STOCK_THUMBNAIL;}} />
+              <img src={image} alt={localizedTitle} className="stock-mobile-thumb" loading="lazy" onError={event=>{event.currentTarget.onerror=null;event.currentTarget.src=DEFAULT_STOCK_THUMBNAIL;}} />
               <div className="stock-mobile-main">
                 <Text strong className="stock-mobile-title" title={localizedTitle}>
                   {localizedTitle}
@@ -742,7 +804,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
                   {actionButton(t('master.title')+' '+localizedTitle, <DatabaseOutlined aria-hidden/>, {disabled:item.isNew,onClick:()=>setCatalogId(item.key)})}
                   {actionButton(t('pricing.title')+' '+localizedTitle, <DollarOutlined aria-hidden/>, {disabled:item.isNew,onClick:()=>setPricingId(item.key)})}
                   {actionButton(t('marker.assigned')+' '+localizedTitle, <TagsOutlined aria-hidden/>, {disabled:item.isNew,onClick:()=>openMarkers(item.key)})}
-                  {actionButton(t('stock.master.edit_detail')+' '+localizedTitle, <EditOutlined aria-hidden/>, {onClick:()=>item.catalogDriven?setCatalogId(item.key):openDrawer(item)})}
+                  {actionButton(t('stock.master.edit_detail')+' '+localizedTitle, <EditOutlined aria-hidden/>, {onClick:()=>item.catalogDriven?setCatalogId(item.key):void openExistingDrawer(item)})}
                   {actionButton(t('stock.master.discard')+' '+localizedTitle, <DeleteOutlined aria-hidden/>, {danger:true,onClick:()=>handleDelete(item.key)})}
                 </Space>
               </div>
@@ -765,12 +827,13 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
     <div className={embedded?'product-records-workspace':undefined} style={{ padding: isMobile ? `0 0 ${MOBILE_BOTTOM_PADDING} 0` : `0 0 ${DESKTOP_BOTTOM_PADDING} 0` }}>
       {!embedded&&<Breadcrumb style={{ marginBottom: '1rem' }} items={[{ title: t('nav.dashboard') }, { title: t('products.title') }]} />}
       <Drawer className="marker-drawer" title={t('marker.assigned')} width="min(100vw,620px)" open={!!markerId} onClose={closeMarkers} maskClosable={false} destroyOnClose>{markerId&&<ProductMarkerEditor productId={markerId} onDirtyChange={setMarkerDirty} onBusyChange={setMarkerBusy}/>}</Drawer>
-      <ProductCatalogPanel id={catalogId} onChoose={setCatalogId} entries={dataSource.filter(row=>!row.isNew)} onSaved={(values,canonical=true)=>{values.forEach(v=>{void api.product(v.productId).then(result=>setDataSource(rows=>rows.map(row=>row.key===v.productId?{...row,categoryPath:result.categoryPath}:row))).catch(error=>message.error(t(error.message)));});setDataSource(prior=>prior.map(row=>{const value=values.find(v=>v.productId===row.key);return value?{...row,catalogDriven:canonical,name:getLocalizedFallback(value.name,row.name),nameL10n:value.name,specificationL10n:value.specification,description:getLocalizedFallback(value.description,''),descriptionL10n:value.description,brand:value.brand??undefined,sku:value.itemNumber??undefined,category:value.categoryIds[0]??'',mediaGallery:value.gallery.map(p=>({id:p.sha256||p.url,url:p.url,type:p.type==='VIDEO'?'video' as const:'image' as const,title:p.title,visible:p.visible}))}:row;}));}}/>
+      <ProductCatalogPanel id={catalogId} onChoose={setCatalogId} entries={dataSource.filter(row=>!row.isNew)}
+        searchEntries={pickArchiveProduct} getExportIds={api.merchantArchiveExport} onSaved={refreshArchive}/>
 
       <div className={`stock-toolbar ${isMobile ? 'stock-toolbar-mobile' : ''} ${toolbarCompact ? 'stock-toolbar-compact' : ''}`}>
         <div style={{ minWidth: 0 }}>
           <Title level={3} style={{ margin: 0 }} className="stock-page-title" data-testid="stock-master-title">
-            {t(embedded?'products.collection':'stock.master.title')}{embedded&&<span className="record-count">{filteredData.length}</span>}
+            {t(embedded?'products.collection':'stock.master.title')}{embedded&&<span className="record-count">{total}</span>}
           </Title>
           <Text type="secondary">{t(embedded?'products.collection_hint':'stock.master.subtitle')}</Text>
         </div>
@@ -781,7 +844,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
               placeholder={t('stock.master.search_placeholder')}
               prefix={<SearchOutlined />}
               value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
+              onChange={(e) => searchChanged(e.target.value)}
             />
             <div className="stock-mobile-product-actions">
                 <Button type="default" icon={<PlusOutlined />} onClick={handleAddRow} block data-testid="stock-master-add-row">
@@ -799,7 +862,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
               prefix={<SearchOutlined />}
               style={{ width: 'min(20rem, 100%)' }}
               value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
+              onChange={(e) => searchChanged(e.target.value)}
             />
               <Space wrap>
                 <Text type="secondary" style={{ marginRight: 12 }}>
@@ -821,19 +884,21 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
       {embedded&&<div className="record-view-bar"><Segmented aria-label={t('products.view')} value={recordView} onChange={value=>setRecordView(value as 'gallery'|'manage')} options={[{label:t('products.gallery'),value:'gallery'},{label:t('products.manage'),value:'manage'}]}/><span>{t('products.original_images')}</span></div>}
 
       <ProductPricingPanel id={pricingId} onClose={()=>setPricingId(undefined)} onSaved={sheet=>setDataSource(prior=>prior.map(row=>row.key===sheet.productId?{...row,actualSale:sheet.regular??undefined}:row))}/>
-      {embedded&&recordView==='gallery'?<div className="product-record-grid">{filteredData.map(item=>{
+      {listFailed&&<Alert type="error" message={t('products.archive_failed')} action={<Button onClick={refreshArchive}>{t('catalog.retry')}</Button>}/>}
+      {listBusy&&<div role="status" className="record-page-status"><Spin aria-label={t('products.archive_loading')}/></div>}
+      {!listBusy&&!listFailed&&(embedded&&recordView==='gallery'?<div className="product-record-grid">{filteredData.map(item=>{
         const image=item.mediaGallery?.find(media=>media.type==='image')?.url;
         const name=getLocalizedFallback(item.nameL10n,item.name);
         const category=categories.find(c=>c.id===item.category);
         return <article className="product-record-pin" key={item.key}>
           <button className="record-cover" onClick={()=>setCatalogId(item.key)} aria-label={t('store.detail_label',{name})}>
             {image?<img src={image} alt={name} loading="lazy" onError={event=>{event.currentTarget.onerror=null;event.currentTarget.src=DEFAULT_STOCK_THUMBNAIL;}}/>:<span className="record-no-image"><InboxOutlined/>{t('gallery.pending')}</span>}
-            {!!item.mediaGallery?.length&&<span className="record-image-count"><PictureOutlined/> {item.mediaGallery.length}</span>}
+            {!!item.mediaCount&&<span className="record-image-count"><PictureOutlined/> {item.mediaCount}</span>}
           </button>
           <div className="record-caption"><div className="record-meta"><span>{item.sku||t('rec.not_stated')}</span><span>{t(item.isNew?'stock.status.new':'stock.status.modified')}</span></div>
             <button className="record-title" onClick={()=>setCatalogId(item.key)}><h3>{name}</h3></button>
-            <ProductBrand brand={item.brand}/><p>{item.categoryPath||(category?getLocalizedFallback(category.name):t('master.title'))}</p>{getLocalizedFallback(item.specificationL10n,'')&&<p className="record-specification">{getLocalizedFallback(item.specificationL10n,'')}</p>}
-            <ProductReviewStars productId={item.isNew||item.visibilityStatus==='DRAFTER_ONLY'?undefined:item.key}/><div className="record-sale-state">{item.actualSale?<CardPrice amount={item.actualSale.amount} currency={item.actualSale.currency}/>:t('sale.pending')}</div>
+            <ProductBrand brand={item.brand}/><p>{item.categoryPath||(category?getLocalizedFallback(category.name):t('master.title'))}</p>{item.specification&&<p className="record-specification">{item.specification}</p>}
+            <ProductStars value={item.rating} productId={item.isNew||item.visibilityStatus==='DRAFTER_ONLY'?undefined:item.key}/><div className="record-sale-state">{item.actualSale?<CardPrice amount={item.actualSale.amount} currency={item.actualSale.currency}/>:t('sale.pending')}</div>
             <div className="record-card-actions marker-product-actions"><Tooltip title={t('marker.assigned')}><Button className="marker-product-trigger" icon={<TagsOutlined aria-hidden/>} aria-label={t('marker.assigned')+' '+name} disabled={item.isNew} onClick={()=>openMarkers(item.key)}/></Tooltip><Button onClick={()=>setCatalogId(item.key)}>{t('master.title')}</Button><Button type="text" onClick={()=>setPricingId(item.key)}>{t('pricing.title')}</Button><Button type="text" danger icon={<DeleteOutlined/>} aria-label={t('trash.remove')+' '+name} onClick={()=>handleDelete(item.key)}/></div>
           </div>
         </article>;
@@ -857,7 +922,12 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
             }}
           />
         </Card>
-      )}
+      ))}
+      {total>merchantArchivePageSize&&<div className="record-page-nav" role="group" aria-label={t('products.archive_navigation')}>
+        <Button disabled={page===0||listBusy||listFailed} onClick={()=>changePage(page-1)}>{t('rec.previous')}</Button>
+        <span aria-live="polite">{page+1} / {Math.ceil(total/merchantArchivePageSize)}</span>
+        <Button disabled={(page+1)*merchantArchivePageSize>=total||listBusy||listFailed} onClick={()=>changePage(page+1)}>{t('rec.next')}</Button>
+      </div>}
 
       <Drawer
         rootClassName={'stock-drawer'+(editingItem?.isNew?' manual-product-create':'')}
@@ -1141,7 +1211,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
             onClick={handleAddRow}
           />
         </div>}
-      <CostcoOnboardingPanel suppliers={suppliers} photoOpen={isQuickAddVisible} photoQueueTarget={photoQueueTarget} onPhotoClose={()=>setIsQuickAddVisible(false)} onOpenProduct={setCatalogId} onConfirmed={()=>{void api.products().then(rows=>setDataSource(rows.map(stockItemFromResponse)));}}/>
+      <CostcoOnboardingPanel suppliers={suppliers} photoOpen={isQuickAddVisible} photoQueueTarget={photoQueueTarget} onPhotoClose={()=>setIsQuickAddVisible(false)} onOpenProduct={setCatalogId} onConfirmed={refreshArchive}/>
     </div>
   );
 }
