@@ -24,6 +24,7 @@ public class UserManagementService {
     private final PasswordEncoder passwords;
     private final AuthService auth;
     @org.springframework.beans.factory.annotation.Autowired private SelfProfileService profiles;
+    @org.springframework.beans.factory.annotation.Autowired private RegistrationCleanup cleanup;
 
     public UserManagementService(UserRepository users, CheckoutIdentityRepository identities,
             EmailChallengeRepository challenges, PasswordEncoder passwords, AuthService auth) {
@@ -49,8 +50,23 @@ public class UserManagementService {
         User user = profiles.lock(id);
         validate(request, user);
         if (!request.enabled() && auth.currentUser(authentication).id().equals(id)) throw invalid("error.users.self_disable");
+        cleanup.revoke(user.getId());
         apply(user, request);
         return account(users.saveAndFlush(user));
+    }
+
+    @Transactional
+    public void deleteRegistrationTest(Long id, String username, String email, Authentication authentication) {
+        var actor = auth.currentUser(authentication);
+        if (!actor.platformAdmin() || actor.id().equals(id)) {
+            throw new ApiException(ErrorCode.FORBIDDEN, "error.users.cleanup_ineligible");
+        }
+        User user = profiles.lock(id);
+        if (user.isPlatformAdmin() || !user.getRoles().equals(Set.of(Role.CUSTOMER))
+                || !Objects.equals(user.getUsername(), username) || !Objects.equals(user.getEmail(), email)) {
+            throw invalid("error.users.cleanup_ineligible");
+        }
+        cleanup.delete(user);
     }
 
     private void validate(Edit request, User existing) {
