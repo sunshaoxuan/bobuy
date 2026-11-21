@@ -45,14 +45,14 @@ function Thumbnail({id}:{id:string}) {
  </div>;
 }
 
-type QueueProps={jobs:CostcoOnboardingJobView[];onReview:(job:CostcoOnboardingJobView)=>void;onChanged:()=>void};
+type QueueProps={jobs:CostcoOnboardingJobView[];onReview:(job:CostcoOnboardingJobView)=>void;onChanged:(job:CostcoOnboardingJobView)=>void};
 export default function ProductPhotoQueue({jobs,onReview,onChanged}:QueueProps){
  const {t}=useI18n();
  const [retrying,setRetrying]=useState<string[]>([]);
  const [failed,setFailed]=useState<string[]>([]);
  const retry=async(id:string)=>{
   setRetrying(ids=>[...ids,id]);setFailed(ids=>ids.filter(value=>value!==id));
-  try{await photoIntakeApi.retry(id);await onChanged();}
+  try{const next=await photoIntakeApi.retry(id);await onChanged(next);}
   catch{setFailed(ids=>[...ids,id]);}
   finally{setRetrying(ids=>ids.filter(value=>value!==id));}
  };

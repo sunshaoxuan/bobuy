@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 /** Dedicated synthetic cloud DB only. Real Postgres row locks, JSON, HTTP authorization and rollback. */
 @EnabledIfEnvironmentVariable(named="BOBBUY_PHOTO_ISOLATED_TEST",matches="true")
-@SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.DEFINED_PORT,properties={"server.port=${BOBBUY_PHOTO_TEST_HTTP_PORT:18080}","spring.datasource.url=jdbc:postgresql://127.0.0.1:${BOBBUY_PHOTO_TEST_DB_PORT:55432}/photo","spring.datasource.username=photo","spring.datasource.password=photo-local-only","spring.datasource.driver-class-name=org.postgresql.Driver","spring.jpa.hibernate.ddl-auto=create-drop","spring.flyway.enabled=false","bobbuy.security.header-auth.enabled=false","bobbuy.ai.costco.worker.enabled=true","bobbuy.ai.costco.worker.delay-millis=1000","bobbuy.seed.force-reset-on-invoke=false"})
+@SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.DEFINED_PORT,properties={"server.port=${BOBBUY_PHOTO_TEST_HTTP_PORT:18080}","spring.datasource.url=jdbc:postgresql://127.0.0.1:${BOBBUY_PHOTO_TEST_DB_PORT:55432}/photo","spring.datasource.username=photo","spring.datasource.password=photo-local-only","spring.datasource.driver-class-name=org.postgresql.Driver","spring.jpa.hibernate.ddl-auto=create-drop","spring.flyway.enabled=false","bobbuy.security.header-auth.enabled=false","bobbuy.ai.costco.worker.enabled=true","bobbuy.ai.costco.worker.delay-millis=1000","bobbuy.seed.force-reset-on-invoke=false","bobbuy.ai.costco.quota.pending=2","bobbuy.ai.costco.quota.daily=3","bobbuy.ai.costco.quota.evidence-bytes=8388608"})
 @AutoConfigureMockMvc
 class ProductPhotoIntakeIntegrationTest {
  @Autowired MockMvc mvc;@Autowired ObjectMapper json;@Autowired JdbcTemplate jdbc;@Autowired BobbuyStore store;
@@ -39,8 +39,7 @@ class ProductPhotoIntakeIntegrationTest {
   try(var c=Objects.requireNonNull(jdbc.getDataSource()).getConnection()){
    if(!Boolean.TRUE.equals(jdbc.queryForObject("select to_regclass('bb_costco_onboarding_job') is not null",Boolean.class)))ScriptUtils.executeSqlScript(c,new ClassPathResource("db/migration/V30__costco_onboarding_jobs.sql"));
    ScriptUtils.executeSqlScript(c,new ClassPathResource("db/migration/V48__product_photo_observations.sql"));
-   if(!Boolean.TRUE.equals(jdbc.queryForObject("select to_regclass('bb_product_photo_request') is not null",Boolean.class)))
-    ScriptUtils.executeSqlScript(c,new ClassPathResource("db/migration/V50__product_photo_queue_requests.sql"));
+   applyPhotoQueueMigration(c);
   }
   if(users.findById(1000L).isEmpty())store.seed();
   auth=tokens.createAccessToken(users.findById(1000L).orElseThrow());
@@ -248,6 +247,101 @@ class ProductPhotoIntakeIntegrationTest {
   } finally {pool.shutdownNow();worker.start();}
  }
 
+ private void applyPhotoQueueMigration(java.sql.Connection connection) {
+  ScriptUtils.executeSqlScript(connection,new ClassPathResource("db/migration/V50__product_photo_queue_requests.sql"));
+ }
+
+ @Test void migrationCanRunAgainWithExistingRequestAliases() throws Exception {
+  worker.stop();
+  try{
+   byte[] bytes=image(0xee1900);
+   String id=enqueue(UUID.randomUUID().toString(),bytes,200).path("id").asText();
+   String alias=UUID.randomUUID().toString();
+   assertThat(enqueue(alias,bytes,200).path("id").asText()).isEqualTo(id);
+   try(var connection=Objects.requireNonNull(jdbc.getDataSource()).getConnection()){
+    applyPhotoQueueMigration(connection);
+    applyPhotoQueueMigration(connection);
+   }
+   assertThat(enqueue(alias,bytes,200).path("id").asText()).isEqualTo(id);
+   assertThat(jdbc.queryForObject("select count(*) from bb_product_photo_request where job_id=?",Long.class,id)).isEqualTo(1);
+   assertThat(jdbc.queryForObject("""
+     select count(*) from pg_indexes where indexname in ('bb_product_photo_job_hash','bb_product_photo_observation_hash')
+     """,Long.class)).isEqualTo(2);
+  }finally{worker.start();}
+ }
+
+ @Test void privatePhotoHistoryNeverConsumesOfficialEvidenceBudget() throws Exception {
+  worker.stop();
+  String officialHash=null;
+  try{
+   // Compressed synthetic rows model more than the old 512 MiB logical photo budget.
+   jdbc.update("""
+     insert into bb_costco_onboarding_evidence(merchant_id,sha256,kind,content_type,content)
+     select 1000,repeat(md5('synthetic-history-'||row),2),'PRIVATE_PHOTO','image/png',
+       decode(repeat('00',8388608),'hex')
+     from generate_series(1,65) as row
+     """);
+   long historicalBytes=jdbc.queryForObject("""
+     select sum(octet_length(content)) from bb_costco_onboarding_evidence where merchant_id=1000 and kind='PRIVATE_PHOTO'
+     """,Long.class);
+   assertThat(historicalBytes).isGreaterThan(512L*1024*1024);
+   byte[] photo=image(0xee1901);
+   String id=enqueue(UUID.randomUUID().toString(),photo,200).path("id").asText();
+   mvc.perform(get("/api/product-photo-intake/"+id+"/photo").header("Authorization","Bearer "+auth))
+     .andExpect(status().isOk()).andExpect(content().bytes(photo));
+   long officialBytes=jdbc.queryForObject("""
+     select coalesce(sum(octet_length(content)),0) from bb_costco_onboarding_evidence
+     where merchant_id=1000 and kind='OFFICIAL_EVIDENCE'
+     """,Long.class);
+   byte[] official=new byte[Math.toIntExact(8L*1024*1024-officialBytes)];
+   var proof=officialReceipt(official);
+   officialHash=proof.sha256();
+   var query=new CostcoOfficialEvidenceFetcher.Query(1000,supplier,"JP",item,null,"b".repeat(64));
+   evidence.put(query,proof,official);
+   byte[] additional=image(0xee1902);
+   assertThatThrownBy(()->evidence.put(query,officialReceipt(additional),additional))
+     .isInstanceOf(CostcoOnboardingQuotaException.class).hasMessage("onboarding.evidence_quota");
+   assertThat(enqueue(UUID.randomUUID().toString(),additional,200).path("state").asText()).isEqualTo("QUEUED");
+  }finally{
+   jdbc.update("""
+     delete from bb_costco_onboarding_evidence where merchant_id=1000 and (sha256=?
+        or sha256 in (select repeat(md5('synthetic-history-'||row),2) from generate_series(1,65) as row))
+     """,officialHash);
+   worker.start();
+  }
+ }
+
+ private CostcoOfficialEvidence officialReceipt(byte[] bytes) {
+  var source=java.net.URI.create("https://example.test/synthetic-official-receipt");
+  return new CostcoOfficialEvidence("synthetic",source,source,CostcoEvidencePersistence.hash(bytes),Instant.now(),
+    "application/octet-stream",null,null,List.of());
+ }
+
+ @Test void numberLimitsCountOnlyNumberJobs() throws Exception {
+  worker.stop();
+  try{
+   for(int n=0;n<4;n++)enqueue(UUID.randomUUID().toString(),image(0xee1910+n),200);
+   String first=enqueueNumber("90000001",200,null).path("id").asText();
+   String second=enqueueNumber("90000002",200,null).path("id").asText();
+   enqueueNumber("90000003",429,"onboarding.pending_quota");
+   setFixtureState(first,"FAILED",null);
+   String third=enqueueNumber("90000003",200,null).path("id").asText();
+   setFixtureState(second,"FAILED",null);
+   setFixtureState(third,"FAILED",null);
+   enqueueNumber("90000004",429,"onboarding.daily_quota");
+   assertThat(enqueue(UUID.randomUUID().toString(),image(0xee1914),200).path("state").asText()).isEqualTo("QUEUED");
+  }finally{worker.start();}
+ }
+
+ private JsonNode enqueueNumber(String number,int status,String reason) throws Exception {
+  var body=json.createObjectNode().put("itemNumber",number).put("market","JP")
+    .put("supplierId",supplier).put("requestId",UUID.randomUUID().toString());
+  var response=mvc.perform(post("/api/ai/costco-onboarding").header("Authorization","Bearer "+auth)
+    .contentType(MediaType.APPLICATION_JSON).content(body.toString())).andExpect(status().is(status));
+  if(reason!=null)response.andExpect(content().string(org.hamcrest.Matchers.containsString(reason)));
+  return json.readTree(response.andReturn().getResponse().getContentAsByteArray()).path("data");
+ }
+
  @Test @EnabledIfEnvironmentVariable(named="BOBBUY_PHOTO_QUEUE_BROWSER",matches="true")
  void browserQueueAgainstRealLocalApi() throws Exception {
   worker.stop();
@@ -258,7 +352,10 @@ class ProductPhotoIntakeIntegrationTest {
    setFixtureState(running,"AI_INTAKE",null);
    setFixtureState(failed,"FAILED","onboarding.retry_exhausted");
    var process=new ProcessBuilder("node","../frontend/scripts/photo-intake-browser.mjs").inheritIO();
-   process.environment().put("PHOTO_BROWSER_EXTRA","queue");process.environment().put("PHOTO_TEST_TOKEN",auth);
+   boolean screenshotOnly="true".equals(System.getenv("BOBBUY_PHOTO_QUEUE_CAPTURE_ONLY"));
+   if(screenshotOnly)enqueue(UUID.randomUUID().toString(),image(0xdd1236),200);
+   process.environment().put("PHOTO_BROWSER_EXTRA",screenshotOnly?"queue-supplement":"queue");
+   process.environment().put("PHOTO_TEST_TOKEN",auth);
    process.environment().put("PHOTO_TEST_JOB",job);process.environment().put("PHOTO_TEST_FAILED_JOB",failed);
    var browser=process.start();
    try {

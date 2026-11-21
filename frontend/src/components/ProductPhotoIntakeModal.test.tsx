@@ -1,12 +1,12 @@
 import React from 'react';
-import {act,cleanup,fireEvent,render,screen,waitFor} from '@testing-library/react';
+import {act,cleanup,fireEvent,render,screen,waitFor,within} from '@testing-library/react';
 import {afterEach,beforeEach,expect,it,vi} from 'vitest';
 const mocks=vi.hoisted(()=>({suppliers:vi.fn(),status:vi.fn(),photo:vi.fn(),get:vi.fn(),review:vi.fn(),confirm:vi.fn(),retry:vi.fn()}));
 vi.mock('../api',()=>({api:{suppliers:mocks.suppliers,costcoOnboarding:{status:mocks.status,photo:mocks.photo,get:mocks.get}},photoIntakeApi:{retry:mocks.retry,image:()=>Promise.resolve(new Blob()),review:mocks.review,confirm:mocks.confirm,photo:()=>Promise.resolve(new Blob())},categoryTreeApi:{list:()=>Promise.resolve([])},masterDataApi:{currencies:()=>Promise.resolve([{code:'JPY'}])}}));
 vi.mock('../productPhotoUpload',()=>({prepareProductPhotoUpload:(f:File)=>f.name==='bad.txt'?Promise.reject(Error('gallery.invalid')):Promise.resolve(f)}));
 vi.mock('../i18n',()=>({useI18n:()=>({locale:'en-US',t:(k:string)=>k})}));
 vi.mock('./CategoryTreePicker',()=>({default:({value,onChange}:{value:string|null;onChange:(id:string|null)=>void})=><select aria-label="test-category" value={value??''} onChange={e=>onChange(e.target.value||null)}><option value="">Uncategorized</option><option value="category-1">First category</option></select>}));
-vi.mock('antd',()=>({Alert:({message,description,action}:any)=><div role="alert">{message}{description}{action}</div>,Button:({children,loading,type,...p}:any)=><button {...p}>{children}</button>,Checkbox:({children,onChange,...p}:any)=><label><input type="checkbox" {...p} onChange={onChange}/>{children}</label>,Input:Object.assign((p:any)=><input {...p}/>,{TextArea:(p:any)=><textarea {...p}/>}),Modal:({children,title}:any)=><div role="dialog">{title}{children}</div>,Select:({options,onChange,loading,allowClear,...p}:any)=><select {...p} onChange={e=>onChange(e.target.value)}><option value=""/>{options.map((o:any)=><option key={o.value} {...o}>{o.label}</option>)}</select>,Space:({children}:any)=><div>{children}</div>,Typography:{Title:({children}:any)=><h2>{children}</h2>}}));
+vi.mock('antd',()=>({Alert:({message,description,action}:any)=><div role="alert">{message}{description}{action}</div>,Button:({children,loading,type,...p}:any)=><button {...p}>{children}</button>,Checkbox:({children,onChange,...p}:any)=><label><input type="checkbox" {...p} onChange={onChange}/>{children}</label>,Input:Object.assign((p:any)=><input {...p}/>,{TextArea:(p:any)=><textarea {...p}/>}),Modal:({children,title}:any)=><div role="dialog">{title}{children}</div>,Select:({options,onChange,loading,allowClear,...p}:any)=><select {...p} onChange={e=>onChange(e.target.value)}><option value=""/>{options.map((o:any)=><option key={o.value} {...o}>{o.label}</option>)}</select>,Space:({children}:any)=><div>{children}</div>,Tag:({children}:any)=><span>{children}</span>,Typography:{Title:({children}:any)=><h2>{children}</h2>}}));
 import ProductPhotoIntakeModal from './ProductPhotoIntakeModal';
 const job={id:'job1',state:'NEEDS_INPUT' as const,revision:7,photo:true,supplierId:'s1'};
 const review=()=>({jobId:'job1',revision:7,supplierId:'s1',market:'JP',itemNumber:'123',status:'MATCH',matches:[{id:'p1',version:2,name:{'en-US':'Synthetic item'},specification:{'ja-JP':'80 × 2'},packaging:'80 × 2',eligible:true}],history:[],saved:null,photoFacts:{amount:999,currency:'JPY',unit:'80 × 2',conditions:'',priceKind:'WAREHOUSE',productVisible:true}});
@@ -76,6 +76,22 @@ it('keeps edits on retry and clears #190 suggestions when opening a different qu
  expect(await screen.findByLabelText('photo.description')).toHaveValue('');
  expect(screen.getByLabelText('test-category')).toHaveValue('');
  expect(screen.getByRole('combobox',{name:'stock.item.storage_condition'})).toHaveValue('');
+});
+
+it('loads a fresh review revision after retrying the open task from the queue',async()=>{
+ const after={...job,revision:9,failureCode:'photo.confirm_required'};
+ const r=review();
+ mocks.get.mockResolvedValueOnce(job).mockResolvedValue(after);
+ mocks.review.mockResolvedValueOnce(r).mockResolvedValue({...r,revision:9,photoFacts:{...r.photoFacts,amount:888}});
+ mocks.retry.mockResolvedValue({...job,state:'QUEUED',revision:8});
+ render(<ProductPhotoIntakeModal {...props} job={job} queue={[job]} onReview={vi.fn()} onQueueChanged={vi.fn()}/>);
+ await screen.findByDisplayValue('999');
+ const queue=within(screen.getByRole('region',{name:'photo.queue'}));
+ fireEvent.click(queue.getByRole('button',{name:'photo.retry_recognition'}));
+ expect(await screen.findByDisplayValue('888')).toBeTruthy();
+ expect(screen.queryByDisplayValue('999')).toBeNull();
+ expect(mocks.retry).toHaveBeenCalledWith(job.id);
+ expect(mocks.photo).not.toHaveBeenCalled();
 });
 
 it('explains missing AI configuration without exposing an internal protocol code',async()=>{

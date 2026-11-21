@@ -19,16 +19,20 @@ public class CostcoEvidencePersistence implements CostcoEvidenceStore {
     private void validate(long owner, String hash, byte[] bytes) {
         if (owner<=0 || bytes==null || bytes.length==0 || bytes.length>8*1024*1024 || !hash(bytes).equals(hash)) throw new IllegalArgumentException("onboarding.evidence_bytes");
     }
-    private boolean reserve(long owner,String hash,byte[] bytes){
+    private boolean isNewEvidence(long owner,String hash,byte[] bytes){
         users.lockById(owner).filter(u->u.isEnabled()&&u.getRoles().contains(com.bobbuy.model.Role.AGENT)).orElseThrow(()->new CostcoNumberOnboardingService.NeedsInput("onboarding.scope_changed"));
         var prior=jdbc.query("select content from bb_costco_onboarding_evidence where merchant_id=? and sha256=?",(rs,n)->rs.getBytes(1),owner,hash);
         if(!prior.isEmpty()){validate(owner,hash,prior.get(0));if(!java.util.Arrays.equals(prior.get(0),bytes))throw new IllegalStateException("onboarding.evidence_collision");return false;}
-        Long used=jdbc.queryForObject("select coalesce(sum(octet_length(content)),0) from bb_costco_onboarding_evidence where merchant_id=?",Long.class,owner);
-        if(used!=null&&used>maxBytes-bytes.length)throw new CostcoOnboardingQuotaException("onboarding.evidence_quota",3600);return true;
+        return true;
     }
     @Override @Transactional public void put(CostcoOfficialEvidenceFetcher.Query query, CostcoOfficialEvidence evidence, byte[] content) {
         validate(query.merchantId(), evidence.sha256(), content);
-        if(!reserve(query.merchantId(),evidence.sha256(),content))return;
+        if(!isNewEvidence(query.merchantId(),evidence.sha256(),content))return;
+        Long used=jdbc.queryForObject("""
+                select coalesce(sum(octet_length(content)),0) from bb_costco_onboarding_evidence
+                where merchant_id=? and kind='OFFICIAL_EVIDENCE'
+                """,Long.class,query.merchantId());
+        if(used!=null&&used>maxBytes-content.length)throw new CostcoOnboardingQuotaException("onboarding.evidence_quota",3600);
         try {
             jdbc.update("insert into bb_costco_onboarding_evidence(merchant_id,sha256,supplier_id,input_hash,kind,content_type,content,receipt) values(?,?,?,?,'OFFICIAL_EVIDENCE',?,?,cast(? as jsonb)) on conflict(merchant_id,sha256) do nothing",
                     query.merchantId(), evidence.sha256(), query.supplierId(), query.inputHash(), evidence.mediaType(), content, mapper.writeValueAsString(evidence));
@@ -37,7 +41,7 @@ public class CostcoEvidencePersistence implements CostcoEvidenceStore {
     }
     @Transactional public String putPrivatePhoto(long owner, byte[] content) {
         var image = RecommendationImageValidator.validate(content); String hash = hash(content); validate(owner, hash, content);
-        if(!reserve(owner,hash,content))return hash;
+        if(!isNewEvidence(owner,hash,content))return hash;
         jdbc.update("insert into bb_costco_onboarding_evidence(merchant_id,sha256,kind,content_type,content) values(?,?,'PRIVATE_PHOTO',?,?) on conflict(merchant_id,sha256) do nothing", owner, hash, image.contentType(), content);
         return hash;
     }

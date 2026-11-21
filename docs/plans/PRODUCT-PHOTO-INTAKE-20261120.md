@@ -57,6 +57,18 @@
 - 浏览器三个图片请求均直接返回排队，刷新后可见，重试只发任务请求。识别中、待确认和已入库与真实隔离库状态一致，截图使用合成资料。两张无关的种子商品外链图由本地占位替代。无活动 AI 模型与实体 iPhone 验收，现有 HEIC 客户端转码路径沿用。
 - [390px 提交与失败](../reports/evidence/product-photo-intake-20261120/issue-189/390-queue.png) · [390px 识别与确认](../reports/evidence/product-photo-intake-20261120/issue-189/390-queue-states.png) · [1280px 提交与失败](../reports/evidence/product-photo-intake-20261120/issue-189/1280-queue.png) · [1280px 识别与确认](../reports/evidence/product-photo-intake-20261120/issue-189/1280-queue-states.png) · [网络、控制台和计算样式](../reports/evidence/product-photo-intake-20261120/issue-189/browser.json)。
 
+### #192 审查修订与对应验收
+
+- 分离私有照片存储、官方资料预算和货号任务限额。隔离 PostgreSQL 核对历史照片逻辑容量超过旧默认 512 MiB 时仍可入队，官方资料预算独立，货号 pending/daily 各自达到阈值仍有 429。
+- V50 同一脚本重复执行后，已存在的请求别名和查找索引保留。沿用首轮通过的组件及浏览器交互证据，浏览器只补 390/1280 全视口及简体中文失败项截图。
+
+从列表重试当前已打开的任务时同步清空旧确认并恢复轮询，定向组件测试核对任务修订号及建议价格刷新。额度隔离和 V50 重跑的三项 PostgreSQL 检查已通过。原语言切换几何在弹窗动画中采样，本次追加仅重采相关浏览器证据。等待 CSS transform 稳定后采样简体、繁体、日语按钮，检查 44px 和横向溢出，并用 Pillow 核对三种语言的拍照、上传、重试字形像素内框。
+
+补充验收已通过。520 MiB 的历史照片、官方预算已满、货号 pending/daily 达阈值、V50 重跑且保留别名均使用隔离 PostgreSQL 实测。照片弹窗 9 项通过，包括列表重试后确认表单使用新 revision。
+
+- [390×844 简体全视口](../reports/evidence/product-photo-intake-20261120/issue-189/390-viewport-zh-CN.png) · [1280×800 简体全视口](../reports/evidence/product-photo-intake-20261120/issue-189/1280-viewport-zh-CN.png) · [390px 简体失败项细节](../reports/evidence/product-photo-intake-20261120/issue-189/390-failed-detail-zh-CN.png) · [稳定态计算样式与九处 PNG 字形像素内框](../reports/evidence/product-photo-intake-20261120/issue-189/browser-supplement.json)。
+- 稳定态数据取代原 `browser.json` 中简体、繁体和日语动画中的尺寸。九处像素测量覆盖三语的拍照、上传、重试按钮。其余控件保留 DOM 几何记录。补拍切换语言的导航取消了初始 `/api/auth/me` 请求，后续 200，照片 API 无失败。表单同步修订只改变重试回调，复用同样布局、样式及文案的实拍证据。
+
 ## 5. 验收
 
 | ID | 观察结果 |

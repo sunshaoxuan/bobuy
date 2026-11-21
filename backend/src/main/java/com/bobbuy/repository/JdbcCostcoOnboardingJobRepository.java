@@ -38,9 +38,9 @@ public class JdbcCostcoOnboardingJobRepository implements CostcoOnboardingJobRep
                 """, (rs,n)->parse(rs.getString(1)), q.idempotencyKey(), q.merchantId());
         if (!alias.isEmpty()) return alias.get(0);
         if (q.privatePhotoSha256() == null) {
-            Long pending=jdbc.queryForObject("select count(*) from bb_costco_onboarding_job where merchant_id=? and state in ('QUEUED','AI_INTAKE','EVIDENCE_FETCH','AI_REVIEW','COMMITTING','RETRY_WAIT')",Long.class,q.merchantId());
+            Long pending=jdbc.queryForObject("select count(*) from bb_costco_onboarding_job where merchant_id=? and payload->>'privatePhotoSha256' is null and state in ('QUEUED','AI_INTAKE','EVIDENCE_FETCH','AI_REVIEW','COMMITTING','RETRY_WAIT')",Long.class,q.merchantId());
             if(pending!=null&&pending>=maxPending)throw new com.bobbuy.service.CostcoOnboardingQuotaException("onboarding.pending_quota",30);
-            Long daily=jdbc.queryForObject("select count(*) from bb_costco_onboarding_job where merchant_id=? and created_at>=current_timestamp-interval '24 hours'",Long.class,q.merchantId());
+            Long daily=jdbc.queryForObject("select count(*) from bb_costco_onboarding_job where merchant_id=? and payload->>'privatePhotoSha256' is null and created_at>=current_timestamp-interval '24 hours'",Long.class,q.merchantId());
             if(daily!=null&&daily>=maxPerDay)throw new com.bobbuy.service.CostcoOnboardingQuotaException("onboarding.daily_quota",3600);
         } else {
             var matching = jdbc.query("""

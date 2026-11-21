@@ -42,6 +42,8 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
   return()=>{generation.current++;};
  },[open]);
  const selectedId=initial?.id;
+ const selectedIdRef=useRef(selectedId);
+ selectedIdRef.current=selectedId;
  useEffect(()=>{
   let active=true;const epoch=++reviewEpoch.current;
   setPollAttempt(0);setJob(initial);setPreview('');setReview(undefined);setSaved(null);setBusy(false);
@@ -81,13 +83,17 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
   if(!files||!supplier)return;
   for(const file of Array.from(files))void submit({file,supplierId:supplier,requestId:crypto.randomUUID()});
  };
+ const applyRetry=(next:CostcoOnboardingJobView)=>{
+  if(selectedIdRef.current!==next.id)return;
+  setJob(next);setError('');setReview(undefined);setSaved(null);setPollAttempt(n=>n+1);
+ };
  const retryRecognition=async()=>{
   if(!job)return;
   const g=reviewEpoch.current;setBusy(true);
   try{
    const next=await photoIntakeApi.retry(job.id);
    if(g!==reviewEpoch.current)return;
-   setJob(next);setError('');setReview(undefined);setPollAttempt(n=>n+1);onQueued(next);
+   applyRetry(next);onQueued(next);
   }catch{if(g===reviewEpoch.current)setError(t('photo.retry_failed'));}
   finally{if(g===reviewEpoch.current)setBusy(false);}
  };
@@ -114,7 +120,7 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
    {entry.error&&<Space wrap>{entry.error!=='photo.file_type'&&<Button onClick={()=>void submit(entry)}>{t('photo.retry_upload')}</Button>}
     <Button onClick={()=>setUploads(rows=>rows.filter(row=>row.requestId!==entry.requestId))}>{t('onboarding.close')}</Button></Space>}
   </div>)}
-  {queue&&onReview&&onQueueChanged&&<ProductPhotoQueue jobs={queue} onReview={onReview} onChanged={onQueueChanged}/>}
+  {queue&&onReview&&onQueueChanged&&<ProductPhotoQueue jobs={queue} onReview={onReview} onChanged={next=>{applyRetry(next);return onQueueChanged();}}/>}
   {preview&&<img className="photo-evidence" src={preview} alt={t('photo.evidence')}/>}
   {job&&<p role="status">{t(saved?'photo.state.completed':photoState(job))} {photoState(job)==='photo.state.failed'&&!saved&&t(photoFailure(job))}</p>}
   {job&&photoState(job)==='photo.state.failed'&&!saved&&<Button loading={busy} onClick={()=>void retryRecognition()}>{t('photo.retry_recognition')}</Button>}
