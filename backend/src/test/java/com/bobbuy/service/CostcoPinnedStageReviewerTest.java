@@ -43,6 +43,35 @@ class CostcoPinnedStageReviewerTest {
         var image=new CostcoOfficialEvidence("image",PAGE,URI.create("https://images.costco.co.jp/item.png"),hash,Instant.parse("2026-11-09T01:00:00Z"),"image/png",4,4,List.of());
         var decision=reviewer.review(Stage.IMAGE_SOURCE,job(List.of(document(store),image),List.of(),null));assertEquals(1,gateway.images.size());assertTrue(decision.trace().imageViewHashes().containsKey(hash));
     }
+    @Test void intakeKeepsVerbatimLabelsAndSeparatePriceKindsWithPrivateEvidence()throws Exception{
+        var gateway=new FakeGateway();
+        var store=new Store();
+        byte[] bytes=png();
+        String hash=CostcoPinnedStageReviewer.digest(bytes);
+        store.contents.put(hash,bytes);
+        var transcript=new PhotoTranscription(List.of(
+                new PhotoTag("00123 試験食品\n税込 ¥980 - ¥200", "00123","試験食品","試験ブランド","1箱","2袋",
+                        "1 kg","2袋","税込","会員限定","11月21日まで",List.of(
+                        new PhotoTagPrice(PhotoTagPriceKind.TOTAL,"¥980",new java.math.BigDecimal("980"),"JPY"),
+                        new PhotoTagPrice(PhotoTagPriceKind.DISCOUNT,"- ¥200",new java.math.BigDecimal("200"),"JPY"))),
+                new PhotoTag("00456 別商品\n¥320","00456","別商品",null,null,null,null,null,null,null,null,List.of())),
+                List.of("箱に青いロゴ"),List.of("同じ写真に二つの値札"));
+        var facts=new PhotoFacts(null,null,null,null,"UNKNOWN",true,transcript);
+        var candidate=new Candidate("00123",null,"試験食品",null,null,null,null,Map.of(),List.of(),List.of(),null,facts);
+        gateway.answer=mapper.writeValueAsString(Map.of("verdict","AMBIGUOUS","reason","Two tags",
+                "identifiedItemNumber","00123","candidate",candidate));
+        var reviewer=new CostcoPinnedStageReviewer(gateway,mapper,store);
+        var decision=reviewer.review(Stage.INTAKE,job(List.of(),List.of(),hash));
+        var durable=mapper.readValue(mapper.writeValueAsString(decision),CostcoOnboardingDecision.class);
+        assertEquals(transcript,durable.candidate().photoFacts().transcription());
+        assertNull(durable.candidate().photoFacts().amount());
+        assertTrue(durable.trace().imageViewHashes().containsKey(hash));
+        assertFalse(gateway.prompt.contains(transcript.tags().get(0).rawText()));
+        assertThrows(IllegalStateException.class,()->reviewer.review(Stage.FACTS,job(List.of(document(store)),List.of(),hash)));
+        assertNull(mapper.readValue("""
+                {"amount":999,"currency":"JPY","unit":"1 kg","conditions":"","priceKind":"WAREHOUSE","productVisible":true}
+                """,PhotoFacts.class).transcription());
+    }
     @Test void photoArchiveDetailsUseKnownLeafCategoriesAndSupportedStorage()throws Exception{
         var gateway=new FakeGateway();var store=new Store();byte[] bytes=png();
         String hash=CostcoPinnedStageReviewer.digest(bytes);store.contents.put(hash,bytes);
@@ -63,6 +92,27 @@ class CostcoPinnedStageReviewerTest {
         gateway.answer=reply.toString();
         assertEquals(new ArchiveDetails("冷凍食品",null,null),
                 reviewer.review(Stage.INTAKE,job(List.of(),List.of(),hash)).candidate().archiveDetails());
+    }
+    @Test void photoDescriptionsRequireAllFourLocalesAndRetrievedTextHash(){
+        var gateway=new FakeGateway();
+        var store=new Store();
+        var doc=document(store);
+        var content=new DescriptionEvidence(Map.of("ja-JP","試験パック2個","zh-CN","盒装两件",
+                "zh-TW","盒裝兩件","en-US","Two units in a box"),List.of(doc.sha256()));
+        var candidate=new Candidate("00123",null,"試験食品",null,null,null,null,Map.of(),List.of());
+        var reply=mapper.valueToTree(Map.of("verdict","ACCEPT","reason","Fixture","identifiedItemNumber","00123","candidate",candidate));
+        var details=((com.fasterxml.jackson.databind.node.ObjectNode)reply.path("candidate")).putObject("archiveDetails");
+        details.set("descriptionEvidence",mapper.valueToTree(content));
+        gateway.answer=reply.toString();
+        var reviewer=new CostcoPinnedStageReviewer(gateway,mapper,store);
+        var result=reviewer.review(Stage.FACTS,job(List.of(doc),List.of(),"c".repeat(64)));
+        assertEquals(content,result.candidate().archiveDetails().descriptionEvidence());
+        var draft=(com.fasterxml.jackson.databind.node.ObjectNode)details.path("descriptionEvidence");
+        ((com.fasterxml.jackson.databind.node.ArrayNode)draft.path("sourceSha256")).set(0,mapper.getNodeFactory().textNode("f".repeat(64)));
+        gateway.answer=reply.toString();
+        assertEquals("onboarding.description_evidence",assertThrows(CostcoNumberOnboardingService.NeedsInput.class,
+                ()->reviewer.review(Stage.FACTS,job(List.of(doc),List.of(),"c".repeat(64)))).getMessage());
+        assertThrows(IllegalArgumentException.class,()->new DescriptionEvidence(Map.of("ja-JP","試験"),List.of(doc.sha256())));
     }
     @Test void wrongBytesAndPrivilegeFieldsNeverReachAcceptedDecision(){
         var badStore=new Store();var badDoc=document(badStore);badStore.contents.put(badDoc.sha256(),new byte[]{9});var gateway=new FakeGateway();
