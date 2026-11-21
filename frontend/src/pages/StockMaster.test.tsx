@@ -33,6 +33,7 @@ vi.mock('../api', () => ({
       {
         product: {
           id: 'prd-1000',
+          cartEnabled: false,
           name: { 'zh-CN': 'Organic Milk', 'ja-JP': 'Organic Milk', 'en-US': 'Organic Milk' },
           categoryId: 'cat-1000',
           basePrice: 12.99,
@@ -46,6 +47,7 @@ vi.mock('../api', () => ({
       {
         product: {
           id: 'prd-1001',
+          cartEnabled: true,
           name: { 'zh-CN': 'Fresh Spinach', 'ja-JP': 'Fresh Spinach', 'en-US': 'Fresh Spinach' },
           categoryId: 'cat-1000',
           basePrice: 4.49,
@@ -59,6 +61,8 @@ vi.mock('../api', () => ({
     translate: () => Promise.resolve({ translatedText: '' }),
     deleteProduct: vi.fn().mockResolvedValue(undefined),
     patchProduct: vi.fn().mockResolvedValue({}),
+    previewCartAvailability: vi.fn(),
+    enableCartAvailability: vi.fn(),
     createProduct:vi.fn().mockResolvedValue({product:{id:"manual-saved",name:{"ja-JP":"手入力"},description:{}},displayName:"手入力",categoryPath:""}),
     onboardConfirm: vi.fn().mockResolvedValue({
       product: { id: 'prd-new', name: { 'zh-CN': 'X' }, basePrice: 1 },
@@ -70,6 +74,59 @@ vi.mock('../api', () => ({
 }));
 
 import StockMaster, {stockItemFromResponse} from './StockMaster';
+
+it('saves the product cart switch independently and reflects the persisted response', async () => {
+  setMatchMedia(false);
+  localStorage.setItem('bobbuy_locale', 'en-US');
+  const save = vi.mocked(api.patchProduct);
+  save.mockClear();
+  save.mockResolvedValueOnce({product: {id: 'prd-1000', cartEnabled: true, name: {}, basePrice: 0},
+    displayName: 'Organic Milk', displayDescription: ''});
+  renderWithI18n(<StockMaster embedded />);
+  const toggle = await screen.findByRole('switch', {name: 'Allow adding to cart Organic Milk'});
+  expect(toggle).not.toBeChecked();
+  fireEvent.click(toggle);
+  await waitFor(() => expect(toggle).toBeChecked());
+  expect(save).toHaveBeenCalledTimes(1);
+  expect(save).toHaveBeenCalledWith('prd-1000', {cartEnabled: true});
+});
+
+it('previews bulk changes without writing, cancels, confirms and shows the empty state', async () => {
+  setMatchMedia(true);
+  localStorage.setItem('bobbuy_locale', 'en-US');
+  const preview = vi.mocked(api.previewCartAvailability);
+  const enable = vi.mocked(api.enableCartAvailability);
+  enable.mockClear();
+  preview.mockResolvedValue({count: 1, items: [{id: 'prd-1000', name: {'en-US': 'Organic Milk'}, itemNumber: 'SKU-20934'}],
+    revision: 'reviewed-revision'});
+  enable.mockResolvedValueOnce({enabledIds: ['prd-1000']});
+  renderWithI18n(<StockMaster embedded />);
+  const toggle = await screen.findByRole('switch', {name: 'Allow adding to cart Organic Milk'});
+  const bulk = screen.getByRole('button', {name: 'Enable cart for all products'});
+  fireEvent.click(bulk);
+  let dialog = await screen.findByRole('dialog');
+  await waitFor(() => expect(within(dialog).getByText('Products to enable: 1')).toBeVisible());
+  expect(within(dialog).getByText('SKU-20934')).toBeVisible();
+  expect(enable).not.toHaveBeenCalled();
+  fireEvent.click(within(dialog).getByRole('button', {name: 'Cancel'}));
+  await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+  expect(enable).not.toHaveBeenCalled();
+  expect(toggle).not.toBeChecked();
+
+  fireEvent.click(bulk);
+  dialog = await screen.findByRole('dialog');
+  fireEvent.click(within(dialog).getByRole('button', {name: 'Confirm enablement'}));
+  await waitFor(() => expect(toggle).toBeChecked());
+  expect(enable).toHaveBeenCalledTimes(1);
+  expect(enable).toHaveBeenCalledWith('reviewed-revision');
+  await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+
+  preview.mockResolvedValueOnce({count: 0, items: [], revision: 'empty'});
+  fireEvent.click(screen.getByRole('button', {name: 'All products are enabled'}));
+  dialog = await screen.findByRole('dialog');
+  expect(within(dialog).getByRole('status')).toHaveTextContent('All products are enabled');
+  expect(within(dialog).getByRole('button', {name: 'Confirm enablement'})).toBeDisabled();
+});
 
 // Top-level cases must have the same isolation as the grouped cases. A timed
 // out async body must never later call cleanup() on the next case's mounted UI.

@@ -47,10 +47,12 @@ import { api, categoryTreeApi, type CategoryTreeNode, type MobileProductResponse
 import './productRecords.css';
 import {ProductReviewStars} from '../components/ProductRating';
 import CardPrice from '../components/CardPrice';
+import {ProductCartBulkAction, ProductCartSwitch} from './ProductCartAvailability';
 
 const { Title, Text } = Typography;
 
 interface StockItem {
+  cartEnabled?: boolean;
   createRequestId?:string;
   categoryNodeId?:string|null;
   visibilityStatus?: string;
@@ -82,6 +84,7 @@ interface StockItem {
 export function stockItemFromResponse(res:MobileProductResponse):StockItem {
   return {
         key: res.product.id,
+        cartEnabled: res.product.cartEnabled,
         visibilityStatus:res.product.visibilityStatus,
         catalogDriven:!!(res.product as unknown as {catalogData?:unknown}).catalogData,
         name: res.displayName,
@@ -296,6 +299,13 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
   }, [isMobile]);
 
   const [dataSource, setDataSource] = useState<StockItem[]>([]);
+  const updateCartAvailability = (ids: string[], cartEnabled: boolean) => {
+    const changed = new Set(ids);
+    setDataSource(rows => rows.map(row => changed.has(row.key) ? {...row, cartEnabled} : row));
+  };
+  const renderCartSwitch = (item: StockItem, name = item.name) =>
+    <ProductCartSwitch id={item.key} name={name} enabled={item.isNew ? undefined : item.cartEnabled}
+      onChange={updateCartAvailability} />;
   const [markerId,setMarkerId]=useState<string>(),[markerDirty,setMarkerDirty]=useState(false),[markerBusy,setMarkerBusy]=useState(false);
   const openMarkers=(id:string)=>{setMarkerDirty(false);setMarkerBusy(false);setMarkerId(id);};
   const closeMarkers=()=>{if(markerBusy)return;if(markerDirty)Modal.confirm({title:t('marker.discard'),onOk:()=>setMarkerId(undefined)});else setMarkerId(undefined);};
@@ -694,6 +704,12 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         record.isNew ? <Tag color="orange">{t('stock.status.new')}</Tag> : <Tag color="blue">{t('stock.status.modified')}</Tag>
     },
     {
+      title: t('cart.availability_label'),
+      key: 'cartEnabled',
+      width: 124,
+      render: (_: unknown, record: StockItem) => renderCartSwitch(record)
+    },
+    {
       title: t('stock.table.action'),
       key: 'action',
       width: 184,
@@ -737,6 +753,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
                 <Text className="stock-mobile-metric">
                   <DatabaseOutlined /> {item.stock}
                 </Text>
+                {renderCartSwitch(item, localizedTitle)}
                 <Space className="stock-compact-actions" size={6}>
                   {actionButton(t('master.title')+' '+localizedTitle, <DatabaseOutlined aria-hidden/>, {disabled:item.isNew,onClick:()=>setCatalogId(item.key)})}
                   {actionButton(t('pricing.title')+' '+localizedTitle, <DollarOutlined aria-hidden/>, {disabled:item.isNew,onClick:()=>setPricingId(item.key)})}
@@ -782,15 +799,13 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
             />
-            <Space style={{ width: '100%' }}>
-              <Space style={{ width: '100%' }}>
+            <Space wrap className="stock-mobile-entry-actions">
                 <Button type="default" icon={<PlusOutlined />} onClick={handleAddRow} block data-testid="stock-master-add-row">
                   {t('stock.master.add_row')}
                 </Button>
                 <Button data-testid="ai-quick-snap-button" type="primary" icon={<CameraOutlined />} onClick={() => setIsQuickAddVisible(true)} block>
                   {t('photo.title')}
                 </Button>
-              </Space>
             </Space>
           </Space>
         ) : (
@@ -818,7 +833,13 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         )}
       </div>
 
-      {embedded&&<div className="record-view-bar"><Segmented aria-label={t('products.view')} value={recordView} onChange={value=>setRecordView(value as 'gallery'|'manage')} options={[{label:t('products.gallery'),value:'gallery'},{label:t('products.manage'),value:'manage'}]}/><span>{t('products.original_images')}</span></div>}
+      <div className="record-view-bar product-cart-toolbar">
+        {embedded&&<Segmented aria-label={t('products.view')} value={recordView} onChange={value=>setRecordView(value as 'gallery'|'manage')} options={[{label:t('products.gallery'),value:'gallery'},{label:t('products.manage'),value:'manage'}]}/>}
+        {embedded&&<span>{t('products.original_images')}</span>}
+        <ProductCartBulkAction
+          allEnabled={dataSource.length > 0 && dataSource.every(item => item.isNew || item.cartEnabled === true)}
+          onChange={updateCartAvailability} />
+      </div>
 
       <ProductPricingPanel id={pricingId} onClose={()=>setPricingId(undefined)} onSaved={sheet=>setDataSource(prior=>prior.map(row=>row.key===sheet.productId?{...row,actualSale:sheet.regular??undefined}:row))}/>
       {embedded&&recordView==='gallery'?<div className="product-record-grid">{filteredData.map(item=>{
@@ -834,6 +855,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
             <button className="record-title" onClick={()=>setCatalogId(item.key)}><h3>{name}</h3></button>
             <ProductBrand brand={item.brand}/><p>{item.categoryPath||(category?getLocalizedFallback(category.name):t('master.title'))}</p>{getLocalizedFallback(item.specificationL10n,'')&&<p className="record-specification">{getLocalizedFallback(item.specificationL10n,'')}</p>}
             <ProductReviewStars productId={item.isNew||item.visibilityStatus==='DRAFTER_ONLY'?undefined:item.key}/><div className="record-sale-state">{item.actualSale?<CardPrice amount={item.actualSale.amount} currency={item.actualSale.currency}/>:t('sale.pending')}</div>
+            {renderCartSwitch(item, name)}
             <div className="record-card-actions marker-product-actions"><Tooltip title={t('marker.assigned')}><Button className="marker-product-trigger" icon={<TagsOutlined aria-hidden/>} aria-label={t('marker.assigned')+' '+name} disabled={item.isNew} onClick={()=>openMarkers(item.key)}/></Tooltip><Button onClick={()=>setCatalogId(item.key)}>{t('master.title')}</Button><Button type="text" onClick={()=>setPricingId(item.key)}>{t('pricing.title')}</Button><Button type="text" danger icon={<DeleteOutlined/>} aria-label={t('trash.remove')+' '+name} onClick={()=>handleDelete(item.key)}/></div>
           </div>
         </article>;
@@ -1131,7 +1153,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
           />
         </Form>
       </Drawer>
-        {(!embedded||recordView==='manage')&&<div className="stock-mobile-fab-group">
+        {!embedded&&<div className="stock-mobile-fab-group">
           <Button
             shape="circle"
             icon={<PlusOutlined />}
