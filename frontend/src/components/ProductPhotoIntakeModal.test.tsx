@@ -62,10 +62,12 @@ it('keeps edits on retry and clears #190 suggestions when opening a different qu
  expect(screen.getByLabelText('test-category')).toHaveValue('category-1');
  expect(screen.getByRole('combobox',{name:'stock.item.storage_condition'})).toHaveValue('FROZEN');
  fireEvent.change(description,{target:{value:'First product only'}});
+ fireEvent.change(screen.getByLabelText(/photo.observed_at/),{target:{value:'2026-11-10T08:30'}});
  fireEvent.change(screen.getByLabelText('test-category'),{target:{value:''}});
  fireEvent.click(screen.getByText('photo.retry_recognition'));
  await waitFor(()=>expect(mocks.retry).toHaveBeenCalledWith(job.id,job.revision));
  expect(await screen.findByLabelText('photo.description')).toHaveValue('First product only');
+ expect(screen.getByLabelText(/photo.observed_at/)).toHaveValue('2026-11-10T08:30');
  expect(screen.getByLabelText('test-category')).toHaveValue('');
  expect(mocks.photo).not.toHaveBeenCalled();
 
@@ -74,6 +76,7 @@ it('keeps edits on retry and clears #190 suggestions when opening a different qu
  mocks.review.mockResolvedValue({...candidate,jobId:replacement.id});
  screenRoot.rerender(<ProductPhotoIntakeModal {...props} job={replacement}/>);
  expect(await screen.findByLabelText('photo.description')).toHaveValue('');
+ expect(screen.getByLabelText(/photo.observed_at/)).not.toHaveValue('2026-11-10T08:30');
  expect(screen.getByLabelText('test-category')).toHaveValue('');
  expect(screen.getByRole('combobox',{name:'stock.item.storage_condition'})).toHaveValue('');
 });

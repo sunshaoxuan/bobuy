@@ -53,6 +53,7 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
   setPollAttempt(0);setJob(initial);setPreview('');setStored(undefined);setReview(undefined);setSaved(null);setBusy(false);
   archiveDraft.current={item:null,edited:new Set()};
   setDescription('');setCategory(null);setStorageCondition(null);setError('');
+  setObservedAt(new Date().toISOString().slice(0,16));
   if(initial?.supplierId)setSupplier(current=>current||initial.supplierId||'');
   if(selectedId)void photoIntakeApi.photo(selectedId).then(blob=>{
    if(active){
