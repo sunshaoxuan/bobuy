@@ -5,6 +5,7 @@ import {api,photoIntakeApi,type MobileSupplier,type CostcoOnboardingJobView,type
 import {getStoredUser,subscribeToAuthChanges} from '../authStorage';
 import {useI18n} from '../i18n';
 import CostcoNumberOnboardingModal from './CostcoNumberOnboardingModal';
+import ProductPhotoQueue from './ProductPhotoQueue';
 import ProductPhotoIntakeModal from './ProductPhotoIntakeModal';
 import ProductPhotoQueueSummary from './ProductPhotoQueueSummary';
 
@@ -33,12 +34,12 @@ export default function CostcoOnboardingPanel({suppliers,photoOpen,photoQueueTar
   catch{if(generation===epoch.current&&sequence===photoRead.current)setPhotoReadFailed(true);}
  };
  useEffect(()=>{
-  if(!subject||!photoQueueTarget)return;
+  if(!subject)return;
   let stopped=false;let timer:ReturnType<typeof setTimeout>;
   const read=async()=>{await refreshPhotos();if(!stopped)timer=setTimeout(()=>void read(),5000);};
   void read();return()=>{stopped=true;photoRead.current++;clearTimeout(timer);};
- },[subject,photoQueueTarget]);
- const queued=(job:CostcoOnboardingJobView)=>{if(job.photo&&photoQueueTarget){void refreshPhotos();return;}setJobs(previous=>[job,...previous.filter(x=>x.id!==job.id)]);};
+ },[subject]);
+ const queued=(job:CostcoOnboardingJobView)=>{if(job.photo){void refreshPhotos();return;}setJobs(previous=>[job,...previous.filter(x=>x.id!==job.id)]);};
  if(!subject)return null;
  const selected=suppliers.some(s=>s.id===supplier);
  const labels={title:t('onboarding.number_title'),itemNumber:t('onboarding.item'),submit:t('onboarding.start'),close:t('onboarding.close'),invalid:t('onboarding.one_item_required'),failed:t('onboarding.retry_attempt'),queued:t('onboarding.queued'),pending:t('onboarding.accepting'),newTask:t('onboarding.new_task')};
@@ -51,7 +52,7 @@ export default function CostcoOnboardingPanel({suppliers,photoOpen,photoQueueTar
   </Space>
   {error&&<Alert type="warning" message={t('onboarding.read_failed')}/>}
   {statusLoaded&&!workerEnabled&&<Alert type="info" message={t('onboarding.worker_disabled')}/>}
-  {jobs.filter(job=>!photoQueueTarget||!job.photo).slice(0,8).map(job=><div key={job.id} data-photo-job={job.id}><Tag>{t('onboarding.state.'+job.state)}</Tag>{job.itemNumber&&<span>{job.itemNumber} </span>}
+  {jobs.filter(job=>!job.photo).slice(0,8).map(job=><div key={job.id} data-photo-job={job.id}><Tag>{t('onboarding.state.'+job.state)}</Tag>{job.itemNumber&&<span>{job.itemNumber} </span>}
    {job.state==='NEEDS_INPUT'&&<Typography.Text>{t(job.failureCode==='onboarding.new_master_needs_price_policy'?'onboarding.master_pending':['onboarding.pending_quota','onboarding.daily_quota','onboarding.evidence_quota'].includes(job.failureCode||'')?job.failureCode!:'onboarding.needs_input')}</Typography.Text>}
    {job.candidate&&<details><summary>{t('onboarding.saved_details')}</summary><dl>
     <dt>{t('onboarding.name')}</dt><dd>{job.candidate.translatedNames?.[locale]||job.candidate.name}</dd>
@@ -63,12 +64,13 @@ export default function CostcoOnboardingPanel({suppliers,photoOpen,photoQueueTar
     {quote.channel&&<span>{t('onboarding.channel')}: {quote.channel} </span>}{quote.taxStatus&&<span>{t('onboarding.tax')}: {quote.taxStatus} </span>}{quote.validFrom} {quote.validUntil}{' '}
     {quote.timeZone&&<span>{t('onboarding.timezone')}: {quote.timeZone} </span>}{quote.conditions}{' '}
     {quote.sourceUrl.startsWith('https://')&&<a href={quote.sourceUrl} target="_blank" rel="noopener noreferrer">{t('onboarding.source')}</a>}</p>)}</details>}
-   {job.photo&&<Button onClick={()=>setReopened(job)}>{t('photo.reopen')}</Button>}
    {job.state==='COMPLETED'&&job.productId&&<Button onClick={()=>onOpenProduct(job.productId!)}>{t('onboarding.open_product')}</Button>}
   </div>)}
+  {!photoQueueTarget&&photoReadFailed&&<Alert type="warning" message={t('onboarding.read_failed')}/>}
+  {!photoQueueTarget&&!photoOpen&&!reopened&&<ProductPhotoQueue jobs={photoRows??[]} onReview={setReopened} onChanged={refreshPhotos}/>}
   <CostcoNumberOnboardingModal open={numberOpen&&selected&&workerEnabled} subject={subject} supplierId={supplier} market="JP" labels={labels}
    enqueue={api.costcoOnboarding.number} onQueued={queued} onClose={()=>setNumberOpen(false)}/>
-  {(photoOpen||reopened)&&<ProductPhotoIntakeModal key={subject+':'+(reopened?.id||'new')} open job={reopened} onClose={()=>{setReopened(undefined);onPhotoClose();}} onQueued={queued} onSaved={onOpenProduct} onConfirmed={()=>{if(photoQueueTarget)void refreshPhotos();onConfirmed?.();}}/>}
+  {(photoOpen||reopened)&&<ProductPhotoIntakeModal key={subject} open job={reopened} queue={photoRows??[]} onReview={setReopened} onQueueChanged={refreshPhotos} onClose={()=>{setReopened(undefined);onPhotoClose();}} onQueued={queued} onSaved={onOpenProduct} onConfirmed={()=>{void refreshPhotos();onConfirmed?.();}}/>}
 
  </section>;
 }

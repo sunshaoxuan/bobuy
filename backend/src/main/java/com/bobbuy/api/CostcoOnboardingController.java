@@ -53,7 +53,7 @@ public class CostcoOnboardingController {
     @org.springframework.transaction.annotation.Transactional
     public ApiResponse<View> photo(Authentication auth,@RequestParam String requestId,@RequestParam String supplierId,
             @RequestParam String market,@RequestParam MultipartFile file) throws IOException {
-        long owner=owner(auth);if(!workerEnabled)throw new ApiException(ErrorCode.INVALID_STATUS,"onboarding.worker_disabled");supplier(owner,supplierId);
+        long owner=owner(auth);supplier(owner,supplierId);
         // Validate scope/idempotency input before persisting even private evidence.
         new CostcoNumberOnboardingService.Input(owner,supplierId,market,requestId,null,"0".repeat(64));
         if(file==null||file.isEmpty()||file.getSize()>8*1024*1024)throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.image");
@@ -68,7 +68,7 @@ public class CostcoOnboardingController {
     public org.springframework.http.ResponseEntity<ApiError> conflict(org.springframework.web.server.ResponseStatusException failure){return org.springframework.http.ResponseEntity.status(failure.getStatusCode()).body(new ApiError("INVALID_REQUEST","onboarding.idempotency_conflict"));}
     @ExceptionHandler(CostcoNumberOnboardingService.NeedsInput.class)
     public org.springframework.http.ResponseEntity<ApiError> scopeChanged(CostcoNumberOnboardingService.NeedsInput failure){return org.springframework.http.ResponseEntity.status(403).body(new ApiError("FORBIDDEN",failure.getMessage()));}
-    @GetMapping public ApiResponse<?> recent(Authentication auth) { return ApiResponse.success(jobs.recent(owner(auth)).stream().map(CostcoOnboardingController::view).toList()); }
+    @GetMapping public ApiResponse<?> recent(Authentication auth,@RequestParam(defaultValue="false") boolean numbersOnly) { return ApiResponse.success(jobs.recent(owner(auth),numbersOnly).stream().map(CostcoOnboardingController::view).toList()); }
     public record Status(boolean workerEnabled,String photoConfigurationIssue) {}
     @GetMapping("/status") public ApiResponse<Status> status(Authentication auth){owner(auth);var configuration=gateway.pinnedConfiguration(com.bobbuy.service.CostcoEvidenceAcquisitionPlanner.REQUIRED_NODE);
         return ApiResponse.success(new Status(workerEnabled,configuration.ready()?null:configuration.code()));}

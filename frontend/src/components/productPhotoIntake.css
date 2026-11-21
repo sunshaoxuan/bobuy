@@ -23,6 +23,16 @@
 .product-photo-intake .ant-checkbox-wrapper {padding-block:4px}
 .product-photo-intake .ant-checkbox-wrapper > span:last-child {position:relative;top:-1px}
 
+.photo-queue ul {list-style:none;margin:0;padding:0;max-height:360px;overflow:auto}
+.photo-queue li {display:flex;align-items:flex-start;gap:8px;padding:8px;border-bottom:1px solid var(--zen-border,#e5e5e5)}
+.photo-queue-thumbnail {flex:0 0 56px;height:56px;border-radius:8px;overflow:hidden;background:var(--zen-bg,#faf9f6);text-align:center}
+.photo-queue-thumbnail img {width:100%;height:100%;object-fit:cover}
+.photo-queue-info {min-width:0;overflow-wrap:anywhere}
+.photo-queue-info .ant-tag {white-space:normal;display:inline-block;max-width:100%;margin-bottom:8px}
+.photo-queue-info p {margin:0 0 8px}
+.photo-queue .ant-btn {min-height:44px;height:auto;border-radius:8px;white-space:normal;padding:10px 16px;line-height:22px}
+.photo-queue :focus-visible {outline:2px solid #795908;outline-offset:2px}
+
 .photo-queue-summary {margin-block:8px 16px}
 .photo-queue-summary-bar,.photo-queue-summary-counts,.photo-queue-summary-meta {display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .photo-queue-summary .ant-btn {min-height:44px}

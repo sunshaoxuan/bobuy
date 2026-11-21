@@ -93,7 +93,11 @@ for(const [width,height] of settings){
   await shot('archive','.product-archive');
  }
  await camera.click();
+ await page.locator('.photo-capture-controls .ant-select-selection-item').waitFor();
+ const awaitPhotoUpload=()=>page.waitForResponse(response=>response.request().method()==='POST'&&new URL(response.url()).pathname==='/api/ai/costco-onboarding/photo');
+ const firstUpload=awaitPhotoUpload();
  await page.locator('input[capture]').setInputFiles({name:'synthetic-first.png',mimeType:'image/png',buffer:png});
+ assert.equal((await firstUpload).status(),200);
  await page.getByRole('link',{name:'下载照片'}).waitFor();
  if(width!==1280){
   await page.getByRole('button',{name:'保存照片',exact:true}).click();
@@ -104,13 +108,9 @@ for(const [width,height] of settings){
  await page.getByRole('link',{name:'下载照片'}).click();
  assert.equal((await downloadPromise).suggestedFilename(),'synthetic-first.png');
  await shot('capture','.product-photo-intake .ant-modal-content');
- const submit=page.locator('.product-photo-intake .ant-btn-primary').first();
- await submit.click();
- await page.waitForFunction(()=>document.querySelector('.product-photo-intake')?.textContent.includes('等待处理'));
+ const secondUpload=awaitPhotoUpload();
  await page.locator('input[type=file]:not([capture])').setInputFiles({name:'synthetic-next.png',mimeType:'image/png',buffer:png});
- await page.getByRole('link',{name:'下载照片'}).waitFor();
- await submit.click();
- await page.waitForFunction(()=>document.querySelector('.product-photo-intake')?.textContent.includes('等待处理'));
+ assert.equal((await secondUpload).status(),200);
  assert.equal(uploads,2);
  await page.locator('.product-photo-intake .ant-modal-close').click();
  await page.reload();
@@ -122,17 +122,23 @@ for(const [width,height] of settings){
   await shot('queue','.photo-queue-summary');
  }
  await page.locator('[data-photo-job="demo-3"] button').click();
- await page.getByText(/桥地址未配置/).waitFor();
- await page.getByRole('button',{name:'用原图重新识别'}).click();
- await page.waitForFunction(()=>document.querySelector('.product-photo-intake')?.textContent.includes('等待处理'));
+ await page.getByRole('status').filter({hasText:/桥地址未配置/}).waitFor();
+ await page.getByRole('button',{name:'用原图重新识别'}).first().click();
+ await page.waitForFunction(()=>/排队中|等待处理/.test(document.querySelector('.product-photo-intake')?.textContent||''));
  assert.equal(retries,1);
  await page.locator('.product-photo-intake .ant-modal-close').click();
  await page.locator('[data-photo-job="demo-0"] button').click();
  await page.locator('input[value="1280"]').waitFor({state:'attached'});
  if(design){
+  const overview=await page.locator('.photo-review-overview').boundingBox();
+  const footer=await page.locator('.photo-confirm-footer').boundingBox();
+  assert.ok(overview&&footer&&overview.y+overview.height<=footer.y);
+  assert.ok(footer.y+footer.height<=await page.evaluate(()=>window.innerHeight));
+  assert.ok(await page.locator('.photo-review-overview').evaluate(section=>
+   Boolean(section.compareDocumentPosition(section.parentElement.querySelector('.photo-queue'))&Node.DOCUMENT_POSITION_FOLLOWING)));
   await shot('review','.product-photo-intake .ant-modal-content');
   await page.locator('.photo-proof-toggle').click();
-  await page.getByAltText('私有现场照片').waitFor();
+  await page.locator('.photo-evidence-expanded').getAttribute('alt').then(alt=>assert.equal(alt,'私有现场照片'));
   await page.locator('.photo-proof-toggle').click();
   for(const checkbox of await page.locator('.product-photo-intake input[type=checkbox]').all()){
    if(await checkbox.isEnabled())await checkbox.check();

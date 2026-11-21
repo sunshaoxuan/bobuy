@@ -1,0 +1,1257 @@
+{
+  "scriptSha256": "3c6db27d050e8063bab10e43c908a152dc9455a96a45e88b301a47c9dc0a1315",
+  "console": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "error",
+      "text": "[API ERROR] FETCH failure at /api/auth/me: TypeError: Failed to fetch\n    at authorizedFetch (http://127.0.0.1:5173/src/api.ts:212:26)\n    at fetchJson (http://127.0.0.1:5173/src/api.ts:313:22)\n    at Object.me (http://127.0.0.1:5173/src/api.ts:620:15)\n    at http://127.0.0.1:5173/src/context/UserRoleContext.tsx:83:14\n    at commitHookEffectListMount (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-BTVZPJ6F.js?v=98d18093:16883:34)\n    at commitPassiveMountOnFiber (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-BTVZPJ6F.js?v=98d18093:18124:19)\n    at commitPassiveMountEffects_complete (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-BTVZPJ6F.js?v=98d18093:18097:17)\n    at commitPassiveMountEffects_begin (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-BTVZPJ6F.js?v=98d18093:18087:15)\n    at commitPassiveMountEffects (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-BTVZPJ6F.js?v=98d18093:18077:11)\n    at flushPassiveEffectsImpl (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-BTVZPJ6F.js?v=98d18093:19458:11)"
+    },
+    {
+      "type": "error",
+      "text": "[API ERROR] FETCH failure at /api/auth/me: TypeError: Failed to fetch\n    at authorizedFetch (http://127.0.0.1:5173/src/api.ts:212:26)\n    at fetchJson (http://127.0.0.1:5173/src/api.ts:313:22)\n    at Object.me (http://127.0.0.1:5173/src/api.ts:620:15)\n    at http://127.0.0.1:5173/src/context/UserRoleContext.tsx:83:14\n    at commitHookEffectListMount (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-BTVZPJ6F.js?v=98d18093:16883:34)\n    at invokePassiveEffectMountInDEV (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-BTVZPJ6F.js?v=98d18093:18292:19)\n    at invokeEffectsInDev (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-BTVZPJ6F.js?v=98d18093:19669:19)\n    at commitDoubleInvokeEffectsInDEV (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-BTVZPJ6F.js?v=98d18093:19654:15)\n    at flushPassiveEffectsImpl (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-BTVZPJ6F.js?v=98d18093:19471:13)\n    at flushPassiveEffects (http://127.0.0.1:5173/node_modules/.vite/deps/chunk-BTVZPJ6F.js?v=98d18093:19415:22)"
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    }
+  ],
+  "network": [
+    {
+      "path": "http://127.0.0.1:5173/src/pages/productTrash.css",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "path": "http://127.0.0.1:5173/src/pages/StockMaster.tsx",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "path": "http://127.0.0.1:5173/api/auth/me",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "path": "http://127.0.0.1:5173/api/auth/me",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/c39e923b-d7f0-4ad9-9891-995621a21a4f",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/c39e923b-d7f0-4ad9-9891-995621a21a4f",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/2a33fccf-5a97-4b84-9eaf-99573d7d4117/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/f2e31301-ad18-4e9a-aef9-c05ccb3866f8/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/d663ccf4-eae4-44e1-8123-3b160bd264d9/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/a799bdd1-9380-4e1d-a9ad-bc09433847ca/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/118f2748-0eb5-44f8-8752-0f5a1aa47b4b/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/c39e923b-d7f0-4ad9-9891-995621a21a4f",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/c39e923b-d7f0-4ad9-9891-995621a21a4f",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/f2e31301-ad18-4e9a-aef9-c05ccb3866f8/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/2a33fccf-5a97-4b84-9eaf-99573d7d4117/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/d663ccf4-eae4-44e1-8123-3b160bd264d9/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/a799bdd1-9380-4e1d-a9ad-bc09433847ca/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/c39e923b-d7f0-4ad9-9891-995621a21a4f",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/c39e923b-d7f0-4ad9-9891-995621a21a4f",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/2a33fccf-5a97-4b84-9eaf-99573d7d4117/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/f2e31301-ad18-4e9a-aef9-c05ccb3866f8/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/d663ccf4-eae4-44e1-8123-3b160bd264d9/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/a799bdd1-9380-4e1d-a9ad-bc09433847ca/photo",
+      "status": 200,
+      "method": "GET"
+    }
+  ],
+  "geometry": [
+    {
+      "name": "stable-390-zh-CN",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "documentWidth": 390,
+      "modalWidth": 366,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "label": "Close",
+          "x": 322,
+          "y": 48,
+          "width": 44,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "东京供货商",
+          "x": 32,
+          "y": 226,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "选择供应商",
+          "x": 44,
+          "y": 227,
+          "width": 298,
+          "height": 30,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "设备拍照",
+          "x": 32,
+          "y": 294,
+          "width": 90,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "相册或文件",
+          "x": 130,
+          "y": 294,
+          "width": 104,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "打开照片任务",
+          "x": 164.015625,
+          "y": 392,
+          "width": 118,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(230, 97, 87)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "打开照片任务",
+          "x": 104,
+          "y": 526,
+          "width": 118,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "用原图重新识别",
+          "x": 104,
+          "y": 578,
+          "width": 132,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "打开照片任务",
+          "x": 164.015625,
+          "y": 639,
+          "width": 118,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "打开照片任务",
+          "x": 104,
+          "y": 743,
+          "width": 118,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "打开照片任务",
+          "x": 104,
+          "y": 835,
+          "width": 118,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "关 闭",
+          "x": 32,
+          "y": 760,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "name": "stable-390-zh-TW",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "documentWidth": 390,
+      "modalWidth": 366,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "label": "Close",
+          "x": 322,
+          "y": 48,
+          "width": 44,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "東京サプライヤー",
+          "x": 32,
+          "y": 226,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "選擇供應商",
+          "x": 44,
+          "y": 227,
+          "width": 298,
+          "height": 30,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "裝置拍照",
+          "x": 32,
+          "y": 294,
+          "width": 90,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "相簿或檔案",
+          "x": 130,
+          "y": 294,
+          "width": 104,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "開啟照片任務",
+          "x": 164.015625,
+          "y": 392,
+          "width": 118,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(230, 97, 87)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "開啟照片任務",
+          "x": 104,
+          "y": 526,
+          "width": 118,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "用原圖重新識別",
+          "x": 104,
+          "y": 578,
+          "width": 132,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "開啟照片任務",
+          "x": 164.015625,
+          "y": 639,
+          "width": 118,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "開啟照片任務",
+          "x": 104,
+          "y": 743,
+          "width": 118,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "開啟照片任務",
+          "x": 104,
+          "y": 835,
+          "width": 118,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "關 閉",
+          "x": 32,
+          "y": 760,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "name": "stable-390-ja-JP",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "documentWidth": 390,
+      "modalWidth": 366,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "label": "Close",
+          "x": 322,
+          "y": 48,
+          "width": 44,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "東京サプライヤー",
+          "x": 32,
+          "y": 248,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "仕入先を選択",
+          "x": 44,
+          "y": 249,
+          "width": 298,
+          "height": 30,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "カメラで撮影",
+          "x": 32,
+          "y": 316,
+          "width": 118,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "アルバムまたはファイル",
+          "x": 158,
+          "y": 316,
+          "width": 187.859375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "写真の処理結果を開く",
+          "x": 164.015625,
+          "y": 414,
+          "width": 174,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(230, 97, 87)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "写真の処理結果を開く",
+          "x": 104,
+          "y": 570,
+          "width": 174,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "この写真で識別を再試行",
+          "x": 104,
+          "y": 622,
+          "width": 188,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "写真の処理結果を開く",
+          "x": 164.015625,
+          "y": 683,
+          "width": 174,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "写真の処理結果を開く",
+          "x": 104,
+          "y": 787,
+          "width": 174,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "写真の処理結果を開く",
+          "x": 104,
+          "y": 879,
+          "width": 174,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "閉じる",
+          "x": 32,
+          "y": 782,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        }
+      ]
+    }
+  ],
+  "results": [
+    "Unscaled full-viewport and mobile detail captures. Waited for modal transforms before measuring DOM boxes. Pillow measured dark glyph pixels in the three actions for each CJK locale (RGB max <145, outer 3px ignored)."
+  ],
+  "fixture": "Synthetic persisted photo suggestions; real UI/API/Postgres; not live AI recognition; unrelated seeded archive images use local placeholders",
+  "glyphs": [
+    {
+      "locale": "zh-CN",
+      "label": "设备拍照",
+      "width": 90,
+      "height": 44,
+      "left": 18,
+      "top": 15,
+      "right": 72,
+      "bottom": 29
+    },
+    {
+      "locale": "zh-CN",
+      "label": "相册或文件",
+      "width": 104,
+      "height": 44,
+      "left": 18,
+      "top": 15,
+      "right": 86,
+      "bottom": 29
+    },
+    {
+      "locale": "zh-CN",
+      "label": "用原图重新识别",
+      "width": 132,
+      "height": 44,
+      "left": 18,
+      "top": 15,
+      "right": 114,
+      "bottom": 29
+    },
+    {
+      "locale": "zh-TW",
+      "label": "裝置拍照",
+      "width": 90,
+      "height": 44,
+      "left": 18,
+      "top": 15,
+      "right": 72,
+      "bottom": 29
+    },
+    {
+      "locale": "zh-TW",
+      "label": "相簿或檔案",
+      "width": 104,
+      "height": 44,
+      "left": 18,
+      "top": 15,
+      "right": 86,
+      "bottom": 29
+    },
+    {
+      "locale": "zh-TW",
+      "label": "用原圖重新識別",
+      "width": 132,
+      "height": 44,
+      "left": 18,
+      "top": 15,
+      "right": 114,
+      "bottom": 29
+    },
+    {
+      "locale": "ja-JP",
+      "label": "カメラで撮影",
+      "width": 118,
+      "height": 44,
+      "left": 19,
+      "top": 15,
+      "right": 100,
+      "bottom": 29
+    },
+    {
+      "locale": "ja-JP",
+      "label": "アルバムまたはファイル",
+      "width": 188,
+      "height": 44,
+      "left": 19,
+      "top": 16,
+      "right": 170,
+      "bottom": 29
+    },
+    {
+      "locale": "ja-JP",
+      "label": "この写真で識別を再試行",
+      "width": 188,
+      "height": 44,
+      "left": 19,
+      "top": 15,
+      "right": 170,
+      "bottom": 29
+    }
+  ]
+}

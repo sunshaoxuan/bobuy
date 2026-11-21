@@ -21,6 +21,15 @@ public class ProductPatch {
     private Boolean isRecommended;
     private Boolean isTemporary;
     private ProductVisibility visibilityStatus;
+    private Boolean cartEnabled;
+
+    public Boolean getCartEnabled() {
+        return cartEnabled;
+    }
+
+    public void setCartEnabled(Boolean cartEnabled) {
+        this.cartEnabled = cartEnabled;
+    }
 
     public Map<String, String> getName() {
         return name;

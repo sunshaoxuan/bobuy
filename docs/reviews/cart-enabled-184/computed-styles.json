@@ -1,0 +1,989 @@
+{
+  "390x844 en-US": {
+    "dimensions": {
+      "view": 390,
+      "document": 390
+    },
+    "entryBounds": [
+      179.390625,
+      265.421875
+    ],
+    "initial": {
+      "width": "52px",
+      "height": "44px",
+      "min-width": "52px",
+      "min-height": "44px",
+      "border-radius": "100px",
+      "border-color": "rgba(0, 0, 0, 0.88)",
+      "border-width": "0px",
+      "background-color": "rgba(0, 0, 0, 0)",
+      "box-shadow": "none",
+      "bounds": {
+        "x": 124,
+        "y": 1028.53125,
+        "width": 52,
+        "height": 44
+      },
+      "track": {
+        "top": "9px",
+        "bottom": "9px",
+        "borderRadius": "999px",
+        "backgroundColor": "rgb(113, 113, 107)"
+      },
+      "thumb": {
+        "x": 128,
+        "y": 1041.53125,
+        "width": 18,
+        "height": 18
+      }
+    },
+    "bulkStyle": {
+      "width": "199.594px",
+      "height": "44px",
+      "min-width": "44px",
+      "min-height": "44px",
+      "border-radius": "999px",
+      "border-color": "rgb(217, 217, 217)",
+      "border-width": "1px",
+      "background-color": "rgb(255, 255, 255)",
+      "box-shadow": "none",
+      "bounds": {
+        "x": 16,
+        "y": -20.515625,
+        "width": 199.59375,
+        "height": 44
+      },
+      "glyph": {
+        "top": -4.265625,
+        "bottom": 8.734375,
+        "centerOffsetY": 0.75,
+        "left": 34,
+        "right": 198.646484375,
+        "height": 13
+      }
+    },
+    "controls": [
+      {
+        "width": "326px",
+        "height": "44px",
+        "min-width": "auto",
+        "min-height": "44px",
+        "border-radius": "8px",
+        "border-color": "rgb(217, 217, 217)",
+        "border-width": "1px",
+        "background-color": "rgb(255, 255, 255)",
+        "box-shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+        "bounds": {
+          "x": 32,
+          "y": 249,
+          "width": 326,
+          "height": 44
+        },
+        "glyph": {
+          "top": 266,
+          "bottom": 276,
+          "centerOffsetY": 0,
+          "left": 174.546875,
+          "right": 215.048828125,
+          "height": 10
+        }
+      },
+      {
+        "width": "326px",
+        "height": "44px",
+        "min-width": "auto",
+        "min-height": "44px",
+        "border-radius": "8px",
+        "border-color": "rgba(0, 0, 0, 0)",
+        "border-width": "1px",
+        "background-color": "rgb(217, 54, 48)",
+        "box-shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px",
+        "bounds": {
+          "x": 32,
+          "y": 301,
+          "width": 326,
+          "height": 44
+        },
+        "glyph": {
+          "top": 318,
+          "bottom": 328,
+          "centerOffsetY": 0,
+          "left": 131.65625,
+          "right": 258.595703125,
+          "height": 10
+        }
+      },
+      {
+        "width": "44px",
+        "height": "44px",
+        "min-width": "0px",
+        "min-height": "0px",
+        "border-radius": "6px",
+        "border-color": "rgba(0, 0, 0, 0.45)",
+        "border-width": "0px",
+        "background-color": "rgba(0, 0, 0, 0)",
+        "box-shadow": "none",
+        "bounds": {
+          "x": 326,
+          "y": 120,
+          "width": 44,
+          "height": 44
+        }
+      }
+    ],
+    "reads": [
+      "/api/merchant/product-cart-availability/preview",
+      "/api/merchant/product-cart-availability/preview",
+      "/api/merchant/product-cart-availability/preview"
+    ],
+    "writes": [
+      [
+        "PATCH",
+        "/api/mobile/products/1001",
+        {
+          "cartEnabled": true
+        }
+      ],
+      [
+        "PATCH",
+        "/api/mobile/products/1001",
+        {
+          "cartEnabled": false
+        }
+      ],
+      [
+        "POST",
+        "/api/merchant/product-cart-availability/enable",
+        {
+          "revision": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    ],
+    "pageErrors": [],
+    "consoleErrors": [],
+    "failedRequests": []
+  },
+  "1280x800 en-US": {
+    "dimensions": {
+      "view": 1280,
+      "document": 1280
+    },
+    "entryBounds": [],
+    "initial": {
+      "width": "52px",
+      "height": "44px",
+      "min-width": "52px",
+      "min-height": "44px",
+      "border-radius": "100px",
+      "border-color": "rgba(0, 0, 0, 0.88)",
+      "border-width": "0px",
+      "background-color": "rgba(0, 0, 0, 0)",
+      "box-shadow": "none",
+      "bounds": {
+        "x": 433,
+        "y": 1118.1875,
+        "width": 52,
+        "height": 44
+      },
+      "track": {
+        "top": "9px",
+        "bottom": "9px",
+        "borderRadius": "999px",
+        "backgroundColor": "rgb(113, 113, 107)"
+      },
+      "thumb": {
+        "x": 437,
+        "y": 1131.1875,
+        "width": 18,
+        "height": 18
+      }
+    },
+    "bulkStyle": {
+      "width": "199.594px",
+      "height": "44px",
+      "min-width": "44px",
+      "min-height": "44px",
+      "border-radius": "999px",
+      "border-color": "rgb(217, 217, 217)",
+      "border-width": "1px",
+      "background-color": "rgb(255, 255, 255)",
+      "box-shadow": "none",
+      "bounds": {
+        "x": 727.890625,
+        "y": -68.359375,
+        "width": 199.59375,
+        "height": 44
+      },
+      "glyph": {
+        "top": -52.109375,
+        "bottom": -39.109375,
+        "centerOffsetY": 0.75,
+        "left": 745.890625,
+        "right": 910.537109375,
+        "height": 13
+      }
+    },
+    "controls": [
+      {
+        "width": "74.9062px",
+        "height": "44px",
+        "min-width": "auto",
+        "min-height": "44px",
+        "border-radius": "8px",
+        "border-color": "rgb(217, 217, 217)",
+        "border-width": "1px",
+        "background-color": "rgb(255, 255, 255)",
+        "box-shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+        "bounds": {
+          "x": 632.40625,
+          "y": 241,
+          "width": 74.90625,
+          "height": 44
+        },
+        "glyph": {
+          "top": 258,
+          "bottom": 268,
+          "centerOffsetY": 0,
+          "left": 649.40625,
+          "right": 689.908203125,
+          "height": 10
+        }
+      },
+      {
+        "width": "160.688px",
+        "height": "44px",
+        "min-width": "auto",
+        "min-height": "44px",
+        "border-radius": "8px",
+        "border-color": "rgba(0, 0, 0, 0)",
+        "border-width": "1px",
+        "background-color": "rgb(217, 54, 48)",
+        "box-shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px",
+        "bounds": {
+          "x": 715.3125,
+          "y": 241,
+          "width": 160.6875,
+          "height": 44
+        },
+        "glyph": {
+          "top": 258,
+          "bottom": 268,
+          "centerOffsetY": 0,
+          "left": 732.3125,
+          "right": 859.251953125,
+          "height": 10
+        }
+      },
+      {
+        "width": "44px",
+        "height": "44px",
+        "min-width": "0px",
+        "min-height": "0px",
+        "border-radius": "6px",
+        "border-color": "rgba(0, 0, 0, 0.45)",
+        "border-width": "0px",
+        "background-color": "rgba(0, 0, 0, 0)",
+        "box-shadow": "none",
+        "bounds": {
+          "x": 844,
+          "y": 112,
+          "width": 44,
+          "height": 44
+        }
+      }
+    ],
+    "reads": [
+      "/api/merchant/product-cart-availability/preview",
+      "/api/merchant/product-cart-availability/preview",
+      "/api/merchant/product-cart-availability/preview",
+      "/api/merchant/product-cart-availability/preview"
+    ],
+    "writes": [
+      [
+        "PATCH",
+        "/api/mobile/products/1001",
+        {
+          "cartEnabled": true
+        }
+      ],
+      [
+        "PATCH",
+        "/api/mobile/products/1001",
+        {
+          "cartEnabled": false
+        }
+      ],
+      [
+        "POST",
+        "/api/merchant/product-cart-availability/enable",
+        {
+          "revision": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ],
+      [
+        "POST",
+        "/api/merchant/product-cart-availability/enable",
+        {
+          "revision": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    ],
+    "pageErrors": [],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 409 (Conflict)"
+    ],
+    "failedRequests": []
+  },
+  "390x844 ja-JP": {
+    "dimensions": {
+      "view": 390,
+      "document": 390
+    },
+    "entryBounds": [
+      168,
+      356
+    ],
+    "initial": {
+      "width": "52px",
+      "height": "44px",
+      "min-width": "52px",
+      "min-height": "44px",
+      "border-radius": "100px",
+      "border-color": "rgba(0, 0, 0, 0.88)",
+      "border-width": "0px",
+      "background-color": "rgba(0, 0, 0, 0)",
+      "box-shadow": "none",
+      "bounds": {
+        "x": 124,
+        "y": 976.53125,
+        "width": 52,
+        "height": 44
+      },
+      "track": {
+        "top": "9px",
+        "bottom": "9px",
+        "borderRadius": "999px",
+        "backgroundColor": "rgb(113, 113, 107)"
+      },
+      "thumb": {
+        "x": 128,
+        "y": 989.53125,
+        "width": 18,
+        "height": 18
+      }
+    },
+    "bulkStyle": {
+      "width": "284.609px",
+      "height": "44px",
+      "min-width": "44px",
+      "min-height": "44px",
+      "border-radius": "999px",
+      "border-color": "rgb(217, 217, 217)",
+      "border-width": "1px",
+      "background-color": "rgb(255, 255, 255)",
+      "box-shadow": "none",
+      "bounds": {
+        "x": 16,
+        "y": 556.484375,
+        "width": 284.609375,
+        "height": 44
+      },
+      "glyph": {
+        "top": 571.484375,
+        "bottom": 585.484375,
+        "centerOffsetY": 0,
+        "left": 34,
+        "right": 284,
+        "height": 14
+      }
+    },
+    "controls": [
+      {
+        "width": "326px",
+        "height": "44px",
+        "min-width": "auto",
+        "min-height": "44px",
+        "border-radius": "8px",
+        "border-color": "rgb(217, 217, 217)",
+        "border-width": "1px",
+        "background-color": "rgb(255, 255, 255)",
+        "box-shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+        "bounds": {
+          "x": 32,
+          "y": 249,
+          "width": 326,
+          "height": 44
+        },
+        "glyph": {
+          "top": 265,
+          "bottom": 278,
+          "centerOffsetY": 0.5,
+          "left": 161,
+          "right": 230,
+          "height": 13
+        }
+      },
+      {
+        "width": "326px",
+        "height": "44px",
+        "min-width": "auto",
+        "min-height": "44px",
+        "border-radius": "8px",
+        "border-color": "rgba(0, 0, 0, 0)",
+        "border-width": "1px",
+        "background-color": "rgb(217, 54, 48)",
+        "box-shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px",
+        "bounds": {
+          "x": 32,
+          "y": 301,
+          "width": 326,
+          "height": 44
+        },
+        "glyph": {
+          "top": 316,
+          "bottom": 330,
+          "centerOffsetY": 0,
+          "left": 159.921875,
+          "right": 228.921875,
+          "height": 14
+        }
+      },
+      {
+        "width": "44px",
+        "height": "44px",
+        "min-width": "0px",
+        "min-height": "0px",
+        "border-radius": "6px",
+        "border-color": "rgba(0, 0, 0, 0.45)",
+        "border-width": "0px",
+        "background-color": "rgba(0, 0, 0, 0)",
+        "box-shadow": "none",
+        "bounds": {
+          "x": 326,
+          "y": 120,
+          "width": 44,
+          "height": 44
+        }
+      }
+    ],
+    "reads": [
+      "/api/merchant/product-cart-availability/preview",
+      "/api/merchant/product-cart-availability/preview"
+    ],
+    "writes": [
+      [
+        "PATCH",
+        "/api/mobile/products/1001",
+        {
+          "cartEnabled": true
+        }
+      ],
+      [
+        "PATCH",
+        "/api/mobile/products/1001",
+        {
+          "cartEnabled": false
+        }
+      ],
+      [
+        "POST",
+        "/api/merchant/product-cart-availability/enable",
+        {
+          "revision": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    ],
+    "pageErrors": [],
+    "consoleErrors": [],
+    "failedRequests": []
+  },
+  "767x844 ja-JP": {
+    "dimensions": {
+      "view": 767,
+      "document": 767
+    },
+    "entryBounds": [
+      168,
+      356
+    ],
+    "initial": {
+      "width": "52px",
+      "height": "44px",
+      "min-width": "52px",
+      "min-height": "44px",
+      "border-radius": "100px",
+      "border-color": "rgba(0, 0, 0, 0.88)",
+      "border-width": "0px",
+      "background-color": "rgba(0, 0, 0, 0)",
+      "box-shadow": "none",
+      "bounds": {
+        "x": 312.5,
+        "y": 1165.03125,
+        "width": 52,
+        "height": 44
+      },
+      "track": {
+        "top": "9px",
+        "bottom": "9px",
+        "borderRadius": "999px",
+        "backgroundColor": "rgb(113, 113, 107)"
+      },
+      "thumb": {
+        "x": 316.5,
+        "y": 1178.03125,
+        "width": 18,
+        "height": 18
+      }
+    },
+    "bulkStyle": {
+      "width": "284.609px",
+      "height": "44px",
+      "min-width": "44px",
+      "min-height": "44px",
+      "border-radius": "999px",
+      "border-color": "rgb(217, 217, 217)",
+      "border-width": "1px",
+      "background-color": "rgb(255, 255, 255)",
+      "box-shadow": "none",
+      "bounds": {
+        "x": 16,
+        "y": 556.484375,
+        "width": 284.609375,
+        "height": 44
+      },
+      "glyph": {
+        "top": 571.484375,
+        "bottom": 585.484375,
+        "centerOffsetY": 0,
+        "left": 34,
+        "right": 284,
+        "height": 14
+      }
+    },
+    "controls": [
+      {
+        "width": "472px",
+        "height": "44px",
+        "min-width": "auto",
+        "min-height": "44px",
+        "border-radius": "8px",
+        "border-color": "rgb(217, 217, 217)",
+        "border-width": "1px",
+        "background-color": "rgb(255, 255, 255)",
+        "box-shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+        "bounds": {
+          "x": 147.5,
+          "y": 249,
+          "width": 472,
+          "height": 44
+        },
+        "glyph": {
+          "top": 265,
+          "bottom": 278,
+          "centerOffsetY": 0.5,
+          "left": 349.5,
+          "right": 418.5,
+          "height": 13
+        }
+      },
+      {
+        "width": "472px",
+        "height": "44px",
+        "min-width": "auto",
+        "min-height": "44px",
+        "border-radius": "8px",
+        "border-color": "rgba(0, 0, 0, 0)",
+        "border-width": "1px",
+        "background-color": "rgb(217, 54, 48)",
+        "box-shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px",
+        "bounds": {
+          "x": 147.5,
+          "y": 301,
+          "width": 472,
+          "height": 44
+        },
+        "glyph": {
+          "top": 316,
+          "bottom": 330,
+          "centerOffsetY": 0,
+          "left": 348.421875,
+          "right": 417.421875,
+          "height": 14
+        }
+      },
+      {
+        "width": "44px",
+        "height": "44px",
+        "min-width": "0px",
+        "min-height": "0px",
+        "border-radius": "6px",
+        "border-color": "rgba(0, 0, 0, 0.45)",
+        "border-width": "0px",
+        "background-color": "rgba(0, 0, 0, 0)",
+        "box-shadow": "none",
+        "bounds": {
+          "x": 587.5,
+          "y": 120,
+          "width": 44,
+          "height": 44
+        }
+      }
+    ],
+    "reads": [
+      "/api/merchant/product-cart-availability/preview",
+      "/api/merchant/product-cart-availability/preview"
+    ],
+    "writes": [
+      [
+        "PATCH",
+        "/api/mobile/products/1001",
+        {
+          "cartEnabled": true
+        }
+      ],
+      [
+        "PATCH",
+        "/api/mobile/products/1001",
+        {
+          "cartEnabled": false
+        }
+      ],
+      [
+        "POST",
+        "/api/merchant/product-cart-availability/enable",
+        {
+          "revision": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    ],
+    "pageErrors": [],
+    "consoleErrors": [],
+    "failedRequests": []
+  },
+  "390x844 zh-CN": {
+    "dimensions": {
+      "view": 390,
+      "document": 390
+    },
+    "entryBounds": [
+      126,
+      272
+    ],
+    "initial": {
+      "width": "52px",
+      "height": "44px",
+      "min-width": "52px",
+      "min-height": "44px",
+      "border-radius": "100px",
+      "border-color": "rgba(0, 0, 0, 0.88)",
+      "border-width": "0px",
+      "background-color": "rgba(0, 0, 0, 0)",
+      "box-shadow": "none",
+      "bounds": {
+        "x": 124,
+        "y": 976.53125,
+        "width": 52,
+        "height": 44
+      },
+      "track": {
+        "top": "9px",
+        "bottom": "9px",
+        "borderRadius": "999px",
+        "backgroundColor": "rgb(113, 113, 107)"
+      },
+      "thumb": {
+        "x": 128,
+        "y": 989.53125,
+        "width": 18,
+        "height": 18
+      }
+    },
+    "bulkStyle": {
+      "width": "132px",
+      "height": "44px",
+      "min-width": "44px",
+      "min-height": "44px",
+      "border-radius": "999px",
+      "border-color": "rgb(217, 217, 217)",
+      "border-width": "1px",
+      "background-color": "rgb(255, 255, 255)",
+      "box-shadow": "none",
+      "bounds": {
+        "x": 16,
+        "y": 556.484375,
+        "width": 132,
+        "height": 44
+      },
+      "glyph": {
+        "top": 571.484375,
+        "bottom": 585.484375,
+        "centerOffsetY": 0,
+        "left": 33,
+        "right": 131,
+        "height": 14
+      }
+    },
+    "controls": [
+      {
+        "width": "326px",
+        "height": "44px",
+        "min-width": "auto",
+        "min-height": "44px",
+        "border-radius": "8px",
+        "border-color": "rgb(217, 217, 217)",
+        "border-width": "1px",
+        "background-color": "rgb(255, 255, 255)",
+        "box-shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+        "bounds": {
+          "x": 32,
+          "y": 249,
+          "width": 326,
+          "height": 44
+        },
+        "glyph": {
+          "top": 264,
+          "bottom": 278,
+          "centerOffsetY": 0,
+          "left": 179.078125,
+          "right": 210.9130859375,
+          "height": 14
+        }
+      },
+      {
+        "width": "326px",
+        "height": "44px",
+        "min-width": "auto",
+        "min-height": "44px",
+        "border-radius": "8px",
+        "border-color": "rgba(0, 0, 0, 0)",
+        "border-width": "1px",
+        "background-color": "rgb(217, 54, 48)",
+        "box-shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px",
+        "bounds": {
+          "x": 32,
+          "y": 301,
+          "width": 326,
+          "height": 44
+        },
+        "glyph": {
+          "top": 316,
+          "bottom": 330,
+          "centerOffsetY": 0,
+          "left": 167,
+          "right": 222,
+          "height": 14
+        }
+      },
+      {
+        "width": "44px",
+        "height": "44px",
+        "min-width": "0px",
+        "min-height": "0px",
+        "border-radius": "6px",
+        "border-color": "rgba(0, 0, 0, 0.45)",
+        "border-width": "0px",
+        "background-color": "rgba(0, 0, 0, 0)",
+        "box-shadow": "none",
+        "bounds": {
+          "x": 326,
+          "y": 120,
+          "width": 44,
+          "height": 44
+        }
+      }
+    ],
+    "reads": [
+      "/api/merchant/product-cart-availability/preview",
+      "/api/merchant/product-cart-availability/preview"
+    ],
+    "writes": [
+      [
+        "PATCH",
+        "/api/mobile/products/1001",
+        {
+          "cartEnabled": true
+        }
+      ],
+      [
+        "PATCH",
+        "/api/mobile/products/1001",
+        {
+          "cartEnabled": false
+        }
+      ],
+      [
+        "POST",
+        "/api/merchant/product-cart-availability/enable",
+        {
+          "revision": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    ],
+    "pageErrors": [],
+    "consoleErrors": [],
+    "failedRequests": []
+  },
+  "390x844 zh-TW": {
+    "dimensions": {
+      "view": 390,
+      "document": 390
+    },
+    "entryBounds": [
+      126,
+      272
+    ],
+    "initial": {
+      "width": "52px",
+      "height": "44px",
+      "min-width": "52px",
+      "min-height": "44px",
+      "border-radius": "100px",
+      "border-color": "rgba(0, 0, 0, 0.88)",
+      "border-width": "0px",
+      "background-color": "rgba(0, 0, 0, 0)",
+      "box-shadow": "none",
+      "bounds": {
+        "x": 124,
+        "y": 976.53125,
+        "width": 52,
+        "height": 44
+      },
+      "track": {
+        "top": "9px",
+        "bottom": "9px",
+        "borderRadius": "999px",
+        "backgroundColor": "rgb(113, 113, 107)"
+      },
+      "thumb": {
+        "x": 128,
+        "y": 989.53125,
+        "width": 18,
+        "height": 18
+      }
+    },
+    "bulkStyle": {
+      "width": "132px",
+      "height": "44px",
+      "min-width": "44px",
+      "min-height": "44px",
+      "border-radius": "999px",
+      "border-color": "rgb(217, 217, 217)",
+      "border-width": "1px",
+      "background-color": "rgb(255, 255, 255)",
+      "box-shadow": "none",
+      "bounds": {
+        "x": 16,
+        "y": 556.484375,
+        "width": 132,
+        "height": 44
+      },
+      "glyph": {
+        "top": 571.484375,
+        "bottom": 585.484375,
+        "centerOffsetY": 0,
+        "left": 33,
+        "right": 131,
+        "height": 14
+      }
+    },
+    "controls": [
+      {
+        "width": "326px",
+        "height": "44px",
+        "min-width": "auto",
+        "min-height": "44px",
+        "border-radius": "8px",
+        "border-color": "rgb(217, 217, 217)",
+        "border-width": "1px",
+        "background-color": "rgb(255, 255, 255)",
+        "box-shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+        "bounds": {
+          "x": 32,
+          "y": 249,
+          "width": 326,
+          "height": 44
+        },
+        "glyph": {
+          "top": 264,
+          "bottom": 278,
+          "centerOffsetY": 0,
+          "left": 179.078125,
+          "right": 210.9130859375,
+          "height": 14
+        }
+      },
+      {
+        "width": "326px",
+        "height": "44px",
+        "min-width": "auto",
+        "min-height": "44px",
+        "border-radius": "8px",
+        "border-color": "rgba(0, 0, 0, 0)",
+        "border-width": "1px",
+        "background-color": "rgb(217, 54, 48)",
+        "box-shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px",
+        "bounds": {
+          "x": 32,
+          "y": 301,
+          "width": 326,
+          "height": 44
+        },
+        "glyph": {
+          "top": 316,
+          "bottom": 330,
+          "centerOffsetY": 0,
+          "left": 167,
+          "right": 222,
+          "height": 14
+        }
+      },
+      {
+        "width": "44px",
+        "height": "44px",
+        "min-width": "0px",
+        "min-height": "0px",
+        "border-radius": "6px",
+        "border-color": "rgba(0, 0, 0, 0.45)",
+        "border-width": "0px",
+        "background-color": "rgba(0, 0, 0, 0)",
+        "box-shadow": "none",
+        "bounds": {
+          "x": 326,
+          "y": 120,
+          "width": 44,
+          "height": 44
+        }
+      }
+    ],
+    "reads": [
+      "/api/merchant/product-cart-availability/preview",
+      "/api/merchant/product-cart-availability/preview"
+    ],
+    "writes": [
+      [
+        "PATCH",
+        "/api/mobile/products/1001",
+        {
+          "cartEnabled": true
+        }
+      ],
+      [
+        "PATCH",
+        "/api/mobile/products/1001",
+        {
+          "cartEnabled": false
+        }
+      ],
+      [
+        "POST",
+        "/api/merchant/product-cart-availability/enable",
+        {
+          "revision": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    ],
+    "pageErrors": [],
+    "consoleErrors": [],
+    "failedRequests": []
+  }
+}
