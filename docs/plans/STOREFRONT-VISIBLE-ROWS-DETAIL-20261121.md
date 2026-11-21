@@ -39,3 +39,4 @@
 - 媒体边界首次在相册打开动画未就绪时立即键盘操作，等待不到3/4。只补Modal实际data-ready状态等待后，390定向诊断PASS；沿用其结果，剩余场景按记录跳过已PASS，补360窄屏局部。无应用代码变化。
 - 窄屏截图复核发现新增360夹具沿用desktop高度900/isMobile=false，撤回该条几何证据，改360×800触摸模拟，仅重做此一场景；390/1440其余6条PASS保留。首图阻塞时正文可见，缩略触区76×76，无横溢出。
 - 最后静态审查只加非progressive模式的decode/settled早返回，避免默认编辑相册额外工作；不改变本批商品详情progressive=true路径。自然计时与边界证据按相关输入复用，默认相册测试交由原生CI覆盖；最终资源随CI绑定。
+- PR #179/e612fca3 原生PR checks 44860045325：前端lint/typecheck/单测通过；后端861例仅PublicBrowseProjectionCompatibilityTest的严格仓库替身拒绝新增findByProductIdInOrderById。补该测试本来检查的b/d子集仓库返回，保留所有隐私断言；仅运行此3例后推送，复用所有应用/浏览器证据。

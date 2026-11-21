@@ -17,7 +17,7 @@ class PublicBrowseProjectionCompatibilityTest {
   var source=new RecommendationItem();source.id=1L;source.postId=1L;source.productId="a";source.name="PUBLIC NAME";source.description="PUBLIC DESCRIPTION";source.specification="PUBLIC SPEC";
   var cross=new RecommendationItem();cross.id=2L;cross.postId=1L;cross.productId="c";cross.name="Foreign source";
   legacyPost(post);legacyItem(source,post);legacyItem(cross,post);
-  var products=repository(ProductRepository.class,Map.of("findAll",List.of(owned,privateOnly,foreign,deleted)));var posts=repository(RecommendationPostRepository.class,Map.of("findByPublishedTrue",List.of(post)));var items=repository(RecommendationItemRepository.class,Map.of("findByPostIdInOrderById",List.of(source,cross)));
+  var products=repository(ProductRepository.class,Map.of("findAll",List.of(owned,privateOnly,foreign,deleted),"findAllById",List.of(privateOnly,deleted)));var posts=repository(RecommendationPostRepository.class,Map.of("findByPublishedTrue",List.of(post),"findAllById",List.of()));var items=repository(RecommendationItemRepository.class,Map.of("findByPostIdInOrderById",List.of(source,cross),"findByProductIdInOrderById",List.of()));
   var taxonomy=new RecommendationTaxonomyService(null,null,null,null,null){@Override public List<RecommendationItem> display(List<RecommendationItem> rows,boolean publicView){assertThat(publicView).isTrue();return rows;}};
   var quotes=new ReferenceQuoteService(null,null,null,null,com.bobbuy.test.PriceDocumentFixtures.repository()){@Override public void decorate(List<RecommendationItem> rows,boolean publicView){}};
   var catalog=new PublicProductCatalogService(products,posts,items,taxonomy,quotes,repository(CategoryRepository.class,Map.of("findAllById",List.of())));
