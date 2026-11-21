@@ -13,8 +13,8 @@ export default function ProductArchive(){
  const [activeRevision,setActiveRevision]=useState(0),[deletedRevision,setDeletedRevision]=useState(0);
  const key=deleted?'deleted':isMerchant?'active':'deleted';
  const items=[...(isMerchant?[{key:'active',label:t('products.active'),children:<StockMaster key={user?.id} embedded refreshKey={activeRevision} onDeleted={()=>setDeletedRevision(value=>value+1)}/>}]:[]),...(admin?[{key:'deleted',label:t('trash.deleted'),children:<DeletedProducts embedded refreshKey={deletedRevision} onRestored={()=>setActiveRevision(value=>value+1)}/>}]:[])];
- return <section className="product-archive" aria-label={t('products.title')}><header className="product-archive-heading"><span>{t('products.collection')}</span><h1>{t('products.title')}</h1><p>{t('products.workspace_hint')}</p></header>
-  <Tabs activeKey={key} items={items} onChange={value=>{const next=new URLSearchParams(params);if(value==='deleted')next.set('view','deleted');else next.delete('view');setParams(next);}}/>
+ return <section className="product-archive" aria-label={t('products.title')}><header className="product-archive-heading"><h1>{t('products.title')}</h1></header>
+  {items.length===1?items.find(item=>item.key===key)?.children:<Tabs activeKey={key} items={items} onChange={value=>{const next=new URLSearchParams(params);if(value==='deleted')next.set('view','deleted');else next.delete('view');setParams(next);}}/>}
   {deleted&&!admin&&<Alert type="error" message={t('trash.admin_only')}/>}
  </section>;
 }

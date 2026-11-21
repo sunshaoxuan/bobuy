@@ -75,7 +75,7 @@ function Admin({passwordResetToken}:{passwordResetToken:string}) {
       <div className="merchant-identity"><span className="merchant-avatar"><ShopOutlined /></span><div><strong>{user?.name}</strong><small>{t('admin.merchant')}</small></div></div>
     </aside>
     <div className="merchant-workspace"><header className="merchant-header"><Button className="merchant-menu-toggle" icon={<MenuOutlined />} aria-label={t('app.open_menu')} onClick={() => setOpen(true)} />
-      <div className="merchant-breadcrumb"><span>{t('admin.workspace')}</span><span>/</span><Link className="merchant-mobile-brand" to="/admin"><BrandLogo compact/></Link>{current?.[0].startsWith('basic-data/')&&<><span>{t('nav.basic_data')}</span><span>/</span></>}<strong>{current ? t(current[1]) : t('zen_audit.scroll_title')}</strong></div>
+      <div className="merchant-breadcrumb"><span>{t('admin.workspace')}</span>{current?.[0]!=='products'&&<span>/</span>}<Link className="merchant-mobile-brand" to="/admin"><BrandLogo compact/></Link>{current?.[0].startsWith('basic-data/')&&<><span>{t('nav.basic_data')}</span><span>/</span></>}{current?.[0]!=='products'&&<strong>{current ? t(current[1]) : t('zen_audit.scroll_title')}</strong>}</div>
       <div className="merchant-header-tools"><LanguageSwitcher /><Tooltip title={t('admin.storefront')}><Link className="merchant-store-link" to="/" aria-label={t('admin.storefront')}><ShopOutlined /><span>{t('admin.storefront')}</span><ArrowUpOutlined rotate={45} /></Link></Tooltip>
       <Tooltip title={t('auth.logout')}><Button className="merchant-header-logout" icon={<LogoutOutlined />} aria-label={t('auth.logout')} onClick={() => void logout()} /></Tooltip></div></header>
     <main className="merchant-content">

@@ -6,7 +6,7 @@ vi.mock('../api',()=>({api:{suppliers:mocks.suppliers,costcoOnboarding:{status:m
 vi.mock('../productPhotoUpload',()=>({prepareProductPhotoUpload:(f:File)=>f.name==='bad.txt'?Promise.reject(Error('gallery.invalid')):Promise.resolve(f)}));
 vi.mock('../i18n',()=>({useI18n:()=>({locale:'en-US',t:(k:string)=>k})}));
 vi.mock('./CategoryTreePicker',()=>({default:({value,onChange}:{value:string|null;onChange:(id:string|null)=>void})=><select aria-label="test-category" value={value??''} onChange={e=>onChange(e.target.value||null)}><option value="">Uncategorized</option><option value="category-1">First category</option></select>}));
-vi.mock('antd',()=>({Alert:({message,description,action}:any)=><div role="alert">{message}{description}{action}</div>,Button:({children,loading,type,...p}:any)=><button {...p}>{children}</button>,Checkbox:({children,onChange,...p}:any)=><label><input type="checkbox" {...p} onChange={onChange}/>{children}</label>,Input:Object.assign((p:any)=><input {...p}/>,{TextArea:(p:any)=><textarea {...p}/>}),Modal:({children,title}:any)=><div role="dialog">{title}{children}</div>,Select:({options,onChange,loading,allowClear,...p}:any)=><select {...p} onChange={e=>onChange(e.target.value)}><option value=""/>{options.map((o:any)=><option key={o.value} {...o}>{o.label}</option>)}</select>,Space:({children}:any)=><div>{children}</div>,Tag:({children}:any)=><span>{children}</span>,Typography:{Title:({children}:any)=><h2>{children}</h2>}}));
+vi.mock('antd',()=>({Alert:({message,description,action}:any)=><div role="alert">{message}{description}{action}</div>,Button:({children,loading,type,...p}:any)=><button {...p}>{children}</button>,Checkbox:({children,onChange,...p}:any)=><label><input type="checkbox" {...p} onChange={onChange}/>{children}</label>,Input:Object.assign((p:any)=><input {...p}/>,{TextArea:(p:any)=><textarea {...p}/>}),Modal:({children,title,footer}:any)=><div role="dialog">{title}{children}{footer}</div>,Select:({options,onChange,loading,allowClear,...p}:any)=><select {...p} onChange={e=>onChange(e.target.value)}><option value=""/>{options.map((o:any)=><option key={o.value} {...o}>{o.label}</option>)}</select>,Space:({children}:any)=><div>{children}</div>,Tag:({children}:any)=><span>{children}</span>,Typography:{Title:({children}:any)=><h2>{children}</h2>}}));
 import ProductPhotoIntakeModal from './ProductPhotoIntakeModal';
 const job={id:'job1',state:'NEEDS_INPUT' as const,revision:7,photo:true,supplierId:'s1'};
 const review=()=>({jobId:'job1',revision:7,supplierId:'s1',market:'JP',itemNumber:'123',status:'MATCH',matches:[{id:'p1',version:2,name:{'en-US':'Synthetic item'},specification:{'ja-JP':'80 × 2'},packaging:'80 × 2',eligible:true}],history:[],saved:null,photoFacts:{amount:999,currency:'JPY',unit:'80 × 2',conditions:'',priceKind:'WAREHOUSE',productVisible:true}});
@@ -32,7 +32,7 @@ it('queues each selected file immediately and accepts a new capture while upload
  expect(props.onQueued).toHaveBeenCalledWith(expect.objectContaining({state:'QUEUED'}));
 });
 it('does not auto-confirm availability and retains input after save failure for exact retry',async()=>{
- render(<ProductPhotoIntakeModal {...props} job={job}/>);await screen.findByDisplayValue('999');expect(screen.getByLabelText('photo.in_stock')).not.toBeChecked();
+ render(<ProductPhotoIntakeModal {...props} job={job}/>);await screen.findByDisplayValue('999');expect(screen.getByText('photo.suggestions')).toBeVisible();expect(screen.getByLabelText('photo.in_stock')).not.toBeChecked();
  fireEvent.click(screen.getByLabelText('photo.identity_confirm'));fireEvent.click(screen.getByLabelText('photo.price_confirm'));fireEvent.click(screen.getByLabelText('photo.in_stock'));
  mocks.confirm.mockRejectedValueOnce(Error('photo.conflict')).mockResolvedValueOnce({id:'o1',productId:'p1',amount:999,currency:'JPY',unit:'80 × 2',inStock:true,priceChanged:false,observedAt:new Date().toISOString()});
  fireEvent.click(screen.getByText('photo.save'));await screen.findByText('photo.conflict');expect(screen.getByDisplayValue('999')).toBeTruthy();expect(screen.getByLabelText('photo.in_stock')).toBeChecked();
@@ -128,6 +128,7 @@ it('shares the unconverted capture and keeps the explicit download path when sha
 
 it('downloads the stored evidence with a storage-version notice',async()=>{
  render(<ProductPhotoIntakeModal {...props} job={job}/>);
+ fireEvent.click(await screen.findByText('photo.open_evidence'));
  expect(await screen.findByText('photo.stored_version')).toBeInTheDocument();
  expect(await screen.findByText('photo.download_photo')).toHaveAttribute('download','product-photo.img');
 });

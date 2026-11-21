@@ -850,10 +850,13 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
     <div className={embedded?'product-records-workspace':undefined} style={{ padding: isMobile ? `0 0 ${MOBILE_BOTTOM_PADDING} 0` : `0 0 ${DESKTOP_BOTTOM_PADDING} 0` }}>
       {!embedded&&<Breadcrumb style={{ marginBottom: '1rem' }} items={[{ title: t('nav.dashboard') }, { title: t('products.title') }]} />}
       <Drawer className="marker-drawer" title={t('marker.assigned')} width="min(100vw,620px)" open={!!markerId} onClose={closeMarkers} maskClosable={false} destroyOnClose>{markerId&&<ProductMarkerEditor productId={markerId} onDirtyChange={setMarkerDirty} onBusyChange={setMarkerBusy}/>}</Drawer>
-      <ProductCatalogPanel id={catalogId} onChoose={setCatalogId} entries={dataSource.filter(row=>!row.isNew)}
-        searchEntries={pickArchiveProduct} getExportIds={api.merchantArchiveExport} onSaved={refreshArchive}/>
 
-      <div className={`stock-toolbar ${isMobile ? 'stock-toolbar-mobile' : ''} ${toolbarCompact ? 'stock-toolbar-compact' : ''}`}>
+
+      {embedded?<div className="record-intake-actions">
+        <Button data-testid="ai-quick-snap-button" type="primary" icon={<CameraOutlined />} onClick={() => setIsQuickAddVisible(true)}>{t('photo.intake_action')}</Button>
+        <Input aria-label={t('stock.master.search_placeholder')} placeholder={t('stock.master.search_placeholder')} prefix={<SearchOutlined />} value={searchText} onChange={e=>searchChanged(e.target.value)}/>
+        <Button icon={<PlusOutlined />} onClick={handleAddRow} data-testid="stock-master-add-row">{t('stock.master.add_row')}</Button>
+      </div>:<div className={`stock-toolbar ${isMobile ? 'stock-toolbar-mobile' : ''} ${toolbarCompact ? 'stock-toolbar-compact' : ''}`}>
         <div style={{ minWidth: 0 }}>
           <Title level={3} style={{ margin: 0 }} className="stock-page-title" data-testid="stock-master-title">
             {t(embedded?'products.collection':'stock.master.title')}{embedded&&<span className="record-count">{total}</span>}
@@ -901,9 +904,11 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
               </Space>
           </Space>
         )}
-      </div>
+      </div>}
 
       <div ref={setPhotoQueueTarget}/>
+      <ProductCatalogPanel id={catalogId} onChoose={setCatalogId} entries={dataSource.filter(row=>!row.isNew)}
+        searchEntries={pickArchiveProduct} getExportIds={api.merchantArchiveExport} onSaved={refreshArchive}/>
       <div className="record-view-bar product-cart-toolbar">
         {embedded&&<Segmented aria-label={t('products.view')} value={recordView} onChange={value=>setRecordView(value as 'gallery'|'manage')} options={[{label:t('products.gallery'),value:'gallery'},{label:t('products.manage'),value:'manage'}]}/>}
         {embedded&&<span>{t('products.original_images')}</span>}

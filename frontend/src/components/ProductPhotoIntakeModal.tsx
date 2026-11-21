@@ -18,6 +18,7 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
  const[suppliers,setSuppliers]=useState<MobileSupplier[]>([]),[supplier,setSupplier]=useState(''),[supplierError,setSupplierError]=useState(false),[suppliersLoaded,setSuppliersLoaded]=useState(false);
  const[tree,setTree]=useState<CategoryTreeNode[]>([]),[currencies,setCurrencies]=useState<{code:string}[]>([]);
  const[configurationIssue,setConfigurationIssue]=useState<string|null>(null);
+ const[proofOpen,setProofOpen]=useState(false);
  const[original,setOriginal]=useState<File>(),[stored,setStored]=useState<File>();
  const[uploads,setUploads]=useState<Upload[]>([]),[preview,setPreview]=useState(''),[job,setJob]=useState(initial),[review,setReview]=useState<PhotoReview>();
  const[pollAttempt,setPollAttempt]=useState(0);
@@ -50,7 +51,7 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
  selectedIdRef.current=selectedId;
  useEffect(()=>{
   let active=true;const epoch=++reviewEpoch.current;
-  setPollAttempt(0);setJob(initial);setPreview('');setStored(undefined);setReview(undefined);setSaved(null);setBusy(false);
+  setProofOpen(false);setPollAttempt(0);setJob(initial);setPreview('');setStored(undefined);setReview(undefined);setSaved(null);setBusy(false);
   archiveDraft.current={item:null,edited:new Set()};
   setDescription('');setCategory(null);setStorageCondition(null);setError('');
   setObservedAt(new Date().toISOString().slice(0,16));
@@ -119,37 +120,70 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
  }catch(e){if(g===reviewEpoch.current)setError(t((e as Error).message));}finally{if(g===reviewEpoch.current)setBusy(false);}};
  const selectedQueueRow=queue?.find(row=>row.id===job?.id&&row.revision===job.revision);
  const latest=review?.history.find(o=>o.productId===selected&&o.amount!=null&&o.currency===currency&&o.unit===unit);
- return <Modal open={open} title={t('photo.title')} onCancel={onClose} footer={null} width={760} rootClassName="product-photo-intake" destroyOnClose>
-  <p>{t('photo.help')}</p>
-  {error&&<Alert type="error" message={error} action={<Button onClick={()=>job?void reload():void loadSuppliers()}>{t('onboarding.refresh')}</Button>}/>}
+ const matchingObservation=review?.history.find(o=>o.productId===selected&&o.amount!=null);
+ const identifiedName=chosen?.name[locale]||chosen?.name['ja-JP']||review?.candidate?.translatedNames?.[locale]||review?.candidate?.name;
+ const reviewSupplier=suppliers.find(row=>row.id===review?.supplierId);
+ const canConfirm=review&&!saved&&!['DELETED','IDENTITY_REQUIRED'].includes(review.status);
+ const originalSave=original&&<ProductPhotoSave file={original} stored={false} showPreview/>;
+ const photoSave=stored&&<ProductPhotoSave key={job?.id} file={stored} stored/>;
+ const capture=!review&&!saved;
+ return <Modal open={open} title={t(review?'photo.review':'photo.intake_action')} onCancel={onClose}
+  footer={canConfirm?<div className="photo-confirm-footer"><p role="status">{missing||t('photo.ready')}</p><Button type="primary" loading={busy} disabled={!!missing} onClick={()=>void save()}>{t(isNew?'photo.create':'photo.save')}</Button></div>:null}
+  width={880} rootClassName="product-photo-intake photo-workspace-dialog" destroyOnClose>
+  {error&&<Alert type="error" message={error} action={<Button onClick={()=>job?void reload():void Promise.all([loadSuppliers(),loadStatus()])}>{t('onboarding.refresh')}</Button>}/>}
+  {capture&&<div className="photo-capture-area"><div className="photo-capture-controls">
+   <p>{t('photo.capture_hint')}</p>
   {supplierError?<Alert type="error" message={t('photo.suppliers_failed')} action={<Button onClick={()=>void loadSuppliers()}>{t('onboarding.refresh')}</Button>}/>:suppliersLoaded&&!suppliers.length?<Alert type="warning" message={t('photo.no_suppliers')}/>:null}
   <label>{t('onboarding.supplier')}<Select aria-label={t('onboarding.supplier')}  value={supplier||undefined} loading={!suppliersLoaded} options={suppliers.map(s=>({value:s.id,label:s.name[locale]||s.name['ja-JP']}))} onChange={setSupplier}/></label>
   <Space wrap><Button disabled={!supplier} onClick={()=>camera.current?.click()}>{t('photo.camera')}</Button><Button disabled={!supplier} onClick={()=>upload.current?.click()}>{t('photo.upload')}</Button></Space>
   {!supplier&&<p role="status">{t('photo.select_supplier')}</p>}
+  </div><div className="photo-capture-preview">
+   {originalSave}
+   {preview&&<img className="photo-evidence" src={preview} alt={t('photo.evidence')}/>}
+   {photoSave}
+  </div></div>}
   <input ref={camera} type="file" accept="image/*" capture="environment" hidden onChange={e=>{pick(e.target.files);e.target.value='';}}/>
   <input ref={upload} type="file" accept="image/*" multiple hidden onChange={e=>{pick(e.target.files);e.target.value='';}}/>
-  {original&&<ProductPhotoSave key={original.name} file={original} stored={false}/>}
   {uploads.map(entry=><div key={entry.requestId} role="status">
    {entry.file.name} · {t(entry.error||'photo.uploading')}
    {entry.error&&<Space wrap>{entry.error!=='photo.file_type'&&<Button onClick={()=>void submit(entry)}>{t('photo.retry_upload')}</Button>}
     <Button onClick={()=>setUploads(rows=>rows.filter(row=>row.requestId!==entry.requestId))}>{t('onboarding.close')}</Button></Space>}
   </div>)}
-  {queue&&onReview&&onQueueChanged&&<ProductPhotoQueue jobs={queue} onReview={onReview} onChanged={next=>{applyRetry(next);return onQueueChanged();}}/>}
-  {preview&&<img className="photo-evidence" src={preview} alt={t('photo.evidence')}/>}
-  {stored&&<ProductPhotoSave key={job?.id} file={stored} stored/>}
+  {review&&!saved&&<section className="photo-review-overview">
+   <div className="photo-review-main">
+    <p className="photo-review-kicker">{reviewSupplier?.name[locale]||reviewSupplier?.name['ja-JP']||t('photo.market')} · {review.market}</p>
+    {isNew&&<p>{t('photo.new')}</p>}
+    <h2>{identifiedName||t('photo.identity_required')}</h2>
+    {review.itemNumber&&<p>{t('onboarding.item')} {review.itemNumber}</p>}
+    <div className="photo-review-prices">
+     <div><small>{t('photo.current_price')}</small><strong>{amount?amount+' '+currency:t('photo.unknown')}</strong>{unit&&<span>{unit}</span>}</div>
+     {!isNew&&<div><small>{t('photo.previous')}</small><strong>{matchingObservation?matchingObservation.amount+' '+matchingObservation.currency:t('photo.unknown')}</strong>{matchingObservation&&<span>{matchingObservation.unit}</span>}</div>}
+    </div>
+    {canConfirm&&<Checkbox checked={inStock} onChange={e=>{setInStock(e.target.checked);edit();}}>{t('photo.in_stock')}</Checkbox>}
+    <p>{t('photo.suggestions')}</p>
+    {isNew&&!!review.candidate?.unknownFields?.length&&<p>{t('photo.unknown_fields')}</p>}
+   </div>
+   {preview&&<div className="photo-review-proof">
+    <button type="button" className="photo-proof-toggle" aria-expanded={proofOpen} onClick={()=>setProofOpen(value=>!value)}>
+     <img src={preview} alt=""/><span>{t(proofOpen?'photo.close_evidence':'photo.open_evidence')}</span>
+    </button>
+   </div>}
+  </section>}
+  {saved&&preview&&<Button className="photo-proof-toggle" aria-expanded={proofOpen} onClick={()=>setProofOpen(value=>!value)}>{t(proofOpen?'photo.close_evidence':'photo.open_evidence')}</Button>}
+  {proofOpen&&preview&&!capture&&<div className="photo-capture-preview"><img className="photo-evidence photo-evidence-expanded" src={preview} alt={t('photo.evidence')}/>{photoSave}</div>}
   {!job&&configurationIssue&&<Alert type="warning" message={t(photoFailure(configurationIssue))}/>}
   {job&&<p role="status">{t(saved?'photo.state.completed':photoState(selectedQueueRow??job))} {photoCanRetry(job)&&!saved&&t(photoFailure(job.failureCode))}</p>}
   {job&&photoCanRetry(job)&&!saved&&<Button loading={busy} onClick={()=>void retryRecognition()}>{t('photo.retry_recognition')}</Button>}
   {review&&!saved&&<section>
-   <Typography.Title level={4}>{t('photo.review')}</Typography.Title><p>{t('photo.suggestions')}</p>
+   <Typography.Title level={4}>{t('photo.review_details')}</Typography.Title>
    {!!review.sources?.length&&<details><summary>{t('photo.sources')}</summary>{review.sources.map(source=><p key={source.sha256}><a href={source.canonicalUrl} target="_blank" rel="noopener noreferrer">{source.canonicalUrl}</a></p>)}</details>}
-   {!!review.candidate?.unknownFields?.length&&<p>{t('photo.unknown_fields')}</p>}
+   {!isNew&&!!review.candidate?.unknownFields?.length&&<p>{t('photo.unknown_fields')}</p>}
    {isNew&&officialPreview&&<><img className="photo-evidence" src={officialPreview} alt={t('photo.official_image')}/><Checkbox checked={useOfficialImage} onChange={e=>{setUseOfficialImage(e.target.checked);edit();}}>{t('photo.use_official_image')}</Checkbox></>}
 
    <label>{t('onboarding.item')}<Input value={item} onChange={e=>{setItem(e.target.value);setIdentity(false);edit();}}/></label><Button onClick={()=>void reload()} disabled={busy}>{t('photo.find')}</Button>
    {review.status==='DELETED'||review.status==='IDENTITY_REQUIRED'?<Alert type="warning" message={t(review.status==='DELETED'?'photo.deleted':'photo.identity_required')}/>:<>
-    {!isNew&&<><label>{t('photo.choose_match')}<Select aria-label={t('photo.choose_match')} value={selected||undefined} options={review.matches.map(m=>({value:m.id,label:(m.name[locale]||m.name['ja-JP'])+' · '+Object.values(m.specification||{}).join(' / ')+' · '+(m.packaging||''),disabled:!m.eligible}))} onChange={id=>{setSelected(id);setIdentity(false);edit();}}/></label>{review.matches.some(m=>!m.eligible)&&<Alert type="warning" message={t('photo.legacy')}/>}</>}
-    {isNew&&<><Typography.Title level={5}>{t('photo.new')}</Typography.Title>{['ja-JP','zh-CN','zh-TW','en-US'].map(l=><label key={l}>{t('onboarding.name')} ({l})<Input value={names[l]||''} onChange={e=>{setNames({...names,[l]:e.target.value});edit();}}/></label>)}
+    {!isNew&&<><label>{t('photo.choose_match')}<Select aria-label={t('photo.choose_match')} value={selected||undefined} options={review.matches.map(m=>({value:m.id,label:[m.name[locale]||m.name['ja-JP'],Object.values(m.specification||{}).join(' / '),m.packaging].filter(Boolean).join(' · '),disabled:!m.eligible}))} onChange={id=>{setSelected(id);setIdentity(false);edit();}}/></label>{review.matches.some(m=>!m.eligible)&&<Alert type="warning" message={t('photo.legacy')}/>}</>}
+    {isNew&&<>{['ja-JP','zh-CN','zh-TW','en-US'].map(l=><label key={l}>{t('onboarding.name')} ({l})<Input value={names[l]||''} onChange={e=>{setNames({...names,[l]:e.target.value});edit();}}/></label>)}
      <label>{t('onboarding.brand')}<Input value={brand} onChange={e=>{setBrand(e.target.value);edit();}}/></label><label>{t('onboarding.model')}<Input value={model} onChange={e=>{setModel(e.target.value);edit();}}/></label><label>{t('onboarding.specification')}<Input value={spec} onChange={e=>{setSpec(e.target.value);edit();}}/></label><label>{t('onboarding.packaging')}<Input value={packaging} onChange={e=>{setPackaging(e.target.value);edit();}}/></label>
      <label>{t('photo.description')}<Input.TextArea value={description} onChange={e=>{archiveDraft.current.edited.add('description');setDescription(e.target.value);edit();}}/></label>
      <CategoryTreePicker nodes={tree} value={category} onChange={c=>{archiveDraft.current.edited.add('category');setCategory(c);edit();}}/>
@@ -160,11 +194,13 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
     {review.photoFacts&&<p>{t('photo.detected')}: {review.photoFacts.amount??t('photo.unknown')} {review.photoFacts.currency} / {review.photoFacts.unit} · {t('photo.kind.'+review.photoFacts.priceKind)} {review.photoFacts.conditions}</p>}
     <div className="photo-price-fields"><label>{t('photo.amount')}<Input inputMode="decimal" value={amount} onChange={e=>{setAmount(e.target.value);setPriceConfirmed(false);edit();}}/></label><label>{t('photo.currency')}<Select aria-label={t('photo.currency')} value={currency||undefined} options={currencies.map(c=>({value:c.code,label:c.code}))} onChange={c=>{setCurrency(c);setPriceConfirmed(false);edit();}}/></label><label>{t('photo.unit')}<Input value={unit} onChange={e=>{setUnit(e.target.value);setPriceConfirmed(false);edit();}}/></label></div>
     <label>{t('photo.conditions')}<Input value={conditions} onChange={e=>{setConditions(e.target.value);setPriceConfirmed(false);edit();}}/></label><Checkbox checked={priceConfirmed} onChange={e=>{setPriceConfirmed(e.target.checked);edit();}}>{t('photo.price_confirm')}</Checkbox>
-    <label>{t('photo.observed_at')} (UTC)<Input type="datetime-local" value={observedAt} onChange={e=>{setObservedAt(e.target.value);edit();}}/></label><Checkbox checked={inStock} onChange={e=>{setInStock(e.target.checked);edit();}}>{t('photo.in_stock')}</Checkbox>
-    <p role="status">{missing||t('photo.ready')}</p><Button type="primary" loading={busy} disabled={!!missing} onClick={()=>void save()}>{t(isNew?'photo.create':'photo.save')}</Button>
+    <label>{t('photo.observed_at')} (UTC)<Input type="datetime-local" value={observedAt} onChange={e=>{setObservedAt(e.target.value);edit();}}/></label>
    </>}
   </section>}
   {saved&&<Alert type="success" message={t('photo.saved')} description={<><p>{saved.amount==null?t('photo.price_not_updated'):t(saved.priceChanged?'photo.price_updated':'photo.price_unchanged')} {saved.amount} {saved.currency} {saved.unit}</p>{saved.inStock&&<p>{t('photo.available')} · {new Date(saved.observedAt).toLocaleString(locale)}</p>}<Button onClick={()=>{onClose();onSaved(saved.productId);}}>{t('onboarding.open_product')}</Button></>}/>}
-  <Button onClick={onClose}>{t('onboarding.close')}</Button>
+  {!capture&&originalSave}
+  {!capture&&<Space wrap><Button disabled={!supplier} onClick={()=>camera.current?.click()}>{t('photo.camera')}</Button><Button disabled={!supplier} onClick={()=>upload.current?.click()}>{t('photo.upload')}</Button></Space>}
+
+  {queue&&onReview&&onQueueChanged&&<ProductPhotoQueue jobs={queue} onReview={onReview} onChanged={next=>{applyRetry(next);return onQueueChanged();}}/>}
  </Modal>;
 }

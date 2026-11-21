@@ -1,0 +1,1168 @@
+{
+  "engine": "webkit",
+  "design": false,
+  "fixtures": "synthetic PNG and intercepted API, including share cancellation mock",
+  "checks": [
+    {
+      "width": 390,
+      "uploads": 2,
+      "retries": 1,
+      "review": true
+    },
+    {
+      "width": 1280,
+      "uploads": 2,
+      "retries": 1,
+      "review": true
+    }
+  ],
+  "geometry": [
+    {
+      "width": 390,
+      "id": "capture",
+      "viewport": 390,
+      "documentWidth": 390,
+      "areaWidth": 366,
+      "controls": [
+        {
+          "label": "Close",
+          "width": 44,
+          "height": 44,
+          "y": 48,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "选择供应商",
+          "width": 298,
+          "height": 30,
+          "y": 204.953125,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "设备拍照",
+          "width": 90,
+          "height": 44,
+          "y": 323.9375,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "相册或文件",
+          "width": 104,
+          "height": 44,
+          "y": 323.9375,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "保存照片",
+          "width": 90,
+          "height": 44,
+          "y": 641.4375,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "下载照片",
+          "width": 90,
+          "height": 44,
+          "y": 641.4375,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(230, 97, 87)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "识别并查找",
+          "width": 322,
+          "height": 44,
+          "y": 759.40625,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(37, 37, 41)",
+          "borderWidth": "1px",
+          "background": "rgb(37, 37, 41)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "关 闭",
+          "width": 322,
+          "height": 44,
+          "y": 849.40625,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "id": "stored",
+      "viewport": 390,
+      "documentWidth": 390,
+      "areaWidth": 366,
+      "controls": [
+        {
+          "label": "Close",
+          "width": 44,
+          "height": 44,
+          "y": 48,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "选择供应商",
+          "width": 298,
+          "height": 30,
+          "y": 204.953125,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.25)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "设备拍照",
+          "width": 90,
+          "height": 44,
+          "y": 323.9375,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "相册或文件",
+          "width": 104,
+          "height": 44,
+          "y": 323.9375,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "保存照片",
+          "width": 90,
+          "height": 44,
+          "y": 641.4375,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "下载照片",
+          "width": 90,
+          "height": 44,
+          "y": 641.4375,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": null,
+          "width": 322,
+          "height": 44,
+          "y": 997.328125,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "按更正货号重新查找",
+          "width": 322,
+          "height": 44,
+          "y": 1057.328125,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "请选择并核对商品规格",
+          "width": 298,
+          "height": 30,
+          "y": 1148.3125,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": null,
+          "width": 12,
+          "height": 12,
+          "y": 1233.296875,
+          "minWidth": "12px",
+          "minHeight": "12px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": null,
+          "width": 322,
+          "height": 44,
+          "y": 1449.234375,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "币种",
+          "width": 298,
+          "height": 30,
+          "y": 1548.21875,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": null,
+          "width": 322,
+          "height": 44,
+          "y": 1645.203125,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": null,
+          "width": 322,
+          "height": 44,
+          "y": 1743.1875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": null,
+          "width": 12,
+          "height": 12,
+          "y": 1829.171875,
+          "minWidth": "12px",
+          "minHeight": "12px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": null,
+          "width": 322,
+          "height": 44,
+          "y": 1917.140625,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": null,
+          "width": 12,
+          "height": 12,
+          "y": 1999.140625,
+          "minWidth": "12px",
+          "minHeight": "12px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "确认保存现场观察",
+          "width": 322,
+          "height": 44,
+          "y": 2089.125,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "label": "关 闭",
+          "width": 322,
+          "height": 44,
+          "y": 2149.125,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "id": "capture",
+      "viewport": 1280,
+      "documentWidth": 1280,
+      "areaWidth": 760,
+      "controls": [
+        {
+          "label": "Close",
+          "width": 44,
+          "height": 44,
+          "y": 36,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "选择供应商",
+          "width": 676,
+          "height": 30,
+          "y": 6.96875,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "设备拍照",
+          "width": 90,
+          "height": 44,
+          "y": 125.953125,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "相册或文件",
+          "width": 104,
+          "height": 44,
+          "y": 125.953125,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "下载照片",
+          "width": 90,
+          "height": 44,
+          "y": 481.953125,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(230, 97, 87)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "识别并查找",
+          "width": 700,
+          "height": 44,
+          "y": 577.9375,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(37, 37, 41)",
+          "borderWidth": "1px",
+          "background": "rgb(37, 37, 41)",
+          "shadow": "rgba(255, 55, 5, 0.06) 0px 2px 0px 0px"
+        },
+        {
+          "label": "关 闭",
+          "width": 700,
+          "height": 44,
+          "y": 667.9375,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "id": "stored",
+      "viewport": 1280,
+      "documentWidth": 1280,
+      "areaWidth": 760,
+      "controls": [
+        {
+          "label": "Close",
+          "width": 44,
+          "height": 44,
+          "y": 36,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "选择供应商",
+          "width": 676,
+          "height": 30,
+          "y": 170.96875,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.25)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "设备拍照",
+          "width": 90,
+          "height": 44,
+          "y": 289.953125,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "相册或文件",
+          "width": 104,
+          "height": 44,
+          "y": 289.953125,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "下载照片",
+          "width": 90,
+          "height": 44,
+          "y": 645.953125,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": null,
+          "width": 700,
+          "height": 44,
+          "y": 957.875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "按更正货号重新查找",
+          "width": 700,
+          "height": 44,
+          "y": 1017.875,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        },
+        {
+          "label": "请选择并核对商品规格",
+          "width": 676,
+          "height": 30,
+          "y": 1108.859375,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": null,
+          "width": 12,
+          "height": 12,
+          "y": 1189.859375,
+          "minWidth": "12px",
+          "minHeight": "12px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": null,
+          "width": 228,
+          "height": 44,
+          "y": 1401.8125,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": "币种",
+          "width": 204,
+          "height": 30,
+          "y": 1402.8125,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": null,
+          "width": 228,
+          "height": 44,
+          "y": 1401.8125,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": null,
+          "width": 700,
+          "height": 44,
+          "y": 1499.796875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": null,
+          "width": 12,
+          "height": 12,
+          "y": 1581.796875,
+          "minWidth": "12px",
+          "minHeight": "12px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": null,
+          "width": 700,
+          "height": 44,
+          "y": 1665.78125,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none"
+        },
+        {
+          "label": null,
+          "width": 12,
+          "height": 12,
+          "y": 1747.78125,
+          "minWidth": "12px",
+          "minHeight": "12px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none"
+        },
+        {
+          "label": "确认保存现场观察",
+          "width": 700,
+          "height": 44,
+          "y": 1837.765625,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none"
+        },
+        {
+          "label": "关 闭",
+          "width": 700,
+          "height": 44,
+          "y": 1897.765625,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px"
+        }
+      ]
+    }
+  ],
+  "network": [
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "POST",
+      "path": "/api/ai/costco-onboarding/photo",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/uploaded-1",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "POST",
+      "path": "/api/ai/costco-onboarding/photo",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/uploaded-2",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-3",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "POST",
+      "path": "/api/product-photo-intake/demo-3/retry",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-0",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "POST",
+      "path": "/api/ai/costco-onboarding/photo",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/uploaded-1",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "POST",
+      "path": "/api/ai/costco-onboarding/photo",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/uploaded-2",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-3",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "POST",
+      "path": "/api/product-photo-intake/demo-3/retry",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-0",
+      "status": 200
+    }
+  ],
+  "errors": []
+}

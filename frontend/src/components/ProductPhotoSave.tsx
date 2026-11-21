@@ -1,9 +1,10 @@
-import {useEffect,useState} from 'react';
+import {useEffect,useRef,useState} from 'react';
 import {Button,Space} from 'antd';
 import {useI18n} from '../i18n';
 
-export default function ProductPhotoSave({file,stored}: {file:File;stored:boolean}) {
+export default function ProductPhotoSave({file,stored,showPreview=false}: {file:File;stored:boolean;showPreview?:boolean}) {
  const {t}=useI18n();
+ const preview=useRef<HTMLCanvasElement>(null);
  const [downloadUrl,setDownloadUrl]=useState('');
  const [message,setMessage]=useState('');
  const [sharing,setSharing]=useState(false);
@@ -16,10 +17,33 @@ export default function ProductPhotoSave({file,stored}: {file:File;stored:boolea
  }
 
  useEffect(()=>{
+  setMessage('');
   const url=URL.createObjectURL(file);
   setDownloadUrl(url);
   return ()=>URL.revokeObjectURL(url);
  },[file]);
+
+ useEffect(()=>{
+  const canvas=preview.current;
+  if(!showPreview||!canvas||typeof createImageBitmap!=='function')return;
+  let active=true;
+  canvas.hidden=true;
+  void createImageBitmap(file).then(bitmap=>{
+   try {
+    if(!active)return;
+    const context=canvas.getContext('2d');
+    if(!context)return;
+    const scale=Math.min(1,720/Math.max(bitmap.width,bitmap.height));
+    canvas.width=Math.max(1,Math.round(bitmap.width*scale));
+    canvas.height=Math.max(1,Math.round(bitmap.height*scale));
+    context.drawImage(bitmap,0,0,canvas.width,canvas.height);
+    canvas.hidden=false;
+   } finally {
+    bitmap.close();
+   }
+  }).catch(()=>{/* A file can still be uploaded or saved if preview decoding fails. */});
+  return ()=>{active=false;};
+ },[file,showPreview]);
 
  const share=async()=>{
   setMessage('');setSharing(true);
@@ -34,6 +58,7 @@ export default function ProductPhotoSave({file,stored}: {file:File;stored:boolea
  };
 
  return <div>
+  {showPreview&&<canvas ref={preview} hidden className="photo-evidence" role="img" aria-label={t('photo.evidence')}/>}
   <Space wrap>
    {canShare&&<Button loading={sharing} onClick={()=>void share()}>{t('photo.save_photo')}</Button>}
    {downloadUrl&&<Button href={downloadUrl} download={file.name}>{t('photo.download_photo')}</Button>}

@@ -173,3 +173,19 @@
 .record-page-nav {display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;margin:16px 0;color:var(--record-ink,#252522)}
 .record-page-nav .ant-btn {min-height:44px;border-radius:8px}
 .record-page-nav .ant-btn:focus-visible {outline:2px solid #795908;outline-offset:2px}
+
+.product-archive .product-archive-heading {padding:0 0 14px}
+.product-archive .product-archive-heading h1 {margin:0;line-height:1.2}
+.product-archive .record-intake-actions {display:grid;grid-template-columns:max-content minmax(150px,340px) max-content;align-items:stretch;gap:8px;margin:0 0 14px}
+.product-archive .record-intake-actions .ant-btn,.product-archive .record-intake-actions .ant-input-affix-wrapper {min-height:44px;border-radius:8px;white-space:normal;height:auto}
+.product-archive .record-intake-actions .ant-input-affix-wrapper {background:#fffdf9;border-color:#dedbd4}
+.product-archive .record-intake-actions .ant-btn-primary {background:#252529;border-color:#252529}
+.product-archive .record-intake-actions .ant-btn-primary:hover {background:#45454c;border-color:#45454c}
+.product-archive .record-intake-actions :focus-visible {outline:2px solid #795908;outline-offset:2px}
+@media(max-width:767px){
+ .product-archive .record-intake-actions {grid-template-columns:minmax(0,1fr) auto}
+ .product-archive .record-intake-actions .ant-btn-primary {grid-column:1/-1;text-align:center}
+ .product-archive .record-intake-actions .ant-input-affix-wrapper input {min-width:0}
+}
+
+.product-archive .product-catalog-panel .ant-btn {min-height:44px}

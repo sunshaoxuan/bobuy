@@ -268,6 +268,9 @@ Ant Design `Switch` 只用于后台。公开商城布尔筛选使用 `button` + 
 - 主要操作控件至少 44px，8px 圆角，四语自然换行；复选框补上下 4px 内距、操作文字上移 1px 作光学对齐。应用范围为 `.product-photo-intake`。
 - [隔离页面、计算样式与字形证据](reports/evidence/product-photo-intake-20261120/README.md)和[真实图片验收记录](plans/PRODUCT-PHOTO-INTAKE-20261120.md)。Android API 36 原生摄像和回传已在模拟设备验证，实体设备及生产复验待执行。
 
+## 商家商品档案试点
+
+商品档案在手机首屏使用已有商家品牌头和一个页面标题，优先放拍照录入、搜索与手工建档。待办计数和首条待确认记录放在商品浏览前。照片审核先显示身份、价格、单位和现场证据，照片可放大，确认栏保留在滚动区外。布局及 44 px 热区的验收见 [商品档案试点实拍](reports/evidence/product-photo-workspace-20261121/README.md)。
 
 ### 17.9 现场照片一步入队
 
