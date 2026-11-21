@@ -1,6 +1,7 @@
 import {chromium,webkit} from '@playwright/test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 import os from 'node:os';
 import path from 'node:path';
 const out=process.env.PHOTO_PREVIEW||path.join(os.tmpdir(),'bobuy-photo-preview');
@@ -29,6 +30,15 @@ for(const [width,height] of settings){
   localStorage.setItem('bobbuy_access_token','synthetic-ui-only');
   localStorage.setItem('bobbuy_auth_user',JSON.stringify({id:1000,username:'demo',name:'BoBuy 测试商家',roles:['AGENT']}));
   if(!localStorage.getItem('bobbuy_locale'))localStorage.setItem('bobbuy_locale','zh-CN');
+  const fetchFromBrowser=window.fetch.bind(window);
+  window.fetch=async (input,options)=>{
+   if(String(input).endsWith('/supplement')&&options?.body instanceof FormData){
+    const file=options.body.get('file');
+    const digest=await crypto.subtle.digest('SHA-256',await file.arrayBuffer());
+    window.previewSupplementHash=[...new Uint8Array(digest)].map(value=>value.toString(16).padStart(2,'0')).join('');
+   }
+   return fetchFromBrowser(input,options);
+  };
   if(mockShare){
    Object.defineProperty(navigator,'canShare',{configurable:true,value:()=>true});
    Object.defineProperty(navigator,'share',{configurable:true,value:async d=>{window.previewShared=d.files.map(f=>f.name);throw new DOMException('User cancelled','AbortError');}});
@@ -47,7 +57,7 @@ for(const [width,height] of settings){
    data={...list[1],id:'uploaded-'+(++uploads)};taskRows.push(data);
   } else if(path.startsWith(root+'/')) data=taskRows.find(x=>x.id===path.split('/').at(-1))||{};
   else if(path===photo+'/demo-pack/supplement'){
-   assert(request.postDataBuffer()?.includes(tagged));
+   if(engine==='chromium')assert(request.postDataBuffer()?.includes(tagged));
    supplemented=true;
    const index=taskRows.findIndex(row=>row.id==='demo-pack');
    data={...taskRows[index],state:'QUEUED',failureCode:null,revision:8};
@@ -252,6 +262,7 @@ for(const [width,height] of settings){
     .setInputFiles({name:'synthetic-edge-tag.png',mimeType:'image/png',buffer:tagged});
   await page.waitForFunction(()=>document.querySelector('.product-photo-intake .photo-proof-toggle img')?.naturalHeight===720);
   assert(supplemented);
+  assert.equal(await page.evaluate(()=>window.previewSupplementHash),createHash('sha256').update(tagged).digest('hex'));
   await shot('supplement','.product-photo-intake .ant-modal-content');
   await page.locator('.product-photo-intake .ant-modal-close').click();
   await page.reload();
