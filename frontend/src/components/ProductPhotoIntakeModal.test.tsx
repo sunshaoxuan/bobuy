@@ -1,9 +1,9 @@
 import React from 'react';
 import {act,cleanup,fireEvent,render,screen,waitFor} from '@testing-library/react';
 import {afterEach,beforeEach,expect,it,vi} from 'vitest';
-const mocks=vi.hoisted(()=>({suppliers:vi.fn(),status:vi.fn(),photo:vi.fn(),get:vi.fn(),review:vi.fn(),confirm:vi.fn()}));
-vi.mock('../api',()=>({api:{suppliers:mocks.suppliers,costcoOnboarding:{status:mocks.status,photo:mocks.photo,get:mocks.get}},photoIntakeApi:{image:()=>Promise.resolve(new Blob()),review:mocks.review,confirm:mocks.confirm,photo:()=>Promise.resolve(new Blob())},categoryTreeApi:{list:()=>Promise.resolve([])},masterDataApi:{currencies:()=>Promise.resolve([{code:'JPY'}])}}));
-vi.mock('../productPhotoUpload',()=>({prepareProductPhotoUpload:(f:File)=>f.name==='bad.txt'?Promise.reject(Error('photo.file_invalid')):Promise.resolve(f)}));
+const mocks=vi.hoisted(()=>({suppliers:vi.fn(),status:vi.fn(),photo:vi.fn(),get:vi.fn(),review:vi.fn(),confirm:vi.fn(),retry:vi.fn()}));
+vi.mock('../api',()=>({api:{suppliers:mocks.suppliers,costcoOnboarding:{status:mocks.status,photo:mocks.photo,get:mocks.get}},photoIntakeApi:{retry:mocks.retry,image:()=>Promise.resolve(new Blob()),review:mocks.review,confirm:mocks.confirm,photo:()=>Promise.resolve(new Blob())},categoryTreeApi:{list:()=>Promise.resolve([])},masterDataApi:{currencies:()=>Promise.resolve([{code:'JPY'}])}}));
+vi.mock('../productPhotoUpload',()=>({prepareProductPhotoUpload:(f:File)=>f.name==='bad.txt'?Promise.reject(Error('gallery.invalid')):Promise.resolve(f)}));
 vi.mock('../i18n',()=>({useI18n:()=>({locale:'en-US',t:(k:string)=>k})}));
 vi.mock('./CategoryTreePicker',()=>({default:({value,onChange}:{value:string|null;onChange:(id:string|null)=>void})=><select aria-label="test-category" value={value??''} onChange={e=>onChange(e.target.value||null)}><option value="">Uncategorized</option><option value="category-1">First category</option></select>}));
 vi.mock('antd',()=>({Alert:({message,description,action}:any)=><div role="alert">{message}{description}{action}</div>,Button:({children,loading,type,...p}:any)=><button {...p}>{children}</button>,Checkbox:({children,onChange,...p}:any)=><label><input type="checkbox" {...p} onChange={onChange}/>{children}</label>,Input:Object.assign((p:any)=><input {...p}/>,{TextArea:(p:any)=><textarea {...p}/>}),Modal:({children,title}:any)=><div role="dialog">{title}{children}</div>,Select:({options,onChange,loading,allowClear,...p}:any)=><select {...p} onChange={e=>onChange(e.target.value)}><option value=""/>{options.map((o:any)=><option key={o.value} {...o}>{o.label}</option>)}</select>,Space:({children}:any)=><div>{children}</div>,Typography:{Title:({children}:any)=><h2>{children}</h2>}}));
@@ -13,11 +13,23 @@ const review=()=>({jobId:'job1',revision:7,supplierId:'s1',market:'JP',itemNumbe
 const props={open:true,onClose:vi.fn(),onQueued:vi.fn(),onSaved:vi.fn()};
 beforeEach(()=>{vi.clearAllMocks();mocks.suppliers.mockResolvedValue([{id:'s1',name:{'en-US':'Supplier'}}]);mocks.status.mockResolvedValue({workerEnabled:true});mocks.get.mockResolvedValue(job);mocks.review.mockResolvedValue(review());vi.stubGlobal('URL',Object.assign(URL,{createObjectURL:()=> 'blob:fixture',revokeObjectURL:vi.fn()}));});
 afterEach(cleanup);
-it('preselects one supplier, offers separate rear-camera and library inputs, and queues only after submit',async()=>{
- render(<ProductPhotoIntakeModal {...props}/>);await waitFor(()=>expect(screen.getByLabelText('onboarding.supplier')).toHaveValue('s1'));
- const inputs=document.querySelectorAll<HTMLInputElement>('input[type=file]');expect(inputs[0]).toHaveAttribute('capture','environment');expect(inputs[1]).not.toHaveAttribute('capture');
- fireEvent.change(inputs[1],{target:{files:[new File(['test'],'fixture.png',{type:'image/png'})]}});await screen.findByAltText('photo.evidence');expect(mocks.photo).not.toHaveBeenCalled();
- mocks.photo.mockResolvedValue(job);fireEvent.click(screen.getByText('photo.recognize'));await waitFor(()=>expect(mocks.photo).toHaveBeenCalledTimes(1));expect(mocks.photo.mock.calls[0][0]).toMatchObject({supplierId:'s1',market:'JP'});
+it('queues each selected file immediately and accepts a new capture while uploads are pending',async()=>{
+ let finish!:(value:unknown)=>void;
+ mocks.photo.mockImplementation(()=>new Promise(resolve=>{finish=resolve;}));
+ render(<ProductPhotoIntakeModal {...props}/>);
+ await waitFor(()=>expect(screen.getByLabelText('onboarding.supplier')).toHaveValue('s1'));
+ const [camera,library]=document.querySelectorAll<HTMLInputElement>('input[type=file]');
+ expect(camera).toHaveAttribute('capture','environment');expect(library).not.toHaveAttribute('capture');expect(library.multiple).toBe(true);
+ const image=(name:string)=>new File(['test'],name,{type:'image/png'});
+ fireEvent.change(library,{target:{files:[image('first.png'),image('second.png')]}});
+ await waitFor(()=>expect(mocks.photo).toHaveBeenCalledTimes(2));
+ expect(screen.getByText('photo.camera')).toBeEnabled();
+ fireEvent.change(camera,{target:{files:[image('third.png')]}});
+ await waitFor(()=>expect(mocks.photo).toHaveBeenCalledTimes(3));
+ expect(new Set(mocks.photo.mock.calls.map(([input])=>input.requestId)).size).toBe(3);
+ expect(mocks.photo.mock.calls.map(([,file])=>file.name)).toEqual(['first.png','second.png','third.png']);
+ await act(()=>finish({...job,state:'QUEUED'}));
+ expect(props.onQueued).toHaveBeenCalledWith(expect.objectContaining({state:'QUEUED'}));
 });
 it('does not auto-confirm availability and retains input after save failure for exact retry',async()=>{
  render(<ProductPhotoIntakeModal {...props} job={job}/>);await screen.findByDisplayValue('999');expect(screen.getByLabelText('photo.in_stock')).not.toBeChecked();
@@ -31,20 +43,20 @@ it('suppresses late recognition after unmount and leaves no-match creation gated
  mocks.review.mockResolvedValue({...review(),status:'NEW',matches:[],candidate:{translatedNames:{},name:''}});render(<ProductPhotoIntakeModal {...props} job={job}/>);await screen.findByText('photo.new');fireEvent.click(screen.getByLabelText('photo.identity_confirm'));expect(screen.getByText('photo.create')).toBeDisabled();expect(screen.getByText('master.japanese_required')).toBeTruthy();
 });
 it('reports supplier failure and empty list in place',async()=>{
- mocks.suppliers.mockRejectedValueOnce(Error('offline'));const v=render(<ProductPhotoIntakeModal {...props}/>);await screen.findByText('photo.suppliers_failed');v.unmount();mocks.suppliers.mockResolvedValue([]);render(<ProductPhotoIntakeModal {...props}/>);await screen.findByText('photo.no_suppliers');expect(screen.getByText('photo.recognize')).toBeDisabled();
+ mocks.suppliers.mockRejectedValueOnce(Error('offline'));const v=render(<ProductPhotoIntakeModal {...props}/>);await screen.findByText('photo.suppliers_failed');v.unmount();mocks.suppliers.mockResolvedValue([]);render(<ProductPhotoIntakeModal {...props}/>);await screen.findByText('photo.no_suppliers');expect(screen.getByText('photo.upload')).toBeDisabled();
 });
 
 it('keeps confirmed review inputs when a replacement file is invalid',async()=>{
  render(<ProductPhotoIntakeModal {...props} job={job}/>);await screen.findByDisplayValue('999');fireEvent.click(screen.getByLabelText('photo.identity_confirm'));
  fireEvent.change(document.querySelectorAll('input[type=file]')[1],{target:{files:[new File(['bad'],'bad.txt',{type:'text/plain'})]}});
- await screen.findByText('photo.file_invalid');expect(screen.getByDisplayValue('999')).toBeTruthy();expect(screen.getByLabelText('photo.identity_confirm')).toBeChecked();
+ await screen.findByText(/photo.file_type/);expect(screen.getByDisplayValue('999')).toBeTruthy();expect(screen.getByLabelText('photo.identity_confirm')).toBeChecked();
 });
 
-it('preserves the draft for a retry and clears it for a different photo',async()=>{
+it('keeps edits on retry and clears #190 suggestions when opening a different queue item',async()=>{
  const candidate={...review(),status:'NEW',matches:[],candidate:{translatedNames:{'ja-JP':'候補'}}};
  mocks.review.mockResolvedValue({...candidate,archiveDetails:{descriptionJa:'AI suggested description',categoryNodeId:'category-1',storageCondition:'FROZEN'}});
- mocks.photo.mockResolvedValue(job);
- render(<ProductPhotoIntakeModal {...props} job={job}/>);
+ mocks.retry.mockResolvedValue(job);
+ const screenRoot=render(<ProductPhotoIntakeModal {...props} job={job}/>);
  const description=await screen.findByLabelText('photo.description');
  expect(description).toHaveValue('AI suggested description');
  expect(screen.getByLabelText('test-category')).toHaveValue('category-1');
@@ -52,16 +64,15 @@ it('preserves the draft for a retry and clears it for a different photo',async()
  fireEvent.change(description,{target:{value:'First product only'}});
  fireEvent.change(screen.getByLabelText('test-category'),{target:{value:''}});
  fireEvent.click(screen.getByText('photo.retry_recognition'));
- fireEvent.click(await screen.findByRole('button',{name:'photo.recognize'}));
+ await waitFor(()=>expect(mocks.retry).toHaveBeenCalledWith(job.id));
  expect(await screen.findByLabelText('photo.description')).toHaveValue('First product only');
  expect(screen.getByLabelText('test-category')).toHaveValue('');
+ expect(mocks.photo).not.toHaveBeenCalled();
 
  const replacement={...job,id:'job2'};
- mocks.photo.mockResolvedValue(replacement);
  mocks.get.mockResolvedValue(replacement);
  mocks.review.mockResolvedValue({...candidate,jobId:replacement.id});
- fireEvent.change(document.querySelectorAll('input[type=file]')[1],{target:{files:[new File(['replacement'],'next.jpg',{type:'image/jpeg'})]}});
- fireEvent.click(await screen.findByRole('button',{name:'photo.recognize'}));
+ screenRoot.rerender(<ProductPhotoIntakeModal {...props} job={replacement}/>);
  expect(await screen.findByLabelText('photo.description')).toHaveValue('');
  expect(screen.getByLabelText('test-category')).toHaveValue('');
  expect(screen.getByRole('combobox',{name:'stock.item.storage_condition'})).toHaveValue('');

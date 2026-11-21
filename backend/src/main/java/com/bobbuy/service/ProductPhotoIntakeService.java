@@ -82,6 +82,18 @@ public class ProductPhotoIntakeService {
         return RecommendationImageValidator.validate(evidence.readVerified(owner,source.sha256()));
     }
     @Transactional(readOnly=true) public List<Observation> productHistory(String product){long owner=owner();if(!products.existsByIdAndMerchantId(product,owner))throw new ApiException(ErrorCode.RESOURCE_NOT_FOUND,"product.not_found");return jdbc.query("select cast(receipt as text) from bb_product_photo_observation where merchant_id=? and product_id=? order by confirmed_at desc,id desc limit 50",(r,n)->parse(r.getString(1)),owner,product);}
+    @Transactional
+    public CostcoOnboardingJob retry(String id) {
+        long owner=owner();
+        users.lockById(owner).filter(u->u.isEnabled()&&u.getRoles().contains(Role.AGENT))
+                .orElseThrow(()->new ApiException(ErrorCode.FORBIDDEN,"error.auth.forbidden"));
+        var job=job(id,owner);
+        if ((!Set.of(CostcoOnboardingJob.State.FAILED,CostcoOnboardingJob.State.NEEDS_INPUT,
+                CostcoOnboardingJob.State.RETRY_WAIT,CostcoOnboardingJob.State.CANCELLED).contains(job.state()))
+                || "photo.confirm_required".equals(job.failureCode()) || saved(job.id(),owner)!=null) return job;
+        return jobs.retryPhoto(job);
+    }
+
     @Transactional public Observation confirm(String id,Confirm input){
         long owner=owner();users.lockById(owner).filter(u->u.isEnabled()&&u.getRoles().contains(Role.AGENT)).orElseThrow(()->new ApiException(ErrorCode.FORBIDDEN,"error.auth.forbidden"));
         // Serialize with worker transitions as well as concurrent confirmations.
@@ -89,6 +101,10 @@ public class ProductPhotoIntakeService {
         var j=job(id,owner);String hash=CostcoEvidencePersistence.hash(json(input).getBytes(java.nio.charset.StandardCharsets.UTF_8));
         var hashes=jdbc.queryForList("select request_hash from bb_product_photo_observation where job_id=? and merchant_id=?",String.class,id,owner);
         if(!hashes.isEmpty()){if(!hashes.get(0).equals(hash))throw conflict();return saved(id,owner);}
+        if (Boolean.TRUE.equals(jdbc.queryForObject("""
+                select exists(select 1 from bb_product_photo_observation where merchant_id=?
+                    and supplier_id=? and market=? and photo_sha256=?)
+                """, Boolean.class, owner,j.supplierId(),j.market(),j.privatePhotoSha256()))) throw conflict();
         if(input==null||!input.identityConfirmed()||j.revision()!=input.revision()||!Set.of(CostcoOnboardingJob.State.NEEDS_INPUT,CostcoOnboardingJob.State.FAILED).contains(j.state()))throw conflict();
         String item=CostcoNumberOnboardingService.normalizeItemNumber(input.itemNumber());
         if(products.deletedCodeCount(owner,item)>0)throw invalid("photo.deleted");

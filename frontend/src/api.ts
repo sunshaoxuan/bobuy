@@ -180,6 +180,8 @@ export type PhotoObservation={id:string;productId:string;supplierId:string;marke
 export type PhotoStorageCondition='AMBIENT'|'FRESH'|'CHILLED'|'FROZEN';
 export type PhotoReview={jobId:string;revision:number;supplierId:string;market:string;itemNumber:string|null;status:string;candidate:CostcoOnboardingJobView['candidate'];archiveDetails?:{descriptionJa:string|null;categoryNodeId:string|null;storageCondition:PhotoStorageCondition|null};photoFacts?:{amount:number|string|null;currency:string|null;unit:string|null;conditions:string|null;priceKind:string;productVisible:boolean};matches:{id:string;version:number;name:Record<string,string>;specification:Record<string,string>;packaging:string|null;eligible:boolean}[];history:PhotoObservation[];saved:PhotoObservation|null;sources?:{canonicalUrl:string;sha256:string;mediaType:string}[];officialImageAvailable?:boolean};
 export const photoIntakeApi={
+ queue:()=>storeGet<CostcoOnboardingJobView[]>('/api/product-photo-intake'),
+ retry:(id:string)=>postJson<CostcoOnboardingJobView,object>('/api/product-photo-intake/'+encodeURIComponent(id)+'/retry',{}),
  image:async(id:string)=>{const r=await authorizedFetch('/api/product-photo-intake/'+encodeURIComponent(id)+'/official-image');if(!r.ok)throw Error(await parseErrorMessage(r));return r.blob();},
  review:(id:string,itemNumber?:string)=>storeGet<PhotoReview>('/api/product-photo-intake/'+encodeURIComponent(id)+(itemNumber?'?'+new URLSearchParams({itemNumber}):'')),
  confirm:(id:string,input:object)=>postJson<PhotoObservation,object>('/api/product-photo-intake/'+encodeURIComponent(id)+'/confirm',input),
@@ -1277,7 +1279,7 @@ export const api = {
             const body=new FormData();body.set('requestId',input.requestId);body.set('supplierId',input.supplierId);body.set('market',input.market);body.set('file',file);
             const response=await authorizedFetch('/api/ai/costco-onboarding/photo',{method:'POST',body});if(!response.ok)throw new Error(await parseErrorMessage(response));return parseSuccessPayload<CostcoOnboardingJobView>(response);
         },
-        list:()=>fetchJson<CostcoOnboardingJobView[]>('/api/ai/costco-onboarding',[]),
+        list:()=>fetchJson<CostcoOnboardingJobView[]>('/api/ai/costco-onboarding?numbersOnly=true',[]),
         get:(id:string)=>fetchJson<CostcoOnboardingJobView>('/api/ai/costco-onboarding/'+encodeURIComponent(id),null as unknown as CostcoOnboardingJobView)
     },
     auth: {

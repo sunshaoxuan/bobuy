@@ -1,0 +1,2461 @@
+{
+  "scriptSha256": "4f6b5f656e4d886ce84a70d3f35e1cefa5fef425f5a3c3a1e25ce7d9702979b3",
+  "console": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    }
+  ],
+  "network": [
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/cae2568a-3a61-4b99-950e-da1bcadc3346",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/0a4056ec-f5a9-409d-9f17-318b1337fed9",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/cae2568a-3a61-4b99-950e-da1bcadc3346",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/0a4056ec-f5a9-409d-9f17-318b1337fed9",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/7eef17f4-bc37-467d-b029-d30adfbe325d/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/95f29931-b2b2-4ebf-b641-76048484d52f/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/ce114d63-bc10-4a28-8b96-1fa441dc82b5/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/46a0451f-761e-4455-8804-bfcf523d5606/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/c6123f00-f1de-409a-829e-ddfc01e96982/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/photo",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/photo",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "path": "/api/product-photo-intake",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/photo",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "path": "/api/product-photo-intake",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/37768da8-7d55-446a-b07c-9084f654c55e/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/863e5a08-6414-40ba-9acc-d19adfcdb732/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/29f9d991-c6f4-48e7-9433-12384157d442/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/cae2568a-3a61-4b99-950e-da1bcadc3346",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/0a4056ec-f5a9-409d-9f17-318b1337fed9",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/cae2568a-3a61-4b99-950e-da1bcadc3346",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/0a4056ec-f5a9-409d-9f17-318b1337fed9",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/7eef17f4-bc37-467d-b029-d30adfbe325d/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/29f9d991-c6f4-48e7-9433-12384157d442/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/863e5a08-6414-40ba-9acc-d19adfcdb732/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/37768da8-7d55-446a-b07c-9084f654c55e/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/95f29931-b2b2-4ebf-b641-76048484d52f/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/7eef17f4-bc37-467d-b029-d30adfbe325d/retry",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "path": "/api/product-photo-intake",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/ce114d63-bc10-4a28-8b96-1fa441dc82b5",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/ce114d63-bc10-4a28-8b96-1fa441dc82b5/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/46a0451f-761e-4455-8804-bfcf523d5606/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/ce114d63-bc10-4a28-8b96-1fa441dc82b5/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/c6123f00-f1de-409a-829e-ddfc01e96982/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/ce114d63-bc10-4a28-8b96-1fa441dc82b5",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/cae2568a-3a61-4b99-950e-da1bcadc3346",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/cae2568a-3a61-4b99-950e-da1bcadc3346",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/0a4056ec-f5a9-409d-9f17-318b1337fed9",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/0a4056ec-f5a9-409d-9f17-318b1337fed9",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/863e5a08-6414-40ba-9acc-d19adfcdb732/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/37768da8-7d55-446a-b07c-9084f654c55e/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/7eef17f4-bc37-467d-b029-d30adfbe325d/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/95f29931-b2b2-4ebf-b641-76048484d52f/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/29f9d991-c6f4-48e7-9433-12384157d442/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/cae2568a-3a61-4b99-950e-da1bcadc3346",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/cae2568a-3a61-4b99-950e-da1bcadc3346",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/0a4056ec-f5a9-409d-9f17-318b1337fed9",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/0a4056ec-f5a9-409d-9f17-318b1337fed9",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/29f9d991-c6f4-48e7-9433-12384157d442/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/7eef17f4-bc37-467d-b029-d30adfbe325d/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/95f29931-b2b2-4ebf-b641-76048484d52f/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/863e5a08-6414-40ba-9acc-d19adfcdb732/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/37768da8-7d55-446a-b07c-9084f654c55e/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/auth/me",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/ai/costco-onboarding",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/categories",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/products",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/0a4056ec-f5a9-409d-9f17-318b1337fed9",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/cae2568a-3a61-4b99-950e-da1bcadc3346",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/cae2568a-3a61-4b99-950e-da1bcadc3346",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1000",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/0a4056ec-f5a9-409d-9f17-318b1337fed9",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/storefront/product-reviews/prd-1638",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/merchant/currencies",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/category-tree",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/mobile/suppliers",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/29f9d991-c6f4-48e7-9433-12384157d442/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/37768da8-7d55-446a-b07c-9084f654c55e/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/863e5a08-6414-40ba-9acc-d19adfcdb732/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/95f29931-b2b2-4ebf-b641-76048484d52f/photo",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/product-photo-intake/7eef17f4-bc37-467d-b029-d30adfbe325d/photo",
+      "status": 200,
+      "method": "GET"
+    }
+  ],
+  "geometry": [
+    {
+      "name": "queue-390",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "documentWidth": 390,
+      "modalWidth": 366,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "label": "Close",
+          "x": 322,
+          "y": 48,
+          "width": 44,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "Tokyo Supplier",
+          "x": 32,
+          "y": 248,
+          "width": 322,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "Select supplier",
+          "x": 44,
+          "y": 249,
+          "width": 298,
+          "height": 30,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Take a photo",
+          "x": 32,
+          "y": 316,
+          "width": 114.171875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Choose a photo or file",
+          "x": 154.171875,
+          "y": 316,
+          "width": 170.984375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 170.703125,
+          "y": 414,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 170.703125,
+          "y": 487,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 170.703125,
+          "y": 560,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 104,
+          "y": 716,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Retry recognition with this photo",
+          "x": 104,
+          "y": 768,
+          "width": 233.21875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 194.046875,
+          "y": 829,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 104,
+          "y": 933,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 104,
+          "y": 1025,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 104,
+          "y": 1117,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Close",
+          "x": 32,
+          "y": 782,
+          "width": 322,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "name": "queue-767",
+      "viewport": {
+        "width": 767,
+        "height": 844
+      },
+      "documentWidth": 767,
+      "modalWidth": 743,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "label": "Close",
+          "x": 699,
+          "y": 48,
+          "width": 44,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "Tokyo Supplier",
+          "x": 32,
+          "y": 204,
+          "width": 699,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "Select supplier",
+          "x": 44,
+          "y": 205,
+          "width": 675,
+          "height": 30,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Take a photo",
+          "x": 32,
+          "y": 272,
+          "width": 114.171875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Choose a photo or file",
+          "x": 154.171875,
+          "y": 272,
+          "width": 170.984375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 170.703125,
+          "y": 370,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 170.703125,
+          "y": 443,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 170.703125,
+          "y": 516,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 104,
+          "y": 650,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Retry recognition with this photo",
+          "x": 248.75,
+          "y": 650,
+          "width": 233.21875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 194.046875,
+          "y": 711,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 232.109375,
+          "y": 784,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 311.921875,
+          "y": 857,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 232.109375,
+          "y": 930,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Close",
+          "x": 32,
+          "y": 738,
+          "width": 699,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "name": "queue-1280",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "documentWidth": 1280,
+      "modalWidth": 760,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "label": "Close",
+          "x": 964,
+          "y": 36,
+          "width": 44,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "Tokyo Supplier",
+          "x": 288,
+          "y": 192,
+          "width": 700,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "Select supplier",
+          "x": 300,
+          "y": 193,
+          "width": 676,
+          "height": 30,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Take a photo",
+          "x": 288,
+          "y": 260,
+          "width": 114.171875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Choose a photo or file",
+          "x": 410.171875,
+          "y": 260,
+          "width": 170.984375,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 426.703125,
+          "y": 358,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 426.703125,
+          "y": 431,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 426.703125,
+          "y": 504,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 360,
+          "y": 638,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Retry recognition with this photo",
+          "x": 504.75,
+          "y": 638,
+          "width": 233.21875,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 450.046875,
+          "y": 699,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 488.109375,
+          "y": 772,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 567.921875,
+          "y": 845,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Open photo task",
+          "x": 488.109375,
+          "y": 918,
+          "width": 136.75,
+          "height": 44,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Close",
+          "x": 288,
+          "y": 726,
+          "width": 700,
+          "height": 44,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "name": "queue-zh-CN",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "documentWidth": 390,
+      "modalWidth": 196.84780883789062,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "label": "Close",
+          "x": 267.00244140625,
+          "y": 221.77381896972656,
+          "width": 23.664764404296875,
+          "height": 23.664764404296875,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "东京供货商",
+          "x": 111.03011322021484,
+          "y": 317.508544921875,
+          "width": 173.18304443359375,
+          "height": 23.664794921875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "选择供应商",
+          "x": 117.48413848876953,
+          "y": 318.04638671875,
+          "width": 160.2750244140625,
+          "height": 16.13507080078125,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "设备拍照",
+          "x": 111.03011322021484,
+          "y": 354.08135986328125,
+          "width": 48.40520477294922,
+          "height": 23.664794921875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "相册或文件",
+          "x": 163.73800659179688,
+          "y": 354.08135986328125,
+          "width": 55.934906005859375,
+          "height": 23.664794921875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "打开照片任务",
+          "x": 182.03280639648438,
+          "y": 406.78924560546875,
+          "width": 63.464599609375,
+          "height": 23.664794921875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "打开照片任务",
+          "x": 182.03280639648438,
+          "y": 446.05126953125,
+          "width": 63.464599609375,
+          "height": 23.664764404296875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "打开照片任务",
+          "x": 182.03280639648438,
+          "y": 485.3132629394531,
+          "width": 63.464599609375,
+          "height": 23.664764404296875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "打开照片任务",
+          "x": 182.03280639648438,
+          "y": 524.5752563476562,
+          "width": 63.464599609375,
+          "height": 23.66473388671875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "打开照片任务",
+          "x": 182.03280639648438,
+          "y": 563.8372802734375,
+          "width": 63.464599609375,
+          "height": 23.66473388671875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "打开照片任务",
+          "x": 149.7542724609375,
+          "y": 619.7721557617188,
+          "width": 63.464599609375,
+          "height": 23.66473388671875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "打开照片任务",
+          "x": 149.7542724609375,
+          "y": 669.2530517578125,
+          "width": 63.464599609375,
+          "height": 23.664794921875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "打开照片任务",
+          "x": 149.7542724609375,
+          "y": 718.73388671875,
+          "width": 63.464599609375,
+          "height": 23.664794921875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "关 闭",
+          "x": 111.03011322021484,
+          "y": 604.7127685546875,
+          "width": 173.18304443359375,
+          "height": 23.664794921875,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "name": "queue-zh-TW",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "documentWidth": 390,
+      "modalWidth": 73.19999694824219,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "label": "Close",
+          "x": 226.8000030517578,
+          "y": 348.79998779296875,
+          "width": 8.800003051757812,
+          "height": 8.800018310546875,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "東京サプライヤー",
+          "x": 168.8000030517578,
+          "y": 384.3999938964844,
+          "width": 64.40000915527344,
+          "height": 8.79998779296875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "選擇供應商",
+          "x": 171.1999969482422,
+          "y": 384.6000061035156,
+          "width": 59.600006103515625,
+          "height": 6,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "裝置拍照",
+          "x": 168.8000030517578,
+          "y": 398,
+          "width": 18,
+          "height": 8.79998779296875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "相簿或檔案",
+          "x": 188.40000915527344,
+          "y": 398,
+          "width": 20.800003051757812,
+          "height": 8.79998779296875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "開啟照片任務",
+          "x": 195.203125,
+          "y": 417.6000061035156,
+          "width": 23.600006103515625,
+          "height": 8.79998779296875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "開啟照片任務",
+          "x": 195.203125,
+          "y": 432.20001220703125,
+          "width": 23.600006103515625,
+          "height": 8.79998779296875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "開啟照片任務",
+          "x": 195.203125,
+          "y": 446.79998779296875,
+          "width": 23.600006103515625,
+          "height": 8.800018310546875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "開啟照片任務",
+          "x": 195.203125,
+          "y": 461.3999938964844,
+          "width": 23.600006103515625,
+          "height": 8.800018310546875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "開啟照片任務",
+          "x": 195.203125,
+          "y": 476,
+          "width": 23.600006103515625,
+          "height": 8.79998779296875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "開啟照片任務",
+          "x": 183.1999969482422,
+          "y": 496.79998779296875,
+          "width": 23.600006103515625,
+          "height": 8.79998779296875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "開啟照片任務",
+          "x": 183.1999969482422,
+          "y": 515.2000122070312,
+          "width": 23.600006103515625,
+          "height": 8.79998779296875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "開啟照片任務",
+          "x": 183.1999969482422,
+          "y": 533.5999755859375,
+          "width": 23.600006103515625,
+          "height": 8.800048828125,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "關 閉",
+          "x": 168.8000030517578,
+          "y": 491.20001220703125,
+          "width": 64.40000915527344,
+          "height": 8.79998779296875,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "name": "queue-ja-JP",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "documentWidth": 390,
+      "modalWidth": 73.19999694824219,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "label": "Close",
+          "x": 277.20001220703125,
+          "y": 348.79998779296875,
+          "width": 8.79998779296875,
+          "height": 8.800018310546875,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "6px",
+          "borderColor": "rgba(0, 0, 0, 0.45)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "DIV",
+          "label": "仕入先を選択",
+          "x": 219.1999969482422,
+          "y": 388.79998779296875,
+          "width": 64.40000915527344,
+          "height": 8.800018310546875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "INPUT",
+          "label": "仕入先を選択",
+          "x": 221.59999084472656,
+          "y": 389,
+          "width": 59.60002136230469,
+          "height": 6,
+          "minWidth": "0px",
+          "minHeight": "0px",
+          "radius": "0px",
+          "borderColor": "rgba(0, 0, 0, 0.88)",
+          "borderWidth": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "カメラで撮影",
+          "x": 219.1999969482422,
+          "y": 402.3999938964844,
+          "width": 23.600006103515625,
+          "height": 8.800018310546875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "アルバムまたはファイル",
+          "x": 244.39999389648438,
+          "y": 402.3999938964844,
+          "width": 37.571868896484375,
+          "height": 8.800018310546875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgba(0, 0, 0, 0.04)",
+          "shadow": "none",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "写真の処理結果を開く",
+          "x": 245.60311889648438,
+          "y": 432.3999938964844,
+          "width": 34.800018310546875,
+          "height": 8.800018310546875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "写真の処理結果を開く",
+          "x": 245.60311889648438,
+          "y": 447,
+          "width": 34.800018310546875,
+          "height": 8.79998779296875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "写真の処理結果を開く",
+          "x": 245.60311889648438,
+          "y": 461.6000061035156,
+          "width": 34.800018310546875,
+          "height": 8.79998779296875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "写真の処理結果を開く",
+          "x": 245.60311889648438,
+          "y": 476.20001220703125,
+          "width": 34.800018310546875,
+          "height": 8.79998779296875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "写真の処理結果を開く",
+          "x": 245.60311889648438,
+          "y": 490.79998779296875,
+          "width": 34.800018310546875,
+          "height": 8.79998779296875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "写真の処理結果を開く",
+          "x": 233.59999084472656,
+          "y": 511.5999755859375,
+          "width": 34.80000305175781,
+          "height": 8.800048828125,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "写真の処理結果を開く",
+          "x": 233.59999084472656,
+          "y": 530,
+          "width": 34.80000305175781,
+          "height": 8.79998779296875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "写真の処理結果を開く",
+          "x": 233.59999084472656,
+          "y": 548.4000244140625,
+          "width": 34.80000305175781,
+          "height": 8.79998779296875,
+          "minWidth": "0px",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        },
+        {
+          "tag": "BUTTON",
+          "label": "閉じる",
+          "x": 219.1999969482422,
+          "y": 506,
+          "width": 64.40000915527344,
+          "height": 8.79998779296875,
+          "minWidth": "auto",
+          "minHeight": "44px",
+          "radius": "8px",
+          "borderColor": "rgb(217, 217, 217)",
+          "borderWidth": "1px",
+          "background": "rgb(255, 255, 255)",
+          "shadow": "rgba(0, 0, 0, 0.02) 0px 2px 0px 0px",
+          "visible": true
+        }
+      ]
+    }
+  ],
+  "results": [
+    "Real Spring API and isolated PostgreSQL: multi-select and continuous capture input, three independent queued responses, reload, all five states, private thumbnails, retry without another multipart request, independent confirmation entry, four locales, 390/767/1280 layouts."
+  ],
+  "fixture": "Synthetic persisted photo suggestions; real UI/API/Postgres; not live AI recognition; unrelated seeded archive images use local placeholders"
+}

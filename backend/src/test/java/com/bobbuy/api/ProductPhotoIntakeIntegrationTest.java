@@ -39,7 +39,8 @@ class ProductPhotoIntakeIntegrationTest {
   try(var c=Objects.requireNonNull(jdbc.getDataSource()).getConnection()){
    if(!Boolean.TRUE.equals(jdbc.queryForObject("select to_regclass('bb_costco_onboarding_job') is not null",Boolean.class)))ScriptUtils.executeSqlScript(c,new ClassPathResource("db/migration/V30__costco_onboarding_jobs.sql"));
    ScriptUtils.executeSqlScript(c,new ClassPathResource("db/migration/V48__product_photo_observations.sql"));
-   ScriptUtils.executeSqlScript(c,new ClassPathResource("db/migration/V48__product_photo_observations.sql"));
+   if(!Boolean.TRUE.equals(jdbc.queryForObject("select to_regclass('bb_product_photo_request') is not null",Boolean.class)))
+    ScriptUtils.executeSqlScript(c,new ClassPathResource("db/migration/V50__product_photo_queue_requests.sql"));
   }
   if(users.findById(1000L).isEmpty())store.seed();
   auth=tokens.createAccessToken(users.findById(1000L).orElseThrow());
@@ -52,7 +53,7 @@ class ProductPhotoIntakeIntegrationTest {
   job=makeJob(item);
  }
  String makeJob(String number)throws Exception{
-  byte[] bytes;try(var out=new java.io.ByteArrayOutputStream()){var image=new java.awt.image.BufferedImage(800,600,java.awt.image.BufferedImage.TYPE_INT_RGB);var g=image.createGraphics();g.setColor(java.awt.Color.WHITE);g.fillRect(0,0,800,600);g.setColor(new java.awt.Color(225,230,215));g.fillRoundRect(40,50,300,380,24,24);g.setColor(java.awt.Color.BLACK);g.setFont(new java.awt.Font("SansSerif",java.awt.Font.BOLD,30));g.drawString("SYNTHETIC TEST",60,110);g.drawString("PRODUCT 80 x 2",60,165);g.drawRect(380,120,380,310);g.drawString("ITEM "+number,400,180);g.setFont(new java.awt.Font("SansSerif",java.awt.Font.BOLD,54));g.drawString("JPY 999",400,270);g.setFont(new java.awt.Font("SansSerif",java.awt.Font.PLAIN,28));g.drawString("per 80 x 2 pack",400,335);g.drawString("TEST FIXTURE - NOT A REAL OFFER",60,520);g.dispose();javax.imageio.ImageIO.write(image,"png",out);bytes=out.toByteArray();}
+  byte[] bytes;try(var out=new java.io.ByteArrayOutputStream()){var image=new java.awt.image.BufferedImage(800,600,java.awt.image.BufferedImage.TYPE_INT_RGB);var g=image.createGraphics();g.setColor(java.awt.Color.WHITE);g.fillRect(0,0,800,600);g.setColor(new java.awt.Color(225,230,215));g.fillRoundRect(40,50,300,380,24,24);g.setColor(java.awt.Color.BLACK);g.setFont(new java.awt.Font("SansSerif",java.awt.Font.BOLD,30));g.drawString("SYNTHETIC TEST",60,110);g.drawString("PRODUCT 80 x 2",60,165);g.drawRect(380,120,380,310);g.drawString("ITEM "+number,400,180);g.setFont(new java.awt.Font("SansSerif",java.awt.Font.BOLD,54));g.drawString("JPY 999",400,270);g.setFont(new java.awt.Font("SansSerif",java.awt.Font.PLAIN,28));g.drawString("per 80 x 2 pack",400,335);g.drawString("TEST FIXTURE - NOT A REAL OFFER",60,520);g.dispose();image.setRGB(0,0,java.util.concurrent.ThreadLocalRandom.current().nextInt());javax.imageio.ImageIO.write(image,"png",out);bytes=out.toByteArray();}
   String photo=evidence.putPrivatePhoto(1000,bytes);String id=UUID.randomUUID().toString();var j=new CostcoOnboardingJob(id,CostcoEvidencePersistence.hash(id.getBytes()),1000,supplier,"JP","a".repeat(64),number,photo,7,CostcoOnboardingJob.State.NEEDS_INPUT,List.of(),List.of(new CostcoOnboardingDecision(CostcoOnboardingDecision.Stage.INTAKE,CostcoOnboardingDecision.Verdict.ACCEPT,"integration-fixture-not-live","fixture",CostcoNumberOnboardingService.REQUIRED_NODE,"a".repeat(64),List.of(),"fixture","fixture","Synthetic test evidence",number,new CostcoOnboardingDecision.Candidate(number,null,"合成現場商品",null,"80 × 2","80 × 2",null,Map.of("ja-JP","合成現場商品","en-US","Synthetic field product"),List.of(),List.of(),null,new CostcoOnboardingDecision.PhotoFacts(new java.math.BigDecimal("999"),"JPY","80 × 2","","WAREHOUSE",true)))),null,null,"photo.confirm_required",Instant.now());
   jdbc.update("insert into bb_costco_onboarding_job(id,merchant_id,supplier_id,market,idempotency_key,input_hash,revision,state,payload) values(?,?,?,?,?,?,7,'NEEDS_INPUT',cast(? as jsonb))",id,1000,supplier,"JP",j.idempotencyKey(),j.inputHash(),json.writeValueAsString(j));return id;
  }
@@ -176,28 +177,103 @@ class ProductPhotoIntakeIntegrationTest {
   request.set("unit",facts.path("unit"));
   return request;
  }
- @Test @EnabledIfEnvironmentVariable(named="BOBBUY_PHOTO_BROWSER",matches="true")
- void browserAcceptanceAgainstRealLocalApi()throws Exception{
-  var process=new ProcessBuilder("node","../frontend/scripts/photo-intake-browser.mjs").inheritIO();
-  process.environment().put("PHOTO_TEST_TOKEN",auth);process.environment().put("PHOTO_TEST_JOB",job);process.environment().put("PHOTO_TEST_NEW_JOB",makeJob(String.valueOf(Long.parseLong(item)+2)));process.environment().put("PHOTO_TEST_PRODUCT",product.getId());
-  assertThat(process.start().waitFor()).isZero();
+ @Autowired CostcoOnboardingWorker worker;
+ @Autowired JdbcCostcoOnboardingJobRepository queueRepository;
+
+ byte[] image(int color) throws Exception {
+  var image=new java.awt.image.BufferedImage(40,40,java.awt.image.BufferedImage.TYPE_INT_RGB);
+  var brush=image.createGraphics();
+  brush.setColor(new java.awt.Color(color));brush.fillRect(0,0,40,40);brush.dispose();
+  try(var out=new java.io.ByteArrayOutputStream()){javax.imageio.ImageIO.write(image,"png",out);return out.toByteArray();}
+ }
+ JsonNode enqueue(String request, byte[] bytes, int status) throws Exception {
+  return json.readTree(mvc.perform(multipart("/api/ai/costco-onboarding/photo")
+    .file(new MockMultipartFile("file","photo.png","image/png",bytes))
+    .param("requestId",request).param("supplierId",supplier).param("market","JP")
+    .header("Authorization","Bearer "+auth)).andExpect(status().is(status))
+    .andReturn().getResponse().getContentAsByteArray()).path("data");
+ }
+ JsonNode queue() throws Exception {
+  return json.readTree(mvc.perform(get("/api/product-photo-intake").header("Authorization","Bearer "+auth))
+    .andExpect(status().isOk()).andReturn().getResponse().getContentAsByteArray()).path("data");
+ }
+ @Test void acceptsMoreThanFortyWithoutAWorkerAndReclaimsAfterRestart() throws Exception {
+  worker.stop();
+  try {
+   jdbc.update("update bb_costco_onboarding_job set next_run_at=current_timestamp+interval '1 day' where state in ('QUEUED','RETRY_WAIT','AI_INTAKE','EVIDENCE_FETCH','AI_REVIEW')");
+   Set<String> ids=new HashSet<>();
+   for(int n=0;n<45;n++){
+    var row=enqueue(UUID.randomUUID().toString(),image(0xea4200+n),200);
+    assertThat(row.path("state").asText()).isEqualTo("QUEUED");
+    ids.add(row.path("id").asText());
+   }
+   assertThat(ids).hasSize(45);
+   assertThat(queue().findValuesAsText("id")).containsAll(ids);
+   var lease=queueRepository.claimNext(Instant.now()).orElseThrow();
+   assertThat(ids).contains(lease.job().id());
+   jdbc.update("update bb_costco_onboarding_job set next_run_at=current_timestamp+interval '1 day' where state='QUEUED' and id<>?",lease.job().id());
+   jdbc.update("update bb_costco_onboarding_job set lease_until=current_timestamp-interval '1 second' where id=?",lease.job().id());
+   worker.start();
+   long until=System.nanoTime()+TimeUnit.SECONDS.toNanos(12);
+   while(queueRepository.findOwned(lease.job().id(),1000).orElseThrow().state()==CostcoOnboardingJob.State.QUEUED&&System.nanoTime()<until)Thread.sleep(100);
+   assertThat(queueRepository.findOwned(lease.job().id(),1000).orElseThrow().state()).isNotEqualTo(CostcoOnboardingJob.State.QUEUED);
+  } finally {worker.start();}
  }
 
- @Test @EnabledIfEnvironmentVariable(named="BOBBUY_PHOTO_BROWSER",matches="true")
- void browserHistoryAiFailureAndLongLabels()throws Exception{
-  confirm(job,input(),auth);
-  var process=new ProcessBuilder("node","../frontend/scripts/photo-intake-browser.mjs").inheritIO();
-  process.environment().put("PHOTO_BROWSER_EXTRA","1");process.environment().put("PHOTO_TEST_TOKEN",auth);process.environment().put("PHOTO_TEST_JOB",job);process.environment().put("PHOTO_TEST_NEW_JOB",makeJob(item));
-  assertThat(process.start().waitFor()).isZero();
+ @Test void concurrentContentAliasesReuseHistoricalJobAndProtectRequestKey() throws Exception {
+  worker.stop();
+  var pool=Executors.newFixedThreadPool(2);
+  try {
+   byte[] bytes=image(0xcb1234);
+   String originalRequest=UUID.randomUUID().toString(), aliasRequest=UUID.randomUUID().toString();
+   var historical=enqueue(originalRequest,bytes,200);String id=historical.path("id").asText();
+   // The original job uses only the historical request key in the task table.
+   assertThat(jdbc.queryForObject("select count(*) from bb_product_photo_request where job_id=?",Long.class,id)).isZero();
+   var requests=pool.invokeAll(List.<Callable<JsonNode>>of(
+     ()->enqueue(aliasRequest,bytes,200),()->enqueue(UUID.randomUUID().toString(),bytes,200)));
+   for(var result:requests)assertThat(result.get().path("id").asText()).isEqualTo(id);
+   enqueue(aliasRequest,image(0xcb1235),409);
+   enqueue(originalRequest,image(0xcb1236),409);
+   assertThat(jdbc.queryForObject("select count(*) from bb_costco_onboarding_job where payload->>'privatePhotoSha256'=?",Long.class,CostcoEvidencePersistence.hash(bytes))).isEqualTo(1);
+   var old=queueRepository.findOwned(id,1000).orElseThrow();
+   var failed=new CostcoOnboardingJob(old.id(),old.idempotencyKey(),old.merchantId(),old.supplierId(),old.market(),
+     old.inputHash(),item,old.privatePhotoSha256(),1,CostcoOnboardingJob.State.FAILED,List.of(),List.of(),
+     null,null,"onboarding.retry_exhausted",Instant.now());
+   jdbc.update("update bb_costco_onboarding_job set state='FAILED',revision=1,attempts=3,payload=cast(? as jsonb) where id=?",json.writeValueAsString(failed),id);
+   mvc.perform(post("/api/product-photo-intake/"+id+"/retry").header("Authorization","Bearer "+auth))
+     .andExpect(status().isOk()).andExpect(jsonPath("$.data.id").value(id)).andExpect(jsonPath("$.data.state").value("QUEUED"));
+   mvc.perform(get("/api/product-photo-intake/"+id+"/photo").header("Authorization","Bearer "+auth))
+     .andExpect(status().isOk()).andExpect(content().bytes(bytes));
+   assertThat(jdbc.queryForObject("select attempts from bb_costco_onboarding_job where id=?",Integer.class,id)).isZero();
+  } finally {pool.shutdownNow();worker.start();}
  }
- @Test @EnabledIfEnvironmentVariable(named="BOBBUY_PHOTO_BROWSER",matches="true")
- void browserAiFailureCopy()throws Exception{
-  var process=new ProcessBuilder("node","../frontend/scripts/photo-intake-browser.mjs").inheritIO();process.environment().put("PHOTO_BROWSER_EXTRA","ai");process.environment().put("PHOTO_TEST_TOKEN",auth);process.environment().put("PHOTO_TEST_JOB",job);assertThat(process.start().waitFor()).isZero();
+
+ @Test @EnabledIfEnvironmentVariable(named="BOBBUY_PHOTO_QUEUE_BROWSER",matches="true")
+ void browserQueueAgainstRealLocalApi() throws Exception {
+  worker.stop();
+  try{
+   String saved=makeJob(item);confirm(saved,input(),auth);
+   String running=enqueue(UUID.randomUUID().toString(),image(0xdd1234),200).path("id").asText();
+   String failed=enqueue(UUID.randomUUID().toString(),image(0xdd1235),200).path("id").asText();
+   setFixtureState(running,"AI_INTAKE",null);
+   setFixtureState(failed,"FAILED","onboarding.retry_exhausted");
+   var process=new ProcessBuilder("node","../frontend/scripts/photo-intake-browser.mjs").inheritIO();
+   process.environment().put("PHOTO_BROWSER_EXTRA","queue");process.environment().put("PHOTO_TEST_TOKEN",auth);
+   process.environment().put("PHOTO_TEST_JOB",job);process.environment().put("PHOTO_TEST_FAILED_JOB",failed);
+   var browser=process.start();
+   try {
+    assertThat(browser.waitFor(120,TimeUnit.SECONDS)).isTrue();
+    assertThat(browser.exitValue()).isZero();
+   } finally {
+    if(browser.isAlive())browser.destroyForcibly();
+   }
+  }finally{worker.start();}
  }
- @Test @EnabledIfEnvironmentVariable(named="BOBBUY_PHOTO_BROWSER",matches="true")
- void browserActualFourLocales()throws Exception{
-  var process=new ProcessBuilder("node","../frontend/scripts/photo-intake-browser.mjs").inheritIO();process.environment().put("PHOTO_BROWSER_EXTRA","locales");process.environment().put("PHOTO_TEST_TOKEN",auth);process.environment().put("PHOTO_TEST_JOB",job);assertThat(process.start().waitFor()).isZero();
+
+ private void setFixtureState(String id,String state,String reason) {
+  jdbc.update("update bb_costco_onboarding_job set state=?, payload=payload || jsonb_build_object('state',?::text,'failureCode',?::text) where id=?",state,state,reason,id);
  }
+
  @Test void atomicallyPersistsAndReopensWithoutSellingMutationAndReusesRetry()throws Exception{
   var x=input();var first=confirm(job,x,auth);assertThat(first.path("priceChanged").asBoolean()).isTrue();assertThat(confirm(job,x,auth)).isEqualTo(first);assertThat(review(job).path("saved")).isEqualTo(first);
   var current=products.findById(product.getId()).orElseThrow();assertThat(current.getBasePrice()).isEqualTo(1234);assertThat(current.getSale()).isNull();assertThat(current.getRecordVersion()).isEqualTo(product.getRecordVersion());

@@ -12,6 +12,107 @@ const page=await context.newPage();page.setDefaultTimeout(15000);page.on('consol
 async function screenshot(name){await page.locator('.product-photo-intake .ant-modal-wrap').evaluate(e=>{e.scrollTop=0;});await page.locator('.product-photo-intake .ant-modal-body').evaluate(e=>{e.scrollTop=0;});await page.screenshot({path:new URL(name+'-full.png',out).pathname,fullPage:true});const modal=page.locator('.product-photo-intake .ant-modal-content');if(await modal.count()){await modal.screenshot({path:new URL(name+'-modal.png',out).pathname});const body=page.locator('.product-photo-intake .ant-modal-body');await body.evaluate(e=>{e.scrollTop=e.scrollHeight;});await modal.screenshot({path:new URL(name+'-actions.png',out).pathname});await body.evaluate(e=>{e.scrollTop=0;});}}
 async function geometry(name){evidence.geometry.push({name,...await page.evaluate(()=>{const modal=document.querySelector('.product-photo-intake .ant-modal-content');const controls=[...(modal?.querySelectorAll('button,input:not([type=file]),.ant-select-selector,.ant-checkbox-wrapper')||[])].map(e=>{const r=e.getBoundingClientRect(),s=getComputedStyle(e);return {tag:e.tagName,label:e.getAttribute('aria-label')||e.textContent?.trim()||e.closest('label')?.textContent?.trim(),x:r.x,y:r.y,width:r.width,height:r.height,minWidth:s.minWidth,minHeight:s.minHeight,radius:s.borderRadius,borderColor:s.borderColor,borderWidth:s.borderWidth,background:s.backgroundColor,shadow:s.boxShadow,visible:r.width>0&&r.height>0};});return {viewport:{width:innerWidth,height:innerHeight},documentWidth:document.documentElement.scrollWidth,modalWidth:modal?.getBoundingClientRect().width,controls};})});}
 async function openJob(id){await page.locator(`[data-photo-job="${id}"]`).getByRole('button',{name:'Open photo task'}).click();await page.locator('.product-photo-intake .photo-evidence').waitFor();}
+if(process.env.PHOTO_BROWSER_EXTRA==='queue'){
+ const folder=new URL('issue-189/',out);
+ await fs.mkdir(folder,{recursive:true});
+ const modal=page.locator('.product-photo-intake .ant-modal-content');
+ const library=modal.locator('input[type=file][multiple]');
+ const camera=modal.locator('input[capture=environment]');
+ const upload=modal.getByRole('button',{name:'Choose a photo or file',exact:true});
+ const failed=process.env.PHOTO_TEST_FAILED_JOB;
+ const submitted=[];
+ // The background archive shows seeded images. Keep these two unrelated fixtures local.
+ for(const url of [
+  'https://cdn.bobbuy.example/products/matcha-kit.png',
+  'https://images.costco-static.com/ImageDelivery/imageService*'
+ ]){
+  await page.route(url,route=>route.fulfill({contentType:'image/png',body:Buffer.from(
+   'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aTioAAAAASUVORK5CYII=','base64')}));
+ }
+ evidence.fixture+='; unrelated seeded archive images use local placeholders';
+ try{
+  await page.goto('http://127.0.0.1:5173/admin/products');
+  const entry=page.getByTestId('ai-quick-snap-button').filter({visible:true});
+  await entry.click();
+  await upload.waitFor();
+  await modal.locator(".ant-select:not(.ant-select-loading)").first().waitFor();
+  if(!await upload.isEnabled()){
+   await modal.getByLabel('Select supplier',{exact:true}).click();
+   await page.locator('.ant-select-item-option').first().click();
+  }
+  const fixture=async(color)=>Buffer.from(await page.evaluate(async color=>{
+   const canvas=document.createElement('canvas');canvas.width=40;canvas.height=40;
+   const ctx=canvas.getContext('2d');ctx.fillStyle=color;ctx.fillRect(0,0,40,40);
+   return Array.from(new Uint8Array(await (await new Promise(resolve=>canvas.toBlob(resolve))).arrayBuffer()));
+  },color));
+  const file=async(name,color)=>({name,mimeType:'image/png',buffer:await fixture(color)});
+  const made=(count)=>new Promise(resolve=>{
+   const receive=async response=>{
+    if(response.request().method()!=='POST'||!response.url().endsWith('/api/ai/costco-onboarding/photo'))return;
+    assert.equal(response.status(),200);
+    const row=(await response.json()).data;
+    assert.equal(row.state,'QUEUED');
+    submitted.push(row.id);
+    if(submitted.length===count){page.off('response',receive);resolve();}
+   };
+   page.on('response',receive);
+  });
+  const done=Promise.race([made(3),page.waitForTimeout(24000).then(()=>{throw new Error("Timed out waiting for three queue responses");})]);
+  await library.setInputFiles([await file('first.png','#d85b15'),await file('second.png','#196765')]);
+  assert(await upload.isEnabled());
+  await camera.setInputFiles(await file('rear-camera.png','#164bc4'));
+  await done;
+  for(const state of ['Queued','Recognizing','Awaiting confirmation','Saved','Failed · retry available']){
+   await modal.getByText(state,{exact:true}).first().waitFor();
+  }
+  for(const [width,height] of [[390,844],[767,844],[1280,800]]){
+   await page.setViewportSize({width,height});
+   await modal.locator('.photo-queue ul').evaluate(list=>{list.scrollTop=0;});
+   await modal.locator('.photo-queue-thumbnail img').first().waitFor();
+   await geometry('queue-'+width);
+   const g=evidence.geometry.at(-1);
+   assert(g.documentWidth<=width);
+   assert(g.controls.filter(row=>row.visible&&row.tag==='BUTTON').every(row=>row.height>=44));
+   assert(await modal.locator('.photo-queue ul').evaluate(list=>list.scrollWidth<=list.clientWidth));
+   assert(await upload.isEnabled());
+   if(width!==767){
+    await modal.screenshot({path:new URL(width+'-queue.png',folder).pathname});
+    await modal.locator(`[data-photo-job="${job}"]`).scrollIntoViewIfNeeded();
+    await modal.screenshot({path:new URL(width+'-queue-states.png',folder).pathname});
+   }
+  }
+  await page.reload();
+  await page.getByTestId('ai-quick-snap-button').filter({visible:true}).click();
+  for(const id of submitted) await modal.locator(`[data-photo-job="${id}"]`).waitFor();
+  const retryResponse=page.waitForResponse(r=>r.url().endsWith('/'+failed+'/retry'));
+  const failedRow=modal.locator(`[data-photo-job="${failed}"]`);
+  await failedRow.getByRole('button',{name:'Retry recognition with this photo'}).click();
+  assert.equal((await retryResponse).status(),200);
+  await failedRow.getByText('Queued',{exact:true}).waitFor();
+  await modal.locator(`[data-photo-job="${job}"]`).getByRole('button',{name:'Open photo task'}).click();
+  await modal.getByText(/Confirm and save observation/).waitFor();
+  assert(await upload.isEnabled());
+  for(const locale of ['zh-CN','zh-TW','ja-JP']){
+   await page.evaluate(l=>localStorage.setItem('bobbuy_locale',l),locale);
+   await page.reload();
+   await page.setViewportSize({width:390,height:844});
+   await page.getByTestId('ai-quick-snap-button').filter({visible:true}).click();
+   await modal.locator('.photo-queue li').first().waitFor();
+   await geometry('queue-'+locale);
+   assert(await modal.locator('.photo-queue ul').evaluate(list=>list.scrollWidth<=list.clientWidth));
+   assert.equal(await page.locator('html').getAttribute('lang'),locale);
+   assert(evidence.geometry.at(-1).documentWidth<=390);
+  }
+  assert.equal(evidence.console.filter(e=>e.type==='pageerror'||e.type==='error').length,0);
+  assert.equal(evidence.network.filter(e=>e.path.includes('/product-photo-intake')&&e.status>=400).length,0);
+  assert.equal(evidence.network.filter(e=>e.method==='POST'&&e.path==='/api/ai/costco-onboarding/photo').length,3);
+  evidence.results.push('Real Spring API and isolated PostgreSQL: multi-select and continuous capture input, three independent queued responses, reload, all five states, private thumbnails, retry without another multipart request, independent confirmation entry, four locales, 390/767/1280 layouts.');
+ }finally{
+  await fs.writeFile(new URL('browser.json',folder),JSON.stringify(evidence,null,2));
+  await browser.close();
+ }
+ process.exit(0);
+}
 if(process.env.PHOTO_BROWSER_EXTRA==='locales'){
  try{
   await page.goto('http://127.0.0.1:5173/admin/products');
