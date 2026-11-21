@@ -182,3 +182,38 @@ npm run check:i18n
 
 - 在拍照入口下方显示照片队列及排队中、识别中、待确认的分别计数。点队列展开照片任务，待确认项提供「查看并确认」。刷新继续读取商家已有任务。货号任务留在原录入区。
 - 照片队列按商家读取独立的轻量记录。已有现场观察用于显示真实已入库状态，官网资料缺失但照片可审查的任务仍进入确认。旧照片沿用已存证据和现有确认入口。
+
+
+## 2026-11-21 照片恢复与保存
+
+仅改商品档案现场照片。验证范围为固定桥配置、历史任务原地重试及并发、连续入队与刷新、照片分享和下载、四语和移动/桌面布局。使用合成照片。独立 UI 试点另行验收。
+
+```text
+功能与美观同时验收，须符合 docs/ui-ux-guidelines.md：
+- 功能按本 issue 需求逐条通过，不改变未授权行为。
+- 视觉与所在页面现有 UI 一致：复用已有 token 与组件，禁止原生未样式化控件，新控件与相邻控件齐高、同圆角档、间距统一。
+- 具备默认 / hover / focus-visible / 选中或激活态；触控目标 ≥ 44px；键盘可操作；有可见标签或 aria-label；对比度足够。
+- 四语文案（含较长的 en-US / ja-JP）在窄屏不溢出、不重叠。
+- PR 附 390px 与 1280px 的改动区域截图（含关键状态）。Playwright 可用则用现有脚本或一次性检查生成。
+- 主移动断点 767px 及 390px 下布局正常换行，无横向溢出。
+- 只运行与本次改动相关的最小测试；PR checks 通过。
+```
+
+### 生产接线和授权后的核对
+
+1. 由有权限的运维在隔离运维机更新现有 [SOPS + age 生产 dotenv 覆盖](../secrets-management.md) 的 `PROD_ENV_SOPS_CIPHERTEXT`，保留已有键。启用时沿用 `PROD_ENCRYPTED_ENV_ENABLED` 的既有流程。
+2. 将 `BOBBUY_AI_LLM_CODEX_BRIDGE_URL` 设为固定的 `https://ccnode.briconbric.com:49530/v1`。保留默认 `BOBBUY_AI_LLM_CODEX_BRIDGE_MODEL=gpt-6.1-terra`，前提是桥的模型列表包含该精确 ID，并通过图片能力验证。配置 `BOBBUY_AI_LLM_CODEX_BRIDGE_API_KEY` 到受保护的 dotenv；也可沿用应用加密凭据的 `BOBBUY_AI_LLM_CODEX_BRIDGE_SECRET_{SALT,NONCE,CIPHERTEXT,TAG,ITERATIONS}` 和 `BOBBUY_AI_SECRET_MASTER_PASSWORD`。Compose 已将桥配置传给 Core 与 AI。现场照片 worker 在 Core，由 `BOBBUY_AI_COSTCO_WORKER_ENABLED=true` 启用。该路径直接走固定桥，无需开启通用 `BOBBUY_AI_BRIDGE_ROUTING_ENABLED`。
+3. 按正常发布机制生效后，以商家会话读取 `/api/ai/costco-onboarding/status`。`workerEnabled=true` 且 `photoConfigurationIssue` 为空只表示本地配置齐备。由运维在受保护环境确认 TLS、经认证的 `/v1/models`、模型 ID 和使用合成图片的视觉推理；仅记录状态，避免输出响应正文、密钥或照片。
+4. 用已有商家队列只读查到两条历史记录并比对任务 ID 和照片可打开。获授权后，在各自记录点「用原图重新识别」。刷新读取同一个 ID，核对状态从排队／处理中到待确认或显示可处理的失败原因。运维核对期间停在审核前，商品建档、价格和在库信息由商家明确确认后写入。
+
+### 手机验收
+
+- 在 iPhone 的 Safari、Chrome、Edge 和 Android 浏览器分别用测试商家打开商品档案。点拍照录入，用相机拍测试货号与价签；另试相册选图。确认拍完出现照片保存动作。
+- 文件分享可用时，打开分享面板，若系统提供「存储图像」，选择后到照片 App 验证。再试取消并核对无成功提示，且仍能继续提交识别。无分享时点「下载照片」并在浏览器下载或文件 App 核对。
+- 连续提交两张不同测试图，刷新队列，核对顶部三个计数与任务状态；打开已入队照片并再次分享或下载。测试 HEIC 时分别核对刚选文件及队列中的服务器存储版本。
+- 用合成的历史任务测试首次失败和恢复后重试，双击后刷新，核对仍是原任务和原证据。业务写入须测试商家另行明确确认。
+- [HTML Media Capture](https://www.w3.org/TR/html-media-capture/) 定义采集入口。照片 App 的实际保存需要实机系统操作。[Web Share](https://www.w3.org/TR/web-share/) 定义文件分享能力和用户手势要求。浏览器自动化与真机分别记录。
+
+### #194 配额协调
+
+#192 的照片任务条数无上限，货号待处理及每日配额独立。旧基线的混合计数会让照片重试占掉货号容量。本次将两项货号计数限定为无照片的任务。照片重试按商家、照片类型、当前版本和终止状态更新同一行，并保留原证据。V49 与 V50 仍由各自负责人按版本顺序交付。

@@ -4,9 +4,17 @@ import {api,categoryTreeApi,masterDataApi,photoIntakeApi,type CategoryTreeNode,t
 import {prepareProductPhotoUpload} from '../productPhotoUpload';
 import {useI18n} from '../i18n';
 import CategoryTreePicker from './CategoryTreePicker';
+import ProductPhotoSave from './ProductPhotoSave';
 import './productPhotoIntake.css';
 
 type Props={open:boolean;job?:CostcoOnboardingJobView;onClose:()=>void;onQueued:(job:CostcoOnboardingJobView)=>void;onSaved:(id:string)=>void;onConfirmed?:()=>void};
+const photoFailureMessage=(code:string)=>({
+ 'ai.pinned_endpoint':'photo.ai_endpoint',
+ 'ai.pinned_credentials_missing':'photo.ai_credentials',
+ 'ai.pinned_provider_or_model':'photo.ai_model',
+ 'ai.pinned_model_unavailable':'photo.ai_model',
+ 'ai.pinned_vision_unattested':'photo.ai_model',
+}[code]??(code.startsWith('ai.')?'photo.ai_unavailable':code));
 const terminal=(j:CostcoOnboardingJobView)=>['NEEDS_INPUT','FAILED','COMPLETED','CANCELLED'].includes(j.state);
 const storageOptions=['AMBIENT','FRESH','CHILLED','FROZEN'] as const;
 export default function ProductPhotoIntakeModal({open,job:initial,onClose,onQueued,onSaved,onConfirmed}:Props){
@@ -14,6 +22,8 @@ export default function ProductPhotoIntakeModal({open,job:initial,onClose,onQueu
  const[suppliers,setSuppliers]=useState<MobileSupplier[]>([]),[supplier,setSupplier]=useState(''),[supplierError,setSupplierError]=useState(false),[suppliersLoaded,setSuppliersLoaded]=useState(false);
  const[worker,setWorker]=useState(false),[statusLoaded,setStatusLoaded]=useState(false),[tree,setTree]=useState<CategoryTreeNode[]>([]),[currencies,setCurrencies]=useState<{code:string}[]>([]);
  const[file,setFile]=useState<File>(),[preview,setPreview]=useState(''),[job,setJob]=useState(initial),[review,setReview]=useState<PhotoReview>();
+ const[original,setOriginal]=useState<File>(),[stored,setStored]=useState<File>();
+ const[configurationIssue,setConfigurationIssue]=useState<string|null>(null);
  const[pollAttempt,setPollAttempt]=useState(0);
  const[busy,setBusy]=useState(false),[error,setError]=useState(''),[item,setItem]=useState(''),[selected,setSelected]=useState(''),[requestId,setRequestId]=useState(()=>crypto.randomUUID());
  const[names,setNames]=useState<Record<string,string>>({}),[spec,setSpec]=useState(''),[brand,setBrand]=useState(''),[model,setModel]=useState(''),[packaging,setPackaging]=useState(''),[description,setDescription]=useState(''),[category,setCategory]=useState<string|null>(null);
@@ -33,10 +43,14 @@ export default function ProductPhotoIntakeModal({open,job:initial,onClose,onQueu
   const p=r.photoFacts;setAmount(p?.priceKind==='WAREHOUSE'&&p.amount!=null?String(p.amount):'');setCurrency(p?.currency||'');setUnit(p?.unit||'');setConditions(p?.conditions||'');setInStock(false);
  };
  const loadSuppliers=async()=>{const g=generation.current;setSupplierError(false);try{const rows=await api.suppliers();if(g!==generation.current)return;setSuppliers(rows);setSuppliersLoaded(true);if(rows.length===1)setSupplier(rows[0].id);}catch{if(g===generation.current){setSupplierError(true);setSuppliersLoaded(true);}}};
- const loadStatus=async()=>{const g=generation.current;try{const s=await api.costcoOnboarding.status();if(g===generation.current){setWorker(s.workerEnabled);setStatusLoaded(true);}}catch{if(g===generation.current)setError(t('onboarding.read_failed'));}};
+ const loadStatus=async()=>{const g=generation.current;try{const s=await api.costcoOnboarding.status();if(g===generation.current){setWorker(s.workerEnabled);setConfigurationIssue(s.photoConfigurationIssue??null);setStatusLoaded(true);}}catch{if(g===generation.current)setError(t('onboarding.read_failed'));}};
  useEffect(()=>{if(!open)return;const g=++generation.current;void loadSuppliers();void loadStatus();
   void categoryTreeApi.list().then(r=>{if(g===generation.current)setTree(r);}).catch(()=>{if(g===generation.current)setError(t('photo.reference_failed'));});void masterDataApi.currencies().then(r=>{if(g===generation.current)setCurrencies(r);}).catch(()=>{if(g===generation.current)setError(t('photo.reference_failed'));});
-  if(initial){setJob(initial);setSupplier(initial.supplierId||'');void photoIntakeApi.photo(initial.id).then(blob=>{if(g===generation.current)setPreview(URL.createObjectURL(blob));}).catch(()=>{if(g===generation.current)setError(t('photo.evidence_failed'));});}
+  if(initial){setJob(initial);setSupplier(initial.supplierId||'');void photoIntakeApi.photo(initial.id).then(blob=>{if(g===generation.current){
+   setPreview(URL.createObjectURL(blob));
+   const extension=blob.type==='image/jpeg'?'jpg':blob.type.split('/')[1]||'img';
+   setStored(new File([blob],'product-photo.'+extension,{type:blob.type}));
+  }}).catch(()=>{if(g===generation.current)setError(t('photo.evidence_failed'));});}
   return()=>{generation.current++;};
  },[open]);
  useEffect(()=>{let active=true;setOfficialPreview('');if(review?.officialImageAvailable&&review.status==='NEW'){void photoIntakeApi.image(review.jobId).then(blob=>{if(active)setOfficialPreview(URL.createObjectURL(blob));}).catch(()=>{if(active)setError(t('photo.official_unavailable'));});}return()=>{active=false;};},[review?.jobId,review?.officialImageAvailable]);
@@ -47,8 +61,20 @@ export default function ProductPhotoIntakeModal({open,job:initial,onClose,onQueu
   void read();return()=>{disposed=true;clearTimeout(timer);};
  },[open,job?.id,pollAttempt]);
  const reset=()=>{generation.current++;setBusy(false);setJob(undefined);setReview(undefined);setSaved(null);setError('');setIdentity(false);setPriceConfirmed(false);setInStock(false);setRequestId(crypto.randomUUID());frozen.current=undefined;};
- const pick=async(f?:File)=>{if(!f)return;const g=generation.current,pick=++pickGeneration.current;try{const prepared=await prepareProductPhotoUpload(f);if(g!==generation.current||pick!==pickGeneration.current)return;reset();archiveDraft.current={item:null,edited:new Set()};setDescription('');setCategory(null);setStorageCondition(null);setFile(prepared);setPreview(URL.createObjectURL(prepared));}catch(e){if(g===generation.current&&pick===pickGeneration.current)setError(t((e as Error).message));}};
+ const pick=async(f?:File)=>{if(!f)return;const g=generation.current,pick=++pickGeneration.current;try{const prepared=await prepareProductPhotoUpload(f);if(g!==generation.current||pick!==pickGeneration.current)return;reset();archiveDraft.current={item:null,edited:new Set()};setDescription('');setCategory(null);setStorageCondition(null);setFile(prepared);setOriginal(f);setStored(undefined);setPreview(URL.createObjectURL(prepared));}catch(e){if(g===generation.current&&pick===pickGeneration.current)setError(t((e as Error).message));}};
  const start=async()=>{if(!file)return;const g=generation.current;setBusy(true);setError('');try{const next=await api.costcoOnboarding.photo({requestId,supplierId:supplier,market:'JP'},file);if(g!==generation.current)return;setJob(next);onQueued(next);}catch(e){if(g===generation.current)setError(t((e as Error).message));}finally{if(g===generation.current)setBusy(false);}};
+ const retry=async()=>{
+  if(!job)return;
+  const g=generation.current;setBusy(true);setError('');
+  try{
+   const next=await photoIntakeApi.retry(job.id,job.revision);
+   if(g!==generation.current)return;
+   setJob(next);onQueued(next);
+   if(!terminal(next)){setReview(undefined);setIdentity(false);setPriceConfirmed(false);frozen.current=undefined;}
+   setPollAttempt(n=>n+1);
+  }catch(e){if(g===generation.current)setError(t((e as Error).message));}
+  finally{if(g===generation.current)setBusy(false);}
+ };
  const reload=async()=>{if(!job)return;if(!terminal(job)){setError('');setPollAttempt(n=>n+1);return;}const g=generation.current;setBusy(true);try{const r=await photoIntakeApi.review(job.id,item);if(g===generation.current){applyReview(r);setError('');}}catch(e){if(g===generation.current)setError(t((e as Error).message));}finally{if(g===generation.current)setBusy(false);}};
  const edit=()=>{frozen.current=undefined;};
  const chosen=review?.matches.find(m=>m.id===selected),isNew=review?.status==='NEW';
@@ -67,9 +93,12 @@ export default function ProductPhotoIntakeModal({open,job:initial,onClose,onQueu
   <Space wrap><Button disabled={busy} onClick={()=>camera.current?.click()}>{t('photo.camera')}</Button><Button disabled={busy} onClick={()=>upload.current?.click()}>{t('photo.upload')}</Button></Space>
   <input ref={camera} type="file" accept="image/*" capture="environment" hidden onChange={e=>{void pick(e.target.files?.[0]);e.target.value='';}}/><input ref={upload} type="file" accept="image/*" hidden onChange={e=>{void pick(e.target.files?.[0]);e.target.value='';}}/>
   {preview&&<img className="photo-evidence" src={preview} alt={t('photo.evidence')}/>}
+  {(original||stored)&&<ProductPhotoSave key={preview} file={(original||stored)!} stored={!original}/>}
+  {!job&&configurationIssue&&<Alert type="warning" message={t(photoFailureMessage(configurationIssue))}/>}
   {!job&&<><Button type="primary" loading={busy} disabled={!file||!supplier||!worker} onClick={()=>void start()}>{t('photo.recognize')}</Button><p role="status">{!file?t('photo.choose_file'):!supplier?t('onboarding.supplier'):statusLoaded&&!worker?t('onboarding.worker_disabled'):!statusLoaded?t('onboarding.accepting'):''}</p></>}
-  {job&&terminal(job)&&!saved&&<Button disabled={busy} onClick={async()=>{if(file){reset();return;}const g=generation.current;try{const blob=await photoIntakeApi.photo(job.id);if(g!==generation.current)return;reset();setFile(new File([blob],'photo.png',{type:blob.type}));}catch{if(g===generation.current)setError(t('photo.evidence_failed'));}}}>{t('photo.retry_recognition')}</Button>}
-  {job&&<p role="status">{t(job.failureCode==='photo.confirm_required'?'photo.confirm_required':'onboarding.state.'+job.state)} {job.failureCode&&job.failureCode!=='photo.confirm_required'?t(job.failureCode.startsWith('ai.')?'photo.ai_unavailable':job.failureCode):''}</p>}
+  {job&&terminal(job)&&job.state!=='COMPLETED'&&job.failureCode!=='photo.confirm_required'&&!saved&&
+   <Button loading={busy} onClick={()=>void retry()}>{t('photo.retry_recognition')}</Button>}
+  {job&&<p role="status">{t(job.failureCode==='photo.confirm_required'?'photo.confirm_required':'onboarding.state.'+job.state)} {job.failureCode&&job.failureCode!=='photo.confirm_required'?t(photoFailureMessage(job.failureCode)):''}</p>}
   {review&&!saved&&<section>
    <Typography.Title level={4}>{t('photo.review')}</Typography.Title><p>{t('photo.suggestions')}</p>
    {!!review.sources?.length&&<details><summary>{t('photo.sources')}</summary>{review.sources.map(source=><p key={source.sha256}><a href={source.canonicalUrl} target="_blank" rel="noopener noreferrer">{source.canonicalUrl}</a></p>)}</details>}
