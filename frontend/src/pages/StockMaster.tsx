@@ -765,9 +765,13 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
     <div className={embedded?'product-records-workspace':undefined} style={{ padding: isMobile ? `0 0 ${MOBILE_BOTTOM_PADDING} 0` : `0 0 ${DESKTOP_BOTTOM_PADDING} 0` }}>
       {!embedded&&<Breadcrumb style={{ marginBottom: '1rem' }} items={[{ title: t('nav.dashboard') }, { title: t('products.title') }]} />}
       <Drawer className="marker-drawer" title={t('marker.assigned')} width="min(100vw,620px)" open={!!markerId} onClose={closeMarkers} maskClosable={false} destroyOnClose>{markerId&&<ProductMarkerEditor productId={markerId} onDirtyChange={setMarkerDirty} onBusyChange={setMarkerBusy}/>}</Drawer>
-      <ProductCatalogPanel id={catalogId} onChoose={setCatalogId} entries={dataSource.filter(row=>!row.isNew)} onSaved={(values,canonical=true)=>{values.forEach(v=>{void api.product(v.productId).then(result=>setDataSource(rows=>rows.map(row=>row.key===v.productId?{...row,categoryPath:result.categoryPath}:row))).catch(error=>message.error(t(error.message)));});setDataSource(prior=>prior.map(row=>{const value=values.find(v=>v.productId===row.key);return value?{...row,catalogDriven:canonical,name:getLocalizedFallback(value.name,row.name),nameL10n:value.name,specificationL10n:value.specification,description:getLocalizedFallback(value.description,''),descriptionL10n:value.description,brand:value.brand??undefined,sku:value.itemNumber??undefined,category:value.categoryIds[0]??'',mediaGallery:value.gallery.map(p=>({id:p.sha256||p.url,url:p.url,type:p.type==='VIDEO'?'video' as const:'image' as const,title:p.title,visible:p.visible}))}:row;}));}}/>
 
-      <div className={`stock-toolbar ${isMobile ? 'stock-toolbar-mobile' : ''} ${toolbarCompact ? 'stock-toolbar-compact' : ''}`}>
+
+      {embedded?<div className="record-intake-actions">
+        <Button data-testid="ai-quick-snap-button" type="primary" icon={<CameraOutlined />} onClick={() => setIsQuickAddVisible(true)}>{t('photo.intake_action')}</Button>
+        <Input aria-label={t('stock.master.search_placeholder')} placeholder={t('stock.master.search_placeholder')} prefix={<SearchOutlined />} value={searchText} onChange={e=>setSearchText(e.target.value)}/>
+        <Button icon={<PlusOutlined />} onClick={handleAddRow} data-testid="stock-master-add-row">{t('stock.master.add_row')}</Button>
+      </div>:<div className={`stock-toolbar ${isMobile ? 'stock-toolbar-mobile' : ''} ${toolbarCompact ? 'stock-toolbar-compact' : ''}`}>
         <div style={{ minWidth: 0 }}>
           <Title level={3} style={{ margin: 0 }} className="stock-page-title" data-testid="stock-master-title">
             {t(embedded?'products.collection':'stock.master.title')}{embedded&&<span className="record-count">{filteredData.length}</span>}
@@ -815,9 +819,10 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
               </Space>
           </Space>
         )}
-      </div>
+      </div>}
 
       <div ref={setPhotoQueueTarget}/>
+      <ProductCatalogPanel id={catalogId} onChoose={setCatalogId} entries={dataSource.filter(row=>!row.isNew)} onSaved={(values,canonical=true)=>{values.forEach(v=>{void api.product(v.productId).then(result=>setDataSource(rows=>rows.map(row=>row.key===v.productId?{...row,categoryPath:result.categoryPath}:row))).catch(error=>message.error(t(error.message)));});setDataSource(prior=>prior.map(row=>{const value=values.find(v=>v.productId===row.key);return value?{...row,catalogDriven:canonical,name:getLocalizedFallback(value.name,row.name),nameL10n:value.name,specificationL10n:value.specification,description:getLocalizedFallback(value.description,''),descriptionL10n:value.description,brand:value.brand??undefined,sku:value.itemNumber??undefined,category:value.categoryIds[0]??'',mediaGallery:value.gallery.map(p=>({id:p.sha256||p.url,url:p.url,type:p.type==='VIDEO'?'video' as const:'image' as const,title:p.title,visible:p.visible}))}:row;}));}}/>
       {embedded&&<div className="record-view-bar"><Segmented aria-label={t('products.view')} value={recordView} onChange={value=>setRecordView(value as 'gallery'|'manage')} options={[{label:t('products.gallery'),value:'gallery'},{label:t('products.manage'),value:'manage'}]}/><span>{t('products.original_images')}</span></div>}
 
       <ProductPricingPanel id={pricingId} onClose={()=>setPricingId(undefined)} onSaved={sheet=>setDataSource(prior=>prior.map(row=>row.key===sheet.productId?{...row,actualSale:sheet.regular??undefined}:row))}/>

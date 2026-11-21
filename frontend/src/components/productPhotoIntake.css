@@ -32,3 +32,58 @@
 .photo-queue-summary-list li .ant-btn {justify-self:end}
 .stock-mobile-product-actions {display:flex;flex-wrap:wrap;gap:8px}
 .stock-mobile-product-actions > .ant-btn {flex:1 1 auto;width:auto;max-width:100%;height:auto;min-height:44px;white-space:normal}
+
+.photo-queue-summary {padding:12px 14px;background:#fffdf9;border:1px solid #e8e2d8;border-radius:16px;color:#252522}
+.photo-queue-summary-bar {justify-content:space-between}
+.photo-queue-summary-counts {justify-content:flex-end}
+.photo-queue-summary-list li {grid-template-columns:48px minmax(0,1fr) minmax(0,auto);padding:9px 0;border-top:1px solid #ebe4da}
+.photo-queue-summary-list li[data-photo-state="confirm"] .ant-tag {color:#78342d;background:#f8e9e3;border-color:#efd6cf}
+.photo-queue-summary .ant-btn {height:auto;white-space:normal;min-width:0;text-align:center;border-radius:8px}
+.photo-queue-summary .ant-btn-primary {background:#a3473f;border-color:#a3473f}
+.photo-queue-summary .ant-btn-primary:hover {background:#85362f;border-color:#85362f}
+.photo-queue-summary .ant-btn:focus-visible,.photo-proof-toggle:focus-visible {outline:2px solid #795908;outline-offset:2px}
+.photo-queue-summary-meta {display:flex;gap:3px 5px;align-items:baseline;overflow-wrap:anywhere;min-width:0}
+.photo-queue-summary-meta time {display:block;width:100%;color:#5f5b52;font-size:12px}
+.photo-queue-thumbnail {width:48px;height:48px;border-radius:8px;background:#eee8df;overflow:hidden}
+.photo-queue-thumbnail img {width:100%;height:100%;object-fit:cover}
+.photo-workspace-dialog .ant-modal-content {background:#fffdf9}
+.photo-workspace-dialog .ant-modal-body {max-height:calc(100dvh - 238px);padding:8px 6px 8px 2px;overscroll-behavior:contain}
+.photo-workspace-dialog .ant-modal-footer {margin-top:0;border-top:1px solid #e8e2d8;padding-top:10px}
+.photo-confirm-footer {display:flex;gap:8px 16px;align-items:center;justify-content:space-between;text-align:start}
+.photo-confirm-footer>p {margin:0;color:#5f5b52;overflow-wrap:anywhere}
+.photo-confirm-footer>.ant-btn {max-width:100%}
+.photo-capture-area {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.photo-capture-area:has(.photo-capture-controls:only-child) {grid-template-columns:1fr}
+.photo-capture-controls,.photo-capture-preview {min-width:0}
+.photo-capture-controls>p,.photo-capture-preview p {margin:4px 0 8px;color:#5f5b52}
+.photo-workspace-dialog .photo-evidence {max-height:205px;margin-bottom:8px}
+.photo-workspace-dialog .photo-evidence-expanded {max-height:50dvh}
+.photo-workspace-dialog section.photo-review-overview {display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,28%);gap:12px;padding:14px;border:1px solid #e8e2d8;border-radius:12px;background:#f8f4ed}
+.photo-review-main h2 {font-size:21px;line-height:1.2;margin:4px 0}
+.photo-review-main p {margin:4px 0}
+.photo-review-kicker {font-size:12px;font-weight:650;color:#85362f}
+.photo-review-prices {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.photo-review-prices>div {display:flex;flex-direction:column;min-width:0}
+.photo-review-prices strong {font-size:18px}
+.photo-review-prices small,.photo-review-prices span {color:#5f5b52}
+.photo-proof-toggle {background:#fffdf9;border:1px solid #dedbd4;border-radius:8px;min-height:44px;color:#252522;font:inherit;cursor:pointer;overflow-wrap:anywhere}
+.photo-review-proof .photo-proof-toggle {display:flex;flex-direction:column;align-items:center;gap:4px;width:100%;padding:5px}
+.photo-proof-toggle:hover {border-color:#85362f;color:#85362f}
+.photo-proof-toggle img {height:96px;width:100%;object-fit:cover;border-radius:4px}
+@media(max-width:767px){
+ .photo-queue-summary {padding:8px 10px}
+ .photo-queue-summary-bar {justify-content:flex-start}
+ .photo-queue-summary-counts {justify-content:flex-start}
+ .photo-queue-summary-list li .ant-btn {max-width:106px;padding-inline:8px}
+ .photo-workspace-dialog .ant-modal {top:12px}
+ .photo-workspace-dialog .ant-modal-content {padding:16px}
+ .photo-workspace-dialog .ant-modal-body {max-height:calc(100dvh - 184px)}
+ .photo-capture-area {grid-template-columns:1fr;gap:10px}
+ .photo-workspace-dialog .photo-evidence {max-height:170px}
+ .photo-workspace-dialog .photo-evidence-expanded {max-height:50dvh}
+ .photo-workspace-dialog section.photo-review-overview {grid-template-columns:minmax(0,1fr) minmax(70px,26%);gap:8px;padding:10px}
+ .photo-review-main h2 {font-size:18px}
+ .photo-proof-toggle img {height:66px}
+ .photo-confirm-footer {flex-wrap:wrap}
+ .photo-confirm-footer .ant-btn {width:100%}
+}

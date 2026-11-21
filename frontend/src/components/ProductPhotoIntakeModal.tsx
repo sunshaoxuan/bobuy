@@ -24,6 +24,7 @@ export default function ProductPhotoIntakeModal({open,job:initial,onClose,onQueu
  const[file,setFile]=useState<File>(),[preview,setPreview]=useState(''),[job,setJob]=useState(initial),[review,setReview]=useState<PhotoReview>();
  const[original,setOriginal]=useState<File>(),[stored,setStored]=useState<File>();
  const[configurationIssue,setConfigurationIssue]=useState<string|null>(null);
+ const[proofOpen,setProofOpen]=useState(false);
  const[pollAttempt,setPollAttempt]=useState(0);
  const[busy,setBusy]=useState(false),[error,setError]=useState(''),[item,setItem]=useState(''),[selected,setSelected]=useState(''),[requestId,setRequestId]=useState(()=>crypto.randomUUID());
  const[names,setNames]=useState<Record<string,string>>({}),[spec,setSpec]=useState(''),[brand,setBrand]=useState(''),[model,setModel]=useState(''),[packaging,setPackaging]=useState(''),[description,setDescription]=useState(''),[category,setCategory]=useState<string|null>(null);
@@ -61,7 +62,7 @@ export default function ProductPhotoIntakeModal({open,job:initial,onClose,onQueu
   void read();return()=>{disposed=true;clearTimeout(timer);};
  },[open,job?.id,pollAttempt]);
  const reset=()=>{generation.current++;setBusy(false);setJob(undefined);setReview(undefined);setSaved(null);setError('');setIdentity(false);setPriceConfirmed(false);setInStock(false);setRequestId(crypto.randomUUID());frozen.current=undefined;};
- const pick=async(f?:File)=>{if(!f)return;const g=generation.current,pick=++pickGeneration.current;try{const prepared=await prepareProductPhotoUpload(f);if(g!==generation.current||pick!==pickGeneration.current)return;reset();archiveDraft.current={item:null,edited:new Set()};setDescription('');setCategory(null);setStorageCondition(null);setFile(prepared);setOriginal(f);setStored(undefined);setPreview(URL.createObjectURL(prepared));}catch(e){if(g===generation.current&&pick===pickGeneration.current)setError(t((e as Error).message));}};
+ const pick=async(f?:File)=>{if(!f)return;const g=generation.current,pick=++pickGeneration.current;try{const prepared=await prepareProductPhotoUpload(f);if(g!==generation.current||pick!==pickGeneration.current)return;reset();archiveDraft.current={item:null,edited:new Set()};setDescription('');setCategory(null);setStorageCondition(null);setFile(prepared);setOriginal(f);setStored(undefined);setProofOpen(false);setPreview(URL.createObjectURL(prepared));}catch(e){if(g===generation.current&&pick===pickGeneration.current)setError(t((e as Error).message));}};
  const start=async()=>{if(!file)return;const g=generation.current;setBusy(true);setError('');try{const next=await api.costcoOnboarding.photo({requestId,supplierId:supplier,market:'JP'},file);if(g!==generation.current)return;setJob(next);onQueued(next);}catch(e){if(g===generation.current)setError(t((e as Error).message));}finally{if(g===generation.current)setBusy(false);}};
  const retry=async()=>{
   if(!job)return;
@@ -84,31 +85,62 @@ export default function ProductPhotoIntakeModal({open,job:initial,onClose,onQueu
   const receipt=await photoIntakeApi.confirm(job.id,input);if(g!==generation.current)return;setSaved(receipt);onConfirmed?.();
  }catch(e){if(g===generation.current)setError(t((e as Error).message));}finally{if(g===generation.current)setBusy(false);}};
  const latest=review?.history.find(o=>o.productId===selected&&o.amount!=null&&o.currency===currency&&o.unit===unit);
- return <Modal open={open} title={t('photo.title')} onCancel={onClose} footer={null} width={760} rootClassName="product-photo-intake" destroyOnClose>
-  <p>{t('photo.help')}</p>
+ const matchingObservation=review?.history.find(o=>o.productId===selected&&o.amount!=null);
+ const identifiedName=chosen?.name[locale]||chosen?.name['ja-JP']||review?.candidate?.translatedNames?.[locale]||review?.candidate?.name;
+ const reviewSupplier=suppliers.find(row=>row.id===review?.supplierId);
+ const canConfirm=review&&!saved&&!['DELETED','IDENTITY_REQUIRED'].includes(review.status);
+ const photoSave=(original||stored)&&<ProductPhotoSave key={preview} file={(original||stored)!} stored={!original}/>;
+ const capture=(!review&&!saved);
+ return <Modal open={open} title={t(review?'photo.review':'photo.intake_action')} onCancel={onClose}
+  footer={canConfirm?<div className="photo-confirm-footer"><p role="status">{missing||t('photo.ready')}</p><Button type="primary" loading={busy} disabled={!!missing} onClick={()=>void save()}>{t(isNew?'photo.create':'photo.save')}</Button></div>:null}
+  width={880} rootClassName="product-photo-intake photo-workspace-dialog" destroyOnClose>
   {error&&<Alert type="error" message={error} action={<Button onClick={()=>job?void reload():void Promise.all([loadSuppliers(),loadStatus()])}>{t('onboarding.refresh')}</Button>}/>}
-  {supplierError?<Alert type="error" message={t('photo.suppliers_failed')} action={<Button onClick={()=>void loadSuppliers()}>{t('onboarding.refresh')}</Button>}/>:suppliersLoaded&&!suppliers.length?<Alert type="warning" message={t('photo.no_suppliers')}/>:null}
-  <label>{t('onboarding.supplier')}<Select aria-label={t('onboarding.supplier')} disabled={busy||!!job} value={supplier||undefined} loading={!suppliersLoaded} options={suppliers.map(s=>({value:s.id,label:s.name[locale]||s.name['ja-JP']}))} onChange={s=>{reset();setSupplier(s);}}/></label>
-  <p>{t('photo.market')}: {review?.market||initial?.market||'JP'}</p>
-  <Space wrap><Button disabled={busy} onClick={()=>camera.current?.click()}>{t('photo.camera')}</Button><Button disabled={busy} onClick={()=>upload.current?.click()}>{t('photo.upload')}</Button></Space>
+  {capture&&<div className="photo-capture-area">
+   <div className="photo-capture-controls">
+    <p>{t('photo.capture_hint')}</p>
+    {supplierError?<Alert type="error" message={t('photo.suppliers_failed')} action={<Button onClick={()=>void loadSuppliers()}>{t('onboarding.refresh')}</Button>}/>:suppliersLoaded&&!suppliers.length?<Alert type="warning" message={t('photo.no_suppliers')}/>:null}
+    <label>{t('onboarding.supplier')}<Select aria-label={t('onboarding.supplier')} disabled={busy||!!job} value={supplier||undefined} loading={!suppliersLoaded} options={suppliers.map(s=>({value:s.id,label:s.name[locale]||s.name['ja-JP']}))} onChange={s=>{reset();setSupplier(s);}}/></label>
+    <Space wrap><Button disabled={busy} onClick={()=>camera.current?.click()}>{t('photo.camera')}</Button><Button disabled={busy} onClick={()=>upload.current?.click()}>{t('photo.upload')}</Button></Space>
+   </div>
+   {preview&&<div className="photo-capture-preview"><img className="photo-evidence" src={preview} alt={t('photo.evidence')}/>{photoSave}</div>}
+  </div>}
   <input ref={camera} type="file" accept="image/*" capture="environment" hidden onChange={e=>{void pick(e.target.files?.[0]);e.target.value='';}}/><input ref={upload} type="file" accept="image/*" hidden onChange={e=>{void pick(e.target.files?.[0]);e.target.value='';}}/>
-  {preview&&<img className="photo-evidence" src={preview} alt={t('photo.evidence')}/>}
-  {(original||stored)&&<ProductPhotoSave key={preview} file={(original||stored)!} stored={!original}/>}
+  {review&&!saved&&<section className="photo-review-overview">
+   <div className="photo-review-main">
+    <p className="photo-review-kicker">{reviewSupplier?.name[locale]||reviewSupplier?.name['ja-JP']||t('photo.market')} · {review.market}</p>
+    {isNew&&<p>{t('photo.new')}</p>}
+    <h2>{identifiedName||t('photo.identity_required')}</h2>
+    {review.itemNumber&&<p>{t('onboarding.item')} {review.itemNumber}</p>}
+    <div className="photo-review-prices">
+     <div><small>{t('photo.current_price')}</small><strong>{amount?amount+' '+currency:t('photo.unknown')}</strong>{unit&&<span>{unit}</span>}</div>
+     {!isNew&&<div><small>{t('photo.previous')}</small><strong>{matchingObservation?matchingObservation.amount+' '+matchingObservation.currency:t('photo.unknown')}</strong>{matchingObservation&&<span>{matchingObservation.unit}</span>}</div>}
+    </div>
+    {canConfirm&&<Checkbox checked={inStock} onChange={e=>{setInStock(e.target.checked);edit();}}>{t('photo.in_stock')}</Checkbox>}
+    {isNew&&<p>{t(review.candidate?.unknownFields?.length?'photo.unknown_fields':'photo.suggestions')}</p>}
+   </div>
+   {preview&&<div className="photo-review-proof">
+    <button type="button" className="photo-proof-toggle" aria-expanded={proofOpen} onClick={()=>setProofOpen(value=>!value)}>
+     <img src={preview} alt=""/><span>{t(proofOpen?'photo.close_evidence':'photo.open_evidence')}</span>
+    </button>
+   </div>}
+  </section>}
+  {saved&&preview&&<Button className="photo-proof-toggle" aria-expanded={proofOpen} onClick={()=>setProofOpen(value=>!value)}>{t(proofOpen?'photo.close_evidence':'photo.open_evidence')}</Button>}
+  {proofOpen&&preview&&!capture&&<div className="photo-capture-preview"><img className="photo-evidence photo-evidence-expanded" src={preview} alt={t('photo.evidence')}/>{photoSave}</div>}
   {!job&&configurationIssue&&<Alert type="warning" message={t(photoFailureMessage(configurationIssue))}/>}
   {!job&&<><Button type="primary" loading={busy} disabled={!file||!supplier||!worker} onClick={()=>void start()}>{t('photo.recognize')}</Button><p role="status">{!file?t('photo.choose_file'):!supplier?t('onboarding.supplier'):statusLoaded&&!worker?t('onboarding.worker_disabled'):!statusLoaded?t('onboarding.accepting'):''}</p></>}
   {job&&terminal(job)&&job.state!=='COMPLETED'&&job.failureCode!=='photo.confirm_required'&&!saved&&
    <Button loading={busy} onClick={()=>void retry()}>{t('photo.retry_recognition')}</Button>}
-  {job&&<p role="status">{t(job.failureCode==='photo.confirm_required'?'photo.confirm_required':'onboarding.state.'+job.state)} {job.failureCode&&job.failureCode!=='photo.confirm_required'?t(photoFailureMessage(job.failureCode)):''}</p>}
+  {job&&!saved&&(!review||(job.failureCode&&job.failureCode!=='photo.confirm_required'))&&<p role="status">{t(job.failureCode==='photo.confirm_required'?'photo.confirm_required':'onboarding.state.'+job.state)} {job.failureCode&&job.failureCode!=='photo.confirm_required'?t(photoFailureMessage(job.failureCode)):''}</p>}
   {review&&!saved&&<section>
-   <Typography.Title level={4}>{t('photo.review')}</Typography.Title><p>{t('photo.suggestions')}</p>
+   <Typography.Title level={4}>{t('photo.review_details')}</Typography.Title>
    {!!review.sources?.length&&<details><summary>{t('photo.sources')}</summary>{review.sources.map(source=><p key={source.sha256}><a href={source.canonicalUrl} target="_blank" rel="noopener noreferrer">{source.canonicalUrl}</a></p>)}</details>}
-   {!!review.candidate?.unknownFields?.length&&<p>{t('photo.unknown_fields')}</p>}
+   {!isNew&&!!review.candidate?.unknownFields?.length&&<p>{t('photo.unknown_fields')}</p>}
    {isNew&&officialPreview&&<><img className="photo-evidence" src={officialPreview} alt={t('photo.official_image')}/><Checkbox checked={useOfficialImage} onChange={e=>{setUseOfficialImage(e.target.checked);edit();}}>{t('photo.use_official_image')}</Checkbox></>}
 
    <label>{t('onboarding.item')}<Input value={item} onChange={e=>{setItem(e.target.value);setIdentity(false);edit();}}/></label><Button onClick={()=>void reload()} disabled={busy}>{t('photo.find')}</Button>
    {review.status==='DELETED'||review.status==='IDENTITY_REQUIRED'?<Alert type="warning" message={t(review.status==='DELETED'?'photo.deleted':'photo.identity_required')}/>:<>
-    {!isNew&&<><label>{t('photo.choose_match')}<Select aria-label={t('photo.choose_match')} value={selected||undefined} options={review.matches.map(m=>({value:m.id,label:(m.name[locale]||m.name['ja-JP'])+' · '+Object.values(m.specification||{}).join(' / ')+' · '+(m.packaging||''),disabled:!m.eligible}))} onChange={id=>{setSelected(id);setIdentity(false);edit();}}/></label>{review.matches.some(m=>!m.eligible)&&<Alert type="warning" message={t('photo.legacy')}/>}</>}
-    {isNew&&<><Typography.Title level={5}>{t('photo.new')}</Typography.Title>{['ja-JP','zh-CN','zh-TW','en-US'].map(l=><label key={l}>{t('onboarding.name')} ({l})<Input value={names[l]||''} onChange={e=>{setNames({...names,[l]:e.target.value});edit();}}/></label>)}
+    {!isNew&&<><label>{t('photo.choose_match')}<Select aria-label={t('photo.choose_match')} value={selected||undefined} options={review.matches.map(m=>({value:m.id,label:[m.name[locale]||m.name['ja-JP'],Object.values(m.specification||{}).join(' / '),m.packaging].filter(Boolean).join(' · '),disabled:!m.eligible}))} onChange={id=>{setSelected(id);setIdentity(false);edit();}}/></label>{review.matches.some(m=>!m.eligible)&&<Alert type="warning" message={t('photo.legacy')}/>}</>}
+    {isNew&&<>{['ja-JP','zh-CN','zh-TW','en-US'].map(l=><label key={l}>{t('onboarding.name')} ({l})<Input value={names[l]||''} onChange={e=>{setNames({...names,[l]:e.target.value});edit();}}/></label>)}
      <label>{t('onboarding.brand')}<Input value={brand} onChange={e=>{setBrand(e.target.value);edit();}}/></label><label>{t('onboarding.model')}<Input value={model} onChange={e=>{setModel(e.target.value);edit();}}/></label><label>{t('onboarding.specification')}<Input value={spec} onChange={e=>{setSpec(e.target.value);edit();}}/></label><label>{t('onboarding.packaging')}<Input value={packaging} onChange={e=>{setPackaging(e.target.value);edit();}}/></label>
      <label>{t('photo.description')}<Input.TextArea value={description} onChange={e=>{archiveDraft.current.edited.add('description');setDescription(e.target.value);edit();}}/></label>
      <CategoryTreePicker nodes={tree} value={category} onChange={c=>{archiveDraft.current.edited.add('category');setCategory(c);edit();}}/>
@@ -119,11 +151,11 @@ export default function ProductPhotoIntakeModal({open,job:initial,onClose,onQueu
     {review.photoFacts&&<p>{t('photo.detected')}: {review.photoFacts.amount??t('photo.unknown')} {review.photoFacts.currency} / {review.photoFacts.unit} · {t('photo.kind.'+review.photoFacts.priceKind)} {review.photoFacts.conditions}</p>}
     <div className="photo-price-fields"><label>{t('photo.amount')}<Input inputMode="decimal" value={amount} onChange={e=>{setAmount(e.target.value);setPriceConfirmed(false);edit();}}/></label><label>{t('photo.currency')}<Select aria-label={t('photo.currency')} value={currency||undefined} options={currencies.map(c=>({value:c.code,label:c.code}))} onChange={c=>{setCurrency(c);setPriceConfirmed(false);edit();}}/></label><label>{t('photo.unit')}<Input value={unit} onChange={e=>{setUnit(e.target.value);setPriceConfirmed(false);edit();}}/></label></div>
     <label>{t('photo.conditions')}<Input value={conditions} onChange={e=>{setConditions(e.target.value);setPriceConfirmed(false);edit();}}/></label><Checkbox checked={priceConfirmed} onChange={e=>{setPriceConfirmed(e.target.checked);edit();}}>{t('photo.price_confirm')}</Checkbox>
-    <label>{t('photo.observed_at')} (UTC)<Input type="datetime-local" value={observedAt} onChange={e=>{setObservedAt(e.target.value);edit();}}/></label><Checkbox checked={inStock} onChange={e=>{setInStock(e.target.checked);edit();}}>{t('photo.in_stock')}</Checkbox>
-    <p role="status">{missing||t('photo.ready')}</p><Button type="primary" loading={busy} disabled={!!missing} onClick={()=>void save()}>{t(isNew?'photo.create':'photo.save')}</Button>
+    <label>{t('photo.observed_at')} (UTC)<Input type="datetime-local" value={observedAt} onChange={e=>{setObservedAt(e.target.value);edit();}}/></label>
    </>}
   </section>}
   {saved&&<Alert type="success" message={t('photo.saved')} description={<><p>{saved.amount==null?t('photo.price_not_updated'):t(saved.priceChanged?'photo.price_updated':'photo.price_unchanged')} {saved.amount} {saved.currency} {saved.unit}</p>{saved.inStock&&<p>{t('photo.available')} · {new Date(saved.observedAt).toLocaleString(locale)}</p>}<Button onClick={()=>{onClose();onSaved(saved.productId);}}>{t('onboarding.open_product')}</Button></>}/>}
-  <Button onClick={onClose}>{t('onboarding.close')}</Button>
+  {!capture&&<Space wrap><Button disabled={busy} onClick={()=>camera.current?.click()}>{t('photo.camera')}</Button><Button disabled={busy} onClick={()=>upload.current?.click()}>{t('photo.upload')}</Button></Space>}
+
  </Modal>;
 }
