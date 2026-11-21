@@ -72,6 +72,44 @@ class ProductPhotoIntakeIntegrationTest {
   mvc.perform(get("/api/product-photo-intake").header("Authorization","Bearer "+auth))
    .andExpect(status().isOk()).andExpect(jsonPath("$.data[?(@.id == '"+job+"')].state",org.hamcrest.Matchers.contains("COMPLETED")));
  }
+ @Test void supplementQueuesSameJobAndPreservesOriginalEvidenceAndAttempt() throws Exception {
+  setFixtureState(job,"NEEDS_INPUT","photo.tag_missing");
+  var oldHash=jdbc.queryForObject("select payload->>'privatePhotoSha256' from bb_costco_onboarding_job where id=?",String.class,job);
+  var second=makeJob(String.valueOf(Long.parseLong(item)+1));
+  var nextHash=jdbc.queryForObject("select payload->>'privatePhotoSha256' from bb_costco_onboarding_job where id=?",String.class,second);
+  byte[] photo=evidence.readVerified(1000L,nextHash);
+  jdbc.update("delete from bb_costco_onboarding_job where id=?",second);
+  var file=new MockMultipartFile("file","synthetic-price-tag.png","image/png",photo);
+  String path="/api/product-photo-intake/"+job+"/supplement";
+  mvc.perform(multipart(path).file(file).param("revision","7").header("Authorization","Bearer "+foreign))
+    .andExpect(status().isNotFound());
+  mvc.perform(multipart(path).file(file).param("revision","7").header("Authorization","Bearer "+auth))
+    .andExpect(status().isOk()).andExpect(jsonPath("$.data.id").value(job)).andExpect(jsonPath("$.data.revision").value(8));
+  assertThat(jdbc.queryForObject("select payload->>'privatePhotoSha256' from bb_costco_onboarding_job where id=?",String.class,job)).isEqualTo(nextHash);
+  assertThat(jdbc.queryForObject("select attempt_history->0->'payload'->>'privatePhotoSha256' from bb_costco_onboarding_job where id=?",String.class,job)).isEqualTo(oldHash);
+  assertThat(evidence.readVerified(1000L,oldHash)).isNotEmpty();
+  assertThat(jdbc.queryForObject("select count(*) from bb_product_photo_observation where job_id=?",Long.class,job)).isZero();
+ }
+ @Test void reopensPersistedTranscriptionOnlyForThePhotoOwner() throws Exception {
+  String raw="TEST FIXTURE\nJPY 999 per 80 × 2";
+  var transcription=json.createObjectNode();
+  transcription.putArray("tags").addObject().put("rawText",raw).put("itemNumber",item)
+   .put("unit","80 × 2").putArray("prices").addObject().put("kind","TOTAL")
+   .put("amount",999).put("rawText","JPY 999").put("currency","JPY");
+  transcription.putArray("productFeatures").add("Green test package");
+  transcription.putArray("uncertainties").add("Partially hidden label");
+  jdbc.update("""
+   update bb_costco_onboarding_job
+      set payload=jsonb_set(payload,'{decisions,0,candidate,photoFacts,transcription}',cast(? as jsonb))
+    where id=? and merchant_id=1000
+   """,transcription.toString(),job);
+  var result=review(job).path("photoFacts").path("transcription");
+  assertThat(result.path("tags").get(0).path("rawText").asText()).isEqualTo(raw);
+  assertThat(result.path("tags").get(0).path("prices").get(0).path("kind").asText()).isEqualTo("TOTAL");
+  assertThat(result.path("uncertainties").get(0).asText()).isEqualTo("Partially hidden label");
+  mvc.perform(get("/api/product-photo-intake/"+job).header("Authorization","Bearer "+foreign)).andExpect(status().isNotFound());
+  assertThat(jdbc.queryForObject("select count(*) from bb_product_photo_observation where job_id=?",Long.class,job)).isZero();
+ }
  @Test void concurrentLegacyRetriesReuseTheOwnedJobAndEvidenceAtNumberCapacity() throws Exception {
   jdbc.update("""
     insert into bb_costco_onboarding_job

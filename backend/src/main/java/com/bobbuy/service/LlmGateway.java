@@ -499,23 +499,7 @@ public class LlmGateway {
         long started = System.nanoTime();
         pinnedDeadline.set(started+Duration.ofSeconds(Math.min(120,codexBridgeTimeout.toSeconds())).toNanos());
         try {
-            PinnedModels capabilities = pinnedModels;
-            if (capabilities == null || !capabilities.endpoint.equals(requiredNode) || !capabilities.model.equals(configuration.model()) || capabilities.expiresAt.isBefore(Instant.now())) {
-                var discovery = objectMapper.readTree(exchangePinnedJson(URI.create(requiredNode + "/models"), key, null));
-                if (!discovery.path("data").isArray()) throw new PinnedFailure("ai.pinned_models_protocol");
-                com.fasterxml.jackson.databind.JsonNode selected = null;int matchingModels=0;
-                for (var model : discovery.path("data")) if (configuration.model().equals(model.path("id").asText())) { selected = model; matchingModels++; }
-                if (selected == null) throw new PinnedFailure("ai.pinned_model_unavailable");
-                if(matchingModels!=1)throw new PinnedFailure("ai.pinned_models_protocol");
-                var supports = selected.path("supports_vision");
-                var capability = selected.path("capabilities").path("vision");
-                boolean declared = supports.asBoolean(false) || capability.asBoolean(false);
-                if (selected.path("capabilities").isArray()) for (var value : selected.path("capabilities")) if ("vision".equals(value.asText())) declared = true;
-                boolean denied = supports.isBoolean() && !supports.booleanValue() || capability.isBoolean() && !capability.booleanValue();
-                Vision vision = denied ? Vision.DENIED : declared ? Vision.DECLARED : Vision.UNKNOWN;
-                capabilities = new PinnedModels(requiredNode, configuration.model(), vision, Instant.now().plusSeconds(120));
-                pinnedModels = capabilities;
-            }
+            PinnedModels capabilities = discoverPinnedModel(configuration, key);
             if (!images.isEmpty() && capabilities.vision == Vision.DENIED) throw new PinnedFailure("ai.pinned_vision_unattested");
             if (!images.isEmpty() && capabilities.vision == Vision.UNKNOWN) {
                 verifyPinnedVision(configuration, key, started);
@@ -525,6 +509,48 @@ public class LlmGateway {
         } catch (PinnedFailure error) { throw error; }
         catch (Exception error) { throw new PinnedFailure("ai.pinned_transport_or_protocol"); }
         finally { pinnedDeadline.remove(); }
+    }
+
+    /** Ops diagnostic: attest the exact model using generated pixels even if the directory declares vision. */
+    public PinnedConfiguration probePinnedVision(URI requiredNode) {
+        var configuration = pinnedConfiguration(requiredNode);
+        if (!configuration.ready()) return configuration;
+        long started = System.nanoTime();
+        pinnedDeadline.set(started+Duration.ofSeconds(Math.min(120,codexBridgeTimeout.toSeconds())).toNanos());
+        try {
+            String key = resolveCodexBridgeApiKey().orElseThrow(() -> new PinnedFailure("ai.pinned_credentials_missing"));
+            var capabilities = discoverPinnedModel(configuration,key);
+            if (capabilities.vision == Vision.DENIED) throw new PinnedFailure("ai.pinned_vision_unattested");
+            verifyPinnedVision(configuration,key,started);
+            pinnedModels = new PinnedModels(requiredNode,configuration.model(),Vision.VERIFIED,capabilities.expiresAt);
+            return new PinnedConfiguration(true,"VISION_VERIFIED",configuration.provider(),configuration.model(),requiredNode);
+        } catch (PinnedFailure failure) {
+            return new PinnedConfiguration(false,failure.getMessage(),configuration.provider(),configuration.model(),requiredNode);
+        } catch (Exception failure) {
+            return new PinnedConfiguration(false,"ai.pinned_transport_or_protocol",configuration.provider(),configuration.model(),requiredNode);
+        } finally { pinnedDeadline.remove(); }
+    }
+
+    private PinnedModels discoverPinnedModel(PinnedConfiguration configuration,String key) throws Exception {
+        var requiredNode=configuration.endpoint();
+        PinnedModels capabilities=pinnedModels;
+        if (capabilities == null || !capabilities.endpoint.equals(requiredNode) || !capabilities.model.equals(configuration.model()) || capabilities.expiresAt.isBefore(Instant.now())) {
+            var discovery = objectMapper.readTree(exchangePinnedJson(URI.create(requiredNode + "/models"), key, null));
+            if (!discovery.path("data").isArray()) throw new PinnedFailure("ai.pinned_models_protocol");
+            com.fasterxml.jackson.databind.JsonNode selected = null;int matchingModels=0;
+            for (var model : discovery.path("data")) if (configuration.model().equals(model.path("id").asText())) { selected = model; matchingModels++; }
+            if (selected == null) throw new PinnedFailure("ai.pinned_model_unavailable");
+            if(matchingModels!=1)throw new PinnedFailure("ai.pinned_models_protocol");
+            var supports = selected.path("supports_vision");
+            var capability = selected.path("capabilities").path("vision");
+            boolean declared = supports.asBoolean(false) || capability.asBoolean(false);
+            if (selected.path("capabilities").isArray()) for (var value : selected.path("capabilities")) if ("vision".equals(value.asText())) declared = true;
+            boolean denied = supports.isBoolean() && !supports.booleanValue() || capability.isBoolean() && !capability.booleanValue();
+            Vision vision = denied ? Vision.DENIED : declared ? Vision.DECLARED : Vision.UNKNOWN;
+            capabilities = new PinnedModels(requiredNode, configuration.model(), vision, Instant.now().plusSeconds(120));
+            pinnedModels = capabilities;
+        }
+        return capabilities;
     }
 
     /** A directory can omit capabilities. Verify pixels without sharing any merchant data. */

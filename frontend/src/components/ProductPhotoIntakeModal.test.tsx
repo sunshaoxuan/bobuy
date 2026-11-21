@@ -31,6 +31,21 @@ it('queues each selected file immediately and accepts a new capture while upload
  await act(()=>finish({...job,state:'QUEUED'}));
  expect(props.onQueued).toHaveBeenCalledWith(expect.objectContaining({state:'QUEUED'}));
 });
+it('shows private price-tag text and uncertainty as evidence without enabling a confirmation',async()=>{
+ const fixture=review();
+ mocks.review.mockResolvedValue({...fixture,photoFacts:{...fixture.photoFacts,amount:null,transcription:{
+  tags:[{rawText:'税込 ¥980\n割引 ¥200'}],productFeatures:['Blue label'],uncertainties:['Two tags visible']
+ }}});
+ render(<ProductPhotoIntakeModal {...props} job={job}/>);
+ const summary=await screen.findByText('photo.transcription');
+ fireEvent.click(summary);
+ const details=within(summary.parentElement!);
+ expect(details.getByText(/税込/).textContent).toBe('税込 ¥980\n割引 ¥200');
+ expect(details.getByText('Blue label')).toBeVisible();
+ expect(details.getByText('Two tags visible')).toBeVisible();
+ expect(screen.getByText('photo.save')).toBeDisabled();
+ expect(mocks.confirm).not.toHaveBeenCalled();
+});
 it('does not auto-confirm availability and retains input after save failure for exact retry',async()=>{
  render(<ProductPhotoIntakeModal {...props} job={job}/>);await screen.findByDisplayValue('999');expect(screen.getByText('photo.suggestions')).toBeVisible();expect(screen.getByLabelText('photo.in_stock')).not.toBeChecked();
  fireEvent.click(screen.getByLabelText('photo.identity_confirm'));fireEvent.click(screen.getByLabelText('photo.price_confirm'));fireEvent.click(screen.getByLabelText('photo.in_stock'));
@@ -128,7 +143,8 @@ it('shares the unconverted capture and keeps the explicit download path when sha
 
 it('downloads the stored evidence with a storage-version notice',async()=>{
  render(<ProductPhotoIntakeModal {...props} job={job}/>);
- fireEvent.click(await screen.findByText('photo.open_evidence'));
+ await screen.findByText('photo.review');
+ fireEvent.click(await screen.findByRole('button',{name:/photo.open_evidence/}));
  expect(await screen.findByText('photo.stored_version')).toBeInTheDocument();
  expect(await screen.findByText('photo.download_photo')).toHaveAttribute('download','product-photo.img');
 });
