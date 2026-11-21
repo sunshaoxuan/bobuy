@@ -160,3 +160,9 @@ npm run check:i18n
 - Android 36 Pixel 8 模拟设备通过隔离 HTTPS 正常登录并打开商品档案。「设备拍照」触发 Chrome 的拍照权限和 Android 原生相机，拍摄虚拟场景并确认后，BoBuy 同一弹窗显示返回的照片。实体验收与模拟设备证据分别记录。
 - 商品档案入口复用四语弹窗标题「拍照识别商品」。最新前端在 Chromium 390×844、1280×800 和本地真实接口通过。入口为 138×44 CSS px，两视口均能就地打开弹窗，供应商及 worker 状态响应 200，未观察到页面 JS 错误或横向溢出。StockMaster 页面定向单测通过。
 - [Android 原生相机](../reports/evidence/product-photo-intake-20261120/android-api36-native-camera.png)、[Android 返回后的预览](../reports/evidence/product-photo-intake-20261120/android-api36-returned-preview.png)、[手机入口](../reports/evidence/product-photo-intake-20261120/photo-entry-390.png)和[桌面弹窗](../reports/evidence/product-photo-intake-20261120/photo-dialog-1280.png)。
+
+### 生产配置
+
+- 照片上传和档案确认均由 Core 承接。Core 的照片 worker 使用固定 HTTPS AI 桥。标准 Compose 将已有桥地址、型号和密文参数映射到 Core 和 AI。队列开关 `BOBBUY_AI_COSTCO_WORKER_ENABLED` 仅映射到 Core，默认关闭。
+- 启用时，部署环境提供已验证的精确 HTTPS 地址、可读图的型号及现有凭证，并在 Core 启动后核对队列状态和受控照片回执。关闭队列用于应用回滚前隔离照片任务；生产凭证及其供应端配置无需变更。
+- 生产 Compose 使用合成参数实测默认关闭和显式启用两种展开。Core 与 AI 接收到相同既有桥参数，只有 Core 接到队列开关。此验证不读取生产密文。
