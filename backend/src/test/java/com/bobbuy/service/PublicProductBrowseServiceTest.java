@@ -97,12 +97,12 @@ class PublicProductBrowseServiceTest {
  private static class Catalog extends PublicProductCatalogService {
   List<Entry> rows=List.of();int reads;
   Catalog(){super(null,null,null,null,null,null);}
-  @Override public List<Entry> publicEntries(Long merchant,Set<String> ids){reads++;return rows;}
+  @Override public List<Entry> publicEntries(Long merchant,Set<String> ids){reads++;return ids==null?rows:rows.stream().filter(e->ids.contains(e.productId())).toList();}
  }
  private static class Markers extends ProductMarkerService {
   List<PublicAssignment> rows=List.of();int reads;
   Markers(){super(null,null,null,null,null);}
-  @Override public List<PublicAssignment> browseAssignments(Map<String,Long> owners){reads++;return rows;}
+  @Override public List<PublicAssignment> browseAssignments(Map<String,Long> owners){reads++;return rows.stream().filter(e->owners.containsKey(e.productId())).toList();}
  }
  private final Catalog catalog=new Catalog();
  private final Markers markers=new Markers();

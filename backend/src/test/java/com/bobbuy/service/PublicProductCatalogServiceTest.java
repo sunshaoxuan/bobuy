@@ -40,14 +40,23 @@ class PublicProductCatalogServiceTest {
    if(n<225){var i=new RecommendationItem();i.id=(long)n+1;i.postId=7L;i.productId=p.getId();i.name="Already published "+n;i.itemNumber="ITEM"+n;sources.add(i);}}
   legacyPost(post);sources.forEach(i->legacyItem(i,post));when(posts.findByPublishedTrue()).thenReturn(List.of(post));when(items.findByPostIdInOrderById(List.of(7L))).thenReturn(sources);when(taxonomy.display(sources,true)).thenReturn(sources);when(products.findAll()).thenReturn(all);
   var returned=new HashSet<String>();for(int page=0;page<10;page++){var result=service.page(page,null);assertThat(result.total()).isEqualTo(225);for(var row:result.items())assertThat(returned.add(row.productId())).isTrue();assertThat(result.hasNext()).isEqualTo(page<9);}
-  assertThat(returned).hasSize(225).doesNotContain("prod225","prod237","prod238","prod253");assertThat(service.visibleProductOwners(null)).hasSize(225).containsEntry("prod000",1001L).containsEntry("prod224",1001L);var selected=new HashSet<String>();for(int n=0;n<30;n++)selected.add(String.format("prod%03d",n));selected.addAll(List.of("prod225","prod238","missing"));assertThat(service.page(0,1001L,selected).total()).isEqualTo(30);assertThat(service.page(0,1001L,selected).items()).hasSize(24);assertThat(service.page(1,1001L,selected).items()).hasSize(6);verify(products,never()).save(any());
+  assertThat(returned).hasSize(225).doesNotContain("prod225","prod237","prod238","prod253");assertThat(service.visibleProductOwners(null)).hasSize(225).containsEntry("prod000",1001L).containsEntry("prod224",1001L);var selected=new HashSet<String>();for(int n=0;n<30;n++)selected.add(String.format("prod%03d",n));selected.addAll(List.of("prod225","prod238","missing"));
+  when(products.findAllById(selected)).thenReturn(all.stream().filter(p->selected.contains(p.getId())).toList());
+  var picked=sources.stream().filter(i->selected.contains(i.productId)).toList();when(items.findByProductIdInOrderById(selected)).thenReturn(picked);when(posts.findAllById(List.of(7L))).thenReturn(List.of(post));when(taxonomy.display(picked,true)).thenReturn(picked);
+  assertThat(service.page(0,1001L,selected).total()).isEqualTo(30);assertThat(service.page(0,1001L,selected).items()).hasSize(24);assertThat(service.page(1,1001L,selected).items()).hasSize(6);verify(products,never()).save(any());
  }
  @Test void drafterProjectionNeverAddsPrivateMasterFieldsOrFallbackMedia(){
   var p=product("a",1);p.setVisibilityStatus(ProductVisibility.DRAFTER_ONLY);p.setBrand("PRIVATE BRAND");p.setDescription(Map.of("ja-JP","PRIVATE DESCRIPTION"));p.setItemNumber("PRIVATE ITEM");
   var media=new MediaGalleryItem();media.setVisible(true);media.setType(MediaType.IMAGE);media.setUrl("https://example.invalid/private.jpg");p.setMediaGallery(List.of(media));
   var post=new RecommendationPost();post.id=7L;post.merchantId=1L;post.published=true;var source=new RecommendationItem();source.id=9L;source.postId=7L;source.productId="a";source.name="Public name";source.specification="Public spec";source.description="Public description";source.itemNumber="PUBLIC ITEM";
   legacyPost(post);legacyItem(source,post);when(posts.findByPublishedTrue()).thenReturn(List.of(post));when(items.findByPostIdInOrderById(List.of(7L))).thenReturn(List.of(source));when(taxonomy.display(List.of(source),true)).thenReturn(List.of(source));when(products.findAll()).thenReturn(List.of(p));
-  var row=service.page(0,null).items().get(0);assertThat(row.name()).containsExactlyEntriesOf(Map.of("ja-JP","Public name"));assertThat(row.description()).containsExactlyEntriesOf(Map.of("ja-JP","Public description"));assertThat(row.specification()).containsExactlyEntriesOf(Map.of("ja-JP","Public spec"));assertThat(row.itemNumber()).isEqualTo("PUBLIC ITEM");assertThat(row.brand()).isNull();assertThat(row.model()).isNull();assertThat(row.packaging()).isNull();assertThat(row.gallery()).isEmpty();assertThat(row.categories()).isEmpty();assertThat(row.reviewedMaster()).isFalse();
+  var row=service.page(0,null).items().get(0);
+  when(products.findAllById(Set.of("a"))).thenReturn(List.of(p));when(items.findByProductIdInOrderById(Set.of("a"))).thenReturn(List.of(source));when(posts.findAllById(List.of(7L))).thenReturn(List.of(post));
+  assertThat(service.publicEntries(null,Set.of("a"))).containsExactly(row);
+  assertThat(service.publicEntries(2L,Set.of("a"))).isEmpty();
+  post.published=false;assertThat(service.publicEntries(null,Set.of("a"))).isEmpty();post.published=true;
+  p.setDeletedAt(java.time.Instant.now());assertThat(service.publicEntries(null,Set.of("a"))).isEmpty();
+  assertThat(row.name()).containsExactlyEntriesOf(Map.of("ja-JP","Public name"));assertThat(row.description()).containsExactlyEntriesOf(Map.of("ja-JP","Public description"));assertThat(row.specification()).containsExactlyEntriesOf(Map.of("ja-JP","Public spec"));assertThat(row.itemNumber()).isEqualTo("PUBLIC ITEM");assertThat(row.brand()).isNull();assertThat(row.model()).isNull();assertThat(row.packaging()).isNull();assertThat(row.gallery()).isEmpty();assertThat(row.categories()).isEmpty();assertThat(row.reviewedMaster()).isFalse();
  }
  @Test void onlyCurrentSameOwnerPublishedSourcesGrantDrafterEligibility(){
   var foreign=product("foreign",1);foreign.setVisibilityStatus(ProductVisibility.DRAFTER_ONLY);var unknown=product("unknown",1);unknown.setVisibilityStatus(null);var deleted=product("deleted",2);deleted.setVisibilityStatus(ProductVisibility.DRAFTER_ONLY);deleted.setDeletedAt(java.time.Instant.now());
@@ -55,5 +64,12 @@ class PublicProductCatalogServiceTest {
   legacyPost(post);list.forEach(i->legacyItem(i,post));when(posts.findByPublishedTrue()).thenReturn(List.of(post));when(items.findByPostIdInOrderById(List.of(7L))).thenReturn(list);when(taxonomy.display(list,true)).thenReturn(list);when(products.findAll()).thenReturn(List.of(foreign,unknown,deleted));assertThat(service.page(0,null).total()).isZero();
   // Withdrawal removes eligibility; the repository supplies current publication state each read.
   emptyPosts();assertThat(service.page(0,null).total()).isZero();
+ }
+ @Test void singlePublicMasterReadDoesNotHydrateTheCatalogOrAllPublishedIssues(){
+  emptyPosts();var p=product("only",1);when(products.findAllById(Set.of("only"))).thenReturn(List.of(p));
+  assertThat(service.publicEntries(1L,Set.of("only"))).extracting(PublicProductCatalogService.Entry::productId).containsExactly("only");
+  assertThat(service.publicEntries(2L,Set.of("only"))).isEmpty();
+  p.setVisibilityStatus(null);assertThat(service.publicEntries(1L,Set.of("only"))).isEmpty();
+  verify(products,never()).findAll();verify(posts,never()).findByPublishedTrue();verify(items,never()).findByPostIdInOrderById(any());
  }
 }

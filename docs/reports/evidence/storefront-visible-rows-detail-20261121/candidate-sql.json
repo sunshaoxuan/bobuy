@@ -1,0 +1,781 @@
+[
+  {
+    "run": 1,
+    "apiMs": 53.68196600466035,
+    "bodyBytes": 2048,
+    "statementCount": 36,
+    "sqlMs": 3.528,
+    "statements": [
+      {
+        "ms": 0.039,
+        "phase": "parse <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.01,
+        "phase": "bind <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.021,
+        "phase": "execute <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.02,
+        "phase": "parse <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.005,
+        "phase": "bind <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.009,
+        "phase": "execute <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.019,
+        "phase": "statement",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.195,
+        "phase": "parse <unnamed>",
+        "tables": [
+          "bb_recommendation_item"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.219,
+        "phase": "bind <unnamed>",
+        "tables": [
+          "bb_recommendation_item"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.023,
+        "phase": "execute <unnamed>",
+        "tables": [
+          "bb_recommendation_item"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.133,
+        "phase": "bind S_4",
+        "tables": [
+          "bb_product"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.142,
+        "phase": "execute S_4",
+        "tables": [
+          "bb_product"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.185,
+        "phase": "bind S_6",
+        "tables": [
+          "bb_product"
+        ],
+        "productIn": true
+      },
+      {
+        "ms": 0.084,
+        "phase": "execute S_6",
+        "tables": [
+          "bb_product"
+        ],
+        "productIn": true
+      },
+      {
+        "ms": 0.174,
+        "phase": "parse <unnamed>",
+        "tables": [
+          "bb_product_price_adjustment",
+          "bb_product_price_adjustment_line"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.511,
+        "phase": "bind <unnamed>",
+        "tables": [
+          "bb_product_price_adjustment",
+          "bb_product_price_adjustment_line"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.037,
+        "phase": "execute <unnamed>",
+        "tables": [
+          "bb_product_price_adjustment",
+          "bb_product_price_adjustment_line"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.255,
+        "phase": "bind S_6",
+        "tables": [
+          "bb_product"
+        ],
+        "productIn": true
+      },
+      {
+        "ms": 0.158,
+        "phase": "execute S_6",
+        "tables": [
+          "bb_product"
+        ],
+        "productIn": true
+      },
+      {
+        "ms": 0.127,
+        "phase": "parse <unnamed>",
+        "tables": [
+          "bb_product_review"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.224,
+        "phase": "bind <unnamed>",
+        "tables": [
+          "bb_product_review"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.093,
+        "phase": "execute <unnamed>",
+        "tables": [
+          "bb_product_review"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.093,
+        "phase": "parse <unnamed>",
+        "tables": [
+          "bb_product_primary_category_path"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.107,
+        "phase": "bind <unnamed>",
+        "tables": [
+          "bb_product_primary_category_path"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.037,
+        "phase": "execute <unnamed>",
+        "tables": [
+          "bb_product_primary_category_path"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.067,
+        "phase": "parse <unnamed>",
+        "tables": [
+          "bb_category_tree_node"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.105,
+        "phase": "bind <unnamed>",
+        "tables": [
+          "bb_category_tree_node"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.032,
+        "phase": "execute <unnamed>",
+        "tables": [
+          "bb_category_tree_node"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.103,
+        "phase": "parse <unnamed>",
+        "tables": [
+          "bb_product_marker_set"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.1,
+        "phase": "bind <unnamed>",
+        "tables": [
+          "bb_product_marker_set"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.036,
+        "phase": "execute <unnamed>",
+        "tables": [
+          "bb_product_marker_set"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.079,
+        "phase": "bind S_1",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.024,
+        "phase": "execute S_1",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.02,
+        "phase": "parse <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.033,
+        "phase": "bind <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.009,
+        "phase": "execute <unnamed>",
+        "tables": [],
+        "productIn": false
+      }
+    ]
+  },
+  {
+    "run": 2,
+    "apiMs": 60.58970000594854,
+    "bodyBytes": 2048,
+    "statementCount": 36,
+    "sqlMs": 4.376,
+    "statements": [
+      {
+        "ms": 0.052,
+        "phase": "parse <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.022,
+        "phase": "bind <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.018,
+        "phase": "execute <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.023,
+        "phase": "parse <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.006,
+        "phase": "bind <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.082,
+        "phase": "execute <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.028,
+        "phase": "statement",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.211,
+        "phase": "parse S_7",
+        "tables": [
+          "bb_recommendation_item"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.426,
+        "phase": "bind S_7",
+        "tables": [
+          "bb_recommendation_item"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.026,
+        "phase": "execute S_7",
+        "tables": [
+          "bb_recommendation_item"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.409,
+        "phase": "bind S_4",
+        "tables": [
+          "bb_product"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.161,
+        "phase": "execute S_4",
+        "tables": [
+          "bb_product"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.351,
+        "phase": "bind S_6",
+        "tables": [
+          "bb_product"
+        ],
+        "productIn": true
+      },
+      {
+        "ms": 0.068,
+        "phase": "execute S_6",
+        "tables": [
+          "bb_product"
+        ],
+        "productIn": true
+      },
+      {
+        "ms": 0.255,
+        "phase": "parse S_8",
+        "tables": [
+          "bb_product_price_adjustment",
+          "bb_product_price_adjustment_line"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.647,
+        "phase": "bind S_8",
+        "tables": [
+          "bb_product_price_adjustment",
+          "bb_product_price_adjustment_line"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.047,
+        "phase": "execute S_8",
+        "tables": [
+          "bb_product_price_adjustment",
+          "bb_product_price_adjustment_line"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.225,
+        "phase": "bind S_6",
+        "tables": [
+          "bb_product"
+        ],
+        "productIn": true
+      },
+      {
+        "ms": 0.061,
+        "phase": "execute S_6",
+        "tables": [
+          "bb_product"
+        ],
+        "productIn": true
+      },
+      {
+        "ms": 0.127,
+        "phase": "parse S_9",
+        "tables": [
+          "bb_product_review"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.153,
+        "phase": "bind S_9",
+        "tables": [
+          "bb_product_review"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.096,
+        "phase": "execute S_9",
+        "tables": [
+          "bb_product_review"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.091,
+        "phase": "parse S_10",
+        "tables": [
+          "bb_product_primary_category_path"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.086,
+        "phase": "bind S_10",
+        "tables": [
+          "bb_product_primary_category_path"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.041,
+        "phase": "execute S_10",
+        "tables": [
+          "bb_product_primary_category_path"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.091,
+        "phase": "parse S_11",
+        "tables": [
+          "bb_category_tree_node"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.087,
+        "phase": "bind S_11",
+        "tables": [
+          "bb_category_tree_node"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.026,
+        "phase": "execute S_11",
+        "tables": [
+          "bb_category_tree_node"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.077,
+        "phase": "parse S_12",
+        "tables": [
+          "bb_product_marker_set"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.08,
+        "phase": "bind S_12",
+        "tables": [
+          "bb_product_marker_set"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.02,
+        "phase": "execute S_12",
+        "tables": [
+          "bb_product_marker_set"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.16,
+        "phase": "bind S_1",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.02,
+        "phase": "execute S_1",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.015,
+        "phase": "parse <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.004,
+        "phase": "bind <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.084,
+        "phase": "execute <unnamed>",
+        "tables": [],
+        "productIn": false
+      }
+    ]
+  },
+  {
+    "run": 3,
+    "apiMs": 32.86919600213878,
+    "bodyBytes": 2048,
+    "statementCount": 30,
+    "sqlMs": 2.983,
+    "statements": [
+      {
+        "ms": 0.08,
+        "phase": "parse <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.008,
+        "phase": "bind <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.017,
+        "phase": "execute <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.02,
+        "phase": "parse <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.029,
+        "phase": "bind <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.007,
+        "phase": "execute <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.029,
+        "phase": "statement",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.387,
+        "phase": "bind S_7",
+        "tables": [
+          "bb_recommendation_item"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.071,
+        "phase": "execute S_7",
+        "tables": [
+          "bb_recommendation_item"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.051,
+        "phase": "bind S_4",
+        "tables": [
+          "bb_product"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.114,
+        "phase": "execute S_4",
+        "tables": [
+          "bb_product"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.079,
+        "phase": "bind S_6",
+        "tables": [
+          "bb_product"
+        ],
+        "productIn": true
+      },
+      {
+        "ms": 0.069,
+        "phase": "execute S_6",
+        "tables": [
+          "bb_product"
+        ],
+        "productIn": true
+      },
+      {
+        "ms": 1.042,
+        "phase": "bind S_8",
+        "tables": [
+          "bb_product_price_adjustment",
+          "bb_product_price_adjustment_line"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.037,
+        "phase": "execute S_8",
+        "tables": [
+          "bb_product_price_adjustment",
+          "bb_product_price_adjustment_line"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.098,
+        "phase": "bind S_6",
+        "tables": [
+          "bb_product"
+        ],
+        "productIn": true
+      },
+      {
+        "ms": 0.143,
+        "phase": "execute S_6",
+        "tables": [
+          "bb_product"
+        ],
+        "productIn": true
+      },
+      {
+        "ms": 0.15,
+        "phase": "bind S_9",
+        "tables": [
+          "bb_product_review"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.028,
+        "phase": "execute S_9",
+        "tables": [
+          "bb_product_review"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.105,
+        "phase": "bind S_10",
+        "tables": [
+          "bb_product_primary_category_path"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.028,
+        "phase": "execute S_10",
+        "tables": [
+          "bb_product_primary_category_path"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.122,
+        "phase": "bind S_11",
+        "tables": [
+          "bb_category_tree_node"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.025,
+        "phase": "execute S_11",
+        "tables": [
+          "bb_category_tree_node"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.096,
+        "phase": "bind S_12",
+        "tables": [
+          "bb_product_marker_set"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.028,
+        "phase": "execute S_12",
+        "tables": [
+          "bb_product_marker_set"
+        ],
+        "productIn": false
+      },
+      {
+        "ms": 0.019,
+        "phase": "bind S_1",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.037,
+        "phase": "execute S_1",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.015,
+        "phase": "parse <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.004,
+        "phase": "bind <unnamed>",
+        "tables": [],
+        "productIn": false
+      },
+      {
+        "ms": 0.045,
+        "phase": "execute <unnamed>",
+        "tables": [],
+        "productIn": false
+      }
+    ]
+  }
+]

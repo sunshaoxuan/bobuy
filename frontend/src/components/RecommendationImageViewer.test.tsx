@@ -36,3 +36,20 @@ it('keeps the selected image across equivalent array rebuilds and omits consumer
  const view=render(tree(pictures));fireEvent.click(view.container.querySelectorAll('.rec-detail-thumbs button')[1]);expect(view.container.querySelector('.rec-gallery-navigation')).toHaveTextContent('2 / 3');
  view.rerender(tree(pictures.map(p=>({...p}))));expect(view.container.querySelector('.rec-gallery-navigation')).toHaveTextContent('2 / 3');expect([...view.container.querySelectorAll('img')].every(img=>!img.alt.includes('internal-file'))).toBe(true);expect(JSON.stringify(pictures)).toBe(original);
 });
+
+it('loads the selected image first, promotes an early selection and advances one background image after settlement',async()=>{
+ const {waitFor}=await import('@testing-library/react');
+ const pictures=[1,2,3,4].map(id=>({id:String(id),url:'/ordered-'+id+'.png',hash:'h'+id,sourceUrl:'',assetKey:'',label:''}));
+ const view=render(<I18nProvider><RecommendationImageViewer progressive consumer pictures={pictures} name="Product"/></I18nProvider>);
+ const sources=()=>new Set([...view.container.querySelectorAll('img')].map(img=>img.getAttribute('src')));
+ expect([...sources()]).toEqual(['/ordered-1.png']);
+ fireEvent.click(view.container.querySelectorAll('.rec-detail-thumbs button')[3]);
+ expect(sources().has('/ordered-4.png')).toBe(true);expect(sources().has('/ordered-2.png')).toBe(false);
+ fireEvent.load(view.container.querySelector('.rec-gallery-slide[aria-hidden="false"] img')!);
+ await waitFor(()=>expect(sources().has('/ordered-1.png')).toBe(true));
+ expect(sources().has('/ordered-2.png')).toBe(false);
+ fireEvent.error(view.container.querySelector('.rec-detail-thumbs img[src="/ordered-1.png"]')!);
+ await waitFor(()=>expect(sources().has('/ordered-2.png')).toBe(true));
+ expect(sources().has('/ordered-3.png')).toBe(false);
+ view.unmount();
+});

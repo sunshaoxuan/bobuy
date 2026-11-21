@@ -41,8 +41,9 @@ public class PublicProductBrowseService {
  public static final class Changed extends RuntimeException { public Changed(){super("Public browse changed; restart at page 0");} }
  public static final class Missing extends RuntimeException {}
  private record Dataset(List<PublicProductCatalogService.Entry> entries,Map<String,List<ProductMarkerService.Definition>> markers){}
- private Dataset dataset(Long merchant){
-  var entries=catalog.publicEntries(merchant,null);var owners=new LinkedHashMap<String,Long>();
+ private Dataset dataset(Long merchant){return dataset(merchant,null);}
+ private Dataset dataset(Long merchant,Set<String> ids){
+  var entries=catalog.publicEntries(merchant,ids);var owners=new LinkedHashMap<String,Long>();
   entries.forEach(e->owners.put(e.productId(),e.merchantId()));
   var byId=new TreeMap<String,List<ProductMarkerService.Definition>>();
   markers.browseAssignments(owners).forEach(a->byId.put(a.productId(),a.markers()));
@@ -151,7 +152,7 @@ public class PublicProductBrowseService {
  @Transactional(readOnly=true,isolation=Isolation.REPEATABLE_READ)
  public Detail detail(String id,Long merchant){
   if(id==null||id.isBlank()||id.length()>255||merchant!=null&&merchant<1)throw new IllegalArgumentException("Invalid detail query");
-  var data=dataset(merchant);var item=data.entries().stream().filter(e->id.equals(e.productId())).findFirst().orElseThrow(Missing::new);
+  var data=dataset(merchant,Set.of(id));var item=data.entries().stream().filter(e->id.equals(e.productId())).findFirst().orElseThrow(Missing::new);
   return new Detail(item,data.markers().getOrDefault(id,List.of()),revision(Arrays.asList("public-product-detail-v1",merchant,item,data.markers().get(id))));
  }
 }

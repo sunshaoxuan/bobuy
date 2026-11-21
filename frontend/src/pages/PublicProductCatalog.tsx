@@ -207,7 +207,7 @@ export function CatalogSection({query='',quantities,onAdd,canBuy,kind='all',refr
     </section>}
     <Drawer className="rec-product-detail catalog-master-detail consumer-detail-drawer" title={opened?<ProductDetailCode value={opened.itemNumber}/>:t('store.details')} width="min(1120px,100vw)" open={!!detailId} onClose={closeDetail}>
       {detailId&&!opened&&(detail.error?<BrowseError error={detail.error} retry={()=>setDetailAttempt(value=>value+1)} refresh={reload}/>:<Spin/>)}
-      {opened&&detailName&&description&&<ConsumerDetail media={<RecommendationImageViewer consumer key={opened.productId} pictures={opened.gallery} name={detailName.value}/>}>
+      {opened&&detailName&&description&&<ConsumerDetail media={<RecommendationImageViewer progressive consumer key={opened.productId} pictures={opened.gallery} name={detailName.value}/>}>
         <ProductMarkerBadges markers={detail.markers??[]} promotionPrices={selectedOfferSource(sale,pricePending(opened.productId),opened.referencePrices?.[0]??mainReference?.facts.priceChange)}/>
         {management(opened)}
         <ProductBrand brand={opened.brand}/><h1 lang={detailName.language}><span className="rec-name-local">{detailName.value||t('rec.not_stated')}</span>{locale!=='ja-JP'&&opened.name['ja-JP']&&opened.name['ja-JP']!==detailName.value&&<span className="rec-name-original" lang="ja">（{opened.name['ja-JP']}）</span>}</h1>{sourceNote(detailName)}
