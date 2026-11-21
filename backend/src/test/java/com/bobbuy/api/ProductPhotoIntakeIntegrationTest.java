@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 /** Dedicated synthetic cloud DB only. Real Postgres row locks, JSON, HTTP authorization and rollback. */
 @EnabledIfEnvironmentVariable(named="BOBBUY_PHOTO_ISOLATED_TEST",matches="true")
-@SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.DEFINED_PORT,properties={"server.port=18080","spring.datasource.url=jdbc:postgresql://127.0.0.1:${BOBBUY_PHOTO_TEST_DB_PORT:55432}/photo","spring.datasource.username=photo","spring.datasource.password=photo-local-only","spring.datasource.driver-class-name=org.postgresql.Driver","spring.jpa.hibernate.ddl-auto=create-drop","spring.flyway.enabled=false","bobbuy.security.header-auth.enabled=false","bobbuy.ai.costco.worker.enabled=true","bobbuy.ai.costco.worker.delay-millis=1000","bobbuy.seed.force-reset-on-invoke=false"})
+@SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.DEFINED_PORT,properties={"server.port=${BOBBUY_PHOTO_TEST_HTTP_PORT:18080}","spring.datasource.url=jdbc:postgresql://127.0.0.1:${BOBBUY_PHOTO_TEST_DB_PORT:55432}/photo","spring.datasource.username=photo","spring.datasource.password=photo-local-only","spring.datasource.driver-class-name=org.postgresql.Driver","spring.jpa.hibernate.ddl-auto=create-drop","spring.flyway.enabled=false","bobbuy.security.header-auth.enabled=false","bobbuy.ai.costco.worker.enabled=true","bobbuy.ai.costco.worker.delay-millis=1000","bobbuy.seed.force-reset-on-invoke=false"})
 @AutoConfigureMockMvc
 class ProductPhotoIntakeIntegrationTest {
  @Autowired MockMvc mvc;@Autowired ObjectMapper json;@Autowired JdbcTemplate jdbc;@Autowired BobbuyStore store;
@@ -72,6 +72,15 @@ class ProductPhotoIntakeIntegrationTest {
   assertThat(matched.path("photoFacts").path("amount").decimalValue()).isEqualByComparingTo("2698");
   assertThat(matched.path("photoFacts").path("currency").asText()).isEqualTo("JPY");
   assertThat(matched.path("photoFacts").path("productVisible").asBoolean()).isTrue();
+  assertThat(matched.path("sources").findValuesAsText("fetchedUrl"))
+    .anyMatch(url->url.contains("/Frozen-Mixed-Seafood-1kg/p/53432"));
+  assertThat(matched.path("candidate").path("specification").asText()).contains("18");
+  System.out.println("LIVE PHOTO official Costco exact-item document verified; frozen storage recovered");
+  assertThat(matched.path("officialImageAvailable").asBoolean()).isTrue();
+  mvc.perform(get("/api/product-photo-intake/"+matched.path("jobId").asText()+"/official-image")
+    .header("Authorization","Bearer "+auth)).andExpect(status().isOk())
+    .andExpect(content().contentTypeCompatibleWith(MediaType.IMAGE_JPEG));
+  System.out.println("LIVE PHOTO official Costco image passed same-item pixel review and private readback");
   var existingInput=liveObservation(matched);
   existingInput.put("productId",product.getId());
   existingInput.put("productVersion",product.getRecordVersion());
@@ -133,6 +142,7 @@ class ProductPhotoIntakeIntegrationTest {
    if(Set.of("NEEDS_INPUT","FAILED","RETRY_WAIT","COMPLETED").contains(state)){
     var reviewed=review(id);
     assertThat(reviewed.path("photoFacts").isObject()).as("real photo intake returned pixel facts (%s)",result.path("failureCode").asText("")).isTrue();
+    if (filename.equals("IMG_1484.jpg")) assertThat(result.path("failureCode").asText()).isEqualTo("photo.confirm_required");
     return reviewed;
    }
    Thread.sleep(2000);

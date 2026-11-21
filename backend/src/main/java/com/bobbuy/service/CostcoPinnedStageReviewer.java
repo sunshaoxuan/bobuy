@@ -45,24 +45,41 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
                 for(var p:matches){
                     if(p.getRecordVersion()==null)continue;
                     var target=new CostcoOnboardingDecision.Target(p.getId(),p.getRecordVersion(),ProductCatalogService.sourceHash(p));seenTargets.put(p.getId(),target);
-                    var row=new LinkedHashMap<String,Object>();row.put("target",target);row.put("name",p.getName());row.put("brand",p.getBrand());row.put("model",p.getCatalogData().model());row.put("specification",p.getCatalogData().specification());row.put("packaging",p.getCatalogData().packaging());masters.add(row);
+                    var row=new LinkedHashMap<String,Object>();row.put("target",target);row.put("name",p.getName());row.put("brand",p.getBrand());row.put("model",p.getCatalogData().model());row.put("specification",p.getCatalogData().specification());row.put("packaging",p.getCatalogData().packaging());
+                    if (job.privatePhotoSha256()!=null) { row.put("itemNumber",p.getItemNumber());row.put("market",job.market()); }
+                    masters.add(row);
                 }
             }
             context.put("existingArchiveCandidates",masters);
             var documents = new ArrayList<Map<String, Object>>();
             var images = new ArrayList<LlmGateway.PinnedImage>();
             var imageHashes = new LinkedHashMap<String, String>();
-            if (stage == Stage.INTAKE && job.privatePhotoSha256() != null)
+            var reviewedPhotoImages = new java.util.HashSet<String>();
+            boolean photoAdmission=stage==Stage.ADMISSION && job.privatePhotoSha256()!=null;
+            if (photoAdmission) {
+                for (var decision : job.decisions()) {
+                    if (decision.stage()==Stage.IMAGE_SOURCE && decision.verdict()==Verdict.ACCEPT && decision.trace()!=null)
+                        reviewedPhotoImages.addAll(decision.trace().imageViewHashes().keySet());
+                }
+                context.put("privatePhotoSha256",job.privatePhotoSha256());
+            }
+            if ((stage==Stage.INTAKE || photoAdmission) && job.privatePhotoSha256()!=null)
                 addImage(job.merchantId(), job.privatePhotoSha256(), images, imageHashes);
             for (var evidence : job.evidence()) {
                 var facts = new LinkedHashMap<String, Object>(); facts.put("receipt", evidence);
                 if (isTextualEvidence(evidence.mediaType())) {
                     byte[] bytes = verified(job.merchantId(), evidence.sha256());
-                    String content = documentText(new String(bytes, StandardCharsets.UTF_8));
-                    facts.put("retrievedText", content.substring(0, Math.min(content.length(), 24_000)));
-                    facts.put("textTruncated", content.length() > 24_000);
+                    String body = new String(bytes, StandardCharsets.UTF_8);
+                    var product = job.privatePhotoSha256()==null ? Map.of() : costcoProductSection(body,evidence,job.itemNumber(),mapper);
+                    if (!product.isEmpty()) facts.put("retrievedProductSection",product);
+                    else {
+                        String content = documentText(body);
+                        facts.put("retrievedText", content.substring(0, Math.min(content.length(), 24_000)));
+                        facts.put("textTruncated", content.length() > 24_000);
+                    }
                 }
-                if (stage == Stage.IMAGE_SOURCE && evidence.mediaType().startsWith("image/") && images.size() < 4)
+                if ((stage==Stage.IMAGE_SOURCE || reviewedPhotoImages.contains(evidence.sha256()))
+                        && evidence.mediaType().startsWith("image/") && images.size()<4)
                     addImage(job.merchantId(), evidence.sha256(), images, imageHashes);
                 documents.add(facts);
             }
@@ -106,6 +123,20 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
                 productVisible means the physical product is visible, not merely a price label. Never infer availability.
                 officialImageSha256 and target must be null at photo INTAKE; referencePrices must be empty there.
                 Preserve photo facts in later candidates. Missing official image must not erase visible photo facts.
+                Photo IDENTITY requires the exact item and variant on a retrieved official product page.
+                A generic page or similar item must return NEEDS_EVIDENCE or AMBIGUOUS.
+                Photo candidates must keep target null; the operator reviews the privately matched catalog record separately.
+                retrievedProductSection is the product's complete matching structured data and specification cells,
+                extracted from the original hashed page. Evaluate it without requiring navigation or page chrome.
+                For a photo, FACTS ACCEPT requires a candidate that preserves the photo facts and supplements
+                them only with information supported by the exact official product document. The candidate's
+                specification may include concise official storage and packaging facts. A product image is optional
+                in FACTS; leave officialImageSha256 null until pixels can be verified. Never copy a website
+                price into photoFacts. Preserve verified FACTS specifications in later candidates.
+                Photo ADMISSION is a decision to show a candidate for operator review. It grants no write,
+                stock, publication, or reuse permission. The first ADMISSION image is the original private
+                photo; use it to check the observed tag. Only the separate reviewed official image may be
+                selected as the officialImageSha256. Report uncertainty instead of inventing details.
                 """ : "") + mapper.writeValueAsString(context);
             LlmGateway.PinnedCompletion result = complete(gateway, prompt, images);
             JsonNode json = mapper.readTree(result.content());
@@ -127,6 +158,13 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
                 if(c.hasNonNull("target"))fields(c.get("target"),Set.of("productId","version","sourceHash"));
                 candidate = mapper.treeToValue(c, Candidate.class);
                 if(candidate.target()!=null&&!candidate.target().equals(seenTargets.get(candidate.target().productId())))throw new CostcoNumberOnboardingService.NeedsInput("onboarding.target_conflict");
+            }
+            if (job.privatePhotoSha256()!=null && stage!=Stage.INTAKE) {
+                if (verdict!=Verdict.ACCEPT) candidate=null;
+                if (stage==Stage.FACTS && verdict==Verdict.ACCEPT && candidate==null)
+                    throw new CostcoNumberOnboardingService.NeedsInput("onboarding.candidate_incomplete");
+                if (candidate!=null && !java.util.Objects.equals(job.itemNumber(),candidate.itemNumber()))
+                    throw new CostcoNumberOnboardingService.NeedsInput("onboarding.item_mismatch");
             }
             if (stage == Stage.ADMISSION && verdict == Verdict.ACCEPT) {
                 if (candidate == null) throw new IllegalArgumentException("onboarding.candidate_missing");
@@ -177,6 +215,38 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
         while (links.find() && structured.length() < 18_000) structured.append(links.group(1)).append('\n');
         String text = html.replaceAll("(?is)<(script|style)\\b[^>]*>.*?</\\1>", " ").replaceAll("(?s)<[^>]*>", " ").replaceAll("\\s+", " ");
         return structured + "\n" + text;
+    }
+    private static final Pattern PRODUCT_JSON = Pattern.compile("(?is)<script[^>]*application/ld\\+json[^>]*>(.*?)</script>");
+    private static final Pattern PRODUCT_ATTRIBUTE = Pattern.compile(
+            "(?is)<td\\b[^>]*class=[\"']attrib[\"'][^>]*>([^<]{1,120})</td>\\s*<td\\b[^>]*class=[\"']attrib-val[\"'][^>]*>([^<]{1,400})</td>");
+
+    static Map<String,Object> costcoProductSection(String html, CostcoOfficialEvidence evidence,
+            String itemNumber, ObjectMapper mapper) {
+        var url=evidence.fetchedUrl();
+        if (itemNumber==null || !"www.costco.co.jp".equalsIgnoreCase(url.getHost())
+                || !url.getPath().endsWith("/p/"+itemNumber)) return Map.of();
+        JsonNode product=null;
+        var scripts=PRODUCT_JSON.matcher(html);
+        while (scripts.find()) {
+            String data=scripts.group(1);
+            if (data.length()>12_000) continue;
+            JsonNode node;
+            try { node=mapper.readTree(data); }
+            catch (com.fasterxml.jackson.core.JsonProcessingException ignored) { continue; }
+            if (node==null || !"product".equalsIgnoreCase(node.path("@type").asText())
+                    || !itemNumber.equals(node.path("sku").asText()) || node.path("name").asText().isBlank()) continue;
+            if (product!=null && !product.equals(node)) return Map.of();
+            product=node;
+        }
+        if (product==null) return Map.of();
+        var specifications=new LinkedHashMap<String,String>();
+        var cells=PRODUCT_ATTRIBUTE.matcher(html);
+        while (specifications.size()<24 && cells.find()) {
+            String label=org.springframework.web.util.HtmlUtils.htmlUnescape(cells.group(1)).strip();
+            String value=org.springframework.web.util.HtmlUtils.htmlUnescape(cells.group(2)).strip();
+            if (!label.isBlank() && !value.isBlank()) specifications.putIfAbsent(label,value);
+        }
+        return Map.of("product",product,"specifications",specifications);
     }
     static boolean isTextualEvidence(String type){return Set.of("text/html","text/plain","application/xhtml+xml","application/json","application/ld+json").contains(type);}
     static String digest(byte[] bytes) { try { return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes)); } catch (NoSuchAlgorithmException error) { throw new IllegalStateException(error); } }

@@ -147,3 +147,10 @@ npm run check:i18n
 - 两张照片的官方来源补充均返回 `onboarding.discovery_missing`，由照片取得的字段仍可提交确认。实体设备后摄和生产复验待执行。桌面和移动的既有运行截图由主模型直接复核，复用相同 UI 输入。
 - 合并上游 b6165c69 时，注册测试账号迁移已占用 V47。照片观察表的 SQL 内容保持原样，改用 V48；原 V47 试验记录对应改号前的候选。旧 worker 回滚仍须先隔离新照片任务。
 - 在隔离 PostgreSQL 18 中使用合成依赖表，以事务执行当前两文件：注册 V47 一次、照片 V48 两次，两张新表均可读，第二次照片迁移保持幂等，验证事务回滚。迁移文件内容哈希与原照片 V47 相同。
+
+### 本地官方资料回归
+
+- Costco 日本站的普通搜索页未返回样本 53432 的正式链接。照片识别按货号访问官方商品入口，通过现有 TLS、逐跳 DNS 校验和证据哈希读取真实商品页。照片任务先给模型同货号的 Product JSON-LD 和规格表，再分别走身份、资料、图像与人工确认候选审核。原货号自动录入标准照旧。
+- `IMG_1484.jpg` 实测官方来源为 `/c/Frozen-Mixed-Seafood-1kg/p/53432`。审核读取 1 kg 与 −18 °C 保存规格，核对原现场照片和 1200×1200 官网图，进入 `photo.confirm_required`。官网图私有 GET 返回 200 和 image/jpeg，已有商品价格和有货确认回读通过。官网网店报价未写入现场价格。
+- `IMG_1638.jpg` 的官网入口返回通用页面，身份审核拒绝该来源；应用保留实拍已读字段，仍成功创建并回读私有新品。未验证来源未用于补全。
+- `CostcoPinnedStageReviewerTest` 14 项及 `ProductPhotoIntakeIntegrationTest#livePhotoMatchesAndUpdatesObservation` 真实检查通过。Android 隔离应用启动实际从空 PostgreSQL 应用了 49 条迁移，最高到 V48。
