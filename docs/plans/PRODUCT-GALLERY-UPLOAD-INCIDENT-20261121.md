@@ -16,6 +16,8 @@
 - `ProductCatalogIntegrationTest` 经真实 HTTP 控制器和隔离数据库验证来源持久化及首图实际上传保存，包括越权、版本、恢复和公开状态。
 - 发布后使用获准的隔离商品验证从选择到主图回读，iPhone Safari／Chrome／Edge 需要实际设备验证系统选择器。生产待补图商品应继续由商家按授权流程操作。开发和验收均不批量改写现有商品。
 
-候选证据：WebKit 每个宽度观察到四次原生选择器事件、两次经审核上传，刷新后来源回读成功，既有图片保留逐图来源。档案列表请求在刷新时有一次 WebKit 夹具中断，已在记录中单列。图库接口和交互没有其他错误。定向前端 20 项、后端 8 项通过。V51 在隔离 PostgreSQL 上连续运行两次，均得到两个可空来源列。
+候选证据：WebKit 每个宽度观察到四次原生选择器事件、两次经审核上传，刷新后来源回读成功，既有图片保留逐图来源。390 px 档案列表请求在刷新时有两次 WebKit 夹具中断，已在记录中单列。图库接口和交互没有其他错误。定向前端 22 项、后端 8 项通过。V51 在隔离 PostgreSQL 上连续运行两次，均得到两个可空来源列。
 
 [390 截图](../reports/evidence/product-gallery-upload-20261121/gallery-390.png) · [1280 截图](../reports/evidence/product-gallery-upload-20261121/gallery-1280.png) · [WebKit 记录](../reports/evidence/product-gallery-upload-20261121/gallery-webkit.json)
+
+追加回归通过 A→B→A 验证暂存文件、来源覆盖及核对状态按商品和会话隔离；同商品取消重选保留三项。删除最后一张图后，仍可修正已有的临时来源覆盖并提交。

@@ -48,6 +48,59 @@ it('opens the picker once per add action even before source review, including af
  expect(screen.getByRole('button',{name:'Upload selected images'})).toBeDisabled();
  expect(mock.upload).not.toHaveBeenCalled();
 });
+it('clears staged files, temporary source and approval when closing A and opening B',async()=>{
+ const savedSource='https://manufacturer.example/saved-source';
+ const override='https://manufacturer.example/only-for-a';
+ const original=picture('original',file('original.png').sha);
+ mock.get.mockImplementation(async(id:string)=>({
+  value:{...value,productId:id,itemNumber:id==='p1'?'SKU-P1':'SKU-P2',
+   defaultImageSourceUrl:savedSource,gallery:[original]},canonical:true,sourceItemIds:[]
+ }));
+ const onChoose=vi.fn(),onSaved=vi.fn();
+ const editor=(id?:string)=><I18nProvider><ProductCatalogPanel id={id} entries={[]} onChoose={onChoose} onSaved={onSaved}/></I18nProvider>;
+ const view=render(editor('p1'));
+ await openMedia();
+ const source=()=>screen.getByLabelText('Source for selected images');
+ const approval=()=>screen.getByRole('checkbox',{name:/I verified the exact item/});
+ fireEvent.change(source(),{target:{value:override}});
+ fireEvent.click(approval());
+ fireEvent.change(input(),{target:{files:[file('private-a.png').file]}});
+ expect(screen.getByText('private-a.png')).toBeInTheDocument();
+ fireEvent.change(input(),{target:{files:[]}});
+ expect(screen.getByText('private-a.png')).toBeInTheDocument();
+ expect(source()).toHaveValue(override);
+ expect(approval()).toBeChecked();
+ fireEvent.click(screen.getByRole('button',{name:'Close'}));
+ expect(onChoose).toHaveBeenCalledWith(undefined);
+ view.rerender(editor());
+ view.rerender(editor('p2'));
+ await screen.findByDisplayValue('SKU-P2');
+ fireEvent.click(screen.getByRole('tab',{name:'Images & sources'}));
+ expect(screen.queryByText('private-a.png')).not.toBeInTheDocument();
+ expect(screen.queryByRole('button',{name:'Upload selected images'})).not.toBeInTheDocument();
+ expect(source()).toHaveValue(savedSource);
+ expect(approval()).not.toBeChecked();
+ view.rerender(editor('p1'));
+ await openMedia();
+ expect(screen.queryByText('private-a.png')).not.toBeInTheDocument();
+ expect(source()).toHaveValue(savedSource);
+ expect(approval()).not.toBeChecked();
+ expect(mock.upload).not.toHaveBeenCalled();
+});
+it('allows recovering the per-upload source after removing the last existing image',async()=>{
+ const original=picture('original',file('original.png').sha);
+ mock.get.mockResolvedValue({value:{...value,defaultImageSourceUrl:'https://manufacturer.example/default',gallery:[original]},canonical:true});
+ render(<I18nProvider><ProductCatalogPanel id="p1" entries={[]} onChoose={vi.fn()} onSaved={vi.fn()}/></I18nProvider>);
+ await openMedia();
+ fireEvent.change(screen.getByLabelText('Source for selected images'),{target:{value:''}});
+ fireEvent.click(screen.getByRole('button',{name:'Remove'}));
+ fireEvent.change(input(),{target:{files:[file('replacement.png').file]}});
+ const source=screen.getByLabelText('Source for selected images');
+ fireEvent.change(source,{target:{value:'https://manufacturer.example/replacement'}});
+ fireEvent.click(screen.getByRole('checkbox',{name:/I verified the exact item/}));
+ expect(screen.getByRole('button',{name:'Upload selected images'})).toBeEnabled();
+ expect(screen.getByLabelText('Default official image source')).toHaveValue('https://manufacturer.example/default');
+});
 it('first-file failure remains visible and clears the picker so the same file can be chosen again',async()=>{
  const a=file('first.png');mock.upload.mockRejectedValueOnce(new Error('gallery.invalid')).mockResolvedValueOnce(picture('asset-first',a.sha));
  render(<I18nProvider><ProductCatalogPanel id="p1" entries={[]} onChoose={vi.fn()} onSaved={vi.fn()}/></I18nProvider>);await openMedia();const picker=select([a.file]);

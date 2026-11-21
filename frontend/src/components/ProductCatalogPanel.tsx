@@ -170,7 +170,7 @@ function CatalogEditor({entries,id,onChoose,onSaved,searchEntries,getExportIds,c
       {cover&&<label>{t('gallery.sources')}<Input value={cover.sourceUrl??''} onChange={e=>patch({gallery:draft.gallery.map((p,i)=>i===activeImage?{...p,sourceUrl:e.target.value}:p)})}/></label>}
       <div className="catalog-upload-group">
        <label>{t('gallery.default_source')}<Input value={draft.defaultImageSourceUrl??''} onChange={e=>{patch({defaultImageSourceUrl:e.target.value});setImageReviewed(false);}} placeholder="https://…"/></label>
-       {cover&&<label>{t('gallery.upload_source')}<Input value={uploadSource} onChange={e=>{setSource(e.target.value);setImageReviewed(false);}} placeholder="https://…"/></label>}
+       {(cover||pendingFiles.length>0||source!==undefined)&&<label>{t('gallery.upload_source')}<Input value={uploadSource} onChange={e=>{setSource(e.target.value);setImageReviewed(false);}} placeholder="https://…"/></label>}
        <Checkbox checked={imageReviewed} onChange={e=>setImageReviewed(e.target.checked)}>{t('gallery.ack')}</Checkbox>
        <p className="catalog-image-guidance">{t('gallery.format_hint')}</p>
        {!!pendingFiles.length&&<><ul className="catalog-picked-files">{pendingFiles.map((file,index)=>
