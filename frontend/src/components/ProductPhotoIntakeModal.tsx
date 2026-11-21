@@ -156,8 +156,8 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
     <h2>{identifiedName||t('photo.identity_required')}</h2>
     {review.itemNumber&&<p>{t('onboarding.item')} {review.itemNumber}</p>}
     <div className="photo-review-prices">
-     <div><small>{t('photo.current_price')}</small><strong>{amount?amount+' '+currency:t('photo.unknown')}</strong>{unit&&<span>{unit}</span>}</div>
-     {!isNew&&<div><small>{t('photo.previous')}</small><strong>{matchingObservation?matchingObservation.amount+' '+matchingObservation.currency:t('photo.unknown')}</strong>{matchingObservation&&<span>{matchingObservation.unit}</span>}</div>}
+     <div><small>{t('photo.current_price')}</small><strong className={amount?undefined:'photo-price-unknown'}>{amount?amount+' '+currency:t('photo.unknown')}</strong>{unit&&<span>{unit}</span>}</div>
+     {!isNew&&<div><small>{t('photo.previous')}</small><strong className={matchingObservation?undefined:'photo-price-unknown'}>{matchingObservation?matchingObservation.amount+' '+matchingObservation.currency:t('photo.unknown')}</strong>{matchingObservation&&<span>{matchingObservation.unit}</span>}</div>}
     </div>
     {canConfirm&&<Checkbox checked={inStock} onChange={e=>{setInStock(e.target.checked);edit();}}>{t('photo.in_stock')}</Checkbox>}
     <p>{t('photo.suggestions')}</p>

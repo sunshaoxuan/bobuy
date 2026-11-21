@@ -1,0 +1,1853 @@
+{
+  "engine": "webkit",
+  "design": true,
+  "fixtures": "synthetic PNG and intercepted API, including share cancellation mock",
+  "checks": [
+    {
+      "width": 360,
+      "locale": "zh-CN",
+      "kind": "unknown",
+      "photoWidth": 71.234375,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "未知／未记录",
+          "unit": null,
+          "lines": 1,
+          "fits": true
+        },
+        {
+          "text": "未知／未记录",
+          "unit": null,
+          "lines": 1,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "locale": "zh-CN",
+      "kind": "long",
+      "photoWidth": 71.234375,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "123456789 JPY",
+          "unit": "12 individually sealed packs / 2.75 kg",
+          "lines": 2,
+          "fits": true
+        },
+        {
+          "text": "998765432 JPY",
+          "unit": "12 large retail units / 3 individually sealed packs",
+          "lines": 2,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "locale": "zh-TW",
+      "kind": "unknown",
+      "photoWidth": 71.234375,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "未知／未記錄",
+          "unit": null,
+          "lines": 1,
+          "fits": true
+        },
+        {
+          "text": "未知／未記錄",
+          "unit": null,
+          "lines": 1,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "locale": "zh-TW",
+      "kind": "long",
+      "photoWidth": 71.234375,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "123456789 JPY",
+          "unit": "12 individually sealed packs / 2.75 kg",
+          "lines": 2,
+          "fits": true
+        },
+        {
+          "text": "998765432 JPY",
+          "unit": "12 large retail units / 3 individually sealed packs",
+          "lines": 2,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "locale": "ja-JP",
+      "kind": "unknown",
+      "photoWidth": 71.234375,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "不明・未記録",
+          "unit": null,
+          "lines": 1,
+          "fits": true
+        },
+        {
+          "text": "不明・未記録",
+          "unit": null,
+          "lines": 1,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "locale": "ja-JP",
+      "kind": "long",
+      "photoWidth": 71.234375,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "123456789 JPY",
+          "unit": "12 individually sealed packs / 2.75 kg",
+          "lines": 2,
+          "fits": true
+        },
+        {
+          "text": "998765432 JPY",
+          "unit": "12 large retail units / 3 individually sealed packs",
+          "lines": 2,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "locale": "en-US",
+      "kind": "unknown",
+      "photoWidth": 71.234375,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "Unknown / not recorded",
+          "unit": null,
+          "lines": 2,
+          "fits": true
+        },
+        {
+          "text": "Unknown / not recorded",
+          "unit": null,
+          "lines": 2,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "locale": "en-US",
+      "kind": "long",
+      "photoWidth": 71.234375,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "123456789 JPY",
+          "unit": "12 individually sealed packs / 2.75 kg",
+          "lines": 2,
+          "fits": true
+        },
+        {
+          "text": "998765432 JPY",
+          "unit": "12 large retail units / 3 individually sealed packs",
+          "lines": 2,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "locale": "zh-CN",
+      "kind": "unknown",
+      "photoWidth": 79.03125,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "未知／未记录",
+          "unit": null,
+          "lines": 1,
+          "fits": true
+        },
+        {
+          "text": "未知／未记录",
+          "unit": null,
+          "lines": 1,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "locale": "zh-CN",
+      "kind": "long",
+      "photoWidth": 79.03125,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "123456789 JPY",
+          "unit": "12 individually sealed packs / 2.75 kg",
+          "lines": 2,
+          "fits": true
+        },
+        {
+          "text": "998765432 JPY",
+          "unit": "12 large retail units / 3 individually sealed packs",
+          "lines": 2,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "locale": "zh-TW",
+      "kind": "unknown",
+      "photoWidth": 79.03125,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "未知／未記錄",
+          "unit": null,
+          "lines": 1,
+          "fits": true
+        },
+        {
+          "text": "未知／未記錄",
+          "unit": null,
+          "lines": 1,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "locale": "zh-TW",
+      "kind": "long",
+      "photoWidth": 79.03125,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "123456789 JPY",
+          "unit": "12 individually sealed packs / 2.75 kg",
+          "lines": 2,
+          "fits": true
+        },
+        {
+          "text": "998765432 JPY",
+          "unit": "12 large retail units / 3 individually sealed packs",
+          "lines": 2,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "locale": "ja-JP",
+      "kind": "unknown",
+      "photoWidth": 79.03125,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "不明・未記録",
+          "unit": null,
+          "lines": 1,
+          "fits": true
+        },
+        {
+          "text": "不明・未記録",
+          "unit": null,
+          "lines": 1,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "locale": "ja-JP",
+      "kind": "long",
+      "photoWidth": 79.03125,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "123456789 JPY",
+          "unit": "12 individually sealed packs / 2.75 kg",
+          "lines": 2,
+          "fits": true
+        },
+        {
+          "text": "998765432 JPY",
+          "unit": "12 large retail units / 3 individually sealed packs",
+          "lines": 2,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "locale": "en-US",
+      "kind": "unknown",
+      "photoWidth": 79.03125,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "Unknown / not recorded",
+          "unit": null,
+          "lines": 2,
+          "fits": true
+        },
+        {
+          "text": "Unknown / not recorded",
+          "unit": null,
+          "lines": 2,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "locale": "en-US",
+      "kind": "long",
+      "photoWidth": 79.03125,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "123456789 JPY",
+          "unit": "12 individually sealed packs / 2.75 kg",
+          "lines": 2,
+          "fits": true
+        },
+        {
+          "text": "998765432 JPY",
+          "unit": "12 large retail units / 3 individually sealed packs",
+          "lines": 2,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "locale": "zh-CN",
+      "kind": "unknown",
+      "photoWidth": 222.3125,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "未知／未记录",
+          "unit": null,
+          "lines": 1,
+          "fits": true
+        },
+        {
+          "text": "未知／未记录",
+          "unit": null,
+          "lines": 1,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "locale": "zh-CN",
+      "kind": "long",
+      "photoWidth": 222.3125,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "123456789 JPY",
+          "unit": "12 individually sealed packs / 2.75 kg",
+          "lines": 1,
+          "fits": true
+        },
+        {
+          "text": "998765432 JPY",
+          "unit": "12 large retail units / 3 individually sealed packs",
+          "lines": 1,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "locale": "zh-TW",
+      "kind": "unknown",
+      "photoWidth": 222.3125,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "未知／未記錄",
+          "unit": null,
+          "lines": 1,
+          "fits": true
+        },
+        {
+          "text": "未知／未記錄",
+          "unit": null,
+          "lines": 1,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "locale": "zh-TW",
+      "kind": "long",
+      "photoWidth": 222.3125,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "123456789 JPY",
+          "unit": "12 individually sealed packs / 2.75 kg",
+          "lines": 1,
+          "fits": true
+        },
+        {
+          "text": "998765432 JPY",
+          "unit": "12 large retail units / 3 individually sealed packs",
+          "lines": 1,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "locale": "ja-JP",
+      "kind": "unknown",
+      "photoWidth": 222.3125,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "不明・未記録",
+          "unit": null,
+          "lines": 1,
+          "fits": true
+        },
+        {
+          "text": "不明・未記録",
+          "unit": null,
+          "lines": 1,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "locale": "ja-JP",
+      "kind": "long",
+      "photoWidth": 222.3125,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "123456789 JPY",
+          "unit": "12 individually sealed packs / 2.75 kg",
+          "lines": 1,
+          "fits": true
+        },
+        {
+          "text": "998765432 JPY",
+          "unit": "12 large retail units / 3 individually sealed packs",
+          "lines": 1,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "locale": "en-US",
+      "kind": "unknown",
+      "photoWidth": 222.3125,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "Unknown / not recorded",
+          "unit": null,
+          "lines": 1,
+          "fits": true
+        },
+        {
+          "text": "Unknown / not recorded",
+          "unit": null,
+          "lines": 1,
+          "fits": true
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "locale": "en-US",
+      "kind": "long",
+      "photoWidth": 222.3125,
+      "photoFits": true,
+      "priceCells": [
+        {
+          "text": "123456789 JPY",
+          "unit": "12 individually sealed packs / 2.75 kg",
+          "lines": 1,
+          "fits": true
+        },
+        {
+          "text": "998765432 JPY",
+          "unit": "12 large retail units / 3 individually sealed packs",
+          "lines": 1,
+          "fits": true
+        }
+      ]
+    }
+  ],
+  "geometry": [],
+  "locales": [],
+  "network": [
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-3",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-0",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-3",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-0",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-3",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-0",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-3",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 360,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-0",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-3",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-0",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-3",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-0",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-3",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-0",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-3",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 390,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-0",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-3",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-0",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-3",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-0",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-3",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-0",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-3",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-3",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/status",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/ai/costco-onboarding/demo-0",
+      "status": 200
+    },
+    {
+      "width": 1280,
+      "method": "GET",
+      "path": "/api/product-photo-intake/demo-0",
+      "status": 200
+    }
+  ],
+  "cancelled": [
+    {
+      "width": 360,
+      "path": "/api/merchant/product-archive?page=0&query=",
+      "error": "Load request cancelled"
+    },
+    {
+      "width": 360,
+      "path": "/api/merchant/product-archive?page=0&query=",
+      "error": "Load request cancelled"
+    },
+    {
+      "width": 360,
+      "path": "/api/merchant/product-archive?page=0&query=",
+      "error": "Load request cancelled"
+    },
+    {
+      "width": 360,
+      "path": "/api/merchant/product-archive?page=0&query=",
+      "error": "Load request cancelled"
+    },
+    {
+      "width": 360,
+      "path": "/api/merchant/product-archive?page=0&query=",
+      "error": "Load request cancelled"
+    },
+    {
+      "width": 390,
+      "path": "/api/merchant/product-archive?page=0&query=",
+      "error": "Load request cancelled"
+    },
+    {
+      "width": 390,
+      "path": "/api/merchant/product-archive?page=0&query=",
+      "error": "Load request cancelled"
+    },
+    {
+      "width": 390,
+      "path": "/api/merchant/product-archive?page=0&query=",
+      "error": "Load request cancelled"
+    },
+    {
+      "width": 390,
+      "path": "/api/merchant/product-archive?page=0&query=",
+      "error": "Load request cancelled"
+    },
+    {
+      "width": 390,
+      "path": "/api/merchant/product-archive?page=0&query=",
+      "error": "Load request cancelled"
+    },
+    {
+      "width": 1280,
+      "path": "/api/merchant/product-archive?page=0&query=",
+      "error": "Load request cancelled"
+    },
+    {
+      "width": 1280,
+      "path": "/api/merchant/product-archive?page=0&query=",
+      "error": "Load request cancelled"
+    },
+    {
+      "width": 1280,
+      "path": "/api/merchant/product-archive?page=0&query=",
+      "error": "Load request cancelled"
+    },
+    {
+      "width": 1280,
+      "path": "/api/merchant/product-archive?page=0&query=",
+      "error": "Load request cancelled"
+    },
+    {
+      "width": 1280,
+      "path": "/api/merchant/product-archive?page=0&query=",
+      "error": "Load request cancelled"
+    }
+  ],
+  "errors": []
+}
