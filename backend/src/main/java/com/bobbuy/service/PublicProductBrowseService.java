@@ -36,7 +36,7 @@ public class PublicProductBrowseService {
   return ReferencePriceDisplay.main(entry).map(offer->{var facts=offer.facts();var display=ReferencePriceDisplay.of(facts,now);return display.amount()==null?null:new CardReference(display.amount(),"JPY",facts.priceUnit,offer.postId(),facts.id,display.state(),display.originalPrice(),display.discountAmount(),facts.priceChange);}).orElse(null);
  }
  public record Browse(List<Card> items,int page,int size,long scopeTotal,long matchedTotal,boolean hasNext,
-   String revision,List<Facet> categories,long unclassified,String query,String category,String locale,String dataset,String datasetRevision,long markedScopeTotal,List<Shelf> shelves,String selectedCategory){}
+   String revision,List<Facet> categories,long unclassified,String query,String category,String locale,String dataset,String datasetRevision,long markedScopeTotal,List<Shelf> shelves,String selectedCategory,Integer offset){}
  public record Detail(PublicProductCatalogService.Entry item,List<ProductMarkerService.Definition> markers,String revision){}
  public static final class Changed extends RuntimeException { public Changed(){super("Public browse changed; restart at page 0");} }
  public static final class Missing extends RuntimeException {}
@@ -91,7 +91,17 @@ public class PublicProductBrowseService {
  private Browse project(int page,Long merchant,String query,String category,String locale,boolean marked,String expected,String order,boolean markedFirst,String shelfOnly){
   return project(page,merchant,query,category,locale,marked,expected,order,markedFirst,shelfOnly,false);
  }
+ /** Bounded viewport read: offsets do not depend on the current number of grid columns.
+  * Legacy page callers retain their 24-item contract and revision semantics. */
+ @Transactional(readOnly=true,isolation=Isolation.REPEATABLE_READ)
+ public Browse range(Long merchant,String query,String category,String locale,boolean marked,String expected,String order,boolean markedFirst,String section,boolean sections,Integer offset,Integer limit){
+  if(offset==null||limit==null||offset<0||offset>2400000||limit<1||limit>48||offset>0&&expected==null||section!=null&&!section.isEmpty()&&expected==null||section!=null&&section.isEmpty()&&offset!=0)throw new IllegalArgumentException("Invalid viewport range");
+  return project(0,merchant,query,category,locale,marked,expected,order,markedFirst,section,sections,offset,limit);
+ }
  private Browse project(int page,Long merchant,String query,String category,String locale,boolean marked,String expected,String order,boolean markedFirst,String shelfOnly,boolean sections){
+  return project(page,merchant,query,category,locale,marked,expected,order,markedFirst,shelfOnly,sections,null,null);
+ }
+ private Browse project(int page,Long merchant,String query,String category,String locale,boolean marked,String expected,String order,boolean markedFirst,String shelfOnly,boolean sections,Integer rangeOffset,Integer rangeLimit){
   ProductBrowseOrder.validate(order);
   validate(page,merchant,query,category,locale,expected);String q=text(query).strip().toLowerCase(Locale.ROOT),cat=text(category);
   var now=java.time.Instant.now();var data=dataset(merchant);String dataset=marked?"marked":"all";
@@ -117,16 +127,18 @@ public class PublicProductBrowseService {
   filtered=ProductBrowseOrder.sorted(filtered,order,e->reference(e,now)==null?null:reference(e,now).amount(),e->e.rating(),e->heat.getOrDefault(e.productId(),0L));
   if(order.startsWith("price"))filtered=ProductBrowseOrder.prices(filtered,order,e->{var actual=currentPrices.get(e.productId());var ref=reference(e,now);return actual!=null?actual:ref==null?null:new PublicBrowsePriceService.Price(ref.amount(),ref.currency());});
   if(markedFirst&&!marked)filtered=filtered.stream().sorted(Comparator.comparing((PublicProductCatalogService.Entry e)->data.markers().getOrDefault(e.productId(),List.of()).isEmpty())).toList();
-  int start=(int)Math.min((long)page*24,filtered.size()),end=Math.min(start+24,filtered.size());
+  int size=rangeLimit==null?24:rangeLimit;
+  int start=(int)Math.min(rangeOffset==null?(long)page*24:rangeOffset,filtered.size()),end=Math.min(start+size,filtered.size());
   java.util.function.Function<PublicProductCatalogService.Entry,Card> card=e->new Card(e.productId(),e.merchantId(),e.name(),e.brand(),e.itemNumber(),e.specification(),e.model(),e.packaging(),e.gallery().isEmpty()?null:e.gallery().get(0),shoppingData==null?e.categories():display.stream().filter(c->c.id().equals(assignments.get(e.productId()))).map(c->new RecommendationItem.Label(c.id(),c.name())).toList(),data.markers().getOrDefault(e.productId(),List.of()),e.reviewedMaster(),e.rating(),reference(e,now));
-  var cards=shelfOnly==null?filtered.subList(start,end).stream().map(card).toList():List.<Card>of();
+  boolean leafRange=rangeOffset!=null&&sections&&"".equals(shelfOnly)&&parents.containsKey(selected);
+  var cards=shelfOnly==null||leafRange?filtered.subList(start,end).stream().map(card).toList():List.<Card>of();
   var shelves=new ArrayList<Shelf>();
-  if(!sections&&shoppingData!=null&&!selected.equals("__unclassified")&&!parents.containsKey(selected)
+  if(rangeOffset==null&&!sections&&shoppingData!=null&&!selected.equals("__unclassified")&&!parents.containsKey(selected)
       &&(selected.isEmpty()||filtered.stream().noneMatch(e->selected.equals(assignments.get(e.productId()))))){
    for(var facet:facets)if(Objects.equals(facet.parentId(),selected.isEmpty()?null:selected)){var shelfRows=filtered.stream().filter(e->{var leaf=assignments.get(e.productId());return facet.id().equals(leaf)||facet.id().equals(parents.get(leaf));}).toList();if(!shelfRows.isEmpty())shelves.add(new Shelf(facet.id(),shelfOnly==null||facet.id().equals(shelfOnly)||shelfOnly.isEmpty()&&shelves.isEmpty()?shelfRows.stream().limit(8).map(card).toList():List.of(),shelfRows.size()));}
    if(selected.isEmpty()&&unclassified>0){var rows=filtered.stream().filter(e->!assignments.containsKey(e.productId())).toList();shelves.add(new Shelf("__unclassified",shelfOnly==null||"__unclassified".equals(shelfOnly)||shelfOnly.isEmpty()&&shelves.isEmpty()?rows.stream().limit(8).map(card).toList():List.of(),rows.size()));}
   }
-  if(sections){
+  if(sections&&!leafRange){
    // Partition by authoritative assignment, never by the first page's cards. Include retained root-only assignments.
    var bySection=new LinkedHashMap<String,List<PublicProductCatalogService.Entry>>();
    for(var root:display)if(root.parentId()==null){
@@ -137,8 +149,8 @@ public class PublicProductBrowseService {
    for(var entry:filtered)bySection.computeIfAbsent(assignments.getOrDefault(entry.productId(),"__unclassified"),key->new ArrayList<>()).add(entry);
    for(var entry:bySection.entrySet())if(!entry.getValue().isEmpty()){
     var rows=entry.getValue();boolean include=entry.getKey().equals(shelfOnly)||shelfOnly.isEmpty()&&shelves.isEmpty();
-    int offset=(int)Math.min((long)page*24,rows.size());
-    shelves.add(new Shelf(entry.getKey(),include?rows.subList(offset,Math.min(offset+(shelfOnly.isEmpty()?8:24),rows.size())).stream().map(card).toList():List.of(),rows.size()));
+    int offset=(int)Math.min(rangeOffset==null?(long)page*24:rangeOffset,rows.size());
+    shelves.add(new Shelf(entry.getKey(),include?rows.subList(offset,Math.min(offset+(rangeLimit!=null?rangeLimit:shelfOnly.isEmpty()?8:24),rows.size())).stream().map(card).toList():List.of(),rows.size()));
    }
   }
   if(shelfOnly!=null&&!shelfOnly.isEmpty()){
@@ -146,7 +158,7 @@ public class PublicProductBrowseService {
    if(shelves.isEmpty())throw new IllegalArgumentException("Unknown overview shelf");
   }
   long markedScopeTotal=data.entries().stream().filter(e->!data.markers().getOrDefault(e.productId(),List.of()).isEmpty()).count();
-  return new Browse(cards,page,24,scope.size(),filtered.size(),end<filtered.size(),version,facets,unclassified,q,cat,locale,dataset,datasetVersion,markedScopeTotal,List.copyOf(shelves),selected);
+  return new Browse(cards,page,size,scope.size(),filtered.size(),end<filtered.size(),version,facets,unclassified,q,cat,locale,dataset,datasetVersion,markedScopeTotal,List.copyOf(shelves),selected,rangeOffset);
  }
  @Transactional(readOnly=true,isolation=Isolation.REPEATABLE_READ)
  public Detail detail(String id,Long merchant){

@@ -4,7 +4,7 @@ import {I18nProvider} from '../i18n';
 import PublicProductCatalog from './PublicProductCatalog';
 import {browsePage,productCard} from '../test/browseFixtures';
 const mocks=vi.hoisted(()=>({productOverview:vi.fn(),productShelf:vi.fn(),productBrowse:vi.fn(),productSales:vi.fn(),productDetail:vi.fn()}));
-vi.mock('../api',()=>({storefrontApi:mocks,productMarkerApi:{}}));
+vi.mock('../api',async()=>{const {viewportReply}=await import('../test/browseFixtures');return {storefrontApi:new Proxy(mocks,{get(target,key){if(['productBrowse','productOverview','productShelf'].includes(String(key)))return async(q:any)=>viewportReply(await (target as any)[key](q),q);return Reflect.get(target,key);}}),productMarkerApi:{}};});
 vi.mock('../context/UserRoleContext',()=>({useUserRole:()=>({user:null,isMerchant:false,isAuthenticated:false,loading:false})}));
 function Probe(){return <output data-testid="url">{useLocation().search}</output>}
 function mount(path='/products'){localStorage.setItem('bobbuy_locale','en-US');return render(<I18nProvider><MemoryRouter initialEntries={[path]}><PublicProductCatalog products={[]} quantities={{}} onAdd={()=>{}} canBuy={()=>false}/><Probe/></MemoryRouter></I18nProvider>);}
