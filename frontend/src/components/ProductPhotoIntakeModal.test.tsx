@@ -46,6 +46,18 @@ it('shows private price-tag text and uncertainty as evidence without enabling a 
  expect(screen.getByText('photo.save')).toBeDisabled();
  expect(mocks.confirm).not.toHaveBeenCalled();
 });
+it('shows packaging label evidence while a missing shelf tag blocks confirmation',async()=>{
+ const missing={...job,failureCode:'photo.tag_missing'};
+ mocks.get.mockResolvedValue(missing);
+ mocks.review.mockResolvedValue({...review(),itemNumber:null,status:'IDENTITY_REQUIRED',matches:[],
+  photoFacts:{amount:null,transcription:{tags:[],packagingLabels:[{rawText:'93963 税抜739円 税込798円'}],productFeatures:[],uncertainties:[]}}});
+ render(<ProductPhotoIntakeModal {...props} job={missing}/>);
+ fireEvent.click(await screen.findByText('photo.transcription'));
+ expect(screen.getByText('photo.packaging_transcription')).toBeVisible();
+ expect(screen.getByText('93963 税抜739円 税込798円')).toBeVisible();
+ expect(screen.queryByText('photo.save')).not.toBeInTheDocument();
+ expect(mocks.confirm).not.toHaveBeenCalled();
+});
 it('does not auto-confirm availability and retains input after save failure for exact retry',async()=>{
  render(<ProductPhotoIntakeModal {...props} job={job}/>);await screen.findByDisplayValue('999');expect(screen.getByText('photo.suggestions')).toBeVisible();expect(screen.getByLabelText('photo.in_stock')).not.toBeChecked();
  fireEvent.click(screen.getByLabelText('photo.identity_confirm'));fireEvent.click(screen.getByLabelText('photo.price_confirm'));fireEvent.click(screen.getByLabelText('photo.in_stock'));

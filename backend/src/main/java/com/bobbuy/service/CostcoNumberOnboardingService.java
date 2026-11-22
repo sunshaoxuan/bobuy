@@ -92,6 +92,16 @@ public final class CostcoNumberOnboardingService {
             if(job.privatePhotoSha256()!=null&&intake.candidate()!=null&&intake.candidate().photoFacts()!=null
                     &&Boolean.FALSE.equals(intake.candidate().photoFacts().priceTagVisible()))
                 return move(job,NEEDS_INPUT,null,job.evidence(),job.decisions(),null,null,"photo.tag_missing");
+            var photoFacts=intake.candidate()==null?null:intake.candidate().photoFacts();
+            if(job.privatePhotoSha256()!=null&&photoFacts!=null&&photoFacts.transcription()!=null
+                    &&photoFacts.transcription().incompleteTagText()){
+                String visibleItem=null;
+                if(intake.verdict()==Verdict.ACCEPT&&intake.identifiedItemNumber()!=null){
+                    try{visibleItem=normalizeItemNumber(intake.identifiedItemNumber());}
+                    catch(IllegalArgumentException ignored){/* Keep the original evidence even without a valid item. */}
+                }
+                return move(job,NEEDS_INPUT,visibleItem,job.evidence(),job.decisions(),null,null,"photo.transcription_incomplete");
+            }
             if (intake.verdict() != Verdict.ACCEPT) return stop(job, intake);
             String item = normalizeItemNumber(intake.identifiedItemNumber());
             if (job.itemNumber() != null && !job.itemNumber().equals(item))

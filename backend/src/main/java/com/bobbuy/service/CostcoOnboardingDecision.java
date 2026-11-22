@@ -76,19 +76,33 @@ public record CostcoOnboardingDecision(Stage stage, Verdict verdict, String prov
             this(amount,currency,unit,conditions,priceKind,productVisible,transcription,null);
         }
         public PhotoFacts {
+            if(transcription!=null&&transcription.incompleteTagText()){
+                amount=null;currency=null;unit=null;conditions=null;priceKind="UNKNOWN";
+            }
             if(Boolean.FALSE.equals(priceTagVisible)){
                 amount=null;currency=null;unit=null;conditions=null;priceKind="UNKNOWN";
+                if(transcription!=null&&!transcription.tags().isEmpty()){
+                    var labels=new java.util.ArrayList<>(transcription.packagingLabels());
+                    labels.addAll(transcription.tags());
+                    transcription=new PhotoTranscription(List.of(),transcription.productFeatures(),transcription.uncertainties(),labels,transcription.incompleteTagText());
+                }
             }
         }
     }
 
     /** Original text and structure from the private photo, bound to its hash by the INTAKE trace. */
-    public record PhotoTranscription(List<PhotoTag> tags,List<String> productFeatures,List<String> uncertainties) {
+    public record PhotoTranscription(List<PhotoTag> tags,List<String> productFeatures,List<String> uncertainties,
+            @JsonInclude(JsonInclude.Include.NON_EMPTY) List<PhotoTag> packagingLabels,
+            @JsonInclude(JsonInclude.Include.NON_DEFAULT) boolean incompleteTagText) {
+        public PhotoTranscription(List<PhotoTag> tags,List<String> productFeatures,List<String> uncertainties){
+            this(tags,productFeatures,uncertainties,List.of(),false);
+        }
         public PhotoTranscription {
             tags=tags==null?List.of():List.copyOf(tags);
             productFeatures=photoTextList(productFeatures);
             uncertainties=photoTextList(uncertainties);
-            if(tags.size()>12)throw new IllegalArgumentException("onboarding.photo_transcription");
+            packagingLabels=packagingLabels==null?List.of():List.copyOf(packagingLabels);
+            if(tags.size()+packagingLabels.size()>12)throw new IllegalArgumentException("onboarding.photo_transcription");
         }
     }
 

@@ -142,8 +142,12 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
                 Without a visible shop tag leave identifiedItemNumber and the candidate itemNumber null. Preserve
                 readable brand, name and packaging to help identify the product and return NEEDS_EVIDENCE.
                 productVisible means the physical product is visible, not merely a price label. Never infer availability.
-                At photo INTAKE only, photoFacts may additionally contain transcription: tags, productFeatures, uncertainties.
-                Keep one tag per visible label. Preserve rawText verbatim including line breaks, script, symbols, and
+                At photo INTAKE only, photoFacts may additionally contain transcription: tags, packagingLabels, productFeatures, uncertainties.
+                Use tags only for independent in-store tags. Put visible item numbers, prices and tax wording
+                printed on the packaging or its stickers in packagingLabels, using the same schema as tags.
+                Record all visible price variants as printed, including pre-tax and tax-inclusive amounts.
+                rawText is required and must contain actual readable text; omit any unreadable label from tags
+                and report the uncertainty. Keep one tag per visible label. Preserve rawText verbatim including line breaks, script, symbols, and
                 promotional fine print. For each tag supply rawText,itemNumber,name,brand,unit,specification,netContent,
                 packageQuantity,taxStatus,conditions,period,prices; unknown fields are null. Each price has kind,rawText,
                 amount,currency. Price kinds: TOTAL, UNIT, STRIKETHROUGH, DISCOUNT, COUPON, UNKNOWN. Do not convert a
@@ -219,6 +223,13 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
                         if(job.privatePhotoSha256()==null||stage!=Stage.INTAKE)
                             throw new IllegalArgumentException("onboarding.photo_transcription");
                         validateTranscription(facts.get("transcription"));
+                        var transcription=(ObjectNode)facts.get("transcription");
+                        if(discardTagsWithoutRawText(transcription)||facts.path("priceTagVisible").asBoolean(false)
+                                &&transcription.path("tags").isEmpty()){
+                            transcription.put("incompleteTagText",true);
+                        }
+                    }else if(stage==Stage.INTAKE&&job.privatePhotoSha256()!=null&&facts.path("priceTagVisible").asBoolean(false)){
+                        ((ObjectNode)facts).putObject("transcription").put("incompleteTagText",true);
                     }
                 }
                 candidate = mapper.treeToValue(c, Candidate.class);
@@ -245,13 +256,30 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
         catch (LlmGateway.PinnedFailure error) { throw error; }
         catch (Exception error) { throw new IllegalStateException("onboarding.decision_schema"); }
     }
+    private static boolean discardTagsWithoutRawText(ObjectNode transcription){
+        var tags=(com.fasterxml.jackson.databind.node.ArrayNode)transcription.get("tags");
+        boolean incomplete=false;
+        for(int i=tags.size()-1;i>=0;i--){
+            var raw=tags.get(i).path("rawText");
+            if(!raw.isTextual()||raw.asText().isBlank()||raw.asText().length()>6000){
+                tags.remove(i);
+                incomplete=true;
+            }
+        }
+        return incomplete;
+    }
+
     private static void validateTranscription(JsonNode transcription){
-        fields(transcription,Set.of("tags","productFeatures","uncertainties"));
+        fields(transcription,Set.of("tags","packagingLabels","productFeatures","uncertainties"));
         for(String key:List.of("tags","productFeatures","uncertainties"))
             if(!transcription.path(key).isArray())throw new IllegalArgumentException("onboarding.photo_transcription");
-        for(var tag:transcription.path("tags")){
+        if(transcription.hasNonNull("packagingLabels")&&!transcription.path("packagingLabels").isArray())
+            throw new IllegalArgumentException("onboarding.photo_transcription");
+        for(String key:List.of("tags","packagingLabels"))for(var tag:transcription.path(key)){
             fields(tag,Set.of("rawText","itemNumber","name","brand","unit","specification","netContent",
                     "packageQuantity","taxStatus","conditions","period","prices"));
+            if(key.equals("tags")&&(!tag.path("rawText").isTextual()||tag.path("rawText").asText().isBlank()
+                    ||tag.path("rawText").asText().length()>6000))continue;
             if(!tag.path("prices").isArray())throw new IllegalArgumentException("onboarding.photo_transcription");
             for(var price:tag.path("prices"))fields(price,Set.of("kind","rawText","amount","currency"));
         }

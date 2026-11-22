@@ -72,6 +72,58 @@ class CostcoPinnedStageReviewerTest {
                 {"amount":999,"currency":"JPY","unit":"1 kg","conditions":"","priceKind":"WAREHOUSE","productVisible":true}
                 """,PhotoFacts.class).transcription());
     }
+    @Test void incompleteTagTextKeepsCoreIdentityAndVerifiedPhotoButDoesNotSupplyWarehousePrice()throws Exception{
+        var gateway=new FakeGateway();var store=new Store();
+        byte[] bytes=png();String hash=CostcoPinnedStageReviewer.digest(bytes);store.contents.put(hash,bytes);
+        gateway.answer="""
+            {"verdict":"ACCEPT","reason":"clear item","identifiedItemNumber":"53432","candidate":{
+              "itemNumber":"53432","name":"Seafood","translatedNames":{},"unknownFields":[],"referencePrices":[],
+              "photoFacts":{"amount":2698,"currency":"JPY","unit":"1 kg","priceKind":"WAREHOUSE",
+                "productVisible":true,"priceTagVisible":true,"transcription":{
+                  "tags":[{"itemNumber":"53432","prices":[{"kind":"TOTAL","amount":2698}]}],
+                  "productFeatures":["1 kg package"],"uncertainties":[]}}
+            }}
+            """;
+        var result=new CostcoPinnedStageReviewer(gateway,mapper,store).review(Stage.INTAKE,job(List.of(),List.of(),hash));
+        assertEquals("53432",result.identifiedItemNumber());
+        assertEquals("Seafood",result.candidate().name());
+        assertTrue(result.trace().imageViewHashes().containsKey(hash));
+        var facts=result.candidate().photoFacts();
+        assertNull(facts.amount());
+        assertTrue(facts.transcription().incompleteTagText());
+        assertEquals(List.of("1 kg package"),facts.transcription().productFeatures());
+        var response=mapper.readTree(gateway.answer);
+        var fieldTag=(com.fasterxml.jackson.databind.node.ObjectNode)response.at("/candidate/photoFacts/transcription/tags/0");
+        fieldTag.put("rawText","53432 JPY 2698");
+        ((com.fasterxml.jackson.databind.node.ObjectNode)fieldTag.at("/prices/0")).put("rawText","JPY 2698").put("currency","JPY");
+        gateway.answer=response.toString();
+        var complete=new CostcoPinnedStageReviewer(gateway,mapper,store).review(Stage.INTAKE,job(List.of(),List.of(),hash));
+        assertEquals(new java.math.BigDecimal("2698"),complete.candidate().photoFacts().amount());
+        assertFalse(complete.candidate().photoFacts().transcription().incompleteTagText());
+    }
+    @Test void packagingOnlyKeepsPrintedNumberAndBothPricesAsPackagingEvidence()throws Exception{
+        var gateway=new FakeGateway();var store=new Store();
+        byte[] bytes=png();String hash=CostcoPinnedStageReviewer.digest(bytes);store.contents.put(hash,bytes);
+        gateway.answer="""
+            {"verdict":"NEEDS_EVIDENCE","reason":"packaging only","identifiedItemNumber":"93963","candidate":{
+              "itemNumber":"93963","name":"Matcha muffins","translatedNames":{},"unknownFields":[],"referencePrices":[],
+              "photoFacts":{"amount":798,"currency":"JPY","unit":"6 pack","priceKind":"WAREHOUSE",
+                "productVisible":true,"priceTagVisible":false,"transcription":{
+                  "tags":[],"packagingLabels":[{"rawText":"93963 税抜739円 税込798円","itemNumber":"93963","prices":[
+                   {"kind":"TOTAL","rawText":"税抜739円","amount":739,"currency":"JPY"},
+                   {"kind":"TOTAL","rawText":"税込798円","amount":798,"currency":"JPY"}]}],
+                  "productFeatures":[],"uncertainties":[]}}
+            }}
+            """;
+        var result=new CostcoPinnedStageReviewer(gateway,mapper,store).review(Stage.INTAKE,job(List.of(),List.of(),hash));
+        assertNull(result.identifiedItemNumber());
+        assertNull(result.candidate().itemNumber());
+        var facts=result.candidate().photoFacts();
+        assertNull(facts.amount());
+        var label=facts.transcription().packagingLabels().get(0);
+        assertEquals("93963",label.itemNumber());
+        assertEquals(List.of(739,798),label.prices().stream().map(p->p.amount().intValueExact()).toList());
+    }
     @Test void supplementedIntakeUsesUncroppedFieldPixelsFirstAndPackagingAsContext() throws Exception {
         var gateway=new FakeGateway();
         var store=new Store();

@@ -6,6 +6,8 @@ const messages: Dictionary = {
 "products.archive_loading":"商品を読み込み中",
 "products.archive_navigation":"商品のページ",
 "products.archive_export_limit":"商品が500件を超えるため、上限内でエクスポートできません。",
+"photo.transcription_incomplete": "値札の原文が不完全です。店頭価格は入力されていません。元の写真と残った証拠を確認して再試行できます。",
+"photo.packaging_transcription": "包装の表示（参考情報）",
 "photo.transcription":"値札の読み取り（AI の提案）",
 "photo.transcription_features":"写真に写っている商品の特徴",
 "photo.transcription_uncertainties":"読み取りが不確かな箇所",

@@ -6,6 +6,8 @@ const messages: Dictionary = {
 "products.archive_loading":"Loading products",
 "products.archive_navigation":"Product pages",
 "products.archive_export_limit":"The archive exceeds the 500-product export limit.",
+"photo.transcription_incomplete": "Price-tag text is missing or incomplete, so no on-site price was filled in. Review the original photo and retained evidence before retrying.",
+"photo.packaging_transcription": "Packaging labels (evidence only)",
 "photo.transcription":"Price-tag transcription (AI suggestion)",
 "photo.transcription_features":"Visible product features",
 "photo.transcription_uncertainties":"Uncertain readings",

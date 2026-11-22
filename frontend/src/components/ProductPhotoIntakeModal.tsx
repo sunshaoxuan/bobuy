@@ -205,11 +205,13 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
    <input ref={supplementCamera} type="file" accept="image/*" capture="environment" hidden onChange={e=>{const file=e.target.files?.[0];e.target.value='';if(file)void supplement(file);}}/>
    <input ref={supplementPicker} type="file" accept="image/*" hidden onChange={e=>{const file=e.target.files?.[0];e.target.value='';if(file)void supplement(file);}}/>
   </section>}
-  {review&&!saved&&job?.failureCode!=='photo.tag_missing'&&<section>
-   <Typography.Title level={4}>{t('photo.review_details')}</Typography.Title>
-   {review.photoFacts?.transcription&&<details>
+   {review?.photoFacts?.transcription&&<details>
     <summary>{t('photo.transcription')}</summary>
     {review.photoFacts.transcription.tags.map((tag,index)=><p key={index} style={{whiteSpace:'pre-wrap'}}>{tag.rawText}</p>)}
+    {!!review.photoFacts.transcription.packagingLabels?.length&&<>
+     <p>{t('photo.packaging_transcription')}</p>
+     {review.photoFacts.transcription.packagingLabels.map((tag,index)=><p key={index} style={{whiteSpace:'pre-wrap'}}>{tag.rawText}</p>)}
+    </>}
     {!!review.photoFacts.transcription.productFeatures.length&&<>
      <p>{t('photo.transcription_features')}</p>
      <ul>{review.photoFacts.transcription.productFeatures.map((value,index)=><li key={index}>{value}</li>)}</ul>
@@ -219,6 +221,8 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
      <ul>{review.photoFacts.transcription.uncertainties.map((value,index)=><li key={index}>{value}</li>)}</ul>
     </>}
    </details>}
+  {review&&!saved&&job?.failureCode!=='photo.tag_missing'&&<section>
+   <Typography.Title level={4}>{t('photo.review_details')}</Typography.Title>
    {!!review.sources?.length&&<details><summary>{t('photo.sources')}</summary>{review.sources.map(source=><p key={source.sha256}><a href={source.canonicalUrl} target="_blank" rel="noopener noreferrer">{source.canonicalUrl}</a></p>)}</details>}
    {!isNew&&!!review.candidate?.unknownFields?.length&&<p>{t('photo.unknown_fields')}</p>}
    {isNew&&officialPreview&&<><p>{t('photo.official_image')}</p><img className="photo-evidence" src={officialPreview} alt={t('photo.official_image')}/><Checkbox checked={useOfficialImage} onChange={e=>{setUseOfficialImage(e.target.checked);edit();}}>{t('photo.use_official_image')}</Checkbox></>}

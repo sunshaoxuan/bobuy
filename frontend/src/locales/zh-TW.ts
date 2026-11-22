@@ -5,6 +5,8 @@ const messages: Dictionary = {
 "products.archive_loading":"正在載入商品",
 "products.archive_navigation":"商品分頁",
 "products.archive_export_limit":"商品檔案超過 500 件，無法依現有上限匯出。",
+"photo.transcription_incomplete": "價籤原文缺失或不完整，現場報價未填入。可查看原圖和已保留的證據後重試。",
+"photo.packaging_transcription": "包裝標籤（僅供佐證）",
 "photo.transcription":"價籤原文（AI 轉錄）",
 "photo.transcription_features":"照片可見的商品特徵",
 "photo.transcription_uncertainties":"未能確定的內容",
