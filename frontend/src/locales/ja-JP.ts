@@ -1404,7 +1404,7 @@ const messages: Dictionary = {
   "gallery.save": "確認済み画像を登録",
   "gallery.manage": "メイン画像と並び順",
   "gallery.select": "おすすめ商品を選択",
-  "gallery.pending": "商品画像を確認中",
+  "gallery.pending": "画像なし",
   "gallery.main": "現在のメイン画像",
   "gallery.set_main": "メイン画像にする",
   "gallery.remove_confirm": "ギャラリーから除外しますか？元の根拠資料は保持します。",

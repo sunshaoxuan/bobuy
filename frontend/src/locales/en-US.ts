@@ -1404,7 +1404,7 @@ const messages: Dictionary = {
   "gallery.save": "Save verified gallery",
   "gallery.manage": "Cover and image order",
   "gallery.select": "Select recommendation item",
-  "gallery.pending": "Product image pending verification",
+  "gallery.pending": "No image available",
   "gallery.main": "Current cover",
   "gallery.set_main": "Set as cover",
   "gallery.remove_confirm": "Remove from gallery? Original source evidence is retained.",

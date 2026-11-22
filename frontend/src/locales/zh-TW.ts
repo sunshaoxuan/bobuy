@@ -1543,7 +1543,7 @@ const messages: Dictionary = {
   "gallery.save": "登錄已核圖集",
   "gallery.manage": "主圖與圖集排序",
   "gallery.select": "選擇推薦項目",
-  "gallery.pending": "商品圖片待核",
+  "gallery.pending": "暫無圖片",
   "gallery.main": "目前主圖",
   "gallery.set_main": "設為主圖",
   "gallery.remove_confirm": "從圖集中移除？原始來源證據仍保留。",
