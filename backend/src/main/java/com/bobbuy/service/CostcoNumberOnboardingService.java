@@ -89,6 +89,9 @@ public final class CostcoNumberOnboardingService {
         try {
             var intake = review(Stage.INTAKE, job);
             job = append(job, intake);
+            if(job.privatePhotoSha256()!=null&&intake.candidate()!=null&&intake.candidate().photoFacts()!=null
+                    &&Boolean.FALSE.equals(intake.candidate().photoFacts().priceTagVisible()))
+                return move(job,NEEDS_INPUT,null,job.evidence(),job.decisions(),null,null,"photo.tag_missing");
             if (intake.verdict() != Verdict.ACCEPT) return stop(job, intake);
             String item = normalizeItemNumber(intake.identifiedItemNumber());
             if (job.itemNumber() != null && !job.itemNumber().equals(item))
@@ -170,7 +173,7 @@ public final class CostcoNumberOnboardingService {
     }
     private CostcoOnboardingJob move(CostcoOnboardingJob old, CostcoOnboardingJob.State state, String item,
             List<CostcoOfficialEvidence> evidence, List<CostcoOnboardingDecision> decisions, String productId, Long version, String failure) {
-        var next = new CostcoOnboardingJob(old.id(), old.idempotencyKey(), old.merchantId(), old.supplierId(), old.market(), old.inputHash(), item, old.privatePhotoSha256(), old.revision() + 1, state, evidence, decisions, productId, version, failure, clock.instant());
+        var next = new CostcoOnboardingJob(old.id(), old.idempotencyKey(), old.merchantId(), old.supplierId(), old.market(), old.inputHash(), item, old.privatePhotoSha256(), old.revision() + 1, state, evidence, decisions, productId, version, failure, clock.instant(),old.packagingPhotoSha256());
         if (!jobs.compareAndSet(old, next)) throw new IllegalStateException("onboarding.state_conflict");
         return next;
     }

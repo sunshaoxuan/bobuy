@@ -30,7 +30,7 @@ public class CostcoOnboardingWorker implements SmartLifecycle {
                 if(users.findById(lease.job().merchantId()).filter(u->u.isEnabled()&&u.getRoles().contains(com.bobbuy.model.Role.AGENT)).isEmpty()
                         ||suppliers.findById(lease.job().supplierId()).filter(s->Long.valueOf(lease.job().merchantId()).equals(s.getMerchantId())).isEmpty()) {
                     var old=lease.job();var next=new com.bobbuy.model.CostcoOnboardingJob(old.id(),old.idempotencyKey(),old.merchantId(),old.supplierId(),old.market(),old.inputHash(),old.itemNumber(),old.privatePhotoSha256(),old.revision()+1,
-                            com.bobbuy.model.CostcoOnboardingJob.State.NEEDS_INPUT,old.evidence(),old.decisions(),null,null,"error.auth.forbidden",Instant.now());
+                            com.bobbuy.model.CostcoOnboardingJob.State.NEEDS_INPUT,old.evidence(),old.decisions(),null,null,"error.auth.forbidden",Instant.now(),old.packagingPhotoSha256());
                     jobs.compareAndSet(old,next);return next;
                 }
                 return lease.job().state()==com.bobbuy.model.CostcoOnboardingJob.State.COMMITTING

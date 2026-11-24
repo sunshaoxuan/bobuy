@@ -94,7 +94,7 @@ public class JdbcCostcoOnboardingJobRepository implements CostcoOnboardingJobRep
         Instant now=Instant.now();
         var queued=new CostcoOnboardingJob(old.id(),old.idempotencyKey(),old.merchantId(),old.supplierId(),
                 old.market(),old.inputHash(),null,old.privatePhotoSha256(),old.revision()+1,QUEUED,
-                List.of(),List.of(),null,null,null,now);
+                List.of(),List.of(),null,null,null,now,old.packagingPhotoSha256());
         int updated=jdbc.update("update bb_costco_onboarding_job set "+ARCHIVE_ATTEMPT+"""
                 payload=cast(? as jsonb),state='QUEUED',revision=?,attempts=0,
                     lease_token=null,lease_until=null,next_run_at=?,updated_at=?
@@ -104,6 +104,25 @@ public class JdbcCostcoOnboardingJobRepository implements CostcoOnboardingJobRep
                 """,json(queued),queued.revision(),Timestamp.from(now),Timestamp.from(now),
                 old.id(),old.merchantId(),old.revision());
         return updated==1?queued:findOwned(old.id(),old.merchantId()).orElseThrow();
+    }
+
+    @Transactional
+    public CostcoOnboardingJob supplementPhoto(CostcoOnboardingJob old,String hash) {
+        Instant now=Instant.now();
+        var queued=new CostcoOnboardingJob(old.id(),old.idempotencyKey(),old.merchantId(),old.supplierId(),
+                old.market(),old.inputHash(),null,hash,old.revision()+1,QUEUED,
+                List.of(),List.of(),null,null,null,now,old.packagingPhotoSha256()==null?old.privatePhotoSha256():old.packagingPhotoSha256());
+        int updated=jdbc.update("""
+                update bb_costco_onboarding_job set
+                    attempt_history=attempt_history || jsonb_build_array(
+                        jsonb_build_object('attempt',attempts,'payload',payload,'lastUpdatedAt',updated_at)),
+                    payload=cast(? as jsonb),state='QUEUED',revision=?,attempts=0,
+                    lease_token=null,lease_until=null,next_run_at=?,updated_at=?
+                where id=? and merchant_id=? and revision=? and state='NEEDS_INPUT'
+                    and payload->>'failureCode'='photo.tag_missing'
+                """,json(queued),queued.revision(),Timestamp.from(now),Timestamp.from(now),old.id(),old.merchantId(),old.revision());
+        if(updated!=1)throw new com.bobbuy.api.response.ApiException(com.bobbuy.api.response.ErrorCode.INVALID_STATUS,"photo.conflict");
+        return queued;
     }
 
     @Override @Transactional public boolean compareAndSet(CostcoOnboardingJob old, CostcoOnboardingJob next) {
@@ -116,14 +135,14 @@ public class JdbcCostcoOnboardingJobRepository implements CostcoOnboardingJobRep
     }
     @Override @Transactional public Optional<Lease> claimNext(Instant now) {
         var exhausted=jdbc.query("select cast(payload as text) from bb_costco_onboarding_job where attempts>=3 and state in ('QUEUED','RETRY_WAIT','AI_INTAKE','EVIDENCE_FETCH','AI_REVIEW') and (lease_until is null or lease_until<=?) order by id limit 10 for update skip locked",(rs,n)->parse(rs.getString(1)),Timestamp.from(now));
-        for(var old:exhausted){var failed=new CostcoOnboardingJob(old.id(),old.idempotencyKey(),old.merchantId(),old.supplierId(),old.market(),old.inputHash(),old.itemNumber(),old.privatePhotoSha256(),old.revision()+1,FAILED,old.evidence(),old.decisions(),null,null,"onboarding.retry_exhausted",now);
+        for(var old:exhausted){var failed=new CostcoOnboardingJob(old.id(),old.idempotencyKey(),old.merchantId(),old.supplierId(),old.market(),old.inputHash(),old.itemNumber(),old.privatePhotoSha256(),old.revision()+1,FAILED,old.evidence(),old.decisions(),null,null,"onboarding.retry_exhausted",now,old.packagingPhotoSha256());
             jdbc.update("update bb_costco_onboarding_job set "+ARCHIVE_ATTEMPT+"payload=cast(? as jsonb),revision=?,state='FAILED',lease_token=null,lease_until=null,updated_at=? where id=?",json(failed),failed.revision(),Timestamp.from(now),old.id());}
         var candidates = jdbc.query("select cast(payload as text),attempts from bb_costco_onboarding_job where (lease_until is null or lease_until<=?) and next_run_at<=? and ((state in ('QUEUED','RETRY_WAIT','AI_INTAKE','EVIDENCE_FETCH','AI_REVIEW') and attempts<3) or (state='COMMITTING' and attempts<10)) order by next_run_at,id limit 1 for update skip locked",
                 (rs,n) -> parse(rs.getString(1)), Timestamp.from(now), Timestamp.from(now));
         if (candidates.isEmpty()) return Optional.empty();
         var old = candidates.get(0); var value = old;
         if (old.state() != QUEUED && old.state() != COMMITTING) {
-            value = new CostcoOnboardingJob(old.id(), old.idempotencyKey(), old.merchantId(), old.supplierId(), old.market(), old.inputHash(), old.privatePhotoSha256()==null?old.itemNumber():null, old.privatePhotoSha256(), old.revision()+1, QUEUED, List.of(), List.of(), null, null, null, now);
+            value = new CostcoOnboardingJob(old.id(), old.idempotencyKey(), old.merchantId(), old.supplierId(), old.market(), old.inputHash(), old.privatePhotoSha256()==null?old.itemNumber():null, old.privatePhotoSha256(), old.revision()+1, QUEUED, List.of(), List.of(), null, null, null, now,old.packagingPhotoSha256());
         }
         String token = UUID.randomUUID().toString();
         String archive=old.state()==COMMITTING?"":ARCHIVE_ATTEMPT;

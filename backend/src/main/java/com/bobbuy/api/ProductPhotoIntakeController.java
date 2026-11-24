@@ -21,6 +21,13 @@ public class ProductPhotoIntakeController {
     public ApiResponse<CostcoOnboardingController.View> retry(@PathVariable String id,@RequestParam long revision){
         return ApiResponse.success(CostcoOnboardingController.view(service.retry(id,revision)));
     }
+    @PostMapping(value="/{id}/supplement",consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ApiResponse<CostcoOnboardingController.View> supplement(@PathVariable String id,@RequestParam long revision,
+            @RequestParam org.springframework.web.multipart.MultipartFile file) throws java.io.IOException {
+        if(file.isEmpty()||file.getSize()>RecommendationImageValidator.MAX_BYTES)
+            throw new ApiException(ErrorCode.INVALID_REQUEST,"error.recommendation.image");
+        return ApiResponse.success(CostcoOnboardingController.view(service.supplement(id,revision,file.getBytes())));
+    }
     @GetMapping("/{id}") public ApiResponse<?> review(@PathVariable String id,@RequestParam(required=false) String itemNumber){return ApiResponse.success(service.review(id,itemNumber));}
     @PostMapping("/{id}/confirm") public ApiResponse<?> confirm(@PathVariable String id,@RequestBody ProductPhotoIntakeService.Confirm input){return ApiResponse.success(service.confirm(id,input));}
     @GetMapping("/products/{id}") public ApiResponse<?> history(@PathVariable String id){return ApiResponse.success(service.productHistory(id));}

@@ -1,6 +1,7 @@
 import {chromium,webkit} from '@playwright/test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 import os from 'node:os';
 import path from 'node:path';
 const out=process.env.PHOTO_PREVIEW||path.join(os.tmpdir(),'bobuy-photo-preview');
@@ -8,10 +9,12 @@ await fs.mkdir(out,{recursive:true});
 const engine=process.env.PHOTO_ENGINE||'chromium';
 const browser=await (engine==='webkit'?webkit.launch():chromium.launch({executablePath:process.env.PHOTO_CHROMIUM||'/usr/bin/chromium',args:['--no-sandbox']}));
 const png=await fs.readFile(new URL('../../docs/reports/evidence/product-photo-intake-20261120/synthetic-photo.png',import.meta.url));
+const tagged=await fs.readFile(new URL('../../docs/reports/evidence/product-photo-intake-20261120/synthetic-edge-tag.png',import.meta.url));
+const packaging=await fs.readFile(new URL('../../docs/reports/evidence/product-photo-intake-20261120/synthetic-packaging.png',import.meta.url));
 const list=['NEEDS_INPUT','QUEUED','AI_INTAKE','FAILED','COMPLETED'].map((state,i)=>({id:'demo-'+i,state,revision:7,supplierId:'s1',market:'JP',photo:true,itemNumber:i===0?'123456':null,createdAt:new Date(Date.UTC(2026,10,21,8,i)).toISOString(),reviewReady:i===0,failureCode:i===0?'photo.confirm_required':i===3?'ai.pinned_endpoint':null}));
 const name={'zh-CN':'北海道牛乳 · 200 毫升 × 12 瓶','zh-TW':'北海道牛乳 · 200 毫升 × 12 瓶','ja-JP':'北海道牛乳 200 mL × 12 本','en-US':'Hokkaido whole milk · 200 mL × 12 bottles'};
 const history={id:'observation',productId:'p1',amount:1180,currency:'JPY',unit:'12 瓶',observedAt:'2026-11-20T08:00:00Z'};
-const review={jobId:'demo-0',revision:7,supplierId:'s1',market:'JP',itemNumber:'123456',status:'MATCH',matches:[{id:'p1',version:2,name,specification:{},eligible:true}],history:[history],saved:null,photoFacts:{amount:1280,currency:'JPY',unit:'12 瓶',conditions:'',priceKind:'WAREHOUSE',productVisible:true}};
+const review={jobId:'demo-0',revision:7,supplierId:'s1',market:'JP',itemNumber:'123456',status:'MATCH',matches:[{id:'p1',version:2,name,specification:{},eligible:true}],history:[history],saved:null,photoFacts:{amount:1280,currency:'JPY',unit:'12 瓶',conditions:'',priceKind:'WAREHOUSE',productVisible:true,transcription:{tags:[{rawText:'税込 ¥1280\n割引 ¥200'}],productFeatures:['测试包装：蓝色标签'],uncertainties:['价签右侧未拍全']}}};
 const network=[],cancelled=[],errors=[],geometry=[],checks=[],locales=[];
 const pricesOnly=process.env.PHOTO_PRICE_CHECK==='1';
 const design=pricesOnly||process.env.PHOTO_DESIGN==='1';
@@ -21,10 +24,21 @@ for(const [width,height] of settings){
  let uploads=0,retries=0;
  const taskRows=list.map(job=>({...job}));
  if(design)taskRows.push({...list[0],id:'demo-new',itemNumber:'891021'});
+ let supplemented=false;
+ if(design&&!pricesOnly)taskRows.push({...list[3],id:'demo-pack',state:'NEEDS_INPUT',failureCode:'photo.tag_missing'});
  await context.addInitScript(({mockShare})=>{
   localStorage.setItem('bobbuy_access_token','synthetic-ui-only');
   localStorage.setItem('bobbuy_auth_user',JSON.stringify({id:1000,username:'demo',name:'BoBuy 测试商家',roles:['AGENT']}));
   if(!localStorage.getItem('bobbuy_locale'))localStorage.setItem('bobbuy_locale','zh-CN');
+  const fetchFromBrowser=window.fetch.bind(window);
+  window.fetch=async (input,options)=>{
+   if(String(input).endsWith('/supplement')&&options?.body instanceof FormData){
+    const file=options.body.get('file');
+    const digest=await crypto.subtle.digest('SHA-256',await file.arrayBuffer());
+    window.previewSupplementHash=[...new Uint8Array(digest)].map(value=>value.toString(16).padStart(2,'0')).join('');
+   }
+   return fetchFromBrowser(input,options);
+  };
   if(mockShare){
    Object.defineProperty(navigator,'canShare',{configurable:true,value:()=>true});
    Object.defineProperty(navigator,'share',{configurable:true,value:async d=>{window.previewShared=d.files.map(f=>f.name);throw new DOMException('User cancelled','AbortError');}});
@@ -42,10 +56,18 @@ for(const [width,height] of settings){
   else if(path===root+'/photo'&&method==='POST'){
    data={...list[1],id:'uploaded-'+(++uploads)};taskRows.push(data);
   } else if(path.startsWith(root+'/')) data=taskRows.find(x=>x.id===path.split('/').at(-1))||{};
-  else if(path.endsWith('/retry')){
+  else if(path===photo+'/demo-pack/supplement'){
+   if(engine==='chromium')assert(request.postDataBuffer()?.includes(tagged));
+   supplemented=true;
+   const index=taskRows.findIndex(row=>row.id==='demo-pack');
+   data={...taskRows[index],state:'QUEUED',failureCode:null,revision:8};
+   taskRows[index]=data;
+  } else if(path.endsWith('/retry')){
    retries++;data={...list[3],failureCode:null,state:'QUEUED',revision:8};taskRows[3]=data;
   } else if(path.endsWith('/photo')||path==='/api/demo-photo.png'){
-   return route.fulfill({contentType:'image/png',body:png});
+   const bytes=path===photo+'/demo-pack/photo'?(supplemented?tagged:packaging):
+    path.startsWith(photo+'/demo-')?tagged:png;
+   return route.fulfill({contentType:'image/png',body:bytes});
   } else if(path.endsWith('/confirm')) data={...history,id:'new-observation',amount:1280,inStock:true,priceChanged:true};
   else if(path.startsWith(photo+'/')) data=path.endsWith('demo-0')?(pricesOnly?{
    ...review,history:[{...history,amount:998765432,unit:'12 large retail units / 3 individually sealed packs'}],
@@ -182,10 +204,19 @@ for(const [width,height] of settings){
   await shot('queue','.photo-queue-summary');
  }
  await page.locator('[data-photo-job="demo-3"] button').click();
+ const fieldProof=page.locator('.product-photo-intake .photo-proof-toggle');
+ const fieldImage=fieldProof.locator('img');
+ await fieldImage.waitFor();
+ assert.equal(await fieldImage.evaluate(el=>getComputedStyle(el).objectFit),'contain');
+ const fieldSource=await fieldImage.getAttribute('src');
+ await fieldProof.click();
+ await page.getByAltText('现场原图',{exact:true}).filter({visible:true}).first().waitFor();
+ await fieldProof.click();
  await page.getByRole('status').filter({hasText:/桥地址未配置/}).waitFor();
  await page.getByRole('button',{name:'用原图重新识别'}).first().click();
  await page.waitForFunction(()=>/排队中|等待处理/.test(document.querySelector('.product-photo-intake')?.textContent||''));
  assert.equal(retries,1);
+ assert.equal(await fieldImage.getAttribute('src'),fieldSource);
  await page.locator('.product-photo-intake .ant-modal-close').click();
  await page.locator('[data-photo-job="demo-0"] button').click();
  await page.locator('input[value="1280"]').waitFor({state:'attached'});
@@ -197,8 +228,14 @@ for(const [width,height] of settings){
   assert.ok(await page.locator('.photo-review-overview').evaluate(section=>
    Boolean(section.compareDocumentPosition(section.parentElement.querySelector('.photo-queue'))&Node.DOCUMENT_POSITION_FOLLOWING)));
   await shot('review','.product-photo-intake .ant-modal-content');
+  const transcription=page.getByText('价签原文（AI 转录）',{exact:true});
+  await transcription.click();
+  const evidence=transcription.locator('..');
+  assert.equal(await evidence.getByText(/税込 ¥1280/).textContent(),'税込 ¥1280\n割引 ¥200');
+  await evidence.getByText('价签右侧未拍全').waitFor();
+  await transcription.click();
   await page.locator('.photo-proof-toggle').click();
-  await page.locator('.photo-evidence-expanded').getAttribute('alt').then(alt=>assert.equal(alt,'私有现场照片'));
+  await page.locator('.photo-evidence-expanded').getAttribute('alt').then(alt=>assert.equal(alt,'现场原图'));
   await page.locator('.photo-proof-toggle').click();
   for(const checkbox of await page.locator('.product-photo-intake input[type=checkbox]').all()){
    if(await checkbox.isEnabled())await checkbox.check();
@@ -210,6 +247,23 @@ for(const [width,height] of settings){
   await page.locator('[data-photo-job="demo-new"] button').click();
   await page.getByRole('heading',{name:'测试米饼'}).waitFor();
   await shot('new','.product-photo-intake .ant-modal-content');
+  await page.locator('.product-photo-intake .ant-modal-close').click();
+  await page.locator('.photo-queue-summary-list [data-photo-job="demo-pack"] button').click();
+  await page.getByText(/画面未见店内价签/).first().waitFor();
+  await page.waitForFunction(()=>document.querySelector('.product-photo-intake .photo-proof-toggle img')?.naturalHeight===320);
+  await shot('packaging','.product-photo-intake .ant-modal-content');
+  await page.locator('section[aria-label="为此任务补拍或上传店内价签"] input[type=file]:not([capture])')
+    .setInputFiles({name:'synthetic-edge-tag.png',mimeType:'image/png',buffer:tagged});
+  await page.waitForFunction(()=>document.querySelector('.product-photo-intake .photo-proof-toggle img')?.naturalHeight===720);
+  assert(supplemented);
+  assert.equal(await page.evaluate(()=>window.previewSupplementHash),createHash('sha256').update(tagged).digest('hex'));
+  await shot('supplement','.product-photo-intake .ant-modal-content');
+  await page.locator('.product-photo-intake .ant-modal-close').click();
+  await page.reload();
+  await page.locator('.photo-queue-summary-bar > button').click();
+  await page.locator('.photo-queue-summary-list [data-photo-job="demo-pack"] button').click();
+  await page.waitForFunction(()=>document.querySelector('.product-photo-intake .photo-proof-toggle img')?.naturalHeight===720);
+  await page.locator('.product-photo-intake .ant-modal-close').click();
  }else{
   await page.getByText('这是服务器保存的版本。HEIC 上传时可能已转换。').waitFor();
   await shot('stored','.product-photo-intake .ant-modal-content');

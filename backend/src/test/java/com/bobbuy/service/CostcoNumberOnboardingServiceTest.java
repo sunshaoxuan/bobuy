@@ -77,6 +77,24 @@ class CostcoNumberOnboardingServiceTest {
     private static CostcoNumberOnboardingService.Input input(long merchant, long supplier, String market, String number, String photo) {
         return new CostcoNumberOnboardingService.Input(merchant, Long.toString(supplier), market, REQUEST, number, photo);
     }
+    @Test void packagingWithoutVisibleStoreTagStopsBeforeNumberDiscoveryOrWrites() {
+        var fixture=new Fixture();
+        fixture.decide=(stage,job)->new CostcoOnboardingDecision(stage,Verdict.ACCEPT,"fixture","fixture-model",
+                CostcoNumberOnboardingService.REQUIRED_NODE,job.inputHash(),List.of(),"fixture","fixture",
+                "Packaging only","0014110",new Candidate("0014110","Fixture brand","Fixture pack",null,null,null,null,
+                        Map.of(),List.of(),List.of(),null,new PhotoFacts(java.math.BigDecimal.TEN,"JPY","pack",null,
+                        "WAREHOUSE",true,null,false)));
+        var service=fixture.service();
+        var job=service.enqueue(input(1,2,"JP",null,IMAGE));
+        var result=service.execute(job.id(),1,0);
+        assertEquals(NEEDS_INPUT,result.state());
+        assertEquals("photo.tag_missing",result.failureCode());
+        assertNull(result.itemNumber());
+        assertNull(result.decisions().get(0).candidate().photoFacts().amount());
+        assertEquals("Fixture pack",result.decisions().get(0).candidate().name());
+        assertEquals(0,fixture.fetches.get());
+        assertEquals(0,fixture.saves.get());
+    }
     @Test void normalizesProtocolOnlyAndRetainsLeadingZeroes() {
         assertEquals("0014110", CostcoNumberOnboardingService.normalizeItemNumber(" ００１４１１０ "));
         for (var invalid : List.of("14110,77839", "1e5", "14110 77839", "ITEM 14110", "", "-14110", "1234567890123"))
