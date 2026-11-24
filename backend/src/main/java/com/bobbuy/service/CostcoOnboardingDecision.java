@@ -46,24 +46,7 @@ public record CostcoOnboardingDecision(Stage stage, Verdict verdict, String prov
         public Candidate(String itemNumber,String brand,String name,String model,String specification,String packaging,String officialImageSha256,Map<String,String> translatedNames,List<String> unknownFields){this(itemNumber,brand,name,model,specification,packaging,officialImageSha256,translatedNames,unknownFields,List.of(),null);}
         public Candidate(String itemNumber,String brand,String name,String model,String specification,String packaging,String officialImageSha256,Map<String,String> translatedNames,List<String> unknownFields,List<ReferencePrice> referencePrices){this(itemNumber,brand,name,model,specification,packaging,officialImageSha256,translatedNames,unknownFields,referencePrices,null);}
     }
-    public record ArchiveDetails(String descriptionJa,String categoryNodeId,StorageCondition storageCondition,
-            @JsonInclude(JsonInclude.Include.NON_NULL) DescriptionEvidence descriptionEvidence) {
-        public ArchiveDetails(String descriptionJa,String categoryNodeId,StorageCondition storageCondition) {
-            this(descriptionJa,categoryNodeId,storageCondition,null);
-        }
-    }
-
-    public record DescriptionEvidence(Map<String,String> translations,List<String> sourceSha256) {
-        public DescriptionEvidence {
-            translations=Map.copyOf(translations);
-            sourceSha256=List.copyOf(sourceSha256);
-            if(!translations.keySet().equals(java.util.Set.of("ja-JP","zh-CN","zh-TW","en-US"))
-                    ||translations.values().stream().anyMatch(v->blank(v)||v.length()>2000)
-                    ||sourceSha256.isEmpty()||sourceSha256.size()>8||sourceSha256.stream().distinct().count()!=sourceSha256.size()
-                    ||sourceSha256.stream().anyMatch(s->!s.matches("[0-9a-f]{64}")))
-                throw new IllegalArgumentException("onboarding.description_evidence");
-        }
-    }
+    public record ArchiveDetails(String descriptionJa,String categoryNodeId,StorageCondition storageCondition) {}
     /** Suggestions from original private pixels, never an approved selling price or stock count. */
     public record PhotoFacts(BigDecimal amount,String currency,String unit,String conditions,String priceKind,boolean productVisible,
             @JsonInclude(JsonInclude.Include.NON_NULL) PhotoTranscription transcription,
@@ -76,9 +59,6 @@ public record CostcoOnboardingDecision(Stage stage, Verdict verdict, String prov
             this(amount,currency,unit,conditions,priceKind,productVisible,transcription,null);
         }
         public PhotoFacts {
-            if(transcription!=null&&transcription.incompleteTagText()){
-                amount=null;currency=null;unit=null;conditions=null;priceKind="UNKNOWN";
-            }
             if(Boolean.FALSE.equals(priceTagVisible)){
                 amount=null;currency=null;unit=null;conditions=null;priceKind="UNKNOWN";
                 if(transcription!=null&&!transcription.tags().isEmpty()){

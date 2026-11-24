@@ -77,18 +77,6 @@ class CostcoNumberOnboardingServiceTest {
     private static CostcoNumberOnboardingService.Input input(long merchant, long supplier, String market, String number, String photo) {
         return new CostcoNumberOnboardingService.Input(merchant, Long.toString(supplier), market, REQUEST, number, photo);
     }
-    @Test void transientVisionFailureKeepsDurablePhotoAndStableDiagnostic() {
-        var fixture=new Fixture();
-        fixture.decide=(stage,job)->{throw new LlmGateway.PinnedFailure("ai.pinned_rate_limited");};
-        var service=fixture.service();
-        var job=service.enqueue(input(1,2,"JP",null,IMAGE));
-        var deferred=service.execute(job.id(),1,0);
-        assertEquals(RETRY_WAIT,deferred.state());
-        assertEquals("ai.pinned_rate_limited",deferred.failureCode());
-        assertEquals(job.id(),deferred.id());
-        assertEquals(IMAGE,deferred.privatePhotoSha256());
-        assertEquals(0,fixture.saves.get());
-    }
     @Test void packagingWithoutVisibleStoreTagStopsBeforeNumberDiscoveryOrWrites() {
         var fixture=new Fixture();
         fixture.decide=(stage,job)->new CostcoOnboardingDecision(stage,Verdict.ACCEPT,"fixture","fixture-model",
@@ -105,23 +93,6 @@ class CostcoNumberOnboardingServiceTest {
         assertNull(result.decisions().get(0).candidate().photoFacts().amount());
         assertEquals("Fixture pack",result.decisions().get(0).candidate().name());
         assertEquals(0,fixture.fetches.get());
-        assertEquals(0,fixture.saves.get());
-    }
-    @Test void incompleteRawTextKeepsTheJobAndIdentityWithoutCommitting(){
-        var fixture=new Fixture();
-        fixture.decide=(stage,job)->new CostcoOnboardingDecision(stage,Verdict.ACCEPT,"fixture","fixture-model",
-                CostcoNumberOnboardingService.REQUIRED_NODE,job.inputHash(),List.of(),"fixture","fixture","Visible number",
-                "53432",new Candidate("53432",null,"Fixture item",null,null,null,null,Map.of(),List.of(),List.of(),null,
-                new PhotoFacts(java.math.BigDecimal.TEN,"JPY","pack",null,"WAREHOUSE",true,
-                        new PhotoTranscription(List.of(),List.of(),List.of(),List.of(),true),true)));
-        var service=fixture.service();
-        var job=service.enqueue(input(1,2,"JP",null,IMAGE));
-        var result=service.execute(job.id(),1,0);
-        assertEquals(NEEDS_INPUT,result.state());
-        assertEquals("photo.transcription_incomplete",result.failureCode());
-        assertEquals("53432",result.itemNumber());
-        assertEquals(IMAGE,result.privatePhotoSha256());
-        assertNull(result.decisions().get(0).candidate().photoFacts().amount());
         assertEquals(0,fixture.saves.get());
     }
     @Test void normalizesProtocolOnlyAndRetainsLeadingZeroes() {

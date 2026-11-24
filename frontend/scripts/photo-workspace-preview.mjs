@@ -62,8 +62,6 @@ for(const [width,height] of settings){
    const index=taskRows.findIndex(row=>row.id==='demo-pack');
    data={...taskRows[index],state:'QUEUED',failureCode:null,revision:8};
    taskRows[index]=data;
-  } else if(path.endsWith('/official-image')){
-   return route.fulfill({contentType:'image/png',body:packaging});
   } else if(path.endsWith('/retry')){
    retries++;data={...list[3],failureCode:null,state:'QUEUED',revision:8};taskRows[3]=data;
   } else if(path.endsWith('/photo')||path==='/api/demo-photo.png'){
@@ -75,7 +73,7 @@ for(const [width,height] of settings){
    ...review,history:[{...history,amount:998765432,unit:'12 large retail units / 3 individually sealed packs'}],
    photoFacts:{...review.photoFacts,amount:123456789,unit:'12 individually sealed packs / 2.75 kg'}
   }:review):path.endsWith('demo-new')?{
-   ...review,jobId:'demo-new',itemNumber:'891021',status:'NEW',matches:[],history:[],officialImageAvailable:true,
+   ...review,jobId:'demo-new',itemNumber:'891021',status:'NEW',matches:[],history:[],
    candidate:{translatedNames:{'ja-JP':'テスト菓子','zh-CN':'测试米饼'},unknownFields:['packaging']},archiveDetails:null
   }:{...review,itemNumber:null,photoFacts:null,status:'IDENTITY_REQUIRED',history:pricesOnly?[]:review.history};
   else if(path==='/api/mobile/suppliers') data=[{id:'s1',name:{'zh-CN':'Costco 日本','en-US':'Costco Japan','ja-JP':'コストコ日本'}}];
@@ -249,10 +247,6 @@ for(const [width,height] of settings){
   await page.locator('[data-photo-job="demo-new"] button').click();
   await page.getByRole('heading',{name:'测试米饼'}).waitFor();
   await shot('new','.product-photo-intake .ant-modal-content');
-  const official=page.getByAltText('官网商品图',{exact:true});
-  await official.waitFor();
-  assert.equal(await official.evaluate(el=>el.naturalWidth),320);
-  assert.equal(await fieldImage.evaluate(el=>el.naturalHeight),720);
   await page.locator('.product-photo-intake .ant-modal-close').click();
   await page.locator('.photo-queue-summary-list [data-photo-job="demo-pack"] button').click();
   await page.getByText(/画面未见店内价签/).first().waitFor();

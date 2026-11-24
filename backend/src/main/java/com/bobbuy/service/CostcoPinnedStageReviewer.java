@@ -175,11 +175,6 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
                 candidate may additionally contain archiveDetails with keys descriptionJa, categoryNodeId, storageCondition.
                 Write a short Japanese description containing only attributes visible in the photo at INTAKE or explicitly
                 supported by the matching source at FACTS. Do not repeat unsupported health, ingredient or allergen claims.
-                For FACTS only, archiveDetails may also include descriptionEvidence with translations and sourceSha256.
-                Use exactly ja-JP, zh-CN, zh-TW and en-US for translations and list the SHA-256 of each actual official
-                textual receipt used. Write in your own words from verifiable facts about this exact item and variant.
-                Do not reproduce site text verbatim or invent nutrition, ingredient, allergen or health claims.
-                If the official receipts cannot support all four versions, leave descriptionEvidence null.
                 Select categoryNodeId exactly from the keys of selectableCategoryPaths if the product belongs there.
                 Specify AMBIENT, FRESH, CHILLED or FROZEN only with explicit evidence; each unknown value must be null.
                 """ : "") + mapper.writeValueAsString(context);
@@ -204,9 +199,7 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
                 for (var price : c.path("referencePrices")) fields(price, Set.of("kind", "amount", "currency", "channel", "taxStatus", "quantityBasis", "validFrom", "validUntil", "timeZone", "conditions", "sourceUrl", "sourceSha256"));
                 if(c.hasNonNull("target"))fields(c.get("target"),Set.of("productId","version","sourceHash"));
                 if(c.has("archiveDetails")){
-                    var officialText=stage==Stage.FACTS?job.evidence().stream().filter(e->isTextualEvidence(e.mediaType()))
-                            .map(CostcoOfficialEvidence::sha256).collect(java.util.stream.Collectors.toSet()):Set.<String>of();
-                    var fields=photoDetails?validatedArchiveDetails(c.get("archiveDetails"),categoryOptions,officialText):null;
+                    var fields=photoDetails?validatedArchiveDetails(c.get("archiveDetails"),categoryOptions):null;
                     ((ObjectNode)c).set("archiveDetails",mapper.valueToTree(fields));
                 }
                 if(c.hasNonNull("photoFacts")){
@@ -295,7 +288,7 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
                 .forEach(n->options.put(n.getId(),n.getFullPath().stream().map(id->byId.getOrDefault(id,id)).collect(java.util.stream.Collectors.joining(" / "))));
         return options;
     }
-    private ArchiveDetails validatedArchiveDetails(JsonNode details,Map<String,String> categoryOptions,Set<String> officialText) throws Exception {
+    private ArchiveDetails validatedArchiveDetails(JsonNode details,Map<String,String> categoryOptions) throws Exception {
         if(!details.isObject())return null;
         String description=details.path("descriptionJa").isTextual()?details.path("descriptionJa").textValue().strip():null;
         if(description!=null&&(description.isBlank()||description.length()>2000))description=null;
@@ -303,21 +296,7 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
         if(!categoryOptions.containsKey(category))category=null;
         String storage=details.path("storageCondition").asText("");
         var condition=java.util.Arrays.stream(StorageCondition.values()).filter(v->v.name().equals(storage)).findFirst().orElse(null);
-        DescriptionEvidence descriptionEvidence=null;
-        if(details.hasNonNull("descriptionEvidence")){
-            var draft=details.get("descriptionEvidence");
-            fields(draft,Set.of("translations","sourceSha256"));
-            if(!draft.path("translations").isObject()||!draft.path("sourceSha256").isArray()
-                    ||java.util.stream.StreamSupport.stream(draft.path("sourceSha256").spliterator(),false).anyMatch(v->!v.isTextual())
-                    ||java.util.stream.StreamSupport.stream(draft.path("translations").spliterator(),false).anyMatch(v->!v.isTextual()))
-                throw new IllegalArgumentException("onboarding.description_evidence");
-            var proposal=mapper.treeToValue(draft,DescriptionEvidence.class);
-            if(!officialText.containsAll(proposal.sourceSha256()))
-                throw new CostcoNumberOnboardingService.NeedsInput("onboarding.description_evidence");
-            descriptionEvidence=proposal;
-        }
-        return description==null&&category==null&&condition==null&&descriptionEvidence==null
-                ?null:new ArchiveDetails(description,category,condition,descriptionEvidence);
+        return description==null&&category==null&&condition==null?null:new ArchiveDetails(description,category,condition);
     }
     static LlmGateway.PinnedCompletion complete(LlmGateway gateway, String prompt, List<LlmGateway.PinnedImage> images) {
         try { return gateway.generatePinned(CostcoEvidenceAcquisitionPlanner.REQUIRED_NODE, prompt, images); }

@@ -92,16 +92,6 @@ public final class CostcoNumberOnboardingService {
             if(job.privatePhotoSha256()!=null&&intake.candidate()!=null&&intake.candidate().photoFacts()!=null
                     &&Boolean.FALSE.equals(intake.candidate().photoFacts().priceTagVisible()))
                 return move(job,NEEDS_INPUT,null,job.evidence(),job.decisions(),null,null,"photo.tag_missing");
-            var photoFacts=intake.candidate()==null?null:intake.candidate().photoFacts();
-            if(job.privatePhotoSha256()!=null&&photoFacts!=null&&photoFacts.transcription()!=null
-                    &&photoFacts.transcription().incompleteTagText()){
-                String visibleItem=null;
-                if(intake.verdict()==Verdict.ACCEPT&&intake.identifiedItemNumber()!=null){
-                    try{visibleItem=normalizeItemNumber(intake.identifiedItemNumber());}
-                    catch(IllegalArgumentException ignored){/* Keep the original evidence even without a valid item. */}
-                }
-                return move(job,NEEDS_INPUT,visibleItem,job.evidence(),job.decisions(),null,null,"photo.transcription_incomplete");
-            }
             if (intake.verdict() != Verdict.ACCEPT) return stop(job, intake);
             String item = normalizeItemNumber(intake.identifiedItemNumber());
             if (job.itemNumber() != null && !job.itemNumber().equals(item))
@@ -143,13 +133,6 @@ public final class CostcoNumberOnboardingService {
         } catch (NeedsInput missing) {
             if (job.state() == COMMITTING) throw missing;
             return move(job, NEEDS_INPUT, job.itemNumber(), job.evidence(), job.decisions(), null, null, missing.getMessage());
-        } catch (LlmGateway.PinnedFailure failure) {
-            if(job.state()==COMMITTING)throw failure;
-            String code="onboarding.stage_failed";
-            if(job.privatePhotoSha256()!=null&&java.util.Set.of("ai.pinned_rate_limited","ai.pinned_timeout",
-                    "ai.pinned_transport_or_protocol","ai.pinned_http_failure","ai.pinned_interrupted").contains(failure.getMessage()))
-                code=failure.getMessage();
-            return move(job,RETRY_WAIT,job.itemNumber(),job.evidence(),job.decisions(),null,null,code);
         } catch (RuntimeException error) {
             // An uncertain save remains COMMITTING. Never blindly create another product or mark completion.
             if (job.state() == COMMITTING) throw error;

@@ -225,7 +225,7 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
    <Typography.Title level={4}>{t('photo.review_details')}</Typography.Title>
    {!!review.sources?.length&&<details><summary>{t('photo.sources')}</summary>{review.sources.map(source=><p key={source.sha256}><a href={source.canonicalUrl} target="_blank" rel="noopener noreferrer">{source.canonicalUrl}</a></p>)}</details>}
    {!isNew&&!!review.candidate?.unknownFields?.length&&<p>{t('photo.unknown_fields')}</p>}
-   {isNew&&officialPreview&&<><p>{t('photo.official_image')}</p><img className="photo-evidence" src={officialPreview} alt={t('photo.official_image')}/><Checkbox checked={useOfficialImage} onChange={e=>{setUseOfficialImage(e.target.checked);edit();}}>{t('photo.use_official_image')}</Checkbox></>}
+   {isNew&&officialPreview&&<><img className="photo-evidence" src={officialPreview} alt={t('photo.official_image')}/><Checkbox checked={useOfficialImage} onChange={e=>{setUseOfficialImage(e.target.checked);edit();}}>{t('photo.use_official_image')}</Checkbox></>}
 
    <label>{t('onboarding.item')}<Input value={item} onChange={e=>{setItem(e.target.value);setIdentity(false);edit();}}/></label><Button onClick={()=>void reload()} disabled={busy}>{t('photo.find')}</Button>
    {review.status==='DELETED'||review.status==='IDENTITY_REQUIRED'?<Alert type="warning" message={t(review.status==='DELETED'?'photo.deleted':'photo.identity_required')}/>:<>

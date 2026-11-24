@@ -163,27 +163,6 @@ class CostcoPinnedStageReviewerTest {
         assertEquals(new ArchiveDetails("冷凍食品",null,null),
                 reviewer.review(Stage.INTAKE,job(List.of(),List.of(),hash)).candidate().archiveDetails());
     }
-    @Test void photoDescriptionsRequireAllFourLocalesAndRetrievedTextHash(){
-        var gateway=new FakeGateway();
-        var store=new Store();
-        var doc=document(store);
-        var content=new DescriptionEvidence(Map.of("ja-JP","試験パック2個","zh-CN","盒装两件",
-                "zh-TW","盒裝兩件","en-US","Two units in a box"),List.of(doc.sha256()));
-        var candidate=new Candidate("00123",null,"試験食品",null,null,null,null,Map.of(),List.of());
-        var reply=mapper.valueToTree(Map.of("verdict","ACCEPT","reason","Fixture","identifiedItemNumber","00123","candidate",candidate));
-        var details=((com.fasterxml.jackson.databind.node.ObjectNode)reply.path("candidate")).putObject("archiveDetails");
-        details.set("descriptionEvidence",mapper.valueToTree(content));
-        gateway.answer=reply.toString();
-        var reviewer=new CostcoPinnedStageReviewer(gateway,mapper,store);
-        var result=reviewer.review(Stage.FACTS,job(List.of(doc),List.of(),"c".repeat(64)));
-        assertEquals(content,result.candidate().archiveDetails().descriptionEvidence());
-        var draft=(com.fasterxml.jackson.databind.node.ObjectNode)details.path("descriptionEvidence");
-        ((com.fasterxml.jackson.databind.node.ArrayNode)draft.path("sourceSha256")).set(0,mapper.getNodeFactory().textNode("f".repeat(64)));
-        gateway.answer=reply.toString();
-        assertEquals("onboarding.description_evidence",assertThrows(CostcoNumberOnboardingService.NeedsInput.class,
-                ()->reviewer.review(Stage.FACTS,job(List.of(doc),List.of(),"c".repeat(64)))).getMessage());
-        assertThrows(IllegalArgumentException.class,()->new DescriptionEvidence(Map.of("ja-JP","試験"),List.of(doc.sha256())));
-    }
     @Test void wrongBytesAndPrivilegeFieldsNeverReachAcceptedDecision(){
         var badStore=new Store();var badDoc=document(badStore);badStore.contents.put(badDoc.sha256(),new byte[]{9});var gateway=new FakeGateway();
         assertThrows(IllegalStateException.class,()->new CostcoPinnedStageReviewer(gateway,mapper,badStore).review(Stage.FACTS,job(List.of(badDoc),List.of(),null)));assertEquals(0,gateway.calls);

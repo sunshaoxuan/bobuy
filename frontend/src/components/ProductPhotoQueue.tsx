@@ -23,9 +23,7 @@ export function photoFailure(code?:string) {
  if(code?.startsWith('ai.'))return 'photo.ai_unavailable';
  if(code==='onboarding.retry_exhausted')return 'photo.recognition_timeout';
  if(code==='error.auth.forbidden'||code==='onboarding.scope_changed')return 'photo.scope_failed';
- if(code==='photo.transcription_incomplete')return 'photo.transcription_incomplete';
  if(code==='photo.tag_missing')return 'photo.tag_missing';
- if(code==='onboarding.description_evidence')return 'photo.description_evidence_missing';
  if(code==='onboarding.evidence_missing')return 'photo.sources_missing';
  return 'photo.recognition_failed';
 }
