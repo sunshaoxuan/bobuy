@@ -590,6 +590,9 @@ export type ProductPatch = Partial<{
     isRecommended: boolean;
     isTemporary: boolean;
     visibilityStatus: string;
+    categoryNodeIds: string[];
+    primaryCategoryNodeId: string | null;
+    categoryRevision: number;
 }>;
 
 export type FinancialAuditLog = {

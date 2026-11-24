@@ -172,8 +172,11 @@ public class CategoryPathImportService {
                 try {
                     Map<String,Object> assignment=json.readValue(target,new com.fasterxml.jackson.core.type.TypeReference<Map<String,Object>>(){});
                     String primary=(String)assignment.get("primary");
-                    var existing=paths.findById(row.productId()).orElseGet(()->new ProductPrimaryCategoryPath(row.productId(),primary));
-                    existing.setCategoryNodeId(primary);paths.save(existing);
+                    long revision=((Number)assignment.get("revision")).longValue();
+                    var existing=paths.findById(row.productId());
+                    if(existing.isEmpty()) paths.saveAndFlush(new ProductPrimaryCategoryPath(row.productId(),primary));
+                    else if(paths.replaceAtRevision(row.productId(),primary,revision)!=1)
+                        throw new CategoryImportConflict("Category selection changed; preview again");
                     additionalPaths.deleteAllByProductId(row.productId());
                     @SuppressWarnings("unchecked") var selected=(List<String>)assignment.get("selected");
                     additionalPaths.saveAll(selected.stream().filter(category->!category.equals(primary)).map(category->new ProductAdditionalCategoryPath(row.productId(),category)).toList());
@@ -273,7 +276,7 @@ public class CategoryPathImportService {
                         if(primary.isBlank()||!selected.contains(primary))error="Primary category must belong to the selected category set";
                         else if(!legacy&&!Objects.toString(paths.findById(id).map(ProductPrimaryCategoryPath::getRevision).orElse(0L)).equals(r.get(7)))error="Category selection changed; export or preview again";
                         else for(String selectedId:selected){var node=nodes.findById(selectedId).orElse(null);String existing=paths.findById(id).map(ProductPrimaryCategoryPath::getCategoryNodeId).orElse(null);if(node==null){error="Unknown category; import the structure first";break;}if(node.getSystemKey()!=null&&!"UNCATEGORIZED".equals(node.getSystemKey())){error="Unsupported system category";break;}if(nodes.existsByParentId(node.getId())&&!node.getId().equals(existing)){error="Choose a leaf category or retain the existing assignment";break;}}
-                        if(error==null)targets.put(id,encoded(Map.of("primary",primary,"selected",selected)));
+                        if(error==null)targets.put(id,encoded(Map.of("primary",primary,"selected",selected,"revision",paths.findById(id).map(ProductPrimaryCategoryPath::getRevision).orElse(0L))));
                     }
                 }
                 rows.add(new Row(i+1,sku,crumb,id,error==null?outcome:"UNMATCHED",error,null,null));

@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.mock.web.MockMultipartFile;
 import com.bobbuy.model.Product;
+import com.bobbuy.model.ProductAdditionalCategoryPath;
+import com.bobbuy.model.ProductPrimaryCategoryPath;
 import com.bobbuy.model.CategoryTreeNode;
 import com.bobbuy.repository.*;
 import java.util.*;
@@ -40,6 +42,7 @@ class CategoryPathImportServiceTest {
         when(products.findAllByItemNumber("SKU-1")).thenReturn(List.of(product));
         when(products.findAllByItemNumber("ALIAS-1")).thenReturn(List.of(product));
         when(products.count()).thenReturn(1L);
+        when(paths.replaceAtRevision(anyString(),anyString(),anyLong())).thenReturn(1);
         List<CategoryTreeNode> saved=new ArrayList<>();
         when(nodes.findAll()).thenAnswer(c->new ArrayList<>(saved));
         when(nodes.findAllByParentId(any())).thenAnswer(call->saved.stream().filter(n->Objects.equals(n.getParentId(),call.getArgument(0))).toList());
@@ -261,7 +264,7 @@ class CategoryPathImportServiceTest {
 
     @Test void downloadedTemplateUsesStableIdentitiesWithoutBusinessExamples() {
         String template=new String(service.exportMappings(7,false,true),StandardCharsets.UTF_8);
-        assertThat(template).isEqualTo("productId,itemNumber,version,categoryNodeId,categoryPath,sortOrder,operation\r\n");
+        assertThat(template).isEqualTo("productId,itemNumber,version,primaryCategoryNodeId,categoryNodeIds,categoryPaths,operation,categoryRevision\r\n");
     }
 
     @Test void mappingExportRoundTripsAndRepeatedConfirmationDoesNotWriteAgain() {
@@ -271,8 +274,20 @@ class CategoryPathImportServiceTest {
         byte[] exported=new String(service.exportMappings(7,false,false),StandardCharsets.UTF_8).replace("productId,", "\"productId\",").getBytes(StandardCharsets.UTF_8);
         var p=service.preview(7,false,new MockMultipartFile("file","mapping.csv","text/csv",exported));
         assertThat(p.matched()).isEqualTo(1);verify(paths,never()).save(any());
-        service.confirm(7,false,p.importId());service.confirm(7,false,p.importId());verify(paths,times(1)).save(any());
+        service.confirm(7,false,p.importId());service.confirm(7,false,p.importId());verify(paths,times(1)).replaceAtRevision("product-1","leaf",0L);
         verify(products,never()).save(any());
+    }
+
+    @Test void legacyPrimaryOnlyMappingRetainsAdditionalAssignments() {
+        var primary=new CategoryTreeNode("primary",null,Map.of("ja-JP","Primary"),List.of("primary"),0,null);
+        var extra=new CategoryTreeNode("extra",null,Map.of("ja-JP","Extra"),List.of("extra"),1,null);
+        when(nodes.findById("primary")).thenReturn(Optional.of(primary));when(nodes.findById("extra")).thenReturn(Optional.of(extra));
+        when(paths.findById("product-1")).thenReturn(Optional.of(new ProductPrimaryCategoryPath("product-1","primary")));
+        when(additionalPaths.findAllByProductId("product-1")).thenReturn(List.of(new ProductAdditionalCategoryPath("product-1","extra")));
+        String csv="productId,itemNumber,version,categoryNodeId,categoryPath,sortOrder,operation\r\nproduct-1,SKU-1,0,primary,Primary,0,ASSIGN\r\n";
+        var preview=service.preview(7,false,new MockMultipartFile("file","legacy.csv","text/csv",csv.getBytes(StandardCharsets.UTF_8)));
+        service.confirm(7,false,preview.importId());
+        verify(additionalPaths).saveAll(argThat(values->values.iterator().next().getCategoryNodeId().equals("extra")));
     }
 
     @Test void changedProductVersionOrScopeRejectsWholeBatchBeforeWriting() {

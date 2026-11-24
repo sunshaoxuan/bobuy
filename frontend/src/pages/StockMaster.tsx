@@ -543,7 +543,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         const response = item.createRequestId ? await api.createProduct({
           requestId:item.createRequestId!,name:item.nameL10n,description:item.descriptionL10n,
           specification:item.specificationL10n,brand:item.brand,itemNumber:item.sku,
-          categoryNodeId:item.categoryNodeId??null,attributes:normalizeStructuredAttributes(item.dynamicAttributes),
+          categoryNodeId:item.categoryNodeId??null,categoryNodeIds:item.categoryNodeIds,attributes:normalizeStructuredAttributes(item.dynamicAttributes),
           merchantSkus:item.merchantSkus,storageCondition:item.storageCondition,orderMethod:item.orderMethod,
           priceTiers:item.priceTiers,
           mediaGallery:item.mediaGallery?.map(m=>({url:m.url,type:m.type.toUpperCase(),title:m.title,visible:m.visible!==false}))
@@ -556,8 +556,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         if(!response.product?.id)throw new Error(t('stock.msg.update_failed'));
         const saved=stockItemFromResponse(response);
         if (item.createRequestId && item.categoryNodeIds !== undefined) {
-          const categories=await categoryTreeApi.assign(response.product.id,item.categoryNodeIds,item.categoryNodeId??null,0);
-          if(categories){saved.categoryNodeId=categories.categoryNodeId;saved.categoryNodeIds=categories.categoryNodeIds;saved.categoryRevision=categories.revision;}
+          saved.categoryNodeId=item.categoryNodeId??null;saved.categoryNodeIds=item.categoryNodeIds;saved.categoryRevision=0;
         }
         setDataSource(prev=>prev.map(it=>it.key===item.key?saved:it));
         setEditingItem(previous=>previous?.key===item.key?saved:previous);
@@ -567,20 +566,16 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         // deliberately absent and are reviewed through productPricingApi.
         await api.patchProduct(item.key,item.catalogDriven?{
           storageCondition:item.storageCondition,orderMethod:item.orderMethod,
-          merchantSkus:item.merchantSkus,priceTiers:item.priceTiers
+          merchantSkus:item.merchantSkus,priceTiers:item.priceTiers,
+          categoryNodeIds:item.categoryNodeIds,primaryCategoryNodeId:item.categoryNodeId??null,categoryRevision:item.categoryRevision
         }:{
           name:item.nameL10n,description:item.descriptionL10n,brand:item.brand,
           categoryId:item.category,itemNumber:item.sku,attributes:item.dynamicAttributes,
           mediaGallery:item.mediaGallery?.map(m=>({url:m.url,type:m.type.toUpperCase(),title:m.title,visible:m.visible !== false})),
           storageCondition:item.storageCondition,orderMethod:item.orderMethod,
-          merchantSkus:item.merchantSkus,priceTiers:item.priceTiers
+          merchantSkus:item.merchantSkus,priceTiers:item.priceTiers,
+          categoryNodeIds:item.categoryNodeIds,primaryCategoryNodeId:item.categoryNodeId??null,categoryRevision:item.categoryRevision
         });
-        if (item.categoryNodeIds !== undefined) {
-          const categories=await categoryTreeApi.assign(item.key,item.categoryNodeIds,item.categoryNodeId??null,item.categoryRevision??0);
-          item.categoryNodeId=categories.categoryNodeId;
-          item.categoryNodeIds=categories.categoryNodeIds;
-          item.categoryRevision=categories.revision;
-        }
         setSyncStatus('saved');
       }
       refreshArchive();
@@ -610,14 +605,14 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
   };
 
   const openDrawer = (record: StockItem, defaultTab?: string) => {
-    detailRequest.current++;
+    const ticket=++detailRequest.current;
     setEditingItem(record);
     void categoryTreeApi.list().then(async tree=>{
       setCreateTree(tree);
-      if(record.isNew)return;
+      if(record.isNew||ticket!==detailRequest.current)return;
       const selected=await categoryTreeApi.product(record.key);
-      const categorized={...record,categoryNodeId:selected.categoryNodeId,categoryNodeIds:selected.categoryNodeIds,categoryRevision:selected.revision};
-      setEditingItem(categorized);
+      if(!selected||ticket!==detailRequest.current)return;
+      setEditingItem(current=>current?.key===record.key?{...current,categoryNodeId:selected.categoryNodeId,categoryNodeIds:selected.categoryNodeIds,categoryRevision:selected.revision}:current);
       form.setFieldsValue({categoryNodeId:selected.categoryNodeId,categoryNodeIds:selected.categoryNodeIds,categoryRevision:selected.revision});
     }).catch(error=>message.error(error.message));
     form.setFieldsValue({

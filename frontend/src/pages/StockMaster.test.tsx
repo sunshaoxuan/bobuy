@@ -2,7 +2,7 @@ import { act, cleanup, render, screen, fireEvent, waitFor, waitForElementToBeRem
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { I18nProvider } from '../i18n';
 import React from 'react';
-import { api } from '../api';
+import { api, categoryTreeApi } from '../api';
 vi.mock('antd',async()=>{const actual=await vi.importActual<typeof import('antd')>('antd');const {CategoryTreeSelectMock}=await import('../test/CategoryTreeSelectMock');return {...actual,TreeSelect:CategoryTreeSelectMock};});
 import {message} from 'antd';
 vi.mock('../components/ProductCatalogPanel',()=>({default:()=>null}));
@@ -139,6 +139,7 @@ it('previews bulk changes without writing, cancels, confirms and shows the empty
 const detailsById=new Map<string,Awaited<ReturnType<typeof api.product>>>();
 beforeEach(()=>{
  detailsById.clear();
+ vi.mocked(categoryTreeApi.product).mockResolvedValue({productId:'prd-1000',categoryNodeId:null,categoryNodeIds:[],revision:4});
  vi.mocked(api.merchantArchive).mockReset();
  vi.mocked(api.product).mockReset();
  vi.mocked(api.product).mockImplementation(async id=>detailsById.get(id)!);
@@ -193,6 +194,17 @@ it('uses the real uppercase IMAGE gallery in embedded browsing and retains edita
   const image=await screen.findByRole('img',{name:'官方图片商品'});expect(image).toHaveAttribute('src','/official-synthetic.png');
   fireEvent.click(screen.getByText('紧凑管理',{exact:true}));await screen.findByText('000123');
  }finally{spy.mockRestore();}
+});
+
+it('saves product fields and the full category replacement in one request',async()=>{
+ localStorage.setItem('bobbuy_locale','en-US');setMatchMedia(false);
+ const patch=vi.mocked(api.patchProduct);patch.mockClear();vi.mocked(categoryTreeApi.assign).mockClear();
+ renderWithI18n(<StockMaster/>);await screen.findByText('Organic Milk');
+ fireEvent.click(screen.getAllByRole('button').find(button=>button.querySelector('.anticon-edit'))!);
+ const drawer=await screen.findByRole('dialog');await waitFor(()=>expect(categoryTreeApi.product).toHaveBeenCalledWith('prd-1000'));
+ fireEvent.click(within(drawer).getByRole('button',{name:'Save & Close'}));
+ await waitFor(()=>expect(patch).toHaveBeenCalledWith('prd-1000',expect.objectContaining({categoryNodeIds:[],primaryCategoryNodeId:null,categoryRevision:4})));
+ expect(categoryTreeApi.assign).not.toHaveBeenCalled();
 });
 
 it('preserves gallery visibility and uppercases media types when patching an existing product',async()=>{

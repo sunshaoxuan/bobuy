@@ -73,12 +73,20 @@ public class CategoryTreeManagementService {
 
     /** Count assigned products throughout each subtree, including unpublished products. */
     private Map<String, Long> productCounts(List<CategoryTreeNode> tree) {
+        Map<String, CategoryTreeNode> byId = new HashMap<>();
+        tree.forEach(node -> byId.put(node.getId(), node));
+        Map<String, Set<String>> productsByNode = new HashMap<>();
+        paths.findAll().forEach(path -> addToAncestors(productsByNode, byId.get(path.getCategoryNodeId()), path.getProductId()));
+        if (additionalPaths != null) additionalPaths.findAll().forEach(path ->
+                addToAncestors(productsByNode, byId.get(path.getCategoryNodeId()), path.getProductId()));
         Map<String, Long> counts = new HashMap<>();
-        for (var node : tree) {
-            long count = paths.countByCategoryNodeId(node.getId()) + (additionalPaths == null ? 0 : additionalPaths.countByCategoryNodeId(node.getId()));
-            for (String ancestor : node.getFullPath()) counts.merge(ancestor, count, Long::sum);
-        }
+        productsByNode.forEach((id, products) -> counts.put(id, (long) products.size()));
         return counts;
+    }
+
+    private void addToAncestors(Map<String, Set<String>> result, CategoryTreeNode node, String productId) {
+        if (node != null) for (String ancestor : node.getFullPath())
+            result.computeIfAbsent(ancestor, ignored -> new HashSet<>()).add(productId);
     }
 
     private void sort(List<CategoryTreeNode> siblings, Map<String, Long> counts) {
@@ -229,14 +237,15 @@ public class CategoryTreeManagementService {
             if (nodes.existsByParentId(selected)) throw invalid();
         }
         var existing = paths.findById(productId);
-        if (input.revision() != null && input.revision() != existing.map(ProductPrimaryCategoryPath::getRevision).orElse(0L))
+        long currentRevision = existing.map(ProductPrimaryCategoryPath::getRevision).orElse(0L);
+        if (input.revision() != null && input.revision() != currentRevision)
             throw new ApiException(ErrorCode.INVALID_REQUEST, "error.category.conflict");
         if (id == null) id = ProductCategoryPathResolver.UNCATEGORIZED_NODE_ID;
         // An explicit assignment prevents legacy fallback from undoing a user's clear.
         String selectedPrimary = id;
-        var primary = existing.orElseGet(() -> new ProductPrimaryCategoryPath(productId, selectedPrimary));
-        primary.setCategoryNodeId(selectedPrimary);
-        paths.save(primary);
+        if (existing.isEmpty()) paths.saveAndFlush(new ProductPrimaryCategoryPath(productId, selectedPrimary));
+        else if (paths.replaceAtRevision(productId, selectedPrimary, currentRevision) != 1)
+            throw new ApiException(ErrorCode.INVALID_REQUEST, "error.category.conflict");
         if (additionalPaths != null) {
             additionalPaths.deleteAllByProductId(productId);
             String primaryId = id;
@@ -246,7 +255,6 @@ public class CategoryTreeManagementService {
         // Imported provenance describes the imported assignment, not a later manual one.
         // Import audit rows retain the historical source independently.
         jdbc.update("update bb_product set category_path_source=null where id=?", productId);
-        paths.flush();
         return product(productId);
     }
 

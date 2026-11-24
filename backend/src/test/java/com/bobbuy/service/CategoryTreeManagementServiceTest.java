@@ -14,6 +14,7 @@ import static org.mockito.Mockito.*;
 class CategoryTreeManagementServiceTest {
     private final CategoryTreeNodeRepository nodes = mock(CategoryTreeNodeRepository.class);
     private final ProductPrimaryCategoryPathRepository paths = mock(ProductPrimaryCategoryPathRepository.class);
+    private final ProductAdditionalCategoryPathRepository additionalPaths = mock(ProductAdditionalCategoryPathRepository.class);
     private final ProductRepository products = mock(ProductRepository.class);
     private final CategoryLegacyMappingRepository mappings = mock(CategoryLegacyMappingRepository.class);
     private final CategoryRepository legacy = mock(CategoryRepository.class);
@@ -34,8 +35,15 @@ class CategoryTreeManagementServiceTest {
         doAnswer(c -> {tree.remove(((CategoryTreeNode)c.getArgument(0)).getId()); return null;}).when(nodes).delete(any());
         when(paths.findById(anyString())).thenAnswer(c -> Optional.ofNullable(assigned.get(c.getArgument(0))));
         when(paths.save(any())).thenAnswer(c -> {ProductPrimaryCategoryPath p = c.getArgument(0); assigned.put(p.getProductId(), p); return p;});
+        when(paths.saveAndFlush(any())).thenAnswer(c -> {ProductPrimaryCategoryPath p = c.getArgument(0); assigned.put(p.getProductId(), p); return p;});
+        when(paths.findAll()).thenAnswer(c -> new ArrayList<>(assigned.values()));
+        when(paths.replaceAtRevision(anyString(),anyString(),anyLong())).thenAnswer(c->{
+            var path=assigned.get(c.getArgument(0)); if(path==null||path.getRevision()!=((Long)c.getArgument(2)).longValue())return 0;
+            path.setCategoryNodeId(c.getArgument(1)); return 1;
+        });
         when(paths.countByCategoryNodeId(anyString())).thenAnswer(c -> assigned.values().stream().filter(p -> p.getCategoryNodeId().equals(c.getArgument(0))).count());
-        service = new CategoryTreeManagementService(nodes, paths, products, mappings, new ProductCategoryPathResolver(paths, mappings, legacy), jdbc);
+        when(additionalPaths.findAll()).thenReturn(List.of());
+        service = new CategoryTreeManagementService(nodes, paths, products, mappings, new ProductCategoryPathResolver(paths, mappings, legacy), jdbc, additionalPaths);
     }
     @Test void shoppingMappingProtectsEmptySourceAndRejectsOverlappingMoves() {
         var first=add(null,"First");var second=add(null,"Second");
@@ -169,6 +177,29 @@ class CategoryTreeManagementServiceTest {
         assertThat(assigned.get("p").getCategoryNodeId()).isEqualTo("system-uncategorized");
         assertThat(service.product("p").categoryNodeId()).isNull();
         verify(products, never()).save(any()); verify(products, never()).delete(any());
+    }
+
+    @Test void ancestorCountsUniqueProductsAssignedToSiblingPaths() {
+        var root=add(null,"食品");
+        var first=add(root.id(),"水");
+        var second=add(root.id(),"茶");
+        assigned.put("p",new ProductPrimaryCategoryPath("p",first.id()));
+        when(additionalPaths.findAll()).thenReturn(List.of(new ProductAdditionalCategoryPath("p",second.id())));
+        assertThat(service.list()).filteredOn(node->node.id().equals(root.id())).singleElement()
+                .extracting(CategoryTreeManagementService.Node::productCount).isEqualTo(1L);
+    }
+
+    @Test void additionalOnlyReplacementTouchesVersionedPrimaryAndReplacesSet() {
+        login("AGENT","7"); Product product=mock(Product.class);when(product.getMerchantId()).thenReturn(7L);
+        when(products.findById("p")).thenReturn(Optional.of(product));
+        var root=add(null,"食品");
+        var first=add(root.id(),"水");
+        var second=add(root.id(),"茶");
+        assigned.put("p",new ProductPrimaryCategoryPath("p",first.id()));
+        service.assign("p",new CategoryTreeManagementService.ProductPath("p",first.id(),List.of(first.id(),second.id()),0L));
+        verify(paths).replaceAtRevision("p",first.id(),0L);
+        verify(additionalPaths).deleteAllByProductId("p");
+        verify(additionalPaths).saveAll(argThat(values->values.iterator().next().getCategoryNodeId().equals(second.id())));
     }
 
     @Test void merchantCannotEditOtherMerchantButPlatformAdminCan() {
