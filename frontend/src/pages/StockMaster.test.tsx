@@ -9,7 +9,11 @@ vi.mock('../components/ProductCatalogPanel',()=>({default:()=>null}));
 vi.mock('../components/ProductMarkerEditor',()=>({default:({productId}:{productId:string})=><output data-testid="marker-product-id">{productId}</output>}));
 
 vi.mock('../api', () => ({
-  categoryTreeApi:{list:()=>Promise.resolve([])},
+  categoryTreeApi:{
+    list:()=>Promise.resolve([]),
+    product:vi.fn().mockResolvedValue({productId:'prd-1000',categoryNodeId:null,categoryNodeIds:[],revision:0}),
+    assign:vi.fn().mockImplementation(async(productId:string,categoryNodeIds:string[],categoryNodeId:string|null,revision:number)=>({productId,categoryNodeId,categoryNodeIds,revision:revision+1}))
+  },
   merchantArchivePageSize:24,
   api: {
     stockCategories: () => Promise.resolve([

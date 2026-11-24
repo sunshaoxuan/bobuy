@@ -4,6 +4,7 @@ import com.bobbuy.api.response.ApiException;
 import com.bobbuy.api.response.ErrorCode;
 import com.bobbuy.model.CategoryTreeNode;
 import com.bobbuy.model.Product;
+import com.bobbuy.model.ProductAdditionalCategoryPath;
 import com.bobbuy.model.ProductPrimaryCategoryPath;
 import com.bobbuy.repository.*;
 import com.bobbuy.security.MerchantScope;

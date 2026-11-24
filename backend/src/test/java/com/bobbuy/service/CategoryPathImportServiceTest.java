@@ -20,6 +20,7 @@ class CategoryPathImportServiceTest {
     private final ProductRepository products=mock(ProductRepository.class);
     private final CategoryTreeNodeRepository nodes=mock(CategoryTreeNodeRepository.class);
     private final ProductPrimaryCategoryPathRepository paths=mock(ProductPrimaryCategoryPathRepository.class);
+    private final ProductAdditionalCategoryPathRepository additionalPaths=mock(ProductAdditionalCategoryPathRepository.class);
     private CategoryPathImportService service;
     private JdbcTemplate jdbc;
 
@@ -29,7 +30,7 @@ class CategoryPathImportServiceTest {
         jdbc.execute("create table bb_category_path_import_row(import_id varchar,row_number int,sku varchar,breadcrumb varchar,product_id varchar,outcome varchar,reason varchar,flag clob,source_tier clob)");
         jdbc.execute("create table bb_product(id varchar primary key,category_import_flag clob,category_path_source clob,price decimal,stock int,published boolean)");
         jdbc.update("insert into bb_product values ('product-1',null,null,123,5,true)");
-        service=new CategoryPathImportService(jdbc,products,nodes,paths,new CategoryReviewedNames());
+        service=new CategoryPathImportService(jdbc,products,nodes,paths,additionalPaths,new CategoryReviewedNames());
         when(nodes.lockTree()).thenReturn(Optional.of(new CategoryTreeNode("system-uncategorized",null,Map.of("ja-JP","未分類"),List.of("system-uncategorized"),Integer.MAX_VALUE,"UNCATEGORIZED")));
         Product product=mock(Product.class);when(product.getId()).thenReturn("product-1");
         when(product.getMerchantId()).thenReturn(7L);when(product.getItemNumber()).thenReturn("SKU-1");when(product.getRecordVersion()).thenReturn(0L);
@@ -140,7 +141,7 @@ class CategoryPathImportServiceTest {
             requestedPaths.add(List.copyOf(path));
             return Map.of("ja-JP",path.get(path.size()-1),"zh-CN","审核示例","zh-TW","審核範例","en-US","Reviewed example");
         });
-        service=new CategoryPathImportService(jdbc,products,nodes,paths,mapping);
+        service=new CategoryPathImportService(jdbc,products,nodes,paths,additionalPaths,mapping);
         var p=ops("SKU-1,例親>例子,官网面包屑（原文）,\n",null);
         verify(nodes,never()).save(any());
         service.confirm(7,p.importId());
