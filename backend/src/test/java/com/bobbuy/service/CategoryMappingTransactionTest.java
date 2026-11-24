@@ -39,7 +39,7 @@ class CategoryMappingTransactionTest {
   for(String suffix:List.of("a","b")){String id=prefix+suffix;csv+=id+","+id+","+products.findById(id).orElseThrow().getRecordVersion()+","+root+",Synthetic,0,ASSIGN\r\n";}
   var p=service.preview(1000,false,new MockMultipartFile("file","synthetic.csv","text/csv",csv.getBytes(StandardCharsets.UTF_8)));previewId=p.importId();
   assertThat(p.matched()).isEqualTo(2);assertThat(paths.findById(prefix+"a")).isEmpty();
-  doThrow(new IllegalStateException("synthetic second-row failure")).when(paths).save(argThat(path->path!=null&&(prefix+"b").equals(path.getProductId())));
+  doThrow(new IllegalStateException("synthetic second-row failure")).when(paths).saveAndFlush(argThat(path->path!=null&&(prefix+"b").equals(path.getProductId())));
   assertThatThrownBy(()->service.confirm(1000,false,previewId)).hasMessageContaining("second-row failure");
   assertThat(paths.findById(prefix+"a")).isEmpty();assertThat(paths.findById(prefix+"b")).isEmpty();assertThat(service.get(1000,previewId).status()).isEqualTo("PREVIEWED");
   reset(paths);service.confirm(1000,false,previewId);service.confirm(1000,false,previewId);
