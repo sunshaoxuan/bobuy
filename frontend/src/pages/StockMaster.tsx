@@ -40,7 +40,7 @@ import MediaGallery, { type MediaItem } from '../components/MediaGallery';
 import CostcoOnboardingPanel from '../components/CostcoOnboardingPanel';
 import {ProductBrand} from '../components/ProductMetadata';
 import ProductCatalogPanel from '../components/ProductCatalogPanel';
-import CategoryTreePicker from '../components/CategoryTreePicker';
+import {CategoryTreeMultiPicker} from '../components/CategoryTreePicker';
 import ProductPricingPanel from '../components/ProductPricingPanel';
 import ProductMarkerEditor from '../components/ProductMarkerEditor';
 import { api, categoryTreeApi, merchantArchivePageSize, type MerchantArchiveRow, type CategoryTreeNode, type MobileProductResponse, type CategoryAttributeTemplateField, type MobileCategory, type MobileSupplier, type AiOnboardingSuggestion } from '../api';
@@ -55,6 +55,8 @@ interface StockItem {
   cartEnabled?: boolean;
   createRequestId?:string;
   categoryNodeId?:string|null;
+  categoryNodeIds?:string[];
+  categoryRevision?:number;
   visibilityStatus?: string;
   catalogDriven?:boolean;
   key: string;
@@ -413,6 +415,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
       key: crypto.randomUUID(),
       createRequestId: crypto.randomUUID(),
       categoryNodeId:null,
+      categoryNodeIds:[],
       name: '',
       category: '',
       price: 0,
@@ -540,7 +543,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         const response = item.createRequestId ? await api.createProduct({
           requestId:item.createRequestId!,name:item.nameL10n,description:item.descriptionL10n,
           specification:item.specificationL10n,brand:item.brand,itemNumber:item.sku,
-          categoryNodeId:item.categoryNodeId??null,attributes:normalizeStructuredAttributes(item.dynamicAttributes),
+          categoryNodeId:item.categoryNodeId??null,categoryNodeIds:item.categoryNodeIds,attributes:normalizeStructuredAttributes(item.dynamicAttributes),
           merchantSkus:item.merchantSkus,storageCondition:item.storageCondition,orderMethod:item.orderMethod,
           priceTiers:item.priceTiers,
           mediaGallery:item.mediaGallery?.map(m=>({url:m.url,type:m.type.toUpperCase(),title:m.title,visible:m.visible!==false}))
@@ -552,6 +555,9 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         if(!item.createRequestId)handleReconcileFeedback(response);
         if(!response.product?.id)throw new Error(t('stock.msg.update_failed'));
         const saved=stockItemFromResponse(response);
+        if (item.createRequestId && item.categoryNodeIds !== undefined) {
+          saved.categoryNodeId=item.categoryNodeId??null;saved.categoryNodeIds=item.categoryNodeIds;saved.categoryRevision=0;
+        }
         setDataSource(prev=>prev.map(it=>it.key===item.key?saved:it));
         setEditingItem(previous=>previous?.key===item.key?saved:previous);
         setSyncStatus('saved');
@@ -560,13 +566,15 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
         // deliberately absent and are reviewed through productPricingApi.
         await api.patchProduct(item.key,item.catalogDriven?{
           storageCondition:item.storageCondition,orderMethod:item.orderMethod,
-          merchantSkus:item.merchantSkus,priceTiers:item.priceTiers
+          merchantSkus:item.merchantSkus,priceTiers:item.priceTiers,
+          categoryNodeIds:item.categoryNodeIds,primaryCategoryNodeId:item.categoryNodeId??null,categoryRevision:item.categoryRevision
         }:{
           name:item.nameL10n,description:item.descriptionL10n,brand:item.brand,
           categoryId:item.category,itemNumber:item.sku,attributes:item.dynamicAttributes,
           mediaGallery:item.mediaGallery?.map(m=>({url:m.url,type:m.type.toUpperCase(),title:m.title,visible:m.visible !== false})),
           storageCondition:item.storageCondition,orderMethod:item.orderMethod,
-          merchantSkus:item.merchantSkus,priceTiers:item.priceTiers
+          merchantSkus:item.merchantSkus,priceTiers:item.priceTiers,
+          categoryNodeIds:item.categoryNodeIds,primaryCategoryNodeId:item.categoryNodeId??null,categoryRevision:item.categoryRevision
         });
         setSyncStatus('saved');
       }
@@ -597,8 +605,16 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
   };
 
   const openDrawer = (record: StockItem, defaultTab?: string) => {
-    detailRequest.current++;
+    const ticket=++detailRequest.current;
     setEditingItem(record);
+    void categoryTreeApi.list().then(async tree=>{
+      setCreateTree(tree);
+      if(record.isNew||ticket!==detailRequest.current)return;
+      const selected=await categoryTreeApi.product(record.key);
+      if(!selected||ticket!==detailRequest.current)return;
+      setEditingItem(current=>current?.key===record.key?{...current,categoryNodeId:selected.categoryNodeId,categoryNodeIds:selected.categoryNodeIds,categoryRevision:selected.revision}:current);
+      form.setFieldsValue({categoryNodeId:selected.categoryNodeId,categoryNodeIds:selected.categoryNodeIds,categoryRevision:selected.revision});
+    }).catch(error=>message.error(error.message));
     form.setFieldsValue({
       ...record,
       nameL10n: record.nameL10n ?? { 'zh-CN': record.name, 'ja-JP': record.name, 'en-US': record.name },
@@ -1033,14 +1049,18 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
                     <Form.Item name="brand" label={t('stock.item.brand')}>
                        <Input placeholder={t('stock.item.brand_placeholder')} />
                     </Form.Item>
+                    <Form.Item noStyle shouldUpdate={(before,after)=>before.categoryNodeId!==after.categoryNodeId||before.categoryNodeIds!==after.categoryNodeIds}>
+                      {({getFieldValue,setFieldsValue})=><Form.Item label={t('stock.item.category')}>
+                        <CategoryTreeMultiPicker nodes={createTree} values={getFieldValue('categoryNodeIds')??[]} primary={getFieldValue('categoryNodeId')??null}
+                          onChange={(categoryNodeIds,categoryNodeId)=>setFieldsValue({categoryNodeIds,categoryNodeId})}/>
+                      </Form.Item>}
+                    </Form.Item>
+                    {!editingItem?.isNew&&<Form.Item name="category" label={t('stock.item.category')}><Input/></Form.Item>}
                     {editingItem?.isNew?<>
-                      <Form.Item name="categoryNodeId" label={t('stock.item.category')}>
-                        <CategoryTreePicker nodes={createTree} value={null} onChange={()=>{}}/>
-                      </Form.Item>
                       <Form.Item name="specificationL10n" label={t('master.specifications')}>
                         <L10nInput locales={['zh-CN','ja-JP','en-US']}/>
                       </Form.Item>
-                    </>:<Form.Item name="category" label={t('stock.item.category')}><Input/></Form.Item>}
+                    </>:null}
                     {activeCategoryAttributes.length > 0 && (
                       <Text strong style={{ display: 'block', marginBottom: 8 }}>
                         {t('stock.dynamic.section')}

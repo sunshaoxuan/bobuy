@@ -151,7 +151,7 @@ public class ProductPhotoIntakeService {
             var n=input.product();
             // Bind create identity to this durable job; never trust an AI/client ID or selling-price field.
             if(n.priceTiers()!=null&&!n.priceTiers().isEmpty()||n.mediaGallery()!=null&&!n.mediaGallery().isEmpty())throw invalid("photo.private_evidence");
-            p=creation.createPhoto(new ManualProductCreationService.Input(UUID.fromString(j.id()),n.name(),n.description(),n.specification(),item,n.brand(),n.categoryNodeId(),Map.of(),Map.of(),List.of(),n.storageCondition(),OrderMethod.PRE_ORDER,List.of()),j.supplierId(),j.market());
+            p=creation.createPhoto(new ManualProductCreationService.Input(UUID.fromString(j.id()),n.name(),n.description(),n.specification(),item,n.brand(),n.categoryNodeId(),null,Map.of(),Map.of(),List.of(),n.storageCondition(),OrderMethod.PRE_ORDER,List.of()),j.supplierId(),j.market());
             if(!Long.valueOf(owner).equals(p.getMerchantId())||!item.equals(p.getItemNumber())||!eligible(p,j))throw conflict();
             if(input.model()!=null&&input.model().length()>200||input.packaging()!=null&&input.packaging().length()>1000)throw invalid("master.invalid");
             var data=p.getCatalogData();p.setCatalogData(new ProductCatalogData(data.specification(),input.model(),input.packaging(),data.categoryIds(),data.supplierId(),null,null,null));products.saveAndFlush(p);

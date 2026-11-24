@@ -22,6 +22,16 @@ public class ProductPatch {
     private Boolean isTemporary;
     private ProductVisibility visibilityStatus;
     private Boolean cartEnabled;
+    private List<String> categoryNodeIds;
+    private String primaryCategoryNodeId;
+    private Long categoryRevision;
+
+    public List<String> getCategoryNodeIds() { return categoryNodeIds; }
+    public void setCategoryNodeIds(List<String> value) { categoryNodeIds = value; }
+    public String getPrimaryCategoryNodeId() { return primaryCategoryNodeId; }
+    public void setPrimaryCategoryNodeId(String value) { primaryCategoryNodeId = value; }
+    public Long getCategoryRevision() { return categoryRevision; }
+    public void setCategoryRevision(Long value) { categoryRevision = value; }
 
     public Boolean getCartEnabled() {
         return cartEnabled;

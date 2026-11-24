@@ -113,30 +113,30 @@ public class PublicProductBrowseService {
   if(expected!=null&&!expected.equals(version))throw new Changed();
   var scope=data.entries().stream().filter(e->!marked||!data.markers().getOrDefault(e.productId(),List.of()).isEmpty()).filter(e->matches(e,q)).toList();
   var labels=new LinkedHashMap<String,RecommendationItem.Label>();var counts=new LinkedHashMap<String,Long>();long unclassified=0;
-  Map<String,String> assignments=shoppingData==null?Map.of():shoppingData.assignments();
+  Map<String,Set<String>> assignments=shoppingData==null?Map.of():shoppingData.assignments();
   var display=shoppingData==null?List.<ShoppingCategoryMap.Category>of():shoppingData.categories();
   var parents=new HashMap<String,String>();display.forEach(c->{if(c.parentId()!=null)parents.put(c.id(),c.parentId());});
   for(var entry:scope){
    if(shoppingData==null){if(entry.categories().isEmpty())unclassified++;var seen=new HashSet<String>();for(var c:entry.categories())if(seen.add(c.id())){labels.put(c.id(),c);counts.merge(c.id(),1L,Long::sum);}}
-   else {String leaf=assignments.get(entry.productId());if(leaf==null)unclassified++;else{counts.merge(leaf,1L,Long::sum);if(parents.get(leaf)!=null)counts.merge(parents.get(leaf),1L,Long::sum);}}
+   else {var leaves=assignments.get(entry.productId());if(leaves==null||leaves.isEmpty())unclassified++;else{var counted=new HashSet<String>();for(String leaf:leaves){counted.add(leaf);if(parents.get(leaf)!=null)counted.add(parents.get(leaf));}counted.forEach(value->counts.merge(value,1L,Long::sum));}}
   }
   var facets=shoppingData==null?counts.entrySet().stream().map(e->new Facet(e.getKey(),labels.get(e.getKey()).name(),e.getValue())).toList():display.stream().filter(c->counts.getOrDefault(c.id(),0L)>0||c.id().equals(cat)||c.id().equals(parents.get(cat))).map(c->new Facet(c.id(),c.name(),counts.getOrDefault(c.id(),0L),c.parentId(),c.icon(),c.imageUrl())).toList();
   // Obsolete raw-category links return to the overview; never interpret a source ID as a shopping ID.
   final String selected=shoppingData!=null&&!cat.equals("__unclassified")&&display.stream().noneMatch(c->c.id().equals(cat))?"":cat;
-  var filtered=scope.stream().filter(e->{if(selected.isEmpty())return true;if(shoppingData==null)return selected.equals("__unclassified")&&e.categories().isEmpty()||e.categories().stream().anyMatch(c->c.id().equals(selected));String leaf=assignments.get(e.productId());return selected.equals("__unclassified")?leaf==null:selected.equals(leaf)||selected.equals(parents.get(leaf));}).toList();
+  var filtered=scope.stream().filter(e->{if(selected.isEmpty())return true;if(shoppingData==null)return selected.equals("__unclassified")&&e.categories().isEmpty()||e.categories().stream().anyMatch(c->c.id().equals(selected));var leaves=assignments.get(e.productId());return selected.equals("__unclassified")?leaves==null||leaves.isEmpty():leaves!=null&&leaves.stream().anyMatch(leaf->selected.equals(leaf)||selected.equals(parents.get(leaf)));}).toList();
   var heat=popularity==null?Map.<String,Long>of():popularity.counts();
   filtered=ProductBrowseOrder.sorted(filtered,order,e->reference(e,now)==null?null:reference(e,now).amount(),e->e.rating(),e->heat.getOrDefault(e.productId(),0L));
   if(order.startsWith("price"))filtered=ProductBrowseOrder.prices(filtered,order,e->{var actual=currentPrices.get(e.productId());var ref=reference(e,now);return actual!=null?actual:ref==null?null:new PublicBrowsePriceService.Price(ref.amount(),ref.currency());});
   if(markedFirst&&!marked)filtered=filtered.stream().sorted(Comparator.comparing((PublicProductCatalogService.Entry e)->data.markers().getOrDefault(e.productId(),List.of()).isEmpty())).toList();
   int size=rangeLimit==null?24:rangeLimit;
   int start=(int)Math.min(rangeOffset==null?(long)page*24:rangeOffset,filtered.size()),end=Math.min(start+size,filtered.size());
-  java.util.function.Function<PublicProductCatalogService.Entry,Card> card=e->new Card(e.productId(),e.merchantId(),e.name(),e.brand(),e.itemNumber(),e.specification(),e.model(),e.packaging(),e.gallery().isEmpty()?null:e.gallery().get(0),shoppingData==null?e.categories():display.stream().filter(c->c.id().equals(assignments.get(e.productId()))).map(c->new RecommendationItem.Label(c.id(),c.name())).toList(),data.markers().getOrDefault(e.productId(),List.of()),e.reviewedMaster(),e.rating(),reference(e,now),e.cartEnabled());
+  java.util.function.Function<PublicProductCatalogService.Entry,Card> card=e->new Card(e.productId(),e.merchantId(),e.name(),e.brand(),e.itemNumber(),e.specification(),e.model(),e.packaging(),e.gallery().isEmpty()?null:e.gallery().get(0),shoppingData==null?e.categories():display.stream().filter(c->assignments.getOrDefault(e.productId(),Set.of()).contains(c.id())).map(c->new RecommendationItem.Label(c.id(),c.name())).toList(),data.markers().getOrDefault(e.productId(),List.of()),e.reviewedMaster(),e.rating(),reference(e,now),e.cartEnabled());
   boolean leafRange=rangeOffset!=null&&sections&&"".equals(shelfOnly)&&parents.containsKey(selected);
   var cards=shelfOnly==null||leafRange?filtered.subList(start,end).stream().map(card).toList():List.<Card>of();
   var shelves=new ArrayList<Shelf>();
   if(rangeOffset==null&&!sections&&shoppingData!=null&&!selected.equals("__unclassified")&&!parents.containsKey(selected)
-      &&(selected.isEmpty()||filtered.stream().noneMatch(e->selected.equals(assignments.get(e.productId()))))){
-   for(var facet:facets)if(Objects.equals(facet.parentId(),selected.isEmpty()?null:selected)){var shelfRows=filtered.stream().filter(e->{var leaf=assignments.get(e.productId());return facet.id().equals(leaf)||facet.id().equals(parents.get(leaf));}).toList();if(!shelfRows.isEmpty())shelves.add(new Shelf(facet.id(),shelfOnly==null||facet.id().equals(shelfOnly)||shelfOnly.isEmpty()&&shelves.isEmpty()?shelfRows.stream().limit(8).map(card).toList():List.of(),shelfRows.size()));}
+      &&(selected.isEmpty()||filtered.stream().noneMatch(e->assignments.getOrDefault(e.productId(),Set.of()).contains(selected)))){
+   for(var facet:facets)if(Objects.equals(facet.parentId(),selected.isEmpty()?null:selected)){var shelfRows=filtered.stream().filter(e->assignments.getOrDefault(e.productId(),Set.of()).stream().anyMatch(leaf->facet.id().equals(leaf)||facet.id().equals(parents.get(leaf)))).toList();if(!shelfRows.isEmpty())shelves.add(new Shelf(facet.id(),shelfOnly==null||facet.id().equals(shelfOnly)||shelfOnly.isEmpty()&&shelves.isEmpty()?shelfRows.stream().limit(8).map(card).toList():List.of(),shelfRows.size()));}
    if(selected.isEmpty()&&unclassified>0){var rows=filtered.stream().filter(e->!assignments.containsKey(e.productId())).toList();shelves.add(new Shelf("__unclassified",shelfOnly==null||"__unclassified".equals(shelfOnly)||shelfOnly.isEmpty()&&shelves.isEmpty()?rows.stream().limit(8).map(card).toList():List.of(),rows.size()));}
   }
   if(sections&&!leafRange){
@@ -147,7 +147,7 @@ public class PublicProductBrowseService {
     for(var child:display)if(root.id().equals(child.parentId()))bySection.put(child.id(),new ArrayList<>());
    }
    bySection.put("__unclassified",new ArrayList<>());
-   for(var entry:filtered)bySection.computeIfAbsent(assignments.getOrDefault(entry.productId(),"__unclassified"),key->new ArrayList<>()).add(entry);
+   for(var entry:filtered){var leaves=assignments.get(entry.productId());if(leaves==null||leaves.isEmpty())bySection.get("__unclassified").add(entry);else for(String leaf:leaves)bySection.computeIfAbsent(leaf,key->new ArrayList<>()).add(entry);}
    for(var entry:bySection.entrySet())if(!entry.getValue().isEmpty()){
     var rows=entry.getValue();boolean include=entry.getKey().equals(shelfOnly)||shelfOnly.isEmpty()&&shelves.isEmpty();
     int offset=(int)Math.min(rangeOffset==null?(long)page*24:rangeOffset,rows.size());

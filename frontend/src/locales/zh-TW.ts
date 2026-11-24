@@ -1918,3 +1918,5 @@ Object.assign(messages,{
   "categoryImport.checkRequired": "請勾選核對確認後再匯入。",
   "categoryImport.ready": "已核對，可確認匯入。"
 });
+
+Object.assign(messages, {"categoryTree.primary":'主要分類'});

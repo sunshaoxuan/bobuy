@@ -4,6 +4,8 @@ import com.bobbuy.model.CategoryTreeNode;
 import com.bobbuy.model.ProductPrimaryCategoryPath;
 import com.bobbuy.repository.CategoryTreeNodeRepository;
 import com.bobbuy.repository.ProductPrimaryCategoryPathRepository;
+import com.bobbuy.repository.ProductAdditionalCategoryPathRepository;
+import com.bobbuy.model.ProductAdditionalCategoryPath;
 import com.bobbuy.repository.ProductRepository;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -32,15 +34,18 @@ public class CategoryPathImportService {
     public static final Set<String> SOURCE_TIERS = Set.of("官网面包屑（原文）", "推定（官网无可用面包屑）", "推定（官网无页面）");
 
     private final ObjectMapper json=new ObjectMapper();
-    private static final List<String> MAPPING_HEADER=List.of("productId","itemNumber","version","categoryNodeId","categoryPath","sortOrder","operation");
+    private static final List<String> LEGACY_MAPPING_HEADER=List.of("productId","itemNumber","version","categoryNodeId","categoryPath","sortOrder","operation");
+    private static final List<String> MAPPING_HEADER=List.of("productId","itemNumber","version","primaryCategoryNodeId","categoryNodeIds","categoryPaths","operation","categoryRevision");
     private final JdbcTemplate jdbc;
     private final ProductRepository products;
     private final CategoryTreeNodeRepository nodes;
     private final ProductPrimaryCategoryPathRepository paths;
+    private final ProductAdditionalCategoryPathRepository additionalPaths;
 
     public CategoryPathImportService(JdbcTemplate jdbc, ProductRepository products,
-            CategoryTreeNodeRepository nodes, ProductPrimaryCategoryPathRepository paths, CategoryReviewedNames reviewedNames) {
-        this.jdbc=jdbc; this.products=products; this.nodes=nodes; this.paths=paths;
+            CategoryTreeNodeRepository nodes, ProductPrimaryCategoryPathRepository paths,
+            ProductAdditionalCategoryPathRepository additionalPaths, CategoryReviewedNames reviewedNames) {
+        this.jdbc=jdbc; this.products=products; this.nodes=nodes; this.paths=paths; this.additionalPaths=additionalPaths;
     }
 
     @Transactional
@@ -163,7 +168,21 @@ public class CategoryPathImportService {
         if(!conflicts.isEmpty())throw new CategoryImportConflict("Preview changed ("+String.join(", ",conflicts)+"); preview again before confirming");
         for(Row row:p.rows()) if("MATCHED".equals(row.outcome())) {
             String target=expected.get("target:"+row.productId());
-            if(target!=null){paths.save(new ProductPrimaryCategoryPath(row.productId(),target));continue;}
+            if(target!=null){
+                try {
+                    Map<String,Object> assignment=json.readValue(target,new com.fasterxml.jackson.core.type.TypeReference<Map<String,Object>>(){});
+                    String primary=(String)assignment.get("primary");
+                    long revision=((Number)assignment.get("revision")).longValue();
+                    var existing=paths.findById(row.productId());
+                    if(existing.isEmpty()) paths.saveAndFlush(new ProductPrimaryCategoryPath(row.productId(),primary));
+                    else if(paths.replaceAtRevision(row.productId(),primary,revision)!=1)
+                        throw new CategoryImportConflict("Category selection changed; preview again");
+                    additionalPaths.deleteAllByProductId(row.productId());
+                    @SuppressWarnings("unchecked") var selected=(List<String>)assignment.get("selected");
+                    additionalPaths.saveAll(selected.stream().filter(category->!category.equals(primary)).map(category->new ProductAdditionalCategoryPath(row.productId(),category)).toList());
+                } catch(IOException malformed) { throw new IllegalStateException("Invalid preview assignment",malformed); }
+                continue;
+            }
             String parent=null; List<String> full=new ArrayList<>(); List<String> japanesePath=new ArrayList<>();
             for(String name:segments(row.breadcrumb(),row.sourceTier())) {
                 japanesePath.add(name);
@@ -213,7 +232,7 @@ public class CategoryPathImportService {
         for(var row:rows)if("MATCHED".equals(row.outcome())){
             var p=products.findById(row.productId()).orElseThrow(()->new IllegalArgumentException("Product unavailable; preview again"));
             if(!admin&&!Objects.equals(p.getMerchantId(),actorId))throw new IllegalArgumentException("Product outside current merchant scope");
-            result.put("product row "+row.rowNumber(),encoded(Arrays.asList(p.getId(),p.getMerchantId(),p.getItemNumber(),p.getRecordVersion(),p.getCategoryId(),p.getCategoryImportFlag(),p.getCategoryPathSource(),paths.findById(p.getId()).map(ProductPrimaryCategoryPath::getCategoryNodeId).orElse(null))));
+            result.put("product row "+row.rowNumber(),encoded(Arrays.asList(p.getId(),p.getMerchantId(),p.getItemNumber(),p.getRecordVersion(),p.getCategoryId(),p.getCategoryImportFlag(),p.getCategoryPathSource(),paths.findById(p.getId()).map(ProductPrimaryCategoryPath::getCategoryNodeId).orElse(null),paths.findById(p.getId()).map(ProductPrimaryCategoryPath::getRevision).orElse(0L),additionalPaths.findAllByProductId(p.getId()).stream().map(ProductAdditionalCategoryPath::getCategoryNodeId).sorted().toList())));
             if(!targets.containsKey(p.getId()))result.put("identity row "+row.rowNumber(),encoded((admin?products.findAllByItemNumber(row.sku()):products.findAllByMerchantIdAndItemNumber(actorId,row.sku())).stream().map(Product::getId).sorted().toList()));
         }
         targets.forEach((id,target)->result.put("target:"+id,target));return result;
@@ -225,8 +244,11 @@ public class CategoryPathImportService {
             csv.printRecord(MAPPING_HEADER);
             if(!template){var tree=new HashMap<String,CategoryTreeNode>();nodes.findAll().forEach(n->tree.put(n.getId(),n));
                 for(var p:(admin?products.findAll():products.findAllByMerchantId(actorId)).stream().sorted(Comparator.comparing(Product::getId)).toList()){
-                    var node=paths.findById(p.getId()).map(path->tree.get(path.getCategoryNodeId())).orElse(null);
-                    csv.printRecord(p.getId(),p.getItemNumber(),Objects.toString(p.getRecordVersion(),"0"),node==null?"":node.getId(),node==null?"":node.getFullPath().stream().map(tree::get).filter(Objects::nonNull).map(n->n.getName().getOrDefault("ja-JP","")).collect(java.util.stream.Collectors.joining(" > ")),node==null?"":node.getSortOrder(),node==null?"KEEP":"ASSIGN");
+                    var primary=paths.findById(p.getId()).orElse(null);var ids=new ArrayList<String>();
+                    if(primary!=null)ids.add(primary.getCategoryNodeId());
+                    additionalPaths.findAllByProductId(p.getId()).stream().map(ProductAdditionalCategoryPath::getCategoryNodeId).sorted().forEach(ids::add);
+                    var labels=ids.stream().map(tree::get).filter(Objects::nonNull).map(node->node.getFullPath().stream().map(tree::get).filter(Objects::nonNull).map(n->n.getName().getOrDefault("ja-JP","")).collect(java.util.stream.Collectors.joining(" > "))).toList();
+                    csv.printRecord(p.getId(),p.getItemNumber(),Objects.toString(p.getRecordVersion(),"0"),primary==null?"":primary.getCategoryNodeId(),String.join("|",ids),String.join("|",labels),primary==null?"KEEP":"ASSIGN",primary==null?"0":primary.getRevision());
                 }
             }csv.flush();return out.toString().getBytes(StandardCharsets.UTF_8);
         }catch(IOException e){throw new IllegalStateException(e);}
@@ -234,11 +256,12 @@ public class CategoryPathImportService {
     private Preview stablePreview(long actor,boolean admin,String filename,byte[] bytes,String text,Set<String> deferred){
         List<Row> rows=new ArrayList<>();Map<String,String> targets=new HashMap<>();Set<String> seen=new HashSet<>();
         try(var csv=CSVParser.parse(text,CSVFormat.RFC4180)){
-            var records=csv.getRecords();if(records.isEmpty()||!records.get(0).toList().equals(MAPPING_HEADER))throw new IllegalArgumentException("Use the downloaded mapping template");
+            var records=csv.getRecords();boolean legacy=!records.isEmpty()&&records.get(0).toList().equals(LEGACY_MAPPING_HEADER);
+            if(records.isEmpty()||!legacy&&!records.get(0).toList().equals(MAPPING_HEADER))throw new IllegalArgumentException("Use the downloaded mapping template");
             if(records.size()<2||records.size()>2001)throw new IllegalArgumentException("Use 1–2000 mapping rows");
             for(int i=1;i<records.size();i++){
-                var r=records.get(i);String error=null,sku=r.size()>1?r.get(1):"",crumb=r.size()>4?r.get(4):"",id=r.size()>0?r.get(0):"",outcome="MATCHED";
-                if(r.size()!=7)error="Expected seven columns";
+                var r=records.get(i);String error=null,sku=r.size()>1?r.get(1):"",crumb=r.size()>(legacy?4:5)?r.get(legacy?4:5):"",id=r.size()>0?r.get(0):"",outcome="MATCHED";
+                if(r.size()!=(legacy?7:8))error="Column count does not match the downloaded template";
                 else if(!seen.add(id))error="Duplicate product identity";
                 else{
                     var product=products.findById(id).filter(p->admin||Objects.equals(actor,p.getMerchantId())).orElse(null);
@@ -247,12 +270,13 @@ public class CategoryPathImportService {
                     else if(deferred.contains(sku)||"KEEP".equals(r.get(6)))outcome="DEFERRED";
                     else if(!"ASSIGN".equals(r.get(6)))error="Operation must be KEEP or ASSIGN";
                     else{
-                        var node=nodes.findById(r.get(3)).orElse(null);
-                        String existing=paths.findById(id).map(ProductPrimaryCategoryPath::getCategoryNodeId).orElse(null);
-                        if(node==null)error="Unknown category; import the structure first";
-                        else if(node.getSystemKey()!=null&&!"UNCATEGORIZED".equals(node.getSystemKey()))error="Unsupported system category";
-                        else if(nodes.existsByParentId(node.getId())&&!node.getId().equals(existing))error="Choose a leaf category or retain the existing assignment";
-                        else targets.put(id,node.getId());
+                        String primary=r.get(3);var selected=new LinkedHashSet<String>();
+                        if(legacy){selected.add(primary);additionalPaths.findAllByProductId(id).stream().map(ProductAdditionalCategoryPath::getCategoryNodeId).forEach(selected::add);}
+                        else if(!r.get(4).isBlank())selected.addAll(Arrays.asList(r.get(4).split("\\|",-1)));
+                        if(primary.isBlank()||!selected.contains(primary))error="Primary category must belong to the selected category set";
+                        else if(!legacy&&!Objects.toString(paths.findById(id).map(ProductPrimaryCategoryPath::getRevision).orElse(0L)).equals(r.get(7)))error="Category selection changed; export or preview again";
+                        else for(String selectedId:selected){var node=nodes.findById(selectedId).orElse(null);String existing=paths.findById(id).map(ProductPrimaryCategoryPath::getCategoryNodeId).orElse(null);if(node==null){error="Unknown category; import the structure first";break;}if(node.getSystemKey()!=null&&!"UNCATEGORIZED".equals(node.getSystemKey())){error="Unsupported system category";break;}if(nodes.existsByParentId(node.getId())&&!node.getId().equals(existing)){error="Choose a leaf category or retain the existing assignment";break;}}
+                        if(error==null)targets.put(id,encoded(Map.of("primary",primary,"selected",selected,"revision",paths.findById(id).map(ProductPrimaryCategoryPath::getRevision).orElse(0L))));
                     }
                 }
                 rows.add(new Row(i+1,sku,crumb,id,error==null?outcome:"UNMATCHED",error,null,null));

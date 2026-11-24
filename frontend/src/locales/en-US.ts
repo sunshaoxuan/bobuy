@@ -1779,3 +1779,5 @@ Object.assign(messages,{
   "categoryImport.checkRequired": "Check the confirmation box after reviewing the preview.",
   "categoryImport.ready": "Review complete; ready to confirm."
 });
+
+Object.assign(messages, {"categoryTree.primary":'Primary category'});
