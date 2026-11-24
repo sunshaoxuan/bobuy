@@ -3,6 +3,7 @@ export const IMAGE_UPLOAD_ACCEPT = 'image/png,image/jpeg,image/webp,image/avif';
 export const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
 const invalid = () => new Error('gallery.invalid');
 const conversionFailed = () => new Error('gallery.conversion_failed');
+const readFailed = () => new Error('gallery.read_failed');
 
 /** Snapshot the live picker list before any asynchronous work or input reset. */
 export const copyFileList = (files: FileList | null): File[] => Array.from(files ?? []);
@@ -20,13 +21,18 @@ export function validCatalogImageSource(source: string): boolean {
 export async function imageUploadSha256(file: File): Promise<string> {
   if (!file.size || file.size > MAX_IMAGE_BYTES) throw invalid();
   if (!globalThis.crypto?.subtle) throw new Error('gallery.hash_unavailable');
-  const bytes = typeof file.arrayBuffer === 'function' ? await file.arrayBuffer() : await new Promise<ArrayBuffer>((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onerror = () => reject(invalid());
-    reader.onload = () => reader.result instanceof ArrayBuffer ? resolve(reader.result) : reject(invalid());
-    reader.readAsArrayBuffer(file);
-  });
-  const digest = await crypto.subtle.digest('SHA-256', bytes);
+  let bytes: ArrayBuffer;
+  try {
+    bytes = typeof file.arrayBuffer === 'function' ? await file.arrayBuffer() : await new Promise<ArrayBuffer>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = () => reject(readFailed());
+      reader.onload = () => reader.result instanceof ArrayBuffer ? resolve(reader.result) : reject(readFailed());
+      reader.readAsArrayBuffer(file);
+    });
+  } catch { throw readFailed(); }
+  let digest: ArrayBuffer;
+  try { digest = await crypto.subtle.digest('SHA-256', bytes); }
+  catch { throw new Error('gallery.hash_failed'); }
   return Array.from(new Uint8Array(digest), value => value.toString(16).padStart(2, '0')).join('');
 }
 
@@ -36,7 +42,9 @@ export async function prepareImageUpload(file: File, catalog = false): Promise<F
   const failure = (key: string) => catalog ? new Error(key) : invalid();
   if (!file.size) throw failure('gallery.file_empty');
   if (file.size > MAX_IMAGE_BYTES) throw failure('gallery.file_too_large');
-  const bytes = new Uint8Array(await file.slice(0, 512).arrayBuffer());
+  let bytes: Uint8Array;
+  try { bytes = new Uint8Array(await file.slice(0, 512).arrayBuffer()); }
+  catch { throw catalog ? readFailed() : invalid(); }
   const ascii = (start: number, end: number) => String.fromCharCode(...bytes.slice(start, end));
   const png = bytes.length >= 8 && [137,80,78,71,13,10,26,10].every((v,i) => bytes[i] === v);
   const jpeg = bytes[0] === 255 && bytes[1] === 216 && bytes[2] === 255;
@@ -47,10 +55,20 @@ export async function prepareImageUpload(file: File, catalog = false): Promise<F
   if (!type) throw failure('gallery.file_format');
   const browserType=file.type.toLowerCase();
   const genericType=!browserType||(catalog&&browserType==='application/octet-stream');
-  if (!genericType&&browserType!==type) throw failure('gallery.mime_mismatch');
+  const transportMismatch=!genericType&&browserType!==type;
+  if (!catalog&&transportMismatch) throw failure('gallery.mime_mismatch');
   const extension=file.name.match(/\.([^.]+)$/)?.[1]?.toLowerCase();
   const expected=type==='image/jpeg'?['jpg','jpeg']:type==='image/png'?['png']:type==='image/webp'?['webp']:['avif'];
-  if(catalog&&extension&&!expected.includes(extension))throw failure('gallery.extension_mismatch');
+  const extensionMismatch=!!extension&&!expected.includes(extension);
+  if(catalog&&(png||jpeg)&&(transportMismatch||extensionMismatch)){
+    const suffix=jpeg?'jpg':'png';
+    const base=file.name.replace(/\.[^.]+$/, '')||'image';
+    // A new transport File changes only the filename/MIME metadata. Its Blob parts
+    // retain the original bytes, and the original picker File remains untouched.
+    return new File([file],`${base}.${suffix}`,{type,lastModified:file.lastModified});
+  }
+  if(catalog&&transportMismatch)throw failure('gallery.mime_mismatch');
+  if(catalog&&extensionMismatch)throw failure('gallery.extension_mismatch');
   // Do not silently flatten animated images into a different product picture.
   if ((webp && ascii(12,16) === 'VP8X' && (bytes[20] & 2) !== 0) || brands.includes('avis')) throw failure('gallery.animated');
   if (png || jpeg) return file;
