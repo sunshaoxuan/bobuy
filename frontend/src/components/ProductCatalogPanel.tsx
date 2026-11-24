@@ -9,7 +9,7 @@ import {PictureOutlined,UploadOutlined,CheckCircleOutlined,ArrowLeftOutlined,Arr
 import './productCatalog.css';
 import {ImageLightbox} from './ImageLightbox';
 import CategoryTreePicker from './CategoryTreePicker';
-import {IMAGE_UPLOAD_ACCEPT,copyFileList,imageUploadSha256,prepareImageUpload,validCatalogImageSource} from '../imageUpload';
+import {IMAGE_UPLOAD_ACCEPT,copyFileList,imageUploadSha256,prepareCatalogImageUpload,validCatalogImageSource} from '../imageUpload';
 import {getStoredAccessToken,getStoredUser,getTestInjectedRole,getTestInjectedUser,subscribeToAuthChanges} from '../authStorage';
 
 const languages=[{key:'ja-JP',label:'日本語'},{key:'zh-CN',label:'简体中文'},{key:'zh-TW',label:'繁體中文'},{key:'en-US',label:'English'}];
@@ -115,11 +115,11 @@ function CatalogEditor({entries,id,onChoose,onSaved,searchEntries,getExportIds,c
    for(let index=0;index<files.length;index++){
     const row=batch[index];if(!current())return;update(row.key,{status:'uploading'});
     try{
-     const prepared=await prepareImageUpload(files[index]);if(!current())return;
+     const prepared=await prepareCatalogImageUpload(files[index]);if(!current())return;
      const sha256=await imageUploadSha256(prepared);if(!current())return;update(row.key,{sha256});
      const known=uploadedAssets.current.get(sha256)??pictures.find(p=>p.sha256===sha256);
-     if(!known&&pictures.length>=100)throw new Error('gallery.invalid');
-     const asset=known??await productCatalogApi.upload(productId,prepared,sourceUrl,files[index].name);if(!current())return;
+     if(!known&&pictures.length>=100)throw new Error('gallery.limit');
+     const asset=known??await productCatalogApi.upload(productId,prepared,sourceUrl,files[index].name,true);if(!current())return;
      uploadedAssets.current.set(sha256,asset);if(asset.sha256)uploadedAssets.current.set(asset.sha256,asset);
      if(!pictures.some(p=>sameAsset(p,asset)))pictures.push(asset);
      setDraft(prior=>current()&&prior?.productId===productId?{...prior,gallery:[...pictures]}:prior);setReviewed(false);
@@ -171,6 +171,7 @@ function CatalogEditor({entries,id,onChoose,onSaved,searchEntries,getExportIds,c
       <div className="catalog-upload-group">
        <label>{t('gallery.default_source')}<Input value={draft.defaultImageSourceUrl??''} onChange={e=>{patch({defaultImageSourceUrl:e.target.value});setImageReviewed(false);}} placeholder="https://…"/></label>
        {(cover||pendingFiles.length>0||source!==undefined)&&<label>{t('gallery.upload_source')}<Input value={uploadSource} onChange={e=>{setSource(e.target.value);setImageReviewed(false);}} placeholder="https://…"/></label>}
+       {uploadSource&&!validCatalogImageSource(uploadSource)&&<Alert type="error" message={t('master.image_source')}/>}
        <Checkbox checked={imageReviewed} onChange={e=>setImageReviewed(e.target.checked)}>{t('gallery.ack')}</Checkbox>
        <p className="catalog-image-guidance">{t('gallery.format_hint')}</p>
        {!!pendingFiles.length&&<><ul className="catalog-picked-files">{pendingFiles.map((file,index)=>
