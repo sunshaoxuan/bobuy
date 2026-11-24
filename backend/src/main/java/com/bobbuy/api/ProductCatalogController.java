@@ -17,7 +17,7 @@ public class ProductCatalogController {
  public record Restore(String checkpointId,long version,boolean reviewed){}
  @PostMapping("/{id}/restore") public ApiResponse<?> restore(@PathVariable String id,@RequestBody Restore input){return ApiResponse.success(service.restore(id,input.checkpointId(),input.version(),input.reviewed()));}
  @PostMapping(value="/{id}/images",consumes=org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE)
- public ApiResponse<?> image(@PathVariable String id,@RequestParam org.springframework.web.multipart.MultipartFile file,@RequestParam String sourceUrl,@RequestParam(defaultValue="") String label,@RequestParam boolean verified){
-  return ApiResponse.success(service.upload(id,com.bobbuy.service.RecommendationImageValidator.validate(file),sourceUrl,label,verified));
+ public ApiResponse<?> image(@PathVariable String id,@RequestParam(required=false) org.springframework.web.multipart.MultipartFile file,@RequestParam(required=false) String sourceUrl,@RequestParam(required=false) String label,@RequestParam(required=false) Boolean verified){
+  return ApiResponse.success(service.upload(id,com.bobbuy.service.RecommendationImageValidator.validateCatalog(file),sourceUrl,label,verified));
  }
 }

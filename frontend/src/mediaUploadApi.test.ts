@@ -13,6 +13,6 @@ it('does not issue an upload request for forged or invalid image bytes',async()=
  const file=new File(['not an image'],'forged.webp',{type:'image/webp'});
  // jsdom has no Blob.arrayBuffer; use the same browser byte API explicitly.
  Object.defineProperty(file,'slice',{value:()=>({arrayBuffer:async()=>new TextEncoder().encode('not an image').buffer})});
- await expect(productCatalogApi.upload('fixture',file,'https://example.invalid/product','Synthetic')).rejects.toThrow('gallery.invalid');
+ await expect(productCatalogApi.upload('fixture',file,'https://example.invalid/product','Synthetic')).rejects.toThrow('gallery.file_format');
  expect(fetch).not.toHaveBeenCalled();
 });

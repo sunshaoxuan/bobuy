@@ -1,6 +1,6 @@
 import { message } from 'antd';
 import { retryRead, ReadRequestError, isTransientReadStatus } from './readRecovery';
-import { prepareImageUpload } from './imageUpload';
+import { prepareCatalogImageUpload, prepareImageUpload } from './imageUpload';
 import type {RecommendationIssueDateReview,RecommendationIssueDateRequest,RecommendationIssueDateSource} from './components/RecommendationIssueDateEditor';
 export type {RecommendationIssueDateReview,RecommendationIssueDateRequest} from './components/RecommendationIssueDateEditor';
 import {
@@ -1175,7 +1175,7 @@ export const productCatalogApi={
  proposals:()=>storeGet<CatalogProposal[]>('/api/merchant/product-catalog'),
  preview:(rows:CatalogInput[])=>postJson<CatalogProposal[],object>('/api/merchant/product-catalog/preview',{rows,reviewed:false}),
  save:(rows:CatalogInput[])=>putJson<{value:CatalogInput;canonical:boolean;sourceItemIds:number[];recoveryId?:string}[],object>('/api/merchant/product-catalog',{rows,reviewed:true}),
- upload:async(id:string,file:File,sourceUrl:string,label:string)=>{const prepared=await prepareImageUpload(file);const form=new FormData();form.set('file',prepared);form.set('sourceUrl',sourceUrl);form.set('label',label);form.set('verified','true');const response=await authorizedFetch('/api/merchant/product-catalog/'+encodeURIComponent(id)+'/images',{method:'POST',body:form});if(!response.ok)throw new Error(await parseErrorMessage(response));return parseSuccessPayload<CatalogMedia>(response);}
+ upload:async(id:string,file:File,sourceUrl:string,label:string,alreadyPrepared=false)=>{const prepared=alreadyPrepared?file:await prepareCatalogImageUpload(file);const form=new FormData();form.set('file',prepared);form.set('sourceUrl',sourceUrl);form.set('label',label);form.set('verified','true');const response=await authorizedFetch('/api/merchant/product-catalog/'+encodeURIComponent(id)+'/images',{method:'POST',body:form});if(!response.ok)throw new Error(await parseErrorMessage(response));return parseSuccessPayload<CatalogMedia>(response);}
 };
 export type CategoryTreeNode={imageUrl?:string|null;id:string;parentId:string|null;name:Record<string,string>;fullPath:string[];sortOrder:number;productCount:number;deleteBlocked?:boolean};
 export const categoryTreeApi={
