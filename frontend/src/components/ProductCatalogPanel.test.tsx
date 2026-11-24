@@ -20,6 +20,13 @@ it('saves an explicitly cleared primary path and never displays internal categor
  await waitFor(()=>expect(tree.assign).toHaveBeenCalledWith('p1',[],null,0));
 });
 beforeEach(()=>{vi.clearAllMocks();localStorage.setItem('bobbuy_locale','en-US');mock.get.mockResolvedValue({value,canonical:false,sourceItemIds:[1]});mock.options.mockResolvedValue({categories:[],suppliers:[]});mock.proposals.mockResolvedValue([{value,changes:['master.canonical_save'],warnings:[]}]);mock.preview.mockImplementation(async rows=>rows.map((value:unknown)=>({value,changes:[],warnings:[]})));mock.save.mockResolvedValue([{value:{...value,version:8},canonical:true}]);});
+it('saves only categories for a legacy master missing ja-JP without catalog validation or writes',async()=>{
+ const legacyValue={...value,name:{...value.name,'ja-JP':''}};mock.get.mockResolvedValue({value:legacyValue,canonical:false,sourceItemIds:[1]});
+ render(<I18nProvider><ProductCatalogPanel entries={[]} id="p1" onChoose={vi.fn()} onSaved={vi.fn()}/></I18nProvider>);
+ await screen.findByDisplayValue('000123');fireEvent.click(screen.getByRole('button',{name:'Clear to Uncategorized'}));
+ const checks=screen.getAllByRole('checkbox');fireEvent.click(checks[checks.length-1]);fireEvent.click(screen.getByRole('button',{name:/confirm and save/i}));
+ await waitFor(()=>expect(tree.assign).toHaveBeenCalledWith('p1',[],null,0));expect(screen.queryByText('Japanese source name is required')).not.toBeInTheDocument();expect(mock.preview).not.toHaveBeenCalled();expect(mock.save).not.toHaveBeenCalled();
+});
 it('edits four languages and requires review before versioned preview/save',async()=>{
  const onSaved=vi.fn();render(<I18nProvider><ProductCatalogPanel entries={[]} id="p1" onChoose={vi.fn()} onSaved={onSaved}/></I18nProvider>);
  await screen.findByDisplayValue('000123');fireEvent.click(screen.getByRole('tab',{name:'Languages & descriptions'}));await screen.findByDisplayValue('日本商品');expect(screen.getByRole('radio',{name:'繁體中文'})).toBeInTheDocument();
