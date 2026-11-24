@@ -2,7 +2,7 @@ import {afterEach,expect,it,vi} from 'vitest';
 import {api,productCatalogApi} from './api';
 import {imageUploadSha256} from './imageUpload';
 const {webcrypto}=await vi.importActual<{webcrypto:Crypto}>('node:crypto');
-const {Buffer}=await vi.importActual<typeof import('node:buffer')>('node:buffer');
+const {Buffer}=await vi.importActual<{Buffer:{from(value:ArrayBuffer):Uint8Array}}>('node:buffer');
 afterEach(()=>{vi.unstubAllGlobals();});
 const read=(blob:Blob)=>new Promise<ArrayBuffer>((resolve,reject)=>{const reader=new FileReader();reader.onerror=reject;reader.onload=()=>resolve(reader.result as ArrayBuffer);reader.readAsArrayBuffer(blob);});
 // Node WebCrypto rejects ArrayBuffers created by some JSDOM realms. Copy the
