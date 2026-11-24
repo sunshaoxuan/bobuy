@@ -129,7 +129,10 @@ it('save failure preserves uploaded draft assets and a retry does not re-upload 
  const a=file('keep.png');const asset=picture('kept-asset',a.sha);mock.upload.mockResolvedValue(asset);
  const onSaved=vi.fn();render(<I18nProvider><ProductCatalogPanel id="p1" entries={[]} onChoose={vi.fn()} onSaved={onSaved}/></I18nProvider>);await openMedia();select([a.file]);await waitFor(()=>expect(document.querySelector('img[src="/api/storefront/recommendation-images/kept-asset"]')).not.toBeNull());
  fireEvent.click(screen.getByRole('checkbox',{name:/I reviewed the data/}));fireEvent.click(screen.getByRole('button',{name:'Confirm and save masters'}));await waitFor(()=>expect(mock.save).toHaveBeenCalledOnce());expect(onSaved).not.toHaveBeenCalled();expect(document.querySelector('img[src="/api/storefront/recommendation-images/kept-asset"]')).not.toBeNull();expect(mock.save.mock.calls[0][0][0].gallery).toEqual([asset]);
- mock.save.mockResolvedValue([{value:{...value,version:8,gallery:[asset]},canonical:true}]);fireEvent.click(screen.getByRole('button',{name:'Confirm and save masters'}));await waitFor(()=>expect(onSaved).toHaveBeenCalledOnce());expect(mock.upload).toHaveBeenCalledOnce();
+ const retry = await screen.findByRole('button',{name:'Confirm and save masters'});
+ await waitFor(()=>expect(retry).toBeEnabled());
+ mock.save.mockResolvedValue([{value:{...value,version:8,gallery:[asset]},canonical:true}]);
+ fireEvent.click(retry);await waitFor(()=>expect(onSaved).toHaveBeenCalledOnce());expect(mock.upload).toHaveBeenCalledOnce();
 });
 it('an account/session switch suppresses the prior upload and drops its private draft/status',async()=>{
  const a=file('private.png');let resolve!:(v:ReturnType<typeof picture>)=>void;mock.upload.mockImplementation(()=>new Promise(r=>{resolve=r;}));
