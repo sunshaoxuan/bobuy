@@ -8,6 +8,9 @@
 .category-tree-picker-field .ant-btn:focus-visible { outline: 2px solid #795908; outline-offset: 2px; }
 .category-tree-multi-picker { display: grid; gap: 8px; }
 .category-tree-multi-picker > .ant-select { min-height: 44px; width: 100%; }
+.category-tree-primary-field { display: grid; gap: 6px; }
+.category-tree-primary-label { color: var(--zen-ink); font-size: 14px; font-weight: 500; line-height: 1.4; }
+.category-tree-primary-field > .ant-select { min-height: 44px; width: 100%; }
 .catalog-identity-grid > label:has(.category-tree-picker-field) { grid-column: 1 / -1; }
 .category-tree-picker-field .ant-select-focused .ant-select-selector { border-color: #795908 !important; box-shadow: 0 0 0 2px rgba(121, 89, 8, .18) !important; }
 .category-tree-picker-popup .ant-select-tree-node-selected { background: #f0f0ed !important; }

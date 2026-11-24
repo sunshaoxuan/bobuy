@@ -1,3 +1,4 @@
+import {useId} from 'react';
 import {Button, Select, TreeSelect} from 'antd';
 import type {CategoryTreeNode} from '../api';
 import {type Locale, useI18n} from '../i18n';
@@ -53,6 +54,7 @@ export function CategoryTreeMultiPicker({nodes, values, primary, disabled, onCha
   onChange: (values: string[], primary: string | null) => void;
 }) {
   const {t, locale} = useI18n();
+  const primaryLabelId = useId();
   const options = categoryTreeData(nodes, locale, true);
   const labels = new Map<string, string>();
   const collect = (rows: CategoryOption[]) => rows.forEach(row => { labels.set(row.value, row.label); collect(row.children); });
@@ -63,8 +65,11 @@ export function CategoryTreeMultiPicker({nodes, values, primary, disabled, onCha
       disabled={disabled} placeholder={t('categoryTree.uncategorized')} popupClassName="category-tree-picker-popup"
       onChange={(next: string[]) => onChange(next, next.includes(primary ?? '') ? primary : next[0] ?? null)}
       filterTreeNode={(input, node) => String(node.label ?? '').toLocaleLowerCase().includes(input.toLocaleLowerCase())}/>
-    {values.length > 0 && <Select aria-label={t('categoryTree.primary')} disabled={disabled} value={primary ?? values[0]}
-      options={values.map(value => ({value, label: labels.get(value) ?? value}))} onChange={next => onChange(values, next)}/>}
+    {values.length > 0 && <div className="category-tree-primary-field">
+      <span className="category-tree-primary-label" id={primaryLabelId}>{t('categoryTree.primary')}</span>
+      <Select aria-label={t('categoryTree.primary')} aria-labelledby={primaryLabelId} disabled={disabled} value={primary ?? values[0]}
+        options={values.map(value => ({value, label: labels.get(value) ?? value}))} onChange={next => onChange(values, next)}/>
+    </div>}
     <Button disabled={disabled || values.length === 0} onClick={() => onChange([], null)}>{t('categoryTree.clear')}</Button>
   </div>;
 }
