@@ -1772,3 +1772,5 @@ Object.assign(messages,{
   "categoryImport.checkRequired": "プレビューを確認し、確認欄にチェックしてください。",
   "categoryImport.ready": "確認済みです。取り込みを確定できます。"
 });
+
+Object.assign(messages, {"categoryTree.primary":'主カテゴリ'});

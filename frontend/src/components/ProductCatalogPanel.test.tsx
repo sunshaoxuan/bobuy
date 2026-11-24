@@ -9,7 +9,7 @@ vi.mock('antd',async()=>{const actual=await vi.importActual<typeof import('antd'
 const mock=vi.hoisted(()=>({get:vi.fn(),restore:vi.fn(),audit:vi.fn(),proposals:vi.fn(),preview:vi.fn(),save:vi.fn(),upload:vi.fn(),options:vi.fn()}));
 const tree=vi.hoisted(()=>({list:vi.fn(),product:vi.fn(),assign:vi.fn()}));
 vi.mock('../api',()=>({productCatalogApi:mock,recommendationTaxonomyApi:{options:mock.options},categoryTreeApi:tree}));
-beforeEach(()=>{tree.list.mockResolvedValue([{id:'rec-cat-private',parentId:null,name:{'ja-JP':'食品'},fullPath:['rec-cat-private'],sortOrder:0,productCount:1}]);tree.product.mockResolvedValue({productId:'p1',categoryNodeId:'rec-cat-private'});tree.assign.mockResolvedValue({productId:'p1',categoryNodeId:null});});
+beforeEach(()=>{tree.list.mockResolvedValue([{id:'rec-cat-private',parentId:null,name:{'ja-JP':'食品'},fullPath:['rec-cat-private'],sortOrder:0,productCount:1}]);tree.product.mockResolvedValue({productId:'p1',categoryNodeId:'rec-cat-private',categoryNodeIds:['rec-cat-private'],revision:0});tree.assign.mockResolvedValue({productId:'p1',categoryNodeId:null,categoryNodeIds:[],revision:1});});
 const value={productId:'p1',version:7,name:{'ja-JP':'日本商品','zh-CN':'中文商品','zh-TW':'繁體商品','en-US':'Product'},description:{},itemNumber:'000123',brand:null,specification:{'ja-JP':'2個'},model:null,packaging:null,categoryIds:[],supplierId:null,gallery:[],translationsReviewed:true};
 it('saves an explicitly cleared primary path and never displays internal category keys',async()=>{
  render(<I18nProvider><ProductCatalogPanel entries={[]} id="p1" onChoose={vi.fn()} onSaved={vi.fn()}/></I18nProvider>);
@@ -17,7 +17,7 @@ it('saves an explicitly cleared primary path and never displays internal categor
  fireEvent.click(screen.getByRole('button',{name:'Clear to Uncategorized'}));
  const checks=screen.getAllByRole('checkbox');fireEvent.click(checks[checks.length-1]);
  fireEvent.click(screen.getByRole('button',{name:/confirm and save/i}));
- await waitFor(()=>expect(tree.assign).toHaveBeenCalledWith('p1',null));
+ await waitFor(()=>expect(tree.assign).toHaveBeenCalledWith('p1',[],null,0));
 });
 beforeEach(()=>{vi.clearAllMocks();localStorage.setItem('bobbuy_locale','en-US');mock.get.mockResolvedValue({value,canonical:false,sourceItemIds:[1]});mock.options.mockResolvedValue({categories:[],suppliers:[]});mock.proposals.mockResolvedValue([{value,changes:['master.canonical_save'],warnings:[]}]);mock.preview.mockImplementation(async rows=>rows.map((value:unknown)=>({value,changes:[],warnings:[]})));mock.save.mockResolvedValue([{value:{...value,version:8},canonical:true}]);});
 it('edits four languages and requires review before versioned preview/save',async()=>{

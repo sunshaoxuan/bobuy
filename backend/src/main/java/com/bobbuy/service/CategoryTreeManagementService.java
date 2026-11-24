@@ -19,12 +19,15 @@ public class CategoryTreeManagementService {
                        int sortOrder, long productCount, boolean deleteBlocked, String imageUrl) {}
     /** Full parent is required; null explicitly means the root. */
     public record Edit(String parentId, Map<String, String> name, Integer sortOrder) {}
-    public record ProductPath(String productId, String categoryNodeId) {}
+    public record ProductPath(String productId, String categoryNodeId, List<String> categoryNodeIds, Long revision) {
+        public ProductPath(String productId, String categoryNodeId) { this(productId, categoryNodeId, null, null); }
+    }
     private static final Set<String> LOCALES = Set.of("zh-CN", "zh-TW", "en-US", "ja-JP");
     private static final Comparator<CategoryTreeNode> ORDER = Comparator.comparingInt(CategoryTreeNode::getSortOrder)
             .thenComparing(CategoryTreeNode::getId);
     private final CategoryTreeNodeRepository nodes;
     private final ProductPrimaryCategoryPathRepository paths;
+    private final ProductAdditionalCategoryPathRepository additionalPaths;
     private final ProductRepository products;
     private final CategoryLegacyMappingRepository mappings;
     private final ProductCategoryPathResolver resolver;
@@ -33,11 +36,16 @@ public class CategoryTreeManagementService {
     @org.springframework.beans.factory.annotation.Autowired
     public void setShopping(ShoppingCategoryService shopping) { this.shopping = shopping; }
 
+    @org.springframework.beans.factory.annotation.Autowired
     public CategoryTreeManagementService(CategoryTreeNodeRepository nodes, ProductPrimaryCategoryPathRepository paths,
             ProductRepository products, CategoryLegacyMappingRepository mappings, ProductCategoryPathResolver resolver,
-            JdbcTemplate jdbc) {
+            JdbcTemplate jdbc, @org.springframework.beans.factory.annotation.Autowired(required=false) ProductAdditionalCategoryPathRepository additionalPaths) {
         this.nodes = nodes; this.paths = paths; this.products = products; this.mappings = mappings; this.resolver = resolver; this.jdbc = jdbc;
+        this.additionalPaths = additionalPaths;
     }
+    public CategoryTreeManagementService(CategoryTreeNodeRepository nodes, ProductPrimaryCategoryPathRepository paths,
+            ProductRepository products, CategoryLegacyMappingRepository mappings, ProductCategoryPathResolver resolver,
+            JdbcTemplate jdbc) { this(nodes, paths, products, mappings, resolver, jdbc, null); }
 
     private static ApiException invalid() { return new ApiException(ErrorCode.INVALID_REQUEST, "error.category.invalid"); }
 
@@ -66,7 +74,7 @@ public class CategoryTreeManagementService {
     private Map<String, Long> productCounts(List<CategoryTreeNode> tree) {
         Map<String, Long> counts = new HashMap<>();
         for (var node : tree) {
-            long count = paths.countByCategoryNodeId(node.getId());
+            long count = paths.countByCategoryNodeId(node.getId()) + (additionalPaths == null ? 0 : additionalPaths.countByCategoryNodeId(node.getId()));
             for (String ancestor : node.getFullPath()) counts.merge(ancestor, count, Long::sum);
         }
         return counts;
@@ -82,7 +90,7 @@ public class CategoryTreeManagementService {
 
     private boolean blocked(CategoryTreeNode node) {
         return node.getSystemKey() != null || shopping != null && shopping.referencesSource(node.getId()) || nodes.existsByParentId(node.getId())
-                || paths.countByCategoryNodeId(node.getId()) > 0 || mappings.existsByCategoryNodeId(node.getId());
+                || paths.countByCategoryNodeId(node.getId()) > 0 || additionalPaths != null && additionalPaths.countByCategoryNodeId(node.getId()) > 0 || mappings.existsByCategoryNodeId(node.getId());
     }
 
     private Node view(CategoryTreeNode n) {
@@ -197,7 +205,11 @@ public class CategoryTreeManagementService {
         // Legacy flat labels have no invented tree equivalent. Unrelated saves preserve them.
         if (resolved.source() == ProductCategoryPathResolver.Source.LEGACY_FLAT
                 || ProductCategoryPathResolver.UNCATEGORIZED_NODE_ID.equals(id)) id = null;
-        return new ProductPath(productId, id);
+        var all = new ArrayList<String>();
+        if (id != null) all.add(id);
+        if (additionalPaths != null) additionalPaths.findAllByProductId(productId).stream().map(ProductAdditionalCategoryPath::getCategoryNodeId).sorted().forEach(all::add);
+        long revision = paths.findById(productId).map(ProductPrimaryCategoryPath::getRevision).orElse(0L);
+        return new ProductPath(productId, id, List.copyOf(all), revision);
     }
 
     @Transactional
@@ -205,18 +217,36 @@ public class CategoryTreeManagementService {
         nodes.lockTree().orElseThrow(CategoryTreeManagementService::invalid);
         owned(productId);
         if (input == null) throw invalid();
+        var requested = input.categoryNodeIds() == null ? (input.categoryNodeId() == null ? List.<String>of() : List.of(input.categoryNodeId())) : input.categoryNodeIds();
+        var unique = new LinkedHashSet<>(requested);
+        if (unique.size() != requested.size()) throw invalid();
         String id = input.categoryNodeId();
-        if (id == null) id = ProductCategoryPathResolver.UNCATEGORIZED_NODE_ID;
-        else {
-            editable(id);
-            if (nodes.existsByParentId(id)) throw invalid();
+        if (id == null && !unique.isEmpty()) id = unique.iterator().next();
+        if (id != null && !unique.contains(id)) throw invalid();
+        for (String selected : unique) {
+            editable(selected);
+            if (nodes.existsByParentId(selected)) throw invalid();
         }
+        var existing = paths.findById(productId);
+        if (input.revision() != null && input.revision() != existing.map(ProductPrimaryCategoryPath::getRevision).orElse(0L))
+            throw new ApiException(ErrorCode.INVALID_REQUEST, "error.category.conflict");
+        if (id == null) id = ProductCategoryPathResolver.UNCATEGORIZED_NODE_ID;
         // An explicit assignment prevents legacy fallback from undoing a user's clear.
-        paths.save(new ProductPrimaryCategoryPath(productId, id));
+        String selectedPrimary = id;
+        var primary = existing.orElseGet(() -> new ProductPrimaryCategoryPath(productId, selectedPrimary));
+        primary.setCategoryNodeId(selectedPrimary);
+        paths.save(primary);
+        if (additionalPaths != null) {
+            additionalPaths.deleteAllByProductId(productId);
+            String primaryId = id;
+            additionalPaths.saveAll(unique.stream().filter(selected -> !selected.equals(primaryId))
+                    .map(selected -> new ProductAdditionalCategoryPath(productId, selected)).toList());
+        }
         // Imported provenance describes the imported assignment, not a later manual one.
         // Import audit rows retain the historical source independently.
         jdbc.update("update bb_product set category_path_source=null where id=?", productId);
-        return new ProductPath(productId, ProductCategoryPathResolver.UNCATEGORIZED_NODE_ID.equals(id) ? null : id);
+        paths.flush();
+        return product(productId);
     }
 
     private Product owned(String id) {
