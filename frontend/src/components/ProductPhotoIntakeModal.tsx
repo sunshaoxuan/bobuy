@@ -146,6 +146,7 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
  const matchingObservation=review?.history.find(o=>o.productId===selected&&o.amount!=null);
  const identifiedName=chosen?.name[locale]||chosen?.name['ja-JP']||review?.candidate?.translatedNames?.[locale]||review?.candidate?.name;
  const reviewSupplier=suppliers.find(row=>row.id===review?.supplierId);
+ const evidenceIncomplete=job?.failureCode==='photo.tag_missing';
  const canConfirm=job?.failureCode!=='photo.tag_missing'&&review&&!saved&&!['DELETED','IDENTITY_REQUIRED'].includes(review.status);
  const originalSave=original&&<ProductPhotoSave file={original} stored={false} showPreview/>;
  const photoSave=stored&&<ProductPhotoSave key={job?.id} file={stored} stored/>;
@@ -182,7 +183,7 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
     <h2>{identifiedName||t('photo.identity_required')}</h2>
     {review.itemNumber&&<p>{t('onboarding.item')} {review.itemNumber}</p>}
     <div className="photo-review-prices">
-     <div><small>{t('photo.current_price')}</small><strong className={amount?undefined:'photo-price-unknown'}>{amount?amount+' '+currency:t('photo.unknown')}</strong>{unit&&<span>{unit}</span>}</div>
+     <div><small>{t('photo.current_price')}</small><strong className={!evidenceIncomplete&&amount?undefined:'photo-price-unknown'}>{!evidenceIncomplete&&amount?amount+' '+currency:t('photo.unknown')}</strong>{!evidenceIncomplete&&unit&&<span>{unit}</span>}</div>
      {!isNew&&<div><small>{t('photo.previous')}</small><strong className={matchingObservation?undefined:'photo-price-unknown'}>{matchingObservation?matchingObservation.amount+' '+matchingObservation.currency:t('photo.unknown')}</strong>{matchingObservation&&<span>{matchingObservation.unit}</span>}</div>}
     </div>
     {canConfirm&&<Checkbox checked={inStock} onChange={e=>{setInStock(e.target.checked);edit();}}>{t('photo.in_stock')}</Checkbox>}
@@ -246,7 +247,7 @@ export default function ProductPhotoIntakeModal({open,job:initial,queue,onReview
   </section>}
   {saved&&<Alert type="success" message={t('photo.saved')} description={<><p>{saved.amount==null?t('photo.price_not_updated'):t(saved.priceChanged?'photo.price_updated':'photo.price_unchanged')} {saved.amount} {saved.currency} {saved.unit}</p>{saved.inStock&&<p>{t('photo.available')} · {new Date(saved.observedAt).toLocaleString(locale)}</p>}<Button onClick={()=>{onClose();onSaved(saved.productId);}}>{t('onboarding.open_product')}</Button></>}/>}
   {!capture&&originalSave}
-  {!capture&&<Space wrap><Button disabled={!supplier} onClick={()=>camera.current?.click()}>{t('photo.camera')}</Button><Button disabled={!supplier} onClick={()=>upload.current?.click()}>{t('photo.upload')}</Button></Space>}
+  {!capture&&!evidenceIncomplete&&<Space wrap><Button disabled={!supplier} onClick={()=>camera.current?.click()}>{t('photo.camera')}</Button><Button disabled={!supplier} onClick={()=>upload.current?.click()}>{t('photo.upload')}</Button></Space>}
 
   {queue&&onReview&&onQueueChanged&&<ProductPhotoQueue jobs={queue} onReview={onReview} onChanged={next=>{applyRetry(next);return onQueueChanged();}}/>}
  </Modal>;

@@ -50,11 +50,16 @@ it('shows packaging label evidence while a missing shelf tag blocks confirmation
  const missing={...job,failureCode:'photo.tag_missing'};
  mocks.get.mockResolvedValue(missing);
  mocks.review.mockResolvedValue({...review(),itemNumber:null,status:'IDENTITY_REQUIRED',matches:[],
-  photoFacts:{amount:null,transcription:{tags:[],packagingLabels:[{rawText:'93963 税抜739円 税込798円'}],productFeatures:[],uncertainties:[]}}});
+  photoFacts:{amount:739,currency:'JPY',unit:'legacy unit',priceKind:'WAREHOUSE',conditions:'',productVisible:true,transcription:{tags:[],packagingLabels:[{rawText:'93963 税抜739円 税込798円'}],productFeatures:[],uncertainties:[]}}});
  render(<ProductPhotoIntakeModal {...props} job={missing}/>);
  fireEvent.click(await screen.findByText('photo.transcription'));
  expect(screen.getByText('photo.packaging_transcription')).toBeVisible();
  expect(screen.getByText('93963 税抜739円 税込798円')).toBeVisible();
+ const currentPrice=screen.getByText('photo.current_price').parentElement!;
+ expect(within(currentPrice).getByText('photo.unknown')).toBeVisible();
+ expect(within(currentPrice).queryByText(/739|JPY|legacy unit/)).toBeNull();
+ expect(screen.getAllByRole('button',{name:'photo.camera'})).toHaveLength(1);
+ expect(screen.getAllByRole('button',{name:'photo.upload'})).toHaveLength(1);
  expect(screen.queryByText('photo.save')).not.toBeInTheDocument();
  expect(mocks.confirm).not.toHaveBeenCalled();
 });
