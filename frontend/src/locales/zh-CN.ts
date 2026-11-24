@@ -1772,3 +1772,5 @@ Object.assign(messages,{
   "categoryImport.checkRequired": "请勾选核对确认后再导入。",
   "categoryImport.ready": "已核对，可确认导入。"
 });
+
+Object.assign(messages, {"categoryTree.primary":'主分类'});

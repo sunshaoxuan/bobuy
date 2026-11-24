@@ -13,6 +13,9 @@ public class ProductPrimaryCategoryPath {
     private String productId;
     @Column(name = "category_node_id", nullable = false)
     private String categoryNodeId;
+    @jakarta.persistence.Version
+    @Column(name = "category_revision", nullable = false)
+    private long revision;
 
     public ProductPrimaryCategoryPath() {}
     public ProductPrimaryCategoryPath(String productId, String categoryNodeId) {
@@ -23,4 +26,5 @@ public class ProductPrimaryCategoryPath {
     public void setProductId(String value) { productId = value; }
     public String getCategoryNodeId() { return categoryNodeId; }
     public void setCategoryNodeId(String value) { categoryNodeId = value; }
+    public long getRevision() { return revision; }
 }

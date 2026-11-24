@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.*;
 class PublicProductBrowseServiceTest {
  @Test void completeSecondarySectionsPreserveLastPagesRootAssignmentsAndScopeRevision(){
   setup();var mapping=org.mockito.Mockito.mock(ShoppingCategoryService.class);
-  var assignments=new HashMap<String,String>();for(int i=0;i<49;i++)assignments.put("p%03d".formatted(i),i<25?"shop-food-one":"shop-food-two");assignments.put("p049","shop-food");
+  var assignments=new HashMap<String,Set<String>>();for(int i=0;i<49;i++)assignments.put("p%03d".formatted(i),Set.of(i<25?"shop-food-one":"shop-food-two"));assignments.put("p049",Set.of("shop-food"));
   org.mockito.Mockito.when(mapping.snapshot(org.mockito.ArgumentMatchers.any())).thenReturn(new ShoppingCategoryService.Snapshot(ShoppingCategoryMapTest.categories(),assignments));service.setShopping(mapping);
   var nav=service.sections(0,null,"en-US",true,"","",null);
   assertThat(nav.shelves()).extracting(PublicProductBrowseService.Shelf::category).containsExactly("shop-food","shop-food-one","shop-food-two","__unclassified");
@@ -36,7 +36,7 @@ class PublicProductBrowseServiceTest {
  }
  @Test void progressiveNavigationIncludesOnlyFirstShelfAndScopedReadsMatchLegacy(){
   setup();var mapping=org.mockito.Mockito.mock(ShoppingCategoryService.class);
-  var assignments=new HashMap<String,String>();for(int i=0;i<50;i++)assignments.put("p%03d".formatted(i),"shop-food-one");
+  var assignments=new HashMap<String,Set<String>>();for(int i=0;i<50;i++)assignments.put("p%03d".formatted(i),Set.of("shop-food-one"));
   org.mockito.Mockito.when(mapping.snapshot(org.mockito.ArgumentMatchers.any())).thenReturn(new ShoppingCategoryService.Snapshot(ShoppingCategoryMapTest.categories(),assignments));service.setShopping(mapping);
   var legacy=service.browse(0,null,"","","en-US",false,null);
   var nav=service.overview(null,"en-US",true);
@@ -54,18 +54,18 @@ class PublicProductBrowseServiceTest {
  }
  @Test void shoppingShelvesAndLeafGridShareOrderedRowsAndHideEmptyCategories(){
   setup();var mapping=org.mockito.Mockito.mock(ShoppingCategoryService.class);
-  var categories=ShoppingCategoryMapTest.categories();var assignments=new HashMap<String,String>();for(int i=0;i<50;i++)assignments.put("p%03d".formatted(i),i%2==0?"shop-food-one":"shop-food-two");
+  var categories=ShoppingCategoryMapTest.categories();var assignments=new HashMap<String,Set<String>>();for(int i=0;i<50;i++)assignments.put("p%03d".formatted(i),Set.of(i%2==0?"shop-food-one":"shop-food-two"));
   org.mockito.Mockito.when(mapping.snapshot(org.mockito.ArgumentMatchers.any())).thenReturn(new ShoppingCategoryService.Snapshot(categories,assignments));service.setShopping(mapping);
   var overview=service.browse(0,null,"","","en-US",false,null);assertThat(overview.scopeTotal()).isEqualTo(51);assertThat(overview.unclassified()).isEqualTo(1);assertThat(overview.categories()).extracting(PublicProductBrowseService.Facet::count).containsExactly(50L,25L,25L);
   var root=service.browse(0,null,"","shop-food","en-US",false,null);assertThat(root.matchedTotal()).isEqualTo(50);assertThat(root.shelves()).hasSize(2);
   var leaf=service.browse(0,null,"","shop-food-one","en-US",false,null);assertThat(leaf.matchedTotal()).isEqualTo(25);assertThat(leaf.shelves()).isEmpty();assertThat(root.shelves().get(0).items()).isEqualTo(leaf.items().subList(0,8));
   assertThat(service.browse(0,null,"","rec-cat-obsolete","en-US",false,null).selectedCategory()).isEmpty();
   assertThat(service.browse(0,null,"Description 50","","en-US",false,null).categories()).isEmpty();
-  assignments.put("p050","shop-food-one");assertThatThrownBy(()->service.browse(1,null,"","","en-US",false,overview.revision())).isInstanceOf(PublicProductBrowseService.Changed.class);
+  assignments.put("p050",Set.of("shop-food-one"));assertThatThrownBy(()->service.browse(1,null,"","","en-US",false,overview.revision())).isInstanceOf(PublicProductBrowseService.Changed.class);
  }
  @Test void retainedRootAssignmentsRemainVisibleWhenRootGainsChildren(){
   setup();var mapping=org.mockito.Mockito.mock(ShoppingCategoryService.class);
-  var assignments=new HashMap<String,String>();assignments.put("p000","shop-food");assignments.put("p001","shop-food-one");
+  var assignments=new HashMap<String,Set<String>>();assignments.put("p000",Set.of("shop-food"));assignments.put("p001",Set.of("shop-food-one"));
   org.mockito.Mockito.when(mapping.snapshot(org.mockito.ArgumentMatchers.any())).thenReturn(new ShoppingCategoryService.Snapshot(ShoppingCategoryMapTest.categories(),assignments));service.setShopping(mapping);
   var root=service.browse(0,null,"","shop-food","en-US",false,null);
   assertThat(root.matchedTotal()).isEqualTo(2);assertThat(root.shelves()).isEmpty();assertThat(root.items()).extracting(PublicProductBrowseService.Card::productId).containsExactlyInAnyOrder("p000","p001");
@@ -130,8 +130,8 @@ class PublicProductBrowseServiceTest {
   assertThatThrownBy(()->service.range(null,"","","en-US",false,"0".repeat(64),"default",false,null,false,6,6)).isInstanceOf(PublicProductBrowseService.Changed.class);
  }
  @Test void viewportSectionMetadataIsBoundedAndLeafRangesKeepTheirLastProduct(){
-  setup();var mapping=org.mockito.Mockito.mock(ShoppingCategoryService.class);var assignments=new HashMap<String,String>();
-  for(int i=0;i<50;i++)assignments.put("p%03d".formatted(i),i<25?"shop-food-one":"shop-food-two");
+  setup();var mapping=org.mockito.Mockito.mock(ShoppingCategoryService.class);var assignments=new HashMap<String,Set<String>>();
+  for(int i=0;i<50;i++)assignments.put("p%03d".formatted(i),Set.of(i<25?"shop-food-one":"shop-food-two"));
   org.mockito.Mockito.when(mapping.snapshot(org.mockito.ArgumentMatchers.any())).thenReturn(new ShoppingCategoryService.Snapshot(ShoppingCategoryMapTest.categories(),assignments));service.setShopping(mapping);
   var root=service.range(null,"","shop-food","en-US",false,null,"default",true,"",true,0,6);
   assertThat(root.items()).isEmpty();assertThat(root.shelves()).extracting(PublicProductBrowseService.Shelf::total).containsExactly(25L,25L);assertThat(root.shelves().get(0).items()).hasSize(6);assertThat(root.shelves().get(1).items()).isEmpty();

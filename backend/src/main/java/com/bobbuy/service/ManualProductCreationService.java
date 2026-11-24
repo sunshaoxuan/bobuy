@@ -13,7 +13,7 @@ import java.util.*;
 @Service
 public class ManualProductCreationService {
     public record Input(UUID requestId, Map<String,String> name, Map<String,String> description,
-        Map<String,String> specification, String itemNumber, String brand, String categoryNodeId,
+        Map<String,String> specification, String itemNumber, String brand, String categoryNodeId, List<String> categoryNodeIds,
         Map<String,String> attributes, Map<String,String> merchantSkus, List<MediaGalleryItem> mediaGallery,
         StorageCondition storageCondition, OrderMethod orderMethod, List<PriceTier> priceTiers) {}
     private final ProductRepository products;
@@ -78,7 +78,7 @@ public class ManualProductCreationService {
         product.setMediaGallery(gallery);
         if(input.priceTiers()!=null){if(input.priceTiers().size()>100)throw invalid("master.invalid");product.setPriceTiers(input.priceTiers());}
         products.saveAndFlush(product);
-        categories.assign(id,new CategoryTreeManagementService.ProductPath(id,input.categoryNodeId()));
+        categories.assign(id,new CategoryTreeManagementService.ProductPath(id,input.categoryNodeId(),input.categoryNodeIds(),0L));
         return product;
     }
 }

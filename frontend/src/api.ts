@@ -590,6 +590,9 @@ export type ProductPatch = Partial<{
     isRecommended: boolean;
     isTemporary: boolean;
     visibilityStatus: string;
+    categoryNodeIds: string[];
+    primaryCategoryNodeId: string | null;
+    categoryRevision: number;
 }>;
 
 export type FinancialAuditLog = {
@@ -1184,8 +1187,8 @@ export const categoryTreeApi={
  create:(value:{parentId:string|null;name:Record<string,string>;sortOrder?:number})=>postJson<CategoryTreeNode,object>('/api/category-tree',value),
  update:(id:string,value:{parentId:string|null;name?:Record<string,string>;sortOrder?:number})=>putJson<CategoryTreeNode,object>('/api/category-tree/'+encodeURIComponent(id),value),
  remove:async(id:string)=>{const response=await authorizedFetch('/api/category-tree/'+encodeURIComponent(id),{method:'DELETE'});if(!response.ok)throw new Error(await parseErrorMessage(response));},
- product:(id:string)=>storeGet<{productId:string;categoryNodeId:string|null}>('/api/category-tree/products/'+encodeURIComponent(id)),
- assign:(id:string,categoryNodeId:string|null)=>putJson<{productId:string;categoryNodeId:string|null},object>('/api/category-tree/products/'+encodeURIComponent(id),{productId:id,categoryNodeId})
+    product:(id:string)=>storeGet<{productId:string;categoryNodeId:string|null;categoryNodeIds:string[];revision:number}>('/api/category-tree/products/'+encodeURIComponent(id)),
+    assign:(id:string,categoryNodeIds:string[],categoryNodeId:string|null,revision:number)=>putJson<{productId:string;categoryNodeId:string|null;categoryNodeIds:string[];revision:number},object>('/api/category-tree/products/'+encodeURIComponent(id),{productId:id,categoryNodeId,categoryNodeIds,revision})
 };
 export type CurrencyDefinition={code:string;symbol:string;fractionDigits:number;name:string;saleEnabled:boolean};
 export type GeographicArea={code:string;parentCode:string|null;level:1|2|3;name:string;reading:string|null};

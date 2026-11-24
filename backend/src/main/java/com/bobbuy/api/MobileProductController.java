@@ -24,6 +24,7 @@ public class MobileProductController {
     @org.springframework.beans.factory.annotation.Autowired private com.bobbuy.service.ProductCategoryLabels labels;
     private final LocalizedJsonbReaderService localizedJsonbReaderService;
     @org.springframework.beans.factory.annotation.Autowired private com.bobbuy.service.ProductSaleService prices;
+    @org.springframework.beans.factory.annotation.Autowired private com.bobbuy.service.CategoryTreeManagementService categories;
 
     public MobileProductController(BobbuyStore store, LocalizedJsonbReaderService localizedJsonbReaderService) {
         this.store = store;
@@ -59,11 +60,15 @@ public class MobileProductController {
     }
 
     @PatchMapping("/{id}")
+    @org.springframework.transaction.annotation.Transactional
     public ResponseEntity<ApiResponse<MobileProductResponse>> patch(@PathVariable String id,
                                                                      @RequestBody ProductPatch patch,
                                                                      Locale locale) {
         Product updated = store.patchProduct(id, patch)
                 .orElseThrow(() -> new ApiException(ErrorCode.RESOURCE_NOT_FOUND, "error.product.not_found"));
+        if (patch.getCategoryNodeIds() != null) categories.assign(id,
+                new com.bobbuy.service.CategoryTreeManagementService.ProductPath(id, patch.getPrimaryCategoryNodeId(),
+                        patch.getCategoryNodeIds(), patch.getCategoryRevision()));
         return ResponseEntity.ok(ApiResponse.success(toResponse(updated, locale)));
     }
 

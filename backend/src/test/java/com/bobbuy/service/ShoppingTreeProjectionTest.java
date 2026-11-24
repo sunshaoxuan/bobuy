@@ -28,6 +28,6 @@ class ShoppingTreeProjectionTest {
   when(paths.findAllById(any())).thenReturn(List.of(new ProductPrimaryCategoryPath("p","root"),new ProductPrimaryCategoryPath("q","missing")));
   var service=new ShoppingCategoryService(nodes,paths,new com.fasterxml.jackson.databind.ObjectMapper());
   assertThat(service.referencesSource("root")).isTrue();
-  assertThat(service.snapshot(List.of("p","q")).assignments()).containsExactly(entry("p","shop-root"));
+  assertThat(service.snapshot(List.of("p","q")).assignments()).containsExactly(entry("p",Set.of("shop-root")));
  }
 }
