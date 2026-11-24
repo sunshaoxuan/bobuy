@@ -81,6 +81,21 @@ class LlmGatewayPinnedTest {
         assertTrue(seeing.payload.contains("Private intake"));
         seeing.generatePinned(NODE,"Private intake",List.of(image));
         assertEquals(4, seeing.targets.size());
+        seeing.models = new Fake().models;
+        assertEquals("VISION_VERIFIED",seeing.probePinnedVision(NODE).code());
+        assertEquals(5,seeing.targets.size());
+        assertFalse(seeing.payload.contains("Private intake"));
+    }
+    @Test void technologyProbeChecksPixelsEvenWhenModelDirectorySaysVision() {
+        var blind=new Fake();
+        var result=blind.probePinnedVision(NODE);
+        assertFalse(result.ready());
+        assertEquals("ai.pinned_vision_unattested",result.code());
+        assertEquals(List.of(URI.create(NODE+"/models"),URI.create(NODE+"/chat/completions")),blind.targets);
+        assertTrue(blind.payload.contains("data:image/png;base64,"));
+        var missing=new Fake(NODE.toString(),"");
+        assertEquals("ai.pinned_credentials_missing",missing.probePinnedVision(NODE).code());
+        assertTrue(missing.targets.isEmpty());
     }
     @Test void unsupportedOrAmbiguousModelNeverCallsCompletion(){
         var absent=new Fake();absent.models="{\"data\":[{\"id\":\"different\"}]}";

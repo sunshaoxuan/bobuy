@@ -59,7 +59,7 @@ export default function ProductPhotoQueueSummary({ rows, failed, onRefresh, onOp
       {(expanded?jobs:first?[first]:[])?.map(({ row, state }) => <li key={row.id} data-photo-job={row.id} data-photo-state={state.slice('photo.state.'.length)}>
         <PhotoQueueThumbnail id={row.id}/>
         <div className="photo-queue-summary-meta">
-          <Tag>{t(state)}</Tag>
+          <Tag>{t(state)}</Tag><small>{t('photo.evidence')}</small>
           {(row.candidate?.translatedNames?.[locale]||row.itemNumber)&&<strong>{row.candidate?.translatedNames?.[locale]||row.itemNumber}</strong>}
           <time dateTime={row.createdAt}>{new Date(row.createdAt).toLocaleString(locale)}</time>
         </div>

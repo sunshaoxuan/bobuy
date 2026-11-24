@@ -72,33 +72,77 @@ class ProductPhotoIntakeIntegrationTest {
   mvc.perform(get("/api/product-photo-intake").header("Authorization","Bearer "+auth))
    .andExpect(status().isOk()).andExpect(jsonPath("$.data[?(@.id == '"+job+"')].state",org.hamcrest.Matchers.contains("COMPLETED")));
  }
- @Test void concurrentLegacyRetriesReuseTheOwnedJobAndEvidenceAtNumberCapacity() throws Exception {
-  jdbc.update("""
-    insert into bb_costco_onboarding_job
-      (id,merchant_id,supplier_id,market,idempotency_key,input_hash,state,payload,next_run_at)
-    select 'number-fixture-'||n,1000,?,'JP',md5('fixture-key-'||n),md5('fixture-input-'||n),
-      'QUEUED','{}'::jsonb,current_timestamp+interval '1 hour' from generate_series(1,32) n
-    """,supplier);
-  jdbc.update("""
-    update bb_costco_onboarding_job
-       set payload=payload || '{"failureCode":"ai.pinned_endpoint","itemNumber":null,"decisions":[]}'::jsonb
-     where id=?
-    """,job);
-  String path="/api/product-photo-intake/"+job+"/retry";
-  byte[] before=mvc.perform(get("/api/product-photo-intake/"+job+"/photo").header("Authorization","Bearer "+auth))
-    .andExpect(status().isOk()).andReturn().getResponse().getContentAsByteArray();
-  mvc.perform(post(path).param("revision","7").header("Authorization","Bearer "+foreign)).andExpect(status().isNotFound());
-  var pool=java.util.concurrent.Executors.newFixedThreadPool(2);
-  try {
-   var submissions=pool.invokeAll(java.util.Collections.nCopies(2,(java.util.concurrent.Callable<String>)()->
-      mvc.perform(post(path).param("revision","7").header("Authorization","Bearer "+auth))
-       .andExpect(status().isOk()).andExpect(jsonPath("$.data.id").value(job)).andReturn().getResponse().getContentAsString()));
-   for(var response:submissions)assertThat(json.readTree(response.get()).path("data").path("revision").asLong()).isGreaterThanOrEqualTo(8);
-  } finally { pool.shutdownNow(); }
-  assertThat(jdbc.queryForObject("select count(*) from bb_costco_onboarding_job where merchant_id=1000 and payload->>'privatePhotoSha256'=?",Long.class,CostcoEvidencePersistence.hash(before))).isEqualTo(1L);
+ @Test void supplementQueuesSameJobAndPreservesOriginalEvidenceAndAttempt() throws Exception {
+  setFixtureState(job,"NEEDS_INPUT","photo.tag_missing");
+  var oldHash=jdbc.queryForObject("select payload->>'privatePhotoSha256' from bb_costco_onboarding_job where id=?",String.class,job);
+  var second=makeJob(String.valueOf(Long.parseLong(item)+1));
+  var nextHash=jdbc.queryForObject("select payload->>'privatePhotoSha256' from bb_costco_onboarding_job where id=?",String.class,second);
+  byte[] photo=evidence.readVerified(1000L,nextHash);
+  jdbc.update("delete from bb_costco_onboarding_job where id=?",second);
+  var file=new MockMultipartFile("file","synthetic-price-tag.png","image/png",photo);
+  String path="/api/product-photo-intake/"+job+"/supplement";
+  mvc.perform(multipart(path).file(file).param("revision","7").header("Authorization","Bearer "+foreign))
+    .andExpect(status().isNotFound());
+  mvc.perform(multipart(path).file(file).param("revision","7").header("Authorization","Bearer "+auth))
+    .andExpect(status().isOk()).andExpect(jsonPath("$.data.id").value(job)).andExpect(jsonPath("$.data.revision").value(8));
+  assertThat(jdbc.queryForObject("select payload->>'privatePhotoSha256' from bb_costco_onboarding_job where id=?",String.class,job)).isEqualTo(nextHash);
+  assertThat(jdbc.queryForObject("select attempt_history->0->'payload'->>'privatePhotoSha256' from bb_costco_onboarding_job where id=?",String.class,job)).isEqualTo(oldHash);
+  assertThat(evidence.readVerified(1000L,oldHash)).isNotEmpty();
   assertThat(jdbc.queryForObject("select count(*) from bb_product_photo_observation where job_id=?",Long.class,job)).isZero();
-  assertThat(mvc.perform(get("/api/product-photo-intake/"+job+"/photo").header("Authorization","Bearer "+auth))
-    .andExpect(status().isOk()).andReturn().getResponse().getContentAsByteArray()).isEqualTo(before);
+ }
+ @Test void reopensPersistedTranscriptionOnlyForThePhotoOwner() throws Exception {
+  String raw="TEST FIXTURE\nJPY 999 per 80 × 2";
+  var transcription=json.createObjectNode();
+  transcription.putArray("tags").addObject().put("rawText",raw).put("itemNumber",item)
+   .put("unit","80 × 2").putArray("prices").addObject().put("kind","TOTAL")
+   .put("amount",999).put("rawText","JPY 999").put("currency","JPY");
+  transcription.putArray("productFeatures").add("Green test package");
+  transcription.putArray("uncertainties").add("Partially hidden label");
+  jdbc.update("""
+   update bb_costco_onboarding_job
+      set payload=jsonb_set(payload,'{decisions,0,candidate,photoFacts,transcription}',cast(? as jsonb))
+    where id=? and merchant_id=1000
+   """,transcription.toString(),job);
+  var result=review(job).path("photoFacts").path("transcription");
+  assertThat(result.path("tags").get(0).path("rawText").asText()).isEqualTo(raw);
+  assertThat(result.path("tags").get(0).path("prices").get(0).path("kind").asText()).isEqualTo("TOTAL");
+  assertThat(result.path("uncertainties").get(0).asText()).isEqualTo("Partially hidden label");
+  mvc.perform(get("/api/product-photo-intake/"+job).header("Authorization","Bearer "+foreign)).andExpect(status().isNotFound());
+  assertThat(jdbc.queryForObject("select count(*) from bb_product_photo_observation where job_id=?",Long.class,job)).isZero();
+ }
+ @Test void concurrentLegacyRetriesReuseTheOwnedJobAndEvidenceAtNumberCapacity() throws Exception {
+  String prefix="number-fixture-"+UUID.randomUUID().toString().substring(0,13)+"-";
+  try {
+   jdbc.update("""
+     insert into bb_costco_onboarding_job
+       (id,merchant_id,supplier_id,market,idempotency_key,input_hash,state,payload,next_run_at)
+     select prefix||n,1000,?,'JP',md5(prefix||'key-'||n),md5(prefix||'input-'||n),
+       'QUEUED','{}'::jsonb,current_timestamp+interval '1 hour' from generate_series(1,32) n cross join (select cast(? as text) as prefix) f
+     """,supplier,prefix);
+   jdbc.update("""
+     update bb_costco_onboarding_job
+        set payload=payload || '{"failureCode":"ai.pinned_endpoint","itemNumber":null,"decisions":[]}'::jsonb
+      where id=?
+     """,job);
+   String path="/api/product-photo-intake/"+job+"/retry";
+   byte[] before=mvc.perform(get("/api/product-photo-intake/"+job+"/photo").header("Authorization","Bearer "+auth))
+     .andExpect(status().isOk()).andReturn().getResponse().getContentAsByteArray();
+   mvc.perform(post(path).param("revision","7").header("Authorization","Bearer "+foreign)).andExpect(status().isNotFound());
+   var pool=java.util.concurrent.Executors.newFixedThreadPool(2);
+   try {
+    var submissions=pool.invokeAll(java.util.Collections.nCopies(2,(java.util.concurrent.Callable<String>)()->
+       mvc.perform(post(path).param("revision","7").header("Authorization","Bearer "+auth))
+        .andExpect(status().isOk()).andExpect(jsonPath("$.data.id").value(job)).andReturn().getResponse().getContentAsString()));
+    for(var response:submissions)assertThat(json.readTree(response.get()).path("data").path("revision").asLong()).isGreaterThanOrEqualTo(8);
+   } finally { pool.shutdownNow(); }
+   assertThat(jdbc.queryForObject("select count(*) from bb_costco_onboarding_job where merchant_id=1000 and payload->>'privatePhotoSha256'=?",Long.class,CostcoEvidencePersistence.hash(before))).isEqualTo(1L);
+   assertThat(jdbc.queryForObject("select count(*) from bb_product_photo_observation where job_id=?",Long.class,job)).isZero();
+   assertThat(mvc.perform(get("/api/product-photo-intake/"+job+"/photo").header("Authorization","Bearer "+auth))
+     .andExpect(status().isOk()).andReturn().getResponse().getContentAsByteArray()).isEqualTo(before);
+  } finally {
+   jdbc.update("delete from bb_costco_onboarding_job where merchant_id=1000 and id like ?",prefix+"%");
+  }
+  assertThat(jdbc.queryForObject("select count(*) from bb_costco_onboarding_job where id like ?",Long.class,prefix+"%")).isZero();
  }
 
  @Test @EnabledIfEnvironmentVariable(named="BOBBUY_PHOTO_LIVE_TEST", matches="true")
@@ -141,38 +185,16 @@ class ProductPhotoIntakeIntegrationTest {
  }
 
  @Test @EnabledIfEnvironmentVariable(named="BOBBUY_PHOTO_LIVE_TEST", matches="true")
- void livePhotoCreatesPrivateMaster() throws Exception {
-  String existingRecognition=System.getenv("BOBBUY_PHOTO_TEST_REUSE_NEW_JOB");
-  var fresh=existingRecognition==null?recognizeLivePhoto("IMG_1638.jpg"):review(existingRecognition);
-  assertThat(fresh.path("status").asText()).isEqualTo("NEW");
-  assertThat(fresh.path("itemNumber").asText()).isEqualTo("93963");
-  var candidate=fresh.path("candidate");
-  assertThat(candidate.path("translatedNames").path("ja-JP").asText()).contains("抹茶");
-  assertThat(fresh.path("photoFacts").path("amount").decimalValue()).isEqualByComparingTo("798");
-  var creation=liveObservation(fresh);
-  var draft=creation.putObject("product");
-  draft.set("name",candidate.path("translatedNames"));
-  String specification=candidate.path("specification").asText();
-  assertThat(specification.replace(" ","")).containsAnyOf("1000g","1kg");
-  draft.putObject("specification").put("ja-JP",specification);
-  draft.set("brand",candidate.path("brand"));
-  var fields=fresh.path("archiveDetails");
-  String description=fields.path("descriptionJa").asText("");
-  if(!description.isBlank())draft.putObject("description").put("ja-JP",description);
-  draft.put("categoryNodeId",fields.path("categoryNodeId").asText(null));
-  draft.put("storageCondition",fields.path("storageCondition").asText(null));
-  var created=confirm(fresh.path("jobId").asText(),creation,auth);
-  assertThat(created.path("amount").decimalValue()).isEqualByComparingTo("798");
-  var reopened=products.findById(created.path("productId").asText()).orElseThrow();
-  assertThat(reopened.getVisibilityStatus()).isEqualTo(ProductVisibility.DRAFTER_ONLY);
-  assertThat(reopened.getSale()).isNull();
-  assertThat(reopened.getName().get("ja-JP")).contains("抹茶");
-  assertThat(reopened.getCatalogData().specification()).containsEntry("ja-JP",specification);
-  if(!description.isBlank())assertThat(reopened.getDescription()).containsEntry("ja-JP",description);
-  if(fields.hasNonNull("storageCondition"))assertThat(reopened.getStorageCondition().name()).isEqualTo(fields.path("storageCondition").asText());
-  assertThat(products.findAllByMerchantIdAndItemNumber(1000L,"93963")).hasSize(1);
-  assertThat(review(fresh.path("jobId").asText()).path("saved")).isEqualTo(created);
-  System.out.println("LIVE PHOTO new item 93963 created privately and reopened");
+ void livePhotoKeepsPackagingEvidenceWithoutRecordingWarehousePrice() throws Exception {
+  var fresh=recognizeLivePhoto("IMG_1638.jpg");
+  assertThat(fresh.path("status").asText()).isEqualTo("IDENTITY_REQUIRED");
+  assertThat(fresh.path("itemNumber").isNull()).isTrue();
+  var facts=fresh.path("photoFacts");
+  assertThat(facts.path("priceTagVisible").asBoolean(true)).isFalse();
+  assertThat(facts.path("amount").isNull()).isTrue();
+  var labels=facts.path("transcription").path("packagingLabels");
+  assertThat(labels.toString()).contains("93963","739","798");
+  assertThat(fresh.path("saved").isNull()).isTrue();
  }
 
  private JsonNode recognizeLivePhoto(String filename) throws Exception {
@@ -196,7 +218,8 @@ class ProductPhotoIntakeIntegrationTest {
    if(Set.of("NEEDS_INPUT","FAILED","RETRY_WAIT","COMPLETED").contains(state)){
     var reviewed=review(id);
     assertThat(reviewed.path("photoFacts").isObject()).as("real photo intake returned pixel facts (%s)",result.path("failureCode").asText("")).isTrue();
-    if (filename.equals("IMG_1484.jpg")) assertThat(result.path("failureCode").asText()).isEqualTo("photo.confirm_required");
+    assertThat(result.path("failureCode").asText()).isEqualTo(
+       filename.equals("IMG_1484.jpg")?"photo.confirm_required":"photo.tag_missing");
     return reviewed;
    }
    Thread.sleep(2000);

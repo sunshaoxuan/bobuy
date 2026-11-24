@@ -179,8 +179,17 @@ export type CostcoOnboardingJobView = {
 export type PhotoObservation={id:string;productId:string;supplierId:string;market:string;amount:number|string|null;currency:string|null;unit:string|null;conditions:string|null;inStock:boolean;priceChanged:boolean;observedAt:string;confirmedAt:string};
 export type PhotoStorageCondition='AMBIENT'|'FRESH'|'CHILLED'|'FROZEN';
 export type PhotoQueueRow=CostcoOnboardingJobView&{createdAt:string;reviewReady?:boolean};
-export type PhotoReview={jobId:string;revision:number;supplierId:string;market:string;itemNumber:string|null;status:string;candidate:CostcoOnboardingJobView['candidate'];archiveDetails?:{descriptionJa:string|null;categoryNodeId:string|null;storageCondition:PhotoStorageCondition|null};photoFacts?:{amount:number|string|null;currency:string|null;unit:string|null;conditions:string|null;priceKind:string;productVisible:boolean};matches:{id:string;version:number;name:Record<string,string>;specification:Record<string,string>;packaging:string|null;eligible:boolean}[];history:PhotoObservation[];saved:PhotoObservation|null;sources?:{canonicalUrl:string;sha256:string;mediaType:string}[];officialImageAvailable?:boolean};
+type PhotoTranscription={tags:{rawText:string}[];packagingLabels?:{rawText:string}[];productFeatures:string[];uncertainties:string[]};
+export type PhotoReview={jobId:string;revision:number;supplierId:string;market:string;itemNumber:string|null;status:string;candidate:CostcoOnboardingJobView['candidate'];archiveDetails?:{descriptionJa:string|null;categoryNodeId:string|null;storageCondition:PhotoStorageCondition|null};photoFacts?:{amount:number|string|null;currency:string|null;unit:string|null;conditions:string|null;priceKind:string;productVisible:boolean;transcription?:PhotoTranscription};matches:{id:string;version:number;name:Record<string,string>;specification:Record<string,string>;packaging:string|null;eligible:boolean}[];history:PhotoObservation[];saved:PhotoObservation|null;sources?:{canonicalUrl:string;sha256:string;mediaType:string}[];officialImageAvailable?:boolean};
 export const photoIntakeApi={
+ supplement:async(id:string,revision:number,file:File)=>{
+  const body=new FormData();
+  body.append('revision',String(revision));
+  body.append('file',file);
+  const response=await authorizedFetch('/api/product-photo-intake/'+encodeURIComponent(id)+'/supplement',{method:'POST',body});
+  if(!response.ok)throw Error(await parseErrorMessage(response));
+  return parseSuccessPayload<CostcoOnboardingJobView>(response);
+ },
  retry:(id:string,revision:number)=>postJson<CostcoOnboardingJobView,object>('/api/product-photo-intake/'+encodeURIComponent(id)+'/retry?'+new URLSearchParams({revision:String(revision)}),{}),
  queue:()=>storeGet<PhotoQueueRow[]>('/api/product-photo-intake'),
  image:async(id:string)=>{const r=await authorizedFetch('/api/product-photo-intake/'+encodeURIComponent(id)+'/official-image');if(!r.ok)throw Error(await parseErrorMessage(r));return r.blob();},
