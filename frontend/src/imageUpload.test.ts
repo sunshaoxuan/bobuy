@@ -36,8 +36,13 @@ it('accepts defensible generic MIME from byte signatures',async()=>{
  vi.spyOn(HTMLCanvasElement.prototype,'toBlob').mockImplementation(callback=>callback(new Blob(['png'],{type:'image/png'})));
  await expect(prepareImageUpload(file(webp,'application/octet-stream'))).resolves.toMatchObject({name:'synthetic.png',type:'image/png'});
 });
-it('separates browser MIME conflict from a conflicting filename extension',async()=>{
+it('normalizes catalog JPEG transport metadata without changing its bytes',async()=>{
  const jpeg=[255,216,255,224,0,16,74,70,73,70];
- await expect(prepareImageUpload(file(jpeg,'image/webp'))).rejects.toThrow('gallery.mime_mismatch');
- await expect(prepareImageUpload(file(jpeg,'application/octet-stream'))).rejects.toThrow('gallery.extension_mismatch');
+ for(const type of ['image/webp','image/jpeg','']){
+  const original=file(jpeg,type);const prepared=await prepareImageUpload(original);
+  expect(prepared).not.toBe(original);expect(prepared).toMatchObject({name:'synthetic.jpg',type:'image/jpeg'});
+ }
+});
+it('keeps strict metadata checks for converted formats',async()=>{
+ await expect(prepareImageUpload(file(webp,'image/jpeg'))).rejects.toThrow('gallery.mime_mismatch');
 });

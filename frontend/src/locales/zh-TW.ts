@@ -152,6 +152,8 @@ const messages: Dictionary = {
   "master.upload_retry_hint": "已確認上傳的圖片會保留，待上傳檔案尚未傳送。請先核對失敗請求，再重新選取檔案。",
   "master.upload_asset": "已上傳素材憑據",
   "gallery.hash_unavailable": "目前無法驗證檔案，尚未開始上傳。",
+  "gallery.hash_failed": "檔案驗證失敗，尚未開始上傳。",
+  "gallery.read_failed": "無法讀取所選檔案，尚未開始上傳。",
   "gallery.file_empty": "檔案是空的，請重新匯出官方圖片後再選取。",
   "gallery.file_too_large": "檔案超過 8 MiB，請在不改變商品圖片的前提下重新匯出為 8 MiB 以下。",
   "gallery.file_format": "檔案內容不是支援的 JPEG、PNG、WebP 或 AVIF 圖片，請重新匯出官方圖片。",

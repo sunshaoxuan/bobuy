@@ -151,6 +151,8 @@ const messages: Dictionary = {
   "master.upload_retry_hint": "確認済みの画像は保持され、待機中のファイルは未送信です。失敗したリクエストを確認してから、ファイルを選び直してください。",
   "master.upload_asset": "アップロード済み素材の参照",
   "gallery.hash_unavailable": "現在ファイルを検証できません。アップロードは開始していません。",
+  "gallery.hash_failed": "ファイルの検証に失敗しました。アップロードは開始していません。",
+  "gallery.read_failed": "選択したファイルを読み取れませんでした。アップロードは開始していません。",
   "gallery.file_empty": "ファイルが空です。公式画像を再書き出しして選択してください。",
   "gallery.file_too_large": "8 MiBを超えています。商品画像を変更せず8 MiB未満で再書き出ししてください。",
   "gallery.file_format": "JPEG・PNG・WebP・AVIFの画像データではありません。公式画像を再書き出ししてください。",

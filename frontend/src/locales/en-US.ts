@@ -151,6 +151,8 @@ const messages: Dictionary = {
   "master.upload_retry_hint": "Earlier confirmed uploads are kept. Pending files have not been uploaded. Check the failure, then select files again.",
   "master.upload_asset": "Uploaded asset reference",
   "gallery.hash_unavailable": "File verification is unavailable. No upload was started.",
+  "gallery.hash_failed": "File verification failed. No upload was started.",
+  "gallery.read_failed": "The selected file could not be read. No upload was started.",
   "gallery.file_empty": "This file is empty. Export the official image again and retry.",
   "gallery.file_too_large": "This file exceeds 8 MiB. Re-export it under 8 MiB without changing the product image.",
   "gallery.file_format": "The file bytes are not a supported JPEG, PNG, WebP or AVIF image. Re-export the official image.",
