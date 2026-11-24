@@ -224,6 +224,8 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
                     }else if(stage==Stage.INTAKE&&job.privatePhotoSha256()!=null&&facts.path("priceTagVisible").asBoolean(false)){
                         ((ObjectNode)facts).putObject("transcription").put("incompleteTagText",true);
                     }
+                    if(facts.path("transcription").path("incompleteTagText").asBoolean(false))
+                        ((ObjectNode)facts).putNull("amount");
                 }
                 candidate = mapper.treeToValue(c, Candidate.class);
                 if(candidate.target()!=null&&!candidate.target().equals(seenTargets.get(candidate.target().productId())))throw new CostcoNumberOnboardingService.NeedsInput("onboarding.target_conflict");

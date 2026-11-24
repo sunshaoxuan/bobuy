@@ -199,6 +199,12 @@ npm run check:i18n
 - `IMG_1638.jpg` 的官网入口返回通用页面，身份审核拒绝该来源；应用保留实拍已读字段，仍成功创建并回读私有新品。未验证来源未用于补全。
 - `CostcoPinnedStageReviewerTest` 14 项及 `ProductPhotoIntakeIntegrationTest#livePhotoMatchesAndUpdatesObservation` 真实检查通过。Android 隔离应用启动实际从空 PostgreSQL 应用了 49 条迁移，最高到 V48。
 
+### 私有照片不完整价签防护修复 2026-11-24
+
+- 授权范围仅限私有照片 INTAKE 审核的服务端协议防护：缺少逐字 `rawText` 的价签转录继续保留货号、名称、已校验原图、包装特征及后续补充工作流，但不得提供现场价格金额。
+- 本批只修改 `CostcoPinnedStageReviewer` 的候选归一化，不修改断言、公开/官方图片、发布状态、自动发布、部署、既有受保护状态或任何已存价格。
+- 最小验证冻结为 `CostcoPinnedStageReviewerTest`（覆盖不完整与完整转录的正反边界）以及既有 `ProductPhotoIntakeIntegrationTest#livePhotoMatchesAndUpdatesObservation` 作为隔离 PostgreSQL 集成证据；相关输入未变的照片弹窗 14 项结果直接复用，不重跑。无生产写入。
+
 ### 本地移动拍照和入口验收
 
 - Android 36 Pixel 8 模拟设备通过隔离 HTTPS 正常登录并打开商品档案。「设备拍照」触发 Chrome 的拍照权限和 Android 原生相机，拍摄虚拟场景并确认后，BoBuy 同一弹窗显示返回的照片。实体验收与模拟设备证据分别记录。
