@@ -1270,7 +1270,9 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
             onClick={handleAddRow}
           />
         </div>}
-      <CostcoOnboardingPanel suppliers={suppliers} photoOpen={isQuickAddVisible} photoQueueTarget={photoQueueTarget} onPhotoClose={()=>setIsQuickAddVisible(false)} onOpenProduct={setCatalogId} onConfirmed={refreshArchive}/>
+      <div className="product-records-onboarding">
+        <CostcoOnboardingPanel suppliers={suppliers} photoOpen={isQuickAddVisible} photoQueueTarget={photoQueueTarget} onPhotoClose={()=>setIsQuickAddVisible(false)} onOpenProduct={setCatalogId} onConfirmed={refreshArchive}/>
+      </div>
     </div>
   );
 }
