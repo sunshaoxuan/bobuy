@@ -180,7 +180,7 @@ useEffect(()=>{if(!id)return;let active=true;const current=beginOperation();setB
        {uploadSource&&!validCatalogImageSource(uploadSource)&&<Alert type="error" message={t('master.image_source')}/>}
        <Checkbox checked={imageReviewed} onChange={e=>setImageReviewed(e.target.checked)}>{t('gallery.ack')}</Checkbox>
        <p className="catalog-image-guidance">{t('gallery.format_hint')}</p>
-       {narrow&&!pendingFiles.length&&<Button icon={<UploadOutlined aria-hidden="true"/>} disabled={busy} onClick={openFilePicker}>{t('products.add_images')}</Button>}
+       {narrow&&<Button icon={<UploadOutlined aria-hidden="true"/>} disabled={busy} onClick={openFilePicker}>{t('products.add_images')}</Button>}
        {!!pendingFiles.length&&<><ul className="catalog-picked-files">{pendingFiles.map((file,index)=>
         <li key={index}><CatalogPickedPreview file={file}/><span>{file.name}</span></li>)}</ul>
         <Button loading={uploadPending.current} disabled={busy||!imageReviewed||!validCatalogImageSource(uploadSource)} onClick={()=>void upload(pendingFiles)}>{t('gallery.upload_selected')}</Button></>}

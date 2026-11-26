@@ -158,7 +158,7 @@ const messages: Dictionary = {
   "master.upload_retry_hint": "已确认上传的图片会保留，待上传文件尚未发送。请先核对失败请求，再重新选择文件。",
   "master.upload_asset": "已上传素材凭据",
   "master.upload_provenance": "此网址是图片来源记录；请选择本地图片文件上传。",
-  "master.upload_select": "下一步：点击上方“添加图片”选择一个或多个本地文件。",
+  "master.upload_select": "下一步：点击“添加图片”选择一个或多个本地文件。",
   "master.upload_source_required": "下一步：填写不含跟踪参数的有效 HTTPS 来源。",
   "master.upload_verify": "下一步：核对已选文件和来源，启用上传按钮。",
   "master.upload_ready": "下一步：点击“上传已选图片”，然后审阅并“确认保存主档”。",

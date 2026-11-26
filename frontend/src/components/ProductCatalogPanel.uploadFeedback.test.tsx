@@ -48,6 +48,20 @@ it('opens the picker once per add action even before source review, including af
  expect(screen.getByRole('button',{name:'Upload selected images'})).toBeDisabled();
  expect(mock.upload).not.toHaveBeenCalled();
 });
+it('keeps exactly one narrow-screen add action after selection and upload rejection',async()=>{
+ const selected=file('replace-me.png');mock.upload.mockRejectedValue(new Error('gallery.invalid_type'));
+ render(<I18nProvider><ProductCatalogPanel id="p1" entries={[]} onChoose={vi.fn()} onSaved={vi.fn()}/></I18nProvider>);
+ await openMedia();
+ const addActions=()=>screen.getAllByRole('button',{name:'Add images'});
+ expect(addActions()).toHaveLength(1);
+ select([selected.file]);
+ expect(document.querySelector('.catalog-picked-files')).toHaveTextContent('replace-me.png');
+ expect(addActions()).toHaveLength(1);
+ await waitFor(()=>expect(mock.upload).toHaveBeenCalledOnce());
+ await waitFor(()=>expect(screen.getByRole('list',{name:'Image upload status'})).toHaveTextContent('Failed'));
+ expect(document.querySelector('.catalog-picked-files')).toHaveTextContent('replace-me.png');
+ expect(addActions()).toHaveLength(1);
+});
 it('explains the first-image stages from provenance through uploaded draft',async()=>{
  const selected=file('first-cover.png');let finish!:(asset:ReturnType<typeof picture>)=>void;
  mock.upload.mockImplementation(()=>new Promise(resolve=>{finish=resolve;}));
@@ -56,7 +70,7 @@ it('explains the first-image stages from provenance through uploaded draft',asyn
  const source=screen.getByLabelText('Default official image source');
  fireEvent.change(source,{target:{value:'https://manufacturer.example/first-cover'}});
  expect(screen.getByText('This URL is the image source record. Select local image files to upload.')).toBeInTheDocument();
- expect(screen.getByText('Next: choose Add images above to select one or more local files.')).toBeInTheDocument();
+ expect(screen.getByText('Next: choose Add images to select one or more local files.')).toBeInTheDocument();
  expect(screen.queryByRole('button',{name:'Upload selected images'})).not.toBeInTheDocument();
  fireEvent.change(input(),{target:{files:[selected.file]}});
  expect(screen.getByText('first-cover.png')).toBeInTheDocument();
@@ -69,7 +83,7 @@ it('explains the first-image stages from provenance through uploaded draft',asyn
  expect(screen.getByText('Uploading selected images… Keep this editor open.')).toBeInTheDocument();
  await act(async()=>finish(picture('first-cover-asset',selected.sha)));
  expect(await screen.findByText('Uploaded images are in this draft. Save the master to associate them.')).toBeInTheDocument();
- expect(screen.queryByText('Next: choose Add images above to select one or more local files.')).not.toBeInTheDocument();
+ expect(screen.queryByText('Next: choose Add images to select one or more local files.')).not.toBeInTheDocument();
  expect(mock.save).not.toHaveBeenCalled();
 });
 it('clears staged files, temporary source and approval when closing A and opening B',async()=>{

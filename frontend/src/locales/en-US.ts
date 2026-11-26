@@ -158,7 +158,7 @@ const messages: Dictionary = {
   "master.upload_retry_hint": "Earlier confirmed uploads are kept. Pending files have not been uploaded. Check the failure, then select files again.",
   "master.upload_asset": "Uploaded asset reference",
   "master.upload_provenance": "This URL is the image source record. Select local image files to upload.",
-  "master.upload_select": "Next: choose Add images above to select one or more local files.",
+  "master.upload_select": "Next: choose Add images to select one or more local files.",
   "master.upload_source_required": "Next: enter a valid HTTPS source without tracking parameters.",
   "master.upload_verify": "Next: verify the selected files and source to enable upload.",
   "master.upload_ready": "Next: choose Upload selected images. Then review and Confirm and save masters.",
