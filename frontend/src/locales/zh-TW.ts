@@ -158,7 +158,7 @@ const messages: Dictionary = {
   "master.upload_unsaved": "已上傳圖片保留於目前草稿，請儲存主檔以完成關聯。",
   "master.upload_retry_hint": "已確認上傳的圖片會保留，待上傳檔案尚未傳送。請先核對失敗請求，再重新選取檔案。",
   "master.upload_asset": "已上傳素材憑據",
-  "master.upload_provenance": "此網址僅記錄圖片來源，不會匯入圖片。",
+  "master.upload_provenance": "此網址是圖片來源記錄；請選取本機圖片檔案上傳。",
   "master.upload_select": "下一步：點擊上方「新增圖片」選取一個或多個本機檔案。",
   "master.upload_source_required": "下一步：輸入不含追蹤參數的有效 HTTPS 來源。",
   "master.upload_verify": "下一步：核對已選檔案和來源，啟用上傳按鈕。",

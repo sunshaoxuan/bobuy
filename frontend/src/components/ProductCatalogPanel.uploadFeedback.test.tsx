@@ -55,7 +55,7 @@ it('explains the first-image stages from provenance through uploaded draft',asyn
  await openMedia();
  const source=screen.getByLabelText('Default official image source');
  fireEvent.change(source,{target:{value:'https://manufacturer.example/first-cover'}});
- expect(screen.getByText('This URL records image provenance; it does not import an image.')).toBeInTheDocument();
+ expect(screen.getByText('This URL is the image source record. Select local image files to upload.')).toBeInTheDocument();
  expect(screen.getByText('Next: choose Add images above to select one or more local files.')).toBeInTheDocument();
  expect(screen.queryByRole('button',{name:'Upload selected images'})).not.toBeInTheDocument();
  fireEvent.change(input(),{target:{files:[selected.file]}});
@@ -69,6 +69,7 @@ it('explains the first-image stages from provenance through uploaded draft',asyn
  expect(screen.getByText('Uploading selected images… Keep this editor open.')).toBeInTheDocument();
  await act(async()=>finish(picture('first-cover-asset',selected.sha)));
  expect(await screen.findByText('Uploaded images are in this draft. Save the master to associate them.')).toBeInTheDocument();
+ expect(screen.queryByText('Next: choose Add images above to select one or more local files.')).not.toBeInTheDocument();
  expect(mock.save).not.toHaveBeenCalled();
 });
 it('clears staged files, temporary source and approval when closing A and opening B',async()=>{
@@ -130,13 +131,15 @@ it('first-file failure remains visible and clears the picker so the same file ca
  expect(screen.getAllByRole('button',{name:/Add images/})).toHaveLength(1);
  await waitFor(()=>expect(mock.upload,screen.queryByRole('list',{name:'Image upload status'})?.textContent??'No upload status').toHaveBeenCalledTimes(1));await waitFor(()=>expect(picker.value).toBe(''));
  expect(screen.getByRole('list',{name:'Image upload status'})).toHaveTextContent('first.png');expect(screen.getByRole('list',{name:'Image upload status'})).toHaveTextContent('Failed');
+ expect(screen.getByText('Earlier confirmed uploads are kept. Pending files have not been uploaded. Check the failure, then select files again.')).toBeInTheDocument();
+ expect(screen.queryByText('Next: verify the selected files and source to enable upload.')).not.toBeInTheDocument();
  select([a.file]);await waitFor(()=>expect(mock.upload).toHaveBeenCalledTimes(2));await waitFor(()=>expect(document.querySelector('img[src="/api/storefront/recommendation-images/asset-first"]')).not.toBeNull());expect(mock.save).not.toHaveBeenCalled();
 });
 it('a middle failure retains the first uploaded asset/preview, leaves later files pending and never partially saves',async()=>{
  const a=file('one.png',1),b=file('two.png',2),c=file('three.png',3);mock.upload.mockResolvedValueOnce(picture('asset-one',a.sha)).mockRejectedValueOnce(new Error('gallery.invalid'));
  render(<I18nProvider><ProductCatalogPanel id="p1" entries={[]} onChoose={vi.fn()} onSaved={vi.fn()}/></I18nProvider>);await openMedia();select([a.file,b.file,c.file]);
  await waitFor(()=>expect(mock.upload).toHaveBeenCalledTimes(2));await waitFor(()=>expect(document.querySelector('img[src="/api/storefront/recommendation-images/asset-one"]')).not.toBeNull());
- const statuses=screen.getByRole('list',{name:'Image upload status'});expect(statuses).toHaveTextContent('one.png');expect(statuses).toHaveTextContent('two.png');expect(statuses).toHaveTextContent('three.png');expect(statuses).toHaveTextContent('Pending');expect(statuses).toHaveTextContent('Failed');expect(screen.getByText('Uploaded images are in this draft. Save the master to associate them.')).toBeInTheDocument();expect(mock.save).not.toHaveBeenCalled();
+ const statuses=screen.getByRole('list',{name:'Image upload status'});expect(statuses).toHaveTextContent('one.png');expect(statuses).toHaveTextContent('two.png');expect(statuses).toHaveTextContent('three.png');expect(statuses).toHaveTextContent('Pending');expect(statuses).toHaveTextContent('Failed');expect(screen.getByText('Uploaded images are in this draft. Save the master to associate them.')).toBeInTheDocument();expect(screen.queryByText('Next: verify the selected files and source to enable upload.')).not.toBeInTheDocument();expect(mock.save).not.toHaveBeenCalled();
 });
 it('duplicate bytes under different names or a reselected successful file reuse the SHA/asset without a second upload',async()=>{
  const a=file('same-a.png',1),b=file('same-b.png',1);mock.upload.mockImplementation(async()=>picture('same-asset',a.sha));

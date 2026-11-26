@@ -134,6 +134,8 @@ useEffect(()=>{if(!id)return;let active=true;const current=beginOperation();setB
  function reorder(index:number,next:number){if(!draft)return;const gallery=[...draft.gallery];const [picture]=gallery.splice(index,1);gallery.splice(next,0,picture);patch({gallery});}
  const warning=(value:string)=>{const index=value.indexOf(':');const key=index<0?value:value.slice(0,index);const translated=t(key);return translated===key?value:translated+(index<0?'':' · '+value.slice(index+1));};
  const cover=draft?.gallery[Math.min(activeImage,(draft?.gallery.length??1)-1)];
+ const hasUploadFailure=uploads.some(row=>row.status==='failed');
+ const hasUnsavedUpload=uploads.some(row=>row.asset&&draft?.gallery.some(p=>sameAsset(p,row.asset!))&&!savedGallery.current.some(p=>sameAsset(p,row.asset!)));
  const uploadNextStep=!pendingFiles.length?'master.upload_select':!validCatalogImageSource(uploadSource)?'master.upload_source_required':!imageReviewed?'master.upload_verify':uploadPending.current?'master.upload_in_progress':'master.upload_ready';
  return <section className="product-catalog-panel"><details className="catalog-utility-disclosure" open={!narrow}><summary><div className="catalog-utility-heading"><span className="catalog-utility-icon"><PictureOutlined/></span><div><h2>{t('master.title')}</h2><p>{t('master.hint')}</p></div></div></summary>
   <div className="product-catalog-actions"><Select aria-label={t('master.choose')} showSearch optionFilterProp="label" filterOption={searchEntries?false:undefined} onSearch={searchEntries?setLookup:undefined} notFoundContent={lookupFailed?t('products.archive_failed'):undefined} value={id} placeholder={t('master.choose')} onChange={onChoose} options={(searchEntries&&lookup.trim()?(matches??[]):entries).map(row=>({value:row.key,label:row.name}))}/><Button onClick={()=>{setBulk(true);setError('');setReviewed(false);}}>{t('master.bulk')}</Button></div></details>
@@ -151,7 +153,7 @@ useEffect(()=>{if(!id)return;let active=true;const current=beginOperation();setB
    <input hidden className="catalog-file-input" ref={fileInput} aria-label={t('gallery.files')} type="file" accept={IMAGE_UPLOAD_ACCEPT} multiple disabled={busy} onChange={e=>{
     const files=copyFileList(e.currentTarget.files);e.currentTarget.value='';
     if(!files.length)return;
-    setPendingFiles(files);setError('');
+    setPendingFiles(files);setUploads([]);setError('');
    }}/>
    <Tabs className="catalog-main-tabs" activeKey={editorTab} onChange={key=>{setEditorTab(key);}} items={[
      {key:'identity',label:t('products.details_tab'),children:<div className="catalog-tab-content">{error&&editorTab==='identity'&&<Alert type="error" message={warning(error)}/>}<div className="catalog-identity-grid">
@@ -180,7 +182,7 @@ useEffect(()=>{if(!id)return;let active=true;const current=beginOperation();setB
        {!!pendingFiles.length&&<><ul className="catalog-picked-files">{pendingFiles.map((file,index)=>
         <li key={index}><CatalogPickedPreview file={file}/><span>{file.name}</span></li>)}</ul>
         <Button loading={uploadPending.current} disabled={busy||!imageReviewed||!validCatalogImageSource(uploadSource)} onClick={()=>void upload(pendingFiles)}>{t('gallery.upload_selected')}</Button></>}
-       <p className="catalog-upload-next" role="status">{t(uploadNextStep)}</p>
+       {!hasUploadFailure&&!hasUnsavedUpload&&<p className="catalog-upload-next" role="status">{t(uploadNextStep)}</p>}
        <p className="catalog-image-guidance">{t('master.upload_hint')}</p>
        {!!uploads.length&&<div className="catalog-upload-feedback" aria-live="polite" aria-atomic="false"><strong className="catalog-upload-heading">{t('master.upload_status')} ({uploads.length})</strong><ul aria-label={t('master.upload_status')}>{uploads.map(row=>{const saved=!!row.asset&&savedGallery.current.some(p=>sameAsset(p,row.asset!));return <li key={row.key}><div className="catalog-upload-row"><strong className="catalog-upload-filename" title={row.name}>{row.name}</strong><Tag color={row.status==='success'?'success':row.status==='failed'?'error':row.status==='uploading'?'processing':undefined}>{t(row.status==='success'?(saved?'master.upload_saved':row.reused?'master.upload_reused':'master.upload_success'):'master.upload_'+row.status)}</Tag></div><details><summary>{t('master.upload_details')}</summary><div className="catalog-upload-record"><span>{t('master.upload_filename')}: {row.name}</span>{row.error&&<span>{warning(row.error)}</span>}{row.asset&&<><span>{t('master.upload_asset')}</span><code>{row.asset.url}</code><code>{row.sha256}</code></>}</div></details></li>;})}</ul>{uploads.some(row=>row.asset&&draft.gallery.some(p=>sameAsset(p,row.asset!))&&!savedGallery.current.some(p=>sameAsset(p,row.asset!)))&&<p role="status">{t('master.upload_unsaved')}</p>}{uploads.some(row=>row.status==='failed')&&<p>{t('master.upload_retry_hint')}</p>}</div>}
       </div></div>}

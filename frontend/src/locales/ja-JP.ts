@@ -157,7 +157,7 @@ const messages: Dictionary = {
   "master.upload_unsaved": "アップロードした画像は現在の下書きに保持されています。商品マスターを保存して関連付けてください。",
   "master.upload_retry_hint": "確認済みの画像は保持され、待機中のファイルは未送信です。失敗したリクエストを確認してから、ファイルを選び直してください。",
   "master.upload_asset": "アップロード済み素材の参照",
-  "master.upload_provenance": "この URL は画像の出典記録用です。画像は取り込みません。",
+  "master.upload_provenance": "この URL は画像の出典記録です。アップロードするローカル画像ファイルを選択してください。",
   "master.upload_select": "次の手順：上の「画像を追加」でローカルファイルを1つ以上選択します。",
   "master.upload_source_required": "次の手順：追跡パラメータのない有効な HTTPS 出典を入力します。",
   "master.upload_verify": "次の手順：選択済みファイルと出典を確認し、アップロードを有効にします。",
