@@ -128,17 +128,26 @@ it('allows recovering the per-upload source after removing the last existing ima
 it('first-file failure remains visible and clears the picker so the same file can be chosen again',async()=>{
  const a=file('first.png');mock.upload.mockRejectedValueOnce(new Error('gallery.invalid')).mockResolvedValueOnce(picture('asset-first',a.sha));
  render(<I18nProvider><ProductCatalogPanel id="p1" entries={[]} onChoose={vi.fn()} onSaved={vi.fn()}/></I18nProvider>);await openMedia();const picker=select([a.file]);
- expect(screen.getAllByRole('button',{name:/Add images/})).toHaveLength(1);
  await waitFor(()=>expect(mock.upload,screen.queryByRole('list',{name:'Image upload status'})?.textContent??'No upload status').toHaveBeenCalledTimes(1));await waitFor(()=>expect(picker.value).toBe(''));
  expect(screen.getByRole('list',{name:'Image upload status'})).toHaveTextContent('first.png');expect(screen.getByRole('list',{name:'Image upload status'})).toHaveTextContent('Failed');
  expect(screen.getByText('Earlier confirmed uploads are kept. Pending files have not been uploaded. Check the failure, then select files again.')).toBeInTheDocument();
  expect(screen.queryByText('Next: verify the selected files and source to enable upload.')).not.toBeInTheDocument();
- select([a.file]);await waitFor(()=>expect(mock.upload).toHaveBeenCalledTimes(2));await waitFor(()=>expect(document.querySelector('img[src="/api/storefront/recommendation-images/asset-first"]')).not.toBeNull());expect(mock.save).not.toHaveBeenCalled();
+ select([a.file]);await waitFor(()=>expect(mock.upload).toHaveBeenCalledTimes(2));await waitFor(()=>expect(document.querySelector('img[src="/api/storefront/recommendation-images/asset-first"]')).not.toBeNull());await waitFor(()=>expect(input()).not.toBeDisabled());const history=screen.getByRole('list',{name:'Image upload status'});expect(within(history).getAllByText('first.png')).toHaveLength(2);expect(history).toHaveTextContent('Failed');expect(history).toHaveTextContent('Uploaded');expect(mock.save).not.toHaveBeenCalled();
+});
+it('keeps an earlier successful receipt while guiding an active new batch',async()=>{
+ const first=file('earlier.png',1),next=file('active.png',2);mock.upload.mockResolvedValueOnce(picture('earlier-asset',first.sha)).mockResolvedValueOnce(picture('active-asset',next.sha));
+ render(<I18nProvider><ProductCatalogPanel id="p1" entries={[]} onChoose={vi.fn()} onSaved={vi.fn()}/></I18nProvider>);await openMedia();select([first.file]);
+ await waitFor(()=>expect(document.querySelector('img[src="/api/storefront/recommendation-images/earlier-asset"]')).not.toBeNull());await waitFor(()=>expect(input()).not.toBeDisabled());
+ fireEvent.change(input(),{target:{files:[next.file]}});
+ expect(screen.getByText('Next: verify the selected files and source to enable upload.')).toBeInTheDocument();
+ expect(screen.getByRole('list',{name:'Image upload status'})).toHaveTextContent('earlier.png');
+ fireEvent.click(screen.getByRole('checkbox',{name:/I verified the exact item/}));fireEvent.click(screen.getByRole('button',{name:'Upload selected images'}));
+ await waitFor(()=>expect(document.querySelector('img[src="/api/storefront/recommendation-images/active-asset"]')).not.toBeNull());await waitFor(()=>expect(input()).not.toBeDisabled());const history=screen.getByRole('list',{name:'Image upload status'});expect(history).toHaveTextContent('earlier.png');expect(history).toHaveTextContent('active.png');
 });
 it('a middle failure retains the first uploaded asset/preview, leaves later files pending and never partially saves',async()=>{
  const a=file('one.png',1),b=file('two.png',2),c=file('three.png',3);mock.upload.mockResolvedValueOnce(picture('asset-one',a.sha)).mockRejectedValueOnce(new Error('gallery.invalid'));
  render(<I18nProvider><ProductCatalogPanel id="p1" entries={[]} onChoose={vi.fn()} onSaved={vi.fn()}/></I18nProvider>);await openMedia();select([a.file,b.file,c.file]);
- await waitFor(()=>expect(mock.upload).toHaveBeenCalledTimes(2));await waitFor(()=>expect(document.querySelector('img[src="/api/storefront/recommendation-images/asset-one"]')).not.toBeNull());
+ await waitFor(()=>expect(mock.upload).toHaveBeenCalledTimes(2));await waitFor(()=>expect(document.querySelector('img[src="/api/storefront/recommendation-images/asset-one"]')).not.toBeNull());await waitFor(()=>expect(input()).not.toBeDisabled());
  const statuses=screen.getByRole('list',{name:'Image upload status'});expect(statuses).toHaveTextContent('one.png');expect(statuses).toHaveTextContent('two.png');expect(statuses).toHaveTextContent('three.png');expect(statuses).toHaveTextContent('Pending');expect(statuses).toHaveTextContent('Failed');expect(screen.getByText('Uploaded images are in this draft. Save the master to associate them.')).toBeInTheDocument();expect(screen.queryByText('Next: verify the selected files and source to enable upload.')).not.toBeInTheDocument();expect(mock.save).not.toHaveBeenCalled();
 });
 it('duplicate bytes under different names or a reselected successful file reuse the SHA/asset without a second upload',async()=>{
@@ -159,6 +168,12 @@ it('save failure preserves uploaded draft assets and a retry does not re-upload 
  await waitFor(()=>expect(retry).toBeEnabled());
  mock.save.mockResolvedValue([{value:{...value,version:8,gallery:[asset]},canonical:true}]);
  fireEvent.click(retry);await waitFor(()=>expect(onSaved).toHaveBeenCalledOnce());expect(mock.upload).toHaveBeenCalledOnce();
+});
+it('reopens an uploaded and saved image as persisted without losing its receipt before close',async()=>{
+ const selected=file('persist.png'),asset=picture('persisted-asset',selected.sha);mock.upload.mockResolvedValue(asset);mock.save.mockResolvedValue([{value:{...value,version:8,gallery:[asset]},canonical:true}]);
+ const editor=(id?:string)=><I18nProvider><ProductCatalogPanel id={id} entries={[]} onChoose={vi.fn()} onSaved={vi.fn()}/></I18nProvider>;const view=render(editor('p1'));await openMedia();select([selected.file]);await waitFor(()=>expect(document.querySelector('img[src="/api/storefront/recommendation-images/persisted-asset"]')).not.toBeNull());
+ fireEvent.click(screen.getByRole('checkbox',{name:/I reviewed the data/}));fireEvent.click(screen.getByRole('button',{name:'Confirm and save masters'}));await waitFor(()=>expect(screen.getByRole('list',{name:'Image upload status'})).toHaveTextContent('Saved'));
+ mock.get.mockResolvedValue({value:{...value,version:8,gallery:[asset]},canonical:true,sourceItemIds:[]});view.rerender(editor());view.rerender(editor('p1'));await openMedia();expect(document.querySelector('img[src="/api/storefront/recommendation-images/persisted-asset"]')).not.toBeNull();expect(screen.queryByRole('list',{name:'Image upload status'})).toBeNull();expect(mock.upload).toHaveBeenCalledOnce();
 });
 it('an account/session switch suppresses the prior upload and drops its private draft/status',async()=>{
  const a=file('private.png');let resolve!:(v:ReturnType<typeof picture>)=>void;mock.upload.mockImplementation(()=>new Promise(r=>{resolve=r;}));

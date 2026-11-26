@@ -1464,7 +1464,7 @@ const messages: Dictionary = {
   "master.categories": "商品分类（可多选）",
   "master.supplier": "商品供应商",
   "master.translations_reviewed": "已核对所填译文；日文修改后须重新审阅",
-  "master.upload_hint": "选图仅暂存；确认保存主档后才更新关联推荐。移除仅取消关联，原来源证据保留。",
+  "master.upload_hint": "移除图片仅取消关联，原始来源证据仍会保留。",
   "master.review": "已逐项核对资料、同型号规格及官方图片来源，并已处理所列冲突",
   "master.save": "确认保存主档",
   "master.bulk_hint": "先生成建议，核对或修改资料，再校验预览；仅保存勾选的商品，不更新售价或库存。",

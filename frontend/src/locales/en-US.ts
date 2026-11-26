@@ -1464,7 +1464,7 @@ const messages: Dictionary = {
   "master.categories": "Product categories",
   "master.supplier": "Product supplier",
   "master.translations_reviewed": "Entered translations reviewed; re-review after Japanese changes",
-  "master.upload_hint": "Images are staged until the master is saved. Removing a link retains original source evidence.",
+  "master.upload_hint": "Removing an image only removes its link; original source evidence is retained.",
   "master.review": "I reviewed the data, exact model/specification and official images, and resolved the listed conflicts",
   "master.save": "Confirm and save masters",
   "master.bulk_hint": "Generate suggestions, review/edit and validate. Save selected products only, without changing price or stock.",

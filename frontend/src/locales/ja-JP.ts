@@ -1464,7 +1464,7 @@ const messages: Dictionary = {
   "master.categories": "商品カテゴリ（複数可）",
   "master.supplier": "商品仕入先",
   "master.translations_reviewed": "入力した訳文を確認済み（日本語の変更後は再確認）",
-  "master.upload_hint": "画像選択は一時保存です。マスターの確認保存後におすすめへ反映します。元の出典は保持します。",
+  "master.upload_hint": "画像を削除しても関連付けのみが解除され、元の出典証拠は保持されます。",
   "master.review": "情報・同一型番と仕様・公式画像の出典を確認し、表示された相違を解決しました",
   "master.save": "確認してマスターを保存",
   "master.bulk_hint": "候補を生成して内容を修正し、検証してください。選択した商品情報のみ保存し、価格・在庫は変更しません。",

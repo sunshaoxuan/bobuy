@@ -1603,7 +1603,7 @@ const messages: Dictionary = {
   "master.categories": "商品分類（可複選）",
   "master.supplier": "商品供應商",
   "master.translations_reviewed": "已核對所填譯文；日文修改後須重新審閱",
-  "master.upload_hint": "選圖僅暫存；確認儲存主檔後才更新關聯推薦。移除僅取消關聯，原來源證據保留。",
+  "master.upload_hint": "移除圖片僅取消關聯，原始來源證據仍會保留。",
   "master.review": "已逐項核對資料、同型號規格及官方圖片來源，並已處理所列衝突",
   "master.save": "確認儲存主檔",
   "master.bulk_hint": "先產生建議，核對或修改資料，再校驗預覽；僅儲存勾選商品，不更新售價或庫存。",
