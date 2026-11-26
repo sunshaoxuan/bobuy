@@ -61,6 +61,7 @@ function CatalogEditor({entries,id,onChoose,onSaved,searchEntries,getExportIds,c
  const [recoveryId,setRecoveryId]=useState<string>(),[restoreOpen,setRestoreOpen]=useState(false),[sourceItems,setSourceItems]=useState<number[]>([]);
  const [bulk,setBulk]=useState(false),[json,setJson]=useState(''),[rows,setRows]=useState<CatalogProposal[]>([]),[validated,setValidated]=useState(false),[selected,setSelected]=useState<React.Key[]>([]);
  const [source,setSource]=useState<string|undefined>(),[pendingFiles,setPendingFiles]=useState<File[]>([]),[imageReviewed,setImageReviewed]=useState(false);const fileInput=useRef<HTMLInputElement>(null);
+ const selectionSequence=useRef(0);const [currentUploadFailed,setCurrentUploadFailed]=useState(false);
  const uploadSource=source??draft?.defaultImageSourceUrl??'';
  const [uploads,setUploads]=useState<UploadRow[]>([]);const uploadSequence=useRef(0),uploadedAssets=useRef(new Map<string,CatalogMedia>()),savedGallery=useRef<CatalogMedia[]>([]);
  const mounted=useRef(true),operation=useRef(0),uploadPending=useRef(false);
@@ -107,7 +108,7 @@ useEffect(()=>{if(!id)return;let active=true;const current=beginOperation();setB
  async function readAudit(){if(busy)return;const current=beginOperation();setBusy(true);setError('');try{const rows=await productCatalogApi.audit();if(current())setAudit(JSON.stringify(rows,null,2));}catch(e){if(current())setError((e as Error).message);}finally{if(current())setBusy(false);}}
  async function upload(files:File[]){
   if(busy||uploadPending.current||!draft||!imageReviewed||!uploadSource||!files.length||!currentScope())return;
-  const current=beginOperation(),productId=draft.productId,sourceUrl=uploadSource,pictures=[...draft.gallery];
+  const current=beginOperation(),productId=draft.productId,sourceUrl=uploadSource,pictures=[...draft.gallery],selection=selectionSequence.current;
   const batch:UploadRow[]=files.map(file=>({key:++uploadSequence.current,name:file.name,status:'waiting'}));
   const update=(key:number,change:Partial<UploadRow>)=>{if(current())setUploads(prior=>prior.map(row=>row.key===key?{...row,...change}:row));};
   uploadPending.current=true;setBusy(true);setError('');setUploads(prior=>[...prior,...batch]);
@@ -125,7 +126,7 @@ useEffect(()=>{if(!id)return;let active=true;const current=beginOperation();setB
      if(!pictures.some(p=>sameAsset(p,asset)))pictures.push(asset);
      setDraft(prior=>current()&&prior?.productId===productId?{...prior,gallery:[...pictures]}:prior);setReviewed(false);
      update(row.key,{status:'success',asset,reused:!!known});
-    }catch(e){if(current()){const message=(e as Error).message;update(row.key,{status:'failed',error:message});setError(message);}return;}
+    }catch(e){if(current()){const message=(e as Error).message;update(row.key,{status:'failed',error:message});if(selection===selectionSequence.current)setCurrentUploadFailed(true);setError(message);}return;}
    }
    if(current())setPendingFiles([]);
   }finally{uploadPending.current=false;if(current()){setBusy(false);setImageReviewed(false);}}
@@ -134,6 +135,9 @@ useEffect(()=>{if(!id)return;let active=true;const current=beginOperation();setB
  function reorder(index:number,next:number){if(!draft)return;const gallery=[...draft.gallery];const [picture]=gallery.splice(index,1);gallery.splice(next,0,picture);patch({gallery});}
  const warning=(value:string)=>{const index=value.indexOf(':');const key=index<0?value:value.slice(0,index);const translated=t(key);return translated===key?value:translated+(index<0?'':' · '+value.slice(index+1));};
  const cover=draft?.gallery[Math.min(activeImage,(draft?.gallery.length??1)-1)];
+ const hasCurrentUploadFailure=currentUploadFailed;
+ const hasUnsavedUpload=uploads.some(row=>row.asset&&draft?.gallery.some(p=>sameAsset(p,row.asset!))&&!savedGallery.current.some(p=>sameAsset(p,row.asset!)));
+ const uploadNextStep=!pendingFiles.length?'master.upload_select':!validCatalogImageSource(uploadSource)?'master.upload_source_required':!imageReviewed?'master.upload_verify':uploadPending.current?'master.upload_in_progress':'master.upload_ready';
  return <section className="product-catalog-panel"><details className="catalog-utility-disclosure" open={!narrow}><summary><div className="catalog-utility-heading"><span className="catalog-utility-icon"><PictureOutlined/></span><div><h2>{t('master.title')}</h2><p>{t('master.hint')}</p></div></div></summary>
   <div className="product-catalog-actions"><Select aria-label={t('master.choose')} showSearch optionFilterProp="label" filterOption={searchEntries?false:undefined} onSearch={searchEntries?setLookup:undefined} notFoundContent={lookupFailed?t('products.archive_failed'):undefined} value={id} placeholder={t('master.choose')} onChange={onChoose} options={(searchEntries&&lookup.trim()?(matches??[]):entries).map(row=>({value:row.key,label:row.name}))}/><Button onClick={()=>{setBulk(true);setError('');setReviewed(false);}}>{t('master.bulk')}</Button></div></details>
   <Drawer rootClassName={'catalog-editor'+(narrow?' catalog-editor-sheet':'')} title={t('master.title')} placement={narrow?'bottom':'right'} height={narrow?sheetHeight:undefined} width={narrow?undefined:1120} open={!!id} onClose={closeEditor} destroyOnClose footer={draft?<div className="catalog-review-bar"><Checkbox disabled={busy} checked={reviewed} onChange={e=>setReviewed(e.target.checked)}>{t('master.review')}</Checkbox><Button type="primary" loading={busy} disabled={!reviewed||busy} onClick={()=>void saveOne()}>{t('master.save')}</Button>{recoveryId&&<Button disabled={busy||dirty} onClick={()=>setRestoreOpen(true)}>{t('master.restore')}</Button>}</div>:null}>
@@ -143,14 +147,14 @@ useEffect(()=>{if(!id)return;let active=true;const current=beginOperation();setB
     <div className="catalog-compact-gallery">
      <button ref={imageOpener} type="button" className="catalog-compact-cover" aria-label={t('gallery.fullscreen')} disabled={!cover||busy} onClick={()=>setImageOpen(true)}>{cover?<img src={cover.url} alt={cover.title?.[locale]||draft.name['ja-JP']}/>:<div className="record-no-image"><PictureOutlined/>{t('gallery.pending')}</div>}</button>
      <div className="catalog-compact-tools"><div className="catalog-filmstrip">{draft.gallery.map((picture,index)=><button key={picture.url} type="button" aria-label={t('products.preview_image',{number:String(index+1)})} aria-pressed={index===Math.min(activeImage,draft.gallery.length-1)} onClick={()=>setActiveImage(index)}><img src={picture.url} alt=""/>{index===0&&<span className="catalog-cover-dot"/>}</button>)}</div>
-      <div className="catalog-image-actions"><Button icon={<StarOutlined/>} disabled={!cover||activeImage===0} onClick={()=>{reorder(activeImage,0);setActiveImage(0);}}>{t(activeImage?'gallery.set_main':'gallery.main')}</Button><Button icon={<ArrowLeftOutlined/>} aria-label={t('master.move_up')} disabled={!cover||activeImage===0} onClick={()=>{reorder(activeImage,activeImage-1);setActiveImage(activeImage-1);}}/><Button icon={<ArrowRightOutlined/>} aria-label={t('master.move_down')} disabled={!cover||activeImage>=draft.gallery.length-1} onClick={()=>{reorder(activeImage,activeImage+1);setActiveImage(activeImage+1);}}/><Button danger icon={<DeleteOutlined/>} aria-label={t('store.remove')} disabled={!cover} onClick={()=>{patch({gallery:draft.gallery.filter((_,i)=>i!==activeImage)});setActiveImage(0);}}/><Button icon={<UploadOutlined aria-hidden="true"/>} disabled={busy} onClick={openFilePicker}>{t('products.add_images')}</Button></div>
+      <div className="catalog-image-actions"><Button icon={<StarOutlined/>} disabled={!cover||activeImage===0} onClick={()=>{reorder(activeImage,0);setActiveImage(0);}}>{t(activeImage?'gallery.set_main':'gallery.main')}</Button><Button icon={<ArrowLeftOutlined/>} aria-label={t('master.move_up')} disabled={!cover||activeImage===0} onClick={()=>{reorder(activeImage,activeImage-1);setActiveImage(activeImage-1);}}/><Button icon={<ArrowRightOutlined/>} aria-label={t('master.move_down')} disabled={!cover||activeImage>=draft.gallery.length-1} onClick={()=>{reorder(activeImage,activeImage+1);setActiveImage(activeImage+1);}}/><Button danger icon={<DeleteOutlined/>} aria-label={t('store.remove')} disabled={!cover} onClick={()=>{patch({gallery:draft.gallery.filter((_,i)=>i!==activeImage)});setActiveImage(0);}}/>{!narrow&&<Button icon={<UploadOutlined aria-hidden="true"/>} disabled={busy} onClick={openFilePicker}>{t('products.add_images')}</Button>}</div>
      </div>
     </div>
     {id&&<ProductPhotoHistory key={id} id={id}/>}
    <input hidden className="catalog-file-input" ref={fileInput} aria-label={t('gallery.files')} type="file" accept={IMAGE_UPLOAD_ACCEPT} multiple disabled={busy} onChange={e=>{
     const files=copyFileList(e.currentTarget.files);e.currentTarget.value='';
     if(!files.length)return;
-    setPendingFiles(files);setError('');
+    selectionSequence.current++;setCurrentUploadFailed(false);setPendingFiles(files);setError('');
    }}/>
    <Tabs className="catalog-main-tabs" activeKey={editorTab} onChange={key=>{setEditorTab(key);}} items={[
      {key:'identity',label:t('products.details_tab'),children:<div className="catalog-tab-content">{error&&editorTab==='identity'&&<Alert type="error" message={warning(error)}/>}<div className="catalog-identity-grid">
@@ -171,15 +175,18 @@ useEffect(()=>{if(!id)return;let active=true;const current=beginOperation();setB
       {cover&&<label>{t('gallery.sources')}<Input value={cover.sourceUrl??''} onChange={e=>patch({gallery:draft.gallery.map((p,i)=>i===activeImage?{...p,sourceUrl:e.target.value}:p)})}/></label>}
       <div className="catalog-upload-group">
        <label>{t('gallery.default_source')}<Input value={draft.defaultImageSourceUrl??''} onChange={e=>{patch({defaultImageSourceUrl:e.target.value});setImageReviewed(false);}} placeholder="https://…"/></label>
+       <p className="catalog-image-guidance catalog-upload-provenance">{t('master.upload_provenance')}</p>
        {(cover||pendingFiles.length>0||source!==undefined)&&<label>{t('gallery.upload_source')}<Input value={uploadSource} onChange={e=>{setSource(e.target.value);setImageReviewed(false);}} placeholder="https://…"/></label>}
        {uploadSource&&!validCatalogImageSource(uploadSource)&&<Alert type="error" message={t('master.image_source')}/>}
        <Checkbox checked={imageReviewed} onChange={e=>setImageReviewed(e.target.checked)}>{t('gallery.ack')}</Checkbox>
        <p className="catalog-image-guidance">{t('gallery.format_hint')}</p>
+       {narrow&&<Button icon={<UploadOutlined aria-hidden="true"/>} disabled={busy} onClick={openFilePicker}>{t('products.add_images')}</Button>}
        {!!pendingFiles.length&&<><ul className="catalog-picked-files">{pendingFiles.map((file,index)=>
         <li key={index}><CatalogPickedPreview file={file}/><span>{file.name}</span></li>)}</ul>
-        <Button disabled={busy||!imageReviewed||!validCatalogImageSource(uploadSource)} onClick={()=>void upload(pendingFiles)}>{t('gallery.upload_selected')}</Button></>}
+        <Button loading={uploadPending.current} disabled={busy||!imageReviewed||!validCatalogImageSource(uploadSource)} onClick={()=>void upload(pendingFiles)}>{t('gallery.upload_selected')}</Button></>}
+       {!hasCurrentUploadFailure&&(pendingFiles.length||!hasUnsavedUpload)&&<p className="catalog-upload-next" role="status">{t(uploadNextStep)}</p>}
        <p className="catalog-image-guidance">{t('master.upload_hint')}</p>
-       {!!uploads.length&&<div className="catalog-upload-feedback" aria-live="polite" aria-atomic="false"><strong className="catalog-upload-heading">{t('master.upload_status')} ({uploads.length})</strong><ul aria-label={t('master.upload_status')}>{uploads.map(row=>{const saved=!!row.asset&&savedGallery.current.some(p=>sameAsset(p,row.asset!));return <li key={row.key}><div className="catalog-upload-row"><strong className="catalog-upload-filename" title={row.name}>{row.name}</strong><Tag color={row.status==='success'?'success':row.status==='failed'?'error':row.status==='uploading'?'processing':undefined}>{t(row.status==='success'?(saved?'master.upload_saved':row.reused?'master.upload_reused':'master.upload_success'):'master.upload_'+row.status)}</Tag></div><details><summary>{t('master.upload_details')}</summary><div className="catalog-upload-record"><span>{t('master.upload_filename')}: {row.name}</span>{row.error&&<span>{warning(row.error)}</span>}{row.asset&&<><span>{t('master.upload_asset')}</span><code>{row.asset.url}</code><code>{row.sha256}</code></>}</div></details></li>;})}</ul>{uploads.some(row=>row.asset&&draft.gallery.some(p=>sameAsset(p,row.asset!))&&!savedGallery.current.some(p=>sameAsset(p,row.asset!)))&&<p role="status">{t('master.upload_unsaved')}</p>}{uploads.some(row=>row.status==='failed')&&<p>{t('master.upload_retry_hint')}</p>}</div>}
+       {!!uploads.length&&<div className="catalog-upload-feedback" aria-live="polite" aria-atomic="false"><strong className="catalog-upload-heading">{t('master.upload_status')} ({uploads.length})</strong><ul aria-label={t('master.upload_status')}>{uploads.map(row=>{const saved=!!row.asset&&savedGallery.current.some(p=>sameAsset(p,row.asset!));return <li key={row.key}><div className="catalog-upload-row"><strong className="catalog-upload-filename" title={row.name}>{row.name}</strong><Tag color={row.status==='success'?'success':row.status==='failed'?'error':row.status==='uploading'?'processing':undefined}>{t(row.status==='success'?(saved?'master.upload_saved':row.reused?'master.upload_reused':'master.upload_success'):'master.upload_'+row.status)}</Tag></div><details><summary>{t('master.upload_details')}</summary><div className="catalog-upload-record"><span>{t('master.upload_filename')}: {row.name}</span>{row.error&&<span>{warning(row.error)}</span>}{row.asset&&<><span>{t('master.upload_asset')}</span><code>{row.asset.url}</code><code>{row.sha256}</code></>}</div></details></li>;})}</ul>{uploads.some(row=>row.asset&&draft.gallery.some(p=>sameAsset(p,row.asset!))&&!savedGallery.current.some(p=>sameAsset(p,row.asset!)))&&<p role="status">{t('master.upload_unsaved')}</p>}{hasCurrentUploadFailure&&<p>{t('master.upload_retry_hint')}</p>}</div>}
       </div></div>}
     ]}/>
    </fieldset>}
