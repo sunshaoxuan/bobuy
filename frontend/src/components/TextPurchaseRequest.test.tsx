@@ -2,14 +2,14 @@ import{act,fireEvent,render,screen,waitFor}from'@testing-library/react';
 import{I18nProvider}from'../i18n';
 import type{LiveCart,LiveCartLine}from'../api';
 import TextPurchaseRequest from'./TextPurchaseRequest';
-const mocks=vi.hoisted(()=>({customer:vi.fn(),addText:vi.fn(),change:vi.fn(),link:vi.fn(),unlink:vi.fn(),undo:vi.fn()}));
+const mocks=vi.hoisted(()=>({customer:vi.fn(),audioCapability:vi.fn(),transcribe:vi.fn(),addText:vi.fn(),change:vi.fn(),link:vi.fn(),unlink:vi.fn(),undo:vi.fn()}));
 vi.mock('../api',()=>({liveCartApi:mocks}));
 vi.mock('./PurchaseProductPicker',()=>({default:({onChoose,onCancel}:{onChoose:(id:string)=>void;onCancel:()=>void})=><div><button onClick={()=>onChoose('catalog-2')}>Choose catalog fixture</button><button onClick={onCancel}>Cancel picker</button></div>}));
 const submission='无糖豆浆 两箱\n草莓 1盒（不要太熟）';
 const line=(id:number,over:Partial<LiveCartLine>={}):LiveCartLine=>({id,productId:null,quantity:1,unitPrice:null,currency:'JPY',ready:false,settlementId:null,version:0,requestBatchId:'batch-1',originalRequest:'草莓 1盒（不要太熟）',originalSubmission:submission,requestedName:'草莓',requestedUnit:'盒',requestConstraints:'不要太熟',quantityConfirmed:true,productName:{},itemNumber:null,productSpecification:{},...over});
 const cart=(version:number,openLines:LiveCartLine[]):LiveCart=>({id:4,merchantId:1,version,openLines,openTotal:{amount:0,unpricedLineCount:openLines.filter(x=>x.unitPrice===null).length}});
 const view=(identity='user:7')=><I18nProvider><TextPurchaseRequest key={identity} merchantId={1} enabled/></I18nProvider>;
-beforeEach(()=>{vi.resetAllMocks();localStorage.setItem('bobbuy_locale','en-US');mocks.customer.mockResolvedValue([]);});
+beforeEach(()=>{vi.resetAllMocks();localStorage.setItem('bobbuy_locale','en-US');mocks.customer.mockResolvedValue([]);mocks.audioCapability.mockResolvedValue({enabled:false,mimeTypes:[],maxDurationSeconds:60,maxBytes:0});});
 
 it('adds a mixed empty-cart request, preserves the complete submission after reload, and shows linked and pending lines together',async()=>{
  const pending=line(1);const linked=line(2,{productId:'catalog-1',originalRequest:'无糖豆浆 两箱',requestedName:'无糖豆浆',quantity:2,productName:{'en-US':'Unsweetened soy milk'},itemNumber:'SKU-1',productSpecification:{'en-US':'12 x 1 L'},unitPrice:20});
