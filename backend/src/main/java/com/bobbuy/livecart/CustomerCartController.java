@@ -9,4 +9,8 @@ public class CustomerCartController {private final LiveCartService service;publi
  @DeleteMapping("/{cartId}/lines/{lineId}") public Cart delete(@PathVariable long cartId,@PathVariable long lineId,@RequestParam long expectedVersion,Authentication a){return service.customerChange(cartId,lineId,new ChangeLine(null,null,null,expectedVersion),a,true);}
  @PatchMapping("/lines/{lineId}") public Cart changeCanonical(@PathVariable long lineId,@RequestBody ChangeLine in,Authentication a){return service.customerChangeByLine(lineId,in,a,false);}
  @DeleteMapping("/lines/{lineId}") public Cart deleteCanonical(@PathVariable long lineId,@RequestParam long expectedVersion,Authentication a){return service.customerChangeByLine(lineId,new ChangeLine(null,null,null,expectedVersion),a,true);}
+ @PostMapping("/text-requests") public TextBatch text(@RequestBody TextRequest in,Authentication a){return service.addTextRequests(in,a);}
+ @PostMapping("/{cartId}/lines/{lineId}/link") public Cart link(@PathVariable long cartId,@PathVariable long lineId,@RequestBody LinkRequest in,Authentication a){return service.customerLink(cartId,lineId,in,a);}
+ @DeleteMapping("/{cartId}/lines/{lineId}/link") public Cart unlink(@PathVariable long cartId,@PathVariable long lineId,@RequestParam long expectedVersion,Authentication a){return service.customerUnlink(cartId,lineId,expectedVersion,a);}
+ @DeleteMapping("/text-requests/{batchId}") public Cart undo(@PathVariable java.util.UUID batchId,@RequestParam long expectedVersion,Authentication a){return service.undoBatch(batchId,expectedVersion,a);}
 }

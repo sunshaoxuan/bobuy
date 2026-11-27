@@ -12,4 +12,6 @@ public class MerchantLiveCartController {private final LiveCartService service;p
  @PostMapping("/{cartId}/settlement-preview") public Preview preview(@PathVariable long cartId,@RequestBody SelectLines in){return service.preview(cartId,in.lineIds());}
  @PostMapping("/{cartId}/settlements") public Cart settle(@PathVariable long cartId,@RequestBody SelectLines in){return service.settle(cartId,in);}
  @PostMapping("/{cartId}/settlements/{sid}/reopen") public Cart reopen(@PathVariable long cartId,@PathVariable long sid,@RequestBody Reopen in){return service.reopen(cartId,sid,in.note());}
+ @PostMapping("/{cartId}/lines/{lineId}/link") public Cart link(@PathVariable long cartId,@PathVariable long lineId,@RequestBody LinkRequest in){return service.merchantLink(cartId,lineId,in);}
+ @DeleteMapping("/{cartId}/lines/{lineId}/link") public Cart unlink(@PathVariable long cartId,@PathVariable long lineId,@RequestParam long expectedVersion){return service.merchantUnlink(cartId,lineId,expectedVersion);}
 }
