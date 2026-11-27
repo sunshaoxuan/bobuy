@@ -67,3 +67,8 @@ it('feature flag replaces the legacy hint and blocks an unverified checkout with
  vi.stubEnv('VITE_CHECKOUT_EMAIL_VERIFICATION_ENABLED','true');
  try{render(tree());await screen.findByText('Verify your email to submit this order');expect(screen.queryByText('You can submit an order for approval before verifying your email.')).not.toBeInTheDocument();expect(submit()).toBeDisabled();fireEvent.click(submit());expect(mocks.checkout).not.toHaveBeenCalled();expect(readDraft('user:7').cart.items.p).toBe(2);}finally{vi.unstubAllEnvs();}
 });
+it('counts persisted text request lines as cart contents without exposing the empty-cart CTA or product checkout',async()=>{
+ const prior=readDraft('user:7');commitDraft('user:7',prior.revision,{...emptyCart(),tripId:11});
+ mocks.liveCustomer.mockResolvedValue([{id:4,merchantId:1,version:2,openTotal:{amount:0,unpricedLineCount:1},openLines:[{id:9,productId:null,quantity:3,unitPrice:null,currency:'JPY',ready:false,settlementId:null,version:0,requestBatchId:'batch',originalRequest:'three mangoes',originalSubmission:'three mangoes',requestedName:'mangoes',requestedUnit:null,requestConstraints:null,quantityConfirmed:true,productName:{},itemNumber:null,productSpecification:{}}]}]);
+ render(tree());expect(await screen.findByText('mangoes')).toBeInTheDocument();await waitFor(()=>expect(screen.getByRole('link',{name:'Cart, 3 items'})).toBeInTheDocument());expect(screen.getByText('3 items')).toBeInTheDocument();expect(screen.queryByText('Your cart is empty')).not.toBeInTheDocument();expect(screen.queryByRole('button',{name:/^Submit order/})).not.toBeInTheDocument();
+});
