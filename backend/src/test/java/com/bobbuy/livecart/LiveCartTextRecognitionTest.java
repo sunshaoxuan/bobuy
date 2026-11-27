@@ -21,8 +21,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.mockingDetails;
+import static org.mockito.Mockito.clearInvocations;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 class LiveCartTextRecognitionTest {
@@ -32,15 +33,14 @@ class LiveCartTextRecognitionTest {
 
  @Test void unavailableProviderReturnsBusinessErrorBeforeAnyWrite() {
   when(db.sql(any()).params(any(Object[].class)).query(any(org.springframework.jdbc.core.RowMapper.class)).optional()).thenReturn(Optional.empty());
+  clearInvocations(db);
   when(llm.generate(any(),any(),any())).thenReturn(Optional.empty());
   var input=new LiveCartModels.TextRequest(UUID.randomUUID(),41,0,"无糖豆浆两箱，草莓一盒",true);
 
   assertThatThrownBy(()->service.addTextRequests(input,customer()))
       .isInstanceOf(LiveCartException.class).hasMessage("CART_REQUEST_RECOGNITION_FAILED");
   verify(db).sql("select id,input_hash,cart_id from bb_live_cart_request_batch where customer_id=? and merchant_id=? and operation_id=?");
-  assertThat(mockingDetails(db).getInvocations()).allSatisfy(call -> {
-   if(call.getMethod().getName().equals("sql"))assertThat((String)call.getArgument(0)).startsWith("select ");
-  });
+  verifyNoMoreInteractions(db);
  }
 
  @Test void incompleteCoverageIsRejectedRatherThanFallingBack() {
