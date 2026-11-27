@@ -1788,4 +1788,5 @@ Object.assign(messages,{
 
 Object.assign(messages, {"categoryTree.primary":'主分类'});
 
+Object.assign(messages,{"purchase.recognition_failed": '识别暂时不可用或结果不完整。草稿已保留；请重试，或按原文加入。'});
 Object.assign(messages,{"purchase.customer_only": "登录顾客后可添加文字请购", "purchase.choose_merchant": "请先明确选择商户，再添加请购。", "purchase.title": "添加请购", "purchase.hint": "可键入、粘贴或使用系统听写。", "purchase.example": "例如：无糖豆浆两箱，草莓一盒", "purchase.original": "原始需求", "purchase.recognize": "识别并加入", "purchase.as_written": "按原文加入", "purchase.undo": "撤销本批", "purchase.added": "本次请购已加入", "purchase.linked": "已关联商品", "purchase.pending": "待采购员确认", "purchase.full_submission": "查看整段提交原文", "purchase.quantity_uncertain": "数量或单位待确认，已保留原文", "purchase.price_pending": "价格待确认", "purchase.quantity": "请购数量", "purchase.replace": "更换商品", "purchase.link": "关联商品", "purchase.unlink": "取消关联", "purchase.excluded": "价格待确认，不计入合计", "purchase.refresh": "请刷新后重试", "purchase.search_placeholder": "搜索商品名称、目录编号或规格", "purchase.search_failed": "商品搜索失败，请重试", "purchase.no_candidates": "没有可加购候选", "purchase.choose": "选择", "purchase.cancel": "取消"});

@@ -770,6 +770,7 @@ type ApiResponse<T> = {
 type ApiErrorResponse = {
     status: 'error';
     errorCode?: string;
+    code?: string;
     message?: string;
     conditions?: PublicationCondition[];
 };
@@ -928,6 +929,7 @@ async function parseErrorMessage(response: Response): Promise<string> {
             if(payload.message.startsWith('onboarding.')||payload.message.startsWith('master.'))return translate(getStoredLocale(),payload.message);
             return payload.message;
         }
+        if(payload?.code==='CART_REQUEST_RECOGNITION_FAILED')return translate(getStoredLocale(),'purchase.recognition_failed');
     } catch {
         if (response.status === 503) {
             return translate(getStoredLocale(), 'maintenance.title');
