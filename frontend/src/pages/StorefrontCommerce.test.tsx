@@ -4,8 +4,8 @@ import{I18nProvider}from'../i18n';
 import{cartStorageKey,commitDraft,emptyCart,readDraft}from'../cart';
 import{installCartLocks}from'../test/cartLock';
 import Storefront from'./Storefront';
-const mocks=vi.hoisted(()=>({checkout:vi.fn(),profile:vi.fn(),saveProfile:vi.fn(),productSales:vi.fn(),trips:vi.fn(),activeTrips:vi.fn(),role:{user:{id:7,name:'A',email:'a@example.com',emailVerified:false,roles:['CUSTOMER']},isCustomer:true,isAuthenticated:true,loading:false,logout:vi.fn()}}));
-vi.mock('../api',()=>({api:{customerTrips:vi.fn()},recommendationApi:{nodes:vi.fn().mockResolvedValue([])},storefrontApi:mocks}));
+const mocks=vi.hoisted(()=>({checkout:vi.fn(),profile:vi.fn(),saveProfile:vi.fn(),productSales:vi.fn(),trips:vi.fn(),activeTrips:vi.fn(),liveCustomer:vi.fn(),role:{user:{id:7,name:'A',email:'a@example.com',emailVerified:false,roles:['CUSTOMER']},isCustomer:true,isAuthenticated:true,loading:false,logout:vi.fn()}}));
+vi.mock('../api',()=>({api:{customerTrips:vi.fn()},recommendationApi:{nodes:vi.fn().mockResolvedValue([])},storefrontApi:mocks,liveCartApi:{customer:mocks.liveCustomer}}));
 vi.mock('../context/UserRoleContext',()=>({useUserRole:()=>mocks.role}));
 // Same narrow Select adapter as StorefrontContext: JSDOM cannot parse AntD's selector.
 // Address Form, buttons, Storefront/cart hooks and all checkout assertions remain real.
@@ -17,6 +17,7 @@ function tree(){return<I18nProvider><MemoryRouter initialEntries={['/checkout']}
 const submit=()=>screen.getByRole('button',{name:/^Submit order/});
 beforeEach(()=>{vi.resetAllMocks();localStorage.clear();installCartLocks();localStorage.setItem('bobbuy_locale','en-US');mocks.role.user={id:7,name:'A',email:'a@example.com',emailVerified:false,roles:['CUSTOMER']};mocks.role.loading=false;mocks.role.isAuthenticated=true;
  mocks.trips.mockResolvedValue([{id:11,merchantId:1,merchantName:'Shop',deliveryArea:'Area',deliveryDate:'2026-11-10'}]);mocks.activeTrips.mockResolvedValue([]);mocks.productSales.mockResolvedValue([product]);mocks.profile.mockImplementation(async()=>({id:mocks.role.user.id,defaultAddress:address}));mocks.saveProfile.mockImplementation(async(body)=>({id:mocks.role.user.id,defaultAddress:body.defaultAddress}));seed();
+ mocks.liveCustomer.mockResolvedValue([]);
 });
 it('synchronously blocks double submit and retries an uncertain result with the identical key and payload',async()=>{
  let reject!:(error:Error)=>void;mocks.checkout.mockImplementationOnce(()=>new Promise((_ok,no)=>{reject=no;})).mockResolvedValue({orderId:99,total:24,currency:'JPY'});
