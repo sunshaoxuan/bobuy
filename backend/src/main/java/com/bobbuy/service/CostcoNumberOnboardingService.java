@@ -43,6 +43,9 @@ public final class CostcoNumberOnboardingService {
         CostcoOnboardingDecision review(Stage stage, CostcoOnboardingJob job);
     }
     public interface ExecutionGuard { void check(CostcoOnboardingJob job); }
+    public interface EvidenceAcquisitionClassifier {
+        CostcoOfficialEvidenceFetcher.Acquisition classify(CostcoOnboardingJob job);
+    }
     public record CommitReceipt(String idempotencyKey, String candidateHash, String productId,
             long productVersion, boolean reopenedAndMatched) {}
     /** Implement via ProductCatalogService + existing media lease/outbox. Save and reopen atomically/idempotently. */
@@ -56,14 +59,22 @@ public final class CostcoNumberOnboardingService {
     private final CatalogCommitter catalog;
     private final Clock clock;
     private final ExecutionGuard guard;
+    private final EvidenceAcquisitionClassifier acquisitionClassifier;
     public CostcoNumberOnboardingService(CostcoOnboardingJobRepository jobs, CostcoOfficialEvidenceFetcher fetcher,
             StageReviewer reviewer, CatalogCommitter catalog, Clock clock) {
-        this(jobs,fetcher,reviewer,catalog,clock,job->{});
+        this(jobs,fetcher,reviewer,catalog,clock,job->{},job -> CostcoOfficialEvidenceFetcher.Acquisition.FULL);
     }
     public CostcoNumberOnboardingService(CostcoOnboardingJobRepository jobs, CostcoOfficialEvidenceFetcher fetcher,
             StageReviewer reviewer, CatalogCommitter catalog, Clock clock,ExecutionGuard guard) {
+        this(jobs, fetcher, reviewer, catalog, clock, guard,
+                job -> CostcoOfficialEvidenceFetcher.Acquisition.FULL);
+    }
+    public CostcoNumberOnboardingService(CostcoOnboardingJobRepository jobs, CostcoOfficialEvidenceFetcher fetcher,
+            StageReviewer reviewer, CatalogCommitter catalog, Clock clock, ExecutionGuard guard,
+            EvidenceAcquisitionClassifier acquisitionClassifier) {
         this.jobs = Objects.requireNonNull(jobs); this.fetcher = Objects.requireNonNull(fetcher);
         this.reviewer = Objects.requireNonNull(reviewer); this.catalog = Objects.requireNonNull(catalog); this.clock = Objects.requireNonNull(clock);this.guard=Objects.requireNonNull(guard);
+        this.acquisitionClassifier = Objects.requireNonNull(acquisitionClassifier);
     }
     public CostcoOnboardingJob enqueue(Input input) {
         // Number and photo share all downstream stages; only intake identity differs.
@@ -98,7 +109,9 @@ public final class CostcoNumberOnboardingService {
                 return move(job, NEEDS_INPUT, job.itemNumber(), job.evidence(), job.decisions(), null, null, "onboarding.item_mismatch");
             job = move(job, EVIDENCE_FETCH, item, job.evidence(), job.decisions(), null, null, null);
             guard.check(job);
-            var evidence = List.copyOf(fetcher.fetch(new CostcoOfficialEvidenceFetcher.Query(merchantId, job.supplierId(), job.market(), item, job.privatePhotoSha256(), job.inputHash())));
+            var acquisition = Objects.requireNonNull(acquisitionClassifier.classify(job));
+            var evidence = List.copyOf(fetcher.fetch(new CostcoOfficialEvidenceFetcher.Query(merchantId,
+                    job.supplierId(), job.market(), item, job.privatePhotoSha256(), job.inputHash(), acquisition)));
             if (evidence.isEmpty()) return move(job, NEEDS_INPUT, item, evidence, job.decisions(), null, null, "onboarding.evidence_missing");
             if (evidence.size() > 32 || evidence.stream().map(CostcoOfficialEvidence::id).distinct().count() != evidence.size())
                 throw new IllegalStateException("onboarding.evidence_protocol");
@@ -106,7 +119,10 @@ public final class CostcoNumberOnboardingService {
                 throw new IllegalStateException("onboarding.evidence_stale");
             job = move(job, AI_REVIEW, item, evidence, job.decisions(), null, null, null);
             Candidate candidate = null;
-            for (var stage : List.of(Stage.IDENTITY, Stage.FACTS, Stage.IMAGE_SOURCE, Stage.ADMISSION)) {
+            var reviewStages = acquisition == CostcoOfficialEvidenceFetcher.Acquisition.TEXT_ONLY
+                    ? List.of(Stage.IDENTITY, Stage.FACTS, Stage.ADMISSION)
+                    : List.of(Stage.IDENTITY, Stage.FACTS, Stage.IMAGE_SOURCE, Stage.ADMISSION);
+            for (var stage : reviewStages) {
                 var decision = review(stage, job); job = append(job, decision);
                 if (decision.verdict() != Verdict.ACCEPT) return stop(job, decision);
                 if (stage == Stage.ADMISSION) candidate = decision.candidate();
@@ -193,9 +209,11 @@ public final class CostcoNumberOnboardingService {
     public static String candidateHash(Candidate c) {
         var translations = c.translatedNames().entrySet().stream().sorted(java.util.Map.Entry.comparingByKey())
                 .map(e -> encode(e.getKey(), e.getValue())).collect(Collectors.joining());
+        var specifications=c.translatedSpecifications().entrySet().stream().sorted(java.util.Map.Entry.comparingByKey()).map(e->encode(e.getKey(),e.getValue())).collect(Collectors.joining());
+        var descriptions=c.translatedDescriptions().entrySet().stream().sorted(java.util.Map.Entry.comparingByKey()).map(e->encode(e.getKey(),e.getValue())).collect(Collectors.joining());
         var prices=c.referencePrices().stream().map(q->encode(q.kind(),q.amount().stripTrailingZeros().toPlainString(),q.currency(),q.channel(),q.taxStatus(),q.quantityBasis(),q.validFrom(),q.validUntil(),q.timeZone(),q.conditions(),q.sourceUrl().toString(),q.sourceSha256())).sorted().collect(Collectors.joining());
         var target=c.target()==null?null:encode(c.target().productId(),Long.toString(c.target().version()),c.target().sourceHash());
-        return hash(encode(c.itemNumber(), c.brand(), c.name(), c.model(), c.specification(), c.packaging(), c.officialImageSha256(), translations,prices,target));
+        return hash(encode(c.itemNumber(), c.brand(), c.name(), c.model(), c.specification(), c.packaging(), c.officialImageSha256(), translations,specifications,descriptions,prices,target));
     }
     private static String encode(String... values) {
         var out = new StringBuilder(); for (var v : values) out.append(v == null ? "-1:" : v.length() + ":" + v); return out.toString();

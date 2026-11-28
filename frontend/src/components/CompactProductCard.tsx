@@ -15,8 +15,9 @@ export function referenceForCard(facts:RecommendationFacts&{id:number;currency?:
 }
 
 /** One public product-card hierarchy; source facts and conditions stay in detail. */
-export default function CompactProductCard({name,originalName,language,brand,itemNumber,image,productId,rating,quote,reference,pending=false,eager=false,eagerRating=false,heading=2,occurrenceKey,onOpen,overlay,actions}:{
+export default function CompactProductCard({name,originalName,language,brand,itemNumber,image,imagePending=false,productId,rating,quote,reference,pending=false,eager=false,eagerRating=false,heading=2,occurrenceKey,onOpen,overlay,actions}:{
  name:string;originalName?:string;language?:string;brand?:string|null;itemNumber?:string|null;image?:string|null;
+ imagePending?:boolean;
  productId?:string|null;rating?:number|null;quote?:StoreProduct;reference?:CardReference|null;
  pending?:boolean;eager?:boolean;eagerRating?:boolean;heading?:2|3;occurrenceKey?:string;
  onOpen:(trigger:HTMLButtonElement)=>void;overlay?:ReactNode;actions?:ReactNode;
@@ -38,7 +39,7 @@ export default function CompactProductCard({name,originalName,language,brand,ite
   </div>
   <div className="product-tile">
    <button type="button" className="product-photo" data-detail-trigger="photo" aria-label={t('store.detail_label',{name})} onClick={event=>open(event.currentTarget)}>
-    {image?<img src={image} alt={name} loading={eager?'eager':'lazy'} onError={event=>{event.currentTarget.style.display='none';}}/>:<span className="rec-no-product-image">{t('gallery.pending')}</span>}
+    {image?<img src={image} alt={name} loading={eager?'eager':'lazy'} onError={event=>{event.currentTarget.style.display='none';}}/>:<span className="rec-no-product-image">{t(imagePending?'quickPublish.storefrontImagePending':'gallery.pending')}</span>}
    </button>
    {overlay}
    <div className="product-body"><div className="compact-card-brand"><ProductBrand brand={brand}/></div><button type="button" className="product-name" data-detail-trigger="name" onClick={event=>open(event.currentTarget)}><Heading lang={language} title={name}>{name||t('rec.not_stated')}</Heading>{locale!=='ja-JP'&&<small className="compact-card-native-name" lang="ja" title={nativeName}>{nativeName?`（${nativeName}）`:'\u00a0'}</small>}</button></div>

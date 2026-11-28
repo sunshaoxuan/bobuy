@@ -1,6 +1,7 @@
 import ProductPhotoHistory from './ProductPhotoHistory';
 import CatalogFileTransfer from './CatalogFileTransfer';
 import ProductReviewEditor from './ProductRating';
+import PhotoQuickPublishModal from './PhotoQuickPublishModal';
 import {useEffect,useRef,useState,useMemo} from 'react';
 import {Alert,Button,Checkbox,Drawer,Input,Select,Table,Tabs,Grid,Modal,Segmented,Tag,type InputRef} from 'antd';
 import {categoryTreeApi,productCatalogApi,recommendationTaxonomyApi,type CatalogInput,type CatalogMedia,type CatalogProposal,type RecommendationChoice,type CategoryTreeNode} from '../api';
@@ -13,7 +14,7 @@ import {IMAGE_UPLOAD_ACCEPT,copyFileList,imageUploadSha256,prepareCatalogImageUp
 import {getStoredAccessToken,getStoredUser,getTestInjectedRole,getTestInjectedUser,subscribeToAuthChanges} from '../authStorage';
 
 const languages=[{key:'ja-JP',label:'日本語'},{key:'zh-CN',label:'简体中文'},{key:'zh-TW',label:'繁體中文'},{key:'en-US',label:'English'}];
-type PanelProps={entries:{key:string;name:string}[];searchEntries?:(query:string,signal:AbortSignal)=>Promise<{key:string;name:string}[]>;getExportIds?:()=>Promise<{ids:string[];limitExceeded:boolean}>;id?:string;onChoose:(id?:string)=>void;onSaved:(rows:CatalogInput[],canonical?:boolean)=>void};
+type PanelProps={entries:{key:string;name:string}[];searchEntries?:(query:string,signal:AbortSignal)=>Promise<{key:string;name:string}[]>;getExportIds?:()=>Promise<{ids:string[];limitExceeded:boolean}>;quickPublishMerchantSubject?:string|number;id?:string;onChoose:(id?:string)=>void;onSaved:(rows:CatalogInput[],canonical?:boolean)=>void};
 type UploadRow={key:number;name:string;status:'waiting'|'uploading'|'success'|'failed';sha256?:string;asset?:CatalogMedia;error?:string;reused?:boolean};
 function CatalogPickedPreview({file}:{file:File}){
  const canvas=useRef<HTMLCanvasElement>(null);
@@ -42,7 +43,7 @@ export default function ProductCatalogPanel(props:PanelProps){
  useEffect(()=>subscribeToAuthChanges(()=>{const next=uploadIdentity();if(next!==scope.current.identity)scope.current={...scope.current,identity:next,generation:scope.current.generation+1};refreshAuth(n=>n+1);}),[]);
  return <CatalogEditor key={expected.generation} {...props} currentScope={currentScope} onSaved={(rows,canonical)=>{if(currentScope())props.onSaved(rows,canonical);}}/>;
 }
-function CatalogEditor({entries,id,onChoose,onSaved,searchEntries,getExportIds,currentScope}:PanelProps&{currentScope:()=>boolean}){
+function CatalogEditor({entries,id,onChoose,onSaved,searchEntries,getExportIds,quickPublishMerchantSubject,currentScope}:PanelProps&{currentScope:()=>boolean}){
  const {t,locale}=useI18n();const [draft,setDraft]=useState<CatalogInput>(),[busy,setBusy]=useState(false),[error,setError]=useState(''),[reviewed,setReviewed]=useState(false),[canonical,setCanonical]=useState(false);
  const [lookup,setLookup]=useState(''),[matches,setMatches]=useState<{key:string;name:string}[]>(),[lookupFailed,setLookupFailed]=useState(false);
  useEffect(()=>{
@@ -139,7 +140,7 @@ useEffect(()=>{if(!id)return;let active=true;const current=beginOperation();setB
  const hasUnsavedUpload=uploads.some(row=>row.asset&&draft?.gallery.some(p=>sameAsset(p,row.asset!))&&!savedGallery.current.some(p=>sameAsset(p,row.asset!)));
  const uploadNextStep=!pendingFiles.length?'master.upload_select':!validCatalogImageSource(uploadSource)?'master.upload_source_required':!imageReviewed?'master.upload_verify':uploadPending.current?'master.upload_in_progress':'master.upload_ready';
  return <section className="product-catalog-panel"><details className="catalog-utility-disclosure" open={!narrow}><summary><div className="catalog-utility-heading"><span className="catalog-utility-icon"><PictureOutlined/></span><div><h2>{t('master.title')}</h2><p>{t('master.hint')}</p></div></div></summary>
-  <div className="product-catalog-actions"><Select aria-label={t('master.choose')} showSearch optionFilterProp="label" filterOption={searchEntries?false:undefined} onSearch={searchEntries?setLookup:undefined} notFoundContent={lookupFailed?t('products.archive_failed'):undefined} value={id} placeholder={t('master.choose')} onChange={onChoose} options={(searchEntries&&lookup.trim()?(matches??[]):entries).map(row=>({value:row.key,label:row.name}))}/><Button onClick={()=>{setBulk(true);setError('');setReviewed(false);}}>{t('master.bulk')}</Button></div></details>
+  <div className="product-catalog-actions"><Select aria-label={t('master.choose')} showSearch optionFilterProp="label" filterOption={searchEntries?false:undefined} onSearch={searchEntries?setLookup:undefined} notFoundContent={lookupFailed?t('products.archive_failed'):undefined} value={id} placeholder={t('master.choose')} onChange={onChoose} options={(searchEntries&&lookup.trim()?(matches??[]):entries).map(row=>({value:row.key,label:row.name}))}/>{quickPublishMerchantSubject!==undefined&&<PhotoQuickPublishModal merchantSubject={quickPublishMerchantSubject}/>}<Button onClick={()=>{setBulk(true);setError('');setReviewed(false);}}>{t('master.bulk')}</Button></div></details>
   <Drawer rootClassName={'catalog-editor'+(narrow?' catalog-editor-sheet':'')} title={t('master.title')} placement={narrow?'bottom':'right'} height={narrow?sheetHeight:undefined} width={narrow?undefined:1120} open={!!id} onClose={closeEditor} destroyOnClose footer={draft?<div className="catalog-review-bar"><Checkbox disabled={busy} checked={reviewed} onChange={e=>setReviewed(e.target.checked)}>{t('master.review')}</Checkbox><Button type="primary" loading={busy} disabled={!reviewed||busy} onClick={()=>void saveOne()}>{t('master.save')}</Button>{recoveryId&&<Button disabled={busy||dirty} onClick={()=>setRestoreOpen(true)}>{t('master.restore')}</Button>}</div>:null}>
    {error&&!draft&&<Alert type="error" message={warning(error)}/>}<div className="catalog-state-strip"><CheckCircleOutlined/>{t(canonical?'master.active':'master.not_adopted')}</div>
    {draft&&<fieldset className="product-catalog-form" disabled={busy}>

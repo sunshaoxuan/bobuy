@@ -8,9 +8,18 @@ import java.util.List;
  * No session cookies, captcha bypass, private addresses or credentials from model output.
  */
 public interface CostcoOfficialEvidenceFetcher {
-    record Query(long merchantId, String supplierId, String market, String itemNumber, String privatePhotoSha256, String inputHash) {
+    enum Acquisition { FULL, TEXT_ONLY, EXACT_OFFICIAL_IMAGE }
+
+    record Query(long merchantId, String supplierId, String market, String itemNumber, String privatePhotoSha256,
+            String inputHash, Acquisition acquisition) {
+        public Query {
+            acquisition = acquisition == null ? Acquisition.FULL : acquisition;
+        }
+        public Query(long merchantId, String supplierId, String market, String itemNumber, String privatePhotoSha256, String inputHash) {
+            this(merchantId, supplierId, market, itemNumber, privatePhotoSha256, inputHash, Acquisition.FULL);
+        }
         public Query(long merchantId, String supplierId, String market, String itemNumber, String privatePhotoSha256) {
-            this(merchantId, supplierId, market, itemNumber, privatePhotoSha256, null);
+            this(merchantId, supplierId, market, itemNumber, privatePhotoSha256, null, Acquisition.FULL);
         }
     }
     List<CostcoOfficialEvidence> fetch(Query query);

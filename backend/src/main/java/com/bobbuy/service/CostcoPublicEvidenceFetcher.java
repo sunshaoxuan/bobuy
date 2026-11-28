@@ -70,6 +70,8 @@ public final class CostcoPublicEvidenceFetcher implements CostcoOfficialEvidence
           int before=result.size();var sources=plan.sources().stream().sorted(Comparator.comparing(CostcoEvidenceAcquisitionPlanner.Source::kind)
                   .thenComparing(CostcoEvidenceAcquisitionPlanner.Source::priority)).toList();
           for(var source:sources) {
+            if (query.acquisition() == CostcoOfficialEvidenceFetcher.Acquisition.TEXT_ONLY
+                    && source.kind() == IMAGE) continue;
             checkDeadline(deadline);String parentHash=null;
             String sourceKey=source.kind()+"|"+source.canonicalUrl()+"|"+source.fetchUrl();if(fetchedSources.contains(sourceKey))continue;
             if(fetchedSources.size()>=12)throw new IllegalStateException("onboarding.evidence_source_budget");

@@ -37,14 +37,18 @@ public record CostcoOnboardingDecision(Stage stage, Verdict verdict, String prov
     public record Candidate(String itemNumber, String brand, String name, String model,
             String specification, String packaging, String officialImageSha256,
             Map<String, String> translatedNames, List<String> unknownFields, List<ReferencePrice> referencePrices,Target target,PhotoFacts photoFacts,
-            @JsonInclude(JsonInclude.Include.NON_NULL) ArchiveDetails archiveDetails) {
-        public Candidate(String itemNumber,String brand,String name,String model,String specification,String packaging,String officialImageSha256,Map<String,String> translatedNames,List<String> unknownFields,List<ReferencePrice> referencePrices,Target target,PhotoFacts photoFacts){this(itemNumber,brand,name,model,specification,packaging,officialImageSha256,translatedNames,unknownFields,referencePrices,target,photoFacts,null);}
-        public Candidate(String itemNumber,String brand,String name,String model,String specification,String packaging,String officialImageSha256,Map<String,String> translatedNames,List<String> unknownFields,List<ReferencePrice> referencePrices,Target target){this(itemNumber,brand,name,model,specification,packaging,officialImageSha256,translatedNames,unknownFields,referencePrices,target,null);}
+            @JsonInclude(JsonInclude.Include.NON_NULL) ArchiveDetails archiveDetails,
+            @JsonInclude(JsonInclude.Include.NON_EMPTY) Map<String,String> translatedSpecifications,
+            @JsonInclude(JsonInclude.Include.NON_EMPTY) Map<String,String> translatedDescriptions) {
+        public Candidate(String itemNumber,String brand,String name,String model,String specification,String packaging,String officialImageSha256,Map<String,String> translatedNames,List<String> unknownFields,List<ReferencePrice> referencePrices,Target target,PhotoFacts photoFacts){this(itemNumber,brand,name,model,specification,packaging,officialImageSha256,translatedNames,unknownFields,referencePrices,target,photoFacts,null,Map.of(),Map.of());}
+        public Candidate(String itemNumber,String brand,String name,String model,String specification,String packaging,String officialImageSha256,Map<String,String> translatedNames,List<String> unknownFields,List<ReferencePrice> referencePrices,Target target){this(itemNumber,brand,name,model,specification,packaging,officialImageSha256,translatedNames,unknownFields,referencePrices,target,null,null,Map.of(),Map.of());}
         public Candidate {
             translatedNames = Map.copyOf(translatedNames); unknownFields = List.copyOf(unknownFields);referencePrices=referencePrices==null?List.of():List.copyOf(referencePrices);
+            translatedSpecifications=translatedSpecifications==null?Map.of():Map.copyOf(translatedSpecifications);
+            translatedDescriptions=translatedDescriptions==null?Map.of():Map.copyOf(translatedDescriptions);
         }
-        public Candidate(String itemNumber,String brand,String name,String model,String specification,String packaging,String officialImageSha256,Map<String,String> translatedNames,List<String> unknownFields){this(itemNumber,brand,name,model,specification,packaging,officialImageSha256,translatedNames,unknownFields,List.of(),null);}
-        public Candidate(String itemNumber,String brand,String name,String model,String specification,String packaging,String officialImageSha256,Map<String,String> translatedNames,List<String> unknownFields,List<ReferencePrice> referencePrices){this(itemNumber,brand,name,model,specification,packaging,officialImageSha256,translatedNames,unknownFields,referencePrices,null);}
+        public Candidate(String itemNumber,String brand,String name,String model,String specification,String packaging,String officialImageSha256,Map<String,String> translatedNames,List<String> unknownFields){this(itemNumber,brand,name,model,specification,packaging,officialImageSha256,translatedNames,unknownFields,List.of(),null,null,null,Map.of(),Map.of());}
+        public Candidate(String itemNumber,String brand,String name,String model,String specification,String packaging,String officialImageSha256,Map<String,String> translatedNames,List<String> unknownFields,List<ReferencePrice> referencePrices){this(itemNumber,brand,name,model,specification,packaging,officialImageSha256,translatedNames,unknownFields,referencePrices,null,null,null,Map.of(),Map.of());}
     }
     public record ArchiveDetails(String descriptionJa,String categoryNodeId,StorageCondition storageCondition) {}
     /** Suggestions from original private pixels, never an approved selling price or stock count. */

@@ -199,6 +199,19 @@ export const photoIntakeApi={
  photo:async(id:string)=>{const r=await authorizedFetch('/api/product-photo-intake/'+encodeURIComponent(id)+'/photo');if(!r.ok)throw Error(await parseErrorMessage(r));return r.blob();}
 };
 
+export type QuickPublishItem={id:string;requestKey:string;jobId:string;state:string;productId:string|null;issueCode:string|null;revision:number;imageState:string|null;candidateImageUrl:string|null;sourcePage:string|null;matchBasis:string|null};
+export type QuickPublishBatch={id:string;supplierId:string;market:string;state:string;total:number;processing:number;published:number;needsInformation:number;failed:number;excluded:number;items:QuickPublishItem[]};
+export const photoQuickPublishApi={
+ list:()=>storeGet<QuickPublishBatch[]>('/api/photo-quick-publish'),
+ create:(input:{requestKey:string;supplierId:string;market:string})=>postJson<QuickPublishBatch,typeof input>('/api/photo-quick-publish',input),
+ get:(id:string)=>storeGet<QuickPublishBatch>('/api/photo-quick-publish/'+encodeURIComponent(id)),
+ seal:(id:string)=>postJson<QuickPublishBatch,object>('/api/photo-quick-publish/'+encodeURIComponent(id)+'/seal',{}),
+ add:async(id:string,requestKey:string,files:File[])=>{const body=new FormData();body.append('requestKey',requestKey);files.forEach(file=>body.append('files',file));const response=await authorizedFetch('/api/photo-quick-publish/'+encodeURIComponent(id)+'/items',{method:'POST',body});if(!response.ok)throw Error(await parseErrorMessage(response));return parseSuccessPayload<QuickPublishBatch>(response);},
+ exclude:(batch:string,item:string,revision:number)=>postJson<QuickPublishBatch,object>(`/api/photo-quick-publish/${encodeURIComponent(batch)}/items/${encodeURIComponent(item)}/exclude?revision=${revision}`,{}),
+ supplement:async(batch:string,item:string,revision:number,file:File)=>{const body=new FormData();body.append('revision',String(revision));body.append('file',file);const response=await authorizedFetch(`/api/photo-quick-publish/${encodeURIComponent(batch)}/items/${encodeURIComponent(item)}/supplement`,{method:'POST',body});if(!response.ok)throw Error(await parseErrorMessage(response));return parseSuccessPayload<QuickPublishBatch>(response);},
+ retryImage:(batch:string,item:string,revision:number)=>postJson<QuickPublishBatch,object>(`/api/photo-quick-publish/${encodeURIComponent(batch)}/items/${encodeURIComponent(item)}/image-retry?revision=${revision}`,{})
+};
+
 export type MobileProductResponse = {
         categoryPath?:string;
         currentRegular?:ProductSale|null;
@@ -1644,6 +1657,8 @@ export type PublicCatalogEntry = {cartEnabled?:boolean;rating?:number|null;intro
     brand:string|null; itemNumber:string|null; specification:Record<string,string>; model:string|null; packaging:string|null;
     gallery:RecommendationPicture[]; categories:RecommendationLabel[];
     referenceOffers:{postId:number;facts:RecommendationItem}[]; reviewedMaster:boolean;
+    /** Optional public projection marker for a newly quick-published product awaiting its first approved image. */
+    rapidListingImagePending?:boolean;
 };
 export type PublicCatalogPage = {items:PublicCatalogEntry[];page:number;size:number;total:number;hasNext:boolean};
 export type MerchantCustomer = { customerId: number; name: string; emailVerified: boolean; merchantApproved: boolean; approvedAt?: string };

@@ -24,7 +24,7 @@ import static com.bobbuy.service.CostcoOnboardingDecision.*;
 /** The semantic decision is a real pinned-model result. This adapter only enforces protocol/provenance. */
 @Component
 public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingService.StageReviewer {
-    static final String POLICY = "costco-onboarding-20261109.2";
+    static final String POLICY = "costco-onboarding-20261128.1";
     private final LlmGateway gateway;
     private final ObjectMapper mapper;
     private final CostcoEvidenceStore evidenceStore;
@@ -65,6 +65,7 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
             var imageHashes = new LinkedHashMap<String, String>();
             var reviewedPhotoImages = new java.util.HashSet<String>();
             boolean photoAdmission=stage==Stage.ADMISSION && job.privatePhotoSha256()!=null;
+            boolean rapidTextOnlyAdmission=isRapidTextOnlyAdmission(stage,job);
             if (photoAdmission) {
                 for (var decision : job.decisions()) {
                     if (decision.stage()==Stage.IMAGE_SOURCE && decision.verdict()==Verdict.ACCEPT && decision.trace()!=null)
@@ -118,8 +119,11 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
                 Return one JSON object with EXACT keys verdict,reason,identifiedItemNumber,candidate. verdict is
                 ACCEPT|NEEDS_EVIDENCE|AMBIGUOUS|REJECT; reason is concise; identifiedItemNumber is a string or null.
                 candidate may be null except an ADMISSION ACCEPT needs an object with EXACT keys:
-                itemNumber,brand,name,model,specification,packaging,officialImageSha256,translatedNames,unknownFields,referencePrices,target.
+                itemNumber,brand,name,model,specification,packaging,officialImageSha256,translatedNames,translatedSpecifications,translatedDescriptions,unknownFields,referencePrices,target.
                 translatedNames is a map using only zh-CN,zh-TW,ja-JP,en-US; unknownFields is an array of missing fact names.
+                For photo ADMISSION, translatedSpecifications and translatedDescriptions must use those same four locales,
+                describe one verified variant, and preserve every quantity, unit and model consistently. Leave them empty
+                when the underlying specification or description is not source-backed; never fill them from generic knowledge.
                 target is null for a new archive candidate; an existing archive update requires an explicit target object
                 productId,version,sourceHash copied exactly from existingArchiveCandidates ONLY after judging same product,
                 market, model and packaging semantically. Never select the first match or invent an existing master.
@@ -171,6 +175,14 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
                 stock, publication, or reuse permission. The first ADMISSION image is the original private
                 photo; use it to check the observed tag. Only the separate reviewed official image may be
                 selected as the officialImageSha256. Report uncertainty instead of inventing details.
+                """ : "") + (rapidTextOnlyAdmission ? """
+                RAPID TEXT-ONLY ADMISSION: This private-photo job intentionally has no separately supplied official
+                product image. That absence is expected and has no bearing on ADMISSION; do not request image evidence
+                or reject admission because official pixels are unavailable. Audit only the evidence-backed identity,
+                verified official text, category selection, and the four locales. Keep unsupported optional values
+                unknown. The private supplier photo is private evidence only, never an official product image, and the
+                candidate officialImageSha256 must be null.
+                The server carries forward the archive classification from the accepted FACTS decision.
                 """ : "") + (photoDetails ? """
                 candidate may additionally contain archiveDetails with keys descriptionJa, categoryNodeId, storageCondition.
                 Write a short Japanese description containing only attributes visible in the photo at INTAKE or explicitly
@@ -189,18 +201,31 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
             Candidate candidate = null;
             if (json.hasNonNull("candidate")) {
                 JsonNode c = json.get("candidate");
-                var keys=new java.util.HashSet<>(Set.of("itemNumber","brand","name","model","specification","packaging","officialImageSha256","translatedNames","unknownFields","referencePrices","target","photoFacts"));
+                var keys=new java.util.HashSet<>(Set.of("itemNumber","brand","name","model","specification","packaging","officialImageSha256","translatedNames","translatedSpecifications","translatedDescriptions","unknownFields","referencePrices","target","photoFacts"));
                 if(job.privatePhotoSha256()!=null)keys.add("archiveDetails");
                 fields(c, keys);
                 for (String name : List.of("itemNumber", "brand", "name", "model", "specification", "packaging", "officialImageSha256")) nullableText(c.get(name), 2000);
                 if (!c.path("translatedNames").isObject() || !c.path("unknownFields").isArray() || !c.path("referencePrices").isArray()) throw new IllegalArgumentException("onboarding.candidate_schema");
                 c.path("translatedNames").fields().forEachRemaining(e -> { if (!Set.of("zh-CN", "zh-TW", "ja-JP", "en-US").contains(e.getKey()) || !e.getValue().isTextual() || e.getValue().asText().length() > 2000) throw new IllegalArgumentException("onboarding.translation_schema"); });
+                for(String translatedField:List.of("translatedSpecifications","translatedDescriptions")){
+                    if(!c.has(translatedField))((ObjectNode)c).putObject(translatedField);
+                    if(!c.path(translatedField).isObject())throw new IllegalArgumentException("onboarding.translation_schema");
+                    c.path(translatedField).fields().forEachRemaining(e->{if(!Set.of("zh-CN","zh-TW","ja-JP","en-US").contains(e.getKey())||!e.getValue().isTextual()||e.getValue().asText().isBlank()||e.getValue().asText().length()>8000)throw new IllegalArgumentException("onboarding.translation_schema");});
+                }
                 for (var unknown : c.path("unknownFields")) if (!unknown.isTextual() || unknown.asText().length() > 200) throw new IllegalArgumentException("onboarding.unknown_schema");
                 for (var price : c.path("referencePrices")) fields(price, Set.of("kind", "amount", "currency", "channel", "taxStatus", "quantityBasis", "validFrom", "validUntil", "timeZone", "conditions", "sourceUrl", "sourceSha256"));
                 if(c.hasNonNull("target"))fields(c.get("target"),Set.of("productId","version","sourceHash"));
                 if(c.has("archiveDetails")){
                     var fields=photoDetails?validatedArchiveDetails(c.get("archiveDetails"),categoryOptions):null;
                     ((ObjectNode)c).set("archiveDetails",mapper.valueToTree(fields));
+                }
+                if(rapidTextOnlyAdmission && verdict==Verdict.ACCEPT){
+                    var facts = job.decisions().stream()
+                            .filter(d -> d.stage()==Stage.FACTS && d.verdict()==Verdict.ACCEPT && d.candidate()!=null)
+                            .reduce((earlier,later) -> later).map(CostcoOnboardingDecision::candidate)
+                            .filter(previous -> java.util.Objects.equals(job.itemNumber(),previous.itemNumber()))
+                            .map(Candidate::archiveDetails).orElse(null);
+                    ((ObjectNode)c).set("archiveDetails",mapper.valueToTree(facts));
                 }
                 if(c.hasNonNull("photoFacts")){
                     JsonNode facts=c.get("photoFacts");
@@ -240,9 +265,11 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
             if (stage == Stage.ADMISSION && verdict == Verdict.ACCEPT) {
                 if (candidate == null) throw new IllegalArgumentException("onboarding.candidate_missing");
                 String selectedHash = candidate.officialImageSha256();
+                if (rapidTextOnlyAdmission && selectedHash != null)
+                    throw new CostcoNumberOnboardingService.NeedsInput("onboarding.official_image_unexpected");
                 boolean viewed = job.decisions().stream().filter(d -> d.stage() == Stage.IMAGE_SOURCE && d.verdict() == Verdict.ACCEPT && d.trace() != null)
                         .anyMatch(d -> d.trace().imageViewHashes().containsKey(selectedHash));
-                if (!viewed) throw new CostcoNumberOnboardingService.NeedsInput("onboarding.image_not_reviewed");
+                if (!rapidTextOnlyAdmission && !viewed) throw new CostcoNumberOnboardingService.NeedsInput("onboarding.image_not_reviewed");
             }
             return new CostcoOnboardingDecision(stage, verdict, result.provider(), result.model(), result.endpoint(), job.inputHash(),
                     job.evidence().stream().map(CostcoOfficialEvidence::sha256).toList(), POLICY, "costco-stage-json-v2", json.path("reason").asText(), item, candidate,
@@ -250,6 +277,13 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
         } catch (CostcoNumberOnboardingService.NeedsInput error) { throw error; }
         catch (LlmGateway.PinnedFailure error) { throw error; }
         catch (Exception error) { throw new IllegalStateException("onboarding.decision_schema"); }
+    }
+    private static boolean isRapidTextOnlyAdmission(Stage stage, CostcoOnboardingJob job) {
+        if (stage != Stage.ADMISSION || job.privatePhotoSha256() == null
+                || job.decisions().stream().anyMatch(d -> d.stage() == Stage.IMAGE_SOURCE)
+                || job.evidence().stream().anyMatch(e -> e.mediaType().startsWith("image/"))) return false;
+        return job.decisions().stream().anyMatch(d -> d.stage() == Stage.IDENTITY && d.verdict() == Verdict.ACCEPT)
+                && job.decisions().stream().anyMatch(d -> d.stage() == Stage.FACTS && d.verdict() == Verdict.ACCEPT);
     }
     private static boolean discardTagsWithoutRawText(ObjectNode transcription){
         var tags=(com.fasterxml.jackson.databind.node.ArrayNode)transcription.get("tags");

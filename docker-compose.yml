@@ -134,6 +134,9 @@ services:
     environment:
       <<: *codex-bridge
       BOBBUY_AI_COSTCO_WORKER_ENABLED: ${BOBBUY_AI_COSTCO_WORKER_ENABLED:-false}
+      # Core is the sole production owner of the durable rapid-photo consumers.
+      BOBBUY_PHOTO_QUICK_PUBLISH_WORKER_ENABLED: ${BOBBUY_PHOTO_QUICK_PUBLISH_WORKER_ENABLED:-true}
+      BOBBUY_OFFICIAL_IMAGE_LOOKUP_WORKER_ENABLED: ${BOBBUY_OFFICIAL_IMAGE_LOOKUP_WORKER_ENABLED:-true}
       SERVER_PORT: 8081
       SPRING_PROFILES_ACTIVE: prod
       NACOS_SERVER_ADDR: ${NACOS_SERVER_ADDR:-nacos:8848}

@@ -125,6 +125,30 @@ public class JdbcCostcoOnboardingJobRepository implements CostcoOnboardingJobRep
         return queued;
     }
 
+    /** Attach the optional packaging view before a queued job can be claimed. */
+    @Transactional
+    public CostcoOnboardingJob attachPackagingPhoto(CostcoOnboardingJob old,String hash) {
+        if(old.packagingPhotoSha256()!=null)return old;
+        var next=new CostcoOnboardingJob(old.id(),old.idempotencyKey(),old.merchantId(),old.supplierId(),old.market(),old.inputHash(),old.itemNumber(),old.privatePhotoSha256(),old.revision()+1,old.state(),old.evidence(),old.decisions(),old.productId(),old.productVersion(),old.failureCode(),Instant.now(),hash);
+        int changed=jdbc.update("update bb_costco_onboarding_job set payload=cast(? as jsonb),revision=?,updated_at=? where id=? and merchant_id=? and revision=? and state='QUEUED' and lease_token is null",json(next),next.revision(),Timestamp.from(next.updatedAt()),old.id(),old.merchantId(),old.revision());
+        if(changed!=1)throw new com.bobbuy.api.response.ApiException(com.bobbuy.api.response.ErrorCode.INVALID_STATUS,"photo.conflict");
+        return next;
+    }
+
+    /** Reopens the same durable photo job after missing packaging evidence is supplied. */
+    @Transactional
+    public CostcoOnboardingJob restartWithPackagingPhoto(CostcoOnboardingJob old, String hash) {
+        if (!java.util.Set.of(FAILED, NEEDS_INPUT).contains(old.state()) || old.packagingPhotoSha256() != null)
+            throw new com.bobbuy.api.response.ApiException(com.bobbuy.api.response.ErrorCode.INVALID_STATUS,"photo.conflict");
+        var now=Instant.now();
+        var next=new CostcoOnboardingJob(old.id(),old.idempotencyKey(),old.merchantId(),old.supplierId(),old.market(),old.inputHash(),
+                old.itemNumber(),old.privatePhotoSha256(),old.revision()+1,QUEUED,List.of(),List.of(),null,null,null,now,hash);
+        int changed=jdbc.update("update bb_costco_onboarding_job set "+ARCHIVE_ATTEMPT+"payload=cast(? as jsonb),revision=?,state='QUEUED',attempts=0,lease_token=null,lease_until=null,next_run_at=current_timestamp,updated_at=? where id=? and merchant_id=? and revision=? and state in ('FAILED','NEEDS_INPUT') and lease_token is null",
+                json(next),next.revision(),Timestamp.from(now),old.id(),old.merchantId(),old.revision());
+        if(changed!=1)throw new com.bobbuy.api.response.ApiException(com.bobbuy.api.response.ErrorCode.INVALID_STATUS,"photo.conflict");
+        return next;
+    }
+
     @Override @Transactional public boolean compareAndSet(CostcoOnboardingJob old, CostcoOnboardingJob next) {
         var lease = active.get();
         if (lease == null || !lease.job().id().equals(old.id()) || old.merchantId() != next.merchantId()
