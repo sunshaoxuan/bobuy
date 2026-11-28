@@ -39,6 +39,19 @@ class OfficialImageCandidateFinderTest {
   assertThat(OfficialImageCandidateFinder.CostcoOfficialSiteFinder.sameVariant("330 g x 6","Brand food six pack 330 g x 6")).isTrue();
  }
 
+ @Test void matchesJapanesePackAndHtmlEncodedCapacityFromExactProductFacts(){
+  String facts="Fozzi's 3本セット 【内容量】340&#xff4d;&#xff4c;/本";
+  assertThat(OfficialImageCandidateFinder.CostcoOfficialSiteFinder.sameVariant("340 mL x 3",facts)).isTrue();
+  assertThat(OfficialImageCandidateFinder.CostcoOfficialSiteFinder.sameVariant("340 mL x 2",facts)).isFalse();
+  assertThat(OfficialImageCandidateFinder.CostcoOfficialSiteFinder.sameVariant("550 mL x 3",facts)).isFalse();
+ }
+
+ @Test void identifierBoundarySeparatesBaseAndHyphenatedVariants(){
+  assertThat(OfficialImageCandidateFinder.CostcoOfficialSiteFinder.hasIdentifier("sku 57808-2", "57808-2")).isTrue();
+  assertThat(OfficialImageCandidateFinder.CostcoOfficialSiteFinder.hasIdentifier("sku 57808-2", "57808")).isFalse();
+  assertThat(OfficialImageCandidateFinder.CostcoOfficialSiteFinder.hasIdentifier("sku 57808-1", "57808-2")).isFalse();
+ }
+
  @Test void independentLookupUsesExactOfficialImageAcquisitionAndOnlyTheExactProductSection(){
   String html="""
     <script type="application/ld+json">{"@type":"Product","sku":"564513","name":"Brand food 330 g"}</script>

@@ -41,6 +41,12 @@ class CostcoPinnedStageReviewerTest {
         var gateway=new FakeGateway();var store=new Store();byte[] bytes=png();String hash=CostcoPinnedStageReviewer.digest(bytes);store.contents.put(hash,bytes);
         var reviewer=new CostcoPinnedStageReviewer(gateway,mapper,store);var intake=reviewer.review(Stage.INTAKE,job(List.of(),List.of(),hash));
         assertEquals(1,gateway.images.size());assertTrue(intake.trace().imageViewHashes().containsKey(hash));
+        assertFalse(gateway.prompt.contains("RAPID INTAKE"));
+        var rapidReviewer=new CostcoPinnedStageReviewer(gateway,mapper,store,null,null,
+                ignored -> CostcoOfficialEvidenceFetcher.Acquisition.TEXT_ONLY);
+        rapidReviewer.review(Stage.INTAKE,job(List.of(),List.of(),hash));
+        assertTrue(gateway.prompt.contains("official 商品番号 label"));
+        assertTrue(gateway.prompt.contains("independently fetched and verified official source evidence"));
         var image=new CostcoOfficialEvidence("image",PAGE,URI.create("https://images.costco.co.jp/item.png"),hash,Instant.parse("2026-11-09T01:00:00Z"),"image/png",4,4,List.of());
         var decision=reviewer.review(Stage.IMAGE_SOURCE,job(List.of(document(store),image),List.of(),null));assertEquals(1,gateway.images.size());assertTrue(decision.trace().imageViewHashes().containsKey(hash));
     }
@@ -288,6 +294,18 @@ class CostcoPinnedStageReviewerTest {
         assertEquals(Map.of("保存方法（温度）","-18 ℃"),section.get("specifications"));
         assertTrue(CostcoPinnedStageReviewer.costcoProductSection(html.replace("00123","00456"),receipt,"00123",mapper).isEmpty());
         assertTrue(CostcoPinnedStageReviewer.costcoProductSection("<title>Costco</title>",receipt,"00123",mapper).isEmpty());
+    }
+    @Test void requestedHyphenatedCostcoFixtureBindsCanonicalPathAndExactStructuredSku() throws Exception {
+        byte[] bytes=getClass().getResourceAsStream("/costco/product-57808-2.html").readAllBytes();
+        var url=URI.create("https://www.costco.co.jp/Blue-PinkGreen/Fozzis-Foaming-Body-Soap-Blue-PinkGreen-3PC/p/57808-2");
+        var receipt=new CostcoOfficialEvidence("fixture",url,url,CostcoPinnedStageReviewer.digest(bytes),
+                Instant.parse("2026-11-28T01:00:00Z"),"text/html",null,null,List.of());
+        String html=new String(bytes,java.nio.charset.StandardCharsets.UTF_8);
+        var section=CostcoPinnedStageReviewer.costcoProductSection(html,receipt,"57808-2",mapper);
+        assertEquals("57808-2",((com.fasterxml.jackson.databind.JsonNode)section.get("product")).path("sku").asText());
+        assertEquals("340 mL × 3本",((Map<?,?>)section.get("specifications")).get("内容量"));
+        assertTrue(CostcoPinnedStageReviewer.costcoProductSection(html,receipt,"57808",mapper).isEmpty());
+        assertTrue(CostcoPinnedStageReviewer.costcoProductSection(html,receipt,"57808-1",mapper).isEmpty());
     }
     @Test void photoAdmissionReceivesPrivatePhotoAndPreviouslyReviewedOfficialPixels() throws Exception {
         var gateway=new FakeGateway();

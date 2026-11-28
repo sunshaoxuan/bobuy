@@ -22,7 +22,7 @@ public class OfficialProductResearch {
   public int status(){return status;} public String target(){return target;}
  }
  public List<Product> find(String item,String suppliedUrl){
-  if(item==null||item.isBlank()||item.length()>100)throw invalid();
+  try{item=CostcoNumberOnboardingService.normalizeItemNumber(item);}catch(IllegalArgumentException error){throw invalid();}
   var urls=suppliedUrl!=null&&!suppliedUrl.isBlank()?List.of(suppliedUrl):search.officialProductUrls(item);
   var found=new ArrayList<Product>();
   for(String url:urls.stream().distinct().limit(5).toList()){
@@ -56,6 +56,7 @@ public class OfficialProductResearch {
   }catch(ApiException error){throw error;}catch(Exception error){throw invalid();}
  }
  public static Product parse(String html,String url,String item,ObjectMapper mapper){
+  if(!CostcoNumberOnboardingService.isItemNumber(item))return null;
   if(!pageUri(url).getPath().endsWith("/p/"+item))return null;
   var scripts=Pattern.compile("<script\\b[^>]*type\\s*=\\s*[\"']application/ld\\+json[\"'][^>]*>(.*?)</script>",Pattern.CASE_INSENSITIVE|Pattern.DOTALL).matcher(html);
   while(scripts.find())try{

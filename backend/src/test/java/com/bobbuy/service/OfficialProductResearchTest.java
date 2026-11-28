@@ -18,5 +18,12 @@ class OfficialProductResearchTest {
  }
  @Test void neverGuessesSkuFromPathNameOrImage(){assertNull(OfficialProductResearch.parse(html("99999"),url,"00123",new ObjectMapper()));}
  @Test void relatedStructuredSkuCannotBeUsedAsThePageProduct(){assertNull(OfficialProductResearch.parse(html("00123"),"https://www.costco.co.jp/Other/p/99999","00123",new ObjectMapper()));}
+ @Test void hyphenatedSellableVariantNeverFallsBackToBaseOrSibling(){
+  String variantUrl="https://www.costco.co.jp/Blue-PinkGreen/Fozzis-Foaming-Body-Soap-Blue-PinkGreen-3PC/p/57808-2";
+  assertNotNull(OfficialProductResearch.parse(html("57808-2"),variantUrl,"57808-2",new ObjectMapper()));
+  assertNull(OfficialProductResearch.parse(html("57808"),variantUrl,"57808-2",new ObjectMapper()));
+  assertNull(OfficialProductResearch.parse(html("57808-1"),variantUrl,"57808-2",new ObjectMapper()));
+  assertNull(OfficialProductResearch.parse(html("57808-2"),variantUrl,"57808",new ObjectMapper()));
+ }
  @Test void noProductGroupVariantsOrUntrustedHosts(){assertNull(OfficialProductResearch.parse(html("00123").replace("\"Product\"","\"ProductGroup\""),url,"00123",new ObjectMapper()));assertThrows(Exception.class,()->OfficialProductResearch.pageUri("https://www.costco.co.jp.evil.test/p/00123"));assertThrows(Exception.class,()->OfficialProductResearch.pageUri("http://www.costco.co.jp/p/00123"));assertThrows(Exception.class,()->OfficialProductResearch.imageUri("https://www.costco.co.jp/medias/sys_master/images/a.jpg?tracking=1"));}
 }
