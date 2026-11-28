@@ -1657,6 +1657,8 @@ export type PublicCatalogEntry = {cartEnabled?:boolean;rating?:number|null;intro
     brand:string|null; itemNumber:string|null; specification:Record<string,string>; model:string|null; packaging:string|null;
     gallery:RecommendationPicture[]; categories:RecommendationLabel[];
     referenceOffers:{postId:number;facts:RecommendationItem}[]; reviewedMaster:boolean;
+    /** Optional public projection marker for a newly quick-published product awaiting its first approved image. */
+    rapidListingImagePending?:boolean;
 };
 export type PublicCatalogPage = {items:PublicCatalogEntry[];page:number;size:number;total:number;hasNext:boolean};
 export type MerchantCustomer = { customerId: number; name: string; emailVerified: boolean; merchantApproved: boolean; approvedAt?: string };

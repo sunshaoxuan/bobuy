@@ -8,7 +8,7 @@ export {boundPan,dragOffset,swipeDirection} from './imageGestures';
 import './recommendationImageViewer.css';
 
 /** Inline fit swipes navigate. The shared fullscreen viewer owns native-size panning. */
-export function RecommendationImageViewer({pictures,name,consumer=false,progressive=false}:{pictures:RecommendationPicture[];name:string;consumer?:boolean;progressive?:boolean}){
+export function RecommendationImageViewer({pictures,name,consumer=false,progressive=false,pendingCopy}:{pictures:RecommendationPicture[];name:string;consumer?:boolean;progressive?:boolean;pendingCopy?:string}){
  const {t}=useI18n();const [index,setIndex]=useState(0),[open,setOpen]=useState(false);
  const opener=useRef<HTMLDivElement>(null),[motion,setMotion]=useState({offset:0,settling:false});
  const settlement=useRef<ReturnType<typeof setTimeout>|null>(null),suppress=useRef(0);
@@ -31,7 +31,7 @@ export function RecommendationImageViewer({pictures,name,consumer=false,progress
  function up(event:PointerEvent<HTMLDivElement>){const g=gesture.current;if(!g||g.id!==event.pointerId)return;gesture.current=null;if(g.moved){suppress.current=Date.now()+500;if(g.axis==='x')settle(swipeDirection(event.clientX-g.x,event.clientY-g.y),g.width);}}
  function cancel(){const g=gesture.current;if(!g)return;gesture.current=null;if(g.axis==='x')settle(0,g.width);suppress.current=Date.now()+500;}
  function activate(){if(Date.now()>=suppress.current)setOpen(true);}
- if(!picture)return <div className="rec-no-product-image">{t('gallery.pending')}</div>;
+ if(!picture)return <div className="rec-no-product-image">{pendingCopy??t('gallery.pending')}</div>;
  const label=(p:RecommendationPicture,i:number)=>consumer?t('gallery.image_alt',{name,number:i+1}):p.label||name;
  const rail=<div className="rec-gallery-rail" data-settling={motion.settling} style={{transform:`translateX(${motion.offset}px)`}}>{[-1,0,1].map(slot=>{const p=pictures[index+slot];return <div className="rec-gallery-slide" key={slot} style={{left:`${slot*100}%`}} aria-hidden={slot!==0}>{p&&media.allows(p.url)&&<img {...{fetchpriority:media.priority(p.url)}} onLoad={ready} onError={()=>media.settled(p.url)} src={p.url} alt={slot===0?label(p,index):''} draggable={false}/>}</div>;})}</div>;
  return <div className="rec-detail-gallery">
