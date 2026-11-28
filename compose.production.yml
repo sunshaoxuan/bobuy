@@ -11,6 +11,10 @@ x-java: &java
   BOBBUY_ACCOUNT_REQUIRE_VERIFIED_EMAIL_FOR_CHECKOUT: 'false'
   BOBBUY_AUTH_ABUSE_ENABLED: 'false'
 
+# Concurrent JVM startups on the production host can exceed 150 seconds.
+x-java-health: &java-health
+  start_period: 180s
+
 x-media: &media
   BOBBUY_MEDIA_RUSTFS_ENABLED: ${BOBBUY_MEDIA_RUSTFS_ENABLED:-false}
   BOBBUY_MEDIA_RUSTFS_ENDPOINT: https://bobuy-rustfs:9000
@@ -78,6 +82,7 @@ services:
   core-service:
     container_name: bobuy-core-service
     image: bobuy/core:${BOBUY_RELEASE:?Set BO BUY release tag}
+    healthcheck: *java-health
     environment:
       <<: [*java, *media]
       BOBBUY_AI_COSTCO_WORKER_ENABLED: ${BOBBUY_AI_COSTCO_WORKER_ENABLED:-true}
@@ -118,6 +123,7 @@ services:
   ai-service:
     container_name: bobuy-ai-service
     image: bobuy/ai:${BOBUY_RELEASE:?Set BO BUY release tag}
+    healthcheck: *java-health
     environment:
       <<: [*java, *media]
       BOBBUY_MEDIA_WORKER_ENABLED: 'false'
@@ -130,6 +136,7 @@ services:
   im-service:
     container_name: bobuy-im-service
     image: bobuy/im:${BOBUY_RELEASE:?Set BO BUY release tag}
+    healthcheck: *java-health
     environment:
       <<: *java
     deploy:
@@ -140,6 +147,7 @@ services:
   auth-service:
     container_name: bobuy-auth-service
     image: bobuy/auth:${BOBUY_RELEASE:?Set BO BUY release tag}
+    healthcheck: *java-health
     environment:
       <<: *java
     deploy:
@@ -150,6 +158,7 @@ services:
   gateway-service:
     container_name: bobuy-gateway-service
     image: bobuy/router:${BOBUY_RELEASE:?Set BO BUY release tag}
+    healthcheck: *java-health
     environment:
       <<: *java
     deploy:
