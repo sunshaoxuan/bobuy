@@ -29,7 +29,8 @@ public interface OfficialImageCandidateFinder {
    if(legacyTestResearch!=null)return fromProducts(request,legacyTestResearch.find(request.itemNumber(),null));
    String inputHash=hash(String.join("\n",Long.toString(request.merchantId()),request.supplierId(),request.market(),request.itemNumber(),
      Objects.toString(request.brand(),""),Objects.toString(request.specification(),""),Objects.toString(request.packaging(),"")));
-   var evidence=fetcher.fetch(new CostcoOfficialEvidenceFetcher.Query(request.merchantId(),request.supplierId(),request.market(),request.itemNumber(),null,inputHash));
+   var evidence=fetcher.fetch(new CostcoOfficialEvidenceFetcher.Query(request.merchantId(),request.supplierId(),request.market(),request.itemNumber(),null,inputHash,
+     CostcoOfficialEvidenceFetcher.Acquisition.EXACT_OFFICIAL_IMAGE));
    var documents=new HashMap<String,CostcoOfficialEvidence>();
    for(var item:evidence)if(!item.mediaType().startsWith("image/"))documents.put(item.sha256(),item);
    var manufacturerHosts=trustedManufacturerHosts(request,documents.values());
@@ -44,10 +45,18 @@ public interface OfficialImageCandidateFinder {
     try{exactProduct=mapper.writeValueAsString(product);}catch(Exception error){throw new IllegalStateException("official_image.product_evidence",error);}
     if(!hasIdentifier(exactProduct,request.itemNumber())||!sameVariant(request.specification()+" "+request.packaging(),exactProduct))continue;
     if(request.brand()!=null&&!request.brand().isBlank()&&!normalize(exactProduct).contains(normalize(request.brand())))continue;
+    if(!declaresImage(text,exactProduct,image.fetchedUrl()))continue;
     return Optional.of(new Candidate(page.fetchedUrl().toString(),image.fetchedUrl().toString(),
       "verified official page/image relationship; item "+request.itemNumber()+"; market "+request.market()+"; specification "+request.specification()+"; package "+request.packaging()));
    }
    return Optional.empty();
+  }
+  private static boolean declaresImage(String html,String exactProduct,URI image){
+   String https=image.toString(),http=https.replaceFirst("^https:","http:");
+   if(exactProduct.contains(https)||exactProduct.contains(http))return true;
+   var metadata=Pattern.compile("(?is)<meta\\b(?=[^>]*(?:property|name)\\s*=\\s*[\"']og:image(?::url)?[\"'])[^>]*content\\s*=\\s*[\"']([^\"']+)[\"'][^>]*>").matcher(html);
+   while(metadata.find())if(https.equals(metadata.group(1))||http.equals(metadata.group(1)))return true;
+   return false;
   }
   private Set<String> trustedManufacturerHosts(Request request,Collection<CostcoOfficialEvidence> documents){
    var result=new HashSet<String>();

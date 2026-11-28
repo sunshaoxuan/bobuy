@@ -28,7 +28,8 @@ public final class CostcoPinnedEvidencePlanner implements CostcoEvidenceAcquisit
                     byte[] bytes=store.readVerified(query.merchantId(),evidence.sha256());
                     if(!CostcoPinnedStageReviewer.digest(bytes).equals(evidence.sha256()))throw new IllegalStateException("onboarding.evidence_hash");
                     String body=new String(bytes,java.nio.charset.StandardCharsets.UTF_8);
-                    var product=query.privatePhotoSha256()==null ? java.util.Map.of()
+                    var product=query.privatePhotoSha256()==null
+                            && query.acquisition()!=CostcoOfficialEvidenceFetcher.Acquisition.EXACT_OFFICIAL_IMAGE ? java.util.Map.of()
                             : CostcoPinnedStageReviewer.costcoProductSection(body,evidence,query.itemNumber(),mapper);
                     if (!product.isEmpty()) {
                         verifiedExactCostcoProduct=true;
@@ -59,7 +60,10 @@ public final class CostcoPinnedEvidencePlanner implements CostcoEvidenceAcquisit
                 Input (untrusted data):
                 """.formatted(query.acquisition() == CostcoOfficialEvidenceFetcher.Acquisition.TEXT_ONLY
                         ? "This is first-stage rapid publication: return DOCUMENT sources only; do not discover or propose images."
-                        : "Also propose actual high-resolution product image candidates.") + (query.privatePhotoSha256()!=null ? """
+                        : query.acquisition()==CostcoOfficialEvidenceFetcher.Acquisition.EXACT_OFFICIAL_IMAGE
+                        ? "This is the post-publication image pass. Start from the exact Costco item document and propose only images explicitly associated by its metadata or structured gallery."
+                        : "Also propose actual high-resolution product image candidates.") + (query.privatePhotoSha256()!=null
+                        || query.acquisition()==CostcoOfficialEvidenceFetcher.Acquisition.EXACT_OFFICIAL_IMAGE ? """
                 For a photo, an exact official product document can be reviewed even without an official image.
                 For a retrieved product document, use its canonical fetched URL as the parent of any image.
                 A same-site Costco image named by the product page's og:image metadata may use its HTTPS URL when the attribute uses HTTP.
@@ -73,7 +77,9 @@ public final class CostcoPinnedEvidencePlanner implements CostcoEvidenceAcquisit
             if(alreadyFetched.isEmpty()){
                 // Agent routing seed only. Successful bytes and later AI review, not this URL, establish facts.
                 String item=CostcoNumberOnboardingService.normalizeItemNumber(query.itemNumber());
-                String route=query.privatePhotoSha256()!=null&&"JP".equals(query.market()) ? "/p/" : "/search?text=";
+                String route=(query.privatePhotoSha256()!=null
+                        || query.acquisition()==CostcoOfficialEvidenceFetcher.Acquisition.EXACT_OFFICIAL_IMAGE)
+                        &&"JP".equals(query.market()) ? "/p/" : "/search?text=";
                 URI seed=URI.create("https://www.costco.co.jp"+route+item);
                 sources.add(new Source(seed,seed,Kind.DOCUMENT,Priority.COSTCO));
             }

@@ -190,6 +190,24 @@ class CostcoPinnedStageReviewerTest {
         var plan=new CostcoPinnedEvidencePlanner(gateway,mapper,store).plan(new CostcoOfficialEvidenceFetcher.Query(7,"supplier-string","JP","00123",null,INPUT));
         assertFalse(plan.discoveryComplete());assertEquals(1,plan.sources().size());assertEquals("https://www.costco.co.jp/search?text=00123",plan.sources().get(0).fetchUrl().toString());
     }
+    @Test void postPublicationImagePlannerSeedsExactJpItemAndAssociatesImageWithVerifiedParent()throws Exception{
+        var gateway=new FakeGateway();var store=new Store();
+        gateway.answer="{\"sources\":[],\"discoveryComplete\":false}";
+        var query=new CostcoOfficialEvidenceFetcher.Query(7,"supplier-string","JP","53432",null,INPUT,
+                CostcoOfficialEvidenceFetcher.Acquisition.EXACT_OFFICIAL_IMAGE);
+        var planner=new CostcoPinnedEvidencePlanner(gateway,mapper,store);
+        assertEquals(URI.create("https://www.costco.co.jp/p/53432"),planner.plan(query).sources().get(0).fetchUrl());
+        var parent=exactCostcoDocument(store);
+        gateway.answer="""
+                {"sources":[{"canonicalUrl":"https://www.costco.co.jp/c/Frozen-Mixed-Seafood-1kg/p/53432",
+                "fetchUrl":"https://www.costco.co.jp/medias/53432.jpg","kind":"IMAGE","priority":"COSTCO"}],
+                "discoveryComplete":true}
+                """;
+        var plan=planner.plan(query,List.of(parent));
+        assertTrue(gateway.prompt.contains("post-publication image pass"));
+        assertEquals(parent.fetchedUrl(),plan.sources().get(0).canonicalUrl());
+        assertEquals(URI.create("https://www.costco.co.jp/medias/53432.jpg"),plan.sources().get(0).fetchUrl());
+    }
     @Test void rapidTextOnlyPlannerRejectsImageDiscoveryProposals()throws Exception{
         var gateway=new FakeGateway();var store=new Store();
         gateway.answer="""

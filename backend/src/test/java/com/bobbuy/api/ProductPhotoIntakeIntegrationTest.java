@@ -34,6 +34,7 @@ class ProductPhotoIntakeIntegrationTest {
  @Autowired MockMvc mvc;@Autowired ObjectMapper json;@Autowired JdbcTemplate jdbc;@Autowired BobbuyStore store;
  @Autowired ProductRepository products;@Autowired SupplierRepository suppliers;@Autowired UserRepository users;
  @Autowired JwtTokenService tokens;@Autowired CostcoEvidencePersistence evidence;@Autowired CategoryTreeNodeRepository categories;
+ @Autowired OfficialImageCandidateFinder officialImageFinder;
  String auth,foreign,customer,supplier,job,item;Product product;
  @BeforeEach void setup() throws Exception {
   try(var c=Objects.requireNonNull(jdbc.getDataSource()).getConnection()){
@@ -285,6 +286,16 @@ class ProductPhotoIntakeIntegrationTest {
    Thread.sleep(2000);
   }
   throw new AssertionError("Live photo did not reach confirmation: "+lastState);
+ }
+
+ @Test @EnabledIfEnvironmentVariable(named="BOBBUY_PHOTO_LIVE_TEST",matches="true")
+ void liveIndependentOfficialLookupUsesKnownItem() {
+  var selected = officialImageFinder.find(new OfficialImageCandidateFinder.Request(
+      1000L, supplier, "JP", "53432", null, "1 kg", "1 kg"));
+  assertThat(selected).as("real official 53432 product image").isPresent();
+  assertThat(selected.orElseThrow().sourcePage()).contains("/p/53432");
+  assertThat(selected.orElseThrow().imageUrl()).startsWith("https://");
+  System.out.println("LIVE RAPID exact supplier image selected by independent finder");
  }
 
  private ObjectNode liveObservation(JsonNode review) {
