@@ -48,6 +48,7 @@ import './productRecords.css';
 import {ProductStars} from '../components/ProductRating';
 import CardPrice from '../components/CardPrice';
 import {ProductCartBulkAction, ProductCartSwitch} from './ProductCartAvailability';
+import {useUserRole} from '../context/UserRoleContext';
 
 const { Title, Text } = Typography;
 
@@ -251,6 +252,7 @@ const normalizeCategories = (categories: MobileCategory[]): MobileCategory[] =>
   })) || [];
 
 export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{embedded?:boolean;refreshKey?:number;onDeleted?:()=>void}={}) {
+  const {user,isMerchant}=useUserRole();
   const { t, locale } = useI18n();
   const [categories, setCategories] = useState<MobileCategory[]>([]);
   const [suppliers, setSuppliers] = useState<MobileSupplier[]>([]);
@@ -923,7 +925,7 @@ export default function StockMaster({embedded=false,refreshKey=0,onDeleted}:{emb
       </div>}
 
       <div ref={setPhotoQueueTarget}/>
-      <ProductCatalogPanel id={catalogId} onChoose={setCatalogId} entries={dataSource.filter(row=>!row.isNew)}
+      <ProductCatalogPanel id={catalogId} onChoose={setCatalogId} entries={dataSource.filter(row=>!row.isNew)} quickPublishMerchantSubject={isMerchant?user?.id:undefined}
         searchEntries={pickArchiveProduct} getExportIds={api.merchantArchiveExport} onSaved={refreshArchive}/>
       <div className="record-view-bar product-cart-toolbar">
         {embedded&&<Segmented aria-label={t('products.view')} value={recordView} onChange={value=>setRecordView(value as 'gallery'|'manage')} options={[{label:t('products.gallery'),value:'gallery'},{label:t('products.manage'),value:'manage'}]}/>}

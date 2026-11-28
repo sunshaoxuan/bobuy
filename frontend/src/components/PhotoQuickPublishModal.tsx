@@ -4,12 +4,11 @@ import {useEffect,useRef,useState} from 'react';
 import {photoQuickPublishApi,recommendationTaxonomyApi,type QuickPublishBatch,type RecommendationChoice} from '../api';
 import {localizedContent,useI18n} from '../i18n';
 import {IMAGE_UPLOAD_ACCEPT,copyFileList} from '../imageUpload';
-import {useUserRole} from '../context/UserRoleContext';
 
 type UploadRow={key:string;files:File[]};
 const newRow=():UploadRow=>({key:crypto.randomUUID(),files:[]});
-export default function PhotoQuickPublishModal(){
- const {t,locale}=useI18n(),{user}=useUserRole(),account=String(user?.id??'anonymous');
+export default function PhotoQuickPublishModal({merchantSubject}:{merchantSubject:string|number}){
+ const {t,locale}=useI18n(),account=String(merchantSubject);
  const [open,setOpen]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState('');
  const [suppliers,setSuppliers]=useState<RecommendationChoice[]>([]),[supplier,setSupplier]=useState<string>(),[market,setMarket]=useState('JP');
  const [rows,setRows]=useState<UploadRow[]>([newRow()]),[batch,setBatch]=useState<QuickPublishBatch>(),[batches,setBatches]=useState<QuickPublishBatch[]>([]);
