@@ -193,9 +193,11 @@ public final class CostcoNumberOnboardingService {
     public static String candidateHash(Candidate c) {
         var translations = c.translatedNames().entrySet().stream().sorted(java.util.Map.Entry.comparingByKey())
                 .map(e -> encode(e.getKey(), e.getValue())).collect(Collectors.joining());
+        var specifications=c.translatedSpecifications().entrySet().stream().sorted(java.util.Map.Entry.comparingByKey()).map(e->encode(e.getKey(),e.getValue())).collect(Collectors.joining());
+        var descriptions=c.translatedDescriptions().entrySet().stream().sorted(java.util.Map.Entry.comparingByKey()).map(e->encode(e.getKey(),e.getValue())).collect(Collectors.joining());
         var prices=c.referencePrices().stream().map(q->encode(q.kind(),q.amount().stripTrailingZeros().toPlainString(),q.currency(),q.channel(),q.taxStatus(),q.quantityBasis(),q.validFrom(),q.validUntil(),q.timeZone(),q.conditions(),q.sourceUrl().toString(),q.sourceSha256())).sorted().collect(Collectors.joining());
         var target=c.target()==null?null:encode(c.target().productId(),Long.toString(c.target().version()),c.target().sourceHash());
-        return hash(encode(c.itemNumber(), c.brand(), c.name(), c.model(), c.specification(), c.packaging(), c.officialImageSha256(), translations,prices,target));
+        return hash(encode(c.itemNumber(), c.brand(), c.name(), c.model(), c.specification(), c.packaging(), c.officialImageSha256(), translations,specifications,descriptions,prices,target));
     }
     private static String encode(String... values) {
         var out = new StringBuilder(); for (var v : values) out.append(v == null ? "-1:" : v.length() + ":" + v); return out.toString();

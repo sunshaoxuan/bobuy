@@ -118,8 +118,11 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
                 Return one JSON object with EXACT keys verdict,reason,identifiedItemNumber,candidate. verdict is
                 ACCEPT|NEEDS_EVIDENCE|AMBIGUOUS|REJECT; reason is concise; identifiedItemNumber is a string or null.
                 candidate may be null except an ADMISSION ACCEPT needs an object with EXACT keys:
-                itemNumber,brand,name,model,specification,packaging,officialImageSha256,translatedNames,unknownFields,referencePrices,target.
+                itemNumber,brand,name,model,specification,packaging,officialImageSha256,translatedNames,translatedSpecifications,translatedDescriptions,unknownFields,referencePrices,target.
                 translatedNames is a map using only zh-CN,zh-TW,ja-JP,en-US; unknownFields is an array of missing fact names.
+                For photo ADMISSION, translatedSpecifications and translatedDescriptions must use those same four locales,
+                describe one verified variant, and preserve every quantity, unit and model consistently. Leave them empty
+                when the underlying specification or description is not source-backed; never fill them from generic knowledge.
                 target is null for a new archive candidate; an existing archive update requires an explicit target object
                 productId,version,sourceHash copied exactly from existingArchiveCandidates ONLY after judging same product,
                 market, model and packaging semantically. Never select the first match or invent an existing master.
@@ -189,12 +192,17 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
             Candidate candidate = null;
             if (json.hasNonNull("candidate")) {
                 JsonNode c = json.get("candidate");
-                var keys=new java.util.HashSet<>(Set.of("itemNumber","brand","name","model","specification","packaging","officialImageSha256","translatedNames","unknownFields","referencePrices","target","photoFacts"));
+                var keys=new java.util.HashSet<>(Set.of("itemNumber","brand","name","model","specification","packaging","officialImageSha256","translatedNames","translatedSpecifications","translatedDescriptions","unknownFields","referencePrices","target","photoFacts"));
                 if(job.privatePhotoSha256()!=null)keys.add("archiveDetails");
                 fields(c, keys);
                 for (String name : List.of("itemNumber", "brand", "name", "model", "specification", "packaging", "officialImageSha256")) nullableText(c.get(name), 2000);
                 if (!c.path("translatedNames").isObject() || !c.path("unknownFields").isArray() || !c.path("referencePrices").isArray()) throw new IllegalArgumentException("onboarding.candidate_schema");
                 c.path("translatedNames").fields().forEachRemaining(e -> { if (!Set.of("zh-CN", "zh-TW", "ja-JP", "en-US").contains(e.getKey()) || !e.getValue().isTextual() || e.getValue().asText().length() > 2000) throw new IllegalArgumentException("onboarding.translation_schema"); });
+                for(String translatedField:List.of("translatedSpecifications","translatedDescriptions")){
+                    if(!c.has(translatedField))((ObjectNode)c).putObject(translatedField);
+                    if(!c.path(translatedField).isObject())throw new IllegalArgumentException("onboarding.translation_schema");
+                    c.path(translatedField).fields().forEachRemaining(e->{if(!Set.of("zh-CN","zh-TW","ja-JP","en-US").contains(e.getKey())||!e.getValue().isTextual()||e.getValue().asText().isBlank()||e.getValue().asText().length()>8000)throw new IllegalArgumentException("onboarding.translation_schema");});
+                }
                 for (var unknown : c.path("unknownFields")) if (!unknown.isTextual() || unknown.asText().length() > 200) throw new IllegalArgumentException("onboarding.unknown_schema");
                 for (var price : c.path("referencePrices")) fields(price, Set.of("kind", "amount", "currency", "channel", "taxStatus", "quantityBasis", "validFrom", "validUntil", "timeZone", "conditions", "sourceUrl", "sourceSha256"));
                 if(c.hasNonNull("target"))fields(c.get("target"),Set.of("productId","version","sourceHash"));

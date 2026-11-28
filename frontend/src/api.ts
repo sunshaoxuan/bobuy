@@ -199,6 +199,16 @@ export const photoIntakeApi={
  photo:async(id:string)=>{const r=await authorizedFetch('/api/product-photo-intake/'+encodeURIComponent(id)+'/photo');if(!r.ok)throw Error(await parseErrorMessage(r));return r.blob();}
 };
 
+export type QuickPublishItem={id:string;requestKey:string;jobId:string;state:string;productId:string|null;issueCode:string|null;revision:number;imageState:string|null;candidateImageUrl:string|null;sourcePage:string|null;matchBasis:string|null};
+export type QuickPublishBatch={id:string;supplierId:string;market:string;state:string;total:number;processing:number;published:number;needsInformation:number;failed:number;excluded:number;items:QuickPublishItem[]};
+export const photoQuickPublishApi={
+ create:(input:{requestKey:string;supplierId:string;market:string})=>postJson<QuickPublishBatch,typeof input>('/api/photo-quick-publish',input),
+ get:(id:string)=>storeGet<QuickPublishBatch>('/api/photo-quick-publish/'+encodeURIComponent(id)),
+ seal:(id:string)=>postJson<QuickPublishBatch,object>('/api/photo-quick-publish/'+encodeURIComponent(id)+'/seal',{}),
+ add:async(id:string,requestKey:string,files:File[])=>{const body=new FormData();body.append('requestKey',requestKey);files.forEach(file=>body.append('files',file));const response=await authorizedFetch('/api/photo-quick-publish/'+encodeURIComponent(id)+'/items',{method:'POST',body});if(!response.ok)throw Error(await parseErrorMessage(response));return parseSuccessPayload<QuickPublishBatch>(response);},
+ exclude:(batch:string,item:string,revision:number)=>postJson<QuickPublishBatch,object>(`/api/photo-quick-publish/${encodeURIComponent(batch)}/items/${encodeURIComponent(item)}/exclude?revision=${revision}`,{})
+};
+
 export type MobileProductResponse = {
         categoryPath?:string;
         currentRegular?:ProductSale|null;
