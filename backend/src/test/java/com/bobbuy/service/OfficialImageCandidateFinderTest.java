@@ -2,6 +2,9 @@ package com.bobbuy.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import java.net.URI;
+import java.nio.charset.StandardCharsets;
+import java.time.Instant;
 import java.util.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,5 +37,20 @@ class OfficialImageCandidateFinderTest {
  @Test void packageMultiplierMustMatchForMultiPack(){
   assertThat(OfficialImageCandidateFinder.CostcoOfficialSiteFinder.sameVariant("330 g x 6","Brand food 330 g x 4")).isFalse();
   assertThat(OfficialImageCandidateFinder.CostcoOfficialSiteFinder.sameVariant("330 g x 6","Brand food six pack 330 g x 6")).isTrue();
+ }
+
+ @Test void independentLookupUsesFullAcquisitionAndOnlyTheExactProductSection(){
+  String html="""
+    <script type="application/ld+json">{"@type":"Product","sku":"564513","name":"Brand food 330 g"}</script>
+    <table><tr><td class="attrib">Size</td><td class="attrib-val">330 g</td></tr></table>
+    <aside>Other product 564513 Brand food 1.2 kg 1 pack</aside>
+    """;
+  byte[] bytes=html.getBytes(StandardCharsets.UTF_8);String hash=CostcoPinnedStageReviewer.digest(bytes);
+  var pageUri=URI.create("https://www.costco.co.jp/p/564513");
+  var page=new CostcoOfficialEvidence("page",pageUri,pageUri,hash,Instant.parse("2026-11-28T00:00:00Z"),"text/html",null,null,List.of());
+  var image=new CostcoOfficialEvidence("image",pageUri,URI.create("https://www.costco.co.jp/exact.jpg"),"b".repeat(64),Instant.parse("2026-11-28T00:00:00Z"),"image/jpeg",1000,1000,List.of(),hash);
+  CostcoEvidenceStore store=new CostcoEvidenceStore(){public void put(CostcoOfficialEvidenceFetcher.Query q,CostcoOfficialEvidence e,byte[] b){}public byte[] readVerified(long owner,String sha){return bytes;}};
+  CostcoOfficialEvidenceFetcher fetcher=query->{assertThat(query.acquisition()).isEqualTo(CostcoOfficialEvidenceFetcher.Acquisition.FULL);return List.of(page,image);};
+  assertThat(new OfficialImageCandidateFinder.CostcoOfficialSiteFinder(fetcher,store,new ObjectMapper()).find(costco12kg())).isEmpty();
  }
 }

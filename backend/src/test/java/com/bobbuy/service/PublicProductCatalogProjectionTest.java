@@ -72,5 +72,24 @@ class PublicProductCatalogProjectionTest {
   assertThat(current.page(0,null).items().get(0).categories()).isEmpty();
   assertThat(p.getCatalogData().categoryIds()).isEmpty();
  }
+ @Test void rapidPhotoMarkerReachesPublicCardAndDetailOnlyUntilAFormalImageExists() throws Exception {
+  var pending=publicProduct("rapid-pending");pending.setAttributes(Map.of("quickPublishBatch","private-batch-id"));
+  var legacy=publicProduct("legacy");
+  var imaged=publicProduct("rapid-imaged");imaged.setAttributes(Map.of("quickPublishBatch","private-batch-id"));
+  var formal=new MediaGalleryItem();formal.setType(MediaType.IMAGE);formal.setVisible(true);formal.setUrl("https://example.invalid/formal.jpg");imaged.setMediaGallery(List.of(formal));
+  var rows=List.of(pending,legacy,imaged);
+  when(products.findAll()).thenReturn(rows);when(products.findAllById(any())).thenAnswer(call->{Set<String> ids=new HashSet<>(call.getArgument(0));return rows.stream().filter(product->ids.contains(product.getId())).toList();});
+  when(posts.findByPublishedTrue()).thenReturn(List.of());when(items.findByPostIdInOrderById(any())).thenReturn(List.of());
+  var markerService=mock(ProductMarkerService.class);when(markerService.browseAssignments(any())).thenReturn(List.of());
+  var browse=new PublicProductBrowseService(catalog,markerService);
+
+  var cards=browse.browse(0,null,"","","en-US",false,null).items();
+  assertThat(cards).filteredOn(PublicProductBrowseService.Card::rapidListingImagePending).extracting(PublicProductBrowseService.Card::productId).containsExactly("rapid-pending");
+  assertThat(browse.detail("rapid-pending",null).item().rapidListingImagePending()).isTrue();
+  assertThat(browse.detail("legacy",null).item().rapidListingImagePending()).isFalse();
+  assertThat(browse.detail("rapid-imaged",null).item().rapidListingImagePending()).isFalse();
+  assertThat(new ObjectMapper().writeValueAsString(cards)).doesNotContain("private-batch-id","quickPublishBatch");
+ }
+ private static Product publicProduct(String id){var product=new Product();product.setId(id);product.setMerchantId(1001L);product.setVisibilityStatus(ProductVisibility.PUBLIC);product.setName(Map.of("ja-JP",id));product.setDescription(Map.of());product.setItemNumber(id);return product;}
 }
 

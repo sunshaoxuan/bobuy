@@ -2,6 +2,7 @@ package com.bobbuy.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.*;
@@ -17,10 +18,11 @@ public interface OfficialImageCandidateFinder {
  final class CostcoOfficialSiteFinder implements OfficialImageCandidateFinder {
   private final CostcoOfficialEvidenceFetcher fetcher;
   private final CostcoEvidenceStore store;
+  private final ObjectMapper mapper;
   private final OfficialProductResearch legacyTestResearch;
 
-  @Autowired public CostcoOfficialSiteFinder(CostcoOfficialEvidenceFetcher fetcher,CostcoEvidenceStore store){this.fetcher=fetcher;this.store=store;this.legacyTestResearch=null;}
-  CostcoOfficialSiteFinder(OfficialProductResearch research){this.fetcher=null;this.store=null;this.legacyTestResearch=research;}
+  @Autowired public CostcoOfficialSiteFinder(CostcoOfficialEvidenceFetcher fetcher,CostcoEvidenceStore store,ObjectMapper mapper){this.fetcher=fetcher;this.store=store;this.mapper=mapper;this.legacyTestResearch=null;}
+  CostcoOfficialSiteFinder(OfficialProductResearch research){this.fetcher=null;this.store=null;this.mapper=null;this.legacyTestResearch=research;}
 
   @Override public Optional<Candidate> find(Request request){
    if(legacyTestResearch!=null)return fromProducts(request,legacyTestResearch.find(request.itemNumber(),null));
@@ -33,8 +35,12 @@ public interface OfficialImageCandidateFinder {
     if(!image.mediaType().startsWith("image/")||image.sourceDocumentSha256()==null)continue;
     var page=documents.get(image.sourceDocumentSha256());if(page==null)continue;
     String text=new String(store.readVerified(request.merchantId(),page.sha256()),StandardCharsets.UTF_8);
-    if(!hasIdentifier(text,request.itemNumber())||!sameVariant(request.specification()+" "+request.packaging(),text))continue;
-    if(request.brand()!=null&&!request.brand().isBlank()&&!normalize(text).contains(normalize(request.brand())))continue;
+    var product=CostcoPinnedStageReviewer.costcoProductSection(text,page,request.itemNumber(),mapper);
+    if(product.isEmpty())continue;
+    String exactProduct;
+    try{exactProduct=mapper.writeValueAsString(product);}catch(Exception error){throw new IllegalStateException("official_image.product_evidence",error);}
+    if(!hasIdentifier(exactProduct,request.itemNumber())||!sameVariant(request.specification()+" "+request.packaging(),exactProduct))continue;
+    if(request.brand()!=null&&!request.brand().isBlank()&&!normalize(exactProduct).contains(normalize(request.brand())))continue;
     return Optional.of(new Candidate(page.fetchedUrl().toString(),image.fetchedUrl().toString(),
       "verified official page/image relationship; item "+request.itemNumber()+"; market "+request.market()+"; specification "+request.specification()+"; package "+request.packaging()));
    }

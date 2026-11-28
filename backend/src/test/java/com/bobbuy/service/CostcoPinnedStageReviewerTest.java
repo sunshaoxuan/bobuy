@@ -189,6 +189,20 @@ class CostcoPinnedStageReviewerTest {
         var plan=new CostcoPinnedEvidencePlanner(gateway,mapper,store).plan(new CostcoOfficialEvidenceFetcher.Query(7,"supplier-string","JP","00123",null,INPUT));
         assertFalse(plan.discoveryComplete());assertEquals(1,plan.sources().size());assertEquals("https://www.costco.co.jp/search?text=00123",plan.sources().get(0).fetchUrl().toString());
     }
+    @Test void rapidTextOnlyPlannerRejectsImageDiscoveryProposals(){
+        var gateway=new FakeGateway();var store=new Store();
+        gateway.answer="""
+                {"sources":[{"canonicalUrl":"https://www.costco.co.jp/p/00123",
+                "fetchUrl":"https://www.costco.co.jp/image.jpg","kind":"IMAGE","priority":"COSTCO"}],
+                "discoveryComplete":true}
+                """;
+        var query=new CostcoOfficialEvidenceFetcher.Query(7,"supplier-string","JP","00123",
+                "c".repeat(64),INPUT,CostcoOfficialEvidenceFetcher.Acquisition.TEXT_ONLY);
+        var plan=new CostcoPinnedEvidencePlanner(gateway,mapper,store).plan(query,List.of(document(store)));
+        assertTrue(plan.discoveryComplete());
+        assertTrue(plan.sources().isEmpty());
+        assertTrue(gateway.prompt.contains("DOCUMENT sources only"));
+    }
     @Test void photoDiscoveryStartsAtExactItemAndCanReviewTextWithoutAnImage(){
         var gateway=new FakeGateway();
         gateway.answer="{\"sources\":[],\"discoveryComplete\":false}";

@@ -222,4 +222,24 @@ class CostcoNumberOnboardingServiceTest {
                 job->{throw new CostcoNumberOnboardingService.NeedsInput("onboarding.scope_changed");});
         assertEquals(NEEDS_INPUT,s.execute(q.id(),1,0).state());assertEquals(0,f.reviews.get());assertEquals(0,f.fetches.get());assertEquals(0,f.saves.get());
     }
+    @Test void rapidClassifierSelectsTextOnlyWhileLegacyConstructorKeepsFullAcquisition() {
+        var rapid=new Fixture();var rapidAcquisition=new java.util.concurrent.atomic.AtomicReference<CostcoOfficialEvidenceFetcher.Acquisition>();
+        var rapidService=new CostcoNumberOnboardingService(rapid.repo,
+                query->{rapidAcquisition.set(query.acquisition());return rapid.evidence;},
+                (stage,job)->decision(stage,Verdict.ACCEPT,job),
+                (job,candidate,hash)->new CostcoNumberOnboardingService.CommitReceipt(job.idempotencyKey(),hash,"product",1,true),
+                CLOCK,job->{},job->CostcoOfficialEvidenceFetcher.Acquisition.TEXT_ONLY);
+        var rapidJob=rapidService.enqueue(input(1,2,"JP","0014110",null));
+        assertEquals(COMPLETED,rapidService.execute(rapidJob.id(),1,0).state());
+        assertEquals(CostcoOfficialEvidenceFetcher.Acquisition.TEXT_ONLY,rapidAcquisition.get());
+
+        var legacy=new Fixture();var legacyAcquisition=new java.util.concurrent.atomic.AtomicReference<CostcoOfficialEvidenceFetcher.Acquisition>();
+        var legacyService=new CostcoNumberOnboardingService(legacy.repo,
+                query->{legacyAcquisition.set(query.acquisition());return legacy.evidence;},
+                (stage,job)->decision(stage,Verdict.ACCEPT,job),
+                (job,candidate,hash)->new CostcoNumberOnboardingService.CommitReceipt(job.idempotencyKey(),hash,"product",1,true),CLOCK);
+        var legacyJob=legacyService.enqueue(input(1,2,"JP","0014110",null));
+        assertEquals(COMPLETED,legacyService.execute(legacyJob.id(),1,0).state());
+        assertEquals(CostcoOfficialEvidenceFetcher.Acquisition.FULL,legacyAcquisition.get());
+    }
 }

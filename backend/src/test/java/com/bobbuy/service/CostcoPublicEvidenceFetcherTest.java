@@ -42,6 +42,22 @@ class CostcoPublicEvidenceFetcherTest {
         assertEquals(20,imageReceipt.width());assertEquals(10,imageReceipt.height());assertEquals(receipts.get(0).sha256(),imageReceipt.sourceDocumentSha256());
         assertEquals(image,imageReceipt.fetchedUrl());assertArrayEquals(pixels,store.readVerified(7,imageReceipt.sha256()));
     }
+    @Test void textOnlyAcquisitionNeverRetrievesAPlannedImage()throws Exception {
+        var textOnly=new CostcoOfficialEvidenceFetcher.Query(7,"costco-jp","JP","123",null,
+                "a".repeat(64),CostcoOfficialEvidenceFetcher.Acquisition.TEXT_ONLY);
+        var store=new Store();var calls=new ArrayList<URI>();
+        var planner=new CostcoEvidenceAcquisitionPlanner(){
+            @Override public Plan plan(CostcoOfficialEvidenceFetcher.Query ignored){
+                return new Plan(textOnly.inputHash(),"p","m",REQUIRED_NODE,List.of(document(),picture()),true);
+            }
+        };
+        var fetcher=new CostcoPublicEvidenceFetcher(planner,store,h->new InetAddress[]{publicIp()},
+                (u,a,m,t)->{calls.add(u);return response("text/html","document only".getBytes(StandardCharsets.UTF_8));},clock);
+        var found=fetcher.fetch(textOnly);
+        assertEquals(List.of(doc),calls);
+        assertEquals(1,found.size());
+        assertEquals("text/html",found.get(0).mediaType());
+    }
     @Test void refusesImageWithoutFetchedDocumentAndDoesNotAskTransport(){var store=new Store();assertThrows(IllegalStateException.class,()->fetcher(store,List.of(picture()),(u,a,m,t)->{fail("Unfetched source must not request image");return null;}).fetch(query));assertTrue(store.receipts.isEmpty());}
     @Test void refusesCanonicalDocumentThatWasOnlyProposed(){var source=new Source(doc,URI.create("https://costco.example/api/data"),Kind.DOCUMENT,Priority.COSTCO);assertThrows(IllegalStateException.class,()->fetcher(new Store(),List.of(source),(u,a,m,t)->{fail();return null;}).fetch(query));}
     @Test void discoveryMustBindNodeAndActualInputHash(){
