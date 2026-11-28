@@ -770,6 +770,7 @@ type ApiResponse<T> = {
 type ApiErrorResponse = {
     status: 'error';
     errorCode?: string;
+    code?: string;
     message?: string;
     conditions?: PublicationCondition[];
 };
@@ -928,6 +929,7 @@ async function parseErrorMessage(response: Response): Promise<string> {
             if(payload.message.startsWith('onboarding.')||payload.message.startsWith('master.'))return translate(getStoredLocale(),payload.message);
             return payload.message;
         }
+        if(payload?.code==='CART_REQUEST_RECOGNITION_FAILED')return translate(getStoredLocale(),'purchase.recognition_failed');
     } catch {
         if (response.status === 503) {
             return translate(getStoredLocale(), 'maintenance.title');
@@ -1637,6 +1639,19 @@ export const api = {
 };
 
 export type StoreTrip = { id: number; merchantId: number; merchantName: string; deliveryArea: string; deliveryDate: string };
+export type LiveCartLine={id:number;productId:string|null;quantity:number;unitPrice:number|null;currency:string;ready:boolean;settlementId:number|null;version:number;requestBatchId:string|null;originalRequest:string|null;originalSubmission:string|null;requestedName:string|null;requestedUnit:string|null;requestConstraints:string|null;quantityConfirmed:boolean;productName:Record<string,string>;itemNumber:string|null;productSpecification:Record<string,string>};
+export type LiveCart={id:number;merchantId:number;version:number;openLines:LiveCartLine[];openTotal:{amount:number;unpricedLineCount:number}};
+export const liveCartApi={
+ customer:()=>storeGet<LiveCart[]>('/api/cart'),
+ addText:async(input:{operationId:string;merchantId:number;expectedVersion:number;text:string;recognize:boolean})=>{const r=await authorizedFetch('/api/cart/text-requests',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(input)});if(!r.ok)throw new Error(await parseErrorMessage(r));return r.json() as Promise<{batchId:string;cart:LiveCart;replayed:boolean}>;},
+ undo:async(batch:string,version:number)=>{const r=await authorizedFetch(`/api/cart/text-requests/${batch}?expectedVersion=${version}`,{method:'DELETE'});if(!r.ok)throw new Error(await parseErrorMessage(r));return r.json() as Promise<LiveCart>;},
+ link:async(cart:number,line:number,productId:string,version:number)=>{const r=await authorizedFetch(`/api/cart/${cart}/lines/${line}/link`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({productId,expectedVersion:version})});if(!r.ok)throw new Error(await parseErrorMessage(r));return r.json() as Promise<LiveCart>;},
+ unlink:async(cart:number,line:number,version:number)=>{const r=await authorizedFetch(`/api/cart/${cart}/lines/${line}/link?expectedVersion=${version}`,{method:'DELETE'});if(!r.ok)throw new Error(await parseErrorMessage(r));return r.json() as Promise<LiveCart>;},
+ change:async(cart:number,line:number,quantity:number,version:number)=>{const r=await authorizedFetch(`/api/cart/${cart}/lines/${line}`,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({quantity,expectedVersion:version})});if(!r.ok)throw new Error(await parseErrorMessage(r));return r.json() as Promise<LiveCart>;},
+ merchantChanges:(cursor=0)=>storeGet<{changes:LiveCart[];version:number}>(`/api/merchant/live-carts?status=OPEN&since=${cursor}`),
+ merchantLink:async(cart:number,line:number,productId:string,version:number)=>{const r=await authorizedFetch(`/api/merchant/live-carts/${cart}/lines/${line}/link`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({productId,expectedVersion:version})});if(!r.ok)throw new Error(await parseErrorMessage(r));return r.json() as Promise<LiveCart>;},
+ merchantUnlink:async(cart:number,line:number,version:number)=>{const r=await authorizedFetch(`/api/merchant/live-carts/${cart}/lines/${line}/link?expectedVersion=${version}`,{method:'DELETE'});if(!r.ok)throw new Error(await parseErrorMessage(r));return r.json() as Promise<LiveCart>;}
+};
 export type StoreProduct = { id: string; merchantId: number; name: Record<string, string>; description: Record<string, string>; brand: string; price: number; categoryId: string; images: string[]; cartEnabled?:boolean;recommendationReady?:boolean;currency?:string;saleUnit?:string;priceRevision?:number;priceToken?:string;regularPrice?:number;priceAdjustmentId?:number;priceValidFrom?:string;priceValidUntil?:string;priceChange?:PriceChangeView|null };
 export type PublicReferencePrice={documentId:number;documentNumber:string;channel:string;currency:string;unit:string;amount:number;regularAmount:number|null;promotion:boolean;startsAt:string;endsAt:string|null;type:PriceChangeView['type'];state:string};
 export type PublicCatalogEntry = {cartEnabled?:boolean;rating?:number|null;introduction?:Record<string,string>;referencePrices?:PublicReferencePrice[];

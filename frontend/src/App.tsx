@@ -32,10 +32,12 @@ const Currencies = lazy(() => import('./pages/Currencies'));
 const GeographicAreas = lazy(() => import('./pages/GeographicAreas'));
 const CategoryPathImport = lazy(() => import('./pages/CategoryPathImport'));
 const CategoryTreeManagement = lazy(() => import('./pages/CategoryTreeManagement'));
+const LiveCarts = lazy(() => import('./pages/LiveCarts'));
 
 const adminPages = [
   ['dashboard', 'nav.dashboard', Dashboard, AppstoreOutlined], ['trips', 'nav.trips', Trips, CalendarOutlined], ['orders', 'nav.orders', Orders, ShoppingOutlined],
   ['order-desk', 'nav.order_desk', OrderDesk, ScanOutlined], ['procurement', 'nav.procurement', ProcurementHUD, InboxOutlined],
+  ['live-carts', '实时购物车', LiveCarts, ShoppingOutlined],
   ['picking', 'nav.picking', PickingMaster, CheckSquareOutlined], ['products', 'products.title', ProductArchive, TagsOutlined],
   ['product-markers', 'marker.title', ProductMarkers, TagsOutlined],
   ['category-path-import', 'categoryImport.title', CategoryPathImport, TagsOutlined],

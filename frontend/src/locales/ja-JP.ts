@@ -1787,3 +1787,7 @@ Object.assign(messages,{
 });
 
 Object.assign(messages, {"categoryTree.primary":'主カテゴリ'});
+
+Object.assign(messages,{"purchase.recognition_failed": '解析を利用できないか、結果が不完全でした。入力内容は保持されています。再試行するか、原文のまま追加してください。'});
+Object.assign(messages,{"purchase.customer_only": "顧客としてログインするとテキストで購入依頼を追加できます。", "purchase.choose_merchant": "購入依頼を追加する前に店舗を選択してください。", "purchase.title": "購入依頼を追加", "purchase.hint": "キーボード入力、貼り付け、またはシステム音声入力を利用できます。", "purchase.example": "例：無糖豆乳を2箱、いちごを1パック", "purchase.original": "元の依頼", "purchase.recognize": "解析して追加", "purchase.as_written": "原文のまま追加", "purchase.undo": "この一括追加を取り消す", "purchase.added": "購入依頼を追加しました。", "purchase.linked": "商品を関連付け済み", "purchase.pending": "購入担当者の確認待ち", "purchase.full_submission": "送信した全文を表示", "purchase.quantity_uncertain": "数量または単位が未確認のため、原文を保持しています。", "purchase.price_pending": "価格確認待ち", "purchase.quantity": "依頼数量", "purchase.replace": "商品を変更", "purchase.link": "商品を関連付ける", "purchase.unlink": "関連付けを解除", "purchase.excluded": "価格確認待ちのため合計に含まれません。", "purchase.refresh": "更新してもう一度お試しください。", "purchase.search_placeholder": "商品名、カタログ番号、仕様を検索", "purchase.search_failed": "商品検索に失敗しました。もう一度お試しください。", "purchase.no_candidates": "購入可能な候補がありません", "purchase.choose": "選択", "purchase.cancel": "キャンセル"});
+Object.assign(messages,{"purchase.close":"購入依頼フォームを閉じる"});

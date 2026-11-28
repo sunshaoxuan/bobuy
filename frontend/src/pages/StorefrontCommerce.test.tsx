@@ -4,8 +4,8 @@ import{I18nProvider}from'../i18n';
 import{cartStorageKey,commitDraft,emptyCart,readDraft}from'../cart';
 import{installCartLocks}from'../test/cartLock';
 import Storefront from'./Storefront';
-const mocks=vi.hoisted(()=>({checkout:vi.fn(),profile:vi.fn(),saveProfile:vi.fn(),productSales:vi.fn(),trips:vi.fn(),activeTrips:vi.fn(),role:{user:{id:7,name:'A',email:'a@example.com',emailVerified:false,roles:['CUSTOMER']},isCustomer:true,isAuthenticated:true,loading:false,logout:vi.fn()}}));
-vi.mock('../api',()=>({api:{customerTrips:vi.fn()},recommendationApi:{nodes:vi.fn().mockResolvedValue([])},storefrontApi:mocks}));
+const mocks=vi.hoisted(()=>({checkout:vi.fn(),profile:vi.fn(),saveProfile:vi.fn(),productSales:vi.fn(),trips:vi.fn(),activeTrips:vi.fn(),liveCustomer:vi.fn(),role:{user:{id:7,name:'A',email:'a@example.com',emailVerified:false,roles:['CUSTOMER']},isCustomer:true,isAuthenticated:true,loading:false,logout:vi.fn()}}));
+vi.mock('../api',()=>({api:{customerTrips:vi.fn()},recommendationApi:{nodes:vi.fn().mockResolvedValue([])},storefrontApi:mocks,liveCartApi:{customer:mocks.liveCustomer}}));
 vi.mock('../context/UserRoleContext',()=>({useUserRole:()=>mocks.role}));
 // Same narrow Select adapter as StorefrontContext: JSDOM cannot parse AntD's selector.
 // Address Form, buttons, Storefront/cart hooks and all checkout assertions remain real.
@@ -17,6 +17,7 @@ function tree(){return<I18nProvider><MemoryRouter initialEntries={['/checkout']}
 const submit=()=>screen.getByRole('button',{name:/^Submit order/});
 beforeEach(()=>{vi.resetAllMocks();localStorage.clear();installCartLocks();localStorage.setItem('bobbuy_locale','en-US');mocks.role.user={id:7,name:'A',email:'a@example.com',emailVerified:false,roles:['CUSTOMER']};mocks.role.loading=false;mocks.role.isAuthenticated=true;
  mocks.trips.mockResolvedValue([{id:11,merchantId:1,merchantName:'Shop',deliveryArea:'Area',deliveryDate:'2026-11-10'}]);mocks.activeTrips.mockResolvedValue([]);mocks.productSales.mockResolvedValue([product]);mocks.profile.mockImplementation(async()=>({id:mocks.role.user.id,defaultAddress:address}));mocks.saveProfile.mockImplementation(async(body)=>({id:mocks.role.user.id,defaultAddress:body.defaultAddress}));seed();
+ mocks.liveCustomer.mockResolvedValue([]);
 });
 it('synchronously blocks double submit and retries an uncertain result with the identical key and payload',async()=>{
  let reject!:(error:Error)=>void;mocks.checkout.mockImplementationOnce(()=>new Promise((_ok,no)=>{reject=no;})).mockResolvedValue({orderId:99,total:24,currency:'JPY'});
@@ -65,4 +66,9 @@ it.each([['en-US','Keep account cart'],['zh-CN','保留账号购物车'],['zh-TW
 it('feature flag replaces the legacy hint and blocks an unverified checkout without changing the cart',async()=>{
  vi.stubEnv('VITE_CHECKOUT_EMAIL_VERIFICATION_ENABLED','true');
  try{render(tree());await screen.findByText('Verify your email to submit this order');expect(screen.queryByText('You can submit an order for approval before verifying your email.')).not.toBeInTheDocument();expect(submit()).toBeDisabled();fireEvent.click(submit());expect(mocks.checkout).not.toHaveBeenCalled();expect(readDraft('user:7').cart.items.p).toBe(2);}finally{vi.unstubAllEnvs();}
+});
+it('counts persisted text request lines as cart contents without exposing the empty-cart CTA or product checkout',async()=>{
+ const prior=readDraft('user:7');commitDraft('user:7',prior.revision,{...emptyCart(),tripId:11});
+ mocks.liveCustomer.mockResolvedValue([{id:4,merchantId:1,version:2,openTotal:{amount:0,unpricedLineCount:1},openLines:[{id:9,productId:null,quantity:3,unitPrice:null,currency:'JPY',ready:false,settlementId:null,version:0,requestBatchId:'batch',originalRequest:'three mangoes',originalSubmission:'three mangoes',requestedName:'mangoes',requestedUnit:null,requestConstraints:null,quantityConfirmed:true,productName:{},itemNumber:null,productSpecification:{}}]}]);
+ render(tree());expect(await screen.findByText('mangoes')).toBeInTheDocument();await waitFor(()=>expect(screen.getByRole('link',{name:'Cart, 3 items'})).toBeInTheDocument());expect(screen.getByText('3 items')).toBeInTheDocument();expect(screen.queryByText('Your cart is empty')).not.toBeInTheDocument();expect(screen.queryByRole('button',{name:/^Submit order/})).not.toBeInTheDocument();
 });
