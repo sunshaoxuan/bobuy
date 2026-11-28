@@ -42,7 +42,12 @@ class ProductLifecycleIntegrationTest {
  JsonNode data(ResultActions action)throws Exception{return json.readTree(action.andExpect(status().isOk()).andReturn().getResponse().getContentAsString()).get("data");}
  ResultActions call(String suffix,Object value,String token)throws Exception{return mvc.perform(post("/api/admin/products/trash"+suffix).header("Authorization","Bearer "+token).contentType(MediaType.APPLICATION_JSON).content(json.writeValueAsBytes(value)));}
  Map<String,Object> selection(String id){return Map.of("id",id,"version",products.findById(id).orElseThrow().getRecordVersion());}
- JsonNode trash()throws Exception{return data(mvc.perform(get("/api/admin/products/trash").header("Authorization","Bearer "+admin)));}
+ JsonNode trash()throws Exception{
+  var rows=data(mvc.perform(get("/api/admin/products/trash").header("Authorization","Bearer "+admin)));
+  var own=json.createArrayNode();
+  for(var row:rows)if(ids.contains(row.path("id").asText()))own.add(row);
+  return own;
+ }
  @Test void hidesFifteenAndRestoresExactLinksWithoutPhysicalDeletion()throws Exception{
   var selected=ids.subList(0,15).stream().map(this::selection).toList();call("/delete",selected,admin).andExpect(status().isOk());
   assertThat(products.deletedIds()).containsAll(ids.subList(0,15));
