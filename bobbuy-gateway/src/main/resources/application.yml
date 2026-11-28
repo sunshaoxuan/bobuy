@@ -29,6 +29,10 @@ spring:
           uri: lb://ai-service
           predicates:
             - Path=/api/ai/**
+        - id: merchant-product-archive
+          uri: lb://core-service
+          predicates:
+            - Path=/api/merchant/product-archive,/api/merchant/product-archive/**
         - id: core-default
           uri: lb://core-service
           predicates:

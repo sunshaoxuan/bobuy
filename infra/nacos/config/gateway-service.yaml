@@ -24,6 +24,10 @@ spring:
           uri: lb://core-service
           predicates:
             - Path=/api/ai/costco-onboarding,/api/ai/costco-onboarding/**
+        - id: merchant-product-archive-route
+          uri: lb://core-service
+          predicates:
+            - Path=/api/merchant/product-archive,/api/merchant/product-archive/**
         - id: ai-route
           uri: lb://ai-service
           predicates:

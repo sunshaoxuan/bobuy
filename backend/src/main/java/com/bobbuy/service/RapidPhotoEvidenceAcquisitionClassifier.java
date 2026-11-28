@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /** Selects the reduced first-stage acquisition only from a durable, owner-bound batch item. */
 @Component
-public final class RapidPhotoEvidenceAcquisitionClassifier
+public class RapidPhotoEvidenceAcquisitionClassifier
         implements CostcoNumberOnboardingService.EvidenceAcquisitionClassifier {
     private final JdbcTemplate jdbc;
 

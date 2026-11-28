@@ -73,6 +73,14 @@ class ProductionProfileRouteTest {
         .isEqualTo("lb://core-service");
   }
 
+  @Test void merchantArchiveUsesCoreExplicitly() throws Exception {
+    var properties = productionRoutes();
+    for (String path : List.of("/api/merchant/product-archive", "/api/merchant/product-archive/export-selection")) {
+      assertThat(destination(properties, "GET", path)).isEqualTo("lb://core-service");
+    }
+    assertThat(properties.getRoutes()).anyMatch(route -> route.getId().equals("merchant-product-archive-route"));
+  }
+
   @Test void existingServiceBoundariesStayIntact() throws Exception {
     var properties = productionRoutes();
     for (String path : List.of("/api/auth/login", "/api/auth/refresh", "/api/auth/me", "/api/auth/profile-other", "/api/auth/forgot-password", "/api/auth/reset-password")) {
