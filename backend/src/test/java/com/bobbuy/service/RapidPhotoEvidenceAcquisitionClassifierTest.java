@@ -17,7 +17,7 @@ class RapidPhotoEvidenceAcquisitionClassifierTest {
     @Test
     void classificationRequiresDurableJobAndMerchantOwnershipMatch() {
         var jdbc = mock(JdbcTemplate.class);
-        var job = new CostcoOnboardingJob("job-id", "key", 7, "supplier", "JP", "a".repeat(64),
+        var job = new CostcoOnboardingJob("job-id", "b".repeat(64), 7, "supplier", "JP", "a".repeat(64),
                 "123", null, 0, CostcoOnboardingJob.State.QUEUED, List.of(), List.of(), null, null,
                 null, Instant.parse("2026-11-28T00:00:00Z"));
         when(jdbc.queryForObject(anyString(), eq(Long.class), eq("job-id"), eq(7L)))
