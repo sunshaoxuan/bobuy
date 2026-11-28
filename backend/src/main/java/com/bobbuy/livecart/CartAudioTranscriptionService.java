@@ -13,7 +13,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 @Service
 public class CartAudioTranscriptionService {
@@ -31,6 +37,7 @@ public class CartAudioTranscriptionService {
     private final Duration rateWindow;
     private final Semaphore concurrency;
     private final Clock clock;
+    private final Duration providerTimeout;
     private final Map<String, Window> windows = new ConcurrentHashMap<>();
 
     public CartAudioTranscriptionService(List<AudioTranscriptionProvider> providers,
@@ -41,13 +48,18 @@ public class CartAudioTranscriptionService {
             @Value("${bobbuy.cart-audio.max-bytes:5242880}") long maxBytes,
             @Value("${bobbuy.cart-audio.max-concurrency:2}") int maxConcurrency,
             @Value("${bobbuy.cart-audio.rate-limit:6}") int rateLimit,
-            @Value("${bobbuy.cart-audio.rate-window-seconds:60}") int rateWindowSeconds) {
+            @Value("${bobbuy.cart-audio.rate-window-seconds:60}") int rateWindowSeconds,
+            @Value("${bobbuy.cart-audio.provider-timeout-seconds:30}") int providerTimeoutSeconds) {
         this(providers, providerId, approved, verified, maxDurationSeconds, maxBytes, maxConcurrency, rateLimit,
-                Duration.ofSeconds(rateWindowSeconds), Clock.systemUTC());
+                Duration.ofSeconds(rateWindowSeconds), Clock.systemUTC(), Duration.ofSeconds(providerTimeoutSeconds));
     }
 
     CartAudioTranscriptionService(List<AudioTranscriptionProvider> providers, String providerId, boolean approved, boolean verified,
             int maxDurationSeconds, long maxBytes, int maxConcurrency, int rateLimit, Duration rateWindow, Clock clock) {
+        this(providers, providerId, approved, verified, maxDurationSeconds, maxBytes, maxConcurrency, rateLimit, rateWindow, clock, Duration.ofSeconds(30));
+    }
+    CartAudioTranscriptionService(List<AudioTranscriptionProvider> providers, String providerId, boolean approved, boolean verified,
+            int maxDurationSeconds, long maxBytes, int maxConcurrency, int rateLimit, Duration rateWindow, Clock clock, Duration providerTimeout) {
         this.provider = providers.stream().filter(p -> p.id().equals(providerId)).findFirst().orElse(null);
         this.approved = approved;
         this.verified = verified;
@@ -57,6 +69,7 @@ public class CartAudioTranscriptionService {
         this.rateWindow = rateWindow;
         this.concurrency = new Semaphore(Math.max(1, maxConcurrency));
         this.clock = clock;
+        this.providerTimeout = providerTimeout.isNegative() || providerTimeout.isZero() ? Duration.ofSeconds(1) : providerTimeout;
     }
 
     public Capability capability() {
@@ -69,13 +82,18 @@ public class CartAudioTranscriptionService {
         if (!capability().enabled()) throw error(ErrorCode.SERVICE_UNAVAILABLE, "audio.unavailable");
         if (file == null || file.isEmpty() || file.getSize() > maxBytes || durationSeconds <= 0 || durationSeconds > maxDurationSeconds)
             throw error(ErrorCode.INVALID_REQUEST, "audio.invalid");
-        String mime = normalize(file.getContentType());
-        if (!provider.supportedMimeTypes().contains(mime)) throw error(ErrorCode.INVALID_REQUEST, "audio.format");
+        String declaredMime = normalize(file.getContentType());
         enforceRate(owner);
         if (!concurrency.tryAcquire()) throw error(ErrorCode.RATE_LIMITED, "audio.busy");
         try {
             byte[] bytes = file.getBytes();
-            String text = provider.transcribe(bytes, mime, locale == null ? "" : locale);
+            AudioContentInspector.Media media = AudioContentInspector.inspect(bytes)
+                    .orElseThrow(() -> error(ErrorCode.INVALID_REQUEST, "audio.format"));
+            if (!media.mimeType().equals(declaredMime) || !provider.supportedMimeTypes().contains(media.mimeType()))
+                throw error(ErrorCode.INVALID_REQUEST, "audio.format");
+            if (media.durationSeconds() > maxDurationSeconds || Math.abs(media.durationSeconds() - durationSeconds) > Math.max(2, media.durationSeconds() * .1))
+                throw error(ErrorCode.INVALID_REQUEST, "audio.invalid");
+            String text = transcribeBounded(bytes, media.mimeType(), locale == null ? "" : locale);
             if (text == null || text.isBlank()) throw error(ErrorCode.SERVICE_UNAVAILABLE, "audio.empty");
             return new Result(text.strip());
         } catch (ApiException ex) {
@@ -84,6 +102,23 @@ public class CartAudioTranscriptionService {
             throw error(ErrorCode.SERVICE_UNAVAILABLE, "audio.failed");
         } finally {
             concurrency.release();
+        }
+    }
+
+    private String transcribeBounded(byte[] bytes, String mime, String locale) throws Exception {
+        ExecutorService executor = Executors.newSingleThreadExecutor(r -> { Thread t=new Thread(r,"cart-audio-provider");t.setDaemon(true);return t; });
+        Future<String> call = executor.submit(() -> provider.transcribe(bytes, mime, locale));
+        try {
+            return call.get(providerTimeout.toMillis(), TimeUnit.MILLISECONDS);
+        } catch (InterruptedException ex) {
+            call.cancel(true); Thread.currentThread().interrupt(); throw ex;
+        } catch (TimeoutException ex) {
+            call.cancel(true); throw ex;
+        } catch (ExecutionException ex) {
+            if (ex.getCause() instanceof Exception cause) throw cause;
+            throw ex;
+        } finally {
+            executor.shutdownNow();
         }
     }
 

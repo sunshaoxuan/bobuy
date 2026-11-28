@@ -5,13 +5,15 @@
 - 基线：`feature/cart-text-purchase-request` 的 `632288d8`；本批在独立分支 `feature/cart-audio-transcription-batch2`，不推动、合并或发布 #211。
 - 只增加购物车请购的录完上传、转写稿编辑入口，以及顾客身份下的能力探测/上传端点；不做实时字幕、语音对话或生产配置变更。
 - 现有 `LlmGateway` 只有文本/视觉生成路由，没有已批准且已验证的音频转写端点。本候选因此用 `AudioTranscriptionProvider` 明确隔离运行端适配器；默认无 provider 且 `approved=false`，能力端点返回关闭，前端隐藏录音控件并保留键盘/系统听写。契约测试使用确定性的 mock，不冒充真实 provider 验收。
+- 2026-11-28 对当前仓库实现、应用配置引用和当前运行环境的**变量名**（不读取或改写秘密）复核：没有 `AudioTranscriptionProvider` 实现，没有 `BOBBUY_CART_AUDIO_*` 运行配置，也没有可证明已批准的语音端点；仅存在与音频批准无关的通用 OpenAI 路由变量名。因此本 PR 不接实际调用，能力继续关闭。待接条件是：提供方/端点与数据处理条款获批、适配器及模型明确、秘密由既有秘密设施注入、超时/取消可验证，并在真实环境完成 `approved` 与 `verified` 双门控验收。
 
 ## 实现与最小验证映射
 
 | 修改 | 最小验证 |
 |---|---|
-| 服务端能力门控、格式/60 秒/5 MiB/并发/频率限制和临时字节生命周期 | `CartAudioTranscriptionServiceTest` |
-| 浏览器格式交集、权限/取消/失败重试、停止与离开释放音轨、转写回填后编辑 | `TextPurchaseRequest.test.tsx` 与定向 recorder 测试/浏览器验收 |
+| 服务端能力门控、按容器内容识别格式与时长、60 秒/5 MiB/并发/频率限制、provider 超时中断和临时字节生命周期 | `CartAudioTranscriptionServiceTest` |
+| 顾客专属端点权限 | `CartAudioAuthorizationIntegrationTest` |
+| 浏览器格式交集、权限/上传取消/失败重试、停止与离开释放音轨、转写回填后编辑 | `TextPurchaseRequest.test.tsx` 与定向 recorder 测试/浏览器验收 |
 | 四语提示、44px 控件和窄屏布局 | i18n 检查、390×844 与 1280×800 截图及计算样式 |
 
 ## 运行与数据边界
@@ -25,8 +27,9 @@
 
 1. **真实 provider 待验收**：须安装一个经批准的 `AudioTranscriptionProvider`，明确配置 provider id，并分别设置批准与真实验证开关；需验证真实端点、模型、密钥来源、超时和数据处理条款后，才能视为可启用。当前候选没有 provider、秘密或生产配置。
 2. **真实设备证据待取得**：需在 HTTPS 的 iOS Safari 与 Android Chrome 各验证允许/拒绝权限、录制/停止、后台或离开释放系统麦克风指示、断网后保留可重试录音、转写后编辑。桌面模拟不能代替这些证据。
-3. 服务端从 multipart 元数据校验客户端测得的时长并独立限制字节数、并发和频率；当前不解码媒体容器来重新计算时长。接入真实 provider 前须由 provider 再限制/验证媒体时长，或增加经批准的安全媒体探测器。
-4. 频率窗口和并发信号量是单实例边界；多副本生产若批准启用，须换成共享限流器。临时上传仍受 Spring multipart 实现影响；本功能本身不创建持久文件，容器级 multipart 临时清理由运行时负责。
+3. 服务端不信任文件名、multipart MIME 或客户端时钟：会解析 MP4/WebM 容器内容，要求声明格式一致，并以容器时长执行 60 秒上限及客户端时长偏差校验。畸形或无法取得时长的容器拒绝进入 provider。
+4. provider 调用有独立超时，超时或请求线程被中断时会取消 worker 并释放并发许可；适配器仍必须响应 Java interruption，并为其网络客户端配置自身的连接/读取超时。
+5. 频率窗口和并发信号量是单实例边界；多副本生产若批准启用，须换成共享限流器。临时上传仍受 Spring multipart 实现影响；本功能本身不创建持久文件，容器级 multipart 临时清理由运行时负责。
 
 ## UI/UX 标准验收条款
 

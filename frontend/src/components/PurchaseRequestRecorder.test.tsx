@@ -24,3 +24,10 @@ it('keeps the text path available when permission is rejected and hides controls
  Object.defineProperty(navigator,'mediaDevices',{configurable:true,value:{getUserMedia:vi.fn().mockRejectedValue(Error('denied'))}});const rendered=render(view());fireEvent.click(await screen.findByRole('button',{name:'Record'}));expect(await screen.findByText(/Microphone access was not granted/)).toBeInTheDocument();
  rendered.unmount();mocks.audioCapability.mockResolvedValue({enabled:false,mimeTypes:[],maxDurationSeconds:60,maxBytes:0});await act(async()=>{render(view());});expect(screen.queryByRole('button',{name:'Record'})).not.toBeInTheDocument();
 });
+
+it('cancels an in-flight upload and releases the recording on unmount',async()=>{
+ const stop=vi.fn();Object.defineProperty(navigator,'mediaDevices',{configurable:true,value:{getUserMedia:vi.fn().mockResolvedValue({getTracks:()=>[{stop}]})}});
+ mocks.transcribe.mockImplementation((_blob:Blob,_seconds:number,_locale:string,signal:AbortSignal)=>new Promise((_resolve,reject)=>signal.addEventListener('abort',()=>reject(new DOMException('cancelled','AbortError')))));
+ const rendered=render(view());fireEvent.click(await screen.findByRole('button',{name:'Record'}));await waitFor(()=>expect(navigator.mediaDevices.getUserMedia).toHaveBeenCalled());fireEvent.click(screen.getByRole('button',{name:/Stop/}));fireEvent.click(screen.getByRole('button',{name:/Send for transcription/}));
+ const signal=mocks.transcribe.mock.calls[0][3] as AbortSignal;fireEvent.click(screen.getByRole('button',{name:'Cancel recording'}));expect(signal.aborted).toBe(true);expect(stop).toHaveBeenCalled();rendered.unmount();
+});
