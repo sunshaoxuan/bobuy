@@ -97,11 +97,19 @@ public interface OfficialImageCandidateFinder {
   private Optional<Candidate> fromProducts(Request request,List<OfficialProductResearch.Product> products){
    for(var product:products){String official=String.join(" ",product.name(),product.description());if(!Objects.equals(request.itemNumber(),product.itemNumber())||!sameVariant(request.specification()+" "+request.packaging(),official)||product.images().isEmpty())continue;return Optional.of(new Candidate(product.productUrl(),product.images().get(0),"official SKU "+request.itemNumber()+"; market "+request.market()+"; specification "+request.specification()+"; package "+request.packaging()));}return Optional.empty();
   }
-  static boolean sameVariant(String expected,String actual){var wanted=measures(expected);return !wanted.isEmpty()&&measures(actual).containsAll(wanted)&&packageCounts(actual).containsAll(packageCounts(expected));}
+  static boolean sameVariant(String expected,String actual){
+   String expectedText=normalizeMeasurements(expected),actualText=normalizeMeasurements(actual);
+   var wanted=measures(expectedText);
+   return !wanted.isEmpty()&&measures(actualText).containsAll(wanted)&&packageCounts(actualText).containsAll(packageCounts(expectedText));
+  }
+  private static String normalizeMeasurements(String value){
+   if(value==null)return "";
+   return java.text.Normalizer.normalize(org.springframework.web.util.HtmlUtils.htmlUnescape(value),java.text.Normalizer.Form.NFKC);
+  }
   private record Measure(String dimension,long amount){}
   private static Set<Measure> measures(String value){var result=new HashSet<Measure>();if(value==null)return result;var matcher=Pattern.compile("(?i)(\\d+(?:[.,]\\d+)?)\\s*(kg|g|ml|l)\\b").matcher(value);while(matcher.find()){double amount=Double.parseDouble(matcher.group(1).replace(',','.'));String unit=matcher.group(2).toLowerCase(Locale.ROOT);String dimension=unit.equals("ml")||unit.equals("l")?"volume":"weight";result.add(new Measure(dimension,Math.round(amount*(unit.equals("kg")||unit.equals("l")?1000:1))));}return result;}
-  private static Set<Long> packageCounts(String value){var result=new HashSet<Long>();if(value==null)return result;var m=Pattern.compile("(?i)(?:x|×)\\s*(\\d+)|(\\d+)\\s*(?:pack|packs|pk|個|本|袋|缶|箱)\\b").matcher(value);while(m.find()){long count=Long.parseLong(m.group(1)!=null?m.group(1):m.group(2));if(count>1)result.add(count);}return result;}
-  private static boolean hasIdentifier(String text,String item){return Pattern.compile("(?<![0-9])"+Pattern.quote(item)+"(?![0-9])").matcher(text).find();}
+  private static Set<Long> packageCounts(String value){var result=new HashSet<Long>();if(value==null)return result;var m=Pattern.compile("(?i)(?:x|×)\\s*(\\d+)|(\\d+)\\s*(?:(?:packs?|pk|pcs?|bottles?)\\b|[個本袋缶箱](?=セット|入り|入|組|[^\\p{L}\\p{N}]|$))").matcher(value);while(m.find()){long count=Long.parseLong(m.group(1)!=null?m.group(1):m.group(2));if(count>1)result.add(count);}return result;}
+  static boolean hasIdentifier(String text,String item){return CostcoNumberOnboardingService.containsExactItemNumber(text,item);}
   private static String normalize(String value){return value.toLowerCase(Locale.ROOT).replaceAll("[^\\p{L}\\p{N}]","");}
   private static String hash(String value){try{return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(value.getBytes(StandardCharsets.UTF_8)));}catch(Exception e){throw new IllegalStateException(e);}}
  }

@@ -97,6 +97,10 @@ class CostcoNumberOnboardingServiceTest {
     }
     @Test void normalizesProtocolOnlyAndRetainsLeadingZeroes() {
         assertEquals("0014110", CostcoNumberOnboardingService.normalizeItemNumber(" ００１４１１０ "));
+        assertEquals("57808-2", CostcoNumberOnboardingService.normalizeItemNumber(" ５７８０８－２ "));
+        assertTrue(CostcoNumberOnboardingService.containsExactItemNumber("SKU 57808-2", "57808-2"));
+        assertFalse(CostcoNumberOnboardingService.containsExactItemNumber("SKU 57808-2", "57808"));
+        assertFalse(CostcoNumberOnboardingService.containsExactItemNumber("SKU 57808-1", "57808-2"));
         for (var invalid : List.of("14110,77839", "1e5", "14110 77839", "ITEM 14110", "", "-14110", "1234567890123"))
             assertThrows(IllegalArgumentException.class, () -> CostcoNumberOnboardingService.normalizeItemNumber(invalid));
     }

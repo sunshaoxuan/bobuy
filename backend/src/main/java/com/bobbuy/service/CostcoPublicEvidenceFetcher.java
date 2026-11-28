@@ -59,7 +59,7 @@ public final class CostcoPublicEvidenceFetcher implements CostcoOfficialEvidence
     }
     @Override public List<CostcoOfficialEvidence> fetch(Query query) {
         if(query.merchantId()<=0||query.supplierId()==null||query.supplierId().isBlank()||query.market()==null||!query.market().matches("[A-Z]{2}")
-                ||query.itemNumber()==null||!query.itemNumber().matches("[0-9]{1,12}")||query.inputHash()==null||!query.inputHash().matches("[0-9a-f]{64}"))
+                ||!CostcoNumberOnboardingService.isItemNumber(query.itemNumber())||query.inputHash()==null||!query.inputHash().matches("[0-9a-f]{64}"))
             throw new IllegalArgumentException("onboarding.evidence_scope");
         long deadline=System.nanoTime()+Duration.ofSeconds(60).toNanos();
         var result=new ArrayList<CostcoOfficialEvidence>();var documents=new HashMap<URI,CostcoOfficialEvidence>();var fetchedSources=new HashSet<String>();int remainingBytes=24*1024*1024;

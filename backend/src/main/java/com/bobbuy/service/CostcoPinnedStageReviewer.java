@@ -30,11 +30,18 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
     private final CostcoEvidenceStore evidenceStore;
     private final ProductRepository products;
     private final CategoryTreeNodeRepository categories;
+    private final CostcoNumberOnboardingService.EvidenceAcquisitionClassifier acquisitionClassifier;
     CostcoPinnedStageReviewer(LlmGateway gateway, ObjectMapper mapper, CostcoEvidenceStore evidenceStore) { this(gateway,mapper,evidenceStore,null); }
     CostcoPinnedStageReviewer(LlmGateway gateway,ObjectMapper mapper,CostcoEvidenceStore evidenceStore,ProductRepository products){this(gateway,mapper,evidenceStore,products,null);}
-    @org.springframework.beans.factory.annotation.Autowired
     public CostcoPinnedStageReviewer(LlmGateway gateway, ObjectMapper mapper, CostcoEvidenceStore evidenceStore,ProductRepository products,CategoryTreeNodeRepository categories) {
+        this(gateway, mapper, evidenceStore, products, categories, job -> CostcoOfficialEvidenceFetcher.Acquisition.FULL);
+    }
+    @org.springframework.beans.factory.annotation.Autowired
+    public CostcoPinnedStageReviewer(LlmGateway gateway, ObjectMapper mapper, CostcoEvidenceStore evidenceStore,
+            ProductRepository products, CategoryTreeNodeRepository categories,
+            CostcoNumberOnboardingService.EvidenceAcquisitionClassifier acquisitionClassifier) {
         this.gateway = gateway; this.mapper = mapper; this.evidenceStore = evidenceStore;this.products=products;this.categories=categories;
+        this.acquisitionClassifier = acquisitionClassifier;
     }
     @Override public CostcoOnboardingDecision review(Stage stage, CostcoOnboardingJob job) {
         try {
@@ -66,6 +73,8 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
             var reviewedPhotoImages = new java.util.HashSet<String>();
             boolean photoAdmission=stage==Stage.ADMISSION && job.privatePhotoSha256()!=null;
             boolean rapidTextOnlyAdmission=isRapidTextOnlyAdmission(stage,job);
+            boolean rapidIntake = stage == Stage.INTAKE && job.privatePhotoSha256() != null
+                    && acquisitionClassifier.classify(job) == CostcoOfficialEvidenceFetcher.Acquisition.TEXT_ONLY;
             if (photoAdmission) {
                 for (var decision : job.decisions()) {
                     if (decision.stage()==Stage.IMAGE_SOURCE && decision.verdict()==Verdict.ACCEPT && decision.trace()!=null)
@@ -175,6 +184,14 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
                 stock, publication, or reuse permission. The first ADMISSION image is the original private
                 photo; use it to check the observed tag. Only the separate reviewed official image may be
                 selected as the officialImageSha256. Report uncertainty instead of inventing details.
+                """ : "") + (rapidIntake ? """
+                RAPID INTAKE: There is one additional acceptable identity label. When the original attachment is a
+                Costco product-page screenshot and the official 商品番号 label and its complete value are legible,
+                treat that label as an identity anchor. Set photoFacts.priceTagVisible to true for this identity check,
+                copy the complete identifier to identifiedItemNumber and candidate.itemNumber, and keep any hyphen and
+                its suffix. A screenshot supplies identity only. Never extract stock or price from it. Leave amount,
+                currency, unit, conditions and transcription null, and use UNKNOWN for priceKind. A product picture by
+                itself does not qualify. Publication still requires independently fetched and verified official source evidence.
                 """ : "") + (rapidTextOnlyAdmission ? """
                 RAPID TEXT-ONLY ADMISSION: This private-photo job intentionally has no separately supplied official
                 product image. That absence is expected and has no bearing on ADMISSION; do not request image evidence
@@ -182,6 +199,8 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
                 verified official text, category selection, and the four locales. Keep unsupported optional values
                 unknown. The private supplier photo is private evidence only, never an official product image, and the
                 candidate officialImageSha256 must be null.
+                If the private source is a Costco product-page screenshot, re-read the entire visible 商品番号,
+                including its suffix, and require it to match the exact identifier in the independently fetched document.
                 The server carries forward the archive classification from the accepted FACTS decision.
                 """ : "") + (photoDetails ? """
                 candidate may additionally contain archiveDetails with keys descriptionJa, categoryNodeId, storageCondition.
@@ -197,7 +216,7 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
                     || json.path("reason").asText().isBlank() || json.path("reason").asText().length() > 4000)
                 throw new IllegalArgumentException("onboarding.decision_schema");
             Verdict verdict = Verdict.valueOf(json.path("verdict").asText());
-            String item = nullableText(json.get("identifiedItemNumber"), 12);
+            String item = nullableText(json.get("identifiedItemNumber"), 25);
             Candidate candidate = null;
             if (json.hasNonNull("candidate")) {
                 JsonNode c = json.get("candidate");

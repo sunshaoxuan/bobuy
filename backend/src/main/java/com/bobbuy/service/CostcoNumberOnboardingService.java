@@ -22,6 +22,7 @@ import static com.bobbuy.service.CostcoOnboardingDecision.*;
  */
 public final class CostcoNumberOnboardingService {
     public static final URI REQUIRED_NODE = URI.create("https://ccnode.briconbric.com:49530/v1");
+    private static final java.util.regex.Pattern ITEM_NUMBER = java.util.regex.Pattern.compile("[0-9]{1,12}(?:-[0-9]{1,12})?");
     public record Input(long merchantId, String supplierId, String market, String requestId,
             String itemNumber, String privatePhotoSha256) {
         public Input {
@@ -203,8 +204,16 @@ public final class CostcoNumberOnboardingService {
     public static String normalizeItemNumber(String raw) {
         if (raw == null) throw new IllegalArgumentException("onboarding.item_required");
         String result = Normalizer.normalize(raw, Normalizer.Form.NFKC).strip();
-        if (!result.matches("[0-9]{1,12}")) throw new IllegalArgumentException("onboarding.one_item_required");
+        if (!isItemNumber(result)) throw new IllegalArgumentException("onboarding.one_item_required");
         return result; // Preserve leading zeroes; do not infer a product from the number's length.
+    }
+    public static boolean isItemNumber(String value) {
+        return value != null && ITEM_NUMBER.matcher(value).matches();
+    }
+    /** Exact textual boundary for Costco variants: a base number is not evidence for a hyphenated SKU. */
+    static boolean containsExactItemNumber(String text, String itemNumber) {
+        return text != null && isItemNumber(itemNumber) && java.util.regex.Pattern.compile(
+                "(?<![0-9-])" + java.util.regex.Pattern.quote(itemNumber) + "(?![0-9-])").matcher(text).find();
     }
     public static String candidateHash(Candidate c) {
         var translations = c.translatedNames().entrySet().stream().sorted(java.util.Map.Entry.comparingByKey())

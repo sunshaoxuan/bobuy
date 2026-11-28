@@ -171,3 +171,14 @@ fb4cbdf1 原生后端与 CodeQL 通过，前端只剩与版本无直接依赖的
 后置查找已回传独立精确货号查找模式、同款官方结构与 og:image 父子收据匹配及安全错误类别。失效证据仅后置候选查找。保留已取得的真实照片发布回读，清空本合成库后只重跑新 finder 实际官方网络以及修改过的 planner/finder 定向单测。
 
 真实后置 finder 已从同款供应商官网取得货号 53432 的官方图，含身份与页面来源校验，31 项定向测试通过。与独立进程真实 claim、无图公开浏览回读及此前 V55 双商品批次证据闭合。冻结本批后端修正与测试，提交原 PR，正式验证沿用原生 PR checks 和 CodeQL，不再重复同条件本地测试。既有前端与实图按未改的运行代码复用。门禁通过后在同一生产基础上原子配置用户授权的固定节点凭据，再合并触发生产 CD。
+
+## 2026-11-29 Costco 连字符变体前置范围
+
+用户授权只扩展快速照片上架的 Costco 商品番号协议，使 `57808-2` 从照片 intake、审核、可信官网取证、商品投影到发布后找图全程保持原值；`57808`、`57808-1`、`57808-2` 必须互不匹配。保留纯数字历史行为、SSRF 网络边界、未知价格/库存和独立官网取证门槛，不改 BoBuy 价格或库存。由本地协调者完成发布及生产样本验收。
+
+本批最小验证为 `CostcoNumberOnboardingServiceTest`、`CostcoPublicEvidenceFetcherTest`、`CostcoPinnedStageReviewerTest`、`OfficialProductResearchTest` 和 `OfficialImageCandidateFinderTest`。Costco 页面在当前执行环境被代理以 HTTP 403 阻断，因此加入只绑定用户给定 canonical、精确 JSON-LD SKU 与页面规格格子的现实 HTML 夹具；夹具不声明库存、Costco 价格或任何回退证据。
+
+
+本地用既有批次归属分类器限制官网截图识别；准入复核截图完整货号与官网结构相同。实际 Costco 日本站短地址与规范地址均已核对 HTTP 200、准确 JSON-LD SKU，官网主图 HTTPS 可用。
+
+五组 76 项通过。真实官网 JSON-LD 的容量实际为 340 加 HTML 全角单位实体，套装为 3本セット。这是初次查找规格验证的具体漏项。只改同款找图规格比较为实体解码及兼容规范化，保留容量与件数负例。失效仅 finder 核对，最小重跑 mvn -B -pl bobbuy-common -am -Dtest=OfficialImageCandidateFinderTest -Dsurefire.failIfNoSpecifiedTests=false test，其余四组 67 项继续复用。

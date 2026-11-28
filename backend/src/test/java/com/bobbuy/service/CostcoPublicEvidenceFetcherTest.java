@@ -35,6 +35,19 @@ class CostcoPublicEvidenceFetcherTest {
     private CostcoPublicEvidenceFetcher fetcher(Store store,List<Source> sources,CostcoPublicEvidenceFetcher.Transport transport){return new CostcoPublicEvidenceFetcher(q->plan(sources),store,h->new InetAddress[]{publicIp()},transport,clock);}
     private CostcoPublicEvidenceFetcher.Response response(String type,byte[] body){return new CostcoPublicEvidenceFetcher.Response(200,Map.of("content-type",List.of(type)),body);}
     private byte[] png()throws IOException{var out=new ByteArrayOutputStream();ImageIO.write(new BufferedImage(20,10,BufferedImage.TYPE_INT_RGB),"png",out);return out.toByteArray();}
+    @Test void acceptsHyphenatedVariantScopeWithoutWeakeningInputValidation(){
+        var variant=new CostcoOfficialEvidenceFetcher.Query(7,"costco-jp","JP","57808-2",null,"a".repeat(64));
+        var page=URI.create("https://www.costco.co.jp/Blue-PinkGreen/Fozzis-Foaming-Body-Soap-Blue-PinkGreen-3PC/p/57808-2");
+        var source=new Source(page,page,Kind.DOCUMENT,Priority.COSTCO);
+        var planner=(CostcoEvidenceAcquisitionPlanner)q->new Plan(q.inputHash(),"fixture","fixture",REQUIRED_NODE,List.of(source),true);
+        var accepted=new CostcoPublicEvidenceFetcher(planner,new Store(),h->new InetAddress[]{publicIp()},
+                (u,a,m,t)->response("text/html","official fixture".getBytes(StandardCharsets.UTF_8)),clock);
+        assertEquals(1,accepted.fetch(variant).size());
+        for(String lookalike:List.of("57808-","57808--2","57808-A","-57808-2")){
+            var invalid=new CostcoOfficialEvidenceFetcher.Query(7,"costco-jp","JP",lookalike,null,"a".repeat(64));
+            assertThrows(IllegalArgumentException.class,()->accepted.fetch(invalid));
+        }
+    }
     @Test void documentThenRealDecodedImageKeepsExactBytesQueryAndParentEvidenceHash()throws Exception {
         var store=new Store();var called=new ArrayList<URI>();byte[] pixels=png();
         var receipts=fetcher(store,List.of(picture(),document()),(uri,address,max,time)->{called.add(uri);assertEquals(publicIp(),address);return response(uri.equals(doc)?"text/html; charset=utf-8":"image/png",uri.equals(doc)?("<img src=\""+image+"\">").getBytes(StandardCharsets.UTF_8):pixels);}).fetch(query);
