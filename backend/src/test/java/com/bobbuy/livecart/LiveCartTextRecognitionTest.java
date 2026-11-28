@@ -56,6 +56,28 @@ class LiveCartTextRecognitionTest {
   assertThat(parsed.toString()).contains("fragment=无糖豆浆两箱","quantity=2","fragment=草莓一盒","constraints=不要太熟");
  }
 
+ @Test void splitsMergedLeadingStandaloneItemNumber() throws Exception {
+  when(llm.generate(any(),any(),any())).thenReturn(Optional.of("[{\"fragment\":\"59363，卖场新出的黑芝麻雪糕\",\"name\":\"黑芝麻雪糕\",\"quantity\":1}]"));
+  assertThat(parse("59363，卖场新出的黑芝麻雪糕").toString()).contains("fragment=59363","fragment=卖场新出的黑芝麻雪糕");
+ }
+
+ @Test void splitsMiddleAndMultipleStandaloneItemNumbersWithoutChangingOtherModelLines() throws Exception {
+  when(llm.generate(any(),any(),any())).thenReturn(Optional.of("[{\"fragment\":\"牛奶\",\"name\":\"牛奶\",\"quantity\":1},{\"fragment\":\"苹果，59363，雪糕，48271\",\"name\":\"苹果和雪糕\",\"quantity\":1},{\"fragment\":\"草莓\",\"name\":\"草莓\",\"quantity\":1}]"));
+  var parsed=parse("牛奶，苹果，59363，雪糕，48271，草莓");
+  assertThat(parsed).hasSize(6);
+  assertThat(parsed.toString()).contains("fragment=牛奶","fragment=苹果","fragment=59363","fragment=雪糕","fragment=48271","fragment=草莓");
+ }
+
+ @Test void alreadyCorrectModelSplitIsPreserved() throws Exception {
+  when(llm.generate(any(),any(),any())).thenReturn(Optional.of("[{\"fragment\":\"牛奶\",\"name\":\"牛奶\",\"quantity\":2},{\"fragment\":\"苹果\",\"name\":\"苹果\",\"quantity\":3},{\"fragment\":\"草莓\",\"name\":\"草莓\",\"quantity\":4}]"));
+  assertThat(parse("牛奶，苹果；草莓").toString()).contains("fragment=牛奶, name=牛奶, quantity=2","fragment=苹果, name=苹果, quantity=3","fragment=草莓, name=草莓, quantity=4");
+ }
+
+ @Test void ambiguousMergedItemNumberIsRejected() {
+  when(llm.generate(any(),any(),any())).thenReturn(Optional.of("[{\"fragment\":\"不要，59363，改要雪糕\",\"name\":\"雪糕\",\"quantity\":1}]"));
+  assertThatThrownBy(()->parse("不要，59363，改要雪糕")).isInstanceOf(LiveCartException.class).hasMessage("CART_REQUEST_RECOGNITION_FAILED");
+ }
+
  private List<?> parse(String text) throws Exception {
   Method method=LiveCartService.class.getDeclaredMethod("parseText",String.class,boolean.class);method.setAccessible(true);
   try{return (List<?>)method.invoke(service,text,true);}catch(InvocationTargetException e){if(e.getCause() instanceof RuntimeException runtime)throw runtime;throw e;}
