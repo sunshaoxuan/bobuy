@@ -165,9 +165,20 @@ it('a middle failure retains the first uploaded asset/preview, leaves later file
  const statuses=screen.getByRole('list',{name:'Image upload status'});expect(statuses).toHaveTextContent('one.png');expect(statuses).toHaveTextContent('two.png');expect(statuses).toHaveTextContent('three.png');expect(statuses).toHaveTextContent('Pending');expect(statuses).toHaveTextContent('Failed');expect(screen.getByText('Uploaded images are in this draft. Save the master to associate them.')).toBeInTheDocument();expect(screen.queryByText('Next: verify the selected files and source to enable upload.')).not.toBeInTheDocument();expect(mock.save).not.toHaveBeenCalled();
 });
 it('duplicate bytes under different names or a reselected successful file reuse the SHA/asset without a second upload',async()=>{
- const a=file('same-a.png',1),b=file('same-b.png',1);mock.upload.mockImplementation(async()=>picture('same-asset',a.sha));
+ const a=file('same-a.png',1),b=file('same-b.png',1);
+ let finish!:(asset:ReturnType<typeof picture>)=>void;
+ mock.upload.mockImplementation(()=>new Promise(resolve=>{finish=resolve;}));
  render(<I18nProvider><ProductCatalogPanel id="p1" entries={[]} onChoose={vi.fn()} onSaved={vi.fn()}/></I18nProvider>);await openMedia();select([a.file,b.file]);
- await waitFor(()=>expect(input().disabled).toBe(true));await waitFor(()=>expect(input().value).toBe(''));select([b.file]);await waitFor(()=>expect(input().value).toBe(''));expect(mock.upload).toHaveBeenCalledTimes(1);expect(document.querySelectorAll('.catalog-filmstrip button')).toHaveLength(1);
+ await waitFor(()=>expect(input()).toBeDisabled());
+ await waitFor(()=>expect(mock.upload).toHaveBeenCalledOnce());
+ await act(async()=>finish(picture('same-asset',a.sha)));
+ await waitFor(()=>expect(input()).not.toBeDisabled());
+ expect(input().value).toBe('');
+ select([b.file]);
+ await waitFor(()=>expect(input()).not.toBeDisabled());
+ expect(input().value).toBe('');
+ expect(mock.upload).toHaveBeenCalledOnce();
+ expect(document.querySelectorAll('.catalog-filmstrip button')).toHaveLength(1);
 });
 it('a slow response cannot append to another product or clear its loading state',async()=>{
  const a=file('late.png');let resolve!:(v:ReturnType<typeof picture>)=>void;mock.upload.mockImplementation(()=>new Promise(r=>{resolve=r;}));

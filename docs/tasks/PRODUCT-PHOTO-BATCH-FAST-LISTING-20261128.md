@@ -119,3 +119,9 @@
 第二次原生前端发现 StockMaster 被新增 useUserRole 强制依赖，影响既有独立挂载；当前修正由 ProductArchive 传已有商家 ID 给 StockMaster，将依赖放回已有鉴权入口。仅运行 StockMaster 和快速上架的新增入口定向用例，复验三视口批次入口。匿名占位和后端证据保持。另两失败为独立 CheckoutEmailVerification 网络重试和已有重复图上传夹具，仍需按确切日志判断是否为相邻问题。
 
 本地复测 StockMaster 和快速上架 2 文件 30 项通过。第二轮 CodeQL 和后端门禁通过；前端两项相邻失败分别为 CheckoutEmailVerification 的重试提示和商品图库重复字节测试中的临时上传按钮可见性，候选未额外改动这两处。原生下一轮覆盖影响集合。
+
+正式 PR 当前候选 4f0f7b38。商品档案入口传递角色的实际 UI 证据需要刷新，同一浏览器夹具复测三视口。既有的匿名详情功能、后端、截图几何和合成 PostgreSQL 业务证据按未变源码继续适用。
+
+4f0f7b38 实跑 Chrome 360/390/1280 均可打开批次、确认候选图入口并打开匿名前台缺图详情。无 Console 错误，手机两按钮实际 44px，三个视口间距 8px。图和网络回执已保存在 docs/reports/evidence/rapid-photo-listing-20261128。原生第三轮 PR checks 46128325516，CodeQL 46128325503。
+
+第三轮前端 151 套通过，唯一失败为直接关联商品图库重复字节测试的瞬态按钮。CheckoutEmailVerification 和 StockMaster 均通过。复用 #211 的 8f6c10f7 已验证测试夹具修正，仅把固定 Promise、恢复可用及一次上传断言应用到同一用例。产品代码与 4f0f7b38 不变，前台、后端、PostgreSQL 证据继续有效。原生前端门禁负责新测试输入。
