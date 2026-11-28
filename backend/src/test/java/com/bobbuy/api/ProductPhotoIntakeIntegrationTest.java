@@ -40,6 +40,8 @@ class ProductPhotoIntakeIntegrationTest {
    if(!Boolean.TRUE.equals(jdbc.queryForObject("select to_regclass('bb_costco_onboarding_job') is not null",Boolean.class)))ScriptUtils.executeSqlScript(c,new ClassPathResource("db/migration/V30__costco_onboarding_jobs.sql"));
    ScriptUtils.executeSqlScript(c,new ClassPathResource("db/migration/V48__product_photo_observations.sql"));
    applyPhotoQueueMigration(c);
+   if(!Boolean.TRUE.equals(jdbc.queryForObject("select to_regclass('bb_photo_publish_batch') is not null",Boolean.class)))
+    ScriptUtils.executeSqlScript(c,new ClassPathResource("db/migration/V55__photo_quick_publish_batches.sql"));
   }
   if(users.findById(1000L).isEmpty())store.seed();
   auth=tokens.createAccessToken(users.findById(1000L).orElseThrow());
@@ -195,6 +197,64 @@ class ProductPhotoIntakeIntegrationTest {
   var labels=facts.path("transcription").path("packagingLabels");
   assertThat(labels.toString()).contains("93963","739","798");
   assertThat(fresh.path("saved").isNull()).isTrue();
+ }
+
+ @Test @EnabledIfEnvironmentVariable(named="BOBBUY_PHOTO_LIVE_TEST",matches="true")
+ void liveRapidPhotoPublishesWithoutWaitingForAnImage() throws Exception {
+  categories.saveAndFlush(new CategoryTreeNode("photo-live-frozen-seafood",null,
+      Map.of("ja-JP","冷凍魚介類"),List.of("photo-live-frozen-seafood"),0,null));
+  var batch = json.createObjectNode().put("requestKey", UUID.randomUUID().toString())
+      .put("supplierId",supplier).put("market","JP");
+  var base = "/api/photo-quick-publish";
+  var created = mvc.perform(post(base).header("Authorization","Bearer "+auth)
+      .contentType(MediaType.APPLICATION_JSON).content(batch.toString()))
+      .andExpect(status().isOk()).andReturn().getResponse();
+  var batchPath = base+"/"+json.readTree(created.getContentAsByteArray()).path("data").path("id").asText();
+  var filename = "IMG_1484.jpg";
+  var photo = new MockMultipartFile("files",filename,"image/jpeg",Files.readAllBytes(Path.of("../sample",filename)));
+  mvc.perform(multipart(batchPath+"/items").file(photo).param("requestKey",UUID.randomUUID().toString())
+      .header("Authorization","Bearer "+auth)).andExpect(status().isOk());
+  mvc.perform(post(batchPath+"/seal").header("Authorization","Bearer "+auth)).andExpect(status().isOk());
+
+  var deadline = Instant.now().plusSeconds(390);
+  String previous = "";
+  while(Instant.now().isBefore(deadline)){
+   var current = mvc.perform(get(batchPath).header("Authorization","Bearer "+auth))
+       .andExpect(status().isOk()).andReturn().getResponse();
+   var row = json.readTree(current.getContentAsByteArray()).path("data").path("items").get(0);
+   String state = row.path("state").asText();
+   String issue = row.path("issueCode").asText("");
+   if(!state.equals(previous)) System.out.printf("LIVE RAPID batch_state=%s issue=%s%n",state,issue);
+   previous = state;
+   if("PUBLISHED".equals(state)){
+    var productId = row.path("productId").asText();
+    mvc.perform(get("/api/storefront/product-browse/"+productId))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.data.item.productId").value(productId))
+        .andExpect(jsonPath("$.data.item.itemNumber").value("53432"))
+        .andExpect(jsonPath("$.data.item.rapidListingImagePending").value(true));
+    assertThat(jdbc.queryForObject("select count(*) from bb_official_image_lookup where product_id=?",Long.class,productId)).isEqualTo(1L);
+    if ("true".equals(System.getenv("BOBBUY_OFFICIAL_IMAGE_LOOKUP_WORKER_ENABLED"))) {
+     var imageDeadline = Instant.now().plusSeconds(170);
+     while (Instant.now().isBefore(imageDeadline)) {
+      var lookup = jdbc.queryForMap("select state,issue_code,source_page from bb_official_image_lookup where product_id=?",productId);
+      if ("CANDIDATE".equals(lookup.get("state"))) {
+       assertThat((String)lookup.get("source_page")).contains("/p/53432");
+       System.out.println("LIVE RAPID independent official image candidate found after publication");
+       return;
+      }
+      if (Set.of("NOT_FOUND","FAILED").contains(lookup.get("state")))
+       throw new AssertionError("Post-publication official search stopped: "+lookup.get("issue_code"));
+      Thread.sleep(2000);
+     }
+     throw new AssertionError("Post-publication official search did not complete");
+    }
+    return;
+   }
+   if(Set.of("NEEDS_INFORMATION","FAILED").contains(state)) throw new AssertionError("Live rapid photo stopped: "+issue);
+   Thread.sleep(2000);
+  }
+  throw new AssertionError("Live rapid photo did not publish: "+previous);
  }
 
  private JsonNode recognizeLivePhoto(String filename) throws Exception {

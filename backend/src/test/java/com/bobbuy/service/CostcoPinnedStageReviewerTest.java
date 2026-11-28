@@ -29,6 +29,7 @@ class CostcoPinnedStageReviewerTest {
     }
     CostcoOnboardingJob job(List<CostcoOfficialEvidence> evidence,List<CostcoOnboardingDecision> decisions,String photo){return new CostcoOnboardingJob("fixture-job","b".repeat(64),7L,"supplier-string","JP",INPUT,"00123",photo,2,CostcoOnboardingJob.State.AI_REVIEW,evidence,decisions,null,null,null,Instant.parse("2026-11-09T01:00:00Z"));}
     CostcoOfficialEvidence document(Store store){byte[] bytes="<h1>Actual fixture 00123</h1><script type=\"application/ld+json\">{\"packaging\":\"80 x 2\"}</script>".getBytes(java.nio.charset.StandardCharsets.UTF_8);String hash=CostcoPinnedStageReviewer.digest(bytes);store.contents.put(hash,bytes);return new CostcoOfficialEvidence("doc",PAGE,PAGE,hash,Instant.parse("2026-11-09T01:00:00Z"),"text/html",null,null,List.of());}
+    CostcoOfficialEvidence exactCostcoDocument(Store store)throws Exception{byte[] bytes=getClass().getResourceAsStream("/costco/product-53432.html").readAllBytes();String hash=CostcoPinnedStageReviewer.digest(bytes);store.contents.put(hash,bytes);URI page=URI.create("https://www.costco.co.jp/c/Frozen-Mixed-Seafood-1kg/p/53432");return new CostcoOfficialEvidence("real-html-fixture",page,page,hash,Instant.parse("2026-11-28T01:00:00Z"),"text/html",null,null,List.of());}
     byte[] png()throws Exception{var b=new java.io.ByteArrayOutputStream();javax.imageio.ImageIO.write(new java.awt.image.BufferedImage(4,4,java.awt.image.BufferedImage.TYPE_INT_RGB),"png",b);return b.toByteArray();}
     @Test void semanticAmbiguityComesFromModelAndActualTextIsBoundToTrace(){
         var gateway=new FakeGateway();var store=new Store();var doc=document(store);
@@ -189,19 +190,50 @@ class CostcoPinnedStageReviewerTest {
         var plan=new CostcoPinnedEvidencePlanner(gateway,mapper,store).plan(new CostcoOfficialEvidenceFetcher.Query(7,"supplier-string","JP","00123",null,INPUT));
         assertFalse(plan.discoveryComplete());assertEquals(1,plan.sources().size());assertEquals("https://www.costco.co.jp/search?text=00123",plan.sources().get(0).fetchUrl().toString());
     }
-    @Test void rapidTextOnlyPlannerRejectsImageDiscoveryProposals(){
+    @Test void rapidTextOnlyPlannerRejectsImageDiscoveryProposals()throws Exception{
         var gateway=new FakeGateway();var store=new Store();
         gateway.answer="""
                 {"sources":[{"canonicalUrl":"https://www.costco.co.jp/p/00123",
                 "fetchUrl":"https://www.costco.co.jp/image.jpg","kind":"IMAGE","priority":"COSTCO"}],
                 "discoveryComplete":true}
                 """;
-        var query=new CostcoOfficialEvidenceFetcher.Query(7,"supplier-string","JP","00123",
+        var query=new CostcoOfficialEvidenceFetcher.Query(7,"supplier-string","JP","53432",
                 "c".repeat(64),INPUT,CostcoOfficialEvidenceFetcher.Acquisition.TEXT_ONLY);
-        var plan=new CostcoPinnedEvidencePlanner(gateway,mapper,store).plan(query,List.of(document(store)));
+        var plan=new CostcoPinnedEvidencePlanner(gateway,mapper,store).plan(query,List.of(exactCostcoDocument(store)));
         assertTrue(plan.discoveryComplete());
         assertTrue(plan.sources().isEmpty());
         assertTrue(gateway.prompt.contains("DOCUMENT sources only"));
+    }
+    @Test void rapidTextOnlyCompletesWithVerifiedExactProductDespiteMoreCopyProposals() throws Exception {
+        var gateway=new FakeGateway();var store=new Store();
+        var document=exactCostcoDocument(store);
+        gateway.answer="""
+                {"sources":[{"canonicalUrl":"https://www.costco.co.jp/c/Frozen-Mixed-Seafood-1kg/p/53432",
+                "fetchUrl":"https://www.costco.co.jp/c/Frozen-Mixed-Seafood-1kg/p/53432","kind":"DOCUMENT","priority":"COSTCO"}],
+                "discoveryComplete":false}
+                """;
+        var textOnly=new CostcoOfficialEvidenceFetcher.Query(7,"supplier-string","JP","53432",
+                "c".repeat(64),INPUT,CostcoOfficialEvidenceFetcher.Acquisition.TEXT_ONLY);
+        var plan=new CostcoPinnedEvidencePlanner(gateway,mapper,store).plan(textOnly,List.of(document));
+        assertTrue(plan.discoveryComplete());
+        assertTrue(plan.sources().isEmpty());
+
+        var wrongSku=new CostcoOfficialEvidenceFetcher.Query(7,"supplier-string","JP","99999",
+                "c".repeat(64),INPUT,CostcoOfficialEvidenceFetcher.Acquisition.TEXT_ONLY);
+        gateway.answer="{\"sources\":[],\"discoveryComplete\":true}";
+        assertThrows(CostcoNumberOnboardingService.NeedsInput.class,
+                ()->new CostcoPinnedEvidencePlanner(gateway,mapper,store).plan(wrongSku,List.of(document)));
+
+        var full=new CostcoOfficialEvidenceFetcher.Query(7,"supplier-string","JP","53432",
+                "c".repeat(64),INPUT,CostcoOfficialEvidenceFetcher.Acquisition.FULL);
+        gateway.answer="""
+                {"sources":[{"canonicalUrl":"https://www.costco.co.jp/c/Frozen-Mixed-Seafood-1kg/p/53432",
+                "fetchUrl":"https://www.costco.co.jp/c/Frozen-Mixed-Seafood-1kg/p/53432","kind":"DOCUMENT","priority":"COSTCO"}],
+                "discoveryComplete":false}
+                """;
+        var fullPlan=new CostcoPinnedEvidencePlanner(gateway,mapper,store).plan(full,List.of(document));
+        assertFalse(fullPlan.discoveryComplete());
+        assertEquals(1,fullPlan.sources().size());
     }
     @Test void photoDiscoveryStartsAtExactItemAndCanReviewTextWithoutAnImage(){
         var gateway=new FakeGateway();

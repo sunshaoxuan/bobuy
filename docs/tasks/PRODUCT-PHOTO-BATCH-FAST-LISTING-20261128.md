@@ -125,3 +125,43 @@
 4f0f7b38 实跑 Chrome 360/390/1280 均可打开批次、确认候选图入口并打开匿名前台缺图详情。无 Console 错误，手机两按钮实际 44px，三个视口间距 8px。图和网络回执已保存在 docs/reports/evidence/rapid-photo-listing-20261128。原生第三轮 PR checks 46128325516，CodeQL 46128325503。
 
 第三轮前端 151 套通过，唯一失败为直接关联商品图库重复字节测试的瞬态按钮。CheckoutEmailVerification 和 StockMaster 均通过。复用 #211 的 8f6c10f7 已验证测试夹具修正，仅把固定 Promise、恢复可用及一次上传断言应用到同一用例。产品代码与 4f0f7b38 不变，前台、后端、PostgreSQL 证据继续有效。原生前端门禁负责新测试输入。
+
+fb4cbdf1 原生后端与 CodeQL 通过，前端只剩与版本无直接依赖的既有 CheckoutEmailVerification 网络重试时序。该用例在上一候选通过，本次仅补图库测试夹具因此已有瞬态差异证据。按最小范围在同 workflow 只重试失败的 Frontend checks job 140929232636 一次，保留后端与 CodeQL 结果；不修改结账模块。
+
+当前停在生产依赖：fb4cbdf1 的 PR checks 46128762843（第 2 次，仅重跑前端）和 CodeQL 46128762805 均成功。PR #213 保持草稿，主分支最近成功 CD 仍为 45755692755 / eaf31c37。未确认可用的生产照片识别和官网搜索连接，真实模型联通和生产验收仍缺失。继续时复用原候选及通过证据，使用受保护的 BoBuy 连接并按计划完成必要实测。测试 Vite 已停止，合成 PostgreSQL 库、账号已删除，原本地服务恢复停止。保留独立工作树、正式截图、CI 及任务记录以便接续。
+
+2026-11-28 18:31:33 +09:00 复查当前生产 eaf31c37：Core 和 AI 启动日志均 active=unconfigured。Core 的照片 worker 已开启，模型名称有默认值，两个实例均无桥接 URL、明文密钥引用或加密密钥组合；生产主环境配置文件也无相应字段。已检查现有 CD 环境、常规受保护配置及生产数据库，无可复用连接引用，数据库无 bb_ai_connection 表。GitHub production 环境未列出相关密钥。此次只做读取，未尝试外发请求或变更配置。草稿 #213 候选 fb4cbdf1 仍保持待部署。
+
+用户已明确授权复用本机已打开 Sub2API 页面上的指定现有密钥和 CCNODE 固定节点，继续真实联通和 PR #213 发布验收。先核对同一凭据的模型、视觉及受控官网搜索能力，只从既有安全入口写入 BoBuy 配置。保留源端原设置，验证输出只含状态。
+
+已从指定现有密钥安全取得受保护引用。/v1/models 在本机与生产主机均已认证，项目当前默认模型 gpt-6.1-terra 唯一可见；8 色无业务像素探针通过，响应匹配 pinned 协议。生产主机访问指定 Costco 与 Calbee 官网样本各 HTTP 200。冻结定向测试为隔离 PostgreSQL 内从实际样本上传到批次自动公开与前台回读，只运行该新用例。合成夹具沿用 V55，不触碰生产商品。
+
+真实照片定向失败：模型读出 IMG_1484 货号 53432，首次 INTAKE ACCEPT，FETCH 已存 Costco 同款 canonical 官方 HTML 1 份，未获取官方图片，批次停 NEEDS_INFORMATION / onboarding.discovery_no_progress。候选文字模式仍混用检索需有图片一类提示及通用结束条件。待修仅文字阶段精确信源结束、后续既有审核继续校验、保留第二阶段找图及旧单照行为。生产尚未写连接。
+
+[真实照片文字阶段修正](https://chatgpt.com/codex/tasks/task_e_6b0abb49fa20832f9e9ee78176a21fae) 已提交，云端没有接收密钥或生产账户。
+
+同一已批准官网找图边界复核发现 OfficialImageCandidateFinder 只使用 exact Costco parser；现有后置采集可能找到品牌官方证据，但最终筛选必然拒绝所有品牌域。并行补这一独立类及其测试，与第一阶段 planner 无路径重叠。
+
+[品牌官网画像候选修正](https://chatgpt.com/codex/tasks/task_e_6b0abb734e20832f9bda465303f758bf) 已提交。
+
+文字取得修正回传：标记由已存储哈希与官网 JSON-LD 同货号商品证据触发，忽略重复候选，审核仍继续；新增精准/异货号与旧 FULL 测试，未改变前台。失效输入仅文字结束判断；在新隔离库复测同样本及已改 planner 的单元用例。
+
+同样本复测：21 项 planner/reviewer 单测通过，真实任务已走到 IDENTITY 和 FACTS，随后旧 IMAGE_SOURCE 抛 onboarding.image_missing。明确第二个阶段门槛，改动限 TEXT_ONLY 快速批次跳过发布前的官方图片审核，保留 ADMISSION、旧 FULL 与上架后独立找图。品牌候选云端已回传，合批后补定向测试。
+
+[图片审核边界修复](https://chatgpt.com/codex/tasks/task_e_6b0abca44d00832fa7c9b667d0a99e78) 已提交。
+
+品牌候选草稿增加结构化规格核对；静态复核发现当前对品牌域仅校验日区路径、页面自报品牌与 URL 同源，现有安全下载保障网络目标和哈希，不证明任意公开域的品牌官方归属。该草稿暂不采用，续作只补可追溯品牌官方归属和对应负例。
+
+[品牌官网归属核验](https://chatgpt.com/codex/tasks/task_e_6b0abcda2090832fbf48202477aa8e67) 已提交，先前草稿未应用。
+
+阶段状态机已回传，TEXT_ONLY 路径保留 INTAKE、IDENTITY、FACTS、ADMISSION，旧 FULL 保留 IMAGE_SOURCE。失效的真实样本仅来自该状态机；已通过 planner/reviewer 单元继续复用。本轮只重跑实际照片及编排类单元测试。
+
+第三次真实样本：INTAKE、IDENTITY、FACTS 全 ACCEPT，ADMISSION 仅因未提供官网图片返回 NEEDS_EVIDENCE，原文核对没有额外资料问题。18 项编排单测通过。需要给发布准入提示和结果校验写明快速文字阶段允许无图，保留既有 FULL 行为。
+
+[文字发布准入修正](https://chatgpt.com/codex/tasks/task_e_6b0abe028a70832fbc2473e62f7ea5ce) 已提交。
+
+文字准入修正回传，明确无图可以完成快速销售档案的准入；其他资料和来源校验保持。品牌候选按同款 Costco 已核实结构中的明示品牌或制造商 URL 严格限定，普通图片资源链接不能证明品牌域。本轮合并复测真实照片至公开回读及官方后置找图，外加受影响 reviewer 与 finder 定向用例，复用 18 项编排通过。
+
+真实模型 ADMISSION ACCEPT 且四语名称、规格、介绍与包装齐全。批次判 missing_facts 的唯一缺项是此前校验过的分类仍只存在 FACTS；ADMISSION 解码按现行规则不保留 archiveDetails。本地最小修正为从同货号最新已接受 FACTS 传递经服务端验证的分类和存储条件。定向只重跑受影响 reviewer 和同一实际照片端到端，29 项已通过中不受影响的官网候选 7 项继续复用。
+
+真实照片主阶段通过：货号 53432 无人工审批达到 PUBLISHED，匿名详情回读同一商品和图片准备中，V55 已生成独立任务。第二阶段实际 claim 1 次，保存通用 Costco 检索 HTML 后返回 official_image.unavailable；未取得该商品已知官网图。22 项相关 reviewer 单测通过。此前真实供应商同款精确商品 HTML 已成功取得且有正式图，保留当前非发布快照，下一轮只修真实找图从通用检索起步的问题及安全的可诊断原因。

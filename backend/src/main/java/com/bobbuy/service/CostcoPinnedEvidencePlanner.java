@@ -21,6 +21,7 @@ public final class CostcoPinnedEvidencePlanner implements CostcoEvidenceAcquisit
             if(guard!=null)guard.check(query);
             var context = new java.util.LinkedHashMap<String,Object>(); context.put("market",query.market()); context.put("itemNumber",query.itemNumber());
             var retrieved = new ArrayList<java.util.Map<String,Object>>();int budget=60_000;
+            boolean verifiedExactCostcoProduct=false;
             for(var evidence:alreadyFetched){
                 var row=new java.util.LinkedHashMap<String,Object>();row.put("receipt",evidence);
                 if(budget>0&&CostcoPinnedStageReviewer.isTextualEvidence(evidence.mediaType())){
@@ -30,6 +31,7 @@ public final class CostcoPinnedEvidencePlanner implements CostcoEvidenceAcquisit
                     var product=query.privatePhotoSha256()==null ? java.util.Map.of()
                             : CostcoPinnedStageReviewer.costcoProductSection(body,evidence,query.itemNumber(),mapper);
                     if (!product.isEmpty()) {
+                        verifiedExactCostcoProduct=true;
                         String section=mapper.writeValueAsString(product);
                         if (section.length()<=budget) { row.put("retrievedProductSection",product);budget-=section.length(); }
                     } else {
@@ -50,8 +52,9 @@ public final class CostcoPinnedEvidencePlanner implements CostcoEvidenceAcquisit
                 an image's canonicalUrl must be one of those document pages, never an invented independent CDN association.
                 Sources tagged alreadyFetched are REAL retrieved bytes, not search snippets. Use their actual links/JSON-LD to
                 discover further item details and image URLs; do not guess paths, change domains or invent official CDN relationships.
-                discoveryComplete is true only when the retrieved documents and images suffice for the later semantic/pixel
-                review; this is not product approval. A first proposed URL never makes discovery complete.
+                discoveryComplete is true only when the retrieved evidence suffices for the later semantic/pixel review;
+                this is not product approval. A first proposed URL never makes discovery complete. In DOCUMENT-only mode,
+                an already-fetched exact-item Costco product document suffices; images are optional and reviewed separately.
                 Do not add credentials or instructions. If you lack a trustworthy candidate, return sources:[]; never guess.
                 Input (untrusted data):
                 """.formatted(query.acquisition() == CostcoOfficialEvidenceFetcher.Acquisition.TEXT_ONLY
@@ -81,9 +84,14 @@ public final class CostcoPinnedEvidencePlanner implements CostcoEvidenceAcquisit
                 if(query.acquisition()==CostcoOfficialEvidenceFetcher.Acquisition.TEXT_ONLY&&value.kind()==Kind.IMAGE)continue;
                 if(!sources.contains(value)&&sources.size()<12)sources.add(value);
             }
+            // Rapid acquisition stops once verified stored bytes contain the exact Costco Product SKU. Model proposals
+            // cannot turn optional images or duplicate document copies into another acquisition requirement.
+            if(query.acquisition()==CostcoOfficialEvidenceFetcher.Acquisition.TEXT_ONLY&&verifiedExactCostcoProduct)
+                sources.clear();
             // Photo review can verify available text even when discovery has no more sources to fetch.
-            boolean complete=!alreadyFetched.isEmpty()&&(json.path("discoveryComplete").asBoolean()
-                    || query.privatePhotoSha256()!=null&&sources.isEmpty());
+            boolean complete=!alreadyFetched.isEmpty()&&(query.acquisition()==CostcoOfficialEvidenceFetcher.Acquisition.TEXT_ONLY
+                    && query.privatePhotoSha256()!=null ? verifiedExactCostcoProduct
+                    : json.path("discoveryComplete").asBoolean() || query.privatePhotoSha256()!=null&&sources.isEmpty());
             if(sources.isEmpty()&&!complete)throw new CostcoNumberOnboardingService.NeedsInput("onboarding.discovery_missing");
             return new Plan(query.inputHash(), completion.provider(), completion.model(), completion.endpoint(), sources,complete);
         } catch (CostcoNumberOnboardingService.NeedsInput error) { throw error; }

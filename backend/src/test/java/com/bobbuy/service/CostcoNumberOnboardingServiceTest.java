@@ -222,24 +222,31 @@ class CostcoNumberOnboardingServiceTest {
                 job->{throw new CostcoNumberOnboardingService.NeedsInput("onboarding.scope_changed");});
         assertEquals(NEEDS_INPUT,s.execute(q.id(),1,0).state());assertEquals(0,f.reviews.get());assertEquals(0,f.fetches.get());assertEquals(0,f.saves.get());
     }
-    @Test void rapidClassifierSelectsTextOnlyWhileLegacyConstructorKeepsFullAcquisition() {
+    @Test void textOnlySkipsImageSourceWhileFullRetainsEveryReviewStage() {
         var rapid=new Fixture();var rapidAcquisition=new java.util.concurrent.atomic.AtomicReference<CostcoOfficialEvidenceFetcher.Acquisition>();
+        var rapidStages=new ArrayList<Stage>();
         var rapidService=new CostcoNumberOnboardingService(rapid.repo,
                 query->{rapidAcquisition.set(query.acquisition());return rapid.evidence;},
-                (stage,job)->decision(stage,Verdict.ACCEPT,job),
+                (stage,job)->{rapidStages.add(stage);return decision(stage,Verdict.ACCEPT,job);},
                 (job,candidate,hash)->new CostcoNumberOnboardingService.CommitReceipt(job.idempotencyKey(),hash,"product",1,true),
                 CLOCK,job->{},job->CostcoOfficialEvidenceFetcher.Acquisition.TEXT_ONLY);
-        var rapidJob=rapidService.enqueue(input(1,2,"JP","0014110",null));
-        assertEquals(COMPLETED,rapidService.execute(rapidJob.id(),1,0).state());
+        var rapidJob=rapidService.enqueue(input(1,2,"JP",null,"b".repeat(64)));
+        var rapidResult=rapidService.execute(rapidJob.id(),1,0);
+        assertEquals(NEEDS_INPUT,rapidResult.state());
+        assertEquals("photo.confirm_required",rapidResult.failureCode());
         assertEquals(CostcoOfficialEvidenceFetcher.Acquisition.TEXT_ONLY,rapidAcquisition.get());
+        assertEquals(List.of(Stage.INTAKE,Stage.IDENTITY,Stage.FACTS,Stage.ADMISSION),rapidStages);
+        assertFalse(rapidStages.contains(Stage.IMAGE_SOURCE));
 
-        var legacy=new Fixture();var legacyAcquisition=new java.util.concurrent.atomic.AtomicReference<CostcoOfficialEvidenceFetcher.Acquisition>();
-        var legacyService=new CostcoNumberOnboardingService(legacy.repo,
-                query->{legacyAcquisition.set(query.acquisition());return legacy.evidence;},
-                (stage,job)->decision(stage,Verdict.ACCEPT,job),
+        var full=new Fixture();var fullAcquisition=new java.util.concurrent.atomic.AtomicReference<CostcoOfficialEvidenceFetcher.Acquisition>();
+        var fullStages=new ArrayList<Stage>();
+        var fullService=new CostcoNumberOnboardingService(full.repo,
+                query->{fullAcquisition.set(query.acquisition());return full.evidence;},
+                (stage,job)->{fullStages.add(stage);return decision(stage,Verdict.ACCEPT,job);},
                 (job,candidate,hash)->new CostcoNumberOnboardingService.CommitReceipt(job.idempotencyKey(),hash,"product",1,true),CLOCK);
-        var legacyJob=legacyService.enqueue(input(1,2,"JP","0014110",null));
-        assertEquals(COMPLETED,legacyService.execute(legacyJob.id(),1,0).state());
-        assertEquals(CostcoOfficialEvidenceFetcher.Acquisition.FULL,legacyAcquisition.get());
+        var fullJob=fullService.enqueue(input(1,2,"JP","0014110",null));
+        assertEquals(COMPLETED,fullService.execute(fullJob.id(),1,0).state());
+        assertEquals(CostcoOfficialEvidenceFetcher.Acquisition.FULL,fullAcquisition.get());
+        assertEquals(List.of(Stage.INTAKE,Stage.IDENTITY,Stage.FACTS,Stage.IMAGE_SOURCE,Stage.ADMISSION),fullStages);
     }
 }

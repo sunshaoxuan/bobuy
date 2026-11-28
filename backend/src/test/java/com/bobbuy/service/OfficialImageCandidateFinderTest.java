@@ -53,4 +53,45 @@ class OfficialImageCandidateFinderTest {
   CostcoOfficialEvidenceFetcher fetcher=query->{assertThat(query.acquisition()).isEqualTo(CostcoOfficialEvidenceFetcher.Acquisition.FULL);return List.of(page,image);};
   assertThat(new OfficialImageCandidateFinder.CostcoOfficialSiteFinder(fetcher,store,new ObjectMapper()).find(costco12kg())).isEmpty();
  }
+
+ @Test void acceptsManufacturerOnlyWhenExactCostcoProductNamesItsOfficialDomain(){
+  String costco="""
+    <script type="application/ld+json">{"@type":"Product","sku":"564513","name":"Kewpie food 1.2 kg 1 pack","brand":{"@type":"Brand","name":"Kewpie","url":"https://www.kewpie.co.jp/"}}</script>
+    """;
+  String manufacturer="""
+    <script type="application/ld+json">{"@type":"Product","sku":"564513","name":"Kewpie food 1.2 kg 1 pack"}</script>
+    """;
+  var request=new OfficialImageCandidateFinder.Request(7,"costco","JP","564513","Kewpie","1.2 kg","1 pack");
+  var fixture=manufacturerFixture(costco,manufacturer,"https://www.kewpie.co.jp/products/564513");
+  assertThat(new OfficialImageCandidateFinder.CostcoOfficialSiteFinder(fixture.fetcher(),fixture.store(),new ObjectMapper()).find(request))
+    .hasValueSatisfying(candidate->{assertThat(candidate.sourcePage()).isEqualTo("https://www.kewpie.co.jp/products/564513");assertThat(candidate.imageUrl()).isEqualTo("https://cdn.kewpie.co.jp/564513.jpg");});
+ }
+
+ @Test void rejectsJpLookalikeThatOnlyDeclaresItselfOfficial(){
+  String costco="""
+    <script type="application/ld+json">{"@type":"Product","sku":"564513","name":"Kewpie food 1.2 kg 1 pack","brand":{"@type":"Brand","name":"Kewpie"},"image":"https://kewpie-official.jp/example.jpg"}</script>
+    """;
+  String lookalike="""
+    <script type="application/ld+json">{"@type":"Product","sku":"564513","name":"Kewpie official food 1.2 kg 1 pack","brand":"Kewpie","url":"https://kewpie-official.jp/jp/564513"}</script>
+    """;
+  var fixture=manufacturerFixture(costco,lookalike,"https://kewpie-official.jp/jp/564513");
+  var request=new OfficialImageCandidateFinder.Request(7,"costco","JP","564513","Kewpie","1.2 kg","1 pack");
+  assertThat(new OfficialImageCandidateFinder.CostcoOfficialSiteFinder(fixture.fetcher(),fixture.store(),new ObjectMapper()).find(request)).isEmpty();
+  assertThat(fixture.fetches()).containsExactly(1);
+ }
+
+ private record ManufacturerFixture(CostcoOfficialEvidenceFetcher fetcher,CostcoEvidenceStore store,List<Integer> fetches){}
+ private static ManufacturerFixture manufacturerFixture(String costcoHtml,String manufacturerHtml,String manufacturerUrl){
+  var bodies=new HashMap<String,byte[]>();
+  byte[] costcoBytes=costcoHtml.getBytes(StandardCharsets.UTF_8),manufacturerBytes=manufacturerHtml.getBytes(StandardCharsets.UTF_8);
+  String costcoHash=CostcoPinnedStageReviewer.digest(costcoBytes),manufacturerHash=CostcoPinnedStageReviewer.digest(manufacturerBytes);
+  bodies.put(costcoHash,costcoBytes);bodies.put(manufacturerHash,manufacturerBytes);
+  var costcoUri=URI.create("https://www.costco.co.jp/p/564513");var makerUri=URI.create(manufacturerUrl);
+  var costcoPage=new CostcoOfficialEvidence("costco",costcoUri,costcoUri,costcoHash,Instant.parse("2026-11-28T00:00:00Z"),"text/html",null,null,List.of());
+  var makerPage=new CostcoOfficialEvidence("maker",makerUri,makerUri,manufacturerHash,Instant.parse("2026-11-28T00:00:00Z"),"text/html",null,null,List.of());
+  var image=new CostcoOfficialEvidence("image",makerUri,URI.create("https://cdn.kewpie.co.jp/564513.jpg"),"c".repeat(64),Instant.parse("2026-11-28T00:00:00Z"),"image/jpeg",1200,1200,List.of(),manufacturerHash);
+  CostcoEvidenceStore store=new CostcoEvidenceStore(){public void put(CostcoOfficialEvidenceFetcher.Query q,CostcoOfficialEvidence e,byte[] b){}public byte[] readVerified(long owner,String sha){return bodies.get(sha);}};
+  var fetches=new ArrayList<Integer>();CostcoOfficialEvidenceFetcher fetcher=query->{fetches.add(1);return List.of(costcoPage,makerPage,image);};
+  return new ManufacturerFixture(fetcher,store,fetches);
+ }
 }

@@ -119,7 +119,10 @@ public final class CostcoNumberOnboardingService {
                 throw new IllegalStateException("onboarding.evidence_stale");
             job = move(job, AI_REVIEW, item, evidence, job.decisions(), null, null, null);
             Candidate candidate = null;
-            for (var stage : List.of(Stage.IDENTITY, Stage.FACTS, Stage.IMAGE_SOURCE, Stage.ADMISSION)) {
+            var reviewStages = acquisition == CostcoOfficialEvidenceFetcher.Acquisition.TEXT_ONLY
+                    ? List.of(Stage.IDENTITY, Stage.FACTS, Stage.ADMISSION)
+                    : List.of(Stage.IDENTITY, Stage.FACTS, Stage.IMAGE_SOURCE, Stage.ADMISSION);
+            for (var stage : reviewStages) {
                 var decision = review(stage, job); job = append(job, decision);
                 if (decision.verdict() != Verdict.ACCEPT) return stop(job, decision);
                 if (stage == Stage.ADMISSION) candidate = decision.candidate();

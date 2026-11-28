@@ -24,7 +24,7 @@ import static com.bobbuy.service.CostcoOnboardingDecision.*;
 /** The semantic decision is a real pinned-model result. This adapter only enforces protocol/provenance. */
 @Component
 public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingService.StageReviewer {
-    static final String POLICY = "costco-onboarding-20261109.2";
+    static final String POLICY = "costco-onboarding-20261128.1";
     private final LlmGateway gateway;
     private final ObjectMapper mapper;
     private final CostcoEvidenceStore evidenceStore;
@@ -65,6 +65,7 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
             var imageHashes = new LinkedHashMap<String, String>();
             var reviewedPhotoImages = new java.util.HashSet<String>();
             boolean photoAdmission=stage==Stage.ADMISSION && job.privatePhotoSha256()!=null;
+            boolean rapidTextOnlyAdmission=isRapidTextOnlyAdmission(stage,job);
             if (photoAdmission) {
                 for (var decision : job.decisions()) {
                     if (decision.stage()==Stage.IMAGE_SOURCE && decision.verdict()==Verdict.ACCEPT && decision.trace()!=null)
@@ -174,6 +175,14 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
                 stock, publication, or reuse permission. The first ADMISSION image is the original private
                 photo; use it to check the observed tag. Only the separate reviewed official image may be
                 selected as the officialImageSha256. Report uncertainty instead of inventing details.
+                """ : "") + (rapidTextOnlyAdmission ? """
+                RAPID TEXT-ONLY ADMISSION: This private-photo job intentionally has no separately supplied official
+                product image. That absence is expected and has no bearing on ADMISSION; do not request image evidence
+                or reject admission because official pixels are unavailable. Audit only the evidence-backed identity,
+                verified official text, category selection, and the four locales. Keep unsupported optional values
+                unknown. The private supplier photo is private evidence only, never an official product image, and the
+                candidate officialImageSha256 must be null.
+                The server carries forward the archive classification from the accepted FACTS decision.
                 """ : "") + (photoDetails ? """
                 candidate may additionally contain archiveDetails with keys descriptionJa, categoryNodeId, storageCondition.
                 Write a short Japanese description containing only attributes visible in the photo at INTAKE or explicitly
@@ -209,6 +218,14 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
                 if(c.has("archiveDetails")){
                     var fields=photoDetails?validatedArchiveDetails(c.get("archiveDetails"),categoryOptions):null;
                     ((ObjectNode)c).set("archiveDetails",mapper.valueToTree(fields));
+                }
+                if(rapidTextOnlyAdmission && verdict==Verdict.ACCEPT){
+                    var facts = job.decisions().stream()
+                            .filter(d -> d.stage()==Stage.FACTS && d.verdict()==Verdict.ACCEPT && d.candidate()!=null)
+                            .reduce((earlier,later) -> later).map(CostcoOnboardingDecision::candidate)
+                            .filter(previous -> java.util.Objects.equals(job.itemNumber(),previous.itemNumber()))
+                            .map(Candidate::archiveDetails).orElse(null);
+                    ((ObjectNode)c).set("archiveDetails",mapper.valueToTree(facts));
                 }
                 if(c.hasNonNull("photoFacts")){
                     JsonNode facts=c.get("photoFacts");
@@ -248,9 +265,11 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
             if (stage == Stage.ADMISSION && verdict == Verdict.ACCEPT) {
                 if (candidate == null) throw new IllegalArgumentException("onboarding.candidate_missing");
                 String selectedHash = candidate.officialImageSha256();
+                if (rapidTextOnlyAdmission && selectedHash != null)
+                    throw new CostcoNumberOnboardingService.NeedsInput("onboarding.official_image_unexpected");
                 boolean viewed = job.decisions().stream().filter(d -> d.stage() == Stage.IMAGE_SOURCE && d.verdict() == Verdict.ACCEPT && d.trace() != null)
                         .anyMatch(d -> d.trace().imageViewHashes().containsKey(selectedHash));
-                if (!viewed) throw new CostcoNumberOnboardingService.NeedsInput("onboarding.image_not_reviewed");
+                if (!rapidTextOnlyAdmission && !viewed) throw new CostcoNumberOnboardingService.NeedsInput("onboarding.image_not_reviewed");
             }
             return new CostcoOnboardingDecision(stage, verdict, result.provider(), result.model(), result.endpoint(), job.inputHash(),
                     job.evidence().stream().map(CostcoOfficialEvidence::sha256).toList(), POLICY, "costco-stage-json-v2", json.path("reason").asText(), item, candidate,
@@ -258,6 +277,13 @@ public final class CostcoPinnedStageReviewer implements CostcoNumberOnboardingSe
         } catch (CostcoNumberOnboardingService.NeedsInput error) { throw error; }
         catch (LlmGateway.PinnedFailure error) { throw error; }
         catch (Exception error) { throw new IllegalStateException("onboarding.decision_schema"); }
+    }
+    private static boolean isRapidTextOnlyAdmission(Stage stage, CostcoOnboardingJob job) {
+        if (stage != Stage.ADMISSION || job.privatePhotoSha256() == null
+                || job.decisions().stream().anyMatch(d -> d.stage() == Stage.IMAGE_SOURCE)
+                || job.evidence().stream().anyMatch(e -> e.mediaType().startsWith("image/"))) return false;
+        return job.decisions().stream().anyMatch(d -> d.stage() == Stage.IDENTITY && d.verdict() == Verdict.ACCEPT)
+                && job.decisions().stream().anyMatch(d -> d.stage() == Stage.FACTS && d.verdict() == Verdict.ACCEPT);
     }
     private static boolean discardTagsWithoutRawText(ObjectNode transcription){
         var tags=(com.fasterxml.jackson.databind.node.ArrayNode)transcription.get("tags");
