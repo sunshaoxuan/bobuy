@@ -26,4 +26,13 @@ class OfficialImageCandidateFinderTest {
   var result=new OfficialImageCandidateFinder.CostcoOfficialSiteFinder(research).find(costco12kg());
   assertThat(result).hasValueSatisfying(candidate->{assertThat(candidate.sourcePage()).isEqualTo(page);assertThat(candidate.imageUrl()).isEqualTo(image);assertThat(candidate.matchBasis()).contains("564513","1.2 kg");});
  }
+
+ @Test void weightCannotMatchSameNumberExpressedAsVolume(){
+  assertThat(OfficialImageCandidateFinder.CostcoOfficialSiteFinder.sameVariant("1.2 kg 2 pack","Brand drink 1.2 L x 2")).isFalse();
+ }
+
+ @Test void packageMultiplierMustMatchForMultiPack(){
+  assertThat(OfficialImageCandidateFinder.CostcoOfficialSiteFinder.sameVariant("330 g x 6","Brand food 330 g x 4")).isFalse();
+  assertThat(OfficialImageCandidateFinder.CostcoOfficialSiteFinder.sameVariant("330 g x 6","Brand food six pack 330 g x 6")).isTrue();
+ }
 }
